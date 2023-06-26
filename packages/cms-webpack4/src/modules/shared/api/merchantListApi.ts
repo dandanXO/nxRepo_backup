@@ -1,5 +1,5 @@
-import { API } from "./index";
-import { AvailableMerchantSelect } from "./commonSelectTypes/getAvailableMerchantSelect";
+import { AvailableMerchantSelect } from './commonSelectTypes/getAvailableMerchantSelect';
+import { API } from './index';
 
 const MerchantListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -8,12 +8,9 @@ const MerchantListApi = API.injectEndpoints({
         getMerchantList: builder.query<AvailableMerchantSelect, null>({
             query: () => ({
                 url: `/merchant-manage/available`,
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
-})
-export const {
-    useLazyGetMerchantListQuery,
-    useGetMerchantListQuery
-} = MerchantListApi;
+    }),
+});
+export const { useLazyGetMerchantListQuery, useGetMerchantListQuery } = MerchantListApi;

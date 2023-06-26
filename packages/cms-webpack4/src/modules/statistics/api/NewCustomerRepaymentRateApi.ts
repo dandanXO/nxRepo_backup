@@ -1,5 +1,4 @@
-import { API } from "../../shared/api";
-
+import { API } from '../../shared/api';
 
 export type GetNewCustomerRiskPaymentRateListRequest = {
     channelId?: number;
@@ -14,8 +13,8 @@ export type GetNewCustomerRiskPaymentRateListRequest = {
     // 風控標籤
     startTime: string;
     // 開始時間
-    newMember: boolean | "";
-}
+    newMember: boolean | '';
+};
 export type GetNewCustomerRiskPaymentRateListResponse = RiskPaymentRateResponseRiskPaymentRateResponse[];
 
 export type RiskPaymentRateResponseRiskPaymentRateResponse = {
@@ -57,17 +56,20 @@ export type RiskPaymentRateResponseRiskPaymentRateResponse = {
 
     totalLendUsers: number;
     // 放款用戶數
-}
+};
 
 const NewCustomerRepaymentRateApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // NOTICE: 新客風控回款率報表
-        getNewCustomerRiskPaymentRateList: builder.query<GetNewCustomerRiskPaymentRateListResponse, GetNewCustomerRiskPaymentRateListRequest>({
+        getNewCustomerRiskPaymentRateList: builder.query<
+            GetNewCustomerRiskPaymentRateListResponse,
+            GetNewCustomerRiskPaymentRateListRequest
+        >({
             query: (requestBody: GetNewCustomerRiskPaymentRateListRequest) => ({
                 url: `/statistics/new-customer-risk-payment-rate`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTICE: 新客風控回款率報表下載
@@ -78,9 +80,7 @@ const NewCustomerRepaymentRateApi = API.injectEndpoints({
         //         method: "get",
         //     }),
         // }),
-    })
-})
+    }),
+});
 
-export const {
-    useLazyGetNewCustomerRiskPaymentRateListQuery,
-} = NewCustomerRepaymentRateApi;
+export const { useLazyGetNewCustomerRiskPaymentRateListQuery } = NewCustomerRepaymentRateApi;

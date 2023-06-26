@@ -1,6 +1,6 @@
-import { API } from "../../shared/api";
-import { GetPayReceiptListRequestQuerystring,GetPayReceiptListProps } from "./types/PayReceiptTypes/getPayReceiptList";
-import { PostPayRecieptConfirmRequest } from "./types/PayReceiptTypes/postPayReceiptConfirm";
+import { API } from '../../shared/api';
+import { GetPayReceiptListProps, GetPayReceiptListRequestQuerystring } from './types/PayReceiptTypes/getPayReceiptList';
+import { PostPayRecieptConfirmRequest } from './types/PayReceiptTypes/postPayReceiptConfirm';
 
 const PayReceiptApi = API.injectEndpoints({
     overrideExisting: false,
@@ -10,20 +10,17 @@ const PayReceiptApi = API.injectEndpoints({
             query: (requestBody: GetPayReceiptListRequestQuerystring) => ({
                 url: `/pay-receipt/list`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: POST /hs/admin/pay-receipt/confirm 确认还款明细
-         postPayReceiptConfirm: builder.mutation<null, PostPayRecieptConfirmRequest>({
+        postPayReceiptConfirm: builder.mutation<null, PostPayRecieptConfirmRequest>({
             query: (requestBody: PostPayRecieptConfirmRequest) => ({
                 url: `/pay-receipt/confirm`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
-    })
-})
-export const {
-    useLazyGetPayReceiptListQuery,
-    usePostPayReceiptConfirmMutation
-} = PayReceiptApi;
+    }),
+});
+export const { useLazyGetPayReceiptListQuery, usePostPayReceiptConfirmMutation } = PayReceiptApi;

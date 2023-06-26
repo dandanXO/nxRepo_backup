@@ -1,7 +1,7 @@
 import AdminPage from '../../../../shared/components/common/AdminPage';
 import DailyRiskControlTable from './DailyRiskControlTable';
-const DailyRiskControlPage = () => {
 
+const DailyRiskControlPage = (): JSX.Element => {
     return (
         <AdminPage
             navigator={{
@@ -11,11 +11,10 @@ const DailyRiskControlPage = () => {
             }}
         >
             <>
-                <DailyRiskControlTable/>
+                <DailyRiskControlTable />
             </>
         </AdminPage>
     );
-}
+};
 
 export default DailyRiskControlPage;
-

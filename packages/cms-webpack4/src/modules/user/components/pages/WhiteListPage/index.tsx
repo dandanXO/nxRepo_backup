@@ -1,28 +1,27 @@
-import { useEffect, useState } from 'react';
-import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
-import AdminPage from '../../../../shared/components/common/AdminPage';
-import WhiteListTable from './WhiteListTable';
-import AddWhiteListModal from './AddWhiteListModal';
-import { usePostWhiteListMutation } from '../../../api/WhiteListApi';
+import { Form } from 'antd';
+import { useState } from 'react';
 
-const WhiteListPage = () => {
+import AdminPage from '../../../../shared/components/common/AdminPage';
+import { usePostWhiteListMutation } from '../../../api/WhiteListApi';
+import AddWhiteListModal from './AddWhiteListModal';
+import WhiteListTable from './WhiteListTable';
+
+const WhiteListPage = (): JSX.Element => {
     const [showModal, setShowModal] = useState(false);
     const [form] = Form.useForm();
-    const [postWhiteList, { isLoading, isSuccess }] = usePostWhiteListMutation();
+    const [postWhiteList, { isSuccess }] = usePostWhiteListMutation();
 
     const onFinish = (values: any) => {
-        console.log(values)
+        console.log(values);
         postWhiteList(values);
         form.resetFields();
-        setShowModal(false)
+        setShowModal(false);
     };
 
     const handleCloseModal = () => {
-        setShowModal(false)
-        form.resetFields()
-    }
+        setShowModal(false);
+        form.resetFields();
+    };
 
     return (
         <AdminPage
@@ -42,7 +41,7 @@ const WhiteListPage = () => {
             }}
         >
             <>
-                <WhiteListTable setShowModal={setShowModal} isPostWhiteListSuccess={isSuccess}/>
+                <WhiteListTable setShowModal={setShowModal} isPostWhiteListSuccess={isSuccess} />
                 <AddWhiteListModal
                     showModal={showModal}
                     handleCloseModal={handleCloseModal}
@@ -52,7 +51,6 @@ const WhiteListPage = () => {
             </>
         </AdminPage>
     );
-}
+};
 
 export default WhiteListPage;
-

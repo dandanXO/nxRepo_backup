@@ -1,3 +1,3 @@
-import {RiskManageModel} from "../../domain/vo/RiskManageModel";
+import { RiskManageModel } from '../../domain/vo/RiskManageModel';
 
 export type GetRiskManageResponse = RiskManageModel;

@@ -1,7 +1,7 @@
-import { GetPageableResponse } from "../commonReponse";
+import { GetPageableResponse } from '../commonReponse';
 
 export interface GetUserContactsResponse {
-    records: GetUserContacts[]
+    records: GetUserContacts[];
 }
 export interface GetUserContacts {
     lastUpdateTime?: string;

@@ -1,6 +1,8 @@
-import {configureStore, createAction, createListenerMiddleware} from "@reduxjs/toolkit";
-import { API } from "../api";
-import searchParamsSlice from "../utils/searchParamsSlice";
+import { configureStore } from '@reduxjs/toolkit';
+
+import { API } from '../api';
+import searchParamsSlice from '../utils/searchParamsSlice';
+
 // import {GetChannelListResponse} from "../api/types/getChannelList";
 // import {FallbackAddListenerOptions} from "@reduxjs/toolkit/dist/listenerMiddleware/types";
 //
@@ -23,7 +25,6 @@ import searchParamsSlice from "../utils/searchParamsSlice";
 //     })
 // })
 
-
 // getTodayOrderDistributeSummaryListener
 // listenerMiddleware.startListening({
 //     actionCreator: orderDistributeTodaySearch,
@@ -36,16 +37,13 @@ import searchParamsSlice from "../utils/searchParamsSlice";
 //     }
 // });
 
-
 export const appStore = configureStore({
     reducer: {
         [API.reducerPath]: API.reducer,
         searchParams: searchParamsSlice,
     },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware()
-            .concat(API.middleware)
-            // .prepend(listenerMiddleware.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(API.middleware),
+    // .prepend(listenerMiddleware.middleware),
 });
 export type RootState = ReturnType<typeof appStore.getState>;
 

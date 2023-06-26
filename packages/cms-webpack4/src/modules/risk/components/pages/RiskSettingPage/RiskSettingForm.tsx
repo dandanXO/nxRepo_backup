@@ -1,12 +1,14 @@
-import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip ,Space} from "antd";
-import React from "react";
-import TextArea from "antd/es/input/TextArea";
-import {AdminForm} from "../../../../shared/components/common/AdminForm";
-import {Store} from "antd/es/form/interface"
-import {RiskModelMenu} from "../../../domain/vo/RiskModelMenu";
-import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import RepeatLoanSection from "./RepeatLoanSection";
-import FirstLoanSection from "./FirstLoanSection";
+import { Form, FormInstance, Input, Select, Switch } from 'antd';
+import { Store } from 'antd/es/form/interface';
+import TextArea from 'antd/es/input/TextArea';
+import React from 'react';
+
+import { AdminForm } from '../../../../shared/components/common/AdminForm';
+import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
+import { RiskModelMenu } from '../../../domain/vo/RiskModelMenu';
+import FirstLoanSection from './FirstLoanSection';
+import RepeatLoanSection from './RepeatLoanSection';
+
 interface RiskSettingFormProps {
     isEdit: boolean;
     id?: number;
@@ -16,10 +18,10 @@ interface RiskSettingFormProps {
     onFinish: () => void;
     currentRiskMenuData: Array<RiskModelMenu>;
     customAntFormFieldError: CustomAntFormFieldError;
-    setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<Object>>;
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
 }
 
-const RiskSettingForm = (props: RiskSettingFormProps) => {
+const RiskSettingForm = (props: RiskSettingFormProps): JSX.Element => {
     // NOTE:
     return (
         <AdminForm
@@ -32,18 +34,12 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 label="风控名称"
                 name="modelName"
                 rules={[{ required: true }]}
-                extra={
-                    '设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。'
-                }
+                extra={'设定后即无法直接修改，需请求技术支持，送出前请务必再次确认。'}
             >
                 <Input placeholder="风控名称" disabled={props.isEdit} />
             </Form.Item>
 
-            <Form.Item
-                label={'风控应用'}
-                name="riskModelName"
-                rules={[{ required: true }]}
-            >
+            <Form.Item label={'风控应用'} name="riskModelName" rules={[{ required: true }]}>
                 <Select placeholder={'选择'}>
                     {props.currentRiskMenuData &&
                         props.currentRiskMenuData.map((risk, index) => {
@@ -61,7 +57,6 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 customAntFormFieldError={props.customAntFormFieldError}
                 setCustomAntFormFieldError={props.setCustomAntFormFieldError}
                 form={props.form}
-
             />
             <RepeatLoanSection
                 isEdit={props.isEdit}
@@ -70,15 +65,8 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
                 form={props.form}
             />
 
-            <Form.Item
-                label={'状态'}
-                name={'enabled'}
-                valuePropName={'checked'}
-            >
-                <Switch
-                    checkedChildren={'启用'}
-                    unCheckedChildren={'停用'}
-                ></Switch>
+            <Form.Item label={'状态'} name={'enabled'} valuePropName={'checked'}>
+                <Switch checkedChildren={'启用'} unCheckedChildren={'停用'}></Switch>
             </Form.Item>
 
             <Form.Item label={'备注'} name="remark">
@@ -86,6 +74,6 @@ const RiskSettingForm = (props: RiskSettingFormProps) => {
             </Form.Item>
         </AdminForm>
     );
-}
+};
 
 export default RiskSettingForm;

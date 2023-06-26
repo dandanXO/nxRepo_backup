@@ -1,10 +1,12 @@
 {
     "parser": "@typescript-eslint/parser",
+    "ignorePatterns": ["!**/*"],
     "plugins": [
         "react",
         "@typescript-eslint"
     ],
     "extends": [
+        "../../.eslintrc.json",
         "plugin:@typescript-eslint/recommended"
     ],
     "parserOptions": {
@@ -26,13 +28,14 @@
         "mocha": true
     },
     "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
         "no-console": [0],
         "rest-spread-spacing": [2],
         "key-spacing": [2],
         "space-infix-ops": [2],
         "object-curly-spacing": ["error", "always"],
         "semi": ["error", "always"],
-        "indent": [2, 4],
         "quotes": [0, "single"],
         "space-before-blocks": [0, "always"],
         "eqeqeq": 0,

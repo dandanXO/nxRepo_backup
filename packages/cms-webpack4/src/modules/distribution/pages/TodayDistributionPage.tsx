@@ -1,68 +1,66 @@
-import {AdminTable} from "../../shared/components/common/AdminTable";
-import AdminPage from "../../shared/components/common/AdminPage";
-import React, {useEffect, useState} from "react";
-import {ProColumns} from "@ant-design/pro-components";
-import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, FormInstance, Space, Table, message} from "antd";
-import CopyText from "../../shared/components/other/CopyText";
+import { ProColumns } from '@ant-design/pro-components';
+import { Button, FormInstance, Space, Table, message } from 'antd';
+import React, { useEffect, useState } from 'react';
+
+import AdminPage from '../../shared/components/common/AdminPage';
+import { AdminTable } from '../../shared/components/common/AdminTable';
+import CopyText from '../../shared/components/other/CopyText';
+import { StageContainer, StageItem, StagePanel, StageTitle, StageTotal } from '../components/Stage/stage';
+import { CommonOrderDistributionModal } from '../modals/CommonOrderDistributionModal';
 import {
     useGetProductNamesQuery,
     useLazyGetDistributionQuery,
     useLazyGetSummaryQuery,
-    usePostDistributionSelectedMutation, usePostDistributionStageMutation
-} from "../services/TodayDistributionAPI";
-
-import  {
+    usePostDistributionSelectedMutation,
+    usePostDistributionStageMutation,
+} from '../services/TodayDistributionAPI';
+import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
     DistributionSummary,
     Stage,
-} from "../types/index"
-
-import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
-import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
+} from '../types';
 
 export type StageData = {
-    [stage: string]: Omit<DistributionSummary, "stage">;
-}
+    [stage: string]: Omit<DistributionSummary, 'stage'>;
+};
 
-export const TodayDistributionPage = () => {
-    const [triggerFetchSummary, {data: summaryResponseData}] = useLazyGetSummaryQuery();
+export const TodayDistributionPage = (): JSX.Element => {
+    const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData | null>({
-        [Stage.T_1] : {
+        [Stage.T_1]: {
             todoTotal: 0,
             doneTotal: 0,
         },
-        [Stage.T0] : {
+        [Stage.T0]: {
             todoTotal: 0,
             doneTotal: 0,
         },
     });
 
     useEffect(() => {
-        const t1 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.T_1)[0];
-        const t0 = summaryResponseData?.summaries?.filter(item => item.stage === Stage.T0)[0];
+        const t1 = summaryResponseData?.summaries?.filter((item) => item.stage === Stage.T_1)[0];
+        const t0 = summaryResponseData?.summaries?.filter((item) => item.stage === Stage.T0)[0];
         setSummaryData({
-            [Stage.T_1] : {
+            [Stage.T_1]: {
                 todoTotal: t1?.todoTotal,
                 doneTotal: t1?.doneTotal,
             },
-            [Stage.T0] : {
+            [Stage.T0]: {
                 todoTotal: t0?.todoTotal,
                 doneTotal: t0?.doneTotal,
             },
-        })
-    }, [summaryResponseData])
+        });
+    }, [summaryResponseData]);
 
-    const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetProductNamesQuery(null);
+    const { currentData: productList } = useGetProductNamesQuery(null);
 
     const productListMap = new Map().set('', { text: '全部' });
     productList?.map((i) => {
-        return productListMap.set(i.productId, { text: i.productName })
+        return productListMap.set(i.productId, { text: i.productName });
     });
 
-
-    const columns: ProColumns<CollectDistributionQueryResponse, "text">[] = [
+    const columns: ProColumns<CollectDistributionQueryResponse, 'text'>[] = [
         {
             key: 'id',
             title: 'ID',
@@ -75,28 +73,28 @@ export const TodayDistributionPage = () => {
             key: 'merchantName',
             title: '商戶名',
             dataIndex: 'merchantName',
-            initialValue: "",
+            initialValue: '',
             hideInSearch: true,
         },
         {
             key: 'orderNo',
             title: '订单编号',
             dataIndex: 'orderNo',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'appName',
             title: 'APP名称',
             dataIndex: 'appName',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'productName',
             title: '产品名称',
             dataIndex: 'productName',
-            initialValue: "",
+            initialValue: '',
             hideInSearch: true,
         },
         {
@@ -104,52 +102,52 @@ export const TodayDistributionPage = () => {
             title: '产品名称',
             dataIndex: 'productId',
             hideInTable: true,
-            initialValue: "",
-            valueType: "select",
+            initialValue: '',
+            valueType: 'select',
             valueEnum: productListMap,
         },
         {
             key: 'phoneNo',
             title: '手机号',
             dataIndex: 'phoneNo',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'userName',
             title: '姓名',
             dataIndex: 'userName',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'oldUser',
             title: '老客下单',
             dataIndex: 'oldUser',
-            initialValue: "",
+            initialValue: '',
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
                 false: { text: '否' },
             },
             valueType: 'select',
-            align: 'center'
+            align: 'center',
         },
         {
             key: 'deviceMoney',
             title: '申请金额',
             dataIndex: 'deviceMoney',
             hideInSearch: true,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'expireTime',
             title: '到期日',
             dataIndex: 'expireTime',
             hideInSearch: true,
-            initialValue: "",
-            valueType: "date",
-            tooltip: "截止时间为该日23:59:59",
+            initialValue: '',
+            valueType: 'date',
+            tooltip: '截止时间为该日23:59:59',
         },
         {
             key: 'stage',
@@ -159,24 +157,22 @@ export const TodayDistributionPage = () => {
             initialValue: Stage.T0,
             // valueEnum: Stage,
             valueEnum: {
-                [Stage.T0]: "T0",
-                [Stage.T_1]: "T-1"
+                [Stage.T0]: 'T0',
+                [Stage.T_1]: 'T-1',
             },
             valueType: 'select',
         },
-    ]
+    ];
 
     // NOTE: GET list and item
-    const [triggerGetList, {
-        currentData: currentItemListData,
-        isFetching: isGetListFetching
-    }] = useLazyGetDistributionQuery();
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] =
+        useLazyGetDistributionQuery();
 
     const [formState, setFormState] = useState<CollectDistributionQueryRequest>({
         stage: Stage.T0,
         pageNum: 1,
         pageSize: 10,
-    })
+    });
 
     useEffect(() => {
         triggerFetchSummary(null);
@@ -194,7 +190,7 @@ export const TodayDistributionPage = () => {
 
     const handleModalClose = () => {
         setShowModal(false);
-    }
+    };
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -206,33 +202,37 @@ export const TodayDistributionPage = () => {
             setSelectedRow([]);
             triggerFetchSummary(null);
             triggerGetList(formState);
-        }
+        };
 
         setShowModal(false);
-        if(isSelectedByOrder) {
+        if (isSelectedByOrder) {
             // console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
-            }).then(() => {
-                refresh();
-                messageApi.success("分配成功");
-            }).catch((error) => {
-                messageApi.error("分配失敗")
             })
+                .then(() => {
+                    refresh();
+                    messageApi.success('分配成功');
+                })
+                .catch(() => {
+                    messageApi.error('分配失敗');
+                });
         } else {
             // console.log("stage", selectedDistributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: selectedDistributionStage,
-            }).then(() => {
-                refresh();
-                messageApi.success("分配成功");
-            }).catch((error) => {
-                messageApi.error("分配失敗")
             })
+                .then(() => {
+                    refresh();
+                    messageApi.success('分配成功');
+                })
+                .catch(() => {
+                    messageApi.error('分配失敗');
+                });
         }
-    }
+    };
 
     const [searchedStage, setSearchedStage] = useState(Stage.T0);
 
@@ -241,40 +241,37 @@ export const TodayDistributionPage = () => {
     const [selectedDistributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostDistributionStageMutation();
 
-
     const pageOnChange = (current, pageSize) => {
         // console.log("pageOnChange.current", current)
         // console.log("pageOnChange.pageSize", pageSize)
         // console.log("pageOnChange.formState", formState)
-        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize }
-        setFormState(newFormStage)
+        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize };
+        setFormState(newFormStage);
         triggerGetList(newFormStage);
-    }
+    };
 
     const refresh = () => {
         // console.log("pageOnChange.formState", formState)
         triggerGetList(formState);
-    }
-
-
-
-
+    };
 
     return (
-        <AdminPage navigator={{
-            ancestor: {
-                path: "",
-                breadcrumbName: "首页",
-            },
-            parent: {
-                path: "",
-                breadcrumbName: "当日催收",
-            },
-            self: {
-                path: "",
-                breadcrumbName:"当日订单分配"
-            }
-        }}>
+        <AdminPage
+            navigator={{
+                ancestor: {
+                    path: '',
+                    breadcrumbName: '首页',
+                },
+                parent: {
+                    path: '',
+                    breadcrumbName: '当日催收',
+                },
+                self: {
+                    path: '',
+                    breadcrumbName: '当日订单分配',
+                },
+            }}
+        >
             <>
                 <StagePanel>
                     <StageContainer>
@@ -307,14 +304,30 @@ export const TodayDistributionPage = () => {
                     loading={isGetListFetching}
                     headerTitle={
                         <Space>
-                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {
-                                setShowModal(true);
-                                setIsSelectedByOrder(true);
-                            }}>自选订单分配</Button>
-                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {
-                                setShowModal(true);
-                                setIsSelectedByOrder(false);
-                            }}>依阶段分配</Button>
+                            <Button
+                                key="1"
+                                type="primary"
+                                ghost
+                                disabled={selectedRow.length === 0}
+                                onClick={() => {
+                                    setShowModal(true);
+                                    setIsSelectedByOrder(true);
+                                }}
+                            >
+                                自选订单分配
+                            </Button>
+                            <Button
+                                key="2"
+                                type="primary"
+                                ghost
+                                disabled={selectedRow.length > 0}
+                                onClick={() => {
+                                    setShowModal(true);
+                                    setIsSelectedByOrder(false);
+                                }}
+                            >
+                                依阶段分配
+                            </Button>
                         </Space>
                     }
                     isSearchFromClient={false}
@@ -329,14 +342,14 @@ export const TodayDistributionPage = () => {
                             ...formState,
                             ...searchFormState,
                         };
-                        setFormState(searchForm)
+                        setFormState(searchForm);
                         // console.log("searchForm", searchForm)
-                        triggerGetList(searchForm)
+                        triggerGetList(searchForm);
                     }}
                     onFormResetCallback={() => {
                         // console.log("onFormResetCallback");
                     }}
-                    rowKey={"orderId"}
+                    rowKey={'orderId'}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
@@ -357,9 +370,9 @@ export const TodayDistributionPage = () => {
                     summaryData={summaryData}
                     setDistributionStage={setSelectedDistributionStage}
                     searchedStage={searchedStage}
-                    type={"today"}
+                    type={'today'}
                 />
             </>
         </AdminPage>
-    )
-}
+    );
+};

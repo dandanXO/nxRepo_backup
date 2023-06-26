@@ -1,55 +1,37 @@
-import {AdminTable, ModalContent} from "../../../../shared/components/common/AdminTable";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {ProColumns} from "@ant-design/pro-components";
-import {FormInstance} from "antd";
-import {AdminFormCustomModal} from "../../../../shared/components/common/AdminFormCustomModal";
-import {useForm} from "antd/es/form/Form";
-import {CustomAntFormFieldError} from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import AdminPage from "../../../../shared/components/common/AdminPage";
-import {AppConfigurationListItem} from "../../../services/appManage/domain/AppConfigurationListItem";
+import { ProColumns } from '@ant-design/pro-components';
+import { FormInstance } from 'antd';
+import { Modal } from 'antd/es';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { AdminFormCustomModal } from '../../../../shared/components/common/AdminFormCustomModal';
+import AdminPage from '../../../../shared/components/common/AdminPage';
+import { AdminTable, ModalContent } from '../../../../shared/components/common/AdminTable';
+import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
 import {
     useCreateAppConfigurationMutation,
     useDeleteAppConfigurationMutation,
     useLazyGetAllAppConfigurationQuery,
     useLazyGetAppConfigurationQuery,
-    useUpdateAppConfigurationMutation
-} from "../../../services/appManage/AppManageApi";
-import {ProColumnsOperationConstant} from "../../../../shared/components/common/ProColumnsOperationConstant";
-import {AppManageForm} from "./AppManageForm";
-import {ChannelTagVO} from "../../../../channel/domain/vo/ChannelTagVO";
-import {Modal} from "antd/es";
+    useUpdateAppConfigurationMutation,
+} from '../../../services/appManage/AppManageApi';
+import { AppConfigurationListItem } from '../../../services/appManage/domain/AppConfigurationListItem';
+import { AppManageForm } from './AppManageForm';
 
 const i18n = {
-    "AppManagePage": {
-        add: "添加",
-        modalTitle: "APP配置",
-    }
-}
-export const idCardOcrList = [
-    "NONE",
-    "ACCUAUTH",
-    "ADV_IQA",
-    "ADV_IQC",
-    "GCT",
-]
-export const liveDetectList = [
-    "NONE",
-    "ACCUAUTH",
-    "ADVANCE",
-    "GCT",
-]
-export const taxCardOcrList = [
-    "NONE",
-    "ACCUAUTH",
-    "ADV_IQA",
-    "ADV_IQC",
-    "GCT",
-]
+    AppManagePage: {
+        add: '添加',
+        modalTitle: 'APP配置',
+    },
+};
+export const idCardOcrList = ['NONE', 'ACCUAUTH', 'ADV_IQA', 'ADV_IQC', 'GCT'];
+export const liveDetectList = ['NONE', 'ACCUAUTH', 'ADVANCE', 'GCT'];
+export const taxCardOcrList = ['NONE', 'ACCUAUTH', 'ADV_IQA', 'ADV_IQC', 'GCT'];
 
-export const AppManagePage = () => {
+export const AppManagePage = (): JSX.Element => {
     // NOTICE: Action: List
     // NOTE: Table
-    const [columns, setColumns] = useState<ProColumns<AppConfigurationListItem>[]>()
+    const [columns, setColumns] = useState<ProColumns<AppConfigurationListItem>[]>();
 
     // NOTICE: Action: Edit
     const [editID, setEditID] = useState<number>();
@@ -67,47 +49,46 @@ export const AppManagePage = () => {
         // console.log(form.getFieldsValue() )
 
         userBrowseAndSearchAllItemsUseCase(fields);
-
-    }, [])
+    }, []);
 
     const onFormResetCallback = useCallback(() => {
         userBrowseAndSearchAllItemsUseCase({});
-    }, [])
+    }, []);
 
-
-    const [triggerDelete, { data: deleteData, isLoading: isDeleteLoading, isSuccess: isDeleteSuccess }] = useDeleteAppConfigurationMutation();
+    const [triggerDelete] = useDeleteAppConfigurationMutation();
 
     const [modal, contextHolder] = Modal.useModal();
 
     const onDeleteModalOK = useCallback((editID: number) => {
         // NOTICE: need dependency array
-        userDeleteChannelSettingUseCase(editID)
-    }, [])
+        userDeleteChannelSettingUseCase(editID);
+    }, []);
 
     // NOTE: User delete ChannelSetting
     const userDeleteChannelSettingUseCase = useCallback((editID: number) => {
         // NOTE:
         triggerDelete({
             id: editID,
-        }).unwrap().then(() => {
-            triggerGetList(null);
         })
+            .unwrap()
+            .then(() => {
+                triggerGetList(null);
+            });
     }, []);
 
     const onDeleteModalCancel = useCallback(() => {
-
-    }, [])
-
+        //
+    }, []);
 
     const userBrowseDeleteChannelSettingUseCase = useCallback((record: AppConfigurationListItem) => {
         modal.confirm({
-            title: "确认要删除此笔数据吗?",
+            title: '确认要删除此笔数据吗?',
             // NOTICE: 得用下面寫法否則 editID 會找不到
             onOk: () => onDeleteModalOK(record.id),
             // onOk: onDeleteModalOK,
             onCancel: onDeleteModalCancel,
         });
-    }, [])
+    }, []);
 
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
@@ -117,56 +98,66 @@ export const AppManagePage = () => {
                 key: 'option',
                 title: '操作',
                 valueType: 'option',
-                render: (text, record, _, action) => {
+                render: (text, record) => {
                     return [
-                        <a key="editable" onClick={() => {
-                            userBrowseEditChannelSettingUseCase(record);
-                        }}>修改</a>,
-                        <a key="deletable" onClick={() => {
-                            userBrowseDeleteChannelSettingUseCase(record)
-                        }}>刪除</a>,
-                    ]
+                        <a
+                            key="editable"
+                            onClick={() => {
+                                userBrowseEditChannelSettingUseCase(record);
+                            }}
+                        >
+                            修改
+                        </a>,
+                        <a
+                            key="deletable"
+                            onClick={() => {
+                                userBrowseDeleteChannelSettingUseCase(record);
+                            }}
+                        >
+                            刪除
+                        </a>,
+                    ];
                 },
-                width: ProColumnsOperationConstant.width["2"],
+                width: ProColumnsOperationConstant.width['2'],
             },
-            { key: 'appName', title: 'APP名称', dataIndex: 'appName', initialValue: "" },
-            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true,},
-            { key: 'createTime', title: '创建时间', dataIndex: 'createTime', initialValue: "", hideInSearch: true},
-            { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', initialValue: "", hideInSearch: true,},
+            { key: 'appName', title: 'APP名称', dataIndex: 'appName', initialValue: '' },
+            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: '', hideInSearch: true },
+            { key: 'createTime', title: '创建时间', dataIndex: 'createTime', initialValue: '', hideInSearch: true },
+            { key: 'updateTime', title: '更新时间', dataIndex: 'updateTime', initialValue: '', hideInSearch: true },
         ];
         setColumns(columns);
     }, []);
 
     useEffect(() => {
         systemInitalizeListUsecase();
-    }, [])
+    }, []);
 
     // NOTE: User browse AllItemsUsecase
     const userBrowseAndSearchAllItemsUseCase = useCallback((query) => {
         triggerGetList(query);
-    }, [])
-
-    useEffect(() => {
-        userBrowseAndSearchAllItemsUseCase({})
     }, []);
 
+    useEffect(() => {
+        userBrowseAndSearchAllItemsUseCase({});
+    }, []);
 
     // NOTE: GET list and item
-    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllAppConfigurationQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] =
+        useLazyGetAllAppConfigurationQuery({
+            pollingInterval: 0,
+            refetchOnFocus: false,
+            refetchOnReconnect: false,
+        });
     const [currentTableListData, setCurrentTableListData] = useState<AppConfigurationListItem[]>();
     useEffect(() => {
-        if(!currentItemListData) return;
-        const data = currentItemListData.map(item => {
+        if (!currentItemListData) return;
+        const data = currentItemListData.map((item) => {
             return {
                 ...item,
-            }
-        })
+            };
+        });
         setCurrentTableListData(data);
-    }, [currentItemListData])
+    }, [currentItemListData]);
 
     // const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData, isLoading: isLoadingAllRiskDropMenuData, isFetching: isFetchingAllRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
     //     pollingInterval: 0,
@@ -179,7 +170,6 @@ export const AppManagePage = () => {
     //     refetchOnFocus: false,
     //     refetchOnReconnect: false
     // });
-
 
     // NOTE: User add Item
     const userAddItemUseCase = useCallback(() => {
@@ -194,22 +184,21 @@ export const AppManagePage = () => {
     }, []);
 
     const onAddItem = useCallback(() => {
-        userAddItemUseCase()
-    }, [])
+        userAddItemUseCase();
+    }, []);
 
     // NOTICE: Form
-    const [form] = useForm()
+    const [form] = useForm();
 
     // NOTICE: Modal - Create, Edit
     // Modal - OK
     const onModalOk = useCallback(() => {
         form.submit();
-    }, [form])
+    }, [form]);
 
     // Modal - Close
     const onCloseModal = useCallback(() => {
         form.resetFields();
-        setCustomAntFormFieldError({});
     }, []);
 
     // Form - Initial Data
@@ -225,28 +214,28 @@ export const AppManagePage = () => {
             taxCardOcr: taxCardOcrList[0],
             liveDetect: liveDetectList[0],
             idCardOcr: idCardOcrList[0],
-        } as DeepPartial<{}>;
-    }, [])
+        };
+    }, []);
 
     // Form - onFieldsChange
-    const onFormFieldsChange = useCallback((changedFields, allFields) => {
+    const onFormFieldsChange = useCallback(() => {
         // userEditingChannelSettingUseCase(changedFields);
-    }, [])
+    }, []);
 
     // Form - Finish
     const onFormFinish = useCallback(() => {
         userEditedChannelSettingUseCase();
-    }, [showModalContent.isEdit, editID])
+    }, [showModalContent.isEdit, editID]);
 
     const userEditedChannelSettingUseCase = useCallback(() => {
         // const isValid = systemValidateChannelSettingUsecase();
         // if(!isValid) return;
 
         // NOTICE: need
-        let fields = form.getFieldsValue();
+        const fields = form.getFieldsValue();
 
         // NOTICE: MODE - Edit
-        if(showModalContent.isEdit) {
+        if (showModalContent.isEdit) {
             fields['id'] = editID;
             delete fields['packageId'];
         }
@@ -254,32 +243,29 @@ export const AppManagePage = () => {
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
 
-
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
-            // console.log("responseData", responseData);
+        triggerAPI(fields)
+            .unwrap()
+            .then(() => {
+                // console.log("responseData", responseData);
 
-            // Reset Form
-            form.resetFields();
+                // Reset Form
+                form.resetFields();
 
-            // Close Modal
-            setShowModalContent({
-                show: false,
-                isEdit: false,
-            })
+                // Close Modal
+                setShowModalContent({
+                    show: false,
+                    isEdit: false,
+                });
 
-            // Reset TableList
-            triggerGetList({});
-
-        })
-    }, [showModalContent.isEdit, editID])
+                // Reset TableList
+                triggerGetList({});
+            });
+    }, [showModalContent.isEdit, editID]);
 
     // NOTE: POST , PUT and DELETE
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateAppConfigurationMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = useUpdateAppConfigurationMutation();
-
-    // Form - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
+    const [triggerPost] = useCreateAppConfigurationMutation();
+    const [triggerPut] = useUpdateAppConfigurationMutation();
 
     // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSettingUseCase = useCallback((record: AppConfigurationListItem) => {
@@ -290,41 +276,44 @@ export const AppManagePage = () => {
         setShowModalContent({
             show: true,
             isEdit: true,
-        })
+        });
         triggerGet({
             id: record.id,
         });
     }, []);
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetAppConfigurationQuery();
+    const [triggerGet, { currentData: currentFormData }] = useLazyGetAppConfigurationQuery();
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
-        if(showModalContent.isEdit && currentFormData) {
-            systemReloadEditChannelSettingUseCase(currentFormData)
+        if (showModalContent.isEdit && currentFormData) {
+            systemReloadEditChannelSettingUseCase(currentFormData);
         }
-    }, [showModalContent.isEdit, currentFormData])
+    }, [showModalContent.isEdit, currentFormData]);
 
     // NOTE: System reload EditChannelSetting
-    const systemReloadEditChannelSettingUseCase = useCallback((currentFormData) => {
-        // NOTE: form - main data
-        form.setFieldsValue(currentFormData)
-    }, [showModalContent.isEdit, currentFormData])
+    const systemReloadEditChannelSettingUseCase = useCallback(
+        (currentFormData) => {
+            // NOTE: form - main data
+            form.setFieldsValue(currentFormData);
+        },
+        [showModalContent.isEdit, currentFormData],
+    );
 
     return (
         <AdminPage
             navigator={{
                 ancestor: {
-                    path: "",
-                    breadcrumbName: "首页",
+                    path: '',
+                    breadcrumbName: '首页',
                 },
                 parent: {
-                    path: "",
-                    breadcrumbName: "APP配置",
+                    path: '',
+                    breadcrumbName: 'APP配置',
                 },
                 self: {
-                    path: "",
-                    breadcrumbName:"APP配置"
-                }
+                    path: '',
+                    breadcrumbName: 'APP配置',
+                },
             }}
         >
             <>
@@ -343,30 +332,38 @@ export const AppManagePage = () => {
                     onSearchClick={(searchInputKeys: any) => {
                         // console.log("searchInputKeys", searchInputKeys);
                         let temp = currentTableListData;
-                        Object.keys(searchInputKeys).map(key => {
-                            let searchInputValue = searchInputKeys[key]
-                            if(searchInputValue !== "") {
-                                temp = temp.filter(item => item[key] === searchInputValue);
+                        Object.keys(searchInputKeys).map((key) => {
+                            const searchInputValue = searchInputKeys[key];
+                            if (searchInputValue !== '') {
+                                temp = temp.filter((item) => item[key] === searchInputValue);
                             }
-                        })
+                        });
                         return temp;
                     }}
                 />
                 <AdminFormCustomModal
-                    width={"600px"}
+                    width={'600px'}
                     title={i18n.AppManagePage.modalTitle}
                     showModalContent={showModalContent}
                     setShowModalContent={setShowModalContent}
                     onOk={onModalOk}
                     onCloseModal={onCloseModal}
                 >
-                    <AppManageForm isEdit={showModalContent.isEdit} form={form} initialValues={formInitialValues} onFieldsChange={onFormFieldsChange} onFinish={onFormFinish}
-                                   taxCardOcrList={taxCardOcrList} idCardOcrList={idCardOcrList} liveDetectList={liveDetectList}/>
+                    <AppManageForm
+                        isEdit={showModalContent.isEdit}
+                        form={form}
+                        initialValues={formInitialValues}
+                        onFieldsChange={onFormFieldsChange}
+                        onFinish={onFormFinish}
+                        taxCardOcrList={taxCardOcrList}
+                        idCardOcrList={idCardOcrList}
+                        liveDetectList={liveDetectList}
+                    />
                 </AdminFormCustomModal>
 
                 {/*NOTICE: Delete Modal*/}
                 <div>{contextHolder}</div>
             </>
         </AdminPage>
-    )
-}
+    );
+};

@@ -7,5 +7,3 @@ export interface FormModalProps {
     form?: any;
     isSuccess?: boolean;
 }
-
-

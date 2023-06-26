@@ -1,6 +1,6 @@
 // NOTE: Put
-import {RiskManageModel} from "../../domain/vo/RiskManageModel";
+import { RiskManageModel } from '../../domain/vo/RiskManageModel';
 
-export type PutRiskManageCreateRequest = Omit<RiskManageModel, "modelName"> & {
+export type PutRiskManageCreateRequest = Omit<RiskManageModel, 'modelName'> & {
     modelId: number;
 };
