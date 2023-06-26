@@ -38,7 +38,6 @@ const RepaymentPage = () => {
 
   const [listStatus, setListStatus] = useState('Unpaid');
   useEffect(() => {
-    dispatch(loadingSlice.actions.updatePageLoading(true))
     triggerGetList({
       pageNumber: 0,
       pageSize: 500,

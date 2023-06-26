@@ -31,7 +31,6 @@ const RepamentCouponModal = () => {
         });
 
     useEffect(() => {
-        dispatch(loadingSlice.actions.updatePageLoading(true))
         triggerGetList({
             isFullRepay: true,
             orderNo,
@@ -148,7 +147,7 @@ const RepamentCouponModal = () => {
             </>
         );
     };
-    
+
     return (
         <Modal className='h-full'>
             <Navigation title={''} back={() => { navigate(-1) }} />
