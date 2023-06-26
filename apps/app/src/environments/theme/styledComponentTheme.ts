@@ -1,6 +1,8 @@
 import { Colors, IThemeConfig, fontSizeListToRem } from '@frontend/mobile/shared/ui';
+import {themes} from './customTailwindTheme';
+import { NativeAppInfo } from '../../app/persistant/nativeAppInfo';
 
-import theme from './tailwind.theme';
+const theme = themes[ NativeAppInfo.environment][`v${NativeAppInfo.uiVersion}`]
 
 export const themeConfig: IThemeConfig = {
   // NOTE: Commons
@@ -50,4 +52,11 @@ export const themeConfig: IThemeConfig = {
       text: '#FFFFFF',
     },
   },
+  input:{
+    disable: theme['custom_state_disable_main'],
+    error: theme['custom_state_error_main'],
+    placeholder: theme['custom_text_fields_placeholder_main'],
+    outline: theme['custom_text_fields_outline_main'],
+  }
+
 };

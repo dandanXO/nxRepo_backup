@@ -11,30 +11,51 @@ import {Button} from "antd/es";
 import queryString from "query-string";
 import {ConstantRiskRankEnum} from "../../../../shared/constants/constantRiskRankEnum";
 import useGetProviderEnum from "../../../../shared/hooks/common/useGetProviderEnum";
+import useGetChannelEnum from "../../../../shared/hooks/useGetChannelEnum";
+import usePageSearchParams from "../../../../shared/hooks/usePageSearchParams";
 
 export const RepaymentRateTable = () => {
-
+    // NOTE: 資料
+    const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
+    const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
     const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
 
-    const [formState, setFormState] = useState<GetNewCustomerRiskPaymentRateListRequest>({
+    // NOTE: 搜尋與分頁
+    const initSearchList: GetNewCustomerRiskPaymentRateListRequest = {
+        channelId: null, // 渠道 ID
         endTime: "",          // 結束時間
         riskControlModel: "", // 风控名稱
         riskRank: "",         // 風控標籤
         startTime: "",         // 開始時間
         newMember:""
-    })
-    useEffect(() => {
-        triggerGetNewCustomerRiskPaymentRateList(null);
-        triggerGetProviderList(null);
-    }, [])
+    }
 
-    const triggerGetList = useCallback(() => {
-        triggerGetNewCustomerRiskPaymentRateList(formState)
-    }, [formState])
+    const { searchList, setSearchList} = usePageSearchParams({ searchListParams: initSearchList });
 
-    const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
+    const getSearchParams = () => {
+        // @ts-ignore
+        const { channelId, fakeLoanDate = '', riskControlModel = '', riskRank = '', newMember }: GetNewCustomerRiskPaymentRateListRequest = formRef.current.getFieldValue();
+        return {
+            channelId,
+            riskControlModel,
+            riskRank,
+            newMember,
+            startTime: fakeLoanDate ? fakeLoanDate[0].format('YYYY-MM-DD 00:00:00') : '',
+            endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : ''
+        }
+    }
 
+
+    // NOTE: 更新列表
+    const triggerGetList = (searchList) => {
+        triggerGetNewCustomerRiskPaymentRateList(searchList)
+    }
+
+    const formRef = useRef<ProFormInstance>();
+
+    // NOTE: refactor me
     const formatNumber = (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+
     const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse, "text">[] = [
         {
             key: 'expireTime',
@@ -156,11 +177,20 @@ export const RepaymentRateTable = () => {
         },
         // NOTE: only search
         {
+            title: '申请渠道',
+            dataIndex: 'channelId',
+            valueType: 'select',
+            key: 'channelId',
+            valueEnum: channelListEnum,
+            hideInSearch: false,
+            hideInTable: true
+        },
+        {
             key: 'riskControlModel',
+            hideInSearch: false,
             hideInTable: true,
             title: '风控应用',
             dataIndex: 'riskControlModel',
-            initialValue: "",
             valueEnum: providerListEnum,
             fieldProps: {
                 allowClear: false,
@@ -168,18 +198,23 @@ export const RepaymentRateTable = () => {
         },
         {
             key: 'riskRank',
+            hideInSearch: false,
             hideInTable: true,
             title: '风控标签',
             dataIndex: 'riskRank',
             valueType: 'select',
             valueEnum: ConstantRiskRankEnum,
-            initialValue: "",
             fieldProps: {
                 allowClear: false,
             }
         },
         {
-            title: '是否新客', dataIndex: 'newMember', valueType: 'select', key: 'newMember', initialValue: "", hideInTable: true,
+            key: 'newMember',
+            title: '是否新客',
+            dataIndex: 'newMember',
+            valueType: 'select',
+            hideInSearch: false,
+            hideInTable: true,
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
@@ -187,46 +222,60 @@ export const RepaymentRateTable = () => {
             },
         },
     ]
-    const formRef = useRef<ProFormInstance>();
-    const getSearchParams = () => {
-        // @ts-ignore
-        const { fakeLoanDate = '', riskControlModel = '', riskRank = '', newMember } = formRef.current.getFieldValue();
-        return {
-            riskControlModel, riskRank, newMember,
-            startTime: fakeLoanDate ? fakeLoanDate[0].format('YYYY-MM-DD 00:00:00') : '',
-            endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : ''
-        }
+
+    const onUserClickSearch = (form: FormInstance) => {
+        const searchList = getSearchParams();
+        setSearchList(searchList)
+        triggerGetList(searchList);
+    }
+
+    const onUserClickReset = (form: FormInstance)=>{
+        // Self State
+        setSearchList(initSearchList);
+        // System reload list
+        triggerGetList(initSearchList);
     }
 
     const onClickHandleExport = () => {
-        const searchParams = getSearchParams();
-        const searchQueryString = queryString.stringify(searchParams);
+        // self state
+        const searchList = getSearchParams();
+        setSearchList(searchList)
+        // get excel
+        const searchQueryString = queryString.stringify(searchList);
         window.open(`/hs/admin/statistics/new-customer-risk-payment-rate/download?${searchQueryString}`);
-        setFormState(searchParams)
-        triggerGetNewCustomerRiskPaymentRateList(searchParams);
+        // refresh list
+        triggerGetList(searchList);
     }
+
+    const onUserChangePage = (current, pageSize) => {
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
+    }
+
+    useEffect(() => {
+        triggerGetList(searchList);
+        triggerGetProviderList(null);
+        triggerGetChannelList(null);
+    }, [])
 
     return (
         <AdminTable <RiskPaymentRateResponseRiskPaymentRateResponse>
+            // static
+            // rowKey={}
             formRef={formRef}
-            searchable={true}
-            isSearchFromClient={false}
-            onFormResetCallback={(form: FormInstance)=>{
-                form.resetFields();
-                triggerGetNewCustomerRiskPaymentRateList(null);
-            }}
-            onFormSearchCallback={(form: FormInstance) => {
-                const searchForm = getSearchParams();
-                setFormState(searchForm);
-                triggerGetNewCustomerRiskPaymentRateList(searchForm);
-            }}
             toolBarRender={() => [<Button onClick={onClickHandleExport} type='primary'>导出</Button>]}
+            // dynamic
+            loading={isFetching}
             tableHeaderColumns={tableHeaderColumns}
             tableDatasource={currentData}
-            triggerToRefreshList={triggerGetList}
-            loading={isFetching}
+            triggerToRefreshList={() => triggerGetList(searchList)}
+            pageOnChange={onUserChangePage}
+            searchable={true}
+            isSearchFromClient={false}
+            onFormResetCallback={onUserClickReset}
+            onFormSearchCallback={onUserClickSearch}
             hasAddForm={false}
             hasEditForm={false}
+
         />
     )
 }

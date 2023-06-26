@@ -1,44 +1,44 @@
-import cx from 'classnames';
-import { Moment } from 'moment';
+import {Moment} from 'moment';
 import moment from 'moment-timezone';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { FeeRateKeyEnum } from '../../../api/indexService/FeeRateKeyEnum';
-import { PlatformProduct } from '../../../api/indexService/PlatformProduct';
-import { ProductApplyDetail } from '../../../api/loanService/ProductApplyDetail';
-import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
-import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
-import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
-import { getToken } from '../../../modules/querystring/getToken';
-import { RootState } from '../../../reduxStore';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { Button } from '../../components/layouts/Button';
-import { Horizontal } from '../../components/layouts/Horizontal';
-import { PageContent } from '../../components/layouts/PageContent';
-import { LoanOverViewSection } from '../../components/sections/LoanOverViewSection';
-import { AuthorizationModal } from '../../modals/AuthorizationModal';
-import { LoanAgreementModal } from '../../modals/QRLoanAgreementModal';
-import { QRSuccessModal } from '../../modals/QRSuccessModal';
-import { QuickRepaymentSummaryModal } from '../../modals/QuickRepaymentSummaryModal';
-import { PagePathEnum } from '../PagePathEnum';
-import { NoticeOrderOrQuotaRejectedSection } from './noticeSections/NoticeOrderOrQuotaRejectedSection';
-import { NoticeUserAuthedEmptyQuotaSection } from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
-import { NoticeUserInProgressAuthStatusSections } from './noticeSections/NoticeUserInProgressAuthStatusSections';
-import { NoticeUserReacquireOver3TimeSections } from './noticeSections/NoticeUserReacquireOver3TimeSections';
-import { NoticeUserRejectedSection } from './noticeSections/NoticeUserRejectedSection';
-import { ADBannerSection } from './sections/ADBannerSection';
-import { AuthenticationSection } from './sections/AuthenticationSection';
-import { LoanInformationSection } from './sections/LoanInformationSection';
-import { MarqueeSection } from './sections/MarqueeSection';
-import { RecommendedProductsSection } from './sections/RecommendedProductsSection';
-import { TipsSection } from './sections/TipsSection';
-import { UserInformationSection } from './sections/UserInformationSection';
-import { WelcomeBackAndReapplyInTimeSection } from './sections/WelcomeBackAndReapplyInTimeSection';
-import { IndexPageSagaAction } from './userUsecaseSaga/indexPageActions';
+import {FeeRateKeyEnum} from '../../../api/indexService/FeeRateKeyEnum';
+import {PlatformProduct} from '../../../api/indexService/PlatformProduct';
+import {ProductApplyDetail} from '../../../api/loanService/ProductApplyDetail';
+import {ORDER_STATE} from '../../../domain/order/ORDER_STATE';
+import {RISK_CONTROL_STATE} from '../../../domain/risk/RISK_CONTROL_STATE';
+import {USER_AUTH_STATE} from '../../../domain/user/USER_AUTH_STATE';
+import {getToken} from '../../../modules/querystring/getToken';
+import {RootState} from '../../../reduxStore';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {Button} from '../../components/layouts/Button';
+import {Horizontal} from '../../components/layouts/Horizontal';
+import {PageContent} from '../../components/layouts/PageContent';
+import {LoanOverViewSection} from '../../components/sections/LoanOverViewSection';
+import {AuthorizationModal} from '../../modals/AuthorizationModal';
+import {LoanAgreementModal} from '../../modals/QRLoanAgreementModal';
+import {QRSuccessModal} from '../../modals/QRSuccessModal';
+import {QuickRepaymentSummaryModal} from '../../modals/QuickRepaymentSummaryModal';
+import {PagePathEnum} from '../PagePathEnum';
+import {NoticeOrderOrQuotaRejectedSection} from './noticeSections/NoticeOrderOrQuotaRejectedSection';
+import {NoticeUserAuthedEmptyQuotaSection} from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
+import {NoticeUserInProgressAuthStatusSections} from './noticeSections/NoticeUserInProgressAuthStatusSections';
+import {NoticeUserReacquireOver3TimeSections} from './noticeSections/NoticeUserReacquireOver3TimeSections';
+import {NoticeUserRejectedSection} from './noticeSections/NoticeUserRejectedSection';
+import {ADBannerSection} from './sections/ADBannerSection';
+import {AuthenticationSection} from './sections/AuthenticationSection';
+import {LoanInformationSection} from './sections/LoanInformationSection';
+import {MarqueeSection} from './sections/MarqueeSection';
+import {RecommendedProductsSection} from './sections/RecommendedProductsSection';
+import {TipsSection} from './sections/TipsSection';
+import {UserInformationSection} from './sections/UserInformationSection';
+import {WelcomeBackAndReapplyInTimeSection} from './sections/WelcomeBackAndReapplyInTimeSection';
+import {IndexPageSagaAction} from './userUsecaseSaga/indexPageActions';
 import SystemCouponModal from '../../modals/SystemCouponModal';
 import {computeNumber} from "../../../modules/computeNumber";
+import {formatDate} from "../../../modules/format/formatDate";
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -109,9 +109,27 @@ const IndexPage = () => {
   }
 
   // NOTE: User Event
+  const isShowReacquireButton = indexPageState.user.state !== USER_AUTH_STATE.reject && indexPageState.user.state !== USER_AUTH_STATE.authing &&
+    (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
+      || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
+    ( indexPageState.order.state === ORDER_STATE.empty
+      || indexPageState.order.state === ORDER_STATE.normal
+      || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder
+      || indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+    );
+
+  const disableClickReacquireCredit = !(indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able && indexPageState.order.state !== ORDER_STATE.hasOverdueOrder) ;
+  // && !(indexPageState.riskControl.state === RISK_CONTROL_STATE.valid);
+
   const onClickReacquireCredit = useCallback(() => {
+    console.log('onClickReacquireCredit--------')
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
-  }, []);
+  }, [disableClickReacquireCredit]);
+
+const onUserClickViewApplicationProgress = () => {
+  navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
+}
+
 
   const navigate = useNavigate();
 
@@ -236,7 +254,7 @@ const IndexPage = () => {
           const disbursalPrice = computeNumber(product.calculating.finalLoanPrice, "*", price).result;
 
           const dueDate = moment().add(product.terms - 1, 'days');
-          const formatedDueDate = dueDate.format('DD-MM-YYYY');
+          const formatedDueDate = formatDate(dueDate)
 
           // console.log("interestPrice", interestPrice);
           // console.log("disbursalPrice", disbursalPrice);
@@ -355,11 +373,12 @@ const IndexPage = () => {
       indexPageState.user.state === USER_AUTH_STATE.ready,
       indexPageState.user.state === USER_AUTH_STATE.authing,
       indexPageState.user.state === USER_AUTH_STATE.reject,
-      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able &&
-      (indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder
-        ||indexPageState.order.state === ORDER_STATE.normal
-        ||indexPageState.order.state === ORDER_STATE.empty
-      ),
+      indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
+      indexPageState.order.state === ORDER_STATE.hasOverdueOrder  && isShowReacquireButton,
+      // (indexPageState.order.state === ORDER_STATE.hasOverdueOrder
+      //   ||indexPageState.order.state === ORDER_STATE.normal
+      //   ||indexPageState.order.state === ORDER_STATE.empty
+      // ),
     ].some((condition) => condition === true);
   }, [indexPageState.riskControl.state, indexPageState.order.state, indexPageState.user.state]);
 
@@ -369,6 +388,8 @@ const IndexPage = () => {
     isSuccess,
     isError,
   } = useSelector((state: RootState) => state.indexPage.api.reacquire);
+
+//   console.log("isReacquireLoading", isReacquireLoading);
 
   const countdown = useSelector((state: RootState) => state.indexPage.timeout.riskControlDate);
   // console.log("countdown", countdown);
@@ -380,8 +401,8 @@ const IndexPage = () => {
   // TODO: refactor me
   const onClickApply = useCallback(() => {
     // NOTICE: empty guard
-    if (!calculatingProducts) return;
 
+    if (!calculatingProducts) return;
     const simpleProducts: ProductApplyDetail[] = calculatingProducts.map((product) => {
       const simpleProduct: ProductApplyDetail = {
         applyAmount: product.calculating.finalLoanPrice,
@@ -405,8 +426,10 @@ const IndexPage = () => {
 
   // NOTE: Modal
   const modelState = useSelector((state: RootState) => state.model);
+
   return (
-    <div className={'flex flex-col overflow-auto max-h-[90vh] pb-20'}>
+    <div className={'flex flex-col'}>
+      <div className={'flex flex-col overflow-auto max-h-[90vh] w-full absolute top-0 pb-10'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}
@@ -450,8 +473,10 @@ const IndexPage = () => {
           {/*NOTE: 用戶認證成功*/}
           {indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state === RISK_CONTROL_STATE.valid &&
-            indexPageState.order.state !== ORDER_STATE.hasOverdueOrder  &&(
-              <div className={'mb-4 mt-6'}>
+            (indexPageState.indexAPI?.availableAmount ?? 0) > 0 &&
+            indexPageState.order.state !== ORDER_STATE.hasOverdueOrder  &&
+            (indexPageState.indexAPI?.products?.length?? 0) > 0  && (
+              <div className={'mt-6 mb-[-20px]'}>
                 {/*NOTE: 顯示推薦產品列表*/}
                 <RecommendedProductsSection state={indexPageState} calculatingProducts={calculatingProducts || []} />
                 <Horizontal />
@@ -467,20 +492,21 @@ const IndexPage = () => {
               //   indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder,
               //   indexPageState.order.state === ORDER_STATE.hasOverdueOrder,
               // NOTE: 首頁-認證完成-有效額度時間-額度不足 || 有額度
-              indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
+            //   indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
             ].some((condition) => condition === true) &&
               indexPageState.user.state === USER_AUTH_STATE.success && (
-                <div className={'mb-3 pt-5'}>
+                <div className={'mt-8'}>
                   <LoanOverViewSection state={indexPageState} />
                 </div>
               )
           }
 
           {/*TODO: refactor me*/}
-          <div className={'mb-3'}>
+          <div>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
 
+        
           {/*TODO: 用戶認證中或用戶拒絕*/}
           {indexPageState.user.state === USER_AUTH_STATE.authing ? (
             <NoticeUserInProgressAuthStatusSections />
@@ -519,19 +545,19 @@ const IndexPage = () => {
             )}
         </PageContent>
       </div>
+    </div>
 
       {/*NOTE: 底部*/}
-      <div className={'absolute w-full bottom-[63px] px-3 py-2'}>
+      <div className={'absolute w-full bottom-[63px] px-3 py-2 '}>
         {/*// NOTE: Button - Apply Now*/}
         {!applyHide && (
           //   (indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able) &&
           <Button
-            onClick={onClickApply}
             dataTestingID={'apply'}
+            dataTestingDisable={applyDisable}
             text={'Apply Now'}
-            className={cx({
-              'bg-cstate-disable-main border-cstate-disable-main': applyDisable,
-            })}
+            disable={applyDisable}
+            onClick={() => !applyDisable && onClickApply()}
           />
         )}
 
@@ -540,39 +566,27 @@ const IndexPage = () => {
         {(indexPageState.user.state === USER_AUTH_STATE.authing ||
           indexPageState.user.state === USER_AUTH_STATE.reject) && (
           <Button
-            onClick={() => {
-              navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
-            }}
+            onClick={onUserClickViewApplicationProgress}
             dataTestingID={'viewAppProgress'}
             text={'View Application Progress'}
           />
         )}
-
         {isReacquireLoading && (
-          <div className={'mb-3 text-center text-xs text-gray-500'}>
-            Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as
-            quickly as possible.
+          <div data-testing-id={'notice-reacquireLoading'} className={'mb-3 text-center text-xs text-ctext-secondary'}>
+            Please wait patiently for 30 seconds to two minutes while we review the maximum amount you can borrow as quickly as possible.
           </div>
         )}
 
         {/*TODO: refactor*/}
         {/*NOTE: 可以點擊獲取額度*/}
         {/*NOTE: 當點擊獲取額度時，顯示反灰按鈕*/}
-        {indexPageState.user.state !== USER_AUTH_STATE.authing &&
-          (indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
-            || indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_one_time) &&
-          ( indexPageState.order.state === ORDER_STATE.empty
-            || indexPageState.order.state === ORDER_STATE.normal
-            || indexPageState.order.state === ORDER_STATE.hasInComingOverdueOrder) && (
+        {isShowReacquireButton && (
             <Button
-              onClick={onClickReacquireCredit}
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
               loading={isReacquireLoading}
-              className={cx({
-                'bg-primary-main': indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
-                'bg-cstate-disable-main border-cstate-disable-main': isReacquireLoading,
-              })}
+              disable={isReacquireLoading || disableClickReacquireCredit}
+              onClick={() => (!isReacquireLoading && !disableClickReacquireCredit) && onClickReacquireCredit()}
             />
           )}
       </div>

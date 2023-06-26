@@ -18,6 +18,7 @@ import { PagePathEnum } from '../PagePathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
+import {formatDate} from "../../../modules/format/formatDate";
 
 const RejectPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const RejectPaymentItem = (props: GetLoanRecord) => {
           <ListItem
             key={'ApplyDate'}
             title={'Apply Date'}
-            text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
+            text={applyDate ? formatDate(moment(applyDate)) : ''}
             titleColor={'text-cstate-disable-main'}
           />
           <Divider />

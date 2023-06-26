@@ -9,6 +9,8 @@
 // ***********************************************
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
+import {PagePathEnum} from "../../../app/src/app/presentation/pages/PagePathEnum";
+
 declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Chainable<Subject> {
@@ -31,3 +33,7 @@ Cypress.Commands.add('login', (email, password) => {
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("visitAPP", (pagePathEnum) => {
+  cy.visit(pagePathEnum)
+})

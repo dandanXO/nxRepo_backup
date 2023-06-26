@@ -3,6 +3,7 @@ import moment from 'moment/moment';
 import Money from '../../components/Money.tsx';
 import { Button } from '../../components/layouts/Button';
 import { PagePathEnum } from '../PagePathEnum';
+import {formatDate} from "../../../modules/format/formatDate";
 
 type ICardContentSection = {
   amountName: string;
@@ -30,7 +31,7 @@ export const CardContentSection = (props: ICardContentSection) => {
 
         {props.dueDate && (
           <div className={`${props.statusColor} text-xs`}>
-            {`Due ${moment(props.dueDate).format('DD-MM-YYYY') ?? ''}`}
+            {`Due ${formatDate(moment(props.dueDate)) ?? ''}`}
           </div>
         )}
       </div>

@@ -77,7 +77,7 @@ function PreAndPostInterestGroups(props: PreAndPostInterestGroupsProps) {
 
         if (touchField === 'plusAmount') {
             setCustomAntFormFieldError(prev => {
-                const error = validateNum(touchValue, "请输入提額金额");
+                const error = validateplusAmount(touchValue, "请输入提額金额");
                 const errorSection = {
                     validateStatus: error ? "error" : "",
                     help: error,

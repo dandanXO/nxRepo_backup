@@ -18,7 +18,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
   // NOTICE: 防止錯誤後無法重新 watch
   try {
 
-    const oldUserForceApply = true;
+    const oldUserForceApply: boolean = yield select((state: RootState) => state.indexPage.indexAPI?.oldUserForceApply);
 
     // NOTE: 老客強下開關不需要彈跳 SummaryModal
     if(!oldUserForceApply) {

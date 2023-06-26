@@ -124,7 +124,7 @@ export const AdminTable = <TableListItemDataType,>({
             optionRender: ({ searchText, resetText }, { form }) => (
                 <Space>
                     <Button onClick={() => {
-                        form.resetFields();
+                        form?.resetFields();
                         setCachedDatasource(tableDatasource);
                         onFormResetCallback(form);
                     }}>
@@ -157,12 +157,12 @@ export const AdminTable = <TableListItemDataType,>({
 
     return (
         <ProTable<TableListItemDataType>
-
+            // NOTE: 配置 Ant Design Form
+            form={form}
             // Table action 的引用，便于自定义触发
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
             formRef={formRef}
-            // formRef={form}
             columns={tableHeaderColumns}
             dataSource={cachedDatasource}
             // onDataSourceChange={(dataSource: T[]) => void}
@@ -230,7 +230,6 @@ export const AdminTable = <TableListItemDataType,>({
                 // onChange: (page) => console.log(page),
 
             }}
-            form={form}
             loading={loading}
             // NOTE:
             // scroll={{ x: 1000 }}
@@ -246,7 +245,6 @@ export const AdminTable = <TableListItemDataType,>({
             // showHiddenNum={false}
             // 用來標示選取的key
             rowKey={rowKey}
-
         />
     )
 }

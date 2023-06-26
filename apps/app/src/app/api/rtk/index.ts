@@ -258,7 +258,7 @@ export const API = createApi({
     getUserProcess: builder.query<GetUserProcessResponse, {}>({
       query: () => ({
         method: 'get',
-        url: `/bank-user/process`,
+        url: `/user/process`,
       }),
     }),
   }),

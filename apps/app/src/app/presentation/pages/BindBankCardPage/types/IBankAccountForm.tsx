@@ -35,7 +35,7 @@ export type IPakistanBankAccountForm = IBankAccountForm & {
   bankAccountValue: any;
   onIFSCDropSelect: (index: number) => void;
   bindCardDropListData: any;
-  iBanData: any;
-  onIBanChange: (event: any) => void;
-  onIbanBlur: (event: any) => void;
+  // iBanData: any;
+  // onIBanChange: (event: any) => void;
+  // onIbanBlur: (event: any) => void;
 };

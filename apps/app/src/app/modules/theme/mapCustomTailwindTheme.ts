@@ -9,6 +9,7 @@ export const mapCustomTailwindTheme = (variables: ITheme): IMappedTheme => {
     '--primary_assistant': variables['primary_assistant'] || '',
     '--secondary_main': variables['secondary_main'] || '',
     '--secondary_variant': variables['secondary_variant'] || '',
+    '--secondary_assistant': variables['secondary_assistant'] || '',
     '--tertiary_main': variables['tertiary_main'] || '',
     '--tertiary_variant': variables['tertiary_variant'] || '',
     // NOTE: background

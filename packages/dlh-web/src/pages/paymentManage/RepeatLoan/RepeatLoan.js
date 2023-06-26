@@ -11,7 +11,7 @@ import moment from 'moment';
 import { CommonTable, CopyText } from 'components';
 import { repeatLoanAction } from './index';
 import SearchList from './SearchList/SearchList';
-import { Popconfirm, Icon, Button, message, Row, Col } from 'antd';
+import { Popconfirm, Icon, Button, message, Row, Col ,Modal} from 'antd';
 import DetailModal from './DetailModal/DetailModal';
 import styles from './RepeatLoan.less';
 import { orderStatus, convertMoneyFormat } from 'utils';
@@ -20,12 +20,13 @@ import PropTypes from 'prop-types';
 import {getAllMerchants, getIsSuperAdmin} from "../../../utils";
 
 const convertParams = (obj) => {
-    const { orderNo = '', userTrueName = '', userPhone = '', merchantId = '' } = obj;
+    const { orderNo = '', userTrueName = '', userPhone = '', merchantId = '', suspend = 'false' } = obj;
     return {
         orderNo,
         userTrueName,
         userPhone,
         merchantId,
+        suspend
     };
 }
 
@@ -40,20 +41,30 @@ class RepeatLoan extends Component {
           allMerchants,
           batchReloanBtnDisabled: false,
           batchLoanRefuseDisabled: false,
+          batchLoanSuspendDisabled: false,
         };
         const _this = this;
         this.searchParams = convertParams({});
         this.pageSize = 10;
         this.columns = [
-            { title: props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo',width:'15%' , render(text) { return <CopyText text={text} /> } },
-            { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName',width:'20%' , render(text) { return <CopyText text={text} /> } },
+            { title: props.intl.formatMessage({ id: "page.search.list.order.no" }), dataIndex: 'orderNo', key: 'orderNo' ,width:'10%', render(text) { return <CopyText text={text} /> } },
+            { title: props.intl.formatMessage({ id: "page.search.list.name" }), dataIndex: 'userTrueName', key: 'userTrueName' , render(text) { return <CopyText text={text} /> } },
             { title: props.intl.formatMessage({ id: "page.search.list.mobile" }), dataIndex: 'userPhone', key: 'userPhone' , render(text) { return <CopyText text={text} /> } },
-            { title: this.props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName', width: '10%' },
-            { title: this.props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName', width: '10%' },
+            {
+                title: props.intl.formatMessage({ id: "page.search.list.suspend" }), dataIndex: 'suspend', key: 'suspend', width: '3%',
+                render (text) {
+                    return text  ?
+                        <div style={{ color: '#F56A00' }}><FormattedMessage id={'page.table.yes'} /></div> :
+                        <FormattedMessage id={'page.table.no'} />
+                }
+            },
+            { title: this.props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName'},
+            { title: this.props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName' },
             {
                 title: props.intl.formatMessage({ id: "page.table.application.amount" }),
                 dataIndex: 'deviceMoney',
                 key: 'deviceMoney',
+                width:'6%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
                 }
@@ -62,15 +73,33 @@ class RepeatLoan extends Component {
                 title: props.intl.formatMessage({ id: "page.table.loan.amount" }),
                 dataIndex: 'lendMoney',
                 key: 'lendMoney',
+                width:'6%',
                 render(text, record) {
                     return <CopyText text={convertMoneyFormat(text)}/>;
+                }
+            },
+            {
+                title: props.intl.formatMessage({ id: "page.table.suspend.time" }),
+                dataIndex: 'suspendTime',
+                key: 'suspendTime',
+            },
+            {
+                title: props.intl.formatMessage({ id: "page.table.card.data.update.time" }),
+                dataIndex: 'lastBindBankCardTime',
+                key: 'lastBindBankCardTime',
+                render(text, record) {
+                  const lastBindBankCardTimeIsAfterSuspendTime  = moment(text).isAfter(moment(record.suspendTime));
+                  if(lastBindBankCardTimeIsAfterSuspendTime) {
+                    return <div style={{color: "#1890FF"}}>{text}</div>
+                  } else {
+                    return text;
+                  }
                 }
             },
             {
                 title: props.intl.formatMessage({ id: "page.search.list.appication.time" }),
                 dataIndex: 'addTime',
                 key: 'addTime',
-                width:'13%',
                 render(text) {
                     if (!text) {
                         return '';
@@ -82,6 +111,7 @@ class RepeatLoan extends Component {
                 title: props.intl.formatMessage({ id: "page.search.list.order.status" }),
                 dataIndex: 'status',
                 key: 'status',
+                width:'6%',
                 render(text) {
                     return orderStatus[text]
                 }
@@ -90,7 +120,7 @@ class RepeatLoan extends Component {
                 title: props.intl.formatMessage({ id: "page.table.operation" }),
                 dataIndex: 'id',
                 key: 'id',
-                width:'8%',
+                width:'5%',
                 render(text, record) {
                     return (
                         <div className={styles.btnWrapper}>
@@ -169,23 +199,67 @@ class RepeatLoan extends Component {
 
     onClickBatchReLoan = () => {
         const { selectKeys, intl, batchReLoan, getTableData, tableData: { data } } = this.props;
-        //是否有选中订单
-        const isSelected = selectKeys.length > 0;
-        if (!isSelected) {
-            message.warn(intl.formatMessage({ id: "windowPage.select.order" }));
-            return;
-        }
-        this.setState({ batchReloanBtnDisabled: true });
-        let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
-        batchReLoan({ orderNos: selectedOrderNos }, () => {
-            getTableData({ pageSize: this.pageSize, pageNum: 1, ...this.searchParams }, () => this.setState({ batchReloanBtnDisabled: false }));
-        });
+         //是否有选中订单
+         const isSelected = selectKeys.length > 0;
+         if (!isSelected) {
+             message.warn(intl.formatMessage({ id: "windowPage.select.order" }));
+             return;
+         }
+        Modal.confirm({
+            title: intl.formatMessage({ id: "page.table.reloan.all.orders.confirm" }),
+            content: intl.formatMessage({ id: "page.table.reloan.all.orders.confirm.content" }),
+            okText: intl.formatMessage({ id: "page.table.ok" }),
+            cancelText: intl.formatMessage({ id: "page.table.cancel" }),
+            icon: <Icon type="info-circle" theme="twoTone" twoToneColor={'#FAAD14'} />,
+            onOk: () => {
+
+                this.setState({ batchReloanBtnDisabled: true });
+                let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
+                batchReLoan({ orderNos: selectedOrderNos }, () => {
+                    getTableData({ pageSize: this.pageSize, pageNum: 1, ...this.searchParams }, () => this.setState({ batchReloanBtnDisabled: false }));
+                });
+
+            }
+        })
 
     }
 
     loanBatchRefuse = () => {
         const _this = this;
         const { selectKeys, intl, batchRefuseLoan, getTableData, tableData: { data } } = this.props;
+
+         // 是否有选中订单
+         const isSelected = selectKeys.length > 0;
+         if (!isSelected) {
+             message.warn(intl.formatMessage({ id: "windowPage.select.order" }));
+             return;
+         }
+
+        Modal.confirm({
+            title: intl.formatMessage({ id: "page.table.quit.lending.all.orders.confirm" }),
+            content: intl.formatMessage({ id: "page.table.quit.lending.all.orders.confirm.content" }),
+            okText: intl.formatMessage({ id: "page.table.ok" }),
+            cancelText: intl.formatMessage({ id: "page.table.cancel" }),
+            icon: <Icon type="info-circle" theme="twoTone" twoToneColor={'#FAAD14'} />,
+            onOk: () => {
+
+                _this.setState({ batchLoanRefuseDisabled: true });
+
+                let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
+                batchRefuseLoan({ orderNos: selectedOrderNos },
+                    () => {
+                        getTableData({ pageSize: _this.pageSize, pageNum: 1, ..._this.searchParams });
+                        _this.setState({ batchLoanRefuseDisabled: false })
+                    });
+            }
+        })
+
+    }
+
+    loanBatchSuspend=()=>{
+        const _this = this;
+        const { selectKeys, intl, batchSuspendLoan, getTableData, tableData: { data } } = this.props;
+
         // 是否有选中订单
         const isSelected = selectKeys.length > 0;
         if (!isSelected) {
@@ -193,14 +267,16 @@ class RepeatLoan extends Component {
             return;
         }
 
-        _this.setState({ batchLoanRefuseDisabled: true });
+        _this.setState({ batchLoanSuspendDisabled: true });
 
         let selectedOrderNos = data.filter(row => selectKeys.includes(row.id)).map(row => row.orderNo);
-        batchRefuseLoan({ orderNos: selectedOrderNos },
+        batchSuspendLoan({ orderNos: selectedOrderNos },
             () => {
+                message.success(intl.formatMessage({ id: "page.table.has.been.modified" }));
                 getTableData({ pageSize: _this.pageSize, pageNum: 1, ..._this.searchParams });
-                _this.setState({ batchLoanRefuseDisabled: false })
+                _this.setState({ batchLoanSuspendDisabled: false })
             });
+
     }
 
     onSelectChange = (selectedKeys) => {
@@ -219,7 +295,7 @@ class RepeatLoan extends Component {
             selectedRowKeys: selectKeys,
             onChange: this.onSelectChange,
         };
-        const { batchReloanBtnDisabled, batchLoanRefuseDisabled } = this.state;
+        const { batchReloanBtnDisabled, batchLoanRefuseDisabled, batchLoanSuspendDisabled } = this.state;
         return (
             <div>
                 <SearchList submit={this.submit} isSuperAdmin={this.state.isSuperAdmin} allMerchants={this.state.allMerchants}/>
@@ -228,6 +304,7 @@ class RepeatLoan extends Component {
                         <Button type={'danger'} onClick={this.handleExportReloanList} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "page.table.export" })}  </Button>
                         <Button type={'primary'} disabled={batchReloanBtnDisabled} onClick={this.onClickBatchReLoan} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "page.table.batch.loan.again" })}  </Button>
                         <Button type={'primary'} disabled={batchLoanRefuseDisabled} onClick={this.loanBatchRefuse} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "windowPage.loan.batch.refuse" })}  </Button>
+                        <Button type={'primary'} disabled={batchLoanSuspendDisabled} onClick={this.loanBatchSuspend} style={{ margin: '10px' }}>{this.props.intl.formatMessage({ id: "page.table.suspend.disbursement" })}  </Button>
                     </Row>
                 </div>
                 <CommonTable
@@ -274,7 +351,8 @@ const mapDispatchToProps = (dispatch) => {
         repeatPay: repeatLoanAction.rplRepeatPay,
         changeSelectKeys: repeatLoanAction.rplChangeSelectKey,
         batchReLoan: repeatLoanAction.rplBatchReLoan,
-        batchRefuseLoan: repeatLoanAction.rplRefuseLoan
+        batchRefuseLoan: repeatLoanAction.rplRefuseLoan,
+        batchSuspendLoan: repeatLoanAction.rplSuspendLoan
     }, dispatch);
 }
 

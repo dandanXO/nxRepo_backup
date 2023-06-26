@@ -18,6 +18,7 @@ import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanD
 
 import {useMemo} from "react";
 import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
+import {formatDate} from "../../../../../modules/format/formatDate";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -78,13 +79,13 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         />
         <ListItem
           title={'Apply Date'}
-          text={applyDate ? moment(applyDate).format('DD-MM-YYYY') : ''}
+          text={applyDate ? formatDate(moment(applyDate)) : ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
         />
         <ListItem
           title={'Due Date'}
-          text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
+          text={dueDate ? formatDate(moment(dueDate)) : ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
         />
@@ -92,7 +93,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {status === 'PAY_OFF' && (
           <ListItem
             title={'Repayment Date'}
-            text={repaymentDate ? moment(repaymentDate).format('DD-MM-YYYY') : ''}
+            text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
           />
@@ -101,7 +102,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {status === 'EXTEND' && (
           <ListItem
             title={'Extension Date'}
-            text={extendDate ? moment(extendDate).format('DD-MM-YYYY') : ''}
+            text={extendDate ? formatDate(moment(extendDate)) : ''}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
           />
@@ -134,14 +135,14 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             );
           })}
 
-        {status !== 'EXTEND' && (
+        {/* {status !== 'EXTEND' && (
           <ListItem
             title={'Daily Fee'}
             text={<Money money={dailyFee} />}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
           />
-        )}
+        )} */}
 
         {status === 'EXTEND' && (
           <ListItem

@@ -5,7 +5,8 @@ import {
     useLazyGetProductManageListQuery,
     useLazyGetProductQuery,
     usePostProductCreateMutation,
-    usePutProductEditMutation
+    usePutProductEditMutation,
+    useGetProductRiskDropdownQuery,
 } from "../../../../service/product/ProductApi";
 import moment from "moment/moment";
 import { CustomAntFormFieldError } from "../../../../../shared/utils/validation/CustomAntFormFieldError";
@@ -102,6 +103,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
 
     const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>(initCustomAntFormFieldError)
     const { currentData: merchantList, isSuccess: isGetMerchantListSuccess } = useGetAvailableMerchantListQuery(null);
+    const { currentData: productRiskList } = useGetProductRiskDropdownQuery(null);
     const [postProductCreate, { isLoading, isSuccess: isPostProductCreateSuccess }] = usePostProductCreateMutation();
     const [putProduct, { isSuccess: isPutProductSuccess }] = usePutProductEditMutation();
 
@@ -114,20 +116,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         })
     }, [productModalData.productId])
 
-
-    const [enableLoanAmount, setEnableLoanAmount] = useState<boolean>(false);
-    const [enableReLoanAmount, setEnableReLoanAmount] = useState<boolean>(false);
-
-
-    useEffect(() => {
-        if(!productModalData.show) {
-            setEnableLoanAmount(false);
-            setEnableReLoanAmount(false);
-            return;
-        }
-    }, [productModalData.show])
-
-
     useEffect(() => {
         if (isFetching) return;
         // if(!productModalData.productId) return;
@@ -135,10 +123,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         // console.log("merchantList", merchantList);
         if (!productFormData) return;
         if (!merchantList) return;
-
-        setEnableLoanAmount(productFormData.newGuestLoanQuotaSwitch === false)
-        setEnableReLoanAmount(productFormData.oldGuestLoanQuotaSwitch === false)
-
 
         const currentMerchant = merchantList?.find(merchant => merchant.merchantId === productFormData.merchantId);
 
@@ -169,6 +153,21 @@ export const useProductFormModal = (props: ProductFormModal) => {
             }, []);
 
             const { hasError } = validatePreOrPostInterestGroups(productInterestRatePairs, true, productInterestRatesContentKey);
+
+            // NOTICE 後端回應初貸混合風控與複貸混合風控是包在prodRiskProvider的list之中，結構為
+            // [object, ...]， object的結構為
+            // { enable: true, isOldUser: ture, provider: "BATEI"}，
+            // enable：是否啟用，都帶ture，isOldUser：true為複貸false為初貸，provider：風控商名稱
+            // 需轉為Filed name為newGuestLoanMixedRisk與oldGuestLoanMixedRisk的tags mode Select 的Field value 中，
+            const { newGuestLoanMixedRisk, oldGuestLoanMixedRisk } = productFormData.prodRiskProvider?.reduce((acc, current) => {
+                if(current.isOldUser === false) { // 初貸
+                    acc['newGuestLoanMixedRisk'] = acc['newGuestLoanMixedRisk'].concat(current.provider)
+                } else if (current.isOldUser === true) { // 複貸
+                    acc['oldGuestLoanMixedRisk'] = acc['oldGuestLoanMixedRisk'].concat(current.provider)
+                }
+
+                return acc
+            }, { newGuestLoanMixedRisk: [], oldGuestLoanMixedRisk: [] }) || { newGuestLoanMixedRisk: [], oldGuestLoanMixedRisk: [] };
 
             form.setFieldsValue({
                 merchantId: currentMerchant?.name,
@@ -212,8 +211,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 extensible: productFormData.extensible,
                 extensibleOverdueDays: productFormData.extensibleOverdueDays,
 
-                newGuestLoanQuotaSwitch: productFormData.newGuestLoanQuotaSwitch === true ? 1 : 0,
-                oldGuestLoanQuotaSwitch: productFormData.oldGuestLoanQuotaSwitch === true ? 1 : 0,
                 oldGuestLoanAmount: productFormData.oldGuestLoanAmount,
 
                 riskRankLoanAmount: productFormData.riskRankLoanAmount,
@@ -241,7 +238,9 @@ export const useProductFormModal = (props: ProductFormModal) => {
                 templateType: productFormData.templateType,
                 weight: productFormData.weight,
                 enabled: productFormData.enabled,
-                productInterestRatePairs
+                productInterestRatePairs,
+                newGuestLoanMixedRisk,
+                oldGuestLoanMixedRisk
             })
         }
 
@@ -355,6 +354,13 @@ export const useProductFormModal = (props: ProductFormModal) => {
             ]
         }, [])
 
+        // NOTICE 需將newGuestLoanMixedRisk與oldGuestLoanMixedRisk的資料轉為後端prodRiskProvider的格式
+        const newGuestLoanMixedRisks = values.newGuestLoanMixedRisk.reduce(
+            (acc, current)=> ([...acc, { isOldUser: false, provider: current}]), [])
+
+        const oldGuestLoanMixedRisk = values.oldGuestLoanMixedRisk.reduce(
+            (acc, current)=> ([...acc, { isOldUser: true, provider: current}]), [])
+
         const riskRankLoanAmount = values?.riskRankLoanAmount?.map(i => ({
             ...i,
             loanAmount: Number(i.loanAmount),
@@ -386,8 +392,8 @@ export const useProductFormModal = (props: ProductFormModal) => {
             extensible: values.extensible,
             extensibleOverdueDays: Number(values.extensibleOverdueDays),
 
-            newGuestLoanQuotaSwitch: values.newGuestLoanQuotaSwitch,
-            oldGuestLoanQuotaSwitch: values.oldGuestLoanQuotaSwitch,
+            prodRiskProvider: newGuestLoanMixedRisks.concat(oldGuestLoanMixedRisk),
+
             riskRankLoanAmount: values.riskRankLoanAmount,
             oldGuestLoanAmount: values.oldGuestLoanAmount,
             renewMaxThreshold: Number(values.renewMaxThreshold),
@@ -504,6 +510,7 @@ export const useProductFormModal = (props: ProductFormModal) => {
         onFinish,
         form,
         merchantList,
+        productRiskList,
         customAntFormFieldError,
         setCustomAntFormFieldError,
         setTriggerFetchTableList,
@@ -513,10 +520,6 @@ export const useProductFormModal = (props: ProductFormModal) => {
         isPutProductSuccess,
         // onAutoFinishedForm,
         onFormSubmit,
-        enableLoanAmount,
-        enableReLoanAmount,
-        setEnableLoanAmount,
-        setEnableReLoanAmount,
         contextHolder,
     }
 }

@@ -8,6 +8,8 @@ import { getToken } from '../../../../../modules/querystring/getToken';
 import { IndexPageProps } from '../../../../../reduxStore';
 import { PagePathEnum } from '../../../PagePathEnum';
 import Divider from "../../../../components/Divider";
+import {formatDate} from "../../../../../modules/format/formatDate";
+import Money from '../../../../components/Money.tsx';
 
 type Props = IndexPageProps;
 
@@ -31,17 +33,17 @@ export const LatestOrderStatus = (props: Props) => {
   const hasInComingOverdueOrder = props.state.order.state === ORDER_STATE.hasInComingOverdueOrder;
 
   return (
-    <div className={'flex flex-col rounded-lg border border-primary-main bg-white px-5 py-1.5'}>
+    <div className={'flex flex-col rounded-lg border border-primary-main bg-white px-5 py-1.5'} data-testing-id="orderNotice" data-order-status={props.state.order.state}>
       <div className={'flex flex-row items-center justify-between'}>
         <div className={'left'}>
-          <div className={'top flex flex-row'}>
+          <div className={'top flex flex-row text-sm'}>
             <div className={'mr-2 font-light text-ctext-primary'}>Loan Order</div>
-            <div className={'font-light text-ctext-primary'}>
-              ₹ {formatPrice(props.state.order.overdueOrComingOverdueOrder?.payableAmount || 0)}
+            <div className={'font-bold text-ctext-primary'}>
+                <Money money={props.state.order.overdueOrComingOverdueOrder?.payableAmount || 0}/>
             </div>
           </div>
 
-          <div className={'bottom flex flex-col'}>
+          <div className={'bottom flex flex-col text-xs'}>
             <div className={'flex flex-row'}>
               {/*NOTE: 顯示逾期文字*/}
               {hasOverdueOrder && (
@@ -64,7 +66,7 @@ export const LatestOrderStatus = (props: Props) => {
                     'text-cstate-error-main': hasOverdueOrder,
                   })}
                 >
-                  {moment(props.state.order.overdueOrComingOverdueOrder?.dueDate).format('DD-MM-YYYY')}
+                  {formatDate(moment(props.state.order.overdueOrComingOverdueOrder?.dueDate))}
                 </div>
               </div>
             </div>
@@ -72,7 +74,7 @@ export const LatestOrderStatus = (props: Props) => {
         </div>
 
         <div className={'right'}>
-          <div data-testing-id={'repay'} className={'text-cstate-info-main font-light'} onClick={onUserClickToRepay}>
+          <div data-testing-id={'repay'} className={'text-cstate-info-main font-bold'} onClick={onUserClickToRepay}>
             Repay
           </div>
         </div>

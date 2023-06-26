@@ -19,6 +19,7 @@ import { Horizontal } from '../../components/layouts/Horizontal';
 import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
 import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
 import {FeeRateKeyEnum} from "../../../api/indexService/FeeRateKeyEnum";
+import {formatDate} from "../../../modules/format/formatDate";
 
 type Props = IndexPageProps & {
   calculatingProducts: FinalProductType[];
@@ -99,11 +100,14 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
             {/*TODO: refactor me*/}
             {props.state.indexAPI?.chargeFeeDetails.map((key) => {
-              if(
-                key.key === FeeRateKeyEnum.LOAN_INTEREST ||
-                key.key === FeeRateKeyEnum.PROCESSING_FEE ||
-                key.key === FeeRateKeyEnum.SERVICE_FEE) {
-                return null;
+              // NOTE: 是否隐藏借款详情
+              if(props.state.indexAPI?.hiddenLoanDetail) {
+                if(
+                  key.key === FeeRateKeyEnum.LOAN_INTEREST ||
+                  key.key === FeeRateKeyEnum.PROCESSING_FEE ||
+                  key.key === FeeRateKeyEnum.SERVICE_FEE) {
+                  return null;
+                }
               }
               const keyMapValue: Record<FeeRateKeyEnum, any> = {
                 [FeeRateKeyEnum.LOAN_INTEREST]: formatPrice(props.calculatingSummary.interest),
@@ -132,7 +136,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
             </div>
             <div className={'item flex flex-row justify-between font-light'}>
               <div className={'key'}>Repayment Date</div>
-              <div className={'value'}>{props.calculatingSummary.repaymentDate?.format('DD-MM-YYYY')}</div>
+              <div className={'value'}>{props.calculatingSummary.repaymentDate ? formatDate(props.calculatingSummary.repaymentDate): ""}</div>
             </div>
           </div>
         </div>

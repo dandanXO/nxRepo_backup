@@ -97,20 +97,21 @@ export const LoanOverViewSection = (props: Props) => {
 
 
   return (
-    <div>
-      <div className={'mb-2 font-medium'}>Loan Over View</div>
+    <div className={'text-ctext-primary'}>
+      <div className={'mb-2 font-bold'} data-testing-id="loanOverView">Loan Over View</div>
 
-      <div className={'flex w-full flex-row justify-around'}>
+      <div className={'flex w-full flex-row justify-center'}>
         <div className={'left relative'}>
           <div className="container relative">
             <Chart options={options.options} series={options.series} type="radialBar" width="160" height="160" />
             <div className={'absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-center'}>
               <div className="text">
-                <div>
-                  {environment.currency}
-                  {isReacquireCreditAmount ? ' ***' : props.state.indexAPI?.availableAmount}
+                <div className='font-bold text-sm mb-1.5'>
+                  {environment.currency}{' '}
+                  {isReacquireCreditAmount ? ' ***' :  props.state.indexAPI?.availableAmount}
                 </div>
-                <div>Available Balance</div>
+                <div className='font-bold text-xs'>Available</div>
+                <div className='font-bold text-xs'>Balance</div>
               </div>
             </div>
           </div>
@@ -119,18 +120,18 @@ export const LoanOverViewSection = (props: Props) => {
         <div className={'right flex flex-col items-end justify-center'}>
           <div className={'used-amount flex flex-col items-start justify-end'}>
             <div className={'label flex flex-row items-center justify-between'}>
-              <div className={'label-color mr-2 h-1.5 w-4 rounded bg-[#E5E5E5]'}></div>
-              <div className={'label-price font-light'}>Used Amount</div>
+              <div className={'label-color mr-2 h-1.5 w-4 rounded bg-cstate-disable-main'}></div>
+              <div className={'label-price font-light text-xs'}>Used Amount</div>
             </div>
-            <div className={'price font-light w-full pl-6'}>
-              {environment.currency}
+            <div className={'price font-bold w-full pl-6 text-sm'}>
+              {environment.currency}{' '}
               {formatPrice(props.state.indexAPI?.usedAmount || 0)}
             </div>
           </div>
-          <div className={'total-amount flex flex-col justify-end'}>
-            <div className={'label font-light'}>Total Amount</div>
-            <div className={'price font-light'}>
-              {environment.currency}
+          <div className={'total-amount flex flex-col justify-end mt-2'}>
+            <div className={'label font-light text-xs'}>Total Amount</div>
+            <div className={'price font-bold text-sm'}>
+              {environment.currency}{' '}
               {isReacquireCreditAmount ? ' ***** ' : formatPrice(props.state.indexAPI?.totalAmount || 0)}
             </div>
           </div>

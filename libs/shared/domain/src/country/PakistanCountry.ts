@@ -7,4 +7,5 @@ export const PakistanCountry: ICountry = {
   countryName: "Pakistan",
   currency: "PKR",
   language: "en_US",
+  timezone: "Asia/Karachi",
 };

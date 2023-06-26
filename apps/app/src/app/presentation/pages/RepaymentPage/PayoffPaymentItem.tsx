@@ -17,6 +17,7 @@ import { PagePathEnum } from '../PagePathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
+import {formatDate} from "../../../modules/format/formatDate";
 
 const PayoffPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();
@@ -76,19 +77,19 @@ const PayoffPaymentItem = (props: GetLoanRecord) => {
           <ListItem
             key={'LoanDate'}
             title={'Loan Date'}
-            text={loanDate ? moment(loanDate).format('DD-MM-YYYY') : ''}
+            text={loanDate ? formatDate(moment(loanDate)): ''}
             titleColor="text-ctext-secondary"
           />
           <ListItem
             key={'DueDate'}
             title={'Due Date'}
-            text={dueDate ? moment(dueDate).format('DD-MM-YYYY') : ''}
+            text={dueDate ? formatDate(moment(dueDate)) : ''}
             titleColor="text-ctext-secondary"
           />
           <ListItem
             key={'RepaymentDate'}
             title={'Repayment Date'}
-            text={repaymentDate ? moment(repaymentDate).format('DD-MM-YYYY') : ''}
+            text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
             titleColor="text-ctext-secondary"
           />
           <Divider />

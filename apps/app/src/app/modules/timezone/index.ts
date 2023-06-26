@@ -1,5 +1,5 @@
 // NOTICE: refactor me
 import moment from 'moment-timezone';
+import {environment} from "../../../environments/environment";
 
-const INDIA_TIME_ZONE = 'Asia/Kolkata';
-moment.tz.setDefault(INDIA_TIME_ZONE);
+moment.tz.setDefault(environment.timezone);

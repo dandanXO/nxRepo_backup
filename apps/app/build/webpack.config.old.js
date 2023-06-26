@@ -15,6 +15,8 @@ infoLog('build');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const isProduction = process.env.NODE_ENV == 'production';
+const isDashboard = process.env.NODE_DASHBOARD;
+
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 console.log('process.env.NODE_COUNTRY:', process.env.NODE_COUNTRY);
 console.log('process.env.NODE_ANALYZER:', process.env.NODE_ANALYZER);
@@ -35,7 +37,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PUBLIC_PATH = !isProduction ? '/' : '/v2/';
 console.log('PUBLIC_PATH', PUBLIC_PATH);
 
-const ASSET_OUTPUT_PATH = 'asset';
+const ASSET_OUTPUT_PATH = 'images';
 
 let proxyURL = 'https://app.india-api-dev.com';
 if (process.env.NODE_COUNTRY === 'in') {
@@ -50,8 +52,15 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
 
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const DashboardPlugin = require("webpack-dashboard/plugin");
+
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// const smp = new SpeedMeasurePlugin();
+
 module.exports = (config, context) => {
-  const finalConfig = merge(config, {
+  let finalConfig = merge(config, {
     devtool: "source-map",
     entry: {
       main: path.resolve(__dirname, '../src/main.tsx'),
@@ -71,28 +80,6 @@ module.exports = (config, context) => {
     // },
     module: {
       rules: [
-        // {
-        //   test: /\.(ts|tsx|js|jsx)$/,
-        //   // include: [
-        //   //   path.resolve(__dirname, '../src'),
-        //   //   path.resolve(__dirname, '../../../libs'),
-        //   // ],
-        //   "exclude": [
-        //     // \\ for Windows, / for macOS and Linux
-        //     /node_modules[\\/]core-js/,
-        //     /node_modules[\\/]webpack[\\/]buildin/,
-        //     // /node_modules/,
-        //   ],
-        //   use: [
-        //     // 'thread-loader',
-        //     {
-        //       loader: 'babel-loader',
-        //       options: {
-        //         cacheDirectory: false
-        //       }
-        //     }
-        //   ]
-        // },
         {
           test: /\.(ts|js|mjs)x?$/,
           // include: [
@@ -102,11 +89,18 @@ module.exports = (config, context) => {
             // \\ for Windows, / for macOS and Linux
             /node_modules[\\/]core-js/,
             /node_modules[\\/]webpack[\\/]buildin/,
+            /node_modules[\\/]react-apexcharts/
             // /node_modules/,
             // node_modules/.pnpm/@floating-ui+core@1.0.2/node_modules/@floating-ui/core/dist/floating-ui.core.browser.min.mjs
             // /node_modules[\\/].pnpm\/@floating-ui+core@1.0.2[\\/]node_modules[\\/]@floating-ui[\\/]core[\\/]dist[\\/]floating-ui.core.browser.min.mjs/,
           ],
           use: [
+            // {
+            //   loader: 'babel-loader',
+            //   options: {
+            //     cacheDirectory: false
+            //   }
+            // },
             {
               loader: path.join(__dirname, './custom/my-loader.js'),
               options: {
@@ -118,13 +112,10 @@ module.exports = (config, context) => {
       ],
     },
     plugins: [
-      // new PreloadWebpackPlugin({
-      //   rel: 'preload',
-      //   // include: 'asyncChunks'
-      //   include: 'all'
-      //   // include: 'initial'
-      // }),
-      // NOTICE:
+      new webpack.IgnorePlugin({
+        resourceRegExp: /^\.\/locale$/,
+        contextRegExp: /moment$/,
+      }),
       new webpack.DefinePlugin({
         AppInfo: {
           VERSION: JSON.stringify(gitRevisionPlugin.version()),
@@ -133,6 +124,22 @@ module.exports = (config, context) => {
           UI_VERSION: process.env.NODE_UI_VERSION,
         },
       }),
+      new MomentTimezoneDataPlugin({
+        matchZones: ["Asia/Kolkata", "Asia/Karachi", "Asia/Dhaka"],
+      }),
+      new HtmlWebpackPlugin({
+        // 配置 HTML 模板路徑與生成名稱 (第三步)
+        template: path.resolve(__dirname, '../src/index.html'),
+        // publicPath: "/v2",
+        chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
+        // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main', 'errorhandler'],
+      }),
+      // new PreloadWebpackPlugin({
+      //   rel: 'preload',
+      //   // include: 'asyncChunks'
+      //   include: 'all'
+      //   // include: 'initial'
+      // }),
       // new CleanWebpackPlugin({
       //   verbose: true,
       // }),
@@ -142,7 +149,7 @@ module.exports = (config, context) => {
       publicPath: PUBLIC_PATH,
       filename: '[name].[contenthash].js',
       // sourceMapFilename: 'maps/[name].[contenthash].map.js'
-      // assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`
+      assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`,
     },
     devServer: {
       hot: true,
@@ -171,25 +178,98 @@ module.exports = (config, context) => {
     },
   });
 
-  // NOTICE: Environment
-  if (process.env.NODE_ANALYZER && !isProduction) {
-    finalConfig.plugins.push(new BundleAnalyzerPlugin());
+  finalConfig = merge(finalConfig, {
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          parallel: true,
+          minify: TerserPlugin.terserMinify,
+          terserOptions: {
+            compress: {
+              drop_console: true,
+            },
+            format: {
+              comments: false,
+            },
+          },
+          // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
+          extractComments: false,
+        }),
+        new ImageMinimizerPlugin({
+          minimizer: {
+            implementation: ImageMinimizerPlugin.imageminMinify,
+            filter: (source, sourcePath) => {
+              var svgRegExp = new RegExp('.svg$', 'g');
+              if(svgRegExp.test(sourcePath)) {
+                console.log("sourcePath", sourcePath);
+                return true
+              } else {
+                return false;
+              }
+            },
+            options: {
+              // Lossless optimization with custom option
+              // Feel free to experiment with options for better result for you
+              plugins: [
+                // ["gifsicle", { interlaced: true }],
+                // ["jpegtran", { progressive: true }],
+                // ["optipng", { optimizationLevel: 5 }],
+                // Svgo configuration here https://github.com/svg/svgo#configuration
+                [
+                  "svgo",
+                  {
+                    plugins: [
+                      {
+                        name: "preset-default",
+                        params: {
+                          overrides: {
+                            removeViewBox: false,
+                            addAttributesToSVGElement: {
+                              params: {
+                                attributes: [
+                                  { xmlns: "http://www.w3.org/2000/svg" },
+                                ],
+                              },
+                            },
+                          },
+                        },
+                      },
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
 
-  } else if (isProduction) {
-    finalConfig.plugins.push(
-      new HtmlWebpackPlugin({
-        // 配置 HTML 模板路徑與生成名稱 (第三步)
-        template: './src/index.html',
-        filename: 'index.html',
-        // publicPath: "/v2",
-        // chunks: ['errorhandler', 'main', 'vendors', 'nx'],
-      })
-    );
-    // NOTICE: 使用以下android 8 is ok
-    finalConfig['optimization'] = {
-      minimize: false,
+        }),
+      ],
       splitChunks: {
         cacheGroups: {
+          // NOTE: default
+          common: {
+            name: 'common',
+            chunks: 'async',
+            minChunks: 2,
+            enforce: true,
+            priority: 5
+          },
+          // NOTE: custom
+          sentry: {
+            test: /[\\/]node_modules[\\/]@sentry*[\\/]/,
+            name: 'sentry',
+            minChunks: 1,
+            priority: 2,
+            chunks: 'all',
+          },
+          vendors: {
+            // test: /[\\/]node_modules[\\/](?!@floating-ui+core@1.0.2)/,
+            test: /[\\/]node_modules[\\/]/,
+
+            name: 'vendors',
+            minChunks: 1,
+            priority: 1,
+            chunks: 'all',
+          },
           // reactLib: {
           //   test: /\/node_modules\/@reduxjs\/toolkit/,
           //   name: 'reactLib',
@@ -197,60 +277,27 @@ module.exports = (config, context) => {
           //   priority: 2,
           //   chunks: 'all',
           // },
-          vendors: {
-            // test: /[\\/]node_modules[\\/](?!@floating-ui+core@1.0.2)/,
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            minChunks: 1,
-            priority: 1,
-            chunks: 'all',
-          },
-          nx: {
-            test: /[\\/]node_modules[\\/]nx/,
-            name: 'nx',
-            minChunks: 1,
-            priority: 2,
-            chunks: 'all',
-          },
+          // nx: {
+          //   test: /[\\/]node_modules[\\/]nx/,
+          //   name: 'nx',
+          //   minChunks: 1,
+          //   priority: 2,
+          //   chunks: 'all',
+          // },
+
         },
       },
-      // splitChunks: {
-      //   chunks: 'async',
-      //   minSize: 20000,
-      //   minRemainingSize: 0,
-      //   minChunks: 1,
-      //   maxAsyncRequests: 30,
-      //   maxInitialRequests: 30,
-      //   enforceSizeThreshold: 50000,
-      //   cacheGroups: {
-      //     defaultVendors: {
-      //       test: /[\\/]node_modules[\\/]/,
-      //       priority: -10,
-      //       reuseExistingChunk: true,
-      //     },
-      //     default: {
-      //       minChunks: 2,
-      //       priority: -20,
-      //       reuseExistingChunk: true,
-      //     },
-      //   },
-      // },
-      // minimize: true,
-      // minimizer: [
-      //   new TerserPlugin({
-      //     terserOptions: {
-      //       compress: {
-      //         drop_console: true,
-      //       },
-      //       format: {
-      //         comments: false,
-      //       },
-      //     },
-      //     // NOTICE: the extractComments option is not supported and all comments will be removed by default, it will be fixed in future
-      //     extractComments: false,
-      //   }),
-      // ],
-    };
+    },
+  })
+
+  // NOTICE: Environment
+  if (process.env.NODE_ANALYZER) {
+    finalConfig.plugins.push(new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+    }));
+  }
+
+  if (isProduction) {
       // finalConfig.plugins.push(
       //   new CleanWebpackPlugin({
       //     verbose: true,
@@ -276,17 +323,35 @@ module.exports = (config, context) => {
       })
     );
   }
-  console.log('finalConfig', finalConfig);
+
+  if(isDashboard) {
+    finalConfig.plugins.push(
+      new DashboardPlugin()
+    )
+  }
+
+  // console.log('finalConfig', finalConfig);
   console.log('finalConfig.optimization.splitChunks.cacheGroups', finalConfig.optimization.splitChunks.cacheGroups);
-  console.log('finalConfig.module.rules', finalConfig.module.rules);
-  // finalConfig.module.rules = [
-  //   finalConfig.module.rules[0],
-  //   finalConfig.module.rules[1],
-  //   finalConfig.module.rules[3],
-  //   finalConfig.module.rules[4],
-  //   finalConfig.module.rules[5],
-  //   finalConfig.module.rules[6],
-  // ]
-  console.log('finalConfig.module.rules', finalConfig.module.rules);
-  return finalConfig;
+  // console.log('finalConfig.module.rules', finalConfig.module.rules);
+
+  finalConfig.module.rules.map((rule) => {
+    console.log('finalConfig.module.rule', rule);
+    if(rule.oneOf) {
+      rule.oneOf.map((one) => {
+        console.log('finalConfig.module.rule.one', one);
+      })
+    }
+  })
+
+  if(!isProduction) {
+    // finalConfig = smp.wrap(finalConfig);
+    console.log('finalConfig.plugins', finalConfig.plugins);
+    console.log('finalConfig', finalConfig);
+    return finalConfig
+  } else {
+    console.log('finalConfig.plugins', finalConfig.plugins);
+    console.log('finalConfig', finalConfig);
+    return finalConfig;
+  }
+
 };
