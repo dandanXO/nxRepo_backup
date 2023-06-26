@@ -1,10 +1,10 @@
-import { useTranslation } from "react-i18next";
-import AdminPage from "../../../shared/components/common/AdminPage";
-import { TodayPhoneUrgeListTable } from "./TodayPhoneUrgeListTable";
+import { useTranslation } from 'react-i18next';
 
+import AdminPage from '../../../shared/components/common/AdminPage';
+import { TodayPhoneUrgeListTable } from './TodayPhoneUrgeListTable';
 
-export const TodayPhoneUrgeList = () => {
-    const { t } = useTranslation()
+export const TodayPhoneUrgeList = (): JSX.Element => {
+    const { t } = useTranslation();
     return (
         <AdminPage
             navigator={{
@@ -24,5 +24,5 @@ export const TodayPhoneUrgeList = () => {
         >
             <TodayPhoneUrgeListTable />
         </AdminPage>
-    )
-}
+    );
+};

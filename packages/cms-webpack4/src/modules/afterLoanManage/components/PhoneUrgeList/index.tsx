@@ -1,15 +1,16 @@
-import { useTranslation } from "react-i18next";
-import AdminPage from "../../../shared/components/common/AdminPage";
-import { OverDuePhoneUrgeListTable } from "./OverDuePhoneUrgeListTable";
+import { useTranslation } from 'react-i18next';
 
-export const PhoneUrgeList = () => {
+import AdminPage from '../../../shared/components/common/AdminPage';
+import { OverDuePhoneUrgeListTable } from './OverDuePhoneUrgeListTable';
+
+export const PhoneUrgeList = (): JSX.Element => {
     const { t } = useTranslation();
     return (
         <AdminPage
             navigator={{
                 ancestor: {
                     path: '/',
-                    breadcrumbName: t("menu.homePage"),
+                    breadcrumbName: t('menu.homePage'),
                 },
                 parent: {
                     path: null,
@@ -23,5 +24,5 @@ export const PhoneUrgeList = () => {
         >
             <OverDuePhoneUrgeListTable />
         </AdminPage>
-    )
-}
+    );
+};

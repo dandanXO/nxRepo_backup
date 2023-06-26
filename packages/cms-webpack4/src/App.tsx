@@ -1,17 +1,17 @@
-import React, {useEffect} from 'react';
-import {Provider} from "react-redux";
-import {appStore} from "./modules/shared/store";
-import "./modules/shared/styles/app.less";
-import {AppRouter} from "./AppRouter";
-require('antd/dist/antd.less');
-import './i18n'
-
 // import * as Sentry from "@sentry/react";
 // import { BrowserTracing } from "@sentry/tracing";
 import { WaterMark } from '@ant-design/pro-components';
-import moment from "moment/moment";
+import moment from 'moment/moment';
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
 
-import {getAdminUser} from "./modules/shared/storage/getUserInfo";
+import { AppRouter } from './AppRouter';
+import './i18n';
+import { getAdminUser } from './modules/shared/storage/getUserInfo';
+import { appStore } from './modules/shared/store';
+import './modules/shared/styles/app.less';
+
+require('antd/dist/antd.less');
 
 // IN
 // "timezone":"Asia/Kolkata"
@@ -32,22 +32,36 @@ import {getAdminUser} from "./modules/shared/storage/getUserInfo";
 //     tracesSampleRate: 1.0,
 // });
 
-
-function App() {
-
+function App(): JSX.Element {
     useEffect(() => {
         // Listen for the event.
-        window.addEventListener('main-app-hashchange', (e) => {
-            console.log("[MicroApp] [receive] event main-app-hashchange", event);
-        }, false);
-    }, [])
+        window.addEventListener(
+            'main-app-hashchange',
+            () => {
+                console.log('[MicroApp] [receive] event main-app-hashchange', event);
+            },
+            false,
+        );
+    }, []);
 
     const adminUserInfo = getAdminUser();
     const phoneNo = adminUserInfo.data.phoneNo;
     const waterMarkColor = appInfo.COUNTRY !== 'Pakistan' ? 'rgba(0,0,0,.10)' : 'rgba(244,133,78,.10)';
     return (
         <Provider store={appStore}>
-            <WaterMark fontFamily={'Arial'} fontWeight={600} height={0} width={200} gapX={100} gapY={100} offsetLeft={0} offsetTop={100} content={`${phoneNo} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`}  fontSize={20} fontColor={waterMarkColor}>
+            <WaterMark
+                fontFamily={'Arial'}
+                fontWeight={600}
+                height={0}
+                width={200}
+                gapX={100}
+                gapY={100}
+                offsetLeft={0}
+                offsetTop={100}
+                content={`${phoneNo} - ${moment().format('YYYY-MM-DD-HH:mm:ss')}`}
+                fontSize={20}
+                fontColor={waterMarkColor}
+            >
                 <AppRouter />
             </WaterMark>
         </Provider>

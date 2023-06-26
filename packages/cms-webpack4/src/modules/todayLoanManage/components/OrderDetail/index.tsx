@@ -1,16 +1,16 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { PageContainer } from "@ant-design/pro-components";
-import { useTranslation } from "react-i18next";
-import { itemRender } from "../../../shared/components/common/itemRender";
-import {OrderDetailContent} from "./OrderDetailContent";
+import { PageContainer } from '@ant-design/pro-components';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
-export const OrderDetail = () => {
+import { itemRender } from '../../../shared/components/common/itemRender';
+import { OrderDetailContent } from './OrderDetailContent';
 
+export const OrderDetail = (): JSX.Element => {
     const { t } = useTranslation();
-    const urlParams=useParams<{ userId: string, collectId: string}>()
+    const urlParams = useParams<{ userId: string; collectId: string }>();
 
-    const { userId, collectId} = urlParams;
+    const { userId, collectId } = urlParams;
 
     return (
         <PageContainer
@@ -19,9 +19,12 @@ export const OrderDetail = () => {
                 breadcrumb: {
                     itemRender: itemRender,
                     routes: [
-                        { path: "/", breadcrumbName: t('common:menu.homePage') },
+                        { path: '/', breadcrumbName: t('common:menu.homePage') },
                         { path: null, breadcrumbName: t('common:menu.currentDayOverdueCall') },
-                        { path: "/todayLoanManage/todayPhoneUrgeList", breadcrumbName: t('common:menu.currentDayOverdueCallList') },
+                        {
+                            path: '/todayLoanManage/todayPhoneUrgeList',
+                            breadcrumbName: t('common:menu.currentDayOverdueCallList'),
+                        },
                         { path: null, breadcrumbName: t('common:breadcrumb.orderDetails') },
                     ],
                 },
@@ -29,5 +32,5 @@ export const OrderDetail = () => {
         >
             <OrderDetailContent userId={userId} collectId={collectId} />
         </PageContainer>
-    )
-}
+    );
+};
