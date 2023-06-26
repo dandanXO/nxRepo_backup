@@ -99,15 +99,15 @@ const PersonalInfoPage = () => {
         </Card>
 
         <Card>
-          <LinkItem title={'Privacy Policy'} to={PagePathEnum.PrivacyPolicyPage} />
-          <LinkItem title={'Disclosure Statement'} to={PagePathEnum.DisclosureStatementPage} />
+          <LinkItem title={'Privacy Policy'} to={`${PagePathEnum.PrivacyPolicyPage}?token=${getToken()}`} />
+          <LinkItem title={'Disclosure Statement'} to={`${PagePathEnum.DisclosureStatementPage}?token=${getToken()}`} />
         </Card>
 
         <Card>
           {/*NOTE: 是否顯示合作夥伴*/}
           {app?.init?.partnership ? <LinkItem title={'Partner'} to={'/partner'} /> : <></>}
           {/*NOTE: 顯示客服*/}
-          <LinkItem title={'Customer Service'} to={PagePathEnum.CustomerServicePage} />
+          <LinkItem title={'Customer Service'} to={`${PagePathEnum.CustomerServicePage}?token=${getToken()}`} />
         </Card>
 
         <Card>

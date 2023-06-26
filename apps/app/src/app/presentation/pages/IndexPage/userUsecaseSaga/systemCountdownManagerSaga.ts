@@ -29,6 +29,9 @@ export function* systemCountdownManagerSaga() {
     ) {
       // NOTICE: 不能重刷，需等待重刷時間
       yield put(SystemCaseActions.SystemRefreshableCountdownSaga(indexResponse.refreshableUntil));
+      // NOTICE: 清掉風控額度到數時間
+      yield put(SystemCaseActions.SystemCountdownSaga(''));
+
     } else {
       // NOTICE: 可以重刷
       if(user.state !== USER_AUTH_STATE.reject &&
@@ -36,7 +39,6 @@ export function* systemCountdownManagerSaga() {
         order.state !== ORDER_STATE.hasOverdueOrder &&
         indexResponse.noQuotaBalance !== true &&
         riskControl.state !== RISK_CONTROL_STATE.order_reject) {
-        console.log("fjidosa9rjk")
         yield put(SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime));
       }
     }

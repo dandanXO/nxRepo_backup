@@ -1,6 +1,8 @@
 import { API } from '../../shared/api';
 
 export type GetNewCustomerRiskPaymentRateListRequest = {
+    channelId?: number;
+    // 渠道來源
     endTime: string;
     // 結束時間
     // isOldUser?: number;

@@ -5,3 +5,28 @@
 body {
   user-select: none;
 }
+
+/* loading 骨架屏 */
+.skeleton {
+    background-color: var(--primary_assistant) !important;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+    color: rgba(0, 0, 0, 0) !important;
+    border-radius: 4px;
+    overflow: hidden;
+    background-size: 200% 100%;
+    animation: waveAnimation 5s linear infinite;
+  }
+  
+  @keyframes waveAnimation {
+    0% {
+      background-position: -200px 0;
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+      opacity: 0.4;
+    }
+  }

@@ -10,6 +10,8 @@ import { Button } from '../../components/layouts/Button';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import Modal from '../../components/Modal';
+import { loadingSlice } from '../../../reduxStore/loadingSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
@@ -18,6 +20,8 @@ type ICouponOption = ICouponProps & {
 const RepamentCouponModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
+
     const { orderNo, paymentAmount, paymentMethod } = location.state || {};
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
         useLazyGetCouponApplicableListQuery({
@@ -34,6 +38,10 @@ const RepamentCouponModal = () => {
             paymentMethod,
         });
     }, []);
+
+    useEffect(() => {
+        dispatch(loadingSlice.actions.updatePageLoading(isFetching))
+    }, [isFetching]);
 
     const applicableCouponList = currentData && currentData.length > 0 ? currentData?.filter((i) => i.applicable === true) : [];
     const unApplicableCouponList = currentData && currentData.length > 0 ? currentData?.filter((i) => i.applicable === false) : [];
@@ -139,7 +147,7 @@ const RepamentCouponModal = () => {
             </>
         );
     };
-    
+
     return (
         <Modal className='h-full'>
             <Navigation title={''} back={() => { navigate(-1) }} />

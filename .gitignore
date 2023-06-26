@@ -56,3 +56,6 @@ Thumbs.db
 
 
 /apps/app/dist/
+
+# App Webpack Uglify
+/tmp_uglify

@@ -122,6 +122,7 @@ const IndexPage = () => {
   // && !(indexPageState.riskControl.state === RISK_CONTROL_STATE.valid);
 
   const onClickReacquireCredit = useCallback(() => {
+    console.log('onClickReacquireCredit--------')
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [disableClickReacquireCredit]);
 
@@ -144,7 +145,9 @@ const onUserClickViewApplicationProgress = () => {
   useEffect(() => {
     // console.log("==============================")
     // console.log("預期要借的總額", quotaBarTargetPrice);
-    if (indexPageState.indexAPI?.products && quotaBarTargetPrice > 0) {
+    if (quotaBarTargetPrice === 0) {
+        setCalculatingProducts([])
+    }else if (indexPageState.indexAPI?.products && quotaBarTargetPrice > 0) {
       let currentSelectedProductsPrice = 0;
       // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice)
 
@@ -427,7 +430,8 @@ const onUserClickViewApplicationProgress = () => {
   const modelState = useSelector((state: RootState) => state.model);
 
   return (
-    <div className={'flex flex-col overflow-auto max-h-[90vh] pb-20'}>
+    <div className={'flex flex-col'}>
+      <div className={'flex flex-col overflow-auto max-h-[90vh] w-full absolute top-0 pb-10'}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}
@@ -493,17 +497,18 @@ const onUserClickViewApplicationProgress = () => {
             //   indexPageState.indexAPI?.noQuotaBalance === false && indexPageState.indexAPI?.availableAmount >= 0,
             ].some((condition) => condition === true) &&
               indexPageState.user.state === USER_AUTH_STATE.success && (
-                <div className={'mb-3 mt-8'}>
+                <div className={'mt-8'}>
                   <LoanOverViewSection state={indexPageState} />
                 </div>
               )
           }
 
           {/*TODO: refactor me*/}
-          <div className={'mb-3'}>
+          <div>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
 
+        
           {/*TODO: 用戶認證中或用戶拒絕*/}
           {indexPageState.user.state === USER_AUTH_STATE.authing ? (
             <NoticeUserInProgressAuthStatusSections />
@@ -542,6 +547,7 @@ const onUserClickViewApplicationProgress = () => {
             )}
         </PageContent>
       </div>
+    </div>
 
       {/*NOTE: 底部*/}
       <div className={'absolute w-full bottom-[63px] px-3 py-2 '}>
@@ -581,8 +587,8 @@ const onUserClickViewApplicationProgress = () => {
               dataTestingID={'reacquireCredit'}
               text={'Reacquire Credit Amount'}
               loading={isReacquireLoading}
-              disable={disableClickReacquireCredit}
-              onClick={() => !disableClickReacquireCredit && onClickReacquireCredit()}
+              disable={isReacquireLoading || disableClickReacquireCredit}
+              onClick={() => (!isReacquireLoading && !disableClickReacquireCredit) && onClickReacquireCredit()}
             />
           )}
       </div>

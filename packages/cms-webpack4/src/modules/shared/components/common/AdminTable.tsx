@@ -1,21 +1,23 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { Button, FormInstance, Space } from 'antd';
-import React, { useEffect, useMemo, useState } from 'react';
+import {Button, FormInstance, Space, Table} from "antd";
+import {PlusOutlined} from "@ant-design/icons";
+import {ProColumns, ProTable} from "@ant-design/pro-components";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 
 export interface ModalContent {
     show: boolean;
     isEdit: boolean;
 }
 
+
 export enum ButtonsText {
-    SearchText = '查詢',
-    ResetText = '重置',
-    AddText = '添加',
+    SearchText= "查詢",
+    ResetText = "重置",
+    AddText = "添加",
 }
 
+
 interface AdminTableTemplateProps<TableListItemDataType> {
-    tableHeaderColumns: ProColumns<TableListItemDataType>[];
+    tableHeaderColumns:  ProColumns<TableListItemDataType, "text">[];
     loading?: boolean;
     tableDatasource: TableListItemDataType[];
     onSearchClick?: (searchInputKeys: any) => TableListItemDataType[];
@@ -39,38 +41,55 @@ interface AdminTableTemplateProps<TableListItemDataType> {
     rowSelection?: any;
     form?: any;
     toolBarRender?: any;
-    currentPage?: number;
+    currentPage?:number;
     pageOnChange?: (current: any, pageSize: number) => void;
     total?: number;
-    formRef?: any;
+    formRef?:any;
+}
+
+interface ActionType {
+    reload: (resetPageIndex?: boolean) => void;
+    reloadAndRest: () => void;
+    reset: () => void;
+    clearSelected?: () => void;
+    startEditable: (rowKey: string) => boolean;
+    cancelEditable: (rowKey: string) => boolean;
+
 }
 
 export const AdminTable = <TableListItemDataType,>({
-    tableHeaderColumns,
-    loading,
-    tableDatasource,
-    onSearchClick,
-    hasAddForm = true,
-    searchable = true,
-    addText = ButtonsText.AddText,
-    onAddCallback,
-    isSearchFromClient = true,
-    onFormSearchCallback,
-    onFormResetCallback,
-    triggerToRefreshList,
-    headerTitle,
-    // onSubmit,
-    // onReset,
-    // onLoad,
-    rowKey = '',
-    rowSelection,
-    form,
-    toolBarRender = null,
-    currentPage,
-    total,
-    pageOnChange,
-    formRef,
-}: AdminTableTemplateProps<TableListItemDataType>): JSX.Element => {
+                                                       tableHeaderColumns,
+                                                       loading,
+                                                       tableDatasource,
+                                                       onSearchClick,
+                                                       setShowModalContent,
+                                                       hasAddForm = true,
+                                                       hasEditForm = true,
+                                                       searchable = true,
+                                                       addText = ButtonsText.AddText,
+                                                       onAddCallback,
+                                                       isSearchFromClient = true,
+                                                       onFormSearchCallback,
+                                                       onFormResetCallback,
+                                                       triggerToRefreshList,
+                                                       headerTitle,
+                                                       // onSubmit,
+                                                       // onReset,
+                                                       // onLoad,
+                                                       rowKey = "",
+                                                       rowSelection,
+                                                       form,
+                                                       toolBarRender = null,
+                                                       currentPage,
+                                                       total,
+                                                       pageOnChange,
+                                                       formRef
+
+}: AdminTableTemplateProps<TableListItemDataType>) => {
+
+    // NOTE: actionRef
+    const actionRef = useRef<ActionType>();
+
     // NOTE: cachedTableHeaderColumns
     // const [cachedTableHeaderColumns, setCachedTableHeaderColumns] = useState<ProColumns<TableListItemDataType, "text">[]>()
     // useEffect(() => {
@@ -104,25 +123,23 @@ export const AdminTable = <TableListItemDataType,>({
             // @ts-ignore
             optionRender: ({ searchText, resetText }, { form }) => (
                 <Space>
-                    <Button
-                        onClick={() => {
-                            form.resetFields();
-                            setCachedDatasource(tableDatasource);
-                            onFormResetCallback(form);
-                        }}
-                    >
+                    <Button onClick={() => {
+                        form?.resetFields();
+                        setCachedDatasource(tableDatasource);
+                        onFormResetCallback(form);
+                    }}>
                         {resetText}
                     </Button>
                     <Button
                         type={'primary'}
                         onClick={() => {
-                            if (onSearchClick && isSearchFromClient) {
+                            if(onSearchClick && isSearchFromClient) {
                                 const searchInputKeys = form.getFieldsValue();
                                 const searchedDataSource = onSearchClick(searchInputKeys);
                                 setCachedDatasource(searchedDataSource);
                                 form.submit();
                             }
-                            if (!isSearchFromClient && onFormSearchCallback) {
+                            if(!isSearchFromClient && onFormSearchCallback) {
                                 onFormSearchCallback(form);
                                 form.submit();
                             }
@@ -132,32 +149,32 @@ export const AdminTable = <TableListItemDataType,>({
                     </Button>
                 </Space>
             ),
-        };
+        }
     }, [tableDatasource, onSearchClick]);
 
     const [currentPaginationPageSize, setCurrentPaginationPageSize] = useState(10);
 
+
     return (
         <ProTable<TableListItemDataType>
+            // NOTE: 配置 Ant Design Form
+            form={form}
             // Table action 的引用，便于自定义触发
             // actionRef={actionRef}
             // 可以获取到查询表单的 form 实例，用于一些灵活的配置
             formRef={formRef}
-            // formRef={form}
             columns={tableHeaderColumns}
             dataSource={cachedDatasource}
             // onDataSourceChange={(dataSource: T[]) => void}
             // editable={{ type: 'multiple', }}
             // tableClassName={tableClassName}
-            columnsState={
-                {
-                    // defaultValue:Record<string, ColumnsState>;
-                    // value: Record<string, ColumnsState>;
-                    // persistenceKey: 'pro-table-singe-demos',
-                    // persistenceType: 'localStorage',
-                    // onChange(value:Record<string, ColumnsState>)=>void
-                }
-            }
+            columnsState={{
+                // defaultValue:Record<string, ColumnsState>;
+                // value: Record<string, ColumnsState>;
+                // persistenceKey: 'pro-table-singe-demos',
+                // persistenceType: 'localStorage',
+                // onChange(value:Record<string, ColumnsState>)=>void
+            }}
             // rowKey="id"
             // @ts-ignore
             search={!searchable ? false : searchConfig}
@@ -166,40 +183,30 @@ export const AdminTable = <TableListItemDataType,>({
                     listsHeight: 400,
                 },
                 // NOTICE: refresh icon
-                reload: () => triggerToRefreshList(),
+                reload: ()=> triggerToRefreshList(),
             }}
             // alwaysShowAlert={true}
             rowSelection={rowSelection}
             // rowSelection={{
-            // 自定义选择项参考: https://ant.design/components/table-cn/#components-table-demo-row-selection-custom
-            // 注释该行则默认不显示下拉选项
-            // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
-            // defaultSelectedRowKeys: [1],
-            // ...rowSelection,
+                // 自定义选择项参考: https://ant.design/components/table-cn/#components-table-demo-row-selection-custom
+                // 注释该行则默认不显示下拉选项
+                // selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+                // defaultSelectedRowKeys: [1],
+                // ...rowSelection,
             // }}
             // dateFormatter="string"
-            dateFormatter={(value) => {
+            dateFormatter={(value, valueType) => {
                 // console.log('====>', value, valueType);
                 return value.format('YYYY-MM-DD HH:mm:ss');
             }}
             // NOTE: Unknow
             headerTitle={
-                headerTitle ? (
-                    headerTitle
-                ) : (
-                    <>
-                        {hasAddForm && (
-                            <Button
-                                key="button"
-                                icon={<PlusOutlined />}
-                                type="primary"
-                                onClick={() => onAddCallback && onAddCallback()}
-                            >
-                                {addText}
-                            </Button>
-                        )}
-                    </>
-                )
+                headerTitle ? headerTitle :
+                <>
+                    {hasAddForm && (
+                        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => onAddCallback && onAddCallback()}>{addText}</Button>
+                    )}
+                </>
             }
             toolBarRender={toolBarRender}
             // NOTE: Antd Design
@@ -221,8 +228,8 @@ export const AdminTable = <TableListItemDataType,>({
                 onChange: pageOnChange,
                 // 页码或 pageSize 改变的回调，参数是改变后的页码及每页条数
                 // onChange: (page) => console.log(page),
+
             }}
-            form={form}
             loading={loading}
             // NOTE:
             // scroll={{ x: 1000 }}
@@ -239,5 +246,5 @@ export const AdminTable = <TableListItemDataType,>({
             // 用來標示選取的key
             rowKey={rowKey}
         />
-    );
-};
+    )
+}
