@@ -197,20 +197,21 @@ export const TodayPhoneUrgeListTable = () => {
                     </Button>
                     <Button
                         type='primary'
-                        onClick={()=> {
-                            const { collectorId, merchantId, overdueDays, ...restField } = form.getFieldsValue();
-                            setSearchList({
-                                ...searchList,
-                                ...restField,
-                                collectorId: collectorId ? Number(collectorId): undefined,
-                                merchantId: merchantId ? Number(merchantId): undefined,
-                                overdueDays: overdueDays ? Number(overdueDays): undefined,
-                            })
-                        }}
+                        onClick={()=> form.submit()}
                     >
                         {t('common:search')}
                     </Button>
                 </Space>]
+        }}
+        onSubmit={(params)=>{
+            const { collectorId, merchantId, overdueDays, ...restField } = params;
+            setSearchList({
+                ...searchList,
+                ...restField,
+                collectorId: collectorId ? Number(collectorId): undefined,
+                merchantId: merchantId ? Number(merchantId): undefined,
+                overdueDays: overdueDays ? Number(overdueDays): undefined,
+            })
         }}
         form={{ ...searchFormLayout }}
         options={{
