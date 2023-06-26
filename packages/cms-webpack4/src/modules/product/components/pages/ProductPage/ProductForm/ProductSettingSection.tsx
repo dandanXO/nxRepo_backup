@@ -1,73 +1,73 @@
-import {Button, Divider, Form, Input, message, Select, TimePicker, Upload, UploadProps ,Collapse} from "antd";
-import {UploadOutlined} from "@ant-design/icons";
-import React from "react";
-import {EmailValidator, NumberValidator} from "../../../../../shared/utils/validation/validator";
-import {cannotTypeFloat} from "../../../../../shared/utils/format/cannotTypeFloat";
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, Collapse, Form, Input, Select, TimePicker, Upload, UploadProps, message } from 'antd';
+import React from 'react';
+
+import { cannotTypeFloat } from '../../../../../shared/utils/format/cannotTypeFloat';
+import { EmailValidator, NumberValidator } from '../../../../../shared/utils/validation/validator';
+
 const { Panel } = Collapse;
 interface ProductSettingSectionProps {
     setLogo: React.Dispatch<React.SetStateAction<string>>;
     setBackgroundImg: React.Dispatch<React.SetStateAction<string>>;
 }
-const ProductSettingSection = (props: ProductSettingSectionProps) => {
-
+const ProductSettingSection = (props: ProductSettingSectionProps): JSX.Element => {
     const [messageApi, contextHolder] = message.useMessage();
 
     // NOTE: uploadLogoProps
-  const uploadLogoProps: UploadProps = {
-    name: 'file',
-    action: '/hs/admin/product-manage/icon/upload',
-    beforeUpload: file => {
-      const isPNG = file.type === 'image/png';
-      if (!isPNG) {
-        messageApi.error(`${file.name} is not a png file`);
-      }
-      return isPNG || Upload.LIST_IGNORE;
-    },
+    const uploadLogoProps: UploadProps = {
+        name: 'file',
+        action: '/hs/admin/product-manage/icon/upload',
+        beforeUpload: (file) => {
+            const isPNG = file.type === 'image/png';
+            if (!isPNG) {
+                messageApi.error(`${file.name} is not a png file`);
+            }
+            return isPNG || Upload.LIST_IGNORE;
+        },
 
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        // console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        messageApi.success(`${info.file.name} file uploaded successfully`);
-        props.setLogo(info.file.response.url);
-      } else if (info.file.status === 'error') {
-        messageApi.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                // console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                messageApi.success(`${info.file.name} file uploaded successfully`);
+                props.setLogo(info.file.response.url);
+            } else if (info.file.status === 'error') {
+                messageApi.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
     // NOTE: uploadBackgroundImgProps
-  const uploadBackgroundImgProps: UploadProps = {
-    name: 'file',
-    action: '/hs/admin/product-manage/icon/upload',
-    beforeUpload: file => {
-      const isPNG = file.type === 'image/png';
-      if (!isPNG) {
-          messageApi.error(`${file.name} is not a png file`);
-      }
-      return isPNG || Upload.LIST_IGNORE;
-    },
+    const uploadBackgroundImgProps: UploadProps = {
+        name: 'file',
+        action: '/hs/admin/product-manage/icon/upload',
+        beforeUpload: (file) => {
+            const isPNG = file.type === 'image/png';
+            if (!isPNG) {
+                messageApi.error(`${file.name} is not a png file`);
+            }
+            return isPNG || Upload.LIST_IGNORE;
+        },
 
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        // console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-          messageApi.success(`${info.file.name} file uploaded successfully`);
-        props.setBackgroundImg(info.file.response.url);
-      } else if (info.file.status === 'error') {
-          messageApi.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                // console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                messageApi.success(`${info.file.name} file uploaded successfully`);
+                props.setBackgroundImg(info.file.response.url);
+            } else if (info.file.status === 'error') {
+                messageApi.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
 
-    const getValueFromEvent = e => {
+    const getValueFromEvent = (e) => {
         if (Array.isArray(e)) {
             return e;
         }
         return e && e.fileList;
-    }
-
+    };
 
     return (
         <React.Fragment>
@@ -76,9 +76,10 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                 <Panel header="产品设定" key="1">
                     <Form.Item label="Logo" required>
                         <Form.Item name="logo" rules={[{ required: true }]}>
-                            <Input allowClear placeholder={""} />
+                            <Input allowClear placeholder={''} />
                         </Form.Item>
-                        <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}
+                        <Form.Item
+                            style={{ display: 'inline-block', marginBottom: 0 }}
                             // NOTICE: [Uncaught TypeError: (fileList || []).forEach is not a function](https://itcn.blog/p/2027269831.html)
                             // 以下三条是必须的
                             name="logoUpload"
@@ -103,9 +104,10 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
 
                     <Form.Item label="广告横幅(选填)">
                         <Form.Item name="backgroundImg" extra="建议上传 610x300，若没有上传，则由系统随机配置。">
-                            <Input allowClear placeholder={""} />
+                            <Input allowClear placeholder={''} />
                         </Form.Item>
-                        <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}
+                        <Form.Item
+                            style={{ display: 'inline-block', marginBottom: 0 }}
                             // 以下三条是必须的
                             name="backgroundImgUpload"
                             valuePropName="fileList"
@@ -126,134 +128,180 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                         </Form.Item>
                     </Form.Item>
 
-                    <Form.Item label="显示额度" style={{ marginBottom: 0 }} required >
-                        <Form.Item name="amountRangeLow" style={{ display: 'inline-block', width: '250px', margin: '0 8px 0 0' }} extra="例如：₹ 3000 - ₹ 10000"
+                    <Form.Item label="显示额度" style={{ marginBottom: 0 }} required>
+                        <Form.Item
+                            name="amountRangeLow"
+                            style={{ display: 'inline-block', width: '250px', margin: '0 8px 0 0' }}
+                            extra="例如：₹ 3000 - ₹ 10000"
                             rules={[
                                 {
                                     transform: (value) => Number(value),
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        min: 1,
-                                        minMessage: "请输入最低额度",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            min: 1,
+                                            minMessage: '请输入最低额度',
+                                        }),
                                 },
                             ]}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return cannotTypeFloat(value);
                             }}
                         >
-                            <Input allowClear placeholder={"最低额度"} prefix="₹" />
+                            <Input allowClear placeholder={'最低额度'} prefix="₹" />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>-</Form.Item>
-                        <Form.Item name="amountRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
+                        <Form.Item
+                            name="amountRangeHigh"
+                            style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
                             rules={[
                                 {
                                     transform: (value) => Number(value),
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        min: 1,
-                                        minMessage: "请输入最高额度",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            min: 1,
+                                            minMessage: '请输入最高额度',
+                                        }),
                                 },
                             ]}
-                            normalize={(value, prevValue, prevValues) => {
+                            normalize={(value) => {
                                 return cannotTypeFloat(value);
                             }}
                         >
-                            <Input allowClear placeholder={"最高额度"} prefix="₹" />
+                            <Input allowClear placeholder={'最高额度'} prefix="₹" />
                         </Form.Item>
                     </Form.Item>
 
                     <Form.Item label="显示利息" extra="至多填写至小数点后两位，例如：0.01 - 0.1% / day" required>
-                        <Form.Item name="interestRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                        <Form.Item
+                            name="interestRangeLow"
+                            style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             rules={[
                                 {
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        required: true,
-                                        min: 0,
-                                        minMessage: "请输入最低利息",
-                                        max: 100,
-                                        maxMessage: "不可超过100%",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            required: true,
+                                            min: 0,
+                                            minMessage: '请输入最低利息',
+                                            max: 100,
+                                            maxMessage: '不可超过100%',
+                                        }),
                                 },
                             ]}
                         >
-                            <Input allowClear placeholder={"最低利息"} />
+                            <Input allowClear placeholder={'最低利息'} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>-</Form.Item>
-                        <Form.Item name="interestRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
+                        <Form.Item
+                            name="interestRangeHigh"
+                            style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
                             rules={[
                                 {
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        required: true,
-                                        min: 0,
-                                        minMessage: "请输入最高利息",
-                                        max: 100,
-                                        maxMessage: "不可超过100%",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            required: true,
+                                            min: 0,
+                                            minMessage: '请输入最高利息',
+                                            max: 100,
+                                            maxMessage: '不可超过100%',
+                                        }),
                                 },
                             ]}
                         >
-                            <Input allowClear placeholder={"最高利息"} suffix={"%"} />
+                            <Input allowClear placeholder={'最高利息'} suffix={'%'} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
                     </Form.Item>
 
                     <Form.Item label="显示期限" extra="例如：91-365 days" required>
-                        <Form.Item name="termRangeLow" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                        <Form.Item
+                            name="termRangeLow"
+                            style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
                             rules={[
                                 {
                                     transform: (value) => Number(value),
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        min: 1,
-                                        minMessage: "请输入最低天数",
-                                        max: 365,
-                                        maxMessage: "请输入1-365间数字%",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            min: 1,
+                                            minMessage: '请输入最低天数',
+                                            max: 365,
+                                            maxMessage: '请输入1-365间数字%',
+                                        }),
                                 },
                             ]}
                         >
-                            <Input allowClear placeholder={"最低天数"} />
+                            <Input allowClear placeholder={'最低天数'} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>-</Form.Item>
-                        <Form.Item name="termRangeHigh" style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
+                        <Form.Item
+                            name="termRangeHigh"
+                            style={{ display: 'inline-block', width: '180px', margin: '0 8px' }}
                             rules={[
                                 {
                                     transform: (value) => Number(value),
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        min: 1,
-                                        minMessage: "请输入最高天数",
-                                        max: 365,
-                                        maxMessage: "请输入1-365间数字%",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            min: 1,
+                                            minMessage: '请输入最高天数',
+                                            max: 365,
+                                            maxMessage: '请输入1-365间数字%',
+                                        }),
                                 },
                             ]}
                         >
-                            <Input allowClear placeholder={"最高天数"} />
+                            <Input allowClear placeholder={'最高天数'} />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>天</Form.Item>
                     </Form.Item>
 
-                    <Form.Item label="通过率" rules={[{ required: true }]} >
-                        <Form.Item name="approveRate" style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}>
+                    <Form.Item label="通过率" rules={[{ required: true }]}>
+                        <Form.Item
+                            name="approveRate"
+                            style={{ display: 'inline-block', width: '180px', margin: '0 8px 0 0' }}
+                        >
                             <Input allowClear placeholder="填写 1-100 间数字" />
                         </Form.Item>
                         <Form.Item style={{ display: 'inline-block', marginBottom: 0 }}>%</Form.Item>
                     </Form.Item>
 
                     <Form.Item label="审核通过时间" extra="例如：5 分钟" required>
-                        <Form.Item name="approveTime" style={{ display: 'inline-block', width: '180px', marginBottom: 0 }}
+                        <Form.Item
+                            name="approveTime"
+                            style={{ display: 'inline-block', width: '180px', marginBottom: 0 }}
                             rules={[
                                 {
                                     transform: (value) => Number(value),
-                                    validator: async (_, value) => NumberValidator(_, value)({
-                                        min: 1,
-                                        minMessage: "请输入审核通过时间",
-                                    })
+                                    validator: async (_, value) =>
+                                        NumberValidator(
+                                            _,
+                                            value,
+                                        )({
+                                            min: 1,
+                                            minMessage: '请输入审核通过时间',
+                                        }),
                                 },
                             ]}
                         >
                             <Input allowClear placeholder="填写数字" />
                         </Form.Item>
-                        <Form.Item name="approveTimeUnit" style={{ display: 'inline-block', marginBottom: 0 }} >
+                        <Form.Item name="approveTimeUnit" style={{ display: 'inline-block', marginBottom: 0 }}>
                             <Select
                             // NOTICE: [antd: Form.Item] `defaultValue` will not work on controlled Field. You should use `initialValues`
                             //   defaultValue={"mins"}
@@ -265,13 +313,19 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                         </Form.Item>
                     </Form.Item>
 
-                    <Form.Item name="csEmail" label="客服邮箱"
+                    <Form.Item
+                        name="csEmail"
+                        label="客服邮箱"
                         rules={[
                             {
                                 transform: (value) => String(value),
-                                validator: async (_, value) => EmailValidator(_, value)({
-                                    required: true,
-                                })
+                                validator: async (_, value) =>
+                                    EmailValidator(
+                                        _,
+                                        value,
+                                    )({
+                                        required: true,
+                                    }),
                             },
                         ]}
                         required
@@ -282,12 +336,12 @@ const ProductSettingSection = (props: ProductSettingSectionProps) => {
                     <Form.Item name="csTime" label="客服时间" rules={[{ required: true }]}>
                         <TimePicker.RangePicker format={'HH:mm'} />
                     </Form.Item>
-                    <Form.Item name="csContact" label="客服电话" >
+                    <Form.Item name="csContact" label="客服电话">
                         <Input allowClear placeholder="客服电话" style={{ width: 262 }} />
                     </Form.Item>
                 </Panel>
             </Collapse>
         </React.Fragment>
-  )
-}
+    );
+};
 export default ProductSettingSection;

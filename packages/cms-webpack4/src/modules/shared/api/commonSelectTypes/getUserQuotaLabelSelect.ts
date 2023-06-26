@@ -1,5 +1,4 @@
-
-export type UserQuotaLabelSelect = UserQuotaLabel[]
+export type UserQuotaLabelSelect = UserQuotaLabel[];
 interface UserQuotaLabel {
     id?: number;
     labelColor?: string;

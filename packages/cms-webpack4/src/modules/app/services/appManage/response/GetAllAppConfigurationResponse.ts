@@ -1,3 +1,3 @@
-import {AppConfigurationListItem} from "../domain/AppConfigurationListItem";
+import { AppConfigurationListItem } from '../domain/AppConfigurationListItem';
 
 export type GetAllAppConfigurationResponse = AppConfigurationListItem[];

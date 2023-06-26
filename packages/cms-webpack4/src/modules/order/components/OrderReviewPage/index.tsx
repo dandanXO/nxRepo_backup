@@ -1,9 +1,9 @@
-
 import { PageContainer } from '@ant-design/pro-components';
-import OrderReviewTable from './OrderReviewTable';
-import { itemRender } from '../../../shared/components/common/itemRender';
 
-const OrderReviewPage = () => {
+import { itemRender } from '../../../shared/components/common/itemRender';
+import OrderReviewTable from './OrderReviewTable';
+
+const OrderReviewPage = (): JSX.Element => {
     // NOTE: breadcrumb
 
     return (
@@ -13,17 +13,16 @@ const OrderReviewPage = () => {
                 breadcrumb: {
                     itemRender: itemRender,
                     routes: [
-                        { path: "/", breadcrumbName: '首页' },
+                        { path: '/', breadcrumbName: '首页' },
                         { path: null, breadcrumbName: '订单管理' },
                         { path: null, breadcrumbName: '订单复审' },
                     ],
                 },
             }}
         >
-             <OrderReviewTable  />
+            <OrderReviewTable />
         </PageContainer>
-    )
-}
+    );
+};
 
 export default OrderReviewPage;
-

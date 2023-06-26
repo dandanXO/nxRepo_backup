@@ -1,70 +1,66 @@
+import { ProColumns } from '@ant-design/pro-components';
+import { Button, FormInstance, Space, Table, message } from 'antd';
+import React, { useEffect, useState } from 'react';
 
-import {AdminTable} from "../../shared/components/common/AdminTable";
-import AdminPage from "../../shared/components/common/AdminPage";
-import React, {useEffect, useRef, useState} from "react";
-import {ProColumns} from "@ant-design/pro-components";
-import {useAdminFormModal} from "../../diversion/ads/components/pages/ActivityAdsPage/useAdminFormModal";
-import {Button, Form, FormInstance, message, Space, Table} from "antd";
+import AdminPage from '../../shared/components/common/AdminPage';
+import { AdminTable } from '../../shared/components/common/AdminTable';
+import CopyText from '../../shared/components/other/CopyText';
+import { StageContainer, StageItem, StagePanel, StageTitle, StageTotal } from '../components/Stage/stage';
+import { CommonOrderDistributionModal } from '../modals/CommonOrderDistributionModal';
+import {
+    useGetOverdueProductNamesQuery,
+    useLazyGetOverdueDistributionQuery,
+    useLazyGetOverdueSummaryQuery,
+    usePostOverdueDistributionSelectedMutation,
+    usePostOverdueDistributionStageMutation,
+} from '../services/OverdueDistributionAPI';
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
     DistributionSummary,
     Stage,
-} from "../types/index";
-
-import {StageContainer, StageItem, StagePanel, StageTitle, StageTotal} from "../components/Stage/stage";
-import {
-    useGetOverdueProductNamesQuery,
-    useLazyGetOverdueSummaryQuery,
-    useLazyGetOverdueDistributionQuery,
-    usePostOverdueDistributionSelectedMutation, usePostOverdueDistributionStageMutation
-} from "../services/OverdueDistributionAPI";
-import {CommonOrderDistributionModal} from "../modals/CommonOrderDistributionModal";
-import moment from "moment";
-import {useForm} from "antd/es/form/Form";
-import CopyText from "../../shared/components/other/CopyText";
+} from '../types';
 
 type StageData = {
-    [stage: string]: Omit<DistributionSummary, "stage">;
+    [stage: string]: Omit<DistributionSummary, 'stage'>;
 };
 
-export const OverdueDistributionPage = () => {
-    const [triggerFetchSummary, {data: summaryResponseData}] = useLazyGetOverdueSummaryQuery();
+export const OverdueDistributionPage = (): JSX.Element => {
+    const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetOverdueSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData>({});
 
     useEffect(() => {
-        let summaryData = {}
-        summaryResponseData?.summaries?.map((item, current) => {
+        const summaryData = {};
+        summaryResponseData?.summaries?.map((item) => {
             summaryData[item.stage] = {
                 todoTotal: item?.todoTotal,
                 doneTotal: item?.doneTotal,
-            }
-        })
+            };
+        });
         // console.log("summaryData", summaryData);
         setSummaryData(summaryData);
-    }, [summaryResponseData])
+    }, [summaryResponseData]);
 
-    const { currentData: productList, isSuccess: isGetProductNamesSuccess} = useGetOverdueProductNamesQuery(null);
+    const { currentData: productList } = useGetOverdueProductNamesQuery(null);
 
     const productListMap = new Map().set('', { text: '全部' });
     productList?.map((i) => {
-        return productListMap.set(i.productId, { text: i.productName })
+        return productListMap.set(i.productId, { text: i.productName });
     });
 
-
-    const stageEnum = {}
-    Object.keys(summaryData).map((key, currentValue) => {
+    const stageEnum = {};
+    Object.keys(summaryData).map((key) => {
         stageEnum[key] = {
-            [Stage.S1]: "S1",
-            [Stage.S2]: "S2",
-            [Stage.S3]: "S3",
-            [Stage.S4]: "S4",
-            [Stage.S5]: "S5",
+            [Stage.S1]: 'S1',
+            [Stage.S2]: 'S2',
+            [Stage.S3]: 'S3',
+            [Stage.S4]: 'S4',
+            [Stage.S5]: 'S5',
         }[key];
-    })
+    });
     // console.log("summaryData", summaryData);
     // console.log("stageEnum", stageEnum);
-    const columns: ProColumns<CollectDistributionQueryResponse, "text">[] = [
+    const columns: ProColumns<CollectDistributionQueryResponse, 'text'>[] = [
         {
             key: 'id',
             title: 'ID',
@@ -77,28 +73,28 @@ export const OverdueDistributionPage = () => {
             key: 'merchantName',
             title: '商戶名',
             dataIndex: 'merchantName',
-            initialValue: "",
+            initialValue: '',
             hideInSearch: true,
         },
         {
             key: 'orderNo',
             title: '订单编号',
             dataIndex: 'orderNo',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'appName',
             title: 'APP名称',
             dataIndex: 'appName',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'productName',
             title: '产品名称',
             dataIndex: 'productName',
-            initialValue: "",
+            initialValue: '',
             hideInSearch: true,
         },
         {
@@ -106,59 +102,59 @@ export const OverdueDistributionPage = () => {
             title: '产品名称',
             dataIndex: 'productId',
             hideInTable: true,
-            initialValue: "",
-            valueType: "select",
+            initialValue: '',
+            valueType: 'select',
             valueEnum: productListMap,
         },
         {
             key: 'phoneNo',
             title: '手机号',
             dataIndex: 'phoneNo',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'userName',
             title: '姓名',
             dataIndex: 'userName',
-            initialValue: "",
-            render: (text) => <CopyText text={text} />
+            initialValue: '',
+            render: (text) => <CopyText text={text} />,
         },
         {
             key: 'oldUser',
             title: '老客下单',
             dataIndex: 'oldUser',
-            initialValue: "",
+            initialValue: '',
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
                 false: { text: '否' },
             },
             valueType: 'select',
-            align: 'center'
+            align: 'center',
         },
         {
             key: 'deviceMoney',
             title: '申请金额',
             dataIndex: 'deviceMoney',
             hideInSearch: true,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'lengNum',
             title: '展期次数',
-            dataIndex: "lengNum",
+            dataIndex: 'lengNum',
             hideInSearch: true,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'expireTime',
             title: '逾期日',
             dataIndex: 'expireTime',
             hideInSearch: true,
-            initialValue: "",
-            valueType: "date",
-            tooltip: "起算时间为该日00:00:00"
+            initialValue: '',
+            valueType: 'date',
+            tooltip: '起算时间为该日00:00:00',
         },
         {
             key: 'stage',
@@ -182,22 +178,17 @@ export const OverdueDistributionPage = () => {
             dataIndex: 'overdueDays',
             hideInSearch: true,
         },
-
-    ]
+    ];
 
     // NOTE: GET list and item
-    const [triggerGetList, {
-        currentData: currentItemListData,
-        isFetching: isGetListFetching
-    }] = useLazyGetOverdueDistributionQuery();
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] =
+        useLazyGetOverdueDistributionQuery();
 
     const [formState, setFormState] = useState<CollectDistributionQueryRequest>({
         stage: Stage.S1,
         pageNum: 1,
         pageSize: 10,
-    })
-
-
+    });
 
     useEffect(() => {
         triggerFetchSummary(null);
@@ -214,7 +205,7 @@ export const OverdueDistributionPage = () => {
 
     const handleModalClose = () => {
         setShowModal(false);
-    }
+    };
 
     const [messageApi, contextHolder] = message.useMessage();
 
@@ -227,31 +218,35 @@ export const OverdueDistributionPage = () => {
             setSelectedRow([]);
             triggerFetchSummary(null);
             triggerGetList(formState);
-        }
-        if(isSelectedByOrder) {
+        };
+        if (isSelectedByOrder) {
             // console.log("orderIds", selectedRow);
             postDistributionSelected({
                 collectorIds: checkedCollector,
                 orderIds: selectedRow,
-            }).then(() => {
-                refresh();
-                messageApi.success("分配成功");
-            }).catch((error) => {
-                messageApi.error("分配失敗")
             })
+                .then(() => {
+                    refresh();
+                    messageApi.success('分配成功');
+                })
+                .catch(() => {
+                    messageApi.error('分配失敗');
+                });
         } else {
             // console.log("stage", distributionStage);
             postDistributionStage({
                 collectorIds: checkedCollector,
                 stage: distributionStage,
-            }).then(() => {
-                refresh();
-                messageApi.success("分配成功");
-            }).catch((error) => {
-                messageApi.error("分配失敗")
             })
+                .then(() => {
+                    refresh();
+                    messageApi.success('分配成功');
+                })
+                .catch(() => {
+                    messageApi.error('分配失敗');
+                });
         }
-    }
+    };
 
     // 紀錄目前選擇階段
     const [searchedStage, setSearchedStage] = useState(Stage.S1);
@@ -261,36 +256,37 @@ export const OverdueDistributionPage = () => {
     const [distributionStage, setSelectedDistributionStage] = useState<Stage>();
     const [postDistributionStage] = usePostOverdueDistributionStageMutation();
 
-
     const pageOnChange = (current, pageSize) => {
         // console.log("pageOnChange.current", current)
         // console.log("pageOnChange.pageSize", pageSize)
         // console.log("pageOnChange.formState", formState)
-        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize }
-        setFormState(newFormStage)
+        const newFormStage = { ...formState, pageNum: current, pageSize: pageSize };
+        setFormState(newFormStage);
         triggerGetList(newFormStage);
-    }
+    };
 
     const refresh = () => {
         // console.log("pageOnChange.formState", formState)
         triggerGetList(formState);
-    }
+    };
 
     return (
-        <AdminPage navigator={{
-            ancestor: {
-                path: "",
-                breadcrumbName: "首页",
-            },
-            parent: {
-                path: "",
-                breadcrumbName: "逾期催收",
-            },
-            self: {
-                path: "",
-                breadcrumbName:"逾期订单分配"
-            }
-        }}>
+        <AdminPage
+            navigator={{
+                ancestor: {
+                    path: '',
+                    breadcrumbName: '首页',
+                },
+                parent: {
+                    path: '',
+                    breadcrumbName: '逾期催收',
+                },
+                self: {
+                    path: '',
+                    breadcrumbName: '逾期订单分配',
+                },
+            }}
+        >
             <>
                 <StagePanel>
                     <StageContainer>
@@ -337,7 +333,7 @@ export const OverdueDistributionPage = () => {
                         </StageItem>
                     </StageContainer>
 
-                    {Object.keys(summaryData).indexOf("S5") > 1 && (
+                    {Object.keys(summaryData).indexOf('S5') > 1 && (
                         <StageContainer>
                             <StageItem>
                                 <StageTitle>{Stage.S5}待分案</StageTitle>
@@ -359,14 +355,30 @@ export const OverdueDistributionPage = () => {
                     loading={isGetListFetching}
                     headerTitle={
                         <Space>
-                            <Button key="1" type="primary" ghost disabled={selectedRow.length === 0} onClick={() => {
-                                setShowModal(true);
-                                setIsSelectedByOrder(true);
-                            }}>自选订单分配</Button>
-                            <Button key="2" type="primary" ghost disabled={selectedRow.length > 0} onClick={() => {
-                                setShowModal(true);
-                                setIsSelectedByOrder(false);
-                            }}>依阶段分配</Button>
+                            <Button
+                                key="1"
+                                type="primary"
+                                ghost
+                                disabled={selectedRow.length === 0}
+                                onClick={() => {
+                                    setShowModal(true);
+                                    setIsSelectedByOrder(true);
+                                }}
+                            >
+                                自选订单分配
+                            </Button>
+                            <Button
+                                key="2"
+                                type="primary"
+                                ghost
+                                disabled={selectedRow.length > 0}
+                                onClick={() => {
+                                    setShowModal(true);
+                                    setIsSelectedByOrder(false);
+                                }}
+                            >
+                                依阶段分配
+                            </Button>
                         </Space>
                     }
                     isSearchFromClient={false}
@@ -384,18 +396,18 @@ export const OverdueDistributionPage = () => {
                             ...searchFormState,
                         };
 
-                        if(finalFormData.dateRange) {
+                        if (finalFormData.dateRange) {
                             finalFormData.expireStartTime = searchFormState.dateRange[0].format('YYYY-MM-DDT00:00:00');
                             finalFormData.expireEndTime = searchFormState.dateRange[1].format('YYYY-MM-DDT23:59:59');
                         }
-                        delete finalFormData["dateRange"]
+                        delete finalFormData['dateRange'];
 
                         // 設定最終查詢
                         setFormState({
                             // ...formState,
-                            ...finalFormData
-                        })
-                        triggerGetList(finalFormData)
+                            ...finalFormData,
+                        });
+                        triggerGetList(finalFormData);
                     }}
                     onFormResetCallback={(form: FormInstance) => {
                         setFormState({
@@ -403,17 +415,17 @@ export const OverdueDistributionPage = () => {
                             dateRange: null,
                             expireStartTime: null,
                             expireEndTime: null,
-                        })
+                        });
                         const searchFormState = form.getFieldsValue();
                         form.setFieldsValue({
                             ...searchFormState,
                             dateRange: null,
                             expireStartTime: null,
                             expireEndTime: null,
-                        })
+                        });
                     }}
                     triggerToRefreshList={refresh}
-                    rowKey={"orderId"}
+                    rowKey={'orderId'}
                     rowSelection={{
                         selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
                         selectedRowKeys: selectedRow,
@@ -422,7 +434,6 @@ export const OverdueDistributionPage = () => {
                     currentPage={currentItemListData?.currentPage}
                     total={currentItemListData?.totalRecords}
                     pageOnChange={pageOnChange}
-
                 />
                 {/*NOTICE: Modal*/}
                 <div>{contextHolder}</div>
@@ -434,12 +445,12 @@ export const OverdueDistributionPage = () => {
                     isSelectedByOrder={isSelectedByOrder}
                     summaryData={summaryData}
                     setDistributionStage={setSelectedDistributionStage}
-                    type={"overdue"}
+                    type={'overdue'}
                     searchedStage={searchedStage}
                     stage={distributionStage}
-                    hasS5={Object.keys(summaryData).indexOf("S5") > 1 }
+                    hasS5={Object.keys(summaryData).indexOf('S5') > 1}
                 />
             </>
         </AdminPage>
-    )
-}
+    );
+};

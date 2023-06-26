@@ -21,5 +21,4 @@ export interface CreateChannelRequest {
 
     url: string;
     // 渠道鏈接
-
 }

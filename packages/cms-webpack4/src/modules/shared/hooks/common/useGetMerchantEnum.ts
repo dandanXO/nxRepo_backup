@@ -1,30 +1,35 @@
-import { useLazyGetMerchantListQuery } from "../../api/merchantListApi";
-import { useEffect, useState } from "react";
-import { getIsSuperAdmin } from "../../storage/getUserInfo";
+import { useEffect, useState } from 'react';
 
-const useGetMerchantEnum = () => {
+import { useLazyGetMerchantListQuery } from '../../api/merchantListApi';
+import { getIsSuperAdmin } from '../../storage/getUserInfo';
 
+const useGetMerchantEnum = (): {
+    triggerGetMerchantList: any;
+    merchantListEnum: Record<any, any>;
+} => {
     const isSuperAdmin = getIsSuperAdmin();
 
     // 可用商戶
-    const [triggerGetMerchantList, { currentData: merchantListData, isLoading, isFetching, isSuccess: isMerchantListDataSuccess, isError, isUninitialized }] = useLazyGetMerchantListQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
-    const [merchantListEnum, setMerchantListEnum] = useState(null)
+    const [triggerGetMerchantList, { currentData: merchantListData, isSuccess: isMerchantListDataSuccess }] =
+        useLazyGetMerchantListQuery({
+            pollingInterval: 0,
+            refetchOnFocus: false,
+            refetchOnReconnect: false,
+        });
+    const [merchantListEnum, setMerchantListEnum] = useState(null);
 
     useEffect(() => {
         if (isSuperAdmin && merchantListData) {
-            let merchantList = new Map().set('', { text: '不限' });
-            merchantListData && merchantListData?.map((i) => {
-                return merchantList.set(i.merchantId, { text: i.name })
-            });
-            setMerchantListEnum(merchantList)
+            const merchantList = new Map().set('', { text: '不限' });
+            merchantListData &&
+                merchantListData?.map((i) => {
+                    return merchantList.set(i.merchantId, { text: i.name });
+                });
+            setMerchantListEnum(merchantList);
         }
-    }, [isMerchantListDataSuccess])
+    }, [isMerchantListDataSuccess]);
 
-    return { triggerGetMerchantList, merchantListEnum }
-}
+    return { triggerGetMerchantList, merchantListEnum };
+};
 
 export default useGetMerchantEnum;

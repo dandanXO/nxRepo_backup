@@ -1,19 +1,18 @@
-import { Form, FormInstance, Input, Radio, Select, Switch, Tooltip, Space, Checkbox } from "antd";
-import CustomLabel from "../../../../shared/components/other/CustomLabel";
-import {NumberValidator} from "../../../../shared/utils/validation/validator";
-import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
-import { useState } from "react";
+import { Checkbox, Form, Input } from 'antd';
 
-interface FormProps{
-    isEdit:boolean;
-    customAntFormFieldError:CustomAntFormFieldError;
-    type?:string;
+import CustomLabel from '../../../../shared/components/other/CustomLabel';
+import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
+
+interface FormProps {
+    isEdit: boolean;
+    customAntFormFieldError: CustomAntFormFieldError;
+    type?: string;
 }
 
-function FirstAndRepeatLoanFormByScore(props:FormProps) {
-    
-    return <>
-            {["极好", "良好", "正常", "普通", "拒绝"].map((levelTag, index) => {
+function FirstAndRepeatLoanFormByScore(props: FormProps): JSX.Element {
+    return (
+        <>
+            {['极好', '良好', '正常', '普通', '拒绝'].map((levelTag, index) => {
                 return (
                     <Form.Item key={index}>
                         {index === 0 && (
@@ -28,7 +27,7 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                         )}
                         <Input.Group compact>
                             {props.isEdit && (
-                                <Form.Item name={[props.type, index, "id"]} style={{ display: "none" }}>
+                                <Form.Item name={[props.type, index, 'id']} style={{ display: 'none' }}>
                                     <Input />
                                 </Form.Item>
                             )}
@@ -37,51 +36,78 @@ function FirstAndRepeatLoanFormByScore(props:FormProps) {
                             </Form.Item>
 
                             <Form.Item style={{ margin: '0 8px 0 0', width: 170 }}>
-                                <Form.Item name={[props.type, index, "max"]} style={{ margin: '0 8px 0 0', width: 72, display: 'inline-block' }}
-                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.validateStatus}
+                                <Form.Item
+                                    name={[props.type, index, 'max']}
+                                    style={{ margin: '0 8px 0 0', width: 72, display: 'inline-block' }}
+                                    validateStatus={
+                                        (props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)
+                                            ?.validateStatus
+                                    }
                                     help={(props.customAntFormFieldError?.[`${props.type}_max_${index}`] as any)?.help}
-                                    rules={[{ required: true, message: "请输入值" }]}
+                                    rules={[{ required: true, message: '请输入值' }]}
                                 >
-                                    <Input placeholder={"值"} />
+                                    <Input placeholder={'值'} />
                                 </Form.Item>
                                 <Form.Item style={{ display: 'inline-block', margin: '0 8px 0 0' }}>-</Form.Item>
-                                <Form.Item name={[props.type, index, "min"]} style={{ margin: '0', width: 72, display: 'inline-block' }}
-                                    validateStatus={(props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)?.validateStatus}
+                                <Form.Item
+                                    name={[props.type, index, 'min']}
+                                    style={{ margin: '0', width: 72, display: 'inline-block' }}
+                                    validateStatus={
+                                        (props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)
+                                            ?.validateStatus
+                                    }
                                     help={(props.customAntFormFieldError?.[`${props.type}_min_${index}`] as any)?.help}
-                                    rules={[{ required: true, message: "请输入值" }]}
+                                    rules={[{ required: true, message: '请输入值' }]}
                                 >
-                                    <Input placeholder={"值"} disabled={index !== 4 ? true : false} />
+                                    <Input placeholder={'值'} disabled={index !== 4} />
                                 </Form.Item>
                             </Form.Item>
 
-                            <Form.Item name={[props.type, index, "loanCount"]} style={{ margin: '0 8px 0 0', width: 110 }}
-                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.validateStatus}
-                                help={(props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.help}
-                                rules={[{ required: true, message: "请输入笔数" }]}
+                            <Form.Item
+                                name={[props.type, index, 'loanCount']}
+                                style={{ margin: '0 8px 0 0', width: 110 }}
+                                validateStatus={
+                                    (props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)
+                                        ?.validateStatus
+                                }
+                                help={
+                                    (props.customAntFormFieldError?.[`${props.type}_loanCount_${index}`] as any)?.help
+                                }
+                                rules={[{ required: true, message: '请输入笔数' }]}
                             >
-                                <Input placeholder={"笔数"} />
+                                <Input placeholder={'笔数'} />
                             </Form.Item>
 
-                            <Form.Item name={[props.type, index, "balance"]} style={{ margin: '0 8px 0 0', width: 110 }}
-                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.validateStatus}
+                            <Form.Item
+                                name={[props.type, index, 'balance']}
+                                style={{ margin: '0 8px 0 0', width: 110 }}
+                                validateStatus={
+                                    (props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)
+                                        ?.validateStatus
+                                }
                                 help={(props.customAntFormFieldError?.[`${props.type}_balance_${index}`] as any)?.help}
-                                rules={[{ required: true, message: "请输入最高可借总额" }]}
+                                rules={[{ required: true, message: '请输入最高可借总额' }]}
                             >
-                                <Input placeholder={"最高可借总额"} />
+                                <Input placeholder={'最高可借总额'} />
                             </Form.Item>
-                            <Form.Item name={[props.type, index, "autoLoan"]} style={{ margin: '0 0px 0 20px', width: 100, textAlign: 'left' }}
-                                validateStatus={(props.customAntFormFieldError?.[`${props.type}_autoLoan_${index}`] as any)?.validateStatus}
+                            <Form.Item
+                                name={[props.type, index, 'autoLoan']}
+                                style={{ margin: '0 0px 0 20px', width: 100, textAlign: 'left' }}
+                                validateStatus={
+                                    (props.customAntFormFieldError?.[`${props.type}_autoLoan_${index}`] as any)
+                                        ?.validateStatus
+                                }
                                 help={(props.customAntFormFieldError?.[`${props.type}_autoLoan_${index}`] as any)?.help}
                                 valuePropName={'checked'}
-                           >
-                                <Checkbox/>
+                            >
+                                <Checkbox />
                             </Form.Item>
                         </Input.Group>
                     </Form.Item>
-                )
+                );
             })}
-    </>
-
+        </>
+    );
 }
 
 export default FirstAndRepeatLoanFormByScore;

@@ -1,65 +1,63 @@
-import {useDispatch, useSelector} from "react-redux";
-import {selectSearchParams, setSearchParams,setSelectedRow} from "./modules/shared/utils/searchParamsSlice";
-import React, {useEffect} from "react";
-import {ConfigProvider} from "antd";
-import {HashRouter as Router, Route, Switch} from "react-router-dom";
-import IndexPage from "./modules/shared/components/pages/IndexPage";
-import {MerchantPage} from "./modules/product/components/pages/MerchantPage";
-import {ProductPage} from "./modules/product/components/pages/ProductPage";
-import UserPage from "./modules/user/components/pages/UserPage";
-import {RiskSettingPage} from "./modules/risk/components/pages/RiskSettingPage";
-import UserInfoPage from "./modules/user/components/pages/UserInfoPage";
-import {createHashHistory} from "history";
-import {ChannelTabPage} from "./modules/channel/components/pages/ChannelTabPage";
-import UserReviewPage from "./modules/user/components/pages/UserReviewPage";
-import UserReviewInfoPage from "./modules/user/components/pages/UserReviewInfoPage";
-import UserReviewRecordPage from "./modules/user/components/pages/UserReviewRecordPage";
-import WhiteListPage from "./modules/user/components/pages/WhiteListPage";
-import BlackListPage from "./modules/user/components/pages/BlackListPage";
-import {AppManagePage} from "./modules/app/components/pages/AppManagePage";
-import ConfigManagePage from "./modules/system/components/pages/ConfigManagePage";
-import OrderPage from "./modules/order/components/OrderPage";
-import OrderDetailPage from "./modules/order/components/OrderDetailPage";
-import OrderReviewPage from "./modules/order/components/OrderReviewPage";
-import OrderReviewDetailPage from "./modules/order/components/OrderReviewDetailPage";
-import OrderFinalReviewPage from "./modules/order/components/OrderFinalReviewPage";
-import OrderFinalReviewDetailPage from "./modules/order/components/OrderFinalReviewDetailPage";
-import OrderReviewRecordPage from "./modules/order/components/OrderReviewRecordPage";
-import SmsConfigPage from "./modules/sms/components/pages/SmsConfigPage";
-import {ActivityAdsAdminPage} from "./modules/diversion/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage";
-import PayReceiptPage from "./modules/financial/components/PayReceiptPage";
-import DailyRiskControlPage from "./modules/statistics/components/pages/DailyRiskControlPage"
-import {TodayDistributionPage} from "./modules/distribution/pages/TodayDistributionPage";
-import {OverdueDistributionPage} from "./modules/distribution/pages/OverdueDistributionPage";
-import {
-    NewCustomerRiskControlRepaymentRatePage
-} from "./modules/statistics/components/pages/NewCustomerRiskControlRepaymentRatePage";
-import LoginAccountManagePage from "./modules/system/components/pages/LoginAccountManage";
-import NewCustomersDailyConversionRatesPage from "./modules/statistics/components/pages/NewCustomersDailyConversionRatesPage";
-import ReloanStatisticsPage from "./modules/statistics/components/pages/ReloanStatisticsPage";
-const Basename = window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/';
+import { ConfigProvider } from 'antd';
+import { createHashHistory } from 'history';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, HashRouter as Router, Switch } from 'react-router-dom';
+
+import { AppManagePage } from './modules/app/components/pages/AppManagePage';
+import { ChannelTabPage } from './modules/channel/components/pages/ChannelTabPage';
+import { OverdueDistributionPage } from './modules/distribution/pages/OverdueDistributionPage';
+import { TodayDistributionPage } from './modules/distribution/pages/TodayDistributionPage';
+import { ActivityAdsAdminPage } from './modules/diversion/ads/components/pages/ActivityAdsPage/ActivityAdsAdminPage';
+import PayReceiptPage from './modules/financial/components/PayReceiptPage';
+import OrderDetailPage from './modules/order/components/OrderDetailPage';
+import OrderFinalReviewDetailPage from './modules/order/components/OrderFinalReviewDetailPage';
+import OrderFinalReviewPage from './modules/order/components/OrderFinalReviewPage';
+import OrderPage from './modules/order/components/OrderPage';
+import OrderReviewDetailPage from './modules/order/components/OrderReviewDetailPage';
+import OrderReviewPage from './modules/order/components/OrderReviewPage';
+import OrderReviewRecordPage from './modules/order/components/OrderReviewRecordPage';
+import { MerchantPage } from './modules/product/components/pages/MerchantPage';
+import { ProductPage } from './modules/product/components/pages/ProductPage';
+import { RiskSettingPage } from './modules/risk/components/pages/RiskSettingPage';
+import IndexPage from './modules/shared/components/pages/IndexPage';
+import { selectSearchParams, setSearchParams, setSelectedRow } from './modules/shared/utils/searchParamsSlice';
+import SmsConfigPage from './modules/sms/components/pages/SmsConfigPage';
+import DailyRiskControlPage from './modules/statistics/components/pages/DailyRiskControlPage';
+import { NewCustomerRiskControlRepaymentRatePage } from './modules/statistics/components/pages/NewCustomerRiskControlRepaymentRatePage';
+import NewCustomersDailyConversionRatesPage from './modules/statistics/components/pages/NewCustomersDailyConversionRatesPage';
+import ReloanStatisticsPage from './modules/statistics/components/pages/ReloanStatisticsPage';
+import ConfigManagePage from './modules/system/components/pages/ConfigManagePage';
+import LoginAccountManagePage from './modules/system/components/pages/LoginAccountManage';
+import BlackListPage from './modules/user/components/pages/BlackListPage';
+import UserInfoPage from './modules/user/components/pages/UserInfoPage';
+import UserPage from './modules/user/components/pages/UserPage';
+import UserReviewInfoPage from './modules/user/components/pages/UserReviewInfoPage';
+import UserReviewPage from './modules/user/components/pages/UserReviewPage';
+import UserReviewRecordPage from './modules/user/components/pages/UserReviewRecordPage';
+import WhiteListPage from './modules/user/components/pages/WhiteListPage';
+
+const Basename = window['__POWERED_BY_QIANKUN__'] ? '/cms' : '/';
 
 const history = createHashHistory({
     basename: Basename,
-})
+});
 
-export const AppRouter = () => {
-    const {pathname,previousPathname} = useSelector(selectSearchParams);
+export const AppRouter = (): JSX.Element => {
+    const { pathname, previousPathname } = useSelector(selectSearchParams);
     const dispatch = useDispatch();
     useEffect(() => {
         // Listen for changes to the current location.
-        const unlisten = history.listen((location, action) => {
-
+        const unlisten = history.listen((location) => {
             if (location.pathname.indexOf(pathname) + location.pathname.indexOf(previousPathname) <= -2) {
                 dispatch(setSearchParams({}));
-                dispatch(setSelectedRow([]))
+                dispatch(setSelectedRow([]));
             }
-
-        })
+        });
         return () => {
             unlisten();
-        }
-    })
+        };
+    });
 
     return (
         <ConfigProvider prefixCls="ant4">
@@ -90,7 +88,7 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/user-review-info/:userId" component={UserReviewInfoPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/user-review-record"} component={UserReviewRecordPage}/>
+                    <Route path={'/user-review-record'} component={UserReviewRecordPage} />
                     {/*// @ts-ignore*/}
                     <Route path="/whitelist" component={WhiteListPage} />
                     {/*// @ts-ignore*/}
@@ -108,35 +106,37 @@ export const AppRouter = () => {
                     {/*// @ts-ignore*/}
                     <Route path="/order-review-detail/:userId/:orderId/:orderNo" component={OrderReviewDetailPage} />
                     {/*// @ts-ignore*/}
-                     {/*// @ts-ignore*/}
+                    {/*// @ts-ignore*/}
                     <Route path="/order-final-review" component={OrderFinalReviewPage} />
                     {/*// @ts-ignore*/}
-                    <Route path="/order-final-review-detail/:userId/:orderId/:orderNo" component={OrderFinalReviewDetailPage} />
+                    <Route
+                        path="/order-final-review-detail/:userId/:orderId/:orderNo"
+                        component={OrderFinalReviewDetailPage}
+                    />
                     {/*// @ts-ignore*/}
                     <Route path="/order-review-record" component={OrderReviewRecordPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/activity-ads"} component={ActivityAdsAdminPage}/>
+                    <Route path={'/activity-ads'} component={ActivityAdsAdminPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/sms-config"} component={SmsConfigPage}/>
+                    <Route path={'/sms-config'} component={SmsConfigPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/pay-receipt"} component={PayReceiptPage}/>
+                    <Route path={'/pay-receipt'} component={PayReceiptPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/riskControlStatistic"} component={DailyRiskControlPage}/>
+                    <Route path={'/riskControlStatistic'} component={DailyRiskControlPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/today-distribution"} component={TodayDistributionPage}/>
+                    <Route path={'/today-distribution'} component={TodayDistributionPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/overdue-distribution"} component={OverdueDistributionPage}/>
+                    <Route path={'/overdue-distribution'} component={OverdueDistributionPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/new-customer-repayment-rate"} component={NewCustomerRiskControlRepaymentRatePage}/>
+                    <Route path={'/new-customer-repayment-rate'} component={NewCustomerRiskControlRepaymentRatePage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/loginAccountMange"} component={LoginAccountManagePage}/>
+                    <Route path={'/loginAccountMange'} component={LoginAccountManagePage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/Registrations"} component={NewCustomersDailyConversionRatesPage}/>
+                    <Route path={'/Registrations'} component={NewCustomersDailyConversionRatesPage} />
                     {/*// @ts-ignore*/}
-                    <Route path={"/reloanStatistics"} component={ReloanStatisticsPage}/>
+                    <Route path={'/reloanStatistics'} component={ReloanStatisticsPage} />
                 </Switch>
             </Router>
-
         </ConfigProvider>
-    )
-}
+    );
+};

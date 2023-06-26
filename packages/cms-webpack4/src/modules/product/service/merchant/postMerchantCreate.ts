@@ -11,5 +11,4 @@ export interface PostMerchantCreateRequestBody {
     name?: string;
     /** 商戶號密碼 */
     password?: string;
-
 }

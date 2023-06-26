@@ -1,4 +1,4 @@
-import { API } from "./index";
+import { API } from './index';
 
 const AppNamesApi = API.injectEndpoints({
     overrideExisting: false,
@@ -8,11 +8,9 @@ const AppNamesApi = API.injectEndpoints({
             query: () => ({
                 url: `/commons/app-names`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
-})
-export const {
-    useLazyGetAppNamesQuery
-} = AppNamesApi;
+    }),
+});
+export const { useLazyGetAppNamesQuery } = AppNamesApi;

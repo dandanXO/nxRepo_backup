@@ -1,7 +1,7 @@
-import { API } from "../../../shared/api";
-import { GetMerchantListResponseData } from "./getMerchantList";
-import { PostMerchantCreateRequestBody } from "./postMerchantCreate";
-import { PutMerchantProps } from "./putMerchant";
+import { API } from '../../../shared/api';
+import { GetMerchantListResponseData } from './getMerchantList';
+import { PostMerchantCreateRequestBody } from './postMerchantCreate';
+import { PutMerchantProps } from './putMerchant';
 
 const MerchantApi = API.injectEndpoints({
     overrideExisting: false,
@@ -11,14 +11,14 @@ const MerchantApi = API.injectEndpoints({
             query: () => ({
                 url: `/merchant-manage/list`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: POST /hs/admin/merchant-manage/merchant 创建商戶
         postMerchantCreate: builder.mutation<{}, PostMerchantCreateRequestBody>({
             query: (requestBody: PostMerchantCreateRequestBody) => ({
                 url: `/merchant-manage/merchant`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -26,14 +26,11 @@ const MerchantApi = API.injectEndpoints({
         putMerchantEdit: builder.mutation<{}, PutMerchantProps>({
             query: ({ merchantId, ...requestBody }: PutMerchantProps) => ({
                 url: `/merchant-manage/merchant/${merchantId}`,
-                method: "put",
+                method: 'put',
                 data: requestBody,
             }),
         }),
-    })
-})
-export const {
-    useLazyGetMerchantManageListQuery,
-    usePostMerchantCreateMutation,
-    usePutMerchantEditMutation
-} = MerchantApi;
+    }),
+});
+export const { useLazyGetMerchantManageListQuery, usePostMerchantCreateMutation, usePutMerchantEditMutation } =
+    MerchantApi;

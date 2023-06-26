@@ -1,68 +1,73 @@
-import React, { useEffect, useState } from "react";
-import { Divider, Form, FormInstance, Radio, Tooltip, Modal } from "antd";
-import FirstAndRepeatLoanFormByValue from "./FirstAndRepeatLoanFormByValue";
-import FirstAndRepeatLoanFormByScore from "./FirstAndRepeatLoanFormByScore";
-import { CustomAntFormFieldError } from "../../../../shared/utils/validation/CustomAntFormFieldError";
+import { Divider, Form, FormInstance, Modal, Radio } from 'antd';
+import React from 'react';
+
+import { CustomAntFormFieldError } from '../../../../shared/utils/validation/CustomAntFormFieldError';
+import FirstAndRepeatLoanFormByScore from './FirstAndRepeatLoanFormByScore';
+import FirstAndRepeatLoanFormByValue from './FirstAndRepeatLoanFormByValue';
 
 interface FirstLoanSectionProps {
     isEdit: boolean;
     customAntFormFieldError: CustomAntFormFieldError;
-    setCustomAntFormFieldError: React.Dispatch<React.SetStateAction<Object>>;
+    setCustomAntFormFieldError: React.Dispatch<CustomAntFormFieldError>;
     form: FormInstance;
 }
 
-const FirstLoanSection = (props: FirstLoanSectionProps) => {
-
+const FirstLoanSection = (props: FirstLoanSectionProps): JSX.Element => {
     const rankStrategy = Form.useWatch('rankStrategy', props.form);
 
     const resetErrorMessage = () => {
         const errorKeys = Object.keys(props.customAntFormFieldError);
-        const removefirstLoanError = errorKeys.filter((i) => i.indexOf("firstLoan") < 0);
+        const removefirstLoanError = errorKeys.filter((i) => i.indexOf('firstLoan') < 0);
         const errorList = removefirstLoanError.reduce((prev, curr) => {
             return { ...prev, [curr]: props.customAntFormFieldError[curr] };
         }, {});
         props.setCustomAntFormFieldError(errorList);
-    }
+    };
 
     const [modal, contextHolder] = Modal.useModal();
 
-    const rankStratOnChange = (e) => {
-
+    const rankStratOnChange = () => {
         resetErrorMessage();
 
         const { firstLoan } = props.form.getFieldsValue();
 
-        const isLoanFormNotFilled = firstLoan.map(loan => {
-            return Object.keys(loan).filter(field => field !== 'id').every(i => loan[i] === undefined)
-        }).every(i => i === true);
+        const isLoanFormNotFilled = firstLoan
+            .map((loan) => {
+                return Object.keys(loan)
+                    .filter((field) => field !== 'id')
+                    .every((i) => loan[i] === undefined);
+            })
+            .every((i) => i === true);
 
         if (!isLoanFormNotFilled) {
             modal.confirm({
-                title: "切换分数类型将会清空现有的数据，确定仍要切换吗？",
+                title: '切换分数类型将会清空现有的数据，确定仍要切换吗？',
                 onOk() {
-                    const isResetFirstLoan = props.isEdit ? firstLoan.map(i => ({ id: i.id })) : [];
+                    const isResetFirstLoan = props.isEdit ? firstLoan.map((i) => ({ id: i.id })) : [];
                     props.form.setFieldsValue({ firstLoan: isResetFirstLoan });
                 },
                 onCancel() {
                     props.form.setFieldsValue({ rankStrategy });
                     props.setCustomAntFormFieldError(props.customAntFormFieldError);
-                }
-            })
+                },
+            });
         }
-
-    }
+    };
 
     return (
         <React.Fragment>
-
-            <Divider style={{color:'#00000073'}} orientation="left">新客配置</Divider>
-            <Form.Item label={"分数类型"} name={"rankStrategy"} required>
-                <Radio.Group onChange={rankStratOnChange} >
+            <Divider style={{ color: '#00000073' }} orientation="left">
+                新客配置
+            </Divider>
+            <Form.Item label={'分数类型'} name={'rankStrategy'} required>
+                <Radio.Group onChange={rankStratOnChange}>
                     <Radio value={'KEY_VALUE'}>值</Radio>
                     <Radio value={'SCORE'}>范围</Radio>
                 </Radio.Group>
             </Form.Item>
-            <Form.Item label={"新客分数"} required
+            <Form.Item
+                label={'新客分数'}
+                required
                 tooltip={
                     <div>
                         <div>填写规则：</div>
@@ -76,10 +81,12 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
                 help={(props.customAntFormFieldError?.[`firstLoan_error`] as any)?.help}
                 validateStatus={(props.customAntFormFieldError?.[`firstLoan_error`] as any)?.validateStatus}
             >
-                {{
-                    'KEY_VALUE': <FirstAndRepeatLoanFormByValue {...props} type="firstLoan" />,
-                    'SCORE': <FirstAndRepeatLoanFormByScore {...props} type="firstLoan" />,
-                }[rankStrategy]}
+                {
+                    {
+                        KEY_VALUE: <FirstAndRepeatLoanFormByValue {...props} type="firstLoan" />,
+                        SCORE: <FirstAndRepeatLoanFormByScore {...props} type="firstLoan" />,
+                    }[rankStrategy]
+                }
             </Form.Item>
             <Form.Item label={'新客规则'} name="useRcQuota" required initialValue={true}>
                 <Radio.Group>
@@ -89,7 +96,7 @@ const FirstLoanSection = (props: FirstLoanSectionProps) => {
             </Form.Item>
             {contextHolder}
         </React.Fragment>
-    )
-}
+    );
+};
 
 export default FirstLoanSection;

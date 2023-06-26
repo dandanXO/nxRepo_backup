@@ -1,4 +1,3 @@
-
 export type GetConfigListResponse = ConfigResponse[];
 
 export interface ConfigResponse {
@@ -24,4 +23,3 @@ export interface options {
     label?: string;
     value?: string;
 }
-

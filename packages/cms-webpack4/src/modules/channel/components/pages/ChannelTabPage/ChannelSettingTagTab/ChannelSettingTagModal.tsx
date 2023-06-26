@@ -1,7 +1,8 @@
-import React from "react";
-import {FormInstance} from "antd";
-import AdminFormModal from "../../../../../shared/components/common/AdminFormModal";
-import {ModalContent} from "../../../../../shared/components/common/AdminTable";
+import { FormInstance } from 'antd';
+import React from 'react';
+
+import AdminFormModal from '../../../../../shared/components/common/AdminFormModal';
+import { ModalContent } from '../../../../../shared/components/common/AdminTable';
 
 interface ChannelSettingTagModalProps {
     // NOTE: Modal
@@ -16,11 +17,10 @@ interface ChannelSettingTagModalProps {
     autoComplete?: boolean;
 }
 export const ChannelSettingTagModal = (props: ChannelSettingTagModalProps) => {
-
     return (
         <AdminFormModal
-            width={"600px"}
-            title={"渠道配置标签"}
+            width={'600px'}
+            title={'渠道配置标签'}
             show={props.showModalContent.show}
             isEdit={props.showModalContent.isEdit}
             handleCloseModal={() => {
@@ -30,7 +30,7 @@ export const ChannelSettingTagModal = (props: ChannelSettingTagModalProps) => {
                 props.setShowModalContent({
                     show: false,
                     isEdit: false,
-                })
+                });
                 props.onCloseModal();
             }}
             onOk={props.onOk}
@@ -39,5 +39,5 @@ export const ChannelSettingTagModal = (props: ChannelSettingTagModalProps) => {
         >
             {props.children}
         </AdminFormModal>
-    )
-}
+    );
+};
