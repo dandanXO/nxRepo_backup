@@ -10,6 +10,7 @@ import { appSlice } from './appSlice';
 import { indexPageSlice } from './indexPageSlice';
 import { loginSlice } from './loginSlice';
 import { modalSlice } from './modalSlice';
+import { loadingSlice } from './loadingSlice';
 
 export const history = createBrowserHistory();
 const routerMiddleware = createRouterMiddleware(history);
@@ -46,6 +47,7 @@ export const appStore = configureStore({
     [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
     [indexPageSlice.name]: indexPageSlice.reducer,
     [loginSlice.name]: loginSlice.reducer,
+    [loadingSlice.name]: loadingSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

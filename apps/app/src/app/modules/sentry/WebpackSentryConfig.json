@@ -1,8 +1,8 @@
 {
-  "url": "https://monitor.sijneokd.com/",
-  "authToken": "2c48e3e9a9464236a5b057ecbd5c2683b52f676f3c294a3eae6bfeb923b6815c",
+  "url": "https://sentry.xu-jie-tech.com",
+  "authToken": "f011dbb05ecf47568bda70647512f773e8a9d3dc54e24f6d96ff8f9d48ef20a8",
   "org": "sentry",
   "project": "api-app",
-  "projectId": 3,
-  "dsn": "https://4a49d8eb6e164c86a8284b81294ed8d1@monitor.sijneokd.com/3"
+  "projectId": 2,
+  "dsn": "https://d90d01b7732c41d79ff57f964858e4cf@sentry.xu-jie-tech.com/2"
 }

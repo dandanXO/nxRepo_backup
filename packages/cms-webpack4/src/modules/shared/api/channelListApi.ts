@@ -1,5 +1,5 @@
-import {API} from "./index";
-import {ChannelSelect} from "./commonSelectTypes/getChannelSelect";
+import { ChannelSelect } from './commonSelectTypes/getChannelSelect';
+import { API } from './index';
 
 const ChannelListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -9,12 +9,9 @@ const ChannelListApi = API.injectEndpoints({
             query: () => ({
                 url: `/channel/drop-menu`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
-})
-export const {
-    useGetChannelListQuery,
-    useLazyGetChannelListQuery
-} = ChannelListApi;
+    }),
+});
+export const { useGetChannelListQuery, useLazyGetChannelListQuery } = ChannelListApi;

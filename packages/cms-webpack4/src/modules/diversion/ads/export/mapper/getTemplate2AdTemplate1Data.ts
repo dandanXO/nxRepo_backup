@@ -1,19 +1,21 @@
-import {ActivityBanner} from "../service/types";
 import {
-  AdTemplate2BrandCard,
-  AdTemplate2Card, IAdTemplate2Data
-} from "../../import/ActivityAdListPage/components/AdTemplate2";
+    AdTemplate2BrandCard,
+    AdTemplate2Card,
+    IAdTemplate2Data,
+} from '../../import/ActivityAdListPage/components/AdTemplate2';
+import { ActivityBanner } from '../service/types';
 
+// function instanceOfBrandCard2(obj: any): obj is AdTemplate2BrandCard {
+//     return 'priceUnit' in obj;
+// }
+//
+// function instanceOfCard2(obj: any): obj is AdTemplate2Card {
+//     return 'title' in obj;
+// }
 
-function instanceOfBrandCard2(obj: any): obj is AdTemplate2BrandCard {
-    return 'priceUnit' in obj;
-}
-
-function instanceOfCard2(obj: any): obj is AdTemplate2Card {
-    return 'title' in obj;
-}
-
-export const getTemplate2AdTemplate1Data = (ads?: ActivityBanner<AdTemplate2BrandCard, AdTemplate2Card>[]): IAdTemplate2Data | null => {
+export const getTemplate2AdTemplate1Data = (
+    ads?: ActivityBanner<AdTemplate2BrandCard, AdTemplate2Card>[],
+): IAdTemplate2Data | null => {
     if (!ads) return null;
     return {
         brandCard: {
@@ -37,5 +39,5 @@ export const getTemplate2AdTemplate1Data = (ads?: ActivityBanner<AdTemplate2Bran
             action: ads[2].action,
             actionUrl: ads[2].actionUrl,
         },
-    }
-}
+    };
+};

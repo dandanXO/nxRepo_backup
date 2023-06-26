@@ -145,7 +145,9 @@ const onUserClickViewApplicationProgress = () => {
   useEffect(() => {
     // console.log("==============================")
     // console.log("預期要借的總額", quotaBarTargetPrice);
-    if (indexPageState.indexAPI?.products && quotaBarTargetPrice > 0) {
+    if (quotaBarTargetPrice === 0) {
+        setCalculatingProducts([])
+    }else if (indexPageState.indexAPI?.products && quotaBarTargetPrice > 0) {
       let currentSelectedProductsPrice = 0;
       // console.log("currentSelectedProductsPrice", currentSelectedProductsPrice)
 

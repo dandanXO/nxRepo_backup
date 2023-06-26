@@ -1,41 +1,43 @@
-import {AdminTable, ModalContent} from "../../../../../shared/components/common/AdminTable";
-import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {ProColumns} from "@ant-design/pro-components";
+import { ProColumns } from '@ant-design/pro-components';
+import { FormInstance } from 'antd';
+import { useForm } from 'antd/es/form/Form';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+
+import { AdminFormCustomModal } from '../../../../../shared/components/common/AdminFormCustomModal';
+import { AdminTable, ModalContent } from '../../../../../shared/components/common/AdminTable';
+import { ProColumnsOperationConstant } from '../../../../../shared/components/common/ProColumnsOperationConstant';
+import { DeepPartial } from '../../../../../shared/types/custom';
+import { CustomAntFormFieldError } from '../../../../../shared/utils/validation/CustomAntFormFieldError';
+import { Channel } from '../../../../domain/vo/Channel';
 import {
-    useCreateChannelMutation, useCreateTagMutation,
+    useCreateChannelMutation,
+    useCreateTagMutation,
     useLazyGetAllChannelQuery,
     useLazyGetAllChannelSettingTagDropMenuQuery,
     useLazyGetAllRiskDropMenuQuery,
-    useLazyGetChannelQuery, useUpdateChannelMutation
-} from "../../../../service/ChannelApi";
-import {FormInstance} from "antd";
-import {AdminFormCustomModal} from "../../../../../shared/components/common/AdminFormCustomModal";
-import {useForm} from "antd/es/form/Form";
-import {ChannelSettingForm} from "./ChannelSettingForm";
-import {CustomAntFormFieldError} from "../../../../../shared/utils/validation/CustomAntFormFieldError";
-import {Channel} from "../../../../domain/vo/Channel";
-import {UpdateChannelRequest} from "../../../../service/request/UpdateChannelRequest";
-import {ChannelSettingTagFormModal} from "../ChannelSettingTagTab/ChannelSettingTagFormModal";
-import {useFormModal} from "../ChannelSettingTagTab/useFormModal";
-import {ProColumnsOperationConstant} from "../../../../../shared/components/common/ProColumnsOperationConstant";
+    useLazyGetChannelQuery,
+    useUpdateChannelMutation,
+} from '../../../../service/ChannelApi';
+import { UpdateChannelRequest } from '../../../../service/request/UpdateChannelRequest';
+import { ChannelSettingTagFormModal } from '../ChannelSettingTagTab/ChannelSettingTagFormModal';
+import { useFormModal } from '../ChannelSettingTagTab/useFormModal';
+import { ChannelSettingForm } from './ChannelSettingForm';
 
 type ChannelListItemVO = Channel & {
     enabledTag?: string;
-
-}
+};
 const i18n = {
-    "ChannelSettingTabPage": {
-        add: "添加渠道",
-    }
-}
+    ChannelSettingTabPage: {
+        add: '添加渠道',
+    },
+};
 interface ChannelSettingTabPageProps {
     active: boolean;
 }
-export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
-
+export const ChannelSettingTabPage = (props: ChannelSettingTabPageProps): JSX.Element => {
     // NOTICE: Action: List
     // NOTE: Table
-    const [columns, setColumns] = useState<ProColumns<ChannelListItemVO>[]>()
+    const [columns, setColumns] = useState<ProColumns<ChannelListItemVO>[]>();
 
     // NOTICE: Action: Edit
     const [editID, setEditID] = useState<number>();
@@ -52,47 +54,47 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
         const fields = form.getFieldsValue();
         // console.log(form.getFieldsValue() )
 
-        if(fields.publishId === "全部" || fields.publishId === "0") {
-            fields.publishId = ""
+        if (fields.publishId === '全部' || fields.publishId === '0') {
+            fields.publishId = '';
         }
         // transform enable
         fields.enabled = {
-            "all": "",
-            "enable": "1",
-            "disable": "0",
-        }[fields.enabledTag]
+            all: '',
+            enable: '1',
+            disable: '0',
+        }[fields.enabledTag];
 
         userBrowseAndSearchAllItemsUseCase(fields);
-
-    }, [])
+    }, []);
 
     const onFormResetCallback = useCallback(() => {
         userBrowseAndSearchAllItemsUseCase({});
-    }, [])
+    }, []);
 
-    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData, isLoading: isLoadingAllChannelSettingTagDropMenuData, isFetching: isFetchingAllChannelSettingTagDropMenuData }] = useLazyGetAllChannelSettingTagDropMenuQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+    const [triggerGetAllChannelSettingTagDropMenu, { currentData: allChannelSettingTagDropMenuData }] =
+        useLazyGetAllChannelSettingTagDropMenuQuery({
+            pollingInterval: 0,
+            refetchOnFocus: false,
+            refetchOnReconnect: false,
+        });
     useEffect(() => {
         triggerGetAllChannelSettingTagDropMenu(null);
-    }, [])
+    }, []);
 
     // NOTICE: Use Case
     // NOTE: System is initializing ChannelSetting List
     const systemInitalizeListUseCase = useCallback(() => {
         const publishNameTags = {
-            "0": {
-                status: "Default",
-                text: "全部"
-            }
-        }
+            '0': {
+                status: 'Default',
+                text: '全部',
+            },
+        };
         allChannelSettingTagDropMenuData.map((item) => {
             publishNameTags[item.id] = {
-                status: "Default",
+                status: 'Default',
                 text: item.name,
-            }
+            };
         });
 
         const columns: ProColumns<ChannelListItemVO>[] = [
@@ -100,41 +102,63 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                 key: 'option',
                 title: '操作',
                 valueType: 'option',
-                render: (text, record, _, action) => {
+                render: (text, record) => {
                     return [
-                        <a key="editable" onClick={() => {
-                            userBrowseEditChannelSettingUseCase(record);
-                        }}>修改</a>,
-                    ]
+                        <a
+                            key="editable"
+                            onClick={() => {
+                                userBrowseEditChannelSettingUseCase(record);
+                            }}
+                        >
+                            修改
+                        </a>,
+                    ];
                 },
-                width: ProColumnsOperationConstant.width["2"],
+                width: ProColumnsOperationConstant.width['2'],
             },
             {
                 key: 'id',
                 title: '渠道ID',
                 dataIndex: 'id',
             },
-            { key: 'name', title: '渠道名称', dataIndex: 'name', initialValue: "" },
-            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: "", hideInSearch: true, },
-            { key: 'downloadLink', title: '渠道链接', dataIndex: 'url', initialValue: "", hideInSearch: true, ellipsis: true, copyable: true},
-            { key: 'modelName', title: '风控方案', dataIndex: 'modelName', initialValue: "" },
-            { key: 'appName', title: '包名', dataIndex: 'appName', initialValue: "" },
-            { key: 'publishId', title: '配置标签', dataIndex: 'publishId', hideInTable: true,
+            { key: 'name', title: '渠道名称', dataIndex: 'name', initialValue: '' },
+            { key: 'packageId', title: 'PackageID', dataIndex: 'packageId', initialValue: '', hideInSearch: true },
+            {
+                key: 'downloadLink',
+                title: '渠道链接',
+                dataIndex: 'url',
+                initialValue: '',
+                hideInSearch: true,
+                ellipsis: true,
+                copyable: true,
+            },
+            { key: 'modelName', title: '风控方案', dataIndex: 'modelName', initialValue: '' },
+            { key: 'appName', title: '包名', dataIndex: 'appName', initialValue: '' },
+            {
+                key: 'publishId',
+                title: '配置标签',
+                dataIndex: 'publishId',
+                hideInTable: true,
                 valueType: 'select',
-                initialValue: publishNameTags["0"].text,
-                valueEnum: publishNameTags
+                initialValue: publishNameTags['0'].text,
+                valueEnum: publishNameTags,
             },
             {
-                key: 'publishName', title: '配置标签', dataIndex: 'publishName', hideInSearch: true,
+                key: 'publishName',
+                title: '配置标签',
+                dataIndex: 'publishName',
+                hideInSearch: true,
             },
             {
                 key: 'enabledTag',
-                title: '状态', dataIndex: 'enabledTag', valueType: 'select',
+                title: '状态',
+                dataIndex: 'enabledTag',
+                valueType: 'select',
                 initialValue: 'all',
                 valueEnum: {
-                    "all": { text: '全部', status: 'Default' },
-                    "enable": { text: '启用', status: 'Success' },
-                    "disable": { text: '停用', status: 'Default' },
+                    all: { text: '全部', status: 'Default' },
+                    enable: { text: '启用', status: 'Success' },
+                    disable: { text: '停用', status: 'Default' },
                 },
                 width: 80,
             },
@@ -143,48 +167,45 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
     }, [allChannelSettingTagDropMenuData]);
 
     useEffect(() => {
-        if(allChannelSettingTagDropMenuData) systemInitalizeListUseCase();
-    }, [allChannelSettingTagDropMenuData])
+        if (allChannelSettingTagDropMenuData) systemInitalizeListUseCase();
+    }, [allChannelSettingTagDropMenuData]);
 
     // NOTE: User browse AllItemsUsecase
     const userBrowseAndSearchAllItemsUseCase = useCallback((query) => {
         triggerGetList(query);
-    }, [])
+    }, []);
 
     useEffect(() => {
-        if(props.active) {
+        if (props.active) {
             triggerGetAllChannelSettingTagDropMenu(null);
-            userBrowseAndSearchAllItemsUseCase({})
+            userBrowseAndSearchAllItemsUseCase({});
         }
     }, [props.active]);
 
-
     // NOTE: GET list and item
-    const [triggerGetList, { currentData: currentItemListData, isLoading: isGetListLoading, isFetching: isGetListFetching }] = useLazyGetAllChannelQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false
-    });
+    const [triggerGetList, { currentData: currentItemListData, isFetching: isGetListFetching }] =
+        useLazyGetAllChannelQuery({
+            pollingInterval: 0,
+            refetchOnFocus: false,
+            refetchOnReconnect: false,
+        });
     const [currentTableListData, setCurrentTableListData] = useState<ChannelListItemVO[]>();
     useEffect(() => {
-        if(!currentItemListData) return;
-        const data = currentItemListData.map(item => {
+        if (!currentItemListData) return;
+        const data = currentItemListData.map((item) => {
             return {
                 ...item,
-                enabledTag: item.enabled === 0 ? "disable" : "enable"
-            }
-        })
+                enabledTag: item.enabled === 0 ? 'disable' : 'enable',
+            };
+        });
         setCurrentTableListData(data);
-    }, [currentItemListData])
+    }, [currentItemListData]);
 
-    const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData, isLoading: isLoadingAllRiskDropMenuData, isFetching: isFetchingAllRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
+    const [triggerGetAllRiskDropMenu, { currentData: allRiskDropMenuData }] = useLazyGetAllRiskDropMenuQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
-        refetchOnReconnect: false
+        refetchOnReconnect: false,
     });
-
-
-
 
     // NOTE: User add Item
     const userAddItemUseCase = useCallback(() => {
@@ -199,17 +220,17 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
     }, []);
 
     const onAddItem = useCallback(() => {
-        userAddItemUseCase()
-    }, [])
+        userAddItemUseCase();
+    }, []);
 
     // NOTICE: Form
-    const [form] = useForm()
+    const [form] = useForm();
 
     // NOTICE: Modal - Create, Edit
     // Modal - OK
     const onModalOk = useCallback(() => {
         form.submit();
-    }, [form])
+    }, [form]);
 
     // Modal - Close
     const onCloseModal = useCallback(() => {
@@ -221,19 +242,19 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
     const formInitialValues = useMemo(() => {
         // NOTE: select and switch need initialValue if you want to select one
         return {
-            enabled: true
-        } as DeepPartial<{}>;
-    }, [])
+            enabled: true,
+        } as DeepPartial<{ enabled: boolean }>;
+    }, []);
 
     // Form - onFieldsChange
-    const onFormFieldsChange = useCallback((changedFields, allFields) => {
+    const onFormFieldsChange = useCallback(() => {
         // userEditingChannelSettingUseCase(changedFields);
-    }, [])
+    }, []);
 
     // Form - Finish
     const onFormFinish = useCallback(() => {
         userEditedChannelSettingUseCase();
-    }, [showModalContent.isEdit, editID])
+    }, [showModalContent.isEdit, editID]);
 
     const userEditedChannelSettingUseCase = useCallback(() => {
         // const isValid = systemValidateChannelSettingUsecase();
@@ -243,7 +264,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
         let fields = form.getFieldsValue();
 
         // NOTICE: MODE - Edit
-        if(showModalContent.isEdit) {
+        if (showModalContent.isEdit) {
             fields = {
                 id: editID,
                 modelId: fields.modelId,
@@ -252,37 +273,37 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                 publishId: fields.publishId,
             } as UpdateChannelRequest;
         }
-        fields["enabled"] = fields.enabled ? 1 : 0;
+        fields['enabled'] = fields.enabled ? 1 : 0;
 
         // NOTE: Create or Edit
         const triggerAPI = !showModalContent.isEdit ? triggerPost : triggerPut;
 
-
         // NOTE: Request
-        triggerAPI(fields).unwrap().then((responseData) => {
-            // console.log("responseData", responseData);
+        triggerAPI(fields)
+            .unwrap()
+            .then(() => {
+                // console.log("responseData", responseData);
 
-            // Reset Form
-            form.resetFields();
+                // Reset Form
+                form.resetFields();
 
-            // Close Modal
-            setShowModalContent({
-                show: false,
-                isEdit: false,
-            })
+                // Close Modal
+                setShowModalContent({
+                    show: false,
+                    isEdit: false,
+                });
 
-            // Reset TableList
-            triggerGetList({});
-
-        })
-    }, [showModalContent.isEdit, editID])
+                // Reset TableList
+                triggerGetList({});
+            });
+    }, [showModalContent.isEdit, editID]);
 
     // NOTE: POST , PUT and DELETE
-    const [triggerPost, { data: postData, isLoading: isPostLoading , isSuccess: isPostSuccess }] = useCreateChannelMutation();
-    const [triggerPut, { data: putData, isLoading: isPutLoading, isSuccess: isPutSuccess }] = useUpdateChannelMutation();
+    const [triggerPost] = useCreateChannelMutation();
+    const [triggerPut] = useUpdateChannelMutation();
 
     // Form - Validation
-    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>()
+    const [customAntFormFieldError, setCustomAntFormFieldError] = useState<CustomAntFormFieldError>();
 
     // NOTE: User browse EditChannelSetting
     const userBrowseEditChannelSettingUseCase = useCallback((record: ChannelListItemVO) => {
@@ -293,35 +314,36 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
         setShowModalContent({
             show: true,
             isEdit: true,
-        })
+        });
         triggerGet({
             id: record.id,
         });
     }, []);
-    const [triggerGet , { data: previousData, currentData: currentFormData, isLoading: isGetLoading, isFetching: isGetFetching, isSuccess: isGetSuccess }] = useLazyGetChannelQuery();
+    const [triggerGet, { currentData: currentFormData }] = useLazyGetChannelQuery();
 
     // NOTE: Form - Mode: edit (Set form fields from data)
     useEffect(() => {
-        if(showModalContent.isEdit && currentFormData) {
-            systemReloadEditChannelSettingUseCase(currentFormData)
+        if (showModalContent.isEdit && currentFormData) {
+            systemReloadEditChannelSettingUseCase(currentFormData);
         }
-    }, [showModalContent.isEdit, currentFormData])
+    }, [showModalContent.isEdit, currentFormData]);
 
     // NOTE: System reload EditChannelSetting
-    const systemReloadEditChannelSettingUseCase = useCallback((currentFormData) => {
-        // NOTE: form - main data
-        form.setFieldsValue(currentFormData)
-    }, [showModalContent.isEdit, currentFormData])
-
-
+    const systemReloadEditChannelSettingUseCase = useCallback(
+        (currentFormData) => {
+            // NOTE: form - main data
+            form.setFieldsValue(currentFormData);
+        },
+        [showModalContent.isEdit, currentFormData],
+    );
 
     // NOTICE: 新增渠道標籤
     const [showTagModalContent, setShowTagModalContent] = useState<ModalContent>({
         show: false,
         isEdit: false,
     });
-    const [tagForm] = useForm()
-    const [triggerPostTag, { data: postTagData, isLoading: isPostTagLoading , isSuccess: isPostTagSuccess }] = useCreateTagMutation();
+    const [tagForm] = useForm();
+    const [triggerPostTag] = useCreateTagMutation();
     const {
         // form
         formInitialValues: tagFormInitialValues,
@@ -344,9 +366,9 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
         formSuccessCallback: () => {
             setTimeout(() => {
                 triggerGetAllChannelSettingTagDropMenu(null);
-            }, 2000)
-        }
-    })
+            }, 2000);
+        },
+    });
 
     return (
         <>
@@ -364,7 +386,7 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                 onFormResetCallback={onFormResetCallback}
             />
             <AdminFormCustomModal
-                title={"渠道配置"}
+                title={'渠道配置'}
                 showModalContent={showModalContent}
                 setShowModalContent={setShowModalContent}
                 onOk={onModalOk}
@@ -380,13 +402,14 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                     // NOTE: data
                     dataForAllRiskDropMenuData={allRiskDropMenuData}
                     dataForAllChannelSettingTagDropMenuData={allChannelSettingTagDropMenuData}
-                    setShowTagModalContent={() => setShowTagModalContent({
-                        show: true,
-                        isEdit: false,
-                    })}
+                    setShowTagModalContent={() =>
+                        setShowTagModalContent({
+                            show: true,
+                            isEdit: false,
+                        })
+                    }
                 />
             </AdminFormCustomModal>
-
 
             {/*NOTICE: 新增渠道標籤*/}
             <ChannelSettingTagFormModal
@@ -404,5 +427,5 @@ export const ChannelSettingTabPage = (props : ChannelSettingTabPageProps) => {
                 customAntFormFieldError={customAntTagFormFieldError}
             />
         </>
-    )
-}
+    );
+};

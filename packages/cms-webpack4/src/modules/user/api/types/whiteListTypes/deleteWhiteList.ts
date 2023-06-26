@@ -1,3 +1,3 @@
 export interface DeleteWhiteListRequestQuerystring {
-    ids:number[];
+    ids: number[];
 }

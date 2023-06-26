@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
 import { PageContainer } from '@ant-design/pro-components';
 import { Tabs } from 'antd';
-import UserInfo from '../../../shared/components/userInfo/UserInfo';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { itemRender } from '../../../shared/components/common/itemRender';
 import AddressBook from '../../../shared/components/userInfo/AddressBook';
-import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
 import LoanInfo from '../../../shared/components/userInfo/LoanInfo';
 import OrderInfo from '../../../shared/components/userInfo/OrderInfo';
-import {Link, useParams} from "react-router-dom";
-import {itemRender} from "../../../shared/components/common/itemRender";
+import SmsMessage from '../../../shared/components/userInfo/SmsMessage';
+import UserInfo from '../../../shared/components/userInfo/UserInfo';
 
-const OrderDetailPage = () => {
+const OrderDetailPage = (): JSX.Element => {
     const [domLoaded, setDomLoaded] = useState(false);
-    const urlParams = useParams<{ userId: string, orderId: string}>();
+    const urlParams = useParams<{ userId: string; orderId: string }>();
     const userId = Number(urlParams.userId);
     const orderId = Number(urlParams.orderId);
 
@@ -20,12 +21,12 @@ const OrderDetailPage = () => {
     }, []);
 
     const tabs = [
-        { label: '订单信息', key: 'orderInfo', children: <OrderInfo orderId={orderId}/> }, // 务必填写 key
-        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId} type="order"/> },
-        { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId}/> },
-        { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId}/> },
-        { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId}/> },
-      ];
+        { label: '订单信息', key: 'orderInfo', children: <OrderInfo orderId={orderId} /> }, // 务必填写 key
+        { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId} type="order" /> },
+        { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId} /> },
+        { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId} /> },
+        { label: '借款信息', key: 'loanInfo', children: <LoanInfo userId={userId} /> },
+    ];
 
     return domLoaded ? (
         <div>
@@ -36,17 +37,16 @@ const OrderDetailPage = () => {
                     breadcrumb: {
                         itemRender: itemRender,
                         routes: [
-                            { path: "/", breadcrumbName: '首页' },
+                            { path: '/', breadcrumbName: '首页' },
                             { path: null, breadcrumbName: '订单管理' },
-                            { path: "/order", breadcrumbName: '订单列表' },
+                            { path: '/order', breadcrumbName: '订单列表' },
                             { path: null, breadcrumbName: '订单详情' },
                         ],
                     },
                 }}
             >
-                <Tabs items={tabs}/>
+                <Tabs items={tabs} />
             </PageContainer>
-
         </div>
     ) : null;
 };

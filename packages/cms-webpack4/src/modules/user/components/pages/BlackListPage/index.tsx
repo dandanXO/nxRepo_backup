@@ -1,27 +1,26 @@
-import { useEffect, useState } from 'react';
-import type { ProColumns } from '@ant-design/pro-components';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Form, Input, InputNumber, Modal, Radio, Space } from 'antd';
-import AdminPage from '../../../../shared/components/common/AdminPage';
-import BlackListTable from './BlackListTable';
-import AddBlackListModal from './AddBlackListModal';
-import { usePostBlackListMutation } from '../../../api/BlackListApi';
+import { Form } from 'antd';
+import { useState } from 'react';
 
-const BlackListPage = () => {
+import AdminPage from '../../../../shared/components/common/AdminPage';
+import { usePostBlackListMutation } from '../../../api/BlackListApi';
+import AddBlackListModal from './AddBlackListModal';
+import BlackListTable from './BlackListTable';
+
+const BlackListPage = (): JSX.Element => {
     const [showModal, setShowModal] = useState(false);
     const [form] = Form.useForm();
-    const [postBlackList, { isLoading, isSuccess }] = usePostBlackListMutation();
+    const [postBlackList, { isSuccess }] = usePostBlackListMutation();
 
     const onFinish = (values: any) => {
         postBlackList(values);
         form.resetFields();
-        setShowModal(false)
+        setShowModal(false);
     };
 
     const handleCloseModal = () => {
-        setShowModal(false)
-        form.resetFields()
-    }
+        setShowModal(false);
+        form.resetFields();
+    };
 
     return (
         <AdminPage
@@ -41,7 +40,7 @@ const BlackListPage = () => {
             }}
         >
             <>
-                <BlackListTable setShowModal={setShowModal} isPostBlackListSuccess={isSuccess}/>
+                <BlackListTable setShowModal={setShowModal} isPostBlackListSuccess={isSuccess} />
                 <AddBlackListModal
                     showModal={showModal}
                     handleCloseModal={handleCloseModal}
@@ -51,7 +50,6 @@ const BlackListPage = () => {
             </>
         </AdminPage>
     );
-}
+};
 
 export default BlackListPage;
-

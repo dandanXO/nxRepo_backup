@@ -27,9 +27,8 @@ export interface PostTelSaleRequestQuerystring {
     phoneNo?: string;
 
     // 用户风控等级
-    riskRank?: ""|"REJECT" | "ORDINARY" | "NORMAL" | "GOOD" | "EXCELLENT";
+    riskRank?: '' | 'REJECT' | 'ORDINARY' | 'NORMAL' | 'GOOD' | 'EXCELLENT';
 
     // 狀態
     status?: number | string;
-
 }

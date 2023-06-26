@@ -1,8 +1,10 @@
-import {CustomAntFormFieldError} from "./CustomAntFormFieldError";
+import { z } from 'zod';
+
+import { CustomAntFormFieldError } from './CustomAntFormFieldError';
 
 abstract class Validation {
     private isEntityValid?: boolean;
-    private fieldsMessage:  CustomAntFormFieldError;
+    private fieldsMessage: CustomAntFormFieldError;
     validate: () => any;
 }
 
@@ -12,20 +14,19 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
     private isEntityValid?: boolean;
     private fieldsMessage: CustomAntFormFieldError;
 
-
     private schema: any;
 
-    constructor(schema: any) {
+    constructor(schema: z.infer<any>) {
         this.schema = schema;
     }
 
-    setProperties(props: ISchemaEntity) {
-        if(props) {
-            Object.keys(props).map(key => {
-                if(props[key] !== undefined) {
+    setProperties(props: ISchemaEntity): SchemaEntity<ISchemaEntity> {
+        if (props) {
+            Object.keys(props).map((key) => {
+                if (props[key] !== undefined) {
                     this[key] = props[key];
                 }
-            })
+            });
         }
         return this;
     }
@@ -34,8 +35,8 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
         isEntityValid: boolean;
         fieldsMessage: CustomAntFormFieldError;
     } {
-        let result
-        if(changedFieldName) {
+        let result;
+        if (changedFieldName) {
             // NOTE: Single Field - onFieldsChange
             result = this.schema.partial().safeParse(this);
         } else {
@@ -44,45 +45,52 @@ export class SchemaEntity<ISchemaEntity> implements Partial<Validation> {
         }
 
         if (!result.success) {
-            (result as any).error.issues.map(issue => {
+            (result as any).error.issues.map((issue) => {
                 const field = issue.path[0];
                 const errorMessage = issue.message;
                 this.fieldsMessage = {
                     ...this.fieldsMessage,
                     [field]: {
-                        validateStatus: "error",
+                        validateStatus: 'error',
                         help: errorMessage,
                         value: this[field],
                     },
-                }
-            })
+                };
+            });
         }
 
-        const errorFields = (result as any).error && (result as any).error.issues && (result as any).error.issues.map(issue => issue.path[0]) || []
+        const errorFields =
+            ((result as any).error &&
+                (result as any).error.issues &&
+                (result as any).error.issues.map((issue) => issue.path[0])) ||
+            [];
 
-        if(this.fieldsMessage) {
-            Object.keys(this.fieldsMessage).map(fieldKey => {
-                if(errorFields.indexOf(fieldKey) === -1) {
+        if (this.fieldsMessage) {
+            Object.keys(this.fieldsMessage).map((fieldKey) => {
+                if (errorFields.indexOf(fieldKey) === -1) {
                     this.fieldsMessage = {
                         ...this.fieldsMessage,
                         [fieldKey]: {
-                            validateStatus: "success",
-                            help: "",
+                            validateStatus: 'success',
+                            help: '',
                             value: this[fieldKey],
-                        }
-                    }
+                        },
+                    };
                 }
             });
-
         }
 
-        const nonValidFields = this.fieldsMessage && Object.keys(this.fieldsMessage).filter(fieldKey => (this.fieldsMessage[fieldKey] as any).validateStatus === "error") || [];
+        const nonValidFields =
+            (this.fieldsMessage &&
+                Object.keys(this.fieldsMessage).filter(
+                    (fieldKey) => (this.fieldsMessage[fieldKey] as any).validateStatus === 'error',
+                )) ||
+            [];
         this.isEntityValid = nonValidFields && nonValidFields.length === 0;
 
         return {
             isEntityValid: this.isEntityValid,
             fieldsMessage: this.fieldsMessage,
-        }
+        };
     }
 }
-

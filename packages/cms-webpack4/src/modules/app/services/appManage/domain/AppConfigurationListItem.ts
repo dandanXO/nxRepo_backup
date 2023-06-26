@@ -1,15 +1,15 @@
 export interface AppConfigurationListItem {
-    appName:	string;
+    appName: string;
     // APP名稱
 
-    createTime	: string;
+    createTime: string;
     // 創建時間
 
     id: number;
 
-    packageId:	string;
+    packageId: string;
     // packageId
 
-    updateTime:	string;
+    updateTime: string;
     // 更新時間
 }

@@ -1,6 +1,6 @@
-import { API } from "../../shared/api";
-import { GetOrderReviewListRequestQuerystring, GetOrderReviewListProps } from "./types/getOrderReviewList";
-import { PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring } from "./types/postOrderReview";
+import { API } from '../../shared/api';
+import { GetOrderReviewListProps, GetOrderReviewListRequestQuerystring } from './types/getOrderReviewList';
+import { PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring } from './types/postOrderReview';
 
 const OrderReviewApi = API.injectEndpoints({
     overrideExisting: false,
@@ -10,20 +10,17 @@ const OrderReviewApi = API.injectEndpoints({
             query: (requestBody: GetOrderReviewListRequestQuerystring) => ({
                 url: `/order-review/first`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: POST /hs/admin/order-review/first-batch 批次訂單初審
         postOrderReview: builder.mutation<PostOrderReviewErrorReponse, PostOrderReviewRequestQuerystring>({
             query: (requestBody: PostOrderReviewRequestQuerystring) => ({
                 url: `/order-review/first-batch`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
-    })
-})
-export const {
-    useLazyGetOrderReviewListQuery,
-    usePostOrderReviewMutation
-} = OrderReviewApi;
+    }),
+});
+export const { useLazyGetOrderReviewListQuery, usePostOrderReviewMutation } = OrderReviewApi;

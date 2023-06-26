@@ -1,5 +1,9 @@
-import React, { CSSProperties ,ReactNode,ReactElement} from 'react';
-const CustomLabel = (props: { style?: CSSProperties; children: string | ReactElement | ReactElement[] }) => (
+import React, { CSSProperties, ReactElement } from 'react';
+
+const CustomLabel = (props: {
+    style?: CSSProperties;
+    children: string | ReactElement | ReactElement[];
+}): JSX.Element => (
     <div
         style={{
             marginRight: 8,

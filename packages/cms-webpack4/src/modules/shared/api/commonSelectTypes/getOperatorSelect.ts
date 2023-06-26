@@ -1,5 +1,5 @@
-export type OperatorSelect =  Operator[]
+export type OperatorSelect = Operator[];
 export interface Operator {
-    id?:number;
-    name?:string;
+    id?: number;
+    name?: string;
 }

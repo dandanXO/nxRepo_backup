@@ -1,5 +1,5 @@
-import {API} from "./index";
-import { ProviderSelect } from "./commonSelectTypes/getProviderSelect";
+import { ProviderSelect } from './commonSelectTypes/getProviderSelect';
+import { API } from './index';
 
 const ProviderListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -9,12 +9,9 @@ const ProviderListApi = API.injectEndpoints({
             query: () => ({
                 url: `/order-review/provider-menu`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
-})
-export const {
-    useGetProviderListQuery,
-    useLazyGetProviderListQuery
-} = ProviderListApi;
+    }),
+});
+export const { useGetProviderListQuery, useLazyGetProviderListQuery } = ProviderListApi;

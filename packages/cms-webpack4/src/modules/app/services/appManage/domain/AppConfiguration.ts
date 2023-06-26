@@ -4,22 +4,22 @@ export interface AppConfiguration {
 
     id?: number;
 
-    idCardOcr: "ACCUAUTH" | "ADV_IQA" | "ADV_IQC" | "GCT" | "NONE";
+    idCardOcr: 'ACCUAUTH' | 'ADV_IQA' | 'ADV_IQC' | 'GCT' | 'NONE';
     // SDK實名卡廠商
 
     kycFirst: boolean;
     // 是否強制跳轉到KYC流程
 
-    liveDetect: "ACCUAUTH" | "ADVANCE" | "GCT" | "NONE";
+    liveDetect: 'ACCUAUTH' | 'ADVANCE' | 'GCT' | 'NONE';
     // SDK人臉檢測廠商
 
-    loginFirst:	boolean;
+    loginFirst: boolean;
     // 是否需要先登入
 
     packageId: string;
     // packageId
 
-    partnershipUrl:	string;
+    partnershipUrl: string;
     // 合作伙伴 H5 URL
 
     showNbfc: boolean;
@@ -34,7 +34,6 @@ export interface AppConfiguration {
     showTermAndCondition: boolean;
     // 是否显示条款页面
 
-    taxCardOcr: "ACCUAUTH" | "ADV_IQA" | "ADV_IQC" | "GCT" | "NONE";
+    taxCardOcr: 'ACCUAUTH' | 'ADV_IQA' | 'ADV_IQC' | 'GCT' | 'NONE';
     // SDK稅卡廠商
-
 }

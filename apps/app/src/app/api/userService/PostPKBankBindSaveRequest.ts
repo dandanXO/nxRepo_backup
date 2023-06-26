@@ -5,5 +5,5 @@ export interface PostPKBankBindSaveRequest {
   walletVendor: string; // 電子錢包商
   bankCode: string; // 銀行代碼
   bankName: string; // 銀行名稱
-  iban: string; // IBAN
+//   iban: string; // IBAN
 }

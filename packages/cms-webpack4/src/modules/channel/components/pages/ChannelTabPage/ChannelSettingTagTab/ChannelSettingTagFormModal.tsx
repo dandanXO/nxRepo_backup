@@ -1,8 +1,8 @@
-import {AdminFormCustomModal} from "../../../../../shared/components/common/AdminFormCustomModal";
-import {ChannelSettingTagForm} from "./ChannelSettingTagForm";
-import React from "react";
+import { FormInstance } from 'antd';
+import React from 'react';
 
-import {FormInstance} from "antd";
+import { AdminFormCustomModal } from '../../../../../shared/components/common/AdminFormCustomModal';
+import { ChannelSettingTagForm } from './ChannelSettingTagForm';
 
 export interface ChannelSettingTagFormModalProps {
     // modal
@@ -12,7 +12,7 @@ export interface ChannelSettingTagFormModalProps {
     };
     setShowModalContent: (any) => void;
     onModalOk: () => void;
-    onCloseModal:  () => void;
+    onCloseModal: () => void;
     // form
     form: FormInstance;
     formInitialValues: any;
@@ -21,13 +21,14 @@ export interface ChannelSettingTagFormModalProps {
     customAntFormFieldError: any;
 }
 
-export const ChannelSettingTagFormModal = (props: ChannelSettingTagFormModalProps) => {
-    {/*NOTICE: Create, Edit Modal*/
+export const ChannelSettingTagFormModal = (props: ChannelSettingTagFormModalProps): JSX.Element => {
+    {
+        /*NOTICE: Create, Edit Modal*/
     }
     return (
         <AdminFormCustomModal
-            title={"渠道配置标签"}
-            width={"600px"}
+            title={'渠道配置标签'}
+            width={'600px'}
             showModalContent={props.showModalContent}
             // 關閉
             setShowModalContent={props.setShowModalContent}
@@ -44,5 +45,5 @@ export const ChannelSettingTagFormModal = (props: ChannelSettingTagFormModalProp
                 customAntFormFieldError={props.customAntFormFieldError}
             />
         </AdminFormCustomModal>
-    )
-}
+    );
+};

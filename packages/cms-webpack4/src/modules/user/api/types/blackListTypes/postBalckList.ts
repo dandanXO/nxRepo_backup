@@ -1,3 +1,3 @@
 export interface PostBlackListRequestQuerystring {
-    phoneNos?: string;    
+    phoneNos?: string;
 }

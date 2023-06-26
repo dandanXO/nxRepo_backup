@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Form, Modal, Spin, Input, Radio } from "antd";
+import { Form, Input, Modal, Radio } from 'antd';
+import React from 'react';
 
 interface UserReviewModalProps {
     showModal?: boolean;
@@ -8,7 +8,7 @@ interface UserReviewModalProps {
     form?: any;
 }
 
-const UsesrReviewModal = ((props: UserReviewModalProps) => {
+const UserReviewModal = (props: UserReviewModalProps): JSX.Element => {
     const { showModal, handleCloseModal, onFinish, form } = props;
 
     const layout = {
@@ -19,19 +19,18 @@ const UsesrReviewModal = ((props: UserReviewModalProps) => {
         { label: '审核通过', value: 1 },
         { label: '审核不通过', value: 0 },
         { label: '进入黑名单', value: 2 },
-    ]
-
+    ];
 
     return (
-
-        <Modal
-            title={"添加黑名单"}
-            open={showModal}
-            onCancel={handleCloseModal}
-            onOk={form.submit}
-        >
-            <Form {...layout} form={form} name="control-hooks" onFinish={onFinish} initialValues={{ reason: "", status: 1 }}>
-                <Form.Item name="status" label="审核结果" >
+        <Modal title={'添加黑名单'} open={showModal} onCancel={handleCloseModal} onOk={form.submit}>
+            <Form
+                {...layout}
+                form={form}
+                name="control-hooks"
+                onFinish={onFinish}
+                initialValues={{ reason: '', status: 1 }}
+            >
+                <Form.Item name="status" label="审核结果">
                     <Radio.Group options={statusOptions} />
                 </Form.Item>
                 <Form.Item name="reason" label="备注" extra="提醒您，备注提交后即不可再修改">
@@ -39,8 +38,7 @@ const UsesrReviewModal = ((props: UserReviewModalProps) => {
                 </Form.Item>
             </Form>
         </Modal>
-    )
-})
+    );
+};
 
-export default UsesrReviewModal;
-
+export default UserReviewModal;

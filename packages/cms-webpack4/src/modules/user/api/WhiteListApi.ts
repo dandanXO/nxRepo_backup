@@ -1,7 +1,7 @@
-import { API } from "../../shared/api";
-import { GetWhiteListProps ,GetWhiteListRequestQuerystring } from "./types/whiteListTypes/getWhtieList";
-import { PostWhiteListRequestQuerystring } from "./types/whiteListTypes/postWhiteList";
-import { DeleteWhiteListRequestQuerystring } from "./types/whiteListTypes/deleteWhiteList";
+import { API } from '../../shared/api';
+import { DeleteWhiteListRequestQuerystring } from './types/whiteListTypes/deleteWhiteList';
+import { GetWhiteListProps, GetWhiteListRequestQuerystring } from './types/whiteListTypes/getWhtieList';
+import { PostWhiteListRequestQuerystring } from './types/whiteListTypes/postWhiteList';
 
 const WhiteListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -11,14 +11,14 @@ const WhiteListApi = API.injectEndpoints({
             query: (requestBody: GetWhiteListRequestQuerystring) => ({
                 url: `/whitelist/list`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: POST /hs/admin/whitelist 批次增加白名單
         postWhiteList: builder.mutation<null, PostWhiteListRequestQuerystring>({
             query: (requestBody: PostWhiteListRequestQuerystring) => ({
                 url: `/whitelist`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -26,7 +26,7 @@ const WhiteListApi = API.injectEndpoints({
         deleteWhiteList: builder.mutation<{}, DeleteWhiteListRequestQuerystring>({
             query: (requestBody: DeleteWhiteListRequestQuerystring) => ({
                 url: `/whitelist`,
-                method: "delete",
+                method: 'delete',
                 data: requestBody,
             }),
         }),
@@ -34,15 +34,15 @@ const WhiteListApi = API.injectEndpoints({
         deleteWhiteListAll: builder.mutation<{}, null>({
             query: () => ({
                 url: `/whitelist/all`,
-                method: "delete",
+                method: 'delete',
                 // data: requestBody,
             }),
         }),
-    })
-})
+    }),
+});
 export const {
     useLazyGetWhiteListQuery,
     usePostWhiteListMutation,
     useDeleteWhiteListMutation,
-    useDeleteWhiteListAllMutation
+    useDeleteWhiteListAllMutation,
 } = WhiteListApi;

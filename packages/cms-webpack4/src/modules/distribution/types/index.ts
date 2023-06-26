@@ -13,7 +13,7 @@ export interface PageRequest {
     sortOrder?: string;
 }
 
-export type CollectDistributionQueryRequest  = {
+export type CollectDistributionQueryRequest = {
     appName?: string;
     merchantId?: number;
     orderNo?: string;
@@ -117,14 +117,14 @@ export interface DistributionSummary {
 }
 
 export enum Stage {
-    NONE = "NONE",
-    S1 = "S1",
-    S2 = "S2",
-    S3 = "S3",
-    S4 = "S4",
-    S5 = "S5",
-    T0 = "T0",
-    T_1 = "T_1"
+    NONE = 'NONE',
+    S1 = 'S1',
+    S2 = 'S2',
+    S3 = 'S3',
+    S4 = 'S4',
+    S5 = 'S5',
+    T0 = 'T0',
+    T_1 = 'T_1',
 }
 
 export interface StageDistributionRequest {
@@ -141,4 +141,3 @@ export interface ProductNameOptions {
     productId: number;
     productName: string;
 }
-

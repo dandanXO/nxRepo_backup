@@ -98,7 +98,13 @@ module.exports = {
 
       addComponents({
           '.open-index-button': {
-              backgroundColor: 'var(--custom_bg_homepage_button)',
+              background: 'var(--custom_bg_homepage_button) !important',
+          },
+          // LoadingMask
+          '.pulseLoader':{
+            '> span ':{
+                backgroundColor:'var(--primary_main) !important',
+            }
           },
           // 拉霸
           '.slider': {

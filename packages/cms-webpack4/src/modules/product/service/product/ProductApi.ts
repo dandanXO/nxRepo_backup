@@ -1,16 +1,16 @@
-import { API } from "../../../shared/api";
-import { GetAvailableMerchantResponse } from "./response/getAvailableMerchantResponse";
-import { PostUploadProductIcon } from "./response/postUploadProductIcon";
+import { API } from '../../../shared/api';
+import { extraProductTypes } from './domain/extraProductTypes';
+import { PatchProductRequestBody } from './domain/patchProduct';
+import { ProductTypes } from './domain/productTypes';
 import { GetProductListRequestQuery } from './request/getProductListRequestQuery';
-import { PatchProductRequestBody } from "./domain/patchProduct";
-import { ProductTypes } from "./domain/productTypes";
-import { extraProductTypes } from "./domain/extraProductTypes";
+import { GetAvailableMerchantResponse } from './response/getAvailableMerchantResponse';
+import { PostUploadProductIcon } from './response/postUploadProductIcon';
 
 export interface ProductRequestParams {
-    productId: number
+    productId: number;
 }
 
-export type Product = ProductTypes & extraProductTypes
+export type Product = ProductTypes & extraProductTypes;
 export type GetProductListResponse = Product[];
 export type GetProductDetailResponse = Product;
 export type PostProductRequest = ProductTypes;
@@ -25,15 +25,15 @@ const ProductApi = API.injectEndpoints({
             query: () => ({
                 url: `/product-manage/merchant/available`,
                 // params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: GET /hs/admin/product-manage/list 产品管理列表
         getProductManageList: builder.query<GetProductListResponse, GetProductListRequestQuery>({
             query: (requestBody: GetProductListRequestQuery) => ({
                 url: `/product-manage/list`,
-                method: "get",
-                params:requestBody
+                method: 'get',
+                params: requestBody,
                 // data: requestBody
             }),
         }),
@@ -41,7 +41,7 @@ const ProductApi = API.injectEndpoints({
         postProductCreate: builder.mutation<{}, PostProductRequest>({
             query: (requestBody: PostProductRequest) => ({
                 url: `/product-manage/product`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -49,11 +49,11 @@ const ProductApi = API.injectEndpoints({
         postUploadProductICON: builder.mutation<PostUploadProductIcon, FormData>({
             query: (requestBody: FormData) => ({
                 url: `/product-manage/icon/upload`,
-                method: "post",
+                method: 'post',
                 headers: {
                     // "Content-Type": "multipart/form-data",
                     // https://www.it145.com/9/182527.html
-                    "Content-Type": "multipart/form-data;boundary=" + new Date().getTime(),
+                    'Content-Type': 'multipart/form-data;boundary=' + new Date().getTime(),
                 },
                 data: requestBody,
             }),
@@ -63,13 +63,13 @@ const ProductApi = API.injectEndpoints({
             query: (arg: ProductRequestParams) => ({
                 url: `/product-manage/product?productId=${arg.productId}`,
                 method: 'get',
-            })
+            }),
         }),
         // NOTE: PUT /hs/admin/product-manage/product/{productId} 异动产品
         putProductEdit: builder.mutation<{}, PutProductProps>({
             query: (requestBody: PutProductProps) => ({
                 url: `/product-manage/product/${requestBody.productId}`,
-                method: "put",
+                method: 'put',
                 data: requestBody,
             }),
         }),
@@ -77,7 +77,7 @@ const ProductApi = API.injectEndpoints({
         patchProductEdit: builder.mutation<{}, PatchProductProps>({
             query: (requestBody: PatchProductProps) => ({
                 url: `/product-manage/product/${requestBody.productId}`,
-                method: "patch",
+                method: 'patch',
                 data: requestBody,
             }),
         }),
@@ -85,11 +85,11 @@ const ProductApi = API.injectEndpoints({
         getProductRiskDropdown: builder.query<string[], null>({
             query: () => ({
                 url: '/product-manage/risk/dropdown',
-                method: 'get'
-            })
-        })
-    })
-})
+                method: 'get',
+            }),
+        }),
+    }),
+});
 
 export const {
     useGetAvailableMerchantListQuery,

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const {commonPlugins, commonRules} = require("./webpack_common.config");
 const {name} = require("../package.json");
 module.exports = {
@@ -34,6 +35,14 @@ module.exports = {
         }
     },
     plugins: [
+        new ESLintPlugin({
+            eslintPath: require.resolve('eslint'),
+            context: path.resolve(__dirname, '../src'),
+            overrideConfigFile: path.resolve(__dirname, '../.eslintrc'),
+            extensions: ['js', 'jsx', 'ts', 'tsx'],
+            emitWarning: true, // 發出警告而不是錯誤
+            emitError: false, // 不中斷打包過程
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: "./public/index.html"

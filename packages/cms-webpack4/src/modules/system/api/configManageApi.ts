@@ -1,5 +1,5 @@
-import { API } from "../../shared/api";
-import { GetConfigListResponse } from "./types/configManageTypes/getConfigList";
+import { API } from '../../shared/api';
+import { GetConfigListResponse } from './types/configManageTypes/getConfigList';
 
 const ConfigListApi = API.injectEndpoints({
     overrideExisting: false,
@@ -9,11 +9,9 @@ const ConfigListApi = API.injectEndpoints({
             query: () => ({
                 url: `/system-conf/group-by`,
                 params: {},
-                method: "get",
+                method: 'get',
             }),
         }),
-    })
-})
-export const {
-    useLazyGetConfigListQuery
-} = ConfigListApi;
+    }),
+});
+export const { useLazyGetConfigListQuery } = ConfigListApi;

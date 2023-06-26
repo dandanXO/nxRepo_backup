@@ -1,22 +1,23 @@
-import {PageContainer} from "@ant-design/pro-components";
-import React from "react";
-import {itemRender} from "./itemRender";
+import { PageContainer } from '@ant-design/pro-components';
+import React from 'react';
+
+import { itemRender } from './itemRender';
 
 export interface AdminTableTemplateProps {
     navigator: {
         parent: {
             path: string;
             breadcrumbName: string;
-        },
+        };
         ancestor: {
             path: string;
             breadcrumbName: string;
-        },
+        };
         self: {
             path: string;
             breadcrumbName: string;
-        }
-    },
+        };
+    };
     // modalContent?: (showModalContent: ModalContent, setShowModalContent: React.Dispatch<React.SetStateAction<ModalContent>>) => React.ReactElement;
     // Fetch
     // loading: boolean;
@@ -32,15 +33,14 @@ export interface AdminTableTemplateProps {
 }
 
 // NOTICE: [TypeScript + React: Typing Generic forwardRefs](https://fettblog.eu/typescript-react-generic-forward-refs/)
-const AdminPage = (props: AdminTableTemplateProps) => {
-
+const AdminPage = (props: AdminTableTemplateProps): JSX.Element => {
     // // NOTE: Modal
     // const [showModalContent, setShowModalContent] = useState<ModalContent>({
     //     show: false,
     //     isEdit: false,
     // });
 
-    return(
+    return (
         <PageContainer
             // loading={props.loading}
             header={{
@@ -50,7 +50,7 @@ const AdminPage = (props: AdminTableTemplateProps) => {
                     routes: [
                         {
                             // path: props.navigator.ancestor.path || "/#/",
-                            path: props.navigator.ancestor.path || "/",
+                            path: props.navigator.ancestor.path || '/',
                             breadcrumbName: props.navigator.ancestor.breadcrumbName || '首页',
                         },
                         {
@@ -67,7 +67,7 @@ const AdminPage = (props: AdminTableTemplateProps) => {
         >
             {props.children}
         </PageContainer>
-    )
-}
+    );
+};
 
 export default AdminPage;

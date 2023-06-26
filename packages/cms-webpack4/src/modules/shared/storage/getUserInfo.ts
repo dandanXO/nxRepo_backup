@@ -1,8 +1,15 @@
-import Cookies from "js-cookie";
-export const getIsSuperAdmin = () => {
-    return JSON.parse(localStorage.getItem("isSuperAdmin"))
-}
+import Cookies from 'js-cookie';
 
-export const getAdminUser = () => {
-    return JSON.parse(Cookies.get("adminUser"))
-}
+export const getIsSuperAdmin = (): unknown => {
+    return JSON.parse(localStorage.getItem('isSuperAdmin'));
+};
+
+type UserInfo = {
+    data: {
+        phoneNo: string;
+    };
+};
+
+export const getAdminUser = (): UserInfo => {
+    return JSON.parse(Cookies.get('adminUser'));
+};

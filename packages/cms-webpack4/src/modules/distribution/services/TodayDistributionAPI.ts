@@ -1,13 +1,14 @@
-import {API} from "../../shared/api";
+import { API } from '../../shared/api';
 import {
     CollectDistributionQueryRequest,
     CollectDistributionQueryResponse,
-    CollectDistributionSummaryResponse, DistributeCollectByStageResponse,
+    CollectDistributionSummaryResponse,
+    DistributeCollectByStageResponse,
     Page,
     ProductNameOptions,
     SelectedDistributionRequest,
-    StageDistributionRequest
-} from "../types";
+    StageDistributionRequest,
+} from '../types';
 
 export const TodayDistributionAPI = API.injectEndpoints({
     overrideExisting: false,
@@ -17,7 +18,7 @@ export const TodayDistributionAPI = API.injectEndpoints({
             query: () => ({
                 url: `/collect-today/distribution/summary`,
                 params: null,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTICE: REFACTOR ME : it will be moved to shared module
@@ -25,7 +26,7 @@ export const TodayDistributionAPI = API.injectEndpoints({
         getProductNames: builder.query<ProductNameOptions[], null>({
             query: () => ({
                 url: `/commons/product-names`,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: 查詢未分配的訂單
@@ -33,21 +34,21 @@ export const TodayDistributionAPI = API.injectEndpoints({
             query: (requestBody: CollectDistributionQueryRequest) => ({
                 url: `/collect-today/distribution`,
                 params: requestBody,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: 催收人員列表 - 获取催收阶段的催收员(依照催收階段)
         getCollector: builder.query<DistributeCollectByStageResponse[], null>({
             query: () => ({
                 url: `/collect-today/stage`,
-                method: "get",
+                method: 'get',
             }),
         }),
         // NOTE: 自選訂單分配
         postDistributionSelected: builder.mutation<null, SelectedDistributionRequest>({
             query: (requestBody: SelectedDistributionRequest) => ({
                 url: `/collect-today/distribution-selected`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
@@ -55,14 +56,12 @@ export const TodayDistributionAPI = API.injectEndpoints({
         postDistributionStage: builder.mutation<null, StageDistributionRequest>({
             query: (requestBody: StageDistributionRequest) => ({
                 url: `/collect-today/distribution-stage`,
-                method: "post",
+                method: 'post',
                 data: requestBody,
             }),
         }),
-
-    })
-})
-
+    }),
+});
 
 export const {
     useLazyGetSummaryQuery,
@@ -71,4 +70,4 @@ export const {
     useLazyGetCollectorQuery,
     usePostDistributionSelectedMutation,
     usePostDistributionStageMutation,
-} = TodayDistributionAPI
+} = TodayDistributionAPI;
