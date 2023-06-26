@@ -22,10 +22,11 @@ import {formatDate} from "../../../../../modules/format/formatDate";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
+  isFetching?:boolean;
 }
 const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
-  const { currentData } = props || {};
+  const { currentData ,isFetching = true} = props || {};
   const {
     status = '',
     productName = '',
@@ -64,30 +65,35 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           text={productName ?? ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
+          isFetching={isFetching}
         />
         <ListItem
           title={'Order No.'}
           text={orderNo ?? ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
+          isFetching={isFetching}
         />
         <ListItem
           title={'Status'}
           text={status ? renderStatusTag(status) : ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
+          isFetching={isFetching}
         />
         <ListItem
           title={'Apply Date'}
           text={applyDate ? formatDate(moment(applyDate)) : ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
+          isFetching={isFetching}
         />
         <ListItem
           title={'Due Date'}
           text={dueDate ? formatDate(moment(dueDate)) : ''}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
+          isFetching={isFetching}
         />
 
         {status === 'PAY_OFF' && (
@@ -96,6 +102,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
+            isFetching={isFetching}
           />
         )}
 
@@ -105,6 +112,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             text={extendDate ? formatDate(moment(extendDate)) : ''}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
+            isFetching={isFetching}
           />
         )}
 
@@ -119,6 +127,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             text={<Money money={loanAmount} />}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
+            isFetching={isFetching}
           />
         )}
 
@@ -131,6 +140,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 text={<Money money={item.value} />}
                 titleColor="text-ctext-secondary"
                 textColor="text-ctext-primary"
+                isFetching={isFetching}
               />
             );
           })}
@@ -150,6 +160,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             text={<Money money={extensionFee} />}
             titleColor="text-ctext-secondary"
             textColor="text-ctext-primary"
+            isFetching={isFetching}
           />
         )}
 
@@ -158,12 +169,14 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           text={overdueDays ?? ''}
           titleColor="text-ctext-secondary"
           textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+          isFetching={isFetching}
         />
         <ListItem
           title={'Overdue Fee'}
           text={<Money money={penaltyInterest} />}
           titleColor="text-ctext-secondary"
           textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+          isFetching={isFetching}
         />
 
         <Divider />
@@ -173,6 +186,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           text={<Money money={reductionAmount} isNagetive={true} />}
           titleColor="text-ctext-secondary"
           textColor="text-ctext-primary"
+          isFetching={isFetching}
         />
 
         <ListItem
@@ -193,6 +207,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           }
           text={<Money money={paidAmount} isNagetive={true} />}
           textColor="text-ctext-primary"
+          isFetching={isFetching}
         />
 
         <Divider />
@@ -204,6 +219,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             className="font-bold"
             titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
             textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            isFetching={isFetching}
           />
         )}
 
@@ -215,6 +231,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             titleColor="text-ctext-primary"
             textColor="text-ctext-primary"
             className="font-bold"
+            isFetching={isFetching}
           />
         )}
 

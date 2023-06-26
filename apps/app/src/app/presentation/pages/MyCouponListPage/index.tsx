@@ -11,9 +11,12 @@ import { Page } from '../../components/layouts/Page';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
+import { loadingSlice } from '../../../reduxStore/loadingSlice';
+import { useDispatch } from 'react-redux';
 
 const MyCouponListPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [listStatus, setListStatus] = useState('Usable');
 
   const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
@@ -36,6 +39,10 @@ const MyCouponListPage = () => {
       status: statusEnum[listStatus] as GetCouponListRequest['status'],
     });
   }, [listStatus]);
+
+  useEffect(() => {
+    dispatch(loadingSlice.actions.updatePageLoading(isFetching))
+  }, [isFetching]);
 
   return (
     <Page className="flex flex-col">

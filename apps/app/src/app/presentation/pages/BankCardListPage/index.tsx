@@ -10,9 +10,12 @@ import { PagePathEnum } from '../PagePathEnum';
 import BankCard from './BankCard';
 import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
 import { MdAdd } from '@react-icons/all-files/md/MdAdd';
+import { loadingSlice } from '../../../reduxStore/loadingSlice';
+import { useDispatch } from 'react-redux';
 
 const BankCardListPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
     useLazyGetBankCardListQuery({
@@ -27,6 +30,11 @@ const BankCardListPage = () => {
   useEffect(() => {
     triggerGetList(null);
   }, [isPostBankCardMainSuccess]);
+
+  useEffect(() => {
+    dispatch(loadingSlice.actions.updatePageLoading(isFetching))
+  }, [isFetching]);
+
 
   const renderNodata = () => {
     return (
