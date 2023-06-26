@@ -11,6 +11,10 @@ import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage'
 import { ChooseBindMethod } from '../../ChooseBindMethod';
 import { BankAccountForm } from './BankAccountForm';
 import { MobileWalletForm } from './MobileWalletForm';
+import ConfirmBindBankCardModal from 'apps/app/src/app/presentation/modals/ConfirmBindBankCardModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'apps/app/src/app/reduxStore';
+import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 
 const Warning = styled.div`
   //margin: 0 auto;
@@ -28,6 +32,8 @@ const Warning = styled.div`
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0 | 1>(1);
+  const dispatch = useDispatch();
+  const modalState = useSelector((state: RootState) => state.model);
 
   const changeOptionValue = (value: 0 | 1) => {
     setChooseBindMethodValue(value);
@@ -77,6 +83,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // iBanData,
     // onIBanChange,
     // onIbanBlur,
+    bankCodeList,
     confirm: confirmBankAccount,
   } = usePakistanBankAccountForm({
     bindCardDropListData: props.bindCardDropListData,
@@ -102,6 +109,8 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // iBanData,
   });
 
+  // console.log("bankAccountValue", bankAccountValue);
+  // console.log("bankCodeList", bankCodeList);
   return (
     <>
       <Outlet />
@@ -110,8 +119,10 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         changeOptionValueCallback={changeOptionValue}
         disable={props.bindCardDropListData?.showBankOption || false}
       />
-
-      <div className={'bg-cstate-info-variant text-cstate-info-main mb-4 rounded-md px-3 py-2 text-xs font-bold '}>
+      <div className={'bg-secondary-assistant text-secondary-main mb-2 rounded-md px-3 py-2 text-xs'}>
+        <span>If you wish to borrow an amount greater than 20,000 Rupees, please select “Bank Card” as your preferred payment method.</span>
+      </div>
+      <div className={'bg-cstate-info-variant text-cstate-info-main mb-4 rounded-md px-3 py-2 text-xs'}>
         <span className={'font-bold underline'}>Once added, it cannot be edited anymore. </span>
         <span>Please ensure that the account belongs to you, and that all information is correct and accurate.</span>
       </div>
@@ -132,8 +143,24 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           // onIbanBlur={onMobileWalletIbanBlur}
           isFormPending={isFormPending || false}
           confirm={() => {
-            // country
-            confirmMobileWallet();
+            const validation = confirmMobileWallet();
+            if (validation) {
+              dispatch(
+                modalSlice.actions.updatebindBankcardModal({
+                  show: true,
+                  confirm: false,
+                  paymentMethod: chooseBindMethodValue,
+                  cardholderName: '',
+                  bankName: '',
+                  bankAccNr: '',
+                  mobileWallet: true,
+                  mobileWalletAccount: mobileData.data,
+                  walletVendor: walletValue?.label ?? '',
+                  walletName: walletValue?.label ?? '',
+                  bankCode: '',
+                })
+              );
+            }
           }}
         />
       ) : (
@@ -154,13 +181,30 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             const validation = validateCommonForm(); // account Number
             const validation2 = confirmBankAccount(); // Iban & Bank Name
             // common
-            if (validation && validation2) confirm();
+            if (validation && validation2) {
+              dispatch(
+                modalSlice.actions.updatebindBankcardModal({
+                  show: true,
+                  confirm: false,
+                  paymentMethod: chooseBindMethodValue,
+                  cardholderName: props.cardholderName,
+                  bankCode: bankCodeList && bankAccountValue.data?.value !== "" && bankCodeList[bankAccountValue.data?.value],
+                  bankName: bankAccountValue.data?.label,
+                  bankAccNr: bankcardNoData.data,
+                  mobileWallet: false,
+                  mobileWalletAccount: '',
+                  walletVendor: '',
+                  walletName: '',
+                } as any)
+              );
+            }
           }}
           // iBanData={iBanData}
           // onIBanChange={onIBanChange}
           // onIbanBlur={onIbanBlur}
         />
       )}
+      {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal state={modalState.bindBankcardModal}/>}
     </>
   );
 };

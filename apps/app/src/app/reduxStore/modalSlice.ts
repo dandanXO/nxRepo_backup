@@ -25,7 +25,20 @@ export type InitialStateType = {
     text: string;
     webUrl: string;
     action: string;
-  }
+  };
+  bindBankcardModal:{
+    show: boolean;
+    confirm: boolean,
+    paymentMethod:number;
+    cardholderName:string;
+    bankName:string;
+    bankAccNr:string;
+    mobileWallet:boolean;
+    mobileWalletAccount:string;
+    walletVendor:string;
+    walletName:string;
+    bankCode:string;
+  };
 };
 
 const initialState: InitialStateType = {
@@ -51,6 +64,19 @@ const initialState: InitialStateType = {
     text: '',
     webUrl: '',
     action: '',
+  },
+  bindBankcardModal:{
+    show: false,
+    confirm: false,
+    paymentMethod: 1,
+    cardholderName: '',
+    bankName: '',
+    bankAccNr: '',
+    mobileWallet: false,
+    mobileWalletAccount: '',
+    walletVendor: '',
+    walletName:'',
+    bankCode: '',
   }
 };
 
@@ -98,6 +124,19 @@ export const modalSlice = createSlice({
       state.systemCouponModal.text = action.payload.text;
       state.systemCouponModal.webUrl = action.payload.webUrl;
       state.systemCouponModal.action = action.payload.action;
+    },
+    updatebindBankcardModal: (state, action: PayloadAction<InitialStateType['bindBankcardModal']>) => {
+        state.bindBankcardModal.show = action.payload.show;
+        state.bindBankcardModal.confirm = action.payload.confirm;
+        state.bindBankcardModal.paymentMethod = action.payload.paymentMethod;
+        state.bindBankcardModal.cardholderName = action.payload.cardholderName;
+        state.bindBankcardModal.bankName = action.payload.bankName;
+        state.bindBankcardModal.bankAccNr = action.payload.bankAccNr;
+        state.bindBankcardModal.mobileWallet = action.payload.mobileWallet;
+        state.bindBankcardModal.mobileWalletAccount = action.payload.mobileWalletAccount;
+        state.bindBankcardModal.walletVendor = action.payload.walletVendor;
+        state.bindBankcardModal.walletName = action.payload.walletName;
+        state.bindBankcardModal.bankCode = action.payload.bankCode;
     },
   },
 });

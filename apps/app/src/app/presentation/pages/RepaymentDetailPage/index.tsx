@@ -45,10 +45,10 @@ const RepaymentDetailPage = (props: any) => {
       )}
       {renderByCountry(
         {
-          [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} />,
-          [PakistanCountry.country]: <PakistanRepaymentDetailPage currentData={currentData} />,
+          [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
+          [PakistanCountry.country]: <PakistanRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
         },
-        <IndiaRepaymentDetailPage currentData={currentData} />
+        <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>
       )}
       <Outlet />
     </div>
