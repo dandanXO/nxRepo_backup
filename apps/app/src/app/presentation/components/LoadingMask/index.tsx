@@ -4,7 +4,7 @@ import { Page } from "../layouts/Page";
 const LoadingMask = () => {
 
     return (
-        <Page className="fixed z-[1000] left-0 top-0 flex justify-center items-center bg-cbg-tertiary h-screen opacity-70">
+        <div className="fixed z-[1000] left-0 top-0 flex justify-center items-center bg-cbg-tertiary h-screen opacity-70 w-full">
             {<PulseLoader
                 className="pulseLoader"
                 loading={true}
@@ -14,7 +14,7 @@ const LoadingMask = () => {
                 speedMultiplier={0.5}
                 margin={15}
             />}
-        </Page>
+        </div>
     );
 }
 

@@ -52,6 +52,8 @@ import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
 import RepamentCouponModal from  '../modals/RepamentCouponModal';
 import IBANFinderModal from  '../modals/IBANFinderModal';
 
+// NOTICE: Static Loading : Compontents
+import LoadingMask from '../components/LoadingMask';
 
 
 
@@ -135,7 +137,7 @@ import IBANFinderModal from  '../modals/IBANFinderModal';
 // );
 // const IBANFinderModal = React.lazy(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
-const LoadingMask= loadable(() => import(/* webpackChunkName: "LoadingMask" */ '../components/LoadingMask'));
+// const LoadingMask= loadable(() => import(/* webpackChunkName: "LoadingMask" */ '../components/LoadingMask'));
 
 // NOTICE: prefetch chrome, firefox cannot work
 // https://stackoverflow.com/questions/59074046/why-are-my-prefetched-scripts-not-being-used-webpack
