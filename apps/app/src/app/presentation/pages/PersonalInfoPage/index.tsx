@@ -18,6 +18,7 @@ import Card from './Card';
 import LinkItem from './LinkItem';
 import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
+import { loadingSlice } from '../../../reduxStore/loadingSlice';
 
 const PersonalInfoPage = () => {
   const navigate = useNavigate();
@@ -28,10 +29,12 @@ const PersonalInfoPage = () => {
   useEffect(() => {
     if (isInitialized) {
       dispatch(PersonalInfoPageSagaActions.system.init());
+      dispatch(loadingSlice.actions.updatePageLoading(false))
     }
     return () => {
       if (!isInitialized) {
         //
+        dispatch(loadingSlice.actions.updatePageLoading(true))
       }
     };
   }, [isInitialized]);
