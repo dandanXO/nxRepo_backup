@@ -66,7 +66,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         messageApi.success(t('common:saved'));
         if (generateLinkType !== 'NONE') {
             modalApi.confirm({
-                title: GenerateRePayLinkEnum[generateLinkType].copyLabel,
+                title: GenerateRePayLinkEnum[generateLinkType]?.copyLabel,
                 icon: null,
                 content: link,
                 okText: t('common:clickToCopy'),
@@ -120,12 +120,12 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             {
                 title: t('order:orderStatus'),
                 dataIndex: 'orderStatus',
-                render: (value) => <Tag color={OrderStatusEnum[value].color}>{t(OrderStatusEnum[value].text)}</Tag>,
+                render: (value) => <Tag color={OrderStatusEnum[value]?.color}>{t(OrderStatusEnum[value]?.text)}</Tag>,
             },
             {
                 title: t('order:orderLabel'),
                 dataIndex: 'orderLabel',
-                render: (value) => <Tag color={OrderLabelEnum[value].color}>{t(OrderLabelEnum[value].text)}</Tag>,
+                render: (value) => <Tag color={OrderLabelEnum[value]?.color}>{t(OrderLabelEnum[value]?.text)}</Tag>,
             },
             {
                 title: t('order:loanAmount', { unit: amountUnit }),
@@ -230,8 +230,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 dataIndex: 'followUpResult',
                 width: '10%',
                 render: (_, { followUpResult }) => {
-                    const followUpResultStatus = FollowUpResultEnum[followUpResult];
-                    return <div>{followUpResultStatus.text}</div>;
+                    return <div>{FollowUpResultEnum[followUpResult]?.text}</div>;
                 },
             },
             {
@@ -312,9 +311,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 title: t('common:table.contactType'),
                 key: 'contact',
                 dataIndex: 'contact',
-                render: (_, { contact }) => (
-                    <div>{EmergencyContactEnum[contact] && EmergencyContactEnum[contact].text}</div>
-                ),
+                render: (_, { contact }) => <div>{EmergencyContactEnum[contact]?.text}</div>,
             },
             { title: t('common:table.relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
             { title: t('common:table.contactName'), key: 'contactName', dataIndex: 'contactName' },
