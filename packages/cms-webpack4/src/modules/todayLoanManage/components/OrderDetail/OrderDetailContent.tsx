@@ -121,8 +121,8 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 title: t('order:orderStatus'),
                 dataIndex: 'orderStatus',
                 render: (value) => (
-                    <Tag color={CurrentDayOrderStatusEnum[value]?.color}>
-                        {t(CurrentDayOrderStatusEnum[value]?.text)}
+                    <Tag color={CurrentDayOrderStatusEnum.get(value)?.color}>
+                        {CurrentDayOrderStatusEnum.get(value)?.text}
                     </Tag>
                 ),
             },
