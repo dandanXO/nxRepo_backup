@@ -29,12 +29,10 @@ const PersonalInfoPage = () => {
   useEffect(() => {
     if (isInitialized) {
       dispatch(PersonalInfoPageSagaActions.system.init());
-      dispatch(loadingSlice.actions.updatePageLoading(false))
     }
     return () => {
       if (!isInitialized) {
         //
-        dispatch(loadingSlice.actions.updatePageLoading(true))
       }
     };
   }, [isInitialized]);
