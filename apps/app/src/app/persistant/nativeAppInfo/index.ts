@@ -112,11 +112,11 @@ export const getAppInfo = (): IAndroidAppInfo => {
           phoneNo: '',
         };
 
-        // NOTE: 不需要模擬
-        if (AppFlag.isForceToWebview) {
-          appInfo.mode = 'Webview';
-          console.log('2.包含本地端強制模擬 webview');
-        }
+        // NOTE: 暫時先不模擬
+        // if (AppFlag.isForceToWebview) {
+        //   appInfo.mode = 'Webview';
+        //   console.log('2.包含本地端強制模擬 webview');
+        // }
       } else {
         // NOTICE: 線上環境
         // NOTICE: 1.包含線上版本: DEV, 印度 v55, v56, v57 都是使用假資料, 所以無法確認以下資訊。給預設值
