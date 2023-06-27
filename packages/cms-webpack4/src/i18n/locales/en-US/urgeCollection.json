@@ -7,6 +7,11 @@
     "contactName": "Contact Name",
     "contactPerson": "Contact Person",
     "contactable": "Contactable",
+    "currentDayOrderStatus": {
+        "0": "In Repayment",
+        "1": "Complete",
+        "3": "Partial Repayment"
+    },
     "extensionLink": {
         "button": "Extension Link",
         "copyLabel": "Extension Link"
@@ -29,6 +34,10 @@
     },
     "orderNo": "Order No.",
     "outstandingBalance": "Outstanding Balance",
+    "overDueOrderStatus": {
+        "0": "Overdue",
+        "1": "Completed"
+    },
     "overdueDays": "Days Overdue",
     "partialRepay": {
         "button": "Partial Repayment",

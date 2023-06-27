@@ -21,8 +21,21 @@ export const useEnum = (
     FollowUpResultEnum: any;
     EmergencyContactEnum: any;
     GenerateRePayLinkEnum: any;
+    CurrentDayOrderStatusEnum: any;
+    OverDueOrderStatusEnum: any;
 } => {
     const { t } = useTranslation(translationNameSpase);
+
+    const CurrentDayOrderStatusEnum = new Map();
+    CurrentDayOrderStatusEnum.set('', { text: t('noRestriction') });
+    CurrentDayOrderStatusEnum.set(0, { text: t('urgeCollection:currentDayOrderStatus.0'), color: 'blue' });
+    CurrentDayOrderStatusEnum.set(1, { text: t('urgeCollection:currentDayOrderStatus.1'), color: 'green' });
+    CurrentDayOrderStatusEnum.set(3, { text: t('urgeCollection:currentDayOrderStatus.3'), color: 'volcano' });
+
+    const OverDueOrderStatusEnum = new Map();
+    OverDueOrderStatusEnum.set('', { text: t('noRestriction') });
+    OverDueOrderStatusEnum.set(0, { text: t('urgeCollection:overDueOrderStatus.0'), color: 'orange' });
+    OverDueOrderStatusEnum.set(1, { text: t('urgeCollection:overDueOrderStatus.1'), color: 'green' });
 
     const OrderLabelEnum = {
         '': { text: t('noRestriction') },
@@ -105,6 +118,8 @@ export const useEnum = (
     };
 
     return {
+        OverDueOrderStatusEnum,
+        CurrentDayOrderStatusEnum,
         OrderLabelEnum,
         OrderStatusEnum,
         CurrentDayOverDueStageEnum,

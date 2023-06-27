@@ -7,6 +7,11 @@
     "contactName": "姓名",
     "contactPerson": "跟进对象",
     "contactable": "是否可联",
+    "currentDayOrderStatus": {
+        "0": "还款中",
+        "1": "已结清",
+        "3": "部分还款"
+    },
     "extensionLink": {
         "button": "生成展期链接",
         "copyLabel": "生成展期链接"
@@ -29,6 +34,10 @@
     },
     "orderNo": "订单编号",
     "outstandingBalance": "当前帐单金额",
+    "overDueOrderStatus": {
+        "0": "逾期中",
+        "1": "已结清"
+    },
     "overdueDays": "逾期天数",
     "partialRepay": {
         "button": "发起部分还款",

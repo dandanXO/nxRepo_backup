@@ -26,6 +26,7 @@ const initSearchList = {
     merchantId: '',
     orderLabel: '',
     overdueDays: '',
+    orderStatus: '',
     phone: '',
     stage: '',
     userName: '',
@@ -73,7 +74,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
     }
 
     const { t } = useTranslation();
-    const { OrderLabelEnum, OverDueStageEnum, FollowUpResultEnum } = useEnum();
+    const { OrderLabelEnum, OverDueStageEnum, FollowUpResultEnum, OverDueOrderStatusEnum } = useEnum();
     const history = useHistory();
     const location = useLocation();
 
@@ -163,6 +164,24 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'overdueDays',
             key: 'overdueDays',
             initialValue: searchParams.overdueDays || '',
+        },
+        {
+            title: t('order:orderStatus'),
+            dataIndex: 'orderStatus',
+            key: 'orderStatus',
+            initialValue: searchParams.orderStatus || '',
+            valueType: 'select',
+            width: '100px',
+            valueEnum: OverDueOrderStatusEnum,
+            fieldProps: { allowClear: false },
+            render: (_, { orderStatus }) => {
+                const status = OverDueOrderStatusEnum.get(orderStatus);
+                return (
+                    <div style={{ textAlign: 'center' }}>
+                        {status ? <Tag color={status?.color}>{status?.text}</Tag> : '-'}
+                    </div>
+                );
+            },
         },
         {
             title: t('urgeCollection:outstandingBalance'),
