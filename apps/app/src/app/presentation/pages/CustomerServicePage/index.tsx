@@ -14,7 +14,7 @@ const CustomerServicePage = () => {
   const { app, indexPage } = useSelector((state: RootState) => state);
   return (
     <div>
-      {!isShowNavigation() && (
+      {isShowNavigation() && (
         <Navigation
             title={'Customer Service'}
             back={() => {
