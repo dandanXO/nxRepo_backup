@@ -19,6 +19,7 @@ import { CollectOverDuePhoneUrgeListItem } from '../../api/types/getCollectOverD
 const { Text } = Typography;
 
 const initSearchList = {
+    orderNo: '',
     appName: '',
     collectorId: '',
     followUpResult: '',
@@ -97,7 +98,12 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
                 );
             },
         },
-        { title: t('urgeCollection:orderNo'), dataIndex: 'orderNo', key: 'orderNo', hideInSearch: true },
+        {
+            title: t('urgeCollection:orderNo'),
+            dataIndex: 'orderNo',
+            key: 'orderNo',
+            initialValue: searchParams.orderNo || '',
+        },
         {
             title: t('urgeCollection:appName'),
             dataIndex: 'appName',

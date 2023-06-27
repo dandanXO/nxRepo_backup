@@ -19,6 +19,7 @@ import { CollectTodayPhoneUrgeListItem } from '../../api/types/getCollectTodayPh
 const { Text } = Typography;
 
 const initSearchList = {
+    orderNo: '',
     appName: '',
     collectorId: '',
     followUpResult: '',
@@ -97,7 +98,12 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
                 );
             },
         },
-        { title: t('urgeCollection:orderNo'), dataIndex: 'orderNo', key: 'orderNo', hideInSearch: true },
+        {
+            title: t('urgeCollection:orderNo'),
+            dataIndex: 'orderNo',
+            key: 'orderNo',
+            initialValue: searchParams.orderNo || '',
+        },
         {
             title: t('urgeCollection:appName'),
             dataIndex: 'appName',
