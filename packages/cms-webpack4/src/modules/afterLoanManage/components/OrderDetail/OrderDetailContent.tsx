@@ -50,7 +50,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectOverDueOrderDetailQuery({ collectId });
 
     const { t } = useTranslation();
-    const { OrderStatusEnum, OrderLabelEnum, FollowUpResultEnum, EmergencyContactEnum, GenerateRePayLinkEnum } =
+    const { OverDueOrderStatusEnum, OrderLabelEnum, FollowUpResultEnum, EmergencyContactEnum, GenerateRePayLinkEnum } =
         useEnum();
 
     const fetched = !orderInfoFetching && !adminSwitchFetching;
@@ -105,7 +105,9 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             {
                 title: t('order:orderStatus'),
                 dataIndex: 'orderStatus',
-                render: (value) => <Tag color={OrderStatusEnum[value]?.color}>{t(OrderStatusEnum[value]?.text)}</Tag>,
+                render: (value) => (
+                    <Tag color={OverDueOrderStatusEnum[value]?.color}>{t(OverDueOrderStatusEnum[value]?.text)}</Tag>
+                ),
             },
             {
                 title: t('order:orderLabel'),

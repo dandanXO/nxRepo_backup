@@ -51,7 +51,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
 
     const { t } = useTranslation();
     const {
-        OrderStatusEnum,
+        CurrentDayOrderStatusEnum,
         CurrentDayOverDueStageEnum,
         OrderLabelEnum,
         FollowUpResultEnum,
@@ -120,7 +120,11 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             {
                 title: t('order:orderStatus'),
                 dataIndex: 'orderStatus',
-                render: (value) => <Tag color={OrderStatusEnum[value]?.color}>{t(OrderStatusEnum[value]?.text)}</Tag>,
+                render: (value) => (
+                    <Tag color={CurrentDayOrderStatusEnum[value]?.color}>
+                        {t(CurrentDayOrderStatusEnum[value]?.text)}
+                    </Tag>
+                ),
             },
             {
                 title: t('order:orderLabel'),
