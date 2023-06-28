@@ -49,7 +49,7 @@ const PersonalInfoPage = () => {
   };
 
   return (
-    <Page className="flex flex-col ">
+    <Page className="flex flex-col pb-20 bg-cbg-primary">
       <div className={`my-4 flex flex-row items-center justify-center`}>
         <div className={`mr-3`}>
           <img src={UserIcon} />
@@ -89,9 +89,9 @@ const PersonalInfoPage = () => {
         {user.state === USER_AUTH_STATE.success &&
          riskControl.state!==RISK_CONTROL_STATE.order_reject &&
          riskControl.state!==RISK_CONTROL_STATE.empty_quota && (
-          <div className={`m-2 justify-end rounded-md p-4 shadow-[0_0px_8px_rgba(0,0,0,0.1)]`}>
+          <Card>
             <LoanOverViewSection state={indexPage} />
-          </div>
+          </Card>
         )}
         {/*NOTE: 顯示綁卡項目*/}
         <Card>
@@ -117,6 +117,10 @@ const PersonalInfoPage = () => {
         {/*NOTE: 五星好評*/}
 
         {/* <Card><LinkItem title={'Rate Us 5 starts'} to={''} /></Card> */}
+        <div className='font-bold text-base m-2 mt-6 '>Setting</div>
+        <Card>
+          <LinkItem title={'Delete My Account'} to={`${PagePathEnum.DeleteAccountPage}?token=${getToken()}`} />
+        </Card>
       </div>
 
       <div className="my-2 text-center">
