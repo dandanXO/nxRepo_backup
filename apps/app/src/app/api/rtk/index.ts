@@ -119,6 +119,7 @@ export const APIV3 = createApi({
         params: query,
       }),
     }),
+  
   }),
 });
 
@@ -261,6 +262,14 @@ export const API = createApi({
         url: `/user/process`,
       }),
     }),
+    // NOTE: DELTETE /api/v2/account 刪除帳號
+    deleteUser: builder.mutation<null, null>({
+      query: (requestBody: null) => ({
+          url: `/account`,
+          method: "delete",
+          data: requestBody,
+      }),
+    }),
   }),
 });
 
@@ -279,4 +288,5 @@ export const {
   usePostBankBindSaveToBangladeshMutation,
   useLazyGetBindCardDropListQuery,
   useLazyGetUserProcessQuery,
+  useDeleteUserMutation
 } = API;

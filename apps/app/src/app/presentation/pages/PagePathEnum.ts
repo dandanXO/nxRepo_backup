@@ -17,4 +17,7 @@ export enum PagePathEnum {
   DisclosureStatementPage = '/disclosure-statement',
   CustomerServicePage = '/v2/customer-service',
   IBANFinderPage = '/v2/iban-finder',
+
+  DeleteAccountPage = '/v2/delete-account',
+  AccountVerificationPage = '/v2/account-verification',
 }

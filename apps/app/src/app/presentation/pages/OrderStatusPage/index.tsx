@@ -16,7 +16,7 @@ const OrderStatusPage = (props: any) => {
 
   return (
     <div>
-      {!isShowNavigation() && (
+      {isShowNavigation() && (
         <Navigation
           title={'Order Status'}
           back={() => {

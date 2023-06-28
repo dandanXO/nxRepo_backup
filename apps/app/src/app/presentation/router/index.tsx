@@ -40,6 +40,8 @@ import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage';
 import CouponModalContentAndroidWebviewPage from  '../pages/CouponModalContentAndroidWebviewPage';
 import ApplicationProgressPage from '../pages/ApplicationProgressPage';
 import LoginPage from  '../pages/LoginPage';
+import DeleteAccountPage from  '../pages/DeleteAccountPage';
+import AccountVerificationPage from  '../pages/AccountVerificationPage';
 
 // NOTICE: Static Loading : Modal
 import RepaymentModal from  '../modals/RepaymentModal';
@@ -51,6 +53,8 @@ import APIBoundaryModal from  '../modals/APIBoundaryModal';
 import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
 import RepamentCouponModal from  '../modals/RepamentCouponModal';
 import IBANFinderModal from  '../modals/IBANFinderModal';
+import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
+
 
 // NOTICE: Static Loading : Compontents
 import LoadingMask from '../components/LoadingMask';
@@ -227,7 +231,11 @@ export const AppRouter = () => {
         </Route>
         <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
         <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
-        <Route path="/v2/quota-model" element={<QuotaModelPage />} />
+        <Route path={PagePathEnum.DeleteAccountPage} element={<DeleteAccountPage />} />
+        <Route path={PagePathEnum.AccountVerificationPage} element={<AccountVerificationPage />} >
+            <Route path={"delete-confirm-modal"} element={<DeleteAccountConfirmModal />} />
+            <Route path="quota-model" element={<QuotaModelPage />} />
+        </Route>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}

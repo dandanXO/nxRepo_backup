@@ -50,7 +50,7 @@ const BindBankCardPage = () => {
 
   return (
     <>
-      {!isShowNavigation() && (
+      {isShowNavigation() && (
         <Navigation
           title={'Add New Card'}
           back={() => {
