@@ -33,6 +33,7 @@ const PersonalInfoPage = () => {
     return () => {
       if (!isInitialized) {
         //
+        dispatch(loadingSlice.actions.updatePageLoading(true));
       }
     };
   }, [isInitialized]);

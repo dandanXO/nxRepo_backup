@@ -105,13 +105,11 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           className="mt-1 flex w-full items-center justify-center rounded-lg border border-solid border-[#aaaaaa] py-2.5 pl-5"
           onClick={() => {
             if (isRepayTypesFetching) return;
-
-            console.log('repayType.value',repayType,repayType.value)
             navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
               state: {
                 ...location.state,
                 paymentAmount: balance,
-                paymentMethod: repayType.value,
+                paymentMethod: repayType?.value ?? "",
               },
             });
           }}
