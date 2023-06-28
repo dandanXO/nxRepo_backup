@@ -46,7 +46,7 @@ const MyCouponListPage = () => {
 
   return (
     <Page className="flex flex-col">
-      {!isShowNavigation() && (
+      {isShowNavigation() && (
         <Navigation
           title={'My Coupon'}
           back={() => {

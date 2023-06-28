@@ -71,7 +71,7 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
     });
   return (
     <div>
-      {!isShowNavigation() && (
+      {isShowNavigation() && (
         <Navigation
           title={'Upload payment receipt'}
           back={() => {
