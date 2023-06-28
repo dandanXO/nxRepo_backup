@@ -30,7 +30,7 @@ const RepaymentDetailPage = (props: any) => {
 
   return (
     <div>
-      {!isShowNavigation() && (
+      {isShowNavigation() && (
         <Navigation
           title={'Payment Details'}
           back={() => {

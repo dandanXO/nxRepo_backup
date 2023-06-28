@@ -5,5 +5,5 @@ import { AppModeEnum } from '../../persistant/appModeModel';
 import { AppGlobal } from '../../persistant/nativeAppInfo';
 
 export const isShowNavigation = (): boolean => {
-  return AppGlobal.mode !== AppModeEnum.PureH5;
+  return AppGlobal.mode !== AppModeEnum.SimpleWebView;
 };
