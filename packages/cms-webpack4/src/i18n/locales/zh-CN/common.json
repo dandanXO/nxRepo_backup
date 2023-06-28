@@ -20,7 +20,6 @@
         "TurnedOff": "关机"
     },
     "function": "操作",
-    "linkCopied": "链接已复制",
     "menu": {
         "currentDayOverdueCall": "当日催收",
         "currentDayOverdueCallList": "当日电催列表",
@@ -29,7 +28,8 @@
         "overdueCollection": "逾期催收"
     },
     "message": {
-        "copySuccess": "链接已复制"
+        "copied": "已复制",
+        "linkCopied": "链接已复制"
     },
     "noRestriction": "不限",
     "none": "无",

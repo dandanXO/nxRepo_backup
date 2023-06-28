@@ -81,7 +81,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
 
     useEffect(() => {
         if (showCopied) {
-            messageApi.success(t('common:linkCopied')).then(() => setShowCopied(false));
+            messageApi.success(t('common:message.linkCopied')).then(() => setShowCopied(false));
         }
     }, [showCopied]);
 
@@ -112,7 +112,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 render: (value, { channelUrl }) => (
                     <div>
                         {value}
-                        <CopyTextIcon text={channelUrl} tooltip />
+                        <CopyTextIcon text={channelUrl} tooltip copiedMessage={t('common:message.linkCopied')} />
                     </div>
                 ),
             },
