@@ -106,6 +106,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           onClick={() => {
             if (isRepayTypesFetching) return;
 
+            console.log('repayType.value',repayType,repayType.value)
             navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
               state: {
                 ...location.state,
