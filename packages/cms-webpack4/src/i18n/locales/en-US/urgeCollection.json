@@ -9,7 +9,7 @@
     "contactable": "Contactable",
     "currentDayOrderStatus": {
         "0": "In Repayment",
-        "1": "Complete",
+        "1": "Completed",
         "3": "Partial Repayment"
     },
     "extensionLink": {
