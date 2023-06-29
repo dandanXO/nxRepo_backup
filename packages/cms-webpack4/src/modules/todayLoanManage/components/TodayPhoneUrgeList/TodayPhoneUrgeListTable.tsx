@@ -115,6 +115,7 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:orderLabel'),
             dataIndex: 'orderLabel',
             key: 'orderLabel',
+            width: '100px',
             initialValue: searchParams.orderLabel || '',
             valueType: 'select',
             valueEnum: OrderLabelEnum,
@@ -171,7 +172,7 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
             key: 'orderStatus',
             initialValue: searchParams.orderStatus || '',
             valueType: 'select',
-            width: '100px',
+            width: '150px',
             valueEnum: CurrentDayOrderStatusEnum,
             fieldProps: { allowClear: false },
             render: (_, { orderStatus }) => {

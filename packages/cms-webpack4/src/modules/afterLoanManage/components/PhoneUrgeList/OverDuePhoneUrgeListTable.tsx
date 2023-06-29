@@ -115,6 +115,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:orderLabel'),
             dataIndex: 'orderLabel',
             key: 'orderLabel',
+            width: '100px',
             initialValue: searchParams.orderLabel || '',
             valueType: 'select',
             valueEnum: OrderLabelEnum,
