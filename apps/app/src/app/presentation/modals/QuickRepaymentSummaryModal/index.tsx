@@ -146,7 +146,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
 
       <div className={'products'}>
         <div className={'text-md mb-2 font-medium '}>Your Products</div>
-        <div className={'min-h-[260px] h-[260px] overflow-scroll flex flex-col'}>
+        <div className={'min-h-[260px] h-[260px] overflow-scroll flex flex-col pb-12'}>
           {props.calculatingProducts.map((product, index) => {
             return <Product key={index} product={product} />;
           })}

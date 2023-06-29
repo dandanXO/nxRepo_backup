@@ -12,6 +12,7 @@ import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
 import { MdAdd } from '@react-icons/all-files/md/MdAdd';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch } from 'react-redux';
+import { Page } from '../../components/layouts/Page';
 
 const BankCardListPage = () => {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ const BankCardListPage = () => {
   };
 
   return (
-    <div className={`flex h-screen flex-col`}>
+    <Page>
       {isSetPrimarySuccess && <SetPrimarySuccessModal setIsSetPrimarySuccess={setIsSetPrimarySuccess} />}
       <Navigation
         title={'Bank Card'}
@@ -76,7 +77,7 @@ const BankCardListPage = () => {
       />
       {currentData && currentData.bankAccounts && currentData.bankAccounts.length !== 0 ? (
         <>
-          <div className={`grow`}>
+          <div>
             {currentData &&
               currentData.bankAccounts &&
               currentData.bankAccounts.map((card) => {
@@ -90,7 +91,7 @@ const BankCardListPage = () => {
                 );
               })}
           </div>
-          <div className={`flex flex-col items-center justify-center`}>
+          <div className={`flex flex-col items-center justify-center pt-4`}>
             <button
               onClick={() => navigate(`${PagePathEnum.BindBankcard}?token=${getToken()}`)}
               className={`mb-3 flex h-6 w-6 items-center justify-center rounded border-2 border-solid border-primary-main  text-2xl font-bold text-primary-main`}
@@ -103,7 +104,7 @@ const BankCardListPage = () => {
       ) : (
         renderNodata()
       )}
-    </div>
+    </Page>
   );
 };
 

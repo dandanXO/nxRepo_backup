@@ -22,9 +22,9 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
       failure: take(APIV3.endpoints.login.matchRejected),
     })
     if(success) {
-      if (success.payload && success.payload && success.payload.token) {
-        const token = success.data.payload.token;
-        // console.log("data.payload.token", data.payload.token)
+      if (success.payload.token) {
+        const token = success.payload.token;
+        // console.log("success.payload", success.payload.token)
         yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB));
         yield put(appSlice.actions.updateToken(token));
         yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));

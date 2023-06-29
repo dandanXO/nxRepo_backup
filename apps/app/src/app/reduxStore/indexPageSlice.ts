@@ -107,8 +107,7 @@ export const indexPageSlice = createSlice({
   initialState,
   reducers: {
     updateUserAPI: (state, action: PayloadAction<GetUserInfoServiceResponse>) => {
-      // state.user.userName = action.payload.userName;
-      state.user.userName = NativeAppInfo.phoneNo;
+      state.user.userName = action.payload.userName;
       state.user.maskUserName =
         NativeAppInfo?.phoneNo?.length >= 10
           ? NativeAppInfo?.phoneNo?.slice(0, 3) + '****' + NativeAppInfo?.phoneNo?.slice(7, 10)

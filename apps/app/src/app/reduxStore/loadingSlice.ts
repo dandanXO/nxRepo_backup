@@ -4,7 +4,7 @@ export type LoadingActionPayload = {
   show: boolean;
 };
 const initialState = {
-    show: true,
+    show: false,
 };
 export const loadingSlice = createSlice({
   name: 'pageLoading',
