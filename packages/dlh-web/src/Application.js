@@ -1296,7 +1296,7 @@ export const SentryModule = {
     // console.log("replay.recordingOptions", replay.recordingOptions);
 
     const sentryConfig = {
-      dsn: "https://c10ab5774259474a9832879e2c3bfeae@web.sijneokd.com/2",
+      dsn: "https://166d4415920643898c57ffa3b14d7c3d@sentry.xu-jie-tech.com/3",
       environment: envName,
       integrations: [new BrowserTracing(), replay],
       // Set tracesSampleRate to 1.0 to capture 100%
