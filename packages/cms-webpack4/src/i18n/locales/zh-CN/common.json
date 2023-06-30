@@ -20,6 +20,7 @@
         "TurnedOff": "关机"
     },
     "function": "操作",
+    "goBack": "返回",
     "linkCopied": "链接已复制",
     "menu": {
         "currentDayOverdueCall": "当日催收",
