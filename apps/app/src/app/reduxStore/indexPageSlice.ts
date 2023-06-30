@@ -23,6 +23,7 @@ export interface InitialState {
     state: USER_AUTH_STATE;
     userName: string;
     maskUserName: string;
+    bankCardName: string;
   };
   order: {
     state: ORDER_STATE;
@@ -69,6 +70,7 @@ const initialState: InitialState = {
     state: USER_AUTH_STATE.ready,
     userName: '',
     maskUserName: '',
+    bankCardName: '',
   },
   order: {
     state: ORDER_STATE.empty,
@@ -107,7 +109,8 @@ export const indexPageSlice = createSlice({
   initialState,
   reducers: {
     updateUserAPI: (state, action: PayloadAction<GetUserInfoServiceResponse>) => {
-      state.user.userName = action.payload.userName;
+      state.user.bankCardName = action.payload.userName;
+      state.user.userName = NativeAppInfo.phoneNo;
       state.user.maskUserName =
         NativeAppInfo?.phoneNo?.length >= 10
           ? NativeAppInfo?.phoneNo?.slice(0, 3) + '****' + NativeAppInfo?.phoneNo?.slice(7, 10)
