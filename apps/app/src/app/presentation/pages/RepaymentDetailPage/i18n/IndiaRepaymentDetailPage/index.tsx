@@ -16,6 +16,7 @@ import {useMemo} from "react";
 import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {formatDate} from "../../../../../modules/format/formatDate";
+import VipIcon from '../../../../components/images/VipIcon.svg';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -54,10 +55,10 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const renderStatusTag = (status: string) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
   };
-  // console.log("status", status === "EXTEND")
+
   return (
     <div>
-      <div className={`px-6 pt-3`}>
+      <div className={`px-6`}>
         <ListItem
           title={'Product'}
           text={productName ?? ''}
@@ -218,6 +219,19 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             className="font-bold"
             isFetching={isFetching}
           />
+        )}
+
+        {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
+            <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
+                <img src={VipIcon} alt="" />
+                <div className='ml-2'>
+                    <span className='font-bold'> VIP Benefits!</span> You'll enjoy 
+                    <span className='font-bold'> higher loan limits</span> and 
+                    <span className='font-bold'> lower interest rates</span> 
+                    with responsible repayments!
+                </div>
+
+            </div>
         )}
 
         <div className={`my-3 flex flex-row text-white`}>

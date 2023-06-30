@@ -59,6 +59,11 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
   return (
     <div>
+      {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
+          <div className={`bg-primary-assistant text-primary-main py-2 text-center text-sm`}>
+              Get more amount after instant payment
+          </div>
+      )}
       <div className={`px-6 pt-3`}>
         <ListItem
           title={'Product'}
