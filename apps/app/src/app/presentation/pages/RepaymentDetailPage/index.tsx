@@ -38,11 +38,7 @@ const RepaymentDetailPage = (props: any) => {
           }}
         />
       )}
-      {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
-        <div className={`bg-primary-assistant text-primary-main py-2 text-center text-sm`}>
-          Get more amount after instant payment
-        </div>
-      )}
+     
       {renderByCountry(
         {
           [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
