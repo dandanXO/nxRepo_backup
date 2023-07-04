@@ -23,6 +23,7 @@ class DetailModal extends Component{
             { title: props.intl.formatMessage({id :"page.search.list.mobile"}), dataIndex: 'userPhone', key: 'userPhone' },
             { title: props.intl.formatMessage({id :"page.search.list.product.name"}), dataIndex: 'productName', key: 'productName' },
             { title: props.intl.formatMessage({id :"page.table.appName"}), dataIndex: 'appName', key: 'appName' },
+            { title: props.intl.formatMessage({id :"page.table.paymentPlatformName"}), dataIndex: 'paymentPlatform', key: 'paymentPlatform' },
             {
                 title: props.intl.formatMessage({id :"page.table.start.time"}),
                 dataIndex: 'addTime',
