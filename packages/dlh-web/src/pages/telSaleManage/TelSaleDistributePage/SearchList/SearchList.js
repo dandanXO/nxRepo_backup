@@ -47,6 +47,7 @@ class SearchList extends Component {
                                             <Option value={'1'}><FormattedMessage id="page.table.not.verified" /></Option>
                                             <Option value={'2'}><FormattedMessage id="page.table.verified" /></Option>
                                             <Option value={'3'}><FormattedMessage id="page.table.loaning" /></Option>
+                                            <Option value={'4'}><FormattedMessage id="page.table.paid.off.without.re.borrowing" /></Option>
                                         </Select>
                                     )
                                 }

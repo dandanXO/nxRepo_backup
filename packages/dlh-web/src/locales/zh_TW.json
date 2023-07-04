@@ -702,6 +702,7 @@
   "page.table.verified": "已認證完",
   "page.table.not.verified": "未認證完",
   "page.table.loaning": "借款中",
+  "page.table.paid.off.without.re.borrowing": "結清未復借",
   "page.table.not.borrowed": "未借款",
   "page.table.not.certified": "未認證完",
   "page.table.assigneda.total": "分配訂單總數",

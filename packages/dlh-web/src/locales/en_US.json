@@ -751,6 +751,7 @@
   "page.table.verified": "Verified",
   "page.table.not.verified": "Not Verified",
   "page.table.loaning": "Loaning",
+  "page.table.paid.off.without.re.borrowing": "Paid off without re-borrowing",
   "page.table.not.borrowed": "Not Borrowed",
   "page.table.assigneda.total": "Assigned Total",
   "page.table.assigned.new.guest": "Assigned New Guest",
