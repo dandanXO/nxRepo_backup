@@ -76,13 +76,11 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           disabled={radioValue === 'balance'}
           onChange={(event: any) => {
             let value = event.target.value;
-            console.log("value", value);
             // value = value.replace(`${environment.currency}`, '').trim();
             value = value.replace(`P`, '').trim();
             value = value.replace(`K`, '').trim();
             value = value.replace(`R`, '').trim();
-            console.log('value------------------',value,environment.currency)
-
+            
             if (value === '' || Number(value) === 0) {
               setBalanceValueErrorMessage('This field cannot be left blank or 0.');
             } else if (!new RegExp('^[0-9]*$').test(value)) {
@@ -93,10 +91,6 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             } else {
               setBalanceValueErrorMessage('');
             }
-            // setBalanceValue(value);
-            // if (!value.includes(environment.currency)) {
-             
-            // }
             setBalanceValue(`${environment.currency} ${value}`);
           }}
           onBlur={() => {}}
@@ -162,7 +156,11 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             radioValue !== 'custom' ? (
               <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />
             ) : (
-              <Money money={balanceValue.replace(`${environment.currency}`, '').trim()} />
+              <Money money={
+                isNaN(balanceValue.replace(`${environment.currency}`, '').trim()) 
+                ? 0 
+                : balanceValue.replace(`${environment.currency}`, '').trim()
+            } />
             )
           }
         />
