@@ -49,7 +49,6 @@ export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBa
                     mobileWallet: false,
                     mobileWalletAccount: '',
                     walletVendor: '',
-                    walletName: '',
                     bankCode: '',
                 }))
                 Modal.alert({
