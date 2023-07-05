@@ -76,8 +76,12 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           disabled={radioValue === 'balance'}
           onChange={(event: any) => {
             let value = event.target.value;
-            // console.log("value", value);
-            value = value.replace(`${environment.currency}`, '').trim();
+            console.log("value", value);
+            // value = value.replace(`${environment.currency}`, '').trim();
+            value = value.replace(`P`, '').trim();
+            value = value.replace(`K`, '').trim();
+            value = value.replace(`R`, '').trim();
+            console.log('value------------------',value,environment.currency)
 
             if (value === '' || Number(value) === 0) {
               setBalanceValueErrorMessage('This field cannot be left blank or 0.');
@@ -90,9 +94,10 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
               setBalanceValueErrorMessage('');
             }
             // setBalanceValue(value);
-            if (!value.includes(environment.currency)) {
-              setBalanceValue(`${environment.currency} ${value}`);
-            }
+            // if (!value.includes(environment.currency)) {
+             
+            // }
+            setBalanceValue(`${environment.currency} ${value}`);
           }}
           onBlur={() => {}}
           errorMessage={balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage}
