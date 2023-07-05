@@ -202,8 +202,8 @@ export default (): JSX.Element => {
                 }}
                 toolBarRender={() => []}
                 columns={columns}
-                // @ts-ignore
                 value={dataSource}
+                // @ts-ignore
                 onChange={setDataSource}
                 editable={{
                     type: 'multiple',

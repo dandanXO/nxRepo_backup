@@ -105,12 +105,14 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'orderNo',
             key: 'orderNo',
             initialValue: searchParams.orderNo || '',
+            render: (_, { orderNo }) => <CopyText text={orderNo} />,
         },
         {
             title: t('urgeCollection:appName'),
             dataIndex: 'appName',
             key: 'appName',
             initialValue: searchParams.appName || '',
+            render: (_, { appName }) => <CopyText text={appName} />,
         },
         {
             title: t('urgeCollection:orderLabel'),
@@ -135,6 +137,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'userName',
             key: 'userName',
             initialValue: searchParams.userName || '',
+            render: (_, { userName }) => <CopyText text={userName} />,
         },
         {
             title: t('urgeCollection:phone'),
