@@ -27,7 +27,7 @@ const initSearchList = {
     merchantId: '',
     orderLabel: '',
     overdueDays: '',
-    orderStatus: '',
+    orderStatus: 0,
     phone: '',
     stage: '',
     userName: '',
@@ -105,14 +105,12 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'orderNo',
             key: 'orderNo',
             initialValue: searchParams.orderNo || '',
-            render: (_, { orderNo }) => <CopyText text={orderNo} />,
         },
         {
             title: t('urgeCollection:appName'),
             dataIndex: 'appName',
             key: 'appName',
             initialValue: searchParams.appName || '',
-            render: (_, { appName }) => <CopyText text={appName} />,
         },
         {
             title: t('urgeCollection:orderLabel'),
@@ -137,7 +135,6 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'userName',
             key: 'userName',
             initialValue: searchParams.userName || '',
-            render: (_, { userName }) => <CopyText text={userName} />,
         },
         {
             title: t('urgeCollection:phone'),
@@ -169,6 +166,24 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'overdueDays',
             key: 'overdueDays',
             initialValue: searchParams.overdueDays || '',
+        },
+        {
+            title: t('order:orderStatus'),
+            dataIndex: 'orderStatus',
+            key: 'orderStatus',
+            initialValue: searchParams.orderStatus || 0,
+            valueType: 'select',
+            width: '100px',
+            valueEnum: OverDueOrderStatusEnum,
+            fieldProps: { allowClear: false },
+            render: (_, { orderStatus }) => {
+                const status = OverDueOrderStatusEnum.get(orderStatus);
+                return (
+                    <div style={{ textAlign: 'center' }}>
+                        {status ? <Tag color={status?.color}>{status?.text}</Tag> : '-'}
+                    </div>
+                );
+            },
         },
         {
             title: t('urgeCollection:outstandingBalance'),

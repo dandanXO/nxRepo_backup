@@ -456,9 +456,12 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             <Tabs
                 items={tabsItems}
                 tabBarExtraContent={
-                    <Button type="primary" onClick={() => setShowModal(true)}>
-                        {t('urgeCollection:addUrge')}
-                    </Button>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <Button type="primary" onClick={() => setShowModal(true)}>
+                            {t('urgeCollection:addUrge')}
+                        </Button>
+                        <Button onClick={() => history.back()}>{t('common:goBack')}</Button>
+                    </div>
                 }
             />
         );

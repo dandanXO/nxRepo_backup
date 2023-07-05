@@ -20,6 +20,8 @@
         "TurnedOff": "Turned Off"
     },
     "function": "Function",
+    "goBack": "Back",
+    "linkCopied": "Copied",
     "menu": {
         "currentDayOverdueCall": "CurrentDay Collection",
         "currentDayOverdueCallList": "CurrentDay Overdue Call List",
