@@ -17,6 +17,7 @@ import { useEnum } from '../../../shared/constants/useEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { formatPrice } from '../../../shared/utils/format/formatPrice';
 import {
+    useGetCollectTodayGenerateLinkSwitchQuery,
     useGetCollectTodayOrderDetailQuery,
     useGetCollectTodayUserDetailQuery,
     useLazyGetCollectTodayCollectRecordQuery,
@@ -48,6 +49,8 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
 
     const { data: adminSwitch, isFetching: adminSwitchFetching } = useGetAdminSwitchQuery(null);
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({ collectId });
+    const { data: generateLinkSwitch, isFetching: generateLinkSwitchFetching } =
+        useGetCollectTodayGenerateLinkSwitchQuery({ todayId: collectId });
 
     const { t } = useTranslation();
     const {
@@ -59,7 +62,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         GenerateRePayLinkEnum,
     } = useEnum('urgeCollection');
 
-    const fetched = !orderInfoFetching && !adminSwitchFetching;
+    const fetched = !orderInfoFetching && !adminSwitchFetching && !generateLinkSwitchFetching;
 
     const onUrgeRecordAdded = (generateLinkType, link) => {
         setShowModal(false);
@@ -478,6 +481,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 amountDue={orderInfo?.amountDue}
                 handleCloseModal={() => setShowModal(false)}
                 onAdded={onUrgeRecordAdded}
+                generateLinkSwitch={generateLinkSwitch}
             />
             <Tab />
         </React.Fragment>

@@ -88,6 +88,16 @@ const CollectOverDueApi = API.injectEndpoints({
                 };
             },
         }),
+        // [GET] 催收端还款链接开关
+        getCollectOverDueGenerateLinkSwitch: builder.query<boolean, { overdueId: string }>({
+            query: (requestBody: { overdueId: string }) => {
+                return {
+                    url: `/orderOverdue/repayment-link-is-prohibited`,
+                    params: requestBody,
+                    method: 'get',
+                };
+            },
+        }),
     }),
 });
 
@@ -98,4 +108,5 @@ export const {
     useLazyGetCollectOverDueCollectRecordQuery,
     useLazyGetCollectOverDueContactListQuery,
     useLazyGetCollectOverDueSMSLogQuery,
+    useGetCollectOverDueGenerateLinkSwitchQuery,
 } = CollectOverDueApi;
