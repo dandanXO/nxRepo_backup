@@ -27,17 +27,6 @@ class SearchList extends Component {
                 <Form onSubmit={this.submit}>
                     <Row>
                         <Col xs={24} sm={12} lg={8}>
-                          <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.tel.sale.createTime" })}>
-                            {
-                              getFieldDecorator('time', {
-                                initialValue: ['', '']
-                              })(
-                                <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]} />
-                              )
-                            }
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} lg={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.mobile" })}>
                                 {
                                     getFieldDecorator('phoneNo', {
@@ -65,6 +54,17 @@ class SearchList extends Component {
                                     )
                                 }
                             </Form.Item>
+                        </Col>
+                        <Col xs={24} sm={12} lg={8}>
+                          <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.tel.sale.createTime" })}>
+                            {
+                              getFieldDecorator('time', {
+                                initialValue: ['', '']
+                              })(
+                                <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]} />
+                              )
+                            }
+                          </Form.Item>
                         </Col>
                         <Col xs={{offset:0, span:24}} sm={{offset: 16, span:8}} lg={{offset: 22, span:2}}>
                           <Form.Item style={{ textAlign: 'left'}}>
