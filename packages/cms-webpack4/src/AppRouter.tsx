@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 
-import AfterLoanManageRoutes from './modules/afterLoanManage/routes/AfterLoanManageRoutes';
+import { AfterLoanManageRoutes } from './modules/afterLoanManage/routes';
 import { AppManagePage } from './modules/app/components/pages/AppManagePage';
 import { ChannelTabPage } from './modules/channel/components/pages/ChannelTabPage';
 import { OverdueDistributionPage } from './modules/distribution/pages/OverdueDistributionPage';
@@ -36,6 +36,7 @@ import NewCustomersDailyConversionRatesPage from './modules/statistics/component
 import ReloanStatisticsPage from './modules/statistics/components/pages/ReloanStatisticsPage';
 import ConfigManagePage from './modules/system/components/pages/ConfigManagePage';
 import LoginAccountManagePage from './modules/system/components/pages/LoginAccountManage';
+import { TodayLoanManageRoutes } from './modules/todayLoanManage/routes';
 import BlackListPage from './modules/user/components/pages/BlackListPage';
 import UserInfoPage from './modules/user/components/pages/UserInfoPage';
 import UserPage from './modules/user/components/pages/UserPage';
@@ -155,6 +156,9 @@ export const AppRouter = (): JSX.Element => {
 
                 {/*逾期催收*/}
                 <AfterLoanManageRoutes />
+
+                {/*當日催收*/}
+                <TodayLoanManageRoutes />
             </Router>
         </ConfigProvider>
     );

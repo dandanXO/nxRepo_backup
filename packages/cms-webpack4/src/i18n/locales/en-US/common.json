@@ -25,7 +25,7 @@
         "homePage": "Home",
         "currentDayOverdueCall": "CurrentDay Collection",
         "currentDayOverdueCallList": "CurrentDay Overdue Call List",
-        "currentDayCollection": "CurrentDay Collection Report",
+        "currentDayCollectionReport": "CurrentDay Collection Report",
         "overdueCollection": "Overdue Collection",
         "overdueCallList": "Overdue Call List",
         "overdueCollectionReport": "Overdue Collection Report"
