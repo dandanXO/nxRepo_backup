@@ -1,0 +1,76 @@
+{
+    "breadcrumb": {
+        "orderDetails": "订单详情",
+        "overDueDetails": "订单详情"
+    },
+    "clickToCopy": "点击复制",
+    "confirm": "确定",
+    "contact": {
+        "borrower": "本人",
+        "emergency": "紧急联络人{{count}}",
+        "list": "通讯录"
+    },
+    "followUpResultStatus": {
+        "BadAttitude": "态度恶劣",
+        "FinancialDifficulties": "财务困难",
+        "InvalidPhoneNumber": "无效号码",
+        "Missed": "未接",
+        "Other": "其他",
+        "Promise": "PTP",
+        "TurnedOff": "关机"
+    },
+    "function": "操作",
+    "goBack": "返回",
+    "menu": {
+        "homePage": "首页",
+        "currentDayOverdueCall": "当日催收",
+        "currentDayOverdueCallList": "当日电催列表",
+        "currentDayCollection": "当日催收明细",
+        "overdueCollection": "逾期催收",
+        "overdueCallList": "逾期电催列表",
+        "overdueCollectionReport": "逾期催收明细"
+    },
+    "message": {
+        "copied": "已复制",
+        "linkCopied": "链接已复制"
+    },
+    "noRestriction": "不限",
+    "none": "无",
+    "orderLabelStatus": {
+        "extension": "展期",
+        "newLoan": "首贷",
+        "reLoan": "复贷"
+    },
+    "orderStatus": {
+        "completed": "已完成",
+        "overDue": "已逾期"
+    },
+    "pagination": {
+        "itemPerPage": " / 页",
+        "showingRange": "共 {{total}} 笔"
+    },
+    "placeholder": {
+        "select": "选择"
+    },
+    "saved": "已储存",
+    "search": "查询",
+    "tab": {
+        "contractList": "通讯录",
+        "orderInfo": "订单信息",
+        "smsMessage": "手机短信",
+        "userInfo": "用户信息"
+    },
+    "table": {
+        "contactName": "联络人姓名",
+        "contactPhone": "联络人电话",
+        "contactType": "联络人名称",
+        "lastAddedTime": "最后添加时间",
+        "phone": "手机号",
+        "relationShip": "与本人关系",
+        "sendPhoneNumber": "发送号码",
+        "sendTime": "发送时间",
+        "smsContent": "内容",
+        "smsSendType": "发送类型",
+        "uploadTime": "上传时间"
+    }
+}

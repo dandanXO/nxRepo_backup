@@ -1,9 +1,16 @@
 import { ConfigProvider } from 'antd';
+// eslint-disable-next-line camelcase
+import en_US from 'antd/es/locale/en_US';
+// eslint-disable-next-line camelcase
+import zh_CN from 'antd/es/locale/zh_CN';
 import { createHashHistory } from 'history';
+import i18next from 'i18next';
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 
+import AfterLoanManageRoutes from './modules/afterLoanManage/routes/AfterLoanManageRoutes';
 import { AppManagePage } from './modules/app/components/pages/AppManagePage';
 import { ChannelTabPage } from './modules/channel/components/pages/ChannelTabPage';
 import { OverdueDistributionPage } from './modules/distribution/pages/OverdueDistributionPage';
@@ -37,6 +44,13 @@ import UserReviewPage from './modules/user/components/pages/UserReviewPage';
 import UserReviewRecordPage from './modules/user/components/pages/UserReviewRecordPage';
 import WhiteListPage from './modules/user/components/pages/WhiteListPage';
 
+const langMap = {
+    // eslint-disable-next-line camelcase
+    'zh-CN': zh_CN,
+    // eslint-disable-next-line camelcase
+    'en-US': en_US,
+};
+
 const Basename = window['__POWERED_BY_QIANKUN__'] ? '/cms' : '/';
 
 const history = createHashHistory({
@@ -45,6 +59,8 @@ const history = createHashHistory({
 
 export const AppRouter = (): JSX.Element => {
     const { pathname, previousPathname } = useSelector(selectSearchParams);
+    // eslint-disable-next-line no-empty-pattern
+    const {} = useTranslation();
     const dispatch = useDispatch();
     useEffect(() => {
         // Listen for changes to the current location.
@@ -60,7 +76,7 @@ export const AppRouter = (): JSX.Element => {
     });
 
     return (
-        <ConfigProvider prefixCls="ant4">
+        <ConfigProvider prefixCls="ant4" locale={langMap[i18next.language]}>
             {/* NOTICE: [Its instance type 'BrowserRouter' is not a valid JSX element](https://stackoverflow.com/questions/71843747/its-instance-type-browserrouter-is-not-a-valid-jsx-element)*/}
             {/*<Router basename={window["__POWERED_BY_QIANKUN__"] ? '/cms' : '/'}>*/}
             {/*// @ts-ignore*/}
@@ -136,6 +152,9 @@ export const AppRouter = (): JSX.Element => {
                     {/*// @ts-ignore*/}
                     <Route path={'/reloanStatistics'} component={ReloanStatisticsPage} />
                 </Switch>
+
+                {/*逾期催收*/}
+                <AfterLoanManageRoutes />
             </Router>
         </ConfigProvider>
     );

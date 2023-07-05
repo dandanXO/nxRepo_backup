@@ -1,0 +1,76 @@
+{
+    "breadcrumb": {
+        "orderDetails": "Order Details",
+        "overDueDetails": "Overdue Details"
+    },
+    "clickToCopy": "Click to copy",
+    "confirm": "Confirm",
+    "contact": {
+        "borrower": "Borrower",
+        "emergency": "Emergency Contact{{count}}",
+        "list": "Contact List"
+    },
+    "followUpResultStatus": {
+        "BadAttitude": "Bad Attitude",
+        "FinancialDifficulties": "Financial Difficulties",
+        "InvalidPhoneNumber": "Invalid Phone Number",
+        "Missed": "Missed",
+        "Other": "Other",
+        "Promise": "PTP",
+        "TurnedOff": "Turned Off"
+    },
+    "function": "Function",
+    "goBack": "Back",
+    "menu": {
+        "homePage": "Home",
+        "currentDayOverdueCall": "CurrentDay Collection",
+        "currentDayOverdueCallList": "CurrentDay Overdue Call List",
+        "currentDayCollection": "CurrentDay Collection Report",
+        "overdueCollection": "Overdue Collection",
+        "overdueCallList": "Overdue Call List",
+        "overdueCollectionReport": "Overdue Collection Report"
+    },
+    "message": {
+        "copied": "Copied",
+        "linkCopied": "Link Copied"
+    },
+    "noRestriction": "Select All",
+    "none": "None",
+    "orderLabelStatus": {
+        "extension": "Extension",
+        "newLoan": "New Loan",
+        "reLoan": "Re-Loan"
+    },
+    "orderStatus": {
+        "completed": "Complete",
+        "overDue": "Overdue"
+    },
+    "pagination": {
+        "itemPerPage": " / Page",
+        "showingRange": "Total {{total}} Record(s)"
+    },
+    "placeholder": {
+        "select": "Select"
+    },
+    "saved": "Saved",
+    "search": "Search",
+    "tab": {
+        "contractList": "Contact List",
+        "orderInfo": "Order Information",
+        "smsMessage": "SMS Message",
+        "userInfo": "User Info"
+    },
+    "table": {
+        "contactName": "Contact Name",
+        "contactPhone": "Contact Number",
+        "contactType": "Contact",
+        "lastAddedTime": "Last Added Time",
+        "phone": "Mobile Number",
+        "relationShip": "Relationship",
+        "sendPhoneNumber": "Phone Number",
+        "sendTime": "Sending Time",
+        "smsContent": "SMS Content",
+        "smsSendType": "Sending Type",
+        "uploadTime": "Upload Time"
+    }
+}

@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+import Cookies from 'js-cookie';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -25,11 +27,20 @@ function render(props) {
     // console.log("2");
 }
 
+const languageCodeMap = {
+    en: 'en-US',
+    cn: 'zh-CN',
+};
+
 function storeTest(props) {
-    props.onGlobalStateChange(
-        (value, prev) => console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev),
-        true,
-    );
+    props.onGlobalStateChange((value, prev) => {
+        console.log(`[onGlobalStateChange - ${props.name}]:`, value, prev);
+
+        const userLang = Cookies.get('intllocale');
+        i18next.changeLanguage(languageCodeMap[userLang]).then(() => {
+            console.log(`cms language change to ${languageCodeMap[userLang]}`);
+        });
+    }, true);
     props.setGlobalState({
         ignore: props.name,
         user: {
@@ -49,18 +60,21 @@ export async function bootstrap(): Promise<void> {
     console.log('[cms-webpack4] react app bootstraped');
 }
 
-export async function update(props: Record<any, any>): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export async function update(props): Promise<void> {
     console.log('[cms-webpack4] update props', props);
 }
 
-export async function mount(props: Record<any, any>): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export async function mount(props): Promise<void> {
     console.log('[cms-webpack4] mount props', props);
     storeTest(props);
     render(props);
 }
 
 // [Updates to Client Rendering APIs](https://zh-hant.reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html#updates-to-client-rendering-apis)
-export async function unmount(props: Record<any, any>): Promise<void> {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export async function unmount(props): Promise<void> {
     console.log('[cms-webpack4] unmount props', props);
     // NOTICE: 17
     const { container } = props;
