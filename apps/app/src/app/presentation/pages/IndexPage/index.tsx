@@ -84,20 +84,35 @@ export type PageState = {
 
 const IndexPage = () => {
   const dispatch = useDispatch();
+  const [webViewVisible, setWebViewVisible] = useState(false);
 
-  // NOTE: isInitialized
-  const isInitialized = useSelector((state: RootState) => state.app.isInit);
   useEffect(() => {
-    if (isInitialized) {
-      dispatch(IndexPageSagaAction.user.viewIndexPageAction());
-    }
-    return () => {
-      if (!isInitialized) {
-        //
+    dispatch(IndexPageSagaAction.user.viewIndexPageAction());
+  }, [dispatch]);
+
+  useEffect(() => {
+    // 監聽驗證完到首頁，重新取得index資料
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        setWebViewVisible(true);
+      } else {
+        setWebViewVisible(false);
       }
     };
-  }, [isInitialized]);
 
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (webViewVisible) {
+      dispatch(IndexPageSagaAction.user.viewIndexPageAction());
+    }
+  }, [webViewVisible]);
+
+ 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
 
   // NOTE: unknow | UserAuthing | UserRejected
@@ -122,7 +137,6 @@ const IndexPage = () => {
   // && !(indexPageState.riskControl.state === RISK_CONTROL_STATE.valid);
 
   const onClickReacquireCredit = useCallback(() => {
-    console.log('onClickReacquireCredit--------')
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [disableClickReacquireCredit]);
 

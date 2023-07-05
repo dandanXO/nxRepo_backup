@@ -9,10 +9,9 @@ export function* userPersonalInfoSaga(action: any) {
     try {
         yield put(loadingSlice.actions.updatePageLoading(true));
 
-        yield all([
-            call(systemCallGetUserInfoSaga),
-            call(systemGetIndexPageSaga),
-        ]);
+        yield call(systemCallGetUserInfoSaga);
+        yield call(systemGetIndexPageSaga);
+
 
     } catch (error) {
         yield catchSagaError(error);
