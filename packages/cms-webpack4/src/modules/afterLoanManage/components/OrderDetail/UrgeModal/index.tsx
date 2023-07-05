@@ -118,6 +118,7 @@ export const UrgeModal = ({
     const PTPTime = () => (
         <Item
             {...layout}
+            tooltip={t('urgeCollection:ptpTimeTooltip')}
             name="ptpTime"
             label={t('urgeCollection:ptpTime')}
             required

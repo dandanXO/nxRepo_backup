@@ -6,15 +6,16 @@ import { useTranslation } from 'react-i18next';
 
 interface ICopyTextIconProps {
     text: string;
+    copiedMessage?: string;
     tooltip?: boolean;
 }
 
-export const CopyTextIcon = ({ text, tooltip }: ICopyTextIconProps): JSX.Element => {
+export const CopyTextIcon = ({ text, tooltip, copiedMessage = '' }: ICopyTextIconProps): JSX.Element => {
     const [messageApi, contextHolder] = message.useMessage();
     const { t } = useTranslation();
 
     const handleCopy = () => {
-        messageApi.success(t('message.copySuccess'));
+        messageApi.success(copiedMessage || t('common:message.copied'));
     };
 
     const Copy = () => (

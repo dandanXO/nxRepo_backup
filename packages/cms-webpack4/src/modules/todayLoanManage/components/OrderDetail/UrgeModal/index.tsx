@@ -40,8 +40,8 @@ export const UrgeModal = ({
     const formSchema = urgeCollectRecordSchema({ partialMoneyMax: amountDue });
     const [postTodayPhoneUrgeRecord, { isLoading }] = usePostCollectTodayPhoneUrgeRecordMutation();
     const { EmergencyContactEnum, FollowUpResultEnum, GenerateRePayLinkEnum } = useEnum();
-
     const [form] = Form.useForm();
+    const [modal, contextHolder] = Modal.useModal();
 
     const onOk = () => {
         form.submit();
@@ -63,6 +63,13 @@ export const UrgeModal = ({
             .then((response) => {
                 onAdded(requestBody.generateLink, response.remark);
                 form.resetFields();
+            })
+            .catch((error) => {
+                if (error?.data?.message) {
+                    modal.confirm({
+                        content: error.data.message,
+                    });
+                }
             });
     };
 
@@ -111,6 +118,7 @@ export const UrgeModal = ({
     const PTPTime = () => (
         <Item
             {...layout}
+            tooltip={t('urgeCollection:ptpTimeTooltip')}
             name="ptpTime"
             label={t('urgeCollection:ptpTime')}
             required
@@ -135,6 +143,7 @@ export const UrgeModal = ({
                 cancelButtonProps={{ disabled: isLoading }}
                 okText={t('common:confirm')}
             >
+                {contextHolder}
                 <Form
                     disabled={isLoading}
                     form={form}
