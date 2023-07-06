@@ -17,6 +17,11 @@ const searchSpan = {
     xxl: 8,
 };
 
+const searchFormLayout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+};
+
 const ReportTable = (): JSX.Element => {
     const [loginLogsModal, setLoginLogsdModal] = useState<{ open: boolean; collectorId: string }>({
         open: false,
@@ -164,6 +169,7 @@ const ReportTable = (): JSX.Element => {
                 columns={columns}
                 rowKey="collectorId"
                 dataSource={mockData}
+                form={{ ...searchFormLayout }}
                 search={{
                     span: searchSpan,
                     labelWidth: 'auto',
