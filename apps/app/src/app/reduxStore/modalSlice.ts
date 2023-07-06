@@ -43,6 +43,9 @@ export type InitialStateType = {
   },
   starRatingSuccessModal: {
     show: boolean;
+  },
+  noRecommendProductModal:{
+    show: boolean;
   }
 };
 
@@ -86,6 +89,9 @@ const initialState: InitialStateType = {
     show: false
   },
   starRatingSuccessModal: {
+    show: false
+  },
+  noRecommendProductModal:{
     show: false
   }
 };
@@ -152,6 +158,9 @@ export const modalSlice = createSlice({
     },
     updateStarRatingSuccessModal: (state, action: PayloadAction<InitialStateType['starRatingSuccessModal']>) => {
         state.starRatingSuccessModal.show = action.payload.show;
+    },
+    updateNoRecommendProductModal: (state, action: PayloadAction<InitialStateType['noRecommendProductModal']>) => {
+        state.noRecommendProductModal.show = action.payload.show;
     },
   },
 });
