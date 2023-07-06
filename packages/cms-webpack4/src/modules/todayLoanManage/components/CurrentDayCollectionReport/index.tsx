@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import AdminPage from '../../../shared/components/common/AdminPage';
+import ReportTable from './ReportTable';
 
 export const CurrentDayCollectionReport = (): JSX.Element => {
     const { t } = useTranslation();
@@ -22,7 +23,7 @@ export const CurrentDayCollectionReport = (): JSX.Element => {
                 },
             }}
         >
-            <div>RRR</div>
+            <ReportTable />
         </AdminPage>
     );
 };
