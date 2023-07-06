@@ -2,26 +2,26 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
-const argv = yargs(hideBin(process.argv)).argv
+const argv = yargs(hideBin(process.argv)).argv;
 // console.log("argv.env", argv.env);
 const countryAbbreviation = argv.env;
 const countryMapping = {
-    "IN": "India",
-    "PK": "Pakistan",
-    "BD": "Bangladesh",
-}
+    IN: 'India',
+    PK: 'Pakistan',
+    BD: 'Bangladesh',
+};
 const country = countryMapping[countryAbbreviation];
-console.log("country", country);
+console.log('country', country);
 
 const commonRules = [
     {
         test: /\.(tsx|ts)$/,
-        use: "ts-loader"
+        use: 'ts-loader',
     },
     {
         test: /\.js|jsx$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
+        exclude: [/node_modules/, /.json/],
+        loader: 'babel-loader',
     },
     {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -29,26 +29,27 @@ const commonRules = [
             loader: 'url-loader',
             options: {
                 name: '[name].[ext]',
-                limit: 20*1024,
-                outputPath: 'assets/'
-            }
-        }
+                limit: 20 * 1024,
+                outputPath: 'assets/',
+            },
+        },
     },
     {
         test: /\.(eot|ttf|woff|woff2)(\?\S*)?$/,
         loader: 'file-loader',
         options: {
             limit: 5000,
-            name: 'fonts/[name].[ext]?[hash:8]'
-        }
+            name: 'fonts/[name].[ext]?[hash:8]',
+        },
     },
     {
         test: /\.css$/,
-        use:[ // 由后向前加载
-            {loader: "style-loader"},
-            {loader: 'css-loader'},
-            {loader: "postcss-loader"}
-        ]
+        use: [
+            // 由后向前加载
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'postcss-loader' },
+        ],
     },
     {
         test: /(\.less)$/,
@@ -65,8 +66,8 @@ const commonRules = [
                         javascriptEnabled: true,
                         modifyVars: {
                             // 'primary-color': '#1DA57A',
-                            'ant-prefix': 'ant4'
-                        }
+                            'ant-prefix': 'ant4',
+                        },
                     },
                 },
             },
@@ -75,32 +76,32 @@ const commonRules = [
     {
         test: /\.sass$/,
         use: [
-            {loader: "style-loader"},
-            {loader: 'css-loader'},
-            {loader: "postcss-loader"},
-            {loader: 'sass-loader'}
-        ]
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'postcss-loader' },
+            { loader: 'sass-loader' },
+        ],
     },
     {
         //test: /\.styl$/,
         test: /\.styl(us)?$/,
         use: [
-            {loader: "style-loader"},
-            {loader: 'css-loader'},
-            {loader: "postcss-loader"},
-            {loader: 'stylus-loader'}
-        ]
-    }
-]
+            { loader: 'style-loader' },
+            { loader: 'css-loader' },
+            { loader: 'postcss-loader' },
+            { loader: 'stylus-loader' },
+        ],
+    },
+];
 const commonPlugins = [
     new MiniCssExtractPlugin({
         filename: 'css/[name][hash:8].css',
-        chunkFilename: 'css/[id][hash:8].css'
+        chunkFilename: 'css/[id][hash:8].css',
     }),
     new webpack.DefinePlugin({
-        'appInfo': {
-            'COUNTRY': JSON.stringify(country),
+        appInfo: {
+            COUNTRY: JSON.stringify(country),
         },
-    })
-]
+    }),
+];
 module.exports = { commonRules, commonPlugins };
