@@ -5,6 +5,7 @@
     "appName": "APP名称",
     "collectionTeam": "催收团队",
     "collector": "催收人",
+    "collectorLoginIPRecord": "催收员登录IP纪录",
     "collectorName": "跟进人",
     "contactName": "姓名",
     "contactPerson": "跟进对象",

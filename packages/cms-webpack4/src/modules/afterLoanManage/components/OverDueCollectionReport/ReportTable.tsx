@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
-import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
+import CollectorLoginLogsModal from './CollectorLoginLogsModal';
 
 const searchSpan = {
     xs: 24,
@@ -17,6 +17,11 @@ const searchSpan = {
 };
 
 const ReportTable = (): JSX.Element => {
+    const [loginLogsdModal, setLoginLogsdModal] = useState<{ open: boolean; collectorId: string }>({
+        open: false,
+        collectorId: '',
+    });
+
     const initDate = moment();
     const initSearchList = {
         merchantId: '',
@@ -29,15 +34,15 @@ const ReportTable = (): JSX.Element => {
 
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
 
-    const handleShowLoginLogs = (recordId: string) => {
-        console.log(recordId);
+    const handleShowLoginLogs = (collectorId: string) => {
+        setLoginLogsdModal({ open: true, collectorId: collectorId });
     };
 
     const { t } = useTranslation();
 
     const mockData = [
         {
-            id: '001',
+            collectorId: '001',
             merchantName: 'BB商戶',
             collectionDate: '2022-08-19',
             collectionTeam: '催收机构名A',
@@ -61,8 +66,8 @@ const ReportTable = (): JSX.Element => {
             title: t('common:function'),
             key: 'function',
             hideInSearch: true,
-            render: (_, record) => (
-                <a onClick={() => handleShowLoginLogs(record.id)}>{t('urgeCollection:loginLogs')}</a>
+            render: (_, { collectorId }) => (
+                <a onClick={() => handleShowLoginLogs(collectorId)}>{t('urgeCollection:loginLogs')}</a>
             ),
         },
         { title: t('urgeCollection:merchantName'), dataIndex: 'merchantName' },
@@ -151,34 +156,46 @@ const ReportTable = (): JSX.Element => {
     ];
 
     return (
-        <ProTable
-            columns={columns}
-            rowKey="id"
-            dataSource={mockData}
-            search={{
-                span: searchSpan,
-                labelWidth: 'auto',
-                optionRender: ({ resetText }, { form }) => [
-                    <Space>
-                        <Button
-                            onClick={() => {
-                                // form.setFieldsValue({ ...initSearchList });
-                                // setSearchList(initSearchList);
-                            }}
-                        >
-                            {resetText}
-                        </Button>
-                        <Button type="primary" onClick={() => form.submit()}>
-                            {t('common:search')}
-                        </Button>
-                    </Space>,
-                ],
-            }}
-            onSubmit={(params) => {
-                console.log('TTT');
-                console.log(params);
-            }}
-        />
+        <>
+            <ProTable
+                columns={columns}
+                rowKey="id"
+                dataSource={mockData}
+                search={{
+                    span: searchSpan,
+                    labelWidth: 'auto',
+                    optionRender: ({ resetText }, { form }) => [
+                        <Space>
+                            <Button
+                                onClick={() => {
+                                    // form.setFieldsValue({ ...initSearchList });
+                                    // setSearchList(initSearchList);
+                                }}
+                            >
+                                {resetText}
+                            </Button>
+                            <Button type="primary" onClick={() => form.submit()}>
+                                {t('common:search')}
+                            </Button>
+                        </Space>,
+                    ],
+                }}
+                onSubmit={(params) => {
+                    console.log('TTT');
+                    console.log(params);
+                }}
+            />
+            <CollectorLoginLogsModal
+                open={loginLogsdModal.open}
+                collectorId={loginLogsdModal.collectorId}
+                onCancel={() =>
+                    setLoginLogsdModal({
+                        open: false,
+                        collectorId: '',
+                    })
+                }
+            />
+        </>
     );
 };
 
