@@ -95,7 +95,7 @@ export const UrgeModal = ({
                     })}
                 </Group>
             </Item>
-            {!generateLinkSwitch && (
+            {
                 <Item dependencies={['generateLink']} noStyle>
                     {({ getFieldValue }) => {
                         const generateLink = getFieldValue('generateLink');
@@ -117,7 +117,7 @@ export const UrgeModal = ({
                         );
                     }}
                 </Item>
-            )}
+            }
         </>
     );
 
@@ -194,7 +194,8 @@ export const UrgeModal = ({
                             return (
                                 <>
                                     {followResult === 'Promise' && <PTPTime />}
-                                    {(followResult === 'Promise' || followResult === 'Other') && <RePayLink />}
+                                    {(followResult === 'Promise' || followResult === 'Other') &&
+                                        !generateLinkSwitch && <RePayLink />}
                                 </>
                             );
                         }}
