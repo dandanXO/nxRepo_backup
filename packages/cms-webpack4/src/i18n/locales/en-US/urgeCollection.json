@@ -3,29 +3,42 @@
     "addUrge": "Add Collection Record",
     "amountDue": "Amount Due",
     "appName": "APP Name",
+    "collectionTeam": "Collection Team",
+    "collector": "Collector",
     "collectorName": "Collector",
     "contactName": "Contact Name",
     "contactPerson": "Contact Person",
     "contactable": "Contactable",
+    "coverageRate": "Coverage Rate",
+    "coverageRateTooltips": "Coverage Rate＝Collection Cases with Collection Records / All Collection Cases",
     "currentDayOrderStatus": {
         "0": "In Repayment",
         "1": "Completed",
         "3": "Partial Repayment"
     },
+    "extensionCount": "Number of Extension Orders",
     "extensionLink": {
         "button": "Extension Link",
         "copyLabel": "Extension Link"
     },
+    "extensionRate": "Extension Rate",
+    "extensionRateTooltips": "Extension Rate＝Number of Extension Orders / Number of Follow-ups",
     "followUp": "Follow-up",
+    "followUpAmount": "Follow-up Amount",
     "followUpCount": "Follow-up Count",
+    "followUpDate": "Follow-up Date",
     "followUpResult": "Follow-up Result",
+    "fullRepaymentOrders": "Full Repayment Orders",
     "generateLink": "Generate Link",
     "helper": {
         "overAmountDue": "The entered amount must not exceed the amount due."
     },
+    "initialLoginTime": "Initial Login Time",
     "lastOpenAppTime": "Latest App Opening Time",
     "latestRepaymentCodeAcquisitionTime": "Latest Repayment Code Acquisition Time",
+    "loginLogs": "Login Logs",
     "merchantName": "Merchant Name",
+    "numberOfFollowUps": "Number of Follow-ups",
     "orderLabel": "Order Label",
     "orderLabelStatus": {
         "extension": "Extension",
@@ -33,6 +46,8 @@
         "reLoan": "Re-Loan"
     },
     "orderNo": "Order No.",
+    "orderPaymentRate": "Order Payment Rate",
+    "orderPaymentRateTooltips": "Order Payment Rate＝Total Number of Payments Received / Number of Follow-ups",
     "outstandingBalance": "Outstanding Balance",
     "overDueOrderStatus": {
         "0": "Overdue",
@@ -43,9 +58,12 @@
         "button": "Partial Repayment",
         "copyLabel": "Partial Repayment Link"
     },
+    "paymentAmountRate": "Payment Amount Ratio",
+    "paymentAmountRateTooltips": "Payment Amount Ratio＝Receipt Amount / Follow-up Amount",
     "phone": "Mobile Number",
     "ptpTime": "PTP Time",
     "ptpTimeTooltip": "PTP = Promise To Pay",
+    "receiptAmount": "Receipt Amount",
     "recentTrackingTime": "Recent Tracking Time",
     "repayAmount": "Repayment amount",
     "repayLink": {
@@ -57,6 +75,8 @@
         "amountDue": "=Loan Amount*(1+Post-Fee Rate)",
         "repayLink": "If users delete the app, the repayment or extension link can be generated and provided to them."
     },
+    "totalReceivedCount": "Total Number of Payments Received",
+    "totalReceivedCountTooltips": "Total Number of Payments Received＝Full Repayment Orders＋Number of Extension Orders",
     "trackingRecord": "Tracking Record",
     "trackingTime": "Tracking Time",
     "urgeRecord": "Collections Record",

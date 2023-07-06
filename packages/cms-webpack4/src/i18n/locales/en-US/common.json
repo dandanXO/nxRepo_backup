@@ -10,6 +10,7 @@
         "emergency": "Emergency Contact{{count}}",
         "list": "Contact List"
     },
+    "endDate": "End Date",
     "followUpResultStatus": {
         "BadAttitude": "Bad Attitude",
         "FinancialDifficulties": "Financial Difficulties",
@@ -54,6 +55,7 @@
     },
     "saved": "Saved",
     "search": "Search",
+    "startDate": "Start Date",
     "tab": {
         "contractList": "Contact List",
         "orderInfo": "Order Information",

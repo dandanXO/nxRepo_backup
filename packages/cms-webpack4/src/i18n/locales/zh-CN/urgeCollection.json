@@ -3,29 +3,42 @@
     "addUrge": "添加催收纪录",
     "amountDue": "应还金额",
     "appName": "APP名称",
+    "collectionTeam": "催收团队",
+    "collector": "催收人",
     "collectorName": "跟进人",
     "contactName": "姓名",
     "contactPerson": "跟进对象",
     "contactable": "是否可联",
+    "coverageRate": "覆盖率",
+    "coverageRateTooltips": "覆盖率＝催案当天是否有催收记录／所有催案",
     "currentDayOrderStatus": {
         "0": "还款中",
         "1": "已结清",
         "3": "部分还款"
     },
+    "extensionCount": "展期笔数",
     "extensionLink": {
         "button": "生成展期链接",
         "copyLabel": "生成展期链接"
     },
+    "extensionRate": "展期率",
+    "extensionRateTooltips": "展期率＝展期笔数／跟进笔数",
     "followUp": "跟进",
+    "followUpAmount": "跟进金额",
     "followUpCount": "跟进次数",
+    "followUpDate": "跟进日",
     "followUpResult": "跟进结果",
+    "fullRepaymentOrders": "全还笔数",
     "generateLink": "生成链结",
     "helper": {
         "overAmountDue": "输入金额不得大于应还金额"
     },
+    "initialLoginTime": "当日首次登录时间",
     "lastOpenAppTime": "最新打开app时间",
     "latestRepaymentCodeAcquisitionTime": "最新还款码获取时间",
+    "loginLogs": "登录纪录",
     "merchantName": "商户名",
+    "numberOfFollowUps": "跟进次数",
     "orderLabel": "订单标签",
     "orderLabelStatus": {
         "extension": "展期",
@@ -33,6 +46,8 @@
         "reLoan": "复贷"
     },
     "orderNo": "订单编号",
+    "orderPaymentRate": "单数回收率",
+    "orderPaymentRateTooltips": "单数回收率＝总回收笔数／跟进笔数",
     "outstandingBalance": "当前帐单金额",
     "overDueOrderStatus": {
         "0": "逾期中",
@@ -43,9 +58,12 @@
         "button": "发起部分还款",
         "copyLabel": "部分还款链接"
     },
+    "paymentAmountRate": "金额回收率",
+    "paymentAmountRateTooltips": "金额回收率＝回收金额／跟进金额",
     "phone": "手机号",
     "ptpTime": "PTP时间",
     "ptpTimeTooltip": "PTP = Promise To Pay\n承诺还款",
+    "receiptAmount": "回收金额",
     "recentTrackingTime": "上次跟进时间",
     "repayAmount": "还款金额",
     "repayLink": {
@@ -57,6 +75,8 @@
         "amountDue": "应还金额=申请金额*(1+后置费率)",
         "repayLink": "若用户删除App时，可生成还款或展期链结，提供给用户"
     },
+    "totalReceivedCount": "总回收笔数",
+    "totalReceivedCountTooltips": "总回收笔数＝全还笔数＋展期笔数",
     "trackingRecord": "跟进纪录",
     "trackingTime": "跟进时间",
     "urgeRecord": "催收纪录",

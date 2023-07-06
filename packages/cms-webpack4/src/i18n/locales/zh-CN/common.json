@@ -10,6 +10,7 @@
         "emergency": "紧急联络人{{count}}",
         "list": "通讯录"
     },
+    "endDate": "结束日期",
     "followUpResultStatus": {
         "BadAttitude": "态度恶劣",
         "FinancialDifficulties": "财务困难",
@@ -54,6 +55,7 @@
     },
     "saved": "已储存",
     "search": "查询",
+    "startDate": "开始日期",
     "tab": {
         "contractList": "通讯录",
         "orderInfo": "订单信息",
