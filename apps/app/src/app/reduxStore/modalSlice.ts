@@ -36,9 +36,14 @@ export type InitialStateType = {
     mobileWallet:boolean;
     mobileWalletAccount:string;
     walletVendor:string;
-    walletName:string;
     bankCode:string;
   };
+  starRatingModal: {
+      show: boolean;
+  },
+  starRatingSuccessModal: {
+    show: boolean;
+  }
 };
 
 const initialState: InitialStateType = {
@@ -75,8 +80,13 @@ const initialState: InitialStateType = {
     mobileWallet: false,
     mobileWalletAccount: '',
     walletVendor: '',
-    walletName:'',
     bankCode: '',
+  },
+  starRatingModal: {
+    show: false
+  },
+  starRatingSuccessModal: {
+    show: false
   }
 };
 
@@ -135,8 +145,13 @@ export const modalSlice = createSlice({
         state.bindBankcardModal.mobileWallet = action.payload.mobileWallet;
         state.bindBankcardModal.mobileWalletAccount = action.payload.mobileWalletAccount;
         state.bindBankcardModal.walletVendor = action.payload.walletVendor;
-        state.bindBankcardModal.walletName = action.payload.walletName;
         state.bindBankcardModal.bankCode = action.payload.bankCode;
+    },
+    updateStarRatingModal: (state, action: PayloadAction<InitialStateType['starRatingModal']>) => {
+        state.starRatingModal.show = action.payload.show;
+    },
+    updateStarRatingSuccessModal: (state, action: PayloadAction<InitialStateType['starRatingSuccessModal']>) => {
+        state.starRatingSuccessModal.show = action.payload.show;
     },
   },
 });

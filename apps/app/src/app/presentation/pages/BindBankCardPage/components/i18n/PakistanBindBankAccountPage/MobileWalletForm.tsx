@@ -26,6 +26,7 @@ type IMobileWalletForm = {
   // iBanData: InputValue<string>;
   // onIBanChange: (event: any) => void;
   // onIbanBlur: (event: any) => void;
+  cardholderName: string;
 };
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
@@ -76,12 +77,20 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
       {/*</div>*/}
 
       <div>
+      <div className={'text-sm'}>{'Mobile Wallet Holder Name'}</div>
+        <Input
+          className="mb-2"
+          labelType={'none'}
+          outlineType={'standard'}
+          placeholder={'Cardholder Name'}
+          value={props.cardholderName}
+          disabled
+        />
         <div className={'mb-0 text-sm'}>{'Mobile Wallet Account'}</div>
         <Input
           name={'account'}
           className="mb-1"
           textAlign={'left'}
-          labelType={'left'}
           outlineType={'standard'}
           placeholder={'Mobile Wallet Account'}
           value={props.mobileData.data}
@@ -99,7 +108,6 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
           name={'account_confirm'}
           className="mb"
           textAlign={'left'}
-          labelType={'left'}
           outlineType={'standard'}
           placeholder={'Confirm Mobile Wallet Account'}
           value={props.confirmMobileData.data}
