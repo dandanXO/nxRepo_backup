@@ -1,7 +1,7 @@
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
@@ -160,8 +160,27 @@ const ReportTable = (): JSX.Element => {
         },
     ];
     if (isSuperAdmin) {
-        columns.splice(1, 0, { title: t('urgeCollection:merchantName'), dataIndex: 'merchantName' });
+        columns.splice(1, 0, {
+            title: t('urgeCollection:merchantName'),
+            dataIndex: 'merchantName',
+            hideInSearch: true,
+        });
+        columns.splice(2, 0, {
+            title: t('urgeCollection:merchantName'),
+            dataIndex: 'merchantId',
+            initialValue: '',
+            hideInTable: true,
+            valueType: 'select',
+            valueEnum: merchantListEnum,
+            fieldProps: { showSearch: true, allowClear: false },
+        });
     }
+
+    useEffect(() => {
+        if (isSuperAdmin) {
+            triggerGetMerchantList(null);
+        }
+    }, [isSuperAdmin]);
 
     return (
         <>
