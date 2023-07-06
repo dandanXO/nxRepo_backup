@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
+import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
 
 const searchSpan = {
@@ -22,6 +23,9 @@ const ReportTable = (): JSX.Element => {
         collectorId: '',
     });
 
+    const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
+    const isSuperAdmin = getIsSuperAdmin();
+
     const initDate = moment();
     const initSearchList = {
         merchantId: '',
@@ -31,8 +35,6 @@ const ReportTable = (): JSX.Element => {
         stage: '',
         collectorId: '',
     };
-
-    const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
 
     const handleShowLoginLogs = (collectorId: string) => {
         setLoginLogsdModal({ open: true, collectorId: collectorId });
@@ -70,7 +72,6 @@ const ReportTable = (): JSX.Element => {
                 <a onClick={() => handleShowLoginLogs(collectorId)}>{t('urgeCollection:loginLogs')}</a>
             ),
         },
-        { title: t('urgeCollection:merchantName'), dataIndex: 'merchantName' },
         {
             title: t('urgeCollection:followUpDate'),
             dataIndex: 'collectionDate',
@@ -154,6 +155,9 @@ const ReportTable = (): JSX.Element => {
             hideInSearch: true,
         },
     ];
+    if (isSuperAdmin) {
+        columns.splice(1, 0, { title: t('urgeCollection:merchantName'), dataIndex: 'merchantName' });
+    }
 
     return (
         <>
