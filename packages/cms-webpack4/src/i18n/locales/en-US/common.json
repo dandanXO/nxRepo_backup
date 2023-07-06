@@ -22,12 +22,12 @@
     "function": "Function",
     "goBack": "Back",
     "menu": {
-        "homePage": "Home",
+        "currentDayCollectionReport": "CurrentDay Collection Report",
         "currentDayOverdueCall": "CurrentDay Collection",
         "currentDayOverdueCallList": "CurrentDay Overdue Call List",
-        "currentDayCollectionReport": "CurrentDay Collection Report",
-        "overdueCollection": "Overdue Collection",
+        "homePage": "Home",
         "overdueCallList": "Overdue Call List",
+        "overdueCollection": "Overdue Collection",
         "overdueCollectionReport": "Overdue Collection Report"
     },
     "message": {

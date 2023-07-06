@@ -22,12 +22,12 @@
     "function": "操作",
     "goBack": "返回",
     "menu": {
-        "homePage": "首页",
+        "currentDayCollectionReport": "当日催收明细",
         "currentDayOverdueCall": "当日催收",
         "currentDayOverdueCallList": "当日电催列表",
-        "currentDayCollectionReport": "当日催收明细",
-        "overdueCollection": "逾期催收",
+        "homePage": "首页",
         "overdueCallList": "逾期电催列表",
+        "overdueCollection": "逾期催收",
         "overdueCollectionReport": "逾期催收明细"
     },
     "message": {
