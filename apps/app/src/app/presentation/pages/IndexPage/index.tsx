@@ -445,7 +445,8 @@ const onUserClickViewApplicationProgress = () => {
 
   return (
     <div className={'flex flex-col'}>
-      <div className={'flex flex-col overflow-auto max-h-[90vh] w-full absolute top-0 pb-10'}>
+      {/*NOTE: 高度扣掉 TabBar:63px、Button:56px*/}
+      <div className={`flex flex-col overflow-auto h-[calc(100vh-63px-56px)] w-full absolute top-0`}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}
@@ -468,7 +469,7 @@ const onUserClickViewApplicationProgress = () => {
           />
         </div>
 
-        <PageContent>
+        <div className="overflow-auto px-5 grow flex flex-col">
           {/*NOTE: 用戶尚未認證*/}
           {indexPageState.user.state === USER_AUTH_STATE.ready && (
             <>
@@ -518,7 +519,7 @@ const onUserClickViewApplicationProgress = () => {
           }
 
           {/*TODO: refactor me*/}
-          <div>
+          <div className='grow flex items-end'>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
 
@@ -559,7 +560,7 @@ const onUserClickViewApplicationProgress = () => {
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota) && (
               <WelcomeBackAndReapplyInTimeSection refreshableCountdown={refreshableCountdown} />
             )}
-        </PageContent>
+        </div>
       </div>
     </div>
 
