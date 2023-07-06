@@ -18,7 +18,7 @@ const searchSpan = {
 };
 
 const ReportTable = (): JSX.Element => {
-    const [loginLogsdModal, setLoginLogsdModal] = useState<{ open: boolean; collectorId: string }>({
+    const [loginLogsModal, setLoginLogsdModal] = useState<{ open: boolean; collectorId: string }>({
         open: false,
         collectorId: '',
     });
@@ -29,8 +29,7 @@ const ReportTable = (): JSX.Element => {
     const initDate = moment();
     const initSearchList = {
         merchantId: '',
-        followUpDateStart: initDate.format('YYYY-MM_DD'),
-        followUpDateEnd: initDate.format('YYYY-MM_DD'),
+        collectionDate: [initDate, initDate],
         collectorTame: '',
         stage: '',
         collectorId: '',
@@ -163,7 +162,7 @@ const ReportTable = (): JSX.Element => {
         <>
             <ProTable
                 columns={columns}
-                rowKey="id"
+                rowKey="collectorId"
                 dataSource={mockData}
                 search={{
                     span: searchSpan,
@@ -172,8 +171,7 @@ const ReportTable = (): JSX.Element => {
                         <Space>
                             <Button
                                 onClick={() => {
-                                    // form.setFieldsValue({ ...initSearchList });
-                                    // setSearchList(initSearchList);
+                                    form.setFieldsValue({ ...initSearchList });
                                 }}
                             >
                                 {resetText}
@@ -190,8 +188,8 @@ const ReportTable = (): JSX.Element => {
                 }}
             />
             <CollectorLoginLogsModal
-                open={loginLogsdModal.open}
-                collectorId={loginLogsdModal.collectorId}
+                open={loginLogsModal.open}
+                collectorId={loginLogsModal.collectorId}
                 onCancel={() =>
                     setLoginLogsdModal({
                         open: false,
