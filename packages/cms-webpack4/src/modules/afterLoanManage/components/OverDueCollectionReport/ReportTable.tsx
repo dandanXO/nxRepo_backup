@@ -17,19 +17,15 @@ const searchSpan = {
 };
 
 const ReportTable = (): JSX.Element => {
+    const initDate = moment();
     const initSearchList = {
         merchantId: '',
-        followUpDateStart: moment().format('YYYY-MM_DD'),
-        followUpDateEnd: moment().format('YYYY-MM_DD'),
+        followUpDateStart: initDate.format('YYYY-MM_DD'),
+        followUpDateEnd: initDate.format('YYYY-MM_DD'),
         collectorTame: '',
         stage: '',
         collectorId: '',
     };
-
-    const { searchList, searchParams, setSelectedList, handleToDetailPage } = usePageSearchParams({
-        searchListParams: initSearchList,
-    });
-    const [initialSearchParams, setInitialSearchParams] = useState(searchParams);
 
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
 
@@ -77,6 +73,7 @@ const ReportTable = (): JSX.Element => {
             fieldProps: {
                 placeholder: [t('common:startDate'), t('common:endDate')],
             },
+            initialValue: [initDate, initDate],
             render: (_, { collectionDate }) => collectionDate,
         },
         {
