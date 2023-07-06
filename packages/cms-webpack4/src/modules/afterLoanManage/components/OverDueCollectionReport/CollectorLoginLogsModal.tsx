@@ -17,7 +17,16 @@ const CollectorLoginLogsModal = ({ open, collectorId, onCancel }: LoginLogsModal
         { loginTime: '2022-08-21 09:03:12', ip: '157.100.188.100' },
     ];
 
-    const columns: ProColumns[] = [{}];
+    const columns: ProColumns[] = [
+        {
+            title: t('common:table.loginTime'),
+            dataIndex: 'loginTime',
+        },
+        {
+            title: t('common:table.loginIP'),
+            dataIndex: 'ip',
+        },
+    ];
 
     return (
         <Modal

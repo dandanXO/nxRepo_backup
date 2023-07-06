@@ -67,6 +67,8 @@
         "contactPhone": "Contact Number",
         "contactType": "Contact",
         "lastAddedTime": "Last Added Time",
+        "loginIP": "Login IP Address",
+        "loginTime": "Login Time",
         "phone": "Mobile Number",
         "relationShip": "Relationship",
         "sendPhoneNumber": "Phone Number",

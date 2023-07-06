@@ -67,6 +67,8 @@
         "contactPhone": "联络人电话",
         "contactType": "联络人名称",
         "lastAddedTime": "最后添加时间",
+        "loginIP": "登录IP位址",
+        "loginTime": "登录时间",
         "phone": "手机号",
         "relationShip": "与本人关系",
         "sendPhoneNumber": "发送号码",
