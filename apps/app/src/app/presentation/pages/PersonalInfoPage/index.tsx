@@ -112,7 +112,7 @@ const PersonalInfoPage = () => {
 
         {/*NOTE: 五星好評*/}
 
-        <Card><LinkItem title={'Rate Us 5 starts'} to={''} onClick={()=>dispatch(modalSlice.actions.updateStarRatingModal({show:true}))}/></Card>
+        <Card><LinkItem title={'Rate Us 5 stars'} to={''} onClick={()=>dispatch(modalSlice.actions.updateStarRatingModal({show:true}))}/></Card>
         <div className='font-bold text-base m-2 mt-6 '>Setting</div>
         <Card>
           <LinkItem title={'Delete My Account'} to={`${PagePathEnum.DeleteAccountPage}?token=${getToken()}`} />
