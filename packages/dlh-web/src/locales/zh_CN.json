@@ -729,6 +729,7 @@
   "page.table.verified": "已認證完",
   "page.table.not.verified": "未认证完",
   "page.table.loaning": "借款中",
+  "page.table.paid.off.without.re.borrowing": "结清未复借",
   "page.table.not.borrowed": "未借款",
   "page.table.assigneda.total": "分配订单总数",
   "page.table.assigned.new.guest": "分配新客数",
