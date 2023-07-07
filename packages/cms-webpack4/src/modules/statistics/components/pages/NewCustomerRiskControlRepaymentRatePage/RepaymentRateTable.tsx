@@ -1,69 +1,75 @@
-import {AdminTable} from "../../../../shared/components/common/AdminTable";
-import {ProColumns, ProFormInstance} from "@ant-design/pro-components";
+import { ProColumns, ProFormInstance } from '@ant-design/pro-components';
+import { Button } from 'antd/es';
+import queryString from 'query-string';
+import { useEffect, useRef } from 'react';
+
+import { AdminTable } from '../../../../shared/components/common/AdminTable';
+import { ConstantRiskRankEnum } from '../../../../shared/constants/constantRiskRankEnum';
+import useGetProviderEnum from '../../../../shared/hooks/common/useGetProviderEnum';
+import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
+import usePageSearchParams from '../../../../shared/hooks/usePageSearchParams';
 import {
     GetNewCustomerRiskPaymentRateListRequest,
     RiskPaymentRateResponseRiskPaymentRateResponse,
-    useLazyGetNewCustomerRiskPaymentRateListQuery
-} from "../../../api/NewCustomerRepaymentRateApi";
-import {useCallback, useEffect, useRef, useState} from "react";
-import {FormInstance} from "antd";
-import {Button} from "antd/es";
-import queryString from "query-string";
-import {ConstantRiskRankEnum} from "../../../../shared/constants/constantRiskRankEnum";
-import useGetProviderEnum from "../../../../shared/hooks/common/useGetProviderEnum";
-import useGetChannelEnum from "../../../../shared/hooks/useGetChannelEnum";
-import usePageSearchParams from "../../../../shared/hooks/usePageSearchParams";
+    useLazyGetNewCustomerRiskPaymentRateListQuery,
+} from '../../../api/NewCustomerRepaymentRateApi';
 
-export const RepaymentRateTable = () => {
+export const RepaymentRateTable = (): JSX.Element => {
     // NOTE: 資料
     const { triggerGetChannelList, channelListEnum } = useGetChannelEnum();
     const { triggerGetProviderList, providerListEnum } = useGetProviderEnum();
-    const [triggerGetNewCustomerRiskPaymentRateList, {data, currentData, isLoading, isFetching, isSuccess, isError}] = useLazyGetNewCustomerRiskPaymentRateListQuery();
+    const [triggerGetNewCustomerRiskPaymentRateList, { currentData, isFetching }] =
+        useLazyGetNewCustomerRiskPaymentRateListQuery();
 
     // NOTE: 搜尋與分頁
     const initSearchList: GetNewCustomerRiskPaymentRateListRequest = {
         channelId: null, // 渠道 ID
-        endTime: "",          // 結束時間
-        riskControlModel: "", // 风控名稱
-        riskRank: "",         // 風控標籤
-        startTime: "",         // 開始時間
-        newMember:""
-    }
+        endTime: '', // 結束時間
+        riskControlModel: '', // 风控名稱
+        riskRank: '', // 風控標籤
+        startTime: '', // 開始時間
+        newMember: '',
+    };
 
-    const { searchList, setSearchList} = usePageSearchParams({ searchListParams: initSearchList });
+    const { searchList, setSearchList } = usePageSearchParams({ searchListParams: initSearchList });
 
     const getSearchParams = () => {
-        // @ts-ignore
-        const { channelId, fakeLoanDate = '', riskControlModel = '', riskRank = '', newMember }: GetNewCustomerRiskPaymentRateListRequest = formRef.current.getFieldValue();
+        const {
+            channelId,
+            fakeLoanDate = '',
+            riskControlModel = '',
+            riskRank = '',
+            newMember,
+        }: // @ts-ignore
+        GetNewCustomerRiskPaymentRateListRequest = formRef.current.getFieldValue();
         return {
             channelId,
             riskControlModel,
             riskRank,
             newMember,
             startTime: fakeLoanDate ? fakeLoanDate[0].format('YYYY-MM-DD 00:00:00') : '',
-            endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : ''
-        }
-    }
-
+            endTime: fakeLoanDate ? fakeLoanDate[1].format('YYYY-MM-DD 23:59:59') : '',
+        };
+    };
 
     // NOTE: 更新列表
     const triggerGetList = (searchList) => {
-        triggerGetNewCustomerRiskPaymentRateList(searchList)
-    }
+        triggerGetNewCustomerRiskPaymentRateList(searchList);
+    };
 
     const formRef = useRef<ProFormInstance>();
 
     // NOTE: refactor me
     const formatNumber = (num) => num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 
-    const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse, "text">[] = [
+    const tableHeaderColumns: ProColumns<RiskPaymentRateResponseRiskPaymentRateResponse, 'text'>[] = [
         {
             key: 'expireTime',
             title: '到期日',
             dataIndex: 'expireTime',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
             valueType: 'date',
         },
         {
@@ -72,7 +78,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'fakeLoanDate',
             hideInSearch: false,
             hideInTable: true,
-            initialValue: "",
+            initialValue: '',
             valueType: 'dateRange',
         },
         {
@@ -81,7 +87,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'totalCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'totalLendUsers',
@@ -89,7 +95,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'totalLendUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'totalLendMoney',
@@ -97,8 +103,8 @@ export const RepaymentRateTable = () => {
             dataIndex: 'totalLendMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render:(text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         {
             key: 'pendingRepaymentCount',
@@ -106,7 +112,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'pendingRepaymentCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'pendingRepaymentUsers',
@@ -114,7 +120,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'pendingRepaymentUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'pendingRepaymentMoney',
@@ -122,8 +128,8 @@ export const RepaymentRateTable = () => {
             dataIndex: 'pendingRepaymentMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render:(text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         {
             key: 'finishCount',
@@ -131,7 +137,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'finishCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'finishUsers',
@@ -139,7 +145,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'finishUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'finishMoney',
@@ -147,8 +153,8 @@ export const RepaymentRateTable = () => {
             dataIndex: 'finishMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render:(text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         {
             key: 'overdueCount',
@@ -156,7 +162,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'overdueCount',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'overdueUsers',
@@ -164,7 +170,7 @@ export const RepaymentRateTable = () => {
             dataIndex: 'overdueUsers',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
+            initialValue: '',
         },
         {
             key: 'overdueMoney',
@@ -172,8 +178,8 @@ export const RepaymentRateTable = () => {
             dataIndex: 'overdueMoney',
             hideInSearch: true,
             hideInTable: false,
-            initialValue: "",
-            render:(text)=>formatNumber(text)
+            initialValue: '',
+            render: (text) => formatNumber(text),
         },
         // NOTE: only search
         {
@@ -183,7 +189,7 @@ export const RepaymentRateTable = () => {
             key: 'channelId',
             valueEnum: channelListEnum,
             hideInSearch: false,
-            hideInTable: true
+            hideInTable: true,
         },
         {
             key: 'riskControlModel',
@@ -194,7 +200,7 @@ export const RepaymentRateTable = () => {
             valueEnum: providerListEnum,
             fieldProps: {
                 allowClear: false,
-            }
+            },
         },
         {
             key: 'riskRank',
@@ -206,7 +212,7 @@ export const RepaymentRateTable = () => {
             valueEnum: ConstantRiskRankEnum,
             fieldProps: {
                 allowClear: false,
-            }
+            },
         },
         {
             key: 'newMember',
@@ -221,48 +227,52 @@ export const RepaymentRateTable = () => {
                 false: { text: '否' },
             },
         },
-    ]
+    ];
 
-    const onUserClickSearch = (form: FormInstance) => {
+    const onUserClickSearch = () => {
         const searchList = getSearchParams();
-        setSearchList(searchList)
+        setSearchList(searchList);
         triggerGetList(searchList);
-    }
+    };
 
-    const onUserClickReset = (form: FormInstance)=>{
+    const onUserClickReset = () => {
         // Self State
         setSearchList(initSearchList);
         // System reload list
         triggerGetList(initSearchList);
-    }
+    };
 
     const onClickHandleExport = () => {
         // self state
         const searchList = getSearchParams();
-        setSearchList(searchList)
+        setSearchList(searchList);
         // get excel
         const searchQueryString = queryString.stringify(searchList);
         window.open(`/hs/admin/statistics/new-customer-risk-payment-rate/download?${searchQueryString}`);
         // refresh list
         triggerGetList(searchList);
-    }
+    };
 
     const onUserChangePage = (current, pageSize) => {
-        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize })
-    }
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
 
     useEffect(() => {
         triggerGetList(searchList);
         triggerGetProviderList(null);
         triggerGetChannelList(null);
-    }, [])
+    }, []);
 
     return (
-        <AdminTable <RiskPaymentRateResponseRiskPaymentRateResponse>
+        <AdminTable<RiskPaymentRateResponseRiskPaymentRateResponse>
             // static
             // rowKey={}
             formRef={formRef}
-            toolBarRender={() => [<Button onClick={onClickHandleExport} type='primary'>导出</Button>]}
+            toolBarRender={() => [
+                <Button onClick={onClickHandleExport} type="primary">
+                    导出
+                </Button>,
+            ]}
             // dynamic
             loading={isFetching}
             tableHeaderColumns={tableHeaderColumns}
@@ -275,7 +285,6 @@ export const RepaymentRateTable = () => {
             onFormSearchCallback={onUserClickSearch}
             hasAddForm={false}
             hasEditForm={false}
-
         />
-    )
-}
+    );
+};

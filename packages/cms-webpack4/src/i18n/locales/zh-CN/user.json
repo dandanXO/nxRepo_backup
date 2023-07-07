@@ -1,0 +1,42 @@
+{
+    "address": "家庭地址",
+    "birthDay": "出生日期",
+    "education": "教育程度",
+    "email": "Email",
+    "emergencyContact": "紧急联络人",
+    "fatherName": "父亲姓名",
+    "gender": "性别",
+    "idCardNo": "身份证号",
+    "idcardBackPhoto": {
+        "Bangladesh": "NID卡反面",
+        "India": "Aadhaar card 反面",
+        "Pakistan": "CNIC卡反面"
+    },
+    "idcardFrontPhoto": {
+        "Bangladesh": "NID卡正面",
+        "India": "Aadhaar card 正面",
+        "Pakistan": "CNIC卡正面"
+    },
+    "idcardPortraitPhoto": {
+        "Bangladesh": "人像",
+        "India": "人像",
+        "Pakistan": "人像"
+    },
+    "identityInfo": "身份信息",
+    "maritalStatus": "婚姻状况",
+    "mobileNumber": "手机号",
+    "occupation": "职业",
+    "panId": "税务证号",
+    "panPhoto": {
+        "India": "PAN卡"
+    },
+    "personalInfo": "个人信息",
+    "registerChannel": "注册渠道",
+    "registerInfo": "注册信息",
+    "registerPackageName": "注册包名",
+    "registerTime": "注册时间",
+    "salaryRange": "薪资范围",
+    "userId": "用户ID",
+    "userName": "姓名",
+    "userSource": "用户来源"
+}

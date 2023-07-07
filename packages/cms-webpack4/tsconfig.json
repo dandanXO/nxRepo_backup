@@ -3,6 +3,7 @@
       "rootDir": ".",
 //      "sourceMap": true,
       "declaration": false,
+      "resolveJsonModule": true,
       "moduleResolution": "node",
       "module": "es6",
       "target": "es5",
@@ -13,7 +14,10 @@
       "noImplicitAny": false,
       "allowJs": true,
       "jsx": "react-jsx",
-      "strict": false
+      "strict": false,
+      "paths": {
+          "react": ["./node_modules/@types/react"]
+      }
   },
   "include": [
       "src/**/*.ts",

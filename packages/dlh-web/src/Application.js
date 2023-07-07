@@ -1234,7 +1234,10 @@ const getMenuMapPageDic = () => {
   replaceMap["/reloanStatistics"] = "/cms/reloanStatistics";
 
   replaceMap["/todayOrderDistribute"] = "/cms/today-distribution";
+  replaceMap["/todayPhoneUrgeList"] = "/cms/todayLoanManage/todayPhoneUrgeList";
+
   replaceMap["/overdueOrderDistribute"] = "/cms/overdue-distribution";
+  replaceMap["/phoneUrgeList"] = "/cms/afterLoanManage/phoneUrgeList"
 
   Object.keys(menuMapPageDic).map(key => {
     if(replaceMap[key]) {

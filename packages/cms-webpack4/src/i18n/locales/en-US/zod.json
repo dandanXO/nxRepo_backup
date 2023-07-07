@@ -1,0 +1,6 @@
+{
+    "graterThan": "Ensure the entered amount is greater than ",
+    "inputNumber": "This field only allows numeric input",
+    "notExceed": "The entered amount must not exceed the ",
+    "required": "Must enter "
+}

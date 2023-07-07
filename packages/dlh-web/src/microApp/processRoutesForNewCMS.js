@@ -133,6 +133,10 @@ export const processRoutesForNewCMS = (data) => {
     // 当日催收
     if (menuItem.actionUrl === "/todayLoanManage") {
       menuItem.children && menuItem.children.map(level2MenuItem => {
+        // 当日电催列表
+        if (level2MenuItem.actionUrl === "/todayPhoneUrgeList") {
+          level2MenuItem.actionUrl = "/cms/todayLoanManage/todayPhoneUrgeList";
+        }
         // 当日订单分配
         if (level2MenuItem.actionUrl === "/todayOrderDistribute") {
           level2MenuItem.actionUrl = "/cms/today-distribution";
@@ -146,6 +150,10 @@ export const processRoutesForNewCMS = (data) => {
         // 逾期订单分配
         if (level2MenuItem.actionUrl === "/overdueOrderDistribute") {
           level2MenuItem.actionUrl = "/cms/overdue-distribution";
+        }
+        // 逾期电催列表
+        if (level2MenuItem.actionUrl === "/phoneUrgeList") {
+          level2MenuItem.actionUrl = "/cms/afterLoanManage/phoneUrgeList";
         }
       })
     }
