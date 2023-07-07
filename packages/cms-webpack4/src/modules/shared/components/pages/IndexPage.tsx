@@ -143,6 +143,16 @@ export function IndexPage(): JSX.Element {
                     <a>Reloan Statistics</a>
                 </Link>
             </div>
+            <div>
+                <Link to="/todayLoanManage/todayPhoneUrgeList">
+                    <a>Current Day Phone Urge List</a>
+                </Link>
+            </div>
+            <div>
+                <Link to="/afterLoanManage/phoneUrgeList">
+                    <a>Overdue Phone Urge List</a>
+                </Link>
+            </div>
 
             {/*<button onClick={() => methodDoesNotExist()}>Test Sentry - Break the world</button>;*/}
         </div>

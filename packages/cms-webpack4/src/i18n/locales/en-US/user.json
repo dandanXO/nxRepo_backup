@@ -1,0 +1,42 @@
+{
+    "address": "Address",
+    "birthDay": "Date of birth",
+    "education": "Education",
+    "email": "Email",
+    "emergencyContact": "Emergency Contact",
+    "fatherName": "Father's Name",
+    "gender": "Gender",
+    "idCardNo": "ID Number",
+    "idcardBackPhoto": {
+        "Bangladesh": "Back side of NID",
+        "India": "Back side of Aadhaar card",
+        "Pakistan": "Back side of CNIC"
+    },
+    "idcardFrontPhoto": {
+        "Bangladesh": "Front side of NID",
+        "India": "Front side of Aadhaar card",
+        "Pakistan": "Front side of CNIC"
+    },
+    "idcardPortraitPhoto": {
+        "Bangladesh": "Portrait",
+        "India": "Portrait",
+        "Pakistan": "Portrait"
+    },
+    "identityInfo": "Identity Information",
+    "maritalStatus": "Marital Status",
+    "mobileNumber": "Mobile Number",
+    "occupation": "Occupation",
+    "panId": "PAN Number",
+    "panPhoto": {
+        "India": "PAN card"
+    },
+    "personalInfo": "Personal information",
+    "registerChannel": "Channel",
+    "registerInfo": "Registration Information",
+    "registerPackageName": "Package Name",
+    "registerTime": "Registration Time",
+    "salaryRange": "Salary Range",
+    "userId": "User ID",
+    "userName": "User Name",
+    "userSource": "User Source"
+}

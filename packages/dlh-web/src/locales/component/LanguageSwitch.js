@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import {IntlContext} from '../api/IntlContext';
 import { Menu, Dropdown, Icon } from 'antd';
+import { qiankunActions } from "../../index";
 
 const menu = (state) => (
   <Menu>
     <Menu.Item>
-      <a onClick={state.switchToEN}>ENG</a>
+      <a onClick={() => {
+        state.switchToEN();
+        qiankunActions.setGlobalState({locale: 'en'});
+      }}>ENG</a>
     </Menu.Item>
     <Menu.Item>
-      <a onClick={state.switchToCN}>简</a>
+      <a onClick={() => {
+        state.switchToCN();
+        qiankunActions.setGlobalState({locale: 'cn'});
+      }}>简</a>
     </Menu.Item>
   </Menu>
 );
@@ -18,9 +25,9 @@ class LanguageSwitch extends Component{
     super(...args);
   }
 
-  
 
- 
+
+
   render(){
     return (
       <IntlContext.Consumer>
@@ -33,13 +40,13 @@ class LanguageSwitch extends Component{
             </Dropdown>
           </div>
         )}
-      
+
       </IntlContext.Consumer>
     );
   }
 
 
-  
+
 
 }
 

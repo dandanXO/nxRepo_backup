@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 
 import { AppRouter } from './AppRouter';
-import './modules/shared/i18n';
+import './i18n';
 import { getAdminUser } from './modules/shared/storage/getUserInfo';
 import { appStore } from './modules/shared/store';
 import './modules/shared/styles/app.less';

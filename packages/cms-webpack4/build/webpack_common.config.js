@@ -20,7 +20,7 @@ const commonRules = [
     },
     {
         test: /\.js|jsx$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /.json/],
         loader: "babel-loader",
     },
     {
@@ -101,6 +101,6 @@ const commonPlugins = [
         'appInfo': {
             'COUNTRY': JSON.stringify(country),
         },
-    })
+    }),
 ]
 module.exports = { commonRules, commonPlugins };
