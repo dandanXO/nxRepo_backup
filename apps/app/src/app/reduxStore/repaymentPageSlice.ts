@@ -15,7 +15,7 @@ type InitialStateType = {
 export type RepaymentRecordActionPayload={
     repaymentRecord:GetLoanRecord[]
 }
-const initialState: InitialStateType = {
+export const repaymentPageInitialState: InitialStateType = {
     paymentType: 'Unpaid',
     scrollPosition: 0,
     repaymentRecord: []
@@ -23,7 +23,7 @@ const initialState: InitialStateType = {
 
 export const repaymentPageSlice = createSlice({
     name: 'repaymentPage',
-    initialState,
+    initialState: repaymentPageInitialState,
     reducers: {
         updateRepaymentPage: (state, action: PayloadAction<RepaymentPageActionPayload>) => {
             state.paymentType = action.payload.paymentType;

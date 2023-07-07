@@ -124,6 +124,7 @@ export const Tags = (props: ITags) => {
         props.items.map((item, index) => {
           return (
             <Tag
+              key={item}
               layoutType={layoutType}
               active={activeIndex === index}
               text={item}
