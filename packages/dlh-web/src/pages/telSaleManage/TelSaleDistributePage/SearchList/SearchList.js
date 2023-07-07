@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Row, Col, Button, Input, Select } from 'antd';
+import { Form, Row, Col, Button, Input, Select, DatePicker } from 'antd';
 import { injectIntl, FormattedMessage } from "react-intl";
+
+const { RangePicker } = DatePicker;
 
 const formItemLayout = {
     labelCol: { span: 6 },
@@ -23,8 +25,8 @@ class SearchList extends Component {
         return (
             <div>
                 <Form onSubmit={this.submit}>
-                    <Row gutter={40}>
-                        <Col span={8}>
+                    <Row>
+                        <Col xs={24} sm={12} lg={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.search.list.mobile" })}>
                                 {
                                     getFieldDecorator('phoneNo', {
@@ -35,7 +37,7 @@ class SearchList extends Component {
                                 }
                             </Form.Item>
                         </Col>
-                        <Col span={8}>
+                        <Col xs={24} sm={12} lg={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.order.status"})}>
                                 {
                                     getFieldDecorator('status', {
@@ -47,15 +49,27 @@ class SearchList extends Component {
                                             <Option value={'1'}><FormattedMessage id="page.table.not.verified" /></Option>
                                             <Option value={'2'}><FormattedMessage id="page.table.verified" /></Option>
                                             <Option value={'3'}><FormattedMessage id="page.table.loaning" /></Option>
+                                            <Option value={'4'}><FormattedMessage id="page.table.paid.off.without.re.borrowing" /></Option>
                                         </Select>
                                     )
                                 }
                             </Form.Item>
                         </Col>
-                        <Col span={8}>
-                            <Form.Item style={{ textAlign: 'left' }}>
-                                <Button type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /> </Button>
-                            </Form.Item>
+                        <Col xs={24} sm={12} lg={8}>
+                          <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.tel.sale.createTime" })}>
+                            {
+                              getFieldDecorator('time', {
+                                initialValue: ['', '']
+                              })(
+                                <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]} />
+                              )
+                            }
+                          </Form.Item>
+                        </Col>
+                        <Col xs={{offset:0, span:24}} sm={{offset: 16, span:8}} lg={{offset: 22, span:2}}>
+                          <Form.Item style={{ textAlign: 'left'}}>
+                            <Button style={{width: '100%'}} type={'primary'} htmlType={'submit'}><FormattedMessage id="page.search.list.search" /> </Button>
+                          </Form.Item>
                         </Col>
                     </Row>
                 </Form>

@@ -25,7 +25,7 @@ function TelSaleDistributePage ({
     urgePersonModalVisible,
     importModalVisible
 }) {
-    const [searchParams, setSearchParams] = useState({ page: 0, size: 10, phoneNo: "", status: "" });
+    const [searchParams, setSearchParams] = useState({ page: 0, size: 10, phoneNo: "", status: "", createTimeStart: "", createTimeEnd: "" });
     const [selectedRow, setSelectedRow] = useState([]);
 
     useEffect(() => {
@@ -52,7 +52,16 @@ function TelSaleDistributePage ({
     };
 
     const handleSearch = (obj) => {
-        setSearchParams({ ...obj, page: 0, size: 10 });
+        const { time, phoneNo, status } = obj
+        const isArr = Array.isArray(time) && time.length > 0;
+        setSearchParams({
+          phoneNo,
+          status,
+          createTimeStart: isArr && time[0] ? time[0].format('YYYY-MM-DD 00:00:00') : '',
+          createTimeEnd: isArr && time[1] ? time[1].format('YYYY-MM-DD 23:59:59') : '',
+          page: 0,
+          size: 10
+        });
     };
 
     const handlePageChange = (info) => {
