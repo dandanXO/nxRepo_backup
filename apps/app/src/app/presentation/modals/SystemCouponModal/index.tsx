@@ -54,6 +54,8 @@ const SystemCouponModal = () => {
 
             navigate(nextUrl as string);
         }
+
+        handleCancel();
     }
 
     return (
