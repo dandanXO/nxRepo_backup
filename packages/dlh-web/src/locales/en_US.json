@@ -675,6 +675,7 @@
   "page.table.apps.install.upload.amount": "Apps installation record upload amount",
   "page.table.ad.appName": "app name",
   "page.table.appName": "App Name",
+  "page.table.paymentPlatformName": "Payment Platform Name",
   "page.table.ad.title": "title",
   "page.table.ad.quota": "Advertising quote",
   "page.table.ad.loan.success.rate": "Load success rate",

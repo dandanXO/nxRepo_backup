@@ -628,6 +628,7 @@
   "page.table.batch.loan.again": "批次重新放款",
   "page.table.ad.appName": "產品名稱",
   "page.table.appName": "App名稱",
+  "page.table.paymentPlatformName": "代付平台",
   "page.table.ad.title": "廣告標題",
   "page.table.ad.quota": "廣告額度",
   "page.table.ad.loan.success.rate": "放款成功率",

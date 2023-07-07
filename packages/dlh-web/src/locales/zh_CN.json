@@ -684,6 +684,7 @@
   "page.table.apps.install.upload.amount": "AppList认证",
   "page.table.ad.appName": "产品名称",
   "page.table.appName": "App名称",
+  "page.table.paymentPlatformName": "代付平台",
   "page.table.ad.title": "广告标题",
   "page.table.ad.quota": "广告额度",
   "page.table.ad.loan.success.rate": "放款成功率",
