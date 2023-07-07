@@ -17,6 +17,7 @@ import { useEnum } from '../../../shared/constants/useEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { formatPrice } from '../../../shared/utils/format/formatPrice';
 import {
+    useGetCollectTodayGenerateLinkSwitchQuery,
     useGetCollectTodayOrderDetailQuery,
     useGetCollectTodayUserDetailQuery,
     useLazyGetCollectTodayCollectRecordQuery,
@@ -48,6 +49,8 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
 
     const { data: adminSwitch, isFetching: adminSwitchFetching } = useGetAdminSwitchQuery(null);
     const { data: orderInfo, isFetching: orderInfoFetching } = useGetCollectTodayOrderDetailQuery({ collectId });
+    const { data: generateLinkSwitch, isFetching: generateLinkSwitchFetching } =
+        useGetCollectTodayGenerateLinkSwitchQuery({ todayId: collectId });
 
     const { t } = useTranslation();
     const {
@@ -59,7 +62,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         GenerateRePayLinkEnum,
     } = useEnum('urgeCollection');
 
-    const fetched = !orderInfoFetching && !adminSwitchFetching;
+    const fetched = !orderInfoFetching && !adminSwitchFetching && !generateLinkSwitchFetching;
 
     const onUrgeRecordAdded = (generateLinkType, link) => {
         setShowModal(false);
@@ -81,7 +84,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
 
     useEffect(() => {
         if (showCopied) {
-            messageApi.success(t('common:linkCopied')).then(() => setShowCopied(false));
+            messageApi.success(t('common:message.linkCopied')).then(() => setShowCopied(false));
         }
     }, [showCopied]);
 
@@ -112,7 +115,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 render: (value, { channelUrl }) => (
                     <div>
                         {value}
-                        <CopyTextIcon text={channelUrl} tooltip />
+                        <CopyTextIcon text={channelUrl} tooltip copiedMessage={t('common:message.linkCopied')} />
                     </div>
                 ),
             },
@@ -345,13 +348,14 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         ];
 
         const smsLogsColumns = [
-            { title: t('common:table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone' },
-            { title: t('common:table.smsContent'), key: 'content', dataIndex: 'content' },
-            { title: t('common:table.smsSendType'), key: 'content', dataIndex: 'direction' },
+            { title: t('common:table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone', width: '15%' },
+            { title: t('common:table.smsContent'), key: 'content', dataIndex: 'content', width: '65%' },
+            { title: t('common:table.smsSendType'), key: 'content', dataIndex: 'direction', width: '10%' },
             {
                 title: t('common:table.sendTime'),
                 key: 'time',
                 dataIndex: 'time',
+                width: '10%',
                 render: (_, { time }) => <div>{moment(time).format('YYYY-MM-DD HH:mm:ss')}</div>,
             },
         ];
@@ -477,6 +481,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 amountDue={orderInfo?.amountDue}
                 handleCloseModal={() => setShowModal(false)}
                 onAdded={onUrgeRecordAdded}
+                generateLinkSwitch={generateLinkSwitch}
             />
             <Tab />
         </React.Fragment>

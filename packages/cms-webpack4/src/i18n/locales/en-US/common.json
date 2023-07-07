@@ -21,7 +21,6 @@
     },
     "function": "Function",
     "goBack": "Back",
-    "linkCopied": "Copied",
     "menu": {
         "currentDayOverdueCall": "CurrentDay Collection",
         "currentDayOverdueCallList": "CurrentDay Overdue Call List",
@@ -30,9 +29,10 @@
         "overdueCollection": "Overdue Collection"
     },
     "message": {
-        "copySuccess": "Link Copied"
+        "copied": "Copied",
+        "linkCopied": "Link Copied"
     },
-    "noRestriction": "No Restriction",
+    "noRestriction": "Select All",
     "none": "None",
     "orderLabelStatus": {
         "extension": "Extension",
