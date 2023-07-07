@@ -396,6 +396,7 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
                         ? 1
                         : currentTodayPhoneUrgeListResponse?.currentPage,
             }}
+            scroll={{ x: 'auto' }}
         />
     );
 };

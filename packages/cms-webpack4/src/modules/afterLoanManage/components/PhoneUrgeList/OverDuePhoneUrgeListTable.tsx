@@ -394,6 +394,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
                 current:
                     overDuePhoneUrgeListResponse?.records?.length === 0 ? 1 : overDuePhoneUrgeListResponse?.currentPage,
             }}
+            scroll={{ x: 'auto' }}
         />
     );
 };
