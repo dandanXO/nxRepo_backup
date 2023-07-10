@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
+import { useGetTodayCollectorListQuery } from '../../api/CollectTodayApi';
 import { useLazyGetCollectTodayCollectDetailQuery } from '../../api/CollectTodayCollectDetailApi';
 import { GetCollectTodayCollectDetail } from '../../api/types/getCollectTodayCollectDetail';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
@@ -29,7 +30,7 @@ const ReportTable = (): JSX.Element => {
     const initSearchList = {
         merchantId: undefined,
         collectionDate: [initDate.format('YYYY-MM-DD'), initDate.format('YYYY-MM-DD')],
-        collectTeam: undefined,
+        collectTeamId: undefined,
         collectStage: undefined,
         collectId: undefined,
         pageNum: 1,
@@ -46,6 +47,7 @@ const ReportTable = (): JSX.Element => {
         refetchOnFocus: false,
         refetchOnReconnect: false,
     });
+    const { data: collectorData } = useGetTodayCollectorListQuery(null);
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const isSuperAdmin = getIsSuperAdmin();
 
@@ -54,6 +56,11 @@ const ReportTable = (): JSX.Element => {
     };
 
     const { t } = useTranslation();
+
+    const collectorListEnum = collectorData?.reduce((acc, current) => {
+        acc.set(current.collectorId, { text: current.collectorName });
+        return acc;
+    }, new Map().set('', { text: t('common:noRestriction') }));
 
     const columns: ProColumns[] = [
         {
@@ -90,6 +97,15 @@ const ReportTable = (): JSX.Element => {
         {
             title: t('urgeCollection:collector'),
             dataIndex: 'collector',
+            hideInSearch: true,
+        },
+        {
+            title: t('urgeCollection:collector'),
+            dataIndex: 'collectId',
+            hideInTable: true,
+            valueType: 'select',
+            valueEnum: collectorListEnum,
+            fieldProps: { showSearch: true, allowClear: false },
         },
         {
             title: t('urgeCollection:initialLoginTime'),
@@ -173,7 +189,7 @@ const ReportTable = (): JSX.Element => {
         const queryParameters = {
             collectId: searchList.collectId,
             collectStage: searchList.collectStage,
-            collectTeam: searchList.collectTeam,
+            collectTeamId: searchList.collectTeamId,
             merchantId: searchList.merchantId,
             pageNum: searchList.pageNum,
             pageSize: searchList.pageSize,

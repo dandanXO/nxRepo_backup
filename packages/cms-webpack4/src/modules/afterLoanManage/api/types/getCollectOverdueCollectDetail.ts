@@ -3,7 +3,7 @@ import { GetPageableResponse } from '../../../shared/api/commonReponse';
 export interface GetCollectOverdueCollectDetailQueryString {
     collectId?: number; // 跟進人
     collectStage?: string; // 逾期階段
-    collectTeam?: string; // 催收团队
+    collectTeamId?: string; // 催收团队
     endTime?: string; // 跟进开始日期
     merchantId?: number; // 商户id
     startTime?: string; // 跟进开始日期
