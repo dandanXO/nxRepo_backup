@@ -1,16 +1,31 @@
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Modal } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { useLazyGetLoginAccountListQuery } from '../../../system/api/LoginAccountManageApi';
+import { operatorsList } from '../../../system/api/types/LoginAccountManageTypes/getLoginAccountList';
 
 interface LoginLogsModalProps {
     open: boolean;
-    collectorId: string;
+    collector: string;
     onCancel: () => void;
 }
 
-const CollectorLoginLogsModal = ({ open, collectorId, onCancel }: LoginLogsModalProps): JSX.Element => {
+const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalProps): JSX.Element => {
+    const initSearchList = {
+        accountNumber: collector,
+        pageNum: 1,
+        pageSize: 10,
+    };
+    const [searchList, setSearchList] = useState(initSearchList);
     const { t } = useTranslation();
+
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetLoginAccountListQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false,
+    });
 
     const mockData = [
         { loginTime: '2022-08-21 10:03:12', ip: '121.198.4.111' },
@@ -20,13 +35,17 @@ const CollectorLoginLogsModal = ({ open, collectorId, onCancel }: LoginLogsModal
     const columns: ProColumns[] = [
         {
             title: t('common:table.loginTime'),
-            dataIndex: 'loginTime',
+            dataIndex: 'lastLoginTime',
         },
         {
             title: t('common:table.loginIP'),
             dataIndex: 'ip',
         },
     ];
+
+    useEffect(() => {
+        triggerGetList(searchList);
+    }, [searchList]);
 
     return (
         <Modal
@@ -35,8 +54,16 @@ const CollectorLoginLogsModal = ({ open, collectorId, onCancel }: LoginLogsModal
             footer={null}
             width="50%"
             onCancel={onCancel}
+            maskClosable={false}
         >
-            <ProTable toolBarRender={false} search={false} dataSource={mockData} columns={columns} />
+            <ProTable<operatorsList>
+                loading={isFetching}
+                columns={columns}
+                rowKey="lastLoginTime"
+                dataSource={(currentData && currentData[0]?.operators) || []}
+                toolBarRender={false}
+                search={false}
+            />
         </Modal>
     );
 };

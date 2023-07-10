@@ -37,9 +37,9 @@ const ReportTable = (): JSX.Element => {
         pageNum: 1,
         pageSize: 10,
     };
-    const [loginLogsModal, setLoginLogsModal] = useState<{ open: boolean; collectorId: string }>({
+    const [loginLogsModal, setLoginLogsModal] = useState<{ open: boolean; collector: string }>({
         open: false,
-        collectorId: '',
+        collector: '',
     });
     const [searchList, setSearchList] = useState(initSearchList);
 
@@ -53,8 +53,8 @@ const ReportTable = (): JSX.Element => {
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const isSuperAdmin = getIsSuperAdmin();
 
-    const handleShowLoginLogs = (collectorId: string) => {
-        setLoginLogsModal({ open: true, collectorId: collectorId });
+    const handleShowLoginLogs = (collector: string) => {
+        setLoginLogsModal({ open: true, collector: collector });
     };
 
     const { t } = useTranslation();
@@ -75,8 +75,8 @@ const ReportTable = (): JSX.Element => {
             title: t('common:function'),
             key: 'function',
             hideInSearch: true,
-            render: (_, { collectorId }) => (
-                <a onClick={() => handleShowLoginLogs(collectorId)}>{t('urgeCollection:loginLogs')}</a>
+            render: (_, { collector }) => (
+                <a onClick={() => handleShowLoginLogs(collector)}>{t('urgeCollection:loginLogs')}</a>
             ),
         },
         {
@@ -273,16 +273,18 @@ const ReportTable = (): JSX.Element => {
                     current: currentData?.records?.records?.length === 0 ? 1 : currentData?.records?.currentPage,
                 }}
             />
-            <CollectorLoginLogsModal
-                open={loginLogsModal.open}
-                collectorId={loginLogsModal.collectorId}
-                onCancel={() =>
-                    setLoginLogsModal({
-                        open: false,
-                        collectorId: '',
-                    })
-                }
-            />
+            {loginLogsModal.open && (
+                <CollectorLoginLogsModal
+                    open={loginLogsModal.open}
+                    collector={loginLogsModal.collector}
+                    onCancel={() =>
+                        setLoginLogsModal({
+                            open: false,
+                            collector: '',
+                        })
+                    }
+                />
+            )}
         </>
     );
 };
