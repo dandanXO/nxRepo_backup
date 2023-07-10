@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { TableCard } from '../../../shared/components/withQueryHook/Cards';
 import { useLazyGetLoginAccountListQuery } from '../../../system/api/LoginAccountManageApi';
 import { operatorsList } from '../../../system/api/types/LoginAccountManageTypes/getLoginAccountList';
 
@@ -56,13 +57,14 @@ const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalPr
             onCancel={onCancel}
             maskClosable={false}
         >
-            <ProTable<operatorsList>
-                loading={isFetching}
+            <TableCard
                 columns={columns}
+                hook={useLazyGetLoginAccountListQuery}
+                queryBody={{ accountNumber: collector }}
+                dataSourcePath="0.operators"
+                totalRecordsPath=""
                 rowKey="lastLoginTime"
-                dataSource={(currentData && currentData[0]?.operators) || []}
-                toolBarRender={false}
-                search={false}
+                hasTotalRecords={false}
             />
         </Modal>
     );
