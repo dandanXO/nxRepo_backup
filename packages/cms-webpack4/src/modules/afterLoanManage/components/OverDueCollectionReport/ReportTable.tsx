@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
+import { useLazyGetCollectOverdueCollectDetailQuery } from '../../api/CollectOverdueCollectDetailApi';
+import { GetCollectOverdueCollectDetail } from '../../api/types/getCollectOverdueCollectDetail';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
 
 const searchSpan = {
@@ -23,50 +25,36 @@ const searchFormLayout = {
 };
 
 const ReportTable = (): JSX.Element => {
-    const [loginLogsdModal, setLoginLogsdModal] = useState<{ open: boolean; collectorId: string }>({
+    const initDate = moment();
+    const initSearchList = {
+        merchantId: undefined,
+        collectionDate: [initDate.format('YYYY-MM-DD'), initDate.format('YYYY-MM-DD')],
+        collectTeam: undefined,
+        collectStage: undefined,
+        collectId: undefined,
+        pageNum: 1,
+        pageSize: 10,
+    };
+    const [loginLogsModal, setLoginLogsModal] = useState<{ open: boolean; collectorId: string }>({
         open: false,
         collectorId: '',
     });
+    const [searchList, setSearchList] = useState(initSearchList);
 
+    const [triggerGetList, { currentData, isFetching }] = useLazyGetCollectOverdueCollectDetailQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false,
+    });
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const isSuperAdmin = getIsSuperAdmin();
 
-    const initDate = moment();
-    const initSearchList = {
-        merchantId: '',
-        collectionDate: [initDate, initDate],
-        collectorTame: '',
-        stage: '',
-        collectorId: '',
-    };
-
     const handleShowLoginLogs = (collectorId: string) => {
-        setLoginLogsdModal({ open: true, collectorId: collectorId });
+        setLoginLogsModal({ open: true, collectorId: collectorId });
     };
 
     const { t } = useTranslation();
 
-    const mockData = [
-        {
-            collectorId: '001',
-            merchantName: 'BB商戶',
-            collectionDate: '2022-08-19',
-            collectionTeam: '催收机构名A',
-            overDueStage: 'S1',
-            collector: 'Json',
-            loginTime: '08:03:12',
-            followCount: 20,
-            coverageRage: '25%',
-            repaidCount: 2,
-            extensionCount: 10,
-            extensionRate: '1%',
-            receivedCount: 2,
-            paymentRate: '50%',
-            receiptAmount: 6800,
-            followUpAmount: 25800,
-            paymentAmountRate: '26.36%',
-        },
-    ];
     const columns: ProColumns[] = [
         {
             title: t('common:function'),
@@ -78,21 +66,25 @@ const ReportTable = (): JSX.Element => {
         },
         {
             title: t('urgeCollection:followUpDate'),
+            dataIndex: 'followUpDate',
+            hideInSearch: true,
+        },
+        {
             dataIndex: 'collectionDate',
             valueType: 'dateRange',
             fieldProps: {
                 placeholder: [t('common:startDate'), t('common:endDate')],
             },
+            hideInTable: true,
             initialValue: [initDate, initDate],
-            render: (_, { collectionDate }) => collectionDate,
         },
         {
             title: t('urgeCollection:collectionTeam'),
-            dataIndex: 'collectionTeam',
+            dataIndex: 'collectTeam',
         },
         {
             title: t('urgeCollection:stage'),
-            dataIndex: 'overDueStage',
+            dataIndex: 'collectStage',
         },
         {
             title: t('urgeCollection:collector'),
@@ -100,28 +92,28 @@ const ReportTable = (): JSX.Element => {
         },
         {
             title: t('urgeCollection:initialLoginTime'),
-            dataIndex: 'loginTime',
+            dataIndex: 'initialLoginTime',
             hideInSearch: true,
         },
         {
             title: t('urgeCollection:numberOfFollowUps'),
-            dataIndex: 'followCount',
+            dataIndex: 'followUpTimes',
             hideInSearch: true,
         },
         {
             tooltip: t('urgeCollection:coverageRateTooltips'),
             title: t('urgeCollection:coverageRate'),
-            dataIndex: 'coverageRage',
+            dataIndex: 'coverageRate',
             hideInSearch: true,
         },
         {
             title: t('urgeCollection:fullRepaymentOrders'),
-            dataIndex: 'repaidCount',
+            dataIndex: 'fullRepaymentOrders',
             hideInSearch: true,
         },
         {
             title: t('urgeCollection:extensionCount'),
-            dataIndex: 'extensionCount',
+            dataIndex: 'numberOfExtensionOrders',
             hideInSearch: true,
         },
         {
@@ -133,13 +125,13 @@ const ReportTable = (): JSX.Element => {
         {
             tooltip: t('urgeCollection:totalReceivedCountTooltips'),
             title: t('urgeCollection:totalReceivedCount'),
-            dataIndex: 'receivedCount',
+            dataIndex: 'totalNumberOfRepaymentsReceived',
             hideInSearch: true,
         },
         {
             tooltip: t('urgeCollection:orderPaymentRateTooltips'),
             title: t('urgeCollection:orderPaymentRate'),
-            dataIndex: 'paymentRate',
+            dataIndex: 'orderPaymentRate',
             hideInSearch: true,
         },
         {
@@ -155,7 +147,7 @@ const ReportTable = (): JSX.Element => {
         {
             tooltip: t('urgeCollection:paymentAmountRateTooltips'),
             title: t('urgeCollection:paymentAmountRate'),
-            dataIndex: 'paymentAmountRate',
+            dataIndex: 'paymentAmountRatio',
             hideInSearch: true,
         },
     ];
@@ -177,6 +169,20 @@ const ReportTable = (): JSX.Element => {
     }
 
     useEffect(() => {
+        const queryParameters = {
+            collectId: searchList.collectId,
+            collectStage: searchList.collectStage,
+            collectTeam: searchList.collectTeam,
+            merchantId: searchList.merchantId,
+            pageNum: searchList.pageNum,
+            pageSize: searchList.pageSize,
+            startTime: searchList.collectionDate[0],
+            endTime: searchList.collectionDate[1],
+        };
+        triggerGetList(queryParameters);
+    }, [searchList]);
+
+    useEffect(() => {
         if (isSuperAdmin) {
             triggerGetMerchantList(null);
         }
@@ -184,10 +190,11 @@ const ReportTable = (): JSX.Element => {
 
     return (
         <>
-            <ProTable
+            <ProTable<GetCollectOverdueCollectDetail>
+                loading={isFetching}
                 columns={columns}
-                rowKey="collectorId"
-                dataSource={mockData}
+                rowKey="collector"
+                dataSource={currentData?.records?.records || []}
                 form={{ ...searchFormLayout }}
                 search={{
                     span: searchSpan,
@@ -208,15 +215,14 @@ const ReportTable = (): JSX.Element => {
                     ],
                 }}
                 onSubmit={(params) => {
-                    console.log('TTT');
-                    console.log(params);
+                    setSearchList(params as any);
                 }}
             />
             <CollectorLoginLogsModal
-                open={loginLogsdModal.open}
-                collectorId={loginLogsdModal.collectorId}
+                open={loginLogsModal.open}
+                collectorId={loginLogsModal.collectorId}
                 onCancel={() =>
-                    setLoginLogsdModal({
+                    setLoginLogsModal({
                         open: false,
                         collectorId: '',
                     })

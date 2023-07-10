@@ -1,7 +1,7 @@
 import { API } from '../../shared/api';
 import {
     GetCollectTodayCollectDetailQueryString,
-    GetCollectTodayCollectDetailRecords,
+    GetCollectTodayCollectDetailResponse,
 } from './types/getCollectTodayCollectDetail';
 
 const CollectTodayCollectDetailApi = API.injectEndpoints({
@@ -9,7 +9,7 @@ const CollectTodayCollectDetailApi = API.injectEndpoints({
     endpoints: (builder) => ({
         // [GET] 當日催收明細
         getCollectTodayCollectDetail: builder.query<
-            GetCollectTodayCollectDetailRecords,
+            GetCollectTodayCollectDetailResponse,
             GetCollectTodayCollectDetailQueryString
         >({
             query: (requestBody: GetCollectTodayCollectDetailQueryString) => ({

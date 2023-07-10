@@ -28,7 +28,7 @@ const ReportTable = (): JSX.Element => {
     const initDate = moment();
     const initSearchList = {
         merchantId: undefined,
-        collectionDate: [initDate, initDate],
+        collectionDate: [initDate.format('YYYY-MM-DD'), initDate.format('YYYY-MM-DD')],
         collectTeam: undefined,
         collectStage: undefined,
         collectId: undefined,
@@ -70,7 +70,7 @@ const ReportTable = (): JSX.Element => {
             hideInSearch: true,
         },
         {
-            dataIndex: 'followUpDatePicker',
+            dataIndex: 'collectionDate',
             valueType: 'dateRange',
             fieldProps: {
                 placeholder: [t('common:startDate'), t('common:endDate')],
@@ -176,8 +176,8 @@ const ReportTable = (): JSX.Element => {
             merchantId: searchList.merchantId,
             pageNum: searchList.pageNum,
             pageSize: searchList.pageSize,
-            startTime: searchList.collectionDate[0].format('YYYY-MM-DD'),
-            endTime: searchList.collectionDate[1].format('YYYY-MM-DD'),
+            startTime: searchList.collectionDate[0],
+            endTime: searchList.collectionDate[1],
         };
         triggerGetList(queryParameters);
     }, [searchList]);
@@ -194,7 +194,7 @@ const ReportTable = (): JSX.Element => {
                 loading={isFetching}
                 columns={columns}
                 rowKey="collector"
-                dataSource={currentData?.records || []}
+                dataSource={currentData?.records?.records || []}
                 form={{ ...searchFormLayout }}
                 search={{
                     span: searchSpan,
@@ -216,8 +216,7 @@ const ReportTable = (): JSX.Element => {
                     ],
                 }}
                 onSubmit={(params) => {
-                    console.log('TTT');
-                    console.log(params);
+                    setSearchList(params as any);
                 }}
             />
             <CollectorLoginLogsModal
