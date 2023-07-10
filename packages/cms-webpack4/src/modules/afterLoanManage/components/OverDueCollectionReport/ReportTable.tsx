@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next';
 
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
-import { useGetCollectOverDueCollectorListQuery } from '../../api/CollectOverDueApi';
+import {
+    useGetCollectOverDueCollectorListQuery,
+    useGetCollectOverdueCollectDepartmentListQuery,
+} from '../../api/CollectOverDueApi';
 import { useLazyGetCollectOverdueCollectDetailQuery } from '../../api/CollectOverdueCollectDetailApi';
 import { GetCollectOverdueCollectDetail } from '../../api/types/getCollectOverdueCollectDetail';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
@@ -48,6 +51,7 @@ const ReportTable = (): JSX.Element => {
         refetchOnReconnect: false,
     });
     const { data: collectorData } = useGetCollectOverDueCollectorListQuery(null);
+    const { data: collectDepartments } = useGetCollectOverdueCollectDepartmentListQuery(null);
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const isSuperAdmin = getIsSuperAdmin();
 
@@ -59,6 +63,11 @@ const ReportTable = (): JSX.Element => {
 
     const collectorListEnum = collectorData?.reduce((acc, current) => {
         acc.set(current.collectorId, { text: current.collectorName });
+        return acc;
+    }, new Map().set('', { text: t('common:noRestriction') }));
+
+    const collectDepartmentsEnum = collectDepartments?.reduce((acc, current) => {
+        acc.set(current.departmentId, { text: current.departmentName });
         return acc;
     }, new Map().set('', { text: t('common:noRestriction') }));
 
@@ -89,6 +98,15 @@ const ReportTable = (): JSX.Element => {
         {
             title: t('urgeCollection:collectionTeam'),
             dataIndex: 'collectTeam',
+            hideInSearch: true,
+        },
+        {
+            title: t('urgeCollection:collectionTeam'),
+            dataIndex: 'collectTeamId',
+            hideInTable: true,
+            valueType: 'select',
+            valueEnum: collectDepartmentsEnum,
+            fieldProps: { showSearch: true, allowClear: false },
         },
         {
             title: t('urgeCollection:stage'),
@@ -185,6 +203,10 @@ const ReportTable = (): JSX.Element => {
         });
     }
 
+    const pageOnChange = (current, pageSize) => {
+        setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
+    };
+
     useEffect(() => {
         const queryParameters = {
             collectId: searchList.collectId,
@@ -233,7 +255,17 @@ const ReportTable = (): JSX.Element => {
                     ],
                 }}
                 onSubmit={(params) => {
-                    setSearchList(params as any);
+                    setSearchList({
+                        ...searchList,
+                        ...params,
+                    });
+                }}
+                pagination={{
+                    showSizeChanger: true,
+                    defaultPageSize: 10,
+                    onChange: pageOnChange,
+                    total: currentData?.records?.totalRecords,
+                    current: currentData?.records?.records?.length === 0 ? 1 : currentData?.records?.currentPage,
                 }}
             />
             <CollectorLoginLogsModal
