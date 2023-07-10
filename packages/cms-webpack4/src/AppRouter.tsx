@@ -144,6 +144,7 @@ export const AppRouter = (): JSX.Element => {
                     <Route path={'/today-distribution'} component={TodayDistributionPage} />
                     {/*// @ts-ignore*/}
                     <Route path={'/overdue-distribution'} component={OverdueDistributionPage} />
+
                     {/*// @ts-ignore*/}
                     <Route path={'/new-customer-repayment-rate'} component={NewCustomerRiskControlRepaymentRatePage} />
                     {/*// @ts-ignore*/}

@@ -142,6 +142,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           // onIBanChange={onMobileWalletIBanChange}
           // onIbanBlur={onMobileWalletIbanBlur}
           isFormPending={isFormPending || false}
+          cardholderName={props.cardholderName}
           confirm={() => {
             const validation = confirmMobileWallet();
             if (validation) {
@@ -150,13 +151,12 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                   show: true,
                   confirm: false,
                   paymentMethod: chooseBindMethodValue,
-                  cardholderName: '',
+                  cardholderName: props.cardholderName,
                   bankName: '',
                   bankAccNr: '',
                   mobileWallet: true,
                   mobileWalletAccount: mobileData.data,
                   walletVendor: walletValue?.label ?? '',
-                  walletName: walletValue?.label ?? '',
                   bankCode: '',
                 })
               );
@@ -194,7 +194,6 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                   mobileWallet: false,
                   mobileWalletAccount: '',
                   walletVendor: '',
-                  walletName: '',
                 } as any)
               );
             }

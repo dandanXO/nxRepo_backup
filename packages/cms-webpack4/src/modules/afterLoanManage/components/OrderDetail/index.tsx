@@ -1,0 +1,33 @@
+import { PageContainer } from '@ant-design/pro-components';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+
+import { itemRender } from '../../../shared/components/common/itemRender';
+import { OrderDetailContent } from './OrderDetailContent';
+
+export const OrderDetail = (): JSX.Element => {
+    const { t } = useTranslation();
+    const urlParams = useParams<{ userId: string; collectId: string }>();
+
+    const { userId, collectId } = urlParams;
+
+    return (
+        <PageContainer
+            header={{
+                ghost: true,
+                breadcrumb: {
+                    itemRender: itemRender,
+                    routes: [
+                        { path: '/', breadcrumbName: t('common:menu.homePage') },
+                        { path: null, breadcrumbName: t('common:menu.overdueCollection') },
+                        { path: '/afterLoanManage/phoneUrgeList', breadcrumbName: t('common:menu.overdueCallList') },
+                        { path: null, breadcrumbName: t('common:breadcrumb.orderDetails') },
+                    ],
+                },
+            }}
+        >
+            <OrderDetailContent userId={userId} collectId={collectId} />
+        </PageContainer>
+    );
+};

@@ -144,6 +144,16 @@ export function IndexPage(): JSX.Element {
                 </Link>
             </div>
             <div>
+                <Link to="/todayLoanManage/todayPhoneUrgeList">
+                    <a>Current Day Phone Urge List</a>
+                </Link>
+            </div>
+            <div>
+                <Link to="/afterLoanManage/phoneUrgeList">
+                    <a>Overdue Phone Urge List</a>
+                </Link>
+            </div>
+            <div>
                 <Link to="/todayLoanManage/currentDayCollectionReport">
                     <a>CurrentDay Collection Report</a>
                 </Link>
