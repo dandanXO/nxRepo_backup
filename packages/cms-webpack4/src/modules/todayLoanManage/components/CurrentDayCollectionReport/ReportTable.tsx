@@ -14,15 +14,15 @@ import CollectorLoginLogsModal from './CollectorLoginLogsModal';
 const searchSpan = {
     xs: 24,
     sm: 24,
-    md: 12,
+    md: 24,
     lg: 12,
     xl: 8,
     xxl: 8,
 };
 
 const searchFormLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 1824 },
 };
 
 const ReportTable = (): JSX.Element => {
