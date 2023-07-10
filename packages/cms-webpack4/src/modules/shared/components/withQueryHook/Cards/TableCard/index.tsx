@@ -10,7 +10,6 @@ interface ITableCardProps {
     title?: string;
     columns: {
         title: string | (() => React.ReactElement);
-        key: string;
         dataIndex: string;
         render?: (dom: React.ReactNode, entity: any) => React.ReactElement;
     }[];
