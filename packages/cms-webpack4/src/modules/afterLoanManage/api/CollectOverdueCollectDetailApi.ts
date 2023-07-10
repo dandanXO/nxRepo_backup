@@ -13,7 +13,7 @@ const CollectOverdueCollectDetailApi = API.injectEndpoints({
             GetCollectOverdueCollectDetailQueryString
         >({
             query: (requestBody: GetCollectOverdueCollectDetailQueryString) => ({
-                url: '/collect-Overdue/collect-detail',
+                url: '/collect-overdue/collect-detail',
                 params: requestBody,
                 method: 'get',
             }),

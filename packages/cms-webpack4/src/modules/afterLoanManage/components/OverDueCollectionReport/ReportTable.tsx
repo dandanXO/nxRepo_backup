@@ -70,6 +70,7 @@ const ReportTable = (): JSX.Element => {
             hideInSearch: true,
         },
         {
+            title: t('urgeCollection:followUpDate'),
             dataIndex: 'collectionDate',
             valueType: 'dateRange',
             fieldProps: {
@@ -204,6 +205,7 @@ const ReportTable = (): JSX.Element => {
                             <Button
                                 onClick={() => {
                                     form.setFieldsValue({ ...initSearchList });
+                                    setSearchList(initSearchList);
                                 }}
                             >
                                 {resetText}

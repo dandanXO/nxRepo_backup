@@ -70,6 +70,7 @@ const ReportTable = (): JSX.Element => {
             hideInSearch: true,
         },
         {
+            title: t('urgeCollection:followUpDate'),
             dataIndex: 'collectionDate',
             valueType: 'dateRange',
             fieldProps: {
