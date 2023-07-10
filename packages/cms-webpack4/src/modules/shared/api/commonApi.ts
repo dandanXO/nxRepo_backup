@@ -1,6 +1,5 @@
-import {API} from "./index";
-import {GetAdminSwitchResponse} from "./types/getAdminSwitch";
-
+import { API } from './index';
+import { GetAdminSwitchResponse } from './types/getAdminSwitch';
 
 const CommonApi = API.injectEndpoints({
     overrideExisting: false,
@@ -8,12 +7,10 @@ const CommonApi = API.injectEndpoints({
         getAdminSwitch: builder.query<GetAdminSwitchResponse, null>({
             query: () => ({
                 url: '/commons/admin-switch',
-                method: 'get'
-            })
-        })
-    })
-})
+                method: 'get',
+            }),
+        }),
+    }),
+});
 
-export const {
-    useGetAdminSwitchQuery
-} = CommonApi
+export const { useGetAdminSwitchQuery } = CommonApi;

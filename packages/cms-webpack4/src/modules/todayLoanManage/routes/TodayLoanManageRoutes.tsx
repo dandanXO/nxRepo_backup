@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import { CurrentDayCollectionReport } from '../components/CurrentDayCollectionReport';
 import { OrderDetail } from '../components/OrderDetail';
 import { TodayPhoneUrgeList } from '../components/TodayPhoneUrgeList';
-import { CurrentDayCollectionReport } from '../components/CurrentDayCollectionReport';
 
 const TodayLoanManageRoutes = (): JSX.Element => (
     <Switch>
