@@ -4,6 +4,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useEnum } from '../../../shared/constants/useEnum';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import {
@@ -60,6 +61,7 @@ const ReportTable = (): JSX.Element => {
     };
 
     const { t } = useTranslation();
+    const { OverDueStageEnum } = useEnum();
 
     const collectorListEnum = collectorData?.reduce((acc, current) => {
         acc.set(current.collectorId, { text: current.collectorName });
@@ -111,6 +113,12 @@ const ReportTable = (): JSX.Element => {
         {
             title: t('urgeCollection:stage'),
             dataIndex: 'collectStage',
+            valueType: 'select',
+            valueEnum: { '': { text: t('common:noRestriction') }, ...OverDueStageEnum },
+            fieldProps: {
+                showSearch: true,
+                allowClear: false,
+            },
         },
         {
             title: t('urgeCollection:collector'),
@@ -195,7 +203,6 @@ const ReportTable = (): JSX.Element => {
         columns.splice(2, 0, {
             title: t('urgeCollection:merchantName'),
             dataIndex: 'merchantId',
-            initialValue: '',
             hideInTable: true,
             valueType: 'select',
             valueEnum: merchantListEnum,
