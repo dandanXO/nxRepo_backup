@@ -1,11 +1,10 @@
-import { ProColumns, ProTable } from '@ant-design/pro-components';
+import { ProColumns } from '@ant-design/pro-components';
 import { Modal } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TableCard } from '../../../shared/components/withQueryHook/Cards';
 import { useLazyGetLoginAccountListQuery } from '../../../system/api/LoginAccountManageApi';
-import { operatorsList } from '../../../system/api/types/LoginAccountManageTypes/getLoginAccountList';
 
 interface LoginLogsModalProps {
     open: boolean;
@@ -14,24 +13,7 @@ interface LoginLogsModalProps {
 }
 
 const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalProps): JSX.Element => {
-    const initSearchList = {
-        accountNumber: collector,
-        pageNum: 1,
-        pageSize: 10,
-    };
-    const [searchList, setSearchList] = useState(initSearchList);
     const { t } = useTranslation();
-
-    const [triggerGetList, { currentData, isFetching }] = useLazyGetLoginAccountListQuery({
-        pollingInterval: 0,
-        refetchOnFocus: false,
-        refetchOnReconnect: false,
-    });
-
-    const mockData = [
-        { loginTime: '2022-08-21 10:03:12', ip: '121.198.4.111' },
-        { loginTime: '2022-08-21 09:03:12', ip: '157.100.188.100' },
-    ];
 
     const columns: ProColumns[] = [
         {
@@ -43,10 +25,6 @@ const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalPr
             dataIndex: 'ip',
         },
     ];
-
-    useEffect(() => {
-        triggerGetList(searchList);
-    }, [searchList]);
 
     return (
         <Modal
