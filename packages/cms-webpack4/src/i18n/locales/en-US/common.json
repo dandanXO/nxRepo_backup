@@ -10,6 +10,7 @@
         "emergency": "Emergency Contact{{count}}",
         "list": "Contact List"
     },
+    "currentPageTotal": "Current Page Total",
     "endDate": "End Date",
     "followUpResultStatus": {
         "BadAttitude": "Bad Attitude",

@@ -11,11 +11,11 @@ export interface GetCollectTodayCollectDetailQueryString {
 
 export interface GetCollectTodayCollectDetailResponse {
     records: GetCollectTodayCollectDetailRecords;
+    statistics: GetCollectTodayCollectDetailStatistics;
 }
 
 export interface GetCollectTodayCollectDetailRecords extends GetPageableResponse {
     records: GetCollectTodayCollectDetail[];
-    statistics: GetCollectTodayCollectDetailStatistics;
 }
 
 export interface GetCollectTodayCollectDetail {

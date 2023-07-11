@@ -10,6 +10,7 @@
         "emergency": "紧急联络人{{count}}",
         "list": "通讯录"
     },
+    "currentPageTotal": "当页总计",
     "endDate": "结束日期",
     "followUpResultStatus": {
         "BadAttitude": "态度恶劣",

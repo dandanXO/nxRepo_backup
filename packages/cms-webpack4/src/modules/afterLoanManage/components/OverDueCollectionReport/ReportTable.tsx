@@ -76,7 +76,7 @@ const ReportTable = (): JSX.Element => {
     const columns: ProColumns[] = [
         {
             title: t('common:function'),
-            key: 'function',
+            dataIndex: 'function',
             hideInSearch: true,
             render: (_, { collector }) => (
                 <a onClick={() => handleShowLoginLogs(collector)}>{t('urgeCollection:loginLogs')}</a>
@@ -239,7 +239,7 @@ const ReportTable = (): JSX.Element => {
             <ProTable<GetCollectOverdueCollectDetail>
                 loading={isFetching}
                 columns={columns}
-                rowKey="collector"
+                rowKey={(record) => record.collector + record.collectStage}
                 dataSource={currentData?.records?.records || []}
                 form={{ ...searchFormLayout }}
                 search={{
