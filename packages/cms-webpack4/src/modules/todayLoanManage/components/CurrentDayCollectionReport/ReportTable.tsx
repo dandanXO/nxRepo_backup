@@ -93,6 +93,7 @@ const ReportTable = (): JSX.Element => {
             valueType: 'dateRange',
             fieldProps: {
                 placeholder: [t('common:startDate'), t('common:endDate')],
+                allowClear: false,
             },
             hideInTable: true,
             initialValue: [initDate, initDate],
