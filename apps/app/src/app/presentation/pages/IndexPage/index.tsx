@@ -85,20 +85,35 @@ export type PageState = {
 
 const IndexPage = () => {
   const dispatch = useDispatch();
+  const [webViewVisible, setWebViewVisible] = useState(false);
 
-  // NOTE: isInitialized
-  const isInitialized = useSelector((state: RootState) => state.app.isInit);
   useEffect(() => {
-    if (isInitialized) {
-      dispatch(IndexPageSagaAction.user.viewIndexPageAction());
-    }
-    return () => {
-      if (!isInitialized) {
-        //
+    dispatch(IndexPageSagaAction.user.viewIndexPageAction());
+  }, [dispatch]);
+
+  useEffect(() => {
+    // 監聽驗證完到首頁，重新取得index資料
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        setWebViewVisible(true);
+      } else {
+        setWebViewVisible(false);
       }
     };
-  }, [isInitialized]);
 
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (webViewVisible) {
+      dispatch(IndexPageSagaAction.user.viewIndexPageAction());
+    }
+  }, [webViewVisible]);
+
+ 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
 
   // NOTE: unknow | UserAuthing | UserRejected
@@ -123,7 +138,6 @@ const IndexPage = () => {
   // && !(indexPageState.riskControl.state === RISK_CONTROL_STATE.valid);
 
   const onClickReacquireCredit = useCallback(() => {
-    console.log('onClickReacquireCredit--------')
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [disableClickReacquireCredit]);
 
@@ -436,7 +450,8 @@ const onUserClickViewApplicationProgress = () => {
 
   return (
     <div className={'flex flex-col'}>
-      <div className={'flex flex-col overflow-auto max-h-[90vh] w-full absolute top-0 pb-10'}>
+      {/*NOTE: 高度扣掉 TabBar:63px、Button:56px*/}
+      <div className={`flex flex-col overflow-auto h-[calc(100vh-63px-56px)] w-full absolute top-0`}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}
@@ -459,7 +474,7 @@ const onUserClickViewApplicationProgress = () => {
           />
         </div>
 
-        <PageContent>
+        <div className="overflow-auto px-5 grow flex flex-col">
           {/*NOTE: 用戶尚未認證*/}
           {indexPageState.user.state === USER_AUTH_STATE.ready && (
             <>
@@ -509,7 +524,7 @@ const onUserClickViewApplicationProgress = () => {
           }
 
           {/*TODO: refactor me*/}
-          <div>
+          <div className='grow flex items-end'>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
 
@@ -550,7 +565,7 @@ const onUserClickViewApplicationProgress = () => {
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota) && (
               <WelcomeBackAndReapplyInTimeSection refreshableCountdown={refreshableCountdown} />
             )}
-        </PageContent>
+        </div>
       </div>
     </div>
 
