@@ -11,6 +11,7 @@ import { indexPageSlice } from './indexPageSlice';
 import { loginSlice } from './loginSlice';
 import { modalSlice } from './modalSlice';
 import { loadingSlice } from './loadingSlice';
+import { repaymentPageSlice } from './repaymentPageSlice';
 
 export const history = createBrowserHistory();
 const routerMiddleware = createRouterMiddleware(history);
@@ -48,6 +49,7 @@ export const appStore = configureStore({
     [indexPageSlice.name]: indexPageSlice.reducer,
     [loginSlice.name]: loginSlice.reducer,
     [loadingSlice.name]: loadingSlice.reducer,
+    [repaymentPageSlice.name]: repaymentPageSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

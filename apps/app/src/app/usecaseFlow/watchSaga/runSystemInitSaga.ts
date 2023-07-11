@@ -88,7 +88,7 @@ export function* runSystemInitSaga() {
       }
 
       // NOTE: Only for H5
-      appStore.dispatch(SystemCaseActions.InitSaga());
+      // appStore.dispatch(SystemCaseActions.InitSaga());
     }
   } catch (error) {
     console.log(error);

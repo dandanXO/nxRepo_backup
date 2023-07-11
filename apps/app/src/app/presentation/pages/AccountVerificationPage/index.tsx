@@ -79,6 +79,7 @@ const AccountVerificationPage = () => {
                     <div className={`mr-1.5 w-full`}>
                         <Button
                             onClick={() => {
+                                if (phoneNumber.data === '') return
                                 navigate(`delete-confirm-modal?token=${getToken()}`);
                             }}
                             text={'Confirm'}
