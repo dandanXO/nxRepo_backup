@@ -296,38 +296,39 @@ const ReportTable = (): JSX.Element => {
                     <Summary>
                         <Row style={{ fontWeight: 'bold', background: '#fafafa' }}>
                             {columnStateMap.function.show && <Cell index={0}>{t('common:currentPageTotal')}</Cell>}
-                            {columnStateMap.followUpDate.show && <Cell index={1} />}
-                            {columnStateMap.collectTeam.show && <Cell index={2} />}
-                            {columnStateMap.collectStage.show && <Cell index={3} />}
+                            {columnStateMap.function.show && isSuperAdmin && <Cell index={1} />}
+                            {columnStateMap.followUpDate.show && <Cell index={2} />}
+                            {columnStateMap.collectTeam.show && <Cell index={3} />}
+                            {columnStateMap.collectStage.show && <Cell index={4} />}
                             {columnStateMap.collector.show && (
-                                <Cell index={4}>{currentData?.statistics?.collector}</Cell>
+                                <Cell index={5}>{currentData?.statistics?.collector}</Cell>
                             )}
-                            {columnStateMap.initialLoginTime.show && <Cell index={5} />}
-                            {columnStateMap.followUpTimes.show && <Cell index={6} />}
-                            {columnStateMap.coverageRate.show && <Cell index={7} />}
+                            {columnStateMap.initialLoginTime.show && <Cell index={6} />}
+                            {columnStateMap.followUpTimes.show && <Cell index={7} />}
+                            {columnStateMap.coverageRate.show && <Cell index={8} />}
                             {columnStateMap.fullRepaymentOrders.show && (
-                                <Cell index={8}>{currentData?.statistics?.fullRepaymentOrders}</Cell>
+                                <Cell index={9}>{currentData?.statistics?.fullRepaymentOrders}</Cell>
                             )}
                             {columnStateMap.numberOfExtensionOrders.show && (
-                                <Cell index={9}>{currentData?.statistics?.numberOfExtensionOrders}</Cell>
+                                <Cell index={10}>{currentData?.statistics?.numberOfExtensionOrders}</Cell>
                             )}
                             {columnStateMap.extensionRate.show && (
-                                <Cell index={10}>{currentData?.statistics?.extensionRate}</Cell>
+                                <Cell index={11}>{currentData?.statistics?.extensionRate}</Cell>
                             )}
                             {columnStateMap.totalNumberOfRepaymentsReceived.show && (
-                                <Cell index={11}>{currentData?.statistics?.totalNumberOfRepaymentsReceived}</Cell>
+                                <Cell index={12}>{currentData?.statistics?.totalNumberOfRepaymentsReceived}</Cell>
                             )}
                             {columnStateMap.orderPaymentRate.show && (
-                                <Cell index={12}>{currentData?.statistics?.orderPaymentRate}</Cell>
+                                <Cell index={13}>{currentData?.statistics?.orderPaymentRate}</Cell>
                             )}
                             {columnStateMap.receiptAmount.show && (
-                                <Cell index={13}>{currentData?.statistics?.receiptAmount}</Cell>
+                                <Cell index={14}>{currentData?.statistics?.receiptAmount}</Cell>
                             )}
                             {columnStateMap.followUpAmount.show && (
-                                <Cell index={14}>{currentData?.statistics?.followUpAmount}</Cell>
+                                <Cell index={15}>{currentData?.statistics?.followUpAmount}</Cell>
                             )}
                             {columnStateMap.paymentAmountRatio.show && (
-                                <Cell index={15}>{currentData?.statistics?.paymentAmountRatio}</Cell>
+                                <Cell index={16}>{currentData?.statistics?.paymentAmountRatio}</Cell>
                             )}
                         </Row>
                     </Summary>

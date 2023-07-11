@@ -33,6 +33,7 @@ const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalPr
             footer={null}
             width="50%"
             onCancel={onCancel}
+            maskClosable={false}
             bodyStyle={{ paddingTop: 0 }}
         >
             <TableCard

@@ -1,5 +1,5 @@
-import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
+import { ColumnsState, ProColumns, ProTable } from '@ant-design/pro-components';
+import { Button, Space, Table } from 'antd';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,9 @@ import {
 import { useLazyGetCollectOverdueCollectDetailQuery } from '../../api/CollectOverdueCollectDetailApi';
 import { GetCollectOverdueCollectDetail } from '../../api/types/getCollectOverdueCollectDetail';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
+
+const { Summary } = Table;
+const { Row, Cell } = Summary;
 
 const searchSpan = {
     xs: 24,
@@ -210,6 +213,16 @@ const ReportTable = (): JSX.Element => {
         });
     }
 
+    const initColumnStateMap = columns.reduce(
+        (acc, current) => ({
+            ...acc,
+            [`${current.dataIndex}`]: { show: !current.hideInTable },
+        }),
+        {},
+    ) as Record<string, ColumnsState>;
+
+    const [columnStateMap, setColumnStateMap] = useState(initColumnStateMap);
+
     const pageOnChange = (current, pageSize) => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
     };
@@ -242,6 +255,10 @@ const ReportTable = (): JSX.Element => {
                 rowKey={(record) => record.collector + record.collectStage}
                 dataSource={currentData?.records?.records || []}
                 form={{ ...searchFormLayout }}
+                options={{
+                    setting: { listsHeight: 400, draggable: false },
+                    reload: () => triggerGetList(searchList),
+                }}
                 search={{
                     span: searchSpan,
                     labelWidth: 'auto',
@@ -274,17 +291,63 @@ const ReportTable = (): JSX.Element => {
                     total: currentData?.records?.totalRecords,
                     current: currentData?.records?.records?.length === 0 ? 1 : currentData?.records?.currentPage,
                 }}
+                columnsState={{
+                    onChange: (columnStateMap) => setColumnStateMap(columnStateMap),
+                }}
+                summary={() => (
+                    <Summary>
+                        <Row style={{ fontWeight: 'bold', background: '#fafafa' }}>
+                            {columnStateMap.function.show && <Cell index={0}>{t('common:currentPageTotal')}</Cell>}
+                            {columnStateMap.function.show && isSuperAdmin && <Cell index={1} />}
+                            {columnStateMap.followUpDate.show && <Cell index={2} />}
+                            {columnStateMap.collectTeam.show && <Cell index={3} />}
+                            {columnStateMap.collectStage.show && <Cell index={4} />}
+                            {columnStateMap.collector.show && (
+                                <Cell index={5}>{currentData?.statistics?.collector}</Cell>
+                            )}
+                            {columnStateMap.initialLoginTime.show && <Cell index={6} />}
+                            {columnStateMap.followUpTimes.show && <Cell index={7} />}
+                            {columnStateMap.coverageRate.show && <Cell index={8} />}
+                            {columnStateMap.fullRepaymentOrders.show && (
+                                <Cell index={9}>{currentData?.statistics?.fullRepaymentOrders}</Cell>
+                            )}
+                            {columnStateMap.numberOfExtensionOrders.show && (
+                                <Cell index={10}>{currentData?.statistics?.numberOfExtensionOrders}</Cell>
+                            )}
+                            {columnStateMap.extensionRate.show && (
+                                <Cell index={11}>{currentData?.statistics?.extensionRate}</Cell>
+                            )}
+                            {columnStateMap.totalNumberOfRepaymentsReceived.show && (
+                                <Cell index={12}>{currentData?.statistics?.totalNumberOfRepaymentsReceived}</Cell>
+                            )}
+                            {columnStateMap.orderPaymentRate.show && (
+                                <Cell index={13}>{currentData?.statistics?.orderPaymentRate}</Cell>
+                            )}
+                            {columnStateMap.receiptAmount.show && (
+                                <Cell index={14}>{currentData?.statistics?.receiptAmount}</Cell>
+                            )}
+                            {columnStateMap.followUpAmount.show && (
+                                <Cell index={15}>{currentData?.statistics?.followUpAmount}</Cell>
+                            )}
+                            {columnStateMap.paymentAmountRatio.show && (
+                                <Cell index={16}>{currentData?.statistics?.paymentAmountRatio}</Cell>
+                            )}
+                        </Row>
+                    </Summary>
+                )}
             />
-            <CollectorLoginLogsModal
-                open={loginLogsModal.open}
-                collector={loginLogsModal.collector}
-                onCancel={() =>
-                    setLoginLogsModal({
-                        open: false,
-                        collector: '',
-                    })
-                }
-            />
+            {loginLogsModal.open && (
+                <CollectorLoginLogsModal
+                    open={loginLogsModal.open}
+                    collector={loginLogsModal.collector}
+                    onCancel={() =>
+                        setLoginLogsModal({
+                            open: false,
+                            collector: '',
+                        })
+                    }
+                />
+            )}
         </>
     );
 };

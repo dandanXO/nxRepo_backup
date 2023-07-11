@@ -11,11 +11,11 @@ export interface GetCollectOverdueCollectDetailQueryString {
 
 export interface GetCollectOverdueCollectDetailResponse {
     records: GetCollectOverdueCollectDetailRecords;
+    statistics: GetCollectOverdueCollectDetailStatistics;
 }
 
 export interface GetCollectOverdueCollectDetailRecords extends GetPageableResponse {
     records: GetCollectOverdueCollectDetail[];
-    statistics: GetCollectOverdueCollectDetailStatistics;
 }
 
 export interface GetCollectOverdueCollectDetail {
