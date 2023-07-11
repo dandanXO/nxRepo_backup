@@ -18,7 +18,6 @@ import Card from './Card';
 import LinkItem from './LinkItem';
 import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
-import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import StarRatingModal from '../../modals/StarRatingModal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import StarRatingSuccessModal from '../../modals/StarRatingSuccessModal';
@@ -27,20 +26,11 @@ const PersonalInfoPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const isInitialized = useSelector((state: RootState) => state.app.isInit);
   const modalState = useSelector((state: RootState) => state.model)
 
   useEffect(() => {
-    if (isInitialized) {
-      dispatch(PersonalInfoPageSagaActions.system.init());
-    }
-    return () => {
-      if (!isInitialized) {
-        //
-        dispatch(loadingSlice.actions.updatePageLoading(true));
-      }
-    };
-  }, [isInitialized]);
+    dispatch(PersonalInfoPageSagaActions.system.init());
+  }, []);
 
   const { indexPage, app } = useSelector((state: RootState) => state);
   const { user, riskControl } = indexPage;
@@ -122,7 +112,7 @@ const PersonalInfoPage = () => {
 
         {/*NOTE: 五星好評*/}
 
-        <Card><LinkItem title={'Rate Us 5 starts'} to={''} onClick={()=>dispatch(modalSlice.actions.updateStarRatingModal({show:true}))}/></Card>
+        <Card><LinkItem title={'Rate Us 5 stars'} to={''} onClick={()=>dispatch(modalSlice.actions.updateStarRatingModal({show:true}))}/></Card>
         <div className='font-bold text-base m-2 mt-6 '>Setting</div>
         <Card>
           <LinkItem title={'Delete My Account'} to={`${PagePathEnum.DeleteAccountPage}?token=${getToken()}`} />

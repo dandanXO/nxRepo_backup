@@ -83,6 +83,7 @@ const BankCardListPage = () => {
               currentData.bankAccounts.map((card) => {
                 return (
                   <BankCard
+                    key={card.bankId}
                     cardName={card.bankName ?? ''}
                     isMainCard={card.main ?? false}
                     cardNo={card.bankAccount ?? ''}

@@ -11,6 +11,8 @@ import { RootState } from '../../../reduxStore';
 import { IndexPageSagaAction } from '../../pages/IndexPage/userUsecaseSaga/indexPageActions';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { SystemCaseActions } from '../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
+import { useEffect } from 'react';
+import { repaymentPageInitialState, repaymentPageSlice } from '../../../reduxStore/repaymentPageSlice';
 
 type Props = {
   hasOrder: boolean;
@@ -26,13 +28,22 @@ export const TabBar = (props: Props) => {
     }
     return location.pathname.indexOf(pageName) > -1;
   };
+
+  useEffect(() => {
+      if (location.pathname !== PagePathEnum.RepaymentPage) {
+          dispatch(repaymentPageSlice.actions.updateRepaymentPage({
+              paymentType: repaymentPageInitialState.paymentType,
+              scrollPosition: repaymentPageInitialState.scrollPosition
+          }))
+      }
+  }, [location])
+  
   const userStatus: USER_AUTH_STATE = useSelector((state: RootState) => state.indexPage.user.state);
   return (
     <div className={'fixed left-0 right-0 bottom-0 flex h-16 flex-row border-t bg-white'}>
       <div
         className={'flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
-          dispatch(SystemCaseActions.SystemFetchCouponSaga());
           navigate(`${PagePathEnum.IndexPage}?token=${getToken()}`);
         }}
       >
