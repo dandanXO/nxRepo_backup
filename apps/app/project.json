@@ -64,6 +64,7 @@
             }
           ],
           "main": "apps/app/src/main.pk.tsx",
+          "webpackConfig": "apps/app/build/webpack.config.main.pk.js",
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
