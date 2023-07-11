@@ -173,6 +173,7 @@ export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
   const location = useLocation();
+
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
   const isOrderOverdue = payableRecords && payableRecords?.some((order) => order.overdue === true);
