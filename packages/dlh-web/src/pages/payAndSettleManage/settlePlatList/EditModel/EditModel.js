@@ -40,7 +40,7 @@ class EditModel extends Component{
                 onCancel={this.handleCancel}
                 width={700}
                 visible={visible}
-                title={intl.formatMessage({id : "Add/Modify Substitue Payment Platform"})}>
+                title={intl.formatMessage({id : "windowPage.add.modify.substitue.payment.platform"})}>
                 <div>
                     <Form>
                         <Form.Item label={intl.formatMessage({id : "page.search.list.platform.name"})} {...this.layout}>
