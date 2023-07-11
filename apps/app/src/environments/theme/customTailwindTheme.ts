@@ -15,6 +15,13 @@ import v65 from './india/v65/tailwind.theme';
 import v66 from './india/v66/tailwind.theme';
 import v67 from './india/v67/tailwind.theme';
 import v68 from './india/v68/tailwind.theme';
+import v69 from './india/v69/tailwind.theme';
+import v70 from './india/v70/tailwind.theme';
+import v71 from './india/v71/tailwind.theme';
+import v72 from './india/v72/tailwind.theme';
+import v73 from './india/v73/tailwind.theme';
+import v74 from './india/v74/tailwind.theme';
+
 // NOTE: Pakistan
 import v15 from './pakistan/v15/tailwind.theme';
 
@@ -37,7 +44,13 @@ export const themes: IThemes = {
     v65,
     v66,
     v67,
-    v68
+    v68,
+    v69,
+    v70,
+    v71,
+    v72,
+    v73,
+    v74,
 
   },
   pakistan: {
