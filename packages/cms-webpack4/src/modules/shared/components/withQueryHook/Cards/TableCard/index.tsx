@@ -12,11 +12,10 @@ interface ITableCardProps {
     rowKey?: string;
     hook: UseLazyQuery<QueryDefinition<any, any, any, any>>;
     queryBody: any;
-    hasTotalRecords?: boolean;
     dataSourcePath?: string;
-    totalRecordsPath?: string;
 }
 
+// 使用useLazyQuery的TableCard
 export const TableCard = ({
     title,
     hook,
@@ -24,8 +23,6 @@ export const TableCard = ({
     rowKey,
     columns,
     dataSourcePath,
-    totalRecordsPath,
-    hasTotalRecords = true,
 }: ITableCardProps): JSX.Element => {
     const [searchParams, setSearchParams] = useState({ pageNum: 1, pageSize: 10 });
     const { t } = useTranslation();
@@ -43,12 +40,6 @@ export const TableCard = ({
     const dataSource = !dataSourcePath
         ? currentData?.records
         : dataSourcePath.split('.').reduce((acc, current) => acc && acc[current], currentData);
-
-    const totalRecords = !hasTotalRecords
-        ? dataSource?.length
-        : !totalRecordsPath
-        ? currentData?.totalRecords
-        : totalRecordsPath.split('.').reduce((acc, current) => acc && acc[current], currentData);
 
     const showTotal = (total, range) => {
         const [start, end] = range;
@@ -74,12 +65,12 @@ export const TableCard = ({
                 toolBarRender={false}
                 rowKey={rowKey}
                 pagination={
-                    totalRecords < 10
+                    currentData?.totalRecords < 10
                         ? false
                         : {
                               showSizeChanger: true,
                               defaultPageSize: 10,
-                              onChange: hasTotalRecords ? pageOnChange : undefined,
+                              onChange: pageOnChange,
                               locale: {
                                   // eslint-disable-next-line camelcase
                                   items_per_page: t('common:pagination.itemPerPage'),

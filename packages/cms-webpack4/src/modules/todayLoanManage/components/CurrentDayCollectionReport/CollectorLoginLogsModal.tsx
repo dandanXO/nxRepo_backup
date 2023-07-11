@@ -3,8 +3,8 @@ import { Modal } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { TableCard } from '../../../shared/components/withQueryHook/Cards';
-import { useLazyGetLoginAccountListQuery } from '../../../system/api/LoginAccountManageApi';
+import { SinglePageTableCard } from '../../../shared/components/withQueryHook/Cards';
+import { useGetLoginAccountListQuery } from '../../../system/api/LoginAccountManageApi';
 
 interface LoginLogsModalProps {
     open: boolean;
@@ -36,14 +36,12 @@ const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalPr
             maskClosable={false}
             bodyStyle={{ paddingTop: 0 }}
         >
-            <TableCard
+            <SinglePageTableCard
                 columns={columns}
-                hook={useLazyGetLoginAccountListQuery}
-                queryBody={{ accountNumber: collector }}
+                hook={useGetLoginAccountListQuery}
+                params={{ accountNumber: collector }}
                 dataSourcePath="0.operators"
-                totalRecordsPath=""
                 rowKey="lastLoginTime"
-                hasTotalRecords={false}
             />
         </Modal>
     );

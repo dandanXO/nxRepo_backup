@@ -396,7 +396,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                     hook={useGetCollectTodayUserDetailQuery}
                     params={{ userId }}
                     rowKey="contact"
-                    dataSourceKey="emergencyContacts"
+                    dataSourcePath="emergencyContacts"
                 />
             </div>
         );

@@ -26,4 +26,5 @@ const LoginAccountManageApi = API.injectEndpoints({
         }),
     }),
 });
-export const { useLazyGetLoginAccountListQuery, usePostLogoutMutation } = LoginAccountManageApi;
+export const { useLazyGetLoginAccountListQuery, usePostLogoutMutation, useGetLoginAccountListQuery } =
+    LoginAccountManageApi;

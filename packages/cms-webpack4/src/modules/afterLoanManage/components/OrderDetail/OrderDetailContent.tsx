@@ -379,7 +379,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                     hook={useGetCollectOverDueUserDetailQuery}
                     params={{ userId }}
                     rowKey="contact"
-                    dataSourceKey="emergencyContacts"
+                    dataSourcePath="emergencyContacts"
                 />
             </div>
         );
