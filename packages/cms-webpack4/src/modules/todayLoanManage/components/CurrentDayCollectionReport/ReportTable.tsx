@@ -1,7 +1,7 @@
-import { ColumnsState, ProColumns, ProTable } from '@ant-design/pro-components';
+import { ColumnsState, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components';
 import { Button, Space, Table } from 'antd';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useEnum } from '../../../shared/constants/useEnum';
@@ -55,6 +55,8 @@ const ReportTable = (): JSX.Element => {
     const { data: collectDepartments } = useGetCollectTodayCollectDepartmentListQuery(null);
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const isSuperAdmin = getIsSuperAdmin();
+
+    const formRef = useRef<ProFormInstance>();
 
     const handleShowLoginLogs = (collector: string) => {
         setLoginLogsModal({ open: true, collector: collector });
@@ -226,6 +228,11 @@ const ReportTable = (): JSX.Element => {
         setSearchList({ ...searchList, pageNum: current, pageSize: pageSize });
     };
 
+    const handelExport = () => {
+        const searchFields = formRef.current.getFieldsValue();
+        console.log(searchFields);
+    };
+
     useEffect(() => {
         const queryParameters = {
             collectId: searchList.collectId,
@@ -249,6 +256,7 @@ const ReportTable = (): JSX.Element => {
     return (
         <>
             <ProTable<GetCollectTodayCollectDetail>
+                formRef={formRef}
                 loading={isFetching}
                 columns={columns}
                 rowKey={(record) => record.collector + record.collectStage}
@@ -334,6 +342,11 @@ const ReportTable = (): JSX.Element => {
                         </Row>
                     </Summary>
                 )}
+                toolBarRender={() => [
+                    <Button onClick={handelExport} type="primary">
+                        {t('common:export')}
+                    </Button>,
+                ]}
             />
             {loginLogsModal.open && (
                 <CollectorLoginLogsModal

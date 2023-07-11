@@ -12,6 +12,7 @@
     },
     "currentPageTotal": "当页总计",
     "endDate": "结束日期",
+    "export": "导出",
     "followUpResultStatus": {
         "BadAttitude": "态度恶劣",
         "FinancialDifficulties": "财务困难",

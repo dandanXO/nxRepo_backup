@@ -12,6 +12,7 @@
     },
     "currentPageTotal": "Current Page Total",
     "endDate": "End Date",
+    "export": "Export",
     "followUpResultStatus": {
         "BadAttitude": "Bad Attitude",
         "FinancialDifficulties": "Financial Difficulties",
