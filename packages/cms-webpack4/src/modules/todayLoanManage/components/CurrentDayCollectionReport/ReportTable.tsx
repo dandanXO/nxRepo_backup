@@ -259,7 +259,9 @@ const ReportTable = (): JSX.Element => {
                 formRef={formRef}
                 loading={isFetching}
                 columns={columns}
-                rowKey={(record) => record.collector + record.collectStage}
+                rowKey={(record) =>
+                    (record.collector || '') + (record.collectStage || '') + (record.followUpDate || '')
+                }
                 dataSource={currentData?.records?.records || []}
                 form={{ ...searchFormLayout }}
                 options={{
