@@ -1,26 +1,24 @@
-import { ProColumns, ProTable } from '@ant-design/pro-components';
+import { ProColumns } from '@ant-design/pro-components';
 import { Modal } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { TableCard } from '../../../shared/components/withQueryHook/Cards';
+import { useLazyGetLoginAccountListQuery } from '../../../system/api/LoginAccountManageApi';
+
 interface LoginLogsModalProps {
     open: boolean;
-    collectorId: string;
+    collector: string;
     onCancel: () => void;
 }
 
-const CollectorLoginLogsModal = ({ open, collectorId, onCancel }: LoginLogsModalProps): JSX.Element => {
+const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalProps): JSX.Element => {
     const { t } = useTranslation();
-
-    const mockData = [
-        { loginTime: '2022-08-21 10:03:12', ip: '121.198.4.111' },
-        { loginTime: '2022-08-21 09:03:12', ip: '157.100.188.100' },
-    ];
 
     const columns: ProColumns[] = [
         {
             title: t('common:table.loginTime'),
-            dataIndex: 'loginTime',
+            dataIndex: 'lastLoginTime',
         },
         {
             title: t('common:table.loginIP'),
@@ -35,8 +33,17 @@ const CollectorLoginLogsModal = ({ open, collectorId, onCancel }: LoginLogsModal
             footer={null}
             width="50%"
             onCancel={onCancel}
+            bodyStyle={{ paddingTop: 0 }}
         >
-            <ProTable toolBarRender={false} search={false} dataSource={mockData} columns={columns} />
+            <TableCard
+                columns={columns}
+                hook={useLazyGetLoginAccountListQuery}
+                queryBody={{ accountNumber: collector }}
+                dataSourcePath="0.operators"
+                totalRecordsPath=""
+                rowKey="lastLoginTime"
+                hasTotalRecords={false}
+            />
         </Modal>
     );
 };
