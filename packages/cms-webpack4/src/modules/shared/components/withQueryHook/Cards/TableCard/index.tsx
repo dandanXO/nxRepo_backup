@@ -65,15 +65,17 @@ export const TableCard = ({
                 toolBarRender={false}
                 rowKey={rowKey}
                 pagination={
-                    currentData?.totalRecords < 10
+                    currentData?.totalRecords <= 10
                         ? false
                         : {
                               showSizeChanger: true,
                               defaultPageSize: 10,
                               onChange: pageOnChange,
+                              total: currentData?.totalRecords,
+                              current: currentData?.currentPage || 1,
                               locale: {
                                   // eslint-disable-next-line camelcase
-                                  items_per_page: t('common:pagination.itemPerPage'),
+                                  items_per_page: t('pagination.itemPerPage'),
                               },
                               showTotal,
                           }
