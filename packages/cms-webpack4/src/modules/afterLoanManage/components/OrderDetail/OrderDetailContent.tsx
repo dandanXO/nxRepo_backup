@@ -88,7 +88,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         const isSuperAdmin = getIsSuperAdmin();
 
         // 取得後台使用者開關 (是否可查看 tab - 手機短信)
-        const showSMSTab = !adminSwitch.todayCollect.smsSwitch;
+        const showSMSTab = !adminSwitch.overDueCollect.smsSwitch;
 
         const orderInfoDescriptions = [
             { title: t('order:orderNumber'), dataIndex: 'orderNumber' },
