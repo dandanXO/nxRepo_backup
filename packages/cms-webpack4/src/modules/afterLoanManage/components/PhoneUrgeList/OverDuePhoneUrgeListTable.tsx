@@ -87,6 +87,8 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
         return acc;
     }, new Map().set('', { text: t('common:noRestriction') }));
 
+    const past24Hours = moment().subtract(24, 'hours');
+
     const columns: ProColumns[] = [
         {
             title: t('function'),
@@ -202,24 +204,47 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'lastOpenAppTime',
             key: 'lastOpenAppTime',
             hideInSearch: true,
-            render: (_, { lastOpenAppTime }) => (
-                <Typography>
-                    {(lastOpenAppTime && moment(lastOpenAppTime).format('YYYY-MM-DD HH:mm:ss')) || '-'}
-                </Typography>
-            ),
+            render: (_, { lastOpenAppTime }) => {
+                const lastOpenAppTimeDateTime = lastOpenAppTime && moment(lastOpenAppTime);
+                return (
+                    <Typography
+                        style={{
+                            color: `${
+                                lastOpenAppTimeDateTime && lastOpenAppTimeDateTime.isAfter(past24Hours) ? '#52C41A' : ''
+                            }`,
+                        }}
+                    >
+                        {(lastOpenAppTime && lastOpenAppTimeDateTime.format('YYYY-MM-DD HH:mm:ss')) || '-'}
+                    </Typography>
+                );
+            },
         },
         {
             title: t('urgeCollection:latestRepaymentCodeAcquisitionTime'),
             dataIndex: 'latestRepaymentCodeAcquisitionTime',
             key: 'latestRepaymentCodeAcquisitionTime',
             hideInSearch: true,
-            render: (_, { latestRepaymentCodeAcquisitionTime }) => (
-                <Typography>
-                    {(latestRepaymentCodeAcquisitionTime &&
-                        moment(latestRepaymentCodeAcquisitionTime).format('YYYY-MM-DD HH:mm:ss')) ||
-                        '-'}
-                </Typography>
-            ),
+            render: (_, { latestRepaymentCodeAcquisitionTime }) => {
+                const latestRepaymentCodeAcquisitionTimeDatetime =
+                    latestRepaymentCodeAcquisitionTime && moment(latestRepaymentCodeAcquisitionTime);
+
+                return (
+                    <Typography
+                        style={{
+                            color: `${
+                                latestRepaymentCodeAcquisitionTimeDatetime &&
+                                latestRepaymentCodeAcquisitionTimeDatetime.isAfter(past24Hours)
+                                    ? '#52C41A'
+                                    : ''
+                            }`,
+                        }}
+                    >
+                        {(latestRepaymentCodeAcquisitionTimeDatetime &&
+                            latestRepaymentCodeAcquisitionTimeDatetime.format('YYYY-MM-DD HH:mm:ss')) ||
+                            '-'}
+                    </Typography>
+                );
+            },
         },
         {
             title: t('urgeCollection:followUpCount'),
