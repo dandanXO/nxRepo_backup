@@ -39,6 +39,7 @@ import {IndexPageSagaAction} from './userUsecaseSaga/indexPageActions';
 import SystemCouponModal from '../../modals/SystemCouponModal';
 import {computeNumber} from "../../../modules/computeNumber";
 import {formatDate} from "../../../modules/format/formatDate";
+import NoRecommendProductModal from '../../modals/NoRecommendProductModal';
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -358,8 +359,7 @@ const onUserClickViewApplicationProgress = () => {
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
       // NOTICE: 額度不足
       // REFACTOR ME
-      indexPageState.indexAPI?.availableAmount === 0 ||
-      calculatingProducts?.length === 0
+      indexPageState.indexAPI?.availableAmount === 0 
     ) {
       disable = true;
     }
@@ -413,13 +413,18 @@ const onUserClickViewApplicationProgress = () => {
       return simpleProduct;
     });
 
-    dispatch(
-      IndexPageSagaAction.user.applyProductAction({
-        applyAmount: currentSelectedProductsPrice,
-        // bankId: 11,
-        details: simpleProducts,
-      })
-    );
+    if (simpleProducts.length === 0) {
+        dispatch(modalSlice.actions.updateNoRecommendProductModal({ show: true }))
+    } else {
+        dispatch(
+            IndexPageSagaAction.user.applyProductAction({
+                applyAmount: currentSelectedProductsPrice,
+                // bankId: 11,
+                details: simpleProducts,
+            })
+        );
+    }
+    
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
   const onClickToCustomerService = useCallback(() => {
@@ -689,6 +694,10 @@ const onUserClickViewApplicationProgress = () => {
 
       {/*NOTE: 優惠券通知 */}
       {modelState.systemCouponModal.show && (<SystemCouponModal/>)}
+
+      {/*NOTE: 無推薦產品提示訊息 */}
+      {modelState.noRecommendProductModal.show && (<NoRecommendProductModal/>)}
+
     </div>
   );
 };
