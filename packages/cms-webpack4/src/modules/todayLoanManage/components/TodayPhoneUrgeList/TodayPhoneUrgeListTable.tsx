@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import CopyText from '../../../shared/components/other/CopyText';
 import { useEnum } from '../../../shared/constants/useEnum';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
@@ -104,12 +105,14 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'orderNo',
             key: 'orderNo',
             initialValue: searchParams.orderNo || '',
+            render: (_, { orderNo }) => <CopyText text={orderNo} />,
         },
         {
             title: t('urgeCollection:appName'),
             dataIndex: 'appName',
             key: 'appName',
             initialValue: searchParams.appName || '',
+            render: (_, { appName }) => <CopyText text={appName} />,
         },
         {
             title: t('urgeCollection:orderLabel'),
@@ -134,6 +137,7 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'userName',
             key: 'userName',
             initialValue: searchParams.userName || '',
+            render: (_, { userName }) => <CopyText text={userName} />,
         },
         {
             title: t('urgeCollection:phone'),
@@ -392,6 +396,7 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
                         ? 1
                         : currentTodayPhoneUrgeListResponse?.currentPage,
             }}
+            scroll={{ x: 'auto' }}
         />
     );
 };

@@ -26,6 +26,7 @@ interface IUrgeModalProps {
     amountDue: number;
     handleCloseModal: () => void;
     onAdded: (generateLinkType, link: string) => void;
+    generateLinkSwitch: boolean; // 是否可產生還款鏈結開關，true: 不可產生 / false : 可以產生
 }
 
 export const UrgeModal = ({
@@ -35,6 +36,7 @@ export const UrgeModal = ({
     userId,
     onAdded,
     amountDue,
+    generateLinkSwitch,
 }: IUrgeModalProps): JSX.Element => {
     const { t } = useTranslation();
     const formSchema = urgeCollectRecordSchema({ partialMoneyMax: amountDue });
@@ -93,31 +95,36 @@ export const UrgeModal = ({
                     })}
                 </Group>
             </Item>
-            <Item dependencies={['generateLink']} noStyle>
-                {({ getFieldValue }) => {
-                    const generateLink = getFieldValue('generateLink');
-                    if (generateLink !== 'PARTIAL_REPAYMENT') return null;
+            {
+                <Item dependencies={['generateLink']} noStyle>
+                    {({ getFieldValue }) => {
+                        const generateLink = getFieldValue('generateLink');
+                        if (generateLink !== 'PARTIAL_REPAYMENT') return null;
 
-                    return (
-                        <HelperFormItem
-                            layout={layout}
-                            label={t('urgeCollection:repayAmount')}
-                            help={`${t('urgeCollection:amountDue')} : ${formatPrice(amountDue)}`}
-                            name="partialMoney"
-                            required
-                            rules={[{ validator: (rule, value) => fieldValidator(rule['field'], value, formSchema) }]}
-                        >
-                            <AmountInput />
-                        </HelperFormItem>
-                    );
-                }}
-            </Item>
+                        return (
+                            <HelperFormItem
+                                layout={layout}
+                                label={t('urgeCollection:repayAmount')}
+                                help={`${t('urgeCollection:amountDue')} : ${formatPrice(amountDue)}`}
+                                name="partialMoney"
+                                required
+                                rules={[
+                                    { validator: (rule, value) => fieldValidator(rule['field'], value, formSchema) },
+                                ]}
+                            >
+                                <AmountInput />
+                            </HelperFormItem>
+                        );
+                    }}
+                </Item>
+            }
         </>
     );
 
     const PTPTime = () => (
         <Item
             {...layout}
+            tooltip={t('urgeCollection:ptpTimeTooltip')}
             name="ptpTime"
             label={t('urgeCollection:ptpTime')}
             required
@@ -187,7 +194,8 @@ export const UrgeModal = ({
                             return (
                                 <>
                                     {followResult === 'Promise' && <PTPTime />}
-                                    {(followResult === 'Promise' || followResult === 'Other') && <RePayLink />}
+                                    {(followResult === 'Promise' || followResult === 'Other') &&
+                                        !generateLinkSwitch && <RePayLink />}
                                 </>
                             );
                         }}
