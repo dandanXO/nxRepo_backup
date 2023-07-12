@@ -2,45 +2,45 @@ import { ICustomTailwindTheme } from '../../../../app/modules/theme/ICustomTailw
 
 const theme: ICustomTailwindTheme = {
     // NOTE: color
-    primary_main: '#62AD81',
-    primary_variant: '#47946F',
-    primary_assistant: '#F2FDF0',
+    primary_main: '#0A5C26',
+    primary_variant: '#054226',
+    primary_assistant: '#CDF6CA',
     
-    secondary_main: '#F7D854',
-    secondary_variant: '#D4B43D',
-    secondary_assistant: '#FEFADC',
+    secondary_main: '#FFAE4F',
+    secondary_variant: '#DB8939',
+    secondary_assistant: '#FFF5DB',
     
-    tertiary_main: '#AAE6B7',
-    tertiary_variant: '#95D3A0',
+    tertiary_main: '#5FCE6F',
+    tertiary_variant: '#349D4D',
 
     // NOTE: State
-    custom_state_disable_main: '#D1D1D1',
-    custom_state_disable_variant: '#909090',
-    custom_state_disable_assistant: '#ECECEC',
+    custom_state_disable_main: '#DEDDDD',
+    custom_state_disable_variant: '#939292',
+    custom_state_disable_assistant: '#F3F3F3',
     
-    custom_state_success_main: '#77C128',
+    custom_state_success_main: '#0EB752',
     
-    custom_state_warning_main: '#F7E382',
-    custom_state_warning_variant: '#B19A41',
+    custom_state_warning_main: '#EACE3A',
+    custom_state_warning_variant: '#BE9800',
     
-    custom_state_error_main: '#FF4F23',
-    custom_state_error_variant: '#FFE8D3',
+    custom_state_error_main: '#C42739',
+    custom_state_error_variant: '#FCDDD3',
     
-    custom_state_info_main: '#007FFF',
-    custom_state_info_variant: '#D5E6FE',
+    custom_state_info_main: '#0764C6',
+    custom_state_info_variant: '#CBECFC',
 
     // NOTE: background
-    custom_bg_primary: '#FDFEF9',
+    custom_bg_primary: '#FDFDFD',
     custom_bg_secondary: '#FFFFFF',
-    custom_bg_tertiary: '#EEFEEB',
-    custom_bg_homepage_button: 'linear-gradient(178.76deg, #62AD81 1.58%, #47946F 99.46%)', // 首頁按鈕 Get my limit
-    custom_bg_button: 'linear-gradient(178.76deg, #62AD81 1.58%, #47946F 99.46%)', // PK primary button
+    custom_bg_tertiary: '#F1FFFA',
+    custom_bg_homepage_button: 'linear-gradient(178.76deg, #0A5C26 1.58%, #054226 99.46%)', // 首頁按鈕 Get my limit
+    custom_bg_button: 'linear-gradient(178.76deg, #0A5C26 1.58%, #054226 99.46%)', // PK primary button
 
     // NOTE: text
-    custom_text_primary: '#222222',
-    custom_text_secondary: '#808080',
-    custom_text_tertiary: '#9F9F9F',
-    custom_text_divider: '#E8E8E8',
+    custom_text_primary: '#343434',
+    custom_text_secondary: '#7D7D7D',
+    custom_text_tertiary: '#C2C2C2',
+    custom_text_divider: '#F1F1F1',
 
     // NOTE: Text Fields
     custom_text_fields_background_main: '#FFFFFF',
