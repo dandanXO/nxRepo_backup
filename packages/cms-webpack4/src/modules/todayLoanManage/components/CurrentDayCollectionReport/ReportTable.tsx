@@ -307,7 +307,7 @@ const ReportTable = (): JSX.Element => {
                     <Summary>
                         <Row style={{ fontWeight: 'bold', background: '#fafafa' }}>
                             {columnStateMap.function.show && <Cell index={0}>{t('common:currentPageTotal')}</Cell>}
-                            {columnStateMap.function.show && isSuperAdmin && <Cell index={1} />}
+                            {columnStateMap.merchantName.show && isSuperAdmin && <Cell index={1} />}
                             {columnStateMap.followUpDate.show && <Cell index={2} />}
                             {columnStateMap.collectTeam.show && <Cell index={3} />}
                             {columnStateMap.collectStage.show && <Cell index={4} />}
