@@ -144,12 +144,12 @@ const ReportTable = (): JSX.Element => {
             hideInSearch: true,
         },
         {
-            title: t('urgeCollection:followUpTimes'),
+            title: t('urgeCollection:numberOfFollowUps'),
             dataIndex: 'numberOfFollowUps',
             hideInSearch: true,
         },
         {
-            title: t('urgeCollection:numberOfFollowUps'),
+            title: t('urgeCollection:followUpTimes'),
             dataIndex: 'followUpTimes',
             hideInSearch: true,
         },
