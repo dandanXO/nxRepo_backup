@@ -160,6 +160,14 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:coverageRate'),
             dataIndex: 'coverageRate',
             hideInSearch: true,
+            render: (_, { coverageRate }) => ({
+                props: {
+                    style: {
+                        background: '#FAFAFA',
+                    },
+                },
+                children: coverageRate,
+            }),
         },
         {
             title: t('urgeCollection:fullRepaymentOrders'),
@@ -176,6 +184,14 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:extensionRate'),
             dataIndex: 'extensionRate',
             hideInSearch: true,
+            render: (_, { extensionRate }) => ({
+                props: {
+                    style: {
+                        background: '#FAFAFA',
+                    },
+                },
+                children: extensionRate,
+            }),
         },
         {
             tooltip: t('urgeCollection:totalReceivedCountTooltips'),
@@ -188,22 +204,40 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:orderPaymentRate'),
             dataIndex: 'orderPaymentRate',
             hideInSearch: true,
+            render: (_, { orderPaymentRate }) => ({
+                props: {
+                    style: {
+                        background: '#FAFAFA',
+                    },
+                },
+                children: orderPaymentRate,
+            }),
         },
         {
             title: t('urgeCollection:receiptAmount'),
             dataIndex: 'receiptAmount',
             hideInSearch: true,
+            render: (_, { receiptAmount }) => receiptAmount.toLocaleString(),
         },
         {
             title: t('urgeCollection:followUpAmount'),
             dataIndex: 'followUpAmount',
             hideInSearch: true,
+            render: (_, { followUpAmount }) => followUpAmount.toLocaleString(),
         },
         {
             tooltip: t('urgeCollection:paymentAmountRateTooltips'),
             title: t('urgeCollection:paymentAmountRate'),
             dataIndex: 'paymentAmountRatio',
             hideInSearch: true,
+            render: (_, { paymentAmountRatio }) => ({
+                props: {
+                    style: {
+                        background: '#FAFAFA',
+                    },
+                },
+                children: paymentAmountRatio,
+            }),
         },
     ];
     if (isSuperAdmin) {
@@ -349,10 +383,10 @@ const ReportTable = (): JSX.Element => {
                                 <Cell index={14}>{currentData?.statistics?.orderPaymentRate}</Cell>
                             )}
                             {columnStateMap.receiptAmount.show && (
-                                <Cell index={15}>{currentData?.statistics?.receiptAmount}</Cell>
+                                <Cell index={15}>{currentData?.statistics?.receiptAmount?.toLocaleString()}</Cell>
                             )}
                             {columnStateMap.followUpAmount.show && (
-                                <Cell index={16}>{currentData?.statistics?.followUpAmount}</Cell>
+                                <Cell index={16}>{currentData?.statistics?.followUpAmount?.toLocaleString()}</Cell>
                             )}
                             {columnStateMap.paymentAmountRatio.show && (
                                 <Cell index={17}>{currentData?.statistics?.paymentAmountRatio}</Cell>
