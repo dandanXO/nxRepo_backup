@@ -1,6 +1,7 @@
 import { ColumnsState, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components';
 import { Button, Space, Table } from 'antd';
 import moment from 'moment';
+import queryString from 'query-string';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -143,6 +144,11 @@ const ReportTable = (): JSX.Element => {
             hideInSearch: true,
         },
         {
+            title: t('urgeCollection:followUpTimes'),
+            dataIndex: 'numberOfFollowUps',
+            hideInSearch: true,
+        },
+        {
             title: t('urgeCollection:numberOfFollowUps'),
             dataIndex: 'followUpTimes',
             hideInSearch: true,
@@ -229,22 +235,27 @@ const ReportTable = (): JSX.Element => {
     };
 
     const handelExport = () => {
-        const searchFields = formRef.current.getFieldsValue();
-        console.log(searchFields);
+        const { collectionDate, ...rest } = formRef.current.getFieldsFormatValue();
+        const searchQueryString = queryString.stringify({
+            ...rest,
+            startTime: collectionDate[0],
+            endTime: collectionDate[1],
+        });
+        window.open(`hs/admin/collect-today/collect-detail/download?${searchQueryString}`);
+        setSearchList({
+            ...searchList,
+            ...rest,
+            collectionDate,
+        });
     };
 
     useEffect(() => {
-        const queryParameters = {
-            collectId: searchList.collectId,
-            collectStage: searchList.collectStage,
-            collectTeamId: searchList.collectTeamId,
-            merchantId: searchList.merchantId,
-            pageNum: searchList.pageNum,
-            pageSize: searchList.pageSize,
-            startTime: searchList.collectionDate[0],
-            endTime: searchList.collectionDate[1],
-        };
-        triggerGetList(queryParameters);
+        const { collectionDate, ...rest } = searchList;
+        triggerGetList({
+            ...rest,
+            startTime: collectionDate[0],
+            endTime: collectionDate[1],
+        });
     }, [searchList]);
 
     useEffect(() => {
@@ -315,31 +326,34 @@ const ReportTable = (): JSX.Element => {
                                 <Cell index={5}>{currentData?.statistics?.collector}</Cell>
                             )}
                             {columnStateMap.initialLoginTime.show && <Cell index={6} />}
-                            {columnStateMap.followUpTimes.show && <Cell index={7} />}
-                            {columnStateMap.coverageRate.show && <Cell index={8} />}
+                            {columnStateMap.numberOfFollowUps.show && (
+                                <Cell index={7}>{currentData?.statistics?.numberOfFollowUps}</Cell>
+                            )}
+                            {columnStateMap.numberOfFollowUps.show && <Cell index={8} />}
+                            {columnStateMap.coverageRate.show && <Cell index={9} />}
                             {columnStateMap.fullRepaymentOrders.show && (
-                                <Cell index={9}>{currentData?.statistics?.fullRepaymentOrders}</Cell>
+                                <Cell index={10}>{currentData?.statistics?.fullRepaymentOrders}</Cell>
                             )}
                             {columnStateMap.numberOfExtensionOrders.show && (
-                                <Cell index={10}>{currentData?.statistics?.numberOfExtensionOrders}</Cell>
+                                <Cell index={11}>{currentData?.statistics?.numberOfExtensionOrders}</Cell>
                             )}
                             {columnStateMap.extensionRate.show && (
-                                <Cell index={11}>{currentData?.statistics?.extensionRate}</Cell>
+                                <Cell index={12}>{currentData?.statistics?.extensionRate}</Cell>
                             )}
                             {columnStateMap.totalNumberOfRepaymentsReceived.show && (
-                                <Cell index={12}>{currentData?.statistics?.totalNumberOfRepaymentsReceived}</Cell>
+                                <Cell index={13}>{currentData?.statistics?.totalNumberOfRepaymentsReceived}</Cell>
                             )}
                             {columnStateMap.orderPaymentRate.show && (
-                                <Cell index={13}>{currentData?.statistics?.orderPaymentRate}</Cell>
+                                <Cell index={14}>{currentData?.statistics?.orderPaymentRate}</Cell>
                             )}
                             {columnStateMap.receiptAmount.show && (
-                                <Cell index={14}>{currentData?.statistics?.receiptAmount}</Cell>
+                                <Cell index={15}>{currentData?.statistics?.receiptAmount}</Cell>
                             )}
                             {columnStateMap.followUpAmount.show && (
-                                <Cell index={15}>{currentData?.statistics?.followUpAmount}</Cell>
+                                <Cell index={16}>{currentData?.statistics?.followUpAmount}</Cell>
                             )}
                             {columnStateMap.paymentAmountRatio.show && (
-                                <Cell index={16}>{currentData?.statistics?.paymentAmountRatio}</Cell>
+                                <Cell index={17}>{currentData?.statistics?.paymentAmountRatio}</Cell>
                             )}
                         </Row>
                     </Summary>
