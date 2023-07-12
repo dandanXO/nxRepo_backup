@@ -9,7 +9,9 @@ type Props = {
   className?: string;
   onClick?: () => void;
   loading?: boolean;
-  type?: 'secondary' | 'ghost' | undefined;
+  type?: 'secondary' | 'ghost' | undefined | 'primary';
+  primaryTypeGradient?: boolean;
+  ghostTheme?: 'primary' | 'secondary' | 'tertiary';
   disable?: boolean;
 } & TestingProps;
 
@@ -25,16 +27,26 @@ export const Button = (props: Props) => {
       className={cx(
         'w-full rounded-md p-2 text-center font-bold border-solid',
         {
-          'border-primary-main bg-primary-main border text-white': props.type === undefined && !disable,
+          'border border-primary-main bg-primary-main text-white': (props.type === undefined || props.type === "primary") && !disable,
         },
         {
-          'border-tertiary-main bg-tertiary-main border text-white': props.type === 'secondary',
+          'bg-primary-gradient': props.primaryTypeGradient === true,
         },
         {
-          'border-primary-main text-primary-main border-[1.5px] bg-none': props.type === 'ghost',
+          'border border-tertiary-main bg-tertiary-main text-white': props.type === 'secondary',
+        },
+
+        {
+          'border-cstate-disable-main bg-cstate-disable-main  text-white': props.disable === true,
         },
         {
-          'bg-cstate-disable-main border-cstate-disable-main text-white': props.disable === true,
+          'border-[1.5px] border-primary-main bg-secondary-main text-primary-main ': props.type === 'ghost' && (props.ghostTheme === undefined || props.ghostTheme === "primary"),
+        },
+        {
+          'border-[1.5px] border-secondary-main bg-secondary-main text-secondary-main ': props.type === 'ghost' && props.ghostTheme === "secondary",
+        },
+        {
+          'border-[1.5px] border-tertiary-main bg-secondary-main text-tertiary-main ': props.type === 'ghost' && props.ghostTheme === "tertiary",
         },
         props.className
       )}
