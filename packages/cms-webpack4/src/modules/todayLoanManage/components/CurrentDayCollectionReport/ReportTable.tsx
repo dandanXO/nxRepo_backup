@@ -1,5 +1,6 @@
 import { ColumnsState, ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components';
 import { Button, Space, Table } from 'antd';
+import i18next from 'i18next';
 import moment from 'moment';
 import queryString from 'query-string';
 import React, { useEffect, useRef, useState } from 'react';
@@ -314,7 +315,7 @@ const ReportTable = (): JSX.Element => {
                     reload: () => triggerGetList(searchList),
                 }}
                 search={{
-                    span: searchSpan,
+                    span: i18next.language === 'en-US' ? { ...searchSpan, xl: 12 } : searchSpan,
                     labelWidth: 'auto',
                     optionRender: ({ resetText }, { form }) => [
                         <Space>
@@ -397,6 +398,9 @@ const ReportTable = (): JSX.Element => {
                         {t('common:export')}
                     </Button>,
                 ]}
+                scroll={{
+                    x: 'auto',
+                }}
             />
             {loginLogsModal.open && (
                 <CollectorLoginLogsModal
