@@ -28,7 +28,7 @@ const searchSpan = {
 
 const searchFormLayout = {
     labelCol: { span: 6 },
-    wrapperCol: { span: 1824 },
+    wrapperCol: { span: 18 },
 };
 
 const ReportTable = (): JSX.Element => {
@@ -82,9 +82,11 @@ const ReportTable = (): JSX.Element => {
             title: t('common:function'),
             dataIndex: 'function',
             hideInSearch: true,
+            width: '5%',
             render: (_, { collector }) => (
                 <a onClick={() => handleShowLoginLogs(collector)}>{t('urgeCollection:loginLogs')}</a>
             ),
+            fixed: 'left',
         },
         {
             title: t('urgeCollection:followUpDate'),
@@ -315,7 +317,7 @@ const ReportTable = (): JSX.Element => {
                     reload: () => triggerGetList(searchList),
                 }}
                 search={{
-                    span: i18next.language === 'en-US' ? { ...searchSpan, xl: 12 } : searchSpan,
+                    span: i18next.language === 'en-US' ? { ...searchSpan, xl: 12, xxl: 12 } : searchSpan,
                     labelWidth: 'auto',
                     optionRender: ({ resetText }, { form }) => [
                         <Space>
@@ -352,7 +354,11 @@ const ReportTable = (): JSX.Element => {
                 summary={() => (
                     <Summary>
                         <Row style={{ fontWeight: 'bold', background: '#fafafa' }}>
-                            {columnStateMap.function.show && <Cell index={0}>{t('common:currentPageTotal')}</Cell>}
+                            {columnStateMap.function.show && (
+                                <Cell index={0} className="summary-cell">
+                                    {t('common:currentPageTotal')}
+                                </Cell>
+                            )}
                             {columnStateMap.merchantName?.show && isSuperAdmin && <Cell index={1} />}
                             {columnStateMap.followUpDate.show && <Cell index={2} />}
                             {columnStateMap.collectTeam.show && <Cell index={3} />}
