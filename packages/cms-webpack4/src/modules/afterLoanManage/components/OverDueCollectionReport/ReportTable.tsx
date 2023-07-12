@@ -86,7 +86,7 @@ const ReportTable = (): JSX.Element => {
             title: t('common:function'),
             dataIndex: 'function',
             hideInSearch: true,
-            width: '5%',
+            width: 100,
             render: (_, { collector }) => (
                 <a onClick={() => handleShowLoginLogs(collector)}>{t('urgeCollection:loginLogs')}</a>
             ),
@@ -96,6 +96,7 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:followUpDate'),
             dataIndex: 'followUpDate',
             hideInSearch: true,
+            width: 100,
         },
         {
             title: t('urgeCollection:followUpDate'),
@@ -112,6 +113,7 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:collectionTeam'),
             dataIndex: 'collectTeam',
             hideInSearch: true,
+            width: 100,
         },
         {
             title: t('urgeCollection:collectionTeam'),
@@ -124,6 +126,7 @@ const ReportTable = (): JSX.Element => {
         {
             title: t('urgeCollection:stage'),
             dataIndex: 'collectStage',
+            width: 100,
             valueType: 'select',
             valueEnum: { '': { text: t('common:noRestriction') }, ...OverDueStageEnum },
             fieldProps: {
@@ -135,6 +138,7 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:collector'),
             dataIndex: 'collector',
             hideInSearch: true,
+            width: 100,
         },
         {
             title: t('urgeCollection:collector'),
@@ -148,22 +152,26 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:initialLoginTime'),
             dataIndex: 'initialLoginTime',
             hideInSearch: true,
+            width: 100,
         },
         {
             title: t('urgeCollection:numberOfFollowUps'),
             dataIndex: 'numberOfFollowUps',
             hideInSearch: true,
+            width: 100,
         },
         {
             title: t('urgeCollection:followUpTimes'),
             dataIndex: 'followUpTimes',
             hideInSearch: true,
+            width: 100,
         },
         {
             tooltip: t('urgeCollection:coverageRateTooltips'),
             title: t('urgeCollection:coverageRate'),
             dataIndex: 'coverageRate',
             hideInSearch: true,
+            width: 100,
             render: (_, { coverageRate }) => ({
                 props: {
                     style: {
@@ -177,17 +185,20 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:fullRepaymentOrders'),
             dataIndex: 'fullRepaymentOrders',
             hideInSearch: true,
+            width: 100,
         },
         {
             title: t('urgeCollection:extensionCount'),
             dataIndex: 'numberOfExtensionOrders',
             hideInSearch: true,
+            width: 100,
         },
         {
             tooltip: t('urgeCollection:extensionRateTooltips'),
             title: t('urgeCollection:extensionRate'),
             dataIndex: 'extensionRate',
             hideInSearch: true,
+            width: 100,
             render: (_, { extensionRate }) => ({
                 props: {
                     style: {
@@ -202,12 +213,14 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:totalReceivedCount'),
             dataIndex: 'totalNumberOfRepaymentsReceived',
             hideInSearch: true,
+            width: 100,
         },
         {
             tooltip: t('urgeCollection:orderPaymentRateTooltips'),
             title: t('urgeCollection:orderPaymentRate'),
             dataIndex: 'orderPaymentRate',
             hideInSearch: true,
+            width: 100,
             render: (_, { orderPaymentRate }) => ({
                 props: {
                     style: {
@@ -221,19 +234,22 @@ const ReportTable = (): JSX.Element => {
             title: t('urgeCollection:receiptAmount'),
             dataIndex: 'receiptAmount',
             hideInSearch: true,
-            render: (_, { receiptAmount }) => receiptAmount.toLocaleString(),
+            width: 100,
+            render: (_, { receiptAmount }) => receiptAmount?.toLocaleString(),
         },
         {
             title: t('urgeCollection:followUpAmount'),
             dataIndex: 'followUpAmount',
             hideInSearch: true,
-            render: (_, { followUpAmount }) => followUpAmount.toLocaleString(),
+            width: 100,
+            render: (_, { followUpAmount }) => followUpAmount?.toLocaleString(),
         },
         {
             tooltip: t('urgeCollection:paymentAmountRateTooltips'),
             title: t('urgeCollection:paymentAmountRate'),
             dataIndex: 'paymentAmountRatio',
             hideInSearch: true,
+            width: 100,
             render: (_, { paymentAmountRatio }) => ({
                 props: {
                     style: {
@@ -248,6 +264,7 @@ const ReportTable = (): JSX.Element => {
         columns.splice(1, 0, {
             title: t('urgeCollection:merchantName'),
             dataIndex: 'merchantName',
+            width: 100,
             hideInSearch: true,
         });
         columns.splice(2, 0, {
@@ -407,8 +424,11 @@ const ReportTable = (): JSX.Element => {
                         {t('common:export')}
                     </Button>,
                 ]}
+                sticky={{
+                    offsetHeader: -20,
+                }}
                 scroll={{
-                    x: 'auto',
+                    x: 1,
                 }}
             />
             {loginLogsModal.open && (
