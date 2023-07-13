@@ -65,7 +65,7 @@ const ReportTable = (): JSX.Element => {
     };
 
     const { t } = useTranslation();
-    const { CurrentDayOverDueStageEnum } = useEnum();
+    const { CurrentDayOverDueStageEnum, TotalOverdueStageEnum } = useEnum();
 
     const collectorListEnum = collectorData?.reduce((acc, current) => {
         acc.set(current.collectorId, { text: current.collectorName });
@@ -125,7 +125,7 @@ const ReportTable = (): JSX.Element => {
             width: 100,
             valueType: 'select',
             valueEnum: { '': { text: t('common:noRestriction') }, ...CurrentDayOverDueStageEnum },
-            render: (_, { collectStage }) => CurrentDayOverDueStageEnum[collectStage]?.text,
+            render: (_, { collectStage }) => TotalOverdueStageEnum[collectStage]?.text,
             fieldProps: {
                 showSearch: true,
                 allowClear: false,
