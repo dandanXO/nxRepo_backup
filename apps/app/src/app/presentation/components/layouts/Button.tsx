@@ -35,18 +35,17 @@ export const Button = (props: Props) => {
         {
           'border border-tertiary-main bg-tertiary-main text-white': props.type === 'secondary',
         },
-
         {
-          'border-cstate-disable-main bg-cstate-disable-main  text-white': props.disable === true,
+          'border-cstate-disable-main bg-cstate-disable-main text-white': props.disable === true,
         },
         {
-          'border-[1.5px] border-primary-main bg-secondary-main text-primary-main ': props.type === 'ghost' && (props.ghostTheme === undefined || props.ghostTheme === "primary"),
+          'border-[1.5px] border-primary-main bg-cbg-secondary-main text-primary-main ': props.type === 'ghost' && (props.ghostTheme === undefined || props.ghostTheme === "primary"),
         },
         {
-          'border-[1.5px] border-secondary-main bg-secondary-main text-secondary-main ': props.type === 'ghost' && props.ghostTheme === "secondary",
+          'border-[1.5px] border-secondary-main bg-cbg-secondary-main text-secondary-main ': props.type === 'ghost' && props.ghostTheme === "secondary",
         },
         {
-          'border-[1.5px] border-tertiary-main bg-secondary-main text-tertiary-main ': props.type === 'ghost' && props.ghostTheme === "tertiary",
+          'border-[1.5px] border-ctext-tertiary bg-cbg-secondary-main text-ctext-tertiary ': props.type === 'ghost' && props.ghostTheme === "tertiary",
         },
         props.className
       )}

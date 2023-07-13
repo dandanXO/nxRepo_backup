@@ -3,7 +3,6 @@ import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
 import React, { ClipboardEvent } from 'react';
 import { useNavigate } from 'react-router';
 import Select from 'react-select';
-import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
 
@@ -121,7 +120,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
 
       {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
       <div className="py-2">
-        <Button className={`${EnumV15GradientButtonClassNames} `} text={'Confirm'} onClick={() => props.confirm()} />
+        <Button primaryTypeGradient={true} text={'Confirm'} onClick={() => props.confirm()} />
       </div>
     </div>
   );

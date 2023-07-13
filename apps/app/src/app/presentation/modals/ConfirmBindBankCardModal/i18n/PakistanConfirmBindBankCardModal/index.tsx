@@ -79,13 +79,20 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                     </>
                 }
                 <div className={`flex flex-row mt-6`}>
-                    <Button onClick={() => dispatch(modalSlice.actions.updatebindBankcardModal({
-                        ...modalState.bindBankcardModal,
-                        show: false,
-                    }))} text={'Cancel'} className={`mr-1 w-full`} type={'ghost'} />
+                    <Button
+                        className={`mr-1 w-full`}
+                        type={'ghost'}
+                        ghostTheme={'tertiary'}
+                        text={'Cancel'}
+                        onClick={() => dispatch(modalSlice.actions.updatebindBankcardModal({
+                            ...modalState.bindBankcardModal,
+                            show: false,
+                        }))} 
+                    />
                     <Button
                         className={`ml-1 w-full`}
                         text={'Confirm'}
+                        primaryTypeGradient={true}
                         onClick={() => {
                             dispatch(BindBankcardAction.user.bindBankcardSaveAction({
                                 ...modalState.bindBankcardModal,

@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router';
 import Select from 'react-select';
 
 import { Input } from '@frontend/mobile/shared/ui';
-
-import { EnumV15GradientButtonClassNames } from '../../../../../../../environments/theme/pakistan/v15/button';
 import { Button } from '../../../../../components/layouts/Button';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
 import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
@@ -111,7 +109,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       <div className="pb-4">
         <Button
           text={'Confirm'}
-          className={`${EnumV15GradientButtonClassNames}`}
+          primaryTypeGradient={true}
           onClick={() => {
             // !props.isFormPending && props.confirm
             props.confirm && props.confirm();

@@ -7,13 +7,14 @@ import { Button } from '../../components/layouts/Button';
 import { SuccessICON } from './i18n/SuccessICON';
 import { i18nUploadedPaymentReceiptPage } from './i18n/translations';
 import UploadedPaymentReceiptPage from './index';
-
+import { environment } from 'apps/app/src/environments/environment';
+import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 const CustomPage = styled(Page)`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: calc(100vh - 18px);
+  height: 100vh;
 `;
 const Content = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymen
           <Description>{props.t('Thank you. Your receipt has been uploaded successfully.')}</Description>
         </Content>
         <ControlSection>
-          <Button text={'Done'} onClick={() => props.navigateToLoanDetails()} />
+          <Button text={'Done'} primaryTypeGradient={environment.country===PakistanCountry.country} onClick={() => props.navigateToLoanDetails()} />
         </ControlSection>
       </CustomPage>
     );

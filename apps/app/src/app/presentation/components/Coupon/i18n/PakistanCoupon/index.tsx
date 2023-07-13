@@ -24,7 +24,7 @@ const PakistanCoupon = (props: ICouponProps) => {
   const layoutTypeStyle: any = {
     normal: {
       font: 'text-ctext-primary',
-      darkContent: 'border-primary-main bg-[#B2E4C6]',
+      darkContent: 'border-primary-main bg-tertiary-main',
       lightContent: 'border-primary-main bg-primary-assistant',
       buttonBG: 'bg-primary-main',
     },
@@ -54,15 +54,18 @@ const PakistanCoupon = (props: ICouponProps) => {
           {couponType}
         </div>
         <div className={cx(`text-sm font-bold`, [typeStyle.font])}>{couponName}</div>
-        <div className={cx(`mb-1.5 text-xs`, [typeStyle.font])}>{couponContent}</div>
+        <div className={cx(`mb-1.5 text-xs`, {
+            'text-ctext-secondary': status !== 'disabled',
+            'text-ctext-tertiary': status === 'disabled',
+          })}>{couponContent}</div>
         <div
-          className={cx('flex text-xs', {
+          className={cx('flex text-xs whitespace-nowrap', {
             'text-cstate-error-main': status !== 'disabled' && isOverdueEqual3Days(expireTime),
-            'text-ctext-secondary': status !== 'disabled' && !isOverdueEqual3Days(expireTime),
+            'text-ctext-primary': status !== 'disabled' && !isOverdueEqual3Days(expireTime),
             'text-ctext-tertiary': status === 'disabled',
           })}
         >
-          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${moment(expireTime)}`}
+          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${moment(expireTime).format('DD-MM-YYYY HH:mm')}`}
         </div>
       </div>
       <div
