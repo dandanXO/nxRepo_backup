@@ -9,6 +9,7 @@ import { PagePathEnum } from '../../PagePathEnum';
 import { UserLoginActionPayload } from './index';
 import { appStore } from 'apps/app/src/app/reduxStore';
 import { SystemCaseActions } from 'apps/app/src/app/usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
+import { loginSlice } from 'apps/app/src/app/reduxStore/loginSlice';
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {
@@ -33,6 +34,11 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
         appStore.dispatch(SystemCaseActions.InitSaga());
       }
     }
+
+    if(failure){
+        yield put(loginSlice.actions.updateResendSeconds(0))
+    }
+    
   } catch (error) {
     yield catchSagaError(error);
   }

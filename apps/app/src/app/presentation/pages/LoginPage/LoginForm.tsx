@@ -51,6 +51,11 @@ export const LoginForm = () => {
     if (resendSeconds === 0) {
       setHasSendOTP(false);
       setDoingCountdownSendOTP(false);
+      setOtpData({
+          data: '',
+          isValidation: false,
+          errorMessage: '',
+      })
     }
   }, [resendSeconds]);
 
