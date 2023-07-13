@@ -39,7 +39,7 @@ const CollectorLoginLogsModal = ({ open, collector, onCancel }: LoginLogsModalPr
             <SinglePageTableCard
                 columns={columns}
                 hook={useGetLoginAccountListQuery}
-                params={{ accountNumber: collector }}
+                params={{ accountNumber: collector, orderBy: 'loginTime' }}
                 dataSourcePath="0.operators"
                 rowKey="lastLoginTime"
             />
