@@ -350,7 +350,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
 
     const handleClickPromote = (userId: number, orderId: number) => {
         history.push(`${currentPath}/detail/${userId}/${orderId}`);
-        savePath(currentPath, `${currentPath}/detail/${userId}/${orderId}`);
+        savePath(currentPath, `${currentPath}/detail`);
     };
 
     const pageOnChange = (current, pageSize) => {
