@@ -13,6 +13,9 @@ import { useState } from 'react';
 const AccountVerificationPage = () => {
     const navigate = useNavigate();
     const userPhoneNumber = useSelector((state: RootState) => state.app.androidAppInfo?.phoneNo) || '';
+    const appState = useSelector((state: RootState) => state.app);
+
+    console.log('AccountVerificationPage AppState',appState)
     const [isInputChange,setIsInputChange]=useState(false)
     const [phoneNumber, setPhoneNumber] = useState<InputValue<string>>({
         data: '',
@@ -37,7 +40,7 @@ const AccountVerificationPage = () => {
         const isUserPhoneNumber = value !== userPhoneNumber
         setPhoneNumber(prev => ({
             ...prev,
-            isValidation: isValidPhoneNumber,
+            isValidation: isValidPhoneNumber || isUserPhoneNumber,
             errorMessage: isValidPhoneNumber ? 'Please enter the correct phone number.' :
                 isUserPhoneNumber ? 'Please double-check the number you entered as it does not match the registered number.' : '',
         }))
@@ -79,7 +82,7 @@ const AccountVerificationPage = () => {
                     <div className={`mr-1.5 w-full`}>
                         <Button
                             onClick={() => {
-                                if (phoneNumber.data === '') return
+                                if (phoneNumber.data === '' || phoneNumber.isValidation) return
                                 navigate(`delete-confirm-modal?token=${getToken()}`);
                             }}
                             text={'Confirm'}
