@@ -7,8 +7,6 @@ import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { PagePathEnum } from '../../PagePathEnum';
 import { UserLoginActionPayload } from './index';
-import { appStore } from 'apps/app/src/app/reduxStore';
-import { SystemCaseActions } from 'apps/app/src/app/usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {
@@ -30,7 +28,6 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
         yield put(appSlice.actions.updateToken(token));
         yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
         yield take(ROUTER_ON_LOCATION_CHANGED);
-        // appStore.dispatch(SystemCaseActions.InitSaga());
       }
     }
   } catch (error) {

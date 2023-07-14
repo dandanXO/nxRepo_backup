@@ -87,9 +87,9 @@ export function* runSystemInitSaga() {
         // yield catchSagaError(error);
       }
     }
+    
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
     if (AppGlobal.mode === AppModeEnum.IndexWebview || AppGlobal.mode === AppModeEnum.PureH5) {
-        console.log('取得初始化資料 (init Info & NativeAppInfo 塞到redux內)')
         appStore.dispatch(SystemCaseActions.InitSaga());
     }
 

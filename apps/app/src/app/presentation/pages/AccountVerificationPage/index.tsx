@@ -13,9 +13,7 @@ import { useState } from 'react';
 const AccountVerificationPage = () => {
     const navigate = useNavigate();
     const userPhoneNumber = useSelector((state: RootState) => state.app.androidAppInfo?.phoneNo) || '';
-    const appState = useSelector((state: RootState) => state.app);
-
-    console.log('AccountVerificationPage AppState',appState)
+    
     const [isInputChange,setIsInputChange]=useState(false)
     const [phoneNumber, setPhoneNumber] = useState<InputValue<string>>({
         data: '',
