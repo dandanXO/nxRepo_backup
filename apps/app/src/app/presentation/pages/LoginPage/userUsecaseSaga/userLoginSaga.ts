@@ -30,7 +30,7 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
         yield put(appSlice.actions.updateToken(token));
         yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
         yield take(ROUTER_ON_LOCATION_CHANGED);
-        appStore.dispatch(SystemCaseActions.InitSaga());
+        // appStore.dispatch(SystemCaseActions.InitSaga());
       }
     }
   } catch (error) {

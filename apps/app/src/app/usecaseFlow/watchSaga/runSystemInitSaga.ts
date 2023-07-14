@@ -86,10 +86,13 @@ export function* runSystemInitSaga() {
         // NOTICE: 以下這行會導致上層 saga 中斷
         // yield catchSagaError(error);
       }
-
-      // NOTE: Only for H5
-      // appStore.dispatch(SystemCaseActions.InitSaga());
     }
+    // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
+    if (AppGlobal.mode === AppModeEnum.IndexWebview || AppGlobal.mode === AppModeEnum.PureH5) {
+        console.log('取得初始化資料 (init Info & NativeAppInfo 塞到redux內)')
+        appStore.dispatch(SystemCaseActions.InitSaga());
+    }
+
   } catch (error) {
     console.log(error);
     yield catchSagaError(error);
