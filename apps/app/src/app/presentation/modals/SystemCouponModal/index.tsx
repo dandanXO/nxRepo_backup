@@ -74,7 +74,7 @@ const SystemCouponModal = () => {
                     }
                 </div>
                 <div className='flex'>
-                    <Button className='mr-1' text={'Cancel'} type={'ghost'} onClick={handleCancel} />
+                    <Button className='mr-1' text={'Cancel'} type={'ghost'} ghostTheme={'tertiary'} onClick={handleCancel} />
                     <Button className='ml-1' text={'Next'} onClick={handleOnClick} />
                 </div>
             </div>

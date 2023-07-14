@@ -9,7 +9,6 @@ import Select, { StylesConfig } from 'react-select';
 import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
 
 import { environment } from '../../../../../../environments/environment';
-import { EnumV15GradientButtonClassNames } from '../../../../../../environments/theme/pakistan/v15/button';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
@@ -170,6 +169,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div className={`mr-1.5 w-full `}>
           <Button
             type={'ghost'}
+            ghostTheme={'tertiary'}
             className={`w-full`}
             text={props.t('Cancel')}
             onClick={() => {
@@ -180,8 +180,9 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         </div>
         <div className={` ml-1.5 w-full`}>
           <Button
-            className={`w-full ${EnumV15GradientButtonClassNames}`}
+            className={`w-full`}
             text={props.t('Repay')}
+            primaryTypeGradient={true}
             onClick={() => {
               if (isRepayTypesFetching) return;
               if (balanceValueErrorMessage === '') handleConfirm();

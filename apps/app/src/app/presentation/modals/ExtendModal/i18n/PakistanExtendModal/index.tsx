@@ -114,10 +114,10 @@ const PakistanExtendModal = (props: any) => {
 
       <div className={`mt-6 flex flex-row text-white`}>
         <div className={`mr-1.5 grow`}>
-          <Button type={'ghost'} onClick={() => navigate(-2)} text={'Cancel'} />
+          <Button type={'ghost'} ghostTheme={'tertiary'} onClick={() => navigate(-2)} text={'Cancel'} />
         </div>
         <div className={`ml-1.5 grow`}>
-          <Button onClick={props.handleConfirm} text={'Confirm'} />
+          <Button onClick={props.handleConfirm} primaryTypeGradient={true} text={'Confirm'} />
         </div>
       </div>
     </div>

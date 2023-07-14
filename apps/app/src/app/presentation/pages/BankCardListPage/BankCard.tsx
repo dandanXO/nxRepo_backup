@@ -12,7 +12,7 @@ const BankCard = ({ cardName, isMainCard, cardNo, handleSetPrimary }: IBankCard)
       <div className={`mb-3 flex flex-row justify-between font-bold items-baseline`}>
         <div className={`text-base`}>{cardName}</div>
         <div className={`text-xs ${isMainCard ? 'text-primary-main' : 'text-ctext-tertiary'}`}>
-          {!isMainCard ? <button className='border border-solid border-ctext-tertiary rounded-2xl py-2 px-4' onClick={handleSetPrimary} >Set Primary</button> : <div className='pr-4'>Primary</div>}
+          {!isMainCard ? <button className='border border-solid border-ctext-tertiary rounded-2xl py-2 px-4 whitespace-nowrap' onClick={handleSetPrimary} >Set Primary</button> : <div className='pr-4'>Primary</div>}
         </div>
       </div>
       <div>{cardNo}</div>

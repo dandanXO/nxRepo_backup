@@ -51,7 +51,7 @@ import ExtendModal from  '../modals/ExtendModal';
 import LogoutModal from  '../modals/LogoutModal';
 import APIBoundaryModal from  '../modals/APIBoundaryModal';
 import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
-import RepamentCouponModal from  '../modals/RepamentCouponModal';
+import RepaymentCouponModal from  '../modals/RepaymentCouponModal';
 import IBANFinderModal from  '../modals/IBANFinderModal';
 import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
 
@@ -136,8 +136,8 @@ import LoadingMask from '../components/LoadingMask';
 // const PrivacyPolicyModal = React.lazy(
 //   () => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal')
 // );
-// const RepamentCouponModal = React.lazy(
-//   () => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal')
+// const RepaymentCouponModal = React.lazy(
+//   () => import(/* webpackChunkName: "RepaymentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepaymentCouponModal')
 // );
 // const IBANFinderModal = React.lazy(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
@@ -164,7 +164,7 @@ import LoadingMask from '../components/LoadingMask';
 // AmountRepaidModal.preload();
 // ExtendConfirmModal.preload();
 // ExtendModal.preload();
-// RepamentCouponModal.preload();
+// RepaymentCouponModal.preload();
 
 
 
@@ -221,7 +221,7 @@ export const AppRouter = () => {
           <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
           <Route path="extend-modal" element={<ExtendModal />} />
-          <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
+          <Route path="repayment-coupon-modal" element={<RepaymentCouponModal />} />
         </Route>
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />

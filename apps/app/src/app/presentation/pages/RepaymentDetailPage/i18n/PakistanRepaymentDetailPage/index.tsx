@@ -4,7 +4,6 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { EnumV15GradientButtonClassNames } from '../../../../../../environments/theme/pakistan/v15/button';
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
@@ -60,7 +59,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   return (
     <div>
       {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
-          <div className={`bg-primary-assistant text-primary-main py-2 text-center text-sm`}>
+          <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>
               Get more amount after instant payment
           </div>
       )}
@@ -253,7 +252,6 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               <Button type={'ghost'} text={'Extend'} />
             </div>
           )}
-
           {status !== 'PAY_OFF' && status !== 'EXTEND' && (
             <div
               onClick={() => {
@@ -266,7 +264,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 'ml-1.5': extendable,
               })}
             >
-              <Button text={'Repay'} className={`${EnumV15GradientButtonClassNames}`} />
+              <Button text={'Repay'} primaryTypeGradient={true} />
             </div>
           )}
         </div>
@@ -303,7 +301,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                   });
                 }}
               >
-                <Button type={'ghost'} className={`w-full`} text={'Upload Receipt'} />
+                <Button type={'ghost'} className={`w-full`} ghostTheme={'secondary'} text={'Upload Receipt'} />
               </div>
             </div>
           </>

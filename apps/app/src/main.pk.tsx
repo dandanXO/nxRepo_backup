@@ -42,7 +42,7 @@ import RepaymentModal from "./app/presentation/modals/RepaymentModal";
 import AmountRepaidModal from "./app/presentation/modals/AmountRepaidModal/AmountRepaidModal";
 import ExtendConfirmModal from "./app/presentation/modals/ExtendConfirmModal";
 import ExtendModal from "./app/presentation/modals/ExtendModal";
-import RepamentCouponModal from "./app/presentation/modals/RepamentCouponModal";
+import RepamentCouponModal from "./app/presentation/modals/RepaymentCouponModal";
 import APIBoundaryModal from "./app/presentation/modals/APIBoundaryModal";
 import LoadingMask from "./app/presentation/components/LoadingMask";
 
