@@ -9,6 +9,7 @@ import { RootState } from '../../../../reduxStore';
 import { InitialStateType, modalSlice } from '../../../../reduxStore/modalSlice';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { IndexPageSagaAction, UserApplyProductActionPayload } from './indexPageActions';
+import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {
@@ -74,6 +75,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
     );
 
+    yield put(loadingSlice.actions.updatePageLoading(true));
     const { data: responseData, success }: { data: LoanServiceResponse; success: boolean } = yield call(
       Service.LoanService.applyLoan,
       {
@@ -107,6 +109,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
   } catch (error: any) {
     yield catchSagaError(error);
   } finally {
+    yield put(loadingSlice.actions.updatePageLoading(false));
     // console.groupEnd();
   }
 }
