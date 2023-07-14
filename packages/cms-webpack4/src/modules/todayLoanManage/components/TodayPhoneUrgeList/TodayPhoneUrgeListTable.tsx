@@ -3,7 +3,7 @@ import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, Space, Tag, Tooltip, Typography } from 'antd';
 import Cookies from 'js-cookie';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 
