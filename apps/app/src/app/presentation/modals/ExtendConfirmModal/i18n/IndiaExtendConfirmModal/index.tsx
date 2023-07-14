@@ -33,7 +33,7 @@ const IndiaExtendConfirmModal = () => {
             });
           }}
         />
-        <Button type={'ghost'} className={`w-full`} text={'Next time'} onClick={() => navigate(-1)} />
+        <Button type={'ghost'} ghostTheme={'tertiary'} className={`w-full`} text={'Next time'} onClick={() => navigate(-1)} />
       </div>
     </div>
   );
