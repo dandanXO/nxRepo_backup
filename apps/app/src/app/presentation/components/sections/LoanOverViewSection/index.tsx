@@ -108,7 +108,7 @@ export const LoanOverViewSection = (props: Props) => {
               <div className="text">
                 <div className='font-bold text-sm mb-1.5'>
                   {environment.currency}{' '}
-                  {isReacquireCreditAmount ? ' ***' :  props.state.indexAPI?.availableAmount}
+                  {isReacquireCreditAmount ? ' ***' :  formatPrice(Number(props.state.indexAPI?.availableAmount))}
                 </div>
                 <div className='font-bold text-xs'>Available</div>
                 <div className='font-bold text-xs'>Balance</div>
