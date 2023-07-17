@@ -11,7 +11,7 @@ import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentRe
 import I18CameraSvgIcon from '../I18CameraSvgIcon';
 import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
 import { isShowNavigation } from 'apps/app/src/app/modules/window/isShowNavigation';
-import cx from 'classNames'
+import cx from 'classnames'
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: I18UploadPaymentReceiptPageProps) => {
