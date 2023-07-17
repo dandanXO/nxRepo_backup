@@ -5,10 +5,11 @@ interface Props {
   back?: () => void;
   to?: () => void;
   toIcon?: React.ReactElement | React.ReactElement[] | string;
+  className?:string;
 }
 export const Navigation = (props: Props) => {
   return (
-    <div className={'navigation sticky top-0 z-10 flex h-14 flex-row items-center justify-between bg-white px-3'}>
+    <div className={`navigation sticky top-0 z-10 flex h-14 flex-row items-center justify-between bg-white px-3 ${props.className}`}>
       {props.back && (
         <div
           onClick={() => {
