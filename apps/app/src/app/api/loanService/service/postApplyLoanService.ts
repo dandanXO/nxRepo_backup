@@ -21,7 +21,7 @@ export const postApplyLoanService = async (req: LoanServiceRequest) => {
     if (axios.isAxiosError(error)) {
       alertModal((error.response as any).data?.message);
     }
-    return null;
+    return error;
   }
 };
 
