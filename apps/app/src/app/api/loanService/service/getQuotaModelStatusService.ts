@@ -20,7 +20,7 @@ export const getQuotaModelStatusService = async (request: GetQuotaModelStatusReq
     if (axios.isAxiosError(error)) {
       alertModal((error.response as any).data?.message);
     }
-    return error;
+    return null;
   }
 };
 
