@@ -10,7 +10,7 @@ import useErrorModal from "../../../../../packages/cms-webpack4/src/modules/shar
 // })
 
 // NOTE: Component - way1
-import IndexPage from "../components/pages/IndexPage";
+// import IndexPage from "../components/pages/IndexPage";
 import LoanDetailsPage, {
     STATE_REPAYMENT_STEPS,
 } from "../components/pages/LoanDetailsPage";
@@ -157,7 +157,7 @@ const Pages = () => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Routes>
-                <Route path={`${AppFlag.pagePrefix}`} element={<IndexPage />} />
+                {/*<Route path={`${AppFlag.pagePrefix}`} element={<IndexPage />} />*/}
                 {/* NOTE: Android 會使用到的頁面，Backend API Response 會給 URL */}
                 <Route
                     path={`${AppFlag.pagePrefix}bank-bind`}
