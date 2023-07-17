@@ -31,14 +31,13 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
         yield put(appSlice.actions.updateToken(token));
         yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
         yield take(ROUTER_ON_LOCATION_CHANGED);
-        appStore.dispatch(SystemCaseActions.InitSaga());
       }
     }
 
     if(failure){
         yield put(loginSlice.actions.updateResendSeconds(0))
     }
-    
+
   } catch (error) {
     yield catchSagaError(error);
   }

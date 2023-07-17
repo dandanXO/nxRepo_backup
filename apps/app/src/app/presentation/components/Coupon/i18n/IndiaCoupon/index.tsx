@@ -66,15 +66,15 @@ const IndiaCoupon = (props: ICouponProps) => {
         ></div>
 
         <div
-          className={cx(`font-bold`, 'text-xs', {
+          className={cx(`font-bold text-xs mb-1.5`, {
             'text-primary-variant': status !== 'disabled',
             'text-cstate-disable-main': status === 'disabled',
           })}
         >
           {couponType}
         </div>
-        <div className={cx(`text-sm font-bold`, [typeStyle.font])}>{couponName}</div>
-        <div className={cx(`mb-1.5 text-xs`, [typeStyle.font])}>{couponContent}</div>
+        <div className={cx(`text-sm font-bold break-all leading-none mb-1.5`, [typeStyle.font])}>{couponName}</div>
+        <div className={cx(`text-xs break-all leading-none mb-1.5 `, [typeStyle.font])}>{couponContent}</div>
         <div
           className={cx('flex text-xs', {
             'text-cstate-error-main': status !== 'disabled' && isOverdueEqual3Days(expireTime),
