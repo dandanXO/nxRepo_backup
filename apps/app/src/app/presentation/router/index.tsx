@@ -14,7 +14,7 @@ import IndexPage from '../pages/IndexPage';
 import { PagePathEnum } from '../pages/PagePathEnum';
 
 // NOTE: Page
-import { CategoryPage } from '../pages/__test__/CategoryPage';
+// import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 
 
@@ -196,7 +196,7 @@ export const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        <Route path="/v2/category" element={<CategoryPage />} />
+        {/*<Route path="/v2/category" element={<CategoryPage />} />*/}
         <Route path="/v2/error" element={<ErrorPage />} />
         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
