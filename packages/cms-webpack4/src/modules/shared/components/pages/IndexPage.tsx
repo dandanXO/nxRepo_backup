@@ -153,6 +153,11 @@ export function IndexPage(): JSX.Element {
                     <a>Overdue Phone Urge List</a>
                 </Link>
             </div>
+            <div>
+                <Link to="/CustomerServiceManage/CustomerServiceManage">
+                    <a>Customer Service Manage</a>
+                </Link>
+            </div>
 
             {/*<button onClick={() => methodDoesNotExist()}>Test Sentry - Break the world</button>;*/}
         </div>
