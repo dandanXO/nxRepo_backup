@@ -226,7 +226,7 @@ export const AppRouter = () => {
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
         <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
-        <Route path="/v2/partner" element={<PartnerPage />} />
+        <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
