@@ -46,6 +46,9 @@ export type InitialStateType = {
   },
   noRecommendProductModal:{
     show: boolean;
+  },
+  paymentProgressingModal:{
+    show: boolean;
   }
 };
 
@@ -92,6 +95,9 @@ const initialState: InitialStateType = {
     show: false
   },
   noRecommendProductModal:{
+    show: false
+  },
+  paymentProgressingModal:{
     show: false
   }
 };
@@ -161,6 +167,9 @@ export const modalSlice = createSlice({
     },
     updateNoRecommendProductModal: (state, action: PayloadAction<InitialStateType['noRecommendProductModal']>) => {
         state.noRecommendProductModal.show = action.payload.show;
+    },
+    updatepaymentProgressingModal: (state, action: PayloadAction<InitialStateType['noRecommendProductModal']>) => {
+        state.paymentProgressingModal.show = action.payload.show;
     },
   },
 });
