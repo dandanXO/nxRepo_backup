@@ -29,12 +29,14 @@ export const FeedbackTable = (): JSX.Element => {
         category: undefined,
         name: undefined,
         phoneNo: undefined,
+        status: undefined,
         createTimeBegin: initDateTime.format('YYYY-MM-DD'),
         createTimeEnd: initDateTime.format('YYYY-MM-DD'),
         pageNum: 1,
         pageSize: 10,
     };
     const [searchParameters, setSearchParameters] = useState(initSearchParameters);
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const { data: feedbackCategories } = useGetFeedbackCategoriesQuery(null);
 
@@ -74,6 +76,36 @@ export const FeedbackTable = (): JSX.Element => {
             render: (data) => <CopyText text={data} />,
         },
         {
+            title: '狀態',
+            dataIndex: 'read',
+            width: '14%',
+            hideInSearch: true,
+            render: (data) => <div style={{ color: `${data ? 'black' : '#1d8bf5'}` }}>{data ? '已读' : '未读'}</div>,
+        },
+        {
+            title: '狀態',
+            dataIndex: 'status',
+            hideInTable: true,
+            valueType: 'select',
+            fieldProps: {
+                allowClear: false,
+                options: [
+                    {
+                        label: '不限',
+                        value: '',
+                    },
+                    {
+                        label: '未读',
+                        value: false,
+                    },
+                    {
+                        label: '已读',
+                        value: true,
+                    },
+                ],
+            },
+        },
+        {
             title: '问题分类',
             dataIndex: 'category',
             width: '14%',
@@ -111,6 +143,10 @@ export const FeedbackTable = (): JSX.Element => {
         setSearchParameters({ ...searchParameters, pageNum: current, pageSize: pageSize });
     };
 
+    const onSelectChange = (selectedRowKeys) => {
+        setSelectedRowKeys(selectedRowKeys);
+    };
+
     useEffect(() => {
         triggerGetList(searchParameters);
     }, [searchParameters]);
@@ -122,6 +158,7 @@ export const FeedbackTable = (): JSX.Element => {
     return (
         <ProTable<FeedbackListItem>
             loading={isFetching}
+            rowKey={({ id }) => id}
             columns={columns}
             dataSource={currentData?.records}
             form={{ ...searchFormLayout }}
@@ -163,6 +200,10 @@ export const FeedbackTable = (): JSX.Element => {
                 onChange: pageOnChange,
                 total: currentData?.totalRecords,
                 current: currentData?.currentPage,
+            }}
+            rowSelection={{
+                selectedRowKeys,
+                onChange: onSelectChange,
             }}
         />
     );
