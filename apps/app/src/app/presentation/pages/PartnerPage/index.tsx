@@ -3,21 +3,21 @@ import { useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../components/layouts/Navigation';
+import { Page } from '../../components/layouts/Page';
 
 const PartnerPage = () => {
   const navigate = useNavigate();
   const { init } = useSelector((state: RootState) => state.app);
   return (
-    <div>
-      {' '}
+    <Page className={`flex flex-col`}>
       <Navigation
         title={'Partner'}
         back={() => {
           navigate(-1);
         }}
       />
-      <iframe className={`grow`} src={init?.partnershipUrl || ''} title="" />
-    </div>
+      <iframe className={`w-full grow`} src={init?.partnershipUrl || ''} title="" />
+    </Page>
   );
 };
 

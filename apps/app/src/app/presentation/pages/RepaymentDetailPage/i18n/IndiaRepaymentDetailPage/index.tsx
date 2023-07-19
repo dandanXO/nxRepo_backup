@@ -17,6 +17,9 @@ import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {formatDate} from "../../../../../modules/format/formatDate";
 import VipIcon from '../../../../components/images/VipIcon.svg';
+import { useSelector } from 'react-redux';
+import PaymentProgressingModal from '../../../../modals/PaymentProgressingModal';
+import { RootState } from 'apps/app/src/app/reduxStore';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -24,6 +27,7 @@ type IRepaymentDetailPage = {
 }
 const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
+  const modalState = useSelector((state: RootState) => state.model);
 
   const { currentData, isFetching = true } = props || {};
   const {
@@ -58,6 +62,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
   return (
     <div>
+      {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
       <div className={`px-6`}>
         <ListItem
           title={'Product'}
