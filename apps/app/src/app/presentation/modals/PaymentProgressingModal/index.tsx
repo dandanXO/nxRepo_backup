@@ -49,8 +49,8 @@ const PaymentProgressingModal = () => {
                     />
                     <Button
                         className='ml-1 w-full'
-                        text={'Apply'}
-                        onClick={()=>handleClick('Booking Application')}
+                        text={'Booking Application'}
+                        onClick={()=>handleClick('BookingApplication')}
                     />
                 </div>
             </div>
