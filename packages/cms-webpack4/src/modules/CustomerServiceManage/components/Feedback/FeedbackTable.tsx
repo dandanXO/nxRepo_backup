@@ -67,13 +67,13 @@ export const FeedbackTable = (): JSX.Element => {
             title: '手机号',
             dataIndex: 'phoneNo',
             width: '14%',
-            render: (data) => <CopyText text={data} />,
+            render: (_, { phoneNo }) => <CopyText text={phoneNo} />,
         },
         {
             title: '姓名',
             dataIndex: 'name',
             width: '14%',
-            render: (data) => <CopyText text={data} />,
+            render: (_, { name }) => <CopyText text={name} />,
         },
         {
             title: 'APP名称',
@@ -82,7 +82,7 @@ export const FeedbackTable = (): JSX.Element => {
             valueType: 'select',
             valueEnum: appNamesEnum,
             fieldProps: { showSearch: true, allowClear: false },
-            render: (data) => <CopyText text={data} />,
+            render: (_, { appName }) => <CopyText text={appName} />,
         },
         {
             title: '狀態',
