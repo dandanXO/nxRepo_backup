@@ -1,7 +1,7 @@
 import AdminPage from '../../../shared/components/common/AdminPage';
-import { CustomerServiceManageTable } from './CustomerServiceManageTable';
+import { FeedbackTable } from './FeedbackTable';
 
-export const CustomerServiceManage = (): JSX.Element => (
+export const Feedback = (): JSX.Element => (
     <AdminPage
         navigator={{
             ancestor: {
@@ -18,6 +18,6 @@ export const CustomerServiceManage = (): JSX.Element => (
             },
         }}
     >
-        <CustomerServiceManageTable />
+        <FeedbackTable />
     </AdminPage>
 );
