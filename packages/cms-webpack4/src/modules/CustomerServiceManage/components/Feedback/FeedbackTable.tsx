@@ -31,6 +31,8 @@ export const FeedbackTable = (): JSX.Element => {
         phoneNo: undefined,
         createTimeBegin: initDateTime.format('YYYY-MM-DD'),
         createTimeEnd: initDateTime.format('YYYY-MM-DD'),
+        pageNum: 1,
+        pageSize: 10,
     };
     const [searchParameters, setSearchParameters] = useState(initSearchParameters);
 
@@ -105,6 +107,10 @@ export const FeedbackTable = (): JSX.Element => {
         },
     ];
 
+    const pageOnChange = (current, pageSize) => {
+        setSearchParameters({ ...searchParameters, pageNum: current, pageSize: pageSize });
+    };
+
     useEffect(() => {
         triggerGetList(searchParameters);
     }, [searchParameters]);
@@ -150,6 +156,13 @@ export const FeedbackTable = (): JSX.Element => {
                     createTimeBegin: createTime[0],
                     createTimeEnd: createTime[1],
                 });
+            }}
+            pagination={{
+                showSizeChanger: true,
+                defaultPageSize: 10,
+                onChange: pageOnChange,
+                total: currentData?.totalRecords,
+                current: currentData?.currentPage,
             }}
         />
     );
