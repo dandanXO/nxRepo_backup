@@ -4,12 +4,13 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 import CopyText from '../../../shared/components/other/CopyText';
-import { useLazyGetFeedbackListQuery } from '../../api/FeedbackManageApi';
+import useGetAppNamesEnum from '../../../shared/hooks/useGetAppNamesEnum';
+import { useGetFeedbackCategoriesQuery, useLazyGetFeedbackListQuery } from '../../api/FeedbackManageApi';
 import { FeedbackListItem } from '../../api/types/getFeedbackList';
 
 const searchFormLayout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 },
 };
 
 const searchSpan = {
@@ -32,6 +33,15 @@ export const FeedbackTable = (): JSX.Element => {
         createTimeEnd: initDateTime.format('YYYY-MM-DD'),
     };
     const [searchParameters, setSearchParameters] = useState(initSearchParameters);
+
+    const { data: feedbackCategories } = useGetFeedbackCategoriesQuery(null);
+
+    const feedbackCategoriesEnum = feedbackCategories?.reduce((acc, current) => {
+        acc.set(current.key, { text: current.displayName });
+        return acc;
+    }, new Map().set('', { text: '不限' }));
+
+    const { triggerGetAppNames, appNamesEnum } = useGetAppNamesEnum();
 
     const [triggerGetList, { currentData, isFetching }] = useLazyGetFeedbackListQuery({
         pollingInterval: 0,
@@ -56,12 +66,18 @@ export const FeedbackTable = (): JSX.Element => {
             title: 'APP名称',
             dataIndex: 'appName',
             width: '14%',
+            valueType: 'select',
+            valueEnum: appNamesEnum,
+            fieldProps: { showSearch: true, allowClear: false },
             render: (data) => <CopyText text={data} />,
         },
         {
             title: '问题分类',
             dataIndex: 'category',
             width: '14%',
+            valueType: 'select',
+            valueEnum: feedbackCategoriesEnum,
+            fieldProps: { allowClear: false },
         },
         {
             title: '用户反馈内容',
@@ -74,6 +90,7 @@ export const FeedbackTable = (): JSX.Element => {
             dataIndex: 'createTime',
             width: '14%',
             hideInSearch: true,
+            render: (data) => moment(data.toString()).format('YYYY-MM-DD hh:mm:ss'),
         },
         {
             title: '创建时间',
@@ -91,6 +108,10 @@ export const FeedbackTable = (): JSX.Element => {
     useEffect(() => {
         triggerGetList(searchParameters);
     }, [searchParameters]);
+
+    useEffect(() => {
+        triggerGetAppNames(null);
+    }, []);
 
     return (
         <ProTable<FeedbackListItem>
