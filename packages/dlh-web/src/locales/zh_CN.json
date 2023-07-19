@@ -1217,6 +1217,8 @@
   "menu.overdueList": "逾期订单",
   "menu.overdueRepaymentList": "逾期还款记录",
   "menu.overdueCallList": "逾期电催列表",
+  "menu.customer.service.management": "客服管理",
+  "menu.customer.service.management.feedback": "客服管理",
   "menu.statistics": "数据统计",
   "menu.repaymentList": "回款统计",
   "menu.channelManage": "渠道管理",

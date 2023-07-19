@@ -157,6 +157,16 @@ export const processRoutesForNewCMS = (data) => {
         }
       })
     }
+
+    // 客服管理
+    if (menuItem.actionUrl === "/customer-service-manage") {
+      menuItem.children && menuItem.children.map(level2MenuItem => {
+        // 客服管理
+        if (level2MenuItem.actionUrl === "/feedback") {
+          level2MenuItem.actionUrl = "/cms/customer-service-manage/feedback";
+        }
+      })
+    }
     return menuItem;
   })
 }

@@ -1146,6 +1146,8 @@
   "menu.overdueList": "逾期訂單",
   "menu.overdueRepaymentList": "逾期還款記錄",
   "menu.overdueCallList": "逾期電催列表",
+  "menu.customer.service.management": "客服管理",
+  "menu.customer.service.management.feedback": "客服管理",
   "menu.statistics": "數據統計",
   "menu.repaymentList": "回款統計",
   "menu.channelManage": "渠道管理",
