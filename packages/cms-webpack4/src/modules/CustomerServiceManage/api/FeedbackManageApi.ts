@@ -1,6 +1,7 @@
 import { API } from '../../shared/api';
 import { GetFeedbackCategories } from './types/getFeedbackCategories';
 import { GetFeedbackListQueryString, GetFeedbackListResponse } from './types/getFeedbackList';
+import { PostFeedbackModifyStatusRequestBody } from './types/postFeedbackModifyStatus';
 
 const FeedbackManageApi = API.injectEndpoints({
     overrideExisting: false,
@@ -21,7 +22,17 @@ const FeedbackManageApi = API.injectEndpoints({
                 params,
             }),
         }),
+
+        // [POST] 修改反馈状态
+        postFeedbackModifyStatus: builder.mutation<null, PostFeedbackModifyStatusRequestBody>({
+            query: (data: PostFeedbackModifyStatusRequestBody) => ({
+                url: '/feedback/modify-status',
+                method: 'post',
+                data,
+            }),
+        }),
     }),
 });
 
-export const { useGetFeedbackCategoriesQuery, useLazyGetFeedbackListQuery } = FeedbackManageApi;
+export const { usePostFeedbackModifyStatusMutation, useGetFeedbackCategoriesQuery, useLazyGetFeedbackListQuery } =
+    FeedbackManageApi;

@@ -1,11 +1,16 @@
-import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
+import { ProColumns, ProFormInstance, ProTable } from '@ant-design/pro-components';
+import { Button, Space, message } from 'antd';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import queryString from 'query-string';
+import { useEffect, useRef, useState } from 'react';
 
 import CopyText from '../../../shared/components/other/CopyText';
 import useGetAppNamesEnum from '../../../shared/hooks/useGetAppNamesEnum';
-import { useGetFeedbackCategoriesQuery, useLazyGetFeedbackListQuery } from '../../api/FeedbackManageApi';
+import {
+    useGetFeedbackCategoriesQuery,
+    useLazyGetFeedbackListQuery,
+    usePostFeedbackModifyStatusMutation,
+} from '../../api/FeedbackManageApi';
 import { FeedbackListItem } from '../../api/types/getFeedbackList';
 
 const searchFormLayout = {
@@ -52,6 +57,10 @@ export const FeedbackTable = (): JSX.Element => {
         refetchOnFocus: false,
         refetchOnReconnect: false,
     });
+    const [postFeedbackModifyStatus, { isLoading }] = usePostFeedbackModifyStatusMutation();
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const formRef = useRef<ProFormInstance>();
 
     const columns: ProColumns<FeedbackListItem>[] = [
         {
@@ -69,7 +78,7 @@ export const FeedbackTable = (): JSX.Element => {
         {
             title: 'APP名称',
             dataIndex: 'appName',
-            width: '14%',
+            width: '10%',
             valueType: 'select',
             valueEnum: appNamesEnum,
             fieldProps: { showSearch: true, allowClear: false },
@@ -78,7 +87,7 @@ export const FeedbackTable = (): JSX.Element => {
         {
             title: '狀態',
             dataIndex: 'read',
-            width: '14%',
+            width: '5%',
             hideInSearch: true,
             render: (data) => <div style={{ color: `${data ? 'black' : '#1d8bf5'}` }}>{data ? '已读' : '未读'}</div>,
         },
@@ -147,6 +156,36 @@ export const FeedbackTable = (): JSX.Element => {
         setSelectedRowKeys(selectedRowKeys);
     };
 
+    const onClickChangeStatus = (status: boolean) => {
+        postFeedbackModifyStatus({
+            id: selectedRowKeys,
+            read: status,
+        })
+            .unwrap()
+            .then(() => {
+                messageApi.success({
+                    content: '已更新',
+                });
+                setSelectedRowKeys([]);
+                triggerGetList(searchParameters);
+            });
+    };
+
+    const handleExport = () => {
+        const { createTime, ...rest } = formRef.current.getFieldsFormatValue();
+        const searchQueryString = queryString.stringify({
+            ...rest,
+            createTimeBegin: createTime[0],
+            createTimeEnd: createTime[1],
+        });
+        window.open(`hs/admin/feedback/download?${searchQueryString}`);
+        setSearchParameters({
+            ...rest,
+            createTimeBegin: createTime[0],
+            createTimeEnd: createTime[1],
+        });
+    };
+
     useEffect(() => {
         triggerGetList(searchParameters);
     }, [searchParameters]);
@@ -156,55 +195,84 @@ export const FeedbackTable = (): JSX.Element => {
     }, []);
 
     return (
-        <ProTable<FeedbackListItem>
-            loading={isFetching}
-            rowKey={({ id }) => id}
-            columns={columns}
-            dataSource={currentData?.records}
-            form={{ ...searchFormLayout }}
-            options={{
-                setting: { listsHeight: 400, draggable: false },
-                reload: () => triggerGetList(searchParameters),
-            }}
-            search={{
-                span: searchSpan,
-                labelWidth: 'auto',
-                optionRender: ({ resetText, searchText }, { form }) => [
+        <div>
+            {contextHolder}
+            <ProTable<FeedbackListItem>
+                formRef={formRef}
+                loading={isFetching || isLoading}
+                rowKey={({ id }) => id}
+                columns={columns}
+                dataSource={currentData?.records}
+                form={{ ...searchFormLayout }}
+                headerTitle={
                     <Space>
                         <Button
-                            onClick={() => {
-                                form.setFieldsValue({ ...initSearchParameters });
-                                setSearchParameters(initSearchParameters);
-                            }}
+                            type="primary"
+                            ghost
+                            disabled={selectedRowKeys.length === 0 || isLoading}
+                            onClick={() => onClickChangeStatus(false)}
                         >
-                            {resetText}
+                            全部未读
                         </Button>
-                        <Button type="primary" onClick={() => form.submit()}>
-                            {searchText}
+                        <Button
+                            type="primary"
+                            ghost
+                            disabled={selectedRowKeys.length === 0 || isLoading}
+                            onClick={() => onClickChangeStatus(true)}
+                        >
+                            全部已读
                         </Button>
-                    </Space>,
-                ],
-            }}
-            onSubmit={(params) => {
-                const { createTime, ...rest } = params;
-                setSearchParameters({
-                    ...searchParameters,
-                    ...rest,
-                    createTimeBegin: createTime[0],
-                    createTimeEnd: createTime[1],
-                });
-            }}
-            pagination={{
-                showSizeChanger: true,
-                defaultPageSize: 10,
-                onChange: pageOnChange,
-                total: currentData?.totalRecords,
-                current: currentData?.currentPage,
-            }}
-            rowSelection={{
-                selectedRowKeys,
-                onChange: onSelectChange,
-            }}
-        />
+                    </Space>
+                }
+                toolBarRender={() => [
+                    <Button type="primary" onClick={handleExport}>
+                        导出
+                    </Button>,
+                ]}
+                options={{
+                    setting: { listsHeight: 400, draggable: false },
+                    reload: () => triggerGetList(searchParameters),
+                }}
+                search={{
+                    span: searchSpan,
+                    labelWidth: 'auto',
+                    optionRender: ({ resetText, searchText }, { form }) => [
+                        <Space>
+                            <Button
+                                onClick={() => {
+                                    form.setFieldsValue({ ...initSearchParameters });
+                                    setSearchParameters(initSearchParameters);
+                                }}
+                            >
+                                {resetText}
+                            </Button>
+                            <Button type="primary" onClick={() => form.submit()}>
+                                {searchText}
+                            </Button>
+                        </Space>,
+                    ],
+                }}
+                onSubmit={(params) => {
+                    const { createTime, ...rest } = params;
+                    setSearchParameters({
+                        ...searchParameters,
+                        ...rest,
+                        createTimeBegin: createTime[0],
+                        createTimeEnd: createTime[1],
+                    });
+                }}
+                pagination={{
+                    showSizeChanger: true,
+                    defaultPageSize: 10,
+                    onChange: pageOnChange,
+                    total: currentData?.totalRecords,
+                    current: currentData?.currentPage,
+                }}
+                rowSelection={{
+                    selectedRowKeys,
+                    onChange: onSelectChange,
+                }}
+            />
+        </div>
     );
 };
