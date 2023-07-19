@@ -101,7 +101,7 @@ const PersonalInfoPage = () => {
 
         <Card>
           {/*NOTE: 是否顯示合作夥伴*/}
-          {app?.init?.partnership ? <LinkItem title={'Partner'} to={'/partner'} /> : <></>}
+          {app?.init?.partnership ? <LinkItem title={'Partner'} to={`${PagePathEnum.PartnerPage}?token=${getToken()}`} /> : <></>}
           {/*NOTE: 顯示客服*/}
           <LinkItem title={'Customer Service'} to={`${PagePathEnum.CustomerServicePage}?token=${getToken()}`} />
         </Card>
