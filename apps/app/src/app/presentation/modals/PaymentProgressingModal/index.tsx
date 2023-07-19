@@ -17,6 +17,8 @@ const PaymentProgressingModal = () => {
     const { init } = useSelector((state: RootState) => state.app);
 
     const handleClick = (buttonText: string) => {
+        
+        dispatch(modalSlice.actions.updatepaymentProgressingModal({ show: false }));
         const eventID = `Payment_Progressing_Modal_CLICK_${buttonText}`.toUpperCase();
         postTraceBehaviour([
             {
@@ -27,10 +29,7 @@ const PaymentProgressingModal = () => {
                 eventTime: new Date().getTime(),
                 duration: 0,
             },
-        ]).unwrap().then(()=>{
-            dispatch(modalSlice.actions.updatepaymentProgressingModal({ show: false }));
-        });
-
+        ])
     }
 
     return (
