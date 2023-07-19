@@ -44,7 +44,7 @@ const CustomerServicePage = () => {
                     <div className='flex justify-between text-sm '>
                         <div>
                             <div className='font-bold text-primary-main grow'>{'Online Customer Service'}</div>
-                            <div>{'MON - FRI, 9:00 AM - 6:00 PM'}</div>
+                            <div>{app?.init?.csServiceTime || ''}</div>
                         </div>
                         <div className='self-center'>
                             <Button text={'Go'} className='w-auto py-1 px-5'
@@ -58,7 +58,7 @@ const CustomerServicePage = () => {
                         <div>
                             <div className='font-bold text-primary-main grow'>{'Phone'}</div>
                             <div>{app?.init?.csContactNumber || ''}</div>
-                            <div>{'MON - FRI, 9:00 AM - 6:00 PM'}</div>
+                            <div>{app?.init?.csServiceTime || ''}</div>
                         </div>
                         <a href={`tel:${app?.init?.csContactNumber || ''}`} className='self-center'>
                             <Button className={'py-1 px-5'} text={'Go'} />
@@ -69,7 +69,7 @@ const CustomerServicePage = () => {
                         <div>
                             <div className='font-bold text-primary-main grow'>{'Whatsapp'}</div>
                             <div>{app?.init?.csWhatsApp || ''}</div>
-                            <div>{'MON - FRI, 9:00 AM - 6:00 PM'}</div>
+                            <div>{app?.init?.csServiceTime || ''}</div>
                         </div>
                     </div>
                 </div>
