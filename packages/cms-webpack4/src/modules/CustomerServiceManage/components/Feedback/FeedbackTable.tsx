@@ -178,6 +178,7 @@ export const FeedbackTable = (): JSX.Element => {
     const handleExport = () => {
         const { createTime, ...rest } = formRef.current.getFieldsFormatValue();
         const searchQueryString = queryString.stringify({
+            ...searchParameters,
             ...rest,
             createTimeBegin: createTime[0],
             createTimeEnd: createTime[1],
