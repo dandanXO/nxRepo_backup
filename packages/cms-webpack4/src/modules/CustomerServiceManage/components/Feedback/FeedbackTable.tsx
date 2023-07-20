@@ -132,7 +132,7 @@ export const FeedbackTable = (): JSX.Element => {
             dataIndex: 'createTime',
             width: '14%',
             hideInSearch: true,
-            render: (data) => moment(data.toString()).format('YYYY-MM-DD HH:MM:SS'),
+            render: (data) => moment(data.toString()).format('YYYY-MM-DD HH:mm:ss'),
         },
         {
             title: '创建时间',
