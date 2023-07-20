@@ -8,6 +8,7 @@ import { PagePathEnum } from '../../pages/PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { usePostTraceBehaviorMutation } from '../../../api/rtk';
 import { RootState } from '../../../reduxStore';
+import {getCurrentUnixTimestamp} from "../../../modules/timezone/getCurrentUnixTimestamp";
 
 const PaymentProgressingModal = () => {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ const PaymentProgressingModal = () => {
                 phoneNo: init?.csContactNumber || 'phoneNo',
                 eventId: eventID,
                 actionType: 'CLICK',
-                eventTime: new Date().getTime(),
+                eventTime: getCurrentUnixTimestamp(),
                 duration: 0,
             },
         ])

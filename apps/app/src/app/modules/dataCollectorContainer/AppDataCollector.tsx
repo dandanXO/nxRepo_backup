@@ -3,6 +3,7 @@ import { useLocation } from 'react-router';
 
 import { environment } from '../../../environments/environment';
 import { usePostTraceBehaviorMutation } from '../../api/rtk';
+import {getCurrentUnixTimestamp} from "../timezone/getCurrentUnixTimestamp";
 
 const AppDataCollector = (props: { children: React.ReactNode }) => {
   // const whitePage: string[] = [ PagePathEnum.RepaymentDetailPage, PagePathEnum.BindBankcard ]
@@ -41,7 +42,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
           phoneNo: 'phoneNo',
           eventId: eventID,
           actionType: 'VISIT',
-          eventTime: new Date().getTime(),
+          eventTime: getCurrentUnixTimestamp(),
           duration: duration,
         },
       ]);
@@ -69,7 +70,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
             phoneNo: 'phoneNo',
             eventId: eventID,
             actionType: 'CLICK',
-            eventTime: new Date().getTime(),
+            eventTime: getCurrentUnixTimestamp(),
             duration: 0,
           },
         ]);
@@ -87,7 +88,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
             phoneNo: 'phoneNo',
             eventId: eventID,
             actionType: 'INPUT',
-            eventTime: new Date().getTime(),
+            eventTime: getCurrentUnixTimestamp(),
             duration: 0,
           },
         ]);
