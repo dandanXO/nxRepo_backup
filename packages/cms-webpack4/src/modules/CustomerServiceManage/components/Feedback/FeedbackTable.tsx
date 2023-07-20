@@ -35,8 +35,7 @@ export const FeedbackTable = (): JSX.Element => {
         name: undefined,
         phoneNo: undefined,
         status: undefined,
-        createTimeBegin: initDateTime.format('YYYY-MM-DD'),
-        createTimeEnd: initDateTime.format('YYYY-MM-DD'),
+        createTime: [initDateTime.format('YYYY-MM-DD'), initDateTime.format('YYYY-MM-DD')],
         pageNum: 1,
         pageSize: 10,
     };
@@ -181,13 +180,17 @@ export const FeedbackTable = (): JSX.Element => {
         window.open(`hs/admin/feedback/download?${searchQueryString}`);
         setSearchParameters({
             ...rest,
-            createTimeBegin: createTime[0],
-            createTimeEnd: createTime[1],
+            createTime,
         });
     };
 
     useEffect(() => {
-        triggerGetList(searchParameters);
+        const { createTime, ...rest } = searchParameters;
+        triggerGetList({
+            ...rest,
+            createTimeBegin: createTime[0],
+            createTimeEnd: createTime[1],
+        });
     }, [searchParameters]);
 
     useEffect(() => {
@@ -253,12 +256,9 @@ export const FeedbackTable = (): JSX.Element => {
                     ],
                 }}
                 onSubmit={(params) => {
-                    const { createTime, ...rest } = params;
                     setSearchParameters({
                         ...searchParameters,
-                        ...rest,
-                        createTimeBegin: createTime[0],
-                        createTimeEnd: createTime[1],
+                        ...params,
                     });
                 }}
                 pagination={{
