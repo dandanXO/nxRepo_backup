@@ -166,7 +166,12 @@ export const FeedbackTable = (): JSX.Element => {
                     content: '已更新',
                 });
                 setSelectedRowKeys([]);
-                triggerGetList(searchParameters);
+                const { createTime, ...rest } = searchParameters;
+                triggerGetList({
+                    ...rest,
+                    createTimeBegin: createTime[0],
+                    createTimeEnd: createTime[1],
+                });
             });
     };
 
