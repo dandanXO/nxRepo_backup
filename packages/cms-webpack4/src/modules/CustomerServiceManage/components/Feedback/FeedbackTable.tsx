@@ -240,7 +240,14 @@ export const FeedbackTable = (): JSX.Element => {
                 ]}
                 options={{
                     setting: { listsHeight: 400, draggable: false },
-                    reload: () => triggerGetList(searchParameters),
+                    reload: () => {
+                        const { createTime, ...rest } = searchParameters;
+                        triggerGetList({
+                            ...rest,
+                            createTimeBegin: createTime[0],
+                            createTimeEnd: createTime[1],
+                        });
+                    },
                 }}
                 search={{
                     span: searchSpan,
