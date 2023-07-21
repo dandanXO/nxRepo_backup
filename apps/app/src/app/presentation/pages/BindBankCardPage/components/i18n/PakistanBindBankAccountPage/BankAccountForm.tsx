@@ -61,6 +61,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
           className="mb-2"
           // defaultValue={props.bankDropList[0].value}
           // value={props?.bankDropList[props.bankAccountValue]?.value}
+          value={props.bankAccountValue.data.value === '' ? undefined : props.bankAccountValue.data}
           onChange={(item: any) => {
             props.onIFSCDropSelect(item);
           }}
