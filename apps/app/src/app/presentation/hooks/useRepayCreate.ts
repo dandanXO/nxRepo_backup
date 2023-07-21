@@ -38,7 +38,7 @@ const useRepayCreate = () => {
           window.location.href = data.nextUrl;
           if (environment.country === IndiaCountry.country) {
               navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true })
-              dispatch(modalSlice.actions.updatepaymentProgressingModal({ show: true }));
+              dispatch(modalSlice.actions.updatePaymentProgressingModal({ show: true }));
           }
           resolve('');
         })
