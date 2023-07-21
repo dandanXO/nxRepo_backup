@@ -59,7 +59,7 @@ const PakistanCoupon = (props: ICouponProps) => {
             'text-ctext-tertiary': status === 'disabled',
           })}>{couponContent}</div>
         <div
-          className={cx('flex text-xs whitespace-nowrap', {
+          className={cx('flex text-xs', {
             'text-cstate-error-main': status !== 'disabled' && isOverdueEqual3Days(expireTime),
             'text-ctext-primary': status !== 'disabled' && !isOverdueEqual3Days(expireTime),
             'text-ctext-tertiary': status === 'disabled',
