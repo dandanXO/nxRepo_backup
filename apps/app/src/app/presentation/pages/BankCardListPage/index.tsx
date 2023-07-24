@@ -72,7 +72,7 @@ const BankCardListPage = () => {
       <Navigation
         title={'Bank Card'}
         back={() => {
-          navigate(-1);
+          navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
         }}
       />
       {currentData && currentData.bankAccounts && currentData.bankAccounts.length !== 0 ? (
