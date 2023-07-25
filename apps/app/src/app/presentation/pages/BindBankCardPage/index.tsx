@@ -17,6 +17,8 @@ import { CustomPage } from '../../components/layouts/CustomPage';
 import { Navigation } from '../../components/layouts/Navigation';
 import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
 import { PakistanBindBankAccountPage } from './components/i18n/PakistanBindBankAccountPage';
+import { PagePathEnum } from '../PagePathEnum';
+import { getToken } from '../../../modules/querystring/getToken';
 
 const BindBankCardPage = () => {
   // NOTICE: Common
@@ -54,7 +56,7 @@ const BindBankCardPage = () => {
         <Navigation
           title={'Add New Card'}
           back={() => {
-            navigate(-1);
+            navigate(`${PagePathEnum.BankcardListPage}?token=${getToken()}`);
           }}
         />
       )}
