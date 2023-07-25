@@ -41,6 +41,7 @@
     "loginLogs": "Login Logs",
     "merchantName": "Merchant Name",
     "numberOfFollowUps": "Number of Follow-ups",
+    "numberOfRepeatLoans": "Number of Repeat Loans",
     "orderLabel": "Order Label",
     "orderLabelStatus": {
         "extension": "Extension",
@@ -72,6 +73,8 @@
         "button": "Repayment Link",
         "copyLabel": "Repayment Link"
     },
+    "repeatLoansRate": "Rate of Repeat Loans",
+    "repeatLoansRateTooltips": "The proportion of repeat loans is included in the number of cases followed up by the collector",
     "stage": "Overdue Stage",
     "tooltip": {
         "amountDue": "=Loan Amount*(1+Post-Fee Rate)",

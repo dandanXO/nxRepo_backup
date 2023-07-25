@@ -259,6 +259,27 @@ const ReportTable = (): JSX.Element => {
                 children: paymentAmountRatio,
             }),
         },
+        {
+            title: t('urgeCollection:numberOfRepeatLoans'),
+            dataIndex: 'numberOfRepeatLoans',
+            hideInSearch: true,
+            width: 100,
+        },
+        {
+            tooltip: t('urgeCollection:repeatLoansRateTooltips'),
+            title: t('urgeCollection:repeatLoansRate'),
+            dataIndex: 'numberOfRepeatLoansRate',
+            hideInSearch: true,
+            width: 100,
+            render: (_, { paymentAmountRatio }) => ({
+                props: {
+                    style: {
+                        background: '#FAFAFA',
+                    },
+                },
+                children: paymentAmountRatio,
+            }),
+        },
     ];
     if (isSuperAdmin) {
         columns.splice(1, 0, {
@@ -415,6 +436,12 @@ const ReportTable = (): JSX.Element => {
                             )}
                             {columnStateMap.paymentAmountRatio.show && (
                                 <Cell index={17}>{currentData?.statistics?.paymentAmountRatio}</Cell>
+                            )}
+                            {columnStateMap.numberOfRepeatLoans.show && (
+                                <Cell index={18}>{currentData?.statistics?.numberOfRepeatLoans}</Cell>
+                            )}
+                            {columnStateMap.numberOfRepeatLoansRate.show && (
+                                <Cell index={19}>{currentData?.statistics?.numberOfRepeatLoansRate}</Cell>
                             )}
                         </Row>
                     </Summary>

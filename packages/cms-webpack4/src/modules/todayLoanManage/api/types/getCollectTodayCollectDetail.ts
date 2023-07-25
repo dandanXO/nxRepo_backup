@@ -36,6 +36,8 @@ export interface GetCollectTodayCollectDetail {
     paymentAmountRatio?: string; // 金額回收率
     receiptAmount?: number; // 回收金額
     totalNumberOfRepaymentsReceived?: number; // 總回收筆數
+    numberOfRepeatLoans?: number; // 復借筆數
+    numberOfRepeatLoansRate?: string; // 復借率
 }
 
 export interface GetCollectTodayCollectDetailStatistics {
@@ -49,4 +51,6 @@ export interface GetCollectTodayCollectDetailStatistics {
     paymentAmountRatio?: string;
     receiptAmount?: number;
     totalNumberOfRepaymentsReceived?: number;
+    numberOfRepeatLoans?: number;
+    numberOfRepeatLoansRate?: string;
 }

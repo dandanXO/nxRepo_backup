@@ -41,6 +41,7 @@
     "loginLogs": "登录纪录",
     "merchantName": "商户名",
     "numberOfFollowUps": "跟进笔数",
+    "numberOfRepeatLoans": "复借笔数",
     "orderLabel": "订单标签",
     "orderLabelStatus": {
         "extension": "展期",
@@ -72,6 +73,8 @@
         "button": "生成还款链接",
         "copyLabel": "生成还款链接"
     },
+    "repeatLoansRate": "复借率",
+    "repeatLoansRateTooltips": "该催收员跟进笔数里有复借的占比",
     "stage": "逾期阶段",
     "tooltip": {
         "amountDue": "应还金额=申请金额*(1+后置费率)",
