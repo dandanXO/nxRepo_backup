@@ -43,7 +43,7 @@ const RejectPaymentItem = (props: GetLoanRecord) => {
   const statusBackground = Status('REJECTED').bg;
 
   return (
-    <div className={`border-ctext-divider mx-4 mb-5 rounded-lg border border-solid pb-2`} onClick={handleCollapse}>
+    <div className={`border-ctext-divider mx-5 mb-5 rounded-lg border border-solid pb-2`} onClick={handleCollapse}>
       <CardHeaderSection
         statusBackground={statusBackground}
         iconUrl={iconUrl}
@@ -53,9 +53,9 @@ const RejectPaymentItem = (props: GetLoanRecord) => {
       />
       <CardContentSection
         amountName={'Loan Amount'}
-        amountNameStyleClass={'text-cstate-disable-main'}
+        amountNameStyleClass={'text-ctext-secondary'}
         orderAmount={orderAmount}
-        orderAmountStyleClass={'text-cstate-disable-main'}
+        orderAmountStyleClass={'text-ctext-secondary'}
         onClick={() =>
           navigate(`${PagePathEnum.OrderStatusPage}?token=${getToken()}`, {
             state: { orderNo, approveRecords },

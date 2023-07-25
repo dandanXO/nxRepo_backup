@@ -57,10 +57,11 @@ const StarRatingModal = () => {
             <div className='text-xs text-ctext-secondary'>Tap a Star to Rate</div>
             <div className='text-sm text-ctext-primary m-3'>Share others your joy! Giving a 5-stars rating now!</div>
             <div className='flex p-4'>
-                <Button className={`mr-1 w-full border-cstate-disable-main text-cstate-disable-main`}
+                <Button className={`mr-1 w-full`}
                     onClick={handleClose}
                     text={'No, thanks'}
                     type={'ghost'}
+                    ghostTheme={'tertiary'}
                 />
                 <Button
                     className={`ml-1 w-full`}

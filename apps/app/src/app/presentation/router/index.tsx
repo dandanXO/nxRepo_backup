@@ -14,7 +14,7 @@ import IndexPage from '../pages/IndexPage';
 import { PagePathEnum } from '../pages/PagePathEnum';
 
 // NOTE: Page
-import { CategoryPage } from '../pages/__test__/CategoryPage';
+// import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 
 
@@ -51,7 +51,7 @@ import ExtendModal from  '../modals/ExtendModal';
 import LogoutModal from  '../modals/LogoutModal';
 import APIBoundaryModal from  '../modals/APIBoundaryModal';
 import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
-import RepamentCouponModal from  '../modals/RepamentCouponModal';
+import RepaymentCouponModal from  '../modals/RepaymentCouponModal';
 import IBANFinderModal from  '../modals/IBANFinderModal';
 import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
 
@@ -136,8 +136,8 @@ import LoadingMask from '../components/LoadingMask';
 // const PrivacyPolicyModal = React.lazy(
 //   () => import(/* webpackChunkName: "PrivacyPolicyModal" */ '../modals/PrivacyPolicyModal')
 // );
-// const RepamentCouponModal = React.lazy(
-//   () => import(/* webpackChunkName: "RepamentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepamentCouponModal')
+// const RepaymentCouponModal = React.lazy(
+//   () => import(/* webpackChunkName: "RepaymentCouponModal" */ /* webpackPrefetch: true */ '../modals/RepaymentCouponModal')
 // );
 // const IBANFinderModal = React.lazy(() => import(/* webpackChunkName: "IBANFinderModal" */ /* webpackPrefetch: true */ '../modals/IBANFinderModal'));
 
@@ -164,7 +164,7 @@ import LoadingMask from '../components/LoadingMask';
 // AmountRepaidModal.preload();
 // ExtendConfirmModal.preload();
 // ExtendModal.preload();
-// RepamentCouponModal.preload();
+// RepaymentCouponModal.preload();
 
 
 
@@ -173,6 +173,7 @@ export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
   const location = useLocation();
+
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
   const isOrderOverdue = payableRecords && payableRecords?.some((order) => order.overdue === true);
@@ -195,7 +196,7 @@ export const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        <Route path="/v2/category" element={<CategoryPage />} />
+        {/*<Route path="/v2/category" element={<CategoryPage />} />*/}
         <Route path="/v2/error" element={<ErrorPage />} />
         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
@@ -220,12 +221,12 @@ export const AppRouter = () => {
           <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
           <Route path="extend-modal" element={<ExtendModal />} />
-          <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
+          <Route path="repayment-coupon-modal" element={<RepaymentCouponModal />} />
         </Route>
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
         <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
-        <Route path="/v2/partner" element={<PartnerPage />} />
+        <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>

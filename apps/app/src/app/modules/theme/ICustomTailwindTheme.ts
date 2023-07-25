@@ -16,6 +16,7 @@ export type ICustomTailwindTheme = {
   custom_bg_secondary: string;
   custom_bg_tertiary: string;
   custom_bg_homepage_button: string;
+  custom_bg_button?: string; // PK priamry button
 
   // NOTE: text
   custom_text_primary: string;

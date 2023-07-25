@@ -9,10 +9,17 @@ import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateReq
 import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
 import { usePostRepayCreateMutation } from '../../api/rtk';
 import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
+import { useDispatch } from 'react-redux';
+import { modalSlice } from '../../reduxStore/modalSlice';
+import { environment } from 'apps/app/src/environments/environment';
+import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
+import { getToken } from '../../modules/querystring/getToken';
+import { PagePathEnum } from '../pages/PagePathEnum';
 
 const useRepayCreate = () => {
   const navigate = useNavigate();
   const pageQueryString = useLocationOrderQueryString();
+  const dispatch = useDispatch();
 
   const orderNo = pageQueryString.orderNo;
   const token = pageQueryString.token;
@@ -29,6 +36,10 @@ const useRepayCreate = () => {
           // console.log('data', data);
           // NOTICE: 跳轉至付款頁面
           window.location.href = data.nextUrl;
+          if (environment.country === IndiaCountry.country) {
+              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true })
+              dispatch(modalSlice.actions.updatepaymentProgressingModal({ show: true }));
+          }
           resolve('');
         })
         .catch((err: CustomAxiosError) => {

@@ -100,6 +100,9 @@ module.exports = {
           '.open-index-button': {
               background: 'var(--custom_bg_homepage_button) !important',
           },
+          '.bg-primary-gradient':{
+              background: 'var(--custom_bg_homepage_button) !important',
+          },
           // LoadingMask
           '.pulseLoader':{
             '> span ':{

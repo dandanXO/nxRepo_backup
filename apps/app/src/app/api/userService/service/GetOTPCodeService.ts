@@ -28,6 +28,6 @@ export const GetOTPCodeService = async (request: GetOTPCodeRequest) => {
     if (axios.isAxiosError(error)) {
       alertModal((error.response as any).data?.message);
     }
-    return null;
+    return error;
   }
 };

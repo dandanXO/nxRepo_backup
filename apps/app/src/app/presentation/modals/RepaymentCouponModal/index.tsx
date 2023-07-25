@@ -12,12 +12,14 @@ import { PagePathEnum } from '../../pages/PagePathEnum';
 import Modal from '../../components/Modal';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { environment } from 'apps/app/src/environments/environment';
+import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
     index: number;
 };
-const RepamentCouponModal = () => {
+const RepaymentCouponModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
@@ -79,7 +81,12 @@ const RepamentCouponModal = () => {
                     <div className={`mt-5`}>There are currently no coupon</div>
                 </div>
                 <div className="p-5">
-                    <Button text={'Back'} className="w-full" onClick={() => navigate(-1)} />
+                    <Button
+                        text={'Back'}
+                        className="w-full"
+                        primaryTypeGradient={environment.country === PakistanCountry.country}
+                        onClick={() => navigate(-1)}
+                    />
                 </div>
             </>
         );
@@ -116,7 +123,7 @@ const RepamentCouponModal = () => {
                         <>
                             <div className="mb-2 mx-4 text-left text-xs font-bold text-ctext-primary">Not applicable to usage conditions</div>
                             {unApplicableCouponList.map((i, index) => (
-                                <div className='mx-4'>
+                                <div className='mx-4' >
                                     <Coupon
                                         expireTime={i.expireTime}
                                         discountAmount={i.discountAmount}
@@ -135,7 +142,8 @@ const RepamentCouponModal = () => {
                 <div className="px-5 py-3">
                     <Button
                         text={'Confirm'}
-                        className="bg-primary-main w-full text-white "
+                        primaryTypeGradient={environment.country===PakistanCountry.country}
+                        className="w-full"
                         onClick={() =>
                             navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}`, {
                                 state: {
@@ -152,11 +160,11 @@ const RepamentCouponModal = () => {
     };
 
     return (
-        <Modal className='h-full'>
+        <Modal className='h-full '>
             <Navigation title={''} back={() => { navigate(-1) }} />
             {currentData && currentData.length > 0 ? renderCouponList() : <NoCouponSection />}
         </Modal>
     )
 };
 
-export default RepamentCouponModal;
+export default RepaymentCouponModal;
