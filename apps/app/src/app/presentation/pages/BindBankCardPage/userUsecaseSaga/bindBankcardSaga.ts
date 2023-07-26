@@ -39,7 +39,7 @@ export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBa
             })
 
             if (success) {
-                yield put(modalSlice.actions.updatebindBankcardModal({
+                yield put(modalSlice.actions.updateBindBankcardModal({
                     show: false,
                     confirm: false,
                     paymentMethod: 1,

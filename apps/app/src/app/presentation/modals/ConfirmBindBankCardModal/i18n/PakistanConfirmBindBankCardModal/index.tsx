@@ -84,7 +84,7 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                         type={'ghost'}
                         ghostTheme={'tertiary'}
                         text={'Cancel'}
-                        onClick={() => dispatch(modalSlice.actions.updatebindBankcardModal({
+                        onClick={() => dispatch(modalSlice.actions.updateBindBankcardModal({
                             ...modalState.bindBankcardModal,
                             show: false,
                         }))} 
