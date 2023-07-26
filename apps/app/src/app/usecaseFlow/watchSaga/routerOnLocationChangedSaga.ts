@@ -21,6 +21,10 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
 
     // 點擊瀏覽器的上一頁    
     if (action.payload.action === "POP") {
+        console.log('prevPathname', prevPathname)
+        console.log('currentPath', currentPath)
+        console.log('currentHash', currentHash)
+        console.log('prevHash', prevHash)
         if (prevHash === '') {
             if (prevPathname === PagePathEnum.RepaymentPage
                 || prevPathname === PagePathEnum.PersonalInfoPage

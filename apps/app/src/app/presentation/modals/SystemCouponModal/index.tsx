@@ -32,7 +32,6 @@ const SystemCouponModal = () => {
             text: '',
             webUrl: '',
             action: '',
-            routeControl: false,
         }))
     }
 
@@ -55,7 +54,7 @@ const SystemCouponModal = () => {
             navigate(nextUrl as string);
         }
 
-        handleCancel();
+        // handleCancel();
     }
 
     return (

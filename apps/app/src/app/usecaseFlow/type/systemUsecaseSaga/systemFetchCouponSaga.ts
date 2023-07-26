@@ -7,6 +7,15 @@ import { modalSlice } from '../../../reduxStore/modalSlice';
 
 export function* systemFetchCouponSaga() {
 
+     // yield put(
+        //     modalSlice.actions.updateSystemCouponModal({
+        //         show: false,
+        //         title: '',
+        //         text: '',
+        //         webUrl: '',
+        //         action: '',
+        //     })
+        // );
     const oldNotifications: GetNotificationResponse = yield select((state: RootState) => state.indexPage.notification);
     const lastestNotificationRespons: GetNotificationResponse = yield call(Service.IndexService.getNotification, null);
     const notifications = [...oldNotifications, ...lastestNotificationRespons];
@@ -21,7 +30,6 @@ export function* systemFetchCouponSaga() {
                 text: notifications[0].text,
                 webUrl: notifications[0].webUrl,
                 action: notifications[0].action,
-                routeControl: false
             })
         );
         const removeFirstNotifications = notifications.slice(1);
