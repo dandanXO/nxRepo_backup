@@ -20,5 +20,6 @@ export enum PagePathEnum {
 
   DeleteAccountPage = '/v2/delete-account',
   AccountVerificationPage = '/v2/account-verification',
-  PartnerPage='/v2/partner'
+  PartnerPage='/v2/partner',
+  FeedbackPage = '/v2/feedback',
 }
