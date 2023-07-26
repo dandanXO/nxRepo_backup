@@ -64,11 +64,11 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     <div>
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
 
-      {currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (
-        <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>
-          Get more amount after instant payment
-        </div>
-      )}
+      {/*{currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (*/}
+      {/*  <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>*/}
+      {/*    Get more amount after instant payment*/}
+      {/*  </div>*/}
+      {/*)}*/}
 
       <div className={`px-6`}>
         <ListItem
