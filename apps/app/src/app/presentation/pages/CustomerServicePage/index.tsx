@@ -56,6 +56,19 @@ const CustomerServicePage = () => {
                     <div className='my-5'><Horizontal /></div>
                     <div className='flex justify-between text-sm '>
                         <div>
+                            <div className='font-bold text-primary-main grow'>{'Feedback'}</div>
+                            <div>{app?.init?.csServiceTime || ''}</div>
+                        </div>
+                        <div className='self-center'>
+                            <Button text={'Go'} className='w-auto py-1 px-5'
+                                onClick={() => {
+                                    navigate(`${PagePathEnum.FeedbackPage}?token=${getToken()}`);
+                                }} />
+                        </div>
+                    </div>
+                    <div className='my-5'><Horizontal /></div>
+                    <div className='flex justify-between text-sm '>
+                        <div>
                             <div className='font-bold text-primary-main grow'>{'Phone'}</div>
                             <div>{app?.init?.csContactNumber || ''}</div>
                             <div>{app?.init?.csServiceTime || ''}</div>
