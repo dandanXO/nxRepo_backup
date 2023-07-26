@@ -7,7 +7,7 @@ import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
 import { errorFallback } from '../utils/errorFallback';
 import { SystemAllModalAction, modalSlice } from '../../reduxStore/modalSlice';
 import { systemModalChangeSaga } from '../type/systemUsecaseSaga/systemModalChangeSage';
-import { routerOnLocationChangedSaga } from './routerOnLocationChangedSaga';
+
 
 export function* watchSystemUseCaseSaga() {
   console.log('[app][saga] 1.4');
@@ -19,7 +19,6 @@ export function* watchSystemUseCaseSaga() {
   );
   yield takeLatest(SystemCaseActions.SystemFetchCouponSaga.type, errorFallback, systemFetchCouponSaga);
 
-  yield takeLatest(ROUTER_ON_LOCATION_CHANGED, errorFallback, routerOnLocationChangedSaga);
   yield takeLatest(ROUTER_CALL_HISTORY_METHOD, errorFallback, routerCallHistoryMethodSaga);
   yield takeLatest(SystemAllModalAction, errorFallback, systemModalChangeSaga);
   console.log('[app][saga] 1.4 end');

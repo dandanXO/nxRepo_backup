@@ -51,10 +51,11 @@ const SystemCouponModal = () => {
                 'FORWARD_LOAN_RECORD': `${PagePathEnum.RepaymentPage}?token=${getToken()}`,
                 'FORWARD_BIND_BANKCARD': `${PagePathEnum.BindBankcard}?token=${getToken()}`,
             }[systemCouponModal?.action];
+
             navigate(nextUrl as string);
         }
 
-        // handleCancel();
+        handleCancel();
     }
 
     return (
