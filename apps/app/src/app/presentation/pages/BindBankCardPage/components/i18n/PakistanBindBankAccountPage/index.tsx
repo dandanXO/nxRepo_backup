@@ -147,7 +147,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             const validation = confirmMobileWallet();
             if (validation) {
               dispatch(
-                modalSlice.actions.updateBindBankcardModal({
+                modalSlice.actions.updatebindBankcardModal({
                   show: true,
                   confirm: false,
                   paymentMethod: chooseBindMethodValue,
@@ -183,7 +183,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
             // common
             if (validation && validation2) {
               dispatch(
-                modalSlice.actions.updateBindBankcardModal({
+                modalSlice.actions.updatebindBankcardModal({
                   show: true,
                   confirm: false,
                   paymentMethod: chooseBindMethodValue,

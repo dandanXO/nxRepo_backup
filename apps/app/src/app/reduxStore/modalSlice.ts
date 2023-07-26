@@ -147,7 +147,7 @@ export const modalSlice = createSlice({
       state.systemCouponModal.webUrl = action.payload.webUrl;
       state.systemCouponModal.action = action.payload.action;
     },
-    updateBindBankcardModal: (state, action: PayloadAction<InitialStateType['bindBankcardModal']>) => {
+    updatebindBankcardModal: (state, action: PayloadAction<InitialStateType['bindBankcardModal']>) => {
         state.bindBankcardModal.show = action.payload.show;
         state.bindBankcardModal.confirm = action.payload.confirm;
         state.bindBankcardModal.paymentMethod = action.payload.paymentMethod;
@@ -168,10 +168,8 @@ export const modalSlice = createSlice({
     updateNoRecommendProductModal: (state, action: PayloadAction<InitialStateType['noRecommendProductModal']>) => {
         state.noRecommendProductModal.show = action.payload.show;
     },
-    updatePaymentProgressingModal: (state, action: PayloadAction<InitialStateType['paymentProgressingModal']>) => {
+    updatepaymentProgressingModal: (state, action: PayloadAction<InitialStateType['noRecommendProductModal']>) => {
         state.paymentProgressingModal.show = action.payload.show;
     },
   },
 });
-
-export const SystemAllModalAction = Object.entries(modalSlice.actions).map(i => i[1].type);

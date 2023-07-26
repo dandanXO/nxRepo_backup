@@ -19,7 +19,7 @@ const PaymentProgressingModal = () => {
 
     const handleClick = (buttonText: string) => {
 
-        dispatch(modalSlice.actions.updatePaymentProgressingModal({ show: false }));
+        dispatch(modalSlice.actions.updatepaymentProgressingModal({ show: false }));
         const eventID = `Payment_Progressing_Modal_CLICK_${buttonText}`.toUpperCase();
         postTraceBehaviour([
             {
