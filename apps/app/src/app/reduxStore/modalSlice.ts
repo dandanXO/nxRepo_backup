@@ -25,6 +25,7 @@ export type InitialStateType = {
     text: string;
     webUrl: string;
     action: string;
+    routeControl: boolean;
   };
   bindBankcardModal:{
     show: boolean;
@@ -75,6 +76,7 @@ const initialState: InitialStateType = {
     text: '',
     webUrl: '',
     action: '',
+    routeControl: false
   },
   bindBankcardModal:{
     show: false,
@@ -146,6 +148,7 @@ export const modalSlice = createSlice({
       state.systemCouponModal.text = action.payload.text;
       state.systemCouponModal.webUrl = action.payload.webUrl;
       state.systemCouponModal.action = action.payload.action;
+      state.systemCouponModal.routeControl = action.payload.routeControl;
     },
     updateBindBankcardModal: (state, action: PayloadAction<InitialStateType['bindBankcardModal']>) => {
         state.bindBankcardModal.show = action.payload.show;
