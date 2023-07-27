@@ -26,32 +26,26 @@ export const useIndiaBankAccountForm = () => {
 
   // validateIFSC
   const validateIFSC = useCallback(() => {
-    let isValidation = false;
-    const ifscScheme = z
-      .string()
-      .min(1, ValidationInfo.min1)
-      .length(11, t('IFSC must be 11 digits only.') as string);
-    const result = ifscScheme.safeParse(ifscData.data);
-    if (!result.success) {
-      const firstError = result.error.format();
-      const errorMessage = firstError._errors[0];
-      setIFSCData({
-        ...ifscData,
-        isValidation: false,
-        errorMessage,
-      });
-      isValidation = false;
-    } else {
-      setIFSCData({
-        ...ifscData,
-        isValidation: true,
-        errorMessage: '',
-      });
-      isValidation = true;
-    }
-    return isValidation;
-  }, [ifscData.data]);
+      const ifscRex = new RegExp("^[A-Z]{4}0[A-Za-z0-9]{6}$");
+      const invalidErrorMessage = t('The IFSC code must consist of 11 characters. Please ensure that you have entered the correct format.');
+      const ifscScheme = z
+          .string()
+          .min(1, ValidationInfo.min1)
+          .length(11, invalidErrorMessage)
+          .regex(ifscRex, invalidErrorMessage)
+  
+      const result = ifscScheme.safeParse(ifscData.data);
+      const isValidation = result.success;
+      const errorMessage = !isValidation ? result.error.format()._errors[0] : '';
 
+      setIFSCData({
+          ...ifscData,
+          isValidation,
+          errorMessage
+      });  
+      return isValidation;  
+  }, [ifscData.data]);
+    
   // onIFSCChange
   const onIFSCChange = (event: any) => {
     const data = event.target.value;
@@ -70,25 +64,51 @@ export const useIndiaBankAccountForm = () => {
   // NOTE: FormInput - UPI
   const [upiData, setUpiData] = useState<InputValue<string>>({
     data: '',
-    // isValidation: false,
-    // errorMessage: "",
+    isValidation: false,
+    errorMessage: "",
   });
+
+  const validateUPIID = useCallback(() => {
+    if (upiData.data === '') {
+        return true;
+    }else{
+        const upiIdRex =new RegExp("^[\\w.-]{2,256}@[a-zA-Z]{2,64}$");
+        const upiIdSchema = z
+            .string()
+            .regex(upiIdRex, t('Invalid UPI ID format. Please retry or refer to the provided instructions and try again.') as string);
+            
+        const result = upiIdSchema.safeParse(upiData.data);
+        const isValidation = result.success;
+        const errorMessage = !isValidation ? result.error.format()._errors[0] : ''
+    
+        setUpiData({
+            ...upiData,
+            isValidation,
+            errorMessage
+        });
+    
+        return isValidation;
+    }
+  }, [upiData.data])
 
   // onUPIIDChange
   const onUPIIDChange = (event: any) => {
     setUpiData({
       ...upiData,
       data: event.target.value,
+      errorMessage: event.target.value === '' ? '' : upiData.errorMessage
     });
   };
 
+  const onUPIIDChangBlur = () => {
+      validateUPIID()
+  }
+
   // validate
   const validate = useCallback(() => {
-    // NOTE: FormInput
-    const isValidation = validateIFSC();
-    // console.log("isValidation", isValidation);
-    return isValidation;
-  }, [ifscData.data]);
+      // NOTE: FormInput 
+      return validateIFSC() && validateUPIID();
+  }, [ifscData.data, upiData.data]);
 
   return {
     // NOTE: form
@@ -100,5 +120,6 @@ export const useIndiaBankAccountForm = () => {
     // NOTE: UPI
     upiData,
     onUPIIDChange,
+    onUPIIDChangBlur
   };
 };

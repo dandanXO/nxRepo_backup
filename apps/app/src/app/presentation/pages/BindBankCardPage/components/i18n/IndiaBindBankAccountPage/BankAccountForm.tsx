@@ -41,7 +41,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
         <Input
           suffix={<div className='absolute left-1' onClick={()=>SetIfscModalShow(true)}><MdInfoOutline/></div>}
           className="mb-3 text-sm"
-          label={'IFSC Code (11 digits)'}
+          label={'IFSC Code (11characters )'}
           value={props.ifscData.data}
           onChange={props.onIFSCChange}
           onBlur={props.onIFSCBlur}
@@ -53,6 +53,8 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           label={'UPI ID'}
           value={props.upiData.data}
           onChange={props.onUPIIDChange}
+          onBlur={props.onUPIIDChangBlur}
+          errorMessage={props.upiData.errorMessage}
         />
       </Form>
       <div className="mb-4">

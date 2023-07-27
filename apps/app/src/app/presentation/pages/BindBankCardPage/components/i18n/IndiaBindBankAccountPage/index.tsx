@@ -30,6 +30,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // NOTE: UPI
     upiData,
     onUPIIDChange,
+    onUPIIDChangBlur
   } = useIndiaBankAccountForm();
 
   const { isFormPending, confirm } = useFinishedBindBankAccountForm({
@@ -65,6 +66,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
         onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
         upiData={upiData}
         onUPIIDChange={onUPIIDChange}
+        onUPIIDChangBlur={onUPIIDChangBlur}
         isFormPending={isFormPending || false}
         confirm={() => {
           // NOTE: validate and display errors
