@@ -15,7 +15,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
   const [upiModalShow,SetUpiModalShow]=useState(false);
 
   return (
-    <div className="flex grow flex-col">
+    <div className="flex flex-col grow">
       <Form className="grow">
         <div className="text-ctext-primary mb-1 text-xs">
           {'For KYC, your Cardholder name and PAN card name should be match.'}

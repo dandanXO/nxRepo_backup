@@ -52,7 +52,6 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   });
 
   return (
-    <div className="flex">
       <BankAccountForm
         cardholderName={props.cardholderName}
         ifscData={ifscData}
@@ -75,6 +74,5 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           if (validation && validation2) confirm();
         }}
       />
-    </div>
   );
 };
