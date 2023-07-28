@@ -13,6 +13,9 @@ import { MdAdd } from '@react-icons/all-files/md/MdAdd';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch } from 'react-redux';
 import { Page } from '../../components/layouts/Page';
+import { PageContent } from '../../components/layouts/PageContent';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import cx from 'classnames'
 
 const BankCardListPage = () => {
   const navigate = useNavigate();
@@ -39,7 +42,7 @@ const BankCardListPage = () => {
 
   const renderNodata = () => {
     return (
-      <div className={`flex grow grow flex-col items-center justify-center px-8 text-center`}>
+      <PageContent className={'justify-center items-center'}>
         <div className={`flex w-40 justify-center`}>
           {' '}
           <img src={NoDataIcon} />{' '}
@@ -50,7 +53,7 @@ const BankCardListPage = () => {
             'You must be verified to add a card, please return to the home page and click "Get my limit" to verify your eligibility.'
           }
         </div>
-      </div>
+      </PageContent>
     );
   };
 
@@ -77,7 +80,13 @@ const BankCardListPage = () => {
       />
       {currentData && currentData.bankAccounts && currentData.bankAccounts.length !== 0 ? (
         <>
-          <div>
+        <div className={cx(`overflow-auto`,
+            {
+                // NOTE: Navigation:56px , Add A New Card:103px
+                'h-[calc(100vh-56px-103px)] pt-0': isShowNavigation(),
+                'h-[100vh-103px]': !isShowNavigation()
+            }
+        )}>
             {currentData &&
               currentData.bankAccounts &&
               currentData.bankAccounts.map((card) => {
