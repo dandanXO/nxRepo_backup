@@ -36,7 +36,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Please select the of your mobile wallet': 'Please select the of your mobile wallet',
       'Your mobile wallet account': 'Your mobile wallet account',
       'Wallet Account Number': 'Wallet Account Number',
-      'Account number should be 11 digits starting with 0.': 'Account number should be 11 digits starting with 0.',
+      'Account number should be 10 or 10 digits starting with 0.': 'Account number should be 10 or 10 digits starting with 0.',
       // NOTE: Bank Account
       'Select a mobile wallet': 'Select a mobile wallet',
       'Your IBAN Number (24 digits)': 'Your IBAN Number (24 digits)',
