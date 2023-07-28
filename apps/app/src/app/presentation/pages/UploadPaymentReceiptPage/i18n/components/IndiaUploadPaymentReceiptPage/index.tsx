@@ -23,7 +23,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               inputWidth={'200px'}
               className="mb"
               value={props.utr.data}
-              labelType="left"
+              labelType="top"
               label={props.t('UTR') as string}
               onChange={(event) => {
                 props.setURT({
