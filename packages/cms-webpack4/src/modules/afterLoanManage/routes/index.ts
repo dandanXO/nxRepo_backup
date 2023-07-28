@@ -1,1 +1,1 @@
-export { default as AfterLoanManageRoutes} from './AfterLoanManageRoutes'
+export { default as AfterLoanManageRoutes } from './AfterLoanManageRoutes';

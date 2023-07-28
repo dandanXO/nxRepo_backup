@@ -1,1 +1,1 @@
-export { ZoomInImage } from './ZoomInImage'
+export { ZoomInImage } from './ZoomInImage';
