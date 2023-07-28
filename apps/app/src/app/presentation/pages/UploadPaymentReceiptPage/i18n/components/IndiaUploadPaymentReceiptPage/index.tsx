@@ -10,19 +10,14 @@ import { i18nUploadPaymentReceiptPage } from '../../translations';
 import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
 import I18CameraSvgIcon from '../I18CameraSvgIcon';
 import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
-import { isShowNavigation } from 'apps/app/src/app/modules/window/isShowNavigation';
-import cx from 'classnames'
+import { PageContent } from 'apps/app/src/app/presentation/components/layouts/PageContent';
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: I18UploadPaymentReceiptPageProps) => {
     return (
-      <div className={cx(`flex flex-col justify-between p-4`, {
-        'h-[calc(100vh-56px)] pt-0': isShowNavigation(),
-        'h-[100vh]': !isShowNavigation()
-      })}>
+      <PageContent>
         {props.isUploading && <UploadingFileModal />}
-
-        <div className={''}>
+        <div className={'grow'}>
           <div className={`mb-2`}>
             <Input
               inputWidth={'200px'}
@@ -63,13 +58,10 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               onInput={(event) => props.onFileChange(event)}
             />
           </UploadSection>
-
           <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
         </div>
-        <div className={'px-4'}>
-          <Button text={'Confirm'} onClick={() => props.confirm()} />
-        </div>
-      </div>
+        <Button text={'Confirm'} onClick={() => props.confirm()} />
+      </PageContent>
     );
   }
 );
