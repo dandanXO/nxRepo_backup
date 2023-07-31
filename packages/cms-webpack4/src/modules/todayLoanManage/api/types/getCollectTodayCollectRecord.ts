@@ -1,15 +1,12 @@
-import {GetDataPageRequestQuerystring} from "../../../shared/api/commonRequest";
-import {GetPageableResponse} from "../../../shared/api/commonReponse";
+import { GetPageableResponse } from '../../../shared/api/commonReponse';
+import { GetDataPageRequestQuerystring } from '../../../shared/api/commonRequest';
 
 export interface GetCollectTodayCollectRecordQueryString extends GetDataPageRequestQuerystring {
-    collectId: string
+    collectId: string;
 }
 
 export interface GetCollectTodayCollectRecordResponse extends GetPageableResponse {
     records: CollectTodayCollectRecordItem[];
 }
 
-export interface CollectTodayCollectRecordItem {
-
-}
-
+export interface CollectTodayCollectRecordItem {}

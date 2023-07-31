@@ -88,7 +88,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         const isSuperAdmin = getIsSuperAdmin();
 
         // 取得後台使用者開關 (是否可查看 tab - 手機短信)
-        const showSMSTab = !adminSwitch.todayCollect.smsSwitch;
+        const showSMSTab = !adminSwitch.overDueCollect.smsSwitch;
 
         const orderInfoDescriptions = [
             { title: t('order:orderNumber'), dataIndex: 'orderNumber' },
@@ -195,21 +195,18 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         const collectRecordColumns = [
             {
                 title: t('urgeCollection:trackingTime'),
-                key: 'trackingTime',
                 dataIndex: 'trackingTime',
                 width: '8%',
                 render: (_, { trackingTime }) => <div>{moment(trackingTime).format('YYYY-MM-DD HH:mm:ss')}</div>,
             },
             {
                 title: t('urgeCollection:stage'),
-                key: 'overdueStage',
                 dataIndex: 'overdueStage',
                 width: '8%',
                 ellipsis: true,
             },
             {
                 title: t('urgeCollection:contactPerson'),
-                key: 'contactPerson',
                 dataIndex: 'contactPerson',
                 width: '8%',
                 render: (_, { contactPerson }) => EmergencyContactEnum[contactPerson]?.text || contactPerson,
@@ -217,7 +214,6 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             { title: t('urgeCollection:phone'), key: 'mobileNumber', dataIndex: 'mobileNumber', width: '10%' },
             {
                 title: t('urgeCollection:followUpResult'),
-                key: 'followUpResult',
                 dataIndex: 'followUpResult',
                 width: '10%',
                 render: (_, { followUpResult }) => {
@@ -235,13 +231,11 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                         </Tooltip>
                     </div>
                 ),
-                key: 'ptpTime',
                 dataIndex: 'ptpTime',
                 width: '6%',
             },
             {
                 title: t('urgeCollection:trackingRecord'),
-                key: 'trackingRecord',
                 dataIndex: 'trackingRecord',
                 width: '30%',
             },
@@ -300,16 +294,14 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         const emergencyContactColumns = [
             {
                 title: t('common:table.contactType'),
-                key: 'contact',
                 dataIndex: 'contact',
                 render: (_, { contact }) => <div>{EmergencyContactEnum[contact]?.text}</div>,
             },
-            { title: t('common:table.relationShip'), key: 'relationShip', dataIndex: 'relationShip' },
-            { title: t('common:table.contactName'), key: 'contactName', dataIndex: 'contactName' },
-            { title: t('common:table.contactPhone'), key: 'contactPhone', dataIndex: 'contactPhone' },
+            { title: t('common:table.relationShip'), dataIndex: 'relationShip' },
+            { title: t('common:table.contactName'), dataIndex: 'contactName' },
+            { title: t('common:table.contactPhone'), dataIndex: 'contactPhone' },
             {
                 title: t('common:table.uploadTime'),
-                key: 'uploadTime',
                 dataIndex: 'uploadTime',
                 render: (_, { uploadTime }) => <div>{moment(uploadTime).format('YYYY-MM-DD HH:mm:ss')}</div>,
             },
@@ -321,23 +313,21 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         }
 
         const contactListColumns = [
-            { title: t('common:table.contactName'), key: 'name', dataIndex: 'name' },
-            { title: t('common:table.phone'), key: 'phone', dataIndex: 'phone' },
+            { title: t('common:table.contactName'), dataIndex: 'name' },
+            { title: t('common:table.phone'), dataIndex: 'phone' },
             {
                 title: t('common:table.lastAddedTime'),
-                key: 'lastUpdateTime',
                 dataIndex: 'lastUpdateTime',
                 render: (_, { lastUpdateTime }) => <div>{moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss')}</div>,
             },
         ];
 
         const smsLogsColumns = [
-            { title: t('common:table.sendPhoneNumber'), key: 'phone', dataIndex: 'phone', width: '15%' },
-            { title: t('common:table.smsContent'), key: 'content', dataIndex: 'content', width: '65%' },
-            { title: t('common:table.smsSendType'), key: 'content', dataIndex: 'direction', width: '10%' },
+            { title: t('common:table.sendPhoneNumber'), dataIndex: 'phone', width: '15%' },
+            { title: t('common:table.smsContent'), dataIndex: 'content', width: '65%' },
+            { title: t('common:table.smsSendType'), dataIndex: 'direction', width: '10%' },
             {
                 title: t('common:table.sendTime'),
-                key: 'time',
                 dataIndex: 'time',
                 width: '10%',
                 render: (_, { time }) => <div>{moment(time).format('YYYY-MM-DD HH:mm:ss')}</div>,
@@ -389,7 +379,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                     hook={useGetCollectOverDueUserDetailQuery}
                     params={{ userId }}
                     rowKey="contact"
-                    dataSourceKey="emergencyContacts"
+                    dataSourcePath="emergencyContacts"
                 />
             </div>
         );

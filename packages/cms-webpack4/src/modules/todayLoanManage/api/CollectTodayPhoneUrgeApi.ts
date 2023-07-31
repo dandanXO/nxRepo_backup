@@ -1,37 +1,40 @@
-import { API } from "../../shared/api";
+import { API } from '../../shared/api';
 import {
     GetCollectTodayPhoneUrgeListQueryString,
-    GetCollectTodayPhoneUrgeListResponse
-} from "./types/getCollectTodayPhoneUrgeList";
+    GetCollectTodayPhoneUrgeListResponse,
+} from './types/getCollectTodayPhoneUrgeList';
 import {
     PostCollectTodayPhoneUrgeRecordRequest,
-    PostCollectTodayPhoneUrgeRecordResponse
-} from "./types/postCollectTodayPhoneUrgeRecord";
-
+    PostCollectTodayPhoneUrgeRecordResponse,
+} from './types/postCollectTodayPhoneUrgeRecord';
 
 const CollectTodayPhoneUrgeApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // [GET] 當日電催列表
-        getCollectTodayPhoneUrgeList: builder.query<GetCollectTodayPhoneUrgeListResponse, GetCollectTodayPhoneUrgeListQueryString>({
+        getCollectTodayPhoneUrgeList: builder.query<
+            GetCollectTodayPhoneUrgeListResponse,
+            GetCollectTodayPhoneUrgeListQueryString
+        >({
             query: (requestBody: GetCollectTodayPhoneUrgeListQueryString) => ({
                 url: '/collect-today/phone-urge/list',
                 params: requestBody,
-                method: 'get'
-            })
+                method: 'get',
+            }),
         }),
         // [POST] 新增當日催收紀錄
-        postCollectTodayPhoneUrgeRecord: builder.mutation<PostCollectTodayPhoneUrgeRecordResponse, PostCollectTodayPhoneUrgeRecordRequest>({
+        postCollectTodayPhoneUrgeRecord: builder.mutation<
+            PostCollectTodayPhoneUrgeRecordResponse,
+            PostCollectTodayPhoneUrgeRecordRequest
+        >({
             query: (requestBody: PostCollectTodayPhoneUrgeRecordRequest) => ({
                 url: '/collect-today/collect-records',
                 method: 'post',
-                data: requestBody
-            })
-        })
-    })
-})
+                data: requestBody,
+            }),
+        }),
+    }),
+});
 
-export const {
-    useLazyGetCollectTodayPhoneUrgeListQuery,
-    usePostCollectTodayPhoneUrgeRecordMutation
-} = CollectTodayPhoneUrgeApi;
+export const { useLazyGetCollectTodayPhoneUrgeListQuery, usePostCollectTodayPhoneUrgeRecordMutation } =
+    CollectTodayPhoneUrgeApi;
