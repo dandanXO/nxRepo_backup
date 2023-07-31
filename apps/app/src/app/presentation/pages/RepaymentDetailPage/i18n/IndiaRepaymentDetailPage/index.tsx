@@ -20,6 +20,8 @@ import VipIcon from '../../../../components/images/VipIcon.svg';
 import { useSelector } from 'react-redux';
 import PaymentProgressingModal from '../../../../modals/PaymentProgressingModal';
 import { RootState } from 'apps/app/src/app/reduxStore';
+import ReservationProductsModal from '../../../../modals/ReservationProductsModal';
+import ReservationSuccessModal from '../../../../modals/ReservationSuccessModal';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -63,7 +65,8 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   return (
     <div>
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
-
+      {modalState.reservationProductsModal.show && <ReservationProductsModal />}
+      {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
       {/*{currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (*/}
       {/*  <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>*/}
       {/*    Get more amount after instant payment*/}

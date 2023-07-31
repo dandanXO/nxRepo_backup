@@ -49,6 +49,12 @@ export type InitialStateType = {
   },
   paymentProgressingModal:{
     show: boolean;
+  },
+  reservationProductsModal:{
+    show: boolean;
+  },
+  reservationSuccessModal:{
+    show: boolean;
   }
 };
 
@@ -98,6 +104,12 @@ const initialState: InitialStateType = {
     show: false
   },
   paymentProgressingModal:{
+    show: false
+  },
+  reservationProductsModal:{
+    show: false
+  },
+  reservationSuccessModal:{
     show: false
   }
 };
@@ -170,6 +182,12 @@ export const modalSlice = createSlice({
     },
     updatepaymentProgressingModal: (state, action: PayloadAction<InitialStateType['noRecommendProductModal']>) => {
         state.paymentProgressingModal.show = action.payload.show;
+    },
+    updateReservationProductsModalgModal: (state, action: PayloadAction<InitialStateType['reservationProductsModal']>) => {
+        state.reservationProductsModal.show = action.payload.show;
+    },
+    updateReservationSuccessModalgModal: (state, action: PayloadAction<InitialStateType['reservationSuccessModal']>) => {
+        state.reservationSuccessModal.show = action.payload.show;
     },
   },
 });

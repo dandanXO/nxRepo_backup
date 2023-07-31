@@ -19,7 +19,7 @@ export const Navigation = (props: Props) => {
           {typeof props.back !== 'undefined' && <IoChevronBack size={20} />}
         </div>
       )}
-      <div className={'mx-3 grow font-normal font-medium'}>{props.title}</div>
+      <div className={'mx-3 grow font-bold'}>{props.title}</div>
       {props.to && (
         <div
           onClick={() => {
