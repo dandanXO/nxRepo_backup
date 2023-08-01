@@ -10,6 +10,9 @@
         "emergency": "Emergency Contact{{count}}",
         "list": "Contact List"
     },
+    "currentPageTotal": "Current Page Total",
+    "endDate": "End Date",
+    "export": "Export",
     "followUpResultStatus": {
         "BadAttitude": "Bad Attitude",
         "FinancialDifficulties": "Financial Difficulties",
@@ -22,11 +25,13 @@
     "function": "Function",
     "goBack": "Back",
     "menu": {
+        "currentDayCollectionReport": "CurrentDay Collection Report",
         "currentDayOverdueCall": "CurrentDay Collection",
         "currentDayOverdueCallList": "CurrentDay Overdue Call List",
         "homePage": "Home",
         "overdueCallList": "Overdue Call List",
-        "overdueCollection": "Overdue Collection"
+        "overdueCollection": "Overdue Collection",
+        "overdueCollectionReport": "Overdue Collection Report"
     },
     "message": {
         "copied": "Copied",
@@ -52,6 +57,7 @@
     },
     "saved": "Saved",
     "search": "Search",
+    "startDate": "Start Date",
     "tab": {
         "contractList": "Contact List",
         "orderInfo": "Order Information",
@@ -63,6 +69,8 @@
         "contactPhone": "Contact Number",
         "contactType": "Contact",
         "lastAddedTime": "Last Added Time",
+        "loginIP": "Login IP Address",
+        "loginTime": "Login Time",
         "phone": "Mobile Number",
         "relationShip": "Relationship",
         "sendPhoneNumber": "Phone Number",
