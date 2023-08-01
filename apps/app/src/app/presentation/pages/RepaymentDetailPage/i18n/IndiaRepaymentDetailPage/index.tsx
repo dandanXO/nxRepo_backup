@@ -67,6 +67,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
       {modalState.reservationProductsModal.show && <ReservationProductsModal />}
       {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
+      {/* <ReservationProductsModal /> */}
       {/*{currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (*/}
       {/*  <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>*/}
       {/*    Get more amount after instant payment*/}
