@@ -8,8 +8,10 @@ import { InitialStateType, modalInitialState, modalSlice } from 'apps/app/src/ap
 import { getOrderNo } from 'apps/app/src/app/modules/querystring/getOrderNo';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
 import moment from 'moment';
+import { IReservationProps } from './reservationAction';
 
-export function* reservationSaga(action: PayloadAction<InitialStateType['reservationProductsModal']>) {
+
+export function* reservationSaga(action: PayloadAction<IReservationProps>) {
     // console.log("action.payload-------", action.payload);
     try {
         yield put(loadingSlice.actions.updatePageLoading(true));

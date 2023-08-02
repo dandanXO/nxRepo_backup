@@ -5,5 +5,5 @@ import { reservationSaga } from "./reservationSaga"
 import { ReservationAction } from "./reservationAction";
 
 export function* watchReservationSaga(){
-    yield takeLatest(ReservationAction.user.reservationSubmitAction.type,errorFallback,reservationSaga)
+    yield takeLatest(ReservationAction.user.reservationAction.type,errorFallback,reservationSaga)
 }

@@ -106,8 +106,7 @@ const ReservationProductsModal = () => {
                                     const reservationDetail = selectedProducts.map((product) => {
                                         return { applyAmount: product.calculating.finalLoanPrice, productId: product.productId }
                                     })
-                                    dispatch(ReservationAction.user.reservationSubmitAction({
-                                        ...modalInitialState.reservationProductsModal,
+                                    dispatch(ReservationAction.user.reservationAction({
                                         confirm: true,
                                         reservationDetail,
                                     }));

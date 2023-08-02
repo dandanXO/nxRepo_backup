@@ -16,7 +16,6 @@ import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { getToken } from '../../modules/querystring/getToken';
 import { PagePathEnum } from '../pages/PagePathEnum';
 import { ReservationAction } from '../modals/ReservationProductsModal/userUsecaseSaga/reservationAction';
-import { modalInitialState } from '../../reduxStore/modalSlice';
 const useRepayCreate = () => {
   const navigate = useNavigate();
   const pageQueryString = useLocationOrderQueryString();
@@ -39,8 +38,9 @@ const useRepayCreate = () => {
           window.location.href = data.nextUrl;
           if (environment.country === IndiaCountry.country) {
               navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true })
-              dispatch(ReservationAction.user.reservationSubmitAction({
-                 ...modalInitialState.reservationProductsModal
+              dispatch(ReservationAction.user.reservationAction({
+                  confirm: false,
+                  reservationDetail: []
               }))
 
           }

@@ -1,8 +1,12 @@
 import { createAction } from "@reduxjs/toolkit";
-import { InitialStateType } from "apps/app/src/app/reduxStore/modalSlice";
+import { ReservationDetail } from "apps/app/src/app/api/loanService/PostReservationSubmitRequest";
 
+export interface IReservationProps{
+    confirm:boolean;
+    reservationDetail:ReservationDetail[]
+}
 export const ReservationAction = {
     user: {
-        reservationSubmitAction: createAction<InitialStateType['reservationProductsModal']>('reservationProductsModal'),
+        reservationAction: createAction<IReservationProps>('reservationAction'),
     },
 };
