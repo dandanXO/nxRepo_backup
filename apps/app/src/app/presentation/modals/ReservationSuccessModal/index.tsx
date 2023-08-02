@@ -12,8 +12,8 @@ const ReservationSuccessModal = () => {
     const dispatch = useDispatch();
    
     const handleOK = () => {
-        dispatch(modalSlice.actions.updateReservationSuccessModalgModal({ show: false }));
-        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}?orderNo=${getOrderNo()}`);
+        dispatch(modalSlice.actions.updateReservationSuccessModal({ show: false }));
+        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`);
         
     }
 

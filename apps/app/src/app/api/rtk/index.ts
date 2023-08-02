@@ -142,10 +142,10 @@ export const APIV3 = createApi({
     }),
     // NOTE: /api/v3/reservation 预约借款页面
     getReservation: builder.query<GetReservationResponse, GetReservationRequest>({
-        query: (data: GetReservationRequest) => ({
+        query: (query: GetReservationRequest) => ({
           method: 'get',
           url: `/reservation`,
-          data: data,
+          params: query,
         }),
     }),
     // NOTE: /api/v3/reservation/submit 提交还款后预约

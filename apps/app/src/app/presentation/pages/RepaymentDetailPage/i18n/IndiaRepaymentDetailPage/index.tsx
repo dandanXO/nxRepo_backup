@@ -61,7 +61,6 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const renderStatusTag = (status: string) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
   };
-
   return (
     <div>
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}

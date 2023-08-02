@@ -11,181 +11,40 @@ import { Product } from '../../components/Product/Product';
 import { useEffect, useState } from 'react';
 import { FinalProductType } from '../../pages/IndexPage';
 import { formatPrice } from '../../../modules/format/formatPrice';
-
+import { ReservationAction } from './userUsecaseSaga/reservationAction';
+import { modalInitialState } from '../../../reduxStore/modalSlice';
 const ReservationProductsModal = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const modalState = useSelector((state: RootState) => state.model);
 
-    const handleClose = () => {
-        dispatch(modalSlice.actions.updateStarRatingSuccessModal({ show: false }));
-    }
+    const { availableAmount } = modalState.reservationProductsModal;
 
-    const handleOK = () => {
-        navigate(`${PagePathEnum.IndexPage}?token=${getToken()}`);
-        handleClose();
-    }
+    const products = modalState.reservationProductsModal.products.map(i => {
+        return {
+            logoUrl: i.logoUrl,
+            productId: i.productId,
+            productName: i.productName,
+            max: 0,
+            min: 0,
+            platformChargeFeeRate: 0,
+            terms: 0,
+            required: i.required,
+            calculating: {
+                finalLoanPrice: i.productAmount,
+                terms: i.terms,
+                disbursalPrice: i.disbursalAmount,
+                dueDate: i.dueDate,
+                interestPrice: 0,
+            }
+        };
+    })
 
-    const products = [
-        {
-            "productId": 48,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4424980256908184.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 3000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 1,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4424980256908184.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 2000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 2,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 8000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 2,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 8000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 2,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 8000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 2,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 8000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 2,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 8000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 2,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 8000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        },
-        {
-            "productId": 2,
-            "productName": "t01",
-            "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
-            "min": 3000,
-            "max": 10000,
-            "terms": 7,
-            "platformChargeFeeRate": 0,
-            "postPlatformChargeFeeRate": 0.4,
-            "calculating": {
-                finalLoanPrice: 8000,
-                interestPrice: 1000,
-                terms: 7,
-                disbursalPrice: 4500,
-                dueDate: '10-03-2023'
-            }
-        }
-    ]
+    const initSelectedProduct = products.filter(i => i.required);
+    const [selectedProducts, setSelectedProducts] = useState(initSelectedProduct);
+    const [productAmount, setProductAmount] = useState(initSelectedProduct[0].calculating.finalLoanPrice || 0)
 
-    const [selectedProducts, setSelectedProducts] = useState<FinalProductType[]>([products[0]]);
-    const [productAmount, setProductAmount] = useState(products[0].calculating.finalLoanPrice || 0)
-
-    const handleProductSelection = (isChecked: boolean, product: FinalProductType) => {
+    const handleProductSelection = (isChecked: boolean, product:any) => {
       if (isChecked) {
         setSelectedProducts((prevSelected) => [...prevSelected, product]);
       } else {
@@ -208,17 +67,17 @@ const ReservationProductsModal = () => {
                     <div className='text-sm text-left leading-none'>Congratulations! Your credit has been upgraded! We have selected some excellent options for you. Please choose the product you want to reserve based on your needs</div>
                     <div className='border border-solid border-cstate-disable-main mt-3 mb-5 w-full rounded-lg p-4'>
                         <div className='text-base'>Maximum Amount</div>
-                        <div className='text-2xl font-bold'>{`${formatPrice(productAmount)}/16,000`}</div>
+                        <div className='text-2xl font-bold'>{`${formatPrice(productAmount)}/${formatPrice(availableAmount)}`}</div>
                     </div>
                     <div className={`mb-3 flex flex-col w-full h-1/2 overflow-auto`}>
-                        {products.map((product, index) => {
+                        {products.map((product:any, index) => {
                             return (
                                 <Product
                                     key={index}
                                     product={product}
                                     checkable={true}
                                     checkboxProps={{
-                                        disable: index === 0,
+                                        disable: product.required,
                                         checked: false,
                                         onClick: (isChecked) => handleProductSelection(isChecked, product),
                                     }}
@@ -231,9 +90,9 @@ const ReservationProductsModal = () => {
                         <div className={`mr-1.5 w-full`}>
                             <Button
                                 onClick={() => {
-                                    dispatch(modalSlice.actions.updateReservationProductsModalgModal({ show: false }));
-                                    //   if (isRepayTypesFetching) return;
-                                    // navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
+                                    dispatch(modalSlice.actions.updateReservationProductsModal({
+                                        ...modalInitialState.reservationProductsModal
+                                    }));
                                 }}
                                 text={'Cancel'}
                                 type={'ghost'}
@@ -241,11 +100,17 @@ const ReservationProductsModal = () => {
 
                             />
                         </div>
-                        <div className={` ml-1.5 w-ful whitespace-nowrap`}>
+                        <div className={` ml-1.5 w-full whitespace-nowrap`}>
                             <Button
                                 onClick={() => {
-                                    // 
-                                    console.log('selectedProducts',selectedProducts)
+                                    const reservationDetail = selectedProducts.map((product) => {
+                                        return { applyAmount: product.calculating.finalLoanPrice, productId: product.productId }
+                                    })
+                                    dispatch(ReservationAction.user.reservationSubmitAction({
+                                        ...modalInitialState.reservationProductsModal,
+                                        confirm: true,
+                                        reservationDetail,
+                                    }));
                                 }}
                                 text={'Reserve Application'} />
                         </div>
