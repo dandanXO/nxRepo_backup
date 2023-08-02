@@ -28,6 +28,9 @@ import { TraceBehaviorRequest } from './TraceBehaviorRequest';
 import axiosBaseQuery from './axiosBaseQuery';
 import { GetFeedbackCategoriesResponse } from '../userService/GetFeedbackCategories';
 import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
+import { GetReservationResponse } from '../loanService/GetReservationResponse';
+import { GetReservationRequest } from '../loanService/GetReservationRequest';
+import { PostReservationSubmitRequest } from '../loanService/PostReservationSubmitRequest';
 
 export type LoginRequest = {
   msgCode: string;
@@ -137,6 +140,22 @@ export const APIV3 = createApi({
           data: data,
         }),
     }),
+    // NOTE: /api/v3/reservation 预约借款页面
+    getReservation: builder.query<GetReservationResponse, GetReservationRequest>({
+        query: (data: GetReservationRequest) => ({
+          method: 'get',
+          url: `/reservation`,
+          data: data,
+        }),
+    }),
+    // NOTE: /api/v3/reservation/submit 提交还款后预约
+    postReservationSubmit: builder.mutation<null, PostReservationSubmitRequest>({
+        query: (data: PostReservationSubmitRequest) => ({
+          method: 'post',
+          url: `/reservation/submit`,
+          data: data,
+        }),
+    }),
   
   }),
 });
@@ -148,7 +167,9 @@ export const {
   useLazyGetCouponListQuery,
   useLazyGetNotificationListQuery,
   useLazyGetFeedbackCategoriesQuery,
-  usePostFeedbackMutation
+  usePostFeedbackMutation,
+  useLazyGetReservationQuery,
+  usePostReservationSubmitMutation
 } = APIV3;
 
 export const API = createApi({
