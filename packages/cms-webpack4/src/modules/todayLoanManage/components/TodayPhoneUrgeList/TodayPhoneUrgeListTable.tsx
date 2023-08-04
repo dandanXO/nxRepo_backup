@@ -416,10 +416,7 @@ export const TodayPhoneUrgeListTable = (): JSX.Element => {
                 defaultPageSize: 10,
                 onChange: pageOnChange,
                 total: currentTodayPhoneUrgeListResponse?.totalRecords,
-                current:
-                    currentTodayPhoneUrgeListResponse?.records?.length === 0
-                        ? 1
-                        : currentTodayPhoneUrgeListResponse?.currentPage,
+                current: currentTodayPhoneUrgeListResponse?.currentPage,
             }}
             scroll={{ x: 'auto' }}
         />
