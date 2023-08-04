@@ -34,6 +34,7 @@ const FeedbackPage = () => {
         errorMessage: '',
     });
     const [isEdit, setIsEdit] = useState(false);
+    const [isSendMessage,setIsSendMessage]=useState(false)
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
         useLazyGetFeedbackCategoriesQuery({
@@ -80,10 +81,12 @@ const FeedbackPage = () => {
         })
 
         if (!isSelectedCategoryError && !isFeedbackValueError) {
+            setIsSendMessage(true);
             postFeedback({
                 category: Number(selectedCategory?.data),
                 feedback: feedbackValue?.data
             }).unwrap().then(()=>{
+                setIsSendMessage(false);
                 Modal.alert({
                     show: true,
                     mask: true,
@@ -161,11 +164,13 @@ const FeedbackPage = () => {
                     {feedbackValue.isValidation && <div className='text-cstate-error-main '>{feedbackValue.errorMessage}</div>}
                 </div>
                 <div className={``}>
-                    <Button
+                    <Button 
+                        text={'Send a message'} 
+                        disable={isSendMessage}
                         onClick={() => {
-                            handleSendFeedback();                        
+                            if(isSendMessage) return;
+                            handleSendFeedback()
                         }}
-                        text={'Send a message'}
                     />
                 </div>
             </div>
