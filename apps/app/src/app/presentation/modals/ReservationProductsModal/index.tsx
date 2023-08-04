@@ -11,7 +11,7 @@ import { Product } from '../../components/Product/Product';
 import { useEffect, useState } from 'react';
 import { FinalProductType } from '../../pages/IndexPage';
 import { formatPrice } from '../../../modules/format/formatPrice';
-import { ReservationAction } from './userUsecaseSaga/reservationAction';
+import { ReservationProductsModalUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import { modalInitialState } from '../../../reduxStore/modalSlice';
 const ReservationProductsModal = () => {
     const navigate = useNavigate();
@@ -59,6 +59,21 @@ const ReservationProductsModal = () => {
         setProductAmount(totalAmout)
     },[selectedProducts])
 
+    const handleReserveProducts = () => {
+        const reservationDetail = selectedProducts.map((product) => {
+            return { applyAmount: product.calculating.finalLoanPrice, productId: product.productId }
+        })
+        dispatch(ReservationProductsModalUseCaseActions.user.reserve({
+            reservationDetail,
+        }));
+    }
+
+    const handleCanleReserveProducts = () => {
+        dispatch(modalSlice.actions.updateReservationProductsModal({
+            ...modalInitialState.reservationProductsModal
+        }));
+    }
+
     return (
         <div className='reservationProducts-modal'>
             <Modal className='h-full ' maskclassName={'py-5 px-5'}>
@@ -83,35 +98,14 @@ const ReservationProductsModal = () => {
                                     }}
                                 />
                             )
-
                         })}
                     </div>
                     <div className={`mb-3 flex flex-row w-full`}>
                         <div className={`mr-1.5 w-full`}>
-                            <Button
-                                onClick={() => {
-                                    dispatch(modalSlice.actions.updateReservationProductsModal({
-                                        ...modalInitialState.reservationProductsModal
-                                    }));
-                                }}
-                                text={'Cancel'}
-                                type={'ghost'}
-                                ghostTheme={'tertiary'}
-
-                            />
+                            <Button text={'Cancel'} type={'ghost'} ghostTheme={'tertiary'} onClick={handleCanleReserveProducts} />
                         </div>
                         <div className={` ml-1.5 w-full whitespace-nowrap`}>
-                            <Button
-                                onClick={() => {
-                                    const reservationDetail = selectedProducts.map((product) => {
-                                        return { applyAmount: product.calculating.finalLoanPrice, productId: product.productId }
-                                    })
-                                    dispatch(ReservationAction.user.reservationAction({
-                                        confirm: true,
-                                        reservationDetail,
-                                    }));
-                                }}
-                                text={'Reserve Application'} />
+                            <Button text={'Reserve Application'} onClick={handleReserveProducts} />
                         </div>
                     </div>
                     <div className={`text-left text-xs text-ctext-secondary leading-none`}>
