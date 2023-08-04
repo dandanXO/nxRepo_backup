@@ -28,6 +28,7 @@ export type IIndiaBankAccountForm = IBankAccountForm & {
 
   upiData: InputValue<string>;
   onUPIIDChange: (event: any) => void;
+  onUPIIDChangBlur: (event: any) => void;
 };
 
 export type IPakistanBankAccountForm = IBankAccountForm & {

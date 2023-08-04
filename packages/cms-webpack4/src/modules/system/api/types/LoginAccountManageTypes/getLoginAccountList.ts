@@ -1,4 +1,6 @@
-export interface GetLoginAccountListRequestQuery {
+import { GetDataPageRequestQuerystring } from '../../../../shared/api/commonRequest';
+
+export interface GetLoginAccountListRequestQuery extends GetDataPageRequestQuerystring {
     accountNumber?: string; // 手機號/登入帳號
     ip?: string; // IP位址
     lastActiveEndTime?: string; // 最後活躍時間EndTIme

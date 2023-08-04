@@ -23,6 +23,7 @@ export const useEnum = (
     GenerateRePayLinkEnum: any;
     CurrentDayOrderStatusEnum: any;
     OverDueOrderStatusEnum: any;
+    TotalOverdueStageEnum: any;
 } => {
     const { t } = useTranslation(translationNameSpase);
 
@@ -83,6 +84,11 @@ export const useEnum = (
         T_1: { text: 'T-1' },
     };
 
+    const TotalOverdueStageEnum = {
+        ...CurrentDayOverDueStageEnum,
+        ...OverDueStageEnum,
+    };
+
     const FollowUpResultEnum: Record<TFollowUpResult & '', { text: string; color?: string }> = {
         '': { text: t('noRestriction') },
         Promise: { text: t('common:followUpResultStatus.Promise'), color: '#1890FF' },
@@ -127,5 +133,6 @@ export const useEnum = (
         FollowUpResultEnum,
         EmergencyContactEnum,
         GenerateRePayLinkEnum,
+        TotalOverdueStageEnum,
     };
 };

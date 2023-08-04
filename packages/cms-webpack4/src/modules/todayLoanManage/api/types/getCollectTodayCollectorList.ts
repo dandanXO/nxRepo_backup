@@ -1,6 +1,6 @@
 export interface CollectTodayCollectorListItem {
-    collectorId?: number,
-    collectorName?: string
+    collectorId?: number;
+    collectorName?: string;
 }
 
-export type GetCollectTodayCollectorListResponse = CollectTodayCollectorListItem[]
+export type GetCollectTodayCollectorListResponse = CollectTodayCollectorListItem[];

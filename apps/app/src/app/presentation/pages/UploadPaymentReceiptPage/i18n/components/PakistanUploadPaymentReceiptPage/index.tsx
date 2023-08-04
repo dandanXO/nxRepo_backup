@@ -8,19 +8,15 @@ import UploadingFileModal from '../../../modal/UploadingFileModal';
 import { i18nUploadPaymentReceiptPage } from '../../translations';
 import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
 import I18CameraSvgIcon from '../I18CameraSvgIcon';
-import { CustomPage } from '../common';
-import { isShowNavigation } from 'apps/app/src/app/modules/window/isShowNavigation';
-import cx from 'classnames'
+import { PageContent } from 'apps/app/src/app/presentation/components/layouts/PageContent';
+
 
 export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: Omit<I18UploadPaymentReceiptPageProps, 'utr' | 'setURT' | 'validateUtr'>) => {
     return (
-        <div className={cx(`flex flex-col justify-between p-5`, {
-            'h-[calc(100vh-56px)]': isShowNavigation(),
-            'h-[100vh]': !isShowNavigation()
-        })}>
+      <PageContent>
         {props.isUploading && <UploadingFileModal />}
-        <div>
+        <div className='grow'>
           <div className="mb-2 text-left text-sm">{props.t('Upload your repayment receipt (optional)')}</div>
           <label
             htmlFor="file"
@@ -44,9 +40,10 @@ export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymen
               onChange={(event) => props.onFileChange(event)}
             />
           </label>
+          <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
         </div>
         <Button primaryTypeGradient={true} text={'Confirm'} onClick={() => props.confirm()} />
-      </div>
+      </PageContent>
     );
   }
 );

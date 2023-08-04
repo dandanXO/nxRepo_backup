@@ -58,6 +58,7 @@ import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
 
 // NOTICE: Static Loading : Compontents
 import LoadingMask from '../components/LoadingMask';
+import FeedbackPage from '../pages/FeedbackPage';
 
 
 
@@ -226,10 +227,11 @@ export const AppRouter = () => {
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
         <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
-        <Route path="/v2/partner" element={<PartnerPage />} />
+        <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
+        <Route path={PagePathEnum.FeedbackPage} element={<FeedbackPage />} />
         <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
         <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
         <Route path={PagePathEnum.DeleteAccountPage} element={<DeleteAccountPage />} />

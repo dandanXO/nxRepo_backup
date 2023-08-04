@@ -26,6 +26,8 @@ import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequ
 import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
 import { TraceBehaviorRequest } from './TraceBehaviorRequest';
 import axiosBaseQuery from './axiosBaseQuery';
+import { GetFeedbackCategoriesResponse } from '../userService/GetFeedbackCategories';
+import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
 
 export type LoginRequest = {
   msgCode: string;
@@ -119,6 +121,22 @@ export const APIV3 = createApi({
         params: query,
       }),
     }),
+    // NOTE: /api/v3/feedback/categories 取得feadback問題種類
+    getFeedbackCategories: builder.query<GetFeedbackCategoriesResponse, null>({
+        query: (query: null) => ({
+          method: 'get',
+          url: `/feedback/categories`,
+          params: query,
+        }),
+    }),
+    // NOTE: /api/v3/feedback 新增用戶回饋
+    postFeedback: builder.mutation<null, PostFeedbackRequest>({
+        query: (data: PostFeedbackRequest) => ({
+          method: 'post',
+          url: `/feedback`,
+          data: data,
+        }),
+    }),
   
   }),
 });
@@ -129,6 +147,8 @@ export const {
   usePostTraceBehaviorMutation,
   useLazyGetCouponListQuery,
   useLazyGetNotificationListQuery,
+  useLazyGetFeedbackCategoriesQuery,
+  usePostFeedbackMutation
 } = APIV3;
 
 export const API = createApi({

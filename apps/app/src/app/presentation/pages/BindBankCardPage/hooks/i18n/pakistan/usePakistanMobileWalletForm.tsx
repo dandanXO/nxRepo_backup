@@ -92,7 +92,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   // Wallet Account  - 驗證
   const validateMobileWalletAccount = useCallback(() => {
     // NOTICE: refactor
-    const message = t('Account number should be 11 digits starting with 0.');
+    const message = t('Account number should be 10 or 10 digits starting with 0.');
     const scheme = z.string().regex(/^0/, message).length(11, message);
     const scheme2 = z.string().length(10, message);
     const result = z.union([scheme, scheme2]).safeParse(mobileData.data);

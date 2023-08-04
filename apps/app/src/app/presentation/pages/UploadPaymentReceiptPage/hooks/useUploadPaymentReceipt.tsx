@@ -33,6 +33,7 @@ export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps
       formFileValue.type !== 'image/webp'
     ) {
       setFileErrorMessage('Please upload correct photo file format.');
+      setFormFile('');
     } else {
       setFileErrorMessage('');
       setFormFile(formFileValue as any);
@@ -59,7 +60,6 @@ export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps
 
     setIsUploading(true);
 
-    // console.log('props', props);
     props.postRepayReceiptRequest({
       orderNo: props.orderNo,
       receipt: environment.country === 'in' ? utr.data : '',
@@ -79,21 +79,13 @@ export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps
     // NOTE: Parse scheme
     const result = utrScheme.safeParse(utr.data);
     // NOTE: Parsed result
-    if (!result.success) {
-      const firstError = result.error.format();
-      const errorMessage = firstError._errors[0];
-      setURT({
+    const isValidation = result.success;
+    const errorMessage = !isValidation ? result.error.format()._errors[0] : '';
+    setURT({
         ...utr,
-        isValidation: false,
+        isValidation,
         errorMessage,
-      });
-    } else {
-      setURT({
-        ...utr,
-        isValidation: true,
-        errorMessage: '',
-      });
-    }
+    });
   }, [utr.data]);
 
   return {

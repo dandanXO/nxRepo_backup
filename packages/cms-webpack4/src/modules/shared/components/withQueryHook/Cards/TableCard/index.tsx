@@ -1,4 +1,4 @@
-import { ProTable } from '@ant-design/pro-components';
+import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { UseLazyQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { QueryDefinition } from '@reduxjs/toolkit/query';
 import React, { useEffect, useState } from 'react';
@@ -8,18 +8,22 @@ import { InformationCard } from '../../../Cards';
 
 interface ITableCardProps {
     title?: string;
-    columns: {
-        title: string | (() => React.ReactElement);
-        key: string;
-        dataIndex: string;
-        render?: (dom: React.ReactNode, entity: any) => React.ReactElement;
-    }[];
+    columns: ProColumns[];
     rowKey?: string;
     hook: UseLazyQuery<QueryDefinition<any, any, any, any>>;
     queryBody: any;
+    dataSourcePath?: string;
 }
 
-export const TableCard = ({ title, hook, queryBody, rowKey, columns }: ITableCardProps): JSX.Element => {
+// 使用useLazyQuery的TableCard
+export const TableCard = ({
+    title,
+    hook,
+    queryBody,
+    rowKey,
+    columns,
+    dataSourcePath,
+}: ITableCardProps): JSX.Element => {
     const [searchParams, setSearchParams] = useState({ pageNum: 1, pageSize: 10 });
     const { t } = useTranslation();
 
@@ -33,9 +37,13 @@ export const TableCard = ({ title, hook, queryBody, rowKey, columns }: ITableCar
         setSearchParams({ pageNum: current, pageSize: pageSize });
     };
 
+    const dataSource = !dataSourcePath
+        ? currentData?.records
+        : dataSourcePath.split('.').reduce((acc, current) => acc && acc[current], currentData);
+
     const showTotal = (total, range) => {
         const [start, end] = range;
-        return t('pagination.showingRange', {
+        return t('common:pagination.showingRange', {
             start,
             end,
             total,
@@ -51,20 +59,20 @@ export const TableCard = ({ title, hook, queryBody, rowKey, columns }: ITableCar
             <ProTable
                 bordered
                 loading={isFetching}
-                dataSource={currentData?.records}
+                dataSource={dataSource}
                 columns={columns}
                 search={false}
                 toolBarRender={false}
                 rowKey={rowKey}
                 pagination={
-                    currentData?.totalRecords < 10
+                    currentData?.totalRecords <= 10
                         ? false
                         : {
                               showSizeChanger: true,
                               defaultPageSize: 10,
                               onChange: pageOnChange,
                               total: currentData?.totalRecords,
-                              current: currentData?.records?.length === 0 ? 0 : currentData?.currentPage,
+                              current: currentData?.currentPage || 1,
                               locale: {
                                   // eslint-disable-next-line camelcase
                                   items_per_page: t('pagination.itemPerPage'),
