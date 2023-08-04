@@ -5,12 +5,12 @@ export type UserReserveActionPayload = {
     reservationDetail: ReservationDetail[]
 }
 
-export const ReservationProductsModalUseCaseActions = {
+export const RepaymentDetailPageUseCaseActions = {
     system: {
-        showReservation: createAction('ReservationProductsModalUseCaseActions-system-showReservation'),
+        showReservation: createAction('RepaymentDetailPageUseCaseActions-system-showReservation'),
     },
     user: {
-        reserve: createAction<UserReserveActionPayload>('ReservationProductsModalUseCaseActions-user-reserve'),
+        reserve: createAction<UserReserveActionPayload>('RepaymentDetailPageUseCaseActions-user-reserve'),
     },
 
 };

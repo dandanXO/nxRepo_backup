@@ -9,7 +9,7 @@ import { watchSystemInitSaga } from './watchSaga/watchSystemInitSaga';
 import { watchSystemUseCaseSaga } from './watchSaga/watchSystemUseCaseSaga';
 import { watchBindBankcardSaga } from '../presentation/pages/BindBankCardPage/userUsecaseSaga/watchBindBankcardSaga';
 import { watchRepaymentPageSaga } from '../presentation/pages/RepaymentPage/userUsecaseSaga/watchRepaymentPageSaga';
-import { watchReservationSaga } from '../presentation/pages/RepaymentDetailPage/userUsecaseSaga/watchReservationSaga';
+import { watchRepaymentDetailPageSaga } from '../presentation/pages/RepaymentDetailPage/userUsecaseSaga/watchRepaymentDetailPageSaga';
 
 // NOTICE: 每個 saga 的 error 得自己 catch, AppSaga 不會收到
 export function* WatchAppSaga() {
@@ -30,7 +30,7 @@ export function* WatchAppSaga() {
 
       watchBindBankcardSaga(),
       watchRepaymentPageSaga(),
-      watchReservationSaga()
+      watchRepaymentDetailPageSaga()
     ]);
     console.log('[app][saga] 3');
   } catch (error) {

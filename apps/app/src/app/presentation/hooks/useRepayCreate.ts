@@ -15,7 +15,7 @@ import { environment } from 'apps/app/src/environments/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { getToken } from '../../modules/querystring/getToken';
 import { PagePathEnum } from '../pages/PagePathEnum';
-import { ReservationProductsModalUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
+import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
 const useRepayCreate = () => {
   const navigate = useNavigate();
   const pageQueryString = useLocationOrderQueryString();
@@ -40,7 +40,7 @@ const useRepayCreate = () => {
               navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
 
               // NOTICE: 取得是否要跳出複借預約彈窗
-              dispatch(ReservationProductsModalUseCaseActions.system.showReservation())
+              dispatch(RepaymentDetailPageUseCaseActions.system.showReservation())
 
           }
           resolve('');

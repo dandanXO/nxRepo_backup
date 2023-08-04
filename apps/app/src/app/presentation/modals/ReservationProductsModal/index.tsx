@@ -11,7 +11,7 @@ import { Product } from '../../components/Product/Product';
 import { useEffect, useState } from 'react';
 import { FinalProductType } from '../../pages/IndexPage';
 import { formatPrice } from '../../../modules/format/formatPrice';
-import { ReservationProductsModalUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
+import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import { modalInitialState } from '../../../reduxStore/modalSlice';
 const ReservationProductsModal = () => {
     const navigate = useNavigate();
@@ -63,7 +63,7 @@ const ReservationProductsModal = () => {
         const reservationDetail = selectedProducts.map((product) => {
             return { applyAmount: product.calculating.finalLoanPrice, productId: product.productId }
         })
-        dispatch(ReservationProductsModalUseCaseActions.user.reserve({
+        dispatch(RepaymentDetailPageUseCaseActions.user.reserve({
             reservationDetail,
         }));
     }
