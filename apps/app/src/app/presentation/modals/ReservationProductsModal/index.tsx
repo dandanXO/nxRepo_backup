@@ -28,11 +28,11 @@ const ReservationProductsModal = () => {
             max: 0,
             min: 0,
             platformChargeFeeRate: 0,
-            terms: 0,
+            terms: i.terms,
             required: i.required,
             calculating: {
                 finalLoanPrice: i.productAmount,
-                terms: i.terms,
+                terms: 0,
                 disbursalPrice: i.disbursalAmount,
                 dueDate: i.dueDate,
                 interestPrice: 0,
