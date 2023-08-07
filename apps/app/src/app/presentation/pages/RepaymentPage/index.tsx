@@ -91,7 +91,7 @@ const RepaymentPage = () => {
                         );
                     })
                 ) : (
-                    <div className="flex grow items-center justify-center p-3">There are no orders currently</div>
+                    <div className="flex grow items-center justify-center p-3">There are currently no orders</div>
                 )}
             </div>
 

@@ -16,7 +16,7 @@ const ListItem = (props: ListItemProps) => {
             <div className={cx(`${titleColor}`)}>{title}</div>
             <div className={cx(`${textColor === '' ? titleColor : textColor} `, {
                 'skeleton': props.isFetching,
-            })}>{text ? text : title}</div>
+            })}>{text}</div>
         </div>
     );
 };

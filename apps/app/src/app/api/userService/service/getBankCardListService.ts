@@ -12,6 +12,6 @@ export const GetBankCardListService = async (params: null) => {
     if (axios.isAxiosError(error)) {
       alertModal((error.response as any).data?.message);
     }
-    return null;
+    return error;
   }
 };

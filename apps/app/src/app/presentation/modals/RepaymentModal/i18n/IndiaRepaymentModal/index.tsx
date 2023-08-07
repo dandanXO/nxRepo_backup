@@ -153,6 +153,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
             }}
             text={props.t('Cancel')}
             type={'ghost'}
+            ghostTheme={'tertiary'}
           />
         </div>
         <div className={` ml-1.5 w-full`}>

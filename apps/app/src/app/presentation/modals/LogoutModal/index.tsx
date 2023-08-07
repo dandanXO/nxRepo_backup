@@ -31,10 +31,10 @@ const LogoutModal = () => {
               <div>{`Are you sure you want to exit ${appName}?`}</div>
               <div className={`mt-6 flex flex-row`}>
                 <div className={`mr-1.5 grow`}>
-                  <Button type={'secondary'} className={'w-full'} text={'Cancel'} onClick={() => navigate(-1)} />
+                  <Button type={'ghost'} ghostTheme={'tertiary'} className={'w-full'} text={'Cancel'} onClick={() => navigate(-1)} />
                 </div>
                 <div className={`ml-1.5 grow`}>
-                  <Button className={'w-full'} text={'Confirm'} onClick={onUserClickToConfirm} />
+                  <Button className={'w-full'} text={'Log out'} onClick={onUserClickToConfirm} />
                 </div>
               </div>
             </div>

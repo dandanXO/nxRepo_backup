@@ -17,6 +17,7 @@ import { CustomPage } from '../../components/layouts/CustomPage';
 import { Navigation } from '../../components/layouts/Navigation';
 import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
 import { PakistanBindBankAccountPage } from './components/i18n/PakistanBindBankAccountPage';
+import { PageContent } from '../../components/layouts/PageContent';
 
 const BindBankCardPage = () => {
   // NOTICE: Common
@@ -58,7 +59,7 @@ const BindBankCardPage = () => {
           }}
         />
       )}
-      <CustomPage>
+      <PageContent>
         {renderByCountry(
           {
             // NOTICE: default 0 index
@@ -91,7 +92,7 @@ const BindBankCardPage = () => {
             cardholderName={cardholderName ?? ''}
           />
         )}
-      </CustomPage>
+      </PageContent>
     </>
   );
 };

@@ -8,6 +8,10 @@ import { changeLocationHref } from '../../../../../modules/errorHandler';
 import { SentryModule } from '../../../../../modules/sentry';
 import { BindBankCardPageEvents } from '../../event';
 import { i18nBankBindAccountPage } from '../../translations';
+import { isSimpleWebView } from 'apps/app/src/app/modules/window/isSimpleWebView';
+import { useNavigate } from 'react-router';
+import { PagePathEnum } from '../../../PagePathEnum';
+import { getToken } from 'apps/app/src/app/modules/querystring/getToken';
 
 type IUseFinishedBindBankAccountPage = {
   // NOTICE: Common
@@ -31,8 +35,9 @@ type IUseFinishedBindBankAccountPage = {
 
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
-
+  const navigate = useNavigate();
   const navigateToAPP = () => {
+ 
     // let targetBankAccount;
     // if (
     //   props.bindCardDropListData &&
@@ -82,7 +87,6 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
 
   const confirm = useCallback(() => {
     if (props.isLoadingPostBankBindSaveToPK) return;
-
     // NOTE: FormRequest
     let request;
     let requestBody = {};
@@ -126,7 +130,13 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
           enableClose: false,
           enableIcon: false,
           onConfirm: () => {
-            navigateToAPP();
+            if (isSimpleWebView()) {
+                navigateToAPP();
+            }
+            else {
+                navigate(`${PagePathEnum.BankcardListPage}?token=${getToken()}`);
+            }
+            
           },
         });
       })

@@ -17,6 +17,9 @@ import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {formatDate} from "../../../../../modules/format/formatDate";
 import VipIcon from '../../../../components/images/VipIcon.svg';
+import { useSelector } from 'react-redux';
+import PaymentProgressingModal from '../../../../modals/PaymentProgressingModal';
+import { RootState } from 'apps/app/src/app/reduxStore';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -24,6 +27,7 @@ type IRepaymentDetailPage = {
 }
 const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
+  const modalState = useSelector((state: RootState) => state.model);
 
   const { currentData, isFetching = true } = props || {};
   const {
@@ -58,6 +62,14 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
   return (
     <div>
+      {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
+
+      {/*{currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (*/}
+      {/*  <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>*/}
+      {/*    Get more amount after instant payment*/}
+      {/*  </div>*/}
+      {/*)}*/}
+
       <div className={`px-6`}>
         <ListItem
           title={'Product'}
@@ -153,7 +165,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         )}
         <ListItem
           title={'Overdue Days'}
-          text={overdueDays ?? ''}
+          text={overdueDays ? overdueDays : "0"}
           titleColor="text-ctext-primary"
           textColor={status === 'OVERDUE' ? Status(status).color : ''}
           isFetching={isFetching}
@@ -225,9 +237,9 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
                 <img src={VipIcon} alt="" />
                 <div className='ml-2'>
-                    <span className='font-bold'> VIP Benefits!</span> You'll enjoy 
-                    <span className='font-bold'> higher loan limits</span> and 
-                    <span className='font-bold'> lower interest rates</span> 
+                    <span className='font-bold'> VIP Benefits!</span> You'll enjoy
+                    <span className='font-bold'> higher loan limits</span> and
+                    <span className='font-bold'> lower interest rates</span>
                     with responsible repayments!
                 </div>
 

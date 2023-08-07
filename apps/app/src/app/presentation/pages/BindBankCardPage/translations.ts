@@ -23,8 +23,10 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'For KYC, your Cardholder name and Aadhaar name should be match.':
         'For KYC, your Cardholder name and Aadhaar name should be match.',
       'UPI ID': 'UPI ID',
-      'IFSC Code (11 digits)': 'IFSC Code (11 digits)',
+      'IFSC Code (11characters )': 'IFSC Code (11characters )',
       'IFSC must be 11 digits only.': 'IFSC must be 11 digits only.',
+      'The IFSC code must consist of 11 characters. Please ensure that you have entered the correct format.': 'The IFSC code must consist of 11 characters. Please ensure that you have entered the correct format.',
+      'Invalid UPI ID format. Please retry or refer to the provided instructions and try again.': 'Invalid UPI ID format. Please retry or refer to the provided instructions and try again.',
 
       // NOTICE: Pakistan
       // NOTE: Mobile Wallet
@@ -34,7 +36,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Please select the of your mobile wallet': 'Please select the of your mobile wallet',
       'Your mobile wallet account': 'Your mobile wallet account',
       'Wallet Account Number': 'Wallet Account Number',
-      'Account number should be 11 digits starting with 0.': 'Account number should be 11 digits starting with 0.',
+      'Account number should be 10 or 10 digits starting with 0.': 'Account number should be 10 or 10 digits starting with 0.',
       // NOTE: Bank Account
       'Select a mobile wallet': 'Select a mobile wallet',
       'Your IBAN Number (24 digits)': 'Your IBAN Number (24 digits)',

@@ -14,7 +14,7 @@ import IndexPage from '../pages/IndexPage';
 import { PagePathEnum } from '../pages/PagePathEnum';
 
 // NOTE: Page
-import { CategoryPage } from '../pages/__test__/CategoryPage';
+// import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 
 
@@ -58,6 +58,7 @@ import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
 
 // NOTICE: Static Loading : Compontents
 import LoadingMask from '../components/LoadingMask';
+import FeedbackPage from '../pages/FeedbackPage';
 
 
 
@@ -196,7 +197,7 @@ export const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        <Route path="/v2/category" element={<CategoryPage />} />
+        {/*<Route path="/v2/category" element={<CategoryPage />} />*/}
         <Route path="/v2/error" element={<ErrorPage />} />
         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
@@ -226,10 +227,11 @@ export const AppRouter = () => {
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
         <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
-        <Route path="/v2/partner" element={<PartnerPage />} />
+        <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
+        <Route path={PagePathEnum.FeedbackPage} element={<FeedbackPage />} />
         <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
         <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
         <Route path={PagePathEnum.DeleteAccountPage} element={<DeleteAccountPage />} />

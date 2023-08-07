@@ -20,6 +20,7 @@ import {
     GetCollectOverDueUserDetailQueryString,
     GetCollectOverDueUserDetailResponse,
 } from './types/getCollectOverDueUserDetail';
+import { GetCollectOverdueCollectDepartmentListResponse } from './types/getCollectOverdueCollectDepartmentList';
 
 const CollectOverDueApi = API.injectEndpoints({
     overrideExisting: false,
@@ -98,10 +99,18 @@ const CollectOverDueApi = API.injectEndpoints({
                 };
             },
         }),
+        // [GET] 获取逾期催收分配部门
+        getCollectOverdueCollectDepartmentList: builder.query<GetCollectOverdueCollectDepartmentListResponse, null>({
+            query: () => ({
+                url: '/collect-overdue/collect-department-list',
+                method: 'get',
+            }),
+        }),
     }),
 });
 
 export const {
+    useGetCollectOverdueCollectDepartmentListQuery,
     useGetCollectOverDueCollectorListQuery,
     useGetCollectOverDueUserDetailQuery,
     useGetCollectOverDueOrderDetailQuery,

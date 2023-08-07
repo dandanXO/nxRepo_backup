@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 
+import CustomerServiceManageRoutes from './modules/CustomerServiceManage/CustomerServiceManageRoutes';
 import { AfterLoanManageRoutes } from './modules/afterLoanManage/routes';
 import { AppManagePage } from './modules/app/components/pages/AppManagePage';
 import { ChannelTabPage } from './modules/channel/components/pages/ChannelTabPage';
@@ -159,6 +160,9 @@ export const AppRouter = (): JSX.Element => {
 
                 {/*當日催收*/}
                 <TodayLoanManageRoutes />
+
+                {/*客服管理*/}
+                <CustomerServiceManageRoutes />
             </Router>
         </ConfigProvider>
     );

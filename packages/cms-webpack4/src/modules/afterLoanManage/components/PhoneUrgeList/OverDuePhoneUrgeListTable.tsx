@@ -411,8 +411,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
                 defaultPageSize: 10,
                 onChange: pageOnChange,
                 total: overDuePhoneUrgeListResponse?.totalRecords,
-                current:
-                    overDuePhoneUrgeListResponse?.records?.length === 0 ? 1 : overDuePhoneUrgeListResponse?.currentPage,
+                current: overDuePhoneUrgeListResponse?.currentPage,
             }}
             scroll={{ x: 'auto' }}
         />

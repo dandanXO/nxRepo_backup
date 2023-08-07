@@ -13,6 +13,6 @@ export const getOpenIndexService = async (params: GetOpenIndexRequest) => {
     if (axios.isAxiosError(error)) {
       alertModal((error.response as any).data?.message);
     }
-    return null;
+    return error;
   }
 };

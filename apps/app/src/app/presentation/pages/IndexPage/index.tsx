@@ -523,12 +523,6 @@ const onUserClickViewApplicationProgress = () => {
               )
           }
 
-          {/*TODO: refactor me*/}
-          <div className='grow flex items-end'>
-            <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
-          </div>
-
-        
           {/*TODO: 用戶認證中或用戶拒絕*/}
           {indexPageState.user.state === USER_AUTH_STATE.authing ? (
             <NoticeUserInProgressAuthStatusSections />
@@ -565,6 +559,12 @@ const onUserClickViewApplicationProgress = () => {
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota) && (
               <WelcomeBackAndReapplyInTimeSection refreshableCountdown={refreshableCountdown} />
             )}
+
+          {/*TODO: refactor me*/}
+          <div className='grow flex items-end'>
+            <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
+          </div>
+          
         </div>
       </div>
     </div>

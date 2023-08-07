@@ -1,4 +1,5 @@
 import { API } from '../../shared/api';
+import { GetCollectTodayCollectDepartmentListResponse } from './types/getCollectTodayCollectDepartmentList';
 import {
     GetCollectTodayCollectRecordQueryString,
     GetCollectTodayCollectRecordResponse,
@@ -95,10 +96,18 @@ const CollectTodayApi = API.injectEndpoints({
                 };
             },
         }),
+        // [GET] 获取當日催收分配部门
+        getCollectTodayCollectDepartmentList: builder.query<GetCollectTodayCollectDepartmentListResponse, null>({
+            query: () => ({
+                url: '/collect-today/collect-department-list',
+                method: 'get',
+            }),
+        }),
     }),
 });
 
 export const {
+    useGetCollectTodayCollectDepartmentListQuery,
     useGetTodayCollectorListQuery,
     useGetCollectTodayUserDetailQuery,
     useGetCollectTodayOrderDetailQuery,

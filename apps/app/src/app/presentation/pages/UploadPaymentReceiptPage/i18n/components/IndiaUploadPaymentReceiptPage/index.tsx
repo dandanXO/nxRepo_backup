@@ -10,20 +10,20 @@ import { i18nUploadPaymentReceiptPage } from '../../translations';
 import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
 import I18CameraSvgIcon from '../I18CameraSvgIcon';
 import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
+import { PageContent } from 'apps/app/src/app/presentation/components/layouts/PageContent';
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: I18UploadPaymentReceiptPageProps) => {
     return (
-      <Page>
+      <PageContent>
         {props.isUploading && <UploadingFileModal />}
-
-        <div className={'px-4'}>
-          <div className={`mb-8`}>
+        <div className={'grow'}>
+          <div className={`mb-2`}>
             <Input
               inputWidth={'200px'}
               className="mb"
               value={props.utr.data}
-              labelType="left"
+              labelType="top"
               label={props.t('UTR') as string}
               onChange={(event) => {
                 props.setURT({
@@ -58,11 +58,10 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               onInput={(event) => props.onFileChange(event)}
             />
           </UploadSection>
-
           <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
-          <Button text={'Confirm'} onClick={() => props.confirm()} />
         </div>
-      </Page>
+        <Button text={'Confirm'} onClick={() => props.confirm()} />
+      </PageContent>
     );
   }
 );
