@@ -1,48 +1,43 @@
-import { Key } from 'antd/es/table/interface';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { selectSearchParams, setPathname, setSearchParams, setSelectedRow } from '../utils/searchParamsSlice';
+import { selectSearchParams, setPathname, setSearchParams } from '../utils/searchParamsSlice';
 
 interface usePageSearchParamsProps {
-    searchListParams?: unknown;
+    searchListParams?: Record<string, any>;
 }
 
 const usePageSearchParams = (
     props: usePageSearchParamsProps,
 ): {
-    searchList: Record<any, any>;
     setSearchList: React.Dispatch<unknown>;
-    handleToDetailPage: (pathname: string, previousPathname: string, selectedRowParams?: Array<unknown>) => void;
-    searchParams: Record<any, any>;
-    selectedList: string[];
-    setSelectedList: React.Dispatch<Key[]>;
+    searchList: Record<string, any>;
+    savePath: (pathname: string, nextPathname: string) => void;
 } => {
     const { searchListParams } = props;
 
+    const history = useHistory();
     const dispatch = useDispatch();
-    const { searchParams = {}, selectedRow = [] } = useSelector(selectSearchParams);
+    const { pathname, searchParams = {} } = useSelector(selectSearchParams);
 
-    const [searchList, setSearchList] = useState<unknown>(searchListParams);
-    const [selectedList, setSelectedList] = useState([]);
-    useEffect(() => {
-        setSearchList(Object.keys(searchParams).length > 0 ? searchParams : searchListParams);
-        setSelectedList(selectedRow.length > 0 ? selectedRow : selectedList);
-    }, [searchParams, selectedRow]);
+    const [searchList, setSearchList] = useState<Record<string, any>>({
+        ...searchListParams,
+        ...(history.location.pathname === pathname ? searchParams : {}),
+    });
 
-    const handleToDetailPage = (pathname, previousPathname, selectedRowParams = []) => {
-        dispatch(setPathname({ pathname: pathname, previousPathname: previousPathname }));
-        dispatch(setSearchParams(searchList));
-        dispatch(setSelectedRow(selectedRowParams));
-    };
+    const savePath = useCallback(
+        (pathname, nextPathname) => {
+            dispatch(setPathname({ pathname: pathname, nextPathname: nextPathname }));
+            dispatch(setSearchParams(searchList));
+        },
+        [searchList],
+    );
 
     return {
-        searchList,
         setSearchList,
-        handleToDetailPage,
-        searchParams,
-        selectedList,
-        setSelectedList,
+        searchList,
+        savePath,
     };
 };
 

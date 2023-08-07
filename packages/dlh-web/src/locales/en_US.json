@@ -1207,6 +1207,8 @@
   "menu.overdueList": "Overdue List",
   "menu.overdueRepaymentList": "Overdue Repayment List",
   "menu.overdueCallList": "Overdue Call List",
+  "menu.customer.service.management": "Customer Service Manage",
+  "menu.customer.service.management.feedback": "Customer Service Manage",
   "menu.statistics": "Statistics",
   "menu.repaymentList": "Repayment List",
   "menu.channelManage": "Channel Mgmt",

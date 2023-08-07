@@ -210,8 +210,6 @@ class OverdueList extends Component {
                 key: 'collectorName',
                 width:'6%',
                 render(text, record) {
-                  console.log("text", text)
-                  console.log("record", record)
                   return (
                     <div>
                       <span onClick={() => _this.collectorLookDetail(record)}><Icon type={'file'} /></span>
@@ -302,16 +300,17 @@ class OverdueList extends Component {
 
     //搜索
     handleSearch = (obj) => {
-        const {setSearchParams, getTableData} = this.props;
-        setSearchParams(obj);
+        const {setSearchParams, getTableData, searchParams} = this.props;
+        setSearchParams({...searchParams, ...obj});
         const params = this.convertParams(obj);
-        getTableData({...params, pageNum: 1, pageSize: 10});
+        getTableData({...params, pageNum: searchParams.pageNum, pageSize: searchParams.pageSize});
     }
     //分页
     handlePageChange = (info) => {
         const {pageSize, current} = info;
-        const {getTableData, searchParams} = this.props;
+        const {getTableData, searchParams, setSearchParams} = this.props;
         const params = this.convertParams(searchParams);
+        setSearchParams({...searchParams, pageSize, pageNum: current})
         getTableData({...params, pageSize, pageNum: current});
     }
 

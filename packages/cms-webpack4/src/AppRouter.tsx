@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, HashRouter as Router, Switch } from 'react-router-dom';
 
+import CustomerServiceManageRoutes from './modules/CustomerServiceManage/CustomerServiceManageRoutes';
 import { AfterLoanManageRoutes } from './modules/afterLoanManage/routes';
 import { AppManagePage } from './modules/app/components/pages/AppManagePage';
 import { ChannelTabPage } from './modules/channel/components/pages/ChannelTabPage';
@@ -28,7 +29,7 @@ import { MerchantPage } from './modules/product/components/pages/MerchantPage';
 import { ProductPage } from './modules/product/components/pages/ProductPage';
 import { RiskSettingPage } from './modules/risk/components/pages/RiskSettingPage';
 import IndexPage from './modules/shared/components/pages/IndexPage';
-import { selectSearchParams, setSearchParams, setSelectedRow } from './modules/shared/utils/searchParamsSlice';
+import { selectSearchParams, setSearchParams } from './modules/shared/utils/searchParamsSlice';
 import SmsConfigPage from './modules/sms/components/pages/SmsConfigPage';
 import DailyRiskControlPage from './modules/statistics/components/pages/DailyRiskControlPage';
 import { NewCustomerRiskControlRepaymentRatePage } from './modules/statistics/components/pages/NewCustomerRiskControlRepaymentRatePage';
@@ -59,20 +60,19 @@ const history = createHashHistory({
 });
 
 export const AppRouter = (): JSX.Element => {
-    const { pathname, previousPathname } = useSelector(selectSearchParams);
+    const { pathname, nextPathname } = useSelector(selectSearchParams);
     // eslint-disable-next-line no-empty-pattern
     const {} = useTranslation();
     const dispatch = useDispatch();
     useEffect(() => {
         // Listen for changes to the current location.
-        const unlisten = history.listen((location) => {
-            if (location.pathname.indexOf(pathname) + location.pathname.indexOf(previousPathname) <= -2) {
+        const unListen = history.listen((location) => {
+            if (location.pathname.indexOf(pathname) + location.pathname.indexOf(nextPathname) <= -2) {
                 dispatch(setSearchParams({}));
-                dispatch(setSelectedRow([]));
             }
         });
         return () => {
-            unlisten();
+            unListen();
         };
     });
 
@@ -160,6 +160,9 @@ export const AppRouter = (): JSX.Element => {
 
                 {/*當日催收*/}
                 <TodayLoanManageRoutes />
+
+                {/*客服管理*/}
+                <CustomerServiceManageRoutes />
             </Router>
         </ConfigProvider>
     );
