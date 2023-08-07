@@ -9,6 +9,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import CustomServiceIcon from './CustomServiceIcon'
 import { Horizontal } from '../../components/layouts/Horizontal';
+import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 
 const CustomerServicePage = () => {
     const navigate = useNavigate();
@@ -41,19 +42,24 @@ const CustomerServicePage = () => {
                         </a>
                     </div>
                     <div className='my-5'><Horizontal /></div>
-                    <div className='flex justify-between text-sm '>
-                        <div>
-                            <div className='font-bold text-primary-main grow'>{'Online Customer Service'}</div>
-                            <div>{app?.init?.csServiceTime || ''}</div>
-                        </div>
-                        <div className='self-center'>
-                            <Button text={'Go'} className='w-auto py-1 px-5'
-                                onClick={() => {
-                                    navigate(`/v2/online-customer-service?token=${getToken()}`);
-                                }} />
-                        </div>
-                    </div>
-                    <div className='my-5'><Horizontal /></div>
+                    {indexPage.user.state !== USER_AUTH_STATE.ready &&
+                        indexPage.indexAPI?.customerServiceUrl &&
+                        (<>
+                            <div className='flex justify-between text-sm '>
+                                <div>
+                                    <div className='font-bold text-primary-main grow'>{'Online Customer Service'}</div>
+                                    <div>{app?.init?.csServiceTime || ''}</div>
+                                </div>
+                                <div className='self-center'>
+                                    <Button text={'Go'} className='w-auto py-1 px-5'
+                                        onClick={() => {
+                                            navigate(`/v2/online-customer-service?token=${getToken()}`);
+                                        }} />
+                                </div>
+                            </div>
+                            <div className='my-5'><Horizontal /></div>
+                        </>
+                        )}
                     <div className='flex justify-between text-sm '>
                         <div>
                             <div className='font-bold text-primary-main grow'>{'Feedback'}</div>

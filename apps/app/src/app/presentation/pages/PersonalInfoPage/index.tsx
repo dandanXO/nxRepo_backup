@@ -75,7 +75,7 @@ const PersonalInfoPage = () => {
           <Button
             onClick={onUserClickToVerify}
             className={'w-auto py-1  px-2'}
-            text={<div className="flex flex-row items-center">Verify Now{<FiChevronRight className="ml-1" />}</div>}
+            text={<div className="flex flex-row items-center whitespace-nowrap">Verify Now{<FiChevronRight className="ml-1" />}</div>}
           />
         </div>
       )}
