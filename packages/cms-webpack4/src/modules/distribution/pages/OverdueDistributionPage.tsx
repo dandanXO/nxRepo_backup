@@ -25,7 +25,7 @@ type StageData = {
     [stage: string]: Omit<DistributionSummary, 'stage'>;
 };
 
-export const OverdueDistributionPage = (): JSX.Element => {
+const OverdueDistributionPage = (): JSX.Element => {
     const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetOverdueSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData>({});
 
@@ -454,3 +454,5 @@ export const OverdueDistributionPage = (): JSX.Element => {
         </AdminPage>
     );
 };
+
+export default OverdueDistributionPage;

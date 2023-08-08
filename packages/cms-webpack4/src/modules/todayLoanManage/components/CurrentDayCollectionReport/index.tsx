@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import AdminPage from '../../../shared/components/common/AdminPage';
 import ReportTable from './ReportTable';
 
-export const CurrentDayCollectionReport = (): JSX.Element => {
+const CurrentDayCollectionReport = (): JSX.Element => {
     const { t } = useTranslation();
 
     return (
@@ -27,3 +27,5 @@ export const CurrentDayCollectionReport = (): JSX.Element => {
         </AdminPage>
     );
 };
+
+export default CurrentDayCollectionReport;

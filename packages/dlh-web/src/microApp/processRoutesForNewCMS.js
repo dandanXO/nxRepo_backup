@@ -6,7 +6,7 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // APP 配置
           if (level2MenuItem.actionUrl === '/appSettingManage') {
-            level2MenuItem.actionUrl = '/cms/app-manage';
+            level2MenuItem.actionUrl = '/cms/appSetting/appSettingManage';
           }
         });
     }
@@ -16,23 +16,23 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // 用戶管理
           if (level2MenuItem.actionUrl === '/userInfoManage') {
-            level2MenuItem.actionUrl = '/cms/user';
+            level2MenuItem.actionUrl = '/cms/userManage/userInfoManage';
           }
           // 用戶終審
           if (level2MenuItem.actionUrl === '/userLastCheck') {
-            level2MenuItem.actionUrl = '/cms/user-review';
+            level2MenuItem.actionUrl = '/cms/userManage/userLastCheck';
           }
           // 用戶審核紀錄
           if (level2MenuItem.actionUrl === '/userCheckRecord') {
-            level2MenuItem.actionUrl = '/cms/user-review-record';
+            level2MenuItem.actionUrl = '/cms/userManage/userCheckRecord';
           }
           // 黑名單
           if (level2MenuItem.actionUrl === '/blackListManage') {
-            level2MenuItem.actionUrl = '/cms/blacklist';
+            level2MenuItem.actionUrl = '/cms/userManage/blackListManage';
           }
           // 白名單
           if (level2MenuItem.actionUrl === '/whiteListManage') {
-            level2MenuItem.actionUrl = '/cms/whitelist';
+            level2MenuItem.actionUrl = '/cms/userManage/whiteListManage';
           }
         });
     }
@@ -41,7 +41,7 @@ export const processRoutesForNewCMS = (data) => {
       menuItem.children &&
         menuItem.children.map((level2MenuItem) => {
           if (level2MenuItem.actionUrl === '/channelList') {
-            level2MenuItem.actionUrl = '/cms/channel';
+            level2MenuItem.actionUrl = '/cms/channelManage/channelList';
           }
         });
     }
@@ -50,9 +50,11 @@ export const processRoutesForNewCMS = (data) => {
       menuItem.children &&
         menuItem.children.map((level2MenuItem) => {
           if (level2MenuItem.actionUrl === '/merchant-manage') {
-            level2MenuItem.actionUrl = '/cms/merchant';
+            // 商戶管理
+            level2MenuItem.actionUrl = '/cms/platform-manage/merchant-manage';
           } else if (level2MenuItem.actionUrl === '/product-manage') {
-            level2MenuItem.actionUrl = '/cms/product';
+            // 產品管理
+            level2MenuItem.actionUrl = '/cms/platform-manage/product-manage';
           }
         });
     }
@@ -60,7 +62,8 @@ export const processRoutesForNewCMS = (data) => {
       menuItem.children &&
         menuItem.children.map((level2MenuItem) => {
           if (level2MenuItem.actionUrl === '/risk-model-setting') {
-            level2MenuItem.actionUrl = '/cms/risk-setting';
+            level2MenuItem.actionUrl =
+              '/cms/riskConfigManage/risk-model-setting';
           }
         });
     }
@@ -70,20 +73,21 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // 訂單列表
           if (level2MenuItem.actionUrl === '/orderList') {
-            level2MenuItem.actionUrl = '/cms/order';
+            level2MenuItem.actionUrl = '/cms/orderManagement/orderList';
           }
-          // 訂單終審
+          // 订单复审
           if (level2MenuItem.actionUrl === '/businessRepeatCheck') {
-            level2MenuItem.actionUrl = '/cms/order-review';
+            level2MenuItem.actionUrl =
+              '/cms/orderManagement/businessRepeatCheck';
           }
           // 訂單終審
           if (level2MenuItem.actionUrl === '/businessLastCheck') {
-            level2MenuItem.actionUrl = '/cms/order-final-review';
+            level2MenuItem.actionUrl = '/cms/orderManagement/businessLastCheck';
           }
 
-          // 訂單終審紀錄
+          // 订单审核纪录
           if (level2MenuItem.actionUrl === '/checkRecord') {
-            level2MenuItem.actionUrl = '/cms/order-review-record';
+            level2MenuItem.actionUrl = '/cms/orderManagement/checkRecord';
           }
         });
     }
@@ -92,7 +96,7 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // 廣告管理
           if (level2MenuItem.actionUrl === '/activity-setting') {
-            level2MenuItem.actionUrl = '/cms/activity-ads';
+            level2MenuItem.actionUrl = '/cms/h5Manage/activity-setting';
           }
         });
     }
@@ -103,7 +107,7 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // 还款补单
           if (level2MenuItem.actionUrl === '/pay-receipt') {
-            level2MenuItem.actionUrl = '/cms/pay-receipt';
+            level2MenuItem.actionUrl = '/cms/paymentManage/pay-receipt';
           }
         });
     }
@@ -114,7 +118,7 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // 登入帐号管理
           if (level2MenuItem.actionUrl === '/loginAccountMange') {
-            level2MenuItem.actionUrl = '/cms/loginAccountMange';
+            level2MenuItem.actionUrl = '/cms/systemManage/loginAccountMange';
           }
         });
     }
@@ -123,19 +127,24 @@ export const processRoutesForNewCMS = (data) => {
     if (menuItem.actionUrl === '/businessStatistics') {
       menuItem.children &&
         menuItem.children.map((level2MenuItem) => {
-          // 每日风控标签统计
-          if (level2MenuItem.actionUrl === '/riskControlStatistic') {
-            level2MenuItem.actionUrl = '/cms/riskControlStatistic';
+          // 新客日统计转化率
+          if (level2MenuItem.actionUrl === '/Registrations') {
+            level2MenuItem.actionUrl = '/cms/businessStatistics/Registrations';
+          }
+          // 用户复借统计
+          if (level2MenuItem.actionUrl === '/reloanStatistics') {
+            level2MenuItem.actionUrl =
+              '/cms/businessStatistics/reloanStatistics';
           }
           // 新客风控回款率
           if (level2MenuItem.actionUrl === '/newCustomerRiskPaymentRate') {
-            level2MenuItem.actionUrl = '/cms/new-customer-repayment-rate';
+            level2MenuItem.actionUrl =
+              '/cms/businessStatistics/newCustomerRiskPaymentRate';
           }
-          if (level2MenuItem.actionUrl === '/Registrations') {
-            level2MenuItem.actionUrl = '/cms/Registrations';
-          }
-          if (level2MenuItem.actionUrl === '/reloanStatistics') {
-            level2MenuItem.actionUrl = '/cms/reloanStatistics';
+          // 每日用户风控标签统计
+          if (level2MenuItem.actionUrl === '/riskControlStatistic') {
+            level2MenuItem.actionUrl =
+              '/cms/businessStatistics/riskControlStatistic';
           }
         });
     }
@@ -146,7 +155,8 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // 当日订单分配
           if (level2MenuItem.actionUrl === '/todayOrderDistribute') {
-            level2MenuItem.actionUrl = '/cms/today-distribution';
+            level2MenuItem.actionUrl =
+              '/cms/todayLoanManage/todayOrderDistribute';
           }
           // 当日电催列表
           if (level2MenuItem.actionUrl === '/todayPhoneUrgeList') {
@@ -155,8 +165,7 @@ export const processRoutesForNewCMS = (data) => {
           }
           // 当日电催明細
           if (level2MenuItem.actionUrl === '/collect-detail') {
-            level2MenuItem.actionUrl =
-              '/cms/todayLoanManage/currentDayCollectionReport';
+            level2MenuItem.actionUrl = '/cms/todayLoanManage/collect-detail';
           }
         });
     }
@@ -167,7 +176,8 @@ export const processRoutesForNewCMS = (data) => {
         menuItem.children.map((level2MenuItem) => {
           // 逾期订单分配
           if (level2MenuItem.actionUrl === '/overdueOrderDistribute') {
-            level2MenuItem.actionUrl = '/cms/overdue-distribution';
+            level2MenuItem.actionUrl =
+              '/cms/afterLoanManage/overdueOrderDistribute';
           }
           // 逾期电催列表
           if (level2MenuItem.actionUrl === '/phoneUrgeList') {
@@ -175,8 +185,7 @@ export const processRoutesForNewCMS = (data) => {
           }
           // 逾期电催明細
           if (level2MenuItem.actionUrl === '/collect-detail') {
-            level2MenuItem.actionUrl =
-              '/cms/afterLoanManage/overDueCollectionReport';
+            level2MenuItem.actionUrl = '/cms/afterLoanManage/collect-detail';
           }
         });
     }

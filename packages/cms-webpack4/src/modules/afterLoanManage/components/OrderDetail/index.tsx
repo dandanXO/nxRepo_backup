@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { itemRender } from '../../../shared/components/common/itemRender';
 import { OrderDetailContent } from './OrderDetailContent';
 
-export const OrderDetail = (): JSX.Element => {
+const OrderDetail = (): JSX.Element => {
     const { t } = useTranslation();
     const urlParams = useParams<{ userId: string; collectId: string }>();
 
@@ -31,3 +31,5 @@ export const OrderDetail = (): JSX.Element => {
         </PageContainer>
     );
 };
+
+export default OrderDetail;

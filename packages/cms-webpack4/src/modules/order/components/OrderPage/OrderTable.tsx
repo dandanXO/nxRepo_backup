@@ -77,8 +77,8 @@ const OrderTable = (): JSX.Element => {
     }, [currentData]);
 
     const handleToUserDetail = (userId, orderId, orderNo) => {
-        history.push(`order-detail/${userId}/${orderId}/${orderNo}`);
-        savePath('/order', '/order-detail');
+        history.push(`/orderManagement/orderList/detail/${userId}/${orderId}/${orderNo}`);
+        savePath('/orderManagement/orderList', '/orderManagement/orderList/detail');
     };
 
     const pageOnChange = (current, pageSize) => {

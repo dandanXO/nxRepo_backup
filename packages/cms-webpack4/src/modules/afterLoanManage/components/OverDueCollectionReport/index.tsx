@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import AdminPage from '../../../shared/components/common/AdminPage';
 import ReportTable from './ReportTable';
 
-export const OverDueCollectionReport = (): JSX.Element => {
+const OverDueCollectionReport = (): JSX.Element => {
     const { t } = useTranslation();
 
     return (
@@ -27,3 +27,5 @@ export const OverDueCollectionReport = (): JSX.Element => {
         </AdminPage>
     );
 };
+
+export default OverDueCollectionReport;

@@ -89,8 +89,8 @@ const OrderReviewTable = (): JSX.Element => {
     }, [currentData]);
 
     const handleToUserDetail = (userId, orderId, orderNo) => {
-        history.push(`order-review-detail/${userId}/${orderId}/${orderNo}`);
-        savePath('/order-review', '/order-review-detail');
+        history.push(`/orderManagement/businessRepeatCheck/review/${userId}/${orderId}/${orderNo}`);
+        savePath('/orderManagement/businessRepeatCheck', '/orderManagement/businessRepeatCheck/review/');
     };
 
     const pageOnChange = (current, pageSize) => {

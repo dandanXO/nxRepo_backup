@@ -39,7 +39,7 @@ const OrderDetailPage = (): JSX.Element => {
                         routes: [
                             { path: '/', breadcrumbName: '首页' },
                             { path: null, breadcrumbName: '订单管理' },
-                            { path: '/order', breadcrumbName: '订单列表' },
+                            { path: '/orderManagement/orderList', breadcrumbName: '订单列表' },
                             { path: null, breadcrumbName: '订单详情' },
                         ],
                     },

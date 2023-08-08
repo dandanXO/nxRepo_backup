@@ -20,11 +20,7 @@ class LayoutMenu extends Component {
         let truePath = '/' + pathArr[1];
 
         if(truePath === "/cms") {
-            truePath = (['afterLoanManage', 'todayPhoneUrgeList'].includes(pathArr[2]))?
-              // 雙層路由的path
-              ('/' + pathArr[1] + '/' + pathArr[2] + (pathArr[3] ? ('/' + pathArr[3]) : '')):
-              // 單層路由的path
-              ('/' + pathArr[1] +'/' + pathArr[2])
+            truePath = '/' + pathArr[1] + '/' + pathArr[2] + (pathArr[3] ? ('/' + pathArr[3]) : '');
         }
 
         this.state = {
@@ -137,11 +133,7 @@ class LayoutMenu extends Component {
             }
 
             if(truePath === "/cms") {
-                truePath = (['afterLoanManage', 'todayPhoneUrgeList'].includes(pathArr[2]))?
-                  // 雙層路由的path
-                  ('/' + pathArr[1] + '/' + pathArr[2] + (pathArr[3] ? ('/' + pathArr[3]) : '')):
-                  // 單層路由的path
-                  ('/' + pathArr[1] +'/' + pathArr[2])
+                truePath = '/' + pathArr[1] + '/' + pathArr[2] + (pathArr[3] ? ('/' + pathArr[3]) : '');
             }
 
             this.setState({

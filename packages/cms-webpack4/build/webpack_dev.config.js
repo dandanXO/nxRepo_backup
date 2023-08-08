@@ -2,19 +2,19 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const {commonPlugins, commonRules} = require("./webpack_common.config");
-const {name} = require("../package.json");
+const { commonPlugins, commonRules } = require('./webpack_common.config');
+const { name } = require('../package.json');
 module.exports = {
     entry: './src/main.tsx',
     output: {
         // path: path.resolve(__dirname, '../', "dist"),
-        path: path.resolve(__dirname, '../../dlh-web', "dist/child/entry-cms-react/"),
+        path: path.resolve(__dirname, '../../dlh-web', 'dist/child/entry-cms-react/'),
 
-        filename: "bundle.[hash:8].js",
+        filename: '[name].bundle.js',
 
         // NOTICE: MicroApp
         // publicPath: "/child/entry-cms-react/",
-        publicPath: "/",
+        publicPath: 'http://localhost:9005/',
         // chunkLoadingGlobal: `webpackJsonp_${name}`,
         jsonpFunction: `webpackJsonp_${name}`,
         globalObject: 'window',
@@ -23,16 +23,16 @@ module.exports = {
         umdNamedDefine: true,
     },
     resolve: {
-        extensions: [".ts", ".tsx", '.js', '.jsx', '.css', '.less', '.scss', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.less', '.scss', '.json'],
         alias: {
-            '@/components': path.resolve(__dirname, "src/components"),
-            '@/views': path.resolve(__dirname, "src/views"),
-            '@/assets': path.resolve(__dirname, "src/assets"),
-            '@/style': path.resolve(__dirname, "src/style"),
-            '@/service': path.resolve(__dirname, "src/service"),
-            '@/router': path.resolve(__dirname, "src/router"),
-            '@/store': path.resolve(__dirname, "src/store"),
-        }
+            '@/components': path.resolve(__dirname, 'src/components'),
+            '@/views': path.resolve(__dirname, 'src/views'),
+            '@/assets': path.resolve(__dirname, 'src/assets'),
+            '@/style': path.resolve(__dirname, 'src/style'),
+            '@/service': path.resolve(__dirname, 'src/service'),
+            '@/router': path.resolve(__dirname, 'src/router'),
+            '@/store': path.resolve(__dirname, 'src/store'),
+        },
     },
     plugins: [
         new ESLintPlugin({
@@ -45,16 +45,15 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: "./public/index.html"
+            template: './public/index.html',
         }),
-        ...commonPlugins
-
+        ...commonPlugins,
     ],
     devServer: {
         // [Webpack5中devServer配置contentBase报错的问题](https://blog.csdn.net/qq_43048301/article/details/121554459)
         // contentBase: path.join(__dirname, './dist'),
         // contentBase: path.resolve(__dirname, '../', "dist/child/entry-cms-react/"),
-        contentBase: path.resolve(__dirname, '../../dlh-web', "dist/child/entry-cms-react/"),
+        contentBase: path.resolve(__dirname, '../../dlh-web', 'dist/child/entry-cms-react/'),
 
         // static: {
         //     directory: path.join(__dirname, './dist'),
@@ -68,8 +67,8 @@ module.exports = {
         port: 9005,
         proxy: {
             //设置代理
-            "/hs": {
-                target: "https://app.india-api-dev.com",
+            '/hs': {
+                target: 'https://app.india-api-dev.com',
                 // target: "https://app.pk-api-dev.com",
                 secure: false, // 協議是https的時候必須要寫
                 changeOrigin: true,
@@ -78,8 +77,6 @@ module.exports = {
     },
     devtool: 'eval-source-map',
     module: {
-        rules: [
-            ...commonRules
-        ]
-    }
-}
+        rules: [...commonRules],
+    },
+};

@@ -25,7 +25,7 @@ export type StageData = {
     [stage: string]: Omit<DistributionSummary, 'stage'>;
 };
 
-export const TodayDistributionPage = (): JSX.Element => {
+const TodayDistributionPage = (): JSX.Element => {
     const [triggerFetchSummary, { data: summaryResponseData }] = useLazyGetSummaryQuery();
     const [summaryData, setSummaryData] = useState<StageData | null>({
         [Stage.T_1]: {
@@ -376,3 +376,5 @@ export const TodayDistributionPage = (): JSX.Element => {
         </AdminPage>
     );
 };
+
+export default TodayDistributionPage;

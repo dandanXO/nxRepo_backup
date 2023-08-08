@@ -1206,37 +1206,37 @@ const getMenuMapPageDic = () => {
   })
   // console.log("menuMapPageDic", menuMapPageDic);
   const replaceMap = {}
-  replaceMap["/appSettingManage"] = "/cms/app-manage";
-  replaceMap["/userInfoManage"] = "/cms/user";
-  replaceMap["/userLastCheck"] = "/cms/user-review";
-  replaceMap["/userCheckRecord"] = "/cms/user-review-record";
-  replaceMap["/blackListManage"] = "/cms/blacklist";
-  replaceMap["/whiteListManage"] = "/cms/whitelist";
+  replaceMap["/appSettingManage"] = "/cms/appSetting/appSettingManage";
+  replaceMap["/userInfoManage"] = "/cms/userManage/userInfoManage";
+  replaceMap["/userLastCheck"] = "/cms/userManage/userLastCheck";
+  replaceMap["/userCheckRecord"] = "/cms/userManage/userCheckRecord";
+  replaceMap["/blackListManage"] = "/cms/userManage/blackListManage";
+  replaceMap["/whiteListManage"] = "/cms/userManage/whiteListManage";
 
-  replaceMap["/channelList"] = "/cms/channel";
-  replaceMap["/merchant-manage"] = "/cms/merchant";
-  replaceMap["/product-manage"] = "/cms/product";
+  replaceMap["/channelList"] = "/cms/channelManage/channelList";
+  replaceMap["/merchant-manage"] = "/cms/platform-manage/merchant-manage";
+  replaceMap["/product-manage"] = "/cms/platform-manage/product-manage";
 
-  replaceMap["/risk-model-setting"] = "/cms/risk-setting";
+  replaceMap["/risk-model-setting"] = "/cms/riskConfigManage/risk-model-setting";
 
-  replaceMap["/orderList"] = "/cms/order";
-  replaceMap["/businessRepeatCheck"] = "/cms/order-review";
-  replaceMap["/businessLastCheck"] = "/cms/order-final-review";
-  replaceMap["/checkRecord"] = "/cms/order-review-record";
+  replaceMap["/orderList"] = "/cms/orderManagement/orderList";
+  replaceMap["/businessRepeatCheck"] = "/cms/orderManagement/businessRepeatCheck";
+  replaceMap["/businessLastCheck"] = "/cms/orderManagement/businessLastCheck";
+  replaceMap["/checkRecord"] = "/cms/orderManagement/checkRecord";
 
-  replaceMap["/activity-setting"] = "/cms/activity-ads";
-  replaceMap["/pay-receipt"] = "/cms/pay-receipt";
-  replaceMap["/loginAccountMange"] = "/cms/loginAccountMange";
+  replaceMap["/activity-setting"] = "/cms/h5Manage/activity-setting";
+  replaceMap["/pay-receipt"] = "/cms/paymentManage/pay-receipt";
+  replaceMap["/loginAccountMange"] = "/cms/systemManage/loginAccountMange";
 
-  replaceMap["/riskControlStatistic"] = "/cms/riskControlStatistic";
-  replaceMap["/newCustomerRiskPaymentRate"] = "/cms/new-customer-repayment-rate";
-  replaceMap["/Registrations"] = "/cms/Registrations";
-  replaceMap["/reloanStatistics"] = "/cms/reloanStatistics";
+  replaceMap["/riskControlStatistic"] = "/cms/businessStatistics/riskControlStatistic";
+  replaceMap["/newCustomerRiskPaymentRate"] = "/cms/businessStatistics/newCustomerRiskPaymentRate";
+  replaceMap["/Registrations"] = "/cms/businessStatistics/Registrations";
+  replaceMap["/reloanStatistics"] = "/cms/businessStatistics/reloanStatistics";
 
-  replaceMap["/todayOrderDistribute"] = "/cms/today-distribution";
+  replaceMap["/todayOrderDistribute"] = "/cms/todayLoanManage/todayOrderDistribute";
   replaceMap["/todayPhoneUrgeList"] = "/cms/todayLoanManage/todayPhoneUrgeList";
 
-  replaceMap["/overdueOrderDistribute"] = "/cms/overdue-distribution";
+  replaceMap["/overdueOrderDistribute"] = "/cms/afterLoanManage/overdueOrderDistribute";
   replaceMap["/phoneUrgeList"] = "/cms/afterLoanManage/phoneUrgeList"
 
   Object.keys(menuMapPageDic).map(key => {
@@ -1245,7 +1245,6 @@ const getMenuMapPageDic = () => {
       delete menuMapPageDic[key];
     }
   })
-  // console.log("menuMapPageDic", menuMapPageDic);
   return menuMapPageDic;
 }
 const menuMapPageDic = getMenuMapPageDic();

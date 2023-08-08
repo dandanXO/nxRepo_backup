@@ -63,11 +63,11 @@ export function IndexPage(): JSX.Element {
                     <a> App Manage</a>
                 </Link>
             </div>
-            <div>
-                <Link to="/config-manage">
-                    <a> Config Manage</a>
-                </Link>
-            </div>
+            {/*<div>*/}
+            {/*    <Link to="/config-manage">*/}
+            {/*        <a> Config Manage</a>*/}
+            {/*    </Link>*/}
+            {/*</div>*/}
             <div>
                 <Link to="/order">
                     <a> Order</a>
@@ -108,11 +108,11 @@ export function IndexPage(): JSX.Element {
                     <a>activity-ads</a>
                 </Link>
             </div>
-            <div>
-                <Link to="/sms-config">
-                    <a>SMS Config</a>
-                </Link>
-            </div>
+            {/*<div>*/}
+            {/*    <Link to="/sms-config">*/}
+            {/*        <a>SMS Config</a>*/}
+            {/*    </Link>*/}
+            {/*</div>*/}
             <div>
                 <Link to="/pay-receipt">
                     <a>pay receipt</a>

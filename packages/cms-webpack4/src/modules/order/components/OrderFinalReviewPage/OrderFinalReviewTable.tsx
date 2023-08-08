@@ -89,8 +89,8 @@ const OrderFinalReviewTable = (): JSX.Element => {
     }, [currentData]);
 
     const handleToUserDetail = (userId, orderId, orderNo) => {
-        history.push(`order-final-review-detail/${userId}/${orderId}/${orderNo}`);
-        savePath('/order-final-review', '/order-final-review-detail');
+        history.push(`/orderManagement/businessLastCheck/review/${userId}/${orderId}/${orderNo}`);
+        savePath('/orderManagement/businessLastCheck', '/orderManagement/businessLastCheck/review');
     };
 
     const pageOnChange = (current, pageSize) => {

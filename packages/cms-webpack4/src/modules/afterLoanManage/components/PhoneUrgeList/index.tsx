@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import AdminPage from '../../../shared/components/common/AdminPage';
 import { OverDuePhoneUrgeListTable } from './OverDuePhoneUrgeListTable';
 
-export const PhoneUrgeList = (): JSX.Element => {
+const PhoneUrgeList = (): JSX.Element => {
     const { t } = useTranslation();
     return (
         <AdminPage
@@ -26,3 +26,5 @@ export const PhoneUrgeList = (): JSX.Element => {
         </AdminPage>
     );
 };
+
+export default PhoneUrgeList;

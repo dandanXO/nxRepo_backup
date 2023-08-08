@@ -1,7 +1,7 @@
 import { AdTemplateCard } from "../index";
 import { AdContainer } from "./AdContainer";
 import styled from "styled-components";
-import { onClickToAction } from "../../../../../../../../packages/cms-webpack4/src/modules/diversion/ads/import/ActivityAdListPage/components/AdClick";
+import { onClickToAction } from "../../../../../../../../packages/cms-webpack4/src/modules/diversion/components/ActivityAdsPage/import/ActivityAdListPage/components/AdClick";
 
 const makeStyleEllipsisOverflowText = () => {
     return `
