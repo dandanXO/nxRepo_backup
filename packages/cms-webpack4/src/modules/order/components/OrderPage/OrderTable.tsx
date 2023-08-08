@@ -47,7 +47,7 @@ const OrderTable = (): JSX.Element => {
 
     // state
     const [orderList, setOrderList] = useState<GetOrderListProps>({ records: [] });
-    const { searchList, setSearchList, handleToDetailPage, searchParams } = usePageSearchParams({
+    const { searchList, setSearchList, savePath } = usePageSearchParams({
         searchListParams: initSearchList,
     });
 
@@ -78,7 +78,7 @@ const OrderTable = (): JSX.Element => {
 
     const handleToUserDetail = (userId, orderId, orderNo) => {
         history.push(`order-detail/${userId}/${orderId}/${orderNo}`);
-        handleToDetailPage('/order-detail', '/order');
+        savePath('/order', '/order-detail');
     };
 
     const pageOnChange = (current, pageSize) => {
@@ -135,21 +135,21 @@ const OrderTable = (): JSX.Element => {
             title: '订单编号',
             dataIndex: 'orderNo',
             key: 'orderNo',
-            initialValue: searchParams.orderNo || '',
+            initialValue: searchList.orderNo,
             render: (text) => <CopyText text={text} />,
         },
         {
             title: '手机号',
             dataIndex: 'phoneNo',
             key: 'phoneNo',
-            initialValue: searchParams.userPhone || '',
+            initialValue: searchList.userPhone,
             render: (text) => <CopyText text={text} />,
         },
         {
             title: '姓名',
             dataIndex: 'userName',
             key: 'userName',
-            initialValue: searchParams.userName || '',
+            initialValue: searchList.userName,
             render: (text) => <CopyText text={text} />,
         },
         {
@@ -157,7 +157,7 @@ const OrderTable = (): JSX.Element => {
             dataIndex: 'isOldUser',
             valueType: 'select',
             key: 'isOldUser',
-            initialValue: searchParams.isOldUser || '',
+            initialValue: searchList.isOldUser,
             width: '50px',
             align: 'center',
             valueEnum: {
@@ -170,14 +170,14 @@ const OrderTable = (): JSX.Element => {
             title: 'APP名称',
             dataIndex: 'appName',
             key: 'appName',
-            initialValue: searchParams.appName || '',
+            initialValue: searchList.appName,
             render: (text) => <CopyText text={text} />,
         },
         {
             title: '产品名称',
             dataIndex: 'productName',
             key: 'productName',
-            initialValue: searchParams.productName || '',
+            initialValue: searchList.productName,
             render: (text) => <CopyText text={text} />,
         },
         {
@@ -185,7 +185,7 @@ const OrderTable = (): JSX.Element => {
             dataIndex: 'status',
             valueType: 'select',
             key: 'status',
-            initialValue: searchParams.status || '',
+            initialValue: searchList.status,
             valueEnum: statusEnum,
             render: (text, { status }) => {
                 const tagStatus = statusEnum[status] || { color: '', text: '' };
@@ -206,7 +206,7 @@ const OrderTable = (): JSX.Element => {
             dataIndex: 'deviceMoney',
             key: 'deviceMoney',
             hideInSearch: true,
-            initialValue: searchParams.deviceMoney || '',
+            initialValue: searchList.deviceMoney || '',
             align: 'right',
         },
         {
@@ -214,7 +214,7 @@ const OrderTable = (): JSX.Element => {
             dataIndex: 'lendMoney',
             key: 'lendMoney',
             hideInSearch: true,
-            initialValue: searchParams.lendMoney || '',
+            initialValue: searchList.lendMoney || '',
             align: 'right',
         },
         {
@@ -222,7 +222,7 @@ const OrderTable = (): JSX.Element => {
             dataIndex: 'lendDays',
             key: 'lendDays',
             hideInSearch: true,
-            initialValue: searchParams.lendDays || '',
+            initialValue: searchList.lendDays || '',
             align: 'center',
             width: '80px',
         },
@@ -242,9 +242,9 @@ const OrderTable = (): JSX.Element => {
             fieldProps: { placeholder: ['开始时间', '结束时间'] },
             hideInTable: true,
             initialValue:
-                searchParams.applyTimeStart === undefined || searchParams.applyTimeStart === ''
+                searchList.applyTimeStart === undefined || searchList.applyTimeStart === ''
                     ? ''
-                    : [moment(searchParams.applyTimeStart), moment(searchParams.applyTimeEnd)],
+                    : [moment(searchList.applyTimeStart), moment(searchList.applyTimeEnd)],
         },
         {
             title: '放款时间',
@@ -262,9 +262,9 @@ const OrderTable = (): JSX.Element => {
             fieldProps: { placeholder: ['开始时间', '结束时间'] },
             hideInTable: true,
             initialValue:
-                searchParams.loanTimeStart === undefined || searchParams.loanTimeStart === ''
+                searchList.loanTimeStart === undefined || searchList.loanTimeStart === ''
                     ? ''
-                    : [moment(searchParams.loanTimeStart), moment(searchParams.loanTimeEnd)],
+                    : [moment(searchList.loanTimeStart), moment(searchList.loanTimeEnd)],
         },
         {
             title: '到期日',
@@ -283,9 +283,9 @@ const OrderTable = (): JSX.Element => {
             fieldProps: { placeholder: ['开始时间', '结束时间'] },
             hideInTable: true,
             initialValue:
-                searchParams.expireTimeStart === undefined || searchParams.expireTimeStart === ''
+                searchList.expireTimeStart === undefined || searchList.expireTimeStart === ''
                     ? ''
-                    : [moment(searchParams.expireTimeStart), moment(searchParams.expireTimeEnd)],
+                    : [moment(searchList.expireTimeStart), moment(searchList.expireTimeEnd)],
         },
 
         {
@@ -293,7 +293,7 @@ const OrderTable = (): JSX.Element => {
             dataIndex: 'isLeng',
             valueType: 'select',
             key: 'isLeng',
-            initialValue: searchParams.isLeng || '',
+            initialValue: searchList.isLeng,
             width: '50px',
             align: 'center',
             valueEnum: {
@@ -310,7 +310,7 @@ const OrderTable = (): JSX.Element => {
             key: 'merchantName',
             valueEnum: merchantListEnum,
             valueType: 'select',
-            initialValue: searchParams.merchantName || '',
+            initialValue: searchList.merchantName,
             width: ProColumnsOperationConstant.width['2'],
         });
         columns.splice(
@@ -322,7 +322,7 @@ const OrderTable = (): JSX.Element => {
                 valueType: 'select',
                 key: 'channelId',
                 valueEnum: channelListEnum,
-                initialValue: searchParams.channelId || '',
+                initialValue: searchList.channelId,
                 hideInTable: true,
             },
             {
@@ -337,7 +337,7 @@ const OrderTable = (): JSX.Element => {
             title: '风控应用',
             dataIndex: 'riskModelName',
             key: 'riskModelName',
-            initialValue: searchParams.rcProvider || '',
+            initialValue: searchList.rcProvider,
             valueEnum: providerListEnum,
         });
     }

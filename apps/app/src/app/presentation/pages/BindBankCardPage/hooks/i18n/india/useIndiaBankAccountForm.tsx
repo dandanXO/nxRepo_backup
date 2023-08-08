@@ -26,7 +26,7 @@ export const useIndiaBankAccountForm = () => {
 
   // validateIFSC
   const validateIFSC = useCallback(() => {
-      const ifscRex = new RegExp("^[A-Z]{4}0[A-Za-z0-9]{6}$");
+      const ifscRex = new RegExp("^[A-Za-z]{4}0[A-Za-z0-9]{6}$");
       const invalidErrorMessage = t('The IFSC code must consist of 11 characters. Please ensure that you have entered the correct format.');
       const ifscScheme = z
           .string()

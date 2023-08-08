@@ -54,12 +54,14 @@ const OrderFinalReviewTable = (): JSX.Element => {
 
     // state
     const [orderReviewList, setOrderReviewList] = useState<GetOrderReviewListProps>({ records: [] });
+    const [selectedList, setSelectedList] = useState([]);
     const [modal, contextHolder] = Modal.useModal();
     const [errorModal, errorContextHolder] = Modal.useModal();
     const [buttonDisabled, setButtonDisbaled] = useState(true);
     const [randomInputValue, setRandomInputValue] = useState<number | string>('');
-    const { searchList, setSearchList, handleToDetailPage, searchParams, selectedList, setSelectedList } =
-        usePageSearchParams({ searchListParams: initSearchList });
+    const { searchList, setSearchList, savePath } = usePageSearchParams({
+        searchListParams: initSearchList,
+    });
     // redux
     const history = useHistory();
 
@@ -88,7 +90,7 @@ const OrderFinalReviewTable = (): JSX.Element => {
 
     const handleToUserDetail = (userId, orderId, orderNo) => {
         history.push(`order-final-review-detail/${userId}/${orderId}/${orderNo}`);
-        handleToDetailPage('/order-final-review-detail', '/order-final-review', selectedList);
+        savePath('/order-final-review', '/order-final-review-detail');
     };
 
     const pageOnChange = (current, pageSize) => {
@@ -160,21 +162,21 @@ const OrderFinalReviewTable = (): JSX.Element => {
             title: '订单编号',
             dataIndex: 'orderNo',
             key: 'orderNo',
-            initialValue: searchParams.orderNo || '',
+            initialValue: searchList.orderNo,
             render: (text) => <CopyText text={text} />,
         },
         {
             title: '手机号',
             dataIndex: 'phoneNo',
             key: 'phoneNo',
-            initialValue: searchParams.phoneNo || '',
+            initialValue: searchList.phoneNo,
             render: (text) => <CopyText text={text} />,
         },
         {
             title: '姓名',
             dataIndex: 'userName',
             key: 'userName',
-            initialValue: searchParams.userName || '',
+            initialValue: searchList.userName,
             render: (text) => <CopyText text={text} />,
         },
         {
@@ -182,7 +184,7 @@ const OrderFinalReviewTable = (): JSX.Element => {
             dataIndex: 'oldMember',
             valueType: 'select',
             key: 'oldMember',
-            initialValue: searchParams.oldMember || '',
+            initialValue: searchList.oldMember,
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
@@ -193,14 +195,14 @@ const OrderFinalReviewTable = (): JSX.Element => {
             title: 'APP名称',
             dataIndex: 'appName',
             key: 'appName',
-            initialValue: searchParams.appName || '',
+            initialValue: searchList.appName,
             render: (text) => <CopyText text={text} />,
         },
         {
             title: '产品名称',
             dataIndex: 'productName',
             key: 'productName',
-            initialValue: searchParams.productName || '',
+            initialValue: searchList.productName,
             render: (text) => <CopyText text={text} />,
         },
         {
@@ -209,7 +211,7 @@ const OrderFinalReviewTable = (): JSX.Element => {
             valueType: 'select',
             key: 'riskRank',
             valueEnum: ConstantRiskRankEnum,
-            initialValue: searchParams.riskRank || '',
+            initialValue: searchList.riskRank,
         },
         {
             title: '空放订单',
@@ -232,9 +234,9 @@ const OrderFinalReviewTable = (): JSX.Element => {
             fieldProps: { placeholder: ['开始时间', '结束时间'] },
             hideInTable: true,
             initialValue:
-                searchParams.searchList === undefined || searchParams.searchList.addStartTime === ''
+                searchList.searchList === undefined || searchList.searchList.addStartTime === ''
                     ? ''
-                    : [moment(searchParams.searchList.addStartTime), moment(searchParams.searchList.addEndTime)],
+                    : [moment(searchList.searchList.addStartTime), moment(searchList.searchList.addEndTime)],
         },
     ];
 
@@ -256,7 +258,7 @@ const OrderFinalReviewTable = (): JSX.Element => {
                 hideInTable: true,
                 valueEnum: merchantListEnum,
                 valueType: 'select',
-                initialValue: searchParams.merchantId || '',
+                initialValue: searchList.merchantId,
             },
         );
         columns.splice(6, 0, {
@@ -265,7 +267,7 @@ const OrderFinalReviewTable = (): JSX.Element => {
             valueType: 'select',
             key: 'applyChannel',
             valueEnum: channelListEnum,
-            initialValue: searchParams.applyChannel || '',
+            initialValue: searchList.applyChannel,
         });
         columns.splice(10, 0, {
             title: '风控应用',
@@ -273,7 +275,7 @@ const OrderFinalReviewTable = (): JSX.Element => {
             valueType: 'select',
             key: 'provider',
             valueEnum: providerListEnum,
-            initialValue: searchParams.provider || '',
+            initialValue: searchList.provider,
         });
     }
     return (

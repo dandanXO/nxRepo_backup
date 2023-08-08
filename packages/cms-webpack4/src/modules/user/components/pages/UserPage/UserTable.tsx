@@ -4,7 +4,6 @@ import { Button, Checkbox, Form, InputNumber, Modal, Radio, Select, Space, Tag, 
 import moment from 'moment';
 import queryString from 'query-string';
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
@@ -12,9 +11,9 @@ import CopyText from '../../../../shared/components/other/CopyText';
 import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
 import useGetChannelEnum from '../../../../shared/hooks/useGetChannelEnum';
 import useGetUserQuotaLabelEnum from '../../../../shared/hooks/useGetUserQuotaLabelEnum';
+import usePageSearchParams from '../../../../shared/hooks/usePageSearchParams';
 import { getIsSuperAdmin } from '../../../../shared/storage/getUserInfo';
 import { enumObjectToMap } from '../../../../shared/utils/format/enumObjectToMap';
-import { selectSearchParams, setPathname, setSearchParams } from '../../../../shared/utils/searchParamsSlice';
 import {
     useDeleteBlackListMutation,
     useDeleteUserMutation,
@@ -69,25 +68,20 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
         pageNum: 1,
         pageSize: 10,
     };
+
+    // hooks
+    const { searchList, setSearchList, savePath } = usePageSearchParams({
+        searchListParams: initSearchList,
+    });
+
     // redux
     const history = useHistory();
-    const dispatch = useDispatch();
-    const { searchParams } = useSelector(selectSearchParams);
     // state
-    const [searchList, setSearchList] = useState<GetUserListRequestQuerystring>(initSearchList);
-    const [isNoLoanAgain, setIsNoLoanAgain] = useState(false);
-    const [isImportTelSale, setIsImportTelSale] = useState(false);
+    const [isNoLoanAgain, setIsNoLoanAgain] = useState(searchList.noLoanAgain === 'true');
+    const [isImportTelSale, setIsImportTelSale] = useState(searchList.noLoanAgain === 'true');
     const [isExportRemainOrder, setIsExportRemainOrder] = useState(false);
     const [modal, contextHolder] = Modal.useModal();
     const [notice, noticeContextHolder] = notification.useNotification();
-
-    useEffect(() => {
-        if (Object.keys(searchParams).length > 0) {
-            setSearchList(searchParams);
-            setIsNoLoanAgain(searchParams.noLoanAgain === 'true');
-            setIsImportTelSale(searchParams.noLoanAgain === 'true');
-        }
-    }, []);
 
     useEffect(() => {
         triggerGetList(searchList);
@@ -106,9 +100,8 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
     }, []);
 
     const handleToUserDetail = (userId) => {
-        dispatch(setPathname({ pathname: '/user-info', previousPathname: '/user' }));
-        dispatch(setSearchParams(searchList));
         history.push(`user-info/${userId}`);
+        savePath('/user', '/user-info');
     };
 
     const pageOnChange = (current, pageSize) => {
@@ -298,12 +291,12 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
                     : [...optionCheck, ...optionBlackList];
             },
         },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || '' },
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchList.phoneNo },
         {
             title: '姓名',
             dataIndex: 'nameTrue',
             key: 'nameTrue',
-            initialValue: searchParams.nameTrue || '',
+            initialValue: searchList.nameTrue,
             render: (text) => <CopyText text={text} />,
         },
         { title: '性别', dataIndex: 'gender', key: 'gender', hideInSearch: true },
@@ -312,7 +305,7 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
             title: '身份证号',
             dataIndex: 'idcardNo',
             key: 'idcardNo',
-            initialValue: searchParams.idcardNo || '',
+            initialValue: searchList.idcardNo,
             render: (text) => <CopyText text={text} />,
         },
         {
@@ -321,14 +314,14 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
             valueType: 'select',
             key: 'riskRank',
             valueEnum: riskRankEnum,
-            initialValue: searchParams.riskRank || '',
+            initialValue: searchList.riskRank,
         },
         {
             title: '是否新客',
             dataIndex: 'newMember',
             valueType: 'select',
             key: 'newMember',
-            initialValue: searchParams.newMember || '',
+            initialValue: searchList.newMember,
             valueEnum: {
                 '': { text: '不限' },
                 true: { text: '是' },
@@ -340,7 +333,7 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
             dataIndex: 'status',
             valueType: 'select',
             key: 'status',
-            initialValue: searchParams.status || '',
+            initialValue: searchList.status,
             valueEnum: enumObjectToMap(statusEnum),
             fieldProps: { showSearch: true },
             render: (text, { status }) => {
@@ -353,7 +346,7 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
             dataIndex: 'quotaLabelId',
             valueType: 'select',
             key: 'quotaLabelId',
-            initialValue: searchParams.quotaLabelId || '',
+            initialValue: searchList.quotaLabelId,
             valueEnum: userQuotaLablEnum,
             fieldProps: { showSearch: true },
             render: (text, { quotaLabelId }) => {
@@ -365,7 +358,7 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
             title: '注册包名',
             dataIndex: 'appName',
             key: 'appName',
-            initialValue: searchParams.appName || '',
+            initialValue: searchList.appName,
             render: (text) => <CopyText text={text} />,
         },
         {
@@ -375,7 +368,7 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
             key: 'channelId',
             valueEnum: channelListEnum,
             fieldProps: { showSearch: true },
-            initialValue: searchParams.channelId || '',
+            initialValue: searchList.channelId,
         },
         { title: '注册时间', dataIndex: 'addTime', key: 'addTime', hideInSearch: true, valueType: 'dateTime' },
         {
@@ -386,9 +379,9 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
             fieldProps: { placeholder: ['开始时间', '结束时间'], onChange: () => handleStatusOnChange() },
             hideInTable: true,
             initialValue:
-                searchParams.addStartTime === undefined || searchParams.addStartTime === ''
+                searchList.addStartTime === undefined || searchList.addStartTime === ''
                     ? ''
-                    : [moment(searchParams.addStartTime), moment(searchParams.addEndTime)],
+                    : [moment(searchList.addStartTime), moment(searchList.addEndTime)],
         },
         {
             title: '结清未复借',
@@ -399,7 +392,7 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
                     <Form
                         form={form}
                         name={'noLoanAgain'}
-                        initialValues={{ noLoanAgain: searchParams.noLoanAgain || isNoLoanAgain }}
+                        initialValues={{ noLoanAgain: searchList.noLoanAgain || isNoLoanAgain }}
                     >
                         <Form.Item>
                             <Radio.Group
@@ -426,8 +419,8 @@ const UserTable = ({ setShowModal, isPostBlackListSuccess }: UserTableProps): JS
                         form={form}
                         key={'noLoanAgainDays'}
                         initialValues={{
-                            noLoanAgainStartDays: searchParams.noLoanAgainStartDays || 1,
-                            noLoanAgainEndDays: searchParams.noLoanAgainEndDays || 30,
+                            noLoanAgainStartDays: searchList.noLoanAgainStartDays || 1,
+                            noLoanAgainEndDays: searchList.noLoanAgainEndDays || 30,
                         }}
                     >
                         <Form.Item style={{ whiteSpace: 'nowrap' }}>

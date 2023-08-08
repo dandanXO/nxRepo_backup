@@ -3,7 +3,7 @@ import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, Space, Tag, Tooltip, Typography } from 'antd';
 import Cookies from 'js-cookie';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useLocation } from 'react-router-dom';
 
@@ -50,10 +50,10 @@ const searchFormLayout = {
 };
 
 export const OverDuePhoneUrgeListTable = (): JSX.Element => {
-    const { searchList, searchParams, setSearchList, handleToDetailPage } = usePageSearchParams({
+    const { searchList, setSearchList, savePath } = usePageSearchParams({
         searchListParams: initSearchList,
     });
-    const [initialSearchParams, setInitialSearchParams] = useState(searchParams);
+
     const [triggerGetList, { currentData: overDuePhoneUrgeListResponse, isFetching: overDuePhoneUrgeListFetching }] =
         useLazyGetCollectOverDuePhoneUrgeListQuery({
             pollingInterval: 0,
@@ -106,14 +106,14 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:orderNo'),
             dataIndex: 'orderNo',
             key: 'orderNo',
-            initialValue: searchParams.orderNo || '',
+            initialValue: searchList.orderNo || '',
             render: (_, { orderNo }) => <CopyText text={orderNo} />,
         },
         {
             title: t('urgeCollection:appName'),
             dataIndex: 'appName',
             key: 'appName',
-            initialValue: searchParams.appName || '',
+            initialValue: searchList.appName || '',
             render: (_, { appName }) => <CopyText text={appName} />,
         },
         {
@@ -121,7 +121,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             dataIndex: 'orderLabel',
             key: 'orderLabel',
             width: '100px',
-            initialValue: searchParams.orderLabel || '',
+            initialValue: searchList.orderLabel || '',
             valueType: 'select',
             valueEnum: OrderLabelEnum,
             fieldProps: { allowClear: false },
@@ -138,14 +138,14 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:userName'),
             dataIndex: 'userName',
             key: 'userName',
-            initialValue: searchParams.userName || '',
+            initialValue: searchList.userName || '',
             render: (_, { userName }) => <CopyText text={userName} />,
         },
         {
             title: t('urgeCollection:phone'),
             dataIndex: 'phone',
             key: 'phone',
-            initialValue: searchParams.phone || '',
+            initialValue: searchList.phone || '',
             render: (_, { phone }) => (
                 <Typography>
                     {phone.substring(0, 3) + '*'.repeat(phone.length - 6) + phone.substring(phone.length - 3)}
@@ -158,7 +158,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             key: 'stage',
             width: '100px',
             ellipsis: true,
-            initialValue: searchParams.stage || '',
+            initialValue: searchList.stage || '',
             valueType: 'select',
             valueEnum: { '': { text: t('noRestriction') }, ...OverDueStageEnum },
             render: (_, { stage }) => <Typography>{OverDueStageEnum[stage]?.text}</Typography>,
@@ -170,13 +170,13 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:overdueDays'),
             dataIndex: 'overdueDays',
             key: 'overdueDays',
-            initialValue: searchParams.overdueDays || '',
+            initialValue: searchList.overdueDays || '',
         },
         {
             title: t('order:orderStatus'),
             dataIndex: 'orderStatus',
             key: 'orderStatus',
-            initialValue: searchParams.orderStatus || 0,
+            initialValue: searchList.orderStatus || 0,
             valueType: 'select',
             width: '100px',
             valueEnum: OverDueOrderStatusEnum,
@@ -268,7 +268,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:followUpResult'),
             dataIndex: 'followUpResult',
             key: 'followUpResult',
-            initialValue: searchParams.followUpResult || '',
+            initialValue: searchList.followUpResult || '',
             valueType: 'select',
             valueEnum: FollowUpResultEnum,
             render: (_, { followUpResult }) => {
@@ -314,14 +314,14 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:collectorName'),
             dataIndex: 'collectorName',
             key: 'collectorName',
-            initialValue: searchParams.collectorName || '',
+            initialValue: searchList.collectorName || '',
             hideInSearch: true,
         },
         {
             title: t('urgeCollection:collectorName'),
             dataIndex: 'collectorId',
             key: 'collectorId',
-            initialValue: searchParams.collectorId || '',
+            initialValue: searchList.collectorId || '',
             hideInSearch: !ableToGetCollectorList,
             hideInTable: true,
             valueType: 'select',
@@ -340,7 +340,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
             title: t('urgeCollection:merchantName'),
             dataIndex: 'merchantId',
             key: 'merchantId',
-            initialValue: searchParams.merchantId || '',
+            initialValue: searchList.merchantId || '',
             hideInTable: true,
             valueType: 'select',
             valueEnum: merchantListEnum,
@@ -350,7 +350,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
 
     const handleClickPromote = (userId: number, orderId: number) => {
         history.push(`${currentPath}/detail/${userId}/${orderId}`);
-        handleToDetailPage(`${currentPath}/detail`, currentPath);
+        savePath(currentPath, `${currentPath}/detail`);
     };
 
     const pageOnChange = (current, pageSize) => {
@@ -358,12 +358,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
     };
 
     useEffect(() => {
-        if (Object.keys(initialSearchParams).length === 0) {
-            triggerGetList(searchList);
-        } else if (JSON.stringify(initialSearchParams) === JSON.stringify(searchList)) {
-            triggerGetList(searchList);
-            setInitialSearchParams({});
-        }
+        triggerGetList(searchList);
     }, [searchList]);
 
     useEffect(() => {
@@ -416,8 +411,7 @@ export const OverDuePhoneUrgeListTable = (): JSX.Element => {
                 defaultPageSize: 10,
                 onChange: pageOnChange,
                 total: overDuePhoneUrgeListResponse?.totalRecords,
-                current:
-                    overDuePhoneUrgeListResponse?.records?.length === 0 ? 1 : overDuePhoneUrgeListResponse?.currentPage,
+                current: overDuePhoneUrgeListResponse?.currentPage,
             }}
             scroll={{ x: 'auto' }}
         />

@@ -3,12 +3,11 @@ import { ProTable } from '@ant-design/pro-components';
 import { Button, Input, List, Modal, Space } from 'antd';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { ProColumnsOperationConstant } from '../../../../shared/components/common/ProColumnsOperationConstant';
 import useValuesEnums from '../../../../shared/hooks/common/useValuesEnums';
-import { selectSearchParams, setPathname, setSearchParams } from '../../../../shared/utils/searchParamsSlice';
+import usePageSearchParams from '../../../../shared/hooks/usePageSearchParams';
 import { useLazyGetUserReviewListQuery } from '../../../api/UserReviewApi';
 import { usePostUserReviewMutation } from '../../../api/UserReviewApi';
 import {
@@ -38,9 +37,13 @@ const UserReviewTable = (): JSX.Element => {
         pageSize: 10,
     };
 
+    // hooks
+    const { searchList, setSearchList, savePath } = usePageSearchParams({
+        searchListParams: initSearchList,
+    });
+
     // state
     const [userReviewList, setUserList] = useState<GetUserReviewListProps>({ records: [] });
-    const [searchList, setSearchList] = useState<GetUserReviewListRequestQuerystring>(initSearchList);
     const [modal, contextHolder] = Modal.useModal();
     const [selectedRow, setSelectedRow] = useState([]);
     const [errorModal, errorContextHolder] = Modal.useModal();
@@ -48,19 +51,6 @@ const UserReviewTable = (): JSX.Element => {
     const [randomInputValue, setRandomInputValue] = useState<number | string>('');
     // redux
     const history = useHistory();
-    const dispatch = useDispatch();
-    const { searchParams } = useSelector(selectSearchParams);
-
-    useEffect(() => {
-        if (searchParams.searchList === undefined) return;
-        if (Object.keys(searchParams.searchList).length > 0) {
-            setSearchList(searchParams.searchList);
-        }
-        if (searchParams.selectedRow.length > 0) {
-            setSelectedRow(searchParams.selectedRow);
-            setButtonDisbaled(false);
-        }
-    }, []);
 
     useEffect(() => {
         triggerGetList(searchList);
@@ -93,9 +83,8 @@ const UserReviewTable = (): JSX.Element => {
     }, [postUserReviewIsSuccess]);
 
     const handleToUserDetail = (userId) => {
-        dispatch(setPathname({ pathname: '/user-review-info', previousPathname: '/user-review' }));
-        dispatch(setSearchParams({ searchList: searchList, selectedRow: selectedRow }));
         history.push(`user-review-info/${userId}`);
+        savePath('/user-review', '/user-review-info');
     };
 
     const pageOnChange = (current, pageSize) => {
@@ -162,15 +151,15 @@ const UserReviewTable = (): JSX.Element => {
             ],
             width: ProColumnsOperationConstant.width['1'],
         },
-        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchParams.phoneNo || '' },
-        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchParams.userName || '' },
+        { title: '手机号', dataIndex: 'phoneNo', key: 'phoneNo', initialValue: searchList.phoneNo },
+        { title: '姓名', dataIndex: 'userName', key: 'userName', initialValue: searchList.userName },
         {
             title: '风控标签',
             dataIndex: 'riskRank',
             valueType: 'select',
             key: 'riskRank',
             valueEnum: riskRankEnum,
-            initialValue: searchParams.riskRank || '',
+            initialValue: searchList.riskRank,
         },
         {
             title: '注册渠道',
@@ -178,7 +167,7 @@ const UserReviewTable = (): JSX.Element => {
             valueType: 'select',
             key: 'regChannelId',
             valueEnum: channelListEnum,
-            initialValue: searchParams.regChannelId || '',
+            initialValue: searchList.regChannelId,
         },
         {
             title: '注册时间',
@@ -195,12 +184,9 @@ const UserReviewTable = (): JSX.Element => {
             fieldProps: { placeholder: ['开始时间', '结束时间'] },
             hideInTable: true,
             initialValue:
-                searchParams.searchList === undefined || searchParams.searchList.registerStartTime === ''
+                searchList.searchList === undefined || searchList.searchList.registerStartTime === ''
                     ? ''
-                    : [
-                          moment(searchParams.searchList.registerStartTime),
-                          moment(searchParams.searchList.registerEndTime),
-                      ],
+                    : [moment(searchList.searchList.registerStartTime), moment(searchList.searchList.registerEndTime)],
         },
     ];
     return (
