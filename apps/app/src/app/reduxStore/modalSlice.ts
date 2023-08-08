@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { BankAccount } from '../api/userService/BankAccount';
+import { ReservationDetail } from '../api/loanService/PostReservationSubmitRequest';
+import { ReservationProduct } from '../api/loanService/GetReservationResponse';
 
 export type InitialStateType = {
   authorizationModal: {
@@ -28,7 +30,7 @@ export type InitialStateType = {
   };
   bindBankcardModal:{
     show: boolean;
-    confirm: boolean,
+    confirm: boolean;
     paymentMethod:number;
     cardholderName:string;
     bankName:string;
@@ -49,10 +51,20 @@ export type InitialStateType = {
   },
   paymentProgressingModal:{
     show: boolean;
+  },
+  reservationProductsModal:{
+    show: boolean;
+    confirm: boolean;
+    reservationDetail: ReservationDetail[];
+    availableAmount: number;
+    products: ReservationProduct[]
+  },
+  reservationSuccessModal:{
+    show: boolean;
   }
 };
 
-const initialState: InitialStateType = {
+export const modalInitialState: InitialStateType = {
   authorizationModal: {
     show: false,
     confirm: null,
@@ -99,12 +111,22 @@ const initialState: InitialStateType = {
   },
   paymentProgressingModal:{
     show: false
+  },
+  reservationProductsModal:{
+    show: false,
+    confirm: false,
+    reservationDetail: [],
+    availableAmount: 0,
+    products: []
+  },
+  reservationSuccessModal:{
+    show: false
   }
 };
 
 export const modalSlice = createSlice({
   name: 'model',
-  initialState,
+  initialState: modalInitialState,
   reducers: {
     updateAuthorizationModal: (state, action: PayloadAction<InitialStateType['authorizationModal']>) => {
       state.authorizationModal.show = action.payload.show;
@@ -170,6 +192,16 @@ export const modalSlice = createSlice({
     },
     updatepaymentProgressingModal: (state, action: PayloadAction<InitialStateType['noRecommendProductModal']>) => {
         state.paymentProgressingModal.show = action.payload.show;
+    },
+    updateReservationProductsModal: (state, action: PayloadAction<InitialStateType['reservationProductsModal']>) => {
+        state.reservationProductsModal.show = action.payload.show;
+        state.reservationProductsModal.confirm = action.payload.confirm;
+        state.reservationProductsModal.reservationDetail = action.payload.reservationDetail;
+        state.reservationProductsModal.availableAmount = action.payload.availableAmount;
+        state.reservationProductsModal.products = action.payload.products;
+    },
+    updateReservationSuccessModal: (state, action: PayloadAction<InitialStateType['reservationSuccessModal']>) => {
+        state.reservationSuccessModal.show = action.payload.show;
     },
   },
 });
