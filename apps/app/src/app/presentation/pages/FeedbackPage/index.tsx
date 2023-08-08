@@ -119,7 +119,7 @@ const FeedbackPage = () => {
             <div className={`p-4 pt-0.5 h-[calc(100vh-56px)] flex flex-col`}>
                 <div className='grow'>
                     <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
-                    onTouchStart={(e) =>{
+                    onClick={(e) =>{
                         console.log('onTouchStart',e)
                         selectRef.current?.focus();
                         // e.stopPropagation()
