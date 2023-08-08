@@ -138,6 +138,7 @@ const FeedbackPage = () => {
                                     data: item.template
                                 })
                             }}
+                            openMenuOnClick={true}
                             options={categoryList}
                             isSearchable={false}
                             placeholder={'Feedback Categories'}
