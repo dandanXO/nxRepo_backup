@@ -119,9 +119,16 @@ const FeedbackPage = () => {
             <div className={`p-4 pt-0.5 h-[calc(100vh-56px)] flex flex-col`}>
                 <div className='grow'>
                     <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
-                    onClick={(e) =>{
-                        console.log('onTouchStart',e)
+                    onTouchStart={(e) =>{
+                        console.log('onTouchStart---start',e)
                         selectRef.current?.focus();
+                        console.log('onTouchStart---end')
+                        // e.stopPropagation()
+                    }}
+                    onTouchEnd={(e) =>{
+                        console.log('onTouchStonTouchEndart---start',e)
+                        selectRef.current?.focus();
+                        console.log('onTouchEnd---end')
                         // e.stopPropagation()
                     }}
                     >
@@ -150,10 +157,10 @@ const FeedbackPage = () => {
                             }}
                             onFocus={()=>{
                                 console.log('onFocus')
-                                selectRef.current?.focus();
                                 setMenuOpen(true)
                             }}
                             onBlur={()=>{
+                                console.log('onBlur')
                                 setMenuOpen(false)
                             }}
                             options={categoryList}
