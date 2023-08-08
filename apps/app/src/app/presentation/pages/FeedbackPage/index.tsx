@@ -122,7 +122,8 @@ const FeedbackPage = () => {
                     onTouchStart={(e) =>{
                         console.log('onTouchStart',e)
                         selectRef.current?.focus();
-                        e.stopPropagation()}}
+                        // e.stopPropagation()
+                    }}
                     >
                         <Select
                         ref={selectRef}
