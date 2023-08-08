@@ -9,7 +9,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../components/layouts/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useEffect, useRef, useState } from 'react';
-import Select from 'react-select';
+import Select, { SelectInstance } from 'react-select';
 import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../api/rtk';
 import cx from 'classnames';
 
@@ -106,6 +106,7 @@ const FeedbackPage = () => {
     }
 
     const [menuOpen,setMenuOpen]=useState(false)
+    const selectRef = useRef<SelectInstance | null>(null);
 
     return (
         <div className={`flex flex-col`}>
@@ -119,6 +120,7 @@ const FeedbackPage = () => {
                 <div className='grow'>
                     <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}>
                         <Select
+                        ref={selectRef}
                             styles={{
                                 control: (baseStyles, state) => ({
                                     ...baseStyles,
@@ -142,6 +144,7 @@ const FeedbackPage = () => {
                             }}
                             onFocus={()=>{
                                 console.log('onFocus')
+                                selectRef.current?.focus();
                                 setMenuOpen(true)
                             }}
                             onBlur={()=>{
