@@ -121,7 +121,7 @@ const FeedbackPage = () => {
                     <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
                     onTouchStart={(e) =>{
                         console.log('onTouchStart---start',e)
-                        selectRef.current?.focus();
+                        // selectRef.current?.focus();
                         setMenuOpen(true)
                         // e.stopPropagation()
                     }}
@@ -151,7 +151,7 @@ const FeedbackPage = () => {
                             }}
                             onFocus={()=>{
                                 console.log('onFocus')
-                                setMenuOpen(true)
+                                setMenuOpen(!menuOpen)
                             }}
                             onBlur={()=>{
                                 console.log('onBlur')
