@@ -105,6 +105,8 @@ const FeedbackPage = () => {
 
     }
 
+    const [menuOpen,setMenuOpen]=useState(false)
+
     return (
         <div className={`flex flex-col`}>
             <Navigation
@@ -138,6 +140,13 @@ const FeedbackPage = () => {
                                     data: item.template
                                 })
                             }}
+                            onFocus={()=>{
+                                setMenuOpen(true)
+                            }}
+                            onBlur={()=>{
+                                setMenuOpen(false)
+                            }}
+                            menuIsOpen={menuOpen}
                             openMenuOnClick={true}
                             options={categoryList}
                             isSearchable={false}
