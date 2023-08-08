@@ -121,6 +121,7 @@ const FeedbackPage = () => {
                     <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
                     onTouchStart={(e) =>{
                         console.log('onTouchStart',e)
+                        selectRef.current?.focus();
                         e.stopPropagation()}}
                     >
                         <Select
