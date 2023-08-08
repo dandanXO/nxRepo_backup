@@ -30,7 +30,7 @@ export const Button = (props: Props) => {
           'border border-primary-main bg-primary-main text-white': (props.type === undefined || props.type === "primary") && !disable,
         },
         {
-          'bg-primary-gradient': props.primaryTypeGradient === true,
+          'bg-primary-gradient': props.primaryTypeGradient === true && !disable,
         },
         {
           'border border-tertiary-main bg-tertiary-main text-white': props.type === 'secondary',

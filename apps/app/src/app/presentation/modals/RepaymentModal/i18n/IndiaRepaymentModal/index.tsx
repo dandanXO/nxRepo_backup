@@ -35,6 +35,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
     setRepayType,
     handleConfirm,
     orderNo,
+    isPostRepayCreateLoading
   } = props;
   const navigate = useNavigate();
 
@@ -158,6 +159,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         </div>
         <div className={` ml-1.5 w-full`}>
           <Button
+            disable={isPostRepayCreateLoading}
             onClick={() => {
               if (isRepayTypesFetching) return;
               if (balanceValueErrorMessage === '') handleConfirm();

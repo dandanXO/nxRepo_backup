@@ -18,7 +18,7 @@ const PureExtendModal = (props: any) => {
 
   const { repayConfirmDetail = {} } = location.state.currentData ?? {};
   const orderNo = location.state.currentData?.orderNo || getOrderNo();
-  const { handlePostExpendCreate } = useExtendCreate();
+  const { handlePostExtendCreate , isPostExtendCreateLoading} = useExtendCreate();
 
   const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
   useEffect(() => {
@@ -26,9 +26,9 @@ const PureExtendModal = (props: any) => {
   }, []);
 
   const handleConfirm = () => {
-    if (isRepayTypesFetching) return;
-    handlePostExpendCreate &&
-      handlePostExpendCreate(
+    if (isRepayTypesFetching || isPostExtendCreateLoading) return;
+    handlePostExtendCreate &&
+    handlePostExtendCreate(
         false,
         orderNo,
         repayConfirmDetail && repayConfirmDetail.extensionPayAmount ? repayConfirmDetail.extensionPayAmount : 0,
@@ -51,6 +51,7 @@ const PureExtendModal = (props: any) => {
                   repayType={repayType}
                   setRepayType={setRepayType}
                   handleConfirm={handleConfirm}
+                  isPostExtendCreateLoading={isPostExtendCreateLoading}
                 />
               ),
               [PakistanCountry.country]: (
@@ -60,6 +61,7 @@ const PureExtendModal = (props: any) => {
                   repayType={repayType}
                   setRepayType={setRepayType}
                   handleConfirm={handleConfirm}
+                  isPostExtendCreateLoading={isPostExtendCreateLoading}
                 />
               ),
             },
@@ -69,6 +71,7 @@ const PureExtendModal = (props: any) => {
               repayType={repayType}
               setRepayType={setRepayType}
               handleConfirm={handleConfirm}
+              isPostExtendCreateLoading={isPostExtendCreateLoading}
             />
           );
         }}

@@ -36,7 +36,7 @@ export interface IRepaymentModalProps {
 const RepaymentModal = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { handlePostRepayCreate } = useRepayCreate();
+  const { handlePostRepayCreate, isPostRepayCreateLoading } = useRepayCreate();
   // console.log("location.state", location.state);
 
   const { balance = '', orderNo = '' } = location.state;
@@ -57,7 +57,7 @@ const RepaymentModal = (props: any) => {
     // console.log("balanceValue");
     // console.log(typeof balanceValue);
     // console.log(balanceValue.trim() === "");
-    if (balanceValue === '') {
+    if (balanceValue === '' || isPostRepayCreateLoading ) {
       return;
     }
     // self
@@ -93,6 +93,7 @@ const RepaymentModal = (props: any) => {
                     repayType={repayType}
                     setRepayType={setRepayType}
                     handleConfirm={handleConfirm}
+                    isPostRepayCreateLoading={isPostRepayCreateLoading}
                     orderNo={orderNo}
                   />
                 ),
@@ -108,6 +109,7 @@ const RepaymentModal = (props: any) => {
                     repayType={repayType}
                     setRepayType={setRepayType}
                     handleConfirm={handleConfirm}
+                    isPostRepayCreateLoading={isPostRepayCreateLoading}
                     orderNo={orderNo}
                   />
                 ),
@@ -123,6 +125,7 @@ const RepaymentModal = (props: any) => {
                 repayType={repayType}
                 setRepayType={setRepayType}
                 handleConfirm={handleConfirm}
+                isPostRepayCreateLoading={isPostRepayCreateLoading}
                 orderNo={orderNo}
               />
             )}

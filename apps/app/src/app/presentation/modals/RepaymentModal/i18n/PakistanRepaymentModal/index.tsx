@@ -40,6 +40,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
     setRepayType,
     handleConfirm,
     orderNo,
+    isPostRepayCreateLoading
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -183,6 +184,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             className={`w-full`}
             text={props.t('Repay')}
             primaryTypeGradient={true}
+            disable={isPostRepayCreateLoading}
             onClick={() => {
               if (isRepayTypesFetching) return;
               if (balanceValueErrorMessage === '') handleConfirm();

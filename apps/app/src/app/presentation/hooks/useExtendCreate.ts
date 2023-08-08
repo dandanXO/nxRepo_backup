@@ -18,7 +18,7 @@ const useExtendCreate = () => {
   const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
-  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] = usePostRepayCreateMutation();
+  const [postRepayCreate, { isLoading: isPostExtendCreateLoading }] = usePostRepayCreateMutation();
 
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ const useExtendCreate = () => {
           reject(err);
         });
     });
-  const handlePostExpendCreate = (
+  const handlePostExtendCreate = (
     isForceApplyAfterRepay: boolean,
     orderNo: string,
     repayAmount: number,
@@ -56,7 +56,8 @@ const useExtendCreate = () => {
   };
 
   return {
-    handlePostExpendCreate,
+    handlePostExtendCreate,
+    isPostExtendCreateLoading
   };
 };
 export default useExtendCreate;
