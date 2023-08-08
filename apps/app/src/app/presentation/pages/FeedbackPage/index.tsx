@@ -139,7 +139,7 @@ const FeedbackPage = () => {
                                 })
                             }}
                             options={categoryList}
-                            isSearchable={true}
+                            isSearchable={false}
                             placeholder={'Feedback Categories'}
                         />
                         {selectedCategory.isValidation && <div className='text-cstate-error-main pt-2 font-normal'>{selectedCategory.errorMessage}</div>}
