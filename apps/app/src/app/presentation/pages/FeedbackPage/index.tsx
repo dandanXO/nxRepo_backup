@@ -8,7 +8,7 @@ import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../components/layouts/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Select from 'react-select';
 import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../api/rtk';
 import cx from 'classnames';
@@ -141,13 +141,13 @@ const FeedbackPage = () => {
                                 })
                             }}
                             onFocus={()=>{
+                                console.log('onFocus')
                                 setMenuOpen(true)
                             }}
                             onBlur={()=>{
                                 setMenuOpen(false)
                             }}
-                            menuIsOpen={menuOpen}
-                            openMenuOnClick={true}
+                            openMenuOnFocus={true}
                             options={categoryList}
                             isSearchable={false}
                             placeholder={'Feedback Categories'}
