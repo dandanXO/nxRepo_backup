@@ -122,13 +122,7 @@ const FeedbackPage = () => {
                     onTouchStart={(e) =>{
                         console.log('onTouchStart---start',e)
                         selectRef.current?.focus();
-                        console.log('onTouchStart---end')
-                        // e.stopPropagation()
-                    }}
-                    onTouchEnd={(e) =>{
-                        console.log('onTouchStonTouchEndart---start',e)
-                        selectRef.current?.focus();
-                        console.log('onTouchEnd---end')
+                        setMenuOpen(true)
                         // e.stopPropagation()
                     }}
                     >
@@ -163,6 +157,7 @@ const FeedbackPage = () => {
                                 console.log('onBlur')
                                 setMenuOpen(false)
                             }}
+                            menuIsOpen={menuOpen}
                             options={categoryList}
                             isSearchable={false}
                             placeholder={'Feedback Categories'}
