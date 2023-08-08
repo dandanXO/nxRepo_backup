@@ -118,7 +118,11 @@ const FeedbackPage = () => {
             />
             <div className={`p-4 pt-0.5 h-[calc(100vh-56px)] flex flex-col`}>
                 <div className='grow'>
-                    <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}>
+                    <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
+                    onTouchStart={(e) =>{
+                        console.log('onTouchStart',e)
+                        e.stopPropagation()}}
+                    >
                         <Select
                         ref={selectRef}
                             styles={{
@@ -150,7 +154,6 @@ const FeedbackPage = () => {
                             onBlur={()=>{
                                 setMenuOpen(false)
                             }}
-                            openMenuOnFocus={true}
                             options={categoryList}
                             isSearchable={false}
                             placeholder={'Feedback Categories'}
