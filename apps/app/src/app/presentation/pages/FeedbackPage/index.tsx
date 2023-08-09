@@ -34,7 +34,7 @@ const FeedbackPage = () => {
         errorMessage: '',
     });
     const [isEdit, setIsEdit] = useState(false);
-    const [isSendMessage,setIsSendMessage]=useState(false)
+    const [isSendMessage, setIsSendMessage] = useState(false)
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
         useLazyGetFeedbackCategoriesQuery({
@@ -85,13 +85,13 @@ const FeedbackPage = () => {
             postFeedback({
                 category: Number(selectedCategory?.data),
                 feedback: feedbackValue?.data
-            }).unwrap().then(()=>{
+            }).unwrap().then(() => {
                 setIsSendMessage(false);
                 Modal.alert({
                     show: true,
                     mask: true,
-                    title:'Received Feedback' as string,
-                    content: 'Thank you for taking the time to provide your feedback. We will take it into careful consideration and will respond to your feedback as quickly as possible.'as string,
+                    title: 'Received Feedback' as string,
+                    content: 'Thank you for taking the time to provide your feedback. We will take it into careful consideration and will respond to your feedback as quickly as possible.' as string,
                     confirmText: 'OK' as string,
                     maskClosable: true,
                     enableClose: false,
@@ -99,15 +99,14 @@ const FeedbackPage = () => {
                     onConfirm: () => {
                         navigate(`${PagePathEnum.CustomerServicePage}?token=${getToken()}`);
                     },
-                  });
+                });
             })
         }
 
     }
 
-    const [menuOpen,setMenuOpen]=useState(false)
-    const selectRef = useRef<SelectInstance | null>(null);
-
+    const [menuOpen, setMenuOpen] = useState(false)
+    // const selectRef = useRef<SelectInstance | null>(null);
     return (
         <div className={`flex flex-col`}>
             <Navigation
@@ -119,15 +118,17 @@ const FeedbackPage = () => {
             <div className={`p-4 pt-0.5 h-[calc(100vh-56px)] flex flex-col`}>
                 <div className='grow'>
                     <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
-                    onTouchStart={(e) =>{
-                        console.log('onTouchStart---start',e)
-                        // selectRef.current?.focus();
-                        setMenuOpen(true)
-                        // e.stopPropagation()
-                    }}
+                        onTouchStart={(e) => {
+                            const clickedElement = e.target as HTMLElement;
+                            if (!clickedElement.className.includes('option')) {
+                                setMenuOpen(!menuOpen)
+                            }
+                            else {
+                                setMenuOpen(true)
+                            }
+                        }}
                     >
                         <Select
-                        ref={selectRef}
                             styles={{
                                 control: (baseStyles, state) => ({
                                     ...baseStyles,
@@ -140,23 +141,18 @@ const FeedbackPage = () => {
                             onChange={(item: any) => {
                                 setSelectedCategory({
                                     ...selectedCategory,
-                                    isValidation:false,
+                                    isValidation: false,
                                     data: item.value
                                 })
                                 setFeedbackValue({
                                     ...feedbackValue,
-                                    isValidation:false,
+                                    isValidation: false,
                                     data: item.template
                                 })
-                            }}
-                            onFocus={()=>{
-                                console.log('onFocus')
-                                setMenuOpen(!menuOpen)
-                            }}
-                            onBlur={()=>{
-                                console.log('onBlur')
                                 setMenuOpen(false)
                             }}
+                            onFocus={() => {setMenuOpen(true)}}
+                            onBlur={() => {setMenuOpen(false)}}
                             menuIsOpen={menuOpen}
                             options={categoryList}
                             isSearchable={false}
@@ -184,11 +180,11 @@ const FeedbackPage = () => {
                     {feedbackValue.isValidation && <div className='text-cstate-error-main '>{feedbackValue.errorMessage}</div>}
                 </div>
                 <div className={``}>
-                    <Button 
-                        text={'Send a message'} 
+                    <Button
+                        text={'Send a message'}
                         disable={isSendMessage}
                         onClick={() => {
-                            if(isSendMessage) return;
+                            if (isSendMessage) return;
                             handleSendFeedback()
                         }}
                     />
