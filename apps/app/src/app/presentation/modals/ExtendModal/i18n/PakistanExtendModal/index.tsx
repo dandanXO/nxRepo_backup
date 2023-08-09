@@ -7,7 +7,6 @@ import { Status } from '../../../../../modules/statusEnum';
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
-import CustomSelect from '../../../../components/Select';
 import { Button } from '../../../../components/layouts/Button';
 import { selectStyles } from '../../../../components/layouts/selectStyles';
 import {formatDate} from "../../../../../modules/format/formatDate";

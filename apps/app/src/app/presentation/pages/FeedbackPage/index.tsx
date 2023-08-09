@@ -8,10 +8,10 @@ import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../components/layouts/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
-import { useEffect, useRef, useState } from 'react';
-import Select, { SelectInstance } from 'react-select';
+import { useEffect, useState } from 'react';
 import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../api/rtk';
 import cx from 'classnames';
+import Select from '../../components/Select';
 
 
 interface ICategory {
@@ -28,13 +28,15 @@ const FeedbackPage = () => {
         isValidation: false,
         errorMessage: '',
     });
+    
     const [feedbackValue, setFeedbackValue] = useState<InputValue<string>>({
         data: '',
         isValidation: false,
         errorMessage: '',
     });
+
     const [isEdit, setIsEdit] = useState(false);
-    const [isSendMessage, setIsSendMessage] = useState(false)
+    const [isSendMessage, setIsSendMessage] = useState(false);
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
         useLazyGetFeedbackCategoriesQuery({
@@ -105,8 +107,6 @@ const FeedbackPage = () => {
 
     }
 
-    const [menuOpen, setMenuOpen] = useState(false)
-    // const selectRef = useRef<SelectInstance | null>(null);
     return (
         <div className={`flex flex-col`}>
             <Navigation
@@ -117,49 +117,32 @@ const FeedbackPage = () => {
             />
             <div className={`p-4 pt-0.5 h-[calc(100vh-56px)] flex flex-col`}>
                 <div className='grow'>
-                    <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
-                        onTouchStart={(e) => {
-                            const clickedElement = e.target as HTMLElement;
-                            if (!clickedElement.className.includes('option')) {
-                                setMenuOpen(!menuOpen)
-                            }
-                            else {
-                                setMenuOpen(true)
-                            }
+                    <Select
+                        containerClassNames={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
+                        styles={{
+                            control: (baseStyles: any, state: any) => ({
+                                ...baseStyles,
+                                borderColor: selectedCategory.isValidation ? window?.theme?.input?.error || 'red' : baseStyles.borderColor,
+                            }),
+                            //@ts-ignore
+                            indicatorSeparator: (provided) => ({ ...provided, display: 'none' })
                         }}
-                    >
-                        <Select
-                            styles={{
-                                control: (baseStyles, state) => ({
-                                    ...baseStyles,
-                                    borderColor: selectedCategory.isValidation ? window?.theme?.input?.error || 'red' : baseStyles.borderColor,
-                                }),
-                                //@ts-ignore
-                                indicatorSeparator: (provided) => ({ ...provided, display: 'none' })
-                            }}
-                            // className='border-red-600'
-                            onChange={(item: any) => {
-                                setSelectedCategory({
-                                    ...selectedCategory,
-                                    isValidation: false,
-                                    data: item.value
-                                })
-                                setFeedbackValue({
-                                    ...feedbackValue,
-                                    isValidation: false,
-                                    data: item.template
-                                })
-                                setMenuOpen(false)
-                            }}
-                            onFocus={() => {setMenuOpen(true)}}
-                            onBlur={() => {setMenuOpen(false)}}
-                            menuIsOpen={menuOpen}
-                            options={categoryList}
-                            isSearchable={false}
-                            placeholder={'Feedback Categories'}
-                        />
-                        {selectedCategory.isValidation && <div className='text-cstate-error-main pt-2 font-normal'>{selectedCategory.errorMessage}</div>}
-                    </div>
+                        onChange={(item: any) => {
+                            setSelectedCategory({
+                                errorMessage: '',
+                                isValidation: false,
+                                data: item.value
+                            })
+                            setFeedbackValue({
+                                errorMessage: '',
+                                isValidation: false,
+                                data: item.template
+                            })
+                        }}
+                        options={categoryList}
+                        placeholder={'Feedback Categories'}
+                        errorMessage={selectedCategory.errorMessage || ''}
+                    />
                     <div className={cx('text-sm mb-1 w-full border border-cstate rounded-lg  p-3 relative',
                         {
                             'border-red-500': feedbackValue.isValidation
