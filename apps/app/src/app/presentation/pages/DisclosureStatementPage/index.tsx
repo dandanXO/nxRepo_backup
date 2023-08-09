@@ -8,7 +8,8 @@ import { Page } from '../../components/layouts/Page';
 const DisclosureStatementPage = () => {
   const navigate = useNavigate();
   const domain: string = useSelector((state: RootState) => state.app.androidAppInfo?.domain) || '';
-  const url = domain + '/permission.html';
+  const url = (domain.includes('https://www.') ? domain :`https://www.${domain}`) + '/permission.html';
+
   return (
     <Page className={`flex flex-col`}>
       <Navigation
