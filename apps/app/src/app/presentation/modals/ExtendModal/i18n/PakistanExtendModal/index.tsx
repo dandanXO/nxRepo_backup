@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 import { useNavigate } from 'react-router';
-import Select from 'react-select';
+import Select from "../../../../components/Select";
 
 import { Status } from '../../../../../modules/statusEnum';
 import Divider from '../../../../components/Divider';
@@ -108,7 +108,6 @@ const PakistanExtendModal = (props: any) => {
         onChange={(item: any) => {
           props.setRepayType(item as paymentMethodValueType);
         }}
-        isSearchable={false}
       />
 
       <div className={`mt-6 flex flex-row text-white`}>

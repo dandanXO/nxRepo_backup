@@ -14,8 +14,8 @@ export const ReactSelect = <Option, IsMulti extends boolean = false, Group exten
 
     return <div className={props.containerClassNames}
         onTouchStart={(e) => {
-            const clickedElement = e.target as HTMLElement;
-            if (!clickedElement.className.includes('option')) {
+            const clickedElement = e.target as any;
+            if (!clickedElement?.classList[0]?.includes('option')) {
                 setSelectMenuOpen(!selectMenuOpen)
             }
             else {

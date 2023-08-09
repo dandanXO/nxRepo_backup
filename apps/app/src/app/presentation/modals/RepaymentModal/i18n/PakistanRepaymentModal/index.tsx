@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
-import Select, { StylesConfig } from 'react-select';
+import Select from "../../../../components/Select";
 
 import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
 
@@ -106,7 +106,6 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           onChange={(item) => {
             setRepayType(item as paymentMethodValueType);
           }}
-          isSearchable={false}
         />
       </div>
 

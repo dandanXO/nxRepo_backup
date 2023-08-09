@@ -4,9 +4,6 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
-import Select from 'react-select';
-import styled from 'styled-components';
-
 import { Horizontal, Input, InputValue, ListItem, Overlay, Radio } from '@frontend/mobile/shared/ui';
 
 import { environment } from '../../../../../../environments/environment';

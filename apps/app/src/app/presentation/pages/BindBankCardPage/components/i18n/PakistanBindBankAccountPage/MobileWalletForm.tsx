@@ -2,7 +2,7 @@ import { Input } from '@frontend/mobile/shared/ui';
 import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
 import React, { ClipboardEvent } from 'react';
 import { useNavigate } from 'react-router';
-import Select from 'react-select';
+import Select from '../../../../../components/Select';
 import { Button } from '../../../../../components/layouts/Button';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
 
@@ -42,7 +42,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         <div className={'text-sm'}>{'Mobile Wallet'}</div>
         <Select
           styles={selectStyles}
-          className="react-select-container mb-2"
+          containerClassNames="react-select-container mb-3"
           options={options}
           // defaultValue={props.bankDropList[0].value}
           value={props.walletValue}
@@ -50,7 +50,6 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
             // console.log(item);
             props.setWalletValue(item);
           }}
-          isSearchable={false}
           placeholder={'Mobile Wallet'}
         />
       </div>

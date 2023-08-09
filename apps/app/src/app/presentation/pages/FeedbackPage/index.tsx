@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../api/rtk';
 import cx from 'classnames';
 import Select from '../../components/Select';
+import { transparent } from 'tailwindcss/colors';
 
 
 interface ICategory {
@@ -122,6 +123,7 @@ const FeedbackPage = () => {
                         styles={{
                             control: (baseStyles: any, state: any) => ({
                                 ...baseStyles,
+                                background: transparent,
                                 borderColor: selectedCategory.isValidation ? window?.theme?.input?.error || 'red' : baseStyles.borderColor,
                             }),
                             //@ts-ignore
