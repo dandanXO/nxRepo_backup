@@ -40,9 +40,10 @@ const ReservationProductsModal = () => {
         };
     })
 
+    const initProductAmount = products.reduce((prev, curr) => prev + curr.calculating.finalLoanPrice, 0);
     const initSelectedProduct = products.filter(i => i.required);
     const [selectedProducts, setSelectedProducts] = useState(initSelectedProduct);
-    const [productAmount, setProductAmount] = useState(initSelectedProduct[0].calculating.finalLoanPrice || 0)
+    const [productAmount, setProductAmount] = useState(initProductAmount || 0)
 
     const handleProductSelection = (isChecked: boolean, product:any) => {
       if (isChecked) {
