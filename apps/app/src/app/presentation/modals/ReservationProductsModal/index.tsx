@@ -93,7 +93,7 @@ const ReservationProductsModal = () => {
                                     checkable={true}
                                     checkboxProps={{
                                         disable: product.required,
-                                        checked: false,
+                                        checked: true,
                                         onClick: (isChecked) => handleProductSelection(isChecked, product),
                                     }}
                                 />
