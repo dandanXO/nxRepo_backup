@@ -13,6 +13,7 @@ import useRepayTypes from '../../hooks/useRepayTypes';
 import IndiaRepaymentModal from './i18n/IndiaRepaymentModal';
 import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
 import { i18nRepaymentModal } from './i18n/translations';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 
 type paymentMethodValueType = {
   type: string;
@@ -37,9 +38,9 @@ const RepaymentModal = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { handlePostRepayCreate, isPostRepayCreateLoading } = useRepayCreate();
-  // console.log("location.state", location.state);
+//   console.log("location.state", location.state);
 
-  const { balance = '', orderNo = '' } = location.state;
+  const { balance = '', orderNo = getOrderNo() } = location.state;
 
   const [radioValue, setRadioValue] = useState('balance');
 

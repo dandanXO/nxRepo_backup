@@ -54,7 +54,7 @@ const UnpaidPaymentItem = (props: GetLoanRecord) => {
         amountName={'Loan Amount'}
         orderAmount={orderAmount}
         onClick={() =>
-          navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
+          navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
             state: { orderNo, approveRecords },
           })
         }

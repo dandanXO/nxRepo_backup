@@ -14,6 +14,7 @@ import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { environment } from 'apps/app/src/environments/environment';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
@@ -145,7 +146,7 @@ const RepaymentCouponModal = () => {
                         primaryTypeGradient={environment.country===PakistanCountry.country}
                         className="w-full"
                         onClick={() =>
-                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}`, {
+                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                                 state: {
                                     ...location.state,
                                     coupon:
@@ -161,7 +162,13 @@ const RepaymentCouponModal = () => {
 
     return (
         <Modal className='h-full '>
-            <Navigation title={''} back={() => { navigate(-1) }} />
+            <Navigation title={''} back={() => { 
+                  navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+                    state: {
+                        ...location.state,
+                    },
+                })
+                }} />
             {currentData && currentData.length > 0 ? renderCouponList() : <NoCouponSection />}
         </Modal>
     )
