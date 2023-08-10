@@ -6,7 +6,6 @@ import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
 import { getOrderNo } from '../../modules/querystring/getOrderNo';
 
-
 // 目前的pathname
 let prevPathname = ''
 
@@ -18,13 +17,13 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
     // 從 location 物件中取得要前往的 pathname
     const currentPath = location.pathname;
     const rootState: RootState = yield select((state: RootState) => state);
- 
+
     // 點擊瀏覽器的上一頁
     if (action.payload.action === "POP") {
         // console.log('prevPathname', prevPathname)
         // console.log('currentPath', currentPath)
         // console.log('routerOnLocationChangedSaga', action);
-
+       
         if (prevPathname === PagePathEnum.RepaymentPage
             || prevPathname === PagePathEnum.PersonalInfoPage
             || prevPathname === PagePathEnum.IndexPage) {
@@ -46,16 +45,18 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
 
             // RepaymentDetailPage 所有的彈窗
             if (prevPathname === '/v2/repayment-detail/repayment-coupon-modal') {
-                yield put(push(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, { state: rootState.navigator.location.state }));
-                return;
-            }
 
-            if (prevPathname.length > PagePathEnum.RepaymentDetailPage.length) {
-                yield put(push(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
-            }
-
-            if (prevPathname === PagePathEnum.RepaymentDetailPage) {
-                yield put(push(`${PagePathEnum.RepaymentPage}?token=${getToken()}`));
+                if(currentPath!=='/v2/repayment-detail/repayment-modal'){
+                    yield put(go(-1))
+                }
+            }else{
+                if (prevPathname.length > PagePathEnum.RepaymentDetailPage.length ) {
+                    yield put(push(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
+                }
+    
+                if (prevPathname === PagePathEnum.RepaymentDetailPage) {
+                    yield put(push(`${PagePathEnum.RepaymentPage}?token=${getToken()}`));
+                }
             }
 
         }
