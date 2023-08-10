@@ -18,6 +18,10 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
     const currentPath = location.pathname;
     const modalState:InitialStateType = yield select((state: RootState) => state.model);
 
+
+    console.log('prevPathname',prevPathname)
+    console.log('currentPath',currentPath)
+
     // 點擊瀏覽器的上一頁
     if (action.payload.action === "POP") {
         console.log('routerOnLocationChangedSaga', action);
@@ -28,7 +32,7 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
         }
 
         // NOTE : RepaymentDetailPage route 控制
-        if (currentPath === PagePathEnum.RepaymentDetailPage || currentPath === '/v2/repayment-detail/repayment-modal') {
+        if (currentPath === PagePathEnum.RepaymentDetailPage || currentPath.includes(PagePathEnum.RepaymentDetailPage) && currentPath.length > PagePathEnum.RepaymentDetailPage.length) {
             // 預約單 modal
             if (modalState.reservationProductsModal.show) {
                 yield put(modalSlice.actions.updateReservationProductsModal({
@@ -36,13 +40,18 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
                     show: false
                 }));
             } else {
-                // 還款 modal
-                if (prevPathname === '/v2/repayment-detail/repayment-modal') {
+                // RepaymentDetailPage 所有的彈窗
+                if (prevPathname.length > PagePathEnum.RepaymentDetailPage.length) {
                     yield put(push(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
                 } else {
                     yield put(push(`${PagePathEnum.RepaymentPage}?token=${getToken()}`));
                 }
             }
+        }
+
+        // NOTE : 上傳還款證明單成功 route 控制
+        if (prevPathname === '/v2/uploaded-payment-receipt') {
+            yield put(push(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
         }
     }
     
