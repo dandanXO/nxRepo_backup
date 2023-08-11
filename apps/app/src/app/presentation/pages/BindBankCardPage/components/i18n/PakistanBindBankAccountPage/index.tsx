@@ -16,18 +16,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 
-const Warning = styled.div`
-  //margin: 0 auto;
-  //width: 284px;
-  //font-size: 15px;
-  //font-weight: normal;
-  //font-stretch: normal;
-  //font-style: normal;
-  //line-height: 1.42;
-  //letter-spacing: normal;
-  //text-align: center;
-  //color: #f82626;
-`;
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
@@ -89,28 +77,13 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     bindCardDropListData: props.bindCardDropListData,
   });
 
-  const { isFormPending, confirm } = useFinishedBindBankAccountForm({
-    // NOTICE: Common
-    bankcardNoData,
-
-    // NOTICE: India
-    // postBankBindSave: props.postBankBindSave,
-    // ifscData,
-    // upiData,
-
-    // NOTICE: Pakistan
-    isLoadingPostBankBindSaveToPK: props.isLoadingPostBankBindSaveToPK || false,
-    postBankBindSaveToPK: props.postBankBindSaveToPK,
-
-    // NOTE: 取得電子錢包列表
-    bindCardDropListData: props.bindCardDropListData,
-    // NOTE: 設定電子錢包列表
-    bankAccountValue,
-    // iBanData,
-  });
 
   // console.log("bankAccountValue", bankAccountValue);
   // console.log("bankCodeList", bankCodeList);
+
+  // NOTE : 暫時先用變數代替，之後修改
+  const isFormPending = false;
+
   return (
     <>
       <Outlet />
