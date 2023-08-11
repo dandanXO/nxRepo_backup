@@ -5,6 +5,7 @@ import { getToken } from '../../modules/querystring/getToken';
 import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
 import { getOrderNo } from '../../modules/querystring/getOrderNo';
+import {isSimpleWebView} from "../../modules/window/isSimpleWebView";
 
 // 目前的pathname
 let prevPathname = ''
@@ -23,7 +24,7 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
         // console.log('prevPathname', prevPathname)
         // console.log('currentPath', currentPath)
         // console.log('routerOnLocationChangedSaga', action);
-       
+
         if (prevPathname === PagePathEnum.RepaymentPage
             || prevPathname === PagePathEnum.PersonalInfoPage
             || prevPathname === PagePathEnum.IndexPage) {
@@ -31,9 +32,13 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
         }
 
         // NOTE : RepaymentDetailPage route 控制
-        if ((prevPathname === PagePathEnum.RepaymentDetailPage ||
+        if (
+          (
+            prevPathname === PagePathEnum.RepaymentDetailPage ||
             currentPath === PagePathEnum.RepaymentDetailPage ||
-            (currentPath.includes(PagePathEnum.RepaymentDetailPage) && currentPath.length > PagePathEnum.RepaymentDetailPage.length))) {
+              (currentPath.includes(PagePathEnum.RepaymentDetailPage
+          ) && currentPath.length > PagePathEnum.RepaymentDetailPage.length))
+        ) {
 
             // 預約單 modal
             if (rootState.model.reservationProductsModal.show) {
@@ -45,17 +50,18 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
 
             // RepaymentDetailPage 所有的彈窗
             if (prevPathname === '/v2/repayment-detail/repayment-coupon-modal') {
-
                 if(currentPath!=='/v2/repayment-detail/repayment-modal'){
                     yield put(go(-1))
                 }
             }else{
-                if (prevPathname.length > PagePathEnum.RepaymentDetailPage.length ) {
+                if (prevPathname.length > PagePathEnum.RepaymentDetailPage.length) {
                     yield put(push(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
                 }
-    
-                if (prevPathname === PagePathEnum.RepaymentDetailPage) {
+
+                if(!isSimpleWebView()) {
+                  if (prevPathname === PagePathEnum.RepaymentDetailPage) {
                     yield put(push(`${PagePathEnum.RepaymentPage}?token=${getToken()}`));
+                  }
                 }
             }
 
