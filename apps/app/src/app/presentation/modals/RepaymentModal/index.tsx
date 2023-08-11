@@ -13,6 +13,7 @@ import useRepayTypes from '../../hooks/useRepayTypes';
 import IndiaRepaymentModal from './i18n/IndiaRepaymentModal';
 import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
 import { i18nRepaymentModal } from './i18n/translations';
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 
 type paymentMethodValueType = {
   type: string;
@@ -36,10 +37,10 @@ export interface IRepaymentModalProps {
 const RepaymentModal = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { handlePostRepayCreate } = useRepayCreate();
-  // console.log("location.state", location.state);
+  const { handlePostRepayCreate, isPostRepayCreateLoading } = useRepayCreate();
+//   console.log("location.state", location.state);
 
-  const { balance = '', orderNo = '' } = location.state;
+  const { balance = '', orderNo = getOrderNo() } = location.state;
 
   const [radioValue, setRadioValue] = useState('balance');
 
@@ -57,7 +58,7 @@ const RepaymentModal = (props: any) => {
     // console.log("balanceValue");
     // console.log(typeof balanceValue);
     // console.log(balanceValue.trim() === "");
-    if (balanceValue === '') {
+    if (balanceValue === '' || isPostRepayCreateLoading ) {
       return;
     }
     // self
@@ -93,6 +94,7 @@ const RepaymentModal = (props: any) => {
                     repayType={repayType}
                     setRepayType={setRepayType}
                     handleConfirm={handleConfirm}
+                    isPostRepayCreateLoading={isPostRepayCreateLoading}
                     orderNo={orderNo}
                   />
                 ),
@@ -108,6 +110,7 @@ const RepaymentModal = (props: any) => {
                     repayType={repayType}
                     setRepayType={setRepayType}
                     handleConfirm={handleConfirm}
+                    isPostRepayCreateLoading={isPostRepayCreateLoading}
                     orderNo={orderNo}
                   />
                 ),
@@ -123,6 +126,7 @@ const RepaymentModal = (props: any) => {
                 repayType={repayType}
                 setRepayType={setRepayType}
                 handleConfirm={handleConfirm}
+                isPostRepayCreateLoading={isPostRepayCreateLoading}
                 orderNo={orderNo}
               />
             )}

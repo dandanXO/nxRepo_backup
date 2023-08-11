@@ -58,7 +58,7 @@ const ExtendPaymentItem = (props: GetLoanRecord) => {
         amountName={'Extension Fee'}
         orderAmount={orderAmount}
         onClick={() => {
-          navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
+          navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
             state: { orderNo, approveRecords },
           });
         }}

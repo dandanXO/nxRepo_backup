@@ -21,6 +21,7 @@ import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import {formatDate} from "../../../../../modules/format/formatDate";
+import { getOrderNo } from 'apps/app/src/app/modules/querystring/getOrderNo';
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {
@@ -35,6 +36,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
     setRepayType,
     handleConfirm,
     orderNo,
+    isPostRepayCreateLoading
   } = props;
   const navigate = useNavigate();
 
@@ -105,7 +107,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           className="mt-1 flex w-full items-center justify-center rounded-lg border border-solid border-[#aaaaaa] py-2.5 pl-5"
           onClick={() => {
             if (isRepayTypesFetching) return;
-            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
+            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
               state: {
                 ...location.state,
                 paymentAmount: balance,
@@ -149,7 +151,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           <Button
             onClick={() => {
               //   if (isRepayTypesFetching) return;
-              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
+              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
             }}
             text={props.t('Cancel')}
             type={'ghost'}
@@ -158,6 +160,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         </div>
         <div className={` ml-1.5 w-full`}>
           <Button
+            disable={isPostRepayCreateLoading}
             onClick={() => {
               if (isRepayTypesFetching) return;
               if (balanceValueErrorMessage === '') handleConfirm();

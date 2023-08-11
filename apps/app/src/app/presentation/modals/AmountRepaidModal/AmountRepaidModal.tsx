@@ -14,6 +14,7 @@ import Money from '../../components/Money.tsx';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { i18nAmountRepaidModal } from './i18n/translations';
 import {formatDate} from "../../../modules/format/formatDate";
+import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 
 const ModalContentStyled = styled.div`
   padding: 0 12px;
@@ -99,7 +100,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
             </div>
           );
         }}
-        onCancel={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`)}
+        onCancel={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`)}
         enableTitleHorizontal={true}
       ></Overlay>
     </div>

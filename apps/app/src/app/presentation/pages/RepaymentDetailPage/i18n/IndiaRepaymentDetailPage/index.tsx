@@ -12,16 +12,17 @@ import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
 import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanDetailResponse';
-import {useMemo} from "react";
+import {useEffect, useMemo} from "react";
 import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
 import {formatDate} from "../../../../../modules/format/formatDate";
 import VipIcon from '../../../../components/images/VipIcon.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PaymentProgressingModal from '../../../../modals/PaymentProgressingModal';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import ReservationProductsModal from '../../../../modals/ReservationProductsModal';
 import ReservationSuccessModal from '../../../../modals/ReservationSuccessModal';
+import { modalInitialState, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -29,6 +30,7 @@ type IRepaymentDetailPage = {
 }
 const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
+  const dispatch =useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
 
   const { currentData, isFetching = true } = props || {};
@@ -61,12 +63,17 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const renderStatusTag = (status: string) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
   };
+
+    useEffect(() => {
+        dispatch(modalSlice.actions.updateReservationProductsModal({
+            ...modalInitialState.reservationProductsModal
+        }))
+    }, [])
   return (
     <div>
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
       {modalState.reservationProductsModal.show && <ReservationProductsModal />}
       {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
-      {/* <ReservationProductsModal /> */}
       {/*{currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (*/}
       {/*  <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>*/}
       {/*    Get more amount after instant payment*/}

@@ -28,11 +28,11 @@ const ReservationProductsModal = () => {
             max: 0,
             min: 0,
             platformChargeFeeRate: 0,
-            terms: 0,
+            terms: i.terms,
             required: i.required,
             calculating: {
                 finalLoanPrice: i.productAmount,
-                terms: i.terms,
+                terms: 0,
                 disbursalPrice: i.disbursalAmount,
                 dueDate: i.dueDate,
                 interestPrice: 0,
@@ -40,9 +40,9 @@ const ReservationProductsModal = () => {
         };
     })
 
-    const initSelectedProduct = products.filter(i => i.required);
-    const [selectedProducts, setSelectedProducts] = useState(initSelectedProduct);
-    const [productAmount, setProductAmount] = useState(initSelectedProduct[0].calculating.finalLoanPrice || 0)
+    const initProductAmount = products.reduce((prev, curr) => prev + curr.calculating.finalLoanPrice, 0);
+    const [selectedProducts, setSelectedProducts] = useState(products);
+    const [productAmount, setProductAmount] = useState(initProductAmount || 0)
 
     const handleProductSelection = (isChecked: boolean, product:any) => {
       if (isChecked) {
@@ -93,7 +93,7 @@ const ReservationProductsModal = () => {
                                     checkable={true}
                                     checkboxProps={{
                                         disable: product.required,
-                                        checked: false,
+                                        checked: true,
                                         onClick: (isChecked) => handleProductSelection(isChecked, product),
                                     }}
                                 />

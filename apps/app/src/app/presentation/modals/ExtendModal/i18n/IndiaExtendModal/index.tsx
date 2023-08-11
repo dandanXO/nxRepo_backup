@@ -85,7 +85,7 @@ const IndiaExtendModal = (props: any) => {
           <Button type={'ghost'} ghostTheme={'tertiary'} onClick={() => navigate(-2)} text={'Cancel'} />
         </div>
         <div className={`ml-1.5 grow`}>
-          <Button onClick={props.handleConfirm} text={'Confirm'} />
+          <Button onClick={props.handleConfirm} text={'Confirm'} disable={props.isPostExtendCreateLoading}/>
         </div>
       </div>
     </div>
