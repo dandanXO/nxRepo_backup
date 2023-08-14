@@ -1,5 +1,5 @@
 import { BangladeshCountry } from '../../../../libs/shared/domain/src/country/BangladeshCountry';
-import { IEnvironment } from '../app/modules/appEnvironment/IEnvironment';
+import { IEnvironment } from '../../../../libs/shared/domain/src/Environment/types/IEnvironment';
 
 export const environment: IEnvironment = {
   production: false,

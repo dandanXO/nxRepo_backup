@@ -1,10 +1,7 @@
 import {AiFillCheckCircle} from '@react-icons/all-files/ai/AiFillCheckCircle';
 import React from 'react';
 import styled from 'styled-components';
-
 import {IThemeConfig} from '@frontend/mobile/shared/ui';
-
-import {AllCountryIdentityName} from '../../../../../../../../../libs/shared/domain/src/country/enum/AllCountryIdentityName';
 import {PakistanCountry} from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import {environment} from '../../../../../../environments/environment';
 import {renderByCountry} from '../../../../../modules/i18n';
@@ -12,6 +9,7 @@ import {Label} from '../Label';
 import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';
 import BankAccountSVG from './ic_bank_account_icon.svg';
 import MobileWalletSVG from './ic_mobile_wallet_icon.svg';
+import {BangladeshCountry} from "../../../../../../../../../libs/shared/domain/src/country/BangladeshCountry";
 
 const Container = styled.div`
   margin-bottom: 8px;
@@ -70,7 +68,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
       <OptionIcon enable={props.value === 0} />
       <img
         style={{ width: 60, height: 60, margin: 'auto' }}
-        src={environment.country === AllCountryIdentityName.BN ? BDMobileWalletSVG : MobileWalletSVG}
+        src={environment.country === BangladeshCountry.country ? BDMobileWalletSVG : MobileWalletSVG}
       />
       <Label className={props.value === 0 ? 'text-primary-main' : ''}>{'Mobile wallet'}</Label>
     </Option>

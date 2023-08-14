@@ -1,9 +1,9 @@
-import { IAllLanguage } from '../../../../../../libs/shared/domain/src/language/types/IAllLanguage';
+import {AllLanguage} from "../../../../../../libs/shared/domain/src/language/enum/AllLanguage";
 
 export interface i18nComponent {
   namespace: string;
   translation: {
-    [key in IAllLanguage]: {
+    [key in AllLanguage]: {
       [key: string]: string;
     };
   };

@@ -3,12 +3,12 @@ import {AllCountryIdentityName} from "./enum/AllCountryIdentityName";
 import {AllTimezoneEnum} from "../timezone/enum/AllTimezoneEnum";
 import {AllLanguage} from "../language/enum/AllLanguage";
 
-export const IndiaCountry: ICountry = {
+export const MexicoCountry: ICountry = {
   country: AllCountryIdentityName.IN,
   // NOTE: just for debugging
-  countryName: "India",
-  currency: "₹",
-  currencyCode: "INR",
+  countryName: "Mexico",
+  currency: "$",
+  currencyCode: "mxn",
   language: AllLanguage.en_US,
   timezone: AllTimezoneEnum["Asia/Kolkata"],
 };

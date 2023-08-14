@@ -1,12 +1,14 @@
 import {AllCountryIdentityName} from "../enum/AllCountryIdentityName";
-import {IAllLanguage} from "../../language/types/IAllLanguage";
-import {IAllTimezone} from "../../timezone/types/AllTimezone";
+import {AllTimezoneEnum} from "../../timezone/enum/AllTimezoneEnum";
+import {AllLanguage} from "../../language/enum/AllLanguage";
 
 export interface ICountry {
   // NOTE: just for debugging
   countryName: string;
   country: AllCountryIdentityName;
   currency: string;
-  language: IAllLanguage;
-  timezone: IAllTimezone;
+  // NOTE: ISO_4217 https://en.wikipedia.org/wiki/ISO_4217
+  currencyCode: string;
+  language: AllLanguage;
+  timezone: AllTimezoneEnum;
 }
