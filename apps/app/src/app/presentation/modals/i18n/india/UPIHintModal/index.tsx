@@ -1,5 +1,5 @@
-import Modal from '../../components/Modal';
-import { CloseButton } from '../../components/layouts/CloseButton';
+import Modal from '../../../../components/Modal';
+import { CloseButton } from '../../../../components/layouts/CloseButton';
 
 const UPIHintModal = (props: { onClick: () => void }) => {
 

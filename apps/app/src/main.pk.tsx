@@ -37,7 +37,7 @@ import AppDataCollector from "./app/modules/dataCollectorContainer/AppDataCollec
 import {PagePathEnum} from "./app/presentation/pages/PagePathEnum";
 
 // Modal
-import IBANFinderModal from "./app/presentation/modals/IBANFinderModal";
+import IBANFinderModal from "./app/presentation/modals/i18n/pakistan/IBANFinderModal";
 import RepaymentModal from "./app/presentation/modals/RepaymentModal";
 import AmountRepaidModal from "./app/presentation/modals/AmountRepaidModal/AmountRepaidModal";
 import ExtendConfirmModal from "./app/presentation/modals/ExtendConfirmModal";

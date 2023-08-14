@@ -7,8 +7,8 @@ import { IIndiaBankAccountForm } from '../../../types/IBankAccountForm';
 import { Form } from '../../Form';
 import { Paragraph } from '../../Paragraph';
 import { MdInfoOutline } from '@react-icons/all-files/md/MdInfoOutline';
-import IFSCHintModal from 'apps/app/src/app/presentation/modals/IFSCHintModal';
-import UPIHintModal from 'apps/app/src/app/presentation/modals/UPIHintModal';
+import IFSCHintModal from 'apps/app/src/app/presentation/modals/i18n/india/IFSCHintModal';
+import UPIHintModal from 'apps/app/src/app/presentation/modals/i18n/india/UPIHintModal';
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
 
   const [ifscModalShow,SetIfscModalShow]=useState(false);
@@ -21,7 +21,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           {'For KYC, your Cardholder name and PAN card name should be match.'}
         </div>
         <Input className="mb-3 text-sm" label={'Cardholder Name'} value={props.cardholderName} disabled />
-        
+
         <Input
           className="mb-3 text-sm"
           label={'Account Number'}
@@ -39,7 +39,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
         <Input
-          suffix={<div className='absolute left-1' 
+          suffix={<div className='absolute left-1'
           onClick={(e) => {
               e.preventDefault();
               SetIfscModalShow(true)

@@ -52,7 +52,7 @@ import LogoutModal from  '../modals/LogoutModal';
 import APIBoundaryModal from  '../modals/APIBoundaryModal';
 import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
 import RepaymentCouponModal from  '../modals/RepaymentCouponModal';
-import IBANFinderModal from  '../modals/IBANFinderModal';
+import IBANFinderModal from '../modals/i18n/pakistan/IBANFinderModal';
 import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
 
 
