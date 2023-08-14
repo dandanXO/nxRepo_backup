@@ -4,25 +4,25 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../modules/querystring/getToken';
-import { Status } from '../../../../../modules/statusEnum';
-import Divider from '../../../../components/Divider';
-import ListItem from '../../../../components/ListItem';
-import Money from '../../../../components/Money.tsx';
-import { Button } from '../../../../components/layouts/Button';
-import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanDetailResponse';
+import { getOrderNo } from '../../../../../../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../../../../../../modules/querystring/getToken';
+import { Status } from '../../../../../../../../modules/statusEnum';
+import Divider from '../../../../../../../components/Divider';
+import ListItem from '../../../../../../../components/ListItem';
+import Money from '../../../../../../../components/Money.tsx';
+import { Button } from '../../../../../../../components/layouts/Button';
+import { GetLoanDetailResponse } from '../../../../../../../../api/loanService/GetLoanDetailResponse';
 import {useEffect, useMemo} from "react";
-import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
-import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
-import {formatDate} from "../../../../../modules/format/formatDate";
-import VipIcon from '../../../../components/images/VipIcon.svg';
+import {useDynamicChargeFeeList} from "../../../../../hooks/useDynamicChargeFeeList";
+import {GetLoanDetailChargeFeeDetailItems} from "../../../../../../../../api/rtk/old/getLoanDetail";
+import {formatDate} from "../../../../../../../../modules/format/formatDate";
+import VipIcon from '../../../../../../../components/images/VipIcon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import PaymentProgressingModal from '../../../../modals/PaymentProgressingModal';
-import { RootState } from 'apps/app/src/app/reduxStore';
-import ReservationProductsModal from '../../../../modals/ReservationProductsModal';
-import ReservationSuccessModal from '../../../../modals/ReservationSuccessModal';
-import { modalInitialState, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
+import PaymentProgressingModal from '../../../../../../../modals/PaymentProgressingModal';
+import { RootState } from '../../../../../../../../reduxStore';
+import ReservationProductsModal from '../../../../../../../modals/ReservationProductsModal';
+import ReservationSuccessModal from '../../../../../../../modals/ReservationSuccessModal';
+import { modalInitialState, modalSlice } from '../../../../../../../../reduxStore/modalSlice';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;

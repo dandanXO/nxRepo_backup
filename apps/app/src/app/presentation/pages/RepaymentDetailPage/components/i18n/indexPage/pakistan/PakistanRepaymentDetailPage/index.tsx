@@ -4,20 +4,20 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../api/rtk/old/getLoanDetail';
-import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../modules/querystring/getToken';
-import { Status } from '../../../../../modules/statusEnum';
-import Divider from '../../../../components/Divider';
-import ListItem from '../../../../components/ListItem';
-import Money from '../../../../components/Money.tsx';
-import { Button } from '../../../../components/layouts/Button';
+import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../../../api/rtk/old/getLoanDetail';
+import { getOrderNo } from '../../../../../../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../../../../../../modules/querystring/getToken';
+import { Status } from '../../../../../../../../modules/statusEnum';
+import Divider from '../../../../../../../components/Divider';
+import ListItem from '../../../../../../../components/ListItem';
+import Money from '../../../../../../../components/Money.tsx';
+import { Button } from '../../../../../../../components/layouts/Button';
 
-import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanDetailResponse';
+import { GetLoanDetailResponse } from '../../../../../../../../api/loanService/GetLoanDetailResponse';
 
 import {useMemo} from "react";
-import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
-import {formatDate} from "../../../../../modules/format/formatDate";
+import {useDynamicChargeFeeList} from "../../../../../hooks/useDynamicChargeFeeList";
+import {formatDate} from "../../../../../../../../modules/format/formatDate";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;

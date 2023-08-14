@@ -3,14 +3,14 @@ import { withTranslation } from 'react-i18next';
 
 import { Input } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../../../../components/layouts/Button';
-import { Page } from '../../../../../components/layouts/Page';
-import UploadingFileModal from '../../../modal/UploadingFileModal';
-import { i18nUploadPaymentReceiptPage } from '../../translations';
-import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
-import I18CameraSvgIcon from '../I18CameraSvgIcon';
-import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
-import { PageContent } from 'apps/app/src/app/presentation/components/layouts/PageContent';
+import { Button } from '../../../../../../../components/layouts/Button';
+import { Page } from '../../../../../../../components/layouts/Page';
+import UploadingFileModal from '../../../../../modal/UploadingFileModal';
+import { i18nUploadPaymentReceiptPage } from '../../../translations';
+import { I18UploadPaymentReceiptPageProps } from '../../../types/I18UploadPaymentReceiptPageProps';
+import I18CameraSvgIcon from '../../../I18CameraSvgIcon';
+import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../../../../common';
+import { PageContent } from '../../../../../../../components/layouts/PageContent';
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: I18UploadPaymentReceiptPageProps) => {

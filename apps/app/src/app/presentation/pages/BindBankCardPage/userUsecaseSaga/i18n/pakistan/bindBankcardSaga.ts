@@ -2,9 +2,9 @@ import { push } from '@lagunovsky/redux-react-router';
 import { PayloadAction, createAction } from '@reduxjs/toolkit';
 import { put, race, take } from 'redux-saga/effects';
 
-import { API } from '../../../../api/rtk';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { InitialStateType, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
+import { API } from '../../../../../../api/rtk';
+import { catchSagaError } from '../../../../../../usecaseFlow/utils/catchSagaError';
+import { InitialStateType, modalSlice } from '../../../../../../reduxStore/modalSlice';
 import i18next from 'i18next';
 import { Modal } from '@frontend/mobile/shared/ui';
 

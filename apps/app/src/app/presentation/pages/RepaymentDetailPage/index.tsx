@@ -11,8 +11,8 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
-import IndiaRepaymentDetailPage from './i18n/IndiaRepaymentDetailPage';
-import PakistanRepaymentDetailPage from './i18n/PakistanRepaymentDetailPage';
+import IndiaRepaymentDetailPage from './components/i18n/indexPage/india/IndiaRepaymentDetailPage';
+import PakistanRepaymentDetailPage from './components/i18n/indexPage/pakistan/PakistanRepaymentDetailPage';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const RepaymentDetailPage = (props: any) => {
           }}
         />
       )}
-     
+
       {renderByCountry(
         {
           [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,

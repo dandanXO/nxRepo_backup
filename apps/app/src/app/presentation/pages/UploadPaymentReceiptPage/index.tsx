@@ -15,9 +15,9 @@ import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
-import { IndiaUploadPaymentReceiptPage } from './i18n/components/IndiaUploadPaymentReceiptPage';
-import { PakistanUploadPaymentReceiptPage } from './i18n/components/PakistanUploadPaymentReceiptPage';
-import { i18nUploadPaymentReceiptPage } from './i18n/translations';
+import { IndiaUploadPaymentReceiptPage } from './components/i18n/indexPage/india/IndiaUploadPaymentReceiptPage';
+import { PakistanUploadPaymentReceiptPage } from './components/i18n/indexPage/pakistan/PakistanUploadPaymentReceiptPage';
+import { i18nUploadPaymentReceiptPage } from './components/i18n/translations';
 
 export interface PostRepayReceiptRequestProps {
   formFile: any;

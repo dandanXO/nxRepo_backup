@@ -3,12 +3,12 @@ import { withTranslation } from 'react-i18next';
 
 import { Input } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../../../../components/layouts/Button';
-import UploadingFileModal from '../../../modal/UploadingFileModal';
-import { i18nUploadPaymentReceiptPage } from '../../translations';
-import { I18UploadPaymentReceiptPageProps } from '../../types/I18UploadPaymentReceiptPageProps';
-import I18CameraSvgIcon from '../I18CameraSvgIcon';
-import { PageContent } from 'apps/app/src/app/presentation/components/layouts/PageContent';
+import { Button } from '../../../../../../../components/layouts/Button';
+import UploadingFileModal from '../../../../../modal/UploadingFileModal';
+import { i18nUploadPaymentReceiptPage } from '../../../translations';
+import { I18UploadPaymentReceiptPageProps } from '../../../types/I18UploadPaymentReceiptPageProps';
+import I18CameraSvgIcon from '../../../I18CameraSvgIcon';
+import { PageContent } from '../../../../../../../components/layouts/PageContent';
 
 
 export const PakistanUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(

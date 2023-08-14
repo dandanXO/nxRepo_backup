@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Page } from '@frontend/mobile/shared/ui';
 
 import { Button } from '../../components/layouts/Button';
-import { SuccessICON } from './i18n/SuccessICON';
-import { i18nUploadedPaymentReceiptPage } from './i18n/translations';
+import { SuccessICON } from './components/i18n/SuccessICON';
+import { i18nUploadedPaymentReceiptPage } from './components/i18n/translations';
 import UploadedPaymentReceiptPage from './index';
 import { environment } from 'apps/app/src/environments/environment';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
