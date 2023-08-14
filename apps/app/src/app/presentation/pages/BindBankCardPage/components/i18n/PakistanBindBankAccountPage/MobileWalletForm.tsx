@@ -10,6 +10,8 @@ import { t } from 'i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
+import ValidateInput from '../../ValidateInput';
+import { validateMobile } from '../../validation';
 
 type IMobileWalletForm = {
     // Wallet List
@@ -50,6 +52,13 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         errorMessage: '',
         isEdit: false
     });
+
+    useEffect(()=>{
+        if(props.walletDropList.length>0){
+            setWalletValue(props.walletDropList[0])
+        }
+
+    },[props.walletDropList])
 
     useEffect(() => {
         if (confirmMobileData.isEdit || confirmMobileData.data.length >= 10) {
@@ -111,7 +120,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                     disabled
                 />
                 <div className={'mb-0 text-sm'}>{'Mobile Wallet Account'}</div>
-                <MobileInput
+                <ValidateInput
                     name={'account'}
                     className="mb-1"
                     textAlign={'left'}
@@ -121,11 +130,13 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                     errorMessage={mobileData.errorMessage}
                     inputData={mobileData}
                     setInputData={setMobileData}
+                    validateData={() => validateMobile(mobileData.data)}
+                    inputLength={10}
                 />
             </div>
             <div>
                 <div className={'text-sm'}>{'Confirm Mobile Wallet Account'}</div>
-                <MobileInput
+                <ValidateInput
                     name={'account_confirm'}
                     className="mb"
                     textAlign={'left'}
@@ -135,6 +146,8 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                     errorMessage={confirmMobileData.errorMessage}
                     inputData={confirmMobileData}
                     setInputData={setConfirmMobileData}
+                    validateData={() => validateMobile(confirmMobileData.data)}
+                    inputLength={10}
                 />
             </div>
 
