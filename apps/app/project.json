@@ -88,7 +88,7 @@
         }
       }
     },
-    "serve-build": {
+    "serve-dev": {
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "development",
@@ -120,14 +120,6 @@
             }
           ]
         },
-        "production-in": {
-          "fileReplacements": [
-            {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.in.prod.ts"
-            }
-          ]
-        },
         "development-pk": {
           "extractLicenses": false,
           "optimization": false,
@@ -140,11 +132,15 @@
             }
           ]
         },
-        "production-pk": {
+        "development-in": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.pk.prod.ts"
+              "with": "apps/app/src/environments/environment.in.dev.ts"
             }
           ]
         },
@@ -160,11 +156,15 @@
             }
           ]
         },
-        "production-bd": {
+        "development-mx": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.bd.prod.ts"
+              "with": "apps/app/src/environments/environment.mx.dev.ts"
             }
           ]
         }
@@ -172,51 +172,51 @@
     },
     "serve-in": {
       "executor": "@nrwl/webpack:dev-server",
-      "defaultConfiguration": "development",
       "options": {
         "hmr": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "app:serve-build:development-in"
-        },
-        "production": {
-          "buildTarget": "app:build:production-in",
-          "hmr": false
+          "buildTarget": "app:serve-dev:development-in"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "serve-pk": {
       "executor": "@nrwl/web:dev-server",
-      "defaultConfiguration": "development",
       "options": {
         "hmr": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "app:serve-build:development-pk"
-        },
-        "production": {
-          "buildTarget": "app:build:production-pk",
-          "hmr": false
+          "buildTarget": "app:serve-dev:development-pk"
         }
-      }
+      },
+      "defaultConfiguration": "development"
     },
     "serve-bd": {
       "executor": "@nrwl/web:dev-server",
-      "defaultConfiguration": "development",
       "options": {
         "hmr": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "app:serve-build:development-bd"
-        },
-        "production": {
-          "buildTarget": "app:build:production-bd",
-          "hmr": false
+          "buildTarget": "app:serve-dev:development-bd"
         }
-      }
+      },
+      "defaultConfiguration": "development"
+    },
+    "serve-mx": {
+      "executor": "@nrwl/webpack:dev-server",
+      "options": {
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "app:serve-dev:development-mx"
+        }
+      },
+      "defaultConfiguration": "development"
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
