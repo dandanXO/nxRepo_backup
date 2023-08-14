@@ -13,7 +13,7 @@ const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+const AppBabelLoader = path.join(__dirname, './loader/app-babel-loader.js')
 
 // NOTICE: react-apexcharts 裡面有舊版本的 .bablerc，跟目前專案的不符合，include node_modules 會導致專案與node_modules 下 .babelrc 不一致
 const filePath = path.resolve(__dirname, '../../../node_modules/react-apexcharts/.babelrc')
@@ -120,7 +120,7 @@ module.exports = (config, context) => {
             //   }
             // },
             {
-              loader: path.join(__dirname, './custom/my-loader.js'),
+              loader: AppBabelLoader,
               options: {
                 cacheDirectory: false,
               }
