@@ -1,18 +1,5 @@
-import { Colors, IThemeConfig, fontSizeListToRem } from '@frontend/mobile/shared/ui';
-import {DEFAULT_INDIA_THEME, DEFAULT_PAKISTAN_THEME, themes} from './customTailwindTheme';
-import { NativeAppInfo } from '../../app/persistant/nativeAppInfo';
-import {environment} from "../environment";
-import {IndiaCountry} from "../../../../../libs/shared/domain/src/country/IndiaCountry";
-
-// NOTE: 預設樣式
-let theme = themes[NativeAppInfo.environment][`v${NativeAppInfo.uiVersion}`]
-if(!theme) {
-  if(environment.country === IndiaCountry.country) {
-    theme = themes[NativeAppInfo.environment][DEFAULT_INDIA_THEME]
-  } else {
-    theme = themes[NativeAppInfo.environment][DEFAULT_PAKISTAN_THEME]
-  }
-}
+import {Colors, fontSizeListToRem, IThemeConfig} from "@frontend/mobile/shared/ui";
+import { theme } from "../../../environments/themeModule/styledComponentTheme";
 
 export const themeConfig: IThemeConfig = {
   // NOTE: Commons
@@ -62,7 +49,7 @@ export const themeConfig: IThemeConfig = {
       text: '#FFFFFF',
     },
   },
-  input:{
+  input: {
     disable: theme['custom_state_disable_main'],
     error: theme['custom_state_error_main'],
     placeholder: theme['custom_text_fields_placeholder_main'],

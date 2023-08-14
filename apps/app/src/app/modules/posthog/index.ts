@@ -1,7 +1,7 @@
 import posthog from 'posthog-js';
 
-import { PosthogConfig } from '../../../environments/theme/india/v55/posthog';
-import { posthogConfigs } from '../../../environments/theme/posthogConfigs';
+import { PosthogConfig } from '../../../environments/themeModule/india/v55/posthog';
+import { posthogConfigs } from '../../../environments/posthugModule/posthogConfigs';
 import { AppModeEnum, AppModeModel } from '../../persistant/appModeModel';
 import { AppGlobal, NativeAppInfo } from '../../persistant/nativeAppInfo';
 import { AppEnvironment } from '../appEnvironment';

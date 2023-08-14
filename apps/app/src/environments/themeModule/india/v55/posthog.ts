@@ -1,6 +1,7 @@
 import { PostHogConfig } from 'posthog-js';
 
-import { commonPosthogConfig } from '../../../devPosthogConfig';
+
+import {commonPosthogConfig} from "../../../../app/modules/posthog/commonPosthogConfig";
 
 export type PosthogConfig = {
   token: string;

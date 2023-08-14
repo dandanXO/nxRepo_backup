@@ -1,7 +1,7 @@
 import { IAndroidAppInfo } from '../../persistant/nativeAppInfo/types/IAndroidAppInfo';
 import { applyTheme } from './utils';
-import { themeConfig } from '../../../environments/theme/styledComponentTheme';
 
+import {themeConfig} from "./themeConfig";
 
 const applyCustomSharedLibTheme = (androidAPPInfo: IAndroidAppInfo) => {
     window.theme = themeConfig

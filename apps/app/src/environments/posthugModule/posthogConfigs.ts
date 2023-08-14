@@ -1,5 +1,5 @@
 import { devPosthogConfig } from '../devPosthogConfig';
-import { PosthogConfig, v55PosthogConfig } from './india/v55/posthog';
+import { PosthogConfig, v55PosthogConfig } from '../themeModule/india/v55/posthog';
 
 // NOTICE: only india now
 export const posthogConfigs: Record<string, PosthogConfig> = {
