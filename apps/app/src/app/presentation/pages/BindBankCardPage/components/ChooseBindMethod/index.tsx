@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import {IThemeConfig} from '@frontend/mobile/shared/ui';
 
-import {AllCountryIdentityName} from '../../../../../../../../../libs/shared/domain/src/country/AllCountryIdentityName';
+import {AllCountryIdentityName} from '../../../../../../../../../libs/shared/domain/src/country/enum/AllCountryIdentityName';
 import {PakistanCountry} from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import {environment} from '../../../../../../environments/environment';
 import {renderByCountry} from '../../../../../modules/i18n';

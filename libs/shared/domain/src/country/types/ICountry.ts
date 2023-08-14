@@ -1,6 +1,6 @@
-import {AllCountryIdentityName} from "../AllCountryIdentityName";
+import {AllCountryIdentityName} from "../enum/AllCountryIdentityName";
 import {IAllLanguage} from "../../language/types/IAllLanguage";
-import {IAllTimezone} from "../AllTimezone";
+import {IAllTimezone} from "../../timezone/types/AllTimezone";
 
 export interface ICountry {
   // NOTE: just for debugging

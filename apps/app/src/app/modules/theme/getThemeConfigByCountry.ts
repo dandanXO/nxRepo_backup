@@ -1,7 +1,7 @@
 import { DefaultThemeConfig, GreenThemeConfig, IThemeConfig } from '@frontend/mobile/shared/ui';
 
 import { AllCountry } from '../../../../../../libs/shared/domain/src/country/AllCountry';
-import { AllCountryIdentityName } from '../../../../../../libs/shared/domain/src/country/AllCountryIdentityName';
+import { AllCountryIdentityName } from '../../../../../../libs/shared/domain/src/country/enum/AllCountryIdentityName';
 import { IndiaCountry } from '../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../libs/shared/domain/src/country/PakistanCountry';
 

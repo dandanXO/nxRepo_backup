@@ -1,5 +1,5 @@
 import {ICountry} from "./types/ICountry";
-import {AllCountryIdentityName} from "./AllCountryIdentityName";
+import {AllCountryIdentityName} from "./enum/AllCountryIdentityName";
 
 export const PakistanCountry: ICountry = {
   country: AllCountryIdentityName.PK,
