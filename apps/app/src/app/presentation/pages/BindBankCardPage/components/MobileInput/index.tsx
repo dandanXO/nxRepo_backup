@@ -59,15 +59,9 @@ const MobileInput = (props: Props) => {
 
     return (
         <Input
-            name={props.name}
-            className={props.className}
-            textAlign={props.textAlign}
-            outlineType={props.outlineType}
-            placeholder={props.placeholder}
-            value={props.inputData.data}
+            {...props}
             onChange={handleOnchange}
             onBlur={handleOnblur}
-            errorMessage={props.inputData.errorMessage}
             onCopy={(e) => preventCopyPaste(e)}
             onCut={(e) => preventCopyPaste(e)}
         />
