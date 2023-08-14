@@ -51,7 +51,7 @@ import LoadingMask from "./app/presentation/components/LoadingMask";
 
 import {CategoryPage} from "./app/presentation/pages/__test__/CategoryPage";
 import {ErrorPage} from "./app/presentation/pages/__test__/ErrorPage";
-import IBANFinderPage from "./app/presentation/pages/IBANFinderPage";
+import IBANFinderPage from "./app/presentation/pages/i18n/paskitan/IBANFinderPage";
 
 import BindBankCardPage from "./app/presentation/pages/BindBankCardPage";
 import RepaymentDetailPage from "./app/presentation/pages/RepaymentDetailPage";

@@ -30,7 +30,7 @@ import LoanRecordPage from '../pages/RepaymentPage'
 import OrderStatusPage from '../pages/OrderStatusPage'
 import MyCouponListPage from '../pages/MyCouponListPage'
 import OnlineCustomerServicePage from '../pages/OnlineCustomerServicePage';
-import IBANFinderPage from '../pages/IBANFinderPage'
+import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage'
 import PartnerPage from '../pages/PartnerPage'
 import PersonalInfoPage  from '../pages/PersonalInfoPage';
 import PrivacyPolicyPage from '../pages/PrivacyPolicyPage';
