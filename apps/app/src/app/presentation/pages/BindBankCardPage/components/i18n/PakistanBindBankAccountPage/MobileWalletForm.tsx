@@ -7,23 +7,26 @@ import { Button } from '../../../../../components/layouts/Button';
 import { selectStyles } from '../../../../../components/layouts/selectStyles';
 import MobileInput from '../../MobileInput';
 import { t } from 'i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'apps/app/src/app/reduxStore';
+import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 
 type IMobileWalletForm = {
     // Wallet List
     walletDropList: any;
-    walletValue: any;
-    setWalletValue: any;
+    // walletValue: any;
+    // setWalletValue: any;
     // Wallet Account
-    mobileData: InputValue<string>;
-    onMobileDataChange: (event: any) => void;
-    onMobileDataBlur: (event: any) => void;
-    // Confirm Wallet Account
-    confirmMobileData: InputValue<string>;
-    onConfirmMobileDataChange: (event: any) => void;
-    onConfirmMobileDataBlur: (event: any) => void;
+    // mobileData: InputValue<string>;
+    // onMobileDataChange: (event: any) => void;
+    // onMobileDataBlur: (event: any) => void;
+    // // Confirm Wallet Account
+    // confirmMobileData: InputValue<string>;
+    // onConfirmMobileDataChange: (event: any) => void;
+    // onConfirmMobileDataBlur: (event: any) => void;
     // Form
     isFormPending: boolean;
-    confirm: (mobileData:string) => void;
+    // confirm: (mobileData:string) => void;
     // iBanData: InputValue<string>;
     // onIBanChange: (event: any) => void;
     // onIbanBlur: (event: any) => void;
@@ -32,10 +35,8 @@ type IMobileWalletForm = {
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
     const navigate = useNavigate();
-    const options = props.walletDropList?.map((item: string, index: number) => {
-        return { value: index, label: item };
-    });
-
+    const dispatch = useDispatch()
+    const [walletValue, setWalletValue] = useState(props.walletDropList[0])
     const [mobileData, setMobileData] = useState<InputValue<string>>({
         data: '',
         isValidation: false,
@@ -69,12 +70,10 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                 <Select
                     styles={selectStyles}
                     className="react-select-container mb-2"
-                    options={options}
-                    // defaultValue={props.bankDropList[0].value}
-                    value={props.walletValue}
+                    options={props.walletDropList}
+                    value={walletValue}
                     onChange={(item: any) => {
-                        // console.log(item);
-                        props.setWalletValue(item);
+                        setWalletValue(item);
                     }}
                     isSearchable={false}
                     placeholder={'Mobile Wallet'}
@@ -141,10 +140,27 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
 
             {/*<Button onClick={() => !props.isFormPending && props.confirm()}>Submit</Button>*/}
             <div className="py-2">
-                <Button primaryTypeGradient={true} text={'Confirm'} onClick={() => {
-                    if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
-                    props.confirm(mobileData.data)
-                }}
+                <Button
+                    primaryTypeGradient={true}
+                    text={'Confirm'}
+                    onClick={() => {
+                        if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
+                        dispatch(
+                            modalSlice.actions.updatebindBankcardModal({
+                                show: true,
+                                confirm: false,
+                                paymentMethod: 0,
+                                cardholderName: props.cardholderName,
+                                bankName: '',
+                                bankAccNr: '',
+                                mobileWallet: true,
+                                mobileWalletAccount: mobileData.data,
+                                walletVendor: walletValue?.value ?? '',
+                                bankCode: '',
+                                walletName: walletValue.label
+                            })
+                        );
+                    }}
                 />
             </div>
         </div>

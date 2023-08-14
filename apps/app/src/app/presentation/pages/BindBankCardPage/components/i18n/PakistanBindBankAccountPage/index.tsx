@@ -20,6 +20,9 @@ import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0 | 1>(1);
+  const [walletDropList,setWalletDropList]=useState<{value:string;label:string}[]>([])
+//   const [bankDropList,setankDropList]=useState([])
+
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
 
@@ -31,6 +34,14 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     props.triggerGetBindCardDropListQuery();
   }, []);
 
+  useEffect(() => {
+      const walletDropListData = props?.bindCardDropListData?.availableWalletVendors || []
+      if (walletDropListData.length !== 0) {
+          const walletList = walletDropListData.map(i => ({ value: i.code, label: i.displayName }))
+          setWalletDropList(walletList)
+      }
+  }, [props.bindCardDropListData]);
+
   const {
     bankcardNoData,
     onAccountNumberChange,
@@ -40,29 +51,6 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     onConfirmAccountNumberBlur,
     validate: validateCommonForm,
   } = useBindBankAccountForm();
-
-  const {
-    // Wallet List
-    walletDropList,
-    walletValue,
-    setWalletValue,
-    // Wallet Account
-    mobileData,
-    onMobileDataChange,
-    onMobileDataBlur,
-    //confirm Wallet Account
-    confirmMobileData,
-    onConfirmMobileDataChange,
-    onConfirmMobileDataBlur,
-    // iBanData: iBanDataMobileWallet,
-    // onIBanChange: onMobileWalletIBanChange,
-    // onIbanBlur: onMobileWalletIbanBlur,
-    confirm: confirmMobileWallet,
-  } = usePakistanMobileWalletForm({
-    isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
-    triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
-    bindCardDropListData: props.bindCardDropListData,
-  });
 
   const {
     bankDropList,
@@ -103,38 +91,8 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
       {chooseBindMethodValue === 0 ? (
         <MobileWalletForm
           walletDropList={walletDropList}
-          walletValue={walletValue}
-          setWalletValue={setWalletValue}
-          mobileData={mobileData}
-          onMobileDataChange={onMobileDataChange}
-          onMobileDataBlur={onMobileDataBlur}
-          confirmMobileData={confirmMobileData}
-          onConfirmMobileDataChange={onConfirmMobileDataChange}
-          onConfirmMobileDataBlur={onConfirmMobileDataBlur}
-          // iBanData={iBanDataMobileWallet}
-          // onIBanChange={onMobileWalletIBanChange}
-          // onIbanBlur={onMobileWalletIbanBlur}
           isFormPending={isFormPending || false}
           cardholderName={props.cardholderName}
-          confirm={(mobileData:string) => {
-            // const validation = confirmMobileWallet();
-            // if (validation) {
-              dispatch(
-                modalSlice.actions.updatebindBankcardModal({
-                  show: true,
-                  confirm: false,
-                  paymentMethod: chooseBindMethodValue,
-                  cardholderName: props.cardholderName,
-                  bankName: '',
-                  bankAccNr: '',
-                  mobileWallet: true,
-                  mobileWalletAccount: mobileData,
-                  walletVendor: walletValue?.label ?? '',
-                  bankCode: '',
-                })
-              );
-            // }
-          }}
         />
       ) : (
         <BankAccountForm
@@ -167,6 +125,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
                   mobileWallet: false,
                   mobileWalletAccount: '',
                   walletVendor: '',
+                  walletName:''
                 } as any)
               );
             }
