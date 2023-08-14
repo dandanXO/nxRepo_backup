@@ -2,13 +2,14 @@ import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
 import React, { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
-import Select, {
+import {
     ControlProps,
     DropdownIndicatorProps,
     IndicatorSeparatorProps,
     IndicatorsContainerProps,
     components,
 } from 'react-select';
+import Select from "../../components/Select";
 
 import { BankAccount } from '../../../api/userService/BankAccount';
 import { formatPrice } from '../../../modules/format/formatPrice';
@@ -20,6 +21,7 @@ import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
 import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
 import { FeeRateKeyEnum } from "../../../api/indexService/FeeRateKeyEnum";
 import { formatDate } from "../../../modules/format/formatDate";
+import { transparent } from 'tailwindcss/colors';
 
 type Props = IndexPageProps & {
     calculatingProducts: FinalProductType[];
@@ -162,15 +164,14 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
                     <div className={'text-md font-medium'}>Bank Card</div>
                     <div className={'relative flex flex-row items-center justify-between'}>
                         <Select
+                            containerClassNames="w-full"
                             menuPlacement={'top'}
                             styles={{
                                 control: (baseStyles, state) => {
                                     return {
                                         ...baseStyles,
+                                        background:transparent,
                                         borderColor: 'white',
-                                        '&:hover': {
-                                            borderColor: 'white',
-                                        },
                                         boxShadow: 'none',
                                     };
                                 },
@@ -179,7 +180,6 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
                                 IndicatorSeparator,
                                 DropdownIndicator,
                             }}
-                            className="w-full"
                             value={optionValue}
                             onChange={(item: any) => {
                                 // console.log(item);
@@ -192,7 +192,6 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
                                     label: bankcard.bankAccount,
                                 };
                             })}
-                            isSearchable={false}
                         />
                     </div>
                     <Horizontal />

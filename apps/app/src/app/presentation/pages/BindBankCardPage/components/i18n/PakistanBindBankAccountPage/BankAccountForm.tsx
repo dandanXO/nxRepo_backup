@@ -1,6 +1,6 @@
 import React, { ClipboardEvent } from 'react';
 import { useNavigate } from 'react-router';
-import Select from 'react-select';
+import Select from "../../../../../components/Select";
 
 import { Input } from '@frontend/mobile/shared/ui';
 import { Button } from '../../../../../components/layouts/Button';
@@ -58,7 +58,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         <div className={'text-sm'}>{'Bank Name'}</div>
         <Select
           styles={selectStyles}
-          className="mb-2"
+          containerClassNames="mb-2"
           // defaultValue={props.bankDropList[0].value}
           // value={props?.bankDropList[props.bankAccountValue]?.value}
           value={props.bankAccountValue.data.value === '' ? undefined : props.bankAccountValue.data}

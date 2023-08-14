@@ -1,13 +1,12 @@
 import moment from 'moment';
 import React from 'react';
 import { useNavigate } from 'react-router';
-import Select from 'react-select';
+import Select from "../../../../components/Select";
 
 import { Status } from '../../../../../modules/statusEnum';
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
-import CustomSelect from '../../../../components/Select';
 import { Button } from '../../../../components/layouts/Button';
 import { selectStyles } from '../../../../components/layouts/selectStyles';
 import {formatDate} from "../../../../../modules/format/formatDate";
@@ -109,7 +108,6 @@ const PakistanExtendModal = (props: any) => {
         onChange={(item: any) => {
           props.setRepayType(item as paymentMethodValueType);
         }}
-        isSearchable={false}
       />
 
       <div className={`mt-6 flex flex-row text-white`}>
