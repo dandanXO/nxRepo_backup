@@ -18,7 +18,7 @@
         "styles": [],
         "scripts": [],
         "webpackConfig": "apps/app/build/webpack.config.main.js",
-        "postcssConfig": "apps/app/postcss.config.js",
+        "postcssConfig": "apps/app/build/postcss.config.js",
         "isolatedConfig": true
       },
       "configurations": {
@@ -104,7 +104,7 @@
         "styles": [],
         "scripts": [],
         "webpackConfig": "apps/app/build/webpack.config.main.js",
-        "postcssConfig": "apps/app/postcss.config.js",
+        "postcssConfig": "apps/app/build/postcss.config.js",
         "isolatedConfig": true
       },
       "configurations": {
@@ -229,7 +229,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/app"],
       "options": {
-        "jestConfig": "apps/app/jest.config.ts",
+        "jestConfig": "apps/app/build/jest.config.ts",
         "passWithNoTests": true
       }
     }
