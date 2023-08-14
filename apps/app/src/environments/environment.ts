@@ -4,7 +4,7 @@
 // console.log("process.env.NX_TEST_GENERAL", process.env.NX_VERBOSE_LOGGING)
 // console.log("process.env.NX_TEST_SINGLE", process.env.NX_SERVE)
 import { IndiaCountry } from '../../../../libs/shared/domain/src/country/IndiaCountry';
-import { IEnvironment } from '../../../../libs/shared/domain/src/Environment/types/IEnvironment';
+import { IEnvironment } from '../../../../libs/shared/domain/src/environment/types/IEnvironment';
 
 export const environment: IEnvironment = {
   production: false,
