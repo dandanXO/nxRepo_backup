@@ -87,6 +87,7 @@
           "vendorChunk": false
         },
         "production-mx": {
+          "main": "apps/app/src/main/main.mx.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environment.ts",
@@ -171,6 +172,7 @@
           ]
         },
         "development-mx": {
+          "main": "apps/app/src/main/main.mx.tsx",
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
