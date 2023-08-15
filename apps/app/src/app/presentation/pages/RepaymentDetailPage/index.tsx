@@ -43,8 +43,9 @@ const RepaymentDetailPage = (props: any) => {
         {
           [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
           [PakistanCountry.country]: <PakistanRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
-        })
-      }
+        },
+        <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>
+      )}
       <Outlet />
     </div>
   );

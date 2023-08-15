@@ -16,7 +16,8 @@ const Coupon = (props: ICouponProps) => {
     {
       [IndiaCountry.country]: <IndiaCoupon {...props} />,
       [PakistanCountry.country]: <PakistanCoupon {...props} />,
-    }
+    },
+    <IndiaCoupon {...props} />
   );
 };
 

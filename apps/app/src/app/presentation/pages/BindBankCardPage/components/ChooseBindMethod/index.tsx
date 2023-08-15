@@ -105,7 +105,11 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
                 {wallet}
               </>
             ),
-          }
+          },
+          <>
+            {bankcard}
+            {wallet}
+          </>
         )}
       </OptionContainer>
     </Container>

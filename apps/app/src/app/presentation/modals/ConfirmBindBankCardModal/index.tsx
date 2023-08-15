@@ -20,7 +20,8 @@ const ConfirmBindBankCardModal = ({state}:IConfirmBindBankCardModal) => {
               {
                 //   [IndiaCountry.country]: <IndiaExtendConfirmModal />,
                   [PakistanCountry.country]: <PakistanConfirmBindBankCardModal  state={state}/>,
-              }
+              },
+              <PakistanConfirmBindBankCardModal  state={state}/>
           )
 
   );

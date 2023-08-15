@@ -106,7 +106,19 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
               fileErrorMessage={fileErrorMessage}
             />
           ),
-        }
+        },
+        <IndiaUploadPaymentReceiptPage
+          isUploading={isUploading}
+          utr={utr}
+          setURT={setURT}
+          validateUtr={validateUtr}
+          formFile={formFile}
+          onFileChange={onFileChange}
+          imageSrc={imageSrc}
+          confirm={confirm}
+          fileErrorMessage={fileErrorMessage}
+        />
+        // <PakistanUploadPaymentReceiptPage isUploading={isUploading} formFile={formFile} onFileChange={onFileChange} imageSrc={imageSrc} confirm={confirm}/>
       )}
     </div>
   );

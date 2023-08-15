@@ -64,7 +64,15 @@ const PureExtendModal = (props: any) => {
                   isPostExtendCreateLoading={isPostExtendCreateLoading}
                 />
               ),
-            }
+            },
+            <IndiaExtendModal
+              currentData={location.state.currentData}
+              repayTypesList={repayTypesList}
+              repayType={repayType}
+              setRepayType={setRepayType}
+              handleConfirm={handleConfirm}
+              isPostExtendCreateLoading={isPostExtendCreateLoading}
+            />
           );
         }}
         enableTitleHorizontal={true}
