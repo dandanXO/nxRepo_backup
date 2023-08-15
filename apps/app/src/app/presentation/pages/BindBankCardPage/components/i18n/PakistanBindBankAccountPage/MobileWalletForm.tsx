@@ -37,7 +37,7 @@ type IMobileWalletForm = {
 
 export const MobileWalletForm = (props: IMobileWalletForm) => {
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [walletValue, setWalletValue] = useState(props.walletDropList[0])
     const [mobileData, setMobileData] = useState<InputValue<string>>({
         data: '',
@@ -72,6 +72,33 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     }, [mobileData.data, confirmMobileData.data])
 
 
+    const confirmBindCard = () => {
+        if (!mobileData.isValidation || !confirmMobileData.isValidation) {
+            if (mobileData.data === '') {
+                setMobileData(validateMobile(mobileData.data));
+            }
+            if (confirmMobileData.data === '') {
+                setConfirmMobileData(validateMobile(confirmMobileData.data));
+            }
+        } else {
+            dispatch(
+                modalSlice.actions.updatebindBankcardModal({
+                    show: true,
+                    confirm: false,
+                    paymentMethod: 0,
+                    cardholderName: props.cardholderName,
+                    bankName: '',
+                    bankAccNr: '',
+                    mobileWallet: true,
+                    mobileWalletAccount: mobileData.data,
+                    walletVendor: walletValue?.value ?? '',
+                    bankCode: '',
+                    walletName: walletValue.label
+                })
+            );
+        }
+    }
+
     return (
         <div className="flex grow flex-col">
             <div>
@@ -88,27 +115,6 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                     placeholder={'Mobile Wallet'}
                 />
             </div>
-
-            {/*<div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>*/}
-            {/*<Input*/}
-            {/*  name={'iban'}*/}
-            {/*  labelType={'none'}*/}
-            {/*  outlineType={'standard'}*/}
-            {/*  placeholder={'Ex. PK36FTBK0000111123456702'}*/}
-            {/*  value={props.iBanData.data}*/}
-            {/*  onChange={props.onIBanChange}*/}
-            {/*  onBlur={props.onIbanBlur}*/}
-            {/*  errorMessage={props.iBanData.errorMessage}*/}
-            {/*  onCopy={(e) => preventCopyPaste(e)}*/}
-            {/*  onCut={(e) => preventCopyPaste(e)}*/}
-            {/*/>*/}
-            {/*<div*/}
-            {/*  className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"*/}
-            {/*  onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}*/}
-            {/*>*/}
-            {/*  {'Click me to learn where can I find my IBAN number?'}*/}
-            {/*</div>*/}
-
             <div>
                 <div className={'text-sm'}>{'Mobile Wallet Holder Name'}</div>
                 <Input
@@ -156,26 +162,30 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                 <Button
                     primaryTypeGradient={true}
                     text={'Confirm'}
-                    onClick={() => {
-                        if (!mobileData.isValidation || !confirmMobileData.isValidation) return;
-                        dispatch(
-                            modalSlice.actions.updatebindBankcardModal({
-                                show: true,
-                                confirm: false,
-                                paymentMethod: 0,
-                                cardholderName: props.cardholderName,
-                                bankName: '',
-                                bankAccNr: '',
-                                mobileWallet: true,
-                                mobileWalletAccount: mobileData.data,
-                                walletVendor: walletValue?.value ?? '',
-                                bankCode: '',
-                                walletName: walletValue.label
-                            })
-                        );
-                    }}
+                    onClick={confirmBindCard}
                 />
             </div>
         </div>
     );
 };
+
+
+    {/*<div className={'text-sm'}>{'Your IBAN Number (24 characters)'}</div>*/}
+            {/*<Input*/}
+            {/*  name={'iban'}*/}
+            {/*  labelType={'none'}*/}
+            {/*  outlineType={'standard'}*/}
+            {/*  placeholder={'Ex. PK36FTBK0000111123456702'}*/}
+            {/*  value={props.iBanData.data}*/}
+            {/*  onChange={props.onIBanChange}*/}
+            {/*  onBlur={props.onIbanBlur}*/}
+            {/*  errorMessage={props.iBanData.errorMessage}*/}
+            {/*  onCopy={(e) => preventCopyPaste(e)}*/}
+            {/*  onCut={(e) => preventCopyPaste(e)}*/}
+            {/*/>*/}
+            {/*<div*/}
+            {/*  className="text-cstate-info-main mb-2 whitespace-nowrap text-xs leading-none underline"*/}
+            {/*  onClick={() => navigate('iban-finder-modal', { state: 'Wallet' })}*/}
+            {/*>*/}
+            {/*  {'Click me to learn where can I find my IBAN number?'}*/}
+            {/*</div>*/}

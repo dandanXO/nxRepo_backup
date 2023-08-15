@@ -11,14 +11,15 @@ import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
 import i18next, { t } from 'i18next';
 import { validateBankcardNo } from '../../validation';
 import ValidateInput from '../../ValidateInput';
+import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
+import { useDispatch } from 'react-redux';
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     const navigate = useNavigate();
-
-    const options = props.bankDropList?.map((item: string, index: number) => {
-        return { value: index, label: item };
-    });
-    
+    const dispatch = useDispatch();
+    const [bankValue, setBankValue] = useState({ value: '', label: '' });
+    const [isBankSelected, setIsBankSelected] = useState(true);
+   
     const [bankAccountData, setBankAccountData] = useState<InputValue<string>>({
         data: '',
         isValidation: false,
@@ -42,7 +43,36 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                 errorMessage: isConfirmMobileDataError ? '' : t('Please make sure your account number match.') as string
             })
         }
-    }, [bankAccountData.data, confirmBankAccountData.data])
+    }, [bankAccountData.data, confirmBankAccountData.data]);
+
+
+    const confirmBindCard = () => {
+        if (bankValue.value === '' || !bankAccountData.isValidation || !confirmBankAccountData.isValidation) {
+            setIsBankSelected(bankValue.value === '' ? false : true);
+            if (bankAccountData.data === '') {
+                setBankAccountData(validateBankcardNo(bankAccountData.data));
+            }
+            if (confirmBankAccountData.data === '') {
+                setconfirmBankAccountData(validateBankcardNo(confirmBankAccountData.data));
+            }
+        } else {
+            dispatch(
+                modalSlice.actions.updatebindBankcardModal({
+                    show: true,
+                    confirm: false,
+                    paymentMethod: 1,
+                    cardholderName: props.cardholderName,
+                    bankCode: bankValue?.value !== "" && bankValue?.value,
+                    bankName: bankValue?.label,
+                    bankAccNr: bankAccountData.data,
+                    mobileWallet: false,
+                    mobileWalletAccount: '',
+                    walletVendor: '',
+                    walletName: ''
+                } as any)
+            );
+        }
+    }
 
     return (
         <div className="flex grow flex-col">
@@ -62,18 +92,16 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                 <Select
                     styles={selectStyles}
                     className="mb-2"
-                    // defaultValue={props.bankDropList[0].value}
-                    // value={props?.bankDropList[props.bankAccountValue]?.value}
-                    value={props.bankAccountValue.data.value === '' ? undefined : props.bankAccountValue.data}
+                    value={bankValue.value === '' ? undefined : bankValue}
                     onChange={(item: any) => {
-                        props.onIFSCDropSelect(item);
+                        setBankValue(item);
                     }}
-                    options={options}
+                    options={props.bankDropList}
                     isSearchable={true}
                     placeholder={'Select'}
                 />
-                {props.bankAccountValue.isValidation &&
-                    <div className='ml-5 text-cstate-error-main'>{props.bankAccountValue.errorMessage}</div>
+                {!isBankSelected &&
+                    <div className='ml-5 text-cstate-error-main'>{t('Please select an option')}</div>
                 }
             </div>
             <div>
@@ -113,10 +141,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                 <Button
                     text={'Confirm'}
                     primaryTypeGradient={true}
-                    onClick={() => {
-                        // !props.isFormPending && props.confirm
-                        props.confirm && props.confirm();
-                    }}
+                    onClick={confirmBindCard}
                 />
             </div>
         </div>

@@ -31,11 +31,13 @@ export type IIndiaBankAccountForm = IBankAccountForm & {
   onUPIIDChangBlur: (event: any) => void;
 };
 
-export type IPakistanBankAccountForm = IBankAccountForm & {
+export type IPakistanBankAccountForm = {
   bankDropList: any;
-  bankAccountValue: any;
-  onIFSCDropSelect: (index: number) => void;
-  bindCardDropListData: any;
+  cardholderName: string;
+  isFormPending: boolean;
+//   bankAccountValue: any;
+//   onIFSCDropSelect: (index: number) => void;
+//   bindCardDropListData: any;
   // iBanData: any;
   // onIBanChange: (event: any) => void;
   // onIbanBlur: (event: any) => void;
