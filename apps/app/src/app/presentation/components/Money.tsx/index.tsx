@@ -1,4 +1,4 @@
-import { environment } from 'apps/app/src/environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 

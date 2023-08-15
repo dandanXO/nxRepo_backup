@@ -6,7 +6,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
 import { getToken } from '../../../modules/querystring/getToken';
 import { Status } from '../../../modules/statusEnum';

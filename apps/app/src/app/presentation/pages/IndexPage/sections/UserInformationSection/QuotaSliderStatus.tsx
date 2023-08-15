@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import React, { SetStateAction, useEffect, useMemo, useState } from 'react';
 
-import { environment } from '../../../../../../environments/environment';
+import { environment } from '../../../../../../environments/environmentModule/environment';
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../../../../../domain/risk/RISK_CONTROL_STATE';
 import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
@@ -62,7 +62,7 @@ export const QuotaSliderStatus = (props: Props) => {
 
   const isMinAndMaxEqual = props.state.indexAPI?.quotaBar.max === props.state.indexAPI?.quotaBar.min;
   const disableSliderDragging = isMinAndMaxEqual ? isMinAndMaxEqual : disableQuotaBar;
-  
+
   return (
     <div className={'mb-4 text-center'} data-testing-id={'quotaSlider'} data-testing-disable={disableQuotaSlider}>
       <div className={'h-[80px]'}>

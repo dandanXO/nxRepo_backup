@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environmentModule/environment';
 
 export const renderByCountry = (
   props: {

@@ -1,4 +1,4 @@
-import { environment } from 'apps/app/src/environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import React from 'react';
 import { useNavigate } from 'react-router';
 

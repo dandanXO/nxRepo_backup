@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { z } from 'zod';
 
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../../environments/environmentModule/environment';
 import { InputValue } from '../../../../modules/form/InputValue';
 import { PostRepayReceiptRequestProps } from '../index';
 

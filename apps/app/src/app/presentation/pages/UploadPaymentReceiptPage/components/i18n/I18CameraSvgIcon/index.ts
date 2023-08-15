@@ -1,4 +1,4 @@
-import { environment } from '../../../../../../../environments/environment';
+import { environment } from '../../../../../../../environments/environmentModule/environment';
 import GeneralCameraSvgIcon from './general/GeneralCameraSvgIcon';
 import IndiaCameraSvgIcon from './india/IndiaCameraSvgIcon';
 import PakistanCameraSvgIcon from './pakistan/PakistanCameraSvgIcon';

@@ -11,7 +11,7 @@ import { usePostRepayCreateMutation } from '../../api/rtk';
 import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
 import { useDispatch } from 'react-redux';
 import { modalSlice } from '../../reduxStore/modalSlice';
-import { environment } from 'apps/app/src/environments/environment';
+import { environment } from '../../../environments/environmentModule/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { getToken } from '../../modules/querystring/getToken';
 import { PagePathEnum } from '../pages/PagePathEnum';

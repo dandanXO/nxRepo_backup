@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {IThemeConfig} from '@frontend/mobile/shared/ui';
 import {PakistanCountry} from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import {environment} from '../../../../../../environments/environment';
+import {environment} from '../../../../../../environments/environmentModule/environment';
 import {renderByCountry} from '../../../../../modules/i18n';
 import {Label} from './Label';
 import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';

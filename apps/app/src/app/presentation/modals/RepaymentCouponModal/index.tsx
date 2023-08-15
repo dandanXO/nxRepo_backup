@@ -12,7 +12,7 @@ import { PagePathEnum } from '../../pages/PagePathEnum';
 import Modal from '../../components/Modal';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { environment } from 'apps/app/src/environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 
@@ -135,7 +135,7 @@ const RepaymentCouponModal = () => {
                                         key={i.id}
                                     />
                                 </div>
-                               
+
                             ))}
                         </>
                     )}
@@ -162,7 +162,7 @@ const RepaymentCouponModal = () => {
 
     return (
         <Modal className='h-full '>
-            <Navigation title={''} back={() => { 
+            <Navigation title={''} back={() => {
                   navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                     state: {
                         ...location.state,

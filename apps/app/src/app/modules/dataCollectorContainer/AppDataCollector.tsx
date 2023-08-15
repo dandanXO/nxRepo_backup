@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect } from 'react';
 import { useLocation } from 'react-router';
 
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../environments/environmentModule/environment';
 import { usePostTraceBehaviorMutation } from '../../api/rtk';
 import {getCurrentUnixTimestamp} from "../timezone/getCurrentUnixTimestamp";
 

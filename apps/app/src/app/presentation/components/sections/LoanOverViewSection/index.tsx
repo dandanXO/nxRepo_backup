@@ -2,7 +2,7 @@ import { ApexOptions } from 'apexcharts';
 import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../../environments/environmentModule/environment';
 import { ORDER_STATE } from '../../../../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
 import { formatPrice } from '../../../../modules/format/formatPrice';
@@ -12,7 +12,7 @@ type Props = IndexPageProps;
 
 export const LoanOverViewSection = (props: Props) => {
   const isReacquireCreditAmount =
-    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able 
+    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
     // props.state.order.state !== ORDER_STATE.reject
     // props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
     // props.state.order.state !== ORDER_STATE.hasOverdueOrder;

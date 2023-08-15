@@ -7,7 +7,7 @@ import { Button } from '../../components/layouts/Button';
 import { SuccessICON } from './components/i18n/SuccessICON';
 import { i18nUploadedPaymentReceiptPage } from './components/i18n/translations';
 import UploadedPaymentReceiptPage from './index';
-import { environment } from 'apps/app/src/environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 const CustomPage = styled(Page)`
   display: flex;

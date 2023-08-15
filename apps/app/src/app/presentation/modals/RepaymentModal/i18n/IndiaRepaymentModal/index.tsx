@@ -6,7 +6,7 @@ import { withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 import { Horizontal, Input, InputValue, ListItem, Overlay, Radio } from '@frontend/mobile/shared/ui';
 
-import { environment } from '../../../../../../environments/environment';
+import { environment } from '../../../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import Money from '../../../../components/Money.tsx';

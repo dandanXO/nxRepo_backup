@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { environment } from '../../../../../src/environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { GetLoanRecordListRequest } from '../../../api/loanService/GetLoanRecordListRequest';
 import { useLazyGetLoanRecordListQuery } from '../../../api/rtk';
 import Tag from '../../components/Tag';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { flexCreator } from '@frontend/mobile/shared/ui';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 
 const LoanBrandStyled = styled.div<propsStyles>`
   ${flexCreator('row', 'flex-start', 'center')};

@@ -9,7 +9,7 @@ import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 // NOTE: ENV
-import { environment } from './environments/environment';
+import { environment } from './environments/environmentModule/environment';
 
 // NOTE: Modules
 import { NativeAppInfo } from './app/persistant/nativeAppInfo';

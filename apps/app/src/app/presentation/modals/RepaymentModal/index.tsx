@@ -6,7 +6,7 @@ import { Overlay } from '@frontend/mobile/shared/ui';
 
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { renderByCountry } from '../../../modules/i18n';
 import useRepayCreate from '../../hooks/useRepayCreate';
 import useRepayTypes from '../../hooks/useRepayTypes';

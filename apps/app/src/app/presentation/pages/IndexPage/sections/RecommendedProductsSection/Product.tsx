@@ -3,7 +3,7 @@ import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
 import { useCallback, useState } from 'react';
 
-import { environment } from '../../../../../../environments/environment';
+import { environment } from '../../../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { FinalProductType } from '../../index';
 import Money from '../../../../components/Money.tsx';

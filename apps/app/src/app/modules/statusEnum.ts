@@ -1,7 +1,7 @@
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environmentModule/environment';
 
 interface IStatusEnum {
   [key: string]: {

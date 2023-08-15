@@ -3,7 +3,7 @@ import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
 import { useCallback, useState } from 'react';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../modules/format/formatPrice';
 import Money from '../../components/Money.tsx';
 import { Checkbox, ICheckboxProps } from '../../components/Checkbox';
@@ -44,7 +44,7 @@ export const Product = (props: Props ) => {
                 </div>
             </div>
             </div>
-            
+
             {expand && (
                 <div className={'expandable-brand flex flex-col bg-cbg-tertiary py-3 px-4 text-ctext-secondary text-xs mt-2'}>
                     {/* <div className={'item mb-1 flex flex-row justify-between font-light'}>

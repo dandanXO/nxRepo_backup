@@ -1,7 +1,7 @@
 import {DEFAULT_INDIA_THEME, DEFAULT_PAKISTAN_THEME, themes} from '../../../environments/themeModule/customTailwindTheme';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../environments/environmentModule/environment";
 import {IndiaCountry} from "../../../../../../libs/shared/domain/src/country/IndiaCountry";
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 

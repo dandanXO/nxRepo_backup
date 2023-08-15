@@ -1,4 +1,4 @@
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../environments/environmentModule/environment';
 import {AppEnvironment} from '../../modules/appEnvironment';
 import {AppModeEnum} from '../appModeModel';
 import {IAndroidAppInfo} from './types/IAndroidAppInfo';
