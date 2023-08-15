@@ -19,6 +19,8 @@ import { IndiaBindBankAccountPage } from './i18nPage/IndiaBindBankAccountPage';
 import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';
 import { PageContent } from '../../components/layouts/PageContent';
 import {environment} from "../../../../environments/environmentModule/environment";
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { MexicoBindBankAccountPage } from './i18nPage/MexicoBindBankAccountPage';
 
 const BindBankCardPage = () => {
   // NOTICE: Common
@@ -80,6 +82,17 @@ const BindBankCardPage = () => {
                 bindCardDropListData={bindCardDropListData}
                 cardholderName={cardholderName ?? ''}
               />
+            ),
+            [MexicoCountry.country]: (
+                <MexicoBindBankAccountPage
+                  isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}
+                  postBankBindSaveToPK={postBankBindSaveToPK}
+                  isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
+                  triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
+                  triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
+                  bindCardDropListData={bindCardDropListData}
+                  cardholderName={cardholderName ?? ''}
+                />
             ),
           },
           <PakistanBindBankAccountPage

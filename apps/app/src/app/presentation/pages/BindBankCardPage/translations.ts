@@ -51,6 +51,11 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Confirm your number': 'Confirm your number',
       'Phone number should be 10 digits.': 'Phone number should be 10 digits.',
       'Please make sure your mobile number match.': 'Please make sure your mobile number match.',
+
+      // NOTICE: Mexico
+      'Name of the bank': 'Name of the bank',
+      'Bank account number': 'Bank account number',
+      'Confirm Bank account number': 'Confirm Bank account number'
     },
     bn_BD: {
       // NOTICE: common
