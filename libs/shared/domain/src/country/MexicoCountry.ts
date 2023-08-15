@@ -4,7 +4,7 @@ import {AllTimezoneEnum} from "../timezone/enum/AllTimezoneEnum";
 import {AllLanguage} from "../language/enum/AllLanguage";
 
 export const MexicoCountry: ICountry = {
-  country: AllCountryIdentityName.IN,
+  country: AllCountryIdentityName.MX,
   // NOTE: just for debugging
   countryName: "Mexico",
   currency: "$",
