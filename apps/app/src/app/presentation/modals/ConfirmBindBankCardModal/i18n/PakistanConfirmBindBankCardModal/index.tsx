@@ -58,7 +58,7 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                         <ListItem
                             className='mb-3'
                             title={'Mobile Wallet'}
-                            text={state?.walletVendor ?? ''}
+                            text={state?.walletName ?? ''}
                             titleColor="text-ctext-secondary"
                             textColor="text-ctext-primary"
                         />

@@ -1,6 +1,7 @@
 // NOTICE: InputValue
 export type InputValue<T> = {
-  data: T;
-  isValidation?: boolean;
-  errorMessage?: string;
+    data: T;
+    isValidation?: boolean;
+    errorMessage?: string;
+    isEdit?: boolean;
 };

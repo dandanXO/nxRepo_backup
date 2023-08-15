@@ -14,24 +14,14 @@ import { MobileWalletForm } from './MobileWalletForm';
 import ConfirmBindBankCardModal from 'apps/app/src/app/presentation/modals/ConfirmBindBankCardModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
-import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 
-const Warning = styled.div`
-  //margin: 0 auto;
-  //width: 284px;
-  //font-size: 15px;
-  //font-weight: normal;
-  //font-stretch: normal;
-  //font-style: normal;
-  //line-height: 1.42;
-  //letter-spacing: normal;
-  //text-align: center;
-  //color: #f82626;
-`;
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE: 選擇支付方式
   const [chooseBindMethodValue, setChooseBindMethodValue] = useState<0 | 1>(1);
+  const [walletDropList, setWalletDropList] = useState<{ value: string; label: string }[]>([]);
+  const [bankDropList, setankDropList] = useState<{ value: string; label: string }[]>([]);
+
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
 
@@ -43,74 +33,24 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     props.triggerGetBindCardDropListQuery();
   }, []);
 
-  const {
-    bankcardNoData,
-    onAccountNumberChange,
-    onAccountNumberBlur,
-    confirmedBankcardNoData,
-    onConfirmAccountNumberChange,
-    onConfirmAccountNumberBlur,
-    validate: validateCommonForm,
-  } = useBindBankAccountForm();
+  useEffect(() => {
+      const walletDropListData = props?.bindCardDropListData?.availableWalletVendors || [];
+      const bankDropListData = props?.bindCardDropListData?.availableBanks || [];
 
-  const {
-    // Wallet List
-    walletDropList,
-    walletValue,
-    setWalletValue,
-    // Wallet Account
-    mobileData,
-    onMobileDataChange,
-    onMobileDataBlur,
-    //confirm Wallet Account
-    confirmMobileData,
-    onConfirmMobileDataChange,
-    onConfirmMobileDataBlur,
-    // iBanData: iBanDataMobileWallet,
-    // onIBanChange: onMobileWalletIBanChange,
-    // onIbanBlur: onMobileWalletIbanBlur,
-    confirm: confirmMobileWallet,
-  } = usePakistanMobileWalletForm({
-    isPostBankBindSaveToPKMutationLoading: props.isPostBankBindSaveToPKMutationLoading || false,
-    triggerPostBankBindSaveToPKMutation: props.triggerPostBankBindSaveToPKMutation,
-    bindCardDropListData: props.bindCardDropListData,
-  });
+      if (walletDropListData.length !== 0) {
+          const walletList = walletDropListData.map(i => ({ value: i.code, label: i.displayName }))
+          setWalletDropList(walletList)
+      }
 
-  const {
-    bankDropList,
-    bankAccountValue,
-    onIFSCDropSelect,
-    // iBanData,
-    // onIBanChange,
-    // onIbanBlur,
-    bankCodeList,
-    confirm: confirmBankAccount,
-  } = usePakistanBankAccountForm({
-    bindCardDropListData: props.bindCardDropListData,
-  });
+      if (bankDropListData.length !== 0) {
+        const bankList = bankDropListData.map(i => ({ value: i.bankCode, label: i.bankName }))
+        setankDropList(bankList)
+    }
+  }, [props.bindCardDropListData]);
 
-  const { isFormPending, confirm } = useFinishedBindBankAccountForm({
-    // NOTICE: Common
-    bankcardNoData,
+  // NOTE : 暫時先用變數代替，之後修改
+  const isFormPending = false;
 
-    // NOTICE: India
-    // postBankBindSave: props.postBankBindSave,
-    // ifscData,
-    // upiData,
-
-    // NOTICE: Pakistan
-    isLoadingPostBankBindSaveToPK: props.isLoadingPostBankBindSaveToPK || false,
-    postBankBindSaveToPK: props.postBankBindSaveToPK,
-
-    // NOTE: 取得電子錢包列表
-    bindCardDropListData: props.bindCardDropListData,
-    // NOTE: 設定電子錢包列表
-    bankAccountValue,
-    // iBanData,
-  });
-
-  // console.log("bankAccountValue", bankAccountValue);
-  // console.log("bankCodeList", bankCodeList);
   return (
     <>
       <Outlet />
@@ -130,77 +70,14 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
       {chooseBindMethodValue === 0 ? (
         <MobileWalletForm
           walletDropList={walletDropList}
-          walletValue={walletValue}
-          setWalletValue={setWalletValue}
-          mobileData={mobileData}
-          onMobileDataChange={onMobileDataChange}
-          onMobileDataBlur={onMobileDataBlur}
-          confirmMobileData={confirmMobileData}
-          onConfirmMobileDataChange={onConfirmMobileDataChange}
-          onConfirmMobileDataBlur={onConfirmMobileDataBlur}
-          // iBanData={iBanDataMobileWallet}
-          // onIBanChange={onMobileWalletIBanChange}
-          // onIbanBlur={onMobileWalletIbanBlur}
           isFormPending={isFormPending || false}
           cardholderName={props.cardholderName}
-          confirm={() => {
-            const validation = confirmMobileWallet();
-            if (validation) {
-              dispatch(
-                modalSlice.actions.updatebindBankcardModal({
-                  show: true,
-                  confirm: false,
-                  paymentMethod: chooseBindMethodValue,
-                  cardholderName: props.cardholderName,
-                  bankName: '',
-                  bankAccNr: '',
-                  mobileWallet: true,
-                  mobileWalletAccount: mobileData.data,
-                  walletVendor: walletValue?.label ?? '',
-                  bankCode: '',
-                })
-              );
-            }
-          }}
         />
       ) : (
         <BankAccountForm
           isFormPending={isFormPending || false}
           cardholderName={props.cardholderName}
-          bankcardNoData={bankcardNoData}
-          onAccountNumberChange={onAccountNumberChange}
-          onAccountNumberBlur={onAccountNumberBlur}
-          confirmedBankcardNoData={confirmedBankcardNoData}
-          onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-          onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
           bankDropList={bankDropList}
-          bankAccountValue={bankAccountValue}
-          bindCardDropListData={props.bindCardDropListData}
-          onIFSCDropSelect={onIFSCDropSelect}
-          confirm={() => {
-            const validation = validateCommonForm(); // account Number
-            const validation2 = confirmBankAccount(); // Iban & Bank Name
-            // common
-            if (validation && validation2) {
-              dispatch(
-                modalSlice.actions.updatebindBankcardModal({
-                  show: true,
-                  confirm: false,
-                  paymentMethod: chooseBindMethodValue,
-                  cardholderName: props.cardholderName,
-                  bankCode: bankCodeList && bankAccountValue.data?.value !== "" && bankCodeList[bankAccountValue.data?.value],
-                  bankName: bankAccountValue.data?.label,
-                  bankAccNr: bankcardNoData.data,
-                  mobileWallet: false,
-                  mobileWalletAccount: '',
-                  walletVendor: '',
-                } as any)
-              );
-            }
-          }}
-          // iBanData={iBanData}
-          // onIBanChange={onIBanChange}
-          // onIbanBlur={onIbanBlur}
         />
       )}
       {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal state={modalState.bindBankcardModal}/>}
