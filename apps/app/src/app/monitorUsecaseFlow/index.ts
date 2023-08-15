@@ -25,4 +25,32 @@ export class MonitorUsecaseFlow {
     }
   }
 
+  public static debugAPIConnection({
+    method,
+    url,
+    params,
+    data,
+    result
+  }: {
+    method?: string;
+    url: string;
+    params: any;
+    data: any;
+    result: any;
+  }) {
+    SentryModule.captureMessage(
+      `API: ${method} ${url}`,
+      {},
+      {
+        request: {
+          params,
+          data,
+        },
+        response: {
+          ...result,
+          data: JSON.parse(JSON.stringify(result.data)),
+        },
+      }
+    );
+  }
 }

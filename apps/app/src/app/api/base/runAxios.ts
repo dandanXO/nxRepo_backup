@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import { AppEnvironment } from '../../modules/appEnvironment';
 import { getToken } from '../../modules/querystring/getToken';
-import { SentryModule } from '../../modules/sentry';
+import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
 
 export const runAxios = async (
   baseUrl: string,
@@ -33,21 +33,15 @@ export const runAxios = async (
     // console.log('runAxios.result', result);
 
     if (AppEnvironment.isDev()) {
-      SentryModule.captureMessage(
-        `API: ${method} ${url}`,
-        {},
-        {
-          request: {
-            params,
-            data,
-          },
-          response: {
-            ...result,
-            data: JSON.parse(JSON.stringify(result.data)),
-          },
-        }
-      );
+      MonitorUsecaseFlow.debugAPIConnection({
+        method,
+        url,
+        params,
+        data,
+        result,
+      })
     }
+
     return {
       success: true,
       data: result.data,
