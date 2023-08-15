@@ -18,6 +18,7 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { IndiaBindBankAccountPage } from './i18nPage/IndiaBindBankAccountPage';
 import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';
 import { PageContent } from '../../components/layouts/PageContent';
+import {environment} from "../../../../environments/environmentModule/environment";
 
 const BindBankCardPage = () => {
   // NOTICE: Common
@@ -49,6 +50,9 @@ const BindBankCardPage = () => {
 
   const navigate = useNavigate();
 
+  console.log("IndiaCountry.country", IndiaCountry.country)
+  console.log("environment.country", environment.country)
+  console.log("PakistanCountry.country", PakistanCountry.country)
   return (
     <>
       {isShowNavigation() && (

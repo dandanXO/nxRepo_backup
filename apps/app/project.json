@@ -31,8 +31,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.prod.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -45,8 +45,8 @@
         "production-in": {
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.in.prod.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/india/environment.in.prod.ts"
             }
           ],
           "optimization": true,
@@ -59,8 +59,8 @@
         "production-pk": {
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.pk.prod.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/pakistan/environment.pk.prod.ts"
             }
           ],
           "main": "apps/app/src/main.pk.tsx",
@@ -75,8 +75,8 @@
         "production-bd": {
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.bd.prod.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/bangladesh/environment.bd.prod.ts"
             }
           ],
           "optimization": true,
@@ -90,8 +90,8 @@
           "main": "apps/app/src/main/main.mx.tsx",
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.mx.prod.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/mexico/environment.mx.prod.ts"
             }
           ],
           "optimization": true,
@@ -130,8 +130,8 @@
           "vendorChunk": true,
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.in.dev.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/india/environment.in.dev.ts"
             }
           ]
         },
@@ -142,20 +142,8 @@
           "vendorChunk": true,
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.pk.dev.ts"
-            }
-          ]
-        },
-        "development-in": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true,
-          "fileReplacements": [
-            {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.in.dev.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/pakistan/environment.pk.dev.ts"
             }
           ]
         },
@@ -166,8 +154,8 @@
           "vendorChunk": true,
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.bd.dev.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/bangladesh/environment.bd.dev.ts"
             }
           ]
         },
@@ -179,8 +167,8 @@
           "vendorChunk": true,
           "fileReplacements": [
             {
-              "replace": "apps/app/src/environments/environment.ts",
-              "with": "apps/app/src/environments/environment.mx.dev.ts"
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/mexico/environment.mx.dev.ts"
             }
           ]
         }
