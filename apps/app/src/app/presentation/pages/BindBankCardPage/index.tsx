@@ -49,10 +49,6 @@ const BindBankCardPage = () => {
     usePostBankBindSaveToPKMutation();
 
   const navigate = useNavigate();
-
-  console.log("IndiaCountry.country", IndiaCountry.country)
-  console.log("environment.country", environment.country)
-  console.log("PakistanCountry.country", PakistanCountry.country)
   return (
     <>
       {isShowNavigation() && (
