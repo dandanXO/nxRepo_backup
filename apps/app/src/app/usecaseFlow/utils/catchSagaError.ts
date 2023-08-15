@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/react';
 import axios, { AxiosError } from 'axios';
 import { put } from 'redux-saga/effects';
 
