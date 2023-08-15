@@ -28,16 +28,12 @@ import { NativeAppInfo } from '../app/persistant/nativeAppInfo';
 // Page
 // PagePathEnum
 import {PagePathEnum} from "../app/presentation/pages/PagePathEnum";
-import {CategoryPage} from "../app/presentation/pages/__test__/CategoryPage";
-import {ErrorPage} from "../app/presentation/pages/__test__/ErrorPage";
-import IBANFinderPage from "../app/presentation/pages/i18n/paskitan/IBANFinderPage";
 import BindBankCardPage from "../app/presentation/pages/BindBankCardPage";
 import RepaymentDetailPage from "../app/presentation/pages/RepaymentDetailPage";
 import UploadedPaymentReceiptPage from "../app/presentation/pages/UploadedPaymentReceiptPage";
 import UploadPaymentReceiptPage from "../app/presentation/pages/UploadPaymentReceiptPage";
 import CouponModalContentAndroidWebviewPage from "../app/presentation/pages/CouponModalContentAndroidWebviewPage";
 // Modal
-import IBANFinderModal from "../app/presentation/modals/i18n/pakistan/IBANFinderModal";
 import RepaymentModal from "../app/presentation/modals/RepaymentModal";
 import AmountRepaidModal from "../app/presentation/modals/AmountRepaidModal/AmountRepaidModal";
 import ExtendConfirmModal from "../app/presentation/modals/ExtendConfirmModal";
@@ -49,6 +45,7 @@ import LoadingMask from "../app/presentation/components/LoadingMask";
 
 // NOTE: Other
 import '../style.css';
+import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -57,28 +54,7 @@ const renderApp = () => {
   // console.log('[app] isInAndroid', isInAndroid());
   // console.log('[app] AndroidAppInfo', AndroidAppInfo);
 
-  // NOTICE: 印度 v58 開始才有, 巴基斯坦 v15 就有了
-  if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
-    const appInfoStr = window['AppInfoTask']['getAppInfo']();
-    const originalAppInfo = JSON.parse(appInfoStr);
-    SentryModule.captureMessage(
-      'App load Original AndroidAppInfo',
-      {
-        packageId: originalAppInfo.packageId,
-        uiVersion: originalAppInfo.uiVersion,
-        mode: originalAppInfo.mode,
-        appName: originalAppInfo.appName,
-        environment: originalAppInfo.environment,
-      },
-      {
-        domain: originalAppInfo.domain,
-      }
-    );
-  } else {
-    SentryModule.captureMessage('App cannot load AndroidAppInfo');
-  }
-
-  SentryModule.captureMessage('App load AndroidAppInfo');
+  MonitorUsecaseFlow.appLoadAndroidAppInfo();
 
   // NOTICE: Theme
   applyCustomTheme(NativeAppInfo);
@@ -125,9 +101,7 @@ const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}>
-          <Route path="iban-finder-modal" element={<IBANFinderModal />} />
-        </Route>
+        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}/>
         <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />
           <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />

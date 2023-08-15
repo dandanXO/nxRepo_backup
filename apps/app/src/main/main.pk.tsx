@@ -49,6 +49,7 @@ import LoadingMask from "../app/presentation/components/LoadingMask";
 
 // NOTE: Other
 import '../style.css';
+import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -57,28 +58,7 @@ const renderApp = () => {
   // console.log('[app] isInAndroid', isInAndroid());
   // console.log('[app] AndroidAppInfo', AndroidAppInfo);
 
-  // NOTICE: 印度 v58 開始才有, 巴基斯坦 v15 就有了
-  if (window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']) {
-    const appInfoStr = window['AppInfoTask']['getAppInfo']();
-    const originalAppInfo = JSON.parse(appInfoStr);
-    SentryModule.captureMessage(
-      'App load Original AndroidAppInfo',
-      {
-        packageId: originalAppInfo.packageId,
-        uiVersion: originalAppInfo.uiVersion,
-        mode: originalAppInfo.mode,
-        appName: originalAppInfo.appName,
-        environment: originalAppInfo.environment,
-      },
-      {
-        domain: originalAppInfo.domain,
-      }
-    );
-  } else {
-    SentryModule.captureMessage('App cannot load AndroidAppInfo');
-  }
-
-  SentryModule.captureMessage('App load AndroidAppInfo');
+  MonitorUsecaseFlow.appLoadAndroidAppInfo();
 
   // NOTICE: Theme
   applyCustomTheme(NativeAppInfo);
