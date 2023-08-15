@@ -1,10 +1,9 @@
-
-
-import { environment } from '../../../environments/environment';
-import { AppFlag } from '../../../environments/flag';
-import { AppEnvironment } from '../../modules/appEnvironment';
-import { AppModeEnum } from '../appModeModel';
-import { IAndroidAppInfo } from './types/IAndroidAppInfo';
+import {environment} from '../../../environments/environment';
+import {AppEnvironment} from '../../modules/appEnvironment';
+import {AppModeEnum} from '../appModeModel';
+import {IAndroidAppInfo} from './types/IAndroidAppInfo';
+import {MexicoCountry} from "../../../../../../libs/shared/domain/src/country/MexicoCountry";
+import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 
 // NOTICE: refactor me
 export const AppTempFlag = {
@@ -84,7 +83,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
 
   let appInfo: IAndroidAppInfo = {
     domain: '',
-    environment: 'india',
+    environment: AllCountriesEnum.india,
     packageId: '',
     appName: '',
     uiVersion: '',
@@ -101,21 +100,21 @@ export const getAppInfo = (): IAndroidAppInfo => {
             const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '55';
 
             // 本地開發
-            const localIndiaAppInfo = {
+            const localIndiaAppInfo: IAndroidAppInfo = {
                 domain: 'https://www.oasis-gold.com',
-                environment: 'india',
+                environment: AllCountriesEnum.india,
                 packageId: 'com.ind.kyc.application',
                 appName: 'Local APP',
                 uiVersion: uiVersion,
                 token: null,
                 mode: 'H5',
                 phoneNo: '',
-            } as IAndroidAppInfo;
+            };
 
             // 測試機
-            const devIndiaAppInfo = {
+            const devIndiaAppInfo: IAndroidAppInfo = {
                 domain: 'https://www.oasis-gold.com',
-                environment: 'india',
+                environment: AllCountriesEnum.india,
                 packageId: 'com.ind.kyc.application',
                 appName: 'DevIn APP',
                 uiVersion: '55',
@@ -123,19 +122,19 @@ export const getAppInfo = (): IAndroidAppInfo => {
                 // NOTICE: mode 的用途？
                 mode: isInApp() ? 'Webview' : 'H5',
                 phoneNo: '',
-            } as IAndroidAppInfo;
+            };
 
             // 正式
-            const proIndiaAppInfo = {
+            const proIndiaAppInfo: IAndroidAppInfo = {
                 domain: '',           // webview 不必要
-                environment: 'india', // webview 不必要
+                environment: AllCountriesEnum.india, // webview 不必要
                 packageId: 'unknown', // webview 不必要
                 appName: 'APP',       // webview 不必要
                 uiVersion: '55',      // NOTE: 換主題需要，但缺失
                 token: null,          // webview 不必要
                 mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
                 phoneNo: '',
-            } as IAndroidAppInfo;
+            };
 
             if (AppEnvironment.isLocalhost()) {
                 // NOTICE: 本地開發
@@ -166,21 +165,21 @@ export const getAppInfo = (): IAndroidAppInfo => {
             const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '15';
 
             // 本地開發
-            const localPakistanAppInfo = {
+            const localPakistanAppInfo: IAndroidAppInfo = {
                 domain: 'https://www.oasis-gold.com',
-                environment: 'pakistan',
+                environment: AllCountriesEnum.pakistan,
                 packageId: 'com.pak.app.yesloan.android',
                 appName: 'Local PK APP',
                 uiVersion: uiVersion,
                 token: null,
                 mode: 'H5',
                 phoneNo: '',
-            } as IAndroidAppInfo;
+            };
 
             // 測試機
-            const devPakistanAppInfo = {
+            const devPakistanAppInfo: IAndroidAppInfo = {
                 domain: 'https://www.oasis-gold.com',
-                environment: 'pakistan',
+                environment: AllCountriesEnum.pakistan,
                 packageId: 'com.pak.app.yesloan.android',
                 appName: 'DevPk APP',
                 uiVersion: '15',
@@ -188,25 +187,69 @@ export const getAppInfo = (): IAndroidAppInfo => {
                 // NOTICE: mode 的用途？
                 mode: isInApp() ? 'Webview' : 'H5',
                 phoneNo: '',
-            } as IAndroidAppInfo;
+            };
 
             // 正式
-            const proPakistanAppInfo = {
+            const proPakistanAppInfo: IAndroidAppInfo = {
                 domain: '',              // webview 不必要
-                environment: 'pakistan', // webview 不必要
+                environment: AllCountriesEnum.pakistan, // webview 不必要
                 packageId: 'unknown',    // webview 不必要
                 appName: 'APP',          // webview 不必要
                 uiVersion: '15',         // NOTE: 換主題需要，但缺失
                 token: null,             // webview 不必要
                 mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
                 phoneNo: '',
-            } as IAndroidAppInfo;
+            };
 
             if (AppEnvironment.isLocalhost()) {
                 appInfo = localPakistanAppInfo;
             } else {
                 appInfo = AppEnvironment.isDev() ? devPakistanAppInfo : proPakistanAppInfo
             }
+        } else if (environment.country === MexicoCountry.country) {
+
+          // 本地開發
+          const localAppInfo: IAndroidAppInfo = {
+            domain: 'https://www.oasis-gold.com',
+            environment: AllCountriesEnum.mexico,
+            packageId: 'com.pak.app.yesloan.android',
+            appName: 'Local PK APP',
+            uiVersion: "1",
+            token: null,
+            mode: 'H5',
+            phoneNo: '',
+          };
+
+          // 測試機
+          const devAppInfo: IAndroidAppInfo = {
+            domain: 'https://www.oasis-gold.com',
+            environment: AllCountriesEnum.mexico,
+            packageId: 'com.pak.app.yesloan.android',
+            appName: 'DEV MX APP',
+            uiVersion: "1",
+            token: null,
+            // NOTICE: mode 的用途？
+            mode: isInApp() ? 'Webview' : 'H5',
+            phoneNo: '',
+          };
+
+          // 正式
+          const prodDevAppInfo: IAndroidAppInfo = {
+            domain: '',              // webview 不必要
+            environment: AllCountriesEnum.mexico,
+            packageId: 'unknown',    // webview 不必要
+            appName: 'APP',          // webview 不必要
+            uiVersion: "1",
+            token: null,             // webview 不必要
+            mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
+            phoneNo: '',
+          };
+
+          if (AppEnvironment.isLocalhost()) {
+            appInfo = localAppInfo;
+          } else {
+            appInfo = AppEnvironment.isDev() ? devAppInfo : prodDevAppInfo
+          }
         } else {
             throw new Error('前端請新增國家配置');
         }

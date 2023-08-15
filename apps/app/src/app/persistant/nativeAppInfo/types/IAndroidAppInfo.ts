@@ -1,5 +1,7 @@
+import {AllCountriesEnum} from "../../../../../../../libs/shared/domain/src/country/AllCountry";
+
 export type IAndroidAppInfo = {
-  environment: 'india' | 'pakistan';
+  environment: AllCountriesEnum;
   packageId: string;
   uiVersion: string;
   token: null | string;

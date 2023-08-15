@@ -41,14 +41,17 @@ import v22 from './pakistan/v22/tailwind.theme';
 import v23 from './pakistan/v23/tailwind.theme';
 import v24 from './pakistan/v24/tailwind.theme';
 import v25 from './pakistan/v25/tailwind.theme';
+import {AllCountriesEnum} from "../../../../../libs/shared/domain/src/country/AllCountry";
 
+// NOTE: Mexico
+import v1 from './mexico/v1/tailwind.theme';
 
 export const DEFAULT_INDIA_THEME: string = 'v55';
 export const DEFAULT_PAKISTAN_THEME: string = 'v15';
 
 // REFACTOR:
 export const themes: IThemes = {
-    india: {
+    [AllCountriesEnum.india]: {
         v38,
         v49,
         v55,
@@ -77,7 +80,7 @@ export const themes: IThemes = {
         v78,
         v79,
     },
-    pakistan: {
+    [AllCountriesEnum.pakistan]: {
         v15,
         v16,
         v17,
@@ -90,4 +93,7 @@ export const themes: IThemes = {
         v24,
         v25,
     },
+    [AllCountriesEnum.mexico]: {
+      v1,
+    }
 };

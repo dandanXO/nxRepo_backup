@@ -3,9 +3,7 @@ import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
 import {environment} from "../../../environments/environment";
 import {IndiaCountry} from "../../../../../../libs/shared/domain/src/country/IndiaCountry";
-
-// REFACTOR:
-type Countries = 'india' | 'pakistan';
+import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 
 function getDefaultTheme () {
   if(environment.country === IndiaCountry.country) {
@@ -15,7 +13,7 @@ function getDefaultTheme () {
   }
 }
 
-export const applyTheme = (country: Countries, theme: string): void => {
+export const applyTheme = (country: AllCountriesEnum, theme: string): void => {
   // console.log("applyTheme.country", country);
   // console.log("applyTheme.theme", theme);
 

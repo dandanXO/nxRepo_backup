@@ -10,3 +10,8 @@ export const AllCountry: ICountry[] = [
   BangladeshCountry,
 ];
 
+export enum AllCountriesEnum {
+  'india'='india',
+  'pakistan'='pakistan',
+  'mexico'= 'mexico'
+}

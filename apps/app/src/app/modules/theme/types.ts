@@ -1,13 +1,11 @@
+import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
+
 export interface ITheme {
   [key: string]: string;
 }
 
-// TODO: refactor
-export interface IThemes {
-  india: {
-    [key: string]: ITheme;
-  };
-  pakistan: {
+export type IThemes = {
+  [country in AllCountriesEnum]: {
     [key: string]: ITheme;
   };
 }
