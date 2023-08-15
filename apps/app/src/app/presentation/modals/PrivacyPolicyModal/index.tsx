@@ -7,7 +7,8 @@ import { useSelector } from 'react-redux';
 const PrivacyPolicyModal = (props: any) => {
   const navigate = useNavigate();
   const domain: string = useSelector((state: RootState) => state.app.androidAppInfo?.domain) || '';
-  const url = domain + '/privacy.html';
+  const url = (domain.includes('https://www.') ? domain :`https://www.${domain}`) + '/privacy.html';
+
   return (
     <Overlay
       show={true}

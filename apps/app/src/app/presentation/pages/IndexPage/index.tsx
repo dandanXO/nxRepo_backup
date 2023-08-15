@@ -115,7 +115,7 @@ const IndexPage = () => {
 
  
   const indexPageState = useSelector((state: RootState) => state.indexPage);
-
+// console.log(indexPageState)
   // NOTE: unknow | UserAuthing | UserRejected
   let finalPageState = PageStateEnum.unknow;
   if (indexPageState.user.state === USER_AUTH_STATE.authing) {
@@ -542,7 +542,7 @@ const onUserClickViewApplicationProgress = () => {
             indexPageState.riskControl.state === RISK_CONTROL_STATE.order_reject &&
             // indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
             (
-              <NoticeOrderOrQuotaRejectedSection />
+              <NoticeOrderOrQuotaRejectedSection state={indexPageState}/>
             )}
 
           {/*NOTE: 用戶通過認證，但沒有可用額度*/}
@@ -555,7 +555,7 @@ const onUserClickViewApplicationProgress = () => {
           {/*NOTE: 顯示下次可借款倒數計時*/}
           {indexPageState.user.state === USER_AUTH_STATE.success &&
             indexPageState.riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able &&
-            (indexPageState.riskControl.state === RISK_CONTROL_STATE.order_reject ||
+            ((indexPageState.riskControl.state === RISK_CONTROL_STATE.order_reject && Number(indexPageState.timeout.refreshableDate.days) < 1) ||
               indexPageState.riskControl.state === RISK_CONTROL_STATE.empty_quota) && (
               <WelcomeBackAndReapplyInTimeSection refreshableCountdown={refreshableCountdown} />
             )}

@@ -77,7 +77,7 @@ export interface InputProps {
   className?: string;
   // label type
   label?: string;
-  labelType?: "none" | "top" | "left";
+  labelType?: "none" | "top" | "left" | "topFix";
   style?: any;
   ref?: any;
   suffix?: string | React.ReactNode;
@@ -251,27 +251,30 @@ const Input: InputInterface = ({
   let upperLabelType = false;
 
   // NOTE: 版型 TOP
-  if (labelType === 'top') {
+  if (labelType === 'top' || labelType === "topFix") {
     CustomInput = StyledTopInput;
     upperLabelType = true;
 
     // NOTE: 無編輯中
     if (!isEdit) {
-      if (String(value).length === 0) {
+      if (String(value).length === 0 ) {
         // NOTE: 編輯前
         LabelComponentElement = (
-          <UpperFilledLabel htmlFor={labelID}>{label}</UpperFilledLabel>
+             labelType === "topFix" 
+             ? <UpperDefaultLabel labelType={labelType} htmlFor={labelID}>{label}</UpperDefaultLabel> 
+             : <UpperFilledLabel labelType={labelType} htmlFor={labelID}>{label}</UpperFilledLabel>
         );
+
       } else {
         // NOTE: 編輯後
         LabelComponentElement = (
-          <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
+          <UpperDefaultLabel labelType={labelType} htmlFor={labelID}>{label}</UpperDefaultLabel>
         );
       }
     } else {
       // NOTE: 編輯中
       LabelComponentElement = (
-        <UpperDefaultLabel htmlFor={labelID}>{label}</UpperDefaultLabel>
+        <UpperDefaultLabel labelType={labelType} htmlFor={labelID}>{label}</UpperDefaultLabel>
       );
     }
 
@@ -308,7 +311,6 @@ const Input: InputInterface = ({
           isFocus={isEdit}
           disabled={disabled}
           outlineType={outlineType}
-
         >
           {LabelComponentElement}
 

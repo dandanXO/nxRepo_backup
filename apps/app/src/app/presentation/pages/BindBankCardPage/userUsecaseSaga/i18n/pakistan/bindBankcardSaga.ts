@@ -4,7 +4,7 @@ import { put, race, take } from 'redux-saga/effects';
 
 import { API } from '../../../../../../api/rtk';
 import { catchSagaError } from '../../../../../../usecaseFlow/utils/catchSagaError';
-import { InitialStateType, modalSlice } from '../../../../../../reduxStore/modalSlice';
+import { InitialStateType, modalInitialState, modalSlice } from '../../../../../../reduxStore/modalSlice';
 import i18next from 'i18next';
 import { Modal } from '@frontend/mobile/shared/ui';
 
@@ -40,16 +40,7 @@ export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBa
 
             if (success) {
                 yield put(modalSlice.actions.updatebindBankcardModal({
-                    show: false,
-                    confirm: false,
-                    paymentMethod: 1,
-                    cardholderName: '',
-                    bankName: '',
-                    bankAccNr: '',
-                    mobileWallet: false,
-                    mobileWalletAccount: '',
-                    walletVendor: '',
-                    bankCode: '',
+                    ...modalInitialState.bindBankcardModal
                 }))
                 Modal.alert({
                     show: true,

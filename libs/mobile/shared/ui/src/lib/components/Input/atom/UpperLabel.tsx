@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface Label {
   for?: string;
+  labelType?:string;
 }
 // NOTICE: LeftInputStyle
 export const UpperFilledLabel = styled.label<Label>`
@@ -21,7 +22,7 @@ export const UpperDefaultLabel = styled.label<Label>`
   //position: absolute;
   //top: -20px;
   //left: 20px;
-  color: #aaaaaa;
+  color:${(props) => props.labelType === 'topFix' ? ` ${props.theme.text?.primary}` : ` ${props.theme.input?.placeholder}`};
   line-height: 22px;
 `;
 

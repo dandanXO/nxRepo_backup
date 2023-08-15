@@ -1,37 +1,50 @@
-import Select, { StylesConfig } from 'react-select';
+import { useState } from 'react';
+import Select, { GroupBase, Props as SelectProps } from 'react-select';
 
-const selectStyles: StylesConfig = {
-  control: (styles) => ({
-    ...styles,
-    backgroundColor: 'white',
-    padding: '0px 10px',
-    border: 0,
-    borderRadius: 0,
-    borderBottom: '1px solid #aaaaaa',
-    span: {
-      width: 0,
-    },
-    textAlign: 'left',
-  }),
-  //@ts-ignore
-  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-    return {
-      ...styles,
-      border: 0,
-      color: isSelected ? '#fff' : '#000',
-      backgroundColor: isSelected ? styles.backgroundColor : null,
-    };
-  },
+interface IReactSelect<Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>
+    extends SelectProps<Option, IsMulti, Group> {
+    containerClassNames?: string;
+    errorMessage?: string;
+}
+
+export const ReactSelect = <Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>(
+    props: IReactSelect<Option, IsMulti, Group>
+) => {
+    const [selectMenuOpen, setSelectMenuOpen] = useState(false);
+
+    return <div className={props.containerClassNames}
+        onTouchStart={(e) => {
+            const clickedElement = e.target as any;
+            if (!clickedElement?.classList[0]?.includes('option')) {
+                setSelectMenuOpen(!selectMenuOpen)
+            }
+            else {
+                setSelectMenuOpen(true)
+            }
+        }}
+    >
+        <Select
+            {...props}
+            styles={props.styles}
+            onChange={(item: any, IsMulti) => {
+                props.onChange && props.onChange(item, IsMulti);
+                setSelectMenuOpen(false);
+            }}
+            onFocus={(item: any) => {
+                props.onFocus && props.onFocus(item);
+                setSelectMenuOpen(true)
+            }}
+            onBlur={(item: any) => {
+                props.onBlur && props.onBlur(item);
+                setSelectMenuOpen(false)
+            }}
+            menuIsOpen={selectMenuOpen}
+            isSearchable={props.isSearchable || false}
+        />
+        {props.errorMessage && <div className='text-cstate-error-main pt-2 font-normal'>{props.errorMessage}</div>}
+    </div>
+
 };
 
-const CustomSelect = (props: any) => {
-  const selectStylesTypes = {
-    standard: selectStyles,
-    outlined: '',
-    '': '',
-  }[props?.type as string];
+export default ReactSelect;
 
-  return <Select styles={props?.type ? selectStylesTypes : ''} {...props} />;
-};
-
-export default CustomSelect;

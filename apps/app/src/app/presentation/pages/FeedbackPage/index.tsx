@@ -9,9 +9,10 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../components/layouts/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useEffect, useState } from 'react';
-import Select from 'react-select';
 import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../api/rtk';
 import cx from 'classnames';
+import Select from '../../components/Select';
+import { transparent } from 'tailwindcss/colors';
 
 
 interface ICategory {
@@ -28,13 +29,15 @@ const FeedbackPage = () => {
         isValidation: false,
         errorMessage: '',
     });
+    
     const [feedbackValue, setFeedbackValue] = useState<InputValue<string>>({
         data: '',
         isValidation: false,
         errorMessage: '',
     });
+
     const [isEdit, setIsEdit] = useState(false);
-    const [isSendMessage,setIsSendMessage]=useState(false)
+    const [isSendMessage, setIsSendMessage] = useState(false);
 
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
         useLazyGetFeedbackCategoriesQuery({
@@ -85,13 +88,13 @@ const FeedbackPage = () => {
             postFeedback({
                 category: Number(selectedCategory?.data),
                 feedback: feedbackValue?.data
-            }).unwrap().then(()=>{
+            }).unwrap().then(() => {
                 setIsSendMessage(false);
                 Modal.alert({
                     show: true,
                     mask: true,
-                    title:'Received Feedback' as string,
-                    content: 'Thank you for taking the time to provide your feedback. We will take it into careful consideration and will respond to your feedback as quickly as possible.'as string,
+                    title: 'Received Feedback' as string,
+                    content: 'Thank you for taking the time to provide your feedback. We will take it into careful consideration and will respond to your feedback as quickly as possible.' as string,
                     confirmText: 'OK' as string,
                     maskClosable: true,
                     enableClose: false,
@@ -99,7 +102,7 @@ const FeedbackPage = () => {
                     onConfirm: () => {
                         navigate(`${PagePathEnum.CustomerServicePage}?token=${getToken()}`);
                     },
-                  });
+                });
             })
         }
 
@@ -115,35 +118,33 @@ const FeedbackPage = () => {
             />
             <div className={`p-4 pt-0.5 h-[calc(100vh-56px)] flex flex-col`}>
                 <div className='grow'>
-                    <div className={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}>
-                        <Select
-                            styles={{
-                                control: (baseStyles, state) => ({
-                                    ...baseStyles,
-                                    borderColor: selectedCategory.isValidation ? window?.theme?.input?.error || 'red' : baseStyles.borderColor,
-                                }),
-                                //@ts-ignore
-                                indicatorSeparator: (provided) => ({ ...provided, display: 'none' })
-                            }}
-                            // className='border-red-600'
-                            onChange={(item: any) => {
-                                setSelectedCategory({
-                                    ...selectedCategory,
-                                    isValidation:false,
-                                    data: item.value
-                                })
-                                setFeedbackValue({
-                                    ...feedbackValue,
-                                    isValidation:false,
-                                    data: item.template
-                                })
-                            }}
-                            options={categoryList}
-                            isSearchable={true}
-                            placeholder={'Feedback Categories'}
-                        />
-                        {selectedCategory.isValidation && <div className='text-cstate-error-main pt-2 font-normal'>{selectedCategory.errorMessage}</div>}
-                    </div>
+                    <Select
+                        containerClassNames={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}
+                        styles={{
+                            control: (baseStyles: any, state: any) => ({
+                                ...baseStyles,
+                                background: transparent,
+                                borderColor: selectedCategory.isValidation ? window?.theme?.input?.error || 'red' : baseStyles.borderColor,
+                            }),
+                            //@ts-ignore
+                            indicatorSeparator: (provided) => ({ ...provided, display: 'none' })
+                        }}
+                        onChange={(item: any) => {
+                            setSelectedCategory({
+                                errorMessage: '',
+                                isValidation: false,
+                                data: item.value
+                            })
+                            setFeedbackValue({
+                                errorMessage: '',
+                                isValidation: false,
+                                data: item.template
+                            })
+                        }}
+                        options={categoryList}
+                        placeholder={'Feedback Categories'}
+                        errorMessage={selectedCategory.errorMessage || ''}
+                    />
                     <div className={cx('text-sm mb-1 w-full border border-cstate rounded-lg  p-3 relative',
                         {
                             'border-red-500': feedbackValue.isValidation
@@ -164,11 +165,11 @@ const FeedbackPage = () => {
                     {feedbackValue.isValidation && <div className='text-cstate-error-main '>{feedbackValue.errorMessage}</div>}
                 </div>
                 <div className={``}>
-                    <Button 
-                        text={'Send a message'} 
+                    <Button
+                        text={'Send a message'}
                         disable={isSendMessage}
                         onClick={() => {
-                            if(isSendMessage) return;
+                            if (isSendMessage) return;
                             handleSendFeedback()
                         }}
                     />

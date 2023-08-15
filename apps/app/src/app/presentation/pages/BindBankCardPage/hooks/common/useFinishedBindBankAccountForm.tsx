@@ -14,153 +14,111 @@ import { PagePathEnum } from '../../../PagePathEnum';
 import { getToken } from 'apps/app/src/app/modules/querystring/getToken';
 
 type IUseFinishedBindBankAccountPage = {
-  // NOTICE: Common
-  bankcardNoData: InputValue<string>;
+    // NOTICE: Common
+    bankcardNoData: InputValue<string>;
 
-  // NOTICE: India
-  isLoadingPostBankBindSave?: boolean;
-  postBankBindSave?: any;
-  ifscData?: InputValue<string>;
-  upiData?: InputValue<string>;
+    // NOTICE: India
+    isLoadingPostBankBindSave?: boolean;
+    postBankBindSave?: any;
+    ifscData?: InputValue<string>;
+    upiData?: InputValue<string>;
 
-  // NOTICE: Pakistan
-  isLoadingPostBankBindSaveToPK?: boolean;
-  postBankBindSaveToPK?: any;
-  // iBanData?: InputValue<any>;
-  // NOTE: 取得電子錢包列表
-  bindCardDropListData?: GetBindCardDropListResponse;
-  // NOTE: 設定電子錢包列表
-  bankAccountValue?: any;
+    // NOTE: 取得電子錢包列表
+    bindCardDropListData?: GetBindCardDropListResponse;
+    // NOTE: 設定電子錢包列表
+    bankAccountValue?: any;
 };
 
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
-  const { t } = useTranslation(i18nBankBindAccountPage.namespace);
-  const navigate = useNavigate();
-  const navigateToAPP = () => {
- 
-    // let targetBankAccount;
-    // if (
-    //   props.bindCardDropListData &&
-    //   props.bindCardDropListData.availableBanks
-    // ) {
-    //   // NOTICE: bankAccountValue 可能為 0
-    //   if (typeof props.bankAccountValue?.value === 'number') {
-    //     targetBankAccount =
-    //       props.bindCardDropListData.availableBanks[
-    //         props.bankAccountValue.value
-    //         ];
-    //   }
-    // }
+    const { t } = useTranslation(i18nBankBindAccountPage.namespace);
+    const navigate = useNavigate();
 
-    SentryModule.captureMessage(BindBankCardPageEvents.UserBindBankcard.name, {
-      ...BindBankCardPageEvents.UserBindBankcard.getTags(
-        'success',
-        props.postBankBindSave
-          ? {
-              bankAccount: props.bankcardNoData.data,
-              // ifscCode: props.ifscData && props.ifscData.data,
-              // upiId: props.upiData && props.upiData.data,
-            }
-          : {
-              // bankAccNr: props.bankcardNoData.data,
-              // mobileWallet: false,
-              // mobileWalletAccount: '',
-              // walletVendor: '',
-              // bankName: (targetBankAccount && targetBankAccount?.bankName) || '',
-              // bankCode: (targetBankAccount && targetBankAccount?.bankCode) || '',
-              // iban: props.iBanData?.data || '',
-            }
-      ),
-    });
+    const navigateToAPP = () => {
 
-    changeLocationHref('innerh5://127.0.0.1');
-  };
-
-  let targetBankAccount: BankVendor;
-
-  if (props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
-    // NOTICE: bankAccountValue 可能為 0
-    if (typeof props.bankAccountValue?.data.value === 'number') {
-      targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue.data.value];
-    }
-  }
-
-  const confirm = useCallback(() => {
-    if (props.isLoadingPostBankBindSaveToPK) return;
-    // NOTE: FormRequest
-    let request;
-    let requestBody = {};
-
-    // NOTICE: India
-    if (props.postBankBindSave) {
-      requestBody = {
-        bankAccount: props.bankcardNoData.data,
-        ifscCode: props.ifscData && props.ifscData.data,
-        upiId: props.upiData && props.upiData.data,
-      };
-      // console.log('requestBody', requestBody);
-      request = props.postBankBindSave(requestBody);
-    } else if (props.postBankBindSaveToPK) {
-      // NOTICE: Pakistan
-      requestBody = {
-        bankAccNr: props.bankcardNoData.data,
-        mobileWallet: false,
-        mobileWalletAccount: '',
-        walletVendor: '',
-        // FIXME:
-        bankName: (targetBankAccount && targetBankAccount?.bankName) || '',
-        bankCode: (targetBankAccount && targetBankAccount?.bankCode) || '',
-        // iban: props.iBanData?.data || '',
-      };
-      // console.log('requestBody', requestBody);
-      request = props.postBankBindSaveToPK(requestBody);
-    }
-
-    request
-      .unwrap()
-      .then((data: any) => {
-        // Notice: bind account successfully
-        Modal.alert({
-          show: true,
-          mask: true,
-          title: t('modal.Notice', { ns: 'common' }) as string,
-          content: t('modal.Success', { ns: 'common' }) as string,
-          confirmText: t('modal.Confirm', { ns: 'common' }) as string,
-          maskClosable: true,
-          enableClose: false,
-          enableIcon: false,
-          onConfirm: () => {
-            if (isSimpleWebView()) {
-                navigateToAPP();
-            }
-            else {
-                navigate(`${PagePathEnum.BankcardListPage}?token=${getToken()}`);
-            }
-            
-          },
+        SentryModule.captureMessage(BindBankCardPageEvents.UserBindBankcard.name, {
+            ...BindBankCardPageEvents.UserBindBankcard.getTags(
+                'success',
+                props.postBankBindSave
+                    ? {
+                        bankAccount: props.bankcardNoData.data,
+                        // ifscCode: props.ifscData && props.ifscData.data,
+                        // upiId: props.upiData && props.upiData.data,
+                    }
+                    : {
+                        // bankAccNr: props.bankcardNoData.data,
+                        // mobileWallet: false,
+                        // mobileWalletAccount: '',
+                        // walletVendor: '',
+                        // bankName: (targetBankAccount && targetBankAccount?.bankName) || '',
+                        // bankCode: (targetBankAccount && targetBankAccount?.bankCode) || '',
+                        // iban: props.iBanData?.data || '',
+                    }
+            ),
         });
-      })
-      .catch(() => {
-        SentryModule.captureMessage(
-          BindBankCardPageEvents.UserBindBankcard.name,
-          BindBankCardPageEvents.UserBindBankcard.getTags('failure', requestBody)
-        );
-      });
-  }, [
-    props.postBankBindSave,
-    props.postBankBindSaveToPK,
-    props.ifscData && props.ifscData.data,
-    props.bankcardNoData.data,
-    props.upiData && props.upiData.data,
-    props.bindCardDropListData?.availableBanks,
-    props.bankAccountValue,
-    props.isLoadingPostBankBindSave,
-    props.isLoadingPostBankBindSaveToPK,
-    // props.iBanData && props.iBanData.data,
-  ]);
 
-  return {
-    isFormPending: props.postBankBindSave ? props.isLoadingPostBankBindSave : props.isLoadingPostBankBindSaveToPK,
-    confirm,
-  };
+        changeLocationHref('innerh5://127.0.0.1');
+    };
+
+    let targetBankAccount: BankVendor;
+
+    if (props.bindCardDropListData && props.bindCardDropListData.availableBanks) {
+        // NOTICE: bankAccountValue 可能為 0
+        if (typeof props.bankAccountValue?.data.value === 'number') {
+            targetBankAccount = props.bindCardDropListData.availableBanks[props.bankAccountValue.data.value];
+        }
+    }
+
+    const confirm = useCallback(() => {
+
+        // NOTICE: India
+        const requestBody = {
+            bankAccount: props.bankcardNoData.data,
+            ifscCode: props.ifscData && props.ifscData.data,
+            upiId: props.upiData && props.upiData.data,
+        };
+
+        props.postBankBindSave(requestBody)
+            .unwrap()
+            .then((data: any) => {
+                // Notice: bind account successfully
+                Modal.alert({
+                    show: true,
+                    mask: true,
+                    title: t('modal.Notice', { ns: 'common' }) as string,
+                    content: t('modal.Success', { ns: 'common' }) as string,
+                    confirmText: t('modal.Confirm', { ns: 'common' }) as string,
+                    maskClosable: true,
+                    enableClose: false,
+                    enableIcon: false,
+                    onConfirm: () => {
+                        if (isSimpleWebView()) {
+                            navigateToAPP();
+                        }
+                        else {
+                            navigate(`${PagePathEnum.BankcardListPage}?token=${getToken()}`);
+                        }
+
+                    },
+                });
+            })
+            .catch(() => {
+                SentryModule.captureMessage(
+                    BindBankCardPageEvents.UserBindBankcard.name,
+                    BindBankCardPageEvents.UserBindBankcard.getTags('failure', requestBody)
+                );
+            });
+    }, [
+        props.postBankBindSave,
+        props.ifscData && props.ifscData.data,
+        props.bankcardNoData.data,
+        props.upiData && props.upiData.data,
+        props.bindCardDropListData?.availableBanks,
+        props.bankAccountValue,
+        props.isLoadingPostBankBindSave,
+    ]);
+
+    return {
+        isFormPending: props.isLoadingPostBankBindSave,
+        confirm,
+    };
 };
