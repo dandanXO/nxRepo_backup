@@ -22,8 +22,7 @@ const ExtendConfirmModal = () => {
           {
             [IndiaCountry.country]: <IndiaExtendConfirmModal />,
             [PakistanCountry.country]: <PakistanExtendConfirmModal />,
-          },
-          <IndiaExtendConfirmModal />
+          }
         );
       }}
     />

@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 import { Input } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../../../../components/layouts/Button';
-import { IIndiaBankAccountForm } from '../../../types/IBankAccountForm';
-import { Form } from '../../Form';
-import { Paragraph } from '../../Paragraph';
+import { Button } from '../../../../components/layouts/Button';
+import { IIndiaBankAccountForm } from '../types/IBankAccountForm';
+import { Form } from './Form';
 import { MdInfoOutline } from '@react-icons/all-files/md/MdInfoOutline';
-import IFSCHintModal from 'apps/app/src/app/presentation/modals/i18n/india/IFSCHintModal';
-import UPIHintModal from 'apps/app/src/app/presentation/modals/i18n/india/UPIHintModal';
+import IFSCHintModal from '../../../../modals/i18n/india/IFSCHintModal';
+import UPIHintModal from '../../../../modals/i18n/india/UPIHintModal';
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
 
   const [ifscModalShow,SetIfscModalShow]=useState(false);

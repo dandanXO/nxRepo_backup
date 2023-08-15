@@ -1,31 +1,39 @@
 import cx from 'classnames';
 import moment from 'moment';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../../../api/rtk/old/getLoanDetail';
-import { getOrderNo } from '../../../../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../../../../modules/querystring/getToken';
-import { Status } from '../../../../../../../../modules/statusEnum';
-import Divider from '../../../../../../../components/Divider';
-import ListItem from '../../../../../../../components/ListItem';
-import Money from '../../../../../../../components/Money.tsx';
-import { Button } from '../../../../../../../components/layouts/Button';
-
-import { GetLoanDetailResponse } from '../../../../../../../../api/loanService/GetLoanDetailResponse';
-
-import {useMemo} from "react";
-import {useDynamicChargeFeeList} from "../../../../../hooks/useDynamicChargeFeeList";
-import {formatDate} from "../../../../../../../../modules/format/formatDate";
+import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../../../../modules/querystring/getToken';
+import { Status } from '../../../../../../modules/statusEnum';
+import Divider from '../../../../../components/Divider';
+import ListItem from '../../../../../components/ListItem';
+import Money from '../../../../../components/Money.tsx';
+import { Button } from '../../../../../components/layouts/Button';
+import { GetLoanDetailResponse } from '../../../../../../api/loanService/GetLoanDetailResponse';
+import {useEffect, useMemo} from "react";
+import {useDynamicChargeFeeList} from "../../../hooks/useDynamicChargeFeeList";
+import {GetLoanDetailChargeFeeDetailItems} from "../../../../../../api/rtk/old/getLoanDetail";
+import {formatDate} from "../../../../../../modules/format/formatDate";
+import VipIcon from '../../../../../components/images/VipIcon.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
+import { RootState } from '../../../../../../reduxStore';
+import ReservationProductsModal from '../../../../../modals/ReservationProductsModal';
+import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
+import { modalInitialState, modalSlice } from '../../../../../../reduxStore/modalSlice';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
-  isFetching?:boolean;
+  isFetching?: boolean;
 }
-const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
+const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
-  const { currentData ,isFetching = true} = props || {};
+  const dispatch =useDispatch();
+  const modalState = useSelector((state: RootState) => state.model);
+
+  const { currentData, isFetching = true } = props || {};
   const {
     status = '',
     productName = '',
@@ -42,7 +50,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     extendable,
     reductionAmount = 0,
     penaltyInterest = 0,
-    loanAmount = 0,
+    loanAmount  = 0,
     dailyFee = 0,
     balance = 0,
     applyDate = '',
@@ -56,47 +64,51 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
   };
 
+    useEffect(() => {
+        dispatch(modalSlice.actions.updateReservationProductsModal({
+            ...modalInitialState.reservationProductsModal
+        }))
+    }, [])
   return (
     <div>
-      {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
-          <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>
-              Get more amount after instant payment
-          </div>
-      )}
-      <div className={`px-6 pt-3`}>
+      {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
+      {modalState.reservationProductsModal.show && <ReservationProductsModal />}
+      {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
+      {/*{currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (*/}
+      {/*  <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>*/}
+      {/*    Get more amount after instant payment*/}
+      {/*  </div>*/}
+      {/*)}*/}
+
+      <div className={`px-6`}>
         <ListItem
           title={'Product'}
           text={productName ?? ''}
-          titleColor="text-ctext-secondary"
-          textColor="text-ctext-primary"
+          titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
           title={'Order No.'}
           text={orderNo ?? ''}
-          titleColor="text-ctext-secondary"
-          textColor="text-ctext-primary"
+          titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
           title={'Status'}
           text={status ? renderStatusTag(status) : ''}
-          titleColor="text-ctext-secondary"
-          textColor="text-ctext-primary"
+          titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
           title={'Apply Date'}
           text={applyDate ? formatDate(moment(applyDate)) : ''}
-          titleColor="text-ctext-secondary"
-          textColor="text-ctext-primary"
+          titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
           title={'Due Date'}
-          text={dueDate ? formatDate(moment(dueDate)) : ''}
-          titleColor="text-ctext-secondary"
-          textColor="text-ctext-primary"
+          text={dueDate ? formatDate(moment(dueDate)): ''}
+          titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
 
@@ -104,8 +116,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           <ListItem
             title={'Repayment Date'}
             text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
-            titleColor="text-ctext-secondary"
-            textColor="text-ctext-primary"
+            titleColor="text-ctext-primary"
             isFetching={isFetching}
           />
         )}
@@ -114,8 +125,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           <ListItem
             title={'Extension Date'}
             text={extendDate ? formatDate(moment(extendDate)) : ''}
-            titleColor="text-ctext-secondary"
-            textColor="text-ctext-primary"
+            titleColor="text-ctext-primary"
             isFetching={isFetching}
           />
         )}
@@ -123,63 +133,58 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         <Divider />
 
         {/*NOTICE: 合同金*/}
-        {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-ctext-secondary" />*/}
+        {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
 
         {status !== 'EXTEND' && (
           <ListItem
             title={'Disbursal Amount'}
             text={<Money money={loanAmount} />}
-            titleColor="text-ctext-secondary"
-            textColor="text-ctext-primary"
+            titleColor="text-ctext-primary"
             isFetching={isFetching}
           />
         )}
 
         {status !== 'EXTEND' &&
-          finalItems?.map((item: any) => {
+          finalItems?.map((item: GetLoanDetailChargeFeeDetailItems, index: number) => {
             if (!item) return null;
             return (
               <ListItem
+                key={index}
                 title={item.itemName}
                 text={<Money money={item.value} />}
-                titleColor="text-ctext-secondary"
-                textColor="text-ctext-primary"
+                titleColor="text-ctext-primary"
                 isFetching={isFetching}
               />
             );
           })}
 
-        {/* {status !== 'EXTEND' && (
+        {status !== 'EXTEND' && (
           <ListItem
             title={'Daily Fee'}
-            text={<Money money={dailyFee} />}
-            titleColor="text-ctext-secondary"
-            textColor="text-ctext-primary"
-          />
-        )} */}
-
-        {status === 'EXTEND' && (
-          <ListItem
-            title={'Extension Fee'}
-            text={<Money money={extensionFee} />}
-            titleColor="text-ctext-secondary"
-            textColor="text-ctext-primary"
+            text={
+              <div className="flex">
+                <Money money={dailyFee} />
+              </div>
+            }
+            titleColor="text-ctext-primary"
             isFetching={isFetching}
           />
         )}
-
+        {status === 'EXTEND' && (
+          <ListItem title={'Extension Fee'} text={<Money money={extensionFee} />} titleColor="text-ctext-primary" isFetching={isFetching}/>
+        )}
         <ListItem
           title={'Overdue Days'}
-          text={overdueDays ?? ''}
-          titleColor="text-ctext-secondary"
-          textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+          text={overdueDays ? overdueDays : "0"}
+          titleColor="text-ctext-primary"
+          textColor={status === 'OVERDUE' ? Status(status).color : ''}
           isFetching={isFetching}
         />
         <ListItem
           title={'Overdue Fee'}
           text={<Money money={penaltyInterest} />}
-          titleColor="text-ctext-secondary"
-          textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+          titleColor="text-ctext-primary"
+          textColor={status === 'OVERDUE' ? Status(status).color : ''}
           isFetching={isFetching}
         />
 
@@ -188,13 +193,12 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         <ListItem
           title={'Reduction Amount'}
           text={<Money money={reductionAmount} isNagetive={true} />}
-          titleColor="text-ctext-secondary"
-          textColor="text-ctext-primary"
+          titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
 
         <ListItem
-          titleColor="text-ctext-secondary"
+          titleColor="text-ctext-primary"
           title={
             <div className={`item-center flex flex-row items-center`}>
               <div className={` mr-1`}>Amount Repaid</div>
@@ -210,19 +214,19 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             </div>
           }
           text={<Money money={paidAmount} isNagetive={true} />}
-          textColor="text-ctext-primary"
           isFetching={isFetching}
         />
 
         <Divider />
+
         {/*NOTE: 總應還金額*/}
         {status !== 'EXTEND' && (
           <ListItem
             title={'Repayment Amount'}
             text={<Money money={balance} />}
-            className="font-bold"
             titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
             textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+            className="font-bold"
             isFetching={isFetching}
           />
         )}
@@ -239,6 +243,19 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           />
         )}
 
+        {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
+            <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
+                <img src={VipIcon} alt="" />
+                <div className='ml-2'>
+                    <span className='font-bold'> VIP Benefits!</span> You'll enjoy
+                    <span className='font-bold'> higher loan limits</span> and
+                    <span className='font-bold'> lower interest rates</span>
+                    with responsible repayments!
+                </div>
+
+            </div>
+        )}
+
         <div className={`my-3 flex flex-row text-white`}>
           {extendable !== undefined && extendable && (
             <div
@@ -247,11 +264,12 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                   state: currentData,
                 });
               }}
-              className={`mr-1.5 grow `}
+              className={`mr-1.5 grow`}
             >
-              <Button type={'ghost'} text={'Extend'} />
+              <Button type={'secondary'} text={'Extend'} />
             </div>
           )}
+
           {status !== 'PAY_OFF' && status !== 'EXTEND' && (
             <div
               onClick={() => {
@@ -264,14 +282,14 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 'ml-1.5': extendable,
               })}
             >
-              <Button text={'Repay'} primaryTypeGradient={true} />
+              <Button text={'Repay'} />
             </div>
           )}
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
           <>
-            <div className={`text-ctext-secondary mb-4 text-xs leading-none`}>
+            <div className={`text-ctext-secondary text-xs`}>
               <div>Attention：</div>
               <ul className="list-outside list-decimal pl-3 pt-1">
                 <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
@@ -295,13 +313,12 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               <div
                 className={`mb-2 grow`}
                 onClick={() => {
-                  // console.log('Upload Receipt---------', orderNo);
                   navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
                     state: { orderNo },
                   });
                 }}
               >
-                <Button type={'ghost'} className={`w-full`} ghostTheme={'secondary'} text={'Upload Receipt'} />
+                <Button type={'ghost'} className={`w-full`} text={'Upload Receipt'} />
               </div>
             </div>
           </>
@@ -311,4 +328,4 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   );
 };
 
-export default PakistanRepaymentDetailPage;
+export default IndiaRepaymentDetailPage;

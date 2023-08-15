@@ -15,8 +15,8 @@ import { renderByCountry } from '../../../modules/i18n';
 import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { CustomPage } from '../../components/layouts/CustomPage';
 import { Navigation } from '../../components/layouts/Navigation';
-import { IndiaBindBankAccountPage } from './components/i18n/IndiaBindBankAccountPage';
-import { PakistanBindBankAccountPage } from './components/i18n/PakistanBindBankAccountPage';
+import { IndiaBindBankAccountPage } from './i18nPage/IndiaBindBankAccountPage';
+import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';
 import { PageContent } from '../../components/layouts/PageContent';
 
 const BindBankCardPage = () => {
@@ -81,17 +81,7 @@ const BindBankCardPage = () => {
                 cardholderName={cardholderName ?? ''}
               />
             ),
-          },
-          <PakistanBindBankAccountPage
-            isLoadingPostBankBindSaveToPK={isLoadingPostBankBindSaveToPK}
-            postBankBindSaveToPK={postBankBindSaveToPK}
-            isPostBankBindSaveToPKMutationLoading={isPostBankBindSaveToPKMutationLoading}
-            triggerPostBankBindSaveToPKMutation={triggerPostBankBindSaveToPKMutation}
-            triggerGetBindCardDropListQuery={triggerGetBindCardDropListQuery}
-            bindCardDropListData={bindCardDropListData}
-            cardholderName={cardholderName ?? ''}
-          />
-        )}
+        })}
       </PageContent>
     </>
   );

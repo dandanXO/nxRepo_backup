@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router';
 import Select from 'react-select';
 
 import { Input } from '@frontend/mobile/shared/ui';
-import { Button } from '../../../../../components/layouts/Button';
-import { selectStyles } from '../../../../../components/layouts/selectStyles';
-import { IPakistanBankAccountForm } from '../../../types/IBankAccountForm';
+import { Button } from '../../../../components/layouts/Button';
+import { selectStyles } from '../../../../components/layouts/selectStyles';
+import { IPakistanBankAccountForm } from '../types/IBankAccountForm';
 import { z } from 'zod';
-import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
+import { InputValue } from '../../../../../modules/form/InputValue';
 import i18next, { t } from 'i18next';
-import { validateBankcardNo } from '../../validation';
-import ValidateInput from '../../ValidateInput';
-import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
+import { validateBankcardNo } from './validation';
+import ValidateInput from '../../components/ValidateInput';
+import { modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {

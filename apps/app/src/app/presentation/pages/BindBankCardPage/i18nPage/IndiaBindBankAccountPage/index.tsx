@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { Page } from '../../../../../components/layouts/Page';
-import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
-import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
-import { useIndiaBankAccountForm } from '../../../hooks/i18n/india/useIndiaBankAccountForm';
-import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage';
+import { Page } from '../../../../components/layouts/Page';
+import { useBindBankAccountForm } from '../../hooks/common/useBindBankAccountForm';
+import { useFinishedBindBankAccountForm } from '../../hooks/common/useFinishedBindBankAccountForm';
+import { useIndiaBankAccountForm } from '../../hooks/i18n/india/useIndiaBankAccountForm';
+import { IUseBindBankAccountPage } from '../types/IUseBindBankAccountPage';
 import { BankAccountForm } from './BankAccountForm';
 
 export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {

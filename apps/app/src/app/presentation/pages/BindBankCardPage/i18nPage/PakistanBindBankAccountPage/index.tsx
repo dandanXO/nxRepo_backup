@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
 import styled from 'styled-components';
 
-import { CustomPage } from '../../../../../components/layouts/CustomPage';
-import { useBindBankAccountForm } from '../../../hooks/common/useBindBankAccountForm';
-import { useFinishedBindBankAccountForm } from '../../../hooks/common/useFinishedBindBankAccountForm';
-import { usePakistanBankAccountForm } from '../../../hooks/i18n/pakistan/usePakistanBankAccountForm';
-import { usePakistanMobileWalletForm } from '../../../hooks/i18n/pakistan/usePakistanMobileWalletForm';
-import { IUseBindBankAccountPage } from '../../../types/IUseBindBankAccountPage';
-import { ChooseBindMethod } from '../../ChooseBindMethod';
+import { CustomPage } from '../../../../components/layouts/CustomPage';
+import { useBindBankAccountForm } from '../../hooks/common/useBindBankAccountForm';
+import { useFinishedBindBankAccountForm } from '../../hooks/common/useFinishedBindBankAccountForm';
+import { usePakistanBankAccountForm } from '../../hooks/i18n/pakistan/usePakistanBankAccountForm';
+import { usePakistanMobileWalletForm } from '../../hooks/i18n/pakistan/usePakistanMobileWalletForm';
+import { IUseBindBankAccountPage } from '../types/IUseBindBankAccountPage';
+import { ChooseBindMethod } from '../../components/ChooseBindMethod';
 import { BankAccountForm } from './BankAccountForm';
 import { MobileWalletForm } from './MobileWalletForm';
-import ConfirmBindBankCardModal from 'apps/app/src/app/presentation/modals/ConfirmBindBankCardModal';
+import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'apps/app/src/app/reduxStore';
+import { RootState } from '../../../../../reduxStore';
 
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {

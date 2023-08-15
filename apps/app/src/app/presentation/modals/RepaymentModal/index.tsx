@@ -114,21 +114,7 @@ const RepaymentModal = (props: any) => {
                     orderNo={orderNo}
                   />
                 ),
-              },
-              <IndiaRepaymentModal
-                radioValue={radioValue}
-                setRadioValue={setRadioValue}
-                balance={balance}
-                balanceValue={balanceValue}
-                setBalanceValue={setBalanceValue}
-                repayTypesList={repayTypesList}
-                isRepayTypesFetching={isRepayTypesFetching}
-                repayType={repayType}
-                setRepayType={setRepayType}
-                handleConfirm={handleConfirm}
-                isPostRepayCreateLoading={isPostRepayCreateLoading}
-                orderNo={orderNo}
-              />
+              }
             )}
           </>
         );

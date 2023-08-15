@@ -15,15 +15,14 @@ const ConfirmBindBankCardModal = ({state}:IConfirmBindBankCardModal) => {
   const location = useLocation();
 
   return (
-    
+
           renderByCountry(
               {
                 //   [IndiaCountry.country]: <IndiaExtendConfirmModal />,
                   [PakistanCountry.country]: <PakistanConfirmBindBankCardModal  state={state}/>,
-              },
-              <PakistanConfirmBindBankCardModal  state={state}/>
+              }
           )
-   
+
   );
 };
 

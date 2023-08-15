@@ -1,17 +1,15 @@
 import { Input } from '@frontend/mobile/shared/ui';
-import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
+import { InputValue } from '../../../../../modules/form/InputValue';
 import React, { ClipboardEvent, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Select from 'react-select';
-import { Button } from '../../../../../components/layouts/Button';
-import { selectStyles } from '../../../../../components/layouts/selectStyles';
-import MobileInput from '../../MobileInput';
+import { Button } from '../../../../components/layouts/Button';
+import { selectStyles } from '../../../../components/layouts/selectStyles';
 import { t } from 'i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'apps/app/src/app/reduxStore';
-import { modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
-import ValidateInput from '../../ValidateInput';
-import { validateMobile } from '../../validation';
+import { useDispatch } from 'react-redux';
+import { modalSlice } from '../../../../../reduxStore/modalSlice';
+import ValidateInput from '../../components/ValidateInput';
+import { validateMobile } from './validation';
 
 type IMobileWalletForm = {
     // Wallet List

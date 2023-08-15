@@ -5,7 +5,7 @@ import {IThemeConfig} from '@frontend/mobile/shared/ui';
 import {PakistanCountry} from '../../../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import {environment} from '../../../../../../environments/environment';
 import {renderByCountry} from '../../../../../modules/i18n';
-import {Label} from '../Label';
+import {Label} from './Label';
 import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';
 import BankAccountSVG from './ic_bank_account_icon.svg';
 import MobileWalletSVG from './ic_mobile_wallet_icon.svg';
@@ -105,11 +105,7 @@ export const ChooseBindMethod = (props: IChooseBindMethod) => {
                 {wallet}
               </>
             ),
-          },
-          <>
-            {bankcard}
-            {wallet}
-          </>
+          }
         )}
       </OptionContainer>
     </Container>
