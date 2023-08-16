@@ -27,8 +27,9 @@ import v76 from './india/v76/tailwind.theme';
 import v77 from './india/v77/tailwind.theme';
 import v78 from './india/v78/tailwind.theme';
 import v79 from './india/v79/tailwind.theme';
-
-
+import v80 from './india/v80/tailwind.theme';
+import v81 from './india/v81/tailwind.theme';
+import v82 from './india/v82/tailwind.theme';
 // NOTE: Pakistan
 import v15 from './pakistan/v15/tailwind.theme';
 import v16 from './pakistan/v16/tailwind.theme';
@@ -42,51 +43,53 @@ import v23 from './pakistan/v23/tailwind.theme';
 import v24 from './pakistan/v24/tailwind.theme';
 import v25 from './pakistan/v25/tailwind.theme';
 
-
-export const DEFAULT_INDIA_THEME: string = 'v55';
-export const DEFAULT_PAKISTAN_THEME: string = 'v15';
+export const DEFAULT_INDIA_THEME = 'v55';
+export const DEFAULT_PAKISTAN_THEME = 'v15';
 
 export const themes: IThemes = {
-    india: {
-        v38,
-        v49,
-        v55,
-        v56,
-        v57,
-        v58,
-        v59,
-        v60,
-        v61,
-        v62,
-        v63,
-        v64,
-        v65,
-        v66,
-        v67,
-        v68,
-        v69,
-        v70,
-        v71,
-        v72,
-        v73,
-        v74,
-        v75,
-        v76,
-        v77,
-        v78,
-        v79,
-    },
-    pakistan: {
-        v15,
-        v16,
-        v17,
-        v18,
-        v19,
-        v20,
-        v21,
-        v22,
-        v23,
-        v24,
-        v25,
-    },
+  india: {
+    v38,
+    v49,
+    v55,
+    v56,
+    v57,
+    v58,
+    v59,
+    v60,
+    v61,
+    v62,
+    v63,
+    v64,
+    v65,
+    v66,
+    v67,
+    v68,
+    v69,
+    v70,
+    v71,
+    v72,
+    v73,
+    v74,
+    v75,
+    v76,
+    v77,
+    v78,
+    v79,
+    v80,
+    v81,
+    v82,
+  },
+  pakistan: {
+    v15,
+    v16,
+    v17,
+    v18,
+    v19,
+    v20,
+    v21,
+    v22,
+    v23,
+    v24,
+    v25,
+  },
 };
