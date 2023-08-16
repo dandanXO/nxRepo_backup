@@ -46,7 +46,7 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           cardholderName={props.cardholderName}
           bankDropList={bankDropList}
         />
-      {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal state={modalState.bindBankcardModal}/>}
+      {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal />}
     </>
   );
 };

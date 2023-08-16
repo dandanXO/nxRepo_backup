@@ -6,6 +6,7 @@ import { InitialStateType, modalSlice } from 'apps/app/src/app/reduxStore/modalS
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import { BindBankcardAction } from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
+import { t } from 'i18next';
 interface IConfirmBindBankCardModal {
     state?: InitialStateType['bindBankcardModal']
 }
@@ -18,10 +19,10 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
     return (
         <Modal>
             <div className='py-6 px-4'>
-                <div className='text-base text-ctext-primary mb-6 font-bold'>Confirm Payment Information</div>
+                <div className='text-base text-ctext-primary mb-6 font-bold'>{t('Confirm Payment Information')}</div>
                 <ListItem
                     className='mb-3'
-                    title={'Payment Method'}
+                    title={t('Payment Method')}
                     text={state?.paymentMethod === 0 ? 'Mobile Wallet' : 'Bank Card'}
                     titleColor="text-ctext-secondary"
                     textColor="text-ctext-primary"
@@ -31,21 +32,21 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                     <>
                         <ListItem
                             className='mb-3'
-                            title={'Cardholder Name'}
+                            title={t('Cardholder Name')}
                             text={state?.cardholderName ?? ''}
                             titleColor="text-ctext-secondary"
                             textColor="text-ctext-primary w-[150px] text-right"
                         />
                         <ListItem
                             className='mb-3'
-                            title={'Bank Name'}
+                            title={t('Bank Name')}
                             text={state?.bankName ?? ''}
                             titleColor="text-ctext-secondary"
                             textColor="text-ctext-primary w-[150px] text-right"
                         />
                         <ListItem
                             className='mb-3'
-                            title={'Account Number'}
+                            title={t('Account Number')}
                             text={state?.bankAccNr ?? ''}
                             titleColor="text-ctext-secondary"
                             textColor="text-ctext-primary w-[150px] text-right"
@@ -57,21 +58,21 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                     <>
                         <ListItem
                             className='mb-3'
-                            title={'Mobile Wallet'}
+                            title={t('Mobile Wallet')}
                             text={state?.walletName ?? ''}
                             titleColor="text-ctext-secondary"
                             textColor="text-ctext-primary"
                         />
                         <ListItem
                             className='mb-3'
-                            title={'Holder Name'}
+                            title={t('Holder Name')}
                             text={state?.cardholderName ?? ''}
                             titleColor="text-ctext-secondary"
                             textColor="text-ctext-primary"
                         />
                         <ListItem
                             className='mb-3'
-                            title={'Account Number'}
+                            title={t('Account Number')}
                             text={state?.mobileWalletAccount ?? ''}
                             titleColor="text-ctext-secondary"
                             textColor="text-ctext-primary"
@@ -83,7 +84,7 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                         className={`mr-1 w-full`}
                         type={'ghost'}
                         ghostTheme={'tertiary'}
-                        text={'Cancel'}
+                        text={t('Cancel')}
                         onClick={() => dispatch(modalSlice.actions.updatebindBankcardModal({
                             ...modalState.bindBankcardModal,
                             show: false,
@@ -91,7 +92,7 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                     />
                     <Button
                         className={`ml-1 w-full`}
-                        text={'Confirm'}
+                        text={t('Confirm')}
                         primaryTypeGradient={true}
                         onClick={() => {
                             dispatch(BindBankcardAction.user.bindBankcardSaveAction({

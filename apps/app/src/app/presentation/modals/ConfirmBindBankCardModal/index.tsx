@@ -6,25 +6,28 @@ import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/cou
 import { renderByCountry } from '../../../modules/i18n';
 import PakistanConfirmBindBankCardModal from './i18n/PakistanConfirmBindBankCardModal';
 import { InitialStateType } from '../../../reduxStore/modalSlice';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import MexicoConfirmBindBankCardModal from './i18n/MexicoConfirmBindBankCardModal';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../reduxStore';
 
-interface IConfirmBindBankCardModal{
-    state?:InitialStateType['bindBankcardModal']
-}
-const ConfirmBindBankCardModal = ({state}:IConfirmBindBankCardModal) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const ConfirmBindBankCardModal = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { bindBankcardModal } = useSelector((state: RootState) => state.model);
 
-  return (
+    return (
 
-          renderByCountry(
-              {
+        renderByCountry(
+            {
                 //   [IndiaCountry.country]: <IndiaExtendConfirmModal />,
-                  [PakistanCountry.country]: <PakistanConfirmBindBankCardModal  state={state}/>,
-              },
-              <PakistanConfirmBindBankCardModal  state={state}/>
-          )
+                [PakistanCountry.country]: <PakistanConfirmBindBankCardModal state={bindBankcardModal} />,
+                [MexicoCountry.country]: <MexicoConfirmBindBankCardModal state={bindBankcardModal} />,
+            },
+            <PakistanConfirmBindBankCardModal state={bindBankcardModal} />
+        )
 
-  );
+    );
 };
 
 export default ConfirmBindBankCardModal;

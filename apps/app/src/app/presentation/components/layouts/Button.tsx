@@ -11,7 +11,8 @@ type Props = {
   loading?: boolean;
   type?: 'secondary' | 'ghost' | undefined | 'primary';
   primaryTypeGradient?: boolean;
-  ghostTheme?: 'primary' | 'secondary' | 'tertiary';
+  ghostTheme?: 'primary' | 'secondary' | 'tertiary' | 'none' ;
+  outlineTheme?: 'round'
   disable?: boolean;
 } & TestingProps;
 
@@ -46,6 +47,12 @@ export const Button = (props: Props) => {
         },
         {
           'border-[1.5px] border-ctext-tertiary bg-cbg-secondary-main text-ctext-tertiary ': props.type === 'ghost' && props.ghostTheme === "tertiary",
+        },
+        {
+          'bg-cbg-secondary-main text-ctext-tertiary ': props.type === 'ghost' && props.ghostTheme === "none",
+        },
+        {
+          'rounded-3xl': props.outlineTheme === "round"
         },
         props.className
       )}

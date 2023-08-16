@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router';
-import styled from 'styled-components';
-
-import { CustomPage } from '../../../../components/layouts/CustomPage';
-import { useBindBankAccountForm } from '../../hooks/common/useBindBankAccountForm';
-import { useFinishedBindBankAccountForm } from '../../hooks/common/useFinishedBindBankAccountForm';
-import { usePakistanBankAccountForm } from '../../hooks/i18n/pakistan/usePakistanBankAccountForm';
-import { usePakistanMobileWalletForm } from '../../hooks/i18n/pakistan/usePakistanMobileWalletForm';
 import { IUseBindBankAccountPage } from '../types/IUseBindBankAccountPage';
 import { ChooseBindMethod } from '../../components/ChooseBindMethod';
 import { BankAccountForm } from './BankAccountForm';
@@ -80,7 +73,7 @@ export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           bankDropList={bankDropList}
         />
       )}
-      {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal state={modalState.bindBankcardModal}/>}
+      {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal />}
     </>
   );
 };

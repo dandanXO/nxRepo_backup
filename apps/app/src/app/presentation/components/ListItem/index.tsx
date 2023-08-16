@@ -1,8 +1,9 @@
 import cx from 'classnames';
+import { ReactNode } from 'react';
 
 type ListItemProps = {
-    title?: string | React.ReactElement;
-    text?: string | React.ReactElement | number;
+    title?: string | React.ReactElement | ReactNode ;
+    text?: string | React.ReactElement | number ;
     titleColor?: string;
     textColor?: string;
     className?: string;

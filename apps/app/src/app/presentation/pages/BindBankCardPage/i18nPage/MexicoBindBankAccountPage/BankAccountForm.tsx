@@ -13,8 +13,6 @@ import { validateBankcardNo } from './validation';
 import ValidateInput from '../../components/ValidateInput';
 import { modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
-import { RiRadioButtonFill } from '@react-icons/all-files/ri/RiRadioButtonFill';
-import { RiCheckboxBlankCircleLine } from '@react-icons/all-files/ri/RiCheckboxBlankCircleLine';
 import { RadioOption } from '../../../../components/RadioOption';
 
 
@@ -142,7 +140,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         isSearchable={true}
                         placeholder={'Select'}
                     />
-                    <div className='my-1 text-cstate-error-main'>{!isBankSelected && t('Please select an option')}</div>
+                    <div className='my-1 ml-5 text-cstate-error-main'>
+                        {!isBankSelected && bankValue.value === '' && t('Please select an option')}
+                    </div>
                 </div>
                 <div className='mb-2'>
                     <ValidateInput
@@ -178,7 +178,8 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
             </div>
             <div>
                 <Button
-                    text={'Confirm'}
+                    outlineTheme={'round'}
+                    text={t('Confirm')}
                     primaryTypeGradient={true}
                     onClick={confirmBindCard}
                 />
