@@ -12,7 +12,7 @@ type Props = {
   type?: 'secondary' | 'ghost' | undefined | 'primary';
   primaryTypeGradient?: boolean;
   ghostTheme?: 'primary' | 'secondary' | 'tertiary' | 'none' ;
-  outlineTheme?: 'round'
+  outlineTheme?: 'round' | undefined
   disable?: boolean;
 } & TestingProps;
 

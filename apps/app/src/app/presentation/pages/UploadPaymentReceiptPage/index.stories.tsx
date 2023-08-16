@@ -4,7 +4,7 @@ import React from 'react';
 import { AppThemeProvider } from '@frontend/mobile/shared/ui';
 
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
-import { IndiaUploadPaymentReceiptPage } from './components/i18n/indexPage/india/IndiaUploadPaymentReceiptPage';
+import { IndiaUploadPaymentReceiptPage } from './i18nPage/IndiaUploadPaymentReceiptPage';
 
 export default {
   title: 'Page/UploadPaymentReceiptPage',

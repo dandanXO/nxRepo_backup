@@ -1,16 +1,13 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-
 import { Input } from '@frontend/mobile/shared/ui';
-
-import { Button } from '../../../../../../../components/layouts/Button';
-import { Page } from '../../../../../../../components/layouts/Page';
-import UploadingFileModal from '../../../../../modal/UploadingFileModal';
-import { i18nUploadPaymentReceiptPage } from '../../../translations';
-import { I18UploadPaymentReceiptPageProps } from '../../../types/I18UploadPaymentReceiptPageProps';
-import I18CameraSvgIcon from '../../../I18CameraSvgIcon';
-import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../../../../common';
-import { PageContent } from '../../../../../../../components/layouts/PageContent';
+import { Button } from '../../../../components/layouts/Button';
+import UploadingFileModal from '../../modal/UploadingFileModal';
+import { i18nUploadPaymentReceiptPage } from '../translations';
+import { I18UploadPaymentReceiptPageProps } from '../types/I18UploadPaymentReceiptPageProps';
+import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
+import { PageContent } from '../../../../components/layouts/PageContent';
+import IndiaCameraSvgIcon from './IndiaCameraSvgIcon';
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(
   (props: I18UploadPaymentReceiptPageProps) => {
@@ -43,7 +40,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
             {!props.formFile ? (
               <div>
                 <CameraSvgIconWrapper>
-                  <I18CameraSvgIcon />
+                  <IndiaCameraSvgIcon />
                 </CameraSvgIconWrapper>
                 <UploadSectionTitle>{props.t('Upload from Photo Album')}</UploadSectionTitle>
               </div>
@@ -58,7 +55,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               onInput={(event) => props.onFileChange(event)}
             />
           </UploadSection>
-          <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
+          <div className="my-2 text-cstate-error-main">{props.fileErrorMessage}</div>
         </div>
         <Button text={'Confirm'} onClick={() => props.confirm()} />
       </PageContent>

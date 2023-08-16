@@ -15,9 +15,11 @@ import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
-import { IndiaUploadPaymentReceiptPage } from './components/i18n/indexPage/india/IndiaUploadPaymentReceiptPage';
-import { PakistanUploadPaymentReceiptPage } from './components/i18n/indexPage/pakistan/PakistanUploadPaymentReceiptPage';
-import { i18nUploadPaymentReceiptPage } from './components/i18n/translations';
+import { IndiaUploadPaymentReceiptPage } from './i18nPage/IndiaUploadPaymentReceiptPage';
+import { PakistanUploadPaymentReceiptPage } from './i18nPage/PakistanUploadPaymentReceiptPage';
+import { i18nUploadPaymentReceiptPage } from './i18nPage/translations';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { MexicoUploadPaymentReceiptPage } from './i18nPage/MexicoUploadPaymentReceiptPage';
 
 export interface PostRepayReceiptRequestProps {
   formFile: any;
@@ -98,6 +100,16 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
           ),
           [PakistanCountry.country]: (
             <PakistanUploadPaymentReceiptPage
+              isUploading={isUploading}
+              formFile={formFile}
+              onFileChange={onFileChange}
+              imageSrc={imageSrc}
+              confirm={confirm}
+              fileErrorMessage={fileErrorMessage}
+            />
+          ),
+          [MexicoCountry.country]: (
+            <MexicoUploadPaymentReceiptPage
               isUploading={isUploading}
               formFile={formFile}
               onFileChange={onFileChange}

@@ -9,6 +9,7 @@ import { i18nUploadedPaymentReceiptPage } from './components/i18n/translations';
 import UploadedPaymentReceiptPage from './index';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 const CustomPage = styled(Page)`
   display: flex;
   flex-direction: column;
@@ -57,7 +58,12 @@ export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymen
           <Description>{props.t('Thank you. Your receipt has been uploaded successfully.')}</Description>
         </Content>
         <ControlSection>
-          <Button text={'Done'} primaryTypeGradient={environment.country===PakistanCountry.country} onClick={() => props.navigateToLoanDetails()} />
+          <Button 
+              text={'Done'}
+              primaryTypeGradient={environment.country === PakistanCountry.country}
+              outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}
+              onClick={() => props.navigateToLoanDetails()}
+          />
         </ControlSection>
       </CustomPage>
     );
