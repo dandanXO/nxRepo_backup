@@ -50,7 +50,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
   return (
     <div className="px-4 text-left text-ctext-primary">
-      <div className="mt-3 ml-[-4px] whitespace-nowrap text-xs">
+      <div className="mt-1 ml-[-4px] whitespace-nowrap text-xs">
         <Radio.Group
           value={radioValue}
           onCheck={(value: any) => {

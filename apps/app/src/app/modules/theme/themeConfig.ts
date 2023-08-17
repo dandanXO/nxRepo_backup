@@ -54,6 +54,12 @@ export const themeConfig: IThemeConfig = {
     error: theme['custom_state_error_main'],
     placeholder: theme['custom_text_fields_placeholder_main'],
     outline: theme['custom_text_fields_outline_main'],
+  },
+  text:{
+    primary: theme['custom_text_primary'],
+    secondary: theme['custom_text_secondary'],
+    tertiary: theme['custom_text_tertiary'],
+    divider: theme['custom_text_divider'],
   }
 
 };

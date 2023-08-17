@@ -52,5 +52,11 @@ export interface IThemeConfig {
     error: Colors | string;
     placeholder: Colors | string;
     outline: Colors | string;
+  },
+  text?: {
+      primary: Colors | string;
+      secondary: Colors | string;
+      tertiary: Colors | string;
+      divider: Colors | string;
   }
 }

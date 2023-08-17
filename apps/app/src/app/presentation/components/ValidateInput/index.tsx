@@ -12,7 +12,7 @@ type Props = {
 } & InputProps; 
 
 const ValidateInput = (props: Props) => {
-    const { inputData, setInputData } = props
+    const { inputData, setInputData ,inputLength =1} = props
     const preventCopyPaste = (e: ClipboardEvent<any>) => {
         e.preventDefault();
     };
@@ -34,7 +34,7 @@ const ValidateInput = (props: Props) => {
     }
 
     useEffect(() => {
-        if ((props.inputLength && inputData.data.length >= props.inputLength) || inputData.isEdit) {
+        if ((inputLength && inputData.data.length >= inputLength) || inputData.isEdit) {
             handleValidate()
         }
     }, [inputData.data])

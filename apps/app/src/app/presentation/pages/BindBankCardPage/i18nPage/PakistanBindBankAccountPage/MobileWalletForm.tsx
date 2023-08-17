@@ -8,7 +8,7 @@ import { selectStyles } from '../../../../components/layouts/selectStyles';
 import { t } from 'i18next';
 import { useDispatch } from 'react-redux';
 import { modalSlice } from '../../../../../reduxStore/modalSlice';
-import ValidateInput from '../../components/ValidateInput';
+import ValidateInput from '../../../../components/ValidateInput';
 import { validateMobile } from './validation';
 
 type IMobileWalletForm = {

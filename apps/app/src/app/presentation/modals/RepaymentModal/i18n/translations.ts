@@ -22,6 +22,9 @@ export const i18nRepaymentModal: i18nComponent = {
       'Payment Amount (PKR)': 'Payment Amount (PKR)',
       'Coupon (PKR)': 'Coupon (PKR)',
       'Repayment Amount': 'Repayment Amount',
+
+      //Mexico
+      'Coupon (MXN)':'Coupon (MXN)'
     },
     bn_BD: {
       Repayment: 'পরিশোধের',
@@ -37,6 +40,9 @@ export const i18nRepaymentModal: i18nComponent = {
         '1. পরিশোধের আগে, অনুগ্রহ করে নিশ্চিত করুন যে আপনার ব্যাঙ্ক অ্যাকাউন্টে যথেষ্ট ব্যালেন্স আছে।',
       '2. In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.':
         '2. আপনার অধিকার রক্ষা করার জন্য, আমরা দৃঢ়ভাবে সুপারিশ করছি যে আপনি একটি স্ক্রিনশট নিন এবং পরিশোধ সম্পূর্ণ করার পরে আপনার UTR নম্বর আপলোড করুন এবং আপনার পরিশোধের রসিদ আপলোড করতে APP-এ ফিরে যান।',
+
+      //Mexico
+      'Coupon (MXN)':'Coupon (MXN)'
     },
   },
 };
