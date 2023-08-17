@@ -126,8 +126,8 @@ const RepaymentModal = (props: any) => {
                                 radioValue={radioValue}
                                 setRadioValue={setRadioValue}
                                 balance={balance}
-                                balanceValue={balanceValue}
-                                setBalanceValue={setBalanceValue}
+                                balanceValue={balanceData}
+                                setBalanceValue={setbalanceData}
                                 repayTypesList={repayTypesList}
                                 isRepayTypesFetching={isRepayTypesFetching}
                                 repayType={repayType}

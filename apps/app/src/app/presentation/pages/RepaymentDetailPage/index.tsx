@@ -13,19 +13,22 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import IndiaRepaymentDetailPage from './i18nPage/india/IndiaRepaymentDetailPage';
 import PakistanRepaymentDetailPage from './i18nPage/pakistan/PakistanRepaymentDetailPage';
+import { RepaymentDetailPageUseCaseActions } from './userUsecaseSaga';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../reduxStore';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
-    useLazyGetLoanDetailQuery({
-      pollingInterval: 0,
-      refetchOnFocus: false,
-      refetchOnReconnect: false,
-    });
+  const dispatch = useDispatch();
+
+  const state = useSelector((state: RootState) => state)
+
+  const currentData = state.repaymentDetailPage.repaymentDetail
+  const isFetching = state.rtkPending.isPending;
 
   useEffect(() => {
-    triggerGetList({ orderNo: location.state?.orderNo || getOrderNo() });
+    dispatch(RepaymentDetailPageUseCaseActions.user.repaymentDetail())
   }, []);
 
   return (
@@ -39,7 +42,7 @@ const RepaymentDetailPage = (props: any) => {
         />
       )}
 
-      {renderByCountry(
+      {currentData!==undefined && renderByCountry(
         {
           [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
           [PakistanCountry.country]: <PakistanRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,

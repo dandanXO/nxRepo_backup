@@ -57,9 +57,9 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
     ];
 
     const handleRadioChange = (e: any) => {
-        setRadioValue(e);
+        // setRadioValue(e);
         if (e === 'balance') {
-            setBalanceValue({ ...balanceValue, data: balance });
+            setBalanceValue({ ...balanceValue, data: `${environment.currency} ${balance}` });
             setBalanceValueErrorMessage('');
         }
     };
@@ -75,10 +75,6 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
             }
         }
     };
-
-    useEffect(()=>{
-        // setBalanceValue(`${environment.currency} ${balanceValue.data}`)
-    },[balanceValue.data])
     return (
         <div className="px-4 text-left text-ctext-primary">
             <div className="mt-1 mb-2 whitespace-nowrap text-sm">

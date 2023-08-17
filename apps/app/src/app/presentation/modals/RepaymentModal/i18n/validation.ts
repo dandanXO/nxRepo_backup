@@ -14,7 +14,7 @@ export const validateBalance = (data: any) => {
         errorMessage = 'This field cannot be left blank or 0.';
     } else if (!new RegExp('^[0-9]*$').test(data)) {
         errorMessage = 'Numbers only. Please try again.';
-    } else if (Number(data) > Number(100)) {
+    } else if (Number(data) > Number(10000)) {
         // NOTE: 限制數字最大值
         errorMessage = 'Amount cannot be greater than the repayment balance.';
     } else {

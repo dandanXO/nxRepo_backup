@@ -12,6 +12,8 @@ import { loginSlice } from './loginSlice';
 import { modalSlice } from './modalSlice';
 import { loadingSlice } from './loadingSlice';
 import { repaymentPageSlice } from './repaymentPageSlice';
+import { repaymentDetailPageSlice } from './repaymentDetailPageSlice';
+import { rtkPendingSlice } from './rtkPendingSlice';
 
 export const history = createBrowserHistory();
 const routerMiddleware = createRouterMiddleware(history);
@@ -50,6 +52,9 @@ export const appStore = configureStore({
     [loginSlice.name]: loginSlice.reducer,
     [loadingSlice.name]: loadingSlice.reducer,
     [repaymentPageSlice.name]: repaymentPageSlice.reducer,
+    [repaymentDetailPageSlice.name]: repaymentDetailPageSlice.reducer,
+    [rtkPendingSlice.name]: rtkPendingSlice.reducer,
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
