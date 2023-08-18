@@ -9,7 +9,7 @@ import { rtkPendingSlice } from "apps/app/src/app/reduxStore/rtkPendingSlice";
 import moment from 'moment';
 
 
-export function* userRepaymentDetailSaga(action: PayloadAction<repaymentDetailPageInitialStateType['repaymentDetail']>) {
+export function* userRepaymentDetailSaga() {
     // console.log("userReserveSaga.payload-------", action.payload);
     try {
         yield put(rtkPendingSlice.actions.updateRtkPending(true));

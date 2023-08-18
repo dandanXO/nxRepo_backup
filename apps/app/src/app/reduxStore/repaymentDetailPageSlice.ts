@@ -5,22 +5,29 @@ import { GetCouponApplicableList } from "../api/userService/GetCouponApplicableL
 export type repaymentDetailPageInitialStateType = {
     repaymentDetail: GetLoanDetailResponse | undefined,
     repaymentData: {
+        balance?: string;
         orderNo?: string;
-        payType?: string;
+
         extend?: boolean;
-        repayAmount?: number;
-        coupon?: GetCouponApplicableList | undefined;
+        repayAmount?: number | string;
+        coupon?: GetCouponApplicableList | null;
+        radio?: string;
+        payType?: "BANK_ACCOUNT" | "MOBILE_WALLET";
+        repayTypeList?: { value: string, label: string }[]
     }
 }
 
 export const repaymentDetailPageInitialState: repaymentDetailPageInitialStateType = {
     repaymentDetail: undefined,
     repaymentData: {
+        balance: '',
         orderNo: '',
-        payType: '',
+        payType: "MOBILE_WALLET",
         extend: false,
         repayAmount: 0,
-        coupon: undefined,
+        coupon: null,
+        radio: 'balance',
+        repayTypeList: []
     }
 }
 
@@ -31,7 +38,7 @@ export const repaymentDetailPageSlice = createSlice({
         updateRepaymentDetail: (state, action: PayloadAction<repaymentDetailPageInitialStateType['repaymentDetail']>) => {
             state.repaymentDetail = action.payload;
         },
-        updateRepaymentData: (state, action:PayloadAction<repaymentDetailPageInitialStateType['repaymentData']>) => {
+        updateRepaymentData: (state, action: PayloadAction<repaymentDetailPageInitialStateType['repaymentData']>) => {
             state.repaymentData = action.payload;
         }
     }

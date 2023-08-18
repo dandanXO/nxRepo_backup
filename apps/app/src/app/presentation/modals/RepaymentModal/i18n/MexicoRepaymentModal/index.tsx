@@ -1,7 +1,7 @@
 import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 import Select from "../../../../components/Select";
@@ -25,6 +25,10 @@ import { t } from 'i18next';
 import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
 import ValidateInput from '../../../../components/ValidateInput';
 import { validateBalance } from '../validation';
+import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'apps/app/src/app/reduxStore';
+import { getOrderNo } from 'apps/app/src/app/modules/querystring/getOrderNo';
 
 type paymentMethodValueType = {
     type: string;
@@ -33,37 +37,39 @@ type paymentMethodValueType = {
 
 const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
     const {
-        radioValue,
-        setRadioValue,
-        balance,
         balanceValue,
         setBalanceValue,
-        repayTypesList,
-        isRepayTypesFetching,
-        repayType,
-        setRepayType,
+        handleRepayData,
         handleConfirm,
-        orderNo,
         isPostRepayCreateLoading
     } = props;
     const navigate = useNavigate();
     const location = useLocation();
-    const { coupon } = location.state;
 
-    const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState('');
     const payOptions = [
         { value: 'balance', label: t('Repay Full Amount') },
         { value: 'custom', label: t('Partial Repayment') },
     ];
+    const repaymentData = useSelector((state: RootState) => state.repaymentDetailPage.repaymentData);
+
+    const { balance, repayAmount, radio, payType, coupon, orderNo, repayTypeList } = repaymentData
 
     const handleRadioChange = (e: any) => {
-        // setRadioValue(e);
         if (e === 'balance') {
             setBalanceValue({ ...balanceValue, data: `${environment.currency} ${balance}` });
-            setBalanceValueErrorMessage('');
         }
+        handleRepayData({
+            ...repaymentData,
+            radio: e,
+            coupon: e === 'balance' ? null : coupon,
+        })
     };
-
+    useEffect(() => {
+        setBalanceValue({
+            ...balanceValue,
+            data:`${environment.currency} ${balance}`
+        })
+    }, [balance])
     const paymentLabel = (color = window.theme?.text?.primary) => {
         return {
             ':before': {
@@ -71,10 +77,11 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                 display: 'block',
                 color: color,
                 top: 0,
-                fontSize:'14px'
+                fontSize: '14px'
             }
         }
     };
+
     return (
         <div className="px-4 text-left text-ctext-primary">
             <div className="mt-1 mb-2 whitespace-nowrap text-sm">
@@ -89,13 +96,13 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                     outlineType={'outlined'}
                     placeholder='8,500'
                     value={`${balanceValue.data}`}
-                    // disabled={radioValue === 'balance'}
+                    disabled={radio === 'balance'}
                     inputData={balanceValue}
                     setInputData={setBalanceValue}
-                    validateData={() => validateBalance(balanceValue.data)}
+                    validateData={() => balance!==undefined && validateBalance(balanceValue.data,balance)}
                     inputLength={1}
                     errorMessage={balanceValue.errorMessage}
-                    
+
                 />
             </div>
 
@@ -113,34 +120,33 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                             alignItems: 'end',
                         }),
                         //@ts-ignore
-                        indicatorsContainer: (provided) => ({ ...provided, alignItems: 'end'}),
+                        indicatorsContainer: (provided) => ({ ...provided, alignItems: 'end' }),
                         indicatorSeparator: (provided) => ({ ...provided, display: 'none' }),
                         input: (styles) => ({ ...styles, bottom: 0 }),
                         placeholder: (styles) => ({ ...styles, color: window.theme?.input?.placeholder, ...paymentLabel() }),
                         singleValue: (styles, { data }) => ({ ...styles, ...paymentLabel() }),
                     }}
                     // data-content={t('Payment Method')}
-                    options={repayTypesList || []}
-                    // value={repayType.value === '' ? undefined : repayType}
-
-                    onChange={(item) => {
-                        setRepayType(item as paymentMethodValueType);
+                    options={repayTypeList || []}
+                    value={repayTypeList === undefined ? undefined : repayTypeList.find((option: any) => option.value === payType)}
+                    onChange={(item: any) => {
+                        handleRepayData({ payType: item.value })
                     }}
                 />
             </div>
 
-            {radioValue !== 'custom' && (
+            {radio !== 'custom' && (
                 <div className='border  border-solid border-cTextFields-outline-main rounded-lg'>
                     <div className="text-sm ml-5 pt-0.5">{t('Coupon (MXN)')}</div>
                     <div
                         className="flex items-center justify-center pl-5 pr-2 pb-0.5"
                         onClick={() => {
-                            if (isRepayTypesFetching) return;
-                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
+                            if (repayTypeList === undefined) return;
+                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                                 state: {
                                     ...location.state,
                                     paymentAmount: balance,
-                                    paymentMethod: repayType.value,
+                                    paymentMethod: payType,
                                 },
                             });
                         }}
@@ -171,13 +177,13 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <ListItem
                     title={'Repayment Amount'}
                     text={
-                        radioValue !== 'custom' ? (
+                        radio !== 'custom' ? (
                             <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />
                         ) : (
-                            <Money money={0
-                                // isNaN(balanceValue.data.replace(`${environment.currency}`, '').trim())
-                                //     ? 0
-                                //     : balanceValue.data.replace(`${environment.currency}`, '').trim()
+                            <Money money={
+                                isNaN(balanceValue.data.replace(`${environment.currency}`, '').trim())
+                                    ? 0
+                                    : balanceValue.data.replace(`${environment.currency}`, '').trim()
                             } />
                         )
                     }
@@ -192,7 +198,10 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                         className={`w-full`}
                         text={props.t('Cancel')}
                         onClick={() => {
-                            navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
+                            handleRepayData({
+                                ...repaymentDetailPageInitialState.repaymentData
+                            })
+                            navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
                         }}
                     />
                 </div>
@@ -203,8 +212,10 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                         primaryTypeGradient={true}
                         disable={isPostRepayCreateLoading}
                         onClick={() => {
-                            if (isRepayTypesFetching) return;
-                            if (balanceValueErrorMessage === '') handleConfirm();
+                            console.log('repaymentDetailPageState', repaymentData)
+                            // console.log(balanceValue.isValidation)
+                            if (repayTypeList === undefined) return;
+                            if (balanceValue.errorMessage === '') handleConfirm();
                         }}
                     />
                 </div>

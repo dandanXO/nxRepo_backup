@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
+import { RootState } from '../../../reduxStore';
+import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
@@ -24,8 +26,11 @@ const RepaymentCouponModal = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
-
-    const { orderNo, paymentAmount, paymentMethod } = location.state || {};
+    const repaymentDetailPageState = useSelector((state: RootState) => state.repaymentDetailPage);
+    
+    const {  orderNo = getOrderNo() , balance } = repaymentDetailPageState.repaymentDetail || {};
+    const {  payType ='MOBILE_WALLET'} =  repaymentDetailPageState.repaymentData|| {};
+    const {  paymentAmount, paymentMethod } = location.state || {};
     const [triggerGetList, { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized }] =
         useLazyGetCouponApplicableListQuery({
             pollingInterval: 0,
@@ -37,8 +42,8 @@ const RepaymentCouponModal = () => {
         triggerGetList({
             isFullRepay: true,
             orderNo,
-            paymentAmount,
-            paymentMethod,
+            paymentAmount: Number(balance || paymentAmount) ,
+            paymentMethod: payType!== undefined && payType === "BANK_ACCOUNT" ? "BANK_ACCOUNT" : "MOBILE_WALLET" || paymentMethod,
         });
     }, []);
 
@@ -145,14 +150,19 @@ const RepaymentCouponModal = () => {
                         text={'Confirm'}
                         primaryTypeGradient={environment.country===PakistanCountry.country}
                         className="w-full"
-                        onClick={() =>
+                        onClick={() =>{
+                      
+                            dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({
+                                ...repaymentDetailPageState.repaymentData,
+                                coupon:applicableCouponList.length > 0 && checkedCoupon > -1 ? applicableCouponList[checkedCoupon] : null,
+                            }))
                             navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                                 state: {
                                     ...location.state,
                                     coupon:
                                         applicableCouponList.length > 0 && checkedCoupon > -1 ? applicableCouponList[checkedCoupon] : null,
                                 },
-                            })
+                            })}
                         }
                     />
                 </div>

@@ -14,7 +14,7 @@ export const RepaymentDetailPageUseCaseActions = {
     },
     user: {
         repaymentDetail: createAction<repaymentDetailPageInitialStateType['repaymentDetail']>('RepaymentDetailPageUseCaseActions-user-repaymentDetail'),
-        repayCreate: createAction<repaymentDetailPageInitialStateType['repaymentData']>('RepaymentDetailPageUseCaseActions-user-repayCreate'),
+        repayData: createAction('RepaymentDetailPageUseCaseActions-user-repayData'),
         reserve: createAction<UserReserveActionPayload>('RepaymentDetailPageUseCaseActions-user-reserve'),
     },
 
