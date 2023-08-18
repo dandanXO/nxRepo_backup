@@ -10,5 +10,5 @@ export const MexicoCountry: ICountry = {
   currency: "$",
   currencyCode: "mxn",
   language: AllLanguage.en_US,
-  timezone: AllTimezoneEnum["Asia/Kolkata"],
+  timezone: AllTimezoneEnum["America/Mexico_City"],
 };

@@ -2,18 +2,30 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
+
 const SentryCliPlugin = require('@sentry/webpack-plugin');
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const {APP_IDENTIFICATION, gitRevisionPlugin, isProduction, isDashboard, PUBLIC_PATH, ASSET_OUTPUT_PATH} = require("./webpack.config.common");
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const DashboardPlugin = require("webpack-dashboard/plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
 const AppBabelLoader = path.join(__dirname, './loader/app-babel-loader.js')
+const {proxyURL}= require("./webpack.config.proxy");
+
+const infoLog = (message, rest) => {
+  if (!rest) {
+    console.info(`${APP_IDENTIFICATION} ${message}`);
+  } else {
+    console.info(`${APP_IDENTIFICATION} ${message}`, rest);
+  }
+};
 
 // NOTICE: react-apexcharts 裡面有舊版本的 .bablerc，跟目前專案的不符合，include node_modules 會導致專案與node_modules 下 .babelrc 不一致
 const filePath = path.resolve(__dirname, '../../../node_modules/react-apexcharts/.babelrc')
@@ -29,63 +41,7 @@ fs.exists(filePath, function(exists) {
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
 
-
-const isProduction = process.env.NODE_ENV == 'production';
-const isDashboard = process.env.NODE_DASHBOARD;
-
-console.log('isProduction: ', isProduction);
-console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
-console.log('process.env.NODE_COUNTRY:', process.env.NODE_COUNTRY);
-console.log('process.env.NODE_ANALYZER:', process.env.NODE_ANALYZER);
-console.log('process.env.NODE_UI_VERSION:', process.env.NODE_UI_VERSION);
-
-const gitRevisionPlugin = new GitRevisionPlugin();
-console.log('gitRevisionPlugin.commithash()', gitRevisionPlugin.commithash());
-
-// NOTICE:
-const PUBLIC_PATH = !isProduction ? '/' : '/v2/';
-console.log('PUBLIC_PATH', PUBLIC_PATH);
-
-// NOTICE:
-const ASSET_OUTPUT_PATH = 'images';
-
-
-// REFACTOR: refactor me
-const APP_IDENTIFICATION = `[apps/app][${process.env.NODE_COUNTRY}] `;
-
-const infoLog = (message, rest) => {
-  if (!rest) {
-    console.info(`${APP_IDENTIFICATION} ${message}`);
-  } else {
-    console.info(`${APP_IDENTIFICATION} ${message}`, rest);
-  }
-};
-
-infoLog('build');
-
-// NOTE: Proxy URL
-let proxyURL = null;
-switch (process.env.NODE_COUNTRY) {
-  case 'in': {
-    proxyURL = 'https://app.india-api-dev.com';
-    break;
-  }
-  case 'pk': {
-    proxyURL = 'https://app.pk-api-dev.com';
-    break;
-  }
-  case 'bd': {
-    proxyURL = 'https://app.bd-api-dev.com';
-    break;
-  }
-  case 'mx': {
-    proxyURL = 'https://app.india-api-dev.com';
-    break;
-  }
-  default: {
-    throw new Error(APP_IDENTIFICATION + "please setting proxy url");
-  }
-}
+infoLog("build");
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
