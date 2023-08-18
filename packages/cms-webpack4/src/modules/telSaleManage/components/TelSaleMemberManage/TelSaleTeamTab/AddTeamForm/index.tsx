@@ -12,7 +12,7 @@ const AddTeamForm = ({ onAdd }: IAddTeamFormProps): JSX.Element => {
     return (
         <Form
             layout="inline"
-            style={{ marginBottom: '20px' }}
+            style={{ marginBottom: '20px', alignItems: 'center' }}
             onFinish={(values) => {
                 if (values.teamName) {
                     onAdd(values.teamName);
@@ -23,7 +23,7 @@ const AddTeamForm = ({ onAdd }: IAddTeamFormProps): JSX.Element => {
                 <Input placeholder="请输入电销团队名称" />
             </Item>
 
-            <Button htmlType="submit" type="primary" shape="circle" icon={<PlusOutlined />} />
+            <Button size="small" htmlType="submit" type="primary" shape="circle" icon={<PlusOutlined />} />
         </Form>
     );
 };
