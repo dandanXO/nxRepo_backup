@@ -1,16 +1,22 @@
-import {DEFAULT_INDIA_THEME, DEFAULT_PAKISTAN_THEME, themes} from '../../../environments/themeModule/customTailwindTheme';
+import {DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME, themes} from '../../../environments/themeModule/customTailwindTheme';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
 import {environment} from "../../../environments/environmentModule/environment";
 import {IndiaCountry} from "../../../../../../libs/shared/domain/src/country/IndiaCountry";
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
+import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 
-function getDefaultTheme () {
-  if(environment.country === IndiaCountry.country) {
-    return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
-  } else {
-    return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
-  }
+function getDefaultTheme() {
+    if (environment.country === IndiaCountry.country) {
+        return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
+    } else if (environment.country === PakistanCountry.country) {
+        return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
+    } else if (environment.country === MexicoCountry.country) {
+        return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_MEXICO_THEME]);
+    }else{
+        return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
+    }
 }
 
 export const applyTheme = (country: AllCountriesEnum, theme: string): void => {

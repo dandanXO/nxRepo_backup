@@ -48,6 +48,7 @@ import v1 from './mexico/v1/tailwind.theme';
 
 export const DEFAULT_INDIA_THEME: string = 'v55';
 export const DEFAULT_PAKISTAN_THEME: string = 'v15';
+export const DEFAULT_MEXICO_THEME: string = 'v1';
 
 // REFACTOR:
 export const themes: IThemes = {
