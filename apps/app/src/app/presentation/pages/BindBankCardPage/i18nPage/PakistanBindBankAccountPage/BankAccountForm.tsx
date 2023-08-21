@@ -11,7 +11,7 @@ import { InputValue } from '../../../../../modules/form/InputValue';
 import i18next, { t } from 'i18next';
 import { validateBankcardNo } from './validation';
 import ValidateInput from '../../../../components/ValidateInput';
-import { modalSlice } from '../../../../../reduxStore/modalSlice';
+import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
@@ -58,6 +58,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         } else {
             dispatch(
                 modalSlice.actions.updatebindBankcardModal({
+                    ...modalInitialState.bindBankcardModal,
                     show: true,
                     confirm: false,
                     paymentMethod: 1,

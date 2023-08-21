@@ -11,7 +11,7 @@ import { InputValue } from '../../../../../modules/form/InputValue';
 import i18next, { t } from 'i18next';
 import { validateBankcardNo } from './validation';
 import ValidateInput from '../../../../components/ValidateInput';
-import { modalSlice } from '../../../../../reduxStore/modalSlice';
+import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import { RadioOption } from '../../../../components/RadioOption';
 
@@ -19,6 +19,7 @@ import { RadioOption } from '../../../../components/RadioOption';
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [cardType,setCardType]=useState('DEBIT_CARD');
     const [bankValue, setBankValue] = useState({ value: '', label: '' });
     const [isBankSelected, setIsBankSelected] = useState(true);
 
@@ -47,6 +48,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         }
     }, [bankAccountData.data, confirmBankAccountData.data]);
 
+    const payOptions = [
+        { value: 'DEBIT_CARD', label: 'Tarjeta de bito' },
+        { value: 'CLABE', label: 'CLABE' },
+    ];
 
     const confirmBindCard = () => {
         if (bankValue.value === '' || !bankAccountData.isValidation || !confirmBankAccountData.isValidation) {
@@ -60,32 +65,21 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         } else {
             dispatch(
                 modalSlice.actions.updatebindBankcardModal({
+                    ...modalInitialState.bindBankcardModal,
                     show: true,
                     confirm: false,
-                    paymentMethod: 1,
+                    cardTypeName:payOptions.find(i=>i.value===cardType)?.label,
+                    cardType: cardType,
                     cardholderName: props.cardholderName,
                     bankCode: bankValue?.value !== "" && bankValue?.value,
                     bankName: bankValue?.label,
                     bankAccNr: bankAccountData.data,
-                    mobileWallet: false,
-                    mobileWalletAccount: '',
-                    walletVendor: '',
-                    walletName: ''
                 } as any)
             );
         }
     }
 
-    const payOptions = [
-        { value: 'Tarjeta de bito', label: 'Tarjeta de bito' },
-        { value: 'CLABE', label: 'CLABE' },
-    ];
-
-    const handleRadioChange = (e: any) => {
-        console.log('handleRadioChange', e)
-        //   setSelectedOption(e.target.value);
-    };
-
+   
     const bankListLabel = (color = '#000') => ({
         ':before': {
             borderRadius: 10,
@@ -101,7 +95,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
             <div className='grow'>
                 <div className='flex mb-2'>
                     <div className='text-ctext-primary font-bold grow'>Método de pago</div>
-                    <RadioOption options={payOptions} onChange={handleRadioChange} />
+                    <RadioOption options={payOptions} onChange={(e: any) => setCardType(e)} />
                 </div>
                 <div className='mb-2'>
                     <Input

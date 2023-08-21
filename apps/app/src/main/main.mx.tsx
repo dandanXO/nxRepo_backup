@@ -46,6 +46,7 @@ import LoadingMask from "../app/presentation/components/LoadingMask";
 // NOTE: Other
 import '../style.css';
 import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
+import LoginPage from "../app/presentation/pages/LoginPage";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -101,6 +102,7 @@ const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
+        {/* <Route path={PagePathEnum.LoginPage} element={<LoginPage />}/> */}
         <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}/>
         <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />

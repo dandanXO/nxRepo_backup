@@ -7,7 +7,7 @@ import { Button } from '../../../../components/layouts/Button';
 import { selectStyles } from '../../../../components/layouts/selectStyles';
 import { t } from 'i18next';
 import { useDispatch } from 'react-redux';
-import { modalSlice } from '../../../../../reduxStore/modalSlice';
+import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import ValidateInput from '../../../../components/ValidateInput';
 import { validateMobile } from './validation';
 
@@ -81,6 +81,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
         } else {
             dispatch(
                 modalSlice.actions.updatebindBankcardModal({
+                    ...modalInitialState.bindBankcardModal,
                     show: true,
                     confirm: false,
                     paymentMethod: 0,

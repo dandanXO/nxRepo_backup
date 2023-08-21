@@ -18,11 +18,17 @@ const MexicoConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) =>
 
     const ListItemTitleStlye = "text-ctext-secondary font-bold text-sm";
     const ListItemTextStlye = "text-ctext-primary w-[150px] text-right text-sm";
-
     return (
         <Modal outlineTheme='round'>
             <div className='py-6 px-4'>
                 <div className='text-base text-ctext-primary mb-4 font-bold'>{t('Confirm Payment Information')}</div>
+                <ListItem
+                    className='mb-3'
+                    title={'Método de pago'}
+                    text={state?.cardTypeName ?? ''}
+                    titleColor={ListItemTitleStlye}
+                    textColor={ListItemTextStlye}
+                />
                 <ListItem
                     className='mb-3'
                     title={t('Cardholder Name')}

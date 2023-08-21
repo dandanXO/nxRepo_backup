@@ -31,6 +31,8 @@ import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
 import { GetReservationResponse } from '../loanService/GetReservationResponse';
 import { GetReservationRequest } from '../loanService/GetReservationRequest';
 import { PostReservationSubmitRequest } from '../loanService/PostReservationSubmitRequest';
+import { PostMXBankBindSaveRequest } from '../userService/PostMXBankBindSaveRequest';
+import { GetMXBindCardDropListResponse } from '../userService/GetMXBindCardDropListResponse';
 
 export type LoginRequest = {
   msgCode: string;
@@ -156,7 +158,13 @@ export const APIV3 = createApi({
           data: data,
         }),
     }),
-  
+    // NOTICE: Mexico - 获取绑卡页信息
+    getMXBindCardDropList: builder.query<GetMXBindCardDropListResponse, {}>({
+        query: () => ({
+            method: 'get',
+            url: `/bank-bind/info`,
+        }),
+    }),
   }),
 });
 
@@ -169,7 +177,8 @@ export const {
   useLazyGetFeedbackCategoriesQuery,
   usePostFeedbackMutation,
   useLazyGetReservationQuery,
-  usePostReservationSubmitMutation
+  usePostReservationSubmitMutation,
+  useLazyGetMXBindCardDropListQuery
 } = APIV3;
 
 export const API = createApi({
@@ -280,6 +289,14 @@ export const API = createApi({
         url: `/bank-bind/save`,
         data: requestBody,
       }),
+    }),
+    // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
+    postBankBindSaveToMX: builder.mutation<{}, PostMXBankBindSaveRequest>({
+        query: (requestBody: PostMXBankBindSaveRequest) => ({
+          method: 'post',
+          url: `/bank-bind/save`,
+          data: requestBody,
+        }),
     }),
     // NOTICE: Pakstan - 获取绑卡页信息
     getBindCardDropList: builder.query<GetBindCardDropListResponse, {}>({

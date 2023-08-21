@@ -31,7 +31,7 @@ export type InitialStateType = {
   bindBankcardModal:{
     show: boolean;
     confirm: boolean;
-    paymentMethod:number;
+    paymentMethod: number;
     cardholderName:string;
     bankName:string;
     bankAccNr:string;
@@ -40,6 +40,8 @@ export type InitialStateType = {
     walletVendor:string;
     bankCode:string;
     walletName:string;
+    cardType: 'CLABE' | 'DEBIT_CARD';
+    cardTypeName: string;
   };
   starRatingModal: {
       show: boolean;
@@ -100,7 +102,10 @@ export const modalInitialState: InitialStateType = {
     mobileWalletAccount: '',
     walletVendor: '',
     bankCode: '',
-    walletName: ''
+    walletName: '',
+    cardType: 'DEBIT_CARD',
+    cardTypeName: '',
+
   },
   starRatingModal: {
     show: false
@@ -183,6 +188,8 @@ export const modalSlice = createSlice({
         state.bindBankcardModal.mobileWalletAccount = action.payload.mobileWalletAccount;
         state.bindBankcardModal.walletVendor = action.payload.walletVendor;
         state.bindBankcardModal.walletName = action.payload.walletName;
+        state.bindBankcardModal.cardType = action.payload.cardType;
+        state.bindBankcardModal.cardTypeName = action.payload.cardTypeName;
 
     },
     updateStarRatingModal: (state, action: PayloadAction<InitialStateType['starRatingModal']>) => {

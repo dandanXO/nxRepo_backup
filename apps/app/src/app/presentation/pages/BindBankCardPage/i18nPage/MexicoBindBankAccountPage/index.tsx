@@ -6,6 +6,8 @@ import { BankAccountForm } from './BankAccountForm';
 import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../reduxStore';
+import { useLazyGetMXBindCardDropListQuery } from 'apps/app/src/app/api/rtk';
+import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
 
 export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
@@ -14,21 +16,31 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
 
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
-
+  const pageQueryString = useLocationOrderQueryString();
+ 
+  const [ triggerGetBindCardDropListQuery,
+    {
+      currentData: bindCardDropListData,
+      isLoading: isBindCardDropListDataLoading,
+      isFetching: isBindCardDropListDataFetching,
+    },
+  ] = useLazyGetMXBindCardDropListQuery({});
   useEffect(() => {
-    props.triggerGetBindCardDropListQuery();
+    triggerGetBindCardDropListQuery({});
   }, []);
 
   useEffect(() => {
-      const bankDropListData = props?.bindCardDropListData?.availableBanks || [];
+      const bankDropListData = bindCardDropListData?.availableBanks || [];
       if (bankDropListData.length !== 0) {
         const bankList = bankDropListData.map(i => ({ value: i.bankCode, label: i.bankName }))
         setankDropList(bankList)
     }
-  }, [props.bindCardDropListData]);
+  }, [bindCardDropListData]);
 
   // NOTE : 暫時先用變數代替，之後修改
   const isFormPending = false;
+  
+  const cardholderName = pageQueryString.cardholderName || bindCardDropListData?.cardholderName;
 
   return (
     <>
@@ -43,7 +55,7 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
       </div>
       <BankAccountForm
           isFormPending={isFormPending || false}
-          cardholderName={props.cardholderName}
+          cardholderName={cardholderName || ''}
           bankDropList={bankDropList}
         />
       {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal />}
