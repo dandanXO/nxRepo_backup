@@ -100,9 +100,8 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                     inputData={balanceValue}
                     setInputData={setBalanceValue}
                     validateData={() => balance!==undefined && validateBalance(balanceValue.data,balance)}
-                    inputLength={1}
+                    inputLength={radio !== 'balance' ? 1 : balance?.length}
                     errorMessage={balanceValue.errorMessage}
-
                 />
             </div>
 
