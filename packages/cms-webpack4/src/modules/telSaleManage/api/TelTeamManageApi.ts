@@ -1,4 +1,5 @@
 import { API } from '../../shared/api';
+import { PostTelSaleTeamRequest } from './types/postTelSaleTeam';
 
 const TelTeamManageApi = API.injectEndpoints({
     overrideExisting: false,
@@ -10,5 +11,15 @@ const TelTeamManageApi = API.injectEndpoints({
                 method: 'get',
             }),
         }),
+        // [POST] 添加电销团队
+        postTelSaleTeam: builder.mutation<null, PostTelSaleTeamRequest>({
+            query: (requestBody: PostTelSaleTeamRequest) => ({
+                url: '/tel-team',
+                method: 'post',
+                data: requestBody,
+            }),
+        }),
     }),
 });
+
+export const { usePostTelSaleTeamMutation } = TelTeamManageApi;

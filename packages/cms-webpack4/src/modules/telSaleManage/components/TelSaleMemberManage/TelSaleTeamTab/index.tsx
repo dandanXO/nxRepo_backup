@@ -1,16 +1,19 @@
 import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { Space, Switch } from 'antd';
+import { Switch } from 'antd';
 import React from 'react';
 
 import EditableInput from '../../../../shared/components/Inputs/EditableInput';
+import { usePostTelSaleTeamMutation } from '../../../api/TelTeamManageApi';
 import AddTeamForm from './AddTeamForm';
 
 const TelSaleTeamTab = (): JSX.Element => {
+    const [createTelSaleTeam, { isLoading: isTelSaleTeamCreating }] = usePostTelSaleTeamMutation();
+
     const columns: ProColumns[] = [
         {
             title: '电销团队名称',
             key: 'teamName',
-            width: '20%',
+            width: '30%',
             render: (_, record) => (
                 <EditableInput
                     originValue={record.name}
@@ -49,8 +52,9 @@ const TelSaleTeamTab = (): JSX.Element => {
         <div>
             <AddTeamForm
                 onAdd={(teamName) => {
-                    console.log(teamName);
+                    createTelSaleTeam({ name: teamName }).unwrap().then();
                 }}
+                loading={isTelSaleTeamCreating}
             />
             <ProTable rowKey="id" columns={columns} dataSource={data} search={false} toolBarRender={false} />
         </div>
