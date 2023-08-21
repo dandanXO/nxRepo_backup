@@ -25,6 +25,6 @@ switch (process.env.NODE_COUNTRY) {
 }
 console.log(`${APP_IDENTIFICATION} proxyURL: ${proxyURL}`)
 
-module.export = {
+module.exports = {
   proxyURL
 }
