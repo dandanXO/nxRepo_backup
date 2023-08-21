@@ -1,12 +1,20 @@
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Switch } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import EditableInput from '../../../../shared/components/Inputs/EditableInput';
+import { useLazyGetTelSaleTeamsQuery } from '../../../api/TelTeamManageApi';
+import { TelSaleTeamsItem } from '../../../api/types/getTelSaleTeams';
 import AddTeamForm from './AddTeamForm';
 
 const TelSaleTeamTab = (): JSX.Element => {
-    const columns: ProColumns[] = [
+    const [getTelSaleTeam, { currentData, isFetching }] = useLazyGetTelSaleTeamsQuery();
+
+    useEffect(() => {
+        getTelSaleTeam(null);
+    }, []);
+
+    const columns: ProColumns<TelSaleTeamsItem>[] = [
         {
             title: '电销团队名称',
             key: 'teamName',
@@ -32,23 +40,22 @@ const TelSaleTeamTab = (): JSX.Element => {
             ),
         },
     ];
-    const data = [
-        {
-            id: '001',
-            enabled: true,
-            name: '新客',
-        },
-        {
-            id: '002',
-            enabled: false,
-            name: '老客',
-        },
-    ];
 
     return (
         <div>
-            <AddTeamForm onAdd={() => {}} />
-            <ProTable rowKey="id" columns={columns} dataSource={data} search={false} toolBarRender={false} />
+            <AddTeamForm
+                onAdd={() => {
+                    getTelSaleTeam(null);
+                }}
+            />
+            <ProTable<TelSaleTeamsItem>
+                rowKey="id"
+                loading={isFetching}
+                columns={columns}
+                dataSource={currentData}
+                search={false}
+                toolBarRender={false}
+            />
         </div>
     );
 };
