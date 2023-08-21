@@ -2,32 +2,43 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Spin } from 'antd';
 import React from 'react';
 
+import { usePostTelSaleTeamMutation } from '../../../../api/TelTeamManageApi';
+
 const { Item } = Form;
 
 interface IAddTeamFormProps {
-    onAdd: (name: string) => void;
-    loading?: boolean;
+    onAdd: () => void;
 }
 
-const AddTeamForm = ({ onAdd, loading }: IAddTeamFormProps): JSX.Element => {
+const AddTeamForm = ({ onAdd }: IAddTeamFormProps): JSX.Element => {
+    const [trigger, { isLoading }] = usePostTelSaleTeamMutation();
+
+    const [form] = Form.useForm();
+
     return (
         <Form
+            form={form}
             layout="inline"
             style={{ marginBottom: '20px', alignItems: 'center' }}
-            onFinish={(values) => {
+            onFinish={async (values) => {
                 if (values.teamName) {
-                    onAdd(values.teamName);
+                    trigger({ name: values.teamName })
+                        .unwrap()
+                        .then(() => {
+                            form.resetFields();
+                            onAdd();
+                        });
                 }
             }}
         >
             <Item label="添加电销团队" name="teamName">
-                <Input disabled={loading} placeholder="请输入电销团队名称" />
+                <Input disabled={isLoading} placeholder="请输入电销团队名称" />
             </Item>
 
-            {!loading && (
+            {!isLoading && (
                 <Button size="small" htmlType="submit" type="primary" shape="circle" icon={<PlusOutlined />} />
             )}
-            {loading && <Spin />}
+            {isLoading && <Spin />}
         </Form>
     );
 };

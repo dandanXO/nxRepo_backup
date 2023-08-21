@@ -3,12 +3,9 @@ import { Switch } from 'antd';
 import React from 'react';
 
 import EditableInput from '../../../../shared/components/Inputs/EditableInput';
-import { usePostTelSaleTeamMutation } from '../../../api/TelTeamManageApi';
 import AddTeamForm from './AddTeamForm';
 
 const TelSaleTeamTab = (): JSX.Element => {
-    const [createTelSaleTeam, { isLoading: isTelSaleTeamCreating }] = usePostTelSaleTeamMutation();
-
     const columns: ProColumns[] = [
         {
             title: '电销团队名称',
@@ -50,12 +47,7 @@ const TelSaleTeamTab = (): JSX.Element => {
 
     return (
         <div>
-            <AddTeamForm
-                onAdd={(teamName) => {
-                    createTelSaleTeam({ name: teamName }).unwrap().then();
-                }}
-                loading={isTelSaleTeamCreating}
-            />
+            <AddTeamForm onAdd={() => {}} />
             <ProTable rowKey="id" columns={columns} dataSource={data} search={false} toolBarRender={false} />
         </div>
     );
