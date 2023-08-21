@@ -13,7 +13,7 @@ function getDefaultTheme() {
     } else if (environment.country === PakistanCountry.country) {
         return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
     } else if (environment.country === MexicoCountry.country) {
-        return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_MEXICO_THEME]);
+        return mapCustomTailwindTheme(themes['mexico'][DEFAULT_MEXICO_THEME]);
     }else{
         return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
     }
