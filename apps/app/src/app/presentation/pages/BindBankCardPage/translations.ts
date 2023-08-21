@@ -55,7 +55,9 @@ export const i18nBankBindAccountPage: i18nComponent = {
       // NOTICE: Mexico
       'Name of the bank': 'Name of the bank',
       'Bank account number': 'Bank account number',
-      'Confirm Bank account number': 'Confirm Bank account number'
+      'Confirm Bank account number': 'Confirm Bank account number',
+      'Account number must be 16 digits only.':'Account number must be 16 digits only.',
+      'Account number must be 18 digits only.':'Account number must be 18 digits only.'
     },
     bn_BD: {
       // NOTICE: common

@@ -165,6 +165,14 @@ export const APIV3 = createApi({
             url: `/bank-bind/info`,
         }),
     }),
+    // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
+    postBankBindSaveToMX: builder.mutation<{}, PostMXBankBindSaveRequest>({
+        query: (requestBody: PostMXBankBindSaveRequest) => ({
+          method: 'post',
+          url: `/bank-bind/save`,
+          data: requestBody,
+        }),
+    }),
   }),
 });
 
@@ -289,14 +297,6 @@ export const API = createApi({
         url: `/bank-bind/save`,
         data: requestBody,
       }),
-    }),
-    // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
-    postBankBindSaveToMX: builder.mutation<{}, PostMXBankBindSaveRequest>({
-        query: (requestBody: PostMXBankBindSaveRequest) => ({
-          method: 'post',
-          url: `/bank-bind/save`,
-          data: requestBody,
-        }),
     }),
     // NOTICE: Pakstan - 获取绑卡页信息
     getBindCardDropList: builder.query<GetBindCardDropListResponse, {}>({

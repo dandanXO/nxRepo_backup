@@ -2,7 +2,7 @@ import { push } from '@lagunovsky/redux-react-router';
 import { PayloadAction, createAction } from '@reduxjs/toolkit';
 import { put, race, take } from 'redux-saga/effects';
 
-import { API } from '../../../../../../api/rtk';
+import { API, APIV3 } from '../../../../../../api/rtk';
 import { catchSagaError } from '../../../../../../usecaseFlow/utils/catchSagaError';
 import { InitialStateType, modalInitialState, modalSlice } from '../../../../../../reduxStore/modalSlice';
 import i18next from 'i18next';
@@ -14,7 +14,7 @@ export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBa
         if (action.payload.confirm) {
 
             yield put(
-                API.endpoints.postBankBindSaveToMX.initiate({
+                APIV3.endpoints.postBankBindSaveToMX.initiate({
                     bankAccount: action.payload.bankAccNr,
                     bankCode: action.payload.bankCode,
                     bankName: action.payload.bankName,
@@ -23,8 +23,8 @@ export function* bindBankcardSaga(action: PayloadAction<InitialStateType['bindBa
             );
 
             const { success, failure } = yield race({
-                success: take(API.endpoints.postBankBindSaveToMX.matchFulfilled),
-                failure: take(API.endpoints.postBankBindSaveToMX.matchRejected),
+                success: take(APIV3.endpoints.postBankBindSaveToMX.matchFulfilled),
+                failure: take(APIV3.endpoints.postBankBindSaveToMX.matchRejected),
             })
 
             if (success) {

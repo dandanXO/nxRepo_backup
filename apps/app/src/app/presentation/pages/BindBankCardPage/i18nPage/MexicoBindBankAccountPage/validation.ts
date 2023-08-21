@@ -21,6 +21,23 @@ export const validateBankcardNo = (data: any) => {
     }
 };
 
+
+export const validateMXBankcardNo = (data: any, digits: number) => {
+
+    const bankCardNoScheme = z
+        .string()
+        .length(digits, t(`Account number must be ${digits} digits only.`) as string)
+    const result = bankCardNoScheme.safeParse(data);
+    const isValidation = result.success;
+    const errorMessage = !isValidation ? result.error.format()._errors[0] : '';
+    return {
+        data,
+        isValidation,
+        errorMessage,
+        isEdit: true
+    }
+};
+
 export const validateMobile = (data: string) => {
 
     const message = t('Account number should be 10 or 10 digits starting with 0.');
