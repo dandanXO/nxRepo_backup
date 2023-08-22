@@ -39,11 +39,10 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
 
   // NOTE : 暫時先用變數代替，之後修改
   const isFormPending = false;
-  
   const cardholderName = pageQueryString.cardholderName || bindCardDropListData?.cardholderName;
 
   return (
-    <>
+    <div className='grow'>
       <Outlet />
       <div className='mb-4'>
         <div className='text-ctext-primary font-bold text-sm'>Advice:</div>
@@ -59,6 +58,6 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
           bankDropList={bankDropList}
         />
       {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal />}
-    </>
+    </div>
   );
 };
