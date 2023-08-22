@@ -101,6 +101,17 @@ export const processRoutesForNewCMS = (data) => {
         });
     }
 
+    // 電銷管理
+    if (menuItem.actionUrl === '/tel-sale') {
+      menuItem.children &&
+        menuItem.children.map((level2MenuItem) => {
+          // 電銷團隊管理
+          if (level2MenuItem.actionUrl === '/tel-team-manage') {
+            level2MenuItem.actionUrl = '/cms/telSaleManage/telSaleMemberManage';
+          }
+        });
+    }
+
     // 财务管理
     if (menuItem.actionUrl === '/paymentManage') {
       menuItem.children &&
@@ -191,13 +202,14 @@ export const processRoutesForNewCMS = (data) => {
     }
 
     // 客服管理
-    if (menuItem.actionUrl === "/customer-service-manage") {
-      menuItem.children && menuItem.children.map(level2MenuItem => {
-        // 客服管理
-        if (level2MenuItem.actionUrl === "/feedback") {
-          level2MenuItem.actionUrl = "/cms/customer-service-manage/feedback";
-        }
-      })
+    if (menuItem.actionUrl === '/customer-service-manage') {
+      menuItem.children &&
+        menuItem.children.map((level2MenuItem) => {
+          // 客服管理
+          if (level2MenuItem.actionUrl === '/feedback') {
+            level2MenuItem.actionUrl = '/cms/customer-service-manage/feedback';
+          }
+        });
     }
     return menuItem;
   });
