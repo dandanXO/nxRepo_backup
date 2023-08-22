@@ -42,7 +42,7 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   const cardholderName = pageQueryString.cardholderName || bindCardDropListData?.cardholderName;
 
   return (
-    <div className='grow'>
+    <div className='h-full flex flex-col grow overflow-auto'>
       <Outlet />
       <div className='mb-4'>
         <div className='text-ctext-primary font-bold text-sm'>Advice:</div>
