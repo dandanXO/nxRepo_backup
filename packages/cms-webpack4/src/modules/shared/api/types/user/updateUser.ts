@@ -13,4 +13,6 @@ export type UpdateUserRequestBody = {
     roleId?: number;
     trueName?: string;
     userName?: string;
+    telGroupId?: number;
+    telTeamId?: number;
 };

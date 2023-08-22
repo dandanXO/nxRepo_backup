@@ -41,6 +41,7 @@ const TelTeamManageApi = API.injectEndpoints({
 });
 
 export const {
+    useGetTelSaleTeamsQuery,
     useLazyGetTelSaleTeamsQuery,
     usePostTelSaleTeamMutation,
     useDeleteTelSaleTeamMutation,

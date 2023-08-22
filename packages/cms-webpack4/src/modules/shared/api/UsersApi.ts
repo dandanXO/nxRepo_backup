@@ -1,8 +1,8 @@
 import { API } from './index';
-import { GetUsersQueryParameters, GetUsersRequestBody, GetUsesResponse } from './types/userTypes/getUsers';
-import { UpdateUserRequestBody } from './types/userTypes/updateUser';
+import { GetUsersQueryParameters, GetUsersRequestBody, GetUsesResponse } from './types/user/getUsers';
+import { UpdateUserRequestBody } from './types/user/updateUser';
 
-const UserApi = API.injectEndpoints({
+const UsersApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
         // [POST] 取得使用者清單
@@ -25,4 +25,4 @@ const UserApi = API.injectEndpoints({
     }),
 });
 
-export const { useLazyGetUsersQuery, useUpdateUserMutation } = UserApi;
+export const { useLazyGetUsersQuery, useUpdateUserMutation } = UsersApi;

@@ -12,7 +12,11 @@ import { TelSaleTeamsItem } from '../../../api/types/getTelSaleTeams';
 import AddTeamForm from './AddTeamForm';
 
 const TelSaleTeamTab = (): JSX.Element => {
-    const [getTelSaleTeam, { currentData, isFetching }] = useLazyGetTelSaleTeamsQuery();
+    const [getTelSaleTeam, { currentData, isFetching }] = useLazyGetTelSaleTeamsQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false,
+    });
     const [deleteTelSaleTeam, { isLoading: telSaleTeamDeleting }] = useDeleteTelSaleTeamMutation();
     const [putTelSaleTeam, { isLoading: telSaleTeamPutting }] = usePutTelSaleTeamMutation();
 

@@ -60,4 +60,7 @@ export type UsersItem = {
     stationId?: number;
     trueName?: string;
     userName?: string;
+    telTeamId?: number;
+    telTeamName?: number;
+    telGroupId?: number;
 };

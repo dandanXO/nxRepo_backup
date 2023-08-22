@@ -3,8 +3,9 @@ import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-import { useLazyGetUsersQuery } from '../../../../shared/api/UserApi';
-import { UsersItem } from '../../../../shared/api/types/userTypes/getUsers';
+import { useLazyGetUsersQuery } from '../../../../shared/api/UsersApi';
+import { UsersItem } from '../../../../shared/api/types/user/getUsers';
+import MemberModifyModal from './MemberModifyModal';
 
 const statusEnum = new Map();
 statusEnum.set('', { text: '全部' });
@@ -33,8 +34,17 @@ const getUsersInitialBody = {
 };
 
 const TelSaleMemberTab = (): JSX.Element => {
+    const [openMemberModify, setOpenMemBerModify] = useState<{ open: boolean; record: UsersItem }>({
+        open: false,
+        record: {},
+    });
+
     const [getUsersBody, setGetUsersBody] = useState(getUsersInitialBody);
-    const [getUsers, { currentData: getUsersResponse, isFetching: isGetUsersLoading }] = useLazyGetUsersQuery();
+    const [getUsers, { currentData: getUsersResponse, isFetching: isGetUsersLoading }] = useLazyGetUsersQuery({
+        pollingInterval: 0,
+        refetchOnFocus: false,
+        refetchOnReconnect: false,
+    });
 
     useEffect(() => {
         getUsers({
@@ -64,6 +74,11 @@ const TelSaleMemberTab = (): JSX.Element => {
             hideInSearch: true,
         },
         {
+            title: '电销团队',
+            dataIndex: 'telTeamName',
+            hideInSearch: true,
+        },
+        {
             title: '状态',
             dataIndex: 'enabled',
             valueType: 'select',
@@ -79,7 +94,16 @@ const TelSaleMemberTab = (): JSX.Element => {
             hideInSearch: true,
             render: (_, record) => (
                 <Space>
-                    <Button type="text" icon={<EditOutlined />} />
+                    <Button
+                        type="text"
+                        icon={<EditOutlined />}
+                        onClick={() => {
+                            setOpenMemBerModify({
+                                open: true,
+                                record,
+                            });
+                        }}
+                    />
                 </Space>
             ),
         },
@@ -90,46 +114,64 @@ const TelSaleMemberTab = (): JSX.Element => {
     };
 
     return (
-        <ProTable<UsersItem>
-            rowKey="id"
-            loading={isGetUsersLoading}
-            toolBarRender={false}
-            columns={columns}
-            dataSource={getUsersResponse?.data}
-            form={{ ...searchFormLayout }}
-            search={{
-                span: searchSpan,
-                labelWidth: 'auto',
-                optionRender: ({ resetText, searchText }, { form }) => [
-                    <Space>
-                        <Button
-                            onClick={() => {
-                                form.setFieldsValue({ ...getUsersInitialBody });
-                                setGetUsersBody(getUsersInitialBody);
-                            }}
-                        >
-                            {resetText}
-                        </Button>
-                        <Button type="primary" onClick={() => form.submit()}>
-                            {searchText}
-                        </Button>
-                    </Space>,
-                ],
-            }}
-            onSubmit={(params) => {
-                setGetUsersBody({
-                    ...getUsersBody,
-                    ...params,
-                });
-            }}
-            pagination={{
-                showSizeChanger: true,
-                defaultPageSize: 10,
-                onChange: pageOnChange,
-                total: getUsersResponse?.total,
-                current: getUsersResponse?.pageNum,
-            }}
-        />
+        <>
+            <ProTable<UsersItem>
+                rowKey="id"
+                loading={isGetUsersLoading}
+                toolBarRender={false}
+                columns={columns}
+                dataSource={getUsersResponse?.data}
+                form={{ ...searchFormLayout }}
+                search={{
+                    span: searchSpan,
+                    labelWidth: 'auto',
+                    optionRender: ({ resetText, searchText }, { form }) => [
+                        <Space>
+                            <Button
+                                onClick={() => {
+                                    form.setFieldsValue({ ...getUsersInitialBody });
+                                    setGetUsersBody(getUsersInitialBody);
+                                }}
+                            >
+                                {resetText}
+                            </Button>
+                            <Button type="primary" onClick={() => form.submit()}>
+                                {searchText}
+                            </Button>
+                        </Space>,
+                    ],
+                }}
+                onSubmit={(params) => {
+                    setGetUsersBody({
+                        ...getUsersBody,
+                        ...params,
+                    });
+                }}
+                pagination={{
+                    showSizeChanger: true,
+                    defaultPageSize: 10,
+                    onChange: pageOnChange,
+                    total: getUsersResponse?.total,
+                    current: getUsersResponse?.pageNum,
+                }}
+            />
+            {openMemberModify.open && (
+                <MemberModifyModal
+                    open={openMemberModify.open}
+                    record={openMemberModify.record}
+                    onCancel={() => {
+                        setOpenMemBerModify({ open: false, record: {} });
+                    }}
+                    onModified={() => {
+                        setOpenMemBerModify({ open: false, record: {} });
+                        getUsers({
+                            parameters: { telManage: true },
+                            body: getUsersBody,
+                        });
+                    }}
+                />
+            )}
+        </>
     );
 };
 
