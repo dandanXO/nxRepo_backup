@@ -94,6 +94,10 @@ const TelSaleTeamTab = (): JSX.Element => {
                 dataSource={currentData}
                 search={false}
                 toolBarRender={false}
+                pagination={{
+                    showSizeChanger: true,
+                    defaultPageSize: 10,
+                }}
             />
         </div>
     );
