@@ -70,6 +70,7 @@ module.exports = {
             '/hs': {
                 target: 'https://app.india-api-dev.com',
                 // target: "https://app.pk-api-dev.com",
+                // target: "https://app.mx-api-dev.com",
                 secure: false, // 協議是https的時候必須要寫
                 changeOrigin: true,
             },
