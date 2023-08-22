@@ -1,6 +1,7 @@
 import { API } from '../../shared/api';
 import { GetTelSaleTeamsResponse } from './types/getTelSaleTeams';
 import { PostTelSaleTeamRequest } from './types/postTelSaleTeam';
+import { PutTelSaleTeamRequestBody } from './types/putTelSaleTeam';
 
 const TelTeamManageApi = API.injectEndpoints({
     overrideExisting: false,
@@ -28,8 +29,20 @@ const TelTeamManageApi = API.injectEndpoints({
                 params: parameter,
             }),
         }),
+        // [PUT] 更新电销团队
+        putTelSaleTeam: builder.mutation<null, PutTelSaleTeamRequestBody>({
+            query: (body: PutTelSaleTeamRequestBody) => ({
+                url: '/tel-team',
+                method: 'put',
+                data: body,
+            }),
+        }),
     }),
 });
 
-export const { useLazyGetTelSaleTeamsQuery, usePostTelSaleTeamMutation, useDeleteTelSaleTeamMutation } =
-    TelTeamManageApi;
+export const {
+    useLazyGetTelSaleTeamsQuery,
+    usePostTelSaleTeamMutation,
+    useDeleteTelSaleTeamMutation,
+    usePutTelSaleTeamMutation,
+} = TelTeamManageApi;

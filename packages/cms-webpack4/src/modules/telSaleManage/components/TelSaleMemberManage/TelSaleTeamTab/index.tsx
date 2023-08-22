@@ -3,14 +3,18 @@ import { Modal, Switch } from 'antd';
 import React, { useEffect } from 'react';
 
 import EditableInput from '../../../../shared/components/Inputs/EditableInput';
-import { useDeleteTelSaleTeamMutation, useLazyGetTelSaleTeamsQuery } from '../../../api/TelTeamManageApi';
+import {
+    useDeleteTelSaleTeamMutation,
+    useLazyGetTelSaleTeamsQuery,
+    usePutTelSaleTeamMutation,
+} from '../../../api/TelTeamManageApi';
 import { TelSaleTeamsItem } from '../../../api/types/getTelSaleTeams';
 import AddTeamForm from './AddTeamForm';
 
 const TelSaleTeamTab = (): JSX.Element => {
     const [getTelSaleTeam, { currentData, isFetching }] = useLazyGetTelSaleTeamsQuery();
-
     const [deleteTelSaleTeam, { isLoading: telSaleTeamDeleting }] = useDeleteTelSaleTeamMutation();
+    const [putTelSaleTeam, { isLoading: telSaleTeamPutting }] = usePutTelSaleTeamMutation();
 
     const [modal, contextHolder] = Modal.useModal();
 
@@ -40,10 +44,13 @@ const TelSaleTeamTab = (): JSX.Element => {
                         });
                     }}
                     onUpdate={(name) => {
-                        console.log('update');
-                        console.log(name);
+                        putTelSaleTeam({ id: record.id, enabled: record.enabled, name })
+                            .unwrap()
+                            .then(() => {
+                                getTelSaleTeam(null);
+                            });
                     }}
-                    loading={telSaleTeamDeleting}
+                    loading={telSaleTeamDeleting || telSaleTeamPutting}
                 />
             ),
         },
@@ -51,7 +58,19 @@ const TelSaleTeamTab = (): JSX.Element => {
             title: '启用',
             key: 'turnOn',
             render: (_, record) => (
-                <Switch checkedChildren="ON" unCheckedChildren="OFF" defaultChecked={record.enabled} />
+                <Switch
+                    checkedChildren="ON"
+                    unCheckedChildren="OFF"
+                    defaultChecked={record.enabled}
+                    loading={telSaleTeamPutting}
+                    onClick={(checked) => {
+                        putTelSaleTeam({ id: record.id, name: record.name, enabled: checked })
+                            .unwrap()
+                            .then(() => {
+                                getTelSaleTeam(null);
+                            });
+                    }}
+                />
             ),
         },
     ];
