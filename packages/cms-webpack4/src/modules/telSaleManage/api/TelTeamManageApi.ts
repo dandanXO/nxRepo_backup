@@ -20,7 +20,16 @@ const TelTeamManageApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // [DELETE] 移除电销团队
+        deleteTelSaleTeam: builder.mutation<null, { id: number }>({
+            query: (parameter) => ({
+                url: '/tel-team',
+                method: 'delete',
+                params: parameter,
+            }),
+        }),
     }),
 });
 
-export const { useLazyGetTelSaleTeamsQuery, usePostTelSaleTeamMutation } = TelTeamManageApi;
+export const { useLazyGetTelSaleTeamsQuery, usePostTelSaleTeamMutation, useDeleteTelSaleTeamMutation } =
+    TelTeamManageApi;

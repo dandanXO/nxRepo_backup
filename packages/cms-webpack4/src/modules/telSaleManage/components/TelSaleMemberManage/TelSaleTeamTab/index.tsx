@@ -1,14 +1,18 @@
 import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { Switch } from 'antd';
+import { Modal, Switch } from 'antd';
 import React, { useEffect } from 'react';
 
 import EditableInput from '../../../../shared/components/Inputs/EditableInput';
-import { useLazyGetTelSaleTeamsQuery } from '../../../api/TelTeamManageApi';
+import { useDeleteTelSaleTeamMutation, useLazyGetTelSaleTeamsQuery } from '../../../api/TelTeamManageApi';
 import { TelSaleTeamsItem } from '../../../api/types/getTelSaleTeams';
 import AddTeamForm from './AddTeamForm';
 
 const TelSaleTeamTab = (): JSX.Element => {
     const [getTelSaleTeam, { currentData, isFetching }] = useLazyGetTelSaleTeamsQuery();
+
+    const [deleteTelSaleTeam, { isLoading: telSaleTeamDeleting }] = useDeleteTelSaleTeamMutation();
+
+    const [modal, contextHolder] = Modal.useModal();
 
     useEffect(() => {
         getTelSaleTeam(null);
@@ -23,12 +27,23 @@ const TelSaleTeamTab = (): JSX.Element => {
                 <EditableInput
                     originValue={record.name}
                     onDelete={() => {
-                        console.log('delete');
+                        modal.confirm({
+                            title: `确认要删除[${record.name}]吗？`,
+                            type: 'warn',
+                            onOk: () => {
+                                deleteTelSaleTeam({ id: record.id })
+                                    .unwrap()
+                                    .then(() => {
+                                        getTelSaleTeam(null);
+                                    });
+                            },
+                        });
                     }}
                     onUpdate={(name) => {
                         console.log('update');
                         console.log(name);
                     }}
+                    loading={telSaleTeamDeleting}
                 />
             ),
         },
@@ -43,6 +58,7 @@ const TelSaleTeamTab = (): JSX.Element => {
 
     return (
         <div>
+            {contextHolder}
             <AddTeamForm
                 onAdd={() => {
                     getTelSaleTeam(null);
