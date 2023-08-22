@@ -34,7 +34,7 @@ const useRepayCreate = () => {
         .then((data: PostRepayCreateResponse) => {
           // console.log('data', data);
           // NOTICE: 跳轉至付款頁面
-        //   window.location.href = data.nextUrl;
+          window.location.href = data.nextUrl;
           if (environment.country === IndiaCountry.country) {
               navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
 

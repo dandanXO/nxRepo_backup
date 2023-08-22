@@ -37,6 +37,7 @@ type paymentMethodValueType = {
 
 const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
     const {
+        setRadioValue,
         balanceValue,
         setBalanceValue,
         handleRepayData,
@@ -51,25 +52,13 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
         { value: 'custom', label: t('Partial Repayment') },
     ];
     const repaymentData = useSelector((state: RootState) => state.repaymentDetailPage.repaymentData);
-
-    const { balance, repayAmount, radio, payType, coupon, orderNo, repayTypeList } = repaymentData
-
+    const { balance, repayAmount, radio, payType, coupon, orderNo, repayTypeList } = repaymentData;
     const handleRadioChange = (e: any) => {
         if (e === 'balance') {
             setBalanceValue({ ...balanceValue, data: `${environment.currency} ${balance}` });
         }
-        handleRepayData({
-            ...repaymentData,
-            radio: e,
-            coupon: e === 'balance' ? null : coupon,
-        })
+        setRadioValue(e)
     };
-    useEffect(() => {
-        setBalanceValue({
-            ...balanceValue,
-            data:`${environment.currency} ${balance}`
-        })
-    }, [balance])
     const paymentLabel = (color = window.theme?.text?.primary) => {
         return {
             ':before': {
@@ -175,17 +164,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
             <div className="mt-3 font-bold">
                 <ListItem
                     title={'Repayment Amount'}
-                    text={
-                        radio !== 'custom' ? (
-                            <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />
-                        ) : (
-                            <Money money={
-                                isNaN(balanceValue.data.replace(`${environment.currency}`, '').trim())
-                                    ? 0
-                                    : balanceValue.data.replace(`${environment.currency}`, '').trim()
-                            } />
-                        )
-                    }
+                    text={<Money money={repayAmount || 0} />}
                 />
             </div>
 
