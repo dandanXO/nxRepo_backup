@@ -12,8 +12,14 @@ type Props = {
 } & InputProps; 
 
 const ValidateInput = (props: Props) => {
-    const { inputData, setInputData ,inputLength =1} = props
+    const { inputData, setInputData, inputLength = 1, onCopy, onCut } = props
     const preventCopyPaste = (e: ClipboardEvent<any>) => {
+        if(onCopy) return
+        e.preventDefault();
+    };
+
+    const preventCutPaste = (e: ClipboardEvent<any>) => {
+        if(onCut) return
         e.preventDefault();
     };
 
@@ -45,7 +51,7 @@ const ValidateInput = (props: Props) => {
             onChange={handleOnchange}
             onBlur={handleOnblur}
             onCopy={(e) => preventCopyPaste(e)}
-            onCut={(e) => preventCopyPaste(e)}
+            onCut={(e) => preventCutPaste(e)}
         />
     )
 }

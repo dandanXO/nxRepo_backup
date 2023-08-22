@@ -30,17 +30,19 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         isEdit: false
     }
     const [bankAccountData, setBankAccountData] = useState<InputValue<string>>(initInputData);
-
     const [confirmBankAccountData, setconfirmBankAccountData] = useState<InputValue<string>>(initInputData);
 
+    const validateBankAndConfrimAccountSame=()=>{
+        const isBankAndConfrimAccountSame = bankAccountData.data === confirmBankAccountData.data;
+        return {
+            ...confirmBankAccountData,
+            isValidation: isBankAndConfrimAccountSame,
+            errorMessage: isBankAndConfrimAccountSame ? '' : t('Please make sure your account number match.') as string
+        }
+    }
     useEffect(() => {
         if (confirmBankAccountData.isEdit || confirmBankAccountData.data.length >= bankAccountLength) {
-            const isConfirmMobileDataError = bankAccountData.data === confirmBankAccountData.data;
-            setconfirmBankAccountData({
-                ...confirmBankAccountData,
-                isValidation: isConfirmMobileDataError,
-                errorMessage: isConfirmMobileDataError ? '' : t('Please make sure your account number match.') as string
-            })
+             setconfirmBankAccountData(validateBankAndConfrimAccountSame())
         }
     }, [bankAccountData.data, confirmBankAccountData.data]);
 
@@ -51,26 +53,27 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
 
     const handleChangeCardType = (e: any) => {
         setCardType(e);
-        setBankAccountData(initInputData);
-        setconfirmBankAccountData(initInputData);
+    }
+
+    const validateBindCard = () => {
+        const isBankValueValid = bankValue.value === '' ? false : true
+        const isBankAccountValid = validateMXBankcardNo(bankAccountData.data, bankAccountLength);
+        const isConfirmBankAccountValid = validateMXBankcardNo(confirmBankAccountData.data, bankAccountLength);
+        const isBankAndConfrimAccountSame = bankAccountData.data === confirmBankAccountData.data;
+        setIsBankSelected(isBankValueValid);
+        setBankAccountData(isBankAccountValid)
+        setconfirmBankAccountData(isBankAndConfrimAccountSame ? isConfirmBankAccountValid : validateBankAndConfrimAccountSame())
+        return isBankValueValid && isBankAccountValid.isValidation && isConfirmBankAccountValid.isValidation && isBankAndConfrimAccountSame
     }
 
     const confirmBindCard = () => {
-        if (bankValue.value === '' || !bankAccountData.isValidation || !confirmBankAccountData.isValidation) {
-            setIsBankSelected(bankValue.value === '' ? false : true);
-            if (bankAccountData.data === '') {
-                setBankAccountData(validateBankcardNo(bankAccountData.data));
-            }
-            if (confirmBankAccountData.data === '') {
-                setconfirmBankAccountData(validateBankcardNo(confirmBankAccountData.data));
-            }
-        } else {
+        if (validateBindCard()) {
             dispatch(
                 modalSlice.actions.updatebindBankcardModal({
                     ...modalInitialState.bindBankcardModal,
                     show: true,
                     confirm: false,
-                    cardTypeName:payOptions.find(i=>i.value===cardType)?.label,
+                    cardTypeName: payOptions.find(i => i.value === cardType)?.label,
                     cardType: cardType,
                     cardholderName: props.cardholderName,
                     bankCode: bankValue?.value !== "" && bankValue?.value,
@@ -95,7 +98,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     return (
         <div className="flex grow flex-col">
             <div className='grow'>
-                <div className='flex mb-2'>
+                <div className='flex mb-2 flex-wrap'>
                     <div className='text-ctext-primary font-bold grow'>Método de pago</div>
                     <RadioOption options={payOptions} onChange={handleChangeCardType} />
                 </div>
@@ -153,6 +156,9 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         setInputData={setBankAccountData}
                         validateData={() => validateMXBankcardNo(bankAccountData.data, bankAccountLength)}
                         inputLength={bankAccountLength}
+                        onCopy={()=>{
+                            //
+                        }}
                     />
                 </div>
 
@@ -167,8 +173,11 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         errorMessage={confirmBankAccountData.errorMessage}
                         inputData={confirmBankAccountData}
                         setInputData={setconfirmBankAccountData}
-                        validateData={() => validateMXBankcardNo(bankAccountData.data, bankAccountLength)}
+                        validateData={() => validateMXBankcardNo(confirmBankAccountData.data, bankAccountLength)}
                         inputLength={bankAccountLength}
+                        onCopy={()=>{
+                            //
+                        }}
                     />
                 </div>
             </div>
