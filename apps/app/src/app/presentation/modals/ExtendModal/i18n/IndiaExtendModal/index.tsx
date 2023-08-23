@@ -8,6 +8,7 @@ import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
 import {formatDate} from "../../../../../modules/format/formatDate";
+import Modal from '../../../../components/Modal';
 
 const IndiaExtendModal = (props: any) => {
   const navigate = useNavigate();
@@ -26,7 +27,8 @@ const IndiaExtendModal = (props: any) => {
   } = props.currentData ?? {};
 
   return (
-    <div className={`p-2`}>
+    <Modal>
+      <div className={`p-4`}> 
       <div className="text-ctext-primary mb-4 text-xl font-bold">Extend</div>
       <ListItem title={'Product'} text={productName ?? ''} titleColor="text-ctext-primary" />
       <ListItem title={'No.'} text={orderNo ?? ''} titleColor="text-ctext-primary" />
@@ -88,7 +90,8 @@ const IndiaExtendModal = (props: any) => {
           <Button onClick={props.handleConfirm} text={'Confirm'} disable={props.isPostExtendCreateLoading}/>
         </div>
       </div>
-    </div>
+      </div>
+    </Modal>
   );
 };
 

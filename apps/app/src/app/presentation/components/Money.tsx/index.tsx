@@ -4,6 +4,7 @@ import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry'
 
 import { formatPrice } from '../../../modules/format/formatPrice';
 import { renderByCountry } from '../../../modules/i18n';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 
 interface IMoney {
   money: number | string;
@@ -18,7 +19,7 @@ const Money = (props: IMoney) => {
     <div className="flex items-baseline">
       {props.isAdd && <div className="mr-1">+</div>}
       {props.isNagetive && <div className="mr-1">-</div>}
-      {environment.country === IndiaCountry.country && (
+      {(environment.country === IndiaCountry.country || environment.country === MexicoCountry.country) &&(
         <div className={`${props.currencyStyle || ''} mr-1`}>{environment.currency}</div>
       )}
       <div className={`${props.moneyStyle || ''}`}>{price}</div>
