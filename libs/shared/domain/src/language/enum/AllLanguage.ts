@@ -2,4 +2,6 @@
 export enum AllLanguage {
   en_US = "en_US",
   bn_BD = "bn_BD",
+  es_MX = "es_MX",
 }
+
