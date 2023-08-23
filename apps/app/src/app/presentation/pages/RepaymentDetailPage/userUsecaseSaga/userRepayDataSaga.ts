@@ -44,10 +44,11 @@ export function* userRepayDataSaga(action:PayloadAction) {
 
             yield put(repaymentDetailPageSlice.actions.updateRepaymentData({
                 ...repayData,
-                balance:balance,
+                balance: balance,
                 repayAmount: balance,
                 orderNo: orderNo,
-                repayTypeList
+                repayTypeList,
+                payType: repayTypeList[0].value
             }))
         }
 

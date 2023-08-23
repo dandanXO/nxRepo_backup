@@ -12,7 +12,7 @@ export type repaymentDetailPageInitialStateType = {
         repayAmount?: number | string;
         coupon?: GetCouponApplicableList | null;
         radio?: string;
-        payType?: "BANK_ACCOUNT" | "MOBILE_WALLET";
+        payType?: string;
         repayTypeList?: { value: string, label: string }[]
     }
 }
@@ -22,7 +22,7 @@ export const repaymentDetailPageInitialState: repaymentDetailPageInitialStateTyp
     repaymentData: {
         balance: '',
         orderNo: '',
-        payType: "MOBILE_WALLET",
+        payType: '',
         extend: false,
         repayAmount: 0,
         coupon: null,

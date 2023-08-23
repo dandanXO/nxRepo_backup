@@ -108,7 +108,6 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
               state: {
                 ...location.state,
                 paymentAmount: balance,
-                paymentMethod: repayType?.value ?? "",
               },
             });
           }}

@@ -43,7 +43,6 @@ const RepaymentCouponModal = () => {
             isFullRepay: true,
             orderNo,
             paymentAmount: Number(balance || paymentAmount) ,
-            paymentMethod: payType!== undefined && payType === "BANK_ACCOUNT" ? "BANK_ACCOUNT" : "MOBILE_WALLET" || paymentMethod,
         });
     }, []);
 
