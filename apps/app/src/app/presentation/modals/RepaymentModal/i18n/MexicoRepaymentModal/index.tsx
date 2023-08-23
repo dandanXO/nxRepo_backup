@@ -118,7 +118,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                     options={repayTypeList || []}
                     value={repayTypeList === undefined ? undefined : repayTypeList.find((option: any) => option.value === payType)}
                     onChange={(item: any) => {
-                        handleRepayData({ payType: item.value })
+                        handleRepayData({ ...repaymentData, payType: item.value });
                     }}
                 />
             </div>
