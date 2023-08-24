@@ -2,7 +2,7 @@ import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 import Select from "../../../../components/Select";
 
@@ -46,6 +46,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
     } = props;
     const navigate = useNavigate();
     const location = useLocation();
+    const { t } = useTranslation(i18nRepaymentModal.namespace);
 
     const payOptions = [
         { value: 'balance', label: t('Repay Full Amount') },
@@ -73,14 +74,14 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
 
     return (
         <div className="px-4 text-left text-ctext-primary">
-            <div className="mt-1 mb-2 whitespace-nowrap text-sm">
+            <div className="mt-1 mb-2 text-sm">
                 <RadioOption options={payOptions} onChange={handleRadioChange} />
             </div>
 
             <div className='mb-2'>
                 <ValidateInput
                     name={'amount'}
-                    label={'nombre de contacto principal'}
+                    label={t('Payment Amount') as string}
                     labelType={'topFix'}
                     outlineType={'outlined'}
                     placeholder='8,500'
@@ -90,7 +91,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                     setInputData={setBalanceValue}
                     validateData={() => balance!==undefined && validateBalance(balanceValue.data,balance)}
                     inputLength={radio !== 'balance' ? 1 : balance?.length}
-                    errorMessage={balanceValue.errorMessage}
+                    errorMessage={t(balanceValue.errorMessage)}
                 />
             </div>
 
@@ -147,12 +148,12 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                                 <div className="flex grow justify-between">
                                     <div className="self-center">- {coupon.discountAmount}</div>
                                     <div className="flex flex-col text-xs text-ctext-secondary">
-                                        <div>expiration date</div>
+                                        <div>{t('expiration date')}</div>
                                         <div className="">{coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
                                     </div>
                                 </div>
                             ) : (
-                                <div className='text-cTextFields-placeholder-main'>{'seleccionase'}</div>
+                                <div className='text-cTextFields-placeholder-main'>{t('Select')}</div>
                             )}
                             <RiArrowDownSLine className="fill-[#CCCCCC] text-2xl" />
                         </div>
@@ -162,7 +163,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
 
             <div className="mt-3 font-bold">
                 <ListItem
-                    title={'Repayment Amount'}
+                    title={t('Repayment Amount')}
                     text={<Money money={repayAmount || 0} />}
                 />
             </div>
@@ -173,7 +174,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                         type={'ghost'}
                         ghostTheme={'tertiary'}
                         className={`w-full`}
-                        text={props.t('Cancel')}
+                        text={t('Cancel')}
                         onClick={() => {
                             handleRepayData({
                                 ...repaymentDetailPageInitialState.repaymentData
@@ -185,12 +186,10 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <div className={` ml-1.5 w-full`}>
                     <Button
                         className={`w-full`}
-                        text={props.t('Repay')}
+                        text={t('Repay')}
                         primaryTypeGradient={true}
                         disable={isPostRepayCreateLoading}
                         onClick={() => {
-                            console.log('repaymentDetailPageState', repaymentData)
-                            // console.log(balanceValue.isValidation)
                             if (repayTypeList === undefined) return;
                             if (balanceValue.errorMessage === '') handleConfirm();
                         }}
@@ -198,13 +197,10 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                 </div>
             </div>
             <div className={`text-left text-xs text-ctext-secondary font-bold leading-none`}>
-                <div>Attention：</div>
+                <div>{t('Attention')}:</div>
                 <ul className="list-outside list-decimal pl-3 pt-1">
-                    <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
-                    <li>
-                        To protect your rights, we strongly recommend that you take a screenshot of the repayment details after
-                        completing the repayment, and upload your screenshot to the app.
-                    </li>
+                    <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
+                    <li>{t('To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.')}</li>
                 </ul>
             </div>
             <div className={`my-4`}>
@@ -214,4 +210,4 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
     );
 };
 
-export default withTranslation(i18nRepaymentModal.namespace)(MexicoRepaymentModal);
+export default MexicoRepaymentModal;

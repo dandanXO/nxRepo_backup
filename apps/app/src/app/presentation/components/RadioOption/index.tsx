@@ -18,10 +18,10 @@ export const RadioOption = (props: IRadio) => {
     return (
         <div className='flex'>
             {options.map((option) => (
-                <div className='flex items-center mr-2 whitespace-nowrap' key={option.value} onClick={() => handleClick(option.value)}>
+                <div className='flex items-center mr-2 leading-none' key={option.value} onClick={() => handleClick(option.value)}>
                     {selectedOption === option.value
-                        ? <RiRadioButtonFill className='fill-primary-main mr-1' />
-                        : <RiCheckboxBlankCircleLine className='fill-primary-main mr-1' />}
+                        ? <RiRadioButtonFill className='fill-primary-main mr-1 text-lg' />
+                        : <RiCheckboxBlankCircleLine className='fill-primary-main mr-1 text-lg' />}
                     {option.label}
                 </div>
             ))}

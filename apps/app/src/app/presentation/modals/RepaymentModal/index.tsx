@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 
 import { Overlay } from '@frontend/mobile/shared/ui';
@@ -24,195 +24,174 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 
 type paymentMethodValueType = {
-    type: string;
-    label: string;
+  type: string;
+  label: string;
 };
 
 export interface IRepaymentModalProps {
-    radioValue: string;
-    setRadioValue: React.Dispatch<React.SetStateAction<string>>;
-    balance: string;
-    balanceValue: string;
-    setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
-    repayTypesList: string[];
-    isRepayTypesFetching: boolean;
-    repayType: paymentMethodValueType;
-    setRepayType: React.Dispatch<React.SetStateAction<paymentMethodValueType>>;
-    handleConfirm: () => void;
-    orderNo: string;
+  radioValue: string;
+  setRadioValue: React.Dispatch<React.SetStateAction<string>>;
+  balance: string;
+  balanceValue: string;
+  setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
+  repayTypesList: string[];
+  isRepayTypesFetching: boolean;
+  repayType: paymentMethodValueType;
+  setRepayType: React.Dispatch<React.SetStateAction<paymentMethodValueType>>;
+  handleConfirm: () => void;
+  orderNo: string;
 }
 
 const RepaymentModal = (props: any) => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const { handlePostRepayCreate, isPostRepayCreateLoading } = useRepayCreate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation(i18nRepaymentModal.namespace);
 
-    const dispatch = useDispatch();
-    const { repaymentData, repaymentDetail } = useSelector((state: RootState) => state.repaymentDetailPage);
+  const { handlePostRepayCreate, isPostRepayCreateLoading } = useRepayCreate();
 
-    const { balance = location.state.balance, orderNo = getOrderNo() } = repaymentDetail || {};
-    const [radioValue, setRadioValue] = useState('balance');
+  const dispatch = useDispatch();
+  const { repaymentData, repaymentDetail } = useSelector((state: RootState) => state.repaymentDetailPage);
 
-    // NOTE: 變動數值
-    const [balanceValue, setBalanceValue] = useState(`${environment.currency} ${balance}`);
+  const { balance = location.state.balance, orderNo = getOrderNo() } = repaymentDetail || {};
+  const [radioValue, setRadioValue] = useState('balance');
 
-    const [balanceData, setbalanceData] = useState<InputValue<string>>({
-        data: `${environment.currency} ${balance}`,
-        isValidation: false,
-        errorMessage: '',
-        isEdit: false
-    });
+  // NOTE: 變動數值
+  const [balanceValue, setBalanceValue] = useState(`${environment.currency} ${balance}`);
 
-
-    // NOTE: 付款方式
-    const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
-    useEffect(() => {
-        if (environment.country === MexicoCountry.country && repaymentData.orderNo === '') {
-            dispatch(RepaymentDetailPageUseCaseActions.user.repayData())
-        } else {
-            triggerGetList({ orderNo: orderNo });
-        }
-    }, []);
+  const [balanceData, setbalanceData] = useState<InputValue<string>>({
+    data: `${environment.currency} ${balance}`,
+    isValidation: false,
+    errorMessage: '',
+    isEdit: false
+  });
 
 
-    useEffect(() => {
-        const isCustom = radioValue !== 'balance';
-        const coupon =  repaymentData.coupon;
-        const currentBalance = Number(balanceData.data.replace(`${environment.currency}`, '').trim()) || 0;
-        const repayAmount = isCustom ? currentBalance : Number(balance) - Number(coupon ? coupon.discountAmount : 0);
-        handleRepayData({
-            ...repaymentData,
-            coupon,
-            radio: radioValue,
-            repayAmount,
-        })
-    }, [radioValue, repaymentData.coupon, balanceData.data])
+  // NOTE: 付款方式
+  const { triggerGetList, isRepayTypesFetching, repayTypesList, repayType, setRepayType } = useRepayTypes();
+  useEffect(() => {
+    if (environment.country === MexicoCountry.country && repaymentData.orderNo === '') {
+      dispatch(RepaymentDetailPageUseCaseActions.user.repayData())
+    } else {
+      triggerGetList({ orderNo: orderNo });
+    }
+  }, []);
 
-    
-    const handleRepayData = useCallback((data: any) => {
-        dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({ ...data }))
-    }, [])
 
-    const handleConfirm = () => {
-      
-      
-        if (environment.country === MexicoCountry.country) {
-            const { balance, repayAmount, radio, payType, coupon, orderNo, repayTypeList } = repaymentData;
-            if (balanceData.data === '' || isPostRepayCreateLoading || orderNo === '') {
-                return;
-            }
+  useEffect(() => {
+    const isCustom = radioValue !== 'balance';
+    const coupon = repaymentData.coupon;
+    const currentBalance = Number(balanceData.data.replace(`${environment.currency}`, '').trim()) || 0;
+    const repayAmount = isCustom ? currentBalance : Number(balance) - Number(coupon ? coupon.discountAmount : 0);
+    handleRepayData({
+      ...repaymentData,
+      coupon,
+      radio: radioValue,
+      repayAmount,
+    })
+  }, [radioValue, repaymentData.coupon, balanceData.data])
 
-            if(payType && orderNo){
-                const couponNo = radio === 'balance' && coupon ? coupon?.couponNo || '' : '';
-                handlePostRepayCreate(false, orderNo, Number(repayAmount) || 0, payType, couponNo);
-            }
 
-        } else {
-            if (balanceValue === '' || isPostRepayCreateLoading) {
-                return;
-            }
+  const handleRepayData = useCallback((data: any) => {
+    dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({ ...data }))
+  }, [])
 
-            const payType = repayType && repayType.value;
-            const coupon = radioValue === 'balance' && location.state.coupon ? location.state.coupon : null;
-            const repaymentAmount =
-                parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) - Number(coupon?.discountAmount || 0);
-            handlePostRepayCreate(false, orderNo, repaymentAmount, payType, coupon?.couponNo || null);
-        }
+  const handleConfirm = () => {
 
-    };
 
-    return (
-        <Modal outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}>
-            <>
-                <div className="text-lg font-bold text-ctext-primary my-2">{props.t('Repay')}</div>
-                {renderByCountry(
-                    {
-                        [IndiaCountry.country]: (
-                            <IndiaRepaymentModal
-                                radioValue={radioValue}
-                                setRadioValue={setRadioValue}
-                                // NOTICE:
-                                balance={balance}
-                                balanceValue={balanceValue}
-                                setBalanceValue={setBalanceValue}
-                                isRepayTypesFetching={isRepayTypesFetching}
-                                repayTypesList={repayTypesList}
-                                repayType={repayType}
-                                setRepayType={setRepayType}
-                                handleConfirm={handleConfirm}
-                                isPostRepayCreateLoading={isPostRepayCreateLoading}
-                                orderNo={orderNo}
-                            />
-                        ),
-                        [PakistanCountry.country]: (
-                            <PakistanRepaymentModal
-                                radioValue={radioValue}
-                                setRadioValue={setRadioValue}
-                                balance={balance}
-                                balanceValue={balanceValue}
-                                setBalanceValue={setBalanceValue}
-                                repayTypesList={repayTypesList}
-                                isRepayTypesFetching={isRepayTypesFetching}
-                                repayType={repayType}
-                                setRepayType={setRepayType}
-                                handleConfirm={handleConfirm}
-                                isPostRepayCreateLoading={isPostRepayCreateLoading}
-                                orderNo={orderNo}
-                            />
-                            // <MexicoRepaymentModal
-                            //     radioValue={radioValue}
-                            //     setRadioValue={setRadioValue}
-                            //     balanceValue={balanceData}
-                            //     setBalanceValue={setbalanceData}
-                            //     handleConfirm={handleConfirm}
-                            //     handleRepayData={handleRepayData}
-                            //     isPostRepayCreateLoading={isPostRepayCreateLoading}
-                            // />
-                        ),
-                        [MexicoCountry.country]: (
-                            // <MexicoRepaymentModal
-                            //     radioValue={radioValue}
-                            //     setRadioValue={setRadioValue}
-                            //     balance={balance}
-                            //     balanceValue={balanceData}
-                            //     setBalanceValue={setbalanceData}
-                            //     repayTypesList={repayTypesList}
-                            //     isRepayTypesFetching={isRepayTypesFetching}
-                            //     repayType={repayType}
-                            //     setRepayType={setRepayType}
-                            //     handleConfirm={handleConfirm}
-                            //     isPostRepayCreateLoading={isPostRepayCreateLoading}
-                            //     orderNo={orderNo}
-                            // />
-                            <MexicoRepaymentModal
-                            radioValue={radioValue}
-                            setRadioValue={setRadioValue}
-                            balanceValue={balanceData}
-                            setBalanceValue={setbalanceData}
-                            handleConfirm={handleConfirm}
-                            handleRepayData={handleRepayData}
-                            isPostRepayCreateLoading={isPostRepayCreateLoading}
-                        />
-                        ),
-                    },
-                    <IndiaRepaymentModal
-                        radioValue={radioValue}
-                        setRadioValue={setRadioValue}
-                        balance={balance}
-                        balanceValue={balanceValue}
-                        setBalanceValue={setBalanceValue}
-                        repayTypesList={repayTypesList}
-                        isRepayTypesFetching={isRepayTypesFetching}
-                        repayType={repayType}
-                        setRepayType={setRepayType}
-                        handleConfirm={handleConfirm}
-                        isPostRepayCreateLoading={isPostRepayCreateLoading}
-                        orderNo={orderNo}
-                    />
-                )}
-            </>
-        </Modal>
-    );
+    if (environment.country === MexicoCountry.country) {
+      const { balance, repayAmount, radio, payType, coupon, orderNo, repayTypeList } = repaymentData;
+      if (balanceData.data === '' || isPostRepayCreateLoading || orderNo === '') {
+        return;
+      }
+
+      if (payType && orderNo) {
+        const couponNo = radio === 'balance' && coupon ? coupon?.couponNo || '' : '';
+        handlePostRepayCreate(false, orderNo, Number(repayAmount) || 0, payType, couponNo);
+      }
+
+    } else {
+      if (balanceValue === '' || isPostRepayCreateLoading) {
+        return;
+      }
+
+      const payType = repayType && repayType.value;
+      const coupon = radioValue === 'balance' && location.state.coupon ? location.state.coupon : null;
+      const repaymentAmount =
+        parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) - Number(coupon?.discountAmount || 0);
+      handlePostRepayCreate(false, orderNo, repaymentAmount, payType, coupon?.couponNo || null);
+    }
+
+  };
+
+  return (
+    <Modal outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}>
+      <>
+        <div className="text-lg font-bold text-ctext-primary my-2">{t('Repay')}</div>
+        {renderByCountry(
+          {
+            [IndiaCountry.country]: (
+              <IndiaRepaymentModal
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                // NOTICE:
+                balance={balance}
+                balanceValue={balanceValue}
+                setBalanceValue={setBalanceValue}
+                isRepayTypesFetching={isRepayTypesFetching}
+                repayTypesList={repayTypesList}
+                repayType={repayType}
+                setRepayType={setRepayType}
+                handleConfirm={handleConfirm}
+                isPostRepayCreateLoading={isPostRepayCreateLoading}
+                orderNo={orderNo}
+              />
+            ),
+            [PakistanCountry.country]: (
+              <PakistanRepaymentModal
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                balance={balance}
+                balanceValue={balanceValue}
+                setBalanceValue={setBalanceValue}
+                repayTypesList={repayTypesList}
+                isRepayTypesFetching={isRepayTypesFetching}
+                repayType={repayType}
+                setRepayType={setRepayType}
+                handleConfirm={handleConfirm}
+                isPostRepayCreateLoading={isPostRepayCreateLoading}
+                orderNo={orderNo}
+              />
+            ),
+            [MexicoCountry.country]: (
+              <MexicoRepaymentModal
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                balanceValue={balanceData}
+                setBalanceValue={setbalanceData}
+                handleConfirm={handleConfirm}
+                handleRepayData={handleRepayData}
+                isPostRepayCreateLoading={isPostRepayCreateLoading}
+              />
+            ),
+          },
+          <IndiaRepaymentModal
+            radioValue={radioValue}
+            setRadioValue={setRadioValue}
+            balance={balance}
+            balanceValue={balanceValue}
+            setBalanceValue={setBalanceValue}
+            repayTypesList={repayTypesList}
+            isRepayTypesFetching={isRepayTypesFetching}
+            repayType={repayType}
+            setRepayType={setRepayType}
+            handleConfirm={handleConfirm}
+            isPostRepayCreateLoading={isPostRepayCreateLoading}
+            orderNo={orderNo}
+          />
+        )}
+      </>
+    </Modal>
+  );
 };
 
 export default withTranslation(i18nRepaymentModal.namespace)(RepaymentModal);

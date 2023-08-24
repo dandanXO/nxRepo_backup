@@ -2,7 +2,7 @@ import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 import Select from "../../../../components/Select";
 
@@ -44,6 +44,8 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation(i18nRepaymentModal.namespace);
+
   const { coupon } = location.state;
 
   const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState('');
@@ -61,13 +63,13 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             }
           }}
         >
-          <Radio value="balance">{props.t('Repay Full Amount')}</Radio>
-          <Radio value="custom">{props.t('Partial Repayment')}</Radio>
+          <Radio value="balance">{t('Repay Full Amount')}</Radio>
+          <Radio value="custom">{t('Partial Repayment')}</Radio>
         </Radio.Group>
       </div>
 
       <div>
-        <div className="mt-3 text-xs">{'Payment Amount (PKR)'}</div>
+        <div className="mt-3 text-xs">{t('Payment Amount (PKR)')}</div>
         <Input
           name={'amount'}
           labelType="none"
@@ -82,12 +84,12 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             value = value.replace(`R`, '').trim();
 
             if (value === '' || Number(value) === 0) {
-              setBalanceValueErrorMessage('This field cannot be left blank or 0.');
+              setBalanceValueErrorMessage(t('This field cannot be left blank or 0.') as string);
             } else if (!new RegExp('^[0-9]*$').test(value)) {
-              setBalanceValueErrorMessage('Numbers only. Please try again.');
+              setBalanceValueErrorMessage(t('Numbers only. Please try again.') as string);
             } else if (Number(value) > Number(balance)) {
               // NOTE: 限制數字最大值
-              setBalanceValueErrorMessage('Amount cannot be greater than the repayment balance.');
+              setBalanceValueErrorMessage(t('Amount cannot be greater than the repayment balance.') as string);
             } else {
               setBalanceValueErrorMessage('');
             }
@@ -99,7 +101,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
       </div>
 
       <div>
-        <div className="mt-1.5 text-xs">{'Payment Method'}</div>
+        <div className="mt-1.5 text-xs">{t('Payment Method')}</div>
         <Select
           styles={selectStyles}
           options={repayTypesList || []}
@@ -112,7 +114,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
       {radioValue !== 'custom' && (
         <>
-          <div className="mt-2.5 text-xs">{'Coupon (PKR)'}</div>
+          <div className="mt-2.5 text-xs">{t('Coupon (PKR)')}</div>
           <div
             className="flex items-center justify-center border-b border-solid border-[#aaaaaa] py-1.5 pl-5 pr-4"
             onClick={() => {
@@ -134,12 +136,12 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
                 <div className="flex grow justify-between">
                   <div className="self-center">- {coupon.discountAmount}</div>
                   <div className="flex flex-col text-xs text-ctext-secondary">
-                    <div>expiration date</div>
+                    <div>{t('expiration date')}</div>
                     <div className="">{coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
                   </div>
                 </div>
               ) : (
-                <div>Select</div>
+                <div>{t('Select')}</div>
               )}
               <RiArrowRightSLine className="fill-[#CCCCCC] text-2xl" />
             </div>
@@ -149,7 +151,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
       <div className="mt-3 font-bold">
         <ListItem
-          title={'Repayment Amount'}
+          title={t('Repayment Amount')}
           text={
             radioValue !== 'custom' ? (
               <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />
@@ -170,7 +172,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             type={'ghost'}
             ghostTheme={'tertiary'}
             className={`w-full`}
-            text={props.t('Cancel')}
+            text={t('Cancel')}
             onClick={() => {
               if (isRepayTypesFetching) return;
               navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
@@ -180,7 +182,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div className={` ml-1.5 w-full`}>
           <Button
             className={`w-full`}
-            text={props.t('Repay')}
+            text={t('Repay')}
             primaryTypeGradient={true}
             disable={isPostRepayCreateLoading}
             onClick={() => {
@@ -191,13 +193,10 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         </div>
       </div>
       <div className={`text-left text-xs text-ctext-secondary font-bold leading-none`}>
-        <div>Attention：</div>
+        <div>{t('Attention')}:</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
-          <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
-          <li>
-            To protect your rights, we strongly recommend that you take a screenshot of the repayment details after
-            completing the repayment, and upload your screenshot to the app.
-          </li>
+          <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
+          <li>{t('To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.')}</li>
         </ul>
       </div>
       <div className={`my-4`}>
@@ -207,4 +206,4 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
   );
 };
 
-export default withTranslation(i18nRepaymentModal.namespace)(PakistanRepaymentModal);
+export default PakistanRepaymentModal;
