@@ -17,6 +17,7 @@ import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry'
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { RootState } from '../../../reduxStore';
 import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
@@ -148,6 +149,7 @@ const RepaymentCouponModal = () => {
                     <Button
                         text={'Confirm'}
                         primaryTypeGradient={environment.country===PakistanCountry.country}
+                        outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}
                         className="w-full"
                         onClick={() =>{
                       

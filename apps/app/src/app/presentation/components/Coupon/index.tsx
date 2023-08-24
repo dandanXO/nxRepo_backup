@@ -1,3 +1,4 @@
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import { GetCouponApplicableList } from '../../../api/userService/GetCouponApplicableListResponse';
@@ -16,6 +17,7 @@ const Coupon = (props: ICouponProps) => {
     {
       [IndiaCountry.country]: <IndiaCoupon {...props} />,
       [PakistanCountry.country]: <PakistanCoupon {...props} />,
+      [MexicoCountry.country]: <PakistanCoupon {...props} />,  // PK 跟 MX 的長一樣，暫時先放pk的
     },
     <IndiaCoupon {...props} />
   );
