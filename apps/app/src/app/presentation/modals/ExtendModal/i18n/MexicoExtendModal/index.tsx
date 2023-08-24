@@ -12,6 +12,8 @@ import { selectStyles } from '../../../../components/layouts/selectStyles';
 import {formatDate} from "../../../../../modules/format/formatDate";
 import Modal from '../../../../components/Modal';
 import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
+import { i18nExtendModal } from '../../translations';
 
 type paymentMethodValueType = {
   value: string;
@@ -30,6 +32,7 @@ const MexicoExtendModal = (props: any) => {
     paidAmount,
     status = '',
   } = props.currentData ?? {};
+  const { t } = useTranslation(i18nExtendModal.namespace);
 
   const paymentLabel = (color = window.theme?.text?.primary) => {
     return {
@@ -101,8 +104,8 @@ const MexicoExtendModal = (props: any) => {
       <ListItem
         title={t('Extension Due Date')}
         text={extendDate ? formatDate(moment(extendDate)) : ''}
-        titleColor="text-ctext-secondary"
-        textColor="text-primary-main"
+        titleColor="text-ctext-secondary text-left"
+        textColor="text-primary-main whitespace-nowrap"
       />
 
       <Divider />
