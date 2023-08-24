@@ -81,6 +81,11 @@ const TelSaleMemberTab = (): JSX.Element => {
             hideInSearch: true,
         },
         {
+            title: '电销组别',
+            dataIndex: 'telGroupName',
+            hideInSearch: true,
+        },
+        {
             title: '状态',
             dataIndex: 'enabled',
             valueType: 'select',

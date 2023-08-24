@@ -27,6 +27,8 @@ const TelSaleGroupTable = ({ telTeamId, groups }: ITelSaleGroupTableProps): JSX.
 
     const [modal, contextHolder] = Modal.useModal();
 
+    const data = currentData || groups;
+
     return (
         <div style={{ margin: '10px 20px', padding: '20px', backgroundColor: 'white' }}>
             {contextHolder}
@@ -36,20 +38,20 @@ const TelSaleGroupTable = ({ telTeamId, groups }: ITelSaleGroupTableProps): JSX.
                     getTelSaleGroups({ telTeamId });
                 }}
             />
-            {!isFetching && (
+            {!isFetching && data.length !== 0 && (
                 <div style={{ width: '40%', padding: '10px', border: '1px solid lightgrey', borderBottom: 'none' }}>
                     电销组别名称
                 </div>
             )}
             {!isFetching &&
-                (currentData || groups).map((group, index) => (
+                data.map((group, index) => (
                     <div
                         key={group.id}
                         style={{
                             width: '40%',
                             padding: '10px',
                             border: '1px solid lightgrey',
-                            borderBottom: `${index !== (currentData || groups).length - 1 && 'none'}`,
+                            borderBottom: `${index !== data.length - 1 && 'none'}`,
                         }}
                     >
                         <EditableInput

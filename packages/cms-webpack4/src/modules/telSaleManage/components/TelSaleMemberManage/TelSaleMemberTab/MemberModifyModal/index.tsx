@@ -1,9 +1,9 @@
 import { Form, Modal, Select, Spin } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useUpdateUserMutation } from '../../../../../shared/api/UsersApi';
 import { UsersItem } from '../../../../../shared/api/types/user/getUsers';
-import { useGetTelSaleTeamsQuery } from '../../../../api/TelTeamManageApi';
+import { useGetTelSaleTeamsQuery, useLazyGetTelSaleGroupsQuery } from '../../../../api/TelTeamManageApi';
 
 const { Item } = Form;
 
@@ -21,8 +21,19 @@ interface IMemberModifyModalProps {
 
 const MemberModifyModal = ({ open, record, onCancel, onModified }: IMemberModifyModalProps): JSX.Element => {
     const [selectedTeam, setSelectedTeam] = useState(record.telTeamId);
+    const [selectedGroup, setSelectedGroup] = useState(record.telGroupId);
     const [updateUser, { isLoading: userUpdating }] = useUpdateUserMutation();
-    const { currentData, isFetching } = useGetTelSaleTeamsQuery(null);
+    const { currentData: telSaleTeams, isFetching: telSaleTeamsFetching } = useGetTelSaleTeamsQuery(null);
+    const [getTelSaleGroups, { currentData: telSaleGroups, isLoading: telSaleGroupsFetching }] =
+        useLazyGetTelSaleGroupsQuery();
+
+    const loading = telSaleTeamsFetching || telSaleGroupsFetching;
+
+    useEffect(() => {
+        if (selectedTeam) {
+            getTelSaleGroups({ telTeamId: selectedTeam });
+        }
+    }, [selectedTeam]);
 
     return (
         <Modal
@@ -48,18 +59,18 @@ const MemberModifyModal = ({ open, record, onCancel, onModified }: IMemberModify
                     roleId: record.roleId,
                     trueName: record.trueName,
                     userName: record.userName,
-                    telGroupId: record.telGroupId,
+                    telGroupId: selectedGroup,
                     telTeamId: selectedTeam,
                 })
                     .unwrap()
                     .then(onModified);
             }}
             okButtonProps={{
-                disabled: isFetching,
+                disabled: loading,
                 loading: userUpdating,
             }}
             cancelButtonProps={{
-                disabled: isFetching || userUpdating,
+                disabled: loading || userUpdating,
             }}
         >
             <Form {...layout}>
@@ -67,21 +78,43 @@ const MemberModifyModal = ({ open, record, onCancel, onModified }: IMemberModify
                 <Item label="手机号">{record.phoneNo}</Item>
                 <Item label="角色">{record.roleStr}</Item>
                 <Item label="电销团队">
-                    {isFetching && <Spin />}
-                    {!isFetching && (
+                    {loading && <Spin />}
+                    {!loading && (
                         <Select
                             value={selectedTeam}
                             onSelect={(value) => {
                                 setSelectedTeam(value);
+                                setSelectedGroup(null);
                             }}
                             onClear={() => {
                                 setSelectedTeam(null);
                             }}
                             allowClear
                         >
-                            {currentData.map((team) => (
+                            {telSaleTeams?.map((team) => (
                                 <Select.Option key={team.id} value={team.id}>
                                     {team.name}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    )}
+                </Item>
+                <Item label="电销组别">
+                    {loading && <Spin />}
+                    {!loading && (
+                        <Select
+                            value={selectedGroup}
+                            onSelect={(value) => {
+                                setSelectedGroup(value);
+                            }}
+                            onClear={() => {
+                                setSelectedGroup(null);
+                            }}
+                            allowClear
+                        >
+                            {telSaleGroups?.map((group) => (
+                                <Select.Option key={group.id} value={group.id}>
+                                    {group.name}
                                 </Select.Option>
                             ))}
                         </Select>

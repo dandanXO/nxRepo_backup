@@ -61,6 +61,7 @@ export type UsersItem = {
     trueName?: string;
     userName?: string;
     telTeamId?: number;
-    telTeamName?: number;
+    telTeamName?: string;
     telGroupId?: number;
+    telGroupName?: string;
 };
