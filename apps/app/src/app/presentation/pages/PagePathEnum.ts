@@ -4,6 +4,7 @@ export enum PagePathEnum {
   RepaymentPage = '/v2/repayment',
   MyCouponListPage = '/v2/my-coupon-list',
   RepaymentDetailPage = '/v2/repayment-detail',
+  PaymentInfoPage = '/v2/payment-info',
   OrderStatusPage = '/v2/order-status',
   PersonalInfoPage = '/v2/personal-info',
   ApplicationProgressPage = '/v2/application-progress',
@@ -20,6 +21,6 @@ export enum PagePathEnum {
 
   DeleteAccountPage = '/v2/delete-account',
   AccountVerificationPage = '/v2/account-verification',
-  PartnerPage='/v2/partner',
+  PartnerPage = '/v2/partner',
   FeedbackPage = '/v2/feedback',
 }
