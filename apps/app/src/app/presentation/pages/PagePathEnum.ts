@@ -4,7 +4,7 @@ export enum PagePathEnum {
   RepaymentPage = '/v2/repayment',
   MyCouponListPage = '/v2/my-coupon-list',
   RepaymentDetailPage = '/v2/repayment-detail',
-  PaymentInfoPage = '/v2/payment-info',
+  RepaymentInfoPage = '/v2/repayment-info',
   OrderStatusPage = '/v2/order-status',
   PersonalInfoPage = '/v2/personal-info',
   ApplicationProgressPage = '/v2/application-progress',

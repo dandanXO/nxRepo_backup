@@ -30,7 +30,7 @@ import { NativeAppInfo } from '../app/persistant/nativeAppInfo';
 import {PagePathEnum} from "../app/presentation/pages/PagePathEnum";
 import BindBankCardPage from "../app/presentation/pages/BindBankCardPage";
 import RepaymentDetailPage from "../app/presentation/pages/RepaymentDetailPage";
-import PaymentInfoPage from "../app/presentation/pages/PaymentInfoPage";
+import RepaymentInfoPage from "../app/presentation/pages/RepaymentInfoPage";
 import UploadedPaymentReceiptPage from "../app/presentation/pages/UploadedPaymentReceiptPage";
 import UploadPaymentReceiptPage from "../app/presentation/pages/UploadPaymentReceiptPage";
 import CouponModalContentAndroidWebviewPage from "../app/presentation/pages/CouponModalContentAndroidWebviewPage";
@@ -112,7 +112,7 @@ const AppRouter = () => {
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
-        <Route path={PagePathEnum.PaymentInfoPage} element={<PaymentInfoPage />}/>
+        <Route path={PagePathEnum.RepaymentInfoPage} element={<RepaymentInfoPage />}/>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />

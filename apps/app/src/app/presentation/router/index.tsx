@@ -26,7 +26,7 @@ import CustomerServicePage from '../pages/CustomerServicePage';
 import DisclosureStatementPage from '../pages/DisclosureStatementPage';
 import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
 import RepaymentDetailPage from '../pages/RepaymentDetailPage'
-import PaymentInfoPage from "../pages/PaymentInfoPage";
+import RepaymentInfoPage from "../pages/RepaymentInfoPage";
 import LoanRecordPage from '../pages/RepaymentPage'
 import OrderStatusPage from '../pages/OrderStatusPage'
 import MyCouponListPage from '../pages/MyCouponListPage'
@@ -227,7 +227,7 @@ export const AppRouter = () => {
         </Route>
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
-        <Route path={PagePathEnum.PaymentInfoPage} element={<PaymentInfoPage />} />
+        <Route path={PagePathEnum.RepaymentInfoPage} element={<RepaymentInfoPage />} />
         <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
         <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>

@@ -1,7 +1,7 @@
 import { Page } from '../../components/layouts/Page';
 
-const PaymentInfoPage = () => {
+const RepaymentInfoPage = () => {
   return <Page className="flex flex-col">PaymentInfoPage</Page>;
 };
 
-export default PaymentInfoPage;
+export default RepaymentInfoPage;
