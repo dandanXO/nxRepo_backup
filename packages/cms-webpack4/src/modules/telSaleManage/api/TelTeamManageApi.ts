@@ -1,5 +1,6 @@
 import { API } from '../../shared/api';
 import { GetTelSaleTeamsResponse } from './types/getTelSaleTeams';
+import { PostTelSaleGroupRequest } from './types/postTelSaleGroup';
 import { PostTelSaleTeamRequest } from './types/postTelSaleTeam';
 import { PutTelSaleTeamRequestBody } from './types/putTelSaleTeam';
 
@@ -37,6 +38,14 @@ const TelTeamManageApi = API.injectEndpoints({
                 data: body,
             }),
         }),
+        // [POST] 添加电销组别
+        postTelSaleGroup: builder.mutation<null, PostTelSaleGroupRequest>({
+            query: (requestBody: PostTelSaleGroupRequest) => ({
+                url: '/tel-group',
+                method: 'post',
+                data: requestBody,
+            }),
+        }),
     }),
 });
 
@@ -46,4 +55,5 @@ export const {
     usePostTelSaleTeamMutation,
     useDeleteTelSaleTeamMutation,
     usePutTelSaleTeamMutation,
+    usePostTelSaleGroupMutation,
 } = TelTeamManageApi;

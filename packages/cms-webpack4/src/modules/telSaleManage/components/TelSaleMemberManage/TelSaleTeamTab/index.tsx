@@ -10,6 +10,7 @@ import {
 } from '../../../api/TelTeamManageApi';
 import { TelSaleTeamsItem } from '../../../api/types/getTelSaleTeams';
 import AddTeamForm from './AddTeamForm';
+import TelSaleGroupTable from './TelSaleGroupTable';
 
 const TelSaleTeamTab = (): JSX.Element => {
     const [getTelSaleTeam, { currentData, isFetching }] = useLazyGetTelSaleTeamsQuery({
@@ -97,6 +98,9 @@ const TelSaleTeamTab = (): JSX.Element => {
                 pagination={{
                     showSizeChanger: true,
                     defaultPageSize: 10,
+                }}
+                expandable={{
+                    expandedRowRender: (record) => <TelSaleGroupTable id={record.id} groups={record.groups} />,
                 }}
             />
         </div>
