@@ -13,6 +13,12 @@ export interface PostRepayCreateResponse {
   payType?: string;
   /** 支付訂單金額 */
   repayAmount: number;
+  /** 下一步跳轉方式 */
+  nextStep: 'html' | 'jumpUrl';
   /** 下一步跳轉網址 */
   nextUrl: string;
+  /** 業務參數 */
+  payload: {
+    orderAmount?: string;
+  };
 }

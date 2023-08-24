@@ -1,21 +1,22 @@
 import * as Sentry from '@sentry/react';
+import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
+import { environment } from '../../../environments/environmentModule/environment';
 import { AppFlag } from '../../../environments/flag';
 import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateRequest';
 import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
 import { usePostRepayCreateMutation } from '../../api/rtk';
 import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
-import { useDispatch } from 'react-redux';
-import { modalSlice } from '../../reduxStore/modalSlice';
-import { environment } from '../../../environments/environmentModule/environment';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 import { getToken } from '../../modules/querystring/getToken';
+import { modalSlice } from '../../reduxStore/modalSlice';
 import { PagePathEnum } from '../pages/PagePathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
+
 const useRepayCreate = () => {
   const navigate = useNavigate();
   const pageQueryString = useLocationOrderQueryString();
@@ -25,22 +26,42 @@ const useRepayCreate = () => {
   const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
-    const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] = usePostRepayCreateMutation();
+  const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =
+    usePostRepayCreateMutation();
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {
       // console.log('[repay] postRepayCreateRequest.props', props);
       postRepayCreate(props)
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
-          // console.log('data', data);
-          // NOTICE: 跳轉至付款頁面
-          window.location.href = data.nextUrl;
+          // data = {
+          //   ...data,
+          //   nextStep: 'html',
+          //   payload: {
+          //     orderAmount: '9000',
+          //   },
+          // };
+          if (data.nextStep === 'html') {
+            navigate(`${PagePathEnum.RepaymentInfoPage}?token=${getToken()}`, {
+              state: data.payload,
+            });
+          }
+          if (data.nextStep === 'jumpUrl') {
+            // NOTICE: 跳轉至付款頁面
+            window.location.href = data.nextUrl;
+          }
           if (environment.country === IndiaCountry.country) {
-              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
+            navigate(
+              `${
+                PagePathEnum.RepaymentDetailPage
+              }?token=${getToken()}&orderNo=${props.orderNo}`,
+              { replace: true }
+            );
 
-              // NOTICE: 取得是否要跳出複借預約彈窗
-              dispatch(RepaymentDetailPageUseCaseActions.system.showReservation())
-
+            // NOTICE: 取得是否要跳出複借預約彈窗
+            dispatch(
+              RepaymentDetailPageUseCaseActions.system.showReservation()
+            );
           }
           resolve('');
         })
@@ -72,7 +93,7 @@ const useRepayCreate = () => {
 
   return {
     handlePostRepayCreate,
-    isPostRepayCreateLoading
+    isPostRepayCreateLoading,
   };
 };
 export default useRepayCreate;
