@@ -8,7 +8,3 @@ export interface i18nComponent {
   namespace: string;
   translation: TranslationKey;
 }
-
-export type Point = {
-  x: number;
-};

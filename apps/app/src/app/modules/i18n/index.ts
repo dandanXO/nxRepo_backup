@@ -1,8 +1,7 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { i18nextPlugin } from 'translation-check';
-
-
+import { i18nExtendConfirmModal } from '../../presentation/modals/ExtendConfirmModal/translations';
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(i18nextPlugin)
@@ -58,6 +57,10 @@ i18next
           // [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.en_US,
           // [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.en_US,
           //
+          [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.en_US||{} ,
+        },
+        es_MX:{
+          [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.es_MX||{} ,
         },
         bn_BD: {
           // NOTICE: REFACTOR ME

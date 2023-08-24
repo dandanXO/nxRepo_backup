@@ -37,7 +37,7 @@ export function* runSystemInitSaga() {
         console.log('AppGlobal.mode = AppModeEnum.IndexWebview;');
 
         // NOTE: Posthog
-        yield call(Posthog.init);
+        // yield call(Posthog.init);
       } else {
         // NOTICE: SimpleWebView
         // AppModeModel.setMode(AppModeEnum.SimpleWebView)
@@ -80,7 +80,7 @@ export function* runSystemInitSaga() {
       // TODO: refactor me
       try {
         // NOTE: Posthog
-        yield call(Posthog.init);
+        // yield call(Posthog.init);
       } catch (error) {
         console.log(error);
         // NOTICE: 以下這行會導致上層 saga 中斷
