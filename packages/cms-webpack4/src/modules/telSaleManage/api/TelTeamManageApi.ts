@@ -1,4 +1,5 @@
 import { API } from '../../shared/api';
+import { GetTelSaleGroupsQueryParameters, GetTelSaleGroupsResponse } from './types/getTelSaleGroups';
 import { GetTelSaleTeamsResponse } from './types/getTelSaleTeams';
 import { PostTelSaleGroupRequest } from './types/postTelSaleGroup';
 import { PostTelSaleTeamRequest } from './types/postTelSaleTeam';
@@ -46,6 +47,14 @@ const TelTeamManageApi = API.injectEndpoints({
                 data: requestBody,
             }),
         }),
+        // [GET] 查詢电销组别
+        getTelSaleGroups: builder.query<GetTelSaleGroupsResponse, GetTelSaleGroupsQueryParameters>({
+            query: (parameters: GetTelSaleGroupsQueryParameters) => ({
+                url: '/tel-group',
+                method: 'get',
+                params: parameters,
+            }),
+        }),
     }),
 });
 
@@ -56,4 +65,5 @@ export const {
     useDeleteTelSaleTeamMutation,
     usePutTelSaleTeamMutation,
     usePostTelSaleGroupMutation,
+    useLazyGetTelSaleGroupsQuery,
 } = TelTeamManageApi;
