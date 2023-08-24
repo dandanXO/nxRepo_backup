@@ -55,6 +55,22 @@ const TelTeamManageApi = API.injectEndpoints({
                 params: parameters,
             }),
         }),
+        // [DELETE] 移除电销组别
+        deleteTelSaleGroup: builder.mutation<null, { id: number }>({
+            query: (parameter) => ({
+                url: '/tel-group',
+                method: 'delete',
+                params: parameter,
+            }),
+        }),
+        // [PUT] 更新电销组别
+        putTelSaleGroup: builder.mutation<null, { id: number; name: string; telTeamId: number }>({
+            query: (body) => ({
+                url: '/tel-group',
+                method: 'put',
+                data: body,
+            }),
+        }),
     }),
 });
 
@@ -66,4 +82,6 @@ export const {
     usePutTelSaleTeamMutation,
     usePostTelSaleGroupMutation,
     useLazyGetTelSaleGroupsQuery,
+    useDeleteTelSaleGroupMutation,
+    usePutTelSaleGroupMutation,
 } = TelTeamManageApi;

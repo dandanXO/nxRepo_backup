@@ -100,7 +100,7 @@ const TelSaleTeamTab = (): JSX.Element => {
                     defaultPageSize: 10,
                 }}
                 expandable={{
-                    expandedRowRender: (record) => <TelSaleGroupTable id={record.id} groups={record.groups} />,
+                    expandedRowRender: (record) => <TelSaleGroupTable telTeamId={record.id} groups={record.groups} />,
                 }}
             />
         </div>

@@ -1,51 +1,84 @@
-import { ProColumns, ProTable } from '@ant-design/pro-components';
-import React, { useState } from 'react';
+import { Modal, Spin } from 'antd';
+import React from 'react';
 
-import { useLazyGetTelSaleGroupsQuery } from '../../../../api/TelTeamManageApi';
+import EditableInput from '../../../../../shared/components/Inputs/EditableInput';
+import {
+    useDeleteTelSaleGroupMutation,
+    useLazyGetTelSaleGroupsQuery,
+    usePutTelSaleGroupMutation,
+} from '../../../../api/TelTeamManageApi';
 import { TelSaleGroupsItem } from '../../../../api/types/getTelSaleTeams';
 import AddGroupForm from '../AddGroupForm';
 
 interface ITelSaleGroupTableProps {
-    id: number;
+    telTeamId: number;
     groups: TelSaleGroupsItem[];
 }
 
-const TelSaleGroupTable = ({ id, groups }: ITelSaleGroupTableProps): JSX.Element => {
-    const [telSaleGroup, setTelSaleGroup] = useState<TelSaleGroupsItem[]>(groups);
+const TelSaleGroupTable = ({ telTeamId, groups }: ITelSaleGroupTableProps): JSX.Element => {
     const [getTelSaleGroups, { currentData, isFetching }] = useLazyGetTelSaleGroupsQuery({
         pollingInterval: 0,
         refetchOnFocus: false,
         refetchOnReconnect: false,
     });
 
-    const columns: ProColumns<TelSaleGroupsItem>[] = [
-        {
-            title: '电销组别名称',
-            dataIndex: 'name',
-        },
-    ];
+    const [deleteTelSaleGroup, { isLoading: telSaleGroupDeleting }] = useDeleteTelSaleGroupMutation();
+    const [putTelSaleGroup, { isLoading: telSaleGroupPutting }] = usePutTelSaleGroupMutation();
+
+    const [modal, contextHolder] = Modal.useModal();
 
     return (
         <div style={{ margin: '10px 20px', padding: '20px', backgroundColor: 'white' }}>
+            {contextHolder}
             <AddGroupForm
-                teamId={id}
+                teamId={telTeamId}
                 onAdd={() => {
-                    getTelSaleGroups({ telTeamId: id });
+                    getTelSaleGroups({ telTeamId });
                 }}
             />
-            <div style={{ padding: '10px', border: '1px solid lightgrey', borderBottom: 'none' }}>电销组别名称</div>
-            {(currentData || groups).map((group, index) => (
-                <div
-                    key={group.id}
-                    style={{
-                        padding: '10px',
-                        border: '1px solid lightgrey',
-                        borderBottom: `${index !== (currentData || groups).length - 1 && 'none'}`,
-                    }}
-                >
-                    {group.name}
+            {!isFetching && (
+                <div style={{ width: '40%', padding: '10px', border: '1px solid lightgrey', borderBottom: 'none' }}>
+                    电销组别名称
                 </div>
-            ))}
+            )}
+            {!isFetching &&
+                (currentData || groups).map((group, index) => (
+                    <div
+                        key={group.id}
+                        style={{
+                            width: '40%',
+                            padding: '10px',
+                            border: '1px solid lightgrey',
+                            borderBottom: `${index !== (currentData || groups).length - 1 && 'none'}`,
+                        }}
+                    >
+                        <EditableInput
+                            originValue={group.name}
+                            onDelete={() => {
+                                modal.confirm({
+                                    title: `确认要删除[${group.name}]吗？`,
+                                    type: 'warn',
+                                    onOk: () => {
+                                        deleteTelSaleGroup({ id: group.id })
+                                            .unwrap()
+                                            .then(() => {
+                                                getTelSaleGroups({ telTeamId });
+                                            });
+                                    },
+                                });
+                            }}
+                            onUpdate={(name) => {
+                                putTelSaleGroup({ id: group.id, name, telTeamId })
+                                    .unwrap()
+                                    .then(() => {
+                                        getTelSaleGroups({ telTeamId });
+                                    });
+                            }}
+                            loading={telSaleGroupDeleting || telSaleGroupPutting}
+                        />
+                    </div>
+                ))}
+            {isFetching && <Spin />}
         </div>
     );
 };
