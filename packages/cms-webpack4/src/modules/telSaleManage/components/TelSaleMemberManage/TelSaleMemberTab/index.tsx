@@ -31,6 +31,7 @@ const getUsersInitialBody = {
     pageSize: 10,
     pageEnable: true,
     enabled: '',
+    phoneNo: '',
 };
 
 const TelSaleMemberTab = (): JSX.Element => {
@@ -67,6 +68,7 @@ const TelSaleMemberTab = (): JSX.Element => {
         {
             title: '手机号',
             dataIndex: 'phoneNo',
+            initialValue: '',
         },
         {
             title: '角色',
