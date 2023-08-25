@@ -75,7 +75,7 @@ const Uni18nUploadPaymentReceiptPage = (props: UploadPaymentReceiptPageProps) =>
     <div>
       {isShowNavigation() && (
         <Navigation
-          title={'Upload payment receipt'}
+          title={props.t('Upload Payment Receipt') as string}
           back={() => {
             navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
               state: { orderNo: location.state.orderNo },

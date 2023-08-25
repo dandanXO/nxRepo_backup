@@ -4,6 +4,9 @@ import { i18nextPlugin } from 'translation-check';
 import { i18nExtendConfirmModal } from '../../presentation/modals/ExtendConfirmModal/translations';
 import { i18nExtendModal } from '../../presentation/modals/ExtendModal/translations';
 import { i18nRepaymentModal } from '../../presentation/modals/RepaymentModal/i18n/translations';
+import { i18nUploadPaymentReceiptPage } from '../../presentation/pages/UploadPaymentReceiptPage/i18nPage/translations';
+import { i18nUploadingFileModal } from '../../presentation/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';
+import { i18nUploadedPaymentReceiptPage } from '../../presentation/pages/UploadedPaymentReceiptPage/components/i18n/translations';
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(i18nextPlugin)
@@ -42,30 +45,39 @@ i18next
           // // NOTE: LoanDetailPage
           // [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US,
           //
-          // // NOTE: LoanDetailsPage
+          // NOTE: LoanDetailsPage
           // [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US,
           // [i18nExtensionDetailModal.namespace]: i18nExtensionDetailModal.translation.en_US,
           [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.en_US || {},
           // [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.en_US,
           // [i18nRepaymentAdsModal.namespace]: i18nRepaymentAdsModal.translation.en_US,
+          [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.en_US || {},
+          [i18nExtendModal.namespace]: i18nExtendModal.translation.en_US || {},
           //
           // // NOTE: ProductAdModalListPage
           // [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.en_US,
           //
-          // // NOTE: UploadedPaymentReceiptPage
-          // [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.en_US,
+          // NOTE: UploadedPaymentReceiptPage
+          [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.en_US || {},
           //
-          // // NOTE: UploadPaymentReceiptPage
-          // [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.en_US,
-          // [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.en_US,
-          //
-          [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.en_US || {},
-          [i18nExtendModal.namespace]: i18nExtendModal.translation.en_US || {},
+          // NOTE: UploadPaymentReceiptPage
+          [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.en_US || {},
+          [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.en_US || {},
+          // 
+        
         },
-        es_MX:{
+        es_MX: {
+          // NOTE: LoanDetailsPage
           [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.es_MX || {},
           [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.es_MX || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.es_MX || {},
+
+          // NOTE: UploadedPaymentReceiptPage
+          [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.en_US || {},
+          // NOTE: UploadPaymentReceiptPage
+          [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.es_MX || {},
+          [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.es_MX || {},
+
         },
         bn_BD: {
           // NOTICE: REFACTOR ME

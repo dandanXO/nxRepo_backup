@@ -59,7 +59,7 @@ export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymen
         </Content>
         <ControlSection>
           <Button 
-              text={'Done'}
+              text={props.t('Done')}
               primaryTypeGradient={environment.country === PakistanCountry.country}
               outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}
               onClick={() => props.navigateToLoanDetails()}

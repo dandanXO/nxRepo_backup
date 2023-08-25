@@ -5,14 +5,18 @@ export const i18nUploadedPaymentReceiptPage: i18nComponent = {
   translation: {
     en_US: {
       'Upload payment receipt': 'Upload payment receipt',
-      'Thank you. Your receipt has been uploaded successfully.':
-        'Thank you. Your receipt has been uploaded successfully.',
-      Done: 'Done',
+      'Thank you. Your receipt has been uploaded successfully.': 'Thank you. Your receipt has been uploaded successfully.',
+      'Done': 'Done',
+    },
+    es_MX: {
+      'Upload payment receipt': 'Subir Recibo de Pago',
+      'Thank you. Your receipt has been uploaded successfully.': 'Gracias. Su recibo se ha cargado con éxito.',
+      'Done': 'Hecho',
     },
     bn_BD: {
       'Upload payment receipt': 'পেমেন্টের রসিদ আপলোড করো',
       'Thank you. Your receipt has been uploaded successfully.': 'ধন্যবাদ. তোমার রসিদ সফলভাবে আপলোড হয়েছে',
-      Done: 'সম্পন্ন হয়েছে',
+      'Done': 'সম্পন্ন হয়েছে',
     },
   },
 };
