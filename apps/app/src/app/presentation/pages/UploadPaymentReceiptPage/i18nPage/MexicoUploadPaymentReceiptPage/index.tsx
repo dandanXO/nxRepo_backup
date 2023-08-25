@@ -42,7 +42,7 @@ export const MexicoUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentR
           </label>
           <div className="my-2 text-cstate-error-main">{props.fileErrorMessage}</div>
         </div>
-        <Button outlineTheme={'round'} text={'Confirm'} onClick={() => props.confirm()} />
+        <Button outlineTheme={'round'} text={props.t('Confirm')} onClick={() => props.confirm()} />
       </PageContent>
     );
   }
