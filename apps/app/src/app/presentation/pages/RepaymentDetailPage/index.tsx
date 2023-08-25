@@ -16,6 +16,8 @@ import PakistanRepaymentDetailPage from './i18nPage/pakistan/PakistanRepaymentDe
 import { RepaymentDetailPageUseCaseActions } from './userUsecaseSaga';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../reduxStore';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import MexicoRepaymentDetailPage from './i18nPage/mexico/MexicoRepaymentDetailPage';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
@@ -46,6 +48,7 @@ const RepaymentDetailPage = (props: any) => {
         {
           [IndiaCountry.country]: <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
           [PakistanCountry.country]: <PakistanRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
+          [MexicoCountry.country]: <MexicoRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>,
         },
         <IndiaRepaymentDetailPage currentData={currentData} isFetching={isFetching}/>
       )}
