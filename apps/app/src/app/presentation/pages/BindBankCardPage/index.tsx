@@ -21,6 +21,8 @@ import { PageContent } from '../../components/layouts/PageContent';
 import {environment} from "../../../../environments/environmentModule/environment";
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import { MexicoBindBankAccountPage } from './i18nPage/MexicoBindBankAccountPage';
+import { i18nBankBindAccountPage } from './translations';
+import { useTranslation } from 'react-i18next';
 
 const BindBankCardPage = () => {
   // NOTICE: Common
@@ -51,11 +53,13 @@ const BindBankCardPage = () => {
     usePostBankBindSaveToPKMutation();
 
   const navigate = useNavigate();
+  const { t } = useTranslation(i18nBankBindAccountPage.namespace);
+
   return (
     <>
       {isShowNavigation() && (
         <Navigation
-          title={'Add New Card'}
+          title={environment.country !== MexicoCountry.country ? 'Add New Card' : t('Bank information') as string}
           back={() => {
             navigate(-1);
           }}

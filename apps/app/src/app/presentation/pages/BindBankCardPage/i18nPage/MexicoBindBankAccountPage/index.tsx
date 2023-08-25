@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../reduxStore';
 import { useLazyGetMXBindCardDropListQuery } from 'apps/app/src/app/api/rtk';
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+import { i18nBankBindAccountPage } from '../../translations';
+import { useTranslation } from 'react-i18next';
 
 
 export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
@@ -40,16 +42,17 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   // NOTE : 暫時先用變數代替，之後修改
   const isFormPending = false;
   const cardholderName = pageQueryString.cardholderName || bindCardDropListData?.cardholderName;
+  const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   return (
     <div className='h-full flex flex-col grow overflow-auto'>
       <Outlet />
       <div className='mb-4'>
-        <div className='text-ctext-primary font-bold text-sm'>Advice:</div>
+        <div className='text-ctext-primary font-bold text-sm'>{t('Advice')}:</div>
         <ul className="list-outside list-decimal pl-3 pt-1 text-xs text-ctext-secondary">
-            <li>Only your debit card can be linked.</li>
-            <li>Can’t link credit card.</li>
-            <li>To expedite your request, please make sure the name and phone number on the card match the information you provide</li>
+            <li>{t('Only your debit card can be linked.')}</li>
+            <li>{t('Can’t link credit card.')}</li>
+            <li>{t('To expedite your request, please make sure the name and phone number on the card match the information you provide')}</li>
         </ul>
       </div>
       <BankAccountForm

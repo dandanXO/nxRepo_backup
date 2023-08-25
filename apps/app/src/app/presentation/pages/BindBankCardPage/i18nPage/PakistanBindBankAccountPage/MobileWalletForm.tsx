@@ -10,6 +10,8 @@ import { useDispatch } from 'react-redux';
 import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import ValidateInput from '../../../../components/ValidateInput';
 import { validateMobile } from './validation';
+import { useTranslation } from 'react-i18next';
+import { i18nBankBindAccountPage } from '../../translations';
 
 type IMobileWalletForm = {
     // Wallet List
@@ -36,6 +38,8 @@ type IMobileWalletForm = {
 export const MobileWalletForm = (props: IMobileWalletForm) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation(i18nBankBindAccountPage.namespace);
+
     const [walletValue, setWalletValue] = useState(props.walletDropList[0])
     const [mobileData, setMobileData] = useState<InputValue<string>>({
         data: '',
@@ -64,7 +68,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
             setConfirmMobileData({
                 ...confirmMobileData,
                 isValidation: isConfirmMobileDataError,
-                errorMessage: isConfirmMobileDataError ? '' : t('Please make sure your mobile number match.') as string
+                errorMessage: isConfirmMobileDataError ? '' : 'Please make sure your mobile number match.' as string
             })
         }
     }, [mobileData.data, confirmMobileData.data])
@@ -101,7 +105,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
     return (
         <div className="flex grow flex-col">
             <div>
-                <div className={'text-sm'}>{'Mobile Wallet'}</div>
+                <div className={'text-sm'}>{t('Mobile Wallet')}</div>
                 <Select
                     styles={selectStyles}
                     className="react-select-container mb-2"
@@ -111,28 +115,28 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                         setWalletValue(item);
                     }}
                     isSearchable={false}
-                    placeholder={'Mobile Wallet'}
+                    placeholder={t('Mobile Wallet')}
                 />
             </div>
             <div>
-                <div className={'text-sm'}>{'Mobile Wallet Holder Name'}</div>
+                <div className={'text-sm'}>{t('Mobile Wallet Holder Name')}</div>
                 <Input
                     className="mb-2"
                     labelType={'none'}
                     outlineType={'standard'}
-                    placeholder={'Cardholder Name'}
+                    placeholder={t('Cardholder Name') as string}
                     value={props.cardholderName}
                     disabled
                 />
-                <div className={'mb-0 text-sm'}>{'Mobile Wallet Account'}</div>
+                <div className={'mb-0 text-sm'}>{t('Mobile Wallet Account')}</div>
                 <ValidateInput
                     name={'account'}
                     className="mb-1"
                     textAlign={'left'}
                     outlineType={'standard'}
-                    placeholder={'Mobile Wallet Account'}
+                    placeholder={t('Mobile Wallet Account') as string}
                     value={mobileData.data}
-                    errorMessage={mobileData.errorMessage}
+                    errorMessage={t(mobileData.errorMessage as string)}
                     inputData={mobileData}
                     setInputData={setMobileData}
                     validateData={() => validateMobile(mobileData.data)}
@@ -140,15 +144,15 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
                 />
             </div>
             <div>
-                <div className={'text-sm'}>{'Confirm Mobile Wallet Account'}</div>
+                <div className={'text-sm'}>{t('Confirm Mobile Wallet Account')}</div>
                 <ValidateInput
                     name={'account_confirm'}
                     className="mb"
                     textAlign={'left'}
                     outlineType={'standard'}
-                    placeholder={'Confirm Mobile Wallet Account'}
+                    placeholder={t('Confirm Mobile Wallet Account') as string}
                     value={confirmMobileData.data}
-                    errorMessage={confirmMobileData.errorMessage}
+                    errorMessage={t(confirmMobileData.errorMessage as string)}
                     inputData={confirmMobileData}
                     setInputData={setConfirmMobileData}
                     validateData={() => validateMobile(confirmMobileData.data)}
@@ -160,7 +164,7 @@ export const MobileWalletForm = (props: IMobileWalletForm) => {
             <div className="py-2">
                 <Button
                     primaryTypeGradient={true}
-                    text={'Confirm'}
+                    text={t('Confirm')}
                     onClick={confirmBindCard}
                 />
             </div>

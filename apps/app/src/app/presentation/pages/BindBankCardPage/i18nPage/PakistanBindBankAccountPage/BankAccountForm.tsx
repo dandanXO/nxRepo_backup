@@ -13,12 +13,15 @@ import { validateBankcardNo } from './validation';
 import ValidateInput from '../../../../components/ValidateInput';
 import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
+import { i18nBankBindAccountPage } from '../../translations';
+import { useTranslation } from 'react-i18next';
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [bankValue, setBankValue] = useState({ value: '', label: '' });
     const [isBankSelected, setIsBankSelected] = useState(true);
+    const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
     const [bankAccountData, setBankAccountData] = useState<InputValue<string>>({
         data: '',
@@ -40,7 +43,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
             setconfirmBankAccountData({
                 ...confirmBankAccountData,
                 isValidation: isConfirmMobileDataError,
-                errorMessage: isConfirmMobileDataError ? '' : t('Please make sure your account number match.') as string
+                errorMessage: isConfirmMobileDataError ? '' : 'Please make sure your account number match.' as string
             })
         }
     }, [bankAccountData.data, confirmBankAccountData.data]);
@@ -78,18 +81,18 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     return (
         <div className="flex grow flex-col">
             <div>
-                <div className={'text-sm'}>{'Cardholder Name'}</div>
+                <div className={'text-sm'}>{t('Cardholder Name')}</div>
                 <Input
                     className="mb-2"
                     labelType={'none'}
                     outlineType={'standard'}
-                    placeholder={'Cardholder Name'}
+                    placeholder={t('Cardholder Name') as string}
                     value={props.cardholderName}
                     disabled
                 />
             </div>
             <div>
-                <div className={'text-sm'}>{'Bank Name'}</div>
+                <div className={'text-sm'}>{t('Bank Name')}</div>
                 <Select
                     styles={selectStyles}
                     className="mb-2"
@@ -99,22 +102,22 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                     }}
                     options={props.bankDropList}
                     isSearchable={true}
-                    placeholder={'Select'}
+                    placeholder={t('Select')}
                 />
                 {!isBankSelected &&
                     <div className='ml-5 text-cstate-error-main'>{t('Please select an option')}</div>
                 }
             </div>
             <div>
-                <div className={'text-sm'}>{'Account Number'}</div>
+                <div className={'text-sm'}>{t('Account Number')}</div>
                 <ValidateInput
                     name={'account'}
                     className="mb-2"
                     labelType={'none'}
                     outlineType={'standard'}
-                    placeholder={'Account Number'}
+                    placeholder={t('Account Number') as string}
                     value={bankAccountData.data}
-                    errorMessage={bankAccountData.errorMessage}
+                    errorMessage={t(bankAccountData.errorMessage as string)}
                     inputData={bankAccountData}
                     setInputData={setBankAccountData}
                     validateData={() => validateBankcardNo(bankAccountData.data)}
@@ -123,15 +126,15 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
             </div>
 
             <div>
-                <div className={'text-sm'}>{'Confirm Account Number'}</div>
+                <div className={'text-sm'}>{t('Confirm Account Number')}</div>
                 <ValidateInput
                     name={'account_confirm'}
                     className="mb-2"
                     labelType={'none'}
                     outlineType={'standard'}
-                    placeholder={'Confirm Account Number'}
+                    placeholder={t('Confirm Account Number') as string}
                     value={confirmBankAccountData.data}
-                    errorMessage={confirmBankAccountData.errorMessage}
+                    errorMessage={t(confirmBankAccountData.errorMessage as string)}
                     inputData={confirmBankAccountData}
                     setInputData={setconfirmBankAccountData}
                     validateData={() => validateBankcardNo(confirmBankAccountData.data)}
@@ -140,7 +143,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
             </div>
             <div className="pb-4">
                 <Button
-                    text={'Confirm'}
+                    text={t('Confirm')}
                     primaryTypeGradient={true}
                     onClick={confirmBindCard}
                 />

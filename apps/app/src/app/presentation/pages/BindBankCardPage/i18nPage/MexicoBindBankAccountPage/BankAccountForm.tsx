@@ -14,11 +14,15 @@ import ValidateInput from '../../../../components/ValidateInput';
 import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import { RadioOption } from '../../../../components/RadioOption';
+import { i18nBankBindAccountPage } from '../../translations';
+import { useTranslation } from 'react-i18next';
 
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation(i18nBankBindAccountPage.namespace);
+
     const [cardType,setCardType]=useState('DEBIT_CARD');
     const [bankValue, setBankValue] = useState({ value: '', label: '' });
     const [isBankSelected, setIsBankSelected] = useState(true);
@@ -37,7 +41,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         return {
             ...confirmBankAccountData,
             isValidation: isBankAndConfrimAccountSame,
-            errorMessage: isBankAndConfrimAccountSame ? '' : t('Please make sure your account number match.') as string
+            errorMessage: isBankAndConfrimAccountSame ? '' :'Please make sure your account number match.' as string
         }
     }
     useEffect(() => {
@@ -47,8 +51,8 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     }, [bankAccountData.data, confirmBankAccountData.data]);
 
     const payOptions = [
-        { value: 'DEBIT_CARD', label: 'Tarjeta de bito' },
-        { value: 'CLABE', label: 'CLABE' },
+        { value: 'DEBIT_CARD', label: t('Debit Card') },
+        { value: 'CLABE', label: t('CLABE') },
     ];
 
     const handleChangeCardType = (e: any) => {
@@ -84,11 +88,10 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         }
     }
 
-   
     const bankListLabel = (color = '#000') => ({
         ':before': {
             borderRadius: 10,
-            content: '"Name of the bank"',
+            content: `"${t("Name of the bank")}"`,
             display: 'block',
             color: color,
             top: 0
@@ -99,7 +102,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
         <div className="flex grow flex-col">
             <div className='grow'>
                 <div className='flex mb-2 flex-wrap'>
-                    <div className='text-ctext-primary font-bold grow'>Método de pago</div>
+                    <div className='text-ctext-primary font-bold grow'>{t('Payment Method')}</div>
                     <RadioOption options={payOptions} onChange={handleChangeCardType} />
                 </div>
                 <div className='mb-2'>
@@ -140,7 +143,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         placeholder={'Select'}
                     />
                     <div className='my-1 ml-5 text-cstate-error-main'>
-                        {!isBankSelected && bankValue.value === '' && t('Please select an option')}
+                        {!isBankSelected && bankValue.value === '' && t('Please select an option.')}
                     </div>
                 </div>
                 <div className='mb-2'>
@@ -151,7 +154,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         outlineType={'outlined'}
                         placeholder={cardType === 'DEBIT_CARD' ? '1234 5678 1112 2222' : '123 456 7890123456 78'}
                         value={bankAccountData.data}
-                        errorMessage={bankAccountData.errorMessage}
+                        errorMessage={t(bankAccountData.errorMessage as string)}
                         inputData={bankAccountData}
                         setInputData={setBankAccountData}
                         validateData={() => validateMXBankcardNo(bankAccountData.data, bankAccountLength)}
@@ -170,7 +173,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         outlineType={'outlined'}
                         placeholder={cardType === 'DEBIT_CARD' ? '1234 5678 1112 2222' : '123 456 7890123456 78'}
                         value={confirmBankAccountData.data}
-                        errorMessage={confirmBankAccountData.errorMessage}
+                        errorMessage={t(confirmBankAccountData.errorMessage as string)}
                         inputData={confirmBankAccountData}
                         setInputData={setconfirmBankAccountData}
                         validateData={() => validateMXBankcardNo(confirmBankAccountData.data, bankAccountLength)}

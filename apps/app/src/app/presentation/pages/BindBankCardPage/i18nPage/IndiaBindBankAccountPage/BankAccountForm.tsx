@@ -8,22 +8,25 @@ import { Form } from './Form';
 import { MdInfoOutline } from '@react-icons/all-files/md/MdInfoOutline';
 import IFSCHintModal from '../../../../modals/i18n/india/IFSCHintModal';
 import UPIHintModal from '../../../../modals/i18n/india/UPIHintModal';
+import { i18nBankBindAccountPage } from '../../translations';
+import { useTranslation } from 'react-i18next';
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
 
   const [ifscModalShow,SetIfscModalShow]=useState(false);
   const [upiModalShow,SetUpiModalShow]=useState(false);
+  const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   return (
     <div className="flex flex-col grow">
       <Form className="grow">
         <div className="text-ctext-primary mb-1 text-xs">
-          {'For KYC, your Cardholder name and PAN card name should be match.'}
+          {t('For KYC, your Cardholder name and PAN card name should be match.')}
         </div>
-        <Input className="mb-3 text-sm" label={'Cardholder Name'} value={props.cardholderName} disabled />
+        <Input className="mb-3 text-sm" label={t('Cardholder Name') as string} value={props.cardholderName} disabled />
 
         <Input
           className="mb-3 text-sm"
-          label={'Account Number'}
+          label={t('Account Number') as string}
           value={props.bankcardNoData.data}
           onChange={props.onAccountNumberChange}
           onBlur={props.onAccountNumberBlur}
@@ -31,7 +34,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
         />
         <Input
           className="mb-3 text-sm"
-          label={'Confirm Account Number'}
+          label={t('Confirm Account Number') as string}
           value={props.confirmedBankcardNoData.data}
           onChange={props.onConfirmAccountNumberChange}
           onBlur={props.onConfirmAccountNumberBlur}
@@ -44,7 +47,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
               SetIfscModalShow(true)
           }}><MdInfoOutline /></div>}
           className="mb-3 text-sm"
-          label={'IFSC Code (11characters )'}
+          label={t('IFSC Code (11characters )') as string}
           value={props.ifscData.data}
           onChange={props.onIFSCChange}
           onBlur={props.onIFSCBlur}
@@ -56,7 +59,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
             SetUpiModalShow(true)
           }}><MdInfoOutline /></div>}
           className="mb-4 text-sm"
-          label={'UPI ID'}
+          label={t('UPI ID') as string}
           value={props.upiData.data}
           onChange={props.onUPIIDChange}
           onBlur={props.onUPIIDChangBlur}
@@ -65,7 +68,7 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
       </Form>
       <div className="mb-4">
         <Button
-          text={'Confirm'}
+          text={t('Confirm') as string}
           onClick={() => {
             !props.isFormPending && props.confirm();
           }}
