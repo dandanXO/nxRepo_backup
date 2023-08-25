@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useLazyGetUsersQuery } from '../../../../shared/api/UsersApi';
 import { UsersItem } from '../../../../shared/api/types/user/getUsers';
+import { useGetTelSaleRolesQuery } from '../../../api/TelTeamManageApi';
 import MemberModifyModal from './MemberModifyModal';
 
 const statusEnum = new Map();
@@ -32,6 +33,7 @@ const getUsersInitialBody = {
     pageEnable: true,
     enabled: '',
     phoneNo: '',
+    roleId: null,
 };
 
 const TelSaleMemberTab = (): JSX.Element => {
@@ -47,12 +49,22 @@ const TelSaleMemberTab = (): JSX.Element => {
         refetchOnReconnect: false,
     });
 
+    const { currentData: telSaleRoles, isLoading: telSaleRolesLoading } = useGetTelSaleRolesQuery(null);
+
     useEffect(() => {
         getUsers({
             parameters: { telManage: true },
             body: getUsersBody,
         });
     }, [getUsersBody]);
+
+    const roleMap = new Map();
+    roleMap.set('', { text: '不限' });
+    let i = 0;
+    while (telSaleRoles?.length > i) {
+        roleMap.set(telSaleRoles[i].roleId, { text: telSaleRoles[i].name });
+        i++;
+    }
 
     const columns: ProColumns<UsersItem>[] = [
         {
@@ -74,6 +86,17 @@ const TelSaleMemberTab = (): JSX.Element => {
             title: '角色',
             dataIndex: 'roleStr',
             hideInSearch: true,
+        },
+        {
+            title: '角色',
+            dataIndex: 'roleId',
+            initialValue: '',
+            valueType: 'select',
+            valueEnum: roleMap,
+            hideInTable: true,
+            fieldProps: {
+                allowClear: false,
+            },
         },
         {
             title: '电销团队',
@@ -120,11 +143,13 @@ const TelSaleMemberTab = (): JSX.Element => {
         setGetUsersBody({ ...getUsersBody, pageNum: current, pageSize });
     };
 
+    const loading = isGetUsersLoading || telSaleRolesLoading;
+
     return (
         <>
             <ProTable<UsersItem>
                 rowKey="id"
-                loading={isGetUsersLoading}
+                loading={loading}
                 toolBarRender={false}
                 columns={columns}
                 dataSource={getUsersResponse?.data}
@@ -149,6 +174,7 @@ const TelSaleMemberTab = (): JSX.Element => {
                     ],
                 }}
                 onSubmit={(params) => {
+                    console.log(params);
                     setGetUsersBody({
                         ...getUsersBody,
                         ...params,

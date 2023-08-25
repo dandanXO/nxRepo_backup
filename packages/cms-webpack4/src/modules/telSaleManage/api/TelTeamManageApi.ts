@@ -1,5 +1,6 @@
 import { API } from '../../shared/api';
 import { GetTelSaleGroupsQueryParameters, GetTelSaleGroupsResponse } from './types/getTelSaleGroups';
+import { GetTelSaleSaleRolesResponse } from './types/getTelSaleSaleRoles';
 import { GetTelSaleTeamsResponse } from './types/getTelSaleTeams';
 import { PostTelSaleGroupRequest } from './types/postTelSaleGroup';
 import { PostTelSaleTeamRequest } from './types/postTelSaleTeam';
@@ -71,6 +72,13 @@ const TelTeamManageApi = API.injectEndpoints({
                 data: body,
             }),
         }),
+        // [GET] 取得電銷相關角色
+        getTelSaleRoles: builder.query<GetTelSaleSaleRolesResponse, null>({
+            query: () => ({
+                url: '/tel-sale/role',
+                method: 'get',
+            }),
+        }),
     }),
 });
 
@@ -84,4 +92,5 @@ export const {
     useLazyGetTelSaleGroupsQuery,
     useDeleteTelSaleGroupMutation,
     usePutTelSaleGroupMutation,
+    useGetTelSaleRolesQuery,
 } = TelTeamManageApi;

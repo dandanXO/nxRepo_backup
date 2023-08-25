@@ -6,8 +6,8 @@ import TelSaleTeamTab from './TelSaleTeamTab';
 
 const TelSaleMemberManage = (): JSX.Element => {
     const tabsItems = [
-        { label: '电销团队', key: 'team', children: <TelSaleTeamTab /> },
         { label: '电销人员', key: 'member', children: <TelSaleMemberTab /> },
+        { label: '电销团队', key: 'team', children: <TelSaleTeamTab /> },
     ];
 
     return (
