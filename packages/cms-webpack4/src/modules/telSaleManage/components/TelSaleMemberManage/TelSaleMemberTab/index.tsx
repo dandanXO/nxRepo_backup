@@ -72,7 +72,8 @@ const TelSaleMemberTab = (): JSX.Element => {
     teamMap.set('', { text: '不限' });
     let j = 0;
     while (telSaleTeams?.length > j) {
-        teamMap.set(telSaleTeams[j].id, { text: telSaleTeams[j].name });
+        const { id, name, enabled } = telSaleTeams[j];
+        teamMap.set(id, { text: `${!enabled ? '(已停用)' : ''}${name}`, enabled });
         j++;
     }
 
@@ -112,6 +113,10 @@ const TelSaleMemberTab = (): JSX.Element => {
             title: '电销团队',
             dataIndex: 'telTeamName',
             hideInSearch: true,
+            render: (_, record) =>
+                record.telTeamId
+                    ? `${!teamMap.get(record.telTeamId)?.enabled ? '(已停用)' : ''}${record.telTeamName || ''}`
+                    : '-',
         },
         {
             title: '电销团队',
@@ -128,6 +133,10 @@ const TelSaleMemberTab = (): JSX.Element => {
             title: '电销组别',
             dataIndex: 'telGroupName',
             hideInSearch: true,
+            render: (_, record) =>
+                record.telGroupId
+                    ? `${!teamMap.get(record.telTeamId)?.enabled ? '(已停用)' : ''}${record.telGroupName || ''}`
+                    : '-',
         },
         {
             title: '状态',
