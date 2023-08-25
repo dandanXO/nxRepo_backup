@@ -1,6 +1,6 @@
 import { EditOutlined } from '@ant-design/icons';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { Button, Space } from 'antd';
+import { Button, FormInstance, Select, Space } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 import { useLazyGetUsersQuery } from '../../../../shared/api/UsersApi';
@@ -77,6 +77,30 @@ const TelSaleMemberTab = (): JSX.Element => {
         j++;
     }
 
+    const enableTeams = telSaleTeams?.reduce(
+        (acc, current) => (current.enabled ? [...acc, { label: current.name, value: current.id }] : acc),
+        [],
+    );
+    const disableTeams = telSaleTeams?.reduce(
+        (acc, current) => (!current.enabled ? [...acc, { label: `(已停用)${current.name}`, value: current.id }] : acc),
+        [],
+    );
+
+    const teamOptions = [
+        {
+            label: '不限',
+            value: '',
+        },
+        {
+            label: '启用',
+            options: enableTeams || [],
+        },
+        {
+            label: '已停用',
+            options: disableTeams || [],
+        },
+    ];
+
     const columns: ProColumns<UsersItem>[] = [
         {
             title: '姓名',
@@ -123,10 +147,24 @@ const TelSaleMemberTab = (): JSX.Element => {
             dataIndex: 'telTeamId',
             hideInTable: true,
             initialValue: '',
-            valueType: 'select',
-            valueEnum: teamMap,
-            fieldProps: {
-                allowClear: false,
+            renderFormItem: (item: any, _, form: FormInstance) => {
+                const { dataIndex, initialValue } = item;
+                const fieldName = dataIndex as string;
+                const { getFieldValue, setFieldValue } = form;
+                let fieldValue = getFieldValue(fieldName);
+                if (!fieldValue) {
+                    fieldValue = initialValue;
+                }
+                return (
+                    <Select
+                        value={fieldValue}
+                        onSelect={(value) => {
+                            setFieldValue(fieldName, value);
+                        }}
+                        allowClear={false}
+                        options={teamOptions}
+                    />
+                );
             },
         },
         {
