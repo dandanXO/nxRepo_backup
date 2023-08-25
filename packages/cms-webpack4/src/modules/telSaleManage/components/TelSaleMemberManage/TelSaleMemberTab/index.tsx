@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useLazyGetUsersQuery } from '../../../../shared/api/UsersApi';
 import { UsersItem } from '../../../../shared/api/types/user/getUsers';
-import { useGetTelSaleRolesQuery } from '../../../api/TelTeamManageApi';
+import { useGetTelSaleRolesQuery, useGetTelSaleTeamsQuery } from '../../../api/TelTeamManageApi';
 import MemberModifyModal from './MemberModifyModal';
 
 const statusEnum = new Map();
@@ -33,7 +33,8 @@ const getUsersInitialBody = {
     pageEnable: true,
     enabled: '',
     phoneNo: '',
-    roleId: null,
+    roleId: '',
+    telTeamId: '',
 };
 
 const TelSaleMemberTab = (): JSX.Element => {
@@ -50,6 +51,7 @@ const TelSaleMemberTab = (): JSX.Element => {
     });
 
     const { currentData: telSaleRoles, isLoading: telSaleRolesLoading } = useGetTelSaleRolesQuery(null);
+    const { currentData: telSaleTeams, isLoading: telSaleTeamsLoading } = useGetTelSaleTeamsQuery(null);
 
     useEffect(() => {
         getUsers({
@@ -64,6 +66,14 @@ const TelSaleMemberTab = (): JSX.Element => {
     while (telSaleRoles?.length > i) {
         roleMap.set(telSaleRoles[i].roleId, { text: telSaleRoles[i].name });
         i++;
+    }
+
+    const teamMap = new Map();
+    teamMap.set('', { text: '不限' });
+    let j = 0;
+    while (telSaleTeams?.length > j) {
+        teamMap.set(telSaleTeams[j].id, { text: telSaleTeams[j].name });
+        j++;
     }
 
     const columns: ProColumns<UsersItem>[] = [
@@ -102,6 +112,17 @@ const TelSaleMemberTab = (): JSX.Element => {
             title: '电销团队',
             dataIndex: 'telTeamName',
             hideInSearch: true,
+        },
+        {
+            title: '电销团队',
+            dataIndex: 'telTeamId',
+            hideInTable: true,
+            initialValue: '',
+            valueType: 'select',
+            valueEnum: teamMap,
+            fieldProps: {
+                allowClear: false,
+            },
         },
         {
             title: '电销组别',
@@ -143,7 +164,7 @@ const TelSaleMemberTab = (): JSX.Element => {
         setGetUsersBody({ ...getUsersBody, pageNum: current, pageSize });
     };
 
-    const loading = isGetUsersLoading || telSaleRolesLoading;
+    const loading = isGetUsersLoading || telSaleRolesLoading || telSaleTeamsLoading;
 
     return (
         <>

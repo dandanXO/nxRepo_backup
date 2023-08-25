@@ -15,9 +15,9 @@ export type GetUsersRequestBody = {
     pageNum?: number; // 页码
     pageSize?: number; // record/page
     phoneNo?: string; // 手机号
-    roleId?: number; // 角色id
+    roleId?: number | string; // 角色id
     telGroupId?: number; // 电销組別
-    telTeamId?: number; // 电销团队
+    telTeamId?: number | string; // 电销团队
     trueName?: string; // 真是姓名
     userName?: string; // 账号
 };
