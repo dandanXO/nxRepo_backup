@@ -35,6 +35,28 @@ const MemberModifyModal = ({ open, record, onCancel, onModified }: IMemberModify
         }
     }, [selectedTeam]);
 
+    const team = telSaleTeams?.find((team) => team.id === selectedTeam);
+
+    const enableTeams = telSaleTeams?.reduce(
+        (acc, current) => (current.enabled ? [...acc, { label: current.name, value: current.id }] : acc),
+        [],
+    );
+    const disableTeams = telSaleTeams?.reduce(
+        (acc, current) => (!current.enabled ? [...acc, { label: `(已停用)${current.name}`, value: current.id }] : acc),
+        [],
+    );
+
+    const teamOptions = [
+        {
+            label: '启用',
+            options: enableTeams || [],
+        },
+        {
+            label: '已停用',
+            options: disableTeams || [],
+        },
+    ];
+
     return (
         <Modal
             title="分配团队"
@@ -90,13 +112,8 @@ const MemberModifyModal = ({ open, record, onCancel, onModified }: IMemberModify
                                 setSelectedTeam(null);
                             }}
                             allowClear
-                        >
-                            {telSaleTeams?.map((team) => (
-                                <Select.Option key={team.id} value={team.id}>
-                                    {team.name}
-                                </Select.Option>
-                            ))}
-                        </Select>
+                            options={teamOptions}
+                        />
                     )}
                 </Item>
                 <Item label="电销组别">
@@ -114,7 +131,7 @@ const MemberModifyModal = ({ open, record, onCancel, onModified }: IMemberModify
                         >
                             {telSaleGroups?.map((group) => (
                                 <Select.Option key={group.id} value={group.id}>
-                                    {group.name}
+                                    {`${!team.enabled ? '(已停用)' : ''}${group.name}`}
                                 </Select.Option>
                             ))}
                         </Select>
