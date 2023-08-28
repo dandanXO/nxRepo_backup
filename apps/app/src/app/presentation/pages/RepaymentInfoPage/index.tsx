@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { PostRepayCreateResponse } from '../../../api/loanService/PostRepayCreateResponse';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
+import { Label } from '../../components/Labels';
 import Money from '../../components/Money.tsx';
 import { Navigation } from '../../components/layouts/Navigation';
 import { Page } from '../../components/layouts/Page';
@@ -34,9 +35,12 @@ const RepaymentInfoPage = () => {
       />
       <div className="mx-6 mt-9 flex flex-col items-center">
         <div className="text-ctext-secondary">Total de la Factura</div>
-        <div className="mt-2 flex text-4xl font-bold">
+        <div className="mt-2 mb-4 flex text-4xl font-bold">
           <Money money={payload?.orderAmount || 0} />
         </div>
+        {payload?.beneficiario && (
+          <Label title="Beneficiario" value={payload.beneficiario} />
+        )}
       </div>
     </Page>
   );

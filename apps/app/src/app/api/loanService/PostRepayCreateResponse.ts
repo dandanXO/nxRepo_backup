@@ -20,5 +20,6 @@ export interface PostRepayCreateResponse {
   /** 業務參數 */
   payload: {
     orderAmount?: string;
+    beneficiario?: string;
   };
 }
