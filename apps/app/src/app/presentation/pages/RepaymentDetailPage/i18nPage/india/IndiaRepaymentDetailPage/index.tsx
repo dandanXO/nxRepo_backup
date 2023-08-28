@@ -64,7 +64,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const { t } = useTranslation(i18nLoanDetailsPage.namespace);
 
   const renderStatusTag = (status: string) => {
-    return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
+    return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{t(Status(status)?.text)}</div>;
   };
 
     useEffect(() => {

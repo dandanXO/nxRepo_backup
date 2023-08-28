@@ -13,7 +13,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
       'Repayment Date': 'Repayment Date',
       'Extension Date': 'Extension Date',
       'Disbursal Amount': 'Disbursal Amount',
-      'Daily Fee':'Daily Fee',
+      'Daily Fee': 'Daily Fee',
       'Extension Fee': 'Extension Fee',
       'Overdue Days': 'Overdue Days',
       'Overdue Fee': 'Overdue Fee',
@@ -33,15 +33,21 @@ export const i18nLoanDetailsPage: i18nComponent = {
       'Repay': 'Repay',
       'Attention': 'Attention',
       'Before repayment, please make sure that you have enough balance on your bank account.': 'Before repayment, please make sure that you have enough balance on your bank account.',
-      'Overdue for more than':'Overdue for more than ',
-      'N days':'N days',
-      'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.':'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.',
-      'Email us if you have any questions about your responsibilities or for more information. mail@mail.com':'Email us if you have any questions about your responsibilities or for more information. mail@mail.com',
-      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼':'After completing the repayment, take a screenshot and upload your repayment receipt here ▼',
-      'Upload Receipt':'Upload Receipt',
+      'Overdue for more than': 'Overdue for more than ',
+      'N days': 'N days',
+      'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.': 'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.',
+      'Email us if you have any questions about your responsibilities or for more information. mail@mail.com': 'Email us if you have any questions about your responsibilities or for more information. mail@mail.com',
+      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼': 'After completing the repayment, take a screenshot and upload your repayment receipt here ▼',
+      'Upload Receipt': 'Upload Receipt',
+
+
+      //Status
+      'Unpaid': 'Unpaid',
+      'Overdue': 'Overdue',
+      'Payoff': 'Payoff',
 
       //PK
-      'Get more amount after instant payment':'Get more amount after instant payment'
+      'Get more amount after instant payment': 'Get more amount after instant payment'
     },
     es_MX: {
 
@@ -72,12 +78,17 @@ export const i18nLoanDetailsPage: i18nComponent = {
       'Repay': 'Repagar',
       'Attention': 'Atención',
       'Before repayment, please make sure that you have enough balance on your bank account.': 'Antes del pago, asegúrese de tener suficiente saldo en su cuenta bancaria.',
-      'Overdue for more than':'Los pagos vencidos por más de ',
-      'N days':'N días ',
-      'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.':'no podrán extenderse ni volver a prestarse, asegúrese de realizar los pagos a tiempo para mantener el acceso ininterrumpido a nuestros servicios.',
-      'Email us if you have any questions about your responsibilities or for more information. mail@mail.com':'Envíenos un correo electrónico si tiene alguna pregunta sobre sus responsabilidades o para obtener más información. mail@mail.com',
-      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼':'Después de completar el pago, tome una captura de pantalla y cargue su recibo de pago aquí ▼',
-      'Upload Receipt':'Cargar Recibo',
+      'Overdue for more than': 'Los pagos vencidos por más de ',
+      'N days': 'N días ',
+      'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.': 'no podrán extenderse ni volver a prestarse, asegúrese de realizar los pagos a tiempo para mantener el acceso ininterrumpido a nuestros servicios.',
+      'Email us if you have any questions about your responsibilities or for more information. mail@mail.com': 'Envíenos un correo electrónico si tiene alguna pregunta sobre sus responsabilidades o para obtener más información. mail@mail.com',
+      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼': 'Después de completar el pago, tome una captura de pantalla y cargue su recibo de pago aquí ▼',
+      'Upload Receipt': 'Cargar Recibo',
+
+      //Status
+      'Unpaid': 'Impago',
+      'Overdue': 'Atrasado',
+      'Payoff': 'Pagar Total',
     },
     bn_BD: {
 

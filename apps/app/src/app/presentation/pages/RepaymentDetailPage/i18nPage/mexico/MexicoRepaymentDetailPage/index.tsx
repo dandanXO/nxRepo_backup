@@ -63,7 +63,7 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const finalItems = useDynamicChargeFeeList(props.currentData?.chargeFeeDetail?.items || undefined);
   const { t } = useTranslation(i18nLoanDetailsPage.namespace);
   const renderStatusTag = (status: string) => {
-    return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
+    return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-2 py-1  rounded-lg`}>{t(Status(status)?.text)}</div>;
   };
 
     useEffect(() => {
