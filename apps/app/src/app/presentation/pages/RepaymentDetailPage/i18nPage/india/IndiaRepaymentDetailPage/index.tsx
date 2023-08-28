@@ -23,6 +23,8 @@ import { RootState } from '../../../../../../reduxStore';
 import ReservationProductsModal from '../../../../../modals/ReservationProductsModal';
 import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
 import { modalInitialState, modalSlice } from '../../../../../../reduxStore/modalSlice';
+import { useTranslation } from 'react-i18next';
+import { i18nLoanDetailsPage } from '../../../translations';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -59,6 +61,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
 
   const finalItems = useDynamicChargeFeeList(props.currentData?.chargeFeeDetail?.items || undefined);
+  const { t } = useTranslation(i18nLoanDetailsPage.namespace);
 
   const renderStatusTag = (status: string) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
@@ -82,31 +85,31 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
       <div className={`px-6`}>
         <ListItem
-          title={'Product'}
+          title={t('Product')}
           text={productName ?? ''}
           titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
-          title={'Order No.'}
+          title={t('Order No.')}
           text={orderNo ?? ''}
           titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
-          title={'Status'}
+          title={t('Status')}
           text={status ? renderStatusTag(status) : ''}
           titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
-          title={'Apply Date'}
+          title={t('Apply Date')}
           text={applyDate ? formatDate(moment(applyDate)) : ''}
           titleColor="text-ctext-primary"
           isFetching={isFetching}
         />
         <ListItem
-          title={'Due Date'}
+          title={t('Due Date')}
           text={dueDate ? formatDate(moment(dueDate)): ''}
           titleColor="text-ctext-primary"
           isFetching={isFetching}
@@ -114,7 +117,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
         {status === 'PAY_OFF' && (
           <ListItem
-            title={'Repayment Date'}
+            title={t('Repayment Date')}
             text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
             titleColor="text-ctext-primary"
             isFetching={isFetching}
@@ -123,7 +126,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
         {status === 'EXTEND' && (
           <ListItem
-            title={'Extension Date'}
+            title={t('Extension Date')}
             text={extendDate ? formatDate(moment(extendDate)) : ''}
             titleColor="text-ctext-primary"
             isFetching={isFetching}
@@ -137,7 +140,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
         {status !== 'EXTEND' && (
           <ListItem
-            title={'Disbursal Amount'}
+            title={t('Disbursal Amount')}
             text={<Money money={loanAmount} />}
             titleColor="text-ctext-primary"
             isFetching={isFetching}
@@ -160,7 +163,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
         {status !== 'EXTEND' && (
           <ListItem
-            title={'Daily Fee'}
+            title={t('Daily Fee')}
             text={
               <div className="flex">
                 <Money money={dailyFee} />
@@ -171,17 +174,17 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           />
         )}
         {status === 'EXTEND' && (
-          <ListItem title={'Extension Fee'} text={<Money money={extensionFee} />} titleColor="text-ctext-primary" isFetching={isFetching}/>
+          <ListItem title={t('Extension Fee')} text={<Money money={extensionFee} />} titleColor="text-ctext-primary" isFetching={isFetching}/>
         )}
         <ListItem
-          title={'Overdue Days'}
+          title={t('Overdue Days')}
           text={overdueDays ? overdueDays : "0"}
           titleColor="text-ctext-primary"
           textColor={status === 'OVERDUE' ? Status(status).color : ''}
           isFetching={isFetching}
         />
         <ListItem
-          title={'Overdue Fee'}
+          title={t('Overdue Fee')}
           text={<Money money={penaltyInterest} />}
           titleColor="text-ctext-primary"
           textColor={status === 'OVERDUE' ? Status(status).color : ''}
@@ -191,7 +194,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         <Divider />
 
         <ListItem
-          title={'Reduction Amount'}
+          title={t('Reduction Amount')}
           text={<Money money={reductionAmount} isNagetive={true} />}
           titleColor="text-ctext-primary"
           isFetching={isFetching}
@@ -201,7 +204,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           titleColor="text-ctext-primary"
           title={
             <div className={`item-center flex flex-row items-center`}>
-              <div className={` mr-1`}>Amount Repaid</div>
+              <div className={` mr-1`}>{t('Amount Repaid')}</div>
               <div
                 onClick={() => {
                   navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
@@ -222,7 +225,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {/*NOTE: 總應還金額*/}
         {status !== 'EXTEND' && (
           <ListItem
-            title={'Repayment Amount'}
+            title={t('Repayment Amount')}
             text={<Money money={balance} />}
             titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
             textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
@@ -234,7 +237,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
         {status === 'EXTEND' && (
           <ListItem
-            title={'Total Extension Fee'}
+            title={t('Total Extension Fee')}
             text={<Money money={totalRepayAmount} />}
             titleColor="text-ctext-primary"
             textColor="text-ctext-primary"
@@ -247,10 +250,10 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
                 <img src={VipIcon} alt="" />
                 <div className='ml-2'>
-                    <span className='font-bold'> VIP Benefits!</span> You'll enjoy
-                    <span className='font-bold'> higher loan limits</span> and
-                    <span className='font-bold'> lower interest rates</span>
-                    with responsible repayments!
+                    <span className='font-bold'> {t('VIP Benefits!')}</span> {t("You'll enjoy")}
+                    <span className='font-bold'> {t('higher loan limits')}</span> {t('and')}
+                    <span className='font-bold'> {t('lower interest rates')}</span>
+                    {t('with responsible repayments!')}
                 </div>
 
             </div>
@@ -266,7 +269,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               }}
               className={`mr-1.5 grow`}
             >
-              <Button type={'secondary'} text={'Extend'} />
+              <Button type={'secondary'} text={t('Extend')} />
             </div>
           )}
 
@@ -282,7 +285,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 'ml-1.5': extendable,
               })}
             >
-              <Button text={'Repay'} />
+              <Button text={t('Repay')} />
             </div>
           )}
         </div>
@@ -290,16 +293,13 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {(status === 'UNPAID' || status === 'OVERDUE') && (
           <>
             <div className={`text-ctext-secondary text-xs`}>
-              <div>Attention：</div>
+              <div>{t('Attention')}：</div>
               <ul className="list-outside list-decimal pl-3 pt-1">
-                <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
-                <li>
-                  Overdue for more than <span className={`text-primary-main`}>N days</span> will not be able to extend
-                  or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our
-                  services.
+                <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
+                <li>{t('Overdue for more than')} <span className={`text-primary-main`}>{t('N days')}</span>
+                  {t("will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.")}
                 </li>
-                <li>
-                  Email us if you have any questions about your responsibilities or for more information.{' '}
+                <li>{t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
                   <span className={`text-primary-main`}>mail@mail.com</span>
                 </li>
               </ul>
@@ -307,7 +307,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div className={`my-3 flex flex-col`}>
               <div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>
               <div className={`text-ctext-primary my-3 text-xs leading-none`}>
-                After completing the repayment, take a screenshot and upload your repayment receipt here ▼
+                {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}
               </div>
               {/*TODO: 先兼容 querystring*/}
               <div
@@ -318,7 +318,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                   });
                 }}
               >
-                <Button type={'ghost'} className={`w-full`} text={'Upload Receipt'} />
+                <Button type={'ghost'} className={`w-full`} text={t('Upload Receipt')} />
               </div>
             </div>
           </>

@@ -82,18 +82,22 @@ export interface GetLoanDetailChargeFeeDetailItems {
   fieldType: 'CURRENCY' | 'TEXT';
   itemName: string;
   key:
-    | 'CREDIT_APPROVAL_FEE'//
-    | 'DAILY_FEE'//
-    | 'GATEWAY_FEE'//
+    | 'CREDIT_APPROVAL_FEE'
+    | 'DAILY_FEE'
+    | 'GATEWAY_FEE'
     | 'GST'
     | 'LOAN_AMOUNT'
-    | 'LOAN_INTEREST'
-    | 'MANAGEMENT_FEE'//
+    | 'LOAN_INTEREST'    // itemName: Interest
+    | 'MANAGEMENT_FEE'
     | 'PENALTY_INTEREST'
     | 'PROCESSING_FEE'
-    | 'REDUCTION_AMOUNT'//
-    | 'SERVICE_FEE';
-    // MARKUP_FEE, OTHER_CHARGES, PROCESS_FEE, PROCESS_INCHARGE
+    | 'REDUCTION_AMOUNT'
+    | 'SERVICE_FEE'      // itemName: Service Charge
+    | 'IVA' 
+    | 'MARKUP_FEE'
+    | 'OTHER_CHARGES'
+    | 'PROCESS_FEE'
+    | 'PROCESS_INCHARGE'
   value: string;
 }
 
