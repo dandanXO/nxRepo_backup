@@ -154,7 +154,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         outlineType={'outlined'}
                         placeholder={cardType === 'DEBIT_CARD' ? '1234 5678 1112 2222' : '123 456 7890123456 78'}
                         value={bankAccountData.data}
-                        errorMessage={t(bankAccountData.errorMessage as string)}
+                        errorMessage={t(bankAccountData.errorMessage as string,{inputLength:bankAccountLength})}
                         inputData={bankAccountData}
                         setInputData={setBankAccountData}
                         validateData={() => validateMXBankcardNo(bankAccountData.data, bankAccountLength)}
@@ -173,7 +173,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                         outlineType={'outlined'}
                         placeholder={cardType === 'DEBIT_CARD' ? '1234 5678 1112 2222' : '123 456 7890123456 78'}
                         value={confirmBankAccountData.data}
-                        errorMessage={t(confirmBankAccountData.errorMessage as string)}
+                        errorMessage={t(confirmBankAccountData.errorMessage as string,{inputLength:bankAccountLength})}
                         inputData={confirmBankAccountData}
                         setInputData={setconfirmBankAccountData}
                         validateData={() => validateMXBankcardNo(confirmBankAccountData.data, bankAccountLength)}

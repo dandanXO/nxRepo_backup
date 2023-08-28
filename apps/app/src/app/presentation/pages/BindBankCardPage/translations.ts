@@ -68,8 +68,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Confirm': 'Confirm',
 
       'Please select an option.': 'Please select an option.',
-      'Account number must be 16 digits only.':'Account number must be 16 digits only.',
-      'Account number must be 18 digits only.':'Account number must be 18 digits only.'
+      'Account number must be {{inputLength}} digits only.': 'Account number must be {{inputLength}} digits only.',
     },
     es_MX: {
       'Bank information': 'Información Bancaria',
@@ -90,8 +89,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'This field cannot be left blank.': 'Este campo no puede quedar en blanco.',
       'Please select an option.': 'Por favor, seleccione una opción.',
       'Please make sure your account number match.': 'Asegúrate de que tu número de cuenta coincida.',
-      'Account number must be 16 digits only.':'Account number must be 16 digits only.',
-      'Account number must be 18 digits only.':'Account number must be 18 digits only.'
+      'Account number must be {{inputLength}} digits only.': 'Número de cuenta debe tener exactamente {{inputLength}} dígitos.',
 
     },
     bn_BD: {

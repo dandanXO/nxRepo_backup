@@ -26,8 +26,8 @@ export const validateMXBankcardNo = (data: any, digits: number) => {
 
     const bankCardNoScheme = z
         .string()
-        .length(digits, t(`Account number must be ${digits} digits only.`) as string)
-        .regex(/^\d+$/, t(`Account number must be ${digits} digits only.`) as string)
+        .length(digits, `Account number must be {{inputLength}} digits only.` as string)
+        .regex(/^\d+$/, `Account number must be {{inputLength}} digits only.` as string)
     const result = bankCardNoScheme.safeParse(data);
     const isValidation = result.success;
     const errorMessage = !isValidation ? result.error.format()._errors[0] : '';
