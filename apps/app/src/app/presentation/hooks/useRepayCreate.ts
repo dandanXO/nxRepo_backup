@@ -43,7 +43,7 @@ const useRepayCreate = () => {
           // };
           if (data.nextStep === 'html') {
             navigate(`${PagePathEnum.RepaymentInfoPage}?token=${getToken()}`, {
-              state: data.payload,
+              state: data,
             });
           }
           if (data.nextStep === 'jumpUrl') {
