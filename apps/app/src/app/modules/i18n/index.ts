@@ -80,6 +80,18 @@ i18next
         
         },
         es_MX: {
+
+          // NOTICE: REFACTOR ME
+          common: {
+            'Welcome to Mobile': 'Welcome to Mobile !!!',
+            modal: {
+              Error: 'Error',
+              Notice: 'Aviso',
+              Success: 'Éxito!',
+              Confirm: 'Confirmar',
+            },
+          },
+
           // NOTE: BankBindPage
           [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.es_MX || {},
 
