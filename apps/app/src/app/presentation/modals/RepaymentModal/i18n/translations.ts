@@ -49,7 +49,7 @@ export const i18nRepaymentModal: i18nComponent = {
       'Cancel': 'Cancelar',
       'Attention:': 'Atención',
       'Before repayment, please make sure that you have enough balance on your bank account.': 'Antes de realizar el pago, asegúrate de tener suficiente saldo en tu cuenta bancaria.',
-      'In order to protect your rights, we strongly recommend you take a screenshot and return to the APP and upload it after completing the repayment.': 'Para proteger tus derechos, te recomendamos encarecidamente que tomes una captura de pantalla, regreses a la aplicación y la cargues después de completar el pago.',
+      'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.':'Para proteger tus derechos, te recomendamos enfáticamente que tomes una captura de pantalla de los detalles del pago después de completarlo, y subas la captura de pantalla a la aplicación.',
 
       //ERROR MESSAGE
       'This field cannot be left blank or 0.':'Este campo no puede quedar en blanco ni ser 0.',
