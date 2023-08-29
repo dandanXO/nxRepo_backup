@@ -14,6 +14,7 @@ import { i18nReservationProductsModal } from '../../presentation/modals/Reservat
 import { i18nProduct } from '../../presentation/components/Product/i18n/translations';
 import { i18nRepaymentCouponModal } from '../../presentation/modals/RepaymentCouponModal/i18n/translations';
 import { i18nCoupon } from '../../presentation/components/Coupon/i18n/translations';
+import { i18nReservationSuccessModal } from '../../presentation/modals/ReservationSuccessModal/i18n/translations';
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(i18nextPlugin)
@@ -61,8 +62,11 @@ i18next
           // [i18nRepaymentAdsModal.namespace]: i18nRepaymentAdsModal.translation.en_US,
           [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.en_US || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.en_US || {},
-          [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.en_US || {},
           [i18nRepaymentCouponModal.namespace]: i18nRepaymentCouponModal.translation.en_US || {},
+
+          // NOTE: LoanDetailsPage - ReservationModal
+          [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.en_US || {},
+          [i18nReservationSuccessModal.namespace]: i18nReservationSuccessModal.translation.en_US || {},
           //
           // // NOTE: ProductAdModalListPage
           // [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.en_US,
@@ -101,9 +105,11 @@ i18next
           [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.es_MX || {},
           [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.es_MX || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.es_MX || {},
-          [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.es_MX || {},
           [i18nRepaymentCouponModal.namespace]: i18nRepaymentCouponModal.translation.es_MX || {},
 
+          // NOTE: LoanDetailsPage - ReservationModal
+          [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.es_MX || {},
+          [i18nReservationSuccessModal.namespace]: i18nReservationSuccessModal.translation.es_MX || {},
 
           // NOTE: UploadedPaymentReceiptPage
           [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.es_MX || {},
