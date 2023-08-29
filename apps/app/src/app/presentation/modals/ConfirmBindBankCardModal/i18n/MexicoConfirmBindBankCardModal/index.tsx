@@ -6,7 +6,8 @@ import { InitialStateType, modalSlice } from 'apps/app/src/app/reduxStore/modalS
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import { BindBankcardAction } from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
+import { i18nConfirmBindBankCardModal } from '../translations';
 interface IConfirmBindBankCardModal {
     state?: InitialStateType['bindBankcardModal']
 }
@@ -18,13 +19,14 @@ const MexicoConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) =>
 
     const ListItemTitleStlye = "text-ctext-secondary font-bold text-sm";
     const ListItemTextStlye = "text-ctext-primary w-[150px] text-right text-sm";
+    const { t } = useTranslation(i18nConfirmBindBankCardModal.namespace);
     return (
         <Modal outlineTheme='round'>
             <div className='py-6 px-4'>
                 <div className='text-base text-ctext-primary mb-4 font-bold'>{t('Confirm Payment Information')}</div>
                 <ListItem
                     className='mb-3'
-                    title={'Método de pago'}
+                    title={t('Payment method')}
                     text={state?.cardTypeName ?? ''}
                     titleColor={ListItemTitleStlye}
                     textColor={ListItemTextStlye}

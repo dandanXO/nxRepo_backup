@@ -15,6 +15,7 @@ import { i18nProduct } from '../../presentation/components/Product/i18n/translat
 import { i18nRepaymentCouponModal } from '../../presentation/modals/RepaymentCouponModal/i18n/translations';
 import { i18nCoupon } from '../../presentation/components/Coupon/i18n/translations';
 import { i18nReservationSuccessModal } from '../../presentation/modals/ReservationSuccessModal/i18n/translations';
+import { i18nConfirmBindBankCardModal } from '../../presentation/modals/ConfirmBindBankCardModal/i18n/translations';
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(i18nextPlugin)
@@ -49,6 +50,7 @@ i18next
           // // NOTICE: Pages
           // NOTE: BankBindPage
           [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.en_US || {},
+          [i18nConfirmBindBankCardModal.namespace]: i18nConfirmBindBankCardModal.translation.en_US || {},
           //
           // // NOTE: LoanDetailPage
           // [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US,
@@ -98,6 +100,8 @@ i18next
 
           // NOTE: BankBindPage
           [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.es_MX || {},
+          [i18nConfirmBindBankCardModal.namespace]: i18nConfirmBindBankCardModal.translation.es_MX || {},
+
 
           // NOTE: LoanDetailsPage
           [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.es_MX || {},
