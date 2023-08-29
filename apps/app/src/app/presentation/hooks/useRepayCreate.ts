@@ -34,15 +34,6 @@ const useRepayCreate = () => {
       postRepayCreate(props)
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
-          // data = {
-          //   ...data,
-          //   nextStep: 'html',
-          //   payload: {
-          //     orderAmount: '9000',
-          //     beneficiario: 'Eddie',
-          //     clabe: '123456789123456789',
-          //   },
-          // };
           if (data.nextStep === 'html') {
             navigate(`${PagePathEnum.RepaymentInfoPage}?token=${getToken()}`, {
               state: data,
