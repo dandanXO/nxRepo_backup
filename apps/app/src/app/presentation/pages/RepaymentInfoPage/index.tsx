@@ -17,7 +17,7 @@ const RepaymentInfoPage = () => {
   const { payType, orderNo, payload } = state as PostRepayCreateResponse;
 
   return (
-    <Page className="flex flex-col">
+    <Page className="flex flex-col pb-9">
       <Navigation
         title={payType}
         back={() => {
@@ -73,6 +73,12 @@ const RepaymentInfoPage = () => {
               />
             }
           />
+        )}
+        {payload.barcodeUrl && (
+          <div className="mt-4 mb-2">
+            <div className="text-center text-sm">Código de barras de pago</div>
+            <img alt="barcodeUrl" src={payload.barcodeUrl} />
+          </div>
         )}
       </div>
       <div className="text-ctext-secondary mx-6 mt-2 items-start text-xs">

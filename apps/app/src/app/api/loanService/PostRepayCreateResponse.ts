@@ -23,5 +23,6 @@ export interface PostRepayCreateResponse {
     beneficiario?: string;
     clabe?: string;
     referencia?: string;
+    barcodeUrl?: string;
   };
 }
