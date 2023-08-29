@@ -22,5 +22,6 @@ export interface PostRepayCreateResponse {
     orderAmount?: string;
     beneficiario?: string;
     clabe?: string;
+    referencia?: string;
   };
 }

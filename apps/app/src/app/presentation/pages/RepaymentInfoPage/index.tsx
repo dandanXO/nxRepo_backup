@@ -60,6 +60,33 @@ const RepaymentInfoPage = () => {
             }
           />
         )}
+        {payload.referencia && (
+          <Label
+            className="mb-2"
+            title="Referencia"
+            value={payload.referencia}
+            extra={
+              <CopyButton
+                className="rounded-full bg-[#E70020]"
+                text="Copiar"
+                value={payload.referencia}
+              />
+            }
+          />
+        )}
+      </div>
+      <div className="text-ctext-secondary mx-6 mt-2 items-start text-xs">
+        <div>Instrucciones de pago:</div>
+        <ul className="list-outside list-decimal pl-4 pt-1">
+          <li>
+            Para completar el pago, por favor realiza la transferencia del monto
+            indicado a la cuenta proporcionada.
+          </li>
+          <li>
+            El código de pago es válido durante 24 horas. Por favor, realiza el
+            pago de manera oportuna.
+          </li>
+        </ul>
       </div>
     </Page>
   );
