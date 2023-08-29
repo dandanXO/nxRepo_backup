@@ -4,6 +4,8 @@ import moment from 'moment';
 import { ICouponProps } from '../..';
 import Money from '../../../Money.tsx';
 import {formatDate} from "../../../../../modules/format/formatDate";
+import { useTranslation } from 'react-i18next';
+import { i18nCoupon } from '../translations';
 
 const isOverdueEqual3Days = (expiredTime: string) => {
   const currentTime = moment();
@@ -38,6 +40,7 @@ const IndiaCoupon = (props: ICouponProps) => {
   };
 
   const typeStyle = status !== 'disabled' ? layoutTypeStyle['normal'] : layoutTypeStyle['disabled'];
+  const { t } = useTranslation(i18nCoupon.namespace);
 
   return (
     <div className={cx(`mb-3 flex grow w-full`, { 'opacity-50': status === 'unUsable' })}>
@@ -82,7 +85,7 @@ const IndiaCoupon = (props: ICouponProps) => {
             'text-cstate-disable-main': status === 'disabled',
           })}
         >
-          {`${buttonText === 'USED' ? 'Used on' : 'Expired time'} ${formatDate(moment(expireTime))}`}
+          {`${buttonText === 'USED' ? t('Used on') : t('Expired time')} ${formatDate(moment(expireTime))}`}
         </div>
       </div>
       <div
@@ -110,7 +113,7 @@ const IndiaCoupon = (props: ICouponProps) => {
           disabled={status !== 'normal'} //只有normal才能點擊
           className={cx(`whitespace-nowrap px-3 py-1 text-xs text-white rounded-xl`, [typeStyle.buttonBG])}
         >
-          {buttonText}
+          {t(buttonText)}
         </button>
       </div>
     </div>

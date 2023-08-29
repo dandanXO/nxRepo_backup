@@ -18,6 +18,8 @@ import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { RootState } from '../../../reduxStore';
 import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { useTranslation } from 'react-i18next';
+import { i18nRepaymentCouponModal } from './i18n/translations';
 
 type ICouponOption = ICouponProps & {
     isChecked: boolean;
@@ -28,7 +30,7 @@ const RepaymentCouponModal = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const repaymentDetailPageState = useSelector((state: RootState) => state.repaymentDetailPage);
-    
+    const { t } = useTranslation(i18nRepaymentCouponModal.namespace);
     const {  orderNo = getOrderNo() , balance } = repaymentDetailPageState.repaymentDetail || {};
     const {  payType ='MOBILE_WALLET'} =  repaymentDetailPageState.repaymentData|| {};
     const {  paymentAmount, paymentMethod } = location.state || {};
@@ -73,7 +75,7 @@ const RepaymentCouponModal = () => {
     const NotUsingCoupon = (props: ICouponOption) => {
         return (
             <a className={`justfy-center  mb-7 mx-4 flex items-center `} onClick={() => setCheckedCoupon(props.index)}>
-                <div className="grow text-left text-xs font-bold text-ctext-primary">Not using a coupon for this repayment.</div>
+                <div className="grow text-left text-xs font-bold text-ctext-primary">{t('Not using a coupon for this repayment.')}</div>
                 {props.isChecked ? <MdRadioButtonChecked className={`fill-sky-500`} /> : <MdRadioButtonUnchecked className={`fill-sky-500`} />}
             </a>
         );
@@ -84,13 +86,14 @@ const RepaymentCouponModal = () => {
             <>
                 <div className={`flex grow flex-col items-center justify-center`}>
                     <img src={NoDataImage} alt="" />
-                    <div className={`mt-5`}>There are currently no coupon</div>
+                    <div className={`mt-5`}>{t('There are currently no coupon')}</div>
                 </div>
                 <div className="p-5">
                     <Button
-                        text={'Back'}
+                        text={t('Back')}
                         className="w-full"
                         primaryTypeGradient={environment.country === PakistanCountry.country}
+                        outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}
                         onClick={() => navigate(-1)}
                     />
                 </div>
@@ -106,7 +109,7 @@ const RepaymentCouponModal = () => {
                         <>
                             {/* 不選優惠券 checkedCoupon & index給-1 */}
                             <NotUsingCoupon index={-1} isChecked={-1 === checkedCoupon} />
-                            <div className="mb-2 mx-4 text-left text-xs font-bold text-ctext-primary">Choose one coupon</div>
+                            <div className="mb-2 mx-4 text-left text-xs font-bold text-ctext-primary">{t('Choose one coupon')}</div>
                             {applicableCouponList?.map((i, index) => {
                                 return (
                                     <CouponOption
@@ -127,7 +130,7 @@ const RepaymentCouponModal = () => {
                     )}
                     {unApplicableCouponList.length > 0 && (
                         <>
-                            <div className="mb-2 mx-4 text-left text-xs font-bold text-ctext-primary">Not applicable to usage conditions</div>
+                            <div className="mb-2 mx-4 text-left text-xs font-bold text-ctext-primary">{t('Not applicable to usage conditions')}</div>
                             {unApplicableCouponList.map((i, index) => (
                                 <div className='mx-4' >
                                     <Coupon
@@ -147,7 +150,7 @@ const RepaymentCouponModal = () => {
                 </div>
                 <div className="px-5 py-3">
                     <Button
-                        text={'Confirm'}
+                        text={t('Confirm')}
                         primaryTypeGradient={environment.country===PakistanCountry.country}
                         outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}
                         className="w-full"

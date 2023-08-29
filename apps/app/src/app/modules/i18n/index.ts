@@ -12,6 +12,8 @@ import { i18nLoanDetailsPage } from '../../presentation/pages/RepaymentDetailPag
 import { i18nAmountRepaidModal } from '../../presentation/modals/AmountRepaidModal/i18n/translations';
 import { i18nReservationProductsModal } from '../../presentation/modals/ReservationProductsModal/translations';
 import { i18nProduct } from '../../presentation/components/Product/i18n/translations';
+import { i18nRepaymentCouponModal } from '../../presentation/modals/RepaymentCouponModal/i18n/translations';
+import { i18nCoupon } from '../../presentation/components/Coupon/i18n/translations';
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(i18nextPlugin)
@@ -60,6 +62,7 @@ i18next
           [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.en_US || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.en_US || {},
           [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.en_US || {},
+          [i18nRepaymentCouponModal.namespace]: i18nRepaymentCouponModal.translation.en_US || {},
           //
           // // NOTE: ProductAdModalListPage
           // [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.en_US,
@@ -73,6 +76,7 @@ i18next
           
           //Component
           [i18nProduct.namespace]: i18nProduct.translation.en_US || {},
+          [i18nCoupon.namespace]: i18nCoupon.translation.en_US || {},
         
         },
         es_MX: {
@@ -86,6 +90,7 @@ i18next
           [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.es_MX || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.es_MX || {},
           [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.es_MX || {},
+          [i18nRepaymentCouponModal.namespace]: i18nRepaymentCouponModal.translation.es_MX || {},
 
 
           // NOTE: UploadedPaymentReceiptPage
@@ -96,6 +101,7 @@ i18next
 
           //Component
           [i18nProduct.namespace]: i18nProduct.translation.es_MX || {},
+          [i18nCoupon.namespace]: i18nCoupon.translation.es_MX || {},
 
         },
         bn_BD: {
