@@ -21,5 +21,6 @@ export interface PostRepayCreateResponse {
   payload: {
     orderAmount?: string;
     beneficiario?: string;
+    clabe?: string;
   };
 }

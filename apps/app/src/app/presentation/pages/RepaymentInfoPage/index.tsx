@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { PostRepayCreateResponse } from '../../../api/loanService/PostRepayCreateResponse';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
+import { CopyButton } from '../../components/Buttons';
 import { Label } from '../../components/Labels';
 import Money from '../../components/Money.tsx';
 import { Navigation } from '../../components/layouts/Navigation';
@@ -39,7 +40,25 @@ const RepaymentInfoPage = () => {
           <Money money={payload?.orderAmount || 0} />
         </div>
         {payload?.beneficiario && (
-          <Label title="Beneficiario" value={payload.beneficiario} />
+          <Label
+            className="mb-2"
+            title="Beneficiario"
+            value={payload.beneficiario}
+          />
+        )}
+        {payload?.clabe && (
+          <Label
+            className="mb-2"
+            title="CLABE"
+            value={payload.clabe}
+            extra={
+              <CopyButton
+                className="rounded-full bg-[#E70020]"
+                text="Copiar"
+                value={payload.clabe}
+              />
+            }
+          />
         )}
       </div>
     </Page>
