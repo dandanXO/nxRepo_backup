@@ -3,20 +3,22 @@ import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
 import { useCallback, useState } from 'react';
 
-import { environment } from '../../../../environments/environmentModule/environment';
-import { formatPrice } from '../../../modules/format/formatPrice';
-import Money from '../../components/Money.tsx';
-import { Checkbox, ICheckboxProps } from '../../components/Checkbox';
-import { FinalProductType } from '../../pages/IndexPage';
+import { environment } from '../../../../../../environments/environmentModule/environment';
+import { formatPrice } from '../../../../../modules/format/formatPrice';
+import Money from '../../../../components/Money.tsx';
+import { Checkbox, ICheckboxProps } from '../../../../components/Checkbox';
+import { FinalProductType } from '../../../../pages/IndexPage';
+import { IChargeFeeDetails } from 'apps/app/src/app/api/loanService/GetReservationResponse';
 
 
 type Props = {
-    product: FinalProductType;
-    checkable?: boolean;
-    checkboxProps?: ICheckboxProps;
+  product: FinalProductType;
+  checkable?: boolean;
+  checkboxProps?: ICheckboxProps;
+  chargeFeeDetails?: IChargeFeeDetails[];
 }
 
-export const Product = (props: Props ) => {
+export const MexicoProduct = (props: Props ) => {
     const { checkable = false } = props;
     const [expand, setExpand] = useState(false);
     const toggleExpand = useCallback(() => {
@@ -47,17 +49,22 @@ export const Product = (props: Props ) => {
 
             {expand && (
                 <div className={'expandable-brand flex flex-col bg-cbg-tertiary py-3 px-4 text-ctext-secondary text-xs mt-2'}>
-                    {/* <div className={'item mb-1 flex flex-row justify-between font-light'}>
-            <div className={'key'}>Interest</div>
-            <div className={'value'}>
-              {environment.currency} {formatPrice(props.product.calculating.interestPrice)}
-            </div>
-          </div> */}
-
                     <div className={'item mb-2 flex flex-row justify-between '}>
-                        <div className={'key'}>Terms</div>
-                        <div className={'value'}>{props.product.terms} days</div>
+                        <div className={'key'}>Loan Amount</div>
+                        <div className={'value'}><Money money={props.product.calculating.finalLoanPrice} /></div>
                     </div>
+                    {
+                      props?.chargeFeeDetails &&
+                      props?.chargeFeeDetails.length > 0 &&
+                      props?.chargeFeeDetails.map(i => {
+                        return (
+                          <div className={'item mb-2 flex flex-row justify-between '}>
+                            <div className={'key'}>{i.title} </div>
+                            <div className={'value'}><Money money={i.feeAmount ?? 0} /></div>
+                          </div>
+                        )
+                      })
+                    }
 
                     <div className={'item mb-2 flex flex-row justify-between '}>
                         <div className={'key'}>Disbursal Amount </div>

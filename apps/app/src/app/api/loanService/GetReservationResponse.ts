@@ -13,4 +13,13 @@ export interface ReservationProduct {
     productName: string        // 产品名稱
     required: boolean;         // 是否为必选
     terms: number;
+    chargeFeeDetails?: IChargeFeeDetails[]
+}
+
+export interface IChargeFeeDetails {
+  title: string;
+  feeAmount: number;
+  key: string;
+  chargeStage: string;
+  counting?: number;
 }

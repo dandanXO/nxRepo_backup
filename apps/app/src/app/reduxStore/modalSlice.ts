@@ -122,9 +122,9 @@ export const modalInitialState: InitialStateType = {
   reservationProductsModal:{
     show: false,
     confirm: false,
-    reservationDetail: [],
+    reservationDetail: [],  // 要預約的產品及資訊
     availableAmount: 0,
-    products: []
+    products: []            // 可預約的產品
   },
   reservationSuccessModal:{
     show: false

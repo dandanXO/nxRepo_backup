@@ -7,7 +7,7 @@ import { PagePathEnum } from '../../pages/PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { RootState } from '../../../reduxStore';
 import { LoanAgreementModal } from '../QRLoanAgreementModal';
-import { Product } from '../../components/Product/Product';
+import { Product } from '../../components/Product';
 import { useEffect, useState } from 'react';
 import { FinalProductType } from '../../pages/IndexPage';
 import { formatPrice } from '../../../modules/format/formatPrice';
@@ -15,6 +15,8 @@ import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPa
 import { modalInitialState } from '../../../reduxStore/modalSlice';
 import { useTranslation } from 'react-i18next';
 import { i18nReservationProductsModal } from './translations';
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 const ReservationProductsModal = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -40,10 +42,10 @@ const ReservationProductsModal = () => {
                 disbursalPrice: i.disbursalAmount,
                 dueDate: i.dueDate,
                 interestPrice: 0,
-            }
+            },
+            chargeFeeDetails:i.chargeFeeDetails,
         };
     })
-
     const initProductAmount = products.reduce((prev, curr) => prev + curr.calculating.finalLoanPrice, 0);
     const [selectedProducts, setSelectedProducts] = useState(products);
     const [productAmount, setProductAmount] = useState(initProductAmount || 0)
@@ -100,6 +102,7 @@ const ReservationProductsModal = () => {
                                         checked: true,
                                         onClick: (isChecked) => handleProductSelection(isChecked, product),
                                     }}
+                                    chargeFeeDetails={product.chargeFeeDetails} 
                                 />
                             )
                         })}
