@@ -82,7 +82,7 @@ i18next
           [i18nExtendModal.namespace]: i18nExtendModal.translation.es_MX || {},
 
           // NOTE: UploadedPaymentReceiptPage
-          [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.en_US || {},
+          [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.es_MX || {},
           // NOTE: UploadPaymentReceiptPage
           [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.es_MX || {},
           [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.es_MX || {},
