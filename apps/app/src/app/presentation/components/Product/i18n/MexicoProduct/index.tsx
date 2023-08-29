@@ -9,6 +9,8 @@ import Money from '../../../../components/Money.tsx';
 import { Checkbox, ICheckboxProps } from '../../../../components/Checkbox';
 import { FinalProductType } from '../../../../pages/IndexPage';
 import { IChargeFeeDetails } from 'apps/app/src/app/api/loanService/GetReservationResponse';
+import { i18nProduct } from '../translations';
+import { useTranslation } from 'react-i18next';
 
 
 type Props = {
@@ -24,6 +26,8 @@ export const MexicoProduct = (props: Props ) => {
     const toggleExpand = useCallback(() => {
         setExpand(!expand);
     }, [expand]);
+
+    const { t } = useTranslation(i18nProduct.namespace);
 
     return (
         <div className={cx('product mb-2 flex flex-col  text-sm ')} >
@@ -50,7 +54,7 @@ export const MexicoProduct = (props: Props ) => {
             {expand && (
                 <div className={'expandable-brand flex flex-col bg-cbg-tertiary py-3 px-4 text-ctext-secondary text-xs mt-2'}>
                     <div className={'item mb-2 flex flex-row justify-between '}>
-                        <div className={'key'}>Loan Amount</div>
+                        <div className={'key'}>{t('Loan Amount')}</div>
                         <div className={'value'}><Money money={props.product.calculating.finalLoanPrice} /></div>
                     </div>
                     {
@@ -67,12 +71,12 @@ export const MexicoProduct = (props: Props ) => {
                     }
 
                     <div className={'item mb-2 flex flex-row justify-between '}>
-                        <div className={'key'}>Disbursal Amount </div>
+                        <div className={'key'}>{t('Disbursal Amount')}</div>
                         <div className={'value'}><Money money={props.product.calculating.disbursalPrice ?? 0} /></div>
                     </div>
 
                     <div className={'item flex flex-row justify-between '}>
-                        <div className={'key'}>Due Date</div>
+                        <div className={'key'}>{t('Due Date')}</div>
                         <div className={'value'}>{props.product.calculating.dueDate}</div>
                     </div>
                 </div>

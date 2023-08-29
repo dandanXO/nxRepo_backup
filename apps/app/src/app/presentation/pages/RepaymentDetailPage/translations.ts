@@ -36,7 +36,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
       'Overdue for more than': 'Overdue for more than ',
       'N days': 'N days',
       'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.': 'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.',
-      'Email us if you have any questions about your responsibilities or for more information. mail@mail.com': 'Email us if you have any questions about your responsibilities or for more information. mail@mail.com',
+      'Email us if you have any questions about your responsibilities or for more information.': 'Email us if you have any questions about your responsibilities or for more information.',
       'After completing the repayment, take a screenshot and upload your repayment receipt here ▼': 'After completing the repayment, take a screenshot and upload your repayment receipt here ▼',
       'Upload Receipt': 'Upload Receipt',
 
@@ -81,7 +81,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
       'Overdue for more than': 'Los pagos vencidos por más de ',
       'N days': 'N días ',
       'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.': 'no podrán extenderse ni volver a prestarse, asegúrese de realizar los pagos a tiempo para mantener el acceso ininterrumpido a nuestros servicios.',
-      'Email us if you have any questions about your responsibilities or for more information. mail@mail.com': 'Envíenos un correo electrónico si tiene alguna pregunta sobre sus responsabilidades o para obtener más información. mail@mail.com',
+      'Email us if you have any questions about your responsibilities or for more information.': 'Envíenos un correo electrónico si tiene alguna pregunta sobre sus responsabilidades o para obtener más información.',
       'After completing the repayment, take a screenshot and upload your repayment receipt here ▼': 'Después de completar el pago, tome una captura de pantalla y cargue su recibo de pago aquí ▼',
       'Upload Receipt': 'Cargar Recibo',
 
