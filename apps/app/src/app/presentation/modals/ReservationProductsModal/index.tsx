@@ -13,10 +13,14 @@ import { FinalProductType } from '../../pages/IndexPage';
 import { formatPrice } from '../../../modules/format/formatPrice';
 import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import { modalInitialState } from '../../../reduxStore/modalSlice';
+import { useTranslation } from 'react-i18next';
+import { i18nReservationProductsModal } from './translations';
 const ReservationProductsModal = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const modalState = useSelector((state: RootState) => state.model);
+
+  const { t } = useTranslation(i18nReservationProductsModal.namespace)
 
     const { availableAmount } = modalState.reservationProductsModal;
 
@@ -78,10 +82,10 @@ const ReservationProductsModal = () => {
         <div className='reservationProducts-modal'>
             <Modal className='h-full ' maskclassName={'py-5 px-5'}>
                 <div className='p-4 flex flex-col items-center overflow-auto'>
-                    <div className='text-base font-bold text-ctext-primary mb-4'>Good News</div>
-                    <div className='text-sm text-left leading-none'>Congratulations! Your credit has been upgraded! We have selected some excellent options for you. Please choose the product you want to reserve based on your needs</div>
+                    <div className='text-base font-bold text-ctext-primary mb-4'>{t('Good News')}</div>
+                    <div className='text-sm text-left leading-none'>{t('Congratulations! Your credit has been upgraded! We have selected some excellent options for you. Please choose the product you want to reserve based on your needs')}</div>
                     <div className='border border-solid border-cstate-disable-main mt-3 mb-5 w-full rounded-lg p-4'>
-                        <div className='text-base'>Maximum Amount</div>
+                        <div className='text-base'>{t('Maximum Amount')}</div>
                         <div className='text-2xl font-bold'>{`${formatPrice(productAmount)}/${formatPrice(availableAmount)}`}</div>
                     </div>
                     <div className={`mb-3 flex flex-col w-full h-1/2 overflow-auto`}>
@@ -102,29 +106,28 @@ const ReservationProductsModal = () => {
                     </div>
                     <div className={`mb-3 flex flex-row w-full`}>
                         <div className={`mr-1.5 w-full`}>
-                            <Button text={'Cancel'} type={'ghost'} ghostTheme={'tertiary'} onClick={handleCanleReserveProducts} />
+                            <Button text={t('Cancel')} type={'ghost'} ghostTheme={'tertiary'} onClick={handleCanleReserveProducts} />
                         </div>
                         <div className={` ml-1.5 w-full whitespace-nowrap`}>
-                            <Button text={'Reserve Application'} onClick={handleReserveProducts} />
+                            <Button text={t('Reserve Application')} onClick={handleReserveProducts} />
                         </div>
                     </div>
                     <div className={`text-left text-xs text-ctext-secondary leading-none`}>
-                        <div>Notes:</div>
+                        <div>{t('Notes:')}</div>
                         <ul className="list-outside list-decimal pl-3 pt-1">
-                            <li>Maintaining good repayment behavior allows us to continue offering high-value, low-interest products.</li>
-                            <li>Multiple booking requests will be automatically accommodated, and the final outcome will depend on the audit results.</li>
-                            <li>Once the reservation orders are approved, the disbursement will be made directly.</li>
-                            <li>After the reservation application is successful, you can view it on the "Payment" page.</li>
-                            <li>By continuing, you agree and acknowledge the
+                            <li>{t('Maintaining good repayment behavior allows us to continue offering high-value, low-interest products.')}</li>
+                            <li>{t('Multiple booking requests will be automatically accommodated, and the final outcome will depend on the audit results.')}</li>
+                            <li>{t('Once the reservation orders are approved, the disbursement will be made directly.')}</li>
+                            <li>{t('After the reservation application is successful, you can view it on the "Payment" page.')}</li>
+                            <li>{t('By continuing, you agree and acknowledge the')}
                                 <a className={'text-blue-500 underline'} onClick={() => {
                                     dispatch(
                                         modalSlice.actions.updateLoanAgreementModal({
                                             show: true,
                                         })
                                     );
-                                }}> Loan Agreement
+                                }}> {t('Loan Agreement')}
                                 </a>
-                                carefully.
                             </li>
                         </ul>
                     </div>
