@@ -24,6 +24,7 @@ export const UpperDefaultLabel = styled.label<Label>`
   //left: 20px;
   color:${(props) => props.labelType === 'topFix' ? ` ${props.theme.text?.primary}` : ` ${props.theme.input?.placeholder}`};
   line-height: 22px;
+  white-space: nowrap;
 `;
 
 // NOTICE: Xujie - RightInputStyle

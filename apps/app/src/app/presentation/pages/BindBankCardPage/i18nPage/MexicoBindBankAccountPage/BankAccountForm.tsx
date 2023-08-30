@@ -122,7 +122,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                                 ...baseStyles,
                                 paddingLeft: '12px',
                                 borderRadius: '9px',
-                                border: `1px solid ${window.theme?.input?.outline ?? '#aaaaaa'}`,
+                                // border: `1px solid ${window.theme?.input?.outline ?? '#aaaaaa'}`,
                             }),
                             valueContainer: (style: any, state: any) => ({
                                 ...style,

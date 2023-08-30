@@ -57,7 +57,7 @@ const MexicoExtendModal = (props: any) => {
         titleColor="text-ctext-secondary"
         textColor="text-ctext-primary"
       />
-      <ListItem title={t('Order No.')} text={orderNo ?? ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary" />
+      <ListItem title={t('Order No.')} text={orderNo ?? ''} titleColor="text-ctext-secondary" textColor="text-ctext-primary whitespace-nowrap" />
       <ListItem
         title={t('Due Date')}
         text={dueDate ? formatDate(moment(dueDate)) : ''}
@@ -104,7 +104,7 @@ const MexicoExtendModal = (props: any) => {
       <ListItem
         title={t('Extension Due Date')}
         text={extendDate ? formatDate(moment(extendDate)) : ''}
-        titleColor="text-ctext-secondary text-left"
+        titleColor="text-ctext-secondary text-left pr-0.5"
         textColor="text-primary-main whitespace-nowrap"
       />
 
