@@ -124,7 +124,7 @@ const RepaymentModal = (props: any) => {
   };
 
   return (
-    <Modal outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}>
+    <Modal outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined} className={'overflow-auto'}>
       <>
         <div className="text-lg font-bold text-ctext-primary my-2">{t('Repay')}</div>
         {renderByCountry(
