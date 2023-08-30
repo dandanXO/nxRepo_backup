@@ -12,7 +12,7 @@ const UploadedPaymentReceiptPage = () => {
   const navigateToLoanDetails = useCallback(() => {
     navigate(`${PagePathEnum.RepaymentDetailPage}?token=${pageQueryString.token}&orderNo=${pageQueryString.orderNo}`, {
       // NOTICE:
-      replace: true,
+      // replace: true,
     });
   }, [pageQueryString.token, pageQueryString.orderNo]);
 
