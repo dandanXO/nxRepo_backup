@@ -21,7 +21,7 @@ const RepaymentInfoPage = () => {
   const { payType, orderNo, payload } = state as PostRepayCreateResponse;
 
   return (
-    <Page className="flex flex-col pb-9">
+    <Page className="flex flex-col">
       <Navigation
         title={payType}
         back={() => {
@@ -38,7 +38,7 @@ const RepaymentInfoPage = () => {
         }}
         backgroundColor="#E70020"
       />
-      <div className="">
+      <div className="flex-grow">
         <div className="mx-6 mt-9 flex flex-col items-center">
           <div className="text-ctext-secondary">Total de la Factura</div>
           <div className="mt-2 mb-4 flex text-4xl font-bold">
@@ -102,7 +102,7 @@ const RepaymentInfoPage = () => {
           </ul>
         </div>
       </div>
-      <div className="mx-6 mt-9">
+      <div className="mt-auto px-6 py-3">
         <button
           className="w-full rounded-full bg-[#E70020] px-2.5 py-4 text-center text-sm font-bold text-white"
           onClick={() => {
