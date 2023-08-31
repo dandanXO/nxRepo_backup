@@ -4,6 +4,7 @@ import {AppModeEnum} from '../appModeModel';
 import {IAndroidAppInfo} from './types/IAndroidAppInfo';
 import {MexicoCountry} from "../../../../../../libs/shared/domain/src/country/MexicoCountry";
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
+import { PhilippinesCountry } from 'libs/shared/domain/src/country/PhilippinesCountry';
 
 // NOTICE: refactor me
 export const AppTempFlag = {
@@ -213,7 +214,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
             domain: 'https://www.oasis-gold.com',
             environment: AllCountriesEnum.mexico,
             packageId: 'com.pak.app.yesloan.android',
-            appName: 'Local PK APP',
+            appName: 'Local MX APP',
             uiVersion: "1",
             token: null,
             mode: 'H5',
@@ -240,6 +241,50 @@ export const getAppInfo = (): IAndroidAppInfo => {
             packageId: 'unknown',    // webview 不必要
             appName: 'APP',          // webview 不必要
             uiVersion: "1",
+            token: null,             // webview 不必要
+            mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
+            phoneNo: '',
+          };
+
+          if (AppEnvironment.isLocalhost()) {
+            appInfo = localAppInfo;
+          } else {
+            appInfo = AppEnvironment.isDev() ? devAppInfo : prodDevAppInfo
+          }
+        }  else if (environment.country === PhilippinesCountry.country) {
+
+          // 本地開發
+          const localAppInfo: IAndroidAppInfo = {
+            domain: 'https://www.oasis-gold.com',
+            environment: AllCountriesEnum.philippines,
+            packageId: 'com.pak.app.yesloan.android',
+            appName: 'Local PH APP',
+            uiVersion: "2",
+            token: null,
+            mode: 'H5',
+            phoneNo: '',
+          };
+
+          // 測試機
+          const devAppInfo: IAndroidAppInfo = {
+            domain: 'https://www.oasis-gold.com',
+            environment: AllCountriesEnum.philippines,
+            packageId: 'com.pak.app.yesloan.android',
+            appName: 'DEV PH APP',
+            uiVersion: "2",
+            token: null,
+            // NOTICE: mode 的用途？
+            mode: isInApp() ? 'Webview' : 'H5',
+            phoneNo: '',
+          };
+
+          // 正式
+          const prodDevAppInfo: IAndroidAppInfo = {
+            domain: '',              // webview 不必要
+            environment: AllCountriesEnum.philippines,
+            packageId: 'unknown',    // webview 不必要
+            appName: 'APP',          // webview 不必要
+            uiVersion: "2",
             token: null,             // webview 不必要
             mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
             phoneNo: '',

@@ -1,4 +1,4 @@
-import {DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME, themes} from '../../../environments/themeModule/customTailwindTheme';
+import {DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME, DEFAULT_PHILIPPINES_THEME, themes} from '../../../environments/themeModule/customTailwindTheme';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
 import {environment} from "../../../environments/environmentModule/environment";
@@ -14,6 +14,8 @@ function getDefaultTheme() {
         return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
     } else if (environment.country === MexicoCountry.country) {
         return mapCustomTailwindTheme(themes['mexico'][DEFAULT_MEXICO_THEME]);
+    }else if (environment.country === MexicoCountry.country) {
+      return mapCustomTailwindTheme(themes['philippines'][DEFAULT_PHILIPPINES_THEME]);
     }else{
         return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
     }

@@ -3,4 +3,5 @@ export enum AllCountryIdentityName {
   PK = "pk",
   BN = "bn",
   MX = "mx",
+  PH = "ph"
 }

@@ -46,9 +46,14 @@ import {AllCountriesEnum} from "../../../../../libs/shared/domain/src/country/Al
 // NOTE: Mexico
 import v1 from './mexico/v1/tailwind.theme';
 
+// NOTE: Philippines
+import v2 from './philippines/v2/tailwind.theme';
+
+
 export const DEFAULT_INDIA_THEME: string = 'v55';
 export const DEFAULT_PAKISTAN_THEME: string = 'v15';
 export const DEFAULT_MEXICO_THEME: string = 'v1';
+export const DEFAULT_PHILIPPINES_THEME: string = 'v2';
 
 // REFACTOR:
 export const themes: IThemes = {
@@ -96,5 +101,8 @@ export const themes: IThemes = {
     },
     [AllCountriesEnum.mexico]: {
       v1,
+    },
+    [AllCountriesEnum.philippines]: {
+      v2,
     }
 };

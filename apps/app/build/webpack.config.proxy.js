@@ -19,6 +19,10 @@ switch (process.env.NODE_COUNTRY) {
     proxyURL = 'https://app.mx-api-dev.com';
     break;
   }
+  case 'ph': {
+    proxyURL = 'https://app.ph-api-dev.com';
+    break;
+  }
   default: {
     throw new Error(APP_IDENTIFICATION + "please setting proxy url");
   }

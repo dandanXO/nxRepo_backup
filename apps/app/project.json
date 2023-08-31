@@ -100,6 +100,21 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        },
+        "production-ph": {
+          "main": "apps/app/src/main/main.ph.tsx",
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/philippines/environment.ph.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
         }
       }
     },
@@ -171,6 +186,19 @@
               "with": "apps/app/src/environments/environmentModule/mexico/environment.mx.dev.ts"
             }
           ]
+        },
+        "development-ph": {
+          "main": "apps/app/src/main/main.ph.tsx",
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/app/src/environments/environmentModule/environment.ts",
+              "with": "apps/app/src/environments/environmentModule/philippines/environment.ph.dev.ts"
+            }
+          ]
         }
       }
     },
@@ -218,6 +246,18 @@
       "configurations": {
         "development": {
           "buildTarget": "app:serve-dev:development-mx"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "serve-ph": {
+      "executor": "@nrwl/webpack:dev-server",
+      "options": {
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "app:serve-dev:development-ph"
         }
       },
       "defaultConfiguration": "development"
