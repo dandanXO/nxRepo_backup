@@ -44,7 +44,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
       //Status
       'Unpaid': 'Unpaid',
       'Overdue': 'Overdue',
-      'Payoff': 'Payoff',
+      'Pay off': 'Pay off',
 
       //PK
       'Get more amount after instant payment': 'Get more amount after instant payment'
@@ -88,7 +88,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
       //Status
       'Unpaid': 'Impago',
       'Overdue': 'Atrasado',
-      'Payoff': 'Pagar Total',
+      'Pay off': 'Pagar Total',
     },
     bn_BD: {
 

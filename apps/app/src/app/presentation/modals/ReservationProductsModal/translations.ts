@@ -1,7 +1,7 @@
 import { i18nComponent } from '../../../modules/i18n/i18nComponent';
 
 export const i18nReservationProductsModal: i18nComponent = {
-  namespace: 'modals/i18nAmountPaidModal',
+  namespace: 'modals/i18nReservationProductsModal',
   translation: {
     en_US: {
       'Good News': 'Good News',

@@ -47,7 +47,7 @@ export const i18nRepaymentModal: i18nComponent = {
       'expiration date': 'Hora de Vencimiento',
       'Repayment Amount': 'Monto de Pago',
       'Cancel': 'Cancelar',
-      'Attention:': 'Atención',
+      'Attention': 'Atención',
       'Before repayment, please make sure that you have enough balance on your bank account.': 'Antes de realizar el pago, asegúrate de tener suficiente saldo en tu cuenta bancaria.',
       'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.':'Para proteger tus derechos, te recomendamos enfáticamente que tomes una captura de pantalla de los detalles del pago después de completarlo, y subas la captura de pantalla a la aplicación.',
 

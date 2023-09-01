@@ -174,6 +174,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                         type={'ghost'}
                         ghostTheme={'tertiary'}
                         className={`w-full`}
+                        outlineTheme={'round'}
                         text={t('Cancel')}
                         onClick={() => {
                             handleRepayData({
@@ -187,8 +188,8 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                     <Button
                         className={`w-full`}
                         text={t('Repay')}
-                        primaryTypeGradient={true}
                         disable={isPostRepayCreateLoading}
+                        outlineTheme={'round'}
                         onClick={() => {
                             if (repayTypeList === undefined) return;
                             if (balanceValue.errorMessage === '') handleConfirm();

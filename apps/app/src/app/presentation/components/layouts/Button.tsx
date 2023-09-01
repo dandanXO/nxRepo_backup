@@ -26,7 +26,7 @@ export const Button = (props: Props) => {
       data-testing-loading={props.loading}
       // shadow-md shadow-gray-400
       className={cx(
-        'w-full rounded-md p-2 text-center font-bold border-solid',
+        'w-full p-2 text-center font-bold border-solid',
         {
           'border border-primary-main bg-primary-main text-white': (props.type === undefined || props.type === "primary") && !disable,
         },
@@ -52,6 +52,7 @@ export const Button = (props: Props) => {
           'bg-cbg-secondary-main text-ctext-tertiary ': props.type === 'ghost' && props.ghostTheme === "none",
         },
         {
+          'rounded-md': props.outlineTheme !== "round",
           'rounded-3xl': props.outlineTheme === "round"
         },
         props.className

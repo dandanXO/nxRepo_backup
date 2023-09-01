@@ -40,7 +40,7 @@ export const MexicoUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentR
               onChange={(event) => props.onFileChange(event)}
             />
           </label>
-          <div className="my-2 text-cstate-error-main">{props.fileErrorMessage}</div>
+          <div className="my-2 text-cstate-error-main">{props.t(props.fileErrorMessage)}</div>
         </div>
         <Button outlineTheme={'round'} text={props.t('Confirm')} onClick={() => props.confirm()} />
       </PageContent>
