@@ -65,7 +65,7 @@ const BindBankCardPage = () => {
           }}
         />
       )}
-      <PageContent className='px-4'>
+      <PageContent className='py-0'>
         {renderByCountry(
           {
             // NOTICE: default 0 index
