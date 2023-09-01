@@ -56,7 +56,7 @@ const BindBankCardPage = () => {
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   return (
-    <>
+    <div className='overflow-auto'>
       {isShowNavigation() && (
         <Navigation
           title={environment.country !== MexicoCountry.country ? 'Add New Card' : t('Bank information') as string}
@@ -65,7 +65,7 @@ const BindBankCardPage = () => {
           }}
         />
       )}
-      <PageContent>
+      <PageContent className='px-4'>
         {renderByCountry(
           {
             // NOTICE: default 0 index
@@ -110,7 +110,7 @@ const BindBankCardPage = () => {
           />
         )}
       </PageContent>
-    </>
+    </div>
   );
 };
 
