@@ -314,6 +314,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                   Email us if you have any questions about your responsibilities or for more information.{' '}
                   <span className={`text-primary-main`}>mail@mail.com</span>
                 </li>
+                <li className='font-bold'>After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.</li>
               </ul>
             </div>
             <div className={` flex flex-col bg-primary-assistant -mx-6 p-6 pb-3  mt-6`}>
