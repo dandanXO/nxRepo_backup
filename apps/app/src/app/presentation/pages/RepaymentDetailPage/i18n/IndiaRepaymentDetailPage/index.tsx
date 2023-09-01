@@ -146,7 +146,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {/*NOTICE: 合同金*/}
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
 
-        {expand && <div className='bg-cstate-disable-assistant p-3 pb-1 -mt-2'>
+        {expand && <div className='bg-[#F8f8f8] p-3 pb-1 -mt-2'>
           {status !== 'EXTEND' && (
             <ListItem
               title={'Disbursal Amount'}
