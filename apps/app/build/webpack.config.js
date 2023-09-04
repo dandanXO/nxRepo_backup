@@ -43,6 +43,8 @@ fs.exists(filePath, function(exists) {
 
 infoLog("build");
 
+const {hostIP} = require("./getNetworkInterface");
+
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
     // NOTE: [Webpack-Devtool](https://webpack.js.org/configuration/devtool/)
@@ -144,10 +146,10 @@ module.exports = (config, context) => {
       assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`,
     },
     devServer: {
-      hot: true,
-      open: "/v2",
-      // NOTE: REFACTOR ME
+      host: hostIP,
       port: 4002,
+      open: "/v2",
+      hot: true,
       historyApiFallback: true,
       onBeforeSetupMiddleware: function (devServer) {
         if (!devServer) {
