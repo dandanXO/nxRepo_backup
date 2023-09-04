@@ -2,7 +2,7 @@ import { IoChevronBack } from '@react-icons/all-files/io5/IoChevronBack';
 import cx from 'classnames';
 
 interface Props {
-  title?: string;
+  title?: string | null;
   back?: () => void;
   to?: () => void;
   toIcon?: React.ReactElement | React.ReactElement[] | string;

@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { useGetPHBindCardDropListQuery } from '../../../../../api/rtk';
+import AddEWalletForm from "./AddEWalletForm";
 
 const PhilippinesBindBankAccountPage = () => {
-  const { currentData: walletVendors } = useGetPHBindCardDropListQuery(null);
+  const { currentData } = useGetPHBindCardDropListQuery(null);
 
   return (
     <div className="px5 pt-2.5">
@@ -17,6 +18,7 @@ const PhilippinesBindBankAccountPage = () => {
           }
         </span>
       </div>
+      <AddEWalletForm walletVendors={currentData?.availableWalletVendors || []} />
     </div>
   );
 };

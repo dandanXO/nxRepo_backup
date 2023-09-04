@@ -9,6 +9,6 @@ export const PhilippinesCountry: ICountry = {
   countryName: "Philippines",
   currency: "₱",
   currencyCode: "PHP",
-  language: AllLanguage.en_US,
+  language: AllLanguage.es_PH,
   timezone: AllTimezoneEnum["Asia/Manila"],
 }

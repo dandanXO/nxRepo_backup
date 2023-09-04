@@ -53,7 +53,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Please make sure your mobile number match.': 'Please make sure your mobile number match.',
 
       // NOTICE: Mexico
-      'Bank information': 'Bank information',
+      'BindBankCardNavigator': 'Bank information',
       'Advice': 'Advice',
       'Only your debit card can be linked.': 'Only your debit card can be linked.',
       'Can’t link credit card.': 'Can’t link credit card.',
@@ -71,7 +71,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Account number must be {{inputLength}} digits only.': 'Account number must be {{inputLength}} digits only.',
     },
     es_MX: {
-      'Bank information': 'Información Bancaria',
+      'BindBankCardNavigator': 'Información Bancaria',
       'Advice': 'Consejo',
       'Only your debit card can be linked.': 'Solo se puede vincular su tarjeta de débito.',
       'Can’t link credit card.': 'No se puede vincular la tarjeta de crédito.',
@@ -134,5 +134,8 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Phone number should be 10 digits.': 'ফোন নম্বরটি 10 ​​সংখ্যার হওয়া উচিত।',
       'Please make sure your mobile number match.': 'আপনার মোবাইল নম্বর মেলে তা নিশ্চিত করুন.',
     },
+    es_PH: {
+      'BindBankCardNavigator': 'Add a New Wallet',
+    }
   },
 };

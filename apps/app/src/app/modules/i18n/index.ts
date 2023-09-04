@@ -79,11 +79,11 @@ i18next
           // NOTE: UploadPaymentReceiptPage
           [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.en_US || {},
           [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.en_US || {},
-          
+
           //Component
           [i18nProduct.namespace]: i18nProduct.translation.en_US || {},
           [i18nCoupon.namespace]: i18nCoupon.translation.en_US || {},
-        
+
         },
         es_MX: {
 
@@ -174,6 +174,21 @@ i18next
           // [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.bn_BD,
           // [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.bn_BD,
         },
+        es_PH: {
+          // NOTICE: REFACTOR ME
+          common: {
+            'Welcome to Mobile': 'Welcome to Mobile !!!',
+            modal: {
+              Error: 'Error',
+              Notice: 'Aviso',
+              Success: 'Éxito!',
+              Confirm: 'Confirmar',
+            },
+          },
+
+          // NOTE: BankBindPage
+          [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.es_PH || {},
+        }
       },
 
       lng: 'en_US', // if you're using a language detector, do not define the lng option

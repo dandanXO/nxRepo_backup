@@ -67,11 +67,7 @@ const BindBankCardPage = () => {
     <>
       {isShowNavigation() && (
         <Navigation
-          title={
-            environment.country !== MexicoCountry.country
-              ? 'Add New Card'
-              : (t('Bank information') as string)
-          }
+          title={t('BindBankCardNavigator')}
           back={() => {
             navigate(-1);
           }}

@@ -1,6 +1,6 @@
 import { WalletVendor } from './WalletVendor';
 
 export interface GetPHBindCardDropListResponse {
-  availableWalletVendors: WalletVendor;
+  availableWalletVendors: WalletVendor[];
   showBankOption: boolean;
 }
