@@ -10,6 +10,7 @@ export type ICustomTailwindTheme = {
 
   tertiary_main: string;
   tertiary_variant: string;
+  tertiary_assistant?: string; // for phil
 
   // NOTE: background
   custom_bg_primary: string;
@@ -30,15 +31,19 @@ export type ICustomTailwindTheme = {
   custom_state_disable_assistant: string;
 
   custom_state_success_main: string;
+  custom_state_success_assistant?: string; // for Phil
 
   custom_state_warning_main: string;
-  custom_state_warning_variant: string;
+  custom_state_warning_variant?: string; // for in & pk
+  custom_state_warning_assistant?: string; // for phil
 
   custom_state_error_main: string;
-  custom_state_error_variant: string; // 只有PK有用到
+  custom_state_error_variant?: string; // 只有PK有用到
+  custom_state_error_assistant?: string; // for phil
 
   custom_state_info_main: string;
-  custom_state_info_variant: string; // 只有PK有用到
+  custom_state_info_variant?: string; // 只有PK有用到
+  custom_state_info_assistant?: string; // for phil
 
   // NOTE: Text Fields
   custom_text_fields_background_main: string;

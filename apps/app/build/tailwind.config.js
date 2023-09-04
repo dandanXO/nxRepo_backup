@@ -8,7 +8,10 @@ const plugin = require('tailwindcss/plugin');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    join(__dirname, '../{src,pages,components}/**/*!(*.stories|*.spec).{ts,tsx,html}'),
+    join(
+      __dirname,
+      '../{src,pages,components}/**/*!(*.stories|*.spec).{ts,tsx,html}'
+    ),
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
@@ -41,6 +44,7 @@ module.exports = {
       tertiary: {
         main: 'var(--tertiary_main)',
         variant: 'var(--tertiary_variant)',
+        assistant: 'var(--tertiary_assistant)',
       },
       cbg: {
         // NOTE: background
@@ -64,18 +68,22 @@ module.exports = {
         },
         success: {
           main: 'var(--custom_state_success_main)',
+          assistant: 'var(--custom_state_success_assistant)',
         },
         warning: {
           main: 'var(--custom_state_warning_main)',
           variant: 'var(--custom_state_warning_variant)',
+          assistant: 'var(--custom_state_warning_assistant)',
         },
         error: {
           main: 'var(--custom_state_error_main)',
           variant: 'var(--custom_state_error_variant)',
+          assistant: 'var(--custom_state_error_assistant)',
         },
         info: {
           main: 'var(--custom_state_info_main)',
           variant: 'var(--custom_state_info_variant)',
+          assistant: 'var(--custom_state_info_assistant)',
         },
       },
       cTextFields: {
@@ -95,82 +103,81 @@ module.exports = {
   plugins: [
     // require("daisyui")
     plugin(function ({ addUtilities, addComponents, addVariant, e }) {
-
       addComponents({
-          '.open-index-button': {
-              background: 'var(--custom_bg_homepage_button) !important',
+        '.open-index-button': {
+          background: 'var(--custom_bg_homepage_button) !important',
+        },
+        '.bg-primary-gradient': {
+          background: 'var(--custom_bg_homepage_button) !important',
+        },
+        // LoadingMask
+        '.pulseLoader': {
+          '> span ': {
+            backgroundColor: 'var(--primary_main) !important',
           },
-          '.bg-primary-gradient':{
-              background: 'var(--custom_bg_homepage_button) !important',
+        },
+        // 拉霸
+        '.slider': {
+          width: '100%',
+          '.quota-slider': {
+            height: '5px',
           },
-          // LoadingMask
-          '.pulseLoader':{
-            '> span ':{
-                backgroundColor:'var(--primary_main) !important',
-            }
+          //NOTE: 拉霸按鈕右側捲軸
+          '.quota-slider-track-1': {
+            background: 'var(--primary_variant)',
+            height: '5px',
+            borderRadius: '8px',
           },
-          // 拉霸
-          '.slider': {
-              width: '100%',
-              '.quota-slider': {
-                  height: '5px',
-              },
-              //NOTE: 拉霸按鈕右側捲軸
-              '.quota-slider-track-1': {
-                  background: 'var(--primary_variant)',
-                  height: '5px',
-                  borderRadius: '8px',
-              },
-              //NOTE: 拉霸按鈕左側捲軸
-              '.quota-slider-track-0': {
-                  background: 'var(--custom_bg_secondary)',
-                  height: '5px',
-                  borderRadius: '8px',
-              },
-              '.quota-slider-track-disable-0': {
-                background: 'var(--custom_bg_secondary)',
-                height: '5px',
-                borderRadius: '8px',
-              },
-              '.quota-slider-track-disable-1': {
-                  background: 'var(--custom_bg_secondary)',
-                  height: '5px',
-                  borderRadius: '8px',
-              },
-              // NOTE: 拉霸按鈕
-              '.quota-slider-thumb': {
-                  '&:focus': {
-                      outline: 'none',
-                      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                  },
-                  background: '#fff',
-                  width: '18px',
-                  height: '18px',
+          //NOTE: 拉霸按鈕左側捲軸
+          '.quota-slider-track-0': {
+            background: 'var(--custom_bg_secondary)',
+            height: '5px',
+            borderRadius: '8px',
+          },
+          '.quota-slider-track-disable-0': {
+            background: 'var(--custom_bg_secondary)',
+            height: '5px',
+            borderRadius: '8px',
+          },
+          '.quota-slider-track-disable-1': {
+            background: 'var(--custom_bg_secondary)',
+            height: '5px',
+            borderRadius: '8px',
+          },
+          // NOTE: 拉霸按鈕
+          '.quota-slider-thumb': {
+            '&:focus': {
+              outline: 'none',
+              boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+            },
+            background: '#fff',
+            width: '18px',
+            height: '18px',
 
-                  top: '-7px',
-                  textAlign: 'center',
-                  lineHeight: '25px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+            top: '-7px',
+            textAlign: 'center',
+            lineHeight: '25px',
+            borderRadius: '50%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
 
-                  // NOTE: 拉霸按鈕-內圓
-                  '.quota-slider-thumb-inner': {
-                      background: 'var(--custom_state_success_main)',
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '50%',
-                  },
-                  '.quota-slider-thumb-inner-disable': {
-                      background: 'var(--custom_state_disable_main)',
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '50%',
-                  },
-              }
-          }
-      })
+            // NOTE: 拉霸按鈕-內圓
+            '.quota-slider-thumb-inner': {
+              background: 'var(--custom_state_success_main)',
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+            },
+            '.quota-slider-thumb-inner-disable': {
+              background: 'var(--custom_state_disable_main)',
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+            },
+          },
+        },
+      });
     }),
   ],
   safelist: ['border-l-2', 'border-dashed'],
