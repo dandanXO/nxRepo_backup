@@ -9,30 +9,31 @@ import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListRepons
 import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
 import { GetRepayTypesRequest } from '../loanService/GetRepayTypesRequest';
 import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
+import { GetReservationRequest } from '../loanService/GetReservationRequest';
+import { GetReservationResponse } from '../loanService/GetReservationResponse';
 import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
 import { PostRepayCreateRequest } from '../loanService/PostRepayCreateRequest';
 import { PostRepayCreateResponse } from '../loanService/PostRepayCreateResponse';
 import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
+import { PostReservationSubmitRequest } from '../loanService/PostReservationSubmitRequest';
 import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
 import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
 import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
 import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
 import { GetCouponListRequest } from '../userService/GetCouponListRequest';
 import { GetCouponListResponse } from '../userService/GetCouponResponse';
+import { GetFeedbackCategoriesResponse } from '../userService/GetFeedbackCategories';
+import { GetMXBindCardDropListResponse } from '../userService/GetMXBindCardDropListResponse';
+import { GetPHBindCardDropListResponse } from '../userService/GetPHBindCardDropListResponse';
 import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
 import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
 import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
+import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
+import { PostMXBankBindSaveRequest } from '../userService/PostMXBankBindSaveRequest';
 import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
 import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
 import { TraceBehaviorRequest } from './TraceBehaviorRequest';
 import axiosBaseQuery from './axiosBaseQuery';
-import { GetFeedbackCategoriesResponse } from '../userService/GetFeedbackCategories';
-import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
-import { GetReservationResponse } from '../loanService/GetReservationResponse';
-import { GetReservationRequest } from '../loanService/GetReservationRequest';
-import { PostReservationSubmitRequest } from '../loanService/PostReservationSubmitRequest';
-import { PostMXBankBindSaveRequest } from '../userService/PostMXBankBindSaveRequest';
-import { GetMXBindCardDropListResponse } from '../userService/GetMXBindCardDropListResponse';
 
 export type LoginRequest = {
   msgCode: string;
@@ -77,14 +78,25 @@ export const APIV3 = createApi({
       // NOTE: cannot work
       async onCacheEntryAdded(
         arg,
-        { dispatch, getState, extra, requestId, cacheEntryRemoved, cacheDataLoaded, getCacheEntry }
+        {
+          dispatch,
+          getState,
+          extra,
+          requestId,
+          cacheEntryRemoved,
+          cacheDataLoaded,
+          getCacheEntry,
+        }
       ) {
         // console.log('onCacheEntryAdded.arg', arg);
       },
     }),
 
     // NOTE: /api/v3/loan/records 貸款紀錄列表
-    getLoanRecordList: builder.query<GetLoanRecordListReponse, GetLoanRecordListRequest>({
+    getLoanRecordList: builder.query<
+      GetLoanRecordListReponse,
+      GetLoanRecordListRequest
+    >({
       query: (query: GetLoanRecordListRequest) => ({
         method: 'get',
         url: `/loan/records`,
@@ -92,7 +104,10 @@ export const APIV3 = createApi({
       }),
     }),
     // NOTE: /api/v3/coupon/applicable 取得可用优惠券列表
-    getCouponApplicableList: builder.query<GetCouponApplicableListResponse, GetCouponApplicableListRequest>({
+    getCouponApplicableList: builder.query<
+      GetCouponApplicableListResponse,
+      GetCouponApplicableListRequest
+    >({
       query: (query: GetCouponApplicableListRequest) => ({
         method: 'get',
         url: `/coupon/applicable`,
@@ -128,50 +143,62 @@ export const APIV3 = createApi({
     }),
     // NOTE: /api/v3/feedback/categories 取得feadback問題種類
     getFeedbackCategories: builder.query<GetFeedbackCategoriesResponse, null>({
-        query: (query: null) => ({
-          method: 'get',
-          url: `/feedback/categories`,
-          params: query,
-        }),
+      query: (query: null) => ({
+        method: 'get',
+        url: `/feedback/categories`,
+        params: query,
+      }),
     }),
     // NOTE: /api/v3/feedback 新增用戶回饋
     postFeedback: builder.mutation<null, PostFeedbackRequest>({
-        query: (data: PostFeedbackRequest) => ({
-          method: 'post',
-          url: `/feedback`,
-          data: data,
-        }),
+      query: (data: PostFeedbackRequest) => ({
+        method: 'post',
+        url: `/feedback`,
+        data: data,
+      }),
     }),
     // NOTE: /api/v3/reservation 预约借款页面
-    getReservation: builder.query<GetReservationResponse, GetReservationRequest>({
-        query: (query: GetReservationRequest) => ({
-          method: 'get',
-          url: `/reservation`,
-          params: query,
-        }),
+    getReservation: builder.query<
+      GetReservationResponse,
+      GetReservationRequest
+    >({
+      query: (query: GetReservationRequest) => ({
+        method: 'get',
+        url: `/reservation`,
+        params: query,
+      }),
     }),
     // NOTE: /api/v3/reservation/submit 提交还款后预约
-    postReservationSubmit: builder.mutation<null, PostReservationSubmitRequest>({
+    postReservationSubmit: builder.mutation<null, PostReservationSubmitRequest>(
+      {
         query: (data: PostReservationSubmitRequest) => ({
           method: 'post',
           url: `/reservation/submit`,
           data: data,
         }),
-    }),
+      }
+    ),
     // NOTICE: Mexico - 获取绑卡页信息
     getMXBindCardDropList: builder.query<GetMXBindCardDropListResponse, {}>({
-        query: () => ({
-            method: 'get',
-            url: `/bank-bind/info`,
-        }),
+      query: () => ({
+        method: 'get',
+        url: `/bank-bind/info`,
+      }),
+    }),
+    // NOTICE: Philippines - 获取绑卡页信息
+    getPHBindCardDropList: builder.query<GetPHBindCardDropListResponse, null>({
+      query: () => ({
+        method: 'get',
+        url: `/bank-bind/info`,
+      }),
     }),
     // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
     postBankBindSaveToMX: builder.mutation<{}, PostMXBankBindSaveRequest>({
-        query: (requestBody: PostMXBankBindSaveRequest) => ({
-          method: 'post',
-          url: `/bank-bind/save`,
-          data: requestBody,
-        }),
+      query: (requestBody: PostMXBankBindSaveRequest) => ({
+        method: 'post',
+        url: `/bank-bind/save`,
+        data: requestBody,
+      }),
     }),
   }),
 });
@@ -186,7 +213,8 @@ export const {
   usePostFeedbackMutation,
   useLazyGetReservationQuery,
   usePostReservationSubmitMutation,
-  useLazyGetMXBindCardDropListQuery
+  useLazyGetMXBindCardDropListQuery,
+  useGetPHBindCardDropListQuery,
 } = APIV3;
 
 export const API = createApi({
@@ -248,7 +276,10 @@ export const API = createApi({
       }),
     }),
     // NOTE: 創建還款訂單
-    postRepayCreate: builder.mutation<PostRepayCreateResponse, PostRepayCreateRequest>({
+    postRepayCreate: builder.mutation<
+      PostRepayCreateResponse,
+      PostRepayCreateRequest
+    >({
       query: (query: PostRepayCreateRequest) => ({
         method: 'post',
         url: `/repay/create`,
@@ -261,7 +292,8 @@ export const API = createApi({
         method: 'post',
         url: `/repay/receipt`,
         headers: {
-          'Content-Type': 'multipart/form-data;boundary=' + new Date().getTime(),
+          'Content-Type':
+            'multipart/form-data;boundary=' + new Date().getTime(),
         },
         data: requestBody,
       }),
@@ -291,7 +323,10 @@ export const API = createApi({
       }),
     }),
     // NOTICE: Bangladesh - 绑定银行主卡或是電子錢包
-    postBankBindSaveToBangladesh: builder.mutation<{}, PostBangladeshBankBindSaveRequest>({
+    postBankBindSaveToBangladesh: builder.mutation<
+      {},
+      PostBangladeshBankBindSaveRequest
+    >({
       query: (requestBody: PostBangladeshBankBindSaveRequest) => ({
         method: 'post',
         url: `/bank-bind/save`,
@@ -323,9 +358,9 @@ export const API = createApi({
     // NOTE: DELTETE /api/v2/account 刪除帳號
     deleteUser: builder.mutation<null, null>({
       query: (requestBody: null) => ({
-          url: `/account`,
-          method: "delete",
-          data: requestBody,
+        url: `/account`,
+        method: 'delete',
+        data: requestBody,
       }),
     }),
   }),
@@ -346,5 +381,5 @@ export const {
   usePostBankBindSaveToBangladeshMutation,
   useLazyGetBindCardDropListQuery,
   useLazyGetUserProcessQuery,
-  useDeleteUserMutation
+  useDeleteUserMutation,
 } = API;
