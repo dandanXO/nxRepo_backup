@@ -2,7 +2,7 @@ import React from 'react';
 import { TailSpin } from 'react-loading-icons';
 
 import { TestingProps } from '../../../modules/TestingProps';
-import tm from '../../../modules/tailwindMerge';
+import { tcx } from "../../../modules/tailwindcss";
 
 type Props = {
   text: string | React.ReactNode;
@@ -26,7 +26,7 @@ export const Button = (props: Props) => {
       data-testing-disable={props.dataTestingDisable}
       data-testing-loading={props.loading}
       // shadow-md shadow-gray-400
-      className={tm(
+      className={tcx(
         'w-full rounded-md border-solid p-2 text-center font-bold',
         [
           'border-primary-main bg-primary-main b border text-white',
