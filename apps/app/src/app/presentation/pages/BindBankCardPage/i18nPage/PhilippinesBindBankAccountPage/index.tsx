@@ -1,10 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { useGetPHBindCardDropListQuery } from '../../../../../api/rtk';
+import { RootState } from '../../../../../reduxStore';
+import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
 import AddEWalletForm from './AddEWalletForm';
 
 const PhilippinesBindBankAccountPage = () => {
   const { currentData } = useGetPHBindCardDropListQuery(null);
+
+  const modalState = useSelector((state: RootState) => state.model);
 
   const walletVendorOption = currentData?.availableWalletVendors.reduce(
     (acc, current) => {
@@ -30,6 +35,7 @@ const PhilippinesBindBankAccountPage = () => {
         </span>
       </div>
       <AddEWalletForm walletVendorOption={walletVendorOption || []} />
+      {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal />}
     </div>
   );
 };

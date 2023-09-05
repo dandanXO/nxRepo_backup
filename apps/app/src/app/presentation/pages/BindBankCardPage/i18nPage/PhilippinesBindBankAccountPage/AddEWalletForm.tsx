@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 
-import { Input } from '@frontend/mobile/shared/ui';
-
 import { InputValue } from '../../../../../modules/form/InputValue';
+import {
+  modalInitialState,
+  modalSlice,
+} from '../../../../../reduxStore/modalSlice';
 import ValidateInput from '../../../../components/ValidateInput';
 import { Button } from '../../../../components/layouts/Button';
 import { i18nBankBindAccountPage } from '../../translations';
@@ -15,7 +18,10 @@ interface IAddEWalletFormProps {
 }
 
 const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
-  const [selectedWallet, setSelectedWallet] = useState<string | undefined>('');
+  const dispatch = useDispatch();
+
+  const [selectedWallet, setSelectedWallet] = useState('');
+  const [isWalletSelected, setIsWalletSelected] = useState(true);
   const [holderName, setHolderName] = useState<InputValue<string>>({
     data: '',
     isValidation: false,
@@ -39,7 +45,7 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
 
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
-  const validMobileNumber = () => {
+  const compareMobileNumber = () => {
     const same = mobileNumber.data === confirmMobileNumber.data;
     return {
       ...confirmMobileNumber,
@@ -48,9 +54,55 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
     };
   };
 
+  const confirmValidation = () => {
+    const isWalletValid = !(selectedWallet === '');
+    const isHolderNameValid = !(holderName.data === '');
+    const isMobileNumberValid = validationPHMobileNumber(mobileNumber.data);
+    const isConfirmMobileNumberValid = validationPHMobileNumber(
+      confirmMobileNumber.data
+    );
+    const isCompareMobileNumberValid =
+      mobileNumber.data === confirmMobileNumber.data;
+    setIsWalletSelected(isWalletValid);
+    setHolderName({
+      ...holderName,
+      isValidation: isHolderNameValid,
+      errorMessage: isHolderNameValid ? '' : 'This field cannot be left blank.',
+    });
+    setMobileNumber(isMobileNumberValid);
+    setConfirmMobileNumber(
+      isCompareMobileNumberValid
+        ? isConfirmMobileNumberValid
+        : compareMobileNumber()
+    );
+
+    return (
+      isWalletValid &&
+      isHolderNameValid &&
+      isMobileNumberValid &&
+      isConfirmMobileNumberValid &&
+      isCompareMobileNumberValid
+    );
+  };
+
+  const onConfirm = () => {
+    if (confirmValidation()) {
+      dispatch(
+        modalSlice.actions.updatebindBankcardModal({
+          ...modalInitialState.bindBankcardModal,
+          show: true,
+          confirm: false,
+          holderName: holderName.data,
+          mobileWalletAccount: mobileNumber.data,
+          walletVendor: selectedWallet,
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     if (confirmMobileNumber.isEdit) {
-      setConfirmMobileNumber(validMobileNumber());
+      setConfirmMobileNumber(compareMobileNumber());
     }
   }, [mobileNumber.data, confirmMobileNumber.data]);
 
@@ -104,9 +156,14 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
             placeholder="Select"
             options={walletVendorOption}
             onChange={(newValue) => {
-              setSelectedWallet(newValue?.value);
+              setSelectedWallet(newValue?.value || '');
             }}
           />
+          {!isWalletSelected && selectedWallet === '' && (
+            <div className="text-cstate-error-main my-1 ml-5">
+              {t('Please select an option.')}
+            </div>
+          )}
         </div>
         <div className="mt-3">
           <Label labelKey="eWalletHolderName" />
@@ -180,8 +237,8 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
         </div>
       </div>
 
-      <div>
-        <Button text={t('Confirm')} outlineTheme="round" />
+      <div className="mt-3">
+        <Button text={t('Confirm')} outlineTheme="round" onClick={onConfirm} />
       </div>
     </div>
   );
