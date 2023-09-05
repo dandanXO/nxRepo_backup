@@ -48,10 +48,10 @@ const theme: ICustomTailwindTheme = {
   custom_text_divider: '#E8E8E8',
 
   // NOTE: Text Fields
-  custom_text_fields_background_main: '#FFFFFF',
+  custom_text_fields_background_main: '#F7F8FA',
   custom_text_fields_background_variant: '#EEEEEE',
   custom_text_fields_placeholder_main: '#D8D8D8',
-  custom_text_fields_outline_main: '#D3D3D3',
+  custom_text_fields_outline_main: '#F7F8FA',
 };
 
 export default theme;
