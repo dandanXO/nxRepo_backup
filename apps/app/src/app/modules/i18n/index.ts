@@ -1,21 +1,23 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { i18nextPlugin } from 'translation-check';
+
+import { i18nCoupon } from '../../presentation/components/Coupon/i18n/translations';
+import { i18nProduct } from '../../presentation/components/Product/i18n/translations';
+import { i18nAmountRepaidModal } from '../../presentation/modals/AmountRepaidModal/i18n/translations';
+import { i18nConfirmBindBankCardModal } from '../../presentation/modals/ConfirmBindBankCardModal/i18n/translations';
 import { i18nExtendConfirmModal } from '../../presentation/modals/ExtendConfirmModal/translations';
 import { i18nExtendModal } from '../../presentation/modals/ExtendModal/translations';
+import { i18nRepaymentCouponModal } from '../../presentation/modals/RepaymentCouponModal/i18n/translations';
 import { i18nRepaymentModal } from '../../presentation/modals/RepaymentModal/i18n/translations';
+import { i18nReservationProductsModal } from '../../presentation/modals/ReservationProductsModal/translations';
+import { i18nReservationSuccessModal } from '../../presentation/modals/ReservationSuccessModal/i18n/translations';
+import { i18nBankBindAccountPage } from '../../presentation/pages/BindBankCardPage/translations';
+import { i18nLoanDetailsPage } from '../../presentation/pages/RepaymentDetailPage/translations';
 import { i18nUploadPaymentReceiptPage } from '../../presentation/pages/UploadPaymentReceiptPage/i18nPage/translations';
 import { i18nUploadingFileModal } from '../../presentation/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';
 import { i18nUploadedPaymentReceiptPage } from '../../presentation/pages/UploadedPaymentReceiptPage/components/i18n/translations';
-import { i18nBankBindAccountPage } from '../../presentation/pages/BindBankCardPage/translations';
-import { i18nLoanDetailsPage } from '../../presentation/pages/RepaymentDetailPage/translations';
-import { i18nAmountRepaidModal } from '../../presentation/modals/AmountRepaidModal/i18n/translations';
-import { i18nReservationProductsModal } from '../../presentation/modals/ReservationProductsModal/translations';
-import { i18nProduct } from '../../presentation/components/Product/i18n/translations';
-import { i18nRepaymentCouponModal } from '../../presentation/modals/RepaymentCouponModal/i18n/translations';
-import { i18nCoupon } from '../../presentation/components/Coupon/i18n/translations';
-import { i18nReservationSuccessModal } from '../../presentation/modals/ReservationSuccessModal/i18n/translations';
-import { i18nConfirmBindBankCardModal } from '../../presentation/modals/ConfirmBindBankCardModal/i18n/translations';
+
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(i18nextPlugin)
@@ -49,44 +51,54 @@ i18next
           //
           // // NOTICE: Pages
           // NOTE: BankBindPage
-          [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.en_US || {},
-          [i18nConfirmBindBankCardModal.namespace]: i18nConfirmBindBankCardModal.translation.en_US || {},
+          [i18nBankBindAccountPage.namespace]:
+            i18nBankBindAccountPage.translation.en_US || {},
+          [i18nConfirmBindBankCardModal.namespace]:
+            i18nConfirmBindBankCardModal.translation.en_US || {},
           //
           // // NOTE: LoanDetailPage
           // [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US,
           //
           // NOTE: LoanDetailsPage
-          [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.en_US || {},
-          [i18nAmountRepaidModal.namespace]:i18nAmountRepaidModal.translation.en_US || {},
+          [i18nLoanDetailsPage.namespace]:
+            i18nLoanDetailsPage.translation.en_US || {},
+          [i18nAmountRepaidModal.namespace]:
+            i18nAmountRepaidModal.translation.en_US || {},
           // [i18nExtensionDetailModal.namespace]: i18nExtensionDetailModal.translation.en_US,
-          [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.en_US || {},
+          [i18nRepaymentModal.namespace]:
+            i18nRepaymentModal.translation.en_US || {},
           // [i18nRepaymentNoticeModal.namespace]: i18nRepaymentNoticeModal.translation.en_US,
           // [i18nRepaymentAdsModal.namespace]: i18nRepaymentAdsModal.translation.en_US,
-          [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.en_US || {},
+          [i18nExtendConfirmModal.namespace]:
+            i18nExtendConfirmModal.translation.en_US || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.en_US || {},
-          [i18nRepaymentCouponModal.namespace]: i18nRepaymentCouponModal.translation.en_US || {},
+          [i18nRepaymentCouponModal.namespace]:
+            i18nRepaymentCouponModal.translation.en_US || {},
 
           // NOTE: LoanDetailsPage - ReservationModal
-          [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.en_US || {},
-          [i18nReservationSuccessModal.namespace]: i18nReservationSuccessModal.translation.en_US || {},
+          [i18nReservationProductsModal.namespace]:
+            i18nReservationProductsModal.translation.en_US || {},
+          [i18nReservationSuccessModal.namespace]:
+            i18nReservationSuccessModal.translation.en_US || {},
           //
           // // NOTE: ProductAdModalListPage
           // [i18nProductAdModalListPage.namespace]: i18nProductAdModalListPage.translation.en_US,
           //
           // NOTE: UploadedPaymentReceiptPage
-          [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.en_US || {},
+          [i18nUploadedPaymentReceiptPage.namespace]:
+            i18nUploadedPaymentReceiptPage.translation.en_US || {},
           //
           // NOTE: UploadPaymentReceiptPage
-          [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.en_US || {},
-          [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.en_US || {},
+          [i18nUploadPaymentReceiptPage.namespace]:
+            i18nUploadPaymentReceiptPage.translation.en_US || {},
+          [i18nUploadingFileModal.namespace]:
+            i18nUploadingFileModal.translation.en_US || {},
 
           //Component
           [i18nProduct.namespace]: i18nProduct.translation.en_US || {},
           [i18nCoupon.namespace]: i18nCoupon.translation.en_US || {},
-
         },
         es_MX: {
-
           // NOTICE: REFACTOR ME
           common: {
             'Welcome to Mobile': 'Welcome to Mobile !!!',
@@ -99,32 +111,42 @@ i18next
           },
 
           // NOTE: BankBindPage
-          [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.es_MX || {},
-          [i18nConfirmBindBankCardModal.namespace]: i18nConfirmBindBankCardModal.translation.es_MX || {},
-
+          [i18nBankBindAccountPage.namespace]:
+            i18nBankBindAccountPage.translation.es_MX || {},
+          [i18nConfirmBindBankCardModal.namespace]:
+            i18nConfirmBindBankCardModal.translation.es_MX || {},
 
           // NOTE: LoanDetailsPage
-          [i18nLoanDetailsPage.namespace]: i18nLoanDetailsPage.translation.es_MX || {},
-          [i18nAmountRepaidModal.namespace]:i18nAmountRepaidModal.translation.es_MX || {},
-          [i18nRepaymentModal.namespace]: i18nRepaymentModal.translation.es_MX || {},
-          [i18nExtendConfirmModal.namespace]: i18nExtendConfirmModal.translation.es_MX || {},
+          [i18nLoanDetailsPage.namespace]:
+            i18nLoanDetailsPage.translation.es_MX || {},
+          [i18nAmountRepaidModal.namespace]:
+            i18nAmountRepaidModal.translation.es_MX || {},
+          [i18nRepaymentModal.namespace]:
+            i18nRepaymentModal.translation.es_MX || {},
+          [i18nExtendConfirmModal.namespace]:
+            i18nExtendConfirmModal.translation.es_MX || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.es_MX || {},
-          [i18nRepaymentCouponModal.namespace]: i18nRepaymentCouponModal.translation.es_MX || {},
+          [i18nRepaymentCouponModal.namespace]:
+            i18nRepaymentCouponModal.translation.es_MX || {},
 
           // NOTE: LoanDetailsPage - ReservationModal
-          [i18nReservationProductsModal.namespace]: i18nReservationProductsModal.translation.es_MX || {},
-          [i18nReservationSuccessModal.namespace]: i18nReservationSuccessModal.translation.es_MX || {},
+          [i18nReservationProductsModal.namespace]:
+            i18nReservationProductsModal.translation.es_MX || {},
+          [i18nReservationSuccessModal.namespace]:
+            i18nReservationSuccessModal.translation.es_MX || {},
 
           // NOTE: UploadedPaymentReceiptPage
-          [i18nUploadedPaymentReceiptPage.namespace]: i18nUploadedPaymentReceiptPage.translation.es_MX || {},
+          [i18nUploadedPaymentReceiptPage.namespace]:
+            i18nUploadedPaymentReceiptPage.translation.es_MX || {},
           // NOTE: UploadPaymentReceiptPage
-          [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.es_MX || {},
-          [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.es_MX || {},
+          [i18nUploadPaymentReceiptPage.namespace]:
+            i18nUploadPaymentReceiptPage.translation.es_MX || {},
+          [i18nUploadingFileModal.namespace]:
+            i18nUploadingFileModal.translation.es_MX || {},
 
           //Component
           [i18nProduct.namespace]: i18nProduct.translation.es_MX || {},
           [i18nCoupon.namespace]: i18nCoupon.translation.es_MX || {},
-
         },
         bn_BD: {
           // NOTICE: REFACTOR ME
@@ -187,8 +209,11 @@ i18next
           },
 
           // NOTE: BankBindPage
-          [i18nBankBindAccountPage.namespace]: i18nBankBindAccountPage.translation.es_PH || {},
-        }
+          [i18nBankBindAccountPage.namespace]:
+            i18nBankBindAccountPage.translation.es_PH || {},
+          [i18nConfirmBindBankCardModal.namespace]:
+            i18nConfirmBindBankCardModal.translation.es_PH || {},
+        },
       },
 
       lng: 'en_US', // if you're using a language detector, do not define the lng option

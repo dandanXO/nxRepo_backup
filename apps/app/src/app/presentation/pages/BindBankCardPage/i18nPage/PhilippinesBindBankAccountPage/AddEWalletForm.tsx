@@ -20,16 +20,16 @@ interface IAddEWalletFormProps {
 const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
   const dispatch = useDispatch();
 
-  const [selectedWallet, setSelectedWallet] = useState('');
+  const [selectedWallet, setSelectedWallet] = useState('GCASH');
   const [isWalletSelected, setIsWalletSelected] = useState(true);
   const [holderName, setHolderName] = useState<InputValue<string>>({
-    data: '',
+    data: 'Eddie',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
   });
   const [mobileNumber, setMobileNumber] = useState<InputValue<string>>({
-    data: '',
+    data: '01111111111',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
@@ -37,7 +37,7 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
   const [confirmMobileNumber, setConfirmMobileNumber] = useState<
     InputValue<string>
   >({
-    data: '',
+    data: '01111111111',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
@@ -87,6 +87,10 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
 
   const onConfirm = () => {
     if (confirmValidation()) {
+      const walletName =
+        walletVendorOption?.find((option) => option.value === selectedWallet)
+          ?.label || '';
+
       dispatch(
         modalSlice.actions.updatebindBankcardModal({
           ...modalInitialState.bindBankcardModal,
@@ -95,6 +99,7 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
           holderName: holderName.data,
           mobileWalletAccount: mobileNumber.data,
           walletVendor: selectedWallet,
+          walletName: walletName,
         })
       );
     }
