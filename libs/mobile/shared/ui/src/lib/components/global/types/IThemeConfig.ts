@@ -58,5 +58,10 @@ export interface IThemeConfig {
       secondary: Colors | string;
       tertiary: Colors | string;
       divider: Colors | string;
+  },
+  textFiled?: {
+    background?: {
+      main?: Colors | string,
+    }
   }
 }

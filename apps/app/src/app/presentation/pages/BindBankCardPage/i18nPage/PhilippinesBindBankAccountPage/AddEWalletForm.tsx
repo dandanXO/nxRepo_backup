@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 
+import { Input } from '@frontend/mobile/shared/ui';
+
+import { InputValue } from '../../../../../modules/form/InputValue';
+import ValidateInput from '../../../../components/ValidateInput';
 import { i18nBankBindAccountPage } from '../../translations';
+import { validationPHMobileNumber } from "./validation";
 
 interface IAddEWalletFormProps {
   walletVendorOption: { value: string; label: string }[];
@@ -10,6 +15,21 @@ interface IAddEWalletFormProps {
 
 const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
   const [selectedWallet, setSelectedWallet] = useState<string | undefined>('');
+  const [holderName, setHolderName] = useState('');
+  const [mobileNumber, setMobileNumber] = useState<InputValue<string>>({
+    data: '',
+    isValidation: false,
+    errorMessage: '',
+    isEdit: false,
+  });
+  const [confirmMobileNumber, setConfirmMobileNumber] = useState<
+    InputValue<string>
+  >({
+    data: '',
+    isValidation: false,
+    errorMessage: '',
+    isEdit: false,
+  });
 
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
@@ -23,14 +43,14 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
         <div>
           <Label labelKey="walletSelectorLabel" />
           <Select
-            className="bg-cTextFields-background-main rounded-md text-sm placeholder-red-400 focus:outline-0"
+            className="bg-cTextFields-background-main rounded-md text-sm focus:outline-0"
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
                 backgroundColor: 'transparent',
                 border: 0,
                 boxShadow: 'none',
-                padding: '8px 8px',
+                padding: '6px 8px',
               }),
               menu: (baseStyles) => ({
                 ...baseStyles,
@@ -67,7 +87,36 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
             }}
           />
         </div>
+        <div className="mt-3">
+          <Label labelKey="eWalletHolderName" />
+          <input
+            className="bg-cTextFields-background-main placeholder-cTextFields-placeholder-main w-full rounded-md py-3 px-4 text-sm focus:outline-0"
+            value={holderName}
+            placeholder="Enter"
+            onChange={(e) => setHolderName(e.currentTarget.value)}
+          />
+        </div>
+        <div className="mt-3">
+          <Label labelKey="mobileNumber" />
+          <ValidateInput
+            inputData={mobileNumber}
+            setInputData={setMobileNumber}
+            validateData={()=>validationPHMobileNumber(mobileNumber.data)}
+            errorMessage={mobileNumber.errorMessage}
+            value={mobileNumber.data}
+            inputLength={11}
+            containerStyle={{
+              backgroundColor: window.theme?.textFiled?.background?.main,
+              borderRadius: '6px',
+              padding: '12px 16px',
+              fontSize: '14px'
+            }}
+            placeholder={t('mobileNumber')}
+            placeholderColor={window.theme?.input?.placeholder}
+          />
+        </div>
       </div>
+
       <div>
         <button>Submit</button>
       </div>

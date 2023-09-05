@@ -60,6 +60,10 @@ export const themeConfig: IThemeConfig = {
     secondary: theme['custom_text_secondary'],
     tertiary: theme['custom_text_tertiary'],
     divider: theme['custom_text_divider'],
+  },
+  textFiled: {
+    background: {
+      main: theme['custom_text_fields_background_main']
+    }
   }
-
 };

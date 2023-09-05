@@ -155,6 +155,9 @@ export const i18nBankBindAccountPage: i18nComponent = {
     es_PH: {
       BindBankCardNavigator: 'Add a New Wallet',
       walletSelectorLabel: 'E-Payment',
+      eWalletHolderName: 'E-Payment Holder Name',
+      mobileNumber: 'Mobile Number',
+      confirmMobileNumber: 'Confirm Mobile Number',
     },
   },
 };

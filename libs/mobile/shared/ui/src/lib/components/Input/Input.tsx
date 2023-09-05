@@ -50,7 +50,7 @@ export interface InputProps {
   // placement?: Placement;
   maxLength?: number;
   minLength?: number;
-  placeholder?: string;
+  placeholder?: string | null;
   // Event Handler
   onFocus?: (event: React.FocusEvent) => void;
   onBlur?: (event: React.FocusEvent) => void;
@@ -87,6 +87,8 @@ export interface InputProps {
   onPaste?: (e: ClipboardEvent) => void;
   onCut?: (e: ClipboardEvent) => void;
   name?: string;
+  containerStyle?: React.CSSProperties,
+  placeholderColor?: string
 }
 
 // NOTICE: 實際產出元件的 dot 特性
@@ -137,6 +139,8 @@ const Input: InputInterface = ({
   onPaste,
   onCut,
   name,
+   containerStyle,
+  placeholderColor
 }: InputProps) => {
   const forceUpdate = useForceUpdate();
 
@@ -260,8 +264,8 @@ const Input: InputInterface = ({
       if (String(value).length === 0 ) {
         // NOTE: 編輯前
         LabelComponentElement = (
-             labelType === "topFix" 
-             ? <UpperDefaultLabel labelType={labelType} htmlFor={labelID}>{label}</UpperDefaultLabel> 
+             labelType === "topFix"
+             ? <UpperDefaultLabel labelType={labelType} htmlFor={labelID}>{label}</UpperDefaultLabel>
              : <UpperFilledLabel labelType={labelType} htmlFor={labelID}>{label}</UpperFilledLabel>
         );
 
@@ -297,6 +301,7 @@ const Input: InputInterface = ({
     <div ref={ref}>
       <InputAndMessageContainer className={className} style={style}>
         <InputContainer
+          style={containerStyle}
           onFocus={() => {
             if (disabled) return;
             setEdit(true);
@@ -315,6 +320,7 @@ const Input: InputInterface = ({
           {LabelComponentElement}
 
           <CustomInput
+            placeholderColor={placeholderColor}
             textAlign={textAlign}
             inputWidth={inputWidth}
             // NOTICE: labelID

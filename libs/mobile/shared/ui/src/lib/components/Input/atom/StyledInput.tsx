@@ -113,7 +113,8 @@ export interface StyledInputProps {
   themeType?: 'early' | 'night';
   isFocus?: boolean;
   inputWidth?: string;
-  textAlign?:'right'|'left'|'center'
+  textAlign?:'right'|'left'|'center',
+  placeholderColor?: string
 }
 
 // Input
@@ -221,7 +222,7 @@ export const StyledTopInput = styled.input<StyledInputProps>`
 
   // placeholder
   ::placeholder {
-    //color: #aaaaaa;
+    color: ${(props)=>props.placeholderColor};
   }
 
   ${(props) => {
