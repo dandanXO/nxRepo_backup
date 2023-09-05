@@ -16,6 +16,8 @@ export const i18nUploadPaymentReceiptPage: i18nComponent = {
       
       // PK
       'Click to upload': 'Click to upload',
+      'Upload your repayment receipt': 'Upload your repayment receipt',
+
     },
     es_MX: {
       // IN
@@ -28,6 +30,7 @@ export const i18nUploadPaymentReceiptPage: i18nComponent = {
     
       // PK
       'Click to upload': 'Haga clic para cargar',
+      'Upload your repayment receipt': 'Sube tu recibo de devolución',
     
     },
     bn_BD: {
