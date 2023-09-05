@@ -6,6 +6,7 @@ import { Input } from '@frontend/mobile/shared/ui';
 
 import { InputValue } from '../../../../../modules/form/InputValue';
 import ValidateInput from '../../../../components/ValidateInput';
+import { Button } from '../../../../components/layouts/Button';
 import { i18nBankBindAccountPage } from '../../translations';
 import { validationPHMobileNumber } from './validation';
 
@@ -180,7 +181,7 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
       </div>
 
       <div>
-        <button>Submit</button>
+        <Button text={t('Confirm')} outlineTheme="round" />
       </div>
     </div>
   );
