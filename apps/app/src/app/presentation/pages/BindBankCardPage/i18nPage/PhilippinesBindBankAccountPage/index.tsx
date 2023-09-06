@@ -23,7 +23,7 @@ const PhilippinesBindBankAccountPage = () => {
   );
 
   return (
-    <div className="flex h-full grow flex-col  px-1 pt-3">
+    <div className="flex h-full grow flex-col px-1 pt-3 pb-4">
       <div className="bg-cstate-info-assistant text-cstate-info-main rounded py-2 px-3 text-xs leading-[14px]">
         <span className="font-bold underline ">
           Once added, it cannot be edited anymore.

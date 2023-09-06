@@ -9,6 +9,7 @@ import {
 import ListItem from '../../../../components/ListItem';
 import Modal from '../../../../components/Modal';
 import { Button } from '../../../../components/layouts/Button';
+import { BindBankcardAction } from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
 import { i18nConfirmBindBankCardModal } from '../translations';
 
 interface IPhilippinesConfirmBindBankCardModalProps {
@@ -42,7 +43,7 @@ const PhilippinesConfirmBindBankCardModal = ({
         <ListItem
           className="mb-3"
           title={t('holderName')}
-          text={state?.holderName}
+          text={state?.cardholderName}
           titleColor={ListItemTitleStyle}
           textColor={ListItemTextStyle}
         />
@@ -55,6 +56,7 @@ const PhilippinesConfirmBindBankCardModal = ({
         />
         <div className="mt-4 flex flex-row gap-2">
           <Button
+            outlineTheme="round"
             text={t('Cancel')}
             type="ghost"
             onClick={() =>
@@ -66,7 +68,18 @@ const PhilippinesConfirmBindBankCardModal = ({
               )
             }
           />
-          <Button text={t('Confirm')} />
+          <Button
+            outlineTheme="round"
+            text={t('Confirm')}
+            onClick={() => {
+              dispatch(
+                BindBankcardAction.user.bindBankcardSaveAction({
+                  ...modalState.bindBankcardModal,
+                  confirm: true,
+                })
+              );
+            }}
+          />
         </div>
       </div>
     </Modal>

@@ -30,6 +30,7 @@ import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest'
 import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
 import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
 import { PostMXBankBindSaveRequest } from '../userService/PostMXBankBindSaveRequest';
+import { PostPHBankBindSaveRequest } from '../userService/PostPHBankBindSaveRequest';
 import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
 import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
 import { TraceBehaviorRequest } from './TraceBehaviorRequest';
@@ -195,6 +196,14 @@ export const APIV3 = createApi({
     // NOTICE: Pakistan - 绑定银行主卡或是電子錢包
     postBankBindSaveToMX: builder.mutation<{}, PostMXBankBindSaveRequest>({
       query: (requestBody: PostMXBankBindSaveRequest) => ({
+        method: 'post',
+        url: `/bank-bind/save`,
+        data: requestBody,
+      }),
+    }),
+    // NOTICE: Philippines - 绑定電子錢包
+    postBankBindSaveToPH: builder.mutation<null, PostPHBankBindSaveRequest>({
+      query: (requestBody: PostPHBankBindSaveRequest) => ({
         method: 'post',
         url: `/bank-bind/save`,
         data: requestBody,

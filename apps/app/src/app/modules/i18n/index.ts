@@ -198,15 +198,6 @@ i18next
         },
         es_PH: {
           // NOTICE: REFACTOR ME
-          common: {
-            'Welcome to Mobile': 'Welcome to Mobile !!!',
-            modal: {
-              Error: 'Error',
-              Notice: 'Aviso',
-              Success: 'Éxito!',
-              Confirm: 'Confirmar',
-            },
-          },
 
           // NOTE: BankBindPage
           [i18nBankBindAccountPage.namespace]:

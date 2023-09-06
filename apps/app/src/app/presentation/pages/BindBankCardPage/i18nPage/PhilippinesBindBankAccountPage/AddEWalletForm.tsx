@@ -20,16 +20,16 @@ interface IAddEWalletFormProps {
 const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
   const dispatch = useDispatch();
 
-  const [selectedWallet, setSelectedWallet] = useState('GCASH');
+  const [selectedWallet, setSelectedWallet] = useState('');
   const [isWalletSelected, setIsWalletSelected] = useState(true);
   const [holderName, setHolderName] = useState<InputValue<string>>({
-    data: 'Eddie',
+    data: '',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
   });
   const [mobileNumber, setMobileNumber] = useState<InputValue<string>>({
-    data: '01111111111',
+    data: '',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
@@ -37,7 +37,7 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
   const [confirmMobileNumber, setConfirmMobileNumber] = useState<
     InputValue<string>
   >({
-    data: '01111111111',
+    data: '',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
@@ -96,7 +96,7 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
           ...modalInitialState.bindBankcardModal,
           show: true,
           confirm: false,
-          holderName: holderName.data,
+          cardholderName: holderName.data,
           mobileWalletAccount: mobileNumber.data,
           walletVendor: selectedWallet,
           walletName: walletName,
