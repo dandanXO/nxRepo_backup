@@ -34,7 +34,7 @@ const theme: ICustomTailwindTheme = {
   custom_state_info_assistant: '#F0FCFF',
 
   // NOTE: background
-  custom_bg_primary: '#FDFFFE',
+  custom_bg_primary: '#F8F9F9',
   custom_bg_secondary: '#FFFFFF',
   custom_bg_tertiary: '#F6FEFB',
   custom_bg_homepage_button:

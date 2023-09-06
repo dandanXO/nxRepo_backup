@@ -6,9 +6,11 @@ import { environment } from '../../../../../../../environments/environmentModule
 import IndiaSuccessIcon from './india/IndiaSuccessIcon';
 import PakistanSuccessIcon from './pakistan/PakistanSuccessIcon';
 import MexicoSuccessIcon from './mexico/MexicoSuccessIcon';
+import PhilippinesSuccessIcon from "./philippines/PhilippinesSuccessIcon";
 
 export const SuccessICON =
       environment.country === 'in' ? IndiaSuccessIcon
-    : environment.country === 'pk' ? PakistanSuccessIcon 
+    : environment.country === 'pk' ? PakistanSuccessIcon
     : environment.country === 'mx' ? MexicoSuccessIcon
+    :environment.country === 'ph'? PhilippinesSuccessIcon
     : GeneralSuccessICON;

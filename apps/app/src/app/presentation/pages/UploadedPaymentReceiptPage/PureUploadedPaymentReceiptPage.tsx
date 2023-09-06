@@ -10,6 +10,7 @@ import UploadedPaymentReceiptPage from './index';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { PhilippinesCountry } from "../../../../../../../libs/shared/domain/src/country/PhilippinesCountry";
 const CustomPage = styled(Page)`
   display: flex;
   flex-direction: column;
@@ -58,10 +59,10 @@ export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymen
           <Description>{props.t('Thank you. Your receipt has been uploaded successfully.')}</Description>
         </Content>
         <ControlSection>
-          <Button 
+          <Button
               text={props.t('Done')}
               primaryTypeGradient={environment.country === PakistanCountry.country}
-              outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}
+              outlineTheme={[MexicoCountry.country, PhilippinesCountry.country].includes(environment.country) ? 'round' : undefined}
               onClick={() => props.navigateToLoanDetails()}
           />
         </ControlSection>
