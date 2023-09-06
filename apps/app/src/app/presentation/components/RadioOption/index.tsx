@@ -1,30 +1,55 @@
-
-import { RiRadioButtonFill } from '@react-icons/all-files/ri/RiRadioButtonFill';
 import { RiCheckboxBlankCircleLine } from '@react-icons/all-files/ri/RiCheckboxBlankCircleLine';
-import { useState } from 'react';
+import { RiRadioButtonFill } from '@react-icons/all-files/ri/RiRadioButtonFill';
+import React, { Component, useState } from 'react';
+
+import { tcx } from '../../../modules/tailwindcss';
+
 interface IRadio {
-    options: { value: string; label: string }[];
-    onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+  onChange: (value: string) => void;
+  radioOnTheme?: string;
+  radioOffTheme?: string;
+  onRadio?: React.ReactElement;
 }
 
 export const RadioOption = (props: IRadio) => {
-    const { options, onChange } = props;
-    const [selectedOption, setSelectedOption] = useState(options[0].value);
+  const { onRadio, options, onChange } = props;
+  const [selectedOption, setSelectedOption] = useState(options[0].value);
 
-    const handleClick = (value: string) => {
-        setSelectedOption(value);
-        onChange && onChange(value);
-    };
-    return (
-        <div className='flex'>
-            {options.map((option) => (
-                <div className='flex items-center mr-2 leading-none' key={option.value} onClick={() => handleClick(option.value)}>
-                    {selectedOption === option.value
-                        ? <RiRadioButtonFill className='fill-primary-main mr-1 text-lg' />
-                        : <RiCheckboxBlankCircleLine className='fill-primary-main mr-1 text-lg' />}
-                    {option.label}
-                </div>
-            ))}
+  const handleClick = (value: string) => {
+    setSelectedOption(value);
+    onChange && onChange(value);
+  };
+
+  const radioOnClassName = tcx(
+    'fill-primary-main mr-1 text-lg',
+    props.radioOnTheme
+  );
+
+  return (
+    <div className="flex">
+      {options.map((option) => (
+        <div
+          className="mr-2 flex items-center leading-none"
+          key={option.value}
+          onClick={() => handleClick(option.value)}
+        >
+          {selectedOption === option.value ? (
+            (onRadio &&
+              React.cloneElement(onRadio, { className: radioOnClassName })) ?? (
+              <RiRadioButtonFill className={radioOnClassName} />
+            )
+          ) : (
+            <RiCheckboxBlankCircleLine
+              className={tcx(
+                'fill-primary-main mr-1 text-lg',
+                props.radioOffTheme
+              )}
+            />
+          )}
+          {option.label}
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
