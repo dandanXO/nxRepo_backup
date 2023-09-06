@@ -17,7 +17,7 @@ export const MexicoUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentR
       <PageContent>
         {props.isUploading && <UploadingFileModal />}
         <div className='grow'>
-          <div className="mb-2 text-left text-sm">{props.t('Upload your repayment receipt (optional)')}</div>
+          <div className="mb-2 text-left text-sm">{props.t('Upload your repayment receipt')}</div>
           <label
             htmlFor="file"
             className="mb-4 flex h-[183px] flex-col items-center justify-center rounded-lg border-2 border-dashed border-cstate-disable-main bg-cstate-disable-assistant"
@@ -40,9 +40,17 @@ export const MexicoUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentR
               onChange={(event) => props.onFileChange(event)}
             />
           </label>
-          <div className="my-2 text-cstate-error-main">{props.fileErrorMessage}</div>
+          <div className="my-2 text-cstate-error-main">{props.t(props.fileErrorMessage)}</div>
         </div>
-        <Button outlineTheme={'round'} text={props.t('Confirm')} onClick={() => props.confirm()} />
+        <Button
+          disable={props.formFile === undefined || props.formFile === ''}
+          outlineTheme={'round'}
+          text={props.t('Confirm')}
+          onClick={() => {
+            if (props.formFile === undefined || props.formFile === '') return
+            props.confirm();
+          }}
+        />
       </PageContent>
     );
   }

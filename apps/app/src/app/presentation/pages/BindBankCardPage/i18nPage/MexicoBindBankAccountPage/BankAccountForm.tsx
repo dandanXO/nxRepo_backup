@@ -188,7 +188,6 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                 <Button
                     outlineTheme={'round'}
                     text={t('Confirm')}
-                    primaryTypeGradient={true}
                     onClick={confirmBindCard}
                 />
             </div>

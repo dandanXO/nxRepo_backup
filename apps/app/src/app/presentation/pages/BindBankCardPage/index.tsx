@@ -64,7 +64,7 @@ const BindBankCardPage = () => {
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   return (
-    <>
+    <div className='overflow-auto'>
       {isShowNavigation() && (
         <Navigation
           title={t('BindBankCardNavigator')}
@@ -73,7 +73,7 @@ const BindBankCardPage = () => {
           }}
         />
       )}
-      <PageContent>
+      <PageContent className='py-0'>
         {renderByCountry(
           {
             // NOTICE: default 0 index
@@ -135,7 +135,7 @@ const BindBankCardPage = () => {
           />
         )}
       </PageContent>
-    </>
+    </div>
   );
 };
 

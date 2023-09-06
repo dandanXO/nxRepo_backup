@@ -1,8 +1,8 @@
-import cx from 'classnames';
 import React from 'react';
 import { TailSpin } from 'react-loading-icons';
 
 import { TestingProps } from '../../../modules/TestingProps';
+import { tcx } from "../../../modules/tailwindcss";
 
 type Props = {
   text: string | React.ReactNode;
@@ -11,13 +11,14 @@ type Props = {
   loading?: boolean;
   type?: 'secondary' | 'ghost' | undefined | 'primary';
   primaryTypeGradient?: boolean;
-  ghostTheme?: 'primary' | 'secondary' | 'tertiary' | 'none' ;
-  outlineTheme?: 'round' | undefined
+  ghostTheme?: 'primary' | 'secondary' | 'tertiary' | 'none';
+  outlineTheme?: 'round' | undefined;
   disable?: boolean;
 } & TestingProps;
 
 export const Button = (props: Props) => {
-  const disable = typeof props.disable === "undefined" ? false : props.disable;
+  const disable = typeof props.disable === 'undefined' ? false : props.disable;
+
   return (
     <button
       onClick={props.onClick}
@@ -25,35 +26,39 @@ export const Button = (props: Props) => {
       data-testing-disable={props.dataTestingDisable}
       data-testing-loading={props.loading}
       // shadow-md shadow-gray-400
-      className={cx(
-        'w-full rounded-md p-2 text-center font-bold border-solid',
-        {
-          'border border-primary-main bg-primary-main text-white': (props.type === undefined || props.type === "primary") && !disable,
-        },
-        {
-          'bg-primary-gradient': props.primaryTypeGradient === true && !disable,
-        },
-        {
-          'border border-tertiary-main bg-tertiary-main text-white': props.type === 'secondary',
-        },
-        {
-          'border-cstate-disable-main bg-cstate-disable-main text-white': props.disable === true,
-        },
-        {
-          'border-[1.5px] border-primary-main bg-cbg-secondary-main text-primary-main ': props.type === 'ghost' && (props.ghostTheme === undefined || props.ghostTheme === "primary"),
-        },
-        {
-          'border-[1.5px] border-secondary-main bg-cbg-secondary-main text-secondary-main ': props.type === 'ghost' && props.ghostTheme === "secondary",
-        },
-        {
-          'border-[1.5px] border-ctext-tertiary bg-cbg-secondary-main text-ctext-tertiary ': props.type === 'ghost' && props.ghostTheme === "tertiary",
-        },
-        {
-          'bg-cbg-secondary-main text-ctext-tertiary ': props.type === 'ghost' && props.ghostTheme === "none",
-        },
-        {
-          'rounded-3xl': props.outlineTheme === "round"
-        },
+      className={tcx(
+        'w-full rounded-md border-solid p-2 text-center font-bold',
+        [
+          'border-primary-main bg-primary-main b border text-white',
+          (props.type === undefined || props.type === 'primary') && !disable,
+        ],
+        ['bg-primary-gradient', props.primaryTypeGradient === true && !disable],
+        [
+          'border-tertiary-main bg-tertiary-main border text-white',
+          props.type === 'secondary',
+        ],
+        [
+          'border-cstate-disable-main bg-cstate-disable-main text-white',
+          props.disable === true,
+        ],
+        [
+          'border-primary-main bg-cbg-secondary-main text-primary-main border-[1.5px]',
+          props.type === 'ghost' &&
+            (props.ghostTheme === undefined || props.ghostTheme === 'primary'),
+        ],
+        [
+          'border-secondary-main bg-cbg-secondary-main text-secondary-main border-[1.5px]',
+          props.type === 'ghost' && props.ghostTheme === 'secondary',
+        ],
+        [
+          'border-ctext-tertiary bg-cbg-secondary-main text-ctext-tertiary border-[1.5px]',
+          props.type === 'ghost' && props.ghostTheme === 'tertiary',
+        ],
+        [
+          'bg-cbg-secondary-main text-ctext-tertiary',
+          props.type === 'ghost' && props.ghostTheme === 'none',
+        ],
+        ['rounded-3xl', props.outlineTheme === 'round'],
         props.className
       )}
     >

@@ -2,7 +2,7 @@ import { environment } from '../../../environments/environmentModule/environment
 
 export const AppEnvironment = {
   isLocalhost: function () {
-    return window.location.hostname === 'localhost';
+    return window.location.hostname === 'localhost' || window.location.hostname.indexOf("192.168") > -1;
   },
   isDev: function () {
     return ['frontend.india-api-dev.com'].indexOf(window.location.hostname) > -1;

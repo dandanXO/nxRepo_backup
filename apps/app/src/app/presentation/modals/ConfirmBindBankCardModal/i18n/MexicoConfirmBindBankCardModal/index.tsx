@@ -21,8 +21,8 @@ const MexicoConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) =>
     const ListItemTextStlye = "text-ctext-primary w-[150px] text-right text-sm";
     const { t } = useTranslation(i18nConfirmBindBankCardModal.namespace);
     return (
-        <Modal outlineTheme='round'>
-            <div className='py-6 px-4'>
+        <Modal outlineTheme='round' className='overflow-auto'>
+            <div className='py-6 px-4 overflow-auto'>
                 <div className='text-base text-ctext-primary mb-4 font-bold'>{t('Confirm Payment Information')}</div>
                 <ListItem
                     className='mb-3'
@@ -67,7 +67,6 @@ const MexicoConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) =>
                         className={`ml-1 w-full`}
                         text={t('Confirm')}
                         outlineTheme={'round'}
-                        primaryTypeGradient={true}
                         onClick={() => {
                             dispatch(BindBankcardAction.user.bindBankcardSaveAction({
                                 ...modalState.bindBankcardModal,
