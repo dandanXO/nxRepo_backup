@@ -27,7 +27,7 @@ const PhilippinesConfirmBindBankCardModal = ({
   const dispatch = useDispatch();
 
   return (
-    <Modal outlineTheme="round">
+    <Modal outlineTheme="round" maskclassName="px-5">
       <div className="py-6 px-7">
         <div className="text-ctext-primary mb-4 text-base font-bold">
           {t('Confirm Payment Information')}
