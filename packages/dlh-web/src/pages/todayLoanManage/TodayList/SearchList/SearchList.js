@@ -55,6 +55,21 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.table.customer.type"})}>
+                                {
+                                    getFieldDecorator('isOldUser', {
+                                        initialValue: ''
+                                    })(
+                                      <Select>
+                                        <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
+                                        <Option value={'0'}><FormattedMessage id="page.table.new.guest" /></Option>
+                                        <Option value={'1'}><FormattedMessage id="page.table.old.guest" /></Option>
+                                      </Select>
+                                    )
+                                }
+                            </Form.Item>
+                        </Col>
+                        <Col lg={12} xl={8}>
                             <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.distribute.time"})}>
                                 {
                                     getFieldDecorator('disTime', {
@@ -202,6 +217,9 @@ export default Form.create({
         return {
             time: Form.createFormField({
                 value: params['time'] || []
+            }),
+            isOldUser: Form.createFormField({
+              value: params['isOldUser'] || ''
             }),
             disTime: Form.createFormField({
                 value: params['disTime'] || []
