@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
 import { MexicoCountry } from '../../../../../../libs/shared/domain/src/country/MexicoCountry';
+import { PhilippinesCountry } from '../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../environments/environmentModule/environment';
 import { AppFlag } from '../../../environments/flag';
 import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateRequest';
@@ -45,9 +46,11 @@ const useRepayCreate = () => {
             window.location.href = data.nextUrl;
 
             if (
-              [IndiaCountry.country, MexicoCountry.country].includes(
-                environment.country
-              )
+              [
+                IndiaCountry.country,
+                MexicoCountry.country,
+                PhilippinesCountry.country,
+              ].includes(environment.country)
             ) {
               navigate(
                 `${
