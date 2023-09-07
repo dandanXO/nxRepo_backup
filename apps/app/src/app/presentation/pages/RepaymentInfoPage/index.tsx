@@ -15,12 +15,7 @@ import { RepaymentDetailPageUseCaseActions } from '../RepaymentDetailPage/userUs
 
 const RepaymentInfoPage = () => {
   const navigate = useNavigate();
-  // const { state } = useLocation();
-
-  const state = {
-    payType: 'HUUH',
-    payload: {},
-  };
+  const { state } = useLocation();
 
   const dispatch = useDispatch();
 
