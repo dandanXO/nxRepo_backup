@@ -82,6 +82,12 @@ export const i18nRepaymentModal: i18nComponent = {
     },
     es_PH: {
       'Payment Amount': 'Payment Amount (₱)',
+      coupon: 'Coupon (₱)',
+      attention: 'Attention:',
+      attention1:
+        'Before repayment, please make sure that you have enough balance on your bank account.',
+      attention2:
+        'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.',
     },
   },
 };

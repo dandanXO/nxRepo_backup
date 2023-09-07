@@ -183,7 +183,7 @@ const RepaymentModal = (props: any) => {
       }
       className={'overflow-auto'}
       maskclassName={
-        environment.country === PhilippinesCountry.country ? 'px-2' : undefined
+        environment.country === PhilippinesCountry.country ? 'px-4' : undefined
       }
     >
       <>

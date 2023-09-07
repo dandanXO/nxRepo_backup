@@ -1,10 +1,11 @@
-import { environment } from '../../../../environments/environmentModule/environment';
 import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
+import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 
+import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../modules/format/formatPrice';
 import { renderByCountry } from '../../../modules/i18n';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 
 interface IMoney {
   money: number | string;
@@ -19,12 +20,20 @@ const Money = (props: IMoney) => {
     <div className="flex items-baseline">
       {props.isAdd && <div className="mr-1">+</div>}
       {props.isNagetive && <div className="mr-1">-</div>}
-      {(environment.country === IndiaCountry.country || environment.country === MexicoCountry.country) &&(
-        <div className={`${props.currencyStyle || ''} mr-1`}>{environment.currency}</div>
+      {[
+        IndiaCountry.country,
+        MexicoCountry.country,
+        PhilippinesCountry.country,
+      ].includes(environment.country) && (
+        <div className={`${props.currencyStyle || ''} mr-1`}>
+          {environment.currency}
+        </div>
       )}
       <div className={`${props.moneyStyle || ''}`}>{price}</div>
       {environment.country === PakistanCountry.country && (
-        <div className={`${props.currencyStyle || ''} ml-1`}>{environment.currency}</div>
+        <div className={`${props.currencyStyle || ''} ml-1`}>
+          {environment.currency}
+        </div>
       )}
     </div>
   );
