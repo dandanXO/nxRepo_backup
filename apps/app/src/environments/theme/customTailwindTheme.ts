@@ -30,6 +30,17 @@ import v79 from './india/v79/tailwind.theme';
 import v80 from './india/v80/tailwind.theme';
 import v81 from './india/v81/tailwind.theme';
 import v82 from './india/v82/tailwind.theme';
+import v83 from './india/v83/tailwind.theme';
+import v84 from './india/v84/tailwind.theme';
+import v85 from './india/v85/tailwind.theme';
+import v86 from './india/v86/tailwind.theme';
+import v87 from './india/v87/tailwind.theme';
+import v88 from './india/v88/tailwind.theme';
+import v89 from './india/v89/tailwind.theme';
+import v90 from './india/v90/tailwind.theme';
+import v91 from './india/v91/tailwind.theme';
+import v92 from './india/v92/tailwind.theme';
+import v93 from './india/v93/tailwind.theme';
 // NOTE: Pakistan
 import v15 from './pakistan/v15/tailwind.theme';
 import v16 from './pakistan/v16/tailwind.theme';
@@ -78,6 +89,17 @@ export const themes: IThemes = {
     v80,
     v81,
     v82,
+    v83,
+    v84,
+    v85,
+    v86,
+    v87,
+    v88,
+    v89,
+    v90,
+    v91,
+    v92,
+    v93,
   },
   pakistan: {
     v15,
