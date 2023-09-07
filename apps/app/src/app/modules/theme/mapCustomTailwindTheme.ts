@@ -19,6 +19,7 @@ export const mapCustomTailwindTheme = (variables: ITheme): IMappedTheme => {
     '--custom_bg_tertiary': variables['custom_bg_tertiary'] || '',
     '--custom_bg_homepage_button': variables['custom_bg_homepage_button'] || '',
     '--custom_bg_button': variables['custom_bg_button'] || '',
+    '--custom_bg_coupon': variables['custom_bg_coupon'] || '',
 
     // NOTE: text
     '--custom_text_primary': variables['custom_text_primary'] || '',

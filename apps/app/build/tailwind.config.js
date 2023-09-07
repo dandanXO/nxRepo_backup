@@ -116,6 +116,9 @@ module.exports = {
             backgroundColor: 'var(--primary_main) !important',
           },
         },
+        '.coupon': {
+          background: 'var(--custom_bg_coupon) !important',
+        },
         // 拉霸
         '.slider': {
           width: '100%',

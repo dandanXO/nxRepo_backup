@@ -40,6 +40,7 @@ const theme: ICustomTailwindTheme = {
   custom_bg_homepage_button:
     'linear-gradient(178.76deg, #72C70F 1.58%, #59AB0A 99.46%)', // 首頁按鈕 Get my limit
   custom_bg_button: 'linear-gradient(178.76deg, #72C70F 1.58%, #59AB0A 99.46%)', // PK primary button
+  custom_bg_coupon: 'linear-gradient(90deg, #FFC881,#FF9F03)',
 
   // NOTE: text
   custom_text_primary: '#303030',
