@@ -102,6 +102,10 @@ const PhilippinesRepaymentModal = ({
             padding: '12px 16px',
             fontSize: '14px',
           }}
+          placeholder="8,500"
+          disabled={radio === 'balance'}
+          inputLength={radio !== 'balance' ? 1 : balance?.length}
+          errorMessage={t(balanceValue.errorMessage || '')}
         />
       </div>
       <div className="mt-2">
@@ -228,7 +232,14 @@ const PhilippinesRepaymentModal = ({
             );
           }}
         />
-        <Button outlineTheme="round" text={t('Repay')} />
+        <Button
+          outlineTheme="round"
+          text={t('Repay')}
+          onClick={() => {
+            if (repayTypeList === undefined) return;
+            if (balanceValue.errorMessage === '') handleConfirm();
+          }}
+        />
       </div>
       <div className="text-ctext-tertiary mt-3 text-xs font-medium">
         <div>{t('attention')}</div>
