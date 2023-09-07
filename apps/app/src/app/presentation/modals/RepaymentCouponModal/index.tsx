@@ -61,68 +61,16 @@ const RepaymentCouponModal = () => {
     dispatch(loadingSlice.actions.updatePageLoading(isFetching));
   }, [isFetching]);
 
-  // const applicableCouponList =
-  //   currentData && currentData.length > 0
-  //     ? currentData?.filter((i) => i.applicable === true)
-  //     : [];
-  const applicableCouponList = [
-    {
-      applicable: false,
-      id: 3,
-      couponNo: 'CPR202305091653004999999',
-      couponType: 'Repayment coupon',
-      couponName: 'test11111111111111111111111',
-      couponContent: 'Get reduction when borrowing over ₱ n',
-      discountAmount: 100.0,
-      expireTime: '2023-09-10T17:50:59',
-    },
-  ];
-  // const unApplicableCouponList =
-  //   currentData && currentData.length > 0
-  //     ? currentData?.filter((i) => i.applicable === false)
-  //     : [];
-  const unApplicableCouponList = [
-    {
-      applicable: false,
-      id: 3,
-      couponNo: 'CPR202305091653004999999',
-      couponType: 'Repayment coupon',
-      couponName: 'test11111111111111111111111',
-      couponContent: 'Get reduction when borrowing over ₱ n',
-      discountAmount: 100.0,
-      expireTime: '2023-09-10T17:50:59',
-    },
-    {
-      applicable: false,
-      id: 3,
-      couponNo: 'CPR202305091653004999999',
-      couponType: 'Repayment coupon',
-      couponName: 'test11111111111111111111111',
-      couponContent: 'Get reduction when borrowing over ₱ n',
-      discountAmount: 100.0,
-      expireTime: '2023-09-10T17:50:59',
-    },
-    {
-      applicable: false,
-      id: 3,
-      couponNo: 'CPR202305091653004999999',
-      couponType: 'Repayment coupon',
-      couponName: 'test11111111111111111111111',
-      couponContent: 'Get reduction when borrowing over ₱ n',
-      discountAmount: 100.0,
-      expireTime: '2023-09-10T17:50:59',
-    },
-    {
-      applicable: false,
-      id: 3,
-      couponNo: 'CPR202305091653004999999',
-      couponType: 'Repayment coupon',
-      couponName: 'test11111111111111111111111',
-      couponContent: 'Get reduction when borrowing over ₱ n',
-      discountAmount: 100.0,
-      expireTime: '2023-09-10T17:50:59',
-    },
-  ];
+  const applicableCouponList =
+    currentData && currentData.length > 0
+      ? currentData?.filter((i) => i.applicable === true)
+      : [];
+
+  const unApplicableCouponList =
+    currentData && currentData.length > 0
+      ? currentData?.filter((i) => i.applicable === false)
+      : [];
+
   const [checkedCoupon, setCheckedCoupon] = useState(-1);
 
   const CouponOption = (props: ICouponOption) => {
