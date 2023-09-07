@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+
 import { useGetPHBindCardDropListQuery } from '../../../../../api/rtk';
 import { RootState } from '../../../../../reduxStore';
 import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
@@ -10,6 +12,8 @@ const PhilippinesBindBankAccountPage = () => {
   const { currentData } = useGetPHBindCardDropListQuery(null);
 
   const modalState = useSelector((state: RootState) => state.model);
+  const pageQueryString = useLocationOrderQueryString();
+  const cardholderName = pageQueryString.cardholderName;
 
   const walletVendorOption = currentData?.availableWalletVendors.reduce(
     (acc, current) => {
@@ -34,7 +38,10 @@ const PhilippinesBindBankAccountPage = () => {
           }
         </span>
       </div>
-      <AddEWalletForm walletVendorOption={walletVendorOption || []} />
+      <AddEWalletForm
+        walletVendorOption={walletVendorOption || []}
+        cardholderName={cardholderName}
+      />
       {modalState.bindBankcardModal.show && <ConfirmBindBankCardModal />}
     </div>
   );

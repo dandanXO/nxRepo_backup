@@ -15,15 +15,19 @@ import { validationPHMobileNumber } from './validation';
 
 interface IAddEWalletFormProps {
   walletVendorOption: { value: string; label: string }[];
+  cardholderName?: string;
 }
 
-const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
+const AddEWalletForm = ({
+  walletVendorOption,
+  cardholderName,
+}: IAddEWalletFormProps) => {
   const dispatch = useDispatch();
 
   const [selectedWallet, setSelectedWallet] = useState('');
   const [isWalletSelected, setIsWalletSelected] = useState(true);
   const [holderName, setHolderName] = useState<InputValue<string>>({
-    data: '',
+    data: cardholderName || '',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
@@ -122,6 +126,7 @@ const AddEWalletForm = ({ walletVendorOption }: IAddEWalletFormProps) => {
           <Label labelKey="walletSelectorLabel" />
           <Select
             className="bg-cTextFields-background-main rounded-md text-sm focus:outline-0"
+            isSearchable={false}
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
