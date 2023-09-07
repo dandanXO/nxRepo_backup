@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { PostRepayCreateResponse } from '../../../api/loanService/PostRepayCreateResponse';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
+import { isShowNavigation } from '../../../modules/window/isShowNavigation';
 import { CopyButton } from '../../components/Buttons';
 import { Label } from '../../components/Labels';
 import Money from '../../components/Money.tsx';
@@ -14,7 +15,12 @@ import { RepaymentDetailPageUseCaseActions } from '../RepaymentDetailPage/userUs
 
 const RepaymentInfoPage = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
+  // const { state } = useLocation();
+
+  const state = {
+    payType: 'HUUH',
+    payload: {},
+  };
 
   const dispatch = useDispatch();
 
@@ -22,22 +28,24 @@ const RepaymentInfoPage = () => {
 
   return (
     <Page className="flex flex-col">
-      <Navigation
-        title={payType}
-        back={() => {
-          navigate(
-            `${
-              PagePathEnum.RepaymentDetailPage
-            }/repayment-modal?token=${getToken()}&orderNo=${
-              orderNo ?? getOrderNo()
-            }`,
-            {
-              state: {},
-            }
-          );
-        }}
-        backgroundColor="#E70020"
-      />
+      {isShowNavigation() && (
+        <Navigation
+          title={payType}
+          back={() => {
+            navigate(
+              `${
+                PagePathEnum.RepaymentDetailPage
+              }/repayment-modal?token=${getToken()}&orderNo=${
+                orderNo ?? getOrderNo()
+              }`,
+              {
+                state: {},
+              }
+            );
+          }}
+          backgroundColor="#E70020"
+        />
+      )}
       <div className="flex-grow">
         <div className="mx-6 mt-9 flex flex-col items-center">
           <div className="text-ctext-secondary">Total de la Factura</div>
