@@ -12,14 +12,17 @@ interface IMoney {
   currencyStyle?: string;
   moneyStyle?: string;
   isNagetive?: boolean;
+  negativePosition?: 'left' | 'inner';
   isAdd?: boolean;
 }
-const Money = (props: IMoney) => {
+const Money = ({ negativePosition = 'left', ...props }: IMoney) => {
   const price = formatPrice(Number(props.money || 0));
   return (
     <div className="flex items-baseline">
       {props.isAdd && <div className="mr-1">+</div>}
-      {props.isNagetive && <div className="mr-1">-</div>}
+      {props.isNagetive && negativePosition === 'left' && (
+        <div className="mr-1">-</div>
+      )}
       {[
         IndiaCountry.country,
         MexicoCountry.country,
@@ -29,6 +32,7 @@ const Money = (props: IMoney) => {
           {environment.currency}
         </div>
       )}
+      {props.isNagetive && negativePosition === 'inner' && <div>-</div>}
       <div className={`${props.moneyStyle || ''}`}>{price}</div>
       {environment.country === PakistanCountry.country && (
         <div className={`${props.currencyStyle || ''} ml-1`}>
