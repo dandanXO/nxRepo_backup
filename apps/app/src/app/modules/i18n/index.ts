@@ -204,6 +204,10 @@ i18next
             i18nBankBindAccountPage.translation.es_PH || {},
           [i18nConfirmBindBankCardModal.namespace]:
             i18nConfirmBindBankCardModal.translation.es_PH || {},
+
+          // NOTE: LoanDetailsPage
+          [i18nRepaymentModal.namespace]:
+            i18nRepaymentModal.translation.es_PH || {},
         },
       },
 

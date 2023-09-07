@@ -59,6 +59,7 @@ const PhilippinesConfirmBindBankCardModal = ({
             outlineTheme="round"
             text={t('Cancel')}
             type="ghost"
+            ghostTheme="disable"
             onClick={() =>
               dispatch(
                 modalSlice.actions.updatebindBankcardModal({

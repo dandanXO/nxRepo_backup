@@ -2,7 +2,7 @@ import React from 'react';
 import { TailSpin } from 'react-loading-icons';
 
 import { TestingProps } from '../../../modules/TestingProps';
-import { tcx } from "../../../modules/tailwindcss";
+import { tcx } from '../../../modules/tailwindcss';
 
 type Props = {
   text: string | React.ReactNode;
@@ -11,7 +11,7 @@ type Props = {
   loading?: boolean;
   type?: 'secondary' | 'ghost' | undefined | 'primary';
   primaryTypeGradient?: boolean;
-  ghostTheme?: 'primary' | 'secondary' | 'tertiary' | 'none';
+  ghostTheme?: 'primary' | 'secondary' | 'tertiary' | 'disable' | 'none';
   outlineTheme?: 'round' | undefined;
   disable?: boolean;
 } & TestingProps;
@@ -53,6 +53,10 @@ export const Button = (props: Props) => {
         [
           'border-ctext-tertiary bg-cbg-secondary-main text-ctext-tertiary border-[1.5px]',
           props.type === 'ghost' && props.ghostTheme === 'tertiary',
+        ],
+        [
+          'border-cstate-disable-main bg-cbg-secondary-main text-cstate-disable-main border-[1.5px]',
+          props.type === 'ghost' && props.ghostTheme === 'disable',
         ],
         [
           'bg-cbg-secondary-main text-ctext-tertiary',

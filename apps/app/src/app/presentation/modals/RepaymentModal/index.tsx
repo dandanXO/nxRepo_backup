@@ -38,16 +38,8 @@ export interface IRepaymentModalProps {
   radioValue: string;
   setRadioValue: React.Dispatch<React.SetStateAction<string>>;
   balance: string;
-  balanceValue: {
-    data: string;
-    errorMessage: string;
-  };
-  setBalanceValue: React.Dispatch<
-    React.SetStateAction<{
-      data: string;
-      errorMessage: string;
-    }>
-  >;
+  balanceValue: string;
+  setBalanceValue: React.Dispatch<React.SetStateAction<string>>;
   repayTypesList: string[];
   isRepayTypesFetching: boolean;
   repayType: paymentMethodValueType;
@@ -73,10 +65,9 @@ const RepaymentModal = (props: any) => {
   const [radioValue, setRadioValue] = useState('balance');
 
   // NOTE: 變動數值
-  const [balanceValue, setBalanceValue] = useState({
-    data: `${environment.currency} ${balance}`,
-    errorMessage: '',
-  });
+  const [balanceValue, setBalanceValue] = useState(
+    `${environment.currency} ${balance}`
+  );
 
   const [balanceData, setbalanceData] = useState<InputValue<string>>({
     data: `${environment.currency} ${balance}`,
@@ -95,7 +86,9 @@ const RepaymentModal = (props: any) => {
   } = useRepayTypes();
   useEffect(() => {
     if (
-      environment.country === MexicoCountry.country &&
+      [MexicoCountry.country, PhilippinesCountry.country].includes(
+        environment.country
+      ) &&
       repaymentData.orderNo === ''
     ) {
       dispatch(RepaymentDetailPageUseCaseActions.user.repayData());
@@ -110,6 +103,7 @@ const RepaymentModal = (props: any) => {
     const currentBalance =
       Number(balanceData.data.replace(`${environment.currency}`, '').trim()) ||
       0;
+
     const repayAmount = isCustom
       ? currentBalance
       : Number(balance) - Number(coupon ? coupon.discountAmount : 0);
@@ -126,7 +120,11 @@ const RepaymentModal = (props: any) => {
   }, []);
 
   const handleConfirm = () => {
-    if (environment.country === MexicoCountry.country) {
+    if (
+      [MexicoCountry.country, PhilippinesCountry.country].includes(
+        environment.country
+      )
+    ) {
       const {
         balance,
         repayAmount,
@@ -156,7 +154,7 @@ const RepaymentModal = (props: any) => {
         );
       }
     } else {
-      if (balanceValue.data === '' || isPostRepayCreateLoading) {
+      if (balanceValue === '' || isPostRepayCreateLoading) {
         return;
       }
 
@@ -166,9 +164,8 @@ const RepaymentModal = (props: any) => {
           ? location.state.coupon
           : null;
       const repaymentAmount =
-        parseInt(
-          balanceValue.data.replace(`${environment.currency}`, '').trim()
-        ) - Number(coupon?.discountAmount || 0);
+        parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) -
+        Number(coupon?.discountAmount || 0);
       handlePostRepayCreate(
         false,
         orderNo,
@@ -243,9 +240,10 @@ const RepaymentModal = (props: any) => {
               <PhilippinesRepaymentModal
                 radioValue={radioValue}
                 setRadioValue={setRadioValue}
-                balanceValue={balanceValue}
-                setBalanceValue={setBalanceValue}
+                balanceValue={balanceData}
+                setBalanceValue={setbalanceData}
                 handleConfirm={handleConfirm}
+                handleRepayData={handleRepayData}
               />
             ),
           },
