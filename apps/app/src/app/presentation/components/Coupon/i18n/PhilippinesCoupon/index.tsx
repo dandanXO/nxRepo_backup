@@ -15,6 +15,10 @@ const PhilippinesCoupon = ({
   onClick,
   buttonText = 'USE NOW',
 }: ICouponProps) => {
+  const expiredDate = moment(expireTime);
+  const notifyDate = expiredDate.subtract(3, 'days');
+  const shouldNotify = moment() > notifyDate;
+
   return (
     <div
       className={tcx('coupon mb-3 flex w-full rounded-lg', [
@@ -28,7 +32,12 @@ const PhilippinesCoupon = ({
           <div className="text-sm font-bold">{couponName}</div>
           <div className="text-xs">{couponContent}</div>
         </div>
-        <div className="mt-[7px] text-[10px]">
+        <div
+          className={tcx('mt-[7px] text-[10px] text-white', [
+            'text-cstate-error-main',
+            status !== 'unUsable' && shouldNotify,
+          ])}
+        >
           {moment(expireTime).format('MM-DD-YYYY HH:mm')}
         </div>
       </div>

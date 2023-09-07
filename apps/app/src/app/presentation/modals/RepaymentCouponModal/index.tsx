@@ -92,6 +92,36 @@ const RepaymentCouponModal = () => {
       discountAmount: 100.0,
       expireTime: '2023-09-10T17:50:59',
     },
+    {
+      applicable: false,
+      id: 3,
+      couponNo: 'CPR202305091653004999999',
+      couponType: 'Repayment coupon',
+      couponName: 'test11111111111111111111111',
+      couponContent: 'Get reduction when borrowing over ₱ n',
+      discountAmount: 100.0,
+      expireTime: '2023-09-10T17:50:59',
+    },
+    {
+      applicable: false,
+      id: 3,
+      couponNo: 'CPR202305091653004999999',
+      couponType: 'Repayment coupon',
+      couponName: 'test11111111111111111111111',
+      couponContent: 'Get reduction when borrowing over ₱ n',
+      discountAmount: 100.0,
+      expireTime: '2023-09-10T17:50:59',
+    },
+    {
+      applicable: false,
+      id: 3,
+      couponNo: 'CPR202305091653004999999',
+      couponType: 'Repayment coupon',
+      couponName: 'test11111111111111111111111',
+      couponContent: 'Get reduction when borrowing over ₱ n',
+      discountAmount: 100.0,
+      expireTime: '2023-09-10T17:50:59',
+    },
   ];
   const [checkedCoupon, setCheckedCoupon] = useState(-1);
 
