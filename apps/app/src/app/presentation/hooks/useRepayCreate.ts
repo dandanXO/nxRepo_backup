@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
+import { MexicoCountry } from '../../../../../../libs/shared/domain/src/country/MexicoCountry';
 import { environment } from '../../../environments/environmentModule/environment';
 import { AppFlag } from '../../../environments/flag';
 import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateRequest';
@@ -42,20 +43,26 @@ const useRepayCreate = () => {
           if (data.nextStep === 'jumpUrl') {
             // NOTICE: 跳轉至付款頁面
             window.location.href = data.nextUrl;
-          }
-          if (environment.country === IndiaCountry.country) {
-            navigate(
-              `${
-                PagePathEnum.RepaymentDetailPage
-              }?token=${getToken()}&orderNo=${props.orderNo}`,
-              { replace: true }
-            );
 
-            // NOTICE: 取得是否要跳出複借預約彈窗
-            dispatch(
-              RepaymentDetailPageUseCaseActions.system.showReservation()
-            );
+            if (
+              [IndiaCountry.country, MexicoCountry.country].includes(
+                environment.country
+              )
+            ) {
+              navigate(
+                `${
+                  PagePathEnum.RepaymentDetailPage
+                }?token=${getToken()}&orderNo=${props.orderNo}`,
+                { replace: true }
+              );
+
+              // NOTICE: 取得是否要跳出複借預約彈窗
+              dispatch(
+                RepaymentDetailPageUseCaseActions.system.showReservation()
+              );
+            }
           }
+
           resolve('');
         })
         .catch((err: CustomAxiosError) => {
