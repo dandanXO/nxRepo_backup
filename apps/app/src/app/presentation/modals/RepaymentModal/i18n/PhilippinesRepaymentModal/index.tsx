@@ -102,7 +102,7 @@ const PhilippinesRepaymentModal = ({
             padding: '12px 16px',
             fontSize: '14px',
           }}
-          placeholder="8,500"
+          placeholder="Amount"
           disabled={radio === 'balance'}
           inputLength={radio !== 'balance' ? 1 : balance?.length}
           errorMessage={t(balanceValue.errorMessage || '')}
