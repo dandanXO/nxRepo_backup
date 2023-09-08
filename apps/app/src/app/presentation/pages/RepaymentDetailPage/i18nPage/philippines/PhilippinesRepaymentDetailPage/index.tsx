@@ -19,6 +19,7 @@ import Divider from '../../../../../components/Divider';
 import ListItem from '../../../../../components/ListItem';
 import Money from '../../../../../components/Money.tsx';
 import { Button } from '../../../../../components/layouts/Button';
+import { PageContent } from '../../../../../components/layouts/PageContent';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
 import ReservationProductsModal from '../../../../../modals/ReservationProductsModal';
 import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
@@ -149,7 +150,7 @@ const PhilippinesRepaymentDetailPage = ({
   const notExtendAndPayOff = !['EXTEND', 'PAY_OFF'].includes(status);
 
   return (
-    <>
+    <PageContent className="p-0">
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
       {modalState.reservationProductsModal.show && <ReservationProductsModal />}
       {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
@@ -336,9 +337,61 @@ const PhilippinesRepaymentDetailPage = ({
               }}
             />
           </div>
+          <div className="text-ctext-secondary mb-3 grow px-5 text-xs">
+            <div>Attention：</div>
+            <ul className="list-outside list-decimal pl-3 pt-1">
+              <li>
+                Before repayment, please make sure that you have enough balance
+                on your bank account.
+              </li>
+              <li>
+                {'Overdue for more than '}
+                <span className="text-cstate-info-main">{'N days '}</span>
+                will not be able to extend or re-loan，please ensure you make
+                repayments on time to maintain uninterrupted access to our
+                services.
+              </li>
+              <li>
+                {
+                  'Email us if you have any questions about your responsibilities or for more information. '
+                }
+                <span className="text-cstate-info-main">mail@mail.com</span>
+              </li>
+              <li>
+                <div className="font-bold">
+                  After completing your repayment, if your loan is not fully
+                  settled within 10 minutes, please upload the screenshot for
+                  our manual review.
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div className="bg-secondary-assistant py-3 px-5">
+            <div className="text-ctext-primary text-xs">
+              After completing the repayment, take a screenshot and upload your
+              repayment receipt here ▼
+            </div>
+            <Button
+              className="mt-3"
+              text={t('Upload Receipt')}
+              type="ghost"
+              ghostTheme="secondary"
+              outlineTheme="round"
+              onClick={() => {
+                navigate(
+                  `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: { orderNo },
+                  }
+                );
+              }}
+            />
+          </div>
         </>
       )}
-    </>
+    </PageContent>
   );
 };
 
