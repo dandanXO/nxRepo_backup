@@ -83,8 +83,8 @@ const AddEWalletForm = ({
     return (
       isWalletValid &&
       isHolderNameValid &&
-      isMobileNumberValid &&
-      isConfirmMobileNumberValid &&
+      isMobileNumberValid.isValidation &&
+      isConfirmMobileNumberValid.isValidation &&
       isCompareMobileNumberValid
     );
   };
