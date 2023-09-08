@@ -4,20 +4,27 @@ import moment from 'moment/moment';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+
+import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
 import { GetLoanDetailResponse } from '../../../../../../api/loanService/GetLoanDetailResponse';
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../api/rtk/old/getLoanDetail';
+import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
+import { getToken } from '../../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import { tcx } from '../../../../../../modules/tailwindcss';
 import { RootState } from '../../../../../../reduxStore';
 import Divider from '../../../../../components/Divider';
 import ListItem from '../../../../../components/ListItem';
 import Money from '../../../../../components/Money.tsx';
+import { Button } from '../../../../../components/layouts/Button';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
 import ReservationProductsModal from '../../../../../modals/ReservationProductsModal';
 import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
+import VIPIcon from './VIPIcon';
 
 interface IPhilippinesRepaymentDetailPage {
   currentData?: GetLoanDetailResponse;
@@ -28,9 +35,10 @@ const PhilippinesRepaymentDetailPage = ({
   currentData,
   isFetching,
 }: IPhilippinesRepaymentDetailPage) => {
-  const [detailExpanded, setDetailExpaned] = useState(true);
+  const [detailExpanded, setDetailExpanded] = useState(false);
 
   const { t } = useTranslation(i18nLoanDetailsPage.namespace);
+  const navigate = useNavigate();
   const modalState = useSelector((state: RootState) => state.model);
 
   const finalItems = useDynamicChargeFeeList(
@@ -55,6 +63,10 @@ const PhilippinesRepaymentDetailPage = ({
     balance = 0,
     applyDate = '',
   } = currentData || {};
+  const repaymentDate =
+    repayRecords.length > 0
+      ? repayRecords[repayRecords.length - 1].repayDate
+      : '';
 
   const StatusTag = ({ status }: { status: string }) => (
     <div
@@ -87,10 +99,54 @@ const PhilippinesRepaymentDetailPage = ({
     />
   );
 
+  const ShowRecordItem = ({
+    show = false,
+    titleKey,
+    text,
+    titleColor = '',
+    textColor = '',
+  }: {
+    show?: boolean;
+    titleKey: string;
+    titleColor?: string;
+    textColor?: string;
+    text?: string | React.ReactElement | number;
+  }) => (
+    <ListItem
+      className="mb-0 text-sm font-medium"
+      titleColor={titleColor ? titleColor : 'text-ctext-secondary'}
+      textColor={textColor ? textColor : 'text-ctext-primary'}
+      title={
+        !show ? (
+          t(titleKey)
+        ) : (
+          <div className="flex items-center gap-2">
+            <div>{t(titleKey)}</div>
+            <div
+              onClick={() => {
+                navigate(
+                  `amount-repaid-record-modal?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: { repayRecords },
+                  }
+                );
+              }}
+            >
+              <img src={AmountPaidIcon} alt="amountPaid" />
+            </div>
+          </div>
+        )
+      }
+      text={text}
+    />
+  );
+
   const formatDate = (dateString: string) =>
     moment(dateString).format('MM-DD-YYYY');
 
-  const expandable = !['EXTEND', 'PAY_OFF'].includes(status);
+  const notExtendAndPayOff = !['EXTEND', 'PAY_OFF'].includes(status);
 
   return (
     <>
@@ -112,16 +168,28 @@ const PhilippinesRepaymentDetailPage = ({
           titleKey="Due Date"
           text={applyDate ? formatDate(dueDate) : ''}
         />
+        {status === 'PAY_OFF' && (
+          <SelfListItem
+            titleKey="Repayment Date"
+            text={repaymentDate ? formatDate(repaymentDate) : ''}
+          />
+        )}
+        {status === 'EXTEND' && (
+          <SelfListItem
+            titleKey="Extension Date"
+            text={extendDate ? formatDate(extendDate) : ''}
+          />
+        )}
       </div>
       <div className="text-ctext-primary px-5">
         <div className="border-ctext-divider border-t border-b">
-          {expandable && (
+          {notExtendAndPayOff && (
             <div
               className={tcx('flex items-center justify-between pt-3', [
                 'pb-3',
                 !detailExpanded,
               ])}
-              onClick={() => setDetailExpaned(!detailExpanded)}
+              onClick={() => setDetailExpanded(!detailExpanded)}
             >
               <div className="font-medium">{t('Payment Details')}</div>
               {detailExpanded ? (
@@ -131,11 +199,11 @@ const PhilippinesRepaymentDetailPage = ({
               )}
             </div>
           )}
-          {(detailExpanded || !expandable) && (
+          {(detailExpanded || !notExtendAndPayOff) && (
             <div
               className={tcx('mb-2 mt-2 text-sm', [
-                'bg-cbg-primary p-3',
-                expandable,
+                'bg-cbg-primary p-3 ',
+                notExtendAndPayOff,
               ])}
             >
               {status !== 'EXTEND' && (
@@ -174,11 +242,102 @@ const PhilippinesRepaymentDetailPage = ({
                 text={<Money money={penaltyInterest} />}
                 textColor={status === 'OVERDUE' ? Status(status).color : ''}
               />
+
               <Divider />
+
+              <SelfListItem
+                titleKey="Reduction Amount"
+                text={<Money money={reductionAmount} isNagetive />}
+              />
+              <ShowRecordItem
+                show={!notExtendAndPayOff}
+                titleKey="Amount Repaid"
+                text={<Money money={paidAmount} isNagetive />}
+              />
             </div>
           )}
         </div>
       </div>
+
+      <div className="py-3 px-5">
+        {status !== 'EXTEND' && (
+          <ShowRecordItem
+            show={extendable}
+            titleKey="Repayment Amount"
+            text={<Money money={balance} />}
+            titleColor={
+              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+            }
+            textColor={
+              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+            }
+          />
+        )}
+        {status === 'EXTEND' && (
+          <ShowRecordItem
+            show={false}
+            titleKey="Total Extension Fee"
+            text={<Money money={totalRepayAmount} />}
+            titleColor="text-ctext-primary"
+            textColor="text-ctext-primary"
+          />
+        )}
+      </div>
+
+      {notExtendAndPayOff && (
+        <>
+          <div className="bg-primary-assistant text-primary-main flex items-center gap-2 py-2 px-5 text-left text-sm">
+            <div className="w-fit">
+              <VIPIcon />
+            </div>
+
+            <div>
+              <span className="font-bold"> {t('VIP Benefits!')}</span>{' '}
+              {t("You'll enjoy")}
+              <span className="font-bold"> {t('higher loan limits')}</span>{' '}
+              {t('and')}
+              <span className="font-bold"> {t('lower interest rates')}</span>
+              {t('with responsible repayments!')}
+            </div>
+          </div>
+
+          <div className="flex gap-2 py-3 px-5">
+            {extendable !== undefined && extendable && (
+              <Button
+                text={t('Extend')}
+                outlineTheme="round"
+                type="ghost"
+                ghostTheme="primary"
+                onClick={() => {
+                  navigate(
+                    `extend-confirm-modal?token=${getToken()}&orderNo=${
+                      orderNo ?? getOrderNo()
+                    }`,
+                    {
+                      state: currentData,
+                    }
+                  );
+                }}
+              />
+            )}
+            <Button
+              text={t('Repay')}
+              outlineTheme="round"
+              onClick={() => {
+                if (currentData === undefined) return;
+                navigate(
+                  `repayment-modal?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: currentData,
+                  }
+                );
+              }}
+            />
+          </div>
+        </>
+      )}
     </>
   );
 };
