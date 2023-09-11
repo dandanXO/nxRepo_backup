@@ -154,6 +154,7 @@ const PhilippinesExtendModal = ({
               ...baseStyles,
               margin: 0,
               padding: 0,
+              boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.2)',
             }),
           }}
           placeholder="Select"
