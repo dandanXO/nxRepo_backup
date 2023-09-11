@@ -208,6 +208,7 @@ i18next
           // NOTE: LoanDetailsPage
           [i18nRepaymentModal.namespace]:
             i18nRepaymentModal.translation.es_PH || {},
+          [i18nExtendModal.namespace]: i18nExtendModal.translation.es_PH || {},
         },
       },
 
