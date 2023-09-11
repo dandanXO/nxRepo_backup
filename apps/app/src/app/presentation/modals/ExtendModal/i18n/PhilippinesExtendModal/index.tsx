@@ -146,6 +146,9 @@ const PhilippinesExtendModal = ({
               ...baseStyles,
               backgroundColor: isSelected ? '#F5F5F5' : '',
               color: 'black',
+              ':hover': {
+                backgroundColor: window.theme?.textFiled?.background?.main,
+              },
             }),
             menuList: (baseStyles) => ({
               ...baseStyles,
