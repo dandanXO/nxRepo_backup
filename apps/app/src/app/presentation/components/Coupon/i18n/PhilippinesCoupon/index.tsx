@@ -31,7 +31,7 @@ const PhilippinesCoupon = ({
       className={tcx(
         'mb-3 flex w-full rounded-lg',
         ['opacity-50', status === 'unUsable'],
-        ['coupon', !disable],
+        ['bg-coupon', !disable],
         [
           'border-cstate-disable-variant bg-cstate-disable-assistant border',
           disable,

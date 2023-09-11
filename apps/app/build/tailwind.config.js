@@ -116,7 +116,16 @@ module.exports = {
             backgroundColor: 'var(--primary_main) !important',
           },
         },
-        '.coupon': {
+        'bg-account': {
+          backgroundColor: '--custom_bg_account',
+        },
+        'bg-modal': {
+          backgroundColor: 'var(--custom_bg_account)',
+        },
+        'bg-disabled': {
+          backgroundColor: 'var(--custom_bg_disabled)',
+        },
+        '.bg-coupon': {
           background: 'var(--custom_bg_coupon) !important',
         },
         // 拉霸

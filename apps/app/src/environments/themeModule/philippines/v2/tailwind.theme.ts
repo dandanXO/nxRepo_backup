@@ -2,51 +2,48 @@ import { ICustomTailwindTheme } from '../../../../app/modules/theme/ICustomTailw
 
 const theme: ICustomTailwindTheme = {
   // NOTE: color
-  primary_main: '#29C6C9',
-  primary_variant: '#219EA1',
-  primary_assistant: '#ECF7F8',
+  primary_main: '#5C99D2',
+  primary_variant: '#4378B4',
+  primary_assistant: '#E0F4FC',
 
-  secondary_main: '#EC6F2F',
-  secondary_variant: '#C85D27',
-  secondary_assistant: '#FEF7F3',
+  secondary_main: '#EF8152',
+  secondary_variant: '#CD5D3B',
+  secondary_assistant: '#FEEFDC',
 
-  tertiary_main: '#5A74DD',
-  tertiary_variant: '#4C64C4',
-  tertiary_assistant: '#EEF1FC',
+  tertiary_main: '#68C1CA',
+  tertiary_variant: '#4C9CAD',
+  tertiary_assistant: '#E3FCF6',
 
   // NOTE: State
-  custom_state_disable_main: '#CBCBCB',
-  custom_state_disable_variant: '#979797',
-  custom_state_disable_assistant: '#F8F9F9',
+  custom_state_disable_main: '#C8C8C8',
+  custom_state_disable_variant: '#949494',
+  custom_state_disable_assistant: '#F7F7F7',
 
-  custom_state_success_main: '#53BF2F',
-  custom_state_success_assistant: '#F8FFEF',
+  custom_state_success_main: '#479F20',
+  custom_state_success_assistant: '#ECFBD5',
 
-  custom_state_warning_main: '#FFC711',
-  custom_state_warning_assistant: '#FFFCEA',
+  custom_state_warning_main: '#F9DA0C',
+  custom_state_warning_assistant: '#FEFBCE',
 
-  custom_state_error_main: '#FF3A4E',
-  custom_state_error_variant: '',
-  custom_state_error_assistant: '#FFF4F0',
+  custom_state_error_main: '#FF4C30',
+  custom_state_error_assistant: '#FFE8D5',
 
-  custom_state_info_main: '#239AFC',
-  custom_state_info_variant: '',
-  custom_state_info_assistant: '#F0FCFF',
+  custom_state_info_main: '#80A9FC',
+  custom_state_info_assistant: '#E5F1FE',
 
   // NOTE: background
-  custom_bg_primary: '#F8F9F9',
+  custom_bg_primary: '#FBFEFF',
   custom_bg_secondary: '#FFFFFF',
-  custom_bg_tertiary: '#F6FEFB',
-  custom_bg_homepage_button:
-    'linear-gradient(178.76deg, #72C70F 1.58%, #59AB0A 99.46%)', // 首頁按鈕 Get my limit
-  custom_bg_button: 'linear-gradient(178.76deg, #72C70F 1.58%, #59AB0A 99.46%)', // PK primary button
-  custom_bg_coupon: 'linear-gradient(90deg, #FFC881,#FF9F03)',
+  custom_bg_account: '#FFFFFF',
+  custom_bg_modal: '#FFFFFF',
+  custom_bg_disabled: '#EFEFEF',
+  custom_bg_coupon: 'linear-gradient(90deg, #ECBD54,#E19E20)',
 
   // NOTE: text
-  custom_text_primary: '#303030',
-  custom_text_secondary: '#767676',
-  custom_text_tertiary: '#B3B3B3',
-  custom_text_divider: '#E8E8E8',
+  custom_text_primary: '#444444',
+  custom_text_secondary: '#6F6F6F',
+  custom_text_tertiary: '#929292',
+  custom_text_divider: '#EDEDED',
 
   // NOTE: Text Fields
   custom_text_fields_background_main: '#F7F8FA',
