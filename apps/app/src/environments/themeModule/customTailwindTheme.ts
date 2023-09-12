@@ -99,7 +99,7 @@ export const themes: IThemes = {
     v1,
   },
   [AllCountriesEnum.philippines]: {
-    PHv1,
-    PHv2,
+    v1: PHv1,
+    v2: PHv2,
   },
 };
