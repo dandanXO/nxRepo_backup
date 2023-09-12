@@ -3,15 +3,18 @@ import { environment } from 'apps/app/src/environments/environmentModule/environ
 import { takeLatest } from 'redux-saga/effects';
 
 import { BindBankcardAction } from './bindBankcardAction';
+import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
 
 export function* watchBindBankcardSaga() {
   const countryName = environment.countryName;
-  const { bindBankcardSaga } = yield import(
-    `./i18n/${countryName}/bindBankcardSaga`
-  );
-  yield takeLatest(
-    BindBankcardAction.user.bindBankcardSaveAction.type,
-    errorFallback,
-    bindBankcardSaga
-  );
+  if (countryName !== IndiaCountry.countryName) {
+    const { bindBankcardSaga } = yield import(
+      `./i18n/${countryName}/bindBankcardSaga`
+    );
+    yield takeLatest(
+      BindBankcardAction.user.bindBankcardSaveAction.type,
+      errorFallback,
+      bindBankcardSaga
+    );
+  }
 }

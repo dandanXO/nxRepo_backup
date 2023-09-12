@@ -16,7 +16,7 @@ import {useEffect, useMemo} from "react";
 import {useDynamicChargeFeeList} from "../../../hooks/useDynamicChargeFeeList";
 import {GetLoanDetailChargeFeeDetailItems} from "../../../../../../api/rtk/old/getLoanDetail";
 import {formatDate} from "../../../../../../modules/format/formatDate";
-import VipIcon from '../../../../../components/images/VipIcon.svg';
+import defaultVipIcon from '../../../../../components/images/VipIcon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
 import { RootState } from '../../../../../../reduxStore';
@@ -25,6 +25,7 @@ import ReservationSuccessModal from '../../../../../modals/ReservationSuccessMod
 import { modalInitialState, modalSlice } from '../../../../../../reduxStore/modalSlice';
 import { useTranslation } from 'react-i18next';
 import { i18nLoanDetailsPage } from '../../../translations';
+import { NativeAppInfo } from 'apps/app/src/app/persistant/nativeAppInfo';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -57,6 +58,8 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     balance = 0,
     applyDate = '',
   } = currentData ?? {};
+
+  const VipIcon = require(`../../../../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_vip_card.png`);
 
   const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
 
@@ -227,7 +230,7 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
         {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
             <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
-                <img src={VipIcon} alt="" />
+                <div className='w-1/3 flex items-center'><img src={VipIcon || defaultVipIcon} alt="" /></div>
                 <div className='ml-2'>
                     <span className='font-bold'> {t('VIP Benefits!')}</span> {t("You'll enjoy")}
                     <span className='font-bold'> {t('higher loan limits')}</span> {t('and')}
