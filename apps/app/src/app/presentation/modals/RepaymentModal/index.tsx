@@ -70,7 +70,10 @@ const RepaymentModal = (props: any) => {
   );
 
   const [balanceData, setbalanceData] = useState<InputValue<string>>({
-    data: `${environment.currency} ${balance}`,
+    data:
+      environment.country === PhilippinesCountry.country
+        ? `${balance}`
+        : `${environment.currency} ${balance}`,
     isValidation: false,
     errorMessage: '',
     isEdit: false,
