@@ -263,7 +263,7 @@ const PhilippinesRepaymentDetailPage = ({
       <div className="py-3 px-5">
         {status !== 'EXTEND' && (
           <ShowRecordItem
-            show={extendable}
+            show={notExtendAndPayOff}
             titleKey="Repayment Amount"
             text={<Money money={balance} />}
             titleColor={
