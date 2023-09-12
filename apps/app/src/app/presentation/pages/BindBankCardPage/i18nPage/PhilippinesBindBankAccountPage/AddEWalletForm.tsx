@@ -206,6 +206,7 @@ const AddEWalletForm = ({
               padding: '12px 16px',
               fontSize: '14px',
             }}
+            onCopy={() => null}
           />
         </div>
         <div className="mt-3">
@@ -225,6 +226,7 @@ const AddEWalletForm = ({
             }}
             placeholder={t('mobileNumber')}
             placeholderColor={window.theme?.input?.placeholder}
+            onCopy={() => null}
           />
         </div>
 
@@ -247,6 +249,7 @@ const AddEWalletForm = ({
             placeholder={t('confirmMobileNumber')}
             placeholderColor={window.theme?.input?.placeholder}
             inputLength={11}
+            onCopy={() => null}
           />
         </div>
       </div>
