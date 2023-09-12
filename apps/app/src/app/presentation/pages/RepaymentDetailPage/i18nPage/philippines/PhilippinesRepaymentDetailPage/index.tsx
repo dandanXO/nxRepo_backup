@@ -202,7 +202,7 @@ const PhilippinesRepaymentDetailPage = ({
           )}
           {(detailExpanded || !notExtendAndPayOff) && (
             <div
-              className={tcx('mb-2 mt-2 text-sm', [
+              className={tcx('mb-3 mt-2 text-sm', [
                 'bg-cbg-primary p-3 ',
                 notExtendAndPayOff,
               ])}
