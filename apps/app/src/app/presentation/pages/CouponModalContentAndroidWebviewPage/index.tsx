@@ -1,20 +1,32 @@
 import { environment } from 'apps/app/src/environments/environmentModule/environment';
 import CouponImageSource from '../../../../assets/coupon.png';
-import { AllCountriesEnum } from 'libs/shared/domain/src/country/AllCountry';
 import { AllCountryIdentityName } from 'libs/shared/domain/src/country/enum/AllCountryIdentityName';
 import MexicoCoupon from './i18n/MexicoCoupon.svg';
 import PhilippinesCoupon from './i18n/PhilippinesCoupon.png';
 
+import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
+
 const CouponModalContentAndroidWebviewPage = () => {
-  const couponImage = {
+
+    const defaultCouponImage = {
     [AllCountryIdentityName.IN]: CouponImageSource,
     [AllCountryIdentityName.PK]: CouponImageSource,
     [AllCountryIdentityName.BN]: CouponImageSource,
     [AllCountryIdentityName.MX]: MexicoCoupon,
     [AllCountryIdentityName.PH]: PhilippinesCoupon,
-  }[environment.country]
+  }[environment.country];
 
-  return <img src={couponImage ? couponImage : CouponImageSource} />;
+  const couponImage = require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_coupon.png`)
+
+  const imageOnError = (event:any) => {
+    event.currentTarget.src = defaultCouponImage;
+  };
+
+  return <img src={couponImage || defaultCouponImage} onError={imageOnError}  alt="coupon" />;
 };
 
 export default CouponModalContentAndroidWebviewPage;
+
+
+
+
