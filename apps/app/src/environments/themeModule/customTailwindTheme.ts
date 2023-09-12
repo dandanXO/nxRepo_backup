@@ -28,8 +28,14 @@ import v76 from './india/v76/tailwind.theme';
 import v77 from './india/v77/tailwind.theme';
 import v78 from './india/v78/tailwind.theme';
 import v79 from './india/v79/tailwind.theme';
+
 // NOTE: Mexico
 import v1 from './mexico/v1/tailwind.theme';
+import v2 from './mexico/v2/tailwind.theme';
+import v3 from './mexico/v3/tailwind.theme';
+import v4 from './mexico/v4/tailwind.theme';
+import v7 from './mexico/v7/tailwind.theme';
+
 // NOTE: Pakistan
 import v15 from './pakistan/v15/tailwind.theme';
 import v16 from './pakistan/v16/tailwind.theme';
@@ -97,6 +103,10 @@ export const themes: IThemes = {
   },
   [AllCountriesEnum.mexico]: {
     v1,
+    v2,
+    v3,
+    v4,
+    v7,
   },
   [AllCountriesEnum.philippines]: {
     v1: PHv1,

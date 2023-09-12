@@ -209,13 +209,14 @@ export const getAppInfo = (): IAndroidAppInfo => {
             }
         } else if (environment.country === MexicoCountry.country) {
 
+          const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '1';
           // 本地開發
           const localAppInfo: IAndroidAppInfo = {
             domain: 'https://www.oasis-gold.com',
             environment: AllCountriesEnum.mexico,
             packageId: 'com.pak.app.yesloan.android',
             appName: 'Local MX APP',
-            uiVersion: "1",
+            uiVersion: uiVersion,
             token: null,
             mode: 'H5',
             phoneNo: '',
