@@ -4,31 +4,28 @@ export const i18nProduct: i18nComponent = {
   namespace: 'component/i18nProduct',
   translation: {
     en_US: {
-
       //IN
-      'Terms': 'Terms',
-      'days': 'days',
+      Terms: 'Terms',
+      days: 'days',
       'Disbursal Amount': 'Disbursal Amount',
       'Due Date': 'Due Date',
 
       //MX
       'Loan Amount': 'Loan amount',
       'Service fee': 'Service fee',
-      'IVA': 'IVA',
+      IVA: 'IVA',
 
-
+      // PH
+      interestFee: 'Interest Fee',
+      totalAmountToPay: 'Total Amount to Pay',
     },
     es_MX: {
-
       'Loan Amount': 'Monto del préstmo',
       'Service fee': 'Cargo por servicio',
-      'IVA': 'IVA',
+      IVA: 'IVA',
       'Disbursal Amount': 'Monto a Desembolsar',
       'Due Date': 'Fecha de Vencimiento',
-
     },
-    bn_BD: {
-
-    },
+    bn_BD: {},
   },
 };

@@ -41,7 +41,7 @@ const ReservationProductsModal = () => {
                 terms: 0,
                 disbursalPrice: i.disbursalAmount,
                 dueDate: i.dueDate,
-                interestPrice: 0,
+                interestPrice: (i.terms && i.productAmount) ? i.productAmount * 0.001 * i.terms: 0,
             },
             chargeFeeDetails:i.chargeFeeDetails,
         };
@@ -102,7 +102,7 @@ const ReservationProductsModal = () => {
                                         checked: true,
                                         onClick: (isChecked) => handleProductSelection(isChecked, product),
                                     }}
-                                    chargeFeeDetails={product.chargeFeeDetails} 
+                                    chargeFeeDetails={product.chargeFeeDetails}
                                 />
                             )
                         })}
