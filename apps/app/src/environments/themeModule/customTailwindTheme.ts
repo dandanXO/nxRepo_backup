@@ -1,3 +1,4 @@
+import { AllCountriesEnum } from '../../../../../libs/shared/domain/src/country/AllCountry';
 import { IThemes } from '../../app/modules/theme/types';
 // NOTE: India
 import v38 from './india/v38/tailwind.theme';
@@ -27,8 +28,8 @@ import v76 from './india/v76/tailwind.theme';
 import v77 from './india/v77/tailwind.theme';
 import v78 from './india/v78/tailwind.theme';
 import v79 from './india/v79/tailwind.theme';
-
-
+// NOTE: Mexico
+import v1 from './mexico/v1/tailwind.theme';
 // NOTE: Pakistan
 import v15 from './pakistan/v15/tailwind.theme';
 import v16 from './pakistan/v16/tailwind.theme';
@@ -41,14 +42,9 @@ import v22 from './pakistan/v22/tailwind.theme';
 import v23 from './pakistan/v23/tailwind.theme';
 import v24 from './pakistan/v24/tailwind.theme';
 import v25 from './pakistan/v25/tailwind.theme';
-import {AllCountriesEnum} from "../../../../../libs/shared/domain/src/country/AllCountry";
-
-// NOTE: Mexico
-import v1 from './mexico/v1/tailwind.theme';
-
+import PHv1 from './philippines/v1/tailwind.theme';
 // NOTE: Philippines
-import v2 from './philippines/v2/tailwind.theme';
-
+import PHv2 from './philippines/v2/tailwind.theme';
 
 export const DEFAULT_INDIA_THEME: string = 'v55';
 export const DEFAULT_PAKISTAN_THEME: string = 'v15';
@@ -57,52 +53,53 @@ export const DEFAULT_PHILIPPINES_THEME: string = 'v2';
 
 // REFACTOR:
 export const themes: IThemes = {
-    [AllCountriesEnum.india]: {
-        v38,
-        v49,
-        v55,
-        v56,
-        v57,
-        v58,
-        v59,
-        v60,
-        v61,
-        v62,
-        v63,
-        v64,
-        v65,
-        v66,
-        v67,
-        v68,
-        v69,
-        v70,
-        v71,
-        v72,
-        v73,
-        v74,
-        v75,
-        v76,
-        v77,
-        v78,
-        v79,
-    },
-    [AllCountriesEnum.pakistan]: {
-        v15,
-        v16,
-        v17,
-        v18,
-        v19,
-        v20,
-        v21,
-        v22,
-        v23,
-        v24,
-        v25,
-    },
-    [AllCountriesEnum.mexico]: {
-      v1,
-    },
-    [AllCountriesEnum.philippines]: {
-      v2,
-    }
+  [AllCountriesEnum.india]: {
+    v38,
+    v49,
+    v55,
+    v56,
+    v57,
+    v58,
+    v59,
+    v60,
+    v61,
+    v62,
+    v63,
+    v64,
+    v65,
+    v66,
+    v67,
+    v68,
+    v69,
+    v70,
+    v71,
+    v72,
+    v73,
+    v74,
+    v75,
+    v76,
+    v77,
+    v78,
+    v79,
+  },
+  [AllCountriesEnum.pakistan]: {
+    v15,
+    v16,
+    v17,
+    v18,
+    v19,
+    v20,
+    v21,
+    v22,
+    v23,
+    v24,
+    v25,
+  },
+  [AllCountriesEnum.mexico]: {
+    v1,
+  },
+  [AllCountriesEnum.philippines]: {
+    PHv1,
+    PHv2,
+  },
 };
