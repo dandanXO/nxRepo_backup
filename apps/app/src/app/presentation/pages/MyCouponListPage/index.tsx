@@ -83,8 +83,8 @@ const MyCouponListPage = () => {
           })
         ) : (
           <div className="flex h-[50vh] flex-col items-center justify-center p-3 mt-5">
-            <img src={NoDataImage} alt="" />
-            <div className={`mt-5`}>There are currently no coupon</div>
+            {/* <img src={NoDataImage} alt="" /> */}
+            <div className={`mt-5 text-sm text-cstate-disable-main`}>There are currently no coupon</div>
           </div>
         )}
       </div>
