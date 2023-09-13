@@ -18,7 +18,7 @@ const MexicoPaymentInstructionPage = ({
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <>
       <div className="flex-grow">
         <div className="mx-6 mt-9 flex flex-col items-center">
           <div className="text-ctext-secondary">Total de la Factura</div>
@@ -101,7 +101,7 @@ const MexicoPaymentInstructionPage = ({
           Pago completado, siguiente paso.
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
