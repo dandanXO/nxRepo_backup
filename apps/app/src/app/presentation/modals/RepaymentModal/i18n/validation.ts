@@ -5,7 +5,8 @@ import { z } from 'zod';
 export const validateBalance = (
   data: any,
   balance: string,
-  showCurrency = true
+  showCurrency = true,
+  ignoreOver = true
 ) => {
   const currency = environment.currency.split('');
   currency.forEach((i) => {
@@ -19,8 +20,13 @@ export const validateBalance = (
   } else if (!new RegExp('^[0-9]*$').test(data)) {
     errorMessage = 'Numbers only. Please try again.';
   } else if (Number(data) > Number(balance)) {
-    // NOTE: 限制數字最大值
-    errorMessage = 'Amount cannot be greater than the repayment balance.';
+    if (ignoreOver) {
+      // NOTE: 限制數字最大值
+      errorMessage = 'Amount cannot be greater than the repayment balance.';
+    } else {
+      errorMessage = '';
+      data = `${balance}`;
+    }
   } else {
     errorMessage = '';
   }

@@ -58,7 +58,7 @@ const PhilippinesProduct = ({
       {expand && (
         <div className="text-ctext-secondary mt-2 flex flex-col gap-1 rounded-lg bg-[#F8F9F9] py-2 px-3 font-medium">
           <div className="flex justify-between">
-            <div>{t('Loan Amount')}</div>
+            <div>{t('loanAmount')}</div>
             <div>
               <Money money={product.calculating.finalLoanPrice} />
             </div>

@@ -209,6 +209,9 @@ i18next
           [i18nRepaymentModal.namespace]:
             i18nRepaymentModal.translation.es_PH || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.es_PH || {},
+
+          // Component
+          [i18nProduct.namespace]: i18nProduct.translation.es_PH || {},
         },
       },
 

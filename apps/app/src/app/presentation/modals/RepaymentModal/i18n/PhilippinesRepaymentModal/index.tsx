@@ -93,7 +93,7 @@ const PhilippinesRepaymentModal = ({
           setInputData={setBalanceValue}
           validateData={() =>
             balance !== undefined &&
-            validateBalance(balanceValue.data, balance, false)
+            validateBalance(balanceValue.data, balance, false, false)
           }
           value={balanceValue.data}
           containerStyle={{

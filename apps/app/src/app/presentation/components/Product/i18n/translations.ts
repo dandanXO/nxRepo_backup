@@ -14,10 +14,6 @@ export const i18nProduct: i18nComponent = {
       'Loan Amount': 'Loan amount',
       'Service fee': 'Service fee',
       IVA: 'IVA',
-
-      // PH
-      interestFee: 'Interest Fee',
-      totalAmountToPay: 'Total Amount to Pay',
     },
     es_MX: {
       'Loan Amount': 'Monto del préstmo',
@@ -27,5 +23,10 @@ export const i18nProduct: i18nComponent = {
       'Due Date': 'Fecha de Vencimiento',
     },
     bn_BD: {},
+    es_PH: {
+      loanAmount: 'Loan Amount',
+      interestFee: 'Interest Fee',
+      totalAmountToPay: 'Total Amount to Pay',
+    },
   },
 };
