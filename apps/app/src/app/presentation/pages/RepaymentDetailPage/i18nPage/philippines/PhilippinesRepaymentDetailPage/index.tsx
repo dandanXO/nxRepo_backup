@@ -14,10 +14,12 @@ import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import { tcx } from '../../../../../../modules/tailwindcss';
+import { NativeAppInfo } from '../../../../../../persistant/nativeAppInfo';
 import { RootState } from '../../../../../../reduxStore';
 import Divider from '../../../../../components/Divider';
 import ListItem from '../../../../../components/ListItem';
 import Money from '../../../../../components/Money.tsx';
+import DefaultVIPIcon from '../../../../../components/images/VipIcon.svg';
 import { Button } from '../../../../../components/layouts/Button';
 import { PageContent } from '../../../../../components/layouts/PageContent';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
@@ -25,7 +27,6 @@ import ReservationProductsModal from '../../../../../modals/ReservationProductsM
 import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
-import VIPIcon from './VIPIcon';
 
 interface IPhilippinesRepaymentDetailPage {
   currentData?: GetLoanDetailResponse;
@@ -45,6 +46,8 @@ const PhilippinesRepaymentDetailPage = ({
   const finalItems = useDynamicChargeFeeList(
     currentData?.chargeFeeDetail?.items
   );
+
+  const VIPIcon = require(`../../../../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_vip_card.png`);
 
   const {
     status = '',
@@ -289,7 +292,7 @@ const PhilippinesRepaymentDetailPage = ({
         <>
           <div className="bg-primary-assistant text-primary-main flex items-center gap-2 py-2 px-5 text-left text-sm">
             <div className="w-fit">
-              <VIPIcon />
+              <img alt="vip" src={VIPIcon || DefaultVIPIcon} />
             </div>
 
             <div>
