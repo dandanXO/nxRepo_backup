@@ -47,7 +47,7 @@ const PhilippinesRepaymentDetailPage = ({
     currentData?.chargeFeeDetail?.items
   );
 
-  const VIPIcon = require(`../../../../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_vip_card.png`);
+  // const VIPIcon = require(`../../../../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_vip_card.png`);
 
   const {
     status = '',
@@ -292,7 +292,7 @@ const PhilippinesRepaymentDetailPage = ({
         <>
           <div className="bg-primary-assistant text-primary-main flex items-center gap-2 py-2 px-5 text-left text-sm">
             <div className="w-fit">
-              <img alt="vip" src={VIPIcon || DefaultVIPIcon} />
+              <img alt="vip" src={DefaultVIPIcon} />
             </div>
 
             <div>
