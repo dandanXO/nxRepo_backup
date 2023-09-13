@@ -36,7 +36,7 @@ const useRepayCreate = () => {
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
           if (data.nextStep === 'html') {
-            navigate(`${PagePathEnum.RepaymentInfoPage}?token=${getToken()}`, {
+            navigate(`${PagePathEnum.PaymentInstructionPage}?token=${getToken()}`, {
               state: data,
             });
           }
