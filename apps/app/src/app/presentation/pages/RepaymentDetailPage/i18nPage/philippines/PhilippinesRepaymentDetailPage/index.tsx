@@ -14,12 +14,10 @@ import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import { tcx } from '../../../../../../modules/tailwindcss';
-import { NativeAppInfo } from '../../../../../../persistant/nativeAppInfo';
 import { RootState } from '../../../../../../reduxStore';
 import Divider from '../../../../../components/Divider';
 import ListItem from '../../../../../components/ListItem';
 import Money from '../../../../../components/Money.tsx';
-import DefaultVIPIcon from '../../../../../components/images/VipIcon.svg';
 import { Button } from '../../../../../components/layouts/Button';
 import { PageContent } from '../../../../../components/layouts/PageContent';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
@@ -27,6 +25,7 @@ import ReservationProductsModal from '../../../../../modals/ReservationProductsM
 import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
+import VipIcon from '../../component/VipIcon';
 
 interface IPhilippinesRepaymentDetailPage {
   currentData?: GetLoanDetailResponse;
@@ -292,7 +291,7 @@ const PhilippinesRepaymentDetailPage = ({
         <>
           <div className="bg-primary-assistant text-primary-main flex items-center gap-2 py-2 px-5 text-left text-sm">
             <div className="w-fit">
-              <img alt="vip" src={DefaultVIPIcon} />
+              <img alt="vip" src={VipIcon()} />
             </div>
 
             <div>

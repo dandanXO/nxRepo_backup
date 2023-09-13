@@ -16,7 +16,13 @@ const CouponModalContentAndroidWebviewPage = () => {
     [AllCountryIdentityName.PH]: PhilippinesCoupon,
   }[environment.country];
 
-  const couponImage = require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_coupon.png`)
+  let couponImage;
+
+  try {
+    couponImage = require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_coupon.png`)
+  } catch (error) {
+    couponImage = defaultCouponImage; 
+  }
 
   const imageOnError = (event:any) => {
     event.currentTarget.src = defaultCouponImage;
