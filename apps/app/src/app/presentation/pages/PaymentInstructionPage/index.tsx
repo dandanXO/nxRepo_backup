@@ -12,6 +12,7 @@ import { Navigation } from '../../components/layouts/Navigation';
 import { Page } from '../../components/layouts/Page';
 import { PagePathEnum } from '../PagePathEnum';
 import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentInstructionPage';
+import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentInstructionPage';
 
 const navigatorMap = {
   [MexicoCountry.country]: '#E70020',
@@ -51,6 +52,9 @@ const PaymentInstructionPage = () => {
           {
             [MexicoCountry.country]: (
               <MexicoPaymentInstructionPage {...state} />
+            ),
+            [PhilippinesCountry.country]: (
+              <PhilippinesPaymentInstructionPage {...state} />
             ),
           },
           <MexicoPaymentInstructionPage {...state} />

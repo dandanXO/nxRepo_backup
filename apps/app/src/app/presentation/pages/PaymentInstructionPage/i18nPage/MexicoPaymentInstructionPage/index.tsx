@@ -13,8 +13,7 @@ import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/
 const MexicoPaymentInstructionPage = ({
   payload,
   orderNo,
-  theme,
-}: PostRepayCreateResponse & { theme?: string }) => {
+}: PostRepayCreateResponse) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
