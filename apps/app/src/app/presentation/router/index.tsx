@@ -26,7 +26,6 @@ import CustomerServicePage from '../pages/CustomerServicePage';
 import DisclosureStatementPage from '../pages/DisclosureStatementPage';
 import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
 import RepaymentDetailPage from '../pages/RepaymentDetailPage'
-import RepaymentInfoPage from "../pages/RepaymentInfoPage";
 import LoanRecordPage from '../pages/RepaymentPage'
 import OrderStatusPage from '../pages/OrderStatusPage'
 import MyCouponListPage from '../pages/MyCouponListPage'
@@ -60,6 +59,7 @@ import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
 // NOTICE: Static Loading : Compontents
 import LoadingMask from '../components/LoadingMask';
 import FeedbackPage from '../pages/FeedbackPage';
+import PaymentInstructionPage from "../pages/PaymentInstructionPage";
 
 
 
@@ -227,7 +227,7 @@ export const AppRouter = () => {
         </Route>
 
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
-        <Route path={PagePathEnum.RepaymentInfoPage} element={<RepaymentInfoPage />} />
+        <Route path={PagePathEnum.PaymentInstructionPage} element={<PaymentInstructionPage />} />
         <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
         <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
