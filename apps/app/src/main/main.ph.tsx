@@ -30,7 +30,6 @@ import { NativeAppInfo } from '../app/persistant/nativeAppInfo';
 import {PagePathEnum} from "../app/presentation/pages/PagePathEnum";
 import BindBankCardPage from "../app/presentation/pages/BindBankCardPage";
 import RepaymentDetailPage from "../app/presentation/pages/RepaymentDetailPage";
-import RepaymentInfoPage from "../app/presentation/pages/RepaymentInfoPage";
 import UploadedPaymentReceiptPage from "../app/presentation/pages/UploadedPaymentReceiptPage";
 import UploadPaymentReceiptPage from "../app/presentation/pages/UploadPaymentReceiptPage";
 import CouponModalContentAndroidWebviewPage from "../app/presentation/pages/CouponModalContentAndroidWebviewPage";
@@ -51,6 +50,7 @@ import LoginPage from "../app/presentation/pages/LoginPage";
 import { AllCountry } from "libs/shared/domain/src/country/AllCountry";
 import { environment } from "../environments/environmentModule/environment";
 import i18next from "i18next";
+import PaymentInstructionPage from "../app/presentation/pages/PaymentInstructionPage";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -132,7 +132,7 @@ const AppRouter = () => {
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
-        <Route path={PagePathEnum.RepaymentInfoPage} element={<RepaymentInfoPage />}/>
+        <Route path={PagePathEnum.PaymentInstructionPage} element={<PaymentInstructionPage />}/>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
