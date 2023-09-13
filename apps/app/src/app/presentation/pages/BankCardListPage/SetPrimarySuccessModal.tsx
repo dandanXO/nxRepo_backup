@@ -19,7 +19,7 @@ export const SetPrimarySuccessModal = (props: SetPrimarySuccessModalProps) => {
       content={(hide: () => void) => {
         return (
           <div className={`px-6 py-3`}>
-            <div className="mt-8 mb-14 text-lg font-bold">Main card set up successfully!</div>
+            <div className="mt-8 mb-14 text-sm text-ctext-primary">Main card set up successfully!</div>
             <div>
               <Button className={'w-full'} text={'OK'} onClick={() => props.setIsSetPrimarySuccess(false)} />
             </div>
