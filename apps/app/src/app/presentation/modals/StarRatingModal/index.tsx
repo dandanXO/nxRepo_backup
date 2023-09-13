@@ -55,7 +55,7 @@ const StarRatingModal = () => {
                 }
             </div>
             <div className='text-xs text-ctext-secondary'>Tap a Star to Rate</div>
-            <div className='text-sm text-ctext-primary m-3'>Share others your joy! Giving a 5-stars rating now!</div>
+            <div className='text-sm text-ctext-primary m-3'>Rate Us 5 Stars on the App to Increase Your Approval Rate!</div>
             <div className='flex p-4'>
                 <Button className={`mr-1 w-full`}
                     onClick={handleClose}
