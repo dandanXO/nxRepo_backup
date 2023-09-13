@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
@@ -13,7 +14,7 @@ import { Page } from '../../components/layouts/Page';
 import { PagePathEnum } from '../PagePathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../RepaymentDetailPage/userUsecaseSaga';
 
-const RepaymentInfoPage = () => {
+const PaymentInstructionPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
@@ -127,4 +128,4 @@ const RepaymentInfoPage = () => {
   );
 };
 
-export default RepaymentInfoPage;
+export default PaymentInstructionPage;
