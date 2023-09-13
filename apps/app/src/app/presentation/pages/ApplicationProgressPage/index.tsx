@@ -26,9 +26,10 @@ const ApplicationProgressPage = () => {
       />
       <PageContent>
         {currentData &&
-          currentData?.map((news) => {
+          currentData?.map((news, index) => {
             return (
               <ProgressItem
+                isHightlight={index === 0}
                 title={news.title}
                 content={news.content}
                 date={formatDate(moment.unix(Number(news.addTime)))}
