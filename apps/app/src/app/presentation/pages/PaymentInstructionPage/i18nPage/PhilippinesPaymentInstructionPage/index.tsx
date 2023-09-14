@@ -1,4 +1,5 @@
 import React from 'react';
+import Barcode from 'react-barcode';
 import { useTranslation } from 'react-i18next';
 
 import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepayCreateResponse';
@@ -82,6 +83,9 @@ const PhilippinesPaymentInstructionPage = ({
       <div className="text-ctext-tertiary text-xs leading-[14px]">
         <div>This reference number expires in 24</div>
         <div>Expires: Friday mm-dd-yyyy at hh:00 PM</div>
+      </div>
+      <div className="mt-5 flex justify-center">
+        <Barcode value="2023-7461-5898" height={70} />
       </div>
     </div>
   );

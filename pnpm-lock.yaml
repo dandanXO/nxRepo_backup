@@ -123,6 +123,7 @@ specifiers:
   ramda: 0.27.1
   react: 18.2.0
   react-apexcharts: ^1.4.0
+  react-barcode: ^1.4.6
   react-dom: 18.2.0
   react-i18next: ^12.0.0
   react-icons: ^4.7.1
@@ -208,6 +209,7 @@ dependencies:
   ramda: 0.27.1
   react: 18.2.0
   react-apexcharts: 1.4.0_cq36j322mc625rw5qlnpk23vma
+  react-barcode: 1.4.6_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-i18next: 12.0.0_e52s5leb62x5eudkmfoztpifde
   react-icons: 4.7.1_react@18.2.0
@@ -14551,6 +14553,11 @@ packages:
       argparse: 2.0.1
     dev: true
 
+  /jsbarcode/3.11.5:
+    resolution: {integrity: sha512-zv3KsH51zD00I/LrFzFSM6dst7rDn0vIMzaiZFL7qusTjPZiPtxg3zxetp0RR7obmjTw4f6NyGgbdkBCgZUIrA==}
+    hasBin: true
+    dev: false
+
   /jsbn/0.1.1:
     resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
     dev: true
@@ -18222,6 +18229,16 @@ packages:
       react: '>=0.13'
     dependencies:
       apexcharts: 3.37.3
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /react-barcode/1.4.6_react@18.2.0:
+    resolution: {integrity: sha512-56WCPqjgpExPVi5LgKOfxM6uSCB4Wd1r94jY2VEwkIdigPjLp8P9RyIBIyQmDraxtYGOHE0e4Uer4+QrmOIy7Q==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      jsbarcode: 3.11.5
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
