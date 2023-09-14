@@ -11,14 +11,14 @@ const IndiaExtendConfirmModal = () => {
   // console.log("ExtendConfirmModal.location.state", location.state);
 
   return (
-    <div className={`p-4`}>
+    <div className={`p-4 text-ctext-primary`}>
       {' '}
       <div className="text-xl font-bold">Extend</div>
-      <div className="my-6 font-bold leading-tight">
+      <div className="my-5 text-sm leading-tight">
         Extensions are intended for situations where you are genuinely experiencing financial difficulties and are
         unable to fully repay the amount owed.
       </div>
-      <div className="mb-4 font-bold leading-tight">
+      <div className="mb-4 text-sm leading-tight">
         We recommend that you prioritize full repayment when possible for a higher credit limit.
       </div>
       <div className={`flex flex-col`}>

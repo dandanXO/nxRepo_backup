@@ -12,10 +12,10 @@ import ListItem from '../../../../components/ListItem';
 import Money from '../../../../components/Money.tsx';
 import { Button } from '../../../../components/layouts/Button';
 import { GetLoanDetailResponse } from 'apps/app/src/app/api/loanService/GetLoanDetailResponse';
-import {useEffect, useMemo, useState} from "react";
-import {useDynamicChargeFeeList} from "../../hooks/useDynamicChargeFeeList";
-import {GetLoanDetailChargeFeeDetailItems} from "../../../../../api/rtk/old/getLoanDetail";
-import {formatDate} from "../../../../../modules/format/formatDate";
+import { useEffect, useMemo, useState } from "react";
+import { useDynamicChargeFeeList } from "../../hooks/useDynamicChargeFeeList";
+import { GetLoanDetailChargeFeeDetailItems } from "../../../../../api/rtk/old/getLoanDetail";
+import { formatDate } from "../../../../../modules/format/formatDate";
 import VipIcon from '../../../../components/images/VipIcon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import PaymentProgressingModal from '../../../../modals/PaymentProgressingModal';
@@ -25,6 +25,7 @@ import ReservationSuccessModal from '../../../../modals/ReservationSuccessModal'
 import { modalInitialState, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
+import { PageContent } from '../../../../components/layouts/PageContent';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -32,7 +33,7 @@ type IRepaymentDetailPage = {
 }
 const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
 
   const { currentData, isFetching = true } = props || {};
@@ -52,7 +53,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     extendable,
     reductionAmount = 0,
     penaltyInterest = 0,
-    loanAmount  = 0,
+    loanAmount = 0,
     dailyFee = 0,
     balance = 0,
     applyDate = '',
@@ -67,13 +68,16 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{Status(status)?.text}</div>;
   };
 
-    useEffect(() => {
-        dispatch(modalSlice.actions.updateReservationProductsModal({
-            ...modalInitialState.reservationProductsModal
-        }))
-    }, [])
+  useEffect(() => {
+    dispatch(modalSlice.actions.updateReservationProductsModal({
+      ...modalInitialState.reservationProductsModal
+    }))
+  }, [])
+
+  const listTitleStyle = "text-ctext-primary text-sm";
+  const listTextStyle = "text-ctext-primary text-sm";
   return (
-    <div>
+    <PageContent className={'pb-0 w-full'}>
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
       {modalState.reservationProductsModal.show && <ReservationProductsModal />}
       {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
@@ -83,227 +87,245 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
       {/*  </div>*/}
       {/*)}*/}
 
-      <div className={`px-6`}>
-        <ListItem
-          title={'Product'}
-          text={productName ?? ''}
-          titleColor="text-ctext-primary"
-          isFetching={isFetching}
-        />
-        <ListItem
-          title={'Order No.'}
-          text={orderNo ?? ''}
-          titleColor="text-ctext-primary"
-          isFetching={isFetching}
-        />
-        <ListItem
-          title={'Status'}
-          text={status ? renderStatusTag(status) : ''}
-          titleColor="text-ctext-primary"
-          isFetching={isFetching}
-        />
-        <ListItem
-          title={'Apply Date'}
-          text={applyDate ? formatDate(moment(applyDate)) : ''}
-          titleColor="text-ctext-primary"
-          isFetching={isFetching}
-        />
-        <ListItem
-          title={'Due Date'}
-          text={dueDate ? formatDate(moment(dueDate)): ''}
-          titleColor="text-ctext-primary"
-          isFetching={isFetching}
-        />
-
-        {status === 'PAY_OFF' && (
+      <div className={`grow flex flex-col `}>
+        <div className={'grow'}>
           <ListItem
-            title={'Repayment Date'}
-            text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
-            titleColor="text-ctext-primary"
+            title={'Product'}
+            text={productName ?? ''}
+            titleColor={listTitleStyle}
+            textColor={listTextStyle}
             isFetching={isFetching}
           />
-        )}
-
-        {status === 'EXTEND' && (
           <ListItem
-            title={'Extension Date'}
-            text={extendDate ? formatDate(moment(extendDate)) : ''}
-            titleColor="text-ctext-primary"
+            title={'Order No.'}
+            text={orderNo ?? ''}
+            titleColor={listTitleStyle}
+            textColor={listTextStyle}
             isFetching={isFetching}
           />
-        )}
-
-        <Divider />
-        <div onClick={() => setExpand(!expand)}>
           <ListItem
-            title={'Payment Details'}
-            text={expand ? <MdExpandLess size={30} className={'fill-cstate-disable-main'} /> : <MdExpandMore size={30} className={'fill-cstate-disable-main'} />}
-            titleColor="text-ctext-primary"
+            title={'Status'}
+            text={status ? renderStatusTag(status) : ''}
+            titleColor={listTitleStyle}
+            textColor={listTextStyle}
+            isFetching={isFetching}
           />
-        </div>
-        
+          <ListItem
+            title={'Apply Date'}
+            text={applyDate ? formatDate(moment(applyDate)) : ''}
+            titleColor={listTitleStyle}
+            textColor={listTextStyle}
+            isFetching={isFetching}
+          />
+          <ListItem
+            title={'Due Date'}
+            text={dueDate ? formatDate(moment(dueDate)) : ''}
+            titleColor={listTitleStyle}
+            textColor={listTextStyle}
+            isFetching={isFetching}
+          />
 
-        {/*NOTICE: 合同金*/}
-        {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
-
-        {expand && <div className='bg-[#F8f8f8] p-3 pb-1 -mt-2'>
-          {status !== 'EXTEND' && (
+          {status === 'PAY_OFF' && (
             <ListItem
-              title={'Disbursal Amount'}
-              text={<Money money={loanAmount} />}
-              titleColor="text-ctext-primary"
+              title={'Repayment Date'}
+              text={repaymentDate ? formatDate(moment(repaymentDate)) : ''}
+              titleColor={listTitleStyle}
+              textColor={listTextStyle}
               isFetching={isFetching}
             />
           )}
 
-          {status !== 'EXTEND' &&
-            finalItems?.map((item: GetLoanDetailChargeFeeDetailItems, index: number) => {
-              if (!item) return null;
-              return (
-                <ListItem
-                  key={index}
-                  title={item.itemName}
-                  text={<Money money={item.value} />}
-                  titleColor="text-ctext-primary"
-                  isFetching={isFetching}
-                />
-              );
-            })}
-
-          {status !== 'EXTEND' && (
-            <ListItem
-              title={'Daily Fee'}
-              text={
-                <div className="flex">
-                  <Money money={dailyFee} />
-                </div>
-              }
-              titleColor="text-ctext-primary"
-              isFetching={isFetching}
-            />
-          )}
           {status === 'EXTEND' && (
-            <ListItem title={'Extension Fee'} text={<Money money={extensionFee} />} titleColor="text-ctext-primary" isFetching={isFetching} />
+            <ListItem
+              title={'Extension Date'}
+              text={extendDate ? formatDate(moment(extendDate)) : ''}
+              titleColor={listTitleStyle}
+              textColor={listTextStyle}
+              isFetching={isFetching}
+            />
           )}
-          <ListItem
-            title={'Overdue Days'}
-            text={overdueDays ? overdueDays : "0"}
-            titleColor="text-ctext-primary"
-            textColor={status === 'OVERDUE' ? Status(status).color : ''}
-            isFetching={isFetching}
-          />
-          <ListItem
-            title={'Overdue Fee'}
-            text={<Money money={penaltyInterest} />}
-            titleColor="text-ctext-primary"
-            textColor={status === 'OVERDUE' ? Status(status).color : ''}
-            isFetching={isFetching}
-          />
 
           <Divider />
+          <div onClick={() => setExpand(!expand)}>
+            <ListItem
+              title={'Payment Details'}
+              text={expand ? <MdExpandLess size={30} className={'fill-cstate-disable-main'} /> : <MdExpandMore size={30} className={'fill-cstate-disable-main'} />}
+              titleColor={listTitleStyle}
+              textColor={listTextStyle}
+            />
+          </div>
 
-          <ListItem
-            title={'Reduction Amount'}
-            text={<Money money={reductionAmount} isNagetive={true} />}
-            titleColor="text-ctext-primary"
-            isFetching={isFetching}
-          />
 
-          <ListItem
-            titleColor="text-ctext-primary"
-            title={
-              <div className={`item-center flex flex-row items-center`}>
-                <div className={` mr-1`}>Amount Repaid</div>
-                <div
-                  onClick={() => {
-                    navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                      state: { repayRecords },
-                    });
-                  }}
-                >
-                  <img src={AmountPaidIcon} />
-                </div>
-              </div>
-            }
-            text={<Money money={paidAmount} isNagetive={true} />}
-            isFetching={isFetching}
-          />
-        </div>}
-        <Divider />
+          {/*NOTICE: 合同金*/}
+          {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-black-400" />*/}
 
-        {/*NOTE: 總應還金額*/}
-        {status !== 'EXTEND' && (
-          <ListItem
-            title={'Repayment Amount'}
-            text={<Money money={balance} />}
-            titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
-            textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
-            className="font-bold"
-            isFetching={isFetching}
-          />
-        )}
+          {expand && <div className='bg-[#F8f8f8] p-3 pb-1 -mt-2'>
+            {status !== 'EXTEND' && (
+              <ListItem
+                title={'Disbursal Amount'}
+                text={<Money money={loanAmount} />}
+                titleColor={listTitleStyle}
+                textColor={listTextStyle}
+                isFetching={isFetching}
+              />
+            )}
 
-        {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
-        {status === 'EXTEND' && (
-          <ListItem
-            title={'Total Extension Fee'}
-            text={<Money money={totalRepayAmount} />}
-            titleColor="text-ctext-primary"
-            textColor="text-ctext-primary"
-            className="font-bold"
-            isFetching={isFetching}
-          />
-        )}
-
-        {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
-            <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
-                <img src={VipIcon} alt="" />
-                <div className='ml-2'>
-                    <span className='font-bold'> VIP Benefits!</span> You'll enjoy
-                    <span className='font-bold'> higher loan limits</span> and
-                    <span className='font-bold'> lower interest rates</span>
-                    with responsible repayments!
-                </div>
-
-            </div>
-        )}
-
-        <div className={`my-3 flex flex-row text-white`}>
-          {extendable !== undefined && extendable && (
-            <div
-              onClick={() => {
-                navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                  state: currentData,
-                });
-              }}
-              className={`mr-1.5 grow`}
-            >
-              <Button type={'secondary'} text={'Extend'} />
-            </div>
-          )}
-
-          {status !== 'PAY_OFF' && status !== 'EXTEND' && (
-            <div
-              onClick={() => {
-                if (currentData === undefined) return;
-                navigate(`repayment-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                  state: currentData,
-                });
-              }}
-              className={cx(`grow`, {
-                'ml-1.5': extendable,
+            {status !== 'EXTEND' &&
+              finalItems?.map((item: GetLoanDetailChargeFeeDetailItems, index: number) => {
+                if (!item) return null;
+                return (
+                  <ListItem
+                    key={index}
+                    title={item.itemName}
+                    text={<Money money={item.value} />}
+                    titleColor={listTitleStyle}
+                    textColor={listTextStyle}
+                    isFetching={isFetching}
+                  />
+                );
               })}
-            >
-              <Button text={'Repay'} />
+
+            {status !== 'EXTEND' && (
+              <ListItem
+                title={'Daily Fee'}
+                text={
+                  <div className="flex">
+                    <Money money={dailyFee} />
+                  </div>
+                }
+                titleColor={listTitleStyle}
+                textColor={listTextStyle}
+                isFetching={isFetching}
+              />
+            )}
+            {status === 'EXTEND' && (
+              <ListItem title={'Extension Fee'}
+                text={<Money money={extensionFee} />}
+                titleColor={listTitleStyle}
+                textColor={listTextStyle}
+                isFetching={isFetching} />
+            )}
+            <ListItem
+              title={'Overdue Days'}
+              text={overdueDays ? overdueDays : "0"}
+              titleColor={listTitleStyle}
+              textColor={`text-sm ${status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}` }
+              isFetching={isFetching}
+            />
+            <ListItem
+              title={'Overdue Fee'}
+              text={<Money money={penaltyInterest} />}
+              titleColor={listTitleStyle}
+              textColor={`text-sm ${status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}` }
+              isFetching={isFetching}
+            />
+
+            <Divider />
+
+            <ListItem
+              title={'Reduction Amount'}
+              text={<Money money={reductionAmount} isNagetive={true} />}
+              titleColor={listTitleStyle}
+              textColor={listTextStyle}
+              isFetching={isFetching}
+            />
+
+            <ListItem
+              titleColor={listTitleStyle}
+              textColor={listTextStyle}
+              title={
+                <div className={`item-center flex flex-row items-center`}>
+                  <div className={` mr-1`}>Amount Repaid</div>
+                  <div
+                    onClick={() => {
+                      navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                        state: { repayRecords },
+                      });
+                    }}
+                  >
+                    <img src={AmountPaidIcon} />
+                  </div>
+                </div>
+              }
+              text={<Money money={paidAmount} isNagetive={true} />}
+              isFetching={isFetching}
+            />
+          </div>}
+          <Divider />
+
+          {/*NOTE: 總應還金額*/}
+          {status !== 'EXTEND' && (
+            <ListItem
+              title={'Repayment Amount'}
+              text={<Money money={balance} />}
+              titleColor={`text-sm ${status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}` }
+              textColor={`text-sm ${status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}` }
+              className="font-bold"
+              isFetching={isFetching}
+            />
+          )}
+
+          {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
+          {status === 'EXTEND' && (
+            <ListItem
+              title={'Total Extension Fee'}
+              text={<Money money={totalRepayAmount} />}
+              titleColor={listTitleStyle}
+              textColor={listTextStyle}
+              className="font-bold"
+              isFetching={isFetching}
+            />
+          )}
+
+          {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
+            <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
+              <img src={VipIcon} alt="" />
+              <div className='ml-2'>
+                <span className='font-bold'> VIP Benefits!</span> You'll enjoy
+                <span className='font-bold'> higher loan limits</span> and
+                <span className='font-bold'> lower interest rates</span>
+                with responsible repayments!
+              </div>
+
             </div>
           )}
-        </div>
 
-        {(status === 'UNPAID' || status === 'OVERDUE') && (
-          <>
+          <div className={`my-3 flex flex-row text-white`}>
+            {extendable !== undefined && extendable && (
+              <div
+                onClick={() => {
+                  navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                    state: currentData,
+                  });
+                }}
+                className={`mr-1.5 grow`}
+              >
+                <Button type={'secondary'} text={'Extend'} />
+              </div>
+            )}
+
+            {status !== 'PAY_OFF' && status !== 'EXTEND' && (
+              <div
+                onClick={() => {
+                  if (currentData === undefined) return;
+                  navigate(`repayment-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                    state: currentData,
+                  });
+                }}
+                className={cx(`grow`, {
+                  'ml-1.5': extendable,
+                })}
+              >
+                <Button text={'Repay'} />
+              </div>
+            )}
+          </div>
+
+          {(status === 'UNPAID' || status === 'OVERDUE') && (
+
             <div className={`text-ctext-secondary text-xs`}>
               <div>Attention：</div>
-              <ul className="list-outside list-decimal pl-3 pt-1">
+              <ul className="list-outside list-decimal pl-3 pt-1 leading-none">
                 <li>Before repayment, please make sure that you have enough balance on your bank account.</li>
                 <li>
                   Overdue for more than <span className={`text-primary-main`}>N days</span> will not be able to extend
@@ -317,27 +339,29 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 <li className='font-bold'>After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.</li>
               </ul>
             </div>
-            <div className={` flex flex-col bg-primary-assistant -mx-6 p-6 pb-3  mt-6`}>
-              {/* <div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div> */}
-              <div className={`text-ctext-primary mb-3 text-xs leading-none`}>
-                After completing the repayment, take a screenshot and upload your repayment receipt here ▼
-              </div>
-              {/*TODO: 先兼容 querystring*/}
-              <div
-                className={`my-2 grow`}
-                onClick={() => {
-                  navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                    state: { orderNo },
-                  });
-                }}
-              >
-                <Button type={'ghost'} className={`w-full bg-[#fff]`} text={'Upload Receipt'}/>
-              </div>
+          )}
+        </div>
+        {(status === 'UNPAID' || status === 'OVERDUE') && (
+          <div className={` flex flex-col bg-primary-assistant -m-4 py-4 px-5 mt-6`}>
+            {/* <div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div> */}
+            <div className={`text-ctext-primary mb-3 text-xs leading-none`}>
+              After completing the repayment, take a screenshot and upload your repayment receipt here ▼
             </div>
-          </>
+            {/*TODO: 先兼容 querystring*/}
+            <div
+              className={`my-2 grow`}
+              onClick={() => {
+                navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
+                  state: { orderNo },
+                });
+              }}
+            >
+              <Button type={'ghost'} className={`w-full bg-[#fff]`} text={'Upload Receipt'} />
+            </div>
+          </div>
         )}
       </div>
-    </div>
+    </PageContent>
   );
 };
 
