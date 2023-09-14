@@ -12,6 +12,8 @@ import { isSimpleWebView } from 'apps/app/src/app/modules/window/isSimpleWebView
 import { useNavigate } from 'react-router';
 import { PagePathEnum } from '../../../PagePathEnum';
 import { getToken } from 'apps/app/src/app/modules/querystring/getToken';
+import { useDispatch } from 'react-redux';
+import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
 
 type IUseFinishedBindBankAccountPage = {
     // NOTICE: Common
@@ -32,6 +34,7 @@ type IUseFinishedBindBankAccountPage = {
 export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccountPage) => {
     const { t } = useTranslation(i18nBankBindAccountPage.namespace);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const navigateToAPP = () => {
 
@@ -69,6 +72,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
     }
 
     const confirm = useCallback(() => {
+      dispatch(loadingSlice.actions.updatePageLoading(true))
 
         // NOTICE: India
         const requestBody = {
@@ -81,6 +85,8 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
             .unwrap()
             .then((data: any) => {
                 // Notice: bind account successfully
+                dispatch(loadingSlice.actions.updatePageLoading(false))
+
                 Modal.alert({
                     show: true,
                     mask: true,

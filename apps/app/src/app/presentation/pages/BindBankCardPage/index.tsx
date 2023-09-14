@@ -50,7 +50,7 @@ const BindBankCardPage = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className='overflow-auto'>
       {isShowNavigation() && (
         <Navigation
           title={'Add New Card'}
@@ -59,7 +59,7 @@ const BindBankCardPage = () => {
           }}
         />
       )}
-      <PageContent>
+      <PageContent className='py-0'>
         {renderByCountry(
           {
             // NOTICE: default 0 index
@@ -93,7 +93,7 @@ const BindBankCardPage = () => {
           />
         )}
       </PageContent>
-    </>
+    </div>
   );
 };
 
