@@ -47,7 +47,7 @@ const PaymentInstructionPage = () => {
           backgroundColor={navigatorMap[environment.country]}
         />
       )}
-      {(state || environment.country === PhilippinesCountry.country) &&
+      {state &&
         renderByCountry(
           {
             [MexicoCountry.country]: (

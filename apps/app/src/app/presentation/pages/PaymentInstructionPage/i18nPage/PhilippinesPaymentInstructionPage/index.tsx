@@ -71,7 +71,7 @@ const PhilippinesPaymentInstructionPage = ({
         extra={
           <div className="h-4/5 w-1/4">
             <CopyButton
-              className="w-full rounded-full bg-[#E85D75] py-2 px-4 focus:border-[#E85D75] focus:bg-white focus:text-[#E85D75]"
+              className="w-full rounded-full bg-[#E85D75] py-2 px-4 active:border active:border-[#E85D75] active:bg-white active:text-[#E85D75]"
               value="ABCE12345678"
               text="Copy"
             />
