@@ -14,7 +14,7 @@ const CopyButton = ({ value, className, text = 'Copy' }: ICopyButtonProps) => {
         'h-full w-full text-center text-base font-bold text-white',
         className
       )}`}
-      onClick={() => {
+      onClick={(e) => {
         navigator.clipboard.writeText(value);
       }}
     >
