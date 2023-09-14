@@ -13,6 +13,7 @@ import { i18nRepaymentModal } from '../../presentation/modals/RepaymentModal/i18
 import { i18nReservationProductsModal } from '../../presentation/modals/ReservationProductsModal/translations';
 import { i18nReservationSuccessModal } from '../../presentation/modals/ReservationSuccessModal/i18n/translations';
 import { i18nBankBindAccountPage } from '../../presentation/pages/BindBankCardPage/translations';
+import { i18nPaymentInstructionPage } from '../../presentation/pages/PaymentInstructionPage/translations';
 import { i18nLoanDetailsPage } from '../../presentation/pages/RepaymentDetailPage/translations';
 import { i18nUploadPaymentReceiptPage } from '../../presentation/pages/UploadPaymentReceiptPage/i18nPage/translations';
 import { i18nUploadingFileModal } from '../../presentation/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';
@@ -74,6 +75,8 @@ i18next
           [i18nExtendModal.namespace]: i18nExtendModal.translation.en_US || {},
           [i18nRepaymentCouponModal.namespace]:
             i18nRepaymentCouponModal.translation.en_US || {},
+          [i18nPaymentInstructionPage.namespace]:
+            i18nPaymentInstructionPage.translation.en_US || {},
 
           // NOTE: LoanDetailsPage - ReservationModal
           [i18nReservationProductsModal.namespace]:
@@ -209,6 +212,8 @@ i18next
           [i18nRepaymentModal.namespace]:
             i18nRepaymentModal.translation.es_PH || {},
           [i18nExtendModal.namespace]: i18nExtendModal.translation.es_PH || {},
+          [i18nPaymentInstructionPage.namespace]:
+            i18nPaymentInstructionPage.translation.es_PH || {},
 
           // Component
           [i18nProduct.namespace]: i18nProduct.translation.es_PH || {},
