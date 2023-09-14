@@ -9,8 +9,8 @@ import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateReq
 import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
 import { usePostRepayCreateMutation } from '../../api/rtk';
 import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
-import { PagePathEnum } from '../pages/PagePathEnum';
 import { getToken } from '../../modules/querystring/getToken';
+import { PagePathEnum } from '../pages/PagePathEnum';
 
 const useExtendCreate = () => {
   const navigate = useNavigate();
@@ -20,7 +20,8 @@ const useExtendCreate = () => {
   const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
-  const [postRepayCreate, { isLoading: isPostExtendCreateLoading }] = usePostRepayCreateMutation();
+  const [postRepayCreate, { isLoading: isPostExtendCreateLoading }] =
+    usePostRepayCreateMutation();
 
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {
@@ -29,9 +30,25 @@ const useExtendCreate = () => {
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
           // console.log('data', data);
-          // NOTICE: 跳轉至付款頁面
-          window.location.href = data.nextUrl;
-          navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
+          if (data.nextStep === 'html') {
+            navigate(
+              `${PagePathEnum.PaymentInstructionPage}?token=${getToken()}`,
+              {
+                state: data,
+              }
+            );
+          }
+          if (data.nextStep === 'jumpUrl') {
+            // NOTICE: 跳轉至付款頁面
+            window.location.href = data.nextUrl;
+            navigate(
+              `${
+                PagePathEnum.RepaymentDetailPage
+              }?token=${getToken()}&orderNo=${props.orderNo}`,
+              { replace: true }
+            );
+          }
+
           resolve('');
         })
         .catch((err: CustomAxiosError) => {
@@ -60,7 +77,7 @@ const useExtendCreate = () => {
 
   return {
     handlePostExtendCreate,
-    isPostExtendCreateLoading
+    isPostExtendCreateLoading,
   };
 };
 export default useExtendCreate;
