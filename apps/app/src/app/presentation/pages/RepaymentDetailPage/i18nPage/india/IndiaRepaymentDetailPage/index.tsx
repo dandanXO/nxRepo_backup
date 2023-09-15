@@ -290,9 +290,9 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
           {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
               <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
-                {/*<div className='w-1/3 flex items-center'>*/}
-                  <img className={"w-[28px]"} src={VipIcon()} alt=""/>
-                {/*</div>*/}
+                <div className='flex items-center w-[80px]'>
+                  <img className={""} src={VipIcon()} alt=""/>
+                </div>
                 <div className='ml-2'>
                     <span className='font-bold'> VIP Benefits!</span> You'll enjoy
                     <span className='font-bold'> higher loan limits</span> and
@@ -353,7 +353,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
-          <div className={`flex flex-col bg-primary-assistant -m-4 py-4 px-5 mt-6`}>
+          <div className={`flex flex-col bg-primary-assistant -mx-4 py-4 px-5 mt-6`}>
             {/*<div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>*/}
             <div className={`text-ctext-primary mb-3 text-xs leading-none`}>
               {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}
