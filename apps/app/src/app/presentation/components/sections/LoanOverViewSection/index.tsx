@@ -98,7 +98,7 @@ export const LoanOverViewSection = (props: Props) => {
 
   return (
     <div className={'text-ctext-primary'}>
-      <div className={'mb-2 font-bold'} data-testing-id="loanOverView">Loan Over View</div>
+      <div className={'mb-2 font-bold text-sm'} data-testing-id="loanOverView">Loan Over View</div>
 
       <div className={'flex w-full flex-row justify-center'}>
         <div className={'left relative'}>
@@ -110,8 +110,8 @@ export const LoanOverViewSection = (props: Props) => {
                   {environment.currency}{' '}
                   {isReacquireCreditAmount ? ' ***' :  formatPrice(Number(props.state.indexAPI?.availableAmount))}
                 </div>
-                <div className='font-bold text-xs'>Available</div>
-                <div className='font-bold text-xs'>Balance</div>
+                <div className='text-xs'>Available</div>
+                <div className='text-xs'>Balance</div>
               </div>
             </div>
           </div>
@@ -121,7 +121,7 @@ export const LoanOverViewSection = (props: Props) => {
           <div className={'used-amount flex flex-col items-start justify-end'}>
             <div className={'label flex flex-row items-center justify-between'}>
               <div className={'label-color mr-2 h-1.5 w-4 rounded bg-cstate-disable-main'}></div>
-              <div className={'label-price font-light text-xs'}>Used Amount</div>
+              <div className={'label-price text-xs'}>Used Amount</div>
             </div>
             <div className={'price font-bold w-full pl-6 text-sm'}>
               {environment.currency}{' '}
@@ -129,7 +129,7 @@ export const LoanOverViewSection = (props: Props) => {
             </div>
           </div>
           <div className={'total-amount flex flex-col justify-end mt-2'}>
-            <div className={'label font-light text-xs'}>Total Amount</div>
+            <div className={'label text-xs'}>Total Amount</div>
             <div className={'price font-bold text-sm'}>
               {environment.currency}{' '}
               {isReacquireCreditAmount ? ' ***** ' : formatPrice(props.state.indexAPI?.totalAmount || 0)}

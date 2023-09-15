@@ -13,7 +13,7 @@ type ListItemProps = {
 const ListItem = (props: ListItemProps) => {
     const { title, text, titleColor = 'text-black', textColor = '', className = '' } = props;
     return (
-        <div className={cx(`mb-2 flex flex-row justify-between text-sm leading-none items-center`, className)}>
+        <div className={cx(`mb-2 flex flex-row justify-between text-sm leading-none items-center grow`, className)}>
             <div className={cx(`${titleColor} text-left`)}>{title}</div>
             <div className={cx(`${textColor === '' ? titleColor : textColor} `, {
                 'skeleton': props.isFetching,

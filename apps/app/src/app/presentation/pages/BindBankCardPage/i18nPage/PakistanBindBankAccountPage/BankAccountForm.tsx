@@ -104,7 +104,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
                     isSearchable={true}
                     placeholder={t('Select')}
                 />
-                {!isBankSelected &&
+                {!isBankSelected && bankValue.value === '' &&
                     <div className='ml-5 text-cstate-error-main'>{t('Please select an option')}</div>
                 }
             </div>

@@ -22,7 +22,7 @@ export const UserInformationSection = (props: Props) => {
   const hasOverdueOrder = props.state.order.state === ORDER_STATE.hasOverdueOrder;
   return (
     <div className={'h-42 flex flex-col items-center bg-primary-assistant px-3 pt-2'}>
-        <div className={'mb-3 w-full'}>
+        <div className={'mb-2 w-full pl-1'}>
           {/*NOTE: 顯示歡迎與是否顯示使用者與客服按鈕*/}
           <UserInfoSupportSection state={props.state} onClickToCustomerService={props.onClickToCustomerService} />
         </div>

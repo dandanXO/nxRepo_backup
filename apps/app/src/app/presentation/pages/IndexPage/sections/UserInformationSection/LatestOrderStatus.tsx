@@ -37,22 +37,22 @@ export const LatestOrderStatus = (props: Props) => {
       <div className={'flex flex-row items-center justify-between'}>
         <div className={'left'}>
           <div className={'top flex flex-row text-sm'}>
-            <div className={'mr-2 font-light text-ctext-primary'}>Loan Order</div>
+            <div className={'mr-2 text-sm text-ctext-primary'}>Loan Order</div>
             <div className={'font-bold text-ctext-primary'}>
                 <Money money={props.state.order.overdueOrComingOverdueOrder?.payableAmount || 0}/>
             </div>
           </div>
 
           <div className={'bottom flex flex-col text-xs'}>
-            <div className={'flex flex-row'}>
+            <div className={'flex flex-row items-end justify-center'}>
               {/*NOTE: 顯示逾期文字*/}
               {hasOverdueOrder && (
-                <div className={'mr-1 h-5 rounded-lg bg-cstate-error-main px-2 text-sm text-white'}>Overdue</div>
+                <div className={'mr-1 rounded-lg bg-cstate-error-main px-2 py-0.5 text-xs text-white'}>Overdue</div>
               )}
               <div className={'flex flex-row'}>
                 {/*NOTE: 顯示逾期時間文字*/}
                 <div
-                  className={cx('mr-2 text-sm font-light', {
+                  className={cx('mr-1 text-xs', {
                     'text-ctext-tertiary': hasInComingOverdueOrder,
                     'text-cstate-error-main': hasOverdueOrder,
                   })}
@@ -61,7 +61,7 @@ export const LatestOrderStatus = (props: Props) => {
                 </div>
                 {/*NOTE: 顯示逾期時間*/}
                 <div
-                  className={cx('text-sm font-bold', {
+                  className={cx('text-xs font-bold', {
                     'text-ctext-tertiary': hasInComingOverdueOrder,
                     'text-cstate-error-main': hasOverdueOrder,
                   })}
@@ -74,7 +74,7 @@ export const LatestOrderStatus = (props: Props) => {
         </div>
 
         <div className={'right'}>
-          <div data-testing-id={'repay'} className={'text-cstate-info-main font-bold'} onClick={onUserClickToRepay}>
+          <div data-testing-id={'repay'} className={'text-cstate-info-main font-bold text-sm'} onClick={onUserClickToRepay}>
             Repay
           </div>
         </div>
@@ -85,7 +85,7 @@ export const LatestOrderStatus = (props: Props) => {
         <>
           {/*TODO: refactor me*/}
           <div className={'my-2 w-full border-t-[1px] border-ctext-divider'} />
-          <div className={cx('mr-2 text-sm font-light leading-4 text-gray-400 text-cstate-error-main')}>
+          <div className={cx('mr-2 text-xs leading-4 text-cstate-error-main text-cstate-error-main')}>
             Remind you to prioritize paying off overdue payments before you can borrow again.
           </div>
         </>

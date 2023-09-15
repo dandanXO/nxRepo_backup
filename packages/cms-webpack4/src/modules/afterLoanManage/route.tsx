@@ -1,6 +1,8 @@
 import React from 'react';
 
-const route = {
+import { Route } from '../../routes';
+
+const route: Route = {
     // 逾期催收
     path: '/afterLoanManage',
     component: React.lazy(() => import(/* webpackChunkName: "NestedRoute" */ '../shared/components/NestedRoute')),

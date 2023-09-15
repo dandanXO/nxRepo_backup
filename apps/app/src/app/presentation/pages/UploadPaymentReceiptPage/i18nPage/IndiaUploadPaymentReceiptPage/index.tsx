@@ -36,13 +36,17 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
           </div>
           <div className={`mb-1 text-left text-sm font-bold`}>{props.t('Upload your repayment receipt(optional)')}</div>
 
-          <UploadSection>
+          <label
+            htmlFor="file"
+            className="mb-4 flex h-[183px] flex-col items-center justify-center rounded-lg
+            border border-solid border-cstate-disable-main
+            bg-cTextFields-background-variant"
+          >
             {!props.formFile ? (
               <div>
                 <CameraSvgIconWrapper>
                   <IndiaCameraSvgIcon />
                 </CameraSvgIconWrapper>
-                <UploadSectionTitle>{props.t('Upload from Photo Album')}</UploadSectionTitle>
               </div>
             ) : (
               <img src={props.imageSrc ? props.imageSrc : ''} className={'h-[181px] object-contain'} alt="" />
@@ -54,8 +58,8 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
               value={''}
               onInput={(event) => props.onFileChange(event)}
             />
-          </UploadSection>
-          <div className="my-2 text-cstate-error-main">{props.fileErrorMessage}</div>
+          </label>
+          <div className="my-2 text-red-500">{props.fileErrorMessage}</div>
         </div>
         <Button text={'Confirm'} onClick={() => props.confirm()} />
       </PageContent>

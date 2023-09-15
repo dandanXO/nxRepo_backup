@@ -14,7 +14,7 @@ export const ADBannerSection = (props: Props) => {
         return (
           <div key={index} data-testing-id="adBanner" className={'ad-banner'}>
             <img
-              className={'rounded-lg bg-green-800 p-10 text-center text-white'}
+              className={'rounded-lg text-center text-white'}
               src={banner.imageUrl}
               onClick={() => onUserClickToOpenBrowser(banner.jumpUrl || '')}
             />

@@ -29,63 +29,84 @@ const IndiaExtendModal = (props: any) => {
   } = props.currentData ?? {};
   const { t } = useTranslation(i18nExtendModal.namespace);
 
+  const listTitleStyle = "text-ctext-primary text-sm";
+  const listTextStyle = "text-ctext-primary text-sm";
+
   return (
     <Modal>
-      <div className={`p-4`}> 
-      <div className="text-ctext-primary mb-4 text-xl font-bold">{t('Extend')}</div>
-      <ListItem title={t('Product')} text={productName ?? ''} titleColor="text-ctext-primary" />
-      <ListItem title={t('Order No.')} text={orderNo ?? ''} titleColor="text-ctext-primary" />
+      <div className={`p-2`}>
+      <div className="text-ctext-primary mb-4 text-xl font-bold">
+        {t('Extend')}
+      </div>
+      <ListItem
+        title={t('Product')}
+        text={productName ?? ''}
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
+      />
+      <ListItem
+        title={t('Order No.')}
+        text={orderNo ?? ''}
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
+      />
       <ListItem
         title={t('Due Date')}
         text={dueDate ? formatDate(moment(dueDate)) : ''}
-        titleColor="text-ctext-primary"
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
       />
       {/*NOTE: 展期費用*/}
-      <ListItem title={t('Extension Fee')} text={<Money money={extensionFee} />} titleColor="text-ctext-primary" />
+      <ListItem
+        title={t('Extension Fee')}
+        text={<Money money={extensionFee} />}
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
+      />
       <ListItem
         title={t('Overdue Days')}
         text={overdueDays ?? ''}
-        titleColor="text-ctext-primary"
-        textColor={overdueDays > 0 ? Status(status).color : 'text-ctext-primary'}
+        titleColor={listTitleStyle}
+        textColor={`text-sm ${overdueDays > 0 ? Status(status).color : 'text-ctext-primary'}` }
       />
       {/*NOTE: 展期罰金*/}
       <ListItem
         title={t('Overdue Fee')}
         text={<Money money={penaltyInterest} />}
-        titleColor="text-ctext-primary"
-        textColor={overdueDays > 0 ? Status(status).color : 'text-ctext-primary'}
+        titleColor={listTitleStyle}
+        textColor={`text-sm ${overdueDays > 0 ? Status(status).color : 'text-ctext-primary'}` }
       />
-
       {/*NOTE: 減免金額*/}
       <ListItem
         title={t('Reduction Amount')}
         text={<Money money={reductionAmount} isNagetive={true} />}
-        titleColor="text-ctext-primary"
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
       />
-
       {/*NOTE: 已還金額*/}
       <ListItem
         title={t('Amount Repaid')}
         text={<Money money={paidAmount} isNagetive={true} />}
-        titleColor="text-ctext-primary"
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
       />
-
       <ListItem
         title={t('Extension Due Date')}
         text={extendDate ? formatDate(moment(extendDate)) : ''}
-        textColor={'text-primary-main'}
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
       />
-
       <Divider />
 
       {/*NOTE: 總金額*/}
       <ListItem
-        className="mt-3 font-bold"
+        className="mt-2 font-bold"
         title={t('Total Extension Fee')}
         text={<Money money={extensionPayAmount} />}
-        titleColor="text-ctext-primary"
+        titleColor={listTitleStyle}
+        textColor={listTextStyle}
       />
-      <div className={`mt-6 flex flex-row text-white`}>
+      <div className={`mt-5 flex flex-row text-white`}>
         <div className={`mr-1.5 grow`}>
           <Button type={'ghost'} ghostTheme={'tertiary'} onClick={() => navigate(-2)} text={t('Cancel')} />
         </div>

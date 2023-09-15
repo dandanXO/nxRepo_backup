@@ -41,7 +41,7 @@ class TodayList extends Component {
             person: '',
         };
         this.convertParams = (obj) => {
-            const { disTime, time, appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName } = obj;
+            const { disTime, time, appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName, isOldUser } = obj;
             const isArr = Array.isArray(time) && time.length > 0;
             const isArr2 = Array.isArray(disTime) && disTime.length > 0;
             return {
@@ -49,7 +49,7 @@ class TodayList extends Component {
                 endTime: isArr ? time[1].format('YYYY-MM-DD 23:59:59') : '',
                 fstartTime: isArr2 ? disTime[0].format('YYYY-MM-DD 00:00:00') : '',
                 fendTime: isArr2 ? disTime[1].format('YYYY-MM-DD 23:59:59') : '',
-                appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName
+                appName, collectorId, orderNo, productId, stage, status, userPhone, userTrueName, isOldUser
             };
         }
         this.columns = [
@@ -68,6 +68,15 @@ class TodayList extends Component {
                         </Tooltip>
                     );
                 }
+            },
+            {
+              title: props.intl.formatMessage({id: "page.table.customer.type"}),
+              dataIndex: 'isOldUser',
+              key: 'isOldUser',
+              width: '6%',
+              render (text) {
+                return text ? <FormattedMessage id="page.table.old.guest" />:<FormattedMessage id="page.table.new.guest" />
+              }
             },
             {
                 title: props.intl.formatMessage({id: "page.search.list.distribute.time"}),
