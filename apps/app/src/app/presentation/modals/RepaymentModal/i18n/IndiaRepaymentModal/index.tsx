@@ -148,7 +148,6 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div className={`mr-1.5 w-full`}>
           <Button
             onClick={() => {
-              //   if (isRepayTypesFetching) return;
               navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
             }}
             text={t('Cancel')}
@@ -164,7 +163,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
               if (balanceValueErrorMessage === '') handleConfirm();
             }}
             text={t('Repay')}
-            className={`border-primary-main bg-primary-main border-[1.5px] border-solid text-white`}
+            // className={`border-primary-main bg-primary-main border-[1.5px] border-solid text-white`}
           />
         </div>
       </div>
