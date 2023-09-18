@@ -345,7 +345,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                   <span className={`text-primary-main`}>mail@mail.com</span>
                 </li>
                 <li className='font-bold'>
-                  {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}
+                  {t('After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.')}
                 </li>
               </ul>
             </div>
