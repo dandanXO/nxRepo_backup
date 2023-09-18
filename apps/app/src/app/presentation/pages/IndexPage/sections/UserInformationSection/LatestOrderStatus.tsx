@@ -21,9 +21,10 @@ export const LatestOrderStatus = (props: Props) => {
 
   // NOTE: User Event
   const onUserClickToRepay = () => {
-    navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
+    const orderNo = props.state.order.overdueOrComingOverdueOrder?.orderNo;
+    navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
       state: {
-        orderNo: props.state.order.overdueOrComingOverdueOrder?.orderNo,
+        orderNo: orderNo,
       },
     });
   };

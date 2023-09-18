@@ -11,7 +11,7 @@ export const i18nExtendConfirmModal: i18nComponent = {
             'Go Extension': 'Go Extension',
 
             //india
-            'Got it and go extension':'Got it and go extension'
+            'Got It And Go Extension':'Got It And Go Extension'
         },
         es_MX: {
             'Extend': 'Extender',
@@ -21,7 +21,7 @@ export const i18nExtendConfirmModal: i18nComponent = {
             'Go Extension': 'Prórroga de préstamo',
 
             //india
-            'Got it and go extension':'Got it and go extension'
+            'Got It And Go Extension':'Got It And Go Extension'
 
         },
     },
