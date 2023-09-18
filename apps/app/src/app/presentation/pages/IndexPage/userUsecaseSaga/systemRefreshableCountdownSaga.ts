@@ -10,9 +10,7 @@ export function* systemRefreshableCountdownSaga(action: any) {
   try {
     // console.log('systemRefreshableCountdownSaga.action', action);
     let countdown = getTimePartInfoBetweenCurrentAndCountDown(action.payload);
-
     while (countdown.end === false) {
-      yield delay(1000);
       countdown = getTimePartInfoBetweenCurrentAndCountDown(action.payload);
       // console.log("countdown", countdown.time);
       // NOTE: 更新倒數顯示資料
@@ -22,8 +20,8 @@ export function* systemRefreshableCountdownSaga(action: any) {
     yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
 
     // TODO: refactor me
-    // NOTE: 主動問後端最新資料
-    yield put(IndexPageSagaAction.user.viewIndexPageAction());
+    // NOTE: 主動問後端最新資料 -> 改成倒數完不主動要資料
+    // yield put(IndexPageSagaAction.user.viewIndexPageAction());
   } catch (error) {
     yield catchSagaError(error);
   }
