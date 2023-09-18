@@ -70,7 +70,7 @@ const MyCouponListPage = () => {
             return (
               <Coupon
                 key={coupon.couponId}
-                expireTime={coupon.expiredTime || ''}
+                expireTime={coupon.redeemed ? coupon.redeemedTime : coupon.expiredTime || ''}
                 discountAmount={coupon.discountAmount || ''}
                 couponType={coupon.couponType || ''}
                 couponName={coupon.couponName || ''}
