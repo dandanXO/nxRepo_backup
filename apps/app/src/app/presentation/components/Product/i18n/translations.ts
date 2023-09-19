@@ -23,7 +23,7 @@ export const i18nProduct: i18nComponent = {
       'Due Date': 'Fecha de Vencimiento',
     },
     bn_BD: {},
-    es_PH: {
+    en_PH: {
       loanAmount: 'Loan Amount',
       interestFee: 'Interest Fee',
       totalAmountToPay: 'Total Amount to Pay',

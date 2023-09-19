@@ -152,7 +152,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'Please make sure your mobile number match.':
         'আপনার মোবাইল নম্বর মেলে তা নিশ্চিত করুন.',
     },
-    es_PH: {
+    en_PH: {
       BindBankCardNavigator: 'Add a New Wallet',
       walletSelectorLabel: 'E-Payment',
       eWalletHolderName: 'E-Payment Holder Name',

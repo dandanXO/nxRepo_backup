@@ -199,24 +199,24 @@ i18next
           // [i18nUploadPaymentReceiptPage.namespace]: i18nUploadPaymentReceiptPage.translation.bn_BD,
           // [i18nUploadingFileModal.namespace]: i18nUploadingFileModal.translation.bn_BD,
         },
-        es_PH: {
+        en_PH: {
           // NOTICE: REFACTOR ME
 
           // NOTE: BankBindPage
           [i18nBankBindAccountPage.namespace]:
-            i18nBankBindAccountPage.translation.es_PH || {},
+            i18nBankBindAccountPage.translation.en_PH || {},
           [i18nConfirmBindBankCardModal.namespace]:
-            i18nConfirmBindBankCardModal.translation.es_PH || {},
+            i18nConfirmBindBankCardModal.translation.en_PH || {},
 
           // NOTE: LoanDetailsPage
           [i18nRepaymentModal.namespace]:
-            i18nRepaymentModal.translation.es_PH || {},
-          [i18nExtendModal.namespace]: i18nExtendModal.translation.es_PH || {},
+            i18nRepaymentModal.translation.en_PH || {},
+          [i18nExtendModal.namespace]: i18nExtendModal.translation.en_PH || {},
           [i18nPaymentInstructionPage.namespace]:
-            i18nPaymentInstructionPage.translation.es_PH || {},
+            i18nPaymentInstructionPage.translation.en_PH || {},
 
           // Component
-          [i18nProduct.namespace]: i18nProduct.translation.es_PH || {},
+          [i18nProduct.namespace]: i18nProduct.translation.en_PH || {},
         },
       },
 

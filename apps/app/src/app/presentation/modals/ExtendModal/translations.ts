@@ -36,7 +36,7 @@ export const i18nExtendModal: i18nComponent = {
       Confirm: 'Confirmar',
     },
     bn_BD: {},
-    es_PH: {
+    en_PH: {
       orderNumber: 'No.',
       extensionFee: 'Extension Fee',
     },

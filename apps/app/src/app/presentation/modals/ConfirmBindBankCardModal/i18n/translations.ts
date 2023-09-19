@@ -32,7 +32,7 @@ export const i18nConfirmBindBankCardModal: i18nComponent = {
       Confirm: 'Confirm',
       Cancel: 'Cancel',
     },
-    es_PH: {
+    en_PH: {
       ePayment: 'E-Payment',
       holderName: 'Holder Name',
     },

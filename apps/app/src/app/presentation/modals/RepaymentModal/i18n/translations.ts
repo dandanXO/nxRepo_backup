@@ -80,7 +80,7 @@ export const i18nRepaymentModal: i18nComponent = {
       '2. In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.':
         '2. আপনার অধিকার রক্ষা করার জন্য, আমরা দৃঢ়ভাবে সুপারিশ করছি যে আপনি একটি স্ক্রিনশট নিন এবং পরিশোধ সম্পূর্ণ করার পরে আপনার UTR নম্বর আপলোড করুন এবং আপনার পরিশোধের রসিদ আপলোড করতে APP-এ ফিরে যান।',
     },
-    es_PH: {
+    en_PH: {
       'Payment Amount': 'Payment Amount (₱)',
       coupon: 'Coupon (₱)',
       attention: 'Attention:',

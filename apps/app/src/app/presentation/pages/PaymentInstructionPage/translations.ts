@@ -4,7 +4,7 @@ export const i18nPaymentInstructionPage: i18nComponent = {
   namespace: 'pages/i18nPaymentInstructionPage',
   translation: {
     en_US: {},
-    es_PH: {
+    en_PH: {
       billerCompany: 'Biller Company',
       receiver: 'Name of Receiver',
       totalPayment: 'Total payment',
