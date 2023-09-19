@@ -847,7 +847,7 @@ describe('IndexPage', () => {
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
-  it.only("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
+  it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
 
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -4664,7 +4664,7 @@ describe('IndexPage', () => {
   })
 
 
-  it("status: level10 => level10 overdue", () => {
+  it.only("status: level10 => level10 overdue", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -4682,10 +4682,11 @@ describe('IndexPage', () => {
     })
 
     // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10.json");
+    // const indexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10.json");
+    const indexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index-level10_bug_products.json");
 
     // NOTE: Given Order overdue
-    const overdueIndexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10_overdue.json");
+    // const overdueIndexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10_overdue.json");
 
 
     let indexCount = 0;
@@ -4701,7 +4702,7 @@ describe('IndexPage', () => {
           console.log("[首頁]2")
           req.send({
             statusCode: 200,
-            body: overdueIndexServiceResponse,
+            body: indexServiceResponse,
           })
         }
         indexCount++;

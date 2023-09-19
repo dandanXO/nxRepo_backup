@@ -113,7 +113,7 @@ const IndexPage = () => {
     }
   }, [webViewVisible]);
 
- 
+
   const indexPageState = useSelector((state: RootState) => state.indexPage);
 // console.log(indexPageState)
   // NOTE: unknow | UserAuthing | UserRejected
@@ -222,7 +222,7 @@ const onUserClickViewApplicationProgress = () => {
       while (processSuccess && nextIndex <= maxIndex) {
         const nextProduct = indexPageState.indexAPI?.products[nextIndex];
         // console.log("nextProduct", nextProduct);
-        if (nextProduct && nextProduct.min <= remainDistributingQuota && remainDistributingQuota < nextProduct.max) {
+        if (nextProduct && nextProduct.min <= remainDistributingQuota && remainDistributingQuota <= nextProduct.max) {
           // console.log("目前商品可以不借到 max 來達到滿足")
           // console.log("只借: ", remainDistributingQuota);
           // NOTE: 實際商品最後借到的金額
@@ -373,7 +373,7 @@ const onUserClickViewApplicationProgress = () => {
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
       // NOTICE: 額度不足
       // REFACTOR ME
-      indexPageState.indexAPI?.availableAmount === 0 
+      indexPageState.indexAPI?.availableAmount === 0
     ) {
       disable = true;
     }
@@ -438,7 +438,7 @@ const onUserClickViewApplicationProgress = () => {
             })
         );
     }
-    
+
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
   const onClickToCustomerService = useCallback(() => {
@@ -564,7 +564,7 @@ const onUserClickViewApplicationProgress = () => {
           <div className='grow flex items-end'>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
-          
+
         </div>
       </div>
     </div>

@@ -60,8 +60,8 @@ export const QuotaSliderStatus = (props: Props) => {
     props.setQuotaBarTargetPrice(currentQuotaValue);
   }, [currentQuotaValue]);
 
-  const isMinAndMaxEqual = props.state.indexAPI?.quotaBar.max === props.state.indexAPI?.quotaBar.min;
-  const disableSliderDragging = isMinAndMaxEqual ? isMinAndMaxEqual : disableQuotaBar;
+  // const isMinAndMaxEqual = props.state.indexAPI?.quotaBar.max === props.state.indexAPI?.quotaBar.min;
+  // const disableSliderDragging = isMinAndMaxEqual ? isMinAndMaxEqual : disableQuotaBar;
 
   return (
     <div className={'mb-4 text-center'} data-testing-id={'quotaSlider'} data-testing-disable={disableQuotaSlider}>
@@ -98,8 +98,8 @@ export const QuotaSliderStatus = (props: Props) => {
                   </div>
                 );
               }}
-              disabled={disableSliderDragging}
-              min={isMinAndMaxEqual ? 0 : props.state.indexAPI?.quotaBar.min || 0}
+              // disabled={disableSliderDragging}
+              min={props.state.indexAPI?.quotaBar.min || 0}
               max={props.state.indexAPI?.quotaBar.max || 0}
               step={props.state.indexAPI?.quotaBar.serial || 0}
               value={currentQuotaValue}
