@@ -47,6 +47,7 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentRe
                 <CameraSvgIconWrapper>
                   <IndiaCameraSvgIcon />
                 </CameraSvgIconWrapper>
+                <div className="mt-2 text-xs text-ctext-secondary">{props.t('Click to upload')}</div>
               </div>
             ) : (
               <img src={props.imageSrc ? props.imageSrc : ''} className={'h-[181px] object-contain'} alt="" />

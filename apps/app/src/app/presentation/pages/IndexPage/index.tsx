@@ -2,7 +2,7 @@ import {Moment} from 'moment';
 import moment from 'moment-timezone';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useNavigate} from 'react-router';
+import {Outlet, useNavigate} from 'react-router';
 
 import {FeeRateKeyEnum} from '../../../api/indexService/FeeRateKeyEnum';
 import {PlatformProduct} from '../../../api/indexService/PlatformProduct';
@@ -373,7 +373,8 @@ const onUserClickViewApplicationProgress = () => {
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
       // NOTICE: 額度不足
       // REFACTOR ME
-      indexPageState.indexAPI?.availableAmount === 0 
+      indexPageState.indexAPI?.availableAmount === 0 ||
+      calculatingProducts?.length === 0
     ) {
       disable = true;
     }
@@ -391,6 +392,7 @@ const onUserClickViewApplicationProgress = () => {
       indexPageState.user.state === USER_AUTH_STATE.reject,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder  && isShowReacquireButton,
+      
       // (indexPageState.order.state === ORDER_STATE.hasOverdueOrder
       //   ||indexPageState.order.state === ORDER_STATE.normal
       //   ||indexPageState.order.state === ORDER_STATE.empty
@@ -427,17 +429,20 @@ const onUserClickViewApplicationProgress = () => {
       return simpleProduct;
     });
 
-    if (simpleProducts.length === 0) {
-        dispatch(modalSlice.actions.updateNoRecommendProductModal({ show: true }))
-    } else {
-        dispatch(
-            IndexPageSagaAction.user.applyProductAction({
-                applyAmount: currentSelectedProductsPrice,
-                // bankId: 11,
-                details: simpleProducts,
-            })
-        );
-    }
+    // Note: 沒有產品
+    // if (simpleProducts.length === 0) {
+    //     dispatch(modalSlice.actions.updateNoRecommendProductModal({ show: true }))
+    // } 
+
+    dispatch(
+      IndexPageSagaAction.user.applyProductAction({
+          applyAmount: currentSelectedProductsPrice,
+          // bankId: 11,
+          details: simpleProducts,
+      })
+    );
+
+    navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
     
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
@@ -615,7 +620,8 @@ const onUserClickViewApplicationProgress = () => {
 
       {/*NOTE: Modals*/}
       {/*NOTE: Quick Repay Modal*/}
-      {modelState.quickRepaymentSummaryModal.show && (
+
+      {/* {modelState.quickRepaymentSummaryModal.show && (
         <div className={'z-10'}>
           <QuickRepaymentSummaryModal
             state={indexPageState}
@@ -656,7 +662,7 @@ const onUserClickViewApplicationProgress = () => {
             }}
           />
         </div>
-      )}
+      )} */}
 
       {/*NOTE: Quick Repay - RepaymentAgreementModal*/}
       {modelState.loanAgreementModal.show && (
@@ -713,6 +719,7 @@ const onUserClickViewApplicationProgress = () => {
       {/*NOTE: 無推薦產品提示訊息 */}
       {modelState.noRecommendProductModal.show && (<NoRecommendProductModal/>)}
 
+      <Outlet/>
     </div>
   );
 };
