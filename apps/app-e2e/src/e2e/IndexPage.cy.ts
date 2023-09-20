@@ -47,7 +47,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/v2?token=246b4469e1004505a5a45f29b4a569a1", {
+  cy.visit("/v2?token=773d73027fbe47369fd9f0426212bc71", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {
@@ -645,12 +645,7 @@ describe('IndexPage', () => {
           .and('contain', 'Due Date')
           .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
 
-      // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-      indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
-          cy.url().should('include', '/repayment-detail');
-      }).then(() => {
-          cy.go(-1)
-      })
+
 
       // NOTE: important 看到不反灰、可使用的借款額度拉霸、看到文字顯示最低與最高金額
       indexPagePo.quotaSlider().should("be.visible");
@@ -675,6 +670,13 @@ describe('IndexPage', () => {
 
       // NOTE: important 看到下方 Tab 的 Payment 有紅點提示
       indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("not.exist");
+
+      // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
+      indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+        cy.url().should('include', '/repayment-detail');
+      }).then(() => {
+        cy.go(-1)
+      })
   })
 
   // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
@@ -808,12 +810,7 @@ describe('IndexPage', () => {
         .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
         .and('contain', 'Remind you to prioritize paying off overdue payments before you can borrow again.');
 
-    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-    indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
-        cy.url().should('include', '/repayment-detail');
-    }).then(() => {
-        cy.go(-1)
-    })
+
 
     // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時、看到文字顯示最低與最高範圍為 ****
     indexPagePo.quotaSlider().should("be.visible");
@@ -843,6 +840,12 @@ describe('IndexPage', () => {
     indexPagePo.tabPayment().should("be.visible");
     indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("be.visible");
 
+    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
+    indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+      cy.url().should('include', '/repayment-detail');
+    }).then(() => {
+      cy.go(-1)
+    })
   })
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
@@ -4664,7 +4667,7 @@ describe('IndexPage', () => {
   })
 
 
-  it.only("status: level10 => level10 overdue", () => {
+  it("status: level10 => level10 overdue", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
