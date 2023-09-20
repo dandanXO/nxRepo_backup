@@ -20,13 +20,12 @@ export function* systemCountdownManagerSaga() {
 
     // NOTICE: 只會擇一倒數器或沒有
     if (
-      // NOTE: 用戶沒通過認證
-      (indexResponse.riskReject === true ||
-        // NOTE: 用戶實際沒借款額度
-        indexResponse.noQuotaBalance === true) &&
-      // NOTE: 用戶可刷新風控額度
-      riskControl.state !== RISK_CONTROL_STATE.expired_refresh_able
+      // NOTE: 用戶沒通過認證 / 老客獲取額度被拒
+      (riskControl.state === RISK_CONTROL_STATE.order_reject ||
+        // NOTE: 老客沒借款額度
+        riskControl.state === RISK_CONTROL_STATE.empty_quota)
     ) {
+      console.log('riskControl.state',riskControl.state,RISK_CONTROL_STATE)
       // NOTICE: 不能重刷，需等待重刷時間
       yield put(SystemCaseActions.SystemRefreshableCountdownSaga(indexResponse.refreshableUntil));
       // NOTICE: 清掉風控額度到數時間
@@ -34,11 +33,11 @@ export function* systemCountdownManagerSaga() {
 
     } else {
       // NOTICE: 可以重刷
-      if(user.state !== USER_AUTH_STATE.reject &&
+      if (user.state !== USER_AUTH_STATE.reject &&
         user.state !== USER_AUTH_STATE.authing &&
-        order.state !== ORDER_STATE.hasOverdueOrder &&
-        indexResponse.noQuotaBalance !== true &&
-        riskControl.state !== RISK_CONTROL_STATE.order_reject) {
+        order.state !== ORDER_STATE.hasOverdueOrder && 
+        // NOTE: 沒有額度 (包含連續３次額度被拒)
+        indexResponse.noQuotaBalance !== true) {
         yield put(SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime));
       }
     }

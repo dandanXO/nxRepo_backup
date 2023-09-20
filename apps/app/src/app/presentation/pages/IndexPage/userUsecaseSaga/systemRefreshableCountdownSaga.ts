@@ -11,6 +11,7 @@ export function* systemRefreshableCountdownSaga(action: any) {
     // console.log('systemRefreshableCountdownSaga.action', action);
     let countdown = getTimePartInfoBetweenCurrentAndCountDown(action.payload);
     while (countdown.end === false) {
+      yield delay(1000);
       countdown = getTimePartInfoBetweenCurrentAndCountDown(action.payload);
       // console.log("countdown", countdown.time);
       // NOTE: 更新倒數顯示資料

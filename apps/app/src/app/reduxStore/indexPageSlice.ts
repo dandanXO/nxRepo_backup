@@ -191,7 +191,12 @@ export const indexPageSlice = createSlice({
         state.riskControl.state = RISK_CONTROL_STATE.order_reject;
 
       } else if (action.payload.noQuotaBalance === true) {
-        state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+        
+        if (action.payload.noQuotaByRetryFewTimes === true) {
+          state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
+        } else {
+          state.riskControl.state = RISK_CONTROL_STATE.empty_quota;
+        }
 
       } else if(isRiskControlOverdue) {
         if (action.payload.refreshable === true) {
