@@ -115,7 +115,7 @@ const IndexPage = () => {
 
 
   const indexPageState = useSelector((state: RootState) => state.indexPage);
-// console.log(indexPageState)
+  // console.log(indexPageState)
   // NOTE: unknow | UserAuthing | UserRejected
   let finalPageState = PageStateEnum.unknow;
   if (indexPageState.user.state === USER_AUTH_STATE.authing) {
@@ -141,9 +141,9 @@ const IndexPage = () => {
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [disableClickReacquireCredit]);
 
-const onUserClickViewApplicationProgress = () => {
-  navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
-}
+  const onUserClickViewApplicationProgress = () => {
+    navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
+  }
 
 
   const navigate = useNavigate();
@@ -172,18 +172,34 @@ const onUserClickViewApplicationProgress = () => {
 
       let firstRoundFinalIndex = 0;
       indexPageState.indexAPI?.products.map((product, index) => {
-        if (processSuccess) {
-          // NOTE: 已經完成任務，忽略執行
-        } else {
-          // console.log("currentTotalPrice", currentSelectedProductsPrice)
-          // NOTE: 假如加入此商品總額度沒爆掉。
-          const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
-          if (tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
+        // console.log("currentTotalPrice", currentSelectedProductsPrice)
+        // NOTE: 假如加入此商品總額度沒爆掉。
+        const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+        if (tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
+          // NOTE: 實際加入此商品
+          const finalProduct: FinalProductType = {
+            ...product,
+            calculating: {
+              finalLoanPrice: product.max,
+              interestPrice: 0,
+              terms: 0,
+              disbursalPrice: 0,
+              dueDate: '',
+            },
+          };
+          currentSelectedProducts.push(finalProduct);
+          // console.log("add product.max", product.max);
+          // NOTE: 實際加入後商品的總額
+          currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+          // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
+        } else if (tempCurrentSelectedProductsPrice > quotaBarTargetPrice ) {
+          const remain = quotaBarTargetPrice - currentSelectedProductsPrice;
+          if(product.min <= remain && remain <= product.max) {
             // NOTE: 實際加入此商品
             const finalProduct: FinalProductType = {
               ...product,
               calculating: {
-                finalLoanPrice: product.max,
+                finalLoanPrice: remain,
                 interestPrice: 0,
                 terms: 0,
                 disbursalPrice: 0,
@@ -191,16 +207,10 @@ const onUserClickViewApplicationProgress = () => {
               },
             };
             currentSelectedProducts.push(finalProduct);
-
             // console.log("add product.max", product.max);
-
             // NOTE: 實際加入後商品的總額
             currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
             // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
-          } else {
-            // NOTE: 不能再借了
-            firstRoundFinalIndex = index;
-            processSuccess = true;
           }
         }
       });
@@ -222,14 +232,14 @@ const onUserClickViewApplicationProgress = () => {
       while (processSuccess && nextIndex <= maxIndex) {
         const nextProduct = indexPageState.indexAPI?.products[nextIndex];
         // console.log("nextProduct", nextProduct);
-        if (nextProduct && nextProduct.min <= remainDistributingQuota && remainDistributingQuota <= nextProduct.max) {
+        if (nextProduct && nextProduct.min <= remainDistributingQuota) {
           // console.log("目前商品可以不借到 max 來達到滿足")
           // console.log("只借: ", remainDistributingQuota);
           // NOTE: 實際商品最後借到的金額
           const finalProduct: FinalProductType = {
             ...nextProduct,
             calculating: {
-              finalLoanPrice: remainDistributingQuota,
+              finalLoanPrice: remainDistributingQuota >= nextProduct.max ? nextProduct.max : remainDistributingQuota,
               interestPrice: 0,
               terms: 0,
               disbursalPrice: 0,

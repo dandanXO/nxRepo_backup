@@ -3,10 +3,10 @@
   "usedAmount": 0,
   "availableAmount": 3000,
   "quotaBar": {
-    "min": 1000,
-    "max": 3000,
-    "current": 3000,
-    "serial": 1000,
+    "min": 3000,
+    "max": 4000,
+    "current": 3500,
+    "serial": 300,
     "steps": [
       1000,
       2000
@@ -135,8 +135,8 @@
       "productId": 18,
       "productName": "MM LOAN",
       "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4424980256908184.png",
-      "min": 6000,
-      "max": 6000,
+      "min": 400,
+      "max": 900,
       "terms": 13,
       "platformChargeFeeRate": 0.000,
       "postPlatformChargeFeeRate": 0.300
