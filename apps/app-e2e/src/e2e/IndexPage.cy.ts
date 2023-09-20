@@ -47,7 +47,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/v2?token=4e026ce9cc1a46af912f68fb0109577b", {
+  cy.visit("/v2?token=1119f2e03619487c8fd4bb609c8ec8ed", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {
@@ -4665,7 +4665,7 @@ describe('IndexPage', () => {
   })
 
 
-  it("status: level10 => level10 overdue", () => {
+  it.only("status: level10 => level10 overdue", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
