@@ -77,17 +77,20 @@ const RepaymentPage = () => {
             <div ref={divRef} className={"h-[calc(100vh_-_56px_-_38px_-_72px)] overflow-scroll flex flex-col"} onScroll={(e) => handleOnscroll(e)}>
                 {repaymentPageState?.repaymentRecord &&
                     repaymentPageState?.repaymentRecord?.length > 0 ? (
-                    repaymentPageState.repaymentRecord?.map((record) => {
+                    repaymentPageState.repaymentRecord?.map((record, index) => {
                         return (
                             record?.status &&
-                            {
-                                PROCESSING: <ProcessingPaymentItem {...record} key={record.orderNo} />,
-                                REJECTED: <RejectPaymentItem {...record} key={record.orderNo} />,
-                                UNPAID: <UnpaidPaymentItem {...record} key={record.orderNo} />,
-                                PAY_OFF: <PayoffPaymentItem {...record} key={record.orderNo} />,
-                                EXTEND: <ExtendPaymentItem {...record} key={record.orderNo} />,
-                                OVERDUE: <OverduePaymentItem {...record} key={record.orderNo} />,
-                            }[record?.status]
+                              <div key={listStatus + record.orderNo + index}>
+                                {{
+                                  PROCESSING: <ProcessingPaymentItem {...record} />,
+                                  REJECTED: <RejectPaymentItem {...record} />,
+                                  UNPAID: <UnpaidPaymentItem {...record} />,
+                                  PAY_OFF: <PayoffPaymentItem {...record}/>,
+                                  EXTEND: <ExtendPaymentItem {...record} />,
+                                  OVERDUE: <OverduePaymentItem {...record} />,
+                                }[record?.status]}
+                              </div>
+
                         );
                     })
                 ) : (
