@@ -3,8 +3,9 @@ import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import moment from 'moment/moment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
+import { StylesConfig } from 'react-select';
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { InputValue } from '../../../../../modules/form/InputValue';
@@ -33,6 +34,47 @@ interface IPhilippinesRepaymentModalProps {
   handleRepayData: (data: any) => void;
 }
 
+const selectStyleConfig: StylesConfig = {
+  control: (baseStyles) => ({
+    ...baseStyles,
+    backgroundColor: 'transparent',
+    border: 0,
+    boxShadow: 'none',
+    padding: '6px 8px',
+  }),
+  menu: (baseStyles) => ({
+    ...baseStyles,
+    boxShadow: 'none',
+    margin: 0,
+  }),
+  indicatorSeparator: (baseStyles) => ({
+    ...baseStyles,
+    display: 'none',
+  }),
+  placeholder: (baseStyles) => ({
+    ...baseStyles,
+    color: window.theme?.input?.placeholder,
+  }),
+  dropdownIndicator: (baseStyles) => ({
+    ...baseStyles,
+    color: window.theme?.text?.primary,
+  }),
+  option: (baseStyles, { isSelected }) => ({
+    ...baseStyles,
+    backgroundColor: isSelected ? '#F5F5F5' : '',
+    color: 'black',
+    ':hover': {
+      backgroundColor: window.theme?.textFiled?.background?.main,
+    },
+  }),
+  menuList: (baseStyles) => ({
+    ...baseStyles,
+    margin: 0,
+    padding: 0,
+    boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.2)',
+  }),
+};
+
 const PhilippinesRepaymentModal = ({
   balanceValue,
   setRadioValue,
@@ -40,7 +82,6 @@ const PhilippinesRepaymentModal = ({
   handleConfirm,
   handleRepayData,
 }: IPhilippinesRepaymentModalProps) => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const { t } = useTranslation(i18nRepaymentModal.namespace);
   const navigate = useNavigate();
@@ -52,9 +93,12 @@ const PhilippinesRepaymentModal = ({
     repayAmount,
     balance,
     orderNo,
-    repayTypeList,
     payType,
     radio,
+    payTypeNote,
+    payTypeNoteList,
+    onlineRepayTypeList,
+    offlineRepayTypeList,
   } = repaymentData;
 
   const payOptions = [
@@ -74,6 +118,13 @@ const PhilippinesRepaymentModal = ({
   const Label = ({ text }: { text: string }) => (
     <div className="mb-1 text-xs font-medium">{text}</div>
   );
+
+  const repayTypeSubOption =
+    payTypeNote?.value === 'Online Payment'
+      ? onlineRepayTypeList
+      : payTypeNote?.value === 'Pay over the counter'
+      ? offlineRepayTypeList
+      : [];
 
   return (
     <div className="mb-5 px-4 text-left">
@@ -112,58 +163,46 @@ const PhilippinesRepaymentModal = ({
         <Label text={t('Payment Method')} />
         <Select
           className="bg-cTextFields-background-main rounded-md text-sm focus:outline-0"
-          styles={{
-            control: (baseStyles) => ({
-              ...baseStyles,
-              backgroundColor: 'transparent',
-              border: 0,
-              boxShadow: 'none',
-              padding: '6px 8px',
-            }),
-            menu: (baseStyles) => ({
-              ...baseStyles,
-              boxShadow: 'none',
-              margin: 0,
-            }),
-            indicatorSeparator: (baseStyles) => ({
-              ...baseStyles,
-              display: 'none',
-            }),
-            placeholder: (baseStyles) => ({
-              ...baseStyles,
-              color: window.theme?.input?.placeholder,
-            }),
-            dropdownIndicator: (baseStyles) => ({
-              ...baseStyles,
-              color: window.theme?.text?.primary,
-            }),
-            option: (baseStyles, { isSelected }) => ({
-              ...baseStyles,
-              backgroundColor: isSelected ? '#F5F5F5' : '',
-              color: 'black',
-              ':hover': {
-                backgroundColor: window.theme?.textFiled?.background?.main,
-              },
-            }),
-            menuList: (baseStyles) => ({
-              ...baseStyles,
-              margin: 0,
-              padding: 0,
-              boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.2)',
-            }),
-          }}
+          styles={selectStyleConfig}
           placeholder="Select"
-          options={repayTypeList || []}
-          value={
-            repayTypeList === undefined
-              ? undefined
-              : repayTypeList.find((option: any) => option.value === payType)
-          }
-          onChange={(item) =>
-            handleRepayData({ ...repaymentData, payType: item?.value })
-          }
+          options={payTypeNoteList}
+          value={payTypeNote}
+          onChange={(item: any) => {
+            let initialOption: any = [];
+            if (item.value === 'Online Payment') {
+              initialOption = onlineRepayTypeList || [];
+            }
+            if (item.value === 'Pay over the counter') {
+              initialOption = offlineRepayTypeList || [];
+            }
+            if (initialOption) {
+              handleRepayData({
+                ...repaymentData,
+                payTypeNote: item,
+                payType: initialOption[0]?.value,
+              });
+            }
+          }}
         />
       </div>
+
+      {payTypeNote && (
+        <div className="mt-2">
+          <Label text={payTypeNote.label || 'Loading'} />
+          <Select
+            className="bg-cTextFields-background-main rounded-md text-sm focus:outline-0"
+            styles={selectStyleConfig}
+            placeholder="Select"
+            options={repayTypeSubOption}
+            value={repayTypeSubOption?.find(
+              (option: any) => option.value === payType
+            )}
+            onChange={(item: any) =>
+              handleRepayData({ ...repaymentData, payType: item?.value })
+            }
+          />
+        </div>
+      )}
 
       {radio !== 'custom' && (
         <div className="mt-3">
@@ -171,7 +210,7 @@ const PhilippinesRepaymentModal = ({
           <div
             className="bg-cTextFields-background-main flex items-center justify-between rounded-md py-3 px-4 text-sm font-medium"
             onClick={() => {
-              if (repayTypeList === undefined) return;
+              if (payType === '') return;
               navigate(
                 `${
                   PagePathEnum.RepaymentDetailPage
@@ -240,7 +279,7 @@ const PhilippinesRepaymentModal = ({
           outlineTheme="round"
           text={t('Repay')}
           onClick={() => {
-            if (repayTypeList === undefined) return;
+            if (payType === '') return;
             if (balanceValue.errorMessage === '') handleConfirm();
           }}
         />

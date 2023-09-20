@@ -14,6 +14,10 @@ export type repaymentDetailPageInitialStateType = {
         radio?: string;
         payType?: string;
         repayTypeList?: { value: string, label: string }[]
+        payTypeNote?: { value: string, label: string }
+        payTypeNoteList?: { value: string, label: string }[]
+        onlineRepayTypeList?: { value: string, label: string }[]
+        offlineRepayTypeList?: { value: string, label: string }[]
     }
 }
 
@@ -27,7 +31,11 @@ export const repaymentDetailPageInitialState: repaymentDetailPageInitialStateTyp
         repayAmount: 0,
         coupon: null,
         radio: 'balance',
-        repayTypeList: []
+        repayTypeList: [],
+        payTypeNote: { value: '', label: '' },
+        payTypeNoteList: [],
+        onlineRepayTypeList: [],
+        offlineRepayTypeList: [],
     }
 }
 

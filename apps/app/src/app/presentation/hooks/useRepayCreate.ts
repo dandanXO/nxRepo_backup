@@ -37,9 +37,12 @@ const useRepayCreate = () => {
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
           if (data.nextStep === 'html') {
-            navigate(`${PagePathEnum.PaymentInstructionPage}?token=${getToken()}`, {
-              state: data,
-            });
+            navigate(
+              `${PagePathEnum.PaymentInstructionPage}?token=${getToken()}`,
+              {
+                state: data,
+              }
+            );
           }
           if (data.nextStep === 'jumpUrl') {
             // NOTICE: 跳轉至付款頁面
