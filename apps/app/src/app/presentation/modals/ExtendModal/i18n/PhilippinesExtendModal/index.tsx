@@ -1,10 +1,14 @@
 import moment from 'moment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { StylesConfig } from 'react-select';
 
 import { GetLoanDetailResponse } from '../../../../../api/loanService/GetLoanDetailResponse';
 import { tcx } from '../../../../../modules/tailwindcss';
+import { RootState } from '../../../../../reduxStore';
+import { repaymentDetailPageSlice } from '../../../../../reduxStore/repaymentDetailPageSlice';
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
 import Modal from '../../../../components/Modal';
@@ -13,16 +17,8 @@ import Select from '../../../../components/Select';
 import { Button } from '../../../../components/layouts/Button';
 import { i18nExtendModal } from '../../translations';
 
-type paymentMethodValueType = {
-  value: string;
-  label: string;
-};
-
 interface IPhilippinesExtendModalProps {
   currentData?: GetLoanDetailResponse;
-  repayTypesList: paymentMethodValueType[];
-  repayType: paymentMethodValueType;
-  setRepayType: React.Dispatch<React.SetStateAction<paymentMethodValueType>>;
   isPostExtendCreateLoading?: boolean;
   handleConfirm: () => void;
 }
@@ -30,14 +26,57 @@ interface IPhilippinesExtendModalProps {
 const formatDate = (dateString: string) =>
   moment(dateString).format('MM-DD-YYYY');
 
+const selectStyleConfig: StylesConfig = {
+  control: (baseStyles) => ({
+    ...baseStyles,
+    backgroundColor: 'transparent',
+    border: 0,
+    boxShadow: 'none',
+    padding: '6px 8px',
+  }),
+  menu: (baseStyles) => ({
+    ...baseStyles,
+    boxShadow: 'none',
+    margin: 0,
+  }),
+  indicatorSeparator: (baseStyles) => ({
+    ...baseStyles,
+    display: 'none',
+  }),
+  placeholder: (baseStyles) => ({
+    ...baseStyles,
+    color: window.theme?.input?.placeholder,
+  }),
+  dropdownIndicator: (baseStyles) => ({
+    ...baseStyles,
+    color: window.theme?.text?.primary,
+  }),
+  option: (baseStyles, { isSelected }) => ({
+    ...baseStyles,
+    backgroundColor: isSelected ? '#F5F5F5' : '',
+    color: 'black',
+    ':hover': {
+      backgroundColor: window.theme?.textFiled?.background?.main,
+    },
+  }),
+  menuList: (baseStyles) => ({
+    ...baseStyles,
+    margin: 0,
+    padding: 0,
+    boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.2)',
+  }),
+};
+
 const PhilippinesExtendModal = ({
   currentData,
-  repayTypesList,
-  repayType,
-  setRepayType,
   isPostExtendCreateLoading,
   handleConfirm,
 }: IPhilippinesExtendModalProps) => {
+  const dispatch = useDispatch();
+  const repaymentData = useSelector(
+    (state: RootState) => state.repaymentDetailPage.repaymentData
+  );
+
   const { t } = useTranslation(i18nExtendModal.namespace);
   const navigate = useNavigate();
 
@@ -49,6 +88,14 @@ const PhilippinesExtendModal = ({
     overdueDays = '',
     penaltyInterest = '',
   } = currentData ?? {};
+
+  const {
+    payType,
+    payTypeNote,
+    payTypeNoteList,
+    onlineRepayTypeList,
+    offlineRepayTypeList,
+  } = repaymentData;
 
   const { extendDate, extensionPayAmount = '' } = repayConfirmDetail ?? {};
 
@@ -76,8 +123,12 @@ const PhilippinesExtendModal = ({
     />
   );
 
-  console.log('RRRR');
-  console.log(repayType);
+  const repayTypeSubOption =
+    payTypeNote?.value === 'Online Payment'
+      ? onlineRepayTypeList
+      : payTypeNote?.value === 'Pay over the counter'
+      ? offlineRepayTypeList
+      : [];
 
   return (
     <Modal>
@@ -116,52 +167,49 @@ const PhilippinesExtendModal = ({
       <div className="text-ctext-primary p-6 pt-0 text-left">
         <div className="t mb-1 text-xs font-medium">{t('Payment Method')}</div>
         <Select
-          className="bg-cTextFields-background-main rounded-md text-sm focus:outline-0"
-          styles={{
-            control: (baseStyles) => ({
-              ...baseStyles,
-              backgroundColor: 'transparent',
-              border: 0,
-              boxShadow: 'none',
-              padding: '6px 8px',
-            }),
-            menu: (baseStyles) => ({
-              ...baseStyles,
-              boxShadow: 'none',
-              margin: 0,
-            }),
-            indicatorSeparator: (baseStyles) => ({
-              ...baseStyles,
-              display: 'none',
-            }),
-            placeholder: (baseStyles) => ({
-              ...baseStyles,
-              color: window.theme?.input?.placeholder,
-            }),
-            dropdownIndicator: (baseStyles) => ({
-              ...baseStyles,
-              color: window.theme?.text?.primary,
-            }),
-            option: (baseStyles, { isSelected }) => ({
-              ...baseStyles,
-              backgroundColor: isSelected ? '#F5F5F5' : '',
-              color: 'black',
-              ':hover': {
-                backgroundColor: window.theme?.textFiled?.background?.main,
-              },
-            }),
-            menuList: (baseStyles) => ({
-              ...baseStyles,
-              margin: 0,
-              padding: 0,
-              boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0.2)',
-            }),
-          }}
+          className="bg-cTextFields-background-main mb-4 rounded-md text-sm focus:outline-0"
+          styles={selectStyleConfig}
           placeholder="Select"
-          options={repayTypesList || []}
-          value={repayType}
-          onChange={(item) => setRepayType(item as paymentMethodValueType)}
+          options={payTypeNoteList}
+          value={payTypeNote}
+          onChange={(item: any) => {
+            let initialOption: any = [];
+            if (item.value === 'Online Payment') {
+              initialOption = onlineRepayTypeList || [];
+            }
+            if (item.value === 'Pay over the counter') {
+              initialOption = offlineRepayTypeList || [];
+            }
+            if (initialOption) {
+              dispatch(
+                repaymentDetailPageSlice.actions.updateRepaymentData({
+                  ...repaymentData,
+                  payTypeNote: item,
+                  payType: initialOption[0]?.value,
+                })
+              );
+            }
+          }}
         />
+        <div className="t mb-1 text-xs font-medium">{t('Payment Method')}</div>
+        <Select
+          className="bg-cTextFields-background-main rounded-md text-sm focus:outline-0"
+          styles={selectStyleConfig}
+          placeholder="Select"
+          options={repayTypeSubOption}
+          value={repayTypeSubOption?.find(
+            (option: any) => option.value === payType
+          )}
+          onChange={(item: any) => {
+            dispatch(
+              repaymentDetailPageSlice.actions.updateRepaymentData({
+                ...repaymentData,
+                payType: item?.value,
+              })
+            );
+          }}
+        />
+
         <div className="mt-5 flex gap-2">
           <Button
             text={t('Cancel')}
