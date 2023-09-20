@@ -2,7 +2,7 @@ import {Moment} from 'moment';
 import moment from 'moment-timezone';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useNavigate} from 'react-router';
+import {Outlet, useNavigate} from 'react-router';
 
 import {FeeRateKeyEnum} from '../../../api/indexService/FeeRateKeyEnum';
 import {PlatformProduct} from '../../../api/indexService/PlatformProduct';
@@ -113,9 +113,9 @@ const IndexPage = () => {
     }
   }, [webViewVisible]);
 
- 
+
   const indexPageState = useSelector((state: RootState) => state.indexPage);
-// console.log(indexPageState)
+  // console.log(indexPageState)
   // NOTE: unknow | UserAuthing | UserRejected
   let finalPageState = PageStateEnum.unknow;
   if (indexPageState.user.state === USER_AUTH_STATE.authing) {
@@ -141,9 +141,9 @@ const IndexPage = () => {
     dispatch(IndexPageSagaAction.user.reacquireCreditAction(null));
   }, [disableClickReacquireCredit]);
 
-const onUserClickViewApplicationProgress = () => {
-  navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
-}
+  const onUserClickViewApplicationProgress = () => {
+    navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
+  }
 
 
   const navigate = useNavigate();
@@ -172,18 +172,34 @@ const onUserClickViewApplicationProgress = () => {
 
       let firstRoundFinalIndex = 0;
       indexPageState.indexAPI?.products.map((product, index) => {
-        if (processSuccess) {
-          // NOTE: 已經完成任務，忽略執行
-        } else {
-          // console.log("currentTotalPrice", currentSelectedProductsPrice)
-          // NOTE: 假如加入此商品總額度沒爆掉。
-          const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
-          if (tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
+        // console.log("currentTotalPrice", currentSelectedProductsPrice)
+        // NOTE: 假如加入此商品總額度沒爆掉。
+        const tempCurrentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+        if (tempCurrentSelectedProductsPrice <= quotaBarTargetPrice) {
+          // NOTE: 實際加入此商品
+          const finalProduct: FinalProductType = {
+            ...product,
+            calculating: {
+              finalLoanPrice: product.max,
+              interestPrice: 0,
+              terms: 0,
+              disbursalPrice: 0,
+              dueDate: '',
+            },
+          };
+          currentSelectedProducts.push(finalProduct);
+          // console.log("add product.max", product.max);
+          // NOTE: 實際加入後商品的總額
+          currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
+          // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
+        } else if (tempCurrentSelectedProductsPrice > quotaBarTargetPrice ) {
+          const remain = quotaBarTargetPrice - currentSelectedProductsPrice;
+          if(product.min <= remain && remain <= product.max) {
             // NOTE: 實際加入此商品
             const finalProduct: FinalProductType = {
               ...product,
               calculating: {
-                finalLoanPrice: product.max,
+                finalLoanPrice: remain,
                 interestPrice: 0,
                 terms: 0,
                 disbursalPrice: 0,
@@ -191,16 +207,10 @@ const onUserClickViewApplicationProgress = () => {
               },
             };
             currentSelectedProducts.push(finalProduct);
-
             // console.log("add product.max", product.max);
-
             // NOTE: 實際加入後商品的總額
             currentSelectedProductsPrice = currentSelectedProductsPrice + product.max;
             // console.log("added product currentTotalPrice", currentSelectedProductsPrice)
-          } else {
-            // NOTE: 不能再借了
-            firstRoundFinalIndex = index;
-            processSuccess = true;
           }
         }
       });
@@ -222,14 +232,14 @@ const onUserClickViewApplicationProgress = () => {
       while (processSuccess && nextIndex <= maxIndex) {
         const nextProduct = indexPageState.indexAPI?.products[nextIndex];
         // console.log("nextProduct", nextProduct);
-        if (nextProduct && nextProduct.min <= remainDistributingQuota && remainDistributingQuota < nextProduct.max) {
+        if (nextProduct && nextProduct.min <= remainDistributingQuota) {
           // console.log("目前商品可以不借到 max 來達到滿足")
           // console.log("只借: ", remainDistributingQuota);
           // NOTE: 實際商品最後借到的金額
           const finalProduct: FinalProductType = {
             ...nextProduct,
             calculating: {
-              finalLoanPrice: remainDistributingQuota,
+              finalLoanPrice: remainDistributingQuota >= nextProduct.max ? nextProduct.max : remainDistributingQuota,
               interestPrice: 0,
               terms: 0,
               disbursalPrice: 0,
@@ -373,7 +383,8 @@ const onUserClickViewApplicationProgress = () => {
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder ||
       // NOTICE: 額度不足
       // REFACTOR ME
-      indexPageState.indexAPI?.availableAmount === 0 
+      indexPageState.indexAPI?.availableAmount === 0 ||
+      calculatingProducts?.length === 0
     ) {
       disable = true;
     }
@@ -391,6 +402,7 @@ const onUserClickViewApplicationProgress = () => {
       indexPageState.user.state === USER_AUTH_STATE.reject,
       indexPageState.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able,
       indexPageState.order.state === ORDER_STATE.hasOverdueOrder  && isShowReacquireButton,
+
       // (indexPageState.order.state === ORDER_STATE.hasOverdueOrder
       //   ||indexPageState.order.state === ORDER_STATE.normal
       //   ||indexPageState.order.state === ORDER_STATE.empty
@@ -427,18 +439,21 @@ const onUserClickViewApplicationProgress = () => {
       return simpleProduct;
     });
 
-    if (simpleProducts.length === 0) {
-        dispatch(modalSlice.actions.updateNoRecommendProductModal({ show: true }))
-    } else {
-        dispatch(
-            IndexPageSagaAction.user.applyProductAction({
-                applyAmount: currentSelectedProductsPrice,
-                // bankId: 11,
-                details: simpleProducts,
-            })
-        );
-    }
-    
+    // Note: 沒有產品
+    // if (simpleProducts.length === 0) {
+    //     dispatch(modalSlice.actions.updateNoRecommendProductModal({ show: true }))
+    // }
+
+    dispatch(
+      IndexPageSagaAction.user.applyProductAction({
+          applyAmount: currentSelectedProductsPrice,
+          // bankId: 11,
+          details: simpleProducts,
+      })
+    );
+
+    navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
+
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
   const onClickToCustomerService = useCallback(() => {
@@ -564,7 +579,7 @@ const onUserClickViewApplicationProgress = () => {
           <div className='grow flex items-end'>
             <TipsSection state={indexPageState} isLoading={isReacquireLoading} />
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -615,7 +630,8 @@ const onUserClickViewApplicationProgress = () => {
 
       {/*NOTE: Modals*/}
       {/*NOTE: Quick Repay Modal*/}
-      {modelState.quickRepaymentSummaryModal.show && (
+
+      {/* {modelState.quickRepaymentSummaryModal.show && (
         <div className={'z-10'}>
           <QuickRepaymentSummaryModal
             state={indexPageState}
@@ -656,7 +672,7 @@ const onUserClickViewApplicationProgress = () => {
             }}
           />
         </div>
-      )}
+      )} */}
 
       {/*NOTE: Quick Repay - RepaymentAgreementModal*/}
       {modelState.loanAgreementModal.show && (
@@ -713,6 +729,7 @@ const onUserClickViewApplicationProgress = () => {
       {/*NOTE: 無推薦產品提示訊息 */}
       {modelState.noRecommendProductModal.show && (<NoRecommendProductModal/>)}
 
+      <Outlet/>
     </div>
   );
 };

@@ -42,7 +42,7 @@ const CustomerServicePage = () => {
                         </a>
                     </div>
                     <div className='my-5'><Horizontal /></div>
-                    {indexPage.user.state !== USER_AUTH_STATE.ready &&
+                    {indexPage.user.state !== USER_AUTH_STATE.ready && indexPage.user.state !== USER_AUTH_STATE.authing &&
                         indexPage.indexAPI?.customerServiceUrl &&
                         (<>
                             <div className='flex justify-between text-sm '>
@@ -54,12 +54,13 @@ const CustomerServicePage = () => {
                                     <Button text={'Go'} className='w-auto py-1 px-5'
                                         onClick={() => {
                                             navigate(`/v2/online-customer-service?token=${getToken()}`);
-                                        }} />
+                                        }}/>
                                 </div>
                             </div>
                             <div className='my-5'><Horizontal /></div>
                         </>
-                        )}
+                        )
+                    }
                     <div className='flex justify-between text-sm '>
                         <div>
                             <div className='font-bold text-primary-main grow'>{'Feedback'}</div>

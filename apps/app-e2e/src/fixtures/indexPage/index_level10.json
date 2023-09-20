@@ -3,9 +3,9 @@
   "usedAmount": 26000,
   "availableAmount": 254000,
   "quotaBar": {
-    "min": 1000,
-    "max": 58000,
-    "current": 58000,
+    "min": 3500,
+    "max": 4000,
+    "current": 3500,
     "serial": 1000
   },
   "chargeFeeDetails": [

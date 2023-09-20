@@ -60,7 +60,7 @@ const IndiaCoupon = (props: ICouponProps) => {
         ></div>
         <div
           className={cx(
-            'border-primary-main absolute bottom-[-1px] right-[-11px] h-[10px] w-[20px] rounded-t-full border border-b-0 border-solid bg-white',
+            'absolute bottom-[-1px] right-[-11px] h-[10px] w-[20px] rounded-t-full border border-b-0 border-solid bg-white',
             {
               'border-primary-main': status !== 'disabled',
               'border-cstate-disable-main': status === 'disabled',

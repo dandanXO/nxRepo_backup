@@ -15,9 +15,9 @@ const IndiaExtendConfirmModal = () => {
   const { t } = useTranslation(i18nExtendConfirmModal.namespace);
 
   return (
-    <div className={`p-4 text-ctext-primary`}>
-      {' '}
-      <div className="text-xl font-bold">t('Extend')</div>
+    <Modal className={`text-ctext-primary`}>
+      <div className='p-4'>
+      <div className="text-xl font-bold">{t('Extend')}</div>
       <div className="my-5 font-bold text-sm leading-tight">
         {t('Extensions are intended for situations where you are genuinely experiencing financial difficulties and are unable to fully repay the amount owed.')}
       </div>
@@ -27,7 +27,7 @@ const IndiaExtendConfirmModal = () => {
       <div className={`flex flex-col`}>
         <Button
           className={`mb-2 w-full`}
-          text={'Got it and go extension'}
+          text={t('Got It And Go Extension')}
           onClick={() => {
             navigate(`${PagePathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
               state: {
@@ -38,7 +38,8 @@ const IndiaExtendConfirmModal = () => {
         />
         <Button type={'ghost'} ghostTheme={'tertiary'} className={`w-full`} text={'Next time'} onClick={() => navigate(-1)} />
       </div>
-    </div>
+      </div>
+    </Modal>
   );
 };
 

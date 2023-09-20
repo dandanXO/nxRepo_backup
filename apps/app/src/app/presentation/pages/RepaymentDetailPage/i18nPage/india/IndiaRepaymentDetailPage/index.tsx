@@ -290,9 +290,9 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
           {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
               <div className={`bg-primary-assistant text-primary-main py-2 px-4 text-left text-sm leading-none flex my-4`}>
-                {/*<div className='w-1/3 flex items-center'>*/}
-                  <img className={"w-[28px]"} src={VipIcon()} alt=""/>
-                {/*</div>*/}
+                <div className='flex items-center w-[80px]'>
+                  <img className={""} src={VipIcon()} alt=""/>
+                </div>
                 <div className='ml-2'>
                     <span className='font-bold'> VIP Benefits!</span> You'll enjoy
                     <span className='font-bold'> higher loan limits</span> and
@@ -338,14 +338,14 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               <div>{t('Attention')}：</div>
               <ul className="list-outside list-decimal pl-3 pt-1  leading-none">
                 <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
-                <li>{t('Overdue for more than')} <span className={`text-primary-main`}>{t('N days')}</span>
+                <li>{t('Overdue for more than')} <span className={`text-cstate-info-main`}>{t('N days')} </span>
                   {t("will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.")}
                 </li>
                 <li>{t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
-                  <span className={`text-primary-main`}>mail@mail.com</span>
+                  <span className={`text-cstate-info-main`}>mail@mail.com</span>
                 </li>
                 <li className='font-bold'>
-                  {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}
+                  {t('After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.')}
                 </li>
               </ul>
             </div>
@@ -353,7 +353,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
-          <div className={`flex flex-col bg-primary-assistant -m-4 py-4 px-5 mt-6`}>
+          <div className={`flex flex-col bg-primary-assistant -mx-4 py-4 px-5 mt-6`}>
             {/*<div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>*/}
             <div className={`text-ctext-primary mb-3 text-xs leading-none`}>
               {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}

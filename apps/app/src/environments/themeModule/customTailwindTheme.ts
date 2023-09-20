@@ -43,13 +43,21 @@ import v90 from './india/v90/tailwind.theme';
 import v91 from './india/v91/tailwind.theme';
 import v92 from './india/v92/tailwind.theme';
 import v93 from './india/v93/tailwind.theme';
+import v94 from './india/v94/tailwind.theme';
+import v95 from './india/v95/tailwind.theme';
+import v96 from './india/v96/tailwind.theme';
+import v97 from './india/v97/tailwind.theme';
 
 // NOTE: Mexico
-import v1 from './mexico/v1/tailwind.theme';
-import v2 from './mexico/v2/tailwind.theme';
-import v3 from './mexico/v3/tailwind.theme';
-import v4 from './mexico/v4/tailwind.theme';
-import v7 from './mexico/v7/tailwind.theme';
+import MXv1 from './mexico/v1/tailwind.theme';
+import MXv2 from './mexico/v2/tailwind.theme';
+import MXv3 from './mexico/v3/tailwind.theme';
+import MXv4 from './mexico/v4/tailwind.theme';
+import MXv5 from './mexico/v5/tailwind.theme';
+import MXv6 from './mexico/v6/tailwind.theme';
+import MXv7 from './mexico/v7/tailwind.theme';
+import MXv8 from './mexico/v8/tailwind.theme';
+import MXv9 from './mexico/v9/tailwind.theme';
 
 // NOTE: Pakistan
 import PKv15 from './pakistan/v15/tailwind.theme';
@@ -117,6 +125,10 @@ export const themes: IThemes = {
     v91,
     v92,
     v93,
+    v94,
+    v95,
+    v96,
+    v97,
   },
   [AllCountriesEnum.pakistan]: {
     v15: PKv15,
@@ -132,11 +144,15 @@ export const themes: IThemes = {
     v25: PKv25,
   },
   [AllCountriesEnum.mexico]: {
-    v1,
-    v2,
-    v3,
-    v4,
-    v7,
+    v1: MXv1,
+    v2: MXv2,
+    v3: MXv3,
+    v4: MXv4,
+    v5: MXv5,
+    v6: MXv6,
+    v7: MXv7,
+    v8: MXv8,
+    v9: MXv9,
   },
   [AllCountriesEnum.philippines]: {
     v1: PHv1,

@@ -47,7 +47,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/v2?token=246b4469e1004505a5a45f29b4a569a1", {
+  cy.visit("/v2?token=1119f2e03619487c8fd4bb609c8ec8ed", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {
@@ -645,12 +645,7 @@ describe('IndexPage', () => {
           .and('contain', 'Due Date')
           .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
 
-      // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-      indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
-          cy.url().should('include', '/repayment-detail');
-      }).then(() => {
-          cy.go(-1)
-      })
+
 
       // NOTE: important 看到不反灰、可使用的借款額度拉霸、看到文字顯示最低與最高金額
       indexPagePo.quotaSlider().should("be.visible");
@@ -675,6 +670,13 @@ describe('IndexPage', () => {
 
       // NOTE: important 看到下方 Tab 的 Payment 有紅點提示
       indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("not.exist");
+
+      // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
+      indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+        cy.url().should('include', '/repayment-detail');
+      }).then(() => {
+        cy.go(-1)
+      })
   })
 
   // FIGMA: 首頁-認證完成-訂單逾期 (Android: Level 5)
@@ -808,12 +810,7 @@ describe('IndexPage', () => {
         .and('contain', moment(indexServiceResponse.payableRecords[0].dueDate).format('DD-MM-YYYY'))
         .and('contain', 'Remind you to prioritize paying off overdue payments before you can borrow again.');
 
-    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
-    indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
-        cy.url().should('include', '/repayment-detail');
-    }).then(() => {
-        cy.go(-1)
-    })
+
 
     // NOTE: important 看到反灰但無法使用的可借款額度拉霸、無法倒數計計時、看到文字顯示最低與最高範圍為 ****
     indexPagePo.quotaSlider().should("be.visible");
@@ -843,11 +840,17 @@ describe('IndexPage', () => {
     indexPagePo.tabPayment().should("be.visible");
     indexPagePo.tabPayment().find("[data-testing-id='tab-payment-notice']").should("be.visible");
 
+    // NOTE: important 能點擊 repay button 跳轉到借款記錄頁面
+    indexPagePo.orderNotice().find("[data-testing-id='repay']").click().then(() => {
+      cy.url().should('include', '/repayment-detail');
+    }).then(() => {
+      cy.go(-1)
+    })
   })
 
   // NOTICE: 情境：之前有訂單，最近一次訂單被拒 ???
   // FIGMA: 首頁-認證完成-新客訂單被拒/老客獲取額度被拒 (Android: Level 3)
-  it.only("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
+  it("status: 用戶已認證、新訂單被拒絕。老客情境：之前有訂單，最近一次訂單被拒。", () => {
 
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
@@ -1016,10 +1019,8 @@ describe('IndexPage', () => {
 
       // NOTE: important 看到訂單被拒絕訊息，可返回借款天數，新客為 90 天、老客為 7 天。
       indexPagePo.noticeOrderOrQuotaRejected().should("be.visible");
-      indexPagePo.noticeOrderOrQuotaRejected().contains('We apologize for the inconvenience');
-      indexPagePo.noticeOrderOrQuotaRejected().contains("We are currently unable to process your loan application. This does not mean that your credit is bad; it is simply due to a high number of current applicants, making it difficult for us to meet everyone's needs immediately.");
-      indexPagePo.noticeOrderOrQuotaRejected().contains('Tip: Repaying loans on time can help prioritize your loan application.');
-      indexPagePo.noticeOrderOrQuotaRejected().contains('You are welcome to try applying again after the countdown is complete.');
+      indexPagePo.noticeOrderOrQuotaRejected().contains('Application Denied');
+      indexPagePo.noticeOrderOrQuotaRejected().contains("Your application has been declined due to insufficient credit score. You are welcome to try applying again in 24 hours.");
 
       // NOTE: important 根據可返回借款天數顯示倒數計時器
       indexPagePo.welcomBackTimer().should("be.visible").contains('Welcome back and reapply in');
@@ -4664,7 +4665,7 @@ describe('IndexPage', () => {
   })
 
 
-  it("status: level10 => level10 overdue", () => {
+  it.only("status: level10 => level10 overdue", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -4682,10 +4683,11 @@ describe('IndexPage', () => {
     })
 
     // NOTE: Given
-    const indexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10.json");
+    // const indexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10.json");
+    const indexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index-level10_bug_products.json");
 
     // NOTE: Given Order overdue
-    const overdueIndexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10_overdue.json");
+    // const overdueIndexServiceResponse: IndexServiceResponse = require("../fixtures/indexPage/index_level10_overdue.json");
 
 
     let indexCount = 0;
@@ -4701,7 +4703,7 @@ describe('IndexPage', () => {
           console.log("[首頁]2")
           req.send({
             statusCode: 200,
-            body: overdueIndexServiceResponse,
+            body: indexServiceResponse,
           })
         }
         indexCount++;

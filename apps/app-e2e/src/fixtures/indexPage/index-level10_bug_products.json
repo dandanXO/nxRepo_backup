@@ -1,0 +1,167 @@
+{
+  "totalAmount": 3000,
+  "usedAmount": 0,
+  "availableAmount": 3000,
+  "quotaBar": {
+    "min": 500,
+    "max": 20000,
+    "current": 3500,
+    "serial": 300,
+    "steps": [
+      1000,
+      2000
+    ]
+  },
+  "chargeFeeDetails": [
+    {
+      "title": "Service Charge",
+      "counting": 0.15,
+      "key": "SERVICE_FEE",
+      "chargeStage": "PRE_INTEREST"
+    },
+    {
+      "title": "Processing Fee",
+      "counting": 0.75,
+      "key": "PROCESSING_FEE",
+      "chargeStage": "PRE_INTEREST"
+    },
+    {
+      "title": "Interest",
+      "counting": 0.1,
+      "key": "LOAN_INTEREST",
+      "chargeStage": "PRE_INTEREST"
+    },
+    {
+      "title": "Markup Fee",
+      "counting": 0.05,
+      "key": "LOAN_INTEREST",
+      "chargeStage": "POST_INTEREST"
+    },
+    {
+      "title": "Processing Fee",
+      "counting": 0.7,
+      "key": "PROCESSING_FEE",
+      "chargeStage": "POST_INTEREST"
+    },
+    {
+      "title": "Other Charges",
+      "counting": 0.25,
+      "key": "OTHER_CHARGES",
+      "chargeStage": "POST_INTEREST"
+    }
+  ],
+  "products": [
+    {
+      "productId": 16,
+      "productName": "platformABCDE",
+      "logoUrl": "https://platform-bucket-pk.s3.ap-south-1.amazonaws.com/CHANGEME/upload/product/product-icon-688362106205040.png",
+      "min": 1000,
+      "max": 1000,
+      "terms": 13,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 17,
+      "productName": "YY LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4419586691995204.png",
+      "min": 6000,
+      "max": 6000,
+      "terms": 13,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 1,
+      "productName": "ZZ LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-6234218750439684.png",
+      "min": 6000,
+      "max": 6000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 19,
+      "productName": "LONG LOEAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/ad_logo/ad-logo-822352090585600.png",
+      "min": 6000,
+      "max": 6000,
+      "terms": 13,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 3,
+      "productName": "AA LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285186.png",
+      "min": 2000,
+      "max": 2000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 4,
+      "productName": "BB LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285141.png",
+      "min": 6000,
+      "max": 6000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 5,
+      "productName": "CC LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285116.png",
+      "min": 6000,
+      "max": 6000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 6,
+      "productName": "EE LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/icon_logo/8285099.png",
+      "min": 2000,
+      "max": 2000,
+      "terms": 7,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    },
+    {
+      "productId": 18,
+      "productName": "MM LOAN",
+      "logoUrl": "https://platform-bucket-in.s3.ap-south-1.amazonaws.com/%E6%B5%8B%E8%AF%95%E7%94%A8/upload/product/product-icon-4424980256908184.png",
+      "min": 400,
+      "max": 900,
+      "terms": 13,
+      "platformChargeFeeRate": 0.000,
+      "postPlatformChargeFeeRate": 0.300
+    }
+  ],
+  "productDetailItems": [
+    "LOAN_INTEREST",
+    "DISBURSAL_AMOUNT",
+    "TERMS",
+    "DUE_DATE"
+  ],
+  "riskReject": false,
+  "refreshable": false,
+  "noQuotaBalance": false,
+  "noQuotaByRetryFewTimes": false,
+  "orderUnderReview": false,
+  "refreshableUntil": "2023-08-17T23:59:59",
+  "offerExpireTime": "2023-08-17T23:59:59",
+  "serverUnixTime": 1692266001,
+  "hiddenLoanDetail": false,
+  "oldUserForceApply": false,
+  "payableRecords": [],
+  "marquee": "Borrow now to get discounts.",
+  "popupUrl": null,
+  "customerServiceUrl": null,
+  "bankBindH5url": "https://frontend.pk-api-dev.com/v2/bind-bankcard?token=eadf98cff3c8408d91c411b003d9c43b&cardholderName=rffc",
+  "loanAgreementUrl": "https://site.pk-api-dev.com/api/v2/html/loan-agreement?sign=7981fa53bcfa3a0b1676f9b8d4dddd2f"
+}
