@@ -47,7 +47,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/v2?token=773d73027fbe47369fd9f0426212bc71", {
+  cy.visit("/v2?token=4e026ce9cc1a46af912f68fb0109577b", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {
@@ -1019,10 +1019,8 @@ describe('IndexPage', () => {
 
       // NOTE: important 看到訂單被拒絕訊息，可返回借款天數，新客為 90 天、老客為 7 天。
       indexPagePo.noticeOrderOrQuotaRejected().should("be.visible");
-      indexPagePo.noticeOrderOrQuotaRejected().contains('We apologize for the inconvenience');
-      indexPagePo.noticeOrderOrQuotaRejected().contains("We are currently unable to process your loan application. This does not mean that your credit is bad; it is simply due to a high number of current applicants, making it difficult for us to meet everyone's needs immediately.");
-      indexPagePo.noticeOrderOrQuotaRejected().contains('Tip: Repaying loans on time can help prioritize your loan application.');
-      indexPagePo.noticeOrderOrQuotaRejected().contains('You are welcome to try applying again after the countdown is complete.');
+      indexPagePo.noticeOrderOrQuotaRejected().contains('Application Denied');
+      indexPagePo.noticeOrderOrQuotaRejected().contains("Your application has been declined due to insufficient credit score. You are welcome to try applying again in 24 hours.");
 
       // NOTE: important 根據可返回借款天數顯示倒數計時器
       indexPagePo.welcomBackTimer().should("be.visible").contains('Welcome back and reapply in');
