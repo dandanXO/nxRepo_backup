@@ -57,4 +57,6 @@ export type PersonalQuotaBar = {
 
   min: number;
   // 拉霸最低額度
+
+  steps: number[];
 };
