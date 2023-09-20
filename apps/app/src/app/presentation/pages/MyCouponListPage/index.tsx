@@ -66,10 +66,10 @@ const MyCouponListPage = () => {
 
       <div className="mx-5 flex flex-col justify-center items-center ">
         {currentData && currentData.records && currentData.records.length >0 ? (
-          currentData?.records?.map((coupon) => {
+          currentData?.records?.map((coupon,index) => {
             return (
               <Coupon
-                key={coupon.couponId}
+                key={listStatus + coupon.couponId + index}
                 expireTime={coupon.redeemed ? coupon.redeemedTime : coupon.expiredTime || ''}
                 discountAmount={coupon.discountAmount || ''}
                 couponType={coupon.couponType || ''}
