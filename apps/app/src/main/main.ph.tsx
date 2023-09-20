@@ -123,7 +123,7 @@ const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}/>
+         {/*<Route path={PagePathEnum.LoginPage} element={<LoginPage />}/>*/}
         <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}/>
         <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />
