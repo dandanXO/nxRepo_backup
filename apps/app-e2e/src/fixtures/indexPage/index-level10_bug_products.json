@@ -3,8 +3,8 @@
   "usedAmount": 0,
   "availableAmount": 3000,
   "quotaBar": {
-    "min": 3000,
-    "max": 4000,
+    "min": 500,
+    "max": 20000,
     "current": 3500,
     "serial": 300,
     "steps": [
