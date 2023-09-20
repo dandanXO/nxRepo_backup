@@ -37,7 +37,10 @@ const CustomerServicePage = () => {
                             <div className='font-bold text-primary-main grow'>{'Contact by Mail'}</div>
                             <div>{app?.init?.csEmail || ''}</div>
                         </div>
-                        <a href={`mailto:${app?.init?.csEmail || ''}`} className='self-center'>
+                        <a href={`mailto:${app?.init?.csEmail || ''}
+                            ?subject=Feedback
+                            &body=App:%20${app?.androidAppInfo?.appName||''}%0DName:%20${indexPage?.user?.userName||''}%0DPhone:%20${app?.androidAppInfo?.phoneNo||''}`} 
+                            className='self-center'>
                             <Button className={'py-1 px-5'} text={'Go'} />
                         </a>
                     </div>
