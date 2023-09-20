@@ -4,7 +4,7 @@
   "availableAmount": 3000,
   "quotaBar": {
     "min": 500,
-    "max": 20000,
+    "max": 21000,
     "current": 3500,
     "serial": 300,
     "steps": [

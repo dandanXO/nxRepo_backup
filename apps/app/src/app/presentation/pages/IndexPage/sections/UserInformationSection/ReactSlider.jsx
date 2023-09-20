@@ -80,11 +80,11 @@ function alignValue(val, props) {
     alignedValue += valModStep > 0 ? props.step : -props.step;
   }
 
-  // NOTICE: 解決 min: 3500, max: 4000, 但是後端給 step: 1000後，前端可以往右拉會爆掉問題
-  if(alignedValue > props.max) {
+  // NOTICE: 1.解決 min: 3500, max: 4000, 但是後端給 step: 1000後，前端可以往右拉會爆掉問題。
+  // NOTICE: 2.並可以拉滿
+  if(val >= props.max) {
     alignedValue = props.max;
   }
-
 
   return parseFloat(alignedValue.toFixed(5));
 }
@@ -725,7 +725,7 @@ class ReactSlider extends React.Component {
   // calculates the offset of a thumb in pixels based on its value.
   calcOffset(value) {
     const range = this.props.max - this.props.min;
-    // NOTE: 修正當最小值最大值相同時，thumb應該要再最大值的刻度那
+    // NOTICE: 修正當最小值最大值相同時，thumb應該要再最大值的刻度那
     if (range === 0) {
       return this.state.upperBound;
     }
