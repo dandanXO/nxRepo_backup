@@ -35,10 +35,8 @@ const RepaymentCouponModal = () => {
     (state: RootState) => state.repaymentDetailPage
   );
   const { t } = useTranslation(i18nRepaymentCouponModal.namespace);
-  const { orderNo = getOrderNo(), balance } =
-    repaymentDetailPageState.repaymentDetail || {};
-  const { payType = 'MOBILE_WALLET' } =
-    repaymentDetailPageState.repaymentData || {};
+  const { orderNo = getOrderNo(), balance } = repaymentDetailPageState.repaymentDetail || {};
+  const { payType = 'MOBILE_WALLET' } = repaymentDetailPageState.repaymentData || {};
   const { paymentAmount, paymentMethod } = location.state || {};
   const [
     triggerGetList,
@@ -113,9 +111,6 @@ const RepaymentCouponModal = () => {
     return (
       <>
         <div className={`flex grow flex-col items-center justify-center`}>
-          {environment.country !== PhilippinesCountry.country && (
-            <img src={NoDataImage} alt="" />
-          )}
           <div className={'text-ctext-secondary mt-5'}>
             {t('There are currently no coupon')}
           </div>
@@ -253,11 +248,7 @@ const RepaymentCouponModal = () => {
           );
         }}
       />
-      {applicableCouponList && applicableCouponList.length > 0 ? (
-        renderCouponList()
-      ) : (
-        <NoCouponSection />
-      )}
+      {currentData && currentData.length > 0 ? renderCouponList() : <NoCouponSection />}
     </Modal>
   );
 };

@@ -21,9 +21,10 @@ export const LatestOrderStatus = (props: Props) => {
 
   // NOTE: User Event
   const onUserClickToRepay = () => {
-    navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, {
+    const orderNo = props.state.order.overdueOrComingOverdueOrder?.orderNo;
+    navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
       state: {
-        orderNo: props.state.order.overdueOrComingOverdueOrder?.orderNo,
+        orderNo: orderNo,
       },
     });
   };
@@ -44,7 +45,7 @@ export const LatestOrderStatus = (props: Props) => {
           </div>
 
           <div className={'bottom flex flex-col text-xs'}>
-            <div className={'flex flex-row items-end justify-center'}>
+            <div className={'flex flex-row items-end'}>
               {/*NOTE: 顯示逾期文字*/}
               {hasOverdueOrder && (
                 <div className={'mr-1 rounded-lg bg-cstate-error-main px-2 py-0.5 text-xs text-white'}>Overdue</div>

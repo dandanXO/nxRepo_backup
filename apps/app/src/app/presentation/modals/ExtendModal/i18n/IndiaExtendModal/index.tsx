@@ -94,7 +94,7 @@ const IndiaExtendModal = (props: any) => {
         title={t('Extension Due Date')}
         text={extendDate ? formatDate(moment(extendDate)) : ''}
         titleColor={listTitleStyle}
-        textColor={listTextStyle}
+        textColor={"text-primary-main text-sm"}
       />
       <Divider />
 

@@ -15,7 +15,7 @@ export const ProgressItem = (props: Props) => {
         'border-primary-main bg-primary-assistant': props.isHightlight,
         'border-cstate-disable-main': !props.isHightlight,
       })}>
-        <div className={cx('title font-bold text-sm text-primary-main', {
+        <div className={cx('title font-bold text-sm', {
           'text-primary-main': props.isHightlight,
           'text-cstate-disable-main': !props.isHightlight,
         })}>{props.title}</div>

@@ -54,6 +54,7 @@ import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
 import RepaymentCouponModal from  '../modals/RepaymentCouponModal';
 import IBANFinderModal from '../modals/i18n/pakistan/IBANFinderModal';
 import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
+import QuickRepaymentModal from '../modals/QuickRepaymentModal';
 
 
 // NOTICE: Static Loading : Compontents
@@ -204,7 +205,9 @@ export const AppRouter = () => {
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
         <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
-        <Route path={PagePathEnum.IndexPage} element={<IndexPage />} />
+        <Route path={PagePathEnum.IndexPage} element={<IndexPage />} >
+          <Route path="quick-repayment-modal" element={<QuickRepaymentModal />} />
+        </Route>
         <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
         <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
         <Route path="/v2/auth" element={<AuthPage />} />

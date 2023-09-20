@@ -41,8 +41,8 @@ export const i18nLoanDetailsPage: i18nComponent = {
         'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.',
       'Email us if you have any questions about your responsibilities or for more information.':
         'Email us if you have any questions about your responsibilities or for more information.',
-      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼':
-        'After completing the repayment, take a screenshot and upload your repayment receipt here ▼',
+      'After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.':'After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.',
+      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼':'After completing the repayment, take a screenshot and upload your repayment receipt here ▼',
       'Upload Receipt': 'Upload Receipt',
 
       //Status
