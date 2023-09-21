@@ -5,7 +5,6 @@ import {MexicoCountry} from "../../../../../../libs/shared/domain/src/country/Me
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 import {PhilippinesCountry} from 'libs/shared/domain/src/country/PhilippinesCountry';
 import {isInApp} from "../../modules/appEnvironment/isInApp";
-import "../../modules/cypress";
 
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
