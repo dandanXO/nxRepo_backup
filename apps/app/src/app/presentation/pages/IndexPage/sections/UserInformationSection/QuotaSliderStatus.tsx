@@ -104,8 +104,24 @@ export const QuotaSliderStatus = (props: Props) => {
               step={props.state.indexAPI?.quotaBar.serial || 0}
               value={currentQuotaValue}
               onChange={(value: any, index: any) => {
-                // console.log("quota.value", value)
-                const quotaValue = isNaN(value) ? 0 : value
+                let newValue = value;
+                // NOTICE: 當 steps 有值，只能滑動到精準的金額位置
+                if(props.state.indexAPI?.quotaBar.steps && props.state.indexAPI?.quotaBar.steps.length > 0) {
+                  if(props.state.indexAPI?.quotaBar.steps.indexOf(value) == -1) {
+                    for(let index = props.state.indexAPI?.quotaBar.steps.length-1;index >= 0; index--) {
+                      if (value >= props.state.indexAPI?.quotaBar.steps[index]) {
+                        newValue = props.state.indexAPI?.quotaBar.steps[index];
+                        setCurrentQuotaValue(newValue);
+                        break;
+                      } else if(value <= props.state.indexAPI?.quotaBar.steps[0]){
+                        // index:0
+                        newValue = props.state.indexAPI?.quotaBar.steps[0];
+                        setCurrentQuotaValue((props.state.indexAPI?.quotaBar.steps[0]));
+                      }
+                    }
+                  }
+                }
+                const quotaValue = isNaN(newValue) ? 0 : newValue
                 setCurrentQuotaValue(quotaValue);
                 setCurrentQuotaLabelValue(formatPrice(quotaValue));
               }}

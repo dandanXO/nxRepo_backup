@@ -18,7 +18,10 @@ import { i18nLoanDetailsPage } from '../../presentation/pages/RepaymentDetailPag
 import { i18nUploadPaymentReceiptPage } from '../../presentation/pages/UploadPaymentReceiptPage/i18nPage/translations';
 import { i18nUploadingFileModal } from '../../presentation/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';
 import { i18nUploadedPaymentReceiptPage } from '../../presentation/pages/UploadedPaymentReceiptPage/components/i18n/translations';
+import {AllCountry} from "../../../../../../libs/shared/domain/src/country/AllCountry";
+import {environment} from "../../../environments/environmentModule/environment";
 
+// NOTE: configure
 i18next
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(i18nextPlugin)
@@ -234,3 +237,26 @@ i18next
   );
 
 export { renderByCountry } from './renderByCountry';
+
+export const I18nModule = {
+  initialize: () => {
+    const i18Language = AllCountry.find(i => i.country === environment.country);
+    if (i18Language) {
+      i18next
+        .changeLanguage(i18Language?.language)
+        .then((t) => {
+          // console.log("changeLanguage:", environment.countryName);
+        })
+        .catch((err) => {
+          // console.log("changeLanguage:", environment.countryName);
+          // console.log("error:", err);
+          const error = new Error();
+          error.name = "changeLanguage";
+          if (err) error.message = JSON.stringify(err);
+          // if (AppFlag.enableSentry) {
+          //     Sentry.captureException(error);
+          // }
+        });
+    }
+  }
+}

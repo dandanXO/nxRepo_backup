@@ -110,7 +110,7 @@ const QuickRepaymentModal = () => {
                 }}
                 components={{
                   IndicatorSeparator,
-                  DropdownIndicator,
+                  // DropdownIndicator,
                 }}
                 value={optionValue}
                 onChange={(item: any) => {

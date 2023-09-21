@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environmentModule/environm
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
-import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { Page } from '../../components/layouts/Page';
 import { PagePathEnum } from '../PagePathEnum';

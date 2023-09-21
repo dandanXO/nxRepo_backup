@@ -19,7 +19,7 @@ import "../app/modules/errorHandler";
 import '../app/modules/sentry';
 import '../app/modules/i18n';
 import '../app/modules/timezone';
-import { applyCustomTheme } from '../app/modules/theme';
+import {ThemeModule} from '../app/modules/theme';
 import AppDataCollector from "../app/modules/dataCollectorContainer/AppDataCollector";
 
 import {appStore, history, RootState} from "../app/reduxStore";
@@ -62,7 +62,7 @@ const renderApp = () => {
   MonitorUsecaseFlow.appLoadAndroidAppInfo();
 
   // NOTICE: Theme
-  applyCustomTheme(NativeAppInfo);
+  ThemeModule.applyCustomTheme(NativeAppInfo);
   // alertModal(JSON.stringify(NativeAppInfo));
 
   // NOTE: Starting to render

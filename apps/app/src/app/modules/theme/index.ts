@@ -23,3 +23,6 @@ export const applyCustomTheme = (androidAppInfo: IAndroidAppInfo) => {
     applyCustomSharedLibTheme(androidAppInfo);
   }
 };
+export const ThemeModule = {
+  applyCustomTheme,
+}

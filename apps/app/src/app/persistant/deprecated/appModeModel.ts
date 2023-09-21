@@ -1,11 +1,4 @@
-import { AppMode, AppStorage } from '../modules/localstorage';
-
-export enum AppModeEnum {
-  'SimpleWebView' = 'SimpleWebView',
-  'IndexWebview' = 'IndexWebview',
-  'PureH5' = 'PureH5',
-  'None' = 'None',
-}
+import {AppMode, AppStorage} from '../../modules/localstorage';
 
 export class AppModeModel {
   static setMode(mode: AppMode) {

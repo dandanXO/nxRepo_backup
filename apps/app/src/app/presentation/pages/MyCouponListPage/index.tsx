@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import NoDataImage from '../../../../assets/NoData.svg';
 import { useLazyGetCouponListQuery } from '../../../api/rtk';
 import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequest';
-import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import Coupon from '../../components/Coupon';
 import { Tags } from '../../components/Tag';
 import { Page } from '../../components/layouts/Page';
@@ -66,10 +66,10 @@ const MyCouponListPage = () => {
 
       <div className="mx-5 flex flex-col justify-center items-center ">
         {currentData && currentData.records && currentData.records.length >0 ? (
-          currentData?.records?.map((coupon) => {
+          currentData?.records?.map((coupon,index) => {
             return (
               <Coupon
-                key={coupon.couponId}
+                key={listStatus + coupon.couponId + index}
                 expireTime={coupon.redeemed ? coupon.redeemedTime : coupon.expiredTime || ''}
                 discountAmount={coupon.discountAmount || ''}
                 couponType={coupon.couponType || ''}

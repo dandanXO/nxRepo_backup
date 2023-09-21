@@ -1,75 +1,11 @@
 import {environment} from '../../../environments/environmentModule/environment';
 import {AppEnvironment} from '../../modules/appEnvironment';
-import {AppModeEnum} from '../appModeModel';
 import {IAndroidAppInfo} from './types/IAndroidAppInfo';
 import {MexicoCountry} from "../../../../../../libs/shared/domain/src/country/MexicoCountry";
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
-import { PhilippinesCountry } from 'libs/shared/domain/src/country/PhilippinesCountry';
-
-// NOTICE: refactor me
-export const AppTempFlag = {
-  // NOTE: 預設是在 android，首頁版、還款與綁卡版
-  isWebview: true,
-};
-
-export const AppGlobal: { mode: AppModeEnum } = {
-  mode: AppModeEnum.None,
-};
-
-export const isInApp = (): boolean => {
-  const rules = ['WebView', '(iPhone|iPod|iPad)(?!.*Safari/)', 'Android.*(wv)'];
-  const regex = new RegExp(`(${rules.join('|')})`, 'ig');
-  const useragent = navigator.userAgent || navigator.vendor;
-  return Boolean(useragent.match(regex));
-};
-
-if (window.Cypress) {
-    // window.appReady = true
-    window.AppInfoTask = {
-      getAppInfo: () => JSON.stringify({
-        domain: 'https://www.oasis-gold.com',
-        environment: 'india',
-        packageId: 'com.ind.kyc.application',
-        appName: 'Local APP',
-        uiVersion: "56",
-        token: null,
-        mode: 'H5',
-        phoneNo: '1234567890',
-      })
-    }
-}
-
-// NOTICE: for testing dev pk
-// window.AppInfoTask = {
-//   getAppInfo: () => JSON.stringify({
-//     "packageId": "com.ind.kyc.application",
-//     "appName": "pkapidev",
-//     "domain": "pk-api-dev.com",
-//     "token": "b7faecdf8f5b4c6fb368fe5d3dcf7df2",
-//     "uiVersion": "24",
-//     "environment": "pakistan",
-//     "isPinCodeEnabled": false,
-//     "phoneNo": "6666666667",
-//     "deviceCode": "1d566731-ba41-4554-b1fc-3774be7a17c0",
-//     "envLanguage": "en"
-//   })
-// }
-
-// NOTICE: for testing dev in
-// window.AppInfoTask = {
-//   getAppInfo: () => JSON.stringify({
-//     appName: "longingloan",
-//     deviceCode: "e8561b5b-36f1-4dd7-bc2d-67466c7a1f47",
-//     domain: "india-api-dev.com",
-//     environment: "india",
-//     isPinCodeEnabled: false,
-//     mode: "Webview",
-//     packageId:"com.ind.kyc.application",
-//     phoneNo: "8888888888",
-//     token: "e1ab7e18244e4bfb9f8c48f3d4c317cd",
-//     uiVersion: "58",
-//   })
-// }
+import {PhilippinesCountry} from 'libs/shared/domain/src/country/PhilippinesCountry';
+import {isInApp} from "../../modules/appEnvironment/isInApp";
+import "../../modules/cypress";
 
 export const getAppInfo = (): IAndroidAppInfo => {
   // console.log("AppModeModel.getMode()", AppModeModel.getMode());
@@ -92,7 +28,6 @@ export const getAppInfo = (): IAndroidAppInfo => {
     mode: 'H5',
     phoneNo: '',
   };
-
 
     // if (AppModeModel.getMode() === AppModeEnum.IndexWebview || AppFlag.isForceToWebview) {
     if (!window['AppInfoTask'] || !window['AppInfoTask']['getAppInfo']) {
