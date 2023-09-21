@@ -40,6 +40,7 @@ import SystemCouponModal from '../../modals/SystemCouponModal';
 import {computeNumber} from "../../../modules/computeNumber";
 import {formatDate} from "../../../modules/format/formatDate";
 import NoRecommendProductModal from '../../modals/NoRecommendProductModal';
+import ExitConfirmModal from '../../modals/ExitConfirmModal';
 
 export type FinalProductType = PlatformProduct & {
   calculating: {
@@ -729,6 +730,9 @@ const IndexPage = () => {
       {/*NOTE: 無推薦產品提示訊息 */}
       {modelState.noRecommendProductModal.show && (<NoRecommendProductModal/>)}
 
+      {/*NOTE: 無推薦產品提示訊息 */}
+      {modelState.exitConfirmModal.show && (<ExitConfirmModal/>)}
+      
       <Outlet/>
     </div>
   );

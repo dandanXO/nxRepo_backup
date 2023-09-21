@@ -25,10 +25,13 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
         // console.log('currentPath', currentPath)
         // console.log('routerOnLocationChangedSaga', action);
 
-        if (prevPathname === PagePathEnum.RepaymentPage
-            || prevPathname === PagePathEnum.PersonalInfoPage
-            || prevPathname === PagePathEnum.IndexPage) {
-            yield put(push(`${PagePathEnum.IndexPage}?token=${getToken()}`));
+        if (prevPathname === PagePathEnum.RepaymentPage || prevPathname === PagePathEnum.PersonalInfoPage||prevPathname === PagePathEnum.IndexPage) {
+          yield put(push(`${PagePathEnum.IndexPage}?token=${getToken()}`));
+          if (prevPathname === PagePathEnum.IndexPage) {
+            yield put(modalSlice.actions.updateExitConfirmModal({
+              show: true
+            }));
+          }
         }
 
         // NOTE : RepaymentDetailPage route 控制
