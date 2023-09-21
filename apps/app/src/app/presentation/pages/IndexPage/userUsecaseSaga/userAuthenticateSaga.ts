@@ -1,7 +1,9 @@
 import { alertModal } from '../../../../api/base/alertModal';
 import { AndroidPage } from '../../../../modules/window/IWindow';
-import { AppGlobal, NativeAppInfo, isInApp } from '../../../../persistant/nativeAppInfo';
+import { NativeAppInfo } from '../../../../persistant/nativeAppInfo';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
+import {isInApp} from "../../../../modules/appEnvironment/isInApp";
 
 export function* userAuthenticateSaga() {
   try {
@@ -9,9 +11,9 @@ export function* userAuthenticateSaga() {
     if (NativeAppInfo.mode === 'H5') {
       message = '注意: H5 不會有此 flow，因為只有老客';
     } else if (NativeAppInfo.mode === 'Webview') {
-      if (AppGlobal.mode === 'SimpleWebView') {
+      if (GlobalAppMode.mode === 'SimpleWebView') {
         message = '注意: SimpleWebView 不會有此 flow';
-      } else if (AppGlobal.mode === 'IndexWebview') {
+      } else if (GlobalAppMode.mode === 'IndexWebview') {
         if (window['IndexTask'] && window['IndexTask']['navToPage'] && isInApp()) {
           window['IndexTask']['navToPage'](AndroidPage.AUTH);
         } else {
@@ -21,7 +23,7 @@ export function* userAuthenticateSaga() {
             message = '電腦模擬 Webview 所以不會跳到 Native APP';
           }
         }
-      } else if (AppGlobal.mode === 'None') {
+      } else if (GlobalAppMode.mode === 'None') {
         message = '注意: AppGlobal.mode === "None"';
       }
     }

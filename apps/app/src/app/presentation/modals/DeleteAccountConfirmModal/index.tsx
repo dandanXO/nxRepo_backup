@@ -7,8 +7,9 @@ import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
 import { getToken } from '../../../modules/querystring/getToken';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { useDeleteUserMutation } from '../../../api/rtk';
-import { AppGlobal, isInApp } from '../../../persistant/nativeAppInfo';
 import { AndroidPage } from '../../../modules/window/IWindow';
+import {GlobalAppMode} from "../../../persistant/GlobalAppMode";
+import {isInApp} from "../../../modules/appEnvironment/isInApp";
 
 const DeleteAccountConfirmModal = () => {
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ const DeleteAccountConfirmModal = () => {
                     onClick={() => {
                         deleteUser(null).unwrap().then(() => {
                             navigate(`${PagePathEnum.LoginPage}`);
-                            if (AppGlobal.mode === 'IndexWebview') {
+                            if (GlobalAppMode.mode === 'IndexWebview') {
                                 if (window['IndexTask'] && window['IndexTask']['navToPage'] && isInApp()) {
                                     window['IndexTask']['navToPage'](AndroidPage.LOGIN);
                                 }

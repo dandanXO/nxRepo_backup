@@ -5,7 +5,7 @@ import { getToken } from '../../modules/querystring/getToken';
 import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
 import { getOrderNo } from '../../modules/querystring/getOrderNo';
-import {isSimpleWebView} from "../../modules/window/isSimpleWebView";
+import {isSimpleWebView} from "../../modules/appEnvironment/isSimpleWebView";
 
 // 目前的pathname
 let prevPathname = ''

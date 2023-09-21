@@ -14,7 +14,7 @@ import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch } from 'react-redux';
 import { Page } from '../../components/layouts/Page';
 import { PageContent } from '../../components/layouts/PageContent';
-import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import cx from 'classnames'
 
 const BankCardListPage = () => {
