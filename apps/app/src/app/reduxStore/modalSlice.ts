@@ -65,6 +65,9 @@ export type InitialStateType = {
   reservationSuccessModal: {
     show: boolean;
   };
+  exitConfirmModal:{
+    show: boolean;
+  }
 };
 
 export const modalInitialState: InitialStateType = {
@@ -128,6 +131,9 @@ export const modalInitialState: InitialStateType = {
   reservationSuccessModal: {
     show: false,
   },
+  exitConfirmModal:{
+    show: false,
+  }
 };
 
 export const modalSlice = createSlice({
@@ -249,6 +255,12 @@ export const modalSlice = createSlice({
       action: PayloadAction<InitialStateType['reservationSuccessModal']>
     ) => {
       state.reservationSuccessModal.show = action.payload.show;
+    },
+    updateExitConfirmModal: (
+      state,
+      action: PayloadAction<InitialStateType['exitConfirmModal']>
+    ) => {
+      state.exitConfirmModal.show = action.payload.show;
     },
   },
 });
