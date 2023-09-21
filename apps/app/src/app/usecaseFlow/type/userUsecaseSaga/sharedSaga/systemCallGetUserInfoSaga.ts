@@ -9,6 +9,7 @@ import { PagePathEnum } from '../../../../presentation/pages/PagePathEnum';
 import { RootState } from '../../../../reduxStore';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../utils/catchSagaError';
+import {MonitorUsecaseFlow} from "../../../../monitorUsecaseFlow";
 
 export function* systemCallGetUserInfoSaga() {
 
@@ -31,7 +32,7 @@ export function* systemCallGetUserInfoSaga() {
       yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
       // Sentry 識別登入行為
-      SentryModule.userLogin(userResponse);
+      MonitorUsecaseFlow.userLogin(userResponse);
 
       return userResponse;
     }

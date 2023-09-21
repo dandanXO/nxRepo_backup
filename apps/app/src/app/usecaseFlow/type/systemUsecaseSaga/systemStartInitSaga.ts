@@ -31,6 +31,8 @@ export function* systemStartInitSaga() {
   ]);
 
   yield put(appSlice.actions.updateInit(response));
+
+  // refactor me
   yield put(appSlice.actions.init(true));
 
 }
