@@ -17,6 +17,10 @@ export interface PostRepayCreateResponse {
   nextStep: 'html' | 'jumpUrl';
   /** 下一步跳轉網址 */
   nextUrl: string;
+  /** 代收平台名稱 */
+  payPlatName?: string;
+  /** 支付方式 */
+  payTypeName?: string;
   /** 業務參數 */
   payload: {
     /** 共用 */
@@ -32,7 +36,5 @@ export interface PostRepayCreateResponse {
     referenceNo?: string;
     qrCode?: string;
     barcode?: string;
-    payPlatName?: string; // 代收平台名稱
-    payTypeName?: string; // 支付方式
   };
 }

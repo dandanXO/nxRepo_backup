@@ -54,13 +54,15 @@ const PhilippinesPaymentInstructionPage = ({
   payload,
   orderNo,
   repayAmount,
+  payTypeName,
+  payPlatName,
 }: PostRepayCreateResponse) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { t } = useTranslation(i18nPaymentInstructionPage.namespace);
 
-  const { payTypeName, referenceNo, payPlatName, qrCode, barcode } = payload;
+  const { referenceNo, qrCode, barcode } = payload;
 
   const expireDate = moment().add(1, 'days');
 
