@@ -1,20 +1,55 @@
 // NOTE: Action: UserApplyProduct
-import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, race, select, take } from 'redux-saga/effects';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {call, put, select, take} from 'redux-saga/effects';
 
-import { Service } from '../../../../api';
-import { LoanServiceResponse } from '../../../../api/loanService/service/postApplyLoanService';
-import { GetBankCardListResponse } from '../../../../api/userService/GetBankCardListResponse';
-import { RootState } from '../../../../reduxStore';
-import { InitialStateType, modalSlice } from '../../../../reduxStore/modalSlice';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { IndexPageSagaAction, UserApplyProductActionPayload } from './indexPageActions';
-import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
+import {Service} from '../../../../api';
+import {LoanServiceResponse} from '../../../../api/loanService/service/postApplyLoanService';
+import {GetBankCardListResponse} from '../../../../api/userService/GetBankCardListResponse';
+import {RootState} from '../../../../reduxStore';
+import {InitialStateType, modalSlice} from '../../../../reduxStore/modalSlice';
+import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
+import {IndexPageSagaAction, UserApplyProductActionPayload} from './indexPageActions';
+import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
+import {alertModal} from "../../../../api/base/alertModal";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
+
+function* autoToUploadUserPhoneData() {
+  // NOTE: 呼叫 Native APP 進行背景資料上傳
+  if (
+    window['IndexTask'] &&
+    window['IndexTask']['uploadKycBackgroundData'] &&
+    window['IndexTask']['uploadKycBackgroundData']
+  ) {
+    window['IndexTask']['uploadKycBackgroundData']();
+  } else {
+    const message = 'Native Error: uploadKycBackgroundData function is missing.';
+    alertModal(message);
+    return false;
+    // NOTICE: 新增邏輯錯誤
+    // throw new Error(message);
+  }
+
+  // NOTE: 監聽 Native 返回的訊息
+  const { payload: onUploadKycBackgroundData } = yield take(
+    IndexPageSagaAction.system.KycBackgroundDataUploadedSaga
+  );
+  if (!onUploadKycBackgroundData) {
+    // NOTICE: 使用者拒絕授權結束流程
+    new Error('User refuses to authenticate');
+    alertModal("Please confirm to upload to apply.");
+    return false;
+  }
+
+  return true;
+
+}
+
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {
   // console.group("userApplyProductsSaga");
   // console.log("action", action);
+
+  let uploaded = false;
 
   // NOTICE: 防止錯誤後無法重新 watch
   try {
@@ -67,8 +102,14 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         return;
       } else {
         // console.log("applyLoan");
+        uploaded = yield autoToUploadUserPhoneData();
       }
+    } else {
+      uploaded = yield autoToUploadUserPhoneData();
+    }
 
+    if(!uploaded) {
+      return;
     }
 
     const selectedBankcardID: number = yield select(
