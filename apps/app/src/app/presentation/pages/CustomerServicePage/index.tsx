@@ -39,7 +39,7 @@ const CustomerServicePage = () => {
                         </div>
                         <a href={`mailto:${app?.init?.csEmail || ''}
                             ?subject=Feedback
-                            &body=App:%20${app?.androidAppInfo?.appName||''}%0DName:%20${indexPage?.user?.userName||''}%0DPhone:%20${app?.androidAppInfo?.phoneNo||''}`} 
+                            &body=App:%20${app?.androidAppInfo?.appName||''}%0D%0AName:%20${indexPage?.user?.bankCardName||''}%0D%0APhone:%20${app?.androidAppInfo?.phoneNo||''}`} 
                             className='self-center'>
                             <Button className={'py-1 px-5'} text={'Go'} />
                         </a>
