@@ -16,7 +16,7 @@ export const ADBannerSection = (props: Props) => {
             <img
               className={'rounded-lg text-center text-white'}
               src={banner.imageUrl}
-              onClick={() => onUserClickToOpenBrowser(banner.jumpUrl || '')}
+              // onClick={() => onUserClickToOpenBrowser(banner.jumpUrl || '')}
             />
           </div>
         );
