@@ -82,8 +82,12 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
     }
 
     // 更新 prevPathname，以便下一次比較
-    if (action.payload.action === "PUSH") {
-        prevPathname = currentPath;
+    if (action.payload.action === "PUSH" &&
+      (prevPathname === PagePathEnum.RepaymentDetailPage ||
+        currentPath === PagePathEnum.RepaymentDetailPage)) {
+      prevPathname = currentPath;
+    } else {
+      prevPathname = currentPath;
     }
 
 }
