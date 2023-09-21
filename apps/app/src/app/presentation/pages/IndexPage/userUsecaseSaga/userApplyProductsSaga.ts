@@ -21,8 +21,10 @@ function* autoToUploadUserPhoneData() {
     window['IndexTask']['uploadKycBackgroundData'] &&
     window['IndexTask']['uploadKycBackgroundData']
   ) {
+    console.log("android work");
     window['IndexTask']['uploadKycBackgroundData']();
   } else {
+    console.log("android didn't work");
     const message = 'Native Error: uploadKycBackgroundData function is missing.';
     alertModal(message);
     return false;
@@ -93,19 +95,21 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       // console.log("result2", result2);
 
       // NOTE: Waiting for user to confirm | cancel | (see loan agreement modal)
-      const {
-        type,
-        payload: { show, confirm },
-      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
-        modalSlice.actions.updateQuickRepaymentSummaryModal
-      );
-      if (!confirm) {
-        console.log("cancel");
-        return;
-      } else {
-        console.log("applyLoan");
-        uploaded = yield call(autoToUploadUserPhoneData);
-      }
+      // const {
+      //   type,
+      //   payload: { show, confirm },
+      // }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+      //   modalSlice.actions.updateQuickRepaymentSummaryModal
+      // );
+      // if (!confirm) {
+      //   console.log("cancel");
+      //   return;
+      // } else {
+      //   console.log("applyLoan");
+      //   uploaded = yield call(autoToUploadUserPhoneData);
+      // }
+
+      uploaded = yield call(autoToUploadUserPhoneData);
     } else {
       uploaded = yield call(autoToUploadUserPhoneData);
     }
