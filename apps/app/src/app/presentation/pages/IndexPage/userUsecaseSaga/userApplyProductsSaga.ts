@@ -34,6 +34,8 @@ function* autoToUploadUserPhoneData() {
   const { payload: onUploadKycBackgroundData } = yield take(
     IndexPageSagaAction.system.KycBackgroundDataUploadedSaga
   );
+  console.log("onUploadKycBackgroundData", onUploadKycBackgroundData);
+
   if (!onUploadKycBackgroundData) {
     // NOTICE: 使用者拒絕授權結束流程
     new Error('User refuses to authenticate');
@@ -98,17 +100,18 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         modalSlice.actions.updateQuickRepaymentSummaryModal
       );
       if (!confirm) {
-        // console.log("cancel");
+        console.log("cancel");
         return;
       } else {
-        // console.log("applyLoan");
-        uploaded = yield autoToUploadUserPhoneData();
+        console.log("applyLoan");
+        uploaded = yield call(autoToUploadUserPhoneData);
       }
     } else {
-      uploaded = yield autoToUploadUserPhoneData();
+      uploaded = yield call(autoToUploadUserPhoneData);
     }
 
     if(!uploaded) {
+
       return;
     }
 

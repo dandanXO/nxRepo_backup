@@ -36,7 +36,7 @@ export class MonitorUsecaseFlow {
 
   // TODO: 目前只有 PureH5 有 setContext and setUser
   static userLogin(userResponse: GetUserInfoServiceResponse) {
-    if (AppEnvironment.isLocalhost()) return;
+    // if (AppEnvironment.isLocalhost()) return;
 
     if (AppFlag.enableSentry) {
       const userInfo = {
