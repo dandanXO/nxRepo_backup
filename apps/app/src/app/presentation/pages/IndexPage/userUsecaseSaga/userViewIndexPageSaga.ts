@@ -16,15 +16,21 @@ import { systemCountdownManagerSaga } from './systemCountdownManagerSaga';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
 import { systemGetIndexPageSaga } from 'apps/app/src/app/usecaseFlow/type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga';
 import { systemFetchCouponSaga } from 'apps/app/src/app/usecaseFlow/type/systemUsecaseSaga/systemFetchCouponSaga';
+import {alertModal} from "../../../../api/base/alertModal";
 
 export function* userViewIndexPageSaga(action: any) {
     // NOTICE: 防止錯誤後無法重新 watch
     try {
+        if (getToken() === '') {
+          // console.log('missing token');
+          // alertModal('missing token2');
+          return;
+        }
         yield put(loadingSlice.actions.updatePageLoading(true));
         yield call(systemCallGetUserInfoSaga);
         yield call(systemGetIndexPageSaga);
         yield call(systemFetchCouponSaga);
-        
+
         const status: number = yield select((state: RootState) => state.indexPage.user.state);
         if (status !== USER_AUTH_STATE.ready) {
              // NOTE: 是否系統執行非同步 - 倒數計時
