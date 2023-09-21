@@ -1,7 +1,7 @@
 // NOTE: Dynamic imports are only supported when the '--module' flag is
 //  set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
 // import loadableComponent from '@loadable/component';
-import posthog from 'posthog-js';
+// import posthog from 'posthog-js';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router';
@@ -19,12 +19,10 @@ import { ErrorPage } from '../pages/__test__/ErrorPage';
 
 
 // NOTICE: Static Loading : Page
-import AuthPage from '../pages/AuthPage';
 import BankCardListPage from '../pages/BankCardListPage';
 import BindBankCardPage from '../pages/BindBankCardPage';
 import CustomerServicePage from '../pages/CustomerServicePage';
 import DisclosureStatementPage from '../pages/DisclosureStatementPage';
-import FinishedRepaymentPage from '../pages/FinishedRepaymentPage'
 import RepaymentDetailPage from '../pages/RepaymentDetailPage'
 import LoanRecordPage from '../pages/RepaymentPage'
 import OrderStatusPage from '../pages/OrderStatusPage'
@@ -189,37 +187,44 @@ export const AppRouter = () => {
   // }
   // }
 
-  React.useEffect(() => {
-    // new
-    posthog.capture('$pageview');
-  }, [location]);
-
+  // React.useEffect(() => {
+  //   // new
+  //   posthog.capture('$pageview');
+  // }, [location]);
 
   return (
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        {/*<Route path="/v2/category" element={<CategoryPage />} />*/}
-        <Route path="/v2/error" element={<ErrorPage />} />
+        {/*NOTICE: refactor me - PK*/}
+        <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
+        {/*<Route path="/v2/auth" element={<AuthPage />} />*/}
+        {/*<Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />*/}
+
         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
-        <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
+
         <Route path={PagePathEnum.IndexPage} element={<IndexPage />} >
           <Route path="quick-repayment-modal" element={<QuickRepaymentModal />} />
         </Route>
         <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
+
         <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
-        <Route path="/v2/auth" element={<AuthPage />} />
-        <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
-        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}>
-          <Route path="iban-finder-modal" element={<IBANFinderModal />} />
-        </Route>
+
         <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
         <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} />
         <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
 
-        <Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />
+        <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
+        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}>
+          <Route path="iban-finder-modal" element={<IBANFinderModal />} />
+        </Route>
+
+        <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
+
+        {/*NOTICE: order: processing, reject*/}
+        <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
 
         <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />
@@ -229,26 +234,32 @@ export const AppRouter = () => {
           <Route path="repayment-coupon-modal" element={<RepaymentCouponModal />} />
         </Route>
 
-        <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
+        {/*NOTICE: Mexico, Philippines*/}
         <Route path={PagePathEnum.PaymentInstructionPage} element={<PaymentInstructionPage />} />
-        <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
-        <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
+
+        <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
+        <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
+        <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
+
+
         <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
+        <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
+        <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.FeedbackPage} element={<FeedbackPage />} />
-        <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
         <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
+
+        {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
         <Route path={PagePathEnum.DeleteAccountPage} element={<DeleteAccountPage />} />
         <Route path={PagePathEnum.AccountVerificationPage} element={<AccountVerificationPage />} >
-            <Route path={"delete-confirm-modal"} element={<DeleteAccountConfirmModal />} />
-            <Route path="quota-model" element={<QuotaModelPage />} />
+          <Route path={"delete-confirm-modal"} element={<DeleteAccountConfirmModal />} />
+          <Route path="quota-model" element={<QuotaModelPage />} />
         </Route>
-        <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
-        <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
-        {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
 
-        <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
+        {/*<Route path="/v2/category" element={<CategoryPage />} />*/}
+        <Route path="/v2/error" element={<ErrorPage />} />
+
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
 

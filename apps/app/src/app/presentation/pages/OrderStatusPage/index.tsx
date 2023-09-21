@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { ApproveRecord } from '../../../api/loanService/ApproveRecord';
 import { getToken } from '../../../modules/querystring/getToken';
-import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PageContent } from '../../components/layouts/PageContent';
 import { PagePathEnum } from '../PagePathEnum';

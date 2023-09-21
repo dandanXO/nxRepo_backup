@@ -121,52 +121,11 @@ export class SentryModule {
     });
   }
 
-  // TODO: 目前只有 PureH5 有 setContext and setUser
-  static userLogin(userResponse: GetUserInfoServiceResponse) {
-    if (AppEnvironment.isLocalhost()) return;
 
-    if (AppFlag.enableSentry) {
-      const userInfo = {
-        'user.phoneNo': getUserPhoneNo(),
-        'user.userName': userResponse.userName,
-        'user.demoAccount': userResponse.demoAccount,
-        'user.organic': userResponse.organic,
-        'user.oldUser': userResponse.oldUser,
-        'user.status': getUserStatusName(userResponse.status),
-        'user.needUpdateKyc': userResponse.needUpdateKyc,
-      };
-      // console.log('userInfo', userInfo);
-      Sentry.setContext('Custom - User Info', userInfo);
-
-      const accountInfo = {
-        // NOTE: 帳號個人資訊
-        username: userResponse.userName,
-      };
-      // console.log("[sentry] accountInfo", accountInfo);
-      Sentry.setUser(accountInfo);
-    }
-
-      try {
-          if (AppFlag.enablePosthog) {
-              posthog.identify(getUserPhoneNo(), {
-                  "user.phoneNo": getUserPhoneNo(),
-                  'user.demoAccount': userResponse.demoAccount,
-              })
-              // posthog.reset(true)
-          }
-      } catch (e){
-          console.log(e)
-      }
-
-  }
 }
 
 
-function getUserStatusName(status: number) {
-  return ['未認證', '通過認證', '審核中', '審核拒絕'][status];
-}
-
-const getUserPhoneNo = () => {
+export const getUserPhoneNo = () => {
   return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : 'unknown';
 };
 

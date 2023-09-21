@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { TestingProps } from '../../../../modules/TestingProps';
+import { TestingProps } from '../../../../modules/cypress/TestingProps';
 type Props = {
     children?: ReactNode;
 } & TestingProps;

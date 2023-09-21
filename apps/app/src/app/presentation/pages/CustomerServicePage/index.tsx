@@ -6,7 +6,7 @@ import { Button } from '../../components/layouts/Button';
 import { Navigation } from '../../components/layouts/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
-import { isShowNavigation } from '../../../modules/window/isShowNavigation';
+import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import CustomServiceIcon from './CustomServiceIcon'
 import { Horizontal } from '../../components/layouts/Horizontal';
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
@@ -39,7 +39,7 @@ const CustomerServicePage = () => {
                         </div>
                         <a href={`mailto:${app?.init?.csEmail || ''}
                             ?subject=Feedback
-                            &body=App:%20${app?.androidAppInfo?.appName||''}%0DName:%20${indexPage?.user?.userName||''}%0DPhone:%20${app?.androidAppInfo?.phoneNo||''}`} 
+                            &body=App:%20${app?.androidAppInfo?.appName||''}%0DName:%20${indexPage?.user?.userName||''}%0DPhone:%20${app?.androidAppInfo?.phoneNo||''}`}
                             className='self-center'>
                             <Button className={'py-1 px-5'} text={'Go'} />
                         </a>

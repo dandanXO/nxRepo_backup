@@ -1,7 +1,7 @@
 import React from 'react';
 import { TailSpin } from 'react-loading-icons';
 
-import { TestingProps } from '../../../modules/TestingProps';
+import { TestingProps } from '../../../modules/cypress/TestingProps';
 import { tcx } from '../../../modules/tailwindcss';
 
 type Props = {

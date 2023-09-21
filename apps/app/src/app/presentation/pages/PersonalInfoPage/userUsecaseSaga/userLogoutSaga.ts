@@ -1,7 +1,9 @@
 import { alertModal } from '../../../../api/base/alertModal';
 import { AndroidPage } from '../../../../modules/window/IWindow';
-import { AppGlobal, NativeAppInfo, isInApp } from '../../../../persistant/nativeAppInfo';
+import { NativeAppInfo } from '../../../../persistant/nativeAppInfo';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
+import {isInApp} from "../../../../modules/appEnvironment/isInApp";
 
 export function* userLogoutSaga() {
   try {
@@ -11,9 +13,9 @@ export function* userLogoutSaga() {
     if (NativeAppInfo.mode === 'H5') {
       // TODO: 單純 API 登出
     } else if (NativeAppInfo.mode === 'Webview') {
-      if (AppGlobal.mode === 'SimpleWebView') {
+      if (GlobalAppMode.mode === 'SimpleWebView') {
         message = '注意: SimpleWebView 不會有此 flow';
-      } else if (AppGlobal.mode === 'IndexWebview') {
+      } else if (GlobalAppMode.mode === 'IndexWebview') {
         if (window['IndexTask'] && window['IndexTask']['navToPage'] && isInApp()) {
           // NOTE: 呼叫 Native APP 登出
           window['IndexTask']['navToPage'](AndroidPage.LOGIN);
@@ -24,7 +26,7 @@ export function* userLogoutSaga() {
             // TODO: 單純 API 登出
           }
         }
-      } else if (AppGlobal.mode === 'None') {
+      } else if (GlobalAppMode.mode === 'None') {
         message = '注意: AppGlobal.mode === "None"';
       }
     }

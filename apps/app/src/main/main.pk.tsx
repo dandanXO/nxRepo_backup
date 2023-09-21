@@ -8,7 +8,7 @@ import {Provider, useSelector} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import {Route, Routes, useLocation} from "react-router";
 import {ReduxRouter, ReduxRouterSelector} from "@lagunovsky/redux-react-router";
-import posthog from "posthog-js";
+// import posthog from "posthog-js";
 
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
 
@@ -19,7 +19,7 @@ import '../app/modules/posthog';
 import '../app/modules/sentry';
 import '../app/modules/i18n';
 import '../app/modules/timezone';
-import { applyCustomTheme } from '../app/modules/theme';
+import {ThemeModule} from '../app/modules/theme';
 import AppDataCollector from "../app/modules/dataCollectorContainer/AppDataCollector";
 
 import {appStore, history, RootState} from "../app/reduxStore";
@@ -61,7 +61,7 @@ const renderApp = () => {
   MonitorUsecaseFlow.appLoadAndroidAppInfo();
 
   // NOTICE: Theme
-  applyCustomTheme(NativeAppInfo);
+  ThemeModule.applyCustomTheme(NativeAppInfo);
   // alertModal(JSON.stringify(NativeAppInfo));
 
   // NOTE: Starting to render
@@ -109,10 +109,10 @@ const AppRouter = () => {
   // }
   // }
 
-  React.useEffect(() => {
-    // new
-    posthog.capture('$pageview');
-  }, [location]);
+  // React.useEffect(() => {
+  //   // new
+  //   posthog.capture('$pageview');
+  // }, [location]);
 
 
   return (
