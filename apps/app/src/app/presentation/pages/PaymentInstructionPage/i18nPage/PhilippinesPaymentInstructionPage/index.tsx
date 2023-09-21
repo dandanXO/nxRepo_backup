@@ -1,6 +1,8 @@
+import moment from 'moment/moment';
 import React from 'react';
 import Barcode from 'react-barcode';
 import { useTranslation } from 'react-i18next';
+import QRCode from 'react-qr-code';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
@@ -51,14 +53,16 @@ const Item = ({
 const PhilippinesPaymentInstructionPage = ({
   payload,
   orderNo,
+  repayAmount,
 }: PostRepayCreateResponse) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { t } = useTranslation(i18nPaymentInstructionPage.namespace);
 
-  const platform = 'PeysoPay';
-  const referenceNumberBarcode = '2023-7461-5898';
+  const { payTypeName, referenceNo, payPlatName, qrCode, barcode } = payload;
+
+  const expireDate = moment().add(1, 'days');
 
   return (
     <PageContent className="grow p-0">
@@ -66,32 +70,47 @@ const PhilippinesPaymentInstructionPage = ({
         <div className="flex items-center justify-between ">
           <div className="flex gap-2 font-bold">
             <div className="text-ctext-primary">{t('repayAt')}</div>
-            <div className="text-primary-main">{platform}</div>
+            <div className="text-primary-main">{payTypeName}</div>
           </div>
           <img
             className="my-2 h-8 object-fill"
             alt="logo"
-            src={Logo(`payment_logo_${getPlatformValue(platform, 'logo')}.png`)}
+            src={Logo(
+              `payment_logo_${getPlatformValue(payTypeName, 'logo')}.png`
+            )}
           />
         </div>
+
         <Divider />
+
         <Item
           title={t('Total payment')}
-          content={<Money money={payload?.orderAmount || 0} />}
+          content={<Money money={repayAmount || 0} />}
         />
 
-        {!getPlatformValue(platform, 'isOnline') && (
-          <Item title={t('receiver')} content="711" />
+        {!getPlatformValue(payTypeName, 'isOnline') && (
+          <Item
+            title={t(
+              (getPlatformValue(payTypeName, 'receiverTitleKey') as string) ||
+                'receiver'
+            )}
+            content={payPlatName}
+          />
         )}
 
-        {referenceNumberBarcode &&
-        !getPlatformValue(platform, 'isOnline') ? null : (
+        {qrCode && (
+          <div className="flex justify-center p-4">
+            <QRCode value={qrCode} />
+          </div>
+        )}
+
+        {barcode && !getPlatformValue(payTypeName, 'isOnline') ? null : (
           <Item
             className="mb-1"
             title={t('referenceNumber')}
-            content="ABCE12345678"
+            content={referenceNo}
             extra={
-              getPlatformValue(platform, 'isOnline') ? (
+              getPlatformValue(payTypeName, 'isOnline') ? (
                 <div className="h-4/5 w-1/4">
                   <CopyButton
                     className="w-full rounded-full bg-[#E85D75] py-2 px-4 active:border active:border-[#E85D75] active:bg-white active:text-[#E85D75]"
@@ -104,23 +123,26 @@ const PhilippinesPaymentInstructionPage = ({
           />
         )}
 
-        {referenceNumberBarcode && (
+        {barcode && (
           <div className="mt-2 flex justify-center">
-            <Barcode value={referenceNumberBarcode} height={70} />
+            <Barcode value={barcode} height={70} />
           </div>
         )}
 
         <div
-          className={tcx('text-ctext-tertiary text-xs leading-[14px]', [
+          className={tcx('text-ctext-tertiary my-2 text-xs leading-[14px]', [
             'my-4 text-center',
-            referenceNumberBarcode,
+            barcode,
           ])}
         >
           <div>This reference number expires in 24 hours</div>
-          <div>Expires: Friday mm-dd-yyyy at hh:00 PM</div>
+          <div>
+            Expires: {expireDate.format('ddd MM-DD-yyyy ')}at
+            {expireDate.format(' HH:mm a')}
+          </div>
         </div>
 
-        {!getPlatformValue(platform, 'isOnline') && !referenceNumberBarcode && (
+        {!getPlatformValue(payTypeName, 'isOnline') && !barcode && (
           <div className="text-cstate-error-main mt-2 mb-3 text-xs leading-[14px]">
             {t('notice')}
           </div>
@@ -128,7 +150,7 @@ const PhilippinesPaymentInstructionPage = ({
 
         <Divider />
 
-        {(getPlatformValue(platform, 'isOnline') || referenceNumberBarcode) && (
+        {(getPlatformValue(payTypeName, 'isOnline') || barcode) && (
           <div className="my-4 text-xs">
             <div className="text-ctext-primary font-bold">Payment tips</div>
             <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5">
@@ -139,7 +161,7 @@ const PhilippinesPaymentInstructionPage = ({
           </div>
         )}
 
-        {!getPlatformValue(platform, 'isOnline') && !referenceNumberBarcode && (
+        {!getPlatformValue(payTypeName, 'isOnline') && !barcode && (
           <div>
             <div className="text-ctext-primary mb-2 text-xs font-bold">
               instructions
@@ -148,11 +170,14 @@ const PhilippinesPaymentInstructionPage = ({
               {[1, 2, 3, 4].map((index) => (
                 <li key={index} className="mb-2">
                   <div className="text-ctext-primary text-sm font-bold leading-[12px]">
-                    {getPlatformValue(platform, `instruction${index}Title`)}
+                    {getPlatformValue(payTypeName, `instruction${index}Title`)}
                   </div>
 
                   <div className="mt-[2px] leading-[12px]">
-                    {getPlatformValue(platform, `instruction${index}Content`)}
+                    {getPlatformValue(
+                      payTypeName,
+                      `instruction${index}Content`
+                    )}
                   </div>
                 </li>
               ))}

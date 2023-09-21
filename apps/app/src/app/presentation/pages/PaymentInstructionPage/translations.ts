@@ -7,6 +7,7 @@ export const i18nPaymentInstructionPage: i18nComponent = {
     en_PH: {
       billerCompany: 'Biller Company',
       receiver: 'Name of Receiver',
+      biller: 'Biller',
       totalPayment: 'Total payment',
       referenceNumberWithPolicyNo: 'Reference Number (Policy No.)',
       referenceNumber: 'Reference Number',

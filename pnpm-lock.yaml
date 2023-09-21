@@ -129,6 +129,7 @@ specifiers:
   react-icons: ^4.7.1
   react-is: 18.2.0
   react-loading-icons: ^1.1.0
+  react-qr-code: ^2.0.12
   react-redux: 8.0.5
   react-refresh: ^0.10.0
   react-router: ^6.10.0
@@ -215,6 +216,7 @@ dependencies:
   react-icons: 4.7.1_react@18.2.0
   react-is: 18.2.0
   react-loading-icons: 1.1.0
+  react-qr-code: 2.0.12_react@18.2.0
   react-redux: 8.0.5_ctrls2ti7t7iutxbwkm5ipogyy
   react-router: 6.10.0_react@18.2.0
   react-router-dom: 6.4.3_biqbaboplfbrettd7655fr4n2y
@@ -17542,6 +17544,10 @@ packages:
     resolution: {integrity: sha512-t+x1zEHDjBwkDGY5v5ApnZ/utcd4XYDiJsaQQoptTXgUXX95sDg1elCdJghzicm7n2mbCBJ3uYWr6M22SO19rg==}
     dev: true
 
+  /qr.js/0.0.0:
+    resolution: {integrity: sha512-c4iYnWb+k2E+vYpRimHqSu575b1/wKl4XFeJGpFmrJQz5I88v9aY2czh7s0w36srfCM1sXgC/xpoJz5dJfq+OQ==}
+    dev: false
+
   /qs/6.10.3:
     resolution: {integrity: sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==}
     engines: {node: '>=0.6'}
@@ -18348,6 +18354,20 @@ packages:
   /react-loading-icons/1.1.0:
     resolution: {integrity: sha512-Y9eZ6HAufmUd8DIQd6rFrx5Bt/oDlTM9Nsjvf8YpajTa3dI8cLNU8jUN5z7KTANU+Yd6/KJuBjxVlrU2dMw33g==}
     engines: {node: '>= 12.0.0'}
+    dev: false
+
+  /react-qr-code/2.0.12_react@18.2.0:
+    resolution: {integrity: sha512-k+pzP5CKLEGBRwZsDPp98/CAJeXlsYRHM2iZn1Sd5Th/HnKhIZCSg27PXO58zk8z02RaEryg+60xa4vyywMJwg==}
+    peerDependencies:
+      react: ^16.x || ^17.x || ^18.x
+      react-native-svg: '*'
+    peerDependenciesMeta:
+      react-native-svg:
+        optional: true
+    dependencies:
+      prop-types: 15.8.1
+      qr.js: 0.0.0
+      react: 18.2.0
     dev: false
 
   /react-redux/8.0.5_ctrls2ti7t7iutxbwkm5ipogyy:

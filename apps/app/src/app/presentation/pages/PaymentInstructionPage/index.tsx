@@ -36,9 +36,7 @@ const PaymentInstructionPage = () => {
             navigate(
               `${
                 PagePathEnum.RepaymentDetailPage
-              }/repayment-modal?token=${getToken()}&orderNo=${
-                state.orderNo ?? getOrderNo()
-              }`,
+              }/repayment-modal?token=${getToken()}&orderNo=${state.orderNo}`,
               {
                 state: {},
               }

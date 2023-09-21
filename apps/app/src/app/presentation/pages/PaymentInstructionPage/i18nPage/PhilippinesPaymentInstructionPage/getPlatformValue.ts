@@ -87,6 +87,7 @@ const platformMap: {
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
   'SM Store': {
+    receiverTitleKey: 'billerCompany',
     isOnline: false,
     logo: 'smpay',
     instruction1Title: 'Visit any SM Store branch',
@@ -119,6 +120,7 @@ const platformMap: {
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
   'Robinsons Supermarket': {
+    receiverTitleKey: 'biller',
     isOnline: false,
     logo: 'robinsons_supermarket',
     instruction1Title: 'Visit Robinsons Supermarket',
@@ -232,10 +234,10 @@ const platformMap: {
   },
 };
 
-export const getPlatformValue = (platform: string, key: string) => {
+export const getPlatformValue = (platform: string | undefined, key: string) => {
+  if (platform === undefined) return null;
   try {
-    const result = platformMap[platform][key];
-    return result === undefined ? 'Loss Value' : result;
+    return platformMap[platform][key];
   } catch (error) {
     return 'Platform Not Found';
   }

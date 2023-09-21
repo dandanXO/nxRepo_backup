@@ -19,10 +19,20 @@ export interface PostRepayCreateResponse {
   nextUrl: string;
   /** 業務參數 */
   payload: {
-    orderAmount?: string;
+    /** 共用 */
+    orderAmount?: string | number;
+
+    /** 墨西哥 */
     beneficiario?: string;
     clabe?: string;
     referencia?: string;
     barcodeUrl?: string;
+
+    /** 菲律賓 */
+    referenceNo?: string;
+    qrCode?: string;
+    barcode?: string;
+    payPlatName?: string; // 代收平台名稱
+    payTypeName?: string; // 支付方式
   };
 }
