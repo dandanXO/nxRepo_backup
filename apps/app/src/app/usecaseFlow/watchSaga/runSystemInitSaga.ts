@@ -100,7 +100,9 @@ export function* runSystemInitSaga() {
       GlobalAppMode.mode === AppModeEnum.IndexWebview ||
       GlobalAppMode.mode === AppModeEnum.PureH5
     ) {
-        appStore.dispatch(SystemCaseActions.InitSaga());
+        if(location.pathname !== PagePathEnum.PaymentResultPage){
+          appStore.dispatch(SystemCaseActions.InitSaga());
+        }
     }
 
   } catch (error) {
