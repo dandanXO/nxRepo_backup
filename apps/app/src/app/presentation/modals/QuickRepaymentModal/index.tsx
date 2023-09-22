@@ -84,6 +84,12 @@ const QuickRepaymentModal = () => {
       onClick={(e: any) => {
         if (!stopPropagation) {
           navigate(-1);
+          dispatch(
+            modalSlice.actions.updateSimpleQuickRepaymentModal({
+              show: false,
+              confirm: false,
+            })
+          );
         } else {
           stopPropagation = false
         }

@@ -21,6 +21,7 @@ import {userReacquireCreditSaga} from "./userReacquireCreditSaga";
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 
 function* callAndroidFunctionToUploadUserPhoneData() {
+  console.log("callAndroidFunctionToUploadUserPhoneData")
   // NOTE: 呼叫 Native APP 進行背景資料上傳
   if (
     window['IndexTask'] &&
@@ -147,6 +148,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         modalSlice.actions.updateSimpleQuickRepaymentModal
       );
       if (confirm) {
+        console.log("uploaded", uploaded);
         if(!uploaded) {
           uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
         } else {
