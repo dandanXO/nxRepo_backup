@@ -1,6 +1,6 @@
 // NOTE: Action: UserApplyProduct
 import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, select, take} from 'redux-saga/effects';
+import {call, put, select, take, takeLatest, race} from 'redux-saga/effects';
 
 import {Service} from '../../../../api';
 import {LoanServiceResponse} from '../../../../api/loanService/service/postApplyLoanService';
@@ -11,28 +11,32 @@ import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
 import {IndexPageSagaAction, UserApplyProductActionPayload} from './indexPageActions';
 import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
 import {alertModal} from "../../../../api/base/alertModal";
+import {SentryModule} from "../../../../modules/sentry";
+import {routerActions} from "@lagunovsky/redux-react-router";
+import {PagePathEnum} from "../../PagePathEnum";
+import {getToken} from "../../../../modules/querystring/getToken";
+import {errorFallback} from "../../../../usecaseFlow/utils/errorFallback";
+import {userReacquireCreditSaga} from "./userReacquireCreditSaga";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 
-function* autoToUploadUserPhoneData() {
+function* callAndroidFunctionToUploadUserPhoneData() {
   // NOTE: 呼叫 Native APP 進行背景資料上傳
   if (
     window['IndexTask'] &&
     window['IndexTask']['uploadKycBackgroundData'] &&
     window['IndexTask']['uploadKycBackgroundData']
   ) {
-    console.log("android work");
     window['IndexTask']['uploadKycBackgroundData']();
   } else {
-    console.log("android didn't work");
-    const message = 'Native Error: uploadKycBackgroundData function is missing.';
-    alertModal(message);
-    return false;
     // NOTICE: 新增邏輯錯誤
-    // throw new Error(message);
+    const message = "Call Android IndexTask.uploadKycBackgroundData unsuccessfully";
+    console.log(message);
+    SentryModule.captureMessage(message)
+    return false;
   }
 
-  // NOTE: 監聽 Native 返回的訊息
+  // NOTE: 監聽 Android Call Javascript Function 返回的訊息
   const { payload: onUploadKycBackgroundData } = yield take(
     IndexPageSagaAction.system.KycBackgroundDataUploadedSaga
   );
@@ -40,27 +44,26 @@ function* autoToUploadUserPhoneData() {
 
   if (!onUploadKycBackgroundData) {
     // NOTICE: 使用者拒絕授權結束流程
-    new Error('User refuses to authenticate');
-    alertModal("Please confirm to upload to apply.");
+    const message = 'User refuses to authenticate';
+    // alertModal("Please confirm to upload to apply.");
+    console.log(message)
     return false;
   }
 
   return true;
-
 }
 
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {
-  // console.group("userApplyProductsSaga");
-  // console.log("action", action);
-
-  let uploaded = false;
+  console.group("userApplyProductsSaga.action", action);
 
   // NOTICE: 防止錯誤後無法重新 watch
   try {
+    yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
 
+    let uploaded = false;
+
+    // NOTE: 系統沒開啟老客強下開關才需要彈跳 SummaryModal
     const oldUserForceApply: boolean = yield select((state: RootState) => state.indexPage.indexAPI?.oldUserForceApply);
-
-    // NOTE: 老客強下開關不需要彈跳 SummaryModal
     if(!oldUserForceApply) {
       // NOTE: 讀取相關總結資訊
       // NOTE: way1
@@ -72,17 +75,30 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
       // const oldUserForceApply: boolean = yield select((state: RootState) => state.indexPage.indexAPI?.oldUserForceApply);
 
-      // NOTE: Popup Summary Modal - confirm | cancel | (see loan agreement model)
+      // NOTE: 彈跳 Popup Summary Modal - confirm | cancel | (see loan agreement model)
+      // yield put(
+      //   modalSlice.actions.updateQuickRepaymentSummaryModal({
+      //     show: true,
+      //     confirm: false,
+      //     bankcardList: data.bankAccounts,
+      //   })
+      // );
       yield put(
-        modalSlice.actions.updateQuickRepaymentSummaryModal({
+        modalSlice.actions.updateSimpleQuickRepaymentModal({
           show: true,
           confirm: false,
           bankcardList: data.bankAccounts,
         })
       );
 
+      // 預設第一張銀行卡
+      // yield put(
+      //   modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
+      //     selectedBankcardId: data.bankAccounts[0].bankId,
+      //   })
+      // );
       yield put(
-        modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
+        modalSlice.actions.updateSimpleQuickRepaymentModalSelectedID({
           selectedBankcardId: data.bankAccounts[0].bankId,
         })
       );
@@ -109,16 +125,37 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       //   uploaded = yield call(autoToUploadUserPhoneData);
       // }
 
-      uploaded = yield call(autoToUploadUserPhoneData);
+      uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
     } else {
-      uploaded = yield call(autoToUploadUserPhoneData);
+      uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
     }
 
-    if(!uploaded) {
+    let processFinished = false;
+    while(!uploaded && !processFinished) {
+      // const [result, result2] = yield race([
+      //   take(modalSlice.actions.updateQuickRepaymentSummaryModal),
+      //   take(modalSlice.actions.updateLoanAgreementModal),
+      // ])
 
-      return;
+      const {
+        type,
+        payload: { show, confirm },
+      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+        modalSlice.actions.updateSimpleQuickRepaymentModal
+      );
+      if (!confirm) {
+        console.log("cancel");
+        processFinished = true;
+      } else {
+        if(!uploaded) {
+          uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
+        } else {
+          processFinished = true;
+        }
+      }
     }
 
+    console.log("開始借款")
     const selectedBankcardID: number = yield select(
       (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
     );
@@ -154,6 +191,8 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         })
       );
     }
+
+
   } catch (error: any) {
     yield catchSagaError(error);
   } finally {

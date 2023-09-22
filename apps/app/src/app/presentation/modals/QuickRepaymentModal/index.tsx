@@ -64,9 +64,9 @@ const QuickRepaymentModal = () => {
   let stopPropagation = false;
 
   useEffect(() => {
-    if (modelState.quickRepaymentSummaryModal.bankcardList) {
-      const bankcard = modelState?.quickRepaymentSummaryModal?.bankcardList.find((bankcard) => {
-        return bankcard.bankId === modelState?.quickRepaymentSummaryModal?.selectedBankcardId;
+    if (modelState.simpleQuickRepaymentModal.bankcardList) {
+      const bankcard = modelState?.simpleQuickRepaymentModal?.bankcardList.find((bankcard) => {
+        return bankcard.bankId === modelState?.simpleQuickRepaymentModal?.selectedBankcardId;
       });
 
       if (bankcard) {
@@ -76,8 +76,14 @@ const QuickRepaymentModal = () => {
         });
       }
     }
+  }, [modelState?.simpleQuickRepaymentModal?.selectedBankcardId, modelState?.simpleQuickRepaymentModal?.bankcardList]);
 
-  }, [modelState?.quickRepaymentSummaryModal?.selectedBankcardId, modelState?.quickRepaymentSummaryModal?.bankcardList]);
+  useEffect(() => {
+    dispatch(modalSlice.actions.updateSimpleQuickRepaymentModal({
+      show: true,
+      confirm: false,
+    }));
+  }, []);
 
   return (
     <div className={cx('quick-repayment-modal fixed left-0 top-0 bottom-0 z-10 flex h-screen w-screen flex-col justify-center bg-black bg-opacity-80 p-0')}
@@ -119,13 +125,13 @@ const QuickRepaymentModal = () => {
                   setOptionValue(item);
                   // props.onChangeBankcardID(item.value);
                   dispatch(
-                    modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
+                    modalSlice.actions.updateSimpleQuickRepaymentModalSelectedID({
                       selectedBankcardId: item.value,
                     })
                   );
                 }}
-                options={modelState?.quickRepaymentSummaryModal?.bankcardList &&
-                  modelState?.quickRepaymentSummaryModal?.bankcardList.map((bankcard, index) => {
+                options={modelState?.simpleQuickRepaymentModal?.bankcardList &&
+                  modelState?.simpleQuickRepaymentModal?.bankcardList.map((bankcard, index) => {
                     return {
                       value: bankcard.bankId,
                       label: bankcard.bankAccount,
@@ -152,7 +158,7 @@ const QuickRepaymentModal = () => {
             </div>
             <Button text={'Confirm'} onClick={() => {
               dispatch(
-                modalSlice.actions.updateQuickRepaymentSummaryModal({
+                modalSlice.actions.updateSimpleQuickRepaymentModal({
                   // NOTICE: 此處不關閉，來避免用戶提交中返回到首頁
                   show: true,
                   confirm: true,

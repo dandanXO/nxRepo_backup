@@ -453,8 +453,8 @@ const IndexPage = () => {
       })
     );
 
-    navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
-
+    // navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
+  //
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
   const onClickToCustomerService = useCallback(() => {
