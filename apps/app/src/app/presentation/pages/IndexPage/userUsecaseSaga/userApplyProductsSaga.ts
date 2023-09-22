@@ -152,14 +152,6 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         if(!uploaded) {
           uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
           console.log("APPLY.uploaded", uploaded);
-
-          yield put(
-            modalSlice.actions.updateSimpleQuickRepaymentModal({
-              show: true,
-              confirm: false,
-            })
-          );
-
         } else {
           processFinished = true;
         }

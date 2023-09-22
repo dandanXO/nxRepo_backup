@@ -82,8 +82,9 @@ const QuickRepaymentModal = () => {
   return (
     <div className={cx('quick-repayment-modal fixed left-0 top-0 bottom-0 z-10 flex h-screen w-screen flex-col justify-center bg-black bg-opacity-80 p-0')}
       onClick={(e: any) => {
-        alert("outside")
+
         if (!stopPropagation) {
+          alert("outside.1")
           navigate(-1);
           dispatch(
             modalSlice.actions.updateSimpleQuickRepaymentModal({
@@ -92,6 +93,7 @@ const QuickRepaymentModal = () => {
             })
           );
         } else {
+          alert("outside.2")
           stopPropagation = false
         }
       }}
@@ -121,6 +123,7 @@ const QuickRepaymentModal = () => {
                 }}
                 value={optionValue}
                 onChange={(item: any) => {
+                  // notice: 沒有 event 無法阻止冒泡事件發生
                   // console.log(item);
                   stopPropagation = true
                   setOptionValue(item);
