@@ -452,7 +452,6 @@ const IndexPage = () => {
           details: simpleProducts,
       })
     );
-
     // navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
   //
   }, [calculatingProducts, currentSelectedProductsPrice]);

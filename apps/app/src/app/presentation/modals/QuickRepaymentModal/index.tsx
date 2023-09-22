@@ -78,18 +78,21 @@ const QuickRepaymentModal = () => {
     }
   }, [modelState?.simpleQuickRepaymentModal?.selectedBankcardId, modelState?.simpleQuickRepaymentModal?.bankcardList]);
 
-  useEffect(() => {
-    dispatch(modalSlice.actions.updateSimpleQuickRepaymentModal({
-      show: true,
-      confirm: false,
-    }));
-  }, []);
 
   return (
     <div className={cx('quick-repayment-modal fixed left-0 top-0 bottom-0 z-10 flex h-screen w-screen flex-col justify-center bg-black bg-opacity-80 p-0')}
       onClick={(e: any) => {
         if (!stopPropagation) {
           navigate(-1);
+
+          dispatch(
+            modalSlice.actions.updateSimpleQuickRepaymentModal({
+              // NOTICE: 此處不關閉，來避免用戶提交中返回到首頁
+              show: true,
+              confirm: true,
+            })
+          );
+
         } else {
           stopPropagation = false
         }
