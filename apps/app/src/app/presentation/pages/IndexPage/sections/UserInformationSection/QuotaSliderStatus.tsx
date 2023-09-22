@@ -105,22 +105,24 @@ export const QuotaSliderStatus = (props: Props) => {
               value={currentQuotaValue}
               onAfterChange={(value: any, index: any)=>{
                 let newValue = value;
-                const direction = value > currentQuotaValue ? 1 : -1;
+                
                 const steps = props.state.indexAPI?.quotaBar.steps;
-                if(steps && steps.length > 0) {
-                    for(let index = steps.length-1;index >= 0; index--) {
-                      if (value >= steps[index]) {
-                        if (value === steps[index] || direction < 0) {
-                          newValue = steps[index]
-                        } else {
-                          newValue = steps[index + 1 >= steps.length ? steps.length : index + 1];
-                        }
-                        break;
-                      } else if (value <= steps[0]) {
-
-                        newValue = steps[0];
-                        setCurrentQuotaValue((steps[0]));
+                if (steps && steps.length > 0) {
+                  const direction = value > currentQuotaValue ? 'right' : 'left';
+                  for (let index = steps.length - 1; index >= 0; index--) {
+                    if (value >= steps[index]) {
+                      if (value === steps[index] || direction === 'left') {
+                        newValue = steps[index]
+                      } else {
+                        const stepsIndex = index + 1 >= steps.length ? steps.length : index + 1
+                        newValue = steps[stepsIndex];
                       }
+                      break;
+                    } else if (value <= steps[0]) {
+
+                      newValue = steps[0];
+                      setCurrentQuotaValue((steps[0]));
+                    }
                   }
                 }
                 setCurrentQuotaValue(newValue);
