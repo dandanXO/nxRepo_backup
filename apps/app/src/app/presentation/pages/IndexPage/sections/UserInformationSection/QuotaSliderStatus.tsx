@@ -129,13 +129,14 @@ export const QuotaSliderStatus = (props: Props) => {
                 setCurrentQuotaLabelValue(formatPrice(quotaValue));
               }}
               onChange={(value: any, index: any) => {
+                setCurrentQuotaLabelValue(formatPrice(quotaValue));
+
                 //NOTE: only non steps
                 const steps = props.state.indexAPI?.quotaBar.steps;
                 if (steps === undefined || steps.length === 0) {
                   setCurrentQuotaValue(value);
                   const quotaValue = isNaN(value) ? 0 : value
                   setCurrentQuotaValue(quotaValue);
-                  setCurrentQuotaLabelValue(formatPrice(quotaValue));
                 }
               }}
             />
