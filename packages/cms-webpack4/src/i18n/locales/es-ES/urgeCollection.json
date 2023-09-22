@@ -1,0 +1,89 @@
+{
+    "addTrackingRecordHelp": "Tenga en cuenta que el registro no se puede modificar después de la presentación.",
+    "addUrge": "Agregar registro de cobro",
+    "amountDue": "Monto debido",
+    "appName": "Nombre de la aplicación",
+    "collectionTeam": "Equipo de cobro",
+    "collector": "Cobrador",
+    "collectorLoginIPRecord": "Registro de inicio de sesión del cobrador",
+    "collectorName": "Seguimiento",
+    "contactName": "Nombre de contacto",
+    "contactPerson": "Persona de contacto",
+    "contactable": "Contactable",
+    "coverageRate": "Tasa de cobertura",
+    "coverageRateTooltips": "Tasa de cobertura = Casos de cobro con registros de cobro / Todos los casos de cobro",
+    "currentDayOrderStatus": {
+        "0": "En proceso de pago",
+        "1": "Completado",
+        "3": "Pago parcial"
+    },
+    "extensionCount": "Número de órdenes de extensión",
+    "extensionLink": {
+        "button": "Generar enlace de extensión",
+        "copyLabel": "Generar enlace de extensión"
+    },
+    "extensionRate": "Tasa de extensión",
+    "extensionRateTooltips": "Tasa de extensión = Número de órdenes de extensión / Número de seguimientos",
+    "followUp": "Seguimiento",
+    "followUpAmount": "Monto de seguimiento",
+    "followUpCount": "Número de seguimientos",
+    "followUpDate": "Fecha de seguimiento",
+    "followUpResult": "Resultado del seguimiento",
+    "followUpTimes": "Número de seguimientos",
+    "fullRepaymentOrders": "Número de órdenes de pago completo",
+    "generateLink": "Generar enlace",
+    "helper": {
+        "overAmountDue": "El monto ingresado no debe superar el monto debido."
+    },
+    "initialLoginTime": "Hora de inicio de sesión inicial",
+    "lastOpenAppTime": "Hora de apertura más reciente de la aplicación",
+    "latestRepaymentCodeAcquisitionTime": "Hora más reciente de obtención del código de pago",
+    "loginLogs": "Registros de inicio de sesión",
+    "merchantName": "Nombre del comerciante",
+    "numberOfFollowUps": "Número de seguimientos",
+    "numberOfRepeatLoans": "Número de préstamos adicionales",
+    "orderLabel": "Etiqueta del pedido",
+    "orderLabelStatus": {
+        "extension": "Extensión",
+        "newLoan": "Nuevo préstamo",
+        "reLoan": "Préstamo adicional"
+    },
+    "orderNo": "Número de pedido",
+    "orderPaymentRate": "Tasa de pago de pedidos",
+    "orderPaymentRateTooltips": "Tasa de pago de pedidos = Total de pagos recibidos / Número de seguimientos",
+    "outstandingBalance": "Saldo pendiente actual",
+    "overDueOrderStatus": {
+        "0": "Atrasado",
+        "1": "Completado"
+    },
+    "overdueDays": "Días de atraso",
+    "partialRepay": {
+        "button": "Pago parcial",
+        "copyLabel": "Enlace de pago parcial"
+    },
+    "paymentAmountRate": "Tasa de pago",
+    "paymentAmountRateTooltips": "Tasa de pago = Monto recibido / Monto de seguimiento",
+    "phone": "Número de móvil",
+    "ptpTime": "Hora de PTP",
+    "ptpTimeTooltip": "PTP = Promesa de Pago",
+    "receiptAmount": "Monto recibido",
+    "recentTrackingTime": "Hora de seguimiento reciente",
+    "repayAmount": "Monto del pago",
+    "repayLink": {
+        "button": "Generar enlace de pago",
+        "copyLabel": "Generar enlace de pago"
+    },
+    "repeatLoansRate": "Tasa de préstamos adicionales",
+    "repeatLoansRateTooltips": "La proporción de préstamos adicionales se incluye en el número de casos seguidos por el cobrador",
+    "stage": "Etapa de atraso",
+    "tooltip": {
+        "amountDue": "Monto debido = Monto del préstamo * (1+Tasa de comisión posterior)",
+        "repayLink": "Si los usuarios eliminan la aplicación, se puede generar y proporcionar el enlace de pago o extensión."
+    },
+    "totalReceivedCount": "Total de pagos recibidos",
+    "totalReceivedCountTooltips": "Total de pagos recibidos = Número de pedidos de pago completo + Número de órdenes de extensión",
+    "trackingRecord": "Registro de seguimiento",
+    "trackingTime": "Hora de seguimiento",
+    "urgeRecord": "Registro de cobro",
+    "userName": "Nombre de usuario"
+}

@@ -1,0 +1,82 @@
+{
+    "breadcrumb": {
+        "orderDetails": "Detalles del pedido",
+        "overDueDetails": "Overdue Details"
+    },
+    "clickToCopy": "Haga clic para copiar",
+    "confirm": "Confirmar",
+    "contact": {
+        "borrower": "Prestatario",
+        "emergency": "Contacto de emergencia{{count}}",
+        "list": "Lista de contactos"
+    },
+    "currentPageTotal": "Total actual de la página",
+    "endDate": "Fecha de finalización",
+    "export": "Exportar",
+    "followUpResultStatus": {
+        "BadAttitude": "Actitud negativa",
+        "FinancialDifficulties": "Dificultades financieras",
+        "InvalidPhoneNumber": "Número de teléfono no válido",
+        "Missed": "Sin respuesta",
+        "Other": "Otro",
+        "Promise": "PTP",
+        "TurnedOff": "Apagado"
+    },
+    "function": "Función",
+    "goBack": "Regresar",
+    "menu": {
+        "currentDayCollectionReport": "Detalle de cobro del día actual",
+        "currentDayOverdueCall": "Cobro del día actual",
+        "currentDayOverdueCallList": "Lista de llamadas de cobro atrasado del día actual",
+        "homePage": "Inicio",
+        "overdueCallList": "Lista de llamadas de cobro atrasado",
+        "overdueCollection": "Cobro atrasado",
+        "overdueCollectionReport": "Detalle de cobro atrasado"
+    },
+    "message": {
+        "copied": "Copiado",
+        "linkCopied": "Enlace copiado"
+    },
+    "noRestriction": "Seleccionar todo",
+    "none": "Ninguno",
+    "orderLabelStatus": {
+        "extension": "Extensión",
+        "newLoan": "Nuevo préstamo",
+        "reLoan": "Préstamo adicional"
+    },
+    "orderStatus": {
+        "completed": "Completo",
+        "overDue": "Atrasado"
+    },
+    "pagination": {
+        "itemPerPage": "/ Página",
+        "showingRange": "Total de {{total}} registros"
+    },
+    "placeholder": {
+        "select": "Seleccionar"
+    },
+    "saved": "Guardado",
+    "search": "Buscar",
+    "startDate": "Fecha de inicio",
+    "tab": {
+        "contractList": "Lista de contactos",
+        "orderInfo": "Información del pedido",
+        "smsMessage": "Mensaje SMS",
+        "userInfo": "Información del usuario"
+    },
+    "table": {
+        "contactName": "Nombre del contacto",
+        "contactPhone": "Número de contacto",
+        "contactType": "Contacto",
+        "lastAddedTime": "Último momento agregado",
+        "loginIP": "Dirección IP de inicio de sesión",
+        "loginTime": "Hora de inicio de sesión",
+        "phone": "Número de móvil",
+        "relationShip": "Relación con el titular",
+        "sendPhoneNumber": "Número de teléfono",
+        "sendTime": "Hora de envío",
+        "smsContent": "Contenido del SMS",
+        "smsSendType": "Tipo de envío",
+        "uploadTime": "Hora de carga"
+    }
+}

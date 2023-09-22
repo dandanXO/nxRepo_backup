@@ -8,6 +8,11 @@ import orderZHCN from './locales/zh-CN/order.json';
 import urgeCollectionZHCN from './locales/zh-CN/urgeCollection.json';
 import userZHCN from './locales/zh-CN/user.json';
 import zodZHCN from './locales/zh-CN/zod.json';
+import commonES from './locales/es-ES/common.json';
+import orderES from './locales/es-ES/order.json';
+import urgeCollectionES from './locales/es-ES/urgeCollection.json';
+import userES from './locales/es-ES/user.json';
+import zodES from './locales/es-ES/zod.json';
 
 export default {
     'zh-CN': {
@@ -24,4 +29,11 @@ export default {
         order: orderENUS,
         urgeCollection: urgeCollectionENUS,
     },
+    'es-ES': {
+        commonES,
+        orderES,
+        urgeCollectionES,
+        userES,
+        zodES,
+    }
 };
