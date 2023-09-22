@@ -10,13 +10,11 @@ import {InitialStateType, modalSlice} from '../../../../reduxStore/modalSlice';
 import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
 import {IndexPageSagaAction, UserApplyProductActionPayload} from './indexPageActions';
 import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
-import {alertModal} from "../../../../api/base/alertModal";
 import {SentryModule} from "../../../../modules/sentry";
 import {routerActions} from "@lagunovsky/redux-react-router";
 import {PagePathEnum} from "../../PagePathEnum";
 import {getToken} from "../../../../modules/querystring/getToken";
 import {errorFallback} from "../../../../usecaseFlow/utils/errorFallback";
-import {userReacquireCreditSaga} from "./userReacquireCreditSaga";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 
@@ -46,7 +44,6 @@ function* callAndroidFunctionToUploadUserPhoneData() {
   if (!onUploadKycBackgroundData) {
     // NOTICE: 使用者拒絕授權結束流程
     const message = 'User refuses to authenticate';
-    // alertModal("Please confirm to upload to apply.");
     console.log(message)
     return false;
   }
@@ -59,13 +56,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
   // NOTICE: 防止錯誤後無法重新 watch
   try {
-    // const navigator = yield select((state:RootState) => state.navigator);;
-    // const isShowSimpleQuickRepaymentModal: number = yield select(
-    //   (state: RootState) => state.model.simpleQuickRepaymentModal.show
-    // );
-    // if(!isShowSimpleQuickRepaymentModal) {
-      yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
-    // }
+    yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
 
     let uploaded = false;
 
@@ -110,13 +101,6 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         })
       );
 
-      // const [result, result2] = yield race([
-      //   take(modalSlice.actions.updateQuickRepaymentSummaryModal),
-      //   take(modalSlice.actions.updateLoanAgreementModal),
-      // ])
-      // console.log("result", result);
-      // console.log("result2", result2);
-
       // NOTE: Waiting for user to confirm | cancel | (see loan agreement modal)
       // const {
       //   type,
@@ -160,24 +144,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         processFinished = true;
       }
     }
-    // if(!uploaded) {
-    //   console.log("不允許借款")
-    //   return
-    // } else {
-    //   // 等待用戶點擊 confirm
-    //   const {
-    //     type,
-    //     payload: { show, confirm },
-    //   }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
-    //     modalSlice.actions.updateSimpleQuickRepaymentModal
-    //   );
-    //   if (!confirm) {
-    //     console.log("cancel");
-    //     return;
-    //   } else {
-    //     console.log("applyLoan");
-    //   }
-    // }
+
     if(uploaded) {
       console.log("開始借款")
       const selectedBankcardID: number = yield select(
@@ -216,8 +183,6 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         );
       }
     }
-
-
 
   } catch (error: any) {
     yield catchSagaError(error);
