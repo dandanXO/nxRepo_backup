@@ -119,7 +119,6 @@ export const QuotaSliderStatus = (props: Props) => {
                     }
                     break;
                   } else if (value <= steps[0]) {
-
                     newValue = steps[0];
                     setCurrentQuotaValue((steps[0]));
                   }
