@@ -84,15 +84,6 @@ const QuickRepaymentModal = () => {
       onClick={(e: any) => {
         if (!stopPropagation) {
           navigate(-1);
-
-          dispatch(
-            modalSlice.actions.updateSimpleQuickRepaymentModal({
-              // NOTICE: 此處不關閉，來避免用戶提交中返回到首頁
-              show: true,
-              confirm: true,
-            })
-          );
-
         } else {
           stopPropagation = false
         }

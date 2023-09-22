@@ -145,6 +145,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       );
       if (!confirm) {
         console.log("cancel");
+
         processFinished = true;
       } else {
         if(!uploaded) {
