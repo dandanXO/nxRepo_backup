@@ -20,10 +20,12 @@ export function* systemStartInitSaga() {
   yield put(appSlice.actions.updateAndroidInfo(NativeAppInfo));
 
   const packageId: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId);
+  console.log("packageId", packageId);
 
   if (getToken() === '') {
-    console.log('missing token');
+    // console.log('missing token');
     alertModal('missing token');
+    return;
   }
 
   const [response]: [GetInitServiceResponse] = yield all([

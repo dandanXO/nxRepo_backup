@@ -3,18 +3,27 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ReservationProduct } from '../api/loanService/GetReservationResponse';
 import { ReservationDetail } from '../api/loanService/PostReservationSubmitRequest';
 import { BankAccount } from '../api/userService/BankAccount';
+import QuickRepaymentModal from "../presentation/modals/QuickRepaymentModal";
 
 export type InitialStateType = {
   authorizationModal: {
     show: boolean;
     confirm: null | boolean;
   };
+  // NOTICE: repay: deprecatd
   quickRepaymentSummaryModal: {
     show: boolean;
     confirm: boolean;
     bankcardList?: BankAccount[];
     selectedBankcardId?: number;
   };
+  // NOTICE: repay: new flow:
+  simpleQuickRepaymentModal: {
+    show: boolean;
+    confirm: boolean;
+    bankcardList?: BankAccount[];
+    selectedBankcardId?: number;
+  },
   loanAgreementModal: {
     show: boolean;
   };
@@ -76,6 +85,12 @@ export const modalInitialState: InitialStateType = {
     confirm: null,
   },
   quickRepaymentSummaryModal: {
+    show: false,
+    confirm: false,
+    bankcardList: undefined,
+    selectedBankcardId: undefined,
+  },
+  simpleQuickRepaymentModal: {
     show: false,
     confirm: false,
     bankcardList: undefined,
@@ -147,6 +162,7 @@ export const modalSlice = createSlice({
       state.authorizationModal.show = action.payload.show;
       state.authorizationModal.confirm = action.payload.confirm;
     },
+    // NOTE: deprecatd
     updateQuickRepaymentSummaryModal: (
       state,
       action: PayloadAction<InitialStateType['quickRepaymentSummaryModal']>
@@ -173,6 +189,24 @@ export const modalSlice = createSlice({
       state.quickRepaymentSummaryModal.selectedBankcardId =
         action.payload.selectedBankcardId;
     },
+    // NOTE: new flow - Simple Quick Repayment Modal
+    updateSimpleQuickRepaymentModal: (state, action: PayloadAction<InitialStateType['simpleQuickRepaymentModal']>) => {
+      state.simpleQuickRepaymentModal.show = action.payload.show;
+      state.simpleQuickRepaymentModal.confirm = action.payload.confirm;
+
+      if (action.payload.bankcardList) {
+        state.simpleQuickRepaymentModal.bankcardList = action.payload.bankcardList;
+      }
+    },
+    updateSimpleQuickRepaymentModalSelectedID: (
+      state,
+      action: PayloadAction<{
+        selectedBankcardId?: number;
+      }>
+    ) => {
+      state.simpleQuickRepaymentModal.selectedBankcardId = action.payload.selectedBankcardId;
+    },
+
     updateLoanAgreementModal: (
       state,
       action: PayloadAction<InitialStateType['loanAgreementModal']>
