@@ -136,8 +136,6 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     let processFinished = false;
     while(!uploaded && !processFinished) {
 
-      uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
-
       // yield put(modalSlice.actions.updateSimpleQuickRepaymentModal({
       //   show: true,
       //   confirm: true,
@@ -149,10 +147,12 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
         modalSlice.actions.updateSimpleQuickRepaymentModal
       );
+      console.log("APPLY.confirm", confirm);
+
       if (confirm) {
-        console.log("uploaded", uploaded);
         if(!uploaded) {
-          //
+          uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
+          console.log("APPLY.uploaded", uploaded);
         } else {
           processFinished = true;
         }
