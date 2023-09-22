@@ -60,9 +60,9 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     // const navigator = yield select((state:RootState) => state.navigator);;
-    const isShowSimpleQuickRepaymentModal: number = yield select(
-      (state: RootState) => state.model.simpleQuickRepaymentModal.show
-    );
+    // const isShowSimpleQuickRepaymentModal: number = yield select(
+    //   (state: RootState) => state.model.simpleQuickRepaymentModal.show
+    // );
     // if(!isShowSimpleQuickRepaymentModal) {
       yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
     // }
@@ -167,62 +167,63 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         processFinished = true;
       }
     }
-
-    if(!uploaded) {
-      console.log("不允許借款")
-      return
-    } else {
-      // 等待用戶點擊 confirm
-      const {
-        type,
-        payload: { show, confirm },
-      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
-        modalSlice.actions.updateSimpleQuickRepaymentModal
+    // if(!uploaded) {
+    //   console.log("不允許借款")
+    //   return
+    // } else {
+    //   // 等待用戶點擊 confirm
+    //   const {
+    //     type,
+    //     payload: { show, confirm },
+    //   }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+    //     modalSlice.actions.updateSimpleQuickRepaymentModal
+    //   );
+    //   if (!confirm) {
+    //     console.log("cancel");
+    //     return;
+    //   } else {
+    //     console.log("applyLoan");
+    //   }
+    // }
+    if(uploaded) {
+      console.log("開始借款")
+      const selectedBankcardID: number = yield select(
+        (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
       );
-      if (!confirm) {
-        console.log("cancel");
-        return;
-      } else {
-        console.log("applyLoan");
+
+      yield put(loadingSlice.actions.updatePageLoading(true));
+      const { data: responseData, success }: { data: LoanServiceResponse; success: boolean } = yield call(
+        Service.LoanService.applyLoan,
+        {
+          ...action.payload,
+          bankId: selectedBankcardID,
+        }
+      );
+
+      // console.log("applyLoan.responseData", responseData);
+
+      if (success) {
+        // NOTE: Refresh IndexPage view data
+        yield put(IndexPageSagaAction.user.viewIndexPageAction());
+
+        // NOTE: Reset Summary Modal
+        yield put(
+          modalSlice.actions.updateQuickRepaymentSummaryModal({
+            show: false,
+            confirm: false,
+            bankcardList: [],
+            selectedBankcardId: undefined,
+          })
+        );
+
+        yield put(
+          modalSlice.actions.updateQRSuccessModal({
+            show: true,
+          })
+        );
       }
     }
 
-    console.log("開始借款")
-    const selectedBankcardID: number = yield select(
-      (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
-    );
-
-    yield put(loadingSlice.actions.updatePageLoading(true));
-    const { data: responseData, success }: { data: LoanServiceResponse; success: boolean } = yield call(
-      Service.LoanService.applyLoan,
-      {
-        ...action.payload,
-        bankId: selectedBankcardID,
-      }
-    );
-
-    // console.log("applyLoan.responseData", responseData);
-
-    if (success) {
-      // NOTE: Refresh IndexPage view data
-      yield put(IndexPageSagaAction.user.viewIndexPageAction());
-
-      // NOTE: Reset Summary Modal
-      yield put(
-        modalSlice.actions.updateQuickRepaymentSummaryModal({
-          show: false,
-          confirm: false,
-          bankcardList: [],
-          selectedBankcardId: undefined,
-        })
-      );
-
-      yield put(
-        modalSlice.actions.updateQRSuccessModal({
-          show: true,
-        })
-      );
-    }
 
 
   } catch (error: any) {
