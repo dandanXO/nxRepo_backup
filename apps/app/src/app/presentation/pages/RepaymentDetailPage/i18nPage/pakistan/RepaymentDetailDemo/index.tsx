@@ -31,7 +31,7 @@ const RepaymentDetailDemo = (props: IRepaymentDetailDemo) => {
         isFetching={isFetching}
       />
       <ListItem
-        title={t('Markup')}
+        title={t('Markup Fee')}
         text={<Money money={0} />}
         titleColor="text-ctext-secondary"
         textColor="text-ctext-primary"
