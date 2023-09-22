@@ -14,6 +14,7 @@ export interface GetLoanDetailResponse {
   extendDate?: string; // 展期日期(status = EXTEND才會有)
   extendable?: boolean; // 该订单是否可展期
   extended?: boolean; // 是否为展期订单
+  extensibleOverdueDays?: number; // 逾期N天内可展期
   extensionFee?: number; // 展期費用(status = EXTEND才會有)
   iconUrl?: string; // Icon url
   loanAmount?: number; // 借款金额(合同金額)
