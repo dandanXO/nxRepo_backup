@@ -3,6 +3,7 @@ import { ConfigProvider } from 'antd';
 import en_US from 'antd/es/locale/en_US';
 // eslint-disable-next-line camelcase
 import zh_CN from 'antd/es/locale/zh_CN';
+import es_ES from 'antd/es/locale/es_ES'
 import { createHashHistory } from 'history';
 import i18next from 'i18next';
 import React, { Suspense, useEffect } from 'react';
@@ -19,6 +20,8 @@ const langMap = {
     'zh-CN': zh_CN,
     // eslint-disable-next-line camelcase
     'en-US': en_US,
+    // eslint-disable-next-line camelcase
+    'es-ES': es_ES,
 };
 
 const Basename = window['__POWERED_BY_QIANKUN__'] ? '/cms' : '/';

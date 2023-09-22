@@ -30,6 +30,7 @@ function render(props) {
 const languageCodeMap = {
     en: 'en-US',
     cn: 'zh-CN',
+    es: 'es-ES'
 };
 
 function storeTest(props) {

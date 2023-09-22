@@ -30,10 +30,10 @@ export default {
         urgeCollection: urgeCollectionENUS,
     },
     'es-ES': {
-        commonES,
-        orderES,
-        urgeCollectionES,
-        userES,
-        zodES,
+        common: commonES,
+        zod: zodES,
+        user: userES,
+        order: orderES,
+        urgeCollection: urgeCollectionES,
     }
 };
