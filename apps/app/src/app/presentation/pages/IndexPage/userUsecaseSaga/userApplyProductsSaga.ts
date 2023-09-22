@@ -130,12 +130,15 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
     }
 
+
+
     let processFinished = false;
     while(!uploaded && !processFinished) {
-      // const [result, result2] = yield race([
-      //   take(modalSlice.actions.updateQuickRepaymentSummaryModal),
-      //   take(modalSlice.actions.updateLoanAgreementModal),
-      // ])
+
+      yield put(modalSlice.actions.updateSimpleQuickRepaymentModal({
+        show: true,
+        confirm: true,
+      }))
 
       const {
         type,
@@ -143,16 +146,15 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
         modalSlice.actions.updateSimpleQuickRepaymentModal
       );
-      if (!confirm) {
-        console.log("cancel");
-
-        processFinished = true;
-      } else {
+      if (confirm) {
         if(!uploaded) {
           uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
         } else {
           processFinished = true;
         }
+      } else {
+        console.log("cancel");
+        processFinished = true;
       }
     }
 
