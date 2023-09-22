@@ -136,12 +136,12 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     let processFinished = false;
     while(!uploaded && !processFinished) {
 
-      // 再次顯示錢包頁面
-      // yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
-      yield put(modalSlice.actions.updateSimpleQuickRepaymentModal({
-        show: true,
-        confirm: true,
-      }))
+      uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
+
+      // yield put(modalSlice.actions.updateSimpleQuickRepaymentModal({
+      //   show: true,
+      //   confirm: true,
+      // }))
 
       const {
         type,
@@ -152,7 +152,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       if (confirm) {
         console.log("uploaded", uploaded);
         if(!uploaded) {
-          uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
+          //
         } else {
           processFinished = true;
         }
@@ -167,6 +167,9 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       return
     } else {
       // 等待用戶點擊 confirm
+
+      // 再次顯示錢包頁面
+      yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
 
       const {
         type,
