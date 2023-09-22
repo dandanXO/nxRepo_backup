@@ -139,7 +139,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
     let processFinished = false;
     while(!uploaded && !processFinished) {
-
+      console.log("等待用戶做出抉擇")
       const {
         type,
         payload: { show, confirm },
