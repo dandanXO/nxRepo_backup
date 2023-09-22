@@ -44,8 +44,8 @@ class IntlProviderWrapper extends Component {
     }
     else {
       this.initLnag = 'en';
-      this.initMsg = es_ES.messages;
-      this.initAntdMsg = es_ES.antdMsg;
+      this.initMsg = en_US.messages;
+      this.initAntdMsg = en_US.antdMsg;
     }
 
     this.saveLang(String(this.initLnag).toString());
