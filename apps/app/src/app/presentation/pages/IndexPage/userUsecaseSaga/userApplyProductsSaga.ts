@@ -161,10 +161,27 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         processFinished = true;
       }
     }
+
     if(!uploaded) {
       console.log("不允許借款")
       return
+    } else {
+      // 等待用戶點擊 confirm
+
+      const {
+        type,
+        payload: { show, confirm },
+      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+        modalSlice.actions.updateSimpleQuickRepaymentModal
+      );
+      if (!confirm) {
+        console.log("cancel");
+        return;
+      } else {
+        console.log("applyLoan");
+      }
     }
+
     console.log("開始借款")
     const selectedBankcardID: number = yield select(
       (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
