@@ -137,7 +137,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     while(!uploaded && !processFinished) {
 
       // 再次顯示錢包頁面
-      yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
+      // yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
       yield put(modalSlice.actions.updateSimpleQuickRepaymentModal({
         show: true,
         confirm: true,
@@ -161,7 +161,6 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
         processFinished = true;
       }
     }
-
     if(!uploaded) {
       console.log("不允許借款")
       return
