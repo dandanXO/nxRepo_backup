@@ -53,6 +53,11 @@ export const i18nLoanDetailsPage: i18nComponent = {
       //PK
       'Get more amount after instant payment':
         'Get more amount after instant payment',
+      'Other Charges': 'Other Charges',
+      'Banking Trans. Cost': 'Banking Trans. Cost',
+      'CIB Cost': 'CIB Cost',
+      'NADRA Verysis Cost': 'NADRA Verysis Cost'
+
     },
     es_MX: {
       // MX
