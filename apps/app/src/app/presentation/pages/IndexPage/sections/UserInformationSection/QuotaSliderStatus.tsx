@@ -103,27 +103,39 @@ export const QuotaSliderStatus = (props: Props) => {
               max={props.state.indexAPI?.quotaBar.max || 0}
               step={props.state.indexAPI?.quotaBar.serial || 0}
               value={currentQuotaValue}
-              onChange={(value: any, index: any) => {
+              onAfterChange={(value: any, index: any)=>{
                 let newValue = value;
-                // NOTICE: 當 steps 有值，只能滑動到精準的金額位置
-                if(props.state.indexAPI?.quotaBar.steps && props.state.indexAPI?.quotaBar.steps.length > 0) {
-                  if(props.state.indexAPI?.quotaBar.steps.indexOf(value) == -1) {
-                    for(let index = props.state.indexAPI?.quotaBar.steps.length-1;index >= 0; index--) {
-                      if (value >= props.state.indexAPI?.quotaBar.steps[index]) {
-                        newValue = props.state.indexAPI?.quotaBar.steps[index];
-                        setCurrentQuotaValue(newValue);
+                const direction = value > currentQuotaValue ? 1 : -1;
+                const steps = props.state.indexAPI?.quotaBar.steps;
+                if(steps && steps.length > 0) {
+                    for(let index = steps.length-1;index >= 0; index--) {
+                      if (value >= steps[index]) {
+                        if (value === steps[index] || direction < 0) {
+                          newValue = steps[index]
+                        } else {
+                          newValue = steps[index + 1 >= steps.length ? steps.length : index + 1];
+                        }
                         break;
-                      } else if(value <= props.state.indexAPI?.quotaBar.steps[0]){
-                        // index:0
-                        newValue = props.state.indexAPI?.quotaBar.steps[0];
-                        setCurrentQuotaValue((props.state.indexAPI?.quotaBar.steps[0]));
+                      } else if (value <= steps[0]) {
+
+                        newValue = steps[0];
+                        setCurrentQuotaValue((steps[0]));
                       }
-                    }
                   }
                 }
+                setCurrentQuotaValue(newValue);
                 const quotaValue = isNaN(newValue) ? 0 : newValue
                 setCurrentQuotaValue(quotaValue);
                 setCurrentQuotaLabelValue(formatPrice(quotaValue));
+              }}
+              onChange={(value: any, index: any) => {
+                const steps = props.state.indexAPI?.quotaBar.steps;
+                if (steps === undefined || steps.length === 0) {
+                  setCurrentQuotaValue(value);
+                  const quotaValue = isNaN(value) ? 0 : value
+                  setCurrentQuotaValue(quotaValue);
+                  setCurrentQuotaLabelValue(formatPrice(quotaValue));
+                }
               }}
             />
           </div>
