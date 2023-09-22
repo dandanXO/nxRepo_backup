@@ -162,6 +162,10 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       }
     }
 
+    if(!uploaded) {
+      console.log("不允許借款")
+      return
+    }
     console.log("開始借款")
     const selectedBankcardID: number = yield select(
       (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
