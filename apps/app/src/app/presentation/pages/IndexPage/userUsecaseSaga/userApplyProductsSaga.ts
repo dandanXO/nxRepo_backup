@@ -59,7 +59,13 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
   // NOTICE: 防止錯誤後無法重新 watch
   try {
-    yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
+    // const navigator = yield select((state:RootState) => state.navigator);;
+    const isShowSimpleQuickRepaymentModal: number = yield select(
+      (state: RootState) => state.model.simpleQuickRepaymentModal.show
+    );
+    // if(!isShowSimpleQuickRepaymentModal) {
+      yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
+    // }
 
     let uploaded = false;
 
@@ -167,10 +173,6 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       return
     } else {
       // 等待用戶點擊 confirm
-
-      // 再次顯示錢包頁面
-      yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
-
       const {
         type,
         payload: { show, confirm },
