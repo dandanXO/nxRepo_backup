@@ -8,59 +8,52 @@ import { Route, Routes, useLocation } from 'react-router';
 
 import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
 import { RootState } from '../../reduxStore';
+// NOTICE: Static Loading : Compontents
+import LoadingMask from '../components/LoadingMask';
 import { TabBar } from '../components/layouts/TabBar';
-// const IndexPage = loadable(() => import("../pages/IndexPage"));
-import IndexPage from '../pages/IndexPage';
-import { PagePathEnum } from '../pages/PagePathEnum';
-
-// NOTE: Page
-// import { CategoryPage } from '../pages/__test__/CategoryPage';
-import { ErrorPage } from '../pages/__test__/ErrorPage';
-
-
+import APIBoundaryModal from '../modals/APIBoundaryModal';
+import AmountRepaidModal from '../modals/AmountRepaidModal/AmountRepaidModal';
+import DeleteAccountConfirmModal from '../modals/DeleteAccountConfirmModal';
+import ExtendConfirmModal from '../modals/ExtendConfirmModal';
+import ExtendModal from '../modals/ExtendModal';
+import LogoutModal from '../modals/LogoutModal';
+import PrivacyPolicyModal from '../modals/PrivacyPolicyModal';
+import QuickRepaymentModal from '../modals/QuickRepaymentModal';
+import RepaymentCouponModal from '../modals/RepaymentCouponModal';
+// NOTICE: Static Loading : Modal
+import RepaymentModal from '../modals/RepaymentModal';
+import IBANFinderModal from '../modals/i18n/pakistan/IBANFinderModal';
+import AccountVerificationPage from '../pages/AccountVerificationPage';
+import ApplicationProgressPage from '../pages/ApplicationProgressPage';
 // NOTICE: Static Loading : Page
 import BankCardListPage from '../pages/BankCardListPage';
 import BindBankCardPage from '../pages/BindBankCardPage';
+import CouponModalContentAndroidWebviewPage from '../pages/CouponModalContentAndroidWebviewPage';
 import CustomerServicePage from '../pages/CustomerServicePage';
+import DeleteAccountPage from '../pages/DeleteAccountPage';
 import DisclosureStatementPage from '../pages/DisclosureStatementPage';
-import RepaymentDetailPage from '../pages/RepaymentDetailPage'
-import LoanRecordPage from '../pages/RepaymentPage'
-import OrderStatusPage from '../pages/OrderStatusPage'
-import MyCouponListPage from '../pages/MyCouponListPage'
+import FeedbackPage from '../pages/FeedbackPage';
+// const IndexPage = loadable(() => import("../pages/IndexPage"));
+import IndexPage from '../pages/IndexPage';
+import LoginPage from '../pages/LoginPage';
+import MyCouponListPage from '../pages/MyCouponListPage';
 import OnlineCustomerServicePage from '../pages/OnlineCustomerServicePage';
-import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage'
-import PartnerPage from '../pages/PartnerPage'
-import PersonalInfoPage  from '../pages/PersonalInfoPage';
+import OrderStatusPage from '../pages/OrderStatusPage';
+import { PagePathEnum } from '../pages/PagePathEnum';
+import PartnerPage from '../pages/PartnerPage';
+import PaymentInstructionPage from '../pages/PaymentInstructionPage';
+import PaymentResultPage from '../pages/PaymentResultPage';
+import PersonalInfoPage from '../pages/PersonalInfoPage';
 import PrivacyPolicyPage from '../pages/PrivacyPolicyPage';
 import QuotaModelPage from '../pages/QuotaModelPage';
-import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage';
+import RepaymentDetailPage from '../pages/RepaymentDetailPage';
+import LoanRecordPage from '../pages/RepaymentPage';
 import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage';
-import CouponModalContentAndroidWebviewPage from  '../pages/CouponModalContentAndroidWebviewPage';
-import ApplicationProgressPage from '../pages/ApplicationProgressPage';
-import LoginPage from  '../pages/LoginPage';
-import DeleteAccountPage from  '../pages/DeleteAccountPage';
-import AccountVerificationPage from  '../pages/AccountVerificationPage';
-
-// NOTICE: Static Loading : Modal
-import RepaymentModal from  '../modals/RepaymentModal';
-import AmountRepaidModal from  '../modals/AmountRepaidModal/AmountRepaidModal';
-import ExtendConfirmModal from  '../modals/ExtendConfirmModal';
-import ExtendModal from  '../modals/ExtendModal';
-import LogoutModal from  '../modals/LogoutModal';
-import APIBoundaryModal from  '../modals/APIBoundaryModal';
-import PrivacyPolicyModal from  '../modals/PrivacyPolicyModal';
-import RepaymentCouponModal from  '../modals/RepaymentCouponModal';
-import IBANFinderModal from '../modals/i18n/pakistan/IBANFinderModal';
-import DeleteAccountConfirmModal from  '../modals/DeleteAccountConfirmModal';
-import QuickRepaymentModal from '../modals/QuickRepaymentModal';
-
-
-// NOTICE: Static Loading : Compontents
-import LoadingMask from '../components/LoadingMask';
-import FeedbackPage from '../pages/FeedbackPage';
-import PaymentInstructionPage from "../pages/PaymentInstructionPage";
-
-
+import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage';
+// NOTE: Page
+// import { CategoryPage } from '../pages/__test__/CategoryPage';
+import { ErrorPage } from '../pages/__test__/ErrorPage';
+import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage';
 
 // NOTICE: 無法以下寫法
 // [ctor is not a function when using React.lazy](https://github.com/facebook/react/issues/15639)
@@ -151,7 +144,6 @@ import PaymentInstructionPage from "../pages/PaymentInstructionPage";
 // https://github.com/jantimon/html-webpack-plugin/issues/1317
 // https://www.technipages.com/google-chrome-prefetch/
 
-
 // NOTE: preload
 // BindBankCardPage.preload();
 // RepaymentDetailPage.preload();
@@ -167,18 +159,20 @@ import PaymentInstructionPage from "../pages/PaymentInstructionPage";
 // ExtendModal.preload();
 // RepaymentCouponModal.preload();
 
-
-
-
 export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
   const location = useLocation();
 
-  const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
-  const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
-  const isOrderOverdue = payableRecords && payableRecords?.some((order) => order.overdue === true);
-  const pageLoading = useSelector((state:any) => state.pageLoading);
+  const apiBoundary = useSelector(
+    (state: RootState) => state.APIBoundaryModule
+  );
+  const payableRecords = useSelector(
+    (state: RootState) => state.indexPage.indexAPI?.payableRecords
+  );
+  const isOrderOverdue =
+    payableRecords && payableRecords?.some((order) => order.overdue === true);
+  const pageLoading = useSelector((state: any) => state.pageLoading);
   // NOTICE: 純 H5 在用畫面阻擋
   // if(NativeAppInfo.mode === 'H5' && !isInit) {
   // if(!isInit) {
@@ -197,7 +191,10 @@ export const AppRouter = () => {
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
         {/*NOTICE: refactor me - PK*/}
-        <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
+        <Route
+          path={PagePathEnum.IBANFinderPage}
+          element={<IBANFinderPage />}
+        />
         {/*<Route path="/v2/auth" element={<AuthPage />} />*/}
         {/*<Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />*/}
 
@@ -205,18 +202,39 @@ export const AppRouter = () => {
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
 
-        <Route path={PagePathEnum.IndexPage} element={<IndexPage />} >
-          <Route path="quick-repayment-modal" element={<QuickRepaymentModal />} />
+        <Route path={PagePathEnum.IndexPage} element={<IndexPage />}>
+          <Route
+            path="quick-repayment-modal"
+            element={<QuickRepaymentModal />}
+          />
         </Route>
-        <Route path={PagePathEnum.PrivacyPolicyModal} element={<PrivacyPolicyModal />} />
+        <Route
+          path={PagePathEnum.PrivacyPolicyModal}
+          element={<PrivacyPolicyModal />}
+        />
 
-        <Route path={PagePathEnum.ApplicationProgressPage} element={<ApplicationProgressPage />} />
+        <Route
+          path={PagePathEnum.ApplicationProgressPage}
+          element={<ApplicationProgressPage />}
+        />
 
-        <Route path={PagePathEnum.CustomerServicePage} element={<CustomerServicePage />} />
-        <Route path="/v2/online-customer-service" element={<OnlineCustomerServicePage />} />
-        <Route path={PagePathEnum.DisclosureStatementPage} element={<DisclosureStatementPage />} />
+        <Route
+          path={PagePathEnum.CustomerServicePage}
+          element={<CustomerServicePage />}
+        />
+        <Route
+          path="/v2/online-customer-service"
+          element={<OnlineCustomerServicePage />}
+        />
+        <Route
+          path={PagePathEnum.DisclosureStatementPage}
+          element={<DisclosureStatementPage />}
+        />
 
-        <Route path={PagePathEnum.BankcardListPage} element={<BankCardListPage />} />
+        <Route
+          path={PagePathEnum.BankcardListPage}
+          element={<BankCardListPage />}
+        />
         <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}>
           <Route path="iban-finder-modal" element={<IBANFinderModal />} />
         </Route>
@@ -224,36 +242,80 @@ export const AppRouter = () => {
         <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
 
         {/*NOTICE: order: processing, reject*/}
-        <Route path={PagePathEnum.OrderStatusPage} element={<OrderStatusPage />} />
+        <Route
+          path={PagePathEnum.OrderStatusPage}
+          element={<OrderStatusPage />}
+        />
 
-        <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
+        <Route
+          path={PagePathEnum.RepaymentDetailPage}
+          element={<RepaymentDetailPage />}
+        >
           <Route path="repayment-modal" element={<RepaymentModal />} />
-          <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
+          <Route
+            path="amount-repaid-record-modal"
+            element={<AmountRepaidModal />}
+          />
           <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
           <Route path="extend-modal" element={<ExtendModal />} />
-          <Route path="repayment-coupon-modal" element={<RepaymentCouponModal />} />
+          <Route
+            path="repayment-coupon-modal"
+            element={<RepaymentCouponModal />}
+          />
         </Route>
 
         {/*NOTICE: Mexico, Philippines*/}
-        <Route path={PagePathEnum.PaymentInstructionPage} element={<PaymentInstructionPage />} />
+        <Route
+          path={PagePathEnum.PaymentInstructionPage}
+          element={<PaymentInstructionPage />}
+        />
+        <Route
+          path={PagePathEnum.PaymentResultPage}
+          element={<PaymentResultPage />}
+        />
+        <Route
+          path="/v2/coupon-modal-content"
+          element={<CouponModalContentAndroidWebviewPage />}
+        />
+        <Route
+          path="/v2/uploaded-payment-receipt"
+          element={<UploadedPaymentReceiptPage />}
+        />
+        <Route
+          path="/v2/upload-payment-receipt"
+          element={<UploadPaymentReceiptPage />}
+        />
 
-        <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
-        <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
-        <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
-
-
-        <Route path={PagePathEnum.PersonalInfoPage} element={<PersonalInfoPage />}>
+        <Route
+          path={PagePathEnum.PersonalInfoPage}
+          element={<PersonalInfoPage />}
+        >
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
-        <Route path={PagePathEnum.MyCouponListPage} element={<MyCouponListPage />} />
+        <Route
+          path={PagePathEnum.MyCouponListPage}
+          element={<MyCouponListPage />}
+        />
         <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
         <Route path={PagePathEnum.FeedbackPage} element={<FeedbackPage />} />
-        <Route path={PagePathEnum.PrivacyPolicyPage} element={<PrivacyPolicyPage />} />
+        <Route
+          path={PagePathEnum.PrivacyPolicyPage}
+          element={<PrivacyPolicyPage />}
+        />
 
         {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
-        <Route path={PagePathEnum.DeleteAccountPage} element={<DeleteAccountPage />} />
-        <Route path={PagePathEnum.AccountVerificationPage} element={<AccountVerificationPage />} >
-          <Route path={"delete-confirm-modal"} element={<DeleteAccountConfirmModal />} />
+        <Route
+          path={PagePathEnum.DeleteAccountPage}
+          element={<DeleteAccountPage />}
+        />
+        <Route
+          path={PagePathEnum.AccountVerificationPage}
+          element={<AccountVerificationPage />}
+        >
+          <Route
+            path={'delete-confirm-modal'}
+            element={<DeleteAccountConfirmModal />}
+          />
           <Route path="quota-model" element={<QuotaModelPage />} />
         </Route>
 
@@ -273,10 +335,17 @@ export const AppRouter = () => {
         PagePathEnum.RepaymentPage as string,
         PagePathEnum.PersonalInfoPage as string,
         PagePathEnum.PersonalInfoPage + '/log-out-modal',
-       ].indexOf(location.pathname) > -1 && <TabBar hasOrder={isOrderOverdue ?? false} />}
+      ].indexOf(location.pathname) > -1 && (
+        <TabBar hasOrder={isOrderOverdue ?? false} />
+      )}
 
-      {apiBoundary.show && <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message} />}
-      {pageLoading.show && <LoadingMask/>}
+      {apiBoundary.show && (
+        <APIBoundaryModal
+          title={apiBoundary.title}
+          message={apiBoundary.message}
+        />
+      )}
+      {pageLoading.show && <LoadingMask />}
       {/*</Suspense>*/}
     </AppDataCollector>
   );
