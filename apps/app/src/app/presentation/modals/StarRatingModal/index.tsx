@@ -9,11 +9,12 @@ import GrayStarIcon from './GrayStarIcon';
 import StarIcon from './StarIcon';
 import { useState } from 'react';
 import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
+import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 
 const StarRatingModal = () => {
 
     const dispatch = useDispatch();
-    const { app } = useSelector((state: RootState) => state)
+    const { app ,indexPage} = useSelector((state: RootState) => state)
 
 
     const [ratingDisable, setRatingDisable] = useState(true);
@@ -31,8 +32,9 @@ const StarRatingModal = () => {
     }
 
     const handleSubmitRating = () => {
+        const mailContentName = indexPage.user.state === USER_AUTH_STATE.ready ? 'guest' : indexPage?.user?.bankCardName || '';
         const herfUrl = rating <= 3 ?
-            `mailto:${app?.init?.csEmail || ''}` :
+            `mailto:${app?.init?.csEmail || ''}?subject=Feedback&body=App:%20${app?.androidAppInfo?.appName||''}%0D%0AName:%20${mailContentName}%0D%0APhone:%20${app?.androidAppInfo?.phoneNo||''}` :
             `https://play.google.com/store/apps/details?id=${NativeAppInfo.packageId}`;
         window.location.href = herfUrl;
         dispatch(modalSlice.actions.updateStarRatingModal({ show: false }));
