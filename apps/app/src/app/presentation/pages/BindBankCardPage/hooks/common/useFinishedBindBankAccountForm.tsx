@@ -14,8 +14,9 @@ import { PagePathEnum } from '../../../PagePathEnum';
 import { getToken } from 'apps/app/src/app/modules/querystring/getToken';
 import { useDispatch } from 'react-redux';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
+import {MonitorUsecaseFlow} from "../../../../../monitorUsecaseFlow";
 
-type IUseFinishedBindBankAccountPage = {
+export type IUseFinishedBindBankAccountPage = {
     // NOTICE: Common
     bankcardNoData: InputValue<string>;
 
@@ -37,28 +38,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
     const dispatch = useDispatch()
 
     const navigateToAPP = () => {
-
-        SentryModule.captureMessage(BindBankCardPageEvents.UserBindBankcard.name, {
-            ...BindBankCardPageEvents.UserBindBankcard.getTags(
-                'success',
-                props.postBankBindSave
-                    ? {
-                        bankAccount: props.bankcardNoData.data,
-                        // ifscCode: props.ifscData && props.ifscData.data,
-                        // upiId: props.upiData && props.upiData.data,
-                    }
-                    : {
-                        // bankAccNr: props.bankcardNoData.data,
-                        // mobileWallet: false,
-                        // mobileWalletAccount: '',
-                        // walletVendor: '',
-                        // bankName: (targetBankAccount && targetBankAccount?.bankName) || '',
-                        // bankCode: (targetBankAccount && targetBankAccount?.bankCode) || '',
-                        // iban: props.iBanData?.data || '',
-                    }
-            ),
-        });
-
+        MonitorUsecaseFlow.userBindBankAccount(props);
         changeLocationHref('innerh5://127.0.0.1');
     };
 
@@ -108,10 +88,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
                 });
             })
             .catch(() => {
-                SentryModule.captureMessage(
-                    BindBankCardPageEvents.UserBindBankcard.name,
-                    BindBankCardPageEvents.UserBindBankcard.getTags('failure', requestBody)
-                );
+                MonitorUsecaseFlow.userBindBankAccountBadly(requestBody)
             });
     }, [
         props.postBankBindSave,

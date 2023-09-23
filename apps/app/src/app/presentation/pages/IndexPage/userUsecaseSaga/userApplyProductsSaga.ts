@@ -31,7 +31,8 @@ function* callAndroidFunctionToUploadUserPhoneData() {
     // NOTICE: 新增邏輯錯誤
     const message = "Call Android IndexTask.uploadKycBackgroundData unsuccessfully";
     console.log(message);
-    SentryModule.captureMessage(message)
+    const error = new Error("message")
+    SentryModule.captureException(error)
     return false;
   }
 
