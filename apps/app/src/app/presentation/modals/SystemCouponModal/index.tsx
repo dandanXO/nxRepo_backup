@@ -2,11 +2,11 @@ import { useLocation, useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../reduxStore';
 import { Button } from '../../components/layouts/Button';
-import CouponImageSource from '../../../../assets/coupon.png';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { SystemCaseActions } from '../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
+import CouponModalContentAndroidWebviewPage from '../../pages/CouponModalContentAndroidWebviewPage';
 
 const SystemCouponModal = () => {
     const navigate = useNavigate();
@@ -66,7 +66,7 @@ const SystemCouponModal = () => {
                 </div>
                 <div className={'my-5 flex flex-col text-sm'}>
                     {systemCouponModal.webUrl
-                        ? (isForwardBrowser ? <div>{systemCouponModal.text}</div> : <img src={CouponImageSource} alt="Coupon" />)
+                        ? (isForwardBrowser ? <div>{systemCouponModal.text}</div> : <CouponModalContentAndroidWebviewPage/>)
                         : (systemCouponModal.action === 'FORWARD_BIND_BANKCARD'
                             ? <div className='text-left' dangerouslySetInnerHTML={{ __html: systemCouponModal.text.replace(/\n/g, '<br/>') }} />
                             : <div>{systemCouponModal.text}</div>

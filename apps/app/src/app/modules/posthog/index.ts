@@ -46,7 +46,7 @@ export class Posthog {
           // posthog.init(v55PosthogConfig.token, v55PosthogConfig.config);
           // posthog.capture('my event', { property: 'value' })
         } else {
-          SentryModule.captureException('尚未配置 Posthog');
+          SentryModule.captureException('[Posthog]尚未配置 Posthog');
         }
       }
     } catch (error) {

@@ -11,6 +11,8 @@ import { RootState, appStore } from '../../reduxStore';
 import { AppEnvironment } from '../appEnvironment';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 
+console.log("AppFlag", AppFlag);
+
 // NOTE: 初始化
 let loaded = false;
 
@@ -18,6 +20,7 @@ if (AppFlag.enableSentry && loaded === false) {
   loaded = true;
 
   const environmentName = AppEnvironment.getEnvironmentName();
+  console.log("environmentName", environmentName);
 
   const replayConfig = {
     maskAllText: false,
@@ -66,6 +69,7 @@ if (AppFlag.enableSentry && loaded === false) {
     sentryConfig.release = AppInfo.COMMITHASH;
   }
 
+  console.log("sentryConfig", sentryConfig);
   Sentry.init(sentryConfig);
 
   // TODO:
@@ -79,7 +83,7 @@ if (AppFlag.enableSentry && loaded === false) {
 
 export class SentryModule {
   static captureException(exception: any, captureContext?: CaptureContext, tags?: { [key: string]: Primitive }) {
-    if (AppEnvironment.isLocalhost()) return;
+    // if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
     const commonTags = getCommonTags();
@@ -97,7 +101,7 @@ export class SentryModule {
   }
 
   static captureMessage(message: string, tags?: { [key: string]: Primitive }, extra?: Extras) {
-    if (AppEnvironment.isLocalhost()) return;
+    // if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
     console.log('appInfo', NativeAppInfo);

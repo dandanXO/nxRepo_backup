@@ -10,6 +10,7 @@ const countryMapping = {
     PK: 'Pakistan',
     BD: 'Bangladesh',
     MX: 'Mexico',
+    PH: 'Philipine',
 };
 const country = countryMapping[countryAbbreviation];
 console.log('country', country);

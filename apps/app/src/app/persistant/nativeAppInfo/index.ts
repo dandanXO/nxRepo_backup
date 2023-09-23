@@ -4,77 +4,38 @@ import {IAndroidAppInfo} from './types/IAndroidAppInfo';
 import {MexicoCountry} from "../../../../../../libs/shared/domain/src/country/MexicoCountry";
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 import {PhilippinesCountry} from 'libs/shared/domain/src/country/PhilippinesCountry';
-import {isInApp} from "../../modules/appEnvironment/isInApp";
+import {NULL_DEFAULT_APP_INFO_TASK} from "./NullAppInfoTaskDefault";
+
 
 export const getAppInfo = (): IAndroidAppInfo => {
-  // console.log("AppModeModel.getMode()", AppModeModel.getMode());
+    // console.log("AppModeModel.getMode()", AppModeModel.getMode());
 
-  // NOTICE:
-  // 還款頁 沒有交互appinfo, pk V15 才有, 還款頁在印度v55沒有, 印度 v59 還款可以加，等待
-  // 綁卡業 沒有交互appinfo, pk V15 才有, 綁卡業在印度v55沒有，印度 v58 綁卡才開始有
-  // 首頁 有交互 appinfo
-  // IBAN 有交互 appinfo
-  // NOTICE: 更新消息
-  // 還款業、綁卡業 印度 v58 才有getInfo 交互
+    // NOTICE:
+    // 還款頁 沒有交互appinfo, pk V15 才有, 還款頁在印度v55沒有, 印度 v59 還款可以加，等待
+    // 綁卡業 沒有交互appinfo, pk V15 才有, 綁卡業在印度v55沒有，印度 v58 綁卡才開始有
+    // 首頁 有交互 appinfo
+    // IBAN 有交互 appinfo
+    // NOTICE: 更新消息
+    // 還款業、綁卡業 印度 v58 才有getInfo 交互
 
-  let appInfo: IAndroidAppInfo = {
-    domain: '',
-    environment: AllCountriesEnum.india,
-    packageId: '',
-    appName: '',
-    uiVersion: '',
-    token: '',
-    mode: 'H5',
-    phoneNo: '',
-  };
+    let appInfo: IAndroidAppInfo = {
+      domain: '',
+      environment: AllCountriesEnum.india,
+      packageId: '',
+      appName: '',
+      uiVersion: '',
+      token: '',
+      mode: 'H5',
+      phoneNo: '',
+    };
 
     // if (AppModeModel.getMode() === AppModeEnum.IndexWebview || AppFlag.isForceToWebview) {
     if (!window['AppInfoTask'] || !window['AppInfoTask']['getAppInfo']) {
         if (environment.country === 'in') {
-
-            const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '55';
-
-            // 本地開發
-            const localIndiaAppInfo: IAndroidAppInfo = {
-                domain: 'https://www.oasis-gold.com',
-                environment: AllCountriesEnum.india,
-                packageId: 'com.ind.kyc.application',
-                appName: 'Local APP',
-                uiVersion: uiVersion,
-                token: null,
-                mode: 'H5',
-                phoneNo: '',
-            };
-
-            // 測試機
-            const devIndiaAppInfo: IAndroidAppInfo = {
-                domain: 'https://www.oasis-gold.com',
-                environment: AllCountriesEnum.india,
-                packageId: 'com.ind.kyc.application',
-                appName: 'DevIn APP',
-                uiVersion: '55',
-                token: null,
-                // NOTICE: mode 的用途？
-                mode: isInApp() ? 'Webview' : 'H5',
-                phoneNo: '',
-            };
-
-            // 正式
-            const proIndiaAppInfo: IAndroidAppInfo = {
-                domain: '',           // webview 不必要
-                environment: AllCountriesEnum.india, // webview 不必要
-                packageId: 'unknown', // webview 不必要
-                appName: 'APP',       // webview 不必要
-                uiVersion: '55',      // NOTE: 換主題需要，但缺失
-                token: null,          // webview 不必要
-                mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
-                phoneNo: '',
-            };
-
             if (AppEnvironment.isLocalhost()) {
                 // NOTICE: 本地開發
                 // NOTICE: 3.只會有開發機的 IndexWebview 或是 PureH5, 但目前分不清楚是哪個模式
-                appInfo = localIndiaAppInfo;
+                appInfo = NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.india].localhost;
 
                 // NOTE: 暫時先不模擬
                 // if (AppFlag.isForceToWebview) {
@@ -87,159 +48,47 @@ export const getAppInfo = (): IAndroidAppInfo => {
                 if (AppEnvironment.isDev()) {
                     // NOTE: 這邊目前可能是瀏覽器直接打開或 App 開啟沒有 getinfo 的mode
                     // NOTE: 這邊後續要判斷是 SimpleWebview or Webview
-                    appInfo = devIndiaAppInfo
+                    appInfo = NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.india].dev;
                 } else {
-                    appInfo = proIndiaAppInfo
+                    appInfo = NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.india].prod;
                 }
             }
         } else if (environment.country === 'pk') {
             // NOTICE: 這邊只會有本地 PureH5, IndexWebview 兩種情況
             // APP 巴基斯坦 v15 不會有這情況，除非是前端呼叫
             // new Error('APP 巴基斯坦 v15 不會有這情況，除非是前端呼叫');
-
-            const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '15';
-
-            // 本地開發
-            const localPakistanAppInfo: IAndroidAppInfo = {
-                domain: 'https://www.oasis-gold.com',
-                environment: AllCountriesEnum.pakistan,
-                packageId: 'com.pak.app.yesloan.android',
-                appName: 'Local PK APP',
-                uiVersion: uiVersion,
-                token: null,
-                mode: 'H5',
-                phoneNo: '',
-            };
-
-            // 測試機
-            const devPakistanAppInfo: IAndroidAppInfo = {
-                domain: 'https://www.oasis-gold.com',
-                environment: AllCountriesEnum.pakistan,
-                packageId: 'com.pak.app.yesloan.android',
-                appName: 'DevPk APP',
-                uiVersion: '15',
-                token: null,
-                // NOTICE: mode 的用途？
-                mode: isInApp() ? 'Webview' : 'H5',
-                phoneNo: '',
-            };
-
-            // 正式
-            const proPakistanAppInfo: IAndroidAppInfo = {
-                domain: '',              // webview 不必要
-                environment: AllCountriesEnum.pakistan, // webview 不必要
-                packageId: 'unknown',    // webview 不必要
-                appName: 'APP',          // webview 不必要
-                uiVersion: '15',         // NOTE: 換主題需要，但缺失
-                token: null,             // webview 不必要
-                mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
-                phoneNo: '',
-            };
-
             if (AppEnvironment.isLocalhost()) {
-                appInfo = localPakistanAppInfo;
+                appInfo = NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.pakistan].localhost;
             } else {
-                appInfo = AppEnvironment.isDev() ? devPakistanAppInfo : proPakistanAppInfo
+                appInfo = AppEnvironment.isDev() ? NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.pakistan].dev : NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.pakistan].prod;
             }
         } else if (environment.country === MexicoCountry.country) {
 
-          const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '1';
-          // 本地開發
-          const localAppInfo: IAndroidAppInfo = {
-            domain: 'https://www.oasis-gold.com',
-            environment: AllCountriesEnum.mexico,
-            packageId: 'com.pak.app.yesloan.android',
-            appName: 'Local MX APP',
-            uiVersion: uiVersion,
-            token: null,
-            mode: 'H5',
-            phoneNo: '',
-          };
-
-          // 測試機
-          const devAppInfo: IAndroidAppInfo = {
-            domain: 'https://www.oasis-gold.com',
-            environment: AllCountriesEnum.mexico,
-            packageId: 'com.pak.app.yesloan.android',
-            appName: 'DEV MX APP',
-            uiVersion: "1",
-            token: null,
-            // NOTICE: mode 的用途？
-            mode: isInApp() ? 'Webview' : 'H5',
-            phoneNo: '',
-          };
-
-          // 正式
-          const prodDevAppInfo: IAndroidAppInfo = {
-            domain: '',              // webview 不必要
-            environment: AllCountriesEnum.mexico,
-            packageId: 'unknown',    // webview 不必要
-            appName: 'APP',          // webview 不必要
-            uiVersion: "1",
-            token: null,             // webview 不必要
-            mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
-            phoneNo: '',
-          };
-
           if (AppEnvironment.isLocalhost()) {
-            appInfo = localAppInfo;
+            appInfo = NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.mexico].localhost;
           } else {
-            appInfo = AppEnvironment.isDev() ? devAppInfo : prodDevAppInfo
+            appInfo = AppEnvironment.isDev() ? NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.mexico].dev : NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.mexico].prod;
           }
+
         }  else if (environment.country === PhilippinesCountry.country) {
 
-          // 本地開發
-          const localAppInfo: IAndroidAppInfo = {
-            domain: 'https://www.oasis-gold.com',
-            environment: AllCountriesEnum.philippines,
-            packageId: 'com.pak.app.yesloan.android',
-            appName: 'Local PH APP',
-            uiVersion: "2",
-            token: null,
-            mode: 'H5',
-            phoneNo: '',
-          };
-
-          // 測試機
-          const devAppInfo: IAndroidAppInfo = {
-            domain: 'https://www.oasis-gold.com',
-            environment: AllCountriesEnum.philippines,
-            packageId: 'com.pak.app.yesloan.android',
-            appName: 'DEV PH APP',
-            uiVersion: "2",
-            token: null,
-            // NOTICE: mode 的用途？
-            mode: isInApp() ? 'Webview' : 'H5',
-            phoneNo: '',
-          };
-
-          // 正式
-          const prodDevAppInfo: IAndroidAppInfo = {
-            domain: '',              // webview 不必要
-            environment: AllCountriesEnum.philippines,
-            packageId: 'unknown',    // webview 不必要
-            appName: 'APP',          // webview 不必要
-            uiVersion: "2",
-            token: null,             // webview 不必要
-            mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
-            phoneNo: '',
-          };
-
           if (AppEnvironment.isLocalhost()) {
-            appInfo = localAppInfo;
+            appInfo = NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.philippines].localhost;
           } else {
-            appInfo = AppEnvironment.isDev() ? devAppInfo : prodDevAppInfo
+            appInfo = AppEnvironment.isDev() ? NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.philippines].dev : NULL_DEFAULT_APP_INFO_TASK[AllCountriesEnum.philippines].prod;
           }
         } else {
             throw new Error('前端請新增國家配置');
         }
     } else {
         // NOTICE: 印度 v58 開始才有, 巴基斯坦 v15 就有了
-        console.log('印度 v58 開始才有, 巴基斯坦 v15 就有了');
+        // console.log('印度 v58 開始才有, 巴基斯坦 v15 就有了');
 
         // getAppInfo
         const appInfoStr = window['AppInfoTask']['getAppInfo']();
         appInfo = JSON.parse(appInfoStr);
+
+        console.log("original appInfo", appInfo);
 
         // NOTICE: 再觀察
         // NOTICE: DEV 印度 v55, v56 的 uiVersion 是寫死成 1 的??
@@ -252,6 +101,7 @@ export const getAppInfo = (): IAndroidAppInfo => {
                 appInfo.uiVersion = '15';
             }
         }
+        console.log("appInfo", appInfo);
         appInfo.mode = 'Webview';
         // NOTE: 後續得判斷是 SimpleWebview 或 Webview
     }

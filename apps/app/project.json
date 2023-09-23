@@ -63,7 +63,7 @@
               "with": "apps/app/src/environments/environmentModule/pakistan/environment.pk.prod.ts"
             }
           ],
-          "main": "apps/app/src/main.pk.tsx",
+          "main": "apps/app/src/main/main.pk.tsx",
           "webpackConfig": "apps/app/build/webpack.config.main.pk.js",
           "optimization": true,
           "outputHashing": "all",

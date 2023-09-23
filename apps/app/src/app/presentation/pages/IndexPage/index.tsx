@@ -90,7 +90,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     dispatch(IndexPageSagaAction.user.viewIndexPageAction());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     // 監聽驗證完到首頁，重新取得index資料
@@ -452,9 +452,8 @@ const IndexPage = () => {
           details: simpleProducts,
       })
     );
-
-    navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
-
+    // navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
+  //
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
   const onClickToCustomerService = useCallback(() => {
@@ -732,7 +731,7 @@ const IndexPage = () => {
 
       {/*NOTE: 無推薦產品提示訊息 */}
       {modelState.exitConfirmModal.show && (<ExitConfirmModal/>)}
-      
+
       <Outlet/>
     </div>
   );
