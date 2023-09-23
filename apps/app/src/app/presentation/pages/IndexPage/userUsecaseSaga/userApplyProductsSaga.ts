@@ -116,38 +116,62 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       //   console.log("applyLoan");
       //   uploaded = yield call(autoToUploadUserPhoneData);
       // }
-
       uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
     } else {
       uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
     }
 
+    // 用戶是否點擊過借款按鈕
+    let isUserTapApplyButton = false;
+
+    // 當日沒上傳過過，點擊付款認後
     let processFinished = false;
     while(!uploaded && !processFinished) {
-      console.log("等待用戶做出抉擇")
+      // 等待用戶點擊借款
       const {
         type,
         payload: { show, confirm },
       }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
         modalSlice.actions.updateSimpleQuickRepaymentModal
       );
-      console.log("APPLY.confirm", confirm);
-
+      isUserTapApplyButton = true;
+      // 點擊借款
       if (confirm) {
+        // 當日沒上傳過再次彈出授權權限畫面
         if(!uploaded) {
           uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
-          console.log("APPLY.uploaded", uploaded);
         } else {
+          // 當日上傳過可以跳到借款 API
           processFinished = true;
         }
       } else {
-        console.log("cancel");
+        // NOTICE: 用戶點擊其他地方取消借款
         processFinished = true;
+        return;
       }
     }
 
+    // NOTICE: 用戶授權過權限，但沒有還沒有點擊過借款按鈕
+    if(!isUserTapApplyButton) {
+      console.log("用戶授權過權限，但沒有還沒有點擊過借款按鈕")
+      const {
+        type,
+        payload: { show, confirm },
+      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+        modalSlice.actions.updateSimpleQuickRepaymentModal
+      );
+      if(!confirm) {
+        console.log("用戶取消借款")
+        return;
+      } else {
+        console.log("用戶確認借款")
+      }
+    }
+
+    // NOTICE: 用戶成功授權並且點擊過借款按鈕
     if(uploaded) {
-      console.log("開始借款")
+      console.log("系統開始借款流程")
+
       const selectedBankcardID: number = yield select(
         (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
       );
@@ -160,7 +184,6 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
           bankId: selectedBankcardID,
         }
       );
-
       // console.log("applyLoan.responseData", responseData);
 
       if (success) {
