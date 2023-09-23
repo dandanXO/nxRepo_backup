@@ -17,6 +17,8 @@ import { catchSagaError } from '../utils/catchSagaError';
 import {GlobalAppMode} from "../../persistant/GlobalAppMode";
 import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
 import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
+import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 
 export function* runSystemInitSaga() {
   try {
@@ -94,11 +96,11 @@ export function* runSystemInitSaga() {
         // yield catchSagaError(error);
       }
     }
-
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
     if (
       GlobalAppMode.mode === AppModeEnum.IndexWebview ||
-      GlobalAppMode.mode === AppModeEnum.PureH5
+      GlobalAppMode.mode === AppModeEnum.PureH5 ||
+      environment.country === PakistanCountry.country
     ) {
         appStore.dispatch(SystemCaseActions.InitSaga());
     }
