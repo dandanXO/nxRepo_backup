@@ -32,15 +32,13 @@ export const runAxios = async (
     const result = await axios(config);
     // console.log('runAxios.result', result);
 
-    if (AppEnvironment.isDev()) {
-      MonitorUsecaseFlow.debugAPIConnection({
-        method,
-        url,
-        params,
-        data,
-        result,
-      })
-    }
+    MonitorUsecaseFlow.debugAPIConnection({
+      method,
+      url,
+      params,
+      data,
+      result,
+    })
 
     return {
       success: true,

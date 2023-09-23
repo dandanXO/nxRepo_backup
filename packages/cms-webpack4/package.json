@@ -9,10 +9,12 @@
         "dev:pk": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env PK",
         "dev:bd": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env BD",
         "dev:mx": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env MX",
+        "dev:ph": "webpack-dev-server --config ./build/webpack_dev.config --mode development --env PH",
         "build:in": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env IN",
         "build:pk": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env PK",
         "build:bd": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env BD",
         "build:mx": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env MX",
+        "build:ph": "node --max-old-space-size=2048 ./node_modules/.bin/webpack --config ./build/webpack_build.config --mode production --env PH",
         "webpack:analyzer": "webpack --config ./build/webpack_analyzer.config --mode production",
         "cypress:open": "cypress open"
     },

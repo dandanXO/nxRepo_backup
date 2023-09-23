@@ -14,7 +14,6 @@ import {MonitorUsecaseFlow} from "../../../../monitorUsecaseFlow";
 export function* systemCallGetUserInfoSaga() {
 
   try {
-
     // NOTE: H5 - 首頁開始
     const token = getToken();
     const location: Location = yield select((state: RootState) => state.navigator.location);
