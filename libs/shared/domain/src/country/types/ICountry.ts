@@ -1,6 +1,6 @@
-import {AllCountryIdentityName} from "../enum/AllCountryIdentityName";
-import {AllTimezoneEnum} from "../../timezone/enum/AllTimezoneEnum";
-import {AllLanguage} from "../../language/enum/AllLanguage";
+import { AllLanguage } from '../../language/enum/AllLanguage';
+import { AllTimezoneEnum } from '../../timezone/enum/AllTimezoneEnum';
+import { AllCountryIdentityName } from '../enum/AllCountryIdentityName';
 
 export interface ICountry {
   // NOTE: just for debugging
@@ -11,4 +11,5 @@ export interface ICountry {
   currencyCode: string;
   language: AllLanguage;
   timezone: AllTimezoneEnum;
+  defaultUIVersion: string;
 }

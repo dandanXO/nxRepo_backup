@@ -3,6 +3,7 @@ import React from 'react';
 
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { environment } from '../../../../environments/environmentModule/environment';
 import { renderByCountry } from '../../../modules/i18n';
 import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
 import IndiaPaymentResultPage from './i18nPage/IndiaPaymentResultPage';
@@ -23,10 +24,17 @@ const PaymentResultPage = () => {
           ? require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_apply_complete.png`)
           : require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_apply_failed.png`);
     } catch (error) {
-      resultImage =
-        path === 'complete'
-          ? require('../../../../assets/ic_apply_complete.png')
-          : require('../../../../assets/ic_apply_failed.png');
+      try {
+        resultImage =
+          path === 'complete'
+            ? require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${environment.defaultUIVersion}/ic_apply_complete.png`)
+            : require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${environment.defaultUIVersion}/ic_apply_failed.png`);
+      } catch (error) {
+        resultImage =
+          path === 'complete'
+            ? require('../../../../assets/ic_apply_complete.png')
+            : require('../../../../assets/ic_apply_failed.png');
+      }
     }
   }
 
