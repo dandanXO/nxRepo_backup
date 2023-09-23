@@ -14,7 +14,7 @@ import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 const CustomerServicePage = () => {
     const navigate = useNavigate();
     const { app, indexPage } = useSelector((state: RootState) => state);
-
+    const mailContentName = indexPage.user.state === USER_AUTH_STATE.ready ? 'guest' : indexPage?.user?.bankCardName || '';
     return (
         <div className='flex flex-col w-screen h-screen'>
             <div className={`h-2/5 w-full bg-gradient-to-br from-primary-assistant  to-primary-main rounded-b-[50px] flex flex-col `}>
@@ -37,7 +37,7 @@ const CustomerServicePage = () => {
                             <div className='font-bold text-primary-main grow'>{'Contact by Mail'}</div>
                             <div>{app?.init?.csEmail || ''}</div>
                         </div>
-                        <a href={`mailto:${app?.init?.csEmail || ''}?subject=Feedback&body=App:%20${app?.androidAppInfo?.appName||''}%0D%0AName:%20${indexPage?.user?.bankCardName||''}%0D%0APhone:%20${app?.androidAppInfo?.phoneNo||''}`} 
+                        <a href={`mailto:${app?.init?.csEmail || ''}?subject=Feedback&body=App:%20${app?.androidAppInfo?.appName||''}%0D%0AName:%20${mailContentName}%0D%0APhone:%20${app?.androidAppInfo?.phoneNo||''}`} 
                             className='self-center'>
                             <Button className={'py-1 px-5'} text={'Go'} />
                         </a>
