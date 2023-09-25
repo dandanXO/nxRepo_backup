@@ -11,7 +11,7 @@ import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
 import {IndexPageSagaAction, UserApplyProductActionPayload} from './indexPageActions';
 import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
 import {SentryModule} from "../../../../modules/sentry";
-import {routerActions} from "@lagunovsky/redux-react-router";
+import {go, routerActions} from "@lagunovsky/redux-react-router";
 import {PagePathEnum} from "../../PagePathEnum";
 import {getToken} from "../../../../modules/querystring/getToken";
 import {errorFallback} from "../../../../usecaseFlow/utils/errorFallback";
@@ -199,6 +199,9 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
             selectedBankcardId: undefined,
           })
         );
+
+        // NOTE: back to indexPage
+        yield put(go(-1))
 
         yield put(
           modalSlice.actions.updateQRSuccessModal({
