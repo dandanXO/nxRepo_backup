@@ -1,6 +1,6 @@
 // NOTE: Action: UserApplyProduct
 import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, select, take, takeLatest, race} from 'redux-saga/effects';
+import {call, put, select, take, takeLatest, race, retry} from 'redux-saga/effects';
 
 import {Service} from '../../../../api';
 import {LoanServiceResponse} from '../../../../api/loanService/service/postApplyLoanService';
@@ -131,7 +131,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       const {
         type,
         payload: { show, confirm },
-      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+      }: PayloadAction<InitialStateType['simpleQuickRepaymentModal']> = yield take(
         modalSlice.actions.updateSimpleQuickRepaymentModal
       );
       isUserTapApplyButton = true;
@@ -157,7 +157,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       const {
         type,
         payload: { show, confirm },
-      }: PayloadAction<InitialStateType['quickRepaymentSummaryModal']> = yield take(
+      }: PayloadAction<InitialStateType['simpleQuickRepaymentModal']> = yield take(
         modalSlice.actions.updateSimpleQuickRepaymentModal
       );
       if(!confirm) {
@@ -173,7 +173,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       console.log("系統開始借款流程")
 
       const selectedBankcardID: number = yield select(
-        (state: RootState) => state.model.quickRepaymentSummaryModal.selectedBankcardId
+        (state: RootState) => state.model.simpleQuickRepaymentModal.selectedBankcardId
       );
 
       yield put(loadingSlice.actions.updatePageLoading(true));
@@ -192,7 +192,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
         // NOTE: Reset Summary Modal
         yield put(
-          modalSlice.actions.updateQuickRepaymentSummaryModal({
+          modalSlice.actions.updateSimpleQuickRepaymentModal({
             show: false,
             confirm: false,
             bankcardList: [],
