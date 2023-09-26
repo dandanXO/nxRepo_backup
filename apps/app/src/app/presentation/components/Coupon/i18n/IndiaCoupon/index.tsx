@@ -95,23 +95,23 @@ const IndiaCoupon = (props: ICouponProps) => {
         })}
       ></div>
       <div
-        className={cx(`flex grow basis-16 flex-col items-center justify-center rounded-r-lg border border-l-0 p-2`, [
+        className={cx(`flex basis-16 flex-col items-center justify-center rounded-r-lg border border-l-0 p-2 w-[100px]`, [
           typeStyle.darkContent,
         ])}
       >
         <div
-          className={cx(`mb-1.5 text-base font-bold mr-2`, {
+          className={cx(`text-base font-bold text-center`, {
             'text-primary-main': status !== 'disabled',
             'text-cstate-disable-main': status === 'disabled',
           })}
         >
-          <Money money={discountAmount} isNagetive={true} moneyStyle={`text-base`} currencyStyle={`text-base`} />
+          <Money money={discountAmount} isNagetive={true} moneyStyle={`text-base break-all leading-none`} currencyStyle={`text-base`} />
         </div>
         <button
           // NOTE:優惠券不需點擊 (點擊功能先做保留)
           onClick={props.onClick}
           disabled={status !== 'normal'} //只有normal才能點擊
-          className={cx(`whitespace-nowrap px-3 py-1 text-xs text-white rounded-xl`, [typeStyle.buttonBG])}
+          className={cx(`whitespace-nowrap px-3 py-1 text-xs text-white rounded-xl mt-2`, [typeStyle.buttonBG])}
         >
           {t(buttonText)}
         </button>
