@@ -1,11 +1,17 @@
 import queryString from 'query-string';
 import React from 'react';
 
+import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
+import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { environment } from '../../../../environments/environmentModule/environment';
+import { renderByCountry } from '../../../modules/i18n';
 import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
+import IndiaPaymentResultPage from './i18nPage/IndiaPaymentResultPage';
+import PhilippinesPaymentResultPage from './i18nPage/PhilippinesPaymentResultPage';
 
 const PaymentResultPage = () => {
   const parseQueryString = queryString.parse(window.location.search);
-  const result = (parseQueryString['result'] as string) || '';
+  const result = (parseQueryString['result'] as 'complete' | 'failed') || '';
 
   const path = ['complete', 'failed'].includes(result) ? result : '';
 
@@ -18,27 +24,37 @@ const PaymentResultPage = () => {
           ? require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_apply_complete.png`)
           : require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_apply_failed.png`);
     } catch (error) {
-      resultImage =
-        path === 'complete'
-          ? require('../../../../assets/ic_apply_complete.png')
-          : require('../../../../assets/ic_apply_failed.png');
+      try {
+        resultImage =
+          path === 'complete'
+            ? require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${environment.defaultUIVersion}/ic_apply_complete.png`)
+            : require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${environment.defaultUIVersion}/ic_apply_failed.png`);
+      } catch (error) {
+        resultImage =
+          path === 'complete'
+            ? require('../../../../assets/ic_apply_complete.png')
+            : require('../../../../assets/ic_apply_failed.png');
+      }
     }
   }
 
   return (
     <div className="flex h-screen items-center justify-center">
       {path ? (
-        <div className="flex flex-col items-center justify-center">
-          <img src={resultImage} alt="result" />
-          <div className="text-primary-main py-4 font-bold">
-            {path === 'complete' ? 'Repayment Successful' : 'Failed'}
-          </div>
-          <div className="text-ctext-secondary w-3/5 text-center text-sm font-medium">
-            {path === 'complete'
-              ? 'The repayment was successful, and the order has been settled.'
-              : 'Bank acceptance is in progress, which may take anywhere from ten seconds to several seconds. Please wait patiently.'}
-          </div>
-        </div>
+        renderByCountry(
+          {
+            [IndiaCountry.country]: (
+              <IndiaPaymentResultPage path={path} resultImage={resultImage} />
+            ),
+            [PhilippinesCountry.country]: (
+              <PhilippinesPaymentResultPage
+                path={path}
+                resultImage={resultImage}
+              />
+            ),
+          },
+          <IndiaPaymentResultPage path={path} resultImage={resultImage} />
+        )
       ) : (
         <div>Not Found</div>
       )}
