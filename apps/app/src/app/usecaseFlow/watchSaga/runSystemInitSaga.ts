@@ -97,15 +97,7 @@ export function* runSystemInitSaga() {
       }
     }
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
-    if (
-      GlobalAppMode.mode === AppModeEnum.IndexWebview ||
-      GlobalAppMode.mode === AppModeEnum.PureH5 ||
-      environment.country === PakistanCountry.country
-    ) {
-        if(location.pathname !== PagePathEnum.PaymentResultPage){
-          appStore.dispatch(SystemCaseActions.InitSaga());
-        }
-    }
+    appStore.dispatch(SystemCaseActions.InitSaga());
 
   } catch (error) {
     console.log(error);

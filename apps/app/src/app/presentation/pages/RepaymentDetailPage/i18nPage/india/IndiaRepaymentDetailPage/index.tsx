@@ -39,7 +39,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
-
+  const { app } = useSelector((state: RootState) => state);
   const { currentData, isFetching = true } = props || {};
   const {
     status = '',
@@ -338,12 +338,14 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               <div>{t('Attention')}：</div>
               <ul className="list-outside list-decimal pl-3 pt-1  leading-none">
                 <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
-                <li>{t('Overdue for more than')} <span className={`text-cstate-info-main`}>{t('N days')} </span>
+                <li>{t('Overdue for more than')} <span className={`text-cstate-info-main`}>{t('7 days')} </span>
                   {t("will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.")}
                 </li>
-                <li>{t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
-                  <span className={`text-cstate-info-main`}>mail@mail.com</span>
-                </li>
+                {app?.init?.csEmail?.trim() && (
+                  <li>{t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
+                    <span className={`text-cstate-info-main`}>{app?.init?.csEmail}</span>
+                  </li>
+                )}
                 <li className='font-bold'>
                   {t('After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.')}
                 </li>

@@ -34,7 +34,7 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
   const dispatch =useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
-
+  const { app } = useSelector((state: RootState) => state);
   const { currentData, isFetching = true } = props || {};
   const {
     status = '',
@@ -276,12 +276,14 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               <div>{t('Attention')}：</div>
               <ul className="list-outside list-decimal pl-3 pt-1">
                 <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
-                <li>{t('Overdue for more than')} <span className={`text-primary-main`}>{t('N days')}</span>
+                <li>{t('Overdue for more than')} <span className={`text-primary-main`}>{t('7 days')}</span>
                   {t("will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.")}
                 </li>
-                <li>{t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
-                  <span className={`text-primary-main`}>mail@mail.com</span>
-                </li>
+                {app?.init?.csEmail?.trim() && (
+                  <li>{t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
+                    <span className={`text-cstate-info-main`}>{app?.init?.csEmail}</span>
+                  </li>
+                )}
               </ul>
             </div>
             <div className={`my-3 flex flex-col`}>

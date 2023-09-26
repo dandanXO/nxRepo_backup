@@ -41,6 +41,7 @@ const PhilippinesRepaymentDetailPage = ({
   const { t } = useTranslation(i18nLoanDetailsPage.namespace);
   const navigate = useNavigate();
   const modalState = useSelector((state: RootState) => state.model);
+  const { app } = useSelector((state: RootState) => state);
 
   const finalItems = useDynamicChargeFeeList(
     currentData?.chargeFeeDetail?.items
@@ -348,17 +349,17 @@ const PhilippinesRepaymentDetailPage = ({
               </li>
               <li>
                 {'Overdue for more than '}
-                <span className="text-cstate-info-main">{'N days '}</span>
+                <span className="text-cstate-info-main">{'7 days '}</span>
                 will not be able to extend or re-loan，please ensure you make
                 repayments on time to maintain uninterrupted access to our
                 services.
               </li>
-              <li>
-                {
-                  'Email us if you have any questions about your responsibilities or for more information. '
-                }
-                <span className="text-cstate-info-main">mail@mail.com</span>
-              </li>
+              {app?.init?.csEmail?.trim() && (
+                <li>
+                  Email us if you have any questions about your responsibilities or for more information.
+                  <span className={`text-cstate-info-main`}>{app?.init?.csEmail}</span>
+                </li>
+              )}
               <li>
                 <div className="font-bold">
                   After completing your repayment, if your loan is not fully
