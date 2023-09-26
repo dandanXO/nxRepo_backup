@@ -150,6 +150,7 @@ const RepaymentCouponModal = () => {
               {applicableCouponList?.map((i, index) => {
                 return (
                   <CouponOption
+                    key={i.id}
                     expireTime={i.expireTime}
                     discountAmount={i.discountAmount}
                     isChecked={index === checkedCoupon}
@@ -158,7 +159,6 @@ const RepaymentCouponModal = () => {
                     couponContent={i.couponContent}
                     index={index}
                     status="normal"
-                    key={i.id}
                   />
                 );
               })}
@@ -173,13 +173,13 @@ const RepaymentCouponModal = () => {
               {unApplicableCouponList.map((i, index) => (
                 <div className="mx-4">
                   <Coupon
+                    key={i.id}
                     expireTime={i.expireTime}
                     discountAmount={i.discountAmount}
                     couponType={i.couponType}
                     couponName={i.couponName}
                     couponContent={i.couponContent}
                     status="unUsable"
-                    key={i.id}
                   />
                 </div>
               ))}
