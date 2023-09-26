@@ -45,7 +45,7 @@ const IndiaCoupon = (props: ICouponProps) => {
   return (
     <div className={cx(`mb-3 flex grow w-full`, { 'opacity-50': status === 'unUsable' })}>
       <div
-        className={cx(`relative flex grow flex-col  rounded-l-lg  border border-r-0 p-2 text-left `, [
+        className={cx(`relative flex grow flex-col  rounded-l-lg  border border-r-0 p-2 text-left w-2/3`, [
           typeStyle.lightContent,
         ])}
       >
@@ -95,7 +95,7 @@ const IndiaCoupon = (props: ICouponProps) => {
         })}
       ></div>
       <div
-        className={cx(`flex basis-16 flex-col items-center justify-center rounded-r-lg border border-l-0 p-2 w-[100px]`, [
+        className={cx(`flex flex-col items-center justify-center rounded-r-lg border border-l-0 p-2 w-1/3`, [
           typeStyle.darkContent,
         ])}
       >
