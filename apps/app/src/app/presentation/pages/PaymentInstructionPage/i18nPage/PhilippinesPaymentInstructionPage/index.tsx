@@ -22,7 +22,7 @@ const Logo = (path: string) => {
   let logo = '';
 
   try {
-    logo = require(`./logo/${path}`);
+    logo = require(`./logo/${path}.png`);
   } catch (error) {
     //
   }
@@ -78,7 +78,7 @@ const PhilippinesPaymentInstructionPage = ({
             className="my-2 h-8 object-fill"
             alt="logo"
             src={Logo(
-              `payment_logo_${getPlatformValue(payTypeName, 'logo')}.png`
+              `payment_logo_${getPlatformValue(payTypeName, 'logo')}`
             )}
           />
         </div>
