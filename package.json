@@ -31,7 +31,7 @@
     "serve:apk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve-pk app -c=development --verbose",
     "serve:abd": "cross-env NODE_ENV=development NODE_COUNTRY=bd pnpm nx serve-bd app -c=development --verbose",
     "serve:amx": "cross-env NODE_ENV=development NODE_COUNTRY=mx pnpm nx serve-mx app -c=development --verbose",
-    "serve:aph": "cross-env NODE_ENV=development NODE_COUNTRY=ph pnpm nx serve-ph app -c=development --verbose",
+    "serve:aph": "cross-env NODE_UI_VERSION=4 NODE_ENV=development NODE_COUNTRY=ph pnpm nx serve-ph app -c=development --verbose",
     "serve:ain:d": "webpack-dashboard -- cross-env NODE_DASHBOARD=true NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development --verbose",
     "serve:apk:d": "webpack-dashboard -- cross-env NODE_DASHBOARD=trueNODE_ENV=development NODE_COUNTRY=pk pnpm nx serve-pk app -c=development --verbose",
     "serve:abd:d": "webpack-dashboard -- cross-env NODE_DASHBOARD=trueNODE_ENV=development NODE_COUNTRY=bd pnpm nx serve-bd app -c=development --verbose",

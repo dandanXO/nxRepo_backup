@@ -83,6 +83,8 @@ import PKv29 from './pakistan/v29/tailwind.theme';
 // NOTE: Philippines
 import PHv1 from './philippines/v1/tailwind.theme';
 import PHv2 from './philippines/v2/tailwind.theme';
+import PHv3 from './philippines/v3/tailwind.theme';
+import PHv4 from './philippines/v4/tailwind.theme';
 
 export const DEFAULT_INDIA_THEME: string = 'v55';
 export const DEFAULT_PAKISTAN_THEME: string = 'v15';
@@ -172,5 +174,7 @@ export const themes: IThemes = {
   [AllCountriesEnum.philippines]: {
     v1: PHv1,
     v2: PHv2,
+    v3: PHv3,
+    v4: PHv4,
   },
 };
