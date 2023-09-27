@@ -60,6 +60,8 @@ import MXv6 from './mexico/v6/tailwind.theme';
 import MXv7 from './mexico/v7/tailwind.theme';
 import MXv8 from './mexico/v8/tailwind.theme';
 import MXv9 from './mexico/v9/tailwind.theme';
+import MXv10 from './mexico/v10/tailwind.theme';
+import MXv11 from './mexico/v11/tailwind.theme';
 
 // NOTE: Pakistan
 import PKv15 from './pakistan/v15/tailwind.theme';
@@ -156,6 +158,8 @@ export const themes: IThemes = {
     v7: MXv7,
     v8: MXv8,
     v9: MXv9,
+    v10:MXv10,
+    v11:MXv11,
   },
   [AllCountriesEnum.philippines]: {
     v1: PHv1,
