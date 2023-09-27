@@ -75,6 +75,10 @@ import PKv22 from './pakistan/v22/tailwind.theme';
 import PKv23 from './pakistan/v23/tailwind.theme';
 import PKv24 from './pakistan/v24/tailwind.theme';
 import PKv25 from './pakistan/v25/tailwind.theme';
+import PKv26 from './pakistan/v26/tailwind.theme';
+import PKv27 from './pakistan/v27/tailwind.theme';
+import PKv28 from './pakistan/v28/tailwind.theme';
+import PKv29 from './pakistan/v29/tailwind.theme';
 
 // NOTE: Philippines
 import PHv1 from './philippines/v1/tailwind.theme';
@@ -147,6 +151,10 @@ export const themes: IThemes = {
     v23: PKv23,
     v24: PKv24,
     v25: PKv25,
+    v26: PKv26,
+    v27: PKv27,
+    v28: PKv28,
+    v29: PKv29,
   },
   [AllCountriesEnum.mexico]: {
     v1: MXv1,
@@ -158,8 +166,8 @@ export const themes: IThemes = {
     v7: MXv7,
     v8: MXv8,
     v9: MXv9,
-    v10:MXv10,
-    v11:MXv11,
+    v10: MXv10,
+    v11: MXv11,
   },
   [AllCountriesEnum.philippines]: {
     v1: PHv1,
