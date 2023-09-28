@@ -50,6 +50,7 @@ import LoadingMask from "../app/presentation/components/LoadingMask";
 // NOTE: Other
 import '../style.css';
 import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
+import PaymentResultPage from "../app/presentation/pages/PaymentResultPage";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -133,6 +134,7 @@ const AppRouter = () => {
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
+        <Route path={PagePathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
 
 
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />

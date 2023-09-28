@@ -8,6 +8,8 @@ import { renderByCountry } from '../../../modules/i18n';
 import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
 import IndiaPaymentResultPage from './i18nPage/IndiaPaymentResultPage';
 import PhilippinesPaymentResultPage from './i18nPage/PhilippinesPaymentResultPage';
+import {MexicoCountry} from "../../../../../../../libs/shared/domain/src/country/MexicoCountry";
+import MexicoPaymentResultPage from './i18nPage/MexicoPaymentResultPage';
 
 const PaymentResultPage = () => {
   const parseQueryString = queryString.parse(window.location.search);
@@ -45,6 +47,9 @@ const PaymentResultPage = () => {
           {
             [IndiaCountry.country]: (
               <IndiaPaymentResultPage path={path} resultImage={resultImage} />
+            ),
+            [MexicoCountry.country]: (
+              <MexicoPaymentResultPage path={path} resultImage={resultImage} />
             ),
             [PhilippinesCountry.country]: (
               <PhilippinesPaymentResultPage

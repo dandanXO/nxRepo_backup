@@ -51,6 +51,7 @@ import { AllCountry } from "libs/shared/domain/src/country/AllCountry";
 import { environment } from "../environments/environmentModule/environment";
 import i18next from "i18next";
 import PaymentInstructionPage from "../app/presentation/pages/PaymentInstructionPage";
+import PaymentResultPage from "../app/presentation/pages/PaymentResultPage";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -133,6 +134,7 @@ const AppRouter = () => {
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
         <Route path={PagePathEnum.PaymentInstructionPage} element={<PaymentInstructionPage />}/>
+        <Route path={PagePathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
