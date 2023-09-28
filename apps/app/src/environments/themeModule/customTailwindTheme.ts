@@ -89,7 +89,7 @@ import PHv4 from './philippines/v4/tailwind.theme';
 export const DEFAULT_INDIA_THEME: string = 'v55';
 export const DEFAULT_PAKISTAN_THEME: string = 'v15';
 export const DEFAULT_MEXICO_THEME: string = 'v1';
-export const DEFAULT_PHILIPPINES_THEME: string = 'v2';
+export const DEFAULT_PHILIPPINES_THEME: string = 'v1';
 
 // REFACTOR:
 export const themes: IThemes = {

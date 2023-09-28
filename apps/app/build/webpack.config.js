@@ -148,7 +148,7 @@ module.exports = (config, context) => {
     devServer: {
       host: hostIP,
       port: 4002,
-      open: "/v2",
+      open: "/v2/bind-bankcard",
       hot: true,
       historyApiFallback: true,
       onBeforeSetupMiddleware: function (devServer) {

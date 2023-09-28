@@ -11,5 +11,5 @@ export const PhilippinesCountry: ICountry = {
   currencyCode: 'PHP',
   language: AllLanguage.en_PH,
   timezone: AllTimezoneEnum['Asia/Manila'],
-  defaultUIVersion: 'v2',
+  defaultUIVersion: 'v1',
 };

@@ -2,7 +2,7 @@ import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country
 import {isInApp} from "../../modules/appEnvironment/isInApp";
 import {INullAppInfoTaskDefault} from "./types/IAppEnvironment";
 
-const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '55';
+const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : null;
 
 export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
   [AllCountriesEnum.india]: {
@@ -11,7 +11,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       environment: AllCountriesEnum.india,
       packageId: 'com.ind.kyc.application',
       appName: 'Local APP',
-      uiVersion: uiVersion,
+      uiVersion: uiVersion || "55",
       token: null,
       mode: 'H5',
       phoneNo: '',
@@ -44,7 +44,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       environment: AllCountriesEnum.pakistan,
       packageId: 'com.pak.app.yesloan.android',
       appName: 'Local PK APP',
-      uiVersion: uiVersion,
+      uiVersion: uiVersion || "15",
       token: null,
       mode: 'H5',
       phoneNo: '',
@@ -77,7 +77,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       environment: AllCountriesEnum.mexico,
       packageId: 'com.pak.app.yesloan.android',
       appName: 'Local MX APP',
-      uiVersion: typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : '1',
+      uiVersion: uiVersion || "1",
       token: null,
       mode: 'H5',
       phoneNo: '',
@@ -110,7 +110,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       environment: AllCountriesEnum.philippines,
       packageId: 'com.pak.app.yesloan.android',
       appName: 'Local PH APP',
-      uiVersion: "2",
+      uiVersion: uiVersion || "1",
       token: null,
       mode: 'H5',
       phoneNo: '',
@@ -120,7 +120,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       environment: AllCountriesEnum.philippines,
       packageId: 'com.pak.app.yesloan.android',
       appName: 'DEV PH APP',
-      uiVersion: "2",
+      uiVersion: "1",
       token: null,
       // NOTICE: mode 的用途？
       mode: isInApp() ? 'Webview' : 'H5',
@@ -131,7 +131,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       environment: AllCountriesEnum.philippines,
       packageId: 'unknown',    // webview 不必要
       appName: 'APP',          // webview 不必要
-      uiVersion: "2",
+      uiVersion: "1",
       token: null,             // webview 不必要
       mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
       phoneNo: '',
