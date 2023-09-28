@@ -24,7 +24,7 @@ export function* systemStartInitSaga() {
 
   if (getToken() === '') {
     // console.log('missing token');
-    alertModal('missing token');
+    // alertModal('missing token');
     return;
   }
 

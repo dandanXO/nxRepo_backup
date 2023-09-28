@@ -10,16 +10,20 @@ import IndiaPaymentResultPage from './i18nPage/IndiaPaymentResultPage';
 import PhilippinesPaymentResultPage from './i18nPage/PhilippinesPaymentResultPage';
 import {MexicoCountry} from "../../../../../../../libs/shared/domain/src/country/MexicoCountry";
 import MexicoPaymentResultPage from './i18nPage/MexicoPaymentResultPage';
+import {useLocation} from "react-router";
+
+type IPaymentResultPageSearchParams = {
+  result?: 'complete' | 'failed';
+}
 
 const PaymentResultPage = () => {
-  const parseQueryString = queryString.parse(window.location.search);
-  const result = (parseQueryString['result'] as 'complete' | 'failed') || '';
 
-  const path = ['complete', 'failed'].includes(result) ? result : '';
-
+  const location = useLocation();
+  const parsedQuery = queryString.parse(location.search) as IPaymentResultPageSearchParams;
+  const path = parsedQuery.result;
   let resultImage;
 
-  if (['complete', 'failed'].includes(result)) {
+  if (path && ['complete', 'failed'].includes(path)) {
     try {
       resultImage =
         path === 'complete'
