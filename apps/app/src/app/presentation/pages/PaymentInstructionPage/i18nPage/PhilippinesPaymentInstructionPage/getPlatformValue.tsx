@@ -1,11 +1,42 @@
+interface Icontent{
+  title:string;
+  content:React.ReactNode
+}
+
 const platformMap: {
-  [key: string]: {
-    [key: string]: string | boolean;
+  [key: 'isOnline' | string]: {
+    [key: string]: string | boolean | Icontent[];
   };
 } = {
   GCash: {
     isOnline: true,
     logo: 'gcash',
+    contents: [
+      {
+        title: 'Repay Instructions via GCash',
+        content: (
+          <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
+            <li>Open <span className="font-bold">GCash</span> app and navigate to <span className="font-bold">“Pay Bills”</span>, 
+            then <span className="font-bold">“Payment Solutions”</span>, and select <span className="font-bold">“Dragonpay”</span> (ensure correct selection).
+            </li>
+            <li>Please input the <span className="font-bold">CORRECT reference_no</span> when making your repayment.</li>
+            <li>The minimum repayment amount is PHP 100.</li>
+          </ul>
+        ),
+      },
+      {
+        title: 'Payment tips',
+        content: (
+          <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
+            <li>Double-check: Carefully check the <span className="font-bold">repayment amount & reference_no before payment.</span></li>
+            <li>Use Official App: <span className="font-bold">Only get reference_no from our official app.</span></li>
+            <li>Secure Connection: Ensure a secure network connection for data safety.</li>
+            <li>Don't Share Codes: Do not share payment codes (reference_no / contract number / account number) with others.</li>
+            <li>Save Receipts: Keep payment receipts for your records.</li>
+          </ul>
+        ),
+      },
+    ],
   },
   GrabPay: {
     isOnline: true,
@@ -23,15 +54,41 @@ const platformMap: {
     isOnline: true,
     logo: 'instapay',
   },
-  PayMaya: {
+  'Paymaya': {
     isOnline: true,
     logo: 'paymaya',
+    contents:[
+      {
+        title: 'Repay Instructions via Paymaya',
+        content: (
+          <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
+            <li>Open <span className="font-bold">PayMaya </span> app and navigate to <span className="font-bold">“Pay Bills”</span>,
+              then <span className="font-bold">“Payment Solutions”</span>, and select <span className="font-bold">“Dragonpay”</span> (ensure correct selection).
+            </li>
+            <li>Please input the <span className="font-bold">CORRECT reference_no</span> in <span className="font-bold">“Account number”</span> text box when making your repayment.</li>
+            <li>The minimum repayment amount is PHP 100.</li>
+          </ul>
+        ),
+      },
+      {
+        title: 'Payment tips',
+        content: (
+          <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
+            <li>Double-check: Carefully check the <span className="font-bold">repayment amount & reference_no before payment.</span></li>
+            <li>Use Official App: <span className="font-bold">Only get reference_no from our official app.</span></li>
+            <li>Secure Connection: Ensure a secure network connection for data safety.</li>
+            <li>Don't Share Codes: Do not share payment codes (reference_no / contract number / account number) with others.</li>
+            <li>Save Receipts: Keep payment receipts for your records.</li>
+          </ul>
+        ),
+      },
+    ]
   },
-  PeysoPay: {
+  PaysoPay: {
     isOnline: true,
     logo: 'paysopay',
   },
-  PESONet: {
+  PESONeT: {
     isOnline: true,
     logo: 'pesonet',
   },
@@ -70,7 +127,7 @@ const platformMap: {
     instruction4Content:
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
-  '7-11': {
+  '7-ELEVEN': {
     isOnline: false,
     logo: '7eleven',
     instruction1Title: 'Visit 7-Eleven',
@@ -119,7 +176,7 @@ const platformMap: {
     instruction4Content:
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
-  'Robinsons Supermarket': {
+  'Robinson Supermarket': {
     receiverTitleKey: 'biller',
     isOnline: false,
     logo: 'robinsons_supermarket',
@@ -234,7 +291,7 @@ const platformMap: {
   },
 };
 
-export const getPlatformValue = (platform: string | undefined, key: string) => {
+const getPlatformValue = (platform: string | undefined, key: string ) => {
   if (platform === undefined) return null;
   try {
     return platformMap[platform][key];
@@ -242,3 +299,4 @@ export const getPlatformValue = (platform: string | undefined, key: string) => {
     return 'Platform Not Found';
   }
 };
+export default getPlatformValue

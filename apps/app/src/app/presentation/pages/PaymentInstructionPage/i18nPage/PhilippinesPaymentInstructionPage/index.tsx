@@ -16,13 +16,13 @@ import { PageContent } from '../../../../components/layouts/PageContent';
 import { PagePathEnum } from '../../../PagePathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
 import { i18nPaymentInstructionPage } from '../../translations';
-import { getPlatformValue } from './getPlatformValue';
+import getPlatformValue from './getPlatformValue';
 
 const Logo = (path: string) => {
   let logo = '';
 
   try {
-    logo = require(`./logo/${path}`);
+    logo = require(`./logo/${path}.png`);
   } catch (error) {
     //
   }
@@ -78,7 +78,7 @@ const PhilippinesPaymentInstructionPage = ({
             className="my-2 h-8 object-fill"
             alt="logo"
             src={Logo(
-              `payment_logo_${getPlatformValue(payTypeName, 'logo')}.png`
+              `payment_logo_${getPlatformValue(payTypeName, 'logo')}`
             )}
           />
         </div>
@@ -154,12 +154,28 @@ const PhilippinesPaymentInstructionPage = ({
 
         {(getPlatformValue(payTypeName, 'isOnline') || barcode) && (
           <div className="my-4 text-xs">
-            <div className="text-ctext-primary font-bold">Payment tips</div>
-            <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5">
-              {[1, 2, 3, 4, 5, 6].map((index) => (
-                <li key={index}>{t(`paymentTips${index}`)}</li>
-              ))}
-            </ul>
+            {
+              (payTypeName === 'GCash' || payTypeName === 'Paymaya') ?
+                (getPlatformValue(payTypeName, 'contents') as any).map((i: any) => {
+                  console.log('PayMaya',i)
+                  return (
+                    <div className='mb-2'>
+                      <div className="text-ctext-primary font-bold text-xs">{i.title}</div>
+                      {i.content}
+                    </div>
+                  )
+                })
+                : (
+                  <div>
+                    <div className="text-ctext-primary font-bold">Payment tips</div>
+                    <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5">
+                      {[1, 2, 3, 4, 5, 6].map((index) => (
+                        <li key={index}>{t(`paymentTips${index}`)}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )
+            }
           </div>
         )}
 
@@ -172,14 +188,14 @@ const PhilippinesPaymentInstructionPage = ({
               {[1, 2, 3, 4].map((index) => (
                 <li key={index} className="mb-2">
                   <div className="text-ctext-primary text-sm font-bold leading-[12px]">
-                    {getPlatformValue(payTypeName, `instruction${index}Title`)}
+                    {getPlatformValue(payTypeName, `instruction${index}Title`) as any}
                   </div>
 
                   <div className="mt-[2px] leading-[12px]">
                     {getPlatformValue(
                       payTypeName,
                       `instruction${index}Content`
-                    )}
+                    ) as any}
                   </div>
                 </li>
               ))}

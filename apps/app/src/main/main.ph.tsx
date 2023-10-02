@@ -41,6 +41,7 @@ import ExtendModal from "../app/presentation/modals/ExtendModal";
 import RepamentCouponModal from "../app/presentation/modals/RepaymentCouponModal";
 import APIBoundaryModal from "../app/presentation/modals/APIBoundaryModal";
 import LoadingMask from "../app/presentation/components/LoadingMask";
+import LoanRecordPage from '../app/presentation/pages/RepaymentPage';
 
 
 // NOTE: Other
@@ -52,6 +53,7 @@ import { environment } from "../environments/environmentModule/environment";
 import i18next from "i18next";
 import PaymentInstructionPage from "../app/presentation/pages/PaymentInstructionPage";
 import PaymentResultPage from "../app/presentation/pages/PaymentResultPage";
+import BankCardListPage from "../app/presentation/pages/BankCardListPage";
 
 const renderApp = () => {
   // NOTE: Before rendering
@@ -124,7 +126,7 @@ const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-         {/*<Route path={PagePathEnum.LoginPage} element={<LoginPage />}/>*/}
+         <Route path={PagePathEnum.LoginPage} element={<LoginPage />}/>
         <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}/>
         <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />
@@ -138,6 +140,12 @@ const AppRouter = () => {
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
+        <Route
+          path={PagePathEnum.BankcardListPage}
+          element={<BankCardListPage />}
+        />
+                <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
+
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
       {apiBoundary.show && <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message} />}
