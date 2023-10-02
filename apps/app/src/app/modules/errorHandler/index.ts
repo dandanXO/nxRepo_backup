@@ -1,7 +1,12 @@
 // NOTICE: sync
+import {SentryModule} from "../sentry";
+
 window.addEventListener(
   'error',
   (event) => {
+    console.log('[APP][ErrorHandler] window.addEventListener.error');
+    SentryModule.captureException(event);
+
     // filter js error
     const target = event.target || event.srcElement;
     const isElementTarget =
@@ -9,7 +14,7 @@ window.addEventListener(
     if (!isElementTarget) return false;
 
     const url = (target as any)?.src || (target as any)?.href;
-    console.log('debug.window.addEventListener.error.url', url);
+    console.log('APP][ErrorHandler] window.addEventListener.error.url', url);
 
     return true;
   },
@@ -17,30 +22,42 @@ window.addEventListener(
 );
 
 window.onerror = (message, source, lineno, colno, error) => {
-  console.log('debug.window.onerror');
+  console.log('[APP][ErrorHandler] window.onerror');
   console.log(`message: ${message}`);
   console.log(`source: ${source}`);
   console.log(`lineno: ${lineno}`);
   console.log(`colno: ${colno}`);
   console.log(`error: ${error}`);
+  console.log('[APP][ErrorHandler] window.onerror');
+
+  SentryModule.captureException(new Error(JSON.stringify({
+    message,
+    source,
+    lineno,
+    colno,
+    error,
+  })));
 
   return true;
 };
 
 // NOTICE: async
 window.addEventListener('rejectionhandled', (event) => {
-  console.log('debug.addEventListener.rejectionhandled');
+  console.log('[APP][ErrorHandler] window.addEventListener.rejectionhandled');
   // NOTE: 詳細錯誤訊息
   console.log(event);
   console.log(event.reason);
+
+  SentryModule.captureException(event);
 });
 
 window.onunhandledrejection = (event) => {
   event.preventDefault();
-  console.error('[app] debug.window.onunhandledrejection');
+  console.log('[APP][ErrorHandler] window.onunhandledrejection');
   console.log(event);
   console.log(event.reason);
 
+  SentryModule.captureException(event);
 };
 
 // NOTE: refactor me
