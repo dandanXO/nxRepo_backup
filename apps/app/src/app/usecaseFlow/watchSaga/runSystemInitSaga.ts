@@ -80,8 +80,6 @@ export function* runSystemInitSaga() {
         MonitorUsecaseFlow.userLogin(userResponse);
 
         // NOTE: App 初始化成功
-        // refactor me
-        yield put(appSlice.actions.init(true));
 
       }
     } else if (NativeAppInfo.mode === 'H5') {
@@ -96,6 +94,7 @@ export function* runSystemInitSaga() {
         // yield catchSagaError(error);
       }
     }
+
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
     appStore.dispatch(SystemCaseActions.InitSaga());
 

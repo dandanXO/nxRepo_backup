@@ -16,8 +16,7 @@ export function* WatchAppSaga() {
   try {
     console.log('[app][saga] 1');
     yield all([
-      // NOTICE: run init
-      runSystemInitSaga(),
+
 
       // NOTICE: watch common
       watchSystemInitSaga(),
@@ -30,7 +29,10 @@ export function* WatchAppSaga() {
 
       watchBindBankcardSaga(),
       watchRepaymentPageSaga(),
-      watchRepaymentDetailPageSaga()
+      watchRepaymentDetailPageSaga(),
+
+      // NOTICE: run init
+      runSystemInitSaga(),
     ]);
     console.log('[app][saga] 3');
   } catch (error) {

@@ -22,12 +22,7 @@ export function* systemStartInitSaga() {
   const packageId: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId);
   console.log("packageId", packageId);
 
-  if (getToken() === '') {
-    // console.log('missing token');
-    // alertModal('missing token');
-    return;
-  }
-
+  // NOTE: 不需登入即可呼叫
   const [response]: [GetInitServiceResponse] = yield all([
     call(Service.AppService.getInit, { packageId }),
   ]);

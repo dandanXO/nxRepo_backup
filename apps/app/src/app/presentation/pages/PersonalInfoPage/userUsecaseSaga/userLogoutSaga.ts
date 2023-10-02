@@ -12,6 +12,8 @@ export function* userLogoutSaga() {
     // TODO: refactor h5=>PureH5
     if (NativeAppInfo.mode === 'H5') {
       // TODO: 單純 API 登出
+      message = '尚未實作';
+
     } else if (NativeAppInfo.mode === 'Webview') {
       if (GlobalAppMode.mode === 'SimpleWebView') {
         message = '注意: SimpleWebView 不會有此 flow';
