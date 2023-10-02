@@ -16,11 +16,7 @@ const CopyButton = ({ value, className, text = 'Copy' }: ICopyButtonProps) => {
         className
       )}`}
       onClick={() => {
-        try {
-          navigator.clipboard.writeText(value);
-        } catch (error) {
-          alertModal(JSON.stringify(error));
-        }
+        navigator.clipboard.writeText(value);
       }}
     >
       {text}
