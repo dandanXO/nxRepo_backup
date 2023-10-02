@@ -5,7 +5,12 @@ export const AppEnvironment = {
     return window.location.hostname === 'localhost' || window.location.hostname.indexOf("192.168") > -1;
   },
   isDev: function () {
-    return ['frontend.india-api-dev.com'].indexOf(window.location.hostname) > -1;
+    // NOTICE: refactor me
+    return [
+      'frontend.india-api-dev.com',
+      'frontend.mx-api-dev.com',
+      'frontend.ph-api-dev.com',
+    ].indexOf(window.location.hostname) > -1;
   },
   getEnvironmentName: function () {
     let envMachine;
