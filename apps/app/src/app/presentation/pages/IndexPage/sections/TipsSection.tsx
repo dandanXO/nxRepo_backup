@@ -74,6 +74,10 @@ export const TipsSection = (props: Props) => {
       props.state.order.state !== ORDER_STATE.hasOverdueOrder &&
       props.state.order.state !== ORDER_STATE.reject &&
       props.state.indexAPI?.products !== undefined &&
+      // NOTICE: 包含幾種情境
+      // 1.可用餘額小於產品最低借款金額
+      // 2.超過可借款筆數
+      // 3.沒有產品可以借款
       props.state.indexAPI?.products?.length === 0
   ) {
       messageComponent = (
