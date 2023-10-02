@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import React from 'react';
 import {alertModal} from "../../../../api/base/alertModal";
+import copy from 'copy-to-clipboard';
 
 interface ICopyButtonProps {
   value: string;
@@ -17,6 +18,7 @@ const CopyButton = ({ value, className, text = 'Copy' }: ICopyButtonProps) => {
       )}`}
       onClick={() => {
         navigator.clipboard.writeText(value);
+        copy(value);
       }}
     >
       {text}
