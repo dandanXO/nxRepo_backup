@@ -1,6 +1,26 @@
 // NOTICE: sync
 import {SentryModule} from "../sentry";
 
+// window.onerror = (message, source, lineno, colno, error) => {
+//   console.log('[APP][ErrorHandler] window.onerror');
+//   console.log(`message: ${message}`);
+//   console.log(`source: ${source}`);
+//   console.log(`lineno: ${lineno}`);
+//   console.log(`colno: ${colno}`);
+//   console.log(`error: ${error}`);
+//   console.log('[APP][ErrorHandler] window.onerror');
+//
+//   SentryModule.captureException(new Error(JSON.stringify({
+//     message,
+//     source,
+//     lineno,
+//     colno,
+//     error,
+//   })));
+//   return true;
+// };
+
+// NOTE: sync
 window.addEventListener(
   'error',
   (event) => {
@@ -21,43 +41,47 @@ window.addEventListener(
   true
 );
 
-window.onerror = (message, source, lineno, colno, error) => {
-  console.log('[APP][ErrorHandler] window.onerror');
-  console.log(`message: ${message}`);
-  console.log(`source: ${source}`);
-  console.log(`lineno: ${lineno}`);
-  console.log(`colno: ${colno}`);
-  console.log(`error: ${error}`);
-  console.log('[APP][ErrorHandler] window.onerror');
 
-  SentryModule.captureException(new Error(JSON.stringify({
-    message,
-    source,
-    lineno,
-    colno,
-    error,
-  })));
-
-  return true;
-};
 
 // NOTICE: async
+// NOTE: 当 Promise 被 reject 且有 reject 处理器的时候，会触发 rejectionhandled 事件。
 window.addEventListener('rejectionhandled', (event) => {
   console.log('[APP][ErrorHandler] window.addEventListener.rejectionhandled');
+
   // NOTE: 詳細錯誤訊息
   console.log(event);
   console.log(event.reason);
-
-  SentryModule.captureException(new Error(JSON.stringify(event.reason)));
+  SentryModule.captureException(new Error(JSON.stringify({
+    message: event.reason.message,
+    name: event.reason.name,
+  })));
 });
 
-window.onunhandledrejection = (event) => {
-  event.preventDefault();
-  console.log('[APP][ErrorHandler] window.onunhandledrejection');
+// NOTE: 当 Promise 被 reject 且没有 reject 处理器的时候，会触发 unhandledrejection 事件。
+// NOTICE: 当 Promise 被 reject 且没有 reject 处理器的时候，会触发 unhandledrejection 事件；这可能发生在 window 下，但也可能发生在 Worker 中
+window.addEventListener('unhandledrejection',(event) => {
+  console.log('[APP][ErrorHandler] window.addEventListener.unhandledrejection');
+
   console.log(event);
   console.log(event.reason);
-  SentryModule.captureException(new Error(JSON.stringify(event.reason)));
-};
+
+  SentryModule.captureException(new Error(JSON.stringify({
+    message: event.reason.message,
+    name: event.reason.name,
+  })));
+
+},true);
+
+// window.onunhandledrejection = (event) => {
+//   event.preventDefault();
+//   console.log('[APP][ErrorHandler] window.onunhandledrejection');
+//   console.log(event);
+//   console.log(event.reason);
+//   SentryModule.captureException(new Error(JSON.stringify({
+//     message: event.reason.message,
+//     name: event.reason.name,
+//   })));
+// };
 
 // NOTE: refactor me
 export const changeLocationHref = (exportUrl: string) => {
