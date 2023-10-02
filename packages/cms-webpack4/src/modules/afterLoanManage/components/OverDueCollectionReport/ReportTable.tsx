@@ -11,8 +11,8 @@ import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum'
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import {
     useGetCollectOverDueCollectorListQuery,
-    useGetCollectOverdueCollectDepartmentListQuery,
-} from '../../api/CollectOverDueApi';
+    useGetCollectOverdueCollectTeamListQuery
+} from "../../api/CollectOverDueApi";
 import { useLazyGetCollectOverdueCollectDetailQuery } from '../../api/CollectOverdueCollectDetailApi';
 import { GetCollectOverdueCollectDetail } from '../../api/types/getCollectOverdueCollectDetail';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
@@ -58,7 +58,7 @@ const ReportTable = (): JSX.Element => {
         refetchOnReconnect: false,
     });
     const { data: collectorData } = useGetCollectOverDueCollectorListQuery(null);
-    const { data: collectDepartments } = useGetCollectOverdueCollectDepartmentListQuery(null);
+    const { data: collectTeams } = useGetCollectOverdueCollectTeamListQuery(null);
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const isSuperAdmin = getIsSuperAdmin();
 
@@ -76,8 +76,8 @@ const ReportTable = (): JSX.Element => {
         return acc;
     }, new Map().set('', { text: t('common:noRestriction') }));
 
-    const collectDepartmentsEnum = collectDepartments?.reduce((acc, current) => {
-        acc.set(current.departmentId, { text: current.departmentName });
+    const collectTeamsEnum = collectTeams?.reduce((acc, current) => {
+        acc.set(current.collectId, { text: current.collectTeamName });
         return acc;
     }, new Map().set('', { text: t('common:noRestriction') }));
 
@@ -120,7 +120,7 @@ const ReportTable = (): JSX.Element => {
             dataIndex: 'collectTeamId',
             hideInTable: true,
             valueType: 'select',
-            valueEnum: collectDepartmentsEnum,
+            valueEnum: collectTeamsEnum,
             fieldProps: { showSearch: true, allowClear: false },
         },
         {
