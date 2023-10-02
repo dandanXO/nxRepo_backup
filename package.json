@@ -229,7 +229,8 @@
     "webpack": "^5.79.0",
     "webpack-bundle-analyzer": "^4.8.0",
     "webpack-dashboard": "^3.3.8",
-    "webpack-merge": "5.8.0"
+    "webpack-merge": "5.8.0",
+    "copy-to-clipboard": "^3.3.3"
   },
   "engines": {
     "node": "16.16.0"

@@ -41,7 +41,6 @@ import OnlineCustomerServicePage from '../pages/OnlineCustomerServicePage';
 import OrderStatusPage from '../pages/OrderStatusPage';
 import { PagePathEnum } from '../pages/PagePathEnum';
 import PartnerPage from '../pages/PartnerPage';
-import PaymentInstructionPage from '../pages/PaymentInstructionPage';
 import PaymentResultPage from '../pages/PaymentResultPage';
 import PersonalInfoPage from '../pages/PersonalInfoPage';
 import PrivacyPolicyPage from '../pages/PrivacyPolicyPage';
@@ -264,11 +263,6 @@ export const AppRouter = () => {
           />
         </Route>
 
-        {/*NOTICE: Mexico, Philippines*/}
-        <Route
-          path={PagePathEnum.PaymentInstructionPage}
-          element={<PaymentInstructionPage />}
-        />
         <Route
           path={PagePathEnum.PaymentResultPage}
           element={<PaymentResultPage />}
