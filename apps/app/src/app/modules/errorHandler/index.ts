@@ -1,5 +1,7 @@
 // NOTICE: sync
 import {SentryModule} from "../sentry";
+// NOTE:
+// https://blog.51cto.com/u_15127593/2803803
 
 // window.onerror = (message, source, lineno, colno, error) => {
 //   console.log('[APP][ErrorHandler] window.onerror');
