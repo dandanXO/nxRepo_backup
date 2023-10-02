@@ -17,7 +17,7 @@ const CopyButton = ({ value, className, text = 'Copy' }: ICopyButtonProps) => {
         className
       )}`}
       onClick={() => {
-        navigator.clipboard.writeText(value);
+        // navigator.clipboard.writeText(value);
         copy(value);
       }}
     >
