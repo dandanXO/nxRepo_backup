@@ -9,7 +9,10 @@ import { useTranslation } from 'react-i18next';
 import { useEnum } from '../../../shared/constants/useEnum';
 import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
-import { useGetCollectTodayCollectDepartmentListQuery, useGetTodayCollectorListQuery } from '../../api/CollectTodayApi';
+import {
+    useGetCollectTodayCollectTeamListQuery,
+    useGetTodayCollectorListQuery
+} from "../../api/CollectTodayApi";
 import { useLazyGetCollectTodayCollectDetailQuery } from '../../api/CollectTodayCollectDetailApi';
 import { GetCollectTodayCollectDetail } from '../../api/types/getCollectTodayCollectDetail';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
@@ -54,7 +57,7 @@ const ReportTable = (): JSX.Element => {
         refetchOnReconnect: false,
     });
     const { data: collectorData } = useGetTodayCollectorListQuery(null);
-    const { data: collectDepartments } = useGetCollectTodayCollectDepartmentListQuery(null);
+    const { data: collectTeams } = useGetCollectTodayCollectTeamListQuery(null);
     const { triggerGetMerchantList, merchantListEnum } = useGetMerchantEnum();
     const isSuperAdmin = getIsSuperAdmin();
 
@@ -72,8 +75,8 @@ const ReportTable = (): JSX.Element => {
         return acc;
     }, new Map().set('', { text: t('common:noRestriction') }));
 
-    const collectDepartmentsEnum = collectDepartments?.reduce((acc, current) => {
-        acc.set(current.departmentId, { text: current.departmentName });
+    const collectTeamsEnum = collectTeams?.reduce((acc, current) => {
+        acc.set(current.collectId, { text: current.collectTeamName });
         return acc;
     }, new Map().set('', { text: t('common:noRestriction') }));
 
@@ -116,7 +119,7 @@ const ReportTable = (): JSX.Element => {
             dataIndex: 'collectTeamId',
             hideInTable: true,
             valueType: 'select',
-            valueEnum: collectDepartmentsEnum,
+            valueEnum: collectTeamsEnum,
             fieldProps: { showSearch: true, allowClear: false },
         },
         {
