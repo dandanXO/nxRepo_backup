@@ -7,6 +7,7 @@ import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import {alertModal} from "../../api/base/alertModal";
+import {SentryModule} from "../sentry";
 
 function getDefaultTheme() {
     if (environment.country === IndiaCountry.country) {
@@ -33,7 +34,11 @@ export const applyTheme = (country: AllCountriesEnum, theme: string): void => {
     themeObject = mapCustomTailwindTheme(themes[country][theme]);
   }
 
-  if(Object.keys(themeObject).length === 0) alertModal(`Please configure Country: ${country} version:${theme}`)
+  if(Object.keys(themeObject).length === 0) {
+    const message = `Please configure Country: ${country} version:${theme}`;
+    SentryModule.captureException(new Error(message))
+    // alertModal(message);
+  }
 
   const root = document.documentElement;
   Object.keys(themeObject).forEach((property) => {
