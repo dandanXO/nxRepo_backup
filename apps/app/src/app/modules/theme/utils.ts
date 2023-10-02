@@ -6,6 +6,7 @@ import {IndiaCountry} from "../../../../../../libs/shared/domain/src/country/Ind
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import {alertModal} from "../../api/base/alertModal";
 
 function getDefaultTheme() {
     if (environment.country === IndiaCountry.country) {
@@ -25,17 +26,14 @@ export const applyTheme = (country: AllCountriesEnum, theme: string): void => {
   // console.log("applyTheme.country", country);
   // console.log("applyTheme.theme", theme);
 
-  let themeObject: IMappedTheme;
+  let themeObject: IMappedTheme = {};
 
   // NOTICE: 有找到 theme 才配置
   if (themes[country] && themes[country][theme]) {
     themeObject = mapCustomTailwindTheme(themes[country][theme]);
-    if (!themeObject) {
-      themeObject = getDefaultTheme();
-    }
-  } else {
-    themeObject = getDefaultTheme();
   }
+
+  if(Object.keys(themeObject).length === 0) alertModal(`Please configure Country: ${country} version:${theme}`)
 
   const root = document.documentElement;
   Object.keys(themeObject).forEach((property) => {
