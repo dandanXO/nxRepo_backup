@@ -1,7 +1,7 @@
 {
     "breadcrumb": {
         "orderDetails": "订单详情",
-        "overDueDetails": "订单详情"
+        "overDueDetails": "逾期"
     },
     "clickToCopy": "点击复制",
     "confirm": "确定",

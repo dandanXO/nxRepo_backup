@@ -1,0 +1,6 @@
+{
+    "graterThan": "Asegúrese de que el monto ingresado sea mayor que",
+    "inputNumber": "Este campo solo permite entrada numérica",
+    "notExceed": "El monto ingresado no debe superar el",
+    "required": "Debe ingresar"
+}

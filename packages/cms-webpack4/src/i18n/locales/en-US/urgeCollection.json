@@ -77,7 +77,7 @@
     "repeatLoansRateTooltips": "The proportion of repeat loans is included in the number of cases followed up by the collector",
     "stage": "Overdue Stage",
     "tooltip": {
-        "amountDue": "=Loan Amount*(1+Post-Fee Rate)",
+        "amountDue": "Amount Due=Loan Amount*(1+Post-Fee Rate)",
         "repayLink": "If users delete the app, the repayment or extension link can be generated and provided to them."
     },
     "totalReceivedCount": "Total Number of Payments Received",

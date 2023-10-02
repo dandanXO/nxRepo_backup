@@ -6,6 +6,7 @@ import { axios } from 'utils';
 
 import en_US from '../en_US';
 import zh_CN from '../zh_CN';
+import es_ES from "../es_ES";
 
 const Context = React.createContext();
 
@@ -27,12 +28,21 @@ class IntlProviderWrapper extends Component {
       this.changeLange('cn', zh_CN.messages, zh_CN.antdMsg);
     };
 
+    this.switchToES = () => {
+      this.changeLange('es', es_ES.messages, es_ES.antdMsg);
+    };
+
     console.log('lang=' + userLang);
     if (userLang === 'cn' || String(userLang).startsWith('zh')) {
       this.initLnag = 'cn';
       this.initMsg = zh_CN.messages;
       this.initAntdMsg = zh_CN.antdMsg;
-    } else {
+    } else if(userLang === 'es') {
+      this.initLnag = 'es';
+      this.initMsg = es_ES.messages;
+      this.initAntdMsg = es_ES.antdMsg;
+    }
+    else {
       this.initLnag = 'en';
       this.initMsg = en_US.messages;
       this.initAntdMsg = en_US.antdMsg;
@@ -46,6 +56,7 @@ class IntlProviderWrapper extends Component {
       antdMsg: this.initAntdMsg,
       switchToCN: this.switchToCN,
       switchToEN: this.switchToEN,
+      switchToES: this.switchToES
     };
   }
 

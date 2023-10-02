@@ -1,0 +1,42 @@
+{
+    "address": "Dirección de casa",
+    "birthDay": "Fecha de nacimiento",
+    "education": "Educación",
+    "email": "Correo electrónico",
+    "emergencyContact": "Contacto de emergencia",
+    "fatherName": "Nombre del padre",
+    "gender": "Género",
+    "idCardNo": "Número de identificación",
+    "idcardBackPhoto": {
+        "Bangladesh": "Reverso de NID",
+        "India": "Reverso de la tarjeta Aadhaar",
+        "Pakistan": "Reverso de CNIC"
+    },
+    "idcardFrontPhoto": {
+        "Bangladesh": "Anverso de NID",
+        "India": "Anverso de la tarjeta Aadhaar",
+        "Pakistan": "Anverso de CNIC"
+    },
+    "idcardPortraitPhoto": {
+        "Bangladesh": "Retrato",
+        "India": "Retrato",
+        "Pakistan": "Retrato"
+    },
+    "identityInfo": "Información de identidad",
+    "maritalStatus": "Estado civil",
+    "mobileNumber": "Número de móvil",
+    "occupation": "Ocupación",
+    "panId": "Número de PAN",
+    "panPhoto": {
+        "India": "Tarjeta PAN"
+    },
+    "personalInfo": "Información personal",
+    "registerChannel": "Canal de registro",
+    "registerInfo": "Información de registro",
+    "registerPackageName": "Nombre del paquete de registro",
+    "registerTime": "Hora de registro",
+    "salaryRange": "Rango de salario",
+    "userId": "ID de usuario",
+    "userName": "Nombre de usuario",
+    "userSource": "Fuente del usuario"
+}

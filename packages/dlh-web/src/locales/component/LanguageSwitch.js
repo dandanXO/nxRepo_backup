@@ -17,6 +17,12 @@ const menu = (state) => (
         qiankunActions.setGlobalState({locale: 'cn'});
       }}>简</a>
     </Menu.Item>
+    <Menu.Item>
+      <a onClick={() => {
+        state.switchToES();
+        qiankunActions.setGlobalState({locale: 'es'});
+      }}>Español</a>
+    </Menu.Item>
   </Menu>
 );
 
