@@ -57,7 +57,7 @@ window.onunhandledrejection = (event) => {
   console.log(event);
   console.log(event.reason);
 
-  SentryModule.captureException(event);
+  SentryModule.captureException(new Error(JSON.stringify(event)));
 };
 
 // NOTE: refactor me
