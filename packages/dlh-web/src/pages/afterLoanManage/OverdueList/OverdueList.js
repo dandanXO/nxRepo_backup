@@ -167,19 +167,20 @@ class OverdueList extends Component {
             },
             {
                 title: props.intl.formatMessage({ id: "customer.status" }),
-                dataIndex: 'collectRecordStatus',
-                key: 'collectRecordStatus',
+                dataIndex: 'followUpResult',
+                key: 'followUpResult',
                 width: '6%',
                 render (text) {
                     const customerStatus = {
-                        0: "page.table.none",
-                        1: "customer.status.promise",
-                        2: "customer.status.missed",
-                        3: "customer.status.turned.off",
-                        4: "customer.status.lost.contact",
-                        5: "customer.status.other"
+                        'Promise': "customer.status.promise",
+                        'Missed': "customer.status.missed",
+                        'TurnedOff': "customer.status.turned.off",
+                        'InvalidPhoneNumber': "customer.status.invalid.phone.number",
+                        'Other': "customer.status.other",
+                        'BadAttitude': "customer.status.bad.attitude",
+                        'FinancialDifficulties': "customer.status.financial.difficulties"
                     }
-                    return text !== null ? <FormattedMessage id={customerStatus[text]} /> : '';
+                    return text !== null ? <FormattedMessage id={customerStatus[text] || 'page.table.none'} /> : '';
                 }
             },
             {
