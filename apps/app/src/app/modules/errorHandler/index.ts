@@ -48,7 +48,7 @@ window.addEventListener('rejectionhandled', (event) => {
   console.log(event);
   console.log(event.reason);
 
-  SentryModule.captureException(event);
+  SentryModule.captureException(new Error(JSON.stringify(event.reason)));
 });
 
 window.onunhandledrejection = (event) => {
@@ -56,8 +56,7 @@ window.onunhandledrejection = (event) => {
   console.log('[APP][ErrorHandler] window.onunhandledrejection');
   console.log(event);
   console.log(event.reason);
-
-  SentryModule.captureException(new Error(JSON.stringify(event)));
+  SentryModule.captureException(new Error(JSON.stringify(event.reason)));
 };
 
 // NOTE: refactor me
