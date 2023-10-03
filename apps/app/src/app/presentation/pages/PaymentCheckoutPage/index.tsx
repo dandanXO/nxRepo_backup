@@ -1,13 +1,14 @@
-import React from 'react';
+import queryString from 'query-string';
+import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
 import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
-import { renderByCountry } from '../../../modules/i18n';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../modules/querystring/getToken';
+import { useLazyGetRepayPayInfoQuery } from '../../../api/rtk';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
+import { renderByCountry } from '../../../modules/i18n';
+import { getToken } from '../../../modules/querystring/getToken';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
 import { PagePathEnum } from '../PagePathEnum';
@@ -20,8 +21,22 @@ const navigatorMap = {
 };
 
 const PaymentCheckoutPage = () => {
+  const parseQueryString = queryString.parse(window.location.search);
+  const hash = (parseQueryString['hash'] as string) || '';
   const navigate = useNavigate();
   const { state } = useLocation();
+
+  const [triggerGetPayInfo, { currentData }] = useLazyGetRepayPayInfoQuery({
+    pollingInterval: 0,
+    refetchOnFocus: false,
+    refetchOnReconnect: false,
+  });
+
+  useEffect(() => {
+    if (hash) {
+      triggerGetPayInfo({ hash });
+    }
+  }, []);
 
   return (
     <Page className="flex flex-col">
@@ -29,33 +44,39 @@ const PaymentCheckoutPage = () => {
         <Navigation
           title={
             environment.country === MexicoCountry.country
-              ? state.payType
+              ? state?.payType || currentData?.payType
               : 'Payment Instructions'
           }
-          back={() => {
-            navigate(
-              `${
-                PagePathEnum.RepaymentDetailPage
-              }/repayment-modal?token=${getToken()}&orderNo=${state.orderNo}`,
-              {
-                state: {},
-              }
-            );
-          }}
+          back={
+            hash
+              ? undefined
+              : () => {
+                  navigate(
+                    `${
+                      PagePathEnum.RepaymentDetailPage
+                    }/repayment-modal?token=${getToken()}&orderNo=${
+                      state.orderNo
+                    }`,
+                    {
+                      state: {},
+                    }
+                  );
+                }
+          }
           backgroundColor={navigatorMap[environment.country]}
         />
       )}
-      {state &&
+      {(state || currentData) &&
         renderByCountry(
           {
             [MexicoCountry.country]: (
-              <MexicoPaymentInstructionPage {...state} />
+              <MexicoPaymentInstructionPage {...state} {...currentData} />
             ),
             [PhilippinesCountry.country]: (
-              <PhilippinesPaymentInstructionPage {...state} />
+              <PhilippinesPaymentInstructionPage {...state} {...currentData} />
             ),
           },
-          <MexicoPaymentInstructionPage {...state} />
+          <MexicoPaymentInstructionPage {...state} {...currentData} />
         )}
     </Page>
   );

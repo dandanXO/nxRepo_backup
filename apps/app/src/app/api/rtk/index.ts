@@ -35,6 +35,7 @@ import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequ
 import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
 import { TraceBehaviorRequest } from './TraceBehaviorRequest';
 import axiosBaseQuery from './axiosBaseQuery';
+import { GetRepayPayInfoResponse } from "../loanService/GetRepayPayInfoResponse";
 
 export type LoginRequest = {
   msgCode: string;
@@ -209,6 +210,14 @@ export const APIV3 = createApi({
         data: requestBody,
       }),
     }),
+
+    // NOTICE: /repay/pay-info載入付款資訊
+    getRepayPayInfo: builder.query<GetRepayPayInfoResponse, {hash: string}>({
+      query: (queryParameters: {hash: string}) => ({
+        method: 'get',
+        url:`/repay/pay-info?hash=${queryParameters.hash}`
+      })
+    })
   }),
 });
 
@@ -224,6 +233,7 @@ export const {
   usePostReservationSubmitMutation,
   useLazyGetMXBindCardDropListQuery,
   useGetPHBindCardDropListQuery,
+  useLazyGetRepayPayInfoQuery
 } = APIV3;
 
 export const API = createApi({
