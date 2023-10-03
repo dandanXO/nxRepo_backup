@@ -50,7 +50,7 @@ const Item = ({
   </div>
 );
 
-const PhilippinesPaymentInstructionPage = ({
+const PhilippinesPaymentCheckoutPage = ({
   payload,
   orderNo,
   repayAmount,
@@ -225,4 +225,4 @@ const PhilippinesPaymentInstructionPage = ({
   );
 };
 
-export default PhilippinesPaymentInstructionPage;
+export default PhilippinesPaymentCheckoutPage;

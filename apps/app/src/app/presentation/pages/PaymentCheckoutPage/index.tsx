@@ -11,15 +11,15 @@ import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigati
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
 import { PagePathEnum } from '../PagePathEnum';
-import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentInstructionPage';
-import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentInstructionPage';
+import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentCheckoutPage';
+import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentCheckoutPage';
 
 const navigatorMap = {
   [MexicoCountry.country]: '#E70020',
   [PhilippinesCountry.country]: '#E85D75',
 };
 
-const PaymentInstructionPage = () => {
+const PaymentCheckoutPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
 
@@ -61,4 +61,4 @@ const PaymentInstructionPage = () => {
   );
 };
 
-export default PaymentInstructionPage;
+export default PaymentCheckoutPage;

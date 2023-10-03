@@ -13,7 +13,7 @@ import AmountRepaidModal from "../modals/AmountRepaidModal/AmountRepaidModal";
 import ExtendConfirmModal from "../modals/ExtendConfirmModal";
 import ExtendModal from "../modals/ExtendModal";
 import RepamentCouponModal from "../modals/RepaymentCouponModal";
-import PaymentInstructionPage from "../pages/PaymentInstructionPage";
+import PaymentCheckoutPage from "../pages/PaymentCheckoutPage";
 import PaymentResultPage from "../pages/PaymentResultPage";
 import UploadedPaymentReceiptPage from "../pages/UploadedPaymentReceiptPage";
 import UploadPaymentReceiptPage from "../pages/UploadPaymentReceiptPage";
@@ -49,7 +49,7 @@ const AppRouter = () => {
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
-        <Route path={PagePathEnum.PaymentInstructionPage} element={<PaymentInstructionPage />}/>
+        <Route path={PagePathEnum.PaymentCheckoutPage} element={<PaymentCheckoutPage />}/>
         <Route path={PagePathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />

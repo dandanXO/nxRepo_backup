@@ -105,4 +105,4 @@ const MexicoPaymentInstructionPage = ({
   );
 };
 
-export default MexicoPaymentInstructionPage;
+export default MexicoPaymentCheckoutPage;

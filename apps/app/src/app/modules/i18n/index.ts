@@ -13,7 +13,7 @@ import { i18nRepaymentModal } from '../../presentation/modals/RepaymentModal/i18
 import { i18nReservationProductsModal } from '../../presentation/modals/ReservationProductsModal/translations';
 import { i18nReservationSuccessModal } from '../../presentation/modals/ReservationSuccessModal/i18n/translations';
 import { i18nBankBindAccountPage } from '../../presentation/pages/BindBankCardPage/translations';
-import { i18nPaymentInstructionPage } from '../../presentation/pages/PaymentInstructionPage/translations';
+import { i18nPaymentInstructionPage } from '../../presentation/pages/PaymentCheckoutPage/translations';
 import { i18nLoanDetailsPage } from '../../presentation/pages/RepaymentDetailPage/translations';
 import { i18nUploadPaymentReceiptPage } from '../../presentation/pages/UploadPaymentReceiptPage/i18nPage/translations';
 import { i18nUploadingFileModal } from '../../presentation/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';

@@ -16,7 +16,7 @@ import LoadingMask from "../../../app/presentation/core-components/LoadingMask";
 import {PagePathEnum} from "../../../app/presentation/pages/PagePathEnum";
 import LoanRecordPage from '../../../app/presentation/pages/RepaymentPage';
 import LoginPage from "../../../app/presentation/pages/LoginPage";
-import PaymentInstructionPage from "../../../app/presentation/pages/PaymentInstructionPage";
+import PaymentCheckoutPage from "../pages/PaymentCheckoutPage";
 import PaymentResultPage from "../../../app/presentation/pages/PaymentResultPage";
 import BankCardListPage from "../../../app/presentation/pages/BankCardListPage";
 import BindBankCardPage from "../../../app/presentation/pages/BindBankCardPage";
@@ -59,7 +59,7 @@ export const AppRouter = () => {
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
-        <Route path={PagePathEnum.PaymentInstructionPage} element={<PaymentInstructionPage />}/>
+        <Route path={PagePathEnum.PaymentCheckoutPage} element={<PaymentCheckoutPage />}/>
         <Route path={PagePathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />

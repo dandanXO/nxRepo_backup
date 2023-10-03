@@ -32,7 +32,7 @@ const useExtendCreate = () => {
           // console.log('data', data);
           if (data.nextStep === 'html') {
             navigate(
-              `${PagePathEnum.PaymentInstructionPage}?token=${getToken()}`,
+              `${PagePathEnum.PaymentCheckoutPage}?token=${getToken()}`,
               {
                 state: data,
               }
