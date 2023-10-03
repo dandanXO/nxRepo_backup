@@ -8,6 +8,7 @@ import { AppEnvironment } from '../../../../modules/appEnvironment';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { createRequestAction } from '../../../../usecaseFlow/utils/createRequestAction';
 import { IndexPageSagaAction } from './indexPageActions';
+import {SentryModule} from "../../../../modules/sentry";
 
 // NOTE:
 export const getQuotaModelStatusAction = createRequestAction('GGetQuotaModelStatus');
@@ -55,8 +56,12 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       ) {
         window['IndexTask']['uploadKycBackgroundData']();
       } else {
+
         const message = 'Native Error: uploadKycBackgroundData function is missing.';
+        SentryModule.captureException(message);
+
         alertModal(message);
+
         // NOTICE: 新增邏輯錯誤
         throw new Error(message);
       }

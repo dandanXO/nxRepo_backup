@@ -1,17 +1,10 @@
-import { all, call, put, select ,take} from 'redux-saga/effects';
+import {all, call, put, select} from 'redux-saga/effects';
 
-import { Service } from '../../../api';
-import { GetInitServiceResponse } from '../../../api/appService/GetInitServiceResponse';
-import { alertModal } from '../../../api/base/alertModal';
-import { GetUserInfoServiceResponse } from '../../../api/userService/GetUserInfoServiceResponse';
-import { getToken } from '../../../modules/querystring/getToken';
-import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
-import { RootState } from '../../../reduxStore';
-import { appSlice } from '../../../reduxStore/appSlice';
-import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
-import { catchSagaError } from '../../utils/catchSagaError';
-import { systemCallGetUserInfoSaga } from '../userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
-import { systemFetchCouponSaga } from './systemFetchCouponSaga';
+import {Service} from '../../../api';
+import {GetInitServiceResponse} from '../../../api/appService/GetInitServiceResponse';
+import {NativeAppInfo} from '../../../persistant/nativeAppInfo';
+import {RootState} from '../../../reduxStore';
+import {appSlice} from '../../../reduxStore/appSlice';
 
 export function* systemStartInitSaga() {
   // try {
@@ -32,9 +25,10 @@ export function* systemStartInitSaga() {
   // refactor me
   yield put(appSlice.actions.init(true));
 
+
 }
 
-function* callGetInit(packageId: string) {
-  const response: GetInitServiceResponse = yield call(Service.AppService.getInit, { packageId });
-  yield put(appSlice.actions.updateInit(response));
-}
+// function* callGetInit(packageId: string) {
+//   const response: GetInitServiceResponse = yield call(Service.AppService.getInit, { packageId });
+//   yield put(appSlice.actions.updateInit(response));
+// }

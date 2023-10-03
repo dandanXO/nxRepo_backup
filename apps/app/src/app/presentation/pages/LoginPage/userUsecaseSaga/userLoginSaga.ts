@@ -2,7 +2,7 @@ import { push ,ROUTER_ON_LOCATION_CHANGED } from '@lagunovsky/redux-react-router
 import { PayloadAction } from '@reduxjs/toolkit';
 import { put, take, race } from 'redux-saga/effects';
 
-import { APIV3, LoginResponse } from '../../../../api/rtk';
+import { APIV3 } from '../../../../api/rtk';
 import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import { PageOrModalPathEnum } from '../../../PageOrModalPathEnum';
@@ -10,6 +10,7 @@ import { UserLoginActionPayload } from './index';
 import { appStore } from 'apps/app/src/app/reduxStore';
 import { SystemCaseActions } from 'apps/app/src/app/usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import { loginSlice } from 'apps/app/src/app/reduxStore/loginSlice';
+import {LoginResponse} from "../../../../api";
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {

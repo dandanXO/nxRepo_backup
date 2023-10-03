@@ -1,52 +1,45 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
-
-import { GetIndexRequest } from '../indexService/GetIndexRequest';
-import { GetIndexResponse } from '../indexService/GetIndexResponse';
-import { GetNotificationResponse } from '../indexService/GetNotificationResponse';
-import { GetLoanDetailRequest } from '../loanService/GetLoanDetailRequest';
-import { GetLoanDetailResponse } from '../loanService/GetLoanDetailResponse';
-import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListReponse';
-import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
-import { GetRepayTypesRequest } from '../loanService/GetRepayTypesRequest';
-import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
-import { GetReservationRequest } from '../loanService/GetReservationRequest';
-import { GetReservationResponse } from '../loanService/GetReservationResponse';
-import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
-import { PostRepayCreateRequest } from '../loanService/PostRepayCreateRequest';
-import { PostRepayCreateResponse } from '../loanService/PostRepayCreateResponse';
-import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
-import { PostReservationSubmitRequest } from '../loanService/PostReservationSubmitRequest';
-import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
-import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
-import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
-import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
-import { GetCouponListRequest } from '../userService/GetCouponListRequest';
-import { GetCouponListResponse } from '../userService/GetCouponResponse';
-import { GetFeedbackCategoriesResponse } from '../userService/GetFeedbackCategories';
-import { GetMXBindCardDropListResponse } from '../userService/GetMXBindCardDropListResponse';
-import { GetPHBindCardDropListResponse } from '../userService/GetPHBindCardDropListResponse';
-import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
-import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
-import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
-import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
-import { PostMXBankBindSaveRequest } from '../userService/PostMXBankBindSaveRequest';
-import { PostPHBankBindSaveRequest } from '../userService/PostPHBankBindSaveRequest';
-import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
-import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
-import { TraceBehaviorRequest } from './TraceBehaviorRequest';
+import {createApi} from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './axiosBaseQuery';
 
-export type LoginRequest = {
-  msgCode: string;
-  // 图片验证码
+import {GetIndexRequest} from '../indexService/GetIndexRequest';
+import {GetIndexResponse} from '../indexService/GetIndexResponse';
+import {GetNotificationResponse} from '../indexService/GetNotificationResponse';
+import {GetLoanDetailRequest} from '../loanService/GetLoanDetailRequest';
+import {GetLoanDetailResponse} from '../loanService/GetLoanDetailResponse';
+import {GetLoanRecordListReponse} from '../loanService/GetLoanRecordListReponse';
+import {GetLoanRecordListRequest} from '../loanService/GetLoanRecordListRequest';
+import {GetRepayTypesRequest} from '../loanService/GetRepayTypesRequest';
+import {GetRepayTypesResponse} from '../loanService/GetRepayTypesResponse';
+import {GetReservationRequest} from '../loanService/GetReservationRequest';
+import {GetReservationResponse} from '../loanService/GetReservationResponse';
+import {GetUserProcessResponse} from '../loanService/GetUserProcessResponse';
+import {PostRepayCreateRequest} from '../loanService/PostRepayCreateRequest';
+import {PostRepayCreateResponse} from '../loanService/PostRepayCreateResponse';
+import {PostRepayReceiptResponse} from '../loanService/PostRepayReceiptResponse';
+import {PostReservationSubmitRequest} from '../loanService/PostReservationSubmitRequest';
+import {GetBankCardListResponse} from '../userService/GetBankCardListResponse';
+import {GetBindCardDropListResponse} from '../userService/GetBindCardDropListResponse';
+import {GetCouponApplicableListRequest} from '../userService/GetCouponApplicableListRequest';
+import {GetCouponApplicableListResponse} from '../userService/GetCouponApplicableListResponse';
+import {GetCouponListRequest} from '../userService/GetCouponListRequest';
+import {GetCouponListResponse} from '../userService/GetCouponResponse';
+import {GetFeedbackCategoriesResponse} from '../userService/GetFeedbackCategories';
+import {GetMXBindCardDropListResponse} from '../userService/GetMXBindCardDropListResponse';
+import {GetPHBindCardDropListResponse} from '../userService/GetPHBindCardDropListResponse';
+import {PostBangladeshBankBindSaveRequest} from '../userService/PostBangladeshBankBindSaveRequest';
+import {PostBankBindSaveRequest} from '../userService/PostBankBindSaveRequest';
+import {PostBankCardMainRequest} from '../userService/PostBankCardMainRequest';
+import {PostFeedbackRequest} from '../userService/PostFeedbackRequest';
+import {PostMXBankBindSaveRequest} from '../userService/PostMXBankBindSaveRequest';
+import {PostPHBankBindSaveRequest} from '../userService/PostPHBankBindSaveRequest';
+import {PostPKBankBindSaveRequest} from '../userService/PostPKBankBindSaveRequest';
+import {GetOTPCodeRequest} from '../userService/service/GetOTPCodeService';
+import {TraceBehaviorRequest} from './TraceBehaviorRequest';
+import {LoginRequest} from "../userService/LoginRequest";
+import {LoginResponse} from "../userService/LoginResponse";
+import {PostUserLogoutRequest} from "../userService/PostUserLogoutRequest";
+import {PostUserLogoutResponse} from "../userService/PostUserLogoutResponse";
 
-  phoneNo: string;
-  // 手机号码
-};
-
-export type LoginResponse = {
-  token: string;
-};
 export const APIV3 = createApi({
   reducerPath: 'apiv3',
   baseQuery: axiosBaseQuery({
@@ -92,7 +85,6 @@ export const APIV3 = createApi({
         // console.log('onCacheEntryAdded.arg', arg);
       },
     }),
-
     // NOTE: /api/v3/loan/records 貸款紀錄列表
     getLoanRecordList: builder.query<
       GetLoanRecordListReponse,
@@ -244,13 +236,13 @@ export const API = createApi({
       }),
     }),
     // NOTE: 登出
-    // logout: builder.mutation<null, LogoutRequest>({
-    //   query: (query: LogoutRequest) => ({
-    //     method: "post",
-    //     url: `/login/otp-code`,
-    //     data: query,
-    //   }),
-    // }),
+    logout: builder.mutation<PostUserLogoutResponse, PostUserLogoutRequest>({
+      query: (requestData: PostUserLogoutRequest) => ({
+        method: "post",
+        url: `/login/user/logout`,
+        data: requestData,
+      }),
+    }),
     // NOTE: 借款首頁
     getIndex: builder.query<GetIndexResponse, GetIndexRequest>({
       query: (query: GetIndexRequest) => ({
@@ -376,6 +368,7 @@ export const API = createApi({
 });
 
 export const {
+  useLogoutMutation,
   useGetLoanDetailQuery,
   useGetRepayTypesQuery,
   useLazyGetBankCardListQuery,

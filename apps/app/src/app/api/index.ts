@@ -27,3 +27,5 @@ export const Service = {
   },
 
 };
+export {LoginRequest} from "./userService/LoginRequest";
+export {LoginResponse} from "./userService/LoginResponse";

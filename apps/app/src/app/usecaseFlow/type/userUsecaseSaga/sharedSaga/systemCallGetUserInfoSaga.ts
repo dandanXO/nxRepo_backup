@@ -10,6 +10,7 @@ import { RootState } from '../../../../reduxStore';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../utils/catchSagaError';
 import {MonitorUsecaseFlow} from "../../../../monitorUsecaseFlow";
+import {push} from "@lagunovsky/redux-react-router";
 
 export function* systemCallGetUserInfoSaga() {
 
@@ -28,6 +29,7 @@ export function* systemCallGetUserInfoSaga() {
       console.log("systemCallGetUserInfoSaga");
 
       const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+      console.log("userResponse2", userResponse);
       yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
       // Sentry 識別登入行為
@@ -36,6 +38,7 @@ export function* systemCallGetUserInfoSaga() {
       return userResponse;
     }
   } catch (error) {
+    // console.log("test error2", error)
     yield catchSagaError(error);
     return false;
   }

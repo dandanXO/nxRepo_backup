@@ -20,7 +20,6 @@ import '../app/modules/window/IWindow';
 
 // NOTE: Other
 import '../style.css';
-import {alertModal} from "../app/api/base/alertModal";
 import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
 import {I18nModule} from "../app/modules/i18n";
 

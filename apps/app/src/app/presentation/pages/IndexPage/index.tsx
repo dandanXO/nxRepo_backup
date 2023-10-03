@@ -88,6 +88,7 @@ const IndexPage = () => {
   const dispatch = useDispatch();
   const [webViewVisible, setWebViewVisible] = useState(false);
 
+  // NOTICE: REFACTOR ME
   useEffect(() => {
     dispatch(IndexPageSagaAction.user.viewIndexPageAction());
   }, []);
@@ -108,6 +109,7 @@ const IndexPage = () => {
     };
   }, []);
 
+  // NOTICE: REFACTOR ME
   useEffect(() => {
     if (webViewVisible) {
       dispatch(IndexPageSagaAction.user.viewIndexPageAction());

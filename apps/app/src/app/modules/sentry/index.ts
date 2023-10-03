@@ -5,7 +5,6 @@ import { Primitive } from '@sentry/types/types/misc';
 import posthog from 'posthog-js';
 
 import { AppFlag } from '../../../environments/flag';
-import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
 import { RootState, appStore } from '../../reduxStore';
 import { AppEnvironment } from '../appEnvironment';

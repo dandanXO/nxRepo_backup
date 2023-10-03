@@ -4,6 +4,8 @@ import { put } from 'redux-saga/effects';
 import { alertModal } from '../../api/base/alertModal';
 import { SentryModule } from '../../modules/sentry';
 import { APIBoundaryModuleSlice } from '../../reduxStore/apiBoundaryModuleSlice';
+import {push} from "@lagunovsky/redux-react-router";
+import {PageOrModalPathEnum} from "../../presentation/PageOrModalPathEnum";
 
 export function* catchSagaError(error: any) {
   // console.log('catchSagaError.error', error);
@@ -16,11 +18,12 @@ export function* catchSagaError(error: any) {
     //     message: "Please login again.",
     //   }));
     // }
-    alertModal((axiosError?.response?.data as any)?.message as string);
   } else {
     // NOTICE: 可能不是純字串
     // alertModal(error, "Warning");
   }
+
   SentryModule.captureException(error);
+
   yield false;
 }

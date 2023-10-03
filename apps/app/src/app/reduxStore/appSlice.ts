@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse';
 import { IAndroidAppInfo } from '../persistant/nativeAppInfo/types/IAndroidAppInfo';
+import {NativeAppInfo} from "../persistant/nativeAppInfo";
+import queryString from "query-string";
 
 export enum AppRunningModeEnum {
   'Unknown',
@@ -15,13 +17,17 @@ export type InitailState = {
   token: string;
   isInit: boolean;
   androidAppInfo: null | IAndroidAppInfo;
+  appName: string;
 };
+
+const parsedQueryString = queryString.parse(window.location.search);
 
 const initialState: InitailState = {
   mode: AppRunningModeEnum.Unknown,
   token: '',
   isInit: false,
   androidAppInfo: null,
+  appName: NativeAppInfo.appName || parsedQueryString['appName'] ? (parsedQueryString['appName'] as string) : "",
 };
 
 export const appSlice = createSlice({

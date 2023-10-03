@@ -6,7 +6,6 @@ import {IndiaCountry} from "../../../../../../libs/shared/domain/src/country/Ind
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import {alertModal} from "../../api/base/alertModal";
 import {SentryModule} from "../sentry";
 
 function getDefaultTheme() {

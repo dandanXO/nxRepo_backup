@@ -4,7 +4,34 @@ import { NativeAppInfo } from '../../../../persistant/nativeAppInfo';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
 import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
 import {isInApp} from "../../../../modules/appEnvironment/isInApp";
+import {call, put, race, select, take} from "redux-saga/effects";
+import {API, APIV3} from "../../../../api/rtk";
+import {push, routerActions} from "@lagunovsky/redux-react-router";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {getToken} from "../../../../modules/querystring/getToken";
+import {RootState} from "../../../../reduxStore";
 
+function *logoutSaga() {
+
+  // http://192.168.50.215:4002/v2?token=93797d3b9fe44ba9be4e1485ffde850a
+  const appName: string = yield select((state: RootState) => state.app.appName);
+  console.log("appName", appName);
+
+  yield put(API.endpoints.logout.initiate({
+    token: getToken(),
+    appName: appName,
+  }) as any);
+
+  const {success, failure} = yield race({
+    success: take(API.endpoints.logout.matchFulfilled),
+    failure: take(API.endpoints.logout.matchRejected),
+  })
+
+  if(success) {
+    yield put(routerActions.push(PageOrModalPathEnum.LoginPage))
+  }
+  // TODO: 這邊錯誤有捕捉嗎?
+}
 export function* userLogoutSaga() {
   try {
     let message = null;
@@ -12,7 +39,8 @@ export function* userLogoutSaga() {
     // TODO: refactor h5=>PureH5
     if (NativeAppInfo.mode === 'H5') {
       // TODO: 單純 API 登出
-      message = '尚未實作';
+      // message = '尚未實作';
+      yield call(logoutSaga);
 
     } else if (NativeAppInfo.mode === 'Webview') {
       if (GlobalAppMode.mode === 'SimpleWebView') {
@@ -26,6 +54,7 @@ export function* userLogoutSaga() {
             message = 'Native Error: window["IndexTask"]["navToPage"] function is missing';
           } else {
             // TODO: 單純 API 登出
+            yield call(logoutSaga);
           }
         }
       } else if (GlobalAppMode.mode === 'None') {

@@ -10,7 +10,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       domain: 'https://www.oasis-gold.com',
       environment: AllCountriesEnum.india,
       packageId: 'com.ind.kyc.application',
-      appName: 'Local APP',
+      appName: "",
       uiVersion: uiVersion || "55",
       token: null,
       mode: 'H5',

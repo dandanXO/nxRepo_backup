@@ -1,6 +1,5 @@
 import cx from 'classnames';
 import React from 'react';
-import {alertModal} from "../../../../../api/base/alertModal";
 // NOTE: https://chupai.github.io/posts/2101/clipboard/
 import copy from 'copy-to-clipboard';
 
