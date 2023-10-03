@@ -1,29 +1,29 @@
-import "./polyfills";
+import "../polyfills";
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
-import { SentryModule } from './app/modules/sentry';
-import "./app/modules/errorHandler";
-import './app/modules/posthog';
+import { SentryModule } from '../app/modules/sentry';
+import "../app/modules/errorHandler";
+import '../app/modules/posthog';
 
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 // NOTE: ENV
-import { environment } from './environments/environmentModule/environment';
+import { environment } from '../environments/environmentModule/environment';
 
 // NOTE: Modules
-import { NativeAppInfo } from './app/persistant/nativeAppInfo';
-import {ThemeModule} from './app/modules/theme';
-import './app/modules/i18n';
-import './app/modules/timezone';
+import { NativeAppInfo } from '../app/persistant/nativeAppInfo';
+import {ThemeModule} from '../app/modules/theme';
+import '../app/modules/i18n';
+import '../app/modules/timezone';
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
-import './app/modules/window/IWindow';
+import '../app/modules/window/IWindow';
 
 // NOTE: Other
-import './style.css';
-import App from './app/app';
-import {alertModal} from "./app/api/base/alertModal";
-import {MonitorUsecaseFlow} from "./app/monitorUsecaseFlow";
-import {I18nModule} from "./app/modules/i18n";
+import '../style.css';
+import App from '../app/app';
+import {alertModal} from "../app/api/base/alertModal";
+import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
+import {I18nModule} from "../app/modules/i18n";
 
 // NOTICE:
 if (window.Cypress) {
