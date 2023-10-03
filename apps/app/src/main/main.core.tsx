@@ -9,6 +9,7 @@ import {environment} from "../environments/environmentModule/environment";
 import {appStore, history, RootState} from "../app/reduxStore";
 import {isInApp} from "../app/modules/appEnvironment/isInApp";
 import {NativeAppInfo} from "../app/persistant/nativeAppInfo";
+import {GlobalAppMode} from "../app/persistant/GlobalAppMode";
 
 type ICoreMain = {
   children: React.ReactElement;
@@ -21,6 +22,7 @@ export const CoreMain = (props: ICoreMain) => {
   console.log('[app] window.theme', window.theme);
   console.log('[app] isInApp', isInApp());
   console.log('[app] NativeAppInfo', NativeAppInfo);
+  console.log('[app] GlobalAppMode', GlobalAppMode.mode);
   // alertModal(JSON.stringify(NativeAppInfo));
 
   return (

@@ -9,16 +9,30 @@ import { Button } from '../../core-components/Button';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 import {NativeAppInfo} from "../../../persistant/nativeAppInfo";
+import {RootState} from "../../../reduxStore";
+import {put} from "redux-saga/effects";
+import {loginSlice} from "../../../reduxStore/loginSlice";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const phoneNumber: string | undefined = useSelector((state: RootState) => state.login.phoneNo);
   const [phoneNumberData, setPhoneNumberData] = useState<InputValue<string>>({
     data: '',
     isValidation: false,
     errorMessage: '',
   });
+  useEffect(() => {
+    if(phoneNumber) {
+      setPhoneNumberData({
+        data: phoneNumber,
+        isValidation: true,
+        errorMessage: '',
+      });
+    }
+  }, [phoneNumber])
+
   const [enableGetOTP, setEnableGetOTP] = useState(false);
 
   const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
@@ -116,6 +130,8 @@ export const LoginForm = () => {
               errorMessage: isError ? '*Please enter the correct phone number.' : '',
             });
             setEnableGetOTP(!isError);
+
+            dispatch(loginSlice.actions.updatePhoneNo(value))
           }}
           onChange={(event: any) => {
             const value = event.target.value;

@@ -10,15 +10,19 @@ import { useDeleteUserMutation } from '../../../api/rtk';
 import { AndroidPage } from '../../../modules/window/IWindow';
 import {GlobalAppMode} from "../../../persistant/GlobalAppMode";
 import {isInApp} from "../../../modules/appEnvironment/isInApp";
+import {alertModal} from "../../../api/base/alertModal";
+import {SentryModule} from "../../../modules/sentry";
+import {select} from "redux-saga/effects";
 
 const DeleteAccountConfirmModal = () => {
     const navigate = useNavigate();
-    const location = useLocation();
     const orderState = useSelector((state: RootState) => state.indexPage.order.state);
     const [deleteUser, { isSuccess: isDeteleUserSuccess, isLoading: isUserDeleting, }] = useDeleteUserMutation();
 
     const Content = () => {
+      const appName: string =  useSelector((state: RootState) => state.app.appName);
 
+      // NOTICE: 尚有未還的訂單，無法刪除帳號
         if (orderState === ORDER_STATE.normal || orderState === ORDER_STATE.hasInComingOverdueOrder || orderState === ORDER_STATE.hasOverdueOrder) {
             return (<div className='py-5 px-4'>
                 <div className='font-bold text-xl text-ctext-primary mb-5'>Delete Account</div>
@@ -32,7 +36,8 @@ const DeleteAccountConfirmModal = () => {
                 />
             </div>)
         } else {
-            return (<div className='py-5 px-4'>
+            return (
+              <div className='py-5 px-4'>
                 <div className='font-bold text-xl text-ctext-primary mb-5'>Thank You</div>
                 <div className='text-sm text-ctext-secondary mb-3'>This account no longer exists.</div>
                 <div className='text-sm text-ctext-secondary mb-3'>It will take 7 days for the account to be completely deleted.</div>
@@ -41,20 +46,41 @@ const DeleteAccountConfirmModal = () => {
 
                 <Button
                     onClick={() => {
+                        // NOTICE: refactor me
+                        let collectMessage = "";
+                        let message = "";
+                        // console.log('[app] GlobalAppMode', GlobalAppMode.mode);
                         deleteUser(null).unwrap().then(() => {
                             navigate(`${PageOrModalPathEnum.LoginPage}`);
                             if (GlobalAppMode.mode === 'IndexWebview') {
                                 if (window['IndexTask'] && window['IndexTask']['navToPage'] && isInApp()) {
                                     window['IndexTask']['navToPage'](AndroidPage.LOGIN);
+                                } else {
+                                  message = "Error: APP:406"
+                                  collectMessage = "Call Android IndexTask.uploadKycBackgroundData unsuccessfully";
                                 }
+                            } else if(GlobalAppMode.mode === "SimpleWebView") {
+                              message = "Error: APP:407"
+                              collectMessage = "注意: SimpleWebView 不會有此 flow";
+                            } else if(GlobalAppMode.mode === "PureH5") {
+                              // NOTE:
+                              navigate(`${PageOrModalPathEnum.LoginPage}?appName=${appName}`);
                             }
                         }).catch((err) => {
                             navigate(`${PageOrModalPathEnum.AccountVerificationPage}?token=${getToken()}`);
+                        }).finally(() => {
+                          if(collectMessage) {
+                            SentryModule.captureException("")
+                          }
+                          if(message) {
+                            alertModal(message)
+                          }
                         })
                     }}
                     text={'Confirm'}
                 />
-            </div>)
+              </div>
+            )
         }
     }
 

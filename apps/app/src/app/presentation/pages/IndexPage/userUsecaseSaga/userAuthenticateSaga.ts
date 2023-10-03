@@ -12,6 +12,7 @@ export function* userAuthenticateSaga() {
     let collectMessage = null;
 
     if (NativeAppInfo.mode === 'H5') {
+      // NOTICE: refactor me
       message = "Error: APP:401"
 
       collectMessage = "注意: H5 不會有此 flow，因為只有老客";
