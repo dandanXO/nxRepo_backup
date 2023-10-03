@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
-import NoDataImage from '../../../../assets/NoData.svg';
+import NoDataImage from '../../components/images/NoData.svg';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { useLazyGetCouponApplicableListQuery } from '../../../api/rtk';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';

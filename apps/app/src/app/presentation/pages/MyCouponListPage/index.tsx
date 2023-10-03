@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import NoDataImage from '../../../../assets/NoData.svg';
+import NoDataImage from '../../components/images/NoData.svg';
 import { useLazyGetCouponListQuery } from '../../../api/rtk';
 import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequest';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';

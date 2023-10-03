@@ -38,8 +38,8 @@ const PaymentResultPage = () => {
       } catch (error) {
         resultImage =
           path === 'complete'
-            ? require('../../../../assets/ic_apply_complete.png')
-            : require('../../../../assets/ic_apply_failed.png');
+            ? require('../../components/images/ic_apply_complete.png')
+            : require('../../components/images/ic_apply_failed.png');
       }
     }
   }

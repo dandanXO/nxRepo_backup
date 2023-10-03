@@ -1,5 +1,5 @@
 import { environment } from 'apps/app/src/environments/environmentModule/environment';
-import CouponImageSource from '../../../../assets/coupon.png';
+import CouponImageSource from '../../components/images/coupon.png';
 import { AllCountryIdentityName } from 'libs/shared/domain/src/country/enum/AllCountryIdentityName';
 import MexicoCoupon from './i18n/MexicoCoupon.svg';
 import PhilippinesCoupon from './i18n/PhilippinesCoupon.png';
@@ -21,7 +21,7 @@ const CouponModalContentAndroidWebviewPage = () => {
   try {
     couponImage = require(`../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_coupon.png`)
   } catch (error) {
-    couponImage = defaultCouponImage; 
+    couponImage = defaultCouponImage;
   }
 
   const imageOnError = (event:any) => {
