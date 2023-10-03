@@ -22,48 +22,22 @@
         "isolatedConfig": true
       },
       "configurations": {
-        "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
-        "production": {
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false,
-          "fileReplacements": [
-            {
-              "replace": "apps/app/src/environments/environmentModule/environment.ts",
-              "with": "apps/app/src/environments/environmentModule/environment.prod.ts"
-            }
-          ]
-        },
         "production-in": {
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false,
           "main": "apps/app/src/main/main.in.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/india/environment.in.prod.ts"
             }
-          ]
-        },
-        "production-pk": {
+          ],
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false,
+          "vendorChunk": false
+        },
+        "production-pk": {
           "main": "apps/app/src/main/main.pk.tsx",
           "fileReplacements": [
             {
@@ -71,52 +45,58 @@
               "with": "apps/app/src/environments/environmentModule/pakistan/environment.pk.prod.ts"
             }
           ],
-          "webpackConfig": "apps/app/build/webpack.config.main.pk.js"
-        },
-        "production-bd": {
+          "webpackConfig": "apps/app/build/webpack.config.main.pk.js",
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false,
+          "vendorChunk": false
+        },
+        "production-bd": {
           "main": "apps/app/src/main/main.bd.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/bangladesh/environment.bd.prod.ts"
             }
-          ]
-        },
-        "production-mx": {
+          ],
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false,
+          "vendorChunk": false
+        },
+        "production-mx": {
           "main": "apps/app/src/main/main.mx.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/mexico/environment.mx.prod.ts"
             }
-          ]
-        },
-        "production-ph": {
+          ],
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
           "namedChunks": false,
           "extractLicenses": true,
-          "vendorChunk": false,
+          "vendorChunk": false
+        },
+        "production-ph": {
           "main": "apps/app/src/main/main.ph.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/philippines/environment.ph.prod.ts"
             }
-          ]
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
         }
       }
     },
@@ -141,69 +121,69 @@
       },
       "configurations": {
         "development-in": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true,
           "main": "apps/app/src/main/main.in.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/india/environment.in.dev.ts"
             }
-          ]
-        },
-        "development-pk": {
+          ],
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
-          "vendorChunk": true,
+          "vendorChunk": true
+        },
+        "development-pk": {
           "main": "apps/app/src/main/main.pk.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/pakistan/environment.pk.dev.ts"
             }
-          ]
-        },
-        "development-bd": {
+          ],
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
-          "vendorChunk": true,
+          "vendorChunk": true
+        },
+        "development-bd": {
           "main": "apps/app/src/main/main.bd.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/bangladesh/environment.bd.dev.ts"
             }
-          ]
-        },
-        "development-mx": {
+          ],
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
-          "vendorChunk": true,
+          "vendorChunk": true
+        },
+        "development-mx": {
           "main": "apps/app/src/main/main.mx.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/mexico/environment.mx.dev.ts"
             }
-          ]
-        },
-        "development-ph": {
+          ],
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
-          "vendorChunk": true,
+          "vendorChunk": true
+        },
+        "development-ph": {
           "main": "apps/app/src/main/main.ph.tsx",
           "fileReplacements": [
             {
               "replace": "apps/app/src/environments/environmentModule/environment.ts",
               "with": "apps/app/src/environments/environmentModule/philippines/environment.ph.dev.ts"
             }
-          ]
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
         }
       }
     },

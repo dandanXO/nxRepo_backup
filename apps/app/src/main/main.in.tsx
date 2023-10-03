@@ -20,10 +20,20 @@ import '../app/modules/window/IWindow';
 
 // NOTE: Other
 import '../style.css';
-import App from '../app/app';
 import {alertModal} from "../app/api/base/alertModal";
 import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
 import {I18nModule} from "../app/modules/i18n";
+
+import {ReduxRouter, ReduxRouterSelector} from '@lagunovsky/redux-react-router';
+import React from 'react';
+import {Provider} from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
+
+import {AppThemeProvider} from '@frontend/mobile/shared/ui';
+
+import {AppRouter} from '../app/presentation/router/index.in';
+import {appStore, RootState} from '../app/reduxStore';
+import {history} from '../app/reduxStore/index';
 
 // NOTICE:
 if (window.Cypress) {
@@ -95,9 +105,23 @@ const renderApp = () => {
   // NOTE: Starting to render
   const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
+  const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator;
+
   root.render(
     <StrictMode>
-      <App />
+      <div>
+        {/*NOTICE: Refactor Me - style component theme : window.theme */}
+        <AppThemeProvider theme={window.theme}>
+          <Provider store={appStore}>
+            <ReduxRouter history={history} routerSelector={routerSelector}>
+              <BrowserRouter basename={'/'}>
+                <AppRouter />
+              </BrowserRouter>
+              {/*<RouterProvider router={appRouter as any} fallbackElement={<div>Loading...</div>} />*/}
+            </ReduxRouter>
+          </Provider>
+        </AppThemeProvider>
+      </div>
     </StrictMode>
   );
 };
