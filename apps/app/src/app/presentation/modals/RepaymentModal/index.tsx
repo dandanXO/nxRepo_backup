@@ -19,7 +19,7 @@ import {
   repaymentDetailPageInitialStateType,
   repaymentDetailPageSlice,
 } from '../../../reduxStore/repaymentDetailPageSlice';
-import Modal from '../../components/Modal';
+import Modal from '../../core-components/Modal';
 import useRepayCreate from '../../hooks/useRepayCreate';
 import useRepayTypes from '../../hooks/useRepayTypes';
 import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';

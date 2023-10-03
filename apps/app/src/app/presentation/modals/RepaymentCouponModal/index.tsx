@@ -17,9 +17,9 @@ import { RootState } from '../../../reduxStore';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
 import Coupon, { ICouponProps } from '../../components/Coupon';
-import Modal from '../../components/Modal';
-import { Button } from '../../components/layouts/Button';
-import { Navigation } from '../../components/layouts/Navigation';
+import Modal from '../../core-components/Modal';
+import { Button } from '../../core-components/Button';
+import { Navigation } from '../../core-components/Navigation';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { i18nRepaymentCouponModal } from './i18n/translations';
 

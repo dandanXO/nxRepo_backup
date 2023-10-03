@@ -1,5 +1,5 @@
 import PulseLoader from "react-spinners/PulseLoader";
-import { Page } from "../layouts/Page";
+import { Page } from "../Page";
 
 const LoadingMask = () => {
 

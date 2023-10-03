@@ -40,7 +40,7 @@ import ExtendConfirmModal from "../app/presentation/modals/ExtendConfirmModal";
 import ExtendModal from "../app/presentation/modals/ExtendModal";
 import RepamentCouponModal from "../app/presentation/modals/RepaymentCouponModal";
 import APIBoundaryModal from "../app/presentation/modals/APIBoundaryModal";
-import LoadingMask from "../app/presentation/components/LoadingMask";
+import LoadingMask from "../app/presentation/core-components/LoadingMask";
 
 
 // NOTE: Other

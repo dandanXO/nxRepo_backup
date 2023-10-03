@@ -3,12 +3,12 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
 import { Status } from '../../../../../modules/statusEnum';
-import Divider from '../../../../components/Divider';
-import ListItem from '../../../../components/ListItem';
+import Divider from '../../../../core-components/Divider';
+import ListItem from '../../../../core-components/ListItem';
 import Money from '../../../../components/Money';
-import { Button } from '../../../../components/layouts/Button';
+import { Button } from '../../../../core-components/Button';
 import {formatDate} from "../../../../../modules/format/formatDate";
-import Modal from '../../../../components/Modal';
+import Modal from '../../../../core-components/Modal';
 import { useTranslation } from 'react-i18next';
 import { i18nExtendModal } from '../../translations';
 

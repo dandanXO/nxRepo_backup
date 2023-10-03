@@ -1,12 +1,12 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { Input } from '@frontend/mobile/shared/ui';
-import { Button } from '../../../../components/layouts/Button';
+import { Button } from '../../../../core-components/Button';
 import UploadingFileModal from '../../modal/UploadingFileModal';
 import { i18nUploadPaymentReceiptPage } from '../translations';
 import { I18UploadPaymentReceiptPageProps } from '../types/I18UploadPaymentReceiptPageProps';
 import { CameraSvgIconWrapper, CustomPage, UploadSection, UploadSectionImg, UploadSectionTitle } from '../common';
-import { PageContent } from '../../../../components/layouts/PageContent';
+import { PageContent } from '../../../../core-components/PageContent';
 import IndiaCameraSvgIcon from './IndiaCameraSvgIcon';
 
 export const IndiaUploadPaymentReceiptPage = withTranslation(i18nUploadPaymentReceiptPage.namespace)(

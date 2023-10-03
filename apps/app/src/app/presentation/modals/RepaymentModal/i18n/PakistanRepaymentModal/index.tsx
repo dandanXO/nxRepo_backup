@@ -4,18 +4,18 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
-import Select from "../../../../components/Select";
+import Select from "../../../../core-components/Select";
 
 import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { getToken } from '../../../../../modules/querystring/getToken';
-import ListItem from '../../../../components/ListItem';
+import ListItem from '../../../../core-components/ListItem';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from '../../../../components/layouts/Button';
-import { selectStyles } from '../../../../components/layouts/selectStyles';
+import { Button } from '../../../../core-components/Button';
+import { selectStyles } from '../../../../core-components/selectStyles';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';

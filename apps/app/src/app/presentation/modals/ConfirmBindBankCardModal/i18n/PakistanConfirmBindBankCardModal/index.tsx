@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
-import { Button } from '../../../../components/layouts/Button';
-import ListItem from '../../../../components/ListItem';
-import Modal from '../../../../components/Modal';
+import { Button } from '../../../../core-components/Button';
+import ListItem from '../../../../core-components/ListItem';
+import Modal from '../../../../core-components/Modal';
 import { InitialStateType, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
@@ -88,7 +88,7 @@ const PakistanConfirmBindBankCardModal = ({ state }: IConfirmBindBankCardModal) 
                         onClick={() => dispatch(modalSlice.actions.updatebindBankcardModal({
                             ...modalState.bindBankcardModal,
                             show: false,
-                        }))} 
+                        }))}
                     />
                     <Button
                         className={`ml-1 w-full`}

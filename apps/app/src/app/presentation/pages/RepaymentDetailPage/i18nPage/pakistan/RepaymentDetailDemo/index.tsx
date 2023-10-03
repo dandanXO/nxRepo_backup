@@ -1,9 +1,9 @@
 
 import { useTranslation } from 'react-i18next';
-import ListItem from '../../../../../components/ListItem';
+import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
 import { i18nLoanDetailsPage } from '../../../translations';
-import Divider from 'apps/app/src/app/presentation/components/Divider';
+import Divider from '../../../../../core-components/Divider';
 
 interface IRepaymentDetailDemo {
   loanAmount: number

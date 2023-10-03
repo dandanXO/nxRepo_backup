@@ -8,8 +8,8 @@ import {
   modalInitialState,
   modalSlice,
 } from '../../../../../reduxStore/modalSlice';
-import ValidateInput from '../../../../components/ValidateInput';
-import { Button } from '../../../../components/layouts/Button';
+import ValidateInput from '../../../../core-components/ValidateInput';
+import { Button } from '../../../../core-components/Button';
 import { i18nBankBindAccountPage } from '../../translations';
 import { validationPHMobileNumber } from './validation';
 

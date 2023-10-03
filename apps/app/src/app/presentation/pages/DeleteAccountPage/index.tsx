@@ -2,11 +2,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../components/layouts/Navigation';
-import { Page } from '../../components/layouts/Page';
+import { Navigation } from '../../core-components/Navigation';
+import { Page } from '../../core-components/Page';
 import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 
 const DeleteAccountPage = () => {
     const navigate = useNavigate();

@@ -9,8 +9,8 @@ import { Route, Routes, useLocation } from 'react-router';
 import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
 import { RootState } from '../../reduxStore';
 // NOTICE: Static Loading : Compontents
-import LoadingMask from '../components/LoadingMask';
-import { TabBar } from '../components/layouts/TabBar';
+import LoadingMask from '../core-components/LoadingMask';
+import { TabBar } from '../core-components/TabBar';
 import APIBoundaryModal from '../modals/APIBoundaryModal';
 import AmountRepaidModal from '../modals/AmountRepaidModal/AmountRepaidModal';
 import DeleteAccountConfirmModal from '../modals/DeleteAccountConfirmModal';

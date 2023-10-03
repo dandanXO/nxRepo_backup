@@ -3,11 +3,11 @@ import { withTranslation } from 'react-i18next';
 
 import { Input } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../../../components/layouts/Button';
+import { Button } from '../../../../core-components/Button';
 import UploadingFileModal from '../../modal/UploadingFileModal';
 import { i18nUploadPaymentReceiptPage } from '../translations';
 import { I18UploadPaymentReceiptPageProps } from '../types/I18UploadPaymentReceiptPageProps';
-import { PageContent } from '../../../../components/layouts/PageContent';
+import { PageContent } from '../../../../core-components/PageContent';
 import MexicoCameraSvgIcon from './MexicoCameraSvgIcon';
 
 

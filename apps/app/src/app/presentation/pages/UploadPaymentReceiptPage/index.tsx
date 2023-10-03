@@ -14,7 +14,7 @@ import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
-import { Navigation } from '../../components/layouts/Navigation';
+import { Navigation } from '../../core-components/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
 import { IndiaUploadPaymentReceiptPage } from './i18nPage/IndiaUploadPaymentReceiptPage';

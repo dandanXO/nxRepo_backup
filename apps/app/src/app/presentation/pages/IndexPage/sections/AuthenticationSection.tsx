@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { Button } from '../../../components/layouts/Button';
+import { Button } from '../../../core-components/Button';
 import { IndexPageSagaAction } from '../userUsecaseSaga/indexPageActions';
 
 export const AuthenticationSection = () => {

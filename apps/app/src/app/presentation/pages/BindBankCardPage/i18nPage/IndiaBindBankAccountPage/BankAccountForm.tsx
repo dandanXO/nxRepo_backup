@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Input } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../../../components/layouts/Button';
+import { Button } from '../../../../core-components/Button';
 import { IIndiaBankAccountForm } from '../types/IBankAccountForm';
 import { Form } from './Form';
 import { MdInfoOutline } from '@react-icons/all-files/md/MdInfoOutline';

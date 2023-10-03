@@ -7,10 +7,10 @@ import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
-import Divider from '../../../../../components/Divider';
-import ListItem from '../../../../../components/ListItem';
+import Divider from '../../../../../core-components/Divider';
+import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
-import { Button } from '../../../../../components/layouts/Button';
+import { Button } from '../../../../../core-components/Button';
 import { GetLoanDetailResponse } from '../../../../../../api/loanService/GetLoanDetailResponse';
 import {useEffect, useMemo, useState} from "react";
 import {useDynamicChargeFeeList} from "../../../hooks/useDynamicChargeFeeList";
@@ -27,7 +27,7 @@ import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
 import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
-import { PageContent } from '../../../../../components/layouts/PageContent';
+import { PageContent } from '../../../../../core-components/PageContent';
 
 
 

@@ -1,8 +1,8 @@
 import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
+import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
 import { useCallback, useState } from 'react';
 
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
@@ -11,7 +11,7 @@ import { IChargeFeeDetails } from '../../../api/loanService/GetReservationRespon
 import { formatPrice } from '../../../modules/format/formatPrice';
 import { renderByCountry } from '../../../modules/i18n';
 import { FinalProductType } from '../../pages/IndexPage';
-import { Checkbox, ICheckboxProps } from '../Checkbox';
+import { Checkbox, ICheckboxProps } from '../../core-components/Checkbox';
 import Money from '../Money';
 import { IndiaProduct } from './i18n/IndiaProduct';
 import { MexicoProduct } from './i18n/MexicoProduct';

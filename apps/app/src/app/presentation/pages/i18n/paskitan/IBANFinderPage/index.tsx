@@ -1,5 +1,5 @@
 import IBan from '../../../../components/images/IBAN.svg';
-import { Page } from '../../../../components/layouts/Page';
+import { Page } from '../../../../core-components/Page';
 import CollapseItem from './CollapseItem';
 
 const IBANFinderPage = () => {

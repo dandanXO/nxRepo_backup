@@ -2,9 +2,9 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
-import { Button } from '../../../../components/layouts/Button';
+import { Button } from '../../../../core-components/Button';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
-import Modal from '../../../../components/Modal';
+import Modal from '../../../../core-components/Modal';
 import { i18nExtendConfirmModal } from '../../translations';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ const PakistanExtendConfirmModal = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(i18nExtendConfirmModal.namespace);
-  
+
   return (
     <Modal>
       <div className={`p-4`}>

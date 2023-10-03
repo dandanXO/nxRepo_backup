@@ -9,14 +9,14 @@ import {
     IndicatorsContainerProps,
     components,
 } from 'react-select';
-import Select from "../../components/Select";
+import Select from "../../core-components/Select";
 
 import { BankAccount } from '../../../api/userService/BankAccount';
 import { formatPrice } from '../../../modules/format/formatPrice';
 import { IndexPageProps } from '../../../reduxStore';
-import { Button } from '../../components/layouts/Button';
-import { CloseButton } from '../../components/layouts/CloseButton';
-import { Horizontal } from '../../components/layouts/Horizontal';
+import { Button } from '../../core-components/Button';
+import { CloseButton } from '../../core-components/CloseButton';
+import { Horizontal } from '../../core-components/Horizontal';
 import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
 import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
 import { FeeRateKeyEnum } from "../../../api/indexService/FeeRateKeyEnum";

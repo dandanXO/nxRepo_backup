@@ -2,13 +2,13 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
-import { Button } from '../../components/layouts/Button';
-import { Navigation } from '../../components/layouts/Navigation';
+import { Button } from '../../core-components/Button';
+import { Navigation } from '../../core-components/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import CustomServiceIcon from './CustomServiceIcon'
-import { Horizontal } from '../../components/layouts/Horizontal';
+import { Horizontal } from '../../core-components/Horizontal';
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 
 const CustomerServicePage = () => {

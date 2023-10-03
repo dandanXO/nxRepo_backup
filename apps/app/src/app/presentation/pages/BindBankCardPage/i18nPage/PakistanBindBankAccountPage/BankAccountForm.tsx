@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router';
 import Select from 'react-select';
 
 import { Input } from '@frontend/mobile/shared/ui';
-import { Button } from '../../../../components/layouts/Button';
-import { selectStyles } from '../../../../components/layouts/selectStyles';
+import { Button } from '../../../../core-components/Button';
+import { selectStyles } from '../../../../core-components/selectStyles';
 import { IPakistanBankAccountForm } from '../types/IBankAccountForm';
 import { z } from 'zod';
 import { InputValue } from '../../../../../modules/form/InputValue';
 import i18next, { t } from 'i18next';
 import { validateBankcardNo } from './validation';
-import ValidateInput from '../../../../components/ValidateInput';
+import ValidateInput from '../../../../core-components/ValidateInput';
 import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import { i18nBankBindAccountPage } from '../../translations';

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router';
 
-import { Navigation } from '../../components/layouts/Navigation';
-import { Page } from '../../components/layouts/Page';
+import { Navigation } from '../../core-components/Navigation';
+import { Page } from '../../core-components/Page';
 import { LoginForm } from './LoginForm';
 
 const LoginPage = () => {

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Overlay } from '@frontend/mobile/shared/ui';
 import { StyledLoading } from '@frontend/mobile/shared/ui';
 
-import Divider from '../../../../components/Divider';
+import Divider from '../../../../core-components/Divider';
 import { i18nUploadingFileModal } from './i18n/translations';
 
 const Container = styled.div`

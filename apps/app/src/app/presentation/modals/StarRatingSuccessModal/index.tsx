@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
-import { Button } from '../../components/layouts/Button';
-import Modal from '../../components/Modal';
-import { CloseButton } from '../../components/layouts/CloseButton';
+import { Button } from '../../core-components/Button';
+import Modal from '../../core-components/Modal';
+import { CloseButton } from '../../core-components/CloseButton';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import ThankYouIcon from './ThankYouIcon';
@@ -11,7 +11,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 const StarRatingSuccessModal = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-   
+
     const handleClose = () => {
         dispatch(modalSlice.actions.updateStarRatingSuccessModal({ show: false }));
     }

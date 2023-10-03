@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
-import { Button } from '../../components/layouts/Button';
-import Modal from '../../components/Modal';
+import { Button } from '../../core-components/Button';
+import Modal from '../../core-components/Modal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import { PagePathEnum } from '../../pages/PagePathEnum';
@@ -14,11 +14,11 @@ import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 const ReservationSuccessModal = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-   
+
     const handleOK = () => {
         dispatch(modalSlice.actions.updateReservationSuccessModal({ show: false }));
         navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`);
-        
+
     }
     const { t } = useTranslation(i18nReservationSuccessModal.namespace);
 

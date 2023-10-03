@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
-import Modal from '../../../../components/Modal';
-import { Button } from '../../../../components/layouts/Button';
+import Modal from '../../../../core-components/Modal';
+import { Button } from '../../../../core-components/Button';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import { i18nExtendConfirmModal } from '../../translations';
 

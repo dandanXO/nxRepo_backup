@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
-import { Button } from '../../components/layouts/Button';
-import Modal from '../../components/Modal';
-import { CloseButton } from '../../components/layouts/CloseButton';
+import { Button } from '../../core-components/Button';
+import Modal from '../../core-components/Modal';
+import { CloseButton } from '../../core-components/CloseButton';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { PagePathEnum } from '../../pages/PagePathEnum';

@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router';
 import { ApproveRecord } from '../../../api/loanService/ApproveRecord';
 import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
-import { Navigation } from '../../components/layouts/Navigation';
-import { PageContent } from '../../components/layouts/PageContent';
+import { Navigation } from '../../core-components/Navigation';
+import { PageContent } from '../../core-components/PageContent';
 import { PagePathEnum } from '../PagePathEnum';
 import { OrderStatusItem } from './OrderStatusItem';
 

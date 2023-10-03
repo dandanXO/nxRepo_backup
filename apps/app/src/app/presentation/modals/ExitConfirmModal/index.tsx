@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
-import { Button } from '../../components/layouts/Button';
-import Modal from '../../components/Modal';
+import { Button } from '../../core-components/Button';
+import Modal from '../../core-components/Modal';
 import { RootState } from '../../../reduxStore';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -41,7 +41,7 @@ const ExitConfirmModal = () => {
                 />
             </div>
           </div>
-           
+
         </Modal>
     );
 };

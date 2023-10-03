@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { Page } from '../../../../components/layouts/Page';
+import { Page } from '../../../../core-components/Page';
 import { useBindBankAccountForm } from '../../hooks/common/useBindBankAccountForm';
 import { useFinishedBindBankAccountForm } from '../../hooks/common/useFinishedBindBankAccountForm';
 import { useIndiaBankAccountForm } from '../../hooks/i18n/india/useIndiaBankAccountForm';

@@ -12,7 +12,7 @@ import { getToken } from '../../../../../modules/querystring/getToken';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from '../../../../components/layouts/Button';
+import { Button } from '../../../../core-components/Button';
 import { PagePathEnum } from '../../../../pages/PagePathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';

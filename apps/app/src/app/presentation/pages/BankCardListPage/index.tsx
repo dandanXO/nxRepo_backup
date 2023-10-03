@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router';
 import { useLazyGetBankCardListQuery } from '../../../api/rtk';
 import { usePostBankCardMainMutation } from '../../../api/rtk';
 import { getToken } from '../../../modules/querystring/getToken';
-import NoDataIcon from '../../components/images/NoData.svg';
-import { Navigation } from '../../components/layouts/Navigation';
+import NoDataIcon from './images/NoData.svg';
+import { Navigation } from '../../core-components/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import BankCard from './BankCard';
 import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
 import { MdAdd } from '@react-icons/all-files/md/MdAdd';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch } from 'react-redux';
-import { Page } from '../../components/layouts/Page';
-import { PageContent } from '../../components/layouts/PageContent';
+import { Page } from '../../core-components/Page';
+import { PageContent } from '../../core-components/PageContent';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import cx from 'classnames'
 

@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import { useLazyGetUserProcessQuery } from '../../../api/rtk';
-import { Navigation } from '../../components/layouts/Navigation';
-import { PageContent } from '../../components/layouts/PageContent';
+import { Navigation } from '../../core-components/Navigation';
+import { PageContent } from '../../core-components/PageContent';
 import { ProgressItem } from './ProgressItem';
 import {formatDate} from "../../../modules/format/formatDate";
 

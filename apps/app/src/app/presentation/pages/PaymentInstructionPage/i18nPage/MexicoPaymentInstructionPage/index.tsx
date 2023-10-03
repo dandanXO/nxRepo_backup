@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepayCreateResponse';
 import { getToken } from '../../../../../modules/querystring/getToken';
-import { Label } from '../../../../components/Labels';
+import { Label } from '../../../../core-components/Labels';
 import Money from '../../../../components/Money';
 import { PagePathEnum } from '../../../PagePathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';

@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../../../reduxStore';
-import { CloseButton } from '../../components/layouts/CloseButton';
-import { Navigation } from '../../components/layouts/Navigation';
+import { CloseButton } from '../../core-components/CloseButton';
+import { Navigation } from '../../core-components/Navigation';
 
 type Props = {
   onClose: () => void;

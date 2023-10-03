@@ -6,9 +6,9 @@ import { useCallback, useState } from 'react';
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
 import Money from '../../../Money';
-import { Checkbox, ICheckboxProps } from '../../../../components/Checkbox';
+import { Checkbox, ICheckboxProps } from '../../../../core-components/Checkbox';
 import { FinalProductType } from '../../../../pages/IndexPage';
-import { IChargeFeeDetails } from 'apps/app/src/app/api/loanService/GetReservationResponse';
+import { IChargeFeeDetails } from '../../../../../api/loanService/GetReservationResponse';
 import { useTranslation } from 'react-i18next';
 import { i18nProduct } from '../translations';
 

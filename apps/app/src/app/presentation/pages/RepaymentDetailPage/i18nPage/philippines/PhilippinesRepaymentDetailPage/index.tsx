@@ -15,11 +15,11 @@ import { getToken } from '../../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import { tcx } from '../../../../../../modules/tailwindcss';
 import { RootState } from '../../../../../../reduxStore';
-import Divider from '../../../../../components/Divider';
-import ListItem from '../../../../../components/ListItem';
+import Divider from '../../../../../core-components/Divider';
+import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
-import { Button } from '../../../../../components/layouts/Button';
-import { PageContent } from '../../../../../components/layouts/PageContent';
+import { Button } from '../../../../../core-components/Button';
+import { PageContent } from '../../../../../core-components/PageContent';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
 import ReservationProductsModal from '../../../../../modals/ReservationProductsModal';
 import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
@@ -46,8 +46,6 @@ const PhilippinesRepaymentDetailPage = ({
   const finalItems = useDynamicChargeFeeList(
     currentData?.chargeFeeDetail?.items
   );
-
-  // const VIPIcon = require(`../../../../../../../environments/themeModule/${NativeAppInfo.environment}/v${NativeAppInfo.uiVersion}/ic_vip_card.png`);
 
   const {
     status = '',

@@ -9,12 +9,12 @@ import { GetLoanDetailResponse } from '../../../../../api/loanService/GetLoanDet
 import { tcx } from '../../../../../modules/tailwindcss';
 import { RootState } from '../../../../../reduxStore';
 import { repaymentDetailPageSlice } from '../../../../../reduxStore/repaymentDetailPageSlice';
-import Divider from '../../../../components/Divider';
-import ListItem from '../../../../components/ListItem';
-import Modal from '../../../../components/Modal';
+import Divider from '../../../../core-components/Divider';
+import ListItem from '../../../../core-components/ListItem';
+import Modal from '../../../../core-components/Modal';
 import Money from '../../../../components/Money';
-import Select from '../../../../components/Select';
-import { Button } from '../../../../components/layouts/Button';
+import Select from '../../../../core-components/Select';
+import { Button } from '../../../../core-components/Button';
 import { i18nExtendModal } from '../../translations';
 
 interface IPhilippinesExtendModalProps {

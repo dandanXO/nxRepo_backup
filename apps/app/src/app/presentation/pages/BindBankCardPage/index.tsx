@@ -17,9 +17,9 @@ import {
 } from '../../../api/rtk';
 import { renderByCountry } from '../../../modules/i18n';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
-import { CustomPage } from '../../components/layouts/CustomPage';
-import { Navigation } from '../../components/layouts/Navigation';
-import { PageContent } from '../../components/layouts/PageContent';
+import { CustomPage } from '../../core-components/CustomPage';
+import { Navigation } from '../../core-components/Navigation';
+import { PageContent } from '../../core-components/PageContent';
 import { IndiaBindBankAccountPage } from './i18nPage/IndiaBindBankAccountPage';
 import { MexicoBindBankAccountPage } from './i18nPage/MexicoBindBankAccountPage';
 import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';

@@ -2,18 +2,18 @@ import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../components/layouts/Navigation';
-import { Page } from '../../components/layouts/Page';
+import { Navigation } from '../../core-components/Navigation';
+import { Page } from '../../core-components/Page';
 import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
 import { useState } from 'react';
 
 const AccountVerificationPage = () => {
     const navigate = useNavigate();
     const userPhoneNumber = useSelector((state: RootState) => state.app.androidAppInfo?.phoneNo) || '';
-    
+
     const [isInputChange,setIsInputChange]=useState(false)
     const [phoneNumber, setPhoneNumber] = useState<InputValue<string>>({
         data: '',
@@ -31,7 +31,7 @@ const AccountVerificationPage = () => {
         }
     }
 
-   
+
     const validatePhoneNumber = (event: any) => {
         const value = event.target.value
         const isValidPhoneNumber = !(/^\d*$/.test(value) && value.length === 10);
@@ -100,7 +100,7 @@ const AccountVerificationPage = () => {
             </div>
             <Outlet />
         </Page>
-  
+
     );
 };
 

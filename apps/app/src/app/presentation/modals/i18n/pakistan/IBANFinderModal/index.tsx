@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { Overlay } from '@frontend/mobile/shared/ui';
 
-import Divider from '../../../../components/Divider';
+import Divider from '../../../../core-components/Divider';
 import IBan from '../../../../components/images/IBAN.svg';
 
 const IBANFinderModal = (props: any) => {

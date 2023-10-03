@@ -7,7 +7,7 @@ import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { IndexPageProps } from '../../../../../reduxStore';
 import { PagePathEnum } from '../../../PagePathEnum';
-import Divider from "../../../../components/Divider";
+import Divider from "../../../../core-components/Divider";
 import {formatDate} from "../../../../../modules/format/formatDate";
 import Money from '../../../../components/Money';
 

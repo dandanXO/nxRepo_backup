@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { CloseButton } from '../../components/layouts/CloseButton';
-import { Horizontal } from '../../components/layouts/Horizontal';
+import { CloseButton } from '../../core-components/CloseButton';
+import { Horizontal } from '../../core-components/Horizontal';
 
 type Props = {
   onClose: () => void;

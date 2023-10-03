@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../reduxStore';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { modalSlice } from '../../../reduxStore/modalSlice';
@@ -14,7 +14,7 @@ const SystemCouponModal = () => {
     const dispatch = useDispatch();
     const { systemCouponModal } = useSelector((state: RootState) => state.model);
 
-    // NOTE : 
+    // NOTE :
     // 1. 若webUrl為有值，顯示本地的圖片，沒有則顯示text
     // 2. action :
     //    FORWARD_BROWSER，顯示text，webUrl跳轉到外部瀏覽器
@@ -41,7 +41,7 @@ const SystemCouponModal = () => {
             dispatch(SystemCaseActions.SystemFetchCouponSaga());
             return;
         }
-        
+
         if (isForwardBrowser) {
             window.location.href = systemCouponModal.webUrl
         } else {

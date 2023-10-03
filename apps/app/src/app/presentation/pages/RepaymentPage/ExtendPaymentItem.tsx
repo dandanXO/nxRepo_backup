@@ -10,10 +10,10 @@ import { environment } from '../../../../environments/environmentModule/environm
 import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
 import { getToken } from '../../../modules/querystring/getToken';
 import { Status } from '../../../modules/statusEnum';
-import Divider from '../../components/Divider';
-import ListItem from '../../components/ListItem';
+import Divider from '../../core-components/Divider';
+import ListItem from '../../core-components/ListItem';
 import Money from '../../components/Money';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { PagePathEnum } from '../PagePathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';

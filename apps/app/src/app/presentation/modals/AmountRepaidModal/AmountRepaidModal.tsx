@@ -9,7 +9,7 @@ import { ListItem, Overlay, flexCreator } from '@frontend/mobile/shared/ui';
 import { GetLoanDetailResponse } from '../../../api/rtk/old/getLoanDetail';
 import { getToken } from '../../../modules/querystring/getToken';
 import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
-import Divider from '../../components/Divider';
+import Divider from '../../core-components/Divider';
 import Money from '../../components/Money';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { i18nAmountRepaidModal } from './i18n/translations';

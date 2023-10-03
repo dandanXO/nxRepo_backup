@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import moment from 'moment';
 
-import { ICouponProps } from '../..';
+import { ICouponProps } from '../../index';
 import Money from '../../../Money';
 import { useTranslation } from 'react-i18next';
 import { i18nCoupon } from '../translations';

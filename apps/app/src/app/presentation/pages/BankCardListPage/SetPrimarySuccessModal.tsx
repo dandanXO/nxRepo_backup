@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { Divider, ListItem, Overlay, Title } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 
 type SetPrimarySuccessModalProps = {
   setIsSetPrimarySuccess: React.Dispatch<React.SetStateAction<boolean>>;

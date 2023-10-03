@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 
 type Props = {
   onClose: () => void;

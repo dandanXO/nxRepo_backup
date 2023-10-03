@@ -1,7 +1,7 @@
 import moment from 'moment/moment';
 
 import Money from '../../components/Money';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { PagePathEnum } from '../PagePathEnum';
 import {formatDate} from "../../../modules/format/formatDate";
 

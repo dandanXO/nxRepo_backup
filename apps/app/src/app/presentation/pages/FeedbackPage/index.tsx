@@ -2,16 +2,16 @@ import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../components/layouts/Navigation';
-import { Page } from '../../components/layouts/Page';
+import { Navigation } from '../../core-components/Navigation';
+import { Page } from '../../core-components/Page';
 import { PagePathEnum } from '../PagePathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useEffect, useState } from 'react';
 import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../api/rtk';
 import cx from 'classnames';
-import Select from '../../components/Select';
+import Select from '../../core-components/Select';
 import { transparent } from 'tailwindcss/colors';
 
 
@@ -29,7 +29,7 @@ const FeedbackPage = () => {
         isValidation: false,
         errorMessage: '',
     });
-    
+
     const [feedbackValue, setFeedbackValue] = useState<InputValue<string>>({
         data: '',
         isValidation: false,

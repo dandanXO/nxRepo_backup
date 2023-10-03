@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { IChargeFeeDetails } from '../../../../../api/loanService/GetReservationResponse';
 import { FinalProductType } from '../../../../pages/IndexPage';
-import { Checkbox, ICheckboxProps } from '../../../Checkbox';
+import { Checkbox, ICheckboxProps } from '../../../../core-components/Checkbox';
 import Money from '../../../Money';
 import { i18nProduct } from '../translations';
 

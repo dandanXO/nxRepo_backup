@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../components/layouts/Navigation';
-import { Page } from '../../components/layouts/Page';
+import { Navigation } from '../../core-components/Navigation';
+import { Page } from '../../core-components/Page';
 
 const PartnerPage = () => {
   const navigate = useNavigate();

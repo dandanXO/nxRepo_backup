@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router';
-import { Button } from '../../components/layouts/Button';
-import Modal from '../../components/Modal';
+import { Button } from '../../core-components/Button';
+import Modal from '../../core-components/Modal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reduxStore';
 import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';

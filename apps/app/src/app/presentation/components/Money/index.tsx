@@ -1,6 +1,6 @@
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
+import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
+import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
+import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';

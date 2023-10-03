@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 
 import { getToken } from '../../../modules/querystring/getToken';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { PagePathEnum } from '../PagePathEnum';
 
 export const CategoryPage = () => {

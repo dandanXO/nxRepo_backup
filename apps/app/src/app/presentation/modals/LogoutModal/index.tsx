@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { Overlay } from '@frontend/mobile/shared/ui';
 
 import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { PersonalInfoPageSagaActions } from '../../pages/PersonalInfoPage/userUsecaseSaga';
 
 const LogoutModal = () => {

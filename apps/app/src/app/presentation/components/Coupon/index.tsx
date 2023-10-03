@@ -1,4 +1,4 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
 
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';

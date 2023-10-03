@@ -13,7 +13,7 @@ import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../components/layouts/Navigation';
+import { Navigation } from '../../core-components/Navigation';
 import { PagePathEnum } from '../PagePathEnum';
 import IndiaRepaymentDetailPage from './i18nPage/india/IndiaRepaymentDetailPage';
 import MexicoRepaymentDetailPage from './i18nPage/mexico/MexicoRepaymentDetailPage';

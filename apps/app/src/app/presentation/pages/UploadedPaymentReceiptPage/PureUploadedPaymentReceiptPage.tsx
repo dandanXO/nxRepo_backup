@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Page } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { SuccessICON } from './components/i18n/SuccessICON';
 import { i18nUploadedPaymentReceiptPage } from './components/i18n/translations';
 import UploadedPaymentReceiptPage from './index';

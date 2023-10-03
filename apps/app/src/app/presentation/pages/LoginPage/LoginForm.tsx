@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../components/layouts/Button';
+import { Button } from '../../core-components/Button';
 import { PagePathEnum } from '../PagePathEnum';
 import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 import {NativeAppInfo} from "../../../persistant/nativeAppInfo";

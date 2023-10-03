@@ -1,5 +1,5 @@
-import { Button } from '../../components/layouts/Button';
-import Modal from '../../components/Modal';
+import { Button } from '../../core-components/Button';
+import Modal from '../../core-components/Modal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 
