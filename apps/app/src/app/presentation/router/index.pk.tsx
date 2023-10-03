@@ -29,7 +29,6 @@ export const AppRouter = () => {
 
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
   const payableRecords = useSelector((state: RootState) => state.indexPage.indexAPI?.payableRecords);
-  const isOrderOverdue = payableRecords && payableRecords?.some((order) => order.overdue === true);
   const pageLoading = useSelector((state:any) => state.pageLoading);
 
   // NOTICE: 純 H5 在用畫面阻擋

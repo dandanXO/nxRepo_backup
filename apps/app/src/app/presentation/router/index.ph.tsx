@@ -1,10 +1,6 @@
 import React from 'react';
 import {useSelector} from "react-redux";
 import {Route, Routes, useLocation} from "react-router";
-import i18next from "i18next";
-
-import {AllCountry} from "libs/shared/domain/src/country/AllCountry";
-import {environment} from "../../../environments/environmentModule/environment";
 
 import {RootState} from "../../../app/reduxStore";
 import AppDataCollector from "../app/../../modules/dataCollectorContainer/AppDataCollector";
@@ -37,8 +33,6 @@ import APIBoundaryModal from "../../../app/presentation/modals/APIBoundaryModal"
 export const AppRouter = () => {
   // const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
   const pageLoading = useSelector((state:any) => state.pageLoading);
-
-  const location = useLocation();
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
 
   // React.useEffect(() => {

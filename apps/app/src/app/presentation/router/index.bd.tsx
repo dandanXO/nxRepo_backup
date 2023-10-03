@@ -1,9 +1,6 @@
 import {useSelector} from "react-redux";
 import {Route, Routes, useLocation} from "react-router";
 import {RootState} from "../../reduxStore";
-import {AllCountry} from "../../../../../../libs/shared/domain/src/country/AllCountry";
-import {environment} from "../../../environments/environmentModule/environment";
-import i18next from "i18next";
 import AppDataCollector from "../../modules/dataCollectorContainer/AppDataCollector";
 import {PagePathEnum} from "../pages/PagePathEnum";
 import BindBankCardPage from "../pages/BindBankCardPage";
@@ -27,8 +24,6 @@ export
 const AppRouter = () => {
   // const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
   const pageLoading = useSelector((state:any) => state.pageLoading);
-
-  const location = useLocation();
   const apiBoundary = useSelector((state: RootState) => state.APIBoundaryModule);
 
   // React.useEffect(() => {
