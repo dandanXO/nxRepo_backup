@@ -10,7 +10,7 @@ import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateRe
 import { usePostRepayCreateMutation } from '../../api/rtk';
 import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
 import { getToken } from '../../modules/querystring/getToken';
-import { PagePathEnum } from '../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 
 const useExtendCreate = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const useExtendCreate = () => {
           // console.log('data', data);
           if (data.nextStep === 'html') {
             navigate(
-              `${PagePathEnum.PaymentCheckoutPage}?token=${getToken()}`,
+              `${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`,
               {
                 state: data,
               }
@@ -43,7 +43,7 @@ const useExtendCreate = () => {
             window.location.href = data.nextUrl;
             navigate(
               `${
-                PagePathEnum.RepaymentDetailPage
+                PageOrModalPathEnum.RepaymentDetailPage
               }?token=${getToken()}&orderNo=${props.orderNo}`,
               { replace: true }
             );

@@ -20,7 +20,7 @@ import { RadioOption } from '../../../../core-components/RadioOption';
 import Select from '../../../../core-components/Select';
 import ValidateInput from '../../../../core-components/ValidateInput';
 import { Button } from '../../../../core-components/Button';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import { validateBalance } from '../validation';
@@ -213,7 +213,7 @@ const PhilippinesRepaymentModal = ({
               if (payType === '') return;
               navigate(
                 `${
-                  PagePathEnum.RepaymentDetailPage
+                  PageOrModalPathEnum.RepaymentDetailPage
                 }/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
                 {
                   state: {
@@ -269,7 +269,7 @@ const PhilippinesRepaymentModal = ({
             });
             navigate(
               `${
-                PagePathEnum.RepaymentDetailPage
+                PageOrModalPathEnum.RepaymentDetailPage
               }?token=${getToken()}&orderNo=${getOrderNo()}`,
               { state: { orderNo } }
             );

@@ -1,6 +1,6 @@
 import { LocationChangeAction, push, back, go } from '@lagunovsky/redux-react-router';
 import { put, select, takeLatest } from 'redux-saga/effects';
-import { PagePathEnum } from '../../presentation/pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../presentation/PageOrModalPathEnum';
 import { getToken } from '../../modules/querystring/getToken';
 import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
@@ -25,25 +25,25 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
     // console.log('currentPath', currentPath)
     // console.log('routerOnLocationChangedSaga', action);
 
-    if (prevPathname === PagePathEnum.RepaymentPage ||
-      prevPathname === PagePathEnum.PersonalInfoPage ||
-      prevPathname === PagePathEnum.IndexPage) {
+    if (prevPathname === PageOrModalPathEnum.RepaymentPage ||
+      prevPathname === PageOrModalPathEnum.PersonalInfoPage ||
+      prevPathname === PageOrModalPathEnum.IndexPage) {
 
-      yield put(push(`${PagePathEnum.IndexPage}?token=${getToken()}`));
+      yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`));
 
-      if (prevPathname === PagePathEnum.IndexPage) {
+      if (prevPathname === PageOrModalPathEnum.IndexPage) {
         yield put(modalSlice.actions.updateExitConfirmModal({
           show: true
         }));
-      } 
+      }
     } else {
       // NOTE : RepaymentDetailPage route 控制
       if (
         (
-          prevPathname === PagePathEnum.RepaymentDetailPage ||
-          currentPath === PagePathEnum.RepaymentDetailPage ||
-          (currentPath.includes(PagePathEnum.RepaymentDetailPage
-          ) && currentPath.length > PagePathEnum.RepaymentDetailPage.length))
+          prevPathname === PageOrModalPathEnum.RepaymentDetailPage ||
+          currentPath === PageOrModalPathEnum.RepaymentDetailPage ||
+          (currentPath.includes(PageOrModalPathEnum.RepaymentDetailPage
+          ) && currentPath.length > PageOrModalPathEnum.RepaymentDetailPage.length))
       ) {
 
         // 預約單 modal
@@ -60,13 +60,13 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
             yield put(go(-1))
           }
         } else {
-          if (prevPathname.length > PagePathEnum.RepaymentDetailPage.length) {
-            yield put(push(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
+          if (prevPathname.length > PageOrModalPathEnum.RepaymentDetailPage.length) {
+            yield put(push(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
           }
 
           if (!isSimpleWebView()) {
-            if (prevPathname === PagePathEnum.RepaymentDetailPage) {
-              yield put(push(`${PagePathEnum.RepaymentPage}?token=${getToken()}`));
+            if (prevPathname === PageOrModalPathEnum.RepaymentDetailPage) {
+              yield put(push(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`));
             }
           }
         }
@@ -76,8 +76,8 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
       // NOTE : 上傳還款證明單成功 route 控制
       if ((prevPathname === '/v2/uploaded-payment-receipt' ||
         prevPathname === '/v2/upload-payment-receipt' ||
-        currentPath === '/v2/upload-payment-receipt') && prevPathname !== PagePathEnum.RepaymentDetailPage) {
-        yield put(push(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
+        currentPath === '/v2/upload-payment-receipt') && prevPathname !== PageOrModalPathEnum.RepaymentDetailPage) {
+        yield put(push(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`));
 
       }
     }
@@ -89,8 +89,8 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
 
   // 更新 prevPathname，以便下一次比較
   if (action.payload.action === "PUSH" &&
-    (prevPathname === PagePathEnum.RepaymentDetailPage ||
-      currentPath === PagePathEnum.RepaymentDetailPage)) {
+    (prevPathname === PageOrModalPathEnum.RepaymentDetailPage ||
+      currentPath === PageOrModalPathEnum.RepaymentDetailPage)) {
     prevPathname = currentPath;
   } else {
     prevPathname = currentPath;

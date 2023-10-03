@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
 import {Route, Routes, useLocation} from "react-router";
 import AppDataCollector from "../../modules/dataCollectorContainer/AppDataCollector";
-import {PagePathEnum} from "../pages/PagePathEnum";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import BindBankCardPage from "../pages/BindBankCardPage";
 import IBANFinderModal from "../modals/i18n/pakistan/IBANFinderModal";
 import IBANFinderPage from "../pages/i18n/paskitan/IBANFinderPage";
@@ -49,21 +49,21 @@ export const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}>
+        <Route path={PageOrModalPathEnum.BindBankcard} element={<BindBankCardPage />}>
           <Route path="iban-finder-modal" element={<IBANFinderModal />} />
         </Route>
 
-        <Route path={PagePathEnum.IBANFinderPage} element={<IBANFinderPage />} />
+        <Route path={PageOrModalPathEnum.IBANFinderPage} element={<IBANFinderPage />} />
 
 
-        <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
+        <Route path={PageOrModalPathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />
           <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
-        <Route path={PagePathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
+        <Route path={PageOrModalPathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
 
 
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />

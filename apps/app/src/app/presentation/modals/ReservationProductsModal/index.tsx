@@ -3,7 +3,7 @@ import { Button } from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { RootState } from '../../../reduxStore';
 import { LoanAgreementModal } from '../QRLoanAgreementModal';

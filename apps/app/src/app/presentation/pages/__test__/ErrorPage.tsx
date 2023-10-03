@@ -7,7 +7,7 @@ import useErrorBoundary from 'use-error-boundary';
 import { ErrorBoundary as CustomErrorBoundary } from '../../../modules/errorHandler/ErrorBoundary';
 import { Button } from '../../core-components/Button';
 import ApplicationProgressPage from '../ApplicationProgressPage';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 
 const JustRenderMe = () => {
   throw new Error('💥');

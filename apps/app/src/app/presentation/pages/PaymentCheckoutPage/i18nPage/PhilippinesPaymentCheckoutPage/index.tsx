@@ -12,7 +12,7 @@ import { tcx } from '../../../../../modules/tailwindcss';
 import Divider from '../../../../core-components/Divider';
 import Money from '../../../../components/Money';
 import { PageContent } from '../../../../core-components/PageContent';
-import { PagePathEnum } from '../../../PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
 import { i18nPaymentInstructionPage } from '../../translations';
 import getPlatformValue from './getPlatformValue';
@@ -209,7 +209,7 @@ const PhilippinesPaymentCheckoutPage = ({
           onClick={() => {
             navigate(
               `${
-                PagePathEnum.RepaymentDetailPage
+                PageOrModalPathEnum.RepaymentDetailPage
               }?token=${getToken()}&orderNo=${orderNo}`,
               { replace: true }
             );

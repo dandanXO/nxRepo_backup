@@ -5,7 +5,7 @@ import { CloseButton } from '../../core-components/CloseButton';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import ThankYouIcon from './ThankYouIcon';
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 
 const StarRatingSuccessModal = () => {
@@ -17,7 +17,7 @@ const StarRatingSuccessModal = () => {
     }
 
     const handleOK = () => {
-        navigate(`${PagePathEnum.IndexPage}?token=${getToken()}`);
+        navigate(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`);
         handleClose();
     }
 

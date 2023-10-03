@@ -11,7 +11,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
 import Divider from '../../core-components/Divider';
 import Money from '../../components/Money';
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { i18nAmountRepaidModal } from './i18n/translations';
 import {formatDate} from "../../../modules/format/formatDate";
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
@@ -100,7 +100,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
             </div>
           );
         }}
-        onCancel={() => navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`)}
+        onCancel={() => navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`)}
         enableTitleHorizontal={true}
       ></Overlay>
     </div>

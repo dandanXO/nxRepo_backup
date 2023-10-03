@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../reduxStore';
 import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
 import { getToken } from '../../../modules/querystring/getToken';
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { useDeleteUserMutation } from '../../../api/rtk';
 import { AndroidPage } from '../../../modules/window/IWindow';
 import {GlobalAppMode} from "../../../persistant/GlobalAppMode";
@@ -26,7 +26,7 @@ const DeleteAccountConfirmModal = () => {
                 <div className='text-sm text-ctext-secondary mb-5'>If you have any questions or concerns, please contact our customer service for assistance.</div>
                 <Button
                     onClick={() => {
-                        navigate(`${PagePathEnum.AccountVerificationPage}?token=${getToken()}`);
+                        navigate(`${PageOrModalPathEnum.AccountVerificationPage}?token=${getToken()}`);
                     }}
                     text={'OK'}
                 />
@@ -42,14 +42,14 @@ const DeleteAccountConfirmModal = () => {
                 <Button
                     onClick={() => {
                         deleteUser(null).unwrap().then(() => {
-                            navigate(`${PagePathEnum.LoginPage}`);
+                            navigate(`${PageOrModalPathEnum.LoginPage}`);
                             if (GlobalAppMode.mode === 'IndexWebview') {
                                 if (window['IndexTask'] && window['IndexTask']['navToPage'] && isInApp()) {
                                     window['IndexTask']['navToPage'](AndroidPage.LOGIN);
                                 }
                             }
                         }).catch((err) => {
-                            navigate(`${PagePathEnum.AccountVerificationPage}?token=${getToken()}`);
+                            navigate(`${PageOrModalPathEnum.AccountVerificationPage}?token=${getToken()}`);
                         })
                     }}
                     text={'Confirm'}

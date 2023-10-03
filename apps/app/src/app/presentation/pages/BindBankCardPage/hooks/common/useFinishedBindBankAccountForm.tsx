@@ -10,7 +10,7 @@ import { BindBankCardPageEvents } from '../../event';
 import { i18nBankBindAccountPage } from '../../translations';
 import { isSimpleWebView } from '../../../../../modules/appEnvironment/isSimpleWebView';
 import { useNavigate } from 'react-router';
-import { PagePathEnum } from '../../../PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { getToken } from 'apps/app/src/app/modules/querystring/getToken';
 import { useDispatch } from 'react-redux';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
@@ -81,7 +81,7 @@ export const useFinishedBindBankAccountForm = (props: IUseFinishedBindBankAccoun
                             navigateToAPP();
                         }
                         else {
-                            navigate(`${PagePathEnum.BankcardListPage}?token=${getToken()}`);
+                            navigate(`${PageOrModalPathEnum.BankcardListPage}?token=${getToken()}`);
                         }
 
                     },

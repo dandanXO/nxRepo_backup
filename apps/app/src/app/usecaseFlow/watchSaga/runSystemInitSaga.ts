@@ -8,7 +8,7 @@ import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoSer
 import { getToken } from '../../modules/querystring/getToken';
 import { SentryModule } from '../../modules/sentry';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
-import { PagePathEnum } from '../../presentation/pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../presentation/PageOrModalPathEnum';
 import { RootState, appStore } from '../../reduxStore';
 import { appSlice } from '../../reduxStore/appSlice';
 import { indexPageSlice } from '../../reduxStore/indexPageSlice';
@@ -34,7 +34,7 @@ export function* runSystemInitSaga() {
 
     if (NativeAppInfo.mode === 'Webview') {
       // NOTICE: 初始化 GlobalAppMode.mode
-      if (location.pathname === PagePathEnum.IndexPage) {
+      if (location.pathname === PageOrModalPathEnum.IndexPage) {
         // NOTE: 用 Android APP 開啟 H5 首頁
         // AppModeModel.setMode(AppModeEnum.IndexWebview);
 
@@ -57,9 +57,9 @@ export function* runSystemInitSaga() {
     if (NativeAppInfo.mode === 'Webview') {
 
       // NOTE: 不需要登入才能訪問的頁面
-      if (location.pathname === PagePathEnum.IBANFinderPage) {
+      if (location.pathname === PageOrModalPathEnum.IBANFinderPage) {
         //
-      } else if (location.pathname === PagePathEnum.LoginPage) {
+      } else if (location.pathname === PageOrModalPathEnum.LoginPage) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
       } else {
         // NOTE: 需要登入才能訪問的頁面

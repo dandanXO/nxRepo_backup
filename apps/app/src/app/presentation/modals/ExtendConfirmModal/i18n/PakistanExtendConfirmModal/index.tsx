@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { Button } from '../../../../core-components/Button';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Modal from '../../../../core-components/Modal';
 import { i18nExtendConfirmModal } from '../../translations';
 import { useTranslation } from 'react-i18next';
@@ -30,7 +30,7 @@ const PakistanExtendConfirmModal = () => {
             className={`ml-1 w-full`}
             text={t('Go Extension')}
             onClick={() => {
-              navigate(`${PagePathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                 state: {
                   currentData: location.state,
                 },

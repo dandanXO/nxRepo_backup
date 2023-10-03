@@ -12,7 +12,7 @@ import {IndexPageSagaAction, UserApplyProductActionPayload} from './indexPageAct
 import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
 import {SentryModule} from "../../../../modules/sentry";
 import {go, routerActions} from "@lagunovsky/redux-react-router";
-import {PagePathEnum} from "../../PagePathEnum";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {getToken} from "../../../../modules/querystring/getToken";
 import {errorFallback} from "../../../../usecaseFlow/utils/errorFallback";
 
@@ -57,7 +57,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
 
   // NOTICE: 防止錯誤後無法重新 watch
   try {
-    yield put(routerActions.push(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
+    yield put(routerActions.push(`${PageOrModalPathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
 
     let uploaded = false;
 

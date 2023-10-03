@@ -15,7 +15,7 @@ import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
 import { IndiaUploadPaymentReceiptPage } from './i18nPage/IndiaUploadPaymentReceiptPage';
 import { MexicoUploadPaymentReceiptPage } from './i18nPage/MexicoUploadPaymentReceiptPage';
@@ -99,7 +99,7 @@ const Uni18nUploadPaymentReceiptPage = (
           back={() => {
             navigate(
               `${
-                PagePathEnum.RepaymentDetailPage
+                PageOrModalPathEnum.RepaymentDetailPage
               }?token=${getToken()}&orderNo=${getOrderNo()}`,
               {
                 state: { orderNo: location.state.orderNo },

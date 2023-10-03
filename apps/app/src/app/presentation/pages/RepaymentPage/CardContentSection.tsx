@@ -2,7 +2,7 @@ import moment from 'moment/moment';
 
 import Money from '../../components/Money';
 import { Button } from '../../core-components/Button';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import {formatDate} from "../../../modules/format/formatDate";
 
 type ICardContentSection = {

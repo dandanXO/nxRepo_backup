@@ -5,7 +5,7 @@ import { Service } from '../../../../api';
 import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserInfoServiceResponse';
 import { getToken } from '../../../../modules/querystring/getToken';
 import { SentryModule } from '../../../../modules/sentry';
-import { PagePathEnum } from '../../../../presentation/pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../presentation/PageOrModalPathEnum';
 import { RootState } from '../../../../reduxStore';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../utils/catchSagaError';
@@ -21,7 +21,7 @@ export function* systemCallGetUserInfoSaga() {
     // console.log("location", location);
     // console.log("action", action);
 
-    if (location.pathname === PagePathEnum.LoginPage && token === '') {
+    if (location.pathname === PageOrModalPathEnum.LoginPage && token === '') {
       // NOTICE 登入頁不需要取得使用者資訊
       return;
     } else {

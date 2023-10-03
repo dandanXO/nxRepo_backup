@@ -15,7 +15,7 @@ import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../core-components/Button';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
@@ -131,7 +131,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                         className="flex items-center justify-center pl-5 pr-2 pb-0.5"
                         onClick={() => {
                             if (repayTypeList === undefined) return;
-                            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+                            navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                                 state: {
                                     ...location.state,
                                     paymentAmount: balance,
@@ -180,7 +180,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
                             handleRepayData({
                                 ...repaymentDetailPageInitialState.repaymentData
                             })
-                            navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
+                            navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
                         }}
                     />
                 </div>

@@ -9,7 +9,7 @@ import Coupon from '../../components/Coupon';
 import { Tags } from '../../core-components/Tag';
 import { Page } from '../../core-components/Page';
 import { Navigation } from '../../core-components/Navigation';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch } from 'react-redux';
@@ -50,7 +50,7 @@ const MyCouponListPage = () => {
         <Navigation
           title={'My Coupon'}
           back={() => {
-            navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+            navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`);
           }}
         />
       )}
@@ -77,7 +77,7 @@ const MyCouponListPage = () => {
                 couponContent={coupon.couponContent || ''}
                 status={listStatus === 'Usable' ? 'normal' : 'disabled'}
                 buttonText={listStatus === 'Usable' ? 'USE NOW' : coupon.redeemed ? 'USED' : 'EXPIRED'}
-                onClick={()=> navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`)}
+                onClick={()=> navigate(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`)}
               />
             );
           })

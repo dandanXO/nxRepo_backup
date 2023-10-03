@@ -16,7 +16,7 @@ import { usePostRepayCreateMutation } from '../../api/rtk';
 import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
 import { getToken } from '../../modules/querystring/getToken';
 import { modalSlice } from '../../reduxStore/modalSlice';
-import { PagePathEnum } from '../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
 
 const useRepayCreate = () => {
@@ -38,7 +38,7 @@ const useRepayCreate = () => {
         .then((data: PostRepayCreateResponse) => {
           if (data.nextStep === 'html') {
             navigate(
-              `${PagePathEnum.PaymentCheckoutPage}?token=${getToken()}`,
+              `${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`,
               {
                 state: data,
               }
@@ -57,7 +57,7 @@ const useRepayCreate = () => {
             ) {
               navigate(
                 `${
-                  PagePathEnum.RepaymentDetailPage
+                  PageOrModalPathEnum.RepaymentDetailPage
                 }?token=${getToken()}&orderNo=${props.orderNo}`,
                 { replace: true }
               );

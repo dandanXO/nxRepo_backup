@@ -9,7 +9,7 @@ import { Status } from '../../../modules/statusEnum';
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';
 import Money from '../../components/Money';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
@@ -54,7 +54,7 @@ const UnpaidPaymentItem = (props: GetLoanRecord) => {
         amountName={'Loan Amount'}
         orderAmount={orderAmount}
         onClick={() =>
-          navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
+          navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
             state: { orderNo, approveRecords },
           })
         }

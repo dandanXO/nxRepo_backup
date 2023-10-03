@@ -5,7 +5,7 @@ import { RootState } from '../../../reduxStore';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 
 const ExitConfirmModal = () => {
 
@@ -18,7 +18,7 @@ const ExitConfirmModal = () => {
     }
 
     const handleLeaveApp=()=>{
-      navigate(`${PagePathEnum.LoginPage}`)
+      navigate(`${PageOrModalPathEnum.LoginPage}`)
     }
 
     return (

@@ -9,7 +9,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { Status } from '../../../modules/statusEnum';
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
@@ -51,7 +51,7 @@ const ProcessingPaymentItem = (props: GetLoanRecord) => {
         amountName={'Loan Amount'}
         orderAmount={orderAmount}
         onClick={() =>
-          navigate(`${PagePathEnum.OrderStatusPage}?token=${getToken()}`, {
+          navigate(`${PageOrModalPathEnum.OrderStatusPage}?token=${getToken()}`, {
             state: { orderNo, approveRecords },
           })
         }

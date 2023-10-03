@@ -6,7 +6,7 @@ import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import Modal from '../../../../core-components/Modal';
 import { Button } from '../../../../core-components/Button';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { i18nExtendConfirmModal } from '../../translations';
 
 const PhilippinesExtendConfirmModal = () => {
@@ -43,7 +43,7 @@ const PhilippinesExtendConfirmModal = () => {
             onClick={() => {
               navigate(
                 `${
-                  PagePathEnum.RepaymentDetailPage
+                  PageOrModalPathEnum.RepaymentDetailPage
                 }/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
                 {
                   state: {

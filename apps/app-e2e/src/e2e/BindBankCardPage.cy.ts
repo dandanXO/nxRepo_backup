@@ -1,4 +1,4 @@
-import {PagePathEnum} from "../../../app/src/app/presentation/pages/PagePathEnum";
+import {PageOrModalPathEnum} from "../../../app/src/app/presentation/PageOrModalPathEnum";
 import {GetBindCardDropListResponse} from "../../../app/src/app/api/rtk/old/GetBindCardDropList";
 
 
@@ -12,7 +12,7 @@ describe("BindBankCardPage", () => {
     const getBindBankCardResponse: GetBindCardDropListResponse = require("../fixtures/bindBankCardPage/bank-bind-info_normal.json");
     cy.intercept("get", "/api/v2/bank-bind/info", getBindBankCardResponse)
 
-    cy.visitAPP(PagePathEnum.BindBankcard);
+    cy.visitAPP(PageOrModalPathEnum.BindBankcard);
 
   })
 

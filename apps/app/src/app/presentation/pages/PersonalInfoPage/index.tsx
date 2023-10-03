@@ -8,19 +8,20 @@ import { Outlet, useNavigate } from 'react-router';
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 import { getToken } from '../../../modules/querystring/getToken';
 import { RootState } from '../../../reduxStore';
-import UserIcon from './UserIcon.svg';
+import UserIcon from './images/UserIcon.svg';
 import { Button } from '../../core-components/Button';
 import { Page } from '../../core-components/Page';
 import { LoanOverViewSection } from '../../core-components/sections/LoanOverViewSection';
 import { IndexPageSagaAction } from '../IndexPage/userUsecaseSaga/indexPageActions';
-import { PagePathEnum } from '../PagePathEnum';
-import Card from './Card';
-import LinkItem from './LinkItem';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import Card from './components/Card';
+import LinkItem from './components/LinkItem';
 import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
 import StarRatingModal from '../../modals/StarRatingModal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import StarRatingSuccessModal from '../../modals/StarRatingSuccessModal';
+import {useGoToLogout} from "../../goTo/goToLogout";
 
 const PersonalInfoPage = () => {
   const navigate = useNavigate();
@@ -40,8 +41,10 @@ const PersonalInfoPage = () => {
     dispatch(IndexPageSagaAction.user.authenticateSaga());
   };
 
+  const goToLogout = useGoToLogout();
+
   const onUserClickToLogout = () => {
-    navigate(`${PagePathEnum.PersonalInfoPage}/log-out-modal`);
+    goToLogout()
   };
 
   return (
@@ -91,23 +94,23 @@ const PersonalInfoPage = () => {
         )}
         {/*NOTE: 顯示綁卡項目*/}
         <Card>
-          <LinkItem title={'Bank Card'} to={`${PagePathEnum.BankcardListPage}?token=${getToken()}`} />
+          <LinkItem title={'Bank Card'} to={`${PageOrModalPathEnum.BankcardListPage}?token=${getToken()}`} />
         </Card>
 
         <Card>
-          <LinkItem title={'Privacy Policy'} to={`${PagePathEnum.PrivacyPolicyPage}?token=${getToken()}`} />
-          <LinkItem title={'Disclosure Statement'} to={`${PagePathEnum.DisclosureStatementPage}?token=${getToken()}`} />
+          <LinkItem title={'Privacy Policy'} to={`${PageOrModalPathEnum.PrivacyPolicyPage}?token=${getToken()}`} />
+          <LinkItem title={'Disclosure Statement'} to={`${PageOrModalPathEnum.DisclosureStatementPage}?token=${getToken()}`} />
         </Card>
 
         <Card>
           {/*NOTE: 是否顯示合作夥伴*/}
-          {app?.init?.partnership ? <LinkItem title={'Partner'} to={`${PagePathEnum.PartnerPage}?token=${getToken()}`} /> : <></>}
+          {app?.init?.partnership ? <LinkItem title={'Partner'} to={`${PageOrModalPathEnum.PartnerPage}?token=${getToken()}`} /> : <></>}
           {/*NOTE: 顯示客服*/}
-          <LinkItem title={'Customer Service'} to={`${PagePathEnum.CustomerServicePage}?token=${getToken()}`} />
+          <LinkItem title={'Customer Service'} to={`${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`} />
         </Card>
 
         <Card>
-          <LinkItem title={'My coupon'} to={`${PagePathEnum.MyCouponListPage}?token=${getToken()}`} />
+          <LinkItem title={'My coupon'} to={`${PageOrModalPathEnum.MyCouponListPage}?token=${getToken()}`} />
         </Card>
 
         {/*NOTE: 五星好評*/}
@@ -115,7 +118,7 @@ const PersonalInfoPage = () => {
         <Card><LinkItem title={'Rate Us 5 stars'} to={''} onClick={()=>dispatch(modalSlice.actions.updateStarRatingModal({show:true}))}/></Card>
         <div className='font-bold text-base m-2 mt-6 '>Setting</div>
         <Card>
-          <LinkItem title={'Delete My Account'} to={`${PagePathEnum.DeleteAccountPage}?token=${getToken()}`} />
+          <LinkItem title={'Delete My Account'} to={`${PageOrModalPathEnum.DeleteAccountPage}?token=${getToken()}`} />
         </Card>
       </div>
 

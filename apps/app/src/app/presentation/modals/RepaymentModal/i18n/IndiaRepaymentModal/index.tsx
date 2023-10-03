@@ -13,7 +13,7 @@ import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../core-components/Button';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
@@ -106,7 +106,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           className="mt-1 flex w-full items-center justify-center rounded-lg border border-solid border-[#aaaaaa] py-2.5 pl-5"
           onClick={() => {
             if (isRepayTypesFetching) return;
-            navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+            navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
               state: {
                 ...location.state,
                 paymentAmount: balance,
@@ -148,7 +148,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div className={`mr-1.5 w-full`}>
           <Button
             onClick={() => {
-              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
             }}
             text={t('Cancel')}
             type={'ghost'}

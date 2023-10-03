@@ -6,7 +6,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';
 import { PageContent } from '../../core-components/PageContent';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { OrderStatusItem } from './OrderStatusItem';
 
 const OrderStatusPage = (props: any) => {
@@ -20,7 +20,7 @@ const OrderStatusPage = (props: any) => {
         <Navigation
           title={'Order Status'}
           back={() => {
-            navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
+            navigate(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`);
           }}
         />
       )}

@@ -9,7 +9,7 @@ import { USER_AUTH_STATE } from '../../domain/user/USER_AUTH_STATE';
 import { getToken } from '../../modules/querystring/getToken';
 import { RootState } from '../../reduxStore';
 import { IndexPageSagaAction } from '../pages/IndexPage/userUsecaseSaga/indexPageActions';
-import { PagePathEnum } from '../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import { SystemCaseActions } from '../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import { useEffect } from 'react';
 import { repaymentPageInitialState, repaymentPageSlice } from '../../reduxStore/repaymentPageSlice';
@@ -22,15 +22,15 @@ export const TabBar = (props: Props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   // console.log("location", location);
-  const isInPage = (pageName: PagePathEnum, exact?: boolean) => {
-    if (pageName === PagePathEnum.IndexPage) {
+  const isInPage = (pageName: PageOrModalPathEnum, exact?: boolean) => {
+    if (pageName === PageOrModalPathEnum.IndexPage) {
       return location.pathname === pageName;
     }
     return location.pathname.indexOf(pageName) > -1;
   };
 
   useEffect(() => {
-      if (location.pathname !== PagePathEnum.RepaymentPage) {
+      if (location.pathname !== PageOrModalPathEnum.RepaymentPage) {
           dispatch(repaymentPageSlice.actions.updateRepaymentPage({
               paymentType: repaymentPageInitialState.paymentType,
               scrollPosition: repaymentPageInitialState.scrollPosition
@@ -44,14 +44,14 @@ export const TabBar = (props: Props) => {
       <div
         className={'flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
-          navigate(`${PagePathEnum.IndexPage}?token=${getToken()}`);
+          navigate(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`);
         }}
       >
-        <RiMoneyDollarCircleFill className={isInPage(PagePathEnum.IndexPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
+        <RiMoneyDollarCircleFill className={isInPage(PageOrModalPathEnum.IndexPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
         <div
           className={cx('text-xs mt-1.5',{
-            'text-primary-main': isInPage(PagePathEnum.IndexPage),
-            'text-cstate-disable-main': !isInPage(PagePathEnum.IndexPage),
+            'text-primary-main': isInPage(PageOrModalPathEnum.IndexPage),
+            'text-cstate-disable-main': !isInPage(PageOrModalPathEnum.IndexPage),
           })}
         >
           Loan
@@ -65,15 +65,15 @@ export const TabBar = (props: Props) => {
           if (userStatus === USER_AUTH_STATE.ready) {
             dispatch(IndexPageSagaAction.user.authenticateSaga());
           } else {
-            navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
+            navigate(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`);
           }
         }}
       >
-        <MdPayment className={isInPage(PagePathEnum.RepaymentPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
+        <MdPayment className={isInPage(PageOrModalPathEnum.RepaymentPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
         <div
           className={cx('text-xs mt-1.5',{
-            'text-primary-main': isInPage(PagePathEnum.RepaymentPage),
-            'text-cstate-disable-main': !isInPage(PagePathEnum.RepaymentPage),
+            'text-primary-main': isInPage(PageOrModalPathEnum.RepaymentPage),
+            'text-cstate-disable-main': !isInPage(PageOrModalPathEnum.RepaymentPage),
           })}
         >
           Payment
@@ -84,14 +84,14 @@ export const TabBar = (props: Props) => {
       <div
         className={'flex flex-1 flex-col items-center justify-center'}
         onClick={() => {
-          navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+          navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`);
         }}
       >
-        <RiUser3Line className={isInPage(PagePathEnum.PersonalInfoPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
+        <RiUser3Line className={isInPage(PageOrModalPathEnum.PersonalInfoPage) ? 'fill-primary-main' : 'fill-cstate-disable-main'} size={24} />
         <div
           className={cx('text-xs mt-1.5',{
-            'text-primary-main': isInPage(PagePathEnum.PersonalInfoPage),
-            'text-cstate-disable-main': !isInPage(PagePathEnum.PersonalInfoPage),
+            'text-primary-main': isInPage(PageOrModalPathEnum.PersonalInfoPage),
+            'text-cstate-disable-main': !isInPage(PageOrModalPathEnum.PersonalInfoPage),
           })}
         >
           Account

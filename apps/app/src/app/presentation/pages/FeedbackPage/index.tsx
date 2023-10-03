@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router';
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../core-components/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
@@ -100,7 +100,7 @@ const FeedbackPage = () => {
                     enableClose: false,
                     enableIcon: false,
                     onConfirm: () => {
-                        navigate(`${PagePathEnum.CustomerServicePage}?token=${getToken()}`);
+                        navigate(`${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`);
                     },
                 });
             })
@@ -113,7 +113,7 @@ const FeedbackPage = () => {
             <Navigation
                 title={'Feedback'}
                 back={() => {
-                    navigate(`${PagePathEnum.CustomerServicePage}?token=${getToken()}`);
+                    navigate(`${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`);
                 }}
             />
             <div className={`p-4 pt-0.5 h-[calc(100vh-56px)] flex flex-col`}>

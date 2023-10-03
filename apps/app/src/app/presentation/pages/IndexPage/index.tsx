@@ -21,7 +21,7 @@ import {AuthorizationModal} from '../../modals/AuthorizationModal';
 import {LoanAgreementModal} from '../../modals/QRLoanAgreementModal';
 import {QRSuccessModal} from '../../modals/QRSuccessModal';
 import {QuickRepaymentSummaryModal} from '../../modals/QuickRepaymentSummaryModal';
-import {PagePathEnum} from '../PagePathEnum';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 import {NoticeOrderOrQuotaRejectedSection} from './noticeSections/NoticeOrderOrQuotaRejectedSection';
 import {NoticeUserAuthedEmptyQuotaSection} from './noticeSections/NoticeUserAuthedEmptyQuotaSection';
 import {NoticeUserInProgressAuthStatusSections} from './noticeSections/NoticeUserInProgressAuthStatusSections';
@@ -143,7 +143,7 @@ const IndexPage = () => {
   }, [disableClickReacquireCredit]);
 
   const onUserClickViewApplicationProgress = () => {
-    navigate(`${PagePathEnum.ApplicationProgressPage}?token=${getToken()}`);
+    navigate(`${PageOrModalPathEnum.ApplicationProgressPage}?token=${getToken()}`);
   }
 
 
@@ -457,7 +457,7 @@ const IndexPage = () => {
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
   const onClickToCustomerService = useCallback(() => {
-    navigate(PagePathEnum.CustomerServicePage);
+    navigate(PageOrModalPathEnum.CustomerServicePage);
   }, []);
 
   // NOTE: Modal

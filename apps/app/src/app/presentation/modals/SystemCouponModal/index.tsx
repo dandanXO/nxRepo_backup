@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../reduxStore';
 import { Button } from '../../core-components/Button';
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { SystemCaseActions } from '../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
@@ -46,10 +46,10 @@ const SystemCouponModal = () => {
             window.location.href = systemCouponModal.webUrl
         } else {
             const nextUrl = {
-                'FORWARD_COUPON_PAGE': `${PagePathEnum.MyCouponListPage}?token=${getToken()}`,
-                'FORWARD_CUSTOMER_SERVICE': `${PagePathEnum.CustomerServicePage}?token=${getToken()}`,
-                'FORWARD_LOAN_RECORD': `${PagePathEnum.RepaymentPage}?token=${getToken()}`,
-                'FORWARD_BIND_BANKCARD': `${PagePathEnum.BindBankcard}?token=${getToken()}`,
+                'FORWARD_COUPON_PAGE': `${PageOrModalPathEnum.MyCouponListPage}?token=${getToken()}`,
+                'FORWARD_CUSTOMER_SERVICE': `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`,
+                'FORWARD_LOAN_RECORD': `${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`,
+                'FORWARD_BIND_BANKCARD': `${PageOrModalPathEnum.BindBankcard}?token=${getToken()}`,
             }[systemCouponModal?.action];
 
             navigate(nextUrl as string);

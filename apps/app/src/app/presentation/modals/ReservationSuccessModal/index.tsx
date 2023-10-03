@@ -3,7 +3,7 @@ import { Button } from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { i18nReservationSuccessModal } from './i18n/translations';
@@ -17,7 +17,7 @@ const ReservationSuccessModal = () => {
 
     const handleOK = () => {
         dispatch(modalSlice.actions.updateReservationSuccessModal({ show: false }));
-        navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`);
+        navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`);
 
     }
     const { t } = useTranslation(i18nReservationSuccessModal.namespace);

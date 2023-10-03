@@ -20,7 +20,7 @@ import Coupon, { ICouponProps } from '../../components/Coupon';
 import Modal from '../../core-components/Modal';
 import { Button } from '../../core-components/Button';
 import { Navigation } from '../../core-components/Navigation';
-import { PagePathEnum } from '../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { i18nRepaymentCouponModal } from './i18n/translations';
 
 type ICouponOption = ICouponProps & {
@@ -212,7 +212,7 @@ const RepaymentCouponModal = () => {
               );
               navigate(
                 `${
-                  PagePathEnum.RepaymentDetailPage
+                  PageOrModalPathEnum.RepaymentDetailPage
                 }/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
                 {
                   state: {
@@ -238,7 +238,7 @@ const RepaymentCouponModal = () => {
         back={() => {
           navigate(
             `${
-              PagePathEnum.RepaymentDetailPage
+              PageOrModalPathEnum.RepaymentDetailPage
             }/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
             {
               state: {

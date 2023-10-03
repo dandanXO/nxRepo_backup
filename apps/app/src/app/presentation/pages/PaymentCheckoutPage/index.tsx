@@ -10,7 +10,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentCheckoutPage';
 import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentCheckoutPage';
 
@@ -35,7 +35,7 @@ const PaymentCheckoutPage = () => {
           back={() => {
             navigate(
               `${
-                PagePathEnum.RepaymentDetailPage
+                PageOrModalPathEnum.RepaymentDetailPage
               }/repayment-modal?token=${getToken()}&orderNo=${state.orderNo}`,
               {
                 state: {},

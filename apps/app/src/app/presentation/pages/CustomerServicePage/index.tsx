@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { RootState } from '../../../reduxStore';
 import { Button } from '../../core-components/Button';
 import { Navigation } from '../../core-components/Navigation';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import CustomServiceIcon from './CustomServiceIcon'
@@ -23,7 +23,7 @@ const CustomerServicePage = () => {
                         className='bg-transparent top-0 left-0 w-full'
                         title={'Customer Service'}
                         back={() => {
-                            navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+                            navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`);
                         }}
                     />)}
                 <div className='flex justify-center grow items-center'>
@@ -70,7 +70,7 @@ const CustomerServicePage = () => {
                         <div className='self-center'>
                             <Button text={'Go'} className='w-auto py-1 px-5'
                                 onClick={() => {
-                                    navigate(`${PagePathEnum.FeedbackPage}?token=${getToken()}`);
+                                    navigate(`${PageOrModalPathEnum.FeedbackPage}?token=${getToken()}`);
                                 }} />
                         </div>
                     </div>

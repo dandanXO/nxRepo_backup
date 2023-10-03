@@ -14,7 +14,7 @@ import { getToken } from '../../../modules/querystring/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import IndiaRepaymentDetailPage from './i18nPage/india/IndiaRepaymentDetailPage';
 import MexicoRepaymentDetailPage from './i18nPage/mexico/MexicoRepaymentDetailPage';
 import PakistanRepaymentDetailPage from './i18nPage/pakistan/PakistanRepaymentDetailPage';
@@ -41,7 +41,7 @@ const RepaymentDetailPage = (props: any) => {
         <Navigation
           title={'Payment Details'}
           back={() => {
-            navigate(`${PagePathEnum.RepaymentPage}?token=${getToken()}`);
+            navigate(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`);
           }}
         />
       )}

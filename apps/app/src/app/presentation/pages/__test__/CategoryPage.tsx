@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../core-components/Button';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 
 export const CategoryPage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export const CategoryPage = () => {
         dataTestingID={'apply'}
         text={'Test'}
         onClick={() => {
-          navigate(`${PagePathEnum.MyCouponListPage}?token=${getToken()}`);
+          navigate(`${PageOrModalPathEnum.MyCouponListPage}?token=${getToken()}`);
         }}
       />
 

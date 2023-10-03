@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 
 const OnlineCustomerServicePage = () => {
@@ -16,7 +16,7 @@ const OnlineCustomerServicePage = () => {
       <Navigation
         title={'Customer Service'}
         back={() => {
-          navigate(`${PagePathEnum.CustomerServicePage}?token=${getToken()}`);
+          navigate(`${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`);
         }}
       />
       <iframe className={`w-full grow`} src={indexPage?.indexAPI?.customerServiceUrl} title="" />

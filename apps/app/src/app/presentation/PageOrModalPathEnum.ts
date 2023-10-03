@@ -1,4 +1,4 @@
-export enum PagePathEnum {
+export enum PageOrModalPathEnum {
   IndexPage = '/v2',
   LoginPage = '/v2/login',
   RepaymentPage = '/v2/repayment',

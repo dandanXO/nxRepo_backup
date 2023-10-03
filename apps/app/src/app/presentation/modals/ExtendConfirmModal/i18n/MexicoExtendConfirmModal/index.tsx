@@ -5,7 +5,7 @@ import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import Modal from '../../../../core-components/Modal';
 import { Button } from '../../../../core-components/Button';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { i18nExtendConfirmModal } from '../../translations';
 
 const MexicoExtendConfirmModal = () => {
@@ -26,7 +26,7 @@ const MexicoExtendConfirmModal = () => {
           <Button onClick={() => navigate(-1)} type={'ghost'} ghostTheme={'none'} text={t('Next Time')} className={`mr-1 w-full`} />
           <Button outlineTheme={'round'} className={`ml-1 w-full whitespace-nowrap`} text={t('Go Extension')}
             onClick={() => {
-              navigate(`${PagePathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
                 state: {
                   currentData: location.state,
                 },

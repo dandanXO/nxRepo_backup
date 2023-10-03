@@ -6,7 +6,7 @@ import { usePostBankCardMainMutation } from '../../../api/rtk';
 import { getToken } from '../../../modules/querystring/getToken';
 import NoDataIcon from './images/NoData.svg';
 import { Navigation } from '../../core-components/Navigation';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import BankCard from './BankCard';
 import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
 import { MdAdd } from '@react-icons/all-files/md/MdAdd';
@@ -75,7 +75,7 @@ const BankCardListPage = () => {
       <Navigation
         title={'Bank Card'}
         back={() => {
-          navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+          navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`);
         }}
       />
       {currentData && currentData.bankAccounts && currentData.bankAccounts.length !== 0 ? (
@@ -103,7 +103,7 @@ const BankCardListPage = () => {
           </div>
           <div className={`flex flex-col items-center justify-center pt-4`}>
             <button
-              onClick={() => navigate(`${PagePathEnum.BindBankcard}?token=${getToken()}`)}
+              onClick={() => navigate(`${PageOrModalPathEnum.BindBankcard}?token=${getToken()}`)}
               className={`mb-3 flex h-6 w-6 items-center justify-center rounded border-2 border-solid border-primary-main  text-2xl font-bold text-primary-main`}
             >
               <MdAdd className='fill-primary-main'/>

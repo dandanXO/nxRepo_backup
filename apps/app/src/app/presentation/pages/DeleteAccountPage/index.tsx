@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../core-components/Button';
 
@@ -15,7 +15,7 @@ const DeleteAccountPage = () => {
             <Navigation
                 title={'Delete My Account'}
                 back={() => {
-                    navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+                    navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`);
                 }}
             />
             <div className={`p-4 pt-0 grow flex flex-col`}>
@@ -37,7 +37,7 @@ const DeleteAccountPage = () => {
                     <div className={`mr-1.5 w-full`}>
                         <Button
                             onClick={() => {
-                                navigate(`${PagePathEnum.AccountVerificationPage}?token=${getToken()}`);
+                                navigate(`${PageOrModalPathEnum.AccountVerificationPage}?token=${getToken()}`);
                             }}
                             text={'Continue'}
                             type={'ghost'}
@@ -46,7 +46,7 @@ const DeleteAccountPage = () => {
                     <div className={` ml-1.5 w-full`}>
                         <Button
                             onClick={() => {
-                                navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+                                navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`);
                             }}
                             text={'Don’t Delete'}
                             className={`border-primary-main bg-primary-main border-[1.5px] border-solid text-white`}

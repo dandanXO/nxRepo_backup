@@ -2,7 +2,7 @@ import {useSelector} from "react-redux";
 import {Route, Routes, useLocation} from "react-router";
 import {RootState} from "../../reduxStore";
 import AppDataCollector from "../../modules/dataCollectorContainer/AppDataCollector";
-import {PagePathEnum} from "../pages/PagePathEnum";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import BindBankCardPage from "../pages/BindBankCardPage";
 import RepaymentDetailPage from "../pages/RepaymentDetailPage";
 import RepaymentModal from "../modals/RepaymentModal";
@@ -38,16 +38,16 @@ const AppRouter = () => {
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
         {/* <Route path={PagePathEnum.LoginPage} element={<LoginPage />}/> */}
-        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}/>
-        <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
+        <Route path={PageOrModalPathEnum.BindBankcard} element={<BindBankCardPage />}/>
+        <Route path={PageOrModalPathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />
           <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
-        <Route path={PagePathEnum.PaymentCheckoutPage} element={<PaymentCheckoutPage />}/>
-        <Route path={PagePathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
+        <Route path={PageOrModalPathEnum.PaymentCheckoutPage} element={<PaymentCheckoutPage />}/>
+        <Route path={PageOrModalPathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />

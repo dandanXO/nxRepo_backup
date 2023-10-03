@@ -6,7 +6,7 @@ import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepa
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { Label } from '../../../../core-components/Labels';
 import Money from '../../../../components/Money';
-import { PagePathEnum } from '../../../PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
 import CopyButton from '../../components/CopyButton';
 
@@ -89,7 +89,7 @@ const MexicoPaymentCheckoutPage = ({
           onClick={() => {
             navigate(
               `${
-                PagePathEnum.RepaymentDetailPage
+                PageOrModalPathEnum.RepaymentDetailPage
               }?token=${getToken()}&orderNo=${orderNo}`,
               { replace: true }
             );

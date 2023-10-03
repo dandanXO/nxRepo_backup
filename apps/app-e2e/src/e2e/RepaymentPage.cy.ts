@@ -1,5 +1,5 @@
 import {GetLoanRecordListReponse} from "../../../app/src/app/api/loanService/GetLoanRecordListReponse";
-import {PagePathEnum} from "../../../app/src/app/presentation/pages/PagePathEnum";
+import {PageOrModalPathEnum} from "../../../app/src/app/presentation/PageOrModalPathEnum";
 
 describe("RepaymentPage", () => {
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe("RepaymentPage", () => {
     })
 
 
-   cy.visitApp(PagePathEnum.RepaymentPage)
+   cy.visitApp(PageOrModalPathEnum.RepaymentPage)
 
   })
 

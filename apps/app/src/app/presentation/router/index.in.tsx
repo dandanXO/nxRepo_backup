@@ -39,7 +39,7 @@ import LoginPage from '../pages/LoginPage';
 import MyCouponListPage from '../pages/MyCouponListPage';
 import OnlineCustomerServicePage from '../pages/OnlineCustomerServicePage';
 import OrderStatusPage from '../pages/OrderStatusPage';
-import { PagePathEnum } from '../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import PartnerPage from '../pages/PartnerPage';
 import PaymentResultPage from '../pages/PaymentResultPage';
 import PersonalInfoPage from '../pages/PersonalInfoPage';
@@ -191,34 +191,34 @@ export const AppRouter = () => {
       <Routes>
         {/*NOTICE: refactor me - PK*/}
         <Route
-          path={PagePathEnum.IBANFinderPage}
+          path={PageOrModalPathEnum.IBANFinderPage}
           element={<IBANFinderPage />}
         />
         {/*<Route path="/v2/auth" element={<AuthPage />} />*/}
         {/*<Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />*/}
 
-        <Route path={PagePathEnum.LoginPage} element={<LoginPage />}>
+        <Route path={PageOrModalPathEnum.LoginPage} element={<LoginPage />}>
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
 
-        <Route path={PagePathEnum.IndexPage} element={<IndexPage />}>
+        <Route path={PageOrModalPathEnum.IndexPage} element={<IndexPage />}>
           <Route
             path="quick-repayment-modal"
             element={<QuickRepaymentModal />}
           />
         </Route>
         <Route
-          path={PagePathEnum.PrivacyPolicyModal}
+          path={PageOrModalPathEnum.PrivacyPolicyModal}
           element={<PrivacyPolicyModal />}
         />
 
         <Route
-          path={PagePathEnum.ApplicationProgressPage}
+          path={PageOrModalPathEnum.ApplicationProgressPage}
           element={<ApplicationProgressPage />}
         />
 
         <Route
-          path={PagePathEnum.CustomerServicePage}
+          path={PageOrModalPathEnum.CustomerServicePage}
           element={<CustomerServicePage />}
         />
         <Route
@@ -226,28 +226,28 @@ export const AppRouter = () => {
           element={<OnlineCustomerServicePage />}
         />
         <Route
-          path={PagePathEnum.DisclosureStatementPage}
+          path={PageOrModalPathEnum.DisclosureStatementPage}
           element={<DisclosureStatementPage />}
         />
 
         <Route
-          path={PagePathEnum.BankcardListPage}
+          path={PageOrModalPathEnum.BankcardListPage}
           element={<BankCardListPage />}
         />
-        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}>
+        <Route path={PageOrModalPathEnum.BindBankcard} element={<BindBankCardPage />}>
           <Route path="iban-finder-modal" element={<IBANFinderModal />} />
         </Route>
 
-        <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
+        <Route path={PageOrModalPathEnum.RepaymentPage} element={<LoanRecordPage />} />
 
         {/*NOTICE: order: processing, reject*/}
         <Route
-          path={PagePathEnum.OrderStatusPage}
+          path={PageOrModalPathEnum.OrderStatusPage}
           element={<OrderStatusPage />}
         />
 
         <Route
-          path={PagePathEnum.RepaymentDetailPage}
+          path={PageOrModalPathEnum.RepaymentDetailPage}
           element={<RepaymentDetailPage />}
         >
           <Route path="repayment-modal" element={<RepaymentModal />} />
@@ -264,7 +264,7 @@ export const AppRouter = () => {
         </Route>
 
         <Route
-          path={PagePathEnum.PaymentResultPage}
+          path={PageOrModalPathEnum.PaymentResultPage}
           element={<PaymentResultPage />}
         />
         <Route
@@ -281,29 +281,29 @@ export const AppRouter = () => {
         />
 
         <Route
-          path={PagePathEnum.PersonalInfoPage}
+          path={PageOrModalPathEnum.PersonalInfoPage}
           element={<PersonalInfoPage />}
         >
           <Route path="log-out-modal" element={<LogoutModal />} />
         </Route>
         <Route
-          path={PagePathEnum.MyCouponListPage}
+          path={PageOrModalPathEnum.MyCouponListPage}
           element={<MyCouponListPage />}
         />
-        <Route path={PagePathEnum.PartnerPage} element={<PartnerPage />} />
-        <Route path={PagePathEnum.FeedbackPage} element={<FeedbackPage />} />
+        <Route path={PageOrModalPathEnum.PartnerPage} element={<PartnerPage />} />
+        <Route path={PageOrModalPathEnum.FeedbackPage} element={<FeedbackPage />} />
         <Route
-          path={PagePathEnum.PrivacyPolicyPage}
+          path={PageOrModalPathEnum.PrivacyPolicyPage}
           element={<PrivacyPolicyPage />}
         />
 
         {/*<Route path="/log-out-modal" element={<LogoutModal />} />*/}
         <Route
-          path={PagePathEnum.DeleteAccountPage}
+          path={PageOrModalPathEnum.DeleteAccountPage}
           element={<DeleteAccountPage />}
         />
         <Route
-          path={PagePathEnum.AccountVerificationPage}
+          path={PageOrModalPathEnum.AccountVerificationPage}
           element={<AccountVerificationPage />}
         >
           <Route
@@ -325,10 +325,10 @@ export const AppRouter = () => {
 
       {/*TODO: refactor me*/}
       {[
-        PagePathEnum.IndexPage as string,
-        PagePathEnum.RepaymentPage as string,
-        PagePathEnum.PersonalInfoPage as string,
-        PagePathEnum.PersonalInfoPage + '/log-out-modal',
+        PageOrModalPathEnum.IndexPage as string,
+        PageOrModalPathEnum.RepaymentPage as string,
+        PageOrModalPathEnum.PersonalInfoPage as string,
+        PageOrModalPathEnum.PersonalInfoPage + '/log-out-modal',
       ].indexOf(location.pathname) > -1 && (
         <TabBar hasOrder={isOrderOverdue ?? false} />
       )}

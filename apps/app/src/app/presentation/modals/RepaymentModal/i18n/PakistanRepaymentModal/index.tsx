@@ -16,7 +16,7 @@ import Money from '../../../../components/Money';
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../core-components/Button';
 import { selectStyles } from '../../../../core-components/selectStyles';
-import { PagePathEnum } from '../../../../pages/PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
@@ -119,7 +119,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             className="flex items-center justify-center border-b border-solid border-[#aaaaaa] py-1.5 pl-5 pr-4"
             onClick={() => {
               if (isRepayTypesFetching) return;
-              navigate(`${PagePathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
                 state: {
                   ...location.state,
                   paymentAmount: balance,
@@ -175,7 +175,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             text={t('Cancel')}
             onClick={() => {
               if (isRepayTypesFetching) return;
-              navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
             }}
           />
         </div>

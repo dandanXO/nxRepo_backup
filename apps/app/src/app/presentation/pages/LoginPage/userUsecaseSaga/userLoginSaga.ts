@@ -5,7 +5,7 @@ import { put, take, race } from 'redux-saga/effects';
 import { APIV3, LoginResponse } from '../../../../api/rtk';
 import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { PagePathEnum } from '../../PagePathEnum';
+import { PageOrModalPathEnum } from '../../../PageOrModalPathEnum';
 import { UserLoginActionPayload } from './index';
 import { appStore } from 'apps/app/src/app/reduxStore';
 import { SystemCaseActions } from 'apps/app/src/app/usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
@@ -29,7 +29,7 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
         const token = success.payload.token;
         yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB));
         yield put(appSlice.actions.updateToken(token));
-        yield put(push(`${PagePathEnum.IndexPage}?token=${token}`));
+        yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${token}`));
         yield take(ROUTER_ON_LOCATION_CHANGED);
       }
     }

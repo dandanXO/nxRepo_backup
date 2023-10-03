@@ -6,7 +6,7 @@ import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { IndexPageProps } from '../../../../../reduxStore';
-import { PagePathEnum } from '../../../PagePathEnum';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Divider from "../../../../core-components/Divider";
 import {formatDate} from "../../../../../modules/format/formatDate";
 import Money from '../../../../components/Money';
@@ -22,7 +22,7 @@ export const LatestOrderStatus = (props: Props) => {
   // NOTE: User Event
   const onUserClickToRepay = () => {
     const orderNo = props.state.order.overdueOrComingOverdueOrder?.orderNo;
-    navigate(`${PagePathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
+    navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
       state: {
         orderNo: orderNo,
       },

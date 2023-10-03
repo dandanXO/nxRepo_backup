@@ -9,7 +9,7 @@ import AppDataCollector from "../app/../../modules/dataCollectorContainer/AppDat
 import LoadingMask from "../../../app/presentation/core-components/LoadingMask";
 
 // NOTE: Page
-import {PagePathEnum} from "../../../app/presentation/pages/PagePathEnum";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import LoanRecordPage from '../../../app/presentation/pages/RepaymentPage';
 import LoginPage from "../../../app/presentation/pages/LoginPage";
 import PaymentCheckoutPage from "../pages/PaymentCheckoutPage";
@@ -44,25 +44,25 @@ export const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        <Route path={PagePathEnum.LoginPage} element={<LoginPage />}/>
-        <Route path={PagePathEnum.BindBankcard} element={<BindBankCardPage />}/>
-        <Route path={PagePathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
+        <Route path={PageOrModalPathEnum.LoginPage} element={<LoginPage />}/>
+        <Route path={PageOrModalPathEnum.BindBankcard} element={<BindBankCardPage />}/>
+        <Route path={PageOrModalPathEnum.RepaymentDetailPage} element={<RepaymentDetailPage />}>
           <Route path="repayment-modal" element={<RepaymentModal />} />
           <Route path="amount-repaid-record-modal" element={<AmountRepaidModal />} />
           <Route path="extend-confirm-modal" element={<ExtendConfirmModal />} />
           <Route path="extend-modal" element={<ExtendModal />} />
           <Route path="repayment-coupon-modal" element={<RepamentCouponModal />} />
         </Route>
-        <Route path={PagePathEnum.PaymentCheckoutPage} element={<PaymentCheckoutPage />}/>
-        <Route path={PagePathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
+        <Route path={PageOrModalPathEnum.PaymentCheckoutPage} element={<PaymentCheckoutPage />}/>
+        <Route path={PageOrModalPathEnum.PaymentResultPage} element={<PaymentResultPage />}/>
         <Route path="/v2/uploaded-payment-receipt" element={<UploadedPaymentReceiptPage />} />
         <Route path="/v2/upload-payment-receipt" element={<UploadPaymentReceiptPage />} />
         <Route path="/v2/coupon-modal-content" element={<CouponModalContentAndroidWebviewPage />} />
         <Route
-          path={PagePathEnum.BankcardListPage}
+          path={PageOrModalPathEnum.BankcardListPage}
           element={<BankCardListPage />}
         />
-        <Route path={PagePathEnum.RepaymentPage} element={<LoanRecordPage />} />
+        <Route path={PageOrModalPathEnum.RepaymentPage} element={<LoanRecordPage />} />
 
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>

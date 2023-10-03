@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router';
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
-import { PagePathEnum } from '../PagePathEnum';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../modules/querystring/getToken';
 import { Button } from '../../core-components/Button';
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
@@ -53,7 +53,7 @@ const AccountVerificationPage = () => {
             <Navigation
                 title={'Account Verification'}
                 back={() => {
-                    navigate(`${PagePathEnum.DeleteAccountPage}?token=${getToken()}`);
+                    navigate(`${PageOrModalPathEnum.DeleteAccountPage}?token=${getToken()}`);
                 }}
             />
             <div className={`p-4 pt-0`}>
@@ -90,7 +90,7 @@ const AccountVerificationPage = () => {
                     <div className={` ml-1.5 w-full`}>
                         <Button
                             onClick={() => {
-                                navigate(`${PagePathEnum.PersonalInfoPage}?token=${getToken()}`);
+                                navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`);
                             }}
                             text={'Next Time'}
                             className={`border-primary-main bg-primary-main border-[1.5px] border-solid text-white`}
