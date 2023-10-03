@@ -81,7 +81,6 @@ export const AppRouter = () => {
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
 
-ex
       {apiBoundary.show && <APIBoundaryModal title={apiBoundary.title} message={apiBoundary.message} />}
 
       {pageLoading.show && <LoadingMask/>}

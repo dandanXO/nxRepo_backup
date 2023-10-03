@@ -24,16 +24,10 @@ import {alertModal} from "../app/api/base/alertModal";
 import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
 import {I18nModule} from "../app/modules/i18n";
 
-import {ReduxRouter, ReduxRouterSelector} from '@lagunovsky/redux-react-router';
 import React from 'react';
-import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
-
-import {AppThemeProvider} from '@frontend/mobile/shared/ui';
 
 import {AppRouter} from '../app/presentation/router/index.in';
-import {appStore, RootState} from '../app/reduxStore';
-import {history} from '../app/reduxStore/index';
+import {CoreMain} from "./main.core";
 
 // NOTICE:
 if (window.Cypress) {
@@ -86,14 +80,6 @@ if (window.Cypress) {
 
 
 const renderApp = () => {
-  // NOTE: Before rendering
-  // console.log('[app] environment', environment);
-  // console.log('[app] window.theme', window.theme);
-  // console.log('[app] isInAndroid', isInAndroid());
-  // console.log('[app] AndroidAppInfo', AndroidAppInfo);
-
-  // alertModal(JSON.stringify(NativeAppInfo));
-
   MonitorUsecaseFlow.appLoadAndroidAppInfo();
 
   // NOTICE: i18n
@@ -105,25 +91,13 @@ const renderApp = () => {
   // NOTE: Starting to render
   const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-  const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator;
-
   root.render(
     <StrictMode>
-      <div>
-        {/*NOTICE: Refactor Me - style component theme : window.theme */}
-        <AppThemeProvider theme={window.theme}>
-          <Provider store={appStore}>
-            <ReduxRouter history={history} routerSelector={routerSelector}>
-              <BrowserRouter basename={'/'}>
-                <AppRouter />
-              </BrowserRouter>
-              {/*<RouterProvider router={appRouter as any} fallbackElement={<div>Loading...</div>} />*/}
-            </ReduxRouter>
-          </Provider>
-        </AppThemeProvider>
-      </div>
+      <CoreMain>
+        <AppRouter/>
+      </CoreMain>
     </StrictMode>
-  );
+  )
 };
 
 renderApp();

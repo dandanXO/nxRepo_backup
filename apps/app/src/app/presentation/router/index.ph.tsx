@@ -45,24 +45,7 @@ export const AppRouter = () => {
   //   // new
   //   posthog.capture('$pageview');
   // }, [location]);
-  const i18Language = AllCountry.find(i => i.country === environment.country);
-  if (i18Language) {
-    i18next
-      .changeLanguage(i18Language?.language)
-      .then((t) => {
-        // console.log("changeLanguage:", environment.countryName);
-      })
-      .catch((err) => {
-        // console.log("changeLanguage:", environment.countryName);
-        // console.log("error:", err);
-        const error = new Error();
-        error.name = "changeLanguage";
-        if (err) error.message = JSON.stringify(err);
-        // if (AppFlag.enableSentry) {
-        //     Sentry.captureException(error);
-        // }
-      });
-  }
+
   return (
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
