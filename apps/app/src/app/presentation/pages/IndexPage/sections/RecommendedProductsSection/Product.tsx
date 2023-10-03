@@ -6,7 +6,7 @@ import { useCallback, useState } from 'react';
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
 import { FinalProductType } from '../../index';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 
 type Props = {
   product: FinalProductType;

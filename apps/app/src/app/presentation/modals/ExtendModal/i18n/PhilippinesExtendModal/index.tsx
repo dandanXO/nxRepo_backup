@@ -12,7 +12,7 @@ import { repaymentDetailPageSlice } from '../../../../../reduxStore/repaymentDet
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
 import Modal from '../../../../components/Modal';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 import Select from '../../../../components/Select';
 import { Button } from '../../../../components/layouts/Button';
 import { i18nExtendModal } from '../../translations';

@@ -9,7 +9,7 @@ import { IndexPageProps } from '../../../../../reduxStore';
 import { PagePathEnum } from '../../../PagePathEnum';
 import Divider from "../../../../components/Divider";
 import {formatDate} from "../../../../../modules/format/formatDate";
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 
 type Props = IndexPageProps;
 

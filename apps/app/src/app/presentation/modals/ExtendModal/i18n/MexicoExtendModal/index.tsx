@@ -6,7 +6,7 @@ import Select from "../../../../components/Select";
 import { Status } from '../../../../../modules/statusEnum';
 import Divider from '../../../../components/Divider';
 import ListItem from '../../../../components/ListItem';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 import { Button } from '../../../../components/layouts/Button';
 import { selectStyles } from '../../../../components/layouts/selectStyles';
 import {formatDate} from "../../../../../modules/format/formatDate";
@@ -42,11 +42,11 @@ const MexicoExtendModal = (props: any) => {
             color: color,
             top: 0,
             fontSize: '12px',
-            
+
         }
     }
   };
-  
+
   return (
     <Modal outlineTheme={'round'}>
       <div className={`p-4`}>

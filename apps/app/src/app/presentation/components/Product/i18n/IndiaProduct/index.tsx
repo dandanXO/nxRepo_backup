@@ -5,7 +5,7 @@ import { useCallback, useState } from 'react';
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../Money';
 import { Checkbox, ICheckboxProps } from '../../../../components/Checkbox';
 import { FinalProductType } from '../../../../pages/IndexPage';
 import { IChargeFeeDetails } from 'apps/app/src/app/api/loanService/GetReservationResponse';

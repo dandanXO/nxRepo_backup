@@ -10,7 +10,7 @@ import { getToken } from '../../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import Divider from '../../../../../components/Divider';
 import ListItem from '../../../../../components/ListItem';
-import Money from '../../../../../components/Money.tsx';
+import Money from '../../../../../components/Money';
 import { Button } from '../../../../../components/layouts/Button';
 
 import { GetLoanDetailResponse } from '../../../../../../api/loanService/GetLoanDetailResponse';
@@ -63,7 +63,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{t(Status(status)?.text)}</div>;
   };
   const { app } = useSelector((state: RootState) => state);
-  
+
   const isTodayRepayment = formatDate(moment(applyDate)) === formatDate(moment()) && status === 'UNPAID';
 
   return (

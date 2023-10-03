@@ -17,7 +17,7 @@ import { tcx } from '../../../../../../modules/tailwindcss';
 import { RootState } from '../../../../../../reduxStore';
 import Divider from '../../../../../components/Divider';
 import ListItem from '../../../../../components/ListItem';
-import Money from '../../../../../components/Money.tsx';
+import Money from '../../../../../components/Money';
 import { Button } from '../../../../../components/layouts/Button';
 import { PageContent } from '../../../../../components/layouts/PageContent';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';

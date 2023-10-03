@@ -10,7 +10,7 @@ import { GetLoanDetailResponse } from '../../../api/rtk/old/getLoanDetail';
 import { getToken } from '../../../modules/querystring/getToken';
 import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
 import Divider from '../../components/Divider';
-import Money from '../../components/Money.tsx';
+import Money from '../../components/Money';
 import { PagePathEnum } from '../../pages/PagePathEnum';
 import { i18nAmountRepaidModal } from './i18n/translations';
 import {formatDate} from "../../../modules/format/formatDate";

@@ -1,7 +1,7 @@
 
 import { useTranslation } from 'react-i18next';
 import ListItem from '../../../../../components/ListItem';
-import Money from '../../../../../components/Money.tsx';
+import Money from '../../../../../components/Money';
 import { i18nLoanDetailsPage } from '../../../translations';
 import Divider from 'apps/app/src/app/presentation/components/Divider';
 

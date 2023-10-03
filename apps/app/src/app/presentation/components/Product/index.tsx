@@ -12,7 +12,7 @@ import { formatPrice } from '../../../modules/format/formatPrice';
 import { renderByCountry } from '../../../modules/i18n';
 import { FinalProductType } from '../../pages/IndexPage';
 import { Checkbox, ICheckboxProps } from '../Checkbox';
-import Money from '../Money.tsx';
+import Money from '../Money';
 import { IndiaProduct } from './i18n/IndiaProduct';
 import { MexicoProduct } from './i18n/MexicoProduct';
 import PhilippinesProduct from './i18n/PhilippinesProduct';

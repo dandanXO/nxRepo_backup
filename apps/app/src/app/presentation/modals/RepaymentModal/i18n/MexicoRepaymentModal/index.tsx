@@ -11,7 +11,7 @@ import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import ListItem from '../../../../components/ListItem';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../components/layouts/Button';

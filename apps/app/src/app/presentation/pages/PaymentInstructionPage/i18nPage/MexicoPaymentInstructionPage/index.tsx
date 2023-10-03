@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router';
 
 import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepayCreateResponse';
 import { getToken } from '../../../../../modules/querystring/getToken';
-import { CopyButton } from '../../../../components/Buttons';
 import { Label } from '../../../../components/Labels';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 import { PagePathEnum } from '../../../PagePathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
+import CopyButton from '../../components/CopyButton';
 
 const MexicoPaymentInstructionPage = ({
   payload,

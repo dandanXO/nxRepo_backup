@@ -9,14 +9,14 @@ import { useNavigate } from 'react-router';
 import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepayCreateResponse';
 import { getToken } from '../../../../../modules/querystring/getToken';
 import { tcx } from '../../../../../modules/tailwindcss';
-import { CopyButton } from '../../../../components/Buttons';
 import Divider from '../../../../components/Divider';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 import { PageContent } from '../../../../components/layouts/PageContent';
 import { PagePathEnum } from '../../../PagePathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
 import { i18nPaymentInstructionPage } from '../../translations';
 import getPlatformValue from './getPlatformValue';
+import CopyButton from "../../components/CopyButton";
 
 const Logo = (path: string) => {
   let logo = '';

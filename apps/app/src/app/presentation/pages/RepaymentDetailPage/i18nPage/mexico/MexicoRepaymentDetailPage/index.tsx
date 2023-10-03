@@ -9,7 +9,7 @@ import { getToken } from '../../../../../../modules/querystring/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import Divider from '../../../../../components/Divider';
 import ListItem from '../../../../../components/ListItem';
-import Money from '../../../../../components/Money.tsx';
+import Money from '../../../../../components/Money';
 import { Button } from '../../../../../components/layouts/Button';
 import { GetLoanDetailResponse } from '../../../../../../api/loanService/GetLoanDetailResponse';
 import {useEffect, useMemo} from "react";

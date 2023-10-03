@@ -2,7 +2,7 @@ import moment from 'moment/moment';
 import React from 'react';
 
 import { tcx } from '../../../../../modules/tailwindcss';
-import Money from '../../../Money.tsx';
+import Money from '../../../Money';
 import { ICouponProps } from '../../index';
 
 interface IPhilippinesCouponProps extends ICouponProps {

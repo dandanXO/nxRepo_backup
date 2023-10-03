@@ -2,7 +2,7 @@ import cx from 'classnames';
 import moment from 'moment';
 
 import { ICouponProps } from '../..';
-import Money from '../../../Money.tsx';
+import Money from '../../../Money';
 import {formatDate} from "../../../../../modules/format/formatDate";
 import { useTranslation } from 'react-i18next';
 import { i18nCoupon } from '../translations';

@@ -15,7 +15,7 @@ import { getToken } from '../../../../../modules/querystring/getToken';
 import { RootState } from '../../../../../reduxStore';
 import { repaymentDetailPageInitialState } from '../../../../../reduxStore/repaymentDetailPageSlice';
 import ListItem from '../../../../components/ListItem';
-import Money from '../../../../components/Money.tsx';
+import Money from '../../../../components/Money';
 import { RadioOption } from '../../../../components/RadioOption';
 import Select from '../../../../components/Select';
 import ValidateInput from '../../../../components/ValidateInput';
