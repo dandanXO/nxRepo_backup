@@ -10,7 +10,7 @@ import { PagePathEnum } from '../../../PagePathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
 import CopyButton from '../../components/CopyButton';
 
-const MexicoPaymentInstructionPage = ({
+const MexicoPaymentCheckoutPage = ({
   payload,
   orderNo,
 }: PostRepayCreateResponse) => {
