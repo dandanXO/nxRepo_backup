@@ -49,7 +49,7 @@ export const LoanAgreementModal = (props: Props) => {
     })
   }, [url])
 
-  var { ref, openPortal, closePortal, isOpen, Portal } = usePortal()
+  // var { ref, openPortal, closePortal, isOpen, Portal } = usePortal()
 
   return (
       <div className={'loan-agreement-modal fixed top-0 z-10 flex h-full w-screen flex-col bg-white'}>
