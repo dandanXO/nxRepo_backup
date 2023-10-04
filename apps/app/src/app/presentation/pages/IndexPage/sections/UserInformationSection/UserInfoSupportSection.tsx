@@ -28,7 +28,7 @@ export const UserInfoSupportSection = (props: Props) => {
       <div className={'left-section flex flex-row items-center'}>
         {/*NOTE: 顯示用戶名 */}
         <div className={'welcome pr-2 font-bold'}>
-          Welcome {isHideUserName ? phoneNumber : maskPhoneNumber}
+          Welcome {isHideUserName ? maskPhoneNumber : phoneNumber}
         </div>
         {/*NOTE: 是否隱藏用戶名稱 Button*/}
         <a data-testing-id={'hide-icon'} onClick={onClickHideUserName}>
