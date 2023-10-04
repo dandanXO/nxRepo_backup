@@ -41,8 +41,8 @@ const Item = ({
   className?: string;
   extra?: React.ReactNode;
 }) => (
-  <div className={tcx('mb-2 flex flex-row items-center gap-3', className)}>
-    <div>
+  <div className={tcx('mb-2 flex flex-row items-center gap-4', className)}>
+    <div className={tcx(['w-3/4 break-all',!!extra])}>
       <div className="text-ctext-secondary">{title}</div>
       <div className="text-xl font-bold">{content}</div>
     </div>
@@ -100,12 +100,6 @@ const PhilippinesPaymentCheckoutPage = ({
           />
         )}
 
-        {qrCode && (
-          <div className="flex justify-center p-4">
-            <QRCode value={qrCode} />
-          </div>
-        )}
-
         {barcode && !getPlatformValue(payTypeName, 'isOnline') ? null : (
           <Item
             className="mb-1"
@@ -116,13 +110,19 @@ const PhilippinesPaymentCheckoutPage = ({
                 <div className="h-4/5 w-1/4">
                   <CopyButton
                     className="w-full rounded-full bg-[#E85D75] py-2 px-4 active:border active:border-[#E85D75] active:bg-white active:text-[#E85D75]"
-                    value="ABCE12345678"
+                    value={referenceNo || ''}
                     text="Copy"
                   />
                 </div>
               ) : null
             }
           />
+        )}
+
+        {qrCode && (
+          <div className="flex justify-center my-5">
+            <QRCode className='w-[200px] h-[200px]' value={qrCode} />
+          </div>
         )}
 
         {barcode && (
