@@ -1,5 +1,6 @@
 import {createApi} from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './axiosBaseQuery';
+import { GetRepayPayInfoResponse } from "../loanService/GetRepayPayInfoResponse";
 
 import {GetIndexRequest} from '../indexService/GetIndexRequest';
 import {GetIndexResponse} from '../indexService/GetIndexResponse';
@@ -201,6 +202,14 @@ export const APIV3 = createApi({
         data: requestBody,
       }),
     }),
+
+    // NOTICE: /repay/pay-info載入付款資訊
+    getRepayPayInfo: builder.query<GetRepayPayInfoResponse, {hash: string}>({
+      query: (queryParameters: {hash: string}) => ({
+        method: 'get',
+        url:`/repay/pay-info?hash=${queryParameters.hash}`
+      })
+    })
   }),
 });
 
@@ -216,6 +225,7 @@ export const {
   usePostReservationSubmitMutation,
   useLazyGetMXBindCardDropListQuery,
   useGetPHBindCardDropListQuery,
+  useLazyGetRepayPayInfoQuery
 } = APIV3;
 
 export const API = createApi({
