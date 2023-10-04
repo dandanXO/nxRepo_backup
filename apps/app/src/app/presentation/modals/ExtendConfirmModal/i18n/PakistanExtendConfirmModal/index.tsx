@@ -24,7 +24,12 @@ const PakistanExtendConfirmModal = () => {
           {t('We recommend that you prioritize full repayment when possible for a higher credit limit.')}
         </div>
         <div className={`flex flex-row `}>
-          <Button onClick={() => navigate(-1)} type={'ghost'} text={t('Next time')} className={`mr-1 w-full`} />
+          <Button
+            type={'ghost'}
+            text={t('Next time')}
+            className={`mr-1 w-full`}
+            onClick={() => navigate(-1)}
+          />
           <Button
             primaryTypeGradient={true}
             className={`ml-1 w-full`}

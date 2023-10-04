@@ -47,7 +47,7 @@ infoLog("env", Cypress.env());
 function visitIndexPage() {
   // cy.visit("/?token=6baecb1bf4fe4c85aecc0d85b30c8dfd")
   // cy.visit("/?pageNumber=0&pageSize=500&status=UNPAID&token=ada8c62f24844155877b8af343d5ce1f")
-  cy.visit("/v2?token=1119f2e03619487c8fd4bb609c8ec8ed", {
+  cy.visit("/v2?token=7b71853a7b244f898edb520b5799a190", {
     onBeforeLoad(win: Cypress.AUTWindow) {
       // @ts-ignore
       // cy.stub(win, "onUploadKycBackgroundData", function () {
@@ -3088,7 +3088,7 @@ describe('IndexPage', () => {
 
 
   //FIGMA: 首頁-認證完成-有效額度時間-額度不足 (Android: Level 7)
-  it("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
+  it.only("status: 用戶已認證、風控額度時間有效，但能借額度不足 (額度用完)", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",
@@ -4665,7 +4665,7 @@ describe('IndexPage', () => {
   })
 
 
-  it.only("status: level10 => level10 overdue", () => {
+  it("status: level10 => level10 overdue", () => {
     // NOTE: Given
     const userServiceResponse: GetUserInfoServiceResponse = {
       "userName": "9013452123",

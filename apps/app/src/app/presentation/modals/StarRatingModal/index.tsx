@@ -1,15 +1,16 @@
-import { useNavigate } from 'react-router';
-import { Button } from '../../core-components/Button';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { CloseButton } from '../../core-components/CloseButton';
-import { RootState } from '../../../reduxStore';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import {CloseButton} from '../../core-components/CloseButton';
+import {RootState} from '../../../reduxStore';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {useDispatch, useSelector} from 'react-redux';
 import GrayStarIcon from './GrayStarIcon';
 import StarIcon from './StarIcon';
-import { useState } from 'react';
-import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
-import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
+import {useState} from 'react';
+import {USER_AUTH_STATE} from '../../../domain/user/USER_AUTH_STATE';
+import {useMailToRUL} from "../../hooks/useMailToRUL";
+import {useAppInfo} from "../../hooks/useAppInfo";
+
 
 const StarRatingModal = () => {
 
@@ -20,7 +21,7 @@ const StarRatingModal = () => {
     const [ratingDisable, setRatingDisable] = useState(true);
     const [rating, setRating] = useState(0);
 
-    const hadleRateStar = (index: number) => {
+    const handleRateStar = (index: number) => {
         setRating(index);
         if (ratingDisable) {
             setRatingDisable(false)
@@ -30,18 +31,18 @@ const StarRatingModal = () => {
     const handleClose = () => {
         dispatch(modalSlice.actions.updateStarRatingModal({ show: false }));
     }
+    const mailContentName = indexPage.user.state === USER_AUTH_STATE.ready ? 'guest' : indexPage?.user?.bankCardName || '';
+    const {mailToURL} = useMailToRUL(mailContentName);
+    const {appID} = useAppInfo();
 
     const handleSubmitRating = () => {
-        const mailContentName = indexPage.user.state === USER_AUTH_STATE.ready ? 'guest' : indexPage?.user?.bankCardName || '';
-        const herfUrl = rating <= 3 ?
-            `mailto:${app?.init?.csEmail || ''}?subject=Feedback&body=App:%20${app?.androidAppInfo?.appName||''}%0D%0AName:%20${mailContentName}%0D%0APhone:%20${app?.androidAppInfo?.phoneNo||''}` :
-            `https://play.google.com/store/apps/details?id=${NativeAppInfo.packageId}`;
-        window.location.href = herfUrl;
+        const appPlayStoreURL = `https://play.google.com/store/apps/details?id=${appID}`;
+
+        window.location.href = rating <= 3 ? mailToURL : appPlayStoreURL;
+
         dispatch(modalSlice.actions.updateStarRatingModal({ show: false }));
         dispatch(modalSlice.actions.updateStarRatingSuccessModal({ show: true }));
     }
-
-
 
     return (
         <Modal className='relative'>
@@ -50,7 +51,7 @@ const StarRatingModal = () => {
             </div>
             <div className='flex justify-center p-2 mt-8'>
                 {[1, 2, 3, 4, 5].map(i => {
-                    return (<div className='mr-2' key={i} onClick={() => hadleRateStar(i)}>
+                    return (<div className='mr-2' key={i} onClick={() => handleRateStar(i)}>
                         {i <= rating ? <StarIcon /> : <GrayStarIcon />}
                     </div>)
                 })

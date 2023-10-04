@@ -18,6 +18,7 @@ export type InitailState = {
   isInit: boolean;
   androidAppInfo: null | IAndroidAppInfo;
   appName: string;
+  appID: string;
 };
 
 const parsedQueryString = queryString.parse(window.location.search);
@@ -28,6 +29,7 @@ const initialState: InitailState = {
   isInit: false,
   androidAppInfo: null,
   appName: NativeAppInfo.appName || parsedQueryString['appName'] ? (parsedQueryString['appName'] as string) : "",
+  appID: NativeAppInfo.packageId || parsedQueryString['packageId'] ? (parsedQueryString['packageId'] as string) : "",
 };
 
 export const appSlice = createSlice({

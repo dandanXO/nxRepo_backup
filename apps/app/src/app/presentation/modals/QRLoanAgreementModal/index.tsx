@@ -1,11 +1,10 @@
-import {useCallback, useEffect} from 'react';
-import { useSelector } from 'react-redux';
+import {useCallback, useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 
-import { RootState } from '../../../reduxStore';
-import { CloseButton } from '../../core-components/CloseButton';
-import { Navigation } from '../../core-components/Navigation';
+import {RootState} from '../../../reduxStore';
+import {CloseButton} from '../../core-components/CloseButton';
+import {Navigation} from '../../core-components/Navigation';
 import {runAxios} from "../../../api/base/runAxios";
-import {GetInitServiceResponse} from "../../../api/appService/GetInitServiceResponse";
 
 type Props = {
   onClose: () => void;
@@ -16,12 +15,23 @@ export const LoanAgreementModal = (props: Props) => {
   }, []);
   const url = useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
 
-  // useEffect(() => {
-  //   if(!url) return;
-  //   runAxios('', url, 'get', null).then((data) => {
-  //     console.log("data", data)
-  //   })
-  // }, [url])
+  // const url = "http://192.168.50.217:8080/api/v2/html/loan-agreement" || useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
+
+  const [htmlData, setHTMLData] = useState<any>();
+  useEffect(() => {
+    if(!url) return;
+    runAxios('', url, 'get', null).then((response) => {
+      // console.log("response", response.data)
+      if(response.success) {
+        // NOTICE: Failed to execute 'atob' on 'Window': The string to be decoded contains characters outside of the Latin1 range.
+        setHTMLData("data:text/html;base64," + btoa(unescape(encodeURIComponent(response.data))));
+        // const element = document.querySelector('#loan-agreement');
+        // if(element){
+        //   (element as  any).src =
+        // }
+      }
+    })
+  }, [url])
 
   return (
       <div className={'loan-agreement-modal fixed top-0 z-10 flex h-full w-screen flex-col bg-white'}>
@@ -30,7 +40,9 @@ export const LoanAgreementModal = (props: Props) => {
               <Navigation className={'pt-5'} title={'Loan Agreement'} />
           </div>
           <div className={'content flex-1'}>
-              <iframe className="w-full h-full" src={url} />
+              {/*<div dangerouslySetInnerHTML={{ __html: htmlData}}/>*/}
+              {/*<iframe id="loan-agreement" className="w-full h-full" src={url} />*/}
+            <iframe id="loan-agreement" className="w-full h-full" src={htmlData}/>
           </div>
       </div>
 

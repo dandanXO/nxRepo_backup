@@ -2,7 +2,20 @@ import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country
 import {isInApp} from "../../modules/appEnvironment/isInApp";
 import {INullAppInfoTaskDefault} from "./types/IAppEnvironment";
 
-const uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : null;
+let uiVersion
+if (window.Cypress) {
+  let AppInfo = {
+    VERSION: "cypress",
+    COMMITHASH: "cypress",
+    BRANCH: "test",
+    UI_VERSION: "55",
+  }
+  uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : null;
+} else {
+  uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : null;
+}
+
+
 
 export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
   [AllCountriesEnum.india]: {

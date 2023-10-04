@@ -6,19 +6,16 @@ import React, { useCallback, useState } from 'react';
 import { IndexPageProps, RootState } from '../../../../../reduxStore';
 import {useSelector} from "react-redux";
 import {NativeAppInfo} from "../../../../../persistant/nativeAppInfo";
+import {useUserPhoneNumber} from "../../../../hooks/useUserPhoneNumber";
 
 type Props = IndexPageProps & {
   onClickToCustomerService: () => void;
 };
 
+
 export const UserInfoSupportSection = (props: Props) => {
 
-  // TODO: refactor
-  // NOTE: Pure H5
-  const phoneNumber: string | undefined = useSelector((state: RootState) => state.login.phoneNo) || "";
-  const maskPhoneNumber = phoneNumber.length >= 10 ? phoneNumber.slice(0, 3) + '****' + phoneNumber.slice(7, 10) : phoneNumber;
-  const originalUserName = phoneNumber || props.state.user.userName;
-  const maskUserName = maskPhoneNumber || props.state.user?.maskUserName;
+  const {phoneNumber, maskPhoneNumber} = useUserPhoneNumber();
   const [isHideUserName, setIsHideUserName] = useState(true);
 
   // NOTE: User Event
@@ -31,7 +28,7 @@ export const UserInfoSupportSection = (props: Props) => {
       <div className={'left-section flex flex-row items-center'}>
         {/*NOTE: 顯示用戶名 */}
         <div className={'welcome pr-2 font-bold'}>
-          Welcome {isHideUserName ? maskUserName : originalUserName}
+          Welcome {isHideUserName ? phoneNumber : maskPhoneNumber}
         </div>
         {/*NOTE: 是否隱藏用戶名稱 Button*/}
         <a data-testing-id={'hide-icon'} onClick={onClickHideUserName}>

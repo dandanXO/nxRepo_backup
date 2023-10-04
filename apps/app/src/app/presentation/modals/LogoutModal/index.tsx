@@ -1,18 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { Overlay } from '@frontend/mobile/shared/ui';
 
-import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
 import { Button } from '../../core-components/Button';
 import { PersonalInfoPageSagaActions } from '../../pages/PersonalInfoPage/userUsecaseSaga';
+import {RootState} from "../../../reduxStore";
 
 const LogoutModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const appName = NativeAppInfo.appName;
+  const appName: string =  useSelector((state: RootState) => state.app.appName);
 
   // NOTE: User Event
   const onUserClickToConfirm = () => {

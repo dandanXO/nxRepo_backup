@@ -23,7 +23,13 @@ const MexicoExtendConfirmModal = () => {
           {t('We recommend that you prioritize full repayment when possible for a higher credit limit.')}
         </div>
         <div className={`flex flex-row flex-wrap-reverse`}>
-          <Button onClick={() => navigate(-1)} type={'ghost'} ghostTheme={'none'} text={t('Next Time')} className={`mr-1 w-full`} />
+          <Button
+            type={'ghost'}
+            ghostTheme={'none'}
+            text={t('Next Time')}
+            className={`mr-1 w-full`}
+            onClick={() => navigate(-1)}
+          />
           <Button outlineTheme={'round'} className={`ml-1 w-full whitespace-nowrap`} text={t('Go Extension')}
             onClick={() => {
               navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {

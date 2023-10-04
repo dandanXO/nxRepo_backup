@@ -459,7 +459,7 @@ const IndexPage = () => {
   }, [calculatingProducts, currentSelectedProductsPrice]);
 
   const onClickToCustomerService = useCallback(() => {
-    navigate(PageOrModalPathEnum.CustomerServicePage);
+    navigate(`${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`);
   }, []);
 
   // NOTE: Modal

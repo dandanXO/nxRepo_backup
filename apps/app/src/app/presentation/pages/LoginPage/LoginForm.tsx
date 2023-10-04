@@ -8,10 +8,9 @@ import { Input, InputValue } from '@frontend/mobile/shared/ui';
 import { Button } from '../../core-components/Button';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
-import {NativeAppInfo} from "../../../persistant/nativeAppInfo";
 import {RootState} from "../../../reduxStore";
-import {put} from "redux-saga/effects";
 import {loginSlice} from "../../../reduxStore/loginSlice";
+import {getToken} from "../../../modules/querystring/getToken";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -99,6 +98,8 @@ export const LoginForm = () => {
       );
     }
   };
+
+  const appName: string =  useSelector((state: RootState) => state.app.appName);
 
   return (
     <>
@@ -200,11 +201,13 @@ export const LoginForm = () => {
           By continuing, you agree to our
           <span
             className="mx-1 text-cstate-info-main underline decoration-cstate-info-main"
-            onClick={() => navigate(PageOrModalPathEnum.PrivacyPolicyModal)}
+            onClick={() =>
+              navigate(`${PageOrModalPathEnum.PrivacyPolicyModal}?token=${getToken()}`)
+            }
           >
             Privacy Policy
           </span>
-          . “{NativeAppInfo.appName}” will send an SMS message to verify your phone number and account.
+          . “{appName}” will send an SMS message to verify your phone number and account.
         </div>
       </div>
     </>

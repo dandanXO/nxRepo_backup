@@ -22,6 +22,7 @@ import StarRatingModal from '../../modals/StarRatingModal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import StarRatingSuccessModal from '../../modals/StarRatingSuccessModal';
 import {useGoToLogout} from "../../goTo/goToLogout";
+import { useUserPhoneNumber } from '../../hooks/useUserPhoneNumber';
 
 const PersonalInfoPage = () => {
   const navigate = useNavigate();
@@ -47,6 +48,8 @@ const PersonalInfoPage = () => {
     goToLogout()
   };
 
+  const {maskPhoneNumber} = useUserPhoneNumber();
+  
   return (
     <Page className="flex flex-col pb-20 bg-cbg-primary">
       <div className={`my-4 flex flex-row items-center justify-center`}>
@@ -54,7 +57,7 @@ const PersonalInfoPage = () => {
           <img src={UserIcon} />
         </div>
         <div className={`flex flex-col items-center justify-center `}>
-          <div className={`font-bold`}>{user.maskUserName}</div>
+          <div className={`font-bold`}>{maskPhoneNumber}</div>
           <div
             className={cx('mt-1 grow rounded-2xl py-1 px-4 text-center text-sm leading-none', {
               'border border-cstate-error-main text-cstate-error-main': user.state === USER_AUTH_STATE.ready,
