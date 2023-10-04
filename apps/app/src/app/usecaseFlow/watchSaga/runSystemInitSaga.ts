@@ -17,6 +17,7 @@ import {GlobalAppMode} from "../../persistant/GlobalAppMode";
 import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
 import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
 import {push} from "@lagunovsky/redux-react-router";
+import { GetIndexResponse } from '../../api/indexService/GetIndexResponse';
 
 console.log("SentryModule", SentryModule);
 
@@ -86,6 +87,10 @@ export function* runSystemInitSaga() {
 
         // NOTE: 登入成功
         MonitorUsecaseFlow.userLogin(userResponse);
+
+        // Loan Agreement 資料在 index
+        const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
+        yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
 
       }
     } else if (NativeAppInfo.mode === 'H5') {
