@@ -84,7 +84,7 @@ export const QuickRepaymentSummaryModal = (props: Props) => {
     }, [props.selectedBankcardId, props.bankcardList]);
 
     return (
-        <div className={cx('quick-repayment-modal fixed top-0 bottom-0 h-screen w-screen  bg-white p-4 flex flex-col')}>
+        <div className={cx('quick-repayment-modal fixed top-0 bottom-0 h-full w-screen  bg-white p-4 flex flex-col')}>
             <div>
                 <div onClick={props.onClose}>
                     <CloseButton />

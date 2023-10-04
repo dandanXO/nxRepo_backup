@@ -61,7 +61,8 @@ export const runAxios = async (
     //   login401 = false;
     // }
 
-    if(login401 && result.config.url !== '/v3/open-index') {
+    // result.config.url !== '/v3/open-index'
+    if(login401) {
       console.log("阻止後續請求");
       return {
         success: false,

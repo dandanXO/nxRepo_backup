@@ -141,7 +141,7 @@ const IBANFinderModal = (props: any) => {
         enableTitleHorizontal={true}
         content={(hide: () => void) => {
           return (
-            <div className={`h-screen `}>
+            <div className={`h-full`}>
               <div className="mb-3 text-xl font-bold ">Tips</div>
               <Divider />
               {location.state === 'Bank' ? renderByBank() : renderByWallet()}

@@ -16,7 +16,7 @@ const CustomerServicePage = () => {
     const { app, indexPage } = useSelector((state: RootState) => state);
     const mailContentName = indexPage.user.state === USER_AUTH_STATE.ready ? 'guest' : indexPage?.user?.bankCardName || '';
     return (
-        <div className='flex flex-col w-screen h-screen'>
+        <div className='flex flex-col w-screen h-full'>
             <div className={`h-2/5 w-full bg-gradient-to-br from-primary-assistant  to-primary-main rounded-b-[50px] flex flex-col `}>
                 {isShowNavigation() && (
                     <Navigation

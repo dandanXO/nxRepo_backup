@@ -4,7 +4,7 @@ import { Page } from "../Page";
 const LoadingMask = () => {
 
     return (
-        <div className="fixed z-[1000] left-0 top-0 flex justify-center items-center bg-cbg-tertiary h-screen opacity-70 w-full">
+        <div className="fixed z-[1000] left-0 top-0 flex justify-center items-center bg-cbg-tertiary h-full opacity-70 w-full">
             {<PulseLoader
                 className="pulseLoader"
                 loading={true}

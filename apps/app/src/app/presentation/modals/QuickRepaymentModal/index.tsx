@@ -80,7 +80,7 @@ const QuickRepaymentModal = () => {
 
 
   return (
-    <div className={cx('quick-repayment-modal fixed left-0 top-0 bottom-0 z-10 flex h-screen w-screen flex-col justify-center bg-black bg-opacity-80 p-0')}
+    <div className={cx('quick-repayment-modal fixed left-0 top-0 bottom-0 z-10 flex h-full w-screen flex-col justify-center bg-black bg-opacity-80 p-0')}
       onClick={(e: any) => {
         if (!stopPropagation) {
           // alert("outside.1")
