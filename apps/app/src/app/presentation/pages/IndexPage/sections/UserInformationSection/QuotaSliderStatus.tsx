@@ -98,7 +98,7 @@ export const QuotaSliderStatus = (props: Props) => {
                 );
               }}
               disabled={disableQuotaBar}
-              min={props.state.indexAPI?.quotaBar.min || 0}
+              min={props.state.indexAPI?.quotaBar.steps && props.state.indexAPI?.quotaBar.steps.length > 0 ? props.state.indexAPI?.quotaBar?.steps[0] : props.state.indexAPI?.quotaBar.min || 0}
               max={props.state.indexAPI?.quotaBar.max || 0}
               step={props.state.indexAPI?.quotaBar.serial || 0}
               value={currentQuotaValue}
