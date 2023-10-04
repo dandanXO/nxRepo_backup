@@ -4,7 +4,7 @@ import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse
 import { IAndroidAppInfo } from '../persistant/nativeAppInfo/types/IAndroidAppInfo';
 import {NativeAppInfo} from "../persistant/nativeAppInfo";
 import queryString from "query-string";
-import {appInfoPersistence} from "../persistant/appInfo";
+import {appInfoPersistence} from "../persistant/AppInfoPersistence";
 
 export enum AppRunningModeEnum {
   'Unknown',

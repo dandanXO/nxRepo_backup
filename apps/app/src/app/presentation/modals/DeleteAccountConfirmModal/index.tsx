@@ -13,7 +13,7 @@ import {isInApp} from "../../../modules/appEnvironment/isInApp";
 import {alertModal} from "../../../api/base/alertModal";
 import {SentryModule} from "../../../modules/sentry";
 import {select} from "redux-saga/effects";
-import {userInfoPersistence} from "../../../persistant/userInfo";
+import {userInfoPersistence} from "../../../persistant/UserInfoPersistence";
 
 const DeleteAccountConfirmModal = () => {
     const navigate = useNavigate();

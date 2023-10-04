@@ -21,7 +21,7 @@ import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
 import {catchSagaError} from '../utils/catchSagaError';
 import {appSlice} from "../../reduxStore/appSlice";
 import queryString from "query-string";
-import {appInfoPersistence} from "../../persistant/appInfo";
+import {appInfoPersistence} from "../../persistant/AppInfoPersistence";
 
 console.log("[app] SentryModule", SentryModule);
 

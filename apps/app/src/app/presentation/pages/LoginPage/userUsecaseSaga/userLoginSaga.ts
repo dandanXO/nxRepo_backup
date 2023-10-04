@@ -9,8 +9,8 @@ import {PageOrModalPathEnum} from '../../../PageOrModalPathEnum';
 import {UserLoginActionPayload} from './index';
 import {loginSlice} from 'apps/app/src/app/reduxStore/loginSlice';
 import {setTokenToLocalStorage} from "../../../../persistant/getToken";
-import {appInfoPersistence} from "../../../../persistant/appInfo";
-import {userInfoPersistence} from "../../../../persistant/userInfo";
+import {appInfoPersistence} from "../../../../persistant/AppInfoPersistence";
+import {userInfoPersistence} from "../../../../persistant/UserInfoPersistence";
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {

@@ -10,7 +10,7 @@ import {push, routerActions} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {getToken, removeTokenFromLocalStorage} from "../../../../persistant/getToken";
 import {RootState} from "../../../../reduxStore";
-import {userInfoPersistence} from "../../../../persistant/userInfo";
+import {userInfoPersistence} from "../../../../persistant/UserInfoPersistence";
 
 function *logoutSaga() {
 
