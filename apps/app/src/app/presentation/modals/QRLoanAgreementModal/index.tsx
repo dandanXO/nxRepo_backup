@@ -13,9 +13,8 @@ export const LoanAgreementModal = (props: Props) => {
   const onClickClose = useCallback(() => {
     props.onClose();
   }, []);
-  const url = useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
 
-  // const url = "http://192.168.50.217:8080/api/v2/html/loan-agreement" || useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
+  const url = useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
 
   const [htmlData, setHTMLData] = useState<any>();
   useEffect(() => {
@@ -25,10 +24,6 @@ export const LoanAgreementModal = (props: Props) => {
       if(response.success) {
         // NOTICE: Failed to execute 'atob' on 'Window': The string to be decoded contains characters outside of the Latin1 range.
         setHTMLData("data:text/html;base64," + btoa(unescape(encodeURIComponent(response.data))));
-        // const element = document.querySelector('#loan-agreement');
-        // if(element){
-        //   (element as  any).src =
-        // }
       }
     })
   }, [url])
