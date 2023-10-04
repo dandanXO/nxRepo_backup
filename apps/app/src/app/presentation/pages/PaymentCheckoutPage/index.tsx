@@ -15,6 +15,7 @@ import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentCheckoutPage';
 import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentCheckoutPage';
 
+// TODO: Refactor Color
 const navigatorMap = {
   [MexicoCountry.country]: '#E70020',
   [PhilippinesCountry.country]: '#E85D75',
@@ -47,16 +48,6 @@ const PaymentCheckoutPage = () => {
               ? state?.payType || currentData?.payType
               : 'Payment Instructions'
           }
-          back={() => {
-            navigate(
-              `${
-                PageOrModalPathEnum.RepaymentDetailPage
-              }/repayment-modal?token=${getToken()}&orderNo=${state.orderNo}`,
-              {
-                state: {},
-              }
-            );
-          }}
           back={
             hash
               ? undefined
