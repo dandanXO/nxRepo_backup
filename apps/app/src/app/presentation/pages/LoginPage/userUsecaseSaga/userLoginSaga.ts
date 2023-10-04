@@ -1,16 +1,16 @@
-import { push ,ROUTER_ON_LOCATION_CHANGED } from '@lagunovsky/redux-react-router';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { put, take, race } from 'redux-saga/effects';
+import {push, ROUTER_ON_LOCATION_CHANGED} from '@lagunovsky/redux-react-router';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {put, race, take} from 'redux-saga/effects';
 
-import { APIV3 } from '../../../../api/rtk';
-import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { PageOrModalPathEnum } from '../../../PageOrModalPathEnum';
-import { UserLoginActionPayload } from './index';
-import { appStore } from 'apps/app/src/app/reduxStore';
-import { SystemCaseActions } from 'apps/app/src/app/usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
-import { loginSlice } from 'apps/app/src/app/reduxStore/loginSlice';
-import {LoginResponse} from "../../../../api";
+import {APIV3} from '../../../../api/rtk';
+import {AppRunningModeEnum, appSlice} from '../../../../reduxStore/appSlice';
+import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
+import {PageOrModalPathEnum} from '../../../PageOrModalPathEnum';
+import {UserLoginActionPayload} from './index';
+import {loginSlice} from 'apps/app/src/app/reduxStore/loginSlice';
+import {setTokenToLocalStorage} from "../../../../persistant/getToken";
+import {appInfoPersistence} from "../../../../persistant/appInfo";
+import {userInfoPersistence} from "../../../../persistant/userInfo";
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {
@@ -29,7 +29,10 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
       if (success.payload.token) {
         const token = success.payload.token;
         yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB));
-        yield put(appSlice.actions.updateToken(token));
+        // yield put(appSlice.actions.updateToken(token));
+        setTokenToLocalStorage(token);
+        userInfoPersistence.phone = action.payload.phone;
+
         yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${token}`));
         yield take(ROUTER_ON_LOCATION_CHANGED);
       }

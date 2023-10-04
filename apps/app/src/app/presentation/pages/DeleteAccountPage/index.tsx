@@ -5,7 +5,7 @@ import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { Button } from '../../core-components/Button';
 
 const DeleteAccountPage = () => {

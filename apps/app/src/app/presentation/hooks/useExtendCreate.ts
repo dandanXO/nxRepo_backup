@@ -9,7 +9,7 @@ import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateReq
 import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
 import { usePostRepayCreateMutation } from '../../api/rtk';
 import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
-import { getToken } from '../../modules/querystring/getToken';
+import { getToken } from '../../persistant/getToken';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 
 const useExtendCreate = () => {

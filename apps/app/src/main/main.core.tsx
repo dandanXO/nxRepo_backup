@@ -10,6 +10,8 @@ import {appStore, history, RootState} from "../app/reduxStore";
 import {isInApp} from "../app/modules/appEnvironment/isInApp";
 import {NativeAppInfo} from "../app/persistant/nativeAppInfo";
 import {GlobalAppMode} from "../app/persistant/GlobalAppMode";
+import {AppFlag} from "../environments/flag";
+import {AppEnvironment} from "../app/modules/appEnvironment";
 
 type ICoreMain = {
   children: React.ReactElement;
@@ -18,11 +20,13 @@ const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigato
 
 export const CoreMain = (props: ICoreMain) => {
   // NOTE: Before rendering
+  console.log('[app] AppEnvironment.getEnvironmentName()', AppEnvironment.getEnvironmentName())
   console.log('[app] environment', environment);
   console.log('[app] window.theme', window.theme);
   console.log('[app] isInApp', isInApp());
   console.log('[app] NativeAppInfo', NativeAppInfo);
   console.log('[app] GlobalAppMode', GlobalAppMode.mode);
+  console.log("AppFlag", AppFlag);
   // alertModal(JSON.stringify(NativeAppInfo));
 
   return (

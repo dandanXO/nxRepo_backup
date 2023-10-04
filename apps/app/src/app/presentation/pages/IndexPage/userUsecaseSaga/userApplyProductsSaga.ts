@@ -13,7 +13,7 @@ import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
 import {SentryModule} from "../../../../modules/sentry";
 import {go, routerActions} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
-import {getToken} from "../../../../modules/querystring/getToken";
+import {getToken} from "../../../../persistant/getToken";
 import {errorFallback} from "../../../../usecaseFlow/utils/errorFallback";
 import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
 

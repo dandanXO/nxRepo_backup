@@ -1,25 +1,29 @@
-import { SentryModule } from '../../modules/sentry';
-import { Location } from 'history';
-import { all, call, fork, put, select } from 'redux-saga/effects';
+import {Location} from 'history';
+import {call, put, select} from 'redux-saga/effects';
+import {push} from "@lagunovsky/redux-react-router";
 
-import { Service } from '../../api';
-import { alertModal } from '../../api/base/alertModal';
-import { GetUserInfoServiceResponse } from '../../api/userService/GetUserInfoServiceResponse';
+import {SentryModule} from '../../modules/sentry';
+import {Service} from '../../api';
+import {alertModal} from '../../api/base/alertModal';
+import {GetUserInfoServiceResponse} from '../../api/userService/GetUserInfoServiceResponse';
 // import { Posthog } from '../../modules/posthog';
-import { getToken } from '../../modules/querystring/getToken';
-import { NativeAppInfo } from '../../persistant/nativeAppInfo';
-import { PageOrModalPathEnum } from '../../presentation/PageOrModalPathEnum';
-import { RootState, appStore } from '../../reduxStore';
-import { indexPageSlice } from '../../reduxStore/indexPageSlice';
-import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
-import { catchSagaError } from '../utils/catchSagaError';
+import {getToken} from '../../persistant/getToken';
+import {PageOrModalPathEnum} from '../../presentation/PageOrModalPathEnum';
+import {appStore, RootState} from '../../reduxStore';
+import {indexPageSlice} from '../../reduxStore/indexPageSlice';
+import {NativeAppInfo} from '../../persistant/nativeAppInfo';
 import {GlobalAppMode} from "../../persistant/GlobalAppMode";
 import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
 import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
-import {push} from "@lagunovsky/redux-react-router";
-import { GetIndexResponse } from '../../api/indexService/GetIndexResponse';
+import {GetIndexResponse} from '../../api/indexService/GetIndexResponse';
 
-console.log("SentryModule", SentryModule);
+import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
+import {catchSagaError} from '../utils/catchSagaError';
+import {appSlice} from "../../reduxStore/appSlice";
+import queryString from "query-string";
+import {appInfoPersistence} from "../../persistant/appInfo";
+
+console.log("[app] SentryModule", SentryModule);
 
 export function* runSystemInitSaga() {
   console.log("[app][times:1] runSystemInitSaga")
@@ -34,13 +38,14 @@ export function* runSystemInitSaga() {
 
     const location: Location = yield select((state: RootState) => state.navigator.location);
 
+    // NOTE: Setting GlobalAppMode
     if (NativeAppInfo.mode === 'Webview') {
       // NOTICE: 初始化 GlobalAppMode.mode
       if (location.pathname === PageOrModalPathEnum.IndexPage) {
         // NOTE: 用 Android APP 開啟 H5 首頁
         // AppModeModel.setMode(AppModeEnum.IndexWebview);
-
         GlobalAppMode.mode = AppModeEnum.IndexWebview;
+
         // NOTE: Posthog
         // yield call(Posthog.init);
       } else {
@@ -53,9 +58,9 @@ export function* runSystemInitSaga() {
       // AppModeModel.setMode(AppModeEnum.PureH5)
       GlobalAppMode.mode = AppModeEnum.PureH5;
     }
+    console.log('[app] GlobalAppMode = ' + GlobalAppMode.mode);
 
-    console.log('GlobalAppMode = ' + GlobalAppMode.mode);
-
+    // NOTE: 根據初始頁面進行初始化
     if (NativeAppInfo.mode === 'Webview') {
 
       // NOTE: 不需要登入才能訪問的頁面
@@ -64,13 +69,12 @@ export function* runSystemInitSaga() {
         //
       } else if (location.pathname === PageOrModalPathEnum.LoginPage) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
-
       } else {
         // NOTICE: 這邊綁卡頁之類也會呼叫到
-
         // NOTE: 需要登入才能訪問的頁面
         const token = getToken();
         // console.log("token", token);
+
         if (!token) {
           const message = '[Webview] Server Error: Need Token';
           // FIXME:
@@ -82,13 +86,13 @@ export function* runSystemInitSaga() {
         // NOTICE: 還款頁面、綁卡頁面、IBAN 說明頁面 (使用 URL Querystring Token 進行登入)
         // NOTE: 更新使用者資訊
         const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-        console.log("userResponse", userResponse);
+        // console.log("[app] userResponse", userResponse);
         yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
         // NOTE: 登入成功
         MonitorUsecaseFlow.userLogin(userResponse);
 
-        // Loan Agreement 資料在 index
+        // NOTE: Loan Agreement 資料在 index
         const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
         yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
 
@@ -104,10 +108,23 @@ export function* runSystemInitSaga() {
         // NOTICE: 以下這行會導致上層 saga 中斷
         // yield catchSagaError(error);
       }
+      const parsedQueryString = queryString.parse(window.location.search);
+      const appName = appInfoPersistence.appName || parsedQueryString["appName"] as string;
+      const appID = appInfoPersistence.appID || parsedQueryString["appID"] as string;
+      if(!appName || !appName) {
+        alertModal("Please select valid appName and appID");
+        return ;
+      }
+      appInfoPersistence.appName = appName;
+      appInfoPersistence.appID = appID;
+
+      yield put(appSlice.actions.updateAppInfo({
+        appName,
+        appID,
+      }));
 
       if (location.pathname === PageOrModalPathEnum.LoginPage) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
-
       } else {
         // NOTICE: 沒有登入權限跳轉至 Login
         const token = getToken();
@@ -124,11 +141,8 @@ export function* runSystemInitSaga() {
         const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
         console.log("userResponse", userResponse);
         yield put(indexPageSlice.actions.updateUserAPI(userResponse));
-
       }
-
     }
-
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
     appStore.dispatch(SystemCaseActions.InitSaga());
 

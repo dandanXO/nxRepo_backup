@@ -11,7 +11,7 @@ import { environment } from '../../../../../../environments/environmentModule/en
 import { InputValue } from '../../../../../modules/form/InputValue';
 import { formatDate } from '../../../../../modules/format/formatDate';
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../modules/querystring/getToken';
+import { getToken } from '../../../../../persistant/getToken';
 import { RootState } from '../../../../../reduxStore';
 import { repaymentDetailPageInitialState } from '../../../../../reduxStore/repaymentDetailPageSlice';
 import ListItem from '../../../../core-components/ListItem';

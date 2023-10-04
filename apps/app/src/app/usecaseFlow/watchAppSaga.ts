@@ -15,9 +15,8 @@ import { watchRepaymentDetailPageSaga } from '../presentation/pages/RepaymentDet
 export function* WatchAppSaga() {
   try {
     console.log('[app][saga] 1');
+
     yield all([
-
-
       // NOTICE: watch common
       watchSystemInitSaga(),
       watchSystemUseCaseSaga(),
@@ -35,6 +34,7 @@ export function* WatchAppSaga() {
       runSystemInitSaga(),
     ]);
     console.log('[app][saga] 3');
+
   } catch (error) {
     console.log('error', error);
     yield catchSagaError(error);

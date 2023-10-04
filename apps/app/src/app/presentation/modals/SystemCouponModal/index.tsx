@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../reduxStore';
 import { Button } from '../../core-components/Button';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { SystemCaseActions } from '../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import CouponModalContentAndroidWebviewPage from '../../pages/CouponModalContentAndroidWebviewPage';

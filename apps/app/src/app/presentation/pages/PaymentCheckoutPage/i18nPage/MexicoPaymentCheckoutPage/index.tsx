@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepayCreateResponse';
-import { getToken } from '../../../../../modules/querystring/getToken';
+import { getToken } from '../../../../../persistant/getToken';
 import { Label } from '../../../../core-components/Labels';
 import Money from '../../../../components/Money';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';

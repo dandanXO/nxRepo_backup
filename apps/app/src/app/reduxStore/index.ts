@@ -14,6 +14,7 @@ import { loadingSlice } from './loadingSlice';
 import { repaymentPageSlice } from './repaymentPageSlice';
 import { repaymentDetailPageSlice } from './repaymentDetailPageSlice';
 import { rtkPendingSlice } from './rtkPendingSlice';
+import {SentryModule} from "../modules/sentry";
 
 export const history = createBrowserHistory();
 const routerMiddleware = createRouterMiddleware(history);
@@ -22,7 +23,6 @@ const logger = (store: any) => (next: any) => (action: any) => {
   if (action.type !== 'indexPage/updateRiskCountdown') {
     // console.log('dispatching', action)
   }
-
   const result: any = next(action);
 
   if (action.type !== 'indexPage/updateRiskCountdown') {
@@ -65,13 +65,16 @@ export const appStore = configureStore({
       .concat(sagaMiddleware),
 });
 
+// NOTE: refactor me
 // NOTICE: then run the saga
 const rootSagaTask = sagaMiddleware.run(WatchAppSaga);
 rootSagaTask.toPromise().catch((error) => {
   // Error here is a fatal error.
   // None of the sagas down the road caught it.
   console.log('[APP][rootSagaTask]', error);
+  SentryModule.captureException(error);
 });
+
 export type RootState = ReturnType<typeof appStore.getState>;
 export type AppDispatch = typeof appStore.dispatch;
 
@@ -82,3 +85,4 @@ export type IndexPageProps = {
 appStore.subscribe(() => {
   // console.log("[app] store:", appStore.getState())
 });
+

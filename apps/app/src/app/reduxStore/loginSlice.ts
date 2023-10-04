@@ -1,4 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import {appInfoPersistence} from "../persistant/appInfo";
+import {userInfoPersistence} from "../persistant/userInfo";
 
 export type UserResendSecondsActionPayload = {
   resendSeconds: number;
@@ -6,7 +8,7 @@ export type UserResendSecondsActionPayload = {
 };
 const initialState: UserResendSecondsActionPayload = {
   resendSeconds: 60,
-  phoneNo: undefined,
+  phoneNo: userInfoPersistence.phone || undefined,
 };
 export const loginSlice = createSlice({
   name: 'login',

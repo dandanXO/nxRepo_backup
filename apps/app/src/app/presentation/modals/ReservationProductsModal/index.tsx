@@ -4,7 +4,7 @@ import Modal from '../../core-components/Modal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { RootState } from '../../../reduxStore';
 import { LoanAgreementModal } from '../QRLoanAgreementModal';
 import { Product } from '../../components/Product';

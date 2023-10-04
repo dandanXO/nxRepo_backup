@@ -4,6 +4,7 @@ import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse
 import { IAndroidAppInfo } from '../persistant/nativeAppInfo/types/IAndroidAppInfo';
 import {NativeAppInfo} from "../persistant/nativeAppInfo";
 import queryString from "query-string";
+import {appInfoPersistence} from "../persistant/appInfo";
 
 export enum AppRunningModeEnum {
   'Unknown',
@@ -14,7 +15,7 @@ export enum AppRunningModeEnum {
 export type InitailState = {
   init?: GetInitServiceResponse;
   mode: AppRunningModeEnum;
-  token: string;
+  // token: string;
   isInit: boolean;
   androidAppInfo: null | IAndroidAppInfo;
   appName: string;
@@ -25,11 +26,11 @@ const parsedQueryString = queryString.parse(window.location.search);
 
 const initialState: InitailState = {
   mode: AppRunningModeEnum.Unknown,
-  token: '',
+  // token: '',
   isInit: false,
   androidAppInfo: null,
-  appName: NativeAppInfo.appName || parsedQueryString['appName'] ? (parsedQueryString['appName'] as string) : "",
-  appID: NativeAppInfo.packageId || parsedQueryString['packageId'] ? (parsedQueryString['packageId'] as string) : "",
+  appName: appInfoPersistence.appName || NativeAppInfo.appName || parsedQueryString['appName'] ? (parsedQueryString['appName'] as string) : "",
+  appID: appInfoPersistence.appID || NativeAppInfo.packageId || parsedQueryString['packageId'] ? (parsedQueryString['packageId'] as string) : "",
 };
 
 export const appSlice = createSlice({
@@ -45,11 +46,15 @@ export const appSlice = createSlice({
     updateMode: (state: InitailState, action: PayloadAction<AppRunningModeEnum>) => {
       state.mode = action.payload;
     },
-    updateToken: (state: InitailState, action: PayloadAction<string>) => {
-      state.token = action.payload;
-    },
+    // updateToken: (state: InitailState, action: PayloadAction<string>) => {
+    //   state.token = action.payload;
+    // },
     updateAndroidInfo: (state: InitailState, action: PayloadAction<IAndroidAppInfo>) => {
       state.androidAppInfo = action.payload;
     },
+    updateAppInfo: (state: InitailState, action: PayloadAction<{appName: string; appID: string;}>) => {
+      state.appName = action.payload.appName;
+      state.appID = action.payload.appID;
+    }
   },
 });

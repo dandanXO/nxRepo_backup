@@ -44,8 +44,7 @@ window.addEventListener(
 );
 
 
-
-// NOTICE: async
+// NOTE: async
 // NOTE: 当 Promise 被 reject 且有 reject 处理器的时候，会触发 rejectionhandled 事件。
 window.addEventListener('rejectionhandled', (event) => {
   console.log('[APP][ErrorHandler] window.addEventListener.rejectionhandled');
@@ -59,6 +58,7 @@ window.addEventListener('rejectionhandled', (event) => {
   })));
 });
 
+// NOTE: async
 // NOTE: 当 Promise 被 reject 且没有 reject 处理器的时候，会触发 unhandledrejection 事件。
 // NOTICE: 当 Promise 被 reject 且没有 reject 处理器的时候，会触发 unhandledrejection 事件；这可能发生在 window 下，但也可能发生在 Worker 中
 window.addEventListener('unhandledrejection',(event) => {

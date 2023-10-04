@@ -6,7 +6,7 @@ import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import ThankYouIcon from './ThankYouIcon';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 
 const StarRatingSuccessModal = () => {
     const navigate = useNavigate();

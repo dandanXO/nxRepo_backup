@@ -12,7 +12,7 @@ import { usePostRepayReceiptMutation } from '../../../api/rtk';
 import { PostRepayReceiptResponse } from '../../../api/rtk/old/PostRepayReceiptResponse';
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';

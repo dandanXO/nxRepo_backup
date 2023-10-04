@@ -9,7 +9,7 @@ import Select from "../../../../core-components/Select";
 import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
-import { getToken } from '../../../../../modules/querystring/getToken';
+import { getToken } from '../../../../../persistant/getToken';
 import ListItem from '../../../../core-components/ListItem';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";

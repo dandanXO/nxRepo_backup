@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepayCreateResponse';
-import { getToken } from '../../../../../modules/querystring/getToken';
+import { getToken } from '../../../../../persistant/getToken';
 import { tcx } from '../../../../../modules/tailwindcss';
 import Divider from '../../../../core-components/Divider';
 import Money from '../../../../components/Money';

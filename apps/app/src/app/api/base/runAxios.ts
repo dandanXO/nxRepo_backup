@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
 import { AppEnvironment } from '../../modules/appEnvironment';
-import { getToken } from '../../modules/querystring/getToken';
+import { getToken } from '../../persistant/getToken';
 import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
 import {alertModal} from "./alertModal";
 import {put} from "redux-saga/effects";

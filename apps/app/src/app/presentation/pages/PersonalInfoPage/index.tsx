@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router';
 
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { RootState } from '../../../reduxStore';
 import UserIcon from './images/UserIcon.svg';
 import { Button } from '../../core-components/Button';
@@ -49,7 +49,7 @@ const PersonalInfoPage = () => {
   };
 
   const {maskPhoneNumber} = useUserPhoneNumber();
-  
+
   return (
     <Page className="flex flex-col pb-20 bg-cbg-primary">
       <div className={`my-4 flex flex-row items-center justify-center`}>

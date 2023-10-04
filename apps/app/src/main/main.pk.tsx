@@ -24,6 +24,28 @@ import {AppRouter} from "../app/presentation/router/index.pk";
 import {CoreMain} from "./main.core";
 import {I18nModule} from "../app/modules/i18n";
 
+
+// NOTICE:
+if (window.Cypress) {
+  // window.appReady = true
+  // NOTICE: for testing dev in
+  // window.AppInfoTask = {
+  //   getAppInfo: () => JSON.stringify({
+  //     appName: "longingloan",
+  //     deviceCode: "e8561b5b-36f1-4dd7-bc2d-67466c7a1f47",
+  //     domain: "india-api-dev.com",
+  //     environment: "india",
+  //     isPinCodeEnabled: false,
+  //     mode: "Webview",
+  //     packageId:"com.ind.kyc.application",
+  //     phoneNo: "8888888888",
+  //     token: "e1ab7e18244e4bfb9f8c48f3d4c317cd",
+  //     uiVersion: "58",
+  //   })
+  // }
+}
+
+
 const renderApp = () => {
   MonitorUsecaseFlow.appLoadAndroidAppInfo();
 

@@ -8,8 +8,9 @@ import {call, put, race, select, take} from "redux-saga/effects";
 import {API, APIV3} from "../../../../api/rtk";
 import {push, routerActions} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
-import {getToken} from "../../../../modules/querystring/getToken";
+import {getToken, removeTokenFromLocalStorage} from "../../../../persistant/getToken";
 import {RootState} from "../../../../reduxStore";
+import {userInfoPersistence} from "../../../../persistant/userInfo";
 
 function *logoutSaga() {
 
@@ -28,6 +29,8 @@ function *logoutSaga() {
   })
 
   if(success) {
+    removeTokenFromLocalStorage();
+    userInfoPersistence.clearPhone();
     yield put(routerActions.push(PageOrModalPathEnum.LoginPage))
   }
   // TODO: 這邊錯誤有捕捉嗎?

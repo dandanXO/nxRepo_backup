@@ -5,7 +5,7 @@ import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { Button } from '../../core-components/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useEffect, useState } from 'react';

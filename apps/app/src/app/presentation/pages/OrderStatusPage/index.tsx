@@ -2,7 +2,7 @@ import moment from 'moment';
 import { useLocation, useNavigate } from 'react-router';
 
 import { ApproveRecord } from '../../../api/loanService/ApproveRecord';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';
 import { PageContent } from '../../core-components/PageContent';

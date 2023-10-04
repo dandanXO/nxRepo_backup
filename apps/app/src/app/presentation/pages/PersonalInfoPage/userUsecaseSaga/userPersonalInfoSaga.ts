@@ -9,7 +9,7 @@ export function* userPersonalInfoSaga(action: any) {
     try {
         yield put(loadingSlice.actions.updatePageLoading(true));
 
-        // yield call(systemCallGetUserInfoSaga);
+        yield call(systemCallGetUserInfoSaga);
         yield call(systemGetIndexPageSaga);
 
 

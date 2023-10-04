@@ -6,7 +6,7 @@ import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../api/rtk/old/getLoanDetail';
 import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../../modules/querystring/getToken';
+import { getToken } from '../../../../../../persistant/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';

@@ -4,13 +4,12 @@ import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
 import posthog from 'posthog-js';
 
+import { AppEnvironment } from '../appEnvironment';
 import { AppFlag } from '../../../environments/flag';
 import { NativeAppInfo } from '../../persistant/nativeAppInfo';
 import { RootState, appStore } from '../../reduxStore';
-import { AppEnvironment } from '../appEnvironment';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 
-console.log("AppFlag", AppFlag);
 
 // NOTE: 初始化
 let loaded = false;
@@ -19,7 +18,7 @@ if (AppFlag.enableSentry && loaded === false) {
   loaded = true;
 
   const environmentName = AppEnvironment.getEnvironmentName();
-  console.log("environmentName", environmentName);
+  // console.log("environmentName", environmentName);
 
   const replayConfig = {
     maskAllText: false,
@@ -67,8 +66,8 @@ if (AppFlag.enableSentry && loaded === false) {
   if (!AppEnvironment.isLocalhost()) {
     sentryConfig.release = AppInfo.COMMITHASH;
   }
+  console.log("[app] sentryConfig", sentryConfig);
 
-  console.log("sentryConfig", sentryConfig);
   Sentry.init(sentryConfig);
 
   // TODO:
@@ -103,7 +102,7 @@ export class SentryModule {
     // if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
-    console.log('appInfo', NativeAppInfo);
+    // console.log('appInfo', NativeAppInfo);
 
     const appState: RootState = appStore.getState();
     const user = appState?.indexPage?.user;

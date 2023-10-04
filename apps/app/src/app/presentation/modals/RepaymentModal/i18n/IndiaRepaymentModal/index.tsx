@@ -8,7 +8,7 @@ import { Horizontal, Input, InputValue, ListItem, Overlay, Radio } from '@fronte
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
-import { getToken } from '../../../../../modules/querystring/getToken';
+import { getToken } from '../../../../../persistant/getToken';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
-import { getToken } from '../../../modules/querystring/getToken';
+import { getToken } from '../../../persistant/getToken';
 import { Status } from '../../../modules/statusEnum';
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';

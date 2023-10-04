@@ -4,7 +4,7 @@ import Modal from '../../core-components/Modal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reduxStore';
 import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
-import { getToken } from '../../../modules/querystring/getToken';
+import {getToken, removeTokenFromLocalStorage} from '../../../persistant/getToken';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { useDeleteUserMutation } from '../../../api/rtk';
 import { AndroidPage } from '../../../modules/window/IWindow';
@@ -13,6 +13,7 @@ import {isInApp} from "../../../modules/appEnvironment/isInApp";
 import {alertModal} from "../../../api/base/alertModal";
 import {SentryModule} from "../../../modules/sentry";
 import {select} from "redux-saga/effects";
+import {userInfoPersistence} from "../../../persistant/userInfo";
 
 const DeleteAccountConfirmModal = () => {
     const navigate = useNavigate();
@@ -63,6 +64,8 @@ const DeleteAccountConfirmModal = () => {
                               message = "Error: APP:407"
                               collectMessage = "注意: SimpleWebView 不會有此 flow";
                             } else if(GlobalAppMode.mode === "PureH5") {
+                              removeTokenFromLocalStorage();
+                              userInfoPersistence.clearPhone();
                               // NOTE:
                               navigate(`${PageOrModalPathEnum.LoginPage}?appName=${appName}`);
                             }
