@@ -57,7 +57,7 @@ const DeleteAccountConfirmModal = () => {
                                     window['IndexTask']['navToPage'](AndroidPage.LOGIN);
                                 } else {
                                   message = "Error: APP:406"
-                                  collectMessage = "Call Android IndexTask.uploadKycBackgroundData unsuccessfully";
+                                  collectMessage = "Call Android IndexTask.navToPage unsuccessfully";
                                 }
                             } else if(GlobalAppMode.mode === "SimpleWebView") {
                               message = "Error: APP:407"

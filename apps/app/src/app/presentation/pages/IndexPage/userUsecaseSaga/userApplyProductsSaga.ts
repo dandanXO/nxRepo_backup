@@ -15,6 +15,7 @@ import {go, routerActions} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {getToken} from "../../../../modules/querystring/getToken";
 import {errorFallback} from "../../../../usecaseFlow/utils/errorFallback";
+import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
 
@@ -53,44 +54,48 @@ function* callAndroidFunctionToUploadUserPhoneData() {
 }
 
 export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductActionPayload>) {
-  console.group("userApplyProductsSaga.action", action);
+  console.log("userApplyProductsSaga.action", action);
 
   // NOTICE: 防止錯誤後無法重新 watch
   try {
     yield put(routerActions.push(`${PageOrModalPathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`))
 
-    let uploaded = false;
+    let wasUserUploadedDataOrSystemIgnoreUserToUpload = false;
 
     // NOTE: 系統沒開啟老客強下開關才需要彈跳 SummaryModal
-    const oldUserForceApply: boolean = yield select((state: RootState) => state.indexPage.indexAPI?.oldUserForceApply);
-    if(!oldUserForceApply) {
+    const isSystemEnableToForceApplyForOldUser: boolean = yield select((state: RootState) => state.indexPage.indexAPI?.oldUserForceApply);
+
+    if(!isSystemEnableToForceApplyForOldUser) {
       // NOTE: 讀取相關總結資訊
       // NOTE: way1
       // const getBankCardListAction = API.endpoints.getBankCardList.initiate(null) as any;
       // yield put(getBankCardListAction)
       // NOTE: way2
-      const data: GetBankCardListResponse = yield call(Service.UserService.GetBankCardList, null);
-      // console.log('data', data);
 
-      // const oldUserForceApply: boolean = yield select((state: RootState) => state.indexPage.indexAPI?.oldUserForceApply);
+      // NOTICE: 這邊沒加上 loading 會無法監聽到 "用戶取消借款"???
+      yield put(loadingSlice.actions.updatePageLoading(true));
 
-      // NOTE: 彈跳 Popup Summary Modal - confirm | cancel | (see loan agreement model)
+      const bankCardListResponse: GetBankCardListResponse = yield call(Service.UserService.GetBankCardList, null);
+
+      // console.log('bankCardListResponse', bankCardListResponse);
+
+      // NOTE: 彈跳 Popup Summary Modal (confirm | cancel | to see loan agreement modal)
       // yield put(
       //   modalSlice.actions.updateQuickRepaymentSummaryModal({
       //     show: true,
       //     confirm: false,
-      //     bankcardList: data.bankAccounts,
+      //     bankcardList: bankCardListResponse.bankAccounts,
       //   })
       // );
       yield put(
         modalSlice.actions.updateSimpleQuickRepaymentModal({
           show: true,
           confirm: false,
-          bankcardList: data.bankAccounts,
+          bankcardList: bankCardListResponse.bankAccounts,
         })
       );
 
-      // 預設第一張銀行卡
+      // NOTE: 預設第一張銀行卡
       // yield put(
       //   modalSlice.actions.updateQuickRepaymentSummaryModalSelectedID({
       //     selectedBankcardId: data.bankAccounts[0].bankId,
@@ -98,11 +103,12 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       // );
       yield put(
         modalSlice.actions.updateSimpleQuickRepaymentModalSelectedID({
-          selectedBankcardId: data.bankAccounts[0].bankId,
+          selectedBankcardId: bankCardListResponse.bankAccounts[0].bankId,
         })
       );
+      yield put(loadingSlice.actions.updatePageLoading(false));
 
-      // NOTE: Waiting for user to confirm | cancel | (see loan agreement modal)
+      // NOTE: Waiting for user to (confirm | cancel | to see loan agreement modal)
       // const {
       //   type,
       //   payload: { show, confirm },
@@ -114,46 +120,71 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
       //   return;
       // } else {
       //   console.log("applyLoan");
-      //   uploaded = yield call(autoToUploadUserPhoneData);
+      //   wasUserUploadedDataOrSystemIgnoreUserToUpload = yield call(autoToUploadUserPhoneData);
       // }
-      uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
-    } else {
-      uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
     }
 
-    // 用戶是否點擊過借款按鈕
-    let isUserTapApplyButton = false;
+    // NOTE: 直接省略此流程
+    const ignoreToLetUserToAuthenticate = GlobalAppMode.mode === "PureH5" || GlobalAppMode.mode === "SimpleWebView" || GlobalAppMode.mode === "None";
+    const letUserToAuthenticate = GlobalAppMode.mode === 'IndexWebview'
 
-    // 當日沒上傳過過，點擊付款認後
+    console.log("ignoreToLetUserToAuthenticate: ", ignoreToLetUserToAuthenticate);
+    console.log("letUserToAuthenticate: ", letUserToAuthenticate);
+
+    if(ignoreToLetUserToAuthenticate) {
+      wasUserUploadedDataOrSystemIgnoreUserToUpload = true;
+    } else if(letUserToAuthenticate) {
+      wasUserUploadedDataOrSystemIgnoreUserToUpload = yield call(callAndroidFunctionToUploadUserPhoneData);
+    }
+
+    // NOTE: 用戶是否點擊過借款按鈕
+    let wasUserTapApplyButton = false;
+
+    // NOTE: 當日沒上傳過過，點擊付款認後
+    // TODO: refactor me - processFinished
     let processFinished = false;
-    while(!uploaded && !processFinished) {
-      // 等待用戶點擊借款
+    while(!processFinished && !wasUserUploadedDataOrSystemIgnoreUserToUpload) {
+      // NOTE: 等待用戶點擊借款, 只有確認可以點，點其他地方都進不來
+      console.log("等待用戶點擊借款, 只有確認可以點，點其他地方都進不來");
       const {
         type,
         payload: { show, confirm },
       }: PayloadAction<InitialStateType['simpleQuickRepaymentModal']> = yield take(
         modalSlice.actions.updateSimpleQuickRepaymentModal
       );
-      isUserTapApplyButton = true;
+      console.log("點擊了 confirm: ", confirm);
+      wasUserTapApplyButton = true;
+
       // 點擊借款
       if (confirm) {
         // 當日沒上傳過再次彈出授權權限畫面
-        if(!uploaded) {
-          uploaded = yield call(callAndroidFunctionToUploadUserPhoneData);
-        } else {
-          // 當日上傳過可以跳到借款 API
+        if(wasUserUploadedDataOrSystemIgnoreUserToUpload) {
+          // 當日上傳過可以跳到借款 API || PureH5 不需要上傳
           processFinished = true;
+        } else {
+          if(ignoreToLetUserToAuthenticate) {
+            console.log("ignoreToLetUserToAuthenticate");
+          } else if(letUserToAuthenticate) {
+            wasUserUploadedDataOrSystemIgnoreUserToUpload = yield call(callAndroidFunctionToUploadUserPhoneData);
+          }
         }
       } else {
-        // NOTICE: 用戶點擊其他地方取消借款
+        // NOTICE: 用戶點擊取消
+        console.log("用戶點擊取消");
         processFinished = true;
         return;
       }
     }
 
+    console.log("step2");
     // NOTICE: 用戶授權過權限，但沒有還沒有點擊過借款按鈕
-    if(!isUserTapApplyButton) {
-      console.log("用戶授權過權限，但沒有還沒有點擊過借款按鈕")
+    if(!wasUserTapApplyButton) {
+      if(GlobalAppMode.mode === "IndexWebview") {
+        console.log("用戶授權過權限，但沒有還沒有點擊過借款按鈕")
+      }
+      if(GlobalAppMode.mode === "PureH5") {
+        console.log("等待借款確認");
+      }
       const {
         type,
         payload: { show, confirm },
@@ -169,14 +200,16 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     }
 
     // NOTICE: 用戶成功授權並且點擊過借款按鈕
-    if(uploaded) {
+    if(wasUserUploadedDataOrSystemIgnoreUserToUpload) {
       console.log("系統開始借款流程")
 
       const selectedBankcardID: number = yield select(
         (state: RootState) => state.model.simpleQuickRepaymentModal.selectedBankcardId
       );
 
+
       yield put(loadingSlice.actions.updatePageLoading(true));
+
       const { data: responseData, success }: { data: LoanServiceResponse; success: boolean } = yield call(
         Service.LoanService.applyLoan,
         {
@@ -184,7 +217,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
           bankId: selectedBankcardID,
         }
       );
-      // console.log("applyLoan.responseData", responseData);
+      console.log("applyLoan.responseData", responseData);
 
       if (success) {
         // NOTE: Refresh IndexPage view data
@@ -215,6 +248,5 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     yield catchSagaError(error);
   } finally {
     yield put(loadingSlice.actions.updatePageLoading(false));
-    // console.groupEnd();
   }
 }
