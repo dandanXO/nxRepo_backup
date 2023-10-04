@@ -18,6 +18,7 @@ import {
     GetCollectTodayUserDetailQueryString,
     GetCollectTodayUserDetailResponse,
 } from './types/getCollectTodayUserDetail';
+import { GetCollectTodayCollectTeamListResponse } from "./types/getCollectTodayCollectTeamList";
 
 const CollectTodayApi = API.injectEndpoints({
     overrideExisting: false,
@@ -103,10 +104,18 @@ const CollectTodayApi = API.injectEndpoints({
                 method: 'get',
             }),
         }),
+        // [GET] 获取當日催收催收團隊
+        getCollectTodayCollectTeamList: builder.query<GetCollectTodayCollectTeamListResponse, null>({
+            query: () => ({
+                url: '/collect-today/collect-team-list',
+                method: 'get'
+            })
+        })
     }),
 });
 
 export const {
+    useGetCollectTodayCollectTeamListQuery,
     useGetCollectTodayCollectDepartmentListQuery,
     useGetTodayCollectorListQuery,
     useGetCollectTodayUserDetailQuery,

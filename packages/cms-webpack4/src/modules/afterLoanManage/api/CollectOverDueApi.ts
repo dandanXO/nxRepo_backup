@@ -21,6 +21,7 @@ import {
     GetCollectOverDueUserDetailResponse,
 } from './types/getCollectOverDueUserDetail';
 import { GetCollectOverdueCollectDepartmentListResponse } from './types/getCollectOverdueCollectDepartmentList';
+import { GetCollectOverdueCollectTeamListResponse } from "./types/getCollectOverdueCollectTeamList";
 
 const CollectOverDueApi = API.injectEndpoints({
     overrideExisting: false,
@@ -106,10 +107,18 @@ const CollectOverDueApi = API.injectEndpoints({
                 method: 'get',
             }),
         }),
+        // [GET] 获取逾期催收團隊列表
+        getCollectOverdueCollectTeamList: builder.query<GetCollectOverdueCollectTeamListResponse, null>({
+            query: ()=>({
+                url: '/collect-overdue/collect-team-list',
+                method: 'get'
+            })
+        })
     }),
 });
 
 export const {
+    useGetCollectOverdueCollectTeamListQuery,
     useGetCollectOverdueCollectDepartmentListQuery,
     useGetCollectOverDueCollectorListQuery,
     useGetCollectOverDueUserDetailQuery,
