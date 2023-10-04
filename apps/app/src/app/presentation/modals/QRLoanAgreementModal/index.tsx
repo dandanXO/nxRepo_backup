@@ -37,7 +37,7 @@ export const LoanAgreementModal = (props: Props) => {
           <div className={'content flex-1'}>
               {/*<div dangerouslySetInnerHTML={{ __html: htmlData}}/>*/}
               {/*<iframe id="loan-agreement" className="w-full h-full" src={url} />*/}
-            <iframe id="loan-agreement" className="w-full h-full" src={htmlData}/>
+              {htmlData && <iframe id="loan-agreement" className="w-full h-full" src={htmlData}/>}
           </div>
       </div>
 
