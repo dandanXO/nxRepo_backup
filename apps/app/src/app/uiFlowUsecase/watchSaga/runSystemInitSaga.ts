@@ -22,6 +22,7 @@ import {catchSagaError} from '../utils/catchSagaError';
 import {appSlice} from "../../reduxStore/appSlice";
 import queryString from "query-string";
 import {appInfoPersistence} from "../../persistant/AppInfoPersistence";
+import {systemGetIndexPageSaga} from "../type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga";
 
 console.log("[app] SentryModule", SentryModule);
 
@@ -152,6 +153,10 @@ export function* runSystemInitSaga() {
         const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
         console.log("userResponse", userResponse);
         yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+        // NOTE: 共用資料需要統一再次拉取
+        yield call(systemGetIndexPageSaga);
+
+
       }
     }
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)

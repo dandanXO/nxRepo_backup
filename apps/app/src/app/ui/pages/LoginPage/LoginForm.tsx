@@ -1,16 +1,19 @@
-import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import cx from 'classnames';
 
+// refactor
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../core-components/Button';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 import {RootState} from "../../../reduxStore";
 import {loginSlice} from "../../../reduxStore/loginSlice";
 import {getToken} from "../../../application/getToken";
+
+import { Button } from '../../core-components/Button';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+
+import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -30,6 +33,21 @@ export const LoginForm = () => {
         errorMessage: '',
       });
     }
+  }, [phoneNumber])
+
+  const validatePhoneFormat = (value: string) => {
+    const isError = value.length !== 10;
+    setPhoneNumberData({
+      data: value,
+      isValidation: !isError,
+      errorMessage: isError ? '*Please enter the correct phone number.' : '',
+    });
+    setEnableGetOTP(!isError);
+    dispatch(loginSlice.actions.updatePhoneNo(value))
+  }
+  useEffect(() => {
+    if(!phoneNumber) return;
+    validatePhoneFormat(phoneNumber)
   }, [phoneNumber])
 
   const [enableGetOTP, setEnableGetOTP] = useState(false);
@@ -101,6 +119,8 @@ export const LoginForm = () => {
 
   const appName: string =  useSelector((state: RootState) => state.app.appName);
 
+
+
   return (
     <>
       <div className={`grow`}>
@@ -123,16 +143,7 @@ export const LoginForm = () => {
           disabled={false}
           errorMessage={phoneNumberData.errorMessage}
           onBlur={(event: any) => {
-            const value = event.target.value;
-            const isError = value.length !== 10;
-            setPhoneNumberData({
-              data: value,
-              isValidation: !isError,
-              errorMessage: isError ? '*Please enter the correct phone number.' : '',
-            });
-            setEnableGetOTP(!isError);
-
-            dispatch(loginSlice.actions.updatePhoneNo(value))
+            validatePhoneFormat(event.target.value)
           }}
           onChange={(event: any) => {
             const value = event.target.value;

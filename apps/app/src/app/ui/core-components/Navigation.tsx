@@ -25,6 +25,7 @@ export const Navigation = (props: Props) => {
       {props.back && (
         <div
           onClick={() => {
+            // console.log("press back")
             props.back && props.back();
           }}
         >
