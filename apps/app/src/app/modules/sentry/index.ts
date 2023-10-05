@@ -4,9 +4,9 @@ import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
 import posthog from 'posthog-js';
 
-import { AppEnvironment } from '../appEnvironment';
+import { AppEnvironment } from '../../device/appEnvironment';
 import { AppFlag } from '../../../environments/flag';
-import { NativeAppInfo } from '../../persistant/nativeAppInfo';
+import { NativeAppInfo } from '../../application/nativeAppInfo';
 import { RootState, appStore } from '../../reduxStore';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 

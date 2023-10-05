@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { GetInitServiceResponse } from '../api/appService/GetInitServiceResponse';
-import { IAndroidAppInfo } from '../persistant/nativeAppInfo/types/IAndroidAppInfo';
-import {NativeAppInfo} from "../persistant/nativeAppInfo";
+import { GetInitServiceResponse } from '../externel/backend/appService/GetInitServiceResponse';
+import { IAndroidAppInfo } from '../externel/nativeApp/types/IAndroidAppInfo';
+import {NativeAppInfo} from "../application/nativeAppInfo";
 import queryString from "query-string";
 import {appInfoPersistence} from "../persistant/AppInfoPersistence";
 

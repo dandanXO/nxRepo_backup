@@ -2,24 +2,24 @@ import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { i18nextPlugin } from 'translation-check';
 
-import { AllCountry } from '../../../../../../libs/shared/domain/src/country/AllCountry';
-import { environment } from '../../../environments/environmentModule/environment';
-import { i18nCoupon } from '../../presentation/components/Coupon/i18n/translations';
-import { i18nProduct } from '../../presentation/components/Product/i18n/translations';
-import { i18nAmountRepaidModal } from '../../presentation/modals/AmountRepaidModal/i18n/translations';
-import { i18nConfirmBindBankCardModal } from '../../presentation/modals/ConfirmBindBankCardModal/i18n/translations';
-import { i18nExtendConfirmModal } from '../../presentation/modals/ExtendConfirmModal/translations';
-import { i18nExtendModal } from '../../presentation/modals/ExtendModal/translations';
-import { i18nRepaymentCouponModal } from '../../presentation/modals/RepaymentCouponModal/i18n/translations';
-import { i18nRepaymentModal } from '../../presentation/modals/RepaymentModal/i18n/translations';
-import { i18nReservationProductsModal } from '../../presentation/modals/ReservationProductsModal/translations';
-import { i18nReservationSuccessModal } from '../../presentation/modals/ReservationSuccessModal/i18n/translations';
-import { i18nBankBindAccountPage } from '../../presentation/pages/BindBankCardPage/translations';
-import { i18nPaymentInstructionPage } from '../../presentation/pages/PaymentCheckoutPage/translations';
-import { i18nLoanDetailsPage } from '../../presentation/pages/RepaymentDetailPage/translations';
-import { i18nUploadPaymentReceiptPage } from '../../presentation/pages/UploadPaymentReceiptPage/i18nPage/translations';
-import { i18nUploadingFileModal } from '../../presentation/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';
-import { i18nUploadedPaymentReceiptPage } from '../../presentation/pages/UploadedPaymentReceiptPage/components/i18n/translations';
+import { i18nCoupon } from '../../ui/components/Coupon/i18n/translations';
+import { i18nProduct } from '../../ui/components/Product/i18n/translations';
+import { i18nAmountRepaidModal } from '../../ui/modals/AmountRepaidModal/i18n/translations';
+import { i18nConfirmBindBankCardModal } from '../../ui/modals/ConfirmBindBankCardModal/i18n/translations';
+import { i18nExtendConfirmModal } from '../../ui/modals/ExtendConfirmModal/translations';
+import { i18nExtendModal } from '../../ui/modals/ExtendModal/translations';
+import { i18nRepaymentCouponModal } from '../../ui/modals/RepaymentCouponModal/i18n/translations';
+import { i18nRepaymentModal } from '../../ui/modals/RepaymentModal/i18n/translations';
+import { i18nReservationProductsModal } from '../../ui/modals/ReservationProductsModal/translations';
+import { i18nReservationSuccessModal } from '../../ui/modals/ReservationSuccessModal/i18n/translations';
+import { i18nBankBindAccountPage } from '../../ui/pages/BindBankCardPage/translations';
+import { i18nPaymentInstructionPage } from '../../ui/pages/PaymentCheckoutPage/translations';
+import { i18nLoanDetailsPage } from '../../ui/pages/RepaymentDetailPage/translations';
+import { i18nUploadPaymentReceiptPage } from '../../ui/pages/UploadPaymentReceiptPage/i18nPage/translations';
+import { i18nUploadingFileModal } from '../../ui/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';
+import { i18nUploadedPaymentReceiptPage } from '../../ui/pages/UploadedPaymentReceiptPage/components/i18n/translations';
+import {AllCountry} from "../../../../../../libs/shared/domain/src/country/AllCountry";
+import {environment} from "../../../environments/environmentModule/environment";
 
 // NOTE: configure
 i18next

@@ -2,12 +2,12 @@ import posthog from 'posthog-js';
 
 import { PosthogConfig } from '../../../environments/themeModule/india/v55/posthog';
 import { posthogConfigs } from '../../../environments/posthugModule/posthogConfigs';
-import { NativeAppInfo } from '../../persistant/nativeAppInfo';
-import { AppEnvironment } from '../appEnvironment';
+import { NativeAppInfo } from '../../application/nativeAppInfo';
+import { AppEnvironment } from '../../device/appEnvironment';
 import { SentryModule } from '../sentry';
 import {AppFlag} from "../../../environments/flag";
-import {GlobalAppMode} from "../../persistant/GlobalAppMode";
-import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
+import {GlobalAppMode} from "../../application/GlobalAppMode";
+import {AppModeEnum} from "../../application/AppModeEnum";
 
 const getPosthogConfig = (): PosthogConfig | null => {
   // if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {

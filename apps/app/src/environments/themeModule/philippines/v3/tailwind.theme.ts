@@ -1,4 +1,5 @@
-import { ICustomTailwindTheme } from '../../../../app/modules/theme/ICustomTailwindTheme';
+import {ICustomTailwindTheme} from "../../../../app/modules/ui/theme/ICustomTailwindTheme";
+
 
 const theme: ICustomTailwindTheme = {
   // NOTE: color

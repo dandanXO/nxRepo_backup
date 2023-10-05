@@ -1,5 +1,5 @@
 import {DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME, DEFAULT_PHILIPPINES_THEME, themes} from './customTailwindTheme';
-import {NativeAppInfo} from '../../app/persistant/nativeAppInfo';
+import {NativeAppInfo} from '../../app/application/nativeAppInfo';
 import {environment} from "../environmentModule/environment";
 import {IndiaCountry} from "../../../../../libs/shared/domain/src/country/IndiaCountry";
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';

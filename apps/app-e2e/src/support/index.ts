@@ -1,4 +1,4 @@
-import {PageOrModalPathEnum} from "../../../app/src/app/presentation/PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../../app/src/app/ui/PageOrModalPathEnum";
 
 declare global {
   namespace Cypress {

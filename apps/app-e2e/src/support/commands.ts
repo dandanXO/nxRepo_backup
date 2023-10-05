@@ -9,7 +9,7 @@
 // ***********************************************
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
-import {PageOrModalPathEnum} from "../../../app/src/app/presentation/PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../../app/src/app/ui/PageOrModalPathEnum";
 
 declare namespace Cypress {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

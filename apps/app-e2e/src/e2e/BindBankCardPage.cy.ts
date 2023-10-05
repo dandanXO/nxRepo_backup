@@ -1,5 +1,5 @@
-import {PageOrModalPathEnum} from "../../../app/src/app/presentation/PageOrModalPathEnum";
-import {GetBindCardDropListResponse} from "../../../app/src/app/api/rtk/old/GetBindCardDropList";
+import {PageOrModalPathEnum} from "../../../app/src/app/ui/PageOrModalPathEnum";
+import {GetBindCardDropListResponse} from "../../../app/src/app/externel/backend/rtk/old/GetBindCardDropList";
 
 
 describe("BindBankCardPage", () => {

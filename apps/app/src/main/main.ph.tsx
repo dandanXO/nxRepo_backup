@@ -1,4 +1,5 @@
 import "../polyfills";
+import { SentryModule } from '../app/modules/sentry';
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 
 import React, {StrictMode} from 'react';
@@ -6,22 +7,23 @@ import * as ReactDOM from 'react-dom/client';
 // import posthog from "posthog-js";
 
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
-import '../app/modules/window/IWindow';
-import "../app/modules/errorHandler";
+import '../app/externel/window/IWindow';
+import "../app/application/errorHandler";
 // import '../app/modules/posthog';
 import '../app/modules/sentry';
 import '../app/modules/i18n';
-import '../app/modules/timezone';
-import {ThemeModule} from '../app/modules/theme';
+import '../app/device/timezone';
 
-import {NativeAppInfo} from '../app/persistant/nativeAppInfo';
+
+import {NativeAppInfo} from '../app/application/nativeAppInfo';
 
 // NOTE: Other
 import '../style.css';
-import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
-import {AppRouter} from "../app/presentation/router/index.ph";
+import {MonitorUsecaseFlow} from "../app/uiFlowUsercaseMoniter";
+import {AppRouter} from "../app/ui/router/index.ph";
 import {CoreMain} from "./main.core";
 import {I18nModule} from "../app/modules/i18n";
+import {ThemeModule} from "../app/modules/ui/theme";
 
 const renderApp = () => {
   MonitorUsecaseFlow.appLoadAndroidAppInfo();
