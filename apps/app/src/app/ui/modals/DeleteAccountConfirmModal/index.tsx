@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
 import { Button } from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { RootState } from '../../../reduxStore';
 import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
 import {getToken, removeTokenFromLocalStorage} from '../../../application/getToken';
@@ -11,14 +11,16 @@ import {GlobalAppMode} from "../../../application/GlobalAppMode";
 import {isInApp} from "../../../device/isInApp";
 import {alertModal} from "../../components/alertModal";
 import {SentryModule} from "../../../modules/sentry";
-import {select} from "redux-saga/effects";
+import {put, select} from "redux-saga/effects";
 import {userInfoPersistence} from "../../../persistant/UserInfoPersistence";
 import { AndroidPage } from '../../../externel/window/IWindow';
+import {loginSlice} from "../../../reduxStore/loginSlice";
 
 const DeleteAccountConfirmModal = () => {
     const navigate = useNavigate();
     const orderState = useSelector((state: RootState) => state.indexPage.order.state);
     const [deleteUser, { isSuccess: isDeteleUserSuccess, isLoading: isUserDeleting, }] = useDeleteUserMutation();
+    const dispatch = useDispatch();
 
     const Content = () => {
       const appName: string =  useSelector((state: RootState) => state.app.appName);
@@ -66,6 +68,7 @@ const DeleteAccountConfirmModal = () => {
                             } else if(GlobalAppMode.mode === "PureH5") {
                               removeTokenFromLocalStorage();
                               userInfoPersistence.clearPhone();
+                              dispatch(loginSlice.actions.updatePhoneNo());
                               // NOTE:
                               navigate(`${PageOrModalPathEnum.LoginPage}?appName=${appName}`);
                             }

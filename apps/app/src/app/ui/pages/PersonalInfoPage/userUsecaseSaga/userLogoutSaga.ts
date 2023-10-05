@@ -11,6 +11,7 @@ import {getToken, removeTokenFromLocalStorage} from "../../../../application/get
 import {RootState} from "../../../../reduxStore";
 import {userInfoPersistence} from "../../../../persistant/UserInfoPersistence";
 import {AndroidPage} from "../../../../externel/window/IWindow";
+import {loginSlice} from "../../../../reduxStore/loginSlice";
 
 function *logoutSaga() {
 
@@ -31,6 +32,7 @@ function *logoutSaga() {
   if(success) {
     removeTokenFromLocalStorage();
     userInfoPersistence.clearPhone();
+    yield put(loginSlice.actions.updatePhoneNo());
     yield put(routerActions.push(PageOrModalPathEnum.LoginPage))
   }
   // TODO: 這邊錯誤有捕捉嗎?

@@ -2,6 +2,8 @@ import {AppModeEnum} from "../../application/AppModeEnum";
 import {GlobalAppMode} from "../../application/GlobalAppMode";
 import {alertModal} from "../../ui/components/alertModal";
 import {SentryModule} from "../../modules/sentry";
+import {put} from "redux-saga/effects";
+import {loginSlice} from "../../reduxStore/loginSlice";
 
 export type AppMode = null | AppModeEnum.SimpleWebView | AppModeEnum.IndexWebview | AppModeEnum.PureH5;
 
