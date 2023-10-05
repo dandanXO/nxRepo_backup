@@ -125,6 +125,17 @@ export function* runSystemInitSaga() {
 
       if (location.pathname === PageOrModalPathEnum.LoginPage) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
+        // NOTE: 有 localStorage 就直接進行頁面跳轉判斷
+        const token = getToken();
+        if(token) {
+          yield put(push(PageOrModalPathEnum.IndexPage));
+
+          // REFACTOR ME
+          const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+          console.log("userResponse", userResponse);
+          yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+        }
+
       } else {
         // NOTICE: 沒有登入權限跳轉至 Login
         const token = getToken();
