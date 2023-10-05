@@ -29,22 +29,19 @@ export const LoanAgreementModal = (props: Props) => {
       // console.log("response", response.data)
       if(response.success) {
         // NOTICE: Failed to execute 'atob' on 'Window': The string to be decoded contains characters outside of the Latin1 range.
-        setHTMLData("data:text/html;base64," + btoa(unescape(encodeURIComponent(response.data))));
+        // setHTMLData("data:text/html;base64," + btoa(unescape(encodeURIComponent(response.data))));
 
         // const header = document.querySelector('#htmlContent');
         // if(header) {
         //   const shadowRoot = header.attachShadow({mode: 'open'});
         //   shadowRoot.innerHTML = response.data;
         // }
-
-
-        const rootElement = document.querySelector("#htmlContent")
-        if(rootElement) {
-          const shadowRoot = rootElement.attachShadow({ mode: "closed" });
-          shadowRoot.innerHTML = response.data;
-        }
-
-
+        // const rootElement = document.querySelector("#htmlContent")
+        // if(rootElement) {
+        //   const shadowRoot = rootElement.attachShadow({ mode: "closed" });
+        //   shadowRoot.innerHTML = response.data;
+        // }
+        setHTMLData(response.data);
       }
     })
   }, [url])
