@@ -10,7 +10,7 @@ import { getToken } from '../../persistant/getToken';
 import { RootState } from '../../reduxStore';
 import { IndexPageSagaAction } from '../pages/IndexPage/userUsecaseSaga/indexPageActions';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
-import { SystemCaseActions } from '../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
+import { SystemCaseActions } from '../../uiUsecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 import { useEffect } from 'react';
 import { repaymentPageInitialState, repaymentPageSlice } from '../../reduxStore/repaymentPageSlice';
 

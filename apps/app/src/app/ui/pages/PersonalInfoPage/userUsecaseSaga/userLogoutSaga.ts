@@ -1,7 +1,7 @@
 import { alertModal } from '../../../../api/base/alertModal';
 import { AndroidPage } from '../../../../modules/window/IWindow';
 import { NativeAppInfo } from '../../../../persistant/nativeAppInfo';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
 import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
 import {isInApp} from "../../../../modules/appEnvironment/isInApp";
 import {call, put, race, select, take} from "redux-saga/effects";

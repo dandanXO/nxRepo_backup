@@ -4,7 +4,7 @@ import { put, race, take } from "redux-saga/effects";
 import { APIV3 } from "apps/app/src/app/api/rtk";
 import { getOrderNo } from "apps/app/src/app/modules/querystring/getOrderNo";
 import { modalInitialState, modalSlice } from "apps/app/src/app/reduxStore/modalSlice";
-import { catchSagaError } from "apps/app/src/app/usecaseFlow/utils/catchSagaError";
+import { catchSagaError } from "../../../../uiUsecaseFlow/utils/catchSagaError";
 
 export function* userReserveSaga(action: PayloadAction<UserReserveActionPayload>) {
     // console.log("userReserveSaga.payload-------", action.payload);
@@ -32,5 +32,5 @@ export function* userReserveSaga(action: PayloadAction<UserReserveActionPayload>
         }
     } catch (error) {
         yield catchSagaError(error);
-    } 
+    }
 }

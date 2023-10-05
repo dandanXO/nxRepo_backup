@@ -1,4 +1,4 @@
-import { errorFallback } from "apps/app/src/app/usecaseFlow/utils/errorFallback";
+import { errorFallback } from "../../../../uiUsecaseFlow/utils/errorFallback";
 import { takeLatest } from "redux-saga/effects";
 
 

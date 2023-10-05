@@ -1,7 +1,7 @@
 import {delay, put} from 'redux-saga/effects';
 
 import {indexPageSlice} from '../../../../reduxStore/indexPageSlice';
-import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
+import {catchSagaError} from '../../../../uiUsecaseFlow/utils/catchSagaError';
 import {getTimeInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 
 

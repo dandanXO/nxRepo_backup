@@ -1,6 +1,6 @@
 import { takeEvery, takeLatest } from 'redux-saga/effects';
 
-import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
+import { errorFallback } from '../../../../uiUsecaseFlow/utils/errorFallback';
 import { IndexPageSagaAction } from './indexPageActions';
 import { userApplyProductsSaga } from './userApplyProductsSaga';
 import { userAuthenticateSaga } from './userAuthenticateSaga';

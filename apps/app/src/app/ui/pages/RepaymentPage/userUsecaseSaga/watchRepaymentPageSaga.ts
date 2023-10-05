@@ -1,6 +1,6 @@
 import { takeLatest ,takeEvery} from "redux-saga/effects";
 import { RepaymentPageSagaActions } from ".";
-import { errorFallback } from '../../../../usecaseFlow/utils/errorFallback';
+import { errorFallback } from '../../../../uiUsecaseFlow/utils/errorFallback';
 import { userRepaymentPageSaga } from "./userRpaymentPageSaga";
 
 export function* watchRepaymentPageSaga() {

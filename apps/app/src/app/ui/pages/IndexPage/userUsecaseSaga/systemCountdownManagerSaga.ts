@@ -3,8 +3,8 @@ import {put, select} from 'redux-saga/effects';
 import {GetIndexResponse} from '../../../../api/indexService/GetIndexResponse';
 import {RISK_CONTROL_STATE} from '../../../../domain/risk/RISK_CONTROL_STATE';
 import {RootState} from '../../../../reduxStore';
-import {SystemCaseActions} from '../../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
-import {catchSagaError} from '../../../../usecaseFlow/utils/catchSagaError';
+import {SystemCaseActions} from '../../../../uiUsecaseFlow/type/systemUsecaseSaga/systemCaseActions';
+import {catchSagaError} from '../../../../uiUsecaseFlow/utils/catchSagaError';
 import {ORDER_STATE} from 'apps/app/src/app/domain/order/ORDER_STATE';
 import {InitialState} from "../../../../reduxStore/indexPageSlice";
 import {USER_AUTH_STATE} from "../../../../domain/user/USER_AUTH_STATE";
@@ -35,7 +35,7 @@ export function* systemCountdownManagerSaga() {
       // NOTICE: 可以重刷
       if (user.state !== USER_AUTH_STATE.reject &&
         user.state !== USER_AUTH_STATE.authing &&
-        order.state !== ORDER_STATE.hasOverdueOrder && 
+        order.state !== ORDER_STATE.hasOverdueOrder &&
         // NOTE: 沒有額度 (包含連續３次額度被拒)
         indexResponse.noQuotaBalance !== true) {
         yield put(SystemCaseActions.SystemCountdownSaga(indexResponse?.offerExpireTime));

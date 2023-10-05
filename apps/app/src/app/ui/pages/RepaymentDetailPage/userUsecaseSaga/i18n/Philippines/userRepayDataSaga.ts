@@ -2,7 +2,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { put, race, select, take ,call } from "redux-saga/effects";
 import { API } from "apps/app/src/app/api/rtk";
 import { getOrderNo } from "apps/app/src/app/modules/querystring/getOrderNo";
-import { catchSagaError } from "apps/app/src/app/usecaseFlow/utils/catchSagaError";
+import { catchSagaError } from "../../../../../../uiUsecaseFlow/utils/catchSagaError";
 import { repaymentDetailPageInitialStateType, repaymentDetailPageSlice } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
 import moment from 'moment';
 import { RootState } from "apps/app/src/app/reduxStore";

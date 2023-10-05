@@ -11,12 +11,12 @@ import { RootState } from '../../../../reduxStore';
 // import { InitialState, indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 // import { SystemCaseActions } from '../../../../usecaseFlow/type/systemUsecaseSaga/systemCaseActions';
 // import { systemCallGetUserInfoSaga } from '../../../../usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
 import { systemCountdownManagerSaga } from './systemCountdownManagerSaga';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
-import { systemGetIndexPageSaga } from 'apps/app/src/app/usecaseFlow/type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga';
-import { systemFetchCouponSaga } from 'apps/app/src/app/usecaseFlow/type/systemUsecaseSaga/systemFetchCouponSaga';
-import { systemCallGetUserInfoSaga } from 'apps/app/src/app/usecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
+import { systemGetIndexPageSaga } from '../../../../uiUsecaseFlow/type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga';
+import { systemFetchCouponSaga } from '../../../../uiUsecaseFlow/type/systemUsecaseSaga/systemFetchCouponSaga';
+import { systemCallGetUserInfoSaga } from '../../../../uiUsecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
 
 export function* userViewIndexPageSaga(action: any) {
   console.log("userViewIndexPageSaga")

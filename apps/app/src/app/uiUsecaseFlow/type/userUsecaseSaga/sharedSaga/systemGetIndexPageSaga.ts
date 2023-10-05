@@ -6,7 +6,7 @@ import { GetIndexResponse } from '../../../../api/indexService/GetIndexResponse'
 import { GetOpenIndexResponse } from '../../../../api/indexService/GetOpenIndexResponse';
 import { USER_AUTH_STATE } from '../../../../domain/user/USER_AUTH_STATE';
 import { RootState } from '../../../../reduxStore';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
+import { catchSagaError } from '../../../utils/catchSagaError';
 import { systemCountdownManagerSaga } from '../../../../ui/pages/IndexPage/userUsecaseSaga/systemCountdownManagerSaga';
 import { indexPageSlice } from 'apps/app/src/app/reduxStore/indexPageSlice';
 

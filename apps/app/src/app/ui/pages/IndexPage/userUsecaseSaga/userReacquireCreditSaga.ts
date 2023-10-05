@@ -5,8 +5,8 @@ import { Service } from '../../../../api';
 import { alertModal } from '../../../../api/base/alertModal';
 import { GetQuotaModelStatusResponse } from '../../../../api/loanService/GetQuotaModelStatusResponse';
 import { AppEnvironment } from '../../../../modules/appEnvironment';
-import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { createRequestAction } from '../../../../usecaseFlow/utils/createRequestAction';
+import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
+import { createRequestAction } from '../../../../uiUsecaseFlow/utils/createRequestAction';
 import { IndexPageSagaAction } from './indexPageActions';
 import {SentryModule} from "../../../../modules/sentry";
 

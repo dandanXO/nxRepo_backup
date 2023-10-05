@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
 import { API, APIV3 } from '../api/rtk';
-import { WatchAppSaga } from '../usecaseFlow/watchAppSaga';
+import { WatchAppSaga } from '../uiUsecaseFlow/watchAppSaga';
 import { APIBoundaryModuleSlice } from './apiBoundaryModuleSlice';
 import { appSlice } from './appSlice';
 import { indexPageSlice } from './indexPageSlice';
