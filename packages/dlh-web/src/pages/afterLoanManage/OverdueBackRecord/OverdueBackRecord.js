@@ -70,7 +70,7 @@ class OverdueBackRecord extends Component {
             title: <FormattedMessage id="page.search.list.repaid.time" />,
             dataIndex: 'payTime',
             key: 'payTime',
-            width: '10%',
+            width: '7%',
             render(text) {
               return <Tooltip title={moment(Number(text) * 1000).format("YYYY-MM-DD HH:mm:ss")}>
                 {moment(Number(text) * 1000).format("MM-DD HH:mm:ss")}
@@ -114,6 +114,7 @@ class OverdueBackRecord extends Component {
             }
           },
           // { title: '还款状态', dataIndex: 'state', key: 'state' },
+          { title: <FormattedMessage id="page.table.coupon.usage.amount" />, dataIndex: 'couponUsageAmount', key: 'couponUsageAmount',  width: '5%' },
           { title: <FormattedMessage id="page.search.list.trans.serial.no" />, dataIndex: 'payTradeNo', key: 'payTradeNo',  width: '7%',render(text) { return <CopyText text={text} isEllispsis={true} /> } },
           // { title: '入账时间', dataIndex: 'billTime', key: 'billTime' },
           { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorName', key: 'collectorName', width: '10%', }

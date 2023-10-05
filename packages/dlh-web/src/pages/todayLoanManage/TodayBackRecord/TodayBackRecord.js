@@ -129,6 +129,7 @@ class TodayBackRecord extends Component {
             }
           },
           // { title: '还款状态', dataIndex: 'state', key: 'state' },
+          { title: <FormattedMessage id="page.table.coupon.usage.amount" />, dataIndex: 'couponUsageAmount', key: 'couponUsageAmount',  width: '6%' },
           {
             title: <FormattedMessage id="page.search.list.trans.serial.no" />, dataIndex: 'payTradeNo', key: 'payTradeNo',  width: '7%',
             render(text) {
