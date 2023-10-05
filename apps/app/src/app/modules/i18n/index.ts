@@ -220,6 +220,8 @@ i18next
 
           // Component
           [i18nProduct.namespace]: i18nProduct.translation.en_PH || {},
+          [i18nLoanDetailsPage.namespace]:
+            i18nLoanDetailsPage.translation.en_PH || {},
         },
       },
 
@@ -240,7 +242,9 @@ export { renderByCountry } from './renderByCountry';
 
 export const I18nModule = {
   initialize: () => {
-    const i18Language = AllCountry.find(i => i.country === environment.country);
+    const i18Language = AllCountry.find(
+      (i) => i.country === environment.country
+    );
     if (i18Language) {
       i18next
         .changeLanguage(i18Language?.language)
@@ -251,12 +255,12 @@ export const I18nModule = {
           // console.log("changeLanguage:", environment.countryName);
           // console.log("error:", err);
           const error = new Error();
-          error.name = "changeLanguage";
+          error.name = 'changeLanguage';
           if (err) error.message = JSON.stringify(err);
           // if (AppFlag.enableSentry) {
           //     Sentry.captureException(error);
           // }
         });
     }
-  }
-}
+  },
+};

@@ -11,10 +11,10 @@ import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/backend/rtk/old/getLoanDetail';
 import { RootState } from '../../../../../../reduxStore';
-import Divider from '../../../../../core-components/Divider';
-import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
 import { Button } from '../../../../../core-components/Button';
+import Divider from '../../../../../core-components/Divider';
+import ListItem from '../../../../../core-components/ListItem';
 import { PageContent } from '../../../../../core-components/PageContent';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
 import ReservationProductsModal from '../../../../../modals/ReservationProductsModal';
@@ -55,10 +55,11 @@ const PhilippinesRepaymentDetailPage = ({
     overdueDays = '',
     paidAmount = '',
     repayRecords = [],
-    totalRepayAmount = '',
+    totalRepayAmount = 0,
     extendDate = '',
     extensionFee = '',
     extendable,
+    orderAmount = 0,
     reductionAmount = 0,
     penaltyInterest = 0,
     loanAmount = 0,
@@ -81,28 +82,32 @@ const PhilippinesRepaymentDetailPage = ({
   );
 
   const SelfListItem = ({
+    className,
     titleKey,
     text,
+    titleColor = '',
     textColor = '',
     translate = true,
   }: {
+    className?: string;
     titleKey: string;
     text?: string | React.ReactElement | number;
+    titleColor?: string;
     textColor?: string;
     translate?: boolean;
   }) => (
     <ListItem
-      className="text-sm font-medium"
+      className={tcx('text-sm font-medium', className)}
       title={translate ? t(titleKey) : titleKey}
       text={text}
-      titleColor="text-ctext-secondary"
+      titleColor={titleColor ? titleColor : 'text-ctext-secondary'}
       textColor={textColor ? textColor : 'text-ctext-primary'}
       isFetching={isFetching}
     />
   );
 
   const ShowRecordItem = ({
-    show = false,
+    show = true,
     titleKey,
     text,
     titleColor = '',
@@ -148,7 +153,7 @@ const PhilippinesRepaymentDetailPage = ({
   const formatDate = (dateString: string) =>
     moment(dateString).format('MM-DD-YYYY');
 
-  const notExtendAndPayOff = !['EXTEND', 'PAY_OFF'].includes(status);
+  const notExtend = status !== 'EXTEND';
 
   return (
     <PageContent className="p-0">
@@ -185,7 +190,7 @@ const PhilippinesRepaymentDetailPage = ({
       </div>
       <div className="text-ctext-primary px-5">
         <div className="border-ctext-divider border-t border-b">
-          {notExtendAndPayOff && (
+          {notExtend && (
             <div
               className={tcx('flex items-center justify-between pt-3', [
                 'pb-3',
@@ -201,15 +206,52 @@ const PhilippinesRepaymentDetailPage = ({
               )}
             </div>
           )}
-          {(detailExpanded || !notExtendAndPayOff) && (
+          {(detailExpanded || !notExtend) && (
             <div
               className={tcx('mb-3 mt-2 text-sm', [
                 'bg-cbg-primary p-3 ',
-                notExtendAndPayOff,
+                notExtend,
               ])}
             >
               {status !== 'EXTEND' && (
                 <>
+                  {status === 'PAY_OFF' && (
+                    <>
+                      <SelfListItem
+                        className="font-bold"
+                        titleKey="orderAmount"
+                        titleColor="text-ctext-primary"
+                        text={<Money money={orderAmount} />}
+                      />
+                      <Divider />
+                    </>
+                  )}
+                  <SelfListItem
+                    className="font-bold"
+                    titleKey="1stRepaymentTitle"
+                    titleColor="text-ctext-primary"
+                    text={<Money money={balance} />}
+                  />
+                  <Divider />
+                  <SelfListItem
+                    className="font-bold"
+                    titleKey="2ndRepaymentTitle"
+                    titleColor="text-ctext-primary"
+                    text={
+                      status === 'OVERDUE' ? undefined : <Money money={0} />
+                    }
+                  />
+                  <div className="text-secondary-variant text-xs font-medium leading-tight">
+                    {t(
+                      status === 'OVERDUE'
+                        ? '2ndRepaymentOverDueNotice'
+                        : '2ndRepaymentNotOverDueNotice'
+                    )}
+                  </div>
+                  <Divider />
+                  <div className="text-ctext-primary mb-2 text-sm font-bold leading-none">
+                    {t('detailFeeTitle')}
+                  </div>
                   <SelfListItem
                     titleKey="Disbursal Amount"
                     text={<Money money={loanAmount} />}
@@ -252,7 +294,6 @@ const PhilippinesRepaymentDetailPage = ({
                 text={<Money money={reductionAmount} isNagetive />}
               />
               <ShowRecordItem
-                show={!notExtendAndPayOff}
                 titleKey="Amount Repaid"
                 text={<Money money={paidAmount} isNagetive />}
               />
@@ -262,31 +303,20 @@ const PhilippinesRepaymentDetailPage = ({
       </div>
 
       <div className="py-3 px-5">
-        {status !== 'EXTEND' && (
-          <ShowRecordItem
-            show={notExtendAndPayOff}
-            titleKey="Repayment Amount"
-            text={<Money money={balance} />}
-            titleColor={
-              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
-            }
-            textColor={
-              status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
-            }
-          />
-        )}
-        {status === 'EXTEND' && (
-          <ShowRecordItem
-            show={false}
-            titleKey="Total Extension Fee"
-            text={<Money money={totalRepayAmount} />}
-            titleColor="text-ctext-primary"
-            textColor="text-ctext-primary"
-          />
-        )}
+        <ShowRecordItem
+          show={false}
+          titleKey="Repayment Amount"
+          text={<Money money={balance} />}
+          titleColor={
+            status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+          }
+          textColor={
+            status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'
+          }
+        />
       </div>
 
-      {notExtendAndPayOff && (
+      {notExtend && status !== 'PAY_OFF' && (
         <>
           <div className="bg-primary-assistant text-primary-main flex items-center gap-2 py-2 px-5 text-left text-sm">
             <div className="w-fit">
@@ -354,8 +384,11 @@ const PhilippinesRepaymentDetailPage = ({
               </li>
               {app?.init?.csEmail?.trim() && (
                 <li>
-                  Email us if you have any questions about your responsibilities or for more information.
-                  <span className={`text-cstate-info-main`}>{app?.init?.csEmail}</span>
+                  Email us if you have any questions about your responsibilities
+                  or for more information.
+                  <span className={`text-cstate-info-main`}>
+                    {app?.init?.csEmail}
+                  </span>
                 </li>
               )}
               <li>

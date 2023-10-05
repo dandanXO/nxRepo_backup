@@ -41,8 +41,10 @@ export const i18nLoanDetailsPage: i18nComponent = {
         'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.',
       'Email us if you have any questions about your responsibilities or for more information.':
         'Email us if you have any questions about your responsibilities or for more information.',
-      'After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.':'After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.',
-      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼':'After completing the repayment, take a screenshot and upload your repayment receipt here ▼',
+      'After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.':
+        'After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.',
+      'After completing the repayment, take a screenshot and upload your repayment receipt here ▼':
+        'After completing the repayment, take a screenshot and upload your repayment receipt here ▼',
       'Upload Receipt': 'Upload Receipt',
 
       //Status
@@ -56,8 +58,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
       'Other Charges': 'Other Charges',
       'Banking Trans. Cost': 'Banking Trans. Cost',
       'CIB Cost': 'CIB Cost',
-      'NADRA Verysis Cost': 'NADRA Verysis Cost'
-
+      'NADRA Verysis Cost': 'NADRA Verysis Cost',
     },
     es_MX: {
       // MX
@@ -104,5 +105,14 @@ export const i18nLoanDetailsPage: i18nComponent = {
       'Pay off': 'Pagar Total',
     },
     bn_BD: {},
+    en_PH: {
+      '1stRepaymentTitle': '1st schedule repayment',
+      '2ndRepaymentTitle': '2nd schedule',
+      '2ndRepaymentOverDueNotice':
+        'The 2nd installment is already included in the total amount due. Please make your payment promptly to avoid more late payment fees.',
+      '2ndRepaymentNotOverDueNotice': 'The second installment has been waived.',
+      detailFeeTitle: 'Details of the fees',
+      orderAmount: 'Order Amount',
+    },
   },
 };
