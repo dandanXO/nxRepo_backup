@@ -30,7 +30,7 @@ export function* runSystemInitSaga() {
   console.log("[app][times:1] runSystemInitSaga")
   try {
     // if(AppModeModel.getMode()) {
-    if (GlobalAppMode.mode !== 'None') {
+    if (GlobalAppMode.mode !== 'Unset') {
       console.log('[app] 已初始化');
       return;
     }
@@ -100,11 +100,6 @@ export function* runSystemInitSaga() {
       }
     } else if (NativeAppInfo.mode === 'H5') {
 
-      // NOTICE: 後台支付結果頁面不需要登入或其他行為
-      if(location.pathname === PageOrModalPathEnum.PaymentResultPage) {
-        return;
-      }
-
       // TODO: refactor me
       try {
         // NOTE: Posthog
@@ -115,15 +110,21 @@ export function* runSystemInitSaga() {
         // yield catchSagaError(error);
       }
 
+      // NOTICE: 後台與第三方支付跳轉的付款結果頁面不需要登入與其他行為
+      if(location.pathname === PageOrModalPathEnum.PaymentResultPage) {
+        return;
+      }
+
+      // NOTICE: 需要 appName, appID 才能使用 PureH5
       const parsedQueryString = queryString.parse(window.location.search);
       const appName = appInfoPersistence.appName || parsedQueryString["appName"] as string;
       const appID = appInfoPersistence.appID || parsedQueryString["appID"] as string;
-
 
       if(!appName || !appID) {
         alertModal("Please use valid appName and appID");
         return ;
       }
+
       appInfoPersistence.appName = appName;
       appInfoPersistence.appID = appID;
 
@@ -138,13 +139,7 @@ export function* runSystemInitSaga() {
         const token = getToken();
         if(token) {
           yield put(push(PageOrModalPathEnum.IndexPage));
-
-          // REFACTOR ME
-          const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-          console.log("userResponse", userResponse);
-          yield put(indexPageSlice.actions.updateUserAPI(userResponse));
         }
-
       } else {
         // NOTICE: 沒有登入權限跳轉至 Login
         const token = getToken();
@@ -154,19 +149,21 @@ export function* runSystemInitSaga() {
           // FIXME:
           // SentryModule.captureMessage(message);
           yield put(push(PageOrModalPathEnum.LoginPage));
-          return alertModal(message);
+
+          alertModal(message);
+          return
         }
 
-        // REFACTOR ME
-        const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-        console.log("userResponse", userResponse);
-        yield put(indexPageSlice.actions.updateUserAPI(userResponse));
         // NOTE: 共用資料需要統一再次拉取
         yield call(systemGetIndexPageSaga);
-
-
       }
+
+      // REFACTOR ME
+      const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+      console.log("userResponse", userResponse);
+      yield put(indexPageSlice.actions.updateUserAPI(userResponse));
     }
+
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
     appStore.dispatch(SystemCaseActions.InitSaga());
 

@@ -190,11 +190,6 @@ export const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        {/*NOTICE: refactor me - PK*/}
-        <Route
-          path={PageOrModalPathEnum.IBANFinderPage}
-          element={<IBANFinderPage />}
-        />
         {/*<Route path="/v2/auth" element={<AuthPage />} />*/}
         {/*<Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />*/}
 
@@ -263,6 +258,7 @@ export const AppRouter = () => {
             element={<RepaymentCouponModal />}
           />
         </Route>
+
 
         <Route
           path={PageOrModalPathEnum.PaymentResultPage}

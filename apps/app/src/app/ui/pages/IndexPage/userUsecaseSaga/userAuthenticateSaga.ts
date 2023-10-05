@@ -42,7 +42,7 @@ export function* userAuthenticateSaga() {
             SentryModule.captureException(collectMessage);
           }
         }
-      } else if (GlobalAppMode.mode === 'None') {
+      } else if (GlobalAppMode.mode === 'Unset') {
         message = "Error: APP:405"
         collectMessage = '注意: AppGlobal.mode === "None"';
       }

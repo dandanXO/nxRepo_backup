@@ -60,7 +60,7 @@ export function* userLogoutSaga() {
             yield call(logoutSaga);
           }
         }
-      } else if (GlobalAppMode.mode === 'None') {
+      } else if (GlobalAppMode.mode === 'Unset') {
         message = '注意: AppGlobal.mode === "None"';
       }
     }
