@@ -29,7 +29,6 @@ const useExtendCreate = () => {
       postRepayCreate(props)
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
-          // console.log('data', data);
           if (data.nextStep === 'html') {
             navigate(
               `${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`,

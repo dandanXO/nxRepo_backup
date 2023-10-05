@@ -157,7 +157,7 @@ const PhilippinesPaymentCheckoutPage = ({
             {
               (payTypeName === 'GCash' || payTypeName === 'Paymaya') ?
                 (getPlatformValue(payTypeName, 'contents') as any).map((i: any) => {
-                  console.log('PayMaya',i)
+                  // console.log('PayMaya',i)
                   return (
                     <div className='mb-2'>
                       <div className="text-ctext-primary font-bold text-xs">{i.title}</div>

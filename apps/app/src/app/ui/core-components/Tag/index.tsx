@@ -85,7 +85,6 @@ export default Tag;
 //         "normal": `border-[${TagColorClass.normal}] text-[${TagColorClass.normal}] bg-[${TagColorClass.normalBackground}]`,
 //         "active": `border-[${TagColorClass.active}] text-[${TagColorClass.active}] bg-[${TagColorClass.activeBackground}]`,
 //     }[state ? 'active' : 'normal'];
-//     console.log('state',state,props.text,layoutType,statusClass)
 //     return (
 //         <div onClick={props.onClick}
 //             className={cx(

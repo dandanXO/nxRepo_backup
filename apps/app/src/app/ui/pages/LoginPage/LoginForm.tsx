@@ -55,7 +55,7 @@ export const LoginForm = () => {
   const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
   const [hasSendOTP, setHasSendOTP] = useState(false);
   const { resendSeconds } = useSelector((state: any) => state.login);
-  console.log("resendSeconds: ", resendSeconds);
+  // console.log("resendSeconds: ", resendSeconds);
 
   const [otpData, setOtpData] = useState<InputValue<string>>({
     data: '',
