@@ -124,7 +124,7 @@ export function* runSystemInitSaga() {
         appID,
       }));
 
-      if (location.pathname === PageOrModalPathEnum.LoginPage) {
+      if (location.pathname === PageOrModalPathEnum.LoginPage || location.pathname === PageOrModalPathEnum.PrivacyPolicyModal) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
         // NOTE: 有 localStorage 就直接進行頁面跳轉判斷
         const token = getToken();

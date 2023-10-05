@@ -213,7 +213,7 @@ export const LoginForm = () => {
           <span
             className="mx-1 text-cstate-info-main underline decoration-cstate-info-main"
             onClick={() =>
-              navigate(`${PageOrModalPathEnum.PrivacyPolicyModal}?token=${getToken()}`)
+              navigate(`${PageOrModalPathEnum.PrivacyPolicyModal}`)
             }
           >
             Privacy Policy
