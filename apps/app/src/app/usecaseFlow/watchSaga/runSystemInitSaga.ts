@@ -8,7 +8,7 @@ import {alertModal} from '../../api/base/alertModal';
 import {GetUserInfoServiceResponse} from '../../api/userService/GetUserInfoServiceResponse';
 // import { Posthog } from '../../modules/posthog';
 import {getToken} from '../../persistant/getToken';
-import {PageOrModalPathEnum} from '../../presentation/PageOrModalPathEnum';
+import {PageOrModalPathEnum} from '../../ui/PageOrModalPathEnum';
 import {appStore, RootState} from '../../reduxStore';
 import {indexPageSlice} from '../../reduxStore/indexPageSlice';
 import {NativeAppInfo} from '../../persistant/nativeAppInfo';
@@ -111,8 +111,8 @@ export function* runSystemInitSaga() {
       const parsedQueryString = queryString.parse(window.location.search);
       const appName = appInfoPersistence.appName || parsedQueryString["appName"] as string;
       const appID = appInfoPersistence.appID || parsedQueryString["appID"] as string;
-      if(!appName || !appName) {
-        alertModal("Please select valid appName and appID");
+      if(!appName || !appID) {
+        alertModal("Please use valid appName and appID");
         return ;
       }
       appInfoPersistence.appName = appName;

@@ -11,7 +11,7 @@ import { ORDER_STATE } from '../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
 import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
 import { NativeAppInfo } from '../persistant/nativeAppInfo';
-import { getQuotaModelStatusAction } from '../presentation/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
+import { getQuotaModelStatusAction } from '../ui/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
 import { GetNotificationResponse } from '../api/indexService/GetNotificationResponse';
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;
@@ -191,7 +191,7 @@ export const indexPageSlice = createSlice({
         state.riskControl.state = RISK_CONTROL_STATE.order_reject;
 
       } else if (action.payload.noQuotaBalance === true) {
-        
+
         if (action.payload.noQuotaByRetryFewTimes === true) {
           state.riskControl.state = RISK_CONTROL_STATE.expired_refresh_over_3;
         } else {

@@ -7,7 +7,7 @@ import { GetOpenIndexResponse } from '../../../../api/indexService/GetOpenIndexR
 import { USER_AUTH_STATE } from '../../../../domain/user/USER_AUTH_STATE';
 import { RootState } from '../../../../reduxStore';
 import { catchSagaError } from '../../../../usecaseFlow/utils/catchSagaError';
-import { systemCountdownManagerSaga } from 'apps/app/src/app/presentation/pages/IndexPage/userUsecaseSaga/systemCountdownManagerSaga';
+import { systemCountdownManagerSaga } from '../../../../ui/pages/IndexPage/userUsecaseSaga/systemCountdownManagerSaga';
 import { indexPageSlice } from 'apps/app/src/app/reduxStore/indexPageSlice';
 
 export function* systemGetIndexPageSaga() {
@@ -27,8 +27,8 @@ export function* systemGetIndexPageSaga() {
             const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
             yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
         }
-        
+
     } catch (error) {
         yield catchSagaError(error);
-    } 
+    }
 }

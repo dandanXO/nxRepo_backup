@@ -1,7 +1,7 @@
 import { ROUTER_CALL_HISTORY_METHOD, ROUTER_ON_LOCATION_CHANGED} from '@lagunovsky/redux-react-router';
 import { put, select, takeLatest } from 'redux-saga/effects';
-import { systemCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemCountdownSaga';
-import { systemRefreshableCountdownSaga } from '../../presentation/pages/IndexPage/userUsecaseSaga/systemRefreshableCountdownSaga';
+import { systemCountdownSaga } from '../../ui/pages/IndexPage/userUsecaseSaga/systemCountdownSaga';
+import { systemRefreshableCountdownSaga } from '../../ui/pages/IndexPage/userUsecaseSaga/systemRefreshableCountdownSaga';
 import { systemFetchCouponSaga } from '../type/systemUsecaseSaga/systemFetchCouponSaga';
 import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
 import { errorFallback } from '../utils/errorFallback';

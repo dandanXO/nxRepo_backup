@@ -22,7 +22,7 @@ import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
 import {CoreMain} from "./main.core";
 
 // NOTICE:
-import {AppRouter} from '../app/presentation/router/index.in';
+import {AppRouter} from '../app/ui/router/index.in';
 
 // NOTICE:
 if (window.Cypress) {

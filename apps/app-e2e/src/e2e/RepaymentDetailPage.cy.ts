@@ -1,5 +1,5 @@
 import {GetLoanDetailResponse} from "../../../app/src/app/api/loanService/GetLoanDetailResponse";
-import {PageOrModalPathEnum} from "../../../app/src/app/presentation/PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../../app/src/app/ui/PageOrModalPathEnum";
 
 describe("RepaymentPage", () => {
   beforeEach(() => {

@@ -1,6 +1,6 @@
 import {IMonitorUsecaseFlow} from "./IMonitorUsecaseFlow";
 import {SentryModule} from "../modules/sentry";
-import {BindBankCardPageEvents} from "../presentation/pages/BindBankCardPage/event";
+import {BindBankCardPageEvents} from "../ui/pages/BindBankCardPage/event";
 
 export const userBindBankAccount:IMonitorUsecaseFlow["userBindBankAccount"] = (props) => {
   SentryModule.captureMessage(BindBankCardPageEvents.UserBindBankcard.name, {

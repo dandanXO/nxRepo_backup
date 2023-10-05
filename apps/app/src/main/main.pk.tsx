@@ -20,7 +20,7 @@ import {NativeAppInfo} from '../app/persistant/nativeAppInfo';
 // NOTE: Other
 import '../style.css';
 import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
-import {AppRouter} from "../app/presentation/router/index.pk";
+import {AppRouter} from "../app/ui/router/index.pk";
 import {CoreMain} from "./main.core";
 import {I18nModule} from "../app/modules/i18n";
 

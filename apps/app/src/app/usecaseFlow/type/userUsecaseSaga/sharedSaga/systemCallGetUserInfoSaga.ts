@@ -5,7 +5,7 @@ import { Service } from '../../../../api';
 import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserInfoServiceResponse';
 import { getToken } from '../../../../persistant/getToken';
 import { SentryModule } from '../../../../modules/sentry';
-import { PageOrModalPathEnum } from '../../../../presentation/PageOrModalPathEnum';
+import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';
 import { RootState } from '../../../../reduxStore';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../utils/catchSagaError';

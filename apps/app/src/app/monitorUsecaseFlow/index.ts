@@ -1,7 +1,7 @@
 import {GetUserInfoServiceResponse} from "../api/userService/GetUserInfoServiceResponse";
 import {
   IUseFinishedBindBankAccountPage
-} from "../presentation/pages/BindBankCardPage/hooks/common/useFinishedBindBankAccountForm";
+} from "../ui/pages/BindBankCardPage/hooks/common/useFinishedBindBankAccountForm";
 import {appLoadAndroidAppInfo} from "./appLoadAndroidAppInfo";
 import {userLogin} from "./userLogin";
 import {userBindBankAccount} from "./userBindBankAccount";

@@ -6,7 +6,7 @@ import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
 import {alertModal} from "./alertModal";
 import {put} from "redux-saga/effects";
 import {push} from "@lagunovsky/redux-react-router";
-import {PageOrModalPathEnum} from "../../presentation/PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../ui/PageOrModalPathEnum";
 import {appStore} from "../../reduxStore";
 
 let login401 = false;

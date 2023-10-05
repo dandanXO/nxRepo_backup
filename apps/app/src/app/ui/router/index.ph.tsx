@@ -6,28 +6,28 @@ import {RootState} from "../../../app/reduxStore";
 import AppDataCollector from "../app/../../modules/dataCollectorContainer/AppDataCollector";
 
 
-import LoadingMask from "../../../app/presentation/core-components/LoadingMask";
+import LoadingMask from "../core-components/LoadingMask";
 
 // NOTE: Page
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
-import LoanRecordPage from '../../../app/presentation/pages/RepaymentPage';
-import LoginPage from "../../../app/presentation/pages/LoginPage";
+import LoanRecordPage from '../pages/RepaymentPage';
+import LoginPage from "../pages/LoginPage";
 import PaymentCheckoutPage from "../pages/PaymentCheckoutPage";
-import PaymentResultPage from "../../../app/presentation/pages/PaymentResultPage";
-import BankCardListPage from "../../../app/presentation/pages/BankCardListPage";
-import BindBankCardPage from "../../../app/presentation/pages/BindBankCardPage";
-import RepaymentDetailPage from "../../../app/presentation/pages/RepaymentDetailPage";
-import UploadedPaymentReceiptPage from "../../../app/presentation/pages/UploadedPaymentReceiptPage";
-import UploadPaymentReceiptPage from "../../../app/presentation/pages/UploadPaymentReceiptPage";
-import CouponModalContentAndroidWebviewPage from "../../../app/presentation/pages/CouponModalContentAndroidWebviewPage";
+import PaymentResultPage from "../pages/PaymentResultPage";
+import BankCardListPage from "../pages/BankCardListPage";
+import BindBankCardPage from "../pages/BindBankCardPage";
+import RepaymentDetailPage from "../pages/RepaymentDetailPage";
+import UploadedPaymentReceiptPage from "../pages/UploadedPaymentReceiptPage";
+import UploadPaymentReceiptPage from "../pages/UploadPaymentReceiptPage";
+import CouponModalContentAndroidWebviewPage from "../pages/CouponModalContentAndroidWebviewPage";
 
 // NOTE: Modal
-import RepaymentModal from "../../../app/presentation/modals/RepaymentModal";
-import AmountRepaidModal from "../../../app/presentation/modals/AmountRepaidModal/AmountRepaidModal";
-import ExtendConfirmModal from "../../../app/presentation/modals/ExtendConfirmModal";
-import ExtendModal from "../../../app/presentation/modals/ExtendModal";
-import RepamentCouponModal from "../../../app/presentation/modals/RepaymentCouponModal";
-import APIBoundaryModal from "../../../app/presentation/modals/APIBoundaryModal";
+import RepaymentModal from "../modals/RepaymentModal";
+import AmountRepaidModal from "../modals/AmountRepaidModal/AmountRepaidModal";
+import ExtendConfirmModal from "../modals/ExtendConfirmModal";
+import ExtendModal from "../modals/ExtendModal";
+import RepamentCouponModal from "../modals/RepaymentCouponModal";
+import APIBoundaryModal from "../modals/APIBoundaryModal";
 
 
 export const AppRouter = () => {

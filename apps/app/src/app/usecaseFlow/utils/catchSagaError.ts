@@ -5,7 +5,7 @@ import { alertModal } from '../../api/base/alertModal';
 import { SentryModule } from '../../modules/sentry';
 import { APIBoundaryModuleSlice } from '../../reduxStore/apiBoundaryModuleSlice';
 import {push} from "@lagunovsky/redux-react-router";
-import {PageOrModalPathEnum} from "../../presentation/PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../ui/PageOrModalPathEnum";
 
 export function* catchSagaError(error: any) {
   // console.log('catchSagaError.error', error);
