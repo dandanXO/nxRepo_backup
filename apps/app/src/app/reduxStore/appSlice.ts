@@ -12,7 +12,7 @@ export enum AppRunningModeEnum {
   'InAndroid',
 }
 
-export type InitailState = {
+export type InitialState = {
   init?: GetInitServiceResponse;
   mode: AppRunningModeEnum;
   // token: string;
@@ -20,41 +20,44 @@ export type InitailState = {
   androidAppInfo: null | IAndroidAppInfo;
   appName: string;
   appID: string;
+  appDomain: string;
 };
 
 const parsedQueryString = queryString.parse(window.location.search);
-
-const initialState: InitailState = {
+console.log("appInfoPersistence.appDomain", appInfoPersistence.appDomain);
+const initialState: InitialState = {
   mode: AppRunningModeEnum.Unknown,
   // token: '',
   isInit: false,
   androidAppInfo: null,
   appName: appInfoPersistence.appName || NativeAppInfo.appName || parsedQueryString['appName'] ? (parsedQueryString['appName'] as string) : "",
   appID: appInfoPersistence.appID || NativeAppInfo.packageId || parsedQueryString['packageId'] ? (parsedQueryString['packageId'] as string) : "",
+  appDomain: appInfoPersistence.appDomain || NativeAppInfo.domain || parsedQueryString['appDomain'] ? (parsedQueryString['appDomain'] as string) : "",
 };
 
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    init: (state: InitailState, action: PayloadAction<boolean>) => {
+    init: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isInit = action.payload;
     },
-    updateInit: (state: InitailState, action: PayloadAction<GetInitServiceResponse>) => {
+    updateInit: (state: InitialState, action: PayloadAction<GetInitServiceResponse>) => {
       state.init = action.payload;
     },
-    updateMode: (state: InitailState, action: PayloadAction<AppRunningModeEnum>) => {
+    updateMode: (state: InitialState, action: PayloadAction<AppRunningModeEnum>) => {
       state.mode = action.payload;
     },
-    // updateToken: (state: InitailState, action: PayloadAction<string>) => {
+    // updateToken: (state: InitialState, action: PayloadAction<string>) => {
     //   state.token = action.payload;
     // },
-    updateAndroidInfo: (state: InitailState, action: PayloadAction<IAndroidAppInfo>) => {
+    updateAndroidInfo: (state: InitialState, action: PayloadAction<IAndroidAppInfo>) => {
       state.androidAppInfo = action.payload;
     },
-    updateAppInfo: (state: InitailState, action: PayloadAction<{appName: string; appID: string;}>) => {
+    updateAppInfo: (state: InitialState, action: PayloadAction<{appName: string; appID: string; appDomain: string;}>) => {
       state.appName = action.payload.appName;
       state.appID = action.payload.appID;
+      state.appDomain = action.payload.appDomain;
     }
   },
 });

@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 const PrivacyPolicyPage = () => {
   const navigate = useNavigate();
-  const domain: string = useSelector((state: RootState) => state.app.androidAppInfo?.domain) || '';
+  const domain: string = useSelector((state: RootState) => state.app.appDomain) || '';
   const url = (domain.includes('https://www.') ? domain :`https://www.${domain}`) + '/privacy.html';
   const dispatch = useDispatch();
   // console.log("domain: ", domain)

@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // import ReactShadowRoot from 'react-shadow-root';
 // import usePortal from 'react-useportal'
 
@@ -9,6 +9,7 @@ import {CloseButton} from '../../core-components/CloseButton';
 import {Navigation} from '../../core-components/Navigation';
 import {gateway} from "../../../gateway";
 import {GlobalAppMode} from "../../../application/GlobalAppMode";
+import {loadingSlice} from "../../../reduxStore/loadingSlice";
 
 type Props = {
   onClose: () => void;
@@ -24,6 +25,7 @@ export const LoanAgreementModal = (props: Props) => {
   const url = useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
 
   const [htmlData, setHTMLData] = useState<any>();
+
   useEffect(() => {
     if(!url) return;
     gateway('', url, 'get', null).then((response) => {
@@ -46,12 +48,25 @@ export const LoanAgreementModal = (props: Props) => {
           setHTMLData("data:text/html;base64," + btoa(unescape(encodeURIComponent(response.data))));
         } else if(GlobalAppMode.mode === "IndexWebview" || GlobalAppMode.mode === "SimpleWebView") {
           setHTMLData(response.data);
+          dispatch(loadingSlice.actions.updatePageLoading(false));
         }
 
       }
     })
   }, [url])
   // var { ref, openPortal, closePortal, isOpen, Portal } = usePortal()
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadingSlice.actions.updatePageLoading(true));
+  }, [])
+
+  const oniFrameLoad = () => {
+    dispatch(loadingSlice.actions.updatePageLoading(false));
+  }
+
+
   return (
       <div className={'loan-agreement-modal fixed top-0 z-10 flex h-full w-screen flex-col bg-white'}>
           <div className={'mb-2'}>
@@ -65,7 +80,7 @@ export const LoanAgreementModal = (props: Props) => {
                 <div dangerouslySetInnerHTML={{ __html: htmlData }}/>
               )}
               {GlobalAppMode.mode === "PureH5" && (
-                <iframe id="loan-agreement" className="w-full h-full" src={htmlData} />
+                <iframe id="loan-agreement" className="w-full h-full" src={htmlData} onLoad={oniFrameLoad}/>
               )}
               {/*NOTE: Android會攔截到 iframe src 行為，導致跳轉行為發生，但Android禁止，所以會發生問題*/}
               {/*<iframe id="loan-agreement" className="w-full h-full" src={url} />*/}

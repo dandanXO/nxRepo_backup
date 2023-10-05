@@ -99,7 +99,7 @@ export function* runSystemInitSaga() {
 
       }
     } else if (NativeAppInfo.mode === 'H5') {
-
+      console.log("[app] first location.pathname: ", location.pathname )
       // TODO: refactor me
       try {
         // NOTE: Posthog
@@ -119,18 +119,29 @@ export function* runSystemInitSaga() {
       const parsedQueryString = queryString.parse(window.location.search);
       const appName = appInfoPersistence.appName || parsedQueryString["appName"] as string;
       const appID = appInfoPersistence.appID || parsedQueryString["appID"] as string;
+      const appDomain = appInfoPersistence.appDomain || parsedQueryString["appDomain"] as string;
 
-      if(!appName || !appID) {
-        alertModal("Please use valid appName and appID");
+      console.log("[app] appName: ",appName)
+      console.log("[app] appID: ",appID)
+      console.log("[app] appDomain: ",appDomain)
+
+      if(!appName || !appID || !appDomain) {
+        // NOTICE: delay 0.5 seconds 讓 privacy policy 的 model 能夠在 alertModal底下
+        setTimeout(() => {
+          alertModal("Please use valid appName, appID and appDomain");
+        }, 500)
+        yield put(push("/error"));
         return ;
       }
 
       appInfoPersistence.appName = appName;
       appInfoPersistence.appID = appID;
+      appInfoPersistence.appDomain = appDomain;
 
       yield put(appSlice.actions.updateAppInfo({
         appName,
         appID,
+        appDomain,
       }));
 
       if (location.pathname === PageOrModalPathEnum.LoginPage || location.pathname === PageOrModalPathEnum.PrivacyPolicyModal) {
@@ -139,7 +150,14 @@ export function* runSystemInitSaga() {
         const token = getToken();
         if(token) {
           yield put(push(PageOrModalPathEnum.IndexPage));
+          const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+          console.log("userResponse", userResponse);
+          yield put(indexPageSlice.actions.updateUserAPI(userResponse));
         }
+        // else {
+        //   yield put(push(`${PageOrModalPathEnum.LoginPage}?appName=${appName}&appID=${appID}&appDomain=${appDomain}`));
+        // }
+
       } else {
         // NOTICE: 沒有登入權限跳轉至 Login
         const token = getToken();
@@ -154,14 +172,13 @@ export function* runSystemInitSaga() {
           return
         }
 
+        const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+        console.log("userResponse", userResponse);
+        yield put(indexPageSlice.actions.updateUserAPI(userResponse));
+
         // NOTE: 共用資料需要統一再次拉取
         yield call(systemGetIndexPageSaga);
       }
-
-      // REFACTOR ME
-      const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-      console.log("userResponse", userResponse);
-      yield put(indexPageSlice.actions.updateUserAPI(userResponse));
     }
 
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)

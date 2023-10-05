@@ -10,7 +10,7 @@ import {loadingSlice} from "../../../reduxStore/loadingSlice";
 const DisclosureStatementPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const domain: string = useSelector((state: RootState) => state.app.androidAppInfo?.domain) || '';
+  const domain: string = useSelector((state: RootState) => state.app.appDomain) || "";
   const url = (domain.includes('https://www.') ? domain :`https://www.${domain}`) + '/permission.html';
 
   useEffect(() => {

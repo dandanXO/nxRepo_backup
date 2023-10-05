@@ -55,6 +55,7 @@ export const LoginForm = () => {
   const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
   const [hasSendOTP, setHasSendOTP] = useState(false);
   const { resendSeconds } = useSelector((state: any) => state.login);
+  console.log("resendSeconds: ", resendSeconds);
 
   const [otpData, setOtpData] = useState<InputValue<string>>({
     data: '',
@@ -129,11 +130,11 @@ export const LoginForm = () => {
           suffix={
             <Button
               dataTestingID={'getOTP'}
-              text={!doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
-              disable={!(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP)}
+              text={resendSeconds === 60 && !doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
+              disable={!(resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP )}
               className={cx('ml-2 py-1 px-2.5 w-auto')}
               onClick={() => {
-                enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
+                resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
               }}
             />
           }

@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import {push} from "@lagunovsky/redux-react-router";
 import {MonitorUsecaseFlow} from "../uiFlowUsecaseMoniter";
-import { getToken } from '../application/getToken';
+import {getToken, removeTokenFromLocalStorage} from '../application/getToken';
 import {alertModal} from "../ui/components/alertModal";
 import {PageOrModalPathEnum} from "../ui/PageOrModalPathEnum";
 import {appStore} from "../reduxStore";
@@ -72,10 +72,11 @@ export const gateway = async (
       data: result.data,
     };
   } catch (error) {
-    console.log('[runAxios] error', error);
+    console.log('[gateway] error', error);
     if (axios.isAxiosError(error)) {
       // (error as any)?.response?.data?.code === 404
       if((error as any)?.response?.data?.code === 401) {
+        removeTokenFromLocalStorage();
         if(!login401) {
           login401 = true;
           alertModal((error as any)?.response?.data?.message);
@@ -84,9 +85,12 @@ export const gateway = async (
           console.log("不跳 401 alert")
         }
       } else {
+        // NOTICE: 避免 rtk 使用 gateway 又跳一次錯誤
+        (error as any).isAlertModal = true;
         alertModal((error?.response?.data as any)?.message as string);
       }
     }
+
     throw error;
   }
 };
