@@ -10,7 +10,7 @@ import { GetUserInfoServiceResponse } from '../externel/backend/userService/GetU
 import { ORDER_STATE } from '../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
 import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
-import { NativeAppInfo } from '../persistant/nativeAppInfo';
+import { NativeAppInfo } from '../application/nativeAppInfo';
 import { getQuotaModelStatusAction } from '../ui/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
 import { GetNotificationResponse } from '../externel/backend/indexService/GetNotificationResponse';
 export interface InitialState {

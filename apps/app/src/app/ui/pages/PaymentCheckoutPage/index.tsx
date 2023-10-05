@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environmentModule/environm
 import { useLazyGetRepayPayInfoQuery } from '../../../externel/backend/rtk';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { renderByCountry } from '../../../modules/i18n';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';

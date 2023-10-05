@@ -1,5 +1,5 @@
-import {IAndroidAppInfo} from "./IAndroidAppInfo";
-import {AllCountriesEnum} from "../../../../../../../libs/shared/domain/src/country/AllCountry";
+import {IAndroidAppInfo} from "../externel/nativeApp/types/IAndroidAppInfo";
+import {AllCountriesEnum} from "../../../../../libs/shared/domain/src/country/AllCountry";
 
 export type IAppEnvironment = {
   localhost: IAndroidAppInfo;

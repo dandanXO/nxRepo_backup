@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
 import { formatPrice } from '../../../../../modules/format/formatPrice';
-import { getToken } from '../../../../../persistant/getToken';
+import { getToken } from '../../../../../application/getToken';
 import { IndexPageProps } from '../../../../../reduxStore';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Divider from "../../../../core-components/Divider";

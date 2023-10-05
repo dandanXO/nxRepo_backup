@@ -2,7 +2,7 @@ import { environment } from '../../../../environments/environmentModule/environm
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import { Button } from '../../core-components/Button';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 

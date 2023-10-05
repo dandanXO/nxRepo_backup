@@ -12,7 +12,7 @@ import NoDataImage from '../../components/images/NoData.svg';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { useLazyGetCouponApplicableListQuery } from '../../../externel/backend/rtk';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import { RootState } from '../../../reduxStore';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';

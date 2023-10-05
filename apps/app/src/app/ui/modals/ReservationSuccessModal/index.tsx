@@ -4,7 +4,7 @@ import Modal from '../../core-components/Modal';
 import { modalSlice } from '../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { i18nReservationSuccessModal } from './i18n/translations';
 import { useTranslation } from 'react-i18next';

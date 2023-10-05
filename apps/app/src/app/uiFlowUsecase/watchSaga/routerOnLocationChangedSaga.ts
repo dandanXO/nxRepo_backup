@@ -1,7 +1,7 @@
 import { LocationChangeAction, push, back, go } from '@lagunovsky/redux-react-router';
 import { put, select, takeLatest } from 'redux-saga/effects';
 import { PageOrModalPathEnum } from '../../ui/PageOrModalPathEnum';
-import { getToken } from '../../persistant/getToken';
+import { getToken } from '../../application/getToken';
 import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
 import { getOrderNo } from '../../modules/querystring/getOrderNo';

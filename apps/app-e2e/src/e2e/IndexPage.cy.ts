@@ -16,7 +16,7 @@ import {GetUserInfoServiceResponse} from "../../../app/src/app/externel/backend/
 import {GetOpenIndexResponse} from "../../../app/src/app/externel/backend/indexService/GetOpenIndexResponse";
 import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 import {FeeRateKeyEnum} from "../../../app/src/app/externel/backend/indexService/FeeRateKeyEnum";
-import {NativeAppInfo} from "apps/app/src/app/persistant/nativeAppInfo";
+import {NativeAppInfo} from "apps/app/src/app/application/nativeAppInfo";
 import {useLazyGetUserProcessQuery} from "../../../app/src/app/externel/backend/rtk";
 import {GetUserProcessResponse} from "../../../app/src/app/externel/backend/loanService/GetUserProcessResponse";
 

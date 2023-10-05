@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
 import { USER_AUTH_STATE } from '../../domain/user/USER_AUTH_STATE';
-import { getToken } from '../../persistant/getToken';
+import { getToken } from '../../application/getToken';
 import { RootState } from '../../reduxStore';
 import { IndexPageSagaAction } from '../pages/IndexPage/userUsecaseSaga/indexPageActions';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';

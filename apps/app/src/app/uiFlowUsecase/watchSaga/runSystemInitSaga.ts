@@ -7,13 +7,13 @@ import {Service} from '../../externel/backend';
 import {alertModal} from '../../ui/components/alertModal';
 import {GetUserInfoServiceResponse} from '../../externel/backend/userService/GetUserInfoServiceResponse';
 // import { Posthog } from '../../modules/posthog';
-import {getToken} from '../../persistant/getToken';
+import {getToken} from '../../application/getToken';
 import {PageOrModalPathEnum} from '../../ui/PageOrModalPathEnum';
 import {appStore, RootState} from '../../reduxStore';
 import {indexPageSlice} from '../../reduxStore/indexPageSlice';
-import {NativeAppInfo} from '../../persistant/nativeAppInfo';
-import {GlobalAppMode} from "../../persistant/GlobalAppMode";
-import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
+import {NativeAppInfo} from '../../application/nativeAppInfo';
+import {GlobalAppMode} from "../../application/GlobalAppMode";
+import {AppModeEnum} from "../../application/AppModeEnum";
 import {MonitorUsecaseFlow} from "../../uiFlowUsercaseMoniter";
 import {GetIndexResponse} from '../../externel/backend/indexService/GetIndexResponse';
 

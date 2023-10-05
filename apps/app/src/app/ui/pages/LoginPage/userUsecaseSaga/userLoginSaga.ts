@@ -8,7 +8,7 @@ import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
 import {PageOrModalPathEnum} from '../../../PageOrModalPathEnum';
 import {UserLoginActionPayload} from './index';
 import {loginSlice} from 'apps/app/src/app/reduxStore/loginSlice';
-import {setTokenToLocalStorage} from "../../../../persistant/getToken";
+import {setTokenToLocalStorage} from "../../../../application/getToken";
 import {appInfoPersistence} from "../../../../persistant/AppInfoPersistence";
 import {userInfoPersistence} from "../../../../persistant/UserInfoPersistence";
 

@@ -3,7 +3,7 @@ import { call, put, select } from 'redux-saga/effects';
 
 import { Service } from '../../../../externel/backend';
 import { GetUserInfoServiceResponse } from '../../../../externel/backend/userService/GetUserInfoServiceResponse';
-import { getToken } from '../../../../persistant/getToken';
+import { getToken } from '../../../../application/getToken';
 import { SentryModule } from '../../../../modules/sentry';
 import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';
 import { RootState } from '../../../../reduxStore';

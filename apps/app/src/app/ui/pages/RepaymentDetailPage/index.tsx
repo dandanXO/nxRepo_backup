@@ -10,7 +10,7 @@ import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/
 import { useLazyGetLoanDetailQuery } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';

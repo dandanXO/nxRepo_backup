@@ -1,9 +1,9 @@
 import {environment} from '../../../environments/environmentModule/environment';
 import {AppEnvironment} from '../../modules/appEnvironment';
-import {IAndroidAppInfo} from './types/IAndroidAppInfo';
+import {IAndroidAppInfo} from '../../externel/nativeApp/types/IAndroidAppInfo';
 import {MexicoCountry} from "../../../../../../libs/shared/domain/src/country/MexicoCountry";
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
-import {PhilippinesCountry} from 'libs/shared/domain/src/country/PhilippinesCountry';
+import {PhilippinesCountry} from '../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import {NULL_DEFAULT_APP_INFO_TASK} from "./NullAppInfoTaskDefault";
 
 

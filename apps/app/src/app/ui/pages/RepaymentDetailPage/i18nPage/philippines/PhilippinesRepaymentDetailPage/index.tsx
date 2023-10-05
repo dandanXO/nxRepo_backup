@@ -11,7 +11,7 @@ import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/backend/rtk/old/getLoanDetail';
 import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../../persistant/getToken';
+import { getToken } from '../../../../../../application/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import { tcx } from '../../../../../../modules/tailwindcss';
 import { RootState } from '../../../../../../reduxStore';

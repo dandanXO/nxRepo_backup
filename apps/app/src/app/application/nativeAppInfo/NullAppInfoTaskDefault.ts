@@ -1,6 +1,6 @@
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 import {isInApp} from "../../modules/appEnvironment/isInApp";
-import {INullAppInfoTaskDefault} from "./types/IAppEnvironment";
+import {INullAppInfoTaskDefault} from "../IAppEnvironment";
 
 let uiVersion
 if (window.Cypress) {

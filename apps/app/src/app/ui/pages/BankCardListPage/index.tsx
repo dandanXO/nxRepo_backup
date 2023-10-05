@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 import { useLazyGetBankCardListQuery } from '../../../externel/backend/rtk';
 import { usePostBankCardMainMutation } from '../../../externel/backend/rtk';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import NoDataIcon from './images/NoData.svg';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';

@@ -5,7 +5,7 @@ import { RootState } from '../../../reduxStore';
 import { Button } from '../../core-components/Button';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import CustomServiceIcon from './CustomServiceIcon'
 import { Horizontal } from '../../core-components/Horizontal';

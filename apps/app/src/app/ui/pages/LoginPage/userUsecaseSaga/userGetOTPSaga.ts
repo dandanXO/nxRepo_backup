@@ -6,7 +6,7 @@ import { API } from '../../../../externel/backend/rtk';
 import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 import { UserLoginActionPayload } from './index';
 import {alertModal} from "../../../components/alertModal";
-import {NativeAppInfo} from "../../../../persistant/nativeAppInfo";
+import {NativeAppInfo} from "../../../../application/nativeAppInfo";
 import queryString from "query-string";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import {rootState} from "../../../../../../../../packages/dlh-web/src/store/root";

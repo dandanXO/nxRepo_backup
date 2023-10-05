@@ -14,7 +14,7 @@ import '../app/modules/i18n';
 import '../app/modules/timezone';
 import {ThemeModule} from '../app/modules/theme';
 
-import {NativeAppInfo} from '../app/persistant/nativeAppInfo';
+import {NativeAppInfo} from '../app/application/nativeAppInfo';
 
 
 // NOTE: Other

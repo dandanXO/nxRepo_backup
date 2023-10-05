@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
 
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../persistant/getToken';
+import { getToken } from '../../../../../application/getToken';
 import { Button } from '../../../../core-components/Button';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Modal from '../../../../core-components/Modal';

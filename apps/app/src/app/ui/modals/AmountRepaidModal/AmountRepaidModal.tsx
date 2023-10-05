@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { ListItem, Overlay, flexCreator } from '@frontend/mobile/shared/ui';
 
 import { GetLoanDetailResponse } from '../../../externel/backend/rtk/old/getLoanDetail';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
 import Divider from '../../core-components/Divider';
 import Money from '../../components/Money';

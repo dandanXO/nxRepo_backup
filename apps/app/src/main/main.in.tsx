@@ -8,7 +8,7 @@ import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 // NOTE: Modules
-import { NativeAppInfo } from '../app/persistant/nativeAppInfo';
+import { NativeAppInfo } from '../app/application/nativeAppInfo';
 import {ThemeModule} from '../app/modules/theme';
 import '../app/modules/i18n';
 import {I18nModule} from "../app/modules/i18n";

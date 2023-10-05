@@ -14,7 +14,7 @@ import { PostRepayCreateRequest } from '../../externel/backend/loanService/PostR
 import { PostRepayCreateResponse } from '../../externel/backend/loanService/PostRepayCreateResponse';
 import { usePostRepayCreateMutation } from '../../externel/backend/rtk';
 import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
-import { getToken } from '../../persistant/getToken';
+import { getToken } from '../../application/getToken';
 import { modalSlice } from '../../reduxStore/modalSlice';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';

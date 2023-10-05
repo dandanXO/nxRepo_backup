@@ -8,8 +8,8 @@ import {AppThemeProvider} from "@frontend/mobile/shared/ui";
 import {environment} from "../environments/environmentModule/environment";
 import {appStore, history, RootState} from "../app/reduxStore";
 import {isInApp} from "../app/modules/appEnvironment/isInApp";
-import {NativeAppInfo} from "../app/persistant/nativeAppInfo";
-import {GlobalAppMode} from "../app/persistant/GlobalAppMode";
+import {NativeAppInfo} from "../app/application/nativeAppInfo";
+import {GlobalAppMode} from "../app/application/GlobalAppMode";
 import {AppFlag} from "../environments/flag";
 import {AppEnvironment} from "../app/modules/appEnvironment";
 

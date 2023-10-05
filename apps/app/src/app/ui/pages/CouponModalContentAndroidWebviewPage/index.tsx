@@ -4,7 +4,7 @@ import { AllCountryIdentityName } from 'libs/shared/domain/src/country/enum/AllC
 import MexicoCoupon from './i18n/MexicoCoupon.svg';
 import PhilippinesCoupon from './i18n/PhilippinesCoupon.png';
 
-import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
+import { NativeAppInfo } from '../../../application/nativeAppInfo';
 
 const CouponModalContentAndroidWebviewPage = () => {
 

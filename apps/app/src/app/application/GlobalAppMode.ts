@@ -1,4 +1,4 @@
-import {AppModeEnum} from "./enum/AppModeEnum";
+import {AppModeEnum} from "./AppModeEnum";
 
 interface IGlobalAppMode {
   mode: AppModeEnum

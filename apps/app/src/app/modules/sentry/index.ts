@@ -6,7 +6,7 @@ import posthog from 'posthog-js';
 
 import { AppEnvironment } from '../appEnvironment';
 import { AppFlag } from '../../../environments/flag';
-import { NativeAppInfo } from '../../persistant/nativeAppInfo';
+import { NativeAppInfo } from '../../application/nativeAppInfo';
 import { RootState, appStore } from '../../reduxStore';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 

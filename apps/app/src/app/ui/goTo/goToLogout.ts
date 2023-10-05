@@ -1,6 +1,6 @@
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {useNavigate} from "react-router";
-import {getToken} from "../../persistant/getToken";
+import {getToken} from "../../application/getToken";
 
 export const useGoToLogout = () => {
   const navigate = useNavigate();

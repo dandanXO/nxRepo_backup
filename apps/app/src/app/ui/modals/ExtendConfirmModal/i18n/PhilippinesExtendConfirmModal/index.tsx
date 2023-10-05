@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 
 import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../persistant/getToken';
+import { getToken } from '../../../../../application/getToken';
 import Modal from '../../../../core-components/Modal';
 import { Button } from '../../../../core-components/Button';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';

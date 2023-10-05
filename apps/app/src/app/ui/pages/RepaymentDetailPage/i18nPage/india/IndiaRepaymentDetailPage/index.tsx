@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
 import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../../persistant/getToken';
+import { getToken } from '../../../../../../application/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';

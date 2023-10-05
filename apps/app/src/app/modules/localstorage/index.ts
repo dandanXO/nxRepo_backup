@@ -1,4 +1,4 @@
-import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
+import {AppModeEnum} from "../../application/AppModeEnum";
 
 export type AppMode = null | AppModeEnum.SimpleWebView | AppModeEnum.IndexWebview | AppModeEnum.PureH5;
 

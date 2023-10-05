@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router';
 
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
-import { getToken } from '../../../persistant/getToken';
+import { getToken } from '../../../application/getToken';
 import { RootState } from '../../../reduxStore';
 import UserIcon from './images/UserIcon.svg';
 import { Button } from '../../core-components/Button';

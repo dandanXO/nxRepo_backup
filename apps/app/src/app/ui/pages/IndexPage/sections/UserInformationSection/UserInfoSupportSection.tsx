@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react';
 
 import { IndexPageProps, RootState } from '../../../../../reduxStore';
 import {useSelector} from "react-redux";
-import {NativeAppInfo} from "../../../../../persistant/nativeAppInfo";
+import {NativeAppInfo} from "../../../../../application/nativeAppInfo";
 import {useUserPhoneNumber} from "../../../../hooks/useUserPhoneNumber";
 
 type Props = IndexPageProps & {

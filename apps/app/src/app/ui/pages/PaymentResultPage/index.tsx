@@ -5,7 +5,7 @@ import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/countr
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { renderByCountry } from '../../../modules/i18n';
-import { NativeAppInfo } from '../../../persistant/nativeAppInfo';
+import { NativeAppInfo } from '../../../application/nativeAppInfo';
 import IndiaPaymentResultPage from './i18nPage/IndiaPaymentResultPage';
 import PhilippinesPaymentResultPage from './i18nPage/PhilippinesPaymentResultPage';
 import {MexicoCountry} from "../../../../../../../libs/shared/domain/src/country/MexicoCountry";

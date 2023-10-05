@@ -10,7 +10,7 @@ import {ProductApplyDetail} from '../../../externel/backend/loanService/ProductA
 import {ORDER_STATE} from '../../../domain/order/ORDER_STATE';
 import {RISK_CONTROL_STATE} from '../../../domain/risk/RISK_CONTROL_STATE';
 import {USER_AUTH_STATE} from '../../../domain/user/USER_AUTH_STATE';
-import {getToken} from '../../../persistant/getToken';
+import {getToken} from '../../../application/getToken';
 import {RootState} from '../../../reduxStore';
 import {modalSlice} from '../../../reduxStore/modalSlice';
 import {Button} from '../../core-components/Button';

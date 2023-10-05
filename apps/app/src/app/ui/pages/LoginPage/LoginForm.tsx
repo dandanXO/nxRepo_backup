@@ -10,7 +10,7 @@ import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 import {RootState} from "../../../reduxStore";
 import {loginSlice} from "../../../reduxStore/loginSlice";
-import {getToken} from "../../../persistant/getToken";
+import {getToken} from "../../../application/getToken";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();

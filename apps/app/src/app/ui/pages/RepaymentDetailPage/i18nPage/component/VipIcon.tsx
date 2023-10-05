@@ -1,4 +1,4 @@
-import { NativeAppInfo } from 'apps/app/src/app/persistant/nativeAppInfo';
+import { NativeAppInfo } from 'apps/app/src/app/application/nativeAppInfo';
 import defaultVipIcon from '../../images/VipIcon.svg';
 
 const VipIcon = () => {
