@@ -17,7 +17,7 @@ import '../app/externel/window/IWindow';
 
 // NOTE: Other
 import '../style.css';
-import {MonitorUsecaseFlow} from "../app/uiFlowUsercaseMoniter";
+import {MonitorUsecaseFlow} from "../app/uiFlowUsecaseMoniter";
 import {CoreMain} from "./main.core";
 
 // NOTICE:

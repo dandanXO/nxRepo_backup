@@ -1,4 +1,4 @@
-import {AppMode, AppStorage} from "../../persistant/localstorage";
+import {AppLocalStorage, AppMode, AppStorage} from "../../persistant/localstorage";
 
 export class AppModeModel {
   static setMode(mode: AppMode) {
@@ -6,7 +6,7 @@ export class AppModeModel {
   }
 
   static getMode(): string {
-    const modeStr = localStorage.getItem('appMode') || '';
+    const modeStr = AppLocalStorage.getItem('appMode') || '';
     return modeStr;
   }
 
@@ -24,7 +24,7 @@ export class AppModeModel {
   // }
 
   static clear(key: string) {
-    localStorage.removeItem(key);
+    AppLocalStorage.removeItem(key);
   }
 }
 

@@ -12,7 +12,7 @@ import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { getToken } from '../../../../../application/getToken';
 import { useDispatch } from 'react-redux';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
-import {MonitorUsecaseFlow} from "../../../../../uiFlowUsercaseMoniter";
+import {MonitorUsecaseFlow} from "../../../../../uiFlowUsecaseMoniter";
 import {changeLocationHref} from "../../../../../application/errorHandler";
 
 export type IUseFinishedBindBankAccountPage = {

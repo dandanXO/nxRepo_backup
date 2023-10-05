@@ -1,15 +1,17 @@
+import {AppLocalStorage} from "./localstorage";
+
 class AppInfoPersistence {
   set appName(name: string) {
-    localStorage.setItem("appName", name);
+    AppLocalStorage.setItem("appName", name);
   }
   get appName(): string {
-    return localStorage.getItem("appName") || "";
+    return AppLocalStorage.getItem("appName") || "";
   }
   set appID(id: string) {
-    localStorage.setItem("appID", id);
+    AppLocalStorage.setItem("appID", id);
   }
   get appID(): string {
-    return localStorage.getItem("appID") || "";
+    return AppLocalStorage.getItem("appID") || "";
   }
 }
 export const appInfoPersistence = new AppInfoPersistence();

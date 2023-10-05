@@ -24,5 +24,7 @@ declare global {
     };
     reduxStore: any;
     Cypress?: any;
+    //refactorme
+    fakeLocalStorage: {[key: string]: string;};
   }
 }

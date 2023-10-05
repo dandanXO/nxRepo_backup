@@ -14,7 +14,7 @@ import {indexPageSlice} from '../../reduxStore/indexPageSlice';
 import {NativeAppInfo} from '../../application/nativeAppInfo';
 import {GlobalAppMode} from "../../application/GlobalAppMode";
 import {AppModeEnum} from "../../application/AppModeEnum";
-import {MonitorUsecaseFlow} from "../../uiFlowUsercaseMoniter";
+import {MonitorUsecaseFlow} from "../../uiFlowUsecaseMoniter";
 import {GetIndexResponse} from '../../externel/backend/indexService/GetIndexResponse';
 
 import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
