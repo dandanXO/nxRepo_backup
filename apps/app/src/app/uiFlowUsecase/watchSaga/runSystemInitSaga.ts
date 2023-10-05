@@ -100,6 +100,11 @@ export function* runSystemInitSaga() {
       }
     } else if (NativeAppInfo.mode === 'H5') {
 
+      // NOTICE: 後台支付結果頁面不需要登入或其他行為
+      if(location.pathname === PageOrModalPathEnum.PaymentResultPage) {
+        return;
+      }
+
       // TODO: refactor me
       try {
         // NOTE: Posthog
@@ -109,9 +114,12 @@ export function* runSystemInitSaga() {
         // NOTICE: 以下這行會導致上層 saga 中斷
         // yield catchSagaError(error);
       }
+
       const parsedQueryString = queryString.parse(window.location.search);
       const appName = appInfoPersistence.appName || parsedQueryString["appName"] as string;
       const appID = appInfoPersistence.appID || parsedQueryString["appID"] as string;
+
+
       if(!appName || !appID) {
         alertModal("Please use valid appName and appID");
         return ;
@@ -124,10 +132,7 @@ export function* runSystemInitSaga() {
         appID,
       }));
 
-      if(location.pathname === PageOrModalPathEnum.PaymentResultPage) {
-        // NOTICE: 後台支付結果頁面不需要登入或其他行為
-
-      } else if (location.pathname === PageOrModalPathEnum.LoginPage || location.pathname === PageOrModalPathEnum.PrivacyPolicyModal) {
+      if (location.pathname === PageOrModalPathEnum.LoginPage || location.pathname === PageOrModalPathEnum.PrivacyPolicyModal) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
         // NOTE: 有 localStorage 就直接進行頁面跳轉判斷
         const token = getToken();
