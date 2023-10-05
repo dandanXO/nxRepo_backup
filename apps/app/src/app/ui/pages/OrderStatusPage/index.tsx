@@ -3,11 +3,11 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { ApproveRecord } from '../../../externel/backend/loanService/ApproveRecord';
 import { getToken } from '../../../application/getToken';
-import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';
 import { PageContent } from '../../core-components/PageContent';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { OrderStatusItem } from './OrderStatusItem';
+import {isShowNavigation} from "../../../device/isShowNavigation";
 
 const OrderStatusPage = (props: any) => {
   const navigate = useNavigate();

@@ -1,15 +1,15 @@
-import { ICustomTailwindTheme } from '../../../../app/modules/theme/ICustomTailwindTheme';
+import { ICustomTailwindTheme } from "apps/app/src/app/modules/ui/theme/ICustomTailwindTheme";
 
 const theme: ICustomTailwindTheme = {
     // NOTE: Color
     primary_main:'#1527CE',
     primary_variant:'#0F1DB1',
     primary_assistant:'#DBE0F0',
-    
+
     secondary_main:'#FFAF93',
     secondary_variant:'#DB806B',
     secondary_assistant:'#FFF5E9',
-    
+
     tertiary_main:'#B7C1FB',
     tertiary_variant:'#747FD7',
 
@@ -17,15 +17,15 @@ const theme: ICustomTailwindTheme = {
     custom_state_disable_main:'#B3B9C4',
     custom_state_disable_variant:'#758195',
     custom_state_disable_assistant:'#F1F2F4',
-    
+
     custom_state_success_main:'#79B040',
-    
+
     custom_state_warning_main:'#FF6322',
     custom_state_warning_variant:'#DB4418',
-    
+
     custom_state_error_main:'#CE1527',
     custom_state_error_variant:'#FCDBCF',
-    
+
     custom_state_info_main:'#4FA1FF',
     custom_state_info_variant:'#DBF2FF',
 

@@ -2,8 +2,9 @@ import React, { useCallback, useState } from 'react';
 import { z } from 'zod';
 
 import { environment } from '../../../../../environments/environmentModule/environment';
-import { InputValue } from '../../../../modules/form/InputValue';
+
 import { PostRepayReceiptRequestProps } from '../index';
+import {InputValue} from "../../../core-components/form/InputValue";
 
 interface PureUploadPaymentReceiptPageProps {
   postRepayReceiptRequest: (props: PostRepayReceiptRequestProps) => void;

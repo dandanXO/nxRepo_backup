@@ -7,13 +7,13 @@ import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
 import {getToken, removeTokenFromLocalStorage} from '../../../application/getToken';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { useDeleteUserMutation } from '../../../externel/backend/rtk';
-import { AndroidPage } from '../../../modules/window/IWindow';
 import {GlobalAppMode} from "../../../application/GlobalAppMode";
 import {isInApp} from "../../../device/isInApp";
 import {alertModal} from "../../components/alertModal";
 import {SentryModule} from "../../../modules/sentry";
 import {select} from "redux-saga/effects";
 import {userInfoPersistence} from "../../../persistant/UserInfoPersistence";
+import { AndroidPage } from '../../../externel/window/IWindow';
 
 const DeleteAccountConfirmModal = () => {
     const navigate = useNavigate();

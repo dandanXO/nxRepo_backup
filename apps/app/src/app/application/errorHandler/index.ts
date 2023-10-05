@@ -1,5 +1,5 @@
 // NOTICE: sync
-import {SentryModule} from "../sentry";
+
 // NOTE:
 // https://blog.51cto.com/u_15127593/2803803
 
@@ -23,6 +23,8 @@ import {SentryModule} from "../sentry";
 // };
 
 // NOTE: sync
+import {SentryModule} from "../../modules/sentry";
+
 window.addEventListener(
   'error',
   (event) => {

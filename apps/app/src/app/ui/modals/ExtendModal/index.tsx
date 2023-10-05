@@ -10,7 +10,6 @@ import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/cou
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { renderByCountry } from '../../../modules/i18n';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { RootState } from '../../../reduxStore';
 import useExtendCreate from '../../hooks/useExtendCreate';
 import useRepayTypes from '../../hooks/useRepayTypes';
@@ -19,6 +18,7 @@ import IndiaExtendModal from './i18n/IndiaExtendModal';
 import MexicoExtendModal from './i18n/MexicoExtendModal';
 import PakistanExtendModal from './i18n/PakistanExtendModal';
 import PhilippinesExtendModal from './i18n/PhilippinesExtendModal';
+import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
 
 const PureExtendModal = (props: any) => {
   const navigate = useNavigate();

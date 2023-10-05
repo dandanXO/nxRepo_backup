@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import {Route, Routes, useLocation} from "react-router";
 
 import {RootState} from "../../../app/reduxStore";
-import AppDataCollector from "../app/../../modules/dataCollectorContainer/AppDataCollector";
+
 
 
 import LoadingMask from "../core-components/LoadingMask";
@@ -28,6 +28,7 @@ import ExtendConfirmModal from "../modals/ExtendConfirmModal";
 import ExtendModal from "../modals/ExtendModal";
 import RepamentCouponModal from "../modals/RepaymentCouponModal";
 import APIBoundaryModal from "../modals/APIBoundaryModal";
+import AppDataCollector from "../../uiFlowDataCollector/AppDataCollector";
 
 
 export const AppRouter = () => {

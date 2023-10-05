@@ -4,8 +4,8 @@ import { PageOrModalPathEnum } from '../../ui/PageOrModalPathEnum';
 import { getToken } from '../../application/getToken';
 import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
-import { getOrderNo } from '../../modules/querystring/getOrderNo';
 import { isSimpleWebView } from "../../device/isSimpleWebView";
+import {getOrderNo} from "../../presentation/querystring/getOrderNo";
 
 // 目前的pathname
 let prevPathname = ''

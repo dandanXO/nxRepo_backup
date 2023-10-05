@@ -28,7 +28,7 @@ import { validateBalance } from '../validation';
 import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
-import { getOrderNo } from 'apps/app/src/app/modules/querystring/getOrderNo';
+import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
 
 type paymentMethodValueType = {
     type: string;

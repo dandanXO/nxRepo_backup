@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from 'react-router';
 
-import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../application/getToken';
 import { Button } from '../../../../core-components/Button';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Modal from '../../../../core-components/Modal';
 import { useTranslation } from 'react-i18next';
 import { i18nExtendConfirmModal } from '../../translations';
+import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
 
 const IndiaExtendConfirmModal = () => {
   const navigate = useNavigate();

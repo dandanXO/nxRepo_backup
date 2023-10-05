@@ -1,12 +1,18 @@
-import {DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME, DEFAULT_PHILIPPINES_THEME, themes} from '../../../environments/themeModule/customTailwindTheme';
+
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
-import {environment} from "../../../environments/environmentModule/environment";
-import {IndiaCountry} from "../../../../../../libs/shared/domain/src/country/IndiaCountry";
-import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
 import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import {SentryModule} from "../sentry";
+import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
+import {
+  DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME,
+  DEFAULT_PHILIPPINES_THEME,
+  themes
+} from "../../../../environments/themeModule/customTailwindTheme";
+import {SentryModule} from "../../sentry";
+import {AllCountriesEnum} from "../../../../../../../libs/shared/domain/src/country/AllCountry";
+
 
 function getDefaultTheme() {
     if (environment.country === IndiaCountry.country) {

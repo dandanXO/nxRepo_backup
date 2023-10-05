@@ -6,15 +6,13 @@ import { Input } from '@frontend/mobile/shared/ui';
 import { Button } from '../../../../core-components/Button';
 import { selectStyles } from '../../../../core-components/selectStyles';
 import { IPakistanBankAccountForm } from '../types/IBankAccountForm';
-import { z } from 'zod';
-import { InputValue } from '../../../../../modules/form/InputValue';
-import i18next, { t } from 'i18next';
 import { validateBankcardNo } from './validation';
 import ValidateInput from '../../../../core-components/ValidateInput';
 import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
 import { useDispatch } from 'react-redux';
 import { i18nBankBindAccountPage } from '../../translations';
 import { useTranslation } from 'react-i18next';
+import {InputValue} from "../../../../core-components/form/InputValue";
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {
     const navigate = useNavigate();

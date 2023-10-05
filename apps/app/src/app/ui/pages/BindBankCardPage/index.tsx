@@ -16,8 +16,6 @@ import {
   usePostBankBindSaveToPKMutation,
 } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
-import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
-import { CustomPage } from '../../core-components/CustomPage';
 import { Navigation } from '../../core-components/Navigation';
 import { PageContent } from '../../core-components/PageContent';
 import { IndiaBindBankAccountPage } from './i18nPage/IndiaBindBankAccountPage';
@@ -25,6 +23,7 @@ import { MexicoBindBankAccountPage } from './i18nPage/MexicoBindBankAccountPage'
 import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';
 import PhilippinesBindBankAccountPage from './i18nPage/PhilippinesBindBankAccountPage';
 import { i18nBankBindAccountPage } from './translations';
+import {isShowNavigation} from "../../../device/isShowNavigation";
 
 const BindBankCardPage = () => {
   // NOTICE: Common

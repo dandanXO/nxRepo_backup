@@ -6,11 +6,11 @@ import { Button } from '../../core-components/Button';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../application/getToken';
-import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import CustomServiceIcon from './CustomServiceIcon'
 import { Horizontal } from '../../core-components/Horizontal';
 import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
 import {useMailToRUL} from "../../hooks/useMailToRUL";
+import {isShowNavigation} from "../../../device/isShowNavigation";
 
 const CustomerServicePage = () => {
     const navigate = useNavigate();

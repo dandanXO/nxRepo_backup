@@ -1,7 +1,6 @@
 import {useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
 import {Route, Routes, useLocation} from "react-router";
-import AppDataCollector from "../../modules/dataCollectorContainer/AppDataCollector";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import BindBankCardPage from "../pages/BindBankCardPage";
 import IBANFinderModal from "../modals/i18n/pakistan/IBANFinderModal";
@@ -21,6 +20,7 @@ import {ErrorPage} from "../pages/__test__/ErrorPage";
 import APIBoundaryModal from "../modals/APIBoundaryModal";
 import LoadingMask from "../core-components/LoadingMask";
 import React from "react";
+import AppDataCollector from "../../uiFlowDataCollector/AppDataCollector";
 
 export const AppRouter = () => {
   const isInit: boolean = useSelector((state: RootState) => state.app.isInit);

@@ -1,7 +1,7 @@
 import "../polyfills";
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 import { SentryModule } from '../app/modules/sentry';
-import "../app/modules/errorHandler";
+import "../app/application/errorHandler";
 import '../app/modules/posthog';
 
 import React, { StrictMode } from 'react';
@@ -9,12 +9,11 @@ import * as ReactDOM from 'react-dom/client';
 
 // NOTE: Modules
 import { NativeAppInfo } from '../app/application/nativeAppInfo';
-import {ThemeModule} from '../app/modules/theme';
 import '../app/modules/i18n';
 import {I18nModule} from "../app/modules/i18n";
-import '../app/modules/timezone';
+import '../app/device/timezone';
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
-import '../app/modules/window/IWindow';
+import '../app/externel/window/IWindow';
 
 // NOTE: Other
 import '../style.css';
@@ -23,6 +22,7 @@ import {CoreMain} from "./main.core";
 
 // NOTICE:
 import {AppRouter} from '../app/ui/router/index.in';
+import {ThemeModule} from "../app/modules/ui/theme";
 
 // NOTICE:
 if (window.Cypress) {

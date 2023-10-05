@@ -10,10 +10,6 @@ import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
 import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/backend/rtk/old/getLoanDetail';
-import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
-import { getToken } from '../../../../../../application/getToken';
-import { Status } from '../../../../../../modules/statusEnum';
-import { tcx } from '../../../../../../modules/tailwindcss';
 import { RootState } from '../../../../../../reduxStore';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';
@@ -26,6 +22,10 @@ import ReservationSuccessModal from '../../../../../modals/ReservationSuccessMod
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
+import { tcx } from 'apps/app/src/app/modules/ui/tailwindcss';
+import { Status } from 'apps/app/src/app/ui/statusEnum';
+import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
+import {getToken} from "../../../../../../application/getToken";
 
 interface IPhilippinesRepaymentDetailPage {
   currentData?: GetLoanDetailResponse;

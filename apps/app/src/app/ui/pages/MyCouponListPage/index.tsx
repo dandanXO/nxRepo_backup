@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 import NoDataImage from '../../components/images/NoData.svg';
 import { useLazyGetCouponListQuery } from '../../../externel/backend/rtk';
 import { GetCouponListRequest } from '../../../externel/backend/userService/GetCouponListRequest';
-import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import Coupon from '../../components/Coupon';
 import { Tags } from '../../core-components/Tag';
 import { Page } from '../../core-components/Page';
@@ -13,6 +12,7 @@ import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../application/getToken';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { useDispatch } from 'react-redux';
+import {isShowNavigation} from "../../../device/isShowNavigation";
 
 const MyCouponListPage = () => {
   const navigate = useNavigate();

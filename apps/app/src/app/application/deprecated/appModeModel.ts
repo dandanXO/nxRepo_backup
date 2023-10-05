@@ -1,4 +1,4 @@
-import {AppMode, AppStorage} from '../../modules/localstorage';
+import {AppMode, AppStorage} from "../../persistant/localstorage";
 
 export class AppModeModel {
   static setMode(mode: AppMode) {

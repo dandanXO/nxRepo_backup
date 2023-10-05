@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router';
 
-import AppDataCollector from '../../modules/dataCollectorContainer/AppDataCollector';
+
 import { RootState } from '../../reduxStore';
 // NOTICE: Static Loading : Compontents
 import LoadingMask from '../core-components/LoadingMask';
@@ -53,6 +53,7 @@ import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage';
 // import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage';
+import AppDataCollector from "../../uiFlowDataCollector/AppDataCollector";
 
 // NOTICE: 無法以下寫法
 // [ctor is not a function when using React.lazy](https://github.com/facebook/react/issues/15639)

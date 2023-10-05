@@ -8,9 +8,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { StylesConfig } from 'react-select';
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
-import { InputValue } from '../../../../../modules/form/InputValue';
 import { formatDate } from '../../../../../modules/format/formatDate';
-import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../application/getToken';
 import { RootState } from '../../../../../reduxStore';
 import { repaymentDetailPageInitialState } from '../../../../../reduxStore/repaymentDetailPageSlice';
@@ -24,6 +22,8 @@ import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import { validateBalance } from '../validation';
+import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
+import {InputValue} from "../../../../core-components/form/InputValue";
 
 interface IPhilippinesRepaymentModalProps {
   radioValue: string;

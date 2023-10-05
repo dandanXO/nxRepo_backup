@@ -1,5 +1,4 @@
 import { alertModal } from '../../../components/alertModal';
-import { AndroidPage } from '../../../../modules/window/IWindow';
 import { NativeAppInfo } from '../../../../application/nativeAppInfo';
 import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 import {GlobalAppMode} from "../../../../application/GlobalAppMode";
@@ -11,6 +10,7 @@ import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {getToken, removeTokenFromLocalStorage} from "../../../../application/getToken";
 import {RootState} from "../../../../reduxStore";
 import {userInfoPersistence} from "../../../../persistant/UserInfoPersistence";
+import {AndroidPage} from "../../../../externel/window/IWindow";
 
 function *logoutSaga() {
 

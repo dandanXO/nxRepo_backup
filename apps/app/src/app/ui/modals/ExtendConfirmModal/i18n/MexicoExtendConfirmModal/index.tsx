@@ -1,12 +1,12 @@
 import { useTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 
-import { getOrderNo } from '../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../application/getToken';
 import Modal from '../../../../core-components/Modal';
 import { Button } from '../../../../core-components/Button';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { i18nExtendConfirmModal } from '../../translations';
+import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
 
 const MexicoExtendConfirmModal = () => {
   const navigate = useNavigate();

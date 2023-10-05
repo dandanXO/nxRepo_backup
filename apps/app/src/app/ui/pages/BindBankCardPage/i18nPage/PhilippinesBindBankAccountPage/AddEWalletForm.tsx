@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
 
-import { InputValue } from '../../../../../modules/form/InputValue';
 import {
   modalInitialState,
   modalSlice,
@@ -12,6 +11,7 @@ import ValidateInput from '../../../../core-components/ValidateInput';
 import { Button } from '../../../../core-components/Button';
 import { i18nBankBindAccountPage } from '../../translations';
 import { validationPHMobileNumber } from './validation';
+import {InputValue} from "../../../../core-components/form/InputValue";
 
 interface IAddEWalletFormProps {
   walletVendorOption: { value: string; label: string }[];

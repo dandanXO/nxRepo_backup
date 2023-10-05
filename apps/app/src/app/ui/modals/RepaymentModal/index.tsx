@@ -10,9 +10,7 @@ import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/countr
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
-import { InputValue } from '../../../modules/form/InputValue';
 import { renderByCountry } from '../../../modules/i18n';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { RootState } from '../../../reduxStore';
 import {
   repaymentDetailPageInitialState,
@@ -28,6 +26,8 @@ import MexicoRepaymentModal from './i18n/MexicoRepaymentModal';
 import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
 import PhilippinesRepaymentModal from './i18n/PhilippinesRepaymentModal';
 import { i18nRepaymentModal } from './i18n/translations';
+import {InputValue} from "../../core-components/form/InputValue";
+import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
 
 type paymentMethodValueType = {
   type: string;

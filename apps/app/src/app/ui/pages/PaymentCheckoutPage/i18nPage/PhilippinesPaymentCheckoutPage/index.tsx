@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router';
 
 import { PostRepayCreateResponse } from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
 import { getToken } from '../../../../../application/getToken';
-import { tcx } from '../../../../../modules/tailwindcss';
 import Divider from '../../../../core-components/Divider';
 import Money from '../../../../components/Money';
 import { PageContent } from '../../../../core-components/PageContent';
@@ -17,6 +16,7 @@ import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/
 import { i18nPaymentInstructionPage } from '../../translations';
 import getPlatformValue from './getPlatformValue';
 import CopyButton from "../../components/CopyButton";
+import {tcx} from "../../../../../modules/ui/tailwindcss";
 
 const Logo = (path: string) => {
   let logo = '';

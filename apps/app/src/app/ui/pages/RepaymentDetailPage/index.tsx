@@ -9,9 +9,8 @@ import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/cou
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { useLazyGetLoanDetailQuery } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../application/getToken';
-import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
+
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
@@ -20,6 +19,7 @@ import MexicoRepaymentDetailPage from './i18nPage/mexico/MexicoRepaymentDetailPa
 import PakistanRepaymentDetailPage from './i18nPage/pakistan/PakistanRepaymentDetailPage';
 import PhilippinesRepaymentDetailPage from './i18nPage/philippines/PhilippinesRepaymentDetailPage';
 import { RepaymentDetailPageUseCaseActions } from './userUsecaseSaga';
+import { isShowNavigation } from '../../../device/isShowNavigation';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();

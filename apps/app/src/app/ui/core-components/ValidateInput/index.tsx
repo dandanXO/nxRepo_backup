@@ -1,15 +1,15 @@
 
 import { Input } from '@frontend/mobile/shared/ui';
-import { InputValue } from 'apps/app/src/app/modules/form/InputValue';
 import React, { ClipboardEvent, useEffect, useState } from 'react';
 import { InputProps } from 'libs/mobile/shared/ui/src/lib/components/Input/Input';
+import {InputValue} from "../form/InputValue";
 
 type Props = {
     inputData: InputValue<string>;
     setInputData: React.Dispatch<React.SetStateAction<InputValue<string>>>;
     validateData: any;
     inputLength?: number;
-} & InputProps; 
+} & InputProps;
 
 const ValidateInput = (props: Props) => {
     const { inputData, setInputData, inputLength = 1, onCopy, onCut } = props

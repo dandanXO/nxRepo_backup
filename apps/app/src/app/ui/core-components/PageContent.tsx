@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
+import { tcx } from '../../modules/ui/tailwindcss';
+import {isShowNavigation} from "../../device/isShowNavigation";
 
-import { tcx } from '../../modules/tailwindcss';
-import { isShowNavigation } from '../../device/appEnvironment/isShowNavigation';
 
 interface Props {
   children?: ReactNode;

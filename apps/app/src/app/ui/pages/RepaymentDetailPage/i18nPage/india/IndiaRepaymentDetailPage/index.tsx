@@ -3,10 +3,7 @@ import moment from 'moment';
 import { useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
-
-import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../application/getToken';
-import { Status } from '../../../../../../modules/statusEnum';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
@@ -28,6 +25,8 @@ import VipIcon from '../../component/VipIcon';
 import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import { PageContent } from '../../../../../core-components/PageContent';
+import {Status} from "../../../../../statusEnum";
+import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
 
 
 

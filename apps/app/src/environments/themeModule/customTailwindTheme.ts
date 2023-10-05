@@ -1,5 +1,5 @@
 import { AllCountriesEnum } from '../../../../../libs/shared/domain/src/country/AllCountry';
-import { IThemes } from '../../app/modules/theme/types';
+import {IThemes} from "../../app/modules/ui/theme/types";
 
 // NOTE: India
 import v38 from './india/v38/tailwind.theme';
@@ -85,6 +85,7 @@ import PHv1 from './philippines/v1/tailwind.theme';
 import PHv2 from './philippines/v2/tailwind.theme';
 import PHv3 from './philippines/v3/tailwind.theme';
 import PHv4 from './philippines/v4/tailwind.theme';
+
 
 export const DEFAULT_INDIA_THEME: string = 'v55';
 export const DEFAULT_PAKISTAN_THEME: string = 'v15';

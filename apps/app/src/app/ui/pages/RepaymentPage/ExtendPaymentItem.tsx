@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
 import { getToken } from '../../../application/getToken';
-import { Status } from '../../../modules/statusEnum';
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';
 import Money from '../../components/Money';
@@ -19,6 +18,7 @@ import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
 import {formatDate} from "../../../modules/format/formatDate";
+import {Status} from "../../statusEnum";
 
 const ExtendPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();

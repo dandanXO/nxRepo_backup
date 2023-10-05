@@ -3,7 +3,6 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import Select from "../../../../core-components/Select";
 
-import { Status } from '../../../../../modules/statusEnum';
 import Divider from '../../../../core-components/Divider';
 import ListItem from '../../../../core-components/ListItem';
 import Money from '../../../../components/Money';
@@ -14,6 +13,7 @@ import Modal from '../../../../core-components/Modal';
 import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { i18nExtendModal } from '../../translations';
+import { Status } from '../../../../statusEnum';
 
 type paymentMethodValueType = {
   value: string;

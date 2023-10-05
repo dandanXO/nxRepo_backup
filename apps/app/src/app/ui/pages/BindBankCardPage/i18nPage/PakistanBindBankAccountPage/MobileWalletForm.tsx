@@ -1,5 +1,4 @@
 import { Input } from '@frontend/mobile/shared/ui';
-import { InputValue } from '../../../../../modules/form/InputValue';
 import React, { ClipboardEvent, useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import Select from 'react-select';
@@ -12,6 +11,7 @@ import ValidateInput from '../../../../core-components/ValidateInput';
 import { validateMobile } from './validation';
 import { useTranslation } from 'react-i18next';
 import { i18nBankBindAccountPage } from '../../translations';
+import {InputValue} from "../../../../core-components/form/InputValue";
 
 type IMobileWalletForm = {
     // Wallet List

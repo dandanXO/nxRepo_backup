@@ -1,5 +1,5 @@
 import {Colors, fontSizeListToRem, IThemeConfig} from "@frontend/mobile/shared/ui";
-import { theme } from "../../../environments/themeModule/styledComponentTheme";
+import { theme } from "apps/app/src/environments/themeModule/styledComponentTheme";
 
 export const themeConfig: IThemeConfig = {
   // NOTE: Commons

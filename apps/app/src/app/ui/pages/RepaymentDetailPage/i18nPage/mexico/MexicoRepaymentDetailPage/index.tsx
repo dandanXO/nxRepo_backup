@@ -4,9 +4,7 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../application/getToken';
-import { Status } from '../../../../../../modules/statusEnum';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
@@ -25,6 +23,8 @@ import { modalInitialState, modalSlice } from '../../../../../../reduxStore/moda
 import { useTranslation } from 'react-i18next';
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
+import {Status} from "../../../../../statusEnum";
+import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;

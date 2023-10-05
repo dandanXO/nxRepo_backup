@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 import {Route, Routes, useLocation} from "react-router";
 import {RootState} from "../../reduxStore";
-import AppDataCollector from "../../modules/dataCollectorContainer/AppDataCollector";
+
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import BindBankCardPage from "../pages/BindBankCardPage";
 import RepaymentDetailPage from "../pages/RepaymentDetailPage";
@@ -18,6 +18,7 @@ import CouponModalContentAndroidWebviewPage from "../pages/CouponModalContentAnd
 import APIBoundaryModal from "../modals/APIBoundaryModal";
 import LoadingMask from "../core-components/LoadingMask";
 import React from "react";
+import AppDataCollector from "../../uiFlowDataCollector/AppDataCollector";
 
 export
 

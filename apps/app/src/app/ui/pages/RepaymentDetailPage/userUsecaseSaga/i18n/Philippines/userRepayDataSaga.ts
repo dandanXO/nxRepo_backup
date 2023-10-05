@@ -1,13 +1,14 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { put, race, select, take ,call } from "redux-saga/effects";
 import { API } from "../../../../../../externel/backend/rtk";
-import { getOrderNo } from "apps/app/src/app/modules/querystring/getOrderNo";
+
 import { catchSagaError } from "../../../../../../uiFlowUsecase/utils/catchSagaError";
 import { repaymentDetailPageInitialStateType, repaymentDetailPageSlice } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
 import moment from 'moment';
 import { RootState } from "apps/app/src/app/reduxStore";
 import { userRepaymentDetailSaga } from "../../userRepaymentDetailSaga";
 import { loadingSlice } from "apps/app/src/app/reduxStore/loadingSlice";
+import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
 
 
 export function* userRepayDataSaga(action:PayloadAction) {

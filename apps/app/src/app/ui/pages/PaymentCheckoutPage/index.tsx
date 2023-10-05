@@ -6,7 +6,6 @@ import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/count
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { useLazyGetRepayPayInfoQuery } from '../../../externel/backend/rtk';
-import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import { renderByCountry } from '../../../modules/i18n';
 import { getToken } from '../../../application/getToken';
 import { Navigation } from '../../core-components/Navigation';
@@ -14,6 +13,7 @@ import { Page } from '../../core-components/Page';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentCheckoutPage';
 import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentCheckoutPage';
+import {isShowNavigation} from "../../../device/isShowNavigation";
 
 // TODO: Refactor Color
 const navigatorMap = {

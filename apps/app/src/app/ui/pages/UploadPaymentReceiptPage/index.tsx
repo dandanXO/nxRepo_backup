@@ -11,9 +11,9 @@ import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/
 import { usePostRepayReceiptMutation } from '../../../externel/backend/rtk';
 import { PostRepayReceiptResponse } from '../../../externel/backend/rtk/old/PostRepayReceiptResponse';
 import { renderByCountry } from '../../../modules/i18n';
-import { getOrderNo } from '../../../modules/querystring/getOrderNo';
+
 import { getToken } from '../../../application/getToken';
-import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
+
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
@@ -22,6 +22,8 @@ import { MexicoUploadPaymentReceiptPage } from './i18nPage/MexicoUploadPaymentRe
 import { PakistanUploadPaymentReceiptPage } from './i18nPage/PakistanUploadPaymentReceiptPage';
 import PhilippinesUploadPaymentReceiptPage from './i18nPage/PhilippinesUploadPaymentReceiptPage';
 import { i18nUploadPaymentReceiptPage } from './i18nPage/translations';
+import { getOrderNo } from '../../../presentation/querystring/getOrderNo';
+import { isShowNavigation } from '../../../device/isShowNavigation';
 
 export interface PostRepayReceiptRequestProps {
   formFile: any;

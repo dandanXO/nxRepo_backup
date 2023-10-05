@@ -4,10 +4,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/backend/rtk/old/getLoanDetail';
-import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../application/getToken';
-import { Status } from '../../../../../../modules/statusEnum';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
@@ -23,6 +20,8 @@ import { i18nLoanDetailsPage } from '../../../translations';
 import RepaymentDetailDemo from '../RepaymentDetailDemo';
 import { useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
+import {Status} from "../../../../../statusEnum";
+import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
