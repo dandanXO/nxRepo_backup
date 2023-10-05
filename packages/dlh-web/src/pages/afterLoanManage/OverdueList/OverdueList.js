@@ -148,6 +148,12 @@ class OverdueList extends Component {
                 }
             },
             {
+              title: props.intl.formatMessage({id: "page.table.coupon.usage.amount"}),
+              dataIndex: 'couponUsageAmount',
+              key: 'couponUsageAmount',
+              width:'7%',
+            },
+            {
                 title: props.intl.formatMessage({id: "page.table.reduce.amount.currency"}),
                 dataIndex: 'reductionAmount',
                 key: 'reductionAmount',

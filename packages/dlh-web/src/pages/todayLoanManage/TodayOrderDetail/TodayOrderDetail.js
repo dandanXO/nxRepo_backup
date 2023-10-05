@@ -9,13 +9,13 @@ import { CommonTable, FormModal, CopyModalMessage ,CopyToLink } from 'components
 import { todayOrderDetailAction } from './index';
 import AddUrgeModal from './AddUrgeModal/AddUrgeModal';
 import UrgeRecordModal from './UrgeRecordModal/UrgeRecordModal';
-const TabPane = Tabs.TabPane;
 import { convertMoneyFormat, emerRelation, maritalStatus, salaryRange, education, position, repaymentType } from "utils";
 import { axios } from 'utils';
 import { injectIntl, FormattedMessage } from "react-intl";
 import {WatermarkPhoto} from "../../../components/WatermarkPhoto/WatermarkPhoto";
 import { Typography } from 'antd';
 import conf from 'conf';
+const TabPane = Tabs.TabPane;
 const { Paragraph } = Typography;
 const { Item } = Descriptions;
 class OrderDetail extends Component{
@@ -302,6 +302,7 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="windowPage.remain.due" />：</span><span>{orderInfo['surplusBackMoney']}</span></Col>
                         {/*<Col className={styles.col} lg={12} xl={8}><span className={styles.title}>展期费用(₹)：</span><span>{orderInfo['standOverMoney']}</span></Col>*/}
                         <Col className={styles.col} lg={12} xl={8} style={{display:'flex'}}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><CopyToLink text={orderInfo['appName']} acturalCopy={orderInfo['channelUrl']} title={orderInfo['channelUrl']}/></Col>
+                        <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.coupon.usage.amount" />：</span><span>{orderInfo.couponUsageAmount}</span></Col>
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankName" />：</span><span>{bankInfo['bankName']}</span></Col>}
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankCardNo" />：</span><span>{bankInfo['bankCardNo']}</span></Col>}
 

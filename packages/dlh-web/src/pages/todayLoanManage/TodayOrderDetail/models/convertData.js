@@ -32,6 +32,7 @@ const converData = (obj = {}) => {
         deviceMemory: obj['deviceMemory'],
         bankInfo: obj['bank'],
         expireTime: obj['expireTime'] ? moment(Number(obj['expireTime']) * 1000).format('YYYY-MM-DD HH:mm:ss') : '',
+        couponUsageAmount: obj['couponUsageAmount'],
     }
 };
 const userConvertData = (obj = {}) => {
@@ -54,7 +55,7 @@ const userConvertData = (obj = {}) => {
         salaryRange: userAuthInfo['salaryRange'],
         emergencyContactInfos: userAuthInfo['emergencyContactInfos'],
         education: userAuthInfo['education'],
-       
+
     };
 }
 export { converData, userConvertData };

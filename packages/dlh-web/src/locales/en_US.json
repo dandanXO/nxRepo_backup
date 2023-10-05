@@ -323,6 +323,7 @@
   "page.table.collect.depart": "Collection Department",
   "page.table.amount.due.currency": "Amount Due(₹s)",
   "page.table.amount.paid.currency": "Amount Paid(₹s)",
+  "page.table.coupon.usage.amount": "Coupon usage amount",
   "page.table.reduce.amount.currency": "Reduction Amount(₹s)",
   "page.table.overdue.list.export": "OverDueFileList_{expDate}.xlsx",
   "page.table.redistribute.order": "Redistribute Order",

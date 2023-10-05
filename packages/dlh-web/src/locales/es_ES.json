@@ -314,6 +314,7 @@
   "page.table.collect.depart": "Departamento de Cobranza",
   "page.table.amount.due.currency": "Monto debido(₹s)",
   "page.table.amount.paid.currency": "Monto pagado(₹s)",
+  "page.table.coupon.usage.amount": "Monto utilizado del cupón",
   "page.table.reduce.amount.currency": "Monto de reducción(₹s)",
   "page.table.overdue.list.export": "Lista de archivos vencidos_{expDate}.xlsx",
   "page.table.redistribute.order": "Reasignar orden",

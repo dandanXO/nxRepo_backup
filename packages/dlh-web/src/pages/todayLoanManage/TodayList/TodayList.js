@@ -150,6 +150,12 @@ class TodayList extends Component {
                 }
             },
             {
+              title: props.intl.formatMessage({id: "page.table.coupon.usage.amount"}),
+              dataIndex: 'couponUsageAmount',
+              key: 'couponUsageAmount',
+              width: '6%',
+            },
+            {
                 title: props.intl.formatMessage({id: "page.table.overdue.stage"}),
                 dataIndex: 'stage',
                 key: 'stage',

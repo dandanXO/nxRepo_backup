@@ -31,6 +31,7 @@ const converData = (obj = {}) => {
         isOlduser: Number(user['isOlduser']) === 0 ? '否' : '是',
         deviceMemory: obj['deviceMemory'],
         expireTime: obj['expireTime'] ? moment(Number(obj['expireTime']) * 1000).format('YYYY-MM-DD HH:mm:ss') : '',
+        couponUsageAmount: obj['couponUsageAmount'],
     }
 };
 const userConvertData = (obj = {}) => {
