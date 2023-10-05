@@ -7,11 +7,11 @@ import {BrowserRouter} from "react-router-dom";
 import {AppThemeProvider} from "@frontend/mobile/shared/ui";
 import {environment} from "../environments/environmentModule/environment";
 import {appStore, history, RootState} from "../app/reduxStore";
-import {isInApp} from "../app/modules/appEnvironment/isInApp";
+import {isInApp} from "../app/device/isInApp";
 import {NativeAppInfo} from "../app/application/nativeAppInfo";
 import {GlobalAppMode} from "../app/application/GlobalAppMode";
 import {AppFlag} from "../environments/flag";
-import {AppEnvironment} from "../app/modules/appEnvironment";
+import {AppEnvironment} from "../app/device/appEnvironment";
 
 type ICoreMain = {
   children: React.ReactElement;

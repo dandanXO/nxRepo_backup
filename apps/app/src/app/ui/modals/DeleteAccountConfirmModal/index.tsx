@@ -9,7 +9,7 @@ import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { useDeleteUserMutation } from '../../../externel/backend/rtk';
 import { AndroidPage } from '../../../modules/window/IWindow';
 import {GlobalAppMode} from "../../../application/GlobalAppMode";
-import {isInApp} from "../../../modules/appEnvironment/isInApp";
+import {isInApp} from "../../../device/isInApp";
 import {alertModal} from "../../components/alertModal";
 import {SentryModule} from "../../../modules/sentry";
 import {select} from "redux-saga/effects";

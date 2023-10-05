@@ -3,7 +3,7 @@ import posthog from 'posthog-js';
 import { PosthogConfig } from '../../../environments/themeModule/india/v55/posthog';
 import { posthogConfigs } from '../../../environments/posthugModule/posthogConfigs';
 import { NativeAppInfo } from '../../application/nativeAppInfo';
-import { AppEnvironment } from '../appEnvironment';
+import { AppEnvironment } from '../../device/appEnvironment';
 import { SentryModule } from '../sentry';
 import {AppFlag} from "../../../environments/flag";
 import {GlobalAppMode} from "../../application/GlobalAppMode";

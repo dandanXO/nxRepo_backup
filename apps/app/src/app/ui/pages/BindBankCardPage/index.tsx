@@ -16,7 +16,7 @@ import {
   usePostBankBindSaveToPKMutation,
 } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
-import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
+import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import { CustomPage } from '../../core-components/CustomPage';
 import { Navigation } from '../../core-components/Navigation';
 import { PageContent } from '../../core-components/PageContent';

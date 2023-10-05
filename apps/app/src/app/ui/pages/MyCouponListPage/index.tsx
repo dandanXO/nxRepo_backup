@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import NoDataImage from '../../components/images/NoData.svg';
 import { useLazyGetCouponListQuery } from '../../../externel/backend/rtk';
 import { GetCouponListRequest } from '../../../externel/backend/userService/GetCouponListRequest';
-import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
+import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import Coupon from '../../components/Coupon';
 import { Tags } from '../../core-components/Tag';
 import { Page } from '../../core-components/Page';

@@ -8,7 +8,7 @@ import { changeLocationHref } from '../../../../../modules/errorHandler';
 import { SentryModule } from '../../../../../modules/sentry';
 import { BindBankCardPageEvents } from '../../event';
 import { i18nBankBindAccountPage } from '../../translations';
-import { isSimpleWebView } from '../../../../../modules/appEnvironment/isSimpleWebView';
+import { isSimpleWebView } from '../../../../../device/isSimpleWebView';
 import { useNavigate } from 'react-router';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { getToken } from '../../../../../application/getToken';

@@ -11,7 +11,7 @@ import { useLazyGetLoanDetailQuery } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../application/getToken';
-import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
+import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import { RootState } from '../../../reduxStore';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';

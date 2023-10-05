@@ -1,5 +1,5 @@
 import {IMonitorUsecaseFlow} from "./IMonitorUsecaseFlow";
-import {AppEnvironment} from "../modules/appEnvironment";
+import {AppEnvironment} from "../device/appEnvironment";
 import {SentryModule} from "../modules/sentry";
 
 export const debugAPIConnection: IMonitorUsecaseFlow["debugAPIConnection"] = ({

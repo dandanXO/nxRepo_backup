@@ -4,7 +4,7 @@ import { call, delay, put, take } from 'redux-saga/effects';
 import { Service } from '../../../../externel/backend';
 import { alertModal } from '../../../components/alertModal';
 import { GetQuotaModelStatusResponse } from '../../../../externel/backend/loanService/GetQuotaModelStatusResponse';
-import { AppEnvironment } from '../../../../modules/appEnvironment';
+import { AppEnvironment } from '../../../../device/appEnvironment';
 import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 import { createRequestAction } from '../../../../uiFlowUsecase/utils/createRequestAction';
 import { IndexPageSagaAction } from './indexPageActions';

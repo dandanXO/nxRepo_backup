@@ -1,5 +1,5 @@
 import {environment} from '../../../environments/environmentModule/environment';
-import {AppEnvironment} from '../../modules/appEnvironment';
+import {AppEnvironment} from '../../device/appEnvironment';
 import {IAndroidAppInfo} from '../../externel/nativeApp/types/IAndroidAppInfo';
 import {MexicoCountry} from "../../../../../../libs/shared/domain/src/country/MexicoCountry";
 import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";

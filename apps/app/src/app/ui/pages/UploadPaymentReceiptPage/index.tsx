@@ -13,7 +13,7 @@ import { PostRepayReceiptResponse } from '../../../externel/backend/rtk/old/Post
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../application/getToken';
-import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
+import { isShowNavigation } from '../../../device/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
