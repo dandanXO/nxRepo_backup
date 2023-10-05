@@ -7,7 +7,7 @@ import { useCallback, useState } from 'react';
 
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
-import { IChargeFeeDetails } from '../../../api/loanService/GetReservationResponse';
+import { IChargeFeeDetails } from '../../../externel/loanService/GetReservationResponse';
 import { formatPrice } from '../../../modules/format/formatPrice';
 import { renderByCountry } from '../../../modules/i18n';
 import { FinalProductType } from '../../pages/IndexPage';

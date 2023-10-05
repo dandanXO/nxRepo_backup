@@ -11,7 +11,7 @@ import {
 } from 'react-select';
 import Select from "../../core-components/Select";
 
-import { BankAccount } from '../../../api/userService/BankAccount';
+import { BankAccount } from '../../../externel/userService/BankAccount';
 import { formatPrice } from '../../../modules/format/formatPrice';
 import { IndexPageProps } from '../../../reduxStore';
 import { Button } from '../../core-components/Button';
@@ -19,7 +19,7 @@ import { CloseButton } from '../../core-components/CloseButton';
 import { Horizontal } from '../../core-components/Horizontal';
 import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
 import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
-import { FeeRateKeyEnum } from "../../../api/indexService/FeeRateKeyEnum";
+import { FeeRateKeyEnum } from "../../../externel/indexService/FeeRateKeyEnum";
 import { formatDate } from "../../../modules/format/formatDate";
 import { transparent } from 'tailwindcss/colors';
 

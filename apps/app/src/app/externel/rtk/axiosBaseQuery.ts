@@ -4,7 +4,7 @@ import type { AxiosError, AxiosRequestConfig } from 'axios';
 import { AppFlag } from '../../../environments/flag';
 import { SentryModule } from '../../modules/sentry';
 import { alertModal } from '../base/alertModal';
-import { runAxios } from '../base/runAxios';
+import { gateway } from '../gateway/gateway';
 
 export interface CustomAxiosError {
   status: any;
@@ -27,7 +27,7 @@ const axiosBaseQuery =
   > =>
   async ({ url, method, data, params, headers }) => {
     try {
-      const resultData = await runAxios(baseUrl, url, method, data, params, headers);
+      const resultData = await gateway(baseUrl, url, method, data, params, headers);
       // console.log('[app] resultData:', resultData);
       return resultData;
     } catch (axiosError) {

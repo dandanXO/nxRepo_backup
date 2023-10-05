@@ -1,8 +1,8 @@
 import { Action, Location } from 'history';
 import { call, put, select } from 'redux-saga/effects';
 
-import { Service } from '../../../../api';
-import { GetUserInfoServiceResponse } from '../../../../api/userService/GetUserInfoServiceResponse';
+import { Service } from '../../../../externel';
+import { GetUserInfoServiceResponse } from '../../../../externel/userService/GetUserInfoServiceResponse';
 import { getToken } from '../../../../persistant/getToken';
 import { SentryModule } from '../../../../modules/sentry';
 import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';

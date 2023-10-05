@@ -2,7 +2,7 @@ import { push } from '@lagunovsky/redux-react-router';
 import { PayloadAction, createAction } from '@reduxjs/toolkit';
 import { put, race, take } from 'redux-saga/effects';
 
-import { API, APIV3 } from '../../../../../../api/rtk';
+import { API, APIV3 } from '../../../../../../externel/rtk';
 import { catchSagaError } from '../../../../../../uiUsecaseFlow/utils/catchSagaError';
 import { InitialStateType, modalInitialState, modalSlice } from '../../../../../../reduxStore/modalSlice';
 import i18next from 'i18next';

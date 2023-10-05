@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { environment } from '../../../../environments/environmentModule/environment';
-import { GetLoanRecordListRequest } from '../../../api/loanService/GetLoanRecordListRequest';
-import { useLazyGetLoanRecordListQuery } from '../../../api/rtk';
+import { GetLoanRecordListRequest } from '../../../externel/loanService/GetLoanRecordListRequest';
+import { useLazyGetLoanRecordListQuery } from '../../../externel/rtk';
 import Tag from '../../core-components/Tag';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';

@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router';
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
 import { AppFlag } from '../../../environments/flag';
-import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateRequest';
-import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
-import { usePostRepayCreateMutation } from '../../api/rtk';
-import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
+import { PostRepayCreateRequest } from '../../externel/loanService/PostRepayCreateRequest';
+import { PostRepayCreateResponse } from '../../externel/loanService/PostRepayCreateResponse';
+import { usePostRepayCreateMutation } from '../../externel/rtk';
+import { CustomAxiosError } from '../../externel/rtk/axiosBaseQuery';
 import { getToken } from '../../persistant/getToken';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 

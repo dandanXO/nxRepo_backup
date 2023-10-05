@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { ReservationProduct } from '../api/loanService/GetReservationResponse';
-import { ReservationDetail } from '../api/loanService/PostReservationSubmitRequest';
-import { BankAccount } from '../api/userService/BankAccount';
+import { ReservationProduct } from '../externel/loanService/GetReservationResponse';
+import { ReservationDetail } from '../externel/loanService/PostReservationSubmitRequest';
+import { BankAccount } from '../externel/userService/BankAccount';
 import QuickRepaymentModal from "../ui/modals/QuickRepaymentModal";
 
 export type InitialStateType = {

@@ -2,7 +2,7 @@ import {push, ROUTER_ON_LOCATION_CHANGED} from '@lagunovsky/redux-react-router';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {put, race, take} from 'redux-saga/effects';
 
-import {APIV3} from '../../../../api/rtk';
+import {APIV3} from '../../../../externel/rtk';
 import {AppRunningModeEnum, appSlice} from '../../../../reduxStore/appSlice';
 import {catchSagaError} from '../../../../uiUsecaseFlow/utils/catchSagaError';
 import {PageOrModalPathEnum} from '../../../PageOrModalPathEnum';

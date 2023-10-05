@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { InputValue, Modal } from '@frontend/mobile/shared/ui';
 
-import { BankVendor, GetBindCardDropListResponse } from '../../../../../api/rtk/old/GetBindCardDropList';
+import { BankVendor, GetBindCardDropListResponse } from '../../../../../externel/rtk/old/GetBindCardDropList';
 import { changeLocationHref } from '../../../../../modules/errorHandler';
 import { SentryModule } from '../../../../../modules/sentry';
 import { BindBankCardPageEvents } from '../../event';

@@ -2,17 +2,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import moment from 'moment-timezone';
 
-import { GetIndexResponse } from '../api/indexService/GetIndexResponse';
-import { GetOpenIndexResponse } from '../api/indexService/GetOpenIndexResponse';
-import { PayableRecords } from '../api/indexService/PayableRecords';
-import { GetQuotaModelStatusResponse } from '../api/loanService/GetQuotaModelStatusResponse';
-import { GetUserInfoServiceResponse } from '../api/userService/GetUserInfoServiceResponse';
+import { GetIndexResponse } from '../externel/indexService/GetIndexResponse';
+import { GetOpenIndexResponse } from '../externel/indexService/GetOpenIndexResponse';
+import { PayableRecords } from '../externel/indexService/PayableRecords';
+import { GetQuotaModelStatusResponse } from '../externel/loanService/GetQuotaModelStatusResponse';
+import { GetUserInfoServiceResponse } from '../externel/userService/GetUserInfoServiceResponse';
 import { ORDER_STATE } from '../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
 import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
 import { NativeAppInfo } from '../persistant/nativeAppInfo';
 import { getQuotaModelStatusAction } from '../ui/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
-import { GetNotificationResponse } from '../api/indexService/GetNotificationResponse';
+import { GetNotificationResponse } from '../externel/indexService/GetNotificationResponse';
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;
   indexAPI: GetIndexResponse | null;

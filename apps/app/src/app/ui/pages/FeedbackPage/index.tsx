@@ -9,7 +9,7 @@ import { getToken } from '../../../persistant/getToken';
 import { Button } from '../../core-components/Button';
 import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
 import { useEffect, useState } from 'react';
-import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../api/rtk';
+import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../externel/rtk';
 import cx from 'classnames';
 import Select from '../../core-components/Select';
 import { transparent } from 'tailwindcss/colors';

@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../../reduxStore';
 import {CloseButton} from '../../core-components/CloseButton';
 import {Navigation} from '../../core-components/Navigation';
-import {runAxios} from "../../../api/base/runAxios";
+import {gateway} from "../../../externel/gateway/gateway";
 
 type Props = {
   onClose: () => void;
@@ -25,7 +25,7 @@ export const LoanAgreementModal = (props: Props) => {
   const [htmlData, setHTMLData] = useState<any>();
   useEffect(() => {
     if(!url) return;
-    runAxios('', url, 'get', null).then((response) => {
+    gateway('', url, 'get', null).then((response) => {
       // console.log("response", response.data)
       if(response.success) {
         // NOTICE: Failed to execute 'atob' on 'Window': The string to be decoded contains characters outside of the Latin1 range.

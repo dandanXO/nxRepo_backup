@@ -1,6 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { put, race, select, take ,call } from "redux-saga/effects";
-import { API, APIV3 } from "apps/app/src/app/api/rtk";
+import { API, APIV3 } from "../../../../externel/rtk";
 import { getOrderNo } from "apps/app/src/app/modules/querystring/getOrderNo";
 import { modalInitialState, modalSlice } from "apps/app/src/app/reduxStore/modalSlice";
 import { catchSagaError } from "../../../../uiUsecaseFlow/utils/catchSagaError";

@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 
-import { LoanServiceRequest } from '../../../../api/loanService/LoanServiceRequest';
+import { LoanServiceRequest } from '../../../../externel/loanService/LoanServiceRequest';
 import { userAuthenticateSaga } from './userAuthenticateSaga';
 
 export const IndexPageSagaAction = {

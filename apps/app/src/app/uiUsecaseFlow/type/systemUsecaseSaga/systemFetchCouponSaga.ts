@@ -1,6 +1,6 @@
-import { Service } from '../../../api';
+import { Service } from '../../../externel';
 import { all, call, fork, put, select, take } from 'redux-saga/effects';
-import { GetNotificationResponse } from '../../../api/indexService/GetNotificationResponse';
+import { GetNotificationResponse } from '../../../externel/indexService/GetNotificationResponse';
 import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
 import { RootState } from '../../../reduxStore';
 import { modalSlice } from '../../../reduxStore/modalSlice';

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import NoDataImage from '../../components/images/NoData.svg';
-import { useLazyGetCouponListQuery } from '../../../api/rtk';
-import { GetCouponListRequest } from '../../../api/userService/GetCouponListRequest';
+import { useLazyGetCouponListQuery } from '../../../externel/rtk';
+import { GetCouponListRequest } from '../../../externel/userService/GetCouponListRequest';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import Coupon from '../../components/Coupon';
 import { Tags } from '../../core-components/Tag';

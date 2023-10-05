@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 import { InputValue, Modal } from '@frontend/mobile/shared/ui';
-import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../api/rtk/old/GetBindCardDropList';
+import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../externel/rtk/old/GetBindCardDropList';
 import { i18nBankBindAccountPage } from '../../../translations';
 import { processWalletDisplayName } from './customization/processWalletDisplayName';
 

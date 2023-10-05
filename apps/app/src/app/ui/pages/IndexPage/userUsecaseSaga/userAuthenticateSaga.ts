@@ -1,4 +1,4 @@
-import { alertModal } from '../../../../api/base/alertModal';
+import { alertModal } from '../../../../externel/base/alertModal';
 import { AndroidPage } from '../../../../modules/window/IWindow';
 import { NativeAppInfo } from '../../../../persistant/nativeAppInfo';
 import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';

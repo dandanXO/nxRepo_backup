@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
-import { API, APIV3 } from '../api/rtk';
+import { API, APIV3 } from '../externel/rtk';
 import { WatchAppSaga } from '../uiUsecaseFlow/watchAppSaga';
 import { APIBoundaryModuleSlice } from './apiBoundaryModuleSlice';
 import { appSlice } from './appSlice';

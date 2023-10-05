@@ -6,7 +6,7 @@ import { BankAccountForm } from './BankAccountForm';
 import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../reduxStore';
-import { useLazyGetMXBindCardDropListQuery } from 'apps/app/src/app/api/rtk';
+import { useLazyGetMXBindCardDropListQuery } from '../../../../../externel/rtk';
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 import { i18nBankBindAccountPage } from '../../translations';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +19,7 @@ export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
   const pageQueryString = useLocationOrderQueryString();
- 
+
   const [ triggerGetBindCardDropListQuery,
     {
       currentData: bindCardDropListData,

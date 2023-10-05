@@ -1,8 +1,8 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
-import { GetLoanRecordListReponse } from "apps/app/src/app/api/loanService/GetLoanRecordListReponse";
-import { GetLoanRecordListRequest } from "apps/app/src/app/api/loanService/GetLoanRecordListRequest";
-import { APIV3 } from "apps/app/src/app/api/rtk";
+import { GetLoanRecordListReponse } from "../../../../externel/loanService/GetLoanRecordListReponse";
+import { GetLoanRecordListRequest } from "../../../../externel/loanService/GetLoanRecordListRequest";
+import { APIV3 } from "../../../../externel/rtk";
 import { loadingSlice } from "apps/app/src/app/reduxStore/loadingSlice";
 import { RepaymentPageActionPayload, repaymentPageSlice } from "apps/app/src/app/reduxStore/repaymentPageSlice";
 import moment from "moment";
@@ -44,7 +44,7 @@ export function* userRepaymentPageSaga(action: PayloadAction<RepaymentPageAction
                 scrollPosition: action.payload.scrollPosition,
             }))
         }
-        
+
     } catch {
         //
 

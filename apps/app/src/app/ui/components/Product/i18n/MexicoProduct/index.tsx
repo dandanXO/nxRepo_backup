@@ -8,7 +8,7 @@ import { formatPrice } from '../../../../../modules/format/formatPrice';
 import Money from '../../../Money';
 import { Checkbox, ICheckboxProps } from '../../../../core-components/Checkbox';
 import { FinalProductType } from '../../../../pages/IndexPage';
-import { IChargeFeeDetails } from '../../../../../api/loanService/GetReservationResponse';
+import { IChargeFeeDetails } from '../../../../../externel/loanService/GetReservationResponse';
 import { i18nProduct } from '../translations';
 import { useTranslation } from 'react-i18next';
 

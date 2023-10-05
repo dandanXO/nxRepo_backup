@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { GetLoanDetailResponse } from "../api/loanService/GetLoanDetailResponse";
-import { GetCouponApplicableList } from "../api/userService/GetCouponApplicableListResponse";
+import { GetLoanDetailResponse } from "../externel/loanService/GetLoanDetailResponse";
+import { GetCouponApplicableList } from "../externel/userService/GetCouponApplicableListResponse";
 
 export type repaymentDetailPageInitialStateType = {
     repaymentDetail: GetLoanDetailResponse | undefined,

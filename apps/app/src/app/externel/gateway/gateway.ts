@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { AppEnvironment } from '../../modules/appEnvironment';
 import { getToken } from '../../persistant/getToken';
 import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
-import {alertModal} from "./alertModal";
+import {alertModal} from "../base/alertModal";
 import {put} from "redux-saga/effects";
 import {push} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../ui/PageOrModalPathEnum";
@@ -11,7 +11,7 @@ import {appStore} from "../../reduxStore";
 
 let login401 = false;
 
-export const runAxios = async (
+export const gateway = async (
   baseUrl: string,
   url: string,
   method?: AxiosRequestConfig['method'],

@@ -6,7 +6,7 @@ import QRCode from 'react-qr-code';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import { PostRepayCreateResponse } from '../../../../../api/loanService/PostRepayCreateResponse';
+import { PostRepayCreateResponse } from '../../../../../externel/loanService/PostRepayCreateResponse';
 import { getToken } from '../../../../../persistant/getToken';
 import { tcx } from '../../../../../modules/tailwindcss';
 import Divider from '../../../../core-components/Divider';

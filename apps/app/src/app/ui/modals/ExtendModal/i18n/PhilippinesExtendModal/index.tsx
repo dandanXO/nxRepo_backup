@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { StylesConfig } from 'react-select';
 
-import { GetLoanDetailResponse } from '../../../../../api/loanService/GetLoanDetailResponse';
+import { GetLoanDetailResponse } from '../../../../../externel/loanService/GetLoanDetailResponse';
 import { tcx } from '../../../../../modules/tailwindcss';
 import { RootState } from '../../../../../reduxStore';
 import { repaymentDetailPageSlice } from '../../../../../reduxStore/repaymentDetailPageSlice';

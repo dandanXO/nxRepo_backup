@@ -3,9 +3,9 @@ import {call, put, select} from 'redux-saga/effects';
 import {push} from "@lagunovsky/redux-react-router";
 
 import {SentryModule} from '../../modules/sentry';
-import {Service} from '../../api';
-import {alertModal} from '../../api/base/alertModal';
-import {GetUserInfoServiceResponse} from '../../api/userService/GetUserInfoServiceResponse';
+import {Service} from '../../externel';
+import {alertModal} from '../../externel/base/alertModal';
+import {GetUserInfoServiceResponse} from '../../externel/userService/GetUserInfoServiceResponse';
 // import { Posthog } from '../../modules/posthog';
 import {getToken} from '../../persistant/getToken';
 import {PageOrModalPathEnum} from '../../ui/PageOrModalPathEnum';
@@ -15,7 +15,7 @@ import {NativeAppInfo} from '../../persistant/nativeAppInfo';
 import {GlobalAppMode} from "../../persistant/GlobalAppMode";
 import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
 import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
-import {GetIndexResponse} from '../../api/indexService/GetIndexResponse';
+import {GetIndexResponse} from '../../externel/indexService/GetIndexResponse';
 
 import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
 import {catchSagaError} from '../utils/catchSagaError';

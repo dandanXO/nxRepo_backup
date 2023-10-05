@@ -10,10 +10,10 @@ import { MexicoCountry } from '../../../../../../libs/shared/domain/src/country/
 import { PhilippinesCountry } from '../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../environments/environmentModule/environment';
 import { AppFlag } from '../../../environments/flag';
-import { PostRepayCreateRequest } from '../../api/loanService/PostRepayCreateRequest';
-import { PostRepayCreateResponse } from '../../api/loanService/PostRepayCreateResponse';
-import { usePostRepayCreateMutation } from '../../api/rtk';
-import { CustomAxiosError } from '../../api/rtk/axiosBaseQuery';
+import { PostRepayCreateRequest } from '../../externel/loanService/PostRepayCreateRequest';
+import { PostRepayCreateResponse } from '../../externel/loanService/PostRepayCreateResponse';
+import { usePostRepayCreateMutation } from '../../externel/rtk';
+import { CustomAxiosError } from '../../externel/rtk/axiosBaseQuery';
 import { getToken } from '../../persistant/getToken';
 import { modalSlice } from '../../reduxStore/modalSlice';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';

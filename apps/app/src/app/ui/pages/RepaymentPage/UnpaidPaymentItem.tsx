@@ -3,7 +3,7 @@ import moment from 'moment';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { GetLoanRecord } from '../../../api/loanService/GetLoanRecord';
+import { GetLoanRecord } from '../../../externel/loanService/GetLoanRecord';
 import { getToken } from '../../../persistant/getToken';
 import { Status } from '../../../modules/statusEnum';
 import Divider from '../../core-components/Divider';

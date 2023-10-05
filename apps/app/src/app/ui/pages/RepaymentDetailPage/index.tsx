@@ -7,7 +7,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
-import { useLazyGetLoanDetailQuery } from '../../../api/rtk';
+import { useLazyGetLoanDetailQuery } from '../../../externel/rtk';
 import { renderByCountry } from '../../../modules/i18n';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../persistant/getToken';

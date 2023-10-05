@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { put } from 'redux-saga/effects';
 
-import { alertModal } from '../../api/base/alertModal';
+import { alertModal } from '../../externel/base/alertModal';
 import { SentryModule } from '../../modules/sentry';
 import { APIBoundaryModuleSlice } from '../../reduxStore/apiBoundaryModuleSlice';
 import {push} from "@lagunovsky/redux-react-router";

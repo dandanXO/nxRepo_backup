@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailResponse } from '../../../../../../api/loanService/GetLoanDetailResponse';
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../api/rtk/old/getLoanDetail';
+import { GetLoanDetailResponse } from '../../../../../../externel/loanService/GetLoanDetailResponse';
+import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/rtk/old/getLoanDetail';
 import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../persistant/getToken';
 import { Status } from '../../../../../../modules/statusEnum';

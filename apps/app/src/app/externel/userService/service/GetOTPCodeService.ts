@@ -1,4 +1,4 @@
-import { runAxios } from '../../base/runAxios';
+import { gateway } from '../../gateway/gateway';
 
 export type GetOTPCodeRequest = {
   appName: string;
@@ -18,6 +18,6 @@ export type GetOTPCodeRequest = {
 };
 
 export const GetOTPCodeService = async (request: GetOTPCodeRequest) => {
-  const { data } = await runAxios('/api', '/v2/login/otp-code', 'post', request, {});
+  const { data } = await gateway('/api', '/v2/login/otp-code', 'post', request, {});
   return data;
 };

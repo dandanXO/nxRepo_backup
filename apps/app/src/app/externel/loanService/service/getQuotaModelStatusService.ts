@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 
-import { runAxios } from '../../base/runAxios';
+import { gateway } from '../../gateway/gateway';
 import { Service } from '../../index';
 import { GetQuotaModelStatusRequest } from '../GetQuotaModelStatusRequest';
 import { GetQuotaModelStatusResponse } from '../GetQuotaModelStatusResponse';
 
 export const getQuotaModelStatusService = async (request: GetQuotaModelStatusRequest) => {
-  const { data }: { data: GetQuotaModelStatusResponse } = await runAxios(
+  const { data }: { data: GetQuotaModelStatusResponse } = await gateway(
     '/api',
     '/v3/loan/quota-model-status',
     'get',

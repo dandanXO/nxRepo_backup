@@ -1,8 +1,8 @@
-import { runAxios } from '../../base/runAxios';
+import { gateway } from '../../gateway/gateway';
 import { LoanServiceRequest } from '../LoanServiceRequest';
 
 export const postApplyLoanService = async (req: LoanServiceRequest) => {
-  const { data, success }: { data: LoanServiceResponse; success: boolean } = await runAxios(
+  const { data, success }: { data: LoanServiceResponse; success: boolean } = await gateway(
     '/api',
     '/v3/loan/apply',
     'post',
