@@ -3,7 +3,7 @@ import { PayloadAction, createAction } from '@reduxjs/toolkit';
 import { put, race, take } from 'redux-saga/effects';
 
 import { API } from '../../../../../../externel/backend/rtk';
-import { catchSagaError } from '../../../../../../uiUsecaseFlow/utils/catchSagaError';
+import { catchSagaError } from '../../../../../../uiFlowUsecase/utils/catchSagaError';
 import { InitialStateType, modalInitialState, modalSlice } from '../../../../../../reduxStore/modalSlice';
 import i18next from 'i18next';
 import { Modal } from '@frontend/mobile/shared/ui';

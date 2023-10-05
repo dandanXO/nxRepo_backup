@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../../../reduxStore';
 import {CloseButton} from '../../core-components/CloseButton';
 import {Navigation} from '../../core-components/Navigation';
-import {gateway} from "../../../externel/gateway";
+import {gateway} from "../../../gateway";
 
 type Props = {
   onClose: () => void;

@@ -1,4 +1,4 @@
-import { gateway } from '../../../gateway';
+import { gateway } from '../../../../gateway';
 import { GetBankCardListResponse } from '../GetBankCardListResponse';
 
 export const GetBankCardListService = async (params: null) => {

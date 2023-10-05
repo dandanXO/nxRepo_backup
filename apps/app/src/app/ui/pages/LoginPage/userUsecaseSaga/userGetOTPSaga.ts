@@ -3,7 +3,7 @@ import {put, select} from 'redux-saga/effects';
 import { Md5 } from 'ts-md5';
 
 import { API } from '../../../../externel/backend/rtk';
-import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 import { UserLoginActionPayload } from './index';
 import {alertModal} from "../../../components/alertModal";
 import {NativeAppInfo} from "../../../../persistant/nativeAppInfo";

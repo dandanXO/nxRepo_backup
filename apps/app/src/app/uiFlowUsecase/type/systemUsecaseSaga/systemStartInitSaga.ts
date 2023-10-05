@@ -1,6 +1,6 @@
 import {all, call, put, select} from 'redux-saga/effects';
 
-import {Service} from '../../../externel';
+import {Service} from '../../../externel/backend';
 import {GetInitServiceResponse} from '../../../externel/backend/appService/GetInitServiceResponse';
 import {NativeAppInfo} from '../../../persistant/nativeAppInfo';
 import {RootState} from '../../../reduxStore';

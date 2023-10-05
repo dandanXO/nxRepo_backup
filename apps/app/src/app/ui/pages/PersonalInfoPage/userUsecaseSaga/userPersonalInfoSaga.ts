@@ -1,9 +1,9 @@
 // NOTE: Action: UserApplyProduct
 import { all, call, fork, put, select } from 'redux-saga/effects';
-import { systemCallGetUserInfoSaga } from '../../../../uiUsecaseFlow/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
-import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
+import { systemCallGetUserInfoSaga } from '../../../../uiFlowUsecase/type/userUsecaseSaga/sharedSaga/systemCallGetUserInfoSaga';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
-import { systemGetIndexPageSaga } from '../../../../uiUsecaseFlow/type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga';
+import { systemGetIndexPageSaga } from '../../../../uiFlowUsecase/type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga';
 
 export function* userPersonalInfoSaga(action: any) {
     try {

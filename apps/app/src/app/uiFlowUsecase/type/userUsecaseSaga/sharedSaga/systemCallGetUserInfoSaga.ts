@@ -1,7 +1,7 @@
 import { Action, Location } from 'history';
 import { call, put, select } from 'redux-saga/effects';
 
-import { Service } from '../../../../externel';
+import { Service } from '../../../../externel/backend';
 import { GetUserInfoServiceResponse } from '../../../../externel/backend/userService/GetUserInfoServiceResponse';
 import { getToken } from '../../../../persistant/getToken';
 import { SentryModule } from '../../../../modules/sentry';
@@ -9,7 +9,7 @@ import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';
 import { RootState } from '../../../../reduxStore';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../utils/catchSagaError';
-import {MonitorUsecaseFlow} from "../../../../monitorUsecaseFlow";
+import {MonitorUsecaseFlow} from "../../../../uiFlowUsercaseMoniter";
 import {push} from "@lagunovsky/redux-react-router";
 
 export function* systemCallGetUserInfoSaga() {

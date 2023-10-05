@@ -14,7 +14,7 @@ import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { getToken } from '../../../../../persistant/getToken';
 import { useDispatch } from 'react-redux';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
-import {MonitorUsecaseFlow} from "../../../../../monitorUsecaseFlow";
+import {MonitorUsecaseFlow} from "../../../../../uiFlowUsercaseMoniter";
 
 export type IUseFinishedBindBankAccountPage = {
     // NOTICE: Common

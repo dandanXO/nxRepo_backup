@@ -18,7 +18,7 @@ import '../app/modules/window/IWindow';
 
 // NOTE: Other
 import '../style.css';
-import {MonitorUsecaseFlow} from "../app/monitorUsecaseFlow";
+import {MonitorUsecaseFlow} from "../app/uiFlowUsercaseMoniter";
 import {CoreMain} from "./main.core";
 
 // NOTICE:

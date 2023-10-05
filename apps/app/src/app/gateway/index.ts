@@ -1,13 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
-
-import { AppEnvironment } from '../../modules/appEnvironment';
-import { getToken } from '../../persistant/getToken';
-import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
-import {alertModal} from "../../ui/components/alertModal";
-import {put} from "redux-saga/effects";
 import {push} from "@lagunovsky/redux-react-router";
-import {PageOrModalPathEnum} from "../../ui/PageOrModalPathEnum";
-import {appStore} from "../../reduxStore";
+import {MonitorUsecaseFlow} from "../uiFlowUsercaseMoniter";
+import { getToken } from '../persistant/getToken';
+import {alertModal} from "../ui/components/alertModal";
+import {PageOrModalPathEnum} from "../ui/PageOrModalPathEnum";
+import {appStore} from "../reduxStore";
 
 let login401 = false;
 

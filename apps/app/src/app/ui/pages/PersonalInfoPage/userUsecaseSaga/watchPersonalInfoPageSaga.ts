@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-import { errorFallback } from '../../../../uiUsecaseFlow/utils/errorFallback';
+import { errorFallback } from '../../../../uiFlowUsecase/utils/errorFallback';
 import { PersonalInfoPageSagaActions } from './index';
 import { userLogoutSaga } from './userLogoutSaga';
 import { userPersonalInfoSaga } from './userPersonalInfoSaga';

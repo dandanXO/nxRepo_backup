@@ -3,7 +3,7 @@ import {call, put, select} from 'redux-saga/effects';
 import {push} from "@lagunovsky/redux-react-router";
 
 import {SentryModule} from '../../modules/sentry';
-import {Service} from '../../externel';
+import {Service} from '../../externel/backend';
 import {alertModal} from '../../ui/components/alertModal';
 import {GetUserInfoServiceResponse} from '../../externel/backend/userService/GetUserInfoServiceResponse';
 // import { Posthog } from '../../modules/posthog';
@@ -14,7 +14,7 @@ import {indexPageSlice} from '../../reduxStore/indexPageSlice';
 import {NativeAppInfo} from '../../persistant/nativeAppInfo';
 import {GlobalAppMode} from "../../persistant/GlobalAppMode";
 import {AppModeEnum} from "../../persistant/enum/AppModeEnum";
-import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
+import {MonitorUsecaseFlow} from "../../uiFlowUsercaseMoniter";
 import {GetIndexResponse} from '../../externel/backend/indexService/GetIndexResponse';
 
 import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';

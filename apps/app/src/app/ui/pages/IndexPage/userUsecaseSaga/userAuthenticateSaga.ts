@@ -1,7 +1,7 @@
 import { alertModal } from '../../../components/alertModal';
 import { AndroidPage } from '../../../../modules/window/IWindow';
 import { NativeAppInfo } from '../../../../persistant/nativeAppInfo';
-import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
 import {isInApp} from "../../../../modules/appEnvironment/isInApp";
 import {SentryModule} from "../../../../modules/sentry";

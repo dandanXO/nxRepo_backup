@@ -1,12 +1,12 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, take } from 'redux-saga/effects';
 
-import { Service } from '../../../../externel';
+import { Service } from '../../../../externel/backend';
 import { alertModal } from '../../../components/alertModal';
 import { GetQuotaModelStatusResponse } from '../../../../externel/backend/loanService/GetQuotaModelStatusResponse';
 import { AppEnvironment } from '../../../../modules/appEnvironment';
-import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
-import { createRequestAction } from '../../../../uiUsecaseFlow/utils/createRequestAction';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
+import { createRequestAction } from '../../../../uiFlowUsecase/utils/createRequestAction';
 import { IndexPageSagaAction } from './indexPageActions';
 import {SentryModule} from "../../../../modules/sentry";
 

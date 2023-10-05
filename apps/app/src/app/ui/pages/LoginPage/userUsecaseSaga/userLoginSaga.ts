@@ -4,7 +4,7 @@ import {put, race, take} from 'redux-saga/effects';
 
 import {APIV3} from '../../../../externel/backend/rtk';
 import {AppRunningModeEnum, appSlice} from '../../../../reduxStore/appSlice';
-import {catchSagaError} from '../../../../uiUsecaseFlow/utils/catchSagaError';
+import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
 import {PageOrModalPathEnum} from '../../../PageOrModalPathEnum';
 import {UserLoginActionPayload} from './index';
 import {loginSlice} from 'apps/app/src/app/reduxStore/loginSlice';

@@ -1,4 +1,4 @@
-import { Service } from '../../../externel';
+import { Service } from '../../../externel/backend';
 import { all, call, fork, put, select, take } from 'redux-saga/effects';
 import { GetNotificationResponse } from '../../../externel/backend/indexService/GetNotificationResponse';
 import { indexPageSlice } from '../../../reduxStore/indexPageSlice';

@@ -1,7 +1,7 @@
 // NOTE: Action: UserApplyProduct
 import { all, call, fork, put, select } from 'redux-saga/effects';
 
-import { Service } from '../../../../externel';
+import { Service } from '../../../../externel/backend';
 import { GetIndexResponse } from '../../../../externel/backend/indexService/GetIndexResponse';
 import { GetOpenIndexResponse } from '../../../../externel/backend/indexService/GetOpenIndexResponse';
 import { USER_AUTH_STATE } from '../../../../domain/user/USER_AUTH_STATE';

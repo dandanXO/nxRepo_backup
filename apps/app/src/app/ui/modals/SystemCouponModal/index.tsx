@@ -5,7 +5,7 @@ import { Button } from '../../core-components/Button';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { getToken } from '../../../persistant/getToken';
 import { modalSlice } from '../../../reduxStore/modalSlice';
-import { SystemCaseActions } from '../../../uiUsecaseFlow/type/systemUsecaseSaga/systemCaseActions';
+import { SystemCaseActions } from '../../../uiFlowUsecase/type/systemUsecaseSaga/systemCaseActions';
 import CouponModalContentAndroidWebviewPage from '../../pages/CouponModalContentAndroidWebviewPage';
 
 const SystemCouponModal = () => {

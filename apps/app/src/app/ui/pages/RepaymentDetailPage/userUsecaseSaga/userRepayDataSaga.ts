@@ -3,7 +3,7 @@ import { put, race, select, take ,call } from "redux-saga/effects";
 import { API, APIV3 } from "../../../../externel/backend/rtk";
 import { getOrderNo } from "apps/app/src/app/modules/querystring/getOrderNo";
 import { modalInitialState, modalSlice } from "apps/app/src/app/reduxStore/modalSlice";
-import { catchSagaError } from "../../../../uiUsecaseFlow/utils/catchSagaError";
+import { catchSagaError } from "../../../../uiFlowUsecase/utils/catchSagaError";
 import { repaymentDetailPageInitialState, repaymentDetailPageInitialStateType, repaymentDetailPageSlice } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
 import { rtkPendingSlice } from "apps/app/src/app/reduxStore/rtkPendingSlice";
 import moment from 'moment';

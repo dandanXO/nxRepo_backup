@@ -1,4 +1,4 @@
-import { errorFallback } from '../../../../uiUsecaseFlow/utils/errorFallback';
+import { errorFallback } from '../../../../uiFlowUsecase/utils/errorFallback';
 import { environment } from 'apps/app/src/environments/environmentModule/environment';
 import { takeLatest } from 'redux-saga/effects';
 

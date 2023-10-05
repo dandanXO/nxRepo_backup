@@ -10,7 +10,7 @@ import {
   modalInitialState,
   modalSlice,
 } from '../../../../../../reduxStore/modalSlice';
-import { catchSagaError } from '../../../../../../uiUsecaseFlow/utils/catchSagaError';
+import { catchSagaError } from '../../../../../../uiFlowUsecase/utils/catchSagaError';
 
 export function* bindBankcardSaga(
   action: PayloadAction<InitialStateType['bindBankcardModal']>

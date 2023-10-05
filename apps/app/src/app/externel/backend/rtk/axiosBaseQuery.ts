@@ -4,7 +4,7 @@ import type { AxiosError, AxiosRequestConfig } from 'axios';
 import { AppFlag } from '../../../../environments/flag';
 import { SentryModule } from '../../../modules/sentry';
 import { alertModal } from '../../../ui/components/alertModal';
-import { gateway } from '../../gateway';
+import { gateway } from '../../../gateway';
 
 export interface CustomAxiosError {
   status: any;

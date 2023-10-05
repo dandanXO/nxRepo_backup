@@ -2,19 +2,19 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, select, take, takeLatest, race, retry} from 'redux-saga/effects';
 
-import {Service} from '../../../../externel';
+import {Service} from '../../../../externel/backend';
 import {LoanServiceResponse} from '../../../../externel/backend/loanService/service/postApplyLoanService';
 import {GetBankCardListResponse} from '../../../../externel/backend/userService/GetBankCardListResponse';
 import {RootState} from '../../../../reduxStore';
 import {InitialStateType, modalSlice} from '../../../../reduxStore/modalSlice';
-import {catchSagaError} from '../../../../uiUsecaseFlow/utils/catchSagaError';
+import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
 import {IndexPageSagaAction, UserApplyProductActionPayload} from './indexPageActions';
 import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
 import {SentryModule} from "../../../../modules/sentry";
 import {go, routerActions} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {getToken} from "../../../../persistant/getToken";
-import {errorFallback} from "../../../../uiUsecaseFlow/utils/errorFallback";
+import {errorFallback} from "../../../../uiFlowUsecase/utils/errorFallback";
 import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁
