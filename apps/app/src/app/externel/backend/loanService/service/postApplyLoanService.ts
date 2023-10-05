@@ -1,4 +1,4 @@
-import { gateway } from '../../gateway/gateway';
+import { gateway } from '../../../gateway';
 import { LoanServiceRequest } from '../LoanServiceRequest';
 
 export const postApplyLoanService = async (req: LoanServiceRequest) => {

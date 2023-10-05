@@ -1,4 +1,4 @@
-import {GetUserInfoServiceResponse} from "../externel/userService/GetUserInfoServiceResponse";
+import {GetUserInfoServiceResponse} from "../externel/backend/userService/GetUserInfoServiceResponse";
 import {
   IUseFinishedBindBankAccountPage
 } from "../ui/pages/BindBankCardPage/hooks/common/useFinishedBindBankAccountForm";

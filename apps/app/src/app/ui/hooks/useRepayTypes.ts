@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { useLazyGetRepayTypesQuery } from '../../externel/rtk';
+import { useLazyGetRepayTypesQuery } from '../../externel/backend/rtk';
 
 type paymentMethodValueType = {
   value: string;

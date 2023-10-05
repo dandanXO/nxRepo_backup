@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { GetLoanRecordListReponse } from "../externel/loanService/GetLoanRecordListReponse";
-import { GetLoanRecord } from "../externel/loanService/GetLoanRecord";
+import { GetLoanRecordListReponse } from "../externel/backend/loanService/GetLoanRecordListReponse";
+import { GetLoanRecord } from "../externel/backend/loanService/GetLoanRecord";
 
 export type RepaymentPageActionPayload = {
     paymentType: string;

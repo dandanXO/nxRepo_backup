@@ -1,4 +1,4 @@
-import { gateway } from '../../gateway/gateway';
+import { gateway } from '../../../gateway';
 import { GetIndexRequest } from '../GetIndexRequest';
 import { GetIndexResponse } from '../GetIndexResponse';
 

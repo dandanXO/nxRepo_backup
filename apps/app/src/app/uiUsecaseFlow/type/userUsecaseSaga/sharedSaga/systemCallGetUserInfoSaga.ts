@@ -2,7 +2,7 @@ import { Action, Location } from 'history';
 import { call, put, select } from 'redux-saga/effects';
 
 import { Service } from '../../../../externel';
-import { GetUserInfoServiceResponse } from '../../../../externel/userService/GetUserInfoServiceResponse';
+import { GetUserInfoServiceResponse } from '../../../../externel/backend/userService/GetUserInfoServiceResponse';
 import { getToken } from '../../../../persistant/getToken';
 import { SentryModule } from '../../../../modules/sentry';
 import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';

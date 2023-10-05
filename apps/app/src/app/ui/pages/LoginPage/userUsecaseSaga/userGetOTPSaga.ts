@@ -2,10 +2,10 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import {put, select} from 'redux-saga/effects';
 import { Md5 } from 'ts-md5';
 
-import { API } from '../../../../externel/rtk';
+import { API } from '../../../../externel/backend/rtk';
 import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
 import { UserLoginActionPayload } from './index';
-import {alertModal} from "../../../../externel/base/alertModal";
+import {alertModal} from "../../../components/alertModal";
 import {NativeAppInfo} from "../../../../persistant/nativeAppInfo";
 import queryString from "query-string";
 import {appSlice} from "../../../../reduxStore/appSlice";

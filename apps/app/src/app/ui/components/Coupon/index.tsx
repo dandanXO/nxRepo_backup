@@ -3,7 +3,7 @@ import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/count
 import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
 import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
-import { GetCouponApplicableList } from '../../../externel/userService/GetCouponApplicableListResponse';
+import { GetCouponApplicableList } from '../../../externel/backend/userService/GetCouponApplicableListResponse';
 import { renderByCountry } from '../../../modules/i18n';
 import IndiaCoupon from './i18n/IndiaCoupon';
 import PakistanCoupon from './i18n/PakistanCoupon';

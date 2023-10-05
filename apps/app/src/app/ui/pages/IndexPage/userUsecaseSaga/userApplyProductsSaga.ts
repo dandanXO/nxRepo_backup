@@ -3,8 +3,8 @@ import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, select, take, takeLatest, race, retry} from 'redux-saga/effects';
 
 import {Service} from '../../../../externel';
-import {LoanServiceResponse} from '../../../../externel/loanService/service/postApplyLoanService';
-import {GetBankCardListResponse} from '../../../../externel/userService/GetBankCardListResponse';
+import {LoanServiceResponse} from '../../../../externel/backend/loanService/service/postApplyLoanService';
+import {GetBankCardListResponse} from '../../../../externel/backend/userService/GetBankCardListResponse';
 import {RootState} from '../../../../reduxStore';
 import {InitialStateType, modalSlice} from '../../../../reduxStore/modalSlice';
 import {catchSagaError} from '../../../../uiUsecaseFlow/utils/catchSagaError';

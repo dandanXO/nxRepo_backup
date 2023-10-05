@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { useLocation, useNavigate } from 'react-router';
 
-import { ApproveRecord } from '../../../externel/loanService/ApproveRecord';
+import { ApproveRecord } from '../../../externel/backend/loanService/ApproveRecord';
 import { getToken } from '../../../persistant/getToken';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { Navigation } from '../../core-components/Navigation';

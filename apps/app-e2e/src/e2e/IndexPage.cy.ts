@@ -1,24 +1,24 @@
 // NOTICE: refactor me
 // import {IndexServiceResponse} from "../../../app/src/app/api/service";
-import {GetIndexResponse as IndexServiceResponse} from "../../../app/src/app/externel/indexService/GetIndexResponse";
+import {GetIndexResponse as IndexServiceResponse} from "../../../app/src/app/externel/backend/indexService/GetIndexResponse";
 
 import {indexPagePo} from "../support/indexPage.po";
 import moment from "moment-timezone"
 import {USER_AUTH_STATE} from "../../../app/src/app/domain/user/USER_AUTH_STATE";
-import {LoanServiceResponse} from "../../../app/src/app/externel/loanService/service/postApplyLoanService";
-import {GetBankCardListResponse} from "../../../app/src/app/externel/userService/GetBankCardListResponse";
-import {GetInitServiceResponse} from "../../../app/src/app/externel/appService/GetInitServiceResponse";
-import {SDKidCardOcr} from "../../../app/src/app/externel/appService/SDKidCardOcr";
-import {SDKliveDetect} from "../../../app/src/app/externel/appService/SDKliveDetect";
-import {SDKtaxCardOcr} from "../../../app/src/app/externel/appService/SDKtaxCardOcr";
-import {GetQuotaModelStatusResponse} from "../../../app/src/app/externel/loanService/GetQuotaModelStatusResponse";
-import {GetUserInfoServiceResponse} from "../../../app/src/app/externel/userService/GetUserInfoServiceResponse";
-import {GetOpenIndexResponse} from "../../../app/src/app/externel/indexService/GetOpenIndexResponse";
+import {LoanServiceResponse} from "../../../app/src/app/externel/backend/loanService/service/postApplyLoanService";
+import {GetBankCardListResponse} from "../../../app/src/app/externel/backend/userService/GetBankCardListResponse";
+import {GetInitServiceResponse} from "../../../app/src/app/externel/backend/appService/GetInitServiceResponse";
+import {SDKidCardOcr} from "../../../app/src/app/externel/backend/appService/SDKidCardOcr";
+import {SDKliveDetect} from "../../../app/src/app/externel/backend/appService/SDKliveDetect";
+import {SDKtaxCardOcr} from "../../../app/src/app/externel/backend/appService/SDKtaxCardOcr";
+import {GetQuotaModelStatusResponse} from "../../../app/src/app/externel/backend/loanService/GetQuotaModelStatusResponse";
+import {GetUserInfoServiceResponse} from "../../../app/src/app/externel/backend/userService/GetUserInfoServiceResponse";
+import {GetOpenIndexResponse} from "../../../app/src/app/externel/backend/indexService/GetOpenIndexResponse";
 import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
-import {FeeRateKeyEnum} from "../../../app/src/app/externel/indexService/FeeRateKeyEnum";
+import {FeeRateKeyEnum} from "../../../app/src/app/externel/backend/indexService/FeeRateKeyEnum";
 import {NativeAppInfo} from "apps/app/src/app/persistant/nativeAppInfo";
-import {useLazyGetUserProcessQuery} from "../../../app/src/app/externel/rtk";
-import {GetUserProcessResponse} from "../../../app/src/app/externel/loanService/GetUserProcessResponse";
+import {useLazyGetUserProcessQuery} from "../../../app/src/app/externel/backend/rtk";
+import {GetUserProcessResponse} from "../../../app/src/app/externel/backend/loanService/GetUserProcessResponse";
 
 import { getTimeInfoBetweenCurrentAndCountDown } from "@frontend/shared/date";
 import { ORDER_STATE } from "apps/app/src/app/domain/order/ORDER_STATE";

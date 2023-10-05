@@ -4,7 +4,7 @@ import { put, race, take } from 'redux-saga/effects';
 
 import { Modal } from '@frontend/mobile/shared/ui';
 
-import { APIV3 } from '../../../../../../externel/rtk';
+import { APIV3 } from '../../../../../../externel/backend/rtk';
 import {
   InitialStateType,
   modalInitialState,

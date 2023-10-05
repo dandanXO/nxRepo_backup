@@ -1,4 +1,4 @@
-import { gateway } from '../../gateway/gateway';
+import {gateway} from '../../../gateway';
 import { GetNotificationResponse } from '../GetNotificationResponse';
 
 export const getNotificationService = async (params: null): Promise<GetNotificationResponse> => {

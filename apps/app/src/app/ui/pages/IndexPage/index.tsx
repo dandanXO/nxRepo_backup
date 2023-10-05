@@ -4,9 +4,9 @@ import {useCallback, useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Outlet, useNavigate} from 'react-router';
 
-import {FeeRateKeyEnum} from '../../../externel/indexService/FeeRateKeyEnum';
-import {PlatformProduct} from '../../../externel/indexService/PlatformProduct';
-import {ProductApplyDetail} from '../../../externel/loanService/ProductApplyDetail';
+import {FeeRateKeyEnum} from '../../../externel/backend/indexService/FeeRateKeyEnum';
+import {PlatformProduct} from '../../../externel/backend/indexService/PlatformProduct';
+import {ProductApplyDetail} from '../../../externel/backend/loanService/ProductApplyDetail';
 import {ORDER_STATE} from '../../../domain/order/ORDER_STATE';
 import {RISK_CONTROL_STATE} from '../../../domain/risk/RISK_CONTROL_STATE';
 import {USER_AUTH_STATE} from '../../../domain/user/USER_AUTH_STATE';

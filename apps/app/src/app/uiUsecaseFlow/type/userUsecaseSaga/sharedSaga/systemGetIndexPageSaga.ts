@@ -2,8 +2,8 @@
 import { all, call, fork, put, select } from 'redux-saga/effects';
 
 import { Service } from '../../../../externel';
-import { GetIndexResponse } from '../../../../externel/indexService/GetIndexResponse';
-import { GetOpenIndexResponse } from '../../../../externel/indexService/GetOpenIndexResponse';
+import { GetIndexResponse } from '../../../../externel/backend/indexService/GetIndexResponse';
+import { GetOpenIndexResponse } from '../../../../externel/backend/indexService/GetOpenIndexResponse';
 import { USER_AUTH_STATE } from '../../../../domain/user/USER_AUTH_STATE';
 import { RootState } from '../../../../reduxStore';
 import { catchSagaError } from '../../../utils/catchSagaError';

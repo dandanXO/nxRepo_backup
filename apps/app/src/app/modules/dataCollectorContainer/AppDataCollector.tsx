@@ -2,7 +2,7 @@ import React, { SyntheticEvent, useEffect } from 'react';
 import { useLocation } from 'react-router';
 
 import { environment } from '../../../environments/environmentModule/environment';
-import { usePostTraceBehaviorMutation } from '../../externel/rtk';
+import { usePostTraceBehaviorMutation } from '../../externel/backend/rtk';
 import {getCurrentUnixTimestamp} from "../timezone/getCurrentUnixTimestamp";
 
 const AppDataCollector = (props: { children: React.ReactNode }) => {

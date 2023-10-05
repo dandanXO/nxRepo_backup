@@ -1,4 +1,4 @@
-import { gateway } from '../../gateway/gateway';
+import { gateway } from '../../../gateway';
 import { GetUserInfoServiceRequest } from '../GetUserInfoServiceRequest';
 import { GetUserInfoServiceResponse } from '../GetUserInfoServiceResponse';
 

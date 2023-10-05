@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import { PostRepayCreateResponse } from '../../../../../externel/loanService/PostRepayCreateResponse';
+import { PostRepayCreateResponse } from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
 import { getToken } from '../../../../../persistant/getToken';
 import { Label } from '../../../../core-components/Labels';
 import Money from '../../../../components/Money';

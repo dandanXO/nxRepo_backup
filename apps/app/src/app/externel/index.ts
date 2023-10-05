@@ -1,11 +1,11 @@
-import { getInitService } from './appService/service/getInitService';
-import { getIndexService } from './indexService/service/getIndexService';
-import { getNotificationService } from './indexService/service/getNotificationService';
-import { getOpenIndexService } from './indexService/service/getOpenIndexService';
-import { getQuotaModelStatusService } from './loanService/service/getQuotaModelStatusService';
-import { postApplyLoanService } from './loanService/service/postApplyLoanService';
-import { GetBankCardListService } from './userService/service/getBankCardListService';
-import { getUserInfoService } from './userService/service/getUserInfoService';
+import { getInitService } from './backend/appService/service/getInitService';
+import { getIndexService } from './backend/indexService/service/getIndexService';
+import { getNotificationService } from './backend/indexService/service/getNotificationService';
+import { getOpenIndexService } from './backend/indexService/service/getOpenIndexService';
+import { getQuotaModelStatusService } from './backend/loanService/service/getQuotaModelStatusService';
+import { postApplyLoanService } from './backend/loanService/service/postApplyLoanService';
+import { GetBankCardListService } from './backend/userService/service/getBankCardListService';
+import { getUserInfoService } from './backend/userService/service/getUserInfoService';
 
 // NOTICE: 根據 非 Page，而是 Domain 做切分
 export const Service = {
@@ -27,5 +27,5 @@ export const Service = {
   },
 
 };
-export {LoginRequest} from "./userService/LoginRequest";
-export {LoginResponse} from "./userService/LoginResponse";
+export {LoginRequest} from "./backend/userService/LoginRequest";
+export {LoginResponse} from "./backend/userService/LoginResponse";

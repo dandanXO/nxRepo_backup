@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { ReservationDetail } from "../../../../externel/loanService/PostReservationSubmitRequest";
+import { ReservationDetail } from "../../../../externel/backend/loanService/PostReservationSubmitRequest";
 import { repaymentDetailPageInitialStateType } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
 
 export type UserReserveActionPayload = {

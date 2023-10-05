@@ -1,4 +1,4 @@
-import {GetLoanRecordListReponse} from "../../../app/src/app/externel/loanService/GetLoanRecordListReponse";
+import {GetLoanRecordListReponse} from "../../../app/src/app/externel/backend/loanService/GetLoanRecordListReponse";
 import {PageOrModalPathEnum} from "../../../app/src/app/ui/PageOrModalPathEnum";
 
 describe("RepaymentPage", () => {

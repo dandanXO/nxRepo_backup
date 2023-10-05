@@ -1,8 +1,8 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
-import { GetLoanRecordListReponse } from "../../../../externel/loanService/GetLoanRecordListReponse";
-import { GetLoanRecordListRequest } from "../../../../externel/loanService/GetLoanRecordListRequest";
-import { APIV3 } from "../../../../externel/rtk";
+import { GetLoanRecordListReponse } from "../../../../externel/backend/loanService/GetLoanRecordListReponse";
+import { GetLoanRecordListRequest } from "../../../../externel/backend/loanService/GetLoanRecordListRequest";
+import { APIV3 } from "../../../../externel/backend/rtk";
 import { loadingSlice } from "apps/app/src/app/reduxStore/loadingSlice";
 import { RepaymentPageActionPayload, repaymentPageSlice } from "apps/app/src/app/reduxStore/repaymentPageSlice";
 import moment from "moment";

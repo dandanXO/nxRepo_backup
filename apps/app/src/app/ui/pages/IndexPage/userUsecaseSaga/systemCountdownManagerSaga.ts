@@ -1,6 +1,6 @@
 import {put, select} from 'redux-saga/effects';
 
-import {GetIndexResponse} from '../../../../externel/indexService/GetIndexResponse';
+import {GetIndexResponse} from '../../../../externel/backend/indexService/GetIndexResponse';
 import {RISK_CONTROL_STATE} from '../../../../domain/risk/RISK_CONTROL_STATE';
 import {RootState} from '../../../../reduxStore';
 import {SystemCaseActions} from '../../../../uiUsecaseFlow/type/systemUsecaseSaga/systemCaseActions';

@@ -6,7 +6,7 @@ import { BankAccountForm } from './BankAccountForm';
 import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../reduxStore';
-import { useLazyGetMXBindCardDropListQuery } from '../../../../../externel/rtk';
+import { useLazyGetMXBindCardDropListQuery } from '../../../../../externel/backend/rtk';
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 import { i18nBankBindAccountPage } from '../../translations';
 import { useTranslation } from 'react-i18next';

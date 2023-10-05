@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { environment } from '../../../../environments/environmentModule/environment';
-import { GetLoanRecord } from '../../../externel/loanService/GetLoanRecord';
+import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
 import { getToken } from '../../../persistant/getToken';
 import { Status } from '../../../modules/statusEnum';
 import Divider from '../../core-components/Divider';

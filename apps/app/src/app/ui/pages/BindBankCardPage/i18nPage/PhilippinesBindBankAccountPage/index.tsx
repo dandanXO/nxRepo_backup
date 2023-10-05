@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
-import { useGetPHBindCardDropListQuery } from '../../../../../externel/rtk';
+import { useGetPHBindCardDropListQuery } from '../../../../../externel/backend/rtk';
 import { RootState } from '../../../../../reduxStore';
 import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
 import AddEWalletForm from './AddEWalletForm';

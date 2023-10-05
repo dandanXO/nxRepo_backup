@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useLazyGetBankCardListQuery } from '../../../externel/rtk';
-import { usePostBankCardMainMutation } from '../../../externel/rtk';
+import { useLazyGetBankCardListQuery } from '../../../externel/backend/rtk';
+import { usePostBankCardMainMutation } from '../../../externel/backend/rtk';
 import { getToken } from '../../../persistant/getToken';
 import NoDataIcon from './images/NoData.svg';
 import { Navigation } from '../../core-components/Navigation';

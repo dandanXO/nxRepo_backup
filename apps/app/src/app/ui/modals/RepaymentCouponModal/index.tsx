@@ -10,7 +10,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import NoDataImage from '../../components/images/NoData.svg';
 import { environment } from '../../../../environments/environmentModule/environment';
-import { useLazyGetCouponApplicableListQuery } from '../../../externel/rtk';
+import { useLazyGetCouponApplicableListQuery } from '../../../externel/backend/rtk';
 import { getOrderNo } from '../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../persistant/getToken';
 import { RootState } from '../../../reduxStore';

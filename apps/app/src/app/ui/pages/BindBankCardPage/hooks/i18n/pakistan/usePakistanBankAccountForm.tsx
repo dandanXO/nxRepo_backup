@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { usePakistanIBanValidate } from '../../../../../../../../../../libs/shared/component/src/hooks/usePakistanIBanValidate';
-import { BankVendor, GetBindCardDropListResponse } from '../../../../../../externel/rtk/old/GetBindCardDropList';
+import { BankVendor, GetBindCardDropListResponse } from '../../../../../../externel/backend/rtk/old/GetBindCardDropList';
 import { InputValue } from '@frontend/mobile/shared/ui';
 import { useTranslation } from 'react-i18next';
 import { i18nBankBindAccountPage } from '../../../translations';

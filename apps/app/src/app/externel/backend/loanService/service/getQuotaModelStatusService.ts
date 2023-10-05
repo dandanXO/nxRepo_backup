@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 
-import { gateway } from '../../gateway/gateway';
-import { Service } from '../../index';
+import { gateway } from '../../../gateway';
+import { Service } from '../../../index';
 import { GetQuotaModelStatusRequest } from '../GetQuotaModelStatusRequest';
 import { GetQuotaModelStatusResponse } from '../GetQuotaModelStatusResponse';
 

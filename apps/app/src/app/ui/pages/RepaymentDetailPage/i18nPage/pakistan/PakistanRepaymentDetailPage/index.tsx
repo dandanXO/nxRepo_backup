@@ -4,7 +4,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/rtk/old/getLoanDetail';
+import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/backend/rtk/old/getLoanDetail';
 import { getOrderNo } from '../../../../../../modules/querystring/getOrderNo';
 import { getToken } from '../../../../../../persistant/getToken';
 import { Status } from '../../../../../../modules/statusEnum';
@@ -13,7 +13,7 @@ import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
 import { Button } from '../../../../../core-components/Button';
 
-import { GetLoanDetailResponse } from '../../../../../../externel/loanService/GetLoanDetailResponse';
+import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
 
 import {useMemo} from "react";
 import {useDynamicChargeFeeList} from "../../../hooks/useDynamicChargeFeeList";

@@ -1,6 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { put, race, select, take ,call } from "redux-saga/effects";
-import { API } from "../../../../../../externel/rtk";
+import { API } from "../../../../../../externel/backend/rtk";
 import { getOrderNo } from "apps/app/src/app/modules/querystring/getOrderNo";
 import { catchSagaError } from "../../../../../../uiUsecaseFlow/utils/catchSagaError";
 import { repaymentDetailPageInitialStateType, repaymentDetailPageSlice } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";

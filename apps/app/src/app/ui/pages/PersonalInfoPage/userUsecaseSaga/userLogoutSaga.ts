@@ -1,11 +1,11 @@
-import { alertModal } from '../../../../externel/base/alertModal';
+import { alertModal } from '../../../components/alertModal';
 import { AndroidPage } from '../../../../modules/window/IWindow';
 import { NativeAppInfo } from '../../../../persistant/nativeAppInfo';
 import { catchSagaError } from '../../../../uiUsecaseFlow/utils/catchSagaError';
 import {GlobalAppMode} from "../../../../persistant/GlobalAppMode";
 import {isInApp} from "../../../../modules/appEnvironment/isInApp";
 import {call, put, race, select, take} from "redux-saga/effects";
-import {API, APIV3} from "../../../../externel/rtk";
+import {API, APIV3} from "../../../../externel/backend/rtk";
 import {push, routerActions} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {getToken, removeTokenFromLocalStorage} from "../../../../persistant/getToken";

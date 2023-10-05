@@ -14,7 +14,7 @@ import {
   useLazyGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
   usePostBankBindSaveToPKMutation,
-} from '../../../externel/rtk';
+} from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { CustomPage } from '../../core-components/CustomPage';

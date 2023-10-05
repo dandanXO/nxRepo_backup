@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
 import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
-import { useLazyGetRepayPayInfoQuery } from '../../../externel/rtk';
+import { useLazyGetRepayPayInfoQuery } from '../../../externel/backend/rtk';
 import { isShowNavigation } from '../../../modules/appEnvironment/isShowNavigation';
 import { renderByCountry } from '../../../modules/i18n';
 import { getToken } from '../../../persistant/getToken';

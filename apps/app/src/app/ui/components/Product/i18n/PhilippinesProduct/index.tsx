@@ -3,7 +3,7 @@ import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { IChargeFeeDetails } from '../../../../../externel/loanService/GetReservationResponse';
+import { IChargeFeeDetails } from '../../../../../externel/backend/loanService/GetReservationResponse';
 import { FinalProductType } from '../../../../pages/IndexPage';
 import { Checkbox, ICheckboxProps } from '../../../../core-components/Checkbox';
 import Money from '../../../Money';

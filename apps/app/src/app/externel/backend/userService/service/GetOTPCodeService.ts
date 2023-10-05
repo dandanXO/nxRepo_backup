@@ -1,4 +1,4 @@
-import { gateway } from '../../gateway/gateway';
+import { gateway } from '../../../gateway';
 
 export type GetOTPCodeRequest = {
   appName: string;

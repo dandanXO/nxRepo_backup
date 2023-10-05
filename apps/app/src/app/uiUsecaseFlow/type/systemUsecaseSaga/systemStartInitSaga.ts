@@ -1,7 +1,7 @@
 import {all, call, put, select} from 'redux-saga/effects';
 
 import {Service} from '../../../externel';
-import {GetInitServiceResponse} from '../../../externel/appService/GetInitServiceResponse';
+import {GetInitServiceResponse} from '../../../externel/backend/appService/GetInitServiceResponse';
 import {NativeAppInfo} from '../../../persistant/nativeAppInfo';
 import {RootState} from '../../../reduxStore';
 import {appSlice} from '../../../reduxStore/appSlice';

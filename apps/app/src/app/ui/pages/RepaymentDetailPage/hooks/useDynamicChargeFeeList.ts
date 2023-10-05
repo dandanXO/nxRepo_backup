@@ -1,5 +1,5 @@
-import {GetLoanDetailResponse} from "../../../../externel/loanService/GetLoanDetailResponse";
-import {GetLoanDetailChargeFeeDetailItems} from "../../../../externel/rtk/old/getLoanDetail";
+import {GetLoanDetailResponse} from "../../../../externel/backend/loanService/GetLoanDetailResponse";
+import {GetLoanDetailChargeFeeDetailItems} from "../../../../externel/backend/rtk/old/getLoanDetail";
 import {computeNumber} from "../../../../modules/computeNumber";
 
 export const useDynamicChargeFeeList = (originalTtems?: GetLoanDetailResponse["chargeFeeDetail"]["items"]) => {

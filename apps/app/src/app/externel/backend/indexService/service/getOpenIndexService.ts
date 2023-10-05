@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { alertModal } from '../../base/alertModal';
-import { gateway } from '../../gateway/gateway';
+import { alertModal } from '../../../../ui/components/alertModal';
+import { gateway } from '../../../gateway';
 import { GetOpenIndexRequest } from '../GetOpenIndexRequest';
 import { GetOpenIndexResponse } from '../GetOpenIndexResponse';
 

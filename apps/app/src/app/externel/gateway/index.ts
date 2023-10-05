@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { AppEnvironment } from '../../modules/appEnvironment';
 import { getToken } from '../../persistant/getToken';
 import {MonitorUsecaseFlow} from "../../monitorUsecaseFlow";
-import {alertModal} from "../base/alertModal";
+import {alertModal} from "../../ui/components/alertModal";
 import {put} from "redux-saga/effects";
 import {push} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../ui/PageOrModalPathEnum";
