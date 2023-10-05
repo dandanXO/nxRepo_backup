@@ -30,6 +30,7 @@ function isLocalStorageAvailable() {
 
 console.log('[app][ability] isLocalStorageAvailable', isLocalStorageAvailable());
 
+// NOTICE: Android 目前不支援 Localstorage
 export class AppLocalStorage {
   static setItem(key: string, value: string) {
     if(!window.localStorage) {
