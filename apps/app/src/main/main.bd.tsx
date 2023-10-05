@@ -19,7 +19,7 @@ import {NativeAppInfo} from '../app/application/nativeAppInfo';
 
 // NOTE: Other
 import '../style.css';
-import {MonitorUsecaseFlow} from "../app/uiFlowUsercaseMoniter";
+import {MonitorUsecaseFlow} from "../app/uiFlowUsecaseMoniter";
 import {AppRouter} from "../app/ui/router/index.bd";
 import {CoreMain} from "./main.core";
 import {I18nModule} from "../app/modules/i18n";

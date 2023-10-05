@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import {push} from "@lagunovsky/redux-react-router";
-import {MonitorUsecaseFlow} from "../uiFlowUsercaseMoniter";
+import {MonitorUsecaseFlow} from "../uiFlowUsecaseMoniter";
 import { getToken } from '../application/getToken';
 import {alertModal} from "../ui/components/alertModal";
 import {PageOrModalPathEnum} from "../ui/PageOrModalPathEnum";

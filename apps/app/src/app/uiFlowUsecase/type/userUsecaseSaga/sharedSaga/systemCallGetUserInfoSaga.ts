@@ -9,7 +9,7 @@ import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';
 import { RootState } from '../../../../reduxStore';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
 import { catchSagaError } from '../../../utils/catchSagaError';
-import {MonitorUsecaseFlow} from "../../../../uiFlowUsercaseMoniter";
+import {MonitorUsecaseFlow} from "../../../../uiFlowUsecaseMoniter";
 import {push} from "@lagunovsky/redux-react-router";
 
 export function* systemCallGetUserInfoSaga() {
