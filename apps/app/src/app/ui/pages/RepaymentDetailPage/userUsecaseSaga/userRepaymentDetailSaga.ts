@@ -19,7 +19,7 @@ export function* userRepaymentDetailSaga() {
       }) as any
     );
 
-    const { success, failure } = yield race({
+    const { success } = yield race({
       success: take(API.endpoints.getLoanDetail.matchFulfilled),
       failure: take(API.endpoints.getLoanDetail.matchRejected),
     });

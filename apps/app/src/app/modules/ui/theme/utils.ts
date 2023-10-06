@@ -18,21 +18,21 @@ import { SentryModule } from '../../sentry';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
 
-function getDefaultTheme() {
-  if (environment.country === IndiaCountry.country) {
-    return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
-  } else if (environment.country === PakistanCountry.country) {
-    return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
-  } else if (environment.country === MexicoCountry.country) {
-    return mapCustomTailwindTheme(themes['mexico'][DEFAULT_MEXICO_THEME]);
-  } else if (environment.country === MexicoCountry.country) {
-    return mapCustomTailwindTheme(
-      themes['philippines'][DEFAULT_PHILIPPINES_THEME]
-    );
-  } else {
-    return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
-  }
-}
+// function getDefaultTheme() {
+//   if (environment.country === IndiaCountry.country) {
+//     return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
+//   } else if (environment.country === PakistanCountry.country) {
+//     return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
+//   } else if (environment.country === MexicoCountry.country) {
+//     return mapCustomTailwindTheme(themes['mexico'][DEFAULT_MEXICO_THEME]);
+//   } else if (environment.country === MexicoCountry.country) {
+//     return mapCustomTailwindTheme(
+//       themes['philippines'][DEFAULT_PHILIPPINES_THEME]
+//     );
+//   } else {
+//     return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
+//   }
+// }
 
 export const applyTheme = (country: AllCountriesEnum, theme: string): void => {
   // console.log("applyTheme.country", country);

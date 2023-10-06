@@ -12,28 +12,28 @@ const Container = styled.div`
   font-size: 16px;
 `;
 
-const ProgressBar = styled.div``;
-const Percent = styled.div`
-  text-align: right;
-`;
+// const ProgressBar = styled.div``;
+// const Percent = styled.div`
+//   text-align: right;
+// `;
 
-const Title = styled.div`
-  text-align: center;
-  color: black;
-  margin-bottom: 30px;
-`;
-const ProgressBarContainer = styled.div`
-  background: #e5e5e5;
-  height: 5px;
-`;
+// const Title = styled.div`
+//   text-align: center;
+//   color: black;
+//   margin-bottom: 30px;
+// `;
+// const ProgressBarContainer = styled.div`
+//   background: #e5e5e5;
+//   height: 5px;
+// `;
 interface ProgressBarIndexProps {
   width: string;
 }
-const ProgressBarWater = styled.div<ProgressBarIndexProps>`
-  background: #aaaaaa;
-  width: ${(props) => props.width};
-  height: 5px;
-`;
+// const ProgressBarWater = styled.div<ProgressBarIndexProps>`
+//   background: #aaaaaa;
+//   width: ${(props) => props.width};
+//   height: 5px;
+// `;
 const Description = styled.div`
   color: #aaaaaa;
   font-size: 14px;

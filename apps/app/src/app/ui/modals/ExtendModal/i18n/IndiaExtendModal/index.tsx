@@ -14,7 +14,6 @@ import { i18nExtendModal } from '../../translations';
 
 const IndiaExtendModal = (props: any) => {
   const navigate = useNavigate();
-  const location = useLocation();
   // const { t } = props;
   const {
     repayConfirmDetail: { extendDate, extensionFee, extensionPayAmount = '' },

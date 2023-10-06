@@ -12,11 +12,11 @@ const useRepayTypes = () => {
     triggerGetList,
     {
       currentData: repayTypesData,
-      isLoading,
+      // isLoading,
       isFetching: isRepayTypesFetching,
       isSuccess,
-      isError,
-      isUninitialized,
+      // isError,
+      // isUninitialized,
     },
   ] = useLazyGetRepayTypesQuery({
     pollingInterval: 0,

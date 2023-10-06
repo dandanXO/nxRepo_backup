@@ -25,20 +25,20 @@ const IndicatorSeparator = (props: IndicatorSeparatorProps<any, true>) => {
     </span>
   );
 };
-
-const DropdownIndicator = (props: DropdownIndicatorProps<any, true>) => {
-  // console.log("DropdownIndicator.props", props);
-  // console.log("selectProps", props.selectProps.menuIsOpen);
-  return (
-    <components.DropdownIndicator {...props}>
-      {props.selectProps.menuIsOpen ? (
-        <MdExpandLess size={30} color={'#AAAAAA'} />
-      ) : (
-        <MdExpandMore size={30} color={'#AAAAAA'} />
-      )}
-    </components.DropdownIndicator>
-  );
-};
+//
+// const DropdownIndicator = (props: DropdownIndicatorProps<any, true>) => {
+//   // console.log("DropdownIndicator.props", props);
+//   // console.log("selectProps", props.selectProps.menuIsOpen);
+//   return (
+//     <components.DropdownIndicator {...props}>
+//       {props.selectProps.menuIsOpen ? (
+//         <MdExpandLess size={30} color={'#AAAAAA'} />
+//       ) : (
+//         <MdExpandMore size={30} color={'#AAAAAA'} />
+//       )}
+//     </components.DropdownIndicator>
+//   );
+// };
 
 type OptionType = {
   label: string | undefined;

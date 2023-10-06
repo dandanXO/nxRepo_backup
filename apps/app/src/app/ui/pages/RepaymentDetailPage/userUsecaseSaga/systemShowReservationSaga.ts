@@ -22,7 +22,7 @@ export function* systemShowReservationSaga(action: PayloadAction) {
         timestamp: moment().format('HH:mm:ss'),
       }) as any
     );
-    const { success, failure } = yield race({
+    const { success } = yield race({
       success: take(APIV3.endpoints.getReservation.matchFulfilled),
       failure: take(APIV3.endpoints.getReservation.matchRejected),
     });

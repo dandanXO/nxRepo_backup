@@ -8,7 +8,7 @@ import { getCurrentUnixTimestamp } from '../modules/timezone/getCurrentUnixTimes
 const AppDataCollector = (props: { children: React.ReactNode }) => {
   // const whitePage: string[] = [ PagePathEnum.RepaymentDetailPage, PagePathEnum.BindBankcard ]
 
-  const [postTraceBehaviour, { isLoading, isSuccess, isError }] =
+  const [postTraceBehaviour] =
     usePostTraceBehaviorMutation();
 
   // NOTE: Page enter, leave, duration
@@ -81,7 +81,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
     } else if (event.type === 'blur') {
       // NOTE: Input
       if ((event.target as any)?.nodeName === 'INPUT') {
-        const value = (event.target as any)?.value;
+        // const value = (event.target as any)?.value;
         const eventID = `${pageName}_INPUT_${
           (event.target as any)?.name
         }`.toUpperCase();

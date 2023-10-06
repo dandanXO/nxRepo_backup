@@ -18,8 +18,6 @@ interface IConfirmBindBankCardModal {
 const PakistanConfirmBindBankCardModal = ({
   state,
 }: IConfirmBindBankCardModal) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
 

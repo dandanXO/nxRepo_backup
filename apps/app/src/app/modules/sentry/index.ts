@@ -115,7 +115,7 @@ export class SentryModule {
     // console.log('appInfo', NativeAppInfo);
 
     const appState: RootState = appStore.getState();
-    const user = appState?.indexPage?.user;
+    // const user = appState?.indexPage?.user;
     // console.log("user", user);
 
     const commonTags = getCommonTags();

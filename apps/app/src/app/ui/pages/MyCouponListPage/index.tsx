@@ -20,7 +20,7 @@ const MyCouponListPage = () => {
 
   const [
     triggerGetList,
-    { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized },
+    { currentData, isFetching },
   ] = useLazyGetCouponListQuery({
     pollingInterval: 0,
     refetchOnFocus: false,

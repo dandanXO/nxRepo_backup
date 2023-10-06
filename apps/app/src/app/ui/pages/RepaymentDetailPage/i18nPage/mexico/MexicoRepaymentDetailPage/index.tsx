@@ -48,15 +48,15 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     paidAmount = '',
     repayRecords = [],
     totalRepayAmount = '',
-    chargeFeeDetail,
+    // chargeFeeDetail,
     extendDate = '',
     extensionFee = '',
-    totalDueAmount = '',
+    // totalDueAmount = '',
     extendable,
     reductionAmount = 0,
     penaltyInterest = 0,
     loanAmount = 0,
-    dailyFee = 0,
+    // dailyFee = 0,
     balance = 0,
     applyDate = '',
   } = currentData ?? {};
@@ -221,7 +221,7 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                   );
                 }}
               >
-                <img src={AmountPaidIcon} />
+                <img src={AmountPaidIcon} alt={""}/>
               </div>
             </div>
           }

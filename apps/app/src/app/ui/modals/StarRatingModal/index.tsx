@@ -14,7 +14,7 @@ import StarIcon from './StarIcon';
 
 const StarRatingModal = () => {
   const dispatch = useDispatch();
-  const { app, indexPage } = useSelector((state: RootState) => state);
+  const { indexPage } = useSelector((state: RootState) => state);
 
   const [ratingDisable, setRatingDisable] = useState(true);
   const [rating, setRating] = useState(0);

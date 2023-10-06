@@ -26,10 +26,10 @@ import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import { validateBalance } from '../validation';
 
-type paymentMethodValueType = {
-  type: string;
-  label: string;
-};
+// type paymentMethodValueType = {
+//   type: string;
+//   label: string;
+// };
 
 const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {

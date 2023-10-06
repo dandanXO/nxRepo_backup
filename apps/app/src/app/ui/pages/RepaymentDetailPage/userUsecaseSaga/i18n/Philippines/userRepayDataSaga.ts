@@ -33,7 +33,7 @@ export function* userRepayDataSaga(action: PayloadAction) {
       }) as any
     );
 
-    const { success, failure } = yield race({
+    const { success } = yield race({
       success: take(API.endpoints.getRepayTypes.matchFulfilled),
       failure: take(API.endpoints.getRepayTypes.matchRejected),
     });

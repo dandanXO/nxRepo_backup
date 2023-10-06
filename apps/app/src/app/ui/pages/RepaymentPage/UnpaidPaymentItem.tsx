@@ -22,7 +22,7 @@ const UnpaidPaymentItem = (props: GetLoanRecord) => {
   const {
     iconUrl = '',
     productName = '',
-    status = '',
+    // status = '',
     dueDate = '',
     orderNo = '',
     orderAmount = '',

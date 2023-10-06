@@ -24,7 +24,6 @@ import { RepaymentDetailPageUseCaseActions } from './userUsecaseSaga';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
 
   const state = useSelector((state: RootState) => state);

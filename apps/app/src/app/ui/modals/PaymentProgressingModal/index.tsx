@@ -9,9 +9,8 @@ import { Button } from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
 
 const PaymentProgressingModal = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [postTraceBehaviour, { isLoading, isSuccess, isError }] =
+  const [postTraceBehaviour] =
     usePostTraceBehaviorMutation();
 
   const { init } = useSelector((state: RootState) => state.app);

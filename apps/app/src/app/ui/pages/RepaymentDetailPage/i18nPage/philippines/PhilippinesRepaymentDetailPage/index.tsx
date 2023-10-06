@@ -55,7 +55,7 @@ const PhilippinesRepaymentDetailPage = ({
     overdueDays = '',
     paidAmount = '',
     repayRecords = [],
-    totalRepayAmount = 0,
+    // totalRepayAmount = 0,
     extendDate = '',
     extensionFee = '',
     extendable,

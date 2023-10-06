@@ -13,8 +13,8 @@ const useExtendCreate = () => {
   const navigate = useNavigate();
   const pageQueryString = useLocationOrderQueryString();
 
-  const orderNo = pageQueryString.orderNo;
-  const token = pageQueryString.token;
+  // const orderNo = pageQueryString.orderNo;
+  // const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
   const [postRepayCreate, { isLoading: isPostExtendCreateLoading }] =

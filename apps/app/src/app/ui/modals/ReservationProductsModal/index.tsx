@@ -14,7 +14,6 @@ import { LoanAgreementModal } from '../QRLoanAgreementModal';
 import { i18nReservationProductsModal } from './translations';
 
 const ReservationProductsModal = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.model);
 

@@ -39,12 +39,12 @@ const RepaymentCouponModal = () => {
   const { t } = useTranslation(i18nRepaymentCouponModal.namespace);
   const { orderNo = getOrderNo(), balance } =
     repaymentDetailPageState.repaymentDetail || {};
-  const { payType = 'MOBILE_WALLET' } =
-    repaymentDetailPageState.repaymentData || {};
-  const { paymentAmount, paymentMethod } = location.state || {};
+  // const { payType = 'MOBILE_WALLET' } =
+  //   repaymentDetailPageState.repaymentData || {};
+  const { paymentAmount } = location.state || {};
   const [
     triggerGetList,
-    { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized },
+    { currentData, isFetching},
   ] = useLazyGetCouponApplicableListQuery({
     pollingInterval: 0,
     refetchOnFocus: false,

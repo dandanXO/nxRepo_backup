@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Route, Routes, useLocation } from 'react-router';
+import { Route, Routes } from 'react-router';
 
 import { RootState } from '../../reduxStore';
 import AppDataCollector from '../../uiFlowDataCollector/AppDataCollector';
@@ -24,7 +24,7 @@ export const AppRouter = () => {
   // const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
   const pageLoading = useSelector((state: any) => state.pageLoading);
 
-  const location = useLocation();
+  // const location = useLocation();
   const apiBoundary = useSelector(
     (state: RootState) => state.APIBoundaryModule
   );

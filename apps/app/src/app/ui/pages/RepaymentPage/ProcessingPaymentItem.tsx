@@ -22,7 +22,7 @@ const ProcessingPaymentItem = (props: GetLoanRecord) => {
   const {
     iconUrl = '',
     productName = '',
-    status = '',
+    // status = '',
     orderNo = '',
     orderAmount = '',
     approveRecords = [],

@@ -46,7 +46,6 @@ export interface IRepaymentModalProps {
 }
 
 const RepaymentModal = (props: any) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(i18nRepaymentModal.namespace);
 
@@ -126,13 +125,13 @@ const RepaymentModal = (props: any) => {
       )
     ) {
       const {
-        balance,
+        // balance,
         repayAmount,
         radio,
         payType,
         coupon,
         orderNo,
-        repayTypeList,
+        // repayTypeList,
       } = repaymentData;
       if (
         balanceData.data === '' ||

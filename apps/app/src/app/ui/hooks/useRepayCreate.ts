@@ -22,8 +22,8 @@ const useRepayCreate = () => {
   const pageQueryString = useLocationOrderQueryString();
   const dispatch = useDispatch();
 
-  const orderNo = pageQueryString.orderNo;
-  const token = pageQueryString.token;
+  // const orderNo = pageQueryString.orderNo;
+  // const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
   const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =

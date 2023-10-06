@@ -25,7 +25,6 @@ import UserIcon from './images/UserIcon.svg';
 import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
 
 const PersonalInfoPage = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const modalState = useSelector((state: RootState) => state.model);

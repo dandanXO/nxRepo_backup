@@ -17,7 +17,7 @@ const UploadedPaymentReceiptPage = () => {
         replace: true,
       }
     );
-  }, [pageQueryString.token, pageQueryString.orderNo]);
+  }, [pageQueryString.token, pageQueryString.orderNo, navigate]);
 
   return (
     <PureUploadedPaymentReceiptPage

@@ -159,7 +159,7 @@ import { ErrorPage } from '../pages/__test__/ErrorPage';
 // RepaymentCouponModal.preload();
 
 export const AppRouter = () => {
-  const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
+  // const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
   const location = useLocation();
 

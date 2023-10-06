@@ -14,8 +14,6 @@ import PakistanExtendConfirmModal from './i18n/PakistanExtendConfirmModal';
 import PhilippinesExtendConfirmModal from './i18n/PhilippinesExtendConfirmModal';
 
 const ExtendConfirmModal = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   return (
     <div>
       {renderByCountry(

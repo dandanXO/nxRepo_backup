@@ -14,7 +14,7 @@ import ProcessingPaymentItem from './ProcessingPaymentItem';
 import RejectPaymentItem from './RejectPaymentItem';
 import UnpaidPaymentItem from './UnpaidPaymentItem';
 // @ts-ignore
-import { default as data } from './data.json';
+// import { default as data } from './data.json';
 import { RepaymentPageSagaActions } from './userUsecaseSaga';
 
 const RepaymentPage = () => {

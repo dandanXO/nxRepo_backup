@@ -37,7 +37,7 @@ export function* userRepaymentPageSaga(
       }) as any
     );
 
-    const { success, failure } = yield race({
+    const { success } = yield race({
       success: take(APIV3.endpoints.getLoanRecordList.matchFulfilled),
       failure: take(APIV3.endpoints.getLoanRecordList.matchRejected),
     });

@@ -24,7 +24,6 @@ const OnlineCustomerServicePage = () => {
       <iframe
         className={`w-full grow`}
         src={indexPage?.indexAPI?.customerServiceUrl}
-        title=""
       />
     </Page>
   );

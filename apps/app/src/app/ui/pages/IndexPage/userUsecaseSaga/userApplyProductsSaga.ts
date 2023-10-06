@@ -174,8 +174,8 @@ export function* userApplyProductsSaga(
       // NOTE: 等待用戶點擊借款, 只有確認可以點，點其他地方都進不來
       console.log('等待用戶點擊借款, 只有確認可以點，點其他地方都進不來');
       const {
-        type,
-        payload: { show, confirm },
+        // type,
+        payload: { confirm },
       }: PayloadAction<InitialStateType['simpleQuickRepaymentModal']> =
         yield take(modalSlice.actions.updateSimpleQuickRepaymentModal);
       console.log('點擊了 confirm: ', confirm);
@@ -214,8 +214,8 @@ export function* userApplyProductsSaga(
         console.log('等待借款確認');
       }
       const {
-        type,
-        payload: { show, confirm },
+        // type,
+        payload: { confirm },
       }: PayloadAction<InitialStateType['simpleQuickRepaymentModal']> =
         yield take(modalSlice.actions.updateSimpleQuickRepaymentModal);
       if (!confirm) {
@@ -273,7 +273,7 @@ export function* userApplyProductsSaga(
         );
       }
     }
-  } catch (error: any) {
+  } catch (error) {
     yield catchSagaError(error);
   } finally {
     yield put(loadingSlice.actions.updatePageLoading(false));

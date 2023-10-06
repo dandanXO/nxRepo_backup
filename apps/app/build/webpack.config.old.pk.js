@@ -4,8 +4,8 @@ const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const SentryCliPlugin = require('@sentry/webpack-plugin');
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;

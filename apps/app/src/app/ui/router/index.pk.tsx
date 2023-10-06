@@ -24,7 +24,7 @@ import { ErrorPage } from '../pages/__test__/ErrorPage';
 import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage';
 
 export const AppRouter = () => {
-  const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
+  // const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
   const location = useLocation();
 
