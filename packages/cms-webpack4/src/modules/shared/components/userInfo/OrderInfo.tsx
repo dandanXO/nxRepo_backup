@@ -75,6 +75,7 @@ const OrderInfo = (props: { orderId: number }): JSX.Element => {
         overdueMoney,
         utr,
         receiptImage,
+        couponUsageAmount
     } = orderDetail;
 
     return (
@@ -100,6 +101,7 @@ const OrderInfo = (props: { orderId: number }): JSX.Element => {
                         <Item label="申请金额">{deviceMoney === 0 || deviceMoney ? deviceMoney : '-'}</Item>
                         <Item label="到帐金额">{lendMoney === 0 || lendMoney ? lendMoney : '-'}</Item>
                         <Item label="应还金额">{totalMoney === 0 || totalMoney ? totalMoney : '-'}</Item>
+                        <Item label="使用优惠券金额">{couponUsageAmount || 0}</Item>
                         <Item label="申请时间">
                             {applyTime ? moment(applyTime).format('YYYY-MM-DD HH:mm:ss') : '-'}
                         </Item>

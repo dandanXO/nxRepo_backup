@@ -24,4 +24,5 @@ export interface GetOrderDetailResponse {
     status?: number; // 订单状态
     totalMoney?: number; // 应还金额
     utr?: string; // UTR
+    couponUsageAmount?: number // 使用优惠券金额
 }
