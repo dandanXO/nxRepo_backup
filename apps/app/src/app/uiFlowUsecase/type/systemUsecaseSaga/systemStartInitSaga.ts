@@ -12,7 +12,7 @@ export function* systemStartInitSaga() {
 
   yield put(appSlice.actions.updateAndroidInfo(NativeAppInfo));
 
-  const packageId: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId);
+  const packageId: string = yield select((state: RootState) => state.app.appID);
   console.log("packageId", packageId);
 
   // NOTE: 不需登入即可呼叫

@@ -9,6 +9,7 @@ import { AppFlag } from '../../../environments/flag';
 import { NativeAppInfo } from '../../application/nativeAppInfo';
 import { RootState, appStore } from '../../reduxStore';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
+import {AppProxy} from "../../proxy/appProxy";
 
 
 // NOTE: 初始化
@@ -137,11 +138,12 @@ function getCommonTags() {
   const user = appState?.indexPage?.user;
 
   return {
-    packageId: NativeAppInfo.packageId,
+    // TODO: REFACTOR ME NativeAppInfo.packageId 在pureh5 沒有
+    packageId: AppProxy.appID,
     uiVersion: NativeAppInfo.uiVersion,
     mode: NativeAppInfo.mode,
-    appName: NativeAppInfo.appName,
-    domain: NativeAppInfo.domain,
+    appName: AppProxy.appName,
+    domain: AppProxy.appDomain,
     'user.userName': user.userName !== '' ? user.userName : 'unknown',
     'user.phoneNo': getUserPhoneNo(),
   };

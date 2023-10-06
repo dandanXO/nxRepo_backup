@@ -5,6 +5,7 @@ import { IAndroidAppInfo } from '../externel/nativeApp/types/IAndroidAppInfo';
 import {NativeAppInfo} from "../application/nativeAppInfo";
 import queryString from "query-string";
 import {appInfoPersistence} from "../persistant/AppInfoPersistence";
+import { AppProxy } from '../proxy/appProxy';
 
 export enum AppRunningModeEnum {
   'Unknown',
@@ -23,16 +24,16 @@ export type InitialState = {
   appDomain: string;
 };
 
-const parsedQueryString = queryString.parse(window.location.search);
-console.log("appInfoPersistence.appDomain", appInfoPersistence.appDomain);
+
+
 const initialState: InitialState = {
   mode: AppRunningModeEnum.Unknown,
   // token: '',
   isInit: false,
   androidAppInfo: null,
-  appName: appInfoPersistence.appName || NativeAppInfo.appName || parsedQueryString['appName'] ? (parsedQueryString['appName'] as string) : "",
-  appID: appInfoPersistence.appID || NativeAppInfo.packageId || parsedQueryString['packageId'] ? (parsedQueryString['packageId'] as string) : "",
-  appDomain: appInfoPersistence.appDomain || NativeAppInfo.domain || parsedQueryString['appDomain'] ? (parsedQueryString['appDomain'] as string) : "",
+  appName: AppProxy.appName,
+  appID: AppProxy.appID,
+  appDomain: AppProxy.appDomain,
 };
 
 export const appSlice = createSlice({

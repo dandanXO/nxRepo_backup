@@ -17,9 +17,10 @@ export function* systemGetIndexPageSaga() {
 
         // NOTE: 使用者尚未認證
         if (status === USER_AUTH_STATE.ready) {
-            const packageID: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId);
+            const packageId: string = yield select((state: RootState) => state.app.appID);
+            console.log("packageId", packageId);
             const openIndexResponse: GetOpenIndexResponse = yield call(Service.IndexService.getOpenIndex, {
-                packageId: packageID,
+                packageId,
             });
             yield put(indexPageSlice.actions.updateOpenAPI(openIndexResponse));
         } else {

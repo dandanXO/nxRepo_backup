@@ -8,6 +8,8 @@ import { SentryModule } from '../sentry';
 import {AppFlag} from "../../../environments/flag";
 import {GlobalAppMode} from "../../application/GlobalAppMode";
 import {AppModeEnum} from "../../application/AppModeEnum";
+import {appInfoPersistence} from "../../persistant/AppInfoPersistence";
+import {AppProxy} from "../../proxy/appProxy";
 
 const getPosthogConfig = (): PosthogConfig | null => {
   // if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
@@ -21,10 +23,9 @@ const getPosthogConfig = (): PosthogConfig | null => {
       return null;
       // return posthogConfigs['dev'];
     } else {
-      // NOTE: REFACTOR ME
       // NOTE: 根據 APP 渠道 去分:
-      if (NativeAppInfo.packageId && posthogConfigs[NativeAppInfo.packageId]) {
-        return posthogConfigs[NativeAppInfo.packageId];
+      if (AppProxy.appID) {
+        return posthogConfigs[AppProxy.appID];
       } else {
         return null;
       }
