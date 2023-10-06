@@ -42,14 +42,12 @@ const RepaymentCouponModal = () => {
   // const { payType = 'MOBILE_WALLET' } =
   //   repaymentDetailPageState.repaymentData || {};
   const { paymentAmount } = location.state || {};
-  const [
-    triggerGetList,
-    { currentData, isFetching},
-  ] = useLazyGetCouponApplicableListQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+  const [triggerGetList, { currentData, isFetching }] =
+    useLazyGetCouponApplicableListQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   useEffect(() => {
     triggerGetList({

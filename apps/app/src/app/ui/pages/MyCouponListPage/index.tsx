@@ -18,14 +18,12 @@ const MyCouponListPage = () => {
   const dispatch = useDispatch();
   const [listStatus, setListStatus] = useState('Usable');
 
-  const [
-    triggerGetList,
-    { currentData, isFetching },
-  ] = useLazyGetCouponListQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+  const [triggerGetList, { currentData, isFetching }] =
+    useLazyGetCouponListQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   const statusEnum = {
     Usable: 'UNUSED',

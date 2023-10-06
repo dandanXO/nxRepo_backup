@@ -8,8 +8,7 @@ import { getCurrentUnixTimestamp } from '../modules/timezone/getCurrentUnixTimes
 const AppDataCollector = (props: { children: React.ReactNode }) => {
   // const whitePage: string[] = [ PagePathEnum.RepaymentDetailPage, PagePathEnum.BindBankcard ]
 
-  const [postTraceBehaviour] =
-    usePostTraceBehaviorMutation();
+  const [postTraceBehaviour] = usePostTraceBehaviorMutation();
 
   // NOTE: Page enter, leave, duration
   const location = useLocation();

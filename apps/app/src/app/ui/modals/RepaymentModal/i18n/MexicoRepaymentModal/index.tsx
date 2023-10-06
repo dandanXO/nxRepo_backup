@@ -10,6 +10,8 @@ import { environment } from '../../../../../../environments/environmentModule/en
 import { getToken } from '../../../../../application/getToken';
 import { getOrderNo } from '../../../../../externel/window/querystring/getOrderNo';
 import { formatDate } from '../../../../../modules/format/formatDate';
+import { RootState } from '../../../../../reduxStore';
+import { repaymentDetailPageInitialState } from '../../../../../reduxStore/repaymentDetailPageSlice';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
@@ -23,8 +25,6 @@ import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import { validateBalance } from '../validation';
-import {RootState} from "../../../../../reduxStore";
-import {repaymentDetailPageInitialState} from "../../../../../reduxStore/repaymentDetailPageSlice";
 
 // type paymentMethodValueType = {
 //   type: string;

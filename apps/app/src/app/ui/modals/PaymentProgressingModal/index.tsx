@@ -10,8 +10,7 @@ import Modal from '../../core-components/Modal';
 
 const PaymentProgressingModal = () => {
   const dispatch = useDispatch();
-  const [postTraceBehaviour] =
-    usePostTraceBehaviorMutation();
+  const [postTraceBehaviour] = usePostTraceBehaviorMutation();
 
   const { init } = useSelector((state: RootState) => state.app);
 
