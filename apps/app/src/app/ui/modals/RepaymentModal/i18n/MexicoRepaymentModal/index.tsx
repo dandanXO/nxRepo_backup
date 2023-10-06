@@ -1,6 +1,4 @@
 import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
-import { RootState } from 'apps/app/src/app/reduxStore';
-import { repaymentDetailPageInitialState } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
 import cx from 'classnames';
 import moment from 'moment';
 import React from 'react';
@@ -25,6 +23,8 @@ import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import { validateBalance } from '../validation';
+import {RootState} from "../../../../../reduxStore";
+import {repaymentDetailPageInitialState} from "../../../../../reduxStore/repaymentDetailPageSlice";
 
 // type paymentMethodValueType = {
 //   type: string;

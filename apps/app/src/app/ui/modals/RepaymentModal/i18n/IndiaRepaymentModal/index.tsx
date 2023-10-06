@@ -106,7 +106,6 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
             setBalanceValue(`${environment.currency} ${value}`);
           }
         }}
-        onBlur={() => {}}
         errorMessage={
           balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage
         }
