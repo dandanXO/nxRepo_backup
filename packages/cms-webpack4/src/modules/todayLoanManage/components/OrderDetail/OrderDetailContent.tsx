@@ -30,6 +30,8 @@ const amountUnitMap = {
     India: '₹',
     Pakistan: 'PKR',
     Bangladesh: '৳',
+    Mexico: 'MXN',
+    Philipine: '₱'
 };
 
 const amountUnit = amountUnitMap[appInfo.COUNTRY];
@@ -153,6 +155,11 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 title: t('order:amountDue', { unit: amountUnit }),
                 dataIndex: 'amountDue',
                 render: (value) => <div>{formatPrice(value) || 0}</div>,
+            },
+            {
+                title: t('order:couponUsageAmount', { unit: amountUnit }),
+                dataIndex: 'couponUsageAmount',
+                render: (value) => <div style={{color: '#1890FF'}}>{value || 0}</div>
             },
             {
                 title: t('order:reductionAmount', { unit: amountUnit }),

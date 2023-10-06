@@ -4,6 +4,7 @@
     "appName": "APP名称",
     "applicationTime": "申请时间",
     "channel": "申請渠道",
+    "couponUsageAmount": "使用优惠券金额({{unit}})",
     "daysOverdue": "逾期天数",
     "disburseAmount": "到帐金额({{unit}})",
     "expirationTime": "到期时间",

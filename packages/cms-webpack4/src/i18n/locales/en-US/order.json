@@ -4,6 +4,7 @@
     "appName": "APP Name",
     "applicationTime": "Application Time",
     "channel": "Channel",
+    "couponUsageAmount": "Coupon usage amount ({{unit}})",
     "daysOverdue": "Days Overdue",
     "disburseAmount": "Disbursal Amount({{unit}})",
     "expirationTime": "Expiration Time",

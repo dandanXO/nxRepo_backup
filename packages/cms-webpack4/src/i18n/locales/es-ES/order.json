@@ -4,6 +4,7 @@
     "appName": "Nombre de la aplicación",
     "applicationTime": "Hora de solicitud",
     "channel": "Canal de solicitud",
+    "couponUsageAmount": "Monto utilizado del cupón ({{unit}})",
     "daysOverdue": "Días de atraso",
     "disburseAmount": "Monto desembolsado ({{unit}})",
     "expirationTime": "Fecha de vencimiento",
