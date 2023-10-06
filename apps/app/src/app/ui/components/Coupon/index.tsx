@@ -1,10 +1,6 @@
-import { MexicoCountry } from '@frontend/shared/domain';
-
-import { IndiaCountry } from '@frontend/shared/domain';
-import { PakistanCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import { GetCouponApplicableList } from '../../../externel/backend/userService/GetCouponApplicableListResponse';
-import { renderByCountry } from '../../../modules/i18n';
+import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
+import {GetCouponApplicableList} from '../../../externel/backend/userService/GetCouponApplicableListResponse';
+import {renderByCountry} from '../../../modules/i18n';
 import IndiaCoupon from './i18n/IndiaCoupon';
 import PakistanCoupon from './i18n/PakistanCoupon';
 import PhilippinesCoupon from './i18n/PhilippinesCoupon';

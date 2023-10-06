@@ -1,21 +1,17 @@
 // import Button from "../../components/Button";
-import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
-import { RiArrowUpSLine } from '@react-icons/all-files/ri/RiArrowUpSLine';
 import cx from 'classnames';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import {useState} from 'react';
+import {useNavigate} from 'react-router';
 
-import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
-import { getToken } from '../../../application/getToken';
+import {GetLoanRecord} from '../../../externel/backend/loanService/GetLoanRecord';
+import {getToken} from '../../../application/getToken';
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';
-import Money from '../../components/Money';
-import { Button } from '../../core-components/Button';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { CardCollapseSection } from './CardCollapseSection';
-import { CardContentSection } from './CardContentSection';
-import { CardHeaderSection } from './CardHeaderSection';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {CardCollapseSection} from './CardCollapseSection';
+import {CardContentSection} from './CardContentSection';
+import {CardHeaderSection} from './CardHeaderSection';
 import {formatDate} from "../../../modules/format/formatDate";
 import {Status} from "../../statusEnum";
 

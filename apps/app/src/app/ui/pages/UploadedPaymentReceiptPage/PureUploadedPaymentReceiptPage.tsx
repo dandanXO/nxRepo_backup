@@ -1,16 +1,15 @@
-import { WithTranslation, withTranslation } from 'react-i18next';
+import {WithTranslation, withTranslation} from 'react-i18next';
 import styled from 'styled-components';
 
-import { Page } from '@frontend/mobile/shared/ui';
+import {Page} from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../core-components/Button';
-import { SuccessICON } from './components/i18n/SuccessICON';
-import { i18nUploadedPaymentReceiptPage } from './components/i18n/translations';
+import {Button} from '../../core-components/Button';
+import {SuccessICON} from './components/i18n/SuccessICON';
+import {i18nUploadedPaymentReceiptPage} from './components/i18n/translations';
 import UploadedPaymentReceiptPage from './index';
-import { environment } from '../../../../environments/environmentModule/environment';
-import { PakistanCountry } from '@frontend/shared/domain';
-import { MexicoCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
+import {environment} from '../../../../environments/environmentModule/environment';
+import {MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
+
 const CustomPage = styled(Page)`
   display: flex;
   flex-direction: column;

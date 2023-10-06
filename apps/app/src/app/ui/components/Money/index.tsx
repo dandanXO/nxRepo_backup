@@ -1,6 +1,6 @@
 import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
-import { environment } from '../../../../environments/environmentModule/environment';
-import { formatPrice } from '../../../modules/format/formatPrice';
+import {environment} from '../../../../environments/environmentModule/environment';
+import {formatPrice} from '../../../modules/format/formatPrice';
 
 
 interface IMoney {

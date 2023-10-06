@@ -1,4 +1,4 @@
-import { i18nComponent } from '../../../../modules/i18n/i18nComponent';
+import {i18nComponent} from '../../../../modules/i18n/i18nComponent';
 
 export const i18nCoupon: i18nComponent = {
   namespace: 'component/i18nCoupon',

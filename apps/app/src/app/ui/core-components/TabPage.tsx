@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { Props } from "./Page";
+import {Props} from "./Page";
 
 export const TabPage = (props: Props) => {
   //NOTE: Tab Height: 56px

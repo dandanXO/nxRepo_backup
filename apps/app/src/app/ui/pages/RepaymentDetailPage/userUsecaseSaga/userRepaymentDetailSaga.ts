@@ -1,10 +1,8 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { put, race, take } from "redux-saga/effects";
-import { API, APIV3 } from "../../../../externel/backend/rtk";
-import { modalInitialState, modalSlice } from "apps/app/src/app/reduxStore/modalSlice";
-import { catchSagaError } from "../../../../uiFlowUsecase/utils/catchSagaError";
-import { repaymentDetailPageInitialStateType, repaymentDetailPageSlice } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
-import { rtkPendingSlice } from "apps/app/src/app/reduxStore/rtkPendingSlice";
+import {put, race, take} from "redux-saga/effects";
+import {API} from "../../../../externel/backend/rtk";
+import {catchSagaError} from "../../../../uiFlowUsecase/utils/catchSagaError";
+import {repaymentDetailPageSlice} from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
+import {rtkPendingSlice} from "apps/app/src/app/reduxStore/rtkPendingSlice";
 import moment from 'moment';
 import {getOrderNo} from "../../../../externel/window/querystring/getOrderNo";
 

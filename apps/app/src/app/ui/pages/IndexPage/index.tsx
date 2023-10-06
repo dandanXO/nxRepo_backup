@@ -19,7 +19,6 @@ import {LoanOverViewSection} from '../../core-components/sections/LoanOverViewSe
 import {AuthorizationModal} from '../../modals/AuthorizationModal';
 import {LoanAgreementModal} from '../../modals/QRLoanAgreementModal';
 import {QRSuccessModal} from '../../modals/QRSuccessModal';
-import {QuickRepaymentSummaryModal} from '../../modals/QuickRepaymentSummaryModal';
 import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 import {NoticeOrderOrQuotaRejectedSection} from './noticeSections/NoticeOrderOrQuotaRejectedSection';
 import {NoticeUserAuthedEmptyQuotaSection} from './noticeSections/NoticeUserAuthedEmptyQuotaSection';

@@ -1,15 +1,11 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import {PayloadAction} from '@reduxjs/toolkit';
 import {put, select} from 'redux-saga/effects';
-import { Md5 } from 'ts-md5';
+import {Md5} from 'ts-md5';
 
-import { API } from '../../../../externel/backend/rtk';
-import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
-import { UserLoginActionPayload } from './index';
+import {API} from '../../../../externel/backend/rtk';
+import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
+import {UserLoginActionPayload} from './index';
 import {alertModal} from "../../../components/alertModal";
-import {NativeAppInfo} from "../../../../application/nativeAppInfo";
-import queryString from "query-string";
-import {appSlice} from "../../../../reduxStore/appSlice";
-import {rootState} from "../../../../../../../../packages/dlh-web/src/store/root";
 import {RootState} from "../../../../reduxStore";
 
 export function* userGetOTPSaga(action: PayloadAction<UserLoginActionPayload>) {

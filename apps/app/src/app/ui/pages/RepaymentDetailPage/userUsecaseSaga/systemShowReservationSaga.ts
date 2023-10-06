@@ -1,14 +1,12 @@
-import { push } from '@lagunovsky/redux-react-router';
-import { PayloadAction, createAction } from '@reduxjs/toolkit';
-import { call, put, race, take } from 'redux-saga/effects';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {put, race, take} from 'redux-saga/effects';
 
-import { APIV3 } from '../../../../externel/backend/rtk';
-import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
-import { InitialStateType, modalInitialState, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
-import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
+import {APIV3} from '../../../../externel/backend/rtk';
+import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
+import {modalSlice} from 'apps/app/src/app/reduxStore/modalSlice';
+import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
 import moment from 'moment';
 import {getOrderNo} from "../../../../externel/window/querystring/getOrderNo";
-
 
 
 export function* systemShowReservationSaga(action: PayloadAction) {

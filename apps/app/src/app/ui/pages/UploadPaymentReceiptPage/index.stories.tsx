@@ -1,10 +1,10 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
 
-import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+import {AppThemeProvider} from '@frontend/mobile/shared/ui';
 
-import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
-import { IndiaUploadPaymentReceiptPage } from './i18nPage/IndiaUploadPaymentReceiptPage';
+import {useUploadPaymentReceipt} from './hooks/useUploadPaymentReceipt';
+import {IndiaUploadPaymentReceiptPage} from './i18nPage/IndiaUploadPaymentReceiptPage';
 
 export default {
   title: 'Page/UploadPaymentReceiptPage',

@@ -2,7 +2,6 @@ import {delay, put} from 'redux-saga/effects';
 
 import {indexPageSlice} from '../../../../reduxStore/indexPageSlice';
 import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
-import {IndexPageSagaAction} from './indexPageActions';
 import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
 
 export function* systemRefreshableCountdownSaga(action: any) {

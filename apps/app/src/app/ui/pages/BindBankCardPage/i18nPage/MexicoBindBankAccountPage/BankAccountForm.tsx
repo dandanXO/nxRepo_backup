@@ -1,17 +1,17 @@
-import React, { ClipboardEvent, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router';
 import Select from 'react-select';
 
-import { Input } from '@frontend/mobile/shared/ui';
-import { Button } from '../../../../core-components/Button';
-import { IPakistanBankAccountForm } from '../types/IBankAccountForm';
-import { validateBankcardNo, validateMXBankcardNo } from './validation';
+import {Input} from '@frontend/mobile/shared/ui';
+import {Button} from '../../../../core-components/Button';
+import {IPakistanBankAccountForm} from '../types/IBankAccountForm';
+import {validateMXBankcardNo} from './validation';
 import ValidateInput from '../../../../core-components/ValidateInput';
-import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
-import { useDispatch } from 'react-redux';
-import { RadioOption } from '../../../../core-components/RadioOption';
-import { i18nBankBindAccountPage } from '../../translations';
-import { useTranslation } from 'react-i18next';
+import {modalInitialState, modalSlice} from '../../../../../reduxStore/modalSlice';
+import {useDispatch} from 'react-redux';
+import {RadioOption} from '../../../../core-components/RadioOption';
+import {i18nBankBindAccountPage} from '../../translations';
+import {useTranslation} from 'react-i18next';
 import {InputValue} from "../../../../core-components/form/InputValue";
 
 

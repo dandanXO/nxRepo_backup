@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 
-import { Overlay } from '@frontend/mobile/shared/ui';
-import { RootState } from '../../../reduxStore';
+import {Overlay} from '@frontend/mobile/shared/ui';
+import {RootState} from '../../../reduxStore';
 import {useDispatch, useSelector} from 'react-redux';
 import React, {useEffect} from "react";
 import {loadingSlice} from "../../../reduxStore/loadingSlice";

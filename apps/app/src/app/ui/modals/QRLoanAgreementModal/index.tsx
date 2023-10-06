@@ -1,9 +1,7 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 // import ReactShadowRoot from 'react-shadow-root';
 // import usePortal from 'react-useportal'
-
-
 import {RootState} from '../../../reduxStore';
 import {CloseButton} from '../../core-components/CloseButton';
 import {Navigation} from '../../core-components/Navigation';

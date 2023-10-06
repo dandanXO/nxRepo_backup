@@ -1,4 +1,4 @@
-import { i18nComponent } from '../../../../modules/i18n/i18nComponent';
+import {i18nComponent} from '../../../../modules/i18n/i18nComponent';
 
 export const i18nUploadPaymentReceiptPage: i18nComponent = {
   namespace: 'pages/i18nUploadPaymentReceiptPage',
@@ -13,7 +13,7 @@ export const i18nUploadPaymentReceiptPage: i18nComponent = {
       'digits only, 12 numbers max': 'digits only, 12 numbers max',
       'Please upload correct photo file format.': 'Please upload correct photo file format.',
       'Confirm': 'Confirm',
-      
+
       // PK
       'Click to upload': 'Click to upload',
       'Upload your repayment receipt': 'Upload your repayment receipt',
@@ -27,11 +27,11 @@ export const i18nUploadPaymentReceiptPage: i18nComponent = {
       'digits only, 12 numbers max': 'Solo dígitos, máximo 12 números.',
       'Please upload correct photo file format.': 'Por favor, sube el archivo de foto en el formato correcto.',
       'Confirm': 'Confirmar',
-    
+
       // PK
       'Click to upload': 'Haga clic para cargar',
       'Upload your repayment receipt': 'Sube tu recibo de devolución',
-    
+
     },
     bn_BD: {
       // Common

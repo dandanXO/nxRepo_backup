@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { alertModal } from '../../../../ui/components/alertModal';
-import { gateway } from '../../../../gateway';
-import { GetOpenIndexRequest } from '../GetOpenIndexRequest';
-import { GetOpenIndexResponse } from '../GetOpenIndexResponse';
+import {alertModal} from '../../../../ui/components/alertModal';
+import {gateway} from '../../../../gateway';
+import {GetOpenIndexRequest} from '../GetOpenIndexRequest';
+import {GetOpenIndexResponse} from '../GetOpenIndexResponse';
 
 export const getOpenIndexService = async (params: GetOpenIndexRequest) => {
   try {

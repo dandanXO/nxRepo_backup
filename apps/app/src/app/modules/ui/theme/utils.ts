@@ -1,4 +1,4 @@
-import { environment } from 'apps/app/src/environments/environmentModule/environment';
+import {environment} from 'apps/app/src/environments/environmentModule/environment';
 
 import {
   DEFAULT_INDIA_THEME,
@@ -7,9 +7,9 @@ import {
   DEFAULT_PHILIPPINES_THEME,
   themes,
 } from '../../../../environments/themeModule/customTailwindTheme';
-import { SentryModule } from '../../sentry';
-import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
-import { IMappedTheme, ITheme } from './types';
+import {SentryModule} from '../../sentry';
+import {mapCustomTailwindTheme} from './mapCustomTailwindTheme';
+import {IMappedTheme, ITheme} from './types';
 import {AllCountriesEnum, IndiaCountry, MexicoCountry, PakistanCountry} from "@frontend/shared/domain";
 
 function getDefaultTheme() {

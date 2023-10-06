@@ -1,13 +1,11 @@
 import cx from 'classnames';
 import moment from 'moment';
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 
-import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
-import { formatPrice } from '../../../../../modules/format/formatPrice';
-import { getToken } from '../../../../../application/getToken';
-import { IndexPageProps } from '../../../../../reduxStore';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import Divider from "../../../../core-components/Divider";
+import {ORDER_STATE} from '../../../../../domain/order/ORDER_STATE';
+import {getToken} from '../../../../../application/getToken';
+import {IndexPageProps} from '../../../../../reduxStore';
+import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
 import {formatDate} from "../../../../../modules/format/formatDate";
 import Money from '../../../../components/Money';
 

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import React from 'react';
+import {useLocation, useNavigate} from 'react-router';
 
-import { Overlay } from '@frontend/mobile/shared/ui';
+import {Overlay} from '@frontend/mobile/shared/ui';
 
 import Divider from '../../../../core-components/Divider';
 import IBan from '../../../../components/images/IBAN.svg';

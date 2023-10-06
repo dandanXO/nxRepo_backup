@@ -1,7 +1,4 @@
-import { IndiaCountry } from '@frontend/shared/domain';
-import { MexicoCountry } from '@frontend/shared/domain';
-
-import { PhilippinesCountry } from '@frontend/shared/domain';
+import {IndiaCountry, MexicoCountry, PhilippinesCountry} from '@frontend/shared/domain';
 import {IChargeFeeDetails} from '../../../externel/backend/loanService/GetReservationResponse';
 import {renderByCountry} from '../../../modules/i18n';
 import {FinalProductType} from '../../pages/IndexPage';

@@ -1,6 +1,6 @@
 import {createApi} from '@reduxjs/toolkit/query/react';
 import axiosBaseQuery from './axiosBaseQuery';
-import { GetRepayPayInfoResponse } from "../loanService/GetRepayPayInfoResponse";
+import {GetRepayPayInfoResponse} from "../loanService/GetRepayPayInfoResponse";
 
 import {GetIndexRequest} from '../indexService/GetIndexRequest';
 import {GetIndexResponse} from '../indexService/GetIndexResponse';

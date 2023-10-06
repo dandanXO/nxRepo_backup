@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 import cx from 'classnames';
 
 // refactor
-import { Input, InputValue } from '@frontend/mobile/shared/ui';
+import {Input, InputValue} from '@frontend/mobile/shared/ui';
 
 import {RootState} from "../../../reduxStore";
 import {loginSlice} from "../../../reduxStore/loginSlice";
-import {getToken} from "../../../application/getToken";
 
-import { Button } from '../../core-components/Button';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {Button} from '../../core-components/Button';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 
-import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
+import {LoginPageUseCaseActionsInstance} from './userUsecaseSaga';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();

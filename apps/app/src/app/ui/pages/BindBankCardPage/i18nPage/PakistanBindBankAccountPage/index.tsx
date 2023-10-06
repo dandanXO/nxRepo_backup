@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router';
-import { IUseBindBankAccountPage } from '../types/IUseBindBankAccountPage';
-import { ChooseBindMethod } from '../../components/ChooseBindMethod';
-import { BankAccountForm } from './BankAccountForm';
-import { MobileWalletForm } from './MobileWalletForm';
+import React, {useEffect, useState} from 'react';
+import {Outlet} from 'react-router';
+import {IUseBindBankAccountPage} from '../types/IUseBindBankAccountPage';
+import {ChooseBindMethod} from '../../components/ChooseBindMethod';
+import {BankAccountForm} from './BankAccountForm';
+import {MobileWalletForm} from './MobileWalletForm';
 import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../../reduxStore';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../../../../reduxStore';
 
 
 export const PakistanBindBankAccountPage = (props: IUseBindBankAccountPage) => {

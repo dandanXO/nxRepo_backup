@@ -1,3 +1,3 @@
-import { GetRepayTypesResponseObject } from './GetRepayTypesResponseObject';
+import {GetRepayTypesResponseObject} from './GetRepayTypesResponseObject';
 
 export type GetRepayTypesResponse = GetRepayTypesResponseObject[];

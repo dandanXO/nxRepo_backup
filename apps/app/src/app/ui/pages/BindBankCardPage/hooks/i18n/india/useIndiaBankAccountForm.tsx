@@ -1,11 +1,11 @@
 import i18next from 'i18next';
-import React, { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { z } from 'zod';
+import React, {useCallback, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {z} from 'zod';
 
-import type { InputValue } from '@frontend/mobile/shared/ui';
+import type {InputValue} from '@frontend/mobile/shared/ui';
 
-import { i18nBankBindAccountPage } from '../../../translations';
+import {i18nBankBindAccountPage} from '../../../translations';
 
 const ValidationInfo = {
   min1: i18next.t('This field cannot be left blank', {
@@ -33,7 +33,7 @@ export const useIndiaBankAccountForm = () => {
           .min(1, ValidationInfo.min1)
           .length(11, invalidErrorMessage)
           .regex(ifscRex, invalidErrorMessage)
-  
+
       const result = ifscScheme.safeParse(ifscData.data);
       const isValidation = result.success;
       const errorMessage = !isValidation ? result.error.format()._errors[0] : '';
@@ -42,10 +42,10 @@ export const useIndiaBankAccountForm = () => {
           ...ifscData,
           isValidation,
           errorMessage
-      });  
-      return isValidation;  
+      });
+      return isValidation;
   }, [ifscData.data]);
-    
+
   // onIFSCChange
   const onIFSCChange = (event: any) => {
     const data = event.target.value;
@@ -76,17 +76,17 @@ export const useIndiaBankAccountForm = () => {
         const upiIdSchema = z
             .string()
             .regex(upiIdRex, t('Invalid UPI ID format. Please retry or refer to the provided instructions and try again.') as string);
-            
+
         const result = upiIdSchema.safeParse(upiData.data);
         const isValidation = result.success;
         const errorMessage = !isValidation ? result.error.format()._errors[0] : ''
-    
+
         setUpiData({
             ...upiData,
             isValidation,
             errorMessage
         });
-    
+
         return isValidation;
     }
   }, [upiData.data])
@@ -106,7 +106,7 @@ export const useIndiaBankAccountForm = () => {
 
   // validate
   const validate = useCallback(() => {
-      // NOTE: FormInput 
+      // NOTE: FormInput
       return validateIFSC() && validateUPIID();
   }, [ifscData.data, upiData.data]);
 

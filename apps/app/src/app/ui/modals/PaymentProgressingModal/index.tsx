@@ -1,13 +1,10 @@
-import { useNavigate } from 'react-router';
-import { Button } from '../../core-components/Button';
+import {useNavigate} from 'react-router';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { CloseButton } from '../../core-components/CloseButton';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
-import { usePostTraceBehaviorMutation } from '../../../externel/backend/rtk';
-import { RootState } from '../../../reduxStore';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {usePostTraceBehaviorMutation} from '../../../externel/backend/rtk';
+import {RootState} from '../../../reduxStore';
 import {getCurrentUnixTimestamp} from "../../../modules/timezone/getCurrentUnixTimestamp";
 
 const PaymentProgressingModal = () => {

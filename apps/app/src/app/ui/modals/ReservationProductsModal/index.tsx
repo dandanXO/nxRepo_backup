@@ -1,22 +1,17 @@
-import { useNavigate } from 'react-router';
-import { Button } from '../../core-components/Button';
+import {useNavigate} from 'react-router';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
-import { RootState } from '../../../reduxStore';
-import { LoanAgreementModal } from '../QRLoanAgreementModal';
-import { Product } from '../../components/Product';
-import { useEffect, useState } from 'react';
-import { FinalProductType } from '../../pages/IndexPage';
-import { formatPrice } from '../../../modules/format/formatPrice';
-import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
-import { modalInitialState } from '../../../reduxStore/modalSlice';
-import { useTranslation } from 'react-i18next';
-import { i18nReservationProductsModal } from './translations';
-import { environment } from 'apps/app/src/environments/environmentModule/environment';
-import { MexicoCountry } from '@frontend/shared/domain';
+import {modalInitialState, modalSlice} from '../../../reduxStore/modalSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../../reduxStore';
+import {LoanAgreementModal} from '../QRLoanAgreementModal';
+import {Product} from '../../components/Product';
+import {useEffect, useState} from 'react';
+import {formatPrice} from '../../../modules/format/formatPrice';
+import {RepaymentDetailPageUseCaseActions} from '../../pages/RepaymentDetailPage/userUsecaseSaga';
+import {useTranslation} from 'react-i18next';
+import {i18nReservationProductsModal} from './translations';
+
 const ReservationProductsModal = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();

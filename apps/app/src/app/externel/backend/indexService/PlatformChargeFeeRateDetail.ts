@@ -1,4 +1,4 @@
-import { FeeRateKeyEnum } from './FeeRateKeyEnum';
+import {FeeRateKeyEnum} from './FeeRateKeyEnum';
 
 export type PlatformChargeFeeRateDetail = {
   counting: number;

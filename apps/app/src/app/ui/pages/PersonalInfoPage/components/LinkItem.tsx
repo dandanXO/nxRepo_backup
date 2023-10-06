@@ -1,5 +1,5 @@
-import { FiChevronRight } from '@react-icons/all-files/fi/FiChevronRight';
-import { useNavigate } from 'react-router';
+import {FiChevronRight} from '@react-icons/all-files/fi/FiChevronRight';
+import {useNavigate} from 'react-router';
 
 interface LinkItem {
     title: string;

@@ -1,16 +1,13 @@
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import {useTranslation} from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { RootState } from '../../../../../reduxStore';
-import {
-  InitialStateType,
-  modalSlice,
-} from '../../../../../reduxStore/modalSlice';
+import {RootState} from '../../../../../reduxStore';
+import {InitialStateType, modalSlice,} from '../../../../../reduxStore/modalSlice';
 import ListItem from '../../../../core-components/ListItem';
 import Modal from '../../../../core-components/Modal';
-import { Button } from '../../../../core-components/Button';
-import { BindBankcardAction } from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
-import { i18nConfirmBindBankCardModal } from '../translations';
+import {Button} from '../../../../core-components/Button';
+import {BindBankcardAction} from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
+import {i18nConfirmBindBankCardModal} from '../translations';
 
 interface IPhilippinesConfirmBindBankCardModalProps {
   state?: InitialStateType['bindBankcardModal'];

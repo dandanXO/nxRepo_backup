@@ -1,12 +1,9 @@
-import { IndiaCountry } from '@frontend/shared/domain';
+import {IndiaCountry, MexicoCountry, PhilippinesCountry} from '@frontend/shared/domain';
 
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router';
 
 import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
-
-import { MexicoCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
 import {environment} from '../../../environments/environmentModule/environment';
 import {PostRepayCreateRequest} from '../../externel/backend/loanService/PostRepayCreateRequest';
 import {PostRepayCreateResponse} from '../../externel/backend/loanService/PostRepayCreateResponse';

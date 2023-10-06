@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { IThemeConfig } from '@frontend/mobile/shared/ui';
+import {IThemeConfig} from '@frontend/mobile/shared/ui';
 
 export const CustomPage = styled.div<{ theme: IThemeConfig }>`
   display: flex;

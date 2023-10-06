@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router';
+import {Outlet} from 'react-router';
 
-import { Navigation } from '../../core-components/Navigation';
-import { Page } from '../../core-components/Page';
-import { LoginForm } from './LoginForm';
+import {Navigation} from '../../core-components/Navigation';
+import {Page} from '../../core-components/Page';
+import {LoginForm} from './LoginForm';
 
 const LoginPage = () => {
   return (

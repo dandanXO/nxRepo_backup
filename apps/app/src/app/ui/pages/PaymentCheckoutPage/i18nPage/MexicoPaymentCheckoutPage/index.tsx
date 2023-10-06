@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { PostRepayCreateResponse } from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
-import { getToken } from '../../../../../application/getToken';
-import { Label } from '../../../../core-components/Labels';
+import {PostRepayCreateResponse} from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
+import {getToken} from '../../../../../application/getToken';
+import {Label} from '../../../../core-components/Labels';
 import Money from '../../../../components/Money';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
+import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
+import {RepaymentDetailPageUseCaseActions} from '../../../RepaymentDetailPage/userUsecaseSaga';
 import CopyButton from '../../components/CopyButton';
 
 const MexicoPaymentCheckoutPage = ({

@@ -1,13 +1,9 @@
 import cx from 'classnames';
 import React from 'react';
-import { Route } from 'react-router';
-import { useNavigate } from 'react-router';
 import useErrorBoundary from 'use-error-boundary';
 
-import { ErrorBoundary as CustomErrorBoundary } from '../../../application/errorHandler/ErrorBoundary';
-import { Button } from '../../core-components/Button';
-import ApplicationProgressPage from '../ApplicationProgressPage';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {ErrorBoundary as CustomErrorBoundary} from '../../../application/errorHandler/ErrorBoundary';
+import {Button} from '../../core-components/Button';
 
 const JustRenderMe = () => {
   throw new Error('💥');

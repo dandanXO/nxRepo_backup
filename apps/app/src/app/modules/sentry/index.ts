@@ -1,13 +1,13 @@
 import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
-import { CaptureContext, Extras } from '@sentry/types';
-import { Primitive } from '@sentry/types/types/misc';
+import {BrowserTracing} from '@sentry/tracing';
+import {CaptureContext, Extras} from '@sentry/types';
+import {Primitive} from '@sentry/types/types/misc';
 import posthog from 'posthog-js';
 
-import { AppEnvironment } from '../../device/appEnvironment';
-import { AppFlag } from '../../../environments/flag';
-import { NativeAppInfo } from '../../application/nativeAppInfo';
-import { RootState, appStore } from '../../reduxStore';
+import {AppEnvironment} from '../../device/appEnvironment';
+import {AppFlag} from '../../../environments/flag';
+import {NativeAppInfo} from '../../application/nativeAppInfo';
+import {appStore, RootState} from '../../reduxStore';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 import {AppProxy} from "../../proxy/appProxy";
 

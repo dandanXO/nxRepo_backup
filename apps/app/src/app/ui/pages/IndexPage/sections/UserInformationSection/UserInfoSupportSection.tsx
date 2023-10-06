@@ -1,11 +1,9 @@
-import { FiEye } from '@react-icons/all-files/fi/FiEye';
-import { FiEyeOff } from '@react-icons/all-files/fi/FiEyeOff';
-import { RiCustomerServiceLine } from '@react-icons/all-files/ri/RiCustomerServiceLine';
-import React, { useCallback, useState } from 'react';
+import {FiEye} from '@react-icons/all-files/fi/FiEye';
+import {FiEyeOff} from '@react-icons/all-files/fi/FiEyeOff';
+import {RiCustomerServiceLine} from '@react-icons/all-files/ri/RiCustomerServiceLine';
+import React, {useState} from 'react';
 
-import { IndexPageProps, RootState } from '../../../../../reduxStore';
-import {useSelector} from "react-redux";
-import {NativeAppInfo} from "../../../../../application/nativeAppInfo";
+import {IndexPageProps} from '../../../../../reduxStore';
 import {useUserPhoneNumber} from "../../../../hooks/useUserPhoneNumber";
 
 type Props = IndexPageProps & {

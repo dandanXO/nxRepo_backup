@@ -1,4 +1,3 @@
-import { formatDate } from "../../../modules/format/formatDate";
 import moment from 'moment-timezone';
 import cx from 'classnames'
 

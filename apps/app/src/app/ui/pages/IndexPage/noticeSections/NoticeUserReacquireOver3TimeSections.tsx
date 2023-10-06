@@ -1,4 +1,4 @@
-import { NoticeSectionContainer } from './index';
+import {NoticeSectionContainer} from './index';
 
 export const NoticeUserReacquireOver3TimeSections = () => {
   return (

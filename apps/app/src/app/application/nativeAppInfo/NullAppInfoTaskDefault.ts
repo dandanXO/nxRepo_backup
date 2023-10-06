@@ -1,4 +1,3 @@
-
 import {isInApp} from "../../device/isInApp";
 import {INullAppInfoTaskDefault} from "../IAppEnvironment";
 import {AllCountriesEnum} from "@frontend/shared/domain";

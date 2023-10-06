@@ -1,9 +1,9 @@
 import {useDispatch, useSelector} from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 
-import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../core-components/Navigation';
-import { Page } from '../../core-components/Page';
+import {RootState} from '../../../reduxStore';
+import {Navigation} from '../../core-components/Navigation';
+import {Page} from '../../core-components/Page';
 import {useEffect} from "react";
 import {loadingSlice} from "../../../reduxStore/loadingSlice";
 

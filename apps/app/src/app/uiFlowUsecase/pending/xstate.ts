@@ -1,4 +1,4 @@
-import { createMachine, interpret } from 'xstate';
+import {createMachine, interpret} from 'xstate';
 
 interface User {
   name: string;

@@ -1,5 +1,5 @@
-import i18next, { t } from "i18next";
-import { z } from "zod";
+import i18next, {t} from "i18next";
+import {z} from "zod";
 
 const ValidationInfo = {
     min1: i18next.t('This field cannot be left blank'),

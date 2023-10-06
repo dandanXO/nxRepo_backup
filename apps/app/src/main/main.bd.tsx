@@ -4,13 +4,9 @@ import '../app/modules/sentry';
 import React, {StrictMode} from 'react';
 import * as ReactDOM from 'react-dom/client';
 // import posthog from "posthog-js";
-
-
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
 import '../app/externel/window/IWindow';
 import "../app/application/errorHandler";
-// import '../app/modules/posthog';
-import '../app/modules/sentry';
 import '../app/modules/i18n';
 import '../app/device/timezone';
 

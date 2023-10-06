@@ -1,9 +1,9 @@
-import { Service } from '../../../externel/backend';
-import { all, call, fork, put, select, take } from 'redux-saga/effects';
-import { GetNotificationResponse } from '../../../externel/backend/indexService/GetNotificationResponse';
-import { indexPageSlice } from '../../../reduxStore/indexPageSlice';
-import { RootState } from '../../../reduxStore';
-import { modalSlice } from '../../../reduxStore/modalSlice';
+import {Service} from '../../../externel/backend';
+import {call, put, select} from 'redux-saga/effects';
+import {GetNotificationResponse} from '../../../externel/backend/indexService/GetNotificationResponse';
+import {indexPageSlice} from '../../../reduxStore/indexPageSlice';
+import {RootState} from '../../../reduxStore';
+import {modalSlice} from '../../../reduxStore/modalSlice';
 
 export function* systemFetchCouponSaga() {
 

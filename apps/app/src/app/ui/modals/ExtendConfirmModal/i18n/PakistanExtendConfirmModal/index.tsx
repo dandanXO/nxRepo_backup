@@ -1,11 +1,11 @@
-import { useLocation, useNavigate } from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 
-import { getToken } from '../../../../../application/getToken';
-import { Button } from '../../../../core-components/Button';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
+import {getToken} from '../../../../../application/getToken';
+import {Button} from '../../../../core-components/Button';
+import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
 import Modal from '../../../../core-components/Modal';
-import { i18nExtendConfirmModal } from '../../translations';
-import { useTranslation } from 'react-i18next';
+import {i18nExtendConfirmModal} from '../../translations';
+import {useTranslation} from 'react-i18next';
 import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 
 const PakistanExtendConfirmModal = () => {

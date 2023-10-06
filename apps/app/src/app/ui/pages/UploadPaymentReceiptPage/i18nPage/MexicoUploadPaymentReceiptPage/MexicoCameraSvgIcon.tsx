@@ -1,4 +1,4 @@
-import { CameraSvgIconProps } from "../types/CameraSvgIconProps";
+import {CameraSvgIconProps} from "../types/CameraSvgIconProps";
 
 const MexicoCameraSvgIcon = ({ fill = '#f58b10' }: CameraSvgIconProps) => {
     return (

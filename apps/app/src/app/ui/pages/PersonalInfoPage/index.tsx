@@ -1,27 +1,27 @@
 // import Button from "../../components/Button";
-import { FiChevronRight } from '@react-icons/all-files/fi/FiChevronRight';
+import {FiChevronRight} from '@react-icons/all-files/fi/FiChevronRight';
 import cx from 'classnames';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router';
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Outlet, useNavigate} from 'react-router';
 
-import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
-import { getToken } from '../../../application/getToken';
-import { RootState } from '../../../reduxStore';
+import {USER_AUTH_STATE} from '../../../domain/user/USER_AUTH_STATE';
+import {getToken} from '../../../application/getToken';
+import {RootState} from '../../../reduxStore';
 import UserIcon from './images/UserIcon.svg';
-import { Button } from '../../core-components/Button';
-import { LoanOverViewSection } from '../../core-components/sections/LoanOverViewSection';
-import { IndexPageSagaAction } from '../IndexPage/userUsecaseSaga/indexPageActions';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {Button} from '../../core-components/Button';
+import {LoanOverViewSection} from '../../core-components/sections/LoanOverViewSection';
+import {IndexPageSagaAction} from '../IndexPage/userUsecaseSaga/indexPageActions';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 import Card from './components/Card';
 import LinkItem from './components/LinkItem';
-import { PersonalInfoPageSagaActions } from './userUsecaseSaga';
-import { RISK_CONTROL_STATE } from '../../../domain/risk/RISK_CONTROL_STATE';
+import {PersonalInfoPageSagaActions} from './userUsecaseSaga';
+import {RISK_CONTROL_STATE} from '../../../domain/risk/RISK_CONTROL_STATE';
 import StarRatingModal from '../../modals/StarRatingModal';
-import { modalSlice } from '../../../reduxStore/modalSlice';
+import {modalSlice} from '../../../reduxStore/modalSlice';
 import StarRatingSuccessModal from '../../modals/StarRatingSuccessModal';
 import {useGoToLogout} from "../../goTo/goToLogout";
-import { useUserPhoneNumber } from '../../hooks/useUserPhoneNumber';
+import {useUserPhoneNumber} from '../../hooks/useUserPhoneNumber';
 import {TabPage} from "../../core-components/TabPage";
 
 const PersonalInfoPage = () => {

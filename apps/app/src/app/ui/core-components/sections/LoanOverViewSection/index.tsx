@@ -1,12 +1,11 @@
-import { ApexOptions } from 'apexcharts';
-import { useEffect, useState } from 'react';
+import {ApexOptions} from 'apexcharts';
+import {useEffect, useState} from 'react';
 import Chart from 'react-apexcharts';
 
-import { environment } from '../../../../../environments/environmentModule/environment';
-import { ORDER_STATE } from '../../../../domain/order/ORDER_STATE';
-import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
-import { formatPrice } from '../../../../modules/format/formatPrice';
-import { IndexPageProps } from '../../../../reduxStore';
+import {environment} from '../../../../../environments/environmentModule/environment';
+import {RISK_CONTROL_STATE} from '../../../../domain/risk/RISK_CONTROL_STATE';
+import {formatPrice} from '../../../../modules/format/formatPrice';
+import {IndexPageProps} from '../../../../reduxStore';
 
 type Props = IndexPageProps;
 

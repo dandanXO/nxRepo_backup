@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router';
 
-import { useLazyGetBankCardListQuery } from '../../../externel/backend/rtk';
-import { usePostBankCardMainMutation } from '../../../externel/backend/rtk';
-import { getToken } from '../../../application/getToken';
+import {useLazyGetBankCardListQuery, usePostBankCardMainMutation} from '../../../externel/backend/rtk';
+import {getToken} from '../../../application/getToken';
 import NoDataIcon from './images/NoData.svg';
-import { Navigation } from '../../core-components/Navigation';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {Navigation} from '../../core-components/Navigation';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 import BankCard from './BankCard';
-import { SetPrimarySuccessModal } from './SetPrimarySuccessModal';
-import { MdAdd } from '@react-icons/all-files/md/MdAdd';
-import { loadingSlice } from '../../../reduxStore/loadingSlice';
-import { useDispatch } from 'react-redux';
-import { Page } from '../../core-components/Page';
-import { PageContent } from '../../core-components/PageContent';
+import {SetPrimarySuccessModal} from './SetPrimarySuccessModal';
+import {MdAdd} from '@react-icons/all-files/md/MdAdd';
+import {loadingSlice} from '../../../reduxStore/loadingSlice';
+import {useDispatch} from 'react-redux';
+import {Page} from '../../core-components/Page';
+import {PageContent} from '../../core-components/PageContent';
 import cx from 'classnames'
 import {isShowNavigation} from "../../../device/isShowNavigation";
 

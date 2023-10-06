@@ -1,4 +1,4 @@
-import { ProductApplyDetail } from './ProductApplyDetail';
+import {ProductApplyDetail} from './ProductApplyDetail';
 
 export type LoanServiceRequest = {
   appName?: string;

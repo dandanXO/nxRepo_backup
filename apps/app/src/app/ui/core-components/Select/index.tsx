@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import Select, { GroupBase, Props as SelectProps } from 'react-select';
+import {useState} from 'react';
+import Select, {GroupBase, Props as SelectProps} from 'react-select';
 
 interface IReactSelect<Option, IsMulti extends boolean = false, Group extends GroupBase<Option> = GroupBase<Option>>
     extends SelectProps<Option, IsMulti, Group> {

@@ -1,18 +1,14 @@
-import { useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router';
-
-import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../core-components/Navigation';
-import { Page } from '../../core-components/Page';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
-import { Button } from '../../core-components/Button';
-import { Input, InputValue, Modal } from '@frontend/mobile/shared/ui';
-import { useEffect, useState } from 'react';
-import { useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation } from '../../../externel/backend/rtk';
+import {useNavigate} from 'react-router';
+import {Navigation} from '../../core-components/Navigation';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {getToken} from '../../../application/getToken';
+import {Button} from '../../core-components/Button';
+import {InputValue, Modal} from '@frontend/mobile/shared/ui';
+import {useEffect, useState} from 'react';
+import {useLazyGetFeedbackCategoriesQuery, usePostFeedbackMutation} from '../../../externel/backend/rtk';
 import cx from 'classnames';
 import Select from '../../core-components/Select';
-import { transparent } from 'tailwindcss/colors';
+import {transparent} from 'tailwindcss/colors';
 
 
 interface ICategory {

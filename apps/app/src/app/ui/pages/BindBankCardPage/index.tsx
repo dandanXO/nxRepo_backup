@@ -1,28 +1,23 @@
-import { MexicoCountry } from '@frontend/shared/domain';
+import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useTranslation} from 'react-i18next';
+import {useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
-
-import { IndiaCountry } from '@frontend/shared/domain';
-import { PakistanCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import { environment } from '../../../../environments/environmentModule/environment';
+import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
 import {
   useLazyGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
   usePostBankBindSaveToPKMutation,
 } from '../../../externel/backend/rtk';
-import { renderByCountry } from '../../../modules/i18n';
-import { Navigation } from '../../core-components/Navigation';
-import { PageContent } from '../../core-components/PageContent';
-import { IndiaBindBankAccountPage } from './i18nPage/IndiaBindBankAccountPage';
-import { MexicoBindBankAccountPage } from './i18nPage/MexicoBindBankAccountPage';
-import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';
+import {renderByCountry} from '../../../modules/i18n';
+import {Navigation} from '../../core-components/Navigation';
+import {PageContent} from '../../core-components/PageContent';
+import {IndiaBindBankAccountPage} from './i18nPage/IndiaBindBankAccountPage';
+import {MexicoBindBankAccountPage} from './i18nPage/MexicoBindBankAccountPage';
+import {PakistanBindBankAccountPage} from './i18nPage/PakistanBindBankAccountPage';
 import PhilippinesBindBankAccountPage from './i18nPage/PhilippinesBindBankAccountPage';
-import { i18nBankBindAccountPage } from './translations';
+import {i18nBankBindAccountPage} from './translations';
 import {isShowNavigation} from "../../../device/isShowNavigation";
 
 const BindBankCardPage = () => {

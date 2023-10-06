@@ -1,16 +1,13 @@
-import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
-import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
+import {MdExpandLess} from '@react-icons/all-files/md/MdExpandLess';
+import {MdExpandMore} from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
-import { useCallback, useState } from 'react';
-
-import { environment } from '../../../../../../environments/environmentModule/environment';
-import { formatPrice } from '../../../../../modules/format/formatPrice';
+import {useCallback, useState} from 'react';
 import Money from '../../../Money';
-import { Checkbox, ICheckboxProps } from '../../../../core-components/Checkbox';
-import { FinalProductType } from '../../../../pages/IndexPage';
-import { IChargeFeeDetails } from '../../../../../externel/backend/loanService/GetReservationResponse';
-import { useTranslation } from 'react-i18next';
-import { i18nProduct } from '../translations';
+import {Checkbox, ICheckboxProps} from '../../../../core-components/Checkbox';
+import {FinalProductType} from '../../../../pages/IndexPage';
+import {IChargeFeeDetails} from '../../../../../externel/backend/loanService/GetReservationResponse';
+import {useTranslation} from 'react-i18next';
+import {i18nProduct} from '../translations';
 
 
 type Props = {

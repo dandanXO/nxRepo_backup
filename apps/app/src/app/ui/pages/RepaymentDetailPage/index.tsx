@@ -1,25 +1,20 @@
 // import Button from "../../components/Button";
-import { MexicoCountry } from '@frontend/shared/domain';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Outlet, useLocation, useNavigate} from 'react-router';
+import {renderByCountry} from '../../../modules/i18n';
+import {getToken} from '../../../application/getToken';
 
-import { IndiaCountry } from '@frontend/shared/domain';
-import { PakistanCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import { useLazyGetLoanDetailQuery } from '../../../externel/backend/rtk';
-import { renderByCountry } from '../../../modules/i18n';
-import { getToken } from '../../../application/getToken';
-
-import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../core-components/Navigation';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {RootState} from '../../../reduxStore';
+import {Navigation} from '../../core-components/Navigation';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 import IndiaRepaymentDetailPage from './i18nPage/india/IndiaRepaymentDetailPage';
 import MexicoRepaymentDetailPage from './i18nPage/mexico/MexicoRepaymentDetailPage';
 import PakistanRepaymentDetailPage from './i18nPage/pakistan/PakistanRepaymentDetailPage';
 import PhilippinesRepaymentDetailPage from './i18nPage/philippines/PhilippinesRepaymentDetailPage';
-import { RepaymentDetailPageUseCaseActions } from './userUsecaseSaga';
-import { isShowNavigation } from '../../../device/isShowNavigation';
+import {RepaymentDetailPageUseCaseActions} from './userUsecaseSaga';
+import {isShowNavigation} from '../../../device/isShowNavigation';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();

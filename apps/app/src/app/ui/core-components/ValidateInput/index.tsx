@@ -1,7 +1,6 @@
-
-import { Input } from '@frontend/mobile/shared/ui';
-import React, { ClipboardEvent, useEffect } from 'react';
-import { InputProps } from 'libs/mobile/shared/ui/src/lib/components/Input/Input';
+import {Input} from '@frontend/mobile/shared/ui';
+import React, {ClipboardEvent, useEffect} from 'react';
+import {InputProps} from 'libs/mobile/shared/ui/src/lib/components/Input/Input';
 import {InputValue} from "../form/InputValue";
 
 type Props = {

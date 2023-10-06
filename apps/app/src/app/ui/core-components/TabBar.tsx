@@ -1,18 +1,17 @@
-import { RiUser3Line } from '@react-icons/all-files/ri/RiUser3Line';
-import { MdPayment } from '@react-icons/all-files/md/MdPayment';
-import { RiMoneyDollarCircleFill } from '@react-icons/all-files/ri/RiMoneyDollarCircleFill';
+import {RiUser3Line} from '@react-icons/all-files/ri/RiUser3Line';
+import {MdPayment} from '@react-icons/all-files/md/MdPayment';
+import {RiMoneyDollarCircleFill} from '@react-icons/all-files/ri/RiMoneyDollarCircleFill';
 import cx from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router';
+import {useDispatch, useSelector} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router';
 
-import { USER_AUTH_STATE } from '../../domain/user/USER_AUTH_STATE';
-import { getToken } from '../../application/getToken';
-import { RootState } from '../../reduxStore';
-import { IndexPageSagaAction } from '../pages/IndexPage/userUsecaseSaga/indexPageActions';
-import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
-import { SystemCaseActions } from '../../uiFlowUsecase/type/systemUsecaseSaga/systemCaseActions';
-import { useEffect } from 'react';
-import { repaymentPageInitialState, repaymentPageSlice } from '../../reduxStore/repaymentPageSlice';
+import {USER_AUTH_STATE} from '../../domain/user/USER_AUTH_STATE';
+import {getToken} from '../../application/getToken';
+import {RootState} from '../../reduxStore';
+import {IndexPageSagaAction} from '../pages/IndexPage/userUsecaseSaga/indexPageActions';
+import {PageOrModalPathEnum} from '../PageOrModalPathEnum';
+import {useEffect} from 'react';
+import {repaymentPageInitialState, repaymentPageSlice} from '../../reduxStore/repaymentPageSlice';
 
 type Props = {
   hasOrder: boolean;

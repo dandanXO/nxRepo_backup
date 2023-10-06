@@ -1,17 +1,17 @@
-import React, { ClipboardEvent, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router';
 import Select from 'react-select';
 
-import { Input } from '@frontend/mobile/shared/ui';
-import { Button } from '../../../../core-components/Button';
-import { selectStyles } from '../../../../core-components/selectStyles';
-import { IPakistanBankAccountForm } from '../types/IBankAccountForm';
-import { validateBankcardNo } from './validation';
+import {Input} from '@frontend/mobile/shared/ui';
+import {Button} from '../../../../core-components/Button';
+import {selectStyles} from '../../../../core-components/selectStyles';
+import {IPakistanBankAccountForm} from '../types/IBankAccountForm';
+import {validateBankcardNo} from './validation';
 import ValidateInput from '../../../../core-components/ValidateInput';
-import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
-import { useDispatch } from 'react-redux';
-import { i18nBankBindAccountPage } from '../../translations';
-import { useTranslation } from 'react-i18next';
+import {modalInitialState, modalSlice} from '../../../../../reduxStore/modalSlice';
+import {useDispatch} from 'react-redux';
+import {i18nBankBindAccountPage} from '../../translations';
+import {useTranslation} from 'react-i18next';
 import {InputValue} from "../../../../core-components/form/InputValue";
 
 export const BankAccountForm = (props: IPakistanBankAccountForm) => {

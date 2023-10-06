@@ -1,9 +1,9 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { UserReserveActionPayload } from ".";
-import { put, race, take } from "redux-saga/effects";
-import { APIV3 } from "../../../../externel/backend/rtk";
-import { modalInitialState, modalSlice } from "apps/app/src/app/reduxStore/modalSlice";
-import { catchSagaError } from "../../../../uiFlowUsecase/utils/catchSagaError";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {UserReserveActionPayload} from ".";
+import {put, race, take} from "redux-saga/effects";
+import {APIV3} from "../../../../externel/backend/rtk";
+import {modalInitialState, modalSlice} from "apps/app/src/app/reduxStore/modalSlice";
+import {catchSagaError} from "../../../../uiFlowUsecase/utils/catchSagaError";
 import {getOrderNo} from "../../../../externel/window/querystring/getOrderNo";
 
 export function* userReserveSaga(action: PayloadAction<UserReserveActionPayload>) {

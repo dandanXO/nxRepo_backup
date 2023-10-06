@@ -1,18 +1,18 @@
-import { useLocation, useNavigate } from 'react-router';
-import { Button } from '../../core-components/Button';
+import {useNavigate} from 'react-router';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
 import {useDispatch, useSelector} from 'react-redux';
-import { RootState } from '../../../reduxStore';
-import { ORDER_STATE } from '../../../domain/order/ORDER_STATE';
+import {RootState} from '../../../reduxStore';
+import {ORDER_STATE} from '../../../domain/order/ORDER_STATE';
 import {getToken, removeTokenFromLocalStorage} from '../../../application/getToken';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { useDeleteUserMutation } from '../../../externel/backend/rtk';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {useDeleteUserMutation} from '../../../externel/backend/rtk';
 import {GlobalAppMode} from "../../../application/GlobalAppMode";
 import {isInApp} from "../../../device/isInApp";
 import {alertModal} from "../../components/alertModal";
 import {SentryModule} from "../../../modules/sentry";
 import {userInfoPersistence} from "../../../persistant/UserInfoPersistence";
-import { AndroidPage } from '../../../externel/window/IWindow';
+import {AndroidPage} from '../../../externel/window/IWindow';
 import {loginSlice} from "../../../reduxStore/loginSlice";
 
 const DeleteAccountConfirmModal = () => {

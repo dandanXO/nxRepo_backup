@@ -2,15 +2,15 @@
 //  set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
 // import loadableComponent from '@loadable/component';
 // import posthog from 'posthog-js';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { Route, Routes, useLocation } from 'react-router';
+import React from 'react';
+import {useSelector} from 'react-redux';
+import {Route, Routes, useLocation} from 'react-router';
 
 
-import { RootState } from '../../reduxStore';
+import {RootState} from '../../reduxStore';
 // NOTICE: Static Loading : Compontents
 import LoadingMask from '../core-components/LoadingMask';
-import { TabBar } from '../core-components/TabBar';
+import {TabBar} from '../core-components/TabBar';
 import APIBoundaryModal from '../modals/APIBoundaryModal';
 import AmountRepaidModal from '../modals/AmountRepaidModal/AmountRepaidModal';
 import DeleteAccountConfirmModal from '../modals/DeleteAccountConfirmModal';
@@ -39,7 +39,7 @@ import LoginPage from '../pages/LoginPage';
 import MyCouponListPage from '../pages/MyCouponListPage';
 import OnlineCustomerServicePage from '../pages/OnlineCustomerServicePage';
 import OrderStatusPage from '../pages/OrderStatusPage';
-import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
+import {PageOrModalPathEnum} from '../PageOrModalPathEnum';
 import PartnerPage from '../pages/PartnerPage';
 import PaymentResultPage from '../pages/PaymentResultPage';
 import PersonalInfoPage from '../pages/PersonalInfoPage';
@@ -51,8 +51,7 @@ import UploadPaymentReceiptPage from '../pages/UploadPaymentReceiptPage';
 import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage';
 // NOTE: Page
 // import { CategoryPage } from '../pages/__test__/CategoryPage';
-import { ErrorPage } from '../pages/__test__/ErrorPage';
-import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage';
+import {ErrorPage} from '../pages/__test__/ErrorPage';
 import AppDataCollector from "../../uiFlowDataCollector/AppDataCollector";
 import {Page} from "../core-components/Page";
 

@@ -1,6 +1,6 @@
-import { useDispatch } from 'react-redux';
-import { IndexPageProps } from '../../../../reduxStore';
-import { IndexPageSagaAction } from '../userUsecaseSaga/indexPageActions';
+import {useDispatch} from 'react-redux';
+import {IndexPageProps} from '../../../../reduxStore';
+import {IndexPageSagaAction} from '../userUsecaseSaga/indexPageActions';
 
 type Props = IndexPageProps;
 

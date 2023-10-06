@@ -1,12 +1,10 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
-import { GetLoanRecordListReponse } from "../../../../externel/backend/loanService/GetLoanRecordListReponse";
-import { GetLoanRecordListRequest } from "../../../../externel/backend/loanService/GetLoanRecordListRequest";
-import { APIV3 } from "../../../../externel/backend/rtk";
-import { loadingSlice } from "apps/app/src/app/reduxStore/loadingSlice";
-import { RepaymentPageActionPayload, repaymentPageSlice } from "apps/app/src/app/reduxStore/repaymentPageSlice";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {GetLoanRecordListRequest} from "../../../../externel/backend/loanService/GetLoanRecordListRequest";
+import {APIV3} from "../../../../externel/backend/rtk";
+import {loadingSlice} from "apps/app/src/app/reduxStore/loadingSlice";
+import {RepaymentPageActionPayload, repaymentPageSlice} from "apps/app/src/app/reduxStore/repaymentPageSlice";
 import moment from "moment";
-import { all, call, fork, put, race, select, take } from "redux-saga/effects";
+import {put, race, take} from "redux-saga/effects";
 
 const statusEnum = {
     Overdue: 'OVERDUE',

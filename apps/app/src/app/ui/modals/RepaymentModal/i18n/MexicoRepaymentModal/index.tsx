@@ -1,33 +1,29 @@
-import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useTranslation, withTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router';
+import React from 'react';
+import {useTranslation} from 'react-i18next';
+import {useLocation, useNavigate} from 'react-router';
 import Select from "../../../../core-components/Select";
 
-import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
-
-import { environment } from '../../../../../../environments/environmentModule/environment';
-import { getToken } from '../../../../../application/getToken';
+import {environment} from '../../../../../../environments/environmentModule/environment';
+import {getToken} from '../../../../../application/getToken';
 import ListItem from '../../../../core-components/ListItem';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from '../../../../core-components/Button';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import { IRepaymentModalProps } from '../../index';
+import {Button} from '../../../../core-components/Button';
+import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
+import {IRepaymentModalProps} from '../../index';
 import AdSVG from '../../repayment_banner.svg';
-import { i18nRepaymentModal } from '../translations';
-import { formatDate } from "../../../../../modules/format/formatDate";
-import { RadioOption } from '../../../../core-components/RadioOption';
-import { t } from 'i18next';
-import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
+import {i18nRepaymentModal} from '../translations';
+import {formatDate} from "../../../../../modules/format/formatDate";
+import {RadioOption} from '../../../../core-components/RadioOption';
+import {RiArrowDownSLine} from '@react-icons/all-files/ri/RiArrowDownSLine';
 import ValidateInput from '../../../../core-components/ValidateInput';
-import { validateBalance } from '../validation';
-import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'apps/app/src/app/reduxStore';
+import {validateBalance} from '../validation';
+import {repaymentDetailPageInitialState} from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
+import {useSelector} from 'react-redux';
+import {RootState} from 'apps/app/src/app/reduxStore';
 import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 
 type paymentMethodValueType = {

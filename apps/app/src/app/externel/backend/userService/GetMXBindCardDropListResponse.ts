@@ -1,4 +1,4 @@
-import { BankVendor } from './BankVendor';
+import {BankVendor} from './BankVendor';
 
 export interface GetMXBindCardDropListResponse {
   availableBanks: BankVendor[];

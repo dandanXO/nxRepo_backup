@@ -1,5 +1,3 @@
-import { CameraSvgIconProps } from "../types/CameraSvgIconProps";
-
 const IndiaCameraSvgIcon = () => {
   return (
     <svg

@@ -1,5 +1,5 @@
-import { IndexPageProps } from 'apps/app/src/app/reduxStore';
-import { NoticeSectionContainer } from './index';
+import {IndexPageProps} from 'apps/app/src/app/reduxStore';
+import {NoticeSectionContainer} from './index';
 
 type Props = IndexPageProps;
 
@@ -8,7 +8,7 @@ export const NoticeOrderOrQuotaRejectedSection = (props: Props) => {
     return (
         <NoticeSectionContainer dataTestingID="noticeOrderOrQuotaRejected">
             <div className={'mb-2 text-sm text-primary-main font-bold'}>Application Denied</div>
-            {withinOneDay 
+            {withinOneDay
              ? (<div className={'paragraph mb-4 text-sm text-ctext-primary leading-none'}>
                 Your application has been declined due to insufficient credit score. You are welcome to try applying again in 24 hours.
              </div>)
@@ -21,7 +21,7 @@ export const NoticeOrderOrQuotaRejectedSection = (props: Props) => {
                 </div>
              </div>
             )}
-            
+
         </NoticeSectionContainer>
     );
 };

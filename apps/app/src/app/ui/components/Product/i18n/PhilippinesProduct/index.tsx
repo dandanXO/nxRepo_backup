@@ -1,13 +1,13 @@
-import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
-import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
-import React, { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import {MdExpandLess} from '@react-icons/all-files/md/MdExpandLess';
+import {MdExpandMore} from '@react-icons/all-files/md/MdExpandMore';
+import React, {useCallback, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
-import { IChargeFeeDetails } from '../../../../../externel/backend/loanService/GetReservationResponse';
-import { FinalProductType } from '../../../../pages/IndexPage';
-import { Checkbox, ICheckboxProps } from '../../../../core-components/Checkbox';
+import {IChargeFeeDetails} from '../../../../../externel/backend/loanService/GetReservationResponse';
+import {FinalProductType} from '../../../../pages/IndexPage';
+import {Checkbox, ICheckboxProps} from '../../../../core-components/Checkbox';
 import Money from '../../../Money';
-import { i18nProduct } from '../translations';
+import {i18nProduct} from '../translations';
 
 interface IPhilippinesProductProps {
   product: FinalProductType;

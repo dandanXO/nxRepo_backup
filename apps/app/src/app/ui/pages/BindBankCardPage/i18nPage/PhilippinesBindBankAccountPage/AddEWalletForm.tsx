@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useDispatch} from 'react-redux';
 import Select from 'react-select';
 
-import {
-  modalInitialState,
-  modalSlice,
-} from '../../../../../reduxStore/modalSlice';
+import {modalInitialState, modalSlice,} from '../../../../../reduxStore/modalSlice';
 import ValidateInput from '../../../../core-components/ValidateInput';
-import { Button } from '../../../../core-components/Button';
-import { i18nBankBindAccountPage } from '../../translations';
-import { validationPHMobileNumber } from './validation';
+import {Button} from '../../../../core-components/Button';
+import {i18nBankBindAccountPage} from '../../translations';
+import {validationPHMobileNumber} from './validation';
 import {InputValue} from "../../../../core-components/form/InputValue";
 
 interface IAddEWalletFormProps {

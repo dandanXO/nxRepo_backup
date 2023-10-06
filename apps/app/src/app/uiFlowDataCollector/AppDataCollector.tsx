@@ -1,6 +1,6 @@
-import React, { SyntheticEvent, useEffect } from 'react';
-import { useLocation } from 'react-router';
-import { usePostTraceBehaviorMutation } from '../externel/backend/rtk';
+import React, {SyntheticEvent, useEffect} from 'react';
+import {useLocation} from 'react-router';
+import {usePostTraceBehaviorMutation} from '../externel/backend/rtk';
 import {environment} from "../../environments/environmentModule/environment";
 import {getCurrentUnixTimestamp} from "../modules/timezone/getCurrentUnixTimestamp";
 

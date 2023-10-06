@@ -1,8 +1,8 @@
-import { call, take } from 'redux-saga/effects';
+import {call, take} from 'redux-saga/effects';
 
-import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
-import { systemStartInitSaga } from '../type/systemUsecaseSaga/systemStartInitSaga';
-import { catchSagaError } from '../utils/catchSagaError';
+import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
+import {systemStartInitSaga} from '../type/systemUsecaseSaga/systemStartInitSaga';
+import {catchSagaError} from '../utils/catchSagaError';
 
 export function* watchSystemInitSaga() {
   try {

@@ -1,14 +1,13 @@
 // NOTE: Action: UserApplyProduct
-import { all, call, fork, put, select } from 'redux-saga/effects';
+import {call, put, select} from 'redux-saga/effects';
 
-import { Service } from '../../../../externel/backend';
-import { GetIndexResponse } from '../../../../externel/backend/indexService/GetIndexResponse';
-import { GetOpenIndexResponse } from '../../../../externel/backend/indexService/GetOpenIndexResponse';
-import { USER_AUTH_STATE } from '../../../../domain/user/USER_AUTH_STATE';
-import { RootState } from '../../../../reduxStore';
-import { catchSagaError } from '../../../utils/catchSagaError';
-import { systemCountdownManagerSaga } from '../../../../ui/pages/IndexPage/userUsecaseSaga/systemCountdownManagerSaga';
-import { indexPageSlice } from 'apps/app/src/app/reduxStore/indexPageSlice';
+import {Service} from '../../../../externel/backend';
+import {GetIndexResponse} from '../../../../externel/backend/indexService/GetIndexResponse';
+import {GetOpenIndexResponse} from '../../../../externel/backend/indexService/GetOpenIndexResponse';
+import {USER_AUTH_STATE} from '../../../../domain/user/USER_AUTH_STATE';
+import {RootState} from '../../../../reduxStore';
+import {catchSagaError} from '../../../utils/catchSagaError';
+import {indexPageSlice} from 'apps/app/src/app/reduxStore/indexPageSlice';
 
 export function* systemGetIndexPageSaga() {
     // NOTICE: 防止錯誤後無法重新 watch

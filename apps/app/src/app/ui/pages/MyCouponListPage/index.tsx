@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
-
-import NoDataImage from '../../components/images/NoData.svg';
-import { useLazyGetCouponListQuery } from '../../../externel/backend/rtk';
-import { GetCouponListRequest } from '../../../externel/backend/userService/GetCouponListRequest';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router';
+import {useLazyGetCouponListQuery} from '../../../externel/backend/rtk';
+import {GetCouponListRequest} from '../../../externel/backend/userService/GetCouponListRequest';
 import Coupon from '../../components/Coupon';
-import { Tags } from '../../core-components/Tag';
-import { Page } from '../../core-components/Page';
-import { Navigation } from '../../core-components/Navigation';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
-import { loadingSlice } from '../../../reduxStore/loadingSlice';
-import { useDispatch } from 'react-redux';
+import {Tags} from '../../core-components/Tag';
+import {Page} from '../../core-components/Page';
+import {Navigation} from '../../core-components/Navigation';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {getToken} from '../../../application/getToken';
+import {loadingSlice} from '../../../reduxStore/loadingSlice';
+import {useDispatch} from 'react-redux';
 import {isShowNavigation} from "../../../device/isShowNavigation";
 
 const MyCouponListPage = () => {

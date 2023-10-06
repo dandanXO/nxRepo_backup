@@ -1,4 +1,4 @@
-import { AllCountriesEnum } from '@frontend/shared/domain';
+import {AllCountriesEnum} from '@frontend/shared/domain';
 import {IThemes} from "../../app/modules/ui/theme/types";
 
 // NOTE: India

@@ -1,6 +1,6 @@
-import { alertModal } from '../../../components/alertModal';
-import { NativeAppInfo } from '../../../../application/nativeAppInfo';
-import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
+import {alertModal} from '../../../components/alertModal';
+import {NativeAppInfo} from '../../../../application/nativeAppInfo';
+import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
 import {GlobalAppMode} from "../../../../application/GlobalAppMode";
 import {isInApp} from "../../../../device/isInApp";
 import {SentryModule} from "../../../../modules/sentry";

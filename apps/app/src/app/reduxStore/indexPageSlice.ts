@@ -1,18 +1,19 @@
 // NOTE: PageRedux
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import moment from 'moment-timezone';
 
-import { GetIndexResponse } from '../externel/backend/indexService/GetIndexResponse';
-import { GetOpenIndexResponse } from '../externel/backend/indexService/GetOpenIndexResponse';
-import { PayableRecords } from '../externel/backend/indexService/PayableRecords';
-import { GetQuotaModelStatusResponse } from '../externel/backend/loanService/GetQuotaModelStatusResponse';
-import { GetUserInfoServiceResponse } from '../externel/backend/userService/GetUserInfoServiceResponse';
-import { ORDER_STATE } from '../domain/order/ORDER_STATE';
-import { RISK_CONTROL_STATE } from '../domain/risk/RISK_CONTROL_STATE';
-import { USER_AUTH_STATE } from '../domain/user/USER_AUTH_STATE';
-import { NativeAppInfo } from '../application/nativeAppInfo';
-import { getQuotaModelStatusAction } from '../ui/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
-import { GetNotificationResponse } from '../externel/backend/indexService/GetNotificationResponse';
+import {GetIndexResponse} from '../externel/backend/indexService/GetIndexResponse';
+import {GetOpenIndexResponse} from '../externel/backend/indexService/GetOpenIndexResponse';
+import {PayableRecords} from '../externel/backend/indexService/PayableRecords';
+import {GetQuotaModelStatusResponse} from '../externel/backend/loanService/GetQuotaModelStatusResponse';
+import {GetUserInfoServiceResponse} from '../externel/backend/userService/GetUserInfoServiceResponse';
+import {ORDER_STATE} from '../domain/order/ORDER_STATE';
+import {RISK_CONTROL_STATE} from '../domain/risk/RISK_CONTROL_STATE';
+import {USER_AUTH_STATE} from '../domain/user/USER_AUTH_STATE';
+import {NativeAppInfo} from '../application/nativeAppInfo';
+import {getQuotaModelStatusAction} from '../ui/pages/IndexPage/userUsecaseSaga/userReacquireCreditSaga';
+import {GetNotificationResponse} from '../externel/backend/indexService/GetNotificationResponse';
+
 export interface InitialState {
   openIndexAPI: GetOpenIndexResponse | null;
   indexAPI: GetIndexResponse | null;

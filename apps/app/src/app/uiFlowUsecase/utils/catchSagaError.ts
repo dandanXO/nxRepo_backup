@@ -1,11 +1,5 @@
-import axios, { AxiosError } from 'axios';
-import { put } from 'redux-saga/effects';
-
-import { alertModal } from '../../ui/components/alertModal';
-import { SentryModule } from '../../modules/sentry';
-import { APIBoundaryModuleSlice } from '../../reduxStore/apiBoundaryModuleSlice';
-import {push} from "@lagunovsky/redux-react-router";
-import {PageOrModalPathEnum} from "../../ui/PageOrModalPathEnum";
+import axios, {AxiosError} from 'axios';
+import {SentryModule} from '../../modules/sentry';
 
 export function* catchSagaError(error: any) {
   // console.log('catchSagaError.error', error);

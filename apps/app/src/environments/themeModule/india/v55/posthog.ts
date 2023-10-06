@@ -1,4 +1,4 @@
-import { PostHogConfig } from 'posthog-js';
+import {PostHogConfig} from 'posthog-js';
 
 
 import {commonPosthogConfig} from "../../../../app/modules/posthog/commonPosthogConfig";

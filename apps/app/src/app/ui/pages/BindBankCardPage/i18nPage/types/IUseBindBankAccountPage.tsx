@@ -1,5 +1,8 @@
-import { GetBindCardDropListResponse } from '../../../../../externel/backend/rtk/old/GetBindCardDropList';
-import { PostBankBindSaveRequest, PostPKBankBindSaveRequest } from '../../../../../externel/backend/rtk/old/postBankBindSave';
+import {GetBindCardDropListResponse} from '../../../../../externel/backend/rtk/old/GetBindCardDropList';
+import {
+  PostBankBindSaveRequest,
+  PostPKBankBindSaveRequest
+} from '../../../../../externel/backend/rtk/old/postBankBindSave';
 
 export type IUseBindBankAccountPage = {
   // NOTE: 綁定

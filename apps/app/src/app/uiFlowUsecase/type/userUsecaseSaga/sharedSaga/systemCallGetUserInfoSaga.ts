@@ -1,16 +1,14 @@
-import { Action, Location } from 'history';
-import { call, put, select } from 'redux-saga/effects';
+import {Location} from 'history';
+import {call, put, select} from 'redux-saga/effects';
 
-import { Service } from '../../../../externel/backend';
-import { GetUserInfoServiceResponse } from '../../../../externel/backend/userService/GetUserInfoServiceResponse';
-import { getToken } from '../../../../application/getToken';
-import { SentryModule } from '../../../../modules/sentry';
-import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';
-import { RootState } from '../../../../reduxStore';
-import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
-import { catchSagaError } from '../../../utils/catchSagaError';
+import {Service} from '../../../../externel/backend';
+import {GetUserInfoServiceResponse} from '../../../../externel/backend/userService/GetUserInfoServiceResponse';
+import {getToken} from '../../../../application/getToken';
+import {PageOrModalPathEnum} from '../../../../ui/PageOrModalPathEnum';
+import {RootState} from '../../../../reduxStore';
+import {indexPageSlice} from '../../../../reduxStore/indexPageSlice';
+import {catchSagaError} from '../../../utils/catchSagaError';
 import {MonitorUsecaseFlow} from "../../../../uiFlowUsecaseMoniter";
-import {push} from "@lagunovsky/redux-react-router";
 
 export function* systemCallGetUserInfoSaga() {
 

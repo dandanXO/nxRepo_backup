@@ -1,10 +1,10 @@
-import { environment } from '../../../../environments/environmentModule/environment';
+import {environment} from '../../../../environments/environmentModule/environment';
 import React from 'react';
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 
-import { getToken } from '../../../application/getToken';
-import { Button } from '../../core-components/Button';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {getToken} from '../../../application/getToken';
+import {Button} from '../../core-components/Button';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 
 export const CategoryPage = () => {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
-import { useLocation, useNavigate } from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 
-import { Divider, ListItem, Overlay, Title } from '@frontend/mobile/shared/ui';
+import {Overlay} from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../core-components/Button';
+import {Button} from '../../core-components/Button';
 
 type SetPrimarySuccessModalProps = {
   setIsSetPrimarySuccess: React.Dispatch<React.SetStateAction<boolean>>;

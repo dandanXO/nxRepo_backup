@@ -1,4 +1,4 @@
-import { WalletVendor } from './WalletVendor';
+import {WalletVendor} from './WalletVendor';
 
 export interface GetPHBindCardDropListResponse {
   availableWalletVendors: WalletVendor[];

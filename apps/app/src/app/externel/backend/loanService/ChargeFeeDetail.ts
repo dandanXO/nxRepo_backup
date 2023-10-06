@@ -1,4 +1,4 @@
-import { ChargeFeeItem } from './ChargeFeeItem';
+import {ChargeFeeItem} from './ChargeFeeItem';
 
 export interface ChargeFeeDetail {
   items?: ChargeFeeItem[];

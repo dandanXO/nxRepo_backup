@@ -1,5 +1,5 @@
 import {useSelector} from "react-redux";
-import {Route, Routes, useLocation} from "react-router";
+import {Route, Routes} from "react-router";
 import {RootState} from "../../reduxStore";
 
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";

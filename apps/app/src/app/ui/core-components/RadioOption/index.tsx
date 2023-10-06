@@ -1,7 +1,8 @@
-import { RiCheckboxBlankCircleLine } from '@react-icons/all-files/ri/RiCheckboxBlankCircleLine';
-import { RiRadioButtonFill } from '@react-icons/all-files/ri/RiRadioButtonFill';
-import React, { Component, useState } from 'react';
+import {RiCheckboxBlankCircleLine} from '@react-icons/all-files/ri/RiCheckboxBlankCircleLine';
+import {RiRadioButtonFill} from '@react-icons/all-files/ri/RiRadioButtonFill';
+import React, {useState} from 'react';
 import {tcx} from "../../../modules/ui/tailwindcss";
+
 interface IRadio {
   options: { value: string; label: string }[];
   onChange: (value: string) => void;

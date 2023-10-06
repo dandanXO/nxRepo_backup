@@ -1,10 +1,10 @@
-import { takeLatest } from 'redux-saga/effects';
+import {takeLatest} from 'redux-saga/effects';
 
-import { errorFallback } from '../../../../uiFlowUsecase/utils/errorFallback';
-import { LoginPageUseCaseActionsInstance } from './index';
-import { userGetOTPSaga } from './userGetOTPSaga';
-import { userLoginSaga } from './userLoginSaga';
-import { userResendSaga } from './userResendSaga';
+import {errorFallback} from '../../../../uiFlowUsecase/utils/errorFallback';
+import {LoginPageUseCaseActionsInstance} from './index';
+import {userGetOTPSaga} from './userGetOTPSaga';
+import {userLoginSaga} from './userLoginSaga';
+import {userResendSaga} from './userResendSaga';
 
 export function* watchLoginPageSaga() {
   console.log('[app][saga] 1.3');

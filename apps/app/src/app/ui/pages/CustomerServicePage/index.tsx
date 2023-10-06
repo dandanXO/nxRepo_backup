@@ -1,14 +1,14 @@
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { RootState } from '../../../reduxStore';
-import { Button } from '../../core-components/Button';
-import { Navigation } from '../../core-components/Navigation';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
+import {RootState} from '../../../reduxStore';
+import {Button} from '../../core-components/Button';
+import {Navigation} from '../../core-components/Navigation';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {getToken} from '../../../application/getToken';
 import CustomServiceIcon from './CustomServiceIcon'
-import { Horizontal } from '../../core-components/Horizontal';
-import { USER_AUTH_STATE } from '../../../domain/user/USER_AUTH_STATE';
+import {Horizontal} from '../../core-components/Horizontal';
+import {USER_AUTH_STATE} from '../../../domain/user/USER_AUTH_STATE';
 import {useMailToRUL} from "../../hooks/useMailToRUL";
 import {isShowNavigation} from "../../../device/isShowNavigation";
 

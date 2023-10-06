@@ -1,12 +1,12 @@
-import { useNavigate } from 'react-router';
-import { Button } from '../../core-components/Button';
+import {useNavigate} from 'react-router';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { CloseButton } from '../../core-components/CloseButton';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { useDispatch } from 'react-redux';
+import {CloseButton} from '../../core-components/CloseButton';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {useDispatch} from 'react-redux';
 import ThankYouIcon from './ThankYouIcon';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {getToken} from '../../../application/getToken';
 
 const StarRatingSuccessModal = () => {
     const navigate = useNavigate();

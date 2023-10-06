@@ -1,12 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import {useEffect, useRef, useState} from 'react';
 
-import { environment } from '../../../../environments/environmentModule/environment';
-import { GetLoanRecordListRequest } from '../../../externel/backend/loanService/GetLoanRecordListRequest';
-import { useLazyGetLoanRecordListQuery } from '../../../externel/backend/rtk';
+import {environment} from '../../../../environments/environmentModule/environment';
 import Tag from '../../core-components/Tag';
-import { Navigation } from '../../core-components/Navigation';
-import { Page } from '../../core-components/Page';
+import {Navigation} from '../../core-components/Navigation';
+import {Page} from '../../core-components/Page';
 import ExtendPaymentItem from './ExtendPaymentItem';
 import OverduePaymentItem from './OverduePaymentItem';
 import PayoffPaymentItem from './PayoffPaymentItem';
@@ -14,11 +11,11 @@ import ProcessingPaymentItem from './ProcessingPaymentItem';
 import RejectPaymentItem from './RejectPaymentItem';
 import UnpaidPaymentItem from './UnpaidPaymentItem';
 // @ts-ignore
-import { default as data } from './data.json';
-import { useDispatch, useSelector } from 'react-redux';
-import { RepaymentPageSagaActions } from './userUsecaseSaga';
-import { RepaymentPageActionPayload, repaymentPageSlice } from '../../../reduxStore/repaymentPageSlice';
-import { RootState } from '../../../reduxStore';
+import {default as data} from './data.json';
+import {useDispatch, useSelector} from 'react-redux';
+import {RepaymentPageSagaActions} from './userUsecaseSaga';
+import {repaymentPageSlice} from '../../../reduxStore/repaymentPageSlice';
+import {RootState} from '../../../reduxStore';
 
 const RepaymentPage = () => {
 

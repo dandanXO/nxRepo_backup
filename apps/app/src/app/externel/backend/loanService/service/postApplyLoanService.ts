@@ -1,5 +1,5 @@
-import { gateway } from '../../../../gateway';
-import { LoanServiceRequest } from '../LoanServiceRequest';
+import {gateway} from '../../../../gateway';
+import {LoanServiceRequest} from '../LoanServiceRequest';
 
 export const postApplyLoanService = async (req: LoanServiceRequest) => {
   const { data, success }: { data: LoanServiceResponse; success: boolean } = await gateway(

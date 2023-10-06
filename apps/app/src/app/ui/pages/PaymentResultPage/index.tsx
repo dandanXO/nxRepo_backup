@@ -1,14 +1,12 @@
 import queryString from 'query-string';
 import React from 'react';
 
-import { IndiaCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import { environment } from '../../../../environments/environmentModule/environment';
-import { renderByCountry } from '../../../modules/i18n';
-import { NativeAppInfo } from '../../../application/nativeAppInfo';
+import {IndiaCountry, MexicoCountry, PhilippinesCountry} from '@frontend/shared/domain';
+import {environment} from '../../../../environments/environmentModule/environment';
+import {renderByCountry} from '../../../modules/i18n';
+import {NativeAppInfo} from '../../../application/nativeAppInfo';
 import IndiaPaymentResultPage from './i18nPage/IndiaPaymentResultPage';
 import PhilippinesPaymentResultPage from './i18nPage/PhilippinesPaymentResultPage';
-import { MexicoCountry } from '@frontend/shared/domain';
 import MexicoPaymentResultPage from './i18nPage/MexicoPaymentResultPage';
 import {useLocation} from "react-router";
 

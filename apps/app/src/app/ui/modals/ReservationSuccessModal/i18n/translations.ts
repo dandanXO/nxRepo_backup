@@ -1,4 +1,4 @@
-import { i18nComponent } from '../../../../modules/i18n/i18nComponent';
+import {i18nComponent} from '../../../../modules/i18n/i18nComponent';
 
 export const i18nReservationSuccessModal: i18nComponent = {
   namespace: 'modals/i18nReservationSuccessModal',

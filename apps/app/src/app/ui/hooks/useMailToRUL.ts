@@ -1,4 +1,4 @@
-import { useAppInfo } from "./useAppInfo";
+import {useAppInfo} from "./useAppInfo";
 import {useUserPhoneNumber} from "./useUserPhoneNumber";
 import {useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";

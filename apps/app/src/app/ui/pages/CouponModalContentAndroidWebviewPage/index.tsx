@@ -1,10 +1,10 @@
-import { environment } from 'apps/app/src/environments/environmentModule/environment';
+import {environment} from 'apps/app/src/environments/environmentModule/environment';
 import CouponImageSource from '../../components/images/coupon.png';
-import { AllCountryIdentityName } from 'libs/shared/domain/src/country/enum/AllCountryIdentityName';
+import {AllCountryIdentityName} from 'libs/shared/domain/src/country/enum/AllCountryIdentityName';
 import MexicoCoupon from './i18n/MexicoCoupon.svg';
 import PhilippinesCoupon from './i18n/PhilippinesCoupon.png';
 
-import { NativeAppInfo } from '../../../application/nativeAppInfo';
+import {NativeAppInfo} from '../../../application/nativeAppInfo';
 
 const CouponModalContentAndroidWebviewPage = () => {
 

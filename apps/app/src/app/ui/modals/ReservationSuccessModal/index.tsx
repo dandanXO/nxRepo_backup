@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router';
-import { Button } from '../../core-components/Button';
+import {useNavigate} from 'react-router';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { useDispatch } from 'react-redux';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
-import { i18nReservationSuccessModal } from './i18n/translations';
-import { useTranslation } from 'react-i18next';
-import { environment } from 'apps/app/src/environments/environmentModule/environment';
-import { MexicoCountry } from '@frontend/shared/domain';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {useDispatch} from 'react-redux';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {getToken} from '../../../application/getToken';
+import {i18nReservationSuccessModal} from './i18n/translations';
+import {useTranslation} from 'react-i18next';
+import {environment} from 'apps/app/src/environments/environmentModule/environment';
+import {MexicoCountry} from '@frontend/shared/domain';
 import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 const ReservationSuccessModal = () => {

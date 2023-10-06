@@ -1,10 +1,10 @@
-import { LocationChangeAction, push, back, go } from '@lagunovsky/redux-react-router';
-import { put, select, takeLatest } from 'redux-saga/effects';
-import { PageOrModalPathEnum } from '../../ui/PageOrModalPathEnum';
-import { getToken } from '../../application/getToken';
-import { RootState } from '../../reduxStore';
-import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
-import { isSimpleWebView } from "../../device/isSimpleWebView";
+import {go, LocationChangeAction, push} from '@lagunovsky/redux-react-router';
+import {put, select} from 'redux-saga/effects';
+import {PageOrModalPathEnum} from '../../ui/PageOrModalPathEnum';
+import {getToken} from '../../application/getToken';
+import {RootState} from '../../reduxStore';
+import {modalSlice} from '../../reduxStore/modalSlice';
+import {isSimpleWebView} from "../../device/isSimpleWebView";
 import {getOrderNo} from "../../externel/window/querystring/getOrderNo";
 import {GlobalAppMode} from "../../application/GlobalAppMode";
 

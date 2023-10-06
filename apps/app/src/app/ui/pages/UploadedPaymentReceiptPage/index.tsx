@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router';
+import {useCallback} from 'react';
+import {useNavigate} from 'react-router';
 
-import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
 
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { PureUploadedPaymentReceiptPage } from './PureUploadedPaymentReceiptPage';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {PureUploadedPaymentReceiptPage} from './PureUploadedPaymentReceiptPage';
 
 const UploadedPaymentReceiptPage = () => {
   const navigate = useNavigate();

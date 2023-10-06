@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router';
+import React, {useEffect, useState} from 'react';
+import {Outlet} from 'react-router';
 
-import { IUseBindBankAccountPage } from '../types/IUseBindBankAccountPage';
-import { BankAccountForm } from './BankAccountForm';
+import {IUseBindBankAccountPage} from '../types/IUseBindBankAccountPage';
+import {BankAccountForm} from './BankAccountForm';
 import ConfirmBindBankCardModal from '../../../../modals/ConfirmBindBankCardModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../../reduxStore';
-import { useLazyGetMXBindCardDropListQuery } from '../../../../../externel/backend/rtk';
-import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
-import { i18nBankBindAccountPage } from '../../translations';
-import { useTranslation } from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../../../../reduxStore';
+import {useLazyGetMXBindCardDropListQuery} from '../../../../../externel/backend/rtk';
+import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
+import {i18nBankBindAccountPage} from '../../translations';
+import {useTranslation} from 'react-i18next';
 
 
 export const MexicoBindBankAccountPage = (props: IUseBindBankAccountPage) => {

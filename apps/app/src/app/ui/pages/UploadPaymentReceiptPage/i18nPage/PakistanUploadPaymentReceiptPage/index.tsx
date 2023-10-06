@@ -1,13 +1,13 @@
 import React from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
-import { Input } from '@frontend/mobile/shared/ui';
+import {Input} from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../../../core-components/Button';
+import {Button} from '../../../../core-components/Button';
 import UploadingFileModal from '../../modal/UploadingFileModal';
-import { i18nUploadPaymentReceiptPage } from '../translations';
-import { I18UploadPaymentReceiptPageProps } from '../types/I18UploadPaymentReceiptPageProps';
-import { PageContent } from '../../../../core-components/PageContent';
+import {i18nUploadPaymentReceiptPage} from '../translations';
+import {I18UploadPaymentReceiptPageProps} from '../types/I18UploadPaymentReceiptPageProps';
+import {PageContent} from '../../../../core-components/PageContent';
 import PakistanCameraSvgIcon from './PakistanCameraSvgIcon';
 
 

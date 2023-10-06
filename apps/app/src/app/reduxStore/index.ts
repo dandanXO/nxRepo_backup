@@ -1,19 +1,19 @@
-import { createRouterMiddleware, createRouterReducer } from '@lagunovsky/redux-react-router';
-import { configureStore } from '@reduxjs/toolkit';
-import { createBrowserHistory } from 'history';
+import {createRouterMiddleware, createRouterReducer} from '@lagunovsky/redux-react-router';
+import {configureStore} from '@reduxjs/toolkit';
+import {createBrowserHistory} from 'history';
 import createSagaMiddleware from 'redux-saga';
 
-import { API, APIV3 } from '../externel/backend/rtk';
-import { WatchAppSaga } from '../uiFlowUsecase/watchAppSaga';
-import { APIBoundaryModuleSlice } from './apiBoundaryModuleSlice';
-import { appSlice } from './appSlice';
-import { indexPageSlice } from './indexPageSlice';
-import { loginSlice } from './loginSlice';
-import { modalSlice } from './modalSlice';
-import { loadingSlice } from './loadingSlice';
-import { repaymentPageSlice } from './repaymentPageSlice';
-import { repaymentDetailPageSlice } from './repaymentDetailPageSlice';
-import { rtkPendingSlice } from './rtkPendingSlice';
+import {API, APIV3} from '../externel/backend/rtk';
+import {WatchAppSaga} from '../uiFlowUsecase/watchAppSaga';
+import {APIBoundaryModuleSlice} from './apiBoundaryModuleSlice';
+import {appSlice} from './appSlice';
+import {indexPageSlice} from './indexPageSlice';
+import {loginSlice} from './loginSlice';
+import {modalSlice} from './modalSlice';
+import {loadingSlice} from './loadingSlice';
+import {repaymentPageSlice} from './repaymentPageSlice';
+import {repaymentDetailPageSlice} from './repaymentDetailPageSlice';
+import {rtkPendingSlice} from './rtkPendingSlice';
 import {SentryModule} from "../modules/sentry";
 
 export const history = createBrowserHistory();

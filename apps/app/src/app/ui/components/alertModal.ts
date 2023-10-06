@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import { Modal } from '@frontend/mobile/shared/ui';
+import {Modal} from '@frontend/mobile/shared/ui';
 
 
 // const customColors = require("../../../environments/theme/india/v55/tailwind.colors");

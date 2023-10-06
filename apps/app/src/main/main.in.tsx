@@ -1,14 +1,14 @@
 import "../polyfills";
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
-import { SentryModule } from '../app/modules/sentry';
+import '../app/modules/sentry';
 import "../app/application/errorHandler";
 import '../app/modules/posthog';
 
-import React, { StrictMode } from 'react';
+import React, {StrictMode} from 'react';
 import * as ReactDOM from 'react-dom/client';
 
 // NOTE: Modules
-import { NativeAppInfo } from '../app/application/nativeAppInfo';
+import {NativeAppInfo} from '../app/application/nativeAppInfo';
 import '../app/modules/i18n';
 import {I18nModule} from "../app/modules/i18n";
 import '../app/device/timezone';

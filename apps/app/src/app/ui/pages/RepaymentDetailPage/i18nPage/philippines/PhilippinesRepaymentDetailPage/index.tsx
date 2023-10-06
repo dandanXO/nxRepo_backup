@@ -1,29 +1,29 @@
-import { IoIosArrowDown } from '@react-icons/all-files/io/IoIosArrowDown';
-import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp';
+import {IoIosArrowDown} from '@react-icons/all-files/io/IoIosArrowDown';
+import {IoIosArrowUp} from '@react-icons/all-files/io/IoIosArrowUp';
 import moment from 'moment/moment';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
+import {AmountPaidIcon} from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
-import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/backend/rtk/old/getLoanDetail';
-import { RootState } from '../../../../../../reduxStore';
+import {GetLoanDetailResponse} from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
+import {GetLoanDetailChargeFeeDetailItems} from '../../../../../../externel/backend/rtk/old/getLoanDetail';
+import {RootState} from '../../../../../../reduxStore';
 import Money from '../../../../../components/Money';
-import { Button } from '../../../../../core-components/Button';
+import {Button} from '../../../../../core-components/Button';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';
-import { PageContent } from '../../../../../core-components/PageContent';
+import {PageContent} from '../../../../../core-components/PageContent';
 import PaymentProgressingModal from '../../../../../modals/PaymentProgressingModal';
 import ReservationProductsModal from '../../../../../modals/ReservationProductsModal';
 import ReservationSuccessModal from '../../../../../modals/ReservationSuccessModal';
-import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
-import { i18nLoanDetailsPage } from '../../../translations';
+import {useDynamicChargeFeeList} from '../../../hooks/useDynamicChargeFeeList';
+import {i18nLoanDetailsPage} from '../../../translations';
 import VipIcon from '../../component/VipIcon';
-import { tcx } from 'apps/app/src/app/modules/ui/tailwindcss';
-import { Status } from 'apps/app/src/app/ui/statusEnum';
+import {tcx} from 'apps/app/src/app/modules/ui/tailwindcss';
+import {Status} from 'apps/app/src/app/ui/statusEnum';
 import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
 import {getToken} from "../../../../../../application/getToken";
 

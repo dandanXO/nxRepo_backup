@@ -1,19 +1,13 @@
-import { MexicoCountry } from '@frontend/shared/domain';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router';
-
-import { Overlay } from '@frontend/mobile/shared/ui';
-
-import { IndiaCountry } from '@frontend/shared/domain';
-import { PakistanCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import { environment } from '../../../../environments/environmentModule/environment';
-import { renderByCountry } from '../../../modules/i18n';
-import { RootState } from '../../../reduxStore';
+import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router';
+import {environment} from '../../../../environments/environmentModule/environment';
+import {renderByCountry} from '../../../modules/i18n';
+import {RootState} from '../../../reduxStore';
 import useExtendCreate from '../../hooks/useExtendCreate';
 import useRepayTypes from '../../hooks/useRepayTypes';
-import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
+import {RepaymentDetailPageUseCaseActions} from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import IndiaExtendModal from './i18n/IndiaExtendModal';
 import MexicoExtendModal from './i18n/MexicoExtendModal';
 import PakistanExtendModal from './i18n/PakistanExtendModal';

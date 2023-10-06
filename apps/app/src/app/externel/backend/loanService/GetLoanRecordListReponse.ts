@@ -1,4 +1,4 @@
-import { GetLoanRecord } from './GetLoanRecord';
+import {GetLoanRecord} from './GetLoanRecord';
 import {Pageable} from "./Pageable";
 import {Sort} from "./Sort";
 

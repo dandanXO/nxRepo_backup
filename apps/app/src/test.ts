@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/react';
+
 const a = new Sentry.Replay();
 
 console.log("a", a);

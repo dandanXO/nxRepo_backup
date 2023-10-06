@@ -1,17 +1,16 @@
-import { useCallback, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import {useCallback} from 'react';
+import {useTranslation} from 'react-i18next';
 
-import { InputValue, Modal } from '@frontend/mobile/shared/ui';
+import {InputValue, Modal} from '@frontend/mobile/shared/ui';
 
-import { BankVendor, GetBindCardDropListResponse } from '../../../../../externel/backend/rtk/old/GetBindCardDropList';
-import { SentryModule } from '../../../../../modules/sentry';
-import { i18nBankBindAccountPage } from '../../translations';
-import { isSimpleWebView } from '../../../../../device/isSimpleWebView';
-import { useNavigate } from 'react-router';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import { getToken } from '../../../../../application/getToken';
-import { useDispatch } from 'react-redux';
-import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
+import {BankVendor, GetBindCardDropListResponse} from '../../../../../externel/backend/rtk/old/GetBindCardDropList';
+import {i18nBankBindAccountPage} from '../../translations';
+import {isSimpleWebView} from '../../../../../device/isSimpleWebView';
+import {useNavigate} from 'react-router';
+import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
+import {getToken} from '../../../../../application/getToken';
+import {useDispatch} from 'react-redux';
+import {loadingSlice} from 'apps/app/src/app/reduxStore/loadingSlice';
 import {MonitorUsecaseFlow} from "../../../../../uiFlowUsecaseMoniter";
 import {changeLocationHref} from "../../../../../application/errorHandler";
 

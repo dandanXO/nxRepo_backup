@@ -1,18 +1,18 @@
 import cx from 'classnames';
 import moment from 'moment';
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import {useState} from 'react';
+import {useNavigate} from 'react-router';
 
-import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
-import { getToken } from '../../../application/getToken';
+import {GetLoanRecord} from '../../../externel/backend/loanService/GetLoanRecord';
+import {getToken} from '../../../application/getToken';
 
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';
 import Money from '../../components/Money';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { CardCollapseSection } from './CardCollapseSection';
-import { CardContentSection } from './CardContentSection';
-import { CardHeaderSection } from './CardHeaderSection';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {CardCollapseSection} from './CardCollapseSection';
+import {CardContentSection} from './CardContentSection';
+import {CardHeaderSection} from './CardHeaderSection';
 import {formatDate} from "../../../modules/format/formatDate";
 import {Status} from "../../statusEnum";
 

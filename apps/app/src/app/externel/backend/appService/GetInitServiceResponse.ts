@@ -1,4 +1,4 @@
-import { SDKProvider } from './SDKProvider';
+import {SDKProvider} from './SDKProvider';
 
 export interface GetInitServiceResponse {
   couponH5Url: string;

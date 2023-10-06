@@ -1,11 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { z } from 'zod';
+import {useCallback, useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {z} from 'zod';
 
-import { InputValue, Modal } from '@frontend/mobile/shared/ui';
-import { GetBindCardDropListResponse, WalletVendor } from '../../../../../../externel/backend/rtk/old/GetBindCardDropList';
-import { i18nBankBindAccountPage } from '../../../translations';
-import { processWalletDisplayName } from './customization/processWalletDisplayName';
+import {InputValue} from '@frontend/mobile/shared/ui';
+import {
+  GetBindCardDropListResponse,
+  WalletVendor
+} from '../../../../../../externel/backend/rtk/old/GetBindCardDropList';
+import {i18nBankBindAccountPage} from '../../../translations';
+import {processWalletDisplayName} from './customization/processWalletDisplayName';
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;

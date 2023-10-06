@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router';
-import { Button } from '../../core-components/Button';
+import {useNavigate} from 'react-router';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { RootState } from '../../../reduxStore';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import {RootState} from '../../../reduxStore';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 
 const ExitConfirmModal = () => {
 

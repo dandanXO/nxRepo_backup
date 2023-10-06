@@ -1,12 +1,11 @@
 import {useDispatch, useSelector} from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 
-import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../core-components/Navigation';
-import {go, routerActions, push, back, forward} from "@lagunovsky/redux-react-router";
-import { Page } from '../../core-components/Page';
+import {RootState} from '../../../reduxStore';
+import {Navigation} from '../../core-components/Navigation';
+import {Page} from '../../core-components/Page';
 import {loadingSlice} from "../../../reduxStore/loadingSlice";
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
 const PrivacyPolicyPage = () => {
   const navigate = useNavigate();

@@ -1,5 +1,4 @@
-
-import { applyTheme } from './utils';
+import {applyTheme} from './utils';
 
 import {themeConfig} from "./themeConfig";
 import {IAndroidAppInfo} from "../../../externel/nativeApp/types/IAndroidAppInfo";

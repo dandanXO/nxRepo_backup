@@ -1,12 +1,9 @@
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
-
-import { RootState } from '../../../reduxStore';
-import { Navigation } from '../../core-components/Navigation';
-import { Page } from '../../core-components/Page';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { getToken } from '../../../application/getToken';
-import { Button } from '../../core-components/Button';
+import {useNavigate} from 'react-router';
+import {Navigation} from '../../core-components/Navigation';
+import {Page} from '../../core-components/Page';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {getToken} from '../../../application/getToken';
+import {Button} from '../../core-components/Button';
 
 const DeleteAccountPage = () => {
     const navigate = useNavigate();

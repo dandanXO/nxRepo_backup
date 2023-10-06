@@ -1,7 +1,6 @@
-import { IndiaCountry } from '@frontend/shared/domain';
-import { PakistanCountry } from '@frontend/shared/domain';
+import {IndiaCountry} from '@frontend/shared/domain';
 
-import { environment } from '../../environments/environmentModule/environment';
+import {environment} from '../../environments/environmentModule/environment';
 
 interface IStatusEnum {
   [key: string]: {

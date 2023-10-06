@@ -1,4 +1,4 @@
-import { i18nComponent } from '../../../modules/i18n/i18nComponent';
+import {i18nComponent} from '../../../modules/i18n/i18nComponent';
 
 export const i18nReservationProductsModal: i18nComponent = {
   namespace: 'modals/i18nReservationProductsModal',
@@ -42,7 +42,7 @@ export const i18nReservationProductsModal: i18nComponent = {
       'Loan Agreement': 'Acuerdo de Préstamo.',
     },
     bn_BD: {
-     
+
     },
   },
 };

@@ -2,14 +2,13 @@ import {AiFillCheckCircle} from '@react-icons/all-files/ai/AiFillCheckCircle';
 import React from 'react';
 import styled from 'styled-components';
 import {IThemeConfig} from '@frontend/mobile/shared/ui';
-import { PakistanCountry } from '@frontend/shared/domain';
+import {BangladeshCountry, PakistanCountry} from '@frontend/shared/domain';
 import {environment} from '../../../../../../environments/environmentModule/environment';
 import {renderByCountry} from '../../../../../modules/i18n';
 import {Label} from './Label';
 import BDMobileWalletSVG from './bd_ic_mobile_wallet_icon.png';
 import BankAccountSVG from './ic_bank_account_icon.svg';
 import MobileWalletSVG from './ic_mobile_wallet_icon.svg';
-import { BangladeshCountry } from '@frontend/shared/domain';
 
 const Container = styled.div`
   margin-bottom: 8px;

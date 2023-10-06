@@ -1,6 +1,6 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import { AppThemeProvider } from '@frontend/mobile/shared/ui';
+import {AppThemeProvider} from '@frontend/mobile/shared/ui';
 
 import UploadingFileModal from './index';
 

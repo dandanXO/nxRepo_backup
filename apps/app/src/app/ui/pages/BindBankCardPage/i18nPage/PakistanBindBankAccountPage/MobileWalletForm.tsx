@@ -1,16 +1,15 @@
-import { Input } from '@frontend/mobile/shared/ui';
-import React, { ClipboardEvent, useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
+import {Input} from '@frontend/mobile/shared/ui';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router';
 import Select from 'react-select';
-import { Button } from '../../../../core-components/Button';
-import { selectStyles } from '../../../../core-components/selectStyles';
-import { t } from 'i18next';
-import { useDispatch } from 'react-redux';
-import { modalInitialState, modalSlice } from '../../../../../reduxStore/modalSlice';
+import {Button} from '../../../../core-components/Button';
+import {selectStyles} from '../../../../core-components/selectStyles';
+import {useDispatch} from 'react-redux';
+import {modalInitialState, modalSlice} from '../../../../../reduxStore/modalSlice';
 import ValidateInput from '../../../../core-components/ValidateInput';
-import { validateMobile } from './validation';
-import { useTranslation } from 'react-i18next';
-import { i18nBankBindAccountPage } from '../../translations';
+import {validateMobile} from './validation';
+import {useTranslation} from 'react-i18next';
+import {i18nBankBindAccountPage} from '../../translations';
 import {InputValue} from "../../../../core-components/form/InputValue";
 
 type IMobileWalletForm = {

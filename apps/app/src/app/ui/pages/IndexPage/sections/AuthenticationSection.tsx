@@ -1,7 +1,7 @@
-import { useDispatch } from 'react-redux';
+import {useDispatch} from 'react-redux';
 
-import { Button } from '../../../core-components/Button';
-import { IndexPageSagaAction } from '../userUsecaseSaga/indexPageActions';
+import {Button} from '../../../core-components/Button';
+import {IndexPageSagaAction} from '../userUsecaseSaga/indexPageActions';
 
 export const AuthenticationSection = () => {
   const dispatch = useDispatch();

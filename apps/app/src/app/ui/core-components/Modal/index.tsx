@@ -1,4 +1,3 @@
-
 import cx from 'classnames';
 
 interface IModal {

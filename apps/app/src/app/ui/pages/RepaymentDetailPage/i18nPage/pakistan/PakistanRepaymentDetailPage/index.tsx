@@ -1,25 +1,23 @@
 import cx from 'classnames';
 import moment from 'moment';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 
-import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
+import {AmountPaidIcon} from '@frontend/mobile/shared/ui';
 
-import { getToken } from '../../../../../../application/getToken';
+import {getToken} from '../../../../../../application/getToken';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';
 import Money from '../../../../../components/Money';
-import { Button } from '../../../../../core-components/Button';
+import {Button} from '../../../../../core-components/Button';
 
-import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
-
-import {useMemo} from "react";
+import {GetLoanDetailResponse} from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
 import {useDynamicChargeFeeList} from "../../../hooks/useDynamicChargeFeeList";
 import {formatDate} from "../../../../../../modules/format/formatDate";
-import { useTranslation } from 'react-i18next';
-import { i18nLoanDetailsPage } from '../../../translations';
+import {useTranslation} from 'react-i18next';
+import {i18nLoanDetailsPage} from '../../../translations';
 import RepaymentDetailDemo from '../RepaymentDetailDemo';
-import { useSelector } from 'react-redux';
-import { RootState } from 'apps/app/src/app/reduxStore';
+import {useSelector} from 'react-redux';
+import {RootState} from 'apps/app/src/app/reduxStore';
 import {Status} from "../../../../../statusEnum";
 import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
 

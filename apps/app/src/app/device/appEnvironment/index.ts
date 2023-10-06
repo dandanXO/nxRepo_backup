@@ -1,4 +1,4 @@
-import { environment } from '../../../environments/environmentModule/environment';
+import {environment} from '../../../environments/environmentModule/environment';
 
 export const AppEnvironment = {
   isLocalhost: function () {

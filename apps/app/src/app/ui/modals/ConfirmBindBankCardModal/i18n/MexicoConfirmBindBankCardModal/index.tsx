@@ -1,13 +1,14 @@
-import { useLocation, useNavigate } from 'react-router';
-import { Button } from '../../../../core-components/Button';
+import {useLocation, useNavigate} from 'react-router';
+import {Button} from '../../../../core-components/Button';
 import ListItem from '../../../../core-components/ListItem';
 import Modal from '../../../../core-components/Modal';
-import { InitialStateType, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'apps/app/src/app/reduxStore';
-import { BindBankcardAction } from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
-import { useTranslation } from 'react-i18next';
-import { i18nConfirmBindBankCardModal } from '../translations';
+import {InitialStateType, modalSlice} from 'apps/app/src/app/reduxStore/modalSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from 'apps/app/src/app/reduxStore';
+import {BindBankcardAction} from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
+import {useTranslation} from 'react-i18next';
+import {i18nConfirmBindBankCardModal} from '../translations';
+
 interface IConfirmBindBankCardModal {
     state?: InitialStateType['bindBankcardModal']
 }

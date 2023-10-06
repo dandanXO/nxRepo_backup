@@ -1,6 +1,5 @@
-
 import Modal from '../../../../core-components/Modal';
-import { CloseButton } from '../../../../core-components/CloseButton';
+import {CloseButton} from '../../../../core-components/CloseButton';
 
 
 const IFSCHintModal = (props:{onClick:()=>void}) => {

@@ -1,19 +1,17 @@
 import moment from 'moment';
 import React from 'react';
-import { useNavigate } from 'react-router';
+import {useNavigate} from 'react-router';
 import Select from "../../../../core-components/Select";
 
 import Divider from '../../../../core-components/Divider';
 import ListItem from '../../../../core-components/ListItem';
 import Money from '../../../../components/Money';
-import { Button } from '../../../../core-components/Button';
-import { selectStyles } from '../../../../core-components/selectStyles';
+import {Button} from '../../../../core-components/Button';
 import {formatDate} from "../../../../../modules/format/formatDate";
 import Modal from '../../../../core-components/Modal';
-import { t } from 'i18next';
-import { useTranslation } from 'react-i18next';
-import { i18nExtendModal } from '../../translations';
-import { Status } from '../../../../statusEnum';
+import {useTranslation} from 'react-i18next';
+import {i18nExtendModal} from '../../translations';
+import {Status} from '../../../../statusEnum';
 
 type paymentMethodValueType = {
   value: string;

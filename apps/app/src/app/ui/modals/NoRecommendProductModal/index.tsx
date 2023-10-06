@@ -1,7 +1,7 @@
-import { Button } from '../../core-components/Button';
+import {Button} from '../../core-components/Button';
 import Modal from '../../core-components/Modal';
-import { modalSlice } from '../../../reduxStore/modalSlice';
-import { useDispatch } from 'react-redux';
+import {modalSlice} from '../../../reduxStore/modalSlice';
+import {useDispatch} from 'react-redux';
 
 const NoRecommendProductModal = () => {
 

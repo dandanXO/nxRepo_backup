@@ -1,4 +1,4 @@
-import { IThemeConfig } from '@frontend/mobile/shared/ui';
+import {IThemeConfig} from '@frontend/mobile/shared/ui';
 
 import './onUploadKycBackgroundData';
 

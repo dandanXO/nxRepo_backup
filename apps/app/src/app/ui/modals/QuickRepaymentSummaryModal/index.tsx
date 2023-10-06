@@ -1,27 +1,21 @@
-import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
-import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
+import {MdExpandLess} from '@react-icons/all-files/md/MdExpandLess';
+import {MdExpandMore} from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
-import React, { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
-import {
-    ControlProps,
-    DropdownIndicatorProps,
-    IndicatorSeparatorProps,
-    IndicatorsContainerProps,
-    components,
-} from 'react-select';
+import React, {useEffect, useState} from 'react';
+import {components, DropdownIndicatorProps, IndicatorSeparatorProps,} from 'react-select';
 import Select from "../../core-components/Select";
 
-import { BankAccount } from '../../../externel/backend/userService/BankAccount';
-import { formatPrice } from '../../../modules/format/formatPrice';
-import { IndexPageProps } from '../../../reduxStore';
-import { Button } from '../../core-components/Button';
-import { CloseButton } from '../../core-components/CloseButton';
-import { Horizontal } from '../../core-components/Horizontal';
-import { FinalProductType, FinalProductsSummary } from '../../pages/IndexPage';
-import { Product } from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
-import { FeeRateKeyEnum } from "../../../externel/backend/indexService/FeeRateKeyEnum";
-import { formatDate } from "../../../modules/format/formatDate";
-import { transparent } from 'tailwindcss/colors';
+import {BankAccount} from '../../../externel/backend/userService/BankAccount';
+import {formatPrice} from '../../../modules/format/formatPrice';
+import {IndexPageProps} from '../../../reduxStore';
+import {Button} from '../../core-components/Button';
+import {CloseButton} from '../../core-components/CloseButton';
+import {Horizontal} from '../../core-components/Horizontal';
+import {FinalProductsSummary, FinalProductType} from '../../pages/IndexPage';
+import {Product} from '../../pages/IndexPage/sections/RecommendedProductsSection/Product';
+import {FeeRateKeyEnum} from "../../../externel/backend/indexService/FeeRateKeyEnum";
+import {formatDate} from "../../../modules/format/formatDate";
+import {transparent} from 'tailwindcss/colors';
 
 type Props = IndexPageProps & {
     calculatingProducts: FinalProductType[];

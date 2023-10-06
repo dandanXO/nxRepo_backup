@@ -1,4 +1,4 @@
-import { IndexPageProps } from '../../reduxStore';
+import {IndexPageProps} from '../../reduxStore';
 
 type Props = IndexPageProps;
 

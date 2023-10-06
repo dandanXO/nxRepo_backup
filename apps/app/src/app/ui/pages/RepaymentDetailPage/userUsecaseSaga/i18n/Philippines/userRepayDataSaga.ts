@@ -1,13 +1,16 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { put, race, select, take ,call } from "redux-saga/effects";
-import { API } from "../../../../../../externel/backend/rtk";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {call, put, race, select, take} from "redux-saga/effects";
+import {API} from "../../../../../../externel/backend/rtk";
 
-import { catchSagaError } from "../../../../../../uiFlowUsecase/utils/catchSagaError";
-import { repaymentDetailPageInitialStateType, repaymentDetailPageSlice } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
+import {catchSagaError} from "../../../../../../uiFlowUsecase/utils/catchSagaError";
+import {
+  repaymentDetailPageInitialStateType,
+  repaymentDetailPageSlice
+} from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
 import moment from 'moment';
-import { RootState } from "apps/app/src/app/reduxStore";
-import { userRepaymentDetailSaga } from "../../userRepaymentDetailSaga";
-import { loadingSlice } from "apps/app/src/app/reduxStore/loadingSlice";
+import {RootState} from "apps/app/src/app/reduxStore";
+import {userRepaymentDetailSaga} from "../../userRepaymentDetailSaga";
+import {loadingSlice} from "apps/app/src/app/reduxStore/loadingSlice";
 import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
 
 

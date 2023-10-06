@@ -1,14 +1,12 @@
 import posthog from 'posthog-js';
 
-import { PosthogConfig } from '../../../environments/themeModule/india/v55/posthog';
-import { posthogConfigs } from '../../../environments/posthugModule/posthogConfigs';
-import { NativeAppInfo } from '../../application/nativeAppInfo';
-import { AppEnvironment } from '../../device/appEnvironment';
-import { SentryModule } from '../sentry';
+import {PosthogConfig} from '../../../environments/themeModule/india/v55/posthog';
+import {posthogConfigs} from '../../../environments/posthugModule/posthogConfigs';
+import {AppEnvironment} from '../../device/appEnvironment';
+import {SentryModule} from '../sentry';
 import {AppFlag} from "../../../environments/flag";
 import {GlobalAppMode} from "../../application/GlobalAppMode";
 import {AppModeEnum} from "../../application/AppModeEnum";
-import {appInfoPersistence} from "../../persistant/AppInfoPersistence";
 import {AppProxy} from "../../proxy/appProxy";
 
 const getPosthogConfig = (): PosthogConfig | null => {

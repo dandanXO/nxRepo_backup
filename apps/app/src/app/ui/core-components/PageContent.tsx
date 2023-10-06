@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { tcx } from '../../modules/ui/tailwindcss';
+import {ReactNode} from 'react';
+import {tcx} from '../../modules/ui/tailwindcss';
 import {isShowNavigation} from "../../device/isShowNavigation";
 
 

@@ -1,6 +1,6 @@
 // NOTE: Action: UserApplyProduct
 import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, select, take, takeLatest, race, retry} from 'redux-saga/effects';
+import {call, put, select, take} from 'redux-saga/effects';
 
 import {Service} from '../../../../externel/backend';
 import {LoanServiceResponse} from '../../../../externel/backend/loanService/service/postApplyLoanService';
@@ -14,7 +14,6 @@ import {SentryModule} from "../../../../modules/sentry";
 import {go, routerActions} from "@lagunovsky/redux-react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {getToken} from "../../../../application/getToken";
-import {errorFallback} from "../../../../uiFlowUsecase/utils/errorFallback";
 import {GlobalAppMode} from "../../../../application/GlobalAppMode";
 
 // NOTICE: 中間流程 updateQuickRepaymentSummaryModal 的成功是控制在 saga 內，關閉則是控制在 component。來避免用戶再還沒提交成功中可以回到首頁

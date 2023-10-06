@@ -1,8 +1,7 @@
-
-import { AiOutlineBorder } from '@react-icons/all-files/ai/AiOutlineBorder';
-import { AiFillCheckSquare } from '@react-icons/all-files/ai/AiFillCheckSquare';
+import {AiOutlineBorder} from '@react-icons/all-files/ai/AiOutlineBorder';
+import {AiFillCheckSquare} from '@react-icons/all-files/ai/AiFillCheckSquare';
 import cx from 'classnames'
-import { useState } from 'react';
+import {useState} from 'react';
 
 export interface ICheckboxProps {
     onClick?: (isChecked: boolean) => void;
@@ -14,7 +13,7 @@ export const Checkbox = (props: ICheckboxProps) => {
     const { disable = false, checked: initialChecked = false, onClick } = props;
 
     const [checked, setChecked] = useState(disable ? disable : initialChecked);
-    
+
     const toggleChecked = () => {
         if (disable) return
         setChecked(!checked)

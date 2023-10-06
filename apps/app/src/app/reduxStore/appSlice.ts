@@ -1,11 +1,8 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import { GetInitServiceResponse } from '../externel/backend/appService/GetInitServiceResponse';
-import { IAndroidAppInfo } from '../externel/nativeApp/types/IAndroidAppInfo';
-import {NativeAppInfo} from "../application/nativeAppInfo";
-import queryString from "query-string";
-import {appInfoPersistence} from "../persistant/AppInfoPersistence";
-import { AppProxy } from '../proxy/appProxy';
+import {GetInitServiceResponse} from '../externel/backend/appService/GetInitServiceResponse';
+import {IAndroidAppInfo} from '../externel/nativeApp/types/IAndroidAppInfo';
+import {AppProxy} from '../proxy/appProxy';
 
 export enum AppRunningModeEnum {
   'Unknown',

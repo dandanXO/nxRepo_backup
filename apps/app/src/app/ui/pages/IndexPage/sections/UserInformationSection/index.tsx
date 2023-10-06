@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { ORDER_STATE } from '../../../../../domain/order/ORDER_STATE';
-import { USER_AUTH_STATE } from '../../../../../domain/user/USER_AUTH_STATE';
-import { IndexPageProps } from '../../../../../reduxStore';
-import { PageState } from '../../index';
-import { LatestOrderStatus } from './LatestOrderStatus';
-import { QuotaSliderStatus } from './QuotaSliderStatus';
-import { StatusContainer } from './StatusContainer';
-import { UnAuthenticationStatus } from './UnAuthenticationStatus';
-import { UserInfoSupportSection } from './UserInfoSupportSection';
+import {ORDER_STATE} from '../../../../../domain/order/ORDER_STATE';
+import {USER_AUTH_STATE} from '../../../../../domain/user/USER_AUTH_STATE';
+import {IndexPageProps} from '../../../../../reduxStore';
+import {PageState} from '../../index';
+import {LatestOrderStatus} from './LatestOrderStatus';
+import {QuotaSliderStatus} from './QuotaSliderStatus';
+import {StatusContainer} from './StatusContainer';
+import {UnAuthenticationStatus} from './UnAuthenticationStatus';
+import {UserInfoSupportSection} from './UserInfoSupportSection';
 
 type Props = IndexPageProps &
   PageState & {

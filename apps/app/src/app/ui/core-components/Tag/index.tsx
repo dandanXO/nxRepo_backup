@@ -5,7 +5,7 @@
 // //     style?: string;
 // // }
 import cx from 'classnames';
-import { useEffect, useState } from 'react';
+import {useState} from 'react';
 
 // // const Tag = ({ isActive, onClick, text ,style}: ITagProps) => {
 

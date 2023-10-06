@@ -1,15 +1,13 @@
-import { errorFallback } from "../../../../uiFlowUsecase/utils/errorFallback";
-import { takeLatest } from "redux-saga/effects";
+import {errorFallback} from "../../../../uiFlowUsecase/utils/errorFallback";
+import {takeLatest} from "redux-saga/effects";
 
 
-
-import { RepaymentDetailPageUseCaseActions } from ".";
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import { environment } from "../../../../../environments/environmentModule/environment";
-import { systemShowReservationSaga } from "./systemShowReservationSaga";
-import { userRepayDataSaga } from "./userRepayDataSaga";
-import { userRepaymentDetailSaga } from "./userRepaymentDetailSaga";
-import { userReserveSaga } from "./userReserveSaga";
+import {RepaymentDetailPageUseCaseActions} from ".";
+import {PhilippinesCountry} from '@frontend/shared/domain';
+import {environment} from "../../../../../environments/environmentModule/environment";
+import {systemShowReservationSaga} from "./systemShowReservationSaga";
+import {userRepaymentDetailSaga} from "./userRepaymentDetailSaga";
+import {userReserveSaga} from "./userReserveSaga";
 
 
 export function* watchRepaymentDetailPageSaga() {

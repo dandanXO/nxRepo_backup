@@ -1,8 +1,8 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-import { ReservationProduct } from '../externel/backend/loanService/GetReservationResponse';
-import { ReservationDetail } from '../externel/backend/loanService/PostReservationSubmitRequest';
-import { BankAccount } from '../externel/backend/userService/BankAccount';
+import {ReservationProduct} from '../externel/backend/loanService/GetReservationResponse';
+import {ReservationDetail} from '../externel/backend/loanService/PostReservationSubmitRequest';
+import {BankAccount} from '../externel/backend/userService/BankAccount';
 
 export type InitialStateType = {
   authorizationModal: {

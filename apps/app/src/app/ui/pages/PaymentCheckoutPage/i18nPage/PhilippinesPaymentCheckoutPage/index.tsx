@@ -1,19 +1,19 @@
 import moment from 'moment/moment';
 import React from 'react';
 import Barcode from 'react-barcode';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import QRCode from 'react-qr-code';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { PostRepayCreateResponse } from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
-import { getToken } from '../../../../../application/getToken';
+import {PostRepayCreateResponse} from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
+import {getToken} from '../../../../../application/getToken';
 import Divider from '../../../../core-components/Divider';
 import Money from '../../../../components/Money';
-import { PageContent } from '../../../../core-components/PageContent';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
-import { i18nPaymentInstructionPage } from '../../translations';
+import {PageContent} from '../../../../core-components/PageContent';
+import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
+import {RepaymentDetailPageUseCaseActions} from '../../../RepaymentDetailPage/userUsecaseSaga';
+import {i18nPaymentInstructionPage} from '../../translations';
 import getPlatformValue from './getPlatformValue';
 import CopyButton from "../../components/CopyButton";
 import {tcx} from "../../../../../modules/ui/tailwindcss";

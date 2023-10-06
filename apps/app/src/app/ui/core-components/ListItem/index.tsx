@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { ReactNode } from 'react';
+import {ReactNode} from 'react';
 
 type ListItemProps = {
     title?: string | React.ReactElement | ReactNode ;

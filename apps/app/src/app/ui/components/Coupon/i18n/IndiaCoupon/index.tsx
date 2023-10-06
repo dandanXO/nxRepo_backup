@@ -1,11 +1,11 @@
 import cx from 'classnames';
 import moment from 'moment';
 
-import { ICouponProps } from '../../index';
+import {ICouponProps} from '../../index';
 import Money from '../../../Money';
 import {formatDate} from "../../../../../modules/format/formatDate";
-import { useTranslation } from 'react-i18next';
-import { i18nCoupon } from '../translations';
+import {useTranslation} from 'react-i18next';
+import {i18nCoupon} from '../translations';
 
 const isOverdueEqual3Days = (expiredTime: string) => {
   const currentTime = moment();

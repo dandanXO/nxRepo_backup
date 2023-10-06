@@ -1,22 +1,21 @@
-import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
+import {RiArrowRightSLine} from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
-import { useTranslation, withTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router';
-import { Horizontal, Input, InputValue, ListItem, Overlay, Radio } from '@frontend/mobile/shared/ui';
+import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useLocation, useNavigate} from 'react-router';
+import {Input, ListItem, Radio} from '@frontend/mobile/shared/ui';
 
-import { environment } from '../../../../../../environments/environmentModule/environment';
-import { formatPrice } from '../../../../../modules/format/formatPrice';
-import { getToken } from '../../../../../application/getToken';
+import {environment} from '../../../../../../environments/environmentModule/environment';
+import {getToken} from '../../../../../application/getToken';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from '../../../../core-components/Button';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import { IRepaymentModalProps } from '../../index';
+import {Button} from '../../../../core-components/Button';
+import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
+import {IRepaymentModalProps} from '../../index';
 import AdSVG from '../../repayment_banner.svg';
-import { i18nRepaymentModal } from '../translations';
+import {i18nRepaymentModal} from '../translations';
 import {formatDate} from "../../../../../modules/format/formatDate";
 import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 

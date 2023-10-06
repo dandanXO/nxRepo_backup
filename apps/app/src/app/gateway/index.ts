@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import {push} from "@lagunovsky/redux-react-router";
 import {MonitorUsecaseFlow} from "../uiFlowUsecaseMoniter";
 import {getToken, removeTokenFromLocalStorage} from '../application/getToken';

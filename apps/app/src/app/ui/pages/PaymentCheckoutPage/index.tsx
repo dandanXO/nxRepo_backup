@@ -1,16 +1,15 @@
 import queryString from 'query-string';
-import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import React, {useEffect} from 'react';
+import {useLocation, useNavigate} from 'react-router';
 
-import { MexicoCountry } from '@frontend/shared/domain';
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import { environment } from '../../../../environments/environmentModule/environment';
-import { useLazyGetRepayPayInfoQuery } from '../../../externel/backend/rtk';
-import { renderByCountry } from '../../../modules/i18n';
-import { getToken } from '../../../application/getToken';
-import { Navigation } from '../../core-components/Navigation';
-import { Page } from '../../core-components/Page';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import {MexicoCountry, PhilippinesCountry} from '@frontend/shared/domain';
+import {environment} from '../../../../environments/environmentModule/environment';
+import {useLazyGetRepayPayInfoQuery} from '../../../externel/backend/rtk';
+import {renderByCountry} from '../../../modules/i18n';
+import {getToken} from '../../../application/getToken';
+import {Navigation} from '../../core-components/Navigation';
+import {Page} from '../../core-components/Page';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
 import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentCheckoutPage';
 import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentCheckoutPage';
 import {isShowNavigation} from "../../../device/isShowNavigation";

@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import { z } from 'zod';
+import React, {useCallback, useState} from 'react';
+import {z} from 'zod';
 
-import { environment } from '../../../../../environments/environmentModule/environment';
+import {environment} from '../../../../../environments/environmentModule/environment';
 
-import { PostRepayReceiptRequestProps } from '../index';
+import {PostRepayReceiptRequestProps} from '../index';
 import {InputValue} from "../../../core-components/form/InputValue";
 
 interface PureUploadPaymentReceiptPageProps {

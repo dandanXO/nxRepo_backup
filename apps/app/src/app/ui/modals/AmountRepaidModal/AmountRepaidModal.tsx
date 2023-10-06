@@ -1,18 +1,18 @@
 import moment from 'moment';
 import React from 'react';
-import { WithTranslation, withTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router';
+import {WithTranslation, withTranslation} from 'react-i18next';
+import {useLocation, useNavigate} from 'react-router';
 import styled from 'styled-components';
 
-import { ListItem, Overlay, flexCreator } from '@frontend/mobile/shared/ui';
+import {flexCreator, Overlay} from '@frontend/mobile/shared/ui';
 
-import { GetLoanDetailResponse } from '../../../externel/backend/rtk/old/getLoanDetail';
-import { getToken } from '../../../application/getToken';
+import {GetLoanDetailResponse} from '../../../externel/backend/rtk/old/getLoanDetail';
+import {getToken} from '../../../application/getToken';
 import recordStatusStyleProps from '../../../modules/recordStatusColorMapper';
 import Divider from '../../core-components/Divider';
 import Money from '../../components/Money';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { i18nAmountRepaidModal } from './i18n/translations';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {i18nAmountRepaidModal} from './i18n/translations';
 import {formatDate} from "../../../modules/format/formatDate";
 import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 

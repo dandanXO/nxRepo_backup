@@ -1,26 +1,22 @@
-import { MdRadioButtonChecked } from '@react-icons/all-files/md/MdRadioButtonChecked';
-import { MdRadioButtonUnchecked } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
-import { MexicoCountry } from '@frontend/shared/domain';
-import { PakistanCountry } from '@frontend/shared/domain';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router';
-
-import { PhilippinesCountry } from '@frontend/shared/domain';
-import NoDataImage from '../../components/images/NoData.svg';
-import { environment } from '../../../../environments/environmentModule/environment';
-import { useLazyGetCouponApplicableListQuery } from '../../../externel/backend/rtk';
-import { getToken } from '../../../application/getToken';
-import { RootState } from '../../../reduxStore';
-import { loadingSlice } from '../../../reduxStore/loadingSlice';
-import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
-import Coupon, { ICouponProps } from '../../components/Coupon';
+import {MdRadioButtonChecked} from '@react-icons/all-files/md/MdRadioButtonChecked';
+import {MdRadioButtonUnchecked} from '@react-icons/all-files/md/MdRadioButtonUnchecked';
+import {MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
+import {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router';
+import {environment} from '../../../../environments/environmentModule/environment';
+import {useLazyGetCouponApplicableListQuery} from '../../../externel/backend/rtk';
+import {getToken} from '../../../application/getToken';
+import {RootState} from '../../../reduxStore';
+import {loadingSlice} from '../../../reduxStore/loadingSlice';
+import {repaymentDetailPageSlice} from '../../../reduxStore/repaymentDetailPageSlice';
+import Coupon, {ICouponProps} from '../../components/Coupon';
 import Modal from '../../core-components/Modal';
-import { Button } from '../../core-components/Button';
-import { Navigation } from '../../core-components/Navigation';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { i18nRepaymentCouponModal } from './i18n/translations';
+import {Button} from '../../core-components/Button';
+import {Navigation} from '../../core-components/Navigation';
+import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {i18nRepaymentCouponModal} from './i18n/translations';
 import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 type ICouponOption = ICouponProps & {

@@ -1,16 +1,12 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import {PayloadAction} from '@reduxjs/toolkit';
 import i18next from 'i18next';
-import { put, race, take } from 'redux-saga/effects';
+import {put, race, take} from 'redux-saga/effects';
 
-import { Modal } from '@frontend/mobile/shared/ui';
+import {Modal} from '@frontend/mobile/shared/ui';
 
-import { APIV3 } from '../../../../../../externel/backend/rtk';
-import {
-  InitialStateType,
-  modalInitialState,
-  modalSlice,
-} from '../../../../../../reduxStore/modalSlice';
-import { catchSagaError } from '../../../../../../uiFlowUsecase/utils/catchSagaError';
+import {APIV3} from '../../../../../../externel/backend/rtk';
+import {InitialStateType, modalInitialState, modalSlice,} from '../../../../../../reduxStore/modalSlice';
+import {catchSagaError} from '../../../../../../uiFlowUsecase/utils/catchSagaError';
 
 export function* bindBankcardSaga(
   action: PayloadAction<InitialStateType['bindBankcardModal']>
