@@ -3,11 +3,11 @@ import {appInfoPersistence} from "../persistant/AppInfoPersistence";
 import {userInfoPersistence} from "../persistant/UserInfoPersistence";
 
 export type UserResendSecondsActionPayload = {
-  resendSeconds: number;
+  resendSeconds?: number;
   phoneNo?: string;
 };
 const initialState: UserResendSecondsActionPayload = {
-  resendSeconds: 60,
+  resendSeconds: undefined,
   phoneNo: userInfoPersistence.phone || undefined,
 };
 export const loginSlice = createSlice({

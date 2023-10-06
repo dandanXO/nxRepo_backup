@@ -25,15 +25,6 @@ export const LoginForm = () => {
     isValidation: false,
     errorMessage: '',
   });
-  useEffect(() => {
-    if(phoneNumber) {
-      setPhoneNumberData({
-        data: phoneNumber,
-        isValidation: true,
-        errorMessage: '',
-      });
-    }
-  }, [phoneNumber])
 
   const validatePhoneFormat = (value: string) => {
     const isError = value.length !== 10;
@@ -45,15 +36,17 @@ export const LoginForm = () => {
     setEnableGetOTP(!isError);
     dispatch(loginSlice.actions.updatePhoneNo(value))
   }
+
   useEffect(() => {
-    if(!phoneNumber) return;
-    validatePhoneFormat(phoneNumber)
-  }, [phoneNumber])
+    if(phoneNumber) {
+      validatePhoneFormat(phoneNumber);
+    }
+  }, [phoneNumber]);
 
   const [enableGetOTP, setEnableGetOTP] = useState(false);
-
-  const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
   const [hasSendOTP, setHasSendOTP] = useState(false);
+  const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
+
   const { resendSeconds } = useSelector((state: any) => state.login);
   // console.log("resendSeconds: ", resendSeconds);
 
@@ -88,6 +81,9 @@ export const LoginForm = () => {
           isValidation: false,
           errorMessage: '',
       })
+    } else if(resendSeconds) {
+      setHasSendOTP(true)
+      setDoingCountdownSendOTP(true);
     }
   }, [resendSeconds]);
 
@@ -130,11 +126,11 @@ export const LoginForm = () => {
           suffix={
             <Button
               dataTestingID={'getOTP'}
-              text={resendSeconds === 60 && !doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
-              disable={!(resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP )}
+              text={!doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
+              disable={!(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP )}
               className={cx('ml-2 py-1 px-2.5 w-auto')}
               onClick={() => {
-                resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
+                enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
               }}
             />
           }
