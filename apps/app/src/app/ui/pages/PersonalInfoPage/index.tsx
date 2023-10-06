@@ -10,7 +10,6 @@ import { getToken } from '../../../application/getToken';
 import { RootState } from '../../../reduxStore';
 import UserIcon from './images/UserIcon.svg';
 import { Button } from '../../core-components/Button';
-import { Page } from '../../core-components/Page';
 import { LoanOverViewSection } from '../../core-components/sections/LoanOverViewSection';
 import { IndexPageSagaAction } from '../IndexPage/userUsecaseSaga/indexPageActions';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
@@ -23,6 +22,7 @@ import { modalSlice } from '../../../reduxStore/modalSlice';
 import StarRatingSuccessModal from '../../modals/StarRatingSuccessModal';
 import {useGoToLogout} from "../../goTo/goToLogout";
 import { useUserPhoneNumber } from '../../hooks/useUserPhoneNumber';
+import {TabPage} from "../../core-components/TabPage";
 
 const PersonalInfoPage = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const PersonalInfoPage = () => {
   const {maskPhoneNumber} = useUserPhoneNumber();
 
   return (
-    <Page className="flex flex-col pb-20 bg-cbg-primary">
+    <TabPage className="flex flex-col bg-cbg-primary">
       <div className={`my-4 flex flex-row items-center justify-center`}>
         <div className={`mr-3`}>
           <img src={UserIcon} />
@@ -132,7 +132,7 @@ const PersonalInfoPage = () => {
       {modalState.starRatingModal.show && <StarRatingModal/>}
       {modalState.starRatingSuccessModal.show && <StarRatingSuccessModal/>}
       <Outlet />
-    </Page>
+    </TabPage>
   );
 };
 

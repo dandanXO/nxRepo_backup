@@ -15,7 +15,6 @@ import {RootState} from '../../../reduxStore';
 import {modalSlice} from '../../../reduxStore/modalSlice';
 import {Button} from '../../core-components/Button';
 import {Horizontal} from '../../core-components/Horizontal';
-import {PageContent} from '../../core-components/PageContent';
 import {LoanOverViewSection} from '../../core-components/sections/LoanOverViewSection';
 import {AuthorizationModal} from '../../modals/AuthorizationModal';
 import {LoanAgreementModal} from '../../modals/QRLoanAgreementModal';
@@ -173,7 +172,7 @@ const IndexPage = () => {
       const currentSelectedProducts: FinalProductType[] = [];
       let processSuccess = false;
 
-      let firstRoundFinalIndex = 0;
+      const firstRoundFinalIndex = 0;
       indexPageState.indexAPI?.products.map((product, index) => {
         // console.log("currentTotalPrice", currentSelectedProductsPrice)
         // NOTE: 假如加入此商品總額度沒爆掉。

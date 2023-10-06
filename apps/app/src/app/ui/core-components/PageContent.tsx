@@ -9,12 +9,13 @@ interface Props {
 }
 
 export const PageContent = (props: Props) => {
+  const showNavigation = isShowNavigation();
   return (
     <div
       className={tcx(
         `flex flex-col overflow-auto p-4`,
-        ['h-[calc(100vh-56px)] pt-0', isShowNavigation()],
-        ['h-[100vh]', !isShowNavigation()],
+        ['h-[calc(100%-56px)] pt-0', showNavigation],
+        ['h-full', !showNavigation],
         props.className
       )}
     >
@@ -22,3 +23,16 @@ export const PageContent = (props: Props) => {
     </div>
   );
 };
+
+export const PageSection = (props: Props) => {
+  return (
+    <div
+      className={tcx(
+        `p-4 overflow-auto`,
+        props.className
+      )}
+    >
+      {props.children}
+    </div>
+  )
+}

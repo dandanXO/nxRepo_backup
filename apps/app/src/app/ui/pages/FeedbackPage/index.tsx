@@ -116,7 +116,7 @@ const FeedbackPage = () => {
                     navigate(`${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`);
                 }}
             />
-            <div className={`p-4 pt-0.5 h-[calc(100%-56px)] flex flex-col`}>
+            <div className={`p-4 pt-0.5 flex flex-col`}>
                 <div className='grow'>
                     <Select
                         containerClassNames={cx('font-bold text-base text-ctext-primary mb-4 leading-none')}

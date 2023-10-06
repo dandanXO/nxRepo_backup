@@ -42,7 +42,7 @@ const sagaMiddleware = createSagaMiddleware({
 
 export const appStore = configureStore({
   reducer: {
-    ['navigator']: createRouterReducer(history),
+    'navigator': createRouterReducer(history),
     [appSlice.name]: appSlice.reducer,
     [modalSlice.name]: modalSlice.reducer,
     [API.reducerPath]: API.reducer,
