@@ -302,7 +302,7 @@ class OrderDetail extends Component{
                         <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="windowPage.remain.due" />：</span><span>{orderInfo['surplusBackMoney']}</span></Col>
                         {/*<Col className={styles.col} lg={12} xl={8}><span className={styles.title}>展期费用(₹)：</span><span>{orderInfo['standOverMoney']}</span></Col>*/}
                         <Col className={styles.col} lg={12} xl={8} style={{display:'flex'}}><span className={styles.title}><FormattedMessage id="page.table.appName" />：</span><CopyToLink text={orderInfo['appName']} acturalCopy={orderInfo['channelUrl']} title={orderInfo['channelUrl']}/></Col>
-                        <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.coupon.usage.amount" />：</span><span>{orderInfo.couponUsageAmount}</span></Col>
+                        <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="page.table.coupon.usage.amount.currency" />：</span><span>{orderInfo.couponUsageAmount}</span></Col>
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankName" />：</span><span>{bankInfo['bankName']}</span></Col>}
                         {bankInfo && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="bankCardNo" />：</span><span>{bankInfo['bankCardNo']}</span></Col>}
 

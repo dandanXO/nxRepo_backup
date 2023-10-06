@@ -326,6 +326,7 @@
   "page.table.amount.due.currency": "应还金额(₹)",
   "page.table.amount.paid.currency": "已还金额(₹)",
   "page.table.coupon.usage.amount": "使用优惠券金额",
+  "page.table.coupon.usage.amount.currency": "使用优惠券金额(₹)",
   "page.table.reduce.amount.currency": "减免金额(₹)",
   "page.table.overdue.list.export": "逾期档案列表_{expDate}.xlsx",
   "page.table.redistribute.order": "重新分配订单",

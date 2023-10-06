@@ -150,7 +150,7 @@ class TodayList extends Component {
                 }
             },
             {
-              title: props.intl.formatMessage({id: "page.table.coupon.usage.amount"}),
+              title: props.intl.formatMessage({id: "page.table.coupon.usage.amount.currency"}),
               dataIndex: 'couponUsageAmount',
               key: 'couponUsageAmount',
               width: '6%',
