@@ -5,6 +5,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
   translation: {
     en_US: {
       // IN
+      coupon: 'Coupon',
       Product: 'Product',
       'Order No.': 'Order No.',
       Status: 'Status',
@@ -63,6 +64,7 @@ export const i18nLoanDetailsPage: i18nComponent = {
     es_MX: {
       // MX
       Product: 'Producto',
+      coupon: 'Cupón',
       'Order No.': 'Número de Orden',
       Status: 'Estado',
       'Apply Date': 'Fecha de Solicitud',

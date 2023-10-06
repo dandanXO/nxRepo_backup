@@ -59,6 +59,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     loanAmount = 0,
     dailyFee = 0,
     balance = 0,
+    coupon = 0,
     applyDate = '',
   } = currentData ?? {};
 
@@ -228,6 +229,17 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 />
 
                 <Divider />
+
+                {
+                  status !== 'EXTEND' &&
+                  <ListItem
+                  title={t('coupon')}
+                  text={<Money money={coupon} isNagetive={true} />}
+                  titleColor={listTitleStyle}
+                  textColor={listTextStyle}
+                  isFetching={isFetching}
+                />
+                }
 
                 <ListItem
                   title={t('Reduction Amount')}

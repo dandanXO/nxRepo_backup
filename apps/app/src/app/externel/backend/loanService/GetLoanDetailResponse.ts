@@ -42,4 +42,5 @@ export interface GetLoanDetailResponse {
     | 'UNPAID'; //狀態
   totalDueAmount?: number; // 訂單總應還金额 (status=UNPAID, OVERDUE才會有)
   totalRepayAmount?: number; // 實際還款金额 summary of repayRecords (status=EXTEND)
+  coupon?: number; // 使用优惠券金额
 }
