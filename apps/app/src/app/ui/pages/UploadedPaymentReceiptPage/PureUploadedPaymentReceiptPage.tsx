@@ -16,7 +16,7 @@ const CustomPage = styled(Page)`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 100vh;
+  height: 100%;
 `;
 const Content = styled.div`
   display: flex;

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root {
+  height: 100%;
+}
+
 body {
   user-select: none;
 }
@@ -16,17 +20,17 @@ body {
     background-size: 200% 100%;
     animation: waveAnimation 5s linear infinite;
   }
-  
-  @keyframes waveAnimation {
-    0% {
-      background-position: -200px 0;
-      opacity: 0.4;
-    }
-    50% {
-      opacity: 0.8;
-    }
-    100% {
-      background-position: calc(200px + 100%) 0;
-      opacity: 0.4;
-    }
+
+@keyframes waveAnimation {
+  0% {
+    background-position: -200px 0;
+    opacity: 0.4;
   }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+    opacity: 0.4;
+  }
+}
