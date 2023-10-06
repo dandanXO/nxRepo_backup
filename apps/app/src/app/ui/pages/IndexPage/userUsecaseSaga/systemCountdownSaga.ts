@@ -1,9 +1,9 @@
-import {delay, put} from 'redux-saga/effects';
+import { delay, put } from 'redux-saga/effects';
 
-import {indexPageSlice} from '../../../../reduxStore/indexPageSlice';
-import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
-import {getTimeInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
+import { getTimeInfoBetweenCurrentAndCountDown } from '@frontend/shared/date';
 
+import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 
 export function* systemCountdownSaga(action: any) {
   // NOTICE: 防止錯誤後無法重新 watch
@@ -27,4 +27,3 @@ export function* systemCountdownSaga(action: any) {
     yield catchSagaError(error);
   }
 }
-

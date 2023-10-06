@@ -1,32 +1,39 @@
+import {
+  ReduxRouter,
+  ReduxRouterSelector,
+} from '@lagunovsky/redux-react-router';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import React from "react";
-import {Provider} from "react-redux";
-import {ReduxRouter, ReduxRouterSelector} from "@lagunovsky/redux-react-router";
-import {BrowserRouter} from "react-router-dom";
+import { AppThemeProvider } from '@frontend/mobile/shared/ui';
 
-import {AppThemeProvider} from "@frontend/mobile/shared/ui";
-import {environment} from "../environments/environmentModule/environment";
-import {appStore, history, RootState} from "../app/reduxStore";
-import {isInApp} from "../app/device/isInApp";
-import {NativeAppInfo} from "../app/application/nativeAppInfo";
-import {GlobalAppMode} from "../app/application/GlobalAppMode";
-import {AppFlag} from "../environments/flag";
-import {AppEnvironment} from "../app/device/appEnvironment";
+import { GlobalAppMode } from '../app/application/GlobalAppMode';
+import { NativeAppInfo } from '../app/application/nativeAppInfo';
+import { AppEnvironment } from '../app/device/appEnvironment';
+import { isInApp } from '../app/device/isInApp';
+import { RootState, appStore, history } from '../app/reduxStore';
+import { environment } from '../environments/environmentModule/environment';
+import { AppFlag } from '../environments/flag';
 
 type ICoreMain = {
   children: React.ReactElement;
-}
-const routerSelector: ReduxRouterSelector<RootState> = (state) => state.navigator;
+};
+const routerSelector: ReduxRouterSelector<RootState> = (state) =>
+  state.navigator;
 
 export const CoreMain = (props: ICoreMain) => {
   // NOTE: Before rendering
-  console.log('[app] AppEnvironment.getEnvironmentName()', AppEnvironment.getEnvironmentName())
+  console.log(
+    '[app] AppEnvironment.getEnvironmentName()',
+    AppEnvironment.getEnvironmentName()
+  );
   console.log('[app] environment', environment);
   console.log('[app] window.theme', window.theme);
   console.log('[app] isInApp', isInApp());
   console.log('[app] NativeAppInfo', NativeAppInfo);
   console.log('[app] GlobalAppMode', GlobalAppMode.mode);
-  console.log("AppFlag", AppFlag);
+  console.log('AppFlag', AppFlag);
   // alertModal(JSON.stringify(NativeAppInfo));
 
   return (
@@ -35,13 +42,11 @@ export const CoreMain = (props: ICoreMain) => {
       <AppThemeProvider theme={window.theme}>
         <Provider store={appStore}>
           <ReduxRouter history={history} routerSelector={routerSelector}>
-            <BrowserRouter basename={'/'}>
-              {props.children}
-            </BrowserRouter>
+            <BrowserRouter basename={'/'}>{props.children}</BrowserRouter>
             {/*<RouterProvider router={appRouter as any} fallbackElement={<div>Loading...</div>} />*/}
           </ReduxRouter>
         </Provider>
       </AppThemeProvider>
     </>
-  )
-}
+  );
+};

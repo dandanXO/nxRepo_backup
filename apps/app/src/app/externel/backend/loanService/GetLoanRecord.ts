@@ -30,7 +30,13 @@ export interface GetLoanRecord {
   reductionAmount?: number; // 減免金額
   repayRecords?: RepayRecord[];
   serviceCharge?: number; // 服務費金額(砍頭金)
-  status?: 'EXTEND' | 'OVERDUE' | 'PAY_OFF' | 'PROCESSING' | 'REJECTED' | 'UNPAID'; //狀態
+  status?:
+    | 'EXTEND'
+    | 'OVERDUE'
+    | 'PAY_OFF'
+    | 'PROCESSING'
+    | 'REJECTED'
+    | 'UNPAID'; //狀態
   totalDueAmount?: number; // 訂單總應還金额 (status=UNPAID, OVERDUE才會有)
   totalRepayAmount?: number; // 實際還款金额 summary of repayRecords (status=EXTEND)
 }

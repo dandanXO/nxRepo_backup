@@ -9,7 +9,14 @@ const IndiaSuccessIcon = () => {
     >
       <defs>
         <clipPath id="a">
-          <rect width="120" height="120" transform="translate(120 103)" fill="none" stroke="#707070" stroke-width="1" />
+          <rect
+            width="120"
+            height="120"
+            transform="translate(120 103)"
+            fill="none"
+            stroke="#707070"
+            stroke-width="1"
+          />
         </clipPath>
         <clipPath id="b">
           <path
@@ -158,7 +165,11 @@ const IndiaSuccessIcon = () => {
             />
           </g>
           <g transform="translate(38.831 47.7)" clip-path="url(#d)">
-            <path d="M83-95h54.044v41.434H83Z" transform="translate(-87.504 90.496)" fill="#fff" />
+            <path
+              d="M83-95h54.044v41.434H83Z"
+              transform="translate(-87.504 90.496)"
+              fill="#fff"
+            />
           </g>
           <g transform="translate(38.831 47.7)">
             <path

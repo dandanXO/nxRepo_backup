@@ -1,4 +1,4 @@
-import {Sort} from "./Sort";
+import { Sort } from './Sort';
 
 export type Pageable = {
   offset: number;
@@ -7,4 +7,4 @@ export type Pageable = {
   paged: boolean;
   sort?: Sort | [];
   unpaged?: boolean;
-}
+};

@@ -2,7 +2,6 @@ import { tcx } from 'apps/app/src/app/modules/ui/tailwindcss';
 import moment from 'moment/moment';
 import React from 'react';
 
-
 import Money from '../../../Money';
 import { ICouponProps } from '../../index';
 

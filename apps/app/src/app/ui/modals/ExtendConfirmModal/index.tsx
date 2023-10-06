@@ -1,9 +1,12 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import { useLocation, useNavigate } from 'react-router';
 
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
+
 import { renderByCountry } from '../../../modules/i18n';
 import IndiaExtendConfirmModal from './i18n/IndiaExtendConfirmModal';
 import MexicoExtendConfirmModal from './i18n/MexicoExtendConfirmModal';
@@ -11,8 +14,6 @@ import PakistanExtendConfirmModal from './i18n/PakistanExtendConfirmModal';
 import PhilippinesExtendConfirmModal from './i18n/PhilippinesExtendConfirmModal';
 
 const ExtendConfirmModal = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   return (
     <div>
       {renderByCountry(

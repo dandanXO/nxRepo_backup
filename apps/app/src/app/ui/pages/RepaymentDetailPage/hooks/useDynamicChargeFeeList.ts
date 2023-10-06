@@ -1,8 +1,10 @@
-import {GetLoanDetailResponse} from "../../../../externel/backend/loanService/GetLoanDetailResponse";
-import {GetLoanDetailChargeFeeDetailItems} from "../../../../externel/backend/rtk/old/getLoanDetail";
-import {computeNumber} from "../../../../modules/computeNumber";
+import { GetLoanDetailResponse } from '../../../../externel/backend/loanService/GetLoanDetailResponse';
+import { GetLoanDetailChargeFeeDetailItems } from '../../../../externel/backend/rtk/old/getLoanDetail';
+import { computeNumber } from '../../../../modules/computeNumber';
 
-export const useDynamicChargeFeeList = (originalTtems?: GetLoanDetailResponse["chargeFeeDetail"]["items"]) => {
+export const useDynamicChargeFeeList = (
+  originalTtems?: GetLoanDetailResponse['chargeFeeDetail']['items']
+) => {
   // NOTE: 新版 h5 要過濾掉之前android需要的欄位, LOAN_AMOUNT 也不會給
 
   // NOTE: 前置利息
@@ -21,38 +23,44 @@ export const useDynamicChargeFeeList = (originalTtems?: GetLoanDetailResponse["c
   // const { value: serviceFee } = getItems('SERVICE_FEE');
   // const { value: gst } = getItems('GST');
 
-  if(!originalTtems) return null;
+  if (!originalTtems) return null;
   const items = JSON.parse(JSON.stringify(originalTtems));
 
-  const lastChargeFeeKeyIndex = items.length - 1
+  const lastChargeFeeKeyIndex = items.length - 1;
   const lastChargeFeeKey: any = items[lastChargeFeeKeyIndex].key;
 
-  if(lastChargeFeeKey) {
-
-    let totalRemain = 0
+  if (lastChargeFeeKey) {
+    let totalRemain = 0;
 
     items.map((item: GetLoanDetailChargeFeeDetailItems) => {
-      if(item.key !== lastChargeFeeKey) {
+      if (item.key !== lastChargeFeeKey) {
         const floatNumber = Number(item.value);
         const number = Math.floor(floatNumber);
-        const float = computeNumber(floatNumber,"-", number).result;
+        const float = computeNumber(floatNumber, '-', number).result;
         const ignoreOnesDigits = number % 10;
-        const finalNumber = computeNumber(floatNumber, "-", ignoreOnesDigits).next("-", float).result;
-        const remain = computeNumber(ignoreOnesDigits, "+", float).result;
+        const finalNumber = computeNumber(
+          floatNumber,
+          '-',
+          ignoreOnesDigits
+        ).next('-', float).result;
+        const remain = computeNumber(ignoreOnesDigits, '+', float).result;
 
-        item.value = finalNumber.toString()
-        totalRemain = computeNumber(totalRemain, "+", remain).result
+        item.value = finalNumber.toString();
+        totalRemain = computeNumber(totalRemain, '+', remain).result;
       }
-    })
+    });
     // console.log("totalRemain", totalRemain);
-    if(lastChargeFeeKey) {
-      const item = items.find((item: GetLoanDetailChargeFeeDetailItems) => item.key === lastChargeFeeKey)
-      if(item) {
-        item.value = computeNumber(item.value, "+", totalRemain).result;
+    if (lastChargeFeeKey) {
+      const item = items.find(
+        (item: GetLoanDetailChargeFeeDetailItems) =>
+          item.key === lastChargeFeeKey
+      );
+      if (item) {
+        item.value = computeNumber(item.value, '+', totalRemain).result;
         totalRemain = 0;
       }
     }
   }
 
   return items;
-}
+};

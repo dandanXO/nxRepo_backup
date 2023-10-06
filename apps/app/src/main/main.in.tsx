@@ -1,44 +1,42 @@
-import "../polyfills";
-// NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
-import { SentryModule } from '../app/modules/sentry';
-import "../app/application/errorHandler";
-import '../app/modules/posthog';
-
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
 
+import '../app/application/errorHandler';
 // NOTE: Modules
 import { NativeAppInfo } from '../app/application/nativeAppInfo';
-import '../app/modules/i18n';
-import {I18nModule} from "../app/modules/i18n";
 import '../app/device/timezone';
 // NOTICE : 會引用 dispatch ，所以會先觸發 run root saga
 import '../app/externel/window/IWindow';
-
+import '../app/modules/i18n';
+import { I18nModule } from '../app/modules/i18n';
+import '../app/modules/posthog';
+// NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
+import '../app/modules/sentry';
+import { ThemeModule } from '../app/modules/ui/theme';
+// NOTICE:
+import { AppRouter } from '../app/ui/router/index.in';
+import { MonitorUsecaseFlow } from '../app/uiFlowUsecaseMoniter';
+import '../polyfills';
 // NOTE: Other
 import '../style.css';
-import {MonitorUsecaseFlow} from "../app/uiFlowUsecaseMoniter";
-import {CoreMain} from "./main.core";
-
-// NOTICE:
-import {AppRouter} from '../app/ui/router/index.in';
-import {ThemeModule} from "../app/modules/ui/theme";
+import { CoreMain } from './main.core';
 
 // NOTICE:
 if (window.Cypress) {
   // window.appReady = true
   window.AppInfoTask = {
-    getAppInfo: () => JSON.stringify({
-      domain: 'https://www.oasis-gold.com',
-      environment: 'india',
-      packageId: 'com.ind.kyc.application',
-      appName: 'Local APP',
-      uiVersion: "56",
-      token: null,
-      mode: 'H5',
-      phoneNo: '1234567890',
-    })
-  }
+    getAppInfo: () =>
+      JSON.stringify({
+        domain: 'https://www.oasis-gold.com',
+        environment: 'india',
+        packageId: 'com.ind.kyc.application',
+        appName: 'Local APP',
+        uiVersion: '56',
+        token: null,
+        mode: 'H5',
+        phoneNo: '1234567890',
+      }),
+  };
 
   // NOTICE: for testing dev in
   // window.AppInfoTask = {
@@ -67,15 +65,17 @@ const renderApp = () => {
   ThemeModule.applyCustomTheme(NativeAppInfo);
 
   // NOTE: Starting to render
-  const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+  const root = ReactDOM.createRoot(
+    document.getElementById('root') as HTMLElement
+  );
 
   root.render(
     <StrictMode>
       <CoreMain>
-        <AppRouter/>
+        <AppRouter />
       </CoreMain>
     </StrictMode>
-  )
+  );
 };
 
 renderApp();

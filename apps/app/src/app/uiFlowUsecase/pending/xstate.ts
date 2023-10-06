@@ -9,7 +9,10 @@ interface UserContext {
   error?: string;
 }
 
-type UserEvent = { type: 'FETCH'; id: string } | { type: 'RESOLVE'; user: User } | { type: 'REJECT'; error: string };
+type UserEvent =
+  | { type: 'FETCH'; id: string }
+  | { type: 'RESOLVE'; user: User }
+  | { type: 'REJECT'; error: string };
 
 type UserTypestate =
   | {

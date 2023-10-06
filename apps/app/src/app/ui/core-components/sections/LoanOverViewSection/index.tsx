@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 
 import { environment } from '../../../../../environments/environmentModule/environment';
-import { ORDER_STATE } from '../../../../domain/order/ORDER_STATE';
 import { RISK_CONTROL_STATE } from '../../../../domain/risk/RISK_CONTROL_STATE';
 import { formatPrice } from '../../../../modules/format/formatPrice';
 import { IndexPageProps } from '../../../../reduxStore';
@@ -12,10 +11,10 @@ type Props = IndexPageProps;
 
 export const LoanOverViewSection = (props: Props) => {
   const isReacquireCreditAmount =
-    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able
-    // props.state.order.state !== ORDER_STATE.reject
-    // props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
-    // props.state.order.state !== ORDER_STATE.hasOverdueOrder;
+    props.state.riskControl.state === RISK_CONTROL_STATE.expired_refresh_able;
+  // props.state.order.state !== ORDER_STATE.reject
+  // props.state.order.state !== ORDER_STATE.hasInComingOverdueOrder &&
+  // props.state.order.state !== ORDER_STATE.hasOverdueOrder;
   const [options, setOptions] = useState<{
     series: ApexOptions['series'];
     options: ApexOptions;
@@ -80,38 +79,56 @@ export const LoanOverViewSection = (props: Props) => {
 
   useEffect(() => {
     if (props.state.indexAPI) {
-      let percent = (props.state.indexAPI?.availableAmount / props.state.indexAPI?.totalAmount) * 100;
+      let percent =
+        (props.state.indexAPI?.availableAmount /
+          props.state.indexAPI?.totalAmount) *
+        100;
       // NOTICE: availableAmount: 999000, totalAmount: 1000000, 算出來是 99.9，但畫面缺口基本上分辨不出來有缺口
       if (percent > 99 && percent < 100) {
         percent = 99;
       }
       setOptions({
         options: {
-            ...options,
-            fill: { colors: isReacquireCreditAmount ? ['#AAAAAA'] : ['#78CB4D']}
+          ...options,
+          fill: { colors: isReacquireCreditAmount ? ['#AAAAAA'] : ['#78CB4D'] },
         },
         series: [percent],
       });
     }
-  }, [props.state.indexAPI,isReacquireCreditAmount]);
-
+  }, [props.state.indexAPI, isReacquireCreditAmount]);
 
   return (
     <div className={'text-ctext-primary'}>
-      <div className={'mb-2 font-bold text-sm'} data-testing-id="loanOverView">Loan Over View</div>
+      <div className={'mb-2 text-sm font-bold'} data-testing-id="loanOverView">
+        Loan Over View
+      </div>
 
       <div className={'flex w-full flex-row justify-center'}>
         <div className={'left relative'}>
           <div className="container relative">
-            <Chart options={options.options} series={options.series} type="radialBar" width="160" height="160" />
-            <div className={'absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-center'}>
+            <Chart
+              options={options.options}
+              series={options.series}
+              type="radialBar"
+              width="160"
+              height="160"
+            />
+            <div
+              className={
+                'absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-center'
+              }
+            >
               <div className="text">
-                <div className='font-bold text-sm mb-1.5'>
+                <div className="mb-1.5 text-sm font-bold">
                   {environment.currency}{' '}
-                  {isReacquireCreditAmount ? ' ***' :  formatPrice(Number(props.state.indexAPI?.availableAmount))}
+                  {isReacquireCreditAmount
+                    ? ' ***'
+                    : formatPrice(
+                        Number(props.state.indexAPI?.availableAmount)
+                      )}
                 </div>
-                <div className='text-xs'>Available</div>
-                <div className='text-xs'>Balance</div>
+                <div className="text-xs">Available</div>
+                <div className="text-xs">Balance</div>
               </div>
             </div>
           </div>
@@ -120,19 +137,25 @@ export const LoanOverViewSection = (props: Props) => {
         <div className={'right flex flex-col items-end justify-center'}>
           <div className={'used-amount flex flex-col items-start justify-end'}>
             <div className={'label flex flex-row items-center justify-between'}>
-              <div className={'label-color mr-2 h-1.5 w-4 rounded bg-cstate-disable-main'}></div>
+              <div
+                className={
+                  'label-color bg-cstate-disable-main mr-2 h-1.5 w-4 rounded'
+                }
+              ></div>
               <div className={'label-price text-xs'}>Used Amount</div>
             </div>
-            <div className={'price font-bold w-full pl-6 text-sm'}>
+            <div className={'price w-full pl-6 text-sm font-bold'}>
               {environment.currency}{' '}
               {formatPrice(props.state.indexAPI?.usedAmount || 0)}
             </div>
           </div>
-          <div className={'total-amount flex flex-col justify-end mt-2'}>
+          <div className={'total-amount mt-2 flex flex-col justify-end'}>
             <div className={'label text-xs'}>Total Amount</div>
-            <div className={'price font-bold text-sm'}>
+            <div className={'price text-sm font-bold'}>
               {environment.currency}{' '}
-              {isReacquireCreditAmount ? ' ***** ' : formatPrice(props.state.indexAPI?.totalAmount || 0)}
+              {isReacquireCreditAmount
+                ? ' ***** '
+                : formatPrice(props.state.indexAPI?.totalAmount || 0)}
             </div>
           </div>
         </div>

@@ -1,14 +1,15 @@
-import {IMonitorUsecaseFlow} from "./IMonitorUsecaseFlow";
-import {AppFlag} from "../../environments/flag";
-import {getUserPhoneNo} from "../modules/sentry";
 import * as Sentry from '@sentry/react';
 import posthog from 'posthog-js';
+
+import { AppFlag } from '../../environments/flag';
+import { getUserPhoneNo } from '../modules/sentry';
+import { IMonitorUsecaseFlow } from './IMonitorUsecaseFlow';
 
 function getUserStatusName(status: number) {
   return ['未認證', '通過認證', '審核中', '審核拒絕'][status];
 }
 
-export const userLogin: IMonitorUsecaseFlow["userLogin"] = (userResponse) => {
+export const userLogin: IMonitorUsecaseFlow['userLogin'] = (userResponse) => {
   // if (AppEnvironment.isLocalhost()) return;
 
   if (AppFlag.enableSentry) {
@@ -36,12 +37,12 @@ export const userLogin: IMonitorUsecaseFlow["userLogin"] = (userResponse) => {
   try {
     if (AppFlag.enablePosthog) {
       posthog.identify(getUserPhoneNo(), {
-        "user.phoneNo": getUserPhoneNo(),
+        'user.phoneNo': getUserPhoneNo(),
         'user.demoAccount': userResponse.demoAccount,
-      })
+      });
       // posthog.reset(true)
     }
-  } catch (e){
-    console.log(e)
+  } catch (e) {
+    console.log(e);
   }
-}
+};

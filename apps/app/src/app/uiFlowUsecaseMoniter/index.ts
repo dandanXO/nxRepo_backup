@@ -1,11 +1,9 @@
-import {GetUserInfoServiceResponse} from "../externel/backend/userService/GetUserInfoServiceResponse";
-import {
-  IUseFinishedBindBankAccountPage
-} from "../ui/pages/BindBankCardPage/hooks/common/useFinishedBindBankAccountForm";
-import {appLoadAndroidAppInfo} from "./appLoadAndroidAppInfo";
-import {userLogin} from "./userLogin";
-import {userBindBankAccount} from "./userBindBankAccount";
-import {debugAPIConnection} from "./debugAPIConnection";
+import { GetUserInfoServiceResponse } from '../externel/backend/userService/GetUserInfoServiceResponse';
+import { IUseFinishedBindBankAccountPage } from '../ui/pages/BindBankCardPage/hooks/common/useFinishedBindBankAccountForm';
+import { appLoadAndroidAppInfo } from './appLoadAndroidAppInfo';
+import { debugAPIConnection } from './debugAPIConnection';
+import { userBindBankAccount } from './userBindBankAccount';
+import { userLogin } from './userLogin';
 
 export class MonitorUsecaseFlow {
   public static appLoadAndroidAppInfo() {

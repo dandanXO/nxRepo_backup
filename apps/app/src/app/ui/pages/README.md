@@ -1,7 +1,7 @@
-* 建立新 Page 要在 PageOrModalPathEnum 下定義
-* 每個 page 下可能會有 
-  * images
-  * components
-  * userUsecaseSaga
-    * watchXXXPageSaga.ts
-  * index.tsx
+- 建立新 Page 要在 PageOrModalPathEnum 下定義
+- 每個 page 下可能會有
+  - images
+  - components
+  - userUsecaseSaga
+    - watchXXXPageSaga.ts
+  - index.tsx

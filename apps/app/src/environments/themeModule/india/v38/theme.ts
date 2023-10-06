@@ -1,4 +1,8 @@
-import { Colors, IThemeConfig, fontSizeListToRem } from '@frontend/mobile/shared/ui';
+import {
+  Colors,
+  IThemeConfig,
+  fontSizeListToRem,
+} from '@frontend/mobile/shared/ui';
 
 import theme from './tailwind.theme';
 

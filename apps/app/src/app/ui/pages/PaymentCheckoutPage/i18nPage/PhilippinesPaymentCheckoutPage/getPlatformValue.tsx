@@ -1,6 +1,6 @@
-interface Icontent{
-  title:string;
-  content:React.ReactNode
+interface Icontent {
+  title: string;
+  content: React.ReactNode;
 }
 
 const platformMap: {
@@ -16,10 +16,18 @@ const platformMap: {
         title: 'Repay Instructions via GCash',
         content: (
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
-            <li>Open <span className="font-bold">GCash</span> app and navigate to <span className="font-bold">“Pay Bills”</span>, 
-            then <span className="font-bold">“Payment Solutions”</span>, and select <span className="font-bold">“Dragonpay”</span> (ensure correct selection).
+            <li>
+              Open <span className="font-bold">GCash</span> app and navigate to{' '}
+              <span className="font-bold">“Pay Bills”</span>, then{' '}
+              <span className="font-bold">“Payment Solutions”</span>, and select{' '}
+              <span className="font-bold">“Dragonpay”</span> (ensure correct
+              selection).
             </li>
-            <li>Please input the <span className="font-bold">CORRECT reference_no</span> when making your repayment.</li>
+            <li>
+              Please input the{' '}
+              <span className="font-bold">CORRECT reference_no</span> when
+              making your repayment.
+            </li>
             <li>The minimum repayment amount is PHP 100.</li>
           </ul>
         ),
@@ -28,10 +36,26 @@ const platformMap: {
         title: 'Payment tips',
         content: (
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
-            <li>Double-check: Carefully check the <span className="font-bold">repayment amount & reference_no before payment.</span></li>
-            <li>Use Official App: <span className="font-bold">Only get reference_no from our official app.</span></li>
-            <li>Secure Connection: Ensure a secure network connection for data safety.</li>
-            <li>Don't Share Codes: Do not share payment codes (reference_no / contract number / account number) with others.</li>
+            <li>
+              Double-check: Carefully check the{' '}
+              <span className="font-bold">
+                repayment amount & reference_no before payment.
+              </span>
+            </li>
+            <li>
+              Use Official App:{' '}
+              <span className="font-bold">
+                Only get reference_no from our official app.
+              </span>
+            </li>
+            <li>
+              Secure Connection: Ensure a secure network connection for data
+              safety.
+            </li>
+            <li>
+              Don't Share Codes: Do not share payment codes (reference_no /
+              contract number / account number) with others.
+            </li>
             <li>Save Receipts: Keep payment receipts for your records.</li>
           </ul>
         ),
@@ -54,18 +78,27 @@ const platformMap: {
     isOnline: true,
     logo: 'instapay',
   },
-  'Paymaya': {
+  Paymaya: {
     isOnline: true,
     logo: 'paymaya',
-    contents:[
+    contents: [
       {
         title: 'Repay Instructions via Paymaya',
         content: (
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
-            <li>Open <span className="font-bold">PayMaya </span> app and navigate to <span className="font-bold">“Pay Bills”</span>,
-              then <span className="font-bold">“Payment Solutions”</span>, and select <span className="font-bold">“Dragonpay”</span> (ensure correct selection).
+            <li>
+              Open <span className="font-bold">PayMaya </span> app and navigate
+              to <span className="font-bold">“Pay Bills”</span>, then{' '}
+              <span className="font-bold">“Payment Solutions”</span>, and select{' '}
+              <span className="font-bold">“Dragonpay”</span> (ensure correct
+              selection).
             </li>
-            <li>Please input the <span className="font-bold">CORRECT reference_no</span> in <span className="font-bold">“Account number”</span> text box when making your repayment.</li>
+            <li>
+              Please input the{' '}
+              <span className="font-bold">CORRECT reference_no</span> in{' '}
+              <span className="font-bold">“Account number”</span> text box when
+              making your repayment.
+            </li>
             <li>The minimum repayment amount is PHP 100.</li>
           </ul>
         ),
@@ -74,15 +107,31 @@ const platformMap: {
         title: 'Payment tips',
         content: (
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
-            <li>Double-check: Carefully check the <span className="font-bold">repayment amount & reference_no before payment.</span></li>
-            <li>Use Official App: <span className="font-bold">Only get reference_no from our official app.</span></li>
-            <li>Secure Connection: Ensure a secure network connection for data safety.</li>
-            <li>Don't Share Codes: Do not share payment codes (reference_no / contract number / account number) with others.</li>
+            <li>
+              Double-check: Carefully check the{' '}
+              <span className="font-bold">
+                repayment amount & reference_no before payment.
+              </span>
+            </li>
+            <li>
+              Use Official App:{' '}
+              <span className="font-bold">
+                Only get reference_no from our official app.
+              </span>
+            </li>
+            <li>
+              Secure Connection: Ensure a secure network connection for data
+              safety.
+            </li>
+            <li>
+              Don't Share Codes: Do not share payment codes (reference_no /
+              contract number / account number) with others.
+            </li>
             <li>Save Receipts: Keep payment receipts for your records.</li>
           </ul>
         ),
       },
-    ]
+    ],
   },
   PaysoPay: {
     isOnline: true,
@@ -291,7 +340,7 @@ const platformMap: {
   },
 };
 
-const getPlatformValue = (platform: string | undefined, key: string ) => {
+const getPlatformValue = (platform: string | undefined, key: string) => {
   if (platform === undefined) return null;
   try {
     return platformMap[platform][key];
@@ -299,4 +348,4 @@ const getPlatformValue = (platform: string | undefined, key: string ) => {
     return 'Platform Not Found';
   }
 };
-export default getPlatformValue
+export default getPlatformValue;

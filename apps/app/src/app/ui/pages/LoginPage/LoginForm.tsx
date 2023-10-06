@@ -1,39 +1,29 @@
+import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import cx from 'classnames';
 
 // refactor
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
 
-import {RootState} from "../../../reduxStore";
-import {loginSlice} from "../../../reduxStore/loginSlice";
-import {getToken} from "../../../application/getToken";
-
-import { Button } from '../../core-components/Button';
+import { RootState } from '../../../reduxStore';
+import { loginSlice } from '../../../reduxStore/loginSlice';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-
+import { Button } from '../../core-components/Button';
 import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const phoneNumber: string | undefined = useSelector((state: RootState) => state.login.phoneNo);
+  const phoneNumber: string | undefined = useSelector(
+    (state: RootState) => state.login.phoneNo
+  );
   const [phoneNumberData, setPhoneNumberData] = useState<InputValue<string>>({
     data: '',
     isValidation: false,
     errorMessage: '',
   });
-  useEffect(() => {
-    if(phoneNumber) {
-      setPhoneNumberData({
-        data: phoneNumber,
-        isValidation: true,
-        errorMessage: '',
-      });
-    }
-  }, [phoneNumber])
 
   const validatePhoneFormat = (value: string) => {
     const isError = value.length !== 10;
@@ -43,17 +33,19 @@ export const LoginForm = () => {
       errorMessage: isError ? '*Please enter the correct phone number.' : '',
     });
     setEnableGetOTP(!isError);
-    dispatch(loginSlice.actions.updatePhoneNo(value))
-  }
+    dispatch(loginSlice.actions.updatePhoneNo(value));
+  };
+
   useEffect(() => {
-    if(!phoneNumber) return;
-    validatePhoneFormat(phoneNumber)
-  }, [phoneNumber])
+    if (phoneNumber) {
+      validatePhoneFormat(phoneNumber);
+    }
+  }, [phoneNumber]);
 
   const [enableGetOTP, setEnableGetOTP] = useState(false);
-
-  const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
   const [hasSendOTP, setHasSendOTP] = useState(false);
+  const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
+
   const { resendSeconds } = useSelector((state: any) => state.login);
   // console.log("resendSeconds: ", resendSeconds);
 
@@ -84,10 +76,13 @@ export const LoginForm = () => {
       setHasSendOTP(false);
       setDoingCountdownSendOTP(false);
       setOtpData({
-          data: '',
-          isValidation: false,
-          errorMessage: '',
-      })
+        data: '',
+        isValidation: false,
+        errorMessage: '',
+      });
+    } else if (resendSeconds) {
+      setHasSendOTP(true);
+      setDoingCountdownSendOTP(true);
     }
   }, [resendSeconds]);
 
@@ -118,9 +113,7 @@ export const LoginForm = () => {
     }
   };
 
-  const appName: string =  useSelector((state: RootState) => state.app.appName);
-
-
+  const appName: string = useSelector((state: RootState) => state.app.appName);
 
   return (
     <>
@@ -130,11 +123,18 @@ export const LoginForm = () => {
           suffix={
             <Button
               dataTestingID={'getOTP'}
-              text={resendSeconds === 60 && !doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
-              disable={!(resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP )}
-              className={cx('ml-2 py-1 px-2.5 w-auto')}
+              text={
+                !doingCountdownSendOTP
+                  ? 'Get OTP'
+                  : `Resend ( ${resendSeconds}s )`
+              }
+              disable={!(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP)}
+              className={cx('ml-2 w-auto py-1 px-2.5')}
               onClick={() => {
-                resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
+                enableGetOTP &&
+                  !hasSendOTP &&
+                  !doingCountdownSendOTP &&
+                  onClickGetOTP();
               }}
             />
           }
@@ -144,7 +144,7 @@ export const LoginForm = () => {
           disabled={false}
           errorMessage={phoneNumberData.errorMessage}
           onBlur={(event: any) => {
-            validatePhoneFormat(event.target.value)
+            validatePhoneFormat(event.target.value);
           }}
           onChange={(event: any) => {
             const value = event.target.value;
@@ -175,7 +175,9 @@ export const LoginForm = () => {
             }
           }}
         />
-        <div className={`mt-4 text-cTextFields-placeholder-main`}>OTP Verification Code</div>
+        <div className={`text-cTextFields-placeholder-main mt-4`}>
+          OTP Verification Code
+        </div>
         <Input
           labelType="none"
           value={otpData.data}
@@ -188,7 +190,8 @@ export const LoginForm = () => {
               setOtpData({
                 data: '',
                 isValidation: false,
-                errorMessage: '*Please confirm the code you received and try again.',
+                errorMessage:
+                  '*Please confirm the code you received and try again.',
               });
             } else {
               setOtpData((prev) => {
@@ -206,20 +209,23 @@ export const LoginForm = () => {
         <Button
           dataTestingID={'Confirm'}
           text={'Confirm'}
-          onClick={() => { handleLogin();}}
+          onClick={() => {
+            handleLogin();
+          }}
         />
 
-        <div className="py-4 text-xs text-ctext-secondary">
+        <div className="text-ctext-secondary py-4 text-xs">
           By continuing, you agree to our
           <span
-            className="mx-1 text-cstate-info-main underline decoration-cstate-info-main"
+            className="text-cstate-info-main decoration-cstate-info-main mx-1 underline"
             onClick={() =>
               navigate(`${PageOrModalPathEnum.PrivacyPolicyModal}`)
             }
           >
             Privacy Policy
           </span>
-          . “{appName}” will send an SMS message to verify your phone number and account.
+          . “{appName}” will send an SMS message to verify your phone number and
+          account.
         </div>
       </div>
     </>

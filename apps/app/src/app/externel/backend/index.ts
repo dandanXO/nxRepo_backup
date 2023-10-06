@@ -15,7 +15,7 @@ export const Service = {
   IndexService: {
     getOpenIndex: getOpenIndexService,
     getIndex: getIndexService,
-    getNotification: getNotificationService
+    getNotification: getNotificationService,
   },
   UserService: {
     GetUserInfoService: getUserInfoService,
@@ -25,7 +25,6 @@ export const Service = {
     applyLoan: postApplyLoanService,
     getQuotaModelStatus: getQuotaModelStatusService,
   },
-
 };
-export {LoginRequest} from "./userService/LoginRequest";
-export {LoginResponse} from "./userService/LoginResponse";
+export { LoginRequest } from './userService/LoginRequest';
+export { LoginResponse } from './userService/LoginResponse';
