@@ -4,7 +4,6 @@
 // console.log("process.env.NX_TEST_GENERAL", process.env.NX_VERBOSE_LOGGING)
 // console.log("process.env.NX_TEST_SINGLE", process.env.NX_SERVE)
 import { IndiaCountry } from '@frontend/shared/domain';
-
 import { IEnvironment } from '@frontend/shared/domain';
 
 export const environment: IEnvironment = {

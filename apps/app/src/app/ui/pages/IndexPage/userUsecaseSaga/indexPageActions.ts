@@ -1,4 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
+
 import { LoanServiceRequest } from '../../../../externel/backend/loanService/LoanServiceRequest';
 
 export const IndexPageSagaAction = {

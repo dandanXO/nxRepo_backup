@@ -284,7 +284,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                         );
                       }}
                     >
-                      <img src={AmountPaidIcon} alt={""}/>
+                      <img src={AmountPaidIcon} alt={''} />
                     </div>
                   </div>
                 }
