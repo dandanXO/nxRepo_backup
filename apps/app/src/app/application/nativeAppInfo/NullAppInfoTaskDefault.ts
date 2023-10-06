@@ -15,6 +15,7 @@ if (window.Cypress) {
   uiVersion = typeof AppInfo.UI_VERSION !== 'undefined' ? String(AppInfo.UI_VERSION) : null;
 }
 
+const mode = isInApp() ? 'Webview' : 'H5';
 
 
 export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
@@ -37,7 +38,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       uiVersion: '55',
       token: null,
       // NOTICE: mode 的用途？
-      mode: isInApp() ? 'Webview' : 'H5',
+      mode,
       phoneNo: '',
     },
     prod: {
@@ -47,7 +48,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: 'APP',       // webview 不必要
       uiVersion: '55',      // NOTE: 換主題需要，但缺失
       token: null,          // webview 不必要
-      mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
+      mode,
       phoneNo: '',
     },
   },
@@ -70,7 +71,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       uiVersion: '15',
       token: null,
       // NOTICE: mode 的用途？
-      mode: isInApp() ? 'Webview' : 'H5',
+      mode,
       phoneNo: '',
     },
     prod: {
@@ -80,7 +81,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: 'APP',          // webview 不必要
       uiVersion: '15',         // NOTE: 換主題需要，但缺失
       token: null,             // webview 不必要
-      mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
+      mode,
       phoneNo: '',
     },
   },
@@ -103,7 +104,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       uiVersion: "1",
       token: null,
       // NOTICE: mode 的用途？
-      mode: isInApp() ? 'Webview' : 'H5',
+      mode,
       phoneNo: '',
     },
     prod: {
@@ -113,7 +114,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: 'APP',          // webview 不必要
       uiVersion: "1",
       token: null,             // webview 不必要
-      mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
+      mode,
       phoneNo: '',
     },
   },
@@ -136,7 +137,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       uiVersion: "1",
       token: null,
       // NOTICE: mode 的用途？
-      mode: isInApp() ? 'Webview' : 'H5',
+      mode,
       phoneNo: '',
     },
     prod: {
@@ -146,7 +147,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: 'APP',          // webview 不必要
       uiVersion: "1",
       token: null,             // webview 不必要
-      mode: isInApp() ? 'Webview' : 'H5', // NOTE: required
+      mode,
       phoneNo: '',
     }
   }

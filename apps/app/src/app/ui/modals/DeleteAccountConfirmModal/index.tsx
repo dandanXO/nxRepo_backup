@@ -11,7 +11,6 @@ import {GlobalAppMode} from "../../../application/GlobalAppMode";
 import {isInApp} from "../../../device/isInApp";
 import {alertModal} from "../../components/alertModal";
 import {SentryModule} from "../../../modules/sentry";
-import {put, select} from "redux-saga/effects";
 import {userInfoPersistence} from "../../../persistant/UserInfoPersistence";
 import { AndroidPage } from '../../../externel/window/IWindow';
 import {loginSlice} from "../../../reduxStore/loginSlice";

@@ -41,30 +41,24 @@ export function* userLogoutSaga() {
   try {
     let message = null;
 
-    // TODO: refactor h5=>PureH5
-    if (NativeAppInfo.mode === 'H5') {
-      // TODO: 單純 API 登出
-      // message = '尚未實作';
+    if (GlobalAppMode.mode === 'SimpleWebView') {
+      message = '注意: SimpleWebView 不會有此 flow';
+
+    } else if (GlobalAppMode.mode === 'IndexWebview') {
+
+      if(window['IndexTask'] && window['IndexTask']['navToPage']) {
+        // NOTE: 呼叫 Native APP 登出
+        window['IndexTask']['navToPage'](AndroidPage.LOGIN);
+      } else {
+        message = 'Native Error: window["IndexTask"]["navToPage"] function is missing';
+      }
       yield call(logoutSaga);
 
-    } else if (NativeAppInfo.mode === 'Webview') {
-      if (GlobalAppMode.mode === 'SimpleWebView') {
-        message = '注意: SimpleWebView 不會有此 flow';
-      } else if (GlobalAppMode.mode === 'IndexWebview') {
-        if (window['IndexTask'] && window['IndexTask']['navToPage'] && isInApp()) {
-          // NOTE: 呼叫 Native APP 登出
-          window['IndexTask']['navToPage'](AndroidPage.LOGIN);
-        } else {
-          if (isInApp()) {
-            message = 'Native Error: window["IndexTask"]["navToPage"] function is missing';
-          } else {
-            // TODO: 單純 API 登出
-            yield call(logoutSaga);
-          }
-        }
-      } else if (GlobalAppMode.mode === 'Unset') {
-        message = '注意: AppGlobal.mode === "None"';
-      }
+    } else if(GlobalAppMode.mode === "PureH5") {
+      yield call(logoutSaga);
+
+    } else if (GlobalAppMode.mode === 'Unset') {
+      message = '注意: AppGlobal.mode === "None"';
     }
 
     if (message) {
