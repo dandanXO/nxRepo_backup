@@ -75,6 +75,7 @@ class RefundRecord extends Component {
             return <CopyText text={convertMoneyFormat(text)} />;
           }
         },
+        { title: this.props.intl.formatMessage({ id: "page.table.coupon.usage.amount" }), dataIndex: 'couponUsageAmount', key: 'couponUsageAmount',  width: '9%'},
         {
 
           title: this.props.intl.formatMessage({ id: "page.search.list.funds.types" }),
