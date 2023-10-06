@@ -467,8 +467,8 @@ const IndexPage = () => {
 
   return (
     <div className={'flex flex-col'}>
-      {/*NOTE: 高度扣掉 TabBar:63px、Button:56px*/}
-      <div className={`flex flex-col overflow-auto h-[calc(100vh-63px-56px)] w-full absolute top-0`}>
+      {/*NOTE: 高度扣掉 TabBar:63px、Button:56px, 不能用vh計算有些瀏覽器會有自訂工具列*/}
+      <div className={`flex flex-col overflow-auto h-[calc(100%-63px-56px)] w-full absolute top-0`}>
       {/*<input type="checkbox" className="toggle" checked />*/}
 
       {/*NOTE: 頭部與內容*/}

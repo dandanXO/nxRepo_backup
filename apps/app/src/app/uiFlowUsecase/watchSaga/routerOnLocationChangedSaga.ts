@@ -6,6 +6,7 @@ import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
 import { isSimpleWebView } from "../../device/isSimpleWebView";
 import {getOrderNo} from "../../presentation/querystring/getOrderNo";
+import {GlobalAppMode} from "../../application/GlobalAppMode";
 
 // 目前的pathname
 let prevPathname = ''
@@ -32,9 +33,13 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
       yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`));
 
       if (prevPathname === PageOrModalPathEnum.IndexPage) {
-        yield put(modalSlice.actions.updateExitConfirmModal({
-          show: true
-        }));
+        if(GlobalAppMode.mode === "SimpleWebView" || GlobalAppMode.mode === "IndexWebview") {
+          yield put(modalSlice.actions.updateExitConfirmModal({
+            show: true
+          }));
+        } else if(GlobalAppMode.mode === "PureH5") {
+          // NOTE: nothing to do, stay in IndexPage
+        }
       }
     } else {
       // NOTE : RepaymentDetailPage route 控制
