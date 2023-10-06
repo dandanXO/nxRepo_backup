@@ -1,5 +1,10 @@
-import {Colors, fontSizeListToRem, IThemeConfig} from "@frontend/mobile/shared/ui";
-import {theme} from "apps/app/src/environments/themeModule/styledComponentTheme";
+import { theme } from 'apps/app/src/environments/themeModule/styledComponentTheme';
+
+import {
+  Colors,
+  IThemeConfig,
+  fontSizeListToRem,
+} from '@frontend/mobile/shared/ui';
 
 export const themeConfig: IThemeConfig = {
   // NOTE: Commons
@@ -55,7 +60,7 @@ export const themeConfig: IThemeConfig = {
     placeholder: theme['custom_text_fields_placeholder_main'],
     outline: theme['custom_text_fields_outline_main'],
   },
-  text:{
+  text: {
     primary: theme['custom_text_primary'],
     secondary: theme['custom_text_secondary'],
     tertiary: theme['custom_text_tertiary'],
@@ -63,7 +68,7 @@ export const themeConfig: IThemeConfig = {
   },
   textFiled: {
     background: {
-      main: theme['custom_text_fields_background_main']
-    }
-  }
+      main: theme['custom_text_fields_background_main'],
+    },
+  },
 };

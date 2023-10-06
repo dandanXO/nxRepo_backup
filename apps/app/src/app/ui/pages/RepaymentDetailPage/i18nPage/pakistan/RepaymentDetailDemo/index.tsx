@@ -1,26 +1,26 @@
-import {useTranslation} from 'react-i18next';
-import ListItem from '../../../../../core-components/ListItem';
+import { useTranslation } from 'react-i18next';
+
 import Money from '../../../../../components/Money';
-import {i18nLoanDetailsPage} from '../../../translations';
 import Divider from '../../../../../core-components/Divider';
+import ListItem from '../../../../../core-components/ListItem';
+import { i18nLoanDetailsPage } from '../../../translations';
 
 interface IRepaymentDetailDemo {
-  loanAmount: number
+  loanAmount: number;
 }
 const RepaymentDetailDemo = (props: IRepaymentDetailDemo) => {
-
   const { t } = useTranslation(i18nLoanDetailsPage.namespace);
 
   const isFetching = false;
 
-  const loanAmount = Number(props.loanAmount)
+  const loanAmount = Number(props.loanAmount);
   const bankTransCost = Number((loanAmount * 0.03).toFixed(0));
   const cibCost = 19;
   const nadraVerysisCost = 40;
-  const repaymentAmount = loanAmount + bankTransCost + cibCost + nadraVerysisCost;
+  const repaymentAmount =
+    loanAmount + bankTransCost + cibCost + nadraVerysisCost;
 
   return (
-
     <div className={``}>
       <ListItem
         title={t('Disbursal Amount')}

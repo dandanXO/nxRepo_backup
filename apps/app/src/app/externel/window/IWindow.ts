@@ -1,4 +1,4 @@
-import {IThemeConfig} from '@frontend/mobile/shared/ui';
+import { IThemeConfig } from '@frontend/mobile/shared/ui';
 
 import './onUploadKycBackgroundData';
 
@@ -25,6 +25,6 @@ declare global {
     reduxStore: any;
     Cypress?: any;
     //refactorme
-    fakeLocalStorage: {[key: string]: string;};
+    fakeLocalStorage: { [key: string]: string };
   }
 }

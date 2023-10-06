@@ -1,4 +1,4 @@
-import {IMappedTheme, ITheme} from './types';
+import { IMappedTheme, ITheme } from './types';
 
 export const mapCustomTailwindTheme = (variables: ITheme): IMappedTheme => {
   // console.log("variables", variables);

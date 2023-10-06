@@ -1,9 +1,10 @@
-import {errorFallback} from '../../../../uiFlowUsecase/utils/errorFallback';
-import {environment} from 'apps/app/src/environments/environmentModule/environment';
-import {takeLatest} from 'redux-saga/effects';
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
+import { takeLatest } from 'redux-saga/effects';
 
-import {BindBankcardAction} from './bindBankcardAction';
-import {IndiaCountry} from '@frontend/shared/domain';
+import { IndiaCountry } from '@frontend/shared/domain';
+
+import { errorFallback } from '../../../../uiFlowUsecase/utils/errorFallback';
+import { BindBankcardAction } from './bindBankcardAction';
 
 export function* watchBindBankcardSaga() {
   const countryName = environment.countryName;

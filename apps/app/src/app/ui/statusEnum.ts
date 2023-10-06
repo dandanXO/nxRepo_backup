@@ -1,6 +1,6 @@
-import {IndiaCountry} from '@frontend/shared/domain';
+import { IndiaCountry } from '@frontend/shared/domain';
 
-import {environment} from '../../environments/environmentModule/environment';
+import { environment } from '../../environments/environmentModule/environment';
 
 interface IStatusEnum {
   [key: string]: {
@@ -60,5 +60,7 @@ const statusEnum = {
 } as IStatusEnum;
 
 export const Status = (status: string) => {
-  return status ? statusEnum[status] : { text: '', color: '', bg: '', buttonText: '', paymentItemList: [] };
+  return status
+    ? statusEnum[status]
+    : { text: '', color: '', bg: '', buttonText: '', paymentItemList: [] };
 };

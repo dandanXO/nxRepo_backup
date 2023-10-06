@@ -52,5 +52,6 @@
   - [【Day16】滾動條 - 避免滾動穿透(Lock Scroll Chaining)](https://ithelp.ithome.com.tw/articles/10301290?sc=iThelpR)
 
 ---
-* Pure H5
-  * 下拉刷狀態沒管理好會失效
+
+- Pure H5
+  - 下拉刷狀態沒管理好會失效

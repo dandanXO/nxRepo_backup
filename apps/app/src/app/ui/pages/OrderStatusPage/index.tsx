@@ -1,13 +1,13 @@
 import moment from 'moment';
-import {useLocation, useNavigate} from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
-import {ApproveRecord} from '../../../externel/backend/loanService/ApproveRecord';
-import {getToken} from '../../../application/getToken';
-import {Navigation} from '../../core-components/Navigation';
-import {PageContent} from '../../core-components/PageContent';
-import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
-import {OrderStatusItem} from './OrderStatusItem';
-import {isShowNavigation} from "../../../device/isShowNavigation";
+import { getToken } from '../../../application/getToken';
+import { isShowNavigation } from '../../../device/isShowNavigation';
+import { ApproveRecord } from '../../../externel/backend/loanService/ApproveRecord';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Navigation } from '../../core-components/Navigation';
+import { PageContent } from '../../core-components/PageContent';
+import { OrderStatusItem } from './OrderStatusItem';
 
 const OrderStatusPage = (props: any) => {
   const navigate = useNavigate();
@@ -20,7 +20,9 @@ const OrderStatusPage = (props: any) => {
         <Navigation
           title={'Order Status'}
           back={() => {
-            navigate(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`);
+            navigate(
+              `${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`
+            );
           }}
         />
       )}

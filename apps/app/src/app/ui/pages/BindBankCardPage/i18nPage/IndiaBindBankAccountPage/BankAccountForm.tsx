@@ -1,29 +1,35 @@
-import React, {useState} from 'react';
+import { MdInfoOutline } from '@react-icons/all-files/md/MdInfoOutline';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import {Input} from '@frontend/mobile/shared/ui';
+import { Input } from '@frontend/mobile/shared/ui';
 
-import {Button} from '../../../../core-components/Button';
-import {IIndiaBankAccountForm} from '../types/IBankAccountForm';
-import {Form} from './Form';
-import {MdInfoOutline} from '@react-icons/all-files/md/MdInfoOutline';
+import { Button } from '../../../../core-components/Button';
 import IFSCHintModal from '../../../../modals/i18n/india/IFSCHintModal';
 import UPIHintModal from '../../../../modals/i18n/india/UPIHintModal';
-import {i18nBankBindAccountPage} from '../../translations';
-import {useTranslation} from 'react-i18next';
+import { i18nBankBindAccountPage } from '../../translations';
+import { IIndiaBankAccountForm } from '../types/IBankAccountForm';
+import { Form } from './Form';
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
-
-  const [ifscModalShow,SetIfscModalShow]=useState(false);
-  const [upiModalShow,SetUpiModalShow]=useState(false);
+  const [ifscModalShow, SetIfscModalShow] = useState(false);
+  const [upiModalShow, SetUpiModalShow] = useState(false);
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   return (
-    <div className="flex flex-col grow">
+    <div className="flex grow flex-col">
       <Form className="grow">
         <div className="text-ctext-primary mb-1 text-xs">
-          {t('For KYC, your Cardholder name and PAN card name should be match.')}
+          {t(
+            'For KYC, your Cardholder name and PAN card name should be match.'
+          )}
         </div>
-        <Input className="mb-3 text-sm" label={t('Cardholder Name') as string} value={props.cardholderName} disabled />
+        <Input
+          className="mb-3 text-sm"
+          label={t('Cardholder Name') as string}
+          value={props.cardholderName}
+          disabled
+        />
 
         <Input
           className="mb-3 text-sm"
@@ -42,11 +48,17 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
         <Input
-          suffix={<div className='absolute left-1'
-          onClick={(e) => {
-              e.preventDefault();
-              SetIfscModalShow(true)
-          }}><MdInfoOutline /></div>}
+          suffix={
+            <div
+              className="absolute left-1"
+              onClick={(e) => {
+                e.preventDefault();
+                SetIfscModalShow(true);
+              }}
+            >
+              <MdInfoOutline />
+            </div>
+          }
           className="mb-3 text-sm"
           label={t('IFSC Code (11characters )') as string}
           value={props.ifscData.data}
@@ -55,10 +67,17 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           errorMessage={props.ifscData.errorMessage}
         />
         <Input
-          suffix={<div className='absolute left-1' onClick={(e) => {
-            e.preventDefault();
-            SetUpiModalShow(true)
-          }}><MdInfoOutline /></div>}
+          suffix={
+            <div
+              className="absolute left-1"
+              onClick={(e) => {
+                e.preventDefault();
+                SetUpiModalShow(true);
+              }}
+            >
+              <MdInfoOutline />
+            </div>
+          }
           className="mb-4 text-sm"
           label={t('UPI ID') as string}
           value={props.upiData.data}
@@ -75,8 +94,10 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           }}
         />
       </div>
-      {ifscModalShow && <IFSCHintModal onClick={()=>SetIfscModalShow(false)}/>}
-      {upiModalShow && <UPIHintModal onClick={()=>SetUpiModalShow(false)}/>}
+      {ifscModalShow && (
+        <IFSCHintModal onClick={() => SetIfscModalShow(false)} />
+      )}
+      {upiModalShow && <UPIHintModal onClick={() => SetUpiModalShow(false)} />}
     </div>
   );
 };

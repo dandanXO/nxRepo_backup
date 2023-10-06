@@ -1,20 +1,26 @@
 // import Button from "../../components/Button";
-import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
-import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {Outlet, useLocation, useNavigate} from 'react-router';
-import {renderByCountry} from '../../../modules/i18n';
-import {getToken} from '../../../application/getToken';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet, useLocation, useNavigate } from 'react-router';
 
-import {RootState} from '../../../reduxStore';
-import {Navigation} from '../../core-components/Navigation';
-import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
+
+import { getToken } from '../../../application/getToken';
+import { isShowNavigation } from '../../../device/isShowNavigation';
+import { renderByCountry } from '../../../modules/i18n';
+import { RootState } from '../../../reduxStore';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Navigation } from '../../core-components/Navigation';
 import IndiaRepaymentDetailPage from './i18nPage/india/IndiaRepaymentDetailPage';
 import MexicoRepaymentDetailPage from './i18nPage/mexico/MexicoRepaymentDetailPage';
 import PakistanRepaymentDetailPage from './i18nPage/pakistan/PakistanRepaymentDetailPage';
 import PhilippinesRepaymentDetailPage from './i18nPage/philippines/PhilippinesRepaymentDetailPage';
-import {RepaymentDetailPageUseCaseActions} from './userUsecaseSaga';
-import {isShowNavigation} from '../../../device/isShowNavigation';
+import { RepaymentDetailPageUseCaseActions } from './userUsecaseSaga';
 
 const RepaymentDetailPage = (props: any) => {
   const navigate = useNavigate();
@@ -36,7 +42,9 @@ const RepaymentDetailPage = (props: any) => {
         <Navigation
           title={'Payment Details'}
           back={() => {
-            navigate(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`);
+            navigate(
+              `${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`
+            );
           }}
         />
       )}

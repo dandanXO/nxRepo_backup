@@ -1,4 +1,4 @@
-import {Moment} from "moment";
+import { Moment } from 'moment';
 
 export function formatDate(moment: Moment) {
   return moment.format('DD-MM-YYYY');

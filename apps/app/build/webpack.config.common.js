@@ -26,4 +26,4 @@ module.exports = {
   gitRevisionPlugin,
   ASSET_OUTPUT_PATH,
   PUBLIC_PATH,
-}
+};

@@ -1,8 +1,14 @@
-import {CameraSvgIconProps} from "../types/CameraSvgIconProps";
+import { CameraSvgIconProps } from '../types/CameraSvgIconProps';
 
 const PakistanCameraSvgIcon = ({ fill = '#f58b10' }: CameraSvgIconProps) => {
   return (
-    <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="80"
+      height="80"
+      viewBox="0 0 80 80"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g clip-path="url(#clip0_430_7604)">
         <path
           d="M12.8891 10.4187H60.0556C61.4195 10.4187 62.5267 11.526 62.5267 12.8898V75.8101C62.5267 77.174 61.4194 78.2814 60.0555 78.2814H12.8891C11.5252 78.2814 10.418 77.174 10.418 75.8103V12.89C10.418 11.526 11.5252 10.4187 12.8891 10.4187Z"

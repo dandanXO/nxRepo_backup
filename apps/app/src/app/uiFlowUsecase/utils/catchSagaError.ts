@@ -1,5 +1,6 @@
-import axios, {AxiosError} from 'axios';
-import {SentryModule} from '../../modules/sentry';
+import axios, { AxiosError } from 'axios';
+
+import { SentryModule } from '../../modules/sentry';
 
 export function* catchSagaError(error: any) {
   // console.log('catchSagaError.error', error);

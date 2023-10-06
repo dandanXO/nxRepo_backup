@@ -1,4 +1,4 @@
 export type TestingProps = {
-    dataTestingID?: string;
-    dataTestingDisable?: boolean;
+  dataTestingID?: string;
+  dataTestingDisable?: boolean;
 };

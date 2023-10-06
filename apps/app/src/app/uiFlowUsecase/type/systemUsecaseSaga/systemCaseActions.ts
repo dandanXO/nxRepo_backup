@@ -1,4 +1,4 @@
-import {createAction} from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
 export const SystemCaseActions = {
   InitSaga: createAction('InitSaga'),
@@ -9,9 +9,11 @@ export const SystemCaseActions = {
   // TODO: refactor me to indexPage
   SystemCountdownSaga: createAction<string>('SystemCountdownSaga'),
   // TODO: refactor me to indexPage
-  SystemRefreshableCountdownSaga: createAction<string>('SystemRefreshableCountdownSaga'),
+  SystemRefreshableCountdownSaga: createAction<string>(
+    'SystemRefreshableCountdownSaga'
+  ),
 
   SystemGetUserInfoSaga: createAction('SystemGetUserInfoSaga'),
 
-  SystemFetchCouponSaga:createAction('SystemFetchCouponSaga'),
+  SystemFetchCouponSaga: createAction('SystemFetchCouponSaga'),
 };

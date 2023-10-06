@@ -1,4 +1,4 @@
-import {AiOutlineClose} from '@react-icons/all-files/ai/AiOutlineClose';
+import { AiOutlineClose } from '@react-icons/all-files/ai/AiOutlineClose';
 
 export const CloseButton = () => {
   return (

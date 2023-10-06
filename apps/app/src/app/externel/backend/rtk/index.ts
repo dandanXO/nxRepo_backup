@@ -1,45 +1,45 @@
-import {createApi} from '@reduxjs/toolkit/query/react';
-import axiosBaseQuery from './axiosBaseQuery';
-import {GetRepayPayInfoResponse} from "../loanService/GetRepayPayInfoResponse";
+import { createApi } from '@reduxjs/toolkit/query/react';
 
-import {GetIndexRequest} from '../indexService/GetIndexRequest';
-import {GetIndexResponse} from '../indexService/GetIndexResponse';
-import {GetNotificationResponse} from '../indexService/GetNotificationResponse';
-import {GetLoanDetailRequest} from '../loanService/GetLoanDetailRequest';
-import {GetLoanDetailResponse} from '../loanService/GetLoanDetailResponse';
-import {GetLoanRecordListReponse} from '../loanService/GetLoanRecordListReponse';
-import {GetLoanRecordListRequest} from '../loanService/GetLoanRecordListRequest';
-import {GetRepayTypesRequest} from '../loanService/GetRepayTypesRequest';
-import {GetRepayTypesResponse} from '../loanService/GetRepayTypesResponse';
-import {GetReservationRequest} from '../loanService/GetReservationRequest';
-import {GetReservationResponse} from '../loanService/GetReservationResponse';
-import {GetUserProcessResponse} from '../loanService/GetUserProcessResponse';
-import {PostRepayCreateRequest} from '../loanService/PostRepayCreateRequest';
-import {PostRepayCreateResponse} from '../loanService/PostRepayCreateResponse';
-import {PostRepayReceiptResponse} from '../loanService/PostRepayReceiptResponse';
-import {PostReservationSubmitRequest} from '../loanService/PostReservationSubmitRequest';
-import {GetBankCardListResponse} from '../userService/GetBankCardListResponse';
-import {GetBindCardDropListResponse} from '../userService/GetBindCardDropListResponse';
-import {GetCouponApplicableListRequest} from '../userService/GetCouponApplicableListRequest';
-import {GetCouponApplicableListResponse} from '../userService/GetCouponApplicableListResponse';
-import {GetCouponListRequest} from '../userService/GetCouponListRequest';
-import {GetCouponListResponse} from '../userService/GetCouponResponse';
-import {GetFeedbackCategoriesResponse} from '../userService/GetFeedbackCategories';
-import {GetMXBindCardDropListResponse} from '../userService/GetMXBindCardDropListResponse';
-import {GetPHBindCardDropListResponse} from '../userService/GetPHBindCardDropListResponse';
-import {PostBangladeshBankBindSaveRequest} from '../userService/PostBangladeshBankBindSaveRequest';
-import {PostBankBindSaveRequest} from '../userService/PostBankBindSaveRequest';
-import {PostBankCardMainRequest} from '../userService/PostBankCardMainRequest';
-import {PostFeedbackRequest} from '../userService/PostFeedbackRequest';
-import {PostMXBankBindSaveRequest} from '../userService/PostMXBankBindSaveRequest';
-import {PostPHBankBindSaveRequest} from '../userService/PostPHBankBindSaveRequest';
-import {PostPKBankBindSaveRequest} from '../userService/PostPKBankBindSaveRequest';
-import {GetOTPCodeRequest} from '../userService/service/GetOTPCodeService';
-import {TraceBehaviorRequest} from './TraceBehaviorRequest';
-import {LoginRequest} from "../userService/LoginRequest";
-import {LoginResponse} from "../userService/LoginResponse";
-import {PostUserLogoutRequest} from "../userService/PostUserLogoutRequest";
-import {PostUserLogoutResponse} from "../userService/PostUserLogoutResponse";
+import { GetIndexRequest } from '../indexService/GetIndexRequest';
+import { GetIndexResponse } from '../indexService/GetIndexResponse';
+import { GetNotificationResponse } from '../indexService/GetNotificationResponse';
+import { GetLoanDetailRequest } from '../loanService/GetLoanDetailRequest';
+import { GetLoanDetailResponse } from '../loanService/GetLoanDetailResponse';
+import { GetLoanRecordListReponse } from '../loanService/GetLoanRecordListReponse';
+import { GetLoanRecordListRequest } from '../loanService/GetLoanRecordListRequest';
+import { GetRepayPayInfoResponse } from '../loanService/GetRepayPayInfoResponse';
+import { GetRepayTypesRequest } from '../loanService/GetRepayTypesRequest';
+import { GetRepayTypesResponse } from '../loanService/GetRepayTypesResponse';
+import { GetReservationRequest } from '../loanService/GetReservationRequest';
+import { GetReservationResponse } from '../loanService/GetReservationResponse';
+import { GetUserProcessResponse } from '../loanService/GetUserProcessResponse';
+import { PostRepayCreateRequest } from '../loanService/PostRepayCreateRequest';
+import { PostRepayCreateResponse } from '../loanService/PostRepayCreateResponse';
+import { PostRepayReceiptResponse } from '../loanService/PostRepayReceiptResponse';
+import { PostReservationSubmitRequest } from '../loanService/PostReservationSubmitRequest';
+import { GetBankCardListResponse } from '../userService/GetBankCardListResponse';
+import { GetBindCardDropListResponse } from '../userService/GetBindCardDropListResponse';
+import { GetCouponApplicableListRequest } from '../userService/GetCouponApplicableListRequest';
+import { GetCouponApplicableListResponse } from '../userService/GetCouponApplicableListResponse';
+import { GetCouponListRequest } from '../userService/GetCouponListRequest';
+import { GetCouponListResponse } from '../userService/GetCouponResponse';
+import { GetFeedbackCategoriesResponse } from '../userService/GetFeedbackCategories';
+import { GetMXBindCardDropListResponse } from '../userService/GetMXBindCardDropListResponse';
+import { GetPHBindCardDropListResponse } from '../userService/GetPHBindCardDropListResponse';
+import { LoginRequest } from '../userService/LoginRequest';
+import { LoginResponse } from '../userService/LoginResponse';
+import { PostBangladeshBankBindSaveRequest } from '../userService/PostBangladeshBankBindSaveRequest';
+import { PostBankBindSaveRequest } from '../userService/PostBankBindSaveRequest';
+import { PostBankCardMainRequest } from '../userService/PostBankCardMainRequest';
+import { PostFeedbackRequest } from '../userService/PostFeedbackRequest';
+import { PostMXBankBindSaveRequest } from '../userService/PostMXBankBindSaveRequest';
+import { PostPHBankBindSaveRequest } from '../userService/PostPHBankBindSaveRequest';
+import { PostPKBankBindSaveRequest } from '../userService/PostPKBankBindSaveRequest';
+import { PostUserLogoutRequest } from '../userService/PostUserLogoutRequest';
+import { PostUserLogoutResponse } from '../userService/PostUserLogoutResponse';
+import { GetOTPCodeRequest } from '../userService/service/GetOTPCodeService';
+import { TraceBehaviorRequest } from './TraceBehaviorRequest';
+import axiosBaseQuery from './axiosBaseQuery';
 
 export const APIV3 = createApi({
   reducerPath: 'apiv3',
@@ -204,12 +204,12 @@ export const APIV3 = createApi({
     }),
 
     // NOTICE: /repay/pay-info載入付款資訊
-    getRepayPayInfo: builder.query<GetRepayPayInfoResponse, {hash: string}>({
-      query: (queryParameters: {hash: string}) => ({
+    getRepayPayInfo: builder.query<GetRepayPayInfoResponse, { hash: string }>({
+      query: (queryParameters: { hash: string }) => ({
         method: 'get',
-        url:`/repay/pay-info?hash=${queryParameters.hash}`
-      })
-    })
+        url: `/repay/pay-info?hash=${queryParameters.hash}`,
+      }),
+    }),
   }),
 });
 
@@ -225,7 +225,7 @@ export const {
   usePostReservationSubmitMutation,
   useLazyGetMXBindCardDropListQuery,
   useGetPHBindCardDropListQuery,
-  useLazyGetRepayPayInfoQuery
+  useLazyGetRepayPayInfoQuery,
 } = APIV3;
 
 export const API = createApi({
@@ -248,7 +248,7 @@ export const API = createApi({
     // NOTE: 登出
     logout: builder.mutation<PostUserLogoutResponse, PostUserLogoutRequest>({
       query: (requestData: PostUserLogoutRequest) => ({
-        method: "post",
+        method: 'post',
         url: `/login/user/logout`,
         data: requestData,
       }),

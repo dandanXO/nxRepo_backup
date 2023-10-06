@@ -1,12 +1,13 @@
-import {useNavigate} from 'react-router';
+import { useNavigate } from 'react-router';
 
-import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
-import {PostRepayCreateRequest} from '../../externel/backend/loanService/PostRepayCreateRequest';
-import {PostRepayCreateResponse} from '../../externel/backend/loanService/PostRepayCreateResponse';
-import {usePostRepayCreateMutation} from '../../externel/backend/rtk';
-import {CustomAxiosError} from '../../externel/backend/rtk/axiosBaseQuery';
-import {getToken} from '../../application/getToken';
-import {PageOrModalPathEnum} from '../PageOrModalPathEnum';
+import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+
+import { getToken } from '../../application/getToken';
+import { PostRepayCreateRequest } from '../../externel/backend/loanService/PostRepayCreateRequest';
+import { PostRepayCreateResponse } from '../../externel/backend/loanService/PostRepayCreateResponse';
+import { usePostRepayCreateMutation } from '../../externel/backend/rtk';
+import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
+import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 
 const useExtendCreate = () => {
   const navigate = useNavigate();

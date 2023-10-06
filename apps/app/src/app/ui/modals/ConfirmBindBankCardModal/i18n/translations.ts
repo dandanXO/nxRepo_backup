@@ -1,4 +1,4 @@
-import {i18nComponent} from 'apps/app/src/app/modules/i18n/i18nComponent';
+import { i18nComponent } from 'apps/app/src/app/modules/i18n/i18nComponent';
 
 export const i18nConfirmBindBankCardModal: i18nComponent = {
   namespace: 'pages/i18nConfirmBindBankCardModal',

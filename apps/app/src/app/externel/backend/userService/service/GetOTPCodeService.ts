@@ -1,4 +1,4 @@
-import {gateway} from '../../../../gateway';
+import { gateway } from '../../../../gateway';
 
 export type GetOTPCodeRequest = {
   appName: string;
@@ -18,6 +18,12 @@ export type GetOTPCodeRequest = {
 };
 
 export const GetOTPCodeService = async (request: GetOTPCodeRequest) => {
-  const { data } = await gateway('/api', '/v2/login/otp-code', 'post', request, {});
+  const { data } = await gateway(
+    '/api',
+    '/v2/login/otp-code',
+    'post',
+    request,
+    {}
+  );
   return data;
 };

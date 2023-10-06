@@ -1,25 +1,29 @@
-import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
-import React, {useCallback} from 'react';
-import {WithTranslation, withTranslation} from 'react-i18next';
-import {useLocation, useNavigate} from 'react-router';
+import React, { useCallback } from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
 
-import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
-import {usePostRepayReceiptMutation} from '../../../externel/backend/rtk';
-import {PostRepayReceiptResponse} from '../../../externel/backend/rtk/old/PostRepayReceiptResponse';
-import {renderByCountry} from '../../../modules/i18n';
+import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import {getToken} from '../../../application/getToken';
-
-import {Navigation} from '../../core-components/Navigation';
-import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
-import {useUploadPaymentReceipt} from './hooks/useUploadPaymentReceipt';
-import {IndiaUploadPaymentReceiptPage} from './i18nPage/IndiaUploadPaymentReceiptPage';
-import {MexicoUploadPaymentReceiptPage} from './i18nPage/MexicoUploadPaymentReceiptPage';
-import {PakistanUploadPaymentReceiptPage} from './i18nPage/PakistanUploadPaymentReceiptPage';
+import { getToken } from '../../../application/getToken';
+import { isShowNavigation } from '../../../device/isShowNavigation';
+import { usePostRepayReceiptMutation } from '../../../externel/backend/rtk';
+import { PostRepayReceiptResponse } from '../../../externel/backend/rtk/old/PostRepayReceiptResponse';
+import { getOrderNo } from '../../../externel/window/querystring/getOrderNo';
+import { renderByCountry } from '../../../modules/i18n';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Navigation } from '../../core-components/Navigation';
+import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
+import { IndiaUploadPaymentReceiptPage } from './i18nPage/IndiaUploadPaymentReceiptPage';
+import { MexicoUploadPaymentReceiptPage } from './i18nPage/MexicoUploadPaymentReceiptPage';
+import { PakistanUploadPaymentReceiptPage } from './i18nPage/PakistanUploadPaymentReceiptPage';
 import PhilippinesUploadPaymentReceiptPage from './i18nPage/PhilippinesUploadPaymentReceiptPage';
-import {i18nUploadPaymentReceiptPage} from './i18nPage/translations';
-import {getOrderNo} from '../../../externel/window/querystring/getOrderNo';
-import {isShowNavigation} from '../../../device/isShowNavigation';
+import { i18nUploadPaymentReceiptPage } from './i18nPage/translations';
 
 export interface PostRepayReceiptRequestProps {
   formFile: any;

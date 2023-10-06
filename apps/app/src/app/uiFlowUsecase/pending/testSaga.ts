@@ -1,9 +1,9 @@
-import {push} from '@lagunovsky/redux-react-router';
-import {createAction} from '@reduxjs/toolkit';
-import {call, put, takeLatest,} from 'redux-saga/effects';
+import { push } from '@lagunovsky/redux-react-router';
+import { createAction } from '@reduxjs/toolkit';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
-import {userLoginAction, userLoginSaga} from './userLoginSaga';
-import {userLogoutAction, userLogoutSaga} from './userLogoutSaga';
+import { userLoginAction, userLoginSaga } from './userLoginSaga';
+import { userLogoutAction, userLogoutSaga } from './userLogoutSaga';
 
 export function* AppSaga() {
   // sagas will be executed in parallel.

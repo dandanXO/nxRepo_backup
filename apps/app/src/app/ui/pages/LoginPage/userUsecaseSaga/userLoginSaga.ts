@@ -1,15 +1,18 @@
-import {push, ROUTER_ON_LOCATION_CHANGED} from '@lagunovsky/redux-react-router';
-import {PayloadAction} from '@reduxjs/toolkit';
-import {put, race, take} from 'redux-saga/effects';
+import {
+  ROUTER_ON_LOCATION_CHANGED,
+  push,
+} from '@lagunovsky/redux-react-router';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { loginSlice } from 'apps/app/src/app/reduxStore/loginSlice';
+import { put, race, take } from 'redux-saga/effects';
 
-import {APIV3} from '../../../../externel/backend/rtk';
-import {AppRunningModeEnum, appSlice} from '../../../../reduxStore/appSlice';
-import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
-import {PageOrModalPathEnum} from '../../../PageOrModalPathEnum';
-import {UserLoginActionPayload} from './index';
-import {loginSlice} from 'apps/app/src/app/reduxStore/loginSlice';
-import {setTokenToLocalStorage} from "../../../../application/getToken";
-import {userInfoPersistence} from "../../../../persistant/UserInfoPersistence";
+import { setTokenToLocalStorage } from '../../../../application/getToken';
+import { APIV3 } from '../../../../externel/backend/rtk';
+import { userInfoPersistence } from '../../../../persistant/UserInfoPersistence';
+import { AppRunningModeEnum, appSlice } from '../../../../reduxStore/appSlice';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
+import { PageOrModalPathEnum } from '../../../PageOrModalPathEnum';
+import { UserLoginActionPayload } from './index';
 
 export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {
@@ -20,11 +23,11 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
         msgCode: action.payload.otp,
       }) as any
     );
-    const {success, failure} = yield race({
+    const { success, failure } = yield race({
       success: take(APIV3.endpoints.login.matchFulfilled),
       failure: take(APIV3.endpoints.login.matchRejected),
-    })
-    if(success) {
+    });
+    if (success) {
       if (success.payload.token) {
         const token = success.payload.token;
         yield put(appSlice.actions.updateMode(AppRunningModeEnum.WEB));
@@ -37,10 +40,9 @@ export function* userLoginSaga(action: PayloadAction<UserLoginActionPayload>) {
       }
     }
 
-    if(failure){
-        yield put(loginSlice.actions.updateResendSeconds(0))
+    if (failure) {
+      yield put(loginSlice.actions.updateResendSeconds(0));
     }
-
   } catch (error) {
     yield catchSagaError(error);
   }

@@ -1,17 +1,18 @@
-import React, {useCallback, useState} from 'react';
-import {z} from 'zod';
+import React, { useCallback, useState } from 'react';
+import { z } from 'zod';
 
-import {environment} from '../../../../../environments/environmentModule/environment';
-
-import {PostRepayReceiptRequestProps} from '../index';
-import {InputValue} from "../../../core-components/form/InputValue";
+import { environment } from '../../../../../environments/environmentModule/environment';
+import { InputValue } from '../../../core-components/form/InputValue';
+import { PostRepayReceiptRequestProps } from '../index';
 
 interface PureUploadPaymentReceiptPageProps {
   postRepayReceiptRequest: (props: PostRepayReceiptRequestProps) => void;
   token: string;
   orderNo: string;
 }
-export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps) => {
+export const useUploadPaymentReceipt = (
+  props: PureUploadPaymentReceiptPageProps
+) => {
   // NOTE: input 1/2
   const [utr, setURT] = useState<InputValue<string>>({
     data: '',
@@ -83,9 +84,9 @@ export const useUploadPaymentReceipt = (props: PureUploadPaymentReceiptPageProps
     const isValidation = result.success;
     const errorMessage = !isValidation ? result.error.format()._errors[0] : '';
     setURT({
-        ...utr,
-        isValidation,
-        errorMessage,
+      ...utr,
+      isValidation,
+      errorMessage,
     });
   }, [utr.data]);
 

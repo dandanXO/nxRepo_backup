@@ -1,14 +1,15 @@
-import {useCallback, useEffect, useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {z} from 'zod';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { z } from 'zod';
 
-import {InputValue} from '@frontend/mobile/shared/ui';
+import { InputValue } from '@frontend/mobile/shared/ui';
+
 import {
   GetBindCardDropListResponse,
-  WalletVendor
+  WalletVendor,
 } from '../../../../../../externel/backend/rtk/old/GetBindCardDropList';
-import {i18nBankBindAccountPage} from '../../../translations';
-import {processWalletDisplayName} from './customization/processWalletDisplayName';
+import { i18nBankBindAccountPage } from '../../../translations';
+import { processWalletDisplayName } from './customization/processWalletDisplayName';
 
 interface IUsePakistanMobileWalletForm {
   isPostBankBindSaveToPKMutationLoading: boolean;
@@ -16,12 +17,16 @@ interface IUsePakistanMobileWalletForm {
   bindCardDropListData?: GetBindCardDropListResponse;
 }
 
-export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm) => {
+export const usePakistanMobileWalletForm = (
+  props: IUsePakistanMobileWalletForm
+) => {
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   // NOTE: Wallet List
   // Wallet List - 電子錢包列表 Data
-  const [walletDropList, setWalletDropList] = useState<(string | React.ReactNode)[]>([]);
+  const [walletDropList, setWalletDropList] = useState<
+    (string | React.ReactNode)[]
+  >([]);
   // const { iBanData, onIBanChange, onIbanBlur, validateIban } = usePakistanIBanValidate();
 
   // Wallet Selected - 選擇的電子錢包
@@ -35,9 +40,11 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     const walletList =
       props.bindCardDropListData &&
       props.bindCardDropListData.availableWalletVendors &&
-      props.bindCardDropListData.availableWalletVendors.map((wallet: WalletVendor) => {
-        return processWalletDisplayName(wallet);
-      });
+      props.bindCardDropListData.availableWalletVendors.map(
+        (wallet: WalletVendor) => {
+          return processWalletDisplayName(wallet);
+        }
+      );
     setWalletDropList(walletList);
     setWalletValue({ value: 0, label: walletList[0] });
   }, [props.bindCardDropListData]);
@@ -49,7 +56,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     errorMessage: '',
   });
 
-  const [confirmMobileData, setConfirmMobileData] = useState<InputValue<string>>({
+  const [confirmMobileData, setConfirmMobileData] = useState<
+    InputValue<string>
+  >({
     data: '',
     isValidation: false,
     errorMessage: '',
@@ -89,7 +98,9 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   // Wallet Account  - 驗證
   const validateMobileWalletAccount = useCallback(() => {
     // NOTICE: refactor
-    const message = t('Account number should be 10 or 10 digits starting with 0.');
+    const message = t(
+      'Account number should be 10 or 10 digits starting with 0.'
+    );
     const scheme = z.string().regex(/^0/, message).length(11, message);
     const scheme2 = z.string().length(10, message);
     const result = z.union([scheme, scheme2]).safeParse(mobileData.data);
@@ -114,9 +125,11 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
   const validateConfirmMobileData = useCallback(() => {
     const confirmMobile = confirmMobileData.data;
     const mobile = mobileData.data;
-    const confirmMobileSchema = z.string().refine((confirmMobile) => confirmMobile === mobile, {
-      message: t('Please make sure your mobile number match.') as string,
-    });
+    const confirmMobileSchema = z
+      .string()
+      .refine((confirmMobile) => confirmMobile === mobile, {
+        message: t('Please make sure your mobile number match.') as string,
+      });
     const result = confirmMobileSchema.safeParse(confirmMobile);
     if (!result.success) {
       const firstError = result.error.format();
@@ -141,8 +154,7 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     validateConfirmMobileData();
     // validateIban();
 
-    return mobileData.isValidation && confirmMobileData.isValidation
-
+    return mobileData.isValidation && confirmMobileData.isValidation;
   }, [
     mobileData.isValidation,
     mobileData.data,
@@ -174,6 +186,6 @@ export const usePakistanMobileWalletForm = (props: IUsePakistanMobileWalletForm)
     // Form
     confirm,
     validateMobileWalletAccount,
-    validateConfirmMobileData
+    validateConfirmMobileData,
   };
 };

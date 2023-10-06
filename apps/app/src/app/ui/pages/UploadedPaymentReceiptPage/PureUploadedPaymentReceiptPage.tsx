@@ -1,14 +1,18 @@
-import {WithTranslation, withTranslation} from 'react-i18next';
+import { WithTranslation, withTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-import {Page} from '@frontend/mobile/shared/ui';
+import { Page } from '@frontend/mobile/shared/ui';
+import {
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import {Button} from '../../core-components/Button';
-import {SuccessICON} from './components/i18n/SuccessICON';
-import {i18nUploadedPaymentReceiptPage} from './components/i18n/translations';
+import { environment } from '../../../../environments/environmentModule/environment';
+import { Button } from '../../core-components/Button';
+import { SuccessICON } from './components/i18n/SuccessICON';
+import { i18nUploadedPaymentReceiptPage } from './components/i18n/translations';
 import UploadedPaymentReceiptPage from './index';
-import {environment} from '../../../../environments/environmentModule/environment';
-import {MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
 
 const CustomPage = styled(Page)`
   display: flex;
@@ -48,24 +52,32 @@ type UploadedPaymentReceiptPage = {
   navigateToLoanDetails: () => void;
 } & WithTranslation;
 
-export const PureUploadedPaymentReceiptPage = withTranslation(i18nUploadedPaymentReceiptPage.namespace)(
-  (props: UploadedPaymentReceiptPage) => {
-    return (
-      <CustomPage>
-        <Content>
-          <SuccessICON />
-          <Title>{props.t('Upload payment receipt')}</Title>
-          <Description>{props.t('Thank you. Your receipt has been uploaded successfully.')}</Description>
-        </Content>
-        <ControlSection>
-          <Button
-              text={props.t('Done')}
-              primaryTypeGradient={environment.country === PakistanCountry.country}
-              outlineTheme={[MexicoCountry.country, PhilippinesCountry.country].includes(environment.country) ? 'round' : undefined}
-              onClick={() => props.navigateToLoanDetails()}
-          />
-        </ControlSection>
-      </CustomPage>
-    );
-  }
-);
+export const PureUploadedPaymentReceiptPage = withTranslation(
+  i18nUploadedPaymentReceiptPage.namespace
+)((props: UploadedPaymentReceiptPage) => {
+  return (
+    <CustomPage>
+      <Content>
+        <SuccessICON />
+        <Title>{props.t('Upload payment receipt')}</Title>
+        <Description>
+          {props.t('Thank you. Your receipt has been uploaded successfully.')}
+        </Description>
+      </Content>
+      <ControlSection>
+        <Button
+          text={props.t('Done')}
+          primaryTypeGradient={environment.country === PakistanCountry.country}
+          outlineTheme={
+            [MexicoCountry.country, PhilippinesCountry.country].includes(
+              environment.country
+            )
+              ? 'round'
+              : undefined
+          }
+          onClick={() => props.navigateToLoanDetails()}
+        />
+      </ControlSection>
+    </CustomPage>
+  );
+});

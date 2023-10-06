@@ -1,10 +1,10 @@
-import {BaseQueryFn} from '@reduxjs/toolkit/query';
-import type {AxiosError, AxiosRequestConfig} from 'axios';
+import { BaseQueryFn } from '@reduxjs/toolkit/query';
+import type { AxiosError, AxiosRequestConfig } from 'axios';
 
-import {AppFlag} from '../../../../environments/flag';
-import {SentryModule} from '../../../modules/sentry';
-import {alertModal} from '../../../ui/components/alertModal';
-import {gateway} from '../../../gateway';
+import { AppFlag } from '../../../../environments/flag';
+import { gateway } from '../../../gateway';
+import { SentryModule } from '../../../modules/sentry';
+import { alertModal } from '../../../ui/components/alertModal';
 
 export interface CustomAxiosError {
   status: any;
@@ -27,10 +27,16 @@ const axiosBaseQuery =
   > =>
   async ({ url, method, data, params, headers }) => {
     try {
-      const resultData = await gateway(baseUrl, url, method, data, params, headers);
+      const resultData = await gateway(
+        baseUrl,
+        url,
+        method,
+        data,
+        params,
+        headers
+      );
       // console.log('[app] resultData:', resultData);
       return resultData;
-
     } catch (axiosError) {
       // NOTE: err
       const err: AxiosError = axiosError as AxiosError;
@@ -51,17 +57,21 @@ const axiosBaseQuery =
         };
         message: string;
       };
-      const backendCustomErrorMessage = backendCustomError?.data?.msg || backendCustomError.message;
+      const backendCustomErrorMessage =
+        backendCustomError?.data?.msg || backendCustomError.message;
       console.info('[app] customErrorMessage:', backendCustomErrorMessage);
       // console.log(err.config.url);
 
       // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
-      if (err.config.url !== '/api/v2/loan/quota/refresh' && err.config.url !== '/api/v3/trace/behavior') {
+      if (
+        err.config.url !== '/api/v2/loan/quota/refresh' &&
+        err.config.url !== '/api/v3/trace/behavior'
+      ) {
         // NOTE: runAxios 那邊已經跳出錯誤
-        if(!(axiosError as any).isAlertModal) {
+        if (!(axiosError as any).isAlertModal) {
           alertModal(backendCustomErrorMessage);
         } else {
-          console.log("runAxios 那邊已經跳出錯誤");
+          console.log('runAxios 那邊已經跳出錯誤');
         }
       }
 

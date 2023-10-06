@@ -1,4 +1,4 @@
-type ComputeNumberType = "+" | "-" | "*" | "/";
+type ComputeNumberType = '+' | '-' | '*' | '/';
 
 export function computeNumber(a: number, type: ComputeNumberType, b: number) {
   /**
@@ -6,7 +6,7 @@ export function computeNumber(a: number, type: ComputeNumberType, b: number) {
    * @param {number} n 數字
    */
   function getDecimalLength(n: number) {
-    const decimal = n.toString().split(".")[1];
+    const decimal = n.toString().split('.')[1];
     return decimal ? decimal.length : 0;
   }
   /**
@@ -14,24 +14,28 @@ export function computeNumber(a: number, type: ComputeNumberType, b: number) {
    * @description 防止出現 `33.33333*100000 = 3333332.9999999995` && `33.33*10 = 333.29999999999995` 這類情況做的處理
    * @param {number} n
    */
-  const amend = (n: number, precision = 15) => parseFloat(Number(n).toPrecision(precision));
-  const power = Math.pow(10, Math.max(getDecimalLength(a), getDecimalLength(b)));
+  const amend = (n: number, precision = 15) =>
+    parseFloat(Number(n).toPrecision(precision));
+  const power = Math.pow(
+    10,
+    Math.max(getDecimalLength(a), getDecimalLength(b))
+  );
   let result = 0;
 
   a = amend(a * power);
   b = amend(b * power);
 
   switch (type) {
-    case "+":
+    case '+':
       result = (a + b) / power;
       break;
-    case "-":
+    case '-':
       result = (a - b) / power;
       break;
-    case "*":
+    case '*':
       result = (a * b) / (power * power);
       break;
-    case "/":
+    case '/':
       result = a / b;
       break;
   }
@@ -48,6 +52,6 @@ export function computeNumber(a: number, type: ComputeNumberType, b: number) {
      */
     next(nextType: any, nextValue: any) {
       return computeNumber(result, nextType, nextValue);
-    }
-  }
+    },
+  };
 }

@@ -1,4 +1,4 @@
-import {BannerResponse} from './BannerResponse';
+import { BannerResponse } from './BannerResponse';
 
 export type GetOpenIndexResponse = {
   banners: BannerResponse[];

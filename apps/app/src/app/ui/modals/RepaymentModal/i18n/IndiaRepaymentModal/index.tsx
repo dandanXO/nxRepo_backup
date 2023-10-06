@@ -1,23 +1,24 @@
-import {RiArrowRightSLine} from '@react-icons/all-files/ri/RiArrowRightSLine';
+import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
-import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {useLocation, useNavigate} from 'react-router';
-import {Input, ListItem, Radio} from '@frontend/mobile/shared/ui';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
 
-import {environment} from '../../../../../../environments/environmentModule/environment';
-import {getToken} from '../../../../../application/getToken';
+import { Input, ListItem, Radio } from '@frontend/mobile/shared/ui';
+
+import { environment } from '../../../../../../environments/environmentModule/environment';
+import { getToken } from '../../../../../application/getToken';
+import { getOrderNo } from '../../../../../externel/window/querystring/getOrderNo';
+import { formatDate } from '../../../../../modules/format/formatDate';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
-import {Button} from '../../../../core-components/Button';
-import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
-import {IRepaymentModalProps} from '../../index';
+import { Button } from '../../../../core-components/Button';
+import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
-import {i18nRepaymentModal} from '../translations';
-import {formatDate} from "../../../../../modules/format/formatDate";
-import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
+import { i18nRepaymentModal } from '../translations';
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {
@@ -32,7 +33,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
     setRepayType,
     handleConfirm,
     orderNo,
-    isPostRepayCreateLoading
+    isPostRepayCreateLoading,
   } = props;
   const navigate = useNavigate();
 
@@ -83,12 +84,20 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           value = value.replace(`${environment.currency} `, '').trim();
 
           if (value === '' || Number(value) === 0) {
-            setBalanceValueErrorMessage(t('This field cannot be left blank or 0.') as string);
+            setBalanceValueErrorMessage(
+              t('This field cannot be left blank or 0.') as string
+            );
           } else if (!new RegExp('^[0-9]*$').test(value)) {
-            setBalanceValueErrorMessage(t('Numbers only. Please try again.') as string);
+            setBalanceValueErrorMessage(
+              t('Numbers only. Please try again.') as string
+            );
           } else if (Number(value) > Number(balance)) {
             // NOTE: 限制數字最大值
-            setBalanceValueErrorMessage(t('Amount cannot be greater than the repayment balance.') as string);
+            setBalanceValueErrorMessage(
+              t(
+                'Amount cannot be greater than the repayment balance.'
+              ) as string
+            );
           } else {
             setBalanceValueErrorMessage('');
           }
@@ -98,22 +107,31 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           }
         }}
         onBlur={() => {}}
-        errorMessage={balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage}
+        errorMessage={
+          balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage
+        }
       />
       {radioValue !== 'custom' && (
         <a
           className="mt-1 flex w-full items-center justify-center rounded-lg border border-solid border-[#aaaaaa] py-2.5 pl-5"
           onClick={() => {
             if (isRepayTypesFetching) return;
-            navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
-              state: {
-                ...location.state,
-                paymentAmount: balance,
-              },
-            });
+            navigate(
+              `${
+                PageOrModalPathEnum.RepaymentDetailPage
+              }/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
+              {
+                state: {
+                  ...location.state,
+                  paymentAmount: balance,
+                },
+              }
+            );
           }}
         >
-          <div className={cx('flex grow flex-nowrap justify-between text-base')}>
+          <div
+            className={cx('flex grow flex-nowrap justify-between text-base')}
+          >
             <div className="self-center">{t('Coupon')}</div>
             {coupon ? (
               <div className="my-[-4px] flex grow flex-col items-end justify-between">
@@ -121,11 +139,18 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                   {<Money money={coupon.discountAmount} isNagetive={true} />}
                 </div>
                 <div className="text-ctext-tertiary text-xs">
-                  <div>{`${t('expiration date')}: `}{coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
+                  <div>
+                    {`${t('expiration date')}: `}
+                    {coupon.expireTime
+                      ? formatDate(moment(coupon.expireTime))
+                      : ''}
+                  </div>
                 </div>
               </div>
             ) : (
-              <div className="text-cTextFields-placeholder-main">{t('Select')}</div>
+              <div className="text-cTextFields-placeholder-main">
+                {t('Select')}
+              </div>
             )}
           </div>
           <RiArrowRightSLine className="fill-ctext-primary mx-1 text-xl" />
@@ -136,9 +161,17 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
           title={t('Repayment Amount') as string}
           text={
             radioValue !== 'custom' ? (
-              <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />
+              <Money
+                money={
+                  Number(balance) - Number(coupon ? coupon.discountAmount : 0)
+                }
+              />
             ) : (
-              <Money money={balanceValue.replace(`${environment.currency}`, '').trim()} />
+              <Money
+                money={balanceValue
+                  .replace(`${environment.currency}`, '')
+                  .trim()}
+              />
             )
           }
         />
@@ -147,7 +180,12 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div className={`mr-1.5 w-full`}>
           <Button
             onClick={() => {
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo } });
+              navigate(
+                `${
+                  PageOrModalPathEnum.RepaymentDetailPage
+                }?token=${getToken()}&orderNo=${getOrderNo()}`,
+                { state: { orderNo } }
+              );
             }}
             text={t('Cancel')}
             type={'ghost'}
@@ -167,11 +205,19 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
         </div>
       </div>
 
-      <div className={`text-left text-xs text-ctext-secondary`}>
+      <div className={`text-ctext-secondary text-left text-xs`}>
         <div>{t('Attention')}:</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
-          <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
-          <li>{t('In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.')}</li>
+          <li>
+            {t(
+              'Before repayment, please make sure that you have enough balance on your bank account.'
+            )}
+          </li>
+          <li>
+            {t(
+              'In order to protect your rights, we strongly recommend you take a screenshot and upload your UTR number after completing the repayment and return to the APP to upload your repayment receipt.'
+            )}
+          </li>
         </ul>
       </div>
 

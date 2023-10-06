@@ -1,4 +1,4 @@
-import {DefaultThemeConfig} from '@frontend/mobile/shared/ui';
+import { DefaultThemeConfig } from '@frontend/mobile/shared/ui';
 
 const { color } = DefaultThemeConfig;
 

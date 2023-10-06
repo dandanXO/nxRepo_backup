@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 export const validationPHMobileNumber = (data: string) => {
   const mobileNumberSchema = z

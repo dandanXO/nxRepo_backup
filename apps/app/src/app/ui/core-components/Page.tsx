@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
 export type Props = {
   children: ReactNode;
@@ -8,4 +8,3 @@ export type Props = {
 export const Page = (props: Props) => {
   return <div className={cx('h-full', props.className)}>{props.children}</div>;
 };
-

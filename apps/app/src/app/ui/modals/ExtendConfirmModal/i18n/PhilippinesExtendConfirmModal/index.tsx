@@ -1,13 +1,13 @@
 import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {useLocation, useNavigate} from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router';
 
-import {getToken} from '../../../../../application/getToken';
+import { getToken } from '../../../../../application/getToken';
+import { getOrderNo } from '../../../../../externel/window/querystring/getOrderNo';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
+import { Button } from '../../../../core-components/Button';
 import Modal from '../../../../core-components/Modal';
-import {Button} from '../../../../core-components/Button';
-import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
-import {i18nExtendConfirmModal} from '../../translations';
-import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
+import { i18nExtendConfirmModal } from '../../translations';
 
 const PhilippinesExtendConfirmModal = () => {
   const navigate = useNavigate();

@@ -1,10 +1,9 @@
-import {applyTheme} from './utils';
-
-import {themeConfig} from "./themeConfig";
-import {IAndroidAppInfo} from "../../../externel/nativeApp/types/IAndroidAppInfo";
+import { IAndroidAppInfo } from '../../../externel/nativeApp/types/IAndroidAppInfo';
+import { themeConfig } from './themeConfig';
+import { applyTheme } from './utils';
 
 const applyCustomSharedLibTheme = (androidAPPInfo: IAndroidAppInfo) => {
-    window.theme = themeConfig
+  window.theme = themeConfig;
 };
 
 const applyDefaultCustomTailwindTheme = (androidAPPInfo: IAndroidAppInfo) => {
@@ -25,4 +24,4 @@ export const applyCustomTheme = (androidAppInfo: IAndroidAppInfo) => {
 };
 export const ThemeModule = {
   applyCustomTheme,
-}
+};

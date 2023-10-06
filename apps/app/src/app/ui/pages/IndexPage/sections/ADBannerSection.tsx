@@ -1,11 +1,11 @@
-import {useDispatch} from 'react-redux';
-import {IndexPageProps} from '../../../../reduxStore';
-import {IndexPageSagaAction} from '../userUsecaseSaga/indexPageActions';
+import { useDispatch } from 'react-redux';
+
+import { IndexPageProps } from '../../../../reduxStore';
+import { IndexPageSagaAction } from '../userUsecaseSaga/indexPageActions';
 
 type Props = IndexPageProps;
 
 export const ADBannerSection = (props: Props) => {
-
   const dispatch = useDispatch();
   // NOTE: User Event
   const onUserClickToOpenBrowser = (url: string) => {

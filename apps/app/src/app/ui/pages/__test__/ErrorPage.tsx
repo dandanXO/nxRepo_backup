@@ -2,8 +2,8 @@ import cx from 'classnames';
 import React from 'react';
 import useErrorBoundary from 'use-error-boundary';
 
-import {ErrorBoundary as CustomErrorBoundary} from '../../../application/errorHandler/ErrorBoundary';
-import {Button} from '../../core-components/Button';
+import { ErrorBoundary as CustomErrorBoundary } from '../../../application/errorHandler/ErrorBoundary';
+import { Button } from '../../core-components/Button';
 
 const JustRenderMe = () => {
   throw new Error('💥');
@@ -24,7 +24,11 @@ export const ErrorPage = () => {
       {didCatch ? (
         <div>
           <p>An error has been caught: {error.message}</p>
-          <Button dataTestingID={'apply'} text={'Reset Error'} onClick={() => reset()} />
+          <Button
+            dataTestingID={'apply'}
+            text={'Reset Error'}
+            onClick={() => reset()}
+          />
         </div>
       ) : (
         <ErrorBoundary>

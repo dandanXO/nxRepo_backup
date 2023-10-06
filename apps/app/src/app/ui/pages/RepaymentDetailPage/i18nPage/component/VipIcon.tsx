@@ -1,4 +1,5 @@
-import {NativeAppInfo} from 'apps/app/src/app/application/nativeAppInfo';
+import { NativeAppInfo } from 'apps/app/src/app/application/nativeAppInfo';
+
 import defaultVipIcon from '../../images/VipIcon.svg';
 
 const VipIcon = () => {
@@ -9,7 +10,7 @@ const VipIcon = () => {
     icon = defaultVipIcon;
   }
 
-  return icon
-}
+  return icon;
+};
 
 export default VipIcon;

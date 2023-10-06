@@ -1,23 +1,29 @@
 import queryString from 'query-string';
 import React from 'react';
+import { useLocation } from 'react-router';
 
-import {IndiaCountry, MexicoCountry, PhilippinesCountry} from '@frontend/shared/domain';
-import {environment} from '../../../../environments/environmentModule/environment';
-import {renderByCountry} from '../../../modules/i18n';
-import {NativeAppInfo} from '../../../application/nativeAppInfo';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
+
+import { environment } from '../../../../environments/environmentModule/environment';
+import { NativeAppInfo } from '../../../application/nativeAppInfo';
+import { renderByCountry } from '../../../modules/i18n';
 import IndiaPaymentResultPage from './i18nPage/IndiaPaymentResultPage';
-import PhilippinesPaymentResultPage from './i18nPage/PhilippinesPaymentResultPage';
 import MexicoPaymentResultPage from './i18nPage/MexicoPaymentResultPage';
-import {useLocation} from "react-router";
+import PhilippinesPaymentResultPage from './i18nPage/PhilippinesPaymentResultPage';
 
 type IPaymentResultPageSearchParams = {
   result?: 'complete' | 'failed';
-}
+};
 
 const PaymentResultPage = () => {
-
   const location = useLocation();
-  const parsedQuery = queryString.parse(location.search) as IPaymentResultPageSearchParams;
+  const parsedQuery = queryString.parse(
+    location.search
+  ) as IPaymentResultPageSearchParams;
   const path = parsedQuery.result;
   let resultImage;
 

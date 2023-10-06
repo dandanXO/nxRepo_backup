@@ -1,11 +1,11 @@
-import {useSelector} from 'react-redux';
-import {useNavigate} from 'react-router';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-import {RootState} from '../../../reduxStore';
-import {Navigation} from '../../core-components/Navigation';
-import {Page} from '../../core-components/Page';
-import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
-import {getToken} from '../../../application/getToken';
+import { getToken } from '../../../application/getToken';
+import { RootState } from '../../../reduxStore';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Navigation } from '../../core-components/Navigation';
+import { Page } from '../../core-components/Page';
 
 const OnlineCustomerServicePage = () => {
   const navigate = useNavigate();
@@ -16,10 +16,16 @@ const OnlineCustomerServicePage = () => {
       <Navigation
         title={'Customer Service'}
         back={() => {
-          navigate(`${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`);
+          navigate(
+            `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`
+          );
         }}
       />
-      <iframe className={`w-full grow`} src={indexPage?.indexAPI?.customerServiceUrl} title="" />
+      <iframe
+        className={`w-full grow`}
+        src={indexPage?.indexAPI?.customerServiceUrl}
+        title=""
+      />
     </Page>
   );
 };

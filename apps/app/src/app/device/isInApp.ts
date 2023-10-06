@@ -1,4 +1,3 @@
-
 // NOTICE: 需繼續優化增加辨識機率
 // NOTE: v1: 準確度低 https://github.com/f2etw/detect-inapp
 

@@ -1,9 +1,13 @@
-import {AppModeEnum} from "../../application/AppModeEnum";
-import {GlobalAppMode} from "../../application/GlobalAppMode";
-import {alertModal} from "../../ui/components/alertModal";
-import {SentryModule} from "../../modules/sentry";
+import { AppModeEnum } from '../../application/AppModeEnum';
+import { GlobalAppMode } from '../../application/GlobalAppMode';
+import { SentryModule } from '../../modules/sentry';
+import { alertModal } from '../../ui/components/alertModal';
 
-export type AppMode = null | AppModeEnum.SimpleWebView | AppModeEnum.IndexWebview | AppModeEnum.PureH5;
+export type AppMode =
+  | null
+  | AppModeEnum.SimpleWebView
+  | AppModeEnum.IndexWebview
+  | AppModeEnum.PureH5;
 
 export class AppStorage {
   static set(key: string, value: any) {
@@ -28,19 +32,26 @@ function isLocalStorageAvailable() {
   }
 }
 
-console.log('[app][ability] isLocalStorageAvailable', isLocalStorageAvailable());
+console.log(
+  '[app][ability] isLocalStorageAvailable',
+  isLocalStorageAvailable()
+);
 
 // NOTICE: Android 目前不支援 Localstorage
 export class AppLocalStorage {
   static setItem(key: string, value: string) {
-    if(!window.localStorage) {
-      if(GlobalAppMode.mode === "PureH5") {
-        const message = "Please do not use browser in private mode or in-app. Need to open App Native Browser";
+    if (!window.localStorage) {
+      if (GlobalAppMode.mode === 'PureH5') {
+        const message =
+          'Please do not use browser in private mode or in-app. Need to open App Native Browser';
         SentryModule.captureException(new Error(message));
         alertModal(message);
         return;
-      } else if(GlobalAppMode.mode === "IndexWebview" || GlobalAppMode.mode === "SimpleWebView"){
-        window.fakeLocalStorage = window.fakeLocalStorage || {}
+      } else if (
+        GlobalAppMode.mode === 'IndexWebview' ||
+        GlobalAppMode.mode === 'SimpleWebView'
+      ) {
+        window.fakeLocalStorage = window.fakeLocalStorage || {};
         window.fakeLocalStorage[key] = value;
       }
     } else {
@@ -50,12 +61,16 @@ export class AppLocalStorage {
   static getItem(key: string): string | null {
     let returnItem = null;
     if (!window.localStorage) {
-      if (GlobalAppMode.mode === "PureH5") {
-        const message = "Please do not use browser in private mode or in-app. Need to open App Native Browser";
+      if (GlobalAppMode.mode === 'PureH5') {
+        const message =
+          'Please do not use browser in private mode or in-app. Need to open App Native Browser';
         SentryModule.captureException(new Error(message));
         alertModal(message);
         return null;
-      } else if (GlobalAppMode.mode === "IndexWebview" || GlobalAppMode.mode === "SimpleWebView") {
+      } else if (
+        GlobalAppMode.mode === 'IndexWebview' ||
+        GlobalAppMode.mode === 'SimpleWebView'
+      ) {
         if (window.fakeLocalStorage && window.fakeLocalStorage[key]) {
           returnItem = window.fakeLocalStorage[key];
         }
@@ -67,11 +82,15 @@ export class AppLocalStorage {
   }
   static removeItem(key: string) {
     if (!window.localStorage) {
-      if (GlobalAppMode.mode === "PureH5") {
-        const message = "Please do not use browser in private mode or in-app. Need to open App Native Browser";
+      if (GlobalAppMode.mode === 'PureH5') {
+        const message =
+          'Please do not use browser in private mode or in-app. Need to open App Native Browser';
         SentryModule.captureException(new Error(message));
         alertModal(message);
-      } else if (GlobalAppMode.mode === "IndexWebview" || GlobalAppMode.mode === "SimpleWebView") {
+      } else if (
+        GlobalAppMode.mode === 'IndexWebview' ||
+        GlobalAppMode.mode === 'SimpleWebView'
+      ) {
         if (window.fakeLocalStorage && window.fakeLocalStorage[key]) {
           delete window.fakeLocalStorage[key];
         }

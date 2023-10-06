@@ -1,9 +1,8 @@
 import React from 'react';
-import {TailSpin} from 'react-loading-icons';
+import { TailSpin } from 'react-loading-icons';
 
-import {TestingProps} from '../../modules/cypress/TestingProps';
-import {tcx} from "../../modules/ui/tailwindcss";
-
+import { TestingProps } from '../../modules/cypress/TestingProps';
+import { tcx } from '../../modules/ui/tailwindcss';
 
 type Props = {
   text: string | React.ReactNode;

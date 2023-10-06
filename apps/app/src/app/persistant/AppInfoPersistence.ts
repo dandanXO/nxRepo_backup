@@ -1,25 +1,25 @@
-import {AppLocalStorage} from "./localstorage";
+import { AppLocalStorage } from './localstorage';
 
 class AppInfoPersistence {
   set appName(name: string) {
-    AppLocalStorage.setItem("appName", name);
+    AppLocalStorage.setItem('appName', name);
   }
   get appName(): string {
-    return AppLocalStorage.getItem("appName") || "";
+    return AppLocalStorage.getItem('appName') || '';
   }
   set appID(id: string) {
-    AppLocalStorage.setItem("appID", id);
+    AppLocalStorage.setItem('appID', id);
   }
   get appID(): string {
-    return AppLocalStorage.getItem("appID") || "";
+    return AppLocalStorage.getItem('appID') || '';
   }
 
   set appDomain(domain: string) {
-    AppLocalStorage.setItem("appDomain", domain);
+    AppLocalStorage.setItem('appDomain', domain);
   }
 
   get appDomain(): string {
-    return AppLocalStorage.getItem("appDomain") || "";
+    return AppLocalStorage.getItem('appDomain') || '';
   }
 }
 export const appInfoPersistence = new AppInfoPersistence();

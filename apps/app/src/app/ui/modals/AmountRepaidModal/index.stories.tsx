@@ -1,7 +1,7 @@
-import {ComponentMeta, ComponentStory} from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import * as React from 'react';
 
-import {AppThemeProvider} from '@frontend/mobile/shared/ui';
+import { AppThemeProvider } from '@frontend/mobile/shared/ui';
 
 import AmountPaidModal from './AmountRepaidModal';
 

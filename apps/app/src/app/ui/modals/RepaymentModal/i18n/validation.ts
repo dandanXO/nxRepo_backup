@@ -1,4 +1,4 @@
-import {environment} from 'apps/app/src/environments/environmentModule/environment';
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
 
 export const validateBalance = (
   data: any,

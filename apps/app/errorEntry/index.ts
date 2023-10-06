@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/react';
 
-import {AppEnvironment} from '../src/app/device/appEnvironment';
+import { AppEnvironment } from '../src/app/device/appEnvironment';
 import sentryEnv from '../src/environments/sentryModule/sentry.json';
 
 const environmentName = AppEnvironment.getEnvironmentName();

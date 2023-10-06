@@ -1,10 +1,10 @@
-import {environment} from '../../../../environments/environmentModule/environment';
 import React from 'react';
-import {useNavigate} from 'react-router';
+import { useNavigate } from 'react-router';
 
-import {getToken} from '../../../application/getToken';
-import {Button} from '../../core-components/Button';
-import {PageOrModalPathEnum} from '../../PageOrModalPathEnum';
+import { environment } from '../../../../environments/environmentModule/environment';
+import { getToken } from '../../../application/getToken';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Button } from '../../core-components/Button';
 
 export const CategoryPage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,9 @@ export const CategoryPage = () => {
         dataTestingID={'apply'}
         text={'Test'}
         onClick={() => {
-          navigate(`${PageOrModalPathEnum.MyCouponListPage}?token=${getToken()}`);
+          navigate(
+            `${PageOrModalPathEnum.MyCouponListPage}?token=${getToken()}`
+          );
         }}
       />
 

@@ -1,29 +1,29 @@
-import {IoMdRadioButtonOn} from '@react-icons/all-files/io/IoMdRadioButtonOn';
-import {RiArrowRightSLine} from '@react-icons/all-files/ri/RiArrowRightSLine';
+import { IoMdRadioButtonOn } from '@react-icons/all-files/io/IoMdRadioButtonOn';
+import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import moment from 'moment/moment';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
-import {useSelector} from 'react-redux';
-import {useLocation, useNavigate} from 'react-router';
-import {StylesConfig} from 'react-select';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router';
+import { StylesConfig } from 'react-select';
 
-import {environment} from '../../../../../../environments/environmentModule/environment';
-import {formatDate} from '../../../../../modules/format/formatDate';
-import {getToken} from '../../../../../application/getToken';
-import {RootState} from '../../../../../reduxStore';
-import {repaymentDetailPageInitialState} from '../../../../../reduxStore/repaymentDetailPageSlice';
-import ListItem from '../../../../core-components/ListItem';
+import { environment } from '../../../../../../environments/environmentModule/environment';
+import { getToken } from '../../../../../application/getToken';
+import { getOrderNo } from '../../../../../externel/window/querystring/getOrderNo';
+import { formatDate } from '../../../../../modules/format/formatDate';
+import { RootState } from '../../../../../reduxStore';
+import { repaymentDetailPageInitialState } from '../../../../../reduxStore/repaymentDetailPageSlice';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Money from '../../../../components/Money';
-import {RadioOption} from '../../../../core-components/RadioOption';
+import { Button } from '../../../../core-components/Button';
+import ListItem from '../../../../core-components/ListItem';
+import { RadioOption } from '../../../../core-components/RadioOption';
 import Select from '../../../../core-components/Select';
 import ValidateInput from '../../../../core-components/ValidateInput';
-import {Button} from '../../../../core-components/Button';
-import {PageOrModalPathEnum} from '../../../../PageOrModalPathEnum';
+import { InputValue } from '../../../../core-components/form/InputValue';
 import AdSVG from '../../repayment_banner.svg';
-import {i18nRepaymentModal} from '../translations';
-import {validateBalance} from '../validation';
-import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
-import {InputValue} from "../../../../core-components/form/InputValue";
+import { i18nRepaymentModal } from '../translations';
+import { validateBalance } from '../validation';
 
 interface IPhilippinesRepaymentModalProps {
   radioValue: string;

@@ -1,19 +1,17 @@
-import {FiEye} from '@react-icons/all-files/fi/FiEye';
-import {FiEyeOff} from '@react-icons/all-files/fi/FiEyeOff';
-import {RiCustomerServiceLine} from '@react-icons/all-files/ri/RiCustomerServiceLine';
-import React, {useState} from 'react';
+import { FiEye } from '@react-icons/all-files/fi/FiEye';
+import { FiEyeOff } from '@react-icons/all-files/fi/FiEyeOff';
+import { RiCustomerServiceLine } from '@react-icons/all-files/ri/RiCustomerServiceLine';
+import React, { useState } from 'react';
 
-import {IndexPageProps} from '../../../../../reduxStore';
-import {useUserPhoneNumber} from "../../../../hooks/useUserPhoneNumber";
+import { IndexPageProps } from '../../../../../reduxStore';
+import { useUserPhoneNumber } from '../../../../hooks/useUserPhoneNumber';
 
 type Props = IndexPageProps & {
   onClickToCustomerService: () => void;
 };
 
-
 export const UserInfoSupportSection = (props: Props) => {
-
-  const {phoneNumber, maskPhoneNumber} = useUserPhoneNumber();
+  const { phoneNumber, maskPhoneNumber } = useUserPhoneNumber();
   const [isHideUserName, setIsHideUserName] = useState(true);
 
   // NOTE: User Event
@@ -22,7 +20,10 @@ export const UserInfoSupportSection = (props: Props) => {
   };
 
   return (
-    <div data-testing-id="welcome" className={'flex w-full flex-row justify-between items-center'}>
+    <div
+      data-testing-id="welcome"
+      className={'flex w-full flex-row items-center justify-between'}
+    >
       <div className={'left-section flex flex-row items-center'}>
         {/*NOTE: 顯示用戶名 */}
         <div className={'welcome pr-2 font-bold'}>
@@ -35,7 +36,10 @@ export const UserInfoSupportSection = (props: Props) => {
       </div>
       <div className={'right-section'}>
         {/*NOTE: 客服 Button*/}
-        <div data-testing-id={'contact-icon'} onClick={props.onClickToCustomerService}>
+        <div
+          data-testing-id={'contact-icon'}
+          onClick={props.onClickToCustomerService}
+        >
           <RiCustomerServiceLine />
         </div>
       </div>

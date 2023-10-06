@@ -1,7 +1,7 @@
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import {Button} from '../../../core-components/Button';
-import {IndexPageSagaAction} from '../userUsecaseSaga/indexPageActions';
+import { Button } from '../../../core-components/Button';
+import { IndexPageSagaAction } from '../userUsecaseSaga/indexPageActions';
 
 export const AuthenticationSection = () => {
   const dispatch = useDispatch();
@@ -10,7 +10,12 @@ export const AuthenticationSection = () => {
   };
   return (
     <div className={'authentication'}>
-      <Button className='open-index-button border-0' onClick={onClick} dataTestingID={'limit-button'} text={'Get my limit'} />
+      <Button
+        className="open-index-button border-0"
+        onClick={onClick}
+        dataTestingID={'limit-button'}
+        text={'Get my limit'}
+      />
     </div>
   );
 };

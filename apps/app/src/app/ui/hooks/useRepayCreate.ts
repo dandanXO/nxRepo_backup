@@ -1,17 +1,21 @@
-import {IndiaCountry, MexicoCountry, PhilippinesCountry} from '@frontend/shared/domain';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 
-import {useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router';
+import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
-import {environment} from '../../../environments/environmentModule/environment';
-import {PostRepayCreateRequest} from '../../externel/backend/loanService/PostRepayCreateRequest';
-import {PostRepayCreateResponse} from '../../externel/backend/loanService/PostRepayCreateResponse';
-import {usePostRepayCreateMutation} from '../../externel/backend/rtk';
-import {CustomAxiosError} from '../../externel/backend/rtk/axiosBaseQuery';
-import {getToken} from '../../application/getToken';
-import {PageOrModalPathEnum} from '../PageOrModalPathEnum';
-import {RepaymentDetailPageUseCaseActions} from '../pages/RepaymentDetailPage/userUsecaseSaga';
+import { environment } from '../../../environments/environmentModule/environment';
+import { getToken } from '../../application/getToken';
+import { PostRepayCreateRequest } from '../../externel/backend/loanService/PostRepayCreateRequest';
+import { PostRepayCreateResponse } from '../../externel/backend/loanService/PostRepayCreateResponse';
+import { usePostRepayCreateMutation } from '../../externel/backend/rtk';
+import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
+import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
+import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
 
 const useRepayCreate = () => {
   const navigate = useNavigate();

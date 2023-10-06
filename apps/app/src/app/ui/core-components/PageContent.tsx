@@ -1,7 +1,7 @@
-import {ReactNode} from 'react';
-import {tcx} from '../../modules/ui/tailwindcss';
-import {isShowNavigation} from "../../device/isShowNavigation";
+import { ReactNode } from 'react';
 
+import { isShowNavigation } from '../../device/isShowNavigation';
+import { tcx } from '../../modules/ui/tailwindcss';
 
 interface Props {
   children?: ReactNode;
@@ -26,13 +26,8 @@ export const PageContent = (props: Props) => {
 
 export const PageSection = (props: Props) => {
   return (
-    <div
-      className={tcx(
-        `p-4 overflow-auto`,
-        props.className
-      )}
-    >
+    <div className={tcx(`overflow-auto p-4`, props.className)}>
       {props.children}
     </div>
-  )
-}
+  );
+};

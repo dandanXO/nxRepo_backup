@@ -1,23 +1,30 @@
-import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
-import React, {useCallback, useEffect, useState} from 'react';
-import {useTranslation, withTranslation} from 'react-i18next';
-import {useDispatch, useSelector} from 'react-redux';
-import {useLocation, useNavigate} from 'react-router';
-import {environment} from '../../../../environments/environmentModule/environment';
-import {renderByCountry} from '../../../modules/i18n';
-import {RootState} from '../../../reduxStore';
-import {repaymentDetailPageSlice,} from '../../../reduxStore/repaymentDetailPageSlice';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation, withTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router';
+
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
+
+import { environment } from '../../../../environments/environmentModule/environment';
+import { getOrderNo } from '../../../externel/window/querystring/getOrderNo';
+import { renderByCountry } from '../../../modules/i18n';
+import { RootState } from '../../../reduxStore';
+import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
 import Modal from '../../core-components/Modal';
+import { InputValue } from '../../core-components/form/InputValue';
 import useRepayCreate from '../../hooks/useRepayCreate';
 import useRepayTypes from '../../hooks/useRepayTypes';
-import {RepaymentDetailPageUseCaseActions} from '../../pages/RepaymentDetailPage/userUsecaseSaga';
+import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import IndiaRepaymentModal from './i18n/IndiaRepaymentModal';
 import MexicoRepaymentModal from './i18n/MexicoRepaymentModal';
 import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
 import PhilippinesRepaymentModal from './i18n/PhilippinesRepaymentModal';
-import {i18nRepaymentModal} from './i18n/translations';
-import {InputValue} from "../../core-components/form/InputValue";
-import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
+import { i18nRepaymentModal } from './i18n/translations';
 
 type paymentMethodValueType = {
   type: string;

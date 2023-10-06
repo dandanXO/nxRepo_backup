@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import {Page} from '@frontend/mobile/shared/ui';
+import { Page } from '@frontend/mobile/shared/ui';
 
 export const CameraSvgIconWrapper = styled.div`
   margin: 0 auto 10px;

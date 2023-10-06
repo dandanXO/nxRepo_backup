@@ -1,8 +1,8 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import {ReservationProduct} from '../externel/backend/loanService/GetReservationResponse';
-import {ReservationDetail} from '../externel/backend/loanService/PostReservationSubmitRequest';
-import {BankAccount} from '../externel/backend/userService/BankAccount';
+import { ReservationProduct } from '../externel/backend/loanService/GetReservationResponse';
+import { ReservationDetail } from '../externel/backend/loanService/PostReservationSubmitRequest';
+import { BankAccount } from '../externel/backend/userService/BankAccount';
 
 export type InitialStateType = {
   authorizationModal: {
@@ -22,7 +22,7 @@ export type InitialStateType = {
     confirm: boolean;
     bankcardList?: BankAccount[];
     selectedBankcardId?: number;
-  },
+  };
   loanAgreementModal: {
     show: boolean;
   };
@@ -73,9 +73,9 @@ export type InitialStateType = {
   reservationSuccessModal: {
     show: boolean;
   };
-  exitConfirmModal:{
+  exitConfirmModal: {
     show: boolean;
-  }
+  };
 };
 
 export const modalInitialState: InitialStateType = {
@@ -145,9 +145,9 @@ export const modalInitialState: InitialStateType = {
   reservationSuccessModal: {
     show: false,
   },
-  exitConfirmModal:{
+  exitConfirmModal: {
     show: false,
-  }
+  },
 };
 
 export const modalSlice = createSlice({
@@ -189,12 +189,16 @@ export const modalSlice = createSlice({
         action.payload.selectedBankcardId;
     },
     // NOTE: new flow - Simple Quick Repayment Modal
-    updateSimpleQuickRepaymentModal: (state, action: PayloadAction<InitialStateType['simpleQuickRepaymentModal']>) => {
+    updateSimpleQuickRepaymentModal: (
+      state,
+      action: PayloadAction<InitialStateType['simpleQuickRepaymentModal']>
+    ) => {
       state.simpleQuickRepaymentModal.show = action.payload.show;
       state.simpleQuickRepaymentModal.confirm = action.payload.confirm;
 
       if (action.payload.bankcardList) {
-        state.simpleQuickRepaymentModal.bankcardList = action.payload.bankcardList;
+        state.simpleQuickRepaymentModal.bankcardList =
+          action.payload.bankcardList;
       }
     },
     updateSimpleQuickRepaymentModalSelectedID: (
@@ -203,7 +207,8 @@ export const modalSlice = createSlice({
         selectedBankcardId?: number;
       }>
     ) => {
-      state.simpleQuickRepaymentModal.selectedBankcardId = action.payload.selectedBankcardId;
+      state.simpleQuickRepaymentModal.selectedBankcardId =
+        action.payload.selectedBankcardId;
     },
 
     updateLoanAgreementModal: (

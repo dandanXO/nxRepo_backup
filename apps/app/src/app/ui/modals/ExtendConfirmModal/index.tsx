@@ -1,6 +1,13 @@
-import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry} from '@frontend/shared/domain';
-import {useLocation, useNavigate} from 'react-router';
-import {renderByCountry} from '../../../modules/i18n';
+import { useLocation, useNavigate } from 'react-router';
+
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
+
+import { renderByCountry } from '../../../modules/i18n';
 import IndiaExtendConfirmModal from './i18n/IndiaExtendConfirmModal';
 import MexicoExtendConfirmModal from './i18n/MexicoExtendConfirmModal';
 import PakistanExtendConfirmModal from './i18n/PakistanExtendConfirmModal';

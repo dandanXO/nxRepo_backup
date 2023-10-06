@@ -1,17 +1,19 @@
-import {PayloadAction} from '@reduxjs/toolkit';
-import {call, delay, put, take} from 'redux-saga/effects';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { call, delay, put, take } from 'redux-saga/effects';
 
-import {Service} from '../../../../externel/backend';
-import {alertModal} from '../../../components/alertModal';
-import {GetQuotaModelStatusResponse} from '../../../../externel/backend/loanService/GetQuotaModelStatusResponse';
-import {AppEnvironment} from '../../../../device/appEnvironment';
-import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
-import {createRequestAction} from '../../../../uiFlowUsecase/utils/createRequestAction';
-import {IndexPageSagaAction} from './indexPageActions';
-import {SentryModule} from "../../../../modules/sentry";
+import { AppEnvironment } from '../../../../device/appEnvironment';
+import { Service } from '../../../../externel/backend';
+import { GetQuotaModelStatusResponse } from '../../../../externel/backend/loanService/GetQuotaModelStatusResponse';
+import { SentryModule } from '../../../../modules/sentry';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
+import { createRequestAction } from '../../../../uiFlowUsecase/utils/createRequestAction';
+import { alertModal } from '../../../components/alertModal';
+import { IndexPageSagaAction } from './indexPageActions';
 
 // NOTE:
-export const getQuotaModelStatusAction = createRequestAction('GGetQuotaModelStatus');
+export const getQuotaModelStatusAction = createRequestAction(
+  'GGetQuotaModelStatus'
+);
 
 export function* userReacquireCreditSaga(action: PayloadAction<null>) {
   // NOTICE: 防止錯誤後無法重新 watch
@@ -56,8 +58,8 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       ) {
         window['IndexTask']['uploadKycBackgroundData']();
       } else {
-
-        const message = 'Native Error: uploadKycBackgroundData function is missing.';
+        const message =
+          'Native Error: uploadKycBackgroundData function is missing.';
         SentryModule.captureException(message);
 
         alertModal(message);
@@ -80,7 +82,10 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     // NOTICE: 要根據此狀態將 UI Blocking
     yield put(getQuotaModelStatusAction.loadingAction());
 
-    let data: GetQuotaModelStatusResponse = yield call(Service.LoanService.getQuotaModelStatus, {});
+    let data: GetQuotaModelStatusResponse = yield call(
+      Service.LoanService.getQuotaModelStatus,
+      {}
+    );
     // console.log("GetQuotaModelStatusResponse", data);
 
     // NOTE: 系統每 20 秒取得風控模型資料，超過十次則停止請求
@@ -88,7 +93,8 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
     const delayMinutesTime = 20;
     const maxRetryTime = 10;
 
-    const isContinuingFetching = data.calculating === true && count <= maxRetryTime;
+    const isContinuingFetching =
+      data.calculating === true && count <= maxRetryTime;
     while (isContinuingFetching) {
       // console.log("重新獲取中");
       yield delay(delayMinutesTime * 1000);
@@ -102,7 +108,9 @@ export function* userReacquireCreditSaga(action: PayloadAction<null>) {
       yield put(getQuotaModelStatusAction.failureAction());
       // yield put(getQuotaModelStatusActions.rejected);
       // NOTICE: 新增業務邏輯錯誤
-      throw new Error(`System fetch quotaModalState over ${maxRetryTime} times per ${delayMinutesTime}s`);
+      throw new Error(
+        `System fetch quotaModalState over ${maxRetryTime} times per ${delayMinutesTime}s`
+      );
     } else {
       yield put(getQuotaModelStatusAction.successAction());
       // yield put(getQuotaModelStatusActions.fulfilled);
