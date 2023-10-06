@@ -1,5 +1,5 @@
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
+import { IndiaCountry } from '@frontend/shared/domain';
+import { PakistanCountry } from '@frontend/shared/domain';
 
 import { environment } from '../../environments/environmentModule/environment';
 

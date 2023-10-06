@@ -1,9 +1,5 @@
 import { environment } from 'apps/app/src/environments/environmentModule/environment';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 
-import { AllCountriesEnum } from '../../../../../../../libs/shared/domain/src/country/AllCountry';
 import {
   DEFAULT_INDIA_THEME,
   DEFAULT_MEXICO_THEME,
@@ -14,6 +10,7 @@ import {
 import { SentryModule } from '../../sentry';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
+import {AllCountriesEnum, IndiaCountry, MexicoCountry, PakistanCountry} from "@frontend/shared/domain";
 
 function getDefaultTheme() {
   if (environment.country === IndiaCountry.country) {

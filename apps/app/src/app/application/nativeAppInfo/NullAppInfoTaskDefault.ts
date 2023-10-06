@@ -1,10 +1,11 @@
-import {AllCountriesEnum} from "../../../../../../libs/shared/domain/src/country/AllCountry";
+
 import {isInApp} from "../../device/isInApp";
 import {INullAppInfoTaskDefault} from "../IAppEnvironment";
+import {AllCountriesEnum} from "@frontend/shared/domain";
 
 let uiVersion
 if (window.Cypress) {
-  let AppInfo = {
+  const AppInfo = {
     VERSION: "cypress",
     COMMITHASH: "cypress",
     BRANCH: "test",

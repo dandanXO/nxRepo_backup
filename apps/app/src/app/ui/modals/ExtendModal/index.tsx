@@ -1,13 +1,13 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { MexicoCountry } from '@frontend/shared/domain';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
 import { Overlay } from '@frontend/mobile/shared/ui';
 
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { IndiaCountry } from '@frontend/shared/domain';
+import { PakistanCountry } from '@frontend/shared/domain';
+import { PhilippinesCountry } from '@frontend/shared/domain';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { renderByCountry } from '../../../modules/i18n';
 import { RootState } from '../../../reduxStore';

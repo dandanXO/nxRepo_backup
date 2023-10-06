@@ -1,4 +1,4 @@
-import { BangladeshCountry } from '../../../../../../libs/shared/domain/src/country/BangladeshCountry';
+import { BangladeshCountry } from '@frontend/shared/domain';
 import { IEnvironment } from '../../../../../../libs/shared/domain/src/environment/types/IEnvironment';
 
 export const environment: IEnvironment = {

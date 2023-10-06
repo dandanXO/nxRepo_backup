@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {appInfoPersistence} from "../persistant/AppInfoPersistence";
 import {userInfoPersistence} from "../persistant/UserInfoPersistence";
 
 export type UserResendSecondsActionPayload = {

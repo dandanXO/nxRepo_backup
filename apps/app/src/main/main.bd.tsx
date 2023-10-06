@@ -1,6 +1,6 @@
 import "../polyfills";
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
-import { SentryModule } from '../app/modules/sentry';
+import '../app/modules/sentry';
 import React, {StrictMode} from 'react';
 import * as ReactDOM from 'react-dom/client';
 // import posthog from "posthog-js";

@@ -1,4 +1,4 @@
-import { AllCountriesEnum } from '../../../../../libs/shared/domain/src/country/AllCountry';
+import { AllCountriesEnum } from '@frontend/shared/domain';
 import {IThemes} from "../../app/modules/ui/theme/types";
 
 // NOTE: India
@@ -87,10 +87,10 @@ import PHv3 from './philippines/v3/tailwind.theme';
 import PHv4 from './philippines/v4/tailwind.theme';
 
 
-export const DEFAULT_INDIA_THEME: string = 'v55';
-export const DEFAULT_PAKISTAN_THEME: string = 'v15';
-export const DEFAULT_MEXICO_THEME: string = 'v1';
-export const DEFAULT_PHILIPPINES_THEME: string = 'v1';
+export const DEFAULT_INDIA_THEME = 'v55';
+export const DEFAULT_PAKISTAN_THEME = 'v15';
+export const DEFAULT_MEXICO_THEME = 'v1';
+export const DEFAULT_PHILIPPINES_THEME = 'v1';
 
 // REFACTOR:
 export const themes: IThemes = {

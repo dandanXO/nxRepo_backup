@@ -1,13 +1,13 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { MexicoCountry } from '@frontend/shared/domain';
 import React, { useCallback } from 'react';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
 
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { IndiaCountry } from '@frontend/shared/domain';
+import { PakistanCountry } from '@frontend/shared/domain';
+import { PhilippinesCountry } from '@frontend/shared/domain';
 import { usePostRepayReceiptMutation } from '../../../externel/backend/rtk';
 import { PostRepayReceiptResponse } from '../../../externel/backend/rtk/old/PostRepayReceiptResponse';
 import { renderByCountry } from '../../../modules/i18n';

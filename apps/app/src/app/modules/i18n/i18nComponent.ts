@@ -1,4 +1,4 @@
-import {AllLanguage} from "../../../../../../libs/shared/domain/src/language/enum/AllLanguage";
+import {AllLanguage} from "@frontend/shared/domain";
 
 type TranslationKey = Partial<{ [key in typeof AllLanguage[AllLanguage] ]: {
   [key: string]: string;

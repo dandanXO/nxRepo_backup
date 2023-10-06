@@ -4,7 +4,7 @@ import { takeLatest } from "redux-saga/effects";
 
 
 import { RepaymentDetailPageUseCaseActions } from ".";
-import { PhilippinesCountry } from "../../../../../../../../libs/shared/domain/src/country/PhilippinesCountry";
+import { PhilippinesCountry } from '@frontend/shared/domain';
 import { environment } from "../../../../../environments/environmentModule/environment";
 import { systemShowReservationSaga } from "./systemShowReservationSaga";
 import { userRepayDataSaga } from "./userRepayDataSaga";

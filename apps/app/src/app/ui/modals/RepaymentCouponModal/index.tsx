@@ -1,13 +1,13 @@
 import { MdRadioButtonChecked } from '@react-icons/all-files/md/MdRadioButtonChecked';
 import { MdRadioButtonUnchecked } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
+import { MexicoCountry } from '@frontend/shared/domain';
+import { PakistanCountry } from '@frontend/shared/domain';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { PhilippinesCountry } from '@frontend/shared/domain';
 import NoDataImage from '../../components/images/NoData.svg';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { useLazyGetCouponApplicableListQuery } from '../../../externel/backend/rtk';

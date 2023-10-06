@@ -16,7 +16,7 @@ import { modalInitialState } from '../../../reduxStore/modalSlice';
 import { useTranslation } from 'react-i18next';
 import { i18nReservationProductsModal } from './translations';
 import { environment } from 'apps/app/src/environments/environmentModule/environment';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { MexicoCountry } from '@frontend/shared/domain';
 const ReservationProductsModal = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();

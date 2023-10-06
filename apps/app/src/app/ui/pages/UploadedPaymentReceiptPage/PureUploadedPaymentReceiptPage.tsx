@@ -8,9 +8,9 @@ import { SuccessICON } from './components/i18n/SuccessICON';
 import { i18nUploadedPaymentReceiptPage } from './components/i18n/translations';
 import UploadedPaymentReceiptPage from './index';
 import { environment } from '../../../../environments/environmentModule/environment';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import { PhilippinesCountry } from "../../../../../../../libs/shared/domain/src/country/PhilippinesCountry";
+import { PakistanCountry } from '@frontend/shared/domain';
+import { MexicoCountry } from '@frontend/shared/domain';
+import { PhilippinesCountry } from '@frontend/shared/domain';
 const CustomPage = styled(Page)`
   display: flex;
   flex-direction: column;

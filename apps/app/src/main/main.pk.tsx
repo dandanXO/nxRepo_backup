@@ -1,5 +1,5 @@
 import "../polyfills";
-import { SentryModule } from '../app/modules/sentry';
+import '../app/modules/sentry';
 // NOTICE: caught ReferenceError: Cannot access 'SentryModule' before initialization
 
 import React, {StrictMode} from 'react';

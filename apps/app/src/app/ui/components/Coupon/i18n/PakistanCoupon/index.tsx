@@ -23,7 +23,7 @@ const PakistanCoupon = (props: ICouponProps) => {
     expireTime = '',
     buttonText = 'USE NOW',
   } = props;
-  const layoutTypeStyle: any = {
+  const layoutTypeStyle = {
     normal: {
       font: 'text-ctext-primary',
       darkContent: 'border-primary-main bg-tertiary-main',

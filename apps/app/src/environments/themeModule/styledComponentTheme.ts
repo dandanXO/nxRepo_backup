@@ -1,10 +1,11 @@
 import {DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME, DEFAULT_PHILIPPINES_THEME, themes} from './customTailwindTheme';
 import {NativeAppInfo} from '../../app/application/nativeAppInfo';
 import {environment} from "../environmentModule/environment";
-import {IndiaCountry} from "../../../../../libs/shared/domain/src/country/IndiaCountry";
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import { PhilippinesCountry } from 'libs/shared/domain/src/country/PhilippinesCountry';
+
+import { IndiaCountry } from '@frontend/shared/domain';
+import { PakistanCountry } from '@frontend/shared/domain';
+import { MexicoCountry } from '@frontend/shared/domain';
+import { PhilippinesCountry } from '@frontend/shared/domain';
 
 // NOTE: 預設樣式
 export let theme = themes[NativeAppInfo.environment][`v${NativeAppInfo.uiVersion}`]

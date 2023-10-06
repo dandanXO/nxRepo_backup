@@ -3,7 +3,7 @@ import { environment } from 'apps/app/src/environments/environmentModule/environ
 import { takeLatest } from 'redux-saga/effects';
 
 import { BindBankcardAction } from './bindBankcardAction';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
+import { IndiaCountry } from '@frontend/shared/domain';
 
 export function* watchBindBankcardSaga() {
   const countryName = environment.countryName;

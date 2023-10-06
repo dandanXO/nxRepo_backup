@@ -1,23 +1,20 @@
-import * as Sentry from '@sentry/react';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { IndiaCountry } from '@frontend/shared/domain';
 
-import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { MexicoCountry } from '../../../../../../libs/shared/domain/src/country/MexicoCountry';
-import { PhilippinesCountry } from '../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
-import { environment } from '../../../environments/environmentModule/environment';
-import { AppFlag } from '../../../environments/flag';
-import { PostRepayCreateRequest } from '../../externel/backend/loanService/PostRepayCreateRequest';
-import { PostRepayCreateResponse } from '../../externel/backend/loanService/PostRepayCreateResponse';
-import { usePostRepayCreateMutation } from '../../externel/backend/rtk';
-import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
-import { getToken } from '../../application/getToken';
-import { modalSlice } from '../../reduxStore/modalSlice';
-import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
-import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
+import {useLocationOrderQueryString} from '@frontend/mobile/shared/ui';
+
+import { MexicoCountry } from '@frontend/shared/domain';
+import { PhilippinesCountry } from '@frontend/shared/domain';
+import {environment} from '../../../environments/environmentModule/environment';
+import {PostRepayCreateRequest} from '../../externel/backend/loanService/PostRepayCreateRequest';
+import {PostRepayCreateResponse} from '../../externel/backend/loanService/PostRepayCreateResponse';
+import {usePostRepayCreateMutation} from '../../externel/backend/rtk';
+import {CustomAxiosError} from '../../externel/backend/rtk/axiosBaseQuery';
+import {getToken} from '../../application/getToken';
+import {PageOrModalPathEnum} from '../PageOrModalPathEnum';
+import {RepaymentDetailPageUseCaseActions} from '../pages/RepaymentDetailPage/userUsecaseSaga';
 
 const useRepayCreate = () => {
   const navigate = useNavigate();

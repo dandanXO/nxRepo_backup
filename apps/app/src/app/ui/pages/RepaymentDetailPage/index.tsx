@@ -1,12 +1,12 @@
 // import Button from "../../components/Button";
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
+import { MexicoCountry } from '@frontend/shared/domain';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { IndiaCountry } from '@frontend/shared/domain';
+import { PakistanCountry } from '@frontend/shared/domain';
+import { PhilippinesCountry } from '@frontend/shared/domain';
 import { useLazyGetLoanDetailQuery } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
 import { getToken } from '../../../application/getToken';

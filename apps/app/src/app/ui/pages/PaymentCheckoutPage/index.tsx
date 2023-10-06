@@ -2,8 +2,8 @@ import queryString from 'query-string';
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { MexicoCountry } from '@frontend/shared/domain';
+import { PhilippinesCountry } from '@frontend/shared/domain';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { useLazyGetRepayPayInfoQuery } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
