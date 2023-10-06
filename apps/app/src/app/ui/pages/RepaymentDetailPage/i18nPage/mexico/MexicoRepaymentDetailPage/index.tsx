@@ -198,15 +198,14 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
         <Divider />
 
-        {
-          status !== 'EXTEND' &&
+        {status !== 'EXTEND' && (
           <ListItem
-          title={t('coupon')}
-          text={<Money money={coupon} isNagetive={true} />}
-          titleColor="text-ctext-primary"
-          isFetching={isFetching}
-        />
-        }
+            title={t('coupon')}
+            text={<Money money={coupon} isNagetive={true} />}
+            titleColor="text-ctext-primary"
+            isFetching={isFetching}
+          />
+        )}
 
         <ListItem
           title={t('Reduction Amount')}

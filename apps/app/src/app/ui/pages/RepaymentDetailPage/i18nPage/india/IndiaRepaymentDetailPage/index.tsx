@@ -261,24 +261,23 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
               <Divider />
 
-                {
-                  status !== 'EXTEND' &&
-                  <ListItem
+              {status !== 'EXTEND' && (
+                <ListItem
                   title={t('coupon')}
                   text={<Money money={coupon} isNagetive={true} />}
                   titleColor={listTitleStyle}
                   textColor={listTextStyle}
                   isFetching={isFetching}
                 />
-                }
+              )}
 
-                <ListItem
-                  title={t('Reduction Amount')}
-                  text={<Money money={reductionAmount} isNagetive={true} />}
-                  titleColor={listTitleStyle}
-                  textColor={listTextStyle}
-                  isFetching={isFetching}
-                />
+              <ListItem
+                title={t('Reduction Amount')}
+                text={<Money money={reductionAmount} isNagetive={true} />}
+                titleColor={listTitleStyle}
+                textColor={listTextStyle}
+                isFetching={isFetching}
+              />
 
               <ListItem
                 title={
