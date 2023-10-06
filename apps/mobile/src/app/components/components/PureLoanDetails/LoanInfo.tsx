@@ -187,17 +187,18 @@ const LoanInfo = (props: LoanInfoProps) => {
                             {t("Extend")}
                         </Button>
                     )}
-                  {status !== "PAY_OFF" && (
-                    <Button
-                      onClick={() =>
-                        setShowRepaymentModal && setShowRepaymentModal(true)
-                      }
-                      className={"repayButton"}
-                      styleType="primary"
-                    >
-                      {t("Repay")}
-                    </Button>
-                  )}
+                    {status !== "PAY_OFF" && (
+                        <Button
+                            onClick={() =>
+                                setShowRepaymentModal &&
+                                setShowRepaymentModal(true)
+                            }
+                            className={"repayButton"}
+                            styleType="primary"
+                        >
+                            {t("Repay")}
+                        </Button>
+                    )}
                 </div>
             </Card>
         </LoanInfoStyled>

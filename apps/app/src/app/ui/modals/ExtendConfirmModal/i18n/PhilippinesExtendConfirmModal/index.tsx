@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 
 import { getToken } from '../../../../../application/getToken';
-import Modal from '../../../../core-components/Modal';
-import { Button } from '../../../../core-components/Button';
+import { getOrderNo } from '../../../../../externel/window/querystring/getOrderNo';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
+import { Button } from '../../../../core-components/Button';
+import Modal from '../../../../core-components/Modal';
 import { i18nExtendConfirmModal } from '../../translations';
-import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 
 const PhilippinesExtendConfirmModal = () => {
   const navigate = useNavigate();

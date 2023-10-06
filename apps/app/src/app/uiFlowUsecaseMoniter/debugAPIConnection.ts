@@ -1,13 +1,13 @@
-import {IMonitorUsecaseFlow} from "./IMonitorUsecaseFlow";
-import {AppEnvironment} from "../device/appEnvironment";
-import {SentryModule} from "../modules/sentry";
+import { AppEnvironment } from '../device/appEnvironment';
+import { SentryModule } from '../modules/sentry';
+import { IMonitorUsecaseFlow } from './IMonitorUsecaseFlow';
 
-export const debugAPIConnection: IMonitorUsecaseFlow["debugAPIConnection"] = ({
+export const debugAPIConnection: IMonitorUsecaseFlow['debugAPIConnection'] = ({
   method,
   url,
   params,
   data,
-  result
+  result,
 }) => {
   if (!AppEnvironment.isDev()) return;
   SentryModule.captureMessage(
@@ -24,4 +24,4 @@ export const debugAPIConnection: IMonitorUsecaseFlow["debugAPIConnection"] = ({
       },
     }
   );
-}
+};

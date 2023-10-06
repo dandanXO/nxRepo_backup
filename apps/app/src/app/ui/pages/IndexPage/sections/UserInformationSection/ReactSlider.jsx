@@ -82,7 +82,7 @@ function alignValue(val, props) {
 
   // NOTICE: 1.解決 min: 3500, max: 4000, 但是後端給 step: 1000後，前端可以往右拉會爆掉問題。
   // NOTICE: 2.並可以拉滿
-  if(val >= props.max) {
+  if (val >= props.max) {
     alignedValue = props.max;
   }
 
@@ -144,14 +144,20 @@ class ReactSlider extends React.Component {
      * If an array is passed each value will determine the position of one thumb.
      * The values in the array must be sorted.
      */
-    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+    defaultValue: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
 
     /**
      * Like `defaultValue` but for
      * [controlled components](http://facebook.github.io/react/docs/forms.html#controlled-components).
      */
     // eslint-disable-next-line zillow/react/require-default-props
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),
+    value: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.arrayOf(PropTypes.number),
+    ]),
 
     /**
      * Determines whether the slider moves horizontally (from left to right)
@@ -215,7 +221,11 @@ class ReactSlider extends React.Component {
      * if an array of numbers it shows just the passed marks, if a number is passed
      * it shows just the marks in that steps: like passing 3 shows the marks 3, 6, 9
      */
-    marks: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.bool, PropTypes.number]),
+    marks: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.number),
+      PropTypes.bool,
+      PropTypes.number,
+    ]),
 
     /**
      * The css class set on the marks.
@@ -262,7 +272,10 @@ class ReactSlider extends React.Component {
      * The length of the array must match the number of thumbs in the value array.
      */
     // eslint-disable-next-line zillow/react/require-default-props
-    ariaLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    ariaLabel: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
 
     /**
      * aria-labelledby for screen-readers to apply to the thumbs.
@@ -271,7 +284,10 @@ class ReactSlider extends React.Component {
      * The length of the array must match the number of thumbs in the value array.
      */
     // eslint-disable-next-line zillow/react/require-default-props
-    ariaLabelledby: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    ariaLabelledby: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+    ]),
 
     /**
      * aria-valuetext for screen-readers.
@@ -560,7 +576,10 @@ class ReactSlider extends React.Component {
 
     if (this.props.onSliderClick && !this.hasMoved) {
       const position = this.getMousePosition(e);
-      const valueAtPos = trimAlignValue(this.calcValue(this.calcOffsetFromPosition(position[0])), this.props);
+      const valueAtPos = trimAlignValue(
+        this.calcValue(this.calcOffsetFromPosition(position[0])),
+        this.props
+      );
       this.props.onSliderClick(valueAtPos);
     }
   };
@@ -594,7 +613,10 @@ class ReactSlider extends React.Component {
 
   getTouchPosition(e) {
     const touch = e.touches[0];
-    return [touch[`page${this.axisKey()}`], touch[`page${this.orthogonalAxisKey()}`]];
+    return [
+      touch[`page${this.axisKey()}`],
+      touch[`page${this.orthogonalAxisKey()}`],
+    ];
   }
 
   getKeyDownEventMap() {
@@ -620,7 +642,9 @@ class ReactSlider extends React.Component {
   }
 
   getValueFromPosition(position) {
-    const diffValue = (position / (this.state.sliderLength - this.state.thumbSize)) * (this.props.max - this.props.min);
+    const diffValue =
+      (position / (this.state.sliderLength - this.state.thumbSize)) *
+      (this.props.max - this.props.min);
     return trimAlignValue(this.state.startValue + diffValue, this.props);
   }
 
@@ -750,7 +774,8 @@ class ReactSlider extends React.Component {
     // The slider bounding rect is based on the viewport, so we must add the window scroll
     // offset to normalize the values.
     const windowOffset = window[`page${this.axisKey()}Offset`];
-    const sliderStart = windowOffset + (this.props.invert ? sliderMax : sliderMin);
+    const sliderStart =
+      windowOffset + (this.props.invert ? sliderMax : sliderMin);
 
     let pixelOffset = position - sliderStart;
     if (this.props.invert) {
@@ -810,7 +835,8 @@ class ReactSlider extends React.Component {
 
     this.setState((prevState) => ({
       startValue: prevState.value[i],
-      startPosition: position !== undefined ? position : prevState.startPosition,
+      startPosition:
+        position !== undefined ? position : prevState.startPosition,
       index: i,
       zIndices,
     }));
@@ -968,7 +994,10 @@ class ReactSlider extends React.Component {
   buildTrackStyle(min, max) {
     const obj = {
       position: 'absolute',
-      willChange: this.state.index >= 0 ? `${this.posMinKey()},${this.posMaxKey()}` : undefined,
+      willChange:
+        this.state.index >= 0
+          ? `${this.posMinKey()},${this.posMaxKey()}`
+          : undefined,
     };
     obj[this.posMinKey()] = min;
     obj[this.posMaxKey()] = max;
@@ -983,9 +1012,9 @@ class ReactSlider extends React.Component {
   }
 
   renderThumb = (style, i) => {
-    const className = `${this.props.thumbClassName} ${this.props.thumbClassName}-${i} ${
-      this.state.index === i ? this.props.thumbActiveClassName : ''
-    }`;
+    const className = `${this.props.thumbClassName} ${
+      this.props.thumbClassName
+    }-${i} ${this.state.index === i ? this.props.thumbActiveClassName : ''}`;
 
     const props = {
       ref: (r) => {
@@ -1003,7 +1032,9 @@ class ReactSlider extends React.Component {
       'aria-valuenow': this.state.value[i],
       'aria-valuemin': this.props.min,
       'aria-valuemax': this.props.max,
-      'aria-label': Array.isArray(this.props.ariaLabel) ? this.props.ariaLabel[i] : this.props.ariaLabel,
+      'aria-label': Array.isArray(this.props.ariaLabel)
+        ? this.props.ariaLabel[i]
+        : this.props.ariaLabel,
       'aria-labelledby': Array.isArray(this.props.ariaLabelledby)
         ? this.props.ariaLabelledby[i]
         : this.props.ariaLabelledby,
@@ -1017,7 +1048,9 @@ class ReactSlider extends React.Component {
 
     if (this.props.ariaValuetext) {
       props['aria-valuetext'] =
-        typeof this.props.ariaValuetext === 'string' ? this.props.ariaValuetext : this.props.ariaValuetext(state);
+        typeof this.props.ariaValuetext === 'string'
+          ? this.props.ariaValuetext
+          : this.props.ariaValuetext(state);
     }
 
     return this.props.renderThumb(props, state);
@@ -1061,7 +1094,9 @@ class ReactSlider extends React.Component {
       tracks.push(this.renderTrack(i + 1, offset[i], offset[i + 1]));
     }
 
-    tracks.push(this.renderTrack(lastIndex + 1, offset[lastIndex], this.state.upperBound));
+    tracks.push(
+      this.renderTrack(lastIndex + 1, offset[lastIndex], this.state.upperBound)
+    );
 
     return tracks;
   }
@@ -1115,7 +1150,8 @@ class ReactSlider extends React.Component {
           this.resizeElementRef.current = r;
         },
         style: { position: 'relative' },
-        className: this.props.className + (this.props.disabled ? ' disabled' : ''),
+        className:
+          this.props.className + (this.props.disabled ? ' disabled' : ''),
         onMouseDown: this.onSliderMouseDown,
         onClick: this.onSliderClick,
       },

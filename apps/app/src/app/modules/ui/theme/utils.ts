@@ -1,32 +1,38 @@
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
 
+import {
+  AllCountriesEnum,
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+} from '@frontend/shared/domain';
+
+import {
+  DEFAULT_INDIA_THEME,
+  DEFAULT_MEXICO_THEME,
+  DEFAULT_PAKISTAN_THEME,
+  DEFAULT_PHILIPPINES_THEME,
+  themes,
+} from '../../../../environments/themeModule/customTailwindTheme';
+import { SentryModule } from '../../sentry';
 import { mapCustomTailwindTheme } from './mapCustomTailwindTheme';
 import { IMappedTheme, ITheme } from './types';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { environment } from 'apps/app/src/environments/environmentModule/environment';
-import {
-  DEFAULT_INDIA_THEME, DEFAULT_MEXICO_THEME, DEFAULT_PAKISTAN_THEME,
-  DEFAULT_PHILIPPINES_THEME,
-  themes
-} from "../../../../environments/themeModule/customTailwindTheme";
-import {SentryModule} from "../../sentry";
-import {AllCountriesEnum} from "../../../../../../../libs/shared/domain/src/country/AllCountry";
 
-
-function getDefaultTheme() {
-    if (environment.country === IndiaCountry.country) {
-        return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
-    } else if (environment.country === PakistanCountry.country) {
-        return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
-    } else if (environment.country === MexicoCountry.country) {
-        return mapCustomTailwindTheme(themes['mexico'][DEFAULT_MEXICO_THEME]);
-    }else if (environment.country === MexicoCountry.country) {
-      return mapCustomTailwindTheme(themes['philippines'][DEFAULT_PHILIPPINES_THEME]);
-    }else{
-        return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
-    }
-}
+// function getDefaultTheme() {
+//   if (environment.country === IndiaCountry.country) {
+//     return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
+//   } else if (environment.country === PakistanCountry.country) {
+//     return mapCustomTailwindTheme(themes['pakistan'][DEFAULT_PAKISTAN_THEME]);
+//   } else if (environment.country === MexicoCountry.country) {
+//     return mapCustomTailwindTheme(themes['mexico'][DEFAULT_MEXICO_THEME]);
+//   } else if (environment.country === MexicoCountry.country) {
+//     return mapCustomTailwindTheme(
+//       themes['philippines'][DEFAULT_PHILIPPINES_THEME]
+//     );
+//   } else {
+//     return mapCustomTailwindTheme(themes['india'][DEFAULT_INDIA_THEME]);
+//   }
+// }
 
 export const applyTheme = (country: AllCountriesEnum, theme: string): void => {
   // console.log("applyTheme.country", country);
@@ -39,9 +45,9 @@ export const applyTheme = (country: AllCountriesEnum, theme: string): void => {
     themeObject = mapCustomTailwindTheme(themes[country][theme]);
   }
 
-  if(Object.keys(themeObject).length === 0) {
+  if (Object.keys(themeObject).length === 0) {
     const message = `Please configure Country: ${country} version:${theme}`;
-    SentryModule.captureException(new Error(message))
+    SentryModule.captureException(new Error(message));
     // alertModal(message);
   }
 

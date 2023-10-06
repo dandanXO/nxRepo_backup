@@ -1,4 +1,4 @@
-const {APP_IDENTIFICATION} = require("./webpack.config.common");
+const { APP_IDENTIFICATION } = require('./webpack.config.common');
 
 // NOTE: Proxy URL
 let proxyURL = null;
@@ -24,11 +24,11 @@ switch (process.env.NODE_COUNTRY) {
     break;
   }
   default: {
-    throw new Error(APP_IDENTIFICATION + "please setting proxy url");
+    throw new Error(APP_IDENTIFICATION + 'please setting proxy url');
   }
 }
-console.log(`${APP_IDENTIFICATION} proxyURL: ${proxyURL}`)
+console.log(`${APP_IDENTIFICATION} proxyURL: ${proxyURL}`);
 
 module.exports = {
-  proxyURL
-}
+  proxyURL,
+};

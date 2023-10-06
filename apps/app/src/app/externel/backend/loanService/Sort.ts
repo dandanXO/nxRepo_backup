@@ -1,5 +1,5 @@
 export type Sort = {
-  empty:	boolean;
-  sorted:	boolean;
-  unsorted:	boolean;
-}
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
+};

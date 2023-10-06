@@ -1,7 +1,5 @@
-import {GetUserInfoServiceResponse} from "../externel/backend/userService/GetUserInfoServiceResponse";
-import {
-  IUseFinishedBindBankAccountPage
-} from "../ui/pages/BindBankCardPage/hooks/common/useFinishedBindBankAccountForm";
+import { GetUserInfoServiceResponse } from '../externel/backend/userService/GetUserInfoServiceResponse';
+import { IUseFinishedBindBankAccountPage } from '../ui/pages/BindBankCardPage/hooks/common/useFinishedBindBankAccountForm';
 
 export interface IMonitorUsecaseFlow {
   appLoadAndroidAppInfo: () => void;

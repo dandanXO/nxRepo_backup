@@ -24,7 +24,9 @@ export const AuthorizationModal = (props: Props) => {
             <CloseButton />
           </div>
           <div className={'header-title'}>Authorization</div>
-          <div className={'header-subtitle text-xs text-gray-500'}>may request access to</div>
+          <div className={'header-subtitle text-xs text-gray-500'}>
+            may request access to
+          </div>
         </div>
 
         <div className={'flex h-[400px] flex-col overflow-auto font-light'}>
@@ -38,38 +40,43 @@ export const AuthorizationModal = (props: Props) => {
           <div className={'mb-3'}>
             <div className={'title'}>SMS</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload SMS data to assist us in using the information you
-              provide for credit scoring and risk assessment.{' '}
+              We need your authorization to collect and upload SMS data to
+              assist us in using the information you provide for credit scoring
+              and risk assessment.{' '}
             </div>
           </div>
 
           <div className={'mb-3'}>
             <div className={'title'}>AppList</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload the AppList to assist us in using the information you
-              provide for credit scoring and risk assessment.{' '}
+              We need your authorization to collect and upload the AppList to
+              assist us in using the information you provide for credit scoring
+              and risk assessment.{' '}
             </div>
           </div>
 
           <div className={'mb-3'}>
             <div className={'title'}>Photo</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload photos to assist us in using the information you provide
-              for credit scoring and risk assessment.{' '}
+              We need your authorization to collect and upload photos to assist
+              us in using the information you provide for credit scoring and
+              risk assessment.{' '}
             </div>
           </div>
 
           <div className={'mb-3'}>
             <div className={'title'}>Phone State</div>
             <div className={'content text-xs text-gray-500'}>
-              We need your authorization to collect and upload the phone state to assist us in using the information you
-              provide for credit scoring and risk assessment.{' '}
+              We need your authorization to collect and upload the phone state
+              to assist us in using the information you provide for credit
+              scoring and risk assessment.{' '}
             </div>
           </div>
 
           <div className={'description text-xs'}>
-            We will only begin to access the data once you allow the permission, and will continue to collect and upload
-            the data until your application is successfully submitted.
+            We will only begin to access the data once you allow the permission,
+            and will continue to collect and upload the data until your
+            application is successfully submitted.
           </div>
         </div>
 

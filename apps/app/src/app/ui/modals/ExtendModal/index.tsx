@@ -1,14 +1,16 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
-import { Overlay } from '@frontend/mobile/shared/ui';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
+import { getOrderNo } from '../../../externel/window/querystring/getOrderNo';
 import { renderByCountry } from '../../../modules/i18n';
 import { RootState } from '../../../reduxStore';
 import useExtendCreate from '../../hooks/useExtendCreate';
@@ -18,7 +20,6 @@ import IndiaExtendModal from './i18n/IndiaExtendModal';
 import MexicoExtendModal from './i18n/MexicoExtendModal';
 import PakistanExtendModal from './i18n/PakistanExtendModal';
 import PhilippinesExtendModal from './i18n/PhilippinesExtendModal';
-import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 const PureExtendModal = (props: any) => {
   const navigate = useNavigate();
@@ -51,22 +52,22 @@ const PureExtendModal = (props: any) => {
 
   const handleConfirm = () => {
     if (isRepayTypesFetching || isPostExtendCreateLoading) return;
-    let payType = ''
-    if(environment.country === PhilippinesCountry.country){
+    let payType = '';
+    if (environment.country === PhilippinesCountry.country) {
       payType = repaymentData.payType || '';
     } else {
-      payType = repayType && repayType.value
+      payType = repayType && repayType.value;
     }
 
     handlePostExtendCreate &&
-    handlePostExtendCreate(
-      false,
-      orderNo,
-      repayConfirmDetail && repayConfirmDetail.extensionPayAmount
-        ? repayConfirmDetail.extensionPayAmount
-        : 0,
-      payType
-    );
+      handlePostExtendCreate(
+        false,
+        orderNo,
+        repayConfirmDetail && repayConfirmDetail.extensionPayAmount
+          ? repayConfirmDetail.extensionPayAmount
+          : 0,
+        payType
+      );
   };
 
   return (

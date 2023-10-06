@@ -2,14 +2,16 @@
 //  set to 'es2020', 'es2022', 'esnext', 'commonjs', 'amd', 'system', 'umd', 'node16', or 'nodenext'.
 // import loadableComponent from '@loadable/component';
 // import posthog from 'posthog-js';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router';
 
-
 import { RootState } from '../../reduxStore';
+import AppDataCollector from '../../uiFlowDataCollector/AppDataCollector';
+import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 // NOTICE: Static Loading : Compontents
 import LoadingMask from '../core-components/LoadingMask';
+import { Page } from '../core-components/Page';
 import { TabBar } from '../core-components/TabBar';
 import APIBoundaryModal from '../modals/APIBoundaryModal';
 import AmountRepaidModal from '../modals/AmountRepaidModal/AmountRepaidModal';
@@ -39,7 +41,6 @@ import LoginPage from '../pages/LoginPage';
 import MyCouponListPage from '../pages/MyCouponListPage';
 import OnlineCustomerServicePage from '../pages/OnlineCustomerServicePage';
 import OrderStatusPage from '../pages/OrderStatusPage';
-import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import PartnerPage from '../pages/PartnerPage';
 import PaymentResultPage from '../pages/PaymentResultPage';
 import PersonalInfoPage from '../pages/PersonalInfoPage';
@@ -52,9 +53,6 @@ import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage';
 // NOTE: Page
 // import { CategoryPage } from '../pages/__test__/CategoryPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
-import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage';
-import AppDataCollector from "../../uiFlowDataCollector/AppDataCollector";
-import {Page} from "../core-components/Page";
 
 // NOTICE: 無法以下寫法
 // [ctor is not a function when using React.lazy](https://github.com/facebook/react/issues/15639)
@@ -161,7 +159,7 @@ import {Page} from "../core-components/Page";
 // RepaymentCouponModal.preload();
 
 export const AppRouter = () => {
-  const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
+  // const isInit: boolean = useSelector((state: RootState) => state.app.isInit);
 
   const location = useLocation();
 
@@ -231,11 +229,17 @@ export const AppRouter = () => {
           path={PageOrModalPathEnum.BankcardListPage}
           element={<BankCardListPage />}
         />
-        <Route path={PageOrModalPathEnum.BindBankcard} element={<BindBankCardPage />}>
+        <Route
+          path={PageOrModalPathEnum.BindBankcard}
+          element={<BindBankCardPage />}
+        >
           <Route path="iban-finder-modal" element={<IBANFinderModal />} />
         </Route>
 
-        <Route path={PageOrModalPathEnum.RepaymentPage} element={<LoanRecordPage />} />
+        <Route
+          path={PageOrModalPathEnum.RepaymentPage}
+          element={<LoanRecordPage />}
+        />
 
         {/*NOTICE: order: processing, reject*/}
         <Route
@@ -259,7 +263,6 @@ export const AppRouter = () => {
             element={<RepaymentCouponModal />}
           />
         </Route>
-
 
         <Route
           path={PageOrModalPathEnum.PaymentResultPage}
@@ -288,8 +291,14 @@ export const AppRouter = () => {
           path={PageOrModalPathEnum.MyCouponListPage}
           element={<MyCouponListPage />}
         />
-        <Route path={PageOrModalPathEnum.PartnerPage} element={<PartnerPage />} />
-        <Route path={PageOrModalPathEnum.FeedbackPage} element={<FeedbackPage />} />
+        <Route
+          path={PageOrModalPathEnum.PartnerPage}
+          element={<PartnerPage />}
+        />
+        <Route
+          path={PageOrModalPathEnum.FeedbackPage}
+          element={<FeedbackPage />}
+        />
         <Route
           path={PageOrModalPathEnum.PrivacyPolicyPage}
           element={<PrivacyPolicyPage />}
@@ -314,7 +323,10 @@ export const AppRouter = () => {
         {/*<Route path="/v2/category" element={<CategoryPage />} />*/}
         <Route path="/v2/error" element={<ErrorPage />} />
 
-        <Route path="*" element={<Page>Please use valid appName, appID and appDomain</Page>} />
+        <Route
+          path="*"
+          element={<Page>Please use valid appName, appID and appDomain</Page>}
+        />
       </Routes>
 
       {/*<Page>*/}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { WithTranslation } from 'react-i18next';
 
 import { InputValue } from '@frontend/mobile/shared/ui';
 
@@ -35,9 +34,9 @@ export type IPakistanBankAccountForm = {
   bankDropList: any;
   cardholderName: string;
   isFormPending: boolean;
-//   bankAccountValue: any;
-//   onIFSCDropSelect: (index: number) => void;
-//   bindCardDropListData: any;
+  //   bankAccountValue: any;
+  //   onIFSCDropSelect: (index: number) => void;
+  //   bindCardDropListData: any;
   // iBanData: any;
   // onIBanChange: (event: any) => void;
   // onIbanBlur: (event: any) => void;

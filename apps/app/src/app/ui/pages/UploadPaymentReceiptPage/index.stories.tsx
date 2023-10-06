@@ -11,15 +11,26 @@ export default {
   component: IndiaUploadPaymentReceiptPage,
 } as ComponentMeta<typeof IndiaUploadPaymentReceiptPage>;
 
-export const Page: ComponentStory<typeof IndiaUploadPaymentReceiptPage> = () => {
-  const { isUploading, utr, setURT, validateUtr, formFile, onFileChange, imageSrc, confirm, fileErrorMessage } =
-    useUploadPaymentReceipt({
-      postRepayReceiptRequest: () => {
-        // do nothing.
-      },
-      token: '',
-      orderNo: '123',
-    });
+export const Page: ComponentStory<
+  typeof IndiaUploadPaymentReceiptPage
+> = () => {
+  const {
+    isUploading,
+    utr,
+    setURT,
+    validateUtr,
+    formFile,
+    onFileChange,
+    imageSrc,
+    confirm,
+    fileErrorMessage,
+  } = useUploadPaymentReceipt({
+    postRepayReceiptRequest: () => {
+      // do nothing.
+    },
+    token: '',
+    orderNo: '123',
+  });
 
   return (
     <AppThemeProvider>

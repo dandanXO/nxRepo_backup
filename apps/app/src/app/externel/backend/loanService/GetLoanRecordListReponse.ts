@@ -1,12 +1,12 @@
 import { GetLoanRecord } from './GetLoanRecord';
-import {Pageable} from "./Pageable";
-import {Sort} from "./Sort";
+import { Pageable } from './Pageable';
+import { Sort } from './Sort';
 
 export interface GetLoanRecordListReponse {
   content: GetLoanRecord[];
-  empty?:	boolean;
-  first?:	boolean;
-  last?:	boolean;
+  empty?: boolean;
+  first?: boolean;
+  last?: boolean;
   number?: number;
   pageable?: Pageable;
   sort?: Sort | [];

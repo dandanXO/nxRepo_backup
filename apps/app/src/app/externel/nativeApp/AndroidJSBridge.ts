@@ -1,3 +1,1 @@
-export type AndroidJSBridge = {
-
-}
+export type AndroidJSBridge = {};

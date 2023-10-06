@@ -1,4 +1,3 @@
-import React from 'react';
 import { StylesConfig } from 'react-select';
 
 export const selectStyles: StylesConfig = {

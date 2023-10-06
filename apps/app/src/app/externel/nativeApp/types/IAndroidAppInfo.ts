@@ -1,4 +1,4 @@
-import {AllCountriesEnum} from "../../../../../../../libs/shared/domain/src/country/AllCountry";
+import { AllCountriesEnum } from '@frontend/shared/domain';
 
 export type IAndroidAppInfo = {
   environment: AllCountriesEnum;

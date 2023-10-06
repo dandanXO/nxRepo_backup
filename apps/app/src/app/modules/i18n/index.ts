@@ -2,6 +2,8 @@ import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { i18nextPlugin } from 'translation-check';
 
+import { AllCountry } from '../../../../../../libs/shared/domain/src/country/AllCountry';
+import { environment } from '../../../environments/environmentModule/environment';
 import { i18nCoupon } from '../../ui/components/Coupon/i18n/translations';
 import { i18nProduct } from '../../ui/components/Product/i18n/translations';
 import { i18nAmountRepaidModal } from '../../ui/modals/AmountRepaidModal/i18n/translations';
@@ -18,8 +20,6 @@ import { i18nLoanDetailsPage } from '../../ui/pages/RepaymentDetailPage/translat
 import { i18nUploadPaymentReceiptPage } from '../../ui/pages/UploadPaymentReceiptPage/i18nPage/translations';
 import { i18nUploadingFileModal } from '../../ui/pages/UploadPaymentReceiptPage/modal/UploadingFileModal/i18n/translations';
 import { i18nUploadedPaymentReceiptPage } from '../../ui/pages/UploadedPaymentReceiptPage/components/i18n/translations';
-import {AllCountry} from "../../../../../../libs/shared/domain/src/country/AllCountry";
-import {environment} from "../../../environments/environmentModule/environment";
 
 // NOTE: configure
 i18next

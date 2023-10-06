@@ -14,9 +14,14 @@ const CollapseItem = ({ title, content, isCollapse }: ICollapseItemProps) => {
   const [collapse, setCollapse] = useState(isCollapse);
   return (
     <div>
-      <div className="flex items-center justify-between " onClick={() => setCollapse(!collapse)}>
+      <div
+        className="flex items-center justify-between "
+        onClick={() => setCollapse(!collapse)}
+      >
         <div className="text-sm font-bold">{title}</div>
-        <div className="text-xl">{collapse ? <RiArrowUpSLine /> : <RiArrowDownSLine />}</div>
+        <div className="text-xl">
+          {collapse ? <RiArrowUpSLine /> : <RiArrowDownSLine />}
+        </div>
       </div>
       <Divider />
       {collapse && (

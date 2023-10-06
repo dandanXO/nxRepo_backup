@@ -16,7 +16,11 @@ const PartnerPage = () => {
           navigate(-1);
         }}
       />
-      <iframe className={`w-full grow`} src={init?.partnershipUrl || ''} title="" />
+      <iframe
+        className={`w-full grow`}
+        src={init?.partnershipUrl || ''}
+        title=""
+      />
     </Page>
   );
 };

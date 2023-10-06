@@ -1,3 +1,1 @@
-export type PostUserLogoutResponse = {
-
-}
+export type PostUserLogoutResponse = {};

@@ -4,12 +4,12 @@ export const i18nAmountRepaidModal: i18nComponent = {
   namespace: 'modals/i18nAmountRepaidModal',
   translation: {
     en_US: {
-      'Amount Repaid Record':'Amount Repaid Record',
-      'No paid records yet':'No paid records yet',
+      'Amount Repaid Record': 'Amount Repaid Record',
+      'No paid records yet': 'No paid records yet',
     },
-    es_MX:{
-      'Amount Repaid Record':'Registro de pagos',
-      'No paid records yet':'Actualmente no hay historial de pagos',
+    es_MX: {
+      'Amount Repaid Record': 'Registro de pagos',
+      'No paid records yet': 'Actualmente no hay historial de pagos',
     },
     bn_BD: {
       'Amount Paid Record': 'প্রদত্ত পরিমাণ রেকর্ড',

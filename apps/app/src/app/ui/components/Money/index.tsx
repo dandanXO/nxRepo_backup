@@ -1,11 +1,12 @@
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
 import { formatPrice } from '../../../modules/format/formatPrice';
-import { renderByCountry } from '../../../modules/i18n';
 
 interface IMoney {
   money: number | string;

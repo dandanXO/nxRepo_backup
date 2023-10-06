@@ -5,20 +5,18 @@ export const i18nCoupon: i18nComponent = {
   translation: {
     en_US: {
       'USE NOW': 'USE NOW',
-      'EXPIRED': 'EXPIRED',
-      'USED': 'USED',
+      EXPIRED: 'EXPIRED',
+      USED: 'USED',
       'Expired time': 'Expired time',
       'Used on': 'Used on',
     },
     es_MX: {
       'USE NOW': 'USAR AHORA',
-      'EXPIRED': 'Vencido',
-      'USED': 'USADO',
+      EXPIRED: 'Vencido',
+      USED: 'USADO',
       'Expired time': 'Hora de Vencimiento',
       'Used on': 'Usado el',
     },
-    bn_BD: {
-
-    },
+    bn_BD: {},
   },
 };
