@@ -21,7 +21,6 @@ export const TabBar = (props: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  // console.log("location", location);
   const isInPage = (pageName: PageOrModalPathEnum, exact?: boolean) => {
     if (pageName === PageOrModalPathEnum.IndexPage) {
       return location.pathname === pageName;

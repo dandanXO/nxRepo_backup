@@ -13,5 +13,13 @@ class AppInfoPersistence {
   get appID(): string {
     return AppLocalStorage.getItem("appID") || "";
   }
+
+  set appDomain(domain: string) {
+    AppLocalStorage.setItem("appDomain", domain);
+  }
+
+  get appDomain(): string {
+    return AppLocalStorage.getItem("appDomain") || "";
+  }
 }
 export const appInfoPersistence = new AppInfoPersistence();

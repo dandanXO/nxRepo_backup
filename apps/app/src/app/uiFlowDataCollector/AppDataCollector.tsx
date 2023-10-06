@@ -97,7 +97,7 @@ const AppDataCollector = (props: { children: React.ReactNode }) => {
   };
 
   return (
-    <div onClick={onAppElementEvent} onBlur={onAppElementEvent}>
+    <div id="app-data-collector" className={"h-full"} onClick={onAppElementEvent} onBlur={onAppElementEvent}>
       {props.children}
     </div>
   );

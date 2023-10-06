@@ -118,6 +118,7 @@ export class SentryModule {
       },
       extra: {
         environment: NativeAppInfo.environment,
+        userAgent: navigator.userAgent,
         ...extra,
       },
     });

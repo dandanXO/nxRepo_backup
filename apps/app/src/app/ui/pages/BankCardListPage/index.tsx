@@ -83,8 +83,8 @@ const BankCardListPage = () => {
         <div className={cx(`overflow-auto`,
             {
                 // NOTE: Navigation:56px , Add A New Card:103px
-                'h-[calc(100vh-56px-103px)] pt-0': isShowNavigation(),
-                'h-[100vh-103px]': !isShowNavigation()
+                'h-[calc(100%-56px-103px)] pt-0': isShowNavigation(),
+                'h-[100%-103px]': !isShowNavigation()
             }
         )}>
             {currentData &&

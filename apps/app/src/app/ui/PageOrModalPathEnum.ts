@@ -17,7 +17,7 @@ export enum PageOrModalPathEnum {
   PrivacyPolicyPage = '/v2/privacy-policy',
   PrivacyPolicyModal = '/v2/privacy-policy-modal',
 
-  DisclosureStatementPage = '/disclosure-statement',
+  DisclosureStatementPage = '/v2/disclosure-statement',
   CustomerServicePage = '/v2/customer-service',
   IBANFinderPage = '/v2/iban-finder',
 

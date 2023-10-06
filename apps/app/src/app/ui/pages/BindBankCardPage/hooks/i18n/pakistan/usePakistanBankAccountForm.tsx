@@ -51,7 +51,7 @@ export const usePakistanBankAccountForm = (props: IUsePakistanBankAccountForm) =
 
   //NOTE: 選擇的帳號
   const onIFSCDropSelect = useCallback((index: any) => {
-    console.log("index", index);
+    // console.log("index", index);
     setBankAccountValue({
         ...bankAccountValue,
         data: index

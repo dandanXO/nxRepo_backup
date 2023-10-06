@@ -30,13 +30,11 @@ const axiosBaseQuery =
       const resultData = await gateway(baseUrl, url, method, data, params, headers);
       // console.log('[app] resultData:', resultData);
       return resultData;
-    } catch (axiosError) {
-      console.log('error-2', axiosError);
 
+    } catch (axiosError) {
       // NOTE: err
       const err: AxiosError = axiosError as AxiosError;
       console.info('[app] err:', err);
-
       // NOTICE: err.response.status !== 200
       // if (
       //   (err.response as any).data?.code !== 404 ||
@@ -45,7 +43,7 @@ const axiosBaseQuery =
       //
       // }
 
-      // NOTE: backendCustomError
+      // NOTE: Backend Custom Error
       const backendCustomError = err.response?.data as {
         code: number;
         data?: {
@@ -55,14 +53,19 @@ const axiosBaseQuery =
       };
       const backendCustomErrorMessage = backendCustomError?.data?.msg || backendCustomError.message;
       console.info('[app] customErrorMessage:', backendCustomErrorMessage);
+      // console.log(err.config.url);
 
-      console.log(err.config.url);
       // NOTICE: REFACTOR ME 避免頻繁 REQUEST 通知
       if (err.config.url !== '/api/v2/loan/quota/refresh' && err.config.url !== '/api/v3/trace/behavior') {
-        alertModal(backendCustomErrorMessage);
+        // NOTE: runAxios 那邊已經跳出錯誤
+        if(!(axiosError as any).isAlertModal) {
+          alertModal(backendCustomErrorMessage);
+        } else {
+          console.log("runAxios 那邊已經跳出錯誤");
+        }
       }
 
-      // NOTE: frontendError
+      // NOTE: Frontend Custom Error
       const frontendError = new Error();
       frontendError.name = backendCustomErrorMessage;
       frontendError.message = JSON.stringify({
@@ -74,11 +77,11 @@ const axiosBaseQuery =
         },
         backendCustomError,
       });
+      console.info('[app] frontendError:', frontendError);
 
       if (AppFlag.enableSentry) {
         SentryModule.captureException(frontendError);
       }
-      console.info('[app] frontendError:', frontendError);
 
       return {
         error: {

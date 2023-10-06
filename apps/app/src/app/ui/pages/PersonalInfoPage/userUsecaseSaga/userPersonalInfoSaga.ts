@@ -8,11 +8,9 @@ import { systemGetIndexPageSaga } from '../../../../uiFlowUsecase/type/userUseca
 export function* userPersonalInfoSaga(action: any) {
     try {
         yield put(loadingSlice.actions.updatePageLoading(true));
-
-        yield call(systemCallGetUserInfoSaga);
-        yield call(systemGetIndexPageSaga);
-
-
+        // refactor: 共用資料需要統一再次拉取(已重構至 run SystemInitSaga)
+        // yield call(systemCallGetUserInfoSaga);
+        // yield call(systemGetIndexPageSaga);
     } catch (error) {
         yield catchSagaError(error);
     } finally {

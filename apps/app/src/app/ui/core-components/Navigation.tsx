@@ -15,6 +15,7 @@ export const Navigation = (props: Props) => {
     <div
       className={cx(
         'navigation sticky top-0 z-10 flex h-14 flex-row items-center justify-between bg-white px-3',
+        // 'navigation fixed top-0 left-0 right-0 100vw h-14 mb-[14px] z-10 flex flex-row items-center justify-between bg-white px-3',
         className,
         {
           'text-white': backgroundColor,

@@ -125,7 +125,7 @@ export function* userApplyProductsSaga(action: PayloadAction<UserApplyProductAct
     }
 
     // NOTE: 直接省略此流程
-    const ignoreToLetUserToAuthenticate = GlobalAppMode.mode === "PureH5" || GlobalAppMode.mode === "SimpleWebView" || GlobalAppMode.mode === "None";
+    const ignoreToLetUserToAuthenticate = GlobalAppMode.mode === "PureH5" || GlobalAppMode.mode === "SimpleWebView" || GlobalAppMode.mode === "Unset";
     const letUserToAuthenticate = GlobalAppMode.mode === 'IndexWebview'
 
     console.log("ignoreToLetUserToAuthenticate: ", ignoreToLetUserToAuthenticate);

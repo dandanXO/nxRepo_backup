@@ -1,16 +1,19 @@
-import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import cx from 'classnames';
 
+// refactor
 import { Input, InputValue } from '@frontend/mobile/shared/ui';
 
-import { Button } from '../../core-components/Button';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 import {RootState} from "../../../reduxStore";
 import {loginSlice} from "../../../reduxStore/loginSlice";
 import {getToken} from "../../../application/getToken";
+
+import { Button } from '../../core-components/Button';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+
+import { LoginPageUseCaseActionsInstance } from './userUsecaseSaga';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -32,11 +35,27 @@ export const LoginForm = () => {
     }
   }, [phoneNumber])
 
+  const validatePhoneFormat = (value: string) => {
+    const isError = value.length !== 10;
+    setPhoneNumberData({
+      data: value,
+      isValidation: !isError,
+      errorMessage: isError ? '*Please enter the correct phone number.' : '',
+    });
+    setEnableGetOTP(!isError);
+    dispatch(loginSlice.actions.updatePhoneNo(value))
+  }
+  useEffect(() => {
+    if(!phoneNumber) return;
+    validatePhoneFormat(phoneNumber)
+  }, [phoneNumber])
+
   const [enableGetOTP, setEnableGetOTP] = useState(false);
 
   const [doingCountdownSendOTP, setDoingCountdownSendOTP] = useState(false);
   const [hasSendOTP, setHasSendOTP] = useState(false);
   const { resendSeconds } = useSelector((state: any) => state.login);
+  // console.log("resendSeconds: ", resendSeconds);
 
   const [otpData, setOtpData] = useState<InputValue<string>>({
     data: '',
@@ -101,6 +120,8 @@ export const LoginForm = () => {
 
   const appName: string =  useSelector((state: RootState) => state.app.appName);
 
+
+
   return (
     <>
       <div className={`grow`}>
@@ -109,11 +130,11 @@ export const LoginForm = () => {
           suffix={
             <Button
               dataTestingID={'getOTP'}
-              text={!doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
-              disable={!(enableGetOTP && !hasSendOTP && !doingCountdownSendOTP)}
+              text={resendSeconds === 60 && !doingCountdownSendOTP ? 'Get OTP' : `Resend ( ${resendSeconds}s )`}
+              disable={!(resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP )}
               className={cx('ml-2 py-1 px-2.5 w-auto')}
               onClick={() => {
-                enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
+                resendSeconds === 60 && enableGetOTP && !hasSendOTP && !doingCountdownSendOTP && onClickGetOTP();
               }}
             />
           }
@@ -123,16 +144,7 @@ export const LoginForm = () => {
           disabled={false}
           errorMessage={phoneNumberData.errorMessage}
           onBlur={(event: any) => {
-            const value = event.target.value;
-            const isError = value.length !== 10;
-            setPhoneNumberData({
-              data: value,
-              isValidation: !isError,
-              errorMessage: isError ? '*Please enter the correct phone number.' : '',
-            });
-            setEnableGetOTP(!isError);
-
-            dispatch(loginSlice.actions.updatePhoneNo(value))
+            validatePhoneFormat(event.target.value)
           }}
           onChange={(event: any) => {
             const value = event.target.value;
@@ -202,7 +214,7 @@ export const LoginForm = () => {
           <span
             className="mx-1 text-cstate-info-main underline decoration-cstate-info-main"
             onClick={() =>
-              navigate(`${PageOrModalPathEnum.PrivacyPolicyModal}?token=${getToken()}`)
+              navigate(`${PageOrModalPathEnum.PrivacyPolicyModal}`)
             }
           >
             Privacy Policy

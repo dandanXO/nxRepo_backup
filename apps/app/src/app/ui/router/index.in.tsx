@@ -54,6 +54,7 @@ import UploadedPaymentReceiptPage from '../pages/UploadedPaymentReceiptPage';
 import { ErrorPage } from '../pages/__test__/ErrorPage';
 import IBANFinderPage from '../pages/i18n/paskitan/IBANFinderPage';
 import AppDataCollector from "../../uiFlowDataCollector/AppDataCollector";
+import {Page} from "../core-components/Page";
 
 // NOTICE: 無法以下寫法
 // [ctor is not a function when using React.lazy](https://github.com/facebook/react/issues/15639)
@@ -190,11 +191,6 @@ export const AppRouter = () => {
     <AppDataCollector>
       {/*<Suspense fallback={<div>Loading...</div>}>*/}
       <Routes>
-        {/*NOTICE: refactor me - PK*/}
-        <Route
-          path={PageOrModalPathEnum.IBANFinderPage}
-          element={<IBANFinderPage />}
-        />
         {/*<Route path="/v2/auth" element={<AuthPage />} />*/}
         {/*<Route path="/v2/finished-repayment" element={<FinishedRepaymentPage />} />*/}
 
@@ -264,6 +260,7 @@ export const AppRouter = () => {
           />
         </Route>
 
+
         <Route
           path={PageOrModalPathEnum.PaymentResultPage}
           element={<PaymentResultPage />}
@@ -317,7 +314,7 @@ export const AppRouter = () => {
         {/*<Route path="/v2/category" element={<CategoryPage />} />*/}
         <Route path="/v2/error" element={<ErrorPage />} />
 
-        <Route path="*" element={<div>Not Found</div>} />
+        <Route path="*" element={<Page>Please use valid appName, appID and appDomain</Page>} />
       </Routes>
 
       {/*<Page>*/}

@@ -57,10 +57,8 @@ const RepaymentPage = () => {
 
     return (
         <Page className="flex flex-col">
-            <div className="text-center">
-                <Navigation title="Payment" />
-            </div>
-            <div className={`flex flex-row justify-between bg-white px-5 pb-3 -mx-1`}>
+            <Navigation title="Payment" className={"text-center"}/>
+            <div className={`top-0 flex flex-row justify-between bg-white px-5 pb-3 mx-1`}>
                 {['Unpaid', 'Overdue', 'Done'].map((i) => (
                     <Tag
                         layoutType={environment.country === 'in' ? 1 : 2}
@@ -74,7 +72,7 @@ const RepaymentPage = () => {
             </div>
 
             {/*TODO: refactor me*/}
-            <div ref={divRef} className={"h-[calc(100vh_-_56px_-_38px_-_72px)] overflow-scroll flex flex-col"} onScroll={(e) => handleOnscroll(e)}>
+            <div ref={divRef} className={"h-[calc(100%_-_56px_-_38px_-_64px)] overflow-scroll flex flex-col"} onScroll={(e) => handleOnscroll(e)}>
                 {repaymentPageState?.repaymentRecord &&
                     repaymentPageState?.repaymentRecord?.length > 0 ? (
                     repaymentPageState.repaymentRecord?.map((record, index) => {

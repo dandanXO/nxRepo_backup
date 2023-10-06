@@ -30,7 +30,7 @@ export const CoreMain = (props: ICoreMain) => {
   // alertModal(JSON.stringify(NativeAppInfo));
 
   return (
-    <div>
+    <>
       {/*NOTICE: Refactor Me - style component theme : window.theme */}
       <AppThemeProvider theme={window.theme}>
         <Provider store={appStore}>
@@ -42,6 +42,6 @@ export const CoreMain = (props: ICoreMain) => {
           </ReduxRouter>
         </Provider>
       </AppThemeProvider>
-    </div>
+    </>
   )
 }

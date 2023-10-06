@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // import ReactShadowRoot from 'react-shadow-root';
 // import usePortal from 'react-useportal'
 
@@ -8,6 +8,8 @@ import {RootState} from '../../../reduxStore';
 import {CloseButton} from '../../core-components/CloseButton';
 import {Navigation} from '../../core-components/Navigation';
 import {gateway} from "../../../gateway";
+import {GlobalAppMode} from "../../../application/GlobalAppMode";
+import {loadingSlice} from "../../../reduxStore/loadingSlice";
 
 type Props = {
   onClose: () => void;
@@ -23,6 +25,7 @@ export const LoanAgreementModal = (props: Props) => {
   const url = useSelector((state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl);
 
   const [htmlData, setHTMLData] = useState<any>();
+
   useEffect(() => {
     if(!url) return;
     gateway('', url, 'get', null).then((response) => {
@@ -41,12 +44,28 @@ export const LoanAgreementModal = (props: Props) => {
         //   const shadowRoot = rootElement.attachShadow({ mode: "closed" });
         //   shadowRoot.innerHTML = response.data;
         // }
-        setHTMLData(response.data);
+        if(GlobalAppMode.mode === "PureH5") {
+          setHTMLData("data:text/html;base64," + btoa(unescape(encodeURIComponent(response.data))));
+        } else if(GlobalAppMode.mode === "IndexWebview" || GlobalAppMode.mode === "SimpleWebView") {
+          setHTMLData(response.data);
+          dispatch(loadingSlice.actions.updatePageLoading(false));
+        }
+
       }
     })
   }, [url])
-
   // var { ref, openPortal, closePortal, isOpen, Portal } = usePortal()
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadingSlice.actions.updatePageLoading(true));
+  }, [])
+
+  const oniFrameLoad = () => {
+    dispatch(loadingSlice.actions.updatePageLoading(false));
+  }
+
 
   return (
       <div className={'loan-agreement-modal fixed top-0 z-10 flex h-full w-screen flex-col bg-white'}>
@@ -57,7 +76,12 @@ export const LoanAgreementModal = (props: Props) => {
           <div className={'content flex-1'}>
               {/*NOTE: [Techniques to prevent CSS override by base application](https://medium.com/whatfix-techblog/techniques-to-prevent-css-override-by-base-application-53a00ff1451a)*/}
               {/*NOTE: htmlData樣式會被影響*/}
-              <div dangerouslySetInnerHTML={{ __html: htmlData}}/>
+              {(GlobalAppMode.mode === "IndexWebview" || GlobalAppMode.mode === "SimpleWebView") && (
+                <div dangerouslySetInnerHTML={{ __html: htmlData }}/>
+              )}
+              {GlobalAppMode.mode === "PureH5" && (
+                <iframe id="loan-agreement" className="w-full h-full" src={htmlData} onLoad={oniFrameLoad}/>
+              )}
               {/*NOTE: Android會攔截到 iframe src 行為，導致跳轉行為發生，但Android禁止，所以會發生問題*/}
               {/*<iframe id="loan-agreement" className="w-full h-full" src={url} />*/}
               {/*  {htmlData && (*/}
