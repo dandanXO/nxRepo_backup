@@ -6,7 +6,7 @@ import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Modal from '../../../../core-components/Modal';
 import { useTranslation } from 'react-i18next';
 import { i18nExtendConfirmModal } from '../../translations';
-import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 
 const IndiaExtendConfirmModal = () => {
   const navigate = useNavigate();

@@ -7,7 +7,7 @@ import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 import { InitialStateType, modalInitialState, modalSlice } from 'apps/app/src/app/reduxStore/modalSlice';
 import { loadingSlice } from 'apps/app/src/app/reduxStore/loadingSlice';
 import moment from 'moment';
-import {getOrderNo} from "../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../externel/window/querystring/getOrderNo";
 
 
 

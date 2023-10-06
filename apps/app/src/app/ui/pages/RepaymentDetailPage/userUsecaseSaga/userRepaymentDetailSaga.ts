@@ -6,7 +6,7 @@ import { catchSagaError } from "../../../../uiFlowUsecase/utils/catchSagaError";
 import { repaymentDetailPageInitialStateType, repaymentDetailPageSlice } from "apps/app/src/app/reduxStore/repaymentDetailPageSlice";
 import { rtkPendingSlice } from "apps/app/src/app/reduxStore/rtkPendingSlice";
 import moment from 'moment';
-import {getOrderNo} from "../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../externel/window/querystring/getOrderNo";
 
 
 export function* userRepaymentDetailSaga() {

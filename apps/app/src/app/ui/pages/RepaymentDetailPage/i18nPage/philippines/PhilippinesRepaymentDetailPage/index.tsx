@@ -24,7 +24,7 @@ import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
 import { tcx } from 'apps/app/src/app/modules/ui/tailwindcss';
 import { Status } from 'apps/app/src/app/ui/statusEnum';
-import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
 import {getToken} from "../../../../../../application/getToken";
 
 interface IPhilippinesRepaymentDetailPage {

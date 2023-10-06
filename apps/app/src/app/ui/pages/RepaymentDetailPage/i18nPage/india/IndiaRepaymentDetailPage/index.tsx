@@ -26,7 +26,7 @@ import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import { PageContent } from '../../../../../core-components/PageContent';
 import {Status} from "../../../../../statusEnum";
-import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
 
 
 

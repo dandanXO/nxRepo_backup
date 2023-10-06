@@ -27,7 +27,7 @@ import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
 import PhilippinesRepaymentModal from './i18n/PhilippinesRepaymentModal';
 import { i18nRepaymentModal } from './i18n/translations';
 import {InputValue} from "../../core-components/form/InputValue";
-import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 type paymentMethodValueType = {
   type: string;

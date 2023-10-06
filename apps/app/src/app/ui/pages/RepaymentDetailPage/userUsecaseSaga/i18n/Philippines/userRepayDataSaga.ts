@@ -8,7 +8,7 @@ import moment from 'moment';
 import { RootState } from "apps/app/src/app/reduxStore";
 import { userRepaymentDetailSaga } from "../../userRepaymentDetailSaga";
 import { loadingSlice } from "apps/app/src/app/reduxStore/loadingSlice";
-import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
 
 
 export function* userRepayDataSaga(action:PayloadAction) {

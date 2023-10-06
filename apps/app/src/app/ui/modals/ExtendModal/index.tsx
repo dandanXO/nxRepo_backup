@@ -18,7 +18,7 @@ import IndiaExtendModal from './i18n/IndiaExtendModal';
 import MexicoExtendModal from './i18n/MexicoExtendModal';
 import PakistanExtendModal from './i18n/PakistanExtendModal';
 import PhilippinesExtendModal from './i18n/PhilippinesExtendModal';
-import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 const PureExtendModal = (props: any) => {
   const navigate = useNavigate();

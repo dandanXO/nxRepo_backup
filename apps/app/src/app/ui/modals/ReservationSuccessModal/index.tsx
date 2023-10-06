@@ -9,7 +9,7 @@ import { i18nReservationSuccessModal } from './i18n/translations';
 import { useTranslation } from 'react-i18next';
 import { environment } from 'apps/app/src/environments/environmentModule/environment';
 import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 const ReservationSuccessModal = () => {
     const navigate = useNavigate();
