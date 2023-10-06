@@ -9,12 +9,12 @@ import { CommonTable, FormModal, CopyModalMessage ,CopyToLink} from 'components'
 import { orderDetailAction } from './index';
 import AddUrgeModal from './AddUrgeModal/AddUrgeModal';
 import UrgeRecordModal from './UrgeRecordModal/UrgeRecordModal';
-const TabPane = Tabs.TabPane;
 import {axios,convertMoneyFormat, emerRelation, maritalStatus,salaryRange, education, position,repaymentType } from "utils";
 import {injectIntl, FormattedMessage} from "react-intl";
 import {WatermarkPhoto} from "../../../components/WatermarkPhoto/WatermarkPhoto";
 import { Typography } from 'antd';
 import conf from 'conf';
+const TabPane = Tabs.TabPane;
 const { Paragraph } = Typography;
 const { Item } = Descriptions;
 //还款记录
@@ -59,21 +59,22 @@ const urgeRecordColumns = [
         }
     },
     {
-        title: <FormattedMessage id="customer.status" />, dataIndex: 'status', key: 'status', width: '15%',
+        title: <FormattedMessage id="customer.status" />, dataIndex: 'followUpResult', key: 'followUpResult', width: '15%',
         render (text) {
             const customerStatus = {
-                0: "page.table.none",
-                1: "customer.status.promise",
-                2: "customer.status.missed",
-                3: "customer.status.turned.off",
-                4: "customer.status.lost.contact",
-                5: "customer.status.other"
+              'Promise': "customer.status.promise",
+              'Missed': "customer.status.missed",
+              'TurnedOff': "customer.status.turned.off",
+              'InvalidPhoneNumber': "customer.status.invalid.phone.number",
+              'Other': "customer.status.other",
+              'BadAttitude': "customer.status.bad.attitude",
+              'FinancialDifficulties': "customer.status.financial.difficulties"
             }
-            return text !== null ? <FormattedMessage id={customerStatus[text]} /> : '';
+            return text !== null ? <FormattedMessage id={customerStatus[text] || 'page.table.none'} /> : '';
         }
     },
-    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark', width: '50%' },
-    { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorname', key: 'collectorname' }
+    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'trackingRecord', key: 'trackingRecord', width: '50%' },
+    { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collector', key: 'collector' }
 ];
 //展期记录
 const standOverRecordColumns = [

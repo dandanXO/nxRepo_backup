@@ -149,11 +149,11 @@ function* watchAddUrgeList() {
 function* getAllUrgeRecord(action) {
     try {
         const res = yield call(getUrgeRecord, action.params);
-        if(Number(res.code) === 200) {
-            const { data } = res;
+        if(res) {
+            const { records } = res;
             const detail = yield select(detailSelector);
             const orderInfo = detail['orderInfo'] || {};
-            const newData = { ...detail, orderInfo: { ...orderInfo, urgeRecord: data } };
+            const newData = { ...detail, orderInfo: { ...orderInfo, urgeRecord: records } };
             yield put(ordSetOrderDetail(newData));
         }
     } catch (e) {
