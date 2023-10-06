@@ -21,7 +21,7 @@ import { Button } from '../../core-components/Button';
 import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { i18nRepaymentCouponModal } from './i18n/translations';
-import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 type ICouponOption = ICouponProps & {
   isChecked: boolean;

@@ -21,7 +21,7 @@ import RepaymentDetailDemo from '../RepaymentDetailDemo';
 import { useSelector } from 'react-redux';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import {Status} from "../../../../../statusEnum";
-import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;

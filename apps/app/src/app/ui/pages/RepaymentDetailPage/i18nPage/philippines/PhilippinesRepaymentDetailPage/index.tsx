@@ -1,7 +1,5 @@
 import { IoIosArrowDown } from '@react-icons/all-files/io/IoIosArrowDown';
 import { IoIosArrowUp } from '@react-icons/all-files/io/IoIosArrowUp';
-import { tcx } from 'apps/app/src/app/modules/ui/tailwindcss';
-import { Status } from 'apps/app/src/app/ui/statusEnum';
 import moment from 'moment/moment';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,10 +8,8 @@ import { useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
-import { getToken } from '../../../../../../application/getToken';
 import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
 import { GetLoanDetailChargeFeeDetailItems } from '../../../../../../externel/backend/rtk/old/getLoanDetail';
-import { getOrderNo } from '../../../../../../presentation/querystring/getOrderNo';
 import { RootState } from '../../../../../../reduxStore';
 import Money from '../../../../../components/Money';
 import { Button } from '../../../../../core-components/Button';
@@ -26,6 +22,10 @@ import ReservationSuccessModal from '../../../../../modals/ReservationSuccessMod
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
+import { tcx } from 'apps/app/src/app/modules/ui/tailwindcss';
+import { Status } from 'apps/app/src/app/ui/statusEnum';
+import {getOrderNo} from "../../../../../../externel/window/querystring/getOrderNo";
+import {getToken} from "../../../../../../application/getToken";
 
 interface IPhilippinesRepaymentDetailPage {
   currentData?: GetLoanDetailResponse;

@@ -18,7 +18,7 @@ import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import {formatDate} from "../../../../../modules/format/formatDate";
-import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {

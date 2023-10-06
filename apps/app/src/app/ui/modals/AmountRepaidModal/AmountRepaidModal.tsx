@@ -14,7 +14,7 @@ import Money from '../../components/Money';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { i18nAmountRepaidModal } from './i18n/translations';
 import {formatDate} from "../../../modules/format/formatDate";
-import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../externel/window/querystring/getOrderNo";
 
 const ModalContentStyled = styled.div`
   padding: 0 12px;

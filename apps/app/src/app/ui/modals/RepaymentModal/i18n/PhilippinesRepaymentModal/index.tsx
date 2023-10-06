@@ -22,7 +22,7 @@ import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import { validateBalance } from '../validation';
-import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 import {InputValue} from "../../../../core-components/form/InputValue";
 
 interface IPhilippinesRepaymentModalProps {

@@ -5,7 +5,7 @@ import { getToken } from '../../application/getToken';
 import { RootState } from '../../reduxStore';
 import { InitialStateType, modalSlice } from '../../reduxStore/modalSlice';
 import { isSimpleWebView } from "../../device/isSimpleWebView";
-import {getOrderNo} from "../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../externel/window/querystring/getOrderNo";
 import {GlobalAppMode} from "../../application/GlobalAppMode";
 
 // 目前的pathname

@@ -6,7 +6,7 @@ import Modal from '../../../../core-components/Modal';
 import { Button } from '../../../../core-components/Button';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { i18nExtendConfirmModal } from '../../translations';
-import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
+import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
 
 const MexicoExtendConfirmModal = () => {
   const navigate = useNavigate();
