@@ -1,9 +1,9 @@
-import {delay, put} from 'redux-saga/effects';
+import { delay, put } from 'redux-saga/effects';
 
-import {indexPageSlice} from '../../../../reduxStore/indexPageSlice';
-import {catchSagaError} from '../../../../uiFlowUsecase/utils/catchSagaError';
-import {IndexPageSagaAction} from './indexPageActions';
-import {getTimePartInfoBetweenCurrentAndCountDown} from "@frontend/shared/date";
+import { getTimePartInfoBetweenCurrentAndCountDown } from '@frontend/shared/date';
+
+import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
+import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
 
 export function* systemRefreshableCountdownSaga(action: any) {
   // NOTICE: 防止錯誤後無法重新 watch
@@ -15,7 +15,9 @@ export function* systemRefreshableCountdownSaga(action: any) {
       countdown = getTimePartInfoBetweenCurrentAndCountDown(action.payload);
       // console.log("countdown", countdown.time);
       // NOTE: 更新倒數顯示資料
-      yield put(indexPageSlice.actions.updateRefreshableCountdown(countdown.time));
+      yield put(
+        indexPageSlice.actions.updateRefreshableCountdown(countdown.time)
+      );
     }
     // NOTE: 結束倒數計時
     yield put(indexPageSlice.actions.expiredRefreshableCountdown({}));
@@ -27,4 +29,3 @@ export function* systemRefreshableCountdownSaga(action: any) {
     yield catchSagaError(error);
   }
 }
-

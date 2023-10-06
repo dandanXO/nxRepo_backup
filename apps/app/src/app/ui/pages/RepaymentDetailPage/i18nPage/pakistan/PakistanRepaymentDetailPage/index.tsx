@@ -1,35 +1,32 @@
+import { RootState } from 'apps/app/src/app/reduxStore';
 import cx from 'classnames';
 import moment from 'moment';
-import { Outlet, useLocation, useNavigate } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
 
 import { getToken } from '../../../../../../application/getToken';
-import Divider from '../../../../../core-components/Divider';
-import ListItem from '../../../../../core-components/ListItem';
+import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
+import { getOrderNo } from '../../../../../../externel/window/querystring/getOrderNo';
+import { formatDate } from '../../../../../../modules/format/formatDate';
 import Money from '../../../../../components/Money';
 import { Button } from '../../../../../core-components/Button';
-
-import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
-
-import {useMemo} from "react";
-import {useDynamicChargeFeeList} from "../../../hooks/useDynamicChargeFeeList";
-import {formatDate} from "../../../../../../modules/format/formatDate";
-import { useTranslation } from 'react-i18next';
+import Divider from '../../../../../core-components/Divider';
+import ListItem from '../../../../../core-components/ListItem';
+import { Status } from '../../../../../statusEnum';
+import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
 import RepaymentDetailDemo from '../RepaymentDetailDemo';
-import { useSelector } from 'react-redux';
-import { RootState } from 'apps/app/src/app/reduxStore';
-import {Status} from "../../../../../statusEnum";
-import {getOrderNo} from "../../../../../../presentation/querystring/getOrderNo";
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
-  isFetching?:boolean;
-}
+  isFetching?: boolean;
+};
 const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
-  const { currentData ,isFetching = true} = props || {};
+  const { currentData, isFetching = true } = props || {};
   const {
     status = '',
     productName = '',
@@ -39,39 +36,54 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     paidAmount = '',
     repayRecords = [],
     totalRepayAmount = '',
-    chargeFeeDetail,
+    // chargeFeeDetail,
     extendDate = '',
     extensionFee = '',
-    totalDueAmount = '',
+    // totalDueAmount = '',
     extendable,
     reductionAmount = 0,
     penaltyInterest = 0,
     loanAmount = 0,
-    dailyFee = 0,
+    // dailyFee = 0,
     balance = 0,
     applyDate = '',
-    extensibleOverdueDays = 0
+    extensibleOverdueDays = 0,
   } = currentData ?? {};
 
-  const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
+  const repaymentDate =
+    repayRecords.length > 0
+      ? repayRecords[repayRecords.length - 1].repayDate
+      : '';
 
-  const finalItems = useDynamicChargeFeeList(props.currentData?.chargeFeeDetail?.items || undefined);
+  const finalItems = useDynamicChargeFeeList(
+    props.currentData?.chargeFeeDetail?.items || undefined
+  );
   const { t } = useTranslation(i18nLoanDetailsPage.namespace);
 
   const renderStatusTag = (status: string) => {
-    return <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>{t(Status(status)?.text)}</div>;
+    return (
+      <div className={`${Status(status)?.color} ${Status(status)?.bg} px-1`}>
+        {t(Status(status)?.text)}
+      </div>
+    );
   };
   const { app } = useSelector((state: RootState) => state);
 
-  const isTodayRepayment = formatDate(moment(applyDate)) === formatDate(moment()) && status === 'UNPAID';
+  const isTodayRepayment =
+    formatDate(moment(applyDate)) === formatDate(moment()) &&
+    status === 'UNPAID';
 
   return (
     <div>
-      {currentData && currentData?.status !== 'PAY_OFF' && currentData?.status !== 'EXTEND' && (
-          <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>
-              {t('Get more amount after instant payment')}
+      {currentData &&
+        currentData?.status !== 'PAY_OFF' &&
+        currentData?.status !== 'EXTEND' && (
+          <div
+            className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}
+          >
+            {t('Get more amount after instant payment')}
           </div>
-      )}
+        )}
       <div className={`px-6 pt-3`}>
         <ListItem
           title={t('Product')}
@@ -134,9 +146,10 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         {/*NOTICE: 合同金*/}
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-ctext-secondary" />*/}
 
-        {isTodayRepayment
-          ? <RepaymentDetailDemo loanAmount={loanAmount}/>
-          : (<>
+        {isTodayRepayment ? (
+          <RepaymentDetailDemo loanAmount={loanAmount} />
+        ) : (
+          <>
             {status !== 'EXTEND' && (
               <ListItem
                 title={t('Disbursal Amount')}
@@ -184,14 +197,22 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               title={t('Overdue Days')}
               text={overdueDays ?? ''}
               titleColor="text-ctext-secondary"
-              textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+              textColor={
+                status === 'OVERDUE'
+                  ? Status(status).color
+                  : 'text-ctext-primary'
+              }
               isFetching={isFetching}
             />
             <ListItem
               title={t('Overdue Fee')}
               text={<Money money={penaltyInterest} />}
               titleColor="text-ctext-secondary"
-              textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+              textColor={
+                status === 'OVERDUE'
+                  ? Status(status).color
+                  : 'text-ctext-primary'
+              }
               isFetching={isFetching}
             />
 
@@ -212,9 +233,14 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                   <div className={` mr-1`}>{t('Amount Repaid')}</div>
                   <div
                     onClick={() => {
-                      navigate(`amount-repaid-record-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                        state: { repayRecords },
-                      });
+                      navigate(
+                        `amount-repaid-record-modal?token=${getToken()}&orderNo=${
+                          orderNo ?? getOrderNo()
+                        }`,
+                        {
+                          state: { repayRecords },
+                        }
+                      );
                     }}
                   >
                     <img src={AmountPaidIcon} />
@@ -233,8 +259,16 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 title={t('Repayment Amount')}
                 text={<Money money={balance} />}
                 className="font-bold"
-                titleColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
-                textColor={status === 'OVERDUE' ? Status(status).color : 'text-ctext-primary'}
+                titleColor={
+                  status === 'OVERDUE'
+                    ? Status(status).color
+                    : 'text-ctext-primary'
+                }
+                textColor={
+                  status === 'OVERDUE'
+                    ? Status(status).color
+                    : 'text-ctext-primary'
+                }
                 isFetching={isFetching}
               />
             )}
@@ -250,15 +284,20 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 isFetching={isFetching}
               />
             )}
-          </>)
-        }
+          </>
+        )}
         <div className={`my-3 flex flex-row text-white`}>
           {extendable !== undefined && extendable && (
             <div
               onClick={() => {
-                navigate(`extend-confirm-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                  state: currentData,
-                });
+                navigate(
+                  `extend-confirm-modal?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: currentData,
+                  }
+                );
               }}
               className={`mr-1.5 grow `}
             >
@@ -269,9 +308,14 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div
               onClick={() => {
                 if (currentData === undefined) return;
-                navigate(`repayment-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                  state: currentData,
-                });
+                navigate(
+                  `repayment-modal?token=${getToken()}&orderNo=${
+                    orderNo ?? getOrderNo()
+                  }`,
+                  {
+                    state: currentData,
+                  }
+                );
               }}
               className={cx(`grow`, {
                 'ml-1.5': extendable,
@@ -287,31 +331,58 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div className={`text-ctext-secondary mb-4 text-xs leading-none`}>
               <div>{t('Attention')}：</div>
               <ul className="list-outside list-decimal pl-3 pt-1">
-                <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
-                <li>{t('Overdue for more than')} <span className={`text-primary-main`}>{extensibleOverdueDays + t(' days')} </span>
-                  {t("will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.")}
+                <li>
+                  {t(
+                    'Before repayment, please make sure that you have enough balance on your bank account.'
+                  )}
                 </li>
-                <li>{t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
-                  <span className={`text-primary-main`}>{app?.init?.csEmail || ''}</span>
+                <li>
+                  {t('Overdue for more than')}{' '}
+                  <span className={`text-primary-main`}>
+                    {extensibleOverdueDays + t(' days')}{' '}
+                  </span>
+                  {t(
+                    'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.'
+                  )}
+                </li>
+                <li>
+                  {t(
+                    'Email us if you have any questions about your responsibilities or for more information.'
+                  )}{' '}
+                  <span className={`text-primary-main`}>
+                    {app?.init?.csEmail || ''}
+                  </span>
                 </li>
               </ul>
             </div>
             <div className={`my-3 flex flex-col`}>
               <div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>
               <div className={`text-ctext-primary my-3 text-xs leading-none`}>
-                {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}
+                {t(
+                  'After completing the repayment, take a screenshot and upload your repayment receipt here ▼'
+                )}
               </div>
               {/*TODO: 先兼容 querystring*/}
               <div
                 className={`mb-2 grow`}
                 onClick={() => {
                   // console.log('Upload Receipt---------', orderNo);
-                  navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`, {
-                    state: { orderNo },
-                  });
+                  navigate(
+                    `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
+                      orderNo ?? getOrderNo()
+                    }`,
+                    {
+                      state: { orderNo },
+                    }
+                  );
                 }}
               >
-                <Button type={'ghost'} className={`w-full`} ghostTheme={'secondary'} text={t('Upload Receipt')} />
+                <Button
+                  type={'ghost'}
+                  className={`w-full`}
+                  ghostTheme={'secondary'}
+                  text={t('Upload Receipt')}
+                />
               </div>
             </div>
           </>

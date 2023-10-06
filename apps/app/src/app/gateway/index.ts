@@ -1,10 +1,11 @@
+import { push } from '@lagunovsky/redux-react-router';
 import axios, { AxiosRequestConfig } from 'axios';
-import {push} from "@lagunovsky/redux-react-router";
-import {MonitorUsecaseFlow} from "../uiFlowUsecaseMoniter";
-import {getToken, removeTokenFromLocalStorage} from '../application/getToken';
-import {alertModal} from "../ui/components/alertModal";
-import {PageOrModalPathEnum} from "../ui/PageOrModalPathEnum";
-import {appStore} from "../reduxStore";
+
+import { getToken, removeTokenFromLocalStorage } from '../application/getToken';
+import { appStore } from '../reduxStore';
+import { PageOrModalPathEnum } from '../ui/PageOrModalPathEnum';
+import { alertModal } from '../ui/components/alertModal';
+import { MonitorUsecaseFlow } from '../uiFlowUsecaseMoniter';
 
 let login401 = false;
 
@@ -27,7 +28,6 @@ export const gateway = async (
   // NOTE: Dynamic get token
 
   try {
-
     const token = getToken();
     const config = {
       url: baseUrl + url,
@@ -49,7 +49,7 @@ export const gateway = async (
       params,
       data,
       result,
-    })
+    });
     //
     // if (
     //   result.config.url !== '/api/v2/login'
@@ -59,12 +59,12 @@ export const gateway = async (
     // }
 
     // result.config.url !== '/v3/open-index'
-    if(login401) {
-      console.log("阻止後續請求");
+    if (login401) {
+      console.log('阻止後續請求');
       return {
         success: false,
         data: null,
-      }
+      };
     }
 
     return {
@@ -75,14 +75,14 @@ export const gateway = async (
     console.log('[gateway] error', error);
     if (axios.isAxiosError(error)) {
       // (error as any)?.response?.data?.code === 404
-      if((error as any)?.response?.data?.code === 401) {
+      if ((error as any)?.response?.data?.code === 401) {
         removeTokenFromLocalStorage();
-        if(!login401) {
+        if (!login401) {
           login401 = true;
           alertModal((error as any)?.response?.data?.message);
           appStore.dispatch(push(PageOrModalPathEnum.LoginPage));
         } else {
-          console.log("不跳 401 alert")
+          console.log('不跳 401 alert');
         }
       } else {
         // NOTICE: 避免 rtk 使用 gateway 又跳一次錯誤

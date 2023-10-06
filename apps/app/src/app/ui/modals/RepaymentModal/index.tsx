@@ -1,23 +1,22 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation, withTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
-import { Overlay } from '@frontend/mobile/shared/ui';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../../environments/environmentModule/environment';
+import { getOrderNo } from '../../../externel/window/querystring/getOrderNo';
 import { renderByCountry } from '../../../modules/i18n';
 import { RootState } from '../../../reduxStore';
-import {
-  repaymentDetailPageInitialState,
-  repaymentDetailPageInitialStateType,
-  repaymentDetailPageSlice,
-} from '../../../reduxStore/repaymentDetailPageSlice';
+import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
 import Modal from '../../core-components/Modal';
+import { InputValue } from '../../core-components/form/InputValue';
 import useRepayCreate from '../../hooks/useRepayCreate';
 import useRepayTypes from '../../hooks/useRepayTypes';
 import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
@@ -26,8 +25,6 @@ import MexicoRepaymentModal from './i18n/MexicoRepaymentModal';
 import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
 import PhilippinesRepaymentModal from './i18n/PhilippinesRepaymentModal';
 import { i18nRepaymentModal } from './i18n/translations';
-import {InputValue} from "../../core-components/form/InputValue";
-import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
 
 type paymentMethodValueType = {
   type: string;
@@ -49,7 +46,6 @@ export interface IRepaymentModalProps {
 }
 
 const RepaymentModal = (props: any) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(i18nRepaymentModal.namespace);
 
@@ -129,13 +125,13 @@ const RepaymentModal = (props: any) => {
       )
     ) {
       const {
-        balance,
+        // balance,
         repayAmount,
         radio,
         payType,
         coupon,
         orderNo,
-        repayTypeList,
+        // repayTypeList,
       } = repaymentData;
       if (
         balanceData.data === '' ||

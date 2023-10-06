@@ -4,16 +4,16 @@ import moment from 'moment';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
 import { getToken } from '../../../application/getToken';
+import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
+import { formatDate } from '../../../modules/format/formatDate';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Status } from '../../statusEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
-import {formatDate} from "../../../modules/format/formatDate";
-import {Status} from "../../statusEnum";
 
 const ProcessingPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const ProcessingPaymentItem = (props: GetLoanRecord) => {
   const {
     iconUrl = '',
     productName = '',
-    status = '',
+    // status = '',
     orderNo = '',
     orderAmount = '',
     approveRecords = [],
@@ -38,7 +38,10 @@ const ProcessingPaymentItem = (props: GetLoanRecord) => {
   const statusBackground = Status('PROCESSING').bg;
 
   return (
-    <div className={`border-ctext-divider mx-5 mb-5 rounded-lg border border-solid pb-2`} onClick={handleCollapse}>
+    <div
+      className={`border-ctext-divider mx-5 mb-5 rounded-lg border border-solid pb-2`}
+      onClick={handleCollapse}
+    >
       <CardHeaderSection
         statusBackground={statusBackground}
         iconUrl={iconUrl}
@@ -51,9 +54,12 @@ const ProcessingPaymentItem = (props: GetLoanRecord) => {
         amountName={'Loan Amount'}
         orderAmount={orderAmount}
         onClick={() =>
-          navigate(`${PageOrModalPathEnum.OrderStatusPage}?token=${getToken()}`, {
-            state: { orderNo, approveRecords },
-          })
+          navigate(
+            `${PageOrModalPathEnum.OrderStatusPage}?token=${getToken()}`,
+            {
+              state: { orderNo, approveRecords },
+            }
+          )
         }
       />
 
@@ -64,7 +70,12 @@ const ProcessingPaymentItem = (props: GetLoanRecord) => {
 
       {collapse && (
         <div className={cx('px-3')}>
-          <ListItem key={'OrderNo.'} title={'Order No.'} text={orderNo ?? ''} titleColor={'text-ctext-secondary'} />
+          <ListItem
+            key={'OrderNo.'}
+            title={'Order No.'}
+            text={orderNo ?? ''}
+            titleColor={'text-ctext-secondary'}
+          />
           <ListItem
             key={'ApplyDate'}
             title={'Apply Date'}

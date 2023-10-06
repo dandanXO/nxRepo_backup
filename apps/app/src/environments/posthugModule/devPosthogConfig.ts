@@ -1,5 +1,5 @@
-import {PosthogConfig} from '../themeModule/india/v55/posthog';
-import {commonPosthogConfig} from "../../app/modules/posthog/commonPosthogConfig";
+import { commonPosthogConfig } from '../../app/modules/posthog/commonPosthogConfig';
+import { PosthogConfig } from '../themeModule/india/v55/posthog';
 
 export const devPosthogConfig: PosthogConfig = {
   token: 'phc_XgUV9Wyjjny3nt7JVjEVlD3c4r4LJBkzb0w3Jb3I8Ov',

@@ -1,15 +1,17 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
-import { environment } from '../../../../environments/environmentModule/environment';
+import { isShowNavigation } from '../../../device/isShowNavigation';
 import {
   useLazyGetBindCardDropListQuery,
   usePostBankBindSaveMutation,
@@ -23,7 +25,6 @@ import { MexicoBindBankAccountPage } from './i18nPage/MexicoBindBankAccountPage'
 import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';
 import PhilippinesBindBankAccountPage from './i18nPage/PhilippinesBindBankAccountPage';
 import { i18nBankBindAccountPage } from './translations';
-import {isShowNavigation} from "../../../device/isShowNavigation";
 
 const BindBankCardPage = () => {
   // NOTICE: Common
@@ -63,7 +64,7 @@ const BindBankCardPage = () => {
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
   return (
-    <div className='overflow-auto'>
+    <div className="overflow-auto">
       {isShowNavigation() && (
         <Navigation
           title={t('BindBankCardNavigator')}
@@ -72,7 +73,7 @@ const BindBankCardPage = () => {
           }}
         />
       )}
-      <PageContent className='py-0'>
+      <PageContent className="py-0">
         {renderByCountry(
           {
             // NOTICE: default 0 index

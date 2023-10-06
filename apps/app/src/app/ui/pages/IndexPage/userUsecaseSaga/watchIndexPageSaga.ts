@@ -1,4 +1,4 @@
-import { takeEvery, takeLatest } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 
 import { errorFallback } from '../../../../uiFlowUsecase/utils/errorFallback';
 import { IndexPageSagaAction } from './indexPageActions';
@@ -10,8 +10,24 @@ import { userViewIndexPageSaga } from './userViewIndexPageSaga';
 export function* watchIndexPageSaga() {
   console.log('[app][saga] 1.2');
 
-  yield takeLatest(IndexPageSagaAction.user.viewIndexPageAction.type, errorFallback, userViewIndexPageSaga);
-  yield takeLatest(IndexPageSagaAction.user.applyProductAction.type, errorFallback, userApplyProductsSaga);
-  yield takeLatest(IndexPageSagaAction.user.reacquireCreditAction.type, errorFallback, userReacquireCreditSaga);
-  yield takeLatest(IndexPageSagaAction.user.authenticateSaga.type, errorFallback, userAuthenticateSaga);
+  yield takeLatest(
+    IndexPageSagaAction.user.viewIndexPageAction.type,
+    errorFallback,
+    userViewIndexPageSaga
+  );
+  yield takeLatest(
+    IndexPageSagaAction.user.applyProductAction.type,
+    errorFallback,
+    userApplyProductsSaga
+  );
+  yield takeLatest(
+    IndexPageSagaAction.user.reacquireCreditAction.type,
+    errorFallback,
+    userReacquireCreditSaga
+  );
+  yield takeLatest(
+    IndexPageSagaAction.user.authenticateSaga.type,
+    errorFallback,
+    userAuthenticateSaga
+  );
 }

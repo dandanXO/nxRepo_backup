@@ -1,29 +1,29 @@
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
 import React, { useCallback } from 'react';
 import { WithTranslation, withTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
-
-import { IndiaCountry } from '../../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from '../../../../../../../libs/shared/domain/src/country/PakistanCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
-import { usePostRepayReceiptMutation } from '../../../externel/backend/rtk';
-import { PostRepayReceiptResponse } from '../../../externel/backend/rtk/old/PostRepayReceiptResponse';
-import { renderByCountry } from '../../../modules/i18n';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
 import { getToken } from '../../../application/getToken';
-
-import { Navigation } from '../../core-components/Navigation';
+import { isShowNavigation } from '../../../device/isShowNavigation';
+import { usePostRepayReceiptMutation } from '../../../externel/backend/rtk';
+import { PostRepayReceiptResponse } from '../../../externel/backend/rtk/old/PostRepayReceiptResponse';
+import { getOrderNo } from '../../../externel/window/querystring/getOrderNo';
+import { renderByCountry } from '../../../modules/i18n';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Navigation } from '../../core-components/Navigation';
 import { useUploadPaymentReceipt } from './hooks/useUploadPaymentReceipt';
 import { IndiaUploadPaymentReceiptPage } from './i18nPage/IndiaUploadPaymentReceiptPage';
 import { MexicoUploadPaymentReceiptPage } from './i18nPage/MexicoUploadPaymentReceiptPage';
 import { PakistanUploadPaymentReceiptPage } from './i18nPage/PakistanUploadPaymentReceiptPage';
 import PhilippinesUploadPaymentReceiptPage from './i18nPage/PhilippinesUploadPaymentReceiptPage';
 import { i18nUploadPaymentReceiptPage } from './i18nPage/translations';
-import { getOrderNo } from '../../../presentation/querystring/getOrderNo';
-import { isShowNavigation } from '../../../device/isShowNavigation';
 
 export interface PostRepayReceiptRequestProps {
   formFile: any;

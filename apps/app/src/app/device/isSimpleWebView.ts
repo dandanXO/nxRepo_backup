@@ -1,6 +1,6 @@
-import {GlobalAppMode} from "../application/GlobalAppMode";
-import {AppModeEnum} from "../application/AppModeEnum";
+import { AppModeEnum } from '../application/AppModeEnum';
+import { GlobalAppMode } from '../application/GlobalAppMode';
 
 export const isSimpleWebView = (): boolean => {
-    return GlobalAppMode.mode === AppModeEnum.SimpleWebView;
+  return GlobalAppMode.mode === AppModeEnum.SimpleWebView;
 };

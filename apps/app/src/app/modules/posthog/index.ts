@@ -1,13 +1,13 @@
 import posthog from 'posthog-js';
 
-import { PosthogConfig } from '../../../environments/themeModule/india/v55/posthog';
+import { AppFlag } from '../../../environments/flag';
 import { posthogConfigs } from '../../../environments/posthugModule/posthogConfigs';
-import { NativeAppInfo } from '../../application/nativeAppInfo';
+import { PosthogConfig } from '../../../environments/themeModule/india/v55/posthog';
+import { AppModeEnum } from '../../application/AppModeEnum';
+import { GlobalAppMode } from '../../application/GlobalAppMode';
 import { AppEnvironment } from '../../device/appEnvironment';
+import { AppProxy } from '../../proxy/appProxy';
 import { SentryModule } from '../sentry';
-import {AppFlag} from "../../../environments/flag";
-import {GlobalAppMode} from "../../application/GlobalAppMode";
-import {AppModeEnum} from "../../application/AppModeEnum";
 
 const getPosthogConfig = (): PosthogConfig | null => {
   // if(AppModeModel.getMode() === AppModeEnum.SimpleWebView) {
@@ -21,10 +21,9 @@ const getPosthogConfig = (): PosthogConfig | null => {
       return null;
       // return posthogConfigs['dev'];
     } else {
-      // NOTE: REFACTOR ME
       // NOTE: 根據 APP 渠道 去分:
-      if (NativeAppInfo.packageId && posthogConfigs[NativeAppInfo.packageId]) {
-        return posthogConfigs[NativeAppInfo.packageId];
+      if (AppProxy.appID) {
+        return posthogConfigs[AppProxy.appID];
       } else {
         return null;
       }
@@ -35,13 +34,13 @@ const getPosthogConfig = (): PosthogConfig | null => {
 export class Posthog {
   static init() {
     try {
-      if(!AppFlag.enablePosthog) return;
-      if(AppEnvironment.isLocalhost()) return;
-      if(AppEnvironment.isDev()) {
+      if (!AppFlag.enablePosthog) return;
+      if (AppEnvironment.isLocalhost()) return;
+      if (AppEnvironment.isDev()) {
         const config = getPosthogConfig();
         if (config) {
           console.log('Posthog.init');
-          posthog.debug()
+          posthog.debug();
           posthog.init(config.token, config.config);
           // posthog.init(v55PosthogConfig.token, v55PosthogConfig.config);
           // posthog.capture('my event', { property: 'value' })

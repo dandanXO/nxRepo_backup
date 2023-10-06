@@ -1,16 +1,12 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import {put, select} from 'redux-saga/effects';
+import { put, select } from 'redux-saga/effects';
 import { Md5 } from 'ts-md5';
 
 import { API } from '../../../../externel/backend/rtk';
+import { RootState } from '../../../../reduxStore';
 import { catchSagaError } from '../../../../uiFlowUsecase/utils/catchSagaError';
+import { alertModal } from '../../../components/alertModal';
 import { UserLoginActionPayload } from './index';
-import {alertModal} from "../../../components/alertModal";
-import {NativeAppInfo} from "../../../../application/nativeAppInfo";
-import queryString from "query-string";
-import {appSlice} from "../../../../reduxStore/appSlice";
-import {rootState} from "../../../../../../../../packages/dlh-web/src/store/root";
-import {RootState} from "../../../../reduxStore";
 
 export function* userGetOTPSaga(action: PayloadAction<UserLoginActionPayload>) {
   try {
@@ -29,10 +25,12 @@ export function* userGetOTPSaga(action: PayloadAction<UserLoginActionPayload>) {
     // const appName = NativeAppInfo.appName || parsedQueryString['appName'] ? (parsedQueryString['appName'] as string) : null;
 
     // yield put(appSlice.actions.)
-    const appName: string = yield select((state: RootState) => state.app.appName);
+    const appName: string = yield select(
+      (state: RootState) => state.app.appName
+    );
 
-    if(!appName) {
-      alertModal("AppName is null");
+    if (!appName) {
+      alertModal('AppName is null');
       return;
     }
 
@@ -45,7 +43,6 @@ export function* userGetOTPSaga(action: PayloadAction<UserLoginActionPayload>) {
         tm,
       }) as any
     );
-
   } catch (error) {
     yield catchSagaError(error);
   }

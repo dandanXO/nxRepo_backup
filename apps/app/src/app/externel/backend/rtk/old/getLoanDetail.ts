@@ -64,7 +64,13 @@ export interface GetLoanDetailResponse {
    * @description 狀態
    * @enum {string}
    */
-  status?: 'EXTEND' | 'OVERDUE' | 'PAY_OFF' | 'PROCESSING' | 'REJECTED' | 'UNPAID';
+  status?:
+    | 'EXTEND'
+    | 'OVERDUE'
+    | 'PAY_OFF'
+    | 'PROCESSING'
+    | 'REJECTED'
+    | 'UNPAID';
   /** @description 訂單總應還金额 */
   totalDueAmount?: number;
 }
@@ -87,17 +93,17 @@ export interface GetLoanDetailChargeFeeDetailItems {
     | 'GATEWAY_FEE'
     | 'GST'
     | 'LOAN_AMOUNT'
-    | 'LOAN_INTEREST'    // itemName: Interest
+    | 'LOAN_INTEREST' // itemName: Interest
     | 'MANAGEMENT_FEE'
     | 'PENALTY_INTEREST'
     | 'PROCESSING_FEE'
     | 'REDUCTION_AMOUNT'
-    | 'SERVICE_FEE'      // itemName: Service Charge
-    | 'IVA' 
+    | 'SERVICE_FEE' // itemName: Service Charge
+    | 'IVA'
     | 'MARKUP_FEE'
     | 'OTHER_CHARGES'
     | 'PROCESS_FEE'
-    | 'PROCESS_INCHARGE'
+    | 'PROCESS_INCHARGE';
   value: string;
 }
 

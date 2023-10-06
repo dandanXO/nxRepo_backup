@@ -1,12 +1,12 @@
-import { useTranslation, withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
 
 import { getToken } from '../../../../../application/getToken';
-import Modal from '../../../../core-components/Modal';
-import { Button } from '../../../../core-components/Button';
+import { getOrderNo } from '../../../../../externel/window/querystring/getOrderNo';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
+import { Button } from '../../../../core-components/Button';
+import Modal from '../../../../core-components/Modal';
 import { i18nExtendConfirmModal } from '../../translations';
-import {getOrderNo} from "../../../../../presentation/querystring/getOrderNo";
 
 const MexicoExtendConfirmModal = () => {
   const navigate = useNavigate();
@@ -17,10 +17,14 @@ const MexicoExtendConfirmModal = () => {
       <div className={`p-4`}>
         <div className="text-xl font-bold">{t('Extend')}</div>
         <div className="my-6 font-bold leading-tight">
-          {t('Extensions are intended for situations where you are genuinely experiencing financial difficulties and are unable to fully repay the amount owed.')}
+          {t(
+            'Extensions are intended for situations where you are genuinely experiencing financial difficulties and are unable to fully repay the amount owed.'
+          )}
         </div>
         <div className="mb-6 font-bold leading-tight">
-          {t('We recommend that you prioritize full repayment when possible for a higher credit limit.')}
+          {t(
+            'We recommend that you prioritize full repayment when possible for a higher credit limit.'
+          )}
         </div>
         <div className={`flex flex-row flex-wrap-reverse`}>
           <Button
@@ -30,13 +34,21 @@ const MexicoExtendConfirmModal = () => {
             className={`mr-1 w-full`}
             onClick={() => navigate(-1)}
           />
-          <Button outlineTheme={'round'} className={`ml-1 w-full whitespace-nowrap`} text={t('Go Extension')}
+          <Button
+            outlineTheme={'round'}
+            className={`ml-1 w-full whitespace-nowrap`}
+            text={t('Go Extension')}
             onClick={() => {
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`, {
-                state: {
-                  currentData: location.state,
-                },
-              });
+              navigate(
+                `${
+                  PageOrModalPathEnum.RepaymentDetailPage
+                }/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
+                {
+                  state: {
+                    currentData: location.state,
+                  },
+                }
+              );
             }}
           />
         </div>

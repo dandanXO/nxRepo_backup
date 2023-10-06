@@ -6,9 +6,9 @@ import {
   InitialStateType,
   modalSlice,
 } from '../../../../../reduxStore/modalSlice';
+import { Button } from '../../../../core-components/Button';
 import ListItem from '../../../../core-components/ListItem';
 import Modal from '../../../../core-components/Modal';
-import { Button } from '../../../../core-components/Button';
 import { BindBankcardAction } from '../../../../pages/BindBankCardPage/userUsecaseSaga/bindBankcardAction';
 import { i18nConfirmBindBankCardModal } from '../translations';
 

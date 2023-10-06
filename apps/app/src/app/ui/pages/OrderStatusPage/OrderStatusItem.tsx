@@ -14,10 +14,13 @@ export const OrderStatusItem = (props: Props) => {
       })}
     >
       <div
-        className={cx('item flex flex-col rounded-md border-[1.5px] px-4 py-2 text-sm ', {
-          'border-ctext-tertiary': !props.isHightLight,
-          'border-primary-main': props.isHightLight,
-        })}
+        className={cx(
+          'item flex flex-col rounded-md border-[1.5px] px-4 py-2 text-sm ',
+          {
+            'border-ctext-tertiary': !props.isHightLight,
+            'border-primary-main': props.isHightLight,
+          }
+        )}
       >
         <div
           className={cx('title font-bold ', {

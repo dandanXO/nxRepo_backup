@@ -15,7 +15,9 @@ const LoginPage = () => {
       <div className={`flex grow flex-col px-4`}>
         <div className={`text-3xl font-bold`}>Create</div>
         <div className={`text-3xl font-bold `}>Your Account</div>
-        <div className={`mt-2 mb-10 text-sm`}>A 6 digit OTP will be sent via SMS to verify your mobile number</div>
+        <div className={`mt-2 mb-10 text-sm`}>
+          A 6 digit OTP will be sent via SMS to verify your mobile number
+        </div>
         <div className={`flex grow flex-col`}>
           <LoginForm />
         </div>

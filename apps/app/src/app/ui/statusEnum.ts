@@ -1,5 +1,4 @@
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
+import { IndiaCountry } from '@frontend/shared/domain';
 
 import { environment } from '../../environments/environmentModule/environment';
 
@@ -61,5 +60,7 @@ const statusEnum = {
 } as IStatusEnum;
 
 export const Status = (status: string) => {
-  return status ? statusEnum[status] : { text: '', color: '', bg: '', buttonText: '', paymentItemList: [] };
+  return status
+    ? statusEnum[status]
+    : { text: '', color: '', bg: '', buttonText: '', paymentItemList: [] };
 };

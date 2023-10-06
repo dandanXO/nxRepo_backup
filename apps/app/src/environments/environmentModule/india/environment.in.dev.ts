@@ -1,5 +1,4 @@
-import { IndiaCountry } from '../../../../../../libs/shared/domain/src/country/IndiaCountry';
-import { IEnvironment } from '../../../../../../libs/shared/domain/src/environment/types/IEnvironment';
+import { IEnvironment, IndiaCountry } from '@frontend/shared/domain';
 
 export const environment: IEnvironment = {
   production: false,

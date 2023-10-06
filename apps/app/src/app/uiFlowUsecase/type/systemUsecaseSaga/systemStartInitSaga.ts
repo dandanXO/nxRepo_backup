@@ -1,10 +1,10 @@
-import {all, call, put, select} from 'redux-saga/effects';
+import { all, call, put, select } from 'redux-saga/effects';
 
-import {Service} from '../../../externel/backend';
-import {GetInitServiceResponse} from '../../../externel/backend/appService/GetInitServiceResponse';
-import {NativeAppInfo} from '../../../application/nativeAppInfo';
-import {RootState} from '../../../reduxStore';
-import {appSlice} from '../../../reduxStore/appSlice';
+import { NativeAppInfo } from '../../../application/nativeAppInfo';
+import { Service } from '../../../externel/backend';
+import { GetInitServiceResponse } from '../../../externel/backend/appService/GetInitServiceResponse';
+import { RootState } from '../../../reduxStore';
+import { appSlice } from '../../../reduxStore/appSlice';
 
 export function* systemStartInitSaga() {
   // try {
@@ -12,8 +12,8 @@ export function* systemStartInitSaga() {
 
   yield put(appSlice.actions.updateAndroidInfo(NativeAppInfo));
 
-  const packageId: string = yield select((state: RootState) => state.app.androidAppInfo?.packageId);
-  console.log("packageId", packageId);
+  const packageId: string = yield select((state: RootState) => state.app.appID);
+  console.log('packageId', packageId);
 
   // NOTE: 不需登入即可呼叫
   const [response]: [GetInitServiceResponse] = yield all([
@@ -24,8 +24,6 @@ export function* systemStartInitSaga() {
 
   // refactor me
   yield put(appSlice.actions.init(true));
-
-
 }
 
 // function* callGetInit(packageId: string) {

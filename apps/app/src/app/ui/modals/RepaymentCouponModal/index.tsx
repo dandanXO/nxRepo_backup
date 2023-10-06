@@ -1,27 +1,29 @@
 import { MdRadioButtonChecked } from '@react-icons/all-files/md/MdRadioButtonChecked';
 import { MdRadioButtonUnchecked } from '@react-icons/all-files/md/MdRadioButtonUnchecked';
-import { MexicoCountry } from 'libs/shared/domain/src/country/MexicoCountry';
-import { PakistanCountry } from 'libs/shared/domain/src/country/PakistanCountry';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
-import NoDataImage from '../../components/images/NoData.svg';
+import {
+  MexicoCountry,
+  PakistanCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
+
 import { environment } from '../../../../environments/environmentModule/environment';
-import { useLazyGetCouponApplicableListQuery } from '../../../externel/backend/rtk';
 import { getToken } from '../../../application/getToken';
+import { useLazyGetCouponApplicableListQuery } from '../../../externel/backend/rtk';
+import { getOrderNo } from '../../../externel/window/querystring/getOrderNo';
 import { RootState } from '../../../reduxStore';
 import { loadingSlice } from '../../../reduxStore/loadingSlice';
 import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
-import Coupon, { ICouponProps } from '../../components/Coupon';
-import Modal from '../../core-components/Modal';
-import { Button } from '../../core-components/Button';
-import { Navigation } from '../../core-components/Navigation';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import Coupon, { ICouponProps } from '../../components/Coupon';
+import { Button } from '../../core-components/Button';
+import Modal from '../../core-components/Modal';
+import { Navigation } from '../../core-components/Navigation';
 import { i18nRepaymentCouponModal } from './i18n/translations';
-import {getOrderNo} from "../../../presentation/querystring/getOrderNo";
 
 type ICouponOption = ICouponProps & {
   isChecked: boolean;
@@ -35,17 +37,17 @@ const RepaymentCouponModal = () => {
     (state: RootState) => state.repaymentDetailPage
   );
   const { t } = useTranslation(i18nRepaymentCouponModal.namespace);
-  const { orderNo = getOrderNo(), balance } = repaymentDetailPageState.repaymentDetail || {};
-  const { payType = 'MOBILE_WALLET' } = repaymentDetailPageState.repaymentData || {};
-  const { paymentAmount, paymentMethod } = location.state || {};
-  const [
-    triggerGetList,
-    { currentData, isLoading, isFetching, isSuccess, isError, isUninitialized },
-  ] = useLazyGetCouponApplicableListQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+  const { orderNo = getOrderNo(), balance } =
+    repaymentDetailPageState.repaymentDetail || {};
+  // const { payType = 'MOBILE_WALLET' } =
+  //   repaymentDetailPageState.repaymentData || {};
+  const { paymentAmount } = location.state || {};
+  const [triggerGetList, { currentData, isFetching }] =
+    useLazyGetCouponApplicableListQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   useEffect(() => {
     triggerGetList({
@@ -248,7 +250,11 @@ const RepaymentCouponModal = () => {
           );
         }}
       />
-      {currentData && currentData.length > 0 ? renderCouponList() : <NoCouponSection />}
+      {currentData && currentData.length > 0 ? (
+        renderCouponList()
+      ) : (
+        <NoCouponSection />
+      )}
     </Modal>
   );
 };

@@ -1,14 +1,14 @@
-import {AppLocalStorage} from "./localstorage";
+import { AppLocalStorage } from './localstorage';
 
 class UserInfoPersistence {
   set phone(name: string) {
-    AppLocalStorage.setItem("phone", name);
+    AppLocalStorage.setItem('phone', name);
   }
   get phone(): string {
-    return AppLocalStorage.getItem("phone") || "";
+    return AppLocalStorage.getItem('phone') || '';
   }
   clearPhone() {
-    AppLocalStorage.removeItem("phone");
+    AppLocalStorage.removeItem('phone');
   }
 }
 export const userInfoPersistence = new UserInfoPersistence();

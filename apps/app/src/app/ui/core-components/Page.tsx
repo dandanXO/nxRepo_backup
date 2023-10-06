@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import { ReactNode } from 'react';
 
-type Props = {
+export type Props = {
   children: ReactNode;
   className?: string;
 };

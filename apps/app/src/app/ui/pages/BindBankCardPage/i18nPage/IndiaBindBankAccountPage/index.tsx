@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { Page } from '../../../../core-components/Page';
 import { useBindBankAccountForm } from '../../hooks/common/useBindBankAccountForm';
 import { useFinishedBindBankAccountForm } from '../../hooks/common/useFinishedBindBankAccountForm';
 import { useIndiaBankAccountForm } from '../../hooks/i18n/india/useIndiaBankAccountForm';
@@ -30,7 +29,7 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     // NOTE: UPI
     upiData,
     onUPIIDChange,
-    onUPIIDChangBlur
+    onUPIIDChangBlur,
   } = useIndiaBankAccountForm();
 
   const { isFormPending, confirm } = useFinishedBindBankAccountForm({
@@ -52,27 +51,27 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
   });
 
   return (
-      <BankAccountForm
-        cardholderName={props.cardholderName}
-        ifscData={ifscData}
-        onIFSCChange={onIFSCChange}
-        onIFSCBlur={onIFSCBlur}
-        bankcardNoData={bankcardNoData}
-        onAccountNumberChange={onAccountNumberChange}
-        onAccountNumberBlur={onAccountNumberBlur}
-        confirmedBankcardNoData={confirmedBankcardNoData}
-        onConfirmAccountNumberChange={onConfirmAccountNumberChange}
-        onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
-        upiData={upiData}
-        onUPIIDChange={onUPIIDChange}
-        onUPIIDChangBlur={onUPIIDChangBlur}
-        isFormPending={isFormPending || false}
-        confirm={() => {
-          // NOTE: validate and display errors
-          const validation = validateCommonForm();
-          const validation2 = validateIndiaForm();
-          if (validation && validation2) confirm();
-        }}
-      />
+    <BankAccountForm
+      cardholderName={props.cardholderName}
+      ifscData={ifscData}
+      onIFSCChange={onIFSCChange}
+      onIFSCBlur={onIFSCBlur}
+      bankcardNoData={bankcardNoData}
+      onAccountNumberChange={onAccountNumberChange}
+      onAccountNumberBlur={onAccountNumberBlur}
+      confirmedBankcardNoData={confirmedBankcardNoData}
+      onConfirmAccountNumberChange={onConfirmAccountNumberChange}
+      onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
+      upiData={upiData}
+      onUPIIDChange={onUPIIDChange}
+      onUPIIDChangBlur={onUPIIDChangBlur}
+      isFormPending={isFormPending || false}
+      confirm={() => {
+        // NOTE: validate and display errors
+        const validation = validateCommonForm();
+        const validation2 = validateIndiaForm();
+        if (validation && validation2) confirm();
+      }}
+    />
   );
 };

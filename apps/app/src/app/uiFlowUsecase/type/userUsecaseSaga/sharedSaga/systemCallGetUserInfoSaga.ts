@@ -1,23 +1,22 @@
-import { Action, Location } from 'history';
+import { Location } from 'history';
 import { call, put, select } from 'redux-saga/effects';
 
+import { getToken } from '../../../../application/getToken';
 import { Service } from '../../../../externel/backend';
 import { GetUserInfoServiceResponse } from '../../../../externel/backend/userService/GetUserInfoServiceResponse';
-import { getToken } from '../../../../application/getToken';
-import { SentryModule } from '../../../../modules/sentry';
-import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';
 import { RootState } from '../../../../reduxStore';
 import { indexPageSlice } from '../../../../reduxStore/indexPageSlice';
+import { PageOrModalPathEnum } from '../../../../ui/PageOrModalPathEnum';
+import { MonitorUsecaseFlow } from '../../../../uiFlowUsecaseMoniter';
 import { catchSagaError } from '../../../utils/catchSagaError';
-import {MonitorUsecaseFlow} from "../../../../uiFlowUsecaseMoniter";
-import {push} from "@lagunovsky/redux-react-router";
 
 export function* systemCallGetUserInfoSaga() {
-
   try {
     // NOTE: H5 - 首頁開始
     const token = getToken();
-    const location: Location = yield select((state: RootState) => state.navigator.location);
+    const location: Location = yield select(
+      (state: RootState) => state.navigator.location
+    );
     // const action: Action = yield select((state: RootState) => state.navigator.action)
     // console.log("location", location);
     // console.log("action", action);
@@ -26,10 +25,13 @@ export function* systemCallGetUserInfoSaga() {
       // NOTICE 登入頁不需要取得使用者資訊
       return;
     } else {
-      console.log("systemCallGetUserInfoSaga");
+      console.log('systemCallGetUserInfoSaga');
 
-      const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-      console.log("userResponse2", userResponse);
+      const userResponse: GetUserInfoServiceResponse = yield call(
+        Service.UserService.GetUserInfoService,
+        {}
+      );
+      console.log('userResponse2', userResponse);
       yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
       // Sentry 識別登入行為
