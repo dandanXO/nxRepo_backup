@@ -9,7 +9,9 @@ export default {
   component: UploadingFileModal,
 } as ComponentMeta<typeof UploadingFileModal>;
 
-export const ModalUploadingFile: ComponentStory<typeof UploadingFileModal> = () => {
+export const ModalUploadingFile: ComponentStory<
+  typeof UploadingFileModal
+> = () => {
   return (
     <AppThemeProvider>
       <UploadingFileModal />

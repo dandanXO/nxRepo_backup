@@ -7,11 +7,11 @@ import {
   modalInitialState,
   modalSlice,
 } from '../../../../../reduxStore/modalSlice';
-import ValidateInput from '../../../../core-components/ValidateInput';
 import { Button } from '../../../../core-components/Button';
+import ValidateInput from '../../../../core-components/ValidateInput';
+import { InputValue } from '../../../../core-components/form/InputValue';
 import { i18nBankBindAccountPage } from '../../translations';
 import { validationPHMobileNumber } from './validation';
-import {InputValue} from "../../../../core-components/form/InputValue";
 
 interface IAddEWalletFormProps {
   walletVendorOption: { value: string; label: string }[];

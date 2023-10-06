@@ -1,26 +1,26 @@
 import { RiArrowRightSLine } from '@react-icons/all-files/ri/RiArrowRightSLine';
 import cx from 'classnames';
 import moment from 'moment';
-import React, { useEffect, useState } from 'react';
-import { useTranslation, withTranslation } from 'react-i18next';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router';
-import Select from "../../../../core-components/Select";
 
-import { Horizontal, Input, Overlay, Radio } from '@frontend/mobile/shared/ui';
+import { Input, Radio } from '@frontend/mobile/shared/ui';
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
 import { getToken } from '../../../../../application/getToken';
-import ListItem from '../../../../core-components/ListItem';
+import { formatDate } from '../../../../../modules/format/formatDate';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Money from '../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
 import { Button } from '../../../../core-components/Button';
+import ListItem from '../../../../core-components/ListItem';
+import Select from '../../../../core-components/Select';
 import { selectStyles } from '../../../../core-components/selectStyles';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
-import {formatDate} from "../../../../../modules/format/formatDate";
 
 type paymentMethodValueType = {
   type: string;
@@ -40,7 +40,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
     setRepayType,
     handleConfirm,
     orderNo,
-    isPostRepayCreateLoading
+    isPostRepayCreateLoading,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,7 +51,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
   const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState('');
 
   return (
-    <div className="px-4 text-left text-ctext-primary">
+    <div className="text-ctext-primary px-4 text-left">
       <div className="mt-1 ml-[-4px] whitespace-nowrap text-xs">
         <Radio.Group
           value={radioValue}
@@ -84,19 +84,29 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             value = value.replace(`R`, '').trim();
 
             if (value === '' || Number(value) === 0) {
-              setBalanceValueErrorMessage(t('This field cannot be left blank or 0.') as string);
+              setBalanceValueErrorMessage(
+                t('This field cannot be left blank or 0.') as string
+              );
             } else if (!new RegExp('^[0-9]*$').test(value)) {
-              setBalanceValueErrorMessage(t('Numbers only. Please try again.') as string);
+              setBalanceValueErrorMessage(
+                t('Numbers only. Please try again.') as string
+              );
             } else if (Number(value) > Number(balance)) {
               // NOTE: 限制數字最大值
-              setBalanceValueErrorMessage(t('Amount cannot be greater than the repayment balance.') as string);
+              setBalanceValueErrorMessage(
+                t(
+                  'Amount cannot be greater than the repayment balance.'
+                ) as string
+              );
             } else {
               setBalanceValueErrorMessage('');
             }
             setBalanceValue(`${environment.currency} ${value}`);
           }}
           onBlur={() => {}}
-          errorMessage={balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage}
+          errorMessage={
+            balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage
+          }
         />
       </div>
 
@@ -119,12 +129,17 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             className="flex items-center justify-center border-b border-solid border-[#aaaaaa] py-1.5 pl-5 pr-4"
             onClick={() => {
               if (isRepayTypesFetching) return;
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}`, {
-                state: {
-                  ...location.state,
-                  paymentAmount: balance,
-                },
-              });
+              navigate(
+                `${
+                  PageOrModalPathEnum.RepaymentDetailPage
+                }/repayment-coupon-modal?token=${getToken()}`,
+                {
+                  state: {
+                    ...location.state,
+                    paymentAmount: balance,
+                  },
+                }
+              );
             }}
           >
             <div
@@ -135,9 +150,13 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
               {coupon ? (
                 <div className="flex grow justify-between">
                   <div className="self-center">- {coupon.discountAmount}</div>
-                  <div className="flex flex-col text-xs text-ctext-secondary">
+                  <div className="text-ctext-secondary flex flex-col text-xs">
                     <div>{t('expiration date')}</div>
-                    <div className="">{coupon.expireTime ? formatDate(moment(coupon.expireTime)) : ''}</div>
+                    <div className="">
+                      {coupon.expireTime
+                        ? formatDate(moment(coupon.expireTime))
+                        : ''}
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -154,13 +173,21 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           title={t('Repayment Amount')}
           text={
             radioValue !== 'custom' ? (
-              <Money money={Number(balance) - Number(coupon ? coupon.discountAmount : 0)} />
+              <Money
+                money={
+                  Number(balance) - Number(coupon ? coupon.discountAmount : 0)
+                }
+              />
             ) : (
-              <Money money={
-                isNaN(balanceValue.replace(`${environment.currency}`, '').trim())
-                ? 0
-                : balanceValue.replace(`${environment.currency}`, '').trim()
-            } />
+              <Money
+                money={
+                  isNaN(
+                    balanceValue.replace(`${environment.currency}`, '').trim()
+                  )
+                    ? 0
+                    : balanceValue.replace(`${environment.currency}`, '').trim()
+                }
+              />
             )
           }
         />
@@ -175,7 +202,12 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             text={t('Cancel')}
             onClick={() => {
               if (isRepayTypesFetching) return;
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}`, { state: { orderNo } });
+              navigate(
+                `${
+                  PageOrModalPathEnum.RepaymentDetailPage
+                }?token=${getToken()}`,
+                { state: { orderNo } }
+              );
             }}
           />
         </div>
@@ -192,11 +224,21 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           />
         </div>
       </div>
-      <div className={`text-left text-xs text-ctext-secondary font-bold leading-none`}>
+      <div
+        className={`text-ctext-secondary text-left text-xs font-bold leading-none`}
+      >
         <div>{t('Attention')}:</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
-          <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
-          <li>{t('To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.')}</li>
+          <li>
+            {t(
+              'Before repayment, please make sure that you have enough balance on your bank account.'
+            )}
+          </li>
+          <li>
+            {t(
+              'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.'
+            )}
+          </li>
         </ul>
       </div>
       <div className={`my-4`}>

@@ -8,22 +8,22 @@ import { useLocation, useNavigate } from 'react-router';
 import { StylesConfig } from 'react-select';
 
 import { environment } from '../../../../../../environments/environmentModule/environment';
-import { formatDate } from '../../../../../modules/format/formatDate';
 import { getToken } from '../../../../../application/getToken';
+import { getOrderNo } from '../../../../../externel/window/querystring/getOrderNo';
+import { formatDate } from '../../../../../modules/format/formatDate';
 import { RootState } from '../../../../../reduxStore';
 import { repaymentDetailPageInitialState } from '../../../../../reduxStore/repaymentDetailPageSlice';
-import ListItem from '../../../../core-components/ListItem';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import Money from '../../../../components/Money';
+import { Button } from '../../../../core-components/Button';
+import ListItem from '../../../../core-components/ListItem';
 import { RadioOption } from '../../../../core-components/RadioOption';
 import Select from '../../../../core-components/Select';
 import ValidateInput from '../../../../core-components/ValidateInput';
-import { Button } from '../../../../core-components/Button';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
+import { InputValue } from '../../../../core-components/form/InputValue';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
 import { validateBalance } from '../validation';
-import {getOrderNo} from "../../../../../externel/window/querystring/getOrderNo";
-import {InputValue} from "../../../../core-components/form/InputValue";
 
 interface IPhilippinesRepaymentModalProps {
   radioValue: string;

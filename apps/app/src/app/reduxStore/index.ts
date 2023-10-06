@@ -1,20 +1,23 @@
-import { createRouterMiddleware, createRouterReducer } from '@lagunovsky/redux-react-router';
+import {
+  createRouterMiddleware,
+  createRouterReducer,
+} from '@lagunovsky/redux-react-router';
 import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
 import { API, APIV3 } from '../externel/backend/rtk';
+import { SentryModule } from '../modules/sentry';
 import { WatchAppSaga } from '../uiFlowUsecase/watchAppSaga';
 import { APIBoundaryModuleSlice } from './apiBoundaryModuleSlice';
 import { appSlice } from './appSlice';
 import { indexPageSlice } from './indexPageSlice';
+import { loadingSlice } from './loadingSlice';
 import { loginSlice } from './loginSlice';
 import { modalSlice } from './modalSlice';
-import { loadingSlice } from './loadingSlice';
-import { repaymentPageSlice } from './repaymentPageSlice';
 import { repaymentDetailPageSlice } from './repaymentDetailPageSlice';
+import { repaymentPageSlice } from './repaymentPageSlice';
 import { rtkPendingSlice } from './rtkPendingSlice';
-import {SentryModule} from "../modules/sentry";
 
 export const history = createBrowserHistory();
 const routerMiddleware = createRouterMiddleware(history);
@@ -42,7 +45,7 @@ const sagaMiddleware = createSagaMiddleware({
 
 export const appStore = configureStore({
   reducer: {
-    ['navigator']: createRouterReducer(history),
+    navigator: createRouterReducer(history),
     [appSlice.name]: appSlice.reducer,
     [modalSlice.name]: modalSlice.reducer,
     [API.reducerPath]: API.reducer,
@@ -54,7 +57,6 @@ export const appStore = configureStore({
     [repaymentPageSlice.name]: repaymentPageSlice.reducer,
     [repaymentDetailPageSlice.name]: repaymentDetailPageSlice.reducer,
     [rtkPendingSlice.name]: rtkPendingSlice.reducer,
-
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -85,4 +87,3 @@ export type IndexPageProps = {
 appStore.subscribe(() => {
   // console.log("[app] store:", appStore.getState())
 });
-

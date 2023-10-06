@@ -6,16 +6,16 @@ import { useNavigate } from 'react-router';
 import { StylesConfig } from 'react-select';
 
 import { GetLoanDetailResponse } from '../../../../../externel/backend/loanService/GetLoanDetailResponse';
+import { tcx } from '../../../../../modules/ui/tailwindcss';
 import { RootState } from '../../../../../reduxStore';
 import { repaymentDetailPageSlice } from '../../../../../reduxStore/repaymentDetailPageSlice';
+import Money from '../../../../components/Money';
+import { Button } from '../../../../core-components/Button';
 import Divider from '../../../../core-components/Divider';
 import ListItem from '../../../../core-components/ListItem';
 import Modal from '../../../../core-components/Modal';
-import Money from '../../../../components/Money';
 import Select from '../../../../core-components/Select';
-import { Button } from '../../../../core-components/Button';
 import { i18nExtendModal } from '../../translations';
-import {tcx} from "../../../../../modules/ui/tailwindcss";
 
 interface IPhilippinesExtendModalProps {
   currentData?: GetLoanDetailResponse;

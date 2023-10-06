@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {appInfoPersistence} from "../persistant/AppInfoPersistence";
-import {userInfoPersistence} from "../persistant/UserInfoPersistence";
+
+import { userInfoPersistence } from '../persistant/UserInfoPersistence';
 
 export type UserResendSecondsActionPayload = {
   resendSeconds?: number;
@@ -14,11 +14,17 @@ export const loginSlice = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    updateResendSeconds: (state, action: PayloadAction<UserResendSecondsActionPayload['resendSeconds']>) => {
+    updateResendSeconds: (
+      state,
+      action: PayloadAction<UserResendSecondsActionPayload['resendSeconds']>
+    ) => {
       state.resendSeconds = action.payload;
     },
-    updatePhoneNo: (state, action: PayloadAction<UserResendSecondsActionPayload["phoneNo"]>) => {
+    updatePhoneNo: (
+      state,
+      action: PayloadAction<UserResendSecondsActionPayload['phoneNo']>
+    ) => {
       state.phoneNo = action.payload;
-    }
+    },
   },
 });

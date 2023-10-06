@@ -4,13 +4,12 @@ import { CaptureContext, Extras } from '@sentry/types';
 import { Primitive } from '@sentry/types/types/misc';
 import posthog from 'posthog-js';
 
-import { AppEnvironment } from '../../device/appEnvironment';
 import { AppFlag } from '../../../environments/flag';
 import { NativeAppInfo } from '../../application/nativeAppInfo';
+import { AppEnvironment } from '../../device/appEnvironment';
+import { AppProxy } from '../../proxy/appProxy';
 import { RootState, appStore } from '../../reduxStore';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
-import {AppProxy} from "../../proxy/appProxy";
-
 
 // NOTE: 初始化
 let loaded = false;
@@ -34,9 +33,7 @@ if (AppFlag.enableSentry && loaded === false) {
     // NOTE: self-hosting
     dsn: WebpackSentryConfig.dsn,
     environment: environmentName,
-    integrations: [
-      new BrowserTracing(),
-    ],
+    integrations: [new BrowserTracing()],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
@@ -47,41 +44,49 @@ if (AppFlag.enableSentry && loaded === false) {
   };
 
   // NOTE: AppFlag.enableSentryReplay
-  if(AppFlag.enableSentryReplay && Array.isArray(sentryConfig.integrations)) {
-    sentryConfig.integrations.push(new Sentry.Replay(replayConfig))
+  if (AppFlag.enableSentryReplay && Array.isArray(sentryConfig.integrations)) {
+    sentryConfig.integrations.push(new Sentry.Replay(replayConfig));
   }
 
   // NOTE: AppFlag.// NOTE: AppFlag.enableSentryReplay
-  if(
+  if (
     AppFlag.enablePosthog &&
-    sentryConfig && sentryConfig.integrations && Array.isArray(sentryConfig.integrations)
+    sentryConfig &&
+    sentryConfig.integrations &&
+    Array.isArray(sentryConfig.integrations)
   ) {
-    sentryConfig.integrations.push(new posthog.SentryIntegration(
-      posthog,
-      WebpackSentryConfig.org,
-      WebpackSentryConfig.projectId,
-      WebpackSentryConfig.url + 'organizations/'
-    ))
+    sentryConfig.integrations.push(
+      new posthog.SentryIntegration(
+        posthog,
+        WebpackSentryConfig.org,
+        WebpackSentryConfig.projectId,
+        WebpackSentryConfig.url + 'organizations/'
+      )
+    );
   }
   // NOTE: AppEnvironment.isLocalhost()
   if (!AppEnvironment.isLocalhost()) {
     sentryConfig.release = AppInfo.COMMITHASH;
   }
-  console.log("[app] sentryConfig", sentryConfig);
+  console.log('[app] sentryConfig', sentryConfig);
 
   Sentry.init(sentryConfig);
 
   // TODO:
   // NOTE: Sentry Replay 會新增 Tags
   // const accountInfo = {
-    // phoneNo: login.phoneNo,
+  // phoneNo: login.phoneNo,
   // }
   // console.log("[sentry] accountInfo", accountInfo);
   // Sentry.setUser(accountInfo);
 }
 
 export class SentryModule {
-  static captureException(exception: any, captureContext?: CaptureContext, tags?: { [key: string]: Primitive }) {
+  static captureException(
+    exception: any,
+    captureContext?: CaptureContext,
+    tags?: { [key: string]: Primitive }
+  ) {
     // if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
@@ -99,14 +104,18 @@ export class SentryModule {
     });
   }
 
-  static captureMessage(message: string, tags?: { [key: string]: Primitive }, extra?: Extras) {
+  static captureMessage(
+    message: string,
+    tags?: { [key: string]: Primitive },
+    extra?: Extras
+  ) {
     // if (AppEnvironment.isLocalhost()) return;
     if (!AppFlag.enableSentry) return;
 
     // console.log('appInfo', NativeAppInfo);
 
     const appState: RootState = appStore.getState();
-    const user = appState?.indexPage?.user;
+    // const user = appState?.indexPage?.user;
     // console.log("user", user);
 
     const commonTags = getCommonTags();
@@ -124,10 +133,7 @@ export class SentryModule {
       },
     });
   }
-
-
 }
-
 
 export const getUserPhoneNo = () => {
   return NativeAppInfo.phoneNo ? NativeAppInfo.phoneNo : 'unknown';

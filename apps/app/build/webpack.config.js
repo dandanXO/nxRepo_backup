@@ -5,19 +5,27 @@ const { merge } = require('webpack-merge');
 
 const SentryCliPlugin = require('@sentry/webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
+// const TerserPlugin = require('terser-webpack-plugin');
 
-const {APP_IDENTIFICATION, gitRevisionPlugin, isProduction, isDashboard, PUBLIC_PATH, ASSET_OUTPUT_PATH} = require("./webpack.config.common");
+const {
+  APP_IDENTIFICATION,
+  gitRevisionPlugin,
+  isProduction,
+  isDashboard,
+  PUBLIC_PATH,
+  ASSET_OUTPUT_PATH,
+} = require('./webpack.config.common');
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const DashboardPlugin = require("webpack-dashboard/plugin");
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const WebpackSentryConfig = require('../src/app/modules/sentry/WebpackSentryConfig.json');
-const AppBabelLoader = path.join(__dirname, './loader/app-babel-loader.js')
-const {proxyURL}= require("./webpack.config.proxy");
+const AppBabelLoader = path.join(__dirname, './loader/app-babel-loader.js');
+const { proxyURL } = require('./webpack.config.proxy');
 
 const infoLog = (message, rest) => {
   if (!rest) {
@@ -28,9 +36,12 @@ const infoLog = (message, rest) => {
 };
 
 // NOTICE: react-apexcharts 裡面有舊版本的 .bablerc，跟目前專案的不符合，include node_modules 會導致專案與node_modules 下 .babelrc 不一致
-const filePath = path.resolve(__dirname, '../../../node_modules/react-apexcharts/.babelrc')
-fs.exists(filePath, function(exists) {
-  if(exists) {
+const filePath = path.resolve(
+  __dirname,
+  '../../../node_modules/react-apexcharts/.babelrc'
+);
+fs.exists(filePath, function (exists) {
+  if (exists) {
     console.log('[react-apexcharts/.babelrc] File exists. Deleting now ...');
     fs.unlinkSync(filePath);
   } else {
@@ -41,18 +52,18 @@ fs.exists(filePath, function(exists) {
 // const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 // const smp = new SpeedMeasurePlugin();
 
-infoLog("build");
+infoLog('build');
 
-const {hostIP} = require("./getNetworkInterface");
+const { hostIP } = require('./getNetworkInterface');
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
     // NOTE: [Webpack-Devtool](https://webpack.js.org/configuration/devtool/)
-    devtool: !isProduction ? "inline-source-map" : "source-map",
+    devtool: !isProduction ? 'inline-source-map' : 'source-map',
     // NOTICE: 被 NX project 控制住
     // entry: {
-      // main: path.resolve(__dirname, '../src/main.tsx'),
-      // test: path.resolve(__dirname, '../src/test.ts'),
+    // main: path.resolve(__dirname, '../src/main.tsx'),
+    // test: path.resolve(__dirname, '../src/test.ts'),
     // },
     // resolve: {
     //   // NOTICE: important
@@ -73,17 +84,17 @@ module.exports = (config, context) => {
           test: /\.(ts|js|mjs)x?$/,
           // include: [
           //   path.resolve(__dirname, '../src/test.ts'),
-            // path.resolve(__dirname, '../src'),
+          // path.resolve(__dirname, '../src'),
           // ],
           include(resourcePath, issuer) {
             // NOTE: 測試用
-            if(resourcePath.indexOf("sentry") > -1) {
+            if (resourcePath.indexOf('sentry') > -1) {
               // console.log("resourcePath", resourcePath);
             }
             // console.log(`  included: ${path.relative(context, resourcePath)} (from ${issuer})`);
             return true; // include all
           },
-          "exclude": [
+          exclude: [
             // \\ for Windows, / for macOS and Linux
             /node_modules[\\/]core-js/,
             /node_modules[\\/]webpack[\\/]buildin/,
@@ -99,9 +110,9 @@ module.exports = (config, context) => {
               loader: AppBabelLoader,
               options: {
                 cacheDirectory: false,
-              }
-            }
-          ]
+              },
+            },
+          ],
         },
       ],
     },
@@ -119,7 +130,7 @@ module.exports = (config, context) => {
         },
       }),
       new MomentTimezoneDataPlugin({
-        matchZones: ["Asia/Kolkata", "Asia/Karachi", "Asia/Dhaka"],
+        matchZones: ['Asia/Kolkata', 'Asia/Karachi', 'Asia/Dhaka'],
       }),
       new HtmlWebpackPlugin({
         // 配置 HTML 模板路徑與生成名稱 (第三步)
@@ -138,7 +149,7 @@ module.exports = (config, context) => {
       //   verbose: true,
       // }),
     ],
-    target: "browserslist",
+    target: 'browserslist',
     output: {
       publicPath: PUBLIC_PATH,
       filename: '[name].[contenthash].js',
@@ -148,7 +159,7 @@ module.exports = (config, context) => {
     devServer: {
       host: hostIP,
       port: 4002,
-      open: "/v2/bind-bankcard",
+      open: '/v2/bind-bankcard',
       hot: true,
       historyApiFallback: true,
       onBeforeSetupMiddleware: function (devServer) {
@@ -179,18 +190,18 @@ module.exports = (config, context) => {
           parallel: true,
           cache: path.resolve(__dirname, '../../../tmp_uglify'),
           // uglifyOptions: {
-            // warnings: false,
-            // parse: {},
-            // compress: {},
-            // mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
-            // output: {
-            //   comments: /@license/i,
-            //   comments: false
-            // },
-            // toplevel: false,
-            // nameCache: null,
-            // ie8: true,
-            // keep_fnames: false,
+          // warnings: false,
+          // parse: {},
+          // compress: {},
+          // mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
+          // output: {
+          //   comments: /@license/i,
+          //   comments: false
+          // },
+          // toplevel: false,
+          // nameCache: null,
+          // ie8: true,
+          // keep_fnames: false,
           // },
           extractComments: false,
         }),
@@ -216,9 +227,9 @@ module.exports = (config, context) => {
             implementation: ImageMinimizerPlugin.imageminMinify,
             filter: (source, sourcePath) => {
               var svgRegExp = new RegExp('.svg$', 'g');
-              if(svgRegExp.test(sourcePath)) {
-                console.log("sourcePath", sourcePath);
-                return true
+              if (svgRegExp.test(sourcePath)) {
+                console.log('sourcePath', sourcePath);
+                return true;
               } else {
                 return false;
               }
@@ -232,18 +243,18 @@ module.exports = (config, context) => {
                 // ["optipng", { optimizationLevel: 5 }],
                 // Svgo configuration here https://github.com/svg/svgo#configuration
                 [
-                  "svgo",
+                  'svgo',
                   {
                     plugins: [
                       {
-                        name: "preset-default",
+                        name: 'preset-default',
                         params: {
                           overrides: {
                             removeViewBox: false,
                             addAttributesToSVGElement: {
                               params: {
                                 attributes: [
-                                  { xmlns: "http://www.w3.org/2000/svg" },
+                                  { xmlns: 'http://www.w3.org/2000/svg' },
                                 ],
                               },
                             },
@@ -256,7 +267,6 @@ module.exports = (config, context) => {
               ],
             },
           },
-
         }),
       ],
       runtimeChunk: true,
@@ -268,14 +278,14 @@ module.exports = (config, context) => {
             chunks: 'initial',
             enforce: true,
             // minChunks: 2,
-            priority: 3
+            priority: 3,
           },
           async_common: {
             name: 'common_async',
             chunks: 'async',
             enforce: true,
             // minChunks: 2,
-            priority: 3
+            priority: 3,
           },
           // NOTE: custom
           sentry: {
@@ -287,7 +297,7 @@ module.exports = (config, context) => {
           },
           rapex: {
             test: /[\\/]node_modules[\\/]react-apexcharts/,
-            name: "react-apex",
+            name: 'react-apex',
             minChunks: 1,
             priority: 2,
             chunks: 'all',
@@ -295,7 +305,7 @@ module.exports = (config, context) => {
           },
           apex: {
             test: /[\\/]node_modules[\\/]apexcharts/,
-            name: "apex",
+            name: 'apex',
             minChunks: 1,
             priority: 2,
             chunks: 'all',
@@ -323,26 +333,27 @@ module.exports = (config, context) => {
           //   priority: 2,
           //   chunks: 'all',
           // },
-
         },
       },
     },
-  })
+  });
 
   // NOTICE: Environment
   if (process.env.NODE_ANALYZER) {
-    finalConfig.plugins.push(new BundleAnalyzerPlugin({
-      analyzerMode: "static",
-    }));
+    finalConfig.plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+      })
+    );
   }
 
   // isProduction
   if (false) {
-      // finalConfig.plugins.push(
-      //   new CleanWebpackPlugin({
-      //     verbose: true,
-      //   })
-      // );
+    // finalConfig.plugins.push(
+    //   new CleanWebpackPlugin({
+    //     verbose: true,
+    //   })
+    // );
     finalConfig.plugins.push(
       new SentryCliPlugin({
         debug: true,
@@ -364,10 +375,8 @@ module.exports = (config, context) => {
     );
   }
 
-  if(isDashboard) {
-    finalConfig.plugins.push(
-      new DashboardPlugin()
-    )
+  if (isDashboard) {
+    finalConfig.plugins.push(new DashboardPlugin());
   }
 
   // console.log('finalConfig', finalConfig);
@@ -376,46 +385,50 @@ module.exports = (config, context) => {
 
   finalConfig.module.rules.map((rule, index) => {
     // console.log('before-filter-finalConfig.module.rule', rule);
-    if(rule.oneOf) {
+    if (rule.oneOf) {
       rule.oneOf.map((one) => {
         // console.log('finalConfig.module.rule.one', one);
-      })
+      });
     }
-  })
+  });
 
   const rules = finalConfig.module.rules.filter((rule, index) => {
-    return !(index === 0 || index === 1|| index === 2);
-  })
+    return !(index === 0 || index === 1 || index === 2);
+  });
 
   finalConfig.module.rules = rules;
 
   finalConfig.module.rules.map((rule, index) => {
     console.log('after-filter-finalConfig.module.rule', rule);
-    if(rule.oneOf) {
+    if (rule.oneOf) {
       rule.oneOf.map((one) => {
         console.log('finalConfig.module.rule.one', one);
-      })
+      });
     }
-  })
+  });
 
-  if(!isProduction) {
+  if (!isProduction) {
     // finalConfig = smp.wrap(finalConfig);
     console.log('finalConfig.plugins', finalConfig.plugins);
     console.log('finalConfig', finalConfig);
-    return finalConfig
+    return finalConfig;
   } else {
     console.log('finalConfig.plugins', finalConfig.plugins);
     // console.log('before finalConfig.optimization.minimizer', finalConfig.optimization.minimizer);
     // NOTICE: 後續要會被加上 TerserPlugin, HashedModuleIdsPlugin, CssMinimizerPlugin
     // NOTICE: 移除 TerserPlugin,
-    const minimizers = finalConfig.optimization.minimizer.filter((rule, index) => {
-      return !(index === 0 );
-    })
+    const minimizers = finalConfig.optimization.minimizer.filter(
+      (rule, index) => {
+        return !(index === 0);
+      }
+    );
     finalConfig.optimization.minimizer = minimizers;
-    console.log('after finalConfig.optimization.minimizer', finalConfig.optimization.minimizer);
+    console.log(
+      'after finalConfig.optimization.minimizer',
+      finalConfig.optimization.minimizer
+    );
 
     console.log('finalConfig', finalConfig);
     return finalConfig;
   }
-
 };

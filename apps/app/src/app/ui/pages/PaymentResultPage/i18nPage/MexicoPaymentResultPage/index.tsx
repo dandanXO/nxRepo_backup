@@ -5,10 +5,7 @@ interface IPaymentResultPage {
   resultImage: string;
 }
 
-const MexicoPaymentResultPage = ({
-  path,
-  resultImage,
-}: IPaymentResultPage) => {
+const MexicoPaymentResultPage = ({ path, resultImage }: IPaymentResultPage) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <img src={resultImage} alt="result" />

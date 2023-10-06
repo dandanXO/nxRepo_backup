@@ -1,8 +1,6 @@
 // NOTICE: sync
-
 // NOTE:
 // https://blog.51cto.com/u_15127593/2803803
-
 // window.onerror = (message, source, lineno, colno, error) => {
 //   console.log('[APP][ErrorHandler] window.onerror');
 //   console.log(`message: ${message}`);
@@ -21,9 +19,8 @@
 //   })));
 //   return true;
 // };
-
 // NOTE: sync
-import {SentryModule} from "../../modules/sentry";
+import { SentryModule } from '../../modules/sentry';
 
 window.addEventListener(
   'error',
@@ -34,7 +31,9 @@ window.addEventListener(
     // filter js error
     const target = event.target || event.srcElement;
     const isElementTarget =
-      target instanceof HTMLScriptElement || target instanceof HTMLLinkElement || target instanceof HTMLImageElement;
+      target instanceof HTMLScriptElement ||
+      target instanceof HTMLLinkElement ||
+      target instanceof HTMLImageElement;
     if (!isElementTarget) return false;
 
     const url = (target as any)?.src || (target as any)?.href;
@@ -45,7 +44,6 @@ window.addEventListener(
   true
 );
 
-
 // NOTE: async
 // NOTE: 当 Promise 被 reject 且有 reject 处理器的时候，会触发 rejectionhandled 事件。
 window.addEventListener('rejectionhandled', (event) => {
@@ -54,27 +52,40 @@ window.addEventListener('rejectionhandled', (event) => {
   // NOTE: 詳細錯誤訊息
   console.log(event);
   console.log(event.reason);
-  SentryModule.captureException(new Error(JSON.stringify({
-    message: event.reason.message,
-    name: event.reason.name,
-  })));
+  SentryModule.captureException(
+    new Error(
+      JSON.stringify({
+        message: event.reason.message,
+        name: event.reason.name,
+      })
+    )
+  );
 });
 
 // NOTE: async
 // NOTE: 当 Promise 被 reject 且没有 reject 处理器的时候，会触发 unhandledrejection 事件。
 // NOTICE: 当 Promise 被 reject 且没有 reject 处理器的时候，会触发 unhandledrejection 事件；这可能发生在 window 下，但也可能发生在 Worker 中
-window.addEventListener('unhandledrejection',(event) => {
-  console.log('[APP][ErrorHandler] window.addEventListener.unhandledrejection');
+window.addEventListener(
+  'unhandledrejection',
+  (event) => {
+    console.log(
+      '[APP][ErrorHandler] window.addEventListener.unhandledrejection'
+    );
 
-  console.log(event);
-  console.log(event.reason);
+    console.log(event);
+    console.log(event.reason);
 
-  SentryModule.captureException(new Error(JSON.stringify({
-    message: event.reason.message,
-    name: event.reason.name,
-  })));
-
-},true);
+    SentryModule.captureException(
+      new Error(
+        JSON.stringify({
+          message: event.reason.message,
+          name: event.reason.name,
+        })
+      )
+    );
+  },
+  true
+);
 
 // window.onunhandledrejection = (event) => {
 //   event.preventDefault();

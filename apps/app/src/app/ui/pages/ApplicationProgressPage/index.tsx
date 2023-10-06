@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import { useLazyGetUserProcessQuery } from '../../../externel/backend/rtk';
+import { formatDate } from '../../../modules/format/formatDate';
 import { Navigation } from '../../core-components/Navigation';
 import { PageContent } from '../../core-components/PageContent';
 import { ProgressItem } from './ProgressItem';
-import {formatDate} from "../../../modules/format/formatDate";
 
 const ApplicationProgressPage = () => {
   const navigate = useNavigate();
@@ -35,8 +35,7 @@ const ApplicationProgressPage = () => {
                 date={formatDate(moment.unix(Number(news.addTime)))}
               />
             );
-          })
-        }
+          })}
         {/*{!currentData && <div>No Data</div>}*/}
       </PageContent>
     </div>

@@ -1,5 +1,4 @@
-import {ICustomTailwindTheme} from "../../../../app/modules/ui/theme/ICustomTailwindTheme";
-
+import { ICustomTailwindTheme } from '../../../../app/modules/ui/theme/ICustomTailwindTheme';
 
 const theme: ICustomTailwindTheme = {
   // NOTE: color
@@ -34,7 +33,8 @@ const theme: ICustomTailwindTheme = {
   custom_bg_primary: '#FBFEF9',
   custom_bg_secondary: '#FFFFFF',
   custom_bg_tertiary: '#EAFCE8',
-  custom_bg_homepage_button: 'linear-gradient(178.76deg, #58B97C 1.58%, #2C855E 99.46%)', // 首頁按鈕 Get my limit
+  custom_bg_homepage_button:
+    'linear-gradient(178.76deg, #58B97C 1.58%, #2C855E 99.46%)', // 首頁按鈕 Get my limit
   custom_bg_button: 'linear-gradient(178.76deg, #58B97C 1.58%, #2C855E 99.46%)', // PK primary button
 
   // NOTE: text

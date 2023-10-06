@@ -16,7 +16,7 @@ export type GetIndexResponse = {
   customerServiceUrl: string;
   // 線上客服連結
 
-  hiddenLoanDetail:	boolean;
+  hiddenLoanDetail: boolean;
   // 是否隐藏借款详情
 
   loanAgreementUrl: string;

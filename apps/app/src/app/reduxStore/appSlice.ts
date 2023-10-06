@@ -2,9 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { GetInitServiceResponse } from '../externel/backend/appService/GetInitServiceResponse';
 import { IAndroidAppInfo } from '../externel/nativeApp/types/IAndroidAppInfo';
-import {NativeAppInfo} from "../application/nativeAppInfo";
-import queryString from "query-string";
-import {appInfoPersistence} from "../persistant/AppInfoPersistence";
 import { AppProxy } from '../proxy/appProxy';
 
 export enum AppRunningModeEnum {
@@ -24,8 +21,6 @@ export type InitialState = {
   appDomain: string;
 };
 
-
-
 const initialState: InitialState = {
   mode: AppRunningModeEnum.Unknown,
   // token: '',
@@ -43,22 +38,38 @@ export const appSlice = createSlice({
     init: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isInit = action.payload;
     },
-    updateInit: (state: InitialState, action: PayloadAction<GetInitServiceResponse>) => {
+    updateInit: (
+      state: InitialState,
+      action: PayloadAction<GetInitServiceResponse>
+    ) => {
       state.init = action.payload;
     },
-    updateMode: (state: InitialState, action: PayloadAction<AppRunningModeEnum>) => {
+    updateMode: (
+      state: InitialState,
+      action: PayloadAction<AppRunningModeEnum>
+    ) => {
       state.mode = action.payload;
     },
     // updateToken: (state: InitialState, action: PayloadAction<string>) => {
     //   state.token = action.payload;
     // },
-    updateAndroidInfo: (state: InitialState, action: PayloadAction<IAndroidAppInfo>) => {
+    updateAndroidInfo: (
+      state: InitialState,
+      action: PayloadAction<IAndroidAppInfo>
+    ) => {
       state.androidAppInfo = action.payload;
     },
-    updateAppInfo: (state: InitialState, action: PayloadAction<{appName: string; appID: string; appDomain: string;}>) => {
+    updateAppInfo: (
+      state: InitialState,
+      action: PayloadAction<{
+        appName: string;
+        appID: string;
+        appDomain: string;
+      }>
+    ) => {
       state.appName = action.payload.appName;
       state.appID = action.payload.appID;
       state.appDomain = action.payload.appDomain;
-    }
+    },
   },
 });

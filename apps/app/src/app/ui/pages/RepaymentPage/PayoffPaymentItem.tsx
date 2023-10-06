@@ -1,23 +1,19 @@
 // import Button from "../../components/Button";
-import { RiArrowDownSLine } from '@react-icons/all-files/ri/RiArrowDownSLine';
-import { RiArrowUpSLine } from '@react-icons/all-files/ri/RiArrowUpSLine';
 import cx from 'classnames';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
 import { getToken } from '../../../application/getToken';
+import { GetLoanRecord } from '../../../externel/backend/loanService/GetLoanRecord';
+import { formatDate } from '../../../modules/format/formatDate';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import Divider from '../../core-components/Divider';
 import ListItem from '../../core-components/ListItem';
-import Money from '../../components/Money';
-import { Button } from '../../core-components/Button';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
+import { Status } from '../../statusEnum';
 import { CardCollapseSection } from './CardCollapseSection';
 import { CardContentSection } from './CardContentSection';
 import { CardHeaderSection } from './CardHeaderSection';
-import {formatDate} from "../../../modules/format/formatDate";
-import {Status} from "../../statusEnum";
 
 const PayoffPaymentItem = (props: GetLoanRecord) => {
   const navigate = useNavigate();
@@ -26,7 +22,7 @@ const PayoffPaymentItem = (props: GetLoanRecord) => {
   const {
     iconUrl = '',
     productName = '',
-    status = '',
+    // status = '',
     dueDate = '',
     orderNo = '',
     orderAmount = '',
@@ -35,7 +31,10 @@ const PayoffPaymentItem = (props: GetLoanRecord) => {
     approveRecords = [],
   } = props;
 
-  const repaymentDate = repayRecords.length > 0 ? repayRecords[repayRecords.length - 1].repayDate : '';
+  const repaymentDate =
+    repayRecords.length > 0
+      ? repayRecords[repayRecords.length - 1].repayDate
+      : '';
 
   const [collapse, setCollapse] = useState(false);
   const handleCollapse = () => {
@@ -46,7 +45,10 @@ const PayoffPaymentItem = (props: GetLoanRecord) => {
   const statusBackground = Status('PAY_OFF').bg;
 
   return (
-    <div className={`border-ctext-divider mx-5 mb-5 rounded-lg border border-solid pb-2`} onClick={handleCollapse}>
+    <div
+      className={`border-ctext-divider mx-5 mb-5 rounded-lg border border-solid pb-2`}
+      onClick={handleCollapse}
+    >
       <CardHeaderSection
         statusBackground={statusBackground}
         iconUrl={iconUrl}
@@ -59,9 +61,14 @@ const PayoffPaymentItem = (props: GetLoanRecord) => {
         amountName={'Loan Amount'}
         orderAmount={orderAmount}
         onClick={() =>
-          navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${orderNo}`, {
-            state: { orderNo, approveRecords },
-          })
+          navigate(
+            `${
+              PageOrModalPathEnum.RepaymentDetailPage
+            }?token=${getToken()}&orderNo=${orderNo}`,
+            {
+              state: { orderNo, approveRecords },
+            }
+          )
         }
         dueDate={dueDate}
         statusColor={'text-ctext-primary'}
@@ -73,11 +80,16 @@ const PayoffPaymentItem = (props: GetLoanRecord) => {
       </div>
       {collapse && (
         <div className={cx('px-3')}>
-          <ListItem key={'OrderNo.'} title={'Order No.'} text={orderNo ?? ''} titleColor={'text-ctext-secondary'} />
+          <ListItem
+            key={'OrderNo.'}
+            title={'Order No.'}
+            text={orderNo ?? ''}
+            titleColor={'text-ctext-secondary'}
+          />
           <ListItem
             key={'LoanDate'}
             title={'Loan Date'}
-            text={loanDate ? formatDate(moment(loanDate)): ''}
+            text={loanDate ? formatDate(moment(loanDate)) : ''}
             titleColor="text-ctext-secondary"
           />
           <ListItem

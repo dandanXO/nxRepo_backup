@@ -1,8 +1,7 @@
 import cx from 'classnames';
-import React from 'react';
 // NOTE: https://chupai.github.io/posts/2101/clipboard/
 import copy from 'copy-to-clipboard';
-
+import React from 'react';
 
 interface ICopyButtonProps {
   value: string;

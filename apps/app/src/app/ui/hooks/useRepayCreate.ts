@@ -1,21 +1,19 @@
-import * as Sentry from '@sentry/react';
-import { IndiaCountry } from 'libs/shared/domain/src/country/IndiaCountry';
-import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { useLocationOrderQueryString } from '@frontend/mobile/shared/ui';
+import {
+  IndiaCountry,
+  MexicoCountry,
+  PhilippinesCountry,
+} from '@frontend/shared/domain';
 
-import { MexicoCountry } from '../../../../../../libs/shared/domain/src/country/MexicoCountry';
-import { PhilippinesCountry } from '../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
 import { environment } from '../../../environments/environmentModule/environment';
-import { AppFlag } from '../../../environments/flag';
+import { getToken } from '../../application/getToken';
 import { PostRepayCreateRequest } from '../../externel/backend/loanService/PostRepayCreateRequest';
 import { PostRepayCreateResponse } from '../../externel/backend/loanService/PostRepayCreateResponse';
 import { usePostRepayCreateMutation } from '../../externel/backend/rtk';
 import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
-import { getToken } from '../../application/getToken';
-import { modalSlice } from '../../reduxStore/modalSlice';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
 
@@ -24,8 +22,8 @@ const useRepayCreate = () => {
   const pageQueryString = useLocationOrderQueryString();
   const dispatch = useDispatch();
 
-  const orderNo = pageQueryString.orderNo;
-  const token = pageQueryString.token;
+  // const orderNo = pageQueryString.orderNo;
+  // const token = pageQueryString.token;
 
   // NOTE: usePostRepayCreateMutation
   const [postRepayCreate, { isLoading: isPostRepayCreateLoading }] =

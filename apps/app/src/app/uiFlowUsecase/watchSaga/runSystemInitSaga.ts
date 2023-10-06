@@ -1,33 +1,32 @@
-import {Location} from 'history';
-import {call, put, select} from 'redux-saga/effects';
-import {push} from "@lagunovsky/redux-react-router";
+import { push } from '@lagunovsky/redux-react-router';
+import { Location } from 'history';
+import queryString from 'query-string';
+import { call, put, select } from 'redux-saga/effects';
 
-import {SentryModule} from '../../modules/sentry';
-import {Service} from '../../externel/backend';
-import {alertModal} from '../../ui/components/alertModal';
-import {GetUserInfoServiceResponse} from '../../externel/backend/userService/GetUserInfoServiceResponse';
+import { AppModeEnum } from '../../application/AppModeEnum';
+import { GlobalAppMode } from '../../application/GlobalAppMode';
 // import { Posthog } from '../../modules/posthog';
-import {getToken} from '../../application/getToken';
-import {PageOrModalPathEnum} from '../../ui/PageOrModalPathEnum';
-import {appStore, RootState} from '../../reduxStore';
-import {indexPageSlice} from '../../reduxStore/indexPageSlice';
-import {NativeAppInfo} from '../../application/nativeAppInfo';
-import {GlobalAppMode} from "../../application/GlobalAppMode";
-import {AppModeEnum} from "../../application/AppModeEnum";
-import {MonitorUsecaseFlow} from "../../uiFlowUsecaseMoniter";
-import {GetIndexResponse} from '../../externel/backend/indexService/GetIndexResponse';
+import { getToken } from '../../application/getToken';
+import { NativeAppInfo } from '../../application/nativeAppInfo';
+import { Service } from '../../externel/backend';
+import { GetIndexResponse } from '../../externel/backend/indexService/GetIndexResponse';
+import { GetUserInfoServiceResponse } from '../../externel/backend/userService/GetUserInfoServiceResponse';
+import { SentryModule } from '../../modules/sentry';
+import { appInfoPersistence } from '../../persistant/AppInfoPersistence';
+import { RootState, appStore } from '../../reduxStore';
+import { appSlice } from '../../reduxStore/appSlice';
+import { indexPageSlice } from '../../reduxStore/indexPageSlice';
+import { PageOrModalPathEnum } from '../../ui/PageOrModalPathEnum';
+import { alertModal } from '../../ui/components/alertModal';
+import { MonitorUsecaseFlow } from '../../uiFlowUsecaseMoniter';
+import { SystemCaseActions } from '../type/systemUsecaseSaga/systemCaseActions';
+import { systemGetIndexPageSaga } from '../type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga';
+import { catchSagaError } from '../utils/catchSagaError';
 
-import {SystemCaseActions} from '../type/systemUsecaseSaga/systemCaseActions';
-import {catchSagaError} from '../utils/catchSagaError';
-import {appSlice} from "../../reduxStore/appSlice";
-import queryString from "query-string";
-import {appInfoPersistence} from "../../persistant/AppInfoPersistence";
-import {systemGetIndexPageSaga} from "../type/userUsecaseSaga/sharedSaga/systemGetIndexPageSaga";
-
-console.log("[app] SentryModule", SentryModule);
+console.log('[app] SentryModule', SentryModule);
 
 export function* runSystemInitSaga() {
-  console.log("[app][times:1] runSystemInitSaga")
+  console.log('[app][times:1] runSystemInitSaga');
   try {
     // if(AppModeModel.getMode()) {
     if (GlobalAppMode.mode !== 'Unset') {
@@ -37,7 +36,9 @@ export function* runSystemInitSaga() {
 
     console.log('[app] 開始初始化');
 
-    const location: Location = yield select((state: RootState) => state.navigator.location);
+    const location: Location = yield select(
+      (state: RootState) => state.navigator.location
+    );
 
     // NOTE: Setting GlobalAppMode
     if (NativeAppInfo.mode === 'Webview') {
@@ -63,7 +64,6 @@ export function* runSystemInitSaga() {
 
     // NOTE: 根據初始頁面進行初始化
     if (NativeAppInfo.mode === 'Webview') {
-
       // NOTE: 不需要登入才能訪問的頁面
       // NOTE: white page list
       if (location.pathname === PageOrModalPathEnum.IBANFinderPage) {
@@ -86,7 +86,10 @@ export function* runSystemInitSaga() {
         // NOTICE: 直接進行登入
         // NOTICE: 還款頁面、綁卡頁面、IBAN 說明頁面 (使用 URL Querystring Token 進行登入)
         // NOTE: 更新使用者資訊
-        const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
+        const userResponse: GetUserInfoServiceResponse = yield call(
+          Service.UserService.GetUserInfoService,
+          {}
+        );
         // console.log("[app] userResponse", userResponse);
         yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
@@ -94,12 +97,14 @@ export function* runSystemInitSaga() {
         MonitorUsecaseFlow.userLogin(userResponse);
 
         // NOTE: Loan Agreement 資料在 index
-        const indexResponse: GetIndexResponse = yield call(Service.IndexService.getIndex, {});
+        const indexResponse: GetIndexResponse = yield call(
+          Service.IndexService.getIndex,
+          {}
+        );
         yield put(indexPageSlice.actions.updateIndexAPI(indexResponse));
-
       }
     } else if (NativeAppInfo.mode === 'H5') {
-      console.log("[app] first location.pathname: ", location.pathname )
+      console.log('[app] first location.pathname: ', location.pathname);
       // TODO: refactor me
       try {
         // NOTE: Posthog
@@ -111,69 +116,84 @@ export function* runSystemInitSaga() {
       }
 
       // NOTICE: 後台與第三方支付跳轉的付款結果頁面不需要登入與其他行為
-      if(location.pathname === PageOrModalPathEnum.PaymentResultPage) {
+      if (location.pathname === PageOrModalPathEnum.PaymentResultPage) {
         return;
       }
 
       // NOTICE: 需要 appName, appID 才能使用 PureH5
       const parsedQueryString = queryString.parse(window.location.search);
-      const appName = appInfoPersistence.appName || parsedQueryString["appName"] as string;
-      const appID = appInfoPersistence.appID || parsedQueryString["appID"] as string;
-      const appDomain = appInfoPersistence.appDomain || parsedQueryString["appDomain"] as string;
+      const appName =
+        appInfoPersistence.appName || (parsedQueryString['appName'] as string);
+      const appID =
+        appInfoPersistence.appID || (parsedQueryString['appID'] as string);
+      const appDomain =
+        appInfoPersistence.appDomain ||
+        (parsedQueryString['appDomain'] as string);
 
-      console.log("[app] appName: ",appName)
-      console.log("[app] appID: ",appID)
-      console.log("[app] appDomain: ",appDomain)
+      console.log('[app] appName: ', appName);
+      console.log('[app] appID: ', appID);
+      console.log('[app] appDomain: ', appDomain);
 
-      if(!appName || !appID || !appDomain) {
+      if (!appName || !appID || !appDomain) {
         // NOTICE: delay 0.5 seconds 讓 privacy policy 的 model 能夠在 alertModal底下
         setTimeout(() => {
-          alertModal("Please use valid appName, appID and appDomain");
-        }, 500)
-        yield put(push("/error"));
-        return ;
+          alertModal('Please use valid appName, appID and appDomain');
+        }, 500);
+        yield put(push('/error'));
+        return;
       }
 
       appInfoPersistence.appName = appName;
       appInfoPersistence.appID = appID;
       appInfoPersistence.appDomain = appDomain;
 
-      yield put(appSlice.actions.updateAppInfo({
-        appName,
-        appID,
-        appDomain,
-      }));
+      yield put(
+        appSlice.actions.updateAppInfo({
+          appName,
+          appID,
+          appDomain,
+        })
+      );
 
-      if (location.pathname === PageOrModalPathEnum.LoginPage || location.pathname === PageOrModalPathEnum.PrivacyPolicyModal) {
+      if (
+        location.pathname === PageOrModalPathEnum.LoginPage ||
+        location.pathname === PageOrModalPathEnum.PrivacyPolicyModal
+      ) {
         // NOTICE: 登入頁面 (使用者輸入OTP 進行登入)
         // NOTE: 有 localStorage 就直接進行頁面跳轉判斷
         const token = getToken();
-        if(token) {
+        if (token) {
           yield put(push(PageOrModalPathEnum.IndexPage));
-          const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-          console.log("userResponse", userResponse);
+          const userResponse: GetUserInfoServiceResponse = yield call(
+            Service.UserService.GetUserInfoService,
+            {}
+          );
+          console.log('userResponse', userResponse);
           yield put(indexPageSlice.actions.updateUserAPI(userResponse));
         }
         // else {
         //   yield put(push(`${PageOrModalPathEnum.LoginPage}?appName=${appName}&appID=${appID}&appDomain=${appDomain}`));
         // }
-
       } else {
         // NOTICE: 沒有登入權限跳轉至 Login
         const token = getToken();
         // console.log("token", token);
         if (!token) {
-          const message = '[PureH5] Frontend Error: Need Token. Cannot come directly without token';
+          const message =
+            '[PureH5] Frontend Error: Need Token. Cannot come directly without token';
           // FIXME:
           // SentryModule.captureMessage(message);
           yield put(push(PageOrModalPathEnum.LoginPage));
 
           alertModal(message);
-          return
+          return;
         }
 
-        const userResponse: GetUserInfoServiceResponse = yield call(Service.UserService.GetUserInfoService, {});
-        console.log("userResponse", userResponse);
+        const userResponse: GetUserInfoServiceResponse = yield call(
+          Service.UserService.GetUserInfoService,
+          {}
+        );
+        console.log('userResponse', userResponse);
         yield put(indexPageSlice.actions.updateUserAPI(userResponse));
 
         // NOTE: 共用資料需要統一再次拉取
@@ -183,7 +203,6 @@ export function* runSystemInitSaga() {
 
     // NOTE: 取得初始化資料 (init Info & NativeAppInfo 塞到redux內)
     appStore.dispatch(SystemCaseActions.InitSaga());
-
   } catch (error) {
     // console.log("test error", error)
     yield catchSagaError(error);

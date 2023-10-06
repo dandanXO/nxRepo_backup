@@ -9,7 +9,9 @@ export default {
   component: PureUploadedPaymentReceiptPage,
 } as ComponentMeta<typeof PureUploadedPaymentReceiptPage>;
 
-export const Page: ComponentStory<typeof PureUploadedPaymentReceiptPage> = (args) => {
+export const Page: ComponentStory<typeof PureUploadedPaymentReceiptPage> = (
+  args
+) => {
   return (
     <AppThemeProvider>
       <PureUploadedPaymentReceiptPage

@@ -11,5 +11,5 @@ export type AvailableQuotaBar = {
   serial: number;
   // 拉霸額度間隔
 
-  steps: number[]
+  steps: number[];
 };

@@ -6,17 +6,17 @@ import QRCode from 'react-qr-code';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
-import { PostRepayCreateResponse } from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
 import { getToken } from '../../../../../application/getToken';
-import Divider from '../../../../core-components/Divider';
-import Money from '../../../../components/Money';
-import { PageContent } from '../../../../core-components/PageContent';
+import { PostRepayCreateResponse } from '../../../../../externel/backend/loanService/PostRepayCreateResponse';
+import { tcx } from '../../../../../modules/ui/tailwindcss';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
+import Money from '../../../../components/Money';
+import Divider from '../../../../core-components/Divider';
+import { PageContent } from '../../../../core-components/PageContent';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
+import CopyButton from '../../components/CopyButton';
 import { i18nPaymentInstructionPage } from '../../translations';
 import getPlatformValue from './getPlatformValue';
-import CopyButton from "../../components/CopyButton";
-import {tcx} from "../../../../../modules/ui/tailwindcss";
 
 const Logo = (path: string) => {
   let logo = '';
@@ -42,7 +42,7 @@ const Item = ({
   extra?: React.ReactNode;
 }) => (
   <div className={tcx('mb-2 flex flex-row items-center gap-4', className)}>
-    <div className={tcx(['w-3/4 break-all',!!extra])}>
+    <div className={tcx(['w-3/4 break-all', !!extra])}>
       <div className="text-ctext-secondary">{title}</div>
       <div className="text-xl font-bold">{content}</div>
     </div>
@@ -77,9 +77,7 @@ const PhilippinesPaymentCheckoutPage = ({
           <img
             className="my-2 h-8 object-fill"
             alt="logo"
-            src={Logo(
-              `payment_logo_${getPlatformValue(payTypeName, 'logo')}`
-            )}
+            src={Logo(`payment_logo_${getPlatformValue(payTypeName, 'logo')}`)}
           />
         </div>
 
@@ -120,8 +118,8 @@ const PhilippinesPaymentCheckoutPage = ({
         )}
 
         {qrCode && (
-          <div className="flex justify-center my-5">
-            <QRCode className='w-[200px] h-[200px]' value={qrCode} />
+          <div className="my-5 flex justify-center">
+            <QRCode className="h-[200px] w-[200px]" value={qrCode} />
           </div>
         )}
 
@@ -154,28 +152,30 @@ const PhilippinesPaymentCheckoutPage = ({
 
         {(getPlatformValue(payTypeName, 'isOnline') || barcode) && (
           <div className="my-4 text-xs">
-            {
-              (payTypeName === 'GCash' || payTypeName === 'Paymaya') ?
-                (getPlatformValue(payTypeName, 'contents') as any).map((i: any) => {
+            {payTypeName === 'GCash' || payTypeName === 'Paymaya' ? (
+              (getPlatformValue(payTypeName, 'contents') as any).map(
+                (i: any) => {
                   // console.log('PayMaya',i)
                   return (
-                    <div className='mb-2'>
-                      <div className="text-ctext-primary font-bold text-xs">{i.title}</div>
+                    <div className="mb-2">
+                      <div className="text-ctext-primary text-xs font-bold">
+                        {i.title}
+                      </div>
                       {i.content}
                     </div>
-                  )
-                })
-                : (
-                  <div>
-                    <div className="text-ctext-primary font-bold">Payment tips</div>
-                    <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5">
-                      {[1, 2, 3, 4, 5, 6].map((index) => (
-                        <li key={index}>{t(`paymentTips${index}`)}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-            }
+                  );
+                }
+              )
+            ) : (
+              <div>
+                <div className="text-ctext-primary font-bold">Payment tips</div>
+                <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5">
+                  {[1, 2, 3, 4, 5, 6].map((index) => (
+                    <li key={index}>{t(`paymentTips${index}`)}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
 
@@ -188,14 +188,21 @@ const PhilippinesPaymentCheckoutPage = ({
               {[1, 2, 3, 4].map((index) => (
                 <li key={index} className="mb-2">
                   <div className="text-ctext-primary text-sm font-bold leading-[12px]">
-                    {getPlatformValue(payTypeName, `instruction${index}Title`) as any}
+                    {
+                      getPlatformValue(
+                        payTypeName,
+                        `instruction${index}Title`
+                      ) as any
+                    }
                   </div>
 
                   <div className="mt-[2px] leading-[12px]">
-                    {getPlatformValue(
-                      payTypeName,
-                      `instruction${index}Content`
-                    ) as any}
+                    {
+                      getPlatformValue(
+                        payTypeName,
+                        `instruction${index}Content`
+                      ) as any
+                    }
                   </div>
                 </li>
               ))}

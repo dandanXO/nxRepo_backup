@@ -2,18 +2,18 @@ import queryString from 'query-string';
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
-import { MexicoCountry } from '../../../../../../../libs/shared/domain/src/country/MexicoCountry';
-import { PhilippinesCountry } from '../../../../../../../libs/shared/domain/src/country/PhilippinesCountry';
+import { MexicoCountry, PhilippinesCountry } from '@frontend/shared/domain';
+
 import { environment } from '../../../../environments/environmentModule/environment';
+import { getToken } from '../../../application/getToken';
+import { isShowNavigation } from '../../../device/isShowNavigation';
 import { useLazyGetRepayPayInfoQuery } from '../../../externel/backend/rtk';
 import { renderByCountry } from '../../../modules/i18n';
-import { getToken } from '../../../application/getToken';
+import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { Navigation } from '../../core-components/Navigation';
 import { Page } from '../../core-components/Page';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import MexicoPaymentInstructionPage from './i18nPage/MexicoPaymentCheckoutPage';
 import PhilippinesPaymentInstructionPage from './i18nPage/PhilippinesPaymentCheckoutPage';
-import {isShowNavigation} from "../../../device/isShowNavigation";
 
 // TODO: Refactor Color
 const navigatorMap = {
