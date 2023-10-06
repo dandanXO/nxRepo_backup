@@ -1,6 +1,4 @@
-import { PakistanCountry } from '@frontend/shared/domain';
-
-import { IEnvironment } from '../../../../../../libs/shared/domain/src/environment/types/IEnvironment';
+import {IEnvironment, PakistanCountry} from '@frontend/shared/domain';
 
 export const environment: IEnvironment = {
   production: false,

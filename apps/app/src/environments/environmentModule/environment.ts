@@ -5,7 +5,7 @@
 // console.log("process.env.NX_TEST_SINGLE", process.env.NX_SERVE)
 import { IndiaCountry } from '@frontend/shared/domain';
 
-import { IEnvironment } from '../../../../../libs/shared/domain/src/environment/types/IEnvironment';
+import { IEnvironment } from '@frontend/shared/domain';
 
 export const environment: IEnvironment = {
   production: false,
