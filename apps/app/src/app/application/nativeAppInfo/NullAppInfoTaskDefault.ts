@@ -17,7 +17,6 @@ if (window.Cypress) {
 
 const mode = isInApp() ? 'Webview' : 'H5';
 
-
 export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
   [AllCountriesEnum.india]: {
     localhost: {
@@ -27,7 +26,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: "",
       uiVersion: uiVersion || "55",
       token: null,
-      mode: 'H5',
+      mode,
       phoneNo: '',
     },
     dev: {
@@ -60,7 +59,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: 'Local PK APP',
       uiVersion: uiVersion || "15",
       token: null,
-      mode: 'H5',
+      mode,
       phoneNo: '',
     },
     dev: {
@@ -93,7 +92,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: 'Local MX APP',
       uiVersion: uiVersion || "1",
       token: null,
-      mode: 'H5',
+      mode,
       phoneNo: '',
     },
     dev: {
@@ -126,7 +125,7 @@ export const NULL_DEFAULT_APP_INFO_TASK: INullAppInfoTaskDefault = {
       appName: 'Local PH APP',
       uiVersion: uiVersion || "1",
       token: null,
-      mode: 'H5',
+      mode,
       phoneNo: '',
     },
     dev: {
