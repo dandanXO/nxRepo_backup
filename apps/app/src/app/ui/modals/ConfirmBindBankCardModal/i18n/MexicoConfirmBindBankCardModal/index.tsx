@@ -78,13 +78,14 @@ const MexicoConfirmBindBankCardModal = ({
             className={`ml-1 w-full`}
             text={t('Confirm')}
             outlineTheme={'round'}
+            disable={modalState.bindBankcardModal.isProcessing}
             onClick={() => {
-              dispatch(
-                BindBankcardAction.user.bindBankcardSaveAction({
-                  ...modalState.bindBankcardModal,
-                  confirm: true,
-                })
-              );
+                dispatch(
+                  BindBankcardAction.user.bindBankcardSaveAction({
+                    ...modalState.bindBankcardModal,
+                    confirm: true,
+                  })
+                );
             }}
           />
         </div>

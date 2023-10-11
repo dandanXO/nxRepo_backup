@@ -25,6 +25,7 @@ export const Button = (props: Props) => {
       data-testing-id={props.dataTestingID}
       data-testing-disable={props.dataTestingDisable}
       data-testing-loading={props.loading}
+      disabled={props.disable}
       // shadow-md shadow-gray-400
       className={tcx(
         'w-full rounded-md border-solid p-2 text-center font-bold',
