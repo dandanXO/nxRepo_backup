@@ -50,6 +50,7 @@ export type InitialStateType = {
     walletName: string;
     cardType: 'CLABE' | 'DEBIT_CARD';
     cardTypeName: string;
+    isProcessing: boolean;
   };
   starRatingModal: {
     show: boolean;
@@ -122,6 +123,7 @@ export const modalInitialState: InitialStateType = {
     walletName: '',
     cardType: 'DEBIT_CARD',
     cardTypeName: '',
+    isProcessing:false
   },
   starRatingModal: {
     show: false,
@@ -251,6 +253,7 @@ export const modalSlice = createSlice({
       state.bindBankcardModal.walletName = action.payload.walletName;
       state.bindBankcardModal.cardType = action.payload.cardType;
       state.bindBankcardModal.cardTypeName = action.payload.cardTypeName;
+      state.bindBankcardModal.isProcessing=action.payload.isProcessing
     },
     updateStarRatingModal: (
       state,
