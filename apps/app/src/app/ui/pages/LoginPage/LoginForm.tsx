@@ -141,6 +141,7 @@ export const LoginForm = () => {
           label={'+91' as string}
           labelType="left"
           value={phoneNumberData.data}
+          textAlign={'left'}
           disabled={false}
           errorMessage={phoneNumberData.errorMessage}
           onBlur={(event: any) => {
