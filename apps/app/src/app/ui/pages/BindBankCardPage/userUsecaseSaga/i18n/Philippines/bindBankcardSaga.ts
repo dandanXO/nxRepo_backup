@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import i18next from 'i18next';
-import { put, race, take } from 'redux-saga/effects';
+import { put, race, select, take } from 'redux-saga/effects';
 
 import { Modal } from '@frontend/mobile/shared/ui';
 
@@ -11,12 +11,20 @@ import {
   modalSlice,
 } from '../../../../../../reduxStore/modalSlice';
 import { catchSagaError } from '../../../../../../uiFlowUsecase/utils/catchSagaError';
+import { RootState } from 'apps/app/src/app/reduxStore';
 
 export function* bindBankcardSaga(
   action: PayloadAction<InitialStateType['bindBankcardModal']>
 ) {
   try {
     if (action.payload.confirm) {
+      const bindBankcardModalState: InitialStateType['bindBankcardModal'] = yield select((state: RootState) => state.model.bindBankcardModal);
+      yield put(
+        modalSlice.actions.updatebindBankcardModal({
+          ...bindBankcardModalState,
+          isProcessing: true
+        })
+      );
       yield put(
         APIV3.endpoints.postBankBindSaveToPH.initiate({
           holderName: action.payload.cardholderName,
@@ -49,6 +57,13 @@ export function* bindBankcardSaga(
             window.location.href = 'innerh5://127.0.0.1';
           },
         });
+      }else{
+        yield put(
+          modalSlice.actions.updatebindBankcardModal({
+            ...bindBankcardModalState,
+            isProcessing: false
+          })
+        );
       }
     }
   } catch (error) {

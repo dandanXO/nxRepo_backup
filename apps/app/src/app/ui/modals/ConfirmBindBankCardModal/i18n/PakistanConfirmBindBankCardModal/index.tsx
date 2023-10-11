@@ -103,6 +103,7 @@ const PakistanConfirmBindBankCardModal = ({
             className={`ml-1 w-full`}
             text={t('Confirm')}
             primaryTypeGradient={true}
+            disable={modalState.bindBankcardModal.isProcessing}
             onClick={() => {
               dispatch(
                 BindBankcardAction.user.bindBankcardSaveAction({
