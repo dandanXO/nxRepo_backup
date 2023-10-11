@@ -115,8 +115,11 @@ export function* runSystemInitSaga() {
         // yield catchSagaError(error);
       }
 
-      // NOTICE: 後台與第三方支付跳轉的付款結果頁面不需要登入與其他行為
-      if (location.pathname === PageOrModalPathEnum.PaymentResultPage) {
+      // NOTICE: 還款資訊頁與後台產生的還款資訊頁與第三方支付跳轉的付款結果頁面不需要登入與其他行為
+      if (
+        location.pathname === PageOrModalPathEnum.PaymentResultPage ||
+        location.pathname === PageOrModalPathEnum.PaymentCheckoutPage
+      ) {
         return;
       }
 
