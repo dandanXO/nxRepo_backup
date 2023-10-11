@@ -32,7 +32,7 @@ const ApplicationProgressPage = () => {
                 isHightlight={index === 0}
                 title={news.title}
                 content={news.content}
-                date={formatDate(moment.unix(Number(news.addTime)))}
+                date={moment.unix(Number(news.addTime)).format('DD-MM-YYYY HH:mm:ss')}
               />
             );
           })}

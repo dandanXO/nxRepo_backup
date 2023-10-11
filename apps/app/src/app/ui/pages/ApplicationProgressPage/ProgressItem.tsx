@@ -1,5 +1,4 @@
 import cx from 'classnames';
-import moment from 'moment-timezone';
 
 interface Props {
   title?: string;
@@ -38,7 +37,7 @@ export const ProgressItem = (props: Props) => {
             'text-cstate-disable-main': !props.isHightlight,
           })}
         >
-          {moment(props.date).format('DD-MM-YYYY HH:mm:ss')}
+          {props.date}
         </div>
       </div>
     </div>
