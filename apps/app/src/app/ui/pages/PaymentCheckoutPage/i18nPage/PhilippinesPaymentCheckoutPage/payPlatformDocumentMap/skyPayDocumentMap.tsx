@@ -4,24 +4,28 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   GCash: {
     isOnline: true,
     logo: 'gcash',
+    referenceNumberTitle: 'Contract Number',
     contents: [
       {
-        title: 'Repay Instructions via GCash',
+        title: 'Repay Instructions via GCash(SKYPAY)',
         content: (
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
             <li>
               Open <span className="font-bold">GCash</span> app and navigate to{' '}
-              <span className="font-bold">“Pay Bills”</span>, then{' '}
-              <span className="font-bold">“Payment Solutions”</span>, and select{' '}
-              <span className="font-bold">“Dragonpay”</span> (ensure correct
+              <span className="font-bold">“Bills”</span> from the menu, then{' '}
+              <span className="font-bold">“Loans”</span>, and select{' '}
+              <span className="font-bold">“SKYPAY”</span> (ensure correct
               selection).
             </li>
             <li>
               Please input the{' '}
-              <span className="font-bold">CORRECT reference_no</span> when
+              <span className="font-bold">CORRECT Contract Number</span> when
               making your repayment.
             </li>
-            <li>The minimum repayment amount is PHP 100.</li>
+            <li>
+              Please make a screenshot of the payment / keep your payment
+              confirmation sms & email.
+            </li>
           </ul>
         ),
       },
@@ -32,13 +36,13 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
             <li>
               Double-check: Carefully check the{' '}
               <span className="font-bold">
-                repayment amount & reference_no before payment.
+                repayment amount & contract_no before payment.
               </span>
             </li>
             <li>
               Use Official App:{' '}
               <span className="font-bold">
-                Only get reference_no from our official app.
+                Only get contract_no from our official app.
               </span>
             </li>
             <li>
@@ -74,25 +78,30 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   Paymaya: {
     isOnline: true,
     logo: 'paymaya',
+    referenceNumberTitle: 'Contract Number',
     contents: [
       {
-        title: 'Repay Instructions via Paymaya',
+        title: 'Repay Instructions via MAYA(SKYPAY)',
         content: (
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
             <li>
-              Open <span className="font-bold">PayMaya </span> app and navigate
-              to <span className="font-bold">“Pay Bills”</span>, then{' '}
-              <span className="font-bold">“Payment Solutions”</span>, and select{' '}
-              <span className="font-bold">“Dragonpay”</span> (ensure correct
+              Open <span className="font-bold">MAYA </span> app and navigate to{' '}
+              <span className="font-bold">“Bills”</span> from the menu, then{' '}
+              <span className="font-bold">“Loans”</span>, and select{' '}
+              <span className="font-bold">“SKYPAY”</span> (ensure correct
               selection).
             </li>
             <li>
               Please input the{' '}
-              <span className="font-bold">CORRECT reference_no</span> in{' '}
-              <span className="font-bold">“Account number”</span> text box when
-              making your repayment.
+              <span className="font-bold">
+                CORRECT Account Number (Contract Number)
+              </span>{' '}
+              when making your repayment.
             </li>
-            <li>The minimum repayment amount is PHP 100.</li>
+            <li>
+              Please make a screenshot of the payment / keep your payment
+              confirmation sms & email.
+            </li>
           </ul>
         ),
       },
@@ -103,13 +112,13 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
             <li>
               Double-check: Carefully check the{' '}
               <span className="font-bold">
-                repayment amount & reference_no before payment.
+                repayment amount & contract_no before payment.
               </span>
             </li>
             <li>
               Use Official App:{' '}
               <span className="font-bold">
-                Only get reference_no from our official app.
+                Only get contract_no from our official app.
               </span>
             </li>
             <li>
@@ -141,6 +150,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   'Cebuana Lhuillier': {
     isOnline: false,
     logo: 'cebuana',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any Cebuana Lhuillier branch',
     instruction1Content: 'Mon-Sat (8:00AM - 5:30PM) Hours may vary by location',
     instruction2Title: 'Complete Bills Payment form',
@@ -156,6 +166,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   'M Lhuillier': {
     isOnline: false,
     logo: 'mlhuillier',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any M Lhuillier branch',
     instruction1Content:
       "Go to the nearest M Lhuillier. Ask the staff that you'd like to make a bills payment.",
@@ -172,6 +183,9 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   '7-ELEVEN': {
     isOnline: false,
     logo: '7eleven',
+    receiverTitle: 'Biller',
+    receiverContent: 'SKYPAY',
+    referenceNumberTitle: 'Contract Number',
     instruction1Title: 'Visit 7-Eleven',
     instruction1Content:
       'Go to the CliQQ Kiosk, choose Bills Payment and look for the name of receiver. For contactless payment, you can also download the CliQQ app.',
@@ -186,9 +200,10 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
   'SM Store': {
-    receiverTitleKey: 'billerCompany',
     isOnline: false,
     logo: 'smpay',
+    receiverTitle: 'Biller Company',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any SM Store branch',
     instruction1Content:
       'Go to the nearest SM Store. Get the Validation Slip in counter for payment.',
@@ -205,6 +220,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   'Palawan Pawnshop': {
     isOnline: false,
     logo: 'palawan_pawnshop',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit Palawan Pawnshop',
     instruction1Content:
       "Go to the nearest Palawan Pawnshop. Ask the staff that you'd like to make a payment.",
@@ -219,9 +235,10 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
   'Robinson Supermarket': {
-    receiverTitleKey: 'biller',
     isOnline: false,
     logo: 'robinsons_supermarket',
+    receiverTitle: 'Biller',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit Robinsons Supermarket',
     instruction1Content:
       "Go to the nearest Robinsons Supermarket and look for Robinsons business center. Ask the staff that you'd like to make a payment.",
@@ -238,6 +255,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   'RD Pawnshop': {
     isOnline: false,
     logo: 'rd_pawnshop',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit RD Pawnshop',
     instruction1Content:
       "Go to the nearest RD Pawnshop and inform the staff that you'd like to make a payment.",
@@ -254,6 +272,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   ECPay: {
     isOnline: false,
     logo: 'ecpay',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit ECPay partner outlet',
     instruction1Content:
       "Go to the nearest ECPay partner outlet and inform the staff that you'd like to make a payment.",
@@ -270,6 +289,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   TrueMoney: {
     isOnline: false,
     logo: 'truemoney',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any TrueMoney Outlet',
     instruction1Content:
       "Go to the nearest TrueMoney Outlet and inform the staff that you'd like to make a payment.",
@@ -286,6 +306,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   'LBC Express': {
     isOnline: false,
     logo: 'lbc',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any LBC Express branch',
     instruction1Content:
       "Go to the nearest LBC Express branch and inform the staff that you'd like to make a payment.",
@@ -302,6 +323,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   Lazada: {
     isOnline: false,
     logo: 'lazada',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any Lazada',
     instruction1Content:
       "Go to the nearest USSC Outlet and inform the staff that you'd like to make a payment.",
@@ -318,6 +340,7 @@ export const skyPayDocumentMap: IPayMethodDocumentMap = {
   USSC: {
     isOnline: false,
     logo: 'ussc',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any USSC Outlet',
     instruction1Content:
       "Go to the nearest USSC Outlet and inform the staff that you'd like to make a payment.",

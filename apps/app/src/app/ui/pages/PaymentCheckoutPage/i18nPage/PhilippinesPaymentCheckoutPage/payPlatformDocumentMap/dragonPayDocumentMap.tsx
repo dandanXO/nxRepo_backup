@@ -141,6 +141,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   'Cebuana Lhuillier': {
     isOnline: false,
     logo: 'cebuana',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any Cebuana Lhuillier branch',
     instruction1Content: 'Mon-Sat (8:00AM - 5:30PM) Hours may vary by location',
     instruction2Title: 'Complete Bills Payment form',
@@ -156,6 +157,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   'M Lhuillier': {
     isOnline: false,
     logo: 'mlhuillier',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any M Lhuillier branch',
     instruction1Content:
       "Go to the nearest M Lhuillier. Ask the staff that you'd like to make a bills payment.",
@@ -172,6 +174,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   '7-ELEVEN': {
     isOnline: false,
     logo: '7eleven',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit 7-Eleven',
     instruction1Content:
       'Go to the CliQQ Kiosk, choose Bills Payment and look for the name of receiver. For contactless payment, you can also download the CliQQ app.',
@@ -186,9 +189,10 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
   'SM Store': {
-    receiverTitleKey: 'billerCompany',
     isOnline: false,
     logo: 'smpay',
+    receiverTitle: 'Biller Company',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any SM Store branch',
     instruction1Content:
       'Go to the nearest SM Store. Get the Validation Slip in counter for payment.',
@@ -205,6 +209,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   'Palawan Pawnshop': {
     isOnline: false,
     logo: 'palawan_pawnshop',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit Palawan Pawnshop',
     instruction1Content:
       "Go to the nearest Palawan Pawnshop. Ask the staff that you'd like to make a payment.",
@@ -219,9 +224,10 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
   'Robinson Supermarket': {
-    receiverTitleKey: 'biller',
     isOnline: false,
     logo: 'robinsons_supermarket',
+    receiverTitle: 'Biller',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit Robinsons Supermarket',
     instruction1Content:
       "Go to the nearest Robinsons Supermarket and look for Robinsons business center. Ask the staff that you'd like to make a payment.",
@@ -238,6 +244,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   'RD Pawnshop': {
     isOnline: false,
     logo: 'rd_pawnshop',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit RD Pawnshop',
     instruction1Content:
       "Go to the nearest RD Pawnshop and inform the staff that you'd like to make a payment.",
@@ -254,6 +261,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   ECPay: {
     isOnline: false,
     logo: 'ecpay',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit ECPay partner outlet',
     instruction1Content:
       "Go to the nearest ECPay partner outlet and inform the staff that you'd like to make a payment.",
@@ -270,6 +278,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   TrueMoney: {
     isOnline: false,
     logo: 'truemoney',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any TrueMoney Outlet',
     instruction1Content:
       "Go to the nearest TrueMoney Outlet and inform the staff that you'd like to make a payment.",
@@ -286,6 +295,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   'LBC Express': {
     isOnline: false,
     logo: 'lbc',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any LBC Express branch',
     instruction1Content:
       "Go to the nearest LBC Express branch and inform the staff that you'd like to make a payment.",
@@ -302,6 +312,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   Lazada: {
     isOnline: false,
     logo: 'lazada',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any Lazada',
     instruction1Content:
       "Go to the nearest USSC Outlet and inform the staff that you'd like to make a payment.",
@@ -318,6 +329,7 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   USSC: {
     isOnline: false,
     logo: 'ussc',
+    receiverContent: 'Dragonpay',
     instruction1Title: 'Visit any USSC Outlet',
     instruction1Content:
       "Go to the nearest USSC Outlet and inform the staff that you'd like to make a payment.",

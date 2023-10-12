@@ -9,7 +9,9 @@ interface IContent {
 type TPayMethodDocumentMapContent = {
   isOnline: boolean;
   logo: string;
-  receiverTitleKey?: string;
+  receiverTitle?: string;
+  receiverContent?: string;
+  referenceNumberTitle?: string;
   contents?: IContent[];
   instruction1Title?: string;
   instruction1Content?: string;
