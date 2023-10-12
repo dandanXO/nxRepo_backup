@@ -244,7 +244,7 @@ const PhilippinesRepaymentDetailPage = ({
                   />
                   <div className="text-secondary-variant text-xs font-medium leading-tight">
                     {t(
-                      status === 'OVERDUE'
+                      overdueDays > 0
                         ? '2ndRepaymentOverDueNotice'
                         : '2ndRepaymentNotOverDueNotice'
                     )}
