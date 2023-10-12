@@ -20,7 +20,6 @@ const CustomerServicePage = () => {
       ? 'guest'
       : indexPage?.user?.bankCardName || '';
   const { mailToURL } = useMailToRUL(mailContentName);
-
   return (
     <div className="flex h-full w-screen flex-col">
       <div
@@ -57,8 +56,8 @@ const CustomerServicePage = () => {
           <div className="my-5">
             <Horizontal />
           </div>
+          {/* NOTE: figma - 未認證的時候不顯示，認證過（狀態不等於0時）才顯示 */}
           {indexPage.user.state !== USER_AUTH_STATE.ready &&
-            indexPage.user.state !== USER_AUTH_STATE.authing &&
             indexPage.indexAPI?.customerServiceUrl &&
             indexPage.indexAPI?.customerServiceUrl !== '' && (
               <>
