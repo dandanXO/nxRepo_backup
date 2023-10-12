@@ -16,6 +16,7 @@ import { PageContent } from '../../../../core-components/PageContent';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
 import CopyButton from '../../components/CopyButton';
 import { i18nPaymentInstructionPage } from '../../translations';
+import { PayPlatformDocument } from './PayPlatformDocument';
 import getPlatformValue from './getPlatformValue';
 
 const Logo = (path: string) => {
@@ -56,6 +57,7 @@ const PhilippinesPaymentCheckoutPage = ({
   repayAmount,
   payTypeName,
   payPlatName,
+  upstreamChannel,
 }: PostRepayCreateResponse) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -65,6 +67,9 @@ const PhilippinesPaymentCheckoutPage = ({
   const { referenceNo, qrCode, barcode } = payload;
 
   const expireDate = moment().add(1, 'days');
+
+  const payPlatformDocument = new PayPlatformDocument(upstreamChannel || '');
+  const { getPayMethodDocument } = payPlatformDocument;
 
   return (
     <PageContent className="grow p-0">
@@ -77,7 +82,9 @@ const PhilippinesPaymentCheckoutPage = ({
           <img
             className="my-2 h-8 object-fill"
             alt="logo"
-            src={Logo(`payment_logo_${getPlatformValue(payTypeName, 'logo')}`)}
+            src={Logo(
+              `payment_logo_${getPayMethodDocument(payTypeName, 'logo')}`
+            )}
           />
         </div>
 
@@ -88,20 +95,27 @@ const PhilippinesPaymentCheckoutPage = ({
           content={<Money money={repayAmount || 0} />}
         />
 
-        {!getPlatformValue(payTypeName, 'isOnline') && (
+        {!getPayMethodDocument(payTypeName, 'isOnline') && (
           <Item
-            title={t(
-              (getPlatformValue(payTypeName, 'receiverTitleKey') as string) ||
-                'receiver'
-            )}
-            content={payPlatName}
+            title={
+              (getPayMethodDocument(payTypeName, 'receiverTitle') as string) ||
+              'Name of Receiver'
+            }
+            content={
+              getPayMethodDocument(payTypeName, 'receiverContent') as string
+            }
           />
         )}
 
-        {barcode && !getPlatformValue(payTypeName, 'isOnline') ? null : (
+        {barcode && !getPayMethodDocument(payTypeName, 'isOnline') ? null : (
           <Item
             className="mb-1"
-            title={t('referenceNumber')}
+            title={
+              (getPayMethodDocument(
+                payTypeName,
+                'referenceNumberTitle'
+              ) as string) || 'Reference Number'
+            }
             content={referenceNo}
             extra={
               getPlatformValue(payTypeName, 'isOnline') ? (
@@ -150,10 +164,10 @@ const PhilippinesPaymentCheckoutPage = ({
 
         <Divider />
 
-        {(getPlatformValue(payTypeName, 'isOnline') || barcode) && (
+        {(getPayMethodDocument(payTypeName, 'isOnline') || barcode) && (
           <div className="my-4 text-xs">
             {payTypeName === 'GCash' || payTypeName === 'Paymaya' ? (
-              (getPlatformValue(payTypeName, 'contents') as any).map(
+              (getPayMethodDocument(payTypeName, 'contents') as any).map(
                 (i: any) => {
                   // console.log('PayMaya',i)
                   return (
@@ -179,33 +193,62 @@ const PhilippinesPaymentCheckoutPage = ({
           </div>
         )}
 
-        {!getPlatformValue(payTypeName, 'isOnline') && !barcode && (
+        {!getPlatformValue(payTypeName, 'isOnline') &&
+          !barcode &&
+          payTypeName !== '7-ELEVEN' && (
+            <div>
+              <div className="text-ctext-primary mb-2 text-xs font-bold">
+                instructions
+              </div>
+              <ul className="text-ctext-secondary list-outside list-decimal pl-4 text-xs">
+                {[1, 2, 3, 4].map((index) => (
+                  <li key={index} className="mb-2">
+                    <div className="text-ctext-primary text-sm font-bold leading-[12px]">
+                      {
+                        getPlatformValue(
+                          payTypeName,
+                          `instruction${index}Title`
+                        ) as any
+                      }
+                    </div>
+
+                    <div className="mt-[2px] leading-[12px]">
+                      {
+                        getPlatformValue(
+                          payTypeName,
+                          `instruction${index}Content`
+                        ) as any
+                      }
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+        {payTypeName === '7-ELEVEN' && (
           <div>
             <div className="text-ctext-primary mb-2 text-xs font-bold">
               instructions
             </div>
             <ul className="text-ctext-secondary list-outside list-decimal pl-4 text-xs">
-              {[1, 2, 3, 4].map((index) => (
-                <li key={index} className="mb-2">
-                  <div className="text-ctext-primary text-sm font-bold leading-[12px]">
-                    {
-                      getPlatformValue(
-                        payTypeName,
-                        `instruction${index}Title`
-                      ) as any
-                    }
-                  </div>
-
-                  <div className="mt-[2px] leading-[12px]">
-                    {
-                      getPlatformValue(
-                        payTypeName,
-                        `instruction${index}Content`
-                      ) as any
-                    }
-                  </div>
-                </li>
-              ))}
+              <li className="mb-2">
+                Visit any <span className="font-bold">7-11</span> Branch, and
+                tell staff that you need to pay{' '}
+                <span className="font-bold">“SkyPay Bill”</span>.
+              </li>
+              <li className="mb-2">
+                Go to Machine, select{' '}
+                <span className="font-bold">“BILLS PAYMENT”</span>, then{' '}
+                <span className="font-bold">“MORE BILLERS”</span>, tap
+                <span className="font-bold">“Loans”</span> and select{' '}
+                <span className="font-bold">“SKYPAY”</span>.
+              </li>
+              <li className="mb-2">
+                Input <span className="font-bold">Contract Number</span> when
+                making your repayment.
+              </li>
+              <li className="mb-2">Please keep the receipt.</li>
             </ul>
           </div>
         )}
