@@ -82,7 +82,7 @@ export const LoanAgreementModal = (props: Props) => {
         </div>
         <Navigation className={'pt-5'} title={'Loan Agreement'} />
       </div>
-      <div className={'content flex-1'}>
+      <div className={'content flex-1 overflow-auto'}>
         {/*NOTE: [Techniques to prevent CSS override by base application](https://medium.com/whatfix-techblog/techniques-to-prevent-css-override-by-base-application-53a00ff1451a)*/}
         {/*NOTE: htmlData樣式會被影響*/}
         {(GlobalAppMode.mode === 'IndexWebview' ||
