@@ -14,6 +14,7 @@ import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { Button } from '../../core-components/Button';
 import { Navigation } from '../../core-components/Navigation';
 import Select from '../../core-components/Select';
+import { PageContent } from '../../core-components/PageContent';
 
 interface ICategory {
   value: number | undefined;
@@ -122,7 +123,7 @@ const FeedbackPage = () => {
   };
 
   return (
-    <div className={`flex flex-col`}>
+    <div className={`flex flex-col h-full`}>
       <Navigation
         title={'Feedback'}
         back={() => {
@@ -131,7 +132,7 @@ const FeedbackPage = () => {
           );
         }}
       />
-      <div className={`flex flex-col p-4 pt-0.5`}>
+      <PageContent>
         <div className="grow">
           <Select
             containerClassNames={cx(
@@ -208,7 +209,7 @@ const FeedbackPage = () => {
             }}
           />
         </div>
-      </div>
+      </PageContent>
     </div>
   );
 };

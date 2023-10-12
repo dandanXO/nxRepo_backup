@@ -94,7 +94,7 @@ const Uni18nUploadPaymentReceiptPage = (
     orderNo: pageQueryString.orderNo || location.state.orderNo || '',
   });
   return (
-    <div>
+    <div className='h-full'>
       {isShowNavigation() && (
         <Navigation
           title={props.t('Upload Payment Receipt') as string}

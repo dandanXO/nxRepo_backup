@@ -50,7 +50,8 @@ const PersonalInfoPage = () => {
   const { maskPhoneNumber } = useUserPhoneNumber();
 
   return (
-    <TabPage className="bg-cbg-primary flex flex-col">
+    // NOTE : pb-123px (tab:63px + Log out mb:67px)
+    <TabPage className="bg-cbg-primary flex flex-col pb-[123px]">
       <div className={`my-4 flex flex-row items-center justify-center`}>
         <div className={`mr-3`}>
           <img src={UserIcon} />

@@ -26,7 +26,7 @@ export const LoginForm = () => {
   });
 
   const validatePhoneFormat = (value: string) => {
-    const isError = value.length !== 10;
+    const isError = String(Number(value)) === 'NaN' || String(value) === '' || value.length !== 10;
     setPhoneNumberData({
       data: value,
       isValidation: !isError,
@@ -70,7 +70,13 @@ export const LoginForm = () => {
       })
     );
   };
-
+  useEffect(() => {
+    dispatch(
+      LoginPageUseCaseActionsInstance.system.resendSeconds({
+        resendSeconds: 0,
+      })
+    );
+  }, [])
   useEffect(() => {
     if (resendSeconds === 0) {
       setHasSendOTP(false);
@@ -141,38 +147,14 @@ export const LoginForm = () => {
           label={'+91' as string}
           labelType="left"
           value={phoneNumberData.data}
+          textAlign={'left'}
           disabled={false}
           errorMessage={phoneNumberData.errorMessage}
           onBlur={(event: any) => {
             validatePhoneFormat(event.target.value);
           }}
           onChange={(event: any) => {
-            const value = event.target.value;
-            if (String(Number(value)) === 'NaN' || String(value) === '') {
-              setPhoneNumberData({
-                data: '',
-                isValidation: false,
-                errorMessage: '*Please enter the correct phone number.',
-              });
-              setEnableGetOTP(false);
-            } else if (value.length !== 10) {
-              setPhoneNumberData({
-                data: value,
-                isValidation: false,
-                errorMessage: '*Please enter the correct phone number.',
-              });
-              setEnableGetOTP(false);
-            } else {
-              setPhoneNumberData((prev) => {
-                return {
-                  ...prev,
-                  data: value,
-                  isValidation: true,
-                  errorMessage: '',
-                };
-              });
-              setEnableGetOTP(true);
-            }
+            validatePhoneFormat(event.target.value);
           }}
         />
         <div className={`text-cTextFields-placeholder-main mt-4`}>
