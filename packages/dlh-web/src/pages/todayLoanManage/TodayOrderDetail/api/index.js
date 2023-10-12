@@ -7,7 +7,7 @@ const api = {
     userContacts: '/hs/admin/collect-today/user-contacts',
     userSmsLogs: '/hs/admin/collect-today/user-sms-logs',
     operator: '/hs/admin/user/contactDetail',
-    urgeRecord: '/hs/admin/orderToday/collectionList',
+    urgeRecord: '/hs/admin/collect-today/collect-records',
     addRecord: '/hs/admin/orderToday/addCollection',
     partialRepayment: '/hs/admin/orderToday/partial-repayment',
     detailTabControl: '/hs/admin/commons/admin-switch'
@@ -25,7 +25,7 @@ const getOperator = (params) => {
     return axios.post(api.operator, params);
 }
 const getUrgeRecord = (params) => {
-    return axios.post(api.urgeRecord, params);
+    return axios.get(`${api.urgeRecord}/${params.overdueId}`, { params: { pageSize: 300 } });
 }
 const addUrgeRecord = (params) => {
     return axios.post(api.addRecord, params);

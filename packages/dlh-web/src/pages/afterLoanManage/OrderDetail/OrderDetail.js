@@ -59,21 +59,22 @@ const urgeRecordColumns = [
         }
     },
     {
-        title: <FormattedMessage id="customer.status" />, dataIndex: 'status', key: 'status', width: '15%',
+        title: <FormattedMessage id="customer.status" />, dataIndex: 'followUpResult', key: 'followUpResult', width: '15%',
         render (text) {
             const customerStatus = {
-                0: "page.table.none",
-                1: "customer.status.promise",
-                2: "customer.status.missed",
-                3: "customer.status.turned.off",
-                4: "customer.status.lost.contact",
-                5: "customer.status.other"
+              'Promise': "customer.status.promise",
+              'Missed': "customer.status.missed",
+              'TurnedOff': "customer.status.turned.off",
+              'InvalidPhoneNumber': "customer.status.invalid.phone.number",
+              'Other': "customer.status.other",
+              'BadAttitude': "customer.status.bad.attitude",
+              'FinancialDifficulties': "customer.status.financial.difficulties"
             }
-            return text !== null ? <FormattedMessage id={customerStatus[text]} /> : '';
+            return text !== null ? <FormattedMessage id={customerStatus[text] || 'page.table.none'} /> : '';
         }
     },
-    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'remark', key: 'remark', width: '50%' },
-    { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collectorname', key: 'collectorname' }
+    { title: <FormattedMessage id="windowPage.collect.remark" />, dataIndex: 'trackingRecord', key: 'trackingRecord', width: '50%' },
+    { title: <FormattedMessage id="windowPage.collector" />, dataIndex: 'collector', key: 'collector' }
 ];
 //展期记录
 const standOverRecordColumns = [
