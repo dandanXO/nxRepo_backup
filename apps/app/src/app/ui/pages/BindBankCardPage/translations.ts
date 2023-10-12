@@ -21,6 +21,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
 
       // NOTICE: India
       // NOTE: Bank Account
+      'Add A New Card':'Add A New Card',
       'For KYC, your Cardholder name and Aadhaar name should be match.':
         'For KYC, your Cardholder name and Aadhaar name should be match.',
       'UPI ID': 'UPI ID',
@@ -33,6 +34,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
 
       // NOTICE: Pakistan
       // NOTE: Mobile Wallet
+      'Add New Card':'Add New Card',
       'Choose the method to receive the money':
         'Choose the method to receive the money',
       'Mobile wallet': 'Mobile wallet',
@@ -62,7 +64,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
         'Please make sure your mobile number match.',
 
       // NOTICE: Mexico
-      BindBankCardNavigator: 'Bank information',
+      'Bank information': 'Bank information',
       Advice: 'Advice',
       'Only your debit card can be linked.':
         'Only your debit card can be linked.',
@@ -83,7 +85,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
         'Account number must be {{inputLength}} digits only.',
     },
     es_MX: {
-      BindBankCardNavigator: 'Información Bancaria',
+      'Bank information': 'Información Bancaria',
       Advice: 'Consejo',
       'Only your debit card can be linked.':
         'Solo se puede vincular su tarjeta de débito.',
@@ -153,7 +155,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
         'আপনার মোবাইল নম্বর মেলে তা নিশ্চিত করুন.',
     },
     en_PH: {
-      BindBankCardNavigator: 'Add a New Wallet',
+      'Add a New Wallet': 'Add a New Wallet',
       walletSelectorLabel: 'E-Payment',
       eWalletHolderName: 'E-Payment Holder Name',
       mobileNumber: 'Mobile Number',

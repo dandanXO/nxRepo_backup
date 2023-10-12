@@ -25,6 +25,8 @@ import { MexicoBindBankAccountPage } from './i18nPage/MexicoBindBankAccountPage'
 import { PakistanBindBankAccountPage } from './i18nPage/PakistanBindBankAccountPage';
 import PhilippinesBindBankAccountPage from './i18nPage/PhilippinesBindBankAccountPage';
 import { i18nBankBindAccountPage } from './translations';
+import { AllCountryIdentityName } from 'libs/shared/domain/src/country/enum/AllCountryIdentityName';
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
 
 const BindBankCardPage = () => {
   // NOTICE: Common
@@ -63,11 +65,19 @@ const BindBankCardPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
 
+  const bindBankCardNavigator = {
+    [AllCountryIdentityName.IN]: 'Add A New Card',
+    [AllCountryIdentityName.PK]: 'Add New Card',
+    [AllCountryIdentityName.MX]: 'Bank information',
+    [AllCountryIdentityName.PH]: 'Add a New Wallet',
+    [AllCountryIdentityName.BN]: 'Add A New Card',
+  }[environment.country] || 'Add A New Card';
+  
   return (
     <div className="overflow-auto">
       {isShowNavigation() && (
         <Navigation
-          title={t('BindBankCardNavigator')}
+          title={t(bindBankCardNavigator)}
           back={() => {
             navigate(-1);
           }}
