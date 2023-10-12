@@ -68,7 +68,9 @@ const PhilippinesPaymentCheckoutPage = ({
 
   const expireDate = moment().add(1, 'days');
 
-  const payPlatformDocument = new PayPlatformDocument(upstreamChannel || '');
+  const payPlatformDocument = new PayPlatformDocument(
+    upstreamChannel || 'dragon_pay'
+  );
   const { getPayMethodDocument } = payPlatformDocument;
 
   return (
@@ -149,7 +151,7 @@ const PhilippinesPaymentCheckoutPage = ({
             barcode,
           ])}
         >
-          <div>This reference number expires in 24 hours</div>
+          <div>This number expires in 24 hours</div>
           <div>
             Expires: {expireDate.format('ddd MM-DD-yyyy ')}at
             {expireDate.format(' HH:mm a')}
