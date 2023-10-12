@@ -348,7 +348,7 @@ module.exports = (config, context) => {
   }
 
   // isProduction
-  if (false) {
+  if (isProduction) {
     // finalConfig.plugins.push(
     //   new CleanWebpackPlugin({
     //     verbose: true,
