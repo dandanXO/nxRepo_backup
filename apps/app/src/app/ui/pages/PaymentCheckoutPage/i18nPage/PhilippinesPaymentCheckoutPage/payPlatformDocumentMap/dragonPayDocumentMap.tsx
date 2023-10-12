@@ -1,13 +1,6 @@
-interface IContent {
-  title: string;
-  content: React.ReactNode;
-}
+import { IPayMethodDocumentMap } from '../PayPlatformDocument';
 
-const platformMap: {
-  [key: 'isOnline' | string]: {
-    [key: string]: string | boolean | IContent[];
-  };
-} = {
+export const dragonPayDocumentMap: IPayMethodDocumentMap = {
   GCash: {
     isOnline: true,
     logo: 'gcash',
@@ -339,13 +332,3 @@ const platformMap: {
       'You will receive a transaction receipt; please keep this receipt for your reference.',
   },
 };
-
-const getPlatformValue = (platform: string | undefined, key: string) => {
-  if (platform === undefined) return null;
-  try {
-    return platformMap[platform][key];
-  } catch (error) {
-    return 'Platform Not Found';
-  }
-};
-export default getPlatformValue;

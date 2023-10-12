@@ -16,6 +16,7 @@ import { PageContent } from '../../../../core-components/PageContent';
 import { RepaymentDetailPageUseCaseActions } from '../../../RepaymentDetailPage/userUsecaseSaga';
 import CopyButton from '../../components/CopyButton';
 import { i18nPaymentInstructionPage } from '../../translations';
+import { PayPlatformDocument } from './PayPlatformDocument';
 import getPlatformValue from './getPlatformValue';
 
 const Logo = (path: string) => {
@@ -56,6 +57,7 @@ const PhilippinesPaymentCheckoutPage = ({
   repayAmount,
   payTypeName,
   payPlatName,
+  upstreamChannel,
 }: PostRepayCreateResponse) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -65,6 +67,9 @@ const PhilippinesPaymentCheckoutPage = ({
   const { referenceNo, qrCode, barcode } = payload;
 
   const expireDate = moment().add(1, 'days');
+
+  const payPlatformDocument = new PayPlatformDocument(upstreamChannel || '');
+  const { getPayMethodDocument } = payPlatformDocument;
 
   return (
     <PageContent className="grow p-0">
@@ -77,7 +82,9 @@ const PhilippinesPaymentCheckoutPage = ({
           <img
             className="my-2 h-8 object-fill"
             alt="logo"
-            src={Logo(`payment_logo_${getPlatformValue(payTypeName, 'logo')}`)}
+            src={Logo(
+              `payment_logo_${getPayMethodDocument(payTypeName, 'logo')}`
+            )}
           />
         </div>
 

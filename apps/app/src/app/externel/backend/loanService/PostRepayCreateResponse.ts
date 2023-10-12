@@ -21,6 +21,8 @@ export interface PostRepayCreateResponse {
   payPlatName?: string;
   /** 支付方式 */
   payTypeName?: string;
+  /** 上游支付通道 */
+  upstreamChannel?: string;
   /** 業務參數 */
   payload: {
     /** 共用 */
