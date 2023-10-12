@@ -72,6 +72,7 @@ const PhilippinesConfirmBindBankCardModal = ({
           <Button
             outlineTheme="round"
             text={t('Confirm')}
+            disable={modalState.bindBankcardModal.isProcessing}
             onClick={() => {
               dispatch(
                 BindBankcardAction.user.bindBankcardSaveAction({
