@@ -46,6 +46,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
     loanAmount = 0,
     // dailyFee = 0,
     balance = 0,
+    coupon = 0,
     applyDate = '',
     extensibleOverdueDays = 0,
   } = currentData ?? {};
@@ -217,6 +218,16 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             />
 
             <Divider />
+
+            {status !== 'EXTEND' && (
+              <ListItem
+                title={t('coupon')}
+                text={<Money money={coupon} isNagetive={true} />}
+                titleColor="text-ctext-secondary"
+                textColor="text-ctext-primary"
+                isFetching={isFetching}
+              />
+            )}
 
             <ListItem
               title={t('Reduction Amount')}

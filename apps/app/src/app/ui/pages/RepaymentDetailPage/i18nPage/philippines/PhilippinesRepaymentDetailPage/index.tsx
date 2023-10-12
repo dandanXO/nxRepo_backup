@@ -64,6 +64,7 @@ const PhilippinesRepaymentDetailPage = ({
     penaltyInterest = 0,
     loanAmount = 0,
     balance = 0,
+    coupon = 0,
     applyDate = '',
   } = currentData || {};
   const repaymentDate =
@@ -288,6 +289,13 @@ const PhilippinesRepaymentDetailPage = ({
               />
 
               <Divider />
+
+              {status !== 'EXTEND' && (
+                <SelfListItem
+                  titleKey="coupon"
+                  text={<Money money={coupon} isNagetive />}
+                />
+              )}
 
               <SelfListItem
                 titleKey="Reduction Amount"
