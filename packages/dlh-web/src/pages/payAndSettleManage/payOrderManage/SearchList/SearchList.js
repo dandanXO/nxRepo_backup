@@ -33,7 +33,7 @@ class SearchList extends Component{
         const ele = allMerchants.map(item => <Option key={item.merchantId} value={item.merchantId} >{item.name}</Option>);
         return [<Option value={''} key={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>].concat(ele);
     }
-  
+
 
     render() {
         const { allPayPlatList, allPayMchList, OrderStatus, form: { getFieldDecorator }, intl, isSuperAdmin, initTime ,btnDisabled} = this.props;
@@ -144,7 +144,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.payment.merchant"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.repayment.merchant"})}>
                                 {
                                     getFieldDecorator('mchId', {
                                         initialValue: ""
@@ -196,7 +196,7 @@ class SearchList extends Component{
                                 }
                             </Form.Item>
                         </Col>
-                      
+
                         <Col lg={36} xl={24} style={{ textAlign: 'right' }}>
                             <Button onClick={this.handleClick} type={'primary'}><FormattedMessage id="page.search.list.search" /></Button>
                         </Col>

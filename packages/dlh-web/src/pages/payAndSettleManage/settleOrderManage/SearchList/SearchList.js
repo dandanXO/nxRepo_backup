@@ -17,7 +17,7 @@ class SearchList extends Component{
 
         };
     }
-    
+
     handleClick = () => {
         const { handleSearch, form: { getFieldsValue } } = this.props;
         // const { visible,allSettlePlatList,allSettleTypeList, form: { getFieldDecorator,getFieldsValue } } = this.props;
@@ -119,7 +119,7 @@ class SearchList extends Component{
                             </Form.Item>
                         </Col>
                         <Col lg={12} xl={8}>
-                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.repayement.platfrom"})}>
+                            <Form.Item {...formItemLayout} label={intl.formatMessage({id : "page.search.list.payment.platform"})}>
                                 {
                                     getFieldDecorator('platId', {
                                         initialValue: ""

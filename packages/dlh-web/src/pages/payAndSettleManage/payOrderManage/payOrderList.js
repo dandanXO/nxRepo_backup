@@ -152,7 +152,7 @@ class PayOrderList extends Component {
                 }
             }, {
                 width: 100,
-                title: this.props.intl.formatMessage({ id: "page.search.list.payment.merchant" }),
+                title: this.props.intl.formatMessage({ id: "page.search.list.repayment.merchant" }),
                 dataIndex: 'mchNo',
                 key: 'mchNo',
                 render(text) {
@@ -261,7 +261,7 @@ class PayOrderList extends Component {
                 key: 'finishTime',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
@@ -277,7 +277,7 @@ class PayOrderList extends Component {
                 key: 'createDate',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
@@ -411,7 +411,7 @@ class PayOrderList extends Component {
         getTableData(this.searchParams);
     }
 
- 
+
 
     handlePageChange = (pagination) => {
         const { current, pageSize } = pagination;

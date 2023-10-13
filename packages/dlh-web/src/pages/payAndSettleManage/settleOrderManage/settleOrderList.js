@@ -175,7 +175,7 @@ class SettleOrderList extends Component {
             }
             ,{
                 width: 110,
-                title: props.intl.formatMessage({id : "page.search.list.repayement.platfrom"}),
+                title: props.intl.formatMessage({id : "page.search.list.payment.platform"}),
                 dataIndex: 'platName',
                 key: 'platName',
                 render(text) {
@@ -307,7 +307,7 @@ class SettleOrderList extends Component {
                 key: 'finishTime',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
@@ -323,7 +323,7 @@ class SettleOrderList extends Component {
                 key: 'createDate',
                 className: styles.smallText,
                 render(text) {
-                    let showStr = !!text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
+                    let showStr = text ? moment(text).format('YYYY-MM-DD HH:mm:ss') : '';
                     return (
                         <CopyToClipboard text={showStr} onCopy={_this.onCopy}>
                             <Tooltip title={showStr}>
@@ -378,7 +378,7 @@ class SettleOrderList extends Component {
             this.setState({btnDisabled: false});
             getTableData({ ...params, pageNum:1, pageSize:10 });
             download(res, this.props.intl.formatMessage({id : "page.table.substitute.order.list"}, {expDate : Date.now()}));
-         
+
         }).catch(() => {
             hide && hide();
             this.setState({btnDisabled: false});
