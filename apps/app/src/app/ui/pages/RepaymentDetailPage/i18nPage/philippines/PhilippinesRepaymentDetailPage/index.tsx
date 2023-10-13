@@ -231,7 +231,7 @@ const PhilippinesRepaymentDetailPage = ({
                     className="font-bold"
                     titleKey="1stRepaymentTitle"
                     titleColor="text-ctext-primary"
-                    text={<Money money={balance} />}
+                    text={<Money money={orderAmount} />}
                   />
                   <Divider />
                   <SelfListItem
