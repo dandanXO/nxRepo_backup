@@ -7,5 +7,8 @@ export const isInApp = (): boolean => {
   // const useragent = navigator.userAgent || navigator.vendor;
   // return Boolean(useragent.match(regex));
   // NOTE: 需求主要偵測是在 我們 app 的 Webview 嗎
-  return !!(window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']);
+  const isInAndroidAppWebview = !!(window['AppInfoTask'] && window['AppInfoTask']['getAppInfo']);
+  // NOTE: [detect ipad/iphone webview via javascript](https://stackoverflow.com/questions/4460205/detect-ipad-iphone-webview-via-javascript)
+  const isInIPhoneOrIpodOrIpadAppWebview = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent);
+  return isInAndroidAppWebview || isInIPhoneOrIpodOrIpadAppWebview;
 };
