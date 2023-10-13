@@ -238,9 +238,7 @@ const PhilippinesRepaymentDetailPage = ({
                     className="font-bold"
                     titleKey="2ndRepaymentTitle"
                     titleColor="text-ctext-primary"
-                    text={
-                      status === 'OVERDUE' ? undefined : <Money money={0} />
-                    }
+                    text={overdueDays > 0 ? undefined : <Money money={0} />}
                   />
                   <div className="text-secondary-variant text-xs font-medium leading-tight">
                     {t(
