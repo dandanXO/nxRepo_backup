@@ -36,7 +36,7 @@ const RepaymentDetailPage = (props: any) => {
   }, []);
 
   return (
-    <div>
+    <div className='h-full'>
       {isShowNavigation() && (
         <Navigation
           title={'Payment Details'}
