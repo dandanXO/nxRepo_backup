@@ -96,8 +96,8 @@ export const useFinishedBindBankAccountForm = (
         MonitorUsecaseFlow.userBindBankAccountBadly(requestBody);
       })
       .finally(() => {
-      dispatch(loadingSlice.actions.updatePageLoading(false));
-    });
+        dispatch(loadingSlice.actions.updatePageLoading(false));
+      });
 
   }, [
     props.postBankBindSave,
