@@ -11,9 +11,8 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
             <li>
               Open <span className="font-bold">GCash</span> app and navigate to{' '}
-              <span className="font-bold">“Pay Bills”</span>, then{' '}
-              <span className="font-bold">“Payment Solutions”</span>, and select{' '}
-              <span className="font-bold">“Dragonpay”</span> (ensure correct
+              <span className="font-bold">“Loans”</span>, then
+              <span className="font-bold">“Dragon Loans”</span>(ensure correct
               selection).
             </li>
             <li>
@@ -81,9 +80,8 @@ export const dragonPayDocumentMap: IPayMethodDocumentMap = {
           <ul className="text-ctext-secondary mt-2 list-outside list-decimal pl-5 text-xs">
             <li>
               Open <span className="font-bold">PayMaya </span> app and navigate
-              to <span className="font-bold">“Pay Bills”</span>, then{' '}
-              <span className="font-bold">“Payment Solutions”</span>, and select{' '}
-              <span className="font-bold">“Dragonpay”</span> (ensure correct
+              to <span className="font-bold">“Loans”</span>, then{' '}
+              <span className="font-bold">“Dragon Loans”</span>(ensure correct
               selection).
             </li>
             <li>
