@@ -72,8 +72,6 @@ export const useFinishedBindBankAccountForm = (
       .unwrap()
       .then((data: any) => {
         // Notice: bind account successfully
-        dispatch(loadingSlice.actions.updatePageLoading(false));
-
         Modal.alert({
           show: true,
           mask: true,
@@ -96,7 +94,11 @@ export const useFinishedBindBankAccountForm = (
       })
       .catch(() => {
         MonitorUsecaseFlow.userBindBankAccountBadly(requestBody);
+      })
+      .final(() => {
+        dispatch(loadingSlice.actions.updatePageLoading(false));
       });
+
   }, [
     props.postBankBindSave,
     props.ifscData && props.ifscData.data,
