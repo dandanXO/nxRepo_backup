@@ -6,4 +6,4 @@ export {MexicoCountry} from "./country/MexicoCountry"
 export {PhilippinesCountry} from "./country/PhilippinesCountry"
 export {AllLanguage} from "./language/enum/AllLanguage"
 
-export {IEnvironment} from "./environment/types/IEnvironment"
+export type {IEnvironment} from "./environment/types/IEnvironment"

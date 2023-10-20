@@ -1,5 +1,5 @@
-
 ## Recipe
+
 - Git
   - [Commit Message Guidelines](https://gist.github.com/brianclements/841ea7bffdb01346392c)
 - Nx
@@ -38,22 +38,22 @@
 
 ```shell
 # --dry-run
-nx g @nrwl/workspace:library feature-bank --dry-run --directory=account/mobile --tags=scope:mobile,type:feature
+nx g @nx/workspace:library feature-bank --dry-run --directory=account/mobile --tags=scope:mobile,type:feature
 
 # directory: mobile/account/feature-bank , library-type: feature, name: feature-bank, tags: scope:mobile, type:feature
-nx g @nrwl/workspace:library feature-bank --directory=account/mobile --tags=scope:mobile,type:feature
+nx g @nx/workspace:library feature-bank --directory=account/mobile --tags=scope:mobile,type:feature
 
 # directory: mobile/shared/ui , library-type: ui, name: ui tags: scope:mobile, type:ui
 # dry run
-nx g @nrwl/react:library ui --dry-run --directory=mobile/shared --tags=scope:mobile,type:ui
+nx g @nx/react:library ui --dry-run --directory=mobile/shared --tags=scope:mobile,type:ui
 # run
-nx g @nrwl/react:library ui --directory=mobile/shared --tags=scope:mobile,type:ui
+nx g @nx/react:library ui --directory=mobile/shared --tags=scope:mobile,type:ui
 
 # next.js add page
-nx g @nrwl/next:page demo --project=admin
+nx g @nx/next:page demo --project=admin
 
-# next.js add component 
-nx g @nrwl/next:component protable --project=admin
+# next.js add component
+nx g @nx/next:component protable --project=admin
 
 ```
 

@@ -17,7 +17,9 @@ const {
   isDashboard,
   PUBLIC_PATH,
   ASSET_OUTPUT_PATH,
+  prebuild,
 } = require('./webpack.config.common');
+
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
@@ -348,7 +350,7 @@ module.exports = (config, context) => {
   }
 
   // isProduction
-  if (isProduction) {
+  if (isProduction && prebuild === false) {
     // finalConfig.plugins.push(
     //   new CleanWebpackPlugin({
     //     verbose: true,

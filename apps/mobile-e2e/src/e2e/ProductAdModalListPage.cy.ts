@@ -1,19 +1,20 @@
 //NOTICE: PageObject
 // https://www.toolsqa.com/cypress/page-object-pattern-in-cypress/
-
 // NOTICE: [Day 26]User Story/ATDD/BDD/TDD - 總結
 //  https://ithelp.ithome.com.tw/articles/10109206
-
 // TODO: Page Object Model
+import moment from 'moment-timezone';
+import React from 'react';
 
+import {
+  GetPersonalLoanRecommendResponse,
+  RecommendProduct,
+} from '../../../mobile/src/app/api/GetPersonalLoanRecommend';
+import { PostApplyProductRequest } from '../../../mobile/src/app/api/PostApplyProductRequest';
+import { PostLoanQuotaRefreshResponse } from '../../../mobile/src/app/api/PostLoanQuotaRefreshResponse';
 import { getGreeting } from '../support/app.po';
-import {GetPersonalLoanRecommendResponse, RecommendProduct} from "../../../mobile/src/app/api/GetPersonalLoanRecommend";
-import moment from "moment-timezone";
-import {PostLoanQuotaRefreshResponse} from "../../../mobile/src/app/api/PostLoanQuotaRefreshResponse";
-import React from "react";
-import {PostApplyProductRequest} from "../../../mobile/src/app/api/PostApplyProductRequest";
 
-console.log("[e2e] env", Cypress.env())
+console.log('[e2e] env', Cypress.env());
 
 // describe('mobile', () => {
 //   beforeEach(() => {
@@ -30,102 +31,101 @@ console.log("[e2e] env", Cypress.env())
 //
 // });
 
-describe("iphone-3一鍵快速借款", () => {
-
+describe('iphone-3一鍵快速借款', () => {
   const productList: RecommendProduct[] = [
     {
-      approvedRate:	"string",
+      approvedRate: 'string',
       // 广告通过率
 
-      approvedTime:	"string",
+      approvedTime: 'string',
       // 广告通过时间
 
-      csContact:	"string",
+      csContact: 'string',
       // 客服電話
 
-      csEmail:	"string",
+      csEmail: 'string',
       // 產品客服郵件
 
-      interestRate:	"1.8%",
+      interestRate: '1.8%',
       // 建议借款服务费率
 
-      loanableAmount:	1000,
+      loanableAmount: 1000,
       // 建议金额
 
-      logoUrl: "string",
+      logoUrl: 'string',
       // Logo icon
 
-      productId:	1,
+      productId: 1,
       // 產品编号
 
-      productName: "AAASAAD LOAN",
+      productName: 'AAASAAD LOAN',
       // 產品名稱
 
-      terms: "91 days",
+      terms: '91 days',
       // 建议借款周期
     },
     {
-      approvedRate:	"string",
+      approvedRate: 'string',
       // 广告通过率
 
-      approvedTime:	"string",
+      approvedTime: 'string',
       // 广告通过时间
 
-      csContact:	"string",
+      csContact: 'string',
       // 客服電話
 
-      csEmail:	"string",
+      csEmail: 'string',
       // 產品客服郵件
 
-      interestRate:	"0.8%",
+      interestRate: '0.8%',
       // 建议借款服务费率
 
-      loanableAmount:	5000,
+      loanableAmount: 5000,
       // 建议金额
 
-      logoUrl: "string",
+      logoUrl: 'string',
       // Logo icon
 
       productId: 2,
       // 產品编号
 
-      productName: "PRR LOAN",
+      productName: 'PRR LOAN',
       // 產品名稱
 
-      terms: "5 days",
+      terms: '5 days',
       // 建议借款周期
     },
     {
-      approvedRate:	"string",
+      approvedRate: 'string',
       // 广告通过率
 
-      approvedTime:	"string",
+      approvedTime: 'string',
       // 广告通过时间
 
-      csContact:	"string",
+      csContact: 'string',
       // 客服電話
 
-      csEmail:	"string",
+      csEmail: 'string',
       // 產品客服郵件
 
-      interestRate:	"1.0%",
+      interestRate: '1.0%',
       // 建议借款服务费率
 
-      loanableAmount:	2000,
+      loanableAmount: 2000,
       // 建议金额
 
-      logoUrl: "string",
+      logoUrl: 'string',
       // Logo icon
 
       productId: 3,
       // 產品编号
 
-      productName: "DOGGY LOAN",
+      productName: 'DOGGY LOAN',
       // 產品名稱
 
-      terms: "12 days",
+      terms: '12 days',
       // 建议借款周期
-    }
+    },
   ];
 
   beforeEach(() => {
@@ -134,7 +134,7 @@ describe("iphone-3一鍵快速借款", () => {
 
     // cy.viewport('iphone-3')
     cy.viewport(320, 300);
-    cy.visit("/product-ad-modal-list?token=45d9ab38654247e88406fa06308fa604");
+    cy.visit('/product-ad-modal-list?token=45d9ab38654247e88406fa06308fa604');
     // cy.intercept("**.sentry.io**", {
     //   statusCode: 200,
     // })
@@ -161,20 +161,20 @@ describe("iphone-3一鍵快速借款", () => {
     //     // but before the response is sent to the browser
     //   })
     // })
-  })
+  });
 
   afterEach(() => {
     // cy.screenshot();
-  })
+  });
 
-  it("1.無額度，無風控到期。畫面應顯示提示用戶語句。用戶不能 Apply。", () => {
+  it('1.無額度，無風控到期。畫面應顯示提示用戶語句。用戶不能 Apply。', () => {
     // NOTICE: GIVEN: 無額度，無風控到期
     // NOTICE: THEN: 畫面顯示倒數計時器、可用金額 0
     // NOTICE: THEN: API Refresh 應該完全不會呼叫
     // NOTICE: THEN: 用戶不能 Apply。
 
     // NOTICE: GIVEN: 無額度，無風控到期
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -188,60 +188,62 @@ describe("iphone-3一鍵快速借款", () => {
           min: 0,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         processing: false,
         riskReject: false,
       } as GetPersonalLoanRecommendResponse,
-    }).then(() => {
-      // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
-      cy.get(".container").contains("Insufficient funds to provide product recommendations. Please adjust your budget accordingly.")
-      cy.get(".price").contains("-");
-
-    }).as("fetchProducts")
+    })
+      .then(() => {
+        // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
+        cy.get('.container').contains(
+          'Insufficient funds to provide product recommendations. Please adjust your budget accordingly.'
+        );
+        cy.get('.price').contains('-');
+      })
+      .as('fetchProducts');
 
     // NOTE: 應該只呼叫一次
     // NOTICE: THEN: 用戶不能 Apply。
     /**
-* TODO(@nrwl/cypress): Nesting Cypress commands in a should assertion now throws.
-* You should use .then() to chain commands instead.
-* More Info: https://docs.cypress.io/guides/references/migration-guide#-should
-**/
-cy.get("@fetchProducts")
+     * TODO(@nx/cypress): Nesting Cypress commands in a should assertion now throws.
+     * You should use .then() to chain commands instead.
+     * More Info: https://docs.cypress.io/guides/references/migration-guide#-should
+     **/
+    cy.get('@fetchProducts')
       .should('have.length', 1)
       .then(() => {
         // NOTE: way1
-        cy.get("button").should('have.css', 'background-color', 'rgb(229, 229, 229)');
+        cy.get('button').should(
+          'have.css',
+          'background-color',
+          'rgb(229, 229, 229)'
+        );
         // NOTE: way2
         // cy.get("button").then(($el) => {
         //   expect($el).to.have.css('background-color', 'rgb(229, 229, 229)')
         // })
-
-
-      })
+      });
 
     // NOTICE: THEN: API Refresh 應該完全不會呼叫
-    cy.intercept("/api/v2/loan/quota/refresh", {
+    cy.intercept('/api/v2/loan/quota/refresh', {
       statusCode: 200,
       body: {
-        effective:	false,
+        effective: false,
         // 用户额度是否有效
-        quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(-4, 'day').format('YYYY-MM-DD HH:mm:ss'),
         // 用户额度有效时间
       } as PostLoanQuotaRefreshResponse,
-    }).as("fetchRefresh");
-    cy.get("@fetchRefresh.all").should('have.length', 0);
-
-
-
+    }).as('fetchRefresh');
+    cy.get('@fetchRefresh.all').should('have.length', 0);
   });
 
-  it.only("2.有額度，無風控到期。用戶應該能 Apply。", () => {
+  it.only('2.有額度，無風控到期。用戶應該能 Apply。', () => {
     // NOTICE: GIVEN: 有額度，無風控到期
     // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
     // NOTICE: THEN: 用戶應該能 Apply。
 
     // NOTICE: GIVEN: 有額度，無風控到期
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -255,44 +257,47 @@ cy.get("@fetchProducts")
           min: 100,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         processing: false,
         riskReject: false,
-      } as GetPersonalLoanRecommendResponse
+      } as GetPersonalLoanRecommendResponse,
     }).then(() => {
       // NOTICE: THEN: 畫面顯示倒數計時器、可用金額
-      cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
-      cy.get(".price").contains("2000");
+      cy.get('.title').contains('LIMITED TIME OFFER COUNTDOWN :');
+      cy.get('.price').contains('2000');
       // NOTICE: THEN: 用戶應該能 Apply。
-      cy.get("button").should('have.css', 'background-color', 'rgb(245, 139, 16)');
-    })
+      cy.get('button').should(
+        'have.css',
+        'background-color',
+        'rgb(245, 139, 16)'
+      );
+    });
 
-    cy.intercept("/api/v2/product/apply", (req) => {
-      console.log("req", req);
+    cy.intercept('/api/v2/product/apply', (req) => {
+      console.log('req', req);
       req.continue((res) => {
-        console.log("res", res);
+        console.log('res', res);
         const stubResponse: PostApplyProductRequest = {
           applyQuota: 1000,
-          productIds: [1, 2, 3]
-        }
+          productIds: [1, 2, 3],
+        };
         res.send({
           statusCode: 200,
           body: stubResponse,
         });
-      })
-    })
-
+      });
+    });
   });
 
-  it("3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。", () => {
+  it('3.無額度，風控到期，但是在七天內。自動幫用戶刷新。並且有拿到能 APPLY資料。', () => {
     // NOTICE GIVEN 無額度，風控到期，但是在七天內
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN 自動幫用戶刷新
 
-    console.log("[3]1");
+    console.log('[3]1');
 
     // NOTICE GIVEN 無額度，風控到期，但是在七天內
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -306,64 +311,69 @@ cy.get("@fetchProducts")
           min: 0,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(-4, 'day').format('YYYY-MM-DD HH:mm:ss'),
         processing: false,
         riskReject: false,
-      } as GetPersonalLoanRecommendResponse
+      } as GetPersonalLoanRecommendResponse,
     }).then(() => {
-      console.log("[3]6");
-      console.log("[dog] request 1")
+      console.log('[3]6');
+      console.log('[dog] request 1');
       // cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9")
-    })
+    });
 
-    console.log("[3]2");
+    console.log('[3]2');
 
     // NOTE: APP 會自動去抓取
     // NOTE: 模擬繼續 refresh
-    cy.intercept("/api/v2/loan/quota/refresh", {
+    cy.intercept('/api/v2/loan/quota/refresh', {
       statusCode: 200,
       body: {
-        effective:	false,
+        effective: false,
         // 用户额度是否有效
-        quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(-4, 'day').format('YYYY-MM-DD HH:mm:ss'),
         // 用户额度有效时间
-      } as PostLoanQuotaRefreshResponse
-    }).as("refresh2").then(() => {
-      console.log("[3]7");
-      console.log("[dog] request 2")
-      // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
-      cy.get(".button-container > button > span")
-        .should("contain", "Refreshing . . . .")
+      } as PostLoanQuotaRefreshResponse,
     })
-
+      .as('refresh2')
+      .then(() => {
+        console.log('[3]7');
+        console.log('[dog] request 2');
+        // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
+        cy.get('.button-container > button > span').should(
+          'contain',
+          'Refreshing . . . .'
+        );
+      });
 
     cy.screenshot();
 
-    console.log("[3]3");
+    console.log('[3]3');
 
     // NOTE: 模擬最後一次更新拿到成功了
     cy.wait(20 * 1000).then(() => {
-      console.log("[3]8");
-    })
+      console.log('[3]8');
+    });
 
-    console.log("[3]4");
+    console.log('[3]4');
 
-    cy.intercept("/api/v2/loan/quota/refresh", {
+    cy.intercept('/api/v2/loan/quota/refresh', {
       statusCode: 200,
       body: {
-        effective:	true,
+        effective: true,
         // 用户额度是否有效
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         // 用户额度有效时间
-      } as PostLoanQuotaRefreshResponse
-    }).as("lastRefresh").then(() => {
-      console.log("[3]9");
-      console.log("[dog] request 3")
-      // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
+      } as PostLoanQuotaRefreshResponse,
     })
+      .as('lastRefresh')
+      .then(() => {
+        console.log('[3]9');
+        console.log('[dog] request 3');
+        // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
+      });
 
     // NOTE: 模擬拿到新的風控資料了
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -377,40 +387,40 @@ cy.get("@fetchProducts")
           min: 100,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         processing: false,
         riskReject: false,
-      } as GetPersonalLoanRecommendResponse
-    }).as("lastGetProduct").then(() => {
-      console.log("[3]10");
-      console.log("[dog] request 4")
-      // cy.get(".button-container").contains("Re-Acquire The Loan Amount")
-      // cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9")
+      } as GetPersonalLoanRecommendResponse,
     })
-    console.log("[3]5");
+      .as('lastGetProduct')
+      .then(() => {
+        console.log('[3]10');
+        console.log('[dog] request 4');
+        // cy.get(".button-container").contains("Re-Acquire The Loan Amount")
+        // cy.get(".button-container > button > div").should("have.class", "loadingio-spinner-spinner-e19blwp8l9")
+      });
+    console.log('[3]5');
 
-
-    cy.intercept("/api/v2/product/apply", (req) => {
-      console.log("req", req);
+    cy.intercept('/api/v2/product/apply', (req) => {
+      console.log('req', req);
       req.continue((res) => {
-        console.log("res", res);
+        console.log('res', res);
         const stubResponse: PostApplyProductRequest = {
           applyQuota: 1000,
-          productIds: [1, 2, 3]
-        }
+          productIds: [1, 2, 3],
+        };
         res.send({
           statusCode: 200,
           body: stubResponse,
         });
-      })
-    })
+      });
+    });
 
-    cy.wait(20 * 1000)
-      .wait(["@lastRefresh", "@lastGetProduct"]);
+    cy.wait(20 * 1000).wait(['@lastRefresh', '@lastGetProduct']);
     cy.screenshot();
   });
 
-  it("4.無額度，風控到期，已超過七天，不幫用戶自動刷新。不能 APPLY。除非刷新。", () => {
+  it('4.無額度，風控到期，已超過七天，不幫用戶自動刷新。不能 APPLY。除非刷新。', () => {
     // NOTICE: GIVEN 用戶無額度，用戶風控到期，已超過七天
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN: 不幫用戶自動刷新
@@ -418,10 +428,10 @@ cy.get("@fetchProducts")
     // NOTE: GIVEN 用戶無額度，用戶風控到期，已超過七天
     let requestId = 0;
     let interceptPersonRecommendCount = 0;
-    cy.intercept("/api/v2/product/personal-recommend?count=", (req) => {
+    cy.intercept('/api/v2/product/personal-recommend?count=', (req) => {
       req.continue((res) => {
         interceptPersonRecommendCount = interceptPersonRecommendCount + 1;
-        if(interceptPersonRecommendCount === 1) {
+        if (interceptPersonRecommendCount === 1) {
           // console.log("[step] 4")
           res.send({
             statusCode: 200,
@@ -438,37 +448,38 @@ cy.get("@fetchProducts")
                 min: 0,
                 // 拉霸最低額度
               },
-              quotaExpireTime: moment().add(-10,'day').format('YYYY-MM-DD HH:mm:ss'),
+              quotaExpireTime: moment()
+                .add(-10, 'day')
+                .format('YYYY-MM-DD HH:mm:ss'),
               processing: false,
               riskReject: false,
-            } as GetPersonalLoanRecommendResponse
-          })
-        } else if(interceptPersonRecommendCount >= 2) {
-          new Error("不應該顯示此行");
+            } as GetPersonalLoanRecommendResponse,
+          });
+        } else if (interceptPersonRecommendCount >= 2) {
+          new Error('不應該顯示此行');
         }
-      })
-    }).as("fetchProducts")
+      });
+    }).as('fetchProducts');
 
     // NOTICE: THEN: 不幫用戶自動刷新
-    cy.wait("@fetchProducts").then(() => {
-      cy.get(".button-container").contains("Re-Acquire The Loan Amount")
-    })
+    cy.wait('@fetchProducts').then(() => {
+      cy.get('.button-container').contains('Re-Acquire The Loan Amount');
+    });
 
-
-    cy.intercept("/api/v2/loan/quota/refresh", {
+    cy.intercept('/api/v2/loan/quota/refresh', {
       statusCode: 200,
       body: {
-        effective:	true,
+        effective: true,
         // 用户额度是否有效
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         // 用户额度有效时间
-      } as PostLoanQuotaRefreshResponse
+      } as PostLoanQuotaRefreshResponse,
     }).then(() => {
       //
     });
 
     // NOTE: 模擬拿到新的風控資料了
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -482,48 +493,46 @@ cy.get("@fetchProducts")
           min: 100,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         processing: false,
         riskReject: false,
-      } as GetPersonalLoanRecommendResponse
+      } as GetPersonalLoanRecommendResponse,
     }).then(() => {
       //
     });
 
-    cy.intercept("/api/v2/product/apply", (req) => {
-      console.log("req", req);
+    cy.intercept('/api/v2/product/apply', (req) => {
+      console.log('req', req);
       req.continue((res) => {
-        console.log("res", res);
+        console.log('res', res);
         const stubResponse: PostApplyProductRequest = {
           applyQuota: 1000,
-          productIds: [1, 2, 3]
-        }
+          productIds: [1, 2, 3],
+        };
         res.send({
           statusCode: 200,
           body: stubResponse,
         });
-      })
-    })
-
-
-  })
+      });
+    });
+  });
 
   // NOTICE: 但如果用戶在其他借貸APP已經借滿，會噴出錯誤唷
-  it("5.有額度，風控到期，不管幾天內。用戶要自己手動刷新。不幫他模擬刷新。也可不刷新直接借款 APPLY，並且會跳出實際借款依照可用額度。", () => {
+  it('5.有額度，風控到期，不管幾天內。用戶要自己手動刷新。不幫他模擬刷新。也可不刷新直接借款 APPLY，並且會跳出實際借款依照可用額度。', () => {
     // NOTICE: GIVEN 有額度，風控到期，不管幾天內。
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN 用戶要自己手動刷新。不幫他模擬刷新。也可不刷新直接借款 APPL
     // NOTICE: THEN: 用戶應該能 Apply，並且會跳出實際借款依照可用額度。
 
     let requestId = 1;
-    let interceptPersonRecommendCount = 0
+    let interceptPersonRecommendCount = 0;
 
     // NOTICE: GIVEN 有額度，風控到期，不管幾天內。
-    cy.intercept("/api/v2/product/personal-recommend?count=", (req) => {
+    cy.intercept('/api/v2/product/personal-recommend?count=', (req) => {
       req.continue((res) => {
         interceptPersonRecommendCount = interceptPersonRecommendCount + 1;
-        if(interceptPersonRecommendCount === 1) {
-          console.log("[step] 4")
+        if (interceptPersonRecommendCount === 1) {
+          console.log('[step] 4');
           res.send({
             statusCode: 200,
             body: {
@@ -539,14 +548,16 @@ cy.get("@fetchProducts")
                 min: 100,
                 // 拉霸最低額度
               },
-              quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
+              quotaExpireTime: moment()
+                .add(-4, 'day')
+                .format('YYYY-MM-DD HH:mm:ss'),
               processing: false,
               riskReject: false,
               stubRequest: true,
-            } as GetPersonalLoanRecommendResponse
-          })
-        } else if(interceptPersonRecommendCount === 2) {
-          console.log("[step] 7")
+            } as GetPersonalLoanRecommendResponse,
+          });
+        } else if (interceptPersonRecommendCount === 2) {
+          console.log('[step] 7');
           res.send({
             statusCode: 200,
             body: {
@@ -562,67 +573,65 @@ cy.get("@fetchProducts")
                 min: 3000,
                 // 拉霸最低額度
               },
-              quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+              quotaExpireTime: moment()
+                .add(1, 'day')
+                .format('YYYY-MM-DD HH:mm:ss'),
               processing: false,
               riskReject: false,
               stubRequest: true,
-            } as GetPersonalLoanRecommendResponse
-          })
+            } as GetPersonalLoanRecommendResponse,
+          });
         }
-      })
-    }).as("fetchProducts")
+      });
+    }).as('fetchProducts');
 
     // NOTE: 等待第 1 次
-    cy.wait("@fetchProducts").then(() => {
-      if(interceptPersonRecommendCount === 1) {
-        console.log("[step] 5")
+    cy.wait('@fetchProducts').then(() => {
+      if (interceptPersonRecommendCount === 1) {
+        console.log('[step] 5');
 
         // NOTE: THEN 用戶要自己手動刷新。也可不刷新直接借款
-        cy.get(".price").contains("8000")
-        cy.get(".button-container").contains("Re-Acquire The Loan Amount")
-      } else if(interceptPersonRecommendCount === 2) {
+        cy.get('.price').contains('8000');
+        cy.get('.button-container').contains('Re-Acquire The Loan Amount');
+      } else if (interceptPersonRecommendCount === 2) {
         // NOTE: 這邊不會監聽到
         // console.log("[step] 8")
         // cy.get(".price").contains("2000")
         // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
       }
-    })
+    });
 
     // NOTE: 先執行 intercept, 所以 requestId === 1
-    cy
-      .intercept("/api/v2/loan/quota/refresh", {
-        statusCode: 200,
-        body: {
-          requestId: requestId++,
-          effective:	true,
-          // 用户额度是否有效
-          quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
-          // 用户额度有效时间
-        } as PostLoanQuotaRefreshResponse
-      }).then(() => {
-        // cy.get(".button-container button").click();
-        // cy.get(".button-container > button > span").should("contain", "Refreshing . . . .")
-      })
+    cy.intercept('/api/v2/loan/quota/refresh', {
+      statusCode: 200,
+      body: {
+        requestId: requestId++,
+        effective: true,
+        // 用户额度是否有效
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
+        // 用户额度有效时间
+      } as PostLoanQuotaRefreshResponse,
+    }).then(() => {
+      // cy.get(".button-container button").click();
+      // cy.get(".button-container > button > span").should("contain", "Refreshing . . . .")
+    });
 
-
-    cy.intercept("/api/v2/product/apply", (req) => {
+    cy.intercept('/api/v2/product/apply', (req) => {
       req.continue((res) => {
         const stubResponse: PostApplyProductRequest = {
           applyQuota: 1000,
-          productIds: [1, 2, 3]
-        }
+          productIds: [1, 2, 3],
+        };
         res.send({
           statusCode: 200,
           body: stubResponse,
         });
-      })
-    })
-
-
+      });
+    });
   });
 
   // NOTICE: 但如果用戶在其他借貸APP已經借滿，會噴出錯誤唷
-  it("6.有額度，風控到期，不管幾天內。用戶要自己手動刷新。幫他模擬刷新。", () => {
+  it('6.有額度，風控到期，不管幾天內。用戶要自己手動刷新。幫他模擬刷新。', () => {
     // NOTICE: GIVEN 有額度，風控到期，不管幾天內。
     // NOTICE: WHEN 用戶瀏覽畫面
     // NOTICE: THEN 用戶要自己手動刷新。也可不刷新直接借款
@@ -672,7 +681,6 @@ cy.get("@fetchProducts")
     // console.log("[testing] date", new Date())
     // cy.wait(4000);
 
-
     // console.log("current", new Date())
 
     // const expiredDateMoment = moment(moment.unix(mockTimestamp)).add("-4", "days").tz("Asia/Kolkata")
@@ -685,16 +693,16 @@ cy.get("@fetchProducts")
     // console.log("[testing] expiredDate", expiredDate);
 
     let requestId = 1;
-    let interceptPersonRecommendCount = 0
+    let interceptPersonRecommendCount = 0;
 
-    console.log("[step] 0")
+    console.log('[step] 0');
 
     // NOTICE: GIVEN 有額度，風控到期，不管幾天內。
-    cy.intercept("/api/v2/product/personal-recommend?count=", (req) => {
+    cy.intercept('/api/v2/product/personal-recommend?count=', (req) => {
       req.continue((res) => {
         interceptPersonRecommendCount = interceptPersonRecommendCount + 1;
-        if(interceptPersonRecommendCount === 1) {
-          console.log("[step] 4")
+        if (interceptPersonRecommendCount === 1) {
+          console.log('[step] 4');
           res.send({
             statusCode: 200,
             body: {
@@ -710,13 +718,15 @@ cy.get("@fetchProducts")
                 min: 100,
                 // 拉霸最低額度
               },
-              quotaExpireTime: moment().add(-4,'day').format('YYYY-MM-DD HH:mm:ss'),
+              quotaExpireTime: moment()
+                .add(-4, 'day')
+                .format('YYYY-MM-DD HH:mm:ss'),
               processing: false,
               riskReject: false,
-            } as GetPersonalLoanRecommendResponse
-          })
-        } else if(interceptPersonRecommendCount === 2) {
-          console.log("[step] 7")
+            } as GetPersonalLoanRecommendResponse,
+          });
+        } else if (interceptPersonRecommendCount === 2) {
+          console.log('[step] 7');
           res.send({
             statusCode: 200,
             body: {
@@ -732,94 +742,100 @@ cy.get("@fetchProducts")
                 min: 3000,
                 // 拉霸最低額度
               },
-              quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+              quotaExpireTime: moment()
+                .add(1, 'day')
+                .format('YYYY-MM-DD HH:mm:ss'),
               processing: false,
               riskReject: false,
-            } as GetPersonalLoanRecommendResponse
-          })
+            } as GetPersonalLoanRecommendResponse,
+          });
         }
-      })
-    }).as("fetchProducts")
+      });
+    }).as('fetchProducts');
 
-    console.log("[step] 1")
+    console.log('[step] 1');
 
     // NOTE: 等待第 1 次
-    cy.wait("@fetchProducts").then(() => {
-      if(interceptPersonRecommendCount === 1) {
-        console.log("[step] 5")
+    cy.wait('@fetchProducts').then(() => {
+      if (interceptPersonRecommendCount === 1) {
+        console.log('[step] 5');
 
         // NOTE: THEN 用戶要自己手動刷新。也可不刷新直接借款
-        cy.get(".price").contains("8000")
-        cy.get(".button-container").contains("Re-Acquire The Loan Amount")
-      } else if(interceptPersonRecommendCount === 2) {
+        cy.get('.price').contains('8000');
+        cy.get('.button-container').contains('Re-Acquire The Loan Amount');
+      } else if (interceptPersonRecommendCount === 2) {
         // NOTE: 這邊不會監聽到
         // console.log("[step] 8")
         // cy.get(".price").contains("2000")
         // cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
       }
-    })
+    });
 
-    console.log("[step] 2")
+    console.log('[step] 2');
 
     // NOTE: 先執行 intercept, 所以 requestId === 1
-    cy
-      .intercept("/api/v2/loan/quota/refresh", {
-        statusCode: 200,
-        body: {
-          requestId: requestId++,
-          effective:	true,
-          // 用户额度是否有效
-          quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
-          // 用户额度有效时间
-        } as PostLoanQuotaRefreshResponse
-      }).then(() => {
-      console.log("[step] 6")
-      cy.get(".button-container button").click();
-      cy.get(".button-container > button > span").should("contain", "Refreshing . . . .")
-    })
+    cy.intercept('/api/v2/loan/quota/refresh', {
+      statusCode: 200,
+      body: {
+        requestId: requestId++,
+        effective: true,
+        // 用户额度是否有效
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
+        // 用户额度有效时间
+      } as PostLoanQuotaRefreshResponse,
+    }).then(() => {
+      console.log('[step] 6');
+      cy.get('.button-container button').click();
+      cy.get('.button-container > button > span').should(
+        'contain',
+        'Refreshing . . . .'
+      );
+    });
 
-    console.log("[step] 3")
+    console.log('[step] 3');
 
     // NOTE: 等待第 2 次
-    cy.wait("@fetchProducts").then(() => {
-      if(interceptPersonRecommendCount === 1) {
+    cy.wait('@fetchProducts').then(() => {
+      if (interceptPersonRecommendCount === 1) {
         // NOTE: 這邊不會監聽到
         // console.log("[step] 7")
         // cy.get(".price").contains("8000")
         // cy.get(".button-container").contains("Re-Acquire The Loan Amount")
-      } else if(interceptPersonRecommendCount === 2) {
-        console.log("[step] 8")
-        cy.get(".title").contains("LIMITED TIME OFFER COUNTDOWN :")
-        cy.get(".price").contains("7777")
+      } else if (interceptPersonRecommendCount === 2) {
+        console.log('[step] 8');
+        cy.get('.title').contains('LIMITED TIME OFFER COUNTDOWN :');
+        cy.get('.price').contains('7777');
         // NOTICE: THEN: 用戶應該能 Apply。
-        cy.get("button").should('have.css', 'background-color', 'rgb(245, 139, 16)');
+        cy.get('button').should(
+          'have.css',
+          'background-color',
+          'rgb(245, 139, 16)'
+        );
       }
-    })
+    });
 
-    cy.intercept("/api/v2/product/apply", (req) => {
-      console.log("req", req);
+    cy.intercept('/api/v2/product/apply', (req) => {
+      console.log('req', req);
       req.continue((res) => {
-        console.log("res", res);
+        console.log('res', res);
         const stubResponse: PostApplyProductRequest = {
           applyQuota: 1000,
-          productIds: [1, 2, 3]
-        }
+          productIds: [1, 2, 3],
+        };
         res.send({
           statusCode: 200,
           body: stubResponse,
         });
-      })
-    })
-
-
+      });
+    });
   });
 
-  it("7.用戶有正在審核的訂單", () => {
+  it('7.用戶有正在審核的訂單', () => {
     // NOTICE: GIVEN 用戶有正在審核的訂單
     // NOTICE: THEN 畫面顯示正在審核請稍候
 
     // NOTICE: GIVEN 用戶有正在審核的訂單
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -833,24 +849,23 @@ cy.get("@fetchProducts")
           min: 100,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         processing: true,
         riskReject: false,
-      } as GetPersonalLoanRecommendResponse
+      } as GetPersonalLoanRecommendResponse,
     }).then(() => {
       // NOTICE: THEN 畫面顯示正在審核請稍候
-      cy.get(".title").contains("Your loan application has been submitted.");
-      cy.get(".p1").contains("Please do not resubmit and wait patiently.");
-    })
+      cy.get('.title').contains('Your loan application has been submitted.');
+      cy.get('.p1').contains('Please do not resubmit and wait patiently.');
+    });
+  });
 
-  })
-
-  it("8.用戶風控被拒。顯示對應回饋畫面", () => {
+  it('8.用戶風控被拒。顯示對應回饋畫面', () => {
     // NOTICE: GIVEN 用戶風控被拒
     // NOTICE: THEN 顯示對應回饋畫面
 
     // NOTICE: GIVEN 用戶風控被拒
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -864,22 +879,24 @@ cy.get("@fetchProducts")
           min: 100,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(1,'day').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment().add(1, 'day').format('YYYY-MM-DD HH:mm:ss'),
         processing: true,
         riskReject: true,
-      } as GetPersonalLoanRecommendResponse
+      } as GetPersonalLoanRecommendResponse,
     }).then(() => {
       // NOTICE: THEN 顯示對應回饋畫面
-      cy.get(".overdue").contains("Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.");
-      cy.get(".overdue").contains("To avoid errors, we recommended that you stay on this screen.");
-    })
-
-
+      cy.get('.overdue').contains(
+        'Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.'
+      );
+      cy.get('.overdue').contains(
+        'To avoid errors, we recommended that you stay on this screen.'
+      );
+    });
   });
 
-  it("9.用戶再過一陣子就到期", () => {
+  it('9.用戶再過一陣子就到期', () => {
     // NOTICE: GIVEN 用戶再過一陣子就到期
-    cy.intercept("/api/v2/product/personal-recommend?count=", {
+    cy.intercept('/api/v2/product/personal-recommend?count=', {
       statusCode: 200,
       body: {
         products: productList,
@@ -893,31 +910,30 @@ cy.get("@fetchProducts")
           min: 100,
           // 拉霸最低額度
         },
-        quotaExpireTime: moment().add(5,'second').format('YYYY-MM-DD HH:mm:ss'),
+        quotaExpireTime: moment()
+          .add(5, 'second')
+          .format('YYYY-MM-DD HH:mm:ss'),
         processing: false,
         riskReject: false,
-      } as GetPersonalLoanRecommendResponse
+      } as GetPersonalLoanRecommendResponse,
     }).then(() => {
       // cy.get(".overdue").contains("Your current discount limit has been exhausted We are reviewing the amount you can borrow for you, please wait patiently for 30 seconds to two minutes.");
       // cy.get(".overdue").contains("To avoid errors, we recommended that you stay on this screen.");
-    })
+    });
 
-    cy.intercept("/api/v2/product/apply", (req) => {
-      console.log("req", req);
+    cy.intercept('/api/v2/product/apply', (req) => {
+      console.log('req', req);
       req.continue((res) => {
-        console.log("res", res);
+        console.log('res', res);
         const stubResponse: PostApplyProductRequest = {
           applyQuota: 1000,
-          productIds: [1, 2, 3]
-        }
+          productIds: [1, 2, 3],
+        };
         res.send({
           statusCode: 200,
-          body: stubResponse
+          body: stubResponse,
         });
-      })
-    })
-
-  })
-
-
-})
+      });
+    });
+  });
+});

@@ -1,4 +1,3 @@
-
 ## Create
 
 ```shell
@@ -7,40 +6,40 @@ npx create-nx-workspace@latest
 
 # Creating Applications and Libraries
 # https://nx.dev/packages/react
-nx g @nrwl/react:app my-new-app
-nx g @nrwl/react:app app --bundler=webpack
+nx g @nx/react:app my-new-app
+nx g @nx/react:app app --bundler=webpack
 
 
- 
+
 
 
 # [Creating a new JS library](https://nx.dev/packages/esbuild/documents/overview#creating-a-new-js-library)
 #bundler should be one of swc,tsc,rollup,vite,esbuild,none
-nx g @nrwl/js:lib shared/domain --bundler=tsc
-nx g @nrwl/js:lib shared/domain --bundler=swc
-nx g @nrwl/js:lib shared/domain --bundler=esbuild
+nx g @nx/js:lib shared/domain --bundler=tsc
+nx g @nx/js:lib shared/domain --bundler=swc
+nx g @nx/js:lib shared/domain --bundler=esbuild
 
 # Dry Run
 -d, --dryRun
-nx g @nrwl/js:lib shared/date --bundler=tsc
+nx g @nx/js:lib shared/date --bundler=tsc
 
 
 # And add a new react library as follows:
-nx g @nrwl/react:lib my-new-lib
-nx g @nrwl/react:lib shared/domain
+nx g @nx/react:lib my-new-lib
+nx g @nx/react:lib shared/domain
 
 # Generating a Component for app
-nx g @nrwl/react:component my-new-component --project=my-new-app
+nx g @nx/react:component my-new-component --project=my-new-app
 
 # Creating Hooks
-nx g @nrwl/react:hook my-new-hook --project=app
+nx g @nx/react:hook my-new-hook --project=app
 
 # Development
 # default url: http://localhost:4200/
 nx serve app
 # add package
 # windicss
-# mode: 
+# mode:
 # interpret mode, compile mode
 # https://windicss.org/posts/modes.html
 # attributify mode: https://windicss.org/posts/attributify.html
@@ -63,7 +62,9 @@ nx build my-new-lib
 ```
 
 ## Remove
-[@nrwl/workspace:remove](https://nx.dev/packages/workspace/generators/remove)
+
+[@nx/workspace:remove](https://nx.dev/packages/workspace/generators/remove)
+
 ```shell
 nx generate remove gateway
 #same

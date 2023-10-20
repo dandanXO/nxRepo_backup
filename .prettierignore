@@ -3,3 +3,5 @@
 /dist
 /coverage
 /apps/app/src/main.tsx
+
+/.nx/cache

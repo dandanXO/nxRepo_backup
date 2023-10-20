@@ -52,7 +52,7 @@ const PhilippinesRepaymentDetailPage = ({
     productName = '',
     orderNo = '',
     dueDate = '',
-    overdueDays = '',
+    overdueDays ,
     paidAmount = '',
     repayRecords = [],
     // totalRepayAmount = 0,
@@ -238,11 +238,11 @@ const PhilippinesRepaymentDetailPage = ({
                     className="font-bold"
                     titleKey="2ndRepaymentTitle"
                     titleColor="text-ctext-primary"
-                    text={overdueDays > 0 ? undefined : <Money money={0} />}
+                    text={overdueDays && overdueDays > 0 ? undefined : <Money money={0} />}
                   />
                   <div className="text-secondary-variant text-xs font-medium leading-tight">
                     {t(
-                      overdueDays > 0
+                      overdueDays && overdueDays > 0
                         ? '2ndRepaymentOverDueNotice'
                         : '2ndRepaymentNotOverDueNotice'
                     )}

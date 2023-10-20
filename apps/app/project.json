@@ -5,7 +5,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
@@ -101,7 +101,7 @@
       }
     },
     "serve-dev": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "development",
       "options": {
@@ -188,7 +188,7 @@
       }
     },
     "serve-in": {
-      "executor": "@nrwl/webpack:dev-server",
+      "executor": "@nx/webpack:dev-server",
       "options": {
         "hmr": true
       },
@@ -200,7 +200,7 @@
       "defaultConfiguration": "development"
     },
     "serve-pk": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nx/web:dev-server",
       "options": {
         "hmr": true
       },
@@ -212,7 +212,7 @@
       "defaultConfiguration": "development"
     },
     "serve-bd": {
-      "executor": "@nrwl/web:dev-server",
+      "executor": "@nx/web:dev-server",
       "options": {
         "hmr": true
       },
@@ -224,7 +224,7 @@
       "defaultConfiguration": "development"
     },
     "serve-mx": {
-      "executor": "@nrwl/webpack:dev-server",
+      "executor": "@nx/webpack:dev-server",
       "options": {
         "hmr": true
       },
@@ -236,7 +236,7 @@
       "defaultConfiguration": "development"
     },
     "serve-ph": {
-      "executor": "@nrwl/webpack:dev-server",
+      "executor": "@nx/webpack:dev-server",
       "options": {
         "hmr": true
       },
@@ -248,14 +248,14 @@
       "defaultConfiguration": "development"
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/app/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
+      "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/app"],
       "options": {
         "jestConfig": "apps/app/build/jest.config.ts",

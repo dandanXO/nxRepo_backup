@@ -12,14 +12,19 @@
     - NX Packaged-Based
       - packages/dlh-web
       - packages/cms-webpack
+
 ---
+
 ## Node
+
 ```shell
 nvm use 16.16
 ```
+
 ## Pre Development (1/1)
 
 ### NX Packaged-Based
+
 ```
 cd ./packages/dlh-web
 npm install --legacy-peer-deps
@@ -31,7 +36,9 @@ npm run dev:in
 ```
 
 ---
+
 ## Pre Development (1/2)
+
 ### NX Integrated
 
 #### Install Packages Management Tool
@@ -46,7 +53,6 @@ npm run dev:in
 pnpm add -g nx
 ```
 
-
 #### Install Packages
 
 ```shell
@@ -54,7 +60,6 @@ pnpm install
 ```
 
 ---
-
 
 ---
 
@@ -83,7 +88,7 @@ npm run dev:in
 
 ```shell
 # Generating Storybook Configuration
-nx g @nrwl/react:storybook-configuration [project-name]
+nx g @nx/react:storybook-configuration [project-name]
 ```
 
 ```shell
@@ -161,6 +166,7 @@ nx build mobile
 ## Projects Command
 
 ### Base
+
 ```shell
 nvm use 16.16.0
 node -v
@@ -174,12 +180,14 @@ nx reset
 ```
 
 ### Mobile
+
 ```shell
 pnpm nx build mobile
 pnpm nx serve mobile
 ```
 
 ### dlh-web (old admin)
+
 ```shell
 cd ./packages/dlh-web
 npm install
@@ -187,6 +195,7 @@ npm run [scripts]
 ```
 
 ### Admin (new dlh-web)
+
 ```shell
 cd ./packages/cws-webpack4
 npm run [scripts]
@@ -195,17 +204,19 @@ npm run [scripts]
 ---
 
 ## pnpm workspace (未使用)
+
 ```shell
 
 # use pnpm workspace to manage packages
 #Run pnpm import to generate a pnpm-lock.yaml file
 pnpm import # root path cannot have pnpm-lock.yaml, otherwise cannot generate packages's pnpm-lock.yaml
 # install packages's dependecies in workspace
-pnpm install 
+pnpm install
 
 ```
 
 ## Lerna (未使用)
+
 ```shell
 # install lerna
 # pnpx learn init # 無效
@@ -217,22 +228,24 @@ pnpx lerna bootstrap --use-workspaces
 ```
 
 ## nx + lerna (未使用)
-* [Integrating Nx and Lerna](https://nx.dev/recipe/lerna-and-nx)
+
+- [Integrating Nx and Lerna](https://nx.dev/recipe/lerna-and-nx)
+
 ```shell
 # install nx + pnpm workspace's packages
 pnpm install
 
 pnpm nx run build
 
-#pnpx lerna run build --scope=dlh-web 
+#pnpx lerna run build --scope=dlh-web
 #pnpx lerna run build --scope=backstage_system
 
-# install package 
-pnpm -F  backstage_system  add webpack-dev-server@3.11.0 -D 
+# install package
+pnpm -F  backstage_system  add webpack-dev-server@3.11.0 -D
 ```
 
-
 ---
+
 # Senty
 
 [Why am I seeing events with "Non-Error exception (or promise rejection) captured with keys: ..." using the JavaScript SDK?](https://sentry.zendesk.com/hc/en-us/articles/360057389753-Why-am-I-seeing-events-with-Non-Error-exception-or-promise-rejection-captured-with-keys-using-the-JavaScript-SDK-)

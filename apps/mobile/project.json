@@ -5,7 +5,7 @@
     "projectType": "application",
     "targets": {
         "build": {
-            "executor": "@nrwl/webpack:webpack",
+            "executor": "@nx/webpack:webpack",
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "production",
             "options": {
@@ -102,7 +102,7 @@
             }
         },
         "serve-build": {
-            "executor": "@nrwl/webpack:webpack",
+            "executor": "@nx/webpack:webpack",
             "outputs": ["{options.outputPath}"],
             "defaultConfiguration": "production",
             "options": {
@@ -200,7 +200,7 @@
             }
         },
         "serve": {
-            "executor": "@nrwl/webpack:dev-server",
+            "executor": "@nx/webpack:dev-server",
             "defaultConfiguration": "development",
             "options": {
                 "buildTarget": "mobile:build",
@@ -238,7 +238,7 @@
             }
         },
         "serve:in": {
-            "executor": "@nrwl/webpack:dev-server",
+            "executor": "@nx/webpack:dev-server",
             "defaultConfiguration": "development",
             "options": {},
             "configurations": {
@@ -253,7 +253,7 @@
             }
         },
         "serve:pk": {
-            "executor": "@nrwl/web:dev-server",
+            "executor": "@nx/web:dev-server",
             "defaultConfiguration": "development",
             "options": {},
             "configurations": {
@@ -268,7 +268,7 @@
             }
         },
         "serve:bd": {
-            "executor": "@nrwl/web:dev-server",
+            "executor": "@nx/web:dev-server",
             "defaultConfiguration": "development",
             "options": {},
             "configurations": {
@@ -283,7 +283,7 @@
             }
         },
         "serve2-in": {
-            "executor": "@nrwl/web:dev-server",
+            "executor": "@nx/web:dev-server",
             "options": {
                 "defaultConfiguration": "development",
                 "buildTarget": "mobile:build:development-in"
@@ -295,7 +295,7 @@
             }
         },
         "serve2-pk": {
-            "executor": "@nrwl/web:dev-server",
+            "executor": "@nx/web:dev-server",
             "options": {
                 "defaultConfiguration": "development",
                 "buildTarget": "mobile:build:development-pk"
@@ -307,7 +307,7 @@
             }
         },
         "serve2-bd": {
-            "executor": "@nrwl/web:dev-server",
+            "executor": "@nx/web:dev-server",
             "options": {
                 "defaultConfiguration": "development",
                 "buildTarget": "mobile:build:development-bd"
@@ -319,14 +319,14 @@
             }
         },
         "lint": {
-            "executor": "@nrwl/linter:eslint",
+            "executor": "@nx/eslint:lint",
             "outputs": ["{options.outputFile}"],
             "options": {
                 "lintFilePatterns": ["apps/mobile/**/*.{ts,tsx,js,jsx}"]
             }
         },
         "test": {
-            "executor": "@nrwl/jest:jest",
+            "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/apps/mobile"],
             "options": {
                 "jestConfig": "apps/mobile/jest.config.ts",
@@ -334,9 +334,8 @@
             }
         },
         "storybook": {
-            "executor": "@nrwl/storybook:storybook",
+            "executor": "@nx/storybook:storybook",
             "options": {
-                "uiFramework": "@storybook/react",
                 "port": 9000,
                 "configDir": "apps/mobile/.storybook"
             },
@@ -347,10 +346,9 @@
             }
         },
         "build-storybook": {
-            "executor": "@nrwl/storybook:build",
+            "executor": "@nx/storybook:build",
             "outputs": ["{options.outputDir}"],
             "options": {
-                "uiFramework": "@storybook/react",
                 "configDir": "apps/mobile/.storybook",
                 "outputDir": "dist/storybook/mobile"
             },

@@ -9,6 +9,8 @@ console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 console.log('process.env.NODE_COUNTRY:', process.env.NODE_COUNTRY);
 console.log('process.env.NODE_ANALYZER:', process.env.NODE_ANALYZER);
 console.log('process.env.NODE_UI_VERSION:', process.env.NODE_UI_VERSION);
+const prebuild = process.env.NODE_PRE_BUILD ? process.env.NODE_PRE_BUILD : false;
+console.log('process.env.prebuild:', prebuild);
 
 const gitRevisionPlugin = new GitRevisionPlugin();
 console.log('gitRevisionPlugin.commithash()', gitRevisionPlugin.commithash());
@@ -26,4 +28,5 @@ module.exports = {
   gitRevisionPlugin,
   ASSET_OUTPUT_PATH,
   PUBLIC_PATH,
+  prebuild,
 };
