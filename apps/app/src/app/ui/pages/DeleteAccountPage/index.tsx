@@ -14,7 +14,7 @@ const DeleteAccountPage = () => {
         title={'Delete My Account'}
         back={() => {
           navigate(
-            `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`
+            `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`, { replace: true }
           );
         }}
       />
@@ -80,7 +80,7 @@ const DeleteAccountPage = () => {
             <Button
               onClick={() => {
                 navigate(
-                  `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`
+                  `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`, { replace: true }
                 );
               }}
               text={'Don’t Delete'}

@@ -31,6 +31,7 @@ import { Status } from '../../../../../statusEnum';
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
+import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -382,6 +383,9 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               <div
                 onClick={() => {
                   if (currentData === undefined) return;
+                  dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({
+                    ...repaymentDetailPageInitialState.repaymentData,
+                  }));
                   navigate(
                     `repayment-modal?token=${getToken()}&orderNo=${
                       orderNo ?? getOrderNo()

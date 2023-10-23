@@ -62,7 +62,7 @@ const AccountVerificationPage = () => {
         title={'Account Verification'}
         back={() => {
           navigate(
-            `${PageOrModalPathEnum.DeleteAccountPage}?token=${getToken()}`
+            `${PageOrModalPathEnum.DeleteAccountPage}?token=${getToken()}`, { replace: true }
           );
         }}
       />
@@ -102,8 +102,9 @@ const AccountVerificationPage = () => {
             <Button
               onClick={() => {
                 navigate(
-                  `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`
+                  `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`, { replace: true }
                 );
+                navigate(-1)
               }}
               text={'Next Time'}
               className={`border-primary-main bg-primary-main border-[1.5px] border-solid text-white`}

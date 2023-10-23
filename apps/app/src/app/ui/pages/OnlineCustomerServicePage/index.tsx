@@ -17,7 +17,7 @@ const OnlineCustomerServicePage = () => {
         title={'Customer Service'}
         back={() => {
           navigate(
-            `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`
+            `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`, { replace: true }
           );
         }}
       />

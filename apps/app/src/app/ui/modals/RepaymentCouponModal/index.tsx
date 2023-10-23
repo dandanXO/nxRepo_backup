@@ -224,6 +224,7 @@ const RepaymentCouponModal = () => {
                         ? applicableCouponList[checkedCoupon]
                         : null,
                   },
+                  replace: true
                 }
               );
             }}
@@ -246,6 +247,7 @@ const RepaymentCouponModal = () => {
               state: {
                 ...location.state,
               },
+              replace: true
             }
           );
         }}

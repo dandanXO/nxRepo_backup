@@ -19,6 +19,9 @@ import { Button } from '../../../../core-components/Button';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
+import { useSelector } from 'react-redux';
+import { RootState } from 'apps/app/src/app/reduxStore';
+import { repaymentDetailPageInitialState } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
 
 const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   const {
@@ -34,6 +37,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
     handleConfirm,
     orderNo,
     isPostRepayCreateLoading,
+    handleRepayData
   } = props;
   const navigate = useNavigate();
 
@@ -44,9 +48,22 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
   // });
   const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState('');
   const location = useLocation();
-  const { coupon } = location.state;
+  // const { coupon } = location.state;
   const { t } = useTranslation(i18nRepaymentModal.namespace);
 
+  const repaymentData = useSelector(
+    (state: RootState) => state.repaymentDetailPage.repaymentData
+  );
+  const {
+    // balance,
+    // repayAmount,
+    // radio,
+    // payType,
+    coupon,
+    // orderNo,
+    // repayTypeList,
+  } = repaymentData;
+    console.log('coupon-------',coupon)
   return (
     <div className="text-ctext-primary p-4">
       <div className="font-2xl px-1">
@@ -132,16 +149,16 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
             className={cx('flex grow flex-nowrap justify-between text-base')}
           >
             <div className="self-center">{t('Coupon')}</div>
-            {coupon ? (
+            {coupon!==null ? (
               <div className="my-[-4px] flex grow flex-col items-end justify-between">
                 <div className="text-primary-main text-sm">
-                  {<Money money={coupon.discountAmount} isNagetive={true} />}
+                  {<Money money={coupon?.discountAmount||''} isNagetive={true} />}
                 </div>
                 <div className="text-ctext-tertiary text-xs">
                   <div>
                     {`${t('expiration date')}: `}
-                    {coupon.expireTime
-                      ? formatDate(moment(coupon.expireTime))
+                    {coupon?.expireTime
+                      ? formatDate(moment(coupon?.expireTime))
                       : ''}
                   </div>
                 </div>
@@ -162,7 +179,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
             radioValue !== 'custom' ? (
               <Money
                 money={
-                  Number(balance) - Number(coupon ? coupon.discountAmount : 0)
+                  Number(balance) - Number(coupon ? coupon?.discountAmount : 0)
                 }
               />
             ) : (
@@ -183,7 +200,7 @@ const IndiaRepaymentModal = (props: IRepaymentModalProps & any) => {
                 `${
                   PageOrModalPathEnum.RepaymentDetailPage
                 }?token=${getToken()}&orderNo=${getOrderNo()}`,
-                { state: { orderNo } }
+                { state: { orderNo }, replace: true }
               );
             }}
             text={t('Cancel')}

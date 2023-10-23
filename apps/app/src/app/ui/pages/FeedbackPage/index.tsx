@@ -114,7 +114,7 @@ const FeedbackPage = () => {
             enableIcon: false,
             onConfirm: () => {
               navigate(
-                `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`
+                `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`, { replace: true }
               );
             },
           });
@@ -128,7 +128,7 @@ const FeedbackPage = () => {
         title={'Feedback'}
         back={() => {
           navigate(
-            `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`
+            `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`, { replace: true }
           );
         }}
       />

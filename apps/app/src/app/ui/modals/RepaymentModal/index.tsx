@@ -92,6 +92,7 @@ const RepaymentModal = (props: any) => {
     ) {
       dispatch(RepaymentDetailPageUseCaseActions.user.repayData());
     } else {
+      dispatch(RepaymentDetailPageUseCaseActions.user.repayData());
       triggerGetList({ orderNo: orderNo });
     }
   }, []);
@@ -206,6 +207,7 @@ const RepaymentModal = (props: any) => {
                 handleConfirm={handleConfirm}
                 isPostRepayCreateLoading={isPostRepayCreateLoading}
                 orderNo={orderNo}
+                handleRepayData={handleRepayData}
               />
             ),
             [PakistanCountry.country]: (

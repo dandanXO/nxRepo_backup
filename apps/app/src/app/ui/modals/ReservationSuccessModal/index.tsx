@@ -19,11 +19,6 @@ const ReservationSuccessModal = () => {
 
   const handleOK = () => {
     dispatch(modalSlice.actions.updateReservationSuccessModal({ show: false }));
-    navigate(
-      `${
-        PageOrModalPathEnum.RepaymentDetailPage
-      }?token=${getToken()}&orderNo=${getOrderNo()}`
-    );
   };
   const { t } = useTranslation(i18nReservationSuccessModal.namespace);
 
