@@ -78,5 +78,6 @@
         "smsContent": "SMS Content",
         "smsSendType": "Sending Type",
         "uploadTime": "Upload Time"
-    }
+    },
+    "updateTime": "Update Time"
 }

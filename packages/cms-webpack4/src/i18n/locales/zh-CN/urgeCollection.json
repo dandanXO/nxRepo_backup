@@ -73,6 +73,7 @@
         "button": "生成还款链接",
         "copyLabel": "生成还款链接"
     },
+    "repaymentProof": "还款证明",
     "repeatLoansRate": "复借率",
     "repeatLoansRateTooltips": "该催收员跟进笔数里有复借的占比",
     "stage": "逾期阶段",

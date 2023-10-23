@@ -73,6 +73,7 @@
         "button": "Repayment Link",
         "copyLabel": "Repayment Link"
     },
+    "repaymentProof": "Repayment Proof",
     "repeatLoansRate": "Rate of Repeat Loans",
     "repeatLoansRateTooltips": "The proportion of repeat loans is included in the number of cases followed up by the collector",
     "stage": "Overdue Stage",

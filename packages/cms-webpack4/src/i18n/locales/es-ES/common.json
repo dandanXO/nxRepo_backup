@@ -78,5 +78,6 @@
         "smsContent": "Contenido del SMS",
         "smsSendType": "Tipo de envío",
         "uploadTime": "Hora de carga"
-    }
+    },
+    "updateTime": "Tiempo de actualización"
 }
