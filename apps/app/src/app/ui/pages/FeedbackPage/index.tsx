@@ -113,11 +113,14 @@ const FeedbackPage = () => {
             enableClose: false,
             enableIcon: false,
             onConfirm: () => {
-              navigate(
-                `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`, { replace: true }
-              );
+              // navigate(
+              //   `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`, { replace: true }
+              // );
             },
           });
+          navigate(
+            `${PageOrModalPathEnum.CustomerServicePage}?token=${getToken()}`, { replace: true }
+          );
         });
     }
   };
