@@ -77,9 +77,7 @@ const PayReceiptTable = (): JSX.Element => {
         '1': { text: '已确认', color: 'green' },
     };
 
-    const utrOrReceiptimgColumn: ProColumns = !['Pakistan', 'Bangladesh', 'Mexico', 'Philipine'].includes(
-        appInfo.COUNTRY,
-    )
+    const utrOrReceiptimgColumn: ProColumns = ['India'].includes(appInfo.COUNTRY)
         ? {
               title: 'UTR',
               dataIndex: 'utr',

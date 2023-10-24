@@ -1,5 +1,5 @@
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { Button, Modal, Tabs, Tag, Tooltip, message } from 'antd';
+import { Button, Image, Modal, Tabs, Tag, Tooltip, message } from 'antd';
 import i18next from 'i18next';
 import moment from 'moment';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
@@ -13,6 +13,7 @@ import {
     SinglePageTableCard,
     TableCard,
 } from '../../../shared/components/withQueryHook/Cards';
+import { DescriptionsCardDescriptions } from '../../../shared/components/withQueryHook/Cards/DescriptionsCard';
 import { useEnum } from '../../../shared/constants/useEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { formatPrice } from '../../../shared/utils/format/formatPrice';
@@ -31,7 +32,7 @@ const amountUnitMap = {
     Pakistan: 'PKR',
     Bangladesh: '৳',
     Mexico: 'MXN',
-    Philipine: '₱'
+    Philipine: '₱',
 };
 
 const amountUnit = amountUnitMap[appInfo.COUNTRY];
@@ -107,7 +108,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         const showContactListTab = !contactSwitch || isOverDue;
         const showSMSTab = !smsSwitch || isOverDue;
 
-        const orderInfoDescriptions = [
+        const orderInfoDescriptions: DescriptionsCardDescriptions[] = [
             { title: t('order:orderNumber'), dataIndex: 'orderNumber' },
             { title: t('order:mobileNumber'), dataIndex: 'mobileNumber' },
             { title: t('order:channel'), dataIndex: 'channel' },
@@ -159,7 +160,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             {
                 title: t('order:couponUsageAmount', { unit: amountUnit }),
                 dataIndex: 'couponUsageAmount',
-                render: (value) => <div style={{color: '#1890FF'}}>{value || 0}</div>
+                render: (value) => <div style={{ color: '#1890FF' }}>{value || 0}</div>,
             },
             {
                 title: t('order:reductionAmount', { unit: amountUnit }),
@@ -211,6 +212,31 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             orderInfoDescriptions.splice(0, 0, {
                 title: t('order:merchantName'),
                 dataIndex: 'merchantName',
+            });
+        }
+
+        const repaymentProofDescriptions: DescriptionsCardDescriptions[] = [
+            {
+                title: t('common:updateTime'),
+                dataIndex: 'payReceipt.lastUpdateTime',
+                span: 3,
+                labelStyle: { width: 120 },
+            },
+            {
+                title: t('urgeCollection:repaymentProof'),
+                dataIndex: 'payReceipt.receiptImgUrl',
+                span: 3,
+                labelStyle: { width: 120 },
+                render: (value) => (value ? <Image width={200} src={value} /> : '-'),
+            },
+        ];
+
+        if (['India'].includes(appInfo.COUNTRY)) {
+            repaymentProofDescriptions.splice(1, 0, {
+                title: 'UTR',
+                dataIndex: 'payReceipt.receipt',
+                span: 3,
+                labelStyle: { width: 120 },
             });
         }
 
@@ -372,6 +398,12 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                     hook={useLazyGetCollectTodayCollectRecordQuery}
                     queryBody={{ collectId }}
                     rowKey="id"
+                />
+                <DescriptionsCard
+                    title={t('urgeCollection:repaymentProof')}
+                    descriptions={repaymentProofDescriptions}
+                    hook={useGetCollectTodayOrderDetailQuery}
+                    params={{ collectId }}
                 />
             </div>
         );
