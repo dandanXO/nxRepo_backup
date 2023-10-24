@@ -15,16 +15,18 @@ const PrivacyPolicyPage = () => {
     (domain.includes('https://www.') ? domain : `https://www.${domain}`) +
     '/privacy.html';
   const dispatch = useDispatch();
-  // console.log("domain: ", domain)
-  // console.log("url: ", url)
+  console.log("domain: ", domain)
+  console.log("url: ", url)
 
   useEffect(() => {
     dispatch(loadingSlice.actions.updatePageLoading(true));
   }, []);
 
   const oniFrameLoad = () => {
+   
     dispatch(loadingSlice.actions.updatePageLoading(false));
   };
+
   return (
     <Page className={`flex flex-col`}>
       <Navigation
