@@ -19,12 +19,12 @@ const PrivacyPolicyPage = () => {
   console.log("url: ", url)
 
   useEffect(() => {
-    dispatch(loadingSlice.actions.updatePageLoading(true));
+    // dispatch(loadingSlice.actions.updatePageLoading(true));
   }, []);
 
   const oniFrameLoad = () => {
    
-    dispatch(loadingSlice.actions.updatePageLoading(false));
+    // dispatch(loadingSlice.actions.updatePageLoading(false));
   };
 
   return (
