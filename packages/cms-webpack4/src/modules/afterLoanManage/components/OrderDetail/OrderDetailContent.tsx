@@ -386,7 +386,7 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 <DescriptionsCard
                     title={t('urgeCollection:repaymentProof')}
                     descriptions={repaymentProofDescriptions}
-                    hook={useGetCollectTodayOrderDetailQuery}
+                    hook={useGetCollectOverDueOrderDetailQuery}
                     params={{ collectId }}
                 />
             </div>
