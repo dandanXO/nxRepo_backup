@@ -200,7 +200,7 @@
       "defaultConfiguration": "development"
     },
     "serve-pk": {
-      "executor": "@nx/web:dev-server",
+      "executor": "@nx/webpack:dev-server",
       "options": {
         "hmr": true
       },
@@ -212,7 +212,7 @@
       "defaultConfiguration": "development"
     },
     "serve-bd": {
-      "executor": "@nx/web:dev-server",
+      "executor": "@nx/webpack:dev-server",
       "options": {
         "hmr": true
       },
