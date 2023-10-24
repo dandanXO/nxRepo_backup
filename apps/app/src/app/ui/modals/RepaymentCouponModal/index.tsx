@@ -37,10 +37,7 @@ const RepaymentCouponModal = () => {
     (state: RootState) => state.repaymentDetailPage
   );
   const { t } = useTranslation(i18nRepaymentCouponModal.namespace);
-  const { orderNo = getOrderNo(), balance } =
-    repaymentDetailPageState.repaymentDetail || {};
-  // const { payType = 'MOBILE_WALLET' } =
-  //   repaymentDetailPageState.repaymentData || {};
+  const { orderNo = getOrderNo(), balance } = repaymentDetailPageState.repaymentDetail || {};
   const { paymentAmount } = location.state || {};
   const [triggerGetList, { currentData, isFetching }] =
     useLazyGetCouponApplicableListQuery({
@@ -191,13 +188,9 @@ const RepaymentCouponModal = () => {
         <div className="px-5 py-3">
           <Button
             text={t('Confirm')}
-            primaryTypeGradient={
-              environment.country === PakistanCountry.country
-            }
+            primaryTypeGradient={environment.country === PakistanCountry.country}
             outlineTheme={
-              [MexicoCountry.country, PhilippinesCountry.country].includes(
-                environment.country
-              )
+              [MexicoCountry.country, PhilippinesCountry.country].includes(environment.country)
                 ? 'round'
                 : undefined
             }
@@ -213,9 +206,7 @@ const RepaymentCouponModal = () => {
                 })
               );
               navigate(
-                `${
-                  PageOrModalPathEnum.RepaymentDetailPage
-                }/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
+                `${PageOrModalPathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
                 {
                   state: {
                     ...location.state,
@@ -239,10 +230,7 @@ const RepaymentCouponModal = () => {
       <Navigation
         title={''}
         back={() => {
-          navigate(
-            `${
-              PageOrModalPathEnum.RepaymentDetailPage
-            }/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
+          navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
             {
               state: {
                 ...location.state,

@@ -28,6 +28,7 @@ import { Status } from '../../../../../statusEnum';
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
+import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -319,13 +320,11 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div
               onClick={() => {
                 if (currentData === undefined) return;
-                navigate(
-                  `repayment-modal?token=${getToken()}&orderNo=${
-                    orderNo ?? getOrderNo()
-                  }`,
-                  {
-                    state: currentData,
-                  }
+                dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({
+                  ...repaymentDetailPageInitialState.repaymentData,
+                }));
+                navigate(`repayment-modal?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`,
+                  { state: currentData }
                 );
               }}
               className={cx(`grow`, {
@@ -342,23 +341,15 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div className={`text-ctext-secondary text-xs`}>
               <div>{t('Attention')}：</div>
               <ul className="list-outside list-decimal pl-3 pt-1">
-                <li>
-                  {t(
-                    'Before repayment, please make sure that you have enough balance on your bank account.'
-                  )}
-                </li>
+                <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
                 <li>
                   {t('Overdue for more than')}{' '}
                   <span className={`text-primary-main`}>{t('7 days')}</span>
-                  {t(
-                    'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.'
-                  )}
+                  {t('will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.')}
                 </li>
                 {app?.init?.csEmail?.trim() && (
                   <li>
-                    {t(
-                      'Email us if you have any questions about your responsibilities or for more information.'
-                    )}{' '}
+                    {t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
                     <span className={`text-cstate-info-main`}>
                       {app?.init?.csEmail}
                     </span>
@@ -368,24 +359,15 @@ const MexicoRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             </div>
             <div className={`my-3 flex flex-col`}>
               <div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>
-              <div
-                className={`text-ctext-primary my-3 text-center text-xs leading-none`}
-              >
-                {t(
-                  'After completing the repayment, take a screenshot and upload your repayment receipt here ▼'
-                )}
+              <div className={`text-ctext-primary my-3 text-center text-xs leading-none`}>
+                {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}
               </div>
               {/*TODO: 先兼容 querystring*/}
               <div
                 className={`mb-2 grow`}
                 onClick={() => {
-                  navigate(
-                    `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
-                      orderNo ?? getOrderNo()
-                    }`,
-                    {
-                      state: { orderNo },
-                    }
+                  navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`,
+                    { state: { orderNo }}
                   );
                 }}
               >
