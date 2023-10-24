@@ -1,6 +1,7 @@
 import type { ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
 import { Button, Space, Tag } from 'antd';
+import { Key } from 'antd/es/table/interface';
 import moment from 'moment';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';
@@ -15,6 +16,7 @@ import usePageSearchParams from '../../../shared/hooks/usePageSearchParams';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { useLazyGetOrderListQuery } from '../../api/OrderApi';
 import { GetOrderListProps, OrderListResponse } from '../../api/types/getOrderList';
+import ModifyExpiredDateModal from './ModifyExpiredDateModal';
 
 const OrderTable = (): JSX.Element => {
     const isSuperAdmin = getIsSuperAdmin();
@@ -47,6 +49,8 @@ const OrderTable = (): JSX.Element => {
 
     // state
     const [orderList, setOrderList] = useState<GetOrderListProps>({ records: [] });
+    const [selectedRow, setSelectedRow] = useState([]);
+    const [modifyExpiredModalOpen, setModifyExpiredModalOpen] = useState(false);
     const { searchList, setSearchList, savePath } = usePageSearchParams({
         searchListParams: initSearchList,
     });
@@ -88,6 +92,10 @@ const OrderTable = (): JSX.Element => {
     const handleExportOrderList = () => {
         const searchQueryString = queryString.stringify(searchList);
         window.open(`/hs/admin/order/list/download?${searchQueryString}`);
+    };
+
+    const onRowSelectChange = (selectedRowKeys: Key[]) => {
+        setSelectedRow(selectedRowKeys);
     };
 
     const statusEnum =
@@ -343,109 +351,141 @@ const OrderTable = (): JSX.Element => {
     }
 
     return (
-        <ProTable<OrderListResponse>
-            columns={columns}
-            dataSource={orderList?.records || []}
-            loading={isFetching}
-            rowKey="id"
-            // headerTitle={<Button key="button" disabled={!isImportTelSale} type="primary" ghost onClick={handleImportTelSale}>导入电销</Button>}
-            search={{
-                labelWidth: 'auto',
-                // @ts-ignore
-                optionRender: ({ searchText, resetText }, { form }) => (
+        <>
+            {modifyExpiredModalOpen && (
+                <ModifyExpiredDateModal
+                    open={modifyExpiredModalOpen}
+                    orderList={orderList?.records || []}
+                    selectedRows={selectedRow}
+                    onOk={() => null}
+                    handleCloseModal={() => setModifyExpiredModalOpen(false)}
+                />
+            )}
+            <ProTable<OrderListResponse>
+                columns={columns}
+                dataSource={orderList?.records || []}
+                loading={isFetching}
+                rowKey="id"
+                search={{
+                    labelWidth: 'auto',
+                    // @ts-ignore
+                    optionRender: ({ searchText, resetText }, { form }) => (
+                        <Space>
+                            <Button
+                                onClick={() => {
+                                    //  form.resetFields();
+                                    // @ts-ignore
+                                    form.setFieldsValue({
+                                        ...initSearchList,
+                                        applyTimeRange: '',
+                                        expireDateRange: '',
+                                        loanTimeRange: '',
+                                        riskModelName: '',
+                                        phoneNo: '',
+                                        userName: '',
+                                        merchantName: '',
+                                    });
+                                    setSearchList(initSearchList);
+                                }}
+                            >
+                                {resetText}
+                            </Button>
+                            <Button
+                                type={'primary'}
+                                onClick={() => {
+                                    const {
+                                        appName,
+                                        applyTimeRange,
+                                        channelId,
+                                        expireDateRange,
+                                        isLeng,
+                                        isOldUser,
+                                        loanTimeRange,
+                                        orderNo,
+                                        productName,
+                                        riskModelName,
+                                        status,
+                                        phoneNo,
+                                        userName,
+                                        merchantName = '',
+                                        // @ts-ignore
+                                    } = form.getFieldValue();
+                                    const merchant = merchantName ? merchantListEnum.get(merchantName)?.text : '';
+                                    setSearchList({
+                                        ...searchList,
+                                        appName,
+                                        applyTimeEnd: applyTimeRange
+                                            ? applyTimeRange[1].format('YYYY-MM-DD 23:59:59')
+                                            : '',
+                                        applyTimeStart: applyTimeRange
+                                            ? applyTimeRange[0].format('YYYY-MM-DD 00:00:00')
+                                            : '',
+                                        channelId: channelId === '0' ? '' : channelId,
+                                        expireTimeEnd: expireDateRange
+                                            ? expireDateRange[1].format('YYYY-MM-DD 23:59:59')
+                                            : '',
+                                        expireTimeStart: expireDateRange
+                                            ? expireDateRange[0].format('YYYY-MM-DD 00:00:00')
+                                            : '',
+                                        isLeng,
+                                        isOldUser,
+                                        loanTimeEnd: loanTimeRange
+                                            ? loanTimeRange[1].format('YYYY-MM-DD 23:59:59')
+                                            : '',
+                                        loanTimeStart: loanTimeRange
+                                            ? loanTimeRange[0].format('YYYY-MM-DD 00:00:00')
+                                            : '',
+                                        orderNo,
+                                        productName,
+                                        rcProvider: riskModelName,
+                                        status,
+                                        userPhone: phoneNo,
+                                        userTrueName: userName,
+                                        merchantName: isSuperAdmin ? merchant : '',
+                                        pageNum: 1,
+                                    });
+                                    form.submit();
+                                }}
+                            >
+                                {searchText}
+                            </Button>
+                        </Space>
+                    ),
+                }}
+                options={{
+                    setting: { listsHeight: 400 },
+                    reload: () => triggerGetList(searchList),
+                }}
+                toolBarRender={() => [
+                    <Button onClick={handleExportOrderList} type="primary">
+                        导出
+                    </Button>,
+                ]}
+                pagination={{
+                    showSizeChanger: true,
+                    defaultPageSize: 10,
+                    onChange: pageOnChange,
+                    total: orderList?.totalRecords,
+                    current: orderList?.records?.length === 0 ? 0 : orderList.currentPage,
+                }}
+                rowSelection={{
+                    selectedRowKeys: selectedRow,
+                    onChange: onRowSelectChange,
+                }}
+                headerTitle={
                     <Space>
                         <Button
-                            onClick={() => {
-                                //  form.resetFields();
-                                // @ts-ignore
-                                form.setFieldsValue({
-                                    ...initSearchList,
-                                    applyTimeRange: '',
-                                    expireDateRange: '',
-                                    loanTimeRange: '',
-                                    riskModelName: '',
-                                    phoneNo: '',
-                                    userName: '',
-                                    merchantName: '',
-                                });
-                                setSearchList(initSearchList);
-                            }}
+                            type="primary"
+                            ghost
+                            disabled={selectedRow.length === 0}
+                            onClick={() => setModifyExpiredModalOpen(true)}
                         >
-                            {resetText}
-                        </Button>
-                        <Button
-                            type={'primary'}
-                            onClick={() => {
-                                const {
-                                    appName,
-                                    applyTimeRange,
-                                    channelId,
-                                    expireDateRange,
-                                    isLeng,
-                                    isOldUser,
-                                    loanTimeRange,
-                                    orderNo,
-                                    productName,
-                                    riskModelName,
-                                    status,
-                                    phoneNo,
-                                    userName,
-                                    merchantName = '',
-                                    // @ts-ignore
-                                } = form.getFieldValue();
-                                const merchant = merchantName ? merchantListEnum.get(merchantName)?.text : '';
-                                setSearchList({
-                                    ...searchList,
-                                    appName,
-                                    applyTimeEnd: applyTimeRange ? applyTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    applyTimeStart: applyTimeRange
-                                        ? applyTimeRange[0].format('YYYY-MM-DD 00:00:00')
-                                        : '',
-                                    channelId: channelId === '0' ? '' : channelId,
-                                    expireTimeEnd: expireDateRange
-                                        ? expireDateRange[1].format('YYYY-MM-DD 23:59:59')
-                                        : '',
-                                    expireTimeStart: expireDateRange
-                                        ? expireDateRange[0].format('YYYY-MM-DD 00:00:00')
-                                        : '',
-                                    isLeng,
-                                    isOldUser,
-                                    loanTimeEnd: loanTimeRange ? loanTimeRange[1].format('YYYY-MM-DD 23:59:59') : '',
-                                    loanTimeStart: loanTimeRange ? loanTimeRange[0].format('YYYY-MM-DD 00:00:00') : '',
-                                    orderNo,
-                                    productName,
-                                    rcProvider: riskModelName,
-                                    status,
-                                    userPhone: phoneNo,
-                                    userTrueName: userName,
-                                    merchantName: isSuperAdmin ? merchant : '',
-                                    pageNum: 1,
-                                });
-                                form.submit();
-                            }}
-                        >
-                            {searchText}
+                            变更到期日
                         </Button>
                     </Space>
-                ),
-            }}
-            options={{
-                setting: { listsHeight: 400 },
-                reload: () => triggerGetList(searchList),
-            }}
-            toolBarRender={() => [
-                <Button onClick={handleExportOrderList} type="primary">
-                    导出
-                </Button>,
-            ]}
-            pagination={{
-                showSizeChanger: true,
-                defaultPageSize: 10,
-                onChange: pageOnChange,
-                total: orderList?.totalRecords,
-                current: orderList?.records?.length === 0 ? 0 : orderList.currentPage,
-            }}
-        />
+                }
+            />
+        </>
     );
 };
 
