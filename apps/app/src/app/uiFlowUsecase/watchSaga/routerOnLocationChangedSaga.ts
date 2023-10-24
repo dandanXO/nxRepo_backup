@@ -21,33 +21,34 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
   const rootState: RootState = yield select((state: RootState) => state);
   const currentPath = location.pathname;
   yield true
-  console.log('currentPath',prevPathname,currentPath)
+  console.log('currentPath', prevPathname, currentPath)
   if (environment.country === IndiaCountry.country) {
 
 
     if (action.payload.action === 'POP') {
-      // if (
-      //   (prevPathname === PageOrModalPathEnum.RepaymentPage ||
-      //   prevPathname === PageOrModalPathEnum.PersonalInfoPage ||
-      //   prevPathname === PageOrModalPathEnum.IndexPage) && (prevPathname!==currentPath)
-      // ) {
-      //   yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`));
+      if (
+        (prevPathname === PageOrModalPathEnum.RepaymentPage ||
+          prevPathname === PageOrModalPathEnum.PersonalInfoPage ||
+          prevPathname === PageOrModalPathEnum.IndexPage) && (prevPathname !== currentPath)
+      ) {
+        yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`));
+        if (prevPathname === PageOrModalPathEnum.IndexPage) {
+          if (
+            GlobalAppMode.mode === 'SimpleWebView' ||
+            GlobalAppMode.mode === 'IndexWebview'
+          ) {
+            yield put(
+              modalSlice.actions.updateExitConfirmModal({
+                show: true,
+              })
+            );
+          } else if (GlobalAppMode.mode === 'PureH5') {
+            // NOTE: nothing to do, stay in IndexPage
+          }
+        }
+      }
 
-      //   if (prevPathname === PageOrModalPathEnum.IndexPage) {
-      //     if (
-      //       GlobalAppMode.mode === 'SimpleWebView' ||
-      //       GlobalAppMode.mode === 'IndexWebview'
-      //     ) {
-      //       yield put(
-      //         modalSlice.actions.updateExitConfirmModal({
-      //           show: true,
-      //         })
-      //       );
-      //     } else if (GlobalAppMode.mode === 'PureH5') {
-      //       // NOTE: nothing to do, stay in IndexPage
-      //     }
-      //   }
-      // }
+
       // 預約單 modal
       if (rootState.model.reservationProductsModal.show) {
         yield put(
@@ -70,21 +71,24 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
         yield put(push(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`))
       }
 
-      prevPathname = currentPath;
-      prevLocation = location;
+
     }
 
 
     if (action.payload.action === "REPLACE") {
+
       if (location.pathname !== '/v2/uploaded-payment-receipt' &&
         !rootState.model.reservationProductsModal.show &&
         !rootState.model.starRatingModal.show &&
         !rootState.model.starRatingSuccessModal.show) {
+
+        console.log('replace')
         yield put(goStraight(-1))
       }
 
     }
-
+    prevPathname = currentPath;
+    prevLocation = location;
 
   } else {
     // 從 location 物件中取得要前往的 pathname
@@ -187,8 +191,7 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
     } else {
       prevPathname = currentPath;
     }
-    
+
   }
- 
 
 }
