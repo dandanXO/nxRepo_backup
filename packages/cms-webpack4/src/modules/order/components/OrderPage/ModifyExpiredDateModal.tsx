@@ -1,4 +1,5 @@
-import { DatePicker, Form, Modal } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
+import { Alert, DatePicker, Form, Modal } from 'antd';
 import { Key } from 'antd/es/table/interface';
 import moment from 'moment';
 import React from 'react';
@@ -78,6 +79,13 @@ const ModifyExpiredDateModal = ({
                     <Item label="变更到期日" name="expiryTime" rules={[{ required: true }]}>
                         <DatePicker disabledDate={(date) => date < lastModifyDate} />
                     </Item>
+                    <Alert
+                        style={{ marginBottom: '20px' }}
+                        message="本功能只能变更未逾期的订单到期日。"
+                        type="info"
+                        showIcon
+                        icon={<InfoCircleOutlined />}
+                    />
                 </Form>
             </div>
         </Modal>
