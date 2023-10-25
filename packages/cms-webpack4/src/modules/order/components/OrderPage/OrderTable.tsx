@@ -357,8 +357,11 @@ const OrderTable = (): JSX.Element => {
                     open={modifyExpiredModalOpen}
                     orderList={orderList?.records || []}
                     selectedRows={selectedRow}
-                    onOk={() => null}
                     handleCloseModal={() => setModifyExpiredModalOpen(false)}
+                    onModified={() => {
+                        setModifyExpiredModalOpen(false);
+                        triggerGetList(searchList);
+                    }}
                 />
             )}
             <ProTable<OrderListResponse>
@@ -471,6 +474,10 @@ const OrderTable = (): JSX.Element => {
                 rowSelection={{
                     selectedRowKeys: selectedRow,
                     onChange: onRowSelectChange,
+                    getCheckboxProps: (record) => {
+                        if (!record.expireDate || record.status === 12) return { disabled: true };
+                        return {};
+                    },
                 }}
                 headerTitle={
                     <Space>
