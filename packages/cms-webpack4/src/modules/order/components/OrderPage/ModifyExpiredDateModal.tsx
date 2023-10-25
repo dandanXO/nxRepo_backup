@@ -45,7 +45,8 @@ const ModifyExpiredDateModal = ({
         return acc;
     }, null);
 
-    const lastModifyDate = moment((lastModifyDatetime as moment.Moment).format('YYYY-MM-DD'), 'YYYY-MM-DD');
+    const lastModifyDate =
+        lastModifyDatetime && moment((lastModifyDatetime as moment.Moment).format('YYYY-MM-DD'), 'YYYY-MM-DD');
 
     const onOk = () => {
         form.submit();
@@ -75,7 +76,7 @@ const ModifyExpiredDateModal = ({
         >
             <div>
                 <Form {...layout} form={form} onFinish={onFinish}>
-                    <Item label="最近到期日">{lastModifyDate.format('YYYY/MM/DD')}</Item>
+                    <Item label="最近到期日">{lastModifyDate && lastModifyDate.format('YYYY/MM/DD')}</Item>
                     <Item label="变更到期日" name="expiryTime" rules={[{ required: true }]}>
                         <DatePicker disabledDate={(date) => date < lastModifyDate} />
                     </Item>

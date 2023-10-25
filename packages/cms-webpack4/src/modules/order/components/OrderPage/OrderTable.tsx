@@ -359,6 +359,7 @@ const OrderTable = (): JSX.Element => {
                     selectedRows={selectedRow}
                     handleCloseModal={() => setModifyExpiredModalOpen(false)}
                     onModified={() => {
+                        setSelectedRow([]);
                         setModifyExpiredModalOpen(false);
                         triggerGetList(searchList);
                     }}
@@ -475,7 +476,7 @@ const OrderTable = (): JSX.Element => {
                     selectedRowKeys: selectedRow,
                     onChange: onRowSelectChange,
                     getCheckboxProps: (record) => {
-                        if (!record.expireDate || record.status === 12) return { disabled: true };
+                        if (!record.expireDate || record.status !== 9) return { disabled: true };
                         return {};
                     },
                 }}
