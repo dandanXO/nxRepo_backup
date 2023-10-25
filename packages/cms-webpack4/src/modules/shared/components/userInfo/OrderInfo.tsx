@@ -75,7 +75,8 @@ const OrderInfo = (props: { orderId: number }): JSX.Element => {
         overdueMoney,
         utr,
         receiptImage,
-        couponUsageAmount
+        couponUsageAmount,
+        lastUpdateTime,
     } = orderDetail;
 
     return (
@@ -119,6 +120,9 @@ const OrderInfo = (props: { orderId: number }): JSX.Element => {
                 <CardStyle title="还款证明">
                     {isUtr(utr) || isReceiptImage(receiptImage) ? (
                         <Descriptions size="small" bordered>
+                            <Item label="更新时间" labelStyle={{ width: 150 }} span={3}>
+                                {lastUpdateTime ? moment(lastUpdateTime).format('YYYY-MM-DD HH:mm:ss') : '-'}
+                            </Item>
                             {isUtr(utr) && (
                                 <Item label="UTR" labelStyle={{ width: 150 }} span={3}>
                                     {utr || '-'}
