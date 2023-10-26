@@ -52,19 +52,11 @@ const RepaymentModal = (props: any) => {
   const { handlePostRepayCreate, isPostRepayCreateLoading } = useRepayCreate();
 
   const dispatch = useDispatch();
-  const { repaymentData, repaymentDetail } = useSelector(
-    (state: RootState) => state.repaymentDetailPage
-  );
-
-  const { balance = location.state.balance, orderNo = getOrderNo() } =
-    repaymentDetail || {};
+  const { repaymentData, repaymentDetail } = useSelector((state: RootState) => state.repaymentDetailPage);
+  const { balance = location.state.balance, orderNo = getOrderNo() } = repaymentDetail || {};
   const [radioValue, setRadioValue] = useState('balance');
 
   // NOTE: 變動數值
-  const [balanceValue, setBalanceValue] = useState(
-    `${environment.currency} ${balance}`
-  );
-
   const [balanceData, setbalanceData] = useState<InputValue<string>>({
     data:
       environment.country === PhilippinesCountry.country
@@ -75,22 +67,8 @@ const RepaymentModal = (props: any) => {
     isEdit: false,
   });
 
-  // NOTE: 付款方式
-  const {
-    triggerGetList,
-    isRepayTypesFetching,
-    repayTypesList,
-    repayType,
-    setRepayType,
-  } = useRepayTypes();
   useEffect(() => {
-    if (repaymentData.orderNo === '' &&
-      [MexicoCountry.country, PhilippinesCountry.country, IndiaCountry.country].includes(environment.country)
-    ) {
-      dispatch(RepaymentDetailPageUseCaseActions.user.repayData());
-    } else {
-      triggerGetList({ orderNo: orderNo });
-    }
+    dispatch(RepaymentDetailPageUseCaseActions.user.repayData());
   }, []);
 
   useEffect(() => {
@@ -111,7 +89,7 @@ const RepaymentModal = (props: any) => {
   }, []);
 
   const handleConfirm = () => {
-    if ([MexicoCountry.country, PhilippinesCountry.country, IndiaCountry.country].includes(environment.country)) {
+   
       const {
         // balance,
         repayAmount,
@@ -135,22 +113,6 @@ const RepaymentModal = (props: any) => {
           couponNo
         );
       }
-    } else {
-      if (balanceValue === '' || isPostRepayCreateLoading) {
-        return;
-      }
-
-      const payType = repayType && repayType.value;
-      const coupon = radioValue === 'balance' && location.state.coupon ? location.state.coupon : null;
-      const repaymentAmount = parseInt(balanceValue.replace(`${environment.currency}`, '').trim()) - Number(coupon?.discountAmount || 0);
-      handlePostRepayCreate(
-        false,
-        orderNo,
-        repaymentAmount,
-        payType,
-        coupon?.couponNo || null
-      );
-    }
   };
 
   return (
@@ -180,16 +142,11 @@ const RepaymentModal = (props: any) => {
               <PakistanRepaymentModal
                 radioValue={radioValue}
                 setRadioValue={setRadioValue}
-                balance={balance}
-                balanceValue={balanceValue}
-                setBalanceValue={setBalanceValue}
-                repayTypesList={repayTypesList}
-                isRepayTypesFetching={isRepayTypesFetching}
-                repayType={repayType}
-                setRepayType={setRepayType}
+                balanceValue={balanceData}
+                setBalanceValue={setbalanceData}
                 handleConfirm={handleConfirm}
+                handleRepayData={handleRepayData}
                 isPostRepayCreateLoading={isPostRepayCreateLoading}
-                orderNo={orderNo}
               />
             ),
             [MexicoCountry.country]: (

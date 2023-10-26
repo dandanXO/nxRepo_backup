@@ -33,9 +33,7 @@ const RepaymentCouponModal = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const repaymentDetailPageState = useSelector(
-    (state: RootState) => state.repaymentDetailPage
-  );
+  const repaymentDetailPageState = useSelector((state: RootState) => state.repaymentDetailPage);
   const { t } = useTranslation(i18nRepaymentCouponModal.namespace);
   const { orderNo = getOrderNo(), balance } = repaymentDetailPageState.repaymentDetail || {};
   const { paymentAmount } = location.state || {};
