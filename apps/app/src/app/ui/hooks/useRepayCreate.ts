@@ -41,7 +41,8 @@ const useRepayCreate = () => {
           }
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
-            window.location.href = data.nextUrl;
+            // window.location.href = data.nextUrl;
+            window.open(data.nextUrl)
 
             if (
               [IndiaCountry.country,
