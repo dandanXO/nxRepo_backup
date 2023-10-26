@@ -64,6 +64,7 @@ const AccountVerificationPage = () => {
           navigate(
             `${PageOrModalPathEnum.DeleteAccountPage}?token=${getToken()}`, { replace: true }
           );
+          navigate(-1)
         }}
       />
       <div className={`p-4 pt-0`}>
@@ -101,10 +102,7 @@ const AccountVerificationPage = () => {
           <div className={` ml-1.5 w-full`}>
             <Button
               onClick={() => {
-                navigate(
-                  `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`, { replace: true }
-                );
-                navigate(-1)
+                navigate(`${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`, { replace: true });
               }}
               text={'Next Time'}
               className={`border-primary-main bg-primary-main border-[1.5px] border-solid text-white`}

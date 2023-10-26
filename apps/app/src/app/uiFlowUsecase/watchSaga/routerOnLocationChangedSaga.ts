@@ -26,6 +26,9 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
 
 
     if (action.payload.action === 'POP') {
+      if(prevPathname === PageOrModalPathEnum.LoginPage){
+        yield put(push(`${PageOrModalPathEnum.LoginPage}?appName=${rootState.app.appName}&appID=${rootState.app.appID}&appDomain=${rootState.app.appDomain}`));
+      }
       if (
         (prevPathname === PageOrModalPathEnum.RepaymentPage ||
           prevPathname === PageOrModalPathEnum.PersonalInfoPage ||
@@ -78,11 +81,11 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
     if (action.payload.action === "REPLACE") {
 
       if (location.pathname !== '/v2/uploaded-payment-receipt' &&
+        prevPathname !== PageOrModalPathEnum.AccountVerificationPage &&
+        location.pathname !== PageOrModalPathEnum.LoginPage &&
         !rootState.model.reservationProductsModal.show &&
         !rootState.model.starRatingModal.show &&
         !rootState.model.starRatingSuccessModal.show) {
-
-        console.log('replace')
         yield put(goStraight(-1))
       }
 
