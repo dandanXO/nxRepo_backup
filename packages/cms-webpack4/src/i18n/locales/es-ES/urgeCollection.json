@@ -73,6 +73,7 @@
         "button": "Generar enlace de pago",
         "copyLabel": "Generar enlace de pago"
     },
+    "repaymentProof": "Comprobante de pago",
     "repeatLoansRate": "Tasa de préstamos adicionales",
     "repeatLoansRateTooltips": "La proporción de préstamos adicionales se incluye en el número de casos seguidos por el cobrador",
     "stage": "Etapa de atraso",

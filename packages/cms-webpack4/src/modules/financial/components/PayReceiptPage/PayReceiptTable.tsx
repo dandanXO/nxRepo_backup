@@ -77,23 +77,22 @@ const PayReceiptTable = (): JSX.Element => {
         '1': { text: '已确认', color: 'green' },
     };
 
-    const utrOrReceiptimgColumn: ProColumns =
-        appInfo.COUNTRY !== 'Pakistan' && appInfo.COUNTRY !== 'Bangladesh'
-            ? {
-                  title: 'UTR',
-                  dataIndex: 'utr',
-                  key: 'utr',
-                  initialValue: '',
-                  render: (text) => <CopyText text={text} />,
-              }
-            : {
-                  title: '还款明细',
-                  dataIndex: 'receiptImageUrl',
-                  key: 'receiptImageUrl',
-                  valueType: 'image',
-                  hideInSearch: true,
-                  align: 'center',
-              };
+    const utrOrReceiptimgColumn: ProColumns = ['India'].includes(appInfo.COUNTRY)
+        ? {
+              title: 'UTR',
+              dataIndex: 'utr',
+              key: 'utr',
+              initialValue: '',
+              render: (text) => <CopyText text={text} />,
+          }
+        : {
+              title: '还款明细',
+              dataIndex: 'receiptImageUrl',
+              key: 'receiptImageUrl',
+              valueType: 'image',
+              hideInSearch: true,
+              align: 'center',
+          };
 
     const columns: ProColumns<PayReceiptList>[] = [
         {
