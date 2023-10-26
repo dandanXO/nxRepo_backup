@@ -78,5 +78,6 @@
         "smsContent": "内容",
         "smsSendType": "发送类型",
         "uploadTime": "上传时间"
-    }
+    },
+    "updateTime": "更新时间"
 }
