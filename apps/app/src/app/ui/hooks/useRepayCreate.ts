@@ -38,20 +38,16 @@ const useRepayCreate = () => {
           if (data.nextStep === 'html' &&
             [MexicoCountry.country, PhilippinesCountry.country].includes(environment.country)) {
             navigate(`${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`, { state: data });
+            return;
           }
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
             // window.location.href = data.nextUrl;
             window.open(data.nextUrl)
+            navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
 
-            if (
-              [IndiaCountry.country,
-              MexicoCountry.country,
-              PhilippinesCountry.country
-              ].includes(environment.country)) {
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
-
-              // NOTICE: 取得是否要跳出複借預約彈窗
+             // NOTICE: 取得是否要跳出複借預約彈窗
+            if ([IndiaCountry.country, MexicoCountry.country, PhilippinesCountry.country].includes(environment.country)) {
               dispatch(
                 RepaymentDetailPageUseCaseActions.system.showReservation()
               );

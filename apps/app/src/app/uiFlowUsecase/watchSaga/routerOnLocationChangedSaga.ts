@@ -22,7 +22,7 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
   const currentPath = location.pathname;
   yield true
   console.log('currentPath', prevPathname, currentPath)
-  if (environment.country === IndiaCountry.country) {
+  // if (environment.country === IndiaCountry.country) {
 
 
     if (action.payload.action === 'POP') {
@@ -82,6 +82,7 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
 
       if (location.pathname !== '/v2/uploaded-payment-receipt' &&
         prevPathname !== PageOrModalPathEnum.AccountVerificationPage &&
+      
         location.pathname !== PageOrModalPathEnum.LoginPage &&
         !rootState.model.reservationProductsModal.show &&
         !rootState.model.starRatingModal.show &&
@@ -93,108 +94,109 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
     prevPathname = currentPath;
     prevLocation = location;
 
-  } else {
-    // 從 location 物件中取得要前往的 pathname
-    const rootState: RootState = yield select((state: RootState) => state);
+  // } 
+  // else {
+  //   // 從 location 物件中取得要前往的 pathname
+  //   const rootState: RootState = yield select((state: RootState) => state);
 
-    // 點擊瀏覽器的上一頁
-    if (action.payload.action === 'POP') {
-      // console.log('prevPathname', prevPathname)
-      // console.log('currentPath', currentPath)
-      // console.log('routerOnLocationChangedSaga', action);
+  //   // 點擊瀏覽器的上一頁
+  //   if (action.payload.action === 'POP') {
+  //     // console.log('prevPathname', prevPathname)
+  //     // console.log('currentPath', currentPath)
+  //     // console.log('routerOnLocationChangedSaga', action);
 
-      if (
-        prevPathname === PageOrModalPathEnum.RepaymentPage ||
-        prevPathname === PageOrModalPathEnum.PersonalInfoPage ||
-        prevPathname === PageOrModalPathEnum.IndexPage
-      ) {
-        yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`));
+  //     if (
+  //       prevPathname === PageOrModalPathEnum.RepaymentPage ||
+  //       prevPathname === PageOrModalPathEnum.PersonalInfoPage ||
+  //       prevPathname === PageOrModalPathEnum.IndexPage
+  //     ) {
+  //       yield put(push(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`));
 
-        if (prevPathname === PageOrModalPathEnum.IndexPage) {
-          if (
-            GlobalAppMode.mode === 'SimpleWebView' ||
-            GlobalAppMode.mode === 'IndexWebview'
-          ) {
-            yield put(
-              modalSlice.actions.updateExitConfirmModal({
-                show: true,
-              })
-            );
-          } else if (GlobalAppMode.mode === 'PureH5') {
-            // NOTE: nothing to do, stay in IndexPage
-          }
-        }
-      } else {
-        // NOTE : RepaymentDetailPage route 控制
-        if (
-          prevPathname === PageOrModalPathEnum.RepaymentDetailPage ||
-          currentPath === PageOrModalPathEnum.RepaymentDetailPage ||
-          (currentPath.includes(PageOrModalPathEnum.RepaymentDetailPage) &&
-            currentPath.length > PageOrModalPathEnum.RepaymentDetailPage.length)
-        ) {
-          // 預約單 modal
-          if (rootState.model.reservationProductsModal.show) {
-            yield put(
-              modalSlice.actions.updateReservationProductsModal({
-                ...rootState.model.reservationProductsModal,
-                show: false,
-              })
-            );
-          }
+  //       if (prevPathname === PageOrModalPathEnum.IndexPage) {
+  //         if (
+  //           GlobalAppMode.mode === 'SimpleWebView' ||
+  //           GlobalAppMode.mode === 'IndexWebview'
+  //         ) {
+  //           yield put(
+  //             modalSlice.actions.updateExitConfirmModal({
+  //               show: true,
+  //             })
+  //           );
+  //         } else if (GlobalAppMode.mode === 'PureH5') {
+  //           // NOTE: nothing to do, stay in IndexPage
+  //         }
+  //       }
+  //     } else {
+  //       // NOTE : RepaymentDetailPage route 控制
+  //       if (
+  //         prevPathname === PageOrModalPathEnum.RepaymentDetailPage ||
+  //         currentPath === PageOrModalPathEnum.RepaymentDetailPage ||
+  //         (currentPath.includes(PageOrModalPathEnum.RepaymentDetailPage) &&
+  //           currentPath.length > PageOrModalPathEnum.RepaymentDetailPage.length)
+  //       ) {
+  //         // 預約單 modal
+  //         if (rootState.model.reservationProductsModal.show) {
+  //           yield put(
+  //             modalSlice.actions.updateReservationProductsModal({
+  //               ...rootState.model.reservationProductsModal,
+  //               show: false,
+  //             })
+  //           );
+  //         }
 
-          // RepaymentDetailPage 所有的彈窗
-          if (prevPathname === '/v2/repayment-detail/repayment-coupon-modal') {
-            if (currentPath !== '/v2/repayment-detail/repayment-modal') {
-              yield put(go(-1));
-            }
-          } else {
-            if (
-              prevPathname.length > PageOrModalPathEnum.RepaymentDetailPage.length
-            ) {
-              yield put(
-                push(
-                  `${PageOrModalPathEnum.RepaymentDetailPage
-                  }?token=${getToken()}&orderNo=${getOrderNo()}`
-                )
-              );
-            }
+  //         // RepaymentDetailPage 所有的彈窗
+  //         if (prevPathname === '/v2/repayment-detail/repayment-coupon-modal') {
+  //           if (currentPath !== '/v2/repayment-detail/repayment-modal') {
+  //             yield put(go(-1));
+  //           }
+  //         } else {
+  //           if (
+  //             prevPathname.length > PageOrModalPathEnum.RepaymentDetailPage.length
+  //           ) {
+  //             yield put(
+  //               push(
+  //                 `${PageOrModalPathEnum.RepaymentDetailPage
+  //                 }?token=${getToken()}&orderNo=${getOrderNo()}`
+  //               )
+  //             );
+  //           }
 
-            if (!isSimpleWebView()) {
-              if (prevPathname === PageOrModalPathEnum.RepaymentDetailPage) {
-                yield put(
-                  push(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`)
-                );
-              }
-            }
-          }
-        }
+  //           if (!isSimpleWebView()) {
+  //             if (prevPathname === PageOrModalPathEnum.RepaymentDetailPage) {
+  //               yield put(
+  //                 push(`${PageOrModalPathEnum.RepaymentPage}?token=${getToken()}`)
+  //               );
+  //             }
+  //           }
+  //         }
+  //       }
 
-        // NOTE : 上傳還款證明單成功 route 控制
-        if (
-          (prevPathname === '/v2/uploaded-payment-receipt' ||
-            prevPathname === '/v2/upload-payment-receipt' ||
-            currentPath === '/v2/upload-payment-receipt') &&
-          prevPathname !== PageOrModalPathEnum.RepaymentDetailPage
-        ) {
-          yield put(
-            push(
-              `${PageOrModalPathEnum.RepaymentDetailPage
-              }?token=${getToken()}&orderNo=${getOrderNo()}`
-            )
-          );
-        }
-      }
-    }
-    if (
-      action.payload.action === 'PUSH' &&
-      (prevPathname === PageOrModalPathEnum.RepaymentDetailPage ||
-        currentPath === PageOrModalPathEnum.RepaymentDetailPage)
-    ) {
-      prevPathname = currentPath;
-    } else {
-      prevPathname = currentPath;
-    }
+  //       // NOTE : 上傳還款證明單成功 route 控制
+  //       if (
+  //         (prevPathname === '/v2/uploaded-payment-receipt' ||
+  //           prevPathname === '/v2/upload-payment-receipt' ||
+  //           currentPath === '/v2/upload-payment-receipt') &&
+  //         prevPathname !== PageOrModalPathEnum.RepaymentDetailPage
+  //       ) {
+  //         yield put(
+  //           push(
+  //             `${PageOrModalPathEnum.RepaymentDetailPage
+  //             }?token=${getToken()}&orderNo=${getOrderNo()}`
+  //           )
+  //         );
+  //       }
+  //     }
+  //   }
+  //   if (
+  //     action.payload.action === 'PUSH' &&
+  //     (prevPathname === PageOrModalPathEnum.RepaymentDetailPage ||
+  //       currentPath === PageOrModalPathEnum.RepaymentDetailPage)
+  //   ) {
+  //     prevPathname = currentPath;
+  //   } else {
+  //     prevPathname = currentPath;
+  //   }
 
-  }
+  // }
 
 }

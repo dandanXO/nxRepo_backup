@@ -213,7 +213,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
             outlineTheme={'round'}
             text={t('Cancel')}
             onClick={() => {
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,{ state: { orderNo } });
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo }, replace: true });
             }}
           />
         </div>

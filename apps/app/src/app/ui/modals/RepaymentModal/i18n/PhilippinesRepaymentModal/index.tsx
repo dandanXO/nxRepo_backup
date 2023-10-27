@@ -271,7 +271,7 @@ const PhilippinesRepaymentModal = ({
               `${
                 PageOrModalPathEnum.RepaymentDetailPage
               }?token=${getToken()}&orderNo=${getOrderNo()}`,
-              { state: { orderNo } }
+              { state: { orderNo }, replace: true }
             );
           }}
         />

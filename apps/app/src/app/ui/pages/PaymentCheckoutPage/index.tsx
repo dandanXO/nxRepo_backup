@@ -60,6 +60,7 @@ const PaymentCheckoutPage = () => {
                     }`,
                     {
                       state: {},
+                      replace: true
                     }
                   );
                 }

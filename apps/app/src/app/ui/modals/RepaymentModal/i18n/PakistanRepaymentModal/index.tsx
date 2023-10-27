@@ -167,7 +167,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             text={t('Cancel')}
             onClick={() => {
               if (repayTypeList === undefined) return;
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,{ state: { orderNo } });
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo }, replace: true });
             }}
           />
         </div>
