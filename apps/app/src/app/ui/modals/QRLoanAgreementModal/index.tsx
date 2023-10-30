@@ -12,6 +12,9 @@ import { Navigation } from '../../core-components/Navigation';
 
 type Props = {
   onClose: () => void;
+  urlParams?: {
+    [key: string]: string | number
+  }
 };
 
 export const LoanAgreementModal = (props: Props) => {
@@ -22,12 +25,20 @@ export const LoanAgreementModal = (props: Props) => {
   const url = useSelector(
     (state: RootState) => state.indexPage.indexAPI?.loanAgreementUrl
   );
+  const bankCardName = useSelector((state: RootState) => state.indexPage.user.bankCardName);
+  const modelState = useSelector((state: RootState) => state.model);
 
   const [htmlData, setHTMLData] = useState<any>();
 
+  const urlParams = {
+    ...modelState.loanAgreementModal.urlParams,
+    borrowerName : bankCardName || '',
+    bankAccountNo: modelState?.simpleQuickRepaymentModal?.selectedBankcardId || ''
+  }
+
   useEffect(() => {
     if (!url) return;
-    gateway('', url, 'get', null).then((response) => {
+    gateway('', url, 'get', {}, urlParams).then((response) => {
       // console.log("response", response.data)
       if (response.success) {
         // NOTICE: Failed to execute 'atob' on 'Window': The string to be decoded contains characters outside of the Latin1 range.

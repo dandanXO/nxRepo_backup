@@ -158,13 +158,9 @@ const IndexPage = () => {
 
   // NOTICE: 推薦產品
   const [quotaBarTargetPrice, setQuotaBarTargetPrice] = useState(0);
-  const [calculatingProducts, setCalculatingProducts] =
-    useState<FinalProductType[]>();
-  const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] =
-    useState(0);
-  const [calculatingSummary, setCalculatingSummary] =
-    useState<FinalProductsSummary>();
-
+  const [calculatingProducts, setCalculatingProducts] = useState<FinalProductType[]>();
+  const [currentSelectedProductsPrice, setCurrentSelectedProductsPrice] = useState(0);
+  const [calculatingSummary, setCalculatingSummary] = useState<FinalProductsSummary>();
   //   console.log("calculatingProducts", calculatingProducts);
 
   // NOTE: setCalculatingProducts
@@ -521,6 +517,30 @@ const IndexPage = () => {
         details: simpleProducts,
       })
     );
+  
+    // NOTE: LoanAgreement
+    const chargeFeeDetails = indexPageState.indexAPI?.chargeFeeDetails.reduce((acc: any, item) => {
+      acc[item.key] = item.counting;
+      return acc;
+    }, {});
+
+    const params = {
+      'loanDate': formatDate(moment()) || '',
+      'loanAmount': calculatingSummary?.loanAmount || 0,
+      'disbursalAmount': calculatingSummary?.disbursalAmount || 0,
+      'loanTerms': calculatingProducts[0]?.terms || '',
+      'repayAmount':calculatingSummary?.loanAmount || 0,
+      'repaymentDate':calculatingSummary?.repaymentDate ,
+      ...chargeFeeDetails
+    }
+
+    dispatch(
+      modalSlice.actions.updateLoanAgreementModal({
+        show: false,
+        urlParams: params
+      })
+    );
+   
     // navigate(`${PagePathEnum.IndexPage}/quick-repayment-modal?token=${getToken()}`)
     //
   }, [calculatingProducts, currentSelectedProductsPrice]);
@@ -774,6 +794,7 @@ const IndexPage = () => {
             onClose={() => {
               dispatch(
                 modalSlice.actions.updateLoanAgreementModal({
+                  ...modelState.loanAgreementModal,
                   show: false,
                 })
               );

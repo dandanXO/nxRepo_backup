@@ -161,6 +161,7 @@ const QuickRepaymentModal = () => {
                 onClick={() => {
                   dispatch(
                     modalSlice.actions.updateLoanAgreementModal({
+                      ...modelState.loanAgreementModal,
                       show: true,
                     })
                   );
