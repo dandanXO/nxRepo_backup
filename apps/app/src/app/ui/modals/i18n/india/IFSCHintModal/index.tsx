@@ -10,7 +10,7 @@ const IFSCHintModal = (props: { onClick: () => void }) => {
       <div className="flex flex-col p-6 pb-4 text-left">
         <div className="text-ctext-primary my-4 text-sm font-bold">
           The IFSC code typically starts with 4 letters that represent the
-          bank's name, followed by a 0(zero), and the remaining 6 characters
+          bank's name, followed by a 0(zero), and the remaining 6 digits
           denote the branch code. For Example: ABCD0123456.
         </div>
         <div className="text-ctext-primary mb-4 text-sm">

@@ -21,13 +21,15 @@ type IBankAccountForm = IForm & {
 };
 
 export type IIndiaBankAccountForm = IBankAccountForm & {
+
   ifscData: InputValue<string>;
-  onIFSCChange: (event: any) => void;
-  onIFSCBlur: (event: any) => void;
+  setIFSCData:React.Dispatch<React.SetStateAction<InputValue<string>>>;
+  validateIFSC:(val:string)=>void;
 
   upiData: InputValue<string>;
-  onUPIIDChange: (event: any) => void;
-  onUPIIDChangBlur: (event: any) => void;
+  setUpiData:React.Dispatch<React.SetStateAction<InputValue<string>>>;
+  validateUpiId:(val:string)=>void;
+
 };
 
 export type IPakistanBankAccountForm = {

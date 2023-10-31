@@ -10,19 +10,28 @@ import UPIHintModal from '../../../../modals/i18n/india/UPIHintModal';
 import { i18nBankBindAccountPage } from '../../translations';
 import { IIndiaBankAccountForm } from '../types/IBankAccountForm';
 import { Form } from './Form';
+import ValidateInput from '../../../../core-components/ValidateInput';
+import { useIndiaBankAccountForm } from '../../hooks/i18n/india/useIndiaBankAccountForm';
 
 export const BankAccountForm = (props: IIndiaBankAccountForm) => {
   const [ifscModalShow, SetIfscModalShow] = useState(false);
   const [upiModalShow, SetUpiModalShow] = useState(false);
   const { t } = useTranslation(i18nBankBindAccountPage.namespace);
-
+  const {
+    // NOTE: IFSC
+    ifscData,
+    setIFSCData,
+    validateIFSC,
+    // NOTE: UPI
+    upiData,
+    setUpiData,
+    validateUpiId
+  } = props;
   return (
     <div className="flex grow flex-col">
       <Form className="grow">
         <div className="text-ctext-primary mb-1 text-xs">
-          {t(
-            'For KYC, your Cardholder name and PAN card name should be match.'
-          )}
+          {t('For KYC, your Cardholder name and PAN card name should be match.')}
         </div>
         <Input
           className="mb-3 text-sm"
@@ -47,7 +56,10 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           onBlur={props.onConfirmAccountNumberBlur}
           errorMessage={props.confirmedBankcardNoData.errorMessage}
         />
-        <Input
+
+        <ValidateInput
+          name={'IFSC'}
+          className="mb-3 text-sm"
           suffix={
             <div
               className="absolute left-1"
@@ -59,14 +71,18 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
               <MdInfoOutline />
             </div>
           }
-          className="mb-3 text-sm"
           label={t('IFSC Code (11characters )') as string}
-          value={props.ifscData.data}
-          onChange={props.onIFSCChange}
-          onBlur={props.onIFSCBlur}
-          errorMessage={props.ifscData.errorMessage}
+          value={ifscData.data}
+          errorMessage={ifscData.errorMessage}
+          inputData={ifscData}
+          setInputData={setIFSCData}
+          validateData={() => validateIFSC(ifscData.data)}
+          inputLength={11}
         />
-        <Input
+        <ValidateInput
+          name={'UPI ID'}
+          className="mb-4 text-sm"
+          label={t('UPI ID') as string}
           suffix={
             <div
               className="absolute left-1"
@@ -78,13 +94,13 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
               <MdInfoOutline />
             </div>
           }
-          className="mb-4 text-sm"
-          label={t('UPI ID') as string}
-          value={props.upiData.data}
-          onChange={props.onUPIIDChange}
-          onBlur={props.onUPIIDChangBlur}
-          errorMessage={props.upiData.errorMessage}
+          value={upiData.data}
+          errorMessage={upiData.errorMessage}
+          inputData={upiData}
+          setInputData={setUpiData}
+          validateData={() => validateUpiId(upiData.data)}
         />
+
       </Form>
       <div className="mb-4">
         <Button

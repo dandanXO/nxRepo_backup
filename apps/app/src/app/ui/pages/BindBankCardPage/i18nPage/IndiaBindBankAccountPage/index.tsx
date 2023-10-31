@@ -18,44 +18,35 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     onConfirmAccountNumberBlur,
     validate: validateCommonForm,
   } = useBindBankAccountForm();
-
   const {
     // NOTE: form
     validate: validateIndiaForm,
     // NOTE: IFSC
     ifscData,
-    onIFSCChange,
-    onIFSCBlur,
+    setIFSCData,
+    validateIFSC,
     // NOTE: UPI
     upiData,
-    onUPIIDChange,
-    onUPIIDChangBlur,
+    setUpiData,
+    validateUpiId
   } = useIndiaBankAccountForm();
 
   const { isFormPending, confirm } = useFinishedBindBankAccountForm({
     // NOTICE: Common
     bankcardNoData,
-
     // NOTICE: India
     isLoadingPostBankBindSave: props.isLoadingPostBankBindSave || false,
     postBankBindSave: props.postBankBindSave,
     ifscData,
     upiData,
-
-    // NOTICE: Pakistan
-    // postBankBindSaveToPK: props.postBankBindSaveToPK,
-    // NOTE: 取得電子錢包列表
-    // bindCardDropListData: props.bindCardDropListData,
-    // NOTE: 設定電子錢包列表
-    // bankAccountValue: props.bankAccountValue,
   });
 
   return (
     <BankAccountForm
       cardholderName={props.cardholderName}
       ifscData={ifscData}
-      onIFSCChange={onIFSCChange}
-      onIFSCBlur={onIFSCBlur}
+      setIFSCData={setIFSCData}
+      validateIFSC={validateIFSC}
       bankcardNoData={bankcardNoData}
       onAccountNumberChange={onAccountNumberChange}
       onAccountNumberBlur={onAccountNumberBlur}
@@ -63,8 +54,8 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
       onConfirmAccountNumberChange={onConfirmAccountNumberChange}
       onConfirmAccountNumberBlur={onConfirmAccountNumberBlur}
       upiData={upiData}
-      onUPIIDChange={onUPIIDChange}
-      onUPIIDChangBlur={onUPIIDChangBlur}
+      setUpiData={setUpiData}
+      validateUpiId={validateUpiId}
       isFormPending={isFormPending || false}
       confirm={() => {
         // NOTE: validate and display errors
