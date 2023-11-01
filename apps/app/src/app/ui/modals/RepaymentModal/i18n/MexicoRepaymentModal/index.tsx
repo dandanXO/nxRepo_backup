@@ -159,10 +159,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
             className="flex items-center justify-center pl-5 pr-2 pb-0.5"
             onClick={() => {
               if (repayTypeList === undefined) return;
-              navigate(
-                `${
-                  PageOrModalPathEnum.RepaymentDetailPage
-                }/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
                 {
                   state: {
                     ...location.state,
@@ -216,15 +213,7 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
             outlineTheme={'round'}
             text={t('Cancel')}
             onClick={() => {
-              handleRepayData({
-                ...repaymentDetailPageInitialState.repaymentData,
-              });
-              navigate(
-                `${
-                  PageOrModalPathEnum.RepaymentDetailPage
-                }?token=${getToken()}&orderNo=${getOrderNo()}`,
-                { state: { orderNo } }
-              );
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo }, replace: true });
             }}
           />
         </div>
@@ -246,15 +235,9 @@ const MexicoRepaymentModal = (props: IRepaymentModalProps & any) => {
       >
         <div>{t('Attention')}:</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
+          <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
           <li>
-            {t(
-              'Before repayment, please make sure that you have enough balance on your bank account.'
-            )}
-          </li>
-          <li>
-            {t(
-              'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.'
-            )}
+            {t('To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.')}
           </li>
         </ul>
       </div>

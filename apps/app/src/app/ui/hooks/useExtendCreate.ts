@@ -8,6 +8,8 @@ import { PostRepayCreateResponse } from '../../externel/backend/loanService/Post
 import { usePostRepayCreateMutation } from '../../externel/backend/rtk';
 import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
+import { MexicoCountry, PhilippinesCountry } from '@frontend/shared/domain';
+import { environment } from 'apps/app/src/environments/environmentModule/environment';
 
 const useExtendCreate = () => {
   const navigate = useNavigate();
@@ -26,17 +28,15 @@ const useExtendCreate = () => {
       postRepayCreate(props)
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
-          if (data.nextStep === 'html') {
-            navigate(
-              `${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`,
-              {
-                state: data,
-              }
-            );
+          if (data.nextStep === 'html' &&
+            [MexicoCountry.country, PhilippinesCountry.country].includes(environment.country)) {
+            navigate(`${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`, { state: data });
+            return;
           }
-          if (data.nextStep === 'jumpUrl') {
+          if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
-            window.location.href = data.nextUrl;
+            // window.location.href = data.nextUrl;
+            window.open(data.nextUrl);
             navigate(
               `${
                 PageOrModalPathEnum.RepaymentDetailPage

@@ -112,7 +112,7 @@ const AmountRepaidModal = (props: AmountRepaidRecordsProps) => {
           navigate(
             `${
               PageOrModalPathEnum.RepaymentDetailPage
-            }?token=${getToken()}&orderNo=${getOrderNo()}`
+            }?token=${getToken()}&orderNo=${getOrderNo()}`,{replace:true}
           )
         }
         enableTitleHorizontal={true}

@@ -93,6 +93,7 @@ const MexicoPaymentCheckoutPage = ({
               }?token=${getToken()}&orderNo=${orderNo}`,
               { replace: true }
             );
+            navigate(-1);
             dispatch(
               RepaymentDetailPageUseCaseActions.system.showReservation()
             );

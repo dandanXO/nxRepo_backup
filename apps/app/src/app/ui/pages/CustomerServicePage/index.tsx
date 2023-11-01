@@ -31,7 +31,7 @@ const CustomerServicePage = () => {
             title={'Customer Service'}
             back={() => {
               navigate(
-                `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`
+                `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`, { replace: true }
               );
             }}
           />

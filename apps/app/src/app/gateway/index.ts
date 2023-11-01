@@ -57,7 +57,6 @@ export const gateway = async (
     //   // 基本上不會遇到
     //   login401 = false;
     // }
-
     // result.config.url !== '/v3/open-index'
     if (login401) {
       console.log('阻止後續請求');
@@ -77,7 +76,7 @@ export const gateway = async (
       // (error as any)?.response?.data?.code === 404
       if ((error as any)?.response?.data?.code === 401) {
         removeTokenFromLocalStorage();
-        if (!login401) {
+        if (!login401 && !url?.includes('behavior')) {
           login401 = true;
           alertModal((error as any)?.response?.data?.message);
           appStore.dispatch(push(PageOrModalPathEnum.LoginPage));

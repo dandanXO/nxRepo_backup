@@ -31,9 +31,7 @@ const DeleteAccountConfirmModal = () => {
   const dispatch = useDispatch();
 
   const Content = () => {
-    const appName: string = useSelector(
-      (state: RootState) => state.app.appName
-    );
+    const app = useSelector((state: RootState) => state.app);
 
     // NOTICE: 尚有未還的訂單，無法刪除帳號
     if (
@@ -56,11 +54,7 @@ const DeleteAccountConfirmModal = () => {
           </div>
           <Button
             onClick={() => {
-              navigate(
-                `${
-                  PageOrModalPathEnum.AccountVerificationPage
-                }?token=${getToken()}`
-              );
+              navigate(`${PageOrModalPathEnum.IndexPage}?token=${getToken()}`, { replace: true });
             }}
             text={'OK'}
           />
@@ -116,9 +110,7 @@ const DeleteAccountConfirmModal = () => {
                     userInfoPersistence.clearPhone();
                     dispatch(loginSlice.actions.updatePhoneNo());
                     // NOTE:
-                    navigate(
-                      `${PageOrModalPathEnum.LoginPage}?appName=${appName}`
-                    );
+                    navigate(`${PageOrModalPathEnum.LoginPage}?appName=${app.appName}&appID=${app.appID}&appDomain=${app.appDomain}`, { replace: true });
                   }
                 })
                 .catch((err) => {

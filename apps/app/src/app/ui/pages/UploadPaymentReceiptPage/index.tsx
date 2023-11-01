@@ -46,7 +46,7 @@ const Uni18nUploadPaymentReceiptPage = (
     navigate(
       `/v2/uploaded-payment-receipt?token=${
         pageQueryString.token
-      }&orderNo=${getOrderNo()}`
+      }&orderNo=${getOrderNo()}`, { replace: true }
     );
   }, [pageQueryString.token, location.state.orderNo]);
 
@@ -105,6 +105,7 @@ const Uni18nUploadPaymentReceiptPage = (
               }?token=${getToken()}&orderNo=${getOrderNo()}`,
               {
                 state: { orderNo: location.state.orderNo },
+                replace: true
               }
             );
           }}

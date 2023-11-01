@@ -21,92 +21,74 @@ import { selectStyles } from '../../../../core-components/selectStyles';
 import { IRepaymentModalProps } from '../../index';
 import AdSVG from '../../repayment_banner.svg';
 import { i18nRepaymentModal } from '../translations';
+import { RootState } from 'apps/app/src/app/reduxStore';
+import { useSelector } from 'react-redux';
+import { RadioOption } from '../../../../core-components/RadioOption';
+import ValidateInput from '../../../../core-components/ValidateInput';
+import { validateBalance } from '../validation';
+import { getOrderNo } from 'apps/app/src/app/externel/window/querystring/getOrderNo';
 
-type paymentMethodValueType = {
-  type: string;
-  label: string;
-};
 
 const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
+
   const {
-    radioValue,
     setRadioValue,
-    balance,
     balanceValue,
     setBalanceValue,
-    repayTypesList,
-    isRepayTypesFetching,
-    repayType,
-    setRepayType,
+    handleRepayData,
     handleConfirm,
-    orderNo,
     isPostRepayCreateLoading,
   } = props;
+
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation(i18nRepaymentModal.namespace);
 
-  const { coupon } = location.state;
-
-  const [balanceValueErrorMessage, setBalanceValueErrorMessage] = useState('');
+  const payOptions = [
+    { value: 'balance', label: t('Repay Full Amount') },
+    { value: 'custom', label: t('Partial Repayment') },
+  ];
+  const repaymentData = useSelector((state: RootState) => state.repaymentDetailPage.repaymentData);
+  const {
+    balance,
+    repayAmount,
+    radio,
+    payType,
+    coupon,
+    orderNo,
+    repayTypeList,
+  } = repaymentData;
+  const handleRadioChange = (e: any) => {
+    if (e === 'balance') {
+      setBalanceValue({
+        ...balanceValue,
+        data: `${environment.currency} ${balance}`,
+      });
+    }
+    setRadioValue(e);
+  };
 
   return (
     <div className="text-ctext-primary px-4 text-left">
-      <div className="mt-1 ml-[-4px] whitespace-nowrap text-xs">
-        <Radio.Group
-          value={radioValue}
-          onCheck={(value: any) => {
-            setRadioValue(value);
-            if (value === 'balance') {
-              setBalanceValue(`${environment.currency} ${balance}`);
-              setBalanceValueErrorMessage('');
-            }
-          }}
-        >
-          <Radio value="balance">{t('Repay Full Amount')}</Radio>
-          <Radio value="custom">{t('Partial Repayment')}</Radio>
-        </Radio.Group>
+      <div className="mt-1 mb-2 text-sm">
+        <RadioOption options={payOptions} onChange={handleRadioChange} />
       </div>
-
       <div>
         <div className="mt-3 text-xs">{t('Payment Amount (PKR)')}</div>
-        <Input
-          name={'amount'}
+        <ValidateInput
+          name={'Amount'}
           labelType="none"
           outlineType="standard"
-          value={balanceValue}
-          disabled={radioValue === 'balance'}
-          onChange={(event: any) => {
-            let value = event.target.value;
-            // value = value.replace(`${environment.currency}`, '').trim();
-            value = value.replace(`P`, '').trim();
-            value = value.replace(`K`, '').trim();
-            value = value.replace(`R`, '').trim();
-
-            if (value === '' || Number(value) === 0) {
-              setBalanceValueErrorMessage(
-                t('This field cannot be left blank or 0.') as string
-              );
-            } else if (!new RegExp('^[0-9]*$').test(value)) {
-              setBalanceValueErrorMessage(
-                t('Numbers only. Please try again.') as string
-              );
-            } else if (Number(value) > Number(balance)) {
-              // NOTE: 限制數字最大值
-              setBalanceValueErrorMessage(
-                t(
-                  'Amount cannot be greater than the repayment balance.'
-                ) as string
-              );
-            } else {
-              setBalanceValueErrorMessage('');
-            }
-            setBalanceValue(`${environment.currency} ${value}`);
-          }}
-          onBlur={() => {}}
-          errorMessage={
-            balanceValueErrorMessage === '' ? '' : balanceValueErrorMessage
+          placeholder="8,500"
+          value={`${balanceValue.data}`}
+          disabled={radio === 'balance'}
+          inputData={balanceValue}
+          setInputData={setBalanceValue}
+          validateData={() =>
+            balance !== undefined && validateBalance(balanceValue.data, balance)
           }
+          inputLength={radio !== 'balance' ? 1 : balance?.length}
+          errorMessage={t(balanceValue.errorMessage)}
         />
       </div>
 
@@ -114,32 +96,33 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div className="mt-1.5 text-xs">{t('Payment Method')}</div>
         <Select
           styles={selectStyles}
-          options={repayTypesList || []}
-          value={repayType}
-          onChange={(item) => {
-            setRepayType(item as paymentMethodValueType);
+          options={repayTypeList || []}
+          value={
+            repayTypeList === undefined
+              ? undefined
+              : repayTypeList.find((option: any) => option.value === payType)
+          }
+          onChange={(item: any) => {
+            handleRepayData({ ...repaymentData, payType: item.value });
           }}
         />
       </div>
 
-      {radioValue !== 'custom' && (
+      {radio !== 'custom' && (
         <>
           <div className="mt-2.5 text-xs">{t('Coupon (PKR)')}</div>
           <div
             className="flex items-center justify-center border-b border-solid border-[#aaaaaa] py-1.5 pl-5 pr-4"
             onClick={() => {
-              if (isRepayTypesFetching) return;
-              navigate(
-                `${
-                  PageOrModalPathEnum.RepaymentDetailPage
-                }/repayment-coupon-modal?token=${getToken()}`,
-                {
-                  state: {
-                    ...location.state,
-                    paymentAmount: balance,
-                  },
-                }
-              );
+              if (repayTypeList === undefined) return;
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
+              {
+                state: {
+                  ...location.state,
+                  paymentAmount: balance,
+                },
+              }
+            );
             }}
           >
             <div
@@ -171,25 +154,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
       <div className="mt-3 font-bold">
         <ListItem
           title={t('Repayment Amount')}
-          text={
-            radioValue !== 'custom' ? (
-              <Money
-                money={
-                  Number(balance) - Number(coupon ? coupon.discountAmount : 0)
-                }
-              />
-            ) : (
-              <Money
-                money={
-                  isNaN(
-                    balanceValue.replace(`${environment.currency}`, '').trim()
-                  )
-                    ? 0
-                    : balanceValue.replace(`${environment.currency}`, '').trim()
-                }
-              />
-            )
-          }
+          text={<Money money={repayAmount || 0} />}
         />
       </div>
 
@@ -201,13 +166,8 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             className={`w-full`}
             text={t('Cancel')}
             onClick={() => {
-              if (isRepayTypesFetching) return;
-              navigate(
-                `${
-                  PageOrModalPathEnum.RepaymentDetailPage
-                }?token=${getToken()}`,
-                { state: { orderNo } }
-              );
+              if (repayTypeList === undefined) return;
+              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`, { state: { orderNo }, replace: true });
             }}
           />
         </div>
@@ -218,8 +178,8 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
             primaryTypeGradient={true}
             disable={isPostRepayCreateLoading}
             onClick={() => {
-              if (isRepayTypesFetching) return;
-              if (balanceValueErrorMessage === '') handleConfirm();
+              if (repayTypeList === undefined) return;
+              if (balanceValue.errorMessage === '') handleConfirm();
             }}
           />
         </div>
@@ -230,14 +190,10 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         <div>{t('Attention')}:</div>
         <ul className="list-outside list-decimal pl-3 pt-1">
           <li>
-            {t(
-              'Before repayment, please make sure that you have enough balance on your bank account.'
-            )}
+            {t('Before repayment, please make sure that you have enough balance on your bank account.')}
           </li>
           <li>
-            {t(
-              'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.'
-            )}
+            {t('To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.')}
           </li>
         </ul>
       </div>

@@ -86,7 +86,7 @@ const BankCardListPage = () => {
         title={'Bank Card'}
         back={() => {
           navigate(
-            `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`
+            `${PageOrModalPathEnum.PersonalInfoPage}?token=${getToken()}`, { replace: true }
           );
         }}
       />

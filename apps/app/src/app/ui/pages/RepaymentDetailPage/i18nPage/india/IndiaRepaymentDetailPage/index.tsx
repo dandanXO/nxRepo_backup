@@ -31,6 +31,7 @@ import { Status } from '../../../../../statusEnum';
 import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
+import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -382,10 +383,10 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               <div
                 onClick={() => {
                   if (currentData === undefined) return;
-                  navigate(
-                    `repayment-modal?token=${getToken()}&orderNo=${
-                      orderNo ?? getOrderNo()
-                    }`,
+                  dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({
+                    ...repaymentDetailPageInitialState.repaymentData,
+                  }));
+                  navigate(`repayment-modal?token=${getToken()}&orderNo=${ orderNo ?? getOrderNo()}`,
                     {
                       state: currentData,
                     }
@@ -404,34 +405,22 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             <div className={`text-ctext-secondary text-xs`}>
               <div>{t('Attention')}：</div>
               <ul className="list-outside list-decimal pl-3 pt-1  leading-none">
-                <li>
-                  {t(
-                    'Before repayment, please make sure that you have enough balance on your bank account.'
-                  )}
-                </li>
+                <li>{t('Before repayment, please make sure that you have enough balance on your bank account.')}</li>
                 <li>
                   {t('Overdue for more than')}{' '}
-                  <span className={`text-cstate-info-main`}>
-                    {t('7 days')}{' '}
-                  </span>
-                  {t(
-                    'will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.'
-                  )}
+                  <span className={`text-cstate-info-main`}>{t('7 days')}{' '}</span>
+                  {t('will not be able to extend or re-loan，please ensure you make repayments on time to maintain uninterrupted access to our services.')}
                 </li>
                 {app?.init?.csEmail?.trim() && (
                   <li>
-                    {t(
-                      'Email us if you have any questions about your responsibilities or for more information.'
-                    )}{' '}
+                    {t('Email us if you have any questions about your responsibilities or for more information.')}{' '}
                     <span className={`text-cstate-info-main`}>
                       {app?.init?.csEmail}
                     </span>
                   </li>
                 )}
                 <li className="font-bold">
-                  {t(
-                    'After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.'
-                  )}
+                  {t('After completing your repayment, if your loan is not fully settled within 10 minutes, please upload the UTR and a screenshot for our manual review.')}
                 </li>
               </ul>
             </div>
@@ -439,26 +428,17 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
         </div>
 
         {(status === 'UNPAID' || status === 'OVERDUE') && (
-          <div
-            className={`bg-primary-assistant -mx-4 mt-6 flex flex-col py-4 px-5`}
-          >
+          <div className={`bg-primary-assistant -mx-4 mt-6 flex flex-col py-4 px-5`}>
             {/*<div className="bg-cstate-disable-assistant mx-[-24px] h-2.5 "></div>*/}
             <div className={`text-ctext-primary mb-3 text-xs leading-none`}>
-              {t(
-                'After completing the repayment, take a screenshot and upload your repayment receipt here ▼'
-              )}
+              {t('After completing the repayment, take a screenshot and upload your repayment receipt here ▼')}
             </div>
             {/*TODO: 先兼容 querystring*/}
             <div
               className={`my-2 grow`}
               onClick={() => {
-                navigate(
-                  `/v2/upload-payment-receipt?token=${getToken()}&orderNo=${
-                    orderNo ?? getOrderNo()
-                  }`,
-                  {
-                    state: { orderNo },
-                  }
+                navigate(`/v2/upload-payment-receipt?token=${getToken()}&orderNo=${orderNo ?? getOrderNo()}`,
+                  { state: { orderNo } }
                 );
               }}
             >
