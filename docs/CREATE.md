@@ -9,6 +9,12 @@ npx create-nx-workspace@latest
 nx g @nx/react:app my-new-app
 nx g @nx/react:app app --bundler=webpack
 
+#In Nx 18, generating projects will no longer derive the name and root.
+#Please provide the exact project name and root in the future.
+#Example: nx g @nx/react:application gambling --directory gambling
+nx g @nx/react:app my-new-app --directory apps
+nx g @nx/react:app app --bundler=webpack --directory apps
+
 
 
 
