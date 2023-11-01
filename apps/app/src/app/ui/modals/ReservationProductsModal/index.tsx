@@ -12,6 +12,8 @@ import Modal from '../../core-components/Modal';
 import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import { LoanAgreementModal } from '../QRLoanAgreementModal';
 import { i18nReservationProductsModal } from './translations';
+import { formatDate } from '../../../modules/format/formatDate';
+import moment from 'moment';
 
 const ReservationProductsModal = () => {
   const dispatch = useDispatch();
@@ -66,6 +68,31 @@ const ReservationProductsModal = () => {
       return total + product.calculating.finalLoanPrice;
     }, 0);
     setProductAmount(totalAmout);
+
+    const totalDisbursalAmount = selectedProducts.reduce((total, product) => {
+      return total + product.calculating.disbursalPrice;
+    }, 0);
+
+    const chargeFeeDetails = selectedProducts && selectedProducts[0]?.chargeFeeDetails?.reduce((acc: any, item) => {
+      acc[item.key] = item.counting;
+      return acc;
+    }, {});
+
+    dispatch(
+      modalSlice.actions.updateLoanAgreementModal({
+        show: false,
+        urlParams: {
+          'loanDate': formatDate(moment()) || '',
+          'loanAmount': totalAmout || 0,
+          'disbursalAmount': totalDisbursalAmount || 0,
+          'loanTerms': selectedProducts[0]?.terms || '',
+          'repayAmount': totalAmout || 0,
+          'repaymentDate': selectedProducts[0]?.calculating.dueDate || '',
+          ...chargeFeeDetails
+        }
+      })
+    );
+
   }, [selectedProducts]);
 
   const handleReserveProducts = () => {
@@ -174,6 +201,7 @@ const ReservationProductsModal = () => {
                   onClick={() => {
                     dispatch(
                       modalSlice.actions.updateLoanAgreementModal({
+                        ...modalState.loanAgreementModal,
                         show: true,
                       })
                     );
@@ -192,6 +220,7 @@ const ReservationProductsModal = () => {
           onClose={() => {
             dispatch(
               modalSlice.actions.updateLoanAgreementModal({
+                ...modalState.loanAgreementModal,
                 show: false,
               })
             );

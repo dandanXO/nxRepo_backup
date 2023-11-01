@@ -26,9 +26,10 @@ export const IndiaUploadPaymentReceiptPage = withTranslation(
             labelType="top"
             label={props.t('UTR') as string}
             onChange={(event) => {
+              const data = event.target.value.replace(/[^0-9]/g, '');
               props.setURT({
                 ...props.utr,
-                data: event.target.value,
+                data,
               });
             }}
             onBlur={() => {

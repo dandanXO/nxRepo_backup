@@ -25,6 +25,9 @@ export type InitialStateType = {
   };
   loanAgreementModal: {
     show: boolean;
+    urlParams: {
+      [key: string]: string | number;
+    }
   };
   QRSuccessModal: {
     show: boolean;
@@ -98,6 +101,7 @@ export const modalInitialState: InitialStateType = {
   },
   loanAgreementModal: {
     show: false,
+    urlParams: {}
   },
   QRSuccessModal: {
     show: false,
@@ -218,6 +222,7 @@ export const modalSlice = createSlice({
       action: PayloadAction<InitialStateType['loanAgreementModal']>
     ) => {
       state.loanAgreementModal.show = action.payload.show;
+      state.loanAgreementModal.urlParams = action.payload.urlParams;
     },
     updateQRSuccessModal: (
       state,
