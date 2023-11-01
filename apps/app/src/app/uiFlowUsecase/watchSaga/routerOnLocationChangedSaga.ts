@@ -86,5 +86,4 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
   }
   prevPathname = currentPath;
   prevLocation = location;
-:
 }
