@@ -27,20 +27,19 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
   const [bankValue, setBankValue] = useState({ value: '', label: '' });
   const [isBankSelected, setIsBankSelected] = useState(true);
   const bankAccountLength = cardType === 'DEBIT_CARD' ? 16 : 18;
+  const bankDropList = cardType === 'DEBIT_CARD' ? props.bankDropList.filter((i: any) => i.value !== "STP") : props.bankDropList;
+ 
   const initInputData = {
     data: '',
     isValidation: false,
     errorMessage: '',
     isEdit: false,
   };
-  const [bankAccountData, setBankAccountData] =
-    useState<InputValue<string>>(initInputData);
-  const [confirmBankAccountData, setconfirmBankAccountData] =
-    useState<InputValue<string>>(initInputData);
+  const [bankAccountData, setBankAccountData] = useState<InputValue<string>>(initInputData);
+  const [confirmBankAccountData, setconfirmBankAccountData] = useState<InputValue<string>>(initInputData);
 
   const validateBankAndConfrimAccountSame = () => {
-    const isBankAndConfrimAccountSame =
-      bankAccountData.data === confirmBankAccountData.data;
+    const isBankAndConfrimAccountSame = bankAccountData.data === confirmBankAccountData.data;
     return {
       ...confirmBankAccountData,
       isValidation: isBankAndConfrimAccountSame,
@@ -77,8 +76,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
       confirmBankAccountData.data,
       bankAccountLength
     );
-    const isBankAndConfrimAccountSame =
-      bankAccountData.data === confirmBankAccountData.data;
+    const isBankAndConfrimAccountSame = bankAccountData.data === confirmBankAccountData.data;
     setIsBankSelected(isBankValueValid);
     setBankAccountData(isBankAccountValid);
     setconfirmBankAccountData(
@@ -170,7 +168,7 @@ export const BankAccountForm = (props: IPakistanBankAccountForm) => {
             onChange={(item: any) => {
               setBankValue(item);
             }}
-            options={props.bankDropList}
+            options={bankDropList}
             isSearchable={true}
             placeholder={'Select'}
           />
