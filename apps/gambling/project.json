@@ -30,15 +30,15 @@
           "sourceMap": true,
           "vendorChunk": true
         },
-        "dev-brazil": {
+        "dev-coco777bet": {
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.dev.brazil.ts"
+              "with": "apps/gambling/src/environments/environment.dev.coco777bet.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/index.brazil.html"
+              "with": "apps/gambling/src/environments/index.dev.coco777bet.html"
             }
           ],
           "extractLicenses": false,
@@ -46,15 +46,15 @@
           "sourceMap": true,
           "vendorChunk": true
         },
-        "prod-brazil": {
+        "prod-coco777bet": {
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.prod.brazil.ts"
+              "with": "apps/gambling/src/environments/environment.prod.coco777bet.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/index.brazil.html"
+              "with": "apps/gambling/src/environments/index.prod.coco777bet.html"
             }
           ],
           "optimization": true,
@@ -118,8 +118,8 @@
         "dev-legend": {
           "buildTarget": "gambling:build:dev-legend"
         },
-        "dev-brazil":  {
-          "buildTarget": "gambling:build:dev-brazil"
+        "dev-coco777bet":  {
+          "buildTarget": "gambling:build:dev-coco777bet"
         }
       }
     },

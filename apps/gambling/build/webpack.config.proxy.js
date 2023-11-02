@@ -6,8 +6,8 @@ if(!isProduction) {
   // NOTE: Proxy URL
 
   switch (process.env.NODE_COUNTRY) {
-    case 'brazil': {
-      proxyURL = 'https://ds.bmw777slots.com';
+    case 'hxj-dev': {
+      proxyURL = 'https://www.hxj-dev.com';
       break;
     }
     case 'bmw': {
