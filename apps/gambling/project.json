@@ -30,6 +30,40 @@
           "sourceMap": true,
           "vendorChunk": true
         },
+        "dev-brazil": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/environment.dev.brazil.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/index.brazil.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "prod-brazil": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/environment.prod.brazil.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/index.brazil.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
         "dev-bmw": {
           "fileReplacements": [
             {
@@ -61,42 +95,6 @@
           "optimization": false,
           "sourceMap": true,
           "vendorChunk": true
-        },
-        "dev-cat777bet": {
-          "fileReplacements": [
-            {
-              "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.dev.cat777bet.ts"
-            },
-            {
-              "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/index.cat777bet.html"
-            }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
-        },
-        "prod-cat777bet": {
-          "fileReplacements": [
-            {
-              "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.prod.cat777bet.ts"
-            },
-            {
-              "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/index.cat777bet.html"
-            }
-          ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
         }
       }
     },
@@ -104,7 +102,6 @@
       "executor": "@nx/webpack:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "gambling:build",
         "hmr": true
       },
       "configurations": {
@@ -121,8 +118,8 @@
         "dev-legend": {
           "buildTarget": "gambling:build:dev-legend"
         },
-        "dev-cat777bet": {
-          "buildTarget": "gambling:build:dev-cat777bet"
+        "dev-brazil":  {
+          "buildTarget": "gambling:build:dev-brazil"
         }
       }
     },

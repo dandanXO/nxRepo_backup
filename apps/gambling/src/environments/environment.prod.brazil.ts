@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
   mockBackend: false,
-  captcha: "/japi/user/captcha/image",
+  platformName: "Brazil",
   baseUrl: "",
-  platformName: "Cat77bet",
   appPackageName: "com.cat777bet.big",
+  captcha: "/japi/user/captcha/image",
   appVersion: "1.0.0",
-  s3URLImages: "https://cx-web-static.s3.sa-east-1.amazonaws.com/game-icons",
+  s3URLImages: "https://xb-web.s3.amazonaws.com/game3",
 };

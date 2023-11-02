@@ -518,7 +518,7 @@ export const PageTemplate = (props: IPage) => {
                     <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{footerTextExpand ? 'jogue fora': 'ver tudo'}</button>
                   </div>
 
-                  <div className='mb-4'>@ 2023 Cat777bet.com All rights</div>
+                  <div className='mb-4'>@ 2023 {environment.platformName} All rights</div>
 
                   <div className='flex justify-center mb-4'>
                     <img alt='footer1' className='h-[13px]' src='assets/footer7.a1b2fb6d.png'/>
