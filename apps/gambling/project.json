@@ -4,6 +4,24 @@
   "sourceRoot": "apps/gambling/src",
   "projectType": "application",
   "targets": {
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "hmr": true
+      },
+      "configurations": {
+        "dev-coco777bet":  {
+          "buildTarget": "gambling:build:dev-coco777bet"
+        },
+        "dev-bmw": {
+          "buildTarget": "gambling:build:dev-bmw"
+        },
+        "dev-legend": {
+          "buildTarget": "gambling:build:dev-legend"
+        }
+      }
+    },
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
@@ -37,7 +55,7 @@
               "with": "apps/gambling/src/environments/environment.dev.coco777bet.ts"
             },
             {
-              "replace": "apps/gambling/src/index.html",
+              "replace": "apps/gambling/src/index.replaceme.html",
               "with": "apps/gambling/src/environments/index.dev.coco777bet.html"
             }
           ],
@@ -95,31 +113,6 @@
           "optimization": false,
           "sourceMap": true,
           "vendorChunk": true
-        }
-      }
-    },
-    "serve": {
-      "executor": "@nx/webpack:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "hmr": true
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "gambling:build:development"
-        },
-        "production": {
-          "buildTarget": "gambling:build:production",
-          "hmr": false
-        },
-        "dev-bmw": {
-          "buildTarget": "gambling:build:dev-bmw"
-        },
-        "dev-legend": {
-          "buildTarget": "gambling:build:dev-legend"
-        },
-        "dev-coco777bet":  {
-          "buildTarget": "gambling:build:dev-coco777bet"
         }
       }
     },
