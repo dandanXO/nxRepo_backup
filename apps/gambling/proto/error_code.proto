@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+enum ERROR_CODE {
+    NONE = 0;                   //
+    TOKEN_INVALID = 100;        //token无效
+    PLAYER_NOT_FOUND = 101;     //playerid不存在
+    REPLACE = 102;              //被别人顶替
+    KICK = 103;                 //被踢下线
+
+    GAME_ID_INVALID = 200;      //gameid无效
+    ROOM_ID_INVALID = 201;      //roomid无效
+    ALREADY_IN_ROOM = 202;      //已经在游戏中
+    NOT_IN_ROOM = 203;          //未进入房间
+    NO_BALANCE = 204;           //余额不足
+    ROBOT_ENOUGH = 205;         //不需要机器人进场
+    CAN_NOT_EXIT = 206;         //不能退出
+    OPERATION_INVALID = 207;    //操作无效
+    CLUB_ID_INVALID = 208;      //clubid无效
+    TABLE_ID_INVALID = 209;     //table_id无效
+    ENTER_FAIL = 210;           //进入桌子失败
+    SERVER_MAINTAIN = 211;      //服务器维护中
+    LOAN_STATUS = 212;      //在借用户不允许进BC
+    TABLE_NO_INVALID = 213; //私桌编号无效
+    BALANCE_NOT_ENOUGH = 214;//创建私桌余额不足
+    PRIVATE_TABLE_INIT_BET_ERROR = 215; //创建私桌时底注错误
+}
+
+

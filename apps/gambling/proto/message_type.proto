@@ -1,0 +1,487 @@
+syntax = "proto3";
+
+enum MSG_TYPE {
+  //
+  DEFAULT = 0;                //
+  CONNECTED = 1;              //通知建立连接
+  UNLOGIN = 2;                //未登录
+  PING = 3;                   //
+  PONG = 4;                   //
+  CLOSE = 5;                  //通知断开
+  SEND_COMMAND = 6;           //php通知客户端
+
+  //服务端内部消息
+  SERVER_AUTH = 10;           //服务器身份认证
+  SYNC_ONLINE_STATUS = 11;    //同步玩家在线状态(gate->game)
+  SYNC_PLAYER_BALANCE = 12;   //同步玩家余额(gate->game)
+  GAME_PLAYER_SETTLED = 13;   //游戏结算(game->gate)
+  SYNC_PLAYER_GAME_DATA = 14; //同步玩家游戏数据(game->gate)
+  SYNC_PLAYER_DATA = 15;      //同步玩家标签(gate->game)
+
+  PLAYER_WIN_MSG = 17;       //玩家赢钱消息(game->gate)
+
+  REGISTRY_SYNC_SERVER_DATA = 20; //registry同步服务器信息(registry->gate/game)
+  SYNC_GAME_SERVER_DATA = 21; //同步game服务器数据
+  ADD_PLAYER_BONUS = 22;      //增加玩家 bonus 余额
+  FREEZE_BALANCE = 23;        //冻结玩家游戏中下注的金额
+
+  //登录
+  PLAYER_LOGIN_REQ = 100;     //请求登录
+  PLAYER_LOGIN_REPLY = 101;   //
+  PLAYER_LOGOUT_REQ = 102;    //请求登出
+  PLAYER_LOGOUT_REPLY = 103;  //
+  PLAYER_BALANCE_EVENT = 104; //同步玩家余额
+  BALANCE_HISTORY_REQ = 105;  //请求输赢明细
+  BALANCE_HISTORY_REPLY = 106;//
+  BONUS_HISTORY_REQ = 107;    //请求所有bonus
+  BONUS_HISTORY_REPLY = 108;  //
+  PLAYER_BALANCE_REQ = 109;   //请求玩家余额
+  PLAYER_INFO_CHANGE = 110;   //玩家信息变更
+  PLAYER_GAME_DATA_REQ = 111; //请求玩家游戏数据
+  PLAYER_GAME_DATA_REPLY = 112;
+  PLAYER_BALANCE_FORCE_REQ = 113; // 强制刷新用户余额
+
+  //大厅
+  ROOM_LIST_REQ = 200;        //请求房间列表
+  ROOM_LIST_REPLY = 201;      //
+  ENTER_ROOM_REQ = 202;       //请求进入房间
+  ENTER_ROOM_REPLY = 203;     //
+  EXIT_ROOM_REQ = 204;        //请求离开房间
+  EXIT_ROOM_REPLY = 205;      //
+  SWITCH_TABLE_REQ = 206;     //换桌
+  TABLE_LIST_REQ = 207;       //请求桌子列表
+  TABLE_LIST_REPLY = 208;     //
+  GLOBAL_NOTICE = 209;        //跑马灯信息
+
+  //通用游戏内消息
+  TABLE_PLAYERS_EVENT = 300;  //玩家状态事件
+  TABLE_TIME_EVENT = 301;     //玩家计时事件
+  GAME_BALANCE_EVENT = 302;   //游戏内余额事件
+  CHAT_EXPRESSION_REQ = 303;  //游戏内表情消息
+  CHAT_EXPRESSION_EVENT = 304;//表情消息事件
+  CHAT_VOICE_REQ = 305;       //游戏语音请求
+  CHAT_VOICE_EVENT = 306;     //游戏语音事件
+  PRIVATE_TABLE_READY_REQ = 307; //私桌准备请求
+  PRIVATE_TABLE_READY_EVENT = 308; //私桌准备时间
+
+  //////////////////////////////// 活动 //////////////////////////////////
+
+
+  //////////////////////////////// 游戏 //////////////////////////////////
+  //TP
+  TP_GAME_START_EVENT = 1000; //游戏开始
+  TP_BUTTON_EVENT = 1001;     //button事件
+  TP_DEAL_CARDS = 1002;       //发牌
+  TP_STATE_EVENT = 1003;      //座位状态事件
+  TP_OPERATION_REQ = 1004;    //玩家操作请求
+  TP_OPERATION_EVENT = 1005;  //玩家操作事件
+  TP_SHOW_CARDS_EVENT = 1006; //show牌事件
+  TP_GAME_END_EVENT = 1007;   //结算事件
+  TP_ALL_SEAT_CARDS = 1008;   //通知机器人所有人底牌
+
+  //RUMMY
+  RUMMY_GAME_START_EVENT = 2000; //游戏开始
+  RUMMY_BUTTON_EVENT = 2001;     //button事件
+  RUMMY_DEAL_CARDS = 2002;       //发牌
+  RUMMY_STATE_EVENT = 2003;      //座位状态事件
+  RUMMY_OPERATION_REQ = 2004;    //玩家操作请求
+  RUMMY_OPERATION_EVENT = 2005;  //玩家操作事件
+  RUMMY_DECLARE_REQ = 2006;      //玩家declare请求
+  RUMMY_DECLARE_EVENT = 2007;    //玩家declare事件
+  RUMMY_GROUP_REQ = 2008;        //玩家分组请求
+  RUMMY_CONFIRM_REQ = 2009;      //玩家确认请求
+  RUMMY_GAME_END_EVENT = 2010;   //结算事件
+  RUMMY_SEAT_CARDS = 2011;       //玩家手牌事件（机器人专用）
+  RUMMY_HISTORY_EVENT = 2012;    //历史结果记录
+  RUMMY_SEAT_SCORE = 2013;       //玩家分数事件（机器人专用）
+
+  //TEXAS
+  TEXAS_ROUND_CAST = 3000;        //轮次开始
+  TEXAS_TABLE_STATE = 3001;       //座位状态事件
+  TEXAS_DEAL_CARDS_EVENT = 3002;  //发牌
+  TEXAS_OPERATION_REQ = 3003;     //玩家操作请求
+  TEXAS_OPERATION_CAST = 3004;    //玩家操作事件
+  TEXAS_TURN_START_EVENT = 3005;  //玩家可执行的操作
+  TEXAS_GAME_WIN_CAST = 3006;     //游戏结算事件
+  TEXAS_GAME_BALANCE_CAST = 3007; //德扑游戏余额广播
+  TEXAS_NEXT_TURN_EVENT = 3008;   //预操作事件
+  TEXAS_ALL_TABLE_STATE = 3009;   //通知机器人所有人底牌
+  TEXAS_STAND_REQ = 3010;         //玩家操作请求-站起
+  TEXAS_STAND_REPLY = 3011;       //玩家操作请求-站起reply
+  TEXAS_SIT_REQ = 3012;           //玩家操作请求-坐下
+  TEXAS_SIT_REPLY = 3013;         //玩家操作请求-坐下reply
+  TEXAS_GAME_DATA_REQ = 3014;     //查看玩家游戏数据
+  TEXAS_GAME_DATA_REPLY = 3015;   //查看玩家游戏数据reply
+  TEXAS_BUY_IN_RANGE_REQ = 3016;  //查询玩家买入范围
+  TEXAS_BUY_IN_RANGE_REPLY = 3017;//查询玩家买入范围reply
+  TEXAS_BUY_IN_REQ = 3018;        //玩家buy in 操作
+
+  //AB 8
+  AB_HISTORY_RESULT_EVENT = 4000; //历史记录
+  AB_GAME_START_EVENT = 4001; //游戏开始
+  AB_STATE_EVENT = 4002;      //座位状态事件
+  AB_OPERATION_REQ = 4003;    //玩家操作请求
+  AB_OPERATION_EVENT = 4004;  //玩家操作事件
+  AB_DEAL_CARDS_EVENT = 4005;       //发牌事件
+  AB_GAME_END_EVENT = 4006;   //结算事件
+  AB_TOP_LIST_EVENT = 4007;    //前30玩家列表
+  AB_ROOM_INFO = 4008;    //通知机器人房间信息
+  AB_RANK_PLAYERS_EVEVT = 4009;    //排名玩家信息
+  AB_STATE_EVENT_2 = 4011;      //座位状态事件2
+
+  //7up7down 9
+  SEVEN_HISTORY_EVENT = 5000;         //历史记录
+  SEVEN_STATE_EVENT = 5001;           //座位状态事件
+  SEVEN_BET_REQ = 5002;               //玩家下注请求
+  SEVEN_BET_EVENT = 5003;             //玩家下注reply
+  SEVEN_TABLE_PLAYERS_EVENT = 5004;   //桌子上的玩家信息
+  SEVEN_TOP_PLAYERS_REQ = 5005;       //请求排名玩家信息
+  SEVEN_TOP_PLAYERS_REPLY = 5006;     //排名玩家信息
+  SEVEN_GAME_END_EVENT = 5007;        //结算事件
+  SEVEN_GAME_START_EVENT = 5008;      //游戏开始事件
+  SEVEN_BATCH_BET_EVENT = 5009;       //批量通知下注事件
+
+  //dragon vs tiger 10
+  DT_HISTORY_EVENT = 5100;         //历史记录
+  DT_STATE_EVENT = 5101;           //座位状态事件
+  DT_BET_REQ = 5102;               //玩家下注请求
+  DT_BET_EVENT = 5103;             //玩家下注reply
+  DT_TABLE_PLAYERS_EVENT = 5104;   //桌子上的玩家信息
+  DT_TOP_PLAYERS_REQ = 5105;       //请求排名玩家信息
+  DT_TOP_PLAYERS_REPLY = 5106;     //排名玩家信息
+  DT_GAME_END_EVENT = 5107;        //结算事件
+  DT_GAME_START_EVENT = 5108;      //游戏开始事件
+  DT_BATCH_BET_EVENT = 5109;       //批量通知下注事件
+
+  //wingo lottery 11
+  WINGO_HISTORY_EVENT = 5200;         //历史记录
+  WINGO_STATE_EVENT = 5201;           //座位状态事件
+  WINGO_BET_REQ = 5202;               //玩家下注请求
+  WINGO_TABLE_PLAYERS_EVENT = 5204;   //桌子上的玩家信息
+  WINGO_TOP_PLAYERS_REQ = 5205;       //请求排名玩家信息
+  WINGO_TOP_PLAYERS_REPLY = 5206;     //排名玩家信息
+  WINGO_GAME_END_EVENT = 5207;        //结算事件
+  WINGO_GAME_START_EVENT = 5208;      //游戏开始事件
+  WINGO_BATCH_BET_EVENT = 5209;       //批量通知下注事件
+
+  //Forest Party 12
+  FP_HISTORY_EVENT = 5300;         //历史记录
+  FP_STATE_EVENT = 5301;           //座位状态事件
+  FP_BET_REQ = 5302;               //玩家下注请求
+  FP_TABLE_PLAYERS_EVENT = 5304;   //桌子上的玩家信息
+  FP_TOP_PLAYERS_REQ = 5305;       //请求排名玩家信息
+  FP_TOP_PLAYERS_REPLY = 5306;     //排名玩家信息
+  FP_GAME_END_EVENT = 5307;        //结算事件
+  FP_GAME_START_EVENT = 5308;      //游戏开始事件
+  FP_BATCH_BET_EVENT = 5309;       //批量通知下注事件
+
+  //Baccarat 3patti 待定
+  BTP_HISTORY_EVENT = 5400;         //历史记录
+  BTP_STATE_EVENT = 5401;           //座位状态事件
+  BTP_BET_REQ = 5402;               //玩家下注请求
+  BTP_TABLE_PLAYERS_EVENT = 5404;   //桌子上的玩家信息
+  BTP_TOP_PLAYERS_REQ = 5405;       //请求排名玩家信息
+  BTP_TOP_PLAYERS_REPLY = 5406;     //排名玩家信息
+  BTP_GAME_END_EVENT = 5407;        //结算事件
+  BTP_GAME_START_EVENT = 5408;      //游戏开始事件
+  BTP_BATCH_BET_EVENT = 5409;       //批量通知下注事件
+
+
+  //carrom 13
+  CARROM_STATE_EVENT = 6001;          //桌子状态
+  CARROM_STRIKE_RESULT_REQ = 6002;    //击球结果 TODO 待废弃
+  CARROM_GAME_END_EVENT = 6003;       //游戏结束事件
+  CARROM_RESULT_REQ = 6004;           //新游戏结果，需要验签
+  CARROM_SYNC_GAME_DATA_REQ = 6005;   //同步游戏数据，需要验签
+  CARROM_HIT_REQ = 6006;              //记录击球
+  CARROM_GUIDE_REQ = 6007;            //是否有新手引导
+  CARROM_GUIDE_REPLY = 6008;          //reply
+
+  //pool 台球 16 17
+  POOL_AIM = 7000;            // 瞄准操作 [Operate] [转发]
+  POOL_TECH_BALL = 7001;      // 加塞操作 [Operate] [转发]
+  POOL_FREE_BALL = 7002;      // 自由球操作 [Operate] [转发]
+  POOL_OPEN_TECHBALL = 7003;  // 打开加塞界面 [目前没用到] [Operate] [转发]
+  POOL_SELECT_HOLE = 7004;    // 报袋 [Operate] [转发]
+  POOL_SELECT_BALL = 7005;    // 报球 [Operate] [转发]
+  POOL_CHARGE = 7006;          // 拉杆蓄力 [Operate] [转发]
+  POOL_PRE_HIT = 7007;        // 击球（提交击球信息） [OperateHit] [转发]
+  POOL_HIT = 7008;            // 击球成功（这个用来做球杆的动画效果处理，没有实际作用） [None] [转发]
+  POOL_TALK = 7009;           // 聊天消息
+  POOL_PING = 7010;           // 心跳包
+  POOL_RESULT = 7011;         // 击球结果
+  POOL_TIMEOUT = 7012;        // 超时
+
+  //流程控制
+  POOL_START_GAME = 7200;      // 开始游戏，在匹配成功之后立即给两边发送 [GameBattle] [推送]
+  POOL_READY = 7100;          // 准备开始 [None] [发送] 服务器收到两边的ready后，选出先手玩家，然后给两边玩家分别发送PLAYING、LOOKING指令
+  POOL_STARTTURN = 7101;      // 玩家开始回合 [None] [转发]
+  POOL_GIVE_UP = 7102;        // 玩家认输 [None] [发送]
+  POOL_PLAYING = 7201;        // 通知该回合为玩家回合 [TurnState] [推送, 转发]
+  POOL_LOOKING = 7202;        // 通知该回合为对手回合 [TurnState] [推送, 转发]
+  POOL_FOUL = 7203;            // 同步犯规消息 [FoulData] [转发]
+  POOL_PRAISE = 7204;          // 同步称赞消息 [PraiseData] [转发]
+  POOL_RESETBALL = 7205;      // 球型发生变化需要重置（如母球洗袋，目前没有用到，预留）[Operate] [转发]
+  POOL_WIN = 7301;            // 玩家胜利 [ResultInfo] [转发]
+  POOL_LOSE = 7302;            // 玩家失败 [ResultInfo] [转发]
+  POOL_SETTLE = 7303;          // 结算游戏，服务器发送 [GameSettle] [推送]
+
+  //问答 game_id 18 19 20
+  QA_TABLE_STATE_EVENT = 8001;
+  QA_QUESTION_EVENT = 8002;
+  QA_ANSWER_REQ = 8003;
+  QA_ANSWER_EVENT = 8004;
+  QA_GAME_END_EVENT = 8005;
+  QA_SEND_ROBOT_EVENT = 8006;
+
+  //小游戏-lucky shot 21
+  SHOT_STATE_REQ = 8101;          // 请求当前状态
+  SHOT_STATE_EVENT = 8102;        // 当前状态
+  SHOT_BUY_REQ = 8103;            // 购买次数
+  SHOT_RESULT_REQ = 8104;         // 击球结果
+  SHOT_PRE_HIT_REQ = 8105;            // 开始击球
+
+  //小游戏-red vs black 24
+  RB_STATE_REQ = 8110;            //请求状态
+  RB_STATE_REPLY = 8111;          //请求状态返回
+  RB_BET_REQ = 8112;              //下注
+  RB_BET_REPLY = 8113;            //结果
+  RB_RANK_LIST_REQ = 8114;        //请求排行榜
+  RB_RANK_LIST_REPLY = 8115;      //排行榜返回
+  RB_GIVE_UP_FREE = 8116;         //放弃免费下注机会
+
+  //truco 25
+  TRUCO_ONLINE_EVENT = 9001;       //玩家重连
+  TRUCO_GAME_START_EVENT = 9002;   //游戏开始事件
+  TRUCO_STATE_EVENT = 9003;  //桌上座位状态事件
+  TRUCO_DEAL_CARDS = 9004;   //发牌
+  TRUCO_PLAYER_OPTION = 9005;    //玩家操作选项
+  TRUCO_OPERATION_REQ = 9006;   //玩家操作请求
+  TRUCO_OPERATION_EVENT = 9007;  //玩家操作事件
+  TRUCO_TURN_END_EVENT = 9008;   //一手牌结束
+  TRUCO_GAME_END_EVENT = 9009;   //游戏结束
+  TRUCO_OPERATION_FAILED = 9010;   //操作失败
+  TRUCO_SCORE_EVENT = 9011;   //当前分数
+  TRUCO_SHOW_CARDS_EVENT = 9012;  //展示手牌
+  TRUCO_TEAM_SCORE_EVENT = 9013;  //队伍分数
+  TRUCO_CONFIRM_REQ = 9014;  //玩家确认游戏结果
+  TRUCO_WIN_CARDS = 9015;   //是否是必胜牌(机器人专用)
+  TRUCO_TEAM_OPERATION = 9016;  //四人场专用
+  TRUCO_SEAT_CARDS = 9017;   //通知机器人玩家手牌(机器人专用)
+
+  //crash
+  CRASH_HISTORY_RESULT_EVENT = 10001;//历史记录
+  CRASH_GAME_START_EVENT = 10002;//游戏开始
+  CRASH_PLAYERS_EVEVT = 10003;//游戏玩家信息
+  CRASH_STATE_EVENT = 10004;//座位状态事件
+  CRASH_BET_REQ = 10005;//下注请求
+  CRASH_BET_EVENT = 10006;//下注事件
+  CRASH_GAME_END_EVENT = 10007;//游戏结束事件
+  CRASH_PLAYER_LIST_REQ = 10008;//玩家列表请求
+  CRASH_PLAYER_LIST_EVENT = 10009;//玩家列表事件
+  CRASH_PLAYER_SETTLEMENT_REQ = 10010;//玩家主动结算
+  CRASH_PLAYER_SETTLEMENT_RESP = 10011;//结算
+
+  //Slots1，阿兹特克，31
+  SLOTS1_STATE_REQ = 10101;            //请求状态
+  SLOTS1_STATE_REPLY = 10102;          //请求状态返回
+  SLOTS1_BET_REQ = 10103;              //下注
+  SLOTS1_BET_REPLY = 10104;            //结果
+
+  //Slots2，阿兹特克V2，32
+  SLOTS2_STATE_REQ = 10201;            //请求状态
+  SLOTS2_STATE_REPLY = 10202;          //请求状态返回
+  SLOTS2_BET_REQ = 10203;              //下注
+  SLOTS2_BET_REPLY = 10204;            //结果
+
+  //押线Slots
+  SLOTS3_STATE_REQ = 10301;            //请求状态
+  SLOTS3_STATE_REPLY = 10302;          //请求状态返回
+  SLOTS3_BET_REQ = 10303;              //下注
+  SLOTS3_BET_REPLY = 10304;            //结果
+
+
+  //世界杯
+  SJB_STATE_REQ = 10401;            //请求状态
+  SJB_STATE_RESP = 10402;          //请求状态返回
+  SJB_GAMESTART_REQ = 10403;
+  SJB_GAMESTART_REPLY= 10404;
+  SJB_BLOCK_REQ = 10405;
+  SJB_BLOCK_RESP = 10406;
+  //埃及
+  EGYPT_STATE_REQ = 10501;            //请求状态
+  EGYPT_STATE_RESP = 10502;          //请求状态返回
+  EGYPT_GAMESTART_REQ = 10503;
+  EGYPT_GAMESTART_RESP = 10504;
+  EGYPT_BLOCK_REQ = 10505;
+  EGYPT_BLOCK_RESP = 10506;
+  //阿兹特克
+  AZTEC_STATE_REQ = 10601;            //请求状态
+  AZTEC_STATE_RESP = 10602;          //请求状态返回
+  AZTEC_GAMESTART_REQ = 10603;
+  AZTEC_GAMESTART_RESP = 10604;
+  AZTEC_BLOCK_REQ = 10605;
+  AZTEC_BLOCK_RESP = 10606;
+
+  //JLB
+  JLB_STATE_REQ = 10701;            //请求状态
+  JLB_STATE_RESP = 10702;          //请求状态返回
+  JLB_GAMESTART_REQ = 10703;
+  JLB_GAMESTART_RESP = 10704;
+  JLB_BLOCK_REQ = 10705;
+  JLB_BLOCK_RESP = 10706;
+
+  //DRAGON
+  DRAGON_STATE_REQ = 10801;            //请求状态
+  DRAGON_STATE_RESP = 10802;          //请求状态返回
+  DRAGON_GAMESTART_REQ = 10803;
+  DRAGON_GAMESTART_RESP = 10804;
+  DRAGON_BLOCK_REQ = 10805;
+  DRAGON_BLOCK_RESP = 10806;
+
+  //ZEUS
+  ZEUS_STATE_REQ = 10901;            //请求状态
+  ZEUS_STATE_RESP = 10902;          //请求状态返回
+  ZEUS_GAMESTART_REQ = 10903;
+  ZEUS_GAMESTART_RESP = 10904;
+  ZEUS_BLOCK_REQ = 10905;
+  ZEUS_BLOCK_RESP = 10906;
+
+
+  //FRUIT
+  FRUIT_STATE_REQ = 11001;            //请求状态
+  FRUIT_STATE_RESP = 11002;          //请求状态返回
+  FRUIT_GAMESTART_REQ = 11003;
+  FRUIT_GAMESTART_RESP = 11004;
+  FRUIT_BLOCK_REQ = 11005;
+  FRUIT_BLOCK_RESP = 11006;
+
+  // SJB02
+  SJB02_STATE_REQ = 11101;
+  SJB02_STATE_RESP = 11102;
+  SJB02_GAMESTART_REQ = 11103;
+  SJB02_GAMESTART_RESP = 11104;
+  SJB02_BLOCK_REQ = 11105;
+  SJB02_BLOCK_RESP = 11106;
+
+  // SPARTA
+  SPARTA_STATE_REQ = 11201;
+  SPARTA_STATE_RESP = 11202;
+  SPARTA_GAMESTART_REQ = 11203;
+  SPARTA_GAMESTART_RESP = 11204;
+  SPARTA_BLOCK_REQ = 11205;
+  SPARTA_BLOCK_RESP = 11206;
+
+  // MONEY
+  MONEY_STATE_REQ = 11301;
+  MONEY_STATE_RESP = 11302;
+  MONEY_GAMESTART_REQ = 11303;
+  MONEY_GAMESTART_RESP = 11304;
+  MONEY_BLOCK_REQ = 11305;
+  MONEY_BLOCK_RESP = 11306;
+
+  // TIGER
+  TIGER_STATE_REQ = 11401;
+  TIGER_STATE_RESP = 11402;
+  TIGER_GAMESTART_REQ = 11403;
+  TIGER_GAMESTART_RESP = 11404;
+  TIGER_BLOCK_REQ = 11405;
+  TIGER_BLOCK_RESP = 11406;
+
+  // ZEUS02
+  ZEUS02_STATE_REQ = 11501;
+  ZEUS02_STATE_RESP = 11502;
+  ZEUS02_GAMESTART_REQ = 11503;
+  ZEUS02_GAMESTART_RESP = 11504;
+  ZEUS02_BLOCK_REQ = 11505;
+  ZEUS02_BLOCK_RESP = 11506;
+
+  // BULL
+  BULL_STATE_REQ = 11601;
+  BULL_STATE_RESP = 11602;
+  BULL_GAMESTART_REQ = 11603;
+  BULL_GAMESTART_RESP = 11604;
+  BULL_BLOCK_REQ = 11605;
+  BULL_BLOCK_RESP = 11606;
+
+  // WOLF
+  WOLF_STATE_REQ = 11701;
+  WOLF_STATE_RESP = 11702;
+  WOLF_GAMESTART_REQ = 11703;
+  WOLF_GAMESTART_RESP = 11704;
+  WOLF_BLOCK_REQ = 11705;
+  WOLF_BLOCK_RESP = 11706;
+
+  // TIGER02
+  TIGER02_STATE_REQ = 11801;
+  TIGER02_STATE_RESP = 11802;
+  TIGER02_GAMESTART_REQ = 11803;
+  TIGER02_GAMESTART_RESP = 11804;
+  TIGER02_BLOCK_REQ = 11805;
+  TIGER02_BLOCK_RESP = 11806;
+
+  // LPIG
+  LPIG_STATE_REQ = 11901;
+  LPIG_STATE_RESP = 11902;
+  LPIG_GAMESTART_REQ = 11903;
+  LPIG_GAMESTART_RESP = 11904;
+  LPIG_BLOCK_REQ = 11905;
+  LPIG_BLOCK_RESP = 11906;
+
+  // NMOUSE
+  NMOUSE_STATE_REQ = 12101;
+  NMOUSE_STATE_RESP = 12102;
+  NMOUSE_GAMESTART_REQ = 12103;
+  NMOUSE_GAMESTART_RESP = 12104;
+  NMOUSE_BLOCK_REQ = 12105;
+  NMOUSE_BLOCK_RESP = 12106;
+
+  // NCOW
+  NCOW_STATE_REQ = 12201;
+  NCOW_STATE_RESP = 12202;
+  NCOW_GAMESTART_REQ = 12203;
+  NCOW_GAMESTART_RESP = 12204;
+  NCOW_BLOCK_REQ = 12205;
+  NCOW_BLOCK_RESP = 12206;
+
+  // NTIGER
+  NTIGER_STATE_REQ = 12301;
+  NTIGER_STATE_RESP = 12302;
+  NTIGER_GAMESTART_REQ = 12303;
+  NTIGER_GAMESTART_RESP = 12304;
+  NTIGER_BLOCK_REQ = 12305;
+  NTIGER_BLOCK_RESP = 12306;
+
+  // NRABIT
+  NRABIT_STATE_REQ = 12401;
+  NRABIT_STATE_RESP = 12402;
+  NRABIT_GAMESTART_REQ = 12403;
+  NRABIT_GAMESTART_RESP = 12404;
+  NRABIT_BLOCK_REQ = 12405;
+  NRABIT_BLOCK_RESP = 12406;
+
+
+
+
+  //外接游戏 bgaming
+  BGAMING_OPEN_REQ  = 12001;  //打开游戏  
+  BGAMING_OPEN_RESP = 12002;    
+  //外接游戏 evoplay 
+  EVOPLAY_OPEN_REQ  = 12003;  //打开游戏
+  EVOPLAY_OPEN_RESP = 12004;        
+  //外接游戏 pgsoft 
+  PGSOFT_OPEN_REQ  = 12005;  //打开游戏 
+  PGSOFT_OPEN_RESP = 12006;
+  //外接游戏 ppsoft 
+  PPSOFT_OPEN_REQ  = 12007;  //打开游戏 
+  PPSOFT_OPEN_RESP = 12008;
+
+  //外接游戏 ppsoft 
+  JILIGAMES_OPEN_REQ  = 12009;  //打开游戏 
+  JILIGAMES_OPEN_RESP = 12010;
+
+ 
+
+
+
+}

@@ -1,0 +1,206 @@
+syntax = "proto3";
+package texas;
+
+////////////////////////////////////////////////////////////////
+// texas poker游戏
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+  DT_NONE = 0;
+  START = 1; //开局
+  OPERATION = 2; //玩家操作
+  END = 3; //等待游戏结束
+}
+
+enum OPERATION_TYPE {
+  OT_NONE = 0; //无
+  OT_CHECK = 1; //过牌
+  OT_BET = 2; //押注
+  OT_CALL = 3; //跟注
+  OT_RAISE = 4; //加注
+  OT_FOLD = 5; //弃牌
+  OT_ALL_IN = 6; //all in
+
+  // 预操作才会有的类型
+  OT_CHECK_OR_FOLD = 7;
+  OT_CALL_ANY = 8;
+}
+
+//牌型
+enum CARD_TYPE {
+  CT_NONE = 0; //无
+  CT_NO_PAIR = 1; //散牌
+  CT_PAIR = 2; //一对
+  CT_TWO_PAIR = 3; //两对
+  CT_TRIPS = 4; //三条
+  CT_STRAIGHT = 5; //顺子
+  CT_FLUSH = 6; //同花
+  CT_FULL_HOUSE = 7; //葫芦
+  CT_QUADS = 8; //四条
+  CT_STRAIGHT_FLUSH = 9; //同花顺
+  CT_ROYAL_STRAIGHT_FLUSH = 10; //皇家同花顺
+}
+
+//轮次类型
+enum ROUND_TYPE {
+  RT_NONE = 0; //无
+  RT_PRE_FLOP = 1; //翻牌前
+  RT_FLOP = 2; //发三张公共牌
+  RT_TURN = 3; //发第4张牌，转牌
+  RT_RIVER = 4; //发第5张牌，河牌
+  RT_ENDING = 5; //结算状态，仅用于在结算中断线重连
+}
+
+//桌上座位状态(开局/进场/重连/每次玩家操作后更新)
+message TableState {
+  string gameCode = 1; //局号
+  repeated int32 pots = 2; //[主底池,边池1,边池2...] 奖池
+  repeated int32 specialSeatIndex = 3; //[庄家位, 小盲位, 大盲位]，之前是buttonSeatIndex
+  repeated SeatState seatStates = 4; //桌上座位状态
+  repeated int32 sharedCards = 5; //公共牌
+  ROUND_TYPE round = 6; //当前轮次 ROUND_TYPE
+  int32 totalPot = 7; //总下注金额，所有奖池+所有玩家当前轮次的下注
+}
+
+//每个座位当前状态
+message SeatState {
+  int32 index = 1; //座位号
+  int32 bet = 2; //当前轮次的下注
+  OperationReq lastOperation = 3; //上一次的操作类型
+  int32 balance = 4; //游戏中的钱
+}
+
+//发牌事件/公共牌出现后更新牌型和牌力
+message DealCardsEvent {
+  ROUND_TYPE type = 1; //轮次类型
+  CardSet cardSet = 2; //牌
+}
+
+//先发送计时器事件TableTimeEvent，再发送给当前玩家发送可操作的类型及minBet maxBet
+message TurnStartEvent {
+  repeated OPERATION_TYPE operationTypes = 1; //可操作的类型
+  int32 minBet = 2; //最小下注
+  int32 maxBet = 3; //最大下注
+  int32 minRaise = 4; //最小需要多raise值，这个值+minBet才是下注的金额
+}
+
+//预操作
+message NextTurnEvent {
+  repeated OPERATION_TYPE operationTypes = 1; //可以预操作的类型
+  int32 minBet = 2; //最小下注
+  int32 maxBet = 3; //最大下注
+}
+
+//玩家操作
+message OperationReq {
+  OPERATION_TYPE type = 1; //类型 OPERATION_TYPE
+  int32 amount = 2; //操作金额
+}
+
+//当前玩家操作后，广播操作事件，再更新 TableState
+message OperationCast {
+  int32 seatIndex = 1; //SEAT
+  OPERATION_TYPE type = 2; //类型 OPERATION_TYPE
+  int32 amount = 3; //操作金额
+}
+
+//站起来
+message StandReq {
+
+}
+
+//站起消息返回
+message StandReply {
+
+}
+
+//坐下
+message SitReq {
+  int32 seatIndex = 1; //SEAT
+}
+
+message SitReply {
+  int32 seatIndex = 1;
+}
+
+//查看玩家游戏数据
+message GameDataReq {
+  int32 seatIndex = 1;
+}
+
+message GameDataReply {
+  int32 seatIndex = 1;
+  int32 totalGames = 2;
+  float vpip = 3;
+  float af = 4;
+}
+
+//查询buy in 买入范围
+message BuyInRangeReq {
+
+}
+
+message BuyInRangeReply {
+  int32 min = 1; //买入最小金额
+  int32 max = 2;  //买入最大金额
+}
+
+message BuyInReq {
+  int32 amount = 1; //买入金额
+}
+
+//每一轮开始事件广播
+message RoundCast {
+  ROUND_TYPE type = 1; //轮次类型
+  repeated int32 cards = 2; //FLOP TURN RIVER 发的牌
+}
+
+//游戏结束广播
+message GameWinCast {
+  message Player {
+    int32 seatIndex = 1;
+    int32 winBet = 2;  //赢的钱，包含下注的钱
+    repeated int32 winPotsIndex = 3; //赢的奖池索引
+    repeated int32 winPotsBet = 4; //对应奖池的钱
+    CardSet cardSet = 5; //手牌
+    repeated int32 useCards = 6; //组成最大牌面的牌
+    int32 balance = 7; //结算后的余额
+    bool showWinner = 8; //是否展示赢的动画 true展示 false不展示
+    int32 totalBet = 9; //总下注金额
+  }
+  repeated Player players = 1;
+  repeated int32 pots = 2; //[主底池,边池1,边池2...] 奖池
+  repeated int32 winPlayerSeats = 3; //最后结算展示赢家的顺序，按照牌力从大到小
+}
+
+// 手牌
+message CardSet {
+  repeated int32 cards = 1; //手牌
+  CARD_TYPE type = 2; //牌型 CARD_TYPE
+  int32 cardStrength = 3; //牌力大小
+}
+
+//游戏余额事件（仅用于游戏内余额显示）
+message GameBalanceCast {
+  message Player {
+    int32 seatIndex = 1; //座位
+    int32 balance = 2; //游戏中的余额
+  }
+  repeated Player players = 1;
+}
+
+//通知机器人所有人的手牌及公牌
+message AllTableState {
+  repeated int32 sharedCards = 1; //公共牌
+  repeated AllSeatState seatStates = 2;
+}
+
+message AllSeatState {
+  int32 index = 1; //座位号
+  int32 balance = 2; //当前余额
+  CardSet cardSet = 3; //手牌
+  repeated int32 useCards = 4; //组成最大牌面的牌
+}
+
+

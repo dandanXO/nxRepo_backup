@@ -1,0 +1,961 @@
+syntax = "proto3";
+
+package base;
+
+message Connected {
+
+    int64 now_time = 1;
+}
+
+message ServerAuth {
+
+    int32 handler_type = 1;
+    string sign = 2;
+    int32 game_id = 3;
+    string url = 4;
+    repeated int32 room_ids = 5;
+}
+
+message RegistrySyncServerData {
+
+    repeated ServerData servers = 1;
+}
+
+message ServerData {
+
+    int32 handler_type = 1;
+    string url = 2;
+    int32 game_id = 3;
+    repeated int32 room_ids = 4;
+}
+
+message GameServerData {
+
+    int32 game_id = 1;
+    string url = 2;
+    repeated RoomInfo room_infos = 3;
+    bool running = 4;
+}
+
+enum GAME_ID {
+
+    GID_NONE = 0;
+    GID_TP = 1;
+    GID_RUMMY = 2;
+    GID_TEXAS = 3;
+    GID_TPJOKER = 4;
+    GID_TPAK47 = 5;
+    GID_RUMMY_2 = 6;
+    GID_AB = 8;
+    GID_SEVEN = 9;
+    GID_DRAGON_TIGER = 10;
+    GID_WINGO = 11;
+    GID_FOREST_PARTY = 12;
+    GID_CARROM = 13;
+    GID_DISC_POOL = 14;
+    GID_FREESTYLE = 15;
+    GID_POOL = 16;
+    GID_POOL_AIM = 17;
+    GID_QA_1 = 18;
+    GID_QA_2 = 19;
+    GID_QA_RANDOM = 20;
+    GID_LUCKY_SHOT = 21;
+    GID_POOL2 = 22;
+    GID_POOL2_AIM = 23;
+    GID_RED_BLACK = 24;
+    GID_TRUCO = 25;
+    GID_TRUCO_CLEAN = 26;
+    GID_CRASH = 30;
+    GID_SLOTS1 = 31;
+    GID_SLOTS2 = 32;
+    GID_SLOTS3 = 33;
+    GID_PRIVATE_TABLE_TRUCO = 40;
+    GID_PRIVATE_TABLE_TRUCO_CLEAN = 41;
+    GID_SLOTS4 = 50;
+    GID_EGYPT_SLOTS = 51;
+    GID_AZTEC_SLOTS = 52;
+    GID_JLB_SLOTS = 53;
+    GID_DRAGON_SLOTS = 54;
+    GID_ZEUS_SLOTS = 55;
+    GID_FRUIT_SLOTS = 56;
+    GID_SJB02_SLOTS = 57;
+    GID_SPARTA_SLOTS = 58;
+    GID_MONEY_SLOTS = 59;
+    GID_TIGER_SLOTS = 60;
+    GID_ZEUS02_SLOTS = 61;
+    GID_BULL_SLOTS = 62;
+    GID_WOLF_SLOTS = 63;
+    GID_TIGER02_SLOTS = 64;
+    GID_LPIG_SLOTS = 65;
+    GID_NMOUSE_SLOTS = 66;
+    GID_NCOW_SLOTS = 67;
+    GID_NTIGER_SLOTS = 68;
+    GID_NRABIT_SLOTS = 69;
+    GID_POTIONSPELLS_SLOTS = 10001;
+    GID_SWEETRUSHMEGAWAYS_SLOTS = 10002;
+    GID_ROAD2RICHES_SLOTS = 10003;
+    GID_LUCKYLADYMOONMEGAWAYS_SLOTS = 10004;
+    GID_DOMNITORSTREASURE_SLOTS = 10005;
+    GID_TREE_OF_LIGHT_SLOTS = 20001;
+    GID_FOREST_DREAMS_SLOTS = 20002;
+    GID_NUKE_WORLD_SLOTS = 20003;
+    GID_RUEDA_DE_CHILE_SLOTS = 20004;
+    GID_PACHIN_GIRL_SLOTS = 20005;
+    GID_PENALTYSHOOTOUT_SLOTS = 20006;
+    GID_THEGREATESTCATCH_SLOTS = 20007;
+    GID_EUROPEANROULETTE_SLOTS = 20008;
+    GID_HOTVOLCANO_SLOTS = 20009;
+    GID_SOLDIT_SLOTS = 20010;
+    GID_FRUITBURST_SLOTS = 20011;
+    GID_HOTRIONIGHTS_SLOTS = 20012;
+    GID_IRISHWEEKEND_SLOTS = 20013;
+    GID_OLDWEST_SLOTS = 20014;
+    GID_PATRICKSMAGICFIELD_SLOTS = 20015;
+    GID_CAMINODECHILIBONUSBUY_SLOTS = 20016;
+    GID_EGYPTGODS_SLOTS = 20017;
+    GID_BASKETBALL_SLOTS = 20018;
+    GID_TALISMANSOFFORTUNE_SLOTS = 20019;
+    GID_THEGREATWALLTREASURE_SLOTS = 20020;
+    GID_ROBINHOOD_SLOTS = 20021;
+    GID_CLASHOFPIRATES_SLOTS = 20022;
+    GID_JOURNEYTOTHEWEST_SLOTS = 20023;
+    GID_VEGASNIGHTS_SLOTS = 20024;
+    GID_JEWELLERYSTORE_SLOTS = 20025;
+    GID_REDCLIFF_SLOTS = 20026;
+    GID_ACEROUND_SLOTS = 20027;
+    GID_ELVENPRINCESSES_SLOTS = 20028;
+    GID_LEGENDOFRA_SLOTS = 20029;
+    GID_THEEMPERORSTOMB_SLOTS = 20030;
+    GID_NECROMANCER_SLOTS = 20031;
+    GID_NAUGHTYGIRLSCABARET_SLOTS = 20032;
+    GID_ATLANTIS_SLOTS = 20033;
+    GID_ROBINSON_SLOTS = 20034;
+    GID_CANDYDREAMS_SLOTS = 20035;
+    GID_HEADSTAILS_SLOTS = 20036;
+    GID_MOREORLESS_SLOTS = 20037;
+    GID_OASISPOKERCLASSIC_SLOTS = 20038;
+    GID_BLACKJACKLUCKYSEVENS_SLOTS = 20039;
+    GID_USSRSEVENTIES_SLOTS = 20040;
+    GID_THESLAVS_SLOTS = 20041;
+    GID_FOURACES_SLOTS = 20042;
+    GID_REDQUEEN_SLOTS = 20043;
+    GID_LEPRECHAUN_RICHES_SLOTS = 30001;
+    GID_TREE_FORTUNE_SLOTS = 30002;
+    GID_GEM_SAVIOUR_SLOTS = 30003;
+    GID_BIKINI_PARADISE_SLOTS = 30004;
+    GID_LUCKY_PIGGY_SLOTS = 30005;
+    GID_TREASURES_AZTEC_SLOTS = 30006;
+    GID_CAPTAIN_BOUNTY_SLOTS = 30007;
+    GID_QUEEN_BOUNTY_SLOTS = 30008;
+    GID_WILD_BANDITO_SLOTS = 30009;
+    GID_DRAGON_HATCH_SLOTS = 30010;
+    GID_GREAT_ICESCAPE_SLOTS = 30011;
+    GID_GANESHA_FORTUNE_SLOTS = 30012;
+    GID_DREAMS_MACAU_SLOTS = 30013;
+    GID_WILD_BOUNTY_SHOWDOWN_SLOTS = 30014;
+    GID_PROSPERITY_FORTUNE_SLOTS = 30015;
+    GID_DINER_DELIGHTS_SLOTS = 30016;
+    GID_EGYPT_BOOK_MYSTERY_SLOTS = 30017;
+    GID_WILD_FIREWORKS_SLOTS = 30018;
+    GID_THAI_RIVER_WONDERS_SLOTS = 30019;
+    GID_BALI_VACATION_SLOTS = 30020;
+    GID_CRYPTO_GOLD_SLOTS = 30021;
+    GID_JURASSIC_KINGDOM_SLOTS = 30022;
+    GID_COCKTAIL_NIGHTS_SLOTS = 30023;
+    GID_FORTUNE_TIGER_SLOTS = 30024;
+    GID_SPEED_WINNER_SLOTS = 30025;
+    GID_LEGEND_PERSEUS_SLOTS = 30026;
+    GID_WINWIN_WON_SLOTS = 30027;
+    GID_MEDUSA_II_SLOTS = 30028;
+    GID_MEDUSA_SLOTS = 30029;
+    GID_PLUSHIE_FRENZY_SLOTS = 30030;
+    GID_WIZDOM_WONDERS_SLOTS = 30031;
+    GID_HOOD_WOLF_SLOTS = 30032;
+    GID_HALLOW_WIN_SLOTS = 30033;
+    GID_SANTA_GIFT_RUSH_SLOTS = 30034;
+    GID_GEM_SAVIOUR_SWORD_SLOTS = 30035;
+    GID_SYMBOLS_EGYPT_SLOTS = 30036;
+    GID_GANESHA_GOLD_SLOTS = 30037;
+    GID_THREE_MONKEYS_SLOTS = 30038;
+    GID_JUNGLE_DELIGHT_SLOTS = 30039;
+    GID_NINJA_SAMURAI_SLOTS = 30040;
+    GID_MUAY_THAI_SLOTS = 30041;
+    GID_REEL_LOVE_SLOTS = 30042;
+    GID_GEM_SAVIOUR_CONQUEST_SLOTS = 30043;
+    GID_CANDY_BURST_SLOTS = 30044;
+    GID_GENIE_WISHES_SLOTS = 30045;
+    GID_CIRCUS_DELIGHT_SLOTS = 30046;
+    GID_SECRETS_CLEOPATRA_SLOTS = 30047;
+    GID_VAMPIRE_CHARM_SLOTS = 30048;
+    GID_JEWELS_PROSPERITY_SLOTS = 30049;
+    GID_JACK_FROST_SLOTS = 30050;
+    GID_GALACTIC_GEMS_SLOTS = 30051;
+    GID_GUARDIANS_FIRE_SLOTS = 30052;
+    GID_MAJESTIC_TREASURES_SLOTS = 30053;
+    GID_CANDY_BONANZA_SLOTS = 30054;
+    GID_HEIST_STAKES_SLOTS = 30055;
+    GID_RISE_APOLLO_SLOTS = 30056;
+    GID_MERMAID_RICHES_SLOTS = 30057;
+    GID_RAIDER_JANE_SLOTS = 30058;
+    GID_SUPERMARKET_SPREE_SLOTS = 30059;
+    GID_BUFFALO_WIN_SLOTS = 30060;
+    GID_LEGENDARY_MONKEY_KING_SLOTS = 30061;
+    GID_SPIRITED_WONDERS_SLOTS = 30062;
+    GID_FARM_INVADERS_SLOTS = 30063;
+    GID_EMOJI_RICHES_SLOTS = 30064;
+    GID_MASK_CARNIVAL_SLOTS = 30065;
+    GID_GARUDA_GEMS_SLOTS = 30066;
+    GID_DESTINY_MOON_SLOTS = 30067;
+    GID_BUTTERFLY_BLOSSOM_SLOTS = 30068;
+    GID_ROOSTER_RUMBLE_SLOTS = 30069;
+    GID_QUEEN_BANQUET_SLOTS = 30070;
+    GID_BATTLEGROUND_ROYALE_SLOTS = 30071;
+    GID_WILD_COASTER_SLOTS = 30072;
+    GID_TOTEM_WONDERS_SLOTS = 30073;
+    GID_ALCHEMY_GOLD_SLOTS = 30074;
+    GID_ASGARDIAN_RISING_SLOTS = 30075;
+    GID_MIDAS_FORTUNE_SLOTS = 30076;
+    GID_FORTUNE_RABBIT_SLOTS = 30077;
+    GID_RAVE_PARTY_FEVER_SLOTS = 30078;
+    GID_HAWAIIAN_TIKI_SLOTS = 30079;
+    GID_BAKERY_BONANZA_SLOTS = 30080;
+    GID_FURY_ODIN_MEGAWAYS_SLOTS = 40001;
+    GID_GATES_OLYMPUS_SLOTS = 40002;
+    GID_SWEET_BONANZA_SLOTS = 40003;
+    GID_BIG_BASS_SPLASH_SLOTS = 40004;
+    GID_BIG_BASS_BONANZA_SLOTS = 40005;
+    GID_JOKER_JEWELS_SLOTS = 40006;
+    GID_GEMS_BONANZA_SLOTS = 40007;
+    GID_BIGGER_BASS_BONANZA_SLOTS = 40008;
+    GID_RELEASE_THE_KRAKEN_SLOTS = 40009;
+    GID_SWEET_BONANZA_XMAS_SLOTS = 40010;
+    GID_WOLF_GOLD_SLOTS = 40011;
+    GID_SUPER7S_SLOTS = 40012;
+    GID_WILD_WILD_RICHES_SLOTS = 40013;
+    GID_FRUIT_PARTY_SLOTS = 40014;
+    GID_STARLIGHT_PRINCESS_SLOTS = 40015;
+    GID_DIAMOND_STRIKE_SLOTS = 40016;
+    GID_MUSTANG_GOLD_SLOTS = 40017;
+    GID_FLOATINGDRAGON_SLOTS = 40018;
+    GID_BONANZA_KEEPING_REEL_SLOTS = 40019;
+    GID_CHRISTMAS_CATCH_SLOTS = 40020;
+    GID_888GOLD_SLOTS = 40021;
+    GID_GOLDPARTY_SLOTS = 40022;
+    GID_5LIONS_MEGAWAYS_SLOTS = 40023;
+    GID_WILD_WEST_GOLD_SLOTS = 40024;
+    GID_CHRISTMAS_BASS_BONANZA_SLOTS = 40025;
+    GID_BUFFALO_KING_MEGAWAYS_SLOTS = 40026;
+    GID_POWER_THOR_MEGAWAYS_SLOTS = 40027;
+    GID_DOG_HOUSE_MEGAWAYS_SLOTS = 40028;
+    GID_MASTER_CHEN_FORTUNE_SLOTS = 40029;
+    GID_MADAME_DESTINY_MEGAWAYS_SLOTS = 40030;
+    GID_SANTA_GREAT_GIFTS_SLOTS = 40031;
+    GID_ULTRA_HOLD_SPIN_SLOTS = 40032;
+    GID_BLACK_BULL_SLOTS = 40033;
+    GID_JUICY_FRUITS_SLOTS = 40034;
+    GID_SPIRIT_ADVENTURE_SLOTS = 40035;
+    GID_WILD_WEST_DUELS_SLOTS = 40036;
+    GID_OCTOBEER_FORTUNES_SLOTS = 40037;
+    GID_FRUIT_PARTY2_SLOTS = 40038;
+    GID_HEART_RIO_SLOTS = 40039;
+    GID_MADAME_DESTINY_SLOTS = 40040;
+    GID_RELEASE_KRAKEN2_SLOTS = 40041;
+    GID_COSMICCASH_SLOTS = 40042;
+    GID_DRAGON_HERO_SLOTS = 40043;
+    GID_HOT_PEPPER_SLOTS = 40044;
+    GID_GOLDEN_BEAUTY_SLOTS = 40045;
+    GID_CLUBTROPICANA_SLOTS = 40046;
+    GID_THEDOGHOUSE_SLOTS = 40047;
+    GID_WILDWILD_BANANAS_SLOTS = 40048;
+    GID_FIRESTRIKE_SLOTS = 40049;
+    GID_LUCKYLIGHTNING_SLOTS = 40050;
+    GID_PIZZAPIZZAPIZZA_SLOTS = 40051;
+    GID_HOTFIESTA_SLOTS = 40052;
+    GID_FISHEYE_SLOTS = 40053;
+    GID_MASTER_JOKER_SLOTS = 40054;
+    GID_MUERTOS_MULTIPLIER_SLOTS = 40055;
+    GID_EXTRAMEGAWAYS_SLOTS = 40056;
+    GID_CASH_PATROL_SLOTS = 40057;
+    GID_MONSTERSUPERLANCHE_SLOTS = 40058;
+    GID_GREAT_RHINO_MEGAWAYS_SLOTS = 40059;
+    GID_WILDWILDRICHES_SLOTS = 40060;
+    GID_BIGBASSBONANZAM_SLOTS = 40061;
+    GID_BRONCO_SPIRIT_SLOTS = 40062;
+    GID_888DRAGONS_SLOTS = 40063;
+    GID_LUCKY_FISHING_SLOTS = 40064;
+    GID_LEGEND_HEROESM_SLOTS = 40065;
+    GID_RABBIT_GARDEN_SLOTS = 40066;
+    GID_JOHN_HUNTER_SLOTS = 40067;
+    GID_MOCHIMON_SLOTS = 40068;
+    GID_SECRETCITYGOLD_SLOTS = 40069;
+    GID_HAND_MIDAS_SLOTS = 40070;
+    GID_FIRE88_SLOTS = 40071;
+    GID_TEMUJIN_TREASURES_SLOTS = 40072;
+    GID_CLEOCATRA_SLOTS = 40073;
+    GID_CHILLI_HEAT_SLOTS = 40074;
+    GID_GORILLA_MAYHEM_SLOTS = 40075;
+    GID_SWEET_POWERNUDGE_SLOTS = 40076;
+    GID_BARN_FESTIVAL_SLOTS = 40077;
+    GID_MAMMOTH_GOLD_SLOTS = 40078;
+    GID_GREAT_RHINO_SLOTS = 40079;
+    GID_FIREBIRD_SPIRIT_SLOTS = 40080;
+    GID_SWORD_ARES_SLOTS = 40081;
+    GID_QUEENIE_SLOTS = 40082;
+    GID_WILD_WEST_MEGAWAYS_SLOTS = 40083;
+    GID_DOG_HOUSE_MULTIHOLD_SLOTS = 40084;
+    GID_STARLIGHT_CHRISTMAS_SLOTS = 40085;
+    GID_FLOATING_DRAGON_SLOTS = 40086;
+    GID_WILD_BOOSTER_SLOTS = 40087;
+    GID_BOOK_GOLDEN_SANDS_SLOTS = 40088;
+    GID_FIRE_STRIKE_SLOTS = 40089;
+    GID_BOOK_TUT_SLOTS = 40090;
+    GID_MYSTERIOUS_EGYPT_SLOTS = 40091;
+    GID_FORTUNE_GIZA_SLOTS = 40092;
+    GID_SUPERX_SLOTS = 40093;
+    GID_CHRISTMAS_CAROLM_SLOTS = 40094;
+    GID_MYSTERY_THEORIENT_SLOTS = 40095;
+    GID_TIGERTREASURES_SLOTS = 40096;
+    GID_BOOK_FALLEN_SLOTS = 40097;
+    GID_ZOMBIE_CARNIVAL_SLOTS = 40098;
+    GID_GOLD_TRAIN_SLOTS = 40099;
+    GID_MONEY_MOUSE_SLOTS = 40100;
+    GID_5LIONS_GOLD_SLOTS = 40101;
+    GID_LUCKY_YEAR_SLOTS = 40102;
+    GID_CLOVERGOLD_SLOTS = 40103;
+    GID_GATESGATOT_KACA_SLOTS = 40104;
+    GID_AZTECGEMS_SLOTS = 40105;
+    GID_CROWN_FIRE_SLOTS = 40106;
+    GID_GREAT_RHINO_DELUXE_SLOTS = 40107;
+    GID_GOBLIN_HEIST_POWERNUDGE_SLOTS = 40108;
+    GID_SUPER_JOKER_SLOTS = 40109;
+    GID_REEL_BANKS_SLOTS = 40110;
+    GID_TREE_RICHES_SLOTS = 40111;
+    GID_AZTECGEMS_DELUXE_SLOTS = 40112;
+    GID_DOWN_RAILS_SLOTS = 40113;
+    GID_HOT_BURN_HOLD_SPIN_SLOTS = 40114;
+    GID_VEGAS_SLOTS = 40115;
+    GID_TROPICALTIKI_SLOTS = 40116;
+    GID_RAINBOWGOLD_SLOTS = 40117;
+    GID_DRAGONKINGDOM_SLOTS = 40118;
+    GID_DRAGONS_SLOTS = 40119;
+    GID_BIG_JUAN_SLOTS = 40120;
+    GID_AMAZING_MONEYMACHINE_SLOTS = 40121;
+    GID_LITTLEGEM_HOLD_SPIN_SLOTS = 40122;
+    GID_FIREARCHER_SLOTS = 40123;
+    GID_WILDHOP_DROP_SLOTS = 40124;
+    GID_DRAGON_KINGDOMEYES_SLOTS = 40125;
+    GID_MONKEYS_SLOTS = 40126;
+    GID_BOOKTUT_RESPIN_SLOTS = 40127;
+    GID_PANDA_FORTUNE_SLOTS = 40128;
+    GID_CONGO_CASH_SLOTS = 40129;
+    GID_ELEMENTAL_GEMS_SLOTS = 40130;
+    GID_COWBOYS_GOLD_SLOTS = 40131;
+    GID_PHOENIX_FORGE_SLOTS = 40132;
+    GID_MAGICIAN_SECRETS_SLOTS = 40133;
+    GID_VEGAS_MAGIC_SLOTS = 40134;
+    GID_GATES_VALHALLA_SLOTS = 40135;
+    GID_TRIPLE_TIGERS_SLOTS = 40136;
+    GID_RISE_GIZA_POWERNUDGE_SLOTS = 40137;
+    GID_SPIN_SCORE_MEGAWAYS_SLOTS = 40138;
+    GID_PIRATE_GOLD_SLOTS = 40139;
+    GID_PIGGIES_SLOTS = 40140;
+    GID_STRIKINGHOT_SLOTS = 40141;
+    GID_PIGGYBANKBILLS_SLOTS = 40142;
+    GID_EMPERORCAISHEN_SLOTS = 40143;
+    GID_MIGHTRA_SLOTS = 40144;
+    GID_QUEENGODS_SLOTS = 40145;
+    GID_WILDBEACHPARTY_SLOTS = 40146;
+    GID_CAISHENGOLD_SLOTS = 40147;
+    GID_HOTBURN_SLOTS = 40148;
+    GID_GOLDENOX_SLOTS = 40149;
+    GID_BOMBBONANZA_SLOTS = 40150;
+    GID_CASHELEVATOR_SLOTS = 40151;
+    GID_DRAGOJEWELSFORTUNE_SLOTS = 40152;
+    GID_EMERALD_KING_SLOTS = 40153;
+    GID_EXTRA_JUICY_SLOTS = 40154;
+    GID_CHICKENDROP_SLOTS = 40155;
+    GID_PINUPGIRLS_SLOTS = 40156;
+    GID_CURSE_WEREWOLF_SLOTS = 40157;
+    GID_PIRATE_GOLD_DELUXE_SLOTS = 40158;
+    GID_WILD_PIXIES_SLOTS = 40159;
+    GID_CAISHEN_CASH_SLOTS = 40160;
+    GID_DRAGON_TIGER_SLOTS = 40161;
+    GID_LUCKY_DRAGONS_SLOTS = 40162;
+    GID_GREEDY_WOLF_SLOTS = 40163;
+    GID_FIREHOT_SLOTS = 40164;
+    GID_GATESAZTEC_SLOTS = 40165;
+    GID_SHININGHOT100_SLOTS = 40166;
+    GID_CRYSTAL_CAVERNS_SLOTS = 40167;
+    GID_SHIELDSPARTA_SLOTS = 40168;
+    GID_GREATSTICKUP_SLOTS = 40169;
+    GID_AZTECBONANZA_SLOTS = 40170;
+    GID_VOODOOMAGIC_SLOTS = 40171;
+    GID_HOKKAIDOWOLF_SLOTS = 40172;
+    GID_MAGICMONEYMAZE_SLOTS = 40173;
+    GID_YUMYUMPOWERWAYS_SLOTS = 40174;
+    GID_EMPTYHEBANK_SLOTS = 40175;
+    GID_HOTCHILLI_SLOTS = 40176;
+    GID_BOUNTYGOLD_SLOTS = 40177;
+    GID_WILDWALKER_SLOTS = 40178;
+    GID_BERMUDARICHES_SLOTS = 40179;
+    GID_EYECLEOPATRA_SLOTS = 40180;
+    GID_WILDSPELLS_SLOTS = 40181;
+    GID_THETWEETYHOUSE_SLOTS = 40182;
+    GID_MYSTERIOUS_SLOTS = 40183;
+    GID_DIAMONDSAREFOREVER_SLOTS = 40184;
+    GID_CANDYSTARS_SLOTS = 40185;
+    GID_ASGARD_SLOTS = 40186;
+    GID_FIREHOT100_SLOTS = 40187;
+    GID_RAGINGBULL_SLOTS = 40188;
+    GID_SANTAWONDERLAND_SLOTS = 40189;
+    GID_LEPRECHAUNSONG_SLOTS = 40190;
+    GID_FISHINREELS_SLOTS = 40191;
+    GID_TREASUREWILD_SLOTS = 40192;
+    GID_GENIEWISHES_SLOTS = 40193;
+    GID_SNAKEEYES_SLOTS = 40194;
+    GID_MONEYMONEYMONEY_SLOTS = 40195;
+    GID_HOTBURNEXTREME_SLOTS = 40196;
+    GID_ULTIMATE_SLOTS = 40197;
+    GID_GOLDENPIG_SLOTS = 40198;
+    GID_PIRATEGOLDENAGE_SLOTS = 40199;
+    GID_EGYPTIANFORTUNES_SLOTS = 40200;
+    GID_BACCARAT_LOBBY_SLOTS = 41001;
+    GID_SPEEDBACCARAT1_SLOTS = 41002;
+    GID_SPEEDBACCARAT2_SLOTS = 41003;
+    GID_SPEEDBACCARAT3_SLOTS = 41004;
+    GID_SPEEDBACCARAT5_SLOTS = 41005;
+    GID_SPEEDBACCARAT6_SLOTS = 41006;
+    GID_SPEEDBACCARAT7_SLOTS = 41007;
+    GID_SPEEDBACCARAT8_SLOTS = 41008;
+    GID_SPEEDBACCARAT9_SLOTS = 41009;
+    GID_SPEEDBACCARAT10_SLOTS = 41010;
+    GID_SUPER8BACCARAT_SLOTS = 41011;
+    GID_FORTUNE6BACCARAT_SLOTS = 41012;
+    GID_ROULETTE_LOBBY_SLOTS = 41013;
+    GID_ROULETTE1_AZURE_SLOTS = 41014;
+    GID_ROULETTE2_SLOTS = 41015;
+    GID_ROULETTE9_THECLUB_SLOTS = 41016;
+    GID_ROULETTE10_RUBY_SLOTS = 41017;
+    GID_MEGAROULETTE_SLOTS = 41018;
+    GID_AUTOROULETTE1_SLOTS = 41019;
+    GID_SPEED_ROULETTE1_SLOTS = 41020;
+    GID_SPEED_ROULETTE2_SLOTS = 41021;
+    GID_POWERUP_ROULETTE_SLOTS = 41022;
+    GID_GAMESHOWS_LOBBY_SLOTS = 41023;
+    GID_BOOMCITY_SLOTS = 41024;
+    GID_SWEET_BONANZACANDYLAND_SLOTS = 41025;
+    GID_MEGAWHEEL_SLOTS = 41026;
+    GID_MEGASICBOLOBBY_SLOTS = 41027;
+    GID_MEGA_SICBO_SLOTS = 41028;
+    GID_BLACKJACKLOBBY_SLOTS = 41029;
+    GID_ONE_BLACKJACK_SLOTS = 41030;
+    GID_ONE_BLACKJACK2_RUBY_SLOTS = 41031;
+    GID_BACCARAT1_SLOTS = 41032;
+    GID_BACCARAT2_SLOTS = 41033;
+    GID_BACCARAT3_SLOTS = 41034;
+    GID_BACCARAT5_SLOTS = 41035;
+    GID_BACCARAT6_SLOTS = 41036;
+    GID_BACCARAT7_SLOTS = 41037;
+    GID_BACCARAT8_SLOTS = 41038;
+    GID_ROULETTE3_MACAO_SLOTS = 41039;
+    GID_ROULETTE4_RUSSIAN_SLOTS = 41040;
+    GID_ROULETTE5_GERMAN_SLOTS = 41041;
+    GID_ROULETTE6_TURKISH_SLOTS = 41042;
+    GID_ROULETTE7_ITALIAN_SLOTS = 41043;
+    GID_ROULETTE8_INDIAN_SLOTS = 41044;
+    GID_ONEBLACKJACK3_DUTCH_SLOTS = 41045;
+    GID_ONEBLACKJACK5_TURKISH_SLOTS = 41046;
+    GID_SPEEDBLACKJACK1_RUBY_SLOTS = 41047;
+    GID_SPEEDBLACKJACK2_RUBY_SLOTS = 41048;
+    GID_SPEED_BLACKJACK3_RUBY_SLOTS = 41049;
+    GID_SPEED_BLACKJACK4_RUBY_SLOTS = 41050;
+    GID_SPEEDBLACKJACK5_RUBY_SLOTS = 41051;
+    GID_VIPBLACKJACK1_RUBY_SLOTS = 41052;
+    GID_VIPBLACKJACK2_RUBY_SLOTS = 41053;
+    GID_VIPBLACKJACK3_RUBY_SLOTS = 41054;
+    GID_VIPBLACKJACK4_RUBY_SLOTS = 41055;
+    GID_VIPBLACKJACK5_RUBY_SLOTS = 41056;
+    GID_PENALTYSHOOTOUTL_SLOTS = 42001;
+    GID_HORSE_RACING_SLOTS = 42002;
+    GID_FANTASTICLEAGUE_SLOTS = 42003;
+    GID_GREYHOUND_RACING_SLOTS = 42004;
+    GID_FORCE1_SLOTS = 42005;
+    GID_DARTS_SLOTS = 42006;
+    GID_WOLFGOLD1000000_SLOTS = 42007;
+    GID_GOLDRUSH500000_SLOTS = 42008;
+    GID_DIAMONDSTRIKE250000_SLOTS = 42009;
+    GID_HOTSAFARI75000_SLOTS = 420010;
+    GID_QUEENGOLD100000_SLOTS = 42011;
+    GID_PANDAGOLD50000_SLOTS = 42012;
+    GID_7PIGGIES25000_SLOTS = 42013;
+    GID_ROYALFISHING_SLOTS = 50001;
+}
+
+message SyncOnlineStatus {
+
+    int32 online = 1;
+}
+
+message SyncPlayerBalance {
+
+    int32 balance = 1;
+    int32 withdraw_balance = 2;
+}
+
+message GamePlayerSettled {
+
+    string game_code = 1;
+    int32 max_bonus = 2;
+    int32 amount = 3;
+    int32 total = 4;
+    int32 club_id = 5;
+    string detail = 6;
+    float fee_rate = 7;
+    int32 game_id = 8;
+    float withdraw_rate = 9;
+    BALANCE_UPDATE_TYPE update_type = 10;
+}
+
+message SyncPlayerGameData {
+
+    int32 game_id = 1;
+    string data = 2;
+}
+
+message AddPlayerBonus {
+
+    int32 amount = 1;
+    int32 expire_time = 2;
+    string detail = 3;
+}
+
+message FreezeBalance {
+
+    int32 game_id = 1;
+    int32 amount = 2;
+}
+
+message PlayerLoginReq {
+
+    string token = 1;
+}
+
+message PlayerLoginReply {
+
+    PlayerBaseInfo base_info = 1;
+    repeated BalanceInfo balances = 2;
+    repeated BonusInfo bonuses = 3;
+    repeated BalanceClubInfo balances_club = 4;
+    repeated int32 game_list = 5;
+    repeated int32 in_game = 6;
+}
+
+message PlayerBalanceEvent {
+
+    repeated BalanceInfo balances = 1;
+    repeated BonusInfo bonuses = 2;
+    repeated BalanceClubInfo balances_club = 3;
+    int32 available_balance = 4;
+}
+
+message PlayerBaseInfo {
+
+    uint64 player_id = 1;
+    string nickname = 2;
+    string head_id = 3;
+    string head_url = 4;
+    int32 tag = 5;
+    int32 avatar_frame = 6;
+    int32 card_back = 7;
+    int32 vip_level = 8;
+}
+
+enum TAG_TYPE {
+
+    TT_NORMAL = 0;
+    TT_SUPPER_FAKE = 1;
+    TT_CHEAT = 2;
+    TT_GENERAL_FAKE = 3;
+    TT_GANG = 4;
+    TT_WINNER = 5;
+    TT_LOSER = 6;
+    TT_ONLY_NORMAL = 7;
+    TT_ONLY_ROBOT = 8;
+    TT_ONLY_FAKE = 9;
+    TT_AB_GAME = 10;
+    TT_NO_BC = 11;
+    TT_CHARGE_RISK = 12;
+    TT_BC_FLOW = 13;
+    TT_CARROM_RISK = 14;
+    TT_ROBOT = 99;
+}
+
+message BalanceInfo {
+
+    int32 type = 1;
+    int32 amount = 2;
+}
+
+message BalanceClubInfo {
+
+    int32 club_id = 1;
+    int32 amount = 2;
+}
+
+enum MONEY_TYPE {
+
+    MT_NONE = 0;
+    MT_RECHARGE = 1;
+    MT_WITHDRAW = 2;
+    MT_GIFT = 3;
+    MT_CLUB = 4;
+    MT_BONUS = 99;
+}
+
+message BonusInfo {
+
+    int32 amount = 1;
+    int32 expire_time = 2;
+}
+
+message BalanceHistory {
+
+    repeated BalanceRecord records = 1;
+}
+
+message BalanceRecord {
+
+    int32 time = 1;
+    int32 update_type = 2;
+    int32 amount = 3;
+    string changed = 4;
+}
+
+enum BALANCE_UPDATE_TYPE {
+
+    BU_NONE = 0;
+    BU_GAME = 1;
+    BU_LOGIN = 2;
+    BU_FEE_BACK = 3;
+    SOURCE_RECHARGE = 11;
+    SOURCE_WITHDRAW = 21;
+    SOURCE_WITHDRAW_FAIL = 22;
+    SOURCE_ACTIVITY = 36;
+    SOURCE_MAIL = 51;
+    SOURCE_ADMIN = 41;
+    SOURCE_RECHARGE_GIVE = 31;
+    SOURCE_GIFT = 32;
+    SOURCE_FREE_LUCK = 33;
+    SOURCE_PAY_LUCK = 34;
+    SOURCE_PAY_LUCK_PAY = 35;
+    SOURCE_CASH_BACK = 61;
+    SOURCE_BONUS = 62;
+    SOURCE_TRANSFER = 63;
+    SOURCE_SEND_MAIL = 64;
+    SOURCE_SIGN = 71;
+    SOURCE_VIP_UP = 72;
+    SOURCE_LUCKY_SHOT = 1000;
+    SOURCE_PRIVATE_TABLE_CREATE = 1001;
+}
+
+message BonusHistory {
+
+    repeated BonusDetail bonuses = 1;
+}
+
+message BonusDetail {
+
+    int32 create_time = 1;
+    int32 total = 2;
+    int32 balance = 3;
+    int32 expire_time = 4;
+}
+
+message PlayerInfoChange {
+
+    int32 vip_level = 1;
+    int32 vip_level_before = 2;
+    string head_id = 3;
+    string head_url = 4;
+    int32 tag = 5;
+    int32 avatar_frame = 6;
+    int32 card_back = 7;
+}
+
+message PlayerGameDataReq {
+
+    repeated int32 game_ids = 1;
+}
+
+message PlayerGameDataReply {
+
+    repeated GameDataDetail game_data = 1;
+}
+
+message GameDataDetail {
+
+    int32 game_id = 1;
+    string data = 2;
+}
+
+message RoomListReq {
+
+    int32 game_id = 1;
+}
+
+message RoomListReply {
+
+    int32 game_id = 1;
+    repeated RoomInfo room_infos = 2;
+}
+
+message TableListReq {
+
+    int32 game_id = 1;
+    int32 room_type = 2;
+    int32 club_id = 3;
+}
+
+message TableListReply {
+
+    int32 game_id = 1;
+    repeated TableInfo table_infos = 2;
+}
+
+message TableInfo {
+
+    int32 table_id = 1;
+    RoomInfo room_infos = 2;
+    repeated PlayerBaseInfo players = 3;
+}
+
+message RoomInfo {
+
+    int32 room_id = 1;
+    string room_name = 2;
+    int32 init_bet = 3;
+    int32 min_enter = 4;
+    int32 min_player_num = 5;
+    int32 max_player_num = 6;
+    int32 player_num_limit = 7;
+    int32 player_num = 8;
+    string room_params = 9;
+}
+
+message EnterRoomReq {
+
+    int32 game_id = 1;
+    int32 room_id = 2;
+    int32 club_id = 3;
+    int32 room_type = 4;
+    int32 match_type = 5;
+    int32 table_id = 6;
+    int32 table_no = 7;
+    int32 init_bet = 8;
+    int32 min_player = 9;
+    int32 max_player = 10;
+}
+
+message EnterRoomReply {
+
+    int32 game_id = 1;
+    int32 room_id = 2;
+    RoomInfo room_info = 3;
+    int32 table_id = 4;
+    int32 seat = 5;
+    int32 enter_reason = 6;
+    int32 room_type = 7;
+    int32 club_id = 8;
+    string game_url = 9;
+    int32 table_no = 10;
+}
+
+enum ENTER_REASON {
+
+    ENTER_NONE = 0;
+    ENTER_PLAYER = 1;
+    ENTER_SWITCH = 2;
+    ENTER_ONLINE = 3;
+}
+
+message ExitRoomReq {
+
+    int32 game_id = 1;
+    int32 room_id = 2;
+}
+
+message ExitRoomReply {
+
+    int32 game_id = 1;
+    int32 room_id = 2;
+    int32 exit_reason = 3;
+    repeated int32 game_list = 4;
+    int32 total_rounds = 5;
+}
+
+enum EXIT_REASON {
+
+    EXIT_NONE = 0;
+    EXIT_PLAYER = 1;
+    EXIT_SWITCH = 2;
+    EXIT_BALANCE = 3;
+    EXIT_ERROR = 4;
+    EXIT_OFFLINE = 5;
+    EXIT_TIMEOUT = 6;
+    EXIT_CLUB_FORBID = 7;
+    EXIT_GAME_OVER = 8;
+    EXIT_SERVER_MAINTAIN = 9;
+}
+
+message SwitchTableReq {
+
+    int32 game_id = 1;
+    int32 room_id = 2;
+}
+
+enum ROOM_TYPE {
+
+    NORMAL = 0;
+    IN_CLUB = 1;
+}
+
+enum MATCH_TYPE {
+
+    AUTO = 0;
+    ENTER_TABLE = 1;
+    CREATE_TABLE = 2;
+}
+
+enum NOTIFY_TYPE {
+
+    NONE = 0;
+    INIT = 1;
+    UPDATE = 2;
+    DELETE = 3;
+}
+
+message TablePlayersEvent {
+
+    int32 notify_type = 1;
+    repeated SeatPlayer table_players = 2;
+}
+
+message SeatPlayer {
+
+    int32 seat = 1;
+    PlayerBaseInfo base_info = 2;
+    bool online = 3;
+    int32 balance = 4;
+    bool ready = 5;
+    bool open = 6;
+}
+
+enum SEAT {
+
+    SEAT_NONE = 0;
+    SEAT_1 = 1;
+    SEAT_2 = 2;
+    SEAT_3 = 3;
+    SEAT_4 = 4;
+    SEAT_5 = 5;
+    SEAT_6 = 6;
+}
+
+message TableTimeEvent {
+
+    int32 round = 1;
+    repeated SeatDeadline table_deadlines = 2;
+    int32 cur_bet = 3;
+}
+
+message SeatDeadline {
+
+    int32 type = 1;
+    int32 seat = 2;
+    int64 start_time = 3;
+    int32 seconds = 4;
+}
+
+message GameBalanceEvent {
+
+    int32 balance = 1;
+    string changed = 2;
+    int32 update_type = 3;
+}
+
+message ChatExpressionReq {
+
+    int32 seat = 1;
+    int32 expression = 2;
+}
+
+message ChatExpressionEvent {
+
+    int32 from_seat = 1;
+    int32 to_seat = 2;
+    int32 expression = 3;
+}
+
+message ChatVoiceReq {
+
+    int32 seat = 1;
+    string content = 2;
+    int32 time = 3;
+}
+
+message ChatVoiceEvent {
+
+    int32 from_seat = 1;
+    int32 to_seat = 2;
+    string content = 3;
+    int32 time = 4;
+}
+
+message SendCommand {
+
+    int32 type = 1;
+    string param = 2;
+}
+
+enum NOTICE_TYPE {
+
+    NT_NONE = 0;
+    NT_WITHDRAW = 1;
+    NT_GAME_WIN = 2;
+    NT_WHEEL = 3;
+}
+
+message GlobalNotice {
+
+    repeated NoticeMsg notice_msgs = 1;
+}
+
+message NoticeMsg {
+
+    int32 notice_type = 1;
+    string content = 2;
+}
+
+message PlayerWinMsg {
+
+    repeated PlayerWinInfo infos = 1;
+}
+
+message PlayerWinInfo {
+
+    string nick_name = 1;
+    int32 amount = 2;
+    int32 game_id = 3;
+    string game_name = 4;
+    int32 init_bet = 5;
+}
+
+message PrivateTableReadyReq {
+
+    int32 seat = 1;
+}
+
+message PrivateTableReadyEvent {
+
+    int32 seat = 1;
+}

@@ -1,0 +1,302 @@
+syntax = "proto3";
+package pool;
+
+
+
+/////////////////////////////////////////////////
+// 游戏交换数据
+/////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+  DT_NONE = 0;
+  OPERATION = 1; //玩家操作
+  RESULT = 2; //收到 pre_hit 和 result 之间的计时
+}
+
+message PoolPlayerInfo {
+  uint64  playerId = 1;    //玩家ID
+  string  nickname = 2;    //昵称
+  string  headId = 3;      //系统头像ID
+  string  headUrl = 4;    //facebook头像url
+  int32  tag = 5;      //玩家标签 TAG_TYPE
+  int32   balance = 6;  //余额
+  int32  seat = 7;  //座位
+}
+
+// 玩家对局中的状态信息（随着TurnState同步）
+message PoolSeatState {
+  int32 seat = 1;                   //座位
+  int32 color = 2;                  // 当前花色
+  int32 selectColor = 3;            // 选择花色（相比color，没有8）
+  int32 foulCount = 4;              // 犯规次数
+  repeated int32 inHoleList = 5;    // 进球列表
+  repeated int32 targetList = 6;    // 目标球列表（预留）
+  repeated Praise praises = 7;      // 称赞统计（预留）
+}
+
+// 游戏初始信息
+message GameBattle {
+  Scene map = 1;        // 初始球型图
+  PoolPlayerInfo mine = 2;    // 玩家信息 - 自己
+  PoolPlayerInfo enemy = 3;    // 玩家信息 - 对手
+  bool useAimTool = 4;  //是否使用瞄准器
+  string gameCode = 5;  //局号
+  int32 ai = 6;  //ai 等级
+  GameRecord gameRecord = 7;  //必胜ai录像
+}
+
+// 球配置
+message BallConfig {
+  int32 id = 1;          // 球编号，0为母球
+  int32 x = 2;          // 位置坐标 - x
+  int32 y = 3;          // 位置坐标 - y
+  bool alive = 4;          // 是否可见
+}
+
+// 球型图
+message Scene {
+  repeated BallConfig balls = 1;    // 球列表
+}
+
+// 回合开始同步数据
+message TurnState {
+  Scene map = 1;                  // 球型图
+  int32 color = 2;                // 待废弃，当前我方应击球的颜色
+  int32 enemyColor = 3;           // 待废弃，当前对手应击球的颜色
+  bool isFreeBall = 4;            // 是否自由球
+  bool isBreak = 5;               // 是否开球
+  bool isNeedSelectHole = 6;      // 是否要报袋
+  bool isNeedSelectBall = 7;      // 是否要报球
+  TurnDetail turnDetail = 8;      // 上一回合的详细描述
+  int32 currentPlayerIdx = 10;    // 当前是谁的回合（0 - 自己，1 - 对手）
+  int32 roundTime = 11;           // 当前回合时间
+  int32 tick = 12;                // 上一回合球局运行时间（物理Tick）
+  int32 enemyRoundTime = 13;
+  bool isNeedResetCueBall = 14;
+  int32 resetBallX = 15;
+  int32 resetBallY = 16;
+  int32 myFoulCount = 17;         //待废弃，我方犯规次数
+  int32 enemyFoulCount = 18;      //待废弃，敌方犯规次数
+  repeated int32 myInHoleList = 19;   //待废弃
+  repeated int32 enemyInHoleList = 20;//待废弃
+  int32 selectedColor = 21;       // 待废弃，选中颜色
+  int32 enemySelectedColor = 22;  // 待废弃，对手选中的颜色
+  repeated PoolSeatState states = 23; //座位状态
+  TurnOperate turnOperate = 24;   // 回合操作
+  int32 winBallCount = 25;        //净胜球
+  BattleFinishReason finishReason = 26; //结束原因
+  repeated int32 inHoleList = 27; //所有玩家的进球记录
+}
+
+// 一般操作同步（不包含球型）
+message Operate {
+  int32 x = 1;        // 位置、指向
+  int32 y = 2;
+  int32 force = 3;      // 力度
+  int32 id = 4;        // 选择ID（报球、报袋用）
+  OperateState state = 5;    // 状态（自由球的抬起、落下）
+  SyncTag syntag = 6;      // 同步标签
+}
+
+// 击球同步（为确保两边物理运行一致，需要同步球型）
+message OperateHit {
+  Scene map = 1;        // 击球前的球型
+  int32 vigor = 2;      // 击球力度
+  int32 rx = 3;        // 瞄准坐标x
+  int32 ry = 4;        // 瞄准坐标y
+  int32 tx = 5;        // 加塞坐标x
+  int32 ty = 6;        // 加塞坐标y
+  int32 prerx = 7;      // 瞄准器修正之前的瞄准坐标x
+  int32 prery = 8;      // 瞄准器修正之前的瞄准坐标y
+  AimResult aimResult = 9;  // 瞄准器结果
+  TurnState turnState = 10;
+  int32 tick = 11;
+}
+
+message Talk {
+  string id = 1;        // 聊天内容ID
+  int32 playerIdx = 2;    // 来自哪个玩家
+}
+
+// 称赞同步数据
+message PraiseData {
+  repeated Praise myPraise = 1;    // 我方累计获得的所有称赞
+  repeated Praise enemyPraise = 2;  // 对手累计获得的所有称赞
+}
+
+message Praise {
+  PraiseType type = 1;
+  PraiseQuality quality = 2;
+}
+
+// 犯规同步数据
+message FoulData {
+  int32 myFoulCount = 1;    // 我方犯规总次数
+  int32 enemyFoulCount = 2;  // 对手犯规总次数
+}
+
+// 胜负判断
+message ResultInfo {
+  BattleFinishReason reason = 1;
+  int32 winBallCount = 2;  // 净胜球
+}
+
+// 超时
+message TimeOutEvent {
+  int32 seat = 1;  //超时玩家座位
+}
+
+// 瞄准器结果
+enum AimResult {
+  GOOD = 0;          // 绿色区 - 成功
+  BAD = 1;          // 黄色区 - 有偏差
+  FAILED = 2;          // 红色区 - 失败
+}
+
+// 操作状态（预留）
+enum OperateState {
+  OS_DEFUALT = 0;
+  MOVE = 1;
+}
+
+// 同步标签（用于做平滑移动插值等）
+enum SyncTag {
+  NONE = 0;
+  BEGIN = 1;
+  INTER = 2;
+  FINISH = 3;
+  IMMEDIATE = 4;
+}
+
+// 回合结束之后的操作信息
+enum TurnOperate {
+  CONTINUE = 0;     // 继续回合
+  TURN = 1;         // 切换玩家
+  FOUL = 2;         // 犯规，切换玩家
+  SELECT = 3;       // 继续回合，分球
+  WIN = 4;          // 胜利
+  LOSE = 5;         // 失败
+}
+
+// 回合详细信息
+enum TurnDetail {
+  TD_DEFUALT = 0;
+  START_MINE = 101001;        // 开局 - 我方回合
+  START_ENEMY = 101002;        // 开局 - 对手回合
+
+  WIN_GOLDENBREAK = 104003;      // 胜利 - 黄金开球
+  LOSE_GOLDENBREAK = 104004;      // 失败 - 对手黄金开球
+
+  TURN_NO_COLOR = 102000;        // 切换回合 - 未分色
+  SELECT_FULLCOLOR = 102001;      // 当前击打全色球
+  SELECT_UNFULLCOLOR = 102002;    // 当前击打花色球
+  FREEBALL_MINE = 107001;        // 我方自由球
+  FREEBALL_ENEMY = 107002;      // 对手自由球
+  TURN_MINE = 103001;          // 切换到我方回合
+  TURN_ENEMY = 103002;        // 切换到对手回合
+  CONTINUE_MINE = 103003;        // 我方继续击球
+  CONTINUE_ENEMY = 103004;      // 对手继续击球
+  SELECTHOLE_MINE = 104001;      // 切换到我方回合并报袋
+  SELECTHOLE_ENEMY = 104002;      // 切换到对手回合并报袋
+  FOUL_BREAK = 105001;        // 犯规 - 开球失败
+  FOUL_BALL_WHITE_INBAG = 105002;    // 犯规 - 母球落袋
+  FOUL_CRASH_INVAILD = 105003;    // 犯规 - 无有效碰撞
+  FOUL_INVALID_TOUCHBALL = 105004;  // 犯规 - 母球触碰对手球
+  FOUL_INVALID_TOUCH8 = 105005;    // 犯规 - 母球触碰黑八
+  FOUL_8BALL_ININVAILDBAG = 105006;  // 犯规 - 黑八没有掉落指定袋口
+  FOUL_BALL_EIGHT_INBAG = 105007;    // 犯规 - 还未击打完自己的球，黑八入袋
+  FOUL_BALL_TARGET_ININVAILDBAG = 105008;  // 犯规 - 目标球没有掉落指定袋口
+  FOUL_TIMEOUT = 105009;        // 犯规 - 自己回合时间耗尽
+  FOUL_NOTOUCH = 105010;        // 犯规 - 未能触碰球
+  FOUL_FULLTIME_MINE = 106001;    // 犯规 - 总比赛时间已耗尽
+  FOUL_FULLTIME_ENEMY = 106002;    // 对手犯规 - 总比赛时间已耗尽
+  RESULT_WIN = 108001;        // 结算 - 胜利
+  RESULT_LOSE = 108002;        // 结算 - 失败
+  RESULT_GIVEUP = 10800;        // 结算 - 认输
+}
+
+// 对局结束详细原因
+enum BattleFinishReason {
+  NORMAL = 0;              // 正常结束
+  FULLFOUL = 1;            // 一方犯规到达上限
+  TWO_NO_READY = 2;          // 双方都没有进入游戏
+  TIMEOUT = 3;            // 一方时间耗尽（针对计时赛）
+  CLEARANCE = 4;            // 一杆清台
+  PERFECT_BREAK = 5;          // 完美开球
+  BALL8LOSE = 6;            // 还未击打完自己的球，黑八入袋
+  BALL8NOTINSELECTHOLELOSE = 7;    // 黑八未能进入指定袋口
+  DISCONNECTED = 8;          // 一方掉线
+  GIVE_UP = 9;            // 一方认输
+}
+
+// 称赞类型
+enum PraiseType {
+  PT_NONE = 0;    // 无
+  REVERT = 1;      // 翻袋
+  STUN = 2;      // 定杆
+  PASS = 3;      // 传球
+  BORROW = 4;      // 借球
+  SNOOKER = 5;    // 障碍
+  KICK = 6;      // 勾球
+  TOP_SPIN = 7;    // 高杆
+  BACK_SPIN = 8;    // 低杆
+  CURVE = 9;      // 弧线
+  LONG = 10;      // 长台
+  THIN_CUT = 11;    // 薄切
+  BREAK = 12;      // 开球
+  PT_FAIL = 13;    // 失败
+  LUCK = 14;      // 幸运
+}
+
+// 称赞级别
+enum PraiseQuality
+{
+  PQ_NONE = 0;      // 无
+  NICE = 1;        // 不错
+  GREAT = 2;        // 很好
+  AMAZING = 3;      // 非常精彩
+  UNBELIEVABLE = 4;    // 难以置信
+  PQ_FAIL = -1;      // 失败
+}
+
+//游戏结算事件
+message GameSettle {
+  int32 winBet = 1; //赢得金额（含门票）
+  int32 winnerSeat = 2; //赢家座位
+  uint64 winnerPlayerId = 3; //赢家id
+  TurnState turnState = 4;
+}
+
+// 游戏录像数据
+message GameRecord {
+  Scene map = 1;
+  repeated TurnRecord record = 2;
+}
+
+message TurnRecord {
+  int32 turnIdx = 1;
+  repeated Action actions = 2;
+}
+
+message Action {
+  int32 time = 1;
+  string type = 2;
+  int32 player = 3;
+  int32 x = 4;
+  int32 y = 5;
+  int32 rx = 6;
+  int32 ry = 7;
+  int32 tx = 8;
+  int32 ty = 9;
+  int32 force = 10;
+  int32 pointer = 11;
+  int32 phase = 12;
+  int32 id = 13;
+  int32 vigor = 14;
+  int32 foulDetail = 15;
+  bool isNeedSelectHole = 16;
+  int32 holeIdx = 17;
+  int32 syncTag = 18;
+  int32 aimResult = 19;
+}

@@ -1,0 +1,28 @@
+syntax = "proto3";
+package slots;
+//import "msg_base.proto";
+
+
+
+
+//游戏开始事件
+message GameStartReq{
+	string 			name = 1;
+}
+
+//游戏开始事件
+message GameStartResp {
+	int32			state = 1;
+}
+
+
+//游戏开始测试
+message GameTestReq{
+	string 			name = 1;
+}
+
+//游戏开始测试
+message GameTestResp {
+	int32			state = 1;
+}
+

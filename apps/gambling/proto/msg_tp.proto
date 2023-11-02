@@ -1,0 +1,129 @@
+syntax = "proto3";
+package tp;
+//import "msg_base.proto";
+
+////////////////////////////////////////////////////////////////
+// tp游戏
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+	DT_NONE 	= 0;
+	START		= 1;	//开局
+	OPERATION	= 2;	//玩家操作
+	SIDE_SHOW	= 3;	//比牌
+	WAIT_NEXT	= 4;	//等待(动画播放)
+	WAIT_END	= 5;	//等待(动画播放)
+}
+
+////////////////////////////////////////////////////////////////
+
+//游戏开始事件
+message GameStartEvent {
+	int32			buttonSeat = 1;	//庄家位
+	repeated int32	seats = 2; 		//玩家座位
+	int32			upDown = 3;	//心流上下行
+	int32           limitType = 4; //心流控制类型
+}
+
+//通知button位
+message ButtonSeatEvent {
+	int32	seat = 1;	//
+}
+
+//桌上座位状态事件(开局/进场/重连)
+message TableStateEvent {
+	string				gameCode	= 1;	//局号
+	int32				totalBet	= 2;	//累计下注
+	int32				currentBet	= 3;	//当前下注额(明注)
+	repeated SeatState	seatStates	= 4;	//桌上座位状态
+}
+message SeatState {
+	int32			seat = 1; 		//SEAT
+	CardSet 		cardSet = 2;	//牌
+	bool			opened = 3;		//是否看牌
+	bool			packed = 4;		//是否盖牌
+	repeated int32	bets = 5;		//下注
+	bool			left = 6;		//是否离开桌子
+}
+
+//所有玩家手牌(发给机器人)
+message AllSeatCards {
+	int32			    handsNum = 1; 	//手牌数
+	repeated SeatCards	seatCards = 2;
+	int32			    initBet = 3; 	//底注
+}
+
+//发送手牌
+message DealCardsEvent {
+	CardSet		cardSet = 1;	//手牌
+	bool        isBest  = 2;	//是否最大牌
+	CardSet		dealedCardSet = 3;	//真实发出去的
+}
+message CardSet {
+	int32			type = 1;	//牌型 CARD_TYPE
+	repeated int32	cards = 2;	//牌
+	repeated int32	originalCards  = 3;	//原始牌
+}
+enum CARD_TYPE {
+	CT_NONE = 0;			//无
+	CT_THREE = 1;			//三条
+	CT_STRAIGHT_FLUSH = 2;	//同花顺
+	CT_STRAIGHT = 3;		//顺子
+	CT_FLUSH = 4;			//同花
+	CT_PAIR = 5;			//对子
+	CT_HIGH = 6;			//高牌
+	CT_UNKNOWN = 7;			//未知(未看牌时)
+}
+
+//玩家操作
+message OperationReq {
+	int32	type = 1;	//类型 OPERATION_TYPE
+}
+enum OPERATION_TYPE {
+	OT_NONE		= 0;	//无
+	OT_OPEN		= 1;	//看牌
+	OT_PACK		= 2;	//弃牌
+	OT_BET		= 3;	//跟注
+	OT_DOUBLE	= 4;    //加倍
+	OT_SHOW		= 5;    //show
+	OT_SIDESHOW = 6;	//sideshow
+	OT_ACCEPT	= 7; 	//同意show
+	OT_REJECT	= 8; 	//拒绝show
+}
+
+//操作事件
+message OperationEvent {
+	int32	seat = 1;		//SEAT
+	int32	type = 2;		//类型 OPERATION_TYPE
+	int32	showSeat = 3;	//side show 目标位置
+	int32	packReason = 4;	//pack原因(pack时) PACK_REASON
+} 
+
+enum PACK_REASON {
+	PR_NONE		= 0;	//无
+	PR_PLAYER	= 1;	//玩家操作
+	PR_EXIT		= 2;	//退出房间
+	PR_TIMEOUT	= 3;	//超时
+	PR_LOSE 	= 4;	//输了
+	PR_BALANCE	= 5;	//余额不足
+}
+
+//show牌事件
+message ShowCardsEvent {
+	repeated int32		winnerSeats = 1;	//赢家位置	
+	repeated SeatCards	seatCards = 2;
+}
+message SeatCards {
+	int32	seat = 1;		//座位
+	CardSet	cardSet = 2;	//牌
+}
+
+//游戏结束
+message GameEndEvent {
+	int32			winBet = 1;			//金额
+	repeated int32	winnerSeats = 2;	//赢家位置	
+	repeated int32	winBets = 3;		//赢注
+}
+
+

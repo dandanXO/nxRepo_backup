@@ -1,0 +1,13 @@
+export const protoEncode = (t: number, n: any) => {
+  console.log(`[ws] protoEncode case ${t}`)
+  console.log(`[ws] protoEncode data ${n}`)
+
+  switch (t) {
+    case 3:
+      return new Uint8Array(0);
+    case 100:
+      return window.protobuf.base.PlayerLoginReq.encode(
+        window.protobuf.base.PlayerLoginReq.create(n)
+      ).finish();
+  }
+}

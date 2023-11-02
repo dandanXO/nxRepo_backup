@@ -1,0 +1,194 @@
+syntax = "proto3";
+package ab2;
+import "msg_base.proto";
+
+
+////////////////////////////////////////////////////////////////
+// ab 类游戏通用事件
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum AB_DEADLINE_TYPE {
+  ADT_NONE = 0;
+  START = 1; //准备开局
+  OPERATION = 2; //下注
+  END = 3; //结算阶段播放动画
+}
+
+// 游戏开始事件，用于播放动画
+message ABGameStartEvent {
+  string gameCode = 1;  //局号
+  //forest party: colors:[24种颜色](1红色 2绿色 3 黄色) payout:[12个下注区域的赔率]
+  string startResult = 2;  //开始结果，json 字符串
+}
+
+//玩家列表事件（桌子上玩家+排行列表）
+message RankPlayersEvent {
+  repeated RankPlayer rankPlayers = 1;
+  int32 playersNum = 2;  // 在线人数
+}
+message RankPlayer {
+  int32 seat = 1; //SEAT
+  base.PlayerBaseInfo baseInfo = 2; //玩家信息
+  bool online = 3; //是否在线
+  int32  balance = 4; //游戏可用余额
+}
+
+//玩家下注请求
+message ABBetReq {
+  int32  betArea = 1;  //下注区域
+  int32 betAmount = 2; //下注的数量
+}
+
+//下注请求响应
+message ABBetEvent {
+  int32  seat = 1;    //SEAT
+  int32  betArea = 3;  //下注区域
+  int32 betAmount = 4; //下注的金额
+  int32 balance = 5; //下注后的余额
+}
+
+message ABBatchBetEvent {
+  repeated ABBetEvent events = 1;
+}
+
+//桌上座位状态事件(进场/重连)，若游戏有其他属性则重新定义
+message ABTableStateEvent {
+  string gameCode = 1;  //局号
+  repeated AreaBets areaBets = 2;  //各个区域上的所有下注
+  repeated AreaBets myAreaBets = 3;  //各个区域上的自己下注
+  string startResult = 4;  //开始结果，json 字符串，同ABGameStartEvent.startResult
+  int32 playersNum = 5;  // 在线人数
+}
+
+//各个区域上的下注
+message AreaBets {
+  int32 areaType = 1; //区域类型
+  int32 totalBet = 2; //区域总金额
+}
+
+//游戏结果
+message ABGameEndEvent {
+  repeated int32 winAreas = 1; //赢的区域
+  repeated WinnerSeatBets  winnerSeatBets = 2; //赢家
+  // 7up7down [骰子1，骰子2，类型0-普通 1-金色]
+  // 龙虎斗 [龙牌，虎牌]
+  // wingo lottery [数字0~9]
+  // forest party [0-普通 获胜区域] [1-BigThree某种动物 获胜区域1 获胜区域2 获胜区域3] [2-BigFour某种颜色 获胜区域1~4]
+  // [3-Bonus 获胜区域1 获胜区域2] [4-Double赔率加倍 获胜区域]
+  // baccarat 3patti [蓝色获胜1/红色获胜2, 蓝色三张牌, 蓝色方牌型, 红色三张牌, 红色方牌型]
+  // 比如蓝色方AAA获胜，红色方同花JQK [1 ,114,214,314, 7, 111,112,113, 6]
+  repeated int32 result = 3; //游戏结算结果
+  int32 notifyType = 4;  //通知类型 1-游戏结束正常通知 2-在结算阶段进入/断线重连，通知结算结果
+  string startResult = 5;  //开始结果，json 字符串，同ABGameStartEvent.startResult
+}
+
+message WinnerSeatBets {
+  int32  winnerSeat = 1; //赢家座位
+  repeated AreaBets areaWinBets = 2; //各个区域赢的钱
+}
+
+//历史记录
+message HistoryEvent {
+  // 7up7down [[骰子和，类型0-普通 1-金色]]
+  // 龙虎斗 [获胜区域,获胜区域,...]
+  // wingo lottery [数字0~9]
+  // baccarat 3patti [[蓝色/红色获胜区域, 获胜牌型]]
+  string history = 1; //历史结果 json 字符串
+}
+
+////////////////////////////////////////////////////////////////
+// 7up7down游戏 9
+////////////////////////////////////////////////////////////////
+
+//下注区域类型
+enum SEVEN_AREA_TYPE {
+  SEVEN_NONE = 0; //无
+  SEVEN_2_6 = 1; //2~6
+  SEVEN_7 = 2; //7
+  SEVEN_8_12 = 3; //7~12
+}
+
+////////////////////////////////////////////////////////////////
+// dragon vs tiger 游戏 10
+////////////////////////////////////////////////////////////////
+
+//下注区域类型
+enum DT_AREA_TYPE {
+  DT_NONE = 0;
+  DT_DRAGON = 1;
+  DT_TIE = 2;
+  DT_TIGER = 3;
+}
+
+////////////////////////////////////////////////////////////////
+// wingo lottery 游戏 11
+////////////////////////////////////////////////////////////////
+
+//下注区域类型
+enum WINGO_AREA_TYPE {
+  WINGO_NONE = 0;
+  WINGO_GREEN = 1;
+  WINGO_VIOLET = 2;
+  WINGO_RED = 3;
+  WINGO_0 = 4;
+  WINGO_1 = 5;
+  WINGO_2 = 6;
+  WINGO_3 = 7;
+  WINGO_4 = 8;
+  WINGO_5 = 9;
+  WINGO_6 = 10;
+  WINGO_7 = 11;
+  WINGO_8 = 12;
+  WINGO_9 = 13;
+}
+
+////////////////////////////////////////////////////////////////
+// Forest Party 游戏 12
+////////////////////////////////////////////////////////////////
+
+enum FP_AREA_TYPE {
+  FP_NONE = 0;
+  LION_RED = 1;
+  LION_GREEN = 2;
+  LION_YELLOW = 3;
+  PANDA_RED = 4;
+  PANDA_GREEN = 5;
+  PANDA_YELLOW = 6;
+  MONKEY_RED = 7;
+  MONKEY_GREEN = 8;
+  MONKEY_YELLOW = 9;
+  RABBIT_RED = 10;
+  RABBIT_GREEN = 11;
+  RABBIT_YELLOW = 12;
+}
+
+////////////////////////////////////////////////////////////////
+// Jandi Munda 游戏
+////////////////////////////////////////////////////////////////
+
+enum JM_AREA_TYPE {
+  JM_NONE = 0;
+  JM_1 = 1;
+  JM_2 = 2;
+  JM_3 = 3;
+  JM_4 = 4;
+  JM_5 = 5;
+  JM_6 = 6;
+}
+
+////////////////////////////////////////////////////////////////
+// Baccarat 3patti 游戏
+////////////////////////////////////////////////////////////////
+
+// 下注区域同时代表牌型
+enum BTP_AREA_TYPE {
+  BTP_HIGH = 0;  //代表 high card
+  BTP_BLUE = 1;
+  BTP_RED = 2;
+  BTP_PAIR = 3;
+  BTP_COLOR = 4;
+  BTP_SEQUENCE = 5;
+  BTP_PURE_SEQUENCE = 6;
+  BTP_SET = 7;
+}

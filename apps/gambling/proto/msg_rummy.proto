@@ -1,0 +1,146 @@
+syntax = "proto3";
+package rummy;
+import "msg_base.proto";
+
+////////////////////////////////////////////////////////////////
+// rummy游戏
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+	DT_NONE 	= 0;
+	START		= 1;	//开局
+	OPERATION	= 2;	//玩家操作
+	DECLARE 	= 3;	//declare
+	DISPLAY 	= 4;	//结果展示
+}
+
+////////////////////////////////////////////////////////////////
+
+//游戏开始事件
+message GameStartEvent {
+	int32			buttonSeat = 1;	//庄家位
+	repeated int32	seats = 2; 		//玩家座位
+	int32           winLose = 3;  //rummy心流状态
+	int32           max_player = 4;   //rummy最大人数
+	int32           real_seat = 5;   //rummy真人座位
+}
+
+//通知button位
+message ButtonSeatEvent {
+	int32	seat = 1;	//
+}
+
+//桌上座位状态事件
+message TableStateEvent {
+	string				gameCode        = 1;	//局号
+	int32				versatileCard   = 2;	//通用牌
+	repeated int32		discardPile     = 3;	//弃牌堆
+	bool        		canDrawDiscard  = 4;	//是否能摸弃牌堆
+	repeated SeatState	seatStates      = 5;	//桌上座位状态
+	int32               nextReal        = 6;    //下一个操作的玩家是否是真人
+	int32               playerDraw      = 7;    //玩家摸牌
+}
+message SeatState {
+	int32			seat = 1; 		    //座位
+	int32			state = 2;          //状态
+	int32			dropAmount = 3;     //drop所需金额
+	int32           settledAmount = 4;  //结算金额
+}
+enum STATE_TYPE {
+	ST_NONE		    = 0;	//无
+	ST_PLAYING		= 1;	//打牌中
+	ST_DROPPED		= 2;	//已drop
+	ST_DECLARED		= 3;	//已公布
+	ST_FINISHED		= 4;	//已胡牌
+	ST_CONFIRMED	= 5;	//已确认
+}
+
+//手牌事件
+message DealCardsEvent {
+	repeated int32	cards = 1;	//牌
+	int32  drop = 2;  //rummy心流六人场机器人是否开局drop
+}
+
+//玩家操作
+message OperationReq {
+	int32	            type = 1;       //类型 OPERATION_TYPE
+	int32	            card = 2;       //丢弃的牌
+	repeated CardSet	cards = 3;	    //牌（finish时0分的牌组）
+	repeated int32  	best_cards = 4; //想摸的牌列表（仅限机器人使用）
+}
+enum OPERATION_TYPE {
+	OT_NONE		    = 0;	//无
+	OT_DRAW_RANDOM	= 1;	//摸牌
+	OT_DRAW_DISCARD	= 2;	//吃牌
+	OT_DISCARD      = 3;	//弃牌
+	OT_DROP	        = 4;    //drop
+	OT_FINISH	    = 5;    //胡牌
+}
+
+//操作事件
+message OperationEvent {
+	int32	seat = 1;		//SEAT
+	int32	type = 2;		//类型 OPERATION_TYPE
+	int32	card = 3;	    //摸吃或丢弃的牌
+	int32	dropReason = 4;	//drop原因(pack时) DROP_REASON
+	bool	timeout = 5;	//是否超时
+}
+enum DROP_REASON {
+	DR_NONE		= 0;	//无
+	DR_PLAYER	= 1;	//玩家操作
+	DR_EXIT		= 2;	//退出房间
+	DR_TIMEOUT	= 3;	//超时
+}
+
+//declare事件
+message DeclareEvent {
+	int32	seat = 1;		       //SEAT
+	int32   settledAmount = 2;     //结算金额
+}
+
+//分组请求
+message GroupReq {
+	repeated CardSet	cards = 1;	//牌
+	int32	            score = 2;	//分数
+}
+message CardSet {
+	int32	            type = 1;	//牌型
+	repeated int32  	cards = 2;	//牌组
+}
+
+//游戏结束
+message GameEndEvent {
+	int32		        winnerSeat = 1;		//赢家座位
+	repeated SeatResult	seatResults = 2;	//玩家结果
+	int32				versatileCard = 3;	//通用牌
+}
+message SeatResult {
+	int32			    seat = 1; 		        //SEAT
+	int32			    state = 2;              //状态
+	int32			    settledAmount = 3;      //结算金额
+	repeated CardSet	cards = 4;              //牌
+	int32			    score = 5;              //分数
+	base.PlayerBaseInfo baseInfo = 6;		    //玩家信息
+}
+
+//玩家手牌事件（机器人专用）
+message SeatCardsEvent {
+	repeated SeatCards	seatCards = 1;
+	int32			    finalTag = 2;    //标签
+}
+message SeatCards {
+	int32	            seat = 1;	//座位
+	repeated int32  	cards = 2;	//牌组
+}
+
+//玩家分数事件（机器人专用）
+message SeatScoreEvent {
+	int32	            seat = 1;	//座位
+	int32	            score = 2;	//分数
+}
+
+//历史结果记录
+message HistoryEvent {
+	repeated GameEndEvent	records = 1;	//历史记录
+}

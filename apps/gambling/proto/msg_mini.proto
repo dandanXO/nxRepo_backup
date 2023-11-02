@@ -1,0 +1,974 @@
+syntax = "proto3";
+package mini;
+
+////////////////////////////////////////////////////////////////
+// 小游戏
+////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////
+// Lucky Shot
+////////////////////////////////////////////////////////////////
+
+// 击球类型
+enum SHOT_TYPE {
+  ST_NONE = 0;
+  ST_FREE = 1; //免费
+  ST_NORMAL = 2; //小额
+  ST_GOLDEN = 3; //大额
+}
+
+// 击球最后落入的区域
+enum SHOT_AREA {
+  SA_NONE = 0; //未落入任何区域
+  SA_CENTER = 1; //中心区域
+  SA_INNER = 2; //内环
+  SA_OUTER = 3; //外环
+}
+
+// 每种区域的奖励
+message ShotReward {
+  SHOT_AREA area = 1;
+  int32 cash = 2;
+  int32 bonus = 3;
+}
+
+// 当前状态 ShotStateReq ShotBuyReq ShotResultReq 都会返回 ShotStateEvent
+message ShotStateEvent {
+  int32 freeRefresh = 1; //免费击球刷新时间戳
+  SHOT_TYPE shotType = 2; //下次击球类型 0-没有次数了 1-免费 2-小额 3-大额
+  int32 shotRemain = 3; //下次击球可用次数 0-没有了
+  int32 placeType = 4; //下次击球摆放类型 1~20
+  string shotParams = 5; //下次击球参数 json 字符串，角度、摩擦力等
+  repeated ShotReward reward = 6; //奖励
+  SHOT_TYPE buyType = 7; //没有次数时，购买击球类型 0-不能再买了
+  int32 buyPrice = 8; //购买金额，单位分
+  int32 buyShotTimes = 9; //购买能打几次
+  int32 goalsPosX = 10;
+  int32 goalsPosY = 11;
+  repeated ShotBall balls = 12;
+}
+
+message ShotBall {
+  int32 tag = 1; //1母球，2目标球，3干扰球
+  int32 posX = 2; //坐标 x
+  int32 posY = 3; //坐标 y
+}
+
+// 购买打球次数
+message ShotBuyReq {
+  SHOT_TYPE type = 1;  //购买类型
+}
+
+// 预击球
+message ShotPreHitReq {
+  SHOT_TYPE shotType = 1; //击球类型
+}
+
+// 击球结果
+message ShotResultReq {
+  SHOT_TYPE shotType = 1; //击球类型
+  int32 placeType = 2; //摆放类型
+  SHOT_AREA area = 3; //最后球落入的区域
+}
+
+////////////////////////////////////////////////////////////////
+// red vs black
+////////////////////////////////////////////////////////////////
+
+//下注区域类型
+enum RB_AREA_TYPE {
+  RB_NONE = 0;
+  RB_SPADE = 1; //黑桃
+  RB_HEART = 2; //红桃
+  RB_CLUB = 3; //梅花
+  RB_DIAMOND = 4; //方片
+  RB_JOKER = 5; //大小王
+  RB_RED = 6; //红色
+  RB_BLACK = 7; //黑色
+}
+
+message RBStateReq {
+  bool completeTask = 1; //是否完成任务
+  int32 gameId = 2;
+  int32 roomId = 3;
+  int32 initBet = 4; //场次大小，单位分
+  int32 queryType = 5;
+}
+
+message RBStateReply {
+  bool isGuide = 1; //是否需要新手引导，true 要 false 不需要
+  int32 remainFreeTimes = 2; //剩余免费下注次数
+  int32 totalFreeTimes = 3; //总的免费次数
+  int32 freeAmount = 4; //一次免费下注相当于多少钱
+  int32 availableBalance = 5; //可用余额
+  string history = 6; //历史记录 json 字符串，key: 1黑桃 2红桃 3梅花 4方块 5大小王，value是出现次数，key不存在就是0
+  string payout =7; //各区域赔率json 字符串，数组下标是 area_type -1
+  bool showVipTask = 8; //是否提示完成vip任务获得免费次数
+  repeated int32 bets = 9; //下注金额序列，单位分
+  int32 defaultBet = 10; //默认值
+  int32 queryType = 11; //透传 req 的 queryType
+}
+
+//下注请求
+message RBBetReq {
+  bool isGuide = 1; //是否为新手引导，新手引导时 isFree=True
+  bool isFree = 2; //是否使用免费下注，使用 free，amount=0
+  int32 amount = 3; //真实下注金额，单位分
+  RB_AREA_TYPE area = 4; //下注区域
+}
+
+message RBBetReply {
+  int32 result = 1; //翻牌结果
+  int32 winBet = 2; //赢得金额
+}
+
+//排行榜请求返回
+message RBRankListReply {
+  repeated RBRankItem list = 1;
+}
+
+message RBRankItem {
+  uint64 playerId = 1;    //玩家ID
+  string nickname = 2;    //昵称
+  string headId = 3;      //系统头像ID
+  string headUrl = 4;     //facebook头像url
+  int32 tag = 5;          //玩家标签 TAG_TYPE
+  int32 avatarFrame = 6;  //头像框
+  int32 cardBack = 7;     //卡背
+  int32 vipLevel = 8;     //vip等级
+  int32 totalGames = 9;   //游戏局数
+  int32 winAmount = 10;   //累计赢的钱
+}
+
+//状态回应
+message Slots1StateReply {
+  repeated int32 initMap = 1; //初始地图
+  int32 availableBalance = 2; //可用余额
+  string params = 3;//游戏参数
+  int32 totalBet = 4; //累计下注
+  int32 totalWin = 5; //累计赢钱
+}
+
+//下注请求
+message Slots1BetReq {
+  int32 betAmount = 3; //真实下注金额，单位分
+}
+
+//下注回应
+message Slots1BetReply {
+  repeated int32 resultMap = 1; //结果地图
+  int32 winAmount = 3; //赢的金额
+}
+
+//状态回应
+message Slots2StateReply {
+  repeated int32 initMap = 1; //初始地图
+  int32 availableBalance = 2; //可用余额
+  string params = 3;//游戏参数
+  int32 win = 4; //WIN
+}
+
+//下注请求
+message Slots2BetReq {
+  int32 betAmount = 3; //真实下注金额，单位分
+}
+
+//一条连线
+message Line {
+  repeated int32 idx = 3; //连线下标
+}
+
+//下注结果
+message Slots2Result {
+  repeated int32 resultMap = 1; //结果地图
+  int32 winAmount = 2; //赢的金额
+  repeated Line lines = 3; //连线下标
+  repeated int32 coins = 4; //金币数量
+  bool hasBigWin = 5;//是否有BigWin
+}
+
+//下注回应
+message Slots2BetReply {
+  repeated Slots2Result results = 1; //结果
+  bool hasBigWin = 2;//是否有BigWin
+}
+
+////////////////////////////////////////////////////////////////
+// 押线Slots
+////////////////////////////////////////////////////////////////
+
+//状态回应
+message Slots3StateReply {
+  repeated int32 initMap = 1; //初始地图
+  string params = 2;//游戏参数
+  string awardLines = 3;//中奖线
+  int32 availableBalance = 4; //可用余额
+}
+
+//下注请求
+message Slots3BetReq {
+  int64 betAmount = 1; //真实下注金额，单位分
+}
+
+//一条连线
+message Line3 {
+  int32 awardIdx = 1; //中奖线下标
+  int32 awardCount = 2; //中奖个数
+}
+
+//一局的结果
+message Slots3Result {
+  repeated int32 resultMap = 1; //结果地图
+  repeated Line3 lines = 2; //连线下标
+  int32 payout = 3; //累计倍率
+  bool hasBigWin = 4;//是否有BigWin
+}
+
+//下注回应
+message Slots3BetReply {
+  repeated Slots3Result results = 1; //结果
+  bool hasBigWin = 2;//是否有BigWin
+}
+
+
+//游戏开始测试
+message GameTestReq{
+	string 			name = 1;
+}
+
+//游戏开始测试
+message GameTestResp {
+	int32			state = 1;
+}
+
+
+//计时事件类型
+enum DEADLINE_TYPE_SJB {
+	DT_NONE 	= 0;
+	REF_BUF		= 1;	//更新buf信息
+}
+
+//游戏开始-sjb
+message ProtoSJBGameStartReq{
+	uint32  score					=1; 	//底分
+	uint32  type					=2; 	//模式选项 0-3
+	uint32  area					=3; 	//区间选项 0-9
+	uint32  buff					=4; 	//buff选项 0-9
+}
+
+
+message ProtoSJBGameStartResp {
+	uint32 stage2Count 			= 1;	//免费转的次数
+	uint32 stage3Count 			= 2;	//小游戏次数
+	uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+	repeated uint32 itemInfo 	= 4;	//开奖信息（15长度的数组，值是牌值1~11）
+	repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度15）
+	repeated LineItem lineItem 	= 6;	//30条线的中奖情况
+	repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+	LGFootBall footballResult 	= 8;	//小游戏足球结果
+	string gameID	 			= 9;	//本桌次唯一ID
+	string buff = 10;	// 选中的buff
+	string area = 11;	// 选中的区间
+	uint32 per = 12;	// 权重值
+	uint32 errorCode = 13;
+}
+
+
+message LineItem {
+	repeated uint32 okPath = 1;					//中奖路线，3~5个位置（位置的值0~14）
+	uint32 cardValue = 2;						//中奖牌值
+	uint32 awTimes = 3;							//倍数
+	uint32 lineIndex = 4;						//第几条规则线（1~30）
+}
+
+message FreeSpin {
+	uint32 awardTotalTimes 		= 1;	//本次转奖励获得钱
+	repeated uint32 itemInfo 	= 2;	//开奖信息（15长度的数组，值是牌值1~11）
+	repeated bool shineArea 	= 3;	//中奖区域（所有能亮的牌，长度15）
+	repeated LineItem lineItem 	= 4;	//30条线的中奖情况
+	repeated int32 param 	    = 5;	//各个游戏独特的参数；aztec第一个位置是金币赢取分
+	string area = 6;	// 选中的区间
+	uint32 per 	= 7;	// 权重值
+
+  repeated FreeSpin freeResult = 8;	//超级转多次自动旋转结果
+}
+
+message LGFootBall {
+	uint32 awardTotalTimes = 1;					//本次所有踢球奖励获得钱
+	repeated uint32 firstRsult = 2;				//第一次踢中情况
+	uint32 secondTimes = 3;						//第二次连中数
+	string area = 4;	// 选中的区间
+	uint32 per 	= 5;	// 权重值
+}
+
+message ProtoSJBBlockReq {
+	 uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoSJBBlockResp {
+	repeated uint32 block = 1;					//档位
+}
+	
+message  ProtoSJBReconnectionResp{
+	repeated uint32 block = 1;					//档位
+}
+
+
+//游戏开始
+message ProtoEgyptGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+
+message ProtoEgyptGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//超级转的次数
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（20长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度20）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated FreeSpin superResult = 8;	//超级转多次自动旋转结果
+  string gameID				 = 9;	//本桌次唯一ID
+  string buff = 10;	// 选中的buff
+  string area = 11;	// 选中的区间
+  uint32 per 	= 12;	// 权重值
+  uint32 errorCode = 13;
+}
+
+
+message ProtoEgyptBlockReq {}
+
+message ProtoEgyptBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message  ProtoEgyptReconnectionResp{
+  repeated uint32 block = 1;					//档位
+}
+
+
+message ProtoAztecBlockReq {
+	 uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoAztecBlockResp {
+	repeated uint32 block = 1;					//档位
+}
+
+//游戏开始
+message ProtoAztecGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoAztecGameStartResp {
+	uint32 stage2Count 			= 1;	//免费转的次数
+	uint32 stage3Count 			= 2;	//金币数
+	uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+	repeated uint32 itemInfo 	= 4;	//开奖信息（20长度的数组，值是牌值1~11）
+	repeated LineItem lineItem 	    = 5;	//50条线的中奖情况
+	repeated FreeSpin freeResult = 6;	//免费转多次自动旋转结果
+	string gameID	 			= 7;	//本桌次唯一ID
+	string buff = 8;	// 选中的buff
+	string area = 9;	// 选中的区间
+	uint32 per = 10;	// 权重值
+	uint32 errorCode = 11;
+}
+
+
+//Jlb
+message ProtoJlbBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoJlbBlockResp {
+ repeated uint32 block = 1;					//档位
+}
+
+message ProtoJlbGameStartReq{
+ uint32  score					=1; 	//底分
+ uint32  type					=2; 	//模式选项 0-3
+ uint32  area					=3; 	//区间选项 0-9
+ uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoJlbGameStartResp {
+	uint32 stage2Count 			= 1;	//免费转的次数
+	uint32 stage3Count 			= 2;	//小游戏次数
+	uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+	repeated uint32 itemInfo 	= 4;	//开奖信息（15长度的数组，值是牌值1~11）
+	repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度15）
+	repeated LineItem lineItem 	= 6;	//30条线的中奖情况
+	repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated FreeSpin superResult = 8;	//超级转多次自动旋转结果
+	string gameID	 			= 9;	//本桌次唯一ID
+	string buff = 10;	// 选中的buff
+	string area = 11;	// 选中的区间
+	uint32 per = 12;	// 权重值
+	uint32 errorCode = 13;
+}
+
+
+//DRAGON
+message ProtoDragonBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoDragonBlockResp {
+ repeated uint32 block = 1;					//档位
+}
+
+message ProtoDragonGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+ }
+ 
+ message ProtoDragonGameStartResp {
+   uint32 stage2Count 			= 1;	//免费转的次数
+   uint32 stage3Count 			= 2;	//小游戏次数
+   uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+   repeated uint32 itemInfo 	= 4;	//开奖信息（15长度的数组，值是牌值1~11）
+   repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度15）
+   repeated LineItem lineItem 	= 6;	//30条线的中奖情况
+   repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+   repeated FreeSpin superResult = 8;	//超级转多次自动旋转结果
+   string gameID	 			= 9;	//本桌次唯一ID
+   string buff = 10;	// 选中的buff
+   string area = 11;	// 选中的区间
+   uint32 per = 12;	// 权重值
+   uint32 errorCode = 13;
+ }
+
+//ZEUS
+
+//状态回应
+message ProtoSlotStateResp {
+  repeated int32 initMap = 1; //初始地图
+  int32 availableBalance = 2; //可用余额
+  string params = 3;//游戏参数
+  int32 win = 4; //WIN
+  repeated uint32 jackpot 	= 5;	// 3个奖池
+}
+
+message ProtoZeusBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoZeusBlockResp {
+ repeated uint32 block = 1;					//档位
+}
+
+message ProtoZeusGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+ }
+
+ message ProtoZeusGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//超级转的次数
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated int32 param 	    = 8;	//各个游戏独特的参数；zeus是每组的基础分（2 3 5 8 倍，都没乘过的）
+  string gameID				 = 9;	//本桌次唯一ID
+  string buff = 10;	// 选中的buff
+  string area = 11;	// 选中的区间
+  uint32 per 	= 12;	// 权重值
+  uint32 errorCode = 13;
+}
+
+
+
+
+//FRUIT
+//状态回应
+
+message ProtoFruitBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoFruitBlockResp {
+ repeated uint32 block = 1;					//档位
+}
+
+message ProtoFruitGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+ }
+
+ message ProtoFruitGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//超级转的次数
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated int32 param 	    = 8;	//各个游戏独特的参数；zeus是每组的基础分（2 3 5 8 倍，都没乘过的）
+  string gameID				 = 9;	//本桌次唯一ID
+  string buff = 10;	// 选中的buff
+  string area = 11;	// 选中的区间
+  uint32 per 	= 12;	// 权重值
+  uint32 errorCode = 13;
+}
+
+//SJB02
+//状态回应
+message ProtoSJB02BlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoSJB02BlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoSJB02GameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoSJB02GameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated FreeSpin goldResult = 8;	//变成金靴子旋转结果
+  string gameID				 = 9;	//本桌次唯一ID
+  string buff = 10;	// 选中的buff
+  string area = 11;	// 选中的区间
+  uint32 per 	= 12;	// 权重值
+  repeated uint32 jackpot 	= 13;	// 3个奖池
+  uint32 errorCode = 14;
+}
+
+//SPARTA
+//状态回应
+message ProtoSpartaBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoSpartaBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoSpartaGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoSpartaGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated FreeSpin superResult = 8;	//超级转多次自动旋转结果
+  repeated int32 param        = 9;   //各个游戏独特的参数；sparta是触发超级转的旋转中，5个及以上金币的币值倍数列表
+  uint32 goldValue           = 10; //本次金币倍数获得分
+  string gameID            = 11; //本桌次唯一ID
+  string buff = 12;  // 选中的buff
+  string area = 13;  // 选中的区间
+  uint32 per = 14;   // 权重值
+  repeated uint32 jackpot    = 15;  // 3个奖池
+  uint32 errorCode = 16;
+}
+
+//MONEY
+//状态回应
+message ProtoMoneyBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoMoneyBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoMoneyGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoMoneyGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated FreeSpin zeroResult = 5;	//免费转多次自动旋转结果
+  repeated FreeSpin redResult = 6;	//免费转多次自动旋转结果
+  string gameID				 = 7;	//本桌次唯一ID
+  string buff = 8;	// 选中的buff
+  string area = 9;	// 选中的区间
+  uint32 per = 10;	// 权重值
+  uint32 errorCode = 11;
+}
+
+//TIGER
+//状态回应
+message ProtoTigerBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoTigerBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoTigerGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoTigerGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  string gameID				 = 5;	//本桌次唯一ID
+  string buff = 6;	// 选中的buff
+  string area = 7;	// 选中的区间
+  uint32 per = 8;	// 权重值
+  uint32 errorCode = 9;
+}
+
+//ZEUS02
+//状态回应
+message ProtoZeus02BlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoZeus02BlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoZeus02GameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoZeus02GameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated FreeSpin superResult = 8;	//超级转多次自动旋转结果
+  repeated int32 param        = 9;   //各个游戏独特的参数；Zeus02是触发超级转的旋转中，6个及以上金币的币值倍数列表
+  uint32 goldValue           = 10; //本次金币倍数获得分
+  string gameID            = 11; //本桌次唯一ID
+  string buff = 12;  // 选中的buff
+  string area = 13;  // 选中的区间
+  uint32 per = 14;   // 权重值
+  repeated uint32 jackpot    = 15;  // 3个奖池
+  uint32 errorCode = 16;     
+}
+
+//BULL
+//状态回应
+message ProtoBullBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoBullBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoBullGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoBullGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated int32 param        = 8;   //各个游戏独特的参数；Bull是
+  string gameID				 = 9;	//本桌次唯一ID
+  string buff = 10;	// 选中的buff
+  string area = 11;	// 选中的区间
+  uint32 per = 12;	// 权重值
+  uint32 errorCode = 13;
+}
+
+//WOLF
+//状态回应
+message ProtoWolfBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoWolfBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoWolfGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoWolfGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin superResult = 7;	//超级转多次自动旋转结果
+  repeated int32 param        = 8;   //各个游戏独特的参数；Wolf是触发超级转的旋转中，6个及以上金币的币值倍数列表
+  uint32 goldValue           = 9; //本次金币倍数获得分
+  string gameID            = 10; //本桌次唯一ID
+  string buff = 11;  // 选中的buff
+  string area = 12;  // 选中的区间
+  uint32 per = 13;   // 权重值
+  repeated uint32 jackpot    = 14;  // 3个奖池
+  uint32 errorCode = 15;
+}
+
+//TIGER02
+//状态回应
+message ProtoTiger02BlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoTiger02BlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoTiger02GameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoTiger02GameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated FreeSpin superResult = 5;	//超级转多次自动旋转结果
+  string gameID            = 6; //本桌次唯一ID
+  string buff = 7;  // 选中的buff
+  string area = 8;  // 选中的区间
+  uint32 per = 9;   // 权重值
+  repeated uint32 jackpot    = 10;  // 3个奖池
+  uint32 errorCode = 11;
+}
+
+//LPIG
+//状态回应
+message ProtoLPigBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoLPigBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoLPigGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoLPigGameStartResp {
+  uint32 stage2Count 			= 1;	//普通转的次数
+  uint32 stage3Count 			= 2;	//超级转次数
+  uint32 awardTotalTimes 		= 3;	//本次奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin normalResult = 7;	//普通转多次自动旋转结果
+  repeated FreeSpin superResult = 8;	//超级转多次自动旋转结果
+  repeated int32 param 	    = 9;	//各个游戏独特的参数；LPIG是每组的基础分（2 3 5 8 倍，都没乘过的）
+  string gameID				 = 10;	//本桌次唯一ID
+  string buff = 11;	// 选中的buff
+  string area = 12;	// 选中的区间
+  uint32 per = 13;	// 权重值
+  uint32 errorCode = 14;
+}
+
+//NMOUSE
+//状态回应
+message ProtoNMouseBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoNMouseBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoNMouseGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoNMouseGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin superResult = 7;	//超级转多次自动旋转结果
+  string gameID				 = 8;	//本桌次唯一ID
+  string buff = 9;	// 选中的buff
+  string area = 10;	// 选中的区间
+  uint32 per = 11;	// 权重值
+  uint32 errorCode = 12;
+}
+
+//NCOW
+//状态回应
+message ProtoNCowBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoNCowBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoNCowGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoNCowGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin normalResult = 7;	//普通转多次自动旋转结果
+  repeated FreeSpin superResult = 8;	//超级转多次自动旋转结果
+  repeated int32 param 	    = 9;	//各个游戏独特的参数；
+  string gameID				 = 10;	//本桌次唯一ID
+  string buff = 11;	// 选中的buff
+  string area = 12;	// 选中的区间
+  uint32 per = 13;	// 权重值
+  uint32 errorCode = 14;
+}
+
+//NTIGER
+//状态回应
+message ProtoNTigerBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoNTigerBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoNTigerGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoNTigerGameStartResp {
+  uint32 stage2Count 			= 1;	//全屏奖倍数10
+  uint32 stage3Count 			= 2;	//超级转次数
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin superResult = 7;	//超级转多次自动旋转结果
+  string gameID				 = 8;	//本桌次唯一ID
+  string buff = 9;	// 选中的buff
+  string area = 10;	// 选中的区间
+  uint32 per = 11;	// 权重值
+  uint32 errorCode = 12;
+}
+
+//NRABIT
+//状态回应
+message ProtoNRabitBlockReq {
+  uint32 gameType = 1;					//游戏类型
+}
+
+message ProtoNRabitBlockResp {
+  repeated uint32 block = 1;					//档位
+}
+
+message ProtoNRabitGameStartReq{
+  uint32  score					=1; 	//底分
+  uint32  type					=2; 	//模式选项 0-3
+  uint32  area					=3; 	//区间选项 0-9
+  uint32  buff					=4; 	//buff选项 0-9
+}
+
+message ProtoNRabitGameStartResp {
+  uint32 stage2Count 			= 1;	//免费转的次数
+  uint32 stage3Count 			= 2;	//Jackpot额外获得的奖池分
+  uint32 awardTotalTimes 		= 3;	//本次普通转奖励获得钱
+  repeated uint32 itemInfo 	= 4;	//开奖信息（30长度的数组，值是牌值1~11）
+  repeated bool shineArea 	= 5;	//中奖区域（所有能亮的牌，长度30）
+  repeated LineItem lineItem 	= 6;	//50条线的中奖情况
+  repeated FreeSpin freeResult = 7;	//免费转多次自动旋转结果
+  repeated int32 param        = 8;   //各个游戏独特的参数；NRabit是普通转中，5个及以上金币的币值倍数列表
+  uint32 goldValue           = 9; //本次金币倍数获得分
+  string gameID				 = 10;	//本桌次唯一ID
+  string buff = 11;	// 选中的buff
+  string area = 12;	// 选中的区间
+  uint32 per = 13;	// 权重值
+  uint32 errorCode = 14;
+}
+
+
+
+//打开游戏外接游戏
+message ProtoPotionSpellsOpenGameReq {
+  string clientType       = 1;          //mobile/desktop
+  uint32 gameId           = 2;          //游戏id
+  string gameStatus       = 3;          //是否中途退出 "0" 显示  "1" 显示
+}
+
+message ProtoPotionSpellsOpenGameResp {
+  string url				      = 1;	//
+}
+
+

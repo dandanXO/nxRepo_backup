@@ -1,0 +1,65 @@
+syntax = "proto3";
+package question;
+
+//计时事件类型
+enum DEADLINE_TYPE {
+  DT_NONE = 0;
+  START = 1; //开局
+  OPERATION = 2; //玩家操作
+  END = 3; //结算
+}
+
+//桌上状态事件(开局/进场/重连)
+message TableStateEvent {
+  string gameCode = 1; //局号
+  int32 winBet = 2; //游戏获胜赢的奖金
+  int32 questionNums = 3; //总问题数
+  int32 current = 4; //当前第几题
+  repeated SeatState seatStates = 5; //桌上座位状态
+}
+
+message SeatState {
+  int32 seat = 1;  //座位号
+  int32 correct = 2; //回答正确次数
+  int32 wrong = 3; //回答错误次数
+  repeated bool answers = 4; //每一题回答是否正确
+  string currentOption = 5; //当前问题选项，为空代表还没有回答
+  bool currentCorrect = 6; //当前选项是否正确
+}
+
+message QuestionEvent {
+  int32 current = 1; //当前第几题
+  string title = 2; //题目
+  repeated Option options = 3; //选项
+}
+
+message Option {
+  string id = 1; //选项 id
+  string content = 2; //选项具体内容
+}
+
+//答题
+message AnswerReq {
+  string optionId = 1; //选择选项id
+}
+
+message AnswerEvent {
+  int32 seat = 1; //座位
+  string optionId = 2; //选择选项id
+  bool isCorrect = 3; //回答是否正确 True回答正确 False回答错误
+  string correctOptionId = 4; //正确的选项
+}
+
+//游戏结束事件
+message GameEndEvent {
+  repeated int32 winnerSeats = 1; //赢家位置
+  repeated int32 winBets = 2; //赢注
+  repeated SeatState seatStates = 5; //桌上座位状态
+}
+
+// 给机器人发送数据
+message SendRobotEvent {
+  repeated QuestionEvent questions = 1; //所有问题选项
+  repeated Option answers = 2; //答案
+  float correctRate = 3; //回答正确率
+}

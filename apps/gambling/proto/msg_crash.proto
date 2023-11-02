@@ -1,0 +1,98 @@
+syntax = "proto3";
+package crash;
+import "msg_base.proto";
+
+////////////////////////////////////////////////////////////////
+// ab游戏
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+	DT_NONE 	= 0;
+	START		= 1;	//开始下注
+	STOP		= 2;	//停止下注
+	FLY			= 3;	//开始飞行
+}
+
+////////////////////////////////////////////////////////////////
+
+//游戏开始事件
+message GameStartEvent {
+	repeated int32	seats = 1; 		//玩家座位
+}
+
+//桌上玩家事件
+message CrashPlayersEvent {
+	repeated CrashPlayer crashPlayers = 1;	//桌子玩家列表
+	int32 playersNum = 2;  // 在线人数
+}
+message CrashPlayer {
+	int32			seat = 1; 			//SEAT
+	base.PlayerBaseInfo	baseInfo = 2;		//玩家信息
+	bool			online = 3;			//是否在线
+	int32	balance = 4;	//游戏可用余额
+	int32 betAmount = 5; //下注金额
+	int32 cashOut = 6; //下注金额
+}
+
+//桌上座位状态事件(开局/进场/重连)
+message TableStateEvent {
+	string				gameCode	= 1;	//局号
+	int32 playersNum = 5;  // 在线人数
+}
+
+
+//桌上历史结果
+message HistoryResultEvent {
+	repeated int32	historyResuls	= 1;	//历史结果
+}
+
+//玩家操作
+message BetReq {
+	int32 betAmount = 1; //下注的数量
+}
+
+//操作事件
+message BetEvent {
+	int32	seat = 1;		//SEAT
+	int32 betAmount = 2; //下注的数量
+}
+
+//游戏结束
+message GameEndEvent {
+	int32 cashOut				 = 1;	//爆炸得倍数
+	repeated WinPlayerInfo infos = 2;	//赢钱玩家信息
+	string selbuf				 = 3; 	//buf类型
+}
+
+//赢钱玩家信息
+message WinPlayerInfo {
+	int32 cashOut		= 1;	//爆炸得倍数
+	int32 winAmount 	= 2; 	//赢钱
+	base.PlayerBaseInfo	baseInfo = 3;		//玩家信息
+}
+
+//玩家列表
+message PlayerListEvent {
+	repeated PlayerInfo	infos = 1;		//玩家信息
+}
+
+message PlayerInfo {
+	uint64 playerId = 1;		//玩家ID
+	string nickname = 2;		//昵称
+	string headId = 3;			//系统头像ID
+	string headUrl = 4;			//facebook头像url
+	int32 tag = 5;				//玩家标签 TAG_TYPE
+	int32 avatarFrame = 6; 		//头像框
+	int32 cardBack = 7; 		//卡背
+	int32 vipLevel = 8; 		//vip等级
+	int32 betAmount = 9; 		//下注的数量
+	int32 winAmount	=10; 		//赢得钱
+	int32 cashOut	=11;	//爆炸得倍数
+}
+
+//玩家主动结算
+message PlayerSettlementReq{}
+message PlayerSettlementResp{
+	 WinPlayerInfo infos = 1; //结算
+}

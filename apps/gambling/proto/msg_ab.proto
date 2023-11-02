@@ -1,0 +1,158 @@
+syntax = "proto3";
+package ab;
+import "msg_base.proto";
+
+////////////////////////////////////////////////////////////////
+// ab游戏
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+	DT_NONE 	= 0;
+	START		= 1;	//开始下注
+	STOP		= 2;	//停止下注
+}
+
+////////////////////////////////////////////////////////////////
+
+//游戏开始事件
+message GameStartEvent {
+	repeated int32	seats = 1; 		//玩家座位
+}
+
+//桌上玩家事件
+message RankPlayersEvent {
+	repeated RankPlayer rankPlayers = 1;	//桌子玩家列表
+	int32 playersNum = 2;  // 在线人数
+}
+message RankPlayer {
+	int32			seat = 1; 			//SEAT
+	base.PlayerBaseInfo	baseInfo = 2;		//玩家信息
+	bool			online = 3;			//是否在线
+	int32	balance = 4;	//游戏可用余额
+}
+
+//桌上座位状态事件(开局/进场/重连)TODO 旧的
+message TableStateEvent {
+	string				gameCode	= 1;	//局号
+	int32				jokerCard	= 2;	//JOKER牌
+	repeated AreaBets				areaBets	= 3;	//各个区域上的所有下注
+	repeated MyAreaBets				myAreaBets	= 4;	//各个区域上的自己下注
+	int32 playersNum = 5;  // 在线人数
+}
+
+//桌上座位状态事件(开局/进场/重连)新的
+message TableStateEvent2 {
+	string				gameCode	= 1;	//局号
+	int32				jokerCard	= 2;	//JOKER牌
+	repeated AreaTotalBet				areaTotalBet	= 3;	//各个区域上的总下注
+	repeated MyAreaBets				myAreaBets	= 4;	//各个区域上的自己下注
+	int32 playersNum = 5;  // 在线人数
+}
+
+//各个区域上的下注
+message AreaBets {
+	int32			areaType = 1; 		//区域类型
+	repeated int32	bets = 2; 		//下注数量
+}
+
+//各个区域上的总下注
+message AreaTotalBet {
+	int32			areaType = 1; 		//区域类型
+	int32	totalBet = 2; 		//总的下注数量
+}
+
+//自己各个区域上的总下注
+message MyAreaBets {
+	int32			areaType = 1; 		//区域类型
+	int32	totalBet = 2; 		//下注总数量
+}
+
+//桌上历史结果
+message HistoryResultEvent {
+	repeated HistoryResult	historyResuls	= 1;	//历史结果
+}
+
+//历史记录
+message HistoryResult {
+	int32			jokerCard = 1; 		//JOKER牌
+	int32			winArea = 2; 		//赢的区域，A或者B
+}
+
+//下注区域类型
+enum AREA_TYPE {
+	AT_NONE	= 0;	//无
+	AT_A		= 1;	//A,1.9
+	AT_B		= 2;	//B,
+	AT_1_5	= 3;	//1~5
+	AT_6_10	= 4;	//6~10
+	AT_11_15	= 5;	//11~15
+	AT_16_25	= 6;	//16~25
+	AT_26_30	= 7;	//26~30
+	AT_31_35	= 8;	//31~35
+	AT_36_40	= 9;	//36~40
+	AT_41_51	= 10;	//41~51
+}
+
+//发牌
+message DealCardsEvent {
+	int32			dealCardType = 1;	//发牌类型 DEAL_CARD_TYPE
+	repeated int32	cards = 2;	//牌
+}
+
+//发牌类型
+enum DEAL_CARD_TYPE {
+	DCT_NONE = 0;			//无
+	DCT_FIRST_DEAL = 1;			//第一轮发JOKER
+	DCT_FINAL_DEAL = 2;	//第二轮发两边A和B
+}
+
+//玩家操作
+message OperationReq {
+	int32	type = 1;	//类型 OPERATION_TYPE
+	int32	betArea = 2;	//下注区域 AREA_TYPE
+	int32 betAmount = 3; //下注的数量
+	int32 betNo = 4; //下注编号
+}
+enum OPERATION_TYPE {
+	OT_NONE		= 0;	//无
+	OT_BET		= 1;	//下注
+	OT_TOP_LIST		= 2;	//获取排名列表
+	OT_BALANCE		= 3;	//获取余额
+	OT_BET_ERROR		= 4;	//下注错误
+	OT_BET_TIMEOUT		= 5;	//下注超时
+}
+
+//操作事件
+message OperationEvent {
+	int32	seat = 1;		//SEAT
+	int32	type = 2;		//类型 OPERATION_TYPE
+	int32	betArea = 3;	//下注区域 AREA_TYPE
+	int32 betAmount = 4; //下注的数量
+	int32 balance = 5; //下注后的余额
+	int32 betNo = 6; //下注编号
+}
+
+//游戏结束
+message GameEndEvent {
+	repeated int32 winAreas = 1;//赢的区域
+	repeated WinnerSeatBets	winnerSeatBets = 2;	//赢家位置赢的钱
+}
+
+//赢家位置赢的钱
+message WinnerSeatBets {
+	int32	winnerSeat = 1; //赢家位置， -1代表右下角的其他玩家
+	repeated AreaWinBets areaWinBets = 2; //
+}
+
+//区域赢的钱
+message AreaWinBets {
+	int32		areaType = 1; 		//区域类型
+	int32		winBets = 2; 		//赢的总数量
+}
+
+//TOP30玩家列表
+message TopListEvent {
+	repeated RankPlayer rankPlayers = 1;	//排行玩家列表 = 1;
+}
+

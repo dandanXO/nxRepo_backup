@@ -15,6 +15,9 @@ nx g @nx/react:app app --bundler=webpack
 nx g @nx/react:app my-new-app --directory apps
 nx g @nx/react:app app --bundler=webpack --directory apps
 
+# Move
+nx g @nx/workspace:move --project my-feature-lib --destination shared/my-feature-lib
+
 
 
 

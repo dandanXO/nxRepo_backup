@@ -1,0 +1,23 @@
+export enum PageOrModalPathEnum {
+  IndexPage = '/',
+  MyPage= "/my",
+  NotificationPage= "/notice-list",
+  WalletPage = "/wallet",
+  SettingPage = "/setting",
+  RechargeActivityPage = "/recharge-activity",
+  WalletDepositNextPage = "/wallet-deposit-next",
+  InitialChargePage = "/initial-charge",
+  IndexSlotPage = "/slot",
+  GameSearchPage = "/game-search",
+  GamePage= "/game",
+  GameRecordPage = "/game-record",
+  PrivacyAgreementPage = "/privacy-agreement",
+  CompanyProfilePage = "/company-profile",
+  VIPGradePage = "/vip-grade",
+  DailySignInPage = "/daily-sign-in",
+  DailySingInRecordPage = "/daily-sign-in-record",
+  InvitePage = "/invite",
+  InviteSettlementRecordPage = "/invite-settlement-record",
+  TelegramPage = "/telegram",
+  ErrorPage = "/error"
+}

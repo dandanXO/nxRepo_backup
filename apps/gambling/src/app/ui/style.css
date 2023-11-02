@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  user-select: none;
+}
+
+/* loading 骨架屏 */
+.skeleton {
+  background-color: var(--primary_assistant) !important;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.08),
+    transparent
+  );
+  color: rgba(0, 0, 0, 0) !important;
+  border-radius: 4px;
+  overflow: hidden;
+  background-size: 200% 100%;
+  animation: waveAnimation 5s linear infinite;
+}
+
+@keyframes waveAnimation {
+  0% {
+    background-position: -200px 0;
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+    opacity: 0.4;
+  }
+}
+
+@keyframes gameListShow {
+  from {
+    transform: translateY(20%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+
+#root {
+  font-family:  -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+  text-align: center;
+  color: #28583C;
+  height: 100%;
+  /*min-height: 100vh;*/
+  min-height: 100%;
+  position: relative;
+  z-index: 1;
+  /*background: #08170A*/
+  /*背景色*/
+}
+
+
+
+.text-transparent {
+  /*color: #fff;*/
+  /*font-weight: 600;*/
+  background-image: linear-gradient(90deg,#FFF600 0%,#4FFB0C 100%);
+  background-clip: text;
+  color: transparent;
+  /*display: block;*/
+  /*font-family: HeeboBold*/
+}
+
+.van-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.2rem;
+  overflow: hidden;
+  margin: 0 auto;
+  display: block;
+  background: rgba(9,11,15,.7);
+  border: 1px solid #FFFA05;
+}
+
+.add-favorites:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: -0.42rem;
+  right: -0.82rem;
+  width: 2rem;
+  height: 1rem;
+  background: #090B0F;
+  transform: rotate(45deg);
+  box-shadow: 0 0 15px inset rgba(255,250,5,.3);
+  background: rgba(9,11,15,.8);
+  border: 1px solid #FFFA05;
+}
+
+.tab-item-title-box:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg,transparent,#4FFB0C);
+}
+
+.border-utils-orange {
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background-clip: padding-box,border-box;
+  background-origin: padding-box,border-box;
+  background-image: linear-gradient(180deg,#090B0F,#090B0F),linear-gradient(90deg,#FF7F03,rgba(252,106,7,.2),#FF7F03,rgba(252,106,7,.2),#FF7F03);
+  box-shadow: inset 0 0 36px 5px #361810;
+}
+
+.border-utils-gray {
+  box-shadow: inset 0 0 36px 5px rgba(255,255,255,.08);
+  border-radius: 11px;
+  border: 1px solid rgba(255,255,255,.3);
+}
+
+
+.table th {
+  background: rgba(255,255,255,.1);
+}
+.table :where(tbody th, tbody td) {
+  background: rgba(255,255,255,.05);
+}
+
+.table-zebra tbody tr:nth-child(even) td {
+  /*--tw-bg-opacity: 1;*/
+  /*background-color: hsl(var(--b1) / var(--tw-bg-opacity));*/
+  background: rgba(255,255,255,.1);
+}
+
+
+.active-drawer-button {
+  background: url(/assets/001/menuBg1.png) no-repeat center/100%;
+  height: 50px;
+}
+
+.vip-tab-items::-webkit-scrollbar {
+  display: none;
+}
+
+
+/*.v-img__img--contain {*/
+/*  object-fit: contain;*/
+/*}*/
+
+/*.v-img__img, .v-img__picture, .v-img__gradient, .v-img__placeholder, .v-img__error {*/
+/*  z-index: -1;*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*}*/
+/*.v-responsive__sizer {*/
+/*  flex: 1 0 0px;*/
+/*  transition: padding-bottom .2s cubic-bezier(.4,0,.2,1);*/
+/*  pointer-events: none;*/
+/*}*/
+/*.rowLine[data-v-ed29e634] {*/
+/*  display: flex;*/
+/*  margin: 16px 2vw;*/
+/*}*/

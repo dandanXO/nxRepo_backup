@@ -1,0 +1,8 @@
+- 共用 Slice
+  - apiBoundaryModuleSlice
+  - appSlice
+  - loadingSlice
+  - modalSlice
+- 每個 page 可能會有單獨的 xxxPageSlice
+- TODO
+  - rtkPendingSlice -> loadingSlice 取代就好

@@ -1,0 +1,205 @@
+syntax = "proto3";
+package truco;
+import "msg_base.proto";
+
+////////////////////////////////////////////////////////////////
+// truco游戏
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+	DT_NONE 	= 0;
+	START		= 1;	//开局
+	OPERATION	= 2;	//玩家操作
+	TRUCO 	= 3;	//回应truco
+    ELEVEN     = 4;   //决定是否要接受11分局
+	DISPLAY 	= 5;	//结果展示
+    NEXT_ROUND  = 6;    //下一轮玩家操作
+    DEAL_CARDS  = 7;    //等待新一轮发牌
+    NEXT_TURN  = 8;     //下一手牌玩家操作
+    GAME_END = 9;     //游戏结束
+    OPERATION_NO_TRUCO = 10;   //通常操作，但不能发起truco
+    TRUCO_NO_TRUCO = 11;    //回应truco，但不能发起truco
+    OPERATION_TIMEOUT = 12;    //超时玩家自动操作
+}
+
+
+////////////////////////////////////////////////////////////////
+
+//游戏开始事件
+message GameStartEvent {
+	int32			buttonSeat = 1;	//庄家位
+	repeated int32	seats = 2; 		//玩家座位
+    repeated int32  teams1 = 3;      //1队成员
+    repeated int32  teams2 = 4;      //2队成员
+}
+
+//通知button位
+message ButtonSeatEvent {
+	int32	seat = 1;	//庄家位
+}
+
+//桌上座位状态事件
+message TableStateEvent {
+	string				gameCode        = 1;	//局号
+	int32				viraCard        = 2;	//vira牌
+    int32               roundState      = 3;    //单轮状态 
+	repeated SeatState	seatStates      = 4;	//桌上座位状态
+    repeated int32      cardPowers      = 5;    //牌力列表，从小到大排序
+    int32               curScore        = 6;    //当前轮次分数
+    int32               stars           = 7;    //当前星数
+    int32               totalAmount     = 8;    //队伍输赢
+    int32               buttonSeat      = 9;    //庄家位
+}
+message SeatState {
+	int32			seat = 1; 		    //座位
+	int32			state = 2;          //状态
+	int32			dropAmount = 3;     //drop所需金额 
+    int32           teamId = 4;           //所在队伍
+    int32           balance = 5;        //玩家余额
+}
+
+enum STATE_TYPE {
+	ST_NONE		    = 0;	//无
+	ST_PLAYING		= 1;	//打牌中
+	ST_TIMEOUT		= 2;	//超时
+    ST_CONFIRMED    = 3;    //已确认
+}
+
+//玩家重连
+message PlayerOnlineEvent {
+	string				gameCode        = 1;	//局号
+	int32				viraCard        = 2;	//vira牌
+    int32               roundState      = 3;    //单轮状态 
+	repeated SeatState	seatStates      = 4;	//桌上座位状态
+    repeated int32      cardPowers      = 5;    //牌力列表，从小到大排序
+    int32               curScore        = 6;    //当前轮次分数
+    int32               stars           = 7;    //当前星数
+    int32               totalAmount     = 8;    //队伍输赢
+    int32               buttonSeat      = 9;    //庄家位
+    repeated SeatCards    seatCards     = 10;   //玩家手牌事件
+    repeated int32      roundHistory    = 11;   //当轮游戏历史结果
+    repeated TableCards  tableCards     = 12;   //桌上已经打出的牌
+}
+
+message TableCards {
+    int32          seat = 1;   //座位
+    int32          card = 2;   //当前出的牌
+}
+
+//手牌事件
+message DealCardsEvent {
+	repeated SeatCards	seatCards = 1;	//玩家手牌
+}
+message SeatCards {
+    int32             seat = 1;  //座位
+    repeated int32    cards = 2;   //手牌
+}
+
+//玩家手牌事件(机器人专用)
+message SeatCardsEvent {
+    repeated SeatCards  seatCards = 1; //玩家手牌事件（机器人专用）
+}
+
+//玩家操作请求
+message OperationReq {
+	int32	            type = 1;       //类型 OPERATION_TYPE
+	int32	            card = 2;       //出的牌或展示的牌
+}
+
+enum OPERATION_TYPE {
+	OT_NONE		    = 0;	//无
+	OT_DISCARD      = 1;	//出牌
+    OT_DISCARD_HIDDEN = 2;    //扣牌出牌
+	OT_DROP	        = 3;    //drop
+	OT_TRUCO	    = 4;    //发起TRUCO
+    OT_TRUCO_ACCEPT = 5;    //接受TRUCO
+    OT_SHOW         = 6;    //展示手牌
+    OT_ELEVEN_ACCEPT = 7;    //接受11分局
+    OT_RETURN       = 8;    //超时玩家返回
+    OT_FIRST_TRUCO  = 9;    //每手牌玩家第一次发起truco, 只用于OperationEvent
+}
+
+//玩家操作选项
+message PlayerOption {
+    repeated int32   option = 1;   //操作选项从左到右依次排序
+    int32     curScore = 2;    //当前分数  
+}
+
+//操作事件
+message OperationEvent {
+	int32	seat = 1;		//SEAT
+	int32	type = 2;		//类型 OPERATION_TYPE
+	int32	card = 3;	    //出的牌
+	int32	dropReason = 4;	//drop原因 DROP_REASON
+	bool	timeout = 5;	//是否超时
+}
+enum DROP_REASON {
+	DR_NONE		= 0;	//无
+	DR_PLAYER	= 1;	//玩家操作
+	DR_EXIT		= 2;	//退出房间
+}
+
+//队伍操作事件(四人场专用)
+message TeamOperation {
+    repeated SeatOperation   seatOperation = 1;   //座位操作
+}
+
+message SeatOperation {
+    int32      seat = 1;     //SEAT
+    int32      type = 2;     //类型 OPERATION_TYPE
+}
+
+//turn结束(一手牌)
+message TurnEndEvent {
+    int32    turn = 1;    //第几手
+    int32    turnWinTeam = 2;     //该手胜利队伍(平局则为0)
+    int32    curScore = 3;      //当前轮次小分
+    int32    stars = 4;      //当前星数
+    repeated int32   winSeats = 5;    //最大牌座位
+    repeated TeamScores    teamScores = 6;   //队伍分数
+    int32    roundWinTeam  = 7;   //一轮胜利队伍
+}
+
+message TeamScores {
+    int32    teamId = 1;    //队伍Id
+    int32    scores = 2;    //队伍分数
+}
+
+//游戏结束事件
+message GameEndEvent {
+    int32   winnerTeam = 1;    //赢家队伍
+    int32   winnerScore = 2;     //赢家分数
+    int32   loseScore = 3;      //输家分数
+    repeated SeatResult	seatResults = 4;    //玩家结果
+}
+
+message SeatResult {
+    int32  seat = 1;     //赢家座位
+    int32  state = 2;     //状态
+    int32  settledAmount = 3;   //结算金额
+    base.PlayerBaseInfo baseInfo = 4;   //玩家信息
+}
+
+message OperationFailed {
+    int32  type = 1;    //类型OPERATION_TYPE
+    int32  card = 2;    //有出牌操作告诉牌值
+}
+
+//当前分数
+message ScoreEvent {
+    int32    curScore        = 1;    //当前轮次分数
+    int32    stars           = 2;    //当前星数
+    int32    totalAmount     = 3;    //队伍输赢
+}
+
+//展示手牌
+message ShowCardsEvent {
+    int32    seat            = 1;     //座位
+    repeated int32   cards   = 2;     //剩余手牌 
+}
+
+//队伍分数
+message TeamScoreEvent {
+    repeated TeamScores    teamScores = 1;   //队伍分数
+}

@@ -1,0 +1,8 @@
+{
+  "url": "https://sentry.xu-jie-tech.com",
+  "authToken": "f011dbb05ecf47568bda70647512f773e8a9d3dc54e24f6d96ff8f9d48ef20a8",
+  "org": "sentry",
+  "project": "api-app",
+  "projectId": 2,
+  "dsn": "https://d90d01b7732c41d79ff57f964858e4cf@sentry.xu-jie-tech.com/2"
+}

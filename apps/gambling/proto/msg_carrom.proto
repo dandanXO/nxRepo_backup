@@ -1,0 +1,73 @@
+syntax = "proto3";
+package carrom;
+
+////////////////////////////////////////////////////////////////
+// carrom游戏
+////////////////////////////////////////////////////////////////
+
+//计时事件类型
+enum DEADLINE_TYPE {
+  DT_NONE = 0;
+  START = 1; //开局
+  OPERATION = 2; //玩家操作
+  END = 3; //结算
+}
+
+//桌上状态事件(开局/进场/重连)
+message TableStateEvent {
+  string gameCode = 1; //局号
+  int32 winBet = 2; //游戏获胜赢的奖金
+  int32 piecesType = 3; //子球摆放类型 1-六个球一圈 2-六个球螺旋围在一起 3-九个球
+  repeated SeatState seatStates = 4; //桌上座位状态
+  string params = 5; //参数 json 字符串
+}
+
+message SeatState {
+  int32 seat = 1;  //1号座白色 2号座黑色
+  int32 timeoutTimes = 2; //超时次数
+  int32 score = 3; //进自己球个数
+  int32 red = 4; //进红球个数
+  int32 white = 5; //进白球个数
+  int32 black = 6; //进黑球个数
+  int32 strikeNums = 7; //击球次数
+  int32 foulTimes = 8; //犯规次数
+}
+
+//击球结果 TODO 待废弃
+message StrikeResultReq {
+  int32 winnerSeat = 1; //赢家位置，若未赢传-1
+  repeated SeatState seatStates = 2;
+}
+
+//游戏结果
+message ResultReq {
+  string gameCode = 1; //局号
+  int32 winnerSeat = 2; //赢家位置，若未赢传-1
+  repeated SeatState seatStates = 3;
+  int32 rounds = 4; //轮换次数
+}
+
+//击球
+message HitReq {
+  int32 seat = 1; //击球的人
+  int32 roundSeat = 2; //当前谁的回合
+}
+
+//同步游戏数据
+message SyncGameDataReq {
+  string gameCode = 1; //局号
+  repeated SeatState seatStates = 2;
+  int32 rounds = 3; //轮换次数
+  int32 seat = 4; //击球的人
+}
+
+//游戏结束事件
+message GameEndEvent {
+  int32 winBet = 1; //赢得金额
+  int32 winnerSeat = 2; //赢家位置
+}
+
+message GuideReply {
+  bool isGuide = 1; //是否新手引导，True 开启，False 关闭
+}
+

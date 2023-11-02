@@ -12,6 +12,7 @@
         "compiler": "babel",
         "outputPath": "dist/apps/gambling",
         "index": "apps/gambling/src/index.html",
+        "generateIndexHtml": false,
         "baseHref": "/",
         "main": "apps/gambling/src/main.tsx",
         "tsConfig": "apps/gambling/tsconfig.app.json",
@@ -19,7 +20,8 @@
         "styles": [],
         "scripts": [],
         "isolatedConfig": true,
-        "webpackConfig": "apps/gambling/webpack.config.js"
+        "webpackConfig": "apps/gambling/build/webpack.config.main.js",
+        "postcssConfig": "apps/gambling/build/postcss.config.js"
       },
       "configurations": {
         "development": {
@@ -28,11 +30,65 @@
           "sourceMap": true,
           "vendorChunk": true
         },
-        "production": {
+        "dev-bmw": {
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.prod.ts"
+              "with": "apps/gambling/src/environments/environment.dev.bmw.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/index.bmw.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "dev-legend": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/environment.dev.legend.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/index.bmw.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "dev-cat777bet": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/environment.dev.cat777bet.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/index.cat777bet.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "prod-cat777bet": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/environment.prod.cat777bet.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/index.cat777bet.html"
             }
           ],
           "optimization": true,
@@ -58,6 +114,15 @@
         "production": {
           "buildTarget": "gambling:build:production",
           "hmr": false
+        },
+        "dev-bmw": {
+          "buildTarget": "gambling:build:dev-bmw"
+        },
+        "dev-legend": {
+          "buildTarget": "gambling:build:dev-legend"
+        },
+        "dev-cat777bet": {
+          "buildTarget": "gambling:build:dev-cat777bet"
         }
       }
     },
