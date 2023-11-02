@@ -17,7 +17,9 @@ const {
   isDashboard,
   PUBLIC_PATH,
   ASSET_OUTPUT_PATH,
+  hostIP,
 } = require('./webpack.config.common');
+
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
@@ -54,7 +56,6 @@ fs.exists(filePath, function (exists) {
 
 infoLog('build');
 
-const { hostIP } = require('./getNetworkInterface');
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
