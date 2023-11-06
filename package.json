@@ -8,7 +8,7 @@
     "test": "nx test",
     "lint": "pnpm nx lint --projects app",
     "format": "pnpm nx format:write --projects app,mobile",
-    "serve:gcoco777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.215 NODE_ENV=development NODE_COUNTRY=hxj-dev pnpm nx serve gambling -c=dev-coco777bet",
+    "serve:gcoco777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=hxj-dev pnpm nx serve gambling -c=dev-coco777bet",
     "build:gcoco777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet --verbose",
     "serve:glegend": "cross-env NODE_ENV=development NODE_COUNTRY=legend pnpm nx serve gambling -c=dev-legend",
     "serve:gbmw": "cross-env NODE_ENV=development NODE_COUNTRY=bmw pnpm nx serve gambling -c=dev-bmw",
