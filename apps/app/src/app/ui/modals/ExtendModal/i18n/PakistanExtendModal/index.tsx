@@ -1,7 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import { formatDate } from '../../../../../modules/format/formatDate';
 import Money from '../../../../components/Money';
@@ -13,13 +13,17 @@ import Select from '../../../../core-components/Select';
 import { selectStyles } from '../../../../core-components/selectStyles';
 import { Status } from '../../../../statusEnum';
 import { i18nExtendModal } from '../../translations';
-
+import { getToken } from 'apps/app/src/app/application/getToken';
+import { getOrderNo } from 'apps/app/src/app/externel/window/querystring/getOrderNo';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 type paymentMethodValueType = {
   value: string;
   label: string;
 };
 const PakistanExtendModal = (props: any) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const {
     repayConfirmDetail: { extendDate, extensionFee, extensionPayAmount = '' },
     orderNo = '',
@@ -133,7 +137,17 @@ const PakistanExtendModal = (props: any) => {
             <Button
               type={'ghost'}
               ghostTheme={'tertiary'}
-              onClick={() => navigate(-2)}
+              onClick={() => {
+                navigate(
+                  `${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,
+                  {
+                    state: {
+                      currentData: location.state,
+                    },
+                    replace:true
+                  }
+                );
+              }}
               text={t('Cancel')}
             />
           </div>
