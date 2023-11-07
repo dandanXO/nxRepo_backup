@@ -41,11 +41,11 @@ export const RecordPanel = (props: IRecordPanel) => {
   useEffect(() => {
     const token = AppLocalStorage.getItem('token') || '';
     if(recordPanelMode === 'deposit') {
-      triggerGetDepositRecord({
-        limit: 1000,
-        page: 1,
-        token,
-      });
+      // triggerGetDepositRecord({
+      //   limit: 1000,
+      //   page: 1,
+      //   token,
+      // });
     } else {
       triggerGetWithdrawRecord({
         limit: 1000,
@@ -150,7 +150,7 @@ export const RecordPanel = (props: IRecordPanel) => {
       {/*</div>*/}
 
       {isMobile ? null : recordPanelMode === 'deposit' ? (
-        <RecordPanelDeposit records={depositRecordData?.data || []} />
+        <RecordPanelDeposit  />
       ) : (
         <RecordPanelWithdraw records={withdrawRecordData?.data || []} />
       )}
