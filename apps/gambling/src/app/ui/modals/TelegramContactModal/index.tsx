@@ -7,7 +7,7 @@ import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 const Container = styled.div`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/pop1.c6814210.png);
+  background-image: url(assets/001/pop1.c6814210.png);
   background-size: 100% auto;
   border-radius: 20px;
   padding: 20px 24px;

@@ -44,7 +44,6 @@ const MoneyLabel = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 36px;
   color: #fff;
   text-align: center;
   margin-bottom: 35px;
@@ -172,7 +171,7 @@ export const WalletDepositNextPage = () => {
 
           <section className={"w-[30%]"}>
             <ShadowContainer className={"flex flex-col justify-center items-center"}>
-              <MoneyLabel className={"mb-4 w-full"}>R${amount}</MoneyLabel>
+              <MoneyLabel className={"mb-4 w-full text-base"}>R${amount}</MoneyLabel>
               <div className={"w-full"}>
                 <QRCode className="w-[100%] h-[100%]" value={String(data?.data?.channelData?.paymentLink || '')} />
                 {/* <img className={"w-[100%] h-[100%]"} src={"https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg"}/> */}

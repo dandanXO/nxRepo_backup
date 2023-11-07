@@ -1,4 +1,4 @@
-import NoData from '../../../../../assets/noData.png'
+import NoData from '../../../../../assets/001/noData.png'
 
 interface IDailyType {
   type: string;

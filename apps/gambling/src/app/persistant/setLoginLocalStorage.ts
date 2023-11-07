@@ -16,6 +16,7 @@ export const setLoginLocalStorage = (props: {
 
 export const clearLoginLocalStorage = () => {
   AppLocalStorage.removeItem("token");
+  AppLocalStorage.removeItem("userInfo");
   AppLocalStorage.removeItem("kPhone");
   AppLocalStorage.removeItem("kPassword");
   // AppLocalStorage.removeItem("amount");

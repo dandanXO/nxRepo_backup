@@ -18,7 +18,7 @@ import {IUserInfo} from "../../../persistant/pending/loginMode";
 const RegisterButton = styled.button`
   width: 198px;
   height: 30px;
-  background: url("assets/balance-bg-7d6b8cd6.png") no-repeat center/100% 100%;
+  background: url("assets/001/balance-bg-7d6b8cd6.png") no-repeat center/100% 100%;
   color: #fff;
 `
 

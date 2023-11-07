@@ -267,7 +267,7 @@ export const DailySignInPage = () => {
         {/*  <img*/}
         {/*    alt={'rabbit'}*/}
         {/*    className="h-[660px] w-[332px]"*/}
-        {/*    src={'assets/img.05e3d09a.png'}*/}
+        {/*    src={'assets/001/img.05e3d09a.png'}*/}
         {/*  />*/}
         {/*</section>*/}
 
@@ -279,7 +279,7 @@ export const DailySignInPage = () => {
           {/*<img*/}
           {/*  alt={'title'}*/}
           {/*  className={'absolute top-[-45px] left-[200px] h-[71px] w-[592px]'}*/}
-          {/*  src={'assets/title.75fa9aa0.png'}*/}
+          {/*  src={'assets/001/title.75fa9aa0.png'}*/}
           {/*/>*/}
           <span className="font-weight-bold text-yellow-300" style={{ fontSize: '40px' }}>BONUS DE LOGIN VIP</span>
 

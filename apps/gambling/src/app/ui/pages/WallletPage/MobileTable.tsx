@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { RechargeListResponseData } from '../../../external/RechargeHistoryListEndpoint';
 import { WithdrawHistoryListEndpointResponseData } from '../../../external/WithdrawHistoryListEndpoint';
-import NoDataImg from '../../../../assets/noData.png'
+import NoDataImg from '../../../../assets/001/noData.png'
 import cx from "classnames"
 
 const Container = styled.div`
