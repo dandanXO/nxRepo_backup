@@ -3,6 +3,9 @@ const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const APP_IDENTIFICATION = `[apps/app][${process.env.NODE_PLATFORM}] `;
 const isProduction = process.env.NODE_ENV == 'production';
 const isDashboard = process.env.NODE_DASHBOARD;
+const devServerHostIP = process.env.NODE_DEV_SERVER_HOST_IP;
+console.log("process.env.NODE_DEV_SERVER_HOST_IP", devServerHostIP)
+console.log('process.env.NX_CLI_SET:', process.env.NX_CLI_SET);
 
 console.log('isProduction: ', isProduction);
 // console.log('process.env:', process.env);
@@ -32,7 +35,11 @@ console.log('PUBLIC_PATH', PUBLIC_PATH);
 // NOTICE:
 const ASSET_OUTPUT_PATH = 'images';
 
-
+// NOTE: window didn't support it
+let { hostIP } = require('./getNetworkInterface');
+if(!hostIP) {
+  hostIP = devServerHostIP;
+}
 
 module.exports = {
   APP_IDENTIFICATION,
@@ -41,4 +48,5 @@ module.exports = {
   gitRevisionPlugin,
   ASSET_OUTPUT_PATH,
   PUBLIC_PATH,
+  hostIP,
 };

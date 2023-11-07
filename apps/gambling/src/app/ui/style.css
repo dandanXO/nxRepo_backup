@@ -152,6 +152,12 @@ body {
   display: none;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 
 /*.v-img__img--contain {*/
 /*  object-fit: contain;*/
