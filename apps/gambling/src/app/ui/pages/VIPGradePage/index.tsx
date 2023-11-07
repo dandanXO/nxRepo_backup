@@ -360,7 +360,7 @@ export const VIPGradePage = () => {
                 <img
                   alt="vip"
                   className={'h-[38px] w-[54px]'}
-                  src={'assets/vip.1bf683b6.png'}
+                  src={'assets/001/vip.1bf683b6.png'}
                 />
                 <img
                   alt="0"
@@ -374,7 +374,7 @@ export const VIPGradePage = () => {
                 <img
                   alt="introduce to vip"
                   className={'h-[50px] w-[500px]'}
-                  src={'assets/title1.d89d4f0c.png'}
+                  src={'assets/001/title1.d89d4f0c.png'}
                 />
               </section>
             </section>

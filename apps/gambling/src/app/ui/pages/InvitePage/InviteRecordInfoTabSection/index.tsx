@@ -10,9 +10,7 @@ import {
   GetInviteRewardDataResponse,
   GetUnsettleInviteRewardDataResponse,
   useLazyGetInviteUserDayReportDataQuery
-} from "../../../../external";
 import {DesktopTotalType} from "./DesktopTotalType";
-import {AppLocalStorage} from "../../../../persistant/localstorage";
 import {DesktopDailyType} from "./DesktopDailyType";
 import moment from "moment";
 import {MobileCommonBlueTable} from "./MobileCommonBlueTable";

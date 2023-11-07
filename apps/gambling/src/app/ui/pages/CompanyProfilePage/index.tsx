@@ -14,7 +14,7 @@ export const CompanyProfilePage = () => {
         <div className="countryItem">
           <div  className="v-responsive v-img v-img--booting" style={{width: "580px"}}>
             <div className="v-responsive__sizer" style={{"paddingBottom": "14.1884%"}}></div>
-            <img className="v-img__img v-img__img--contain" src="assets/img1.be3894ae.png"/>
+            <img className="v-img__img v-img__img--contain" src="assets/001/img1.be3894ae.png"/>
           </div>
         </div>
 
@@ -25,7 +25,7 @@ export const CompanyProfilePage = () => {
         <div className="industryItem mb-4">
           <div  className="v-responsive v-img v-img--booting" style={{width: "580px"}}>
             <div className="v-responsive__sizer" style={{"paddingBottom": "15.8983%"}}></div>
-            <img className="v-img__img v-img__img--contain" src="assets/img2.6ebaa7a5.png"/>
+            <img className="v-img__img v-img__img--contain" src="assets/001/img2.6ebaa7a5.png"/>
           </div>
         </div>
 

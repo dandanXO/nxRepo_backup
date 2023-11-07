@@ -36,7 +36,7 @@ export const TelegramPage = () => {
       <div className={"px-0 sm:px-10 w-full"}>
 
         {/*<section className={"rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
-        {/*  <img className="w-full" src={"assets/bg.761d8ab4.png"}/>*/}
+        {/*  <img className="w-full" src={"assets/001/bg.761d8ab4.png"}/>*/}
         {/*  <div className={"mt-20 absolute left-[40px] top-0 text-white"}>*/}
         {/*    <div className={"text-4xl mb-4"}>Junte-se ao telegram</div>*/}
         {/*    <Bonus className={"text-5xl mb-2"}>Revela oficialmente mais</Bonus>*/}
@@ -45,7 +45,7 @@ export const TelegramPage = () => {
         {/*</section>*/}
 
         <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>
-          <img className="w-full" src={"assets/bg.761d8ab4.png"}/>
+          <img className="w-full" src={"assets/001/bg.761d8ab4.png"}/>
           <div className={"mt-5 xl:mt-20 absolute left-[40px] top-0 text-white"}>
             <div className={"md:text-4xl mb-4 text-xl"}>Junte-se ao telegram</div>
             <Bonus className={"md:text-4xl"}>atividades de recompensa</Bonus>

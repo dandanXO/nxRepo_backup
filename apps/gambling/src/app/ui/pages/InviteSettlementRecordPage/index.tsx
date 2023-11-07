@@ -8,7 +8,7 @@ import {useNavigate} from "react-router";
 import {useLazyGetUserInviteRewardRecordQuery} from "../../../external";
 import {useCallback, useEffect, useState} from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import NoDataImg from "../../../../assets/noData.png";
+import NoDataImg from "../../../../assets/001/noData.png";
 
 const { RangePicker } = DatePicker;
 
