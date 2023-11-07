@@ -32,7 +32,17 @@ const PakistanExtendConfirmModal = () => {
             type={'ghost'}
             text={t('Next time')}
             className={`mr-1 w-full`}
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate(
+                `${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,
+                {
+                  state: {
+                    currentData: location.state,
+                  },
+                  replace: true
+                }
+              );
+            }}
           />
           <Button
             primaryTypeGradient={true}
@@ -47,6 +57,7 @@ const PakistanExtendConfirmModal = () => {
                   state: {
                     currentData: location.state,
                   },
+                  replace: true
                 }
               );
             }}

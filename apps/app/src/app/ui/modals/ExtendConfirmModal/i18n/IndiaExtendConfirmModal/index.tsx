@@ -34,13 +34,12 @@ const IndiaExtendConfirmModal = () => {
             text={t('Got It And Go Extension')}
             onClick={() => {
               navigate(
-                `${
-                  PageOrModalPathEnum.RepaymentDetailPage
-                }/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
+                `${PageOrModalPathEnum.RepaymentDetailPage}/extend-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
                 {
                   state: {
                     currentData: location.state,
                   },
+                  replace: true
                 }
               );
             }}
@@ -50,7 +49,17 @@ const IndiaExtendConfirmModal = () => {
             ghostTheme={'tertiary'}
             className={`w-full`}
             text={'Next time'}
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate(
+                `${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,
+                {
+                  state: {
+                    currentData: location.state,
+                  },
+                  replace: true
+                }
+              );
+            }}
           />
         </div>
       </div>

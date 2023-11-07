@@ -2,7 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { StylesConfig } from 'react-select';
 
 import { GetLoanDetailResponse } from '../../../../../externel/backend/loanService/GetLoanDetailResponse';
@@ -16,7 +16,9 @@ import ListItem from '../../../../core-components/ListItem';
 import Modal from '../../../../core-components/Modal';
 import Select from '../../../../core-components/Select';
 import { i18nExtendModal } from '../../translations';
-
+import { getToken } from 'apps/app/src/app/application/getToken';
+import { getOrderNo } from 'apps/app/src/app/externel/window/querystring/getOrderNo';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 interface IPhilippinesExtendModalProps {
   currentData?: GetLoanDetailResponse;
   isPostExtendCreateLoading?: boolean;
@@ -79,6 +81,7 @@ const PhilippinesExtendModal = ({
 
   const { t } = useTranslation(i18nExtendModal.namespace);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     repayConfirmDetail,
@@ -216,7 +219,17 @@ const PhilippinesExtendModal = ({
             outlineTheme="round"
             type="ghost"
             ghostTheme="disable"
-            onClick={() => navigate(-2)}
+            onClick={() => {
+              navigate(
+                `${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,
+                {
+                  state: {
+                    currentData: location.state,
+                  },
+                  replace:true
+                }
+              );
+            }}
           />
           <Button
             text={t('Confirm')}
