@@ -11,6 +11,30 @@ body,
 body {
   user-select: none;
 }
+/* scrollbar */
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(170, 170, 170,0.6);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 3px;
+  height: 10px;
+  background: transparent;
+  position: relative;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(170, 170, 170,0.6);
+
+}
 
 /* loading 骨架屏 */
 .skeleton {
