@@ -7,6 +7,7 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import { useLazyGetInviteRewardDataQuery, useLazyGetInviteUserDayReportDataQuery, useLazyGetUnsettleInviteRewardDataQuery } from "../../../external";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
+import {environment} from "../../../../environments/environment";
 
 // const InviteCommmonButton = styled.div`
 //   color: #fff;
@@ -34,7 +35,7 @@ const TabButton = styled.button<ITabButton>`
 const TabTextConVidar = styled.div`
   padding: 10px 45px;
   color: #fff;
-  background: url("assets/001/btn_green01.png") center center no-repeat;
+  background: url("assets/${environment.assetPrefix}/btn_green01.png") center center no-repeat;
   //width: 150px;
   //height: 60px;
   //border-radius: 10px;
@@ -46,7 +47,7 @@ const TabTextConVidar = styled.div`
 const TabTextDados = styled.div`
   padding: 10px 30px;
   color: #fff;
-  background: url("assets/001/icon_yellow.png") center center no-repeat;
+  background: url("assets/${environment.assetPrefix}/icon_yellow.png") center center no-repeat;
   //width: 150px;
   //height: 60px;
   //border-radius: 10px;

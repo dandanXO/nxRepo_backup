@@ -9,9 +9,10 @@ import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
 import {appSlice} from "../../reduxStore/appSlice";
+import {environment} from "../../../environments/environment";
 
 const DepositButton = styled(BackgroundButton)`
-  background: url(assets/001/btn_FirstDeposit.png) no-repeat center/100%;
+  background: url(assets/${environment.assetPrefix}/btn_FirstDeposit.png) no-repeat center/100%;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -20,7 +21,7 @@ const DepositButton = styled(BackgroundButton)`
 `
 
 const CashBackButton = styled(BackgroundButton)`
-  background: url(assets/001/btn_cashback.png) no-repeat center/100%;
+  background: url(assets/${environment.assetPrefix}/btn_cashback.png) no-repeat center/100%;
   height: 60px;
   display: flex;
   flex-direction: row;
@@ -32,7 +33,7 @@ const HomeButton  = styled(BackgroundButton)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: url(assets/001/btn_home.png) no-repeat center/100%;
+  background: url(assets/${environment.assetPrefix}/btn_home.png) no-repeat center/100%;
   height: 40px;
 `
 
@@ -116,7 +117,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
       }}>
         {/* 添加一个去背的背景图片*/}
         <div className="absolute inset-0 z-[-1] bg-no-repeat bg-cover bg-center"
-             style={{ backgroundImage: 'url("assets/001/Sidebar_Shading.png")',
+             style={{ backgroundImage: `url("assets/${environment.assetPrefix}/Sidebar_Shading.png")`,
                backgroundSize: '100% 40%',
                backgroundPosition: 'center bottom',}}></div>
 

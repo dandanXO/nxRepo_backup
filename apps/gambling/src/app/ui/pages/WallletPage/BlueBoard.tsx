@@ -12,6 +12,7 @@ import {
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
+import {environment} from "../../../../environments/environment";
 
 const Container = styled.div`
   //width: 94%;
@@ -21,7 +22,7 @@ const Container = styled.div`
   //padding: 0.2rem 0;
   //box-sizing: border-box;
   //overflow: hidden;
-  background: url("assets/001/block_di.png") center center no-repeat;
+  background: url("assets/${environment.assetPrefix}/block_di.png") center center no-repeat;
   //border: 0.02rem solid rgba(255,255,255,.3);
 `
 export const BlueBoard = () => {

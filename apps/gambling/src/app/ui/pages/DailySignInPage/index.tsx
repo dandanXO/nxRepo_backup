@@ -12,6 +12,7 @@ import {Footer} from './Footer';
 import {MobileTemplate} from './MobileTemplate';
 import {Notice} from './Notice';
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
+import {environment} from "../../../../environments/environment";
 
 const DailySignInContainer = styled.div`
   //margin: 5vw 0;
@@ -192,7 +193,7 @@ export const DayList = (props: {
             {/*<div className={"w-[88px] h-[74px]"}>*/}
             {/*</div>*/}
             <div>
-              <img alt={'money'} src={'assets/001/gold.png'} />
+              <img alt={'money'} src={`assets/${environment.assetPrefix}/gold.png`} />
             </div>
             <div className="h-10"></div>
             <div className="flex-grow flex flex-col justify-center items-center">
@@ -267,7 +268,7 @@ export const DailySignInPage = () => {
         {/*  <img*/}
         {/*    alt={'rabbit'}*/}
         {/*    className="h-[660px] w-[332px]"*/}
-        {/*    src={'assets/001/img.05e3d09a.png'}*/}
+        {/*    src={`assets/${environment.assetPrefix}/img.05e3d09a.png`}*/}
         {/*  />*/}
         {/*</section>*/}
 
@@ -279,7 +280,7 @@ export const DailySignInPage = () => {
           {/*<img*/}
           {/*  alt={'title'}*/}
           {/*  className={'absolute top-[-45px] left-[200px] h-[71px] w-[592px]'}*/}
-          {/*  src={'assets/001/title.75fa9aa0.png'}*/}
+          {/*  src={`assets/${environment.assetPrefix}/title.75fa9aa0.png`}*/}
           {/*/>*/}
           <span className="font-weight-bold text-yellow-300" style={{ fontSize: '40px' }}>BONUS DE LOGIN VIP</span>
 

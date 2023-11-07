@@ -1,4 +1,4 @@
-import NoData from '../../../../../assets/001/noData.png'
+import {environment} from "../../../../../environments/environment";
 
 interface IDailyType {
   type: string;
@@ -55,7 +55,7 @@ export const DesktopDailyType = (props: IDailyType) => {
           ) : (<tr>
             <td colSpan={props.type === "1" ? 6 : 5}>
               <div className="flex flex-col items-center">
-                <div><img className={'h-[100px]'} src={NoData} /></div>
+                <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
                 <div>Nothing here</div>
               </div>
             </td>

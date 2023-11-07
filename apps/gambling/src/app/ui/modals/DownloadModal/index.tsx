@@ -13,7 +13,7 @@ const Container = styled.div`
   //height: 100%;
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/001/downBg.png);
+  background-image: url(assets/${environment.assetPrefix}/downBg.png);
   background-size: 100% 100%;
   text-align: center;
 `;

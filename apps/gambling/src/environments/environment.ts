@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  assetPrefix: "coco777bet",
   mockBackend: false,
   captcha: "/japi/user/captcha/image",
   baseUrl: "",

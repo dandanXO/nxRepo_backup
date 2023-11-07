@@ -10,12 +10,14 @@ import {
   GetInviteRewardDataResponse,
   GetUnsettleInviteRewardDataResponse,
   useLazyGetInviteUserDayReportDataQuery
+} from "../../../../external/index";
 import {DesktopTotalType} from "./DesktopTotalType";
 import {DesktopDailyType} from "./DesktopDailyType";
 import moment from "moment";
 import {MobileCommonBlueTable} from "./MobileCommonBlueTable";
 import {MobileCommonOrangeTable} from "./MobileCommonOrangeTable";
 import {MobileCommonGreenTable} from "./MobileCommonGreenTable";
+import {AppLocalStorage} from "../../../../persistant/localstorage";
 
 const RecordButton = styled.button`
   width: 145px;

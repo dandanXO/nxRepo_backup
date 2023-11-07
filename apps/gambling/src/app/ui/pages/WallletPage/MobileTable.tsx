@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { RechargeListResponseData } from '../../../external/RechargeHistoryListEndpoint';
 import { WithdrawHistoryListEndpointResponseData } from '../../../external/WithdrawHistoryListEndpoint';
-import NoDataImg from '../../../../assets/001/noData.png'
 import cx from "classnames"
+import {environment} from "../../../../environments/environment";
 
 const Container = styled.div`
   background: rgba(255, 255, 255, 0.1);
@@ -24,7 +24,7 @@ const TradeStatusMap: { [key: number]: string } = {
 const NoData = () => {
   return (
     <div className=' flex flex-col justify-center items-center py-10'>
-      <img className={'h-[100px]'} src={NoDataImg} alt="NoData"/>
+      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
       <div>Nada aq</div>
     </div>
   )

@@ -13,6 +13,7 @@ import { LevelList } from '../DailySignInPage';
 import {IRLevelButton} from './index';
 import {useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
+import {environment} from "../../../../environments/environment";
 
 export const LevelListBottomBr = styled.div`
   height: 1rem;
@@ -223,7 +224,7 @@ export const VIPGradeMobileTemplate = ({
           )}
 
           <ItemContainer className={'flex flex-row'}  style={{
-            background: `url('assets/001/Upgraderewards.png')`,
+            background: `url('assets/${environment.assetPrefix}/Upgraderewards.png')`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'right right',
@@ -237,7 +238,7 @@ export const VIPGradeMobileTemplate = ({
 
 
           <ItemContainer className="flex flex-row" style={{
-            background: `url('assets/001/Sign-inrewards.png')`,
+            background: `url('assets/${environment.assetPrefix}/Sign-inrewards.png')`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'right right',

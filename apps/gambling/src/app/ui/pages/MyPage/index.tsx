@@ -15,9 +15,10 @@ import {useGetLetterListMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import { IUserStore } from "../../../gateway/socket";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
+import {environment} from "../../../../environments/environment";
 
 const MyPageButtonD = styled.button`
-  background-image: url("assets/001/btn_green05.png");
+  background-image: url("assets/${environment.assetPrefix}/btn_green05.png");
   background-size: 100% 100%;
   padding: 4px 31px;
   font-family: HeeboBold;
@@ -27,7 +28,7 @@ const MyPageButtonD = styled.button`
 const MyPageButtonW = styled.button`
   //background: none;
   //border-radius: 0.2rem;
-  background-image: url("assets/001/btn_yellow05.png"); /* 设置背景图像的路径 */
+  background-image: url("assets/${environment.assetPrefix}/btn_yellow05.png"); /* 设置背景图像的路径 */
   background-size: 100% 100%;
   //box-shadow: 0 0.04rem #036a02, inset 0 0.02rem 0.06rem rgba(255,255,255,.5);
 

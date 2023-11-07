@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
+  assetPrefix: "bmw",
   mockBackend: false,
   captcha: "https://ds.bmw777slots.com/japi/user/captcha/image",
   baseUrl: "",

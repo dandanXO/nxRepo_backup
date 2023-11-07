@@ -3,6 +3,7 @@ import {VIPBorderStyleContainer} from "../VIPGradePage";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import styled from "styled-components";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
+import {environment} from "../../../../environments/environment";
 
 const Bonus = styled.div`
   text-shadow: 0px 4px 0px #D60404;
@@ -10,7 +11,7 @@ const Bonus = styled.div`
 
 const RechargeButton = styled.div`
   cursor: pointer;
-  background: url("assets/001/btn_green.png") center center no-repeat;
+  background: url("assets/${environment.assetPrefix}/btn_green.png") center center no-repeat;
   background-size: cover; /* 背景圖片尺寸適應容器 */
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
   border-radius: 10px;
@@ -33,7 +34,7 @@ export const RechargeActivityPage = () => {
       <div className={"px-0 sm:px-10 px-10 w-full"}>
 
         {/*<section className={"rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
-        {/*  <img className="w-full" src={"assets/001/banner_10.png"}/>*/}
+        {/*  <img className="w-full" src={`assets/${environment.assetPrefix}/banner_10.png`}/>*/}
         {/*  /!*<div className={"mt-20 absolute left-[40px] top-0 text-white"}>*!/*/}
         {/*  /!*  <div className={"text-4xl mb-4"}>Benefícios-ofertasde deposito</div>*!/*/}
         {/*  /!*  <Bonus className={"text-6xl"}>Ate 10% bônus</Bonus>*!/*/}
@@ -45,7 +46,7 @@ export const RechargeActivityPage = () => {
         {/*</section>*/}
 
         <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8 mt-4"}>
-          <img className="w-full" src={"assets/001/banner.png"}/>
+          <img className="w-full" src={`assets/${environment.assetPrefix}/banner.png`}/>
           <div className={"mt-5 xl:mt-20 absolute left-[40px] top-0 text-white"}>
             <div className={"md:text-4xl mb-4 text-xl"}>Benefícios-ofertasde deposito</div>
             <Bonus className={"md:text-4xl"}>Ate 10% bônus</Bonus>

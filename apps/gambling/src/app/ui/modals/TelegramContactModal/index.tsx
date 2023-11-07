@@ -2,12 +2,13 @@ import styled from "styled-components";
 import cx from "classnames";
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
+import {environment} from "../../../../environments/environment";
 
 
 const Container = styled.div`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/001/pop1.c6814210.png);
+  background-image: url(assets/${environment.assetPrefix}/pop1.c6814210.png);
   background-size: 100% auto;
   border-radius: 20px;
   padding: 20px 24px;

@@ -70,13 +70,13 @@ const StyledPage = styled.div.attrs((props) => ({
     left: 0;
     z-index: -2;
     //opacity: .6; //背景霧面
-    background: url("assets/001/bg_bothside.png")no-repeat center center/150% auto;
+    background: url("assets/${environment.assetPrefix}/bg_bothside.png")no-repeat center center/150% auto;
     background-position: center bottom;
     background-repeat: no-repeat; /* 防止背景图像重复 */
     background-color:#08170A;  //背景圖
   }
   ${(props) => props.isCurrentPageCompanyProfile && `
-    background: url("assets/001/bg.888bcf29.png") no-repeat center center/100% auto;
+    background: url("assets/${environment.assetPrefix}/bg.888bcf29.png") no-repeat center center/100% auto;
     background-color:#090b0f;
   `};
   @media (min-width: 640px) {
@@ -432,12 +432,12 @@ export const PageTemplate = (props: IPage) => {
               <div className={"flex flex-col"}>
 
                 <div className='mt-3 flex justify-center mb-4 flex-nowrap'>
-                  <img alt='footer1' className='w-[6%] h-[89%] flex-1' src='assets/001/footer1.aa87e40b.png'/>
-                  <img alt='footer1' className='w-[16%] h-[60%] flex-1 mt-1' src='assets/001/footer2.43ad4696.png'/>
-                  <img alt='footer1' className='w-[16%] h-[72%] flex-1' src='assets/001/footer3.e3ce7aaa.png' onClick={()=>window.open('https://www.skrill.com/pt/')}/>
-                  <img alt='footer1' className='w-[16%] h-[60%] flex-1 mt-1' src='assets/001/footer5.3cd11f0c.png' onClick={()=>window.open('https://www.begambleaware.org/')}/>
-                  <img alt='footer1' className='w-[8%] h-[89%] flex-1' src='assets/001/footer6.a8ba450a.png' onClick={()=>window.open('https://www.interac.ca/en/')}/>
-                  <img alt='footer1' className='w-[6%] h-[72%] flex-1 mt-0.5' src='assets/001/footer4.e6cdeca2.png' onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
+                  <img alt='footer1' className='w-[6%] h-[89%] flex-1' src={`assets/${environment.assetPrefix}/footer1.aa87e40b.png`}/>
+                  <img alt='footer1' className='w-[16%] h-[60%] flex-1 mt-1' src={`assets/${environment.assetPrefix}/footer2.43ad4696.png`} />
+                  <img alt='footer1' className='w-[16%] h-[72%] flex-1' src={`assets/${environment.assetPrefix}/footer3.e3ce7aaa.png`}  onClick={()=>window.open('https://www.skrill.com/pt/')}/>
+                  <img alt='footer1' className='w-[16%] h-[60%] flex-1 mt-1' src={`assets/${environment.assetPrefix}/footer5.3cd11f0c.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
+                  <img alt='footer1' className='w-[8%] h-[89%] flex-1' src={`assets/${environment.assetPrefix}/footer6.a8ba450a.png`}  onClick={()=>window.open('https://www.interac.ca/en/')}/>
+                  <img alt='footer1' className='w-[6%] h-[72%] flex-1 mt-0.5' src={`assets/${environment.assetPrefix}/footer4.e6cdeca2.pngs`}  onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
                 </div>
 
                 <div>
@@ -521,7 +521,7 @@ export const PageTemplate = (props: IPage) => {
                   <div className='mb-4'>@ 2023 Cat777bet.com All rights</div>
 
                   <div className='flex justify-center mb-4'>
-                    <img alt='footer1' className='h-[13px]' src='assets/001/footer7.a1b2fb6d.png'/>
+                    <img alt='footer1' className='h-[13px]' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
                   </div>
 
                 </section>
@@ -550,7 +550,7 @@ export const PageTemplate = (props: IPage) => {
 
                 <section className={"w-8/12"}>
                   <div className={"flex gap-3 items-center mb-2"}>
-                    <img className={"w-[100px] h-[50px]"} src={"assets/001/LOGO.png"}/>
+                    <img className={"w-[100px] h-[50px]"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
                     {/*<span className="text-lg">{environment.platformName}</span>*/}
                   </div>
 
@@ -568,15 +568,15 @@ export const PageTemplate = (props: IPage) => {
                   </div>
 
                   <div className='mt-3 flex justify-center mb-4'>
-                    <img alt='footer1' className='h-10' src='assets/001/footer1.aa87e40b.png'/>
-                    <img alt='footer1' className='h-10' src='assets/001/footer2.43ad4696.png'/>
-                    <img alt='footer1' className='h-10' src='assets/001/footer3.e3ce7aaa.png' onClick={()=>window.open('https://www.skrill.com/pt/')}/>
-                    <img alt='footer1' className='h-10' src='assets/001/footer5.3cd11f0c.png' onClick={()=>window.open('https://www.begambleaware.org/')}/>
-                    <img alt='footer1' className='h-10' src='assets/001/footer6.a8ba450a.png' onClick={()=>window.open('https://www.interac.ca/en/')}/>
-                    <img alt='footer1' className='h-10' src='assets/001/footer4.e6cdeca2.png' onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
+                    <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer1.aa87e40b.png`}/>
+                    <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer2.43ad4696.png`}/>
+                    <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer3.e3ce7aaa.png`} onClick={()=>window.open('https://www.skrill.com/pt/')}/>
+                    <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer5.3cd11f0c.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
+                    <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer6.a8ba450a.png`} onClick={()=>window.open('https://www.interac.ca/en/')}/>
+                    <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer4.e6cdeca2.png`} onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
                   </div>
                   <div className='flex justify-center mb-4'>
-                    <img alt='footer1' className='h-5' src='assets/001/footer7.a1b2fb6d.png'/>
+                    <img alt='footer1' className='h-5' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
                   </div>
                   <div className='mb-4'>@ 2023 Cat777bet.com All rights</div>
                 </section>
@@ -599,7 +599,7 @@ export const PageTemplate = (props: IPage) => {
 
               <div>
                 <button className={""} onClick={onClickToOpenTelegramService}>
-                  <img alt={"telegram"} className="w-[50%]" src={"assets/001/icon-34cdd0f9.png"}/>
+                  <img alt={"telegram"} className="w-[50%]" src={`assets/${environment.assetPrefix}/icon-34cdd0f9.png`}/>
                 </button>
               </div>
             </div>
@@ -623,7 +623,7 @@ export const PageTemplate = (props: IPage) => {
                 <div className={"mb-1"}>
                   <button
                     onClick={onClickToOpenTelegramService}>
-                    <img alt={"telegram"} className="w-[40px]" src={"assets/001/icon-34cdd0f9.png"}/>
+                    <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-34cdd0f9.png`}/>
                   </button>
                   <div className={"text-xs font-light"}>Serviço</div>
                 </div>
@@ -631,7 +631,7 @@ export const PageTemplate = (props: IPage) => {
                 <div className={"mb-1"}>
                   <button
                     onClick={onClickToOpenTelegramManager}>
-                    <img alt={"telegram"} className="w-[40px]" src={"assets/001/icon-34cdd0f9.png"}/>
+                    <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-34cdd0f9.png`}/>
                   </button>
                   <div className={"text-xs font-lights"}>Gerente</div>
                 </div>
@@ -643,7 +643,7 @@ export const PageTemplate = (props: IPage) => {
 
       {isUILoading && (
         <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
-          <img className={"w-[60px] mb-6"} src={"/assets/001/logo_catonly.png"}/>
+          <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_catonly.png`}/>
           <ThreeDots height={25} className={'inline-block'} />
         </div>
       )}

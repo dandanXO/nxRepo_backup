@@ -5,6 +5,7 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../reduxStore";
 import { appSlice } from "../../../reduxStore/appSlice";
+import {environment} from "../../../../environments/environment";
 
 const responsive = {
   superLargeDesktop: {
@@ -73,7 +74,7 @@ export const AppCarousel = () => {
           }}>
             Primeiro depósito <br/> bônus de 20%
           </p>
-          <img src="assets/001/h5_banner_1_long.png" />
+          <img src={`assets/${environment.assetPrefix}/h5_banner_1_long.png`} />
         </div>
       ) : (
         <div className="mr-4 mr-14" onClick={() => {
@@ -88,7 +89,7 @@ export const AppCarousel = () => {
           }}>
             Primeiro depósito <br/> bônus de 20%
           </p>
-          <img src="assets/001/h5_banner_1.png" className="rounded-box" style={{ display: 'block' }}/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_1.png`} className="rounded-box" style={{ display: 'block' }}/>
         </div>
       )}
 
@@ -106,7 +107,7 @@ export const AppCarousel = () => {
       {/*    }}>*/}
       {/*      Primeiro depósito <br/> bônus de 20%*/}
       {/*    </p>*/}
-      {/*    <img src="assets/001/h501.png" style={{height: '141px',width: '390px'}}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/h501.png`} style={{height: '141px',width: '390px'}}/>*/}
       {/*  </div>*/}
       {/*) : (*/}
       {/*  <div className="mr-4 mr-14" onClick={() => {*/}
@@ -121,7 +122,7 @@ export const AppCarousel = () => {
       {/*    }}>*/}
       {/*      Primeiro depósito <br/> bônus de 20%*/}
       {/*    </p>*/}
-      {/*    <img src="assets/001/web01.png" className="rounded-box" style={{ display: 'block' }}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/web01.png`} className="rounded-box" style={{ display: 'block' }}/>*/}
       {/*  </div>*/}
       {/*)}*/}
 
@@ -140,7 +141,7 @@ export const AppCarousel = () => {
           }}>
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
-          <img src="assets/001/h5_banner_2_long.png"/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_2_long.png`}/>
         </div>
       ) : (
         <div className={"mr-4 mr-14"} onClick={() => {
@@ -155,7 +156,7 @@ export const AppCarousel = () => {
           }}>
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
-          <img src="assets/001/h5_banner_2.png" className="rounded-box"  style={{ display: 'block' }}/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_2.png`} className="rounded-box"  style={{ display: 'block' }}/>
         </div>
       )}
 
@@ -173,7 +174,7 @@ export const AppCarousel = () => {
       {/*    }}>*/}
       {/*      Benefícios-ofertasde deposito<br/>Ate 10% bônus*/}
       {/*    </p>*/}
-      {/*    <img src="assets/001/h502.png" style={{height: '141px',width: '390px'}}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/h502.png`} style={{height: '141px',width: '390px'}}/>*/}
       {/*  </div>*/}
       {/*) : (*/}
       {/*  <div className={"mr-4 mr-14"} onClick={() => {*/}
@@ -188,7 +189,7 @@ export const AppCarousel = () => {
       {/*    }}>*/}
       {/*      Benefícios-ofertasde deposito<br/>Ate 10% bônus*/}
       {/*    </p>*/}
-      {/*    <img src="assets/001/web02.png" className="rounded-box"  style={{ display: 'block' }}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/web02.png`} className="rounded-box"  style={{ display: 'block' }}/>*/}
       {/*  </div>*/}
       {/*)}*/}
 
@@ -203,13 +204,13 @@ export const AppCarousel = () => {
           navigate(PageOrModalPathEnum.VIPGradePage)
         }
       }}>
-        <img src="assets/001/h5_banner_4_long.png"/>
+        <img src={`assets/${environment.assetPrefix}/h5_banner_4_long.png`}/>
       </div>
       ) : (
         <div className={'mr-14 mr-14'} onClick={() => {
           navigate(PageOrModalPathEnum.VIPGradePage);
         }}>
-        <img src="assets/001/h5_banner_4.png" className="rounded-box"  style={{ display: 'block' }}/>
+        <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`} className="rounded-box"  style={{ display: 'block' }}/>
         </div>
       )}
 
@@ -221,13 +222,13 @@ export const AppCarousel = () => {
       {/*      navigate(PageOrModalPathEnum.VIPGradePage)*/}
       {/*    }*/}
       {/*  }}>*/}
-      {/*    <img src="assets/001/h5VIP01.png" style={{height: '141px',width: '390px'}}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/h5VIP01.png`} style={{height: '141px',width: '390px'}}/>*/}
       {/*  </div>*/}
       {/*) : (*/}
       {/*  <div className={'mr-14 mr-14'} onClick={() => {*/}
       {/*    navigate(PageOrModalPathEnum.VIPGradePage);*/}
       {/*  }}>*/}
-      {/*    <img src="assets/001/VIP01.png" className="rounded-box"  style={{ display: 'block' }}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/VIP01.png`} className="rounded-box"  style={{ display: 'block' }}/>*/}
       {/*  </div>*/}
       {/*)}*/}
 
@@ -240,7 +241,7 @@ export const AppCarousel = () => {
             navigate(PageOrModalPathEnum.DailySignInPage)
           }
         }}>
-          <img src="assets/001/h5_banner_5_long.png"/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_5_long.png`}/>
         </div>
       ) : (
         <div className={'mr-14 mr-14'} onClick={() => {
@@ -250,7 +251,7 @@ export const AppCarousel = () => {
             navigate(PageOrModalPathEnum.DailySignInPage)
           }
         }}>
-        <img src="assets/001/h5_banner_5.png" className="rounded-box"  style={{ display: 'block' }}/>
+        <img src={`assets/${environment.assetPrefix}/h5_banner_5.png`} className="rounded-box"  style={{ display: 'block' }}/>
         </div>
       )}
 
@@ -262,13 +263,13 @@ export const AppCarousel = () => {
       {/*      navigate(PageOrModalPathEnum.VIPGradePage)*/}
       {/*    }*/}
       {/*  }}>*/}
-      {/*    <img src="assets/001/h503.png" style={{height: '141px',width: '390px'}}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/h503.png`} style={{height: '141px',width: '390px'}}/>*/}
       {/*  </div>*/}
       {/*) : (*/}
       {/*  <div className={'mr-14 mr-14'} onClick={() => {*/}
       {/*    navigate(PageOrModalPathEnum.VIPGradePage);*/}
       {/*  }}>*/}
-      {/*    <img src="assets/001/web03.png" className="rounded-box"  style={{ display: 'block' }}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/web03.png`} className="rounded-box"  style={{ display: 'block' }}/>*/}
       {/*  </div>*/}
       {/*)}*/}
 
@@ -288,7 +289,7 @@ export const AppCarousel = () => {
           }}>
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
-          <img src="assets/001/h5_banner_3_long.png"/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_3_long.png`}/>
         </div>
       ) : (
         <div className={"mr-4 mr-14"} onClick={() => {
@@ -304,7 +305,7 @@ export const AppCarousel = () => {
           }}>
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
-          <img src="assets/001/h5_banner_3.png" className="rounded-box"  style={{ display: 'block' }}/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_3.png`} className="rounded-box"  style={{ display: 'block' }}/>
         </div>
       )}
 
@@ -322,7 +323,7 @@ export const AppCarousel = () => {
       {/*    }}>*/}
       {/*      <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>*/}
       {/*    </p>*/}
-      {/*    <img src="assets/001/h504.png" style={{height: '141px',width: '390px'}}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/h504.png`} style={{height: '141px',width: '390px'}}/>*/}
       {/*  </div>*/}
       {/*) : (*/}
       {/*  <div className={"mr-4 mr-14"} onClick={() => {*/}
@@ -338,7 +339,7 @@ export const AppCarousel = () => {
       {/*    }}>*/}
       {/*      <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$25</span>*/}
       {/*    </p>*/}
-      {/*    <img src="assets/001/web04.png" className="rounded-box"  style={{ display: 'block' }}/>*/}
+      {/*    <img src={`assets/${environment.assetPrefix}/web04.png`} className="rounded-box"  style={{ display: 'block' }}/>*/}
       {/*  </div>*/}
       {/*)}*/}
 

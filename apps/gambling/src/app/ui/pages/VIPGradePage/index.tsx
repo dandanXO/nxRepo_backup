@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {appStore, RootState} from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {IUserStore} from "../../../gateway/socket";
+import {environment} from "../../../../environments/environment";
 
 const VIPContainer = styled.div`
   background-color: rgba(40, 112, 82, 0.1);
@@ -119,7 +120,7 @@ const VIPLabel = styled.div`
   margin-top: 6px;
   float: right;
   font-weight: bold;
-  background: url("assets/001/vip_di.png") no-repeat center;
+  background: url("assets/${environment.assetPrefix}/vip_di.png") no-repeat center;
 `;
 
 const vips: number[] = [];
@@ -360,7 +361,7 @@ export const VIPGradePage = () => {
                 <img
                   alt="vip"
                   className={'h-[38px] w-[54px]'}
-                  src={'assets/001/vip.1bf683b6.png'}
+                  src={`assets/${environment.assetPrefix}/vip.1bf683b6.png`}
                 />
                 <img
                   alt="0"
@@ -374,7 +375,7 @@ export const VIPGradePage = () => {
                 <img
                   alt="introduce to vip"
                   className={'h-[50px] w-[500px]'}
-                  src={'assets/001/title1.d89d4f0c.png'}
+                  src={`assets/${environment.assetPrefix}/title1.d89d4f0c.png`}
                 />
               </section>
             </section>
@@ -507,7 +508,7 @@ export const VIPGradePage = () => {
                   <img
                     className={'relative top-[-6px] h-[80px] w-[120px]'}
                     alt={''}
-                    src={'assets/001/icon_bullion.png'}
+                    src={`assets/${environment.assetPrefix}/icon_bullion.png`}
                   />
                   <div className={'flex flex-col text-xl text-white'}>
                     <span>Recompensa total de</span>
@@ -519,7 +520,7 @@ export const VIPGradePage = () => {
                   <img
                     className={'relative top-[-6px] h-[80px] w-[120px]'}
                     alt={''}
-                    src={'assets/001/icon_bank.png'}
+                    src={`assets/${environment.assetPrefix}/icon_bank.png`}
                   />
                   <div className={'flex flex-col text-xl text-white'}>
                     <span>recompensa de</span>

@@ -15,7 +15,7 @@ export const InitialChargePage = () => {
       <div className={"px-0 sm:px-10 w-full"}>
 
         <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8 mt-4"}>
-          <img className="w-full" src={"assets/001/banner.png"}/>
+          <img className="w-full" src={`assets/${environment.assetPrefix}/banner.png`}/>
           <div className={"mt-5 xl:mt-20 absolute left-[40px] top-0 text-white"}>
             <div className={"md:text-4xl mb-4 text-xl"}>Primeiro depósito</div>
             <Bonus className={"md:text-4xl"}>+ bônus de 20%</Bonus>

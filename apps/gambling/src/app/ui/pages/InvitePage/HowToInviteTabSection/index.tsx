@@ -6,7 +6,7 @@ import {environment} from "../../../../../environments/environment";
 
 const HowToImageContainer = styled.div`
   position: relative;
-  background-image: url("assets/001/banner_01.png");
+  background-image: url("assets/${environment.assetPrefix}/banner_01.png");
   background-size: 1524px 423px;
   //background-size: cover;
   overflow: hidden;
@@ -106,8 +106,8 @@ export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
     <div className={"mb-[80px]"}>
       <HowToImageContainer className={"px-10"}>
         {contextHolder}
-        <img className="hidden sm:block w-max-[100%] h-auto" src={"assets/001/topTitle1.ed9276b2.png"}/>
-        <img className={"display sm:hidden"} src={"assets/001/team_title-7d5515fe.png"}/>
+        <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.assetPrefix}/topTitle1.ed9276b2.png`}/>
+        <img className={"display sm:hidden"} src={`assets/${environment.assetPrefix}/team_title-7d5515fe.png`}/>
 
         <Avenir className={"hidden sm:block text-white text-lg text-left mb-2"}>
           Enquanto os usuários gostam de jogar e ganhar prêmios na plataforma SKY Group ({environment.platformName}), eles também podem lançar um programa especial de recompensa por convite através do {environment.platformName} para ganhar comissões generosas! Que mais clientes de jogos da plataforma {environment.platformName} participem! Promova um usuário de recarga válida, o bônus é de até 20 reais. Depois de se tornar um agente ao mesmo tempo, você também pode obter uma generosa comissão de retorno do volume de negócios do jogo! O que você está esperando, copie rapidamente o link do convite abaixo, envie para seus melhores amigos e participem juntos.
@@ -117,8 +117,8 @@ export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
           Convide usuários válidos para recarga, o bônus pode chegar a até R$20! O que você está esperando, convide seus amigos para participar!
         </Avenir>
 
-        <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={"assets/001/topTitle2.396e135e.png"}/>
-        <img className={"mb-2 display sm:hidden"} src={"assets/001/invite-code-title-c456ebc9.png"}/>
+        <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={`assets/${environment.assetPrefix}/topTitle2.396e135e.png`}/>
+        <img className={"mb-2 display sm:hidden"} src={`assets/${environment.assetPrefix}/invite-code-title-c456ebc9.png`}/>
 
 
         <BorderLinkButtonContainer className={"p-2 sm:p-6 mb-4 rounded-2xl"}>
@@ -132,7 +132,7 @@ export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
 
       <QuestionContainer>
 
-        <img className={"mb-2"} src={"assets/001/acting.png"}/>
+        <img className={"mb-2"} src={`assets/${environment.assetPrefix}/acting.png`}/>
 
         <section className={"text-left text-white text-lg"}>
           <Avenir>Fornecer à {environment.platformName} um convite efetivo ao cliente (o cliente deve preencher o registro do número do celular e concluir uma recarga).</Avenir>

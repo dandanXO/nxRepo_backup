@@ -14,11 +14,12 @@ import {RootState} from "../../../reduxStore";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {MessageCountBadge} from "../../components/MessageCountBadge";
 import {IUserInfo} from "../../../persistant/pending/loginMode";
+import {environment} from "../../../../environments/environment";
 
 const RegisterButton = styled.button`
   width: 198px;
   height: 30px;
-  background: url("assets/001/balance-bg-7d6b8cd6.png") no-repeat center/100% 100%;
+  background: url("assets/${environment.assetPrefix}/balance-bg-7d6b8cd6.png") no-repeat center/100% 100%;
   color: #fff;
 `
 
@@ -50,7 +51,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
           <a>
             <img className={""} onClick={() => {
               navigate(PageOrModalPathEnum.IndexPage)
-            }} alt={"logo"} src={"assets/001/logo_catonly.png"}/>
+            }} alt={"logo"} src={`assets/${environment.assetPrefix}/logo_catonly.png`}/>
           </a>
         </button>
       </div>
@@ -90,7 +91,7 @@ const VIPLabel = styled.div`
   margin-top: 6px;
   float: right;
   font-weight: bold;
-  background: url("assets/001/vip.png") no-repeat 3px center/70%;
+  background: url("assets/${environment.assetPrefix}/vip.png") no-repeat 3px center/70%;
 `
 
 const AvatarBorder = styled.div`
@@ -154,7 +155,7 @@ export const Avatar = (props: {
         <img className={cx("rounded-full",{
           "w-[56px] h-[56px] min-w-[56px] min-h-[56px]}": !props.big,
           "w-[82px] h-[82px]": props.big,
-        })} alt="avatar" src={"assets/001/avatar.png"}/>
+        })} alt="avatar" src={`assets/${environment.assetPrefix}/avatar.png`}/>
         {/*<AvatarBorder/>*/}
       </button>
     /*</div>*/
@@ -201,7 +202,7 @@ export const Header = (props: IHeader) => {
 
   return (
     <header className={cx("flex flex-row justify-start items-center px-5", props.className)} style={{
-      backgroundImage: 'url("assets/001/top_di.png")', // 替换成背景图片路径
+      backgroundImage: `url("assets/${environment.assetPrefix}/top_di.png")`, // 替换成背景图片路径
       backgroundSize: 'cover', // 调整背景图片大小以填充整个元素
       backgroundPosition: '90% 50%', // 调整背景图片位置
       backgroundRepeat: 'no-repeat', // 禁止背景图片重复
@@ -211,7 +212,7 @@ export const Header = (props: IHeader) => {
         <a>
           <img onClick={() => {
             navigate(PageOrModalPathEnum.IndexPage)
-          }} alt={"logo"} src={"assets/001/LOGO.png"}/>
+          }} alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
         </a>
       </div>
 

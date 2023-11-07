@@ -10,9 +10,10 @@ import {appSlice, totalBalanceSheetSelector} from "../../../reduxStore/appSlice"
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "react-loading-icons";
+import {environment} from "../../../../environments/environment";
 
 export const PersonalControl = styled.div`
-  background: url("assets/001/balance_di.png") no-repeat center/100% 100%;
+  background: url("assets/${environment.assetPrefix}/balance_di.png") no-repeat center/100% 100%;
   width: 178px;
   height: 32px;
 `

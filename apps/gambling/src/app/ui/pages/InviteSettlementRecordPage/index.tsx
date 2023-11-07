@@ -8,7 +8,7 @@ import {useNavigate} from "react-router";
 import {useLazyGetUserInviteRewardRecordQuery} from "../../../external";
 import {useCallback, useEffect, useState} from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import NoDataImg from "../../../../assets/001/noData.png";
+import {environment} from "../../../../environments/environment";
 
 const { RangePicker } = DatePicker;
 
@@ -31,7 +31,7 @@ const tableStyle = {
 const NoData = () => {
   return (
     <td colSpan={2} className=''>
-      <img className={'h-[100px] margin-auto'} src={NoDataImg} alt="NoData"/>
+      <img className={'h-[100px] margin-auto'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
       <div>Nada aq</div>
     </td>
   )

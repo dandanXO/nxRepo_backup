@@ -11,6 +11,7 @@ import {useEffect, useMemo, useState} from "react";
 import { BlueBoard } from "./BlueBoard";
 import { MobileInput } from "./MobileInput";
 import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../external/RechargeInfoGetEndpoint";
+import {environment} from "../../../../environments/environment";
 
 
 const Item = styled.div.attrs((props) => ({
@@ -34,11 +35,11 @@ const InputTag = styled.div`
   min-width: 117px;
   z-index: 1;
   font-family: MavenPro-SemiBold;
-  background-image: url("assets/001/giveaway.png");
+  background-image: url("assets/${environment.assetPrefix}/giveaway.png");
 `;
 
 const MobileTag = styled(InputTag)`
-  background-image: url("assets/001/giveaway.png");
+  background-image: url("assets/${environment.assetPrefix}/giveaway.png");
   color: #fff;
 `
 
@@ -62,7 +63,7 @@ export const MobileDepositConfirmButton = styled.div`
   //border: none;
   //border-radius: 0.15rem;
   //margin: 0.2rem auto 0.4rem;
-  background: url("assets/001/btn_green4.png") center center no-repeat;
+  background: url("assets/${environment.assetPrefix}/btn_green4.png") center center no-repeat;
   //box-shadow: 0 0.04rem #036a02, inset 0 0.02rem 0.06rem rgba(255,255,255,.5);
 `
 

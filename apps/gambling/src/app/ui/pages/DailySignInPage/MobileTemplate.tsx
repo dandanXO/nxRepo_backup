@@ -50,7 +50,7 @@ export const MobileTemplate = ({
       <Container className={'100vh relative'}>
       {/*// <Container className={'h-full relative'}>*/}
       {/*  <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
-      {/*    <img className="w-full" src={"assets/001/bannerVIP.png"}/>*/}
+      {/*    <img className="w-full" src={`assets/${environment.assetPrefix}/bannerVIP.png`}/>*/}
       {/*  </section>*/}
 
         <div className={'p-2'}>

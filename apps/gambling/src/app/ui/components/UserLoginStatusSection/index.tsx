@@ -4,6 +4,7 @@ import {UserLoginForm} from "./forms/UserLoginForm";
 import {UserRegisterForm} from "./forms/UserRegisterForm";
 import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
 import {UserForgetPasswordForm} from "./forms/UserForgetPasswordForm";
+import {environment} from "../../../../environments/environment";
 
 export type IUserLoginStatusSection = {
   // onClickToLogin: () => void;
@@ -78,7 +79,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
       {(switchToLoginOrRegister === "login" ? (
         <div>
           <section className={"flex flex-col justify-center items-center mb-4"}>
-            <img className={"mb-2"} alt={"website-small-logo"} src={"assets/001/LOGO.png"}/>
+            <img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
             {/*<span className={"text-white text-sm"}>{environment.platformName}</span>*/}
           </section>
           <UserLoginForm

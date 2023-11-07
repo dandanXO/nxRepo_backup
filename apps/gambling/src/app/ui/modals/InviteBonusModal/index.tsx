@@ -2,6 +2,7 @@ import styled from "styled-components";
 import cx from "classnames";
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
+import {environment} from "../../../../environments/environment";
 
 export type IInitialChargeModal = {
   close: () => void;
@@ -11,7 +12,7 @@ export type IInitialChargeModal = {
 const Container = styled.div`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/001/pop3.8f1838c0.png);
+  background-image: url(assets/${environment.assetPrefix}/pop3.8f1838c0.png);
   background-size: 100% auto;
   border-radius: 20px;
   padding: 20px 24px;
@@ -98,7 +99,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
         </div>
 
 
-        <img alt="title" className={"w-[269px] h-[27px]"} src={"assets/001/title3.274f5fbe.png"}/>
+        <img alt="title" className={"w-[269px] h-[27px]"} src={`assets/${environment.assetPrefix}/title3.274f5fbe.png`}/>
         <div className={"text-white text-sm"}>Bônus de primeira recarga para usuários convidados</div>
 
         <div className={"w-full"}>
