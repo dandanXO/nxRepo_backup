@@ -48,12 +48,23 @@ export const GamePage = () => {
     // }
 
     const getGameBrand = (gameId: number): string | null => {
-      if(10000 < gameId && gameId < 20000) {
-        return "ppmater";
-      } else if(20000 < gameId && gameId < 30000) {
-        return "jiligames"
-      } else if(30000 < gameId && gameId < 40000) {
-        return "pg";
+      // NOTE: 先写死，待后端开单一启动游戏API
+      // 0-100 cc
+      // 50000-54000 pg2
+      // 60000-61000 pp2
+      // 61000-62000 pp2_vivo
+      // 62000-63000 pp2_viver
+      // 63000-64000 pp2
+      // 80000-81000 jili
+      // 100000-101000 JDB
+      // 110000-111000 FC
+      // 130000-131000 CQ9
+      if(80000 <= gameId && gameId < 81000) {
+        return "jiligames";
+      } else if(100000 <= gameId && gameId < 101000) {
+        return "jdb";
+      } else if (130000 <= gameId && gameId < 131000) {
+        return "cq9";
       } else {
         return null;
       }
