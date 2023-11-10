@@ -18,7 +18,6 @@ const ModalTitle = styled.div`
   margin: 162px 0 20px;
   text-align: center;
   font-size: 32px;
-  //background: linear-gradient(180deg,#D071FD 0%,#003BC6 100%);
   line-height: 26px;
   //text-shadow: 0px 3px 0px #0461D6;
 `
@@ -27,7 +26,7 @@ const ModalButton = styled.button`
   width: 169px;
   height: 40px;
   border-radius: 25px;
-  background: linear-gradient(180deg,#56F0D6 0%,#8499FD 100%);
+  background: linear-gradient(180deg,var(--btn-gradient2-from) 0%,var(--btn-gradient2-to) 100%);
   //position: absolute;
   //bottom: 34px;
   //left: 50%;
@@ -35,7 +34,7 @@ const ModalButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: var(--white);
   font-size: 16px;
 `
 
@@ -68,11 +67,11 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
         <div className={"flex flex-col"}>
           <div className={"mb-4 mt-3"}>
             <ModalTitle className="mt-4" style={{
-              background: 'linear-gradient(180deg, #D071FD 0%, #003BC6 100%)',
+              background: 'linear-gradient(180deg, var(--text-gradient-ad-tg-from) 0%, var(--text-gradient-ad-tg-to) 100%)',
               WebkitBackgroundClip: 'text',
               color: 'transparent',
             }}>Junte-se a nós</ModalTitle>
-            <div className={"text-[#003BC6] text-center text-sm"}>
+            <div className={"text-text-telegram text-center text-sm"}>
               Prezados clientes VIP, juntem-se ao nosso canal oficial do Telegram. Realizaremos vários eventos de loteria de tempos em tempos. Dezenas de milhares de reais estão esperando por você para reivindicar.
             </div>
           </div>

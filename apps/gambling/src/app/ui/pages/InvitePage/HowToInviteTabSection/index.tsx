@@ -28,7 +28,7 @@ const HowToImageContainer = styled.div`
 
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--white);
 
   padding: 20px;
 `;
@@ -37,7 +37,7 @@ const BorderLinkButtonContainer = styled.div`
   width: 95%; /* 如果要指定寬度，取消註釋此行 */
   height: 60px;
   margin: 1vw auto 4vw;
-  background-color: #fff; /* 將 background-image 改為 background-color */
+  background-color: var(--white); /* 將 background-image 改為 background-color */
   border-radius: 40px;
   border: 1px solid rgba(255, 255, 255, 0.5);
 
@@ -48,33 +48,32 @@ const BorderLinkButtonContainer = styled.div`
 
 const GreenContainer = styled.div`
   padding: 40px;
-  //box-shadow: inset 0 0 36px 5px #163610;
   border-radius: 20px;
   margin: 40px 0;
-  border: 1px solid #16ff8f;
-  //background-image: linear-gradient(180deg,#090B0F,#090B0F),linear-gradient(90deg,#1DA668,rgba(25,177,106,.2),#1DA668,rgba(25,177,106,.2),#1DA668);
-  background: #013e4299;
+  border: 1px solid var(--main-primary-main);
+  background: var(--assistant);
+  color:var(--white);
 `;
 
 const YellowContainer = styled.div`
   margin: 40px 0;
   padding: 20px;
-  color: #ffcf45;
+  color: var(--main-state-warning);
 `;
 const RedContainer = styled.div`
   margin: 40px 0 0;
   padding: 40px;
   text-align: left;
-  background: rgba(255, 119, 119, 0.6);
+  background: var(--main-state-error);
   border-radius: 10px;
-  color: #fff;
+  color: var(--white);
 `;
 
 const CopyButton = styled.button`
   width: 200px;
   height: 60px;
-  background: linear-gradient(to bottom, #C8F568, #16FF8F);
-  color: #047A70;
+  background: var(--main-primary-main);
+  color: var(--main-primary-varient);
   transition: all 0.2s;
   cursor: pointer;
   border-radius: 40px;
@@ -84,14 +83,13 @@ const CopyButton = styled.button`
 const MyriadPro = styled.div`
   font-size: 44px;
   font-weight: bold;
-  background: linear-gradient(to bottom, #c8f568, #16ff8f);
+  background: var(--main-primary-main);
   -webkit-background-clip: text;
   color: transparent;
 `;
 
 const Roboto = styled.div`
   font-size: 18px;
-  color: #fff;
 `;
 
 interface IHowToInviteTabSection {
@@ -201,7 +199,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
         </GreenContainer>
 
         <YellowContainer className={'text-left text-lg'}>
-          <Roboto style={{ color: '#FFCF45' }}>
+          <Roboto>
             Regras de liquidação da plataforma {environment.platformName}: A
             comissão devolvida pelo {environment.platformName} é atualizada a
             cada 10 a 30 minutos, e a comissão devolvida será liberada toda

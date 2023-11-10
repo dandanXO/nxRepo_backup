@@ -13,7 +13,7 @@ import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "
 import {environment} from "../../../../environments/environment";
 
 export const PersonalControl = styled.div`
-  background-color: #069D5C;
+  background-color: var(--medium);
   border-radius: 25px;
   width: 178px;
   height: 32px;
@@ -40,7 +40,7 @@ export const UserMoneyStatusSection = () => {
       }}>
         <img alt={"refresh"} className={"w-[20px] h-[20px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
       </button>
-      <div className={"flex-auto text-[#ECEC00] sm:text-center md:text-left md:text-xs flex justify-center basis-1/2"}>{
+      <div className={"flex-auto text-main-secondary-main sm:text-center md:text-left md:text-xs flex justify-center basis-1/2"}>{
         isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue}`
       }</div>
       <button onClick={() => {

@@ -57,7 +57,7 @@ const SendSMSCodeButton = styled.button`
   position: absolute;
   width: 70px;
   height: 53px;
-  background: #16FF8F;
+  background: var(--main-primary-main);
   border-radius: 0 25px 25px 0; /* 左侧半径为0，其他圆角为25px */
   // display: flex;
   // justify-content: center;

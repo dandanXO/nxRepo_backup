@@ -26,7 +26,7 @@ const Item = styled.div.attrs({
   margin-bottom: 16px;
   margin-top: 10px;
   background-color: rgba(242, 255, 221, 0.5);
-  border: 1px solid #2CFD99;
+  border: 1px solid var(--main-primary-main);
   //box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 8px;
   padding: 10px 20px;
@@ -44,7 +44,7 @@ const MoneyButton = styled.div.attrs((props) => ({
   top: -1%;
   width: 104px;
   height: 78px;
-  background: linear-gradient(90deg, #1EE59E, #E2FD97);
+  background: linear-gradient(90deg, var(--dashboard-block2-gradient-from), var(--dashboard-block2-gradient-to));
   //box-shadow: 0 2px 4px rgba(0,0,0,.5), 0 1px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 10px;
   //display: flex;
@@ -52,13 +52,13 @@ const MoneyButton = styled.div.attrs((props) => ({
   //align-items: center;
   color: #f7fe00;
   line-height: 21px;
-  border-color: 2px solid #028350;
+  border-color: 2px solid var(--dashboard-block2);
   //text-shadow: 0px 1px 0px #7D0403;
   //margin-top: -15px;
 `
 
 const EarnButton = styled.button`
-  background: linear-gradient(180deg,#C8F568 0%,#16FF8F 100%);
+  background: linear-gradient(180deg,var(--btn-gradient1-from) 0%,var(--btn-gradient1-to) 100%);;
   //box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 24px;
   transition: all .1s ease-in-out;
@@ -68,7 +68,7 @@ const EarnButton = styled.button`
 const InviteButton = styled.button`
   font-size: 15px;
   display: block;
-  background: linear-gradient(180deg,#56F0D6 0%,#8499FD 100%);
+  background: linear-gradient(180deg,var(--btn-gradient2-from) 0%,var(--btn-gradient2-to) 100%);
   //box-shadow: 0 2px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 24px;
   letter-spacing: 0;
@@ -109,14 +109,14 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
           <div className={"flex flex-col w-full mb-2"}>
             <Item>
               <div className={"left flex flex-col"}>
-                <div className={"font-bold text-lg text-[#16FF8F]"}>Convidar 1-10</div>
-                <div className={"text-bold text-lg  text-[#16FF8F]"}>Prêmio</div>
+                <div className={"font-bold text-lg text-main-primary-main"}>Convidar 1-10</div>
+                <div className={"text-bold text-lg text-main-primary-main"}>Prêmio</div>
               </div>
               <div className={"right"}>
                 <MoneyButton className={"money-button"}>
                   <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
                   <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: '#028350',
+                    color: 'var(--dashboard-block2)',
                     textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
                   }}>10</span>
                 </MoneyButton>
@@ -125,14 +125,14 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
 
             <Item>
               <div className={"left flex flex-col"}>
-                <div className={"font-bold text-lg text-[#16FF8F]"}>Convidar 11-24</div>
-                <div className={"text-bold text-lg text-[#16FF8F]"}>Prêmio</div>
+                <div className={"font-bold text-lg text-main-primary-main"}>Convidar 11-24</div>
+                <div className={"text-bold text-lg text-main-primary-main"}>Prêmio</div>
               </div>
               <div className={"right"}>
                 <MoneyButton className={"money-button"}>
                   <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
                   <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: '#028350',
+                    color: 'var(--dashboard-block2)',
                     textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
                   }}>15</span>
                 </MoneyButton>
@@ -141,14 +141,14 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
 
             <Item>
               <div className={"left flex flex-col"}>
-                <div className={"font-bold text-lg text-[#16FF8F]"}>{"Convidar > 25"}</div>
-                <div className={"text-bold text-lg text-[#16FF8F]"}>Prêmio</div>
+                <div className={"font-bold text-lg text-main-primary-main"}>{"Convidar > 25"}</div>
+                <div className={"text-bold text-lg text-main-primary-main"}>Prêmio</div>
               </div>
               <div className={"right"}>
                 <MoneyButton className={"money-button"} style={{ border: '1px solid white' }}>
                   <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
                   <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: '#028350',
+                    color: 'var(--dashboard-block2)',
                     textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
                   }}>20</span>
 
@@ -158,8 +158,8 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
           </div>
 
           <div className={"flex flex-row justify-between items-center text-sm"}>
-            <EarnButton className={"text-sm text-[#047A70] font-bold"} onClick={()=>props.close()}>Ganhar dinheiro</EarnButton>
-            <InviteButton className={"text-sm text-[#ffffff] font-bold"} onClick={() => props.onConfirm()}>Convide agora</InviteButton>
+            <EarnButton className={"text-sm text-main-primary-varient font-bold"} onClick={()=>props.close()}>Ganhar dinheiro</EarnButton>
+            <InviteButton className={"text-sm text-white font-bold"} onClick={() => props.onConfirm()}>Convide agora</InviteButton>
           </div>
 
         </div>

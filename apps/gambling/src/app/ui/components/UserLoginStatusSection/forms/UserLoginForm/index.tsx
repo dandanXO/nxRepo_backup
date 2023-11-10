@@ -20,7 +20,7 @@ import {appSlice} from "../../../../../reduxStore/appSlice";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
-    border: "1px solid #2CFD99",
+    border: "1px solid var(--main-primary-main)",
   };
 
   const valid = data.length === 10 || data.length === 11;
@@ -185,7 +185,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             prefix={
               <>
                 <PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />
-                <span className="text-[#01FF52] mr-2">+55</span>
+                <span className="text-main-primary-main mr-2">+55</span>
               </>
             }
             placeholder="Tu número de celular"

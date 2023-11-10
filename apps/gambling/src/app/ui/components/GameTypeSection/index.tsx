@@ -18,10 +18,10 @@ const MobileGameTypeHeader = (props: {
   return (
       <header className={"flex flex-row mb-3 relative tab-item-title-box"}>
         <img src={`assets/${environment.assetPrefix}/ic_game.png`} />
-        <span className={"text-3xl text-semibold text-[#ffffff]"}>{props.gameTypeName}</span>
+        <span className={"text-3xl text-semibold text-white"}>{props.gameTypeName}</span>
         <div className={"flex-grow"}></div>
         {props?.onClick && (
-            <span className={"text-xl text-[#16FF8F] mt-2"} onClick={props?.onClick}>
+            <span className={"text-xl text-main-primary-main mt-2"} onClick={props?.onClick}>
       {'Tudo'}
     </span>
         )}
@@ -52,7 +52,7 @@ const GameTypeHeader = (props: {
         {isMobile ? (
           <button onClick={props.onClick} className={"text-xl text-transparent"}>Tudo</button>
         ) : (
-          <button onClick={props.onClick} className={"rounded-2xl border-[1px] border-[#2CFD99] px-4 pt-[5px] pb-[2px] text-[#2CFD99] text-sm !font-bold font-[ERASBD]"}>Ver todos {props?.count}</button>
+          <button onClick={props.onClick} className={"rounded-2xl border-[1px] border-main-primary-main px-4 pt-[5px] pb-[2px] text-main-primary-main text-sm !font-bold font-[ERASBD]"}>Ver todos {props?.count}</button>
         )}
       </div>}
 
@@ -197,7 +197,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       {props.data && listSize < props.data?.length &&
         <div className="flex-1 mt-2">
           <button onClick={loadMore}
-                  className="text-[#047A70] bg-gradient-to-b from-[#C8F568] to-[#16FF8F] py-1.5 px-6 rounded-2xl font-bold">
+                  className="text-main-primary-varient bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] py-1.5 px-6 rounded-2xl font-bold">
             Ver mais
           </button>
         </div>

@@ -69,13 +69,13 @@ export const NotificationPage = () => {
       <div className="flex h-full flex-col px-3 py-3 text-white">
         <LeftOutlined
             style={{ fontSize: '24px' }} // 調整箭頭圖示的大小
-            className={'absolute left-[20px] top-[20px] text-[#ffffff] font-bold'}
+            className={'absolute left-[20px] top-[20px] text-white font-bold'}
             onClick={() => {
               navigate(PageOrModalPathEnum.IndexPage);
             }}
         />
 
-        <div className="mb-5 pl-3 text-2xl font-bold italic " style={{color:'#FBFF3F'}}>
+        <div className="mb-5 pl-3 text-2xl font-bold italic text-main-secondary-main">
           Centro de Notificação
         </div>
 

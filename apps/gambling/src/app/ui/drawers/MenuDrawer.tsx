@@ -13,7 +13,7 @@ import {environment} from "../../../environments/environment";
 
 const DepositButton = styled(BackgroundButton)`
   //background: url(assets/${environment.assetPrefix}/btn_FirstDeposit.png) no-repeat center/100%;
-  background: linear-gradient(180deg,#FE6060 0%,#FFA24D 100%);
+  background: linear-gradient(180deg,var(--btn-gradient-vip-from) 0%,var(--btn-gradient-vip-to) 100%);
   border-radius: 10px;
   height: 60px;
   display: flex;
@@ -23,7 +23,7 @@ const DepositButton = styled(BackgroundButton)`
 `
 
 const CashBackButton = styled(BackgroundButton)`
-  background: linear-gradient(180deg,#8692FF 0%,#55F1D5 100%);
+  background: linear-gradient(180deg,var(--dashboard-block1-gradient-from) 0%,var(--dashboard-block1-gradient-to) 100%);
   border-radius: 10px;
   height: 60px;
   display: flex;
@@ -59,7 +59,7 @@ const StyledDrawerButton = styled.button.attrs<IStyledDrawerButton>(props => ({
   height: 55px;
   box-sizing: border-box;
 
-  background: #069D5C;
+  background: var(--medium);
   margin-top: 12px;
   font-weight: 600;
 
@@ -111,7 +111,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
       props.closeMenuDrawer();
     }}>
 
-      <div className={cx("bg-[#013E42] p-4 flex flex-col flex-between", props.className, {
+      <div className={cx("bg-assistant p-4 flex flex-col flex-between", props.className, {
         "top-0": isMobile,
         "top-[130px]": !isMobile,
         "rounded-tr-lg": !isMobile,
@@ -122,7 +122,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
         {/* 添加一个去背的背景图片*/}
         <div className="absolute inset-0 z-[-1] bg-no-repeat bg-center"
              style={{
-               background: '#013E42',
+               background: 'var(--assistant)',
                backgroundSize: '100% 40%',
                backgroundPosition: 'center bottom',
                borderRadius: '0 20px 0 0',

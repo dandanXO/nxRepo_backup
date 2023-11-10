@@ -315,7 +315,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           </div>
         <p className={"text-white font-thin"} style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}>
           <span className={"text-[#31B77D]"}>Eu concordo</span>
-          <span className={"text-[#FBFF3F]"}>Condições e condições, política de privacidade</span>
+          <span className={"text-main-secondary-main"}>Condições e condições, política de privacidade</span>
         </p>
       </section>
         ):(
@@ -329,7 +329,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
             </div>
           <p className={"text-white font-thin"}>
             <span className={"text-[#31B77D]"}>Eu concordo</span>
-            <span className={"text-[#FBFF3F]"}>Condições e condições, política de privacidade</span>
+            <span className={"text-main-secondary-main"}>Condições e condições, política de privacidade</span>
           </p>
         </section>
       )}
