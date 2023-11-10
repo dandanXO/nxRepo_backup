@@ -1,4 +1,3 @@
-import {Avatar, AvatarAccountInfo} from "../../templates/PageTemplate/Header";
 import styled, { keyframes } from "styled-components";
 import {RightOutlined} from "@ant-design/icons"
 import {useNavigate} from "react-router";
@@ -22,6 +21,8 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import { IUserStore } from "../../../gateway/socket";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {environment} from "../../../../environments/environment";
+import {Avatar} from "../../templates/PageTemplate/Avatar";
+import {AvatarAccountInfo} from "../../templates/PageTemplate/AvatarAccountInfo";
 
 const MyPageButtonD = styled.button`
   background-image: url("assets/${environment.assetPrefix}/btn_green05.png");
