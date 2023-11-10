@@ -2,7 +2,7 @@ import {ITotal} from "./MobileCommonBlueTable";
 
 export const DesktopTotalType = (props: ITotal & { type: string }) => {
   return (
-    <div className="overflow-x-auto text-white text-center" style={{borderWidth:'1px',borderColor:'#58DCC7',borderRadius:'10px'}}>
+    <div className="overflow-x-auto text-white text-center" style={{borderWidth:'1px',borderColor:'var(--table-light)',borderRadius:'10px'}}>
       <table className="table table-zebra w-full">
         {/* head */}
         <thead>
