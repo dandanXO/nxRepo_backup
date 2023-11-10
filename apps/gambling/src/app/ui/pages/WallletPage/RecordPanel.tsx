@@ -12,6 +12,8 @@ import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';
 import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';
 import { RecordButton } from './index';
+import {TotalSectionContainer} from "./TotalSectionContainer";
+import cx from "classnames";
 
 type IRecordPanel = {
   recordPanelMode: 'deposit' | 'withdraw';
@@ -57,9 +59,13 @@ export const RecordPanel = (props: IRecordPanel) => {
 
   return (
     <SectionContainer id={'record-section'}>
-      {isMobile && <BlueBoard />}
+      {/*{isMobile && <BlueBoard />}*/}
 
-      <section className={'button-list flex flex-row'}>
+      {isMobile && (
+        <TotalSectionContainer/>
+      )}
+
+      <section className={cx('button-list flex flex-row mb-5',{"md:mb-10":!isMobile})}>
         <RecordButton
           className={'p-2'}
           active={recordPanelMode === 'deposit'}
@@ -150,7 +156,7 @@ export const RecordPanel = (props: IRecordPanel) => {
       {/*</div>*/}
 
       {isMobile ? null : recordPanelMode === 'deposit' ? (
-        <RecordPanelDeposit  />
+        <RecordPanelDeposit records={depositRecordData?.data || []} />
       ) : (
         <RecordPanelWithdraw records={withdrawRecordData?.data || []} />
       )}

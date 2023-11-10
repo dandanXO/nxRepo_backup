@@ -270,7 +270,7 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.WalletDepositNextPage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showTabbar={false}>
               <WalletDepositNextPage/>
             </PageTemplate>
           )}/>
@@ -346,7 +346,7 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.GameSearchPage} element={(
-            <PageTemplate showMobileHeader={false}>
+            <PageTemplate showMobileHeader={false} showFooter={false}>
               <GameSearchPage/>
             </PageTemplate>
           )}/>

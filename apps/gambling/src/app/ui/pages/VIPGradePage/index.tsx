@@ -17,6 +17,10 @@ import {appStore, RootState} from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {IUserStore} from "../../../gateway/socket";
 import {environment} from "../../../../environments/environment";
+import { ThreeDots } from 'react-loading-icons';
+import {useNavigate} from "react-router";
+import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
+import {tcx} from "../../utils/tcx";
 
 const VIPContainer = styled.div`
   background-color: rgba(40, 112, 82, 0.1);
@@ -38,76 +42,77 @@ const VIPICONContainer = styled.div`
 const LevelButton = styled.button.attrs<{
   className?: string;
 }>((props) => ({
-  className: cx(props.className, 'flex flex-row justify-center items-center'),
+  className: cx(props.className, 'flex flex-row justify-between gap-2 items-center'),
 }))`
-  width: 84px;
-  min-width: 84px;
-  height: 40px;
-  min-height: 40px;
+  min-width: fit-content;
   text-shadow: 0px 1px 0px #ffffff;
 `;
 
 export const CurrentLevelButton = styled(LevelButton)`
   //color: #841c00;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAA2CAYAAAAGRjHZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU4MjJDMTg5NkQ2MTExRUVBQUREQzNFRUQxMDhDM0E2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU4MjJDMThBNkQ2MTExRUVBQUREQzNFRUQxMDhDM0E2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTgyMkMxODc2RDYxMTFFRUFBRERDM0VFRDEwOEMzQTYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTgyMkMxODg2RDYxMTFFRUFBRERDM0VFRDEwOEMzQTYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4+FHoVAAACSUlEQVR42uydTUuUURiG7zGzQKqVlGb0ZYZBm8xF0KKfoKit+glB1CKpHxBlmzb9g3ZK2n9o2QckWEEqojmLSMEC0z6m+znzSjJObXM81wX3w5lhVs97zTnvOwznlCqzqkeL01/kktNRvAeNy1dn0XntTDjPnI3aD5XqCDHgjGpJXSp7tOJ8c37R0Yam2dnvHHLa01f8g+uI8/RvQuxx7lmC25rz6BM93NW0OSeTHKOud52ftUI80KxlmPboB/3KZtY455xKUoxsFWLIS8SYXiFDllJcSEvIsOt4CBE3izN6rk6WiYyXj8v6GHNFk8uwFpAha+LaL+io69Xm9Gi55FqhL1kTDhxTfwjRp2WEyJ7lVC+GEEe0hhDZs5Zqewixr/oECllTdaCliU5A7VMoywUgBCAEIAQgBCAEIAQgBCAEIAQgBOw4IfhHNTBDAEIAQgBCAEIAQgBCAELAfxGCH6aAGQIQAhACEAIQAhACEAIQAhACEAIQAnYmsWHIF3axhrSPsbQRM0RZrTqgdXqSNa2plkOIN2pTtz7Tk6w5nOqLEGJSZzSkt/Qka7pTnfyztfETdWqevmTJceda2tr4dNxUxiEat9QrjkjJkbjmvWl001nf3JZwTD16qCvFqwrJIkFc87j24YC2H6DySO90XS89muPLs6s5UcwMPXrsekN1DlDZZNC5ryl16X16KJVWxf8uG51YCw6qerzSWed8OmLpjjO+9WOlfxzCFgdqDBQexdb5e+lqQ/PdiRvHmP8niiVi2yFsvwUYAHO0CFu7ab0WAAAAAElFTkSuQmCC);
-  background-repeat: no-repeat;
-  background-size: 84px 40px;
-  border: none;
+  //background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAA2CAYAAAAGRjHZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkU4MjJDMTg5NkQ2MTExRUVBQUREQzNFRUQxMDhDM0E2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkU4MjJDMThBNkQ2MTExRUVBQUREQzNFRUQxMDhDM0E2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTgyMkMxODc2RDYxMTFFRUFBRERDM0VFRDEwOEMzQTYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTgyMkMxODg2RDYxMTFFRUFBRERDM0VFRDEwOEMzQTYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4+FHoVAAACSUlEQVR42uydTUuUURiG7zGzQKqVlGb0ZYZBm8xF0KKfoKit+glB1CKpHxBlmzb9g3ZK2n9o2QckWEEqojmLSMEC0z6m+znzSjJObXM81wX3w5lhVs97zTnvOwznlCqzqkeL01/kktNRvAeNy1dn0XntTDjPnI3aD5XqCDHgjGpJXSp7tOJ8c37R0Yam2dnvHHLa01f8g+uI8/RvQuxx7lmC25rz6BM93NW0OSeTHKOud52ftUI80KxlmPboB/3KZtY455xKUoxsFWLIS8SYXiFDllJcSEvIsOt4CBE3izN6rk6WiYyXj8v6GHNFk8uwFpAha+LaL+io69Xm9Gi55FqhL1kTDhxTfwjRp2WEyJ7lVC+GEEe0hhDZs5Zqewixr/oECllTdaCliU5A7VMoywUgBCAEIAQgBCAEIAQgBCAEIAQgBOw4IfhHNTBDAEIAQgBCAEIAQgBCAELAfxGCH6aAGQIQAhACEAIQAhACEAIQAhACEAIQAnYmsWHIF3axhrSPsbQRM0RZrTqgdXqSNa2plkOIN2pTtz7Tk6w5nOqLEGJSZzSkt/Qka7pTnfyztfETdWqevmTJceda2tr4dNxUxiEat9QrjkjJkbjmvWl001nf3JZwTD16qCvFqwrJIkFc87j24YC2H6DySO90XS89muPLs6s5UcwMPXrsekN1DlDZZNC5ryl16X16KJVWxf8uG51YCw6qerzSWed8OmLpjjO+9WOlfxzCFgdqDBQexdb5e+lqQ/PdiRvHmP8niiVi2yFsvwUYAHO0CFu7ab0WAAAAAElFTkSuQmCC);
+  //background-repeat: no-repeat;
+  background: linear-gradient(180deg, var(--btn-gradient-vip-from) 0%, var(--btn-gradient-vip-to) 100%);
+  border: 1px var(--main-secondary-main) solid;
 `;
 export const OtherLevelButton = styled(LevelButton)`
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAA2CAYAAAAGRjHZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkYzOEYxMkI5NkQ2MTExRUVCOUE1RENFNEMwNDA0Q0RCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkYzOEYxMkJBNkQ2MTExRUVCOUE1RENFNEMwNDA0Q0RCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RjM4RjEyQjc2RDYxMTFFRUI5QTVEQ0U0QzA0MDRDREIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RjM4RjEyQjg2RDYxMTFFRUI5QTVEQ0U0QzA0MDRDREIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Rbp0kAAACfklEQVR42uydz24SURSHz52pjAhYGyVV6sp00b26cO0LYGJNfAdd6AKjD9CYutCNT+ASqzW+gA+gMXHduGqtrTVNHfoHLHM9B4YEG9wL9/uSH5BhhsU5H3cuLO51N7+/khEUNPU8NzS1/BiMLy3Nuuaz5q3mnaZz8qSpERfe0iy77dZ8tLMv8utIXOdYJPOUdJyJo7JPphaknCxk1dJdXy2v6dFHmjf/EiLWLLmd/Ua0sSdu94AiThLdTNyBDgiaeDsVP3NmPqudXVExlvXdJ3bGSSGWVIRG9PVn72KYbOwLH+von3W6jWxuWvLRQqL8/dvuRwsZAhw1rOfWe3NgIIRNFp9H3/aQIVQprPciL8wFE2LRbaWX3e4hxQn29nEo6sCcvrxjQtR7vyYgaHIH6ibEdZceUZHQR4m+A9dMiIvS6VKR0Ok7cMmESPjTCXIHChGVgL/mEpQAEAIQAhACEAIQAhACEAIQAhACEAIQAhACEAIQAhACEAIQAhACEAIAIQAhACEAIQAhACEAIQAhACEAIQAhACHgvxcilRgvMMHZY8dM2PRJTEFCp9BzYNOE+CKlhIIEjq+ctqePJsRqdqFERQInd2DVhGj62cq6P1ekKqGODtp7dWDDXDAhbBONh70V0Zlchof2PF8N/4GmPTCg6avlZ9mV8yKOGgWD9tp6br03B+zQ8H4Zj9WUoi/E92x1dBZDn/DbxExRstq0yfDSej84PiyErW17X0/40K2Wn7qttL/FUtoW1z7WT2C12/EeDZz4RNtdSXoTSJ0zrOUivB4+bdSeWyua93rBYne2YvtvXdXY0vmnqOpY81tjE8dP0t+ErSkjNmH7I8AAQaWz+gRPJ8UAAAAASUVORK5CYII=);
-  background-size: 84px 40px;
+  //background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAA2CAYAAAAGRjHZAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkYzOEYxMkI5NkQ2MTExRUVCOUE1RENFNEMwNDA0Q0RCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkYzOEYxMkJBNkQ2MTExRUVCOUE1RENFNEMwNDA0Q0RCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RjM4RjEyQjc2RDYxMTFFRUI5QTVEQ0U0QzA0MDRDREIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RjM4RjEyQjg2RDYxMTFFRUI5QTVEQ0U0QzA0MDRDREIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Rbp0kAAACfklEQVR42uydz24SURSHz52pjAhYGyVV6sp00b26cO0LYGJNfAdd6AKjD9CYutCNT+ASqzW+gA+gMXHduGqtrTVNHfoHLHM9B4YEG9wL9/uSH5BhhsU5H3cuLO51N7+/khEUNPU8NzS1/BiMLy3Nuuaz5q3mnaZz8qSpERfe0iy77dZ8tLMv8utIXOdYJPOUdJyJo7JPphaknCxk1dJdXy2v6dFHmjf/EiLWLLmd/Ua0sSdu94AiThLdTNyBDgiaeDsVP3NmPqudXVExlvXdJ3bGSSGWVIRG9PVn72KYbOwLH+von3W6jWxuWvLRQqL8/dvuRwsZAhw1rOfWe3NgIIRNFp9H3/aQIVQprPciL8wFE2LRbaWX3e4hxQn29nEo6sCcvrxjQtR7vyYgaHIH6ibEdZceUZHQR4m+A9dMiIvS6VKR0Ok7cMmESPjTCXIHChGVgL/mEpQAEAIQAhACEAIQAhACEAIQAhACEAIQAhACEAIQAhACEAIQAhACEAIAIQAhACEAIQAhACEAIQAhACEAIQAhACHgvxcilRgvMMHZY8dM2PRJTEFCp9BzYNOE+CKlhIIEjq+ctqePJsRqdqFERQInd2DVhGj62cq6P1ekKqGODtp7dWDDXDAhbBONh70V0Zlchof2PF8N/4GmPTCg6avlZ9mV8yKOGgWD9tp6br03B+zQ8H4Zj9WUoi/E92x1dBZDn/DbxExRstq0yfDSej84PiyErW17X0/40K2Wn7qttL/FUtoW1z7WT2C12/EeDZz4RNtdSXoTSJ0zrOUivB4+bdSeWyua93rBYne2YvtvXdXY0vmnqOpY81tjE8dP0t+ErSkjNmH7I8AAQaWz+gRPJ8UAAAAASUVORK5CYII=);
+  background-color: var(--main);
+  border: 1px var(--main-primary-main) solid;
   &:hover {
-    background-image: url(data:image/png;base64,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);
+    //background-image: url(data:image/png;base64,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);
   }
 `;
 
-export const IRLevelButton = styled(LevelButton)`
-  //color: #841c00;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAAAxCAYAAAD6BNZ1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZGRjA4OTIyNkQ2MjExRUVBMjREODhCNjQ1NDZGNkExIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZGRjA4OTIzNkQ2MjExRUVBMjREODhCNjQ1NDZGNkExIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkZGMDg5MjA2RDYyMTFFRUEyNEQ4OEI2NDU0NkY2QTEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkZGMDg5MjE2RDYyMTFFRUEyNEQ4OEI2NDU0NkY2QTEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7E0e6eAAAFo0lEQVR42uxcS29bRRQ+fjs4KXH6QCG1qNKoDQ3lVRUEC1rxkFghEEsK6goQDwmxgZ9AWVAWgChiwXMNYoWgVIEFCCreTWhRGyqlSYCGOuAYO36F79w74xk7TnAb2/W9Ol/0Jb7X9zrWfHPOnHNn5gRml6+nFiAC3gLuB8fAHeDVYC/YR4JmkQEXwVnwV3ACHAe/AYvr/fDAOsQOgneCB8H7RNS2d4KPwLfAY2ClU2KHwYfA58BrRYeO4xfwEPg+WGqn2HeAr4LX1b8Rojx8eQY9IQeTXwJLFKAyWBF5msQyWm0ZLVlBK1Yohhbsge/uQyvGG11+AnwS/KLVYvN/Oww+xvdUb3a+xjxFKY2vWRC12oQKWrhASZjTJqcz1PQPotfBZ8F8K8TeBn4A3lgr8hy+wgVRosMo0ABUHawX/QfwAfDsesTmNz8GB427zsK5zMCS89Lyl83S4xgsh2ByCfv0HHgv+NOliH0z+BnYb3z5NEaTtLR2l6DkuPaUfWoBvAv8brXIuhFGlEVXhY7RFKx5UcKtLkIQhhdDCLdEw/pUv9LtNvBMM5bNwdiX4E06Bog6QmeldbvWrScwlg/bsfP34O31QVsjyz5shOYLfsPvrFh0VyPr6FQyFs76vQQ+sZZls7//VHeREMbogIzRHsrTkwjaUnZado+Ku1ZYNr9+xfiCLK5OO3cIvAI2zAEwQUpH1nM3qSdtttgHwVEd5xHSK3HdXsQMOKylHVW6vmm7cZ7UOKWicIg87Vi1wJsIwJ0HjTs/De5kWcPWWD2irbosQnvenQed52BhnUbz7ORRLfbDJlH/S9y3D8A6hukqffiIFpsXHtyvzxYlKPNJ7p22xWZ9Iyz2XlILDyrIwcsye+UTFBw9g+70KOu7l8Xeb6w6A7EFfgHrGTNz4ftY7F3Gz+dkvPbVuJ2D2FWMhU1uTc4jdbFsP1n2kn04ymKnzJtFsWwfYbl2QepWFjtpzF7s2l9i1+iZ1KmXg7IkXb6T20I0TO7i84j7VgAUwf2CgJnfdnIxFpufjW5xxQ7BukvSSj5BqHZRYprFntZiB2HgRRHbN4iYEZpxjsXm2a49bk+IwbJz0ko+QdjOsolOstgT1RGceiD2grSSbyy7xz6cZLHH9VGC+pBnz0kr+QQJZxNtFeMs9nFydwn2xSkOV85bTWQyxOuI4iduLJu3AR/XqdeHpOa0+ylJv9Mf0loeR795VkZK36JevPCuFnsjfmZEbM+DdbTwthuwueDlprxWaSSCUwPoFfOyNMmz2AT9ImYtKet6zBab5z9eBN/ggxQNwsnn6F/ZvOc5XIGROmX2YTIOKX1rNgmw8D+TmvLMUBYHZ6T1PIbdtB05VXV350laZd04n3ga/IQ7Ad/A7uBPceeewRboZQnNkxxPkVWKo36v11HwCPg4H+yAQ8gjWF9wIndBd0ffvY5eFo6QtfWn3o1r8KKlr0hVWqigg/xIU/S37OLsWlwJa76Bhin4P7s4V9uMzwvLedvuZu0PWPALYuFdhwFYNAttTWaeV0Kfrr92rcoLe5Rbr27In6BpmpMxvGswiDF6bGXlhbvBbxtdf9E1VRbgzidpBjYuadnlQi9G2l00BCtsXU0VjW1UVy2pSGU6hc8+J9WSOo6tcNw7YXuRldWSHgSn1rr3YuqgvQw+SlYthwKi+rM0T7Ow95xMnrQNPRSFHSfpGtqIVzUJFIdT/CDsGWpRHTQb+8DXyNpYoPEP5D5PGfzNw9EvOSlbGbF8SRYnN40w4umQs2EnAgcdow14tRmZ84baeWmNSXLLaHze7Odfau3SA+Dz5O77FXQWvLLoBfA9anPtUhu8gZ9rdvBsGe8STIgObQM/5OBpyndUhtSxqsSNwCvbblVunovYcr3xIdUBekWrprGohOVaGVxv/IRy019TC+qN/yfAAN9sgLPewUbJAAAAAElFTkSuQmCC);
-  background-repeat: no-repeat;
-  background-size: 84px 40px;
-  border: none;
+
+export const IRLevelButton = styled.button.attrs<{
+  className?: string;
+}>((props) => ({
+  className: props.className,
+}))`
+  background: linear-gradient(180deg, var(--btn-gradient1-from) 0%, var(--btn-gradient1-to) 100%);
+  color: var(--main-primary-varient);
+  border-radius: 40px;
 `;
 
 export const VIPBorderStyleContainer = styled.div`
-  padding: 1vw 30px;
-  background: rgba(255,255,255,.1);
+  padding: 32px 54px;
+  background: var(--medium);
   border-radius: 10px;
   //border: 1px solid rgba(255,255,255,.8);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 `;
 
 const VIPLightBorderStyleContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: var(--medium);
+  border-radius: 16px;
   height: 100%;
   width: 100%;
-  padding: 10px 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 32px;
+  //border: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
 const VIPTextBorderStyleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background: var(--medium);
+  border-radius: 16px;
   height: 100%;
-  padding: 10px 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 0;
+  //border: 1px solid rgba(255, 255, 255, 0.2);
   width: 478.5px; !important;
 `;
 
 const VIPLabel = styled.div`
-  width: 150px;
-  height: 40px;
+  width: 212px;
+  height: 65px;
   text-align: center;
   display: flex;
   align-items: center;
@@ -115,13 +120,22 @@ const VIPLabel = styled.div`
   //box-shadow: inset 0 0 36px 5px rgba(255, 219, 0, 0.09);
   border-radius: 30px;
   border: none; /* 取消边框 */
-  color: #fffa05;
-  font-family: ERASBD;
-  margin-top: 6px;
+  color: var(--dashboard-block3);
   float: right;
   font-weight: bold;
-  background: url("assets/${environment.assetPrefix}/vip_di.png") no-repeat center;
+  background: linear-gradient(180deg, var(--dashboard-block3-gradient-from) 0%, var(--dashboard-block3-gradient-to) 100%);
+  // background: url("assets/${environment.assetPrefix}/vip_di.png") no-repeat center;
 `;
+
+const VIPTitle = styled.span`
+  font-size: 48px;
+  line-height: 50px;
+  margin-left: 24px;
+  background: -webkit-linear-gradient(-90deg, var(--dashboard-block3-gradient-from) 0%, var(--dashboard-block3-gradient-to) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+`
 
 const vips: number[] = [];
 
@@ -191,19 +205,19 @@ const increment = (target: number) => keyframes`
 `;
 
 const Progress = styled.div<{ progress: number }>`
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.5);
   border-radius: 50px;
-  background-image: linear-gradient(270deg, #00bdff 0%, #7f06ff 100%);
+  background-image: url("assets/${environment.assetPrefix}/process_bar.png");
+  background-size: contain;
   height: inherit;
   animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
 `;
 
-const ProgressBar = ({ progress }: { progress: number }) => {
+export const ProgressBar = ({ progress, className, textClassName }: { progress: number, className?:string, textClassName?: string }) => {
   return (
-    <div className={'relative mr-10 h-[30px] w-full flex-auto rounded-3xl bg-white bg-opacity-20 leading-[30px]'}>
+    <div className={tcx('relative w-full flex-auto rounded-3xl bg-assistant', className)}>
       <Progress progress={progress > 1 ? 100 : progress * 100} />
-      <span className={'absolute right-4 top-0 text-white'}>
-        {progress > 1 ? '100' : (progress * 100).toFixed(2)}%
+      <span className={tcx('absolute text-medium font-bold', textClassName)}>
+        {progress > 1 ? '100' : (progress * 100).toFixed(0)}%
       </span>
     </div>
   );
@@ -248,6 +262,8 @@ export const VIPGradePage = () => {
 
   const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
   const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = AppLocalStorage.getItem('token') || '';
@@ -335,6 +351,38 @@ export const VIPGradePage = () => {
   );
 
 
+  const isVipLoading = useSelector((state: RootState) => state.app.isVipLoading);
+
+  const [showReloadButton, setShowReloadButton] = useState(false);
+
+
+
+
+  useEffect(() => {
+    const simulateAsyncLoad = setTimeout(() => {
+      if (isVipLoading) {
+        setShowReloadButton(true);
+      }
+    }, 3000); // 模拟1毫秒的加载时间
+
+    return () => {
+      clearTimeout(simulateAsyncLoad);
+    };
+  }, [isVipLoading]);
+
+  const handleReload = () => {
+    setShowReloadButton(false);
+  };
+
+  if (isVipLoading && (!signInConfig || !vipAllInfo)) {
+    return (
+        <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
+          <img className={"w-[70px] h-[35px] mb-6"} src={`/assets/${environment.assetPrefix}/Variant7.png`}/>
+          <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
+          <ThreeDots height={25} className={'inline-block'} />
+        </div>
+    );
+  } else {
 
   if (isMobile)
     return (
@@ -380,10 +428,10 @@ export const VIPGradePage = () => {
               </section>
             </section>
 
-            <section className={'mb-4 text-center text-base font-bold text-white md:text-2xl'}>
+            <section className={'mb-10 text-center text-base font-bold text-white md:text-2xl'}>
               <div className="flex items-center justify-center"> {/* 使用 justify-center 来水平居中 */}
                 <VIPLabel>VIP {currentLevel}</VIPLabel>
-                <span style={{ marginLeft: '10px' }}>INTRODUCAO AO NIVEL VIP</span>
+                <VIPTitle>INTRODUCAO AO NIVEL VIP</VIPTitle>
               </div>
             </section>
 
@@ -398,25 +446,23 @@ export const VIPGradePage = () => {
 
               <section
                 className={
-                  'mb-4 text-center text-base font-bold text-white md:text-2xl'
+                  'mb-4 text-center text-4xl font-bold text-main-primary-main'
                 }
               >
                 — Distância próximo nível —
               </section>
 
               <VIPBorderStyleContainer className={'flex flex-row'}>
-                <div className={'flex shrink-0 flex-col text-left min-w-[250px]'}>
-                  <span className={'text-lg text-white'}>
+                <div className={'flex shrink-0 flex-col text-left min-w-[250px] text-xl'}>
+                  <span className={'text-white'}>
                     Quantidade total de recarga:
                   </span>
                   <span className={'text-left'}>
-                    <span className={'text-base text-[#cdb7f6]'}>
+                    <span className={'text-white'}>
                       R$
                       {userVIPInfo?.data?.vip_score
                         ? userVIPInfo?.data?.vip_score / 100
                         : 0}
-                    </span>
-                    <span className={'text-base text-white'}>
                       /R$
                       {userVIPInfo?.data?.next_level_score
                         ? userVIPInfo?.data?.next_level_score / 100
@@ -426,32 +472,32 @@ export const VIPGradePage = () => {
                 </div>
 
                 <ProgressBar
+                  className='mx-16 h-8'
+                  textClassName='right-4 top-1 text-base'
                   progress={
-                    userVIPInfo?.data?.vip_score ||
-                    0 / (userVIPInfo?.data?.next_level_score || 1)
+                      (userVIPInfo?.data?.vip_score || 0) /
+                      (userVIPInfo?.data?.next_level_score || 1)
                   }
                 />
 
                 <div className={'shrink-0'}>
-                  <IRLevelButton>
+                  <IRLevelButton className='text-2xl px-14 py-4' onClick={()=> navigate(PageOrModalPathEnum.WalletPage)}>
                     <span className={'text-lg font-bold'}>IR</span>
                   </IRLevelButton>
                 </div>
               </VIPBorderStyleContainer>
 
               <VIPBorderStyleContainer className={'flex flex-row'}>
-                <div className={'flex shrink-0 flex-col  text-left min-w-[250px]'}>
-                  <span className={'text-lg text-white'}>
+                <div className={'flex shrink-0 flex-col  text-left min-w-[250px] text-xl'}>
+                  <span className={'text-white'}>
                     Número total de apostas:
                   </span>
                   <span className={'text-left'}>
-                    <span className={'text-base text-[#cdb7f6]'}>
+                    <span className={'text-white'}>
                       R$
                       {userVIPInfo?.data?.flow
                         ? userVIPInfo?.data?.flow / 100
                         : 0}
-                    </span>
-                    <span className={'text-base text-white'}>
                       /R$
                       {userVIPInfo?.data?.next_level_flow
                         ? userVIPInfo?.data?.next_level_flow / 100
@@ -461,6 +507,8 @@ export const VIPGradePage = () => {
                 </div>
 
                 <ProgressBar
+                  className='mx-16 h-8'
+                  textClassName='right-4 top-1 text-base'
                   progress={
                     userVIPInfo?.data?.flow_progress
                       ? userVIPInfo?.data?.flow_progress / 100
@@ -469,16 +517,16 @@ export const VIPGradePage = () => {
                 />
 
                 <div className={'shrink-0'}>
-                  <IRLevelButton>
+                  <IRLevelButton className='text-2xl px-14 py-4' onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>
                     <span className={'text-lg font-bold'}>IR</span>
                   </IRLevelButton>
                 </div>
               </VIPBorderStyleContainer>
             </section>
 
-            <section>
+            <section className='mt-6'>
               <section
-                className={'mb-4 text-center text-2xl font-bold text-white'}
+                className={'mb-6 text-center text-4xl font-bold text-white'}
               >
                 — Privilégio —
               </section>
@@ -506,11 +554,10 @@ export const VIPGradePage = () => {
                   className={'mr-4 h-[100px] flex-1'}
                 >
                   <img
-                    className={'relative top-[-6px] h-[80px] w-[120px]'}
                     alt={''}
-                    src={`assets/${environment.assetPrefix}/icon_bullion.png`}
+                    src={`assets/${environment.assetPrefix}/icon_vip_context_2.png`}
                   />
-                  <div className={'flex flex-col text-xl text-white'}>
+                  <div className={'flex flex-col text-2xl italic leading-none font-bold text-white'}>
                     <span>Recompensa total de</span>
                     <span>check-in de 7 dias: R${signBonus}</span>
                   </div>
@@ -518,12 +565,11 @@ export const VIPGradePage = () => {
 
                 <VIPLightBorderStyleContainer className={'flex-1'}>
                   <img
-                    className={'relative top-[-6px] h-[80px] w-[120px]'}
                     alt={''}
-                    src={`assets/${environment.assetPrefix}/icon_bank.png`}
+                    src={`assets/${environment.assetPrefix}/icon_vip_context_1.png`}
                   />
-                  <div className={'flex flex-col text-xl text-white'}>
-                    <span>recompensa de</span>
+                  <div className={'flex flex-col text-2xl italic leading-none font-bold text-white'}>
+                    <span className='text-end'>recompensa de</span>
                     <span>
                       atualização : R$
                       {currentLevelInfo?.upRewardAmout
@@ -535,37 +581,37 @@ export const VIPGradePage = () => {
               </section>
 
               <section className={'mb-4 flex w-full flex-col text-white'}>
-              <section className={'flex flex-row'}>
-                <VIPTextBorderStyleContainer
-                  className={
-                    'mr-4 flex flex-1 items-center justify-center text-lg'
-                  }>
-                  Limite máximo de retirada única : R$
-                  {currentLevelInfo?.withdrawAmountLimitDay
-                    ? `${currentLevelInfo?.withdrawAmountLimitDay / 100}`
-                    : '0'}
-                </VIPTextBorderStyleContainer>
+                <section className={'flex flex-row mb-10'}>
+                  <VIPTextBorderStyleContainer
+                    className={
+                      'mr-4 flex flex-1 items-center justify-center text-2xl italic font-bold'
+                    }>
+                    Limite máximo de retirada única : R$
+                    {currentLevelInfo?.withdrawAmountLimitDay
+                      ? `${currentLevelInfo?.withdrawAmountLimitDay / 100}`
+                      : '0'}
+                  </VIPTextBorderStyleContainer>
 
-                <VIPTextBorderStyleContainer
-                  className={
-                    'flex flex-1 items-center justify-center text-lg'
-                  }>
-                  Número de retiradas por dia：
-                  {currentLevelInfo?.withdrawTimesLimitDay}
-                </VIPTextBorderStyleContainer>
-              </section>
+                  <VIPTextBorderStyleContainer
+                    className={
+                      'flex flex-1 items-center justify-center text-2xl italic font-bold'
+                    }>
+                    Número de retiradas por dia：
+                    {currentLevelInfo?.withdrawTimesLimitDay}
+                  </VIPTextBorderStyleContainer>
+                </section>
 
 
                 <section
-                  className={'mb-4 text-center text-2xl font-bold text-white'}
+                  className={'mb-6 text-center text-4xl font-bold text-white'}
                 >
-                  — Privilégio —
+                  — Condições do VIP atual —
                 </section>
 
                 <section className={'flex flex-row'}>
                   <VIPTextBorderStyleContainer
                     className={
-                      'mr-4 flex flex-1 items-center justify-center text-lg'
+                      'mr-4 flex flex-1 items-center justify-center text-2xl italic font-bold'
                     }
                   >
                     Quantidade total de recarga : R$
@@ -576,7 +622,7 @@ export const VIPGradePage = () => {
 
                   <VIPTextBorderStyleContainer
                     className={
-                      'flex flex-1 items-center justify-center text-lg'
+                      'flex flex-1 items-center justify-center text-2xl italic font-bold'
                     }
                   >
                     Número total de apostas : R$
@@ -592,4 +638,6 @@ export const VIPGradePage = () => {
       </div>
     </>
   );
-};
+}
+}
+

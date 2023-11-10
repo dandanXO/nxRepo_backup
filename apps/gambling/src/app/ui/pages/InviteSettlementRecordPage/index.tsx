@@ -17,22 +17,23 @@ const tableStyle = {
     borderCollapse: 'collapse',
   },
   th: {
-    backgroundColor: '#498D68',
+    backgroundColor: '#008B8D',
     color: '#fff',
-    border: '0.5px solid #333',
+    border: '0.1px solid rgba(0, 82, 101, 0.3)',
   },
   td: {
-    backgroundColor: '#3F7659',
+    backgroundColor: '#006D79',
     color: '#fff',
-    border: '0.5px solid #333',
   },
 };
 
 const NoData = () => {
   return (
     <td colSpan={2} className=''>
-      <img className={'h-[100px] margin-auto'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
-      <div>Nada aq</div>
+      <div style={{backgroundColor:'#006D79'}}>
+        <img style={{display: 'unset'}} className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
+        <div>Nada aq</div>
+      </div>
     </td>
   )
 }
@@ -67,7 +68,7 @@ export const InviteSettlementRecordPage = () => {
   const datePickerStyle = {
     backgroundColor: '#437B5D',
     borderRadius: '10px',
-    border: 'none',
+    border: '0.5px solid #58DCC7',
     color: '#ffffff',
   };
 
@@ -105,14 +106,14 @@ export const InviteSettlementRecordPage = () => {
             />
           </section>
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto" style={{borderWidth:'1px',borderColor:'#58DCC7',borderRadius:'10px'}}>
             <table className="table table-zebra w-full text-center">
               {/* head */}
               <thead>
-              <tr>
-                <th style={tableStyle.th}>Hora De Entrada</th>
-                <th style={tableStyle.th}>Bônus</th>
-              </tr>
+                <tr>
+                  <th style={tableStyle.th}>Hora De Entrada</th>
+                  <th style={tableStyle.th}>Bônus</th>
+                </tr>
               </thead>
 
               <tbody>

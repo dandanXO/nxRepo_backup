@@ -13,6 +13,7 @@ import {MobileTemplate} from './MobileTemplate';
 import {Notice} from './Notice';
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {environment} from "../../../../environments/environment";
+import {tcx} from "../../utils/tcx";
 
 const DailySignInContainer = styled.div`
   //margin: 5vw 0;
@@ -113,22 +114,22 @@ export const LevelList = ({
         const isReachLevel = numberValue === currentSelectedLevel
         const LevelButton = isReachLevel ? CurrentLevelButton : OtherLevelButton;
         const vipIcon = isReachLevel
-          ? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAaCAYAAADWm14/AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZGMjAzNDYwNkQ2MTExRUVBQTJEQ0Y1OUJCQjRDMDgxIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZGMjAzNDYxNkQ2MTExRUVBQTJEQ0Y1OUJCQjRDMDgxIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkYyMDM0NUU2RDYxMTFFRUFBMkRDRjU5QkJCNEMwODEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkYyMDM0NUY2RDYxMTFFRUFBMkRDRjU5QkJCNEMwODEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5vXV+dAAAB2klEQVR42sSWzytEURTHZwbDkB8ZCkmk7CTZ2CmSH7NQCmUj7CjEQuTXQlb2NghLpVjxL5DFLPzIPBSxYSbkx0KZ8T11pl6ve98v855Tn9675/4433e679zrTbx67JgXDIFefj8AayBudaF0jz1bBrOqdiuoAeOWv8RGBvJAFGRo/D8gCN6sLOaz8fVlguBkaaDU6mJ2BNyCmMAf4z7HBXyDKc2Go/dJ7rMtoA50gWoT87bBhqq9DnZMzKviGA1qAX6wB8JgH1yDVYOFikC/qt0HCgzmLIIbjnEKDkGABIyBbs1gSnGHzmIzIEfVzgcTOuNbwBLXjKS1UxwSEJJMapb4aaePCPwkIFcyp00WgwR8SjpjEv80yBL4KQujkjnPEv87FaIevOwKOh94o22Ce/ZVgAjI1BFdCT64TRt6EAyAcsH4ULISUkrnQYlgUAIc8U7vBMMGm20B3PFZ0SQZ8wjmwJa2FGeDJ80GS6V9gWJ+CgsRdVx6nDNFHVxWCc8dFBAxU4qdzMDVfwtQzAg4czMDoguJj//jgAMCCsGLUQbiIqUpsKg2uN594MKN9LstQLEiIOyAgBMrt2I/XxpqU/j19aKTV+9aHuQDo/EPfwSV3WOwIjuSfwUYADUVZgz5+9arAAAAAElFTkSuQmCC'
-          : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAATtJREFUOE+t008rRGEUx/HvL0RiZ2chZSE2Ulds5AWwsrC0mEkje1n5Ezt7k8YbUGzIK7AyKWLDRrG2oqZQjo7u1fQ09xpzPau7+J3Pvfec84h/OspyzGwAOAQMWJD0lJZPhcysDTgHpuJif56R9NkIy4I2gM2gaFXSbkMofvMocCfp3UNmNhl/TXtQ9AZEkm7jXCcwAtzIzE6AOeAR2AGOgSowlNKPa2AaWATWgH7gzKFXoKeuqAZ0/zLMMFNz6AKYyLkFVYf2gOWcUNmhAnCQEyo6NAZc5YTGHeoAXoCuFjFfid7vhTQzH3cUQKfxQvr18OPZLWA2yF1KihKoDJSCgE/TB1EPrTSY8L6kUgIVgUqLv7YkqZJAg8A94P36y/kAhiU9/FxaM5sHtoG+JqVnYF3SUdLAJuuyY1+4I2ifqehT2wAAAABJRU5ErkJggg==';
+          ? `assets/${environment.assetPrefix}/icon_vip_box_open.png`
+          : `assets/${environment.assetPrefix}/icon_vip_box_open.png`;
           return (
             <LevelButton
-              className={'mr-3'}
+              className={tcx('mr-3 p-2 text-3xl rounded-xl', ['p-1 pr-2 text-base rounded-lg', isMobile])}
               key={index}
               onClick={() => {
                 setCurrentSelectedLevel(numberValue);
               }}
             >
               <img
+                className='w-7 h-6'
                 alt={isReachLevel ?"king" : "lock"}
-                className={'mr-2'}
                 src={currentLevel >= numberValue
                   ? vipIcon
-                  : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAARlJREFUOE/t07ErhVEYx/HvV2wmZZT4GyjJIEySv8AkShlEMYmQQSluKZvNYJYJGVCsNiO7RSbRo1svvfd47/Xe3dnO8z7P57z9OkfqrIgYB5aBPiCAa2BLvSsasagYEUvALpB+/wCm1JN07hcUET3AI9AG3AB7QCuwAAwCr0Cv+pLHiqB54CAb6FKrg0REO/AEdGR/dfwXtAZsAPfqQL45Iq6AYWBR3S8L3apDCXQOjJWFpoEZ4EGdS6AK0A9U0sBrMoqI7izkerciX39Xn78LP1BE7AArZYRcz7q6Wd3noUtgpEnoTJ34hxqmVpjRBTDaZNin6mQa9iFQcwFLoNvqagp1AkfZC2/5A/kEqs9lVn2rgUqc3rDlC5IRchOtsAplAAAAAElFTkSuQmCC'
+                  : `assets/${environment.assetPrefix}/icon_vip_box_close.png`
                 }
               />
               <span className={'text-[#fff] font-bold'}>VIP{numberValue}</span>

@@ -24,18 +24,33 @@ const TabButton = styled.button<ITabButton>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  //height: 100%;
   cursor: pointer;
   width: 350px;
-  font-family: ERASBD;
   height: 56px;
   margin-right: 8px;
+  color: ${(props) =>
+    props.active
+    ? "rgba(22, 255, 143, 1)"
+    : "#fff"};
+
+  background: ${(props) =>
+    props.active
+      ? `url('assets/${environment.assetPrefix}/btn_invite_friend.png') center center no-repeat`
+      : ""};
+
+  @media (max-width: 768px) {
+    background: ${(props) =>
+        props.active
+            ? `url('assets/${environment.assetPrefix}/btn_invite_friend_h5.png') center center no-repeat`
+            : ""};
+  }
 `
 
 const TabTextConVidar = styled.div`
-  padding: 10px 45px;
-  color: #fff;
-  background: url("assets/${environment.assetPrefix}/btn_green01.png") center center no-repeat;
+  padding: 10px 30px;
+  //color: #fff;
+  //background: url("assets/${environment.assetPrefix}/btn_green01.png") center center no-repeat;
   //width: 150px;
   //height: 60px;
   //border-radius: 10px;
@@ -46,8 +61,8 @@ const TabTextConVidar = styled.div`
 
 const TabTextDados = styled.div`
   padding: 10px 30px;
-  color: #fff;
-  background: url("assets/${environment.assetPrefix}/icon_yellow.png") center center no-repeat;
+  //color: #fff;
+  //background: url("assets/${environment.assetPrefix}/icon_yellow.png") center center no-repeat;
   //width: 150px;
   //height: 60px;
   //border-radius: 10px;
@@ -61,7 +76,6 @@ export const QuestionContainer = styled.div`
   //background: rgba(9,11,15,.6);
   //border-radius: 20px;
   margin: 20px 0;
-  font-family: HelveticaNeue-Medium-11;
 `
 
 
@@ -121,13 +135,13 @@ export const InvitePage = () => {
           <TabButton active={panelMode === "howto"} onClick={() => {
             setPanelMode("howto")
           }}>
-            <TabTextConVidar className={"rounded-3xl text-sm font-bold"}>{isMobile ? "Convidar" :"Como convidar"}</TabTextConVidar>
+            <TabTextConVidar className={"text-sm font-bold"}>{isMobile ? "Convidar" :"Como convidar"}</TabTextConVidar>
           </TabButton>
 
           <TabButton active={panelMode === "daily"} onClick={() => {
             setPanelMode("daily")
           }}>
-            <TabTextDados className={"rounded-3xl text-sm font-bold"}>
+            <TabTextDados className={"text-sm font-bold"}>
               {isMobile ? "Dados diários" : "Convite diariamente"}
             </TabTextDados>
           </TabButton>

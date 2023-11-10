@@ -13,15 +13,16 @@ import {userLogout} from "../../usecase/userLogout";
 const CancelButton = styled.button`
   border-radius: 25px;
   font-size: 14px;
-  background: linear-gradient(180deg,#49524B 0%,#9CB7AA 100%);
-  box-shadow: 0 2px #303e32, inset 0 1px 3px rgba(255,255,255,.5);
+  //background: linear-gradient(180deg,#49524B 0%,#9CB7AA 100%);
+  background: #CFCFCF;
+  //box-shadow: 0 2px #303e32, inset 0 1px 3px rgba(255,255,255,.5);
   margin: 0 12px;
   letter-spacing: 0;
 `
 const ConfirmButton = styled.button`
   font-size: 14px;
-  background: linear-gradient(180deg,#00B125 0%,#00FE5A 99%);
-  box-shadow: 0 2px #036a02,inset 0 1px 3px rgba(255,255,255,.5)!important;
+  background: linear-gradient(180deg,#C8F568 0%,#16FF8F 99%);
+  //box-shadow: 0 2px #036a02,inset 0 1px 3px rgba(255,255,255,.5)!important;
   border-radius: 25px;
   margin: 0 12px;
   letter-spacing: 0;
@@ -53,10 +54,10 @@ export const LogoutSection = (props: ILogoutPopover) => {
 
   return (
     <div className={cx("flex flex-col", props.className)}>
-      <div className={"mb-2"}>Tem certeza que deseja sair?</div>
+      <div className={"mb-2 text-[#FBFF3F]"}>Tem certeza que deseja sair?</div>
       <div className={"flex flex-row justify-center"}>
-        <CancelButton className={"px-2 py-1"} onClick={onHandleCancel}>Cancelar</CancelButton>
-        <ConfirmButton className={"px-2 py-1"} onClick={onHandleLogout}>Confirme</ConfirmButton>
+        <CancelButton className={"px-2 py-1 text-[#ffffff]"} onClick={onHandleCancel}>Cancelar</CancelButton>
+        <ConfirmButton className={"px-2 py-1 text-[#047A70]"} onClick={onHandleLogout}>Confirme</ConfirmButton>
       </div>
     </div>
   )

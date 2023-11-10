@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import styled, {keyframes} from 'styled-components';
 
@@ -10,7 +10,7 @@ import {
 } from '../../../external';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { LevelList } from '../DailySignInPage';
-import {IRLevelButton} from './index';
+import {IRLevelButton, ProgressBar} from './index';
 import {useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {environment} from "../../../../environments/environment";
@@ -31,7 +31,7 @@ for (let i = 0; i <= 25; i += 1) {
 
 const ItemContainer = styled.div.attrs((props) => ({
   className: cx(
-    'rounded-xl px-4 py-2 mb-4 text-white text-lg',
+    'rounded-xl px-5 py-4 mb-3 text-white text-base',
     props.className
   ),
 }))`
@@ -45,9 +45,8 @@ const ItemContainer = styled.div.attrs((props) => ({
   //height: 1.2rem;
   //display: flex;
   //align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 0.12rem;
-  box-shadow: 0 1px 0 1px #fff;
+  background: var(--medium);
+  border-radius: 16px;
 `;
 
 const Container = styled.div`
@@ -105,29 +104,16 @@ const increment = (target: number) => keyframes`
   }
 `;
 
-const Progress = styled.div<{ progress: number }>`
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.5);
-  border-radius: 50px;
-  background-image: linear-gradient(270deg, #00bdff 0%, #7f06ff 100%);
-  height: inherit;
-  animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
+const VIPTitle = styled.button.attrs<{
+  className?: string;
+}>((props) => ({
+  className: props.className,
+}))`
+  background: -webkit-linear-gradient(-90deg, var(--dashboard-block3-gradient-from) 0%, var(--dashboard-block3-gradient-to) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 `;
-
-const ProgressBar = ({ progress }: { progress: number }) => {
-  return (
-    <div
-      className={
-        'relative mr-2 h-[30px] w-full flex-auto rounded-3xl bg-white bg-opacity-20 text-left leading-[30px]'
-      }
-    >
-      <Progress progress={progress > 1 ? 100 : progress * 100} />
-      <span className={'absolute left-4 top-0 text-white'}>
-        {progress > 1 ? '100' : (progress * 100).toFixed(2)}%
-      </span>
-    </div>
-  );
-};
-
 
 export const VIPGradeMobileTemplate = ({
   userVIPInfo,
@@ -169,7 +155,7 @@ export const VIPGradeMobileTemplate = ({
       {/*<img src={"assets/page_bg-9c716c35.jpg"}/>*/}
 
       <Container className={'p-4'}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom:'20px' }}>
           <div
             className={'text-left h-[37.5px] w-[37.5px]'}
             onClick={() => {
@@ -183,9 +169,9 @@ export const VIPGradeMobileTemplate = ({
             />
           </div>
 
-          <div className={'mb-2 text-center text-3xl font-bold text-white ml-[68px]'}>
+          <VIPTitle className={'mb-2 text-center text-xl font-bold ml-[100px]'}>
             Centro VIP
-          </div>
+          </VIPTitle>
 
         </div>
 
@@ -197,13 +183,81 @@ export const VIPGradeMobileTemplate = ({
           />
         </section>
 
-        <section className={'mb-4 text-center'}>
+        <section className={'mb-4'}>
           <section
             className={
-              'mb-4 text-center text-base text-2xl font-bold text-white'
+              'mb-4 text-center text-xl font-bold text-main-primary-main'
             }
           >
             — Distância próximo nível —
+          </section>
+
+          <ItemContainer className={'flex flex-col text-center'}>
+            <div className='mb-1'>
+              Quantidade total de recarga:{' '}
+              {userVIPInfo?.data?.vip_score
+                ? userVIPInfo?.data?.vip_score / 100
+                : 0}
+              /
+              {userVIPInfo?.data?.next_level_score
+                ? userVIPInfo?.data?.next_level_score / 100
+                : 0}
+            </div>
+
+            <div className={'progress-button flex flex-row items-center'}>
+              <ProgressBar
+                className='mr-2 h-6'
+                textClassName='right-2 top-[3px] text-sm'
+                progress={
+                  (userVIPInfo?.data?.vip_score || 0) /
+                  (userVIPInfo?.data?.next_level_score || 1)
+                }
+              />
+
+              <div className={'shrink-0'}>
+                <IRLevelButton className='text-base px-8 py-2' onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}>
+                  <span className={'text-[#247855] font-bold'}>IR</span>
+                </IRLevelButton>
+              </div>
+            </div>
+          </ItemContainer>
+
+          <ItemContainer className={'flex flex-col text-center'}>
+            <div className='mb-1'>
+              Número total de apostas:{' '}
+              {userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0}/
+              {userVIPInfo?.data?.next_level_flow
+                ? userVIPInfo?.data?.next_level_flow / 100
+                : 0}
+            </div>
+
+            <div className={'progress-button flex flex-row items-center'}>
+              <ProgressBar
+                className='mr-2 h-6'
+                textClassName='right-2 top-[3px] text-sm'
+                progress={
+                  userVIPInfo?.data?.flow_progress
+                    ? userVIPInfo?.data?.flow_progress / 100
+                    : 0
+                }
+              />
+
+              <div className={'shrink-0'}>
+                <IRLevelButton className='text-base px-8 py-2' onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>
+                  <span className={'text-[#247855] font-bold'}>IR</span>
+                </IRLevelButton>
+              </div>
+            </div>
+          </ItemContainer>
+        </section>
+
+        <section className={'mb-4 text-center'}>
+          <section
+            className={
+              'mb-4 text-center text-xl font-bold text-white'
+            }
+          >
+            — Privilégio —
           </section>
 
           {currentSelectedLevel >= 20 && (
@@ -223,143 +277,63 @@ export const VIPGradeMobileTemplate = ({
             </ItemContainer>
           )}
 
-          <ItemContainer className={'flex flex-row'}  style={{
-            background: `url('assets/${environment.assetPrefix}/Upgraderewards.png')`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right right',
-            color: 'white',
-            borderRadius: '10px',
-          }}>
-            <div>
-              Recompensa total de check-in de 7 dias: R${signBonus}
+          <ItemContainer className='flex justify-between'>
+            <img
+              className={'h-[43px] w-[70px]'}
+              alt={''}
+              src={`assets/${environment.assetPrefix}/icon_vip_context_2.png`}
+            />
+            <div className='flex flex-col justify-center text-right font-bold leading-5'>
+              <div>Recompensas de upgrade</div>
+              <div>de associação: R${signBonus}</div>
             </div>
           </ItemContainer>
 
 
-          <ItemContainer className="flex flex-row" style={{
-            background: `url('assets/${environment.assetPrefix}/Sign-inrewards.png')`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right right',
-            color: 'white',
-            borderRadius: '10px',
-          }}>
-            <div>
-              Recompensa total de check-in de 7 dias: R${signBonus}
+          <ItemContainer className="flex justify-between">
+            <img
+              className={'h-[43px] w-[70px]'}
+              alt={''}
+              src={`assets/${environment.assetPrefix}/icon_vip_context_1.png`}
+            />
+            <div className='flex flex-col justify-center text-right font-bold leading-5'>
+              <div>Recompensa total de</div>
+              <div>check-in de 7 dias: R${signBonus}</div>
             </div>
           </ItemContainer>
 
-
-
-
-          <ItemContainer className={'flex flex-row text-center'}>
-            <div>
-              {' '}
-              Limite máximo de retirada única : R$
-              {currentLevelInfo?.withdrawAmountLimitDay
-                ? `${currentLevelInfo?.withdrawAmountLimitDay / 100}`
-                : '0'}
-            </div>
+          <ItemContainer className='text-center font-bold'>
+            Limite máximo de retirada única : R$
+            {currentLevelInfo?.withdrawAmountLimitDay
+              ? `${currentLevelInfo?.withdrawAmountLimitDay / 100}`
+              : '0'}
           </ItemContainer>
 
-          <ItemContainer className={'flex flex-row text-center'}>
-            <div>
-              {' '}
-              Número de retiradas por dia:{' '}
-              {currentLevelInfo?.withdrawTimesLimitDay}
-            </div>
+          <ItemContainer className='text-center font-bold'>
+            Número de retiradas por dia:{' '}
+            {currentLevelInfo?.withdrawTimesLimitDay}
           </ItemContainer>
         </section>
 
         <section className={'mb-4'}>
-          <section className={'mb-4 text-center text-2xl font-bold text-white'}>
+          <section className={'mb-4 text-center text-xl font-bold text-white'}>
             — Condições do VIP atual —
           </section>
 
-          <ItemContainer className={'flex flex-row'}>
-            <div>
-              {' '}
-              Quantidade total de recarga : R$
-              {currentLevelInfo?.rechargeAmountLimit
-                ? `${currentLevelInfo?.rechargeAmountLimit / 100}`
-                : '0'}
+          <ItemContainer className='text-center font-bold'>
+            Quantidade total de recarga : R$
+            {currentLevelInfo?.rechargeAmountLimit
+              ? `${currentLevelInfo?.rechargeAmountLimit / 100}`
+              : '0'}<div>
+
             </div>
           </ItemContainer>
 
-          <ItemContainer className={'flex flex-row'}>
-            <div>
-              {' '}
-              Número total de apostas : R$
-              {currentLevelInfo?.flowLimit
-                ? `${currentLevelInfo?.flowLimit / 100}`
-                : '0'}
-            </div>
-          </ItemContainer>
-        </section>
-
-        <section className={'mb-4'}>
-          <section
-            className={
-              'mb-4 text-center text-base text-2xl font-bold text-[rgba(255,247,16,1)]'
-            }
-          >
-            — Distância próximo nível —
-          </section>
-
-          <ItemContainer className={'flex flex-col text-left'}>
-            <div>
-              {' '}
-              Quantidade total de recarga:{' '}
-              {userVIPInfo?.data?.vip_score
-                ? userVIPInfo?.data?.vip_score / 100
-                : 0}
-              /
-              {userVIPInfo?.data?.next_level_score
-                ? userVIPInfo?.data?.next_level_score / 100
-                : 0}
-            </div>
-
-            <div className={'progress-button flex flex-row items-center'}>
-              <ProgressBar
-                progress={
-                  userVIPInfo?.data?.vip_score ||
-                  0 / (userVIPInfo?.data?.next_level_score || 1)
-                }
-              />
-
-              <div className={'shrink-0'}>
-                <IRLevelButton>
-                  <span className={'text-[#247855] font-bold'}>IR</span>
-                </IRLevelButton>
-              </div>
-            </div>
-          </ItemContainer>
-
-          <ItemContainer className={'flex flex-col text-left'}>
-            <div>
-              Número total de apostas:{' '}
-              {userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0}/
-              {userVIPInfo?.data?.next_level_flow
-                ? userVIPInfo?.data?.next_level_flow / 100
-                : 0}
-            </div>
-
-            <div className={'progress-button flex flex-row items-center'}>
-              <ProgressBar
-                progress={
-                  userVIPInfo?.data?.flow_progress
-                    ? userVIPInfo?.data?.flow_progress / 100
-                    : 0
-                }
-              />
-
-              <div className={'shrink-0'}>
-                <IRLevelButton>
-                  <span className={'text-[#247855] font-bold'}>IR</span>
-                </IRLevelButton>
-              </div>
-            </div>
+          <ItemContainer className='text-center font-bold'>
+            Número total de apostas : R$
+            {currentLevelInfo?.flowLimit
+              ? `${currentLevelInfo?.flowLimit / 100}`
+              : '0'}
           </ItemContainer>
         </section>
       </Container>

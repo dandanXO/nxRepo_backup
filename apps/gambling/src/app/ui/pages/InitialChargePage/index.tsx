@@ -4,30 +4,48 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {Bonus} from "../../components/Bonus";
 import {ChargeButton} from "../../components/ChargeButton";
 import {environment} from "../../../../environments/environment";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 
 export const InitialChargePage = () => {
   const navigate = useNavigate();
+  const {isMobile} = useBreakpoint();
 
   return (
     <>
-
-      <div className={"px-0 sm:px-10 w-full"}>
-
-        <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8 mt-4"}>
-          <img className="w-full" src={`assets/${environment.assetPrefix}/banner.png`}/>
-          <div className={"mt-5 xl:mt-20 absolute left-[40px] top-0 text-white"}>
-            <div className={"md:text-4xl mb-4 text-xl"}>Primeiro depósito</div>
-            <Bonus className={"md:text-4xl"}>+ bônus de 20%</Bonus>
-          </div>
+        <div className={"px-0 sm:px-10 w-full"}>
+          <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8 mt-4"}>
+            {isMobile ? (
+                <>
+                  <img className="w-full" src={`assets/${environment.assetPrefix}/h5_banner_1.png`}/>
+                  <div className={"mt-5 xl:mt-20 absolute left-[22px] top-[18px] text-white"}>
+                    <div className={"text-3xl text-[rgba(255,239,1)]"}>Primeiro depósito</div>
+                    <div className={"text-3xl text-[rgba(255,239,1)]"}>+ bônus de 20%</div>
+                  </div>
+                </>
+            ) : (
+                <>
+                  <img className="w-full" src={`assets/${environment.assetPrefix}/banner1.png`}/>
+                  <div className={"mt-5 xl:mt-20 absolute left-[30%] top-[5%] transform translate(-50%, -50%) text-white text-center"}>
+                    <div className={"text-8xl text-[rgba(255,239,1)]"} >Primeiro depósito</div>
+                    <div className={"text-8xl text-[rgba(255,239,1)]"}>+ bônus de 20%</div>
+                  </div>
+                </>
+         )}
         </section>
 
         <section className={"px-2 sm:px-0"}>
-          <section className={"text-white text-lg text-left mb-8 ml-3"}>
+          <section className={"text-white text-lg text-left ml-3"}>
             Lembrete caloroso, certifique-se de que seu nome, número de telefone celular e número de conta CPF são únicos. Se o mesmo usuário registrar várias contas para receber bônus em dinheiro, consideraremos isso uma trapaça. Se isso acontecer, a conta relevante será permanentemente congelada. Nós não compensará as perdas causadas por trapaça!
           </section>
 
-          <VIPBorderStyleContainer className={"flex flex-col text-left text-white items-start text-lg"}>
+          <section className={"flex justify-center items-center"}>
+            <ChargeButton onClick={() => {
+              navigate(PageOrModalPathEnum.WalletPage);
+            }} className={"text-white text-lg font-bold"}>Recarrague agora</ChargeButton>
+          </section>
+
+          <div className={"p-4 rounded-lg flex flex-col text-left text-white items-start text-lg bg-[rgba(1,79,75,0.6)] border border-solid border-green-500 mb-8"}>
             <div className={"text-left w-full"}>Bônus de 20% para o primeiro depósito</div>
             <div className={"text-left w-full"}>Obrigado pela confiança e apoio. Para sua primeira recarga, oferecemos um bônus de recarga de até 20%! As recompensas serão transferidas diretamente para sua conta após a recarga.</div>
             <div className={"text-left w-full"}>Detalhes do evento:</div>
@@ -39,13 +57,7 @@ export const InitialChargePage = () => {
               <li>5. O direito de interpretação final das atividades da plataforma pertence ao SKY Group (propriedade do {environment.platformName})</li>
             </ul>
 
-          </VIPBorderStyleContainer>
-
-          <section className={"flex justify-center items-center"}>
-            <ChargeButton onClick={() => {
-              navigate(PageOrModalPathEnum.WalletPage);
-            }} className={"text-white text-lg"}>Recarrague agora</ChargeButton>
-          </section>
+          </div>
 
         </section>
 

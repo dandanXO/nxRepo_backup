@@ -54,20 +54,36 @@ export type IUserForgetPasswordForm = {
 }
 
 const SendSMSCodeButton = styled.button`
-  width: 88px;
-  height: 30px;
-  background: linear-gradient(58deg,#FFA305 0%,#FFCC5A 100%);
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin-top: -3px;
+  position: absolute;
+  width: 70px;
+  height: 53px;
+  background: #16FF8F;
+  border-radius: 0 25px 25px 0; /* 左侧半径为0，其他圆角为25px */
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // cursor: pointer;
+  // margin-top: -3px;
 `
+
 
 export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
   const {isMobile} = useBreakpoint();
   const Input = isMobile ? MobileInput : DesktopInput;
+
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const toggleCheck = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [password, setPassword] = useState('');
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   // NOTO: 2023101601 / test1234
   // refactor:
@@ -181,20 +197,10 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           onValidatePhoneInput(event.target.value, setPhoneInput)
        }}
       />
-
+      <div style={{ position: 'relative' }}>
       <Input
         type={"text"}
         prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        suffix={<SendSMSCodeButton onClick={() => {
-          if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
-            triggerSendForgetPasswordSMSCode({
-              appPackageName: environment.appPackageName,
-              deviceId: AppLocalStorage.getItem("deviceId") || "",
-              phone: phoneInput.data,
-              verifyType: 1
-            });
-          }
-        }}>Enviar</SendSMSCodeButton>}
         placeholder={"Código de verificação"}
         value={captchaInput.data}
         validation={captchaInput.isValidation}
@@ -203,9 +209,23 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           onValidateCaptchaInput(event.target.value, setCaptchaInput);
         }}
       />
+        <div className={'w-[330px]'}>
+      <SendSMSCodeButton  style={{ position: 'absolute',right: '0px', top: '0', zIndex: '1',fontWeight: 'bold' }} onClick={() => {
+        if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
+          triggerSendForgetPasswordSMSCode({
+            appPackageName: environment.appPackageName,
+            deviceId: AppLocalStorage.getItem("deviceId") || "",
+            phone: phoneInput.data,
+            verifyType: 1
+          });
+        }
+      }}>Enviar</SendSMSCodeButton>
+        </div>
+      </div>
 
+      <div style={{ position: 'relative' }}>
       <Input
-        type={"password"}
+        type={isPasswordVisible ? 'text' : 'password'}
         prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         placeholder={"Senha (4-12 letras e números)"}
         value={passwordInput.data}
@@ -228,11 +248,23 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
 
         }}
       />
+        <div
+            className="password-toggle"
+            style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
+            onClick={togglePasswordVisibility}
+        >
+          {isPasswordVisible ? (
+              <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
+          ) : (
+              <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+          )}
+        </div>
+      </div>
 
       <section className={"flex flex-col"}>
         <ConfirmButton
           onClick={() => onFormConfirm()}
-          style={{width: "100%", height: 50}}>Entrar</ConfirmButton>
+          style={{width: "100%", height: 50, fontWeight: "bold"}}>Entrar</ConfirmButton>
       </section>
 
     </section>

@@ -8,7 +8,7 @@ import {environment} from "../../../../environments/environment";
 const Container = styled.div`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/${environment.assetPrefix}/pop1.c6814210.png);
+  background-image: url(assets/${environment.assetPrefix}/ad_bg_2.png);
   background-size: 100% auto;
   border-radius: 20px;
   padding: 20px 24px;
@@ -18,17 +18,16 @@ const ModalTitle = styled.div`
   margin: 162px 0 20px;
   text-align: center;
   font-size: 32px;
-  color: #fff;
+  //background: linear-gradient(180deg,#D071FD 0%,#003BC6 100%);
   line-height: 26px;
-  text-shadow: 0px 3px 0px #0461D6;
-  font-family: Roboto, sans-serif;
+  //text-shadow: 0px 3px 0px #0461D6;
 `
 
 const ModalButton = styled.button`
   width: 169px;
   height: 40px;
   border-radius: 25px;
-  background: linear-gradient(180deg,#1D3CFF 0%,#0B96FF 100%);
+  background: linear-gradient(180deg,#56F0D6 0%,#8499FD 100%);
   //position: absolute;
   //bottom: 34px;
   //left: 50%;
@@ -38,7 +37,6 @@ const ModalButton = styled.button`
   align-items: center;
   color: #fff;
   font-size: 16px;
-  font-family: HelveticaNeue-Bold-02;
 `
 
 export type ITelegramContactModal = {
@@ -69,16 +67,20 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
 
         <div className={"flex flex-col"}>
           <div className={"mb-4 mt-3"}>
-            <ModalTitle className={"mt-4"}>Junte-se a nós</ModalTitle>
-            <div className={"text-white text-center text-sm"}>
+            <ModalTitle className="mt-4" style={{
+              background: 'linear-gradient(180deg, #D071FD 0%, #003BC6 100%)',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent',
+            }}>Junte-se a nós</ModalTitle>
+            <div className={"text-[#003BC6] text-center text-sm"}>
               Prezados clientes VIP, juntem-se ao nosso canal oficial do Telegram. Realizaremos vários eventos de loteria de tempos em tempos. Dezenas de milhares de reais estão esperando por você para reivindicar.
             </div>
           </div>
 
           <div className={"flex flex-col justify-center items-center"}>
             <ModalButton onClick={() => props.toTelegram() }>
-              <img alt={"telegram"} className="w-[14px] h-[10px] mr-4" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA6CAMAAAAz+392AAAApVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+4/eNVAAAANnRSTlMA+gbpCsZVHhrjwJyFKhT38YoO7diwpndoS0VA27qsln8u9LShdHBsYVs7NiPS0MqQUDLevNQ7eFNdAAACGElEQVRIx63W13KrQBAE0AEUSMoJlHOWLdm+/f+fdmURDOwuIyyfR1FQYnqrGXpFdW6XNy/cr99WGu4G9Eu1loHAmH6jtLcRa1BxH7MmEgwqqL17Q5pNhYz6DWS1CtxvDsaQqDwdod/TIFWlp5xdCwrGUxEevpDSaJ16iKyItbh2kFau0enntzkXofeOjKZHNEwcDJ/yHNdLZPVMokoy2Top1TddCKzvBD0kfJLKcCqLcNa+X5ojqa+qAWmE3SPdzZAiqwu9MoGM5urfV/tIG+XUgJjkXSn7eK2UrYEy5Jq7YMRCxBdKOjlx2mKSwYzEjJxEhNsLVIxK+JKSIXtxhEENyDn18KB1IPoIJrD9hFo3Grm/hKihP/7eGGqaG038oElzelz7B7XygkJbSF0fF7uAOsmIC7lDMGfVWVj9NJoDhXNUKu5FkWSg1INCJ9mNg7KQZKRtQ2WSqXhvEg99PEocujcouWLNHabLMMnYOS/zm7StfedrkSxfCzlM4o06yGER79ZAnimx9hpy8fvNAIwhu4uB02aXGTC6xBmCsSZOBYwdcTwwTi8HounEaTGPeCeWE3dPRXrMZ8SaItDTqSprtj2xwqaZPr7GkreqESuomn44NN/IljPxrPTxMe3ie/Py8dVNcIvuzbo49KFRbG82gavwm11obzbXPonmGrc380aGsOkVVg/WrSO9YmtB29CLqm36W/8BYjhU0q0V+48AAAAASUVORK5CYII="}/>
-              <span>Junte-se</span>
+              {/*<img alt={"telegram"} className="w-[14px] h-[10px] mr-4"/>*/}
+              <span className={"font-bold"}>Junte-se</span>
             </ModalButton>
           </div>
         </div>

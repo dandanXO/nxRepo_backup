@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import { ScrollTab } from "../../components/ScrollTab";
+import { environment } from "apps/gambling-dashboard/src/environments/environment";
 
 
 export type TTotalFavoriteLocalState = {
@@ -99,7 +100,7 @@ export const IndexPage = () => {
   return (
     <>
       <div className={cx("w-full", {
-        "w-[calc(100vw-400px)] ml-20": !isMobile,
+        "w-[calc(100vw-265px)] ml-20": !isMobile,
         "p-4": !isMobile,
       })}>
 
@@ -113,8 +114,8 @@ export const IndexPage = () => {
             return <GameTypeSectionList key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClick={()=>navigate(PageOrModalPathEnum.IndexSlotPage)} />
           })
         ) : (
-            <section className={"flex flex-col bg-[rgba(255,255,255,.1)] ml-20 p-4 rounded-lg w-[calc(88.6vw-265px)]"}>
-              <section className={"mb-4 flex flex-row items-center px-4 w-full"}>
+            <section className="flex flex-col bg-[rgba(1,62,66,0.6)] ml-20 p-4 rounded-lg w-[calc(88.6vw-265px)]" style={{ border: '1px solid #2CFD99' }}>
+            <section className="mb-4 flex flex-row items-center px-4 w-full" style={{borderBottom: '1px solid rgb(44, 253, 153)'}}>
                 <div className="min-w-[100px] mr-2">
                   <ScrollTab className="mx-4">
                     <Tabs className={"game-type-tab-list  "}>
@@ -136,8 +137,8 @@ export const IndexPage = () => {
                     </Tabs>
                   </ScrollTab>
                 </div>
-                <div className="shirnk-0 basis-[200px]">
-                  <Input className="items-baseline flex-1" prefix={<SearchOutlined className={"text-white text-lg mr-2"} placeholder={"Pesquisar nome do jogo"} />}
+                <div className="shirnk-0 basis-[450px]">
+                  <Input className="bg-[#069D5C] items-baseline flex-1" prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
                     onChange={(event: any) => {
                       setSearchInput(event.target.value)
                     }}

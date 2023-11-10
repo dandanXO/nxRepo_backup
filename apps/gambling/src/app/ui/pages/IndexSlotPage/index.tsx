@@ -7,7 +7,7 @@ import { GameTypeSectionList } from "../../components/GameTypeSection";
 import { MockSlot } from "../../components/GameTypeSection/mock/MockSlot";
 import { LeftSquareOutlined, RightSquareOutlined, SearchOutlined } from "@ant-design/icons";
 import { Input } from "../../components/Input";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLazyGetGameListQuery } from "../../../external";
 import { GetGameListResponseData } from "../../../external/GetGameListEndpoint";
 import { useSelector } from "react-redux";
@@ -77,12 +77,35 @@ export const IndexSlotPage = () => {
       }) :
       renderTypeGameList()
   }
+
+  const [initialPageX, setInitialPageX] = useState(0);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  const handleMouseDown = (e: any) => {
+    setInitialPageX(e.pageX);
+  };
+
+  const handleMouseUp = (e: any) => {
+    setInitialPageX(0);
+  };
+
+  const handleMouseMove = (e: any) => {
+    if (initialPageX !== 0 && contentRef.current !== null) {
+      const leftOrRight = initialPageX - e.pageX;
+      contentRef.current.scrollLeft += leftOrRight;
+      setInitialPageX(e.pageX);
+    }
+  };
+
+
   return (
     <>
       {isMobile ? (
-        <div className={"px-4 bg-[#090D0F] sticky top-[52.5px] left-0 right-0 z-20"}>
+        <div className={"px-4 bg-[rgba(1,62,66,0.1)] sticky top-[52.5px] left-0 right-0 z-20"}>
+        <div>
           <ScrollTab>
-          <Tabs className={"game-type-tab-list bg-[black]"}>
+          <section className={"mb-4 flex flex-row items-center px-4 mt-3"}>
+          <Tabs className={"game-type-tab-list"}>
             <TabItem key="Salão" name={"Salão"} active={activeTab === "Salão"} onClick={() => setActiveTab("Salão")} />
             <>
               {label!==undefined && [...label, 'Favoritos'].map((tab: string, index: number) => {
@@ -96,8 +119,11 @@ export const IndexSlotPage = () => {
               })}
             </>
           </Tabs>
+          </section>
           </ScrollTab>
         </div>
+        </div>
+
       ) : (
         <section className={"mb-4 flex flex-row items-center px-4"}>
           <Tabs className={"game-type-tab-list mr-4"}>

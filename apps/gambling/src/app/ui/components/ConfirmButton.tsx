@@ -5,7 +5,7 @@ export const ConfirmButton = styled.div`
 
   width: 140px;
   height: 40px;
-  background: linear-gradient(180deg,#E9FE52 0%,#00FE5A 99%);
+  background: linear-gradient(180deg,#C8F568 0%,#16FF8F 100%);
   box-shadow: 0 2px #036a02, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 25px;
   display: flex;
@@ -13,7 +13,7 @@ export const ConfirmButton = styled.div`
   align-items: center;
   margin-right: 118px;
   cursor: pointer;
-  text-shadow: 0 1px 3px #036A02;
+  //text-shadow: 0 1px 3px #036A02;
   transition: all .1s ease-in-out;
   font-size: 18px;
 

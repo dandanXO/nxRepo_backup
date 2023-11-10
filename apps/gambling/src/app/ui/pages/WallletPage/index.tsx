@@ -1,68 +1,33 @@
 import styled from "styled-components";
-import {TabItem, Tabs} from "../../components/TabItem";
-import {useEffect, useState} from "react";
+import { TabItem, Tabs } from "../../components/TabItem";
+import { useEffect, useState } from "react";
 import cx from "classnames";
-import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
+import { useNavigate } from "react-router";
+import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {LeftOutlined} from "@ant-design/icons";
-import {DepositPanel} from "./DepositPanel";
-import {WithdrawPanel} from "./WithdrawPanel";
-import {RecordPanel} from "./RecordPanel";
-import {useGetRechargeMutation, useGetWithdrawLimitMutation} from "../../../external";
-import {AppLocalStorage} from "../../../persistant/localstorage";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../reduxStore";
+import { LeftOutlined } from "@ant-design/icons";
+import { DepositPanel } from "./DepositPanel";
+import { WithdrawPanel } from "./WithdrawPanel";
+import { RecordPanel } from "./RecordPanel";
+import { useGetRechargeMutation, useGetWithdrawLimitMutation } from "../../../external";
+import { AppLocalStorage } from "../../../persistant/localstorage";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reduxStore";
 
-import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
-import {IUserStore} from "../../../gateway/socket";
+import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
+import { IUserStore } from "../../../gateway/socket";
 import {
   accountPromotedSwingSelector, accountPromotedWithdrawableSelector,
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
+import { useAutoUpdateBalance } from "../../hooks/useAutoUpdateBalance";
+import { tcx } from "../../utils/tcx";
+import {TotalSectionContainer} from "./TotalSectionContainer";
 
-const TotalSectionContainer = styled.div`
-  background: rgba(255,255,255,.1);
-  border-radius: 19px;
-  border: 1px solid rgba(255,255,255,.5);
-`
 
-const TotalSectionTopContent = styled.div`
-  background: linear-gradient(180deg,#4CA7FF 0%,#256EFF 100%);
-  border-radius: 19px;
-  border: 1px solid rgba(255,255,255,.3);
-`
 
-const TotalSectionBottomContent = styled.div`
 
-`
-
-const StyledDepositSectionNotice = styled.div`
-  //background: linear-gradient(90deg,rgba(9,11,15,.16) 0%,rgba(247,186,23,.16) 54%,rgba(9,11,15,.16) 100%);
-  //style={{ color: '#00718c', fontFamily: 'myriadpro-bold' }}
-  color: #ffffff;
-  margin-bottom: 16px;
-  padding: 6px 10px;
-  text-align: left;
-  line-height: 18px;
-`
-export const DepositSectionNotice = (props: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
-  const {isMobile} = useBreakpoint();
-  return (
-    <StyledDepositSectionNotice
-      className={cx(props.className,{
-
-      })}
-    >
-      {props.children}
-    </StyledDepositSectionNotice>
-  )
-}
 
 
 export const DepositConfirmButton = styled.div`
@@ -80,7 +45,7 @@ export const DepositConfirmButton = styled.div`
 `;
 
 
-const StyledRecordButton = styled.button.attrs<{className?: string;}>((props) => ({
+const StyledRecordButton = styled.button.attrs<{ className?: string; }>((props) => ({
   className: cx(props.className, "text-transparent"),
 }))`
   width: 115px;
@@ -96,7 +61,6 @@ const StyledRecordButton = styled.button.attrs<{className?: string;}>((props) =>
 
   letter-spacing: 0;
   font-size: 16px;
-  font-family: HelveticaNeue-Bold-02;
 
 `
 
@@ -125,16 +89,17 @@ export const RecordButton = (props: IRecordButton) => {
       }}
     >
       <div
-        className={cx(props.className, "text-[#fff]",{
-          "text-transparent": props.active || hover,
+        className={cx(props.className, "text-white", {
+          // "text-transparent": props.active || hover,
           "font-bold": props.active || hover,
           "font-medium": props.active || hover,
+          "border-b-[1px] border-main-secondary-main ": props.active,
+          "text-main-secondary-main": props.active || hover,
         })}
       >{props.children}</div>
     </StyledRecordButton>
   )
 }
-
 
 export const ViewButton = styled.div`
   width: 60px;
@@ -152,20 +117,20 @@ export const WallletPage = () => {
 
   useAllowLoginRouterRules();
 
-  const {updateBalance} = useAutoUpdateBalance();
+  const { updateBalance } = useAutoUpdateBalance();
 
 
   const [panelMode, setPanelMode] = useState<"deposit" | "withdraw" | "record">("deposit");
 
 
   const navigate = useNavigate();
-  const {isMobile} = useBreakpoint();
+  const { isMobile } = useBreakpoint();
 
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
   useEffect(() => {
-      if (panelMode === "deposit") {
-          triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem("token") || '' })
-      }
+    if (panelMode === "deposit") {
+      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem("token") || '' })
+    }
   }, [panelMode])
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)
 
@@ -184,120 +149,66 @@ export const WallletPage = () => {
 
   return (
     <>
-      {/*<div className={"pb-[100px]"}>*/}
+      {isMobile && (
+        <div className={"pt-4 px-4 pb-4 bg-main sticky top-0 left-0 right-0 z-20 flex flex-col justify-start items-start"}>
+          <LeftOutlined className={"mb-4 text-white"} onClick={() => {
+            navigate(PageOrModalPathEnum.MyPage);
+          }} />
 
-        {isMobile && (
-          <div className={"px-4 bg-[#294E3B] sticky top-0 left-0 right-0 z-20 flex flex-row justify-start items-center"}>
-
-            <LeftOutlined className={"mr-4 text-white text-base"} onClick={() => {
-              navigate(PageOrModalPathEnum.MyPage);
-            }}/>
-
-            <div className={"py-2 w-full"}>
-              <Tabs className={"game-type-tab-list bg-[black] w-full"}>
-                <TabItem className="flex-1" name={"Depósito"} active={panelMode === "deposit"} onClick={() => {
-                  setPanelMode("deposit")
-                }}/>
-                <TabItem className="flex-1" name={"Retirar"} active={panelMode === "withdraw"} onClick={() => {
-                  setPanelMode("withdraw")
-                }}/>
-                <TabItem className="flex-1" name={"Registro"} active={panelMode === "record"} onClick={() => {
-                  setPanelMode("record")
-                }}/>
-              </Tabs>
-            </div>
+          <div className={"w-full"}>
+            <Tabs className={"game-type-tab-list w-full"}>
+              <TabItem pureColor={true} className="flex-1 mr-2" size="small" name={"Depósito"} active={panelMode === "deposit"} onClick={() => {
+                setPanelMode("deposit")
+              }} />
+              <TabItem pureColor={true} className="flex-1 mr-2" size="small"  name={"Retirar"} active={panelMode === "withdraw"} onClick={() => {
+                setPanelMode("withdraw")
+              }} />
+              <TabItem pureColor={true} className="flex-1 mr-2" size="small"  name={"Registro"} active={panelMode === "record"} onClick={() => {
+                setPanelMode("record")
+              }} />
+            </Tabs>
           </div>
+        </div>
+      )}
+
+      <div className={"p-4 md:p-8"}>
+        {!isMobile && (
+          <TotalSectionContainer/>
         )}
 
-        <div className={"p-2 md:p-8"}>
-          {!isMobile && (
-            <TotalSectionContainer className={"flex flex-col min-h-[250px] text-white mb-6"}>
-
-              <TotalSectionTopContent className={"flex-1 flex flex-row justify-between items-center px-16"}>
-
-                <div className={"flex-1 text-3xl"}>Total Da Conta</div>
-
-                <div className={"flex-1 flex flex-col justify-center items-center"}>
-                  <div className={"flex flex-col text-2xl"}>{totalBalanceSheetValue}</div>
-                  <div className={"flex flex-col text-2xl"}>Balanço Total</div>
-                </div>
-
-                <div className={"flex-1 flex flex-col justify-center items-center"}>
-                  <div className={"flex flex-col text-2xl"}>{totalReasableValue}</div>
-                  <div className={"flex flex-col text-2xl"}>Retirável Total</div>
-                </div>
-              </TotalSectionTopContent>
-
-              <TotalSectionBottomContent className={"flex-1 flex flex-row justify-between items-center px-6"}>
-
-                <div className={"text-xl mr-2"}>
-                  <div>Depositar conta</div>
-                  <div>(Atividade)</div>
-                </div>
-
-                <div className={"flex-1 flex flex-col justify-center items-center mr-2"}>
-                  <div className={"flex flex-col text-base"}>{totalBalanceSheetValue - 0}</div>
-                  <div className={"flex flex-col text-base"}>Balanço</div>
-                </div>
-
-                <div className={"flex-1 flex flex-col justify-center items-center mr-2"}>
-                  <div className={"flex flex-col text-base"}>{totalReasableValue - 0}</div>
-                  <div className={"flex flex-col text-base"}>Retirável</div>
-                </div>
-
-                <div className={"mr-16"}/>
-
-                <div className={"text-xl"}>
-                  <div>Conta </div>
-                  <div>Promovida</div>
-                </div>
-
-                <div className={"flex-1 flex flex-col justify-center items-center mr-2"}>
-                  <div className={"flex flex-col text-base"}>{accountPromotedSwingValue}</div>
-                  <div className={"flex flex-col text-base"}>Balanço</div>
-                </div>
-
-                <div className={"flex-1 flex flex-col justify-center items-center"}>
-                  <div className={"flex flex-col text-base"}>{accountPromotedWithdrawableValue}</div>
-                  <div className={"flex flex-col text-base"}>Retirável</div>
-                </div>
-              </TotalSectionBottomContent>
-
-            </TotalSectionContainer>
-          )}
-
-          {!isMobile && (
-            <section id={"tab-item"}>
-              <Tabs className={"game-type-tab-list"}>
-                <TabItem name={"Depósito"} active={panelMode === "deposit"} size={"big"} onClick={() => {
-                  setPanelMode("deposit")
-                }}
-                />
-                <TabItem name={"Retirar"} active={panelMode === "withdraw"} size={"big"} onClick={() => {
-                  setPanelMode("withdraw")
-                }}/>
-                <TabItem name={"Registro"} active={panelMode === "record"} size={"big"} onClick={() => {
-                  setPanelMode("record")
-                }}/>
-              </Tabs>
-            </section>
-          )}
+        {!isMobile && (
+          <section id={"tab-item"}>
+            <Tabs className={"game-type-tab-list"}>
+              <TabItem pureColor={true} className="mr-3" name={"Depósito"} active={panelMode === "deposit"} size={"big"} onClick={() => {
+                setPanelMode("deposit")
+              }}
+              />
+              <TabItem pureColor={true} className="mr-3" name={"Retirar"} active={panelMode === "withdraw"} size={"big"} onClick={() => {
+                setPanelMode("withdraw")
+              }} />
+              <TabItem pureColor={true} className="mr-3" name={"Registro"} active={panelMode === "record"} size={"big"} onClick={() => {
+                setPanelMode("record")
+              }} />
+            </Tabs>
+          </section>
+        )}
+        <div className={tcx("",
+          [`p-8 border border-solid border-main-primary-main lg:p-14 mt-10 bg-[var(--game-block)] rounded-2xl `, !isMobile]
+        )}>
 
           {panelMode === "deposit" ? (
-            <DepositPanel data={rechargeData?.data}/>
-          ): panelMode === "withdraw" ? (
+            <DepositPanel data={rechargeData?.data} />
+          ) : panelMode === "withdraw" ? (
             <WithdrawPanel onClickToWithdrawRecord={() => {
               setPanelMode("record");
               setRecordPanelMode("withdraw");
-            }}/>
+            }} />
           ) : (
-            <RecordPanel recordPanelMode={recordPanelMode}/>
+            <RecordPanel recordPanelMode={recordPanelMode} />
           )}
-
         </div>
 
-      {/*</div>*/}
-
+      </div>
 
     </>
   )

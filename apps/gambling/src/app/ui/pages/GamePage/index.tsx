@@ -34,7 +34,6 @@ export const GamePage = () => {
     useAllowLoginRouterRules();
     const location = useLocation();
     const { gameId, label } = queryString.parse(location.search) as { gameId: string, label: string };
-
     const [triggerStartGame, { data, isLoading, isSuccess, isError }] = useStartGameMutation();
     // const urlParam = {
     //     "Fishing": "jiligames",
@@ -54,6 +53,8 @@ export const GamePage = () => {
         return "jiligames"
       } else if(30000 < gameId && gameId < 40000) {
         return "pg";
+      } else if(40000 < gameId && gameId < 50000) {
+        return "zfgames";
       } else {
         return null;
       }

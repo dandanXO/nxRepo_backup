@@ -93,25 +93,26 @@ export const RecordPanelDeposit = () => {
       <Table columns={tableColumns} dataSource={records} fetchData={handleFetchData} dataCount={Number(depositRecordData?.page?.count)}/>
     </DragScrollContainer>
   )
+
   return (
     <div className="h-[25vh] overflow-x-auto">
       <table className="table-zebra relative table w-full">
         {/* head */}
         <thead className="sticky top-0">
           <tr>
-            <th>identificador</th>
+            <th className="text-center">ID da ordem</th>
             <th className="text-center">Valor</th>
-            <th className="text-center">Bônus</th>
-            <th className="text-center">Método De Depósito</th>
+            <th className="text-center">Valor do bônus</th>
+            <th className="text-center">Modelo</th>
             <th className="text-center">Estado Do Depósito</th>
             <th className="text-center">Tempo</th>
           </tr>
         </thead>
 
         <tbody>
-          {records.map((record) => (
+          {records !== undefined && records.length > 0 ?records.map((record) => (
             <tr key={record.id}>
-              <td className={'flex flex-row'}>
+              <td className={'flex flex-row justify-center'}>
                 <span>{record.pay_serial_no}</span>
                 <span>
                   <button>
@@ -135,7 +136,15 @@ export const RecordPanelDeposit = () => {
               <td className="text-center">{DepositStatusMap[record.status]}</td>
               <td className="text-center">{record.created_at}</td>
             </tr>
-          ))}
+          )):(<tr>
+              <td colSpan={6}>
+                <div className="flex flex-col items-center p-14" style={{backgroundColor:'#006D79'}}>
+                  <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
+                  <div>Nothing here</div>
+                </div>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

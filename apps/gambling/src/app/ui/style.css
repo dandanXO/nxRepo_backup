@@ -2,39 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html,
 body,
 #root {
   height: 100%;
+  font-family:  -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 }
 
 body {
   user-select: none;
 }
-/* scrollbar */
-/* Works on Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(170, 170, 170,0.6);
-}
 
-/* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 3px;
-  height: 10px;
-  background: transparent;
+#root {
+  text-align: center;
+  color: var(--primary);
+  height: 100%;
+  /*min-height: 100vh;*/
+  min-height: 100%;
   position: relative;
+  z-index: 1;
+  background: #145F55
+  /*背景色*/
 }
-*::-webkit-scrollbar-track {
-  background: transparent;
-  position: absolute;
-  top:0;
-  right: 0;
-}
-*::-webkit-scrollbar-thumb {
-  background: rgba(170, 170, 170,0.6);
 
-}
 
 /* loading 骨架屏 */
 .skeleton {
@@ -75,19 +66,6 @@ body {
   }
 }
 
-
-#root {
-  font-family:  -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
-  text-align: center;
-  color: #28583C;
-  height: 100%;
-  /*min-height: 100vh;*/
-  min-height: 100%;
-  position: relative;
-  z-index: 1;
-  /*background: #08170A*/
-  /*背景色*/
-}
 
 
 
@@ -152,18 +130,19 @@ body {
   border: 1px solid rgba(255,255,255,.3);
 }
 
-
+.ant-picker-input input {
+  color: var(--white);
+}
 .table th {
-  background: rgba(255,255,255,.1);
+  text-transform: none;
+  background: var(--table-main);
 }
 .table :where(tbody th, tbody td) {
-  background: rgba(255,255,255,.05);
+  background: var(--table-varient);
 }
 
 .table-zebra tbody tr:nth-child(even) td {
-  /*--tw-bg-opacity: 1;*/
-  /*background-color: hsl(var(--b1) / var(--tw-bg-opacity));*/
-  background: rgba(255,255,255,.1);
+  background: var(--table-main);
 }
 
 
@@ -175,6 +154,15 @@ body {
 .vip-tab-items::-webkit-scrollbar {
   display: none;
 }
+
+.placeholder-color::placeholder {
+    color: var(--main-primary-main);
+  }
+
+.custom-input::placeholder {
+  color: #ffffff;
+}
+
 
 
 /*.v-img__img--contain {*/

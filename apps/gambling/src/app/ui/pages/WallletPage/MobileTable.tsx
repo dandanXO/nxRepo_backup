@@ -7,7 +7,7 @@ import cx from "classnames"
 import {environment} from "../../../../environments/environment";
 
 const Container = styled.div`
-  background: rgba(255, 255, 255, 0.1);
+  /* background: rgba(255, 255, 255, 0.1); */
 `;
 interface IDepositMobileTableProps {
   records: RechargeListResponseData[];
@@ -38,44 +38,44 @@ export const DepositMobileTable = ({ records }: IDepositMobileTableProps) => {
           {records.map((record) => (
             <Container
               key={record.id}
-              className="mb-4 flex flex-col rounded-2xl bg-[red] py-2 text-white"
+              className="mb-4 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
             >
               <div
                 className={
-                  'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1 text-[#ffdd0a]'
+                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1 text-main-primary-main '
                 }
               >
                 <span>ID da ordem: {record.id}</span>
-                <CopyOutlined className={'text-[#ffdd0a]'} />
+                <CopyOutlined className={'text-main-primary-main'} />
               </div>
 
               <div
                 className={
-                  'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1'
+                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
                 }
               >
-                <span className={'text-[#e2d7ff]'}>Valor</span>
+                <span className={''}>Valor</span>
                 <span className={''}>R${Number(record.amount).toFixed(2)}</span>
               </div>
 
               <div
                 className={
-                  'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1'
+                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
                 }
               >
-                <span className={'text-[#e2d7ff]'}>valor do bônus</span>
+                <span className={''}>valor do bônus</span>
                 <span className={''}>
                   R${(Number(record.amount) * Number(record.rate)).toFixed(2)}
                 </span>
               </div>
 
-              <div className={'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1'}>
-                <span className={'text-[#e2d7ff]'}>Modelo</span>
+              <div className={'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'}>
+                <span className={''}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-[rgba(255,255,255,.4)] px-4 py-1'}>
-                <span className={'text-[#e2d7ff]'}>{record.created_at}</span>
+              <div className={'flex flex-row justify-between border-assistant px-4 py-1'}>
+                <span className={''}>{record.created_at}</span>
                 <span style={{ color:
                     record.status === 2 ? '#FFA500' :   // 橘色
                       record.status === 3 ? '#FF0000' :   // 红色
@@ -104,46 +104,46 @@ export const WithdrawMobileTable = ({ records }: IWithdrawMobileTableProps) => {
           {records.map((record) => (
             <Container
               key={record.id}
-              className="mb-4 flex flex-col rounded-2xl bg-[red] py-2 text-white"
+              className="mb-4 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
             >
               <div
                 className={
-                  'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1 text-[#ffdd0a]'
+                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1 text-main-primary-main '
                 }
               >
                 <span>ID da ordem: {record.pay_serial_no}</span>
-                <CopyOutlined className={'text-[#ffdd0a]'} />
+                <CopyOutlined className={'text-main-primary-main'} />
               </div>
 
               <div
                 className={
-                  'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1'
+                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
                 }
               >
-                <span className={'text-[#e2d7ff]'}>Valor</span>
+                <span className={''}>Valor</span>
                 <span className={''}>R${Number(record.amount).toFixed(2)}</span>
               </div>
 
               <div
                 className={
-                  'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1'
+                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
                 }
               >
-                <span className={'text-[#e2d7ff]'}>Taxa de retirada</span>
+                <span className={''}>Taxa de retirada</span>
                 <span className={''}>R${Number(record.fee).toFixed(2)}</span>
               </div>
 
               <div
                 className={
-                  'mb-2 flex flex-row justify-between border-b-[0.0px] border-[rgba(255,255,255,.4)] px-4 py-1'
+                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
                 }
               >
-                <span className={'text-[#e2d7ff]'}>Modelo</span>
+                <span className={''}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-[rgba(255,255,255,.4)] px-4 py-1'}>
-                <span className={'text-[#e2d7ff]'}>{record.created_at}</span>
+              <div className={'flex flex-row justify-between border-assistant px-4 py-1'}>
+                <span className={''}>{record.created_at}</span>
                 <span style={{ color:
                     record.status === 2 ? '#FFA500' :   // 橘色
                       record.status === 3 ? '#FF0000' :   // 红色

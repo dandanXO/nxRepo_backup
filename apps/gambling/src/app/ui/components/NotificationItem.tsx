@@ -50,30 +50,44 @@ export const NotificationItemTitle = styled.div<{
   expand?: boolean;
 }>`
   padding: 12px 14px;
-  box-shadow: inset 0 0 36px 5px rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 0 36px 5px rgba(2, 92, 80, 1) !important;
 
   ${(props) =>
-    props.expand &&
-    `
+      (props.expand || !props.first) && `
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-width: 1px;
+    border-color: rgba(88, 220, 199, 1);
   `};
 
   border-bottom: ${(props) =>
-    !props.expand && !props.last ? '1px rgba(255,255,255,0.2) solid' : 'none'};
+      !props.expand
+          ? '1px rgba(88, 220, 199, 1) solid'
+          : props.last
+              ? '1px rgba(88, 220, 199, 1) solid' // 如果是最後一個，也應用底部邊框
+              : 'none'};
+
+  border-bottom-left-radius: ${(props) => !props.expand ? '10px' : '0'};
+  border-bottom-right-radius: ${(props) => !props.expand ? '10px' : '0'};
+  margin-bottom: ${(props) => !props.expand ? '10px' : '0'};
 `;
 
 export const NotificationItemExpandable = styled.div`
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(88, 220, 199, 1);
   //background: purple;
   padding: 14px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: none;
+  border-width: 1px;
+  border-color: rgba(88, 220, 199, 1);
 `;
 
 export const NotificationItemRedDot = styled.div`
   width: 6px;
   height: 6px;
-  background-color: #ed1c24;
+  background-color: #FF7777;
   border-radius: 3px;
   display: inline-block;
   margin-right: 6px;

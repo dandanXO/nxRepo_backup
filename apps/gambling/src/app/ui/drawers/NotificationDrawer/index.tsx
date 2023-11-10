@@ -18,6 +18,7 @@ import {
 } from '../../components/NotificationItem';
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
+import {environment} from "../../../../environments/environment";
 
 export type INotificationDrawer = {
   closeDrawer: () => void;
@@ -49,7 +50,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
           mailId,
         });
         triggerGetMailCount({ token: AppLocalStorage.getItem('token') || '' })
-        
+
         const tempMessages = [...messages];
         const tempMessage = { ...messages[index] };
         tempMessage.is_read = 1;
@@ -94,8 +95,9 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
           'flex-between fixed right-0 top-0 bottom-0 z-10 flex w-[450px] flex-col bg-[#090B0F] p-4 text-left',
           {}
         )}
+        style={{background: `url("assets/${environment.assetPrefix}/bg_web_login_1.png")`}}
       >
-        <div className={'mb-2 text-lg font-bold text-white'}>
+        <div className={'mb-2 text-lg font-bold text-white'} style={{color:'#FBFF3F'}}>
           Centro de Notificaciones
         </div>
 

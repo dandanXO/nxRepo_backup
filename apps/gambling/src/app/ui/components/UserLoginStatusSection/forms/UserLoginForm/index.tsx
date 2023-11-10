@@ -19,6 +19,10 @@ import {useDispatch} from "react-redux";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
+  const customInputStyle = {
+    border: "1px solid #2CFD99",
+  };
+
   const valid = data.length === 10 || data.length === 11;
   if(valid) {
     setPhoneInput({
@@ -74,6 +78,20 @@ type IUserLoginForm = {
 export const UserLoginForm = (props: IUserLoginForm) => {
   const {isMobile} = useBreakpoint();
   const Input = isMobile ? MobileInput : DesktopInput;
+
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const toggleCheck = () => {
+    setIsChecked(!isChecked);
+  };
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [password, setPassword] = useState('');
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   // refactor:
   const [phoneInput, setPhoneInput] = useState<InputValue<string>>({
@@ -162,23 +180,24 @@ export const UserLoginForm = (props: IUserLoginForm) => {
   return (
     <div className={"form"}>
       <div className={"flex flex-col"}>
-        <Input type={"text"} prefix={
-          <>
-            <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>
-            <span className={"text-[#01FF52] mr-2"}>+55</span>
-          </>
-        }
-         placeholder={"Tu nùmero de celular"}
-         value={phoneInput.data}
-         validation={phoneInput.isValidation}
-         errorMessage={phoneInput.errorMessage}
-         onChange={(event) => {
-           onValidatePhoneInput(event.target.value, setPhoneInput)
-         }}
+        <Input
+            type="text"
+            prefix={
+              <>
+                <PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />
+                <span className="text-[#01FF52] mr-2">+55</span>
+              </>
+            }
+            placeholder="Tu número de celular"
+            value={phoneInput.data}
+            validation={phoneInput.isValidation}
+            errorMessage={phoneInput.errorMessage}
+            onChange={(event) => onValidatePhoneInput(event.target.value, setPhoneInput)}
         />
 
-        <Input
-          type={"password"}
+        <div style={{ position: 'relative' }}>
+          <Input
+              type={isPasswordVisible ? 'text' : 'password'}
           prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
           placeholder={"Senha (4-12 letras e números)"}
           value={passwordInput.data}
@@ -188,14 +207,26 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             onValidatePasswordInput(event.target.value, setPasswordInput)
           }}
         />
+          <div
+              className="password-toggle"
+              style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
+              onClick={togglePasswordVisibility}
+          >
+            {isPasswordVisible ? (
+                <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
+            ) : (
+                <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+            )}
+          </div>
+        </div>
 
         <section className={"flex flex-col mt-2"}>
-          <button className={"my-4 text-white"} onClick={() => {
+          <button className={"my-4 text-[#31B77D]"} onClick={() => {
             props.onSwitchToForgetPassword();
           }}>Esqueça a senha?</button>
           <ConfirmButton
             onClick={() => onFormConfirm()}
-            style={{width: "100%", height: 50}}>Entrar</ConfirmButton>
+            style={{width: "100%", height: 50, fontWeight: "bold"}}>Entrar</ConfirmButton>
         </section>
 
       </div>

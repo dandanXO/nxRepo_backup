@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import {ITabType} from "./index";
+import { environment } from "../../../../../environments/environment";
 
 
 export interface ITotal {
@@ -23,8 +24,10 @@ export interface ITotal {
 type IMobileCommonBlueTable = ITabType & ITotal;
 
 const BlueBackgroundShadowContainer = styled.div`
-  background: linear-gradient(45deg,#194BCA 0%,#5392FE 100%);
-  box-shadow: inset 0 -0.16rem 0.34rem #0ab8f5;
+  //background: linear-gradient(45deg,#194BCA 0%,#5392FE 100%);
+  //box-shadow: inset 0 -0.16rem 0.34rem #0ab8f5;
+  background: url("assets/${environment.assetPrefix}/h5_invite_dashboard_1.png") center center no-repeat;
+  background-size: cover;
 `
 
 const CommonTableTabG = styled.div<{

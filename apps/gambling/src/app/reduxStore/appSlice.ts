@@ -8,6 +8,7 @@ export type InitialState = {
   isUserMoneyStatusLoading: boolean;
   isLogin: boolean;
   isUILoading: boolean;
+  isVipLoading: Boolean;
   userStore?: IUserStore;
   isShowLoginModal: boolean;
   isShowMobileLogoutModal: boolean;
@@ -56,6 +57,7 @@ const initialState: InitialState = {
   globalMessage: null,
   vip_level: 0,
   isUILoading: true,
+  isVipLoading: true,
   isUserMoneyStatusLoading: false,
   isMobile: true,
   isLogin: !!AppLocalStorage.getItem("token"),
@@ -76,6 +78,9 @@ export const appSlice = createSlice({
     },
     setIsUILoading: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isUILoading = action.payload;
+    },
+    setIsVipLoading: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.isVipLoading = action.payload;
     },
     setIsUserMoneyStatusLoading: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isUserMoneyStatusLoading = action.payload;

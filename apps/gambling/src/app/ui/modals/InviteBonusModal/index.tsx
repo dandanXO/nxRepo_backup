@@ -12,7 +12,7 @@ export type IInitialChargeModal = {
 const Container = styled.div`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/${environment.assetPrefix}/pop3.8f1838c0.png);
+  background-image: url(assets/${environment.assetPrefix}/ad_bg_1.png);
   background-size: 100% auto;
   border-radius: 20px;
   padding: 20px 24px;
@@ -25,8 +25,9 @@ const Item = styled.div.attrs({
   //position: relative;
   margin-bottom: 16px;
   margin-top: 10px;
-  background: linear-gradient(180deg,#004EFF 0%,#00ACFE 100%);
-  box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
+  background-color: rgba(242, 255, 221, 0.5);
+  border: 1px solid #2CFD99;
+  //box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 8px;
   padding: 10px 20px;
 
@@ -40,24 +41,25 @@ const MoneyButton = styled.div.attrs((props) => ({
 }>`
   position: absolute;
   right: -10px;
-  top: 36%;
+  top: -1%;
   width: 104px;
-  height: 29px;
-  background: #FF3F20;
-  box-shadow: 0 2px 4px rgba(0,0,0,.5), 0 1px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
-  border-radius: 6px;
+  height: 78px;
+  background: linear-gradient(90deg, #1EE59E, #E2FD97);
+  //box-shadow: 0 2px 4px rgba(0,0,0,.5), 0 1px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
+  border-radius: 10px;
   //display: flex;
   //justify-content: center;
   //align-items: center;
   color: #f7fe00;
   line-height: 21px;
-  text-shadow: 0px 1px 0px #7D0403;
+  border-color: 2px solid #028350;
+  //text-shadow: 0px 1px 0px #7D0403;
   //margin-top: -15px;
 `
 
 const EarnButton = styled.button`
-  background: linear-gradient(180deg,#004EFF 0%,#00ACFE 100%);
-  box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
+  background: linear-gradient(180deg,#C8F568 0%,#16FF8F 100%);
+  //box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 24px;
   transition: all .1s ease-in-out;
   padding: 10px 20px;
@@ -66,8 +68,8 @@ const EarnButton = styled.button`
 const InviteButton = styled.button`
   font-size: 15px;
   display: block;
-  background: linear-gradient(180deg,#FF1515 0%,#FF7F2F 100%);
-  box-shadow: 0 2px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
+  background: linear-gradient(180deg,#56F0D6 0%,#8499FD 100%);
+  //box-shadow: 0 2px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 24px;
   letter-spacing: 0;
   transition: all .1s ease-in-out;
@@ -88,7 +90,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
         event.stopPropagation();
       }}>
 
-        <div className={"flex flex-row justify-end mb-2 absolute right-[20px] top-[20px]"}>
+        <div className={"flex flex-row justify-end mb-2 absolute right-[10px] top-[18px]"}>
           <button onClick={() => {
             props.close();
           }}>
@@ -99,55 +101,65 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
         </div>
 
 
-        <img alt="title" className={"w-[269px] h-[27px]"} src={`assets/${environment.assetPrefix}/title3.274f5fbe.png`}/>
-        <div className={"text-white text-sm"}>Bônus de primeira recarga para usuários convidados</div>
+        <img alt="title" className={"w-[269px] h-[16px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>
+        <div className={"text-white text-sm mt-2"}>Bônus de primeira recarga para usuários convidados</div>
 
         <div className={"w-full"}>
 
           <div className={"flex flex-col w-full mb-2"}>
             <Item>
               <div className={"left flex flex-col"}>
-                <div className={"font-bold text-sm"}>Convidar 1-10</div>
-                <div className={"text-base text-sm"}>Prêmio</div>
+                <div className={"font-bold text-lg text-[#16FF8F]"}>Convidar 1-10</div>
+                <div className={"text-bold text-lg  text-[#16FF8F]"}>Prêmio</div>
               </div>
               <div className={"right"}>
                 <MoneyButton className={"money-button"}>
-                  <img alt="money" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAASCAYAAAC9+TVUAAAAAXNSR0IArs4c6QAAAuNJREFUOE991EtonFUYxvHf+WYmk05S0+k0tlHbhlaqFQTtBaRCwS6q1lt1JYIUuhPcKAi6UHSnCwXtSsGF4sKFoLvebKW0RYubLqLpzdSY9GKaTJo2maQz/b4jM1N7CeI5HA4ceP6H93kvwf+s+L7Eix7S40ksdsgnYYeJ+ZIw/yH+aKk1tijaquAJHVYIrU3drw56Nrxk7HbdTUj83WaLfaRkvY6kYG4RJ3MM1/m7xrJung/Ulx93tL4tPDV44V/QLcglRxQXPe5IJ+dSZqpUUroQkceCe9m0k2xgwME928L22ZEmqAWJX6l4xWg8/EBnGD/JXTeEyY2/shuQ5l3rYWsXaXXQ4bmnwzOG25DTXnB/4Qf7+ll62vVekpRklpaNc7jWBOBKE5iwPWPGCUdtaUPG7YqlNa+H3Wd5tKF6msnzdK1k2QqcQ4lYIA6SXMLdWI6cD0MkcdWA4dVrDf3BZtIxcnNkgZgnmeTiOLkclX5yR4iRUMGUsyF+r99zzjhWycXuCfU+hg+waguTQzhFV5nOe5gdZbJG7xSFDpIlOGZ/iH/Zqa/zS7tL4tqq2iwLLjJdpnsh4TiXq6T9lFeRnSI32g4vKbYgb4X4m4/15d90vGR0+IridXoXMN1J92OkJ0hyXJthokrfWrKD5Mqt1EZD1of4rg9s8p5FZCOEM4Q8M3OcL7VLpbiVQo18D2M/U56g2IvLLrjqvhDfVpba6xEbm4UVx9s+pE1js/Y530V9JVODLJ+mso7iauzzTfjMq+0Uv6MitceDNjRjTUdpnCFrkEWmlhBr9PTSsYKOVYTpFmRH+NTXt8r+DYtFez1sQ1zItT/JauT6yPeR9BLKxJRsmPCTNJnTH3YZvaOLYxPUsNdGGzTTtxDdNMaYHSI7Qe6SsY68w8WSb8PnvrvZO7e3dQtUs7++2rq0SmPEeFp3tJR3oFhwSKfB8IXGf46CO0CvKat5Wd4vcgbmi+bPoH8Adc4S7UClmikAAAAASUVORK5CYII="}/>
-                  <span className={"money-value"}>10</span>
+                  <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
+                  <span className={"ml-2 font-bold text-lg money-value"} style={{
+                    color: '#028350',
+                    textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
+                  }}>10</span>
                 </MoneyButton>
               </div>
             </Item>
 
             <Item>
               <div className={"left flex flex-col"}>
-                <div className={"font-bold text-sm"}>Convidar 11-24</div>
-                <div className={"text-base text-sm"}>Prêmio</div>
+                <div className={"font-bold text-lg text-[#16FF8F]"}>Convidar 11-24</div>
+                <div className={"text-bold text-lg text-[#16FF8F]"}>Prêmio</div>
               </div>
               <div className={"right"}>
                 <MoneyButton className={"money-button"}>
-                  <img alt="money" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAASCAYAAAC9+TVUAAAAAXNSR0IArs4c6QAAAuNJREFUOE991EtonFUYxvHf+WYmk05S0+k0tlHbhlaqFQTtBaRCwS6q1lt1JYIUuhPcKAi6UHSnCwXtSsGF4sKFoLvebKW0RYubLqLpzdSY9GKaTJo2maQz/b4jM1N7CeI5HA4ceP6H93kvwf+s+L7Eix7S40ksdsgnYYeJ+ZIw/yH+aKk1tijaquAJHVYIrU3drw56Nrxk7HbdTUj83WaLfaRkvY6kYG4RJ3MM1/m7xrJung/Ulx93tL4tPDV44V/QLcglRxQXPe5IJ+dSZqpUUroQkceCe9m0k2xgwME928L22ZEmqAWJX6l4xWg8/EBnGD/JXTeEyY2/shuQ5l3rYWsXaXXQ4bmnwzOG25DTXnB/4Qf7+ll62vVekpRklpaNc7jWBOBKE5iwPWPGCUdtaUPG7YqlNa+H3Wd5tKF6msnzdK1k2QqcQ4lYIA6SXMLdWI6cD0MkcdWA4dVrDf3BZtIxcnNkgZgnmeTiOLkclX5yR4iRUMGUsyF+r99zzjhWycXuCfU+hg+waguTQzhFV5nOe5gdZbJG7xSFDpIlOGZ/iH/Zqa/zS7tL4tqq2iwLLjJdpnsh4TiXq6T9lFeRnSI32g4vKbYgb4X4m4/15d90vGR0+IridXoXMN1J92OkJ0hyXJthokrfWrKD5Mqt1EZD1of4rg9s8p5FZCOEM4Q8M3OcL7VLpbiVQo18D2M/U56g2IvLLrjqvhDfVpba6xEbm4UVx9s+pE1js/Y530V9JVODLJ+mso7iauzzTfjMq+0Uv6MitceDNjRjTUdpnCFrkEWmlhBr9PTSsYKOVYTpFmRH+NTXt8r+DYtFez1sQ1zItT/JauT6yPeR9BLKxJRsmPCTNJnTH3YZvaOLYxPUsNdGGzTTtxDdNMaYHSI7Qe6SsY68w8WSb8PnvrvZO7e3dQtUs7++2rq0SmPEeFp3tJR3oFhwSKfB8IXGf46CO0CvKat5Wd4vcgbmi+bPoH8Adc4S7UClmikAAAAASUVORK5CYII="}/>
-                  <span className={"money-value"}>15</span>
+                  <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
+                  <span className={"ml-2 font-bold text-lg money-value"} style={{
+                    color: '#028350',
+                    textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
+                  }}>15</span>
                 </MoneyButton>
               </div>
             </Item>
 
             <Item>
               <div className={"left flex flex-col"}>
-                <div className={"font-bold text-sm"}>{"Convidar > 25"}</div>
-                <div className={"text-base text-sm"}>Prêmio</div>
+                <div className={"font-bold text-lg text-[#16FF8F]"}>{"Convidar > 25"}</div>
+                <div className={"text-bold text-lg text-[#16FF8F]"}>Prêmio</div>
               </div>
               <div className={"right"}>
-                <MoneyButton className={"money-button"}>
-                  <img alt="money" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAASCAYAAAC9+TVUAAAAAXNSR0IArs4c6QAAAuNJREFUOE991EtonFUYxvHf+WYmk05S0+k0tlHbhlaqFQTtBaRCwS6q1lt1JYIUuhPcKAi6UHSnCwXtSsGF4sKFoLvebKW0RYubLqLpzdSY9GKaTJo2maQz/b4jM1N7CeI5HA4ceP6H93kvwf+s+L7Eix7S40ksdsgnYYeJ+ZIw/yH+aKk1tijaquAJHVYIrU3drw56Nrxk7HbdTUj83WaLfaRkvY6kYG4RJ3MM1/m7xrJung/Ulx93tL4tPDV44V/QLcglRxQXPe5IJ+dSZqpUUroQkceCe9m0k2xgwME928L22ZEmqAWJX6l4xWg8/EBnGD/JXTeEyY2/shuQ5l3rYWsXaXXQ4bmnwzOG25DTXnB/4Qf7+ll62vVekpRklpaNc7jWBOBKE5iwPWPGCUdtaUPG7YqlNa+H3Wd5tKF6msnzdK1k2QqcQ4lYIA6SXMLdWI6cD0MkcdWA4dVrDf3BZtIxcnNkgZgnmeTiOLkclX5yR4iRUMGUsyF+r99zzjhWycXuCfU+hg+waguTQzhFV5nOe5gdZbJG7xSFDpIlOGZ/iH/Zqa/zS7tL4tqq2iwLLjJdpnsh4TiXq6T9lFeRnSI32g4vKbYgb4X4m4/15d90vGR0+IridXoXMN1J92OkJ0hyXJthokrfWrKD5Mqt1EZD1of4rg9s8p5FZCOEM4Q8M3OcL7VLpbiVQo18D2M/U56g2IvLLrjqvhDfVpba6xEbm4UVx9s+pE1js/Y530V9JVODLJ+mso7iauzzTfjMq+0Uv6MitceDNjRjTUdpnCFrkEWmlhBr9PTSsYKOVYTpFmRH+NTXt8r+DYtFez1sQ1zItT/JauT6yPeR9BLKxJRsmPCTNJnTH3YZvaOLYxPUsNdGGzTTtxDdNMaYHSI7Qe6SsY68w8WSb8PnvrvZO7e3dQtUs7++2rq0SmPEeFp3tJR3oFhwSKfB8IXGf46CO0CvKat5Wd4vcgbmi+bPoH8Adc4S7UClmikAAAAASUVORK5CYII="}/>
-                  <span className={"money-value"}>20</span>
+                <MoneyButton className={"money-button"} style={{ border: '1px solid white' }}>
+                  <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
+                  <span className={"ml-2 font-bold text-lg money-value"} style={{
+                    color: '#028350',
+                    textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
+                  }}>20</span>
+
                 </MoneyButton>
               </div>
             </Item>
           </div>
 
           <div className={"flex flex-row justify-between items-center text-sm"}>
-            <EarnButton className={"text-sm"} onClick={()=>props.close()}>Ganhar dinheiro</EarnButton>
-            <InviteButton className={"text-sm"} onClick={() => props.onConfirm()}>Convide agora</InviteButton>
+            <EarnButton className={"text-sm text-[#047A70] font-bold"} onClick={()=>props.close()}>Ganhar dinheiro</EarnButton>
+            <InviteButton className={"text-sm text-[#ffffff] font-bold"} onClick={() => props.onConfirm()}>Convide agora</InviteButton>
           </div>
 
         </div>

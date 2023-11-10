@@ -1,6 +1,7 @@
 import cx from "classnames";
 import {UserLoginStatusSection} from "../../components/UserLoginStatusSection";
 import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
+import { environment } from "apps/gambling-dashboard/src/environments/environment";
 
 export type IUserLoginStatusDrawers = {
   closeDrawer: () => void;
@@ -15,9 +16,14 @@ export const UserLoginStatusDrawers = (props: IUserLoginStatusDrawers) => {
       props.closeDrawer();
     }}>
 
-      <div className={cx("fixed right-0 top-0 bottom-0 z-10 w-[450px] bg-[#194129] p-4 flex flex-col flex-between", {
+      <div className={cx("fixed right-0 top-0 bottom-0 z-10 bg-[rgba(7,54,57,1)] w-[400px] p-4 flex flex-col flex-between", {
 
         })}
+           style={{
+             backgroundImage: `url("assets/${environment.assetPrefix}/bg_web_login.png")`,
+             backgroundPosition: 'center bottom', // 将垂直位置设置为底部
+             backgroundRepeat: 'no-repeat'
+           }}
          onClick={(event) => {
            event.stopPropagation();
          }}

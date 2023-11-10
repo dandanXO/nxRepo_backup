@@ -74,10 +74,12 @@ export const AppCarousel = () => {
           }}>
             Primeiro depósito <br/> bônus de 20%
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_1_long.png`} />
+          <img
+              src={`assets/${environment.assetPrefix}/h5_banner_1.png`}
+          />
         </div>
       ) : (
-        <div className="mr-4 mr-14" onClick={() => {
+        <div className="w-[calc(88.6vw-265px)]" onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
@@ -89,7 +91,7 @@ export const AppCarousel = () => {
           }}>
             Primeiro depósito <br/> bônus de 20%
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_1.png`} className="rounded-box" style={{ display: 'block' }}/>
+          <img src={`assets/${environment.assetPrefix}/banner1.png`} className="rounded-box" style={{ display: 'block', borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -141,10 +143,10 @@ export const AppCarousel = () => {
           }}>
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_2_long.png`}/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_2.png`}/>
         </div>
       ) : (
-        <div className={"mr-4 mr-14"} onClick={() => {
+        <div className={"w-[calc(88.6vw-265px)]"} onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
@@ -156,7 +158,7 @@ export const AppCarousel = () => {
           }}>
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_2.png`} className="rounded-box"  style={{ display: 'block' }}/>
+          <img src={`assets/${environment.assetPrefix}/banner3.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -204,13 +206,13 @@ export const AppCarousel = () => {
           navigate(PageOrModalPathEnum.VIPGradePage)
         }
       }}>
-        <img src={`assets/${environment.assetPrefix}/h5_banner_4_long.png`}/>
+        <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`}/>
       </div>
       ) : (
-        <div className={'mr-14 mr-14'} onClick={() => {
+        <div className={'w-[calc(88.6vw-265px)]'} onClick={() => {
           navigate(PageOrModalPathEnum.VIPGradePage);
         }}>
-        <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`} className="rounded-box"  style={{ display: 'block' }}/>
+        <img src={`assets/${environment.assetPrefix}/banner2.png`} className="rounded-box"  style={{ display: 'block', borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -241,17 +243,17 @@ export const AppCarousel = () => {
             navigate(PageOrModalPathEnum.DailySignInPage)
           }
         }}>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_5_long.png`}/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_5.png`}/>
         </div>
       ) : (
-        <div className={'mr-14 mr-14'} onClick={() => {
+        <div className={'w-[calc(88.6vw-265px)]'} onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
             navigate(PageOrModalPathEnum.DailySignInPage)
           }
         }}>
-        <img src={`assets/${environment.assetPrefix}/h5_banner_5.png`} className="rounded-box"  style={{ display: 'block' }}/>
+        <img src={`assets/${environment.assetPrefix}/banner5.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -289,10 +291,10 @@ export const AppCarousel = () => {
           }}>
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_3_long.png`}/>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_3.png`}/>
         </div>
       ) : (
-        <div className={"mr-4 mr-14"} onClick={() => {
+        <div className={"w-[calc(88.6vw-265px)]"} onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
@@ -305,7 +307,7 @@ export const AppCarousel = () => {
           }}>
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_3.png`} className="rounded-box"  style={{ display: 'block' }}/>
+          <img src={`assets/${environment.assetPrefix}/banner4.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
         </div>
       )}
 

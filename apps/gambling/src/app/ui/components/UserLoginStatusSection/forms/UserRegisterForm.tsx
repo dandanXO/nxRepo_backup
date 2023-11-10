@@ -1,7 +1,7 @@
 import {PhoneSvg} from "../PhoneSvg";
 import {KeySvg} from "../KeySvg";
 import {ConfirmButton} from "../../ConfirmButton";
-import {CheckCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {Input as DesktopInput, Input, InputValue} from "../../Input";
 import {MobileInput} from "./UserLoginForm/MobileInput";
@@ -98,6 +98,19 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
   //     }
   //   }))
   // }
+
+    const [isChecked, setIsChecked] = useState(false);
+
+    const toggleCheck = () => {
+        setIsChecked(!isChecked);
+    };
+
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [password, setPassword] = useState('');
+
+    const togglePasswordVisibility = () => {
+        setIsPasswordVisible(!isPasswordVisible);
+    };
 
   const {onFormConfirm} = useForm({
     onFormConfirm: () =>  {
@@ -220,32 +233,46 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         }}
       />
 
-      <Input
-        type={"password"}
-        prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        placeholder={"Senha (4-12 letras e números)"}
-        value={passwordInput.data}
-        validation={passwordInput.isValidation}
-        errorMessage={passwordInput.errorMessage}
-        onChange={(event) => {
-          if(onValidatePasswordInput(event.target.value, setPasswordInput)) {
-            setPasswordInput({
-              data: event.target.value,
-              isValidation: true,
-              errorMessage: "",
-            });
-          } else {
-            setPasswordInput({
-              data: event.target.value,
-              isValidation: false,
-              errorMessage: "Senha (4-12 letras e números)",
-            })
-          }
+        <div style={{ position: 'relative' }}>
+            <Input
+                type={isPasswordVisible ? 'text' : 'password'}
+                prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+                placeholder={"Senha (4-12 letras e números)"}
+                value={passwordInput.data}
+                validation={passwordInput.isValidation}
+                errorMessage={passwordInput.errorMessage}
+                onChange={(event) => {
+                    if (onValidatePasswordInput(event.target.value, setPasswordInput)) {
+                        setPasswordInput({
+                            data: event.target.value,
+                            isValidation: true,
+                            errorMessage: "",
+                        });
+                    } else {
+                        setPasswordInput({
+                            data: event.target.value,
+                            isValidation: false,
+                            errorMessage: "Senha (4-12 letras e números)",
+                        })
+                    }
+                }}
+            />
+            <div
+                className="password-toggle"
+                style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
+                onClick={togglePasswordVisibility}
+            >
+                {isPasswordVisible ? (
+                    <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
+                ) : (
+                    <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+                )}
+            </div>
+        </div>
 
-        }}
-      />
 
-      <Input
+
+        <Input
         type={"text"}
         prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         outerSuffix={<img className={"h-[48px]"} src={environment.captcha}/>}
@@ -273,28 +300,36 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       <section className={"flex flex-col mb-4"}>
         <ConfirmButton
           onClick={() => onFormConfirm()}
-          style={{width: "100%", height: 50}}
+          style={{width: "100%", height: 50, fontWeight: "bold"}}
         >Register Agora</ConfirmButton>
       </section>
 
       {isMobile ? (
       <section className={"flex flex-row items-center mb-4"}>
-        <CheckCircleOutlined className={cx("mr-2 relative top-[1px]", {
-          "text-white": true,
-        })}/>
+          <div className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
+              {isChecked ? (
+                  <img src={`assets/${environment.assetPrefix}/Property 1=uncheck.png`} />
+              ) : (
+                  <img src={`assets/${environment.assetPrefix}/Property 1=check.png`} alt="Checked" />
+              )}
+          </div>
         <p className={"text-white font-thin"} style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}>
-          <span>Eu concordo</span>
-          <span className={"text-[#01FF52]"}>Condições e condições, política de privacidade</span>
+          <span className={"text-[#31B77D]"}>Eu concordo</span>
+          <span className={"text-[#FBFF3F]"}>Condições e condições, política de privacidade</span>
         </p>
       </section>
         ):(
         <section className={"flex flex-row items-center"}>
-          <CheckCircleOutlined className={cx("mr-2 relative top-[1px]", {
-            "text-white": true,
-          })}/>
+            <div className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
+                {isChecked ? (
+                    <img src={`assets/${environment.assetPrefix}/Property 1=uncheck.png`}/>
+                ) : (
+                    <img src={`assets/${environment.assetPrefix}/Property 1=check.png`}/>
+                )}
+            </div>
           <p className={"text-white font-thin"}>
-            <span>Eu concordo</span>
-            <span className={"text-[#01FF52]"}>Condições e condições, política de privacidade</span>
+            <span className={"text-[#31B77D]"}>Eu concordo</span>
+            <span className={"text-[#FBFF3F]"}>Condições e condições, política de privacidade</span>
           </p>
         </section>
       )}

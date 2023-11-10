@@ -15,12 +15,13 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import {MessageCountBadge} from "../../components/MessageCountBadge";
 import {IUserInfo} from "../../../persistant/pending/loginMode";
 import {environment} from "../../../../environments/environment";
+import { RightOutlined } from "@ant-design/icons";
 
 const RegisterButton = styled.button`
-  width: 198px;
+  width: 150px;
   height: 30px;
-  background: url("assets/${environment.assetPrefix}/balance-bg-7d6b8cd6.png") no-repeat center/100% 100%;
-  color: #fff;
+  border-radius: 25px;
+  background: linear-gradient(180deg,#56F0D6 0%,#8499FD 99%);
 `
 
 
@@ -34,7 +35,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
   const login = useSelector((state: RootState) => state.app.isLogin);
   const navigate = useNavigate();
   return (
-    <header className={cx("w-full h-[52.5px] bg-[#284B39] px-4 flex flex-row items-center justify-between z-10", {
+    <header className={cx("w-full h-[52.5px] bg-[#014F4B] px-4 flex flex-row items-center justify-between z-10", {
       "fixed top-0": true || isMobile
     })}>
       <div className={"flex flex-row items-center"}>
@@ -43,7 +44,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
             onClick={() => {
               props.clickToOpenMenuDrawer();
             }}
-            alt={"menu"} className={"w-[22.5px] h-[22.5px]"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAYAAAAehFoBAAAAAXNSR0IArs4c6QAAA0NJREFUWMPtWL9rHEcU/t7M27vTORDrjIs0ghCTziYQq0gCBpdGDu6TKpX/AruWSRNwl79BkE5FSBdsYzVJkUCwOmMwuHFhsBRhrc+Kdj4X+2tmdvduQ4KkYj9Y7s17b3fezM28b+YBAwYMGLAI0qa8ycmaziem66UJ5p4c25r6Lnnc5TMHzATu9sr8xdKAb707dxlGnpRtek4WgCFhKxmwoCfDs3l+ACxLudCz0IOeXPtZECq48t0HR7t+fNoYgcAyGpEAsGT0UcJAgk7yYKRlUIU/AZVaZ4IAm74Q2ji+ZsCJSXnMt5B8Ym3RuREvWKlnxxTtPACBkpVvbgtn2qDwLwclXvD+PwAwUZMOu3bAgLNIHDeI8Ufp9MI00i9qryzxHb1LD2/P8Pd/DVjblGtH0zti8T0jgmCVR/PUAy+PoiILgQUroilJQUejP4Gjq32Cevjabggg12fZL7GtlX4tYLUYjZJQEAogKQKobZ5cPaxtLNoktB5jJ0jIgz3dtEZ+VpHPe89wQqYCuIpqpZgpiRjMIwAT+JVMWBONJReSwKM9nN850C0FNvJ/zfVfwyeNx29Gl5FxWxwvWZTLym2ur7p7vZbEiQb72n6Df9xv1vFSvvykWIbtONWAd/b1vjGypcA5BZGUe4boDFhPM2AFKG1HURDWncEZ/vL88V0VfpsAh2FWwtlcEgCw/mH2kyL7IhE+s2SQLnsvifvp+I4hfjCIbxFtNwwGtw3Tcpso/H+/tnr8VVt/V2bYfb7n1jPYLSE3ym/1nmGlTC1hlDDq8sc6GiULubCRnlzoPZt6Nm2ydYCPV7H/ySz7eiTYVMCpc/1nOIHLAFlwD4sII94wjTseYSDZ0oONgIC79/IV/pAOjmhV/kiMJTr8LDwIpcAKUk+bIn7XWRxe/R8OPwMGDDjtK9L2wfhTwP2lgAREEaU1U/B9adPK3jwXGEqQ7rT6XlhNMuLVxgjC4DO5iKeLKz+Zm1qDlbhW5rOXCXJ0WA9rlJ/inB3l9rIfKQt54e90KXGMEsnkmI3Oa1KIa2cMBhWUseL3O4io8xbhkPUijl/fTtZ0XtN2XgqdLy2fBqXWeQ+fRRjDyQwvhl07YMCAf4f3bFNE6dt1HxoAAAAASUVORK5CYII="}
+            alt={"menu"} className={"w-[22.5px] h-[22.5px]"} src={`assets/${environment.assetPrefix}/ic_menu.png`}
           />
         </button>
 
@@ -51,7 +52,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
           <a>
             <img className={""} onClick={() => {
               navigate(PageOrModalPathEnum.IndexPage)
-            }} alt={"logo"} src={`assets/${environment.assetPrefix}/logo_catonly.png`}/>
+            }} alt={"logo"} src={`assets/${environment.assetPrefix}/logo_h5.png`}/>
           </a>
         </button>
       </div>
@@ -60,7 +61,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
 
       {!login ? (
         <section>
-          <RegisterButton className={"font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>
+          <RegisterButton className={"text-[#ffffff] font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>
         </section>
       ): (
         <>
@@ -79,19 +80,18 @@ export const HeaderMobile = (props: IHeaderMobile) => {
 
 const VIPLabel = styled.div`
   width: 100px;
-  height: 30px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   //box-shadow: inset 0 0 36px 5px rgba(255, 219, 0, 0.09);
   border-radius: 10px;
   border: none; /* 取消边框 */
-  color: #fffa05;
-  font-family: ERASBD;
+  color: #ffffff;
   margin-top: 6px;
-  float: right;
+  //float: right;
   font-weight: bold;
-  background: url("assets/${environment.assetPrefix}/vip.png") no-repeat 3px center/70%;
+  background: url("assets/${environment.assetPrefix}/account_vip.png") no-repeat 3px center/70%;
 `
 
 const AvatarBorder = styled.div`
@@ -155,7 +155,7 @@ export const Avatar = (props: {
         <img className={cx("rounded-full",{
           "w-[56px] h-[56px] min-w-[56px] min-h-[56px]}": !props.big,
           "w-[82px] h-[82px]": props.big,
-        })} alt="avatar" src={`assets/${environment.assetPrefix}/avatar.png`}/>
+        })} alt="avatar" src={`assets/${environment.assetPrefix}/ic_avatar_select.png`}/>
         {/*<AvatarBorder/>*/}
       </button>
     /*</div>*/
@@ -169,16 +169,44 @@ export const AvatarAccountInfo = (props: IAvatarAccountInfo) => {
   const user: IUserInfo = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || ""): {};
   // const vip_level = useSelector((state: RootState) => state.app?.userStore?.userinfo?.vip_level)
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
+  const navigate = useNavigate();
+
+  const imageStyles = {
+    marginLeft: '3px', /* 可以根据需要调整间距 */
+    marginTop: '1px'
+  };
+
+  const containerStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    textAlign: 'left', // 使用 "left" 代替字符串
+  };
+
+  const contentStyles = {
+    display: 'flex',
+    alignItems: 'center',
+  };
+
+
 
   return (
     <section className={cx("flex flex-col items-start text-base", props.className)}>
       <span className={"flex flex-row"}>
         <span className={"text-white mr-2"}>ID:{user.user_id}</span>
-        {/*<button>*/}
-        {/*  <img className="w-[22px] h-[20px]" alt={"copy"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=="}/>*/}
-        {/*</button>*/}
+        <button>
+          <img className="w-[22px] h-[20px]" alt={"copy"} src={`assets/${environment.assetPrefix}/ic_copy.png`}/>
+        </button>
       </span>
-      <VIPLabel>VIP {vip_level}</VIPLabel>
+      <div style={contentStyles}>
+        <VIPLabel className="" onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)}>
+      <span className={'mr-6'}>VIP. {vip_level}</span>
+      {/*<img src={"assets/001/Seta.png"} alt="箭头" width="35px" height="50px" style={imageStyles} />*/}
+        </VIPLabel>
+        {/*<RightOutlined className="mt-1 mr-8" style={{ fontSize: 25, color: 'white', fontWeight: 1000 }} onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)}/>*/}
+      </div>
+
+
     </section>
   )
 }
@@ -202,23 +230,42 @@ export const Header = (props: IHeader) => {
 
   return (
     <header className={cx("flex flex-row justify-start items-center px-5", props.className)} style={{
-      backgroundImage: `url("assets/${environment.assetPrefix}/top_di.png")`, // 替换成背景图片路径
+      // backgroundImage: `url("assets/${environment.assetPrefix}/top_di.png")`, // 替换成背景图片路径
       backgroundSize: 'cover', // 调整背景图片大小以填充整个元素
       backgroundPosition: '90% 50%', // 调整背景图片位置
       backgroundRepeat: 'no-repeat', // 禁止背景图片重复
-      backgroundColor: '#284B39', // 设置背景颜色
+      backgroundColor: '#013E42', // 设置背景颜色
     }}>
-      <div className={"w-[276px]"}>
+      <div className={"w-[200px]"}>
         <a>
           <img onClick={() => {
             navigate(PageOrModalPathEnum.IndexPage)
           }} alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
         </a>
       </div>
-
-      <div className={"w-[250px] hidden xl:block"}>
-        <WebsiteButton/>
+      <div className={"w-[276px]"} style={{ position: 'relative' }}>
+        <a>
+          <img alt={"logo"} src={`assets/${environment.assetPrefix}/Rectangle 88.png`} style={{
+            position: 'relative',
+          }}/>
+          <img alt={"anotherImage"} src={`assets/${environment.assetPrefix}/Group.png`} style={{
+            position: 'absolute',
+            left: '0',
+            top: '0'
+          }}/>
+          <img alt={"thirdImage"} src={`assets/${environment.assetPrefix}/Products of SKY group.png`} style={{
+            position: 'absolute',
+            left: '20px', /* 调整第三张图片的水平位置 */
+            top: '27px' /* 调整第三张图片的垂直位置 */
+          }}/>
+        </a>
       </div>
+
+
+
+      {/*<div className={"w-[250px] hidden xl:block"}>*/}
+      {/*  <WebsiteButton/>*/}
+      {/*</div>*/}
 
       {/*[How to Align Last Flex Item to Right](https://medium.com/@iamryanyu/how-to-align-last-flex-item-to-right-73512e4e5912)*/}
       {!isLogin ? (
@@ -244,7 +291,7 @@ export const Header = (props: IHeader) => {
               props.onClickToOpenNotificationDrawer();
             }}>
               <Notification>
-                <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"notification"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjIzMDg4NjZENjk5MzExRUU5RUUwOEM0MjFGODdBNDJDIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjIzMDg4NjZFNjk5MzExRUU5RUUwOEM0MjFGODdBNDJDIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MjMwODg2NkI2OTkzMTFFRTlFRTA4QzQyMUY4N0E0MkMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MjMwODg2NkM2OTkzMTFFRTlFRTA4QzQyMUY4N0E0MkMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5ydrm2AAADJElEQVR42tSZWWgTQRjHZ2to631RibcgCl4vpT6oRcQDK1iPvni+eKCI6IuKUI8HqyAqgogHgorghSAVKyaoGKn6IB4P6ouopFZEpWpb04CkSeP/2/1itptNMmvb7OQPP8hkZ7v/fLMz831TLd4iuqIxYA4oB9PAcDAExEEIfAVvwDNwDwT/90FazLlRMrIFzAILQYGDe5+Ax+ASeOfIaLRZuu84sBFsAwNE13USnANvpYxG5IxuAKdAkeh+1YD9WY3++ZX1D90EVaJnRe/xPNCU1mg4vdGB/E5NFbkROVkAXtkaDf20vWkE8PNMzqVCvIK8TjHaYm/0Axgv3FEbmAw+m7/0dMRTOvpdNEnqB16CYZ2Mxjp3WsFro9sqARfA+n9D/y05z7wcbo9QR9PBCyOiyaHfqphJ0hEwV4/op+/6F4N5Xy4S6omMBhLv6GZFTZI2GUaNoa8U6moR6OWJxvUZNlNho7RDLqWILhHqq8oTFWJGHhidQBGdlAdGS+gdHeXwpgAnuyPTpH/XwA9hjFSZ5VqMd5x23gWHSj6zD0XUybLk51mY0EGwx9TeBY6Z2nVgMX+O8Jr4lNsHwHMwWuK5xVp9o2h1UFpMBO9N7b6cmmmgEYy19C/nGol0nksZsw6BaonnttJkcmLUGv3CNJ/t+hfbXO8t+dz2Agx9Ey36kpwFhab2UaDxZy84bLo2CFSb2qvAMlO7DKyUfG6YJhOVraWSv4xK5I/gISe31smyG8zmUriCM7KEqKyuBbc4OV7rYG40a3VBvUY/rfjydJuSEl8erKO1NPQNXPmVKmoyohvl7CmgsNEH+vLERs+AHYoavaKXIlGjQTP5ssOZmAvRCcpVa820T0GjO5PlctJoA+/dexUx+UgYZ6opRhNRXQ6mKGC0MtMBBIkOxX6D/i5Xnm3ZjnRq0iQQudJqXi5Fpohud/kdXcOJd4rMEZ0PTri4+1TYRdIaUaqb7rhk8j5YB75k6kQR9XLaluuTEipDjoPrMp09HULcsOSNPamwMLK1u+Cikxspoj4e+u6MKH6/iLIxOtgMcqHnExn+oZBJfwUYAMQSF6v9PklxAAAAAElFTkSuQmCC"}/>
+                <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"notification"} src={`assets/${environment.assetPrefix}/ic_notification.png`}/>
                 {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
               </Notification>
             </button>
@@ -254,7 +301,7 @@ export const Header = (props: IHeader) => {
             props.onClickToChangeLogoutPopover(!props.openLogoutPopover);
           }}>
             <button>
-              <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"logout"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAArCAYAAAAKasrDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDQ4OCwgMjAyMC8wNy8xMC0yMjowNjo1MyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjAgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjJFRjY5NkIzNjk5MzExRUVCQkFGOEUyM0Q4NDMyMEE3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjJFRjY5NkI0Njk5MzExRUVCQkFGOEUyM0Q4NDMyMEE3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MkVGNjk2QjE2OTkzMTFFRUJCQUY4RTIzRDg0MzIwQTciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MkVGNjk2QjI2OTkzMTFFRUJCQUY4RTIzRDg0MzIwQTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6nBmyPAAAC1klEQVR42sSYPWgUQRTHZ5M7IfGLgBpBUTGFdoYUFsGURlSwEK4K+NFEVIhiExAiSUwQI4Lxk7QBO63SBC2TQEBEYqeiNiqInHoRg5i7Xf/vnAnLMLc7szO7++B3O/vxZt+9mX1v5nlBEDBW8UqMsTtgI8tGZkCfzoMeGehXvBW0W1i2chTMxj1UoB/YWFPc+wFegPVgO/0ZC2Oo/1awI3Rtp45i3UCfsT84bFDc/wKGwCcHHmsCl8Ftfr6ib2CgvNcGzoDj4B54DD5YGAg/sOdJ/lVdM4KtYBS8B5Og3Y/XierLSKduYC3QZgB8BFNgm4GewDPV0fGgTAvoB2/BVQtvalEQHkwgm8E42A3OpRWLmkQMsKAftNfs+1Fi40HZm18tnORHhhkHBlYtdDt5KLve2MDs0ltrqC3yfhmMgi3gUloe1BXKTPM8bYqgX6FsCwbAdzCSp4EvQY90rZn9T7W0WBnmAzqW1xCrpCyd01z8CybWDKy68+A+cJYPmY6s8ghQlK7f5F6963qIu8Cgo74myUjXHlx2PPxTWX8kxlKwjbIRcc6FTLv2IMW5hajUpchAFF4OinVBSJ6A067nIBl3KIGevGmjXV8pj0Ctkk0Kz5XSmoNxQju5E7xN+5N3PAY2h66V8kx1FCcf8PZ5biC9fR14DXrVX3F2Bv4OtX/xYwd4Bk6muR5MIuKttKo5Eh0H8/1IyrGBOufVTHwmyXCIV/MyULckspzIwKpd5UqEjM+ivwaeoz3IRWklre3BNksDHybQKZpUtxZx6M54/s/pe5CxYzhcA1cSvox2Yt8UKxJZPB40lngWiZV6Cfj+m7UpeADcAocNDfTScrNc3VoCvaAHvDKoQu3Nuro1zxP7KT70HXkF6rj64DTYD8bAz7RrgQ0rrFSjjqAKhsAeMBHzrHNMKqwVMAg6wSPpXjHVOeibpToKERfAU3AD7Aqt7ZzLPwEGAJ0JMVtPxt9rAAAAAElFTkSuQmCC"}/>
+              <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"logout"} src={`assets/${environment.assetPrefix}/ic_signout.png`}/>
             </button>
           </section>
 

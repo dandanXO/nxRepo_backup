@@ -5,9 +5,9 @@ import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
 
 
 const Container = styled.div`
-  background: rgba(25, 65, 41, 0.93);
+  background: #013E42;
   //background: rgba(9,11,15,1);
-  box-shadow: 0 0 .1rem #27563A !important;
+  //box-shadow: 0 0 .1rem #27563A !important;
 
   overflow: hidden;
   position: relative;
@@ -37,7 +37,7 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
   return (
     <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}>
 
-      <Container className={"p-2 rounded-2xl max-w-[300px] box-content"}>
+      <Container className={"p-2 rounded-2xl max-w-[320px] box-content"}>
         <UserLoginStatusSection
           confirmToLogin={() => {
             props.setIsLogin(true);

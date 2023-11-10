@@ -1,4 +1,6 @@
 import { WithdrawHistoryListEndpointResponseData } from '../../../external/WithdrawHistoryListEndpoint';
+import cx from "classnames";
+import {environment} from "../../../../environments/environment";
 
 const WithdrawStatusMap: { [key: number]: string } = {
   1: 'Completed',
@@ -14,24 +16,24 @@ interface IRecordPanelWithdrawProps {
 
 export const RecordPanelWithdraw = ({ records }: IRecordPanelWithdrawProps) => {
   return (
-    <div className="h-[25vh] overflow-x-auto">
+    <div className="overflow-x-auto text-white text-center" style={{borderWidth:'1px',borderColor:'#58DCC7',borderRadius:'10px'}}>
       <table className="table-zebra relative table w-full">
         {/* head */}
         <thead className="sticky top-0">
           <tr>
-            <th>identificador</th>
+            <th className="text-center">ID da ordem</th>
             <th className="text-center">Valor</th>
-            <th className="text-center">Taxa De Retirada</th>
-            <th className="text-center">Método De Depósito</th>
-            <th className="text-center">Status De Retirada</th>
+            <th className="text-center">Valor do bônus</th>
+            <th className="text-center">Modelo</th>
+            <th className="text-center">Estado Do Depósito</th>
             <th className="text-center">Tempo</th>
           </tr>
         </thead>
 
         <tbody>
-          {records.map((record) => (
+          {records !== undefined && records.length > 0 ? records.map((record) => (
             <tr key={record.id}>
-              <td className={'flex flex-row'}>
+              <td className={'flex flex-row justify-center'}>
                 <span>{record.pay_serial_no}</span>
                 <span>
                   <button>
@@ -55,7 +57,15 @@ export const RecordPanelWithdraw = ({ records }: IRecordPanelWithdrawProps) => {
               </td>
               <td className="text-center">{record.created_at}</td>
             </tr>
-          ))}
+          )):(<tr>
+              <td colSpan={6}>
+                <div className="flex flex-col items-center p-14" style={{backgroundColor:'#006D79'}}>
+                  <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
+                  <div>Nothing here</div>
+                </div>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

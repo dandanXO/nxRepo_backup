@@ -6,20 +6,18 @@ export const DesktopTotalType = (props: ITotal & { type: string }) => {
       borderCollapse: 'collapse',
     },
     th: {
-      backgroundColor: '#498D68',
+      backgroundColor: '#008B8D',
       color: '#fff',
-      border: '0.5px solid #333',
+      border: '0.1px solid rgba(0, 82, 101, 0.3)',
     },
     td: {
-      backgroundColor: '#3F7659',
+      backgroundColor: '#006D79',
       color: '#fff',
-      border: '0.5px solid #333',
     },
   };
 
-
   return (
-    <div className="overflow-x-auto text-white text-center">
+    <div className="overflow-x-auto text-white text-center" style={{borderWidth:'1px',borderColor:'#58DCC7',borderRadius:'10px'}}>
       <table className="table table-zebra w-full">
         {/* head */}
         <thead>
@@ -28,7 +26,7 @@ export const DesktopTotalType = (props: ITotal & { type: string }) => {
           {props.type === "1" && <th style={tableStyle.th}>Primeira Recarga Recompensas</th>}
           {props.isProxy && <th style={tableStyle.th}>Dividendos</th>}
           <th style={tableStyle.th}>Valor Da Transação Do Jogo</th>
-          <th style={tableStyle.th}>Recompensas De Troca De Jogos </th>
+          <th style={tableStyle.th}>Recompensas De Troca De Jogos</th>
           <th style={tableStyle.th}>Recompensa Total</th>
         </tr>
         </thead>
@@ -46,5 +44,5 @@ export const DesktopTotalType = (props: ITotal & { type: string }) => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
