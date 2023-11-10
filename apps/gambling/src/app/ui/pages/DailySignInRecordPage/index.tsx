@@ -9,22 +9,6 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 
 const { RangePicker } = DatePicker;
 
-const tableStyle = {
-  thead: {
-    borderCollapse: 'collapse',
-  },
-  th: {
-    backgroundColor: '#498D68',
-    color: '#fff',
-    border: '0.5px solid #333',
-  },
-  td: {
-    backgroundColor: '#3F7659',
-    color: '#fff',
-    border: '0.5px solid #333',
-  },
-};
-
 export const DailySignInRecordPage = () => {
   useAllowLoginRouterRules();
 
@@ -58,11 +42,11 @@ export const DailySignInRecordPage = () => {
               {/* head */}
               <thead>
               <tr>
-                <th style={tableStyle.th}>ID</th>
-                <th style={tableStyle.th}>Nivel VIP</th>
-                <th style={tableStyle.th}>Coleta Contínua</th>
-                <th style={tableStyle.th}>Obter Recompensas</th>
-                <th style={tableStyle.th}>Tempo</th>
+                <th>ID</th>
+                <th>Nivel VIP</th>
+                <th>Coleta Contínua</th>
+                <th>Obter Recompensas</th>
+                <th>Tempo</th>
               </tr>
               </thead>
 
@@ -70,11 +54,11 @@ export const DailySignInRecordPage = () => {
               {data?.data.map((item, index) => {
                 return (
                   <tr>
-                    <td style={tableStyle.td}>{item.user_id}</td>
-                    <td style={tableStyle.td}>LV{item.vip_level}</td>
-                    <td style={tableStyle.td}>{item.days}</td>
-                    <td style={tableStyle.td}>R${item.bonus}</td>
-                    <td style={tableStyle.td}>{item.created_at}</td>
+                    <td>{item.user_id}</td>
+                    <td>LV{item.vip_level}</td>
+                    <td>{item.days}</td>
+                    <td>R${item.bonus}</td>
+                    <td>{item.created_at}</td>
                   </tr>
                 )
               })}

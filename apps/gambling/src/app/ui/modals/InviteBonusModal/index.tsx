@@ -116,7 +116,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
                 <MoneyButton className={"money-button"}>
                   <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
                   <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: '#028350',
+                    color: 'var(--dashboard-block2)',
                     textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
                   }}>10</span>
                 </MoneyButton>
@@ -132,7 +132,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
                 <MoneyButton className={"money-button"}>
                   <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
                   <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: '#028350',
+                    color: 'var(--dashboard-block2)',
                     textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
                   }}>15</span>
                 </MoneyButton>
@@ -148,7 +148,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
                 <MoneyButton className={"money-button"} style={{ border: '1px solid white' }}>
                   <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
                   <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: '#028350',
+                    color: 'var(--dashboard-block2)',
                     textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
                   }}>20</span>
 

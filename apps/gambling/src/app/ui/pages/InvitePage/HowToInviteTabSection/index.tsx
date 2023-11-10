@@ -202,7 +202,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
         </GreenContainer>
 
         <YellowContainer className={'text-left text-lg'}>
-          <Roboto style={{ color: '#FFCF45' }}>
+          <Roboto style={{ color: 'var(--main-state-warning)' }}>
             Regras de liquidação da plataforma {environment.platformName}: A
             comissão devolvida pelo {environment.platformName} é atualizada a
             cada 10 a 30 minutos, e a comissão devolvida será liberada toda
