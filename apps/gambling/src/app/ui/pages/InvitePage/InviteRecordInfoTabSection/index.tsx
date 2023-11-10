@@ -16,6 +16,8 @@ import moment from "moment";
 import {MobileCommonBlueTable} from "./MobileCommonBlueTable";
 import {MobileCommonOrangeTable} from "./MobileCommonOrangeTable";
 import {MobileCommonGreenTable} from "./MobileCommonGreenTable";
+import {AppLocalStorage} from "../../../../persistant/localstorage";
+import {DesktopDailyType} from "./DesktopDailyType";
 
 const RecordButton = styled.button`
   width: 145px;

@@ -23,7 +23,7 @@ export const DragScrollContainer = (props: IDragScrollContainer) => {
       onWheel() {
         api.stop(); // 取消动画，让浏览器自己处理
       },
-      onDrag(h) {
+      onDrag(h: any) {
         api.start({
           left: -h.offset[0],
           immediate: true // 无动画过程

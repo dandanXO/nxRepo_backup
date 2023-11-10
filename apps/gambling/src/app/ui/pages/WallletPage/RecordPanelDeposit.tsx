@@ -41,7 +41,7 @@ export const RecordPanelDeposit = () => {
             <span>
               <button onClick={()=>onClickToCopy(record.pay_serial_no)}>
                 <img className="h-[20px] w-[22px]" alt={'copy'}
-                  src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
+                     src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
                 />
               </button>
             </span>
@@ -89,32 +89,31 @@ export const RecordPanelDeposit = () => {
 
   return (
     <DragScrollContainer className='h-[25vh]' >
-       {contextHolder}
+      {contextHolder}
       <Table columns={tableColumns} dataSource={records} fetchData={handleFetchData} dataCount={Number(depositRecordData?.page?.count)}/>
     </DragScrollContainer>
   )
-
   return (
     <div className="h-[25vh] overflow-x-auto">
       <table className="table-zebra relative table w-full">
         {/* head */}
         <thead className="sticky top-0">
-          <tr>
-            <th className="text-center">ID da ordem</th>
-            <th className="text-center">Valor</th>
-            <th className="text-center">Valor do bônus</th>
-            <th className="text-center">Modelo</th>
-            <th className="text-center">Estado Do Depósito</th>
-            <th className="text-center">Tempo</th>
-          </tr>
+        <tr>
+          <th>identificador</th>
+          <th className="text-center">Valor</th>
+          <th className="text-center">Bônus</th>
+          <th className="text-center">Método De Depósito</th>
+          <th className="text-center">Estado Do Depósito</th>
+          <th className="text-center">Tempo</th>
+        </tr>
         </thead>
 
         <tbody>
-          {records !== undefined && records.length > 0 ?records.map((record) => (
-            <tr key={record.id}>
-              <td className={'flex flex-row justify-center'}>
-                <span>{record.pay_serial_no}</span>
-                <span>
+        {records.map((record) => (
+          <tr key={record.id}>
+            <td className={'flex flex-row'}>
+              <span>{record.pay_serial_no}</span>
+              <span>
                   <button>
                     <img
                       className="h-[20px] w-[22px]"
@@ -125,26 +124,18 @@ export const RecordPanelDeposit = () => {
                     />
                   </button>
                 </span>
-              </td>
-              <td className="text-center">
-                R${Number(record.amount).toFixed(2)}
-              </td>
-              <td className="text-center">
-                R${(Number(record.amount) * Number(record.rate)).toFixed(2)}
-              </td>
-              <td className="text-center">{record.pay_channel}</td>
-              <td className="text-center">{DepositStatusMap[record.status]}</td>
-              <td className="text-center">{record.created_at}</td>
-            </tr>
-          )):(<tr>
-              <td colSpan={6}>
-                <div className="flex flex-col items-center p-14" style={{backgroundColor:'#006D79'}}>
-                  <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
-                  <div>Nothing here</div>
-                </div>
-              </td>
-            </tr>
-          )}
+            </td>
+            <td className="text-center">
+              R${Number(record.amount).toFixed(2)}
+            </td>
+            <td className="text-center">
+              R${(Number(record.amount) * Number(record.rate)).toFixed(2)}
+            </td>
+            <td className="text-center">{record.pay_channel}</td>
+            <td className="text-center">{DepositStatusMap[record.status]}</td>
+            <td className="text-center">{record.created_at}</td>
+          </tr>
+        ))}
         </tbody>
       </table>
     </div>

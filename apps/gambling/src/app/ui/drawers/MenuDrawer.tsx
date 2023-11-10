@@ -185,7 +185,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               <div className={"flex"}>+ 20%</div>
             </div>
             <span>
-               <img className="h-[58px] w-[58px]" alt={"invite"} src={`assets/${environment.assetPrefix}/Group2.png`} style={{verticalAlign: 'middle'}}/>
+               <img className="h-[58px] w-[58px]" alt={"invite"} src={`assets/${environment.assetPrefix}/Group.png`} style={{verticalAlign: 'middle'}}/>
             </span>
           </DepositButton>
 

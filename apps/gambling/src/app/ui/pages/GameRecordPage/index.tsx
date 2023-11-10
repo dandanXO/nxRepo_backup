@@ -8,7 +8,7 @@ import { AppLocalStorage } from '../../../persistant/localstorage';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { SectionContainer } from '../../components/SectionContainer';
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
-import { environment } from 'apps/gambling-dashboard/src/environments/environment.prod.cat777bet';
+import { environment } from "../../../../environments/environment"
 
 const tableStyle = {
   thead: {

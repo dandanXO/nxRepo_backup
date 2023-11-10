@@ -1,7 +1,7 @@
 import cx from "classnames";
 import {UserLoginStatusSection} from "../../components/UserLoginStatusSection";
 import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
-import { environment } from "apps/gambling-dashboard/src/environments/environment";
+import { environment } from "../../../../environments/environment"
 
 export type IUserLoginStatusDrawers = {
   closeDrawer: () => void;

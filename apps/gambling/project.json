@@ -55,6 +55,10 @@
               "with": "apps/gambling/src/environments/environment.dev.coco777bet.ts"
             },
             {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/theme.coco777bet.css"
+            },
+            {
               "replace": "apps/gambling/src/index.replaceme.html",
               "with": "apps/gambling/src/environments/index.dev.coco777bet.html"
             }
@@ -69,6 +73,10 @@
             {
               "replace": "apps/gambling/src/environments/environment.ts",
               "with": "apps/gambling/src/environments/environment.prod.coco777bet.ts"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/theme.coco777bet.css"
             },
             {
               "replace": "apps/gambling/src/index.html",
@@ -89,6 +97,10 @@
               "with": "apps/gambling/src/environments/environment.dev.bmw.ts"
             },
             {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/theme.bmw.css"
+            },
+            {
               "replace": "apps/gambling/src/index.html",
               "with": "apps/gambling/src/environments/index.bmw.html"
             }
@@ -103,6 +115,10 @@
             {
               "replace": "apps/gambling/src/environments/environment.ts",
               "with": "apps/gambling/src/environments/environment.dev.legend.ts"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/theme.legend.css"
             },
             {
               "replace": "apps/gambling/src/index.html",

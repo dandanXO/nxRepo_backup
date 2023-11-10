@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import { ScrollTab } from "../../components/ScrollTab";
-import { environment } from "apps/gambling-dashboard/src/environments/environment";
+import { environment } from "../../../../environments/environment"
 
 
 export type TTotalFavoriteLocalState = {

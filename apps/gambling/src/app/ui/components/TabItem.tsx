@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import cx from "classnames";
 import {useState} from "react";
-import { environment } from "apps/gambling-dashboard/src/environments/environment";
+import { environment } from "../../../environments/environment"
 import useBreakpoint from "../hooks/useBreakpoint";
 
 
