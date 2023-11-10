@@ -146,10 +146,7 @@ body {
 }
 
 
-.active-drawer-button {
-  background: url(/assets/001/menuBg1.png) no-repeat center/100%;
-  height: 50px;
-}
+
 
 .vip-tab-items::-webkit-scrollbar {
   display: none;

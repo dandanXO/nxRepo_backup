@@ -52,15 +52,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.dev.coco777bet.ts"
+              "with": "apps/gambling/src/environments/coco777bet/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/theme.coco777bet.css"
+              "with": "apps/gambling/src/environments/coco777bet/theme.css"
             },
             {
               "replace": "apps/gambling/src/index.replaceme.html",
-              "with": "apps/gambling/src/environments/index.dev.coco777bet.html"
+              "with": "apps/gambling/src/environments/coco777bet/index.html"
             }
           ],
           "extractLicenses": false,
@@ -72,15 +72,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.prod.coco777bet.ts"
+              "with": "apps/gambling/src/environments/coco777bet/environment.prod.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/theme.coco777bet.css"
+              "with": "apps/gambling/src/environments/coco777bet/theme.css"
             },
             {
-              "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/index.prod.coco777bet.html"
+              "replace": "apps/gambling/src/index.replaceme.html",
+              "with": "apps/gambling/src/environments/coco777bet/index.html"
             }
           ],
           "optimization": true,
@@ -94,15 +94,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.dev.bmw.ts"
+              "with": "apps/gambling/src/environments/bmw/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/theme.bmw.css"
+              "with": "apps/gambling/src/environments/bmw/theme.css"
             },
             {
-              "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/index.bmw.html"
+              "replace": "apps/gambling/src/index.replaceme.html",
+              "with": "apps/gambling/src/environments/bmw/index.html"
             }
           ],
           "extractLicenses": false,
@@ -114,15 +114,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/environment.dev.legend.ts"
+              "with": "apps/gambling/src/environments/legend/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/theme.legend.css"
+              "with": "apps/gambling/src/environments/legend/theme.css"
             },
             {
-              "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/index.bmw.html"
+              "replace": "apps/gambling/src/index.replaceme.html",
+              "with": "apps/gambling/src/environments/legend/index.html"
             }
           ],
           "extractLicenses": false,

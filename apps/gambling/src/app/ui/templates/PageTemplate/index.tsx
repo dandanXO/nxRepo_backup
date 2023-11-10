@@ -395,10 +395,6 @@ export const PageTemplate = (props: IPage) => {
           "left-[276px] w-[calc(100vw-276px)]": !isMobile && isShowDesktopMenuDrawer,
           "bg-[]": !isCurrentPageCompanyProfile && !isMobile,//背景色
         })} style={{
-          // background: "url('assets/001/Brazilianwordmap.png') center/cover no-repeat",
-          backgroundSize: '60% 70%',
-          backgroundPosition: 'right bottom',
-          // opacity: 0.5,
         }}>
           {isMobile && isShowMobileHeader && (
             <HeaderMobile

@@ -20,6 +20,11 @@ const DepositButton = styled(BackgroundButton)`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+
+  &.active-drawer-button {
+    background: url(/assets/${environment.assetPrefix}/menuBg1.png) no-repeat center/100%;
+    height: 50px;
+  }
 `
 
 const CashBackButton = styled(BackgroundButton)`
