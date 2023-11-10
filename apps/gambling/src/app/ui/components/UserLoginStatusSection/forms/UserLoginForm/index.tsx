@@ -221,7 +221,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
         </div>
 
         <section className={"flex flex-col mt-2"}>
-          <button className={"my-4 text-[#31B77D]"} onClick={() => {
+          <button className={"my-4 text-[var(--light)]"} onClick={() => {
             props.onSwitchToForgetPassword();
           }}>Esqueça a senha?</button>
           <ConfirmButton

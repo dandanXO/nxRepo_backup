@@ -50,7 +50,7 @@ export const NotificationItemTitle = styled.div<{
   expand?: boolean;
 }>`
   padding: 12px 14px;
-  box-shadow: inset 0 0 36px 5px rgba(2, 92, 80, 1) !important;
+  box-shadow: inset 0 0 36px 5px var(--main) !important;
 
   ${(props) =>
       (props.expand || !props.first) && `

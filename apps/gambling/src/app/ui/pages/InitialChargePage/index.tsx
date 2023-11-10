@@ -45,7 +45,7 @@ export const InitialChargePage = () => {
             }} className={"text-white text-lg font-bold"}>Recarrague agora</ChargeButton>
           </section>
 
-          <div className={"p-4 rounded-lg flex flex-col text-left text-white items-start text-lg bg-[rgba(1,79,75,0.6)] border border-solid border-green-500 mb-8"}>
+          <div className={"p-4 rounded-lg flex flex-col text-left text-white items-start text-lg border border-solid border-green-500 mb-8"} style={{ backgroundColor: 'var(--game-block)', opacity:0.6 }}>
             <div className={"text-left w-full"}>Bônus de 20% para o primeiro depósito</div>
             <div className={"text-left w-full"}>Obrigado pela confiança e apoio. Para sua primeira recarga, oferecemos um bônus de recarga de até 20%! As recompensas serão transferidas diretamente para sua conta após a recarga.</div>
             <div className={"text-left w-full"}>Detalhes do evento:</div>
