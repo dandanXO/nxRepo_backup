@@ -35,7 +35,7 @@ export const LogoutModal = (props:ILogoutModal) => {
 
   return (
     <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}>
-      <LogoutSection className={"bg-[#013E42] p-4 rounded-2xl"}/>
+      <LogoutSection className={"bg-[var(--assistant)] p-4 rounded-2xl"}/>
     </div>
   )
 }

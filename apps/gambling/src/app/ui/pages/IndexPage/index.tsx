@@ -138,7 +138,7 @@ export const IndexPage = () => {
                   </ScrollTab>
                 </div>
                 <div className="shirnk-0 basis-[450px]">
-                  <Input className="bg-[#069D5C] items-baseline flex-1" prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
+                  <Input className="bg-[var(--medium)] items-baseline flex-1" prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
                     onChange={(event: any) => {
                       setSearchInput(event.target.value)
                     }}

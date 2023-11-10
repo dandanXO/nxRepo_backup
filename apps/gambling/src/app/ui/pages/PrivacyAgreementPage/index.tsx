@@ -14,7 +14,7 @@ export const PrivacyAgreementPage = () => {
     <>
       <div
         className={cx('overflow-y-auto', {
-          'p-8 border border-solid border-green-500 rounded-lg bg-[#014F4B] m-4 mt-8 mr-20': !isMobile,
+          'p-8 border border-solid border-green-500 rounded-lg bg-[var(--varient)] m-4 mt-8 mr-20': !isMobile,
           'py-3 px-4': isMobile,
         })}
       >
@@ -50,7 +50,7 @@ export const PrivacyAgreementPage = () => {
           className={cx(
             'mt-3 flex flex-col gap-3 text-left text-base text-white',
             {
-              'px-4 py-4 text-sm text-opacity-70 border border-solid border-green-500 rounded-lg bg-[#014F4B]': isMobile,
+              'px-4 py-4 text-sm text-opacity-70 border border-solid border-green-500 rounded-lg bg-[var(--varient)]': isMobile,
             }
           )}
         >

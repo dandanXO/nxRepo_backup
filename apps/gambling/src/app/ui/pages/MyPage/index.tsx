@@ -143,7 +143,7 @@ const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 };
 
 const DepositAndWithdrawalContainer = styled.div`
-  background-color: #014F4B;
+  background-color: var(--varient);
   border: 1px solid #2CFD99;
   background-size: 100% 100%;
   border-radius: 10px;
@@ -153,7 +153,7 @@ const DepositAndWithdrawalContainer = styled.div`
 `;
 
 const ListItemContainer = styled.div`
-  background: #014F4B;
+  background: var(--varient);
   border: 1px solid #2CFD99;
   background-size: 100% 100%;
   border-radius: 10px;
@@ -164,7 +164,7 @@ const ListItemContainer = styled.div`
 
 
 const VIPContainer = styled.div`
-  background-color: #014F4B;
+  background-color: var(--varient);
   border: 1px solid #2CFD99;
   background-size: 100% 100%;
   border-radius: 10px;

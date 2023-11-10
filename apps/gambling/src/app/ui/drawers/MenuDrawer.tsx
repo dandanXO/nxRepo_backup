@@ -64,7 +64,7 @@ const StyledDrawerButton = styled.button.attrs<IStyledDrawerButton>(props => ({
   height: 55px;
   box-sizing: border-box;
 
-  background: #069D5C;
+  background: var(--medium);
   margin-top: 12px;
   font-weight: 600;
 
@@ -116,7 +116,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
       props.closeMenuDrawer();
     }}>
 
-      <div className={cx("bg-[#013E42] p-4 flex flex-col flex-between", props.className, {
+      <div className={cx("bg-[var(--assistant)] p-4 flex flex-col flex-between", props.className, {
         "top-0": isMobile,
         "top-[130px]": !isMobile,
         "rounded-tr-lg": !isMobile,
@@ -127,7 +127,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
         {/* 添加一个去背的背景图片*/}
         <div className="absolute inset-0 z-[-1] bg-no-repeat bg-center"
              style={{
-               background: '#013E42',
+               background: 'var(--main)',
                backgroundSize: '100% 40%',
                backgroundPosition: 'center bottom',
                borderRadius: '0 20px 0 0',

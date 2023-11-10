@@ -134,9 +134,9 @@ const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 
 const VIPContainer = styled.div`
   //background-color: rgba(40, 112, 82, 0.2);
-background: #195F5B;
+background: var(--varient);
   background-size: 100% 100%;
-  border: 1px solid #2CFD99;
+  border: 1px solid var(--main-primary-main);
   border-radius: 10px;
   padding: 1px;
   height: 230px;
@@ -144,9 +144,9 @@ background: #195F5B;
 
 const ContaContainer = styled.div`
   //background-color: rgba(40, 112, 82, 0.2);
-background: #195F5B;
+  background: var(--varient);
   background-size: 100% 100%;
-  border: 1px solid #2CFD99;
+  border: 1px solid var(--main-primary-main);
   border-radius: 10px;
   padding: 1px;
   height: 145px;
@@ -154,9 +154,9 @@ background: #195F5B;
 
 const OtherContainer = styled.div`
   //background-color: rgba(40, 112, 82, 0.2);
-background: #195F5B;
+  background: var(--varient);
   background-size: 100% 100%;
-  border: 1px solid #2CFD99;
+  border: 1px solid var(--main-primary-main);
   border-radius: 10px;
   padding: 1px;
   height: 60px;
@@ -307,7 +307,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
       props.close();
     }}>
       <div
-          className={cx("fixed right-[144px] top-[100px] z-10 w-[400px] rounded-2xl p-4 flex flex-col flex-between text-sm bg-[#013E42]", {
+          className={cx("fixed right-[144px] top-[100px] z-10 w-[400px] rounded-2xl p-4 flex flex-col flex-between text-sm bg-[var(--assistant)]", {
           })}
           style={{
             // background: `url("assets/${environment.assetPrefix}/bg_web_login.png")`,

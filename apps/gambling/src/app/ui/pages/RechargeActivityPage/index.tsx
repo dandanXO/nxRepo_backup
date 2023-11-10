@@ -71,7 +71,7 @@ export const RechargeActivityPage = () => {
         </section>
 
 
-        <div className={"p-4 rounded-lg flex flex-col text-left text-white items-start text-lg bg-[rgba(1,79,75,0.6)] border border-solid border-green-500 mb-8 mr-4 ml-4"}>
+        <div className={"p-4 rounded-lg flex flex-col text-left text-white items-start text-lg border border-solid border-green-500 mb-8 mr-4 ml-4"} style={{ backgroundColor: 'var(--game-block)', opacity:0.6 }}>
           <div className={"text-left w-full"}>Nota especial:
           </div>
 

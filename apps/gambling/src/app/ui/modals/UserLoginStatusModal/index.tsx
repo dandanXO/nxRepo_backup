@@ -5,7 +5,7 @@ import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
 
 
 const Container = styled.div`
-  background: #013E42;
+  background: var(--assistant);
   //background: rgba(9,11,15,1);
   //box-shadow: 0 0 .1rem #27563A !important;
 

@@ -27,7 +27,7 @@ export const SettingPage = () => {
           close={() => setEditing(false)}
         />
       )}
-      <div className={`p-8 ${isMobile ? 'bg-[#014F4B]' : 'p-4 border border-solid border-green-500 rounded-lg bg-[#014F4B] m-4 mb-40 mt-8'}`}>
+      <div className={`p-8 ${isMobile ? 'bg-[var(--varient)]' : 'p-4 border border-solid border-green-500 rounded-lg bg-[var(--varient)] m-4 mb-40 mt-8'}`}>
         <SectionContainer id={'game-record-section'}>
           <button
               className={'mb-8 flex items-end flex-col'}

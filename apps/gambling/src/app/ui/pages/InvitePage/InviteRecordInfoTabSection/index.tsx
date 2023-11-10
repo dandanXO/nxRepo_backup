@@ -195,7 +195,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
     }[isMobile ? mobileTotalPanelMode : totalPanelMode]
 
 
-    const dailyData = inviteUserDay?.data.records.map((z: any) => {
+    const dailyData = inviteUserDay?.data?.records.map((z: any) => {
         const dataType = isMobile ? mobileDailyPanelMode : dailyPanelMode
       console.log("dailyData0", dataType);
 

@@ -13,7 +13,7 @@ import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "
 import {environment} from "../../../../environments/environment";
 
 export const PersonalControl = styled.div`
-  background-color: #069D5C;
+  background-color: var(--medium);
   border-radius: 25px;
   width: 178px;
   height: 32px;

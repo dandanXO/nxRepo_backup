@@ -16,7 +16,7 @@ export const TabBar = (props: IFooter) => {
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
 
   return (
-    <footer className={"fixed bottom-0 flex flex-row justify-between h-[60px] z-10 bg-[#013E42] w-full p-2"}>
+    <footer className={"fixed bottom-0 flex flex-row justify-between h-[60px] z-10 bg-[var(--assistant)] w-full p-2"}>
       <section className={"flex-1 flex flex-col items-center"}
                onClick={() => {
                  navigate(PageOrModalPathEnum.IndexPage);

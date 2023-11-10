@@ -51,9 +51,10 @@ const GreenContainer = styled.div`
   //box-shadow: inset 0 0 36px 5px #163610;
   border-radius: 20px;
   margin: 40px 0;
-  border: 1px solid #16ff8f;
+  border: 1px solid var(--main-primary-main);
   //background-image: linear-gradient(180deg,#090B0F,#090B0F),linear-gradient(90deg,#1DA668,rgba(25,177,106,.2),#1DA668,rgba(25,177,106,.2),#1DA668);
-  background: #013e4299;
+  background: var(--assistant);
+  opacity: 0.6;
 `;
 
 const YellowContainer = styled.div`
