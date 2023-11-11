@@ -30,166 +30,100 @@ module.exports = {
     // https://tailwindcss.com/docs/customizing-colors#naming-your-colors
     colors: {
       ...colors,
-      // ...customColors,
-      primary: {
-        main: 'var(--primary_main)',
-        variant: 'var(--primary_variant)',
-        assistant: 'var(--primary_assistant)',
-      },
-      secondary: {
-        main: 'var(--secondary_main)',
-        variant: 'var(--secondary_variant)',
-        assistant: 'var(--secondary_assistant)',
-      },
-      tertiary: {
-        main: 'var(--tertiary_main)',
-        variant: 'var(--tertiary_variant)',
-        assistant: 'var(--tertiary_assistant)',
-      },
-      cbg: {
-        // NOTE: background
-        primary: 'var(--custom_bg_primary)',
-        secondary: 'var(--custom_bg_secondary)',
-        tertiary: 'var(--custom_bg_tertiary)',
-      },
-      ctext: {
-        // NOTE: text
-        primary: 'var(--custom_text_primary)',
-        secondary: 'var(--custom_text_secondary)',
-        tertiary: 'var(--custom_text_tertiary)',
-        divider: 'var(--custom_text_divider)',
-      },
-      cstate: {
-        // NOTE: State
-        disable: {
-          main: 'var(--custom_state_disable_main)',
-          variant: 'var(--custom_state_disable_variant)',
-          assistant: 'var(--custom_state_disable_assistant)',
-        },
-        success: {
-          main: 'var(--custom_state_success_main)',
-          assistant: 'var(--custom_state_success_assistant)',
-        },
-        warning: {
-          main: 'var(--custom_state_warning_main)',
-          variant: 'var(--custom_state_warning_variant)',
-          assistant: 'var(--custom_state_warning_assistant)',
-        },
-        error: {
-          main: 'var(--custom_state_error_main)',
-          variant: 'var(--custom_state_error_variant)',
-          assistant: 'var(--custom_state_error_assistant)',
-        },
-        info: {
-          main: 'var(--custom_state_info_main)',
-          variant: 'var(--custom_state_info_variant)',
-          assistant: 'var(--custom_state_info_assistant)',
-        },
-      },
-      cTextFields: {
-        background: {
-          main: 'var(--custom_text_fields_background_main)',
-          variant: 'var(--custom_text_fields_background_variant)',
-        },
-        placeholder: {
-          main: 'var(--custom_text_fields_placeholder_main)',
-        },
-        outline: {
-          main: 'var(--custom_text_fields_outline_main)',
-        },
-      },
+      /*bg*/
+      "main": 'var(--main)',
+      "varient": 'var(--varient)',
+      "assistant": 'var(--assistant)',
+      "medium": 'var(--medium)',
+      "light": 'var(--light)',
+
+      /*bg-other*/
+      "game-block": 'var(--game-block)',
+      "footer": 'var(--footer)',
+
+      /*main*/
+      "main-primary-main": 'var(--main-primary-main)',
+      "main-primary-varient": 'var(--main-primary-varient)',
+      "main-primary-assistant": 'var(--main-primary-assistant)',
+      "main-secondary-main": 'var(--main-secondary-main)',
+      "main-state-error": 'var(--main-state-error)',
+      "main-state-warning": 'var(--main-state-warning)',
+
+      /*table*/
+      "table-main": 'var(--table-main)',
+      "table-varient": 'var(--table-varient)',
+      "table-asisstant": 'var(--table-asisstant)',
+      "table-light": 'var(--table-light)',
+
+      /*button*/
+      /*btn/button*/
+      "btn-gradient1-from": 'var(--btn-gradient1-from)',
+      "btn-gradient1-to": 'var(--btn-gradient1-to)',
+
+      /*btn/button_2*/
+      "btn-gradient-2-from": 'var(--btn-gradient-2-from)',
+      "btn-gradient-2-to": 'var(--btn-gradient-2-to)',
+
+      /*btn/button_inactive*/
+      "btn-gradient-inactive-from": 'var(--btn-gradient-inactive-from)',
+      "btn-gradient-inactive-to": 'var(--btn-gradient-inactive-to)',
+
+      /*btn/icon*/
+      "btn-gradient-icon-from": 'var(--btn-gradient-icon-from)',
+      "btn-gradient-icon-to": 'var(--btn-gradient-icon-to)',
+
+      /*btn-vip*/
+      "btn-gradient-vip-from": 'var(--btn-gradient-vip-from)',
+      "btn-gradient-vip-to": 'var(--btn-gradient-vip-to)',
+
+      /*dashboard*/
+      /*dashboard/block_1*/
+      "dashboard-block1-gradient-from": 'var(--dashboard-block1-gradient-from)',
+      "dashboard-block1-gradient-to": 'var(--dashboard-block1-gradient-to)',
+      /*dashboard/block_2*/
+      "dashboard-block2-gradient-from": 'var(--dashboard-block2-gradient-from)',
+      "dashboard-block2-gradient-to": 'var(--dashboard-block2-gradient-to)',
+      /*dashboard/block_3*/
+      "dashboard-block3-gradient-from": 'var(--dashboard-block3-gradient-from)',
+      "dashboard-block3-gradient-to": 'var(--dashboard-block3-gradient-to)',
+
+
+      /*dashboard/dashboard_base*/
+      "dashboard-base": 'var(--dashboard-base)',
+      /*dashboard/block_1*/
+      "dashboard-block1": 'var(--dashboard-block1)',
+
+      /*dashboard/block_2*/
+      "dashboard-block2": 'var(--dashboard-block2)',
+      /*dashboard/block_3*/
+      "dashboard-block3": 'var(--dashboard-block3)',
+
+
+      /*text*/
+      /*text/telegram*/
+      "telegram": 'var(--telegram)',
+      /*text/black*/
+      "black": 'var(--black)',
+      /*text/white*/
+      "white": 'var(--white)',
+      /*text/grey*/
+      "gray": 'var(--gray)',
+
+      /*text-dashboard*/
+      "block1": 'var(--block1)',
+      /*text-ad*/
+      "gradient-ad-from": 'var(--gradient-ad-from)',
+      "gradient-ad-to": 'var(--gradient-ad-to)',
+
+      /*text-ad_tg*/
+      "gradient-ad-tg-from": 'var(--gradient-ad-tg-from)',
+      "gradient-ad-tg-to": 'var(--gradient-ad-tg-to)',
     },
   },
   plugins: [
     // require("daisyui"),
     plugin(function ({ addUtilities, addComponents, addVariant, e }) {
-      addComponents({
-        '.open-index-button': {
-          background: 'var(--custom_bg_homepage_button) !important',
-        },
-        '.bg-primary-gradient': {
-          background: 'var(--custom_bg_homepage_button) !important',
-        },
-        // LoadingMask
-        '.pulseLoader': {
-          '> span ': {
-            backgroundColor: 'var(--primary_main) !important',
-          },
-        },
-        'bg-account': {
-          backgroundColor: '--custom_bg_account',
-        },
-        'bg-modal': {
-          backgroundColor: 'var(--custom_bg_account)',
-        },
-        'bg-disabled': {
-          backgroundColor: 'var(--custom_bg_disabled)',
-        },
-        '.bg-coupon': {
-          background: 'var(--custom_bg_coupon) !important',
-        },
-        // 拉霸
-        '.slider': {
-          width: '100%',
-          '.quota-slider': {
-            height: '5px',
-          },
-          //NOTE: 拉霸按鈕右側捲軸
-          '.quota-slider-track-1': {
-            background: 'var(--primary_variant)',
-            height: '5px',
-            borderRadius: '8px',
-          },
-          //NOTE: 拉霸按鈕左側捲軸
-          '.quota-slider-track-0': {
-            background: 'var(--custom_bg_secondary)',
-            height: '5px',
-            borderRadius: '8px',
-          },
-          '.quota-slider-track-disable-0': {
-            background: 'var(--custom_bg_secondary)',
-            height: '5px',
-            borderRadius: '8px',
-          },
-          '.quota-slider-track-disable-1': {
-            background: 'var(--custom_bg_secondary)',
-            height: '5px',
-            borderRadius: '8px',
-          },
-          // NOTE: 拉霸按鈕
-          '.quota-slider-thumb': {
-            '&:focus': {
-              outline: 'none',
-              boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-            },
-            background: '#fff',
-            width: '18px',
-            height: '18px',
 
-            top: '-7px',
-            textAlign: 'center',
-            lineHeight: '25px',
-            borderRadius: '50%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-
-            // NOTE: 拉霸按鈕-內圓
-            '.quota-slider-thumb-inner': {
-              background: 'var(--custom_state_success_main)',
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-            },
-            '.quota-slider-thumb-inner-disable': {
-              background: 'var(--custom_state_disable_main)',
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-            },
-          },
-        },
-      });
     }),
   ],
   safelist: ['border-l-2', 'border-dashed'],

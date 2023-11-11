@@ -6,6 +6,7 @@ import { API, API3 } from '../external';
 import { appSlice } from './appSlice';
 import { gameSlice } from './gameSlice';
 import {setupListeners} from "@reduxjs/toolkit/query";
+import {uiSlice} from "./uiSlice";
 
 
 export const history = createBrowserHistory();
@@ -38,7 +39,8 @@ export const appStore = configureStore({
     [appSlice.name]: appSlice.reducer,
     [API.reducerPath]: API.reducer,
     [API3.reducerPath]: API3.reducer,
-    [gameSlice.name]: gameSlice.reducer
+    [gameSlice.name]: gameSlice.reducer,
+    [uiSlice.name]: uiSlice.reducer,
     // [APIBoundaryModuleSlice.name]: APIBoundaryModuleSlice.reducer,
     // [indexPageSlice.name]: indexPageSlice.reducer,
     // [loadingSlice.name]: loadingSlice.reducer,

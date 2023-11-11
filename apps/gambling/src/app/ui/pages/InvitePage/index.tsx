@@ -120,7 +120,7 @@ export const InvitePage = () => {
   return (
     <>
 
-      <div className={"px-4 sm:px-10 font-[HelveticaNeue-Medium-11] py-4"}>
+      <div className={"px-4 sm:px-10 py-4"}>
 
         <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
           {/*<Tabs className={"game-type-tab-list"}>*/}

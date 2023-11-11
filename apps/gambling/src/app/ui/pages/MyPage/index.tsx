@@ -18,11 +18,10 @@ import {useEffect, useState} from "react";
 import { MessageCountBadge } from "../../components/MessageCountBadge";
 import {useGetLetterListMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import { IUserStore } from "../../../gateway/socket";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {environment} from "../../../../environments/environment";
-import {Avatar} from "../../templates/PageTemplate/Avatar";
-import {AvatarAccountInfo} from "../../templates/PageTemplate/AvatarAccountInfo";
+import {Avatar} from "../../components/Avatar";
+import {AvatarAccountInfo} from "../../components/AvatarAccountInfo";
 
 const MyPageButtonD = styled.button`
   background-image: url("assets/${environment.assetPrefix}/btn_green05.png");

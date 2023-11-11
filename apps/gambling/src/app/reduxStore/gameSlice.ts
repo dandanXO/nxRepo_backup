@@ -40,7 +40,6 @@ export const gameSlice = createSlice({
   initialState:initGameList,
   reducers: {
     setLabel: (state: InitialState, action: PayloadAction<InitialState['label']>) => {
-
       state.label = action.payload;
     },
     setGameList: (state: InitialState, action: PayloadAction<GetGameListResponseData>) => {

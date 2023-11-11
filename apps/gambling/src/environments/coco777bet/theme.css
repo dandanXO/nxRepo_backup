@@ -1,10 +1,10 @@
 :root {
   /*bg*/
-  --main: #025C50;
-  --varient: #014F4B;
-  --assistant: #013E42;
-  --medium: #069D5C;
-  --light: #31B77D;
+  --main: #17103f;
+  --varient: #032658;
+  --assistant: #1D2147;
+  --medium: #2A78DD;
+  --light: #06F2ED;
 
   /*bg-other*/
   --game-block: #013E42;
@@ -89,8 +89,4 @@
   --text-gradient-ad-tg-from: #D071FD;
   --text-gradient-ad-tg-to: #003BC6;
 
-}
-
-body {
-  background-color: #025C50;
 }

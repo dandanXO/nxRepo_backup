@@ -2,9 +2,9 @@ import Carousel from "react-multi-carousel";
 import {useNavigate} from "react-router";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../reduxStore";
-import { appSlice } from "../../../reduxStore/appSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../reduxStore";
+import {appSlice} from "../../../reduxStore/appSlice";
 import {environment} from "../../../../environments/environment";
 
 const responsive = {

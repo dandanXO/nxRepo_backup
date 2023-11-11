@@ -1,39 +1,24 @@
-import styled from "styled-components";
-import cx from "classnames"
 // import { space, layout, typography, color } from 'styled-system'
-import {Header} from "./Header";
-
 import React, {useEffect, useState} from "react";
-import {MenuDrawer} from "../../drawers/MenuDrawer";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {UserLoginStatusModal} from "../../modals/UserLoginStatusModal";
-import {UserLoginStatusDrawers} from "../../drawers/UserLoginStatusDrawers";
-import {UserInfoStatusPopover} from "../../popover/UserInfoStatusPopover";
-import {ThreeDots} from 'react-loading-icons';
-import {NotificationDrawer} from "../../drawers/NotificationDrawer";
-import {InviteBonusModal} from "../../modals/InviteBonusModal";
-import {LogoutPopover} from "../../popover/LogoutPopover";
-import {DownloadModal} from "../../modals/DownloadModal";
-
 import {notification} from 'antd';
-import {RootState} from "../../../reduxStore";
 import {useDispatch, useSelector} from "react-redux";
-import {appSlice} from "../../../reduxStore/appSlice";
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useLocation, useNavigate} from "react-router";
-import { TabBar } from "./TabBar";
-import {LogoutModal} from "../../modals/LogoutModal";
-import App from "next/app";
-import {TelegramContactModal} from "../../modals/TelegramContactModal";
-import {ErrorPage} from "../../pages/ErrorPage";
-import { ErrorBoundary } from "react-error-boundary";
-import {environment} from "../../../../environments/environment";
-import { DownOutlined, UpOutlined } from "@ant-design/icons";
+
+import useBreakpoint from "../../hooks/useBreakpoint";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
-import {Toolbox} from "./Toolbox";
-import {Footer} from "./Footer";
-import {HeaderMobile} from "./HeaderMobile";
+
+import {RootState} from "../../../reduxStore";
+import {appSlice} from "../../../reduxStore/appSlice";
+import {uiSlice} from "../../../reduxStore/uiSlice";
+
+import {AppLocalStorage} from "../../../persistant/localstorage";
+import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
+import {environment} from "../../../../environments/environment";
+
+import {CocoPageTemplate} from "./env/CocoPageTemplate";
+import {PernambucanaPageTemplate} from "./env/PernambucanaPageTemplate";
+
+
 console.log("environment", environment);
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
@@ -46,51 +31,6 @@ export type IOpenNotificationWithIcon = {
 // export const AppContext = createContext({
 //   isUserLogin: !!AppLocalStorage.getItem("token"),
 // });
-
-type IStyledPage = {
-  isCurrentPageCompanyProfile: boolean;
-}
-const StyledPage = styled.div.attrs((props) => ({
-  className: "h-full"
-}))<IStyledPage>`
-  &:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    //box-shadow: 0 0 3rem 0.5rem #306347 inset;
-    //background-color:#306347;
-  }
-  &:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -2;
-    background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
-
-    @media (max-width: 768px) {
-      background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
-    }
-  }
-
-  ${(props) => props.isCurrentPageCompanyProfile && `
-    background: url("assets/${environment.assetPrefix}/bg.888bcf29.png") no-repeat center center/100% auto;
-    background-color:#090b0f;
-  `};
-  @media (min-width: 640px) {
-    &:after {
-      //background: url("assets/bgImg.3a85b39c.jpg") no-repeat center center/100% auto;
-    }
-  }
-
-`;
-
 
 
 export type IPage = {
@@ -105,11 +45,13 @@ export type IPage = {
 }
 export const PageTemplate = (props: IPage) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
-
-
-
+  // const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
+  const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
+  const setOpenMenuDrawer = (show: boolean) => {
+    dispatch(uiSlice.actions.setOpenMenuDrawer(show));
+  }
   const {isMobile} = useBreakpoint();
 
   useEffect(() => {
@@ -122,7 +64,6 @@ export const PageTemplate = (props: IPage) => {
 
   // NOTE: UserLoginStatusModal
   const [showUserLoginStatusMobileModal, setShowUserLoginStatusMobileModal] = useState(false);
-
 
   // useEffect(() => {
   //   if(!isMobile) {
@@ -158,7 +99,7 @@ export const PageTemplate = (props: IPage) => {
   // const {user: { isUserLogin }} = usePageTemplatePresenter();
   // const { isUserLogin} = useContext(AppContext);
   // const [isLogin, setIsLogin] = useState(isUserLogin);
-  const dispatch = useDispatch();
+
   const isLogin = useSelector((state: RootState) => state.app.isLogin);
   const setIsLogin = (login: boolean) => {
     dispatch(appSlice.actions.setIsLogin(login))
@@ -253,182 +194,82 @@ export const PageTemplate = (props: IPage) => {
     window.open(telegramServiceUrl,'_blank')
   }
 
-  return (
-    <StyledPage isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}>
+  if(environment.assetPrefix === "coco777bet") {
+    return (
+      <CocoPageTemplate
+        isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+        contextHolder={contextHolder}
+        isMobile={isMobile}
+        isShowDesktopHeader={isShowDesktopHeader}
+        isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+        showLoginModal={showLoginModal}
+        setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
+        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+        openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+        setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+        setOpenLogoutPopover={setOpenLogoutPopover}
+        isShowMobileLogoutModal={isShowMobileLogoutModal}
 
-      {contextHolder}
+        openMenuDrawer={openMenuDrawer}
+        setOpenMenuDrawer={setOpenMenuDrawer}
+        isShowLoginModal={isShowLoginModal}
+        openNotificationWithIcon={openNotificationWithIcon}
+        openDownloadModal={openDownloadModal}
+        setOpenDownloadModal={setOpenDownloadModal}
+        isShowTelegramModal={isShowTelegramModal}
+        onClickToOpenTelegramService={onClickToOpenTelegramService}
+        isShowInviteBonusModal={isShowInviteBonusModal}
+        setOpenInitailChargeModal={setOpenInitailChargeModal}
+        isShowMobileHeader={isShowMobileHeader}
+        isShowTabbar={isShowTabbar}
+        showToolbox={props.showToolbox}
+        onClickToDownload={onClickToDownload}
+        onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+        isUILoading={isUILoading}
+      >
+        {props.children}
+      </CocoPageTemplate>
+    )
+  } else {
+    return (
+      <PernambucanaPageTemplate
+        isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+        contextHolder={contextHolder}
+        isMobile={isMobile}
+        isShowDesktopHeader={isShowDesktopHeader}
+        isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+        isLogin={isLogin}
+        setIsLogin={setIsLogin}
+        showLoginModal={showLoginModal}
+        setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
+        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+        openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+        setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+        setOpenLogoutPopover={setOpenLogoutPopover}
+        isShowMobileLogoutModal={isShowMobileLogoutModal}
 
-      {!isMobile && isShowDesktopHeader && (
-        <Header
-          isLogin={isLogin}
-          onClickUserLoginStatusDrawer={() => {
-            // setOpenNonMobileUserLoginStatusDrawer(true);
-            showLoginModal(true)
-          }}
-          className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
-          onClickToPopupUserInfoStatusPopover={() => {
-            setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
-          }}
-          onClickToOpenNotificationDrawer={() => {
-            setOpenDesktopNotificationDrawer(true)
-          }}
-          onClickToChangeLogoutPopover={(display: boolean) => {
-            setOpenLogoutPopover(display);
-          }}
-          openLogoutPopover={isShowMobileLogoutModal}
+        openMenuDrawer={openMenuDrawer}
+        setOpenMenuDrawer={setOpenMenuDrawer}
+        isShowLoginModal={isShowLoginModal}
+        openNotificationWithIcon={openNotificationWithIcon}
+        openDownloadModal={openDownloadModal}
+        setOpenDownloadModal={setOpenDownloadModal}
+        isShowTelegramModal={isShowTelegramModal}
+        onClickToOpenTelegramService={onClickToOpenTelegramService}
+        isShowInviteBonusModal={isShowInviteBonusModal}
+        setOpenInitailChargeModal={setOpenInitailChargeModal}
+        isShowMobileHeader={isShowMobileHeader}
+        isShowTabbar={isShowTabbar}
+        showToolbox={props.showToolbox}
+        onClickToDownload={onClickToDownload}
+        onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+        isUILoading={isUILoading}
+      >
+        {props.children}
+      </PernambucanaPageTemplate>
+    )
+  }
 
-        />
-      )}
-
-      <div className={"h-full flex flex-row"}>
-
-        {/*{isShowDesktopMenuDrawer && openMenuDrawer && (*/}
-        {/*  <MenuDrawer*/}
-        {/*    className={cx("fixed left-0 bottom-0 w-[276px] min-w-[276px] h-full z-30", {*/}
-        {/*      "w-[0px]": !isShowDesktopMenuDrawer,*/}
-        {/*    })}*/}
-        {/*    closeMenuDrawer={ () => {*/}
-        {/*      setOpenMenuDrawer(false)*/}
-        {/*    }}/>*/}
-        {/*)}*/}
-        {isShowDesktopMenuDrawer && (
-          <MenuDrawer
-            className={cx("fixed bottom-0 w-[276px] min-w-[276px] h-full z-30",
-              "ease-in-out",
-              {
-                "duration-300": true, //isMobile,
-                // "w-[0px]": !isShowDesktopMenuDrawer,
-                "left-[-276px]": isMobile && !openMenuDrawer,
-                "flex left-0": openMenuDrawer,
-              }
-            )}
-            closeMenuDrawer={ () => {
-              setOpenMenuDrawer(false)
-            }}
-            openMenuDrawer={openMenuDrawer}
-          />
-        )}
-
-        {/*refactor: openNotificationWithIcon*/}
-        {/*{showUserLoginStatusMobileModal && (*/}
-        {isMobile && isShowLoginModal && (
-          <UserLoginStatusModal
-            openNotificationWithIcon={openNotificationWithIcon}
-            close={() => {
-              // setShowUserLoginStatusMobileModal(false)
-              showLoginModal(false)
-            }}
-            setIsLogin={(login: boolean) => setIsLogin(login)}
-          />
-        )}
-        {/*{openNonMobileUserLoginStatusDrawer && (*/}
-        {!isMobile && isShowLoginModal && (
-          <UserLoginStatusDrawers
-            openNotificationWithIcon={openNotificationWithIcon}
-            closeDrawer={() => {
-              // setOpenNonMobileUserLoginStatusDrawer(false);
-              showLoginModal(false)
-            }}
-            setIsLogin={() => setIsLogin(true)}
-          />
-        )}
-
-        {openDownloadModal && (
-          <DownloadModal close={() => {
-            setOpenDownloadModal(false)
-          }}/>
-        )}
-
-        {openDesktopUserInfoStatusDrawer && (
-          <UserInfoStatusPopover close={() => setOpenDesktopUserInfoStatusDrawer(false)}/>
-        )}
-
-        {openDesktopNotificationDrawer && (
-          <NotificationDrawer closeDrawer={() => {
-            setOpenDesktopNotificationDrawer(false)
-          }}/>
-        )}
-
-        {!isMobile && isShowMobileLogoutModal && (
-          <LogoutPopover close={() => {
-            setOpenLogoutPopover(false);
-          }}/>
-        )}
-
-        {isShowTelegramModal && (
-          <TelegramContactModal close={() => {
-            dispatch(appSlice.actions.setShowTelegramModal(false))
-          }} toTelegram={() => {
-            dispatch(appSlice.actions.setShowTelegramModal(false))
-            onClickToOpenTelegramService()
-          }}/>
-        )}
-
-        {isShowInviteBonusModal && (
-          <InviteBonusModal
-            close={() => {
-              setOpenInitailChargeModal(false);
-            }}
-            onConfirm={() => {
-              setOpenInitailChargeModal(false);
-              navigate(PageOrModalPathEnum.InvitePage);
-            }}/>
-        )}
-
-        <div className={cx("w-full h-full", {
-          "relative": !isMobile,
-          "top-[100px]": isShowDesktopHeader,
-          "left-[276px] w-[calc(100vw-276px)]": !isMobile && isShowDesktopMenuDrawer,
-          "bg-[]": !isCurrentPageCompanyProfile && !isMobile,//背景色
-        })} style={{
-        }}>
-          {isMobile && isShowMobileHeader && (
-            <HeaderMobile
-              clickToOpenMenuDrawer={() => {
-                setOpenMenuDrawer(!openMenuDrawer)
-              }}
-              clickToOpenUserLoginStatusModal={() => {
-                // setShowUserLoginStatusMobileModal(true);
-                showLoginModal(true)
-              }}
-            />
-          )}
-
-          {isMobile && isShowMobileLogoutModal && (
-            <LogoutModal/>
-          )}
-
-          {/*NOTE: 佔據高度*/}
-          {isMobile ? (
-            isShowMobileHeader && <div className={"h-[52.5px]"}></div>
-          ) : (
-            isShowMobileHeader && <div className={"h-[13px]"}></div>
-          )}
-
-          <ErrorBoundary fallback={<div className={"text-white"}>Children</div>}>
-            {props.children}
-          </ErrorBoundary>
-
-          {/*Footer*/}
-          <Footer/>
-
-          {isMobile && isShowTabbar&& (
-            <TabBar/>
-          )}
-
-          {/*Toolbox*/}
-          <Toolbox showToolbox={props.showToolbox} onClickToDownload={onClickToDownload} onClickToOpenTelegramManager={onClickToOpenTelegramManager} onClickToOpenTelegramService={onClickToOpenTelegramService}/>
-        </div>
-      </div>
-
-      {isUILoading && (
-        <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
-          <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
-          <ThreeDots height={25} className={'inline-block'} />
-        </div>
-      )}
-
-    </StyledPage>
-
-  )
 }

@@ -11,6 +11,9 @@
         "hmr": true
       },
       "configurations": {
+        "dev-pernambucana777bet": {
+          "buildTarget": "gambling:build:dev-pernambucana777bet"
+        },
         "dev-coco777bet":  {
           "buildTarget": "gambling:build:dev-coco777bet"
         },
@@ -47,6 +50,48 @@
           "optimization": false,
           "sourceMap": true,
           "vendorChunk": true
+        },
+        "dev-pernambucana777bet": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/pernambucana777bet/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/pernambucana777bet/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/index.replaceme.html",
+              "with": "apps/gambling/src/environments/pernambucana777bet/index.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "prod-pernambucana777bet": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/pernambucana777bet/environment.prod.ts"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/pernambucana777bet/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/index.replaceme.html",
+              "with": "apps/gambling/src/environments/pernambucana777bet/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
         },
         "dev-coco777bet": {
           "fileReplacements": [
