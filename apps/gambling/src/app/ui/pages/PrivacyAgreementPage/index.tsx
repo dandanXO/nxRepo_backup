@@ -14,7 +14,7 @@ export const PrivacyAgreementPage = () => {
     <>
       <div
         className={cx('overflow-y-auto', {
-          'p-8 border border-solid border-green-500 rounded-lg bg-[#014F4B] m-4 mt-8 mr-20': !isMobile,
+          'p-8 border border-solid border-green-500 rounded-lg bg-varient m-4 mt-8 mr-20': !isMobile,
           'py-3 px-4': isMobile,
         })}
       >
@@ -38,7 +38,7 @@ export const PrivacyAgreementPage = () => {
 
 
         {isMobile && (
-          <div className="ml-2 text-left text-2xl font-bold text-[#FBFF3F]">
+          <div className="ml-2 text-left text-2xl font-bold text-main-secondary-main">
             Politica de Privacidade
           </div>
         )}
@@ -50,7 +50,7 @@ export const PrivacyAgreementPage = () => {
           className={cx(
             'mt-3 flex flex-col gap-3 text-left text-base text-white',
             {
-              'px-4 py-4 text-sm text-opacity-70 border border-solid border-green-500 rounded-lg bg-[#014F4B]': isMobile,
+              'px-4 py-4 text-sm text-opacity-70 border border-solid border-green-500 rounded-lg bg-varient': isMobile,
             }
           )}
         >
@@ -58,7 +58,7 @@ export const PrivacyAgreementPage = () => {
           <div
               className={cx('mt-5 text-white', {
                 'text-base': isMobile,
-                'text-2xl text-center text-[#16FF8F]': !isMobile, // 添加 text-center 类
+                'text-2xl text-center text-main-primary-main': !isMobile, // 添加 text-center 类
               })}
           >
             Privacy Policy and Personal Data Protection

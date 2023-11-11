@@ -12,25 +12,10 @@ import {environment} from "../../../../environments/environment";
 
 const { RangePicker } = DatePicker;
 
-const tableStyle = {
-  thead: {
-    borderCollapse: 'collapse',
-  },
-  th: {
-    backgroundColor: '#008B8D',
-    color: '#fff',
-    border: '0.1px solid rgba(0, 82, 101, 0.3)',
-  },
-  td: {
-    backgroundColor: '#006D79',
-    color: '#fff',
-  },
-};
-
 const NoData = () => {
   return (
     <td colSpan={2} className=''>
-      <div style={{backgroundColor:'#006D79'}}>
+      <div className='p-12' style={{backgroundColor:'var(--table-varient)'}}>
         <img style={{display: 'unset'}} className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
         <div>Nada aq</div>
       </div>
@@ -66,9 +51,9 @@ export const InviteSettlementRecordPage = () => {
   }, [dates])
 
   const datePickerStyle = {
-    backgroundColor: '#437B5D',
+    backgroundColor: 'var(--table-main)',
     borderRadius: '10px',
-    border: '0.5px solid #58DCC7',
+    border: 'none',
     color: '#ffffff',
   };
 
@@ -106,13 +91,13 @@ export const InviteSettlementRecordPage = () => {
             />
           </section>
 
-          <div className="overflow-x-auto" style={{borderWidth:'1px',borderColor:'#58DCC7',borderRadius:'10px'}}>
+          <div className="overflow-x-auto" style={{borderWidth:'1px',borderColor:'var(--table-light)',borderRadius:'10px'}}>
             <table className="table table-zebra w-full text-center">
               {/* head */}
               <thead>
                 <tr>
-                  <th style={tableStyle.th}>Hora De Entrada</th>
-                  <th style={tableStyle.th}>Bônus</th>
+                  <th className='p-4'>Hora De Entrada</th>
+                  <th className='p-4'>Bônus</th>
                 </tr>
               </thead>
 
@@ -121,8 +106,8 @@ export const InviteSettlementRecordPage = () => {
                 currentData?.rows.map((itme, index) => {
                   return (
                     <tr>
-                      <td style={tableStyle.td}>{itme.updateTime}</td>
-                      <td style={tableStyle.td}>R{parseFloat((itme.reward/1000).toFixed(2))}</td>
+                      <td className='p-12'>{itme.updateTime}</td>
+                      <td className='p-12'>R{parseFloat((itme.reward/1000).toFixed(2))}</td>
                     </tr>
                   )
                 })

@@ -21,7 +21,7 @@ const CancelButton = styled.button`
 `
 const ConfirmButton = styled.button`
   font-size: 14px;
-  background: linear-gradient(180deg,#C8F568 0%,#16FF8F 99%);
+  background: linear-gradient(180deg,var(--btn-gradient1-from) 0%,var(--btn-gradient1-to) 99%);
   //box-shadow: 0 2px #036a02,inset 0 1px 3px rgba(255,255,255,.5)!important;
   border-radius: 25px;
   margin: 0 12px;
@@ -54,10 +54,10 @@ export const LogoutSection = (props: ILogoutPopover) => {
 
   return (
     <div className={cx("flex flex-col", props.className)}>
-      <div className={"mb-2 text-[#FBFF3F]"}>Tem certeza que deseja sair?</div>
+      <div className={"mb-2 text-main-secondary-main"}>Tem certeza que deseja sair?</div>
       <div className={"flex flex-row justify-center"}>
-        <CancelButton className={"px-2 py-1 text-[#ffffff]"} onClick={onHandleCancel}>Cancelar</CancelButton>
-        <ConfirmButton className={"px-2 py-1 text-[#047A70]"} onClick={onHandleLogout}>Confirme</ConfirmButton>
+        <CancelButton className={"px-2 py-1 text-white"} onClick={onHandleCancel}>Cancelar</CancelButton>
+        <ConfirmButton className={"px-2 py-1 text-main-primary-varient"} onClick={onHandleLogout}>Confirme</ConfirmButton>
       </div>
     </div>
   )

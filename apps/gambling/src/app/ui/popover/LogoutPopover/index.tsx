@@ -11,7 +11,7 @@ type ILogoutPopover = {
 export const LogoutPopover = (props: ILogoutPopover) => {
 
   return (
-    <div className={cx("fixed right-[10px] top-[100px] z-30 w-[240px] bg-[#013E42] rounded-xl p-[10px] flex flex-col flex-between text-sm",
+    <div className={cx("fixed right-[10px] top-[100px] z-30 w-[240px] bg-assistant rounded-xl p-[10px] flex flex-col flex-between text-sm",
       "text-white", {
     })}>
       <LogoutSection />

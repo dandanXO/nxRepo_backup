@@ -5,7 +5,7 @@ export const ConfirmButton = styled.div`
 
   width: 140px;
   height: 40px;
-  background: linear-gradient(180deg,#C8F568 0%,#16FF8F 100%);
+  background: linear-gradient(180deg,var(--btn-gradient1-from) 0%,var(--btn-gradient1-to) 100%);
   box-shadow: 0 2px #036a02, inset 0 1px 3px rgba(255,255,255,.5);
   border-radius: 25px;
   display: flex;

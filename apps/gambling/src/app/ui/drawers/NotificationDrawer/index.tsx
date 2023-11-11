@@ -97,7 +97,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
         )}
         style={{background: `url("assets/${environment.assetPrefix}/bg_web_login_1.png")`}}
       >
-        <div className={'mb-2 text-lg font-bold text-white'} style={{color:'#FBFF3F'}}>
+        <div className={'mb-2 text-lg font-bold text-main-secondary-main'} >
           Centro de Notificaciones
         </div>
 

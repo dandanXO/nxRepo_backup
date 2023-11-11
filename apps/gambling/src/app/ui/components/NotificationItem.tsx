@@ -50,21 +50,21 @@ export const NotificationItemTitle = styled.div<{
   expand?: boolean;
 }>`
   padding: 12px 14px;
-  box-shadow: inset 0 0 36px 5px rgba(2, 92, 80, 1) !important;
+  box-shadow: inset 0 0 36px 5px var(--main) !important;
 
   ${(props) =>
       (props.expand || !props.first) && `
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border-width: 1px;
-    border-color: rgba(88, 220, 199, 1);
+    border-color: var(--main-primary-main);
   `};
 
   border-bottom: ${(props) =>
       !props.expand
-          ? '1px rgba(88, 220, 199, 1) solid'
+          ? '1px var(--main-primary-main) solid'
           : props.last
-              ? '1px rgba(88, 220, 199, 1) solid' // 如果是最後一個，也應用底部邊框
+              ? '1px var(--main-primary-main) solid' // 如果是最後一個，也應用底部邊框
               : 'none'};
 
   border-bottom-left-radius: ${(props) => !props.expand ? '10px' : '0'};
@@ -74,20 +74,20 @@ export const NotificationItemTitle = styled.div<{
 
 export const NotificationItemExpandable = styled.div`
   font-size: 14px;
-  color: rgba(88, 220, 199, 1);
+  color: var(--white);
   //background: purple;
   padding: 14px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   border-top: none;
   border-width: 1px;
-  border-color: rgba(88, 220, 199, 1);
+  border-color: var(--main-primary-main);
 `;
 
 export const NotificationItemRedDot = styled.div`
   width: 6px;
   height: 6px;
-  background-color: #FF7777;
+  background-color: var(--main-state-error);
   border-radius: 3px;
   display: inline-block;
   margin-right: 6px;

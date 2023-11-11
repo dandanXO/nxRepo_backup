@@ -53,35 +53,35 @@ const Progress = styled.div<{ progress: number }>`
 
 const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
   return (
-      <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl bg-[#3A7052] leading-[30px]'}>
+      <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl bg-assistant leading-[30px]'}>
         <Progress progress={progress > 1 ? 100 : progress * 100} />
-        <span className="absolute right-4 top-0 text-[#FFA500]">
+        <span className="absolute right-4 top-0 text-medium">
         VIP {currentLevel + 1}
       </span>
-        <span className="absolute text-center top-0 left-4 right-4 text-[#FFA500]">
+        <span className="absolute text-center top-0 left-4 right-4 text-medium">
           {progress > 1 ? '100' : (progress * 100).toFixed(2)}%
         </span>
-        <span className="absolute left-4 top-0 text-[#FFA500] pr-4">
+        <span className="absolute left-4 top-0 text-medium pr-4">
         VIP {currentLevel}
       </span>
-        <span className="text-sm text-[#0BFF0B]">
+        <span className="text-sm text-main-primary-main">
         Depósitos totais:
         </span>
-        <span className="text-sm mr-6 text-[#ffffff]">
+        <span className="text-sm mr-6 text-white">
           R${' '}
           {userVIPInfo?.data?.vip_score
               ? userVIPInfo?.data?.vip_score / 100
               : 0}
           {' '}
           /
-          <span className="mr-6 text-[#0BFF0B]">
+          <span className="mr-6 text-main-primary-main">
             {' '}
           {userVIPInfo?.data?.next_level_score
               ? userVIPInfo?.data?.next_level_score / 100
               : 0}
              </span>
         </span>
-        {/*<span className="text-[#FFA500]" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
+        {/*<span className="text-medium" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
         {/*<span className="text-[#ffffff]">*/}
         {/*Pontos de apostas:R${' '}*/}
         {/*  {userVIPInfo?.data?.vip_score ? Math.floor(userVIPInfo?.data?.vip_score / 100) : 0}*/}
@@ -93,25 +93,25 @@ const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 
 const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
   return (
-      <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl bg-[#3A7052] leading-[30px]'}>
+      <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl bg-assistant leading-[30px]'}>
         <Progress progress={progress > 1 ? 100 : progress * 100} />
-        <span className="absolute right-4 top-0 text-[#FFA500]">
+        <span className="absolute right-4 top-0 text-medium">
         VIP {currentLevel + 1}
       </span>
-        <span className="absolute text-center top-0 left-4 right-4 text-[#FFA500]">
+        <span className="absolute text-center top-0 left-4 right-4 text-medium">
           {progress > 1 ? '100' : (progress * 100).toFixed(2)}%
         </span>
-        <span className="absolute left-4 top-0 text-[#FFA500] pr-4">
+        <span className="absolute left-4 top-0 text-medium pr-4">
         VIP {currentLevel}
       </span>
-        {/*<span className="text-[#FFA500] pr-4" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
-        <span className="text-sm text-[#0BFF0B]">
+        {/*<span className="text-medium pr-4" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
+        <span className="text-sm text-main-primary-main">
        Pontos de apostas:
         </span>
-        <span className="mr-6 text-[#ffffff]">
+        <span className="mr-6 text-white">
         R${' '}
           {userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0}{' '}/
-         <span className="mr-6 text-[#0BFF0B]">
+         <span className="mr-6 text-main-primary-main">
            {' '}
           {userVIPInfo?.data?.next_level_flow
               ? userVIPInfo?.data?.next_level_flow / 100
@@ -119,7 +119,7 @@ const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
            </span>
       </span>
 
-        {/*<span className="text-[#FFA500] pr-4" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
+        {/*<span className="text-medium pr-4" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
       {/*  <span className="mr-6 text-[#ffffff]">*/}
       {/*  Depósitos totais:R${' '}*/}
       {/*    {userVIPInfo?.data?.flow*/}
@@ -133,30 +133,27 @@ const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 
 
 const VIPContainer = styled.div`
-  //background-color: rgba(40, 112, 82, 0.2);
-background: #195F5B;
+  background: var(--varient);
   background-size: 100% 100%;
-  border: 1px solid #2CFD99;
+  border: 1px solid var(--main-primary-main);
   border-radius: 10px;
   padding: 1px;
   height: 230px;
 `;
 
 const ContaContainer = styled.div`
-  //background-color: rgba(40, 112, 82, 0.2);
-background: #195F5B;
+  background: var(--varient);
   background-size: 100% 100%;
-  border: 1px solid #2CFD99;
+  border: 1px solid var(--main-primary-main);
   border-radius: 10px;
   padding: 1px;
   height: 145px;
 `;
 
 const OtherContainer = styled.div`
-  //background-color: rgba(40, 112, 82, 0.2);
-background: #195F5B;
+  background: var(--varient);
   background-size: 100% 100%;
-  border: 1px solid #2CFD99;
+  border: 1px solid var(--main-primary-main);
   border-radius: 10px;
   padding: 1px;
   height: 60px;
@@ -307,7 +304,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
       props.close();
     }}>
       <div
-          className={cx("fixed right-[144px] top-[100px] z-10 w-[400px] rounded-2xl p-4 flex flex-col flex-between text-sm bg-[#013E42]", {
+          className={cx("fixed right-[144px] top-[100px] z-10 w-[400px] rounded-2xl p-4 flex flex-col flex-between text-sm bg-assistant", {
           })}
           style={{
             // background: `url("assets/${environment.assetPrefix}/bg_web_login.png")`,
@@ -321,7 +318,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
           <VIPContainer>
             <div className={"mt-4 flex flex flex-row items-center"}>
               <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.assetPrefix}/ic_vip01.png`}/>
-              <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, #FE6060, #FFA24D)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
+              <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, var(--btn-gradient-vip-from), var(--btn-gradient-vip-to))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
               <RightOutlined className="ml-40" style={{ fontSize: 25, color: 'white', fontWeight: 1000 }} onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)}/>
             </div>
             <VIPBorderStyleContainer className={'flex flex-row'}>
@@ -336,7 +333,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                 />
                 {/*<div className="text-center text-base text-[#4C9F71]" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
                 {/*  {userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0}*/}
-                {/*  <span className="text-[#FFA500]" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>/</span>*/}
+                {/*  <span className="text-medium" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>/</span>*/}
                 {/*  {userVIPInfo?.data?.next_level_score*/}
                 {/*      ? userVIPInfo?.data?.next_level_score / 100*/}
                 {/*      : 0}*/}
@@ -364,7 +361,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                 {/*  {userVIPInfo?.data?.flow*/}
                 {/*      ? userVIPInfo?.data?.flow / 100*/}
                 {/*      : 0}*/}
-                {/*  <span className="text-[#FFA500]" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>/</span>*/}
+                {/*  <span className="text-medium" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>/</span>*/}
                 {/*  {userVIPInfo?.data?.next_level_flow*/}
                 {/*      ? userVIPInfo?.data?.next_level_flow / 100*/}
                 {/*      : 0}*/}
@@ -409,11 +406,11 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
           <div className={"flex flex-row justify-center items-center px-7"}>
             <div className={"flex flex-col mr-24"}>
-              <span className={"text-[#16FF8F] text-lg"}>{totalBalanceSheetValue}</span>
+              <span className={"text-main-primary-main text-lg"}>{totalBalanceSheetValue}</span>
               <span className={"text-white"}>Balanço Total</span>
             </div>
             <div className={"flex flex-col"}>
-              <span className={"text-[#16FF8F] text-lg"}>{totalReasableValue}</span>
+              <span className={"text-main-primary-main text-lg"}>{totalReasableValue}</span>
               <span className={"text-white"}>Retirável Total</span>
             </div>
           </div>
@@ -429,14 +426,14 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
           <div className={"flex flex-row justify-between items-start px-3"}>
             <div className={"flex flex-col mr-2"}>
-              <span className={"text-[#16FF8F] text-lg"}>{totalPrize}</span>
+              <span className={"text-main-primary-main text-lg"}>{totalPrize}</span>
               <span className={"text-white"}>Prêmio total</span>
             </div>
 
             <div className={"w-[1px] h-[30px] bg-[rgba(255,255,255,.1)] self-center mr-1"}/>
 
             <div className={"flex flex-col  mr-2"}>
-              <span className={"text-[#16FF8F] text-lg"}>{bonusAwaitingSettlement}</span>
+              <span className={"text-main-primary-main text-lg"}>{bonusAwaitingSettlement}</span>
               <span className={"text-white"}>
               Bônus aguardando
               <br/>
@@ -448,7 +445,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
             <div className={"flex flex-col"}>
               {/*<span className={"text-[#FF7D03] text-lg"}>{accountPromotedSwingValue}</span>*/}
-              <span className={"text-[#16FF8F] text-lg"}>{fullWithdrawable}</span>
+              <span className={"text-main-primary-main text-lg"}>{fullWithdrawable}</span>
               <span className={"text-white"}>Retirável Total</span>
             </div>
           </div>

@@ -95,7 +95,7 @@ export const IndexSlotPage = () => {
   return (
     <>
       {isMobile ? (
-        <div className={"px-4 bg-[rgba(1,62,66,0.1)] sticky top-[52.5px] left-0 right-0 z-20"}>
+        <div className={"px-4 sticky top-[52.5px] left-0 right-0 z-20"}>
         <div>
           <ScrollTab>
           <section className={"mb-4 flex flex-row items-center px-4 mt-3"}>

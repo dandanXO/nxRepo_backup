@@ -76,29 +76,28 @@ const Progress = styled.div<{ progress: number }>`
 
 const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
   return (
-      <div className={'relative h-[30px] w-[280px] flex-auto rounded-3xl bg-[#3A7052] leading-[30px]'}>
+      <div className={'relative h-[30px] w-[280px] flex-auto rounded-3xl bg-assistant leading-[30px]'}>
         <Progress progress={progress > 1 ? 100 : progress * 100} />
-        <span className="absolute right-4 top-0 text-[#FFA500] ">
+        <span className="absolute right-4 top-0 text-medium ">
         VIP {currentLevel + 1}
       </span>
-        <span className="absolute text-center top-0 left-4 right-4 text-[#FFA500]">
+        <span className="absolute text-center top-0 left-4 right-4 text-medium ">
           {progress > 1 ? '100' : (progress * 100).toFixed(2)}%
         </span>
-        <span className="absolute left-4 top-0 text-[#FFA500] pr-4">
+        <span className="absolute left-4 top-0 text-medium pr-4">
         VIP {currentLevel}
       </span>
-        {/*<span className="text-[#FFA500]" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
-        <span className="text-sm text-[#0BFF0B]">
-        Depósitos totais:
+        <span className="text-sm text-main-primary-main">
+        Depósitos totais: 
         </span>
-        <span className="text-sm mr-6 text-[#ffffff]">
-          R${' '}
+        <span className="text-sm mr-6 text-white">
+          {' '}R${' '}
           {userVIPInfo?.data?.vip_score
               ? userVIPInfo?.data?.vip_score / 100
               : 0}
           {' '}
           /
-          <span className="mr-6 text-[#0BFF0B]">
+          <span className="mr-6 text-main-primary-main">
             {' '}
           {userVIPInfo?.data?.next_level_score
               ? userVIPInfo?.data?.next_level_score / 100
@@ -112,25 +111,24 @@ const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 
 const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
   return (
-      <div className={'relative h-[30px] w-[280px] flex-auto rounded-3xl bg-[#3A7052] leading-[30px]'}>
+      <div className={'relative h-[30px] w-[280px] flex-auto rounded-3xl bg-assistant leading-[30px]'}>
         <Progress progress={progress > 1 ? 100 : progress * 100} />
-        <span className="absolute right-4 top-0 text-[#FFA500]">
+        <span className="absolute right-4 top-0 text-medium">
         VIP {currentLevel + 1}
       </span>
-        <span className="absolute text-center top-0 left-4 right-4 text-[#FFA500]">
+        <span className="absolute text-center top-0 left-4 right-4 text-medium">
           {progress > 1 ? '100' : (progress * 100).toFixed(2)}%
         </span>
-        <span className="absolute left-4 top-0 text-[#FFA500] pr-4">
+        <span className="absolute left-4 top-0 text-medium pr-4">
         VIP {currentLevel}
       </span>
-        {/*<span className="text-[#FFA500] pr-4" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
-        <span className="text-sm text-[#0BFF0B]">
+        <span className="text-sm text-main-primary-main">
        Pontos de apostas:
         </span>
-        <span className="mr-6 text-[#ffffff]">
+        <span className="mr-6 text-white">
         R${' '}
           {userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0}{' '}/
-          <span className="mr-6 text-[#0BFF0B]">
+          <span className="mr-6 text-main-primary-main">
             {' '}
           {userVIPInfo?.data?.next_level_flow
               ? userVIPInfo?.data?.next_level_flow / 100
@@ -142,8 +140,8 @@ const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 };
 
 const DepositAndWithdrawalContainer = styled.div`
-  background-color: #014F4B;
-  border: 1px solid #2CFD99;
+  background-color: var(--varient);
+  border: 1px solid var(--main-primary-main);
   background-size: 100% 100%;
   border-radius: 10px;
   padding: 1px;
@@ -152,8 +150,8 @@ const DepositAndWithdrawalContainer = styled.div`
 `;
 
 const ListItemContainer = styled.div`
-  background: #014F4B;
-  border: 1px solid #2CFD99;
+  background: var(--varient);
+  border: 1px solid var(--main-primary-main);
   background-size: 100% 100%;
   border-radius: 10px;
   padding: 1px;
@@ -163,8 +161,8 @@ const ListItemContainer = styled.div`
 
 
 const VIPContainer = styled.div`
-  background-color: #014F4B;
-  border: 1px solid #2CFD99;
+  background-color: var(--varient);
+  border: 1px solid var(--main-primary-main);
   background-size: 100% 100%;
   border-radius: 10px;
   padding: 1px;
@@ -348,7 +346,7 @@ export const MyPage = () => {
     <VIPContainer>
       <div className={"flex flex flex-row items-center mt-3 w-full"}>
       <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.assetPrefix}/ic_vip01.png`}/>
-      <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, #FE6060, #FFA24D)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
+      <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, var(--btn-gradient-vip-from), var(--btn-gradient-vip-to))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
         <div className="flex-grow"></div>
         <RightOutlined className="flex-grow" style={{ fontSize: 25, color: 'white', fontWeight: 1000 }} onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)} />      </div>
       <VIPBorderStyleContainer className={'flex flex-row'}>
@@ -361,7 +359,7 @@ export const MyPage = () => {
               currentLevel={currentLevel}
               userVIPInfo={userVIPInfo}
           />
-          <div className="text-center text-base text-[#4C9F71]" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <div className="text-center text-base text-medium" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
           </div>
         </div>
       </VIPBorderStyleContainer>
@@ -394,16 +392,16 @@ export const MyPage = () => {
       <section className={"total flex flex-row text-white justify-between mb-4 mt-1"}>
 
         <div className={"item flex-1"}>
-          <div className={"title text-[#ffffff] mb-2"}>Fundos totais</div>
-          <div className={"money text-lg mb text-[#fffa73]"}>R${totalBalanceSheetValue}</div>
+          <div className={"title text-white mb-2"}>Fundos totais</div>
+          <div className={"money text-lg mb text-main-secondary-main"}>R${totalBalanceSheetValue}</div>
           <MyPageButtonD onClick={() => {
             navigate(PageOrModalPathEnum.WalletPage)
           }} className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Depósito</MyPageButtonD>
         </div>
 
         <div className={"item flex-1"}>
-          <div className={"title text-[#ffffff] mb-2"}>Retirável Total</div>
-          <div className={"money text-lg mb text-[#fffa73]"}>R${totalReasableValue}</div>
+          <div className={"title text-white mb-2"}>Retirável Total</div>
+          <div className={"money text-lg mb text-main-secondary-main"}>R${totalReasableValue}</div>
           <MyPageButtonW onClick={() => {
             navigate(PageOrModalPathEnum.WalletPage)
           }} className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Retirar</MyPageButtonW>

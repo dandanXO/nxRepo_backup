@@ -9,7 +9,7 @@ export const InputSection = styled.a<{
   validation?: boolean;
 }>`
   //border: 1px solid transparent;
-  /* border: 1px solid #2CFD99; */
+  /* border: 1px solid var(--main-primary-main); */
   /* border-radius: 25px; */
 
   //box-shadow: inset 0 0 36px 5px rgba(255,255,255,.08);
@@ -56,7 +56,7 @@ export const Input = (props: IInput) => {
         <InputSection focus={focus} onClick={() => {
           // (inputRef && inputRef.current as any).focus()
         }}
-        className={tcx("w-full rounded-3xl border-[#2CFD99] border-solid border",
+        className={tcx("w-full rounded-3xl border-main-primary-main border-solid border",
           // "active:!border-2 active:!border-[#01FF52]": !props.themeStyle,
           ["border-utils-gray", props.themeStyle === "simple"],
           props.className

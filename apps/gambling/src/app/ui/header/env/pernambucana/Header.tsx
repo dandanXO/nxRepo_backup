@@ -50,7 +50,7 @@ export const Header = (props: IHeader) => {
       backgroundSize: 'cover', // 调整背景图片大小以填充整个元素
       backgroundPosition: '90% 50%', // 调整背景图片位置
       backgroundRepeat: 'no-repeat', // 禁止背景图片重复
-      backgroundColor: '#013E42', // 设置背景颜色
+      backgroundColor: 'var(--assistant)', // 设置背景颜色
     }}>
       <div className={"w-[200px]"}>
         <a>
