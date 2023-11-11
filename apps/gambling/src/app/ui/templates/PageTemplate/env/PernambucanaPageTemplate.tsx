@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../../header/env/pernambucana/Header";
-import {MenuDrawer} from "../../../drawers/MenuDrawer";
 import cx from "classnames";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
@@ -24,6 +23,7 @@ import React from "react";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import {PernambucanaMenuDrawerContent} from "../../../drawers/MenuDrawer/env/PernambucanaMenuDrawerContent";
+import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
 type IProps = {
   children?: React.ReactNode;

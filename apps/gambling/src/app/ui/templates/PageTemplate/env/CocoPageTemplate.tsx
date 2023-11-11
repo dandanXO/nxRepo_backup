@@ -3,10 +3,10 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {environment} from "../../../../../environments/environment";
 import {Footer} from "../../../footers/coco777bet/Footer";
-import {MenuDrawer} from "../../../drawers/MenuDrawer";
 import {CocoMenuDrawerContent} from "../../../drawers/MenuDrawer/env/CocoMenuDrawerContent";
 import {Header} from "../../../header/env/coco/Header";
 import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
+import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
