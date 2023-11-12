@@ -7,13 +7,13 @@ import {
   GetSignInConfigResponse,
   GetUserVIPAllInfoResponse,
   GetVIPInfoResponse,
-} from '../../../external';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { LevelList } from '../DailySignInPage';
+} from '../../../../external';
+import { PageOrModalPathEnum } from '../../../PageOrModalPathEnum';
+import { LevelList } from '../../DailySignInPage';
 import {IRLevelButton, ProgressBar} from './index';
 import {useSelector} from "react-redux";
-import {RootState} from "../../../reduxStore";
-import {environment} from "../../../../environments/environment";
+import {RootState} from "../../../../reduxStore";
+import {environment} from "../../../../../environments/environment";
 
 export const LevelListBottomBr = styled.div`
   height: 1rem;
@@ -95,15 +95,6 @@ interface IVIPGradeMobileTemplateProps {
   allSignInConfig: GetSignInConfigResponse['data']['signInAllConfig'];
 }
 
-const increment = (target: number) => keyframes`
-  from {
-    width: 0%;
-  }
-  to {
-    width: ${target}%;
-  }
-`;
-
 const VIPTitle = styled.button.attrs<{
   className?: string;
 }>((props) => ({
@@ -115,11 +106,11 @@ const VIPTitle = styled.button.attrs<{
   color: transparent;
 `;
 
-export const VIPGradeMobileTemplate = ({
-  userVIPInfo,
-  allLevelInfo,
-  allSignInConfig,
-}: IVIPGradeMobileTemplateProps) => {
+const Pernambucana777BetVIPGradeMobileTemplate = ({
+    userVIPInfo,
+    allLevelInfo,
+    allSignInConfig,
+  }: IVIPGradeMobileTemplateProps) => {
 
   // const user = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || ""): {};
   // const vip_level = useSelector((state: RootState) => state.app?.userStore?.userinfo?.vip_level)
@@ -326,7 +317,7 @@ export const VIPGradeMobileTemplate = ({
               ? `${currentLevelInfo?.rechargeAmountLimit / 100}`
               : '0'}<div>
 
-            </div>
+          </div>
           </ItemContainer>
 
           <ItemContainer className='text-center font-bold'>
@@ -340,3 +331,5 @@ export const VIPGradeMobileTemplate = ({
     </div>
   );
 };
+
+export default Pernambucana777BetVIPGradeMobileTemplate;
