@@ -1,43 +1,22 @@
 import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   useGetSignInConfigMutation,
-  useGetUserVIPAllInfoQuery,
   useGetVIPInfoMutation, useLazyGetUserVIPAllInfoQuery,
 } from '../../../external';
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { useAllowLoginRouterRules } from '../../router/useAllowLoginRouterRules';
-import { LevelList } from '../DailySignInPage';
-import { VIPGradeMobileTemplate } from './VIPGradeMobileTemplate';
 import {useDispatch, useSelector} from "react-redux";
-import {appStore, RootState} from "../../../reduxStore";
+import { RootState } from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
-import {IUserStore} from "../../../gateway/socket";
 import {environment} from "../../../../environments/environment";
 import { ThreeDots } from 'react-loading-icons';
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {tcx} from "../../utils/tcx";
-
-const VIPContainer = styled.div`
-  background-color: rgba(40, 112, 82, 0.1);
-  background-size: 100% 100%;
-  border-radius: 28px;
-  padding: 28px;
-`;
-
-const VIPICONContainer = styled.div`
-  width: 148px;
-  height: 56px;
-  background: rgba(200, 5, 255, 0.15);
-  border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  position: relative;
-  margin-right: 1vw;
-`;
+import Coco777betVIPGradePage from "./Coco777betVIPGradePage";
+import Pernambucana777BetVIPGradePage from "./Pernambucana777BetVIPGradePage";
 
 const LevelButton = styled.button.attrs<{
   className?: string;
@@ -65,16 +44,6 @@ export const OtherLevelButton = styled(LevelButton)`
 `;
 
 
-export const IRLevelButton = styled.button.attrs<{
-  className?: string;
-}>((props) => ({
-  className: props.className,
-}))`
-  background: linear-gradient(180deg, var(--btn-gradient1-from) 0%, var(--btn-gradient1-to) 100%);
-  color: var(--main-primary-varient);
-  border-radius: 40px;
-`;
-
 export const VIPBorderStyleContainer = styled.div`
   padding: 32px 54px;
   background: var(--medium);
@@ -86,174 +55,7 @@ export const VIPBorderStyleContainer = styled.div`
   margin-bottom: 16px;
 `;
 
-const VIPLightBorderStyleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--medium);
-  border-radius: 16px;
-  height: 100%;
-  width: 100%;
-  padding: 20px 32px;
-  //border: 1px solid rgba(255, 255, 255, 0.2);
-`;
 
-const VIPTextBorderStyleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--medium);
-  border-radius: 16px;
-  height: 100%;
-  padding: 20px 0;
-  //border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 478.5px; !important;
-`;
-
-const VIPLabel = styled.div`
-  width: 212px;
-  height: 65px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  //box-shadow: inset 0 0 36px 5px rgba(255, 219, 0, 0.09);
-  border-radius: 30px;
-  border: none; /* 取消边框 */
-  color: var(--dashboard-block3);
-  float: right;
-  font-weight: bold;
-  background: linear-gradient(180deg, var(--dashboard-block3-gradient-from) 0%, var(--dashboard-block3-gradient-to) 100%);
-  // background: url("assets/${environment.assetPrefix}/vip_di.png") no-repeat center;
-`;
-
-const VIPTitle = styled.span`
-  font-size: 48px;
-  line-height: 50px;
-  margin-left: 24px;
-  background: -webkit-linear-gradient(-90deg, var(--dashboard-block3-gradient-from) 0%, var(--dashboard-block3-gradient-to) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-`
-
-const vips: number[] = [];
-
-for (let i = 0; i <= 25; i += 1) {
-  vips.push(i);
-}
-
-// const user = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || ""): {};
-
-const VIPList = () => {
-  const [currentSelectedLevel, setCurrentSelectedLevel] = useState(0);
-
-  return (
-    <section
-      className={
-        'vip-tab-items flex-no-wrap mb-4 flex w-full flex-row overflow-auto'
-      }
-    >
-      {vips.map((numberValue, index) => {
-        if (numberValue === currentSelectedLevel) {
-          return (
-            <CurrentLevelButton className={'mr-4'} key={index}>
-              <img
-                alt="king"
-                className={'mr-2'}
-                src={
-                  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAATtJREFUOE+t008rRGEUx/HvL0RiZ2chZSE2Ulds5AWwsrC0mEkje1n5Ezt7k8YbUGzIK7AyKWLDRrG2oqZQjo7u1fQ09xpzPau7+J3Pvfec84h/OspyzGwAOAQMWJD0lJZPhcysDTgHpuJif56R9NkIy4I2gM2gaFXSbkMofvMocCfp3UNmNhl/TXtQ9AZEkm7jXCcwAtzIzE6AOeAR2AGOgSowlNKPa2AaWATWgH7gzKFXoKeuqAZ0/zLMMFNz6AKYyLkFVYf2gOWcUNmhAnCQEyo6NAZc5YTGHeoAXoCuFjFfid7vhTQzH3cUQKfxQvr18OPZLWA2yF1KihKoDJSCgE/TB1EPrTSY8L6kUgIVgUqLv7YkqZJAg8A94P36y/kAhiU9/FxaM5sHtoG+JqVnYF3SUdLAJuuyY1+4I2ifqehT2wAAAABJRU5ErkJggg=='
-                }
-              />
-              <span className={'text-lg font-bold'}>LV{numberValue}</span>
-            </CurrentLevelButton>
-          );
-        } else {
-          return (
-            <OtherLevelButton
-              key={index}
-              className={'mr-4'}
-              onClick={() => {
-                setCurrentSelectedLevel(numberValue);
-              }}
-            >
-              <img
-                alt="lock"
-                className={'mr-2'}
-                src={
-                  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAARlJREFUOE/t07ErhVEYx/HvV2wmZZT4GyjJIEySv8AkShlEMYmQQSluKZvNYJYJGVCsNiO7RSbRo1svvfd47/Xe3dnO8z7P57z9OkfqrIgYB5aBPiCAa2BLvSsasagYEUvALpB+/wCm1JN07hcUET3AI9AG3AB7QCuwAAwCr0Cv+pLHiqB54CAb6FKrg0REO/AEdGR/dfwXtAZsAPfqQL45Iq6AYWBR3S8L3apDCXQOjJWFpoEZ4EGdS6AK0A9U0sBrMoqI7izkerciX39Xn78LP1BE7AArZYRcz7q6Wd3noUtgpEnoTJ34hxqmVpjRBTDaZNin6mQa9iFQcwFLoNvqagp1AkfZC2/5A/kEqs9lVn2rgUqc3rDlC5IRchOtsAplAAAAAElFTkSuQmCC'
-                }
-              />
-              <span className={'text-lg font-bold text-white'}>
-                LV{numberValue}
-              </span>
-            </OtherLevelButton>
-          );
-        }
-      })}
-    </section>
-  );
-};
-
-const increment = (target: number) => keyframes`
-  from {
-    width: 0%;
-  }
-  to {
-    width: ${target}%;
-  }
-`;
-
-const Progress = styled.div<{ progress: number }>`
-  border-radius: 50px;
-  background-image: url("assets/${environment.assetPrefix}/process_bar.png");
-  background-size: contain;
-  height: inherit;
-  animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
-`;
-
-export const ProgressBar = ({ progress, className, textClassName }: { progress: number, className?:string, textClassName?: string }) => {
-  return (
-    <div className={tcx('relative w-full flex-auto rounded-3xl bg-assistant', className)}>
-      <Progress progress={progress > 1 ? 100 : progress * 100} />
-      <span className={tcx('absolute text-medium font-bold', textClassName)}>
-        {progress > 1 ? '100' : (progress * 100).toFixed(0)}%
-      </span>
-    </div>
-  );
-};
-
-const jackpotMap: {
-  [key: number]: {
-    image: string;
-    label: string;
-  };
-} = {
-  20: {
-    image: '20.960d4c12.png',
-    label: 'Audi a4',
-  },
-  21: {
-    image: '21.9a505f16.png',
-    label: 'BMW 520i',
-  },
-  22: {
-    image: '22.ac866c20.png',
-    label: 'Porsche Cayenne',
-  },
-  23: {
-    image: '23.363de727.png',
-    label: 'Porsche 911',
-  },
-  24: {
-    image: '24.98d31a44.png',
-    label: 'Ferrari 448',
-  },
-  25: {
-    image: '25.2d1da4ad.png',
-    label: 'helicóptero',
-  },
-};
 
 export const VIPGradePage = () => {
   useAllowLoginRouterRules();
@@ -355,9 +157,6 @@ export const VIPGradePage = () => {
 
   const [showReloadButton, setShowReloadButton] = useState(false);
 
-
-
-
   useEffect(() => {
     const simulateAsyncLoad = setTimeout(() => {
       if (isVipLoading) {
@@ -384,260 +183,25 @@ export const VIPGradePage = () => {
     );
   } else {
 
-  if (isMobile)
+    if (environment.assetPrefix === 'coco777bet') {
+      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig}/>
+    } else {
+      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig}/>
+    }
+
     return (
-      <VIPGradeMobileTemplate
+      <Pernambucana777BetVIPGradePage
+        isMobile={isMobile}
+        currentLevel={currentLevel}
+        currentSelectedLevel={currentSelectedLevel}
+        signBonus={signBonus}
+        setCurrentSelectedLevel={setCurrentSelectedLevel}
         userVIPInfo={userVIPInfo}
         allLevelInfo={allLevelInfo}
         allSignInConfig={allSignInConfig}
+        currentLevelInfo={currentLevelInfo}
       />
-    );
-
-  return (
-    <>
-      <div className={'px-14 py-8'}>
-        <VIPContainer>
-          <section className={'flex flex-col'}>
-            <section
-              className={
-                'md:display introduce-vip mb-4 flex hidden flex-row items-center justify-center'
-              }
-            >
-              <VIPICONContainer
-                className={'flex flex-row items-center justify-center'}
-              >
-                <img
-                  alt="vip"
-                  className={'h-[38px] w-[54px]'}
-                  src={`assets/${environment.assetPrefix}/vip.1bf683b6.png`}
-                />
-                <img
-                  alt="0"
-                  className={'h-[38px] w-[24px]'}
-                  src={
-                    'data:image/png;base64,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'
-                  }
-                />
-              </VIPICONContainer>
-              <section>
-                <img
-                  alt="introduce to vip"
-                  className={'h-[50px] w-[500px]'}
-                  src={`assets/${environment.assetPrefix}/title1.d89d4f0c.png`}
-                />
-              </section>
-            </section>
-
-            <section className={'mb-10 text-center text-base font-bold text-white md:text-2xl'}>
-              <div className="flex items-center justify-center"> {/* 使用 justify-center 来水平居中 */}
-                <VIPLabel>VIP {currentLevel}</VIPLabel>
-                <VIPTitle>INTRODUCAO AO NIVEL VIP</VIPTitle>
-              </div>
-            </section>
-
-
-
-            <section>
-              <LevelList
-                currentLevel={currentLevel}
-                currentSelectedLevel={currentSelectedLevel}
-                setCurrentSelectedLevel={setCurrentSelectedLevel}
-              />
-
-              <section
-                className={
-                  'mb-4 text-center text-4xl font-bold text-main-primary-main'
-                }
-              >
-                — Distância próximo nível —
-              </section>
-
-              <VIPBorderStyleContainer className={'flex flex-row'}>
-                <div className={'flex shrink-0 flex-col text-left min-w-[250px] text-xl'}>
-                  <span className={'text-white'}>
-                    Quantidade total de recarga:
-                  </span>
-                  <span className={'text-left'}>
-                    <span className={'text-white'}>
-                      R$
-                      {userVIPInfo?.data?.vip_score
-                        ? userVIPInfo?.data?.vip_score / 100
-                        : 0}
-                      /R$
-                      {userVIPInfo?.data?.next_level_score
-                        ? userVIPInfo?.data?.next_level_score / 100
-                        : 0}
-                    </span>
-                  </span>
-                </div>
-
-                <ProgressBar
-                  className='mx-16 h-8'
-                  textClassName='right-4 top-1 text-base'
-                  progress={
-                      (userVIPInfo?.data?.vip_score || 0) /
-                      (userVIPInfo?.data?.next_level_score || 1)
-                  }
-                />
-
-                <div className={'shrink-0'}>
-                  <IRLevelButton className='text-2xl px-14 py-4' onClick={()=> navigate(PageOrModalPathEnum.WalletPage)}>
-                    <span className={'text-lg font-bold'}>IR</span>
-                  </IRLevelButton>
-                </div>
-              </VIPBorderStyleContainer>
-
-              <VIPBorderStyleContainer className={'flex flex-row'}>
-                <div className={'flex shrink-0 flex-col  text-left min-w-[250px] text-xl'}>
-                  <span className={'text-white'}>
-                    Número total de apostas:
-                  </span>
-                  <span className={'text-left'}>
-                    <span className={'text-white'}>
-                      R$
-                      {userVIPInfo?.data?.flow
-                        ? userVIPInfo?.data?.flow / 100
-                        : 0}
-                      /R$
-                      {userVIPInfo?.data?.next_level_flow
-                        ? userVIPInfo?.data?.next_level_flow / 100
-                        : 0}
-                    </span>
-                  </span>
-                </div>
-
-                <ProgressBar
-                  className='mx-16 h-8'
-                  textClassName='right-4 top-1 text-base'
-                  progress={
-                    userVIPInfo?.data?.flow_progress
-                      ? userVIPInfo?.data?.flow_progress / 100
-                      : 0
-                  }
-                />
-
-                <div className={'shrink-0'}>
-                  <IRLevelButton className='text-2xl px-14 py-4' onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>
-                    <span className={'text-lg font-bold'}>IR</span>
-                  </IRLevelButton>
-                </div>
-              </VIPBorderStyleContainer>
-            </section>
-
-            <section className='mt-6'>
-              <section
-                className={'mb-6 text-center text-4xl font-bold text-white'}
-              >
-                — Privilégio —
-              </section>
-
-              {currentSelectedLevel >= 20 && (
-                <div className="flex flex-col items-center justify-center">
-                  <img
-                    alt="jackpot"
-                    src={`assets/${jackpotMap[currentSelectedLevel].image}`}
-                  />
-                  <div className="py-10">
-                    <div className="text-[50px] text-yellow-500">
-                      Nível Mega Jackpot:{' '}
-                      {jackpotMap[currentSelectedLevel].label}
-                    </div>
-                    <div className="text-xl text-white">
-                      Ou numerário de valor equivalente
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <section className={'mb-4 flex flex-row'}>
-                <VIPLightBorderStyleContainer
-                  className={'mr-4 h-[100px] flex-1'}
-                >
-                  <img
-                    alt={''}
-                    src={`assets/${environment.assetPrefix}/icon_vip_context_2.png`}
-                  />
-                  <div className={'flex flex-col text-2xl italic leading-none font-bold text-white'}>
-                    <span>Recompensa total de</span>
-                    <span>check-in de 7 dias: R${signBonus}</span>
-                  </div>
-                </VIPLightBorderStyleContainer>
-
-                <VIPLightBorderStyleContainer className={'flex-1'}>
-                  <img
-                    alt={''}
-                    src={`assets/${environment.assetPrefix}/icon_vip_context_1.png`}
-                  />
-                  <div className={'flex flex-col text-2xl italic leading-none font-bold text-white'}>
-                    <span className='text-end'>recompensa de</span>
-                    <span>
-                      atualização : R$
-                      {currentLevelInfo?.upRewardAmout
-                        ? `${currentLevelInfo?.upRewardAmout / 100}`
-                        : '0'}
-                    </span>
-                  </div>
-                </VIPLightBorderStyleContainer>
-              </section>
-
-              <section className={'mb-4 flex w-full flex-col text-white'}>
-                <section className={'flex flex-row mb-10'}>
-                  <VIPTextBorderStyleContainer
-                    className={
-                      'mr-4 flex flex-1 items-center justify-center text-2xl italic font-bold'
-                    }>
-                    Limite máximo de retirada única : R$
-                    {currentLevelInfo?.withdrawAmountLimitDay
-                      ? `${currentLevelInfo?.withdrawAmountLimitDay / 100}`
-                      : '0'}
-                  </VIPTextBorderStyleContainer>
-
-                  <VIPTextBorderStyleContainer
-                    className={
-                      'flex flex-1 items-center justify-center text-2xl italic font-bold'
-                    }>
-                    Número de retiradas por dia：
-                    {currentLevelInfo?.withdrawTimesLimitDay}
-                  </VIPTextBorderStyleContainer>
-                </section>
-
-
-                <section
-                  className={'mb-6 text-center text-4xl font-bold text-white'}
-                >
-                  — Condições do VIP atual —
-                </section>
-
-                <section className={'flex flex-row'}>
-                  <VIPTextBorderStyleContainer
-                    className={
-                      'mr-4 flex flex-1 items-center justify-center text-2xl italic font-bold'
-                    }
-                  >
-                    Quantidade total de recarga : R$
-                    {currentLevelInfo?.rechargeAmountLimit
-                      ? `${currentLevelInfo?.rechargeAmountLimit / 100}`
-                      : '0'}
-                  </VIPTextBorderStyleContainer>
-
-                  <VIPTextBorderStyleContainer
-                    className={
-                      'flex flex-1 items-center justify-center text-2xl italic font-bold'
-                    }
-                  >
-                    Número total de apostas : R$
-                    {currentLevelInfo?.flowLimit
-                      ? `${currentLevelInfo?.flowLimit / 100}`
-                      : '0'}
-                  </VIPTextBorderStyleContainer>
-                </section>
-              </section>
-            </section>
-          </section>
-        </VIPContainer>
-      </div>
-    </>
-  );
-}
+    )
+  }
 }
 
