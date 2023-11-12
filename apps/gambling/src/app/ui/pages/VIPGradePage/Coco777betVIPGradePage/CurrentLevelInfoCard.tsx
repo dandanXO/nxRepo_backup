@@ -10,7 +10,7 @@ interface ICurrentLabelInfoCardProps {
   userVIPInfo?: GetVIPInfoResponse
 }
 
-const CurrentLabelInfoCard = ({
+const CurrentLevelInfoCard = ({
   userVIPInfo,
   currentLevel
 }: ICurrentLabelInfoCardProps) => {
@@ -146,4 +146,4 @@ const CurrentLabelInfoCard = ({
   )
 }
 
-export default CurrentLabelInfoCard
+export default CurrentLevelInfoCard

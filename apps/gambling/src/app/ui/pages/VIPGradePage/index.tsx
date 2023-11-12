@@ -184,9 +184,9 @@ export const VIPGradePage = () => {
   } else {
 
     if (environment.assetPrefix === 'coco777bet') {
-      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel}/>
+      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig}/>
     } else {
-      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel}/>
+      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig}/>
     }
 
     return (
