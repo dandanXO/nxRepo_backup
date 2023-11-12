@@ -47,7 +47,10 @@ export const TabBar = (props: IFooter) => {
     >
       {showHome && (
         <section
-          className={"flex-1 flex flex-col items-center"}
+          className={cx("flex-1 flex flex-col items-center", {
+            "font-bold": location.pathname === PageOrModalPathEnum.IndexPage ||
+              location.pathname === PageOrModalPathEnum.GameSearchPage
+          })}
           onClick={() => {
             onClickToIndex();
           }}
@@ -68,7 +71,9 @@ export const TabBar = (props: IFooter) => {
 
       {showSlot && (
         <section
-          className={"flex-1 flex flex-col items-center"}
+          className={cx("flex-1 flex flex-col items-center", {
+            "font-bold": location.pathname === PageOrModalPathEnum.IndexSlotPage
+          })}
           onClick={() => {
              onClickToSlot();
           }}
@@ -86,7 +91,9 @@ export const TabBar = (props: IFooter) => {
 
       {showInvite && (
         <section
-          className={"flex-1 flex flex-col items-center"}
+          className={cx("flex-1 flex flex-col items-center", {
+            "font-bold": location.pathname === PageOrModalPathEnum.InvitePage
+          })}
           onClick={() => {
             onClickToInvite();
           }}
@@ -104,7 +111,9 @@ export const TabBar = (props: IFooter) => {
 
       {showVIP && (
         <section
-          className={"flex-1 flex flex-col items-center"}
+          className={cx("flex-1 flex flex-col items-center", {
+            "font-bold": location.pathname === PageOrModalPathEnum.VIPGradePage
+          })}
           onClick={() => {
             onClickToVipGrade();
           }}
@@ -123,7 +132,9 @@ export const TabBar = (props: IFooter) => {
 
       {showProfile && (
         <section
-          className={"flex-1 flex flex-col items-center"}
+          className={cx("flex-1 flex flex-col items-center", {
+            "font-bold": location.pathname === PageOrModalPathEnum.MyPage
+          })}
           onClick={() => {
             onClickToProfile();
            }}
