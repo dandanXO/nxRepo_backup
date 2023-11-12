@@ -17,6 +17,14 @@ import {environment} from "../../../environments/environment";
 
 import {CocoPageTemplate} from "./env/CocoPageTemplate";
 import {PernambucanaPageTemplate} from "./env/PernambucanaPageTemplate";
+import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
+import {UserLoginStatusDrawers} from "../drawers/UserLoginStatusDrawers";
+import {DownloadModal} from "../modals/DownloadModal";
+import {UserInfoStatusPopover} from "../popover/UserInfoStatusPopover";
+import {NotificationDrawer} from "../drawers/NotificationDrawer";
+import {LogoutPopover} from "../popover/LogoutPopover";
+import {TelegramContactModal} from "../modals/TelegramContactModal";
+import {InviteBonusModal} from "../modals/InviteBonusModal";
 
 
 console.log("environment", environment);
@@ -194,82 +202,148 @@ export const PageTemplate = (props: IPage) => {
     window.open(telegramServiceUrl,'_blank')
   }
 
-  if(environment.assetPrefix === "coco777bet") {
-    return (
-      <CocoPageTemplate
-        isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
-        contextHolder={contextHolder}
-        isMobile={isMobile}
-        isShowDesktopHeader={isShowDesktopHeader}
-        isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        showLoginModal={showLoginModal}
-        setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
-        openDesktopNotificationDrawer={openDesktopNotificationDrawer}
-        setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
-        setOpenLogoutPopover={setOpenLogoutPopover}
-        isShowMobileLogoutModal={isShowMobileLogoutModal}
+  return (
+    <>
+      {environment.assetPrefix === "coco777bet" ? (
+        <CocoPageTemplate
+          isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+          contextHolder={contextHolder}
+          isMobile={isMobile}
+          isShowDesktopHeader={isShowDesktopHeader}
+          isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+          isLogin={isLogin}
+          setIsLogin={setIsLogin}
+          showLoginModal={showLoginModal}
+          setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
+          openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+          openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+          setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+          setOpenLogoutPopover={setOpenLogoutPopover}
+          isShowMobileLogoutModal={isShowMobileLogoutModal}
 
-        openMenuDrawer={openMenuDrawer}
-        setOpenMenuDrawer={setOpenMenuDrawer}
-        isShowLoginModal={isShowLoginModal}
-        openNotificationWithIcon={openNotificationWithIcon}
-        openDownloadModal={openDownloadModal}
-        setOpenDownloadModal={setOpenDownloadModal}
-        isShowTelegramModal={isShowTelegramModal}
-        onClickToOpenTelegramService={onClickToOpenTelegramService}
-        isShowInviteBonusModal={isShowInviteBonusModal}
-        setOpenInitailChargeModal={setOpenInitailChargeModal}
-        isShowMobileHeader={isShowMobileHeader}
-        isShowTabbar={isShowTabbar}
-        showToolbox={props.showToolbox}
-        onClickToDownload={onClickToDownload}
-        onClickToOpenTelegramManager={onClickToOpenTelegramManager}
-        isUILoading={isUILoading}
-      >
-        {props.children}
-      </CocoPageTemplate>
-    )
-  } else {
-    return (
-      <PernambucanaPageTemplate
-        isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
-        contextHolder={contextHolder}
-        isMobile={isMobile}
-        isShowDesktopHeader={isShowDesktopHeader}
-        isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
-        isLogin={isLogin}
-        setIsLogin={setIsLogin}
-        showLoginModal={showLoginModal}
-        setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
-        openDesktopNotificationDrawer={openDesktopNotificationDrawer}
-        setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
-        setOpenLogoutPopover={setOpenLogoutPopover}
-        isShowMobileLogoutModal={isShowMobileLogoutModal}
+          openMenuDrawer={openMenuDrawer}
+          setOpenMenuDrawer={setOpenMenuDrawer}
+          isShowLoginModal={isShowLoginModal}
+          openNotificationWithIcon={openNotificationWithIcon}
+          openDownloadModal={openDownloadModal}
+          setOpenDownloadModal={setOpenDownloadModal}
+          isShowTelegramModal={isShowTelegramModal}
+          onClickToOpenTelegramService={onClickToOpenTelegramService}
+          isShowInviteBonusModal={isShowInviteBonusModal}
+          setOpenInitailChargeModal={setOpenInitailChargeModal}
+          isShowMobileHeader={isShowMobileHeader}
+          isShowTabbar={isShowTabbar}
+          showToolbox={props.showToolbox}
+          onClickToDownload={onClickToDownload}
+          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+          isUILoading={isUILoading}
+        >
+          {props.children}
+        </CocoPageTemplate>
+      ): (
+        <PernambucanaPageTemplate
+          isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+          contextHolder={contextHolder}
+          isMobile={isMobile}
+          isShowDesktopHeader={isShowDesktopHeader}
+          isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+          isLogin={isLogin}
+          setIsLogin={setIsLogin}
+          showLoginModal={showLoginModal}
+          setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
+          openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+          openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+          setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+          setOpenLogoutPopover={setOpenLogoutPopover}
+          isShowMobileLogoutModal={isShowMobileLogoutModal}
 
-        openMenuDrawer={openMenuDrawer}
-        setOpenMenuDrawer={setOpenMenuDrawer}
-        isShowLoginModal={isShowLoginModal}
-        openNotificationWithIcon={openNotificationWithIcon}
-        openDownloadModal={openDownloadModal}
-        setOpenDownloadModal={setOpenDownloadModal}
-        isShowTelegramModal={isShowTelegramModal}
-        onClickToOpenTelegramService={onClickToOpenTelegramService}
-        isShowInviteBonusModal={isShowInviteBonusModal}
-        setOpenInitailChargeModal={setOpenInitailChargeModal}
-        isShowMobileHeader={isShowMobileHeader}
-        isShowTabbar={isShowTabbar}
-        showToolbox={props.showToolbox}
-        onClickToDownload={onClickToDownload}
-        onClickToOpenTelegramManager={onClickToOpenTelegramManager}
-        isUILoading={isUILoading}
-      >
-        {props.children}
-      </PernambucanaPageTemplate>
-    )
-  }
+          openMenuDrawer={openMenuDrawer}
+          setOpenMenuDrawer={setOpenMenuDrawer}
+          isShowLoginModal={isShowLoginModal}
+          openNotificationWithIcon={openNotificationWithIcon}
+          openDownloadModal={openDownloadModal}
+          setOpenDownloadModal={setOpenDownloadModal}
+          isShowTelegramModal={isShowTelegramModal}
+          onClickToOpenTelegramService={onClickToOpenTelegramService}
+          isShowInviteBonusModal={isShowInviteBonusModal}
+          setOpenInitailChargeModal={setOpenInitailChargeModal}
+          isShowMobileHeader={isShowMobileHeader}
+          isShowTabbar={isShowTabbar}
+          showToolbox={props.showToolbox}
+          onClickToDownload={onClickToDownload}
+          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+          isUILoading={isUILoading}
+        >
+          {props.children}
+        </PernambucanaPageTemplate>
+      )}
+
+      {/*refactor: openNotificationWithIcon*/}
+      {/*{showUserLoginStatusMobileModal && (*/}
+      {isMobile && isShowLoginModal && (
+        <UserLoginStatusModal
+          openNotificationWithIcon={openNotificationWithIcon}
+          close={() => {
+            // setShowUserLoginStatusMobileModal(false)
+            showLoginModal(false)
+          }}
+          setIsLogin={(login: boolean) => setIsLogin(login)}
+        />
+      )}
+      {/*{openNonMobileUserLoginStatusDrawer && (*/}
+      {!isMobile && isShowLoginModal && (
+        <UserLoginStatusDrawers
+          openNotificationWithIcon={openNotificationWithIcon}
+          closeDrawer={() => {
+            // setOpenNonMobileUserLoginStatusDrawer(false);
+            showLoginModal(false)
+          }}
+          setIsLogin={() => setIsLogin(true)}
+        />
+      )}
+
+      {openDownloadModal && (
+        <DownloadModal close={() => {
+          setOpenDownloadModal(false)
+        }}/>
+      )}
+
+      {openDesktopUserInfoStatusDrawer && (
+        <UserInfoStatusPopover close={() => setOpenDesktopUserInfoStatusDrawer(false)}/>
+      )}
+
+      {openDesktopNotificationDrawer && (
+        <NotificationDrawer closeDrawer={() => {
+          setOpenDesktopNotificationDrawer(false)
+        }}/>
+      )}
+
+      {!isMobile && isShowMobileLogoutModal && (
+        <LogoutPopover close={() => {
+          setOpenLogoutPopover(false);
+        }}/>
+      )}
+
+      {isShowTelegramModal && (
+        <TelegramContactModal close={() => {
+          dispatch(appSlice.actions.setShowTelegramModal(false))
+        }} toTelegram={() => {
+          dispatch(appSlice.actions.setShowTelegramModal(false))
+          onClickToOpenTelegramService()
+        }}/>
+      )}
+
+      {isShowInviteBonusModal && (
+        <InviteBonusModal
+          close={() => {
+            setOpenInitailChargeModal(false);
+          }}
+          onConfirm={() => {
+            setOpenInitailChargeModal(false);
+            navigate(PageOrModalPathEnum.InvitePage);
+          }}/>
+      )}
+    </>
+  )
 
 }

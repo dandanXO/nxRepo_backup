@@ -2,16 +2,6 @@ import styled from "styled-components";
 import {environment} from "../../../../environments/environment";
 import {Header} from "../../header/env/pernambucana/Header";
 import cx from "classnames";
-import {UserLoginStatusModal} from "../../modals/UserLoginStatusModal";
-import {UserLoginStatusDrawers} from "../../drawers/UserLoginStatusDrawers";
-import {DownloadModal} from "../../modals/DownloadModal";
-import {UserInfoStatusPopover} from "../../popover/UserInfoStatusPopover";
-import {NotificationDrawer} from "../../drawers/NotificationDrawer";
-import {LogoutPopover} from "../../popover/LogoutPopover";
-import {TelegramContactModal} from "../../modals/TelegramContactModal";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {InviteBonusModal} from "../../modals/InviteBonusModal";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {HeaderMobile} from "../../header/env/pernambucana/HeaderMobile";
 import {LogoutModal} from "../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
@@ -24,6 +14,53 @@ import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import {PernambucanaMenuDrawerContent} from "../../drawers/MenuDrawer/env/PernambucanaMenuDrawerContent";
 import {MenuDrawer} from "../../drawers/MenuDrawer";
+
+
+type IStyledPage = {
+  isCurrentPageCompanyProfile: boolean;
+}
+
+export const StyledPage = styled.div.attrs((props) => ({
+  className: "h-full"
+}))<IStyledPage>`
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    //box-shadow: 0 0 3rem 0.5rem #306347 inset;
+    //background-color:#306347;
+  }
+
+  &:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
+
+    @media (max-width: 768px) {
+      background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
+    }
+  }
+
+  ${(props) => props.isCurrentPageCompanyProfile && `
+    background: url("assets/${environment.assetPrefix}/bg.888bcf29.png") no-repeat center center/100% auto;
+    background-color:#090b0f;
+  `};
+  @media (min-width: 640px) {
+    &:after {
+      //background: url("assets/bgImg.3a85b39c.jpg") no-repeat center center/100% auto;
+    }
+  }
+`;
+
 
 type IProps = {
   children?: React.ReactNode;
@@ -140,72 +177,6 @@ export const PernambucanaPageTemplate = ({
           </MenuDrawer>
         )}
 
-        {/*refactor: openNotificationWithIcon*/}
-        {/*{showUserLoginStatusMobileModal && (*/}
-        {isMobile && isShowLoginModal && (
-          <UserLoginStatusModal
-            openNotificationWithIcon={openNotificationWithIcon}
-            close={() => {
-              // setShowUserLoginStatusMobileModal(false)
-              showLoginModal(false)
-            }}
-            setIsLogin={(login: boolean) => setIsLogin(login)}
-          />
-        )}
-        {/*{openNonMobileUserLoginStatusDrawer && (*/}
-        {!isMobile && isShowLoginModal && (
-          <UserLoginStatusDrawers
-            openNotificationWithIcon={openNotificationWithIcon}
-            closeDrawer={() => {
-              // setOpenNonMobileUserLoginStatusDrawer(false);
-              showLoginModal(false)
-            }}
-            setIsLogin={() => setIsLogin(true)}
-          />
-        )}
-
-        {openDownloadModal && (
-          <DownloadModal close={() => {
-            setOpenDownloadModal(false)
-          }}/>
-        )}
-
-        {openDesktopUserInfoStatusDrawer && (
-          <UserInfoStatusPopover close={() => setOpenDesktopUserInfoStatusDrawer(false)}/>
-        )}
-
-        {openDesktopNotificationDrawer && (
-          <NotificationDrawer closeDrawer={() => {
-            setOpenDesktopNotificationDrawer(false)
-          }}/>
-        )}
-
-        {!isMobile && isShowMobileLogoutModal && (
-          <LogoutPopover close={() => {
-            setOpenLogoutPopover(false);
-          }}/>
-        )}
-
-        {isShowTelegramModal && (
-          <TelegramContactModal close={() => {
-            dispatch(appSlice.actions.setShowTelegramModal(false))
-          }} toTelegram={() => {
-            dispatch(appSlice.actions.setShowTelegramModal(false))
-            onClickToOpenTelegramService()
-          }}/>
-        )}
-
-        {isShowInviteBonusModal && (
-          <InviteBonusModal
-            close={() => {
-              setOpenInitailChargeModal(false);
-            }}
-            onConfirm={() => {
-              setOpenInitailChargeModal(false);
-              navigate(PageOrModalPathEnum.InvitePage);
-            }}/>
-        )}
-
         <div className={cx("w-full h-full", {
           "relative": !isMobile,
           "top-[100px]": isShowDesktopHeader,
@@ -263,47 +234,3 @@ export const PernambucanaPageTemplate = ({
 
   )
 }
-type IStyledPage = {
-  isCurrentPageCompanyProfile: boolean;
-}
-
-export const StyledPage = styled.div.attrs((props) => ({
-  className: "h-full"
-}))<IStyledPage>`
-  &:before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    //box-shadow: 0 0 3rem 0.5rem #306347 inset;
-    //background-color:#306347;
-  }
-
-  &:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -2;
-    background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
-
-    @media (max-width: 768px) {
-      background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
-    }
-  }
-
-  ${(props) => props.isCurrentPageCompanyProfile && `
-    background: url("assets/${environment.assetPrefix}/bg.888bcf29.png") no-repeat center center/100% auto;
-    background-color:#090b0f;
-  `};
-  @media (min-width: 640px) {
-    &:after {
-      //background: url("assets/bgImg.3a85b39c.jpg") no-repeat center center/100% auto;
-    }
-  }
-`;
