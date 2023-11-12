@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
-import {environment} from "../../../../../environments/environment";
-import {Footer} from "../../../footers/coco777bet/Footer";
-import {CocoMenuDrawerContent} from "../../../drawers/MenuDrawer/env/CocoMenuDrawerContent";
-import {Header} from "../../../header/env/coco/Header";
-import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
-import {MenuDrawer} from "../../../drawers/MenuDrawer";
+import {environment} from "../../../../environments/environment";
+import {Footer} from "../../footers/coco777bet/Footer";
+import {CocoMenuDrawerContent} from "../../drawers/MenuDrawer/env/CocoMenuDrawerContent";
+import {Header} from "../../header/env/coco/Header";
+import {HeaderMobile} from "../../header/env/coco/HeaderMobile";
+import {MenuDrawer} from "../../drawers/MenuDrawer";
+import {TabBar} from "../../tabBar";
+import {Toolbox} from "../../components/Toolbox";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -126,6 +128,7 @@ export const CocoPageTemplate = ({
 
         {isMobile && isShowMobileHeader && (
           <HeaderMobile
+            className={"!h-[52.5px]"}
             clickToOpenMenuDrawer={() => {
               setOpenMenuDrawer(!openMenuDrawer)
             }}
@@ -157,10 +160,16 @@ export const CocoPageTemplate = ({
         )}
 
         {isShowDesktopMenuDrawer && (
-          <MenuDrawer className={""}>
+          <MenuDrawer
+            className={""}
+            isTabletShow={false}
+            isShowCloseButton={false}
+          >
             <CocoMenuDrawerContent/>
           </MenuDrawer>
         )}
+
+        <div className={"w-full h-[52.5px]"}/>
 
         <ErrorBoundary
           fallback={
@@ -171,6 +180,17 @@ export const CocoPageTemplate = ({
         </ErrorBoundary>
 
         <Footer/>
+
+        {isMobile && isShowTabbar&& (
+          <TabBar isShowSlot={false} size={"big"}/>
+        )}
+
+        <Toolbox
+          showToolbox={showToolbox}
+          onClickToDownload={onClickToDownload}
+          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+          onClickToOpenTelegramService={onClickToOpenTelegramService}
+        />
 
       </StyledPage>
   )

@@ -1,6 +1,6 @@
 import cx from "classnames";
 import {UserLoginStatusSection} from "../../components/UserLoginStatusSection";
-import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
+import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import { environment } from "../../../../environments/environment"
 
 export type IUserLoginStatusDrawers = {

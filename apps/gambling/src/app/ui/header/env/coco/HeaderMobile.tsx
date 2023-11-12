@@ -13,6 +13,7 @@ import {RegisterButton} from "../../../components/RegisterButton";
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;
   clickToOpenUserLoginStatusModal: () => void;
+  className?: string;
 }
 
 export const HeaderMobile = (props: IHeaderMobile) => {
@@ -29,14 +30,17 @@ export const HeaderMobile = (props: IHeaderMobile) => {
         "bg-varient",
         {
           "fixed top-0": isMobile
-        }
+        },
+        "border-b-[1px] border-[var(--varient)]",
+        props.className,
       )}
     >
       <div className={"flex flex-row items-center"}>
         <button className={"mr-4"}>
           <img
             alt={"menu"}
-            className={"w-[22.5px] h-[22.5px]"}
+            // className={"w-[22.5px] h-[22.5px]"}
+            className={"w-[23px] h-[18px]"}
             src={`assets/${environment.assetPrefix}/ic_menu.png`}
             onClick={() => {
               props.clickToOpenMenuDrawer();

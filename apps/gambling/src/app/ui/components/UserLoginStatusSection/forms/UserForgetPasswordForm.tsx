@@ -14,7 +14,7 @@ import {
 } from "../../../../external";
 import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
 import {promiseHandler} from "../../../../gateway/promiseHanlder";
-import {IOpenNotificationWithIcon} from "../../../templates/PageTemplate";
+import {IOpenNotificationWithIcon} from "../../../pageTemplate";
 import {PostRegisterRequest} from "../../../../external/RegisterEndpoint";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";
 import {validate} from "class-validator";

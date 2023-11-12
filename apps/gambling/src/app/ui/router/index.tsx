@@ -36,7 +36,7 @@ import { gameSlice } from '../../reduxStore/gameSlice';
 import {PrivacyAgreementPage} from "../pages/PrivacyAgreementPage";
 import {environment} from "../../../environments/environment";
 import {ErrorBoundary} from "react-error-boundary";
-import {PageTemplate} from "../templates/PageTemplate";
+import {PageTemplate} from "../pageTemplate";
 import useBreakpoint from "../hooks/useBreakpoint";
 import {IUserInfo} from "../../persistant/pending/loginMode";
 import styled from "styled-components";

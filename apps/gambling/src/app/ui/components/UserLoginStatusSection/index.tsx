@@ -2,7 +2,7 @@ import cx from "classnames";
 import {useState} from "react";
 import {UserLoginForm} from "./forms/UserLoginForm";
 import {UserRegisterForm} from "./forms/UserRegisterForm";
-import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
+import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import {UserForgetPasswordForm} from "./forms/UserForgetPasswordForm";
 import {environment} from "../../../../environments/environment";
 

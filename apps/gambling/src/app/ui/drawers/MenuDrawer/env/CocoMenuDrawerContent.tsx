@@ -8,7 +8,7 @@ import {RootState} from "../../../../reduxStore";
 import {DepositButton} from "../../../components/DepositButton";
 import {CashBackButton} from "../../../components/CashBackButton";
 import {DrawerButton} from "../../../components/DrawerButton";
-import {useMenuDrawer} from "../useMenuDrawer";
+import {usePageNavigate} from "../../../hooks/usePageNavigate";
 
 
 export const CocoMenuDrawerContent = () => {
@@ -21,7 +21,7 @@ export const CocoMenuDrawerContent = () => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
-  } = useMenuDrawer();
+  } = usePageNavigate();
   return (
     <>
       <DepositButton className={cx("flex text-base font-bold mb-3", {

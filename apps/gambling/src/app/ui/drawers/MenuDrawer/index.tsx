@@ -1,42 +1,29 @@
-import styled from "styled-components";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import cx from "classnames";
-import {BackgroundButton} from "../../components/BackgroundButton";
-import {useLocation, useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {environment} from "../../../../environments/environment";
 import {uiSlice} from "../../../reduxStore/uiSlice";
-
-const HomeButton  = styled(BackgroundButton)`
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: url(assets/${environment.assetPrefix}/btn_home.png) no-repeat center/100%;
-  height: 40px;
-`
 
 export type IMenuDrawer = {
   className?: string;
   children: React.ReactNode;
   // openMenuDrawer: boolean;
   // closeMenuDrawer: () => void;
+  isTabletShow?: boolean;
+  isShowCloseButton?: boolean;
 }
 export const MenuDrawer = (props: IMenuDrawer) => {
-  const {isMobile} = useBreakpoint();
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useDispatch();
-  const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
-
+  const {isMobile} = useBreakpoint();
   const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
+  const tabletShow = props.isTabletShow === undefined ? true : props.isTabletShow;
+  const showCloseButton = props.isShowCloseButton === undefined ? true : props.isShowCloseButton;
 
   const closeMenuDrawer = () => {
     dispatch(uiSlice.actions.setOpenMenuDrawer(false));
   }
 
+  if(!isMobile && !tabletShow) return ;
   return (
     <div
       className={cx("", {
@@ -75,7 +62,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
              }}
         ></div>
 
-        {isMobile && (
+        {isMobile && showCloseButton && (
           <div className={"flex flex-row justify-end mb-2"}>
             <button>
               <img
@@ -86,52 +73,9 @@ export const MenuDrawer = (props: IMenuDrawer) => {
           </div>
         )}
 
-        {!isMobile && (
-          <section>
-            <HomeButton className={"h-[50px] !font-bold text-base mb-3"} onClick={() => {
-              if(!isLogin) {
-                dispatch(appSlice.actions.showLoginDrawerOrModal(true))
-              } else {
-                navigate(PageOrModalPathEnum.IndexPage)
-              }
-            }}>
-              {location.pathname === PageOrModalPathEnum.IndexPage ? (
-                <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_home.png`}/>
-              ): (
-                <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_home.png`}/>
-              )}
-              <span className={cx({
-                "text-transparent": location.pathname === PageOrModalPathEnum.IndexPage,
-              })}>Página Inicial</span>
-            </HomeButton>
-          </section>
-        )}
-
         <section className={"flex flex-col"}>
           {props.children}
         </section>
-
-        {isMobile && (
-          <section className={"flex flex-col items-center justify-end h-full"}>
-            <div className={"w-[276px]"} style={{ position: 'relative' }}>
-              <a>
-                <img alt={"logo"} src={`assets/${environment.assetPrefix}/Rectangle 88.png`} style={{
-                  position: 'relative',
-                }}/>
-                <img alt={"anotherImage"} src={`assets/${environment.assetPrefix}/Group.png`} style={{
-                  position: 'absolute',
-                  left: '0',
-                  top: '0'
-                }}/>
-                <img alt={"thirdImage"} src={`assets/${environment.assetPrefix}/Products of SKY group.png`} style={{
-                  position: 'absolute',
-                  left: '20px', /* 調整第三張圖片的水平位置 */
-                  top: '27px' /* 調整第三張圖片的垂直位置 */
-                }}/>
-              </a>
-            </div>
-          </section>
-        )}
 
       </div>
     </div>

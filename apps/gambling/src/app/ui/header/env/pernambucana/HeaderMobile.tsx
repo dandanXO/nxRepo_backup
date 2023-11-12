@@ -14,6 +14,7 @@ import {RegisterButton} from "../../../components/RegisterButton";
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;
   clickToOpenUserLoginStatusModal: () => void;
+  className?: string;
 }
 
 export const HeaderMobile = (props: IHeaderMobile) => {
@@ -30,7 +31,8 @@ export const HeaderMobile = (props: IHeaderMobile) => {
         "bg-[var(--varient)]",
         {
           "fixed top-0": isMobile
-        }
+        },
+        props.className,
       )}
     >
       <div className={"flex flex-row items-center"}>

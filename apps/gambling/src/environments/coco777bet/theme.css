@@ -1,7 +1,9 @@
 :root {
+  --font-family: Avenir, Helvetica, Arial, sans-serif;
+
   /*bg*/
   --main: #1D2147;
-  --varient: #032658;
+  --varient: #000c26;
   --assistant: #1D2147;
   --medium: #2A78DD;
   --light: #06F2ED;
@@ -88,5 +90,12 @@
   /*text-ad_tg*/
   --text-gradient-ad-tg-from: #D071FD;
   --text-gradient-ad-tg-to: #003BC6;
+
+
+  --tab-primary-from: #0D2054;
+  --tab-primary-to: #2931A9;
+  --tab-border-top: #5964F5;
+  --tab-text-color-normal: #FFFFFF;
+  --tab-text-color-active: #FFFFFF;
 
 }

@@ -11,8 +11,8 @@ import {useSelector} from "react-redux";
 import {useSearchGames} from "../../hooks/useSearchGames";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {environment} from "../../../../environments/environment"
-import {Pernambucana777BetIndexPage} from "./Pernambucana777BetIndexPage";
-import {Coco777betIndexPage} from "./Coco777betIndexPage";
+import {PernambucanaIndexPage} from "./env/PernambucanaIndexPage";
+import {CocoIndexPage} from "./env/CocoIndexPage";
 
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number [] },
@@ -88,7 +88,7 @@ export const IndexPage = () => {
 
   if(environment.assetPrefix === "coco777bet") {
     return (
-      <Coco777betIndexPage
+      <CocoIndexPage
         allGameList={allGameList}
         totalFavoriteLocalState={totalFavoriteLocalState}
         setTotalFavoriteLocalState={setTotalFavoriteLocalState}
@@ -103,7 +103,7 @@ export const IndexPage = () => {
   }
 
   return (
-    <Pernambucana777BetIndexPage
+    <PernambucanaIndexPage
       allGameList={allGameList}
       totalFavoriteLocalState={totalFavoriteLocalState}
       setTotalFavoriteLocalState={setTotalFavoriteLocalState}

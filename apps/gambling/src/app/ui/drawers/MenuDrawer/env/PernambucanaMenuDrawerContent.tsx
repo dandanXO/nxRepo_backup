@@ -12,10 +12,13 @@ import {RootState} from "../../../../reduxStore";
 import {DepositButton} from "../../../components/DepositButton";
 import {CashBackButton} from "../../../components/CashBackButton";
 import {DrawerButton} from "../../../components/DrawerButton";
-import {useMenuDrawer} from "../useMenuDrawer";
+import {usePageNavigate} from "../../../hooks/usePageNavigate";
+import {HomeButton} from "../../../components/HomeButton";
 
 export const PernambucanaMenuDrawerContent = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const {isMobile} = useBreakpoint();
   const {
     onClickToFirstDeposit,
     onClickToDepositCashback,
@@ -23,9 +26,34 @@ export const PernambucanaMenuDrawerContent = () => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
-  } = useMenuDrawer();
+  } = usePageNavigate();
+
+  const dispatch = useDispatch();
+  const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
+
   return (
     <>
+      {!isMobile && (
+        <section>
+          <HomeButton className={"h-[50px] !font-bold text-base mb-3"} onClick={() => {
+            if(!isLogin) {
+              dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+            } else {
+              navigate(PageOrModalPathEnum.IndexPage)
+            }
+          }}>
+            {location.pathname === PageOrModalPathEnum.IndexPage ? (
+              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_home.png`}/>
+            ): (
+              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_home.png`}/>
+            )}
+            <span className={cx({
+              "text-transparent": location.pathname === PageOrModalPathEnum.IndexPage,
+            })}>Página Inicial</span>
+          </HomeButton>
+        </section>
+      )}
+
       <DepositButton
         className={cx("flex text-base font-bold mb-3", {
           "active-drawer-button": location.pathname === PageOrModalPathEnum.InitialChargePage
@@ -162,6 +190,28 @@ export const PernambucanaMenuDrawerContent = () => {
             "text-transparent": location.pathname === PageOrModalPathEnum.TelegramPage,
           })}>Adicionar Telegrama</span>
       </DrawerButton>
+
+      {isMobile && (
+        <section className={"flex flex-col items-center justify-end h-full"}>
+          <div className={"w-[276px]"} style={{ position: 'relative' }}>
+            <a>
+              <img alt={"logo"} src={`assets/${environment.assetPrefix}/Rectangle 88.png`} style={{
+                position: 'relative',
+              }}/>
+              <img alt={"anotherImage"} src={`assets/${environment.assetPrefix}/Group.png`} style={{
+                position: 'absolute',
+                left: '0',
+                top: '0'
+              }}/>
+              <img alt={"thirdImage"} src={`assets/${environment.assetPrefix}/Products of SKY group.png`} style={{
+                position: 'absolute',
+                left: '20px', /* 調整第三張圖片的水平位置 */
+                top: '27px' /* 調整第三張圖片的垂直位置 */
+              }}/>
+            </a>
+          </div>
+        </section>
+      )}
 
     </>
   )

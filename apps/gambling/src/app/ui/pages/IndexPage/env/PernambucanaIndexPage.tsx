@@ -1,15 +1,15 @@
 import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
-import {AppCarousel} from "./AppCarousel";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {GameTypeSectionList} from "../../components/GameTypeSection";
-import {Input} from "../../components/Input";
+import {AppCarousel} from "../AppCarousel";
+import useBreakpoint from "../../../hooks/useBreakpoint";
+import {GameTypeSectionList} from "../../../components/GameTypeSection";
+import {Input} from "../../../components/Input";
 // @ts-ignore
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {environment} from "../../../../environments/environment"
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {environment} from "../../../../../environments/environment"
 
 
 export type TTotalFavoriteLocalState = {
@@ -37,7 +37,7 @@ type IPernambucana777BetIndexPage = {
   gameList: any;
 }
 
-export const Pernambucana777BetIndexPage = ({
+export const PernambucanaIndexPage = ({
                                               allGameList,
                                               totalFavoriteLocalState,
                                               setTotalFavoriteLocalState,

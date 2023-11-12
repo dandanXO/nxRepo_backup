@@ -4,16 +4,16 @@ import {notification} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router";
 
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
+import useBreakpoint from "../hooks/useBreakpoint";
+import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
 
-import {RootState} from "../../../reduxStore";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {uiSlice} from "../../../reduxStore/uiSlice";
+import {RootState} from "../../reduxStore";
+import {appSlice} from "../../reduxStore/appSlice";
+import {uiSlice} from "../../reduxStore/uiSlice";
 
-import {AppLocalStorage} from "../../../persistant/localstorage";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {environment} from "../../../../environments/environment";
+import {AppLocalStorage} from "../../persistant/localstorage";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+import {environment} from "../../../environments/environment";
 
 import {CocoPageTemplate} from "./env/CocoPageTemplate";
 import {PernambucanaPageTemplate} from "./env/PernambucanaPageTemplate";

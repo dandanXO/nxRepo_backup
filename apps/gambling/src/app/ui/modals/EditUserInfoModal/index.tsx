@@ -9,7 +9,7 @@ import { AppLocalStorage } from '../../../persistant/localstorage';
 import { Input as DesktopInput } from '../../components/Input';
 import { MobileInput } from '../../components/UserLoginStatusSection/forms/UserLoginForm/MobileInput';
 import useBreakpoint from '../../hooks/useBreakpoint';
-import { IOpenNotificationWithIcon } from '../../templates/PageTemplate';
+import { IOpenNotificationWithIcon } from '../../pageTemplate';
 
 const AvatarSrcMap: { [key: number]: string} = {
   1: 'alterar_1.c00fc635.png',

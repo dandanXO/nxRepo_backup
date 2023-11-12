@@ -1,13 +1,14 @@
 import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {GameTypeSectionList} from "../../components/GameTypeSection";
-import {Input} from "../../components/Input";
+import useBreakpoint from "../../../hooks/useBreakpoint";
+import {GameTypeSectionList} from "../../../components/GameTypeSection";
+import {Input} from "../../../components/Input";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {environment} from "../../../../environments/environment"
-import {IndexTabs} from "./IndexTabs";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {environment} from "../../../../../environments/environment"
+import {IndexTabs} from "../IndexTabs";
+import FakeBanner from "./FakeBanner.png";
 
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number [] },
@@ -34,7 +35,7 @@ type ICoco777betIndexPage = {
   gameList: any;
 }
 
-export const Coco777betIndexPage = ({
+export const CocoIndexPage = ({
                                               allGameList,
                                               totalFavoriteLocalState,
                                               setTotalFavoriteLocalState,
@@ -51,15 +52,16 @@ export const Coco777betIndexPage = ({
   return (
     <>
       <div className={cx("w-full",
-        "h-[400px] bg-[red]",
+        "max-h-[160px] md:h-[400px] bg-[red]",
         {
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
         // "p-4": !isMobile,
       })}>
         {/*<AppCarousel />*/}
+        <img src={FakeBanner}/>
       </div>
 
-      <div className={"p-4"}>
+      <div className={"p"}>
         {isMobile ? (
           allGameList !== undefined && allGameList.map((i: any, index: number) => {
             return (

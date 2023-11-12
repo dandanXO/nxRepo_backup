@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {CloseCircleOutlined} from "@ant-design/icons";
 import {UserLoginStatusSection} from "../../components/UserLoginStatusSection";
-import {IOpenNotificationWithIcon} from "../../templates/PageTemplate";
+import {IOpenNotificationWithIcon} from "../../pageTemplate";
 
 
 const Container = styled.div`
