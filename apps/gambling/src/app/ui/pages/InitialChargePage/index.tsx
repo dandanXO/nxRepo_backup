@@ -1,7 +1,5 @@
-import {VIPBorderStyleContainer} from "../VIPGradePage";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {Bonus} from "../../components/Bonus";
 import {ChargeButton} from "../../components/ChargeButton";
 import {environment} from "../../../../environments/environment";
 import useBreakpoint from "../../hooks/useBreakpoint";

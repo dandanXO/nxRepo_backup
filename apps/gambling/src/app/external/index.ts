@@ -304,20 +304,22 @@ export type GetVIPInfoResponse = {
   };
 };
 
+export type GetUserVIPAllInfoResponseData = {
+  level: number;
+  rechargeAmountLimit: number;
+  flowLimit: number;
+  withdrawAmountLimitDay: number;
+  withdrawTimesLimitDay: number;
+  receiveAmountLimitDay: number;
+  display: number;
+  upRewardAmout: number;
+}
+
 export type GetUserVIPAllInfoResponse = {
   code: number;
   msg: string;
   total: number;
-  data: {
-    level: number;
-    rechargeAmountLimit: number;
-    flowLimit: number;
-    withdrawAmountLimitDay: number;
-    withdrawTimesLimitDay: number;
-    receiveAmountLimitDay: number;
-    display: number;
-    upRewardAmout: number;
-  }[];
+  data: GetUserVIPAllInfoResponseData[];
 };
 
 export type GetSignInConfigResponse = {
