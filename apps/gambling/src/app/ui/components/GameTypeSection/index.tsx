@@ -104,11 +104,38 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   }, [animating])
 
 
+  const mobileGameTypeHeaderProps = environment.assetPrefix === 'coco777bet' ? {
+
+    showIcon: false,
+    containerClassName:'mx-1 mt-2 mb-1.5',
+    titleClassName: 'text-2xl font-medium text-white',
+    seeMoreText: 'Ver mais',
+    textClassName: `text-sm text-white text-center w-[78px] h-[24px]
+    after:content-['']
+    after:skew-x-[-15deg] 
+    after:bg-[#262fa8]
+    after:h-[24px]
+    after:absolute 
+    after:w-[78px]
+    after:rounded`
+  } : {
+    
+    containerClassName:`mb-3 text-3xl
+    after:content-['']
+    after:h-[1px]
+    after:bottom-0
+    after:right-0
+    after:absolute 
+    after:w-full
+    after:bg-gradient-to-r from-transparent to-[#4FFB0C]`,
+    titleClassName: 'text-3xl font-semibold text-white',
+    textClassName: `text-[#16FF8F] text-xl`
+  }
   return (
     <section className={"flex flex-col mb-4"}>
 
       {props.gameTypeName ==='null' ? <div></div> : isMobile ? (
-        <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClick}/>
+        <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClick} {...mobileGameTypeHeaderProps}/>
       ): (
         <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.data?.length} onClick={props.onClick} isViewAll={props.isViewAll} setViewType={props.setViewType}/>
       )}

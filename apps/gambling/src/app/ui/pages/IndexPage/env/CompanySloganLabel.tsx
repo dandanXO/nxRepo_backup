@@ -9,9 +9,9 @@ const CompanyLabel = styled.div`
 
 export const CompanySloganLabel = () => {
   return (
-    <div className={"p-2 bg-[#020E29] font-[Heebo]"}>
+    <div className={"p-2 pb-1 bg-[#020E29] font-[Heebo] leading-none"}>
       <CompanyLabel className={"font-[600]"}>Wild 777 Bet (o FMY Group) {'>>'}</CompanyLabel>
-      <div className={"text-[rgba(255,255,255,.8)]"}>merece a sua confiança</div>
+      <div className={"text-sm text-[rgba(255,255,255,.8)]"}>merece a sua confiança</div>
     </div>
   )
 }
