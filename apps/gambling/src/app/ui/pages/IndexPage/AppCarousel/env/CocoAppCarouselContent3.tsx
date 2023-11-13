@@ -19,7 +19,7 @@ export const CocoAppCarouselContent3 = () => {
         <div onClick={() => {
           onClickToInvite()
         }}>
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-3xl text-left">
+          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-3xl text-left text-white">
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img src={`assets/${environment.assetPrefix}/h5_banner_3.jpeg`}/>
