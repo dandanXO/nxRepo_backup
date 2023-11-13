@@ -10,7 +10,7 @@ export const MobileInput = styled(Input)`
   //border-radius: 10px;
   //margin-bottom: 0.4rem;
   overflow: visible;
-  border: 1px solid transparent;
+  border: 1px solid var(--input-mobile-border);
   //box-shadow: inset 0 0 0.3rem 0.05rem #000;
   background: var(--assistant);
   //background: linear-gradient(180deg,#1f2332 0%,#090B0F 100%);
