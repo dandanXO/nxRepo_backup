@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import cx from "classnames";
 
 export const Button = styled.button`

@@ -77,7 +77,7 @@ export const MobileGameItem = (props: IItem) => {
     <StyledMobileGameItem className={cx("p-1 shrink-0 grow-0 basis-[33%] overflow-hidden w-[33vh] h-[33vw] rounded-2xl flex flex-col items-center relative", {
 
     })} >
-      <div onClick={props.onClick} className={cx("relative overflow-hidden w-full h-full rounded-xl border-[#FFFA05] border-[1px] border-solid", {
+      <div onClick={props.onClick} className={cx("relative overflow-hidden w-full h-full rounded-xl ", {
 
       })}>
         {!onLoad && (
@@ -87,7 +87,8 @@ export const MobileGameItem = (props: IItem) => {
         )}
         <img
           alt={props.name}
-          className={cx("max-w-full w-full h-full rounded-xl hover:blur-[2px] ", {
+          className={cx("border-[#FFFA05] border-[1px] border-solid",
+            "max-w-full w-full h-full rounded-xl hover:blur-[2px] ", {
             // "van-image": isMobile,
             "invisible": !onLoad,
           })}

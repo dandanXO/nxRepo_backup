@@ -3,7 +3,6 @@ import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {appStore, RootState} from "../../../reduxStore";
 import {useDispatch, useSelector} from "react-redux";
-import {useGetBalanceMutation, useLazyGetSimpleBalanceQuery} from "../../../external";
 import React, {useEffect} from "react";
 import {IUserStore} from "../../../gateway/socket";
 import {appSlice, totalBalanceSheetSelector} from "../../../reduxStore/appSlice";

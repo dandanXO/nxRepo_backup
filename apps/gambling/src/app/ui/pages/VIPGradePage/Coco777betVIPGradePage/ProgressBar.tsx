@@ -17,11 +17,11 @@ const increment = (target: number) => keyframes`
 const Progress = styled.div.attrs((props)=>({
   className: props.className
 }))<{ progress: number, backgroundImageUrl?: string, className?: string, progressColor?: string }>`
-  background-image: url(${(props) => props.backgroundImageUrl ? props.backgroundImageUrl : ''});
+  background-image: url(${(props) => props.backgroundImageUrl && !props.progressColor ? props.backgroundImageUrl : ''});
   background-size: contain;
   height: inherit;
   animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
-  background-color: ${props => props.progressColor || ''};
+  background: ${props => props.progressColor || ''};
 `;
 
 interface IProgressBarProps {

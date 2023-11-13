@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {UserMoneyStatusSection} from "../header/UserMoneyStatusSection";
+import {UserMoneyStatusSection} from "../../header/UserMoneyStatusSection";
 import React from "react";
 
 export const RegisterButton = styled.button`

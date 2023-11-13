@@ -98,4 +98,9 @@
   --tab-text-color-normal: #FFFFFF;
   --tab-text-color-active: #FFFFFF;
 
+  --input-mobile-border: transparent;
+
+  --drawer-bg: #17103F;
+  --drawer-border: rgba(50,63,91,.7);
+
 }

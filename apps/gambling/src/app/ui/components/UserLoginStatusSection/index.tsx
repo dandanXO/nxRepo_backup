@@ -21,6 +21,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
   return (
     <div>
       <section className={"h-[72px] flex justify-center items-center"}>
+
         {switchToLoginOrRegister !== "forget" && (
           <div className="flex" style={{ width: "350px" }}>
             <button
@@ -28,15 +29,16 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
                 setSwitchToLoginOrRegister("login")
               }}
               className={cx("flex-1 font-bold pb-2 ml-7 mr-7", {
+                // "border-b-short": switchToLoginOrRegister === "login", // 新增的类
+              })}
+            >
+              <span className={cx("pb-2",{
                 "text-main-secondary-main": switchToLoginOrRegister === "login",
                 "text-white": switchToLoginOrRegister !== "login",
                 "border-b-2": switchToLoginOrRegister === "login",
                 "border-b-solid": switchToLoginOrRegister === "login",
                 "border-b-main-secondary-main": switchToLoginOrRegister === "login",
-                // "border-b-short": switchToLoginOrRegister === "login", // 新增的类
-              })}
-            >
-              Entrar
+              })}>Entrar</span>
             </button>
 
 
@@ -45,15 +47,17 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
                 setSwitchToLoginOrRegister("register")
               }}
               className={cx("flex-1 font-bold pb-2 mr-7 ml-7",{
+
+              })}
+            >
+              <span className={cx("pb-2", {
                 "text-main-secondary-main": switchToLoginOrRegister === "register",
                 "text-white": switchToLoginOrRegister !== "register",
                 "border-b-2": switchToLoginOrRegister === "register",
                 "border-bottom-width-2": switchToLoginOrRegister === "register",
                 "border-b-solid": switchToLoginOrRegister === "register",
                 "border-b-main-secondary-main": switchToLoginOrRegister === "register",
-              })}
-            >
-              Cadastre-Se
+              })}>Cadastre-Se</span>
             </button>
           </div>
         )}

@@ -32,7 +32,17 @@ const MexicoExtendConfirmModal = () => {
             ghostTheme={'none'}
             text={t('Next Time')}
             className={`mr-1 w-full`}
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate(
+                `${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,
+                {
+                  state: {
+                    currentData: location.state,
+                  },
+                  replace: true
+                }
+              );
+            }}
           />
           <Button
             outlineTheme={'round'}
@@ -47,6 +57,7 @@ const MexicoExtendConfirmModal = () => {
                   state: {
                     currentData: location.state,
                   },
+                  replace: true
                 }
               );
             }}

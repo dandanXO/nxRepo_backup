@@ -8,7 +8,7 @@ import {RootState} from "../../../../reduxStore";
 import {environment} from "../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {RegisterButton, RegisterButton2} from "../../../components/RegisterButton";
+import {RegisterButton, RegisterButton2} from "../../../components/Buttons/RegisterButton";
 
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;

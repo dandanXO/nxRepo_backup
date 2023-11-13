@@ -1,7 +1,7 @@
 import {SectionContainer} from "../../components/SectionContainer";
 import moment, {Moment} from "moment/moment";
 import {DatePicker} from "antd";
-import {Button} from "../../components/Button";
+import {Button} from "../../components/Buttons/Button";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useNavigate} from "react-router";

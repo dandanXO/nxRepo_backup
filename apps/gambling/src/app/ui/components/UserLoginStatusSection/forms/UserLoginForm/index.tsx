@@ -1,8 +1,8 @@
 import {PhoneSvg} from "../../PhoneSvg";
 import {KeySvg} from "../../KeySvg";
-import {ConfirmButton} from "../../../ConfirmButton";
+import {ConfirmButton} from "../../../Buttons/ConfirmButton";
 import {Input as DesktopInput, InputValue} from "../../../Input";
-import {MobileInput} from "./MobileInput";
+import {MobileInput} from "../../../MobileInput";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 import {useState} from "react";
@@ -180,11 +180,13 @@ export const UserLoginForm = (props: IUserLoginForm) => {
   return (
     <div className={"form"}>
       <div className={"flex flex-col"}>
+
         <Input
             type="text"
             prefix={
               <>
-                <PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />
+                {/*<PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />*/}
+                <PhoneSvg fill="#6c7083" className="mr-2 w-[14px] h-[20px]" />
                 <span className="text-main-primary-main mr-2">+55</span>
               </>
             }
@@ -195,33 +197,34 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             onChange={(event) => onValidatePhoneInput(event.target.value, setPhoneInput)}
         />
 
-        <div style={{ position: 'relative' }}>
-          <Input
-              type={isPasswordVisible ? 'text' : 'password'}
-          prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-          placeholder={"Senha (4-12 letras e números)"}
-          value={passwordInput.data}
-          validation={passwordInput.isValidation}
-          errorMessage={passwordInput.errorMessage}
-          onChange={(event) => {
-            onValidatePasswordInput(event.target.value, setPasswordInput)
-          }}
-        />
-          <div
-              className="password-toggle"
-              style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
-              onClick={togglePasswordVisibility}
-          >
-            {isPasswordVisible ? (
-                <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
-            ) : (
-                <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+        <Input
+            type={isPasswordVisible ? 'text' : 'password'}
+            // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+            prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+            placeholder={"Senha (4-12 letras e números)"}
+            value={passwordInput.data}
+            validation={passwordInput.isValidation}
+            errorMessage={passwordInput.errorMessage}
+            onChange={(event) => {
+              onValidatePasswordInput(event.target.value, setPasswordInput)
+            }}
+            suffix={(
+              <div
+                className="password-toggle"
+                // style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
+                onClick={togglePasswordVisibility}
+              >
+                {isPasswordVisible ? (
+                  <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
+                ) : (
+                  <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+                )}
+              </div>
             )}
-          </div>
-        </div>
+        />
 
-        <section className={"flex flex-col mt-2"}>
-          <button className={"my-4 text-[var(--light)]"} onClick={() => {
+        <section className={"flex flex-col"}>
+          <button className={"text-[var(--light)]"} onClick={() => {
             props.onSwitchToForgetPassword();
           }}>Esqueça a senha?</button>
           <ConfirmButton

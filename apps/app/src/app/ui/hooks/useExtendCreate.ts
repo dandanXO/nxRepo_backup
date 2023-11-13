@@ -30,7 +30,7 @@ const useExtendCreate = () => {
         .then((data: PostRepayCreateResponse) => {
           if (data.nextStep === 'html' &&
             [MexicoCountry.country, PhilippinesCountry.country].includes(environment.country)) {
-            navigate(`${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`, { state: data });
+            navigate(`${PageOrModalPathEnum.PaymentCheckoutPage}?token=${getToken()}`, { state: data, replace: true });
             return;
           }
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {

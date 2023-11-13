@@ -3,17 +3,17 @@ import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import {environment} from "../../../../../environments/environment";
 import styled from "styled-components";
-import {BackgroundButton} from "../../../components/BackgroundButton";
+import {BackgroundButton} from "../../../components/Buttons/BackgroundButton";
 import {useState} from "react";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {useLocation, useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
-import {DepositButton} from "../../../components/DepositButton";
-import {CashBackButton} from "../../../components/CashBackButton";
-import {DrawerButton} from "../../../components/DrawerButton";
+import {DepositButton} from "../../../components/Buttons/DepositButton";
+import {CashBackButton} from "../../../components/Buttons/CashBackButton";
+import {DrawerButton} from "../../../components/Buttons/DrawerButton";
 import {usePageNavigate} from "../../../hooks/usePageNavigate";
-import {HomeButton} from "../../../components/HomeButton";
+import {HomeButton} from "../../../components/Buttons/HomeButton";
 
 export const PernambucanaMenuDrawerContent = () => {
   const location = useLocation();

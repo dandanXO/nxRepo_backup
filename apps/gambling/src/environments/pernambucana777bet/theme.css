@@ -97,6 +97,9 @@
   --tab-text-color-normal: #2CFD99;
   --tab-text-color-active: #E5F041;
 
+  --input-mobile-border: transparent;
 
+  --drawer-bg: #013E42;
+  --drawer-border: #013E42;
 }
 

@@ -8,7 +8,7 @@ import {RootState} from "../../../../reduxStore";
 import {environment} from "../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {RegisterButton} from "../../../components/RegisterButton";
+import {RegisterButton} from "../../../components/Buttons/RegisterButton";
 import {SearchButton} from "./SearchButton";
 
 
