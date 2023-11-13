@@ -622,9 +622,9 @@ export const API = createApi({
       getWithdrawLimit: WithdrawInfoGetEndpoint(builder),
       withdraw: WithdrawEndpoint(builder),
       withdrawHistoryList: WithdrawHistoryListEndpoint(builder),
-      getBalance: builder.mutation<GetBalanceResponse, GetBalanceRequest>({
+      getBalance: builder.query<GetBalanceResponse, GetBalanceRequest>({
         query: (data: GetBalanceRequest) => ({
-          method: 'post',
+          method: 'get',
           url: `/japi/user/balance`,
           data,
         })
@@ -809,7 +809,7 @@ export const {
   useGetConfigMutation,
   useLazyGetGameListQuery,
   useLoginMutation,
-  useGetBalanceMutation,
+  useLazyGetBalanceQuery,
   useLazyGetSimpleBalanceQuery,
   useGetUserGameRecordMutation,
   useRegisterMutation,

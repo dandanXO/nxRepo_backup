@@ -1,8 +1,7 @@
 import {
-  useGetBalanceMutation,
   useGetMailCountMutation,
   useGetSignInConfigMutation,
-  useGetVIPInfoMutation,
+  useGetVIPInfoMutation, useLazyGetBalanceQuery,
   useLazyGetUserVIPAllInfoQuery
 } from "../../external";
 import {useEffect} from "react";
@@ -16,7 +15,7 @@ export const useAutoUpdateBalance = () => {
   const dispatch = useDispatch();
   const {isLogin} = useSelector((state: RootState) => state.app)
 
-  const [triggerGetBalance, {data,isLoading: isGetBalanceLoading}] = useGetBalanceMutation();
+  const [triggerGetBalance, {data,isLoading: isGetBalanceLoading}] = useLazyGetBalanceQuery();
 
   // const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
   const [triggerGetUserVIPInfo, {data: vipAllInfo, isLoading: isGetVIPInfoLoading}] = useGetVIPInfoMutation();
