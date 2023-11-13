@@ -266,8 +266,9 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
 
       <section className={"flex flex-col"}>
         <ConfirmButton
+          className="!w-full"
           onClick={() => onFormConfirm()}
-          style={{width: "100%", height: 50, fontWeight: "bold"}}>Entrar</ConfirmButton>
+        >Entrar</ConfirmButton>
       </section>
 
     </section>

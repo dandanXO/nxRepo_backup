@@ -224,12 +224,13 @@ export const UserLoginForm = (props: IUserLoginForm) => {
         />
 
         <section className={"flex flex-col"}>
-          <button className={"text-[var(--light)]"} onClick={() => {
-            props.onSwitchToForgetPassword();
-          }}>Esqueça a senha?</button>
-          <ConfirmButton
-            onClick={() => onFormConfirm()}
-            style={{width: "100%", height: 50, fontWeight: "bold"}}>Entrar</ConfirmButton>
+          <button
+            className={"text-[var(--light)] text-left mb-3 ml-3"}
+            onClick={() => {
+              props.onSwitchToForgetPassword();
+            }}
+          >Esqueça a senha?</button>
+          <ConfirmButton className="!w-full" onClick={() => onFormConfirm()}>Entrar</ConfirmButton>
         </section>
 
       </div>

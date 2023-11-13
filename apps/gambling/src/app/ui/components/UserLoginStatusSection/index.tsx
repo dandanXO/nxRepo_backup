@@ -12,6 +12,7 @@ export type IUserLoginStatusSection = {
   confirmToLogin: () => void;
   confirmToRegister: () => void;
   openNotificationWithIcon: (props: IOpenNotificationWithIcon) => void;
+  showPlatformLogo?: boolean;
 }
 
 
@@ -20,8 +21,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
 
   return (
     <div>
-      <section className={"h-[72px] flex justify-center items-center"}>
-
+      <section className={"mb-2 flex justify-center items-center"}>
         {switchToLoginOrRegister !== "forget" && (
           <div className="flex" style={{ width: "350px" }}>
             <button
@@ -40,7 +40,6 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
                 "border-b-main-secondary-main": switchToLoginOrRegister === "login",
               })}>Entrar</span>
             </button>
-
 
             <button
               onClick={() => {
@@ -83,8 +82,11 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
       {(switchToLoginOrRegister === "login" ? (
         <div>
           <section className={"flex flex-col justify-center items-center mb-4"}>
-            <img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>
-            {/*<span className={"text-white text-sm"}>{environment.platformName}</span>*/}
+            {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>*/}
+            <img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
+            {props.showPlatformLogo && (
+              <span className={"text-white text-sm"}>{environment.platformName}</span>
+            )}
           </section>
           <UserLoginForm
             confirmToLogin={() => {

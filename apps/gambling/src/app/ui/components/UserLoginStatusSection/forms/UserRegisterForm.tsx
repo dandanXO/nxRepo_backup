@@ -302,9 +302,9 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
       <section className={"flex flex-col mb-4"}>
         <ConfirmButton
+          className="!w-full"
           onClick={() => onFormConfirm()}
-          style={{width: "100%", height: 50, fontWeight: "bold"}}
-        >Register Agora</ConfirmButton>
+        >Register agora</ConfirmButton>
       </section>
 
       {isMobile ? (

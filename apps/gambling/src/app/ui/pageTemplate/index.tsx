@@ -290,6 +290,7 @@ export const PageTemplate = (props: IPage) => {
           setIsLogin={(login: boolean) => setIsLogin(login)}
         />
       )}
+
       {/*{openNonMobileUserLoginStatusDrawer && (*/}
       {!isMobile && isShowLoginModal && (
         <UserLoginStatusDrawers
