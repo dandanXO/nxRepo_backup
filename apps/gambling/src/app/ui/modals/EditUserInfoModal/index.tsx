@@ -7,7 +7,7 @@ import { useUpdateUserInfoMutation } from '../../../external';
 import { promiseHandler } from '../../../gateway/promiseHanlder';
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { Input as DesktopInput } from '../../components/Input';
-import { MobileInput } from '../../components/UserLoginStatusSection/forms/UserLoginForm/MobileInput';
+import { MobileInput } from '../../components/MobileInput';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { IOpenNotificationWithIcon } from '../../pageTemplate';
 

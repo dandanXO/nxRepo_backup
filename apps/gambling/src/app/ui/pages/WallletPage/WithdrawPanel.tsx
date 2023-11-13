@@ -1,6 +1,6 @@
 import { SectionContainer } from "../../components/SectionContainer";
 import { Input, InputValue } from "../../components/Input";
-import { Button, ButtonPro } from "../../components/Button";
+import { Button, ButtonPro } from "../../components/Buttons/Button";
 import { DepositConfirmButton, ViewButton } from "./index";
 import { BlueBoard } from "./BlueBoard";
 import useBreakpoint from "../../hooks/useBreakpoint";

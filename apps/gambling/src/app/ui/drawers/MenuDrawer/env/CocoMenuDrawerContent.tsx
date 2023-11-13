@@ -10,9 +10,9 @@ import { CocoMobileMenuItem } from "../components/MobileMenuItem";
 import { MobileMenuLink } from "../components/MobileMenuLink";
 import { CopyLinkItem } from "../../../components/CopyLinkItem";
 import { useEffect } from "react";
-import { DepositButton } from "../../../components/DepositButton";
-import { CashBackButton } from "../../../components/CashBackButton";
-import { DrawerButton } from "../../../components/DrawerButton";
+import { DepositButton } from "../../../components/Buttons/DepositButton";
+import { CashBackButton } from "../../../components/Buttons/CashBackButton";
+import { DrawerButton } from "../../../components/Buttons/DrawerButton";
 
 import { AvatarContainer } from "../../../header/env/coco/AvatarContainer";
 import { Avatar } from "../../../components/Avatar";
@@ -60,7 +60,7 @@ export const CocoMenuDrawerContent = () => {
         </div>
         }
       </div>
-      
+
       <CocoMobileMenuItem
         text={'Canal De Telegram'}
         className={`after:bg-[#2E45DA] justify-between`}

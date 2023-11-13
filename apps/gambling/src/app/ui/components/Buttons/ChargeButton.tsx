@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 export const ChargeButton = styled.div`
   cursor: pointer;

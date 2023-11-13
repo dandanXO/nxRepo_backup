@@ -1,10 +1,10 @@
 import {PhoneSvg} from "../PhoneSvg";
 import {KeySvg} from "../KeySvg";
-import {ConfirmButton} from "../../ConfirmButton";
+import {ConfirmButton} from "../../Buttons/ConfirmButton";
 import {CheckCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {Input as DesktopInput, Input, InputValue} from "../../Input";
-import {MobileInput} from "./UserLoginForm/MobileInput";
+import {MobileInput} from "../../MobileInput";
 import {useState} from "react";
 import {useForm} from "../../../hooks/useForm";
 import {
@@ -185,7 +185,8 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         type={"text"}
         prefix={
           <>
-            <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>
+            {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
+            <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
             <span className={"text-[#01FF52] mr-2"}>+55</span>
           </>
         }
@@ -200,7 +201,8 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
       <div style={{ position: 'relative' }}>
       <Input
         type={"text"}
-        prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+        // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+        prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
         placeholder={"Código de verificação"}
         value={captchaInput.data}
         validation={captchaInput.isValidation}
@@ -226,7 +228,8 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
       <div style={{ position: 'relative' }}>
       <Input
         type={isPasswordVisible ? 'text' : 'password'}
-        prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+        // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+        prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
         placeholder={"Senha (4-12 letras e números)"}
         value={passwordInput.data}
         validation={passwordInput.isValidation}

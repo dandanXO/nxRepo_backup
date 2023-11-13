@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {ChargeButton} from "../../components/ChargeButton";
+import {ChargeButton} from "../../components/Buttons/ChargeButton";
 import {environment} from "../../../../environments/environment";
 import useBreakpoint from "../../hooks/useBreakpoint";
 

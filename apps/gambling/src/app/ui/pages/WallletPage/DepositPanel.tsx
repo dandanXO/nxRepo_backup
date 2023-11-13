@@ -12,7 +12,7 @@ import { BlueBoard } from "./BlueBoard";
 import { MobileInput } from "./MobileInput";
 import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../external/RechargeInfoGetEndpoint";
 import { environment } from "../../../../environments/environment";
-import {ButtonPro, ProButton} from "../../components/Button";
+import {ButtonPro, ProButton} from "../../components/Buttons/Button";
 import { tcx } from "../../utils/tcx";
 import {TotalSectionContainer} from "./TotalSectionContainer";
 

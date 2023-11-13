@@ -625,7 +625,7 @@ export const API = createApi({
       getBalance: builder.mutation<GetBalanceResponse, GetBalanceRequest>({
         query: (data: GetBalanceRequest) => ({
           method: 'post',
-          url: `/prod-api/user/query-balance`,
+          url: `/japi/user/balance`,
           data,
         })
       }),

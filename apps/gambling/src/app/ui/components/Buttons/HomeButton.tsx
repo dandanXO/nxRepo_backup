@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {BackgroundButton} from "./BackgroundButton";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 export const HomeButton  = styled(BackgroundButton)`
   flex-direction: row;

@@ -1,4 +1,4 @@
-import {Button} from "../../components/Button";
+import {Button} from "../../components/Buttons/Button";
 import cx from "classnames";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";

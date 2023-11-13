@@ -11,7 +11,7 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../environments/environment";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {notification} from "antd";
-import {ButtonPro} from "../../components/Button";
+import {ButtonPro} from "../../components/Buttons/Button";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { tcx } from "../../utils/tcx";
 import cx from "classnames";

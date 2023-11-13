@@ -17,13 +17,9 @@ import {CocoAppCarouselContent3} from "../AppCarousel/env/CocoAppCarouselContent
 import {CocoAppCarouselContent4} from "../AppCarousel/env/CocoAppCarouselContent4";
 import {CocoAppCarouselContent5} from "../AppCarousel/env/CocoAppCarouselContent5";
 import {CocoAppCarouselContent6} from "../AppCarousel/env/CocoAppCarouselContent6";
+import {CompanySloganLabel} from "./CompanySloganLabel";
 
-const CompanySlogan = styled.div`
-  background-image: linear-gradient(0deg,#fff 0%,#2b3aff 100%);
-  //background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-`
+
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number [] },
   localArr: {
@@ -72,10 +68,7 @@ export const CocoIndexPage = ({
         // "p-4": !isMobile,
       })}>
 
-        <div className={"p-2 bg-[#020E29]"}>
-          <CompanySlogan className={"font-[600]"}>Wild 777 Bet (o FMY Group) {'>>'}</CompanySlogan>
-          <div className={"text-[rgba(255,255,255,.8)]"}>merece a sua confiança</div>
-        </div>
+        <CompanySloganLabel/>
 
         {/*<img src={FakeBanner}/>*/}
         <AppCarousel>
