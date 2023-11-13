@@ -24,6 +24,7 @@ export type ITabItem = {
   className?: string;
   size?: "small" | "normal" | "big" | "auto",
   onClick?: () => void;
+  background?:string;
 }
 
 export const StyledTabItem = styled.button<ITabItem>`
@@ -47,7 +48,7 @@ export const StyledTabItem = styled.button<ITabItem>`
   ${(props) => {
     if (!props.pureColor) {
       return props.active && `
-        background: url("assets/${environment.assetPrefix}/select_btn.png");
+        background: ${props.background ?props.background :`url("assets/${environment.assetPrefix}/select_btn.png")`};
         background-size: 100% 100%;
         background-position:  center;
       `;
@@ -74,6 +75,7 @@ export const TabItem = (props: ITabItem) => {
   return (
     <StyledTabItem
       pureColor={props.pureColor}
+      background={props.background}
       className={cx(
         "px-4 py-1",
         "md:px-6 md:py-1",
