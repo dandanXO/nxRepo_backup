@@ -99,7 +99,7 @@ export const CocoIndexPage = ({
         <Container className="bg-[#020E29]">
           <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
             <DragScrollContainer>
-              <section className={"flex flex-row items-center bg-[#000C26] py-1"}>
+              <section className={"flex flex-row items-center bg-[#000C26] px-0.5"}>
                 <Tabs className={"game-type-tab-list"}>
                   <div>
                     {label !== undefined && ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
@@ -110,7 +110,7 @@ export const CocoIndexPage = ({
                           active={activeTab === tab}
                           onClick={() => setActiveTab(tab)}
                           className={cx(`font-bold border-none border-0 rounded `, {
-                            'bg-[#262fa8] text-white': activeTab === tab,
+                            'bg-[#262fa8] text-white py-0.5': activeTab === tab,
                             'text-[#9ea3bb]': activeTab !== tab
                           })}
                         />

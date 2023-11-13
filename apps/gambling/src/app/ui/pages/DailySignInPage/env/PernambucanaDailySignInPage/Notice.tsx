@@ -1,4 +1,4 @@
-import {VIPBorderStyleContainer} from "../VIPGradePage";
+import {VIPBorderStyleContainer} from "../../../VIPGradePage";
 
 export const Notice = () => {
   return (
