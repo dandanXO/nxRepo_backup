@@ -17,7 +17,7 @@ import { DrawerButton } from "../../../components/Buttons/DrawerButton";
 import { AvatarContainer } from "../../../header/env/coco/AvatarContainer";
 import { Avatar } from "../../../components/Avatar";
 import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
-import { AppLocalStorage } from "apps/gambling/src/app/persistant/localstorage";
+import { AppLocalStorage } from "../../../../persistant/localstorage";
 import { notification } from "antd";
 import copy from "copy-to-clipboard";
 

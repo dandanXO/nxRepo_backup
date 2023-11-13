@@ -1,5 +1,6 @@
-import { tcx } from '../../../../../../app/src/app/modules/ui/tailwindcss';
+
 import { ReactElement, useEffect, useRef, useState } from 'react';
+import {tcx} from "../../utils/tcx";
 
 
 interface IColumns {
