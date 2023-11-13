@@ -136,8 +136,9 @@ export const Footer = (props: IFooter) => {
           </div>
         </div>
       ): (
-        <div className='h-[400px] bg-[var(--main)] text-white flex justify-center'>
-            <div className={"flex gap-3 w-11/12 mt-3"}>
+        <div className='bg-[var(--main)] text-white flex justify-center'>
+          {/*h-[400px]*/}
+          <div className={"flex gap-3 w-11/12 mt-3"}>
 
               <section className={"flex flex-col gap-3 w-1/12 items-start"}>
                 <div className='text-gray-500'>Jogo</div>
