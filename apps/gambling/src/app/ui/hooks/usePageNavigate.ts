@@ -69,6 +69,14 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.MyPage)
     }
   }
+
+  const onClickToSearch = () => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(PageOrModalPathEnum.GameSearchPage)
+    }
+  }
   return {
     onClickToIndex,
     onClickToSlot,
@@ -79,5 +87,6 @@ export const usePageNavigate = () => {
     onClickToCheckInDaily,
     onClickToTelegram,
     onClickToProfile,
+    onClickToSearch
   }
 }

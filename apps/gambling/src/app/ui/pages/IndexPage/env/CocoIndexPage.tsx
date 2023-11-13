@@ -23,6 +23,7 @@ import { DragScrollContainer } from "../../../components/DragScrollContainer";
 import { useEffect } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
+import { usePageNavigate } from "../../../hooks/usePageNavigate";
 
 
 export type TTotalFavoriteLocalState = {
@@ -63,6 +64,7 @@ export const CocoIndexPage = ({
 }:ICoco777betIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
+  const {onClickToSearch} = usePageNavigate();
 
   useEffect(() => {
     if (activeTab === "Todos") {
@@ -118,7 +120,7 @@ export const CocoIndexPage = ({
               </section>
             </DragScrollContainer>
           </div>
-          <div className="-mb-4">
+          <div className="-mb-4" onClick={onClickToSearch}>
             <Input className={" mt-2 mx-2 py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
               inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
               placeholder={"Pesquisar nome do jogo"}
@@ -128,7 +130,8 @@ export const CocoIndexPage = ({
 
         </div>
       )}
-      {isMobile && (
+      {isMobile && <div className="bg-[#000C26]">{gameList()}</div>}
+      {/* {isMobile && (
         <div className={"p-2 bg-[#020E29]"}>
           {allGameList !== undefined && allGameList.map((i: any, index: number) => {
             return (
@@ -143,11 +146,10 @@ export const CocoIndexPage = ({
             )
           })}
         </div>
-      )}
+      )} */}
 
       {!isMobile && (
         <div className={"p-4"}>
-          // green border
           <section
             // style={{ border: '1px solid #2CFD99' }}
             className={cx(
@@ -168,8 +170,7 @@ export const CocoIndexPage = ({
               <div className="shirnk-0 grow-0 basis-[150px]">
                 <Input
                   className="bg-[#069D5C] items-baseline"
-                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`}
-                               placeholder={"Pesquisar nome do jogo"} />}
+                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
                   onChange={(event: any) => {
                     setSearchInput(event.target.value)
                   }}
