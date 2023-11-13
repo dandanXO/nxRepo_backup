@@ -14,6 +14,7 @@ import {IRLevelButton, ProgressBar} from './index';
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {environment} from "../../../../../environments/environment";
+import { JackpotMap } from "../index";
 
 export const LevelListBottomBr = styled.div`
   height: 1rem;
@@ -56,38 +57,6 @@ const Container = styled.div`
   background-color: rgba(40, 112, 82, 0.1);
   background-size: 100% 100%;
 `;
-
-const jackpotMap: {
-  [key: number]: {
-    image: string;
-    label: string;
-  };
-} = {
-  20: {
-    image: '20-7a820a39.png',
-    label: 'Audi a4',
-  },
-  21: {
-    image: '21-ba2f88fe.png',
-    label: 'BMW 520i',
-  },
-  22: {
-    image: '22-667f2bd5.png',
-    label: 'Porsche Cayenne',
-  },
-  23: {
-    image: '23-c74d9cdd.png',
-    label: 'Porsche 911',
-  },
-  24: {
-    image: '24-52d916b4.png',
-    label: 'Ferrari 448',
-  },
-  25: {
-    image: '25-e9c8c963.png',
-    label: 'helicóptero',
-  },
-};
 
 interface IVIPGradeMobileTemplateProps {
   userVIPInfo?: GetVIPInfoResponse;
@@ -255,11 +224,11 @@ const Pernambucana777BetVIPGradeMobileTemplate = ({
             <ItemContainer className="flex flex-col items-center justify-center">
               <img
                 alt="jackpot"
-                src={`assets/${jackpotMap[currentSelectedLevel].image}`}
+                src={`assets/${JackpotMap[currentSelectedLevel].image}`}
               />
               <div className="w-full bg-purple-900 bg-opacity-20">
                 <div className="text-sm ">
-                  Nível Mega Jackpot: {jackpotMap[currentSelectedLevel].label}
+                  Nível Mega Jackpot: {JackpotMap[currentSelectedLevel].label}
                 </div>
                 <div className="text-[10px] leading-none opacity-70">
                   Ou numerário de valor equivalente

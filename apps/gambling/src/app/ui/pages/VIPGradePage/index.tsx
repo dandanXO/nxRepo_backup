@@ -56,6 +56,38 @@ export const VIPBorderStyleContainer = styled.div`
 `;
 
 
+export const JackpotMap: {
+  [key: number]: {
+    image: string;
+    label: string;
+  };
+} = {
+  20: {
+    image: '20-7a820a39.png',
+    label: 'Audi a4',
+  },
+  21: {
+    image: '21-ba2f88fe.png',
+    label: 'BMW 520i',
+  },
+  22: {
+    image: '22-667f2bd5.png',
+    label: 'Porsche Cayenne',
+  },
+  23: {
+    image: '23-c74d9cdd.png',
+    label: 'Porsche 911',
+  },
+  24: {
+    image: '24-52d916b4.png',
+    label: 'Ferrari 448',
+  },
+  25: {
+    image: '25-e9c8c963.png',
+    label: 'helicóptero',
+  },
+};
+
 
 export const VIPGradePage = () => {
   useAllowLoginRouterRules();
@@ -184,9 +216,15 @@ export const VIPGradePage = () => {
   } else {
 
     if (environment.assetPrefix === 'coco777bet') {
-      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig}/>
-    } else {
-      return <Coco777betVIPGradePage isMobile={isMobile} userVIPInfo={userVIPInfo} currentLevel={currentLevel} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig}/>
+      return (
+        <Coco777betVIPGradePage
+          isMobile={isMobile}
+          userVIPInfo={userVIPInfo}
+          currentLevel={currentLevel}
+          allLevelInfo={allLevelInfo}
+          allSignInConfig={allSignInConfig}
+        />
+      )
     }
 
     return (
