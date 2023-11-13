@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import cx from "classnames";
-import {useState} from "react";
+import { useState } from "react";
 import { environment } from "../../../environments/environment"
 import useBreakpoint from "../hooks/useBreakpoint";
 
 
 export type ITabs = {
-  children: React.ReactElement[];
+  children: React.ReactElement | React.ReactElement[];
   className?: string;
 }
 export const Tabs = (props: ITabs) => {
@@ -31,8 +31,8 @@ export const StyledTabItem = styled.button<ITabItem>`
   //min-height: 35px;
   color: var(--white);
   ${(props) => {
-    if(props.pureColor === true) {
-      if(!props.active) {
+    if (props.pureColor === true) {
+      if (!props.active) {
         return `
           color: var(--white);
         `;
@@ -45,14 +45,14 @@ export const StyledTabItem = styled.button<ITabItem>`
     }
   }};
   ${(props) => {
-    if(!props.pureColor) {
+    if (!props.pureColor) {
       return props.active && `
         background: url("assets/${environment.assetPrefix}/select_btn.png");
         background-size: 100% 100%;
         background-position:  center;
       `;
     } else {
-      if(props.active) {
+      if (props.active) {
         return `
           background: linear-gradient(90deg, var(--btn-gradient1-from), var(--btn-gradient1-to));
           border-radius: 8px;
@@ -69,14 +69,14 @@ export const StyledTabItem = styled.button<ITabItem>`
 `;
 
 export const TabItem = (props: ITabItem) => {
-  const {isMobile} = useBreakpoint();
+  const { isMobile } = useBreakpoint();
   const [hover, setHover] = useState(false);
   return (
     <StyledTabItem
       pureColor={props.pureColor}
       className={cx(
         "px-4 py-1",
-              "md:px-6 md:py-1",
+        "md:px-6 md:py-1",
         {
           // "w-[96px] text-xl": props.size === "small",
           // "w-[114px] text-xl": props.size === "big" || !isMobile,
@@ -95,11 +95,46 @@ export const TabItem = (props: ITabItem) => {
         className={cx(
           "",
           {
-          // "text-transparent": props.active || hover,
-          // "font-bold": props.active,
-          // "font-medium": !props.active,
-        })}
+            // "text-transparent": props.active || hover,
+            // "font-bold": props.active,
+            // "font-medium": !props.active,
+          })}
       >{props.name}</div>
     </StyledTabItem>
+  )
+}
+
+
+export const CocoTabItem = (props: ITabItem) => {
+  const { isMobile } = useBreakpoint();
+  const [hover, setHover] = useState(false);
+  return (
+    <button
+      className={cx(
+        "px-4 py-1",
+        "md:px-6 md:py-1",
+        {
+          // "w-[96px] text-xl": props.size === "small",
+          // "w-[114px] text-xl": props.size === "big" || !isMobile,
+          "w-full": props.size === "auto"
+        }, props.className)}
+      onClick={() => props.onClick && props.onClick()}
+      onMouseOver={() => {
+        setHover(true);
+      }}
+      onMouseOut={() => {
+        setHover(false)
+      }}
+    >
+      <div
+        className={cx(
+          "",
+          {
+            // "text-transparent": props.active || hover,
+            // "font-bold": props.active,
+            // "font-medium": !props.active,
+          })}
+      >{props.name}</div>
+    </button>
   )
 }

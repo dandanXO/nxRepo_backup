@@ -14,13 +14,13 @@ export const InputSection = styled.a<{
 
   //box-shadow: inset 0 0 36px 5px rgba(255,255,255,.08);
 
-  padding: 14px 16px;
+  /* padding: 14px 16px; */
   display: flex;
   flex-direction: row;
 
   transition: all .4s;
 
-  border-color: var(--main-primary-main);
+  /* border-color: var(--main-primary-main); */
   ${(props) => props.focus && `
     border-color: #01FF52;
   `}
@@ -56,7 +56,7 @@ export const Input = (props: IInput) => {
         <InputSection focus={focus} onClick={() => {
           // (inputRef && inputRef.current as any).focus()
         }}
-        className={tcx("w-full rounded-3xl border-main-primary-main border-solid border",
+        className={tcx("w-full rounded-3xl border-main-primary-main border-solid border py-4 px-3.5 ",
           // "active:!border-2 active:!border-[#01FF52]": !props.themeStyle,
           ["border-utils-gray", props.themeStyle === "simple"],
           props.className

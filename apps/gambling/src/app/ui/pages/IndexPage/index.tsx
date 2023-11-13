@@ -82,9 +82,15 @@ export const IndexPage = () => {
         ? <GameTypeSectionList gameTypeName={'null'} data={searchResults} onClick={() => navigate(PageOrModalPathEnum.IndexSlotPage)} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
         : <></>
     } else {
-      return activeTab === "Todos" ? renderAllGameList() : renderTypeGameList()
+      return (activeTab === "Todos" || activeTab === "Salão") ? renderAllGameList() : renderTypeGameList()
     }
   }
+
+
+  useEffect(() => {
+    gameList();
+  }, [activeTab])
+
 
   if(environment.assetPrefix === "coco777bet") {
     return (

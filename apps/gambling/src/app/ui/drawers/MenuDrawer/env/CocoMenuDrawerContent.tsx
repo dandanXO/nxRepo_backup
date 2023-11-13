@@ -108,7 +108,7 @@ export const CocoMenuDrawerContent = () => {
         }}
       />
       <div className="w-full text-center">
-        <p className="text-[#ffd624] text-xs leading-none mb-2">Copie o link e cole-o no navegador do seu computador para abri-lo em seu computador</p>
+        <p className="mt-4 text-[#ffd624] text-xs leading-none mb-2">Copie o link e cole-o no navegador do seu computador para abri-lo em seu computador</p>
         <CopyLinkItem url={'https://coco777bet.com'} className={'rounded'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
       </div>
     </>
