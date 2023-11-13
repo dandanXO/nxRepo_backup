@@ -11,6 +11,8 @@ import {MessageCountBadge} from "../../../components/MessageCountBadge";
 import {environment} from "../../../../../environments/environment";
 import {Avatar} from "../../../components/Avatar";
 import {AvatarAccountInfo} from "../../../components/AvatarAccountInfo";
+import {CompanyButton} from "./CompanyButton";
+import {WebsiteLogo} from "./WebsiteLogo";
 
 
 const Notification = styled.section`
@@ -52,35 +54,8 @@ export const Header = (props: IHeader) => {
       backgroundRepeat: 'no-repeat', // 禁止背景图片重复
       backgroundColor: 'var(--assistant)', // 设置背景颜色
     }}>
-      <div className={"w-[200px]"}>
-        <a>
-          <img onClick={() => {
-            navigate(PageOrModalPathEnum.IndexPage)
-          }} alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
-        </a>
-      </div>
-      <div className={"w-[276px]"} style={{ position: 'relative' }}>
-        <a>
-          <img alt={"logo"} src={`assets/${environment.assetPrefix}/Rectangle 88.png`} style={{
-            position: 'relative',
-          }}/>
-          <img alt={"anotherImage"} src={`assets/${environment.assetPrefix}/Group.png`} style={{
-            position: 'absolute',
-            left: '0',
-            top: '0'
-          }}/>
-          <img alt={"thirdImage"} src={`assets/${environment.assetPrefix}/Products of SKY group.png`} style={{
-            position: 'absolute',
-            left: '20px', /* 调整第三张图片的水平位置 */
-            top: '27px' /* 调整第三张图片的垂直位置 */
-          }}/>
-        </a>
-      </div>
-
-
-      {/*<div className={"w-[250px] hidden xl:block"}>*/}
-      {/*  <WebsiteButton/>*/}
-      {/*</div>*/}
+      <WebsiteLogo/>
+      <CompanyButton/>
 
       {/*[How to Align Last Flex Item to Right](https://medium.com/@iamryanyu/how-to-align-last-flex-item-to-right-73512e4e5912)*/}
       {!isLogin ? (
