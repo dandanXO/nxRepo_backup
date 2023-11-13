@@ -59,9 +59,8 @@ export const PernambucanaIndexPage = ({
         "p-4": !isMobile,
       })}>
 
-      <AppCarousel>
         <PernambucanaAppCarouselContent/>
-      </AppCarousel>
+
 
       </div>
 

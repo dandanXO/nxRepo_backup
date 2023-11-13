@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 
+/*@font-face {*/
+/*  font-family: 'HeeboBold';*/
+/*  src: url("assets/fonts/Heebo-Bold.ttf") format("truetype");*/
+/*}*/
+
 html,
 body {
   /*height: 100%;*/

@@ -13,7 +13,7 @@ export const CocoAppCarouselContent4 = () => {
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToVipGrade} = usePageNavigate();
   return (
-    <>
+    <div className={"font-[22.5px] font-[Heebo]"}>
       {isMobile ? (
         <div onClick={() => {
           onClickToVipGrade();
@@ -28,6 +28,6 @@ export const CocoAppCarouselContent4 = () => {
                style={{display: 'block', borderRadius: '10px'}}/>
         </div>
       )}
-    </>
+    </div>
   )
 }

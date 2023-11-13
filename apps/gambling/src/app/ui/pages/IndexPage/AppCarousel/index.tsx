@@ -36,7 +36,7 @@ export const AppCarousel = (props: IAppCarousel) => {
       showDots={true}
       arrows={false}
       responsive={responsive}
-      autoPlay={true} // 啟用自動輪播
+      autoPlay={false} // 啟用自動輪播
       autoPlaySpeed={3000} // 自動輪播速度（毫秒）
       infinite={true} // 啟用無限循環
       // removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头

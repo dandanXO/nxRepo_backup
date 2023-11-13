@@ -14,17 +14,12 @@ export const CocoAppCarouselContent2 = () => {
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToDepositCashback} = usePageNavigate();
   return (
-    <>
-
+    <div className={"font-[22.5px] font-[Heebo]"}>
       {isMobile ? (
         <div onClick={() => {
           onClickToDepositCashback();
         }}>
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-3xl text-left"
-             style={{
-               WebkitTextStroke: '1px black',
-               WebkitTextFillColor: 'white'
-             }}>
+          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-3xl text-left">
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img src={`assets/${environment.assetPrefix}/h5_banner_2.jpeg`}/>
@@ -33,20 +28,14 @@ export const CocoAppCarouselContent2 = () => {
         <div className={"w-[calc(88.6vw-265px)]"} onClick={() => {
           onClickToDepositCashback();
         }} style={{display: 'flex', justifyContent: 'center'}}>
-          <p className="absolute left-28 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-6xl text-left"
-             style={{
-               WebkitTextStroke: '2.5px black',
-               WebkitTextFillColor: 'white'
-             }}>
+          <p className="absolute left-28 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-6xl text-left">
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img src={`assets/${environment.assetPrefix}/banner2.jpeg`} className="rounded-box"
                style={{display: 'block', borderRadius: '10px'}}/>
         </div>
       )}
-
-
-    </>
+    </div>
   )
 
 }
