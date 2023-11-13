@@ -13,11 +13,11 @@ export const MobileMenuItem = (props: IMobileMenuItem) => {
   const { text, className = '', icon, onClick, iconSuffix = false } = props
 
   return (
-    <div className={cx("mobile-menu-item flex w-full py-2.5 px-4 mb-2 text-base font-bold ", className)} onClick={onClick && onClick}>
+    <button className={cx("mobile-menu-item flex w-full py-2.5 px-4 mb-2 text-base font-bold ", className)} onClick={onClick && onClick}>
       {!iconSuffix && <div className='z-50'>{icon}</div>}
       <p className='z-50'>{text}</p>
       {iconSuffix && <div className='z-50'>{icon}</div>}
-    </div>
+    </button>
   )
 }
 
