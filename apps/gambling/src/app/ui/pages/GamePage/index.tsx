@@ -47,17 +47,38 @@ export const GamePage = () => {
     // }
 
     const getGameBrand = (gameId: number): string | null => {
-      if(10000 < gameId && gameId < 20000) {
-        return "ppmater";
-      } else if(20000 < gameId && gameId < 30000) {
-        return "jiligames"
-      } else if(30000 < gameId && gameId < 40000) {
-        return "pg";
-      } else if(40000 < gameId && gameId < 50000) {
-        return "zfgames";
-      } else {
-        return null;
-      }
+        // NOTE: 先写死，待后端开单一启动游戏API
+        // 0-100 cc
+        // 50000-54000 pg2 pgsoft2
+        // 60000-61000 pp2 ppplay2
+        // 61000-62000 pp2_vivo ppplay
+        // 62000-63000 pp2_viver ??
+        // 63000-64000 pp2 ppplay2
+        // 80000-81000 jili jiligames
+        // 100000-101000 JDB jdb
+        // 110000-111000 FC fc
+        // 130000-131000 CQ9 cq9
+        if (50000 <= gameId && gameId < 54000) {
+            return "pgsoft2";
+        } else if(60000 <= gameId && gameId < 61000) {
+            return "ppplay2";
+        } else if(61000 <= gameId && gameId < 62000) {
+            return "ppplay";
+        } else if(62000 <= gameId && gameId < 63000) {
+            return "CHANGE_ME";
+        } else if(63000 <= gameId && gameId < 64000) {
+            return "ppplay2";
+        } else if(80000 <= gameId && gameId < 81000) {
+            return "jiligames";
+        } else if(100000 <= gameId && gameId < 101000) {
+            return "jdb";
+        } else if(110000 <= gameId && gameId < 111000) {
+            return "fc";
+        } else if (130000 <= gameId && gameId < 131000) {
+            return "cq9";
+        } else {
+            return null;
+        }
     }
     const {isMobile} = useBreakpoint();
 

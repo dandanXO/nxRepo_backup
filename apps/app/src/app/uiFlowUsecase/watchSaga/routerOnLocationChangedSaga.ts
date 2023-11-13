@@ -73,9 +73,11 @@ export function* routerOnLocationChangedSaga(action: LocationChangeAction) {
 
   if (action.payload.action === "REPLACE") {
 
-    if (location.pathname !== '/v2/uploaded-payment-receipt' &&
+    if (
       prevPathname !== PageOrModalPathEnum.AccountVerificationPage &&
-
+      location.pathname !== '/v2/uploaded-payment-receipt' &&
+      location.pathname !== `${PageOrModalPathEnum.RepaymentDetailPage}/extend-modal` &&
+      location.pathname !== PageOrModalPathEnum.PaymentCheckoutPage &&
       location.pathname !== PageOrModalPathEnum.LoginPage &&
       !rootState.model.reservationProductsModal.show &&
       !rootState.model.starRatingModal.show &&

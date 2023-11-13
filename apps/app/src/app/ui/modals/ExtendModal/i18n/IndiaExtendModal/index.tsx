@@ -11,9 +11,14 @@ import ListItem from '../../../../core-components/ListItem';
 import Modal from '../../../../core-components/Modal';
 import { Status } from '../../../../statusEnum';
 import { i18nExtendModal } from '../../translations';
+import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
+import { getToken } from 'apps/app/src/app/application/getToken';
+import { getOrderNo } from 'apps/app/src/app/externel/window/querystring/getOrderNo';
 
 const IndiaExtendModal = (props: any) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   // const { t } = props;
   const {
     repayConfirmDetail: { extendDate, extensionFee, extensionPayAmount = '' },
@@ -114,7 +119,17 @@ const IndiaExtendModal = (props: any) => {
             <Button
               type={'ghost'}
               ghostTheme={'tertiary'}
-              onClick={() => navigate(-2)}
+              onClick={() => {
+                navigate(
+                  `${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,
+                  {
+                    state: {
+                      currentData: location.state,
+                    },
+                    replace:true
+                  }
+                );
+              }}
               text={t('Cancel')}
             />
           </div>

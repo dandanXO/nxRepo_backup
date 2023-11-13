@@ -35,7 +35,17 @@ const PhilippinesExtendConfirmModal = () => {
             outlineTheme="round"
             type="ghost"
             ghostTheme="disable"
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate(
+                `${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${getOrderNo()}`,
+                {
+                  state: {
+                    currentData: location.state,
+                  },
+                  replace: true
+                }
+              );
+            }}
           />
           <Button
             text={t('Go Extension')}
@@ -49,6 +59,7 @@ const PhilippinesExtendConfirmModal = () => {
                   state: {
                     currentData: location.state,
                   },
+                  replace: true
                 }
               );
             }}
