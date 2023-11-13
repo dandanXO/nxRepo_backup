@@ -34,7 +34,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
       }}
     >
       <div
-        className={cx("bg-[#013E42] p-4 flex flex-col flex-between",
+        className={cx("bg-[var(--drawer-bg)] p-4 flex flex-col flex-between",
+          "border-r border-r-[var(--drawer-border)]",
           "fixed bottom-0 w-[276px] min-w-[276px] h-full z-30",
           {
             "ease-in-out duration-300": isMobile,
@@ -53,14 +54,14 @@ export const MenuDrawer = (props: IMenuDrawer) => {
         }}
       >
         {/* 添加一个去背的背景图片*/}
-        <div className="absolute inset-0 z-[-1] bg-no-repeat bg-center"
-             style={{
-               background: '#013E42',
-               backgroundSize: '100% 40%',
-               backgroundPosition: 'center bottom',
-               borderRadius: '0 20px 0 0',
-             }}
-        ></div>
+        {/*<div className="absolute inset-0 z-[-1] bg-no-repeat bg-center"*/}
+        {/*     style={{*/}
+        {/*       background: '#013E42',*/}
+        {/*       backgroundSize: '100% 40%',*/}
+        {/*       backgroundPosition: 'center bottom',*/}
+        {/*       borderRadius: '0 20px 0 0',*/}
+        {/*     }}*/}
+        {/*></div>*/}
 
         {isMobile && showCloseButton && (
           <div className={"flex flex-row justify-end mb-2"}>
