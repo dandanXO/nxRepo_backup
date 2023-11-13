@@ -48,7 +48,7 @@ export const CocoMenuDrawerContent = () => {
       <div className="user-info flex flex-col justify-center items-center mb-4">
         {contextHolder}
         <CocoAvatar />
-        <div className="user-info flex mt-2 items-center">
+        {userInfo.user_id && <div className="user-info flex mt-2 items-center">
           <p className="user-name text-white font-bold">G{userInfo.user_id}</p>
           <div className="mx-1 text-[#595656] text-xs">|</div>
           <div className="user-code flex text-xs text-[#fcc04f] items-center" onClick={onClickToCopy}>
@@ -58,9 +58,9 @@ export const CocoMenuDrawerContent = () => {
             </div>
           </div>
         </div>
+        }
       </div>
-
-
+      
       <CocoMobileMenuItem
         text={'Canal De Telegram'}
         className={`after:bg-[#2E45DA] justify-between`}
