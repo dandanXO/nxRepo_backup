@@ -21,7 +21,7 @@ const Progress = styled.div.attrs((props)=>({
   background-size: contain;
   height: inherit;
   animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
-  background-color: ${props => props.progressColor || ''};
+  background: ${props => props.progressColor || ''};
 `;
 
 interface IProgressBarProps {

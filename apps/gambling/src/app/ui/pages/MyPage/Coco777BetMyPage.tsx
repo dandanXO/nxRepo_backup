@@ -115,6 +115,7 @@ const Coco777BetMyPage = ({
             progress={
               (userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)
             }
+            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
           >
             <div className='h-full flex px-3 text-xs'>
               {((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)).toFixed(0)}%
@@ -130,6 +131,7 @@ const Coco777BetMyPage = ({
                 ? userVIPInfo?.data?.flow_progress / 100
                 : 0
             }
+            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
           >
             <div className='h-full flex px-3 text-xs'>
               {((userVIPInfo?.data?.flow || 0) / (userVIPInfo?.data?.next_level_flow || 1)).toFixed(0)}%
