@@ -9,6 +9,9 @@ import {DepositButton} from "../../../components/DepositButton";
 import {CashBackButton} from "../../../components/CashBackButton";
 import {DrawerButton} from "../../../components/DrawerButton";
 import {usePageNavigate} from "../../../hooks/usePageNavigate";
+import {AvatarContainer} from "../../../header/env/coco/AvatarContainer";
+import {Avatar} from "../../../components/Avatar";
+import {CocoAvatar} from "../../../components/Avatar/CocoAvatar";
 
 
 export const CocoMenuDrawerContent = () => {
@@ -24,6 +27,8 @@ export const CocoMenuDrawerContent = () => {
   } = usePageNavigate();
   return (
     <>
+      <CocoAvatar/>
+
       <DepositButton className={cx("flex text-base font-bold mb-3", {
         "active-drawer-button": location.pathname === PageOrModalPathEnum.InitialChargePage
       })} onClick={() => {

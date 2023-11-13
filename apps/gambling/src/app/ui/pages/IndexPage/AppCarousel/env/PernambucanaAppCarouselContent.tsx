@@ -1,65 +1,19 @@
-import Carousel from "react-multi-carousel";
+import {appSlice} from "../../../../../reduxStore/appSlice";
+import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
+import {environment} from "../../../../../../environments/environment";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../reduxStore";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {environment} from "../../../../environments/environment";
+import {RootState} from "../../../../../reduxStore";
 
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 1,
-    partialVisible:true
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 1,
-    partialVisible:true
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 1,
-    partialVisible:true
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items:1,
-    partialVisible:true
-  }
-};
-
-
-export const AppCarousel = () => {
+export const PernambucanaAppCarouselContent = () => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
+
   return (
-    <Carousel
-      swipeable={true}
-      draggable={true}
-      showDots={true}
-      arrows={false}
-      responsive={responsive}
-      autoPlay={true} // 啟用自動輪播
-      autoPlaySpeed={3000} // 自動輪播速度（毫秒）
-      infinite={true} // 啟用無限循環
-      // removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头
-      // ssr={true} // means to render carousel on server-side.
-      // autoPlay={this.props.deviceType !== "mobile" ? true : false}
-      customTransition="transform 1s ease-in-out"
-      keyBoardControl={true}
-      // transitionDuration={500}
-      containerClass="carousel-container"
-      // removeArrowOnDeviceType={["tablet", "mobile"]}
-      // deviceType={this.props.deviceType}
-      // deviceType={"mobile"}
-      dotListClass="custom-dot-list-style"
-      itemClass="carousel-item-padding-40-px"
-    >
+    <>
       {isMobile ? (
         <div onClick={() => {
           if(!isLogin) {
@@ -75,7 +29,7 @@ export const AppCarousel = () => {
             Primeiro depósito <br/> bônus de 20%
           </p>
           <img
-              src={`assets/${environment.assetPrefix}/h5_banner_1.png`}
+            src={`assets/${environment.assetPrefix}/h5_banner_1.png`}
           />
         </div>
       ) : (
@@ -84,7 +38,7 @@ export const AppCarousel = () => {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
             navigate(PageOrModalPathEnum.InitialChargePage)
-        }}} style={{ display: 'flex',justifyContent: 'center' }}>
+          }}} style={{ display: 'flex',justifyContent: 'center' }}>
           <p className="absolute top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-6xl text-left" style={{
             WebkitTextStroke: '3px black',
             WebkitTextFillColor: 'white'
@@ -199,20 +153,20 @@ export const AppCarousel = () => {
 
 
       {isMobile ? (
-      <div onClick={() => {
-        if(!isLogin) {
-          dispatch(appSlice.actions.showLoginDrawerOrModal(true))
-        } else {
-          navigate(PageOrModalPathEnum.VIPGradePage)
-        }
-      }}>
-        <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`}/>
-      </div>
+        <div onClick={() => {
+          if(!isLogin) {
+            dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+          } else {
+            navigate(PageOrModalPathEnum.VIPGradePage)
+          }
+        }}>
+          <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`}/>
+        </div>
       ) : (
         <div className={'w-[calc(88.6vw-265px)]'} onClick={() => {
           navigate(PageOrModalPathEnum.VIPGradePage);
         }}>
-        <img src={`assets/${environment.assetPrefix}/banner2.png`} className="rounded-box"  style={{ display: 'block', borderRadius: '10px' }}/>
+          <img src={`assets/${environment.assetPrefix}/banner2.png`} className="rounded-box"  style={{ display: 'block', borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -253,7 +207,7 @@ export const AppCarousel = () => {
             navigate(PageOrModalPathEnum.DailySignInPage)
           }
         }}>
-        <img src={`assets/${environment.assetPrefix}/banner5.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
+          <img src={`assets/${environment.assetPrefix}/banner5.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -344,10 +298,6 @@ export const AppCarousel = () => {
       {/*    <img src={`assets/${environment.assetPrefix}/web04.png`} className="rounded-box"  style={{ display: 'block' }}/>*/}
       {/*  </div>*/}
       {/*)}*/}
-
-
-
-    </Carousel>
+    </>
   )
-
 }

@@ -12,8 +12,8 @@ import {ThreeDots} from "react-loading-icons";
 import React from "react";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
-import {PernambucanaMenuDrawerContent} from "../../drawers/MenuDrawer/env/PernambucanaMenuDrawerContent";
 import {MenuDrawer} from "../../drawers/MenuDrawer";
+import {PernambucanaMenuDrawerContent} from "../../drawers/MenuDrawer/env/PernambucanaMenuDrawerContent";
 
 
 type IStyledPage = {

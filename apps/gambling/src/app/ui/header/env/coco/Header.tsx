@@ -2,7 +2,7 @@ import styled from "styled-components";
 import cx from "classnames";
 import React from "react";
 import {ConfirmButton} from "../../../components/ConfirmButton";
-import {UserMoneyStatusSection} from "../../../components/UserMoneyStatusSection";
+import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {useNavigate} from "react-router";
 import {useSelector} from "react-redux";

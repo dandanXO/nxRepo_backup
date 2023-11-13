@@ -11,15 +11,18 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "react-loading-icons";
 import {environment} from "../../../../environments/environment";
+import cx from "classnames";
 
 export const PersonalControl = styled.div`
   background-color: var(--medium);
-  border-radius: 25px;
   width: 178px;
   height: 32px;
 `
 
-export const UserMoneyStatusSection = () => {
+type IProps = {
+  className?: string;
+}
+export const UserMoneyStatusSection = (props: IProps) => {
   const navigate = useNavigate();
 
   // const { userAmount } = useSelector((state: RootState) => state.app.userStore as IUserStore)
@@ -34,13 +37,14 @@ export const UserMoneyStatusSection = () => {
   const {updateBalance} = useAutoUpdateBalance();
   const isUserMoneyStatusLoading = useSelector((state: RootState) => state.app.isUserMoneyStatusLoading)
   return (
-    <PersonalControl className={"px-3 flex flex-row justify-between items-center md:scale-[1.6]"}>
+    <PersonalControl className={cx("px-3 flex flex-row justify-between items-center md:scale-[1.6]", props.className)}>
       <button className={"refrsh"} onClick={() => {
         updateBalance();
       }}>
         <img alt={"refresh"} className={"w-[20px] h-[20px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
       </button>
-      <div className={"flex-auto text-main-secondary-main sm:text-center md:text-left md:text-xs flex justify-center basis-1/2"}>{
+      {/*main-secondary-main*/}
+      <div className={"flex-auto text-white sm:text-center md:text-left md:text-xs flex justify-center basis-1/2 font-bold"}>{
         isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue}`
       }</div>
       <button onClick={() => {
