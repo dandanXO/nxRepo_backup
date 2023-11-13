@@ -10,25 +10,22 @@ import { CocoMobileMenuItem } from "../components/MobileMenuItem";
 import { MobileMenuLink } from "../components/MobileMenuLink";
 import { CopyLinkItem } from "../../../components/CopyLinkItem";
 import { useEffect } from "react";
-import { useLazyGetInviteRewardDataQuery } from "apps/gambling/src/app/external";
-import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
-import {appSlice} from "../../../../reduxStore/appSlice";
-import {environment} from "../../../../../environments/environment";
-import {useLocation, useNavigate} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../reduxStore";
-import {DepositButton} from "../../../components/DepositButton";
-import {CashBackButton} from "../../../components/CashBackButton";
-import {DrawerButton} from "../../../components/DrawerButton";
-import {usePageNavigate} from "../../../hooks/usePageNavigate";
-import {AvatarContainer} from "../../../header/env/coco/AvatarContainer";
-import {Avatar} from "../../../components/Avatar";
-import {CocoAvatar} from "../../../components/Avatar/CocoAvatar";
+import { DepositButton } from "../../../components/DepositButton";
+import { CashBackButton } from "../../../components/CashBackButton";
+import { DrawerButton } from "../../../components/DrawerButton";
+
+import { AvatarContainer } from "../../../header/env/coco/AvatarContainer";
+import { Avatar } from "../../../components/Avatar";
+import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
+import { AppLocalStorage } from "apps/gambling/src/app/persistant/localstorage";
+import { notification } from "antd";
+import copy from "copy-to-clipboard";
+
 
 
 export const CocoMenuDrawerContent = () => {
   const location = useLocation();
-
+  const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
   const {
     onClickToFirstDeposit,
     onClickToDepositCashback,
@@ -37,9 +34,32 @@ export const CocoMenuDrawerContent = () => {
     onClickToCheckInDaily,
     onClickToTelegram,
   } = usePageNavigate();
+
+  const [api, contextHolder] = notification.useNotification();
+
+  const onClickToCopy = () => {
+    copy(userInfo.user_id||'');
+    api.success({
+      message: 'Copiado!',
+    });
+  };
   return (
     <>
-      <CocoAvatar/>
+      <div className="user-info flex flex-col justify-center items-center mb-4">
+        {contextHolder}
+        <CocoAvatar />
+        <div className="user-info flex mt-2 items-center">
+          <p className="user-name text-white font-bold">G{userInfo.user_id}</p>
+          <div className="mx-1 text-[#595656] text-xs">|</div>
+          <div className="user-code flex text-xs text-[#fcc04f] items-center" onClick={onClickToCopy}>
+            <p>ID:{userInfo.user_id || ''}</p>
+            <div>
+              <img className="w-[12px] h-[12px] ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAMAAAC3SZ14AAAAAXNSR0IArs4c6QAAAGxQTFRFAAAA/6pV/8wz/6pV/79A98NM/8NM/8VS/79Q/8VQ+b9N/8JS+79M+79Q+79O/MJQ/L9O/L9Q/MBR/cFQ/cJO/cFO/cFQ/MBP/cFQ/MBP/cBP/MBP/MBP/MBP/MBP/cBP/cFP/MBP/cFP/MBPNOcZbQAAACN0Uk5TAAMFBggeHh8gIygyPEBIU1hgZXN1f5CVnZ+fq7e/x9Ph7P4CzGNYAAAAZUlEQVQY083Qxw6AIBBF0bFjL9jA7vz/P2ogAyZuXHqXJ5TkQdxLUwKqDW25pnNlJl8TLgBOSBh5moLd3j1SRS3O9MGEg6KO3gVgKH9CdfGiu69U0RIZCkXlY0Xk+ngz0hKCu3ABRT8TcsVvuVoAAAAASUVORK5CYII=" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       <CocoMobileMenuItem
         text={'Canal De Telegram'}
