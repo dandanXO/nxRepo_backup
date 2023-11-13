@@ -24,6 +24,7 @@ import { useEffect } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../hooks/usePageNavigate";
+import {Container} from "../../../components/Container";
 
 
 export type TTotalFavoriteLocalState = {
@@ -92,14 +93,14 @@ export const CocoIndexPage = ({
           <CocoAppCarouselContent5/>
           {/*<CocoAppCarouselContent6/>*/}
         </AppCarousel>
-
       </div>
+
       {isMobile && (
-        <div className="bg-[#020E29]">
-          <div className={" sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
+        <Container className="bg-[#020E29]">
+          <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
             <DragScrollContainer>
-              <section className={"flex flex-row items-center px-4 mt-3 bg-[#000C26] py-1"}>
-                <Tabs className={"game-type-tab-list "}>
+              <section className={"flex flex-row items-center bg-[#000C26] py-1"}>
+                <Tabs className={"game-type-tab-list"}>
                   <div>
                     {label !== undefined && ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
                       return (
@@ -120,17 +121,21 @@ export const CocoIndexPage = ({
               </section>
             </DragScrollContainer>
           </div>
-          <div className="-mb-4" onClick={onClickToSearch}>
-            <Input className={" mt-2 mx-2 py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
+
+          <div className="mb-4" onClick={onClickToSearch}>
+            <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
               inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
-              placeholder={"Pesquisar nome do jogo"}
+              placeholder={"Por favor insira o nome do jogo"}
               suffix={<SearchOutlined className={"text-[#007aff] text-xl"} />}
             />
           </div>
 
-        </div>
+          <div className="bg-[#000C26]">
+            {gameList()}
+          </div>
+
+        </Container>
       )}
-      {isMobile && <div className="bg-[#000C26]">{gameList()}</div>}
       {/* {isMobile && (
         <div className={"p-2 bg-[#020E29]"}>
           {allGameList !== undefined && allGameList.map((i: any, index: number) => {
@@ -149,7 +154,7 @@ export const CocoIndexPage = ({
       )} */}
 
       {!isMobile && (
-        <div className={"p-4"}>
+        <Container>
           <section
             // style={{ border: '1px solid #2CFD99' }}
             className={cx(
@@ -183,7 +188,7 @@ export const CocoIndexPage = ({
             </section>
 
           </section>
-        </div>
+        </Container>
       )}
 
     </>
