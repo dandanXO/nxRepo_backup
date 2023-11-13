@@ -1,6 +1,5 @@
 import cx from 'classnames';
 import React, {useEffect, useRef, useState} from 'react';
-import {useNavigate} from 'react-router';
 import styled from 'styled-components';
 
 import {GetSignInConfigResponse, useGetSignInConfigMutation} from '../../../external';
@@ -8,19 +7,12 @@ import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
 import {CurrentLevelButton, OtherLevelButton} from '../VIPGradePage';
-import {Footer} from './Footer';
-import {MobileTemplate} from './MobileTemplate';
-import {Notice} from './Notice';
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {environment} from "../../../../environments/environment";
 import {tcx} from "../../utils/tcx";
+import PernambucanaDailySignInPage from "./env/PernambucanaDailySignInPage";
+import CocoDailySignInPage from "./env/CocoDailySignInPage";
 
-const DailySignInContainer = styled.div`
-  //margin: 5vw 0;
-  //background-size: 100% 100%;
-  //width: 1498px;
-  //height: 676px;
-`;
 
 
 const Daily = styled.div<{
@@ -43,23 +35,6 @@ const days: number[] = [];
 for (let i = 1; i <= 7; i += 1) {
   days.push(i);
 }
-
-const Panel = styled.div`
-  //background: linear-gradient(
-  //  180deg,
-  //  rgba(152, 122, 255, 0.8) 0%,
-  //  rgba(71, 50, 164, 0.8) 100%
-  //);
-  //background: linear-gradient(to bottom, #808080, #2b2b2b);
-`;
-
-const VIPContainer = styled.div`
-  //background-color: #287052;
-  background-color: rgba(40, 112, 82, 0.1);
-  background-size: 100% 100%;
-  border-radius: 28px;
-  padding: 28px;
-`;
 
 export const LevelList = ({
   currentLevel,
@@ -140,72 +115,6 @@ export const LevelList = ({
   );
 };
 
-export const DayList = (props: {
-  currentSelectedLevel: number;
-  signInAllConfig: {
-    identifier: string;
-    value: string;
-  }[];
-  className?: string;
-  itemClassName?: string;
-  signInConfig?: GetSignInConfigResponse['data']['signInConfig'];
-  signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays'];
-  todayIsSignIn: GetSignInConfigResponse['data']['todayIsSignIn'];
-  vipLevel: GetSignInConfigResponse['data']['vipLevel'];
-}) => {
-  const { signInAllConfig, currentSelectedLevel } = props;
-  const vipConfig = signInAllConfig.find(
-    (config) =>
-      config.identifier.split('::')[2].replace('V', '') ===
-      `${currentSelectedLevel}`
-  );
-
-  const dayConfigs = JSON.parse(vipConfig?.value || '[]');
-
-  return (
-    <section
-      className={cx(
-        'flex-no-wrap mb-6 flex w-full flex-row overflow-auto',
-        props.className
-      )}
-    >
-      {days.map((day, index) => {
-        const config = dayConfigs.find(
-          (dayConfig: any) => dayConfig.days === day
-        );
-        const disable = currentSelectedLevel === props.vipLevel && index + 1 <= props.signInTotalDays;
-        return (
-          <Daily
-            key={index}
-            disable={disable}
-            className={cx(
-              'day-item mr-4 flex min-h-[50px] w-[25%] flex-1 flex-col items-center justify-start rounded-lg pb-4',
-                    props.itemClassName,
-              {
-                "bg-[#274b38]": disable
-              }
-            )}
-          >
-            <DailyDia
-              className={'bg-purple mb-2 w-full rounded-t text-lg text-white'}
-            >
-              Dia{day}
-            </DailyDia>
-            {/*<div className={"w-[88px] h-[74px]"}>*/}
-            {/*</div>*/}
-            <div>
-              <img alt={'money'} src={`assets/${environment.assetPrefix}/gold.png`} />
-            </div>
-            <div className="h-10"></div>
-            <div className="flex-grow flex flex-col justify-center items-center">
-              <span className="text-white">R${config?.cashback}</span>
-            </div>
-          </Daily>
-        );
-      })}
-    </section>
-  );
-};
 export const DailySignInPage = () => {
   const [currentSelectedLevel, setCurrentSelectedLevel] = useState(1);
 
@@ -244,76 +153,32 @@ export const DailySignInPage = () => {
 
   useAutoUpdateBalance();
 
-  if (isMobile) {
+  if(environment.assetPrefix === 'coco777bet') {
     return (
-      <MobileTemplate
+      <CocoDailySignInPage
         onClickToSignIn={onClickToSignIn}
-        currentLevel={signInConfig?.data?.vipLevel || 0}
+        signInConfig={signInConfig?.data?.signInConfig || []}
         signInAllConfig={signInConfig?.data?.signInAllConfig || []}
-        signInConfig={signInConfig?.data?.signInConfig}
         signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
         todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
         vipLevel={signInConfig?.data?.vipLevel || 0}
-        setCurrentSelectedLevel={setCurrentSelectedLevel}
         currentSelectedLevel={currentSelectedLevel}
+        setCurrentSelectedLevel={setCurrentSelectedLevel}
       />
-    );
+    )
   }
 
   return (
-    <>
-      <div className={'px-14 py-8'}>
-        <VIPContainer>
-        <DailySignInContainer className={'flex w-full flex-row'}>
-        {/*<section className={'flex shrink-0 flex-row'}>*/}
-        {/*  <img*/}
-        {/*    alt={'rabbit'}*/}
-        {/*    className="h-[660px] w-[332px]"*/}
-        {/*    src={`assets/${environment.assetPrefix}/img.05e3d09a.png`}*/}
-        {/*  />*/}
-        {/*</section>*/}
-
-        <Panel
-          className={
-            'flex-3  relative mt-8 mb-12 flex w-[calc(100%)] flex-col rounded-t-3xl p-8'
-          }
-        >
-          {/*<img*/}
-          {/*  alt={'title'}*/}
-          {/*  className={'absolute top-[-45px] left-[200px] h-[71px] w-[592px]'}*/}
-          {/*  src={`assets/${environment.assetPrefix}/title.75fa9aa0.png`}*/}
-          {/*/>*/}
-          <span className="font-weight-bold text-yellow-300" style={{ fontSize: '40px' }}>BONUS DE LOGIN VIP</span>
-
-          <LevelList
-            startLevel={1}
-            currentLevel={signInConfig?.data?.vipLevel || 0}
-            currentSelectedLevel={currentSelectedLevel}
-            setCurrentSelectedLevel={setCurrentSelectedLevel}
-          />
-
-          <DayList
-            currentSelectedLevel={currentSelectedLevel}
-            signInAllConfig={signInConfig?.data?.signInAllConfig || []}
-            signInConfig={signInConfig?.data?.signInConfig}
-            signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
-            todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
-            vipLevel={signInConfig?.data?.vipLevel || 0}
-          />
-
-          <Notice />
-
-          <Footer
-            onClickToSignIn={onClickToSignIn}
-            todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
-            vipLevel={signInConfig?.data?.vipLevel || 0}
-            setCurrentSelectedLevel={setCurrentSelectedLevel}
-          />
-
-        </Panel>
-      </DailySignInContainer>
-        </VIPContainer>
-      </div>
-    </>
-  );
+    <PernambucanaDailySignInPage
+      onClickToSignIn={onClickToSignIn}
+      currentLevel={signInConfig?.data?.vipLevel || 0}
+      signInConfig={signInConfig?.data?.signInConfig}
+      signInAllConfig={signInConfig?.data?.signInAllConfig || []}
+      signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
+      todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
+      vipLevel={signInConfig?.data?.vipLevel || 0}
+      currentSelectedLevel={currentSelectedLevel}
+      setCurrentSelectedLevel={setCurrentSelectedLevel}
+    />
+  )
 };
