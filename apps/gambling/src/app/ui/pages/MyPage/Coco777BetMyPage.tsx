@@ -11,6 +11,32 @@ import { appSlice, totalBalanceSheetSelector, totalReasableSelector } from "../.
 import CurrentVIPIcon from "../../components/CurrentVIPIcon";
 import ProgressBar from "../VIPGradePage/Coco777betVIPGradePage/ProgressBar";
 import { RightOutlined } from "@ant-design/icons";
+import styled from "styled-components";
+
+const CheckInButton = styled.button`
+  background: linear-gradient(90deg,#E92359,#8958FF);
+`;
+
+const DepositButton = styled.button`
+  background: linear-gradient(-90deg,#E61D62,#FF570F);
+`;
+
+const WithdrawButton = styled.button`
+  background: linear-gradient(-90deg,#6E1EEB,#B111FF);
+`;
+
+const VIPContainer = styled.div`
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(0deg,#7707CE,#5D11F7,#0078FF),linear-gradient(0deg,#E27DFF,#00EAFF);
+`;
+
+const NavigatorContainer = styled.div`
+  background: linear-gradient(0deg,#0F1744,#2E1555);
+  border: 1px solid rgba(255,255,255,.1);
+`;
 
 interface ICoco777BetMyPageProps {
   userVIPInfo?: GetVIPInfoResponse
@@ -45,39 +71,39 @@ const Coco777BetMyPage = ({
           </div>
         </div>
 
-        <button
-          className='py-2 px-4 rounded-full bg-medium text-sm text-white'
+        <CheckInButton
+          className='py-1 px-4 rounded-full bg-medium text-sm text-white'
           onClick={()=>navigate(PageOrModalPathEnum.DailySignInPage)}
         >
           check-in
-        </button>
+        </CheckInButton>
       </section>
 
       <section className='flex justify-between text-center py-3'>
         <div className='w-full px-3'>
           <div className='text-xl text-white'>R$ {totalBalanceSheetValue}</div>
           <div className='text-sm text-white'>Fundos totais</div>
-          <button
+          <DepositButton
             className='bg-medium w-full py-2 text-white rounded-md mt-3 text-base font-bold'
             onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
           >
             Depósito
-          </button>
+          </DepositButton>
         </div>
 
         <div className='w-full px-3'>
           <div className='text-xl text-white'>R$ {totalReasableValue}</div>
           <div className='text-sm text-white'>Retirável Total</div>
-          <button
+          <WithdrawButton
             className='bg-medium w-full py-2 text-white rounded-md mt-3 text-base font-bold'
             onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
           >
             Retirar
-          </button>
+          </WithdrawButton>
         </div>
       </section>
 
-      <section className='border border-purple-400 rounded-xl flex mt-1 items-center pr-6'>
+      <VIPContainer className='rounded-xl flex mt-1 items-center pr-6'>
         <div className='w-1/3 p-3'>
           <CurrentVIPIcon level={currentLevel} textClassName='text-3xl text-white'/>
         </div>
@@ -110,26 +136,26 @@ const Coco777BetMyPage = ({
             </div>
           </ProgressBar>
         </div>
-      </section>
+      </VIPContainer>
 
-      <section className='border border-purple-400 rounded-xl text-white mt-5 text-base'>
+      <NavigatorContainer className='rounded-xl text-white mt-5 text-base'>
         <div className='p-3'>Outras funções</div>
         <button
-          className='p-3 flex justify-between border-b border-purple-100 items-center w-full'
+          className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
           onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
         >
           <div>Registros de cobrança</div>
           <RightOutlined style={{ fontSize: 16 }}/>
         </button>
         <button
-          className='p-3 flex justify-between border-b border-purple-100 items-center w-full'
+          className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
           onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}
         >
           <div>Registro do jogo</div>
           <RightOutlined style={{ fontSize: 16 }}/>
         </button>
         <button
-          className='p-3 flex justify-between border-b border-purple-100 items-center w-full'
+          className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
           onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}
         >
           <div>Configuração</div>
@@ -142,7 +168,7 @@ const Coco777BetMyPage = ({
           <div>Sair</div>
           <RightOutlined style={{ fontSize: 16 }}/>
         </button>
-      </section>
+      </NavigatorContainer>
     </div>
   )
 }
