@@ -164,7 +164,6 @@ export const CocoPageTemplate = ({
           <MenuDrawer
             className={""}
             isTabletShow={false}
-            isShowCloseButton={false}
           >
             <CocoMenuDrawerContent/>
           </MenuDrawer>
