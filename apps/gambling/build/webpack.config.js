@@ -376,7 +376,7 @@ module.exports = (config, context) => {
         authToken: WebpackSentryConfig.authToken,
         org: WebpackSentryConfig.org,
         project: WebpackSentryConfig.project,
-        include: './dist/apps/app',
+        include: './dist/apps/gambling',
         ignoreFile: '.sentrycliignore',
         ignore: ['node_modules', 'webpack.config.js'],
         // configFile: 'sentry.properties',

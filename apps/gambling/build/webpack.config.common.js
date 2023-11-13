@@ -1,6 +1,6 @@
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 
-const APP_IDENTIFICATION = `[apps/app][${process.env.NODE_PLATFORM}] `;
+const APP_IDENTIFICATION = `[apps/gambling][${process.env.NODE_PLATFORM}] `;
 const isProduction = process.env.NODE_ENV == 'production';
 const isDashboard = process.env.NODE_DASHBOARD;
 const devServerHostIP = process.env.NODE_DEV_SERVER_HOST_IP;
