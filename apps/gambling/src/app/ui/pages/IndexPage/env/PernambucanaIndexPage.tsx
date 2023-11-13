@@ -10,6 +10,7 @@ import {Input} from "../../../components/Input";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {environment} from "../../../../../environments/environment"
+import {PernambucanaAppCarouselContent} from "../AppCarousel/env/PernambucanaAppCarouselContent";
 
 
 export type TTotalFavoriteLocalState = {
@@ -58,7 +59,9 @@ export const PernambucanaIndexPage = ({
         "p-4": !isMobile,
       })}>
 
-      <AppCarousel />
+      <AppCarousel>
+        <PernambucanaAppCarouselContent/>
+      </AppCarousel>
 
       </div>
 

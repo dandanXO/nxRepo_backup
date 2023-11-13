@@ -4,6 +4,7 @@ import useBreakpoint from "../../../hooks/useBreakpoint";
 import { tcx } from "../../../utils/tcx";
 import ProgressBar from "./ProgressBar";
 import { GetVIPInfoResponse } from "../../../../external";
+import CurrentVIPIcon from "../../../components/CurrentVIPIcon";
 
 interface ICurrentLabelInfoCardProps {
   currentLevel: number
@@ -22,16 +23,12 @@ const CurrentLevelInfoCard = ({
           'p-2 border-2 border-purple-400 rounded-md flex items-center text-white',
           ['flex-col', isMobile]
         )}>
-      <div className={tcx('flex items-center w-[17%] justify-center', ['w-full', isMobile])}>
-        <img
-          className={
-            tcx(
-              'w-full p-2 px-5',
-              ['w-32 px-0', isMobile],
-            )}
-          src={`assets/${environment.assetPrefix}/icon_vip_current.png`}
+      <div className={tcx('flex items-center w-[22%] justify-center', ['w-full', isMobile])}>
+        <CurrentVIPIcon
+          className={tcx('w-full p-2 px-5', ['w-32 px-0', isMobile])}
+          level={currentLevel}
+          textClassName={tcx('text-2xl', ['hidden', !isMobile])}
         />
-        <div className={tcx('hidden text-2xl', ['block', isMobile])}>VIP {0}</div>
       </div>
       <div className='flex-grow w-full text-left'>
         <div className={tcx('text-3xl',['hidden', isMobile])}>
@@ -39,7 +36,7 @@ const CurrentLevelInfoCard = ({
         </div>
 
         <div>Quantidade total de recarga:</div>
-        <div className='flex items-center'>
+        <div className={tcx('flex items-center w-4/5', ['w-full', isMobile])}>
           <div>VIP{currentLevel}</div>
           <ProgressBar
             className={tcx('bg-assistant mx-2 h-6', ['h-5', isMobile])}
@@ -90,7 +87,7 @@ const CurrentLevelInfoCard = ({
         </div>
 
         <div>Número total de apostas</div>
-        <div className='flex items-center'>
+        <div className={tcx('flex items-center w-4/5', ['w-full', isMobile])}>
           <div>VIP{currentLevel}</div>
           <ProgressBar
             className={tcx('bg-assistant mx-2 h-6', ['h-5', isMobile])}

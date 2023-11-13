@@ -88,7 +88,7 @@ const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
         VIP {currentLevel}
       </span>
         <span className="text-sm text-main-primary-main">
-        Depósitos totais: 
+        Depósitos totais:
         </span>
         <span className="text-sm mr-6 text-white">
           {' '}R${' '}

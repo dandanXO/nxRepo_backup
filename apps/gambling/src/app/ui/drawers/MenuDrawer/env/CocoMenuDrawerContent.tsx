@@ -11,6 +11,19 @@ import { MobileMenuLink } from "../components/MobileMenuLink";
 import { CopyLinkItem } from "../../../components/CopyLinkItem";
 import { useEffect } from "react";
 import { useLazyGetInviteRewardDataQuery } from "apps/gambling/src/app/external";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {appSlice} from "../../../../reduxStore/appSlice";
+import {environment} from "../../../../../environments/environment";
+import {useLocation, useNavigate} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../../reduxStore";
+import {DepositButton} from "../../../components/DepositButton";
+import {CashBackButton} from "../../../components/CashBackButton";
+import {DrawerButton} from "../../../components/DrawerButton";
+import {usePageNavigate} from "../../../hooks/usePageNavigate";
+import {AvatarContainer} from "../../../header/env/coco/AvatarContainer";
+import {Avatar} from "../../../components/Avatar";
+import {CocoAvatar} from "../../../components/Avatar/CocoAvatar";
 
 
 export const CocoMenuDrawerContent = () => {
@@ -26,6 +39,8 @@ export const CocoMenuDrawerContent = () => {
   } = usePageNavigate();
   return (
     <>
+      <CocoAvatar/>
+
       <CocoMobileMenuItem
         text={'Canal De Telegram'}
         className={`after:bg-[#2E45DA] justify-between`}
