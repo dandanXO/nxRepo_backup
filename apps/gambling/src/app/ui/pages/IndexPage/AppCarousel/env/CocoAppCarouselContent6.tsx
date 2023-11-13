@@ -14,7 +14,7 @@ export const CocoAppCarouselContent6 = () => {
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToCheckInDaily} = usePageNavigate();
   return (
-    <div className={"font-[22.5px] font-[Heebo]"}>
+    <div className={"text-[22.5px] font-[Heebo]"}>
       {isMobile ? (
         <div onClick={() => {
           onClickToCheckInDaily();
