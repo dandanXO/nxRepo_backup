@@ -22,6 +22,8 @@ import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {environment} from "../../../../environments/environment";
 import {Avatar} from "../../components/Avatar";
 import {AvatarAccountInfo} from "../../components/AvatarAccountInfo";
+import Pernambucana777BetMyPage from "./Pernambucana777BetMyPage";
+import Coco777BetMyPage from "./Coco777BetMyPage";
 
 const MyPageButtonD = styled.button`
   background-image: url("assets/${environment.assetPrefix}/btn_green05.png");
@@ -323,145 +325,14 @@ export const MyPage = () => {
       (acc: number, current: { cashback: number }) => acc + current.cashback,
       0
   );
+
+  if (environment.assetPrefix === 'coco777bet') {
+    return (
+      <Coco777BetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
+    )
+  }
+
   return (
-  <>
-
-    <div className={"px-4 pt-4 pb-[100px] w-full"}>
-      <section className={"profile flex flex-row justify-between items-center mb-4"}>
-        <div className={"flex flex-row items-center"}>
-          <div className={"mr-4"}>
-            <Avatar big={true}/>
-          </div>
-          <div className={""}>
-            <AvatarAccountInfo className={"!items-start"}/>
-          </div>
-        </div>
-        <button className="relative" onClick={() => navigate(PageOrModalPathEnum.NotificationPage)}>
-          <img alt={"message"} className="w-[30px] h-[30px]" src={`assets/${environment.assetPrefix}/icon_44.png`}/>
-          {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
-        </button>
-      </section>
-
-   <div>
-    <VIPContainer>
-      <div className={"flex flex flex-row items-center mt-3 w-full"}>
-      <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.assetPrefix}/ic_vip01.png`}/>
-      <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, var(--btn-gradient-vip-from), var(--btn-gradient-vip-to))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
-        <div className="flex-grow"></div>
-        <RightOutlined className="flex-grow" style={{ fontSize: 25, color: 'white', fontWeight: 1000 }} onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)} />      </div>
-      <VIPBorderStyleContainer className={'flex flex-row'}>
-        <div className={'relative mr-5 h-[30px] w-full flex-auto rounded-3xl  text-left'}>
-          <ProgressBar1
-              progress={
-                  (userVIPInfo?.data?.vip_score || 0) /
-                  (userVIPInfo?.data?.next_level_score || 1)
-              }
-              currentLevel={currentLevel}
-              userVIPInfo={userVIPInfo}
-          />
-          <div className="text-center text-base text-medium" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          </div>
-        </div>
-      </VIPBorderStyleContainer>
-
-
-
-
-
-      <VIPBorderStyleContainer className={'flex flex-row'}>
-        <div className={'relative mr-5 h-[30px] w-full flex-auto rounded-3xl  text-left'}>
-          <ProgressBar2
-              progress={
-                userVIPInfo?.data?.flow_progress
-                    ? userVIPInfo?.data?.flow_progress / 100
-                    : 0
-              }
-              currentLevel={currentLevel}
-              userVIPInfo={userVIPInfo}
-          />
-        </div>
-      </VIPBorderStyleContainer>
-          </VIPContainer>
-          </div>
-
-
-
-
-
-    <DepositAndWithdrawalContainer>
-      <section className={"total flex flex-row text-white justify-between mb-4 mt-1"}>
-
-        <div className={"item flex-1"}>
-          <div className={"title text-white mb-2"}>Fundos totais</div>
-          <div className={"money text-lg mb text-main-secondary-main"}>R${totalBalanceSheetValue}</div>
-          <MyPageButtonD onClick={() => {
-            navigate(PageOrModalPathEnum.WalletPage)
-          }} className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Depósito</MyPageButtonD>
-        </div>
-
-        <div className={"item flex-1"}>
-          <div className={"title text-white mb-2"}>Retirável Total</div>
-          <div className={"money text-lg mb text-main-secondary-main"}>R${totalReasableValue}</div>
-          <MyPageButtonW onClick={() => {
-            navigate(PageOrModalPathEnum.WalletPage)
-          }} className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Retirar</MyPageButtonW>
-        </div>
-
-      </section>
-    </DepositAndWithdrawalContainer>
-
-      <div className={"text-white text-lg font-bold text-left mb-2 mt-5"}>Outras funções</div>
-
-      <ListItemContainer className={"control-item text-white !font-sm"}>
-        <ListItem first={true} bottomBorder={true} onClick={() => {
-          navigate(PageOrModalPathEnum.WalletPage)
-        }}>
-          <div className={"flex flex flex-row items-center"}>
-            <img alt={"order-record"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_account_bill.png`}/>
-            <span className={"font-bold"}>Registros de cobrança</span>
-          </div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </ListItem>
-        </ListItemContainer>
-
-      <ListItemContainer className={"control-item text-white !font-sm"}>
-        <ListItem bottomBorder={true} onClick={() => {
-          navigate(PageOrModalPathEnum.GameRecordPage)
-        }}>
-          <div className={"flex flex flex-row items-center"}>
-            <img alt={"game-register"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
-            <span className={"font-bold"}>Registro do jogo</span>
-          </div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </ListItem>
-        </ListItemContainer>
-
-      <ListItemContainer className={"control-item text-white !font-sm"}>
-        <ListItem bottomBorder={true} onClick={() => {
-          navigate(PageOrModalPathEnum.SettingPage)
-        }}>
-          <div className={"flex flex flex-row items-center"}>
-            <img alt={"setting"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
-            <span className={"font-bold"}>Configuração</span>
-          </div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </ListItem>
-        </ListItemContainer>
-
-      <ListItemContainer className={"control-item text-white !font-sm"}>
-        <ListItem last={true} onClick={() => {
-          dispatch(appSlice.actions.showMobileLogoutModal(true));
-        }}>
-          <div className={"flex flex flex-row items-center"}>
-            <img alt={"log-out"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_signout.png`}/>
-            <span className={"font-bold"}>Sair</span>
-          </div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </ListItem>
-        </ListItemContainer>
-
-
-    </div>
-  </>
- )
+    <Pernambucana777BetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
+  )
 }

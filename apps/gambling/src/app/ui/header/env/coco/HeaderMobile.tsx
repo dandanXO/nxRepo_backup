@@ -8,7 +8,7 @@ import {RootState} from "../../../../reduxStore";
 import {environment} from "../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {RegisterButton} from "../../../components/RegisterButton";
+import {RegisterButton, RegisterButton2} from "../../../components/RegisterButton";
 
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;
@@ -68,7 +68,8 @@ export const HeaderMobile = (props: IHeaderMobile) => {
 
       {!login ? (
         <section>
-          <RegisterButton className={"text-[#ffffff] font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>
+          {/*<RegisterButton className={"text-[#ffffff] font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>*/}
+          <RegisterButton2 onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton2>
         </section>
       ): (
         <>
