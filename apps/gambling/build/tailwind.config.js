@@ -101,7 +101,7 @@ module.exports = {
 
       /*text*/
       /*text/telegram*/
-      "telegram": 'var(--telegram)',
+      "telegram": 'var(--text-telegram)',
       /*text/black*/
       "black": 'var(--black)',
       /*text/white*/
