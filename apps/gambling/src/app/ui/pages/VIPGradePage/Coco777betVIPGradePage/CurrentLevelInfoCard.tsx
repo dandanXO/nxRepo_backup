@@ -22,7 +22,7 @@ const CurrentLevelInfoCard = ({
           'p-2 border-2 border-purple-400 rounded-md flex items-center text-white',
           ['flex-col', isMobile]
         )}>
-      <div className={tcx('flex items-center w-[17%] justify-center', ['w-full', isMobile])}>
+      <div className={tcx('flex items-center w-[22%] justify-center', ['w-full', isMobile])}>
         <img
           className={
             tcx(
@@ -39,7 +39,7 @@ const CurrentLevelInfoCard = ({
         </div>
 
         <div>Quantidade total de recarga:</div>
-        <div className='flex items-center'>
+        <div className='flex items-center w-4/5'>
           <div>VIP{currentLevel}</div>
           <ProgressBar
             className={tcx('bg-assistant mx-2 h-6', ['h-5', isMobile])}
@@ -90,7 +90,7 @@ const CurrentLevelInfoCard = ({
         </div>
 
         <div>Número total de apostas</div>
-        <div className='flex items-center'>
+        <div className='flex items-center w-4/5'>
           <div>VIP{currentLevel}</div>
           <ProgressBar
             className={tcx('bg-assistant mx-2 h-6', ['h-5', isMobile])}

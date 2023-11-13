@@ -3,6 +3,7 @@ import { GetUserVIPAllInfoResponseData } from "../../../../external";
 import { tcx } from "../../../utils/tcx";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import { environment } from "../../../../../environments/environment";
+import { JackpotMap } from "../index";
 
 interface ILevelInfoCardProps extends GetUserVIPAllInfoResponseData {
   signInBonus: number
@@ -24,37 +25,63 @@ const LevelInfoCard = ({
 
   return (
     <div className={tcx(
-        'p-2 border-2 border-purple-400 rounded-md flex text-white bg-table-varient text-left text-lg',
-        ['flex-col text-sm', isMobile],
+        'p-4 border-2 border-purple-400 rounded-md flex text-white bg-table-varient text-left text-lg gap-5',
+        ['flex-col text-sm gap-0', isMobile],
         className,
       )}>
       <div className={tcx('flex w-3/5', ['w-full', isMobile])}>
         <div className={tcx(
             'p-4 flex flex-col items-center justify-center',
             ['p-0', isMobile],
-            ['w-[24%]', !isMobile]
+            ['w-[30%]', !isMobile]
         )}>
           <img
-            src={`assets/${environment.assetPrefix}/icon_vip_info.png`}
-            className={tcx("p-2", ['w-32', isMobile])}
+            src={isMobile ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
+               level < 20 ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
+                 `assets/${environment.assetPrefix}/${JackpotMap[level].image}`
+          }
+            className={tcx("p-2", ['w-32 p-0', isMobile])}
           />
+          {
+            !isMobile && level >= 20 && (
+              <div className='text-base text-center'>
+                <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
+                <div>Ou numerário de valor equivalente</div>
+              </div>
+            )
+          }
           <div className={isMobile?'text-2xl':'text-4xl'}>VIP {level}</div>
         </div>
         <div>
+
           <div className={isMobile?'text-lg':'text-3xl'}>Privilégio</div>
-          <div>Recompensa de atualização： R$ {
-            (upRewardAmout ? upRewardAmout / 100 : 0).toLocaleString('en-Us', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            })}
-          </div>
-          <div>Recompensa total de check-in de 7 dias： {signInBonus}</div>
-          <div>Limite máximo de retirada única： R$ {
-            (withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0).toLocaleString('en-Us', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2
-            })}</div>
-          <div>Número de retiradas por dia： {withdrawTimesLimitDay}</div>
+
+          {
+            isMobile && level >= 20 && (
+              <div className='border-b border-purple-400 flex flex-col items-center'>
+                <img className='p-3' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
+                <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
+                <div>Ou numerário de valor equivalente</div>
+              </div>
+            )
+          }
+
+          <ul className={isMobile?'relative list-decimal pl-5':''}>
+            <li className={isMobile?'absolute top-0 left-[-10000px]':''}>Recompensa de atualização： R$ {
+              (upRewardAmout ? upRewardAmout / 100 : 0).toLocaleString('en-Us', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
+            </li>
+            <li>Recompensa total de check-in de 7 dias： {signInBonus}</li>
+            <li>Limite máximo de retirada única： R$ {
+              (withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0).toLocaleString('en-Us', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}</li>
+            <li>Número de retiradas por dia： {withdrawTimesLimitDay}</li>
+          </ul>
+
         </div>
       </div>
       <div className={tcx(
