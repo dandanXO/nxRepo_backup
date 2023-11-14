@@ -259,7 +259,7 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.InvitePage} element={(
-            <PageTemplate showMobileHeader={false} showFooter={false}>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
               <InvitePage/>
             </PageTemplate>
           )}/>
@@ -271,37 +271,37 @@ export const AppRouter = () => {
           )}/>
 
           <Route path={PageOrModalPathEnum.WalletPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false}>
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
               <WallletPage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.WalletDepositNextPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false}>
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
               <WalletDepositNextPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.GameRecordPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false}>
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
               <GameRecordPage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.VIPGradePage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <VIPGradePage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.DailySignInPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false}>
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
               <DailySignInPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.DailySingInRecordPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false}>
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
               <DailySignInRecordPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.SettingPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false}>
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
               <SettingPage/>
             </PageTemplate>
           )}/>
@@ -316,18 +316,18 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.InitialChargePage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <InitialChargePage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.RechargeActivityPage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <RechargeActivityPage/>
             </PageTemplate>
           )}/>
 
           <Route path={PageOrModalPathEnum.TelegramPage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <TelegramPage/>
             </PageTemplate>
           )}/>
@@ -335,7 +335,7 @@ export const AppRouter = () => {
           <Route path={PageOrModalPathEnum.GamePage} element={(
             <PageTemplate
               // common
-              showFooter={false}
+              showMobileFooter={false}
               showToolbox={false}
               // desktop
               showDesktopHeader={false}
@@ -348,14 +348,14 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.GameSearchPage} element={(
-            <PageTemplate showMobileHeader={false} showFooter={false}>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
               <GameSearchPage/>
             </PageTemplate>
           )}/>
 
           {/*NOTE: Mobile*/}
           <Route path={PageOrModalPathEnum.MyPage} element={(
-            <PageTemplate showMobileHeader={false} showFooter={false}>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
               <MyPage/>
             </PageTemplate>
           )}/>

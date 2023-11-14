@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../environments/environment";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
@@ -30,11 +32,15 @@ export const TelegramPage = () => {
   const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
   const user_id = userInfo?.user_id || '';
   const telegramUrl=`https://t.me/${telegramId}?start=${user_id}`
+
+  const {onClickToIndex} = usePageNavigate();
+
   return (
     <>
 
       <div className={"px-0 sm:px-10 w-full"}>
 
+        <BackNavigation onClick={() => onClickToIndex()}/>
         {/*<section className={"rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
         {/*  <img className="w-full" src={`assets/${environment.assetPrefix}/bg.761d8ab4.png`}/>*/}
         {/*  <div className={"mt-20 absolute left-[40px] top-0 text-white"}>*/}

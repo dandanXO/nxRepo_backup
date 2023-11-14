@@ -7,7 +7,7 @@ export const MobileGreenBackgroundShadowContainer = styled.div`
   //background: url("assets/${environment.assetPrefix}/h5_invite_dashboard_2.png") center center no-repeat;
   //background-size: cover;
 
-  border-radius: 10px;
+  //border-radius: 10px;
   /* padding: 0.15rem 0; */
   /* position: relative; */
   border: 2px solid transparent;

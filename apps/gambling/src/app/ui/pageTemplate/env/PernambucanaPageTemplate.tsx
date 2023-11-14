@@ -67,7 +67,8 @@ type IProps = {
   isCurrentPageCompanyProfile: boolean;
   contextHolder: any;
   isMobile: boolean;
-  isShowFooter: boolean;
+  isShowMobileFooter: boolean;
+  isShowDesktopFooter: boolean;
   isShowToolbox: boolean;
   isShowDesktopHeader: boolean;
   isShowDesktopMenuDrawer: boolean;
@@ -104,7 +105,8 @@ export const PernambucanaPageTemplate = ({
                                                  isCurrentPageCompanyProfile,
                                                  contextHolder,
                                                  isMobile,
-                                                  isShowFooter,
+                                                  isShowMobileFooter,
+                                                  isShowDesktopFooter,
                                                   isShowToolbox,
                                                  isShowDesktopHeader,
                                                  isLogin,
@@ -214,7 +216,9 @@ export const PernambucanaPageTemplate = ({
           </ErrorBoundary>
 
           {/*Footer*/}
-          {isShowFooter && <Footer/>}
+          {<Footer showMobileFooter={isShowMobileFooter}
+                   showDesktopFooter={isShowDesktopFooter}
+          />}
 
           {isMobile && isShowTabbar && (
             <TabBar/>

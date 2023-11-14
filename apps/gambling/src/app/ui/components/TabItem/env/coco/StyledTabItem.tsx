@@ -19,7 +19,7 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
     } else {
       return `
           color: var(--main-primary-varient);
-          border: 1px solid var(--white);
+          // border: 1px solid var(--white);
         `
     }
   }
@@ -53,7 +53,7 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
       } else {
         return `
             background: var(--assistant);
-            border-radius: 8px;
+            // border-radius: 8px;
           `
       }
 
@@ -77,10 +77,10 @@ export const StyledTabItem = (props: ITabItem) => {
           {props.mode === "howto" ? (
             // <img alt={"howto"} className={"w-[20px] h-[20px] pr-2"} src={props.active ? howToActiveImg : howToInactiveImg}/>
             <img alt={"howto"} className={"h-[20px] pr-2"} src={props.active ? howToActiveImg : howToInactiveImg}/>
-          ): (
+          ): props.mode === "data" ? (
             // <img alt={"data"} className={"w-[20px] h-[20px] pr-2"} src={props.active ? dataActiveImg : dataInactiveImg}/>
             <img alt={"data"} className={"h-[20px] pr-2"} src={props.active ? dataActiveImg : dataInactiveImg}/>
-          )}
+          ): null}
           {props.children}
         </div>
       </StyledTabItemNoICON>
