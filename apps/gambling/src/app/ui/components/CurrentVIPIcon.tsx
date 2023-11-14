@@ -5,17 +5,19 @@ import { environment } from "../../../environments/environment";
 interface ICurrentVIPIconProps {
   level: number
   className?: string
+  imageClassName?: string
   textClassName?: string
 }
 
 const CurrentVIPIcon = ({
   level,
   className,
+  imageClassName,
   textClassName
 }:ICurrentVIPIconProps) => {
   return (
     <div className={tcx('flex flex-col w-full justify-center items-center', className)}>
-      <img alt='currentVIP' src={`assets/${environment.assetPrefix}/icon_vip_current.png`}/>
+      <img className={imageClassName} alt='currentVIP' src={`assets/${environment.assetPrefix}/icon_vip_current.png`}/>
       <div className={textClassName}>VIP {level}</div>
     </div>
   )

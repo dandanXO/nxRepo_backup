@@ -195,7 +195,7 @@ export const CocoLevelList = ({
         return (
           <LevelItemWrapper
             key={level}
-            className='w-[10%] p-0 min-w-[84px] mr-3 relative'
+            className={tcx('w-[10%] p-0 min-w-[84px] mr-3 relative', ['ml-3', isMobile && level === 1])}
           >
             <LevelButton
               className='text-lg h-9 flex justify-center items-center gap-2 w-full'
@@ -289,7 +289,7 @@ const DayList = ({
                         )
                       }
                     </div>
-                    <StraightContainer className='break-all leading-normal text-base font-bold text-[#561a99] text-center py-2 px-1 w-full'>R${config?.cashback}</StraightContainer>
+                    <StraightContainer className='break-all leading-normal text-base font-bold text-[#561a99] text-center py-2 px-1 w-full'>R$ {config?.cashback}</StraightContainer>
                   </div>
                 </div>
               </DayItem>
@@ -422,7 +422,11 @@ const CocoDailySignInPage = ({
             <div className='mt-3 mb-[30px] my-auto text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </VIPRight>
 
-          <button className='absolute bottom-[6%] right-[7%] text-white text-xl'>{'visualizar registros >'}</button>
+          <button
+            className='absolute bottom-[6%] right-[7%] text-white text-xl'
+            onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}
+          >{'visualizar registros >'}
+          </button>
 
           <VIPIcon>
             <ResponsiveContainer>
