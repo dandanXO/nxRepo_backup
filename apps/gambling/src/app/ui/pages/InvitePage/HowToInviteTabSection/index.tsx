@@ -65,7 +65,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
   return (
     <div className={'mb-[80px]'}>
 
-      <HowToImageContainer className={'p-4'}>
+      <HowToImageContainer className={'p-4 rounded-2xl'}>
         {contextHolder}
         <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.assetPrefix}/topTitle1.ed9276b2.png`}/>
         <img className={"display sm:hidden"} src={`assets/${environment.assetPrefix}/team_title-7d5515fe.png`}/>

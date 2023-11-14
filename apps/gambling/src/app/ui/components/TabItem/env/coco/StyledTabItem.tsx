@@ -19,7 +19,7 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
     } else {
       return `
           color: var(--main-primary-varient);
-          border: 1px solid var(--white);
+          // border: 1px solid var(--white);
         `
     }
   }
@@ -53,7 +53,7 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
       } else {
         return `
             background: var(--assistant);
-            border-radius: 8px;
+            // border-radius: 8px;
           `
       }
 

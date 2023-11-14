@@ -19,7 +19,7 @@ export const HowToImageContainer = styled.div`
   justify-content: center;
 
 
-  border-radius: 0.2rem;
+  //border-radius: 0.2rem;
   //margin: 0.2rem auto;
   //padding: 0.1rem 0.18rem 0;
   box-sizing: border-box;
