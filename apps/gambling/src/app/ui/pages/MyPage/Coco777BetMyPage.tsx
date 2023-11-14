@@ -1,29 +1,21 @@
 import React from "react";
-import { GetVIPInfoResponse } from "../../../external";
-import { CocoAvatar } from "../../components/Avatar/CocoAvatar";
-import { useNavigate } from "react-router";
-import { IUserInfo } from "../../../persistant/pending/loginMode";
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import { environment } from "../../../../environments/environment";
-import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
-import { useDispatch, useSelector } from "react-redux";
-import { appSlice, totalBalanceSheetSelector, totalReasableSelector } from "../../../reduxStore/appSlice";
+import {GetVIPInfoResponse} from "../../../external";
+import {CocoAvatar} from "../../components/Avatar/CocoAvatar";
+import {useNavigate} from "react-router";
+import {IUserInfo} from "../../../persistant/pending/loginMode";
+import {AppLocalStorage} from "../../../persistant/localstorage";
+import {environment} from "../../../../environments/environment";
+import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
+import {useDispatch, useSelector} from "react-redux";
+import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../reduxStore/appSlice";
 import CurrentVIPIcon from "../../components/CurrentVIPIcon";
 import ProgressBar from "../VIPGradePage/Coco777betVIPGradePage/ProgressBar";
-import { RightOutlined } from "@ant-design/icons";
+import {RightOutlined} from "@ant-design/icons";
 import styled from "styled-components";
-
-const CheckInButton = styled.button`
-  background: linear-gradient(90deg,#E92359,#8958FF);
-`;
-
-const DepositButton = styled.button`
-  background: linear-gradient(-90deg,#E61D62,#FF570F);
-`;
-
-const WithdrawButton = styled.button`
-  background: linear-gradient(-90deg,#6E1EEB,#B111FF);
-`;
+import {CheckInButton} from "../../components/Buttons/CheckInButton";
+import {DepositButton} from "../../components/Buttons/DepositButton2";
+import {WithdrawButton} from "../../components/Buttons/WithdrawButton";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
 
 const VIPContainer = styled.div`
   box-sizing: border-box;
@@ -51,9 +43,14 @@ const Coco777BetMyPage = ({
 
   const totalBalanceSheetValue= useSelector(totalBalanceSheetSelector);
   const totalReasableValue = useSelector(totalReasableSelector);
-
-  const navigate = useNavigate();
   const dispatch = useDispatch()
+
+  const {
+    onClickToCheckInDaily,
+    onClickToWallet,
+    onClickToGameRecord,
+    onClickToSetting,
+  } = usePageNavigate();
 
   return (
     <div className='p-3'>
@@ -73,7 +70,7 @@ const Coco777BetMyPage = ({
 
         <CheckInButton
           className='py-1 px-4 rounded-full bg-medium text-sm text-white'
-          onClick={()=>navigate(PageOrModalPathEnum.DailySignInPage)}
+          onClick={()=>onClickToCheckInDaily()}
         >
           check-in
         </CheckInButton>
@@ -85,7 +82,7 @@ const Coco777BetMyPage = ({
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
             className='bg-medium w-full py-2 text-white rounded-md mt-3 text-base font-bold'
-            onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
+            onClick={() => onClickToWallet()}
           >
             Depósito
           </DepositButton>
@@ -96,7 +93,7 @@ const Coco777BetMyPage = ({
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
             className='bg-medium w-full py-2 text-white rounded-md mt-3 text-base font-bold'
-            onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
+            onClick={() => onClickToWallet()}
           >
             Retirar
           </WithdrawButton>
@@ -144,21 +141,21 @@ const Coco777BetMyPage = ({
         <div className='p-3'>Outras funções</div>
         <button
           className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
-          onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
+          onClick={() => onClickToWallet()}
         >
           <div>Registros de cobrança</div>
           <RightOutlined style={{ fontSize: 16 }}/>
         </button>
         <button
           className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
-          onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}
+          onClick={()=>onClickToGameRecord()}
         >
           <div>Registro do jogo</div>
           <RightOutlined style={{ fontSize: 16 }}/>
         </button>
         <button
           className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
-          onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}
+          onClick={() => onClickToSetting()}
         >
           <div>Configuração</div>
           <RightOutlined style={{ fontSize: 16 }}/>

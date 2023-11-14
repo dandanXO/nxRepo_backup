@@ -24,6 +24,14 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.InitialChargePage)
     }
   }
+  const onClickToWallet = () => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(PageOrModalPathEnum.WalletPage)
+    }
+  }
+
   const onClickToDepositCashback = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
@@ -77,16 +85,33 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.GameSearchPage)
     }
   }
+  const onClickToGameRecord = () => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(PageOrModalPathEnum.GameRecordPage)
+    }
+  }
+  const onClickToSetting = () => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(PageOrModalPathEnum.SettingPage)
+    }
+  }
   return {
     onClickToIndex,
     onClickToSlot,
     onClickToFirstDeposit,
+    onClickToWallet,
     onClickToDepositCashback,
     onClickToInvite,
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
     onClickToProfile,
-    onClickToSearch
+    onClickToSearch,
+    onClickToGameRecord,
+    onClickToSetting,
   }
 }
