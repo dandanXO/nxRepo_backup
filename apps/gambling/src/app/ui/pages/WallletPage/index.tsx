@@ -21,6 +21,8 @@ import {
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {tcx} from "../../utils/tcx";
 import {TotalSectionContainer} from "./TotalSectionContainer";
+import { environment } from "apps/gambling/src/environments/environment";
+import { CocoWalletPage } from "./env/CocoWalletPage";
 
 
 export const WallletPage = () => {
@@ -55,6 +57,10 @@ export const WallletPage = () => {
     'deposit' | 'withdraw'
   >('deposit');
 
+  if (environment.assetPrefix === 'coco777bet') {
+    return <CocoWalletPage />
+  }
+
   return (
     <>
       {isMobile && (
@@ -80,10 +86,7 @@ export const WallletPage = () => {
       )}
 
       <div className={"p-4 md:p-8"}>
-        {!isMobile && (
-          <TotalSectionContainer/>
-        )}
-
+        <TotalSectionContainer/>
         {!isMobile && (
           <section id={"tab-item"}>
             <Tabs className={"game-type-tab-list"}>
