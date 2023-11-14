@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 type IProps = {
   onClick?: () => void;
+  title?: React.ReactNode;
 }
 
 export const BackNavigation = (props: IProps) => {
@@ -11,11 +12,11 @@ export const BackNavigation = (props: IProps) => {
     <div className={"ml-3 mt-3 mb-3 text-xl text-left text-white"}>
       <button
         // className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
-        className={'mb-2 flex flex-row items-center'}
+        className={'mb-2 flex flex-row items-center justify-center'}
         onClick={() => props.onClick && props.onClick()}
       >
         <LeftOutlined />
-        <div className={'ml-2'}>Retornar</div>
+        {props.title ? props.title : <div className={'ml-2'}>Retornar</div>}
       </button>
     </div>
   )
