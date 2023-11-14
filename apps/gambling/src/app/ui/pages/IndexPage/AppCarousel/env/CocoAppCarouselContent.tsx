@@ -22,7 +22,7 @@ export const CocoAppCarouselContent = () => {
             onClickToFirstDeposit();
           }}
         >
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-3xl text-left text-white">
+          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left text-white">
             Primeiro depósito <br/> + bônus de 20%
           </p>
           <img

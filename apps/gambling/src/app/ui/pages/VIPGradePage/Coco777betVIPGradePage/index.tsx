@@ -7,6 +7,7 @@ import { tcx } from "../../../utils/tcx";
 import CurrentLevelInfoCard from "./CurrentLevelInfoCard";
 import { GetSignInConfigResponse, GetUserVIPAllInfoResponse, GetVIPInfoResponse } from "../../../../external";
 import LevelInfoCard from "./LevelInfoCard";
+import {Container} from "../../../components/container/Container";
 
 interface ICoco777betVIPGradePageProps {
   currentLevel: number
@@ -49,7 +50,7 @@ const Coco777betVIPGradePage = ({
 
 
   return (
-    <main className={tcx('px-10', ['px-1', isMobile])}>
+    <Container>
       <nav
         className={tcx('flex items-center text-white text-2xl', ['hidden', isMobile])}
         onClick={() => {
@@ -74,7 +75,7 @@ const Coco777betVIPGradePage = ({
           ))
         }
       </section>
-    </main>
+    </Container>
   )
 }
 

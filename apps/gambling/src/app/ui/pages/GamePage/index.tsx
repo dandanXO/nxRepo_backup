@@ -113,7 +113,8 @@ export const GamePage = () => {
           </BackButton>
 
           {data !== undefined && (
-            <iframe className={`w-full h-full`} src={data.link} />
+            // <iframe className={`w-full h-full`} src={data.link} />
+            <iframe className={`w-[100vw] h-[100vh]`} src={data.link} />
           )}
         </>
     );
