@@ -17,6 +17,18 @@ export type IToolbox = {
   onClickToOpenTelegramManager: () => void;
   onClickToOpenTelegramService: () => void;
 }
+
+const ToolButton = styled.button`
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background-clip: padding-box,border-box;
+  background-origin: padding-box,border-box;
+  background-image: linear-gradient(0deg,#0a24a5,#0272c2),linear-gradient(180deg,#90c8f1,#0C629E);
+  width: 40px;
+  height: 40px;
+  padding: 3px;
+`
+
 export const Toolbox = (props: IToolbox) => {
   const {isMobile} = useBreakpoint();
   const isShowToolbox = props.showToolbox === undefined ? true : props.showToolbox;
@@ -24,17 +36,18 @@ export const Toolbox = (props: IToolbox) => {
   return (
     <>
       {isMobile && isShowToolbox ? (
-        <div className={"z-10 fixed right-[-23px] bottom-[68px]"}>
+        // <div className={"z-10 fixed right-[-23px] bottom-[68px]"}>
+        <div className={"z-10 fixed right-[16px] bottom-[68px]"}>
           <div className={"mb-2"}>
-            <button className={""} onClick={props.onClickToDownload}>
-              <img alt={"download"} className="w-[50%]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
-            </button>
+            <ToolButton className={""} onClick={props.onClickToDownload}>
+              <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
+            </ToolButton>
           </div>
 
           <div>
-            <button className={""} onClick={props.onClickToOpenTelegramService}>
-              <img alt={"telegram"} className="w-[50%]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
-            </button>
+            <ToolButton className={""} onClick={props.onClickToOpenTelegramService}>
+              <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
+            </ToolButton>
           </div>
         </div>
       ): isShowToolbox ? (
@@ -42,10 +55,10 @@ export const Toolbox = (props: IToolbox) => {
           <FixedToolContainer className={"flex flex-col justify-center items-center px2 py-3 mb-4"}>
             <div className={"text-xs font-light"}>Download</div>
 
-            <button
+            <ToolButton
               onClick={props.onClickToDownload}>
               <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
-            </button>
+            </ToolButton>
 
           </FixedToolContainer>
 
@@ -53,18 +66,18 @@ export const Toolbox = (props: IToolbox) => {
             <div className={"text-xs font-lights mb-1"}>Contate-nos</div>
 
             <div className={"mb-1"}>
-              <button
+              <ToolButton
                 onClick={props.onClickToOpenTelegramService}>
                 <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
-              </button>
+              </ToolButton>
               <div className={"text-xs font-light"}>Serviço</div>
             </div>
 
             <div className={"mb-1"}>
-              <button
+              <ToolButton
                 onClick={props.onClickToOpenTelegramManager}>
                 <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
-              </button>
+              </ToolButton>
               <div className={"text-xs font-lights"}>Gerente</div>
             </div>
           </FixedToolContainer>
