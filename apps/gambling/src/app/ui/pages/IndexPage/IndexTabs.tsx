@@ -1,4 +1,4 @@
-import {TabItem, Tabs} from "../../components/TabItem";
+import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import {ScrollTab} from "../../components/ScrollTab";
 
 type IIndexTabs = {

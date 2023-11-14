@@ -1,4 +1,4 @@
-import {TabItem, Tabs} from "../../components/TabItem";
+import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";

@@ -9,7 +9,7 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../environments/environment";
 import {TabButton, TabTextConVidar, TabTextDados} from "../../components/TabPanel/TabButton";
 import {Container} from "../../components/Container";
-import {TabItem, Tabs} from "../../components/TabItem";
+import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 
 // const InviteCommmonButton = styled.div`
 //   color: #fff;
@@ -72,11 +72,11 @@ export const InvitePage = () => {
         <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
           <div>
             <Tabs className={"game-type-tab-list"}>
-              <TabItem className={""} name={"Como convidar"} active={panelMode === "howto"} size={"big"} onClick={() => {
+              <TabItem mode={"howto"} className={""} name={"Como convidar"} active={panelMode === "howto"} size={"big"} onClick={() => {
                 setPanelMode("howto")
               }}
               />
-              <TabItem className={""} name={"Convite diariamente"} active={panelMode === "daily"} size={"big"} onClick={() => {
+              <TabItem mode={"data"} className={""} name={"Convite diariamente"} active={panelMode === "daily"} size={"big"} onClick={() => {
                 setPanelMode("daily")
               }}/>
             </Tabs>

@@ -25,7 +25,7 @@ export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
         </div>
       </div>
 
-      <div className={"flex flex-col"}>
+      <div className={"text-center flex flex-col"}>
         <span className={"text-2xl text-[#ffffff]"}
               style={{fontWeight: 'bold'}}>R$ {props.data.waitForCalReward || 0.00}</span>
         <span className="text-sm" style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>

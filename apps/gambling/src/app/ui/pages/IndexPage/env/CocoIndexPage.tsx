@@ -18,7 +18,8 @@ import {CocoAppCarouselContent4} from "../AppCarousel/env/CocoAppCarouselContent
 import {CocoAppCarouselContent5} from "../AppCarousel/env/CocoAppCarouselContent5";
 import {CocoAppCarouselContent6} from "../AppCarousel/env/CocoAppCarouselContent6";
 import { ScrollTab } from "../../../components/ScrollTab";
-import { CocoTabItem, TabItem, Tabs } from "../../../components/TabItem";
+import { TabItem, Tabs } from "../../../components/TabItem/TabItem";
+import { CocoTabItem } from "../../../components/TabItem/CocoTabItem";
 import { DragScrollContainer } from "../../../components/DragScrollContainer";
 import { useEffect } from "react";
 import { SearchOutlined } from "@ant-design/icons";

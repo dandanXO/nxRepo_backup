@@ -1,6 +1,6 @@
 import {DesktopColorfulBoard} from "./DesktopColorfulBoard";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
-import {TabItem, Tabs} from "../../../components/TabItem";
+import {TabItem, Tabs} from "../../../components/TabItem/TabItem";
 import {DesktopTotalType} from "./DesktopTotalType";
 import {DesktopDailyType} from "./DesktopDailyType";
 import {QuestionContainer} from "../index";
