@@ -5,7 +5,7 @@ import {
   useWithdrawHistoryListMutation,
 } from '../../../external';
 import { AppLocalStorage } from '../../../persistant/localstorage';
-import { SectionContainer } from '../../components/SectionContainer';
+import { SectionContainer } from '../../components/container/SectionContainer'
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { BlueBoard } from './BlueBoard';
 import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';

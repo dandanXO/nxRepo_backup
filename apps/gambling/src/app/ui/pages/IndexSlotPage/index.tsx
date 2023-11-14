@@ -7,7 +7,7 @@ import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {TTotalFavoriteLocalState} from "../IndexPage";
-import {ScrollTab} from "../../components/ScrollTab";
+import {ScrollTab} from "../../components/TabItem/ScrollTab";
 
 
 const StyledIndexPage = styled.div`

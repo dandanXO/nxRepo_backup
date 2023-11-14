@@ -1,4 +1,4 @@
-import { SectionContainer } from "../../components/SectionContainer";
+import { SectionContainer } from "../../components/container/SectionContainer";
 import { Input, InputValue } from "../../components/Inputs/Input";
 import { Button, ButtonPro } from "../../components/Buttons/Button";
 import { BlueBoard } from "./BlueBoard";

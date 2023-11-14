@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import { useGetUserGameRecordMutation } from '../../../external';
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { SectionContainer } from '../../components/SectionContainer';
+import { SectionContainer } from '../../components/container/SectionContainer';
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import { environment } from "../../../../environments/environment"
 

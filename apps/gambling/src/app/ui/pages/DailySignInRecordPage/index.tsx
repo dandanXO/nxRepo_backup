@@ -1,4 +1,4 @@
-import {SectionContainer} from "../../components/SectionContainer";
+import {SectionContainer} from "../../components/container/SectionContainer";
 import {DatePicker} from "antd";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {useNavigate} from "react-router";

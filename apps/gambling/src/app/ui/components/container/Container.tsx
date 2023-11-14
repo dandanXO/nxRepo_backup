@@ -1,5 +1,5 @@
-import useBreakpoint from "../hooks/useBreakpoint";
 import cx from "classnames";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 type IContainer = {
   children: React.ReactNode;

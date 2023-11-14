@@ -1,4 +1,4 @@
-import {SectionContainer} from "../../components/SectionContainer";
+import {SectionContainer} from "../../components/container/SectionContainer";
 import moment, {Moment} from "moment/moment";
 import {DatePicker} from "antd";
 import {Button} from "../../components/Buttons/Button";

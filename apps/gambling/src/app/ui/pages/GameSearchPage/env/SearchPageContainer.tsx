@@ -1,9 +1,9 @@
 
 import { environment } from "apps/gambling/src/environments/environment";
 import { ReactNode } from "react";
-import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
+
 import { usePageNavigate } from "../../../hooks/usePageNavigate";
-import {Container} from "../../../components/Container";
+import {Container} from "../../../components/container/Container";
 interface Props {
   children?: ReactNode;
 }

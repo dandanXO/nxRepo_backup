@@ -1,6 +1,6 @@
 import { Input } from "../../components/Inputs/Input";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
-import { SectionContainer } from "../../components/SectionContainer";
+import { SectionContainer } from "../../components/container/SectionContainer";
 import styled from "styled-components";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { depositData } from "./depositData";

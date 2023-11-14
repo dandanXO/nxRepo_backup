@@ -2,7 +2,7 @@ import styled from "styled-components";
 import activeTabImg from "./tab.png"
 import inactiveTabImg from "./tab-inactive.png"
 
-export const CommonTableTabG = styled.div<{
+export const ImageTab = styled.div<{
   active: boolean;
 }>`
   width: 100px;

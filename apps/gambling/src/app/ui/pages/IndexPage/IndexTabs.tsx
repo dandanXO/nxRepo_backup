@@ -1,5 +1,5 @@
 import {TabItem, Tabs} from "../../components/TabItem/TabItem";
-import {ScrollTab} from "../../components/ScrollTab";
+import {ScrollTab} from "../../components/TabItem/ScrollTab";
 
 type IIndexTabs = {
   label: any;

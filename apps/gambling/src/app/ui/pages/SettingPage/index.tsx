@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { Input, InputSection } from '../../components/Inputs/Input';
-import { SectionContainer } from '../../components/SectionContainer';
+import { SectionContainer } from '../../components/container/SectionContainer';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../router/useAllowLoginRouterRules';
