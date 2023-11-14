@@ -1,5 +1,5 @@
 import { TabItem, Tabs } from "../../../components/TabItem/TabItem";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
 import useBreakpoint from "../../../hooks/useBreakpoint";
@@ -23,6 +23,8 @@ import { tcx } from "../../../utils/tcx";
 import { TotalSectionContainer } from "../TotalSectionContainer";
 import { CommonTableTabG } from "../../InvitePage/InviteRecordInfoTabSection/env/CommonTableTabG";
 import cx from "classnames";
+import {BackNavigation} from "../../../components/BackNavigation";
+import {Container} from "../../../components/container/Container";
 
 
 export const CocoWalletPage = () => {
@@ -59,12 +61,11 @@ export const CocoWalletPage = () => {
 
   return (
     <>
+
       {isMobile && (
-        <div className={"h-[60px] bg-main sticky top-0 left-0 right-0 z-20 flex flex-row justify-start items-center"}>
-          <LeftOutlined className={"pl-4 text-white "} onClick={() => {
-            navigate(PageOrModalPathEnum.MyPage);
-          }} />
-        </div>
+        <BackNavigation onClick={() => {
+          navigate(PageOrModalPathEnum.MyPage);
+        }}/>
       )}
 
       <div className={"m-auto w-[94%]"}>

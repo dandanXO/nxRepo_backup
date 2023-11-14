@@ -1,5 +1,5 @@
 import {TabItem, Tabs} from "../../components/TabItem/TabItem";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import useBreakpoint from "../../hooks/useBreakpoint";
@@ -23,6 +23,7 @@ import {tcx} from "../../utils/tcx";
 import {TotalSectionContainer} from "./TotalSectionContainer";
 import { environment } from "apps/gambling/src/environments/environment";
 import { CocoWalletPage } from "./env/CocoWalletPage";
+import {BackNavigation} from "../../components/BackNavigation";
 
 
 export const WallletPage = () => {
@@ -65,9 +66,10 @@ export const WallletPage = () => {
     <>
       {isMobile && (
         <div className={"pt-4 px-4 pb-4 bg-main sticky top-0 left-0 right-0 z-20 flex flex-col justify-start items-start"}>
-          <LeftOutlined className={"mb-4 text-white"} onClick={() => {
+
+          <BackNavigation onClick={() => {
             navigate(PageOrModalPathEnum.MyPage);
-          }} />
+          }}/>
 
           <div className={"w-full"}>
             <Tabs className={"game-type-tab-list w-full"}>

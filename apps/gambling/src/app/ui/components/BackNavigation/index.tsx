@@ -9,10 +9,10 @@ type IProps = {
 }
 export const BackNavigation = (props: IProps) => {
   return (
-    <div className={"mt-2 text-xl text-left text-white"}>
+    <div className={"ml-2 mt-2 mb-2 text-xl text-left text-white"}>
       <button
         // className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
-        className={'mb-4 flex flex-row items-center'}
+        className={'mb-2 flex flex-row items-center'}
         onClick={() => props.onClick && props.onClick()}
       >
         <LeftOutlined />
