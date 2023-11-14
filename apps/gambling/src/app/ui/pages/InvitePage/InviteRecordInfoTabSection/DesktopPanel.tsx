@@ -1,8 +1,8 @@
-import {DesktopColorfulBoard} from "./DesktopColorfulBoard";
+import {DesktopColorfulBoard} from "./env/pernambucana/DesktopColorfulBoard";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {TabItem, Tabs} from "../../../components/TabItem";
-import {DesktopTotalType} from "./DesktopTotalType";
-import {DesktopDailyType} from "./DesktopDailyType";
+import {DesktopTotalType} from "./env/pernambucana/DesktopTotalType";
+import {DesktopDailyType} from "./env/pernambucana/DesktopDailyType";
 import {QuestionContainer} from "../index";
 import {useNavigate} from "react-router";
 import {RecordButton2} from "../../../components/Buttons/RecordButton";

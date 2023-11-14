@@ -1,6 +1,6 @@
-import {MobileCommonGreenTable} from "./MobileCommonGreenTable";
-import {MobileCommonBlueTable} from "./MobileCommonBlueTable";
-import {MobileCommonOrangeTable} from "./MobileCommonOrangeTable";
+import {MobileCommonGreenTable} from "./env/pernambucana/MobileCommonGreenTable";
+import {MobileCommonBlueTable} from "./env/pernambucana/MobileCommonBlueTable";
+import {MobileCommonOrangeTable} from "./env/pernambucana/MobileCommonOrangeTable";
 import styled from "styled-components";
 
 const GreenHRline = styled.div`

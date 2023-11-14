@@ -1,7 +1,7 @@
 import moment from "moment/moment";
 import styled from "styled-components";
-import {ITabType} from "./index";
-import { environment } from "../../../../../environments/environment"
+import {ITabType} from "../../index";
+import { environment } from "../../../../../../../environments/environment"
 
 type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; }
 
