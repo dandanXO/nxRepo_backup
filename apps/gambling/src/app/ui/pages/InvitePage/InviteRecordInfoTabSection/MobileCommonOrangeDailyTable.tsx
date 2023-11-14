@@ -15,7 +15,7 @@ type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; }
 export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) => {
 
   return (
-    <MobileOrangeBackgroundShadowContainer className={"px-4 py-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
+    <MobileOrangeBackgroundShadowContainer className={"px-4 pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
 
       <div className={"flex flex-row text-lg font-bold justify-around mb-2"}>
         <CommonTableTabG className={""} active={props.type === "1"} onClick={() => props.onClick("1")}>Nível 1</CommonTableTabG>

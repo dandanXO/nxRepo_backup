@@ -32,7 +32,7 @@ type IMobileCommonBlueTable = ITabType & ITotal;
 
 export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
   return (
-    <MobileBlueBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 py-2 text-[#ffffff] text-left"}>
+    <MobileBlueBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 pb-2 text-[#ffffff] text-left"}>
       <div className={"flex flex-row text-lg font-bold justify-around mb-2"}>
         <CommonTableTabG className={""} active={props.type === "1"} onClick={() => props.onClick("1")}>Nível 1</CommonTableTabG>
         <CommonTableTabG className={""} active={props.type === "2"} onClick={() => props.onClick("2")}>Nível 2</CommonTableTabG>
