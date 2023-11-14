@@ -12,8 +12,8 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
-import {GameBackNavigation} from "../../components/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
+import {GameBackNavigation} from "../../components/BackNavigation/GameBackNavigation";
 
 export const GamePage = () => {
     useAllowLoginRouterRules();
