@@ -1,9 +1,9 @@
 
 import { SearchOutlined } from "@ant-design/icons";
-import { Input as DesktopInput, IInput, InputValue } from "../../../components/Inputs/Input";
-import useBreakpoint from "../../../hooks/useBreakpoint";
-import { MobileInput } from "../../../components/Inputs/MobileInput";
-import { environment } from "apps/gambling/src/environments/environment";
+import { Input as DesktopInput, IInput, InputValue } from "./Input";
+import useBreakpoint from "../../hooks/useBreakpoint";
+import { MobileInput } from "./MobileInput";
+import { environment } from "../../../../environments/environment";
 export const SearchInput = (props: IInput) => {
   const { isMobile } = useBreakpoint();
 

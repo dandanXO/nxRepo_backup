@@ -9,7 +9,7 @@ import { AppLocalStorage } from "../../../persistant/localstorage";
 import { TTotalFavoriteLocalState } from "../IndexPage";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
-import { SearchInput } from "./env/SearchInput";
+import { SearchInput } from "../../components/Inputs/SearchInput";
 import { SearchPageContainer } from "./env/SearchPageContainer";
 // import {onValidatePasswordInput} from "../../components/UserLoginStatusSection/forms/UserLoginForm";
 
