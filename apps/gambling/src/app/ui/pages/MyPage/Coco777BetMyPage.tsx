@@ -1,11 +1,9 @@
 import React from "react";
 import {GetVIPInfoResponse} from "../../../external";
 import {CocoAvatar} from "../../components/Avatar/CocoAvatar";
-import {useNavigate} from "react-router";
 import {IUserInfo} from "../../../persistant/pending/loginMode";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {environment} from "../../../../environments/environment";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useDispatch, useSelector} from "react-redux";
 import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../reduxStore/appSlice";
 import CurrentVIPIcon from "../../components/CurrentVIPIcon";
@@ -18,17 +16,16 @@ import {WithdrawButton} from "../../components/Buttons/WithdrawButton";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import {Container} from "../../components/container/Container";
 
+import {List} from "../../components/List";
+import {ListHeader} from "../../components/List/ListHeader";
+import {ListItem} from "../../components/List/ListItem";
+
 const VIPContainer = styled.div`
   box-sizing: border-box;
   border: 1px solid transparent;
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   background-image: linear-gradient(0deg,#7707CE,#5D11F7,#0078FF),linear-gradient(0deg,#E27DFF,#00EAFF);
-`;
-
-const NavigatorContainer = styled.div`
-  background: linear-gradient(0deg,#0F1744,#2E1555);
-  border: 1px solid rgba(255,255,255,.1);
 `;
 
 interface ICoco777BetMyPageProps {
@@ -134,37 +131,14 @@ const Coco777BetMyPage = ({
         </div>
       </VIPContainer>
 
-      <NavigatorContainer className='rounded-xl text-white mt-5 text-base'>
-        <div className='p-3 text-[#ffb413]'>Outras funções</div>
-        <button
-          className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
-          onClick={() => onClickToWallet()}
-        >
-          <div>Registros de cobrança</div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </button>
-        <button
-          className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
-          onClick={()=>onClickToGameRecord()}
-        >
-          <div>Registro do jogo</div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </button>
-        <button
-          className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
-          onClick={() => onClickToSetting()}
-        >
-          <div>Configuração</div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </button>
-        <button
-          className='p-3 flex justify-between items-center w-full'
-          onClick={()=> dispatch(appSlice.actions.showMobileLogoutModal(true))}
-        >
-          <div>Sair</div>
-          <RightOutlined style={{ fontSize: 16 }}/>
-        </button>
-      </NavigatorContainer>
+      <List>
+        <ListHeader>Outras funções</ListHeader>
+        <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>
+        <ListItem title={"Registro do jogo"} onClick={() => onClickToGameRecord()}/>
+        <ListItem title={"Configuração"} onClick={() => onClickToSetting()}/>
+        <ListItem title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>
+      </List>
+
     </Container>
   )
 }
