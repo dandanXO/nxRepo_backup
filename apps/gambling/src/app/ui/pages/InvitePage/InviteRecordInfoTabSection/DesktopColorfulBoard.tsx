@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {IBoardData} from "../../index";
-import { environment } from "../../../../../../../environments/environment"
+import {IBoardData} from "./index";
+import { environment } from "../../../../../environments/environment"
 
 
 const BlueBoardContainer = styled.div`

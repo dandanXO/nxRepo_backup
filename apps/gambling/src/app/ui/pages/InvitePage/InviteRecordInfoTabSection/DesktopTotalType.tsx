@@ -1,4 +1,4 @@
-import {ITotal} from "./MobileCommonBlueTable";
+import {ITotal} from "./MobileCommonBlueTotalTable";
 
 export const DesktopTotalType = (props: ITotal & { type: string }) => {
   return (

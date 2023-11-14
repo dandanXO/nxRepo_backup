@@ -1,19 +1,14 @@
-import styled from "styled-components";
-import {IBoardData} from "../../index";
-import { environment } from "../../../../../../../environments/environment"
+import {IBoardData} from "./index";
+import {MobileGreenBackgroundShadowContainer as Pernambucana} from "./env/pernambucana/MobileGreenBackgroundShadowContainer";
+import {MobileGreenBackgroundShadowContainer as Coco } from "./env/coco/MobileGreenBackgroundShadowContainer";
+import {environment} from "../../../../../environments/environment";
+
+const MobileGreenBackgroundShadowContainer = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana
 
 
-
-const GreenBackgroundShadowContainer = styled.div`
-  //background: linear-gradient(45deg,#478E51 0%,#5DDC54 100%);
-  //box-shadow: inset 0 -0.16rem 0.34rem #72fc6c;
-  background: url("assets/${environment.assetPrefix}/h5_invite_dashboard_2.png") center center no-repeat;
-  background-size: cover;
-`
-
-export const MobileCommonGreenTable = (props: IBoardData) => {
+export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
   return (
-    <GreenBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 py-2 text-white"}>
+    <MobileGreenBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 py-2 text-white"}>
 
       <div className={"flex flex-row justify-between  mb-2"}>
         <div className={"flex flex-col"}>
@@ -38,6 +33,6 @@ export const MobileCommonGreenTable = (props: IBoardData) => {
           </span>
       </div>
 
-    </GreenBackgroundShadowContainer>
+    </MobileGreenBackgroundShadowContainer>
   )
 }

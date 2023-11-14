@@ -1,50 +1,26 @@
 import moment from "moment/moment";
 import styled from "styled-components";
-import {ITabType} from "../../index";
-import { environment } from "../../../../../../../environments/environment"
+import {ITabType} from "./index";
+import {MobileOrangeBackgroundShadowContainer as Pernambucana} from "./env/pernambucana/MobileOrangeBackgroundShadowContainer";
+import {MobileOrangeBackgroundShadowContainer as Coco} from "./env/coco/MobileOrangeBackgroundShadowContainer";
+import {environment} from "../../../../../environments/environment";
+import {CommonTableTabG} from "./env/CommonTableTabG";
+
+const MobileOrangeBackgroundShadowContainer = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana;
 
 type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; }
 
 
-const OrangeBackgroundShadowContainer = styled.div`
-  //background: linear-gradient(45deg,#FC6728 0%,#F7B122 100%);
-  //box-shadow: inset 0 -0.16rem 0.34rem #ffb558;
-  background: url("assets/${environment.assetPrefix}/h5_invite_dashboard_3.png") center center no-repeat;
-  background-size: cover;
-`
 
-const CommonTableTabO = styled.div<{
-  active: boolean;
-}>`
-  ${(props) => props.active && `
-    color: ${props.active ? '#ffffff' : '#ffffff'}; /* 设置文本颜色 */
-
-  &:after {
-    display: block;
-    content: "";
-    width: 50px;
-    height: 3px;
-    bottom: 0;
-    background: ${props.active ? 'rgba(255, 255, 255, 0.7)' : 'transparent'};
-    transform: translateX(50%) translateX(-50%);
-    transition-duration: 0.3s;
-    box-shadow: ${props.active ? '0 0 10px rgba(255, 255, 255, 1)' : 'none'};
-  }
-  `};
-`
-
-export const MobileCommonOrangeTable = (props: IMobileCommonOrangeTable) => {
+export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) => {
 
   return (
-    <OrangeBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 py-2 text-[#ffffff] text-left"}>
+    <MobileOrangeBackgroundShadowContainer className={"px-4 py-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
 
       <div className={"flex flex-row text-lg font-bold justify-around mb-2"}>
-        <CommonTableTabO className={""} active={props.type === "1"} onClick={() => props.onClick("1")}>Nível
-          1</CommonTableTabO>
-        <CommonTableTabO className={""} active={props.type === "2"} onClick={() => props.onClick("2")}>Nível
-          2</CommonTableTabO>
-        <CommonTableTabO className={""} active={props.type === "3"} onClick={() => props.onClick("3")}>Nível
-          3</CommonTableTabO>
+        <CommonTableTabG className={""} active={props.type === "1"} onClick={() => props.onClick("1")}>Nível 1</CommonTableTabG>
+        <CommonTableTabG className={""} active={props.type === "2"} onClick={() => props.onClick("2")}>Nível 2</CommonTableTabG>
+        <CommonTableTabG className={""} active={props.type === "3"} onClick={() => props.onClick("3")}>Nível 3</CommonTableTabG>
       </div>
 
       {props.isProxy && (
@@ -93,6 +69,6 @@ export const MobileCommonOrangeTable = (props: IMobileCommonOrangeTable) => {
         </div>
       </div>
 
-    </OrangeBackgroundShadowContainer>
+    </MobileOrangeBackgroundShadowContainer>
   )
 }
