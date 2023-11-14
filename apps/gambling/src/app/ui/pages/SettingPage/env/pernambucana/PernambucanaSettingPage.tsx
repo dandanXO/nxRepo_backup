@@ -10,7 +10,7 @@ import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"
 import {Container} from "../../../../components/container/Container";
-import {BackNavigation} from "../../../../components/BackNavigation";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 
 
 type IProps = {

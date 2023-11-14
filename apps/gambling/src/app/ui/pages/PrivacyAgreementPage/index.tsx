@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import {environment} from "../../../../environments/environment";
-import {BackNavigation} from "../../components/BackNavigation";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 
 export const PrivacyAgreementPage = () => {
   const { isMobile } = useBreakpoint();

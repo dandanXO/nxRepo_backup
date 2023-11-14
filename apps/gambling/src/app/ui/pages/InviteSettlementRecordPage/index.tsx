@@ -9,7 +9,7 @@ import {useLazyGetUserInviteRewardRecordQuery} from "../../../external";
 import React, {useCallback, useEffect, useState} from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {environment} from "../../../../environments/environment";
-import {BackNavigation} from "../../components/BackNavigation";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 
 const { RangePicker } = DatePicker;
 

@@ -14,7 +14,7 @@ import {List} from "../../../../components/List";
 import {ListItem} from "../../../../components/List/ListItem";
 import {ViewButton} from "../../../../components/Buttons/ViewButton";
 import {EditOutlined, InfoCircleOutlined, PhoneOutlined, UserOutlined,} from "@ant-design/icons";
-import {BackNavigation} from "../../../../components/BackNavigation";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 
 
 type IProps = {

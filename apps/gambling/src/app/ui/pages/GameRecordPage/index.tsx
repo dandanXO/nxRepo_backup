@@ -9,7 +9,7 @@ import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { SectionContainer } from '../../components/container/SectionContainer';
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import { environment } from "../../../../environments/environment"
-import {BackNavigation} from "../../components/BackNavigation";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 
 const tableStyle = {

@@ -15,8 +15,8 @@ export const BackNavigation = (props: IProps) => {
         onClick={() => props.onClick && props.onClick()}
       >
         <LeftOutlined />
+        <div className={'ml-2'}>Retornar</div>
       </button>
-      <div className={''}>Retornar</div>
     </div>
   )
 }

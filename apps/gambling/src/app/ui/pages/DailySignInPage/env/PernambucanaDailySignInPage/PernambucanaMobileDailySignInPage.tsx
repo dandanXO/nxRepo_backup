@@ -11,7 +11,7 @@ import {GetSignInConfigResponse} from "../../../../../external";
 import { RootState } from '../../../../../reduxStore';
 import { useSelector } from 'react-redux';
 import { LevelList } from "../../index";
-import {BackNavigation} from "../../../../components/BackNavigation";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 
 const Container = styled.div`
   //background: #287052;

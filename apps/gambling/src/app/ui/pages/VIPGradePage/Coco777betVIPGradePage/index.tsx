@@ -8,7 +8,7 @@ import CurrentLevelInfoCard from "./CurrentLevelInfoCard";
 import { GetSignInConfigResponse, GetUserVIPAllInfoResponse, GetVIPInfoResponse } from "../../../../external";
 import LevelInfoCard from "./LevelInfoCard";
 import {Container} from "../../../components/container/Container";
-import {BackNavigation} from "../../../components/BackNavigation";
+import {BackNavigation} from "../../../components/BackNavigation/BackNavigation";
 
 interface ICoco777betVIPGradePageProps {
   currentLevel: number

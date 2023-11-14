@@ -10,7 +10,7 @@ import { environment } from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
-import {BackNavigation} from "../../../../components/BackNavigation";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 const SignInButton = styled.div<{

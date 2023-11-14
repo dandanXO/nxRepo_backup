@@ -16,7 +16,7 @@ import {
 } from '../../components/NotificationItem';
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {BackNavigation} from "../../components/BackNavigation";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 
 export const NotificationPage = () => {
   useAllowLoginRouterRules();

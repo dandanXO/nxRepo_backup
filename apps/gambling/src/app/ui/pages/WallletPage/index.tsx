@@ -23,7 +23,7 @@ import {tcx} from "../../utils/tcx";
 import {TotalSectionContainer} from "./TotalSectionContainer";
 import { environment } from "apps/gambling/src/environments/environment";
 import { CocoWalletPage } from "./env/CocoWalletPage";
-import {BackNavigation} from "../../components/BackNavigation";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 
 
 export const WallletPage = () => {
