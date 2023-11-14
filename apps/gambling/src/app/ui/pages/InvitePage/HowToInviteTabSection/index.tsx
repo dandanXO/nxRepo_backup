@@ -159,7 +159,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
       </HowToImageContainer>
 
       <QuestionContainer>
-        <img className={'my-8 mx-auto'} src={'assets/001/acting.png'} />
+        <img className={'my-8 mx-auto'} src={`assets/${environment.assetPrefix}/acting.png`} />
 
         <section className={'text-left text-lg text-white mx-10'}>
           <Roboto>
