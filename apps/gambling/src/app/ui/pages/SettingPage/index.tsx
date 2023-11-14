@@ -9,6 +9,7 @@ import useBreakpoint from '../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../router/useAllowLoginRouterRules';
 import { environment } from "../../../../environments/environment"
+import {Container} from "../../components/container/Container";
 
 
 export const SettingPage = () => {
@@ -20,14 +21,14 @@ export const SettingPage = () => {
   const navigate = useNavigate();
   const { isMobile } = useBreakpoint();
   return (
-    <>
+    <Container>
       {editing && (
         <EditUserInfoModal
           nickname={nickname}
           close={() => setEditing(false)}
         />
       )}
-      <div className={`p-8 ${isMobile ? 'bg-varient' : 'p-4 border border-solid border-green-500 rounded-lg bg-varient m-4 mb-40 mt-8'}`}>
+      <div className={`${isMobile ? 'bg-varient' : 'border border-solid border-green-500 rounded-lg bg-varient m-4 mb-40 mt-8'}`}>
         <SectionContainer id={'game-record-section'}>
           <button
               className={'mb-8 flex items-end flex-col'}
@@ -134,6 +135,6 @@ export const SettingPage = () => {
         </SectionContainer>
         <div className={'h-20'}></div>
       </div>
-    </>
+    </Container>
   );
 };
