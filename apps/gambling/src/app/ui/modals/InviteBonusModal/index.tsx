@@ -1,83 +1,18 @@
-import styled from "styled-components";
-import cx from "classnames";
-import { useNavigate } from "react-router";
-import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
+import {useNavigate} from "react-router";
 import {environment} from "../../../../environments/environment";
+import {Container as Pernambucana} from "./env/pernambucana/Container";
+import {Container as Coco} from "./env/coco/Container";
+import {EarnButton} from "../../components/Buttons/EarnButton";
+import {InviteButton} from "../../components/Buttons/InviteButton";
+import {Item} from "./env/pernambucana/Item";
+import {MoneyButton} from "./env/pernambucana/MoneyButton";
+
+const Container = environment.assetPrefix == "coco777bet" ? Coco : Pernambucana;
 
 export type IInitialChargeModal = {
   close: () => void;
   onConfirm: () => void;
 }
-
-const Container = styled.div`
-  //width: 100%;
-  //height: 100%;
-  background-image: url(assets/${environment.assetPrefix}/ad_bg_1.png);
-  background-size: 100% auto;
-  border-radius: 20px;
-  padding: 20px 24px;
-`;
-
-const Item = styled.div.attrs({
-  className: "relative w-full flex flex-row justify-between text-left item-center",
-})`
-  //width: 94%;
-  //position: relative;
-  margin-bottom: 16px;
-  margin-top: 10px;
-  background-color: rgba(242, 255, 221, 0.5);
-  border: 1px solid var(--main-primary-main);
-  //box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
-  border-radius: 8px;
-  padding: 10px 20px;
-
-  text-shadow: 0px 1px 0px #042A85;
-`
-
-const MoneyButton = styled.div.attrs((props) => ({
-  className: cx("flex flex-row justify-center items-center", props.className)
-}))<{
-  className?: string;
-}>`
-  position: absolute;
-  right: -10px;
-  top: -1%;
-  width: 104px;
-  height: 78px;
-  background: linear-gradient(90deg, var(--dashboard-block2-gradient-from), var(--dashboard-block2-gradient-to));
-  //box-shadow: 0 2px 4px rgba(0,0,0,.5), 0 1px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
-  border-radius: 10px;
-  //display: flex;
-  //justify-content: center;
-  //align-items: center;
-  color: #f7fe00;
-  line-height: 21px;
-  border-color: 2px solid var(--dashboard-block2);
-  //text-shadow: 0px 1px 0px #7D0403;
-  //margin-top: -15px;
-`
-
-const EarnButton = styled.button`
-  background: linear-gradient(180deg,var(--btn-gradient1-from) 0%,var(--btn-gradient1-to) 100%);;
-  //box-shadow: 0 2px #0148f9, inset 0 1px 3px rgba(255,255,255,.5);
-  border-radius: 24px;
-  transition: all .1s ease-in-out;
-  padding: 10px 20px;
-  flex:1;
-`
-const InviteButton = styled.button`
-  font-size: 15px;
-  display: block;
-  background: linear-gradient(180deg,var(--btn-gradient2-from) 0%,var(--btn-gradient2-to) 100%);
-  //box-shadow: 0 2px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
-  border-radius: 24px;
-  letter-spacing: 0;
-  transition: all .1s ease-in-out;
-
-  padding: 10px 20px;
-  flex:1;
-  margin-left: 16px;
-`
 
 export const InviteBonusModal = (props: IInitialChargeModal) => {
   const navigate = useNavigate();
