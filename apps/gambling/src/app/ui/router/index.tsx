@@ -286,7 +286,7 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.VIPGradePage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <VIPGradePage />
             </PageTemplate>
           )}/>
@@ -316,18 +316,18 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.InitialChargePage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <InitialChargePage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.RechargeActivityPage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <RechargeActivityPage/>
             </PageTemplate>
           )}/>
 
           <Route path={PageOrModalPathEnum.TelegramPage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <TelegramPage/>
             </PageTemplate>
           )}/>

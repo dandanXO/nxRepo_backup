@@ -3,14 +3,17 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {ChargeButton} from "../../components/Buttons/ChargeButton";
 import {environment} from "../../../../environments/environment";
 import useBreakpoint from "../../hooks/useBreakpoint";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
 
 
 export const InitialChargePage = () => {
   const navigate = useNavigate();
   const {isMobile} = useBreakpoint();
-
+  const {onClickToIndex} = usePageNavigate();
   return (
     <>
+        <BackNavigation onClick={() => onClickToIndex()}/>
         <div className={"px-0 sm:px-10 w-full"}>
           <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8 mt-4"}>
             {isMobile ? (
