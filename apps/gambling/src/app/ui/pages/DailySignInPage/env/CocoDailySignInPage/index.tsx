@@ -10,6 +10,8 @@ import { environment } from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import {BackNavigation} from "../../../../components/BackNavigation";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -329,6 +331,10 @@ const CocoDailySignInPage = ({
 
   const disableButton = vipLevel === 0 || todayIsSignIn
 
+  const {
+    onClickToIndex
+  } = usePageNavigate();
+
   if (isMobile) {
     return (
       <CocoMobileDailySignInPage
@@ -347,13 +353,8 @@ const CocoDailySignInPage = ({
   return (
     <div>
       {contextHolder}
-      <button
-        className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
-        onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}
-      >
-        <LeftOutlined />
-        <div>Retornar</div>
-      </button>
+
+      <BackNavigation onClick={() => onClickToIndex()}/>
 
       <VIPContainer>
         <StraightContainer className='flex relative'>

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import {environment} from "../../../../environments/environment";
+import {BackNavigation} from "../../components/BackNavigation";
 
 export const PrivacyAgreementPage = () => {
   const { isMobile } = useBreakpoint();
@@ -19,32 +20,16 @@ export const PrivacyAgreementPage = () => {
         })}
       >
         <div className="flex w-full items-center text-left text-white">
-          <button onClick={() => navigate(PageOrModalPathEnum.SettingPage)}>
-            <img
-              className={cx('mr-3', {
-                'h-[21px] w-[21px]': !isMobile,
-                'h-10 w-10': isMobile,
-              })}
-              alt="back"
-              src={
-                isMobile
-                  ? `assets/${environment.assetPrefix}/icon_40.png`
-                  : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAMAAADfNcjQAAAAZlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+Vn2moAAAAIXRSTlMA5QjW6825oZSHeFMpIRoUD/Xw397dxMOurWtpXUI9MzAmTIk1AAAAlElEQVQ4y7XURxbEIAwDUBzS+/RJD/e/ZKIDKFqF7ec9wLZwd63KrLryMYRgF16eHjz3Ah7v1HO41dQz+KdhHP3hvqWewpOOef+F/3rmXQJPI+athw/Umzc8Y+xqg+fUtxheUF+f8JL68oBP1N0LPhMkG+gR+pL6mbpQutS6WbrdemD0yOmh1WOvg6Ojp8Or468/kAMmXBWDCW3GHwAAAABJRU5ErkJggg=='
-              }
-            >
-            </img>
-          </button>
-          {!isMobile && <div className="text-2xl text-white">Retornar</div>}
 
+          <BackNavigation onClick={() => navigate(PageOrModalPathEnum.SettingPage)}/>
 
-        {isMobile && (
-          <div className="ml-2 text-left text-2xl font-bold text-main-secondary-main">
-            Politica de Privacidade
-          </div>
-        )}
+          {isMobile && (
+            <div className="ml-2 text-left text-2xl font-bold text-main-secondary-main">
+              Politica de Privacidade
+            </div>
+          )}
 
         </div>
-
 
         <div
           className={cx(

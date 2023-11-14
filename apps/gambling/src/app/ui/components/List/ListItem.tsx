@@ -3,7 +3,7 @@ import React from "react";
 
 type IProps = {
   onClick?: () => void;
-  title: string;
+  title: React.ReactNode;
 }
 export const ListItem = (props: IProps) => {
   return (
@@ -11,8 +11,8 @@ export const ListItem = (props: IProps) => {
       className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
       onClick={() => props && props.onClick && props.onClick()}
     >
-      <div>{props.title}</div>
-      <RightOutlined style={{ fontSize: 16 }}/>
+      <div className={"w-full text-left"}>{props.title}</div>
+      {props.onClick && <RightOutlined style={{ fontSize: 16 }}/>}
     </button>
   )
 }

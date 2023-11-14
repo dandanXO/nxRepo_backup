@@ -131,7 +131,9 @@ const Coco777BetMyPage = ({
         </div>
       </VIPContainer>
 
-      <List>
+      <List
+        className={"bg-gradient-to-b from-[#0F1744] to-[#2E1555]"}
+      >
         <ListHeader>Outras funções</ListHeader>
         <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>
         <ListItem title={"Registro do jogo"} onClick={() => onClickToGameRecord()}/>

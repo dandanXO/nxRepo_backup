@@ -12,23 +12,8 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
-
-const BackButton = styled.div`
-  left: 20px;
-  top: 20px;
-  z-index: 99;
-  padding: 4px 10px;
-  border-radius: 20px;
-  text-align: center;
-  background: linear-gradient(60deg,#3378EE 0%,#0DE5FF 100%);
-  position: absolute;
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`
+import {GameBackNavigation} from "../../components/BackNavigation";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
 
 export const GamePage = () => {
     useAllowLoginRouterRules();
@@ -97,20 +82,15 @@ export const GamePage = () => {
         }
     }, []);
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const {updateBalance} = useAutoUpdateBalance();
+    const {onClickToIndex} = usePageNavigate();
+
     return (
         <>
-          <BackButton
-            onClick={() => {
-              updateBalance();
-              navigate(PageOrModalPathEnum.IndexPage);
-            }}
-            className={"fixed top-[10px] left-[10px] p-4 text-white flex flex-row justify-center items-center"}>
-            <LeftOutlined className={"mr-1text-white text-base relative top-[-2px] left-[-3px]"}/>
-            <div>Retornar</div>
-          </BackButton>
+          <GameBackNavigation onClick={() => {
+            updateBalance();
+            onClickToIndex();
+          }} />
 
           {data !== undefined && (
             // <iframe className={`w-full h-full`} src={data.link} />
