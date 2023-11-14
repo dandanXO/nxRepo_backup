@@ -138,7 +138,7 @@ const Coco777BetMyPage = ({
         <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>
         <ListItem title={"Registro do jogo"} onClick={() => onClickToGameRecord()}/>
         <ListItem title={"Configuração"} onClick={() => onClickToSetting()}/>
-        <ListItem title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>
+        <ListItem isEnd={true} title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>
       </List>
 
     </Container>
