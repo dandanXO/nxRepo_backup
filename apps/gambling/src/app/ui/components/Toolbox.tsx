@@ -2,6 +2,8 @@ import {environment} from "../../../environments/environment";
 import React from "react";
 import useBreakpoint from "../hooks/useBreakpoint";
 import styled from "styled-components";
+import {useLocation} from "react-router";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 
 const FixedToolContainer = styled.div`
     width: 80px;
@@ -32,18 +34,21 @@ const ToolButton = styled.button`
 export const Toolbox = (props: IToolbox) => {
   const {isMobile} = useBreakpoint();
   const isShowToolbox = props.showToolbox === undefined ? true : props.showToolbox;
+  const location = useLocation();
+  const isMobileShowDownload = location.pathname === PageOrModalPathEnum.IndexPage;
 
   return (
     <>
       {isMobile && isShowToolbox ? (
         // <div className={"z-10 fixed right-[-23px] bottom-[68px]"}>
         <div className={"z-10 fixed right-[16px] bottom-[68px]"}>
-          <div className={"mb-2"}>
-            <ToolButton className={""} onClick={props.onClickToDownload}>
-              <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
-            </ToolButton>
-          </div>
-
+          {isMobileShowDownload && (
+            <div className={"mb-2"}>
+              <ToolButton className={""} onClick={props.onClickToDownload}>
+                <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
+              </ToolButton>
+            </div>
+          )}
           <div>
             <ToolButton className={""} onClick={props.onClickToOpenTelegramService}>
               <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
@@ -52,9 +57,9 @@ export const Toolbox = (props: IToolbox) => {
         </div>
       ): isShowToolbox ? (
         <div className={"fixed right-[0px] bottom-[68px] text-white w-[100px] flex flex-col p-[10px] z-20"}>
+
           <FixedToolContainer className={"flex flex-col justify-center items-center px2 py-3 mb-4"}>
             <div className={"text-xs font-light"}>Download</div>
-
             <ToolButton
               onClick={props.onClickToDownload}>
               <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>

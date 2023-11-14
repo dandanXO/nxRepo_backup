@@ -61,7 +61,8 @@ type ICoco777betIndexPageTemplate = {
   isCurrentPageCompanyProfile: boolean;
   contextHolder: any;
   isMobile: boolean;
-  isShowFooter: boolean;
+  isShowMobileFooter: boolean;
+  isShowDesktopFooter: boolean;
   isShowToolbox: boolean;
   isShowDesktopHeader: boolean;
   isShowDesktopMenuDrawer: boolean;
@@ -98,7 +99,8 @@ export const CocoPageTemplate = ({
                                          isCurrentPageCompanyProfile,
                                          contextHolder,
                                          isMobile,
-                                          isShowFooter,
+                                          isShowMobileFooter,
+                                        isShowDesktopFooter,
                                           isShowToolbox,
                                          isShowDesktopHeader,
                                          isLogin,
@@ -185,7 +187,9 @@ export const CocoPageTemplate = ({
           {children}
         </ErrorBoundary>
 
-        {isShowFooter && <Footer/>}
+        {<Footer showMobileFooter={isShowMobileFooter}
+                 showDesktopFooter={isShowDesktopFooter}
+        />}
 
 
         {isMobile && isShowTabbar && (

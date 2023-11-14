@@ -47,9 +47,9 @@ export type IPage = {
   showTabbar?: boolean;
   showDesktopHeader?: boolean;
   showDesktopMenuDrawer?: boolean;
-  showFooter?: boolean;
+  showMobileFooter?: boolean;
+  showDesktopFooter?: boolean;
   showToolbox?: boolean;
-
 }
 export const PageTemplate = (props: IPage) => {
   const navigate = useNavigate();
@@ -152,7 +152,8 @@ export const PageTemplate = (props: IPage) => {
 
   const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
   const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
-  const isShowFooter = props.showFooter === undefined ? true : props.showFooter;
+  const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
+  const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
   const isShowToolbox = props.showToolbox === undefined ? true : props.showToolbox;
 
   const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
@@ -210,7 +211,8 @@ export const PageTemplate = (props: IPage) => {
           isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
           contextHolder={contextHolder}
           isMobile={isMobile}
-          isShowFooter={isShowFooter}
+          isShowMobileFooter={isShowMobileFooter}
+          isShowDesktopFooter={isShowMobileFooter}
           isShowToolbox={isShowToolbox}
           isShowDesktopHeader={isShowDesktopHeader}
           isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
@@ -249,7 +251,8 @@ export const PageTemplate = (props: IPage) => {
           isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
           contextHolder={contextHolder}
           isMobile={isMobile}
-          isShowFooter={isShowFooter}
+          isShowMobileFooter={isShowMobileFooter}
+          isShowDesktopFooter={isShowMobileFooter}
           isShowToolbox={isShowToolbox}
           isShowDesktopHeader={isShowDesktopHeader}
           isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}

@@ -16,6 +16,7 @@ import {CheckInButton} from "../../components/Buttons/CheckInButton";
 import {DepositButton} from "../../components/Buttons/DepositButton2";
 import {WithdrawButton} from "../../components/Buttons/WithdrawButton";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
+import {Container} from "../../components/container/Container";
 
 const VIPContainer = styled.div`
   box-sizing: border-box;
@@ -53,8 +54,9 @@ const Coco777BetMyPage = ({
   } = usePageNavigate();
 
   return (
-    <div className='p-3'>
+    <Container className={"!pt-4 pb-[80px]"}>
       <section className='flex justify-between items-center'>
+
         <div className='flex gap-4 items-center'>
           <CocoAvatar />
           <div>
@@ -69,11 +71,8 @@ const Coco777BetMyPage = ({
         </div>
 
         <CheckInButton
-          className='py-1 px-4 rounded-full bg-medium text-sm text-white'
           onClick={()=>onClickToCheckInDaily()}
-        >
-          check-in
-        </CheckInButton>
+        >check-in</CheckInButton>
       </section>
 
       <section className='flex justify-between text-center py-3'>
@@ -81,18 +80,14 @@ const Coco777BetMyPage = ({
           <div className='text-xl text-white'>R$ {totalBalanceSheetValue}</div>
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
-            className='bg-medium w-full py-2 text-white rounded-md mt-3 text-base font-bold'
             onClick={() => onClickToWallet()}
-          >
-            Depósito
-          </DepositButton>
+          >Depósito</DepositButton>
         </div>
 
         <div className='w-full px-3'>
           <div className='text-xl text-white'>R$ {totalReasableValue}</div>
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
-            className='bg-medium w-full py-2 text-white rounded-md mt-3 text-base font-bold'
             onClick={() => onClickToWallet()}
           >
             Retirar
@@ -101,9 +96,11 @@ const Coco777BetMyPage = ({
       </section>
 
       <VIPContainer className='rounded-xl flex mt-1 items-center pr-6'>
+
         <div className='w-1/3 p-3'>
           <CurrentVIPIcon level={currentLevel} textClassName='text-3xl text-white'/>
         </div>
+
         <div className='w-2/3 text-white'>
           <div className='mb-1'>Depósitos totais: {userVIPInfo?.data?.vip_score || 0} / {userVIPInfo?.data?.next_level_score || 1}</div>
           <ProgressBar
@@ -138,7 +135,7 @@ const Coco777BetMyPage = ({
       </VIPContainer>
 
       <NavigatorContainer className='rounded-xl text-white mt-5 text-base'>
-        <div className='p-3'>Outras funções</div>
+        <div className='p-3 text-[#ffb413]'>Outras funções</div>
         <button
           className='p-3 flex justify-between border-b-[0.1px] border-black border-opacity-10 items-center w-full'
           onClick={() => onClickToWallet()}
@@ -168,7 +165,7 @@ const Coco777BetMyPage = ({
           <RightOutlined style={{ fontSize: 16 }}/>
         </button>
       </NavigatorContainer>
-    </div>
+    </Container>
   )
 }
 
