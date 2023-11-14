@@ -61,6 +61,8 @@ type ICoco777betIndexPageTemplate = {
   isCurrentPageCompanyProfile: boolean;
   contextHolder: any;
   isMobile: boolean;
+  isShowFooter: boolean;
+  isShowToolbox: boolean;
   isShowDesktopHeader: boolean;
   isShowDesktopMenuDrawer: boolean;
   isLogin: boolean;
@@ -96,6 +98,8 @@ export const CocoPageTemplate = ({
                                          isCurrentPageCompanyProfile,
                                          contextHolder,
                                          isMobile,
+                                          isShowFooter,
+                                          isShowToolbox,
                                          isShowDesktopHeader,
                                          isLogin,
                                          setIsLogin,
@@ -181,18 +185,22 @@ export const CocoPageTemplate = ({
           {children}
         </ErrorBoundary>
 
-        <Footer/>
+        {isShowFooter && <Footer/>}
+
 
         {isMobile && isShowTabbar && (
           <TabBar isShowSlot={false} size={"big"}/>
         )}
 
-        <Toolbox
-          showToolbox={showToolbox}
-          onClickToDownload={onClickToDownload}
-          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
-          onClickToOpenTelegramService={onClickToOpenTelegramService}
-        />
+        {isShowToolbox && (
+          <Toolbox
+            showToolbox={showToolbox}
+            onClickToDownload={onClickToDownload}
+            onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+            onClickToOpenTelegramService={onClickToOpenTelegramService}
+          />
+        )}
+
 
         {isUILoading && (
           <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>

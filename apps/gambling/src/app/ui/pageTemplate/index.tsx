@@ -152,7 +152,8 @@ export const PageTemplate = (props: IPage) => {
 
   const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
   const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
-
+  const isShowFooter = props.showFooter === undefined ? true : props.showFooter;
+  const isShowToolbox = props.showToolbox === undefined ? true : props.showToolbox;
 
   const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
   const isShowDesktopMenuDrawer = props.showDesktopMenuDrawer === undefined ? true : props.showDesktopMenuDrawer;
@@ -209,9 +210,12 @@ export const PageTemplate = (props: IPage) => {
           isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
           contextHolder={contextHolder}
           isMobile={isMobile}
+          isShowFooter={isShowFooter}
+          isShowToolbox={isShowToolbox}
           isShowDesktopHeader={isShowDesktopHeader}
           isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
           isLogin={isLogin}
+
           setIsLogin={setIsLogin}
           showLoginModal={showLoginModal}
           setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
@@ -245,6 +249,8 @@ export const PageTemplate = (props: IPage) => {
           isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
           contextHolder={contextHolder}
           isMobile={isMobile}
+          isShowFooter={isShowFooter}
+          isShowToolbox={isShowToolbox}
           isShowDesktopHeader={isShowDesktopHeader}
           isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
           isLogin={isLogin}

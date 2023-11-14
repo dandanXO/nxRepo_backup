@@ -9,6 +9,7 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../environments/environment";
 import {TabButton, TabTextConVidar, TabTextDados} from "../../components/TabPanel/TabButton";
 import {Container} from "../../components/Container";
+import {TabItem, Tabs} from "../../components/TabItem";
 
 // const InviteCommmonButton = styled.div`
 //   color: #fff;
@@ -69,28 +70,34 @@ export const InvitePage = () => {
     <>
       <Container>
         <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
-          {/*<Tabs className={"game-type-tab-list"}>*/}
-          {/*  <TabItem className={""} name={"Como convidar"} active={panelMode === "howto"} size={"big"} onClick={() => {*/}
-          {/*    setPanelMode("howto")*/}
-          {/*  }}*/}
-          {/*  />*/}
-          {/*  <TabItem className={""} name={"Convite diariamente"} active={panelMode === "daily"} size={"big"} onClick={() => {*/}
-          {/*    setPanelMode("daily")*/}
-          {/*  }}/>*/}
-          {/*</Tabs>*/}
-          <TabButton active={panelMode === "howto"} onClick={() => {
-            setPanelMode("howto")
-          }}>
-            <TabTextConVidar className={"text-sm font-bold"}>{isMobile ? "Convidar" :"Como convidar"}</TabTextConVidar>
-          </TabButton>
+          <div>
+            <Tabs className={"game-type-tab-list"}>
+              <TabItem className={""} name={"Como convidar"} active={panelMode === "howto"} size={"big"} onClick={() => {
+                setPanelMode("howto")
+              }}
+              />
+              <TabItem className={""} name={"Convite diariamente"} active={panelMode === "daily"} size={"big"} onClick={() => {
+                setPanelMode("daily")
+              }}/>
+            </Tabs>
+          </div>
 
-          <TabButton active={panelMode === "daily"} onClick={() => {
-            setPanelMode("daily")
-          }}>
-            <TabTextDados className={"text-sm font-bold"}>
-              {isMobile ? "Dados diários" : "Convite diariamente"}
-            </TabTextDados>
-          </TabButton>
+          {/*<div>*/}
+          {/*  <TabButton active={panelMode === "howto"} onClick={() => {*/}
+          {/*    setPanelMode("howto")*/}
+          {/*  }}>*/}
+          {/*    <TabTextConVidar className={"text-sm font-bold"}>{isMobile ? "Convidar" :"Como convidar"}</TabTextConVidar>*/}
+          {/*  </TabButton>*/}
+
+          {/*  <TabButton active={panelMode === "daily"} onClick={() => {*/}
+          {/*    setPanelMode("daily")*/}
+          {/*  }}>*/}
+          {/*    <TabTextDados className={"text-sm font-bold"}>*/}
+          {/*      {isMobile ? "Dados diários" : "Convite diariamente"}*/}
+          {/*    </TabTextDados>*/}
+          {/*  </TabButton>*/}
+          {/*</div>*/}
+
         </section>
 
 

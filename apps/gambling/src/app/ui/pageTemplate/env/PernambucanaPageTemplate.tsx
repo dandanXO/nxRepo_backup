@@ -67,6 +67,8 @@ type IProps = {
   isCurrentPageCompanyProfile: boolean;
   contextHolder: any;
   isMobile: boolean;
+  isShowFooter: boolean;
+  isShowToolbox: boolean;
   isShowDesktopHeader: boolean;
   isShowDesktopMenuDrawer: boolean;
   isLogin: boolean;
@@ -102,6 +104,8 @@ export const PernambucanaPageTemplate = ({
                                                  isCurrentPageCompanyProfile,
                                                  contextHolder,
                                                  isMobile,
+                                                  isShowFooter,
+                                                  isShowToolbox,
                                                  isShowDesktopHeader,
                                                  isLogin,
                                                  setIsLogin,
@@ -210,14 +214,16 @@ export const PernambucanaPageTemplate = ({
           </ErrorBoundary>
 
           {/*Footer*/}
-          <Footer/>
+          {isShowFooter && <Footer/>}
 
           {isMobile && isShowTabbar && (
             <TabBar/>
           )}
 
           {/*Toolbox*/}
-          <Toolbox showToolbox={showToolbox} onClickToDownload={onClickToDownload} onClickToOpenTelegramManager={onClickToOpenTelegramManager} onClickToOpenTelegramService={onClickToOpenTelegramService}/>
+          {isShowToolbox && (
+            <Toolbox showToolbox={showToolbox} onClickToDownload={onClickToDownload} onClickToOpenTelegramManager={onClickToOpenTelegramManager} onClickToOpenTelegramService={onClickToOpenTelegramService}/>
+          )}
         </div>
       </div>
 
