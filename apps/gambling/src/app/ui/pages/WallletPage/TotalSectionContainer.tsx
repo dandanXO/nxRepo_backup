@@ -12,6 +12,7 @@ import cx from "classnames";
 import {DownOutlined, QuestionCircleFilled, QuestionCircleOutlined, UpOutlined} from "@ant-design/icons";
 import {useEffect, useState} from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
+import { CocoTotalSectionContainer } from "./env/CocoTotalSectionContainer";
 
 const StyledTotalSectionContainer = styled.div`
   border-radius: 19px;
@@ -47,6 +48,10 @@ export const TotalSectionContainer = () => {
       setExpand(true)
     }
   }, [isMobile])
+
+  if (environment.assetPrefix === 'coco777bet') {
+    return <CocoTotalSectionContainer />
+  }
 
   return (
     <StyledTotalSectionContainer className={"flex flex-col text-white mb-6"}>
