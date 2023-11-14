@@ -132,15 +132,10 @@ export const DepositPanel = (props: IDepositPanel) => {
 
   return (
     <SectionContainer id={"deposit-section"}>
-      {isMobile && (
-        <TotalSectionContainer/>
-      )}
       <div className={tcx("text-main-primary-main text-base leading-5 text-left my-5", [`text-xl my-10`, !isMobile])}>
         Prezado usuário, quando o valor da primeira recarga ultrapassar 50 reais, você receberá até 20% de recompensa de recarga. A partir da segunda recarga, se o valor da recarga ultrapassar R$ 50, você receberá um bônus de recarga de até 10%! 6 vezes ao dia, quanto maior o valor da recarga, maior a proporção de presentes!
       </div>
-
       <section className={"flex flex-col w-full"}>
-
         <div className={tcx("relative",[`my-10`,!isMobile])}>
           {isMobile ? (
             <WithdrawMobileInput value={inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"} />

@@ -85,7 +85,7 @@ export const CocoTotalSectionContainer = () => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <StyledTotalSectionContainer className={"flex flex-col text-white mb-6"}>
+    <StyledTotalSectionContainer className={"flex flex-col text-white"}>
 
       <TotalSectionTopContent className={"flex-1 flex flex-col p-4 md:py-0 md:flex-row  justify-around items-center px-5 font-bold w-full relative"}>
 
