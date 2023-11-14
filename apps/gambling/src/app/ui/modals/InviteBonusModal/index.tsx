@@ -38,6 +38,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
 
         {/*<img alt="title" className={"w-[269px] h-[16px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>*/}
         <img alt="title" className={"w-[269px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>
+
         <div className={"text-white text-sm mt-2"}>Bônus de primeira recarga para usuários convidados</div>
 
         <div className={"w-full"}>

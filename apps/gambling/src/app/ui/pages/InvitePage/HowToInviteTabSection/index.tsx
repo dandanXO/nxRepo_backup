@@ -3,48 +3,15 @@ import styled from "styled-components";
 import copy from "copy-to-clipboard";
 import {notification} from 'antd';
 import {environment} from "../../../../../environments/environment";
+import {HowToImageContainer as PernambucanaHowToImageContainer} from "./env/pernambucana/HowToImageContainer";
+import {HowToImageContainer as CocoHowToImageContainer} from "./env/coco/HowToImageContainer";
+import {InviteCopySection as PernambucanaInviteCopySection} from "./env/pernambucana/InviteCopySection";
+import {InviteCopySection as CocoInviteCopySection} from "./env/coco/InviteCopySection";
+import shareListImg from "../HowToInviteTabSection/env/coco/share-list.png";
 
-const HowToImageContainer = styled.div`
-  position: relative;
-  background-image: url("assets/${environment.assetPrefix}/banner_1.png");
-  background-size: 1524px 423px;
-  //background-size: cover;
-  overflow: hidden;
-  border-radius: 8px;
+const InviteCopySection = environment.assetPrefix === "coco777bet" ? CocoInviteCopySection : PernambucanaInviteCopySection;
+const HowToImageContainer = environment.assetPrefix === "coco777bet" ? CocoHowToImageContainer : PernambucanaHowToImageContainer;
 
-  //width: 1524px;
-  //height: 423px;
-  //padding: 20px
-
-  display: flex;
-  flex-direction: column;
-
-  //background-image: url({{ section.settings.bgimg | image_url }});
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0;
-  //height: 350px;
-  min-height: 380px;
-
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-
-  padding: 20px;
-`;
-const BorderLinkButtonContainer = styled.div`
-  position: relative;
-  width: 95%; /* 如果要指定寬度，取消註釋此行 */
-  height: 60px;
-  margin: 1vw auto 4vw;
-  background-color: var(--white); /* 將 background-image 改為 background-color */
-  border-radius: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
 
 const GreenContainer = styled.div`
   padding: 40px;
@@ -69,17 +36,6 @@ const RedContainer = styled.div`
   color: var(--white);
 `;
 
-const CopyButton = styled.button`
-  width: 200px;
-  height: 60px;
-  background: var(--main-primary-main);
-  color: var(--main-primary-varient);
-  transition: all 0.2s;
-  cursor: pointer;
-  border-radius: 40px;
-  font-size: 24px;
-  font-weight: bold;
-`;
 const MyriadPro = styled.div`
   font-size: 44px;
   font-weight: bold;
@@ -108,7 +64,8 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
   return (
     <div className={'mb-[80px]'}>
-      <HowToImageContainer className={'px-10'}>
+
+      <HowToImageContainer className={'p-4'}>
         {contextHolder}
         <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.assetPrefix}/topTitle1.ed9276b2.png`}/>
         <img className={"display sm:hidden"} src={`assets/${environment.assetPrefix}/team_title-7d5515fe.png`}/>
@@ -136,26 +93,15 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
         <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={`assets/${environment.assetPrefix}/topTitle2.396e135e.png`}/>
         <img className={"mb-2 display sm:hidden"} src={`assets/${environment.assetPrefix}/invite-code-title-c456ebc9.png`}/>
 
-        <BorderLinkButtonContainer className={'mb-4 rounded-2xl p-2 sm:p-6'}>
-          <div className={'text-sm font-bold text-gray-700 text-black'}>
-            {props.inviteUrl}
-          </div>
-          <CopyButton
-            className={
-              'relative left-[24px] hidden h-[60px] w-[221px] sm:block'
-            }
-            onClick={onClickToCopy}
-          >
-            Cópia de
-          </CopyButton>
-        </BorderLinkButtonContainer>
+        <InviteCopySection inviteUrl={props.inviteUrl} onClickToCopy={onClickToCopy}/>
 
-        <CopyButton
-          className={'block h-[60px] w-[221px] sm:hidden'}
-          onClick={onClickToCopy}
-        >
-          Cópia de
-        </CopyButton>
+        {environment.assetPrefix === "coco777bet" ? (
+          <div className={"text-center"}>
+            <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
+            <img className={"mb-2"} src={shareListImg}/>
+          </div>
+        ): null}
+
       </HowToImageContainer>
 
       <QuestionContainer>

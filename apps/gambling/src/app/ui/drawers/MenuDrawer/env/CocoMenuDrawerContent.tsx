@@ -20,8 +20,7 @@ import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../persistant/localstorage";
 import { notification } from "antd";
 import copy from "copy-to-clipboard";
-
-
+import {InviteCopySection} from "../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
 
 export const CocoMenuDrawerContent = () => {
   const location = useLocation();
@@ -107,10 +106,7 @@ export const CocoMenuDrawerContent = () => {
           onClickToVipGrade();
         }}
       />
-      <div className="w-full text-center">
-        <p className="mt-4 text-[#ffd624] text-xs leading-none mb-2">Copie o link e cole-o no navegador do seu computador para abri-lo em seu computador</p>
-        <CopyLinkItem url={'https://coco777bet.com'} className={'rounded'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
-      </div>
+      <InviteCopySection/>
     </>
   )
 }
