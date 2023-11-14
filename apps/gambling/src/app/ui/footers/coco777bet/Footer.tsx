@@ -73,7 +73,7 @@ export const Footer = (props: IFooter) => {
               <section className={"flex flex-col items-start"}>
                 {/* 这里是你的内容 */}
                 <button
-                  className='relative h-[20px] text-[#16FF8F] w-full flex flex-row justify-between'
+                  className='relative h-[20px] w-full flex flex-row justify-between'
                   onClick={() => {
                     setFooterExpands({
                       ...footerExpands,
@@ -83,10 +83,10 @@ export const Footer = (props: IFooter) => {
                 >
                   <span className="relative z-10">Ajuda</span>
                   {!footerExpands.helpers ? <DownOutlined /> : <UpOutlined />}
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-[#16FF8F]" style={{ transform: 'translateY(50%)'}} />
+                  <div className="absolute bottom-0 left-0 w-full h-0.5" style={{ transform: 'translateY(50%)'}} />
                 </button>
                 {footerExpands.helpers === true && (
-                  <div className={"pl-4 flex flex-col items-start ml-6 text-[#16FF8F] mt-2"}>
+                  <div className={"pl-4 flex flex-col items-start ml-6 mt-2"}>
                     <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</div>
                     <div className={"h-[30px]"}>Termos de Servico</div>
                     <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</div>
@@ -150,7 +150,7 @@ export const Footer = (props: IFooter) => {
               </section>
 
               <section className={"flex flex-col gap-3 w-3/12 items-start"}>
-                <div className='text-gray-500'>Ajuda</div>
+                <div className=''>Ajuda</div>
                 <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                 <div>Termos de Servico</div>
                 <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
