@@ -3,7 +3,7 @@ import cx from "classnames";
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {GameTypeSectionList} from "../../../components/GameTypeSection";
-import {Input} from "../../../components/Input";
+import {Input} from "../../../components/Inputs/Input";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {environment} from "../../../../../environments/environment"

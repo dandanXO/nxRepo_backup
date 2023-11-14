@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import cx from "classnames"
 import {useState} from "react";
-import { tcx } from '../utils/tcx';
+import { tcx } from '../../utils/tcx';
 
 
 export const InputSection = styled.a<{

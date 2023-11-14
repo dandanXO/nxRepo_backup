@@ -11,9 +11,9 @@ import { BlueBoard } from './BlueBoard';
 import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';
 import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';
-import { RecordButton } from './index';
 import {TotalSectionContainer} from "./TotalSectionContainer";
 import cx from "classnames";
+import {RecordButton} from "../../components/Buttons/RecordButton";
 
 type IRecordPanel = {
   recordPanelMode: 'deposit' | 'withdraw';

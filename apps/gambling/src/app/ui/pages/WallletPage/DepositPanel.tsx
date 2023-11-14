@@ -1,7 +1,6 @@
-import { Input } from "../../components/Input";
+import { Input } from "../../components/Inputs/Input";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import { SectionContainer } from "../../components/SectionContainer";
-import { DepositConfirmButton } from "./index";
 import styled from "styled-components";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { depositData } from "./depositData";
@@ -9,12 +8,13 @@ import cx from "classnames";
 import { useNavigate } from "react-router";
 import { useEffect, useMemo, useState } from "react";
 import { BlueBoard } from "./BlueBoard";
-import { MobileInput } from "./MobileInput";
+import { WithdrawMobileInput } from "../../components/Inputs/WithdrawMobileInput";
 import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../external/RechargeInfoGetEndpoint";
 import { environment } from "../../../../environments/environment";
 import {ButtonPro, ProButton} from "../../components/Buttons/Button";
 import { tcx } from "../../utils/tcx";
 import {TotalSectionContainer} from "./TotalSectionContainer";
+import {DepositConfirmButton} from "../../components/Buttons/DepositConfirmButton";
 
 
 const Item = styled.div.attrs((props) => ({
@@ -143,7 +143,7 @@ export const DepositPanel = (props: IDepositPanel) => {
 
         <div className={tcx("relative",[`my-10`,!isMobile])}>
           {isMobile ? (
-            <MobileInput value={inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"} />
+            <WithdrawMobileInput value={inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"} />
           ) : (
             <Input value={inputValue} className={"w-full bg-white border-white"} themeStyle={"normal"} />
           )}

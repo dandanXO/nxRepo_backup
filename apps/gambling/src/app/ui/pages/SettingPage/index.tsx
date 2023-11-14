@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { Input, InputSection } from '../../components/Input';
+import { Input, InputSection } from '../../components/Inputs/Input';
 import { SectionContainer } from '../../components/SectionContainer';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../modals/EditUserInfoModal';

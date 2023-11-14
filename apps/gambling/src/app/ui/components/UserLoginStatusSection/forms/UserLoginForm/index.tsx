@@ -1,8 +1,8 @@
 import {PhoneSvg} from "../../PhoneSvg";
 import {KeySvg} from "../../KeySvg";
 import {ConfirmButton} from "../../../Buttons/ConfirmButton";
-import {Input as DesktopInput, InputValue} from "../../../Input";
-import {MobileInput} from "../../../MobileInput";
+import {Input as DesktopInput, InputValue} from "../../../Inputs/Input";
+import {MobileInput} from "../../../Inputs/MobileInput";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 import {useState} from "react";

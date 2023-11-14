@@ -4,7 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import {AppCarousel} from "../AppCarousel";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {GameTypeSectionList} from "../../../components/GameTypeSection";
-import {Input} from "../../../components/Input";
+import {Input} from "../../../components/Inputs/Input";
 // @ts-ignore
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
 import {useNavigate} from "react-router";

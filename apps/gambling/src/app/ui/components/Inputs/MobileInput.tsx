@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Input} from "./Input";
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 
 export const PernambucanaMobileInput = styled(Input)`

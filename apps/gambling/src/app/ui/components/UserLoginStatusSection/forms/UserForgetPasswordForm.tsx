@@ -3,8 +3,8 @@ import {KeySvg} from "../KeySvg";
 import {ConfirmButton} from "../../Buttons/ConfirmButton";
 import {CheckCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../hooks/useBreakpoint";
-import {Input as DesktopInput, Input, InputValue} from "../../Input";
-import {MobileInput} from "../../MobileInput";
+import {Input as DesktopInput, Input, InputValue} from "../../Inputs/Input";
+import {MobileInput} from "../../Inputs/MobileInput";
 import {useState} from "react";
 import {useForm} from "../../../hooks/useForm";
 import {

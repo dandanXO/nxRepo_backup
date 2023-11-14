@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import { useUpdateUserInfoMutation } from '../../../external';
 import { promiseHandler } from '../../../gateway/promiseHanlder';
 import { AppLocalStorage } from '../../../persistant/localstorage';
-import { Input as DesktopInput } from '../../components/Input';
-import { MobileInput } from '../../components/MobileInput';
+import { Input as DesktopInput } from '../../components/Inputs/Input';
+import { MobileInput } from '../../components/Inputs/MobileInput';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { IOpenNotificationWithIcon } from '../../pageTemplate';
 
