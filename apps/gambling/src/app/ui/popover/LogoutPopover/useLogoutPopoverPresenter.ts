@@ -5,7 +5,7 @@ export const useLogoutPopoverPresenter = () => {
     AppLocalStorage.removeItem("token");
     AppLocalStorage.removeItem("userInfo");
     AppLocalStorage.removeItem("kPhone");
-    AppLocalStorage.removeItem("kPassword");
+    // AppLocalStorage.removeItem("kPassword");
   }
   return {
     logout,

@@ -49,7 +49,7 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
       props.close();
     }}>
 
-      <Container className={" w-[338px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl text-white flex flex-col items-center relative"} onClick={(event) => {
+      <Container className={" w-[338px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl flex flex-col items-center relative"} onClick={(event) => {
         event.stopPropagation();
       }}>
 

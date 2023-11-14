@@ -56,3 +56,10 @@ export const RecordButton = (props: IRecordButton) => {
     </StyledRecordButton>
   )
 }
+export const RecordButton2 = styled.button`
+  width: 145px;
+  background: linear-gradient(60deg,rgba(51,120,238,.5) 0%,rgba(13,229,255,.5) 100%);
+  border-radius: 20px;
+  font-size: 16px;
+  border: 2px solid rgba(255,255,255,.3);
+`

@@ -259,8 +259,14 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.InvitePage} element={(
-            <PageTemplate showMobileHeader={false}>
-              <InvitePage />
+            <PageTemplate showMobileHeader={false} showFooter={false}>
+              <InvitePage/>
+            </PageTemplate>
+          )}/>
+
+          <Route path={PageOrModalPathEnum.InviteSettlementRecordPage} element={(
+            <PageTemplate>
+              <InviteSettlementRecordPage/>
             </PageTemplate>
           )}/>
 
@@ -325,11 +331,7 @@ export const AppRouter = () => {
               <TelegramPage/>
             </PageTemplate>
           )}/>
-          <Route path={PageOrModalPathEnum.InviteSettlementRecordPage} element={(
-            <PageTemplate>
-              <InviteSettlementRecordPage/>
-            </PageTemplate>
-          )}/>
+
           <Route path={PageOrModalPathEnum.GamePage} element={(
             <PageTemplate
               // common
