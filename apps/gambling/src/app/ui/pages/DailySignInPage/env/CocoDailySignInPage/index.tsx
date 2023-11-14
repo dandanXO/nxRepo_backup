@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { GetSignInConfigResponse } from "../../../../../external";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import CocoMobileDailySignInPage from "./CocoMobileDailySignInPage";
@@ -9,6 +9,9 @@ import styled from "styled-components";
 import { environment } from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
+import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -69,6 +72,7 @@ const DayTitle = styled.div`
 const VIPContainer = styled.div`
   margin: 6vw 6vw 5vw 20vw;
   background: #311159;
+  border: 3px solid #DD79F7;
   border-radius: 50px;
   transform: skew(-8deg);
 `
@@ -106,6 +110,118 @@ const ResponsiveContainer = styled.div`
   position: relative;
   z-index: 0;
 `
+
+const LevelButton = styled.button.attrs<{className?:string}>((props)=>({
+  className: props.className
+}))`
+  color: white;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: padding-box,border-box;
+  background-origin: padding-box,border-box;
+`
+
+const CurrentButton = styled(LevelButton)`
+  color: #ffe4c3;
+  background-image: linear-gradient(180deg,#7A120B,#D43824,#7A120B),linear-gradient(180deg,#FFB400,#B42206,#FFB400);
+`
+
+const OtherButton = styled(LevelButton)`
+  background-image: linear-gradient(180deg,#3E0A69,#3E0A69),linear-gradient(180deg,#7B2BBF,#7B2BBF);
+`
+const DisableButton = styled(CurrentButton) `
+  filter: grayscale(1);
+`
+
+const LevelItemWrapper = styled.div`
+  flex: 1 0 auto;
+`
+
+interface ICocoLevelListProps {
+  className?: string;
+  currentLevel: number;
+  currentSelectedLevel: number;
+  setCurrentSelectedLevel: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export const CocoLevelList = ({
+  className,
+  currentLevel,
+  currentSelectedLevel,
+  setCurrentSelectedLevel
+}: ICocoLevelListProps) => {
+  useAllowLoginRouterRules()
+  const { isMobile } = useBreakpoint()
+
+  const vips: number[] = [];
+
+  for (let i = 1; i <= 25; i += 1) {
+    vips.push(i);
+  }
+
+  const [initialPageX, setInitialPageX] = useState(0);
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  const handleMouseDown = (e: any) => {
+    setInitialPageX(e.pageX);
+  };
+
+  const handleMouseUp = (e: any) => {
+    setInitialPageX(0);
+  };
+
+  const handleMouseMove = (e: any) => {
+    if (initialPageX !== 0 && contentRef.current !== null) {
+      const leftOrRight = initialPageX - e.pageX;
+      contentRef.current.scrollLeft += leftOrRight;
+      setInitialPageX(e.pageX);
+    }
+  };
+
+
+  return (
+    <section
+      className={tcx('vip-tab-items flex overflow-auto w-full relative', className)}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseUp}
+      ref={contentRef}
+    >
+      {vips.map((level, index) => {
+        const isReachLevel = level === currentSelectedLevel
+        const LevelButton = level < currentLevel ? DisableButton: isReachLevel ? CurrentButton : OtherButton;
+
+        return (
+          <LevelItemWrapper
+            key={level}
+            className='w-[10%] p-0 min-w-[84px] mr-3 relative'
+          >
+            <LevelButton
+              className='text-lg h-9 flex justify-center items-center gap-2 w-full'
+              onClick={()=>setCurrentSelectedLevel(level)}
+            >
+              {
+                level >= currentLevel && (
+                  <div>
+                    {
+                      level === currentLevel ?
+                        <img alt='lock' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAATtJREFUOE+t008rRGEUx/HvL0RiZ2chZSE2Ulds5AWwsrC0mEkje1n5Ezt7k8YbUGzIK7AyKWLDRrG2oqZQjo7u1fQ09xpzPau7+J3Pvfec84h/OspyzGwAOAQMWJD0lJZPhcysDTgHpuJif56R9NkIy4I2gM2gaFXSbkMofvMocCfp3UNmNhl/TXtQ9AZEkm7jXCcwAtzIzE6AOeAR2AGOgSowlNKPa2AaWATWgH7gzKFXoKeuqAZ0/zLMMFNz6AKYyLkFVYf2gOWcUNmhAnCQEyo6NAZc5YTGHeoAXoCuFjFfid7vhTQzH3cUQKfxQvr18OPZLWA2yF1KihKoDJSCgE/TB1EPrTSY8L6kUgIVgUqLv7YkqZJAg8A94P36y/kAhiU9/FxaM5sHtoG+JqVnYF3SUdLAJuuyY1+4I2ifqehT2wAAAABJRU5ErkJggg=='/>
+                        : <img alt='lock' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAARlJREFUOE/t07ErhVEYx/HvV2wmZZT4GyjJIEySv8AkShlEMYmQQSluKZvNYJYJGVCsNiO7RSbRo1svvfd47/Xe3dnO8z7P57z9OkfqrIgYB5aBPiCAa2BLvSsasagYEUvALpB+/wCm1JN07hcUET3AI9AG3AB7QCuwAAwCr0Cv+pLHiqB54CAb6FKrg0REO/AEdGR/dfwXtAZsAPfqQL45Iq6AYWBR3S8L3apDCXQOjJWFpoEZ4EGdS6AK0A9U0sBrMoqI7izkerciX39Xn78LP1BE7AArZYRcz7q6Wd3noUtgpEnoTJ34hxqmVpjRBTDaZNin6mQa9iFQcwFLoNvqagp1AkfZC2/5A/kEqs9lVn2rgUqc3rDlC5IRchOtsAplAAAAAElFTkSuQmCC'/>
+                    }
+                  </div>
+                )
+              }
+              <div className={isMobile?'italic':''}>{isMobile?'VIP':'LV'}{level}</div>
+            </LevelButton>
+          </LevelItemWrapper>
+        )
+      })}
+    </section>
+  )
+}
+
+
 
 const days: number[] = [];
 
@@ -150,7 +266,7 @@ const DayList = ({
           const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
 
           return (
-            <DayItemWrapper>
+            <DayItemWrapper key={day}>
               <DayItem className={tcx(['opacity-60', checked])}>
                 <DayTitle>
                   Dia{day}
@@ -215,6 +331,10 @@ const CocoDailySignInPage = ({
 
   const disableButton = vipLevel === 0 || todayIsSignIn
 
+  const {
+    onClickToIndex
+  } = usePageNavigate();
+
   if (isMobile) {
     return (
       <CocoMobileDailySignInPage
@@ -233,13 +353,8 @@ const CocoDailySignInPage = ({
   return (
     <div>
       {contextHolder}
-      <button
-        className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
-        onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}
-      >
-        <LeftOutlined />
-        <div>Retornar</div>
-      </button>
+
+      <BackNavigation onClick={() => onClickToIndex()}/>
 
       <VIPContainer>
         <StraightContainer className='flex relative'>
@@ -252,6 +367,16 @@ const CocoDailySignInPage = ({
             </VIPRightTitle>
 
             <VIPRightContent>
+
+              <div className='ml-[2vw]'>
+                <CocoLevelList
+                  className='font-bold'
+                  currentLevel={vipLevel}
+                  currentSelectedLevel={currentSelectedLevel}
+                  setCurrentSelectedLevel={setCurrentSelectedLevel}
+                />
+              </div>
+
               <DayList
                 currentSelectedLevel={currentSelectedLevel}
                 signInAllConfig={signInAllConfig || []}

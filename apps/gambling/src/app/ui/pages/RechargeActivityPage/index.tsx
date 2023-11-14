@@ -6,6 +6,8 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../environments/environment";
 import { ChargeButton } from "../../components/Buttons/ChargeButton";
 import useBreakpoint from "../../hooks/useBreakpoint";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 
 const Bonus = styled.div`
   text-shadow: 0px 4px 0px #D60404;
@@ -29,9 +31,11 @@ export const RechargeActivityPage = () => {
   useAllowLoginRouterRules();
   const navigate = useNavigate();
   const {isMobile} = useBreakpoint();
+  const {onClickToIndex} = usePageNavigate();
 
   return (
       <>
+        <BackNavigation onClick={() => onClickToIndex()}/>
         <div className={"px-0 sm:px-10 w-full"}>
           <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8 mt-4"}>
             {isMobile ? (

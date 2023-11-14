@@ -61,9 +61,9 @@ export const RecordPanel = (props: IRecordPanel) => {
     <SectionContainer id={'record-section'}>
       {/*{isMobile && <BlueBoard />}*/}
 
-      {isMobile && (
+      {/* {isMobile && (
         <TotalSectionContainer/>
-      )}
+      )} */}
 
       <section className={cx('button-list flex flex-row mb-5',{"md:mb-10":!isMobile})}>
         <RecordButton

@@ -7,15 +7,18 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 
 export type IFooter = {
-  showFooter?: boolean;
+  // showFooter?: boolean;
   showTabbar?: boolean;
+  showMobileFooter?: boolean;
+  showDesktopFooter?: boolean;
 }
 
 export const Footer = (props: IFooter) => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
 
-  const isShowFooter = props.showFooter === undefined ? true : props.showTabbar;
+  const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
+  const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
 
   // NOTE: mobile footer expands
   const [footerExpands, setFooterExpands] = useState({
@@ -25,11 +28,10 @@ export const Footer = (props: IFooter) => {
   // NOTE: mobile
   const [footerTextExpand, setFooterTextExpand] = useState(false)
 
-  if(!isShowFooter) return;
 
   return (
     <>
-      {isMobile ? (
+      {isMobile && isShowMobileFooter? (
         <div className={cx(
           'flex justify-center text-white p-4 pb-[80px]',
           "bg-[var(--main)]",
@@ -135,7 +137,7 @@ export const Footer = (props: IFooter) => {
             </section>
           </div>
         </div>
-      ): (
+      ): isShowDesktopFooter ? (
         <div className='bg-[var(--main)] text-white flex justify-center'>
           {/*h-[400px]*/}
           <div className={"flex gap-3 w-11/12 mt-3"}>
@@ -190,7 +192,7 @@ export const Footer = (props: IFooter) => {
               </section>
             </div>
           </div>
-      )}
+      ): null}
     </>
   )
 }
