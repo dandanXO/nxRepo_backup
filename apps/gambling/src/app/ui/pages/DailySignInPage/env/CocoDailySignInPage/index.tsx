@@ -8,6 +8,31 @@ import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import styled from "styled-components";
 import { environment } from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
+import { notification } from "antd";
+
+const SignInButton = styled.div<{
+  disable: boolean
+}>`
+  position: relative;
+  width: 20%;
+  margin: 0 auto;
+  min-width: 190px;
+  cursor: pointer;
+  filter: grayscale(${(props)=>props.disable?100:0}%);
+`
+
+const SignInInfoContainer = styled.div`
+  transform: skew(-8deg);
+  padding: .8vw 1vw;
+  background: #FFC937;
+  box-shadow: 0 3px 0 1px rgba(185,9,76,.35);
+  border-radius: 10px;
+  margin: 1.6vw 3vw 0 2px;
+`
+
+const StraightContainer = styled.div`
+  transform: skew(8deg);
+`
 
 const DayListContainer = styled.div`
   margin: 1.2vw;
@@ -41,23 +66,11 @@ const DayTitle = styled.div`
   color: white;
 `
 
-const DayMoneyText = styled.div`
-  transform: skew(8deg);
-  word-break: break-all;
-  line-height: normal;
-`
-
 const VIPContainer = styled.div`
   margin: 6vw 6vw 5vw 20vw;
   background: #311159;
   border-radius: 50px;
   transform: skew(-8deg);
-`
-
-const VIPContent = styled.div`
-  display: flex;
-  position: relative;
-  transform: skew(8deg);
 `
 
 const VIPRight = styled.div`
@@ -134,9 +147,7 @@ const DayList = ({
             (dayConfig: any) => dayConfig.days === day
           );
 
-          // const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
-          const checked = currentSelectedLevel === 1 && index + 1 <= 2;
-          // const checked = true
+          const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
 
           return (
             <DayItemWrapper>
@@ -162,7 +173,7 @@ const DayList = ({
                         )
                       }
                     </div>
-                    <DayMoneyText className='text-base font-bold text-[#561a99] text-center py-2 px-1 w-full'>R${config?.cashback}</DayMoneyText>
+                    <StraightContainer className='break-all leading-normal text-base font-bold text-[#561a99] text-center py-2 px-1 w-full'>R${config?.cashback}</StraightContainer>
                   </div>
                 </div>
               </DayItem>
@@ -200,6 +211,9 @@ const CocoDailySignInPage = ({
 
   const navigate = useNavigate();
   const { isMobile } = useBreakpoint();
+  const [notice, contextHolder] = notification.useNotification();
+
+  const disableButton = vipLevel === 0 || todayIsSignIn
 
   if (isMobile) {
     return (
@@ -218,6 +232,7 @@ const CocoDailySignInPage = ({
 
   return (
     <div>
+      {contextHolder}
       <button
         className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
         onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}
@@ -227,7 +242,7 @@ const CocoDailySignInPage = ({
       </button>
 
       <VIPContainer>
-        <VIPContent>
+        <StraightContainer className='flex relative'>
           <VIPRight>
             <VIPRightTitle>
               <ResponsiveContainer>
@@ -245,7 +260,41 @@ const CocoDailySignInPage = ({
                 todayIsSignIn={todayIsSignIn || false}
                 vipLevel={vipLevel || 0}
               />
+
+              <SignInInfoContainer>
+                <StraightContainer className='font-bold text-xl text-[#cc1d00]'>Regras de recompensa diária VIP：</StraightContainer>
+                <StraightContainer className='text-[#cc1d00] mt-[10px] text-lg font-bold'>
+                  · Cada nível só pode receber recompensas por 7 dias no total. As recompensas serão creditadas na próxima vez que você as reivindicar.
+                  <br/>
+                  · Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
+                </StraightContainer>
+              </SignInInfoContainer>
             </VIPRightContent>
+
+            <SignInButton
+              disable={disableButton}
+              onClick={()=> {
+                setCurrentSelectedLevel(vipLevel || 0)
+                if(todayIsSignIn) {
+                  notice.error({
+                    message: "Você concluiu o check-in hoje"
+                  })
+                  return;
+                }
+                if(disableButton) {
+                  notice.error({
+                    message: "O VIP 0 temporariamente não suporta"
+                  })
+                  return;
+                }else {
+                  onClickToSignIn();
+                }
+              }}
+            >
+              <img alt='signInButton' src={`assets/${environment.assetPrefix}/daily_sign_in_button.png`}/>
+            </SignInButton>
+
+            <div className='mt-3 mb-[30px] my-auto text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </VIPRight>
 
           <button className='absolute bottom-[6%] right-[7%] text-white text-xl'>{'visualizar registros >'}</button>
@@ -261,7 +310,7 @@ const CocoDailySignInPage = ({
             </ResponsiveContainer>
           </VIPIcon>
 
-        </VIPContent>
+        </StraightContainer>
       </VIPContainer>
     </div>
   )
