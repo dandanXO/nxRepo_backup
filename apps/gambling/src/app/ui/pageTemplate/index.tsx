@@ -25,6 +25,7 @@ import {NotificationDrawer} from "../drawers/NotificationDrawer";
 import {LogoutPopover} from "../popover/LogoutPopover";
 import {TelegramContactModal} from "../modals/TelegramContactModal";
 import {InviteBonusModal} from "../modals/InviteBonusModal";
+import {LogoutModal} from "../modals/LogoutModal";
 
 
 console.log("environment", environment);
@@ -199,7 +200,6 @@ export const PageTemplate = (props: IPage) => {
   // console.log("location", location);
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
 
-
   const onClickToOpenTelegramService = () => {
     window.open(telegramServiceUrl,'_blank')
   }
@@ -287,20 +287,16 @@ export const PageTemplate = (props: IPage) => {
         </PernambucanaPageTemplate>
       )}
 
-      {/*refactor: openNotificationWithIcon*/}
-      {/*{showUserLoginStatusMobileModal && (*/}
+      {/*Login*/}
       {isMobile && isShowLoginModal && (
         <UserLoginStatusModal
           openNotificationWithIcon={openNotificationWithIcon}
           close={() => {
-            // setShowUserLoginStatusMobileModal(false)
             showLoginModal(false)
           }}
           setIsLogin={(login: boolean) => setIsLogin(login)}
         />
       )}
-
-      {/*{openNonMobileUserLoginStatusDrawer && (*/}
       {!isMobile && isShowLoginModal && (
         <UserLoginStatusDrawers
           openNotificationWithIcon={openNotificationWithIcon}
@@ -312,9 +308,13 @@ export const PageTemplate = (props: IPage) => {
         />
       )}
 
-      {openDownloadModal && (
-        <DownloadModal close={() => {
-          setOpenDownloadModal(false)
+      {/*Logout*/}
+      {isMobile && isShowMobileLogoutModal && (
+        <LogoutModal/>
+      )}
+      {!isMobile && isShowMobileLogoutModal && (
+        <LogoutPopover close={() => {
+          setOpenLogoutPopover(false);
         }}/>
       )}
 
@@ -328,12 +328,6 @@ export const PageTemplate = (props: IPage) => {
         }}/>
       )}
 
-      {!isMobile && isShowMobileLogoutModal && (
-        <LogoutPopover close={() => {
-          setOpenLogoutPopover(false);
-        }}/>
-      )}
-
       {isShowTelegramModal && (
         <TelegramContactModal close={() => {
           dispatch(appSlice.actions.setShowTelegramModal(false))
@@ -343,6 +337,7 @@ export const PageTemplate = (props: IPage) => {
         }}/>
       )}
 
+      {/*比 TelegramContactModal 還上層*/}
       {isShowInviteBonusModal && (
         <InviteBonusModal
           close={() => {
@@ -353,6 +348,17 @@ export const PageTemplate = (props: IPage) => {
             navigate(PageOrModalPathEnum.InvitePage);
           }}/>
       )}
+
+
+
+      {/*Download*/}
+      {openDownloadModal && (
+        <DownloadModal close={() => {
+          setOpenDownloadModal(false)
+        }}/>
+      )}
+
+
     </>
   )
 
