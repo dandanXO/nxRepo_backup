@@ -74,7 +74,7 @@ export const CocoSettingPage = ({
           </div>
         }/>
 
-        <ListItem title={
+        <ListItem isEnd={true} title={
           <div className={"w-full flex flex-row justify-between items-center"}>
             <div className={"flex flex-row justify-center items-center"}>
               <InfoCircleOutlined className={"mr-2"}/>
@@ -82,12 +82,13 @@ export const CocoSettingPage = ({
             </div>
             <div>{"1.0.1"}</div>
           </div>
-        }/>
+        }
+        />
 
       </List>
 
       <List className={"bg-[#3F28AC]"}>
-        <ListItem title={
+        <ListItem isEnd={true} title={
             <div className={"w-full flex flex-row justify-between items-center"}>
               <div className={"flex flex-row justify-center items-center"}>
                 <InfoCircleOutlined className={"mr-2"}/>
@@ -95,7 +96,7 @@ export const CocoSettingPage = ({
               </div>
             </div>
           }
-        onClick={() => navigate('/privacy-agreement')}
+          onClick={() => navigate('/privacy-agreement')}
         />
       </List>
 
