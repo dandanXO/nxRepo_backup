@@ -245,9 +245,9 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         {/*{isMobile && (*/}
         {/*  <BlueBoard/>*/}
         {/*)}*/}
-        {isMobile && (
+        {/* {isMobile && (
           <TotalSectionContainer/>
-        )}
+        )} */}
 
 
 
