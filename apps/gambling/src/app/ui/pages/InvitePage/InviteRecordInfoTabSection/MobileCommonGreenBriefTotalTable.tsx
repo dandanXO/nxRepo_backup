@@ -12,24 +12,20 @@ export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
 
       <div className={"flex flex-row justify-between  mb-2"}>
         <div className={"flex flex-col"}>
-          <span className={"text-2xl text-[#ffffff]"}
-                style={{fontWeight: 'bold'}}>R$ {props.data.totalReward || 0.00}</span>
-          <span className="text-sm" style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>Prêmio total</span>
+          <span className={"text-xl text-[#ffffff]"}>R$ {props.data.totalReward || 0.00}</span>
+          <span className="text-sm">Prêmio total</span>
         </div>
 
         <div className={"flex flex-col"}>
-          <span className={"text-2xl text-[#ffffff]"}
-                style={{fontWeight: 'bold'}}>R$ {props.data.paidReward || 0.00}</span>
-          <span className="text-sm"
-                style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.8)'}}>Bônus já liquidados</span>
+          <span className={"text-xl text-[#ffffff]"}>R$ {props.data.paidReward || 0.00}</span>
+          <span className="text-sm">Bônus já liquidados</span>
         </div>
       </div>
 
       <div className={"text-center flex flex-col"}>
-        <span className={"text-2xl text-[#ffffff]"}
-              style={{fontWeight: 'bold'}}>R$ {props.data.waitForCalReward || 0.00}</span>
-        <span className="text-sm" style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>
-            <span>Bônus aguardando liquidação<br/>(Atualizar a cada 24 horas)</span>
+        <span className={"text-xl text-[#ffffff]"}>R$ {props.data.waitForCalReward || 0.00}</span>
+        <span className="text-sm">
+            <span>Bônus aguardando liquidação(Atualizar a cada 24 horas)</span>
           </span>
       </div>
 

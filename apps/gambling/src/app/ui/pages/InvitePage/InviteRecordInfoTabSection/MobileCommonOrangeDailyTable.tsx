@@ -37,21 +37,19 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
       </div>
       <div className={"flex flex-col mb-2 mt-2"}>
         <span className={"text-2xl text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].totalReward || 0.00}</span>
-        <span className="font-hairline"
-              style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>Obter bônus</span>
+        <span className="font-hairline">Obter bônus</span>
       </div>
 
       {props.type === "1" && (
         <div className={"flex flex-row justify-between mb-2"}>
           <div className={"flex flex-col"}>
             <span className={"text-lg text-[#ffffff]"}>{props.records && props.records[0] && props.records[0].numRecharge || 0.00}</span>
-            <span className="font-hairline" style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>Usuário de recarga</span>
+            <span className="font-hairline">Usuário de recarga</span>
           </div>
 
           <div className={"flex flex-col"}>
             <span className={"text-lg text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].firstRecharge || 0.00}</span>
-            <span className="font-hairline"
-                  style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>Obter bônus</span>
+            <span className="font-hairline">Obter bônus</span>
           </div>
         </div>
       )}
@@ -59,13 +57,12 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
       <div className={"flex flex-row justify-between mb-2"}>
         <div className={"flex flex-col"}>
           <span className={"text-lg text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRecharge || 0.00}</span>
-          <span className="font-hairline" style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>Valor da transação do jogo</span>
+          <span className="font-hairline">Valor da transação do jogo</span>
         </div>
 
         <div className={"flex flex-col"}>
           <span className={"text-lg text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || "0.00"}</span>
-          <span className="font-hairline"
-                style={{fontWeight: 'bold', color: 'rgba(255, 255, 255, 0.75)'}}>Obter bônus</span>
+          <span className="font-hairline">Obter bônus</span>
         </div>
       </div>
 
