@@ -9,7 +9,7 @@ type IProps = {
 }
 export const BackNavigation = (props: IProps) => {
   return (
-    <div className={"ml-2 mt-2 mb-2 text-xl text-left text-white"}>
+    <div className={"ml-3 mt-3 mb-3 text-xl text-left text-white"}>
       <button
         // className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
         className={'mb-2 flex flex-row items-center'}
