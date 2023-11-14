@@ -5,6 +5,6 @@ type IProps = {
 }
 export const ListHeader = (props: IProps) => {
   return (
-    <div className='p-3 text-[#ffb413]'>{props.children}</div>
+    <div className='p-3 text-[#ffb413] border-b-[0.1px] border-black border-opacity-10'>{props.children}</div>
   )
 }
