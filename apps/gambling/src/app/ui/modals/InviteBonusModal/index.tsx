@@ -1,13 +1,15 @@
 import {useNavigate} from "react-router";
 import {environment} from "../../../../environments/environment";
-import {Container as Pernambucana} from "./env/pernambucana/Container";
-import {Container as Coco} from "./env/coco/Container";
+import {Container as PernambucanaContainer} from "./env/pernambucana/Container";
+import {Container as CocoContainer} from "./env/coco/Container";
 import {EarnButton} from "../../components/Buttons/EarnButton";
 import {InviteButton} from "../../components/Buttons/InviteButton";
-import {Item} from "./env/pernambucana/Item";
-import {MoneyButton} from "./env/pernambucana/MoneyButton";
 
-const Container = environment.assetPrefix == "coco777bet" ? Coco : Pernambucana;
+import {Item as PernambucanaItem} from "./env/pernambucana/Item";
+import {Item as CocoItem} from "./env/coco/Item";
+
+const Item = environment.assetPrefix === "coco777bet" ? CocoItem : PernambucanaItem;
+const Container = environment.assetPrefix === "coco777bet" ? CocoContainer : PernambucanaContainer;
 
 export type IInitialChargeModal = {
   close: () => void;
@@ -15,7 +17,6 @@ export type IInitialChargeModal = {
 }
 
 export const InviteBonusModal = (props: IInitialChargeModal) => {
-  const navigate = useNavigate();
   return (
     <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event) => {
       props.close();
@@ -24,7 +25,6 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
       <Container className={" w-[340px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl text-white flex flex-col items-center relative"} onClick={(event) => {
         event.stopPropagation();
       }}>
-
         <div className={"flex flex-row justify-end mb-2 absolute right-[10px] top-[18px]"}>
           <button onClick={() => {
             props.close();
@@ -36,60 +36,16 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
         </div>
 
 
-        <img alt="title" className={"w-[269px] h-[16px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>
+        {/*<img alt="title" className={"w-[269px] h-[16px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>*/}
+        <img alt="title" className={"w-[269px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>
         <div className={"text-white text-sm mt-2"}>Bônus de primeira recarga para usuários convidados</div>
 
         <div className={"w-full"}>
 
           <div className={"flex flex-col w-full mb-2"}>
-            <Item>
-              <div className={"left flex flex-col"}>
-                <div className={"font-bold text-lg text-main-primary-main"}>Convidar 1-10</div>
-                <div className={"text-bold text-lg text-main-primary-main"}>Prêmio</div>
-              </div>
-              <div className={"right"}>
-                <MoneyButton className={"money-button"}>
-                  <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
-                  <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: 'var(--dashboard-block2)',
-                    textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
-                  }}>10</span>
-                </MoneyButton>
-              </div>
-            </Item>
-
-            <Item>
-              <div className={"left flex flex-col"}>
-                <div className={"font-bold text-lg text-main-primary-main"}>Convidar 11-24</div>
-                <div className={"text-bold text-lg text-main-primary-main"}>Prêmio</div>
-              </div>
-              <div className={"right"}>
-                <MoneyButton className={"money-button"}>
-                  <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
-                  <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: 'var(--dashboard-block2)',
-                    textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
-                  }}>15</span>
-                </MoneyButton>
-              </div>
-            </Item>
-
-            <Item>
-              <div className={"left flex flex-col"}>
-                <div className={"font-bold text-lg text-main-primary-main"}>{"Convidar > 25"}</div>
-                <div className={"text-bold text-lg text-main-primary-main"}>Prêmio</div>
-              </div>
-              <div className={"right"}>
-                <MoneyButton className={"money-button"} style={{ border: '1px solid white' }}>
-                  <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
-                  <span className={"ml-2 font-bold text-lg money-value"} style={{
-                    color: 'var(--dashboard-block2)',
-                    textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
-                  }}>20</span>
-
-                </MoneyButton>
-              </div>
-            </Item>
+            <Item title={"Convidar 1-10"} money={10}/>
+            <Item title={"Convidar 11-24"} money={15}/>
+            <Item title={"Convidar > 25"} money={20}/>
           </div>
 
           <div className={"flex flex-row justify-between items-center text-sm"}>

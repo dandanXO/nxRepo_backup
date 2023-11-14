@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import cx from "classnames";
+import {environment} from "../../../../../../environments/environment";
 
-export const MoneyButton = styled.div.attrs((props) => ({
+const StyledMoneyButton = styled.div.attrs((props) => ({
   className: cx("flex flex-row justify-center items-center", props.className)
 }))<{
   className?: string;
@@ -23,3 +24,20 @@ export const MoneyButton = styled.div.attrs((props) => ({
   //text-shadow: 0px 1px 0px #7D0403;
   //margin-top: -15px;
 `
+
+type IMoneyButton = {
+  money: number;
+}
+export const MoneyButton = (props: IMoneyButton) => {
+  return (
+    <StyledMoneyButton>
+      <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
+      <span
+        className={"ml-2 font-bold text-lg money-value text-[var(--dashboard-block2)]"}
+        style={{
+          textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
+        }}
+      >{props.money}</span>
+    </StyledMoneyButton>
+  )
+}

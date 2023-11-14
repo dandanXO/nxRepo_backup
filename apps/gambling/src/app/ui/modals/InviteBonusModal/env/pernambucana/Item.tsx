@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Item = styled.div.attrs({
+import {MoneyButton} from "./MoneyButton";
+
+const StyledItem = styled.div.attrs({
   className: "relative w-full flex flex-row justify-between text-left item-center",
 })`
   //width: 94%;
@@ -15,3 +17,21 @@ export const Item = styled.div.attrs({
 
   text-shadow: 0px 1px 0px #042A85;
 `
+
+type IItem = {
+  title: string;
+  money: number;
+}
+export const Item = (props: IItem) => {
+  return (
+    <StyledItem>
+      <div className={"left flex flex-col"}>
+        <div className={"font-bold text-lg text-main-primary-main"}>{props.title}</div>
+        <div className={"text-bold text-lg text-main-primary-main"}>Prêmio</div>
+      </div>
+      <div className={"right"}>
+        <MoneyButton money={props.money}/>
+      </div>
+    </StyledItem>
+  )
+}
