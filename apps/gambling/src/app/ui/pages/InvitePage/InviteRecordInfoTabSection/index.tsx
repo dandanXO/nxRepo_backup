@@ -1,37 +1,16 @@
 import {useEffect, useState} from "react";
-import styled from "styled-components";
-import {TabItem, Tabs} from "../../../components/TabItem";
-import {QuestionContainer} from "../index";
-import {DesktopColorfulBoard} from "./DesktopColorfulBoard";
 import useBreakpoint from "../../../hooks/useBreakpoint";
-import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {
   GetInviteRewardDataResponse,
   GetUnsettleInviteRewardDataResponse,
   useLazyGetInviteUserDayReportDataQuery
 } from "../../../../external/index";
-import {DesktopTotalType} from "./DesktopTotalType";
 import moment from "moment";
-import {MobileCommonBlueTable} from "./MobileCommonBlueTable";
-import {MobileCommonOrangeTable} from "./MobileCommonOrangeTable";
-import {MobileCommonGreenTable} from "./MobileCommonGreenTable";
+
 import {AppLocalStorage} from "../../../../persistant/localstorage";
-import {DesktopDailyType} from "./DesktopDailyType";
+import {MobilePanel} from "./MobilePanel";
+import {DesktopPanel} from "./DesktopPanel";
 
-const RecordButton = styled.button`
-  width: 145px;
-  background: linear-gradient(60deg,rgba(51,120,238,.5) 0%,rgba(13,229,255,.5) 100%);
-  border-radius: 20px;
-  font-size: 16px;
-  border: 2px solid rgba(255,255,255,.3);
-`
-
-const GreenHRline = styled.div`
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg,transparent,#FFF600,#4FFB0C,transparent);
-`
 
 export interface ITabType {
   type: "1" | "2" | "3";
@@ -56,7 +35,7 @@ interface IInviteRecordInfoTabSection {
 
 export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) => {
     const {isMobile} = useBreakpoint();
-    const navigate = useNavigate();
+
     const [totalPanelMode, setTotalPanelMode] = useState<"1" | "2" | "3">("1");
     const [dailyPanelMode, setDailyPanelMode] = useState<"1" | "2" | "3">("1");
     const [mobileTotalPanelMode, setMobileTotalPanelMode] = useState<"1" | "2" | "3">("1");
@@ -197,7 +176,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
 
     const dailyData = inviteUserDay?.data?.records.map((z: any) => {
         const dataType = isMobile ? mobileDailyPanelMode : dailyPanelMode
-      console.log("dailyData0", dataType);
+        // console.log("dailyData0", dataType);
 
         const dividendos = (() => {
           if(dataType === "1") {
@@ -211,7 +190,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
             return z.rewd3Reward
           }
         })()
-      console.log("dailyData1", dailyData);
+        // console.log("dailyData1", dailyData);
 
         // 當天總邀請獎勵
         const totalReward = (() => {
@@ -226,19 +205,19 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
             return (z.flow3Reward / 100).toFixed(2);
           }
         })()
-      console.log("dailyData2", totalReward);
+        // console.log("dailyData2", totalReward);
 
         // 當天有充值過的邀請人數
         // NOTICE: 2.3 級沒有這數據
         // z.num1Recharge
         const numRecharge = dataType === "1" ? z.num1Recharge : 0;
 
-      console.log("dailyData3", numRecharge);
+        // console.log("dailyData3", numRecharge);
         // 當天有產生首充邀請獎勵
         // NOTICE: 2.3 級沒有這數據
         // z.firstRechargeReward
         const firstRecharge = dataType === "1" ? Number(z.firstRechargeReward / 100).toFixed(2) : 0;
-      console.log("dailyData4", firstRecharge);
+        // console.log("dailyData4", firstRecharge);
 
         // 當天邀請玩家的總流水
         const gameRecharge = (() => {
@@ -253,7 +232,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
             return (z.flow3 / 100).toFixed(2)
           }
         })()
-      console.log("dailyData5", gameRecharge);
+        // console.log("dailyData5", gameRecharge);
         // 當天邀請玩家的總流水獎金
         const gameRechargeReward = (() => {
           if(dataType === "1") {
@@ -267,100 +246,18 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
             return (z.flow3Reward / 100).toFixed(2)
           }
         })()
-      console.log("dailyData6", gameRechargeReward);
+        // console.log("dailyData6", gameRechargeReward);
         return { numRecharge, firstRecharge, gameRecharge, gameRechargeReward, totalReward, dividendos }
     })
-  console.log("dailyData", dailyData);
+    // console.log("dailyData", dailyData);
+
   return (
     <div className={"mb-[80px]"}>
-
       {isMobile ? (
-        <div>
-          <section className={"mb-4"}>
-            <MobileCommonGreenTable data={totalRewardData}/>
-            <GreenHRline className={"my-4"}/>
-          </section>
-
-          <section className={"mb-4"}>
-            <div className={"text-[#4E91EF] font-bold text-lg text-left mb-2"}>Dados totais<span className={"text-xs"}>(Atualize a cada 30 minutos)</span></div>
-            <MobileCommonBlueTable isProxy={isProxy} data={totalInviteData} type={mobileTotalPanelMode} onClick={(type) => setMobileTotalPanelMode(type as "1" | "2" | "3")} />
-          </section>
-
-          <section className={"mb-4"}>
-            <div className={"text-[#EE9544] font-bold text-lg text-left mb-2"}>Dados diários<span className={"text-xs"}>(Atualize a cada 30 minutos)</span></div>
-            <MobileCommonOrangeTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} />
-          </section>
-        </div>
+        <MobilePanel isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} mobileTotalPanelMode={mobileTotalPanelMode} setMobileTotalPanelMode={setMobileTotalPanelMode} dailyData={dailyData} mobileDailyPanelMode={mobileDailyPanelMode} setMobileDailyPanelMode={setMobileDailyPanelMode}/>
       ) : (
-        <QuestionContainer>
-          <DesktopColorfulBoard data={totalRewardData}/>
-
-          <section className={"flex flex-row justify-end mb-4"}>
-            <RecordButton onClick={() => {
-              navigate(PageOrModalPathEnum.InviteSettlementRecordPage);
-            }} className={"text-white px-4 py-2"}>Registro</RecordButton>
-          </section>
-
-          <section>
-            <div className={"text-left text-white text-lg mb-2"}>Dados totals</div>
-
-            <div className={"flex flex-row justify-between items-center"}>
-
-              <div className={"w-[510px] mb-4"}>
-                <Tabs className={"game-type-tab-list"}>
-                  <TabItem name={"Promoção nível 1"} active={totalPanelMode === "1"} size={"auto"} onClick={() => {
-                    setTotalPanelMode("1")
-                  }}
-                  />
-                  <TabItem name={"Promoção nível 2"} active={totalPanelMode === "2"} size={"auto"} onClick={() => {
-                    setTotalPanelMode("2")
-                  }}/>
-                  <TabItem name={"Promoção nível 3"} active={totalPanelMode === "3"} size={"auto"} onClick={() => {
-                    setTotalPanelMode("3")
-                  }}/>
-                </Tabs>
-              </div>
-
-              <div className={"text-white"}>Atualize a cada 30 minutos</div>
-            </div>
-
-            <div className={"mb-4"}>
-              <DesktopTotalType isProxy={isProxy} type={totalPanelMode} data={totalInviteData}/>
-            </div>
-
-          </section>
-
-          <section>
-            <div className={"text-left text-white text-lg mb-2"}>Dados diários</div>
-
-            <div className={"flex flex-row justify-between items-center"}>
-
-              <div className={"w-[510px] mb-4"}>
-                <Tabs className={"game-type-tab-list"}>
-                  <TabItem name={"Promoção nível 1"} active={dailyPanelMode === "1"} size={"auto"} onClick={() => {
-                    setDailyPanelMode("1")
-                  }}
-                  />
-                  <TabItem name={"Promoção nível 2"} active={dailyPanelMode === "2"} size={"auto"} onClick={() => {
-                    setDailyPanelMode("2")
-                  }}/>
-                  <TabItem name={"Promoção nível 3"} active={dailyPanelMode === "3"} size={"auto"} onClick={() => {
-                    setDailyPanelMode("3")
-                  }}/>
-                </Tabs>
-              </div>
-
-              <div className={"text-white"}>Atualize a cada 30 minutos</div>
-            </div>
-
-            <div className={"mb-4"}>
-              <DesktopDailyType isProxy={isProxy} type={dailyPanelMode} records={dailyData}/>
-            </div>
-
-          </section>
-        </QuestionContainer>
+        <DesktopPanel isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} totalPanelMode={totalPanelMode} setTotalPanelMode={setTotalPanelMode} dailyData={dailyData} dailyPanelMode={dailyPanelMode} setDailyPanelMode={setDailyPanelMode}/>
       )}
-
     </div>
   )
 }
