@@ -328,6 +328,16 @@ export const PageTemplate = (props: IPage) => {
         }}/>
       )}
 
+      {isShowTelegramModal && (
+        <TelegramContactModal close={() => {
+          dispatch(appSlice.actions.setShowTelegramModal(false))
+        }} toTelegram={() => {
+          dispatch(appSlice.actions.setShowTelegramModal(false))
+          onClickToOpenTelegramService()
+        }}/>
+      )}
+
+      {/*比 TelegramContactModal 還上層*/}
       {isShowInviteBonusModal && (
         <InviteBonusModal
           close={() => {
@@ -339,14 +349,7 @@ export const PageTemplate = (props: IPage) => {
           }}/>
       )}
 
-      {isShowTelegramModal && (
-        <TelegramContactModal close={() => {
-          dispatch(appSlice.actions.setShowTelegramModal(false))
-        }} toTelegram={() => {
-          dispatch(appSlice.actions.setShowTelegramModal(false))
-          onClickToOpenTelegramService()
-        }}/>
-      )}
+
 
       {/*Download*/}
       {openDownloadModal && (
