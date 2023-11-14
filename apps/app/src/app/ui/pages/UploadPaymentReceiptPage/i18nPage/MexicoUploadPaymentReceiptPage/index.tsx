@@ -24,7 +24,14 @@ export const MexicoUploadPaymentReceiptPage = withTranslation(
         {props.isUploading && <UploadingFileModal />}
         <div className="grow">
           <div className="mb-2 text-left text-sm">
-            {props.t('Upload your repayment receipt')}
+            {/*{props.t('Upload your repayment receipt')}*/}
+            <div>
+              <div className={"mb-2"}>Proporcione registros de transferencia que contengan la siguiente información</div>
+              <div>
+                <div>1. Cuenta (CLABE, teléfono móvil o tarjeta)</div>
+                <div>2. Claves de seguimiento</div>
+              </div>
+            </div>
           </div>
           <label
             htmlFor="file"
