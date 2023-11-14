@@ -9,6 +9,7 @@ import {MenuDrawer} from "../../drawers/MenuDrawer";
 import {TabBar} from "../../tabBar";
 import {Toolbox} from "../../components/Toolbox";
 import {CocoMenuDrawerContent} from "../../drawers/MenuDrawer/env/CocoMenuDrawerContent";
+import {ThreeDots} from "react-loading-icons";
 
 
 type IStyledPage = {
@@ -139,7 +140,8 @@ export const CocoPageTemplate = ({
             }}
           />
         )}
-        {!isMobile && (
+
+        {!isMobile && isShowMobileHeader && (
           <Header
             isLogin={isLogin}
             onClickUserLoginStatusDrawer={() => {
@@ -168,8 +170,8 @@ export const CocoPageTemplate = ({
             <CocoMenuDrawerContent/>
           </MenuDrawer>
         )}
-
-        <div className={"w-full h-[52.5px]"}/>
+        {/*NOTE: 佔據有 Header 時的高度*/}
+        {isShowMobileHeader && <div className={"w-full h-[52.5px]"}/>}
 
         <ErrorBoundary
           fallback={
@@ -181,7 +183,7 @@ export const CocoPageTemplate = ({
 
         <Footer/>
 
-        {isMobile && isShowTabbar&& (
+        {isMobile && isShowTabbar && (
           <TabBar isShowSlot={false} size={"big"}/>
         )}
 
@@ -191,6 +193,13 @@ export const CocoPageTemplate = ({
           onClickToOpenTelegramManager={onClickToOpenTelegramManager}
           onClickToOpenTelegramService={onClickToOpenTelegramService}
         />
+
+        {isUILoading && (
+          <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
+            <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
+            <ThreeDots height={25} className={'inline-block'} />
+          </div>
+        )}
 
       </StyledPage>
   )

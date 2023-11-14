@@ -132,8 +132,6 @@ export const PernambucanaPageTemplate = ({
                                                  isUILoading,
 
 }: IProps) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   return (
     <StyledPage isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}>
@@ -214,7 +212,7 @@ export const PernambucanaPageTemplate = ({
           {/*Footer*/}
           <Footer/>
 
-          {isMobile && isShowTabbar&& (
+          {isMobile && isShowTabbar && (
             <TabBar/>
           )}
 
