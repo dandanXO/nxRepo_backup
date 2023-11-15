@@ -182,7 +182,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
       <div className={"flex flex-col"}>
 
         <Input
-            type="text"
+            type="number"
             prefix={
               <>
                 {/*<PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />*/}

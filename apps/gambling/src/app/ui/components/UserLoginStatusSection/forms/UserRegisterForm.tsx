@@ -177,18 +177,20 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
   return (
     <section className={"flex flex-col"}>
 
-      <Input type={"text"} prefix={
-        <>
-          {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
-          <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
-          <span className={"text-main-primary-main mr-2"}>+55</span>
-        </>
-      }
-         placeholder={"Tu nùmero de celular"}
-         value={phoneInput.data}
-         validation={phoneInput.isValidation}
-         errorMessage={phoneInput.errorMessage}
-         onChange={(event) => {
+      <Input
+        type={"number"}
+        prefix={
+          <>
+            {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
+            <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
+            <span className={"text-main-primary-main mr-2"}>+55</span>
+          </>
+        }
+        placeholder={"Tu nùmero de celular"}
+        value={phoneInput.data}
+        validation={phoneInput.isValidation}
+        errorMessage={phoneInput.errorMessage}
+        onChange={(event) => {
            if(onValidatePhoneInput(event.target.value, setPhoneInput)) {
              setPhoneInput({
                data: event.target.value,
@@ -202,11 +204,11 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
                errorMessage: "Número de celular de 10 ou 11 dígitos",
              })
            }
-         }}
+        }}
       />
 
       <Input
-          type={"text"}
+          type={"number"}
           prefix={
             <>
               {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
@@ -273,32 +275,31 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         )}
       />
 
-
-        <Input
-          type={"text"}
-          // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-          prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
-          outerSuffix={<img className={"h-[48px]"} src={environment.captcha}/>}
-          placeholder={"Código de verificação"}
-          value={captchaInput.data}
-          validation={captchaInput.isValidation}
-          errorMessage={captchaInput.errorMessage}
-          onChange={(event) => {
-            if(onValidateCaptchaInput(event.target.value)) {
-              setCaptchaInput({
-                data: event.target.value,
-                isValidation: true,
-                errorMessage: "",
-              });
-            } else {
-              setCaptchaInput({
-                data: event.target.value,
-                isValidation: false,
-                errorMessage: "por favor insira o código de verificação",
-              })
-            }
-          }}
-        />
+      <Input
+        type={"text"}
+        // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+        prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+        outerSuffix={<img className={"h-[48px]"} src={environment.captcha}/>}
+        placeholder={"Código de verificação"}
+        value={captchaInput.data}
+        validation={captchaInput.isValidation}
+        errorMessage={captchaInput.errorMessage}
+        onChange={(event) => {
+          if(onValidateCaptchaInput(event.target.value)) {
+            setCaptchaInput({
+              data: event.target.value,
+              isValidation: true,
+              errorMessage: "",
+            });
+          } else {
+            setCaptchaInput({
+              data: event.target.value,
+              isValidation: false,
+              errorMessage: "por favor insira o código de verificação",
+            })
+          }
+        }}
+      />
 
       <section className={"flex flex-col mb-4"}>
         <ConfirmButton

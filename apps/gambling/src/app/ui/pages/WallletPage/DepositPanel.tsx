@@ -73,7 +73,7 @@ interface IDepositPanel {
 }
 // let clicked = false;
 export const DepositPanel = (props: IDepositPanel) => {
-  
+
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
   const { isMobile } = useBreakpoint();
@@ -133,7 +133,7 @@ export const DepositPanel = (props: IDepositPanel) => {
     <SectionContainer id={"deposit-section"}>
       <DepositNoticeSection />
       <section className={"flex flex-col w-full"}>
-        <DepositInput inputValue={inputValue} selectedIndexConfig={selectedIndexConfig} />
+        {recharge_options && recharge_options.length > 0 && <DepositInput inputValue={inputValue} selectedIndexConfig={selectedIndexConfig} />}
         <div className={tcx("flex flex-1 m-auto flex-row flex-wrap w-full justify-start items-stretch", [`mb-20 `, !isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);

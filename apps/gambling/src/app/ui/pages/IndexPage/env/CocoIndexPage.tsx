@@ -66,11 +66,11 @@ export const CocoIndexPage = ({
   const navigate = useNavigate();
   const {onClickToSearch} = usePageNavigate();
 
-  useEffect(() => {
-    if (activeTab === "Todos") {
-      setActiveTab("Salão")
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (activeTab === "Todos") {
+  //     setActiveTab("Salão")
+  //   }
+  // }, [])
 
   return (
     <>
@@ -94,60 +94,60 @@ export const CocoIndexPage = ({
       <Container className="bg-[#020E29]">
         {/*Tabs*/}
         {isMobile ? (
-          <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
-            <DragScrollContainer>
-              <section className={"flex flex-row items-center bg-[#000C26] px-0.5"}>
-                <Tabs className={"game-type-tab-list"}>
-                  <div>
-                    {label !== undefined && ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
-                      return (
-                        <CocoTabItem
-                          key={index}
-                          name={tab}
-                          active={activeTab === tab}
-                          onClick={() => setActiveTab(tab)}
-                          className={cx(`font-bold border-none border-0 rounded `, {
-                            'bg-[#262fa8] text-white py-0.5': activeTab === tab,
-                            'text-[#9ea3bb]': activeTab !== tab
-                          })}
-                        />
-                      )
-                    })}
-                  </div>
-                </Tabs>
-              </section>
-            </DragScrollContainer>
+          <div>
+            <div className="mb-4" onClick={onClickToSearch}>
+              <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
+                     inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
+                     placeholder={"Por favor insira o nome do jogo"}
+                     suffix={<SearchOutlined className={"text-[#007aff] text-xl"} />}
+              />
+            </div>
+
+            <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
+              <DragScrollContainer>
+                <section className={"flex flex-row items-center bg-[#000C26] px-0.5"}>
+                  <Tabs className={"game-type-tab-list"}>
+                    <div>
+                      {label !== undefined && ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
+                        return (
+                          <CocoTabItem
+                            key={index}
+                            className={cx(`font-bold border-none border-0 rounded `, {
+                              'bg-[#262fa8] text-white py-0.5': activeTab === tab,
+                              'text-[#9ea3bb]': activeTab !== tab
+                            })}
+                            name={tab}
+                            active={activeTab === tab}
+                            onClick={() => setActiveTab(tab)}
+                          />
+                        )
+                      })}
+                    </div>
+                  </Tabs>
+                </section>
+              </DragScrollContainer>
+            </div>
+
           </div>
           ): (
-            <section
-              style={{borderBottom: '1px solid rgb(44, 253, 153)'}}
-              className="mb-4 flex flex-row items-center px-4 w-full"
-            >
-              <div className="mr-2 grow">
-                <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+            <div className={"flex flex-row justify-center items-center"}>
+
+              <section className="mb-4 flex flex-row items-center px-4 w-full">
+                <div className="mr-2 grow">
+                  <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                </div>
+              </section>
+
+              <div className="shirnk-0 grow-0 basis-[150px]">
+                <Input
+                  className="items-baseline"
+                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
+                  onChange={(event: any) => {
+                    setSearchInput(event.target.value)
+                  }}
+                />
               </div>
-
-            </section>
-        )}
-
-        {isMobile ? (
-          <div className="mb-4" onClick={onClickToSearch}>
-            <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
-                   inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
-                   placeholder={"Por favor insira o nome do jogo"}
-                   suffix={<SearchOutlined className={"text-[#007aff] text-xl"} />}
-            />
-          </div>
-        ): (
-          <div className="shirnk-0 grow-0 basis-[150px]">
-            <Input
-              className="bg-[#069D5C] items-baseline"
-              prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
-              onChange={(event: any) => {
-                setSearchInput(event.target.value)
-              }}
-            />
-          </div>
+            </div>
         )}
 
         <div className="bg-[#000C26]">
