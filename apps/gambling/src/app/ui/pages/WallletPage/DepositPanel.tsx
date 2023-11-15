@@ -11,12 +11,13 @@ import { BlueBoard } from "./BlueBoard";
 import { WithdrawMobileInput } from "../../components/Inputs/WithdrawMobileInput";
 import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../external/RechargeInfoGetEndpoint";
 import { environment } from "../../../../environments/environment";
-import {ButtonPro, ProButton} from "../../components/Buttons/Button";
+import { ButtonPro, ProButton } from "../../components/Buttons/Button";
 import { tcx } from "../../utils/tcx";
-import {TotalSectionContainer} from "./TotalSectionContainer";
-import {DepositConfirmButton} from "../../components/Buttons/DepositConfirmButton";
-import {DepositNoticeSection} from "./env/DepositNoticeSection";
+import { TotalSectionContainer } from "./TotalSectionContainer";
+import { DepositConfirmButton } from "../../components/Buttons/DepositConfirmButton";
+import { DepositNoticeSection } from "./env/DepositNoticeSection";
 import { DepositButton } from "./env/DepositButton";
+import { DepositInput } from "./env/DepositInput";
 
 
 const Item = styled.div.attrs((props) => ({
@@ -24,41 +25,12 @@ const Item = styled.div.attrs((props) => ({
 }))`
 `
 
-const InputTag = styled.div`
-  position: absolute;
-  top: -24px;
-  right: -10px;
-  border-radius: 0 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  padding: 0 8px;
-  height: 96px;
-  color: #fff;
-  min-width: 117px;
-  z-index: 1;
-  background-image: url("assets/${environment.assetPrefix}/giveaway.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-`;
 
 const MobileTagImg = styled.img`
   //background-image: url("assets/${environment.assetPrefix}/giveaway.png");
   //background-size: 82px;
   //background-position: center 23px;
   font-size: 26px;
-  color: #fff;
-  position: absolute;
-  top: -27px;
-`
-const MobileTag = styled(InputTag)`
-  background-image: url("assets/${environment.assetPrefix}/giveaway.png");
-  background-size: 82px;
-  //background-size: 100px;
-  background-position: center 23px;
-  //font-size: 26px;
-  font-size: 18px;
   color: #fff;
   position: absolute;
   top: -27px;
@@ -138,54 +110,31 @@ export const DepositPanel = (props: IDepositPanel) => {
       return {
         rechargeValue: `R$ ${rechargeValue}`,
         rechargeClassName: 'text-base items-baseline',
-        className:  `min-h-[50px] ${isMobile?'pt-3':''} rounded-md shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(187,160,255,0.76)_inset,0_-2px_1px_rgba(39,8,74,0.76)_inset]`,
+        className: `min-h-[50px] ${isMobile ? 'pt-3' : ''} rounded-md shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(187,160,255,0.76)_inset,0_-2px_1px_rgba(39,8,74,0.76)_inset]`,
         activeRechargeClassName: 'text-[#7a2800]',
         bgClassName: 'bg-gradient-to-b from-[#5A16B7] to-[#7800FF]',
         activeBgClassName: 'bg-gradient-to-t from-[#FB7000] to-[#FFC000] shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(255,243,160,0.76)_inset,0_-2px_2px_rgba(122,40,0,0.76)_inset]',
         rate: `+ R$ ${rate}`,
-        rateClassName:`${!isMobile?'text-[#fff600]':''}`,
-        activeRateClassName:`${!isMobile?'text-[#7a2800]':''}`,
+        rateClassName: `${!isMobile ? 'text-[#fff600]' : ''}`,
+        activeRateClassName: `${!isMobile ? 'text-[#7a2800]' : ''}`,
         isRateTag: isMobile,
         rateTagClassName: 'text-xs pt-0.5 pr-1 text-[#fbd81e] absolute bg-gradient-to-r from-[transparent] via-[#FF3838]  to-[#FF3838] top-0 right-0 rounded-tr-lg',
       }
-    }else{
-      return{
+    } else {
+      return {
         rechargeValue: `${rechargeValue}`,
-        rate:`+ ${rate}`,
-        className:'italic'
+        rate: `+ ${rate}`,
+        className: 'italic'
       }
     }
   }
 
   return (
     <SectionContainer id={"deposit-section"}>
-      <DepositNoticeSection/>
+      <DepositNoticeSection />
       <section className={"flex flex-col w-full"}>
-        <div className={tcx("relative",[`my-10`,!isMobile])}>
-          {isMobile ? (
-            <WithdrawMobileInput value={inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"} />
-          ) : (
-            <Input value={inputValue} className={"w-full bg-white border-white"} themeStyle={"normal"} />
-          )}
-          {
-            selectedIndexConfig && selectedIndexConfig?.rate && parseFloat(selectedIndexConfig?.rate) > 0 &&
-            (
-              isMobile ? (
-                <MobileTag className={"text-base font-bold"}>
-                  <span className="pr-1">+ </span> <span>{(Number(inputValue) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1)).toFixed(0).toString()}</span>
-                </MobileTag>
-              ) : (
-                <InputTag className={cx({
-                  // "background-[linear-gradient(90deg,#FFF600 0%,#4FFB0C 100%)]": isMobile,
-                })}
-                >
-                  <span className="pr-1">+ </span> <span>{(Number(inputValue) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1)).toFixed(0).toString()}</span>
-                </InputTag>
-              )
-            )
-          }
-        </div>
-        <div className={tcx("flex m-auto flex-row flex-wrap w-full justify-between items-stretch",[`mb-20 justify-start`,!isMobile])}>
+        <DepositInput inputValue={inputValue} selectedIndexConfig={selectedIndexConfig} />
+        <div className={tcx("flex m-auto flex-row flex-wrap w-full justify-between items-stretch", [`mb-20 justify-start`, !isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
             const isShowRate = Number(config?.rate) !== 0;
@@ -200,7 +149,7 @@ export const DepositPanel = (props: IDepositPanel) => {
                 }}
                 isActive={selectedIndex === index}
                 isShowRate={isShowRate}
-                {...depositButtonProps(rechargeValue,rate)}
+                {...depositButtonProps(rechargeValue, rate)}
               />
             )
           })}
@@ -211,7 +160,7 @@ export const DepositPanel = (props: IDepositPanel) => {
             <ButtonPro
               size="small"
               onClick={() => {
-                if(!clicked) {
+                if (!clicked) {
                   setClicked(true);
                   navigate(PageOrModalPathEnum.WalletDepositNextPage, {
                     state: {
