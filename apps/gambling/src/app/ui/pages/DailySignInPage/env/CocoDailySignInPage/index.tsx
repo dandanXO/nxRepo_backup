@@ -423,8 +423,8 @@ const CocoDailySignInPage = ({
           </VIPRight>
 
           <button
-            className='absolute bottom-[6%] right-[7%] text-white text-xl'
-            onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}
+            className='absolute bottom-[6%] right-[7%] text-white text-xl z-20'
+            onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
           >{'visualizar registros >'}
           </button>
 
