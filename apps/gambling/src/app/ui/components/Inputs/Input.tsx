@@ -26,7 +26,7 @@ export const InputSection = styled.a<{
     border-color: var(--input-focus-border);
   `}
   ${(props) => props.validation === false && `
-    border-color: var(--input-inactive-border);
+    border-color: var(--input-invalidation-border);
   `}
 
 `
@@ -54,16 +54,18 @@ export const Input = (props: IInput) => {
   return (
     <div className={"mb-4"}>
       <div className={"flex flex-row justify-center items-center"}>
-        <InputSection focus={focus} onClick={() => {
-          // (inputRef && inputRef.current as any).focus()
-        }}
-        className={tcx("w-full rounded-3xl border-[var(--input-border)] border-solid border py-4 px-3.5 ",
-          // "active:!border-2 active:!border-[#01FF52]": !props.themeStyle,
-          ["border-utils-gray", props.themeStyle === "simple"],
-          "bg-[var(--input-background)]",
-          props.className
-        )}
-                      validation={props.validation}
+        <InputSection
+          focus={focus}
+          onClick={() => {
+            // (inputRef && inputRef.current as any).focus()
+          }}
+          className={tcx("w-full rounded-3xl border-[var(--input-border)] border-solid border py-4 px-3.5 ",
+            // "active:!border-2 active:!border-[#01FF52]": !props.themeStyle,
+            ["border-utils-gray", props.themeStyle === "simple"],
+            "bg-[var(--input-background)]",
+            props.className
+          )}
+          validation={props.validation}
         >
           {props.prefix}
           {props.children ? (props.children) : (

@@ -100,14 +100,14 @@
 
 
   --input-text-color: #ffffff;
-  --input-placeholder-color: gray;
+  --input-placeholder-color: #d2afff;
   --input-mobile-border: transparent;
   --input-border: #5a3af7;
   --input-background: #341972;
   --input-focus-background: #341972;
-  --input-focus-border: #ffffff;
+  --input-focus-border: #1A7BFF;
   --input-active-background: #E47174;
-  --input-inactive-border: #E47174;
+  --input-invalidation-border: #8B619E;
 
   --drawer-bg: #17103F;
   --drawer-border: rgba(50,63,91,.7);
