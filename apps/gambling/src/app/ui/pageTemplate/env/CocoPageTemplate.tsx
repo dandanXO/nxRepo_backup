@@ -218,6 +218,7 @@ export const CocoPageTemplate = ({
         {/*Login*/}
         {isShowLoginModal && (
           <UserLoginStatusModal
+            showCloseButton={true}
             openNotificationWithIcon={openNotificationWithIcon}
             close={() => {
               showLoginModal(false)

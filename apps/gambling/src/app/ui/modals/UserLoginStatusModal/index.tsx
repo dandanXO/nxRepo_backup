@@ -21,7 +21,8 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
     <div
       className={"bg-[rgba(0,0,0,.6)] z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}
       onClick={() => {
-        props.close()
+        // NOTE: 用戶會誤點
+        // props.close()
       }}
     >
 
@@ -40,7 +41,7 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
           openNotificationWithIcon={props.openNotificationWithIcon}
         />
 
-        {isShowCloseButton || true && (
+        {isShowCloseButton && (
           <section className={"mt-2 flex flex-col justify-center items-center"}>
             <button>
               <CloseCircleOutlined className={"text-white text-xl"} onClick={() => {

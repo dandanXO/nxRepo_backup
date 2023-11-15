@@ -182,7 +182,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
     <section className={"flex flex-col"}>
 
       <Input
-        type={"text"}
+        type={"number"}
         prefix={
           <>
             {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
@@ -190,39 +190,42 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
             <span className={"text-[#01FF52] mr-2"}>+55</span>
           </>
         }
-       placeholder={"Tu nùmero de celular"}
-       value={phoneInput.data}
-       validation={phoneInput.isValidation}
-       errorMessage={phoneInput.errorMessage}
-       onChange={(event) => {
-          onValidatePhoneInput(event.target.value, setPhoneInput)
-       }}
+         placeholder={"Tu nùmero de celular"}
+         value={phoneInput.data}
+         validation={phoneInput.isValidation}
+         errorMessage={phoneInput.errorMessage}
+         onChange={(event) => {
+            onValidatePhoneInput(event.target.value, setPhoneInput)
+         }}
       />
+
       <div style={{ position: 'relative' }}>
-      <Input
-        type={"text"}
-        // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
-        placeholder={"Código de verificação"}
-        value={captchaInput.data}
-        validation={captchaInput.isValidation}
-        errorMessage={captchaInput.errorMessage}
-        onChange={(event) => {
-          onValidateCaptchaInput(event.target.value, setCaptchaInput);
-        }}
-      />
+        <Input
+          type={"text"}
+          // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+          prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+          placeholder={"Código de verificação"}
+          value={captchaInput.data}
+          validation={captchaInput.isValidation}
+          errorMessage={captchaInput.errorMessage}
+          onChange={(event) => {
+            onValidateCaptchaInput(event.target.value, setCaptchaInput);
+          }}
+        />
         <div className={'w-[330px]'}>
-      <SendSMSCodeButton  style={{ position: 'absolute',right: '0px', top: '0', zIndex: '1',fontWeight: 'bold' }} onClick={() => {
-        if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
-          triggerSendForgetPasswordSMSCode({
-            appPackageName: environment.appPackageName,
-            deviceId: AppLocalStorage.getItem("deviceId") || "",
-            phone: phoneInput.data,
-            verifyType: 1
-          });
-        }
-      }}>Enviar</SendSMSCodeButton>
-        </div>
+          <SendSMSCodeButton
+            style={{ position: 'absolute',right: '0px', top: '0', zIndex: '1',fontWeight: 'bold' }}
+            onClick={() => {
+              if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
+                triggerSendForgetPasswordSMSCode({
+                  appPackageName: environment.appPackageName,
+                  deviceId: AppLocalStorage.getItem("deviceId") || "",
+                  phone: phoneInput.data,
+                  verifyType: 1
+                });
+              }
+            }}>Enviar</SendSMSCodeButton>
+          </div>
       </div>
 
       <div style={{ position: 'relative' }}>
