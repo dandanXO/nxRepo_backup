@@ -5,9 +5,9 @@ import { environment } from "../../../../environments/environment";
 
 const NoData = () => {
   return (
-    <div className=' flex flex-col justify-center items-center py-10 bg-table-varient'>
+    <div className='flex flex-col justify-center items-center py-10 bg-table-varient gap-2'>
       <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
-      <div>Nada aq</div>
+      <div className='text-lg'>Nada aqui</div>
     </div>
   )
 }
@@ -80,7 +80,7 @@ export const Table = (props: ITable) => {
           </thead>
         </table>
       </div>
-      <div className='h-4/5 overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
+      <div className='h-full overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
         <table className={tcx('table-zebra relative table w-full table-fixed ')}>
           <tbody className=''>
             {dataSource.length === 0 ? <tr>

@@ -88,7 +88,7 @@ export const RecordPanelDeposit = () => {
   }
 
   return (
-    <DragScrollContainer className='h-[25vh]' >
+    <DragScrollContainer className='h-[30vh] rounded-2xl overflow-hidden' >
       {contextHolder}
       <Table columns={tableColumns} dataSource={records} fetchData={handleFetchData} dataCount={Number(depositRecordData?.page?.count)}/>
     </DragScrollContainer>
