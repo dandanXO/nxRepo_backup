@@ -83,26 +83,25 @@ export const Table = (props: ITable) => {
       <div className='h-full overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
         <table className={tcx('table-zebra relative table w-full table-fixed ')}>
           <tbody className=''>
-            <NoData />
-            {/*{dataSource.length === 0 ? <tr>*/}
-            {/*  <NoData />*/}
-            {/*</tr> :*/}
-            {/*  dataSource.map((data: any) => {*/}
-            {/*    return <tr>*/}
-            {/*      {columns?.map((col: any, colIndex: number) => (*/}
-            {/*        <td key={col.key + colIndex}*/}
-            {/*          className={tcx('p-2 border-white border-opacity-20 sm:break-all text-center',*/}
-            {/*            ['border-r', colIndex !== columns.length - 1],*/}
-            {/*            [`w-[${col.width}]`, col.width !== undefined],*/}
-            {/*            props.className,*/}
-            {/*            props.contentStyle*/}
-            {/*          )}>*/}
-            {/*          {col.render !== undefined ? col.render(data as any) : data[col.name]}*/}
-            {/*        </td>*/}
-            {/*      ))}*/}
-            {/*    </tr>*/}
-            {/*  })*/}
-            {/*}*/}
+            {dataSource.length === 0 ? <tr>
+              <NoData />
+            </tr> :
+              dataSource.map((data: any) => {
+                return <tr>
+                  {columns?.map((col: any, colIndex: number) => (
+                    <td key={col.key + colIndex}
+                      className={tcx('p-2 border-white border-opacity-20 sm:break-all text-center',
+                        ['border-r', colIndex !== columns.length - 1],
+                        [`w-[${col.width}]`, col.width !== undefined],
+                        props.className,
+                        props.contentStyle
+                      )}>
+                      {col.render !== undefined ? col.render(data as any) : data[col.name]}
+                    </td>
+                  ))}
+                </tr>
+              })
+            }
           </tbody>
         </table>
       </div>
