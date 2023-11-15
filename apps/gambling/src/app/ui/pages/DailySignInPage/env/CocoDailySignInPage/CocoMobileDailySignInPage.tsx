@@ -174,7 +174,7 @@ const CocoMobileDailySignInPage = ({
 
       <section>
         <CocoLevelList
-          className='font-bold'
+          className='font-bold text-base h-7'
           currentLevel={vipLevel}
           currentSelectedLevel={currentSelectedLevel}
           setCurrentSelectedLevel={setCurrentSelectedLevel}
