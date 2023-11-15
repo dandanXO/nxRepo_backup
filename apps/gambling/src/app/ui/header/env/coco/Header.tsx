@@ -47,7 +47,7 @@ const HeaderButton = styled.button.attrs((props) => ({
 })) <{
   className?: string;
 }>`
-  width: 100px;
+  width: 100%;
   background-color: #040404;
   color: #cdbbff;
   transform: skew(-8deg);
@@ -60,8 +60,8 @@ const HeaderButton = styled.button.attrs((props) => ({
 
 const HeaderButtonText = styled.div`
   transform: skew(8deg);
-  height: 100%;
-  width: 100px;
+  /* height: 100%; */
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,8 +95,8 @@ export const Header = (props: IHeader) => {
       {
         isLogin && (hover && <HeaderMenu />)
       }
-      <div className={"flex flex-row"}>
-        <div className={"w-[100px] p-4 bg-[#5939f7] -mr-1"}>
+      <div className={"flex flex-row basis-[58%] min-w-[680px] max-h-[67px] -mb-[1px]"}>
+        <div className={"min-w-[100px] max-w-[130px] p-4 bg-[#5939f7] -mr-1"}>
           <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
         </div>
         <HeaderButton>
