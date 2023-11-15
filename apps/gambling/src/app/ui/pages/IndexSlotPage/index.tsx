@@ -2,7 +2,7 @@ import styled from "styled-components";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {TabItem, Tabs} from "../../components/TabItem/TabItem";
-import {GameTypeSectionList} from "../../components/GameTypeSection";
+import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
 import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {AppLocalStorage} from "../../../persistant/localstorage";

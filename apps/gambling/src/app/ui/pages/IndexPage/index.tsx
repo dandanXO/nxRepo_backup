@@ -1,7 +1,7 @@
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {GameTypeSectionList} from "../../components/GameTypeSection";
+import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
 // @ts-ignore
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
 import React, {useEffect, useState} from "react";
