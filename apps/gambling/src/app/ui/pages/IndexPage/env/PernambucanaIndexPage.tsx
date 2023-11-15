@@ -71,19 +71,19 @@ export const PernambucanaIndexPage = ({
             return <GameTypeSectionList key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClick={()=>navigate(PageOrModalPathEnum.IndexSlotPage)} />
           })
         ) : (
-            <section className="flex flex-col bg-[rgba(1,62,66,0.6)] ml-20 p-4 rounded-lg w-[calc(88.6vw-265px)]" style={{ border: '1px solid #2CFD99' }}>
-            <section className="mb-4 flex flex-row items-center px-4 w-full" style={{borderBottom: '1px solid rgb(44, 253, 153)'}}>
-                <div className="min-w-[100px] mr-2">
+            <section className="flex flex-col bg-[rgba(1,62,66,0.6)] ml-20 p-4 rounded-lg " style={{ border: '1px solid #2CFD99' }}>
+              <section className="mb-4 flex flex-row items-center px-4 w-full" style={{borderBottom: '1px solid rgb(44, 253, 153)'}}>
+                  <div className="min-w-[100px] mr-2">
 
-                </div>
-                <div className="shirnk-0 basis-[450px]">
-                  <Input className="bg-[#069D5C] items-baseline flex-1" prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
-                    onChange={(event: any) => {
-                      setSearchInput(event.target.value)
-                    }}
-                  />
-                </div>
-              </section>
+                  </div>
+                  <div className="shirnk-0 basis-[450px]">
+                    <Input className="bg-[#069D5C] items-baseline flex-1" prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
+                      onChange={(event: any) => {
+                        setSearchInput(event.target.value)
+                      }}
+                    />
+                  </div>
+                </section>
 
             <section className={"flex flex-col"}>
               {gameList()}

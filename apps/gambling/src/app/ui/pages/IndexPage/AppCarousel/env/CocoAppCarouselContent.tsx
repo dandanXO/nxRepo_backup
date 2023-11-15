@@ -7,6 +7,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../environments/environment";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import cx from "classnames";
 
 export const CocoAppCarouselContent = () => {
   const {isMobile} = useBreakpoint();
@@ -30,13 +31,25 @@ export const CocoAppCarouselContent = () => {
           />
         </div>
       ) : (
-        <div className="w-[calc(88.6vw-265px)]" onClick={() => {
-          onClickToFirstDeposit();
-        }} style={{ display: 'flex',justifyContent: 'center' }}>
-          <p className="absolute top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-6xl text-left">
+        <div
+          className="banner w-screen"
+          onClick={() => {
+            onClickToFirstDeposit();
+          }}
+          // style={{ display: 'flex',justifyContent: 'center' }}
+        >
+          <p
+            className={cx("absolute top-1/2 transform -translate-y-1/2",
+              "pl-4",
+              "italic font-bold text-6xl text-left"
+            )}
+          >
             Primeiro depósito <br/> bônus de 20%
           </p>
-          <img src={`assets/${environment.assetPrefix}/banner1.jpeg`} className="rounded-box" style={{ display: 'block', borderRadius: '10px' }}/>
+          <img
+            src={`assets/${environment.assetPrefix}/banner1.jpeg`}
+            // className="rounded-box"
+          />
         </div>
       )}
       </div>

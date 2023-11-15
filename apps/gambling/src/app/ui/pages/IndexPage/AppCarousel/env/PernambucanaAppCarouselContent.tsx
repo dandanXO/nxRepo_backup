@@ -79,7 +79,7 @@ export const PernambucanaAppCarouselContent = () => {
           />
         </div>
       ) : (
-        <div className="w-[calc(88.6vw-265px)]" onClick={() => {
+        <div className="" onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
@@ -146,7 +146,7 @@ export const PernambucanaAppCarouselContent = () => {
           <img src={`assets/${environment.assetPrefix}/h5_banner_2.png`}/>
         </div>
       ) : (
-        <div className={"w-[calc(88.6vw-265px)]"} onClick={() => {
+        <div className={""} onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
@@ -209,7 +209,7 @@ export const PernambucanaAppCarouselContent = () => {
           <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`}/>
         </div>
       ) : (
-        <div className={'w-[calc(88.6vw-265px)]'} onClick={() => {
+        <div className={''} onClick={() => {
           navigate(PageOrModalPathEnum.VIPGradePage);
         }}>
           <img src={`assets/${environment.assetPrefix}/banner2.png`} className="rounded-box"  style={{ display: 'block', borderRadius: '10px' }}/>
@@ -246,7 +246,7 @@ export const PernambucanaAppCarouselContent = () => {
           <img src={`assets/${environment.assetPrefix}/h5_banner_5.png`}/>
         </div>
       ) : (
-        <div className={'w-[calc(88.6vw-265px)]'} onClick={() => {
+        <div className={''} onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
@@ -294,7 +294,7 @@ export const PernambucanaAppCarouselContent = () => {
           <img src={`assets/${environment.assetPrefix}/h5_banner_3.png`}/>
         </div>
       ) : (
-        <div className={"w-[calc(88.6vw-265px)]"} onClick={() => {
+        <div className={""} onClick={() => {
           if(!isLogin) {
             dispatch(appSlice.actions.showLoginDrawerOrModal(true))
           } else {
