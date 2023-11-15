@@ -14,12 +14,12 @@ export const CocoAppCarouselContent2 = () => {
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToDepositCashback} = usePageNavigate();
   return (
-    <div className={"text-[22.5px] font-[Heebo]"}>
+    <div className={"text-[22.5px] font-[Heebo] text-white"}>
       {isMobile ? (
         <div onClick={() => {
           onClickToDepositCashback();
         }}>
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left text-white">
+          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img src={`assets/${environment.assetPrefix}/h5_banner_2.jpeg`}/>

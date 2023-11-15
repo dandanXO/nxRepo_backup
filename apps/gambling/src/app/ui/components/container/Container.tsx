@@ -12,7 +12,7 @@ export const Container = (props: IContainer) => {
     <div
       className={cx({
         "px-3 py-2": isMobile,
-        "p-4": !isMobile,
+        "px-12 py-4": !isMobile,
       }, props.className)}
       onClick={()=>props.onClick}
     >{props.children}</div>
