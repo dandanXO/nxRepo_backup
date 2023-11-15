@@ -2,7 +2,24 @@
 import cx from 'classnames';
 import useBreakpoint from '../../../hooks/useBreakpoint';
 
-export const DepositButton = (props: any) => {
+interface IDepositButton {
+  isActive: boolean;
+  isShowRate: boolean;
+  rechargeValue: string;
+  rate: string;
+  className?: string;
+  rechargeClassName?: string;
+  activeRechargeClassName?: string;
+  rateClassName?: string;
+  activeRateClassName?: string;
+  isRateTag?: boolean;
+  rateTagClassName?: string;
+  bgClassName?: string;
+  activeBgClassName?: string;
+  onClick: () => void;
+}
+
+export const DepositButton = (props: IDepositButton) => {
   const { isMobile } = useBreakpoint();
 
   const {
