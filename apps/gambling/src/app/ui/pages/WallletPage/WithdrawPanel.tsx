@@ -1,17 +1,14 @@
 import { SectionContainer } from "../../components/container/SectionContainer";
 import { Input, InputValue } from "../../components/Inputs/Input";
 import { Button, ButtonPro } from "../../components/Buttons/Button";
-import { BlueBoard } from "./BlueBoard";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { WithdrawMobileInput } from "../../components/Inputs/WithdrawMobileInput";
-import { MobileDepositConfirmButton } from "./DepositPanel";
 import { useEffect, useMemo, useState } from "react";
 import Select from 'react-select';
 import {useGetWithdrawLimitMutation, useWithdrawMutation} from "../../../external";
 import {environment} from "../../../../environments/environment";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {notification} from 'antd';
-import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {useSelector} from "react-redux";
