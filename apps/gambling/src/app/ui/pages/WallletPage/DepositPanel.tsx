@@ -16,6 +16,7 @@ import { tcx } from "../../utils/tcx";
 import {TotalSectionContainer} from "./TotalSectionContainer";
 import {DepositConfirmButton} from "../../components/Buttons/DepositConfirmButton";
 import {DepositNoticeSection} from "./env/DepositNoticeSection";
+import { DepositButton } from "./env/DepositButton";
 
 
 const Item = styled.div.attrs((props) => ({
@@ -63,22 +64,22 @@ const MobileTag = styled(InputTag)`
   top: -27px;
 `
 
-const DepoisitButton = styled.button.attrs<{ active: boolean; }>((props) => ({
-  className: props.className,
-})) <{
-  bgActive?: boolean;
-}>`
- ${(props) => props.bgActive
-  ? `
-    background:linear-gradient(to bottom, var(--btn-gradient1-from) 0%, var(--btn-gradient1-to) 100%);
-    color: var(--main);
-  `
-  : `
-    background: var(--medium);
-    color: var(--white);
- `};
+// const DepoisitButton = styled.button.attrs<{ active: boolean; }>((props) => ({
+//   className: props.className,
+// })) <{
+//   bgActive?: boolean;
+// }>`
+//  ${(props) => props.bgActive
+//   ? `
+//     background:linear-gradient(to bottom, var(--btn-gradient1-from) 0%, var(--btn-gradient1-to) 100%);
+//     color: var(--main);
+//   `
+//   : `
+//     background: var(--medium);
+//     color: var(--white);
+//  `};
 
-`
+// `
 
 export const MobileDepositConfirmButton = styled.div`
   //width: 4.46rem;
@@ -131,6 +132,31 @@ export const DepositPanel = (props: IDepositPanel) => {
     // console.log("configs:", config);
   }, [props?.data, recharge_options_default, recharge_options])
 
+
+  const depositButtonProps = (rechargeValue: number, rate: string) => {
+    if (environment.assetPrefix === 'coco777bet') {
+      return {
+        rechargeValue: `R$ ${rechargeValue}`,
+        rechargeClassName: 'text-base items-baseline',
+        className:  `min-h-[50px] ${isMobile?'pt-3':''} rounded-md shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(187,160,255,0.76)_inset,0_-2px_1px_rgba(39,8,74,0.76)_inset]`,
+        activeRechargeClassName: 'text-[#7a2800]',
+        bgClassName: 'bg-gradient-to-b from-[#5A16B7] to-[#7800FF]',
+        activeBgClassName: 'bg-gradient-to-t from-[#FB7000] to-[#FFC000] shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(255,243,160,0.76)_inset,0_-2px_2px_rgba(122,40,0,0.76)_inset]',
+        rate: `+ R$ ${rate}`,
+        rateClassName:`${!isMobile?'text-[#fff600]':''}`,
+        activeRateClassName:`${!isMobile?'text-[#7a2800]':''}`,
+        isRateTag: isMobile,
+        rateTagClassName: 'text-xs pt-0.5 pr-1 text-[#fbd81e] absolute bg-gradient-to-r from-[transparent] via-[#FF3838]  to-[#FF3838] top-0 right-0 rounded-tr-lg',
+      }
+    }else{
+      return{
+        rechargeValue: `${rechargeValue}`,
+        rate:`+ ${rate}`,
+        className:'italic'
+      }
+    }
+  }
+
   return (
     <SectionContainer id={"deposit-section"}>
       <DepositNoticeSection/>
@@ -159,49 +185,23 @@ export const DepositPanel = (props: IDepositPanel) => {
             )
           }
         </div>
-
-        <div className={tcx("flex flex-row flex-wrap w-full justify-start items-stretch",[`mb-20`,!isMobile])}>
+        <div className={tcx("flex m-auto flex-row flex-wrap w-full justify-between items-stretch",[`mb-20 justify-start`,!isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
+            const isShowRate = Number(config?.rate) !== 0;
+            const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? (Number(rechargeValue) * Number(config?.rate)).toFixed(2) : ""
             return (
-              <Item
+              <DepositButton
                 key={index}
-                className={cx("flex flex-col px-2 mb-2 w-1/3", {
-
-                })}
                 onClick={() => {
                   setSelectedIndex(index);
                   setInputValue(String(rechargeValue))
                   setSelectedIndexConfig(config);
                 }}
-              >
-                <DepoisitButton
-                  bgActive={selectedIndex === index}
-                  className={cx(`p-2 flex italic font-bold lg:flex-row flex-col`,
-                    "justify-around items-center min-h-[55px] whitespace-nowrap",
-                    {
-                      "rounded-2xl border-[1px] border-[var(--medium)]": selectedIndex !== index,
-                      "border-[1px] rounded-2xl border-white ": selectedIndex === index,
-                    })}
-                >
-                  <span className={cx("value items-baseline text-base xl:text-4xl lg:text-2xl md:text-lg md:mr-2", {
-                    "text-white": selectedIndex !== index,
-                    "text-main-primary-varient": selectedIndex === index,
-                  })}>
-                    {rechargeValue}
-                  </span>
-
-                  {Number(rechargeValue) >= Number(config?.amount_min) && (
-                    <span className={cx("text-base lg:text-2xl md:text-base", {
-                      "text-main-secondary-main": selectedIndex !== index,
-                      "text-varient ": selectedIndex === index,
-                    })}>
-                      {config && config?.rate && parseFloat(config?.rate) !== 0 ? "+" + (Number(rechargeValue) * Number(config?.rate)).toFixed(2) : ""}
-                    </span>
-                  )}
-                  { }
-                </DepoisitButton>
-              </Item>
+                isActive={selectedIndex === index}
+                isShowRate={isShowRate}
+                {...depositButtonProps(rechargeValue,rate)}
+              />
             )
           })}
         </div>
