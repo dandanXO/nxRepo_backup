@@ -1,13 +1,22 @@
 
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import {tcx} from "../../utils/tcx";
+import { environment } from "../../../../environments/environment";
 
+const NoData = () => {
+  return (
+    <div className='flex flex-col justify-center items-center py-10 bg-table-varient gap-2'>
+      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
+      <div className='text-lg'>Nada aqui</div>
+    </div>
+  )
+}
 
 interface IColumns {
   title: string;
   name: string;
   key: string;
-  render?: (i: any) => ReactElement;
+  render?: (i: any) => ReactElement | string;
 }
 
 interface ITable {
@@ -53,9 +62,9 @@ export const Table = (props: ITable) => {
   }, [dataSource])
 
   return (
-    <div className={tcx('h-full w-full min-w-[500px] ')}>
+    <div className={tcx('h-full w-full min-w-[500px] overflow-hidden')}>
       <div className={tcx(['pr-[3px]', isScrollbarVisible])}>
-        <table className='relative table w-full no-scrollbar table-fixed '>
+        <table className='relative table w-full no-scrollbar table-fixed'>
           <thead className=''>
             {columns?.map((col: any, colIndex: number) => (
               <th key={col.key}
@@ -71,19 +80,17 @@ export const Table = (props: ITable) => {
           </thead>
         </table>
       </div>
-      <div className='h-4/5 overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
+      <div className='h-full overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
         <table className={tcx('table-zebra relative table w-full table-fixed ')}>
           <tbody className=''>
             {dataSource.length === 0 ? <tr>
-              <td className='py-10'>
-                no data
-              </td>
+              <NoData />
             </tr> :
               dataSource.map((data: any) => {
                 return <tr>
                   {columns?.map((col: any, colIndex: number) => (
                     <td key={col.key + colIndex}
-                      className={tcx('p-2 border-white border-opacity-20 sm:break-all',
+                      className={tcx('p-2 border-white border-opacity-20 sm:break-all text-center',
                         ['border-r', colIndex !== columns.length - 1],
                         [`w-[${col.width}]`, col.width !== undefined],
                         props.className,

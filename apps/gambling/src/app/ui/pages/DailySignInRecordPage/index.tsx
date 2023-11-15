@@ -1,32 +1,51 @@
 import {SectionContainer} from "../../components/container/SectionContainer";
-import {DatePicker} from "antd";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {useGetSignInRecordMutation} from "../../../external";
-import {useEffect} from "react";
+import { GetSignInRecordResponseData, useGetSignInRecordMutation } from "../../../external";
+import { useEffect, useState } from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
+import { Table } from "../../components/Table";
 
-const { RangePicker } = DatePicker;
 
 export const DailySignInRecordPage = () => {
   useAllowLoginRouterRules();
 
-  const dateFormat = 'YYYY/MM/DD';
-  const navigate = useNavigate();
   const [triggerGetSignInRecord, {data}] = useGetSignInRecordMutation();
+  const [page, setPage] = useState(1);
+  const [records, setRecords] = useState<GetSignInRecordResponseData[]>([])
+
+
+
+  const handleFetchData = () => {
+    if(page < (data?.page?.page_count || 0)) {
+      setPage(page + 1)
+    }
+  }
+
+  const {onClickToCheckInDaily} = usePageNavigate();
+
+  const columns = [
+    { title: 'ID', name: 'id', key: 'id'},
+    { title: 'Nivel VIP', name: 'vip_level', key: 'vip_level'},
+    { title: 'Coleta Contínua', name: 'days', key: 'days', render: (record:any) => record.days === 1 ? `${record.days}dia`: `${record.days}dias`},
+    { title: 'Obter Recompensas', name: 'cashback', key: 'cashback', render: (record: any) => `R$ ${(record.cashback / 100).toLocaleString()}`},
+    { title: 'Tempo', name: 'created_at', key: 'created_at' },
+  ]
 
   useEffect(() => {
     triggerGetSignInRecord({
-      page: 1,
-      limit: 1000,
+      limit: 10,
+      page: page,
       token: AppLocalStorage.getItem("token") || "",
     })
-  }, [])
+  }, [page])
 
-  const {onClickToCheckInDaily} = usePageNavigate();
+  useEffect(() => {
+    setRecords([...records, ...(data?.data || [])])
+  }, [data?.data])
+
   return (
     <>
       <div className={"p-8"}>
@@ -35,39 +54,15 @@ export const DailySignInRecordPage = () => {
 
           <BackNavigation onClick={() => onClickToCheckInDaily()}/>
 
-          <div className="overflow-x-auto">
-            <table className="table table-zebra w-full text-center">
-              {/* head */}
-              <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nivel VIP</th>
-                <th>Coleta Contínua</th>
-                <th>Obter Recompensas</th>
-                <th>Tempo</th>
-              </tr>
-              </thead>
-
-              <tbody>
-              {data?.data.map((item, index) => {
-                return (
-                  <tr>
-                    <td>{item.user_id}</td>
-                    <td>LV{item.vip_level}</td>
-                    <td>{item.days}</td>
-                    <td>R${item.bonus}</td>
-                    <td>{item.created_at}</td>
-                  </tr>
-                )
-              })}
-              </tbody>
-            </table>
+          <div className='rounded-lg max-h-[80vh] overflow-hidden'>
+            <Table
+              fetchData={handleFetchData}
+              dataSource={records}
+              columns={columns}
+              dataCount={data?.page?.count || 0}
+            />
           </div>
-
-
-
         </SectionContainer>
-
       </div>
 
     </>

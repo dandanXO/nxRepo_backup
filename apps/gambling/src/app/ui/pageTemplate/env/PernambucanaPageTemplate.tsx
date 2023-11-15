@@ -14,6 +14,8 @@ import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import {MenuDrawer} from "../../drawers/MenuDrawer";
 import {PernambucanaMenuDrawerContent} from "../../drawers/MenuDrawer/env/PernambucanaMenuDrawerContent";
+import {UserLoginStatusModal} from "../../modals/UserLoginStatusModal";
+import {UserLoginStatusDrawers} from "../../drawers/UserLoginStatusDrawers";
 
 
 type IStyledPage = {
@@ -236,6 +238,27 @@ export const PernambucanaPageTemplate = ({
           <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
           <ThreeDots height={25} className={'inline-block'} />
         </div>
+      )}
+
+      {/*Login*/}
+      {isMobile && isShowLoginModal && (
+        <UserLoginStatusModal
+          openNotificationWithIcon={openNotificationWithIcon}
+          close={() => {
+            showLoginModal(false)
+          }}
+          setIsLogin={(login: boolean) => setIsLogin(login)}
+        />
+      )}
+      {!isMobile && isShowLoginModal && (
+        <UserLoginStatusDrawers
+          openNotificationWithIcon={openNotificationWithIcon}
+          closeDrawer={() => {
+            // setOpenNonMobileUserLoginStatusDrawer(false);
+            showLoginModal(false)
+          }}
+          setIsLogin={() => setIsLogin(true)}
+        />
       )}
 
     </StyledPage>

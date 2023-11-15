@@ -6,4 +6,5 @@ export const GameList = styled.div`
   grid-template-rows: repeat(auto-fill, 150px);
   gap: 16px;
   margin-top: 15px;
+  justify-content: space-between;
 `

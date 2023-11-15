@@ -10,6 +10,8 @@ import {TabBar} from "../../tabBar";
 import {Toolbox} from "../../components/Toolbox";
 import {CocoMenuDrawerContent} from "../../drawers/MenuDrawer/env/CocoMenuDrawerContent";
 import {ThreeDots} from "react-loading-icons";
+import {UserLoginStatusModal} from "../../modals/UserLoginStatusModal";
+import {UserLoginStatusDrawers} from "../../drawers/UserLoginStatusDrawers";
 
 
 type IStyledPage = {
@@ -177,7 +179,7 @@ export const CocoPageTemplate = ({
           </MenuDrawer>
         )}
         {/*NOTE: 佔據有 Header 時的高度*/}
-        {isShowMobileHeader && <div className={"w-full h-[52.5px]"}/>}
+        {isMobile && isShowMobileHeader && <div className={"w-full h-[52.5px]"}/>}
 
         <ErrorBoundary
           fallback={
@@ -211,6 +213,18 @@ export const CocoPageTemplate = ({
             <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
             <ThreeDots height={25} className={'inline-block'} />
           </div>
+        )}
+
+        {/*Login*/}
+        {isShowLoginModal && (
+          <UserLoginStatusModal
+            showCloseButton={true}
+            openNotificationWithIcon={openNotificationWithIcon}
+            close={() => {
+              showLoginModal(false)
+            }}
+            setIsLogin={(login: boolean) => setIsLogin(login)}
+          />
         )}
 
       </StyledPage>

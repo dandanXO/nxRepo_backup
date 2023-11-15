@@ -1,7 +1,7 @@
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {GameTypeSectionList} from "../../components/GameTypeSection";
+import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
 // @ts-ignore
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
 import React, {useEffect, useState} from "react";
@@ -37,7 +37,8 @@ export const IndexPage = () => {
 
   const { isMobile } = useBreakpoint();
   const { allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
-  const [activeTab, setActiveTab] = useState("Todos");
+  // const [activeTab, setActiveTab] = useState("Todos");
+  const [activeTab, setActiveTab] = useState("Salão");
   const [viewType, setViewType] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const { searchResults, handleSearchGames } = useSearchGames(searchInput);

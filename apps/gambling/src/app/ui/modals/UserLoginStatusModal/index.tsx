@@ -1,9 +1,10 @@
 import {CloseCircleOutlined} from "@ant-design/icons";
-import {UserLoginStatusSection} from "../../components/UserLoginStatusSection";
+import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import {environment} from "../../../../environments/environment";
 import {PernambucanaContainer} from "./env/PernambucanaContainer";
 import {CocoContainer} from "./env/CocoContainer";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 
 const Container = environment.assetPrefix === "coco777bet" ? CocoContainer : PernambucanaContainer;
@@ -17,11 +18,13 @@ export type IUserLoginStatusModal = {
 }
 export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
   const isShowCloseButton = props.showCloseButton == undefined ? true : props.showCloseButton;
+  const {isMobile} = useBreakpoint();
   return (
     <div
       className={"bg-[rgba(0,0,0,.6)] z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}
       onClick={() => {
-        props.close()
+        // NOTE: 手機版用戶會誤點
+        !isMobile && props.close()
       }}
     >
 
@@ -40,7 +43,7 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
           openNotificationWithIcon={props.openNotificationWithIcon}
         />
 
-        {isShowCloseButton || true && (
+        {isShowCloseButton && (
           <section className={"mt-2 flex flex-col justify-center items-center"}>
             <button>
               <CloseCircleOutlined className={"text-white text-xl"} onClick={() => {

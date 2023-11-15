@@ -1,8 +1,7 @@
 import {PhoneSvg} from "../../PhoneSvg";
 import {KeySvg} from "../../KeySvg";
-import {ConfirmButton} from "../../../Buttons/ConfirmButton";
-import {Input as DesktopInput, InputValue} from "../../../Inputs/Input";
-import {MobileInput} from "../../../Inputs/MobileInput";
+import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
+import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 import {useState} from "react";
@@ -17,6 +16,8 @@ import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {connect} from "../../../../../gateway/socket";
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../../../reduxStore/appSlice";
+import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
+import {MobileInput} from "../../../../components/Inputs/MobileInput";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
@@ -76,9 +77,9 @@ type IUserLoginForm = {
   onSwitchToForgetPassword: () => void;
 }
 export const UserLoginForm = (props: IUserLoginForm) => {
+
   const {isMobile} = useBreakpoint();
   const Input = isMobile ? MobileInput : DesktopInput;
-
 
   const [isChecked, setIsChecked] = useState(false);
 
@@ -182,12 +183,12 @@ export const UserLoginForm = (props: IUserLoginForm) => {
       <div className={"flex flex-col"}>
 
         <Input
-            type="text"
+            type="number"
             prefix={
               <>
                 {/*<PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />*/}
                 <PhoneSvg fill="#6c7083" className="mr-2 w-[14px] h-[20px]" />
-                <span className="text-main-primary-main mr-2">+55</span>
+                <span className="text-[var(--input-text-color)] mr-2">+55</span>
               </>
             }
             placeholder="Tu número de celular"
@@ -211,13 +212,12 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             suffix={(
               <div
                 className="password-toggle"
-                // style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
                 onClick={togglePasswordVisibility}
               >
                 {isPasswordVisible ? (
-                  <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
+                  <EyeOutlined className={"text-[#8B619E]"}/>
                 ) : (
-                  <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+                  <EyeInvisibleOutlined className={"text-[#8B619E]"}/>
                 )}
               </div>
             )}

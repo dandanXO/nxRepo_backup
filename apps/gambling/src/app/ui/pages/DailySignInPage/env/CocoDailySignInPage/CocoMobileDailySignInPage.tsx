@@ -174,7 +174,7 @@ const CocoMobileDailySignInPage = ({
 
       <section>
         <CocoLevelList
-          className='font-bold'
+          className='font-bold text-base h-7'
           currentLevel={vipLevel}
           currentSelectedLevel={currentSelectedLevel}
           setCurrentSelectedLevel={setCurrentSelectedLevel}
@@ -216,7 +216,7 @@ const CocoMobileDailySignInPage = ({
 
       <div
         className='my-3 text-white text-sm text-center'
-        onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}
+        onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
       >{'visualizar registros >'}</div>
 
       <SignInIngoContainer>

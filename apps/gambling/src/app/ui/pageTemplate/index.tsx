@@ -287,26 +287,7 @@ export const PageTemplate = (props: IPage) => {
         </PernambucanaPageTemplate>
       )}
 
-      {/*Login*/}
-      {isMobile && isShowLoginModal && (
-        <UserLoginStatusModal
-          openNotificationWithIcon={openNotificationWithIcon}
-          close={() => {
-            showLoginModal(false)
-          }}
-          setIsLogin={(login: boolean) => setIsLogin(login)}
-        />
-      )}
-      {!isMobile && isShowLoginModal && (
-        <UserLoginStatusDrawers
-          openNotificationWithIcon={openNotificationWithIcon}
-          closeDrawer={() => {
-            // setOpenNonMobileUserLoginStatusDrawer(false);
-            showLoginModal(false)
-          }}
-          setIsLogin={() => setIsLogin(true)}
-        />
-      )}
+
 
       {/*Logout*/}
       {isMobile && isShowMobileLogoutModal && (
@@ -348,7 +329,6 @@ export const PageTemplate = (props: IPage) => {
             navigate(PageOrModalPathEnum.InvitePage);
           }}/>
       )}
-
 
 
       {/*Download*/}

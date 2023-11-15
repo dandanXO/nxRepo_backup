@@ -1,10 +1,11 @@
 import {PhoneSvg} from "../PhoneSvg";
 import {KeySvg} from "../KeySvg";
-import {ConfirmButton} from "../../Buttons/ConfirmButton";
+import {ConfirmButton} from "../../../components/Buttons/ConfirmButton";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../hooks/useBreakpoint";
-import {Input as DesktopInput, Input, InputValue} from "../../Inputs/Input";
-import {MobileInput} from "../../Inputs/MobileInput";
+import {Input as DesktopInput, Input, InputValue} from "../../../components/Inputs/Input";
+import {MobileInput} from "../../../components/Inputs/MobileInput";
+
 import {useState} from "react";
 import {useForm} from "../../../hooks/useForm";
 import {useRegisterMutation} from "../../../../external";
@@ -14,7 +15,7 @@ import {IOpenNotificationWithIcon} from "../../../pageTemplate";
 import {PostRegisterRequest} from "../../../../external/RegisterEndpoint";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";
 import {validate} from "class-validator";
-import {onValidatePhoneInput, onValidatePasswordInput} from "./UserLoginForm/index"
+import {onValidatePhoneInput, onValidatePasswordInput} from "./UserLoginForm"
 import {environment} from "../../../../../environments/environment"
 import {SecuritySvg} from "../SecuritySvg";
 import {connect} from "../../../../gateway/socket";
@@ -22,6 +23,7 @@ import {appSlice} from "../../../../reduxStore/appSlice";
 import { useDispatch } from "react-redux";
 import {AppLocalStorage} from "../../../../persistant/localstorage";
 import cx from "classnames";
+import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 
 const onValidateConfirmPhoneInput = (first: string, second: string) => {
   if(first !== second) {
@@ -177,18 +179,20 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
   return (
     <section className={"flex flex-col"}>
 
-      <Input type={"text"} prefix={
-        <>
-          {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
-          <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
-          <span className={"text-main-primary-main mr-2"}>+55</span>
-        </>
-      }
-         placeholder={"Tu nùmero de celular"}
-         value={phoneInput.data}
-         validation={phoneInput.isValidation}
-         errorMessage={phoneInput.errorMessage}
-         onChange={(event) => {
+      <Input
+        type={"number"}
+        prefix={
+          <>
+            {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
+            <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
+            <span className={"text-main-primary-main mr-2"}>+55</span>
+          </>
+        }
+        placeholder={"Tu nùmero de celular"}
+        value={phoneInput.data}
+        validation={phoneInput.isValidation}
+        errorMessage={phoneInput.errorMessage}
+        onChange={(event) => {
            if(onValidatePhoneInput(event.target.value, setPhoneInput)) {
              setPhoneInput({
                data: event.target.value,
@@ -202,11 +206,11 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
                errorMessage: "Número de celular de 10 ou 11 dígitos",
              })
            }
-         }}
+        }}
       />
 
       <Input
-          type={"text"}
+          type={"number"}
           prefix={
             <>
               {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
@@ -261,44 +265,42 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         suffix={(
           <div
             className="password-toggle"
-            // style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
             onClick={togglePasswordVisibility}
           >
             {isPasswordVisible ? (
-              <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
+              <EyeOutlined className={"text-[#8B619E]"}/>
             ) : (
-              <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+              <EyeInvisibleOutlined className={"text-[#8B619E]"}/>
             )}
           </div>
         )}
       />
 
-
-        <Input
-          type={"text"}
-          // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-          prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
-          outerSuffix={<img className={"h-[48px]"} src={environment.captcha}/>}
-          placeholder={"Código de verificação"}
-          value={captchaInput.data}
-          validation={captchaInput.isValidation}
-          errorMessage={captchaInput.errorMessage}
-          onChange={(event) => {
-            if(onValidateCaptchaInput(event.target.value)) {
-              setCaptchaInput({
-                data: event.target.value,
-                isValidation: true,
-                errorMessage: "",
-              });
-            } else {
-              setCaptchaInput({
-                data: event.target.value,
-                isValidation: false,
-                errorMessage: "por favor insira o código de verificação",
-              })
-            }
-          }}
-        />
+      <Input
+        type={"text"}
+        // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+        prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+        outerSuffix={<img className={"h-[48px]"} src={environment.captcha}/>}
+        placeholder={"Código de verificação"}
+        value={captchaInput.data}
+        validation={captchaInput.isValidation}
+        errorMessage={captchaInput.errorMessage}
+        onChange={(event) => {
+          if(onValidateCaptchaInput(event.target.value)) {
+            setCaptchaInput({
+              data: event.target.value,
+              isValidation: true,
+              errorMessage: "",
+            });
+          } else {
+            setCaptchaInput({
+              data: event.target.value,
+              isValidation: false,
+              errorMessage: "por favor insira o código de verificação",
+            })
+          }
+        }}
+      />
 
       <section className={"flex flex-col mb-4"}>
         <ConfirmButton

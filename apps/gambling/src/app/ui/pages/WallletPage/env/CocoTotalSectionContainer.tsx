@@ -106,7 +106,7 @@ export const CocoTotalSectionContainer = () => {
 
         <div className={"w-full flex-[2] flex flex-row "}>
           <div className={"flex-1 flex flex-col justify-center items-center"}>
-            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold tracking-widest"}>R$ {totalBalanceSheetValue.toFixed(2)}</div>
+            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {totalBalanceSheetValue.toFixed(2)}</div>
             <div className={cx("flex flex-col text-sm md:text-xl", {
               'text-[#ffffffb3] font-normal': isMobile,
 
@@ -114,7 +114,7 @@ export const CocoTotalSectionContainer = () => {
           </div>
 
           <div className={"flex-1 flex flex-col justify-center items-center"}>
-            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold tracking-widest"}>R$ {totalReasableValue.toFixed(2)}</div>
+            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {totalReasableValue.toFixed(2)}</div>
             <div className={cx("flex flex-col text-sm md:text-xl", {
               'text-[#ffffffb3] font-normal': isMobile
             })}>Retirável Total</div>

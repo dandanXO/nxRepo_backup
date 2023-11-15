@@ -1,25 +1,22 @@
+
+import { useEffect, useMemo, useState } from "react";
+import {useSelector} from "react-redux";
+import Select from 'react-select';
+import {notification} from 'antd';
+
+import useBreakpoint from "../../hooks/useBreakpoint";
 import { SectionContainer } from "../../components/container/SectionContainer";
 import { Input, InputValue } from "../../components/Inputs/Input";
 import { Button, ButtonPro } from "../../components/Buttons/Button";
-import { BlueBoard } from "./BlueBoard";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import { WithdrawMobileInput } from "../../components/Inputs/WithdrawMobileInput";
-import { MobileDepositConfirmButton } from "./DepositPanel";
-import { useEffect, useMemo, useState } from "react";
-import Select from 'react-select';
 import {useGetWithdrawLimitMutation, useWithdrawMutation} from "../../../external";
 import {environment} from "../../../../environments/environment";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import {notification} from 'antd';
-import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
-import {useSelector} from "react-redux";
+
 import {RootState} from "../../../reduxStore";
-import {TotalSectionContainer} from "./TotalSectionContainer";
 import { tcx } from "../../utils/tcx";
-import {DepositConfirmButton} from "../../components/Buttons/DepositConfirmButton";
-import {ViewButton} from "../../components/Buttons/ViewButton";
+import {MobileInput} from "../../components/Inputs/MobileInput";
 
 
 type IWithdrawPanel = {
@@ -30,7 +27,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   const { isMobile } = useBreakpoint();
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
 
-  const MainInput = isMobile ? WithdrawMobileInput : Input;
+  const MainInput = isMobile ? MobileInput : Input;
   const [amountInput, setAmountInput] = useState<InputValue<string>>({
     data: '',
     isValidation: true,
@@ -257,9 +254,9 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           <div className={"text-white text-left font-bold mb-2 italic"}>Quantidade retirada</div>
 
           <MainInput
-            inputClassName={"text-main-primary-main leading-none"}
+            inputClassName={"leading-none"}
             themeStyle={"simple"}
-            className="w-full rounded-lg border-main-primary-main bg-varient"
+            className="w-full rounded-lg"
             placeholder={`Retirada mínima R$${withdrawLimitMin}`}
 
             value={amountInput.data}
@@ -294,7 +291,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
               <MainInput
                 inputClassName={"text-main-primary-main leading-none"}
                 themeStyle={"simple"}
-                className="w-full rounded-lg border-main-primary-main bg-varient"
+                className="w-full rounded-lg"
                 placeholder={"Insira o nome do titular do cartão"}
                 value={nameInput.data}
                 validation={nameInput.isValidation}
@@ -309,9 +306,9 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
             <section className={""}>
               <label className={"text-white font-bold block mb-2 italic"}>Código CPF/CNPJ</label>
               <MainInput
-                inputClassName={"text-main-primary-main leading-none "}
                 themeStyle={"simple"}
-                className="w-full rounded-lg border-main-primary-main bg-varient"
+                className="w-full rounded-lg"
+                inputClassName={"text-main-primary-main leading-none "}
                 placeholder={"Insira o seu código CPF"}
                 value={CPFInput.data}
                 validation={CPFInput.isValidation}
@@ -331,10 +328,10 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
                   control: (baseStyle, states) => {
                     return {
                       ...baseStyle,
-                      background: 'var(--varient)',
+                      background: 'var(--input-background)',
                       // borderColor: (states.menuIsOpen || states.isFocused) ? 'var(--varient)' : 'var(--main-primary-main)',
-                      borderColor:'var(--main-primary-main)',
-                      color: 'var(--main-primary-main)',
+                      borderColor:'var(--input-border)',
+                      color: 'var(--input-text-color)',
                       padding: '6px',
                       borderRadius: '8px',
                       outline: 'none',
@@ -347,7 +344,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
                       },
                       '&:focus': {
                         ...baseStyle,
-                        borderColor: 'var(--main-primary-main)',
+                        borderColor: 'var(--input-focus-border)',
                         border:'solid 1px'
                         // backgroundImage: isMobile ?'linear-gradient(180deg,#133f23,#090B0F),linear-gradient(90deg,#FFF600,#4FFB0C':'',
                       }
@@ -366,17 +363,15 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
                   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
                     return {
                       ...styles,
-                      borderColor: 'var(--main-primary-main)',
-                      background: isFocused ? '#0f1114' : '#101e12',
-                      color: 'var(--main-primary-main)',
+                      borderColor: 'var(--input-border)',
+                      background: isFocused ? 'var(--input-focus-background)' : 'var(--input-background)',
+                      color: 'var(--input-text-color)',
                       marginTop: '-5px',
                       marginBottom: '-5px',
                       ':active': {
                         ...styles[':active'],
-                        backgroundColor: isSelected ? '#0f1114' : '#101e12',
-                        borderColor: 'var(--main-primary-main)',
-
-
+                        backgroundColor: isSelected ? 'var(--input-focus-background)' : 'var(--input-background)',
+                        borderColor: 'var(--input-border)',
                       },
                     };
                   },
@@ -385,7 +380,6 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
                     color: '#9ca3af',
                   })
                 }}
-
                 value={selectOption}
                 onChange={(item: any) => {
                   setSelectOption(item)
@@ -397,9 +391,9 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
             <section className={""}>
               <label className={"text-white font-bold block mb-2 italic"}>{selectOption.label}</label>
               <MainInput
-                inputClassName={"text-main-primary-main leading-none"}
+                className="w-full rounded-lg"
+                inputClassName={"leading-none"}
                 themeStyle={"simple"}
-                className="w-full rounded-lg border-main-primary-main bg-varient"
                 placeholder={selectOption.label}
                 value={selectInput.data}
                 validation={selectInput.isValidation}
