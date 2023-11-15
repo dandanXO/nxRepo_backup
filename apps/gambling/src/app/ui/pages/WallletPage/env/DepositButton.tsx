@@ -37,13 +37,13 @@ export const DepositButton = (props: IDepositButton) => {
 
   return (
     <button
-      className={cx(`flex font-bold lg:flex-row flex-col mb-2 basis-[31%] `,
+      className={cx(`flex font-bold lg:flex-row flex-col mb-2 mx-1 basis-[31%] `,
         "justify-around items-center min-h-[55px] whitespace-nowrap",
         {
           [bgStyle]: !isActive,
           [activeBgStyle]: isActive,
           'relative': isRateTag,
-          'm-2': !isMobile
+          'basis-1/3': !isMobile
         }, className
       )}
       onClick={() => {

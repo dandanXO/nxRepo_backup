@@ -68,7 +68,7 @@ export const CocoWalletPage = () => {
         }}/>
       )}
 
-      <div className={"m-auto w-[94%]"}>
+      <div className={"m-auto w-[94%] pb-16"}>
         <TotalSectionContainer />
 
         <div id={"tab-item"}>
