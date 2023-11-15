@@ -49,11 +49,11 @@ export const RecordPanel = (props: IRecordPanel) => {
       //   token,
       // });
     } else {
-      triggerGetWithdrawRecord({
-        limit: 1000,
-        page: 1,
-        token,
-      });
+      // triggerGetWithdrawRecord({
+      //   limit: 1000,
+      //   page: 1,
+      //   token,
+      // });
     }
   }, [recordPanelMode]);
 
@@ -158,7 +158,7 @@ export const RecordPanel = (props: IRecordPanel) => {
       {isMobile ? null : recordPanelMode === 'deposit' ? (
         <RecordPanelDeposit />
       ) : (
-        <RecordPanelWithdraw records={withdrawRecordData?.data || []} />
+        <RecordPanelWithdraw />
       )}
     </SectionContainer>
   );
