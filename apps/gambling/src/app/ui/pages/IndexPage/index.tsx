@@ -37,7 +37,8 @@ export const IndexPage = () => {
 
   const { isMobile } = useBreakpoint();
   const { allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
-  const [activeTab, setActiveTab] = useState("Todos");
+  // const [activeTab, setActiveTab] = useState("Todos");
+  const [activeTab, setActiveTab] = useState("Salão");
   const [viewType, setViewType] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const { searchResults, handleSearchGames } = useSearchGames(searchInput);

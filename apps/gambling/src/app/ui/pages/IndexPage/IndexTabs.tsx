@@ -18,7 +18,8 @@ export const IndexTabs = ({
     <ScrollTab className="mx-4">
       <Tabs className={"game-type-tab-list"}>
         {
-          ["Todos", ...label, 'Favoritos'].map((tab: string, index: number) => {
+          // ["Todos", ...label, 'Favoritos']
+          ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
             return (
               <ImageTab
                 // className={cx(`font-bold border-none border-0 rounded `, {
