@@ -16,7 +16,7 @@ interface IColumns {
   title: string;
   name: string;
   key: string;
-  render?: (i: any) => ReactElement;
+  render?: (i: any) => ReactElement | string;
 }
 
 interface ITable {
