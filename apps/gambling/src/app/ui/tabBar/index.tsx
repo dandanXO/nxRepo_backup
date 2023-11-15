@@ -27,7 +27,9 @@ export const TabBar = (props: IFooter) => {
   const showVIP = props.isShowVIP === undefined ? true : props.isShowVIP;
   const showProfile = props.isShowProfile === undefined ? true : props.isShowProfile;
   const size = props.size == undefined ? "small" : props.size;
-  const iconSize = size === "big" ? "w-[40px] h-[40px]" : "w-[27px] h-[27px]";
+
+  // const iconSize = size === "big" ? "w-[40px] h-[40px]" : "w-[27px] h-[27px]";
+  const iconSize = size === "big" ? "w-[34px] h-[34px]" : "w-[27px] h-[27px]";
 
   const {
     onClickToIndex,

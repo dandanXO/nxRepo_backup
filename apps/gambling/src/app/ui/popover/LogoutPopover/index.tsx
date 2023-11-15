@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {useDispatch} from "react-redux";
 import {clearLoginLocalStorage} from "../../../persistant/setLoginLocalStorage";
-import {LogoutSection} from "../../components/LogoutSection";
+import {LogoutSection} from "../../components-bs/LogoutSection";
 
 type ILogoutPopover = {
   close: () => void;

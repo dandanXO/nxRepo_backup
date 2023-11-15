@@ -1,10 +1,11 @@
 import {PhoneSvg} from "../PhoneSvg";
 import {KeySvg} from "../KeySvg";
-import {ConfirmButton} from "../../Buttons/ConfirmButton";
+import {ConfirmButton} from "../../../components/Buttons/ConfirmButton";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../hooks/useBreakpoint";
-import {Input as DesktopInput, Input, InputValue} from "../../Inputs/Input";
-import {MobileInput} from "../../Inputs/MobileInput";
+import {Input as DesktopInput, Input, InputValue} from "../../../components/Inputs/Input";
+import {MobileInput} from "../../../components/Inputs/MobileInput";
+
 import {useState} from "react";
 import {useForm} from "../../../hooks/useForm";
 import {useRegisterMutation} from "../../../../external";
@@ -14,7 +15,7 @@ import {IOpenNotificationWithIcon} from "../../../pageTemplate";
 import {PostRegisterRequest} from "../../../../external/RegisterEndpoint";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";
 import {validate} from "class-validator";
-import {onValidatePhoneInput, onValidatePasswordInput} from "./UserLoginForm/index"
+import {onValidatePhoneInput, onValidatePasswordInput} from "./UserLoginForm"
 import {environment} from "../../../../../environments/environment"
 import {SecuritySvg} from "../SecuritySvg";
 import {connect} from "../../../../gateway/socket";
@@ -22,6 +23,7 @@ import {appSlice} from "../../../../reduxStore/appSlice";
 import { useDispatch } from "react-redux";
 import {AppLocalStorage} from "../../../../persistant/localstorage";
 import cx from "classnames";
+import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 
 const onValidateConfirmPhoneInput = (first: string, second: string) => {
   if(first !== second) {
@@ -263,13 +265,12 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         suffix={(
           <div
             className="password-toggle"
-            // style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
             onClick={togglePasswordVisibility}
           >
             {isPasswordVisible ? (
-              <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
+              <EyeOutlined className={"text-[#8B619E]"}/>
             ) : (
-              <img className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
+              <EyeInvisibleOutlined className={"text-[#8B619E]"}/>
             )}
           </div>
         )}

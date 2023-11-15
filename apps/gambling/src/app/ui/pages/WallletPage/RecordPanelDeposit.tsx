@@ -33,7 +33,7 @@ export const RecordPanelDeposit = () => {
 
   const tableColumns = [
     {
-      title: 'identificador', name: 'pay_serial_no', key: 'pay_serial_no', width: '200px',
+      title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', width: '200px',
       render: (record: any) => {
         return (
           <div className='whitespace-nowrap'>

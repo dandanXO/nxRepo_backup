@@ -91,7 +91,7 @@ export const Input = (props: IInput) => {
         {props.outerSuffix}
       </div>
       {props.validation === false && (
-        <div className={"text-left text-[#E47174] pl-4"}>{props.errorMessage}</div>
+        <div className={"text-left text-[var(--input-invalidation-text-color)] pl-4"}>{props.errorMessage}</div>
       )}
     </div>
 

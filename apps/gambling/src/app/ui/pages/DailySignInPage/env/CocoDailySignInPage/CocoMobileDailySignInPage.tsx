@@ -216,7 +216,7 @@ const CocoMobileDailySignInPage = ({
 
       <div
         className='my-3 text-white text-sm text-center'
-        onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}
+        onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
       >{'visualizar registros >'}</div>
 
       <SignInIngoContainer>
