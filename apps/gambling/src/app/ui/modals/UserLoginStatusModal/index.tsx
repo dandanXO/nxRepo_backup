@@ -1,5 +1,5 @@
 import {CloseCircleOutlined} from "@ant-design/icons";
-import {UserLoginStatusSection} from "../../components/UserLoginStatusSection";
+import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import {environment} from "../../../../environments/environment";
 import {PernambucanaContainer} from "./env/PernambucanaContainer";

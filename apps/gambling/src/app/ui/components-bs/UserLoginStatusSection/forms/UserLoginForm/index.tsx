@@ -1,7 +1,7 @@
 import {PhoneSvg} from "../../PhoneSvg";
 import {KeySvg} from "../../KeySvg";
-import {ConfirmButton} from "../../../Buttons/ConfirmButton";
-import {Input as DesktopInput, Input, InputValue} from "../../../Inputs/Input";
+import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
+import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 import {useState} from "react";
@@ -17,7 +17,7 @@ import {connect} from "../../../../../gateway/socket";
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
-import {MobileInput} from "../../../Inputs/MobileInput";
+import {MobileInput} from "../../../../components/Inputs/MobileInput";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
