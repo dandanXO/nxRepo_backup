@@ -11,6 +11,7 @@ import {GetSignInConfigResponse} from "../../../../../external";
 import { RootState } from '../../../../../reduxStore';
 import { useSelector } from 'react-redux';
 import { LevelList } from "../../index";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 
 const Container = styled.div`
   //background: #287052;
@@ -53,14 +54,10 @@ export const PernambucanMobileDailySignInPage = ({
       {/*  </section>*/}
 
       <div className={'p-2'}>
-        <LeftOutlined
-          style={{ fontSize: '24px' }} // 調整箭頭圖示的大小
-          className={'absolute left-[20px] top-[20px] text-[#ffffff] font-bold'}
-          onClick={() => {
-            navigate(PageOrModalPathEnum.IndexPage);
-          }}
-        />
 
+        <BackNavigation onClick={() => {
+          navigate(PageOrModalPathEnum.IndexPage);
+        }}/>
 
         <div className={'mt-2.5 mb-2 text-lg font-bold text-white'}>
           Meu nível atual VIP {currentLevel}

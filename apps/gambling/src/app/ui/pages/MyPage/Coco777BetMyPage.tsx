@@ -131,12 +131,14 @@ const Coco777BetMyPage = ({
         </div>
       </VIPContainer>
 
-      <List>
+      <List
+        className={"bg-gradient-to-b from-[#0F1744] to-[#2E1555]"}
+      >
         <ListHeader>Outras funções</ListHeader>
         <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>
         <ListItem title={"Registro do jogo"} onClick={() => onClickToGameRecord()}/>
         <ListItem title={"Configuração"} onClick={() => onClickToSetting()}/>
-        <ListItem title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>
+        <ListItem isEnd={true} title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>
       </List>
 
     </Container>

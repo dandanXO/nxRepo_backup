@@ -10,6 +10,8 @@ import { environment } from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -179,7 +181,7 @@ export const CocoLevelList = ({
 
   return (
     <section
-      className={tcx('vip-tab-items flex overflow-auto w-full relative', className)}
+      className={tcx('vip-tab-items flex overflow-auto w-full relative h-9 text-lg', className)}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
@@ -193,10 +195,10 @@ export const CocoLevelList = ({
         return (
           <LevelItemWrapper
             key={level}
-            className='w-[10%] p-0 min-w-[84px] mr-3 relative'
+            className={tcx('w-[10%] p-0 min-w-[100px] mr-3 relative h-full', ['ml-3', isMobile && level === 1])}
           >
             <LevelButton
-              className='text-lg h-9 flex justify-center items-center gap-2 w-full'
+              className='flex justify-center items-center gap-2 w-full h-full'
               onClick={()=>setCurrentSelectedLevel(level)}
             >
               {
@@ -287,7 +289,7 @@ const DayList = ({
                         )
                       }
                     </div>
-                    <StraightContainer className='break-all leading-normal text-base font-bold text-[#561a99] text-center py-2 px-1 w-full'>R${config?.cashback}</StraightContainer>
+                    <StraightContainer className='break-all leading-normal text-base font-bold text-[#561a99] text-center py-2 px-1 w-full'>R$ {config?.cashback}</StraightContainer>
                   </div>
                 </div>
               </DayItem>
@@ -329,6 +331,10 @@ const CocoDailySignInPage = ({
 
   const disableButton = vipLevel === 0 || todayIsSignIn
 
+  const {
+    onClickToIndex
+  } = usePageNavigate();
+
   if (isMobile) {
     return (
       <CocoMobileDailySignInPage
@@ -347,13 +353,8 @@ const CocoDailySignInPage = ({
   return (
     <div>
       {contextHolder}
-      <button
-        className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
-        onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}
-      >
-        <LeftOutlined />
-        <div>Retornar</div>
-      </button>
+
+      <BackNavigation onClick={() => onClickToIndex()}/>
 
       <VIPContainer>
         <StraightContainer className='flex relative'>
@@ -421,7 +422,11 @@ const CocoDailySignInPage = ({
             <div className='mt-3 mb-[30px] my-auto text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </VIPRight>
 
-          <button className='absolute bottom-[6%] right-[7%] text-white text-xl'>{'visualizar registros >'}</button>
+          <button
+            className='absolute bottom-[6%] right-[7%] text-white text-xl'
+            onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}
+          >{'visualizar registros >'}
+          </button>
 
           <VIPIcon>
             <ResponsiveContainer>

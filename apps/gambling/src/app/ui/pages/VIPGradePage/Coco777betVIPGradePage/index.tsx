@@ -8,6 +8,7 @@ import CurrentLevelInfoCard from "./CurrentLevelInfoCard";
 import { GetSignInConfigResponse, GetUserVIPAllInfoResponse, GetVIPInfoResponse } from "../../../../external";
 import LevelInfoCard from "./LevelInfoCard";
 import {Container} from "../../../components/container/Container";
+import {BackNavigation} from "../../../components/BackNavigation/BackNavigation";
 
 interface ICoco777betVIPGradePageProps {
   currentLevel: number
@@ -51,16 +52,13 @@ const Coco777betVIPGradePage = ({
 
   return (
     <Container>
-      <nav
-        className={tcx('flex items-center text-white text-2xl', ['hidden', isMobile])}
+
+      <BackNavigation
         onClick={() => {
           updateBalance();
           navigate(PageOrModalPathEnum.IndexPage);
         }}
-      >
-        <LeftOutlined />
-        <div>Retornar</div>
-      </nav>
+      />
 
       <section className='mt-2'>
         <div className={tcx('text-start text-4xl py-5', ['text-base py-2', isMobile])}>Meu progresso VIP</div>

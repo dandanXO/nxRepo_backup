@@ -9,6 +9,8 @@ import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { SectionContainer } from '../../components/container/SectionContainer';
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import { environment } from "../../../../environments/environment"
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
 
 const tableStyle = {
   thead: {
@@ -47,6 +49,10 @@ export const GameRecordPage = () => {
     });
   }, [dates]);
 
+  const {
+    onClickToIndex,
+  } = usePageNavigate();
+
   return (
     <>
       <div className={'flex h-full flex-col p-4 md:p-8'}>
@@ -54,20 +60,7 @@ export const GameRecordPage = () => {
           className="flex h-full flex-col"
           id={'game-record-section'}
         >
-          <button
-            className={'flex flex-row items-center mb-4'}
-            onClick={() => navigate(PageOrModalPathEnum.IndexPage)}
-          >
-            <img
-              className={'mr-3 h-[21px] w-[21px]'}
-              alt={'back'}
-              src={
-                'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAMAAADfNcjQAAAAZlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+Vn2moAAAAIXRSTlMA5QjW6825oZSHeFMpIRoUD/Xw397dxMOurWtpXUI9MzAmTIk1AAAAlElEQVQ4y7XURxbEIAwDUBzS+/RJD/e/ZKIDKFqF7ec9wLZwd63KrLryMYRgF16eHjz3Ah7v1HO41dQz+KdhHP3hvqWewpOOef+F/3rmXQJPI+athw/Umzc8Y+xqg+fUtxheUF+f8JL68oBP1N0LPhMkG+gR+pL6mbpQutS6WbrdemD0yOmh1WOvg6Ojp8Or468/kAMmXBWDCW3GHwAAAABJRU5ErkJggg=='
-              }
-            />
-          </button>
-
-          <span className={'text-2xl text-white mb-4 text-left'}>Registro do jogo</span>
+          <BackNavigation onClick={() => onClickToIndex()}/>
 
           <section className={'mb-4 text-left text-white'}>
             <RangePicker

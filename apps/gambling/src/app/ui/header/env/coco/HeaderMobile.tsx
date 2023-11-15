@@ -9,6 +9,7 @@ import {environment} from "../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {RegisterButton, RegisterButton2} from "../../../components/Buttons/RegisterButton";
+import {MessageOutlined} from "@ant-design/icons";
 
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;
@@ -38,7 +39,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
         props.className,
       )}
     >
-      <div className={"flex flex-row items-center"}>
+      <div className={"flex flex-row justify-between items-center w-full"}>
         <button className={"mr-4"}>
           <img
             alt={"menu"}
@@ -51,31 +52,22 @@ export const HeaderMobile = (props: IHeaderMobile) => {
           />
         </button>
 
-        {/*<button className={"w-[40px]"}>*/}
-        {/*  <a>*/}
-        {/*    <img*/}
-        {/*      alt={"logo"}*/}
-        {/*      className={""}*/}
-        {/*      src={`assets/${environment.assetPrefix}/logo_h5.png`}*/}
-        {/*      onClick={() => {*/}
-        {/*        navigate(PageOrModalPathEnum.IndexPage)*/}
-        {/*      }}*/}
-        {/*    />*/}
-        {/*  </a>*/}
-        {/*</button>*/}
-
-      </div>
-
-      {!login ? (
-        <section>
-          {/*<RegisterButton className={"text-[#ffffff] font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>*/}
-          <RegisterButton2 onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton2>
-        </section>
-      ): (
-        <>
+        {!login && (
+          <section>
+            {/*<RegisterButton className={"text-[#ffffff] font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>*/}
+            <RegisterButton2 onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton2>
+          </section>
+        )}
+        {login && (
           <UserMoneyStatusSection className={"rounded-[5px] !bg-[#1A3084] shadow-[0_1px_#1f6dc8]"}/>
-        </>
-      )}
+        )}
+
+        {login && (
+          <div className={"rounded-[5px] !bg-[#1A3084] py-[5px] px-4 text-white text-bold shadow-[0_1px_#1f6dc8]"}>
+            Message
+          </div>
+        )}
+      </div>
 
     </header>
   )

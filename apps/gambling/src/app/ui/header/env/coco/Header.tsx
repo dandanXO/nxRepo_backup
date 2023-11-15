@@ -41,14 +41,29 @@ export type IHeader = {
   onClickToChangeLogoutPopover: (display: boolean) => void;
 }
 
+const HeaderButton = styled.button.attrs((props) => ({
+  className: cx("font-bold", props.className),
+}))<{
+  className?: string;
+}>`
+  width: 100px;
+  background-color: #040404;
+  color: #cdbbff;
+  transform: skew(-8deg);
+`
+
+const HeaderButtonText = styled.span`
+  transform: skew(8deg);
+`
 export const Header = (props: IHeader) => {
   const navigate = useNavigate()
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app)
 
   return (
     <header
-      className={cx("max-h-[66px] px-5",
-        "flex flex-row justify-start items-center"
+      className={cx("max-h-[66px]",
+        "flex flex-row justify-between items-center",
+        // "bg-purple-500"
       )}
       // style={{
       //   backgroundImage: `url("assets/${environment.assetPrefix}/top_di.png")`, // 替换成背景图片路径
@@ -59,10 +74,30 @@ export const Header = (props: IHeader) => {
       // }}
     >
 
-
-
+      <div className={"flex flex-row"}>
+        <div className={"w-[100px] p-4 bg-[#5939f7]"}>
+          <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
+        </div>
+        <HeaderButton>
+          <HeaderButtonText>Jogos</HeaderButtonText>
+        </HeaderButton>
+        <HeaderButton>
+          <HeaderButtonText>Atividade</HeaderButtonText>
+        </HeaderButton>
+        <HeaderButton>
+          <HeaderButtonText>Convidar</HeaderButtonText>
+        </HeaderButton>
+        <HeaderButton>
+          <HeaderButtonText>VIP</HeaderButtonText>
+        </HeaderButton>
+        <HeaderButton>
+          <HeaderButtonText>Download</HeaderButtonText>
+        </HeaderButton>
+      </div>
       {!isLogin && (
-        <LoginButton className={"text-white text-lg"}>Connecte-se</LoginButton>
+        <LoginButton className={"text-white text-lg"} onClick={() => {
+          props.onClickUserLoginStatusDrawer()
+        }}>Connecte-se</LoginButton>
       )}
 
       {/*[How to Align Last Flex Item to Right](https://medium.com/@iamryanyu/how-to-align-last-flex-item-to-right-73512e4e5912)*/}
