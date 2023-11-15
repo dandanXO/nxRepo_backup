@@ -97,9 +97,18 @@
   --tab-text-color-normal: #2CFD99;
   --tab-text-color-active: #E5F041;
 
-  --input-mobile-border: transparent;
 
-  --drawer-bg: #013E42;
-  --drawer-border: #013E42;
+  --input-text-color: #ffffff;
+  --input-placeholder-color: #d2afff;
+  /*--input-mobile-border: transparent;*/
+  --input-border: #5a3af7b3;
+  --input-background: #341972;
+  --input-focus-background: #E47174;
+  --input-focus-border: #1A7BFF;
+  --input-invalidation-border: #8B619E;
+  --input-invalidation-text-color: #E47174;
+
+  --drawer-bg: #17103F;
+  --drawer-border: rgba(50,63,91,.7);
 }
 
