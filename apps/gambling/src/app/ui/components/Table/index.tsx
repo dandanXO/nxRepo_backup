@@ -5,9 +5,9 @@ import { environment } from "../../../../environments/environment";
 
 const NoData = () => {
   return (
-    <div className=' flex flex-col justify-center items-center py-10 bg-table-varient'>
+    <div className='flex flex-col justify-center items-center py-10 bg-table-varient gap-2'>
       <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
-      <div>Nada aq</div>
+      <div className='text-lg'>Nada aqui</div>
     </div>
   )
 }
@@ -80,28 +80,29 @@ export const Table = (props: ITable) => {
           </thead>
         </table>
       </div>
-      <div className='h-4/5 overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
+      <div className='h-full overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
         <table className={tcx('table-zebra relative table w-full table-fixed ')}>
           <tbody className=''>
-            {dataSource.length === 0 ? <tr>
-              <NoData />
-            </tr> :
-              dataSource.map((data: any) => {
-                return <tr>
-                  {columns?.map((col: any, colIndex: number) => (
-                    <td key={col.key + colIndex}
-                      className={tcx('p-2 border-white border-opacity-20 sm:break-all text-center',
-                        ['border-r', colIndex !== columns.length - 1],
-                        [`w-[${col.width}]`, col.width !== undefined],
-                        props.className,
-                        props.contentStyle
-                      )}>
-                      {col.render !== undefined ? col.render(data as any) : data[col.name]}
-                    </td>
-                  ))}
-                </tr>
-              })
-            }
+            <NoData />
+            {/*{dataSource.length === 0 ? <tr>*/}
+            {/*  <NoData />*/}
+            {/*</tr> :*/}
+            {/*  dataSource.map((data: any) => {*/}
+            {/*    return <tr>*/}
+            {/*      {columns?.map((col: any, colIndex: number) => (*/}
+            {/*        <td key={col.key + colIndex}*/}
+            {/*          className={tcx('p-2 border-white border-opacity-20 sm:break-all text-center',*/}
+            {/*            ['border-r', colIndex !== columns.length - 1],*/}
+            {/*            [`w-[${col.width}]`, col.width !== undefined],*/}
+            {/*            props.className,*/}
+            {/*            props.contentStyle*/}
+            {/*          )}>*/}
+            {/*          {col.render !== undefined ? col.render(data as any) : data[col.name]}*/}
+            {/*        </td>*/}
+            {/*      ))}*/}
+            {/*    </tr>*/}
+            {/*  })*/}
+            {/*}*/}
           </tbody>
         </table>
       </div>
