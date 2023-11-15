@@ -181,7 +181,7 @@ export const CocoLevelList = ({
 
   return (
     <section
-      className={tcx('vip-tab-items flex overflow-auto w-full relative', className)}
+      className={tcx('vip-tab-items flex overflow-auto w-full relative h-9 text-lg', className)}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
@@ -195,10 +195,10 @@ export const CocoLevelList = ({
         return (
           <LevelItemWrapper
             key={level}
-            className={tcx('w-[10%] p-0 min-w-[84px] mr-3 relative', ['ml-3', isMobile && level === 1])}
+            className={tcx('w-[10%] p-0 min-w-[100px] mr-3 relative h-full', ['ml-3', isMobile && level === 1])}
           >
             <LevelButton
-              className='text-lg h-9 flex justify-center items-center gap-2 w-full'
+              className='flex justify-center items-center gap-2 w-full h-full'
               onClick={()=>setCurrentSelectedLevel(level)}
             >
               {
