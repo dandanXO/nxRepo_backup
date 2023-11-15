@@ -20,12 +20,13 @@ export const InputSection = styled.a<{
 
   transition: all .4s;
 
-  /* border-color: var(--main-primary-main); */
+  border-color: var(--input-border);
+
   ${(props) => props.focus && `
-    border-color: #01FF52;
+    border-color: var(--input-focus-border);
   `}
   ${(props) => props.validation === false && `
-    border-color: #E47174;
+    border-color: var(--input-inactive-border);
   `}
 
 `
@@ -56,9 +57,10 @@ export const Input = (props: IInput) => {
         <InputSection focus={focus} onClick={() => {
           // (inputRef && inputRef.current as any).focus()
         }}
-        className={tcx("w-full rounded-3xl border-main-primary-main border-solid border py-4 px-3.5 ",
+        className={tcx("w-full rounded-3xl border-[var(--input-border)] border-solid border py-4 px-3.5 ",
           // "active:!border-2 active:!border-[#01FF52]": !props.themeStyle,
           ["border-utils-gray", props.themeStyle === "simple"],
+          "bg-[var(--input-background)]",
           props.className
         )}
                       validation={props.validation}
@@ -67,7 +69,7 @@ export const Input = (props: IInput) => {
           {props.children ? (props.children) : (
             <input
               // ref={inputRef as any}
-              className={cx(props.inputClassName, "bg-transparent focus:outline-none w-full text-[#c1c1c1] placeholder-color")}
+              className={cx(props.inputClassName, "bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder-[var(--input-placeholder-color)]")}
               type={props.type || "text"}
               placeholder={props.placeholder}
               value={props.value}

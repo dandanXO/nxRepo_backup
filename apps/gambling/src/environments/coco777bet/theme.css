@@ -98,7 +98,16 @@
   --tab-text-color-normal: #FFFFFF;
   --tab-text-color-active: #FFFFFF;
 
+
+  --input-text-color: #ffffff;
+  --input-placeholder-color: gray;
   --input-mobile-border: transparent;
+  --input-border: #5a3af7;
+  --input-background: #341972;
+  --input-focus-background: #341972;
+  --input-focus-border: #ffffff;
+  --input-active-background: #E47174;
+  --input-inactive-border: #E47174;
 
   --drawer-bg: #17103F;
   --drawer-border: rgba(50,63,91,.7);
