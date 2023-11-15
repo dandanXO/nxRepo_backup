@@ -1,4 +1,4 @@
-import { WithdrawMobileInput } from "../../../components/Inputs/WithdrawMobileInput"
+
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import { Input } from "../../../components/Inputs/Input";
 import cx from 'classnames';
@@ -67,7 +67,7 @@ export const DepositInput = (props: IDepositInput) => {
   return (
     <div className={cx("relative", { 'my-10': !isMobile })}>
       {isMobile ? (
-        <WithdrawMobileInput value={inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"} />
+        <MobileInput value={inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"} />
       ) : (
         <Input value={inputValue} className={"w-full bg-white border-white"} themeStyle={"normal"} />
       )}
