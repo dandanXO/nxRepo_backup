@@ -129,7 +129,7 @@ export const DepositPanel = (props: IDepositPanel) => {
       <DepositNoticeSection />
       <section className={"flex flex-col w-full"}>
         {recharge_options && recharge_options.length > 0 && <DepositInput inputValue={inputValue} selectedIndexConfig={selectedIndexConfig} />}
-        <div className={tcx("flex m-auto flex-row flex-wrap w-full justify-between items-stretch", [`mb-20 justify-start`, !isMobile])}>
+        <div className={tcx("flex flex-1 m-auto flex-row flex-wrap w-full justify-start items-stretch", [`mb-20 `, !isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
             const isShowRate = Number(config?.rate) !== 0;
