@@ -80,10 +80,7 @@ export const CocoIndexPage = ({
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
         // "p-4": !isMobile,
       })}>
-
-        <CompanySloganLabel/>
-
-        {/*<img src={FakeBanner}/>*/}
+        {isMobile && <CompanySloganLabel/>}
         <AppCarousel>
           <CocoAppCarouselContent/>
           <CocoAppCarouselContent2/>
@@ -94,8 +91,9 @@ export const CocoIndexPage = ({
         </AppCarousel>
       </div>
 
-      {isMobile && (
-        <Container className="bg-[#020E29]">
+      <Container className="bg-[#020E29]">
+        {/*Tabs*/}
+        {isMobile ? (
           <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
             <DragScrollContainer>
               <section className={"flex flex-row items-center bg-[#000C26] px-0.5"}>
@@ -120,49 +118,7 @@ export const CocoIndexPage = ({
               </section>
             </DragScrollContainer>
           </div>
-
-          <div className="mb-4" onClick={onClickToSearch}>
-            <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
-              inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
-              placeholder={"Por favor insira o nome do jogo"}
-              suffix={<SearchOutlined className={"text-[#007aff] text-xl"} />}
-            />
-          </div>
-
-          <div className="bg-[#000C26]">
-            {gameList()}
-          </div>
-
-        </Container>
-      )}
-      {/* {isMobile && (
-        <div className={"p-2 bg-[#020E29]"}>
-          {allGameList !== undefined && allGameList.map((i: any, index: number) => {
-            return (
-              <GameTypeSectionList
-                key={index}
-                totalFavoriteLocalState={totalFavoriteLocalState}
-                setTotalFavoriteLocalState={setTotalFavoriteLocalState}
-                gameTypeName={i.gameType}
-                data={i.data.games}
-                onClick={()=>navigate(PageOrModalPathEnum.IndexSlotPage)}
-              />
-            )
-          })}
-        </div>
-      )} */}
-
-      {!isMobile && (
-        <Container>
-          <section
-            // style={{ border: '1px solid #2CFD99' }}
-            className={cx(
-              // "border-solid",
-              // "rounded-lg",
-              // "bg-[rgba(1,62,66,0.6)]",
-              "flex flex-col",
-            )}
-          >
+          ): (
             <section
               style={{borderBottom: '1px solid rgb(44, 253, 153)'}}
               className="mb-4 flex flex-row items-center px-4 w-full"
@@ -171,24 +127,34 @@ export const CocoIndexPage = ({
                 <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
               </div>
 
-              <div className="shirnk-0 grow-0 basis-[150px]">
-                <Input
-                  className="bg-[#069D5C] items-baseline"
-                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
-                  onChange={(event: any) => {
-                    setSearchInput(event.target.value)
-                  }}
-                />
-              </div>
             </section>
+        )}
 
-            <section className={"flex flex-col"}>
-              {gameList()}
-            </section>
+        {isMobile ? (
+          <div className="mb-4" onClick={onClickToSearch}>
+            <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
+                   inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
+                   placeholder={"Por favor insira o nome do jogo"}
+                   suffix={<SearchOutlined className={"text-[#007aff] text-xl"} />}
+            />
+          </div>
+        ): (
+          <div className="shirnk-0 grow-0 basis-[150px]">
+            <Input
+              className="bg-[#069D5C] items-baseline"
+              prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
+              onChange={(event: any) => {
+                setSearchInput(event.target.value)
+              }}
+            />
+          </div>
+        )}
 
-          </section>
-        </Container>
-      )}
+        <div className="bg-[#000C26]">
+          {gameList()}
+        </div>
+
+      </Container>
 
     </>
   )
