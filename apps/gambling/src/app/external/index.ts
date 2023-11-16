@@ -375,7 +375,7 @@ type GetUserGameRecordRequest = {
   token: string;
 };
 
-type GetUserGameRecordResponse = {
+export type GetUserGameRecordResponse = {
   total: number;
   rows: {
     gameId: number;
