@@ -286,7 +286,7 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.VIPGradePage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
               <VIPGradePage />
             </PageTemplate>
           )}/>

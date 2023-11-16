@@ -44,6 +44,7 @@ const CurrentLevelInfoCard = ({
             progress={(userVIPInfo?.data?.vip_score || 0) /
               (userVIPInfo?.data?.next_level_score || 1)
           }
+            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
           >
             <div className={tcx('h-full flex items-center', ['px-4', isMobile], ['justify-center', !isMobile])}>
               {
@@ -97,6 +98,7 @@ const CurrentLevelInfoCard = ({
               ? userVIPInfo?.data?.flow_progress / 100
               : 0
             }
+            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
           >
             <div className={tcx('h-full flex items-center', ['px-4', isMobile], ['justify-center', !isMobile])}>
               {
