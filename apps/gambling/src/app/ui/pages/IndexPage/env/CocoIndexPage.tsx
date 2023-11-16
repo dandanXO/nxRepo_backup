@@ -104,7 +104,7 @@ export const CocoIndexPage = ({
       <Container className="bg-[#020E29]">
         {/*Tabs*/}
         {isMobile ? (
-          <div>
+          <>
             <div className="mb-4" onClick={handleToSearchPage}>
               <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
                      inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
@@ -141,7 +141,7 @@ export const CocoIndexPage = ({
               </DragScrollContainer>
             </div>
 
-          </div>
+          </>
           ): (
             <div className={"flex flex-row justify-center items-center"}>
 
