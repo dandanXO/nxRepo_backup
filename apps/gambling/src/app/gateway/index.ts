@@ -61,7 +61,7 @@ export const gateway = async (
     }
 
     // NOTE: other msg
-    if(result.data.code !== 200) {
+    if(result.data.code !==null && result.data.code !== 200) {
       dispatch(appSlice.actions.setGlobalMessage(result.data?.msg));
       return {
         error: "error",
