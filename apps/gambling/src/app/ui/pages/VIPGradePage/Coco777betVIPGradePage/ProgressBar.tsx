@@ -42,7 +42,7 @@ const ProgressBar = ({
   progressColor
 }:IProgressBarProps) => {
   return (
-    <div className={tcx('relative flex-auto', className, rounded)}>
+    <div className={tcx('relative flex-auto overflow-hidden', className, rounded)}>
       <Progress
         className={rounded}
         progress={progress > 1 ? 100 : progress * 100}

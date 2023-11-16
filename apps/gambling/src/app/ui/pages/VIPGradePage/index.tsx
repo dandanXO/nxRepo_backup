@@ -93,22 +93,41 @@ export const JackpotMap: {
 export const VIPGradePage = () => {
   useAllowLoginRouterRules();
 
-  const [triggerGetUserVIPALLInfo, {currentData: vipAllInfo}] = useLazyGetUserVIPAllInfoQuery();
+  const { isMobile } = useBreakpoint();
 
-  const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
-  const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
+  const [triggerGetUserVIPALLInfo, {data: oldVipAllInfo, currentData: vipAllInfo, isLoading, isFetching}] = useLazyGetUserVIPAllInfoQuery();
 
-  const navigate = useNavigate();
+  // NOTICE: Store Mutation old data
+  const [triggerGetSignConfig, { data: signInConfigResponseData , isLoading: isGetSignConfigLoading}] = useGetSignInConfigMutation();
+  const [signInConfig, setSignInConfig] = useState<any>()
+  useEffect(() => {
+    if(!isGetSignConfigLoading) {
+      setSignInConfig(signInConfigResponseData);
+    }
+  }, [signInConfigResponseData, isGetSignConfigLoading])
+
+  // NOTICE: Store Mutation  old data
+  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isLoading: isGetUserVIPInfoLoading }] = useGetVIPInfoMutation();
+  const [userVIPInfo, setUserVIPInfo] = useState<any>()
+  useEffect(() => {
+    if(!isGetUserVIPInfoLoading) {
+      setUserVIPInfo(userVIPInfoResponseData);
+    }
+  }, [userVIPInfoResponseData, isGetUserVIPInfoLoading])
+
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem('token') || '';
-    triggerGetSignConfig({
-      onlyGetSignInConfig: true,
-      token,
-    });
-    triggerGetUserVIPInfo({
-      token,
-    });
+    const token = AppLocalStorage.getItem('token');
+
+    if(token && token !== "" && token !== "undefined") {
+      triggerGetSignConfig({
+        onlyGetSignInConfig: true,
+        token,
+      });
+      triggerGetUserVIPInfo({
+        token,
+      });
+    }
     triggerGetUserVIPALLInfo(null);
   }, []);
 
@@ -132,39 +151,20 @@ export const VIPGradePage = () => {
 
   // const vip_level = useSelector((state: RootState) => state.app?.userStore?.userinfo?.vip_level)
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
-  console.log("vip_level", vip_level);
+  // console.log("vip_level", vip_level);
 
   const [currentSelectedLevel, setCurrentSelectedLevel] = useState(vip_level);
   const [currentLevel, setCurrentLevel] = useState(vip_level);
   // console.log("user", user);
 
   const dispatch = useDispatch();
-  // const userStore = useSelector((state: RootState) => state?.app?.userStore);
-  const userData = useSelector((state: RootState) => state.app?.userStore)
 
   useEffect(() => {
-    // dispatch(appSlice.actions.setUserStore({
-    //   ...userData,
-    //   userinfo: {
-    //     vip_level,
-    //   }
-    // });
-    //
-
-    // dispatch(appSlice.actions.setUserStore({
-    //   ...userData,
-    //   userinfo: {
-    //     vip_level
-    //   }
-    // } as any));
     if(!signInConfig) return;
     dispatch(appSlice.actions.setUserVIPLevel(signInConfig?.data?.vipLevel))
-
     setCurrentLevel(vip_level)
-
   }, [signInConfig]);
 
-  const { isMobile } = useBreakpoint();
 
   const allLevelInfo = vipAllInfo ? vipAllInfo.data : [];
   const currentLevelInfo = allLevelInfo?.find(
@@ -173,7 +173,7 @@ export const VIPGradePage = () => {
 
   const allSignInConfig = signInConfig?.data.signInAllConfig || [];
   const vipConfig = allSignInConfig?.find(
-    (config) =>
+    (config: any) =>
       config.identifier.split('::')[2].replace('V', '') ===
       `${currentSelectedLevel}`
   );
@@ -185,62 +185,31 @@ export const VIPGradePage = () => {
     0
   );
 
-
-  const isVipLoading = useSelector((state: RootState) => state.app.isVipLoading);
-
-  const [showReloadButton, setShowReloadButton] = useState(false);
-
-  useEffect(() => {
-    const simulateAsyncLoad = setTimeout(() => {
-      if (isVipLoading) {
-        setShowReloadButton(true);
-      }
-    }, 3000); // 模拟1毫秒的加载时间
-
-    return () => {
-      clearTimeout(simulateAsyncLoad);
-    };
-  }, [isVipLoading]);
-
-  const handleReload = () => {
-    setShowReloadButton(false);
-  };
-
-  if (isVipLoading && (!signInConfig || !vipAllInfo)) {
+  if (environment.assetPrefix === 'coco777bet') {
     return (
-        <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
-          <img className={"w-[70px] h-[35px] mb-6"} src={`/assets/${environment.assetPrefix}/Variant7.png`}/>
-          <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
-          <ThreeDots height={25} className={'inline-block'} />
-        </div>
-    );
-  } else {
-
-    if (environment.assetPrefix === 'coco777bet') {
-      return (
-        <Coco777betVIPGradePage
-          isMobile={isMobile}
-          userVIPInfo={userVIPInfo}
-          currentLevel={currentLevel}
-          allLevelInfo={allLevelInfo}
-          allSignInConfig={allSignInConfig}
-        />
-      )
-    }
-
-    return (
-      <Pernambucana777BetVIPGradePage
+      <Coco777betVIPGradePage
         isMobile={isMobile}
-        currentLevel={currentLevel}
-        currentSelectedLevel={currentSelectedLevel}
-        signBonus={signBonus}
-        setCurrentSelectedLevel={setCurrentSelectedLevel}
         userVIPInfo={userVIPInfo}
+        currentLevel={currentLevel}
         allLevelInfo={allLevelInfo}
         allSignInConfig={allSignInConfig}
-        currentLevelInfo={currentLevelInfo}
       />
     )
   }
+
+  return (
+    <Pernambucana777BetVIPGradePage
+      isMobile={isMobile}
+      currentLevel={currentLevel}
+      currentSelectedLevel={currentSelectedLevel}
+      signBonus={signBonus}
+      setCurrentSelectedLevel={setCurrentSelectedLevel}
+      userVIPInfo={userVIPInfo}
+      allLevelInfo={allLevelInfo}
+      allSignInConfig={allSignInConfig}
+      currentLevelInfo={currentLevelInfo}
+    />
+  )
+
 }
 

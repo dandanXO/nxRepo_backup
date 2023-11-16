@@ -31,9 +31,13 @@ export const useAutoUpdateBalance = () => {
 
   const updateVIPInfo = () => {
     if(!isLogin) return;
-    triggerGetUserVIPInfo({
-      token: AppLocalStorage.getItem("token") || ""
-    });
+    const token =  AppLocalStorage.getItem("token")
+    if(token && token !== "" && token !== "undefined") {
+      triggerGetUserVIPInfo({
+        token,
+      });
+    }
+
   }
 
   const updateMailCount = () => {

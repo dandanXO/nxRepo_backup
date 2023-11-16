@@ -67,10 +67,9 @@ export const AppCarousel = (props: IAppCarousel) => {
       // autoPlay={false}
       autoPlay={isMobile ? true : false}
       autoPlaySpeed={3000}
-      infinite={false}
+      infinite={true}
       // removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头
       // ssr={true} // means to render carousel on server-side.
-
       customTransition="transform 1s ease-in-out"
       keyBoardControl={true}
       // transitionDuration={500}

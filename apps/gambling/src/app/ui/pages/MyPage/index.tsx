@@ -246,14 +246,17 @@ export const MyPage = () => {
 
   useEffect(() => {
     const token = AppLocalStorage.getItem('token') || '';
-    triggerGetSignConfig({
-      onlyGetSignInConfig: true,
-      token,
-    });
-    triggerGetUserVIPInfo({
-      token,
-    });
+    if(token && token !== "" && token !== "undefined") {
+      triggerGetSignConfig({
+        onlyGetSignInConfig: true,
+        token,
+      });
+      triggerGetUserVIPInfo({
+        token,
+      });
+    }
     triggerGetUserVIPALLInfo(null);
+
   }, []);
 
   useEffect(() => {

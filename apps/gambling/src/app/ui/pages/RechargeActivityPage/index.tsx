@@ -35,7 +35,10 @@ export const RechargeActivityPage = () => {
 
   return (
       <>
-        <BackNavigation onClick={() => onClickToIndex()}/>
+        <BackNavigation
+          onClick={() => onClickToIndex()}
+          title={<div className={"w-full text-center"}>Recarga benefícios</div>}
+        />
         <div className={"px-0 sm:px-10 w-full"}>
           <section className={"sm:rounded-3xl text-white font-bold overflow-hidden relative mb-8 mt-4"}>
             {isMobile ? (

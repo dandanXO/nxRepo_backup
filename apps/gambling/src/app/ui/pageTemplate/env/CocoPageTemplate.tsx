@@ -11,8 +11,6 @@ import {Toolbox} from "../../components/Toolbox";
 import {CocoMenuDrawerContent} from "../../drawers/MenuDrawer/env/CocoMenuDrawerContent";
 import {ThreeDots} from "react-loading-icons";
 import {UserLoginStatusModal} from "../../modals/UserLoginStatusModal";
-import {UserLoginStatusDrawers} from "../../drawers/UserLoginStatusDrawers";
-
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -135,6 +133,8 @@ export const CocoPageTemplate = ({
                                        }: ICoco777betIndexPageTemplate) => {
   return (
       <StyledPage isCurrentPageCompanyProfile={false}>
+
+
 
         {isMobile && isShowMobileHeader && (
           <HeaderMobile
