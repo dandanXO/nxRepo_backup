@@ -137,7 +137,7 @@ export const AppRouter = () => {
       token,
     }).then((response) => {
       // console.log("token", token);
-      if(!(response as any).error => {
+      if(!(response as any).error) {
         console.log("triggerLogin-data", response)
         // setLoginLocalStorage({
         //   token: (response as any).data.data.token,
@@ -158,7 +158,7 @@ export const AppRouter = () => {
         dispatch(appSlice.actions.setShowTelegramModal(true))
         // props.confirmToLogin();
         setIsSetup(true);
-      })
+      }
     }).catch((error: any) => {
       console.error(error);
     })
