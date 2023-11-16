@@ -128,7 +128,10 @@ export const CocoIndexPage = ({
                             })}
                             name={tab}
                             active={activeTab === tab}
-                            onClick={() => setActiveTab(tab)}
+                            onClick={() => {
+                              setActiveTab(tab);
+                              setViewType('');
+                            }}
                           />
                         )
                       })}

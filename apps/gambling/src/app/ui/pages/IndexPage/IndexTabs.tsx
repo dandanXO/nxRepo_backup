@@ -27,7 +27,10 @@ export const IndexTabs = ({
                 //   'text-[#9ea3bb]': activeTab !== tab
                 // })}
                 active={activeTab === tab}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => {
+                  setActiveTab(tab);
+                  setViewType('')
+                }}
               >
                 {tab}
               </ImageTab>
