@@ -11,6 +11,7 @@ if(AppLocalStorage.getItem("token")) {
   const token = AppLocalStorage.getItem("token");
   if(url && token) connect(url, token);
 }
+
 export const gateway = async (
   dispatch: (action: any) => void,
   getState: () => any,
