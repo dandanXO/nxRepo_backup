@@ -10,13 +10,10 @@ import {TabBar} from "../../tabBar";
 import {Toolbox} from "../../components/Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";
-import {useNavigate} from "react-router";
-import {useDispatch} from "react-redux";
 import {MenuDrawer} from "../../drawers/MenuDrawer";
 import {PernambucanaMenuDrawerContent} from "../../drawers/MenuDrawer/env/PernambucanaMenuDrawerContent";
 import {UserLoginStatusModal} from "../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../drawers/UserLoginStatusDrawers";
-
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -144,6 +141,8 @@ export const PernambucanaPageTemplate = ({
   return (
     <StyledPage isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}>
 
+      {/*Refactor ME*/}{/*Refactor ME*/}
+      {contextHolder}
       {contextHolder}
 
       {!isMobile && isShowDesktopHeader && (

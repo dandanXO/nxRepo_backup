@@ -115,6 +115,7 @@ export const Header = (props: IHeader) => {
           <HeaderButtonText>Download</HeaderButtonText>
         </HeaderButton>
       </div>
+
       {!isLogin && (
         <LoginButton className={"text-white text-lg"} onClick={() => {
           props.onClickUserLoginStatusDrawer()
