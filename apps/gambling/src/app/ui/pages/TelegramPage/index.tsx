@@ -40,7 +40,10 @@ export const TelegramPage = () => {
 
       <div className={"px-0 sm:px-10 w-full"}>
 
-        <BackNavigation onClick={() => onClickToIndex()}/>
+        <BackNavigation
+          onClick={() => onClickToIndex()}
+          title={<div className={"w-full text-center"}>Canal De Telegram</div>}
+        />
         {/*<section className={"rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
         {/*  <img className="w-full" src={`assets/${environment.assetPrefix}/bg.761d8ab4.png`}/>*/}
         {/*  <div className={"mt-20 absolute left-[40px] top-0 text-white"}>*/}
