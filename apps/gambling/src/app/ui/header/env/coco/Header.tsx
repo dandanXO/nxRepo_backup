@@ -77,25 +77,25 @@ export const Header = (props: IHeader) => {
         "flex flex-row justify-between items-center relative",
         // "bg-purple-500"
       )}
-      // style={{
-      //   backgroundImage: `url("assets/${environment.assetPrefix}/top_di.png")`, // 替换成背景图片路径
-      //   backgroundSize: 'cover', // 调整背景图片大小以填充整个元素
-      //   backgroundPosition: '90% 50%', // 调整背景图片位置
-      //   backgroundRepeat: 'no-repeat', // 禁止背景图片重复
-      //   backgroundColor: '#013E42', // 设置背景颜色
-      // }}
-
-      onMouseOver={() => {
-        setHover(true);
-      }}
-      onMouseOut={() => {
-        setHover(false)
-      }}
+    // style={{
+    //   backgroundImage: `url("assets/${environment.assetPrefix}/top_di.png")`, // 替换成背景图片路径
+    //   backgroundSize: 'cover', // 调整背景图片大小以填充整个元素
+    //   backgroundPosition: '90% 50%', // 调整背景图片位置
+    //   backgroundRepeat: 'no-repeat', // 禁止背景图片重复
+    //   backgroundColor: '#013E42', // 设置背景颜色
+    // }}
     >
       {
         isLogin && (hover && <HeaderMenu />)
       }
-      <div className={"flex flex-row basis-[58%] min-w-[680px] max-h-[67px] -mb-[1px]"}>
+      <div className={"flex flex-row basis-[58%] min-w-[680px] max-h-[67px] -mb-[1px]"}
+        onMouseOver={() => {
+          setHover(true);
+        }}
+        onMouseOut={() => {
+          setHover(false)
+        }}
+      >
         <div className={"min-w-[100px] max-w-[130px] p-4 bg-[#5939f7] -mr-1"}>
           <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
         </div>
