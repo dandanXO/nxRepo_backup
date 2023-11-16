@@ -3,20 +3,16 @@ import moment, { Moment } from 'moment';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useGetUserGameRecordMutation } from '../../../external';
+import { GetUserGameRecordResponse, useGetUserGameRecordMutation } from "../../../external";
 import { AppLocalStorage } from '../../../persistant/localstorage';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
 import { SectionContainer } from '../../components/container/SectionContainer';
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import { environment } from "../../../../environments/environment"
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
-
-const tableStyle = {
-  thead: {
-    borderCollapse: 'collapse',
-  },
-};
+import useBreakpoint from "../../hooks/useBreakpoint";
+import { Table } from "../../components/Table";
+import { undefined } from "zod";
 
 
 const { RangePicker } = DatePicker;
@@ -24,11 +20,11 @@ const { RangePicker } = DatePicker;
 export const GameRecordPage = () => {
   useAllowLoginRouterRules();
 
+  const pageSize = 10
   const min = moment().subtract(7, 'days');
   const max = moment();
   const dateFormat = 'YYYYMMDD';
   const [dates, setDates] = useState([min, max]);
-  const navigate = useNavigate();
 
   const datePickerStyle = {
     backgroundColor: 'var(--table-main)',
@@ -38,20 +34,72 @@ export const GameRecordPage = () => {
   };
 
   const [triggerGetRecord, { data }] = useGetUserGameRecordMutation({});
+  const [records, setRecords] = useState<GetUserGameRecordResponse["rows"]>([])
+  const [page, setPage] = useState(1)
+
+  const {
+    onClickToIndex,
+  } = usePageNavigate();
+
+  const { isMobile } = useBreakpoint();
+
+  const columns = [
+    {
+      title: 'Nome do jogo',
+      name: 'gameName',
+      key: 'gameName',
+      render: (record: any) => (
+        <div>
+          {!isMobile && (
+            <img
+              alt='gameLogo'
+              className='mx-auto w-12 object-cover'
+              src={`${environment.s3URLImages}/${record.gameId}.jpg`}
+            />)
+          }
+          <div>
+            {record.gameName}
+          </div>
+        </div>
+      )
+    },
+    { title: 'Tempo',
+      name: 'createTime',
+      key: 'createTime',
+      render: (record: any) => (
+        <>
+          <div>{record.createTime.split(" ")[0]}</div>
+          <div>{record.createTime.split(" ")[1]}</div>
+        </>
+      )
+    },
+    { title: 'Valor Da Aposta', name: 'bet', key: 'bet', render:(record: any) => (record.bet / 100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) },
+    { title: 'Lucro', name: 'win', key: 'win', render:(record: any) => (record.win / 100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) }
+  ]
+
+  const handleFetchData = () => {
+    if(records.length < (data?.total || 0)) {
+      setPage((records.length / pageSize) + 1)
+    }
+  }
+
 
   useEffect(() => {
     triggerGetRecord({
       dayMin: dates[0].format(dateFormat),
       dayMax: dates[1].format(dateFormat),
-      pageNum: 1,
-      pageSize: 1000,
+      pageNum: page,
+      pageSize: pageSize,
       token: AppLocalStorage.getItem('token') || '',
     });
-  }, [dates]);
+  }, [dates, page]);
 
-  const {
-    onClickToIndex,
-  } = usePageNavigate();
+  useEffect(()=> {
+    setRecords([...records, ...(data?.rows || [])])
+  }, [data?.rows])
+
+
+
 
   return (
     <>
@@ -76,56 +124,15 @@ export const GameRecordPage = () => {
             />
           </section>
 
-          <div className="grow overflow-x-auto overflow-y-auto rounded-md">
-            <table className="table table-zebra w-full text-center" style={{
-              tableLayout: "fixed"
-            }}>
-              {/* head */}
-              <thead className="sticky top-0">
-                <tr>
-                  <th className="w-1/4 break-words md:p-4">Nome do jogo</th>
-                  <th className="w-1/4 break-words md:p-4">Tempo</th>
-                  <th className="w-1/4 break-words md:p-4">Valor Da Aposta</th>
-                  <th className="w-1/4 break-words md:p-4">Lucro</th>
-                </tr>
-              </thead>
-
-              {data?.rows && (
-                <tbody className="">
-                  {data.rows.map((record, index) => (
-                    <tr
-                      key={index}
-                      className={"px-1"}
-                      // className="py-1 odd:bg-opacity-[0.05] even:bg-opacity-10"
-                    >
-                      <td className={"p-0 md:p-4"}>
-                        <div
-                          style={{ width: '50px', margin: "auto" }}
-                          className="hidden md:block mx-[10px] my-[6px] object-cover"
-                        >
-                          <img
-                            alt="gameLogo"
-                            src={`${environment.s3URLImages}/${record.gameId}.jpg`}
-                          />
-                        </div>
-                        <div style={{
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          padding: "0 10px",
-                        }}>{record.gameName}</div>
-                      </td>
-                      <td>
-                        <div>{record.createTime.split(" ")[0]}</div>
-                        <div>{record.createTime.split(" ")[1]}</div>
-                      </td>
-                      <td>{parseFloat((record.bet / 100).toFixed(2))}</td>
-                      <td>{parseFloat((record.win / 100).toFixed(2))}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              )}
-            </table>
+          <div className='h-[80vh] rounded-lg overflow-hidden'>
+            <Table
+              fetchData={handleFetchData}
+              dataSource={records}
+              columns={columns}
+              dataCount={data?.total || 0}
+            />
           </div>
+
         </SectionContainer>
       </div>
     </>
