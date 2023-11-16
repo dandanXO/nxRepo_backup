@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../reduxStore/appSlice";
 import CurrentVIPIcon from "../../components/CurrentVIPIcon";
 import ProgressBar from "../VIPGradePage/Coco777betVIPGradePage/ProgressBar";
-import {RightOutlined} from "@ant-design/icons";
 import styled from "styled-components";
 import {CheckInButton} from "../../components/Buttons/CheckInButton";
 import {DepositButton} from "../../components/Buttons/DepositButton2";
@@ -34,9 +33,9 @@ interface ICoco777BetMyPageProps {
 }
 
 const Coco777BetMyPage = ({
-  userVIPInfo,
-  currentLevel
-}: ICoco777BetMyPageProps) => {
+                            userVIPInfo,
+                            currentLevel
+                          }: ICoco777BetMyPageProps) => {
   const user: IUserInfo = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || "") : {};
 
   const totalBalanceSheetValue= useSelector(totalBalanceSheetSelector);
@@ -99,7 +98,11 @@ const Coco777BetMyPage = ({
         </div>
 
         <div className='w-2/3 text-white'>
-          <div className='mb-1'>Depósitos totais: {userVIPInfo?.data?.vip_score || 0} / {userVIPInfo?.data?.next_level_score || 1}</div>
+          <div className='mb-1'>Depósitos totais: {
+            userVIPInfo?.data?.vip_score ? (userVIPInfo?.data?.vip_score/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}): 0
+          } / {
+            userVIPInfo?.data?.next_level_score? (userVIPInfo?.data?.next_level_score/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+          }</div>
           <ProgressBar
             className='h-4 bg-table-main mb-3'
             rounded='rounded-full'
@@ -109,11 +112,19 @@ const Coco777BetMyPage = ({
             progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
           >
             <div className='h-full flex px-3 text-xs'>
-              {((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)).toFixed(0)}%
+              {(
+                ((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ) >= 100 ?
+                  100:
+                  ((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 )
+              ).toFixed(0)}%
             </div>
           </ProgressBar>
 
-          <div className='mb-1'>Pontos de apostas: {userVIPInfo?.data?.flow || 0} / {userVIPInfo?.data?.next_level_flow || 1}</div>
+          <div className='mb-1'>Pontos de apostas: {
+            userVIPInfo?.data?.flow ? (userVIPInfo?.data?.flow/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+          } / {
+            userVIPInfo?.data?.next_level_flow ? (userVIPInfo?.data?.next_level_flow/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+          }</div>
           <ProgressBar
             className='h-4 bg-table-main'
             rounded='rounded-full'
@@ -125,7 +136,7 @@ const Coco777BetMyPage = ({
             progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
           >
             <div className='h-full flex px-3 text-xs'>
-              {((userVIPInfo?.data?.flow || 0) / (userVIPInfo?.data?.next_level_flow || 1)).toFixed(0)}%
+              {(((userVIPInfo?.data?.flow || 0) / (userVIPInfo?.data?.next_level_flow || 1)*100)).toFixed(0)}%
             </div>
           </ProgressBar>
         </div>

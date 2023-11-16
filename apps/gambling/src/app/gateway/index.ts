@@ -3,7 +3,7 @@ import { AppLocalStorage } from '../persistant/localstorage';
 import "../external/websocket/windowProtobuf";
 import {connect} from "./socket";
 import {userLogout} from "../usecase/userLogout";
-import {unknown} from "zod";
+
 import {appSlice} from "../reduxStore/appSlice";
 
 if(AppLocalStorage.getItem("token")) {
@@ -11,8 +11,6 @@ if(AppLocalStorage.getItem("token")) {
   const token = AppLocalStorage.getItem("token");
   if(url && token) connect(url, token);
 }
-
-
 export const gateway = async (
   dispatch: (action: any) => void,
   getState: () => any,
@@ -60,7 +58,17 @@ export const gateway = async (
       dispatch(appSlice.actions.setGlobalMessage(result.data?.msg));
       userLogout()
     }
+
+    // NOTE: other msg
+    if(result.data.code !== 200) {
+      dispatch(appSlice.actions.setGlobalMessage(result.data?.msg));
+      return {
+        error: "error",
+        data: result.data?.msg,
+      };
+    }
     console.log('runAxios.result', result);
+
     return {
       // success: true,
       data: result.data,

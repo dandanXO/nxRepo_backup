@@ -17,8 +17,6 @@ import {environment} from "../../../environments/environment";
 
 import {CocoPageTemplate} from "./env/CocoPageTemplate";
 import {PernambucanaPageTemplate} from "./env/PernambucanaPageTemplate";
-import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
-import {UserLoginStatusDrawers} from "../drawers/UserLoginStatusDrawers";
 import {DownloadModal} from "../modals/DownloadModal";
 import {UserInfoStatusPopover} from "../popover/UserInfoStatusPopover";
 import {NotificationDrawer} from "../drawers/NotificationDrawer";
@@ -191,7 +189,7 @@ export const PageTemplate = (props: IPage) => {
   const telegramServiceId = AppLocalStorage.getItem('telegramService');
   const telegramManagerId = AppLocalStorage.getItem('telegramManager');
   const userInfoString = AppLocalStorage.getItem("userInfo");
-  const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
+  const userInfo = userInfoString && userInfoString !== "undefined"  ? JSON.parse(userInfoString) : null;
   const user_id = userInfo?.user_id || '';
   const telegramServiceUrl=`https://t.me/${telegramServiceId}?start=${user_id}`
   const telegramManagerUrl=`https://t.me/${telegramManagerId}?start=${user_id}`
@@ -338,6 +336,7 @@ export const PageTemplate = (props: IPage) => {
         }}/>
       )}
 
+      {contextHolder}
 
     </>
   )

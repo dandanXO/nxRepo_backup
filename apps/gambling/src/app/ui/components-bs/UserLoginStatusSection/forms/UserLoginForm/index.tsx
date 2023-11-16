@@ -149,27 +149,28 @@ export const UserLoginForm = (props: IUserLoginForm) => {
           phone: phoneInput.data,
           password: passwordInput.data,
         }).then((response) => {
-          promiseHandler.then(response, () => {
-            console.log("triggerLogin-data", response)
-            setLoginLocalStorage({
-              token: (response as any).data.data.token,
-              userInfo: (response as any).data.data.user_info,
-              kPhone: phoneInput.data,
-              kPassword: passwordInput.data,
-              amount: 100,
-              ip: (response as any).data.data.connection.ip,
-            })
-            dispatch(appSlice.actions.setUserVIPLevel((response as any).data.data.user_info.vip_level));
+            // console.log("triggerLogin-data", response)
+            if(!(response as any).error) {
+              setLoginLocalStorage({
+                token: (response as any).data?.data?.token,
+                userInfo: (response as any).data?.data?.user_info,
+                kPhone: phoneInput.data,
+                kPassword: passwordInput.data,
+                amount: 100,
+                ip: (response as any).data?.data?.connection?.ip,
+              })
+              dispatch(appSlice.actions.setUserVIPLevel((response as any).data?.data?.user_info?.vip_level));
 
-            const url = (response as any).data.data.connection.ip;
-            const token = (response as any).data.data.token;
-            if(url) connect(url, token);
-            dispatch(appSlice.actions.setIsLogin(true));
-            dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-            dispatch(appSlice.actions.setShowTelegramModal(true))
+              const url = (response as any).data?.data?.connection?.ip;
+              const token = (response as any).data?.data?.token;
+              if(token && url) connect(url, token);
 
-            props.confirmToLogin();
-          }, props.openNotificationWithIcon);
+              dispatch(appSlice.actions.setIsLogin(true));
+              dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
+              dispatch(appSlice.actions.setShowTelegramModal(true))
+
+              props.confirmToLogin();
+            }
         }).catch((error: any) => {
           alert(error);
         })
