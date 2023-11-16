@@ -73,7 +73,7 @@ const LevelInfoCard = ({
                 maximumFractionDigits: 2
               })}
             </li>
-            <li>Recompensa total de check-in de 7 dias： {signInBonus}</li>
+            <li>Recompensa total de check-in de 7 dias： {signInBonus.toFixed(2)}</li>
             <li>Limite máximo de retirada única： R$ {
               (withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0).toLocaleString('en-Us', {
                 minimumFractionDigits: 2,

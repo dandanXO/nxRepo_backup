@@ -25,6 +25,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../hooks/usePageNavigate";
 import {Container} from "../../../components/container/Container";
+import { useSelector } from "react-redux";
+import { RootState } from "apps/gambling/src/app/reduxStore";
 
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number [] },
@@ -64,6 +66,8 @@ export const CocoIndexPage = ({
 }:ICoco777betIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
+  const { isLogin } = useSelector((state: RootState) => state.app);
+
   const {onClickToSearch} = usePageNavigate();
 
   // useEffect(() => {
@@ -71,6 +75,12 @@ export const CocoIndexPage = ({
   //     setActiveTab("Salão")
   //   }
   // }, [])
+
+  const handleToSearchPage = () => {
+    if (isLogin) {
+      onClickToSearch();
+    }
+  }
 
   return (
     <>
@@ -95,7 +105,7 @@ export const CocoIndexPage = ({
         {/*Tabs*/}
         {isMobile ? (
           <div>
-            <div className="mb-4" onClick={onClickToSearch}>
+            <div className="mb-4" onClick={handleToSearchPage}>
               <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
                      inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
                      placeholder={"Por favor insira o nome do jogo"}
