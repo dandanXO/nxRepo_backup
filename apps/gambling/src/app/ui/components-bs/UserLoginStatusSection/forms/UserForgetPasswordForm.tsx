@@ -152,7 +152,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         "appPackageName": environment.appPackageName,
         "appVersion": environment.appVersion,
       }).then((response) => {
-        console.log("triggerRegister-data", response)
+        // console.log("triggerRegister-data", response)
         if(!(response as any).error) {
           setLoginLocalStorage({
             token: (response as any).data?.data?.token,

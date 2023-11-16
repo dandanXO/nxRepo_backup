@@ -126,7 +126,7 @@ export const DailySignInPage = () => {
     useGetSignInConfigMutation();
 
 
-  console.log("signInConfig", signInConfig);
+  // console.log("signInConfig", signInConfig);
 
   useEffect(() => {
     if(signInConfig?.data?.vipLevel) {

@@ -26,7 +26,7 @@ import {InviteBonusModal} from "../modals/InviteBonusModal";
 import {LogoutModal} from "../modals/LogoutModal";
 
 
-console.log("environment", environment);
+console.log("[APP] environment", environment);
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 export type IOpenNotificationWithIcon = {
