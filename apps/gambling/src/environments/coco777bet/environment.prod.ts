@@ -7,5 +7,5 @@ export const environment = {
   appPackageName: "com.ttgroup.phxj",
   captcha: "/japi/user/captcha/image",
   appVersion: "1.0.0",
-  s3URLImages: "https://xb-web.s3.amazonaws.com/game3",
+  s3URLImages: "https://resources.ttgroup.vip/icon",
 };
