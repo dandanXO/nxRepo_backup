@@ -27,7 +27,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
   return (
     <header
       className={cx(
-        "w-full h-[52.5px] px-4 z-10",
+        "w-full h-[52.5px] px-4 z-20",
         "flex flex-row items-center justify-between",
         // "bg-varient",
         "bg-[#020E29]",

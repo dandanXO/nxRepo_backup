@@ -138,7 +138,7 @@ export const CocoPageTemplate = ({
 
         {isMobile && isShowMobileHeader && (
           <HeaderMobile
-            className={"!h-[52.5px] z-20"}
+            className={"!h-[52.5px]"}
             clickToOpenMenuDrawer={() => {
               setOpenMenuDrawer(!openMenuDrawer)
             }}
