@@ -58,7 +58,7 @@ export const DepositInput = (props: IDepositInput) => {
               'text-xs pt-0.5 pr-1  text-[#fbd81e] bg-gradient-to-r from-[transparent] via-[#FF3838] to-[#FF3838] rounded-tr-lg': isMobile
             })
           }>
-            + R$ {parseFloat(selectedIndexConfig?.rate)}
+            + R$ {(Number(inputValue) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1)).toFixed(0).toString()}
           </div>)}
       </div>
     )

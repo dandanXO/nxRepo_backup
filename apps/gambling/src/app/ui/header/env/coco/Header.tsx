@@ -13,6 +13,9 @@ import { Avatar } from "../../../components/Avatar";
 import { AvatarAccountInfo } from "../../../components/AvatarAccountInfo";
 import { LoginButton } from "./LoginButton";
 import { HeaderMenu } from "./HeaderMenu";
+import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
+import { IUserInfo } from "../../../../persistant/pending/loginMode";
+import { AppLocalStorage } from "../../../../persistant/localstorage";
 
 
 const Notification = styled.section`
@@ -31,6 +34,14 @@ const Notification = styled.section`
   }
 `
 
+const DirectionIcon  = styled.img<{
+  active?: boolean
+}>`
+  height: 8px;
+  width: 12px;
+  transform: rotate(${props => props.active ? 180: 0}deg);
+`
+
 
 export type IHeader = {
   className?: string;
@@ -39,6 +50,7 @@ export type IHeader = {
   isLogin: boolean;
   onClickToOpenNotificationDrawer: () => void;
   openLogoutPopover: boolean;
+  openDesktopUserInfoStatusDrawer: boolean;
   onClickToChangeLogoutPopover: (display: boolean) => void;
 }
 
@@ -68,6 +80,8 @@ const HeaderButtonText = styled.div`
 `
 export const Header = (props: IHeader) => {
   const navigate = useNavigate()
+  const user: IUserInfo = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || "") : {};
+
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
   const [hover, setHover] = useState(false);
 
@@ -126,25 +140,38 @@ export const Header = (props: IHeader) => {
       {isLogin && (
         <section className={"flex flex-row items-center ml-auto"}>
 
-          <div className={"mr-24 hidden lg:block"}>
+          <div className={"mr-20 hidden lg:block"}>
             <UserMoneyStatusSection />
           </div>
 
-          <section className={"mr-6"}>
-            <Avatar onClickToPopupUserInfoStatusPopover={() => props.onClickToPopupUserInfoStatusPopover()} />
+          <section
+            className='flex gap-4 items-center mr-6 py-5'
+            onClick={()=>props.onClickToPopupUserInfoStatusPopover()}
+          >
+            <CocoAvatar />
+            <div>
+              <div className='text-lg text-white flex gap-2'>
+                <div>{user.nickname}</div>
+                <DirectionIcon
+                  active={props.openDesktopUserInfoStatusDrawer}
+                  className='mx-auto my-auto'
+                  src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
+                />
+              </div>
+              <div className='text-base text-[#ff76ff] leading-none'>ID:{user.user_id}</div>
+            </div>
           </section>
-
-          <section className={"mr-3"}>
-            <AvatarAccountInfo />
-          </section>
-
 
           <section className={"relative mr-4"}>
             <button onClick={() => {
               props.onClickToOpenNotificationDrawer();
             }}>
               <Notification>
-                <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"notification"} src={`assets/${environment.assetPrefix}/ic_notification.png`} />
+                <img
+                  className="w-[30px] h-[36px] min-w-[30px] min-h-[36px]"
+                  alt={"notification"}
+                  src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAeCAYAAAA2Lt7lAAAAAXNSR0IArs4c6QAAA3hJREFUSEvdll9oXEUYxc+ZudmtQaNQrCIJUqyiaOuDoKAo242IUV9ESv62pI9Cq1YQJKbl0ixBRH0wYMEHlRib2tUKBsmDZFlpkYIEsWBRqGICDRrTaKhpzO6dObK7SZvdpm7I5snvbZg75/f9u/MNUd2YaEs9YAO9BGGHQAtgAnAD/ry+ymbD6L8kWE3/4WfDLZvqbS/BPQIait8TiwS+dIhezQ6F52oBcGdHX4sxOAKwqSi9ZJJmIH9o8s+Z98+NDixeC3LNCBLd4Sa/YLfagPsM0Q2gfqWIgDykkcgpNT/vfxofCS+tBlkVUEzLdfY5kG0A7gfQQF7xviAkQQQuATrjhTQDHs8M9k4VtlaCrgI80hbeFg+CA4C6CG4BYKrUyUuaBfi5z0VvZNPhzyshZYDHd71+o4tFL5J4gcDmag1QkbKLkgYXjTv8zUfh9PLeCkBoEh02aQyPQLijMiVrgklTDv7liz+ePzE+/l6+1HBL9lBn2FAP85oh9wEsK+iaxEt5ydPreC5vD5xM9/xRBkh0ho0W9gOQyTXkfVVmofAgfqCi1rGPw7NlgMc6+u4MiDTJQtes2yRNOKfdXx87dLIc0Np3TxAUAfeuW714UJNy2JsZPpgpT1F7/93G+jSB+2oDYMJF6s4eO5j9nwGaW/vvUuA/JbG9lhRJ+JU0e8aGeiqKXOqiz0jWDPAeu7PDvadW1CA0yXY+DWPeJdlYWwSaIdEbuzD94ejoQGFuAI/u6r85FndvAmwFEK8FAMEJGsvJPX/qaPgLgdDs7LBPkqWhsq47qMKj4jACeiZnpwdZuJ5j1vab0t1fm/dXQB5Sxnm3n8muVDuEfgC3b4T3ywwBFyS9xWTX4S8I88QGer/EkId4hsnOVOFa3byR3l+OQlhgc2fqO5R+rsJ7ZyOtMEqnmOhKdRpgL4StV6kTghSRyJX2ludTaa5LrANVB7FythtAU5I+4baWd+KN1882waKRts4aG/llkHeBoVc9jYnDu8jTF5WNDGlpnUcEur+NRdkZo8jnnfntr9jcZCW5bL2tZX+s6aZbnqFRN8g4gX9KriMmeA/ixNycPzo+Ei5U/grL66pPx+b2cIeMfYXAUyJvKB3UPMExIXo7M4TTQHg5gso0VwUkEmEQ3Gq2e2M6QD1I0kD83sMN/57z355Nh0v1Wb0//gXUW3uITFgj8QAAAABJRU5ErkJggg=='
+                />
                 {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
               </Notification>
             </button>
