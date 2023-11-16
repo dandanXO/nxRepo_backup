@@ -15,7 +15,6 @@ import {
 import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
 import {promiseHandler} from "../../../../gateway/promiseHanlder";
 import {IOpenNotificationWithIcon} from "../../../pageTemplate";
-import {PostRegisterRequest} from "../../../../external/RegisterEndpoint";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";
 import {validate} from "class-validator";
 import {onValidatePhoneInput, onValidatePasswordInput} from "./UserLoginForm"
@@ -154,23 +153,21 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         "appVersion": environment.appVersion,
       }).then((response) => {
         console.log("triggerRegister-data", response)
-        promiseHandler.then(response, () => {
+        if(!(response as any).error) {
           setLoginLocalStorage({
-            token: (response as any).data.data.token,
-            userInfo: (response as any).data.data.user_info,
+            token: (response as any).data?.data?.token,
+            userInfo: (response as any).data?.data?.user_info,
             kPhone: phoneInput.data,
             kPassword: passwordInput.data,
             amount: 100,
-            ip: (response as any).data.data.connection.ip,
+            ip: (response as any).data?.data?.connection?.ip,
           })
 
-          const url = (response as any).data.data.connection.ip;
-          const token = (response as any).data.data.token;
-          if(url) connect(url, token);
-
-
+          const url = (response as any).data?.data?.connection?.ip;
+          const token = (response as any).data?.data?.token;
+          if(url && token) connect(url, token)
           props.confirmToRegister();
-        }, props.openNotificationWithIcon);
+        }
       }).catch((error) => {
         alert(error)
       })

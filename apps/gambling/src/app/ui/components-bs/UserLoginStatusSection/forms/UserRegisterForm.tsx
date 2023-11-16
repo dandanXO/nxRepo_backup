@@ -150,26 +150,26 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           "web_uuid": "39b1e7e2-0a02-4fd2-958f-e8a85215010f"
       }).then((response) => {
         console.log("triggerRegister-data", response)
-        promiseHandler.then(response, () => {
+        if(!(response as any).error) {
           setLoginLocalStorage({
-            token: (response as any).data.data.token,
-            userInfo: (response as any).data.data.user_info,
+            token: (response as any).data?.data?.token,
+            userInfo: (response as any).data?.data?.user_info,
             kPhone: phoneInput.data,
             kPassword: passwordInput.data,
             amount: 100,
-            ip: (response as any).data.data.connection.ip,
+            ip: (response as any).data?.data?.connection?.ip,
           })
 
-          const url = (response as any).data.data.connection.ip;
-          const token = (response as any).data.data.token;
-          if(url) connect(url, token);
+          const url = (response as any).data?.data?.connection?.ip;
+          const token = (response as any).data?.data?.token;
+          if(url && token) connect(url, token);
 
           dispatch(appSlice.actions.setIsLogin(true));
           dispatch(appSlice.actions.setShowTelegramModal(true))
           dispatch(appSlice.actions.setIsShowInviteBonusModal(true));
 
           props.confirmToRegister();
-        }, props.openNotificationWithIcon);
+        }
       }).catch((error) => {
         alert(error)
       })
