@@ -167,6 +167,7 @@ export const CocoPageTemplate = ({
               setOpenLogoutPopover(display);
             }}
             openLogoutPopover={isShowMobileLogoutModal}
+            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
           />
         )}
 
