@@ -194,8 +194,9 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   useEffect(() => {
     if(isLogin) {
       triggerGetInviteReward({});
+      triggerGetUnsettleInviteReward({})
     }
-    triggerGetUnsettleInviteReward({})
+
   }, [])
 
   // A = /japi/invite/userInvite/queryInviteRewardData

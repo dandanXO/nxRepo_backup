@@ -9,6 +9,8 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 
 import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import {Container} from "../../components/container/Container";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../reduxStore";
 
 // const InviteCommmonButton = styled.div`
 //   color: #fff;
@@ -32,6 +34,7 @@ export const InvitePage = () => {
 
   const [panelMode, setPanelMode] = useState<"howto" | "daily" >("howto");
   const {isMobile} = useBreakpoint();
+  const {isLogin} = useSelector((state: RootState) => state.app)
 
   const [triggerGetInviteReward, { currentData: inviteInfo, isFetching: isInviteInfoFetching }] =
   useLazyGetInviteRewardDataQuery({
@@ -48,8 +51,11 @@ export const InvitePage = () => {
   });
 
   useEffect(()=>{
-    triggerGetInviteReward({});
-    triggerGetUnsettleInviteReward({})
+    if(isLogin) {
+      triggerGetInviteReward({});
+      triggerGetUnsettleInviteReward({})
+    }
+
   },[])
 
 
