@@ -6,6 +6,7 @@ import {useState} from "react";
 // import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import {TailSpin} from 'react-loading-icons';
+import {environment} from "../../../../environments/environment";
 
 
 
@@ -107,7 +108,8 @@ export const DesktopGameItem = (props: IItem) => {
                "hide": !onLoad,
                "basis-[calc(100%-1rem)]": onLoad
              })}
-             src={props.imageURL}
+             src={`${environment.s3URLImages}/${props.gameId}-small.png`}
+             srcSet={`${environment.s3URLImages}/${props.gameId}-small.png 1x, ${environment.s3URLImages}/${props.gameId}-medium.png 2x, ${environment.s3URLImages}/${props.gameId}-large.png 3x`}
              onLoad={() => {
                setOnLoad(true);
              }}
@@ -143,6 +145,7 @@ const StyledMobileGameItem = styled.div.attrs<IGameItem>(props => ({
 `
 
 export type IItem ={
+  gameId: number;
   imageURL: string;
   name: string;
   onClick?: () => void;
