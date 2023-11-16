@@ -162,7 +162,7 @@ const CocoMobileDailySignInPage = ({
       {/*</nav>*/}
 
       <BackNavigation
-        title={<img alt='title' className='h-[26px]' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>}
+        title={<img alt='title' className='h-[26px] ml-2' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>}
         onClick={() => onClickToIndex()}
       />
 
