@@ -207,7 +207,7 @@ export const CocoLevelList = ({
             className={tcx('w-[10%] p-0 min-w-[100px] mr-3 relative h-full', ['ml-3', isMobile && level === 1])}
           >
             <LevelButton
-              className='flex justify-center items-center gap-2 w-full h-full'
+              className='flex justify-center items-center gap-2 w-full h-full hover:opacity-80'
               onClick={()=>setCurrentSelectedLevel(level)}
             >
               {
