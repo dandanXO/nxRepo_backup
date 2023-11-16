@@ -149,7 +149,7 @@ export const CocoPageTemplate = ({
           />
         )}
 
-        {!isMobile && isShowMobileHeader && (
+        {!isMobile && isShowDesktopHeader && (
           <Header
             isLogin={isLogin}
             onClickUserLoginStatusDrawer={() => {
