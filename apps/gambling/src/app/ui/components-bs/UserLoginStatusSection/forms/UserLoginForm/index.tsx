@@ -172,7 +172,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
               props.confirmToLogin();
             }
         }).catch((error: any) => {
-          alert(error);
+          console.error(error);
         })
       }
     }
