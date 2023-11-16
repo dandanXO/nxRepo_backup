@@ -117,14 +117,17 @@ export const VIPGradePage = () => {
 
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem('token') || '';
-    triggerGetSignConfig({
-      onlyGetSignInConfig: true,
-      token,
-    });
-    triggerGetUserVIPInfo({
-      token,
-    });
+    const token = AppLocalStorage.getItem('token');
+
+    if(token && token !== "" && token !== "undefined") {
+      triggerGetSignConfig({
+        onlyGetSignInConfig: true,
+        token,
+      });
+      triggerGetUserVIPInfo({
+        token,
+      });
+    }
     triggerGetUserVIPALLInfo(null);
   }, []);
 

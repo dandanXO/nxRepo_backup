@@ -189,8 +189,12 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   // console.log("inviteInfo", inviteInfo);
   // console.log("inviteUnsettle", inviteUnsettle);
 
+  const { isLogin } = useSelector((state: RootState) => state.app);
+
   useEffect(() => {
-    triggerGetInviteReward({});
+    if(isLogin) {
+      triggerGetInviteReward({});
+    }
     triggerGetUnsettleInviteReward({})
   }, [])
 
@@ -219,14 +223,16 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem('token') || '';
-    triggerGetSignConfig({
-      onlyGetSignInConfig: true,
-      token,
-    });
-    triggerGetUserVIPInfo({
-      token,
-    });
+    const token = AppLocalStorage.getItem('token');
+    if(token && token !== "" && token !== "undefined") {
+      triggerGetSignConfig({
+        onlyGetSignInConfig: true,
+        token,
+      });
+      triggerGetUserVIPInfo({
+        token,
+      });
+    }
     triggerGetUserVIPALLInfo(null);
   }, []);
 
