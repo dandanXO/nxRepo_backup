@@ -11,7 +11,7 @@ export const MobileGameTypeHeader = (props: {
 
 }) => {
   const { containerClassName = '', titleClassName = '', showIcon = true, textClassName = '', seeMoreText = '' } = props;
-  console.log('mobileGameTypeHeaderProps', props)
+  // console.log('mobileGameTypeHeaderProps', props)
   return (
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>
       <div className="flex">

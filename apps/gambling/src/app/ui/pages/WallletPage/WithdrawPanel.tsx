@@ -61,7 +61,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
 
   const [selectOption, setSelectOption] = useState(tipoPixOptions[0]);
   const [triggerGetWithdrawLimit, currentWithdrawLimitData] = useGetWithdrawLimitMutation()
-  console.log("currentWithdrawLimitData", currentWithdrawLimitData);
+  // console.log("currentWithdrawLimitData", currentWithdrawLimitData);
   useEffect(() => {
     triggerGetWithdrawLimit({
       token: AppLocalStorage.getItem("token") || "",

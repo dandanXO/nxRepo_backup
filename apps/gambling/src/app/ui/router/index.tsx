@@ -46,8 +46,6 @@ import {connect} from "../../gateway/socket";
 import {notification} from "antd";
 
 
-console.log("AppRouter");
-
 export const AppRouter = () => {
   const [isSetup, setIsSetup] = useState(false);
 
@@ -62,10 +60,10 @@ export const AppRouter = () => {
     refetchOnReconnect: false,
   });
 
-  console.log("data", data)
-  console.log("isLoading", isLoading)
-  console.log("isSuccess", isSuccess)
-  console.log("isError", isError)
+  // console.log("data", data)
+  // console.log("isLoading", isLoading)
+  // console.log("isSuccess", isSuccess)
+  // console.log("isError", isError)
 
   // const config = useSelector(selectConfigResult)
   // const config = useSelector((state: RootState) => state.api);
@@ -138,8 +136,8 @@ export const AppRouter = () => {
       "sysLanguage": null,
       token,
     }).then((response) => {
-      console.log("asdf token", token);
-      promiseHandler.then(response, () => {
+      // console.log("token", token);
+      if(!(response as any).error) {
         console.log("triggerLogin-data", response)
         // setLoginLocalStorage({
         //   token: (response as any).data.data.token,
@@ -160,7 +158,7 @@ export const AppRouter = () => {
         dispatch(appSlice.actions.setShowTelegramModal(true))
         // props.confirmToLogin();
         setIsSetup(true);
-      }, () => {});
+      }
     }).catch((error: any) => {
       console.error(error);
     })
