@@ -100,7 +100,7 @@ const DayList = ({
           const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
 
           return (
-            <DayItem checked={checked}>
+            <DayItem checked={checked} key={day}>
               <DayTitle className='absolute top-2 flex left-8'>
                 R$ {(config?.cashback || 0).toLocaleString()}
                 {
