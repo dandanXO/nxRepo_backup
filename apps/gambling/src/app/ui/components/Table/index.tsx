@@ -62,7 +62,7 @@ export const Table = (props: ITable) => {
   }, [dataSource])
 
   return (
-    <div className={tcx('h-full w-full min-w-[500px] overflow-hidden')}>
+    <div className={tcx('h-full w-full min-w-[500px] overflow-hidden flex flex-col')}>
       <div className={tcx(['pr-[3px]', isScrollbarVisible])}>
         <table className='relative table w-full no-scrollbar table-fixed'>
           <thead className=''>
@@ -80,7 +80,7 @@ export const Table = (props: ITable) => {
           </thead>
         </table>
       </div>
-      <div className='h-full overflow-y-auto' ref={tbodyRef} onScroll={handleOnScroll}>
+      <div className='h-full overflow-y-auto flex-1' ref={tbodyRef} onScroll={handleOnScroll}>
         <table className={tcx('table-zebra relative table w-full table-fixed ')}>
           <tbody className=''>
             {dataSource.length === 0 ? <tr>
