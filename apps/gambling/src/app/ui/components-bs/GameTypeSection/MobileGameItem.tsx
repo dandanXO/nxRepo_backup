@@ -4,6 +4,7 @@ import cx from "classnames";
 import {TailSpin} from "react-loading-icons";
 import {IGameItem, IItem} from "./GameItem";
 import styled from "styled-components";
+import {environment} from "../../../../environments/environment";
 // import Skeleton from 'react-loading-skeleton'
 
 
@@ -94,7 +95,9 @@ export const MobileGameItem = (props: IItem) => {
             // "van-image": isMobile,
             "invisible": !onLoad,
           })}
-          src={props.imageURL}
+          // src={props.imageURL}
+          src={`${environment.s3URLImages}/${props.gameId}-small.png`}
+          srcSet={`${environment.s3URLImages}/${props.gameId}-small.png 1x, ${environment.s3URLImages}/${props.gameId}-medium.png 2x, ${environment.s3URLImages}/${props.gameId}-large.png 3x`}
           onLoad={() => {
             setOnLoad(true);
           }}

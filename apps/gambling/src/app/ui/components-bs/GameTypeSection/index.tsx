@@ -112,20 +112,20 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     seeMoreText: 'Ver mais',
     textClassName: `text-sm text-white text-center w-[78px] h-[24px]
     after:content-['']
-    after:skew-x-[-15deg] 
+    after:skew-x-[-15deg]
     after:bg-[#262fa8]
     after:h-[24px]
-    after:absolute 
+    after:absolute
     after:w-[78px]
     after:rounded`
   } : {
-    
+
     containerClassName:`mb-3 text-3xl
     after:content-['']
     after:h-[1px]
     after:bottom-0
     after:right-0
-    after:absolute 
+    after:absolute
     after:w-full
     after:bg-gradient-to-r from-transparent to-[#4FFB0C]`,
     titleClassName: 'text-3xl font-semibold text-white',
@@ -150,8 +150,10 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
           return (
             <MainGameItem
               key={index}
+              gameId={Number(item.gameId)}
               name={item.name}
-              imageURL={`${environment.s3URLImages}/${item.gameId}.jpg`}
+              // imageURL={`${environment.s3URLImages}/${item.gameId}.jpg`}
+              imageURL={`https://resources.ttgroup.vip/icon/${item.gameId}-small.png`}
               onClick={() => onClickGameItem(item)}
               favorite={(totalFavoriteLocalState.local[userInfo.user_id] || []).includes(Number(item.gameId))}
               onClickFavorite={() => onClickFavoriteGameItem(item)}
