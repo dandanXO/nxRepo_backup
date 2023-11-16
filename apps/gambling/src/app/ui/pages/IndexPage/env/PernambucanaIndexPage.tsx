@@ -1,7 +1,7 @@
 import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
-import {AppCarousel} from "../AppCarousel";
+import {AppCarousel} from "../Carousel";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {GameTypeSectionList} from "../../../components-bs/GameTypeSection";
 import {Input} from "../../../components/Inputs/Input";
@@ -10,7 +10,7 @@ import {Input} from "../../../components/Inputs/Input";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {environment} from "../../../../../environments/environment"
-import {PernambucanaAppCarouselContent} from "../AppCarousel/env/PernambucanaAppCarouselContent";
+import {PernambucanaAppCarouselContent} from "../Carousel/env/PernambucanaAppCarouselContent";
 
 
 export type TTotalFavoriteLocalState = {

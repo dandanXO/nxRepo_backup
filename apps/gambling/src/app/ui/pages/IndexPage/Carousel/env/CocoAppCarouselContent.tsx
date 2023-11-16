@@ -8,15 +8,16 @@ import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../environments/environment";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import cx from "classnames";
+import {CarouselContainer} from "../CarouselContainer";
 
-export const CocoAppCarouselContent6= () => {
+export const CocoAppCarouselContent = () => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToFirstDeposit} = usePageNavigate();
   return (
-    <div className={"text-[22.5px] font-[Heebo] text-white"}>
+    <CarouselContainer className={"text-[22.5px] font-[Heebo] text-white"}>
       {isMobile ? (
         <div
           onClick={() => {
@@ -24,10 +25,10 @@ export const CocoAppCarouselContent6= () => {
           }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
-            <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
+            Primeiro depósito <br/> + bônus de 20%
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/h5_banner_6.jpeg`}
+              src={`assets/${environment.assetPrefix}/h5_banner_1.jpeg`}
           />
         </div>
       ) : (
@@ -44,15 +45,15 @@ export const CocoAppCarouselContent6= () => {
               "italic font-bold text-6xl text-left"
             )}
           >
-            <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
+            Primeiro depósito <br/> bônus de 20%
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/banner6.jpeg`}
+            src={`assets/${environment.assetPrefix}/banner1.jpeg`}
             // className="rounded-box"
           />
         </div>
       )}
-    </div>
+      </CarouselContainer>
   )
 }
 
