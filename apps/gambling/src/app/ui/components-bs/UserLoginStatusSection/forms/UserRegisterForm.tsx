@@ -171,7 +171,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           props.confirmToRegister();
         }
       }).catch((error) => {
-        alert(error)
+        console.error(error);
       })
     }
   })

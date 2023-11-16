@@ -162,7 +162,7 @@ export const AppRouter = () => {
         setIsSetup(true);
       }, () => {});
     }).catch((error: any) => {
-      alert(error);
+      console.error(error);
     })
   }, [])
   //const mounted = useRef(false);

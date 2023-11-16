@@ -169,7 +169,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           props.confirmToRegister();
         }
       }).catch((error) => {
-        alert(error)
+        console.error(error);
       })
     }
   })
