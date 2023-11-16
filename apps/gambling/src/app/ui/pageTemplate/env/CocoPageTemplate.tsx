@@ -149,7 +149,7 @@ export const CocoPageTemplate = ({
           />
         )}
 
-        {!isMobile && isShowMobileHeader && (
+        {!isMobile && isShowDesktopHeader && (
           <Header
             isLogin={isLogin}
             onClickUserLoginStatusDrawer={() => {
@@ -167,6 +167,7 @@ export const CocoPageTemplate = ({
               setOpenLogoutPopover(display);
             }}
             openLogoutPopover={isShowMobileLogoutModal}
+            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
           />
         )}
 

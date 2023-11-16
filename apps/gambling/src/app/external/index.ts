@@ -606,7 +606,8 @@ export const API = createApi({
   //
   // },
   refetchOnReconnect: true,
-  refetchOnFocus: true,
+  // NOTICE: 有些需要 token 的 api 也會更新...先暫時取消
+  refetchOnFocus: false,
   // keepUnusedDataFor: 60,
   // refetchOnMountOrArgChange: 60,
   endpoints: (builder) => {

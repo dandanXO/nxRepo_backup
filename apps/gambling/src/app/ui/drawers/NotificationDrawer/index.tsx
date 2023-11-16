@@ -1,7 +1,6 @@
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import cx from 'classnames';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, {useEffect, useState} from 'react';
 
 import {
   GetLetterResponseData,
@@ -9,7 +8,7 @@ import {
   useGetMailCountMutation,
   usePostLetterReadMutation,
 } from '../../../external';
-import { AppLocalStorage } from '../../../persistant/localstorage';
+import {AppLocalStorage} from '../../../persistant/localstorage';
 import {
   NotificationItemContainer,
   NotificationItemExpandable,
@@ -18,11 +17,16 @@ import {
 } from '../../components/NotificationItem';
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
+import {NotificationContainer as PernambucanaContainer} from "./env/pernambucana/NotificationContainer";
+import {NotificationContainer as CocoContainer} from "./env/coco/NotificationContainer";
 import {environment} from "../../../../environments/environment";
+
+const NotificationContainer = environment.assetPrefix === "coco777bet" ? CocoContainer : PernambucanaContainer;
 
 export type INotificationDrawer = {
   closeDrawer: () => void;
 };
+
 
 export const NotificationDrawer = (props: INotificationDrawer) => {
   const [messages, setMessages] = useState<GetLetterResponseData[]>([]);
@@ -90,13 +94,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
         props.closeDrawer();
       }}
     >
-      <div
-        className={cx(
-          'flex-between fixed right-0 top-0 bottom-0 z-10 flex w-[450px] flex-col bg-[#090B0F] p-4 text-left',
-          {}
-        )}
-        style={{background: `url("assets/${environment.assetPrefix}/bg_web_login_1.png")`}}
-      >
+      <NotificationContainer>
         <div className={'mb-2 text-lg font-bold text-main-secondary-main'} >
           Centro de Notificaciones
         </div>
@@ -148,7 +146,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
               </NotificationItemContainer>
             ))}
         </div>
-      </div>
+      </NotificationContainer>
     </div>
   );
 };

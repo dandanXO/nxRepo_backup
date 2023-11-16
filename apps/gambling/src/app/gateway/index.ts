@@ -48,27 +48,27 @@ export const gateway = async (
     const result = await axios(config);
 
     // NOTE: 系統維護中
-    if(result.data && result.data.code && result.data.code === 102015 ) {
-      dispatch(appSlice.actions.setGlobalMessage(result.data?.msg));
+    if(result?.data && result?.data?.code && result?.data?.code === 102015 ) {
+      dispatch(appSlice.actions.setGlobalMessage(result?.data?.msg));
       userLogout()
     }
 
-    if(result.data && result.data.code && result.data.code === 400 ) {
-      console.log("token is invalid: ", token)
+    if(result?.data && result?.data?.code && result?.data?.code === 400 ) {
+      console.log("[gateway] token is invalid: ", token)
       // dispatch(appSlice.actions.setGlobalMessage("token is invalid"));
-      dispatch(appSlice.actions.setGlobalMessage(result.data?.msg));
+      dispatch(appSlice.actions.setGlobalMessage(result?.data?.msg));
       userLogout()
     }
 
     // NOTE: other msg
-    if(result.data.code !==null && result.data.code !== 200) {
-      dispatch(appSlice.actions.setGlobalMessage(result.data?.msg));
+    if(result?.data?.code !==null && result?.data?.code !== 200) {
+      dispatch(appSlice.actions.setGlobalMessage(result?.data?.msg));
       return {
         error: "error",
-        data: result.data?.msg,
+        data: result?.data?.msg,
       };
     }
-    console.log('runAxios.result', result);
+    console.log('[gateway] runAxios.result', result);
 
     return {
       // success: true,

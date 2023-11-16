@@ -1,8 +1,11 @@
 import {CopyLinkItem} from "../../../../../components/CopyLinkItem";
 import {useLazyGetInviteRewardDataQuery} from "../../../../../../external";
 import {useEffect} from "react";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../../../reduxStore";
 
 export const InviteCopySection = () => {
+  const {isLogin} = useSelector((state: RootState) => state.app)
   const [triggerGetInviteReward, { currentData: inviteInfo, isFetching: isInviteInfoFetching }] =
     useLazyGetInviteRewardDataQuery({
       pollingInterval: 0,
@@ -11,7 +14,7 @@ export const InviteCopySection = () => {
     });
 
   useEffect(()=>{
-    triggerGetInviteReward({});
+    if(isLogin) triggerGetInviteReward({});
   },[])
 
   const inviteUrl = inviteInfo?.data?.inviteUrl || '';

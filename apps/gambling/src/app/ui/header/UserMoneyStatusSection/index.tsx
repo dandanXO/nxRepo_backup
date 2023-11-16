@@ -14,8 +14,10 @@ import cx from "classnames";
 
 export const PersonalControl = styled.div`
   background-color: var(--medium);
-  width: 178px;
+  box-shadow: 0 2px rgba(31,109,200,.72), 0 2px #14266a;
+  width: 160px;
   height: 32px;
+  border-radius: 5px;
 `
 
 type IProps = {

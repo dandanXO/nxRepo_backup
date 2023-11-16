@@ -168,7 +168,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
-  console.log("totalBalanceSheetValue", totalBalanceSheetValue);
+  // console.log("totalBalanceSheetValue", totalBalanceSheetValue);
   const totalReasableValue = useSelector(totalReasableSelector);
   // const accountPromotedSwingValue = useSelector(accountPromotedSwingSelector);
 
@@ -194,8 +194,9 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   useEffect(() => {
     if(isLogin) {
       triggerGetInviteReward({});
+      triggerGetUnsettleInviteReward({})
     }
-    triggerGetUnsettleInviteReward({})
+
   }, [])
 
   // A = /japi/invite/userInvite/queryInviteRewardData
@@ -256,7 +257,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
   // const vip_level = useSelector((state: RootState) => state.app?.userStore?.userinfo?.vip_level)
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
-  console.log("vip_level", vip_level);
+  // console.log("vip_level", vip_level);
 
   const [currentSelectedLevel, setCurrentSelectedLevel] = useState(vip_level);
   const [currentLevel, setCurrentLevel] = useState(vip_level);

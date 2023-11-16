@@ -71,7 +71,7 @@ let $local = {
 // TODO:
 let router = {
   push: (path: string) => {
-    console.log("path: " + path)
+    console.log("[gateway] path: " + path)
   }
 }
 
@@ -80,8 +80,8 @@ let toast$1 = {
   success: (message: string, {timeout}: {
     timeout: number,
   }) => {
-    console.log("message:", message)
-    console.log("timeout:", timeout)
+    console.log("[gateway] message:", message)
+    console.log("[gateway] timeout:", timeout)
   }
 }
 
@@ -109,7 +109,7 @@ export class Socket {
   }
 
   connect() {
-    console.log("[Socket] connect")
+    console.log("[gateway] [Socket] connect")
     this.ws = new WebSocket(this.url);
     this.creatorTime(true);
 
@@ -162,8 +162,8 @@ export class Socket {
   }
 
   send(t: number, n: any) {
-    console.log("[send] protoid====", t);
-    console.log("[send] 编码=============", n);
+    console.log("[gateway] [send] protoid====", t);
+    console.log("[gateway] [send] 编码=============", n);
 
     let o = this.encode(t, n);
     let s = Math.floor(new Date().getTime() / 1000);
@@ -192,7 +192,7 @@ export class Socket {
 
       if (this.reLoginTimes === -1) {
         // userStore$3.websocketTipsDialog = true;
-        // console.log("[websocket][104] userStore$3", userStore);
+        // console.log("[gateway] [websocket][104] userStore$3", userStore);
         updateUserStore({
           ...getUserStore(),
           websocketTipsDialog: true,
@@ -218,7 +218,7 @@ export class Socket {
 
   onmessage(t: MessageEvent) {
     if (t != null && !Object.is(t.target, this.ws)) {
-      console.log("SocketUtils onmessage() !this.socket");
+      console.log("[gateway] SocketUtils onmessage() !this.socket");
       return;
     }
     let n = JSON.parse(t.data);
@@ -228,7 +228,7 @@ export class Socket {
     }
     this.decode(n, (o: any) => {
       if (o.protoid) {
-        console.log("解码==========", o);
+        console.log("[gateway] 解码==========", o);
         this.onProtoMessage(o);
       }
     });
@@ -247,13 +247,13 @@ export class Socket {
     // let r = Base64.decode(t.msg);
     const r = atob(t.msg);
 
-    // console.log("r", r);
+    // console.log("[gateway] r", r);
     let a: number[] = [];
 
     for (let l = 0; l < r.length; l++) {
       a.push(r.charCodeAt(l));
     }
-    // console.log("a", a);
+    // console.log("[gateway] a", a);
 
     s.protoid = o;
     s.data = this.protoDecode(o, new Uint8Array(a));

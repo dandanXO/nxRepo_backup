@@ -14,6 +14,7 @@ import {appSlice} from "../../reduxStore/appSlice";
 export const useAutoUpdateBalance = () => {
   const dispatch = useDispatch();
   const {isLogin} = useSelector((state: RootState) => state.app)
+  // console.log("isLogin", isLogin);
 
   const [triggerGetBalance, {data,isLoading: isGetBalanceLoading}] = useLazyGetBalanceQuery();
 
@@ -24,9 +25,12 @@ export const useAutoUpdateBalance = () => {
 
   const updateBalance = () => {
     if(!isLogin) return;
-    triggerGetBalance({
-      token: AppLocalStorage.getItem("token") || ""
-    })
+    const token =  AppLocalStorage.getItem("token")
+    if(token && token !== "" && token !== "undefined") {
+      triggerGetBalance({
+        token: AppLocalStorage.getItem("token") || ""
+      })
+    }
   }
 
   const updateVIPInfo = () => {

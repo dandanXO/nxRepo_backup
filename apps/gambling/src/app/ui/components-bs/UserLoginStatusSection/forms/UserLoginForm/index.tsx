@@ -121,7 +121,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
       }
 
       if(environment.mockBackend) {
-        console.log("triggerLogin-data", MockTriggerLoginResponse);
+        // console.log("triggerLogin-data", MockTriggerLoginResponse);
         setLoginLocalStorage({
           token: MockTriggerLoginResponse.data.token,
           userInfo: MockTriggerLoginResponse.data.user_info,
@@ -172,7 +172,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
               props.confirmToLogin();
             }
         }).catch((error: any) => {
-          alert(error);
+          console.error(error);
         })
       }
     }

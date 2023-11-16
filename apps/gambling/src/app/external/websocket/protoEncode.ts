@@ -1,6 +1,6 @@
 export const protoEncode = (t: number, n: any) => {
-  console.log(`[ws] protoEncode case ${t}`)
-  console.log(`[ws] protoEncode data ${n}`)
+  console.log(`[websocket] protoEncode case ${t}`)
+  console.log(`[websocket] protoEncode data ${n}`)
 
   switch (t) {
     case 3:

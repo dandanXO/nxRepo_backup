@@ -22,9 +22,9 @@ export const onProtoMessage = (
     type3: 0,
   };
 
-  console.log("[onProtoMessage]");
-  console.log("protoid", protoid);
-  console.log("data", data);
+  console.log("[websocket][onProtoMessage]");
+  console.log("[websocket]protoid", protoid);
+  console.log("[websocket]data", data);
 
   switch (protoid) {
     case 4:

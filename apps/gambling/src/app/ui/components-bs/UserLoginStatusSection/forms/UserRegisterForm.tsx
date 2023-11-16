@@ -149,7 +149,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           "captcha_image_code": captchaInput.data,
           "web_uuid": "39b1e7e2-0a02-4fd2-958f-e8a85215010f"
       }).then((response) => {
-        console.log("triggerRegister-data", response)
+        // console.log("triggerRegister-data", response)
         if(!(response as any).error) {
           setLoginLocalStorage({
             token: (response as any).data?.data?.token,
@@ -171,7 +171,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           props.confirmToRegister();
         }
       }).catch((error) => {
-        alert(error)
+        console.error(error);
       })
     }
   })
