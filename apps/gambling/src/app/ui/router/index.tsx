@@ -44,6 +44,7 @@ import {promiseHandler} from "../../gateway/promiseHanlder";
 import {setLoginLocalStorage} from "../../persistant/setLoginLocalStorage";
 import {connect} from "../../gateway/socket";
 import {notification} from "antd";
+import TermsOfServicePage from "../pages/TermsOfServicePage";
 
 
 export const AppRouter = () => {
@@ -306,6 +307,11 @@ export const AppRouter = () => {
           <Route path={PageOrModalPathEnum.PrivacyAgreementPage} element={(
             <PageTemplate showMobileHeader={false} showTabbar={!isMobile}>
               <PrivacyAgreementPage/>
+            </PageTemplate>
+          )}/>
+          <Route path={PageOrModalPathEnum.TermsOfService} element={(
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={!isMobile}>
+              <TermsOfServicePage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.CompanyProfilePage} element={(
