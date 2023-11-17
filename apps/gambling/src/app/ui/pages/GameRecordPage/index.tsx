@@ -34,6 +34,7 @@ export const GameRecordPage = () => {
   };
 
   const [triggerGetRecord, { data }] = useGetUserGameRecordMutation({});
+  const [resetRecords, setResetRecords]= useState(false);
   const [records, setRecords] = useState<GetUserGameRecordResponse["rows"]>([])
   const [page, setPage] = useState(1)
 
@@ -92,10 +93,21 @@ export const GameRecordPage = () => {
       pageSize: pageSize,
       token: AppLocalStorage.getItem('token') || '',
     });
-  }, [dates, page]);
+  }, [page, dates]);
+
+  useEffect(()=>{
+    setResetRecords(true)
+    setPage(1)
+  }, [dates])
+
 
   useEffect(()=> {
-    setRecords([...records, ...(data?.rows || [])])
+    if(resetRecords) {
+      setRecords(data?.rows || [])
+      setResetRecords(false)
+    }else {
+      setRecords([...records, ...(data?.rows || [])])
+    }
   }, [data?.rows])
 
 
@@ -124,7 +136,7 @@ export const GameRecordPage = () => {
             />
           </section>
 
-          <div className='h-[80vh] rounded-lg overflow-hidden'>
+          <div className='h-[80vh] rounded-lg overflow-hidden overflow-x-scroll'>
             <Table
               fetchData={handleFetchData}
               dataSource={records}

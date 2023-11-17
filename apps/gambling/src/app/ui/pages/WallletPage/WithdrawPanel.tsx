@@ -122,9 +122,18 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   }
   const validateSelectInput = (value: string) => {
     let isError = false;
-    if (selectOption.label === 'CPF' || selectOption.label === 'CNPJ') {
+    if (selectOption.label === 'CPF' ) {
       isError = isNaN(Number(value)) || value === "" || value.length !== 11
-      const errorMessage = selectOption.label === 'CPF' ? "Informe o CPF no formato correto" : "Insira seu CNPJ no formato correto"
+      const errorMessage ="Informe o CPF no formato correto" ;
+      setSelectInput({
+        data: value,
+        isValidation: !isError,
+        errorMessage: !isError ? "" : errorMessage,
+      })
+
+    }else if (selectOption.label === 'CNPJ') {
+      isError = isNaN(Number(value)) || value === "" || value.length !== 14
+      const errorMessage = "Insira seu CNPJ no formato correto"
       setSelectInput({
         data: value,
         isValidation: !isError,
@@ -140,7 +149,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         errorMessage: !isError ? "" : value === "" ? "Por favor insira seu e-mail" : "Informe o CPF no formato correto",
       })
     } else if (selectOption.label === 'Telefone(+55)') {
-      isError = isNaN(Number(value)) || value === "" || value.length !== 11
+      isError = isNaN(Number(value)) || value === "" || (value.length !== 10 && value.length !== 11)
       setSelectInput({
         data: value,
         isValidation: !isError,
@@ -324,6 +333,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
               <Select
                 menuPlacement={'top'}
                 className="rounded-lg "
+                isSearchable={false}
                 styles={{
                   control: (baseStyle, states) => {
                     return {
@@ -377,7 +387,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
                   },
                   singleValue: (provided, state) => ({
                     ...provided,
-                    color: '#9ca3af',
+                    color: 'var(--main-primary-main)',
                   })
                 }}
                 value={selectOption}
