@@ -5,6 +5,7 @@ import cx from "classnames";
 import React, {useState} from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
+import { useSelector } from "react-redux";
 
 export type IFooter = {
   // showFooter?: boolean;
@@ -16,6 +17,7 @@ export type IFooter = {
 export const Footer = (props: IFooter) => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
+  const { label } = useSelector((state: any) => state.gameList);
 
   const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
   const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
@@ -30,7 +32,7 @@ export const Footer = (props: IFooter) => {
 
 
   return (
-    <>
+    <div>
       {isMobile && isShowMobileFooter? (
         <div className={cx(
           'flex justify-center text-white p-4 pb-[80px]',
@@ -63,11 +65,13 @@ export const Footer = (props: IFooter) => {
                 </button>
                 {footerExpands.gameTypes === true && (
                   <div className={"pl-4 flex flex-col items-start"}>
-                    <button className={"h-[44px]"} onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Salão</button>
-                    <button className={"h-[44px]"} onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Slots</button>
-                    <button className={"h-[44px]"} onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Fishing</button>
-                    <button className={"h-[44px]"} onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Vivo</button>
-                    <button className={"h-[44px]"} onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Viver</button>
+                    {
+                      ["Salão", ...label].map((gameName: string, index: number) => {
+                        return (
+                          <button className={"h-[44px]"} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
+                        )
+                      })
+                    }
                   </div>
                 )}
               </section>
@@ -144,11 +148,13 @@ export const Footer = (props: IFooter) => {
 
               <section className={"flex flex-col gap-3 w-1/12 items-start"}>
                 <div className='text-gray-500'>Jogo</div>
-                <button onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Salão</button>
-                <button onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Slots</button>
-                <button onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Fishing</button>
-                <button onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Vivo</button>
-                <button onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}>Viver</button>
+                {
+                  ["Salão", ...label].map((gameName: string, index: number) => {
+                    return (
+                      <button onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
+                    )
+                  })
+                }
               </section>
 
               <section className={"flex flex-col gap-3 w-3/12 items-start"}>
@@ -193,6 +199,6 @@ export const Footer = (props: IFooter) => {
             </div>
           </div>
       ): null}
-    </>
+    </div>
   )
 }
