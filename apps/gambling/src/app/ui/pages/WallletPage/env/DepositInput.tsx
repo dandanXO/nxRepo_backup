@@ -38,19 +38,29 @@ const MobileTag = styled(InputTag)`
 
 interface IDepositInput {
   inputValue: string;
+  setInputValue: (value: string) => void;
   selectedIndexConfig?: RechargeResponseConfig;
 }
 
 export const DepositInput = (props: IDepositInput) => {
   const { isMobile } = useBreakpoint();
-  const { inputValue, selectedIndexConfig } = props;
-
+  const { inputValue, setInputValue, selectedIndexConfig } = props;
   const isShowInputTag = selectedIndexConfig && Number(selectedIndexConfig?.rate) > 0
+  const extraDepositBonus = (Number(inputValue) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1)).toFixed(2).toString();
 
   if (environment.assetPrefix === 'coco777bet') {
     return (
       <div className={cx("relative", { 'my-10': !isMobile })}>
-        <MobileInput value={inputValue} className={cx({ 'py-2.5 px-4': isMobile })} inputClassName={'text-white'} />
+        <MobileInput
+          type={"number"}
+          className={cx({ 'py-2.5 px-4': isMobile })}
+          inputClassName={'text-white'}
+          value={inputValue}
+          onChange={(event) => {
+            console.log(event.target.value)
+            setInputValue(event.target.value);
+          }}
+        />
         {isShowInputTag &&
           (<div className={cx(`absolute top-0 right-0`,
             {
@@ -58,7 +68,7 @@ export const DepositInput = (props: IDepositInput) => {
               'text-xs pt-0.5 pr-1  text-[#fbd81e] bg-gradient-to-r from-[transparent] via-[#FF3838] to-[#FF3838] rounded-tr-lg': isMobile
             })
           }>
-            + R$ {(Number(inputValue) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1)).toFixed(0).toString()}
+            + R$ {extraDepositBonus}
           </div>)}
       </div>
     )
@@ -76,14 +86,14 @@ export const DepositInput = (props: IDepositInput) => {
         (
           isMobile ? (
             <MobileTag className={"text-base font-bold"}>
-              <span className="pr-1">+ </span> <span>{(Number(inputValue) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1)).toFixed(0).toString()}</span>
+              <span className="pr-1">+ </span> <span>{extraDepositBonus}</span>
             </MobileTag>
           ) : (
             <InputTag className={cx({
               // "background-[linear-gradient(90deg,#FFF600 0%,#4FFB0C 100%)]": isMobile,
             })}
             >
-              <span className="pr-1">+ </span> <span>{(Number(inputValue) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1)).toFixed(0).toString()}</span>
+              <span className="pr-1">+ </span> <span>{extraDepositBonus}</span>
             </InputTag>
           )
         )

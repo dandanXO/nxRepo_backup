@@ -89,15 +89,39 @@ export const DepositPanel = (props: IDepositPanel) => {
     }) || []
     return configs[0];
   }
+
+  // 根據預設值初始化
   useEffect(() => {
+    // 設定有符合的充值按鈕
     const defaultIndex = recharge_options.indexOf(Number(recharge_options_default))
     setSelectedIndex(defaultIndex);
+
+    // 設定預設輸數框
     setInputValue(String(recharge_options_default))
+
     const config = getConfig(recharge_options_default);
     setSelectedIndexConfig(config);
     // console.log(`rechargeValue:${recharge_options_default}`)
     // console.log("configs:", config);
   }, [props?.data, recharge_options_default, recharge_options])
+
+  // NOTICE: 當輸入框有變動時
+  useEffect(() => {
+    // 設定有符合的充值按鈕
+    const defaultIndex = recharge_options.indexOf(Number(inputValue))
+    // 有匹配到符合的充值按鈕
+    if(defaultIndex > -1) {
+      setSelectedIndex(defaultIndex);
+    } else {
+      setSelectedIndex(-1)
+    }
+    // NOTICE: Fatal note - props?.data 在 getConfig 有用到
+    const config = getConfig(Number(inputValue));
+    setSelectedIndexConfig(config);
+    // console.log(`[input] inputValue:${inputValue}`)
+    // console.log("[input] configs:", config);
+  }, [props?.data, recharge_options, inputValue])
+
 
 
   const depositButtonProps = (rechargeValue: number, rate: string) => {
@@ -128,7 +152,7 @@ export const DepositPanel = (props: IDepositPanel) => {
     <SectionContainer id={"deposit-section"}>
       <DepositNoticeSection />
       <section className={"flex flex-col w-full"}>
-        {recharge_options && recharge_options.length > 0 && <DepositInput inputValue={inputValue} selectedIndexConfig={selectedIndexConfig} />}
+        {recharge_options && recharge_options.length > 0 && <DepositInput inputValue={inputValue} setInputValue={setInputValue} selectedIndexConfig={selectedIndexConfig} />}
         <div className={tcx("flex flex-1 m-auto flex-row flex-wrap w-full justify-start items-stretch", [`mb-20 `, !isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
