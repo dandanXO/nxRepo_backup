@@ -79,35 +79,35 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
       </section>
 
 
-      {(switchToLoginOrRegister === "login" ? (
-        <div>
-          <section className={"flex flex-col justify-center items-center mb-4"}>
-            {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>*/}
-            <img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
-            {props.showPlatformLogo && (
-              <span className={"text-white text-sm"}>{environment.platformName}</span>
-            )}
-          </section>
-          <UserLoginForm
-            confirmToLogin={() => {
-              props.confirmToLogin()
-            }}
-            openNotificationWithIcon={props.openNotificationWithIcon}
-            onSwitchToForgetPassword={() => {
-              setSwitchToLoginOrRegister("forget")
-            }}
-          />
-        </div>
-      ) : switchToLoginOrRegister === "register" ? (
-        <div>
-          <UserRegisterForm
-            confirmToRegister={() => {
-              props.confirmToLogin()
-            }}
-            openNotificationWithIcon={props.openNotificationWithIcon}
-          />
-        </div>
-      ) : (
+      {/*{(switchToLoginOrRegister === "login" ? (*/}
+      {/*  <div>*/}
+      {/*    <section className={"flex flex-col justify-center items-center mb-4"}>*/}
+      {/*      /!*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>*!/*/}
+      {/*      <img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>*/}
+      {/*      {props.showPlatformLogo && (*/}
+      {/*        <span className={"text-white text-sm"}>{environment.platformName}</span>*/}
+      {/*      )}*/}
+      {/*    </section>*/}
+      {/*    <UserLoginForm*/}
+      {/*      confirmToLogin={() => {*/}
+      {/*        props.confirmToLogin()*/}
+      {/*      }}*/}
+      {/*      openNotificationWithIcon={props.openNotificationWithIcon}*/}
+      {/*      onSwitchToForgetPassword={() => {*/}
+      {/*        setSwitchToLoginOrRegister("forget")*/}
+      {/*      }}*/}
+      {/*    />*/}
+      {/*  </div>*/}
+      {/*) : switchToLoginOrRegister === "register" ? (*/}
+      {/*  <div>*/}
+      {/*    <UserRegisterForm*/}
+      {/*      confirmToRegister={() => {*/}
+      {/*        props.confirmToLogin()*/}
+      {/*      }}*/}
+      {/*      openNotificationWithIcon={props.openNotificationWithIcon}*/}
+      {/*    />*/}
+      {/*  </div>*/}
+      {/*) : (*/}
         <div>
           <UserForgetPasswordForm
             confirmToRegister={() => {
@@ -116,7 +116,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
             openNotificationWithIcon={props.openNotificationWithIcon}
           />
         </div>
-      ))}
+      {/*))}*/}
     </div>
   )
 

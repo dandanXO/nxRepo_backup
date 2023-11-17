@@ -5,7 +5,7 @@ import {CheckCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {Input as DesktopInput, Input, InputValue} from "../../../components/Inputs/Input";
 import {MobileInput} from "../../../components/Inputs/MobileInput";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useForm} from "../../../hooks/useForm";
 import {
   useForgetPasswordMutation,
@@ -52,18 +52,69 @@ export type IUserForgetPasswordForm = {
   openNotificationWithIcon: (props: IOpenNotificationWithIcon) => void;
 }
 
-const SendSMSCodeButton = styled.button`
-  position: absolute;
-  width: 70px;
-  height: 53px;
+const StyledSendSMSCodeButton = styled.button`
   background: var(--main-primary-main);
-  border-radius: 0 25px 25px 0; /* 左侧半径为0，其他圆角为25px */
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // cursor: pointer;
-  // margin-top: -3px;
 `
+{/*Enviar*/}
+{/*Esquerda 120s*/}
+{/*Reenviar*/}
+type ICountingButtonType = "ready" | "counting" | "finished";
+type IProps = {
+  onClick: (isCounting: boolean) => void;
+  valid: boolean;
+}
+const SendSMSCodeButton = (props: IProps) => {
+  const [state, setState] = useState<ICountingButtonType>("ready")
+  const [secondState, setSecondState] = useState<number>(120)
+  let strState
+
+  useEffect(() => {
+    let countingDownID: any;
+
+    if(state === "counting") {
+      if(countingDownID) {
+        clearTimeout(countingDownID);
+      }
+      countingDownID = setTimeout(() => {
+        if(secondState > 0) {
+          setSecondState(secondState - 1)
+        } else if(secondState === 0){
+          clearTimeout(countingDownID);
+          setState("finished");
+          setSecondState(120);
+        }
+      }, 1000)
+    }
+    return () => {
+      if(state === "counting") {
+        clearTimeout(countingDownID);
+      }
+    }
+  }, [state, secondState])
+
+  if(state === "ready") {
+    strState = "Enviar"
+  } else if(state === "counting") {
+    strState = "Esquerda " + secondState
+  } else {
+    strState = "Reenviar"
+  }
+  console.log("props.valid", props.valid)
+  return (
+    <StyledSendSMSCodeButton
+      className="px-2 py-1 rounded-xl"
+      onClick={() => {
+        props.onClick && props.onClick(state === "counting");
+
+        if(!props.valid) return;
+        if(state === "ready") {
+          setState("counting");
+        } else if(state === "finished") {
+          setState("counting");
+        }
+    }}>{strState}</StyledSendSMSCodeButton>
+  )
+}
 
 
 export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
@@ -201,6 +252,21 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           type={"text"}
           // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
           prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+          suffix={
+            <SendSMSCodeButton
+              valid={phoneInput.data.length > 0 && phoneInput.isValidation || false}
+              onClick={(isCounting) => {
+                if(isCounting) return;
+                if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
+                  triggerSendForgetPasswordSMSCode({
+                    appPackageName: environment.appPackageName,
+                    deviceId: AppLocalStorage.getItem("deviceId") || "",
+                    phone: phoneInput.data,
+                    verifyType: 1
+                  });
+                }
+              }}/>
+          }
           placeholder={"Código de verificação"}
           value={captchaInput.data}
           validation={captchaInput.isValidation}
@@ -209,20 +275,6 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
             onValidateCaptchaInput(event.target.value, setCaptchaInput);
           }}
         />
-        <div className={'w-[330px]'}>
-          <SendSMSCodeButton
-            style={{ position: 'absolute',right: '0px', top: '0', zIndex: '1',fontWeight: 'bold' }}
-            onClick={() => {
-              if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
-                triggerSendForgetPasswordSMSCode({
-                  appPackageName: environment.appPackageName,
-                  deviceId: AppLocalStorage.getItem("deviceId") || "",
-                  phone: phoneInput.data,
-                  verifyType: 1
-                });
-              }
-            }}>Enviar</SendSMSCodeButton>
-          </div>
       </div>
 
       <div style={{ position: 'relative' }}>
