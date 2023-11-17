@@ -22,7 +22,7 @@ export const InviteCopySection = () => {
   return (
     <div className="w-full text-center">
       <p className="mt-4 text-[#ffd624] text-xs leading-none mb-2">Copie o link e cole-o no navegador do seu computador para abri-lo em seu computador</p>
-      <CopyInputUrlItem url={isLogin ? inviteUrl : 'https://www.hxj-dev.com'} className={'rounded break-all text-left'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
+      <CopyInputUrlItem url={isLogin ? inviteUrl : location.href} className={'rounded break-all text-left'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
     </div>
   )
 }
