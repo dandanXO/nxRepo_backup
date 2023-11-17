@@ -73,7 +73,7 @@ const Coco777BetMyPage = ({
 
       <section className='flex justify-between text-center py-3'>
         <div className='w-full px-3'>
-          <div className='text-xl text-white'>R$ {totalBalanceSheetValue}</div>
+          <div className='text-xl text-white'>R$ {totalBalanceSheetValue.toLocaleString()}</div>
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
             onClick={() => onClickToWallet()}
@@ -81,7 +81,7 @@ const Coco777BetMyPage = ({
         </div>
 
         <div className='w-full px-3'>
-          <div className='text-xl text-white'>R$ {totalReasableValue}</div>
+          <div className='text-xl text-white'>R$ {totalReasableValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
             onClick={() => onClickToWallet()}
