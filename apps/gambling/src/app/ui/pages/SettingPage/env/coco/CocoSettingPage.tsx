@@ -64,7 +64,15 @@ export const CocoSettingPage = ({
               <UserOutlined className={"mr-2"}/>
               <div>Apelido</div>
             </div>
-            <div>{nickname}</div>
+            <div className='flex gap-2 items-center'>
+              <div>{nickname}</div>
+              <button
+                className='flex items-center'
+                onClick={()=> setEditing(true)
+              }>
+                <EditOutlined />
+              </button>
+            </div>
             {/*<ViewButton*/}
             {/*  onClick={() => setEditing(true)}*/}
             {/*  className={'!h-[30px]'}*/}
