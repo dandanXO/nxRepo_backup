@@ -130,7 +130,6 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
     };
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [password, setPassword] = useState('');
 
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
