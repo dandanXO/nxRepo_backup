@@ -1,7 +1,6 @@
 import { DatePicker } from 'antd';
 import moment, { Moment } from 'moment';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 
 import { GetUserGameRecordResponse, useGetUserGameRecordMutation } from "../../../external";
 import { AppLocalStorage } from '../../../persistant/localstorage';
@@ -12,7 +11,6 @@ import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { Table } from "../../components/Table";
-import { undefined } from "zod";
 
 
 const { RangePicker } = DatePicker;

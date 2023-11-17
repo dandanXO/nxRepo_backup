@@ -11,8 +11,8 @@ import cx from "classnames";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import useBreakpoint from "../../../hooks/useBreakpoint";
-import { IconTooltip } from "./components/IconTooltip";
 import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
+import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
 
 
 const StyledTotalSectionContainer = styled.div`
