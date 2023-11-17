@@ -1,7 +1,7 @@
 import {PhoneSvg} from "../PhoneSvg";
 import {KeySvg} from "../KeySvg";
 import {ConfirmButton} from "../../../components/Buttons/ConfirmButton";
-import {CheckCircleOutlined} from "@ant-design/icons";
+import {CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {Input as DesktopInput, Input, InputValue} from "../../../components/Inputs/Input";
 import {MobileInput} from "../../../components/Inputs/MobileInput";
@@ -99,13 +99,11 @@ const SendSMSCodeButton = (props: IProps) => {
   } else {
     strState = "Reenviar"
   }
-  console.log("props.valid", props.valid)
   return (
     <StyledSendSMSCodeButton
       className="px-2 py-1 rounded-xl"
       onClick={() => {
         props.onClick && props.onClick(state === "counting");
-
         if(!props.valid) return;
         if(state === "ready") {
           setState("counting");
@@ -277,11 +275,22 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         />
       </div>
 
-      <div style={{ position: 'relative' }}>
       <Input
         type={isPasswordVisible ? 'text' : 'password'}
         // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+        suffix={(
+          <div
+            className="password-toggle"
+            onClick={togglePasswordVisibility}
+          >
+            {isPasswordVisible ? (
+              <EyeOutlined className={"text-[#8B619E]"}/>
+            ) : (
+              <EyeInvisibleOutlined className={"text-[#8B619E]"}/>
+            )}
+          </div>
+        )}
         placeholder={"Senha (4-12 letras e números)"}
         value={passwordInput.data}
         validation={passwordInput.isValidation}
@@ -303,18 +312,6 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
 
         }}
       />
-        <div
-            className="password-toggle"
-            style={{ position: 'absolute', right: '17px', top: '9px', zIndex: '1' }}
-            onClick={togglePasswordVisibility}
-        >
-          {isPasswordVisible ? (
-              <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_on.png`} alt="EyeOffSvg" />
-          ) : (
-              <img src={`assets/${environment.assetPrefix}/Property 1=ic_eye_off.png`} alt="EyeSvg"/>
-          )}
-        </div>
-      </div>
 
       <section className={"flex flex-col"}>
         <ConfirmButton
