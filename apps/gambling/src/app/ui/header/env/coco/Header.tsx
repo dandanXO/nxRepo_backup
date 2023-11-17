@@ -16,6 +16,7 @@ import { HeaderMenu } from "./HeaderMenu";
 import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
 import { IUserInfo } from "../../../../persistant/pending/loginMode";
 import { AppLocalStorage } from "../../../../persistant/localstorage";
+import { usePageNavigate } from "../../../hooks/usePageNavigate";
 
 
 const Notification = styled.section`
@@ -52,6 +53,7 @@ export type IHeader = {
   openLogoutPopover: boolean;
   openDesktopUserInfoStatusDrawer: boolean;
   onClickToChangeLogoutPopover: (display: boolean) => void;
+  onClickToDownload: () => void;
 }
 
 const HeaderButton = styled.button.attrs((props) => ({
@@ -84,11 +86,13 @@ export const Header = (props: IHeader) => {
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
   const [hover, setHover] = useState(false);
+  const {onClickToIndex,onClickToInvite,onClickToVipGrade} = usePageNavigate();
+
 
   return (
     <header
       className={cx("max-h-[66px]",
-        "flex flex-row justify-between items-center relative",
+        "flex flex-row justify-start items-center relative",
         // "bg-purple-500"
       )}
     // style={{
@@ -100,9 +104,17 @@ export const Header = (props: IHeader) => {
     // }}
     >
       {
-        isLogin && (hover && <HeaderMenu />)
+        hover && (
+          <div
+            onMouseOver={() => { setHover(true) }}
+            onMouseOut={() => { setHover(false) }}
+          >
+            <HeaderMenu />
+          </div>
+        )
       }
-      <div className={"flex flex-row basis-[58%] min-w-[680px] max-h-[67px] -mb-[1px]"}
+
+      <div className={"flex  flex-row min-w-[680px] max-h-[67px] -mb-[1px]"}
         onMouseOver={() => {
           setHover(true);
         }}
@@ -114,27 +126,30 @@ export const Header = (props: IHeader) => {
           <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
         </div>
         <HeaderButton>
-          <HeaderButtonText>Jogos</HeaderButtonText>
+          <HeaderButtonText onClick={onClickToIndex}>Jogos</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
           <HeaderButtonText>Atividade</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
-          <HeaderButtonText>Convidar</HeaderButtonText>
+          <HeaderButtonText onClick={onClickToInvite}>Convidar</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
-          <HeaderButtonText>VIP</HeaderButtonText>
+          <HeaderButtonText onClick={onClickToVipGrade}>VIP</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
-          <HeaderButtonText>Download</HeaderButtonText>
+          <HeaderButtonText onClick={props.onClickToDownload}>Download</HeaderButtonText>
         </HeaderButton>
       </div>
 
       {!isLogin && (
-        <LoginButton className={"text-white text-lg"} onClick={() => {
-          props.onClickUserLoginStatusDrawer()
-        }}>Connecte-se</LoginButton>
+        <div className="flex-1 flex justify-end">
+          <LoginButton className={"text-white text-lg"} onClick={() => {
+            props.onClickUserLoginStatusDrawer()
+          }}>Connecte-se</LoginButton>
+        </div>
       )}
+
 
       {/*[How to Align Last Flex Item to Right](https://medium.com/@iamryanyu/how-to-align-last-flex-item-to-right-73512e4e5912)*/}
       {isLogin && (
