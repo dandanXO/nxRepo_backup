@@ -1,4 +1,4 @@
-import {CopyLinkItem} from "../../../../../components/CopyLinkItem";
+import {CopyInputUrlItem} from "../../../../../components/CopyInputUrlItem";
 import {useLazyGetInviteRewardDataQuery} from "../../../../../../external";
 import {useEffect} from "react";
 import {useSelector} from "react-redux";
@@ -22,7 +22,7 @@ export const InviteCopySection = () => {
   return (
     <div className="w-full text-center">
       <p className="mt-4 text-[#ffd624] text-xs leading-none mb-2">Copie o link e cole-o no navegador do seu computador para abri-lo em seu computador</p>
-      <CopyLinkItem url={inviteUrl} className={'rounded'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
+      <CopyInputUrlItem url={inviteUrl} className={'rounded'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
     </div>
   )
 }

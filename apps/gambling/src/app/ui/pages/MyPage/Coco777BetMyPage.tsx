@@ -18,6 +18,8 @@ import {Container} from "../../components/container/Container";
 import {List} from "../../components/List";
 import {ListHeader} from "../../components/List/ListHeader";
 import {ListItem} from "../../components/List/ListItem";
+import { CopyIcon } from "apps/gambling/src/app/ui/components/CopyIcon";
+
 
 const VIPContainer = styled.div`
   box-sizing: border-box;
@@ -58,10 +60,8 @@ const Coco777BetMyPage = ({
           <div>
             <div className='text-white text-base'>{user.nickname}</div>
             <div className='text-white text-sm flex items-center'>
-              <span className='mr-2'>ID:{user.user_id}</span>
-              <button>
-                <img className="w-[17px] h-[17px]" alt={"copy"} src={`assets/${environment.assetPrefix}/ic_copy.png`}/>
-              </button>
+              <span>ID:{user.user_id}</span>
+              <CopyIcon copyText={user.user_id} />
             </div>
           </div>
         </div>
