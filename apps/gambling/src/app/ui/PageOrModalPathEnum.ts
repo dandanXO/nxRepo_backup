@@ -12,6 +12,7 @@ export enum PageOrModalPathEnum {
   GamePage= "/game",
   GameRecordPage = "/game-record",
   PrivacyAgreementPage = "/privacy-agreement",
+  TermsOfService = "/terms_of_service",
   CompanyProfilePage = "/company-profile",
   VIPGradePage = "/vip-grade",
   DailySignInPage = "/daily-sign-in",
