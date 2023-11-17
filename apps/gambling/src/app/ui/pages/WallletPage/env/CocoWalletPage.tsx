@@ -25,11 +25,13 @@ import { CommonTableTabG } from "../../InvitePage/InviteRecordInfoTabSection/env
 import cx from "classnames";
 import {BackNavigation} from "../../../components/BackNavigation/BackNavigation";
 import {Container} from "../../../components/container/Container";
+import { usePageNavigate } from "../../../hooks/usePageNavigate";
 
 
 export const CocoWalletPage = () => {
 
   useAllowLoginRouterRules();
+  const {onClickToIndex} = usePageNavigate();
 
   const { updateBalance } = useAutoUpdateBalance();
 
@@ -63,9 +65,7 @@ export const CocoWalletPage = () => {
     <>
 
       {isMobile && (
-        <BackNavigation onClick={() => {
-          navigate(PageOrModalPathEnum.MyPage);
-        }}/>
+        <BackNavigation onClick={onClickToIndex}/>
       )}
 
       <div className={"m-auto w-[94%] pb-16"}>

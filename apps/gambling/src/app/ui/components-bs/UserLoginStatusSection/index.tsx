@@ -78,7 +78,6 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
         )}
       </section>
 
-
       {(switchToLoginOrRegister === "login" ? (
         <div>
           <section className={"flex flex-col justify-center items-center mb-4"}>

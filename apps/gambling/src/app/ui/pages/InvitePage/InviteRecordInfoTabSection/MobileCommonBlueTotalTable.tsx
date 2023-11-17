@@ -6,6 +6,9 @@ import {MobileBlueBackgroundShadowContainer as Coco} from "./env/coco/MobileBlue
 
 import {environment} from "../../../../../environments/environment";
 import {CommonTableTabG} from "./env/CommonTableTabG";
+import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
+import { useState } from "react";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 
 
 const MobileBlueBackgroundShadowContainer = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana;
@@ -31,6 +34,8 @@ export interface ITotal {
 type IMobileCommonBlueTable = ITabType & ITotal;
 
 export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
+  const [inviteBonusInfoOpen, setInviteBonusInfoOpen] = useState(false)
+
   return (
     <MobileBlueBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 pb-2 text-[#ffffff] text-left"}>
       <div className={"flex flex-row text-lg font-bold justify-around mb-2"}>
@@ -76,9 +81,24 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
           <span className="font-hairline">Valor da transação do jogo</span>
         </div>
 
-        <div className={"flex flex-col"}>
-          <span className={"text-lg text-[#ffffff]"}>R$ {props.data.gameRechargeReward || 0.00}</span>
+        <div className={"flex flex-col"} onClick={()=>setInviteBonusInfoOpen(true)}>
+          <div className='flex gap-2 items-center'>
+            <span className={"text-lg text-[#ffffff]"}>R$ {props.data.gameRechargeReward || 0.00}</span>
+            <QuestionCircleOutlined style={{ color: '#FF8A00'}} />
+          </div>
           <span className="font-hairline">Obter bônus</span>
+          {
+            inviteBonusInfoOpen && (
+              <ConfirmDrawer
+                onClose={()=>setInviteBonusInfoOpen(false)}
+                className='bg-gradient-to-t from-[#2E104C] to-[#3F28AF]'
+                buttonStyle='bg-gradient-to-t from-[#d88c19] to-[#ffae1a]'
+                buttonText='Eu vejo'
+                title='Descrição detalhada'
+                content='As recompensas são liquidadas toda segunda-feira'
+              />
+            )
+          }
         </div>
       </div>
 

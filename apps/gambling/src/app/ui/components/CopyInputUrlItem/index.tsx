@@ -3,14 +3,14 @@ import { notification } from "antd";
 import cx from "classnames";
 import copy from "copy-to-clipboard";
 
-interface ICopyLinkItem {
+interface ICopyInputUrlItem {
   url: string;
   className?: string;
   urlClassName?: string;
   buttonClassName?: string;
 }
 
-export const CopyLinkItem = (props: ICopyLinkItem) => {
+export const CopyInputUrlItem = (props: ICopyInputUrlItem) => {
   const { url, className = '', urlClassName, buttonClassName } = props;
   const [api, contextHolder] = notification.useNotification();
 

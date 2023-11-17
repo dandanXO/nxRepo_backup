@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { environment } from "../../../../../environments/environment";
 import { useSelector } from "react-redux";
-import { Tooltip } from 'react-tooltip';
 import {
   accountPromotedSwingSelector, accountPromotedWithdrawableSelector,
   toDepositAccountRemovableSelector,
@@ -10,11 +8,11 @@ import {
   totalReasableSelector
 } from "../../../../reduxStore/appSlice";
 import cx from "classnames";
-import { DownOutlined, QuestionCircleFilled, QuestionCircleOutlined, UpOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import { IconTooltip } from "./components/IconTooltip";
-import { MobileBottomNoticeSection } from "./components/MobileBottomNoticeSection";
+import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
 
 
 const StyledTotalSectionContainer = styled.div`
@@ -41,11 +39,11 @@ const MobileTotalDetailItem = (props: any) => {
 
 
   return (
-    <div className={"flex flex-col flex-nowrap flex-1 p-2.5"}>
+    <div className={"flex flex-col flex-nowrap flex-1 p-2.5"} onClick={() => setNoticeShow(!noticeShow)}>
       <div className={"whitespace-nowrap flex flex-row items-center "}>
         <div className={"font-[Heebo] font-bold"}>{titleText}</div>
 
-        <div className={"text-xs ml-0.5 -translate-y-2"} onClick={() => setNoticeShow(!noticeShow)}><QuestionCircleOutlined /></div>
+        <div className={"text-xs ml-0.5 -translate-y-2"}><QuestionCircleOutlined /></div>
       </div>
       <div className={"flex flex-row items-center text-sm"}>
         <div className={"flex flex-col text-sm md:text-base mr-1"}>Balanço: </div>
@@ -55,14 +53,18 @@ const MobileTotalDetailItem = (props: any) => {
         <div className={"flex flex-col text-sm md:text-base mr-1"}>Retirável: </div>
         <div className={"flex flex-col text-sm md:text-base"}> R$ {removableValue}</div>
       </div>
-      {noticeShow && <MobileBottomNoticeSection
-        className={'bg-gradient-to-t from-[#2E104C] to-[#3F28AF]'}
-        title={'Descrição detalhada'}
-        content={noticeText}
-        buttonText={'Eu vejo'}
-        buttonStyle={'bg-gradient-to-t from-[#d88c19] to-[#ffae1a]'}
-        onClick={() => setNoticeShow(!noticeShow)}
-      />}
+      {
+        noticeShow && (
+          <ConfirmDrawer
+            className='bg-gradient-to-t from-[#2E104C] to-[#3F28AF]'
+            buttonStyle='bg-gradient-to-t from-[#d88c19] to-[#ffae1a]'
+            title='Descrição detalhada'
+            content={noticeText}
+            buttonText='Eu vejo'
+            onClose={()=>setNoticeShow(false)}
+          />
+        )
+      }
     </div>
   )
 

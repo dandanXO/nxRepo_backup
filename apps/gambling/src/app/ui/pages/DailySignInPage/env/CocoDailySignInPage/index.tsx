@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GetSignInConfigResponse } from "../../../../../external";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import CocoMobileDailySignInPage from "./CocoMobileDailySignInPage";
@@ -160,7 +160,7 @@ export const CocoLevelList = ({
   }
 
   const [initialPageX, setInitialPageX] = useState(0);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLElement | null>(null);
 
   const handleMouseDown = (e: any) => {
     setInitialPageX(e.pageX);
@@ -178,6 +178,15 @@ export const CocoLevelList = ({
     }
   };
 
+  useEffect(()=>{
+    const currentItem = contentRef.current?.children[currentSelectedLevel - 1 ] as HTMLElement | undefined
+    if(currentItem) {
+      contentRef.current?.scrollTo({
+        left: currentItem?.offsetLeft - ((contentRef.current?.offsetWidth || 0) - currentItem?.offsetWidth) / 2,
+        behavior: 'smooth'
+      })
+    }
+  }, [currentSelectedLevel])
 
   return (
     <section
@@ -198,7 +207,7 @@ export const CocoLevelList = ({
             className={tcx('w-[10%] p-0 min-w-[100px] mr-3 relative h-full', ['ml-3', isMobile && level === 1])}
           >
             <LevelButton
-              className='flex justify-center items-center gap-2 w-full h-full'
+              className='flex justify-center items-center gap-2 w-full h-full hover:opacity-80'
               onClick={()=>setCurrentSelectedLevel(level)}
             >
               {

@@ -8,20 +8,12 @@ import { RootState } from "../../../../reduxStore";
 import { usePageNavigate } from "../../../hooks/usePageNavigate";
 import { CocoMobileMenuItem } from "../components/MobileMenuItem";
 import { MobileMenuLink } from "../components/MobileMenuLink";
-import { CopyLinkItem } from "../../../components/CopyLinkItem";
-import { useEffect } from "react";
-import { DepositButton } from "../../../components/Buttons/DepositButton";
-import { CashBackButton } from "../../../components/Buttons/CashBackButton";
-import { DrawerButton } from "../../../components/Buttons/DrawerButton";
-
-import { AvatarContainer } from "../../../header/env/coco/AvatarContainer";
-import { Avatar } from "../../../components/Avatar";
 import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../persistant/localstorage";
-import { notification } from "antd";
-import copy from "copy-to-clipboard";
 import {InviteCopySection} from "../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
 import {uiSlice} from "../../../../reduxStore/uiSlice";
+import { CopyIcon } from "apps/gambling/src/app/ui/components/CopyIcon";
+
 
 export const CocoMenuDrawerContent = () => {
   const location = useLocation();
@@ -35,14 +27,7 @@ export const CocoMenuDrawerContent = () => {
     onClickToTelegram,
   } = usePageNavigate();
 
-  const [api, contextHolder] = notification.useNotification();
 
-  const onClickToCopy = () => {
-    copy(userInfo.user_id||'');
-    api.success({
-      message: 'Copiado!',
-    });
-  };
   const dispatch = useDispatch();
   const closeMenuDrawer = () => {
     dispatch(uiSlice.actions.setOpenMenuDrawer(false));
@@ -51,16 +36,13 @@ export const CocoMenuDrawerContent = () => {
   return (
     <>
       <div className="user-info flex flex-col justify-center items-center mb-4">
-        {contextHolder}
         <CocoAvatar />
         {userInfo.user_id && <div className="user-info flex mt-2 items-center">
           <p className="user-name text-white font-bold">G{userInfo.user_id}</p>
           <div className="mx-1 text-[#595656] text-xs">|</div>
-          <div className="user-code flex text-xs text-[#fcc04f] items-center" onClick={onClickToCopy}>
+          <div className="user-code flex text-xs text-[#fcc04f] items-center" >
             <p>ID:{userInfo.user_id || ''}</p>
-            <div>
-              <img className="w-[12px] h-[12px] ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAMAAAC3SZ14AAAAAXNSR0IArs4c6QAAAGxQTFRFAAAA/6pV/8wz/6pV/79A98NM/8NM/8VS/79Q/8VQ+b9N/8JS+79M+79Q+79O/MJQ/L9O/L9Q/MBR/cFQ/cJO/cFO/cFQ/MBP/cFQ/MBP/cBP/MBP/MBP/MBP/MBP/cBP/cFP/MBP/cFP/MBPNOcZbQAAACN0Uk5TAAMFBggeHh8gIygyPEBIU1hgZXN1f5CVnZ+fq7e/x9Ph7P4CzGNYAAAAZUlEQVQY083Qxw6AIBBF0bFjL9jA7vz/P2ogAyZuXHqXJ5TkQdxLUwKqDW25pnNlJl8TLgBOSBh5moLd3j1SRS3O9MGEg6KO3gVgKH9CdfGiu69U0RIZCkXlY0Xk+ngz0hKCu3ABRT8TcsVvuVoAAAAASUVORK5CYII=" alt="" />
-            </div>
+              <CopyIcon copyText={userInfo.user_id || ''}/>
           </div>
         </div>
         }
