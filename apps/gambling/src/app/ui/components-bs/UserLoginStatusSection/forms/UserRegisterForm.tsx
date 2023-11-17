@@ -219,19 +219,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         validation={phoneInput.isValidation}
         errorMessage={phoneInput.errorMessage}
         onChange={(event) => {
-           if(onValidatePhoneInput(event.target.value, setPhoneInput)) {
-             setPhoneInput({
-               data: event.target.value,
-               isValidation: true,
-               errorMessage: "",
-             });
-           } else {
-             setPhoneInput({
-               data: event.target.value,
-               isValidation: false,
-               errorMessage: "Número de celular de 10 ou 11 dígitos",
-             })
-           }
+          onValidatePhoneInput(event.target.value, setPhoneInput);
         }}
       />
 
@@ -249,19 +237,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           validation={confirmPhoneInput.isValidation}
           errorMessage={confirmPhoneInput.errorMessage}
           onChange={(event) => {
-            if(onValidateConfirmPhoneInput(phoneInput.data, event.target.value, setConfirmPhoneInput)) {
-              setConfirmPhoneInput({
-                data: event.target.value,
-                isValidation: true,
-                errorMessage: "",
-              });
-            } else {
-              setConfirmPhoneInput({
-                data: event.target.value,
-                isValidation: false,
-                errorMessage: "Os números de telefone estão inconsistentes.",
-              })
-            }
+            onValidateConfirmPhoneInput(phoneInput.data, event.target.value, setConfirmPhoneInput);
           }}
       />
 
@@ -274,19 +250,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         validation={passwordInput.isValidation}
         errorMessage={passwordInput.errorMessage}
         onChange={(event) => {
-          if (onValidatePasswordInput(event.target.value, setPasswordInput)) {
-            setPasswordInput({
-              data: event.target.value,
-              isValidation: true,
-              errorMessage: "",
-            });
-          } else {
-            setPasswordInput({
-              data: event.target.value,
-              isValidation: false,
-              errorMessage: "Senha (4-12 letras e números)",
-            })
-          }
+          onValidatePasswordInput(event.target.value, setPasswordInput);
         }}
         suffix={(
           <div
@@ -312,19 +276,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         validation={captchaInput.isValidation}
         errorMessage={captchaInput.errorMessage}
         onChange={(event) => {
-          if(onValidateCaptchaInput(event.target.value, setCaptchaInput)) {
-            setCaptchaInput({
-              data: event.target.value,
-              isValidation: true,
-              errorMessage: "",
-            });
-          } else {
-            setCaptchaInput({
-              data: event.target.value,
-              isValidation: false,
-              errorMessage: "por favor insira o código de verificação",
-            })
-          }
+          onValidateCaptchaInput(event.target.value, setCaptchaInput);
         }}
       />
 

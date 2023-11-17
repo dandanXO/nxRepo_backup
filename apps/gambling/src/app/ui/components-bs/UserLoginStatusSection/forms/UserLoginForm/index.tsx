@@ -48,7 +48,9 @@ export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
 
 
 export const onValidatePasswordInput = (data: string, setPasswordInput: any) => {
-  const valid = data.length >= 4 && data.length <= 12;
+  
+  const passwordRex = /^[a-zA-Z0-9]+$/;
+  const valid = passwordRex.test(data) && !data.includes(' ') && data.length >= 4 && data.length <= 12;  
   if(valid) {
     setPasswordInput({
       data,
