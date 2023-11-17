@@ -20,7 +20,7 @@ export const MobileGameTypeHeader = (props: {
       </div>
       {props?.onClick && (
         <div className={cx("flex justify-center items-center", textClassName)} onClick={props?.onClick}>
-          <p className="z-50">{seeMoreText ? seeMoreText : 'Tudo'}</p>
+          <p className="z-10">{seeMoreText ? seeMoreText : 'Tudo'}</p>
         </div>
       )}
     </header>
