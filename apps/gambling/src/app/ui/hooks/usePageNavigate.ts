@@ -99,6 +99,9 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.SettingPage)
     }
   }
+  const onClickToPrivacyAgreement = () => {
+    navigate(PageOrModalPathEnum.PrivacyAgreementPage)
+  }
   return {
     onClickToIndex,
     onClickToSlot,
@@ -113,5 +116,6 @@ export const usePageNavigate = () => {
     onClickToSearch,
     onClickToGameRecord,
     onClickToSetting,
+    onClickToPrivacyAgreement,
   }
 }
