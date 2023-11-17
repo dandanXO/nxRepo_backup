@@ -25,19 +25,40 @@ import {AppLocalStorage} from "../../../../persistant/localstorage";
 import cx from "classnames";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {usePageNavigate} from "../../../hooks/usePageNavigate";
+import {Captcha} from "./Captcha";
 
-const onValidateConfirmPhoneInput = (first: string, second: string) => {
+const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
+    setConfirmPhoneInput({
+      data: second,
+      isValidation: false,
+      errorMessage: "Os números de telefone estão inconsistentes.",
+    });
     return false;
   } else {
+    setConfirmPhoneInput({
+      data: second,
+      isValidation: true,
+      errorMessage: "",
+    });
     return true;
   }
 }
 
-const onValidateCaptchaInput = (data: string) => {
+const onValidateCaptchaInput = (data: string, setCaptchaInput: any) => {
   if(data === "") {
+    setCaptchaInput({
+      data,
+      isValidation: false,
+      errorMessage: "por favor insira o código de verificação",
+    });
     return false;
   } else {
+    setCaptchaInput({
+      data,
+      isValidation: true,
+      errorMessage: "",
+    });
     return true;
   }
 }
@@ -102,7 +123,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
   //   }))
   // }
 
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(true);
 
     const toggleCheck = () => {
         setIsChecked(!isChecked);
@@ -118,8 +139,9 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
   const {onFormConfirm} = useForm({
     onFormConfirm: () =>  {
       if(!onValidatePhoneInput(phoneInput.data, setPhoneInput) ||
-        !onValidateConfirmPhoneInput(phoneInput.data, confirmPhoneInput.data) ||
-        !onValidatePasswordInput(passwordInput.data, setPasswordInput)
+        !onValidateConfirmPhoneInput(phoneInput.data, confirmPhoneInput.data, setConfirmPhoneInput) ||
+        !onValidatePasswordInput(passwordInput.data, setPasswordInput) ||
+        !onValidateCaptchaInput(captchaInput.data, setCaptchaInput)
       ) {
         return;
       }
@@ -176,10 +198,6 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       })
     }
   })
-  const [captchaURL, setCaptchaURL] = useState(environment.captcha);
-  const onClickCaptcha = () => {
-    setCaptchaURL(`${environment.captcha}?${new Date().getTime()}`)
-  }
 
   const {
     onClickToPrivacyAgreement
@@ -231,7 +249,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           validation={confirmPhoneInput.isValidation}
           errorMessage={confirmPhoneInput.errorMessage}
           onChange={(event) => {
-            if(onValidateConfirmPhoneInput(phoneInput.data, event.target.value)) {
+            if(onValidateConfirmPhoneInput(phoneInput.data, event.target.value, setConfirmPhoneInput)) {
               setConfirmPhoneInput({
                 data: event.target.value,
                 isValidation: true,
@@ -288,20 +306,13 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         type={"text"}
         // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
-        outerSuffix={
-          <img
-            className={"h-[48px] cursor-pointer"} src={captchaURL}
-            onClick={() => {
-              onClickCaptcha();
-            }}
-          />
-        }
+        outerSuffix={<Captcha/>}
         placeholder={"Código de verificação"}
         value={captchaInput.data}
         validation={captchaInput.isValidation}
         errorMessage={captchaInput.errorMessage}
         onChange={(event) => {
-          if(onValidateCaptchaInput(event.target.value)) {
+          if(onValidateCaptchaInput(event.target.value, setCaptchaInput)) {
             setCaptchaInput({
               data: event.target.value,
               isValidation: true,
@@ -327,37 +338,37 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
       {isMobile ? (
           <section className={"flex flex-row items-center mb-4"}>
-              <div className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
-                  {isChecked ? (
+              <button className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
+                  {!isChecked ? (
                       <img src={`assets/${environment.assetPrefix}/Property 1=uncheck.png`} />
                   ) : (
                       <img src={`assets/${environment.assetPrefix}/Property 1=check.png`} alt="Checked" />
                   )}
-              </div>
-            <p className={"text-white font-thin"} style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}>
+              </button>
+            <a className={"text-white font-thin"} style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}>
               <span className={"text-[var(--light)] mr-1"} onClick={toggleCheck} >Eu concordo</span>
               <span className={"text-main-secondary-main"} onClick={() => {
                 onClickToPrivacyAgreement();
               }}>Condições e condições, política de privacidade</span>
-            </p>
+            </a>
           </section>
       ):(
         <section className={"flex flex-row items-center"}>
-            <div className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
-                {isChecked ? (
+            <button className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
+                {!isChecked ? (
                     <img src={`assets/${environment.assetPrefix}/Property 1=uncheck.png`}/>
                 ) : (
                     <img src={`assets/${environment.assetPrefix}/Property 1=check.png`}/>
                 )}
-            </div>
-          <p className={"text-white font-thin"}>
+            </button>
+          <a className={"text-white font-thin"}>
             <span onClick={toggleCheck} className={"text-[var(--light)] mr-1"}>Eu concordo</span>
             <span
               className={"text-main-secondary-main"}
               onClick={() => {
                 onClickToPrivacyAgreement();
               }}>Condições e condições, política de privacidade</span>
-          </p>
+          </a>
         </section>
       )}
 
