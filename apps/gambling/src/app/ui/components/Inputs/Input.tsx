@@ -52,7 +52,7 @@ export const Input = (props: IInput) => {
   // const inputRef = useRef();
   const [focus, setFocus] = useState(false);
   return (
-    <div className={"mb-4"}>
+    <div className={"mb-3 md:mb-4"}>
       <div className={"flex flex-row justify-center items-center"}>
         <InputSection
           focus={focus}

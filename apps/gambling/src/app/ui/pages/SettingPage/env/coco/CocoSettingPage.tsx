@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 
-import { AppLocalStorage } from '../../../../../persistant/localstorage';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import { Input, InputSection } from '../../../../components/Inputs/Input';
-import { SectionContainer } from '../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/useAllowLoginRouterRules';
@@ -12,9 +9,10 @@ import { environment } from "../../../../../../environments/environment"
 import {Container} from "../../../../components/container/Container";
 import {List} from "../../../../components/List";
 import {ListItem} from "../../../../components/List/ListItem";
-import {ViewButton} from "../../../../components/Buttons/ViewButton";
-import {EditOutlined, InfoCircleOutlined, PhoneOutlined, UserOutlined,} from "@ant-design/icons";
+import {InfoCircleOutlined, PhoneOutlined, UserOutlined,} from "@ant-design/icons";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import { tcx } from "../../../../utils/tcx";
+import { notification } from "antd";
 
 
 type IProps = {
@@ -32,11 +30,14 @@ export const CocoSettingPage = ({
   useAllowLoginRouterRules();
 
   const navigate = useNavigate();
+
+  const [api, contextHolder]= notification.useNotification();
+
   const { isMobile } = useBreakpoint();
 
   return (
     <Container>
-
+      {contextHolder}
       <BackNavigation
         onClick={() => {
           if (isMobile) {
@@ -67,10 +68,21 @@ export const CocoSettingPage = ({
             <div className='flex gap-2 items-center'>
               <div>{nickname}</div>
               <button
-                className='flex items-center'
+                className={tcx(
+                  'flex items-center',
+                  ['bg-red-600 rounded-3xl px-3 bg-gradient-to-r from-[#FFA305] to-[#FFCC5A]', !isMobile]
+                )}
                 onClick={()=> setEditing(true)
               }>
-                <EditOutlined />
+                {
+                  isMobile ? (
+                    <img
+                      className='w-[20px] h-[20px]'
+                      alt='edit'
+                      src={`assets/${environment.assetPrefix}/ic_account_edit.png`}
+                    />
+                  ): 'Editar'
+                }
               </button>
             </div>
             {/*<ViewButton*/}
@@ -111,7 +123,15 @@ export const CocoSettingPage = ({
       {editing && (
         <EditUserInfoModal
           nickname={nickname}
-          close={() => setEditing(false)}
+          close={(done) => {
+            setEditing(false);
+            if(done) {
+              api.success({
+                message: 'Done',
+              });
+              navigate(PageOrModalPathEnum.SettingPage)
+            }
+          }}
         />
       )}
 
