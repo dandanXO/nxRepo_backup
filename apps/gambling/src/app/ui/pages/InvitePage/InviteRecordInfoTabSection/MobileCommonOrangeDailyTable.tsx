@@ -1,6 +1,6 @@
 import moment from "moment/moment";
 import {ITabType} from "./index";
-import {CommonTableTabG} from "./env/CommonTableTabG";
+import {CommonTableTabG} from "../../../components/TabItem/CommonTableTabG";
 
 import {MobileOrangeBackgroundShadowContainer as PMobileOrangeBackgroundShadowContainer} from "./env/pernambucana/MobileOrangeBackgroundShadowContainer";
 import {MobileOrangeBackgroundShadowContainer as WMobileOrangeBackgroundShadowContainer} from "./env/wild/MobileOrangeBackgroundShadowContainer";

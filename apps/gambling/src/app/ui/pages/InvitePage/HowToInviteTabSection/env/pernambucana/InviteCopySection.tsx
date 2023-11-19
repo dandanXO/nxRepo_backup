@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {CopyButton} from "../../CopyButton";
+import {CopyButton} from "./CopyButton";
 
 
 const BorderLinkButtonContainer = styled.div`

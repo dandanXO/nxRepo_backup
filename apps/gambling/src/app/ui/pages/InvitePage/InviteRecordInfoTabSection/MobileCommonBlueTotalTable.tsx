@@ -2,7 +2,7 @@ import { useState } from "react";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import {ITabType} from "./index";
 
-import {CommonTableTabG} from "./env/CommonTableTabG";
+import {CommonTableTabG} from "../../../components/TabItem/CommonTableTabG";
 import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
 
 import {renderByPlatform} from "../../../utils/renderByPlatform";

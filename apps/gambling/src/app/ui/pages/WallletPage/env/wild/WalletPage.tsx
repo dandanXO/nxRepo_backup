@@ -21,7 +21,7 @@ import {
 import { useAutoUpdateBalance } from "../../../../hooks/useAutoUpdateBalance";
 import { tcx } from "../../../../utils/tcx";
 import { TotalSectionContainer } from "../../TotalSectionContainer";
-import { CommonTableTabG } from "../../../InvitePage/InviteRecordInfoTabSection/env/CommonTableTabG";
+import { CommonTableTabG } from "../../../../components/TabItem/CommonTableTabG";
 import cx from "classnames";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {Container} from "../../../../components/container/Container";
