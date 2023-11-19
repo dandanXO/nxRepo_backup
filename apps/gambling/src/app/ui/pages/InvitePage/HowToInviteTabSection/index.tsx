@@ -3,14 +3,29 @@ import styled from "styled-components";
 import copy from "copy-to-clipboard";
 import {notification} from 'antd';
 import {environment} from "../../../../../environments/environment";
-import {HowToImageContainer as PernambucanaHowToImageContainer} from "./env/pernambucana/HowToImageContainer";
-import {HowToImageContainer as CocoHowToImageContainer} from "./env/coco/HowToImageContainer";
-import {InviteCopySection as PernambucanaInviteCopySection} from "./env/pernambucana/InviteCopySection";
-import {InviteCopySection as CocoInviteCopySection} from "./env/coco/InviteCopySection";
-import shareListImg from "../HowToInviteTabSection/env/coco/share-list.png";
 
-const InviteCopySection = environment.assetPrefix === "coco777bet" ? CocoInviteCopySection : PernambucanaInviteCopySection;
-const HowToImageContainer = environment.assetPrefix === "coco777bet" ? CocoHowToImageContainer : PernambucanaHowToImageContainer;
+import {HowToImageContainer as PHowToImageContainer} from "./env/pernambucana/HowToImageContainer";
+import {HowToImageContainer as WHowToImageContainer} from "./env/wild/HowToImageContainer";
+import {HowToImageContainer as CHowToImageContainer} from "./env/coco/HowToImageContainer";
+
+import {InviteCopySection as PInviteCopySection} from "./env/pernambucana/InviteCopySection";
+import {InviteCopySection as WInviteCopySection} from "./env/wild/InviteCopySection";
+import {InviteCopySection as CInviteCopySection} from "./env/coco/InviteCopySection";
+
+import shareListImg from "../HowToInviteTabSection/env/coco/share-list.png";
+import {renderByPlatform} from "../../../utils/renderByPlatform";
+
+const HowToImageContainer = renderByPlatform({
+  "wild777bet": WHowToImageContainer,
+  "coco777bet": CHowToImageContainer,
+}, PHowToImageContainer)
+
+
+const InviteCopySection = renderByPlatform({
+  "wild777bet": WInviteCopySection,
+  "coco777bet": CInviteCopySection,
+}, PInviteCopySection)
+
 
 
 const GreenContainer = styled.div`
@@ -95,12 +110,21 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
         <InviteCopySection inviteUrl={props.inviteUrl} onClickToCopy={onClickToCopy}/>
 
-        {environment.assetPrefix === "coco777bet" ? (
-          <div className={"text-center"}>
-            <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
-            <img className={"mb-2"} src={shareListImg}/>
-          </div>
-        ): null}
+        {/*NOTICE: refactor me*/}
+        {renderByPlatform({
+          "coco777bet": (
+            <div className={"text-center"}>
+              <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
+              <img className={"mb-2"} src={shareListImg}/>
+            </div>
+          ),
+          "wild777bet": (
+            <div className={"text-center"}>
+              <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
+              <img className={"mb-2"} src={shareListImg}/>
+            </div>
+          )
+        }, null)}
 
       </HowToImageContainer>
 

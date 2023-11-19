@@ -1,22 +1,25 @@
 import moment from "moment/moment";
-import styled from "styled-components";
 import {ITabType} from "./index";
-import {MobileOrangeBackgroundShadowContainer as Pernambucana} from "./env/pernambucana/MobileOrangeBackgroundShadowContainer";
-import {MobileOrangeBackgroundShadowContainer as Coco} from "./env/coco/MobileOrangeBackgroundShadowContainer";
-import {environment} from "../../../../../environments/environment";
 import {CommonTableTabG} from "./env/CommonTableTabG";
 
-const MobileOrangeBackgroundShadowContainer = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana;
+import {MobileOrangeBackgroundShadowContainer as PMobileOrangeBackgroundShadowContainer} from "./env/pernambucana/MobileOrangeBackgroundShadowContainer";
+import {MobileOrangeBackgroundShadowContainer as WMobileOrangeBackgroundShadowContainer} from "./env/wild/MobileOrangeBackgroundShadowContainer";
+import {MobileOrangeBackgroundShadowContainer as CMobileOrangeBackgroundShadowContainer} from "./env/coco/MobileOrangeBackgroundShadowContainer";
+import {renderByPlatform} from "../../../utils/renderByPlatform";
+
+const MobileOrangeBackgroundShadowContainer = renderByPlatform({
+  "wild777bet": WMobileOrangeBackgroundShadowContainer,
+  "coco777bet": CMobileOrangeBackgroundShadowContainer,
+}, PMobileOrangeBackgroundShadowContainer)
+
 
 type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; }
-
 
 
 export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) => {
 
   return (
     <MobileOrangeBackgroundShadowContainer className={"px-4 pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
-
       <div className={"flex flex-row text-lg font-bold justify-around mb-2"}>
         <CommonTableTabG className={""} active={props.type === "1"} onClick={() => props.onClick("1")}>Nível 1</CommonTableTabG>
         <CommonTableTabG className={""} active={props.type === "2"} onClick={() => props.onClick("2")}>Nível 2</CommonTableTabG>

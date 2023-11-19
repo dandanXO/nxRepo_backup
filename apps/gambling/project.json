@@ -11,6 +11,9 @@
         "hmr": true
       },
       "configurations": {
+        "dev-wild777bet": {
+          "buildTarget": "gambling:build:dev-wild777bet"
+        },
         "dev-pernambucana777bet": {
           "buildTarget": "gambling:build:dev-pernambucana777bet"
         },
@@ -92,6 +95,26 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        },
+        "dev-wild777bet": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/wild777bet/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/wild777bet/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/index.replaceme.html",
+              "with": "apps/gambling/src/environments/wild777bet/index.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
         },
         "dev-coco777bet": {
           "fileReplacements": [

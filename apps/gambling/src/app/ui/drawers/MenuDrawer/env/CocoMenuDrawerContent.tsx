@@ -12,7 +12,7 @@ import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../persistant/localstorage";
 import {InviteCopySection} from "../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
 import {uiSlice} from "../../../../reduxStore/uiSlice";
-import { CopyIcon } from "apps/gambling/src/app/ui/components/CopyIcon";
+import {CopyIcon} from "../../../components/CopyIcon";
 
 
 export const CocoMenuDrawerContent = () => {

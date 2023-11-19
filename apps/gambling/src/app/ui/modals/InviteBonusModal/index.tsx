@@ -1,15 +1,28 @@
-import {useNavigate} from "react-router";
+
 import {environment} from "../../../../environments/environment";
-import {Container as PernambucanaContainer} from "./env/pernambucana/Container";
-import {Container as CocoContainer} from "./env/coco/Container";
 import {EarnButton} from "../../components/Buttons/EarnButton";
 import {InviteButton} from "../../components/Buttons/InviteButton";
 
-import {Item as PernambucanaItem} from "./env/pernambucana/Item";
-import {Item as CocoItem} from "./env/coco/Item";
+import {renderByPlatform} from "../../utils/renderByPlatform";
 
-const Item = environment.assetPrefix === "coco777bet" ? CocoItem : PernambucanaItem;
-const Container = environment.assetPrefix === "coco777bet" ? CocoContainer : PernambucanaContainer;
+import {Item as PItem} from "./env/pernambucana/Item";
+import {Item as WItem} from "./env/wild/Item";
+import {Item as CItem} from "./env/coco/Item";
+
+import {Container as PContainer} from "./env/pernambucana/Container";
+import {Container as WContainer} from "./env/wild/Container";
+import {Container as CContainer} from "./env/coco/Container";
+
+const Item = renderByPlatform({
+  "wild777bet": WItem,
+  "coco777bet": CItem,
+}, PItem)
+
+const Container = renderByPlatform({
+  "wild777bet": WContainer,
+  "coco777bet": CContainer,
+}, PContainer)
+
 
 export type IInitialChargeModal = {
   close: () => void;
@@ -22,7 +35,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
       props.close();
     }}>
 
-      <Container className={" w-[340px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl text-white flex flex-col items-center relative"} onClick={(event) => {
+      <Container className={" w-[340px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl text-white flex flex-col items-center relative"} onClick={(event: any) => {
         event.stopPropagation();
       }}>
         <div className={"flex flex-row justify-end mb-2 absolute right-[10px] top-[18px]"}>

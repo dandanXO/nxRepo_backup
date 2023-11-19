@@ -1,4 +1,10 @@
-import {CommonTableTabG as Pernambucana} from "./pernambucana/CommonTableTabG";
-import {environment} from "../../../../../../environments/environment";
-import {ImageTab as Coco} from "../../../../components/TabItem/ImageTab";
-export const CommonTableTabG = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana;
+
+import {renderByPlatform} from "../../../../utils/renderByPlatform";
+
+import {CommonTableTabG as PCImageTab} from "./pernambucana/CommonTableTabG";
+import {ImageTab} from "../../../../components/TabItem/ImageTab";
+
+export const CommonTableTabG = renderByPlatform({
+  "wild777bet": ImageTab,
+  "coco777bet": ImageTab,
+}, PCImageTab)

@@ -1,13 +1,17 @@
-import {IBoardData} from "./index";
-import {MobileGreenBackgroundShadowContainer as Pernambucana} from "./env/pernambucana/MobileGreenBackgroundShadowContainer";
-import {MobileGreenBackgroundShadowContainer as Coco } from "./env/coco/MobileGreenBackgroundShadowContainer";
-import {environment} from "../../../../../environments/environment";
 import {RightOutlined} from "@ant-design/icons";
-import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
+import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
+import {IBoardData} from "./index";
 
-const MobileGreenBackgroundShadowContainer = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana
+import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {MobileGreenBackgroundShadowContainer as PMobileGreenBackgroundShadowContainer} from "./env/pernambucana/MobileGreenBackgroundShadowContainer";
+import {MobileGreenBackgroundShadowContainer as WMobileGreenBackgroundShadowContainer} from "./env/wild/MobileGreenBackgroundShadowContainer";
+import {MobileGreenBackgroundShadowContainer as CMobileGreenBackgroundShadowContainer } from "./env/coco/MobileGreenBackgroundShadowContainer";
 
+const MobileGreenBackgroundShadowContainer = renderByPlatform({
+  "wild777bet": WMobileGreenBackgroundShadowContainer,
+  "coco777bet": CMobileGreenBackgroundShadowContainer,
+}, PMobileGreenBackgroundShadowContainer)
 
 export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
   const navigate = useNavigate();
@@ -28,7 +32,7 @@ export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
             }} />
           </div>
           <span className="text-sm">Bônus já liquidados</span>
-          
+
         </div>
       </div>
 

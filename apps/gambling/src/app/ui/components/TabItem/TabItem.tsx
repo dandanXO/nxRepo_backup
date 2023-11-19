@@ -1,11 +1,15 @@
 import cx from "classnames";
 import {useState} from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {environment} from "../../../../environments/environment";
+import {StyledTabItem as PStyledTabItem} from "./env/pernambucana/StyledTabItem";
+import {StyledTabItem as CtyledTabItem} from "./env/coco/StyledTabItem"
+import {StyledTabItem as WStyledTabItem} from "./env/wild/StyledTabItem"
+import {renderByPlatform} from "../../utils/renderByPlatform";
 
-import {StyledTabItem as Pernambucana} from "./env/pernambucana/StyledTabItem";
-import {StyledTabItem as Coco} from "./env/coco/StyledTabItem"
-const StyledTabItem = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana;
+const StyledTabItem = renderByPlatform({
+  "coco777bet": CtyledTabItem,
+  "wild": WStyledTabItem,
+}, PStyledTabItem)
 
 export type ITabs = {
   children: React.ReactElement | React.ReactElement[];

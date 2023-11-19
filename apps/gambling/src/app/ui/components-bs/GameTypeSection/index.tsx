@@ -15,6 +15,10 @@ import {MobileGameList} from "./MobileGameList";
 import {GameList} from "./GameList";
 import {MobileGameTypeHeader} from "./MobileGameTypeHeader";
 import {GameTypeHeader} from "./GameTypeHeader";
+import {mobileGameTypeHeaderProps as PmobileGameTypeHeaderProps} from "./env/pernambucana/mobileGameTypeHeaderProps";
+import {mobileGameTypeHeaderProps as WmobileGameTypeHeaderProps} from "./env/wild/mobileGameTypeHeaderProps";
+import {mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps} from "./env/coco/mobileGameTypeHeaderProps";
+import {renderByPlatform} from "../../utils/renderByPlatform";
 
 type GameItem = {
   name: string;
@@ -103,34 +107,11 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     }
   }, [animating])
 
+  const mobileGameTypeHeaderProps = renderByPlatform({
+    "coco777bet": CmobileGameTypeHeaderProps,
+    "wild777bet": WmobileGameTypeHeaderProps,
+  }, PmobileGameTypeHeaderProps)
 
-  const mobileGameTypeHeaderProps = environment.assetPrefix === 'coco777bet' ? {
-
-    showIcon: false,
-    containerClassName:'mx-1 mt-2 mb-1.5',
-    titleClassName: 'text-2xl font-medium text-white',
-    seeMoreText: 'Ver mais',
-    textClassName: `text-sm text-white text-center w-[78px] h-[24px]
-    after:content-['']
-    after:skew-x-[-15deg]
-    after:bg-[#262fa8]
-    after:h-[24px]
-    after:absolute
-    after:w-[78px]
-    after:rounded`
-  } : {
-
-    containerClassName:`mb-3 text-3xl
-    after:content-['']
-    after:h-[1px]
-    after:bottom-0
-    after:right-0
-    after:absolute
-    after:w-full
-    after:bg-gradient-to-r from-transparent to-[#4FFB0C]`,
-    titleClassName: 'text-3xl font-semibold text-white',
-    textClassName: `text-[#16FF8F] text-xl`
-  }
   return (
     <section className={"flex flex-col mb-4"}>
 

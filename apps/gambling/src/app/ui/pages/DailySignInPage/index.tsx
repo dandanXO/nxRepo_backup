@@ -10,8 +10,11 @@ import {CurrentLevelButton, OtherLevelButton} from '../VIPGradePage';
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {environment} from "../../../../environments/environment";
 import {tcx} from "../../utils/tcx";
-import PernambucanaDailySignInPage from "./env/PernambucanaDailySignInPage";
-import CocoDailySignInPage from "./env/CocoDailySignInPage";
+
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import PernambucanaDailySignInPage from "./env/pernambucana/DailySignInPage";
+import WDailySignInPage from "./env/wild/DailySignInPage";
+import CocoDailySignInPage from "./env/coco/DailySignInPage";
 
 
 
@@ -153,8 +156,8 @@ export const DailySignInPage = () => {
 
   useAutoUpdateBalance();
 
-  if(environment.assetPrefix === 'coco777bet') {
-    return (
+  return renderByPlatform({
+    "coco777bet": (
       <CocoDailySignInPage
         onClickToSignIn={onClickToSignIn}
         signInConfig={signInConfig?.data?.signInConfig || []}
@@ -165,10 +168,20 @@ export const DailySignInPage = () => {
         currentSelectedLevel={currentSelectedLevel}
         setCurrentSelectedLevel={setCurrentSelectedLevel}
       />
+    ),
+    "wild": (
+      <WDailySignInPage
+        onClickToSignIn={onClickToSignIn}
+        signInConfig={signInConfig?.data?.signInConfig || []}
+        signInAllConfig={signInConfig?.data?.signInAllConfig || []}
+        signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
+        todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
+        vipLevel={signInConfig?.data?.vipLevel || 0}
+        currentSelectedLevel={currentSelectedLevel}
+        setCurrentSelectedLevel={setCurrentSelectedLevel}
+      />
     )
-  }
-
-  return (
+  }, (
     <PernambucanaDailySignInPage
       onClickToSignIn={onClickToSignIn}
       currentLevel={signInConfig?.data?.vipLevel || 0}
@@ -180,5 +193,5 @@ export const DailySignInPage = () => {
       currentSelectedLevel={currentSelectedLevel}
       setCurrentSelectedLevel={setCurrentSelectedLevel}
     />
-  )
+  ))
 };

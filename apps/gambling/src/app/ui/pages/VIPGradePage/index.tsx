@@ -12,11 +12,11 @@ import { useAllowLoginRouterRules } from '../../router/useAllowLoginRouterRules'
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
-import {environment} from "../../../../environments/environment";
-import { ThreeDots } from 'react-loading-icons';
-import {useNavigate} from "react-router";
-import Coco777betVIPGradePage from "./Coco777betVIPGradePage";
-import Pernambucana777BetVIPGradePage from "./Pernambucana777BetVIPGradePage";
+
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import PVIPGradePage from "./env/pernambucana/VIPGradePage";
+import WVIPGradePage from "./env/wild/VIPGradePage";
+import CVIPGradePage from "./env/coco/VIPGradePage";
 
 const LevelButton = styled.button.attrs<{
   className?: string;
@@ -185,9 +185,18 @@ export const VIPGradePage = () => {
     0
   );
 
-  if (environment.assetPrefix === 'coco777bet') {
-    return (
-      <Coco777betVIPGradePage
+  return renderByPlatform({
+    "wild777bet": (
+      <WVIPGradePage
+        isMobile={isMobile}
+        userVIPInfo={userVIPInfo}
+        currentLevel={currentLevel}
+        allLevelInfo={allLevelInfo}
+        allSignInConfig={allSignInConfig}
+      />
+    ),
+    "coco777bet": (
+      <CVIPGradePage
         isMobile={isMobile}
         userVIPInfo={userVIPInfo}
         currentLevel={currentLevel}
@@ -195,10 +204,8 @@ export const VIPGradePage = () => {
         allSignInConfig={allSignInConfig}
       />
     )
-  }
-
-  return (
-    <Pernambucana777BetVIPGradePage
+  }, (
+    <PVIPGradePage
       isMobile={isMobile}
       currentLevel={currentLevel}
       currentSelectedLevel={currentSelectedLevel}
@@ -209,7 +216,7 @@ export const VIPGradePage = () => {
       allSignInConfig={allSignInConfig}
       currentLevelInfo={currentLevelInfo}
     />
-  )
+  ))
 
 }
 

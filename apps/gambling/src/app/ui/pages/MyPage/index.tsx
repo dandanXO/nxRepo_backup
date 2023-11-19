@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import {RightOutlined} from "@ant-design/icons"
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,7 +6,6 @@ import {RootState} from "../../../reduxStore";
 import {
   GetVIPInfoResponse,
   useGetSignInConfigMutation,
-  useGetUserVIPAllInfoQuery,
   useGetVIPInfoMutation, useLazyGetUserVIPAllInfoQuery,
 } from '../../../external';
 
@@ -15,15 +13,17 @@ import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../
 import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {useEffect, useState} from "react";
-import { MessageCountBadge } from "../../components/MessageCountBadge";
 import {useGetLetterListMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
+
 import {environment} from "../../../../environments/environment";
-import {Avatar} from "../../components/Avatar";
-import {AvatarAccountInfo} from "../../components/AvatarAccountInfo";
-import Pernambucana777BetMyPage from "./Pernambucana777BetMyPage";
-import Coco777BetMyPage from "./Coco777BetMyPage";
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import PBetMyPage from "./env/pernambucana/BetMyPage";
+import WBetMyPage  from "./env/wild/BetMyPage";
+import CBetMyPage from "./env/coco/BetMyPage";
+
+
 
 const MyPageButtonD = styled.button`
   background-image: url("assets/${environment.assetPrefix}/btn_green05.png");
@@ -329,13 +329,14 @@ export const MyPage = () => {
       0
   );
 
-  if (environment.assetPrefix === 'coco777bet') {
-    return (
-      <Coco777BetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
-    )
-  }
-
-  return (
-    <Pernambucana777BetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
-  )
+  return renderByPlatform({
+    "wild777bet": (
+      <WBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
+    ),
+    "coco777bet": (
+      <CBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
+    ),
+  }, (
+    <PBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
+  ))
 }

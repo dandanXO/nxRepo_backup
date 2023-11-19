@@ -81,7 +81,7 @@ export const Input = (props: IInput) => {
               onBlur={() => {
                 setFocus(false)
               }}
-              onChange={(event) => {
+              onChange={(event: any) => {
                 props.onChange && props.onChange(event)
               }}
             />

@@ -118,7 +118,7 @@ export const EditUserInfoModal = ({
             prefix={<UserOutlined className="mr-2" />}
             className="mt-4 md:mt-8 w-full items-center rounded-full p-3 text-xs md:text-3xl"
             value={userNickname}
-            onChange={(event) => setUserNickname(event.target.value)}
+            onChange={(event: any) => setUserNickname(event.target.value)}
           />
         </div>
 

@@ -27,7 +27,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const WebpackSentryConfig = require('./WebpackSentryConfig.json');
 const AppBabelLoader = path.join(__dirname, './loader/app-babel-loader.js');
-const { proxyURL, PORT } = require('./webpack.config.proxy');
+const { proxyURL, PORT } = require('./env/webpack.config.proxy');
 
 const infoLog = (message, rest) => {
   if (!rest) {
