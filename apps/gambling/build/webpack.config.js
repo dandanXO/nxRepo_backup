@@ -138,7 +138,8 @@ module.exports = (config, context) => {
         template: path.resolve(__dirname, '../src/index.html'),
         'meta': {
           'viewport': 'width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
-        }
+        },
+        // favicon: path.resolve(__dirname, `../src/assets/${process.env.NODE_COUNTRY}/favicon.ico`),
         // publicPath: "/v2",
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main', 'errorhandler'],

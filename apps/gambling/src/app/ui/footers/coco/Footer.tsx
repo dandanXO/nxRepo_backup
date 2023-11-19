@@ -6,6 +6,7 @@ import React, {useState} from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
+import {Logo} from "./Logo"
 
 export type IFooter = {
   // showFooter?: boolean;
@@ -36,7 +37,7 @@ export const Footer = (props: IFooter) => {
       {isMobile && isShowMobileFooter? (
         <div className={cx(
           'flex justify-center text-white p-4 pb-[80px]',
-          "bg-[var(--main)]",
+          "bg-[var(--unknown)]",
         )}>
           <div className={"flex flex-col"}>
 
@@ -142,7 +143,7 @@ export const Footer = (props: IFooter) => {
           </div>
         </div>
       ): isShowDesktopFooter ? (
-        <div className='bg-[var(--main)] text-white flex justify-center'>
+        <div className='bg-[var(--unknown)] text-white flex justify-center'>
           {/*h-[400px]*/}
           <div className={"flex gap-3 w-11/12 mt-3"}>
 
@@ -166,8 +167,8 @@ export const Footer = (props: IFooter) => {
 
               <section className={"w-8/12 mt-3"}>
                 <div className={"flex gap-3 items-center mb-2"}>
-                  <img className={"w-[100px] h-[50px]"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>
-                  {/*<span className="text-lg">{environment.platformName}</span>*/}
+                  <Logo/>
+                  <span className="text-lg">{environment.platformName}</span>
                 </div>
 
                 <div className={cx("flex-auto flex-nowrap leading-6 text-ellipsis overflow-hidden text-left", {

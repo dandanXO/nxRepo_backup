@@ -23,7 +23,7 @@ html,
 body {
   /*height: 100%;*/
   font-family: var(--font-family);
-  background: var(--main);
+  background: var(--unknown);
 }
 
 html {

@@ -1,12 +1,124 @@
 :root {
   --font-family: Avenir, Helvetica, Arial, sans-serif;
 
+
+  /*taipei colors-start*/
+  --primary-main-from: #45CCF7;
+  --primary-main-to: #0044C7;
+  --primary-variant: #002773;
+  --primary-assistant: #A1C1FF;
+  --primary-assistant-20: #A1C1FF;
+
+  --secondary-main-from: #FFEF61;
+  --secondary-main-to: #FF7E21;
+  --secondary-variant: #A25700;
+  --secondary-assistant: #FDEF70;
+
+  --black: #000000;
+  --white: #FFFFFF;
+  --white-30: rgba(255, 255, 255, 0.3);
+  --white-20: rgba(255, 255, 255, 0.2);
+
+  --state-success-main: #32D957;
+  --state-success-variant: #E2FFE8;
+  --state-error-main: #F05151;
+  --state-error-variant: #FF9696;
+
+  --state-info-main: #51B7F0;
+  --state-info-variant: #A4DEFF;
+  --state-disable-main: #C5C5C5;
+  --state-disable-variant: #969696;
+
+  --background-primary: #152951;;
+  --background-textfields: #2D3047;
+  --background-checkin-from: #ffffff;
+  --background-checkin-to: #1E083A;
+  --background-modal-from: #577DDE;
+  --background-modal-to: #000691;
+
+  --background-add-money: #2AD2E9;
+  --background-vip-level-from: #7C91FF;
+  --background-vip-level-to: #2E22BD;
+  --background-alert-text-from: #FEB867;
+  --background-alert-text-to: #FF7E21;
+
+  --background-dashboard-main-from: #5754F3;
+  --background-dashboard-main-via: #121C78;
+  --background-dashboard-main-to: #0D1DA4;
+  --background-dashboard-secondary: #252A99;
+  --background-modal-telegram-from: #0E3E9B;
+  --background-modal-telegram-to: #6272FF;
+
+  --stroke-textfields: #24468B;
+  --stroke-block: #ABDCFF;
+  --stroke-dashboard-main-from: #D680FF;
+  --stroke-dashboard-main-via: #FFFFFF;
+  --stroke-dashboard-main-to: #FFA9F6;
+  --stroke-dashboard-secondary: #393FC4;
+
+
+  --button-login-1-from: #FFC121;
+  --button-login-1-to: #FF7E21;
+
+  --button-login-2-from: #C5C5C5;
+  --button-login-2-to: #969696;
+
+  --button-checkin-from: #FFA775;
+  --button-checkin-to: #FF2121;
+
+  --button-modal-download-from: #30C1FF;
+  --button-modal-download-to: #C625FF;
+
+  --button-withdraw-from: #FFA775;
+  --button-withdraw-to: #FF2121;
+
+  --button-deposit-from: #FF7373;
+  --button-deposit-to: #9E21FF;
+
+  --button-invite-record-from: #FFD05D;
+  --button-invite-record-to: #FF3838;
+
+  --button-gametab-focus-from: #FFFFFF;
+  --button-gametab-focus-via: #88E3FF;
+  --button-gametab-focus-to: #0044C7;
+
+  --button-drawer-linear01-from: #528DFF;
+  --button-drawer-linear01-to: #0057FF;
+
+  --button-drawer-linear02-from: #2BE681;
+  --button-drawer-linear02-to: #0E735B;
+
+  --button-drawer-linear03-from: #FF8E8E;
+  --button-drawer-linear03-to: #FF3838;
+
+  --button-drawer-linear04-from: #FFE500;
+  --button-drawer-linear04-to: #FF6A00;
+
+  --button-gametab-from: #FFFFFF;
+  --button-gametab-via: #88E3FF;
+  --button-gametab-to: #0044C7;
+
+  --text-primary: #1C1C1C;
+  --text-seondary: #646464;
+  --text-tertiary: #BEBEBE;
+  --text-white: #ffffff;
+  --text-deposit: #1C1C1C;
+
+  --lineary-blue-from: #2492FF;
+  --lineary-blue-to: #0043AE;
+
+
+  /*taipei colors-end*/
+
   /*bg*/
-  --main: #1D2147;
-  --varient: #020E29;
-  --assistant: #1D2147;
-  --medium: #2A78DD;
+  --main: #45CCF7;
+  --varient: #002773;
+  --assistant: #A1C1FF;
+  --medium: #A1C1FF;
   --light: #06F2ED;
+
+
+  --unknown: #152951;
 
   /*bg-other*/
   --game-block: #212B5C;
@@ -92,8 +204,8 @@
   --text-gradient-ad-tg-to: #003BC6;
 
 
-  --tab-primary-from: #0D2054;
-  --tab-primary-to: #2931A9;
+  --tab-primary-from: #0044C7;
+  --tab-primary-to: #45CCF7;
   --tab-border-top: #5964F5;
   --tab-text-color-normal: #FFFFFF;
   --tab-text-color-active: #FFFFFF;

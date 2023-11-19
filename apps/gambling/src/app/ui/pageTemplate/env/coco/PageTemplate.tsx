@@ -213,8 +213,8 @@ export const PageTemplate = ({
 
 
         {isUILoading && (
-          <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
-            <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
+          <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-[var(--unknown)] flex flex-col justify-center items-center"}>
+            <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/LOGO.png`}/>
             <ThreeDots height={25} className={'inline-block'} />
           </div>
         )}

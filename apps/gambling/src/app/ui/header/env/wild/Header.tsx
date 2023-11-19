@@ -122,7 +122,7 @@ export const Header = (props: IHeader) => {
           setHover(false)
         }}
       >
-        <div className={"min-w-[100px] max-w-[130px] p-4 bg-[#5939f7] -mr-1"}>
+        <div className={"min-w-[100px] max-w-[130px] p-4 bg-[#5939f7] -mr-1"} onClick={() => onClickToIndex()}>
           <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
         </div>
         <HeaderButton>

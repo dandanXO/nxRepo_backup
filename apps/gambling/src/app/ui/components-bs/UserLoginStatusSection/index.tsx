@@ -5,6 +5,7 @@ import {UserRegisterForm} from "./forms/UserRegisterForm";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import {UserForgetPasswordForm} from "./forms/UserForgetPasswordForm";
 import {environment} from "../../../../environments/environment";
+import {Logo} from "../../footers/coco/Logo";
 
 export type IUserLoginStatusSection = {
   // onClickToLogin: () => void;
@@ -82,10 +83,11 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
         <div>
           <section className={"flex flex-col justify-center items-center mb-4"}>
             {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>*/}
-            <img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
-            {props.showPlatformLogo && (
+            {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>*/}
+            <Logo/>
+            {/*{props.showPlatformLogo && (*/}
               <span className={"text-white text-sm"}>{environment.platformName}</span>
-            )}
+            {/*)}*/}
           </section>
           <UserLoginForm
             confirmToLogin={() => {

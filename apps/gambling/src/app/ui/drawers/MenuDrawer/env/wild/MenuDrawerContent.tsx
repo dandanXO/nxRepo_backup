@@ -6,13 +6,13 @@ import { useLocation, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import { CocoMobileMenuItem } from "../../components/MobileMenuItem";
 import { MobileMenuLink } from "../../components/MobileMenuLink";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CopyIcon} from "../../../../components/CopyIcon";
+import {MobileMenuItem} from "./MobileMenuItem";
 
 
 export const MenuDrawerContent = () => {
@@ -48,7 +48,7 @@ export const MenuDrawerContent = () => {
         }
       </div>
 
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Canal De Telegram'}
         className={`after:bg-[#2E45DA] justify-between`}
         iconSuffix={true}
@@ -58,7 +58,7 @@ export const MenuDrawerContent = () => {
           closeMenuDrawer();
         }}
       />
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Primeiro depósito +20%'}
         className={`after:bg-[#DF4444]`}
         onClick={() => {
@@ -66,7 +66,7 @@ export const MenuDrawerContent = () => {
           closeMenuDrawer();
         }}
       />
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Recarregar Cashback +10%'}
         className={`after:bg-[#21C18C]`}
         onClick={() => {
@@ -74,7 +74,7 @@ export const MenuDrawerContent = () => {
           closeMenuDrawer();
         }}
       />
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Recompensa de check-in'}
         className={`after:bg-[#8F2EDA]`}
         onClick={() => {

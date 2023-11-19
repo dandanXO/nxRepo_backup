@@ -11,7 +11,7 @@ import { MessageCountBadge } from "../../../components/MessageCountBadge";
 import { environment } from "../../../../../environments/environment";
 import { Avatar } from "../../../components/Avatar";
 import { AvatarAccountInfo } from "../../../components/AvatarAccountInfo";
-import { LoginButton } from "./LoginButton";
+import { LoginButton } from "../../../components/Buttons/LoginButton";
 import { HeaderMenu } from "./HeaderMenu";
 import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
 import { IUserInfo } from "../../../../persistant/pending/loginMode";
@@ -62,13 +62,13 @@ const HeaderButton = styled.button.attrs((props) => ({
   className?: string;
 }>`
   width: 100%;
-  background-color: #040404;
-  color: #cdbbff;
+  background-color: var(--primary-varient);
+  color: var(--white);
   transform: skew(-8deg);
   font-size: 16px;
   &:hover {
-   color:white;
-   border-bottom: 3px solid #9dd9ff;
+   color: var(--secondary-main-from);
+   border-bottom: 3px solid var(--secondary-main-from);
   }
 `
 
@@ -92,7 +92,7 @@ export const Header = (props: IHeader) => {
   return (
     <header
       className={cx("max-h-[66px]",
-        "flex flex-row justify-start items-center relative",
+        "flex flex-row justify-start items-center relative bg-[var(--primary-variant)] ",
         // "bg-purple-500"
       )}
     // style={{
@@ -122,8 +122,11 @@ export const Header = (props: IHeader) => {
           setHover(false)
         }}
       >
-        <div className={"min-w-[100px] max-w-[130px] p-4 bg-[#5939f7] -mr-1"}>
-          <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
+        <div
+          className={"min-w-[100px] max-w-[130px] p-2 -mr-1 bg-gradient-to-r from-[rgba(163, 16, 16, 1)] via-[rgba(211, 20, 20, 0.5) to-[rgba(0, 39, 115, 0)]"}
+          onClick={() => onClickToIndex()}
+        >
+          <img className="w-[56px] h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
         </div>
         <HeaderButton>
           <HeaderButtonText onClick={onClickToIndex}>Jogos</HeaderButtonText>
@@ -144,9 +147,12 @@ export const Header = (props: IHeader) => {
 
       {!isLogin && (
         <div className="flex-1 flex justify-end">
-          <LoginButton className={"text-white text-lg"} onClick={() => {
-            props.onClickUserLoginStatusDrawer()
-          }}>Connecte-se</LoginButton>
+          <LoginButton
+            className={"text-white text-lg"}
+            onClick={() => {
+              props.onClickUserLoginStatusDrawer()
+            }}
+          >Connecte-se</LoginButton>
         </div>
       )}
 

@@ -2,13 +2,15 @@ import { useLocation, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import { CocoMobileMenuItem } from "../../components/MobileMenuItem";
 import { MobileMenuLink } from "../../components/MobileMenuLink";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CopyIcon} from "../../../../components/CopyIcon";
+import {MobileMenuItem} from "./MobileMenuItem";
+import styled from "styled-components";
+import {environment} from "../../../../../../environments/environment";
 
 
 export const MenuDrawerContent = () => {
@@ -44,9 +46,9 @@ export const MenuDrawerContent = () => {
         }
       </div>
 
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Canal De Telegram'}
-        className={`after:bg-[#2E45DA] justify-between`}
+        className={`justify-between after:bg-gradient-to-b from-[#528DFF] to-[#0057FF]`}
         iconSuffix={true}
         icon={<img className="w-[25px] h-[25px]" alt={"telegram"} src={`https://m.wild777bet.com/assets/bar1_tel-dfc5b7e5.png`} />}
         onClick={() => {
@@ -54,30 +56,31 @@ export const MenuDrawerContent = () => {
           closeMenuDrawer();
         }}
       />
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Primeiro depósito +20%'}
-        className={`after:bg-[#DF4444]`}
+        className={`after:bg-gradient-to-b from-[#2BE681] to-[#0E735B]`}
         onClick={() => {
           onClickToFirstDeposit();
           closeMenuDrawer();
         }}
       />
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Recarregar Cashback +10%'}
-        className={`after:bg-[#21C18C]`}
+        className={`after:bg-gradient-to-b from-[#FF8E8E] to-[#FF3838]`}
         onClick={() => {
           onClickToDepositCashback();
           closeMenuDrawer();
         }}
       />
-      <CocoMobileMenuItem
+      <MobileMenuItem
         text={'Recompensa de check-in'}
-        className={`after:bg-[#8F2EDA]`}
+        className={`after:bg-gradient-to-b from-[#FFE500] to-[#FF6A00]`}
         onClick={() => {
           onClickToCheckInDaily();
           closeMenuDrawer();
         }}
       />
+
       <MobileMenuLink
         text={'Bónus de Convite'}
         className="text-[#838ca0] mt-2"

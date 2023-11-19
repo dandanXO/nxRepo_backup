@@ -17,7 +17,7 @@ if(!isProduction) {
       PORT = 4005;
       break;
     }
-    case 'hxj-dev': {
+    case 'coco777bet': {
       proxyURL = 'https://www.hxj-dev.com';
       PORT = 4002;
       break;
