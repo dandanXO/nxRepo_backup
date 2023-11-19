@@ -1,21 +1,21 @@
 import cx from "classnames";
-import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
-import { appSlice } from "../../../../reduxStore/appSlice";
-import { environment } from "../../../../../environments/environment";
+import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
+import { appSlice } from "../../../../../reduxStore/appSlice";
+import { environment } from "../../../../../../environments/environment";
 import { useLocation, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../reduxStore";
-import { usePageNavigate } from "../../../hooks/usePageNavigate";
-import { CocoMobileMenuItem } from "../components/MobileMenuItem";
-import { MobileMenuLink } from "../components/MobileMenuLink";
-import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
-import { AppLocalStorage } from "../../../../persistant/localstorage";
-import {InviteCopySection} from "../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
-import {uiSlice} from "../../../../reduxStore/uiSlice";
-import {CopyIcon} from "../../../components/CopyIcon";
+import { RootState } from "../../../../../reduxStore";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { CocoMobileMenuItem } from "../../components/MobileMenuItem";
+import { MobileMenuLink } from "../../components/MobileMenuLink";
+import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
+import {uiSlice} from "../../../../../reduxStore/uiSlice";
+import {CopyIcon} from "../../../../components/CopyIcon";
 
 
-export const CocoMenuDrawerContent = () => {
+export const MenuDrawerContent = () => {
   const location = useLocation();
   const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
   const {

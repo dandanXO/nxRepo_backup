@@ -1,19 +1,22 @@
 import styled from "styled-components";
 import {environment} from "../../../../../environments/environment";
-import {Header} from "../../../header/env/pernambucana/Header";
+
 import cx from "classnames";
-import {HeaderMobile} from "../../../header/env/pernambucana/HeaderMobile";
+
 import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
-import {Footer} from "../../../footers/coco777bet/Footer";
+import {Footer} from "../../../footers/coco/Footer";
 import {TabBar} from "../../../tabBar";
 import {Toolbox} from "../../../components/Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
-import {PernambucanaMenuDrawerContent} from "../../../drawers/MenuDrawer/env/PernambucanaMenuDrawerContent";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
+
+import {HeaderMobile} from "../../../header/env/pernambucana/HeaderMobile";
+import {Header} from "../../../header/env/pernambucana/Header";
+import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -178,7 +181,7 @@ export const PageTemplate = ({
         {/*)}*/}
         {isShowDesktopMenuDrawer && (
           <MenuDrawer className={"rounded-r-3xl"}>
-            <PernambucanaMenuDrawerContent/>
+            <MenuDrawerContent/>
           </MenuDrawer>
         )}
 

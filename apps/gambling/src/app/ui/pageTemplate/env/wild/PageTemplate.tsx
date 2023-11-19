@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
-import {environment} from "../../../../../environments/environment";
-import {Footer} from "../../../footers/coco777bet/Footer";
-import {Header} from "../../../header/env/coco/Header";
-import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
+
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
 import {TabBar} from "../../../tabBar";
 import {Toolbox} from "../../../components/Toolbox";
-import {CocoMenuDrawerContent} from "../../../drawers/MenuDrawer/env/CocoMenuDrawerContent";
 import {ThreeDots} from "react-loading-icons";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
+
+import {environment} from "../../../../../environments/environment";
+import {Header} from "../../../header/env/wild/Header";
+import {HeaderMobile} from "../../../header/env/wild/HeaderMobile";
+import {Footer} from "../../../footers/wild/Footer";
+import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
+
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -177,7 +180,7 @@ export const PageTemplate = ({
             className={""}
             isTabletShow={false}
           >
-            <CocoMenuDrawerContent/>
+            <MenuDrawerContent/>
           </MenuDrawer>
         )}
         {/*NOTE: 佔據有 Header 時的高度*/}
