@@ -123,10 +123,10 @@ export const Header = (props: IHeader) => {
         }}
       >
         <div
-          className={"min-w-[100px] max-w-[130px] p-2 -mr-1 bg-gradient-to-r from-[rgba(163, 16, 16, 1)] via-[rgba(211, 20, 20, 0.5) to-[rgba(0, 39, 115, 0)]"}
+          className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)]"}
           onClick={() => onClickToIndex()}
         >
-          <img className="w-[56px] h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
+          <img className="max-w-[56px] max-h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
         </div>
         <HeaderButton>
           <HeaderButtonText onClick={onClickToIndex}>Jogos</HeaderButtonText>
