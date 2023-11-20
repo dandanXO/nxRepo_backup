@@ -4,17 +4,24 @@ import {
   useGetVIPInfoMutation, useLazyGetBalanceQuery,
   useLazyGetUserVIPAllInfoQuery
 } from "../../external";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {AppLocalStorage} from "../../persistant/localstorage";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
 import {appSlice} from "../../reduxStore/appSlice";
+import {useLocation} from "react-router";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 
+type IUseAutoUpdateBalance = {
+  autoWindowFocusRefresh?: boolean;
+}
+export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
+  const windowFocusRefresh = typeof props?.autoWindowFocusRefresh === "undefined" ? true : false;
 
-export const useAutoUpdateBalance = () => {
   const dispatch = useDispatch();
   const {isLogin} = useSelector((state: RootState) => state.app)
   // console.log("isLogin", isLogin);
+  const location = useLocation();
 
   const [triggerGetBalance, {data,isLoading: isGetBalanceLoading}] = useLazyGetBalanceQuery();
 
@@ -22,31 +29,35 @@ export const useAutoUpdateBalance = () => {
   const [triggerGetUserVIPInfo, {data: vipAllInfo, isLoading: isGetVIPInfoLoading}] = useGetVIPInfoMutation();
   const [triggerGetMailCount, { data: messageData }] = useGetMailCountMutation();
 
-
-  const updateBalance = () => {
-    if(!isLogin) return;
+  const isValidToken = () => {
+    if(!isLogin) return false;
     const token =  AppLocalStorage.getItem("token")
     if(token && token !== "" && token !== "undefined") {
+      return true
+    } else {
+      return false;
+    }
+  }
+  const updateBalance = () => {
+    if(isValidToken()) {
       triggerGetBalance({
-        token: AppLocalStorage.getItem("token") || ""
+        token: AppLocalStorage.getItem("token") || "",
       })
     }
   }
 
   const updateVIPInfo = () => {
-    if(!isLogin) return;
-    const token =  AppLocalStorage.getItem("token")
-    if(token && token !== "" && token !== "undefined") {
+    if(isValidToken() && location.pathname !== PageOrModalPathEnum.VIPGradePage) {
       triggerGetUserVIPInfo({
-        token,
+        token: AppLocalStorage.getItem("token") || ""
       });
     }
-
   }
 
   const updateMailCount = () => {
-    if (!isLogin) return;
-    triggerGetMailCount({ token: AppLocalStorage.getItem('token') || '' })
+    if(isValidToken()) {
+      triggerGetMailCount({ token: AppLocalStorage.getItem('token') || '' })
+    }
   }
 
   useEffect(() => {
@@ -61,25 +72,49 @@ export const useAutoUpdateBalance = () => {
   }, [messageData]);
 
   // NOTE: login change
-  useEffect(() => {
-    if(!isLogin) return;
-    updateBalance();
-    updateVIPInfo();
-    updateMailCount();
-  }, [isLogin])
+  // useEffect(() => {
+  //   if(!isLogin) return;
+  //   updateBalance();
+  //   updateVIPInfo();
+  //   updateMailCount();
+  // }, [isLogin])
 
   // NOTE: window focus change
   useEffect(() => {
     if(!isLogin) return;
+    if(!windowFocusRefresh) return ;
+    // console.log("[window] location.pathname", location.pathname);
+
     const handler = () => {
       updateBalance();
       updateVIPInfo();
+      // updateMailCount();
     }
-    window.addEventListener("focus", handler)
+    window.addEventListener("focus", () => {
+      console.log("[window] add focus")
+      handler();
+    })
     return () => {
+      if(!windowFocusRefresh) return;
+      console.log("[window] remove focus")
       window.removeEventListener("focus", handler)
     }
-  }, [isLogin])
+  }, [isLogin, windowFocusRefresh])
+
+  // NOTE: window focus change, location changes
+  const [prevLocation, setPrevLocation] = useState<any>();
+  useEffect(() => {
+    console.log("[window] location.pathname", location?.pathname);
+    if(!isLogin) return;
+    if(!windowFocusRefresh) return ;
+    if(prevLocation?.pathname !== location.pathname) {
+      console.log("[window] location.pathname change update");
+      updateBalance();
+      updateVIPInfo();
+    }
+    setPrevLocation(location);
+  }, [isLogin, location.pathname])
+
 
   // NOTE: update redux for balance
   const userData = useSelector((state: RootState) => state.app?.userStore)
@@ -103,8 +138,14 @@ export const useAutoUpdateBalance = () => {
     }
   }, [vipAllInfo])
 
-
+  const update = () => {
+    updateBalance();
+    updateVIPInfo();
+  }
   return {
+    update,
     updateBalance,
+    // updateVIPInfo,
+    // updateMailCount,
   }
 }

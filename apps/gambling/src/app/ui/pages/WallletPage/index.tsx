@@ -1,7 +1,4 @@
-import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import useBreakpoint from "../../hooks/useBreakpoint";
 
 import {useGetRechargeMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
@@ -14,8 +11,6 @@ import {
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
-
 
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import {renderByPlatform} from "../../utils/renderByPlatform";
@@ -31,10 +26,6 @@ export const WallletPage = () => {
 
   useAllowLoginRouterRules();
 
-  const navigate = useNavigate();
-  const { isMobile } = useBreakpoint();
-
-  const { updateBalance } = useAutoUpdateBalance();
   const {onClickToIndex} = usePageNavigate();
 
 

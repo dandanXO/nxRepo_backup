@@ -7,7 +7,6 @@ import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
 import {CurrentLevelButton, OtherLevelButton} from '../VIPGradePage';
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {environment} from "../../../../environments/environment";
 import {tcx} from "../../utils/tcx";
 
@@ -15,8 +14,6 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import PernambucanaDailySignInPage from "./env/pernambucana/DailySignInPage";
 import WDailySignInPage from "./env/wild/DailySignInPage";
 import CocoDailySignInPage from "./env/coco/DailySignInPage";
-
-
 
 const Daily = styled.div<{
   disable: boolean;
@@ -153,8 +150,6 @@ export const DailySignInPage = () => {
       token: AppLocalStorage.getItem('token') || '',
     });
   }, []);
-
-  useAutoUpdateBalance();
 
   return renderByPlatform({
     "coco777bet": (

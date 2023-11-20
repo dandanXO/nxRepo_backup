@@ -1,6 +1,4 @@
 import React from "react";
-import { useAutoUpdateBalance } from "../../../../../hooks/useAutoUpdateBalance";
-import { LeftOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { tcx } from "../../../../../utils/tcx";
@@ -28,7 +26,6 @@ const Coco777betVIPGradePage = ({
 }:ICoco777betVIPGradePageProps) => {
 
   const navigate = useNavigate();
-  const { updateBalance } = useAutoUpdateBalance();
 
   const allLevelInfoWithBonus = allLevelInfo?.map((info)=>{
     const currentLevelSignInConfigData = allSignInConfig?.find((config)=> {
@@ -55,7 +52,6 @@ const Coco777betVIPGradePage = ({
 
       <BackNavigation
         onClick={() => {
-          updateBalance();
           navigate(PageOrModalPathEnum.IndexPage);
         }}
       />

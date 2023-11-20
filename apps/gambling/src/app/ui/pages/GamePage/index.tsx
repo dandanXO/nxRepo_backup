@@ -6,12 +6,8 @@ import {useLocation, useNavigate} from "react-router";
 import queryString from 'query-string';
 
 import {useStartGameMutation} from '../../../external';
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {useDispatch} from "react-redux";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import {GameBackNavigation} from "../../components/BackNavigation/GameBackNavigation";
 
@@ -84,13 +80,11 @@ export const GamePage = () => {
         }
     }, []);
 
-    const {updateBalance} = useAutoUpdateBalance();
     const {onClickToIndex} = usePageNavigate();
 
     return (
         <>
           <GameBackNavigation onClick={() => {
-            updateBalance();
             onClickToIndex();
           }} />
 
