@@ -28,6 +28,9 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 import { UserInfoStatusPopoverBalanceInfo as CocoBalanceInfo } from "./env/coco/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverBalanceInfo as WildBalanceInfo } from "./env/wild/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverBalanceInfo as PernambucanaBalanceInfo } from "./env/pernambucana/UserInfoStatusPopoverBalanceInfo";
+import { UserInfoStatusPopoverInviteInfo as CocoInviteInfo } from "./env/coco/UserInfoStatusPopoverInviteInfo";
+import { UserInfoStatusPopoverInviteInfo as WildInviteInfo } from "./env/wild/UserInfoStatusPopoverInviteInfo";
+import { UserInfoStatusPopoverInviteInfo as PernambucanaInviteInfo } from "./env/pernambucana/UserInfoStatusPopoverInviteInfo";
 
 
 const PopoverContainer = renderByPlatform({
@@ -43,6 +46,12 @@ export interface IUserInfoStatusPopoverVIPInfoProps {
 export interface IUserInfoStatusPopoverBalanceInfoProps {
   totalBalanceSheetValue: number
   totalReasableValue: number
+}
+
+export interface IUserInfoStatusPopoverInviteInfoProps {
+  totalPrize: number
+  bonusAwaitingSettlement: number
+  fullWithdrawable: number
 }
 
 export const VIPBorderStyleContainer = styled.div`
@@ -314,8 +323,6 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
 
 
-
-
   return (
     <div
       className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full"}
@@ -337,6 +344,11 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                   totalBalanceSheetValue={totalBalanceSheetValue}
                   totalReasableValue={totalReasableValue}
                 />
+                <CocoInviteInfo
+                  totalPrize={totalPrize}
+                  bonusAwaitingSettlement={bonusAwaitingSettlement}
+                  fullWithdrawable={fullWithdrawable}
+                />
               </>
             ) ,
             "wild777bet": (
@@ -349,6 +361,11 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                   totalBalanceSheetValue={totalBalanceSheetValue}
                   totalReasableValue={totalReasableValue}
                 />
+                <WildInviteInfo
+                  totalPrize={totalPrize}
+                  bonusAwaitingSettlement={bonusAwaitingSettlement}
+                  fullWithdrawable={fullWithdrawable}
+                />
               </>
             )
           }, (
@@ -360,6 +377,11 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
               <PernambucanaBalanceInfo
                 totalBalanceSheetValue={totalBalanceSheetValue}
                 totalReasableValue={totalReasableValue}
+              />
+              <PernambucanaInviteInfo
+                totalPrize={totalPrize}
+                bonusAwaitingSettlement={bonusAwaitingSettlement}
+                fullWithdrawable={fullWithdrawable}
               />
             </>
           ) )
@@ -390,40 +412,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
       </Button>
       </OtherContainer>
 
-        <ContaContainer className={'mt-3'} onClick={() => {
-          navigate(PageOrModalPathEnum.VIPGradePage)
-          }}>
-          <Button className={"text-sm mb-4 !shadow-none"}>
-            <span className={"text-base"}>Conta Promovida</span>
-            <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>
-          </Button>
 
-          <div className={"flex flex-row justify-between items-start px-3"}>
-            <div className={"flex flex-col mr-2"}>
-              <span className={"text-main-primary-main text-lg"}>{totalPrize}</span>
-              <span className={"text-white"}>Prêmio total</span>
-            </div>
-
-            <div className={"w-[1px] h-[30px] bg-[rgba(255,255,255,.1)] self-center mr-1"}/>
-
-            <div className={"flex flex-col  mr-2"}>
-              <span className={"text-main-primary-main text-lg"}>{bonusAwaitingSettlement}</span>
-              <span className={"text-white"}>
-              Bônus aguardando
-              <br/>
-              liquidação
-            </span>
-            </div>
-
-            <div className={"w-[1px] h-[30px] bg-[rgba(255,255,255,.1)] self-center mr-1"}/>
-
-            <div className={"flex flex-col"}>
-              {/*<span className={"text-[#FF7D03] text-lg"}>{accountPromotedSwingValue}</span>*/}
-              <span className={"text-main-primary-main text-lg"}>{fullWithdrawable}</span>
-              <span className={"text-white"}>Retirável Total</span>
-            </div>
-          </div>
-        </ContaContainer>
 
 
 
