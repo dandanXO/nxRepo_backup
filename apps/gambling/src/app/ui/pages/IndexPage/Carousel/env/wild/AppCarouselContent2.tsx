@@ -1,16 +1,16 @@
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../../reduxStore";
-import {appSlice} from "../../../../../reduxStore/appSlice";
+import {RootState} from "../../../../../../reduxStore";
+import {appSlice} from "../../../../../../reduxStore/appSlice";
 
-import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
-import {environment} from "../../../../../../environments/environment";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import {PageOrModalPathEnum} from "../../../../../PageOrModalPathEnum";
+import {environment} from "../../../../../../../environments/environment";
+import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import cx from "classnames";
-import {CarouselContainer} from "../CarouselContainer";
+import {CarouselContainer} from "../../CarouselContainer";
 
-export const CocoAppCarouselContent = () => {
+export const AppCarouselContent2 = () => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,10 +25,10 @@ export const CocoAppCarouselContent = () => {
           }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
-            Primeiro depósito <br/> + bônus de 20%
+            Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img
-              src={`assets/${environment.assetPrefix}/h5_banner_1.jpeg`}
+            src={`assets/${environment.assetPrefix}/h5_banner_2.jpeg`}
           />
         </div>
       ) : (
@@ -45,15 +45,15 @@ export const CocoAppCarouselContent = () => {
               "italic font-bold text-6xl text-left"
             )}
           >
-            Primeiro depósito <br/> bônus de 20%
+            Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/banner1.jpeg`}
+            src={`assets/${environment.assetPrefix}/banner2.jpeg`}
             // className="rounded-box"
           />
         </div>
       )}
-      </CarouselContainer>
+    </CarouselContainer>
   )
 }
 

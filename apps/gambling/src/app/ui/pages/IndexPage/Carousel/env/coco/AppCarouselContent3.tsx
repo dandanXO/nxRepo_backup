@@ -1,16 +1,16 @@
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../../reduxStore";
-import {appSlice} from "../../../../../reduxStore/appSlice";
+import {RootState} from "../../../../../../reduxStore";
+import {appSlice} from "../../../../../../reduxStore/appSlice";
 
-import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
-import {environment} from "../../../../../../environments/environment";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import {PageOrModalPathEnum} from "../../../../../PageOrModalPathEnum";
+import {environment} from "../../../../../../../environments/environment";
+import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import cx from "classnames";
-import {CarouselContainer} from "../CarouselContainer";
+import {CarouselContainer} from "../../CarouselContainer";
 
-export const CocoAppCarouselContent2 = () => {
+export const AppCarouselContent3 = () => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const CocoAppCarouselContent2 = () => {
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/h5_banner_2.jpeg`}
+            src={`assets/${environment.assetPrefix}/h5_banner_3.jpeg`}
           />
         </div>
       ) : (
@@ -48,7 +48,7 @@ export const CocoAppCarouselContent2 = () => {
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/banner2.jpeg`}
+            src={`assets/${environment.assetPrefix}/banner3.jpeg`}
             // className="rounded-box"
           />
         </div>
