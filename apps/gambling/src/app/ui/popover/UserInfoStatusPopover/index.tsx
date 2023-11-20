@@ -4,15 +4,13 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useSelector} from "react-redux";
 
 import {
-  accountPromotedSwingSelector,
-  appSlice,
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
 import {GetVIPInfoResponse,
   useGetSignInConfigMutation,
   useGetVIPInfoMutation, useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery, useLazyGetUserVIPAllInfoQuery} from "../../../external";
-import {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import styled, { keyframes } from "styled-components";
 import { RightOutlined } from "@ant-design/icons";
 import { RootState } from "../../../reduxStore";
@@ -31,6 +29,9 @@ import { UserInfoStatusPopoverBalanceInfo as PernambucanaBalanceInfo } from "./e
 import { UserInfoStatusPopoverInviteInfo as CocoInviteInfo } from "./env/coco/UserInfoStatusPopoverInviteInfo";
 import { UserInfoStatusPopoverInviteInfo as WildInviteInfo } from "./env/wild/UserInfoStatusPopoverInviteInfo";
 import { UserInfoStatusPopoverInviteInfo as PernambucanaInviteInfo } from "./env/pernambucana/UserInfoStatusPopoverInviteInfo";
+import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/coco/UserInfoStatusPopoverNavigator";
+import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/UserInfoStatusPopoverNavigator";
+import { UserInfoStatusPopoverNavigator as PernambucanaNavigator } from "./env/pernambucana/UserInfoStatusPopoverNavigator";
 
 
 const PopoverContainer = renderByPlatform({
@@ -52,6 +53,11 @@ export interface IUserInfoStatusPopoverInviteInfoProps {
   totalPrize: number
   bonusAwaitingSettlement: number
   fullWithdrawable: number
+}
+
+export interface IUserInfoStatusPopoverNavigatorProps {
+  children: React.ReactNode
+  onClick: () => void
 }
 
 export const VIPBorderStyleContainer = styled.div`
@@ -184,13 +190,11 @@ export const ContaContainer = styled.div`
   height: 145px;
 `;
 
-const OtherContainer = styled.div`
+export const OtherContainer = styled.div`
   background: var(--varient);
   background-size: 100% 100%;
   border: 1px solid var(--main-primary-main);
   border-radius: 10px;
-  padding: 1px;
-  height: 60px;
 `;
 
 
@@ -349,6 +353,16 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                   bonusAwaitingSettlement={bonusAwaitingSettlement}
                   fullWithdrawable={fullWithdrawable}
                 />
+                <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
+                  <div>
+                    Registro Do Jogo
+                  </div>
+                </CocoNavigator>
+                <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
+                  <div>
+                    Modificar Dados
+                  </div>
+                </CocoNavigator>
               </>
             ) ,
             "wild777bet": (
@@ -366,6 +380,18 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                   bonusAwaitingSettlement={bonusAwaitingSettlement}
                   fullWithdrawable={fullWithdrawable}
                 />
+                <WildNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
+                  <div className={"flex flex flex-row items-center"}>
+                    <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
+                    <span>Modificar dados</span>
+                  </div>
+                </WildNavigator>
+                <WildNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
+                  <div className={"flex flex flex-row items-center"}>
+                    <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
+                    <span>Registro do jogo</span>
+                  </div>
+                </WildNavigator>
               </>
             )
           }, (
@@ -383,38 +409,21 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                 bonusAwaitingSettlement={bonusAwaitingSettlement}
                 fullWithdrawable={fullWithdrawable}
               />
+              <PernambucanaNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
+                <div className={"flex flex flex-row items-center"}>
+                  <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
+                  <span>Modificar dados</span>
+                </div>
+              </PernambucanaNavigator>
+              <PernambucanaNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
+                <div className={"flex flex flex-row items-center"}>
+                  <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
+                  <span>Registro do jogo</span>
+                </div>
+              </PernambucanaNavigator>
             </>
           ) )
         }
-
-
-       <OtherContainer className={'mb-4 mt-5'}>
-        <Button className={"flex"} onClick={() => {
-          navigate(PageOrModalPathEnum.SettingPage);
-        }}>
-          <div className={"flex flex flex-row items-center"}>
-          <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
-          <span> Modificar dados</span>
-          </div>
-          <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>
-        </Button>
-      </OtherContainer>
-
-      <OtherContainer className={'mb-4'}>
-      <Button className="text-sm mb-4 flex" style={{alignItems: 'center',justifyContent: 'space-between'}} onClick={() => {
-        navigate(PageOrModalPathEnum.GameRecordPage);
-      }}>
-        <div className={"flex flex flex-row items-center"}>
-        <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
-        <span> Registro do jogo</span>
-        </div>
-        <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>
-      </Button>
-      </OtherContainer>
-
-
-
-
 
       </PopoverContainer>
     </div>

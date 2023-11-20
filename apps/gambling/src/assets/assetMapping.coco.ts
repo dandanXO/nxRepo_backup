@@ -9,19 +9,27 @@ export type IAssetMapping =  {
   //header
   header: {
     menu: any
-  },
+  };
+  game: {
+    unfavorite: any;
+    favorite: any;
+  };
   tab: {
     home: any;
     invite: any;
     vip: any;
     account: any;
-  }
+  };
 }
 
 export const AssetMappingCoco: IAssetMapping = {
   logo: require(`./coco777bet/LOGO.png`),
   //header
   //header
+  game: {
+    unfavorite: require(`./coco777bet/icon=favorite-default.png`),
+    favorite: require(`./coco777bet/icon=favorite-active.png`),
+  },
   header: {
     menu: require(`./coco777bet/icon=menu.png`)
   },
