@@ -41,18 +41,16 @@ export const UserMoneyStatusSection = (props: IProps) => {
 
   const isUserMoneyStatusLoading = useSelector((state: RootState) => state.app.isUserMoneyStatusLoading)
   return (
-    <PersonalControl className={cx("px-3 flex flex-row justify-between items-center", props.className)}>
-      <div className='flex gap-2 items-center'>
-        <button className={"refresh"} onClick={() => {
-          update();
-        }}>
-          <img alt={"refresh"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
-        </button>
-        {/*main-secondary-main*/}
-        <div className={"flex-auto text-white sm:text-center md:text-left md:text-lg flex justify-center basis-1/2 font-bold"}>{
-          isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue.toLocaleString('en-US', {maximumFractionDigits:2, minimumFractionDigits: 2})}`
-        }</div>
-      </div>
+    <PersonalControl className={cx("px-3 flex flex-row justify-between items-center gap-2 h-8 md:h-11", props.className)}>
+      <button className={"refresh"} onClick={() => {
+        update();
+      }}>
+        <img alt={"refresh"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
+      </button>
+      {/*main-secondary-main*/}
+      <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-bold"}>{
+        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue.toLocaleString('en-US', {maximumFractionDigits:2, minimumFractionDigits: 2})}`
+      }</div>
       <button onClick={() => {
         navigate(PageOrModalPathEnum.WalletPage);
       }}>
