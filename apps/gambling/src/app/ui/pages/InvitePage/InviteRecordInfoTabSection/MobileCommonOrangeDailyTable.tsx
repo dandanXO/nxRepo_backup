@@ -6,6 +6,7 @@ import {MobileOrangeBackgroundShadowContainer as PMobileOrangeBackgroundShadowCo
 import {MobileOrangeBackgroundShadowContainer as WMobileOrangeBackgroundShadowContainer} from "./env/wild/MobileOrangeBackgroundShadowContainer";
 import {MobileOrangeBackgroundShadowContainer as CMobileOrangeBackgroundShadowContainer} from "./env/coco/MobileOrangeBackgroundShadowContainer";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
+import DatePicker from "../../../components/DatePickers/DatePicker";
 
 const MobileOrangeBackgroundShadowContainer = renderByPlatform({
   "wild777bet": WMobileOrangeBackgroundShadowContainer,
@@ -13,7 +14,7 @@ const MobileOrangeBackgroundShadowContainer = renderByPlatform({
 }, PMobileOrangeBackgroundShadowContainer)
 
 
-type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; }
+type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; recordDate: string; onRecordDateSelect: (date: string) => void }
 
 
 export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) => {
@@ -33,10 +34,7 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
       )}
 
       <div className={"text-[transparent]"}>
-        <span className={"bg-white rounded-xl text-[#fc6728] px-2 py-1 items-center"}>
-          <span className={"mr-2"}>{moment().format("YYYY/MM/DD")}</span>
-          {/* <DownOutlined className={""}/>  切換下拉，會呼叫invite day api ，先隱藏功能 */}
-        </span>
+        <DatePicker onConfirm={props.onRecordDateSelect} value={props.recordDate} min={moment().subtract(1, 'days').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
       </div>
       <div className={"flex flex-col mb-2 mt-2"}>
         <span className={"text-2xl text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].totalReward || 0.00}</span>
