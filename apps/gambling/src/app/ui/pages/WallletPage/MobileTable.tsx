@@ -1,17 +1,15 @@
 import { CopyOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
-import { RechargeListResponseData } from '../../../external/RechargeHistoryListEndpoint';
-import { WithdrawHistoryListEndpointResponseData } from '../../../external/WithdrawHistoryListEndpoint';
 import cx from "classnames"
 import {environment} from "../../../../environments/environment";
+import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "../../../external";
+import { useEffect } from "react";
+import { AppLocalStorage } from "../../../persistant/localstorage";
 
 const Container = styled.div`
   /* background: rgba(255, 255, 255, 0.1); */
 `;
-interface IDepositMobileTableProps {
-  records: RechargeListResponseData[];
-}
 
 const TradeStatusMap: { [key: number]: string } = {
   1: 'Sucesso',
@@ -29,13 +27,24 @@ const NoData = () => {
     </div>
   )
 }
-export const DepositMobileTable = ({ records }: IDepositMobileTableProps) => {
+export const DepositMobileTable = () => {
+  const [triggerGetDepositRecord, { data }] = useRechargeHistoryListMutation()
+
+  useEffect(()=>{
+    const token = AppLocalStorage.getItem('token') || '';
+    triggerGetDepositRecord({
+      limit: 1000,
+      page: 1,
+      token
+    })
+  }, [])
+
   return (
     <div>
-      {records.length === 0
+      {data?.data?.length === 0
         ? <NoData />
         : <div className="h-[80vh] overflow-y-auto">
-          {records.map((record) => (
+          {data?.data?.map((record) => (
             <Container
               key={record.id}
               className="mb-4 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
@@ -91,17 +100,24 @@ export const DepositMobileTable = ({ records }: IDepositMobileTableProps) => {
   );
 };
 
-interface IWithdrawMobileTableProps {
-  records: WithdrawHistoryListEndpointResponseData[];
-}
+export const WithdrawMobileTable = () => {
+  const [triggerGetWithdrawRecord, { data }] = useWithdrawHistoryListMutation({})
 
-export const WithdrawMobileTable = ({ records }: IWithdrawMobileTableProps) => {
+  useEffect(()=>{
+    const token = AppLocalStorage.getItem('token') || '';
+    triggerGetWithdrawRecord({
+      limit: 1000,
+      page: 1,
+      token
+    })
+  }, [])
+
   return (
     <div>
-      {records.length === 0
+      {data?.data?.length === 0
         ? <NoData />
-        : <div className={cx("overflow-y-auto", { "h-[80vh]": records.length > 0 })}>
-          {records.map((record) => (
+        : <div className={cx("overflow-y-auto", { "h-[80vh]": data?.data?.length || 0 > 0 })}>
+          {data?.data?.map((record) => (
             <Container
               key={record.id}
               className="mb-4 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
