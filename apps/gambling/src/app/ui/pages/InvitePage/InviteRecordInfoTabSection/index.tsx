@@ -40,6 +40,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
     const [dailyPanelMode, setDailyPanelMode] = useState<"1" | "2" | "3">("1");
     const [mobileTotalPanelMode, setMobileTotalPanelMode] = useState<"1" | "2" | "3">("1");
     const [mobileDailyPanelMode, setMobileDailyPanelMode] = useState<"1" | "2" | "3">("1");
+    const [orangeRecordSelectedDate, setOrangeRecordSelectedDate] = useState(moment())
 
     const inviteInfoData = props?.inviteInfo?.data;
     const inviteUnsettleData = props?.inviteUnsettle?.data;
@@ -64,15 +65,15 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         token: AppLocalStorage.getItem("token") || '',
         userId: String(inviteInfoData.userId|| inviteUnsettleData.userId),
         // dayMin: isMobile ? moment().format('YYYYMMDD') : moment().subtract(1, 'days').format('YYYYMMDD'),
-        dayMin: moment().subtract(1, 'days').format('YYYYMMDD'),
-        dayMax: moment().format('YYYYMMDD')
+        dayMin: isMobile ? orangeRecordSelectedDate.format('YYYYMMDD'): moment().subtract(1, 'days').format('YYYYMMDD'),
+        dayMax: isMobile ? orangeRecordSelectedDate.format('YYYYMMDD'): moment().format('YYYYMMDD')
       })
     }
     useEffect(() => {
       if (inviteInfoData.userId || inviteUnsettleData.userId) {
         reload();
       }
-    }, [])
+    }, [orangeRecordSelectedDate])
 
     // NOTE: window focus change
     useEffect(() => {
@@ -254,7 +255,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
   return (
     <div className={"mb-[80px]"}>
       {isMobile ? (
-        <MobilePanel isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} mobileTotalPanelMode={mobileTotalPanelMode} setMobileTotalPanelMode={setMobileTotalPanelMode} dailyData={dailyData} mobileDailyPanelMode={mobileDailyPanelMode} setMobileDailyPanelMode={setMobileDailyPanelMode}/>
+        <MobilePanel isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} mobileTotalPanelMode={mobileTotalPanelMode} setMobileTotalPanelMode={setMobileTotalPanelMode} dailyData={dailyData} mobileDailyPanelMode={mobileDailyPanelMode} setMobileDailyPanelMode={setMobileDailyPanelMode} orangeRecordDate={orangeRecordSelectedDate.format('YYYY-MM-DD')} onOrangeRecordDateSelect={(date)=> setOrangeRecordSelectedDate(moment(date, 'YYYY-MM-DD'))}/>
       ) : (
         <DesktopPanel isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} totalPanelMode={totalPanelMode} setTotalPanelMode={setTotalPanelMode} dailyData={dailyData} dailyPanelMode={dailyPanelMode} setDailyPanelMode={setDailyPanelMode}/>
       )}

@@ -5,21 +5,22 @@ import DatePicker from "rmc-date-picker";
 import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'
 import { tcx } from "../../utils/tcx";
+import { DatePickerBlock, dateToString } from "./DatePicker";
 
 
-interface IRangeDatePackerProps {
+interface IRangeDatePickerProps {
   onConfirm: (values: [string, string]) => void
   value: [string, string]
   max?: string
   min?: string
 }
 
-const RangeDatePacker = ({
+const RangeDatePicker = ({
   min,
   max,
   onConfirm,
   value
-}: IRangeDatePackerProps) => {
+}: IRangeDatePickerProps) => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [open, setOpen] = useState(true);
   const [anchor, setAnchor] = useState(1)
@@ -33,8 +34,6 @@ const RangeDatePacker = ({
     }
   }
 
-  const dateToString  = (date: any) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
-
   const handleConfirm = () => {
     setOpen(false)
     setTimeout(()=>{
@@ -46,8 +45,7 @@ const RangeDatePacker = ({
 
   return (
     <>
-      <div
-        className='bg-[#0d3a7e] w-fit px-4 py-1 rounded-full flex items-center gap-2'
+      <DatePickerBlock
         onClick={()=>setDrawerOpen(true)}
       >
         <div>
@@ -56,7 +54,7 @@ const RangeDatePacker = ({
           {value[1]}
         </div>
         <DownOutlined />
-      </div>
+      </DatePickerBlock>
 
       {
         drawerOpen && (
@@ -115,4 +113,4 @@ const RangeDatePacker = ({
   )
 }
 
-export default RangeDatePacker;
+export default RangeDatePicker;
