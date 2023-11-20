@@ -121,10 +121,11 @@ export const IndexSlotPage = () => {
       ) : (
         <section className={"mb-4 flex flex-row items-center px-4"}>
           <Tabs className={"game-type-tab-list mr-4"}>
-            <TabItem key="Salão" name={"Salão"} active={activeTab === "Salão"} className={"w-[114px] text-xl"} onClick={() => setActiveTab("Salão")} />
+            <TabItem pureColor={true} key="Salão" name={"Salão"} active={activeTab === "Salão"} className={"w-[114px] text-xl"} onClick={() => setActiveTab("Salão")} />
             {label!==undefined && label?.map((tab: string, index: number) => {
               return (
                 <TabItem
+                  pureColor={true}
                   key={index}
                   name={tab}
                   active={activeTab === tab}

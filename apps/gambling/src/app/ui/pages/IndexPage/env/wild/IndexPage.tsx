@@ -27,6 +27,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {Container} from "../../../../components/container/Container";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
+import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 
 
 export type TTotalFavoriteLocalState = {
@@ -148,7 +149,9 @@ export const IndexPage = ({
 
               <section className="mb-4 flex flex-row items-center px-4 w-full">
                 <div className="mr-2 grow">
-                  <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  <ScrollTab className="mx-4">
+                    <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  </ScrollTab>
                 </div>
               </section>
 

@@ -1,18 +1,10 @@
-import styled from "styled-components";
-import activeTabImg from "./tab.png"
-import inactiveTabImg from "./tab-inactive.png"
+import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {ImageTab as PImageTab} from "../env/pernambucana/ImageTab/index"
+import {ImageTab as WImageTab} from "../env/wild/ImageTab/index"
+import {ImageTab as CImageTab} from "../env/coco/ImageTab/index"
 
-export const ImageTab = styled.div<{
-  active: boolean;
-  color?: string;
-}>`
-  width: 100px;
-  height: 32px;
-  background: ${props => props.active ? `url(${activeTabImg}) no-repeat center/100% 100%` : `url(${inactiveTabImg}) no-repeat center/100% 100%`};
-  line-height: 32px;
-  text-align: center;
-  font-size: 14px;
-  color: ${props => props.active ? `#ffffff` : props.color ? props.color : `#669eef`};
-  cursor: pointer;
+export const ImageTab = renderByPlatform({
+  "wild777bet": WImageTab,
+  "coco777bet": CImageTab,
+}, PImageTab)
 
-`
