@@ -167,6 +167,15 @@ export const DepositPanel = (props: IDepositPanel) => {
               />
             )
           })}
+          {
+            // NOTE: 排版用，塞空的的區塊補齊空位
+            Array.from({ length: (recharge_options?.length - 1) % 3 }, (_, index) => {
+              return  <div 
+              key={index}
+              className={cx('basis-[30%] flex-1 mx-1')}
+              ></div>
+            })
+          }
         </div>
 
         {isMobile ? (

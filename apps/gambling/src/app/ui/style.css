@@ -139,3 +139,15 @@ html {
 .custom-input::placeholder {
   color: #ffffff;
 }
+
+.rmc-date-picker {
+  padding: 0;
+}
+
+.rmc-picker-mask {
+  background-image: linear-gradient(to bottom, rgba(32, 73, 142, 0.95), rgba(32, 73, 142, 0.6)), linear-gradient(to top, rgba(32, 73, 142, 0.95), rgba(32, 73, 142, 0.6));
+}
+
+.rmc-picker-item  {
+  color: white;
+}
