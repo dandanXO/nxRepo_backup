@@ -15,12 +15,11 @@ import ConfirmDrawer from "../../../../components/Drawers/ConfirmDrawer";
 import { IconTooltip } from "../../../../components/Tooltips/IconTooltip";
 
 const StyledTotalSectionContainer = styled.div`
-  border-radius: 19px;
-  border: 2px solid transparent;
-  background: linear-gradient(0deg,#2E104C,#3F28AF),linear-gradient(180deg,#5A3AF7,#500E8D);
-  color:white;
-  background-clip: padding-box,border-box;
-  background-origin: padding-box,border-box;
+  border-radius: 16px;
+  border: 1px solid var(--stroke-dashboard-main-from, --stroke-dashboard-main-via,--stroke-dashboard-main-to);
+  background: var(--background-dashboard-main, linear-gradient(180deg, var(--background-dashboard-main-from) 0%, var(--background-dashboard-main-via) 85.42%, var(--background-dashboard-main-to) 100%));
+  box-shadow: 4px 4px 4px 0px #ffffff40 inset, -4px -4px 4px 0px #ffffff40 inset;
+
 `;
 
 const TotalSectionTopContent = styled.div`
@@ -38,19 +37,19 @@ const MobileTotalDetailItem = (props: any) => {
 
 
   return (
-    <div className={"flex flex-col flex-nowrap flex-1 p-2.5"} onClick={() => setNoticeShow(!noticeShow)}>
-      <div className={"whitespace-nowrap flex flex-row items-center "}>
-        <div className={"font-[Heebo] font-bold"}>{titleText}</div>
+    <div className={"flex flex-col flex-nowrap flex-1 px-3.5 pt-4 pb-3.5 "} onClick={() => setNoticeShow(!noticeShow)}>
+      <div className={"whitespace-nowrap flex flex-row items-center mb-3"}>
+        <div className={"font-[Heebo] font-bold text-sm"}>{titleText}</div>
 
-        <div className={"text-xs ml-0.5 -translate-y-2"}><QuestionCircleOutlined /></div>
+        <div className={"text-sm ml- flex items-center"}><QuestionCircleOutlined /></div>
       </div>
-      <div className={"flex flex-row items-center text-sm"}>
-        <div className={"flex flex-col text-sm md:text-base mr-1"}>Balanço: </div>
-        <div className={"flex flex-col text-sm md:text-base"}> R$ {balanceValue}</div>
+      <div className={"flex flex-row items-center text-xs mb-2.5"}>
+        <div className={"flex flex-col text-xs md:text-base mr-1"}>Balanço: </div>
+        <div className={"flex flex-col text-xs md:text-base"}> R$ {balanceValue}</div>
       </div>
-      <div className={"flex flex-row items-center "}>
-        <div className={"flex flex-col text-sm md:text-base mr-1"}>Retirável: </div>
-        <div className={"flex flex-col text-sm md:text-base"}> R$ {removableValue}</div>
+      <div className={"flex flex-row items-center text-xs"}>
+        <div className={"flex flex-col text-xs md:text-base mr-1"}>Retirável: </div>
+        <div className={"flex flex-col text-xs md:text-base"}> R$ {removableValue}</div>
       </div>
       {
         noticeShow && (
@@ -60,7 +59,7 @@ const MobileTotalDetailItem = (props: any) => {
             title='Descrição detalhada'
             content={noticeText}
             buttonText='Eu vejo'
-            onClose={()=>setNoticeShow(false)}
+            onClose={() => setNoticeShow(false)}
           />
         )
       }
@@ -73,17 +72,17 @@ const TotalDetailItem = (props: any) => {
   const { titleText, balanceValue, removableValue } = props;
 
   return (
-    <div className={"flex flex-row flex-nowrap flex-1 items-center flex-0 shrink-0 basis-1/2"}>
+    <div className={"flex flex-row flex-nowrap flex-1 items-center flex-0 shrink-0 basis-1/2 "}>
       <div className={"whitespace-nowrap flex flex-row justify-center flex-0 shrink-0 basis-[35%] p-3"}>
         <div className={"font-[Heebo] text-base md:text-xl"}>{titleText}</div>
       </div>
       <div className={"flex flex-col items-center flex-0 shrink-0 basis-[25%] p-3"}>
         <div className={"flex flex-col text-base md:text-lg whitespace-nowrap"}> R$ {balanceValue}</div>
-        <div className={"flex flex-col text-sm md:mt-2.5"}>Balanço</div>
+        <div className={"flex flex-col text-sm md:mt-2"}>Balanço</div>
       </div>
       <div className={"flex flex-col items-center flex-0 shrink-0 basis-[25%] p-3"}>
         <div className={"flex flex-col text-base md:text-lg whitespace-nowrap"}> R$ {removableValue}</div>
-        <div className={"flex flex-col text-sm md:mt-2.5"}>Retirável</div>
+        <div className={"flex flex-col text-sm md:mt-2"}>Retirável</div>
       </div>
     </div>
   )
@@ -104,11 +103,9 @@ export const TotalSectionContainer = () => {
   return (
     <StyledTotalSectionContainer className={"flex flex-col text-white relative"}>
 
-      <TotalSectionTopContent className={"flex-1 flex flex-col p-4 md:py-0 md:flex-row  justify-around items-center px-5 font-bold w-full relative"}>
-        <div className={cx("w-full flex-1 flex flex-row items-center md:h-[124px] md:justify-center")}>
-          <div className={cx("text-left text-base  md:text-3xl", {
-            'absolute top-0 left-0 text-xs py-[3px] px-2.5 bg-[#0000001a] rounded-br': isMobile,
-            '[text-shadow:_0_3px_0_rgb(0_0_0)]': !isMobile
+      <TotalSectionTopContent className={"flex-1 flex flex-col p-3.5 md:p-6 md:flex-row justify-around items-center font-bold w-full relative"}>
+        <div className={cx("w-full flex-1 flex flex-row items-center md:justify-center mb-3")}>
+          <div className={cx("text-left text-xs md:text-3xl font-normal", {
           })}>Total Da Conta</div>
           <section
             className={cx(
@@ -124,7 +121,7 @@ export const TotalSectionContainer = () => {
           <div className={"flex-1 flex flex-col justify-center items-center"}>
             <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {totalBalanceSheetValue.toFixed(2)}</div>
             <div className={cx("flex flex-col text-sm md:text-xl", {
-              'text-[#ffffffb3] font-normal': isMobile,
+              'text-white font-normal': isMobile,
 
             })}>Balanço Total</div>
           </div>
@@ -132,14 +129,14 @@ export const TotalSectionContainer = () => {
           <div className={"flex-1 flex flex-col justify-center items-center"}>
             <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {totalReasableValue.toFixed(2)}</div>
             <div className={cx("flex flex-col text-sm md:text-xl", {
-              'text-[#ffffffb3] font-normal': isMobile
+              'text-white font-normal': isMobile
             })}>Retirável Total</div>
           </div>
         </div>
       </TotalSectionTopContent>
-
+      <div className="border-b border-solid border-white mx-3.5 md:mx-6"></div>
       {isMobile &&
-        (<TotalSectionBottomContent className={"border-t border-[#d3abff4d] flex flex-row flex-wrap justify-between items-center text-base md:text-medium text-[#d3abff]"}>
+        (<TotalSectionBottomContent className={" flex flex-row flex-wrap justify-between items-center text-base md:text-medium text-[var(--secondary-assistant)]"}>
           <MobileTotalDetailItem
             titleText={'Depositar conta'}
             balanceValue={totalBalanceSheetValue.toFixed(2)}
@@ -155,12 +152,12 @@ export const TotalSectionContainer = () => {
         </TotalSectionBottomContent>
         )}
       {!isMobile &&
-        (<TotalSectionBottomContent className={"border-t border-[#d3abff4d] flex flex-row flex-wrap justify-between items-center text-base text-[#d3abff] py-3"}>
+        (<TotalSectionBottomContent className={" flex flex-row flex-wrap justify-between items-center text-base text-[var(--secondary-assistant)] p-3"}>
           <TotalDetailItem titleText={(<div className="flex flex-col justify-center items-center">
             <div>Depositar conta</div>
-            <div className="whitespace-nowrap">
+            <div className="whitespace-nowrap flex items-center">
               <span className="mr-1">(Atividade)</span>
-              <IconTooltip icon={<QuestionCircleOutlined className={'text-sm'}/>} id={"deposit-tooltip"} content="Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc." />
+              <IconTooltip icon={<QuestionCircleOutlined className={'text-2xl'} />} id={"deposit-tooltip"} content="Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc." />
             </div>
           </div>
           )}
@@ -170,9 +167,9 @@ export const TotalSectionContainer = () => {
           <TotalDetailItem
             titleText={(<div className="flex flex-col justify-center items-center">
               <div>Conta Promovida</div>
-              <div className="whitespace-nowrap">
+              <div className="whitespace-nowrap flex items-center">
                 <span className="mr-1">(Atividade)</span>
-                <IconTooltip icon={<QuestionCircleOutlined className={'text-sm'}/>} id={"Conta-tooltip"} content="Uma conta composta por recompensas por convidar amigos e retorno de comissões com base no valor da transação dos usuários convidados. " />
+                <IconTooltip icon={<QuestionCircleOutlined className={'text-2xl'} />} id={"Conta-tooltip"} content="Uma conta composta por recompensas por convidar amigos e retorno de comissões com base no valor da transação dos usuários convidados. " />
               </div>
 
             </div>

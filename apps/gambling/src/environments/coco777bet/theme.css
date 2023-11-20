@@ -41,6 +41,7 @@
   --background-vip-level-to: #2E22BD;
   --background-alert-text-from: #FEB867;
   --background-alert-text-to: #FF7E21;
+  --background-submenu: #040404bf;
 
   --background-dashboard-main-from: #5754F3;
   --background-dashboard-main-via: #121C78;
@@ -51,9 +52,9 @@
 
   --stroke-textfields: #24468B;
   --stroke-block: #ABDCFF;
-  --stroke-dashboard-main-from: #D680FF;
+  --stroke-dashboard-main-from: #4CB0FF;
   --stroke-dashboard-main-via: #FFFFFF;
-  --stroke-dashboard-main-to: #FFA9F6;
+  --stroke-dashboard-main-to: #4CB0FF;
   --stroke-dashboard-secondary: #393FC4;
 
 
