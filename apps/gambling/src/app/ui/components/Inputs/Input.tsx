@@ -1,35 +1,8 @@
-import styled from "styled-components";
 import cx from "classnames"
 import {useState} from "react";
-import { tcx } from '../../utils/tcx';
-
-
-export const InputSection = styled.a<{
-  focus?: boolean;
-  validation?: boolean;
-}>`
-  //border: 1px solid transparent;
-  /* border: 1px solid var(--main-primary-main); */
-  /* border-radius: 25px; */
-
-  //box-shadow: inset 0 0 36px 5px rgba(255,255,255,.08);
-
-  /* padding: 14px 16px; */
-  display: flex;
-  flex-direction: row;
-
-  transition: all .4s;
-
-  border-color: var(--input-border);
-
-  ${(props) => props.focus && `
-    border-color: var(--input-focus-border);
-  `}
-  ${(props) => props.validation === false && `
-    border-color: var(--input-invalidation-border);
-  `}
-
-`
+import {tcx} from '../../utils/tcx';
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import {InputSection} from "./InputSection"
 
 export type IInput = {
   prefix?: React.ReactNode;
@@ -48,7 +21,7 @@ export type IInput = {
 
 }
 
-export const Input = (props: IInput) => {
+const BaseInput = (props: IInput) => {
   // const inputRef = useRef();
   const [focus, setFocus] = useState(false);
   return (
@@ -59,10 +32,8 @@ export const Input = (props: IInput) => {
           onClick={() => {
             // (inputRef && inputRef.current as any).focus()
           }}
-          className={tcx("w-full rounded-3xl border-[var(--input-border)] border-solid border py-4 px-3.5 ",
-            // "active:!border-2 active:!border-[#01FF52]": !props.themeStyle,
+          className={tcx("w-full",
             ["border-utils-gray", props.themeStyle === "simple"],
-            "bg-[var(--input-background)]",
             props.className
           )}
           validation={props.validation}
@@ -71,7 +42,7 @@ export const Input = (props: IInput) => {
           {props.children ? (props.children) : (
             <input
               // ref={inputRef as any}
-              className={cx(props.inputClassName, "bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder-[var(--input-placeholder-color)]")}
+              className={cx(props.inputClassName, "bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder:text-[var(--input-placeholder-color)]")}
               type={props.type || "text"}
               placeholder={props.placeholder}
               value={props.value}
@@ -103,4 +74,10 @@ export type InputValue<T> = {
   isValidation?: boolean;
   errorMessage?: string;
 };
+
+export const Input = renderByPlatform({
+  "coco777bet": BaseInput,
+  "wild777bet": BaseInput
+}, BaseInput);
+
 
