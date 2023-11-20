@@ -3,6 +3,7 @@ import cx from "classnames";
 import {environment} from "../../../../environments/environment";
 import React from "react";
 import { IUserInfo } from "../../../persistant/pending/loginMode";
+import { tcx } from "../../utils/tcx";
 
 export const Avatar = (props: {
   onClickToPopupUserInfoStatusPopover?: () => void;
@@ -28,10 +29,10 @@ export const Avatar = (props: {
         {/*  "w-[82px] h-[95px]": props.big,*/}
         {/*})} alt="avatar" src={`assets/${AvatarSrcMap[userInfo.avatar || 1]}`}/>*/}
         <img
-          className={cx("rounded-full", {
-            "w-[44px] h-[44px] min-w-[44px] min-h-[44px]}": !props.big,
-            "w-[82px] h-[82px]": props.big,
-          },props.className)}
+          className={tcx("rounded-full",
+            ["w-[44px] h-[44px] min-w-[44px] min-h-[44px]}", !props.big],
+            ["w-[82px] h-[82px]", !!props.big],
+            props.className)}
           alt="avatar"
           src={`assets/${environment.assetPrefix}/avatar_${userInfo.avatar || 1}.png`}
         />

@@ -1,4 +1,3 @@
-import {Button} from "../../components/Buttons/Button";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useSelector} from "react-redux";
@@ -12,7 +11,6 @@ import {GetVIPInfoResponse,
   useGetVIPInfoMutation, useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery, useLazyGetUserVIPAllInfoQuery} from "../../../external";
 import React, {useEffect, useMemo, useState} from "react";
 import styled, { keyframes } from "styled-components";
-import { RightOutlined } from "@ant-design/icons";
 import { RootState } from "../../../reduxStore";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { environment } from "../../../../environments/environment"
@@ -32,6 +30,7 @@ import { UserInfoStatusPopoverInviteInfo as PernambucanaInviteInfo } from "./env
 import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/coco/UserInfoStatusPopoverNavigator";
 import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/UserInfoStatusPopoverNavigator";
 import { UserInfoStatusPopoverNavigator as PernambucanaNavigator } from "./env/pernambucana/UserInfoStatusPopoverNavigator";
+import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/coco/UserINfoStatusPopoverUserInfo'
 
 
 const PopoverContainer = renderByPlatform({
@@ -340,6 +339,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
           renderByPlatform({
             "coco777bet": (
               <>
+                <CocoUserInfo />
                 <CocoVIPInfo
                   userVIPInfo={userVIPInfo}
                   currentLevel={currentLevel}
