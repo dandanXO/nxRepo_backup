@@ -17,11 +17,17 @@ import {
 } from '../../components/NotificationItem';
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
-import {NotificationContainer as PernambucanaContainer} from "./env/pernambucana/NotificationContainer";
-import {NotificationContainer as CocoContainer} from "./env/coco/NotificationContainer";
-import {environment} from "../../../../environments/environment";
 
-const NotificationContainer = environment.assetPrefix === "coco777bet" ? CocoContainer : PernambucanaContainer;
+import {NotificationContainer as PNotificationContainer} from "./env/pernambucana/NotificationContainer";
+import {NotificationContainer as WNotificationContainer} from "./env/wild/NotificationContainer";
+import {NotificationContainer as CNotificationContainer} from "./env/coco/NotificationContainer";
+
+import {renderByPlatform} from "../../utils/renderByPlatform";
+
+const NotificationContainer = renderByPlatform({
+  "wild777bet": WNotificationContainer,
+  "coco777bet": CNotificationContainer,
+}, PNotificationContainer);
 
 export type INotificationDrawer = {
   closeDrawer: () => void;

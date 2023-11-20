@@ -10,7 +10,7 @@ import { TTotalFavoriteLocalState } from "../IndexPage";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import { SearchInput } from "../../components/Inputs/SearchInput";
-import { SearchPageContainer } from "./env/SearchPageContainer";
+import { SearchPageContainer } from "./SearchPageContainer";
 // import {onValidatePasswordInput} from "../../components/UserLoginStatusSection/forms/UserLoginForm";
 
 export const GameSearchPage = () => {
@@ -51,7 +51,7 @@ export const GameSearchPage = () => {
         value={searchInput.data}
         validation={searchInput.isValidation}
         errorMessage={searchInput.errorMessage}
-        onChange={(event) => {
+        onChange={(event: any) => {
           setSearchInput({
             data: event.target.value,
             isValidation: true,

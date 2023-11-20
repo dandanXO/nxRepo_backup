@@ -1,7 +1,6 @@
 import { DatePicker } from 'antd';
 import moment, { Moment } from 'moment';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router';
 
 import { GetUserGameRecordResponse, useGetUserGameRecordMutation } from "../../../external";
 import { AppLocalStorage } from '../../../persistant/localstorage';
@@ -12,7 +11,7 @@ import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { Table } from "../../components/Table";
-import { undefined } from "zod";
+import RangeDatePacker from "../../components/DatePickers/RangeDatePacker";
 
 
 const { RangePicker } = DatePicker;
@@ -123,17 +122,29 @@ export const GameRecordPage = () => {
           <BackNavigation onClick={() => onClickToIndex()}/>
 
           <section className={'mb-4 text-left text-white'}>
-            <RangePicker
-              value={[dates[0], dates[1]]}
-              allowClear={false}
-              format="YYYY-MM-DD"
-              onChange={(dates) => {
-                if (dates) {
-                  setDates(dates as Moment[]);
-                }
-              }}
-              style={datePickerStyle}
-            />
+            {
+              isMobile ?
+                (<RangeDatePacker
+                  min='2023-01-01'
+                  max={max.format('YYYY-MM-DD')}
+                  onConfirm={(values)=> setDates([moment(values[0], 'YYYY-MM-DD'), moment(values[1], 'YYYY-MM-DD')])}
+                  value={[dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]}
+                />):
+                (
+                  <RangePicker
+                    value={[dates[0], dates[1]]}
+                    allowClear={false}
+                    format="YYYY-MM-DD"
+                    onChange={(dates) => {
+                      if (dates) {
+                        setDates(dates as Moment[]);
+                      }
+                    }}
+                    style={datePickerStyle}
+                    disabledDate={(current) => current > max}
+                  />
+                )
+            }
           </section>
 
           <div className='h-[80vh] rounded-lg overflow-hidden overflow-x-scroll'>

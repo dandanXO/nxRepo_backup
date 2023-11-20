@@ -1,17 +1,19 @@
-import {ITabType} from "./index";
-import {
-  MobileBlueBackgroundShadowContainer as Pernambucana
-} from "./env/pernambucana/MobileBlueBackgroundShadowContainer";
-import {MobileBlueBackgroundShadowContainer as Coco} from "./env/coco/MobileBlueBackgroundShadowContainer";
-
-import {environment} from "../../../../../environments/environment";
-import {CommonTableTabG} from "./env/CommonTableTabG";
-import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
 import { useState } from "react";
 import { QuestionCircleOutlined } from "@ant-design/icons";
+import {ITabType} from "./index";
 
+import {CommonTableTabG} from "../../../components/TabItem/CommonTableTabG";
+import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
 
-const MobileBlueBackgroundShadowContainer = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana;
+import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {MobileBlueBackgroundShadowContainer as PMobileBlueBackgroundShadowContainer} from "./env/pernambucana/MobileBlueBackgroundShadowContainer";
+import {MobileBlueBackgroundShadowContainer as WMobileBlueBackgroundShadowContainer} from "./env/wild/MobileBlueBackgroundShadowContainer";
+import {MobileBlueBackgroundShadowContainer as CMobileBlueBackgroundShadowContainer} from "./env/coco/MobileBlueBackgroundShadowContainer";
+
+const MobileBlueBackgroundShadowContainer = renderByPlatform({
+  "wild777bet": WMobileBlueBackgroundShadowContainer,
+  "coco777bet": CMobileBlueBackgroundShadowContainer,
+}, PMobileBlueBackgroundShadowContainer)
 
 export interface ITotal {
   data: {

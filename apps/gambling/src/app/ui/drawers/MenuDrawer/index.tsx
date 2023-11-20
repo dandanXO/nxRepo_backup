@@ -3,6 +3,12 @@ import cx from "classnames";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {uiSlice} from "../../../reduxStore/uiSlice";
+import styled from "styled-components";
+import {environment} from "../../../../environments/environment";
+
+const StyledMenuDrawerContainer = styled.div`
+  background: url(assets/${environment.assetPrefix}/bg_sidebar_mobile.png);
+`
 
 export type IMenuDrawer = {
   className?: string;
@@ -33,10 +39,11 @@ export const MenuDrawer = (props: IMenuDrawer) => {
         closeMenuDrawer();
       }}
     >
-      <div
-        className={cx("bg-[var(--drawer-bg)] p-4 flex flex-col flex-between",
+      <StyledMenuDrawerContainer
+        className={cx("p-4 flex flex-col flex-between",
           "border-r border-r-[var(--drawer-border)]",
           "fixed bottom-0 w-[276px] min-w-[276px] h-full z-30",
+          "bg-[var(--drawer-bg)]",
           {
             "ease-in-out duration-300": isMobile,
             // "w-[0px]": !isShowDesktopMenuDrawer,
@@ -78,7 +85,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
           {props.children}
         </section>
 
-      </div>
+      </StyledMenuDrawerContainer>
     </div>
 
   )

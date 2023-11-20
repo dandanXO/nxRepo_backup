@@ -1,12 +1,20 @@
+import {RightOutlined} from "@ant-design/icons";
+import { useNavigate } from "react-router";
+import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
 import {IBoardData} from "./index";
-import {MobileGreenBackgroundShadowContainer as Pernambucana} from "./env/pernambucana/MobileGreenBackgroundShadowContainer";
-import {MobileGreenBackgroundShadowContainer as Coco } from "./env/coco/MobileGreenBackgroundShadowContainer";
-import {environment} from "../../../../../environments/environment";
 
-const MobileGreenBackgroundShadowContainer = environment.assetPrefix === "coco777bet" ? Coco : Pernambucana
+import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {MobileGreenBackgroundShadowContainer as PMobileGreenBackgroundShadowContainer} from "./env/pernambucana/MobileGreenBackgroundShadowContainer";
+import {MobileGreenBackgroundShadowContainer as WMobileGreenBackgroundShadowContainer} from "./env/wild/MobileGreenBackgroundShadowContainer";
+import {MobileGreenBackgroundShadowContainer as CMobileGreenBackgroundShadowContainer } from "./env/coco/MobileGreenBackgroundShadowContainer";
 
+const MobileGreenBackgroundShadowContainer = renderByPlatform({
+  "wild777bet": WMobileGreenBackgroundShadowContainer,
+  "coco777bet": CMobileGreenBackgroundShadowContainer,
+}, PMobileGreenBackgroundShadowContainer)
 
 export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
+  const navigate = useNavigate();
   return (
     <MobileGreenBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 py-2 text-white"}>
 
@@ -17,8 +25,14 @@ export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
         </div>
 
         <div className={"flex flex-col"}>
-          <span className={"text-xl text-[#ffffff]"}>R$ {props.data.paidReward || 0.00}</span>
+          <div className={"text-xl text-[#ffffff] flex items-center"}>
+            <span>R$ {props.data.paidReward || 0.00} </span>
+            <RightOutlined className="text-xs ml-1" onClick={() => {
+              navigate(PageOrModalPathEnum.InviteSettlementRecordPage);
+            }} />
+          </div>
           <span className="text-sm">Bônus já liquidados</span>
+
         </div>
       </div>
 

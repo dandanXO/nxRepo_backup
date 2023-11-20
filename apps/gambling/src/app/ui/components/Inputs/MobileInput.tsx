@@ -1,29 +1,10 @@
-import styled from "styled-components";
-import {Input} from "./Input";
-import {environment} from "../../../../environments/environment";
-import {WithdrawMobileInput} from "./WithdrawMobileInput";
+import {WithdrawMobileInput as PCWithdrawMobileInput} from "./env/pernambucana/WithdrawMobileInput";
+import {WithdrawMobileInput as CWithdrawMobileInput} from "./env/coco/WithdrawMobileInput";
+import {WithdrawMobileInput as WWithdrawMobileInput} from "./env/wild/WithdrawMobileInput";
+import {renderByPlatform} from "../../utils/renderByPlatform";
 
-
-const PernambucanaMobileInput = styled(Input)`
-  //height: 0.85rem;
-  //display: flex;
-  //align-items: center;
-  //padding: 0 0.24rem;
-  //border-radius: 10px;
-  //margin-bottom: 0.4rem;
-  overflow: visible;
-  border: 1px solid var(--input-border);
-  background: var(--input-background);
-  //box-shadow: inset 0 0 0.3rem 0.05rem #000;
-  //background: linear-gradient(180deg,#1f2332 0%,#090B0F 100%);
-  //box-shadow: 0 1px rgba(255,255,255,.5) inset, 0 -0.03rem 0.08rem rgba(0,0,0,.5);
-`;
-
-// const CocoMobileInput = styled(PernambucanaMobileInput)`
-//   background: #341972;
-//   border: 1px solid rgba(90,58,247,.7);
-//   border-radius: 10px;
-// `;
-
-export const MobileInput = environment.assetPrefix === "coco777bet" ? WithdrawMobileInput : PernambucanaMobileInput;
 // export const MobileInput = WithdrawMobileInput;
+export const MobileInput = renderByPlatform({
+  "coco777bet": CWithdrawMobileInput,
+  "wild777bet": WWithdrawMobileInput
+}, PCWithdrawMobileInput);

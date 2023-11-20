@@ -22,7 +22,6 @@ import {connect} from "../../../../gateway/socket";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import { useDispatch } from "react-redux";
 import {AppLocalStorage} from "../../../../persistant/localstorage";
-import cx from "classnames";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {usePageNavigate} from "../../../hooks/usePageNavigate";
 import {Captcha} from "./Captcha";
@@ -217,7 +216,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         value={phoneInput.data}
         validation={phoneInput.isValidation}
         errorMessage={phoneInput.errorMessage}
-        onChange={(event) => {
+        onChange={(event: any) => {
           onValidatePhoneInput(event.target.value, setPhoneInput);
         }}
       />
@@ -235,7 +234,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           value={confirmPhoneInput.data}
           validation={confirmPhoneInput.isValidation}
           errorMessage={confirmPhoneInput.errorMessage}
-          onChange={(event) => {
+          onChange={(event: any) => {
             onValidateConfirmPhoneInput(phoneInput.data, event.target.value, setConfirmPhoneInput);
           }}
       />
@@ -248,7 +247,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         value={passwordInput.data}
         validation={passwordInput.isValidation}
         errorMessage={passwordInput.errorMessage}
-        onChange={(event) => {
+        onChange={(event: any) => {
           onValidatePasswordInput(event.target.value, setPasswordInput);
         }}
         suffix={(
@@ -274,7 +273,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         value={captchaInput.data}
         validation={captchaInput.isValidation}
         errorMessage={captchaInput.errorMessage}
-        onChange={(event) => {
+        onChange={(event: any) => {
           onValidateCaptchaInput(event.target.value, setCaptchaInput);
         }}
       />

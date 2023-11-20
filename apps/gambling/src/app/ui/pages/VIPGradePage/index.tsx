@@ -1,22 +1,19 @@
 import cx from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
-import {
-  useGetSignInConfigMutation,
-  useGetVIPInfoMutation, useLazyGetUserVIPAllInfoQuery,
-} from '../../../external';
-import { AppLocalStorage } from '../../../persistant/localstorage';
+import {useGetSignInConfigMutation, useGetVIPInfoMutation, useLazyGetUserVIPAllInfoQuery,} from '../../../external';
+import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
-import { useAllowLoginRouterRules } from '../../router/useAllowLoginRouterRules';
+import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
 import {useDispatch, useSelector} from "react-redux";
-import { RootState } from "../../../reduxStore";
+import {RootState} from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
-import {environment} from "../../../../environments/environment";
-import { ThreeDots } from 'react-loading-icons';
-import {useNavigate} from "react-router";
-import Coco777betVIPGradePage from "./Coco777betVIPGradePage";
-import Pernambucana777BetVIPGradePage from "./Pernambucana777BetVIPGradePage";
+
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import PVIPGradePage from "./env/pernambucana/VIPGradePage";
+import WVIPGradePage from "./env/wild/VIPGradePage";
+import CVIPGradePage from "./env/coco/VIPGradePage";
 
 const LevelButton = styled.button.attrs<{
   className?: string;
@@ -42,18 +39,6 @@ export const OtherLevelButton = styled(LevelButton)`
   &:hover {
     //background-image: url(data:image/png;base64,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);
   }
-`;
-
-
-export const VIPBorderStyleContainer = styled.div`
-  padding: 32px 54px;
-  background: var(--medium);
-  border-radius: 10px;
-  //border: 1px solid rgba(255,255,255,.8);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
 `;
 
 
@@ -185,9 +170,18 @@ export const VIPGradePage = () => {
     0
   );
 
-  if (environment.assetPrefix === 'coco777bet') {
-    return (
-      <Coco777betVIPGradePage
+  return renderByPlatform({
+    "wild777bet": (
+      <WVIPGradePage
+        isMobile={isMobile}
+        userVIPInfo={userVIPInfo}
+        currentLevel={currentLevel}
+        allLevelInfo={allLevelInfo}
+        allSignInConfig={allSignInConfig}
+      />
+    ),
+    "coco777bet": (
+      <CVIPGradePage
         isMobile={isMobile}
         userVIPInfo={userVIPInfo}
         currentLevel={currentLevel}
@@ -195,10 +189,8 @@ export const VIPGradePage = () => {
         allSignInConfig={allSignInConfig}
       />
     )
-  }
-
-  return (
-    <Pernambucana777BetVIPGradePage
+  }, (
+    <PVIPGradePage
       isMobile={isMobile}
       currentLevel={currentLevel}
       currentSelectedLevel={currentSelectedLevel}
@@ -209,7 +201,7 @@ export const VIPGradePage = () => {
       allSignInConfig={allSignInConfig}
       currentLevelInfo={currentLevelInfo}
     />
-  )
+  ))
 
 }
 

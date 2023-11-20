@@ -1,12 +1,5 @@
-import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {LeftOutlined} from "@ant-design/icons";
-import {DepositPanel} from "./DepositPanel";
-import {WithdrawPanel} from "./WithdrawPanel";
-import {RecordPanel} from "./RecordPanel";
+
 import {useGetRechargeMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {useSelector} from "react-redux";
@@ -18,28 +11,26 @@ import {
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
-import {tcx} from "../../utils/tcx";
-import {TotalSectionContainer} from "./TotalSectionContainer";
-import { environment } from "apps/gambling/src/environments/environment";
-import { CocoWalletPage } from "./env/CocoWalletPage";
-import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
 
+import { usePageNavigate } from "../../hooks/usePageNavigate";
+import {renderByPlatform} from "../../utils/renderByPlatform";
+
+import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"
+import { WalletPage as WWallletPage } from "./env/wild/WalletPage";
+import { WalletPage as CWallletPage } from "./env/coco/WalletPage";
+
+export type IPanelType = "deposit" | "withdraw" | "record";
+export type IRecordPanelType = 'deposit' | 'withdraw';
 
 export const WallletPage = () => {
 
   useAllowLoginRouterRules();
 
-  const { updateBalance } = useAutoUpdateBalance();
   const {onClickToIndex} = usePageNavigate();
 
 
-  const [panelMode, setPanelMode] = useState<"deposit" | "withdraw" | "record">("deposit");
+  const [panelMode, setPanelMode] = useState<IPanelType>("deposit");
 
-
-  const navigate = useNavigate();
-  const { isMobile } = useBreakpoint();
 
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
   useEffect(() => {
@@ -52,79 +43,24 @@ export const WallletPage = () => {
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
   const totalReasableValue = useSelector(totalReasableSelector);
 
-
   const accountPromotedSwingValue = useSelector(accountPromotedSwingSelector);
   const accountPromotedWithdrawableValue = useSelector(accountPromotedWithdrawableSelector);
 
-  const [recordPanelMode, setRecordPanelMode] = useState<
-    'deposit' | 'withdraw'
-  >('deposit');
+  const [recordPanelMode, setRecordPanelMode] = useState<IRecordPanelType>('deposit');
 
-  if (environment.assetPrefix === 'coco777bet') {
-    return <CocoWalletPage />
-  }
 
-  return (
-    <>
-      {isMobile && (
-        <div className={"pt-4 px-4 pb-4 bg-main sticky top-0 left-0 right-0 z-20 flex flex-col justify-start items-start"}>
+  return renderByPlatform({
+    "wild777bet": (
+      <WWallletPage />
+    ),
+    "coco777bet": (
+      <CWallletPage />
+    ),
+  }, (
+    <PWalletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
+  ))
 
-          <BackNavigation onClick={onClickToIndex}/>
 
-          <div className={"w-full"}>
-            <Tabs className={"game-type-tab-list w-full"}>
-              <TabItem pureColor={true} className="flex-1 mr-2" size="small" name={"Depósito"} active={panelMode === "deposit"} onClick={() => {
-                setPanelMode("deposit")
-              }} />
-              <TabItem pureColor={true} className="flex-1 mr-2" size="small"  name={"Retirar"} active={panelMode === "withdraw"} onClick={() => {
-                setPanelMode("withdraw")
-              }} />
-              <TabItem pureColor={true} className="flex-1 mr-2" size="small"  name={"Registro"} active={panelMode === "record"} onClick={() => {
-                setPanelMode("record")
-              }} />
-            </Tabs>
-          </div>
-        </div>
-      )}
-
-      <div className={"p-4 md:p-8"}>
-        <TotalSectionContainer/>
-        {!isMobile && (
-          <section id={"tab-item"}>
-            <Tabs className={"game-type-tab-list"}>
-              <TabItem pureColor={true} className="mr-3" name={"Depósito"} active={panelMode === "deposit"} size={"big"} onClick={() => {
-                setPanelMode("deposit")
-              }}
-              />
-              <TabItem pureColor={true} className="mr-3" name={"Retirar"} active={panelMode === "withdraw"} size={"big"} onClick={() => {
-                setPanelMode("withdraw")
-              }} />
-              <TabItem pureColor={true} className="mr-3" name={"Registro"} active={panelMode === "record"} size={"big"} onClick={() => {
-                setPanelMode("record")
-              }} />
-            </Tabs>
-          </section>
-        )}
-        <div className={tcx("",
-          [`p-8 border border-solid border-main-primary-main lg:p-14 mt-10 bg-[var(--game-block)] rounded-2xl `, !isMobile]
-        )}>
-
-          {panelMode === "deposit" ? (
-            <DepositPanel data={rechargeData?.data} />
-          ) : panelMode === "withdraw" ? (
-            <WithdrawPanel onClickToWithdrawRecord={() => {
-              setPanelMode("record");
-              setRecordPanelMode("withdraw");
-            }} />
-          ) : (
-            <RecordPanel recordPanelMode={recordPanelMode} />
-          )}
-        </div>
-
-      </div>
-
-    </>
-  )
 }
 
 

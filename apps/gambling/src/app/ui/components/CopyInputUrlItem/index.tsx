@@ -24,12 +24,12 @@ export const CopyInputUrlItem = (props: ICopyInputUrlItem) => {
     <div className={cx(`
       w-full flex rounded-3xl text-white
       justify-between bg-gradient-to-b from-[#7e2e83] from-0% to-[#310081] to-100% 
-      shadow-md bg-white bg-opacity-10 inset-x-0 bottom-0`,
+      shadow-md bg-white bg-opacity-10 inset-x-0 bottom-0 `,
       className
     )}>
       {contextHolder}
       <div className={cx("p-4", urlClassName)}>{url}</div>
-      <button onClick={onClickToCopy} className={cx('rounded-3xl bg-gradient-to-l from-[#E61D62] to-[#FF570F] px-4', buttonClassName)}>Cópia</button>
+      <button onClick={onClickToCopy} className={cx('rounded-3xl bg-gradient-to-l from-[#E61D62] to-[#FF570F] px-4 whitespace-nowrap', buttonClassName)}>Cópia</button>
     </div>
   )
 }

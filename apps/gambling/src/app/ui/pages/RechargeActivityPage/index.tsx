@@ -1,5 +1,4 @@
 import {useNavigate} from "react-router";
-import {VIPBorderStyleContainer} from "../VIPGradePage";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import styled from "styled-components";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
@@ -8,6 +7,7 @@ import { ChargeButton } from "../../components/Buttons/ChargeButton";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
+import {VIPBorderStyleContainer} from "../../components/VIPBorderStyleContainer";
 
 const Bonus = styled.div`
   text-shadow: 0px 4px 0px #D60404;

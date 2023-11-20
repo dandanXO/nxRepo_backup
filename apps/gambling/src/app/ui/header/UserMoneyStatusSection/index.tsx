@@ -4,9 +4,7 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {appStore, RootState} from "../../../reduxStore";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
-import {IUserStore} from "../../../gateway/socket";
-import {appSlice, totalBalanceSheetSelector} from "../../../reduxStore/appSlice";
-import {AppLocalStorage} from "../../../persistant/localstorage";
+import {totalBalanceSheetSelector} from "../../../reduxStore/appSlice";
 import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "react-loading-icons";
 import {environment} from "../../../../environments/environment";
@@ -35,12 +33,15 @@ export const UserMoneyStatusSection = (props: IProps) => {
   //   triggerRefreshBalance({});
   // }, [])
 
-  const {updateBalance} = useAutoUpdateBalance();
+  const { update } = useAutoUpdateBalance({
+    autoWindowFocusRefresh: false,
+  });
+
   const isUserMoneyStatusLoading = useSelector((state: RootState) => state.app.isUserMoneyStatusLoading)
   return (
     <PersonalControl className={cx("px-3 flex flex-row justify-between items-center md:scale-[1.6]", props.className)}>
-      <button className={"refrsh"} onClick={() => {
-        updateBalance();
+      <button className={"refresh"} onClick={() => {
+        update();
       }}>
         <img alt={"refresh"} className={"w-[20px] h-[20px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
       </button>

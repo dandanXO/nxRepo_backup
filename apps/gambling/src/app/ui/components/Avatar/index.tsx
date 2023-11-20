@@ -2,6 +2,7 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import cx from "classnames";
 import {environment} from "../../../../environments/environment";
 import React from "react";
+import { IUserInfo } from "../../../persistant/pending/loginMode";
 
 export const Avatar = (props: {
   onClickToPopupUserInfoStatusPopover?: () => void;
@@ -9,7 +10,7 @@ export const Avatar = (props: {
   className?: string;
 }) => {
 
-  const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
+  const userInfo: IUserInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
 
   return (
     // <div className={cx("relative", {
@@ -32,7 +33,7 @@ export const Avatar = (props: {
             "w-[82px] h-[82px]": props.big,
           },props.className)}
           alt="avatar"
-          src={`assets/${environment.assetPrefix}/ic_avatar_select.png`}
+          src={`assets/${environment.assetPrefix}/avatar_${userInfo.avatar || 1}.png`}
         />
         {/*<AvatarBorder/>*/}
       </button>

@@ -1,17 +1,11 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import {useState} from 'react';
+import {AppLocalStorage} from '../../../persistant/localstorage';
+import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
 
-import { AppLocalStorage } from '../../../persistant/localstorage';
-import { PageOrModalPathEnum } from '../../PageOrModalPathEnum';
-import { Input, InputSection } from '../../components/Inputs/Input';
-import { SectionContainer } from '../../components/container/SectionContainer';
-import useBreakpoint from '../../hooks/useBreakpoint';
-import { EditUserInfoModal } from '../../modals/EditUserInfoModal';
-import { useAllowLoginRouterRules } from '../../router/useAllowLoginRouterRules';
-import { environment } from "../../../../environments/environment"
-import {Container} from "../../components/container/Container";
-import {CocoSettingPage} from "./env/coco/CocoSettingPage";
-import {PernambucanaSettingPage} from "./env/pernambucana/PernambucanaSettingPage";
+import {SettingPage as PSettingPage} from "./env/pernambucana/SettingPage";
+import {SettingPage as WSettingPage} from "./env/wild/SettingPage";
+import {SettingPage as CSettingPage} from "./env/coco/SettingPage";
+import {renderByPlatform} from "../../utils/renderByPlatform";
 
 
 export const SettingPage = () => {
@@ -21,7 +15,14 @@ export const SettingPage = () => {
   const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}');
   const { phone, nickname } = userInfo;
 
-  return environment.assetPrefix === "coco777bet" ? (
-    <CocoSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname} />
-  ) : <PernambucanaSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname} />
+  return renderByPlatform({
+    "wild777bet": (
+      <WSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
+    ),
+    "coco777bet": (
+      <CSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
+    )
+  }, (
+    <PSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
+  ))
 };

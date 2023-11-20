@@ -10,9 +10,12 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useSelector} from "react-redux";
 import {useSearchGames} from "../../hooks/useSearchGames";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import {environment} from "../../../../environments/environment"
-import {PernambucanaIndexPage} from "./env/PernambucanaIndexPage";
-import {CocoIndexPage} from "./env/CocoIndexPage";
+
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import {IndexPage as PIndexPage} from "./env/pernambucana/IndexPage";
+import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
+import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
+
 
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number [] },
@@ -38,7 +41,8 @@ export const IndexPage = () => {
   const { isMobile } = useBreakpoint();
   const { allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
   // const [activeTab, setActiveTab] = useState("Todos");
-  const [activeTab, setActiveTab] = useState("Salão");
+  // "Salão"
+  const [activeTab, setActiveTab] = useState("Todos");
   const [viewType, setViewType] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const { searchResults, handleSearchGames } = useSearchGames(searchInput);
@@ -92,10 +96,22 @@ export const IndexPage = () => {
     gameList();
   }, [activeTab])
 
-
-  if(environment.assetPrefix === "coco777bet") {
-    return (
-      <CocoIndexPage
+  return renderByPlatform({
+    "wild777bet": (
+      <WIndexPage
+        allGameList={allGameList}
+        totalFavoriteLocalState={totalFavoriteLocalState}
+        setTotalFavoriteLocalState={setTotalFavoriteLocalState}
+        label={label}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        setViewType={setViewType}
+        setSearchInput={setSearchInput}
+        gameList={gameList}
+      />
+    ),
+    "coco777bet": (
+      <CIndexPage
         allGameList={allGameList}
         totalFavoriteLocalState={totalFavoriteLocalState}
         setTotalFavoriteLocalState={setTotalFavoriteLocalState}
@@ -107,19 +123,20 @@ export const IndexPage = () => {
         gameList={gameList}
       />
     )
-  }
+  }, (
+    (
+      <PIndexPage
+        allGameList={allGameList}
+        totalFavoriteLocalState={totalFavoriteLocalState}
+        setTotalFavoriteLocalState={setTotalFavoriteLocalState}
+        label={label}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        setViewType={setViewType}
+        setSearchInput={setSearchInput}
+        gameList={gameList}
+      />
+    )
+  ))
 
-  return (
-    <PernambucanaIndexPage
-      allGameList={allGameList}
-      totalFavoriteLocalState={totalFavoriteLocalState}
-      setTotalFavoriteLocalState={setTotalFavoriteLocalState}
-      label={label}
-      activeTab={activeTab}
-      setActiveTab={setActiveTab}
-      setViewType={setViewType}
-      setSearchInput={setSearchInput}
-      gameList={gameList}
-    />
-  )
 }

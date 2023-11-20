@@ -240,7 +240,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
          value={phoneInput.data}
          validation={phoneInput.isValidation}
          errorMessage={phoneInput.errorMessage}
-         onChange={(event) => {
+         onChange={(event: any) => {
             onValidatePhoneInput(event.target.value, setPhoneInput)
          }}
       />
@@ -269,7 +269,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           value={captchaInput.data}
           validation={captchaInput.isValidation}
           errorMessage={captchaInput.errorMessage}
-          onChange={(event) => {
+          onChange={(event: any) => {
             onValidateCaptchaInput(event.target.value, setCaptchaInput);
           }}
         />
@@ -295,7 +295,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         value={passwordInput.data}
         validation={passwordInput.isValidation}
         errorMessage={passwordInput.errorMessage}
-        onChange={(event) => {
+        onChange={(event: any) => {
           if(onValidatePasswordInput(event.target.value, setPasswordInput)) {
             setPasswordInput({
               data: event.target.value,

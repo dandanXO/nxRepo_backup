@@ -171,7 +171,9 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
 
   const [api, contextHolder] = notification.useNotification();
 
-  const { updateBalance } = useAutoUpdateBalance();
+  const { update } = useAutoUpdateBalance({
+    autoWindowFocusRefresh: false,
+  });
 
 
   const onClickToWithdraw = () => {
@@ -208,7 +210,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
       })
     }).unwrap().then(data => {
       if (data?.code === 200) {
-        updateBalance();
+        update();
         api.info({
           message: data?.msg,
           onClick: () => {

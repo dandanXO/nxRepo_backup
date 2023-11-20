@@ -1,4 +1,6 @@
 import {environment} from "../../../../../environments/environment";
+import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 
 interface IDailyType {
   type: string;
@@ -18,7 +20,16 @@ export const DesktopDailyType = (props: IDailyType) => {
             {props.type === "1" && <th>Primeira Recarga Recompensas</th>}
             {props.isProxy && <th>Dividendos</th>}
             <th className='p-4'>Valor Da Transação Do Jogo</th>
-            <th className='p-4'>Recompensas De Troca De Jogos </th>
+            <th className='p-4'>
+              Recompensas De Troca De Jogos
+              <span className='ml-2'>
+              <IconTooltip
+                id='game-bonus-tooltip'
+                icon={<QuestionCircleOutlined style={{ color: '#FF8A00'}} className='text-base' />}
+                content='As recompensas são liquidadas toda segunda-feira'
+              />
+            </span>
+            </th>
             <th className='p-4'>Recompensa Total </th>
           </tr>
         </thead>

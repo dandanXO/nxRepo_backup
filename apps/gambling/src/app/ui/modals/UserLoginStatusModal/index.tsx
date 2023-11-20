@@ -1,14 +1,17 @@
 import {CloseCircleOutlined} from "@ant-design/icons";
 import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
-import {environment} from "../../../../environments/environment";
-import {PernambucanaContainer} from "./env/PernambucanaContainer";
-import {CocoContainer} from "./env/CocoContainer";
 import useBreakpoint from "../../hooks/useBreakpoint";
+import {renderByPlatform} from "../../utils/renderByPlatform";
 
+import {Container as PContainer} from "./env/pernambucana/Container";
+import {Container as WContainer} from "./env/wild/Container";
+import {Container as CContainer} from "./env/coco/Container";
 
-const Container = environment.assetPrefix === "coco777bet" ? CocoContainer : PernambucanaContainer;
-
+const Container = renderByPlatform({
+  "wild777bet": WContainer,
+  "coco777bet": CContainer,
+}, PContainer)
 
 export type IUserLoginStatusModal = {
   setIsLogin: (login: boolean) => void;
@@ -16,6 +19,7 @@ export type IUserLoginStatusModal = {
   showCloseButton?: boolean;
   openNotificationWithIcon: (props: IOpenNotificationWithIcon) => void;
 }
+
 export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
   const isShowCloseButton = props.showCloseButton == undefined ? true : props.showCloseButton;
   const {isMobile} = useBreakpoint();
@@ -28,7 +32,7 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
       }}
     >
 
-      <Container className={"p-4 rounded-2xl max-w-[320px]"} onClick={(event) => {
+      <Container className={"p-4 rounded-2xl max-w-[320px]"} onClick={(event: any) => {
         event.stopPropagation();
       }}>
         <UserLoginStatusSection

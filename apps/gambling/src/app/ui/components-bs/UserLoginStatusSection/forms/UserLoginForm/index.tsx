@@ -48,9 +48,9 @@ export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
 
 
 export const onValidatePasswordInput = (data: string, setPasswordInput: any) => {
-  
+
   const passwordRex = /^[a-zA-Z0-9]+$/;
-  const valid = passwordRex.test(data) && !data.includes(' ') && data.length >= 4 && data.length <= 12;  
+  const valid = passwordRex.test(data) && !data.includes(' ') && data.length >= 4 && data.length <= 12;
   if(valid) {
     setPasswordInput({
       data,
@@ -198,7 +198,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             value={phoneInput.data}
             validation={phoneInput.isValidation}
             errorMessage={phoneInput.errorMessage}
-            onChange={(event) => onValidatePhoneInput(event.target.value, setPhoneInput)}
+            onChange={(event: any) => onValidatePhoneInput(event.target.value, setPhoneInput)}
         />
 
         <Input
@@ -209,7 +209,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             value={passwordInput.data}
             validation={passwordInput.isValidation}
             errorMessage={passwordInput.errorMessage}
-            onChange={(event) => {
+            onChange={(event: any) => {
               onValidatePasswordInput(event.target.value, setPasswordInput)
             }}
             suffix={(

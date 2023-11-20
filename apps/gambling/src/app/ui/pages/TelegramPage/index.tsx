@@ -1,6 +1,5 @@
 import {useNavigate} from "react-router";
 import {Bonus} from "../../components/Bonus";
-import {VIPBorderStyleContainer} from "../VIPGradePage";
 
 import styled from "styled-components";
 import { AppLocalStorage } from "../../../persistant/localstorage";
@@ -8,6 +7,7 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../environments/environment";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
+import {VIPBorderStyleContainer} from "../../components/VIPBorderStyleContainer";
 
 const GoToTelegram = styled.div`
   cursor: pointer;

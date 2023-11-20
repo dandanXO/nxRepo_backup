@@ -10,16 +10,20 @@ import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../exte
 import { environment } from "../../../../environments/environment";
 import { ButtonPro, ProButton } from "../../components/Buttons/Button";
 import { tcx } from "../../utils/tcx";
-import { DepositNoticeSection } from "./env/DepositNoticeSection";
-import { DepositButton } from "./env/DepositButton";
-import { DepositInput } from "./env/DepositInput";
+import { DepositNoticeSection } from "./DepositNoticeSection";
+import { DepositButton } from "./DepositButton";
+import { DepositInput } from "./DepositInput";
+
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import {depositButtonProps as PDepositButtonProps} from "./env/pernambucana/depositButtonProps";
+import {depositButtonProps as WDepositButtonProps} from "./env/wild/depositButtonProps";
+import {depositButtonProps as CDepositButtonProps} from "./env/coco/depositButtonProps";
 
 
 const Item = styled.div.attrs((props) => ({
   className: cx(props.className, ""),
 }))`
 `
-
 
 const MobileTagImg = styled.img`
   //background-image: url("assets/${environment.assetPrefix}/giveaway.png");
@@ -123,30 +127,21 @@ export const DepositPanel = (props: IDepositPanel) => {
   }, [props?.data, recharge_options, inputValue])
 
 
-
-  const depositButtonProps = (rechargeValue: number, rate: string) => {
-    if (environment.assetPrefix === 'coco777bet') {
-      return {
-        rechargeValue: `R$ ${rechargeValue}`,
-        rechargeClassName: 'text-base items-baseline',
-        className: `min-h-[50px] ${isMobile ? 'pt-3' : ''} rounded-md shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(187,160,255,0.76)_inset,0_-2px_1px_rgba(39,8,74,0.76)_inset]`,
-        activeRechargeClassName: 'text-[#7a2800]',
-        bgClassName: 'bg-gradient-to-b from-[#5A16B7] to-[#7800FF]',
-        activeBgClassName: 'bg-gradient-to-t from-[#FB7000] to-[#FFC000] shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(255,243,160,0.76)_inset,0_-2px_2px_rgba(122,40,0,0.76)_inset]',
-        rate: `+ R$ ${rate}`,
-        rateClassName: `${!isMobile ? 'text-[#fff600]' : ''}`,
-        activeRateClassName: `${!isMobile ? 'text-[#7a2800]' : ''}`,
-        isRateTag: isMobile,
-        rateTagClassName: 'text-xs pt-0.5 pr-1 text-[#fbd81e] absolute bg-gradient-to-r from-[transparent] via-[#FF3838]  to-[#FF3838] top-0 right-0 rounded-tr-lg',
-      }
-    } else {
-      return {
-        rechargeValue: `${rechargeValue}`,
-        rate: `+ ${rate}`,
-        className: 'italic'
-      }
-    }
-  }
+  const depositButtonProps = (rechargeValue: number, rate: string) => renderByPlatform({
+    "wild777bet": WDepositButtonProps({
+      rechargeValue,
+      isMobile,
+      rate,
+    }),
+    "coco777bet": CDepositButtonProps({
+      rechargeValue,
+      isMobile,
+      rate,
+    }),
+  }, PDepositButtonProps({
+    rechargeValue,
+    rate,
+  }))
 
   return (
     <SectionContainer id={"deposit-section"}>
@@ -172,6 +167,15 @@ export const DepositPanel = (props: IDepositPanel) => {
               />
             )
           })}
+          {
+            // NOTE: 排版用，塞空的的區塊補齊空位
+            Array.from({ length: (recharge_options?.length - 1) % 3 }, (_, index) => {
+              return  <div 
+              key={index}
+              className={cx('basis-[30%] flex-1 mx-1')}
+              ></div>
+            })
+          }
         </div>
 
         {isMobile ? (

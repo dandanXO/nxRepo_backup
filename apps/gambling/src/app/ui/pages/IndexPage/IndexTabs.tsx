@@ -1,6 +1,13 @@
 import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import {ScrollTab} from "../../components/TabItem/ScrollTab";
 import {ImageTab} from "../../components/TabItem/ImageTab";
+import cx from "classnames";
+import todos from "./env/coco/index-tab-todos.png"
+import slots from "./env/coco/index-tab-slots.png"
+import vivo from "./env/coco/index-tab-vivo.png"
+import viver from "./env/coco/index-tab-viver.png"
+import favorite from "./env/coco/index-tab-favorite.png"
+import recent from "./env/coco/index-tab-recent.png"
 
 type IIndexTabs = {
   label: any;
@@ -14,14 +21,29 @@ export const IndexTabs = ({
                             setActiveTab,
                             setViewType,
                           }:IIndexTabs) => {
+  // const icons = {
+  //   "Todos":
+  // }
+  const icons = [
+    todos,
+    slots,
+    vivo,
+    viver,
+    favorite,
+    recent
+  ]
   return (
     <ScrollTab className="mx-4">
       <Tabs className={"game-type-tab-list"}>
         {
           // ["Todos", ...label, 'Favoritos']
-          ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
+          // ["Salão", ...label, 'Favoritos']
+          ["Todos", ...label, 'Favoritos'].map((tab: string, index: number) => {
             return (
               <ImageTab
+                className={cx("flex row justify-center items-center",{
+                  "!bg-gradient-to-b from-[#88E3FF] to-[#0044C7]": activeTab === tab,
+                })}
                 // className={cx(`font-bold border-none border-0 rounded `, {
                 //   'bg-[#262fa8] text-white py-0.5': activeTab === tab,
                 //   'text-[#9ea3bb]': activeTab !== tab
@@ -32,7 +54,8 @@ export const IndexTabs = ({
                   setViewType('')
                 }}
               >
-                {tab}
+                <img className="w-[20px] h-[20px] mr-1" src={icons[index] ? icons[index] : icons[0]} />
+                <span>{tab}</span>
               </ImageTab>
             )
             return (

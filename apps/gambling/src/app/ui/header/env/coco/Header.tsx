@@ -11,11 +11,12 @@ import { MessageCountBadge } from "../../../components/MessageCountBadge";
 import { environment } from "../../../../../environments/environment";
 import { Avatar } from "../../../components/Avatar";
 import { AvatarAccountInfo } from "../../../components/AvatarAccountInfo";
-import { LoginButton } from "./LoginButton";
+import { LoginButton } from "../../../components/Buttons/LoginButton";
 import { HeaderMenu } from "./HeaderMenu";
 import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
 import { IUserInfo } from "../../../../persistant/pending/loginMode";
 import { AppLocalStorage } from "../../../../persistant/localstorage";
+import { usePageNavigate } from "../../../hooks/usePageNavigate";
 
 
 const Notification = styled.section`
@@ -52,6 +53,7 @@ export type IHeader = {
   openLogoutPopover: boolean;
   openDesktopUserInfoStatusDrawer: boolean;
   onClickToChangeLogoutPopover: (display: boolean) => void;
+  onClickToDownload: () => void;
 }
 
 const HeaderButton = styled.button.attrs((props) => ({
@@ -60,13 +62,13 @@ const HeaderButton = styled.button.attrs((props) => ({
   className?: string;
 }>`
   width: 100%;
-  background-color: #040404;
-  color: #cdbbff;
+  background-color: var(--primary-varient);
+  color: var(--white);
   transform: skew(-8deg);
   font-size: 16px;
   &:hover {
-   color:white;
-   border-bottom: 3px solid #9dd9ff;
+   color: var(--secondary-main-from);
+   border-bottom: 3px solid var(--secondary-main-from);
   }
 `
 
@@ -84,11 +86,13 @@ export const Header = (props: IHeader) => {
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
   const [hover, setHover] = useState(false);
+  const {onClickToIndex,onClickToInvite,onClickToVipGrade} = usePageNavigate();
+
 
   return (
     <header
       className={cx("max-h-[66px]",
-        "flex flex-row justify-between items-center relative",
+        "flex flex-row justify-start items-center relative bg-[var(--primary-variant)] ",
         // "bg-purple-500"
       )}
     // style={{
@@ -100,9 +104,17 @@ export const Header = (props: IHeader) => {
     // }}
     >
       {
-        isLogin && (hover && <HeaderMenu />)
+        hover && (
+          <div
+            onMouseOver={() => { setHover(true) }}
+            onMouseOut={() => { setHover(false) }}
+          >
+            <HeaderMenu />
+          </div>
+        )
       }
-      <div className={"flex flex-row basis-[58%] min-w-[680px] max-h-[67px] -mb-[1px]"}
+
+      <div className={"flex  flex-row min-w-[680px] max-h-[67px] -mb-[1px]"}
         onMouseOver={() => {
           setHover(true);
         }}
@@ -110,31 +122,40 @@ export const Header = (props: IHeader) => {
           setHover(false)
         }}
       >
-        <div className={"min-w-[100px] max-w-[130px] p-4 bg-[#5939f7] -mr-1"}>
-          <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
+        <div
+          className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)]"}
+          onClick={() => onClickToIndex()}
+        >
+          <img className="max-w-[56px] max-h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
         </div>
         <HeaderButton>
-          <HeaderButtonText>Jogos</HeaderButtonText>
+          <HeaderButtonText onClick={onClickToIndex}>Jogos</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
           <HeaderButtonText>Atividade</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
-          <HeaderButtonText>Convidar</HeaderButtonText>
+          <HeaderButtonText onClick={onClickToInvite}>Convidar</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
-          <HeaderButtonText>VIP</HeaderButtonText>
+          <HeaderButtonText onClick={onClickToVipGrade}>VIP</HeaderButtonText>
         </HeaderButton>
         <HeaderButton>
-          <HeaderButtonText>Download</HeaderButtonText>
+          <HeaderButtonText onClick={props.onClickToDownload}>Download</HeaderButtonText>
         </HeaderButton>
       </div>
 
       {!isLogin && (
-        <LoginButton className={"text-white text-lg"} onClick={() => {
-          props.onClickUserLoginStatusDrawer()
-        }}>Connecte-se</LoginButton>
+        <div className="flex-1 flex justify-end">
+          <LoginButton
+            className={"text-white text-lg"}
+            onClick={() => {
+              props.onClickUserLoginStatusDrawer()
+            }}
+          >Connecte-se</LoginButton>
+        </div>
       )}
+
 
       {/*[How to Align Last Flex Item to Right](https://medium.com/@iamryanyu/how-to-align-last-flex-item-to-right-73512e4e5912)*/}
       {isLogin && (

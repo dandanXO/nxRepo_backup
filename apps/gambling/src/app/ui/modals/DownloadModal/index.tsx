@@ -49,11 +49,11 @@ export const DownloadModal = (props: IInitialChargeModal) => {
   const downloadUrl=AppLocalStorage.getItem('downloadUrl')
 
   return (
-    <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event) => {
+    <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event: any) => {
       props.close();
     }}>
 
-      <Container className={"text-white px-10 py-10 w-[400px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl text-white flex flex-col items-center relative"} onClick={(event) => {
+      <Container className={"text-white px-10 py-10 w-[400px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl text-white flex flex-col items-center relative"} onClick={(event: any) => {
         event.stopPropagation();
       }}>
 
