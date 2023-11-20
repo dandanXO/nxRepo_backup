@@ -3,6 +3,7 @@ export const environment = {
   assetPrefix: "pernambucana777bet",
   mockBackend: false,
   platformName: "Dev pernambucana777bet",
+  platformGroup: "Group",
   baseUrl: "",
   appPackageName: "com.pernambucana777bet.big",
   captcha: "/japi/user/captcha/image",
