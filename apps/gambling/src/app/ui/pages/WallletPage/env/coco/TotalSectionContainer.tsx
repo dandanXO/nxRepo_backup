@@ -16,7 +16,7 @@ import { IconTooltip } from "../../../../components/Tooltips/IconTooltip";
 
 const StyledTotalSectionContainer = styled.div`
   border-radius: 16px;
-  border: 1px solid var(--stroke-dashboard-main-from, --stroke-dashboard-main-via,--stroke-dashboard-main-to);
+  border: 1px solid var(--stroke-dashboard-main);
   background: var(--background-dashboard-main, linear-gradient(180deg, var(--background-dashboard-main-from) 0%, var(--background-dashboard-main-via) 85.42%, var(--background-dashboard-main-to) 100%));
   box-shadow: 4px 4px 4px 0px #ffffff40 inset, -4px -4px 4px 0px #ffffff40 inset;
 

@@ -50,12 +50,13 @@
   --background-modal-telegram-from: #0E3E9B;
   --background-modal-telegram-to: #6272FF;
 
-  --stroke-textfields: #24468B;
+  --stroke-textfields: #AAC6FF;
   --stroke-block: #ABDCFF;
-  --stroke-dashboard-main-from: #4CB0FF;
-  --stroke-dashboard-main-via: #FFFFFF;
-  --stroke-dashboard-main-to: #4CB0FF;
+  --stroke-dashboard-main:#00FFEF;
   --stroke-dashboard-secondary: #393FC4;
+  /* stroke/modal Solid, 70%, Normal #40F4FF -> rgba to hex : #40f4ffb3*/
+  --stroke-modal: #40f4ffb3; 
+
 
 
   --button-login-1-from: #FFC121;
