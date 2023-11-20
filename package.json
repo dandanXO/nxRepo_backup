@@ -135,6 +135,8 @@
     "react-tooltip": "^5.23.0",
     "redux-saga": "^1.2.3",
     "regenerator-runtime": "0.13.7",
+    "rmc-date-picker": "^6.0.10",
+    "rmc-picker": "^5.0.10",
     "rxjs": "^7.8.1",
     "sass-loader": "^13.3.2",
     "styled-components": "5.3.6",
