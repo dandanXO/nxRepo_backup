@@ -35,12 +35,12 @@ const Notification = styled.section`
   }
 `
 
-const DirectionIcon  = styled.img<{
+const DirectionIcon = styled.img<{
   active?: boolean
 }>`
   height: 8px;
   width: 12px;
-  transform: rotate(${props => props.active ? 180: 0}deg);
+  transform: rotate(${props => props.active ? 180 : 0}deg);
 `
 
 
@@ -67,8 +67,8 @@ const HeaderButton = styled.button.attrs((props) => ({
   transform: skew(-8deg);
   font-size: 16px;
   &:hover {
-   color: var(--secondary-main-from);
-   border-bottom: 3px solid var(--secondary-main-from);
+   color:var(--secondary-main-to);
+   border-bottom: 3px solid var(--secondary-main-to);
   }
 `
 
@@ -86,7 +86,7 @@ export const Header = (props: IHeader) => {
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
   const [hover, setHover] = useState(false);
-  const {onClickToIndex,onClickToInvite,onClickToVipGrade} = usePageNavigate();
+  const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
 
 
   return (
@@ -117,12 +117,12 @@ export const Header = (props: IHeader) => {
         }
 
         <div className={"flex  flex-row min-w-[680px] max-h-[67px] -mb-[1px]"}
-             onMouseOver={() => {
-               setHover(true);
-             }}
-             onMouseOut={() => {
-               setHover(false)
-             }}
+          onMouseOver={() => {
+            setHover(true);
+          }}
+          onMouseOut={() => {
+            setHover(false)
+          }}
         >
           <div
             className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)] cursor-pointer"}
@@ -171,7 +171,7 @@ export const Header = (props: IHeader) => {
 
           <section
             className='flex gap-2 items-center'
-            onClick={()=>props.onClickToPopupUserInfoStatusPopover()}
+            onClick={() => props.onClickToPopupUserInfoStatusPopover()}
           >
             <CocoAvatar />
             <div>
