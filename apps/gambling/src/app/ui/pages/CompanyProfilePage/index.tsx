@@ -5,7 +5,7 @@ export const CompanyProfilePage = () => {
     <>
       <div className="companyInfo text-white text-left px-8">
         <div className="title">
-          <span className={"text-4xl"}>SKY Group</span>
+          <span className={"text-4xl"}>TT Group</span>
           <span className={"text-4xl"}>—Fundada em Cingapura em 1993</span>
         </div>
 
