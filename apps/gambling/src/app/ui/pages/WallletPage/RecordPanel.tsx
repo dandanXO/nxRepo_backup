@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import {
-  useRechargeHistoryListMutation,
-  useWithdrawHistoryListMutation,
-} from '../../../external';
-import { AppLocalStorage } from '../../../persistant/localstorage';
 import { SectionContainer } from '../../components/container/SectionContainer'
 import useBreakpoint from '../../hooks/useBreakpoint';
-import { BlueBoard } from './BlueBoard';
 import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';
 import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';
-import {TotalSectionContainer} from "./TotalSectionContainer";
 import cx from "classnames";
 import {RecordButton} from "../../components/Buttons/RecordButton";
 
@@ -31,31 +24,7 @@ export const RecordPanel = (props: IRecordPanel) => {
     }
   }, [props.recordPanelMode])
 
-  // 充值紀錄
-  const [triggerGetDepositRecord, { data: depositRecordData }] =
-    useRechargeHistoryListMutation({});
-  // 提現紀錄
-  const [triggerGetWithdrawRecord, { data: withdrawRecordData }] =
-    useWithdrawHistoryListMutation({});
-
   const { isMobile } = useBreakpoint();
-
-  useEffect(() => {
-    const token = AppLocalStorage.getItem('token') || '';
-    if(recordPanelMode === 'deposit') {
-      // triggerGetDepositRecord({
-      //   limit: 1000,
-      //   page: 1,
-      //   token,
-      // });
-    } else {
-      // triggerGetWithdrawRecord({
-      //   limit: 1000,
-      //   page: 1,
-      //   token,
-      // });
-    }
-  }, [recordPanelMode]);
 
   return (
     <SectionContainer id={'record-section'}>
@@ -87,10 +56,10 @@ export const RecordPanel = (props: IRecordPanel) => {
       </section>
 
       {isMobile && recordPanelMode === 'deposit' && (
-        depositRecordData && <DepositMobileTable records={depositRecordData?.data || []} />
+        <DepositMobileTable />
       )}
       {isMobile && recordPanelMode === 'withdraw' && (
-        withdrawRecordData && <WithdrawMobileTable records={withdrawRecordData?.data || []} />
+        <WithdrawMobileTable  />
       )}
 
       {/*<section className={"table"}>*/}
