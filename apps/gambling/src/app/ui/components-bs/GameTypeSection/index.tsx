@@ -97,7 +97,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const [animating, setAnimating] = useState(true)
   useEffect(() => {
     setAnimating(true)
-  }, [props.gameTypeName])
+  }, [props.gameTypeName,props.isViewAll])
 
   useEffect(() => {
     if (animating) {
@@ -116,7 +116,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     <section className={"flex flex-col mb-4"}>
 
       {props.gameTypeName ==='null' ? <div></div> : isMobile ? (
-        <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClick} {...mobileGameTypeHeaderProps}/>
+        <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClick} isViewAll={props.isViewAll} setViewType={props.setViewType} {...mobileGameTypeHeaderProps}/>
       ): (
         <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.data?.length} onClick={props.onClick} isViewAll={props.isViewAll} setViewType={props.setViewType}/>
       )}
@@ -143,8 +143,8 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
         })}
       </MainGameList>
 
-      {props.data && listSize < props.data?.length &&
-        <div className="flex-1 mt-2">
+      {(props.data && listSize < props.data?.length) && props.isViewAll &&
+        <div className="flex-1 mt-10 justify-center flex">
           <button onClick={loadMore}
                   className="text-main-primary-varient bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] py-1.5 px-6 rounded-2xl font-bold">
             Ver mais
