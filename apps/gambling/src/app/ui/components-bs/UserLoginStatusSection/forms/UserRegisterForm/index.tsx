@@ -1,30 +1,30 @@
-import {PhoneSvg} from "../PhoneSvg";
-import {KeySvg} from "../KeySvg";
-import {ConfirmButton} from "../../../components/Buttons/ConfirmButton";
+import {PhoneSvg} from "../../PhoneSvg";
+import {KeySvg} from "../../KeySvg";
+import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
-import useBreakpoint from "../../../hooks/useBreakpoint";
-import {Input as DesktopInput, Input, InputValue} from "../../../components/Inputs/Input";
-import {MobileInput} from "../../../components/Inputs/MobileInput";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
+// import {MobileInput} from "../../../../components/Inputs/MobileInput";
 
 import {useState} from "react";
-import {useForm} from "../../../hooks/useForm";
-import {useRegisterMutation} from "../../../../external";
-import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
-import {promiseHandler} from "../../../../gateway/promiseHanlder";
-import {IOpenNotificationWithIcon} from "../../../pageTemplate";
-import {PostRegisterRequest} from "../../../../external/RegisterEndpoint";
+import {useForm} from "../../../../hooks/useForm";
+import {useRegisterMutation} from "../../../../../external";
+import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
+import {promiseHandler} from "../../../../../gateway/promiseHanlder";
+import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
+import {PostRegisterRequest} from "../../../../../external/RegisterEndpoint";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";
 import {validate} from "class-validator";
-import {onValidatePhoneInput, onValidatePasswordInput} from "./UserLoginForm"
-import {environment} from "../../../../../environments/environment"
-import {SecuritySvg} from "../SecuritySvg";
-import {connect} from "../../../../gateway/socket";
-import {appSlice} from "../../../../reduxStore/appSlice";
+import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"
+import {environment} from "../../../../../../environments/environment"
+import {SecuritySvg} from "../../SecuritySvg";
+import {connect} from "../../../../../gateway/socket";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 import { useDispatch } from "react-redux";
-import {AppLocalStorage} from "../../../../persistant/localstorage";
+import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
-import {usePageNavigate} from "../../../hooks/usePageNavigate";
-import {Captcha} from "./Captcha";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {Captcha} from "../Captcha";
 
 const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
@@ -68,10 +68,8 @@ export type IUserRegisterForm = {
 
 export const UserRegisterForm = (props: IUserRegisterForm) => {
   const {isMobile} = useBreakpoint();
-  const Input = isMobile ? MobileInput : DesktopInput;
+  // const Input = isMobile ? MobileInput : DesktopInput;
 
-  // NOTO: 2023101601 / test1234
-  // refactor:
   const [phoneInput, setPhoneInput] = useState<InputValue<string>>({
     data: '',
     isValidation: true,
@@ -98,6 +96,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
   const dispatch = useDispatch();
 
   const [triggerRegister, {isLoading, isError, isSuccess}] = useRegisterMutation();
+
   // const onFormInputChange = (inputItems: Partial<PostRegisterRequest>) => {
   //   const loginFormData = new LoginFormData({
   //     appChannel: "",
