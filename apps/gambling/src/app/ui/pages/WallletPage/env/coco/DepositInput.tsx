@@ -1,5 +1,5 @@
 import cx from "classnames";
-import {MobileInput} from "../../../../components/Inputs/MobileInput";
+import { MobileInput } from "../../../../components/Inputs/MobileInput";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 type IDepositInput = {
@@ -24,11 +24,13 @@ export const DepositInput = (props: IDepositInput) => {
         }}
       />
       {props.isShowInputTag &&
-        (<div className={cx(`absolute top-0 right-0`,
-          {
-            'text-base px-2 text-white bg-[#FC8038] rounded-tr-[10px] rounded-bl-[10px] rounded-tl-none rounded-tbrnone': !isMobile,
-            'text-xs pt-0.5 pr-1  text-[#fbd81e] bg-gradient-to-r from-[transparent] via-[#FF3838] to-[#FF3838] rounded-tr-lg': isMobile
-          })
+        (<div className={cx(`
+          absolute top-0 right-0 
+          px-2 py-1
+          text-xs md:text-xl text-[var(--primary-variant)] 
+          bg-[var(--background-add-money)] 
+          rounded-tr-[10px] rounded-bl-[10px] rounded-tl-none rounded-tb-none
+        `)
         }>
           + R$ {props.extraDepositBonus}
         </div>)}

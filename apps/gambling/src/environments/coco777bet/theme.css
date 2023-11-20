@@ -41,6 +41,7 @@
   --background-vip-level-to: #2E22BD;
   --background-alert-text-from: #FEB867;
   --background-alert-text-to: #FF7E21;
+  --background-submenu: #040404bf;
 
   --background-dashboard-main-from: #5754F3;
   --background-dashboard-main-via: #121C78;
@@ -49,12 +50,13 @@
   --background-modal-telegram-from: #0E3E9B;
   --background-modal-telegram-to: #6272FF;
 
-  --stroke-textfields: #24468B;
+  --stroke-textfields: #AAC6FF;
   --stroke-block: #ABDCFF;
-  --stroke-dashboard-main-from: #D680FF;
-  --stroke-dashboard-main-via: #FFFFFF;
-  --stroke-dashboard-main-to: #FFA9F6;
+  --stroke-dashboard-main:#00FFEF;
   --stroke-dashboard-secondary: #393FC4;
+  /* stroke/modal Solid, 70%, Normal #40F4FF -> rgba to hex : #40f4ffb3*/
+  --stroke-modal: #40f4ffb3; 
+
 
 
   --button-login-1-from: #FFC121;
@@ -102,7 +104,7 @@
   --text-seondary: #646464;
   --text-tertiary: #BEBEBE;
   --text-white: #ffffff;
-  --text-deposit: #1C1C1C;
+  --text-deposit: #6A3C12;
 
   --lineary-blue-from: #2492FF;
   --lineary-blue-to: #0043AE;
