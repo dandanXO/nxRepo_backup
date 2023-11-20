@@ -11,7 +11,7 @@ import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { Table } from "../../components/Table";
-import RangeDatePacker from "../../components/DatePickers/RangeDatePacker";
+import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
 
 
 const { RangePicker } = DatePicker;
@@ -124,7 +124,7 @@ export const GameRecordPage = () => {
           <section className={'mb-4 text-left text-white'}>
             {
               isMobile ?
-                (<RangeDatePacker
+                (<RangeDatePicker
                   min='2023-01-01'
                   max={max.format('YYYY-MM-DD')}
                   onConfirm={(values)=> setDates([moment(values[0], 'YYYY-MM-DD'), moment(values[1], 'YYYY-MM-DD')])}

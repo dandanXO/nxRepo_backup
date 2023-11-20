@@ -153,7 +153,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
       setSelectInput({
         data: value,
         isValidation: !isError,
-        errorMessage: !isError ? "" : "Por favor, insira o número de telefone",
+        errorMessage: !isError ? "" : "Número de celular de 10 ou 11 dígitos",
       })
     }
     return isError;
