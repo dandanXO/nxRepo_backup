@@ -10,7 +10,7 @@ const MenuItem = (props: {
   return (
     <button
       onClick={props.onClick}
-      className={cx("mb-5 text-base text-[var(--white)] hover:underline hover:text-[var(--secondary-main-from)] text-center flex justify-center items-center", props.className)}
+      className={cx("mb-5 text-base text-[var(--white)] hover:underline hover:text-[var(--secondary-assistant)] text-center flex justify-center items-center", props.className)}
     >
       {props.menuText}
     </button>
@@ -21,7 +21,7 @@ export const HeaderMenu = () => {
   const { onClickToTelegram, onClickToCheckInDaily, onClickToFirstDeposit, onClickToDepositCashback } = usePageNavigate();
 
   return (
-    <div className="py-6 h-[190px] z-10 w-full fixed top-[66px] left-0 flex items-center bg-[#040404e0]">
+    <div className="py-6 h-[190px] z-10 w-full fixed top-[66px] left-0 flex items-center bg-[var(--background-submenu)]">
       <div className="w-[80px]"></div>
       <div className=" basis-[120px] self-start">
         <MenuItem menuText={'Telegrama'} className="" onClick={onClickToTelegram} />
