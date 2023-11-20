@@ -1,5 +1,4 @@
 import {TabItem, Tabs} from "../../components/TabItem/TabItem";
-import {ScrollTab} from "../../components/TabItem/ScrollTab";
 import {ImageTab} from "../../components/TabItem/ImageTab";
 import cx from "classnames";
 import todos from "./env/coco/index-tab-todos.png"
@@ -14,12 +13,14 @@ type IIndexTabs = {
   activeTab: any;
   setActiveTab: (value: any)  => void;
   setViewType: (value: any)  => void;
+  hideIcon?: boolean;
 }
 export const IndexTabs = ({
                             label,
                             activeTab,
                             setActiveTab,
                             setViewType,
+                            hideIcon
                           }:IIndexTabs) => {
   // const icons = {
   //   "Todos":
@@ -33,7 +34,6 @@ export const IndexTabs = ({
     recent
   ]
   return (
-    <ScrollTab className="mx-4">
       <Tabs className={"game-type-tab-list"}>
         {
           // ["Todos", ...label, 'Favoritos']
@@ -54,24 +54,24 @@ export const IndexTabs = ({
                   setViewType('')
                 }}
               >
-                <img className="w-[20px] h-[20px] mr-1" src={icons[index] ? icons[index] : icons[0]} />
+                {!hideIcon && <img className="w-[20px] h-[20px] mr-1" src={icons[index] ? icons[index] : icons[0]} />}
+
                 <span>{tab}</span>
               </ImageTab>
             )
-            return (
-              <TabItem
-                key={index}
-                name={tab}
-                active={activeTab === tab}
-                size="big"
-                onClick={() => {
-                  setActiveTab(tab)
-                  setViewType('')
-                }}
-              />)
+            // return (
+            //   <TabItem
+            //     key={index}
+            //     name={tab}
+            //     active={activeTab === tab}
+            //     size="big"
+            //     onClick={() => {
+            //       setActiveTab(tab)
+            //       setViewType('')
+            //     }}
+            //   />)
           })
         }
       </Tabs>
-    </ScrollTab>
   )
 }

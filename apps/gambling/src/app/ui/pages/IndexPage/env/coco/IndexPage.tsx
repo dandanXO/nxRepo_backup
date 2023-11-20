@@ -27,6 +27,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {Container} from "../../../../components/container/Container";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
+import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 
 
 export type TTotalFavoriteLocalState = {
@@ -117,27 +118,7 @@ export const IndexPage = ({
             <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
               <DragScrollContainer>
                 <section className={"flex flex-row items-center bg-[#000C26] px-0.5"}>
-                  <Tabs className={"game-type-tab-list"}>
-                    <div>
-                      {label !== undefined && ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
-                        return (
-                          <CocoTabItem
-                            key={index}
-                            className={cx(`font-bold border-none border-0 rounded `, {
-                              'bg-[#262fa8] text-white py-0.5': activeTab === tab,
-                              'text-[#9ea3bb]': activeTab !== tab
-                            })}
-                            name={tab}
-                            active={activeTab === tab}
-                            onClick={() => {
-                              setActiveTab(tab);
-                              setViewType('');
-                            }}
-                          />
-                        )
-                      })}
-                    </div>
-                  </Tabs>
+                  <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
                 </section>
               </DragScrollContainer>
             </div>
@@ -148,7 +129,9 @@ export const IndexPage = ({
 
               <section className="mb-4 flex flex-row items-center px-4 w-full">
                 <div className="mr-2 grow">
-                  <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  <ScrollTab className="mx-4">
+                    <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  </ScrollTab>
                 </div>
               </section>
 
