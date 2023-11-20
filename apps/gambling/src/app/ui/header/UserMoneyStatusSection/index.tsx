@@ -49,7 +49,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
       </button>
       {/*main-secondary-main*/}
       <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-bold"}>{
-        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue.toLocaleString('en-US', {maximumFractionDigits:2, minimumFractionDigits: 2})}`
+        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue.toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits: 2})}`
       }</div>
       <button onClick={() => {
         navigate(PageOrModalPathEnum.WalletPage);

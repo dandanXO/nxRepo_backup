@@ -1,16 +1,16 @@
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../../reduxStore";
-import {appSlice} from "../../../../../reduxStore/appSlice";
+import {RootState} from "../../../../../../reduxStore";
+import {appSlice} from "../../../../../../reduxStore/appSlice";
 
-import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
-import {environment} from "../../../../../../environments/environment";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import {PageOrModalPathEnum} from "../../../../../PageOrModalPathEnum";
+import {environment} from "../../../../../../../environments/environment";
+import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import cx from "classnames";
-import {CarouselContainer} from "../CarouselContainer";
+import {CarouselContainer} from "../../CarouselContainer";
 
-export const CocoAppCarouselContent4 = () => {
+export const AppCarouselContent6= () => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,9 +25,11 @@ export const CocoAppCarouselContent4 = () => {
           }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
-            Prêmio upgrade VIP<br/> Só esperando você coletar!
+            <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_4.jpeg`}/>
+          <img
+            src={`assets/${environment.assetPrefix}/h5_banner_6.jpeg`}
+          />
         </div>
       ) : (
         <div
@@ -43,10 +45,10 @@ export const CocoAppCarouselContent4 = () => {
               "italic font-bold text-6xl text-left"
             )}
           >
-            Prêmio upgrade VIP<br/> Só esperando você coletar!
+            <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/banner4.jpeg`}
+            src={`assets/${environment.assetPrefix}/banner6.jpeg`}
             // className="rounded-box"
           />
         </div>

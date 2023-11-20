@@ -8,8 +8,7 @@ import {RootState} from "../../../../reduxStore";
 import {environment} from "../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {RegisterButton, RegisterButton2} from "../../../components/Buttons/RegisterButton";
-import {MessageOutlined} from "@ant-design/icons";
+import {RegisterButton} from "../../../components/Buttons/RegisterButton";
 import { MessageCountBadge } from "../../../components/MessageCountBadge";
 
 export type IHeaderMobile = {
@@ -55,8 +54,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
 
         {!isLogin && (
           <section>
-            {/*<RegisterButton className={"text-[#ffffff] font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>*/}
-            <RegisterButton2 onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton2>
+            <RegisterButton onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>
           </section>
         )}
 

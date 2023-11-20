@@ -8,9 +8,9 @@ import {RootState} from "../../../../reduxStore";
 import {environment} from "../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {RegisterButton, RegisterButton2} from "../../../components/Buttons/RegisterButton";
-import {MessageOutlined} from "@ant-design/icons";
+import { RegisterButton} from "../../../components/Buttons/RegisterButton";
 import { MessageCountBadge } from "../../../components/MessageCountBadge";
+import {AssetMappingCoco} from "../../../../../assets/assetMapping.coco";
 
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;
@@ -29,8 +29,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
       className={cx(
         "w-full h-[52.5px] px-4 z-20",
         "flex flex-row items-center justify-between",
-        // "bg-varient",
-        "bg-[#020E29]",
+        "bg-[var(--primary-variant)]",
         // border-bottom: 1px solid rgba(11,28,64,.77);
         {
           "fixed top-0": isMobile
@@ -46,7 +45,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
             alt={"menu"}
             // className={"w-[22.5px] h-[22.5px]"}
             className={"w-[23px] h-[18px]"}
-            src={`assets/${environment.assetPrefix}/ic_menu.png`}
+            src={AssetMappingCoco.header.menu}
             onClick={() => {
               props.clickToOpenMenuDrawer();
             }}
@@ -55,17 +54,13 @@ export const HeaderMobile = (props: IHeaderMobile) => {
 
         {!isLogin && (
           <section>
-            {/*<RegisterButton className={"text-[#ffffff] font-bold"} onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>*/}
-            <RegisterButton2 onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton2>
+            <RegisterButton onClick={() => props.clickToOpenUserLoginStatusModal()}>Registar Conta</RegisterButton>
           </section>
         )}
 
-        <div className='flex gap-4'>
-          {isLogin && (
+        {isLogin && (
+          <div className='flex gap-4'>
             <UserMoneyStatusSection />
-          )}
-
-          {isLogin && (
             <div
               className='flex items-center'
               onClick={()=>navigate(PageOrModalPathEnum.NotificationPage)}
@@ -77,8 +72,9 @@ export const HeaderMobile = (props: IHeaderMobile) => {
               />
               {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
             </div>
-          )}
-        </div>
+          </div>
+        )}
+
       </div>
 
     </header>

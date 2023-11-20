@@ -1,8 +1,7 @@
 import {
   useGetMailCountMutation,
-  useGetSignInConfigMutation,
-  useGetVIPInfoMutation, useLazyGetBalanceQuery,
-  useLazyGetUserVIPAllInfoQuery
+  useGetVIPInfoMutation,
+  useLazyGetBalanceQuery,
 } from "../../external";
 import {useEffect, useState} from "react";
 import {AppLocalStorage} from "../../persistant/localstorage";
@@ -47,7 +46,10 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
   }
 
   const updateVIPInfo = () => {
-    if(isValidToken() && location.pathname !== PageOrModalPathEnum.VIPGradePage) {
+    if(isValidToken() &&
+      location.pathname !== PageOrModalPathEnum.VIPGradePage &&
+      location.pathname !== PageOrModalPathEnum.MyPage
+    ) {
       triggerGetUserVIPInfo({
         token: AppLocalStorage.getItem("token") || ""
       });

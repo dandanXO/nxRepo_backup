@@ -6,6 +6,7 @@ import cx from "classnames";
 import {appSlice} from "../../reduxStore/appSlice";
 import {useLocation, useNavigate} from "react-router";
 import {usePageNavigate} from "../hooks/usePageNavigate";
+import {AssetMappingCoco} from "../../../assets/assetMapping.coco";
 
 export type IFooter = {
   isShowHome?: boolean;
@@ -29,7 +30,8 @@ export const TabBar = (props: IFooter) => {
   const size = props.size == undefined ? "small" : props.size;
 
   // const iconSize = size === "big" ? "w-[40px] h-[40px]" : "w-[27px] h-[27px]";
-  const iconSize = size === "big" ? "w-[34px] h-[34px]" : "w-[27px] h-[27px]";
+  // const iconSize = size === "big" ? "w-[34px] h-[34px]" : "w-[27px] h-[27px]";
+  const iconSize = "w-[24px] h-[24px]";
 
   const {
     onClickToIndex,
@@ -49,7 +51,7 @@ export const TabBar = (props: IFooter) => {
     >
       {showHome && (
         <section
-          className={cx("flex-1 flex flex-col items-center", {
+          className={cx("flex-1 flex flex-col items-center justify-center", {
             "font-bold": location.pathname === PageOrModalPathEnum.IndexPage ||
               location.pathname === PageOrModalPathEnum.GameSearchPage
           })}
@@ -61,9 +63,9 @@ export const TabBar = (props: IFooter) => {
             location.pathname === PageOrModalPathEnum.IndexPage ||
             location.pathname === PageOrModalPathEnum.GameSearchPage
           ) ? (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_home_h5.png`}/>
+            <img className={cx(iconSize)} src={AssetMappingCoco.tab.home}/>
           ): (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_home_inactive.png`}/>
+            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.home}/>
           )}
           <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
             "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.IndexPage,
@@ -73,7 +75,7 @@ export const TabBar = (props: IFooter) => {
 
       {showSlot && (
         <section
-          className={cx("flex-1 flex flex-col items-center", {
+          className={cx("flex-1 flex flex-col items-center justify-center", {
             "font-bold": location.pathname === PageOrModalPathEnum.IndexSlotPage
           })}
           onClick={() => {
@@ -81,9 +83,9 @@ export const TabBar = (props: IFooter) => {
           }}
         >
           {location.pathname === PageOrModalPathEnum.IndexSlotPage  ? (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_game_h5.png`}/>
+            <img className={iconSize} src={AssetMappingCoco.tab.home}/>
           ): (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_game_inactive.png`}/>
+            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.home}/>
           )}
           <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
             "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.IndexSlotPage,
@@ -93,7 +95,7 @@ export const TabBar = (props: IFooter) => {
 
       {showInvite && (
         <section
-          className={cx("flex-1 flex flex-col items-center", {
+          className={cx("flex-1 flex flex-col items-center justify-center", {
             "font-bold": location.pathname === PageOrModalPathEnum.InvitePage
           })}
           onClick={() => {
@@ -101,9 +103,9 @@ export const TabBar = (props: IFooter) => {
           }}
         >
           {location.pathname === PageOrModalPathEnum.InvitePage  ? (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_invite_friends_h5.png`}/>
+            <img className={iconSize} src={AssetMappingCoco.tab.invite}/>
           ): (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_invite_friends_inactive.png`}/>
+            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.invite}/>
           )}
           <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
             "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.InvitePage,
@@ -113,7 +115,7 @@ export const TabBar = (props: IFooter) => {
 
       {showVIP && (
         <section
-          className={cx("flex-1 flex flex-col items-center", {
+          className={cx("flex-1 flex flex-col items-center justify-center", {
             "font-bold": location.pathname === PageOrModalPathEnum.VIPGradePage
           })}
           onClick={() => {
@@ -121,9 +123,9 @@ export const TabBar = (props: IFooter) => {
           }}
         >
           {location.pathname === PageOrModalPathEnum.VIPGradePage  ? (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_vip_h5.png`}/>
+            <img className={iconSize} src={AssetMappingCoco.tab.vip}/>
           ): (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_vip_inactive.png`}/>
+            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.vip}/>
           )}
           <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
             "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.VIPGradePage,
@@ -134,7 +136,7 @@ export const TabBar = (props: IFooter) => {
 
       {showProfile && (
         <section
-          className={cx("flex-1 flex flex-col items-center", {
+          className={cx("flex-1 flex flex-col items-center justify-center", {
             "font-bold": location.pathname === PageOrModalPathEnum.MyPage
           })}
           onClick={() => {
@@ -142,9 +144,9 @@ export const TabBar = (props: IFooter) => {
            }}
         >
           {location.pathname === PageOrModalPathEnum.MyPage  ? (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_account_h5.png`}/>
+            <img className={iconSize} src={AssetMappingCoco.tab.account}/>
           ): (
-            <img className={iconSize} src={`assets/${environment.assetPrefix}/ic_account_inactive.png`}/>
+            <img className={cx(iconSize, "opacity-50")}src={AssetMappingCoco.tab.account}/>
           )}
           <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
             "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.MyPage,
