@@ -15,7 +15,6 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import {useEffect, useState} from "react";
 import {useGetLetterListMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 
 import {environment} from "../../../../environments/environment";
 import {renderByPlatform} from "../../utils/renderByPlatform";
@@ -205,9 +204,6 @@ const ListItem = styled.button.attrs((props) => ({
 export const MyPage = () => {
   useAllowLoginRouterRules();
   const navigate = useNavigate();
-
-  const {updateBalance} = useAutoUpdateBalance();
-
 
   const {isMobile} = useBreakpoint();
   // console.log("mypage isMobile", isMobile)

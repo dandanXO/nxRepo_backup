@@ -117,7 +117,9 @@ export const PageTemplate = (props: IPage) => {
     dispatch(appSlice.actions.setIsLogin(login))
   }
 
-  const {updateBalance} = useAutoUpdateBalance();
+  const {update} = useAutoUpdateBalance({
+    autoWindowFocusRefresh: false,
+  });
 
   // NOTE: UserInfoStatusDrawer
   const [openDesktopUserInfoStatusDrawer, setOpenDesktopUserInfoStatusDrawer] = useState(false);
@@ -129,7 +131,7 @@ export const PageTemplate = (props: IPage) => {
   }, [isMobile]);
 
   useEffect(() => {
-    if(openDesktopUserInfoStatusDrawer) updateBalance();
+    if(openDesktopUserInfoStatusDrawer) update();
   }, [openDesktopUserInfoStatusDrawer])
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);

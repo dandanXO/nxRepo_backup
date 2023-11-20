@@ -20,7 +20,6 @@ import {WalletDepositNextPage} from "../pages/WalletDepositNextPage";
 import {
   selectConfigResult,
   useGetConfigMutation,
-  useGetUserVIPAllInfoQuery,
   useLazyGetGameListQuery,
   useLoginMutation
 } from "../../external";
@@ -45,6 +44,7 @@ import {setLoginLocalStorage} from "../../persistant/setLoginLocalStorage";
 import {connect} from "../../gateway/socket";
 import {notification} from "antd";
 import TermsOfServicePage from "../pages/TermsOfServicePage";
+import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
 
 
 export const AppRouter = () => {
@@ -164,6 +164,7 @@ export const AppRouter = () => {
       console.error(error);
     })
   }, [])
+
   //const mounted = useRef(false);
   // useEffect(() => {
   //   // NOTE: https://react.dev/learn/synchronizing-with-effects#fetching-data 無效
@@ -241,6 +242,8 @@ export const AppRouter = () => {
       }
     }
   }, [globalMessage]);
+
+  useAutoUpdateBalance();
 
   return (
     <>

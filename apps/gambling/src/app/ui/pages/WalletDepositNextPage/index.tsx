@@ -9,7 +9,6 @@ import copy from 'copy-to-clipboard';
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../environments/environment";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {notification} from "antd";
 import {ButtonPro} from "../../components/Buttons/Button";
 import useBreakpoint from "../../hooks/useBreakpoint";
@@ -77,7 +76,6 @@ const RechargeButton = styled.button`
 `
 export const WalletDepositNextPage = () => {
     useAllowLoginRouterRules();
-    const {updateBalance} = useAutoUpdateBalance();
     const {isMobile} = useBreakpoint();
     const [countdown, setCountdown] = useState(900); // 15分钟的秒数
     const [triggerRecharge, { data, isLoading, isSuccess, isError }] = useRechargeMutation();
@@ -114,7 +112,7 @@ export const WalletDepositNextPage = () => {
             token: AppLocalStorage.getItem("token") || ''
         })
         // .unwrap().then(data => {
-        //   updateBalance();
+
         //   notidicationAPI.info({
         //     message: data?.msg
         //   })

@@ -7,7 +7,7 @@ import {PageOrModalPathEnum} from "../ui/PageOrModalPathEnum";
 // note: data flow
 export const userLogout = () => {
   const isLogin = (appStore.getState() as RootState)?.app?.isLogin;
-  // console.log("userLogout.isLogin:", isLogin);
+  console.log("userLogout.isLogin:", isLogin);
   if(isLogin) {
     clearLoginLocalStorage();
     appStore.dispatch(appSlice.actions.setIsLogin(false));

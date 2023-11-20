@@ -18,23 +18,16 @@ import {
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../../../reduxStore/appSlice";
-import { useAutoUpdateBalance } from "../../../../hooks/useAutoUpdateBalance";
-import { tcx } from "../../../../utils/tcx";
 import { TotalSectionContainer } from "../../TotalSectionContainer";
 import { CommonTableTabG } from "../../../../components/TabItem/CommonTableTabG";
 import cx from "classnames";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
-import {Container} from "../../../../components/container/Container";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-
 
 export const WalletPage = () => {
 
   useAllowLoginRouterRules();
   const {onClickToIndex} = usePageNavigate();
-
-  const { updateBalance } = useAutoUpdateBalance();
-
 
   const [panelMode, setPanelMode] = useState<"deposit" | "withdraw" | "record">("deposit");
 

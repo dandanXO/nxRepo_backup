@@ -830,7 +830,6 @@ export const {
   useWithdrawHistoryListMutation,
   useGetSignInConfigMutation,
   useGetSignInRecordMutation,
-  useGetUserVIPAllInfoQuery,
   useLazyGetUserVIPAllInfoQuery,
   useGetVIPInfoMutation,
   useLazyDownloadQuery,

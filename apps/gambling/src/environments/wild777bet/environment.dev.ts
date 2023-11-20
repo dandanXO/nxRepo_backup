@@ -3,6 +3,7 @@ export const environment = {
   assetPrefix: "wild777bet",
   mockBackend: false,
   platformName: "Dev Wild777bet",
+  platformGroup: "Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",
   captcha: "/japi/user/captcha/image",
