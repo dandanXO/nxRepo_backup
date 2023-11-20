@@ -11,7 +11,7 @@ export const depositButtonProps = ({
   return {
     rechargeValue: `R$ ${rechargeValue}`,
     rechargeClassName: 'text-base items-baseline',
-    className: `min-h-[50px] ${isMobile ? 'pt-3' : ''} rounded-md shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(187,160,255,0.76)_inset,0_-2px_1px_rgba(39,8,74,0.76)_inset]`,
+    className: `min-h-[50px] ${isMobile ? 'pt-3' : ''} justify-around items-center rounded-md shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(187,160,255,0.76)_inset,0_-2px_1px_rgba(39,8,74,0.76)_inset]`,
     activeRechargeClassName: 'text-[#7a2800]',
     bgClassName: 'bg-gradient-to-b from-[#5A16B7] to-[#7800FF]',
     activeBgClassName: 'bg-gradient-to-t from-[#FB7000] to-[#FFC000] shadow-[0_0px_2px_#000c27,0_1px_2px_rgba(255,243,160,0.76)_inset,0_-2px_2px_rgba(122,40,0,0.76)_inset]',

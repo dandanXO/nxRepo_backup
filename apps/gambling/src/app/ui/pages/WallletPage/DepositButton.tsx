@@ -38,7 +38,7 @@ export const DepositButton = (props: IDepositButton) => {
   return (
     <button
       className={cx(`flex font-bold lg:flex-row flex-col mb-2 mx-1 basis-[30%] flex-1`,
-        "justify-around items-center min-h-[55px] whitespace-nowrap",
+        " min-h-[55px] whitespace-nowrap",
         {
           [bgStyle]: !isActive,
           [activeBgStyle]: isActive,
@@ -49,23 +49,23 @@ export const DepositButton = (props: IDepositButton) => {
         props.onClick && props.onClick()
       }}
     >
-      <span className={cx("value items-baseline text-base xl:text-4xl lg:text-2xl md:text-lg md:mr-2", {
+      <div className={cx("value items-baseline text-base xl:text-4xl lg:text-2xl md:text-lg md:mr-2", {
         [rechargeClassName ? rechargeClassName : "text-white"]: !isActive,
         [activeRechargeClassName ? activeRechargeClassName : "text-main-primary-varient"]: isActive,
       })}>
         {rechargeValue}
-      </span>
+      </div>
 
 
       {isShowRate &&
         (isRateTag
           ? (<div className={cx(rateTagClassName)}>{rate}</div>)
-          : (<span className={cx("text-base lg:text-2xl md:text-base", {
+          : (<div className={cx("text-base lg:text-2xl md:text-base", {
             [rateClassName ? rateClassName : "text-main-secondary-main"]: !isActive,
             [activeRateClassName ? activeRateClassName : "text-varient "]: isActive,
           })}>
             {rate}
-          </span>
+          </div>
           ))
       }
     </button>

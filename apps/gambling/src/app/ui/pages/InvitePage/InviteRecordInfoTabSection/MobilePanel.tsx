@@ -23,18 +23,21 @@ type IMobilePanel = {
   dailyData: any;
   mobileDailyPanelMode: any;
   setMobileDailyPanelMode: (value: "1" | "2" | "3") => void;
+  orangeRecordDate: string
+  onOrangeRecordDateSelect: (date: string) => void
 }
 export const MobilePanel = ({
-                              isProxy,
-                              totalRewardData,
-                              totalInviteData,
-                              mobileTotalPanelMode,
-                              setMobileTotalPanelMode,
-
-                              dailyData,
-                              mobileDailyPanelMode,
-                              setMobileDailyPanelMode,
-                            }: IMobilePanel) => {
+  isProxy,
+  totalRewardData,
+  totalInviteData,
+  mobileTotalPanelMode,
+  setMobileTotalPanelMode,
+  dailyData,
+  mobileDailyPanelMode,
+  setMobileDailyPanelMode,
+  orangeRecordDate,
+  onOrangeRecordDateSelect
+}: IMobilePanel) => {
   return (
     <div>
       <section className={"mb-4"}>
@@ -49,7 +52,7 @@ export const MobilePanel = ({
 
       <section className={"mb-4"}>
         <div className={"text-[#EE9544] font-bold text-lg text-left mb-1"}>Dados diários<span className={"text-xs"}>(Atualize a cada 30 minutos)</span></div>
-        <MobileCommonOrangeDailyTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} />
+        <MobileCommonOrangeDailyTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} recordDate={orangeRecordDate} onRecordDateSelect={onOrangeRecordDateSelect} />
       </section>
     </div>
   )

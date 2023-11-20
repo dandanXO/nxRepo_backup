@@ -11,12 +11,12 @@ import {IndexTabs} from "../../IndexTabs";
 import FakeBanner from "./FakeBanner.png";
 import {AppCarousel} from "../../Carousel";
 import styled from "styled-components";
-import {CocoAppCarouselContent} from "../../Carousel/env/CocoAppCarouselContent";
-import {CocoAppCarouselContent2} from "../../Carousel/env/CocoAppCarouselContent2";
-import {CocoAppCarouselContent3} from "../../Carousel/env/CocoAppCarouselContent3";
-import {CocoAppCarouselContent4} from "../../Carousel/env/CocoAppCarouselContent4";
-import {CocoAppCarouselContent5} from "../../Carousel/env/CocoAppCarouselContent5";
-import {CocoAppCarouselContent6} from "../../Carousel/env/CocoAppCarouselContent6";
+import {AppCarouselContent} from "../../Carousel/env/coco/AppCarouselContent";
+import {AppCarouselContent2} from "../../Carousel/env/coco/AppCarouselContent2";
+import {AppCarouselContent3} from "../../Carousel/env/coco/AppCarouselContent3";
+import {AppCarouselContent4} from "../../Carousel/env/coco/AppCarouselContent4";
+import {AppCarouselContent5} from "../../Carousel/env/coco/AppCarouselContent5";
+import {AppCarouselContent6} from "../../Carousel/env/coco/AppCarouselContent6";
 import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
 import { CocoTabItem } from "../../../../components/TabItem/CocoTabItem";
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
@@ -27,6 +27,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {Container} from "../../../../components/container/Container";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
+import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 
 
 export type TTotalFavoriteLocalState = {
@@ -93,11 +94,11 @@ export const IndexPage = ({
       })}>
         {isMobile && <CompanySloganLabel/>}
         <AppCarousel>
-          <CocoAppCarouselContent/>
-          <CocoAppCarouselContent2/>
-          <CocoAppCarouselContent3/>
-          <CocoAppCarouselContent4/>
-          <CocoAppCarouselContent5/>
+          <AppCarouselContent/>
+          {/*<AppCarouselContent2/>*/}
+          {/*<AppCarouselContent3/>*/}
+          {/*<AppCarouselContent4/>*/}
+          {/*<AppCarouselContent5/>*/}
           {/*<CocoAppCarouselContent6/>*/}
         </AppCarousel>
       </div>
@@ -107,37 +108,21 @@ export const IndexPage = ({
         {isMobile ? (
           <>
             <div className="mb-4" onClick={handleToSearchPage}>
-              <Input className={"py-0.5 px-2.5 text-xs border-none bg-[#09213d] placeholder:text-[#007aff] rounded"}
-                     inputClassName={"placeholder:text-[#007aff] text-sm placeholder:font-bold"}
-                     placeholder={"Por favor insira o nome do jogo"}
-                     suffix={<SearchOutlined className={"text-[#007aff] text-xl"} />}
+              <Input
+                className={cx(
+                "py-0.5 px-2.5 text-xs rounded",
+                      "!border-[var(--stroke-textfields)] bg-[var(--background-textfields)]"
+                )}
+                inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
+                placeholder={"Por favor insira o nome do jogo"}
+                prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
               />
             </div>
 
-            <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 border-b border-solid border-[#ffffff26] whitespace-nowrap"}>
+            <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 whitespace-nowrap"}>
               <DragScrollContainer>
                 <section className={"flex flex-row items-center bg-[#000C26] px-0.5"}>
-                  <Tabs className={"game-type-tab-list"}>
-                    <div>
-                      {label !== undefined && ["Salão", ...label, 'Favoritos'].map((tab: string, index: number) => {
-                        return (
-                          <CocoTabItem
-                            key={index}
-                            className={cx(`font-bold border-none border-0 rounded `, {
-                              'bg-[#262fa8] text-white py-0.5': activeTab === tab,
-                              'text-[#9ea3bb]': activeTab !== tab
-                            })}
-                            name={tab}
-                            active={activeTab === tab}
-                            onClick={() => {
-                              setActiveTab(tab);
-                              setViewType('');
-                            }}
-                          />
-                        )
-                      })}
-                    </div>
-                  </Tabs>
+                  <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
                 </section>
               </DragScrollContainer>
             </div>
@@ -148,14 +133,17 @@ export const IndexPage = ({
 
               <section className="mb-4 flex flex-row items-center px-4 w-full">
                 <div className="mr-2 grow">
-                  <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  <ScrollTab className="mx-4">
+                    <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  </ScrollTab>
                 </div>
               </section>
 
               <div className="shirnk-0 grow-0 basis-[150px]">
                 <Input
                   className="items-baseline"
-                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
+                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`}/>}
+                  placeholder={"Pesquisar nome do jogo"}
                   onChange={(event: any) => {
                     setSearchInput(event.target.value)
                   }}

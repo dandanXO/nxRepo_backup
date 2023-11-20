@@ -151,7 +151,7 @@ export const DepositPanel = (props: IDepositPanel) => {
         <div className={tcx("flex flex-1 m-auto flex-row flex-wrap w-full justify-start items-stretch", [`mb-20 `, !isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
-            const isShowRate = Number(config?.rate) !== 0;
+            const isShowRate = Number(config?.rate) > 0 || (Number(rechargeValue) * Number(config?.rate)).toFixed(2) > config?.amount_min;
             const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? (Number(rechargeValue) * Number(config?.rate)).toFixed(2) : ""
             return (
               <DepositButton

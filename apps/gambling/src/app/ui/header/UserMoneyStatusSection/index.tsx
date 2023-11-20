@@ -9,14 +9,16 @@ import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "react-loading-icons";
 import {environment} from "../../../../environments/environment";
 import cx from "classnames";
+import { renderByPlatform } from "../../utils/renderByPlatform";
+import { PersonalControl as CocoPersonalControl } from '../env/coco/PersonalControl'
+import { PersonalControl as WildPersonalControl } from '../env/wild/PersonalControl'
+import { PersonalControl as PernambucanaPersonalControl } from '../env/pernambucana/PersonalControl'
 
-export const PersonalControl = styled.div`
-  background-color: var(--medium);
-  box-shadow: 0 2px rgba(31,109,200,.72), 0 2px #14266a;
-  width: 160px;
-  height: 32px;
-  border-radius: 5px;
-`
+
+const PersonalControl = renderByPlatform({
+  "coco777bet": CocoPersonalControl,
+  "wild777bet" : WildPersonalControl
+}, PernambucanaPersonalControl)
 
 type IProps = {
   className?: string;
@@ -39,20 +41,20 @@ export const UserMoneyStatusSection = (props: IProps) => {
 
   const isUserMoneyStatusLoading = useSelector((state: RootState) => state.app.isUserMoneyStatusLoading)
   return (
-    <PersonalControl className={cx("px-3 flex flex-row justify-between items-center md:scale-[1.6]", props.className)}>
+    <PersonalControl className={cx("px-3 flex flex-row justify-between items-center gap-2 h-8 md:h-11", props.className)}>
       <button className={"refresh"} onClick={() => {
         update();
       }}>
-        <img alt={"refresh"} className={"w-[20px] h-[20px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
+        <img alt={"refresh"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
       </button>
       {/*main-secondary-main*/}
-      <div className={"flex-auto text-white sm:text-center md:text-left md:text-xs flex justify-center basis-1/2 font-bold"}>{
-        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue}`
+      <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-bold"}>{
+        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${totalBalanceSheetValue.toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits: 2})}`
       }</div>
       <button onClick={() => {
         navigate(PageOrModalPathEnum.WalletPage);
       }}>
-        <img alt={"add"} className={"w-[20px] h-[20px]"} src={`assets/${environment.assetPrefix}/ic_add.png`}/>
+        <img alt={"add"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_add.png`}/>
       </button>
     </PersonalControl>
   )

@@ -1,5 +1,4 @@
 import {Button} from "../../components/Buttons/Button";
-import cx from "classnames";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useSelector} from "react-redux";
@@ -19,6 +18,41 @@ import { RightOutlined } from "@ant-design/icons";
 import { RootState } from "../../../reduxStore";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { environment } from "../../../../environments/environment"
+import { UserInfoStatusPopoverContainer as CocoPopoverContainer } from './env/coco/UserInfoStatusPopoverContainer';
+import { UserInfoStatusPopoverContainer as WildPopoverContainer } from './env/wild/UserInfoStatusPopoverContainer';
+import { UserInfoStatusPopoverContainer as PernambucanaPopoverContainer } from './env/pernambucana/UserInfoStatusPopoverContainer';
+import { UserInfoStatusPopoverVIPInfo as CocoVIPInfo} from './env/coco/UserInfoStatusPopoverVIPInfo'
+import { UserInfoStatusPopoverVIPInfo as WildVIPInfo} from './env/wild/UserInfoStatusPopoverVIPInfo'
+import { UserInfoStatusPopoverVIPInfo as PernambucanaVIPInfo} from './env/pernambucana/UserInfoStatusPopoverVIPInfo'
+import { renderByPlatform } from "../../utils/renderByPlatform";
+import { UserInfoStatusPopoverBalanceInfo as CocoBalanceInfo } from "./env/coco/UserInfoStatusPopoverBalanceInfo";
+import { UserInfoStatusPopoverBalanceInfo as WildBalanceInfo } from "./env/wild/UserInfoStatusPopoverBalanceInfo";
+import { UserInfoStatusPopoverBalanceInfo as PernambucanaBalanceInfo } from "./env/pernambucana/UserInfoStatusPopoverBalanceInfo";
+import { UserInfoStatusPopoverInviteInfo as CocoInviteInfo } from "./env/coco/UserInfoStatusPopoverInviteInfo";
+import { UserInfoStatusPopoverInviteInfo as WildInviteInfo } from "./env/wild/UserInfoStatusPopoverInviteInfo";
+import { UserInfoStatusPopoverInviteInfo as PernambucanaInviteInfo } from "./env/pernambucana/UserInfoStatusPopoverInviteInfo";
+
+
+const PopoverContainer = renderByPlatform({
+  "coco777bet": CocoPopoverContainer,
+  "wild777bet": WildPopoverContainer
+}, PernambucanaPopoverContainer)
+
+export interface IUserInfoStatusPopoverVIPInfoProps {
+  currentLevel: number
+  userVIPInfo?: GetVIPInfoResponse
+}
+
+export interface IUserInfoStatusPopoverBalanceInfoProps {
+  totalBalanceSheetValue: number
+  totalReasableValue: number
+}
+
+export interface IUserInfoStatusPopoverInviteInfoProps {
+  totalPrize: number
+  bonusAwaitingSettlement: number
+  fullWithdrawable: number
+}
 
 export const VIPBorderStyleContainer = styled.div`
   padding: 1.5vw 30px;
@@ -51,7 +85,7 @@ const Progress = styled.div<{ progress: number }>`
 
 
 
-const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
+export const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
   return (
       <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl bg-assistant leading-[30px]'}>
         <Progress progress={progress > 1 ? 100 : progress * 100} />
@@ -91,7 +125,7 @@ const ProgressBar1 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 };
 
 
-const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
+export const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: number, currentLevel: number, userVIPInfo: GetVIPInfoResponse | undefined }) => {
   return (
       <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl bg-assistant leading-[30px]'}>
         <Progress progress={progress > 1 ? 100 : progress * 100} />
@@ -132,7 +166,7 @@ const ProgressBar2 = ({ progress, currentLevel, userVIPInfo }: { progress: numbe
 
 
 
-const VIPContainer = styled.div`
+export const VIPContainer = styled.div`
   background: var(--varient);
   background-size: 100% 100%;
   border: 1px solid var(--main-primary-main);
@@ -141,7 +175,7 @@ const VIPContainer = styled.div`
   height: 230px;
 `;
 
-const ContaContainer = styled.div`
+export const ContaContainer = styled.div`
   background: var(--varient);
   background-size: 100% 100%;
   border: 1px solid var(--main-primary-main);
@@ -259,7 +293,6 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
   // console.log("vip_level", vip_level);
 
-  const [currentSelectedLevel, setCurrentSelectedLevel] = useState(vip_level);
   const [currentLevel, setCurrentLevel] = useState(vip_level);
   // console.log("user", user);
 
@@ -288,95 +321,71 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
   }, [signInConfig]);
 
-  const allLevelInfo = vipAllInfo ? vipAllInfo.data : [];
-  const currentLevelInfo = allLevelInfo?.find(
-      (info) => info.level === currentSelectedLevel
-  );
 
-  const allSignInConfig = signInConfig?.data.signInAllConfig || [];
-  const vipConfig = allSignInConfig?.find(
-      (config) =>
-          config.identifier.split('::')[2].replace('V', '') ===
-          `${currentSelectedLevel}`
-  );
 
-  const dayConfigs = JSON.parse(vipConfig?.value || '[]');
-
-  const signBonus = dayConfigs?.reduce(
-      (acc: number, current: { cashback: number }) => acc + current.cashback,
-      0
-  );
   return (
-    <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"} onClick={(event) => {
-      props.close();
-    }}>
-      <div
-          className={cx("fixed right-[144px] top-[100px] z-10 w-[400px] rounded-2xl p-4 flex flex-col flex-between text-sm bg-assistant", {
-          })}
-          style={{
-            // background: `url("assets/${environment.assetPrefix}/bg_web_login.png")`,
-            // backgroundSize: 'cover',
-            // backgroundPosition: 'center bottom',
-          }}
-      >
+    <div
+      className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full"}
+      onClick={(event) => {
+        props.close();
+      }}
+    >
+      <PopoverContainer>
 
-
-        <div>
-          <VIPContainer>
-            <div className={"mt-4 flex flex flex-row items-center"}>
-              <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.assetPrefix}/ic_vip01.png`}/>
-              <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, var(--btn-gradient-vip-from), var(--btn-gradient-vip-to))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
-              <RightOutlined className="ml-40" style={{ fontSize: 25, color: 'white', fontWeight: 1000 }} onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)}/>
-            </div>
-            <VIPBorderStyleContainer className={'flex flex-row'}>
-              <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl  text-left'}>
-                <ProgressBar1
-                    progress={
-                        (userVIPInfo?.data?.vip_score || 0) /
-                        (userVIPInfo?.data?.next_level_score || 1)
-                    }
-                    currentLevel={currentLevel}
-                    userVIPInfo={userVIPInfo}
+        {
+          renderByPlatform({
+            "coco777bet": (
+              <>
+                <CocoVIPInfo
+                  userVIPInfo={userVIPInfo}
+                  currentLevel={currentLevel}
                 />
-                {/*<div className="text-center text-base text-[#4C9F71]" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
-                {/*  {userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0}*/}
-                {/*  <span className="text-medium" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>/</span>*/}
-                {/*  {userVIPInfo?.data?.next_level_score*/}
-                {/*      ? userVIPInfo?.data?.next_level_score / 100*/}
-                {/*      : 0}*/}
-                {/*</div>*/}
-              </div>
-            </VIPBorderStyleContainer>
-
-
-
-
-
-            <VIPBorderStyleContainer className={'flex flex-row'}>
-              <div className={'relative mr-5 h-[30px] w-[310px] flex-auto rounded-3xl  text-left'}>
-                <ProgressBar2
-                    progress={
-                      userVIPInfo?.data?.flow_progress
-                          ? userVIPInfo?.data?.flow_progress / 100
-                          : 0
-                    }
-                    currentLevel={currentLevel}
-                    userVIPInfo={userVIPInfo}
+                <CocoBalanceInfo
+                  totalBalanceSheetValue={totalBalanceSheetValue}
+                  totalReasableValue={totalReasableValue}
                 />
-
-                {/*<div className="text-center text-base text-[#4C9F71]" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>*/}
-                {/*  {userVIPInfo?.data?.flow*/}
-                {/*      ? userVIPInfo?.data?.flow / 100*/}
-                {/*      : 0}*/}
-                {/*  <span className="text-medium" style={{ background: 'linear-gradient(45deg, #FFA500, #FFFFFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>/</span>*/}
-                {/*  {userVIPInfo?.data?.next_level_flow*/}
-                {/*      ? userVIPInfo?.data?.next_level_flow / 100*/}
-                {/*      : 0}*/}
-                {/*</div>*/}
-              </div>
-            </VIPBorderStyleContainer>
-          </VIPContainer>
-        </div>
+                <CocoInviteInfo
+                  totalPrize={totalPrize}
+                  bonusAwaitingSettlement={bonusAwaitingSettlement}
+                  fullWithdrawable={fullWithdrawable}
+                />
+              </>
+            ) ,
+            "wild777bet": (
+              <>
+                <WildVIPInfo
+                  userVIPInfo={userVIPInfo}
+                  currentLevel={currentLevel}
+                />
+                <WildBalanceInfo
+                  totalBalanceSheetValue={totalBalanceSheetValue}
+                  totalReasableValue={totalReasableValue}
+                />
+                <WildInviteInfo
+                  totalPrize={totalPrize}
+                  bonusAwaitingSettlement={bonusAwaitingSettlement}
+                  fullWithdrawable={fullWithdrawable}
+                />
+              </>
+            )
+          }, (
+            <>
+              <PernambucanaVIPInfo
+                userVIPInfo={userVIPInfo}
+                currentLevel={currentLevel}
+              />
+              <PernambucanaBalanceInfo
+                totalBalanceSheetValue={totalBalanceSheetValue}
+                totalReasableValue={totalReasableValue}
+              />
+              <PernambucanaInviteInfo
+                totalPrize={totalPrize}
+                bonusAwaitingSettlement={bonusAwaitingSettlement}
+                fullWithdrawable={fullWithdrawable}
+              />
+            </>
+          ) )
+        }
 
 
        <OtherContainer className={'mb-4 mt-5'}>
@@ -391,76 +400,23 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
         </Button>
       </OtherContainer>
 
-        <OtherContainer className={'mb-4'}>
-        <Button className="text-sm mb-4 flex" style={{alignItems: 'center',justifyContent: 'space-between'}} onClick={() => {
-          navigate(PageOrModalPathEnum.GameRecordPage);
-        }}>
-          <div className={"flex flex flex-row items-center"}>
-          <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
-          <span> Registro do jogo</span>
-          </div>
-          <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>
-        </Button>
-        </OtherContainer>
-
-        <ContaContainer onClick={() => {
-          navigate(PageOrModalPathEnum.WalletPage);
-        }}>
-          <Button className={"text-sm mb-4 !shadow-none"} >
-            <span className={"text-base"}>Total Da Conta</span>
-            <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>
-          </Button>
-
-          <div className={"flex flex-row justify-center items-center px-7"}>
-            <div className={"flex flex-col mr-24"}>
-              <span className={"text-main-primary-main text-lg"}>{totalBalanceSheetValue}</span>
-              <span className={"text-white"}>Balanço Total</span>
-            </div>
-            <div className={"flex flex-col"}>
-              <span className={"text-main-primary-main text-lg"}>{totalReasableValue}</span>
-              <span className={"text-white"}>Retirável Total</span>
-            </div>
-          </div>
-          </ContaContainer>
-
-        <ContaContainer className={'mt-3'} onClick={() => {
-          navigate(PageOrModalPathEnum.VIPGradePage)
-          }}>
-          <Button className={"text-sm mb-4 !shadow-none"}>
-            <span className={"text-base"}>Conta Promovida</span>
-            <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>
-          </Button>
-
-          <div className={"flex flex-row justify-between items-start px-3"}>
-            <div className={"flex flex-col mr-2"}>
-              <span className={"text-main-primary-main text-lg"}>{totalPrize}</span>
-              <span className={"text-white"}>Prêmio total</span>
-            </div>
-
-            <div className={"w-[1px] h-[30px] bg-[rgba(255,255,255,.1)] self-center mr-1"}/>
-
-            <div className={"flex flex-col  mr-2"}>
-              <span className={"text-main-primary-main text-lg"}>{bonusAwaitingSettlement}</span>
-              <span className={"text-white"}>
-              Bônus aguardando
-              <br/>
-              liquidação
-            </span>
-            </div>
-
-            <div className={"w-[1px] h-[30px] bg-[rgba(255,255,255,.1)] self-center mr-1"}/>
-
-            <div className={"flex flex-col"}>
-              {/*<span className={"text-[#FF7D03] text-lg"}>{accountPromotedSwingValue}</span>*/}
-              <span className={"text-main-primary-main text-lg"}>{fullWithdrawable}</span>
-              <span className={"text-white"}>Retirável Total</span>
-            </div>
-          </div>
-        </ContaContainer>
+      <OtherContainer className={'mb-4'}>
+      <Button className="text-sm mb-4 flex" style={{alignItems: 'center',justifyContent: 'space-between'}} onClick={() => {
+        navigate(PageOrModalPathEnum.GameRecordPage);
+      }}>
+        <div className={"flex flex flex-row items-center"}>
+        <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
+        <span> Registro do jogo</span>
+        </div>
+        <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>
+      </Button>
+      </OtherContainer>
 
 
 
-      </div>
+
+
+      </PopoverContainer>
     </div>
 
   )

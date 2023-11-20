@@ -5,7 +5,7 @@ export const DepositNoticeSection = () => {
   const {isMobile} = useBreakpoint();
 
   return (
-    <div className={cx("text-[#ffba00] font-[Heebo]  text-left my-5")}>
+    <div className={cx("text-[var(--secondary-assistant)] font-[Heebo]  text-left my-5")}>
       {
         isMobile
           ? (<p className=" text-xs leading-tight">

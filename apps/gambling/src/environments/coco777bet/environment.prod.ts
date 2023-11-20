@@ -3,6 +3,7 @@ export const environment = {
   assetPrefix: "coco777bet",
   mockBackend: false,
   platformName: "Coco777bet",
+  platformGroup: "Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",
   captcha: "/japi/user/captcha/image",

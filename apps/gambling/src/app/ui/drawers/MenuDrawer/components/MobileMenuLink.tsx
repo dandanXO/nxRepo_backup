@@ -10,7 +10,7 @@ export const MobileMenuLink = (props: IMobileMenuLink) => {
   const { text, className = '', icon, onClick } = props;
 
   return (
-    <button className={cx("mobile-menu-link flex mb-2 items-center text-base",className)} onClick={onClick && onClick}>
+    <button className={cx("mobile-menu-link flex mb-2 items-center text-sm",className)} onClick={onClick && onClick}>
       {icon && icon}
       <p>{text}</p>
     </button>

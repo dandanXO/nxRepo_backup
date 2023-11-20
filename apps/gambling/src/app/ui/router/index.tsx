@@ -48,7 +48,7 @@ import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
 
 
 export const AppRouter = () => {
-  const [isSetup, setIsSetup] = useState(false);
+  const [isSetup, setIsSetup] = useState(true);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -115,7 +115,7 @@ export const AppRouter = () => {
 
   const { isMobile } = useBreakpoint();
 
-  const [triggerLogin] = useLoginMutation()
+  // const [triggerLogin] = useLoginMutation()
 
 
   useEffect(() => {
@@ -126,20 +126,20 @@ export const AppRouter = () => {
       return;
     }
 
-    triggerLogin({
-      "appChannel": "pc",
-      "appPackageName": environment.appPackageName,
-      "deviceId": AppLocalStorage.getItem("deviceId") || "",
-      "deviceModel": "WEB",
-      "deviceVersion": "WEB",
-      "appVersion": environment.appVersion,
-      "sysTimezone": null,
-      "sysLanguage": null,
-      token,
-    }).then((response) => {
+    // triggerLogin({
+    //   "appChannel": "pc",
+    //   "appPackageName": environment.appPackageName,
+    //   "deviceId": AppLocalStorage.getItem("deviceId") || "",
+    //   "deviceModel": "WEB",
+    //   "deviceVersion": "WEB",
+    //   "appVersion": environment.appVersion,
+    //   "sysTimezone": null,
+    //   "sysLanguage": null,
+    //   token,
+    // }).then((response) => {
       // console.log("token", token);
-      if(!(response as any).error) {
-        console.log("triggerLogin-data", response)
+      // if(!(response as any).error) {
+        // console.log("triggerLogin-data", response)
         // setLoginLocalStorage({
         //   token: (response as any).data.data.token,
         //   userInfo: (response as any).data.data.user_info,
@@ -148,21 +148,21 @@ export const AppRouter = () => {
         //   amount: 100,
         //   ip: (response as any).data.data.connection.ip,
         // })
-        AppLocalStorage.setItem("token", (response as any).data.data.token);
-        dispatch(appSlice.actions.setUserVIPLevel((response as any).data.data.user_info.vip_level));
+        // AppLocalStorage.setItem("token", (response as any).data.data.token);
+        // dispatch(appSlice.actions.setUserVIPLevel((response as any).data.data.user_info.vip_level));
 
-        const url = (response as any).data.data.connection.ip;
-        const token = (response as any).data.data.token;
-        if(url) connect(url, token);
-        dispatch(appSlice.actions.setIsLogin(true));
-        dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-        dispatch(appSlice.actions.setShowTelegramModal(true))
+        // const url = (response as any).data.data.connection.ip;
+        // const token = (response as any).data.data.token;
+        // if(url) connect(url, token);
+        // dispatch(appSlice.actions.setIsLogin(true));
+        // dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
+        // dispatch(appSlice.actions.setShowTelegramModal(true))
         // props.confirmToLogin();
         setIsSetup(true);
-      }
-    }).catch((error: any) => {
-      console.error(error);
-    })
+      // }
+    // }).catch((error: any) => {
+    //   console.error(error);
+    // })
   }, [])
 
   //const mounted = useRef(false);

@@ -10,7 +10,7 @@ import {Input} from "../../../../components/Inputs/Input";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../environments/environment"
-import {PernambucanaAppCarouselContent} from "../../Carousel/env/PernambucanaAppCarouselContent";
+import {PernambucanaAppCarouselContent} from "../../Carousel/env/pernambucana/PernambucanaAppCarouselContent";
 
 
 export type TTotalFavoriteLocalState = {

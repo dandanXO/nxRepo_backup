@@ -29,7 +29,7 @@ export const Avatar = (props: {
         {/*})} alt="avatar" src={`assets/${AvatarSrcMap[userInfo.avatar || 1]}`}/>*/}
         <img
           className={cx("rounded-full", {
-            "w-[56px] h-[56px] min-w-[56px] min-h-[56px]}": !props.big,
+            "w-[44px] h-[44px] min-w-[44px] min-h-[44px]}": !props.big,
             "w-[82px] h-[82px]": props.big,
           },props.className)}
           alt="avatar"

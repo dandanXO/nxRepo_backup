@@ -11,12 +11,12 @@ import {IndexTabs} from "../../IndexTabs";
 import FakeBanner from "./FakeBanner.png";
 import {AppCarousel} from "../../Carousel";
 import styled from "styled-components";
-import {CocoAppCarouselContent} from "../../Carousel/env/CocoAppCarouselContent";
-import {CocoAppCarouselContent2} from "../../Carousel/env/CocoAppCarouselContent2";
-import {CocoAppCarouselContent3} from "../../Carousel/env/CocoAppCarouselContent3";
-import {CocoAppCarouselContent4} from "../../Carousel/env/CocoAppCarouselContent4";
-import {CocoAppCarouselContent5} from "../../Carousel/env/CocoAppCarouselContent5";
-import {CocoAppCarouselContent6} from "../../Carousel/env/CocoAppCarouselContent6";
+import {AppCarouselContent} from "../../Carousel/env/wild/AppCarouselContent";
+import {AppCarouselContent2} from "../../Carousel/env/wild/AppCarouselContent2";
+import {AppCarouselContent3} from "../../Carousel/env/wild/AppCarouselContent3";
+import {AppCarouselContent4} from "../../Carousel/env/wild/AppCarouselContent4";
+import {AppCarouselContent5} from "../../Carousel/env/wild/AppCarouselContent5";
+import {AppCarouselContent6} from "../../Carousel/env/wild/AppCarouselContent6";
 import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
 import { CocoTabItem } from "../../../../components/TabItem/CocoTabItem";
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
@@ -27,6 +27,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {Container} from "../../../../components/container/Container";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
+import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 
 
 export type TTotalFavoriteLocalState = {
@@ -93,11 +94,11 @@ export const IndexPage = ({
       })}>
         {isMobile && <CompanySloganLabel/>}
         <AppCarousel>
-          <CocoAppCarouselContent/>
-          <CocoAppCarouselContent2/>
-          <CocoAppCarouselContent3/>
-          <CocoAppCarouselContent4/>
-          <CocoAppCarouselContent5/>
+          <AppCarouselContent/>
+          <AppCarouselContent2/>
+          <AppCarouselContent3/>
+          <AppCarouselContent4/>
+          <AppCarouselContent5/>
           {/*<CocoAppCarouselContent6/>*/}
         </AppCarousel>
       </div>
@@ -148,7 +149,9 @@ export const IndexPage = ({
 
               <section className="mb-4 flex flex-row items-center px-4 w-full">
                 <div className="mr-2 grow">
-                  <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  <ScrollTab className="mx-4">
+                    <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                  </ScrollTab>
                 </div>
               </section>
 
