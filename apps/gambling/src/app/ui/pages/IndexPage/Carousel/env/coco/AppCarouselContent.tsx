@@ -48,7 +48,7 @@ export const AppCarouselContent = () => {
           {/*  Primeiro depósito <br/> bônus de 20%*/}
           {/*</p>*/}
           <img
-            src={`assets/${environment.assetPrefix}/banner1.png`}
+            src={`assets/${environment.assetPrefix}/banner_1.png`}
             // className="rounded-box"
           />
         </div>
