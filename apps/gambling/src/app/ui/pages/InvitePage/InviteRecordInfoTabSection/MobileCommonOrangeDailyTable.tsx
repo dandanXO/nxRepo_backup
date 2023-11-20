@@ -7,6 +7,9 @@ import {MobileOrangeBackgroundShadowContainer as WMobileOrangeBackgroundShadowCo
 import {MobileOrangeBackgroundShadowContainer as CMobileOrangeBackgroundShadowContainer} from "./env/coco/MobileOrangeBackgroundShadowContainer";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
 import DatePicker from "../../../components/DatePickers/DatePicker";
+import { useState } from "react";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
 
 const MobileOrangeBackgroundShadowContainer = renderByPlatform({
   "wild777bet": WMobileOrangeBackgroundShadowContainer,
@@ -18,6 +21,7 @@ type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; rec
 
 
 export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) => {
+  const [inviteBonusInfoOpen, setInviteBonusInfoOpen] = useState(false)
 
   return (
     <MobileOrangeBackgroundShadowContainer className={"px-4 pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
@@ -61,9 +65,24 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
           <span className="font-hairline">Valor da transação do jogo</span>
         </div>
 
-        <div className={"flex flex-col"}>
-          <span className={"text-lg text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || "0.00"}</span>
+        <div className={"flex flex-col"} onClick={()=>setInviteBonusInfoOpen(true)}>
+          <div className='flex gap-2 items-center'>
+            <span className={"text-lg text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || "0.00"}</span>
+            <QuestionCircleOutlined style={{ color: '#FF8A00'}} />
+          </div>
           <span className="font-hairline">Obter bônus</span>
+          {
+            inviteBonusInfoOpen && (
+              <ConfirmDrawer
+                onClose={()=>setInviteBonusInfoOpen(false)}
+                className='bg-gradient-to-t from-[#2E104C] to-[#3F28AF]'
+                buttonStyle='bg-gradient-to-t from-[#d88c19] to-[#ffae1a]'
+                buttonText='Eu vejo'
+                title='Descrição detalhada'
+                content='As recompensas são liquidadas toda segunda-feira'
+              />
+            )
+          }
         </div>
       </div>
 
