@@ -71,7 +71,7 @@ export const AppCarousel = (props: IAppCarousel) => {
       // removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头
       // ssr={true} // means to render carousel on server-side.
       customTransition="transform 1s ease-in-out"
-      keyBoardControl={true}
+      keyBoardControl={false}
       // transitionDuration={500}
       containerClass="carousel-container"
       // removeArrowOnDeviceType={["tablet", "mobile"]}

@@ -15,12 +15,15 @@ export const AppCarouselContent5 = () => {
   const {onClickToCheckInDaily} = usePageNavigate();
 
   return (
-    <CarouselContainer className={"text-[22.5px] text-white"}>
+    <CarouselContainer
+      className={"text-[22.5px] text-white"}
+      onClickBanner={() => {
+        onClickToCheckInDaily();
+
+      }}
+    >
       {isMobile ? (
         <div
-          onClick={() => {
-            onClickToCheckInDaily();
-          }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
             <span>Check-in todos os dias <br/> O dinheiro não para!</span>
@@ -32,9 +35,6 @@ export const AppCarouselContent5 = () => {
       ) : (
         <div
           className="banner w-screen"
-          onClick={() => {
-            onClickToCheckInDaily();
-          }}
         >
           <p
             className={cx("absolute top-1/2 transform -translate-y-1/2",

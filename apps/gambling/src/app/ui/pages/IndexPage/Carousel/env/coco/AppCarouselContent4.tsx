@@ -15,12 +15,14 @@ export const AppCarouselContent4 = () => {
   const {onClickToVipGrade} = usePageNavigate();
 
   return (
-    <CarouselContainer className={"text-[22.5px] text-white"}>
+    <CarouselContainer
+      className={"text-[22.5px] text-white"}
+      onClickBanner={() => {
+        onClickToVipGrade();
+      }}
+    >
       {isMobile ? (
         <div
-          onClick={() => {
-            onClickToVipGrade();
-          }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
             Prêmio upgrade VIP<br/> Só esperando você coletar!
@@ -30,9 +32,6 @@ export const AppCarouselContent4 = () => {
       ) : (
         <div
           className="banner w-screen"
-          onClick={() => {
-            onClickToVipGrade();
-          }}
         >
           <p
             className={cx("absolute top-1/2 transform -translate-y-1/2",
