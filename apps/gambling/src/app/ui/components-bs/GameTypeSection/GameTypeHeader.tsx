@@ -28,9 +28,10 @@ export const GameTypeHeader = (props: {
         {isMobile ? (
           <button onClick={props.onClick} className={"text-xl text-transparent"}>Tudo</button>
         ) : (
-          <button onClick={props.onClick}
-                  className={"rounded-2xl border-[1px] border-[#2CFD99] px-4 pt-[5px] pb-[2px] text-[#2CFD99] text-sm !font-bold"}>Ver
-            todos {props?.count}</button>
+          <button
+            onClick={props.onClick}
+            className={"rounded-2xl border-[1px] border-[#2CFD99] px-4 pt-[5px] pb-[2px] text-[#2CFD99] text-sm !font-bold"}
+          >Ver todos {props?.count}</button>
         )}
       </div>}
 

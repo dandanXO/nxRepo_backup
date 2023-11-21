@@ -24,9 +24,9 @@ export const AppCarouselContent = () => {
             onClickToFirstDeposit();
           }}
         >
-          {/*<p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">*/}
-          {/*  Primeiro depósito <br/> + bônus de 20%*/}
-          {/*</p>*/}
+          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
+            Primeiro depósito <br/> + bônus de 20%
+          </p>
           <img
               src={`assets/${environment.assetPrefix}/h5_banner_1.png`}
           />
@@ -39,14 +39,14 @@ export const AppCarouselContent = () => {
           }}
           // style={{ display: 'flex',justifyContent: 'center' }}
         >
-          {/*<p*/}
-          {/*  className={cx("absolute top-1/2 transform -translate-y-1/2",*/}
-          {/*    "pl-4",*/}
-          {/*    "italic font-bold text-6xl text-left"*/}
-          {/*  )}*/}
-          {/*>*/}
-          {/*  Primeiro depósito <br/> bônus de 20%*/}
-          {/*</p>*/}
+          <p
+            className={cx("absolute top-1/2 transform -translate-y-1/2",
+              "pl-4",
+              "italic font-bold text-6xl text-left"
+            )}
+          >
+            Primeiro depósito <br/> bônus de 20%
+          </p>
           <img
             src={`assets/${environment.assetPrefix}/banner_1.png`}
             // className="rounded-box"

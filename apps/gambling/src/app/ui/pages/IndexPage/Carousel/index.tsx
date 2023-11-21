@@ -65,7 +65,7 @@ export const AppCarousel = (props: IAppCarousel) => {
       arrows={false}
       responsive={responsive}
       // autoPlay={false}
-      autoPlay={isMobile ? true : false}
+      autoPlay={true}
       autoPlaySpeed={3000}
       infinite={true}
       // removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头
