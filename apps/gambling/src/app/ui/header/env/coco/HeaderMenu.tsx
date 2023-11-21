@@ -29,7 +29,7 @@ export const HeaderMenu = () => {
       <div className="flex flex-col basis-[120px] justify-between self-start">
         <MenuItem menuText={'Check-in'} onClick={onClickToCheckInDaily}/>
         <MenuItem menuText={<div className="leading-none">Primeiro depósito<span className="">+20%</span></div>} onClick={onClickToFirstDeposit}/>
-        <MenuItem menuText={<div className="leading-none">Recarregar Cashback<span className="">+20%</span></div>} onClick={onClickToDepositCashback}/>
+        <MenuItem menuText={<div className="leading-none">Recarregar Cashback<span className="">+10%</span></div>} onClick={onClickToDepositCashback}/>
       </div>
 
     </div>

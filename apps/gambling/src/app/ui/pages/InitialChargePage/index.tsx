@@ -46,7 +46,7 @@ export const InitialChargePage = () => {
           <section className={"flex justify-center items-center"}>
             <ChargeButton onClick={() => {
               navigate(PageOrModalPathEnum.WalletPage);
-            }} className={"text-white text-lg font-bold"}>Recarrague agora</ChargeButton>
+            }} className={"text-white text-lg font-bold mt-[60px] mb-10 mx-auto"}>Recarrague agora</ChargeButton>
           </section>
 
           <div className={"p-4 rounded-lg flex flex-col text-left text-white items-start text-lg border border-solid border-green-500 mb-8"} style={{ backgroundColor: 'var(--game-block)', opacity:0.6 }}>
