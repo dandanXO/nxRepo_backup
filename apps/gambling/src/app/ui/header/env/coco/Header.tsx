@@ -172,6 +172,18 @@ export const Header = (props: IHeader) => {
           <section
             className='flex gap-2 items-center'
             onClick={() => props.onClickToPopupUserInfoStatusPopover()}
+            onMouseOver={() => {
+              // console.log("onMouseOver")
+              props.onClickToPopupUserInfoStatusPopover();
+            }}
+            onMouseOut={() => {
+              // console.log("onMouseOut")
+            }}
+            onMouseLeave={() => {
+              // console.log("onMouseLeave")
+              // NOTICE: StatusPopover 不能有 mash div 佔滿全部螢幕，不然會導致 over out leave 瞬間連續觸發
+              // props.onClickToPopupUserInfoStatusPopover();
+            }}
           >
             <CocoAvatar className='w-[44px] h-[44px]' />
             <div>
