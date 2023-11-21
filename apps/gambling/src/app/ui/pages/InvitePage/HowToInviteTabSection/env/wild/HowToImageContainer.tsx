@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import { environment } from "../../../../../../../environments/environment";
+import { HowToImageText } from "../common/HowToImageText";
+import { InviteCopySection } from "./InviteCopySection";
 
 export const HowToImageContainer = styled.div`
   position: relative;
@@ -31,3 +34,22 @@ export const HowToImageContainer = styled.div`
   background-origin: padding-box,border-box;
   background-image: linear-gradient(0deg,#2E104C,#3F28AF),linear-gradient(180deg,#5A3AF7,#500E8D);
 `;
+export const HowToImage = (props: any) => {
+  return (
+    <HowToImageContainer className={props.className}>
+      <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.assetPrefix}/topTitle1.ed9276b2.png`} />
+      <img className={"display sm:hidden"} src={`assets/${environment.assetPrefix}/team_title-7d5515fe.png`} />
+      <div className="mb-2 md:mx-16 md:my-5">
+        <HowToImageText />
+      </div>
+      <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={`assets/${environment.assetPrefix}/topTitle2.396e135e.png`} />
+      <img className={"mb-2 display sm:hidden"} src={`assets/${environment.assetPrefix}/invite-code-title-c456ebc9.png`} />
+      <InviteCopySection/>
+      <div className={"text-center"}>
+        <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
+        <img className={""} src={`assets/${environment.assetPrefix}/pic_social_media_logo.png`} />
+      </div>
+    </HowToImageContainer>
+  )
+
+}
