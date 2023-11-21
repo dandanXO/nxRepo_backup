@@ -6,20 +6,20 @@ const StyledMoneyButton = styled.div.attrs((props) => ({
 }))<{
   className?: string;
 }>`
-  position: absolute;
-  right: -10px;
-  top: -1%;
+  //position: absolute;
+  //right: -10px;
+  //top: -1%;
   //width: 104px;
   //height: 78px;
-  background: linear-gradient(90deg, var(--dashboard-block2-gradient-from), var(--dashboard-block2-gradient-to));
+  //background: linear-gradient(90deg, var(--dashboard-block2-gradient-from), var(--dashboard-block2-gradient-to));
   //box-shadow: 0 2px 4px rgba(0,0,0,.5), 0 1px #880c00, inset 0 1px 3px rgba(255,255,255,.5);
-  border-radius: 10px;
+  //border-radius: 10px;
   //display: flex;
   //justify-content: center;
   //align-items: center;
-  color: #f7fe00;
-  line-height: 21px;
-  border-color: 2px solid var(--dashboard-block2);
+  //color: #f7fe00;
+  //line-height: 21px;
+  //border-color: 2px solid var(--dashboard-block2);
   //text-shadow: 0px 1px 0px #7D0403;
   //margin-top: -15px;
 `
@@ -31,11 +31,11 @@ export const MoneyButton = (props: IMoneyButton) => {
   return (
     <StyledMoneyButton>
       <span
-        className={"ml-2 font-bold text-lg money-value text-[var(--dashboard-block2)]"}
-        style={{
-          textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
-        }}
-      >R$ {props.money.toFixed(2)}</span>
+        className={"ml-2 font-bold text-lg money-value text-[var(--secondary-assistant)]"}
+        // style={{
+        //   textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
+        // }}
+      >R$ {props.money?.toFixed(2)}</span>
     </StyledMoneyButton>
   )
 }

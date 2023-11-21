@@ -56,6 +56,7 @@
   --stroke-dashboard-secondary: #393FC4;
   /* stroke/modal Solid, 70%, Normal #40F4FF -> rgba to hex : #40f4ffb3*/
   --stroke-modal: #40f4ffb3;
+  --stroke-popup: #FFB84C;
 
 
 
@@ -105,6 +106,7 @@
   --text-tertiary: #BEBEBE;
   --text-white: #ffffff;
   --text-deposit: #6A3C12;
+  --text-popup: #FFF065;
 
   --lineary-blue-from: #2492FF;
   --lineary-blue-to: #0043AE;

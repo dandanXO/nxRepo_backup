@@ -151,12 +151,11 @@ export const AppRouter = () => {
         // AppLocalStorage.setItem("token", (response as any).data.data.token);
         // dispatch(appSlice.actions.setUserVIPLevel((response as any).data.data.user_info.vip_level));
 
-        // const url = (response as any).data.data.connection.ip;
-        // const token = (response as any).data.data.token;
-        // if(url) connect(url, token);
-        // dispatch(appSlice.actions.setIsLogin(true));
-        // dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-        // dispatch(appSlice.actions.setShowTelegramModal(true))
+        const url = AppLocalStorage.getItem("ip");
+        if(url && token) connect(url, token);
+        dispatch(appSlice.actions.setIsLogin(true));
+        dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
+        dispatch(appSlice.actions.setShowTelegramModal(true))
         // props.confirmToLogin();
         setIsSetup(true);
       // }
