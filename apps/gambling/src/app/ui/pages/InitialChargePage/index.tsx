@@ -58,7 +58,7 @@ export const InitialChargePage = () => {
               <li>2. Cada conta tem apenas uma chance (depois de completar esta recompensa, você pode participar do evento de presente de recarga da plataforma).</li>
               <li>3. O bônus de depósito será creditado diretamente em sua conta de depósito.</li>
               <li>4. Rejeitamos contas fraudulentas, uma vez descobertas, elas serão permanentemente congeladas.</li>
-              <li>5. O direito de interpretação final das atividades da plataforma pertence ao SKY Group (propriedade do {environment.platformName})</li>
+              <li>5. O direito de interpretação final das atividades da plataforma pertence ao TT Group (propriedade do {environment.platformName})</li>
             </ul>
 
           </div>

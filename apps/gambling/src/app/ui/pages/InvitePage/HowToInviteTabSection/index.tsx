@@ -89,7 +89,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
           className={'mx-16 my-5 hidden text-left text-lg text-white sm:block'}
         >
           Enquanto os usuários gostam de jogar e ganhar prêmios na plataforma
-          SKY Group ({environment.platformName}), eles também podem lançar um
+          TT Group ({environment.platformName}), eles também podem lançar um
           programa especial de recompensa por convite através do{' '}
           {environment.platformName} para ganhar comissões generosas! Que mais
           clientes de jogos da plataforma {environment.platformName} participem!
