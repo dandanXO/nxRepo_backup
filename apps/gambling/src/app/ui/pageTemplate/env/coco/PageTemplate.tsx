@@ -159,8 +159,12 @@ export const PageTemplate = ({
               showLoginModal(true)
             }}
             className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
+            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             onClickToPopupUserInfoStatusPopover={() => {
-              setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
+              setOpenDesktopUserInfoStatusDrawer(true)
+            }}
+            onClickToDismissPopupUserInfoStatusPopover={() => {
+              setOpenDesktopUserInfoStatusDrawer(false)
             }}
             onClickToOpenNotificationDrawer={() => {
               setOpenDesktopNotificationDrawer(true)
@@ -170,7 +174,7 @@ export const PageTemplate = ({
             }}
             onClickToDownload={onClickToDownload}
             openLogoutPopover={isShowMobileLogoutModal}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+
           />
         )}
 

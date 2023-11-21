@@ -328,7 +328,8 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
   return (
     <div
-      className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full"}
+      // NOTICE: StatusPopover 不能有 mash div 佔滿全部螢幕，不然會導致 over out leave 瞬間連續觸發
+      // className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full"}
       onClick={(event) => {
         props.close();
       }}
