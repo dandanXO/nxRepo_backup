@@ -28,6 +28,8 @@ import {Container} from "../../../../components/container/Container";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
+import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
+import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 
 
 export type TTotalFavoriteLocalState = {
@@ -95,10 +97,13 @@ export const IndexPage = ({
         {isMobile && <CompanySloganLabel/>}
         <AppCarousel>
           <AppCarouselContent/>
-          {/*<AppCarouselContent2/>*/}
-          {/*<AppCarouselContent3/>*/}
-          {/*<AppCarouselContent4/>*/}
-          {/*<AppCarouselContent5/>*/}
+          <AppCarouselContent2/>
+          <AppCarouselContent3/>
+          <AppCarouselContent4/>
+          <AppCarouselContent5/>
+          <AppCarouselContent6/>
+          <AppCarouselContent7/>
+          <AppCarouselContent8/>
           {/*<CocoAppCarouselContent6/>*/}
         </AppCarousel>
       </div>
