@@ -17,7 +17,7 @@ export const Captcha = (props: ICaptcha) => {
       setImgSrc(`data:${res.headers['content-type']};base64,${btoa(String.fromCharCode(...new Uint8Array(res.data)))}`);
       if(res.headers["captcha-image-key"]) {
         const key = res.headers["captcha-image-key"];
-        console.log("captcha-image-key", key)
+        // console.log("captcha-image-key", key)
         props.onGetCaptchaKey(key)
       }
     });
