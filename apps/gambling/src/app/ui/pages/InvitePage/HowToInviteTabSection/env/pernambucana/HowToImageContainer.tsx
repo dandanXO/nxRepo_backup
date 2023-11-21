@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import {environment} from "../../../../../../../environments/environment";
+import { environment } from "../../../../../../../environments/environment";
+import { HowToImageText } from "../common/HowToImageText";
+import { InviteCopySection } from "./InviteCopySection";
 
 export const HowToImageContainer = styled.div`
   position: relative;
@@ -29,3 +31,25 @@ export const HowToImageContainer = styled.div`
 
   padding: 20px;
 `;
+
+
+export const HowToImage = (props: any) => {
+  const { inviteUrl = '', onClickToCopy } = props;
+  return (
+    <HowToImageContainer className={props.className}>
+      <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.assetPrefix}/topTitle1.ed9276b2.png`} />
+      <img className={"display sm:hidden"} src={`assets/${environment.assetPrefix}/team_title-7d5515fe.png`} />
+      <div className="mb-2 md:mx-16 md:my-5">
+        <HowToImageText />
+      </div>
+      <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={`assets/${environment.assetPrefix}/topTitle2.396e135e.png`} />
+      <img className={"mb-2 display sm:hidden"} src={`assets/${environment.assetPrefix}/invite-code-title-c456ebc9.png`} />
+      <InviteCopySection inviteUrl={inviteUrl} onClickToCopy={onClickToCopy} />
+      <div className={"text-center"}>
+        <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
+        <img className={""} src={`assets/${environment.assetPrefix}/pic_social_media_logo.png`} />
+      </div>
+    </HowToImageContainer>
+  )
+
+}

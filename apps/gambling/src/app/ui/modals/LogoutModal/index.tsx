@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {CloseCircleOutlined} from "@ant-design/icons";
 import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection";
 import {LogoutSection} from "../../components-bs/LogoutSection";
+import cx from "classnames";
 
 
 const Container = styled.div`
@@ -28,14 +29,22 @@ const Container = styled.div`
   //}
 `
 
+const LogoutSectionContainer = styled.div.attrs((props) => ({
+  className: cx("z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full", props.className)
+}))<{
+  className?: string;
+}>``
+
+
 export type ILogoutModal = {
 
 }
 export const LogoutModal = (props:ILogoutModal) => {
 
   return (
-    <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}>
-      <LogoutSection className={"bg-assistant p-4 rounded-2xl"}/>
-    </div>
+    <LogoutSectionContainer className={"bg-assistant"}>
+      <LogoutSection className={"border-[var(--stroke-modal)] border-[1] bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] p-4 rounded-sm"}/>
+    </LogoutSectionContainer>
   )
 }
+

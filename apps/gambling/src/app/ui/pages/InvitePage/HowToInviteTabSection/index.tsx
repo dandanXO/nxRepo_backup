@@ -1,19 +1,24 @@
-import {QuestionContainer} from "../index";
+import { QuestionContainer } from "../index";
 import styled from "styled-components";
 import copy from "copy-to-clipboard";
-import {notification} from 'antd';
-import {environment} from "../../../../../environments/environment";
+import { notification } from 'antd';
+import { environment } from "../../../../../environments/environment";
 
-import {HowToImageContainer as PHowToImageContainer} from "./env/pernambucana/HowToImageContainer";
-import {HowToImageContainer as WHowToImageContainer} from "./env/wild/HowToImageContainer";
-import {HowToImageContainer as CHowToImageContainer} from "./env/coco/HowToImageContainer";
+import { HowToImageContainer as PHowToImageContainer } from "./env/pernambucana/HowToImageContainer";
+import { HowToImageContainer as WHowToImageContainer } from "./env/wild/HowToImageContainer";
+import { HowToImageContainer as CHowToImageContainer } from "./env/coco/HowToImageContainer";
 
-import {InviteCopySection as PInviteCopySection} from "./env/pernambucana/InviteCopySection";
-import {InviteCopySection as WInviteCopySection} from "./env/wild/InviteCopySection";
-import {InviteCopySection as CInviteCopySection} from "./env/coco/InviteCopySection";
+import { InviteCopySection as PInviteCopySection } from "./env/pernambucana/InviteCopySection";
+import { InviteCopySection as WInviteCopySection } from "./env/wild/InviteCopySection";
+import { InviteCopySection as CInviteCopySection } from "./env/coco/InviteCopySection";
 
 import shareListImg from "../HowToInviteTabSection/env/coco/share-list.png";
-import {renderByPlatform} from "../../../utils/renderByPlatform";
+import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { HowToImageText } from "./env/common/HowToImageText";
+import { HowToImage as CHowToImage } from "./env/coco/HowToImageContainer";
+import { HowToImage as WHowToImage } from "./env/wild/HowToImageContainer";
+import { HowToImage as PHowToImage } from "./env/pernambucana/HowToImageContainer";
+
 
 const HowToImageContainer = renderByPlatform({
   "wild777bet": WHowToImageContainer,
@@ -79,54 +84,11 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
   return (
     <div className={'mb-[80px]'}>
+      {renderByPlatform({
+        "wild777bet": <WHowToImage className="p-4 rounded-2xl"  />,
+        "coco777bet": <CHowToImage className="p-4 rounded-2xl" />,
+      }, <PHowToImage className="p-4 rounded-2xl" />)}
 
-      <HowToImageContainer className={'p-4 rounded-2xl'}>
-        {contextHolder}
-        <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.assetPrefix}/topTitle1.ed9276b2.png`}/>
-        <img className={"display sm:hidden"} src={`assets/${environment.assetPrefix}/team_title-7d5515fe.png`}/>
-
-        <Roboto
-          className={'mx-16 my-5 hidden text-left text-lg text-white sm:block'}
-        >
-          Enquanto os usuários gostam de jogar e ganhar prêmios na plataforma
-          TT Group ({environment.platformName}), eles também podem lançar um
-          programa especial de recompensa por convite através do{' '}
-          {environment.platformName} para ganhar comissões generosas! Que mais
-          clientes de jogos da plataforma {environment.platformName} participem!
-          Promova um usuário de recarga válida, o bônus é de até 20 reais.
-          Depois de se tornar um agente ao mesmo tempo, você também pode obter
-          uma generosa comissão de retorno do volume de negócios do jogo! O que
-          você está esperando, copie rapidamente o link do convite abaixo, envie
-          para seus melhores amigos e participem juntos.
-        </Roboto>
-
-        <Roboto className={'mb-2 block text-left text-lg text-white sm:hidden'}>
-          Convide usuários válidos para recarga, o bônus pode chegar a até R$20!
-          O que você está esperando, convide seus amigos para participar!
-        </Roboto>
-
-        <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={`assets/${environment.assetPrefix}/topTitle2.396e135e.png`}/>
-        <img className={"mb-2 display sm:hidden"} src={`assets/${environment.assetPrefix}/invite-code-title-c456ebc9.png`}/>
-
-        <InviteCopySection inviteUrl={props.inviteUrl} onClickToCopy={onClickToCopy}/>
-
-        {/*NOTICE: refactor me*/}
-        {renderByPlatform({
-          "coco777bet": (
-            <div className={"text-center"}>
-              <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
-              <img className={"mb-2"} src={shareListImg}/>
-            </div>
-          ),
-          "wild777bet": (
-            <div className={"text-center"}>
-              <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
-              <img className={"mb-2"} src={shareListImg}/>
-            </div>
-          )
-        }, null)}
-
-      </HowToImageContainer>
 
       <QuestionContainer>
         <img className={'my-8 mx-auto'} src={`assets/${environment.assetPrefix}/acting.png`} />
