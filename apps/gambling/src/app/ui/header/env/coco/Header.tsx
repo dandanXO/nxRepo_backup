@@ -173,7 +173,7 @@ export const Header = (props: IHeader) => {
             className='flex gap-2 items-center'
             onClick={() => props.onClickToPopupUserInfoStatusPopover()}
           >
-            <CocoAvatar />
+            <CocoAvatar className='w-[44px] h-[44px]' />
             <div>
               <div className='text-lg text-white flex gap-2'>
                 <div>{user.nickname}</div>

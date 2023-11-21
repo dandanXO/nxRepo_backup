@@ -23,11 +23,8 @@ import {CopyIcon} from "../../../../components/CopyIcon";
 
 
 const VIPContainer = styled.div`
-  box-sizing: border-box;
-  border: 1px solid transparent;
-  background-clip: padding-box, border-box;
-  background-origin: padding-box, border-box;
-  background-image: linear-gradient(0deg,#7707CE,#5D11F7,#0078FF),linear-gradient(0deg,#E27DFF,#00EAFF);
+  border: 2px solid var(--primary-assistant);
+  background: linear-gradient(180deg,var(--primary-main-from),var(--primary-main-to));
 `;
 
 interface IBetMyPageProps {
@@ -57,7 +54,9 @@ const BetMyPage = ({
       <section className='flex justify-between items-center'>
 
         <div className='flex gap-4 items-center'>
-          <CocoAvatar />
+          <div className='h-[60px] w-[60px] rounded-[13px] overflow-hidden'>
+            <CocoAvatar className='h-[60px] w-[60px]' />
+          </div>
           <div>
             <div className='text-white text-base'>{user.nickname}</div>
             <div className='text-white text-sm flex items-center'>
@@ -69,22 +68,24 @@ const BetMyPage = ({
 
         <CheckInButton
           onClick={()=>onClickToCheckInDaily()}
-        >check-in</CheckInButton>
+        >Check-in</CheckInButton>
       </section>
 
-      <section className='flex justify-between text-center py-3'>
-        <div className='w-full px-3'>
-          <div className='text-xl text-white'>R$ {totalBalanceSheetValue.toLocaleString()}</div>
+      <section className='flex justify-between text-center mt-[26px] mb-5'>
+        <div className='w-full px-3 flex flex-col gap-3 items-center'>
+          <div className='text-xl text-white'>R$ {totalBalanceSheetValue.toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2})}</div>
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
+            className='w-[126px]'
             onClick={() => onClickToWallet()}
           >Depósito</DepositButton>
         </div>
 
-        <div className='w-full px-3'>
-          <div className='text-xl text-white'>R$ {totalReasableValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+        <div className='w-full px-3 flex flex-col gap-3 items-center'>
+          <div className='text-xl text-white'>R$ {totalReasableValue.toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2})}</div>
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
+            className='w-[126px]'
             onClick={() => onClickToWallet()}
           >
             Retirar
@@ -92,59 +93,78 @@ const BetMyPage = ({
         </div>
       </section>
 
-      <VIPContainer className='rounded-xl flex mt-1 items-center pr-6'>
+      <VIPContainer className='rounded-xl flex items-center px-[14px] gap-[14px] py-4'>
 
-        <div className='w-1/3 p-3'>
-          <CurrentVIPIcon level={currentLevel} textClassName='text-3xl text-white'/>
+        <div className='w-1/3'>
+          <CurrentVIPIcon
+            className='gap-[10px]'
+            level={currentLevel}
+            imageClassName='w-[84px]'
+            textClassName='text-3xl text-white w-[61px]'
+          />
         </div>
 
         <div className='w-2/3 text-white'>
-          <div className='mb-1'>Depósitos totais: {
-            userVIPInfo?.data?.vip_score ? (userVIPInfo?.data?.vip_score/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}): 0
-          } / {
-            userVIPInfo?.data?.next_level_score? (userVIPInfo?.data?.next_level_score/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
-          }</div>
+          <div className='mb-1'>
+            <div>Depósitos totais:</div>
+            <div className='text-[var(--secondary-assistant)]'>
+              {
+                userVIPInfo?.data?.vip_score ? (userVIPInfo?.data?.vip_score/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}): 0
+              } / {
+              userVIPInfo?.data?.next_level_score? (userVIPInfo?.data?.next_level_score/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+              }
+            </div>
+          </div>
           <ProgressBar
-            className='h-4 bg-table-main mb-3'
-            rounded='rounded-full'
+            className='h-6 bg-white mb-3'
+            rounded='rounded-xl'
             progress={
               (userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)
             }
-            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
+            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className='h-full flex px-3 text-xs'>
-              {(
-                ((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ) >= 100 ?
-                  100:
-                  ((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 )
-              ).toFixed(0)}%
+            <div className='h-full flex px-3 items-center justify-center'>
+              <div className='text-xs text-[var(--text-deposit)]'>
+                Próximo nível {(
+                  ((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ) >= 100 ?
+                    100:
+                    ((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 )
+                ).toFixed(0)}%
+              </div>
             </div>
           </ProgressBar>
 
-          <div className='mb-1'>Pontos de apostas: {
-            userVIPInfo?.data?.flow ? (userVIPInfo?.data?.flow/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
-          } / {
-            userVIPInfo?.data?.next_level_flow ? (userVIPInfo?.data?.next_level_flow/100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
-          }</div>
+          <div className='mb-1'>
+            <div>Pontos de apostas:</div>
+            <div className='text-[var(--secondary-assistant)]'>
+              {
+                userVIPInfo?.data?.flow ? (userVIPInfo?.data?.flow/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+              } / {
+              userVIPInfo?.data?.next_level_flow ? (userVIPInfo?.data?.next_level_flow/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+              }
+            </div>
+          </div>
           <ProgressBar
-            className='h-4 bg-table-main'
-            rounded='rounded-full'
+            className='h-6 bg-white'
+            rounded='rounded-xl'
             progress={
               userVIPInfo?.data?.flow_progress
                 ? userVIPInfo?.data?.flow_progress / 100
                 : 0
             }
-            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
+            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className='h-full flex px-3 text-xs'>
-              {(((userVIPInfo?.data?.flow || 0) / (userVIPInfo?.data?.next_level_flow || 1)*100)).toFixed(0)}%
+            <div className='h-full flex px-3 items-center justify-center'>
+              <div className='text-xs text-[var(--text-deposit)]'>
+                Próximo nível {(((userVIPInfo?.data?.flow || 0) / (userVIPInfo?.data?.next_level_flow || 1)*100)).toFixed(0)}%
+              </div>
             </div>
           </ProgressBar>
         </div>
       </VIPContainer>
 
       <List
-        className={"bg-gradient-to-b from-[#0F1744] to-[#2E1555]"}
+        className={"bg-[var(--primary-variant)]"}
       >
         <ListHeader>Outras funções</ListHeader>
         <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>

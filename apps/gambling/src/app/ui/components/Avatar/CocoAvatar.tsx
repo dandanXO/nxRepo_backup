@@ -1,8 +1,15 @@
 import {Avatar} from "./index";
 import {AvatarContainer} from "../../header/env/coco/AvatarContainer";
+import { tcx } from "../../utils/tcx";
 
-export const CocoAvatar = () => {
-  return <Avatar className={"!rounded-[2px] w-[59px] h-[59px]"}/>
+interface ICocoAvatarProps {
+  className?: string
+}
+
+export const CocoAvatar = ({
+  className
+}: ICocoAvatarProps) => {
+  return <Avatar className={tcx("!rounded-[2px] w-[59px] h-[59px]", className)}/>
   // return (
   //   <AvatarContainer className={"w-[44px] h-[44px] relative"}>
   //     <Avatar className={"!rounded-[2px]"}/>

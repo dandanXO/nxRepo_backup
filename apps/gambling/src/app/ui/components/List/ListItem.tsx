@@ -10,7 +10,7 @@ type IProps = {
 export const ListItem = (props: IProps) => {
   return (
     <button
-      className={cx('p-3 flex justify-between border-black border-opacity-10 items-center w-full', {
+      className={cx('p-3 flex justify-between border-[var(--primary-assistant)] items-center w-full', {
         "border-b-[0.1px]": !props.isEnd,
       })}
       onClick={() => props && props.onClick && props.onClick()}

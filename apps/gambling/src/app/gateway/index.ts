@@ -1,16 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { AppLocalStorage } from '../persistant/localstorage';
 import "../external/websocket/windowProtobuf";
-import {connect} from "./socket";
 import {userLogout} from "../usecase/userLogout";
 
 import {appSlice} from "../reduxStore/appSlice";
-
-if(AppLocalStorage.getItem("token")) {
-  const url = AppLocalStorage.getItem("ip");
-  const token = AppLocalStorage.getItem("token");
-  if(url && token) connect(url, token);
-}
 
 export const gateway = async (
   dispatch: (action: any) => void,

@@ -13,7 +13,7 @@ export const ChargeButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 60px auto 40px;
+  /* margin: 60px auto 40px; */
   color: #247855;
 `
 

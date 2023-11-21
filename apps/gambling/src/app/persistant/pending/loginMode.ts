@@ -50,7 +50,7 @@ export type UserLoginLocalstorage = {
   getInviteConfigLocal: {
     "time": string;
     "data": {
-      "id": 1,
+      "id": number,
       "proxyType": number;
       "firstRecharge": number;
       "bindReward": number;
