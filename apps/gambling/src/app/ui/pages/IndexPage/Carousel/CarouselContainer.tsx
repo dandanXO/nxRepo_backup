@@ -10,7 +10,7 @@ export const CarouselContainer = (props: IProps) => {
   const [canClick, setCanClick] = useState<boolean>(true);
   return (
     // <div className={cx("pointer-events-none", props.className)}>{props.children}</div>
-    <div className={cx("", props.className)}
+    <button className={cx("", props.className)}
         // onDragStart={() => {
         //   setCanClick(false)
         // }}
@@ -22,6 +22,6 @@ export const CarouselContainer = (props: IProps) => {
         }}
     >
       {props.children}
-    </div>
+    </button>
   )
 }
