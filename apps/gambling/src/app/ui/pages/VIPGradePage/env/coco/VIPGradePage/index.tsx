@@ -57,13 +57,13 @@ const Coco777betVIPGradePage = ({
         }}
       />
 
-      <section className='mt-2'>
-        <div className={tcx('text-start text-4xl py-5', ['text-base py-2', isMobile])}>Meu progresso VIP</div>
+      <section>
+        <div className={tcx('text-start text-4xl py-6 font-bold text-[var(--primary-assistant)]', ['text-lg py-2', isMobile])}>Meu progresso VIP</div>
         <CurrentLevelInfoCard userVIPInfo={userVIPInfo} currentLevel={currentLevel} />
       </section>
 
-      <section className='mt-2'>
-        <div className={tcx('text-start text-4xl py-5', ['text-base py-2', isMobile])}>Descrição do nível VIP</div>
+      <section>
+        <div className={tcx('text-start text-4xl py-6 font-bold text-[var(--primary-assistant)]', ['text-lg py-2', isMobile])}>Descrição do nível VIP</div>
         {
           allLevelInfoWithBonus?.map((info) => (
             <LevelInfoCard className='mb-2' {...info} />

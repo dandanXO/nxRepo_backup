@@ -20,125 +20,102 @@ const CurrentLevelInfoCard = ({
     <div
       className={
         tcx(
-          'p-2 border-2 border-purple-400 rounded-md flex items-center text-white',
+          'p-6 border-4 border-[var(--stroke-dashboard-main)] bg-gradient-to-b from-[var(--background-vip-level-from)] to-[var(--background-vip-level-to)] rounded-lg flex items-center text-white gap-6',
           ['flex-col', isMobile]
         )}>
-      <div className={tcx('flex items-center w-[22%] justify-center', ['w-full', isMobile])}>
+      <div className='flex items-center justify-center'>
         <CurrentVIPIcon
-          className={tcx('w-full p-2 px-5', ['w-32 px-0', isMobile])}
+          className={tcx('px-12 py-3', ['gap-[15px]', isMobile])}
+          imageClassName='w-[280px]'
           level={currentLevel}
-          textClassName={tcx('text-2xl', ['hidden', !isMobile])}
+          textClassName={tcx('w-[102px]', ['hidden', !isMobile])}
         />
       </div>
-      <div className='flex-grow w-full text-left'>
-        <div className={tcx('text-3xl',['hidden', isMobile])}>
-          VIP {currentLevel}
-        </div>
+      <div className='flex-grow w-full text-left text-base font-medium'>
+        <img className={tcx('w-[104px]', ['hidden', isMobile])} alt='vip_level' src={`assets/${environment.assetPrefix}/ic_vip_${currentLevel}.png`}/>
 
         <div>Quantidade total de recarga:</div>
-        <div className={tcx('flex items-center w-4/5', ['w-full', isMobile])}>
-          <div>VIP{currentLevel}</div>
+        {
+          isMobile && (
+            <div className='flex justify-between text-sm mb-1'>
+              <div>VIP{currentLevel}</div>
+              <div>VIP{currentLevel + 1}</div>
+            </div>
+          )
+        }
+        <div className='flex items-center w-full mb-[14px]'>
+          <div className={isMobile? 'hidden': ''}>VIP{currentLevel}</div>
           <ProgressBar
-            className={tcx('bg-assistant mx-2 h-6', ['h-5', isMobile])}
+            className={tcx('bg-white mx-2 h-7', ['mx-0', isMobile])}
             rounded='rounded-full'
             progress={(userVIPInfo?.data?.vip_score || 0) /
               (userVIPInfo?.data?.next_level_score || 1)
           }
-            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
+            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className={tcx('h-full flex items-center', ['px-4', isMobile], ['justify-center', !isMobile])}>
-              {
-                !isMobile ? (
-                  <div>
-                    R$
-                    {(userVIPInfo?.data?.vip_score
-                      ? (userVIPInfo?.data?.vip_score / 100)
-                      : 0).toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    })}
-                    /R$
-                    {(userVIPInfo?.data?.next_level_score
-                      ? (userVIPInfo?.data?.next_level_score / 100).toFixed(2)
-                      : 0).toLocaleString('en-US', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
-                    })}
-                  </div>
-                ) : (
-                  <div>
-                    {(userVIPInfo?.data?.vip_score
-                      ? userVIPInfo?.data?.vip_score / 100
-                      : 0).toLocaleString('en-US', {
-                      minimumFractionDigits: 1,
-                      maximumFractionDigits: 1
-                    })}
-                    {' '}
-                    /
-                    {' '}
-                    {(userVIPInfo?.data?.next_level_score
-                      ? userVIPInfo?.data?.next_level_score / 100
-                      : 0).toLocaleString()}
-                  </div>
-                )
-              }
+            <div className={tcx('h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center', ['px-4', isMobile])}>
+              <div>
+                R$
+                {(userVIPInfo?.data?.vip_score
+                  ? (userVIPInfo?.data?.vip_score / 100)
+                  : 0).toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}
+                /R$
+                {(userVIPInfo?.data?.next_level_score
+                  ? (userVIPInfo?.data?.next_level_score / 100)
+                  : 0).toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}
+              </div>
             </div>
           </ProgressBar>
-          <div>VIP{currentLevel + 1}</div>
+          <div className={isMobile? 'hidden': ''}>VIP{currentLevel + 1}</div>
         </div>
 
         <div>Número total de apostas</div>
-        <div className={tcx('flex items-center w-4/5', ['w-full', isMobile])}>
-          <div>VIP{currentLevel}</div>
+        {
+          isMobile && (
+            <div className='flex justify-between text-sm mb-1'>
+              <div>VIP{currentLevel}</div>
+              <div>VIP{currentLevel + 1}</div>
+            </div>
+          )
+        }
+        <div className='flex items-center w-full'>
+          <div className={isMobile? 'hidden': ''}>VIP{currentLevel}</div>
           <ProgressBar
-            className={tcx('bg-assistant mx-2 h-6', ['h-5', isMobile])}
+            className={tcx('bg-white mx-2 h-7', ['mx-0', isMobile])}
             rounded='rounded-full'
             progress={
               userVIPInfo?.data?.flow_progress
               ? userVIPInfo?.data?.flow_progress / 100
               : 0
             }
-            progressColor='linear-gradient(0deg,#E15B20,#FFEA00)'
+            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className={tcx('h-full flex items-center', ['px-4', isMobile], ['justify-center', !isMobile])}>
-              {
-                !isMobile ? (
-                  <div>
-                    R$
-                    {(userVIPInfo?.data?.flow
-                      ? userVIPInfo?.data?.flow / 100
-                      : 0).toLocaleString('en-US', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
-                    })}
-                    /R$
-                    {(userVIPInfo?.data?.next_level_flow
-                      ? userVIPInfo?.data?.next_level_flow / 100
-                      : 0).toLocaleString('en-US', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2
-                    })}
-                  </div>
-                ) : (
-                  <div>
-                    {(userVIPInfo?.data?.flow
-                      ? userVIPInfo?.data?.flow / 100
-                      : 0).toLocaleString('en-US', {
-                      minimumFractionDigits: 1,
-                      maximumFractionDigits: 1
-                    })}
-                    {' '}
-                    /
-                    {' '}
-                    {(userVIPInfo?.data?.next_level_flow
-                      ? userVIPInfo?.data?.next_level_flow / 100
-                      : 0).toLocaleString()}
-                  </div>
-                )
-              }
+            <div className={tcx('h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center', ['px-4', isMobile])}>
+              <div>
+                R$
+                {(userVIPInfo?.data?.flow
+                  ? userVIPInfo?.data?.flow / 100
+                  : 0).toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}
+                /R$
+                {(userVIPInfo?.data?.next_level_flow
+                  ? userVIPInfo?.data?.next_level_flow / 100
+                  : 0).toLocaleString('pt-BR', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}
+              </div>
             </div>
           </ProgressBar>
-          <div>VIP{currentLevel + 1}</div>
+          <div className={isMobile? 'hidden': ''}>VIP{currentLevel + 1}</div>
         </div>
       </div>
     </div>
