@@ -48,7 +48,6 @@ export type IHeader = {
   className?: string;
   onClickUserLoginStatusDrawer: () => void;
   onClickToPopupUserInfoStatusPopover: () => void;
-  onClickToDismissPopupUserInfoStatusPopover?: () => void;
   isLogin: boolean;
   onClickToOpenNotificationDrawer: () => void;
   openLogoutPopover: boolean;
@@ -172,7 +171,7 @@ export const Header = (props: IHeader) => {
 
           <section
             className='flex gap-2 items-center'
-            // onClick={() => props.onClickToPopupUserInfoStatusPopover()}
+            onClick={() => props.onClickToPopupUserInfoStatusPopover()}
             onMouseOver={() => {
               // console.log("onMouseOver")
               props.onClickToPopupUserInfoStatusPopover();
@@ -183,7 +182,7 @@ export const Header = (props: IHeader) => {
             onMouseLeave={() => {
               // console.log("onMouseLeave")
               // NOTICE: StatusPopover 不能有 mash div 佔滿全部螢幕，不然會導致 over out leave 瞬間連續觸發
-              props?.onClickToDismissPopupUserInfoStatusPopover && props?.onClickToDismissPopupUserInfoStatusPopover()
+              // props.onClickToPopupUserInfoStatusPopover();
             }}
           >
             <CocoAvatar className='w-[44px] h-[44px]' />
