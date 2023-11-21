@@ -17,7 +17,7 @@ export const HowToImageText = () => {
         para seus melhores amigos e participem juntos.
       </div>
 
-      <div className={'block text-left text-lg text-white md:hidden'}>
+      <div className={'block text-left text-sm text-white md:hidden'}>
         Convide usuários válidos para recarga, o bônus pode chegar a até R$20!
         O que você está esperando, convide seus amigos para participar!
       </div>

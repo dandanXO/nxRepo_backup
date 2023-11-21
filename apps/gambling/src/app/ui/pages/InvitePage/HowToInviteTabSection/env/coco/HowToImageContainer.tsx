@@ -9,7 +9,6 @@ import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
 export const HowToImageContainer = styled.div`
   position: relative;
   min-height: 380px;
-  min-width: 320px;
   color: var(--white);
   overflow: hidden;
   display: flex;
@@ -30,7 +29,7 @@ export const HowToImage = (props: any) => {
       'shadow-[-4px_-4px_4px_0px_rgba(255,255,255,0.25)_inset,4px_4px_4px_0px_rgba(255,255,255,0.25)_inset]': isMobile
     })}>
       <div className="mb-2 sm:mb-8">
-        <div className={`text-3xl font-extrabold text-[var(--text-popup)] mt-4 mb-2 sm:text-4xl sm:font-bold sm:text-white sm:mb-2.5`}>Como convidar usuários?</div>
+        <div className={`text-3xl font-extrabold text-[var(--text-popup)] mb-2 sm:text-4xl sm:font-bold sm:text-white sm:mb-2.5`}>Como convidar usuários?</div>
         <HowToImageText />
       </div>
       <div className={cx("w-full flex flex-col text-center sm:text-left sm:flex-row sm:rounded-2xl sm:pb-4 sm:pt-0.5 sm:px-8", {
@@ -45,7 +44,7 @@ export const HowToImage = (props: any) => {
           <img className={"w-[400px]"} src={`assets/${environment.assetPrefix}/pic_social_media_logo.png`} />
         </div>
       </div>
-
+      {!isMobile && <div className={`text-4xl font-bold text-white my-8 w-full`}>Instruções diárias de recompensa de comissão</div>}
     </HowToImageContainer>
   )
 
