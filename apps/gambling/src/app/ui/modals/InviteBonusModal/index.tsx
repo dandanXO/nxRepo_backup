@@ -9,6 +9,7 @@ import {useEffect, useState} from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
+import { useInviteConfig } from "../../hooks/useInviteConfig";
 
 type IConfigItem = {
   num: string;
@@ -20,24 +21,7 @@ export type IInitialChargeModal = {
 }
 
 export const InviteBonusModal = (props: IInitialChargeModal) => {
-  const { isLogin } = useSelector((state: RootState) => state.app);
-  const [triggerGetInviteConfig, {isLoading, data, isFetching, currentData }] = useLazyGetInviteConfigQuery();
-  const [currentConfig, setCurrentConfig] = useState<IConfigItem[]>();
-
-  useEffect(() => {
-    if(isLogin) {
-      triggerGetInviteConfig({})
-    }
-  }, [isLogin]);
-
-  useEffect(() => {
-  //   const userInfo: UserInfo = AppLocalStorage.getItem("userInfo");
-    const currentProxyType = currentData?.data.filter(item => item.proxyType === 0);
-    if(currentProxyType) {
-      const configs: IConfigItem[] = JSON.parse(currentProxyType[0].firstRechargeLevel);
-      setCurrentConfig(configs);
-    }
-  }, [currentData])
+  const { currentConfig } = useInviteConfig();
 
   return (
     <div
