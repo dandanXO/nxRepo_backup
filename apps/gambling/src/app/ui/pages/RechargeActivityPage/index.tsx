@@ -12,6 +12,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 import { RechargeActivityContent as CRechargeActivityContent } from './env/coco/RechargeActivityContent';
 import { RechargeActivityContent as PRechargeActivityContent } from './env/pernambucana/RechargeActivityContent';
 import { RechargeActivityContent as WRechargeActivityContent } from './env/wild/RechargeActivityContent';
+import { Banner } from "../../components/Banner";
 
 
 const Bonus = styled.div`
@@ -39,18 +40,21 @@ export const RechargeActivityPage = () => {
   const { onClickToIndex } = usePageNavigate();
 
   return (
-    <>
+    <div className={"px-4 md:px-10 w-full"}>
       <BackNavigation
         onClick={() => onClickToIndex()}
         title={<div className={"w-full text-center md:text-left md:ml-2"}>Recarga benefícios</div>}
       />
-      <div className={"px-4 md:px-10 w-full"}>
-
-        {renderByPlatform({
-          "coco777bet": <CRechargeActivityContent />,
-          "wild777bet": <WRechargeActivityContent />
-        }, <PRechargeActivityContent />)};
-      </div>
-    </>
+      <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`} src={`assets/${environment.assetPrefix}/h5_banner_2.png`} bannerText={
+        <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
+          <div className={"text-white text-sm md:text-xl lg:text-4xl mb-2 md:mb-4 lg:mb-9"}>Benefícios-ofertasde deposito</div>
+          <div className={"text-white text-xl md:text-3xl lg:text-8xl"}>Ate 10% bônus</div>
+        </div>
+      } />
+      {renderByPlatform({
+        "coco777bet": <CRechargeActivityContent />,
+        "wild777bet": <WRechargeActivityContent />
+      }, <PRechargeActivityContent />)};
+    </div>
   )
 }
