@@ -36,9 +36,7 @@ type ILogoutPopover = {
 
 export const LogoutSection = (props: ILogoutPopover) => {
   // const {logout} = useLogoutPopoverPresenter();
-
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const onHandleCancel = () => {
@@ -54,10 +52,10 @@ export const LogoutSection = (props: ILogoutPopover) => {
 
   return (
     <div className={cx("flex flex-col", props.className)}>
-      <div className={"mb-2 text-main-secondary-main"}>Tem certeza que deseja sair?</div>
+      <div className={"mb-2 text-[var(--white)]"}>Tem certeza que deseja sair?</div>
       <div className={"flex flex-row justify-center"}>
-        <CancelButton className={"px-2 py-1 text-white"} onClick={onHandleCancel}>Cancelar</CancelButton>
-        <ConfirmButton className={"px-2 py-1 text-main-primary-varient"} onClick={onHandleLogout}>Confirme</ConfirmButton>
+        <button className={"mr-2 px-2 py-1 bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[--var(white)] rounded-md"} onClick={onHandleCancel}>Cancelar</button>
+        <button className={"px-2 py-1 bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)] text-[--var(white)] rounded-md"} onClick={onHandleLogout}>Confirme</button>
       </div>
     </div>
   )

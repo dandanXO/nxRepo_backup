@@ -63,13 +63,13 @@ export const TelegramPage = () => {
 
 
         <VIPBorderStyleContainer className={"flex flex-col text-left text-white items-start text-lg"}>
-          <div className={"text-left w-full"}>SKY Group ({environment.platformName}) sinceramente convida você a se juntar ao nosso canal de telegrama e vamos nos comunicar mais profundamente!</div>
+          <div className={"text-left w-full"}>{environment.platformGroup} ({environment.platformName}) sinceramente convida você a se juntar ao nosso canal de telegrama e vamos nos comunicar mais profundamente!</div>
           <div className={"text-left w-full"}>Anunciaremos as seguintes atividades ou informações relacionadas no canal de telegrama:</div>
 
           <ul className={"text-left w-full"}>
             <li>1. Quando a plataforma lançar novas atividades, iremos anunciá-las no canal do telegram o mais rápido possível.</li>
             <li>2. Atualizaremos várias recompensas na plataforma de tempos em tempos no canal do telegrama.</li>
-            <li>3. Compartilhe regularmente recompensas de envelope vermelho de troca oficial do SKY Group ({environment.platformName}) todos os dias.</li>
+            <li>3. Compartilhe regularmente recompensas de envelope vermelho de troca oficial do {environment.platformGroup} ({environment.platformName}) todos os dias.</li>
             <li>4. A lista de ganhadores da plataforma será divulgada no canal do telegram o mais breve possível.</li>
             <li>5. Anúncios e manutenções relacionados à plataforma serão divulgados no canal do Telegram assim que possível.</li>
             <li>6. A atualização do mecanismo de recompensa por convite da plataforma será anunciada na plataforma do Telegram o mais rápido possível.</li>

@@ -17,7 +17,7 @@ export const WebsiteButton = () => {
       className={"cursor-default"}
       // onClick={() => navigate(PageOrModalPathEnum.CompanyProfilePage)}
     >
-      <span className={"text-white font-bold"}>Produtos do SKY Group </span>
+      <span className={"text-white font-bold"}>Produtos do {environment.platformGroup} </span>
     </StyledWebsiteButton>
   )
 }

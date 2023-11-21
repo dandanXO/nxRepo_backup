@@ -341,10 +341,10 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
         props.close();
       }}
     >
-      <PopoverContainer onMouseLeave={() => {
-        props.close();
-      }}>
-
+      <PopoverContainer
+        onMouseLeave={() => {
+          props.close();
+        }}>
         {
           renderByPlatform({
             "coco777bet": (
