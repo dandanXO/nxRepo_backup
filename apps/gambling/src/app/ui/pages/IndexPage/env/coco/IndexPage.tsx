@@ -113,6 +113,7 @@ export const IndexPage = ({
         {isMobile ? (
           <>
             <div className="mb-4" onClick={handleToSearchPage}>
+              {/*NOTICE: refactor me*/}
               <Input
                 className={cx(
                 "py-0.5 px-2.5 text-xs rounded",
@@ -145,10 +146,15 @@ export const IndexPage = ({
               </section>
 
               <div className="shirnk-0 grow-0 basis-[150px]">
+                {/*NOTICE: refactor me*/}
                 <Input
-                  className="items-baseline"
-                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`}/>}
+                  className={cx(
+                    "py-0.5 px-2.5 text-xs rounded",
+                    "!border-[var(--stroke-textfields)] bg-[var(--background-textfields)]"
+                  )}
+                  inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
                   placeholder={"Pesquisar nome do jogo"}
+                  prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
                   onChange={(event: any) => {
                     setSearchInput(event.target.value)
                   }}

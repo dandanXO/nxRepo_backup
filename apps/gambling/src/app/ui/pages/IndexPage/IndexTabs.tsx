@@ -1,12 +1,12 @@
 import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import {ImageTab} from "../../components/TabItem/ImageTab";
 import cx from "classnames";
-import todos from "./env/coco/index-tab-todos.png"
-import slots from "./env/coco/index-tab-slots.png"
-import vivo from "./env/coco/index-tab-vivo.png"
-import viver from "./env/coco/index-tab-viver.png"
-import favorite from "./env/coco/index-tab-favorite.png"
-import recent from "./env/coco/index-tab-recent.png"
+import todos from "../../env/coco/index-tab-todos.png"
+import slots from "../../env/coco/index-tab-slots.png"
+import vivo from "../../env/coco/index-tab-vivo.png"
+import viver from "../../env/coco/index-tab-viver.png"
+import favorite from "../../env/coco/index-tab-favorite.png"
+import recent from "../../env/coco/index-tab-recent.png"
 
 type IIndexTabs = {
   label: any;
@@ -28,10 +28,14 @@ export const IndexTabs = ({
   const icons = [
     todos,
     slots,
-    vivo,
     viver,
+    vivo,
+    todos,
+    todos,
+    todos,
+    todos,
     favorite,
-    recent
+    // recent
   ]
   return (
       <Tabs className={"game-type-tab-list"}>
