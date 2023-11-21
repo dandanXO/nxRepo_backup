@@ -678,8 +678,8 @@ export const API = createApi({
         }),
       }),
       getInviteConfig: builder.query<
-        GetInviteConfigRequest,
-        GetInviteConfigResponse
+        GetInviteConfigResponse,
+        GetInviteConfigRequest
       >({
         query: (query: GetInviteConfigRequest) => ({
           method: 'get',
@@ -821,9 +821,10 @@ export const {
   useRechargeMutation,
   useGetLetterListMutation,
   useRechargeHistoryListMutation,
+  useLazyGetInviteConfigQuery,
   useLazyGetInviteRewardDataQuery,
-  useLazyGetUnsettleInviteRewardDataQuery,
   useLazyGetInviteUserDayReportDataQuery,
+  useLazyGetUnsettleInviteRewardDataQuery,
   useLazyGetUserInviteRewardRecordQuery,
   useGetWithdrawLimitMutation,
   useWithdrawMutation,

@@ -35,7 +35,7 @@ export const MoneyButton = (props: IMoneyButton) => {
         style={{
           textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
         }}
-      >R$ {props.money.toFixed(2)}</span>
+      >R$ {props.money?.toFixed(2)}</span>
     </StyledMoneyButton>
   )
 }
