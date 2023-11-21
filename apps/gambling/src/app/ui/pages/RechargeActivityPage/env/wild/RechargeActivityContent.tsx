@@ -1,7 +1,6 @@
 import { ChargeButton } from "../../../../components/Buttons/ChargeButton"
 import useBreakpoint from "../../../../hooks/useBreakpoint"
 import { usePageNavigate } from "../../../../hooks/usePageNavigate"
-import { Banner } from "./Banner"
 import { BenefitSection } from "./BenefitSection"
 import { NoticeSection } from "./NoticeSection"
 
@@ -18,7 +17,6 @@ export const RechargeActivityContent = () => {
   }
   return (
     <>
-      <Banner />
       <BenefitSection />
       <RechargeButton />
       <NoticeSection />
