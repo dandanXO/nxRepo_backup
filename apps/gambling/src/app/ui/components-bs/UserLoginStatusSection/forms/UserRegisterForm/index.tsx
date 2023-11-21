@@ -143,6 +143,9 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         return;
       }
 
+      if(!captchaKey) {
+        return;
+      }
       triggerRegister({
           "appChannel": "pc",
           "deviceId": AppLocalStorage.getItem("deviceId") || "",
@@ -165,7 +168,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           },
           "installTime": String(new Date().getTime()),
           // TODO:
-          "captcha_image_key": "78ahjsgfafsfchhcsa",
+          "captcha_image_key": captchaKey,
           "captcha_image_code": captchaInput.data,
           "web_uuid": "39b1e7e2-0a02-4fd2-958f-e8a85215010f"
       }).then((response) => {
@@ -200,6 +203,10 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
     onClickToPrivacyAgreement
   } = usePageNavigate();
 
+  const [captchaKey, setCaptchaKey] = useState<string>();
+  const onGetCaptchaKey = (key: string) => {
+    setCaptchaKey(key);
+  }
   return (
     <section className={"flex flex-col"}>
       <Input
@@ -267,7 +274,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         type={"text"}
         // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
-        outerSuffix={<Captcha/>}
+        outerSuffix={<Captcha onGetCaptchaKey={onGetCaptchaKey}/>}
         placeholder={"Código de verificação"}
         value={captchaInput.data}
         validation={captchaInput.isValidation}
