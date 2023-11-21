@@ -37,7 +37,6 @@ export const AppCarouselContent = () => {
           onClick={() => {
             onClickToFirstDeposit();
           }}
-          // style={{ display: 'flex',justifyContent: 'center' }}
         >
           <p
             className={cx("absolute top-1/2 transform -translate-y-1/2",
@@ -49,7 +48,6 @@ export const AppCarouselContent = () => {
           </p>
           <img
             src={`assets/${environment.assetPrefix}/banner_1.png`}
-            // className="rounded-box"
           />
         </div>
       )}

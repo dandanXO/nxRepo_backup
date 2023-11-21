@@ -12,20 +12,18 @@ import {CarouselContainer} from "../../CarouselContainer";
 
 export const AppCarouselContent5 = () => {
   const {isMobile} = useBreakpoint();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
-  const {onClickToFirstDeposit} = usePageNavigate();
+  const {onClickToCheckInDaily} = usePageNavigate();
+
   return (
     <CarouselContainer className={"text-[22.5px] text-white"}>
       {isMobile ? (
         <div
           onClick={() => {
-            onClickToFirstDeposit();
+            onClickToCheckInDaily();
           }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
-            <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
+            <span>Check-in todos os dias <br/> O dinheiro não para!</span>
           </p>
           <img
             src={`assets/${environment.assetPrefix}/h5_banner_5.png`}
@@ -35,9 +33,8 @@ export const AppCarouselContent5 = () => {
         <div
           className="banner w-screen"
           onClick={() => {
-            onClickToFirstDeposit();
+            onClickToCheckInDaily();
           }}
-          // style={{ display: 'flex',justifyContent: 'center' }}
         >
           <p
             className={cx("absolute top-1/2 transform -translate-y-1/2",
@@ -45,11 +42,10 @@ export const AppCarouselContent5 = () => {
               "italic font-bold text-6xl text-left"
             )}
           >
-            <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
+            <span>Check-in todos os dias <br/> O dinheiro não para!</span>
           </p>
           <img
             src={`assets/${environment.assetPrefix}/banner_5.png`}
-            // className="rounded-box"
           />
         </div>
       )}

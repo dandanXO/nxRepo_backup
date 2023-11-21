@@ -101,9 +101,12 @@ export const IndexPage = ({
           <AppCarouselContent3/>
           <AppCarouselContent4/>
           <AppCarouselContent5/>
-          <AppCarouselContent6/>
-          <AppCarouselContent7/>
-          <AppCarouselContent8/>
+          {/*NOTE: 公司簡介目前沒有*/}
+          {/*<AppCarouselContent6/>*/}
+          {/*NOTE: 暫時備用*/}
+          {/*<AppCarouselContent7/>*/}
+          {/*NOTE: 暫時備用*/}
+          {/*<AppCarouselContent8/>*/}
           {/*<CocoAppCarouselContent6/>*/}
         </AppCarousel>
       </div>

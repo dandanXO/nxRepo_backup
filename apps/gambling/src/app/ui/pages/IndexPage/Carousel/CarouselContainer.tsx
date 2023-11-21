@@ -6,6 +6,7 @@ type IProps = {
 }
 export const CarouselContainer = (props: IProps) => {
   return (
-    <div className={cx("pointer-events-none", props.className)}>{props.children}</div>
+    // <div className={cx("pointer-events-none", props.className)}>{props.children}</div>
+    <div className={cx("", props.className)}>{props.children}</div>
   )
 }

@@ -12,16 +12,14 @@ import {CarouselContainer} from "../../CarouselContainer";
 
 export const AppCarouselContent4 = () => {
   const {isMobile} = useBreakpoint();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
-  const {onClickToFirstDeposit} = usePageNavigate();
+  const {onClickToVipGrade} = usePageNavigate();
+
   return (
     <CarouselContainer className={"text-[22.5px] text-white"}>
       {isMobile ? (
         <div
           onClick={() => {
-            onClickToFirstDeposit();
+            onClickToVipGrade();
           }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
@@ -33,9 +31,8 @@ export const AppCarouselContent4 = () => {
         <div
           className="banner w-screen"
           onClick={() => {
-            onClickToFirstDeposit();
+            onClickToVipGrade();
           }}
-          // style={{ display: 'flex',justifyContent: 'center' }}
         >
           <p
             className={cx("absolute top-1/2 transform -translate-y-1/2",
@@ -47,7 +44,6 @@ export const AppCarouselContent4 = () => {
           </p>
           <img
             src={`assets/${environment.assetPrefix}/banner_4.png`}
-            // className="rounded-box"
           />
         </div>
       )}
