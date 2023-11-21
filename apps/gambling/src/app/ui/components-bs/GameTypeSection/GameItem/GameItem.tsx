@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import cx from "classnames"
 import {ArrowRightOutlined} from "@ant-design/icons/lib/icons";
-import useBreakpoint from "../../hooks/useBreakpoint";
 import {useState} from "react";
 // import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import {TailSpin} from 'react-loading-icons';
-import {environment} from "../../../../environments/environment";
-
+import {environment} from "../../../../../environments/environment";
 
 
 export type IGameItem = {

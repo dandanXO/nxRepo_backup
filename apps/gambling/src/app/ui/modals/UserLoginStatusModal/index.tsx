@@ -7,6 +7,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import {Container as PContainer} from "./env/pernambucana/Container";
 import {Container as WContainer} from "./env/wild/Container";
 import {Container as CContainer} from "./env/coco/Container";
+import {useEffect} from "react";
 
 const Container = renderByPlatform({
   "wild777bet": WContainer,
@@ -23,6 +24,8 @@ export type IUserLoginStatusModal = {
 export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
   const isShowCloseButton = props.showCloseButton == undefined ? true : props.showCloseButton;
   const {isMobile} = useBreakpoint();
+
+
   return (
     <div
       className={"bg-[rgba(0,0,0,.6)] z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}

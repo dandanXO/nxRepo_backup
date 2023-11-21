@@ -1,6 +1,6 @@
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {DesktopGameItem} from "./GameItem";
-import {MobileGameItem} from "./MobileGameItem";
+import {DesktopGameItem} from "./GameItem/GameItem";
+import {MobileGameItem} from "./GameItem/MobileGameItem";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
@@ -11,10 +11,10 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import {TTotalFavoriteLocalState} from "../../pages/IndexPage";
 import cx from "classnames";
 import {environment} from "../../../../environments/environment"
-import {MobileGameList} from "./MobileGameList";
-import {GameList} from "./GameList";
-import {MobileGameTypeHeader} from "./MobileGameTypeHeader";
-import {GameTypeHeader} from "./GameTypeHeader";
+import {MobileGameList} from "./GameList/MobileGameList";
+import {GameList} from "./GameList/GameList";
+import {MobileGameTypeHeader} from "./GameTypeHeader/MobileGameTypeHeader";
+import {GameTypeHeader} from "./GameTypeHeader/GameTypeHeader";
 import {mobileGameTypeHeaderProps as PmobileGameTypeHeaderProps} from "./env/pernambucana/mobileGameTypeHeaderProps";
 import {mobileGameTypeHeaderProps as WmobileGameTypeHeaderProps} from "./env/wild/mobileGameTypeHeaderProps";
 import {mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps} from "./env/coco/mobileGameTypeHeaderProps";

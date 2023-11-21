@@ -4,6 +4,10 @@ import useBreakpoint from "../hooks/useBreakpoint";
 import styled from "styled-components";
 import {useLocation} from "react-router";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+import {renderByPlatform} from "../utils/renderByPlatform";
+import {ToolButton as PToolButton} from "../components/Buttons/env/pernambucana/ToolButton"
+import {ToolButton as WToolButton} from "../components/Buttons/env/wild/ToolButton"
+import {ToolButton as CToolButton} from "../components/Buttons/env/coco/ToolButton"
 
 const FixedToolContainer = styled.div`
     width: 80px;
@@ -20,16 +24,10 @@ export type IToolbox = {
   onClickToOpenTelegramService: () => void;
 }
 
-const ToolButton = styled.button`
-  border-radius: 100px;
-  border: 1px solid transparent;
-  background-clip: padding-box,border-box;
-  background-origin: padding-box,border-box;
-  background-image: linear-gradient(0deg,#0a24a5,#0272c2),linear-gradient(180deg,#90c8f1,#0C629E);
-  width: 40px;
-  height: 40px;
-  padding: 3px;
-`
+const ToolButton = renderByPlatform({
+  "wild777bet": WToolButton,
+  "coco777bet": CToolButton,
+}, PToolButton)
 
 export const Toolbox = (props: IToolbox) => {
   const {isMobile} = useBreakpoint();

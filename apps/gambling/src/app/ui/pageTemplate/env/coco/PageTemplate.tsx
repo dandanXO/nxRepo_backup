@@ -136,8 +136,6 @@ export const PageTemplate = ({
   return (
       <StyledPage isCurrentPageCompanyProfile={false}>
 
-
-
         {isMobile && isShowMobileHeader && (
           <HeaderMobile
             className={"!h-[52.5px]"}
@@ -159,6 +157,7 @@ export const PageTemplate = ({
               showLoginModal(true)
             }}
             className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
+            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             onClickToPopupUserInfoStatusPopover={() => {
               setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
             }}
@@ -170,7 +169,7 @@ export const PageTemplate = ({
             }}
             onClickToDownload={onClickToDownload}
             openLogoutPopover={isShowMobileLogoutModal}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+
           />
         )}
 

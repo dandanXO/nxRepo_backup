@@ -12,19 +12,19 @@ import {CarouselContainer} from "../../CarouselContainer";
 
 export const AppCarouselContent7= () => {
   const {isMobile} = useBreakpoint();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToFirstDeposit} = usePageNavigate();
+
   return (
-    <CarouselContainer className={"text-[22.5px] font-[Heebo] text-white"}>
+    <CarouselContainer
+      className={"text-[22.5px] text-white"}
+      onClickBanner={() => {
+        onClickToFirstDeposit();
+      }}
+    >
       {isMobile ? (
         <div
-          onClick={() => {
-            onClickToFirstDeposit();
-          }}
         >
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
+          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
           <img
@@ -34,15 +34,11 @@ export const AppCarouselContent7= () => {
       ) : (
         <div
           className="banner w-screen"
-          onClick={() => {
-            onClickToFirstDeposit();
-          }}
-          // style={{ display: 'flex',justifyContent: 'center' }}
         >
           <p
             className={cx("absolute top-1/2 transform -translate-y-1/2",
               "pl-4",
-              "italic font-bold text-6xl text-left"
+              "font-bold text-6xl text-left"
             )}
           >
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>

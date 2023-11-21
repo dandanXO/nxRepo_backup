@@ -3,11 +3,10 @@ import cx from "classnames";
 import {TailSpin} from "react-loading-icons";
 import {IGameItem, IItem} from "./GameItem";
 import styled from "styled-components";
-import {environment} from "../../../../environments/environment";
-import {GameImg} from "./GameImg";
-import {FavoriteSection} from "./FavoriteSection";
-import {Skeleton} from "./Skeleton";
-
+import {environment} from "../../../../../environments/environment";
+import {GameImg} from "../GameImg";
+import {FavoriteSection} from "../FavoriteSection";
+import {Skeleton} from "../Skeleton";
 
 const StyledMobileGameItem = styled.div.attrs<IGameItem>(props => ({
   // className: cx("w-1/3 sm:w-1/4 md:w-1/5 lg:w-1/5 xl:w-1/5", props.className)

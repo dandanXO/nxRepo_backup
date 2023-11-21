@@ -1,6 +1,6 @@
 import {Dispatch, SetStateAction} from "react";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {environment} from "../../../../environments/environment";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {environment} from "../../../../../../environments/environment";
 
 export const GameTypeHeader = (props: {
   gameTypeName: string;

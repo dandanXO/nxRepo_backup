@@ -12,19 +12,19 @@ import {CarouselContainer} from "../../CarouselContainer";
 
 export const AppCarouselContent4 = () => {
   const {isMobile} = useBreakpoint();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
-  const {onClickToFirstDeposit} = usePageNavigate();
+  const {onClickToVipGrade} = usePageNavigate();
+
   return (
-    <CarouselContainer className={"text-[22.5px] font-[Heebo] text-white"}>
+    <CarouselContainer
+      className={"text-[22.5px] text-white"}
+      onClickBanner={() => {
+        onClickToVipGrade();
+      }}
+    >
       {isMobile ? (
         <div
-          onClick={() => {
-            onClickToFirstDeposit();
-          }}
         >
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
+          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
             Prêmio upgrade VIP<br/> Só esperando você coletar!
           </p>
           <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`}/>
@@ -32,22 +32,17 @@ export const AppCarouselContent4 = () => {
       ) : (
         <div
           className="banner w-screen"
-          onClick={() => {
-            onClickToFirstDeposit();
-          }}
-          // style={{ display: 'flex',justifyContent: 'center' }}
         >
           <p
             className={cx("absolute top-1/2 transform -translate-y-1/2",
               "pl-4",
-              "italic font-bold text-6xl text-left"
+              "font-bold text-6xl text-left"
             )}
           >
             Prêmio upgrade VIP<br/> Só esperando você coletar!
           </p>
           <img
             src={`assets/${environment.assetPrefix}/banner_4.png`}
-            // className="rounded-box"
           />
         </div>
       )}
