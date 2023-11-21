@@ -25,81 +25,91 @@ const LevelInfoCard = ({
 
   return (
     <div className={tcx(
-        'p-4 border-2 border-purple-400 rounded-md flex text-white bg-table-varient text-left text-lg gap-5',
-        ['flex-col text-sm gap-0', isMobile],
+        'p-6 border-2 border-[var(--stroke-dashboard-secondary)] rounded-lg flex text-white bg-[var(--background-dashboard-secondary)] text-left text-lg gap-6',
+        ['flex-col text-sm gap-3', isMobile],
         className,
       )}>
-      <div className={tcx('flex w-3/5', ['w-full', isMobile])}>
+      <div className='flex items-center'>
         <div className={tcx(
-            'p-4 flex flex-col items-center justify-center',
-            ['p-0', isMobile],
-            ['w-[30%]', !isMobile]
+            'flex flex-col w-[280px] justify-center items-center ',
+          ['w-full', isMobile]
         )}>
           <img
-            src={isMobile ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
-               level < 20 ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
-                 `assets/${environment.assetPrefix}/${JackpotMap[level].image}`
-          }
-            className={tcx("p-2", ['w-32 p-0', isMobile])}
+            className={tcx('px-[93px]', ['px-0', level >= 20])}
+            src={
+              level < 20 ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
+                `assets/${environment.assetPrefix}/${JackpotMap[level].image}`
+            }
           />
           {
-            !isMobile && level >= 20 && (
+             level >= 20 && (
               <div className='text-base text-center'>
                 <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
                 <div>Ou numerário de valor equivalente</div>
               </div>
             )
           }
-          <div className={isMobile?'text-2xl':'text-4xl'}>VIP {level}</div>
+          <img className={tcx('w-[102px] mt-[6px]', ['mt-[14px]', isMobile])} alt='vip_level' src={`assets/${environment.assetPrefix}/ic_vip_${level}.png`} />
         </div>
-        <div>
+      </div>
 
-          <div className={isMobile?'text-lg':'text-3xl'}>Privilégio</div>
+      <div className='flex w-full gap-3'>
+        <div className={tcx('w-1/2 flex flex-col gap-2 text-xl', ['text-sm', isMobile])}>
+          <div className={isMobile?'text-lg font-bold':'text-2xl font-medium'}>Privilégio</div>
 
-          {
-            isMobile && level >= 20 && (
-              <div className='border-b border-purple-400 flex flex-col items-center'>
-                <img className='p-3' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
-                <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
-                <div>Ou numerário de valor equivalente</div>
-              </div>
-            )
-          }
-
-          <ul className={isMobile?'relative list-decimal pl-5':''}>
-            <li className={isMobile?'absolute top-0 left-[-10000px]':''}>Recompensa de atualização： R$ {
-              (upRewardAmout ? upRewardAmout / 100 : 0).toLocaleString('en-Us', {
+          <div className={tcx(['absolute top-0 left-[-10000px]', isMobile], ['hidden', level >= 20])}>Recompensa de atualização：
+            <span className='text-[var(--secondary-assistant)]'>
+              R$ {
+              (upRewardAmout ? upRewardAmout / 100 : 0).toLocaleString('pt-BR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
               })}
-            </li>
-            <li>Recompensa total de check-in de 7 dias： {signInBonus.toFixed(2)}</li>
-            <li>Limite máximo de retirada única： R$ {
-              (withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0).toLocaleString('en-Us', {
+            </span>
+          </div>
+          <div>Recompensa total de check-in de 7 dias：
+            <span className='text-[var(--secondary-assistant)]'>
+              {signInBonus.toLocaleString('pt-BR', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
-              })}</li>
-            <li>Número de retiradas por dia： {withdrawTimesLimitDay}</li>
-          </ul>
+              })}
+            </span>
+          </div>
+          <div>Limite máximo de retirada única：
+            <span className='text-[var(--secondary-assistant)]'>
+              R$ {
+              (withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0).toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
+            </span>
+          </div>
+          <div>Número de retiradas por dia：
+            <span className='text-[var(--secondary-assistant)]'>{withdrawTimesLimitDay}</span>
+          </div>
 
         </div>
-      </div>
-      <div className={tcx(
-          'w-2/5',
-          ['w-full bg-table-main p-2 rounded-md mt-2', isMobile],
-          ['hidden', isMobile && level === 0]
-      )}>
-        <div className={tcx('text-2xl text-left', ['text-lg', isMobile])}>Condição</div>
-        <div>Quantidade total de recarga: R$ {
-          (rechargeAmountLimit ? rechargeAmountLimit / 100 : 0).toLocaleString('en-Us', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })}</div>
-        <div>Número total de apostas: R$ {
-          (flowLimit ? flowLimit / 100 : 0).toLocaleString('en-Us', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })}</div>
+
+        <div className='w-1/2 bg-[rgba(255,255,255,20%)] p-2 rounded-md border border-[var(--primary-assistant)] flex flex-col gap-2'>
+          <div className={tcx('text-2xl text-left font-medium', ['text-lg font-bold', isMobile])}>Condição</div>
+          <div>Quantidade total de recarga:
+            <span className='text-[var(--secondary-assistant)]'>
+              R$ {
+              (rechargeAmountLimit ? rechargeAmountLimit / 100 : 0).toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
+            </span>
+          </div>
+          <div>Número total de apostas:
+            <span className='text-[var(--secondary-assistant)]'>
+              R$ {
+              (flowLimit ? flowLimit / 100 : 0).toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -62,11 +62,11 @@ const Coco777betVIPGradePage = ({
         <CurrentLevelInfoCard userVIPInfo={userVIPInfo} currentLevel={currentLevel} />
       </section>
 
-      <section>
+      <section className={isMobile?'mb-16':''}>
         <div className={tcx('text-start text-4xl py-6 font-bold text-[var(--primary-assistant)]', ['text-lg py-2', isMobile])}>Descrição do nível VIP</div>
         {
           allLevelInfoWithBonus?.map((info) => (
-            <LevelInfoCard className='mb-2' {...info} />
+            <LevelInfoCard className={tcx('mb-6', ['mb-[14px]', isMobile])} {...info} />
           ))
         }
       </section>
