@@ -9,6 +9,7 @@ import { RecordButton2 } from "../../../components/Buttons/RecordButton";
 import { environment } from "apps/gambling/src/environments/environment";
 import { CocoTabItem } from "../../../components/TabItem/CocoTabItem";
 import cx from 'classnames';
+import { tabItemProps } from "./env/coco/tabItemProps";
 
 type IDesktopPanel = {
   isProxy: boolean;
@@ -46,22 +47,6 @@ export const DesktopPanel = ({
 
   const navigate = useNavigate();
 
-  // const isCoco777bet = environment.assetPrefix !== 'coco777bet'
-
-  const tabItemProps = (isActive: boolean) => {
-    const isCoco777bet = environment.assetPrefix === 'coco777bet'
-    if (isCoco777bet) {
-      return {
-        className: cx('rounded-lg mr-4 whitespace-nowrap', {
-          'border border-solid border-[var(--primary-assistant)] text-[var(--primary-assistant)]': !isActive
-        }),
-        pureColor: true,
-        background: "var(--primary-variant)",
-        activeBackground: "linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%) "
-      }
-    }
-
-  }
   return (
     <QuestionContainer>
       <DesktopColorfulBoard data={totalRewardData} />

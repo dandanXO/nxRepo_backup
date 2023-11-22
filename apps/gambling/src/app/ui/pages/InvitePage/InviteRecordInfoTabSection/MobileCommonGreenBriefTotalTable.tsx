@@ -16,16 +16,16 @@ const MobileGreenBackgroundShadowContainer = renderByPlatform({
 export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
   const navigate = useNavigate();
   return (
-    <MobileGreenBackgroundShadowContainer className={"flex flex-col rounded-2xl px-4 py-2 text-white"}>
+    <MobileGreenBackgroundShadowContainer className={"flex flex-col rounded-2xl px-3 py-5 text-white"}>
 
-      <div className={"flex flex-row justify-between  mb-2"}>
+      <div className={"flex flex-row justify-around  mb-2"}>
         <div className={"flex flex-col"}>
           <span className={"text-xl text-[#ffffff]"}>R$ {props.data.totalReward || 0.00}</span>
           <span className="text-sm">Prêmio total</span>
         </div>
 
         <div className={"flex flex-col"}>
-          <div className={"text-xl text-[#ffffff] flex items-center"}>
+          <div className={"text-xl text-[#ffffff] flex items-center justify-around"}>
             <span>R$ {props.data.paidReward || 0.00} </span>
             <RightOutlined className="text-xs ml-1" onClick={() => {
               navigate(PageOrModalPathEnum.InviteSettlementRecordPage);
@@ -38,7 +38,7 @@ export const MobileCommonGreenBriefTotalTable = (props: IBoardData) => {
 
       <div className={"text-center flex flex-col"}>
         <span className={"text-xl text-[#ffffff]"}>R$ {props.data.waitForCalReward || 0.00}</span>
-        <span className="text-sm">
+        <span className="text-xs whitespace-nowrap">
             <span>Bônus aguardando liquidação(Atualizar a cada 24 horas)</span>
           </span>
       </div>
