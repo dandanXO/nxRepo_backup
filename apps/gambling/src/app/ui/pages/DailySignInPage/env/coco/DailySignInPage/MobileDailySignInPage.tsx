@@ -87,7 +87,7 @@ const MobileDailySignInPage = ({
         </section>
 
         <SignInButton
-          className='mt-9 mx-auto w-[162px] h-[40px]'
+          className='mt-9 mx-auto w-[162px] h-[40px] relative'
           disable={disableButton}
           onClick={()=> {
             setCurrentSelectedLevel(vipLevel || 0)
