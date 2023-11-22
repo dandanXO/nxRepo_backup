@@ -70,7 +70,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
                 alt='notification'
                 src={`assets/${environment.assetPrefix}/ic_notification.png`}
               />
-              {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
+              {messageCount !== 0 && <MessageCountBadge className='top-[5px] right-[5px]'>{messageCount}</MessageCountBadge>}
             </div>
           </div>
         )}
