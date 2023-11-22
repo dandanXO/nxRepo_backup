@@ -63,12 +63,19 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
 ${(props) => {
     if (props.active) {
       if (props.activeBackground) {
-        return `background: ${props.activeBackground}`
+        return `
+        background: ${props.activeBackground};
+        color:white;
+        `
       }
-      ;
+
     } else {
       if (props.background) {
-        return `background: ${props.background}`
+        console.log('props.background)',props.background)
+        return `
+        background: ${props.background};
+        color:  var(--primary-assistant);
+        `
       }
     }
   }};
