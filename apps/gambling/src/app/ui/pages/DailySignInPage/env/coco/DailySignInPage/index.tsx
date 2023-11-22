@@ -16,57 +16,17 @@ import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 const SignInButton = styled.div<{
   disable: boolean
 }>`
-  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_button.png");
+  background-image: url(${props =>
+    props.disable?`assets/${environment.assetPrefix}/daily_sign_in_button_disable.png`:
+                  `assets/${environment.assetPrefix}/daily_sign_in_button.png`});
   background-size: 100%;
   width: 20vw;
   height: calc(0.33 * 20vw);
   background-repeat: no-repeat;
-  filter: grayscale(${(props)=>props.disable?100:0}%);
-`
-
-const SignInInfoContainer = styled.div`
-  padding: .8vw 1vw;
-  background: #FFC937;
-  box-shadow: 0 3px 0 1px rgba(185,9,76,.35);
-  border-radius: 10px;
-  margin: 1.6vw 3vw 0 2px;
-`
-
-const StraightContainer = styled.div`
-  transform: skew(8deg);
-`
-
-const DayListContainer = styled.div`
-  //margin: 1.2vw;
-`
-
-const DayItemWrapper = styled.div`
-  margin-right: 40px;
 `
 
 const DayItem = styled.div`
   background-image: url("assets/${environment.assetPrefix}/daily_sign_in_wrapper.png");
-  background-size: 100%;
-  background-repeat: no-repeat;
-`
-
-const DayTitle = styled.div`
-  width: 100%;
-  padding: 4px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-`
-
-const VIPContainer = styled.div`
-  margin: 6vw 3vw 5vw 20vw;
-  //background: #311159;
-  //border: 3px solid #DD79F7;
-  //border-radius: 50px;
-  //transform: skew(-8deg);
-  padding: 0 50px;
-  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_container.png");
   background-size: 100%;
   background-repeat: no-repeat;
 `
@@ -80,36 +40,12 @@ const Container = styled.div`
   background-repeat: no-repeat;
 `
 
-const VIPRight = styled.div`
+const BackGround = styled.div`
+  background-image: url("assets/${environment.assetPrefix}/bg_desktop.png");
   width: 100%;
-  position: relative;
-  z-index: 1;
-`
-
-const VIPRightTitle = styled.div`
-  width: 96%;
-  margin: -5% 0 0 2%;
-`
-
-const VIPRightContent = styled.div`
-  margin-top: -16px;
-`
-
-const VIPIcon = styled.div`
-  width: 40%;
-  position: absolute;
-  top: 50%;
-  left: -32%;
-  transform: translateY(-68%);
-`
-
-const ResponsiveContainer = styled.div`
-  display: flex;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: hidden;
-  position: relative;
-  z-index: 0;
+  height: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
 `
 
 const LevelButton = styled.button.attrs<{className?:string}>((props)=>({
@@ -128,12 +64,9 @@ const OtherButton = styled(LevelButton)`
   background-image: url("assets/${environment.assetPrefix}/daily_sign_in_other_vip.png");
   background-size: 100%;
 `
-const DisableButton = styled(CurrentButton) `
-  filter: grayscale(1);
-`
-
-const LevelItemWrapper = styled.div`
-  flex: 1 0 auto;
+const DisableButton = styled(LevelButton) `
+  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_button_checked.png");
+  background-size: 100%;
 `
 
 interface ICocoLevelListProps {
@@ -272,41 +205,45 @@ export const DayList = ({
         const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
 
         return (
-          <DayItem key={day} className={tcx(
-            'flex flex-col justify-between w-[128px] min-w-[128px] h-[188px] mr-[4%] text-center',
-            ['opacity-60', checked],
-            ['w-[108px] min-w-[108px] h-[160px]', isMobile]
-          )}>
-            <div
-              className={tcx('w-full flex justify-center items-center text-white mt-[14px]', ['mt-[10px]', isMobile])}
-            >
-              Dia{day}
-              {
-                checked && <img
-                  style={{width: '18px', marginLeft: '6px'}}
-                  alt='check-text'
-                  src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAR1JREFUOE/Vk69Lg2EUhZ8THFgGgoKChgVXLEuW2WwGwaIg2Gyzubgmi2JzNqOIYUEQQVHcP7NklIGiRy58k89vP9xkIN72wnuf973nnCsmVJoQh78H2V4DroBHSbu/+pHtVeAOyAPPkmbHBtkuAQ/ADPAG7EhqjgWyvRKjAHPAO7An6SIMGxlkexl4AhaAD2Bf0nnX9W8g2zlJr9lI2C4kkCXAQEVSI33vC2T7FignM990L9leBFpAwAJyKOkk+1ga1AbmgQ6wKenedpxjnGLSWJNU7xfiNGgduAamgZcQEjgCQuCouqTaoE3IarQBNIFcpuFYUnXYOvW4ZnsLuASmksZTSZWfdrKv/ba3gTMgMnIgKUQeWiPn6P+BPgHf3FMTEyIoFgAAAABJRU5ErkJggg==' />
-              }
-            </div>
+          <div className='relative'>
+            <DayItem key={day} className={tcx(
+              'flex flex-col justify-between w-[128px] min-w-[128px] h-[188px] text-center mr-[2px] 2xl:mr-[50px]',
+              ['grayscale', checked],
+              ['w-[108px] min-w-[108px] h-[160px]', isMobile]
+            )}>
+              <div
+                className={tcx('w-full flex justify-center items-center text-white mt-[14px]', ['mt-[10px]', isMobile])}
+              >
+                Dia{day}
+              </div>
 
-            <div className='relative flex justify-center'>
-              <img
-                className={tcx('w-[90px]', ['w-[72px]', isMobile])}
-                alt='money'
-                src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}
-              />
               {
-                checked && (
-                  <div className='absolute top-[17%] left-[15%] w-[70%]'>
-                    <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
+                !checked && (
+                  <div className='relative flex justify-center'>
+                    <img
+                      className={tcx('w-[90px]', ['w-[72px]', isMobile])}
+                      alt='money'
+                      src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}
+                    />
                   </div>
                 )
               }
-            </div>
 
-            <div className='break-all text-sm  text-white mb-[24px]'>R$ {(config?.cashback || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits:2}) }</div>
+              {
+                !checked && (
+                  <div className='break-all text-sm  text-white mb-[24px]'>R$ {(config?.cashback || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits:2}) }</div>
+                )
+              }
 
-          </DayItem>
+            </DayItem>
+            {
+              checked && (
+                <div className='absolute top-[30%] left-[15%] w-[70%]'>
+                  <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
+                </div>
+              )
+            }
+          </div>
         )
       })}
     </div>
@@ -363,13 +300,19 @@ const CocoDailySignInPage = ({
   }
 
   return (
-    <div>
-      {contextHolder}
+    <div className='bg-gradient-to-b from-[var(--background-checkin-from)] to-[var(--background-checkin-to)]'>
+      <BackGround>
+        {contextHolder}
 
-      <BackNavigation onClick={() => onClickToIndex()}/>
+        <BackNavigation onClick={() => onClickToIndex()}/>
 
-      <div className='px-24 flex flex-col items-end'>
-          <Container className='relative pt-10 pb-16 pl-16 pr-[86px]'>
+        <div className='px-24 flex flex-col items-end'>
+          <Container className='relative
+                                pt-5 pr-10 pb-8 pl-8
+                                lg:pt-7 lg:pr-12 lg:pb-10 lg:pl-10
+                                xl:pt-9 xl:pr-16 xl:pb-14 xl:pl-14
+                                2xl:pt-14 2xl:pr-20 2xl:pb-14 2xl:pl-17
+                                '>
             <div className='h-full overflow-y-scroll'>
               <CocoLevelList
                 className='font-bold mt-5'
@@ -427,98 +370,13 @@ const CocoDailySignInPage = ({
             <div className='absolute bottom-0 translate-y-[80px] left-[50%] translate-x-[-50%] text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </Container>
 
-        <button
-          className='text-white text-xl mt-20 mr-10'
-          onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
-        >{'visualizar registros >'}
-        </button>
-      </div>
-
-      {/*<VIPContainer>*/}
-      {/*  <div className='flex relative'>*/}
-      {/*    <VIPRight>*/}
-      {/*      <VIPRightTitle>*/}
-      {/*        <ResponsiveContainer>*/}
-      {/*          <div className='pb-[10.6804%]'></div>*/}
-      {/*          <img alt='title' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>*/}
-      {/*        </ResponsiveContainer>*/}
-      {/*      </VIPRightTitle>*/}
-
-      {/*      <VIPRightContent>*/}
-
-      {/*        <div className='ml-[2vw]'>*/}
-      {/*          <CocoLevelList*/}
-      {/*            className='font-bold'*/}
-      {/*            currentLevel={vipLevel}*/}
-      {/*            currentSelectedLevel={currentSelectedLevel}*/}
-      {/*            setCurrentSelectedLevel={setCurrentSelectedLevel}*/}
-      {/*          />*/}
-      {/*        </div>*/}
-
-      {/*        <DayList*/}
-      {/*          currentSelectedLevel={currentSelectedLevel}*/}
-      {/*          signInAllConfig={signInAllConfig || []}*/}
-      {/*          signInConfig={signInConfig}*/}
-      {/*          signInTotalDays={signInTotalDays || 0}*/}
-      {/*          todayIsSignIn={todayIsSignIn || false}*/}
-      {/*          vipLevel={vipLevel || 0}*/}
-      {/*        />*/}
-
-      {/*        <SignInInfoContainer>*/}
-      {/*          <StraightContainer className='font-bold text-xl text-[#cc1d00]'>Regras de recompensa diária VIP：</StraightContainer>*/}
-      {/*          <div className='text-[#cc1d00] mt-[10px] text-lg font-bold'>*/}
-      {/*            · Cada nível só pode receber recompensas por 7 dias no total. As recompensas serão creditadas na próxima vez que você as reivindicar.*/}
-      {/*            <br/>*/}
-      {/*            · Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.*/}
-      {/*          </div>*/}
-      {/*        </SignInInfoContainer>*/}
-      {/*      </VIPRightContent>*/}
-
-      {/*      <SignInButton*/}
-      {/*        disable={disableButton}*/}
-      {/*        onClick={()=> {*/}
-      {/*          setCurrentSelectedLevel(vipLevel || 0)*/}
-      {/*          if(todayIsSignIn) {*/}
-      {/*            notice.error({*/}
-      {/*              message: "Você concluiu o check-in hoje"*/}
-      {/*            })*/}
-      {/*            return;*/}
-      {/*          }*/}
-      {/*          if(disableButton) {*/}
-      {/*            notice.error({*/}
-      {/*              message: "O VIP 0 temporariamente não suporta"*/}
-      {/*            })*/}
-      {/*            return;*/}
-      {/*          }else {*/}
-      {/*            onClickToSignIn();*/}
-      {/*          }*/}
-      {/*        }}*/}
-      {/*      >*/}
-      {/*        <img alt='signInButton' src={`assets/${environment.assetPrefix}/daily_sign_in_button.png`}/>*/}
-      {/*      </SignInButton>*/}
-
-      {/*      <div className='mt-3 mb-[30px] my-auto text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>*/}
-      {/*    </VIPRight>*/}
-
-      {/*    <button*/}
-      {/*      className='absolute bottom-[6%] right-[7%] text-white text-xl z-20'*/}
-      {/*      onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}*/}
-      {/*    >{'visualizar registros >'}*/}
-      {/*    </button>*/}
-
-      {/*    <VIPIcon>*/}
-      {/*      <ResponsiveContainer>*/}
-      {/*        <div className='pb-[122.699%]'></div>*/}
-      {/*        <img*/}
-      {/*          className='absolute top-0 left-0 w-full h-full z-[-1]'*/}
-      {/*          alt='god'*/}
-      {/*          src={`assets/${environment.assetPrefix}/daily_sign_in_god.png`}*/}
-      {/*        />*/}
-      {/*      </ResponsiveContainer>*/}
-      {/*    </VIPIcon>*/}
-
-      {/*  </div>*/}
-      {/*</VIPContainer>*/}
+          <button
+            className='text-white text-xl mt-20 mr-10 mb-20'
+            onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
+          >{'visualizar registros >'}
+          </button>
+        </div>
+      </BackGround>
     </div>
   )
 }
