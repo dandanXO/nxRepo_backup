@@ -74,7 +74,7 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
           <div className={"flex flex-col"} onClick={() => setInviteBonusInfoOpen(true)}>
             <div className='flex gap-2 items-center'>
               <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || "0.00"}</span>
-              <QuestionCircleOutlined style={{ color: '#FF8A00' }} />
+              <QuestionCircleOutlined style={{ color: isCoco777bet ? 'white' : '#FF8A00' }} />
             </div>
             <span className="text-xs font-hairline">Obter bônus</span>
             {
