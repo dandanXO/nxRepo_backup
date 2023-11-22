@@ -35,11 +35,13 @@ export const UserINfoStatusPopoverUserInfo = () => {
         </div>
       </div>
 
-      <img
-        className='h-6 w-6'
-        src={`assets/${environment.assetPrefix}/ic_sign_out.png`}
-        onClick={()=>setOpenLogoutPopover(true)}
-      />
+      <button>
+        <img
+          className='h-6 w-6'
+          src={`assets/${environment.assetPrefix}/ic_sign_out.png`}
+          onClick={()=>setOpenLogoutPopover(true)}
+        />
+      </button>
     </div>
   )
 }
