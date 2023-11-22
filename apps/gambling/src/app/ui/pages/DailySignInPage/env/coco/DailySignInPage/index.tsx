@@ -18,9 +18,9 @@ const SignInButton = styled.div<{
 }>`
   background-image: url("assets/${environment.assetPrefix}/daily_sign_in_button.png");
   background-size: 100%;
+  width: 20vw;
+  height: calc(0.33 * 20vw);
   background-repeat: no-repeat;
-  width:20vw;
-  height: calc(0.3 * 20vw);
   filter: grayscale(${(props)=>props.disable?100:0}%);
 `
 
@@ -247,7 +247,7 @@ interface IDayListProps {
   vipLevel: GetSignInConfigResponse['data']['vipLevel'];
 }
 
-const DayList = ({
+export const DayList = ({
   signInAllConfig,
   currentSelectedLevel,
   vipLevel,
@@ -268,12 +268,17 @@ const DayList = ({
           (dayConfig: any) => dayConfig.days === day
         );
 
+        const { isMobile } = useBreakpoint();
         const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
 
         return (
-          <DayItem key={day} className={tcx('flex flex-col justify-between w-[128px] min-w-[128px] h-[188px] mr-[4%] text-center', ['opacity-60', checked])}>
+          <DayItem key={day} className={tcx(
+            'flex flex-col justify-between w-[128px] min-w-[128px] h-[188px] mr-[4%] text-center',
+            ['opacity-60', checked],
+            ['w-[108px] min-w-[108px] h-[160px]', isMobile]
+          )}>
             <div
-              className='w-full flex justify-center items-center text-white mt-[14px]'
+              className={tcx('w-full flex justify-center items-center text-white mt-[14px]', ['mt-[10px]', isMobile])}
             >
               Dia{day}
               {
@@ -285,7 +290,11 @@ const DayList = ({
             </div>
 
             <div className='relative flex justify-center'>
-              <img className='w-[90px]' alt='money' src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}/>
+              <img
+                className={tcx('w-[90px]', ['w-[72px]', isMobile])}
+                alt='money'
+                src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}
+              />
               {
                 checked && (
                   <div className='absolute top-[17%] left-[15%] w-[70%]'>
