@@ -9,12 +9,29 @@ import {ToolButton as PToolButton} from "../components/Buttons/env/pernambucana/
 import {ToolButton as WToolButton} from "../components/Buttons/env/wild/ToolButton"
 import {ToolButton as CToolButton} from "../components/Buttons/env/coco/ToolButton"
 
+
+const defaultFixedToolStyle = {
+  backgroundColor: 'rgba(119, 136, 120, 0.4)'
+}
+
+const coco777betFixedToolStyle = {
+  background: `linear-gradient(135deg, var(--lineary-blue-from) 8.58%, var(--lineary-blue-to) 91.42%)`,
+  border: '1px solid var(--primary-assistant)',
+  borderRight: '0px',
+  boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)'
+}
+
+const FixedToolStyle = renderByPlatform({
+  "wild777bet": defaultFixedToolStyle,
+  "coco777bet": coco777betFixedToolStyle,
+}, defaultFixedToolStyle)
+
 const FixedToolContainer = styled.div`
     width: 80px;
-    background-color: rgba(119, 136, 120, 0.4);
     border-radius: 11px 0 0 11px;
     overflow: hidden;
     z-index: 10;
+    ${FixedToolStyle}
 `
 
 export type IToolbox = {
@@ -42,22 +59,22 @@ export const Toolbox = (props: IToolbox) => {
         <div className={"z-10 fixed right-[16px] bottom-[68px]"}>
           {isMobileShowDownload && (
             <div className={"mb-2"}>
-              <ToolButton className={""} onClick={props.onClickToDownload}>
+              <ToolButton isMobile={isMobile} className={""} onClick={props.onClickToDownload}>
                 <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
               </ToolButton>
             </div>
           )}
           <div>
-            <ToolButton className={""} onClick={props.onClickToOpenTelegramService}>
-              <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
+            <ToolButton isMobile={isMobile} className={""} onClick={props.onClickToOpenTelegramService}>
+              <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/customer-service-2.png`}/>
             </ToolButton>
           </div>
         </div>
       ): isShowToolbox ? (
-        <div className={"fixed right-[0px] bottom-[68px] text-white w-[100px] flex flex-col p-[10px] z-20"}>
+        <div className={"fixed right-0 bottom-[68px] text-white flex flex-col z-20"}>
 
           <FixedToolContainer className={"flex flex-col justify-center items-center px2 py-3 mb-4"}>
-            <div className={"text-xs font-light"}>Download</div>
+            <div className={"text-xs font-light mb-2"}>Download</div>
             <ToolButton
               onClick={props.onClickToDownload}>
               <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
@@ -66,9 +83,9 @@ export const Toolbox = (props: IToolbox) => {
           </FixedToolContainer>
 
           <FixedToolContainer className={"flex flex-col justify-center items-center p-4"}>
-            <div className={"text-xs font-lights mb-1"}>Contate-nos</div>
+            <div className={"text-xs font-lights mb-2 whitespace-nowrap"}>Contate-nos</div>
 
-            <div className={"mb-1"}>
+            <div className={"mb-2"}>
               <ToolButton
                 onClick={props.onClickToOpenTelegramService}>
                 <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
@@ -76,7 +93,7 @@ export const Toolbox = (props: IToolbox) => {
               <div className={"text-xs font-light"}>Serviço</div>
             </div>
 
-            <div className={"mb-1"}>
+            <div className={""}>
               <ToolButton
                 onClick={props.onClickToOpenTelegramManager}>
                 <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>

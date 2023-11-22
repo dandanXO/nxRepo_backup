@@ -91,7 +91,7 @@ export const Header = (props: IHeader) => {
 
   return (
     <header
-      className={cx("max-h-[66px]",
+      className={cx("z-10 sticky top-[0] max-h-[66px]",
         "flex flex-row justify-between items-center relative bg-[var(--primary-variant)] ",
         // "bg-purple-500"
       )}

@@ -28,7 +28,7 @@ export const AppCarouselContent = () => {
             Primeiro depósito <br/> + bônus de 20%
           </p>
           <img
-              src={`assets/${environment.assetPrefix}/h5_banner_1.png`}
+              src={`assets/${environment.assetPrefix}/h5_banner_2.png`}
           />
         </div>
       ) : (
@@ -44,7 +44,7 @@ export const AppCarouselContent = () => {
             Primeiro depósito <br/> bônus de 20%
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/banner_1.png`}
+            src={`assets/${environment.assetPrefix}/banner_2.png`}
           />
         </div>
       )}

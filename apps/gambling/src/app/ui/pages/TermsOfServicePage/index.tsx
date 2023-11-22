@@ -34,7 +34,7 @@ const TermsOfServicePage = () => {
 
       <div className='text-center md:text-start text-sm md:text-base mb-2 md:my-4'>{environment.platformName} WEBSITES TERMS OF USE and ADDITIONAL TERMS{!isMobile &&<span>.</span>}</div>
 
-      ALL {environment.platformName} ONLINE GAMES, SERVICES AND WEBSITES USERS MUST ACKNOWLEDGE THAT READ, UNDERSTANDOOD AND AGREED TO BE SUBJECT TO THESE TERMS.
+      ALL USERS OF {environment.platformName} ONLINE GAMES, SERVICES, AND WEBSITES MUST ACKNOWLEDGE THAT THEY HAVE READ, UNDERSTOOD, AND AGREED TO BE SUBJECT TO THESE TERMS.
       <TermsBr/>
       {environment.platformName} respects your privacy and understands the importance of protecting your personal information. We will only collect information we need to fulfill your requests and our legitimate business objectives. We will never send you marketing communications without your consent and we will never share your personal information with third parties who are not bound by our privacy policy, unless you give us your consent.
       <TermsBr/>
@@ -46,7 +46,7 @@ const TermsOfServicePage = () => {
       <TermsBr/>
       This instrument is called " {environment.platformName} WEBSITES TERMS OF USE AND ADDITIONAL TERMS." which together with the information entered by the user upon registration, and content protection policies, constitute the whole nature of a private electronic document and should be read and accepted in its entirety.
       <TermsBr/>
-      This instrument legally binds for all purposes the company {environment.platformName} LLP, whose information and addresses can be obtained through the web site (https://startechgame.com), owner of the websites, their content and gaming platform, all contained here, hereinafter simply "site" or "websites", and "software" and of the accounts created by any individual on any of the sites listed here, hereafter simply "User" or "Users".
+      This legal instrument binds the company {environment.platformName} LLP for all purposes. {environment.platformName} LLP, the owner of the websites, their content, and gaming platform, collectively referred to as the "site" or "websites," as well as the "software" and the accounts created by any individual on any of the listed sites, is hereinafter simply referred to as "User" or "Users." Information and addresses related to Sunny LLP can be obtained through the designated channels.
       <TermsBr/>
       1st- Sites Covered in the Present Document:
       <TermsBr/>

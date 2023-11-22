@@ -1,4 +1,4 @@
-import { Input } from "../../components/Inputs/Input";
+import {Input, InputValue} from "../../components/Inputs/Input";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import { SectionContainer } from "../../components/container/SectionContainer";
 import styled from "styled-components";
@@ -78,7 +78,11 @@ export const DepositPanel = (props: IDepositPanel) => {
   const { isMobile } = useBreakpoint();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedIndexConfig, setSelectedIndexConfig] = useState<RechargeResponseConfig>();
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState<InputValue<string>>({
+    data: "",
+    isValidation: true,
+    errorMessage: "",
+  });
 
   // NOTE: bd
   const { recharge_options_default = 0, recharge_options = [] } = props?.data?.options || {};
@@ -101,7 +105,11 @@ export const DepositPanel = (props: IDepositPanel) => {
     setSelectedIndex(defaultIndex);
 
     // 設定預設輸數框
-    setInputValue(String(recharge_options_default))
+    setInputValue({
+      isValidation: true,
+      data: String(recharge_options_default),
+      errorMessage: "",
+    })
 
     const config = getConfig(recharge_options_default);
     setSelectedIndexConfig(config);
@@ -112,7 +120,7 @@ export const DepositPanel = (props: IDepositPanel) => {
   // NOTICE: 當輸入框有變動時
   useEffect(() => {
     // 設定有符合的充值按鈕
-    const defaultIndex = recharge_options.indexOf(Number(inputValue))
+    const defaultIndex = recharge_options.indexOf(Number(inputValue.data))
     // 有匹配到符合的充值按鈕
     if(defaultIndex > -1) {
       setSelectedIndex(defaultIndex);
@@ -120,11 +128,11 @@ export const DepositPanel = (props: IDepositPanel) => {
       setSelectedIndex(-1)
     }
     // NOTICE: Fatal note - props?.data 在 getConfig 有用到
-    const config = getConfig(Number(inputValue));
+    const config = getConfig(Number(inputValue.data));
     setSelectedIndexConfig(config);
-    // console.log(`[input] inputValue:${inputValue}`)
+    // console.log(`[input] inputValue:${inputValue.data}`)
     // console.log("[input] configs:", config);
-  }, [props?.data, recharge_options, inputValue])
+  }, [props?.data, recharge_options, inputValue.data])
 
 
   const depositButtonProps = (rechargeValue: number, rate: string) => renderByPlatform({
@@ -143,11 +151,32 @@ export const DepositPanel = (props: IDepositPanel) => {
     rate,
   }))
 
+  const onClickToNextDepositPage = (event: any) => {
+    if(!inputValue.isValidation) return;
+    if (!clicked) {
+      setClicked(true);
+      navigate(PageOrModalPathEnum.WalletDepositNextPage, {
+        state: {
+          amount: Number(inputValue.data),
+          configID: selectedIndexConfig ? selectedIndexConfig?.id : ""
+        }
+      });
+    }
+  }
+
   return (
     <SectionContainer id={"deposit-section"}>
       <DepositNoticeSection />
       <section className={"flex flex-col w-full"}>
-        {recharge_options && recharge_options.length > 0 && <DepositInput inputValue={inputValue} setInputValue={setInputValue} selectedIndexConfig={selectedIndexConfig} />}
+        {recharge_options && recharge_options.length > 0 && (
+          <DepositInput
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            selectedIndexConfig={selectedIndexConfig}
+            minimunValue={recharge_options && recharge_options[0] || 0}
+            maximunValue={props.data?.config && props.data?.config[props.data?.config.length - 1]  ? Number(props.data?.config && props.data?.config[props.data?.config.length - 1].amount_max) : 0}
+          />
+        )}
         <div className={tcx("flex flex-1 m-auto flex-row flex-wrap w-full justify-start items-stretch", [`mb-20 `, !isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
@@ -158,7 +187,11 @@ export const DepositPanel = (props: IDepositPanel) => {
                 key={index}
                 onClick={() => {
                   setSelectedIndex(index);
-                  setInputValue(String(rechargeValue))
+                  setInputValue({
+                    data: String(rechargeValue),
+                    isValidation: true,
+                    errorMessage: "",
+                  })
                   setSelectedIndexConfig(config);
                 }}
                 isActive={selectedIndex === index}
@@ -184,17 +217,7 @@ export const DepositPanel = (props: IDepositPanel) => {
           <section className={" fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
             <ButtonPro
               size="small"
-              onClick={() => {
-                if (!clicked) {
-                  setClicked(true);
-                  navigate(PageOrModalPathEnum.WalletDepositNextPage, {
-                    state: {
-                      amount: Number(inputValue),
-                      configID: selectedIndexConfig ? selectedIndexConfig?.id : ""
-                    }
-                  });
-                }
-              }}
+              onClick={onClickToNextDepositPage}
             >
               DEPÓSITO
             </ButtonPro>
@@ -203,12 +226,7 @@ export const DepositPanel = (props: IDepositPanel) => {
           <section className={"flex flex-col justify-center items-center w-full"}>
             <ProButton
               className={"bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] text-main-primary-varient font-bold text-2xl"}
-              onClick={() => {
-                if (!clicked) {
-                  setClicked(true);
-                  navigate(PageOrModalPathEnum.WalletDepositNextPage, { state: { amount: Number(inputValue), configID: selectedIndexConfig ? selectedIndexConfig?.id : "" } });
-                }
-              }}
+              onClick={onClickToNextDepositPage}
             >
               Depósito
             </ProButton>

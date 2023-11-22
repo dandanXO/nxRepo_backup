@@ -1,6 +1,6 @@
 import cx from "classnames";
 import {MobileInput} from "../../../../components/Inputs/MobileInput";
-import {Input} from "../../../../components/Inputs/Input";
+import {Input, InputValue} from "../../../../components/Inputs/Input";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import styled from "styled-components";
 import {environment} from "../../../../../../environments/environment";
@@ -36,22 +36,61 @@ const MobileTag = styled(InputTag)`
 
 
 interface IDepositInput {
-  inputValue: string;
-  setInputValue: (value: string) => void;
+  inputValue: InputValue<string>;
+  setInputValue: (data: InputValue<string>) => void;
   isShowInputTag: boolean | undefined;
   extraDepositBonus: React.ReactNode;
   selectedIndexConfig: any;
+  minimunValue: number;
+  maximunValue: number;
 }
 
 export const DepositInput = (props: IDepositInput) => {
   const { isMobile } = useBreakpoint();
+
+  const onInputValueChange = (event: any) => {
+    const inputValue = event.target.value;
+    // console.log("inputValue", inputValue);
+    // console.log("inputValue.props.minimunValue", props.minimunValue);
+    // console.log("inputValue.props.maximunValue", props.maximunValue);
+    if(Number(inputValue) < props.minimunValue) {
+      props.setInputValue({
+        data: inputValue,
+        isValidation: false,
+        errorMessage: `Depósito mínimo ${props.minimunValue}`
+      });
+      return;
+    } else if(Number(inputValue) > props.maximunValue) {
+      props.setInputValue({
+        data: inputValue,
+        isValidation: false,
+        errorMessage: `O valor máximo de recarga é ${props.maximunValue}`
+      });
+      return;
+    } else {
+      props.setInputValue({
+        data: inputValue,
+        isValidation: true,
+        errorMessage: ""
+      });
+    }
+  }
   return (
     (
       <div className={cx("relative", { 'my-10': !isMobile })}>
         {isMobile ? (
-          <MobileInput value={props.inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"} />
+          <MobileInput
+            value={props.inputValue} className={"w-full h-[35px] bg-white !py-0 border-white"}
+            onChange={onInputValueChange}
+            validation={props.inputValue.isValidation}
+            errorMessage={props.inputValue.errorMessage}
+          />
         ) : (
-          <Input value={props.inputValue} className={"w-full bg-white border-white"} themeStyle={"normal"} />
+          <Input value={props.inputValue} className={"w-full bg-white border-white"} themeStyle={"normal"}
+                 onChange={onInputValueChange}
+                 validation={props.inputValue.isValidation}
+                 errorMessage={props.inputValue.errorMessage}
+          />
         )}
         {
           props.isShowInputTag && parseFloat(props.selectedIndexConfig?.rate) > 0 &&

@@ -59,7 +59,7 @@ const DatePicker = ({
       {
         drawerOpen && (
           <Drawer
-            className='w-full bg-[#20498E] text-white'
+            className='w-full bg-[var(--primary-variant)] text-white'
             onClose={()=>{
               setDrawerOpen(false)
               setOpen(true)}

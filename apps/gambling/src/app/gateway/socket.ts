@@ -58,13 +58,13 @@ export type IUserStore = {
 
 let $local = {
   set: (key: string, value: string) => {
-    AppLocalStorage.setItem(key, value)
+    AppLocalStorage.setItem(key as any, value)
   },
   get: (key: string) => {
-    return AppLocalStorage.getItem(key);
+    return AppLocalStorage.getItem(key as any);
   },
   remove: (key: string) => {
-    AppLocalStorage.removeItem(key)
+    AppLocalStorage.removeItem(key as any)
   }
 };
 

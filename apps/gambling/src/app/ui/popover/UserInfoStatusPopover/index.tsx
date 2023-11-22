@@ -326,14 +326,14 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   }, [signInConfig]);
 
 
-  useEffect(() => {
-    const close = () => props.close();
-    window.addEventListener("scroll", close);
-
-    return () => {
-      window.removeEventListener("scroll", close);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const close = () => props.close();
+  //   window.addEventListener("scroll", close);
+  //
+  //   return () => {
+  //     window.removeEventListener("scroll", close);
+  //   }
+  // }, []);
 
   return (
     <div
