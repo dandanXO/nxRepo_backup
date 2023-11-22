@@ -91,7 +91,7 @@ export const Header = (props: IHeader) => {
 
   return (
     <header
-      className={cx("max-h-[66px]",
+      className={cx("z-10 sticky top-[0] max-h-[66px]",
         "flex flex-row justify-between items-center relative bg-[var(--primary-variant)] ",
         // "bg-purple-500"
       )}
@@ -150,7 +150,7 @@ export const Header = (props: IHeader) => {
 
 
       {!isLogin && (
-        <div className="flex-1 flex justify-end">
+        <div className="flex-1 flex justify-end mr-4">
           <LoginButton
             className={"text-white text-lg"}
             onClick={() => {
