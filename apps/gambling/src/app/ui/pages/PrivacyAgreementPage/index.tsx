@@ -636,33 +636,16 @@ export const PrivacyAgreementPage = () => {
           </div>
           <div>9. Transfer to other countries:</div>
           <div>
-            {environment.platformName} shares some personal data obtained from Users on a
-            global level with the company UNITED JOY LLP, headquartered in the
-            city of London - UK, in order to carry out the activities specified
-            in this Policy.
+            {environment.platformName} shares some personal data obtained from Users globally to facilitate the activities outlined in this Policy. This data is shared with various partners and service providers, including third parties located outside the Users' country of residence.
           </div>
           <div>
-            {environment.platformName} may also subcontract processing services or share the
-            personal data obtained from Users with third parties located in
-            countries other than their country of residence. The personal data
-            obtained from Users may, therefore, be subject to privacy laws
-            different from those in force in their country of residence.
+            {environment.platformName} may also subcontract processing services or share the personal data obtained from Users with third parties situated in countries different from their country of residence. Consequently, the personal data collected from Users may be subject to privacy laws distinct from those applicable in their country of residence.
           </div>
           <div>
-            Personal data collected in the European Union and Switzerland may,
-            for instance, be transferred and processed by third parties located
-            in a country outside the European Union and Switzerland. In these
-            cases, {environment.platformName} shall ensure that the transfer of Users
-            personal data is carried out in accordance with the applicable
-            privacy laws, as well as ensure, in particular, the adoption of the
-            appropriate contractual, technical and organizational measures, such
-            as the standard contractual clauses approved by the European
-            Commission.
+            For example, personal data gathered in the European Union and Switzerland may be transferred and processed by third parties located in a country outside the European Union and Switzerland. In such instances, {environment.platformName} will ensure that the transfer of Users' personal data complies with the relevant privacy laws. Additionally, {environment.platformName} will guarantee the adoption of appropriate contractual, technical, and organizational measures, including the use of standard contractual clauses approved by the European Commission.
           </div>
           <div>
-            More information about the security measures we use to protect Users
-            personal data is available in Section 11, "Keeping Users personal
-            data safe".
+            Further details about the security measures employed to safeguard Users' personal data can be found in Section 11, "Keeping Users' personal data safe."
           </div>
           <div>10. URLs:</div>
           <div>
@@ -688,10 +671,10 @@ export const PrivacyAgreementPage = () => {
             that no system is completely secure.
           </div>
           <div>
-            A password protects User accounts, and that is why we encourage
-            Users to use a unique and robust password, to limit access to
-            computers, browse rs and other devices deemed secure (trusted), and
-            to log out after using the {environment.platformName} service.
+            A password protects User accounts, and that is why we encourage Users
+            to use a unique and robust password, to limit access to computers, browsers
+            and other devices deemed secure (trusted), and to log out after using the
+            {environment.platformName} service.
           </div>
           <div>12. Children:</div>
           <div>Children Between Age of 13 and 18</div>
