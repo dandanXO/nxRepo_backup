@@ -10,7 +10,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";
 
 
-type IWalletPage = {
+export type IWalletPage = {
   onClickToIndex: () => void;
   panelMode: IPanelType;
   setPanelMode: (type: IPanelType) => void;

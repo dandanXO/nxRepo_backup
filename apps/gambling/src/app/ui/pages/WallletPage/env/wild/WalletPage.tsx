@@ -24,40 +24,18 @@ import cx from "classnames";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {IWalletPage} from "../pernambucana/WalletPage";
 
-export const WalletPage = () => {
+export const WalletPage = (props: IWalletPage) => {
 
   useAllowLoginRouterRules();
+
   const {onClickToIndex} = usePageNavigate();
-
-  const [panelMode, setPanelMode] = useState<"deposit" | "withdraw" | "record">("deposit");
-
-
-  const navigate = useNavigate();
   const { isMobile } = useBreakpoint();
 
-  const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
-  useEffect(() => {
-    if (panelMode === "deposit") {
-      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
-    }
-  }, [panelMode])
-  // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)
-
-  const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
-  const totalReasableValue = useSelector(totalReasableSelector);
-
-
-  const accountPromotedSwingValue = useSelector(accountPromotedSwingSelector);
-  const accountPromotedWithdrawableValue = useSelector(accountPromotedWithdrawableSelector);
-
-  const [recordPanelMode, setRecordPanelMode] = useState<
-    'deposit' | 'withdraw'
-  >('deposit');
 
   return (
     <>
-
       {isMobile && (
         <BackNavigation onClick={onClickToIndex}/>
       )}
@@ -67,22 +45,22 @@ export const WalletPage = () => {
 
         <div id={"tab-item"}>
           <Tabs className={"game-type-tab-list flex font-bold my-4 md:my-5  justify-center items-center"}>
-            <CommonTableTabG className={cx({"flex-1":isMobile})} color={'#d3abff'} active={panelMode === "deposit"} onClick={() => {setPanelMode("deposit")}}>Depósito</CommonTableTabG>
-            <CommonTableTabG className={cx({"flex-1":isMobile})}  color={'#d3abff'} active={panelMode === "withdraw"}  onClick={() => {setPanelMode("withdraw")}} >Retirar</CommonTableTabG>
-            <CommonTableTabG className={cx({"flex-1":isMobile})}color={'#d3abff'} active={panelMode === "record"}  onClick={() => {setPanelMode("record")}} >Registro</CommonTableTabG>
+            <CommonTableTabG className={cx({"flex-1":isMobile})} color={'#d3abff'} active={props.panelMode === "deposit"} onClick={() => {props.setPanelMode("deposit")}}>Depósito</CommonTableTabG>
+            <CommonTableTabG className={cx({"flex-1":isMobile})}  color={'#d3abff'} active={props.panelMode === "withdraw"}  onClick={() => {props.setPanelMode("withdraw")}} >Retirar</CommonTableTabG>
+            <CommonTableTabG className={cx({"flex-1":isMobile})}color={'#d3abff'} active={props.panelMode === "record"}  onClick={() => {props.setPanelMode("record")}} >Registro</CommonTableTabG>
           </Tabs>
         </div>
         <div className={''}>
 
-          {panelMode === "deposit" ? (
-            <DepositPanel data={rechargeData?.data} />
-          ) : panelMode === "withdraw" ? (
+          {props.panelMode === "deposit" ? (
+            <DepositPanel data={props.rechargeData?.data} />
+          ) : props.panelMode === "withdraw" ? (
             <WithdrawPanel onClickToWithdrawRecord={() => {
-              setPanelMode("record");
-              setRecordPanelMode("withdraw");
+              props.setPanelMode("record");
+              props.setRecordPanelMode("withdraw");
             }} />
           ) : (
-            <RecordPanel recordPanelMode={recordPanelMode} />
+            <RecordPanel recordPanelMode={props.recordPanelMode} />
           )}
         </div>
 

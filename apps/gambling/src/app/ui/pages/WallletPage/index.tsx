@@ -29,9 +29,7 @@ export const WallletPage = () => {
 
   const {onClickToIndex} = usePageNavigate();
 
-
   const [panelMode, setPanelMode] = useState<IPanelType>("deposit");
-
 
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
   useEffect(() => {
@@ -41,21 +39,20 @@ export const WallletPage = () => {
   }, [panelMode])
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)
 
+  const [recordPanelMode, setRecordPanelMode] = useState<IRecordPanelType>('deposit');
+
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
   const totalReasableValue = useSelector(totalReasableSelector);
 
   const accountPromotedSwingValue = useSelector(accountPromotedSwingSelector);
   const accountPromotedWithdrawableValue = useSelector(accountPromotedWithdrawableSelector);
 
-  const [recordPanelMode, setRecordPanelMode] = useState<IRecordPanelType>('deposit');
-
-
   return renderByPlatform({
     "wild777bet": (
-      <WWallletPage />
+      <WWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
     "coco777bet": (
-      <CWallletPage />
+      <CWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
   }, (
     <PWalletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
