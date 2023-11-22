@@ -157,6 +157,7 @@ export const AppRouter = () => {
         dispatch(appSlice.actions.setIsLogin(true));
         dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
         dispatch(appSlice.actions.setShowTelegramModal(true))
+        dispatch(appSlice.actions.setShowDepositModal(true))
         // props.confirmToLogin();
         setIsSetup(true);
       // }

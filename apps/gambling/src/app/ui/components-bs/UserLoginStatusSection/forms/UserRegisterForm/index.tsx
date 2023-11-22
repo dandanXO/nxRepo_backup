@@ -190,6 +190,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
           dispatch(appSlice.actions.setIsLogin(true));
           dispatch(appSlice.actions.setShowTelegramModal(true))
+          dispatch(appSlice.actions.setShowDepositModal(true))
           dispatch(appSlice.actions.setIsShowInviteBonusModal(true));
 
           props.confirmToRegister();
