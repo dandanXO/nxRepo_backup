@@ -1,19 +1,19 @@
-import styled from "styled-components";
-import cx from "classnames";
-import { useNavigate } from "react-router";
-import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
-import {environment} from "../../../../environments/environment";
-import { tcx } from "../../utils/tcx";
+import React from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
+import styled from "styled-components";
+import { environment } from "../../../../environments/environment";
+import { tcx } from "../../utils/tcx";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 
 const Container = styled.div`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/${environment.assetPrefix}/ad_bg_2.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  //background-image: url(assets/${environment.assetPrefix}/ad_bg_2.png);
+  background: linear-gradient(180deg, var(--background-modal-from), var(--background-modal-to));
+  //background-repeat: no-repeat;
+  //background-size: cover;
+  border: 2px solid var(--stroke-modal);
   border-radius: 20px;
 `;
 
@@ -36,28 +36,31 @@ const ModalButton = styled.button`
   color: var(--white);
 `
 
-export type ITelegramContactModal = {
+interface IDepositAdvertisementModalProps {
   close: () => void;
-  toTelegram: () => void;
+  onConfirm: () => void
 }
 
-export const TelegramContactModal = (props: ITelegramContactModal) => {
+export const DepositAdvertisementModal = ({
+  close,
+  onConfirm
+}:IDepositAdvertisementModalProps) => {
 
   const { isMobile } = useBreakpoint();
 
   return (
-    <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event) => {
-      props.close();
+    <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event) => {
+      close();
     }}>
 
       <Container
         className={tcx(
-          "w-[410px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl flex flex-col items-center relative px-5 py-6",
-          ['w-[242px] px-[14px] py-5', isMobile]
-          )}
+          "w-[410px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl flex flex-col items-center relative px-5 py-8",
+          ['w-[240px] px-3 py-4', isMobile]
+        )}
         onClick={(event) => {
-        event.stopPropagation();
-      }}>
+          event.stopPropagation();
+        }}>
 
         <div className={tcx(
           "flex flex-row justify-end mb-2 absolute right-[20px]",
@@ -65,7 +68,7 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
           ['right-[50%] translate-x-[50%] bottom-0 translate-y-[50px]', isMobile]
         )}>
           <button onClick={() => {
-            props.close();
+            close();
           }}>
             {
               isMobile ?
@@ -77,33 +80,26 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
           </button>
         </div>
 
+        <div className={tcx('text-white text-3xl mt-5 font-extrabold', ['text-base mt-0', isMobile])}>Equilíbrio insuficiente!</div>
 
-        <img alt='icon' className={tcx('w-[180px] mt-6 mb-3', ['w-[105px] mt-0 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
+        <img
+          alt='icon'
+          className={tcx('w-[220px] mt-6 mb-3', ['w-[100px] mt-3 mb-2', isMobile])}
+          src={`assets/${environment.assetPrefix}/ic_advertisement_deposit.png`}
+        />
 
-        <div className={"flex flex-col"}>
-          <div className={"mb-4 text-white"}>
-            <ModalTitle
-              style={{
-              // background: 'linear-gradient(180deg, var(--text-gradient-ad-tg-from) 0%, var(--text-gradient-ad-tg-to) 100%)',
-              // WebkitBackgroundClip: 'text',
-              color: 'white',
-              }}
-              className={tcx('text-[32px]', ['text-base', isMobile])}
-            >Junte-se a nós</ModalTitle>
-            <div className={tcx("text-text-telegram text-center text-lg font-medium mt-4", ['text-xs mt-1', isMobile])}>
-              Prezados clientes VIP, juntem-se ao nosso canal oficial do Telegram. Realizaremos vários eventos de loteria de tempos em tempos. Dezenas de milhares de reais estão esperando por você para reivindicar.
-            </div>
-          </div>
+        <div className={tcx("mb-4 text-white text-center text-lg font-medium mt-4", ['text-xs mt-1', isMobile])}>
+          Caros clientes VIP, você pode obter até {20}% de recompensa ao recarregar. Quanto mais você recarrega, mais bônus você recebe! Sem limite de tempo!
+        </div>
 
-          <div className={"flex flex-col justify-center items-center"}>
-            <ModalButton
-              className={tcx('text-lg w-[168px] h-[52px]', ['text-sm w-[99px] h-[31px]', isMobile])}
-              onClick={() => props.toTelegram() }
-            >
-              {/*<img alt={"telegram"} className="w-[14px] h-[10px] mr-4"/>*/}
-              <span className={"font-bold"}>Junte-se</span>
-            </ModalButton>
-          </div>
+        <div className={"flex flex-col justify-center items-center"}>
+          <ModalButton
+            className={tcx('text-lg w-[168px] h-[52px]', ['text-sm w-[99px] h-[31px]', isMobile])}
+            onClick={() => onConfirm() }
+          >
+            {/*<img alt={"telegram"} className="w-[14px] h-[10px] mr-4"/>*/}
+            <span className={"font-bold"}>Depósito</span>
+          </ModalButton>
         </div>
 
 
@@ -111,4 +107,3 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
     </div>
   )
 }
-
