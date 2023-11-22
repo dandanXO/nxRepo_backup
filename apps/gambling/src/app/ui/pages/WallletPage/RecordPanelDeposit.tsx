@@ -6,6 +6,7 @@ import { Table } from '../../components/Table';
 import copy from 'copy-to-clipboard';
 import {notification} from 'antd';
 import { DragScrollContainer } from '../../components/DragScrollContainer';
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 const DepositStatusMap: { [key: number]: string } = {
@@ -63,7 +64,7 @@ export const RecordPanelDeposit = () => {
 
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem('token') || '';
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetDepositRecord({
       limit: 10,
       page: page,

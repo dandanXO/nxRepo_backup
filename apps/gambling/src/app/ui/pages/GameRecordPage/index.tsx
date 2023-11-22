@@ -12,6 +12,7 @@ import {usePageNavigate} from "../../hooks/usePageNavigate";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { Table } from "../../components/Table";
 import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 const { RangePicker } = DatePicker;
@@ -90,7 +91,7 @@ export const GameRecordPage = () => {
       dayMax: dates[1].format(dateFormat),
       pageNum: page,
       pageSize: pageSize,
-      token: AppLocalStorage.getItem('token') || '',
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
     });
   }, [page, dates]);
 

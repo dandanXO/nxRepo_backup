@@ -63,3 +63,10 @@ export const RecordButton2 = styled.button`
   font-size: 16px;
   border: 2px solid rgba(255,255,255,.3);
 `
+
+export const RecordButton3 = styled.button`
+  width: 145px;
+  background: linear-gradient(180deg,var(--button-invite-record-from) 0%,var(--button-invite-record-to) 100%);
+  border-radius: 20px;
+  font-size: 16px;
+`

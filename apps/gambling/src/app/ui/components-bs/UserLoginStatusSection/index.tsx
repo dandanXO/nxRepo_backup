@@ -18,7 +18,7 @@ export type IUserLoginStatusSection = {
 
 
 export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
-  const [switchToLoginOrRegister, setSwitchToLoginOrRegister] = useState<"login"|"register"|"forget">("register");
+  const [switchToLoginOrRegister, setSwitchToLoginOrRegister] = useState<"login"|"register"|"forget">("login");
 
   return (
     <div>

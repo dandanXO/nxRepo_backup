@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {TTotalFavoriteLocalState} from "../IndexPage";
 import {ScrollTab} from "../../components/TabItem/ScrollTab";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 const StyledIndexPage = styled.div`
@@ -36,8 +37,8 @@ const StyledIndexPage = styled.div`
 
 
 export const IndexSlotPage = () => {
-  const favoriteLocal = JSON.parse(AppLocalStorage.getItem('favoriteLocal') || '{}')
-  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem('favoriteLocalArr') || '{}')
+  const favoriteLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocal) || '{}')
+  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
   const [totalFavoriteLocalState, setTotalFavoriteLocalState] = useState<TTotalFavoriteLocalState>({
     local: favoriteLocal,
     localArr: favoriteLocalArr
@@ -51,8 +52,8 @@ export const IndexSlotPage = () => {
     let list: { subGameType: string, games: { gameId: string }[] }[] = []
 
     if(activeTab === 'Favoritos') {
-      const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
-      const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem('favoriteLocalArr') || '{}')
+      const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
+      const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
 
       list = [{ subGameType: 'Favoritos', games: favoriteLocalArr[userInfo.user_id]}]
     } else {

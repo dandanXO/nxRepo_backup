@@ -31,6 +31,7 @@ export type ITabItem = {
   size?: "small" | "normal" | "big" | "auto";
   onClick?: () => void;
   background?:string;
+  activeBackground?:string;
 
   mode?: "howto" | "data";
   children?: React.ReactNode;
@@ -44,6 +45,7 @@ export const TabItem = (props: ITabItem) => {
       mode={props.mode}
       pureColor={props.pureColor}
       background={props.background}
+      activeBackground={props.activeBackground}
       className={cx(
         "px-4 py-1",
         "md:px-6 md:py-1",

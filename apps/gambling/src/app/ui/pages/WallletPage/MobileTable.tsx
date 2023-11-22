@@ -6,6 +6,7 @@ import {environment} from "../../../../environments/environment";
 import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "../../../external";
 import { useEffect } from "react";
 import { AppLocalStorage } from "../../../persistant/localstorage";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 const Container = styled.div`
   /* background: rgba(255, 255, 255, 0.1); */
@@ -31,7 +32,7 @@ export const DepositMobileTable = () => {
   const [triggerGetDepositRecord, { data }] = useRechargeHistoryListMutation()
 
   useEffect(()=>{
-    const token = AppLocalStorage.getItem('token') || '';
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetDepositRecord({
       limit: 1000,
       page: 1,
@@ -104,7 +105,7 @@ export const WithdrawMobileTable = () => {
   const [triggerGetWithdrawRecord, { data }] = useWithdrawHistoryListMutation({})
 
   useEffect(()=>{
-    const token = AppLocalStorage.getItem('token') || '';
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
       limit: 1000,
       page: 1,

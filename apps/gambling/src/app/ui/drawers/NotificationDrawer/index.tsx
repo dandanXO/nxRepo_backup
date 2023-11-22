@@ -23,6 +23,7 @@ import {NotificationContainer as WNotificationContainer} from "./env/wild/Notifi
 import {NotificationContainer as CNotificationContainer} from "./env/coco/NotificationContainer";
 
 import {renderByPlatform} from "../../utils/renderByPlatform";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 const NotificationContainer = renderByPlatform({
   "wild777bet": WNotificationContainer,
@@ -56,10 +57,10 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
     } else {
       if (unRead) {
         triggerPostLetterRead({
-          token: AppLocalStorage.getItem('token') || '',
+          token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
           mailId,
         });
-        triggerGetMailCount({ token: AppLocalStorage.getItem('token') || '' })
+        triggerGetMailCount({ token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
 
         const tempMessages = [...messages];
         const tempMessage = { ...messages[index] };
@@ -74,7 +75,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
 
   useEffect(() => {
     triggerGetLetter({
-      token: AppLocalStorage.getItem('token') || '',
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
     });
   }, []);
 

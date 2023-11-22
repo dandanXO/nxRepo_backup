@@ -37,7 +37,6 @@ import {environment} from "../../../environments/environment";
 import {ErrorBoundary} from "react-error-boundary";
 import {PageTemplate} from "../pageTemplate";
 import useBreakpoint from "../hooks/useBreakpoint";
-import {IUserInfo} from "../../persistant/pending/loginMode";
 import styled from "styled-components";
 import {promiseHandler} from "../../gateway/promiseHanlder";
 import {setLoginLocalStorage} from "../../persistant/setLoginLocalStorage";
@@ -45,6 +44,8 @@ import {connect} from "../../gateway/socket";
 import {notification} from "antd";
 import TermsOfServicePage from "../pages/TermsOfServicePage";
 import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
+import {IUserInfo} from "../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 
 
 export const AppRouter = () => {
@@ -89,15 +90,15 @@ export const AppRouter = () => {
     if(!isSetup) return;
     if (data !== undefined) {
       if(data.data['group_telegram']) {
-        AppLocalStorage.setItem('telegramGroup', data.data['group_telegram']);
+        AppLocalStorage.setItem(AppLocalStorageKey.telegramGroup, data.data['group_telegram']);
       }
       if(data.data['service_telegram']) {
-        AppLocalStorage.setItem('telegramService', data.data['service_telegram']);
+        AppLocalStorage.setItem(AppLocalStorageKey.telegramService, data.data['service_telegram']);
       }
       if(data.data['manager_telegram']) {
-        AppLocalStorage.setItem('telegramManager', data.data['manager_telegram']);
+        AppLocalStorage.setItem(AppLocalStorageKey.telegramManager, data.data['manager_telegram']);
       }
-      AppLocalStorage.setItem('downloadUrl', data.data['url_download']);
+      AppLocalStorage.setItem(AppLocalStorageKey.downloadUrl, data.data['url_download']);
     }
   }, [data])
 
@@ -119,7 +120,7 @@ export const AppRouter = () => {
 
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem("token");
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
     if(!token) {
       setIsSetup(true);
       dispatch(appSlice.actions.showLoginDrawerOrModal(true));
@@ -151,7 +152,7 @@ export const AppRouter = () => {
         // AppLocalStorage.setItem("token", (response as any).data.data.token);
         // dispatch(appSlice.actions.setUserVIPLevel((response as any).data.data.user_info.vip_level));
 
-        const url = AppLocalStorage.getItem("ip");
+        const url = AppLocalStorage.getItem(AppLocalStorageKey.ip);
         if(url && token) connect(url, token);
         dispatch(appSlice.actions.setIsLogin(true));
         dispatch(appSlice.actions.setIsShowInviteBonusModal(true))

@@ -14,9 +14,10 @@ import { AvatarAccountInfo } from "../../../components/AvatarAccountInfo";
 import { LoginButton } from "./LoginButton";
 import { HeaderMenu } from "./HeaderMenu";
 import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
-import { IUserInfo } from "../../../../persistant/pending/loginMode";
 import { AppLocalStorage } from "../../../../persistant/localstorage";
 import { usePageNavigate } from "../../../hooks/usePageNavigate";
+import {IUserInfo} from "../../../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 
 
 const Notification = styled.section`
@@ -82,7 +83,7 @@ const HeaderButtonText = styled.div`
 `
 export const Header = (props: IHeader) => {
   const navigate = useNavigate()
-  const user: IUserInfo = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || "") : {};
+  const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
   const [hover, setHover] = useState(false);

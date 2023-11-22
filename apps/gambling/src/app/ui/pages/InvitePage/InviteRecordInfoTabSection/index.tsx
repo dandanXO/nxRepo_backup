@@ -10,6 +10,7 @@ import moment from "moment";
 import {AppLocalStorage} from "../../../../persistant/localstorage";
 import {MobilePanel} from "./MobilePanel";
 import {DesktopPanel} from "./DesktopPanel";
+import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 
 
 export interface ITabType {
@@ -62,7 +63,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
       triggerGetInviteUserDay({
         pageNum: "1",
         pageSize: "1000",
-        token: AppLocalStorage.getItem("token") || '',
+        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
         userId: String(inviteInfoData.userId|| inviteUnsettleData.userId),
         // dayMin: isMobile ? moment().format('YYYYMMDD') : moment().subtract(1, 'days').format('YYYYMMDD'),
         dayMin: isMobile ? orangeRecordSelectedDate.format('YYYYMMDD'): moment().subtract(1, 'days').format('YYYYMMDD'),

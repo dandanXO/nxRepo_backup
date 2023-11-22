@@ -12,7 +12,7 @@ interface ICoco777betVIPGradePageProps {
   currentLevel: number
   userVIPInfo?: GetVIPInfoResponse
   isMobile: boolean
-  allLevelInfo: GetUserVIPAllInfoResponse['data']
+  allLevelInfo: GetUserVIPAllInfoResponse['data'];
   allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig']
 }
 

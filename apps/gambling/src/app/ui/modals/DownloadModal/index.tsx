@@ -3,6 +3,7 @@ import { useLazyDownloadQuery } from "../../../external";
 import QRCode from 'react-qr-code';
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import {environment} from "../../../../environments/environment";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 export type IInitialChargeModal = {
   close: () => void;
@@ -46,7 +47,7 @@ export const DownloadModal = (props: IInitialChargeModal) => {
     })
   }
 
-  const downloadUrl=AppLocalStorage.getItem('downloadUrl')
+  const downloadUrl=AppLocalStorage.getItem(AppLocalStorageKey.downloadUrl)
 
   return (
     <div className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event: any) => {

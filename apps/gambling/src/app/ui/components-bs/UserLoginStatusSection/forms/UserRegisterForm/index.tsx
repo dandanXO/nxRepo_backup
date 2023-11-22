@@ -25,6 +25,7 @@ import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {Captcha} from "../Captcha";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
@@ -148,7 +149,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       }
       triggerRegister({
           "appChannel": "pc",
-          "deviceId": AppLocalStorage.getItem("deviceId") || "",
+          "deviceId": AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
           "appPackageName": environment.appPackageName,
           "deviceModel": "WEB",
           "deviceVersion": "WEB",

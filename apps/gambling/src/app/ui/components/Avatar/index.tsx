@@ -2,8 +2,9 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import cx from "classnames";
 import {environment} from "../../../../environments/environment";
 import React from "react";
-import { IUserInfo } from "../../../persistant/pending/loginMode";
 import { tcx } from "../../utils/tcx";
+import {IUserInfo} from "../../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 export const Avatar = (props: {
   onClickToPopupUserInfoStatusPopover?: () => void;
@@ -11,7 +12,7 @@ export const Avatar = (props: {
   className?: string;
 }) => {
 
-  const userInfo: IUserInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
+  const userInfo: IUserInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
 
   return (
     // <div className={cx("relative", {

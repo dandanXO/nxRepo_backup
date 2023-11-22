@@ -18,6 +18,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"
 import { WalletPage as WWallletPage } from "./env/wild/WalletPage";
 import { WalletPage as CWallletPage } from "./env/coco/WalletPage";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 export type IPanelType = "deposit" | "withdraw" | "record";
 export type IRecordPanelType = 'deposit' | 'withdraw';
@@ -28,17 +29,17 @@ export const WallletPage = () => {
 
   const {onClickToIndex} = usePageNavigate();
 
-
   const [panelMode, setPanelMode] = useState<IPanelType>("deposit");
-
 
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
   useEffect(() => {
     if (panelMode === "deposit") {
-      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem("token") || '' })
+      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
     }
   }, [panelMode])
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)
+
+  const [recordPanelMode, setRecordPanelMode] = useState<IRecordPanelType>('deposit');
 
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
   const totalReasableValue = useSelector(totalReasableSelector);
@@ -46,15 +47,12 @@ export const WallletPage = () => {
   const accountPromotedSwingValue = useSelector(accountPromotedSwingSelector);
   const accountPromotedWithdrawableValue = useSelector(accountPromotedWithdrawableSelector);
 
-  const [recordPanelMode, setRecordPanelMode] = useState<IRecordPanelType>('deposit');
-
-
   return renderByPlatform({
     "wild777bet": (
-      <WWallletPage />
+      <WWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
     "coco777bet": (
-      <CWallletPage />
+      <CWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
   }, (
     <PWalletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>

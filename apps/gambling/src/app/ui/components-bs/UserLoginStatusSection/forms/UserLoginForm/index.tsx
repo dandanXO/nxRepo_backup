@@ -18,6 +18,7 @@ import {useDispatch} from "react-redux";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {MobileInput} from "../../../../components/Inputs/MobileInput";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
@@ -142,7 +143,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
         triggerLogin({
           "appChannel": "pc",
           "appPackageName": environment.appPackageName,
-          "deviceId": AppLocalStorage.getItem("deviceId") || "",
+          "deviceId": AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
           "deviceModel": "WEB",
           "deviceVersion": "WEB",
           "appVersion": environment.appVersion,

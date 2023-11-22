@@ -17,6 +17,7 @@ import {
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 export const NotificationPage = () => {
   useAllowLoginRouterRules();
@@ -40,7 +41,7 @@ export const NotificationPage = () => {
     } else {
       if (unRead) {
         triggerPostLetterRead({
-          token: AppLocalStorage.getItem('token') || '',
+          token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
           mailId,
         });
 
@@ -56,7 +57,7 @@ export const NotificationPage = () => {
 
   useEffect(() => {
     triggerGetLetter({
-      token: AppLocalStorage.getItem('token') || '',
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
     });
   }, []);
 

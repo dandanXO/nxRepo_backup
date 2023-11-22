@@ -10,6 +10,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {environment} from "../../../../environments/environment";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 const { RangePicker } = DatePicker;
 
@@ -36,9 +37,9 @@ export const InviteSettlementRecordPage = () => {
   const [dates, setDates] = useState([min, max]);
 
   const refresh = useCallback((startTime: string, endTime: string) => {
-    if(!AppLocalStorage.getItem("userId")) return;
+    if(!AppLocalStorage.getItem(AppLocalStorageKey.userId)) return;
     triggerGetUserInviteReward({
-      userId: AppLocalStorage.getItem("userId") || "",
+      userId: AppLocalStorage.getItem(AppLocalStorageKey.userId) || "",
       pageNum: "1",
       pageSize: "10000",
       startTime,

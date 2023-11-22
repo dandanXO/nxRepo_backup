@@ -14,6 +14,7 @@ import {ButtonPro} from "../../../../components/Buttons/Button";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 const Notice = styled.div`
   height: 60px;
@@ -107,9 +108,9 @@ export const WalletDepositNextPage = () => {
             appPackageName: environment.appPackageName,
             appVersion: environment.appVersion,
             configId: configID,
-            phone: AppLocalStorage.getItem("kPhone") || '',
+            phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
             qr: 1,
-            token: AppLocalStorage.getItem("token") || ''
+            token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
         })
         // .unwrap().then(data => {
 

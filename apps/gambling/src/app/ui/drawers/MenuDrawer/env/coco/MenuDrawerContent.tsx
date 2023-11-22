@@ -11,11 +11,12 @@ import { CopyIcon } from "../../../../components/CopyIcon";
 import { MobileMenuItem } from "./MobileMenuItem";
 import styled from "styled-components";
 import { environment } from "../../../../../../environments/environment";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 export const MenuDrawerContent = () => {
   const location = useLocation();
-  const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
+  const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
   const {
     onClickToFirstDeposit,
     onClickToDepositCashback,

@@ -29,6 +29,7 @@ import {renderByPlatform} from "../utils/renderByPlatform";
 import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
+import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 
 
 console.log("[APP] environment", environment);
@@ -193,9 +194,9 @@ export const PageTemplate = (props: IPage) => {
   };
 
   // openNotificationWithIcon('error')
-  const telegramServiceId = AppLocalStorage.getItem('telegramService');
-  const telegramManagerId = AppLocalStorage.getItem('telegramManager');
-  const userInfoString = AppLocalStorage.getItem("userInfo");
+  const telegramServiceId = AppLocalStorage.getItem(AppLocalStorageKey.telegramService);
+  const telegramManagerId = AppLocalStorage.getItem(AppLocalStorageKey.telegramManager);
+  const userInfoString = AppLocalStorage.getItem(AppLocalStorageKey.userInfo);
   const userInfo = userInfoString && userInfoString !== "undefined"  ? JSON.parse(userInfoString) : null;
   const user_id = userInfo?.user_id || '';
   const telegramServiceUrl=`https://t.me/${telegramServiceId}?start=${user_id}`

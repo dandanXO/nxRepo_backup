@@ -1,4 +1,5 @@
 import {
+  GetVIPInfoResponse,
   useGetMailCountMutation,
   useGetVIPInfoMutation,
   useLazyGetBalanceQuery,
@@ -10,6 +11,10 @@ import {RootState} from "../../reduxStore";
 import {appSlice} from "../../reduxStore/appSlice";
 import {useLocation} from "react-router";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+
+import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
+import {getLocalStorageObjectByKey} from "../../persistant/getLocalStorageObjectByKey";
+import {setLocalStorageObjectByKey} from "../../persistant/setLocalStorageObjectByKey";
 
 type IUseAutoUpdateBalance = {
   autoWindowFocusRefresh?: boolean;
@@ -24,13 +29,23 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
 
   const [triggerGetBalance, {data,isLoading: isGetBalanceLoading}] = useLazyGetBalanceQuery();
 
-  // const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
-  const [triggerGetUserVIPInfo, {data: vipAllInfo, isLoading: isGetVIPInfoLoading}] = useGetVIPInfoMutation();
+
+  // NOTICE: get or set by LocalStorage
+  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useGetVIPInfoMutation();
+  const prevUserVIPInfo = getLocalStorageObjectByKey<GetVIPInfoResponse>(AppLocalStorageKey.useGetVIPInfoMutation);
+  const [vipAllInfo, setVipAllInfo] = useState<GetVIPInfoResponse>(prevUserVIPInfo)
+  useEffect(() => {
+    if(!isUninitialized && !isGetUserVIPInfoLoading && userVIPInfoResponseData && userVIPInfoResponseData.code === 200) {
+      setLocalStorageObjectByKey(AppLocalStorageKey.useGetVIPInfoMutation, userVIPInfoResponseData);
+      setVipAllInfo(userVIPInfoResponseData);
+    }
+  }, [isUninitialized, isGetUserVIPInfoLoading, userVIPInfoResponseData])
+
   const [triggerGetMailCount, { data: messageData }] = useGetMailCountMutation();
 
   const isValidToken = () => {
     if(!isLogin) return false;
-    const token =  AppLocalStorage.getItem("token")
+    const token =  AppLocalStorage.getItem(AppLocalStorageKey.token)
     if(token && token !== "" && token !== "undefined") {
       return true
     } else {
@@ -40,7 +55,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
   const updateBalance = () => {
     if(isValidToken()) {
       triggerGetBalance({
-        token: AppLocalStorage.getItem("token") || "",
+        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
       })
     }
   }
@@ -51,21 +66,21 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
       location.pathname !== PageOrModalPathEnum.MyPage
     ) {
       triggerGetUserVIPInfo({
-        token: AppLocalStorage.getItem("token") || ""
+        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ""
       });
     }
   }
 
   const updateMailCount = () => {
     if(isValidToken()) {
-      triggerGetMailCount({ token: AppLocalStorage.getItem('token') || '' })
+      triggerGetMailCount({ token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
     }
   }
 
   useEffect(() => {
-    const isLoading = isGetBalanceLoading || isGetVIPInfoLoading
+    const isLoading = isGetBalanceLoading || isGetUserVIPInfoLoading
     dispatch(appSlice.actions.setIsUserMoneyStatusLoading(isLoading));
-  }, [isGetBalanceLoading, isGetVIPInfoLoading])
+  }, [isGetBalanceLoading, isGetUserVIPInfoLoading])
 
   useEffect(() => {
     if (messageData) {

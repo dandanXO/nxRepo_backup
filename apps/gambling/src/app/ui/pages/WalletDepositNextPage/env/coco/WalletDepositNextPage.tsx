@@ -14,6 +14,7 @@ import { ButtonPro } from "../../../../components/Buttons/Button";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 const ShadowContainer = styled.div.attrs<{
   className?: string;
@@ -63,9 +64,9 @@ export const WalletDepositNextPage = () => {
       appPackageName: environment.appPackageName,
       appVersion: environment.appVersion,
       configId: configID,
-      phone: AppLocalStorage.getItem("kPhone") || '',
+      phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
       qr: 1,
-      token: AppLocalStorage.getItem("token") || ''
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
     })
     // .unwrap().then(data => {
 
@@ -98,17 +99,17 @@ export const WalletDepositNextPage = () => {
 
   const mobileShadowContainerStyle = `
   p-4 mb-3 text-sm
-  flex flex-row justify-between 
-  bg-[var(--primary-variant)] 
-  border border-solid border-[var(--stroke-textfields)] 
+  flex flex-row justify-between
+  bg-[var(--primary-variant)]
+  border border-solid border-[var(--stroke-textfields)]
   shadow-[inset_0_0_36px_5px_rgba(255,255,255,0.08)]
   `;
 
   const deskTopShadowContainerStyle = `
-  flex flex-row justify-between 
+  flex flex-row justify-between
   p-5 mb-4 text-lg rounded-xl
   bg-[var(--background-dashboard-secondary)]
-  border-b border-solid border-[var(--primary-assistant)] 
+  border-b border-solid border-[var(--primary-assistant)]
   `;
 
 

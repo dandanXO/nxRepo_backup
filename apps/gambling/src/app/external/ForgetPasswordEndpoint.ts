@@ -2,7 +2,8 @@ import {EndpointBuilder, EndpointDefinitions} from '@reduxjs/toolkit/src/query/e
 import {BaseQueryFn} from '@reduxjs/toolkit/src/query/baseQueryTypes';
 import {ExternelEndpoint} from "./types";
 import {CommonLoginRequestData} from "./RegisterEndpoint";
-import {IUserInfo} from "../persistant/pending/loginMode";
+
+import {IUserInfo} from "../persistant/IUserInfo";
 
 export type ForgetPasswordRequestExtraData = {
   // adjust_ad_id: "0",

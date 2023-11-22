@@ -19,6 +19,7 @@ import {mobileGameTypeHeaderProps as PmobileGameTypeHeaderProps} from "./env/per
 import {mobileGameTypeHeaderProps as WmobileGameTypeHeaderProps} from "./env/wild/mobileGameTypeHeaderProps";
 import {mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps} from "./env/coco/mobileGameTypeHeaderProps";
 import {renderByPlatform} from "../../utils/renderByPlatform";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 type GameItem = {
   name: string;
@@ -39,7 +40,7 @@ export type IGameTypeSectionList = {
 
 
 export const GameTypeSectionList = (props: IGameTypeSectionList) => {
-  const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
+  const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
   const { totalFavoriteLocalState, setTotalFavoriteLocalState } = props;
 
   const {isMobile} = useBreakpoint();
@@ -89,8 +90,8 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
         local: newTotalFavoriteLocal,
         localArr: newTotalFavoriteLocalArr
       })
-      AppLocalStorage.setItem('favoriteLocal', JSON.stringify(newTotalFavoriteLocal))
-      AppLocalStorage.setItem('favoriteLocalArr', JSON.stringify(newTotalFavoriteLocalArr))
+      AppLocalStorage.setItem(AppLocalStorageKey.favoriteLocal, JSON.stringify(newTotalFavoriteLocal))
+      AppLocalStorage.setItem(AppLocalStorageKey.favoriteLocalArr, JSON.stringify(newTotalFavoriteLocalArr))
     }
   }
 

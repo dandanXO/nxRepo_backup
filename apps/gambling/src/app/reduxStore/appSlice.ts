@@ -2,6 +2,7 @@ import {PayloadAction, createSlice, createSelector, createDraftSafeSelector} fro
 import { IUserStore } from '../gateway/socket';
 import {AppLocalStorage} from "../persistant/localstorage";
 import {RootState} from "./index";
+import {AppLocalStorageKey} from "../persistant/AppLocalStorageKey";
 
 export type InitialState = {
   isMobile: boolean;
@@ -58,7 +59,7 @@ const initialState: InitialState = {
   isUILoading: true,
   isUserMoneyStatusLoading: false,
   isMobile: true,
-  isLogin: !!AppLocalStorage.getItem("token"),
+  isLogin: !!AppLocalStorage.getItem(AppLocalStorageKey.token),
   userStore: userStore$3,
   isShowLoginModal: false,
   isShowMobileLogoutModal: false,

@@ -1,7 +1,8 @@
 import {EndpointBuilder, EndpointDefinitions} from '@reduxjs/toolkit/src/query/endpointDefinitions';
 import {BaseQueryFn} from '@reduxjs/toolkit/src/query/baseQueryTypes';
 import {ExternelEndpoint} from "./types";
-import {IUserInfo} from "../persistant/pending/loginMode";
+
+import {IUserInfo} from "../persistant/IUserInfo";
 
 export type RegisterRequestExtraData = {
   verifyCode: string;

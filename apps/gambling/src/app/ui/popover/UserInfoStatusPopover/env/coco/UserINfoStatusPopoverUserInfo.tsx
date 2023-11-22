@@ -1,14 +1,15 @@
 import React from "react";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
-import { IUserInfo } from "../../../../../persistant/pending/loginMode";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { CopyIcon } from "../../../../components/CopyIcon";
 import { environment } from "../../../../../../environments/environment";
 import { useDispatch } from "react-redux";
 import { appSlice } from "../../../../../reduxStore/appSlice";
+import {IUserInfo} from "../../../../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 export const UserINfoStatusPopoverUserInfo = () => {
-  const user: IUserInfo = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || "") : {};
+  const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const setOpenLogoutPopover = (show: boolean) => {
     dispatch(appSlice.actions.showMobileLogoutModal(show))

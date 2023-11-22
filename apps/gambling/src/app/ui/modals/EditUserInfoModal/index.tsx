@@ -12,6 +12,7 @@ import { IOpenNotificationWithIcon } from '../../pageTemplate';
 import { tcx } from "../../utils/tcx";
 import { UserOutlined } from "@ant-design/icons";
 import { environment } from "../../../../environments/environment";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 interface IEditUserInfoModalProps {
@@ -38,7 +39,7 @@ export const EditUserInfoModal = ({
   nickname,
   close,
 }: IEditUserInfoModalProps) => {
-  const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
+  const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
   const [userNickname, setUserNickname] = useState(nickname);
   const [triggerUpdateUserInfo, { isLoading }] = useUpdateUserInfoMutation({});
   const [selectedAvatar, setSelectedAvatar] = useState(Number(userInfo.avatar) || 1)
@@ -60,7 +61,7 @@ export const EditUserInfoModal = ({
 
   const handleConfirm = () => {
     triggerUpdateUserInfo({
-      token: AppLocalStorage.getItem('token') || '',
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
       nickname: userNickname,
       avatar: `${selectedAvatar}`
     }).then((response) => {
@@ -69,7 +70,7 @@ export const EditUserInfoModal = ({
         () => {
           if ((response as any).data.code === 200) {
             AppLocalStorage.setItem(
-              'userInfo',
+              AppLocalStorageKey.userInfo,
               JSON.stringify((response as any).data.data.user_info || '{}')
             );
             close(true);

@@ -3,7 +3,7 @@ import { GetSignInConfigResponse } from "../../../../../../external";
 import { LeftOutlined } from "@ant-design/icons";
 import { environment } from "../../../../../../../environments/environment";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
-import { CocoLevelList } from "./index";
+import { CocoLevelList, DayList } from "./index";
 import styled from "styled-components";
 import { notification } from "antd";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
@@ -16,9 +16,9 @@ import {Container} from "../../../../../components/container/Container";
 const SignInButton = styled.div<{
   disable: boolean
 }>`
-  width: 50%;
-  margin: 30px auto 0;
-  cursor: pointer;
+  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_button.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
   filter: grayscale(${(props)=>props.disable?100:0}%);
 `
 
@@ -76,56 +76,56 @@ interface IDayListProps {
   vipLevel: GetSignInConfigResponse['data']['vipLevel'];
 }
 
-const DayList = ({
-  signInAllConfig,
-  currentSelectedLevel,
-  vipLevel,
-  signInTotalDays
-}: IDayListProps) => {
-  const vipConfig = signInAllConfig.find(
-    (config) =>
-      config.identifier.split('::')[2].replace('V', '') ===
-      `${currentSelectedLevel}`
-  );
-  const dayConfigs = JSON.parse(vipConfig?.value || '[]');
-
-  return (
-    <div className='w-full ml-1 min-h-8 overflow-x-scroll flex justify-between relative'>
-      {
-        days.map((day, index) => {
-          const config = dayConfigs.find(
-            (dayConfig: any) => dayConfig.days === day
-          );
-
-          const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
-
-          return (
-            <DayItem checked={checked} key={day}>
-              <DayTitle className='absolute top-2 flex left-8'>
-                R$ {(config?.cashback || 0).toLocaleString()}
-                {
-                  checked && <img
-                    style={{width: '9px', height: '12px', marginLeft: '6px', marginTop: '-px'}}
-                    alt='check-text'
-                    src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAR1JREFUOE/Vk69Lg2EUhZ8THFgGgoKChgVXLEuW2WwGwaIg2Gyzubgmi2JzNqOIYUEQQVHcP7NklIGiRy58k89vP9xkIN72wnuf973nnCsmVJoQh78H2V4DroBHSbu/+pHtVeAOyAPPkmbHBtkuAQ/ADPAG7EhqjgWyvRKjAHPAO7An6SIMGxlkexl4AhaAD2Bf0nnX9W8g2zlJr9lI2C4kkCXAQEVSI33vC2T7FignM990L9leBFpAwAJyKOkk+1ga1AbmgQ6wKenedpxjnGLSWJNU7xfiNGgduAamgZcQEjgCQuCouqTaoE3IarQBNIFcpuFYUnXYOvW4ZnsLuASmksZTSZWfdrKv/ba3gTMgMnIgKUQeWiPn6P+BPgHf3FMTEyIoFgAAAABJRU5ErkJggg==' />
-                }
-              </DayTitle>
-              <img className='h-[55px] mx-auto mt-8' alt='money' src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}/>
-              {
-                checked && (
-                  <div className='absolute top-[43%] left-[35%] w-[30%]'>
-                    <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
-                  </div>
-                )
-              }
-              <div className='absolute bottom-1 left-8 text-[#561a99] text-center font-bold'>Dia {day}</div>
-            </DayItem>
-          )
-        })
-      }
-    </div>
-  )
-}
+// const DayList = ({
+//   signInAllConfig,
+//   currentSelectedLevel,
+//   vipLevel,
+//   signInTotalDays
+// }: IDayListProps) => {
+//   const vipConfig = signInAllConfig.find(
+//     (config) =>
+//       config.identifier.split('::')[2].replace('V', '') ===
+//       `${currentSelectedLevel}`
+//   );
+//   const dayConfigs = JSON.parse(vipConfig?.value || '[]');
+//
+//   return (
+//     <div className='w-full ml-1  overflow-x-scroll flex justify-between relative'>
+//       {
+//         days.map((day, index) => {
+//           const config = dayConfigs.find(
+//             (dayConfig: any) => dayConfig.days === day
+//           );
+//
+//           const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
+//
+//           return (
+//             <DayItem checked={checked} key={day}>
+//               <DayTitle className='absolute top-2 flex left-8'>
+//                 R$ {(config?.cashback || 0).toLocaleString()}
+//                 {
+//                   checked && <img
+//                     style={{width: '9px', height: '12px', marginLeft: '6px', marginTop: '-px'}}
+//                     alt='check-text'
+//                     src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAR1JREFUOE/Vk69Lg2EUhZ8THFgGgoKChgVXLEuW2WwGwaIg2Gyzubgmi2JzNqOIYUEQQVHcP7NklIGiRy58k89vP9xkIN72wnuf973nnCsmVJoQh78H2V4DroBHSbu/+pHtVeAOyAPPkmbHBtkuAQ/ADPAG7EhqjgWyvRKjAHPAO7An6SIMGxlkexl4AhaAD2Bf0nnX9W8g2zlJr9lI2C4kkCXAQEVSI33vC2T7FignM990L9leBFpAwAJyKOkk+1ga1AbmgQ6wKenedpxjnGLSWJNU7xfiNGgduAamgZcQEjgCQuCouqTaoE3IarQBNIFcpuFYUnXYOvW4ZnsLuASmksZTSZWfdrKv/ba3gTMgMnIgKUQeWiPn6P+BPgHf3FMTEyIoFgAAAABJRU5ErkJggg==' />
+//                 }
+//               </DayTitle>
+//               <img className='h-[55px] mx-auto mt-8' alt='money' src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}/>
+//               {
+//                 checked && (
+//                   <div className='absolute top-[43%] left-[35%] w-[30%]'>
+//                     <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
+//                   </div>
+//                 )
+//               }
+//               <div className='absolute bottom-1 left-8 text-[#561a99] text-center font-bold'>Dia {day}</div>
+//             </DayItem>
+//           )
+//         })
+//       }
+//     </div>
+//   )
+// }
 
 interface ICocoMobileDailySignInPageProps {
   onClickToSignIn: () => void
@@ -162,19 +162,22 @@ const MobileDailySignInPage = ({
       {/*</nav>*/}
 
       <BackNavigation
-        title={<img alt='title' className='h-[26px] ml-2' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>}
+        title={<img alt='title' className='w-[80%] ml-6' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>}
         onClick={() => onClickToIndex()}
       />
 
-      <section className='flex justify-center items-center my-3'>
-        <div className='w-1/2'>
-          <CurrentVIPIcon level={vipLevel} className='flex-row gap-2' imageClassName='w-1/2' textClassName='text-white text-2xl w-full' />
-        </div>
+      <section className='flex justify-center items-center my-6'>
+        <CurrentVIPIcon
+          level={vipLevel}
+          className='flex-row gap-2'
+          imageClassName='w-[64px]'
+          textClassName='text-white text-2xl w-[78px]'
+        />
       </section>
 
       <section>
         <CocoLevelList
-          className='font-bold text-base h-7'
+          className='font-bold text-base'
           currentLevel={vipLevel}
           currentSelectedLevel={currentSelectedLevel}
           setCurrentSelectedLevel={setCurrentSelectedLevel}
@@ -192,6 +195,7 @@ const MobileDailySignInPage = ({
       </section>
 
       <SignInButton
+        className='mt-9 mx-auto w-[162px] h-[40px]'
         disable={disableButton}
         onClick={()=> {
           setCurrentSelectedLevel(vipLevel || 0)
@@ -211,22 +215,22 @@ const MobileDailySignInPage = ({
           }
         }}
       >
-        <img alt='signInButton' src={`assets/${environment.assetPrefix}/daily_sign_in_button.png`}/>
+        <div className='text-lg font-medium text-white pt-[9%] text-center'>Colete cupons</div>
       </SignInButton>
 
       <div
-        className='my-3 text-white text-sm text-center'
+        className='mt-[14px] mb-6 text-white text-sm text-center'
         onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
       >{'visualizar registros >'}</div>
 
-      <SignInIngoContainer>
-        <div className='text-base text-center mb-2'>Regras de recompensa diária VIP:</div>
+      <div className='bg-[rgba(255,255,255,30%)] text-white py-3 px-[14px] rounded-md mb-16 text-sm font-medium'>
+        <div className='text-lg font-bold text-center'>Regras de recompensa diária VIP:</div>
         <div>
           Cada nível só pode receber recompensas por 7 dias no total. As recompensas serão creditadas na próxima vez que você as reivindicar.
           <br/>
           Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
         </div>
-      </SignInIngoContainer>
+      </div>
     </Container>
   )
 }
