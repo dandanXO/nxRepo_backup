@@ -90,7 +90,7 @@ const DayList = ({
   const dayConfigs = JSON.parse(vipConfig?.value || '[]');
 
   return (
-    <div className='w-full ml-1 min-h-8 overflow-x-scroll flex justify-between relative'>
+    <div className='w-full ml-1  overflow-x-scroll flex justify-between relative'>
       {
         days.map((day, index) => {
           const config = dayConfigs.find(
@@ -174,7 +174,7 @@ const MobileDailySignInPage = ({
 
       <section>
         <CocoLevelList
-          className='font-bold text-base h-7'
+          className='font-bold text-base'
           currentLevel={vipLevel}
           currentSelectedLevel={currentSelectedLevel}
           setCurrentSelectedLevel={setCurrentSelectedLevel}
