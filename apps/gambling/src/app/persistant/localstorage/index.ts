@@ -1,8 +1,8 @@
-
+import {AppLocalStorageKey} from "../AppLocalStorageKey";
 
 
 export class AppLocalStorage {
-  static setItem(key: string, value: string) {
+  static setItem(key: AppLocalStorageKey, value: string) {
     if (!window.localStorage) {
       window.fakeLocalStorage = window.fakeLocalStorage || {};
       window.fakeLocalStorage[key] = value;
@@ -10,7 +10,7 @@ export class AppLocalStorage {
       localStorage.setItem(key, value);
     }
   }
-  static getItem(key: string): string | null {
+  static getItem(key: AppLocalStorageKey): string | null {
     let returnItem = null;
     if (!window.localStorage) {
       if (window.fakeLocalStorage && window.fakeLocalStorage[key]) {
@@ -21,7 +21,7 @@ export class AppLocalStorage {
     }
     return returnItem;
   }
-  static removeItem(key: string) {
+  static removeItem(key: AppLocalStorageKey) {
     if (!window.localStorage) {
       if (window.fakeLocalStorage && window.fakeLocalStorage[key]) {
         delete window.fakeLocalStorage[key];
