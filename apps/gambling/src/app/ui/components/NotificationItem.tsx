@@ -50,7 +50,6 @@ export const NotificationItemTitle = styled.div<{
   expand?: boolean;
 }>`
   padding: 12px 14px;
-  box-shadow: inset 0 0 36px 5px var(--main) !important;
 
   ${(props) =>
       (props.expand || !props.first) && `
@@ -75,19 +74,19 @@ export const NotificationItemTitle = styled.div<{
 export const NotificationItemExpandable = styled.div`
   font-size: 14px;
   color: var(--white);
-  //background: purple;
+  background: linear-gradient(180deg, var(--primary-main-from), var(--primary-main-to));
   padding: 14px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   border-top: none;
   border-width: 1px;
-  border-color: var(--main-primary-main);
+  border-color: var(--primary-assistant);
 `;
 
 export const NotificationItemRedDot = styled.div`
   width: 6px;
   height: 6px;
-  background-color: var(--main-state-error);
+  background-color: var(--state-error-variant);
   border-radius: 3px;
   display: inline-block;
   margin-right: 6px;

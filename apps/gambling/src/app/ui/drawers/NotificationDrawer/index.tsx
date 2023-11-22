@@ -102,8 +102,8 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
       }}
     >
       <NotificationContainer>
-        <div className={'mb-2 text-lg font-bold text-main-secondary-main'} >
-          Centro de Notificaciones
+        <div className={'mb-2 text-2xl font-bold text-[var(--white)]'} >
+          Centro de Notificação
         </div>
 
         <div className={'overflow-y-auto text-base text-white'}>

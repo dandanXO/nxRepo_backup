@@ -18,6 +18,16 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import styled from "styled-components";
+import { environment } from "../../../../environments/environment";
+
+const BackGround = styled.div`
+  background-image: url("assets/${environment.assetPrefix}/bg_mobile.png");
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+`
 
 export const NotificationPage = () => {
   useAllowLoginRouterRules();
@@ -68,15 +78,19 @@ export const NotificationPage = () => {
   }, [data]);
 
   return (
-      <div className="flex h-full flex-col px-3 py-3 text-white">
+      <BackGround className="flex h-full flex-col px-3 py-3 text-white">
 
-        <BackNavigation onClick={() => {
-          navigate(PageOrModalPathEnum.IndexPage);
-        }}/>
+        <BackNavigation
+          onClick={() => {
+            navigate(PageOrModalPathEnum.IndexPage);
+          }}
+          title={
+            <div className="pl-10 text-lg font-bold text-[var(--white)]">
+              Centro de Notificação
+            </div>
+          }
+        />
 
-        <div className="mb-5 pl-3 text-2xl font-bold italic text-main-secondary-main">
-          Centro de Notificação
-        </div>
 
         <div className="grow overflow-y-auto">
           {messages &&
@@ -125,6 +139,6 @@ export const NotificationPage = () => {
               </NotificationItemContainer>
             ))}
         </div>
-      </div>
+      </BackGround>
   );
 };
