@@ -8,6 +8,7 @@ import {environment} from "../../../../environments/environment";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import {VIPBorderStyleContainer} from "../../components/VIPBorderStyleContainer";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
@@ -27,8 +28,8 @@ export const TelegramPage = () => {
 
   const navigate = useNavigate();
 
-  const telegramId = AppLocalStorage.getItem('telegramGroup');
-  const userInfoString = AppLocalStorage.getItem("userInfo");
+  const telegramId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
+  const userInfoString = AppLocalStorage.getItem(AppLocalStorageKey.userInfo);
   const userInfo = userInfoString ? JSON.parse(userInfoString) : null;
   const user_id = userInfo?.user_id || '';
   const telegramUrl=`https://t.me/${telegramId}?start=${user_id}`

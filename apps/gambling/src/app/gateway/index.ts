@@ -4,6 +4,7 @@ import "../external/websocket/windowProtobuf";
 import {userLogout} from "../usecase/userLogout";
 
 import {appSlice} from "../reduxStore/appSlice";
+import {AppLocalStorageKey} from "../persistant/AppLocalStorageKey";
 
 export const gateway = async (
   dispatch: (action: any) => void,
@@ -26,7 +27,7 @@ export const gateway = async (
   // NOTE: Dynamic get token
 
   try {
-    const token =  AppLocalStorage.getItem("token") ||''
+    const token =  AppLocalStorage.getItem(AppLocalStorageKey.token) ||''
     const config = {
       url: baseUrl + url,
       method,

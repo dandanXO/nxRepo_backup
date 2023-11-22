@@ -15,6 +15,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import {IndexPage as PIndexPage} from "./env/pernambucana/IndexPage";
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
 import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 export type TTotalFavoriteLocalState = {
@@ -31,8 +32,8 @@ export type TTotalFavoriteLocalState = {
 }
 
 export const IndexPage = () => {
-  const favoriteLocal = JSON.parse(AppLocalStorage.getItem('favoriteLocal') || '{}')
-  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem('favoriteLocalArr') || '{}')
+  const favoriteLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocal) || '{}')
+  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
   const [totalFavoriteLocalState, setTotalFavoriteLocalState] = useState<TTotalFavoriteLocalState>({
     local: favoriteLocal,
     localArr: favoriteLocalArr
@@ -67,8 +68,8 @@ export const IndexPage = () => {
     let list: { subGameType: string, games: { gameId: string }[] }[] = []
 
     if(activeTab === 'Favoritos') {
-      const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
-      const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem('favoriteLocalArr') || '{}')
+      const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
+      const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
 
       list = [{ subGameType: 'Favoritos', games: favoriteLocalArr[userInfo.user_id]}]
     } else {

@@ -1,7 +1,6 @@
 import React from "react";
 import {GetVIPInfoResponse} from "../../../../../external";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
-import {IUserInfo} from "../../../../../persistant/pending/loginMode";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {environment} from "../../../../../../environments/environment";
 import {useDispatch, useSelector} from "react-redux";
@@ -19,6 +18,8 @@ import {List} from "../../../../components/List";
 import {ListHeader} from "../../../../components/List/ListHeader";
 import {ListItem} from "../../../../components/List/ListItem";
 import {CopyIcon} from "../../../../components/CopyIcon";
+import {IUserInfo} from "../../../../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 
@@ -36,7 +37,7 @@ const BetMyPage = ({
                             userVIPInfo,
                             currentLevel
                           }: IBetMyPageProps) => {
-  const user: IUserInfo = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || "") : {};
+  const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const totalBalanceSheetValue= useSelector(totalBalanceSheetSelector);
   const totalReasableValue = useSelector(totalReasableSelector);

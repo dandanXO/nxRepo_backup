@@ -2,7 +2,13 @@ import cx from 'classnames';
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
-import {useGetSignInConfigMutation, useGetVIPInfoMutation, useLazyGetUserVIPAllInfoQuery,} from '../../../external';
+import {
+  GetUserVIPAllInfoResponse,
+  GetVIPInfoResponse,
+  useGetSignInConfigMutation,
+  useGetVIPInfoMutation,
+  useLazyGetUserVIPAllInfoQuery,
+} from '../../../external';
 import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
@@ -14,6 +20,10 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import PVIPGradePage from "./env/pernambucana/VIPGradePage";
 import WVIPGradePage from "./env/wild/VIPGradePage";
 import CVIPGradePage from "./env/coco/VIPGradePage";
+
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import {getLocalStorageObjectByKey} from "../../../persistant/getLocalStorageObjectByKey";
+import {setLocalStorageObjectByKey} from "../../../persistant/setLocalStorageObjectByKey";
 
 const LevelButton = styled.button.attrs<{
   className?: string;
@@ -74,36 +84,56 @@ export const JackpotMap: {
   },
 };
 
-
-export const VIPGradePage = () => {
+ export const VIPGradePage = () => {
   useAllowLoginRouterRules();
 
   const { isMobile } = useBreakpoint();
 
-  const [triggerGetUserVIPALLInfo, {data: oldVipAllInfo, currentData: vipAllInfo, isLoading, isFetching}] = useLazyGetUserVIPAllInfoQuery();
+  // NOTICE: 存到 LocalStorage
+  const [triggerGetUserVIPALLInfo, {
+    isUninitialized: isVipAllInfoUninitialized,
+    isLoading: isGetUserVIPAllInfoLoading,
+    data: oldVipAllInfo,
+    isFetching,
+    currentData: vipAllInfoResponseData,
+    }] = useLazyGetUserVIPAllInfoQuery();
+  // NOTE: get from localStorage
+  const prevVipAllInfo = getLocalStorageObjectByKey<GetUserVIPAllInfoResponse>(AppLocalStorageKey.useLazyGetUserVIPAllInfoQuery);
+  const [vipAllInfo, setVipAllInfo] = useState<GetUserVIPAllInfoResponse>(prevVipAllInfo)
+  useEffect(() => {
+    if(!isVipAllInfoUninitialized && !isGetUserVIPAllInfoLoading && vipAllInfoResponseData && vipAllInfoResponseData.code === 200) {
+      setLocalStorageObjectByKey(AppLocalStorageKey.useLazyGetUserVIPAllInfoQuery, vipAllInfoResponseData);
+      setVipAllInfo(vipAllInfoResponseData);
+    }
+  }, [isVipAllInfoUninitialized, isGetUserVIPAllInfoLoading, vipAllInfoResponseData])
+
+  // NOTICE: 存到 LocalStorage
+  // NOTICE: Store Mutation  old data
+  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useGetVIPInfoMutation();
+  const prevUserVIPInfo = getLocalStorageObjectByKey<GetVIPInfoResponse>(AppLocalStorageKey.useGetVIPInfoMutation);
+  const [userVIPInfo, setUserVIPInfo] = useState<GetVIPInfoResponse>(prevUserVIPInfo)
+  useEffect(() => {
+    if(!isUninitialized && !isGetUserVIPInfoLoading && userVIPInfoResponseData && userVIPInfoResponseData.code === 200) {
+      setLocalStorageObjectByKey(AppLocalStorageKey.useGetVIPInfoMutation, userVIPInfoResponseData);
+      setUserVIPInfo(userVIPInfoResponseData);
+    }
+  }, [isUninitialized, isGetUserVIPInfoLoading, userVIPInfoResponseData ])
+
 
   // NOTICE: Store Mutation old data
   const [triggerGetSignConfig, { data: signInConfigResponseData , isLoading: isGetSignConfigLoading}] = useGetSignInConfigMutation();
   const [signInConfig, setSignInConfig] = useState<any>()
   useEffect(() => {
     if(!isGetSignConfigLoading) {
+
       setSignInConfig(signInConfigResponseData);
     }
   }, [signInConfigResponseData, isGetSignConfigLoading])
 
-  // NOTICE: Store Mutation  old data
-  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isLoading: isGetUserVIPInfoLoading }] = useGetVIPInfoMutation();
-  const [userVIPInfo, setUserVIPInfo] = useState<any>()
-  useEffect(() => {
-    if(!isGetUserVIPInfoLoading) {
-      setUserVIPInfo(userVIPInfoResponseData);
-    }
-  }, [userVIPInfoResponseData, isGetUserVIPInfoLoading])
 
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem('token');
-
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
     if(token && token !== "" && token !== "undefined") {
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
@@ -112,13 +142,14 @@ export const VIPGradePage = () => {
       triggerGetUserVIPInfo({
         token,
       });
+      triggerGetUserVIPALLInfo(null);
     }
-    triggerGetUserVIPALLInfo(null);
+
   }, []);
 
   useEffect(() => {
     const handler = () => {
-      const token = AppLocalStorage.getItem('token') || '';
+      const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
         token,

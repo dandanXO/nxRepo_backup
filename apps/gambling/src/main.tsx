@@ -11,6 +11,7 @@ import {AppLocalStorage} from "./app/persistant/localstorage";
 import {ErrorPage} from "./app/ui/pages/ErrorPage";
 import { v4 as uuidv4, validate, version } from 'uuid';
 import {tryCatch} from "ramda";
+import {AppLocalStorageKey} from "./app/persistant/AppLocalStorageKey";
 
 
 declare global {
@@ -46,18 +47,18 @@ const render = () => {
 }
 
 // NOTE: remove device id which use fingerprintjs
-const deviceId = AppLocalStorage.getItem("deviceId") || "";
+const deviceId = AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "";
 try {
   if(!validate(deviceId) && version(deviceId) !== 4) {
-    AppLocalStorage.removeItem("deviceId");
+    AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
   }
 } catch (e) {
-  AppLocalStorage.removeItem("deviceId");
+  AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
 }
 
 
-if(!AppLocalStorage.getItem("deviceId")) {
-  AppLocalStorage.setItem("deviceId", uuidv4());
+if(!AppLocalStorage.getItem(AppLocalStorageKey.deviceId)) {
+  AppLocalStorage.setItem(AppLocalStorageKey.deviceId, uuidv4());
   render();
 } else {
   render();

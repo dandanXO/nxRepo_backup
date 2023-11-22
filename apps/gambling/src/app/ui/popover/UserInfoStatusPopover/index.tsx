@@ -31,6 +31,7 @@ import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/coco/User
 import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/UserInfoStatusPopoverNavigator";
 import { UserInfoStatusPopoverNavigator as PernambucanaNavigator } from "./env/pernambucana/UserInfoStatusPopoverNavigator";
 import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/coco/UserINfoStatusPopoverUserInfo'
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 const PopoverContainer = renderByPlatform({
@@ -261,7 +262,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem('token');
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
     if(token && token !== "" && token !== "undefined") {
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
@@ -276,7 +277,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
   useEffect(() => {
     const handler = () => {
-      const token = AppLocalStorage.getItem('token') || '';
+      const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
         token,

@@ -7,6 +7,7 @@ import { useWithdrawHistoryListMutation } from "../../../external";
 import { notification } from "antd";
 import copy from "copy-to-clipboard";
 import { AppLocalStorage } from "../../../persistant/localstorage";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 const WithdrawStatusMap: { [key: number]: string } = {
   1: 'Completed',
@@ -67,7 +68,7 @@ export const RecordPanelWithdraw = () => {
   }
 
   useEffect(()=>{
-    const token = AppLocalStorage.getItem('token') || '';
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
       limit: 10,
       page,

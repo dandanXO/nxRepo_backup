@@ -13,11 +13,12 @@ import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSect
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CopyIcon} from "../../../../components/CopyIcon";
 import {MobileMenuItem} from "./MobileMenuItem";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 export const MenuDrawerContent = () => {
   const location = useLocation();
-  const userInfo = JSON.parse(AppLocalStorage.getItem('userInfo') || '{}')
+  const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
   const {
     onClickToFirstDeposit,
     onClickToDepositCashback,

@@ -11,6 +11,7 @@ import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import { SearchInput } from "../../components/Inputs/SearchInput";
 import { SearchPageContainer } from "./SearchPageContainer";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 // import {onValidatePasswordInput} from "../../components/UserLoginStatusSection/forms/UserLoginForm";
 
 export const GameSearchPage = () => {
@@ -20,9 +21,9 @@ export const GameSearchPage = () => {
     errorMessage: '',
   });
 
-  const favoriteLocal = JSON.parse(AppLocalStorage.getItem('favoriteLocal') || '{}')
+  const favoriteLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocal) || '{}')
   const navigate = useNavigate();
-  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem('favoriteLocalArr') || '{}')
+  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
   const [totalFavoriteLocalState, setTotalFavoriteLocalState] = useState<TTotalFavoriteLocalState>({
     local: favoriteLocal,
     localArr: favoriteLocalArr

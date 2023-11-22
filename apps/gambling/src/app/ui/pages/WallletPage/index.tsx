@@ -18,6 +18,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"
 import { WalletPage as WWallletPage } from "./env/wild/WalletPage";
 import { WalletPage as CWallletPage } from "./env/coco/WalletPage";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 export type IPanelType = "deposit" | "withdraw" | "record";
 export type IRecordPanelType = 'deposit' | 'withdraw';
@@ -35,7 +36,7 @@ export const WallletPage = () => {
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
   useEffect(() => {
     if (panelMode === "deposit") {
-      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem("token") || '' })
+      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
     }
   }, [panelMode])
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)

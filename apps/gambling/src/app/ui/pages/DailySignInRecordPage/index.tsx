@@ -7,6 +7,7 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import { Table } from "../../components/Table";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 export const DailySignInRecordPage = () => {
@@ -38,7 +39,7 @@ export const DailySignInRecordPage = () => {
     triggerGetSignInRecord({
       limit: 10,
       page: page,
-      token: AppLocalStorage.getItem("token") || "",
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
     })
   }, [page])
 

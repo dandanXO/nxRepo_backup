@@ -24,6 +24,7 @@ import {SecuritySvg} from "../SecuritySvg";
 import {connect} from "../../../../gateway/socket";
 import {AppLocalStorage} from "../../../../persistant/localstorage";
 import styled from "styled-components";
+import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 
 
 const onValidateCaptchaInput = (data: string, setCaptchaInput: any) => {
@@ -193,7 +194,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         password: passwordInput.data,
         "verifyCode": captchaInput.data,
         "appChannel": "mobile",
-        "deviceId": AppLocalStorage.getItem("deviceId") || "",
+        "deviceId": AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
         "deviceModel": "WEB",
         "deviceVersion": "WEB",
         "sysTimezone": null,
@@ -258,7 +259,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
                 if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
                   triggerSendForgetPasswordSMSCode({
                     appPackageName: environment.appPackageName,
-                    deviceId: AppLocalStorage.getItem("deviceId") || "",
+                    deviceId: AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
                     phone: phoneInput.data,
                     verifyType: 1
                   });

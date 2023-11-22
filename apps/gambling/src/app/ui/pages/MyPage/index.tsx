@@ -21,6 +21,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import PBetMyPage from "./env/pernambucana/BetMyPage";
 import WBetMyPage  from "./env/wild/BetMyPage";
 import CBetMyPage from "./env/coco/BetMyPage";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
 
@@ -230,7 +231,7 @@ export const MyPage = () => {
 
   useEffect(() => {
     triggerGetLetter({
-      token: AppLocalStorage.getItem('token') || '',
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
     });
   }, [])
 
@@ -241,7 +242,7 @@ export const MyPage = () => {
   const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem('token') || '';
+    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     if(token && token !== "" && token !== "undefined") {
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
@@ -257,7 +258,7 @@ export const MyPage = () => {
 
   useEffect(() => {
     const handler = () => {
-      const token = AppLocalStorage.getItem('token') || '';
+      const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
         token,

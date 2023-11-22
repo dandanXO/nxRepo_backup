@@ -25,6 +25,7 @@ import cx from "classnames";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {Container} from "../../../../components/container/Container";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 export const WalletPage = () => {
@@ -41,7 +42,7 @@ export const WalletPage = () => {
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
   useEffect(() => {
     if (panelMode === "deposit") {
-      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem("token") || '' })
+      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
     }
   }, [panelMode])
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)

@@ -14,6 +14,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import PernambucanaDailySignInPage from "./env/pernambucana/DailySignInPage";
 import WDailySignInPage from "./env/wild/DailySignInPage";
 import CocoDailySignInPage from "./env/coco/DailySignInPage";
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 const Daily = styled.div<{
   disable: boolean;
@@ -139,7 +140,7 @@ export const DailySignInPage = () => {
   const onClickToSignIn = () => {
     triggerGetSignInConfig({
       onlyGetSignInConfig: false,
-      token: AppLocalStorage.getItem('token') || '',
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
     }).then(() => {
       // done
     })
@@ -147,7 +148,7 @@ export const DailySignInPage = () => {
   useEffect(() => {
     triggerGetSignInConfig({
       onlyGetSignInConfig: true,
-      token: AppLocalStorage.getItem('token') || '',
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
     });
   }, []);
 

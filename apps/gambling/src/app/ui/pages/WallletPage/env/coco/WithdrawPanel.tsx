@@ -18,6 +18,7 @@ import { RootState } from "../../../../../reduxStore";
 import cx from 'classnames';
 import { MobileInput } from "../../../../components/Inputs/MobileInput";
 import { WithdrawNoticeSection } from './WithdrawNoticeSection';
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 type IWithdrawPanel = {
@@ -65,7 +66,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   // console.log("currentWithdrawLimitData", currentWithdrawLimitData);
   useEffect(() => {
     triggerGetWithdrawLimit({
-      token: AppLocalStorage.getItem("token") || "",
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
     })
   }, [])
 
@@ -198,7 +199,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     }
 
     triggerWithdraw({
-      token: AppLocalStorage.getItem("token") || "",
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
       app_package_name: environment.appPackageName,
       app_version: environment.appVersion,
       amount: Number(amountInput.data),
@@ -271,7 +272,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           </div>
 
           <div className={cx(`text-white leading-none  rounded-xl
-            p-3.5 md:py-6 md:px-4  
+            p-3.5 md:py-6 md:px-4
             my-4 md:my-6
             text-xs md:text-xl
             text-center md:text-left

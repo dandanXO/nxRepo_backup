@@ -1,4 +1,3 @@
-import {IUserInfo} from "../../persistant/pending/loginMode";
 import {AppLocalStorage} from "../../persistant/localstorage";
 import {useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
@@ -8,6 +7,8 @@ import {environment} from "../../../environments/environment";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import React from "react";
 import styled from "styled-components";
+import {IUserInfo} from "../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 
 const VIPLabel = styled.div`
   width: 100px;
@@ -30,7 +31,7 @@ export type IAvatarAccountInfo = {
 }
 
 export const AvatarAccountInfo = (props: IAvatarAccountInfo) => {
-  const user: IUserInfo = AppLocalStorage.getItem("userInfo") ? JSON.parse(AppLocalStorage.getItem("userInfo") || "") : {};
+  const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
   // const vip_level = useSelector((state: RootState) => state.app?.userStore?.userinfo?.vip_level)
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
   const navigate = useNavigate();

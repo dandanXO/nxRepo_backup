@@ -19,6 +19,7 @@ import { tcx } from "../../../../utils/tcx";
 import { MobileInput } from "../../../../components/Inputs/MobileInput";
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
 import { WithdrawNoticeSection } from './WithdrawNoticeSection';
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 type IWithdrawPanel = {
@@ -66,7 +67,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   // console.log("currentWithdrawLimitData", currentWithdrawLimitData);
   useEffect(() => {
     triggerGetWithdrawLimit({
-      token: AppLocalStorage.getItem("token") || "",
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
     })
   }, [])
 
@@ -199,7 +200,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     }
 
     triggerWithdraw({
-      token: AppLocalStorage.getItem("token") || "",
+      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
       app_package_name: environment.appPackageName,
       app_version: environment.appVersion,
       amount: Number(amountInput.data),
