@@ -56,7 +56,7 @@ const Skeleton = styled.div`
 
 const DesktopGameItemButton = renderByPlatform({
   "wild777bet": WPlayButton,
-  "coco777bet": WPlayButton,
+  "coco777bet": CPlayButton,
 }, PPlayButton)
 
 const FavoriteSection = styled.div`
