@@ -352,7 +352,6 @@ export const PageTemplate = (props: IPage) => {
       {openDesktopUserInfoStatusDrawer && (
         <UserInfoStatusPopover
           close={() => setOpenDesktopUserInfoStatusDrawer(false)}
-
         />
       )}
 

@@ -9,6 +9,8 @@ type ICloseICON = {
 export const CloseICON = (props: ICloseICON) => {
   return (
     // <CloseCircleOutlined className={"text-white text-xl"}/>
-    <img className={cx("w-[24px] h-[24px]",props.className)}  src={`assets/${environment.assetPrefix}/icon=close.png`} alt="Close Icon" />
+    <button className={cx('p-2 hover:rounded-full hover:bg-[rgba(255,255,255,0.7)]')}>
+      <img className={cx("w-[24px] h-[24px]",props.className)}  src={`assets/${environment.assetPrefix}/icon=close.png`} alt="Close Icon" />
+    </button>
   )
 }

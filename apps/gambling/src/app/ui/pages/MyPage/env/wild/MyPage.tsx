@@ -17,7 +17,7 @@ import {Container} from "../../../../components/container/Container";
 import {List} from "../../../../components/List";
 import {ListHeader} from "../../../../components/List/ListHeader";
 import {ListItem} from "../../../../components/List/ListItem";
-import {CopyIcon} from "../../../../components/CopyIcon";
+import {CopyIcon} from "../../../../components/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 

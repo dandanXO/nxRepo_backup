@@ -18,9 +18,9 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 
 import {environment} from "../../../../environments/environment";
 import {renderByPlatform} from "../../utils/renderByPlatform";
-import PBetMyPage from "./env/pernambucana/BetMyPage";
-import WBetMyPage  from "./env/wild/BetMyPage";
-import CBetMyPage from "./env/coco/BetMyPage";
+import PBetMyPage from "./env/pernambucana/MyPage";
+import WBetMyPage  from "./env/wild/MyPage";
+import CBetMyPage from "./env/coco/MyPage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 

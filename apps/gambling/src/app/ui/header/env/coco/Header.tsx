@@ -85,7 +85,7 @@ export const Header = (props: IHeader) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
-  const [hover, setHover] = useState(true);
+  const [hover, setHover] = useState(false);
   const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
 
 
@@ -125,7 +125,7 @@ export const Header = (props: IHeader) => {
           }}
         >
           <div
-            className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)] cursor-pointer"}
+            className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)] cursor-pointer flex row justify-center items-center"}
             onClick={() => onClickToIndex()}
           >
             <img className="max-w-[56px] max-h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
@@ -195,7 +195,7 @@ export const Header = (props: IHeader) => {
                   src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
                 />
               </div>
-              <div className='text-base text-[#ff76ff] leading-none'>ID:{user.user_id}</div>
+              <div className='text-base text-[var(--text-tertiary)] leading-none'>ID:{user.user_id}</div>
             </div>
           </section>
 

@@ -19,7 +19,7 @@ export const Avatar = (props: {
     //   "w-[56px] h-[64px] min-w-[56px] min-h-[64px]}": !props.big,
     //   "w-[82px] h-[95px]": props.big,
     // })}>
-      <button
+      <div
         className={"relative"}
         onClick={() => {
           props.onClickToPopupUserInfoStatusPopover && props.onClickToPopupUserInfoStatusPopover()
@@ -38,7 +38,7 @@ export const Avatar = (props: {
           src={`assets/${environment.assetPrefix}/avatar_${userInfo.avatar || 1}.png`}
         />
         {/*<AvatarBorder/>*/}
-      </button>
+      </div>
     /*</div>*/
   )
 }

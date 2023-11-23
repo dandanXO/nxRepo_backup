@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import { useEffect, useState } from "react";
 import styled from 'styled-components';
 import {LeftOutlined} from "@ant-design/icons";
 
@@ -10,11 +10,20 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import {GameBackNavigation} from "../../components/BackNavigation/GameBackNavigation";
+import { LeaveGameConfirmModal } from "../../modals/LeaveGameConfirmModal";
+import { AppLocalStorage } from "../../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 
 export const GamePage = () => {
     useAllowLoginRouterRules();
+
+    const [closeGame, setCloseGame]= useState(false);
+
     const location = useLocation();
-    const { gameId, label } = queryString.parse(location.search) as { gameId: string, label: string };
+    const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
+    const favoriteLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocal) || '{}')
+    const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
+    const { gameId, label, gameName } = queryString.parse(location.search) as { gameId: string, label: string, gameName: string };
     const [triggerStartGame, { data, isLoading, isSuccess, isError }] = useStartGameMutation();
     // const urlParam = {
     //     "Fishing": "jiligames",
@@ -89,11 +98,44 @@ export const GamePage = () => {
 
     const {onClickToIndex} = usePageNavigate();
 
+    const onConfirmClose = (addFavorite: boolean) => {
+      if(addFavorite) {
+        const userFavorite = favoriteLocal[userInfo.user_id] || []
+        const userFavoriteArr = favoriteLocalArr[userInfo.user_id] || []
+        if(userFavorite.find((favorite: number) => favorite === Number(gameId))) {
+          onClickToIndex()
+        } else {
+          const newUserFavorite = [Number(gameId), ...userFavorite]
+          const newLocalFavorite = { ...favoriteLocal, [userInfo.user_id]: newUserFavorite }
+
+          const newUserFavoriteArr = [ {gameId: Number(gameId),name: gameName, img: '', label:  '', type:  ''}, ...userFavoriteArr]
+          const newLocalFavoriteArr = { ...favoriteLocalArr, [userInfo.user_id]: newUserFavoriteArr}
+
+          AppLocalStorage.setItem(AppLocalStorageKey.favoriteLocal, JSON.stringify(newLocalFavorite))
+          AppLocalStorage.setItem(AppLocalStorageKey.favoriteLocalArr, JSON.stringify(newLocalFavoriteArr))
+          onClickToIndex()
+        }
+      } else {
+        onClickToIndex();
+      }
+    }
+
     return (
         <>
-          <GameBackNavigation onClick={() => {
-            onClickToIndex();
-          }} />
+          {
+            !closeGame && (
+              <GameBackNavigation onClick={() => setCloseGame(true)} />
+            )
+          }
+
+          {
+            closeGame && (
+              <LeaveGameConfirmModal
+                onConfirm={onConfirmClose}
+                onClose={()=> setCloseGame(false)}
+              />
+            )
+          }
 
           {data !== undefined && (
             // <iframe className={`w-full h-full`} src={data.link} />
