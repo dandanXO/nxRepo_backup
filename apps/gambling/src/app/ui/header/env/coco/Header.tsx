@@ -85,7 +85,7 @@ export const Header = (props: IHeader) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
-  const [hover, setHover] = useState(false);
+  const [hover, setHover] = useState(true);
   const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
 
 

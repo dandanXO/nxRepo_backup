@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Input as DesktopInput, InputValue } from "../../components/Inputs/Input";
-import { Search } from "../../components-bs/UserLoginStatusSection/Search";
+import { SearchICON } from "../../components/Icons/SearchICON";
 import { MobileInput } from "../../components/Inputs/MobileInput";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { useSearchGames } from "../../hooks/useSearchGames";

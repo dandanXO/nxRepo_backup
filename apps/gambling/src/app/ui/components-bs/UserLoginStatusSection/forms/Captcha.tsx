@@ -24,8 +24,10 @@ export const Captcha = (props: ICaptcha) => {
   }
   if(!imgSrc) return null;
   return (
+    // border-bottom-right-radius: 8px;
+  // border-top-right-radius: 8px;
     <img
-      className={"h-[48px] cursor-pointer"} src={imgSrc}
+      className={"h-[50px] cursor-pointer rounded-br-[8px] rounded-tr-[8px]"} src={imgSrc}
       onClick={() => {
         onClickCaptcha();
       }}

@@ -24,7 +24,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
     <div>
       <section className={"mb-2 flex justify-center items-center"}>
         {switchToLoginOrRegister !== "forget" && (
-          <div className="flex" style={{ width: "350px" }}>
+          <div className="flex pb-2" style={{ width: "350px" }}>
             <button
               onClick={() => {
                 setSwitchToLoginOrRegister("login")
@@ -80,11 +80,13 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
       </section>
 
       {(switchToLoginOrRegister === "login" ? (
-        <div>
+        <div className={""}>
           <section className={"flex flex-col justify-center items-center mb-4"}>
             {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>*/}
             {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>*/}
-            <Logo/>
+            <div className={"mb-2"}>
+              <Logo className={"w-[76px] h-[76px] rounded-[10px] border-solid border-white border-[2px]"}/>
+            </div>
             {/*{props.showPlatformLogo && (*/}
               <span className={"text-white text-sm"}>{environment.platformName}</span>
             {/*)}*/}

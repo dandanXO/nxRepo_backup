@@ -1,5 +1,5 @@
-import {PhoneSvg} from "../../PhoneSvg";
-import {KeySvg} from "../../KeySvg";
+import {PhoneSvg} from "../../../../components/Icons/PhoneSvg";
+import {KeySvg} from "../../../../components/Icons/KeySvg";
 import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
 import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
@@ -17,7 +17,7 @@ import {PostRegisterRequest} from "../../../../../external/RegisterEndpoint";
 import {validate} from "class-validator";
 import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"
 import {environment} from "../../../../../../environments/environment"
-import {SecuritySvg} from "../../SecuritySvg";
+import {SecuritySvg} from "../../../../components/Icons/SecuritySvg";
 import {connect} from "../../../../../gateway/socket";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import { useDispatch } from "react-redux";
@@ -26,6 +26,8 @@ import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {Captcha} from "../Captcha";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
+import {CheckableICON} from "../../../../components/Icons/CheckableICON";
 
 const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
@@ -216,8 +218,8 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         prefix={
           <>
             {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
-            <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
-            <span className={"text-main-primary-main mr-2"}>+55</span>
+            <PhoneSvg className={"mr-2"}/>
+            <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
           </>
         }
         placeholder={"Tu nùmero de celular"}
@@ -234,8 +236,8 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           prefix={
             <>
               {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
-              <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
-              <span className={"text-main-primary-main mr-2"}>+55</span>
+              <PhoneSvg className={"mr-2"}/>
+              <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
             </>
           }
           placeholder={"Confirme o número do celular"}
@@ -250,7 +252,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       <Input
         type={isPasswordVisible ? 'text' : 'password'}
         // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+        prefix={<KeySvg className={"mr-2"}/>}
         placeholder={"Senha (4-12 letras e números)"}
         value={passwordInput.data}
         validation={passwordInput.isValidation}
@@ -263,19 +265,16 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
             className="password-toggle"
             onClick={togglePasswordVisibility}
           >
-            {isPasswordVisible ? (
-              <EyeOutlined className={"text-[#8B619E]"}/>
-            ) : (
-              <EyeInvisibleOutlined className={"text-[#8B619E]"}/>
-            )}
+            <HidableEyeSvg hide={!isPasswordVisible}/>
           </div>
         )}
       />
 
       <Input
         type={"text"}
+        className={"rounded-br-[0px] rounded-tr-[0px] border-r-[0px]"}
         // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+        prefix={<SecuritySvg className={"mr-2"}/>}
         outerSuffix={<Captcha onGetCaptchaKey={onGetCaptchaKey}/>}
         placeholder={"Código de verificação"}
         value={captchaInput.data}
@@ -294,41 +293,20 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         >Register agora</ConfirmButton>
       </section>
 
-      {isMobile ? (
-          <section className={"flex flex-row items-center mb-4"}>
-              <button className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
-                  {!isChecked ? (
-                      <img src={`assets/${environment.assetPrefix}/Property 1=uncheck.png`} />
-                  ) : (
-                      <img src={`assets/${environment.assetPrefix}/Property 1=check.png`} alt="Checked" />
-                  )}
-              </button>
-            <a className={"text-white font-thin"} style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}>
-              <span className={"text-[var(--light)] mr-1"} onClick={toggleCheck} >Eu concordo</span>
-              <span className={"text-main-secondary-main"} onClick={() => {
-                onClickToPrivacyAgreement();
-              }}>Condições e condições, política de privacidade</span>
-            </a>
-          </section>
-      ):(
-        <section className={"flex flex-row items-center"}>
-            <button className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
-                {!isChecked ? (
-                    <img src={`assets/${environment.assetPrefix}/Property 1=uncheck.png`}/>
-                ) : (
-                    <img src={`assets/${environment.assetPrefix}/Property 1=check.png`}/>
-                )}
-            </button>
-          <a className={"text-white font-thin"}>
-            <span onClick={toggleCheck} className={"text-[var(--light)] mr-1"}>Eu concordo</span>
-            <span
-              className={"text-main-secondary-main"}
-              onClick={() => {
-                onClickToPrivacyAgreement();
-              }}>Condições e condições, política de privacidade</span>
-          </a>
-        </section>
-      )}
+      <section className={"flex flex-row items-center mb-4"}>
+        <button className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
+          <CheckableICON isChecked={isChecked}/>
+        </button>
+        <a
+          className={"text-white font-thin text-md"}
+          // style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}
+        >
+          <span className={"text-[#a5a5a5] mr-1"} onClick={toggleCheck} >Eu concordo</span>
+          <span className={"text-[var(--white)]"} onClick={() => {
+            onClickToPrivacyAgreement();
+          }}>Condições e condições, política de privacidade</span>
+        </a>
+      </section>
 
 
     </section>

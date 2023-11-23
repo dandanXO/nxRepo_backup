@@ -167,7 +167,6 @@ export const PrivacyAgreementPage = () => {
             1.Control some of the categories of personal data we handle;
           </div>
           <div>2.Manage your publicly available personal data;</div>
-          <div>2.Manage your publicly available personal data;</div>
           <div>
             If we send you electronic marketing messages based on your consent
             or as otherwise permitted by applicable law, Users may at any time,

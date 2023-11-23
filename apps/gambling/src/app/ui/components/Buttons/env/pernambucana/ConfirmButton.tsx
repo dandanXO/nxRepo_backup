@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ConfirmButton = styled.div<{
+export const ConfirmButton = styled.button<{
   disable?: boolean;
 }>`
   margin-right: 118px;

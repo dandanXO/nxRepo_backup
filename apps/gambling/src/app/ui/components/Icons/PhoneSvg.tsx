@@ -1,8 +1,9 @@
 import {ISVGComponent} from "../../ISVGComponent";
 import {environment} from "../../../../environments/environment";
+import cx from "classnames";
 
 export const PhoneSvg = (props: ISVGComponent) => {
   return (
-      <img className={props.className} src={`assets/${environment.assetPrefix}/Property 1=ic_phone.png`} alt="Phone Icon" />
+      <img className={cx("w-[24px] h-[24px]",props.className)} src={`assets/${environment.assetPrefix}/icon=smartphone.png`} alt="Phone Icon" />
   )
 }
