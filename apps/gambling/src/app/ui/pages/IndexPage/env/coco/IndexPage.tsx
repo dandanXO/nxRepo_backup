@@ -125,6 +125,9 @@ export const IndexPage = ({
                 inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
                 placeholder={"Por favor insira o nome do jogo"}
                 prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
+                onChange={(event: any) => {
+                  setSearchInput(event.target.value)
+                }}
               />
             </div>
 
@@ -148,7 +151,7 @@ export const IndexPage = ({
                 </div>
               </section>
 
-              <div className="shirnk-0 grow-0 basis-[150px]">
+              <div className="shirnk-0 grow-0 basis-[200px]">
                 {/*NOTICE: refactor me*/}
                 <Input
                   className={cx(

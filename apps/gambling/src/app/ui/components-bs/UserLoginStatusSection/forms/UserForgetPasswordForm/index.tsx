@@ -1,30 +1,30 @@
-import {PhoneSvg} from "../PhoneSvg";
-import {KeySvg} from "../KeySvg";
-import {ConfirmButton} from "../../../components/Buttons/ConfirmButton";
+import {PhoneSvg} from "../../../../components/Icons/PhoneSvg";
+import {KeySvg} from "../../../../components/Icons/KeySvg";
+import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
 import {CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined} from "@ant-design/icons";
-import useBreakpoint from "../../../hooks/useBreakpoint";
-import {Input as DesktopInput, Input, InputValue} from "../../../components/Inputs/Input";
-import {MobileInput} from "../../../components/Inputs/MobileInput";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
+import {MobileInput} from "../../../../components/Inputs/MobileInput";
 import {useEffect, useState} from "react";
-import {useForm} from "../../../hooks/useForm";
+import {useForm} from "../../../../hooks/useForm";
 import {
   useForgetPasswordMutation,
   useRegisterMutation,
   useSendForgetPasswordSMSCodeMutation
-} from "../../../../external";
-import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
-import {promiseHandler} from "../../../../gateway/promiseHanlder";
-import {IOpenNotificationWithIcon} from "../../../pageTemplate";
+} from "../../../../../external";
+import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
+import {promiseHandler} from "../../../../../gateway/promiseHanlder";
+import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";
 import {validate} from "class-validator";
-import {onValidatePhoneInput, onValidatePasswordInput} from "./UserLoginForm"
+import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"
 
-import {environment} from "../../../../../environments/environment"
-import {SecuritySvg} from "../SecuritySvg";
-import {connect} from "../../../../gateway/socket";
-import {AppLocalStorage} from "../../../../persistant/localstorage";
+import {environment} from "../../../../../../environments/environment"
+import {SecuritySvg} from "../../../../components/Icons/SecuritySvg";
+import {connect} from "../../../../../gateway/socket";
+import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import styled from "styled-components";
-import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 const onValidateCaptchaInput = (data: string, setCaptchaInput: any) => {

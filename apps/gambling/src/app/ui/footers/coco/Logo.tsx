@@ -1,10 +1,13 @@
-// import {environment} from "../../../../environments/environment";
 import React from "react";
 // import LOGO from "../../../../assets/coco777bet/LOGO.png";
 import {AssetMappingCoco} from "../../../../assets/assetMapping.coco";
-export const Logo = () => {
+import cx from "classnames";
+type ILogo = {
+  className?: string;
+}
+export const Logo = (props: ILogo) => {
   return (
     // <img className={"w-[50px] h-[50px]"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
-    <img className={"w-[50px] h-[50px]"} src={AssetMappingCoco["logo"]}/>
+    <img className={cx("w-[50px] h-[50px]", props.className)} src={AssetMappingCoco["logo"]}/>
   )
 }

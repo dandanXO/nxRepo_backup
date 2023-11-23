@@ -1,5 +1,5 @@
-import {PhoneSvg} from "../../PhoneSvg";
-import {KeySvg} from "../../KeySvg";
+import {PhoneSvg} from "../../../../components/Icons/PhoneSvg";
+import {KeySvg} from "../../../../components/Icons/KeySvg";
 import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
 import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
@@ -7,7 +7,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useState} from "react";
 import {useLoginMutation} from "../../../../../external";
 import {environment} from "../../../../../../environments/environment";
-import {MockTriggerLoginResponse} from "../../MockTriggetLoginResponse";
+import {MockTriggerLoginResponse} from "../../mock/MockTriggetLoginResponse";
 import {useForm} from "../../../../hooks/useForm";
 import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
 import {promiseHandler} from "../../../../../gateway/promiseHanlder";
@@ -19,6 +19,7 @@ import {appSlice} from "../../../../../reduxStore/appSlice";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {MobileInput} from "../../../../components/Inputs/MobileInput";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
@@ -123,23 +124,23 @@ export const UserLoginForm = (props: IUserLoginForm) => {
         return;
       }
 
-      if(environment.mockBackend) {
-        // console.log("triggerLogin-data", MockTriggerLoginResponse);
-        setLoginLocalStorage({
-          token: MockTriggerLoginResponse.data.token,
-          userInfo: MockTriggerLoginResponse.data.user_info,
-          kPhone: phoneInput.data,
-          kPassword: passwordInput.data,
-          amount: 100,
-          ip: MockTriggerLoginResponse.data.connection.ip,
-        })
-
-        const url = MockTriggerLoginResponse.data.connection.ip;
-        const token = MockTriggerLoginResponse.data.token;
-        if(url) connect(url, token);
-
-        props.confirmToLogin();
-      } else {
+      // if(environment.mockBackend) {
+      //   // console.log("triggerLogin-data", MockTriggerLoginResponse);
+      //   setLoginLocalStorage({
+      //     token: MockTriggerLoginResponse.data.token,
+      //     userInfo: MockTriggerLoginResponse.data.user_info,
+      //     kPhone: phoneInput.data,
+      //     kPassword: passwordInput.data,
+      //     amount: 100,
+      //     ip: MockTriggerLoginResponse.data.connection.ip,
+      //   })
+      //
+      //   const url = MockTriggerLoginResponse.data.connection.ip;
+      //   const token = MockTriggerLoginResponse.data.token;
+      //   if(url) connect(url, token);
+      //
+      //   props.confirmToLogin();
+      // } else {
         triggerLogin({
           "appChannel": "pc",
           "appPackageName": environment.appPackageName,
@@ -179,7 +180,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
           console.error(error);
         })
       }
-    }
+    // }
   });
 
 
@@ -192,8 +193,8 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             prefix={
               <>
                 {/*<PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />*/}
-                <PhoneSvg fill="#6c7083" className="mr-2 w-[14px] h-[20px]" />
-                <span className="text-[var(--input-text-color)] mr-2">+55</span>
+                <PhoneSvg className="mr-2" />
+                <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
               </>
             }
             placeholder="Tu número de celular"
@@ -206,7 +207,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
         <Input
             type={isPasswordVisible ? 'text' : 'password'}
             // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-            prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+            prefix={<KeySvg className={"mr-2"}/>}
             placeholder={"Senha (4-12 letras e números)"}
             value={passwordInput.data}
             validation={passwordInput.isValidation}
@@ -219,18 +220,14 @@ export const UserLoginForm = (props: IUserLoginForm) => {
                 className="password-toggle"
                 onClick={togglePasswordVisibility}
               >
-                {isPasswordVisible ? (
-                  <EyeOutlined className={"text-[#8B619E]"}/>
-                ) : (
-                  <EyeInvisibleOutlined className={"text-[#8B619E]"}/>
-                )}
+                <HidableEyeSvg hide={!isPasswordVisible}/>
               </div>
             )}
         />
 
         <section className={"flex flex-col"}>
           <button
-            className={"text-[var(--light)] text-left mb-3 ml-3"}
+            className={"text-[var(--white)] text-center mb-3 ml-3"}
             onClick={() => {
               props.onSwitchToForgetPassword();
             }}

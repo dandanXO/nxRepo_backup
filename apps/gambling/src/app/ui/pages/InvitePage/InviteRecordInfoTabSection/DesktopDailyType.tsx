@@ -10,17 +10,17 @@ interface IDailyType {
 
 export const DesktopDailyType = (props: IDailyType) => {
   return (
-    <div className="overflow-x-auto text-white text-center" style={{borderWidth:'1px',borderColor:'var(--table-light)',borderRadius:'10px'}}>
+    <div className="overflow-x-auto text-white text-center rounded-xl" >
       <table className="table table-zebra w-full">
         {/* head */}
         <thead>
           <tr>
-            <th className='p-4'>Data</th>
-            <th className='p-4'>Usuário De Recarga</th>
-            {props.type === "1" && <th>Primeira Recarga Recompensas</th>}
-            {props.isProxy && <th>Dividendos</th>}
-            <th className='p-4'>Valor Da Transação Do Jogo</th>
-            <th className='p-4'>
+            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Data</th>
+            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Usuário De Recarga</th>
+            {props.type === "1" && <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Primeira Recarga Recompensas</th>}
+            {props.isProxy && <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Dividendos</th>}
+            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Valor Da Transação Do Jogo</th>
+            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>
               Recompensas De Troca De Jogos
               <span className='ml-2'>
               <IconTooltip
@@ -37,21 +37,21 @@ export const DesktopDailyType = (props: IDailyType) => {
           {props.records !== undefined && props.records?.length > 0 ? props.records?.map((s: any, index: number) => {
             return (
               <tr key={index}>
-                <td>{s.day}</td>
-                <td>{s.numRecharge}</td>
-                {props.type === "1" && <td>{s.firstRecharge || 0.00}</td>}
-                {props.isProxy && <td>{s.dividendos}</td>}
-                <td>{s.gameRecharge || 0.00}</td>
-                <td>{s.gameRechargeReward || 0.00}</td>
+                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.day}</td>
+                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.numRecharge}</td>
+                {props.type === "1" && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.firstRecharge || 0.00}</td>}
+                {props.isProxy && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.dividendos}</td>}
+                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRecharge || 0.00}</td>
+                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRechargeReward || 0.00}</td>
                 <td>{s.totalReward || 0.00}</td>
               </tr>
             )
           }
           ) : (<tr>
             <td colSpan={props.type === "1" ? 6 : 5}>
-              <div className="flex flex-col items-center p-12" style={{backgroundColor:'var(--table-varient)'}}>
+              <div className="flex flex-col items-center p-12">
                 <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
-                <div>Nothing here</div>
+                <div>Nada aqui</div>
               </div>
             </td>
           </tr>
