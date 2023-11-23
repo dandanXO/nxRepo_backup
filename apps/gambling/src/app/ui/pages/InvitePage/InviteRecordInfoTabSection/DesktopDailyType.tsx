@@ -39,11 +39,11 @@ export const DesktopDailyType = (props: IDailyType) => {
               <tr key={index}>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.day}</td>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.numRecharge}</td>
-                {props.type === "1" && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.firstRecharge || 0.00}</td>}
+                {props.type === "1" && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.firstRecharge}</td>}
                 {props.isProxy && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.dividendos}</td>}
-                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRecharge || 0.00}</td>
-                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRechargeReward || 0.00}</td>
-                <td>{s.totalReward || 0.00}</td>
+                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRecharge}</td>
+                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRechargeReward}</td>
+                <td>{s.totalReward}</td>
               </tr>
             )
           }

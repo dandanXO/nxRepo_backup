@@ -4,6 +4,7 @@ import { tcx } from "../../../../../utils/tcx";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";
 import { environment } from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
+import { formatMoney } from "../../../../../utils/formatMoney";
 
 interface ILevelInfoCardProps extends GetUserVIPAllInfoResponseData {
   signInBonus: number
@@ -59,28 +60,18 @@ const LevelInfoCard = ({
 
           <div className={tcx(['absolute top-0 left-[-10000px]', isMobile], ['hidden', level >= 20])}>Recompensa de atualização：
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {
-              (upRewardAmout ? upRewardAmout / 100 : 0).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}
+              R$ {formatMoney(upRewardAmout ? upRewardAmout / 100 : 0)}
             </span>
           </div>
           <div>Recompensa total de check-in de 7 dias：
             <span className='text-[var(--secondary-assistant)]'>
-              {signInBonus.toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}
+              {formatMoney(signInBonus)}
             </span>
           </div>
           <div>Limite máximo de retirada única：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {
-              (withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}
+              formatMoney(withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0)}
             </span>
           </div>
           <div>Número de retiradas por dia：
@@ -93,20 +84,12 @@ const LevelInfoCard = ({
           <div className={tcx('text-2xl text-left font-medium', ['text-lg font-bold', isMobile])}>Condição</div>
           <div>Quantidade total de recarga:
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {
-              (rechargeAmountLimit ? rechargeAmountLimit / 100 : 0).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}
+              R$ {formatMoney(rechargeAmountLimit ? rechargeAmountLimit / 100 : 0)}
             </span>
           </div>
           <div>Número total de apostas:
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {
-              (flowLimit ? flowLimit / 100 : 0).toLocaleString('pt-BR', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-              })}
+              R$ {formatMoney(flowLimit ? flowLimit / 100 : 0)}
             </span>
           </div>
         </div>

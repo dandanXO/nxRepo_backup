@@ -20,6 +20,7 @@ import {ListItem} from "../../../../components/List/ListItem";
 import {CopyIcon} from "../../../../components/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import { formatMoney } from "../../../../utils/formatMoney";
 
 
 
@@ -74,7 +75,7 @@ const MyPage = ({
 
       <section className='flex justify-between text-center mt-[26px] mb-5'>
         <div className='w-full px-3 flex flex-col gap-3 items-center'>
-          <div className='text-xl text-white'>R$ {totalBalanceSheetValue.toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2})}</div>
+          <div className='text-xl text-white'>R$ {formatMoney(totalBalanceSheetValue)}</div>
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
             className='w-[126px]'
@@ -83,7 +84,7 @@ const MyPage = ({
         </div>
 
         <div className='w-full px-3 flex flex-col gap-3 items-center'>
-          <div className='text-xl text-white'>R$ {totalReasableValue.toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2})}</div>
+          <div className='text-xl text-white'>R$ {formatMoney(totalReasableValue)}</div>
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
             className='w-[126px]'
@@ -110,9 +111,9 @@ const MyPage = ({
             <div>Depósitos totais:</div>
             <div className='text-[var(--secondary-assistant)]'>
               {
-                userVIPInfo?.data?.vip_score ? (userVIPInfo?.data?.vip_score/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}): 0
+                formatMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score/100: 0)
               } / {
-              userVIPInfo?.data?.next_level_score? (userVIPInfo?.data?.next_level_score/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+                formatMoney(userVIPInfo?.data?.next_level_score? userVIPInfo?.data?.next_level_score/100 : 0)
               }
             </div>
           </div>
@@ -139,9 +140,9 @@ const MyPage = ({
             <div>Pontos de apostas:</div>
             <div className='text-[var(--secondary-assistant)]'>
               {
-                userVIPInfo?.data?.flow ? (userVIPInfo?.data?.flow/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+                formatMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow/100 : 0)
               } / {
-              userVIPInfo?.data?.next_level_flow ? (userVIPInfo?.data?.next_level_flow/100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) : 0
+                formatMoney(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow/100 : 0)
               }
             </div>
           </div>

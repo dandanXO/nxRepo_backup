@@ -31,11 +31,11 @@ export const DesktopTotalType = (props: ITotal & { type: string }) => {
         {/* row 1 */}
         <tr>
           <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{props?.data.numRecharge || 0}</td>
-          {props.type === "1" && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.firstRecharge || 0.00}</td>}
+          {props.type === "1" && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.firstRecharge}</td>}
           {props.isProxy && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.dividendos}</td>}
-          <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.gameRecharge || 0.00}</td>
-          <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.gameRechargeReward || 0.00}</td>
-          <td className='p-4'>R${props?.data.totalReward || 0.00}</td>
+          <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.gameRecharge}</td>
+          <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.gameRechargeReward}</td>
+          <td className='p-4'>R${props?.data.totalReward}</td>
         </tr>
         </tbody>
       </table>
