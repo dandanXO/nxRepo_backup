@@ -33,19 +33,21 @@ export const StyledPage = styled.div.attrs((props) => ({
     //background-color:#306347;
   }
 
-  // &:after {
-  //   content: "";
-  //   width: 100%;
-  //   height: 100%;
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   z-index: -2;
-  //   background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
-  //   @media (max-width: 768px) {
-  //     background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
-  //   }
-  // }
+  &:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    background-image: url("assets/${environment.assetPrefix}/bg_web.png");
+    @media (max-width: 768px) {
+      background-image: url("assets/${environment.assetPrefix}/bg_h5.png");
+    }
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
   // ${(props) => props.isCurrentPageCompanyProfile && `
   //   background: url("assets/${environment.assetPrefix}/bg.888bcf29.png") no-repeat center center/100% auto;
@@ -135,7 +137,6 @@ export const PageTemplate = ({
                                        }: ICoco777betIndexPageTemplate) => {
   return (
       <StyledPage isCurrentPageCompanyProfile={false}>
-
         {isMobile && isShowMobileHeader && (
           <HeaderMobile
             className={"!h-[52.5px]"}
