@@ -141,17 +141,15 @@ export const IndexPage = ({
 
           </>
           ): (
-            <div className={"flex flex-row justify-center items-center"}>
+            <div className={"flex flex-row justify-center items-baseline"}>
 
-              <section className="mb-4 w-full flex flex-row items-center">
-                <div className="mr-2 grow">
-                  <ScrollTab className="mx-4">
-                    <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
-                  </ScrollTab>
-                </div>
-              </section>
+              <div className="grow min-w-[100px] mb-4">
+                <ScrollTab className="items-center">
+                  <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
+                </ScrollTab>
+              </div>
 
-              <div className="shirnk-0 grow-0 basis-[200px]">
+              <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]">
                 {/*NOTICE: refactor me*/}
                 <Input
                   className={cx(

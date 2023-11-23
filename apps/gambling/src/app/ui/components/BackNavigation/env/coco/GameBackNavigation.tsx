@@ -1,6 +1,8 @@
 import {LeftOutlined} from "@ant-design/icons";
 import React from "react";
 import styled from "styled-components";
+import { environment } from "../../../../../../environments/environment";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 const BackButton = styled.div`
   left: 20px;
@@ -9,7 +11,6 @@ const BackButton = styled.div`
   padding: 4px 10px;
   border-radius: 20px;
   text-align: center;
-  background: linear-gradient(60deg,#3378EE 0%,#0DE5FF 100%);
   position: absolute;
   display: flex;
   align-content: center;
@@ -24,13 +25,15 @@ type IGameBackNavigation = {
 }
 
 export const GameBackNavigation = (props: IGameBackNavigation) => {
+
+  const { isMobile } = useBreakpoint();
+
   return (
     <BackButton
       className={"fixed top-[10px] left-[10px] p-4 text-white flex flex-row justify-center items-center"}
       onClick={props.onClick}
     >
-      <LeftOutlined className={"mr-1text-white text-base relative top-[-2px] left-[-3px]"}/>
-      <div>Retornar</div>
+      <img className={isMobile? 'w-[50px] h-[50px]': 'w-[76px] h-[76px]'} alt='leaveIcon' src={`assets/${environment.assetPrefix}/icon_game_close.png`}/>
     </BackButton>
   )
 }

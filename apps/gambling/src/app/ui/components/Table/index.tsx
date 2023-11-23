@@ -80,7 +80,7 @@ export const Table = (props: ITable) => {
           </thead>
         </table>
       </div>
-      <div className='h-full overflow-y-auto flex-1' ref={tbodyRef} onScroll={handleOnScroll}>
+      <div className='customTable-tbody h-full overflow-y-auto flex-1' ref={tbodyRef} onScroll={handleOnScroll}>
         <table className={tcx('table-zebra relative table w-full table-fixed ')}>
           <tbody className=''>
             {dataSource.length === 0 ? <tr>
