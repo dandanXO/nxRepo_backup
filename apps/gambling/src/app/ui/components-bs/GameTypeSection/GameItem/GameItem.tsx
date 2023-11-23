@@ -7,6 +7,10 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import {TailSpin} from 'react-loading-icons';
 import {environment} from "../../../../../environments/environment";
 
+import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { PlayButton as CPlayButton } from "../env/coco/PlayButton";
+import { PlayButton as WPlayButton } from "../env/wild/PlayButton";
+import { PlayButton as PPlayButton } from "../env/pernambucana/PlayButton";
 
 export type IGameItem = {
   className?: string;
@@ -49,16 +53,11 @@ const Skeleton = styled.div`
   width: 100%;
 
 `
-const DesktopGameItemButton = styled.div`
-  width: 90px;
-  height: 36px;
-  background: linear-gradient(149deg,#FFF600 0%,#4FFB0C 100%);
-  border-radius: 8px;
-  color: #0b0e11;
-  //display: flex;
-  //justify-content: center;
-  //align-items: center;
-`
+
+const DesktopGameItemButton = renderByPlatform({
+  "wild777bet": WPlayButton,
+  "coco777bet": WPlayButton,
+}, PPlayButton)
 
 const FavoriteSection = styled.div`
   //&:after {
@@ -88,7 +87,7 @@ export const DesktopGameItem = (props: IItem) => {
   const [onLoad, setOnLoad] = useState(false);
   return (
     <StyledGameItem
-      className={"p-1 game-item rounded flex flex-col items-center relative"}
+      className={"p-1 game-item rounded flex flex-col items-center relative group"}
       onMouseOver={() => {
         setHover(true);
       }}
@@ -102,7 +101,7 @@ export const DesktopGameItem = (props: IItem) => {
       )}
       <div className={"w-full"}>
         <img alt={"name"}
-             className={cx("rounded-xl hover:blur-[2px] w-[150px] h-[150px] object-cover", {
+             className={cx("rounded-xl hover:blur-[2px] hover:brightness-50 w-[150px] h-[150px] object-cover group-hover:blur-[2px] group-hover:brightness-50", {
                // "hide": !onLoad,
                "invisible": !onLoad,
                "basis-[calc(100%-1rem)]": onLoad
@@ -126,11 +125,9 @@ export const DesktopGameItem = (props: IItem) => {
       {hover && (
         <DesktopGameItemButton
           onClick={props.onClick}
-          className={cx("text-white absolute top-[29%] flex flex-row justify-center items-center font-bold")}
-        >
-          <span>Jogar</span>
-          <ArrowRightOutlined className={"ml-1 relative top-[1px]"}/>
-        </DesktopGameItemButton>
+          
+        />
+
       )}
     </StyledGameItem>
   )
