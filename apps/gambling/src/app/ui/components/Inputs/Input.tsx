@@ -18,14 +18,18 @@ export type IInput = {
   validation?: boolean;
   errorMessage?: string;
   outerSuffix?: React.ReactNode;
+  pureContainer?: boolean;
 
 }
 
 const BaseInput = (props: IInput) => {
   // const inputRef = useRef();
   const [focus, setFocus] = useState(false);
+  const isPureContainer = typeof props.pureContainer == "undefined" ? false : props.pureContainer;
   return (
-    <div className={"mb-3 md:mb-4"}>
+    <div className={cx({
+      "mb-3 md:mb-4": !isPureContainer
+    })}>
       <div className={"flex flex-row justify-center items-center"}>
         <InputSection
           focus={focus}
