@@ -17,9 +17,9 @@ const { RangePicker } = DatePicker;
 const NoData = () => {
   return (
     <td colSpan={2} className=''>
-      <div className='p-12' style={{backgroundColor:'var(--table-varient)'}}>
+      <div className='p-12'>
         <img style={{display: 'unset'}} className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
-        <div>Nada aq</div>
+        <div>Nada aqui</div>
       </div>
     </td>
   )
@@ -88,12 +88,12 @@ export const InviteSettlementRecordPage = () => {
             />
           </section>
 
-          <div className="overflow-x-auto" style={{borderWidth:'1px',borderColor:'var(--table-light)',borderRadius:'10px'}}>
+          <div className="overflow-x-auto rounded-xl">
             <table className="table table-zebra w-full text-center">
               {/* head */}
               <thead>
                 <tr>
-                  <th className='p-4'>Hora De Entrada</th>
+                  <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Hora De Entrada</th>
                   <th className='p-4'>Bônus</th>
                 </tr>
               </thead>
@@ -103,7 +103,7 @@ export const InviteSettlementRecordPage = () => {
                 currentData?.rows.map((itme, index) => {
                   return (
                     <tr>
-                      <td className='p-12'>{itme.updateTime}</td>
+                      <td className='p-12 border-r border-[rgba(255,255,255,0.2)]'>{itme.updateTime}</td>
                       <td className='p-12'>R{parseFloat((itme.reward/1000).toFixed(2))}</td>
                     </tr>
                   )
