@@ -26,7 +26,7 @@ const CurrentLevelInfoCard = ({
       <div className='flex items-center justify-center'>
         <CurrentVIPIcon
           className={tcx('w-[280px]', ['gap-[15px]', isMobile])}
-          imageClassName='px-12 py-3'
+          imageClassName='px-12 py-3 object-contain'
           level={currentLevel}
           textClassName={tcx('w-[102px]', ['hidden', !isMobile])}
         />

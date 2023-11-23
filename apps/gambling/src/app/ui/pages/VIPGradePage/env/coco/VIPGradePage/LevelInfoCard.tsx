@@ -35,7 +35,7 @@ const LevelInfoCard = ({
           ['w-full', isMobile]
         )}>
           <img
-            className={tcx('px-[93px]', ['px-0', level >= 20])}
+            className={tcx('px-[93px] object-contain', ['px-0', level >= 20])}
             src={
               level < 20 ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
                 `assets/${environment.assetPrefix}/${JackpotMap[level].image}`
