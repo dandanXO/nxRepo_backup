@@ -38,7 +38,7 @@ export const IndexTabs = ({
     // recent
   ]
   return (
-      <Tabs className={"game-type-tab-list my-2"}>
+      <Tabs className={"game-type-tab-list my-1"}>
         {
           // ["Todos", ...label, 'Favoritos']
           // ["Salão", ...label, 'Favoritos']
