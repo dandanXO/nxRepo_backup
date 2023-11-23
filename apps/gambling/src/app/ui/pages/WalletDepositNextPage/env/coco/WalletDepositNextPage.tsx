@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRechargeMutation } from "../../../../../external";
 import { useLocation, useNavigate } from "react-router";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
@@ -15,6 +15,8 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 const ShadowContainer = styled.div.attrs<{
   className?: string;
@@ -114,23 +116,20 @@ export const WalletDepositNextPage = () => {
 
 
   const shadowContainerStyle = isMobile ? mobileShadowContainerStyle : deskTopShadowContainerStyle
+
+  const {onClickToWallet} = usePageNavigate();
+
   return (
     <div className={"p-5 md:p-10 md:pt-0 w-full"}>
       <div className={cx("", { " md:bg-[var(--game-block)] md:rounded-2xl md:py-5 md:px-14 ": !isMobile })}>
         {contextHolder}
 
-        <button className={cx("flex mb-4 items-center",
-          {
-            'flex-col': !['wild777bet', 'coco777bet'].includes(environment.assetPrefix),
-            'md:flex-row md:mb-10': !isMobile,
-            'flex-row w-full': ['wild777bet', 'coco777bet'].includes(environment.assetPrefix)
-          })} onClick={() => {
-            navigate(PageOrModalPathEnum.WalletPage);
-          }}>
-          <img className={cx("w-[21px] h-[21px] mr-2")} alt={"back"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAMAAADfNcjQAAAAZlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+Vn2moAAAAIXRSTlMA5QjW6825oZSHeFMpIRoUD/Xw397dxMOurWtpXUI9MzAmTIk1AAAAlElEQVQ4y7XURxbEIAwDUBzS+/RJD/e/ZKIDKFqF7ec9wLZwd63KrLryMYRgF16eHjz3Ah7v1HO41dQz+KdhHP3hvqWewpOOef+F/3rmXQJPI+athw/Umzc8Y+xqg+fUtxheUF+f8JL68oBP1N0LPhMkG+gR+pL6mbpQutS6WbrdemD0yOmh1WOvg6Ojp8Or468/kAMmXBWDCW3GHwAAAABJRU5ErkJggg=="} />
-          {isMobile && <span className={cx("text-white text-xl font-bold text-center flex-1")}>Depósito</span>}
-          {!isMobile && <span className={cx("text-white text-2xl font-bold text-left flex-1")}>Retornar</span>}
-        </button>
+        <BackNavigation
+          title={(
+            <span className={cx("ml-2 text-white text-xl font-bold text-center md:text-left flex-1")}>{isMobile ? "Depósito" : "Retornar"}</span>
+          )}
+          onClick={()=> onClickToWallet()}
+        />
 
         {isMobile && (
           <div className={"text-3xl text-center text-[var(--secondary-assistant)]"}>R$ {amount}</div>
