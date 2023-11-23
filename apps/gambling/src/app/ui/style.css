@@ -115,14 +115,14 @@ html {
 }
 .table th {
   text-transform: none;
-  background: var(--table-main);
+  background: var(--primary-variant);
 }
 .table :where(tbody th, tbody td) {
-  background: var(--table-varient);
+  background: rgb(from var(--primary-assistant) r g b / 20%);
 }
 
 .table-zebra tbody tr:nth-child(even) td {
-  background: var(--table-main);
+  background: rgb(from var(--white) r g b / 20%);
 }
 
 

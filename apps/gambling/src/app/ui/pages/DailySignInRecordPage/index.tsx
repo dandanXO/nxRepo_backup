@@ -55,7 +55,7 @@ export const DailySignInRecordPage = () => {
 
           <BackNavigation onClick={() => onClickToCheckInDaily()}/>
 
-          <div className='rounded-lg max-h-[80vh] overflow-hidden'>
+          <div className='rounded-lg h-[80vh] overflow-hidden'>
             <Table
               fetchData={handleFetchData}
               dataSource={records}
