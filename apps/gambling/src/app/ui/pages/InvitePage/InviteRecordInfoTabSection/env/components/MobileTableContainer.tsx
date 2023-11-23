@@ -1,10 +1,7 @@
 import { renderByPlatform } from "apps/gambling/src/app/ui/utils/renderByPlatform"
-import { ReactElement } from "react"
 import { MobileOpacityBackgroundContainer } from "../coco/MobileOpacityBackgroundContainer"
+import { FragmentContainer } from "apps/gambling/src/app/ui/components/FragmentContainer"
 
-const FragmentContainer = (props: { children: ReactElement[] }) => {
-  return (<>{props.children}</>)
-}
 
 export const MobileTableContainer = renderByPlatform({
   "wild777bet": FragmentContainer,

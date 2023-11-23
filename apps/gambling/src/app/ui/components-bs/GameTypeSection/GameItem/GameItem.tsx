@@ -96,14 +96,15 @@ export const DesktopGameItem = (props: IItem) => {
         setHover(false);
       }}>
       {!onLoad && (
-        <Skeleton className={"rounded-xl w-[150px] h-[150px]  flex justify-center items-center"}>
+        <Skeleton className={"absolute rounded-xl w-[150px] h-[150px]  flex justify-center items-center"}>
           <TailSpin/>
         </Skeleton>
       )}
       <div className={"w-full"}>
         <img alt={"name"}
              className={cx("rounded-xl hover:blur-[2px] w-[150px] h-[150px] object-cover", {
-               "hide": !onLoad,
+               // "hide": !onLoad,
+               "invisible": !onLoad,
                "basis-[calc(100%-1rem)]": onLoad
              })}
              src={`${environment.s3URLImages}/${props.gameId}-small.png`}

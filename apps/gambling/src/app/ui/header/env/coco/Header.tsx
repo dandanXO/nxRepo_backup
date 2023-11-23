@@ -150,7 +150,7 @@ export const Header = (props: IHeader) => {
 
 
       {!isLogin && (
-        <div className="flex-1 flex justify-end">
+        <div className="flex-1 flex justify-end mr-4">
           <LoginButton
             className={"text-white text-lg"}
             onClick={() => {

@@ -1,4 +1,4 @@
-import {DownOutlined, LeftOutlined, UpOutlined} from '@ant-design/icons';
+import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -70,13 +70,17 @@ export const NotificationPage = () => {
   return (
       <div className="flex h-full flex-col px-3 py-3 text-white">
 
-        <BackNavigation onClick={() => {
-          navigate(PageOrModalPathEnum.IndexPage);
-        }}/>
+        <BackNavigation
+          onClick={() => {
+            navigate(PageOrModalPathEnum.IndexPage);
+          }}
+          title={
+            <div className="pl-10 text-lg font-bold text-[var(--white)]">
+              Centro de Notificação
+            </div>
+          }
+        />
 
-        <div className="mb-5 pl-3 text-2xl font-bold italic text-main-secondary-main">
-          Centro de Notificação
-        </div>
 
         <div className="grow overflow-y-auto">
           {messages &&

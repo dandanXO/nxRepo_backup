@@ -46,7 +46,7 @@ export const IndexTabs = ({
             return (
               <ImageTab
                 className={cx("flex row justify-center items-center",{
-                  "!bg-gradient-to-b from-[#88E3FF] to-[#0044C7]": activeTab === tab,
+                  "bg-gradient-to-b from-[#88E3FF] to-[#0044C7]": activeTab === tab,
                 })}
                 // className={cx(`font-bold border-none border-0 rounded `, {
                 //   'bg-[#262fa8] text-white py-0.5': activeTab === tab,

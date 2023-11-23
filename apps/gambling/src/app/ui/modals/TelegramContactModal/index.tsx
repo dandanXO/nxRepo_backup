@@ -61,7 +61,7 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
 
         <div className={tcx(
           "flex flex-row justify-end mb-2 absolute right-[20px]",
-          ['top-[20ox]', !isMobile],
+          ['top-[20px]', !isMobile],
           ['right-[50%] translate-x-[50%] bottom-0 translate-y-[50px]', isMobile]
         )}>
           <button onClick={() => {

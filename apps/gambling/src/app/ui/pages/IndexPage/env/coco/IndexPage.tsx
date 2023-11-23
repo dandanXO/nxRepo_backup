@@ -111,7 +111,7 @@ export const IndexPage = ({
         </AppCarousel>
       </div>
 
-      <Container className="bg-[#020E29]">
+      <Container className="bg-[var(--background-primary)]">
         {/*Tabs*/}
         {isMobile ? (
           <>
@@ -128,11 +128,11 @@ export const IndexPage = ({
               />
             </div>
 
-            <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 whitespace-nowrap"}>
-              <DragScrollContainer>
-                <section className={"flex flex-row items-center bg-[#000C26] px-0.5"}>
+            <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 whitespace-nowrap "}>
+              <DragScrollContainer className="flex flex-row items-center bg-[var(--background-primary)] px-0.5 ">
+                {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
                   <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
-                </section>
+                {/* </section> */}
               </DragScrollContainer>
             </div>
 
@@ -166,7 +166,7 @@ export const IndexPage = ({
             </div>
         )}
 
-        <div className="bg-[#000C26]">
+        <div className="bg-[var(--background-primary)]">
           {gameList()}
         </div>
 
