@@ -294,7 +294,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       </section>
 
       <section className={"flex flex-row items-center mb-4"}>
-        <button className={"mr-2 relative top-[1px]"} onClick={toggleCheck}>
+        <button className={"mr-2 relative top-[1px] shrink-0"} onClick={toggleCheck}>
           <CheckableICON isChecked={isChecked}/>
         </button>
         <a

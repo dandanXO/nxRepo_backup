@@ -19,7 +19,7 @@ export const ScrollTab = (props: { children: React.ReactElement[] | React.ReactE
   return (
     <div className={cx("flex flex-row items-center")}>
       <LeftSquareOutlined className={"text-white text-lg visible xl:invisible grow-0"} onClick={handleScrollLeft} />
-      <div ref={scrollContainerRef} className={cx(" flex flex-row shrink-auto overflow-hidden mx-2",props.className)}>
+      <div ref={scrollContainerRef} className={cx("flex flex-row shrink-auto overflow-hidden mx-2",props.className)}>
         {props.children}
       </div>
       <RightSquareOutlined className={"text-white text-lg visible xl:invisible grow-0"} onClick={handleScrollRight} />

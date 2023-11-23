@@ -17,7 +17,7 @@ import {Container} from "../../../../components/container/Container";
 import {List} from "../../../../components/List";
 import {ListHeader} from "../../../../components/List/ListHeader";
 import {ListItem} from "../../../../components/List/ListItem";
-import {CopyIcon} from "../../../../components/CopyIcon";
+import {CopyIcon} from "../../../../components/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
@@ -33,7 +33,7 @@ interface IBetMyPageProps {
   currentLevel: number
 }
 
-const BetMyPage = ({
+const MyPage = ({
                             userVIPInfo,
                             currentLevel
                           }: IBetMyPageProps) => {
@@ -61,7 +61,7 @@ const BetMyPage = ({
           <div>
             <div className='text-white text-base'>{user.nickname}</div>
             <div className='text-white text-sm flex items-center'>
-              <span>ID:{user.user_id}</span>
+              <span className={"text-[var(--text-tertiary)]"}>ID:{user.user_id}</span>
               <CopyIcon copyText={user.user_id} />
             </div>
           </div>
@@ -178,4 +178,4 @@ const BetMyPage = ({
   )
 }
 
-export default BetMyPage;
+export default MyPage;

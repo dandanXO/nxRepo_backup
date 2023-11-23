@@ -42,11 +42,11 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
 
         {isShowCloseButton && (
           <section className={"flex flex-col justify-center items-end"}>
-            <button onClick={() => {
+            <div onClick={() => {
               props.close();
             }}>
               <CloseICON/>
-            </button>
+            </div>
           </section>
         )}
 

@@ -1,6 +1,3 @@
-import { environment } from "apps/gambling/src/environments/environment"
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation"
-import { Banner } from "../../../../components/Banner"
 import { ChargeButton } from "../../../../components/Buttons/ChargeButton"
 import useBreakpoint from "../../../../hooks/useBreakpoint"
 import { usePageNavigate } from "../../../../hooks/usePageNavigate"

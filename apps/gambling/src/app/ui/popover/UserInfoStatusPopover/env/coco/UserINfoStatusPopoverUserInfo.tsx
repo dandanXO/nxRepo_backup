@@ -1,12 +1,13 @@
 import React from "react";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { CopyIcon } from "../../../../components/CopyIcon";
+import { CopyIcon } from "../../../../components/Icons/CopyIcon";
 import { environment } from "../../../../../../environments/environment";
 import { useDispatch } from "react-redux";
 import { appSlice } from "../../../../../reduxStore/appSlice";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {SignoutICON} from "../../../../components/Icons/SignoutICON";
 
 export const UserINfoStatusPopoverUserInfo = () => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
@@ -26,7 +27,7 @@ export const UserINfoStatusPopoverUserInfo = () => {
         <div className='flex flex-col justify-between text-[var(--text-tertiary)]'>
           <div className='text-xl text-white'>{user.nickname}</div>
           <div
-            className='flex gap-2 text-lg'
+            className='flex gap-2 text-lg items-center'
             onClick={(e)=>e.stopPropagation()}
           >
             <div>ID:{user.user_id}</div>
@@ -35,12 +36,8 @@ export const UserINfoStatusPopoverUserInfo = () => {
         </div>
       </div>
 
-      <button>
-        <img
-          className='h-6 w-6'
-          src={`assets/${environment.assetPrefix}/ic_sign_out.png`}
-          onClick={()=>setOpenLogoutPopover(true)}
-        />
+      <button onClick={()=>setOpenLogoutPopover(true)}>
+        <SignoutICON/>
       </button>
     </div>
   )

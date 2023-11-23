@@ -52,7 +52,7 @@ export const TelegramPage = () => {
 
       <BackNavigation
         onClick={() => onClickToIndex()}
-        title={<div className={"w-full text-center"}>Retornar</div>}
+        title={<div className={"w-full text-center md:text-left"}>Retornar</div>}
       />
       {/*<section className={"rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
       {/*  <img className="w-full" src={`assets/${environment.assetPrefix}/bg.761d8ab4.png`}/>*/}
@@ -70,7 +70,7 @@ export const TelegramPage = () => {
           <Bonus className={"md:text-4xl"}>atividades de recompensa</Bonus>
         </div>
       </section> */}
-   
+
       <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`} src={`assets/${environment.assetPrefix}/banner_telegram.png`} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
           <div className={"text-white text-base sm:text-3xl md:text-4xl  lg:text-5xl font-bold lg:mb-2"}>Sample wordingptas y</div>
@@ -85,8 +85,8 @@ export const TelegramPage = () => {
         {isCoco777bet && <div className="text-2xl font-bold mb-4 sm:mb-2.5"><span className="text-white mr-2">Canal De</span><span className="text-[var(--primary-assistant)]">Telegram</span></div>}
         <div className={"text-left w-full mb-4 sm:mb-3"}>{environment.platformGroup} ({environment.platformName}) sinceramente convida você a se juntar ao nosso canal de telegrama e vamos nos comunicar mais profundamente!</div>
 
-        <button className={`rounded-lg mx-auto my-4 sm:hidden w-[90%] flex-1 py-2 text-center 
-          items-center justify-center text-white text-xl flex 
+        <button className={`rounded-lg mx-auto my-4 sm:hidden w-[90%] flex-1 py-2 text-center
+          items-center justify-center text-white text-xl flex
           bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]`}
           onClick={() => {
             window.open(telegramUrl, '_blank')
