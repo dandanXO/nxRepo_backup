@@ -2,20 +2,13 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import {tcx} from "../../utils/tcx";
 import { environment } from "../../../../environments/environment";
-import styled from "styled-components";
-
-
-const NoDataContainer = styled.div`
-  background: rgb(from var(--white) r g b / 20%);
-`
-
 
 const NoData = () => {
   return (
-    <NoDataContainer className='flex flex-col justify-center items-center py-[50px] gap-1'>
+    <td className='flex flex-col justify-center items-center py-[50px] gap-1'>
       <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
       <div className='text-lg font-medium'>Nada aqui</div>
-    </NoDataContainer>
+    </td>
   )
 }
 
