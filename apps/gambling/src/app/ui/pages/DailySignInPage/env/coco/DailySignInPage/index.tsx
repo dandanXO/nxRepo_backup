@@ -12,6 +12,7 @@ import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRouterRules";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
+import { formatMoney } from "../../../../../utils/formatMoney";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -231,7 +232,7 @@ export const DayList = ({
 
               {
                 !checked && (
-                  <div className='break-all text-sm  text-white mb-[24px]'>R$ {(config?.cashback || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits:2}) }</div>
+                  <div className='break-all text-sm  text-white mb-[24px]'>R$ {formatMoney((config?.cashback || 0))}</div>
                 )
               }
 

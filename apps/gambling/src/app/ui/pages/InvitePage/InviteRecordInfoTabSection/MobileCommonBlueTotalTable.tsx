@@ -59,7 +59,7 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
       <MobileTableContainer>
         {props.isProxy && (
           <div className={"flex flex-row justify-end"}>
-            <span className={"text-base text-[#ffffff]"}>Dividends: R$ {props.data.dividendos || 0.00}</span>
+            <span className={"text-base text-[#ffffff]"}>Dividends: R$ {props.data.dividendos}</span>
           </div>
         )}
         {/* data: {
@@ -70,7 +70,7 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
         totalReward:string;
       } */}
         <div className={"flex flex-col mb-2"}>
-          <span className={"text-xl text-[#ffffff]"}>R$ {props.data.totalReward || 0.00}</span>
+          <span className={"text-xl text-[#ffffff]"}>R$ {props.data.totalReward}</span>
           <span className="text-xs font-hairline">Obter bônus</span>
         </div>
 
@@ -82,7 +82,7 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
             </div>
 
             <div className={"flex flex-col"}>
-              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.firstRecharge || 0.00}</span>
+              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.firstRecharge}</span>
               <span className="text-xs font-hairline">Obter bônus</span>
             </div>
           </div>
@@ -90,13 +90,13 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
 
         <div className={"flex flex-row justify-around mb-2"}>
           <div className={"flex flex-col"}>
-            <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRecharge || 0.00}</span>
+            <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRecharge}</span>
             <span className="text-xs font-hairline">Valor da transação do jogo</span>
           </div>
 
           <div className={"flex flex-col"} onClick={() => setInviteBonusInfoOpen(true)}>
             <div className='flex gap-2 items-center'>
-              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRechargeReward || 0.00}</span>
+              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRechargeReward}</span>
               <QuestionCircleOutlined style={{ color: isCoco777bet ? 'white' : '#FF8A00' }} />
             </div>
             <span className="text-xs font-hairline">Obter bônus</span>

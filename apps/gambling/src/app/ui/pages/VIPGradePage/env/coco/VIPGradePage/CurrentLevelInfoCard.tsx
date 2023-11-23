@@ -5,6 +5,7 @@ import { tcx } from "../../../../../utils/tcx";
 import ProgressBar from "./ProgressBar";
 import { GetVIPInfoResponse } from "../../../../../../external";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
+import { formatMoney } from "../../../../../utils/formatMoney";
 
 interface ICurrentLabelInfoCardProps {
   currentLevel: number
@@ -56,19 +57,9 @@ const CurrentLevelInfoCard = ({
             <div className={tcx('h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center', ['px-4', isMobile])}>
               <div>
                 R$
-                {(userVIPInfo?.data?.vip_score
-                  ? (userVIPInfo?.data?.vip_score / 100)
-                  : 0).toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })}
+                {formatMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
                 /R$
-                {(userVIPInfo?.data?.next_level_score
-                  ? (userVIPInfo?.data?.next_level_score / 100)
-                  : 0).toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })}
+                {formatMoney(userVIPInfo?.data?.next_level_score ? userVIPInfo?.data?.next_level_score / 100 : 0)}
               </div>
             </div>
           </ProgressBar>
@@ -99,19 +90,9 @@ const CurrentLevelInfoCard = ({
             <div className={tcx('h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center', ['px-4', isMobile])}>
               <div>
                 R$
-                {(userVIPInfo?.data?.flow
-                  ? userVIPInfo?.data?.flow / 100
-                  : 0).toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })}
+                {formatMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
                 /R$
-                {(userVIPInfo?.data?.next_level_flow
-                  ? userVIPInfo?.data?.next_level_flow / 100
-                  : 0).toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })}
+                {formatMoney(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow / 100 : 0)}
               </div>
             </div>
           </ProgressBar>
