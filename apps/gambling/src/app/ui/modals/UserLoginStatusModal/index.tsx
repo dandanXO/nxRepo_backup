@@ -1,4 +1,4 @@
-import {CloseCircleOutlined} from "@ant-design/icons";
+
 import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import useBreakpoint from "../../hooks/useBreakpoint";
@@ -8,6 +8,7 @@ import {Container as PContainer} from "./env/pernambucana/Container";
 import {Container as WContainer} from "./env/wild/Container";
 import {Container as CContainer} from "./env/coco/Container";
 import {useEffect} from "react";
+import {CloseICON} from "../../components/Icons/CloseICON";
 
 const Container = renderByPlatform({
   "wild777bet": WContainer,
@@ -38,6 +39,17 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
       <Container className={"p-4 rounded-2xl max-w-[340px]"} onClick={(event: any) => {
         event.stopPropagation();
       }}>
+
+        {isShowCloseButton && (
+          <section className={"flex flex-col justify-center items-end"}>
+            <button onClick={() => {
+              props.close();
+            }}>
+              <CloseICON/>
+            </button>
+          </section>
+        )}
+
         <UserLoginStatusSection
           confirmToLogin={() => {
             props.setIsLogin(true);
@@ -50,15 +62,15 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
           openNotificationWithIcon={props.openNotificationWithIcon}
         />
 
-        {isShowCloseButton && (
-          <section className={"mt-2 flex flex-col justify-center items-center"}>
-            <button>
-              <CloseCircleOutlined className={"text-white text-xl"} onClick={() => {
-                props.close();
-              }}/>
-            </button>
-          </section>
-        )}
+        {/*{isShowCloseButton && (*/}
+        {/*  <section className={"mt-2 flex flex-col justify-center items-center"}>*/}
+        {/*    <button>*/}
+        {/*      <CloseCircleOutlined className={"text-white text-xl"} onClick={() => {*/}
+        {/*        props.close();*/}
+        {/*      }}/>*/}
+        {/*    </button>*/}
+        {/*  </section>*/}
+        {/*)}*/}
 
       </Container>
 

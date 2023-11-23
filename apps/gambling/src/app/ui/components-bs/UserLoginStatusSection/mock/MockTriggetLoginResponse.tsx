@@ -1,4 +1,4 @@
-import {PostLoginResponse} from "../../../external/LoginEndpoint";
+import {PostLoginResponse} from "../../../../external/LoginEndpoint";
 
 export const MockTriggerLoginResponse: PostLoginResponse = {
   "code": 200,

@@ -218,8 +218,8 @@
   /*NOTE: figma 沒有 自己拆出來的*/
   --input-border: var(--stroke-textfields);
   --input-background: var(--background-textfields);
-  --input-placeholder-color: var(--white);
-  --input-text-color: var(--text-tertiary);
+  --input-placeholder-color: var(--text-tertiary);
+  --input-text-color: var(--white);
 
 
   --input-focus-border: var(--stroke-textfields);
