@@ -44,7 +44,7 @@ const BackGround = styled.div`
   background-image: url("assets/${environment.assetPrefix}/bg_desktop.png");
   width: 100%;
   height: 100%;
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
 `
 
@@ -300,7 +300,7 @@ const CocoDailySignInPage = ({
   }
 
   return (
-    <div className='bg-gradient-to-b from-[var(--background-checkin-from)] to-[var(--background-checkin-to)]'>
+    <div className='h-[100vh] bg-gradient-to-b from-[var(--background-checkin-from)] to-[var(--background-checkin-to)]'>
       <BackGround>
         {contextHolder}
 
