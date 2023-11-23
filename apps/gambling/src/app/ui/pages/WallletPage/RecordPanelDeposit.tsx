@@ -87,7 +87,7 @@ export const RecordPanelDeposit = () => {
   }
 
   return (
-    <DragScrollContainer className='max-h-[40vh] rounded-xl overflow-hidden' >
+    <DragScrollContainer className='h-[40vh] rounded-xl overflow-hidden' >
       {contextHolder}
       <Table
         titleStyle='text-sm'
