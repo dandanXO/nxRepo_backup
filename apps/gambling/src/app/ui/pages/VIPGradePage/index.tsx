@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 import {
   GetUserVIPAllInfoResponse,
-  GetVIPInfoResponse,
   useGetSignInConfigMutation,
-  useGetVIPInfoMutation,
   useLazyGetUserVIPAllInfoQuery,
 } from '../../../external';
 import {AppLocalStorage} from '../../../persistant/localstorage';
@@ -24,6 +22,7 @@ import CVIPGradePage from "./env/coco/VIPGradePage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {getLocalStorageObjectByKey} from "../../../persistant/getLocalStorageObjectByKey";
 import {setLocalStorageObjectByKey} from "../../../persistant/setLocalStorageObjectByKey";
+import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
 
 const LevelButton = styled.button.attrs<{
   className?: string;
@@ -109,15 +108,7 @@ export const JackpotMap: {
 
   // NOTICE: 存到 LocalStorage
   // NOTICE: Store Mutation  old data
-  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useGetVIPInfoMutation();
-  const prevUserVIPInfo = getLocalStorageObjectByKey<GetVIPInfoResponse>(AppLocalStorageKey.useGetVIPInfoMutation);
-  const [userVIPInfo, setUserVIPInfo] = useState<GetVIPInfoResponse>(prevUserVIPInfo)
-  useEffect(() => {
-    if(!isUninitialized && !isGetUserVIPInfoLoading && userVIPInfoResponseData && userVIPInfoResponseData.code === 200) {
-      setLocalStorageObjectByKey(AppLocalStorageKey.useGetVIPInfoMutation, userVIPInfoResponseData);
-      setUserVIPInfo(userVIPInfoResponseData);
-    }
-  }, [isUninitialized, isGetUserVIPInfoLoading, userVIPInfoResponseData ])
+  const {userVIPInfo} = useLocalstorageGetUserVIPInfo();
 
 
   // NOTICE: Store Mutation old data
@@ -139,9 +130,6 @@ export const JackpotMap: {
         onlyGetSignInConfig: true,
         token,
       });
-      triggerGetUserVIPInfo({
-        token,
-      });
       triggerGetUserVIPALLInfo(null);
     }
 
@@ -152,9 +140,6 @@ export const JackpotMap: {
       const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
-        token,
-      });
-      triggerGetUserVIPInfo({
         token,
       });
       triggerGetUserVIPALLInfo(null);
