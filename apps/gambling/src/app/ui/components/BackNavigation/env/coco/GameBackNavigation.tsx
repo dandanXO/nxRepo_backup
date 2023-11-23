@@ -30,10 +30,10 @@ export const GameBackNavigation = (props: IGameBackNavigation) => {
 
   return (
     <BackButton
-      className={"fixed top-[10px] left-[10px] p-4 text-white flex flex-row justify-center items-center"}
+      className={"fixed top-[10px] left-[10px] text-white flex flex-row justify-center items-center"}
       onClick={props.onClick}
     >
-      <img className={isMobile? 'w-[50px] h-[50px]': 'w-[76px] h-[76px]'} alt='leaveIcon' src={`assets/${environment.assetPrefix}/icon_game_close.png`}/>
+      <img className={isMobile? 'w-[24px] h-[24px]': 'w-[50px] h-[50px]'} alt='leaveIcon' src={`assets/${environment.assetPrefix}/icon_game_close.png`}/>
     </BackButton>
   )
 }
