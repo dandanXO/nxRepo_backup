@@ -38,22 +38,19 @@ export const RecordPanelWithdraw = () => {
       title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', width: '200px',
       render: (record: any) => {
         return (
-          <div className='whitespace-nowrap'>
-            <span>{record.pay_serial_no}</span>
-            <span>
-              <button onClick={()=>onClickToCopy(record.pay_serial_no)}>
-                <img className="h-[20px] w-[22px]" alt={'copy'}
-                     src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
-                />
-              </button>
-            </span>
-
+          <div className='flex gap-2'>
+            <div >{record.pay_serial_no}</div>
+            <button onClick={()=>onClickToCopy(record.pay_serial_no)}>
+              <img className="h-[20px] w-[22px]" alt={'copy'}
+                   src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
+              />
+            </button>
           </div>
         )
       }
     },
-    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => <div>R${Number(record.amount).toFixed(2)}</div> },
-    { title: 'Taxa De Retirada', name: 'fee', key: 'fee', render: (record: any) => <div>R${Number(record.fee).toFixed(2)}</div> },
+    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => <div>R${Number(record.amount).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2})}</div> },
+    { title: 'Taxa De Retirada', name: 'fee', key: 'fee', render: (record: any) => <div>R${Number(record.fee).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2})}</div> },
     { title: 'Método De Retirada', name: 'pay_channel', key: 'pay_channel' },
     { title: 'Status De Retirada', name: 'status', key: 'status', render: (record: any) => <div>{WithdrawStatusMap[record.status]}</div> },
     { title: 'Tempo', name: 'created_at', key: 'created_at' },
@@ -83,7 +80,7 @@ export const RecordPanelWithdraw = () => {
   }, [withdrawRecordData?.data])
 
   return (
-    <div className='h-[30vh] rounded-2xl overflow-hidden'>
+    <div className='max-h-[40vh] rounded-xl overflow-hidden'>
       {contextHolder}
       <Table
         fetchData={handleFetchData}

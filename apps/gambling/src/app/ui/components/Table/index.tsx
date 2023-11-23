@@ -2,13 +2,20 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import {tcx} from "../../utils/tcx";
 import { environment } from "../../../../environments/environment";
+import styled from "styled-components";
+
+
+const NoDataContainer = styled.div`
+  background: rgb(from var(--white) r g b / 20%);
+`
+
 
 const NoData = () => {
   return (
-    <div className='flex flex-col justify-center items-center py-10 bg-table-varient gap-2'>
+    <NoDataContainer className='flex flex-col justify-center items-center py-[50px] gap-1'>
       <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
-      <div className='text-lg'>Nada aqui</div>
-    </div>
+      <div className='text-lg font-medium'>Nada aqui</div>
+    </NoDataContainer>
   )
 }
 
@@ -68,8 +75,8 @@ export const Table = (props: ITable) => {
           <thead className=''>
             {columns?.map((col: any, colIndex: number) => (
               <th key={col.key}
-                className={tcx('p-2 border-b border-white border-opacity-20 sm:break-all',
-                  ['border-r', colIndex !== columns.length - 1],
+                className={tcx('p-2 sm:break-all',
+                  ['border-r border-[rgba(255,255,255,0.2)]', colIndex !== columns.length - 1],
                   [`w-[${col.width}]`, col.width !== undefined],
                   props.className,
                   props.titleStyle
@@ -90,7 +97,7 @@ export const Table = (props: ITable) => {
                 return <tr>
                   {columns?.map((col: any, colIndex: number) => (
                     <td key={col.key + colIndex}
-                      className={tcx('p-2 border-white border-opacity-20 sm:break-all text-center',
+                      className={tcx('py-4 px-3 border-[rgba(255,255,255,0.2)] sm:break-all text-center',
                         ['border-r', colIndex !== columns.length - 1],
                         [`w-[${col.width}]`, col.width !== undefined],
                         props.className,
