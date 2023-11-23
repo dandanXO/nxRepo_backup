@@ -11,6 +11,7 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import {environment} from "../../../../environments/environment";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import { formatMoney } from "../../utils/formatMoney";
 
 const { RangePicker } = DatePicker;
 
@@ -104,7 +105,7 @@ export const InviteSettlementRecordPage = () => {
                   return (
                     <tr>
                       <td className='p-12 border-r border-[rgba(255,255,255,0.2)]'>{itme.updateTime}</td>
-                      <td className='p-12'>R{parseFloat((itme.reward/1000).toFixed(2))}</td>
+                      <td className='p-12'>R$: {formatMoney(itme.reward/100)}</td>
                     </tr>
                   )
                 })

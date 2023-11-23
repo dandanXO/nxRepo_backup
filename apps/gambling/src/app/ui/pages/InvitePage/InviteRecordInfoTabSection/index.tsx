@@ -50,7 +50,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
     // 1 代理 0 全民
     const isProxy = props?.inviteInfo?.data.proxyType === 1
     const convertRecharge = (num1: number | string, num2: number | string) => {
-        return ((Number(num1) + Number(num2)) / 100).toFixed(2)
+        return formatMoney((Number(num1) + Number(num2)) / 100)
     }
 
     const [triggerGetInviteUserDay, { currentData: inviteUserDay, isFetching: isInviteUserDayeFetching }] =
