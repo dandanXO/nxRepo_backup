@@ -47,19 +47,19 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
         </div>
         <MobileTableContainer>
         <div className={"flex flex-col mb-2 mt-2"}>
-          <span className={"text-xl text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].totalReward || 0.00}</span>
+          <span className={"text-xl text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].totalReward || '0,00'}</span>
           <span className="text-xs font-hairline">Obter bônus</span>
         </div>
-  
+
         {props.type === "1" && (
           <div className={"flex flex-row justify-around mb-2"}>
             <div className={"flex flex-col"}>
-              <span className={"text-sm text-[#ffffff]"}>{props.records && props.records[0] && props.records[0].numRecharge || 0.00}</span>
+              <span className={"text-sm text-[#ffffff]"}>{props.records && props.records[0] && props.records[0].numRecharge || 0}</span>
               <span className="text-xs font-hairline">Usuário de recarga</span>
             </div>
 
             <div className={"flex flex-col"}>
-              <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].firstRecharge || 0.00}</span>
+              <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].firstRecharge || '0,00'}</span>
               <span className="text-xs font-hairline">Obter bônus</span>
             </div>
           </div>
@@ -67,13 +67,13 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
 
         <div className={"flex flex-row justify-around mb-2"}>
           <div className={"flex flex-col"}>
-            <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRecharge || 0.00}</span>
+            <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRecharge || '0,00'}</span>
             <span className="text-xs font-hairline">Valor da transação do jogo</span>
           </div>
 
           <div className={"flex flex-col"} onClick={() => setInviteBonusInfoOpen(true)}>
             <div className='flex gap-2 items-center'>
-              <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || "0.00"}</span>
+              <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || '0,00'}</span>
               <QuestionCircleOutlined style={{ color: isCoco777bet ? 'white' : '#FF8A00' }} />
             </div>
             <span className="text-xs font-hairline">Obter bônus</span>
