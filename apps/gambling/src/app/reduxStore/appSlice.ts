@@ -13,6 +13,7 @@ export type InitialState = {
   isShowLoginModal: boolean;
   isShowMobileLogoutModal: boolean;
   isShowTelegramModal: boolean;
+  isShowDepositModal: boolean;
   isShowInviteBonusModal: boolean;
   messageCount: number;
   vip_level: number;
@@ -64,6 +65,7 @@ const initialState: InitialState = {
   isShowLoginModal: false,
   isShowMobileLogoutModal: false,
   isShowTelegramModal: false,
+  isShowDepositModal: false,
   isShowInviteBonusModal: false,
   messageCount: 0,
 };
@@ -98,6 +100,9 @@ export const appSlice = createSlice({
     },
     setShowTelegramModal: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isShowTelegramModal = action.payload;
+    },
+    setShowDepositModal: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.isShowDepositModal = action.payload;
     },
     setIsShowInviteBonusModal: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isShowInviteBonusModal = action.payload;
