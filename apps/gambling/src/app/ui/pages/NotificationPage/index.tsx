@@ -1,4 +1,4 @@
-import {DownOutlined, LeftOutlined, UpOutlined} from '@ant-design/icons';
+import {DownOutlined, UpOutlined} from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -18,16 +18,6 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import styled from "styled-components";
-import { environment } from "../../../../environments/environment";
-
-const BackGround = styled.div`
-  background-image: url("assets/${environment.assetPrefix}/bg_mobile.png");
-  width: 100%;
-  height: 100%;
-  background-size: 100%;
-  background-repeat: no-repeat;
-`
 
 export const NotificationPage = () => {
   useAllowLoginRouterRules();
@@ -78,7 +68,7 @@ export const NotificationPage = () => {
   }, [data]);
 
   return (
-      <BackGround className="flex h-full flex-col px-3 py-3 text-white">
+      <div className="flex h-full flex-col px-3 py-3 text-white">
 
         <BackNavigation
           onClick={() => {
@@ -139,6 +129,6 @@ export const NotificationPage = () => {
               </NotificationItemContainer>
             ))}
         </div>
-      </BackGround>
+      </div>
   );
 };
