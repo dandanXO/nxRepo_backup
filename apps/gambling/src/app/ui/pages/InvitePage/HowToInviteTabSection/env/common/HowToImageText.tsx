@@ -6,7 +6,7 @@ export const HowToImageText = () => {
     <>
       <div className={cx('hidden text-left text-lg text-white md:block',)}>
         Enquanto os usuários gostam de jogar e ganhar prêmios na plataforma
-        SKY Group ({environment.platformName}), eles também podem lançar um
+        {environment.platformGroup} ({environment.platformName}), eles também podem lançar um
         programa especial de recompensa por convite através do{' '}
         {environment.platformName} para ganhar comissões generosas! Que mais
         clientes de jogos da plataforma {environment.platformName} participem!
