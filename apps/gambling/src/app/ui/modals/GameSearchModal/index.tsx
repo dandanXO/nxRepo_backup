@@ -6,13 +6,7 @@ import { SearchInput } from "../../components/Inputs/SearchInput";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import { useEffect, useState } from "react";
 import { GameListSection } from "./components/GameListSection";
-import { SearchICON } from "../../components/Icons/SearchICON";
-import { GameTypeSectionList } from "../../components-bs/GameTypeSection";
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
-import { TTotalFavoriteLocalState } from "../../pages/IndexPage";
-import { MobileGameList } from "../../components-bs/GameTypeSection/GameList/MobileGameList";
-import { GameList } from "../../components-bs/GameTypeSection/GameList/GameList";
+
 import { MobileGameItem } from "../../components-bs/GameTypeSection/GameItem/MobileGameItem";
 import { DesktopGameItem } from "../../components-bs/GameTypeSection/GameItem/GameItem";
 import useBreakpoint from "../../hooks/useBreakpoint";

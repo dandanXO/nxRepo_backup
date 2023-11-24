@@ -61,14 +61,14 @@ export const IndexSlotPage = () => {
     }
 
     return list.map(({ subGameType, games }: any, index: number) => {
-      return <GameTypeSectionList key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={subGameType} data={games} />
+      return <GameTypeSectionList isLatestItem={list.length - 1 === index}  key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={subGameType} data={games} />
     })
   }
 
   const gameList = () => {
     return allGameList && activeTab === "Salão"
       ? allGameList !== undefined && allGameList.map((i: any, index:number) => {
-        return <GameTypeSectionList key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClick={() => setActiveTab(i.gameType)} />
+        return <GameTypeSectionList isLatestItem={allGameList.length - 1 === index} key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClick={() => setActiveTab(i.gameType)} />
       }) :
       renderTypeGameList()
   }

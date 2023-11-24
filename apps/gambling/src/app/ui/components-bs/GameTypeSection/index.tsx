@@ -38,6 +38,7 @@ export type IGameTypeSectionList = {
   totalFavoriteLocalState: TTotalFavoriteLocalState
   setTotalFavoriteLocalState: Dispatch<SetStateAction<TTotalFavoriteLocalState>>;
   setViewType?:Dispatch<SetStateAction<string>>;
+  isLatestItem: boolean;
 }
 
 
@@ -54,8 +55,9 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const displayedItems = props?.data && props?.data.slice(0, listSize);
 
   const loadMore = () => {
-    setListSize(listSize + 10); // 每次點擊按鈕增加10筆
-  };
+    const number = isMobile ? 9 : 20;
+    setListSize(listSize + number); // 每次點擊按鈕增加10筆
+  }
 
   const [animating, setAnimating] = useState(true)
   useEffect(() => {
@@ -76,7 +78,9 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   }, PmobileGameTypeHeaderProps)
 
   return (
-    <section className={"flex flex-col mb-4"}>
+    <section className={cx({
+      "flex flex-col mb-4": !props.isLatestItem,
+    })}>
 
       {props.gameTypeName ==='null' ? <div></div> : isMobile ? (
         <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClick} isViewAll={props.isViewAll} setViewType={props.setViewType} {...mobileGameTypeHeaderProps}/>
@@ -108,8 +112,10 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
 
       {(props.data && listSize < props.data?.length) && props.isViewAll &&
         <div className="flex-1 mt-10 justify-center flex">
-          <button onClick={loadMore}
-                  className="text-main-primary-varient bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] py-1.5 px-6 rounded-2xl font-bold">
+          <button
+            onClick={loadMore}
+            className="text-main-primary-varient bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] py-1.5 px-6 rounded-2xl font-bold"
+          >
             Ver mais
           </button>
         </div>

@@ -10,7 +10,6 @@ type IContainer = {
 export const Container = (props: IContainer) => {
   const isY = typeof props.y === "undefined" ? true : props.y;
   const {isMobile} = useBreakpoint();
-  console.log('props.onClick',props.onClick)
   return (
     <div
       className={cx({
