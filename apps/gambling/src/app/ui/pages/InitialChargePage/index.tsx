@@ -25,7 +25,7 @@ export const InitialChargePage = () => {
         onClick={() => onClickToIndex()}
         title={<div className={"w-full text-center md:text-left ml-2"}>Primeira recarga</div>}
       />
-      <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`} src={`assets/${environment.assetPrefix}/h5_banner_2.png`} bannerText={
+      <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`} src={`assets/${environment.assetPrefix}/h5_banner_20%.png`} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
           <div className={"text-white text-sm md:text-xl lg:text-4xl mb-2 md:mb-4 lg:mb-9"}>Primeiro depósito</div>
           <div className={"text-white text-xl md:text-3xl lg:text-8xl"}>+ bônus de 20%</div>

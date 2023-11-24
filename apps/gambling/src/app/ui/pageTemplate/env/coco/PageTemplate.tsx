@@ -13,6 +13,7 @@ import {environment} from "../../../../../environments/environment";
 import {Header} from "../../../header/env/coco/Header";
 import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
+import { TShowToolboxConfig } from "../../index";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -67,7 +68,6 @@ type ICoco777betIndexPageTemplate = {
   isMobile: boolean;
   isShowMobileFooter: boolean;
   isShowDesktopFooter: boolean;
-  isShowToolbox: boolean;
   isShowDesktopHeader: boolean;
   isShowDesktopMenuDrawer: boolean;
   isLogin: boolean;
@@ -92,11 +92,10 @@ type ICoco777betIndexPageTemplate = {
   setOpenInitailChargeModal: (value: any) => void;
   isShowMobileHeader: boolean;
   isShowTabbar: boolean;
-  showToolbox?: boolean;
   onClickToDownload: () => void;
   onClickToOpenTelegramManager: () => void;
   isUILoading: boolean;
-
+  showToolboxConfig?: TShowToolboxConfig
 }
 export const PageTemplate = ({
                                          children,
@@ -105,7 +104,6 @@ export const PageTemplate = ({
                                          isMobile,
                                           isShowMobileFooter,
                                         isShowDesktopFooter,
-                                          isShowToolbox,
                                          isShowDesktopHeader,
                                          isLogin,
                                          setIsLogin,
@@ -129,11 +127,11 @@ export const PageTemplate = ({
                                          isShowInviteBonusModal,
                                          setOpenInitailChargeModal,
                                          isShowMobileHeader,
-                                         showToolbox,
                                          onClickToDownload,
                                          onClickToOpenTelegramManager,
                                          isShowTabbar,
                                          isUILoading,
+                                         showToolboxConfig
                                        }: ICoco777betIndexPageTemplate) => {
   return (
       <StyledPage isCurrentPageCompanyProfile={false}>
@@ -202,9 +200,9 @@ export const PageTemplate = ({
           <TabBar isShowSlot={false} size={"big"}/>
         )}
 
-        {isShowToolbox && (
+        {showToolboxConfig !== false && (
           <Toolbox
-            showToolbox={showToolbox}
+            showToolboxConfig={showToolboxConfig}
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             onClickToOpenTelegramService={onClickToOpenTelegramService}

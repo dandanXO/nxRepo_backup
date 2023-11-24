@@ -252,7 +252,7 @@ export const AppRouter = () => {
         <Routes>
           {/*NOTE: Common*/}
           <Route path={PageOrModalPathEnum.IndexPage} element={(
-            <PageTemplate>
+            <PageTemplate showToolboxConfig={{mobile: {download: true}}}>
               <IndexPage />
             </PageTemplate>
           )}/>
@@ -284,7 +284,12 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.GameRecordPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={false}
+              showMobileFooter={false}
+              showToolboxConfig={{mobile:{ customerService: false}}}
+            >
               <GameRecordPage />
             </PageTemplate>
           )}/>
@@ -299,7 +304,12 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.DailySingInRecordPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={false}
+              showMobileFooter={false}
+              showToolboxConfig={{mobile:{ customerService: false}}}
+            >
               <DailySignInRecordPage/>
             </PageTemplate>
           )}/>
@@ -309,12 +319,21 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.PrivacyAgreementPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={!isMobile}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={!isMobile}
+              showToolboxConfig={{mobile:{ customerService: false}}}
+            >
               <PrivacyAgreementPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.TermsOfService} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={!isMobile}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={false}
+              showMobileFooter={!isMobile}
+              showToolboxConfig={{mobile:{ customerService: false}}}
+            >
               <TermsOfServicePage />
             </PageTemplate>
           )}/>
@@ -335,7 +354,12 @@ export const AppRouter = () => {
           )}/>
 
           <Route path={PageOrModalPathEnum.TelegramPage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showMobileFooter={false}
+              showTabbar={false}
+              showToolboxConfig={{mobile:{ customerService: false }}}
+            >
               <TelegramPage/>
             </PageTemplate>
           )}/>
@@ -344,7 +368,7 @@ export const AppRouter = () => {
             <PageTemplate
               // common
               showMobileFooter={false}
-              showToolbox={false}
+              showToolboxConfig={false}
               // desktop
               showDesktopHeader={false}
               showDesktopMenuDrawer={false}
@@ -368,7 +392,12 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.NotificationPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={false}
+              showMobileFooter={false}
+              showToolboxConfig={{mobile:{ customerService: false}}}
+            >
               <NotificationPage/>
             </PageTemplate>
           )}/>
