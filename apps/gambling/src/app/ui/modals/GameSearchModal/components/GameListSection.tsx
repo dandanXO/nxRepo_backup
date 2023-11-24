@@ -4,6 +4,8 @@ import { ArrowLeft } from '../../../components/Icons/ArrowLeft';
 import { ArrowRight } from '../../../components/Icons/ArrowRight';
 import { useEffect, useRef, useState } from 'react';
 import { DragScrollContainer } from '../../../components/DragScrollContainer';
+import { useGesture } from '@use-gesture/react';
+import { useSpring } from '@react-spring/web';
 
 interface IGameListSection {
   icon?: React.ReactElement;
@@ -45,16 +47,44 @@ export const GameListSection = (props: IGameListSection) => {
 
 
 
+  const [, api] = useSpring(() => ({
+    from: { left: 0 },
+    onChange(v: any) {
+      scrollContainerRef.current!.scroll({ left: v.value.left });
+    }
+  }));
+
+  const bind = useGesture(
+    {
+      onWheel() {
+        api.stop(); // 取消动画，让浏览器自己处理
+      },
+      onDrag(h: any) {
+        api.start({
+          left: -h.offset[0],
+          immediate: true // 无动画过程
+        });
+      }
+    },
+    {
+      drag: {
+        // 每次拖动传入 当前的 scrollLeft 作为初始状态
+        from: () => [-scrollContainerRef.current!.scrollLeft, 0],
+        axis: "x", // 仅在 x 方向 drag
+        filterTaps: true
+      }
+    }
+  );
   return (
-    <div className={cx("flex flex-col w-full mb-3.5",{
-      'px-4':!isMobile,
-      'px-2':isMobile
-    } ,className)}>
+    <div className={cx("flex flex-col w-full mb-3.5", {
+      'px-6': !isMobile,
+      'px-2': isMobile
+    }, className)}>
       {isShowHeader &&
-        (<div className='flex flex-row justify-between mb-3.5'>
+        (<div className='flex flex-row justify-between mb-2 sm:mb-3.5 pl-1 sm:pl-0'>
           <div className='flex justify-center items-center'>
             <div>{icon && icon}</div>
-            <div>{title}</div>
+            <div className='text-xs sm:text-base'>{title}</div>
           </div>
           {!isMobile && isOverflowedX && <div className='flex '>
             <button onClick={handleClickToLeft}><ArrowLeft /></button>
@@ -62,13 +92,14 @@ export const GameListSection = (props: IGameListSection) => {
           </div>}
         </div>)}
       {!isMobile ?
-        (<div ref={scrollContainerRef} className={cx("flex flex-1 overflow-hidden mx-2", gameListClassName)}>
+        (<div {...bind()} ref={scrollContainerRef} className={cx("GameListSection-PC flex flex-1 overflow-hidden", gameListClassName)}>
           {children}
         </div>)
         : (<DragScrollContainer className={cx("flex flex-1 overflow-hidden", gameListClassName)}>
           {children}
         </DragScrollContainer>)
       }
+
     </div>
   )
 }
