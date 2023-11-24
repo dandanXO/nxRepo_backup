@@ -8,6 +8,8 @@ import {RootState} from "../../reduxStore";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {userLogout} from "../../usecase/userLogout";
+import {LogoutCancelButton} from "../components/Buttons/LogoutCancelButton";
+import {LogoutConfirmButton} from "../components/Buttons/LogoutConfirmButton";
 
 
 const CancelButton = styled.button`
@@ -54,8 +56,8 @@ export const LogoutSection = (props: ILogoutPopover) => {
     <div className={cx("flex flex-col", props.className)}>
       <div className={"mb-2 text-[var(--white)]"}>Tem certeza que deseja sair?</div>
       <div className={"flex flex-row justify-center"}>
-        <button className={"mr-2 px-2 py-1 bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[--var(white)] rounded-md"} onClick={onHandleCancel}>Cancelar</button>
-        <button className={"px-2 py-1 bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)] text-[--var(white)] rounded-md"} onClick={onHandleLogout}>Confirme</button>
+        <LogoutCancelButton onClick={onHandleCancel}/>
+        <LogoutConfirmButton onClick={onHandleLogout}/>
       </div>
     </div>
   )

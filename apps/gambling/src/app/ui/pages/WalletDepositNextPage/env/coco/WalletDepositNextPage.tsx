@@ -165,7 +165,7 @@ export const WalletDepositNextPage = () => {
               <div className="h-full flex justify-center items-center">
                 <QRCode className={cx("w-[80%] min-w-[100px] max-w-[280px] mb-6",)} value={String(data?.data?.channelData?.paymentLink || '')} />
               </div>
-              <ButtonPro className="whitespace-nowrap !px-4" type="green" size="small" onClick={onClickToCopy}>Copiar código de pix</ButtonPro>
+              <ButtonPro className="whitespace-nowrap w-full" type="green" size="small" onClick={onClickToCopy}>Copiar código de pix</ButtonPro>
             </div>
           )}
 

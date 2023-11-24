@@ -1,10 +1,11 @@
+import {ViewButton} from "../../../../components/Buttons/deprecated/ViewButton";
 
 export const WithdrawNoticeSection = (props: any) => {
   const { onClickToVIP, vip_level, withdrawLimitMin, withdrawLimitMax } = props;
 
   const sectionStyle = `
-  p-2.5 md:p-6 
-  mb-2 md:mb-4 
+  p-2.5 md:p-6
+  mb-2 md:mb-4
   text-xs md:text-xl
   bg-[var(--primary-variant)] text-white rounded-lg  `
   return (
@@ -19,8 +20,9 @@ export const WithdrawNoticeSection = (props: any) => {
           <span className={"text-[var(--secondary-assistant)]"}> R${withdrawLimitMax}</span>.
         </div>
         <div className="text-center m-2">
-          <button className="py-3 px-4 bg-[var(--secondary-assistant)] text-xs md:text-base " onClick={onClickToVIP}>Cheque</button>
+          <button className="py-2 px-5 rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-xs md:text-base" onClick={onClickToVIP}>Cheque</button>
         </div>
+
       </section>
 
       <section className={sectionStyle}>
