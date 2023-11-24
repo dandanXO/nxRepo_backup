@@ -46,13 +46,11 @@ export const GameRecordPage = () => {
       key: 'gameName',
       render: (record: any) => (
         <div>
-          {!isMobile && (
-            <img
-              alt='gameLogo'
-              className='mx-auto w-12 object-cover'
-              src={`${environment.s3URLImages}/${record.gameId}.jpg`}
-            />)
-          }
+          <img
+            alt='gameLogo'
+            className='mx-auto w-12 object-cover'
+            src={`${environment.s3URLImages}/${record.gameId}-small.png`}
+          />
           <div>
             {record.gameName}
           </div>
@@ -144,7 +142,7 @@ export const GameRecordPage = () => {
           }
         </section>
 
-        <div className='h-[80vh] rounded-lg overflow-hidden overflow-x-scroll'>
+        <div className='h-[80vh] rounded-lg overflow-hidden'>
           <Table
             fetchData={handleFetchData}
             dataSource={records}
