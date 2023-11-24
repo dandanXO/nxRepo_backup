@@ -51,11 +51,15 @@ const Coco777betVIPGradePage = ({
   return (
     <Container>
 
-      <BackNavigation
-        onClick={() => {
-          navigate(PageOrModalPathEnum.IndexPage);
-        }}
-      />
+      {
+        !isMobile && (
+          <BackNavigation
+            onClick={() => {
+              navigate(PageOrModalPathEnum.IndexPage);
+            }}
+          />
+        )
+      }
 
       <section>
         <div className={tcx('text-start text-4xl py-6 font-bold text-[var(--primary-assistant)]', ['text-lg py-2', isMobile])}>Meu progresso VIP</div>
