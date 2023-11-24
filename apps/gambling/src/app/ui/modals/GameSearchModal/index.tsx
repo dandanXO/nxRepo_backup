@@ -71,14 +71,14 @@ export const GameSearchModal = (props: IGameSearchModal) => {
   return (
     <div className="fixed left-0 top-0 right-0 bottom-0 z-[999] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
       <div className={cx("fixed  bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] rounded-lg", {
-        "w-[80%] h-[80%]": !isMobile,
-        "w-[90%] h-[90%]": isMobile
+        "w-[80%]": !isMobile,
+        "w-[90%]": isMobile
       })}>
 
-        <div className={"p-4"}>
-          <div className="flex justify-between mb-3.5">
+        <div className={"px-3 py-3.5 sm:p-6"}>
+          <div className="flex justify-between items-center mb-2 sm:mb-3.5">
             <div className="text-base text-white">Procurar</div>
-            <button onClick={props.onClose}><CloseICON /></button>
+            <button onClick={props.onClose} className="-m-2"><CloseICON /></button>
 
           </div>
           <SearchInput placeholder={"Pesquisar nome do jogo"}
@@ -95,7 +95,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
           <div className="text-white text-xs text-center">Insira pelo menos 3 símbolos para iniciar a pesquisa</div>
         </div>
         {searchInput.data.length >= 3 && (<GameListSection className="text-white" icon={<SearchOutlined className={"text-white text-sm mr-2"} />} title={'Procurar Resultados'} children={gameList(searchResults)} />)}
-        <GameListSection className="text-white" icon={<Icon className="w-[24px] h-[24px]" img={`assets/${environment.assetPrefix}/icon=recommend.png`} name={'recommend'} />} title={'Procurar Resultados'} children={gameList(typeGameList[0]?.data[0]?.games)} />
+        <GameListSection className="text-white" icon={<Icon className="w-[24px] h-[24px] mr-1" img={`assets/${environment.assetPrefix}/icon=recommend.png`} name={'recommend'} />} title={'Procurar Resultados'} children={gameList(typeGameList[0]?.data[0]?.games)} />
       </div>
     </div>
   )
