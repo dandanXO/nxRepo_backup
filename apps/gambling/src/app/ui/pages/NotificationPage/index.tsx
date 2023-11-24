@@ -101,25 +101,24 @@ export const NotificationPage = () => {
                 }}
               >
                 <NotificationItemTitle
-                  className="item flex flex-row items-center justify-between"
                   expand={expandableIndex === index}
                   last={
                     index === messages.length - 1 ||
                     (expandableIndex !== null && index === expandableIndex - 1)
                   }
                 >
-                  {message.is_read === 0 && <NotificationItemRedDot />}
-                  <div className="title">{message.title}</div>
-                  <div className={'flex flex-row'}>
-                    <div className={'date mr-2'}>{message.created_at}</div>
-                    <div className={'leading-[16px]'}>
-                      {expandableIndex !== index ? (
-                        <DownOutlined style={{ fontSize: '14px' }} />
-                      ) : (
-                        <UpOutlined style={{ fontSize: '14px' }} />
-                      )}
+                  <div className='flex justify-between items-center'>
+                    <div className='flex items-center w-11/12'>
+                      {message.is_read === 0 && <NotificationItemRedDot />}
+                      <div className="text-ellipsis overflow-hidden">{message.title}</div>
                     </div>
+                    {expandableIndex !== index ? (
+                      <DownOutlined style={{ fontSize: '14px' }} />
+                    ) : (
+                      <UpOutlined style={{ fontSize: '14px' }} />
+                    )}
                   </div>
+                  <div>{message.created_at}</div>
                 </NotificationItemTitle>
                 {expandableIndex === index && (
                   <NotificationItemExpandable>

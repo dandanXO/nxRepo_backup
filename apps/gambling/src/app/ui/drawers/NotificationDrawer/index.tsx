@@ -125,24 +125,25 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
                 }}
               >
                 <NotificationItemTitle
-                  className="item flex flex-row items-center justify-between"
+                  className="item flex flex-row items-center"
                   expand={expandableIndex === index}
                   last={
                     index === messages.length - 1 ||
                     (expandableIndex !== null && index === expandableIndex - 1)
                   }
                 >
-                  {message.is_read === 0 && <NotificationItemRedDot />}
-                  <div className="title">{message.title}</div>
-                  <div className={'flex flex-row'}>
+                  <div className='flex items-center w-2/3'>
+                    {message.is_read === 0 && <NotificationItemRedDot />}
+                    <div className="text-ellipsis overflow-hidden">{message.title}</div>
+                  </div>
+
+                  <div className='flex items-center w-1/3'>
                     <div className={'date mr-2'}>{message.created_at}</div>
-                    <div className={'leading-[16px]'}>
-                      {expandableIndex !== index ? (
-                        <DownOutlined style={{ fontSize: '14px' }} />
-                      ) : (
-                        <UpOutlined style={{ fontSize: '14px' }} />
-                      )}
-                    </div>
+                    {expandableIndex !== index ? (
+                      <DownOutlined style={{ fontSize: '14px' }} />
+                    ) : (
+                      <UpOutlined style={{ fontSize: '14px' }} />
+                    )}
                   </div>
                 </NotificationItemTitle>
                 {expandableIndex === index && (
