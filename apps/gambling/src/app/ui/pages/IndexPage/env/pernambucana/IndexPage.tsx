@@ -36,6 +36,8 @@ type IPernambucana777BetIndexPage = {
   setViewType: (value: any) => void;
   setSearchInput: (value: any) => void;
   gameList: any;
+  showFixForIOSStickTab: boolean;
+  scrollToCarousel: () => void;
 }
 
 export const IndexPage = ({
