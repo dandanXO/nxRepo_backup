@@ -9,4 +9,5 @@ export const SectionContainer = styled.div.attrs<{
   //background-color: rgba(9,11,15,.6);
   //border-radius: 20px;
   //padding: 1.5vw 3vw;
+  //background-color: rgba(255,255,255,.5);
 `;

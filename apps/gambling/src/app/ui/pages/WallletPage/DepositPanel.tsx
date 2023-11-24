@@ -158,7 +158,10 @@ export const DepositPanel = (props: IDepositPanel) => {
     rate,
   }))
 
+  const isLoaded = recharge_options && recharge_options.length > 0;
   const onClickToNextDepositPage = (event: any) => {
+    if(!isLoaded) return;;
+
     if(!inputValue.isValidation) return;
     if (!clicked) {
       setClicked(true);
@@ -178,16 +181,17 @@ export const DepositPanel = (props: IDepositPanel) => {
           }
         });
       })
-     
+
     }
   }
+
 
 
   return (
     <SectionContainer id={"deposit-section"}>
       <DepositNoticeSection />
       <section className={"flex flex-col w-full"}>
-        {recharge_options && recharge_options.length > 0 && (
+        {isLoaded && (
           <DepositInput
             inputValue={inputValue}
             setInputValue={setInputValue}
@@ -232,25 +236,41 @@ export const DepositPanel = (props: IDepositPanel) => {
           }
         </div>
 
+
         {isMobile ? (
-          <section className={" fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
-            <ButtonPro
-              size="small"
+          <section className={"bg-[rgba(0,0,0,.5)] fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
+            {/*<ButtonPro*/}
+            {/*  size="small"*/}
+            {/*  onClick={onClickToNextDepositPage}*/}
+            {/*>*/}
+            {/*  DEPÓSITO*/}
+            {/*</ButtonPro>*/}
+
+            <button
+              className={cx("w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--button-deposit-from)] to-[var(--button-deposit-to)] text-[var(--white)] font-medium", {
+                "opacity-50": !isLoaded,
+              })}
               onClick={onClickToNextDepositPage}
             >
               DEPÓSITO
-            </ButtonPro>
+            </button>
           </section>
-        ) : (
+        ) : isLoaded ? (
           <section className={"flex flex-col justify-center items-center w-full"}>
-            <ProButton
-              className={"bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] text-main-primary-varient font-bold text-2xl"}
+            {/*<ProButton*/}
+            {/*  className={"bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] text-main-primary-varient font-bold text-2xl"}*/}
+            {/*  onClick={onClickToNextDepositPage}*/}
+            {/*>*/}
+            {/*  Depósito*/}
+            {/*</ProButton>*/}
+            <button
+              className={"w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--button-deposit-from)] to-[var(--button-deposit-to)] text-[var(--white)] font-medium"}
               onClick={onClickToNextDepositPage}
             >
-              Depósito
-            </ProButton>
+              DEPÓSITO
+            </button>
           </section>
-        )}
+        ): null}
       </section>
     </SectionContainer>
   )
