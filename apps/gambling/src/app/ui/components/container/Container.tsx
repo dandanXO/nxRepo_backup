@@ -10,6 +10,7 @@ type IContainer = {
 export const Container = (props: IContainer) => {
   const isY = typeof props.y === "undefined" ? true : props.y;
   const {isMobile} = useBreakpoint();
+  console.log('props.onClick',props.onClick)
   return (
     <div
       className={cx({
@@ -20,7 +21,7 @@ export const Container = (props: IContainer) => {
         "md:px-12": !isMobile,
         "md:py-4": !isMobile && isY,
       }, props.className)}
-      onClick={()=>props.onClick}
+      onClick={props.onClick}
     >{props.children}</div>
   )
 }
