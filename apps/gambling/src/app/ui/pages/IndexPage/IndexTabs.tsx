@@ -7,6 +7,7 @@ import vivo from "../../env/coco/index-tab-vivo.png"
 import viver from "../../env/coco/index-tab-viver.png"
 import favorite from "../../env/coco/index-tab-favorite.png"
 import recent from "../../env/coco/index-tab-recent.png"
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 type IIndexTabs = {
   label: any;
@@ -37,8 +38,11 @@ export const IndexTabs = ({
     favorite,
     // recent
   ]
+  const {isMobile} = useBreakpoint();
   return (
-      <Tabs className={"game-type-tab-list pl-4"}>
+      <Tabs className={cx("game-type-tab-list", {
+        "pl-4": isMobile
+      })}>
         {
           // ["Todos", ...label, 'Favoritos']
           // ["Salão", ...label, 'Favoritos']
