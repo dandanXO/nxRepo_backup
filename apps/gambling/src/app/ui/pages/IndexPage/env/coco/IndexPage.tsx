@@ -85,9 +85,33 @@ export const IndexPage = ({
     }
   }
 
+  // NOTICE: 使用 Javascript 方式替換純 CSS stikcy，因為 iOS sticky 會滾到一半就直接上去
+  const [showFixForIOSStickTab, setShowFixForIOSStickTab] = useState(false);
+  const [carouselHeight, setCarouselHeight] = useState(0);
+
+  useEffect(() => {
+    const scroll = () => {
+      const carousel = document.getElementById("app-carousel");
+      let carouselHeight = 0;
+      if(carousel && carousel.offsetHeight) {
+        carouselHeight = carousel.offsetHeight;
+        setCarouselHeight(carouselHeight);
+      }
+      if(window.scrollY > carouselHeight) {
+        setShowFixForIOSStickTab(true)
+      } else {
+        setShowFixForIOSStickTab(false)
+      }
+    }
+    window.addEventListener("scroll", scroll);
+    return () => {
+      window.removeEventListener("scroll", scroll);
+    }
+  }, []);
+
   return (
     <>
-      <div className={cx("w-full bg-[#020E29]",
+      <div id="app-carousel" className={cx("w-full bg-[#020E29]",
         // "max-h-[160px] md:h-[400px] bg-[red]",
         {
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
@@ -116,7 +140,9 @@ export const IndexPage = ({
         className={cx(
           "",
           {
-            "bg-[var(--primary-variant)] sticky top-[52.5px] left-0 right-0 z-20": isMobile
+            "bg-[var(--primary-variant)] z-20": isMobile,
+            // "sticky top-[52.5px] left-0 right-0": isMobile,
+            "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
           },
           {
             "bg-[var(--background-primary)]" : !isMobile
@@ -129,7 +155,12 @@ export const IndexPage = ({
             <div className={"whitespace-nowrap"}>
               <DragScrollContainer className="flex flex-row items-center">
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
-                <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
+                <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={(tab: number) => {
+                  setActiveTab(tab);
+                  if(window.scrollY > carouselHeight) {
+                    window.scrollTo({ top: carouselHeight, behavior: "smooth" });
+                  }
+                }} setViewType={setViewType} />
                 {/* </section> */}
               </DragScrollContainer>
             </div>
@@ -185,7 +216,7 @@ export const IndexPage = ({
         </Container>
       ): null}
 
-      <Container y={false} className="bg-[var(--background-primary)]">
+      <Container className="bg-[var(--background-primary)]">
         {gameList()}
       </Container>
     </>
