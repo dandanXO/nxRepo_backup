@@ -14,6 +14,7 @@ import { Table } from "../../components/Table";
 import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { datePickerStyle } from '../../components/DatePickers/DatePicker';
+import { formatMoney } from "../../utils/formatMoney";
 
 
 const { RangePicker } = DatePicker;
@@ -68,8 +69,8 @@ export const GameRecordPage = () => {
         </>
       )
     },
-    { title: 'Valor Da Aposta', name: 'bet', key: 'bet', render: (record: any) => (record.bet / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) },
-    { title: 'Lucro', name: 'win', key: 'win', render: (record: any) => (record.win / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
+    { title: 'Valor Da Aposta', name: 'bet', key: 'bet', render: (record: any) => formatMoney(record.bet / 100) },
+    { title: 'Lucro', name: 'win', key: 'win', render: (record: any) => formatMoney(record.win / 100) }
   ]
 
   const handleFetchData = () => {
