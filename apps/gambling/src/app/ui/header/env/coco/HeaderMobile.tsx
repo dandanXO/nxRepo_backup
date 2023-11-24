@@ -60,7 +60,7 @@ export const HeaderMobile = (props: IHeaderMobile) => {
           <div className='flex gap-4'>
             <UserMoneyStatusSection />
             <div
-              className='flex items-center'
+              className='flex items-center relative'
               onClick={()=>navigate(PageOrModalPathEnum.NotificationPage)}
             >
               <img
