@@ -28,6 +28,7 @@ import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
+import {useScrollToCarousel} from "../../useScrollToCarousel";
 
 
 export type TTotalFavoriteLocalState = {
@@ -53,6 +54,8 @@ type ICoco777betIndexPage = {
   setViewType: (value: any) => void;
   setSearchInput: (value: any) => void;
   gameList: any;
+  showFixForIOSStickTab: boolean;
+  scrollToCarousel: () => void;
 }
 
 export const IndexPage = ({
@@ -64,7 +67,9 @@ export const IndexPage = ({
                                               setActiveTab,
                                               setViewType,
                                               setSearchInput,
-                                              gameList
+                                              gameList,
+  scrollToCarousel,
+  showFixForIOSStickTab,
 }:ICoco777betIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
@@ -85,9 +90,11 @@ export const IndexPage = ({
     }
   }
 
+
+
   return (
     <>
-      <div className={cx("w-full bg-[#020E29]",
+      <div id="app-carousel" className={cx("w-full bg-[#020E29]",
         // "max-h-[160px] md:h-[400px] bg-[red]",
         {
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
@@ -111,59 +118,84 @@ export const IndexPage = ({
         </AppCarousel>
       </div>
 
-      {/*Tabs*/}
-      <Container
-        className={cx(
-          "",
-          {
-            "bg-[var(--primary-variant)] sticky top-[52.5px] left-0 right-0 z-20": isMobile
-          },
-          {
-            "bg-[var(--background-primary)]" : !isMobile
-          }
-        )}
-      >
-        {isMobile ? (
-
+      {/*Tabs - mobile*/}
+      {isMobile && (
+        <div
+          className={cx(
+            "py-2",
+            {
+              "bg-[var(--primary-variant)] z-20": isMobile,
+              // "sticky top-[52.5px] left-0 right-0": isMobile,
+              "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
+            },
+            {
+              "bg-[var(--background-primary)]" : !isMobile
+            }
+          )}
+        >
           <div className={""}>
             <div className={"whitespace-nowrap"}>
               <DragScrollContainer className="flex flex-row items-center">
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
-                <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
+                <IndexTabs
+                  hideIcon={true}
+                  activeTab={activeTab}
+                  label={label}
+                  setActiveTab={(tab: number) => {
+                    setActiveTab(tab);
+                    scrollToCarousel()
+                  }}
+                  setViewType={setViewType}
+                />
                 {/* </section> */}
               </DragScrollContainer>
             </div>
           </div>
+        </div>
+      )}
 
-        ) : (
-            <div className={"flex flex-row justify-center items-baseline"}>
-              <div className="grow min-w-[100px] mr-2">
-                <ScrollTab className="items-center">
-                  <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
-                </ScrollTab>
-              </div>
-
-              <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={()=>setIsSearch(true)}>
-                {/*NOTICE: refactor me*/}
-                <Input
-                  pureContainer={true}
-                  className={cx(
-                    "py-0.5 px-2.5 text-xs rounded",
-                    "!border-[var(--stroke-textfields)] bg-[var(--background-textfields)]"
-                  )}
-                  inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
-                  placeholder={"Pesquisar nome do jogo"}
-                  prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
-                  onChange={(event: any) => {
-                    setSearchInput(event.target.value)
-                  }}
-                />
-              </div>
-
+      {/*Tabs - desktop*/}
+      {!isMobile && (
+        <Container
+          className={cx(
+            "",
+            {
+              "bg-[var(--primary-variant)] z-20": isMobile,
+              // "sticky top-[52.5px] left-0 right-0": isMobile,
+              "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
+            },
+            {
+              "bg-[var(--background-primary)]" : !isMobile
+            }
+          )}
+        >
+          <div className={"flex flex-row justify-center items-baseline"}>
+            <div className="grow min-w-[100px] mr-2">
+              <ScrollTab className="items-center">
+                <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
+              </ScrollTab>
             </div>
 
-        )}
-      </Container>
+            <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={()=>setIsSearch(true)}>
+              {/*NOTICE: refactor me*/}
+              <Input
+                pureContainer={true}
+                className={cx(
+                  "py-0.5 px-2.5 text-xs rounded",
+                  "!border-[var(--stroke-textfields)] bg-[var(--background-textfields)]"
+                )}
+                inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
+                placeholder={"Pesquisar nome do jogo"}
+                prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
+                onChange={(event: any) => {
+                  setSearchInput(event.target.value)
+                }}
+              />
+            </div>
+
+          </div>
+        </Container>
+      )}
 
       {/*SearchInput*/}
       {isMobile ? (
@@ -185,7 +217,7 @@ export const IndexPage = ({
         </Container>
       ): null}
 
-      <Container y={false} className="bg-[var(--background-primary)]">
+      <Container className="bg-[var(--background-primary)]">
         {gameList()}
       </Container>
     </>

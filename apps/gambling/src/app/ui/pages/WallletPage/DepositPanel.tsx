@@ -20,6 +20,9 @@ import {depositButtonProps as CDepositButtonProps} from "./env/coco/depositButto
 import { formatMoney } from "../../utils/formatMoney";
 import {ButtonPro} from "../../components/Buttons/ButtonPro";
 import {ProButton} from "../../components/Buttons/ProButton";
+import { useRechargeMutation } from "../../../external";
+import { AppLocalStorage } from "../../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 
 
 const Item = styled.div.attrs((props) => ({
@@ -77,6 +80,8 @@ export const DepositPanel = (props: IDepositPanel) => {
 
   const [clicked, setClicked] = useState(false);
   const navigate = useNavigate();
+  const [triggerRecharge, { data, isLoading, isSuccess, isError }] = useRechargeMutation();
+
   const { isMobile } = useBreakpoint();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedIndexConfig, setSelectedIndexConfig] = useState<RechargeResponseConfig>();
@@ -157,14 +162,26 @@ export const DepositPanel = (props: IDepositPanel) => {
     if(!inputValue.isValidation) return;
     if (!clicked) {
       setClicked(true);
-      navigate(PageOrModalPathEnum.WalletDepositNextPage, {
-        state: {
-          amount: Number(inputValue.data),
-          configID: selectedIndexConfig ? selectedIndexConfig?.id : ""
-        }
-      });
+      triggerRecharge({
+        amount: Number(inputValue.data),
+        appPackageName: environment.appPackageName,
+        appVersion: environment.appVersion,
+        configId: Number(selectedIndexConfig?.id),
+        phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
+        qr: 1,
+        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
+      }).then(({data}:any)=>{
+        navigate(PageOrModalPathEnum.WalletDepositNextPage, {
+          state: {
+            amount: Number(inputValue.data),
+            data,
+          }
+        });
+      })
+     
     }
   }
+
 
   return (
     <SectionContainer id={"deposit-section"}>

@@ -51,7 +51,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const MainGameList = isMobile ? MobileGameList : GameList
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem
 
-  const [listSize, setListSize] = useState(15);
+  const [listSize, setListSize] = useState(isMobile ? 9 : 20);
   const displayedItems = props?.data && props?.data.slice(0, listSize);
 
   const loadMore = () => {

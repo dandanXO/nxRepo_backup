@@ -37,9 +37,12 @@ export const WalletDepositNextPage = () => {
   useAllowLoginRouterRules();
   const { isMobile } = useBreakpoint();
   const [countdown, setCountdown] = useState(900); // 15分钟的秒数
-  const [triggerRecharge, { data, isLoading, isSuccess, isError }] = useRechargeMutation();
+
+  // const [triggerRecharge, { data, isLoading, isSuccess, isError }] = useRechargeMutation();
   const location = useLocation();
   const navigate = useNavigate();
+  const data = location.state.data || {};
+  const amount = location.state.amount || 0;
   const [api, contextHolder] = notification.useNotification();
 
   const onClickToCopy = () => {
@@ -49,38 +52,14 @@ export const WalletDepositNextPage = () => {
     })
   }
 
-  const amount = location.state.amount || 0
-  const configID = location.state.configID || "";
-
-  // const [notidicationAPI, contextHolder] = notification.useNotification();
-
   useEffect(() => {
     if (location.state.amount === 0) {
       navigate(PageOrModalPathEnum.WalletPage)
     }
   }, [location.state.amount])
 
-  useEffect(() => {
-    triggerRecharge({
-      amount: amount,
-      appPackageName: environment.appPackageName,
-      appVersion: environment.appVersion,
-      configId: configID,
-      phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
-      qr: 1,
-      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
-    })
-    // .unwrap().then(data => {
 
-    //   notidicationAPI.info({
-    //     message: data?.msg
-    //   })
-    // }).catch((error) => {
-    //   notidicationAPI.error(({
-    //     message: JSON.stringify(error)
-    //   }))
-    // })
-  }, [])
+
 
   const handleToWalletPage = () => {
     navigate(PageOrModalPathEnum.WalletPage)

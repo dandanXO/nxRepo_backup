@@ -105,7 +105,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
     const handler = () => {
       updateBalance();
       updateVIPInfo();
-      // updateMailCount();
+      updateMailCount();
     }
     window.addEventListener("focus", () => {
       console.log("[window] add focus")
@@ -128,6 +128,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
       console.log("[window] location.pathname change update");
       updateBalance();
       updateVIPInfo();
+      updateMailCount();
     }
     setPrevLocation(location);
   }, [isLogin, location.pathname])
@@ -158,6 +159,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
   const update = () => {
     updateBalance();
     updateVIPInfo();
+    updateMailCount();
   }
   return {
     update,

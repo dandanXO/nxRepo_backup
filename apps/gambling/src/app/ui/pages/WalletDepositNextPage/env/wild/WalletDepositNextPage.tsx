@@ -7,14 +7,14 @@ import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import QRCode from 'react-qr-code';
 import copy from 'copy-to-clipboard';
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
-import {useAllowLoginRouterRules} from "../../../../router/useAllowLoginRouterRules";
-import {environment} from "../../../../../../environments/environment";
-import {notification} from "antd";
+import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import { environment } from "../../../../../../environments/environment";
+import { notification } from "antd";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
-import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
+import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
+import { ButtonPro } from "../../../../components/Buttons/ButtonPro";
 
 const Notice = styled.div`
   height: 60px;
@@ -76,74 +76,48 @@ const RechargeButton = styled.button`
   align-items: center;
 `
 export const WalletDepositNextPage = () => {
-    useAllowLoginRouterRules();
-    const {isMobile} = useBreakpoint();
-    const [countdown, setCountdown] = useState(900); // 15分钟的秒数
-    const [triggerRecharge, { data, isLoading, isSuccess, isError }] = useRechargeMutation();
-    const location = useLocation();
-    const navigate = useNavigate();
+  useAllowLoginRouterRules();
+  const { isMobile } = useBreakpoint();
+  const [countdown, setCountdown] = useState(900); // 15分钟的秒数
+  const location = useLocation();
+  const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
-
-    const onClickToCopy = () => {
-    copy(data?.data?.channelData?.paymentLink||'');
+  const data = location.state.data || {};
+  const amount = location.state.amount || 0;
+  const onClickToCopy = () => {
+    copy(data?.data?.channelData?.paymentLink || '');
     api.success({
       message: "Copiado!"
     })
   }
 
-    const amount = location.state.amount || 0
-    const configID = location.state.configID || "";
-
-    // const [notidicationAPI, contextHolder] = notification.useNotification();
-
-    useEffect(() => {
-      if(location.state.amount === 0) {
-        navigate(PageOrModalPathEnum.WalletPage)
-      }
-    }, [location.state.amount])
-
-    useEffect(() => {
-        triggerRecharge({
-            amount: amount,
-            appPackageName: environment.appPackageName,
-            appVersion: environment.appVersion,
-            configId: configID,
-            phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
-            qr: 1,
-            token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
-        })
-        // .unwrap().then(data => {
-
-        //   notidicationAPI.info({
-        //     message: data?.msg
-        //   })
-        // }).catch((error) => {
-        //   notidicationAPI.error(({
-        //     message: JSON.stringify(error)
-        //   }))
-        // })
-    }, [])
-
-    const handleToWalletPage = () => {
-        navigate(PageOrModalPathEnum.WalletPage)
+  useEffect(() => {
+    if (location.state.amount === 0) {
+      navigate(PageOrModalPathEnum.WalletPage)
     }
+  }, [location.state.amount])
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (countdown > 0) {
-                setCountdown((prev) => prev - 1);
-            } else {
-                handleToWalletPage()
-            }
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, [countdown]);
 
-    const message = 'Ordem de pagamento criada com sucesso, pague em 15 minutos!'
+  const handleToWalletPage = () => {
+    navigate(PageOrModalPathEnum.WalletPage)
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (countdown > 0) {
+        setCountdown((prev) => prev - 1);
+      } else {
+        handleToWalletPage()
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [countdown]);
+
+  const message = 'Ordem de pagamento criada com sucesso, pague em 15 minutos!'
   return (
-      <div className={"p-5 md:p-10 md:pt-0 w-full"}>
+    <div className={"p-5 md:p-10 md:pt-0 w-full"}>
       <div className={cx("", { "md:border md:border-solid md:border-main-primary-main md:mt-10 md:bg-[var(--game-block)] md:rounded-2xl md:py-16 md:px-14 ": !isMobile })}>
-      {contextHolder}
+        {contextHolder}
 
         <button className={cx("flex flex-col mb-4", { 'md:flex-row md:mb-10': !isMobile })} onClick={() => {
           navigate(PageOrModalPathEnum.WalletPage);
@@ -156,7 +130,7 @@ export const WalletDepositNextPage = () => {
           <div className={"text-3xl text-main-state-warning font-bold"}>R$ {amount}</div>
         )}
 
-        <div className={cx("text-base text-main-state-warning leading-none mb-4 mt-2", {'md:text-4xl md:text-bold md:mb-14': !isMobile })}>
+        <div className={cx("text-base text-main-state-warning leading-none mb-4 mt-2", { 'md:text-4xl md:text-bold md:mb-14': !isMobile })}>
           {isMobile ? message : message.toLocaleUpperCase()}</div>
 
         <section className={cx("flex flex-col w-full", { "md:flex-row": !isMobile })}>
@@ -171,15 +145,15 @@ export const WalletDepositNextPage = () => {
               <div className={"text-white"}>{moment().startOf('day').seconds(countdown).format('mm:ss')}</div>
             </ShadowContainer>
 
-            <ShadowContainer className={cx("flex flex-row justify-between p-4 mb-3 text-sm bg-varient", {"md:text-lg md:mb-5 md:p-5": !isMobile})}>
+            <ShadowContainer className={cx("flex flex-row justify-between p-4 mb-3 text-sm bg-varient", { "md:text-lg md:mb-5 md:p-5": !isMobile })}>
               <div className={"text-white"}>Numero solicitado</div>
-              <div className={"text-white"}>{data?.data?.orderId||''}</div>
+              <div className={"text-white"}>{data?.data?.orderId || ''}</div>
             </ShadowContainer>
 
 
-            {!isMobile && (<ShadowContainer className={cx("flex flex-col justify-between p-4 mb-4 bg-varient", {"md:text-lg md:mb-5 md:p-5": !isMobile})}>
+            {!isMobile && (<ShadowContainer className={cx("flex flex-col justify-between p-4 mb-4 bg-varient", { "md:text-lg md:mb-5 md:p-5": !isMobile })}>
               <div className={"text-white text-left mb-4 w-full"}>Pague a corda</div>
-              <div className={"text-white break-all mb-4"}>{data?.data?.channelData?.paymentLink||''}</div>
+              <div className={"text-white break-all mb-4"}>{data?.data?.channelData?.paymentLink || ''}</div>
               <ButtonPro className="w-1/2 whitespace-nowrap" type="blue" size="medium" onClick={onClickToCopy}>Copiar código de pix</ButtonPro>
             </ShadowContainer>
             )}
@@ -187,13 +161,13 @@ export const WalletDepositNextPage = () => {
           </section>
 
           {!isMobile && (
-            <section className={cx("w-full mb-4 ",{"md:w-[40%]":!isMobile})}>
+            <section className={cx("w-full mb-4 ", { "md:w-[40%]": !isMobile })}>
               <ShadowContainer className={"flex flex-col justify-between items-center h-full bg-varient"}>
                 <div className={"text-white font-bold w-full rounded-xl text-4xl py-4 bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)]"}>R${amount}</div>
                 <div className="h-full flex justify-center items-center">
-                <QRCode className={cx("w-[80%] min-w-[100px] max-w-[280px] mb-5",)} value={String(data?.data?.channelData?.paymentLink || '')} />
-              </div>
-            </ShadowContainer>
+                  <QRCode className={cx("w-[80%] min-w-[100px] max-w-[280px] mb-5",)} value={String(data?.data?.channelData?.paymentLink || '')} />
+                </div>
+              </ShadowContainer>
             </section>
           )}
           {isMobile && (

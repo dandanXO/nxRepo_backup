@@ -6,20 +6,31 @@ type IdepositButtonProps = {
   rate: string;
 }
 export const depositButtonProps = ({
-                                     rechargeValue,
-                                     isMobile,
-                                     rate,
-                                   }: IdepositButtonProps) => {
+  rechargeValue,
+  isMobile,
+  rate,
+}: IdepositButtonProps) => {
 
+  const rechargeStyle = 
+  `
+  md:flex-1
+  text-sm md:text-lg lg:text-xl xl:text-2xl 
+  text-center ${rate === '' ? 'md:text-center' : 'md:text-right'}
+  `;
 
-  const rechargeStyle='text-sm md:text-2xl md:text-center md:flex-1';
-  const rateStyle=`w-full text-xs text-right md:w-auto md:flex-1 md:text-xl md:text-left`;
-
-
+  const rateStyle = 
+  `
+  w-full 
+  md:w-auto md:flex-1
+  md:self-end text-right
+  lg:text-left sm:self-center
+  text-xs md:text-lg  lg:text-lg xl:text-xl
+  `;
+  
   return {
     rechargeValue: `R$ ${formatMoney(rechargeValue)}`,
     rechargeClassName: rechargeStyle,
-    className: `px-1 min-h-[50px] rounded-md text-white flex-col-reverse items-center justify-center`,
+    className: `flex-col-reverse px-3 py-2 min-h-[50px] rounded-md text-white  items-center justify-center`,
     activeRechargeClassName: `${rechargeStyle} text-[var(--text-deposit)]`,
     bgClassName: 'bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]',
     activeBgClassName: 'bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)]',

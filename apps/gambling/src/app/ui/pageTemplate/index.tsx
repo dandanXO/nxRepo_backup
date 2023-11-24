@@ -46,6 +46,17 @@ export type IOpenNotificationWithIcon = {
 //   isUserLogin: !!AppLocalStorage.getItem("token"),
 // });
 
+export type TShowToolboxConfig = {
+  mobile?: {
+    download?: boolean;
+    customerService?: boolean;
+  } | boolean;
+  desktop?: {
+    download?: boolean;
+    customerService?: boolean;
+    manager?: boolean
+  } | boolean;
+} | boolean;
 
 export type IPage = {
   children: React.ReactNode;
@@ -55,7 +66,7 @@ export type IPage = {
   showDesktopMenuDrawer?: boolean;
   showMobileFooter?: boolean;
   showDesktopFooter?: boolean;
-  showToolbox?: boolean;
+  showToolboxConfig?: TShowToolboxConfig
 }
 export const PageTemplate = (props: IPage) => {
   const navigate = useNavigate();
@@ -162,7 +173,6 @@ export const PageTemplate = (props: IPage) => {
   const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
   const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
   const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
-  const isShowToolbox = props.showToolbox === undefined ? true : props.showToolbox;
 
   const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
   const isShowDesktopMenuDrawer = props.showDesktopMenuDrawer === undefined ? true : props.showDesktopMenuDrawer;
@@ -222,7 +232,6 @@ export const PageTemplate = (props: IPage) => {
             isMobile={isMobile}
             isShowMobileFooter={isShowMobileFooter}
             isShowDesktopFooter={isShowMobileFooter}
-            isShowToolbox={isShowToolbox}
             isShowDesktopHeader={isShowDesktopHeader}
             isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
             isLogin={isLogin}
@@ -248,10 +257,10 @@ export const PageTemplate = (props: IPage) => {
             setOpenInitailChargeModal={setOpenInitailChargeModal}
             isShowMobileHeader={isShowMobileHeader}
             isShowTabbar={isShowTabbar}
-            showToolbox={props.showToolbox}
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             isUILoading={isUILoading}
+            showToolboxConfig={props.showToolboxConfig}
           >
             {props.children}
           </CPageTemplate>
@@ -263,7 +272,6 @@ export const PageTemplate = (props: IPage) => {
             isMobile={isMobile}
             isShowMobileFooter={isShowMobileFooter}
             isShowDesktopFooter={isShowMobileFooter}
-            isShowToolbox={isShowToolbox}
             isShowDesktopHeader={isShowDesktopHeader}
             isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
             isLogin={isLogin}
@@ -289,10 +297,10 @@ export const PageTemplate = (props: IPage) => {
             setOpenInitailChargeModal={setOpenInitailChargeModal}
             isShowMobileHeader={isShowMobileHeader}
             isShowTabbar={isShowTabbar}
-            showToolbox={props.showToolbox}
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             isUILoading={isUILoading}
+            showToolboxConfig={props.showToolboxConfig}
           >
             {props.children}
           </WPageTemplate>
@@ -304,7 +312,6 @@ export const PageTemplate = (props: IPage) => {
           isMobile={isMobile}
           isShowMobileFooter={isShowMobileFooter}
           isShowDesktopFooter={isShowMobileFooter}
-          isShowToolbox={isShowToolbox}
           isShowDesktopHeader={isShowDesktopHeader}
           isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
           isLogin={isLogin}
@@ -329,10 +336,10 @@ export const PageTemplate = (props: IPage) => {
           setOpenInitailChargeModal={setOpenInitailChargeModal}
           isShowMobileHeader={isShowMobileHeader}
           isShowTabbar={isShowTabbar}
-          showToolbox={props.showToolbox}
           onClickToDownload={onClickToDownload}
           onClickToOpenTelegramManager={onClickToOpenTelegramManager}
           isUILoading={isUILoading}
+          showToolboxConfig={props.showToolboxConfig}
         >
           {props.children}
         </PPageTemplate>
