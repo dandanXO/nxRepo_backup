@@ -9,6 +9,7 @@ import {environment} from "../../../../../../../environments/environment";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
+import {Container} from "../../../../../components/container/Container";
 
 export const AppCarouselContent2 = () => {
   const {isMobile} = useBreakpoint();
@@ -35,14 +36,14 @@ export const AppCarouselContent2 = () => {
         <div
           className="banner w-screen"
         >
-          <p
+          <Container
             className={cx("absolute top-1/2 transform -translate-y-1/2",
               "pl-4",
               "font-bold text-6xl text-left"
             )}
           >
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
-          </p>
+          </Container>
           <img
             src={`assets/${environment.assetPrefix}/banner_1.png`}
           />

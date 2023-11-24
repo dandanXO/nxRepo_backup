@@ -12,6 +12,7 @@ import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import CurrentVIPIcon from "../../../../components/CurrentVIPIcon";
 import ProgressBar from "../../../../pages/VIPGradePage/env/coco/VIPGradePage/ProgressBar";
+import { formatMoney } from "../../../../utils/formatMoney";
 
 export const UserInfoStatusPopoverVIPInfo = ({
   userVIPInfo,
@@ -43,11 +44,11 @@ export const UserInfoStatusPopoverVIPInfo = ({
         <RightOutlined />
       </div>
 
-      <div className='flex flex-col gap-2 text-sm'>
+      <div className='flex flex-col gap-2 text-xs'>
         <div className='mt-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
             <div className='text-white'>Próximo nível: {depositPercent > 100 ? 100 : depositPercent.toFixed(0)}%</div>
-            <div className='text-[var(--secondary-assistant)]'>Depósitos totais: R$ {vipScore?(vipScore / 100).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2}) : 0}</div>
+            <div className='text-[var(--secondary-assistant)]'>Depósitos totais: R$ {formatMoney(vipScore? vipScore / 100 : 0)}</div>
           </div>
           <ProgressBar
             className='h-6 bg-white'
@@ -57,9 +58,7 @@ export const UserInfoStatusPopoverVIPInfo = ({
           >
             <div className='flex justify-between px-4 h-full items-center text-[var(--text-deposit)]'>
               <div>VIP{currentLevel}</div>
-              <div>R$ {vipScore ? (vipScore/100).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2}): '0,00'}/R$ {
-                nextLevelScore ? (nextLevelScore/100).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2}): '0,00'
-              }</div>
+              <div>R$ {formatMoney(vipScore ? vipScore/100: 0)}/R$ {formatMoney(nextLevelScore ? nextLevelScore/100: 0)}</div>
               <div>VIP{currentLevel+1}</div>
             </div>
           </ProgressBar>
@@ -68,7 +67,7 @@ export const UserInfoStatusPopoverVIPInfo = ({
         <div className='mt-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
             <div className='text-white'>Próximo nível: {flowProgress}%</div>
-            <div className='text-[var(--secondary-assistant)]'>Pontos de apostas: R$ {flow? (flow/100).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2}) : '0,00'}</div>
+            <div className='text-[var(--secondary-assistant)]'>Pontos de apostas: R$ {formatMoney(flow ? flow/100 : 0)}</div>
           </div>
           <ProgressBar
             className='h-6 bg-white'
@@ -78,9 +77,7 @@ export const UserInfoStatusPopoverVIPInfo = ({
           >
             <div className='flex justify-between px-4 h-full items-center text-[var(--text-deposit)]'>
               <div>VIP{currentLevel}</div>
-              <div>R$ {flow ? (flow/100).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2}): '0,00'}/R$ {
-                nextLevelFlow ? (nextLevelFlow/100).toLocaleString('pt-BR', {maximumFractionDigits:2, minimumFractionDigits:2}): '0,00'
-              }</div>
+              <div>R$ {formatMoney(flow ? flow/100: 0)}/R$ {formatMoney(nextLevelFlow ? nextLevelFlow/100: 0)}</div>
               <div>VIP{currentLevel+1}</div>
             </div>
           </ProgressBar>

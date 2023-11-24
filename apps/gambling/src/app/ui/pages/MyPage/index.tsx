@@ -6,7 +6,7 @@ import {RootState} from "../../../reduxStore";
 import {
   GetVIPInfoResponse,
   useGetSignInConfigMutation,
-  useGetVIPInfoMutation, useLazyGetUserVIPAllInfoQuery,
+  useLazyGetUserVIPAllInfoQuery,
 } from '../../../external';
 
 import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../reduxStore/appSlice";
@@ -18,10 +18,13 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 
 import {environment} from "../../../../environments/environment";
 import {renderByPlatform} from "../../utils/renderByPlatform";
-import PBetMyPage from "./env/pernambucana/BetMyPage";
-import WBetMyPage  from "./env/wild/BetMyPage";
-import CBetMyPage from "./env/coco/BetMyPage";
+import PBetMyPage from "./env/pernambucana/MyPage";
+import WBetMyPage  from "./env/wild/MyPage";
+import CBetMyPage from "./env/coco/MyPage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import {getLocalStorageObjectByKey} from "../../../persistant/getLocalStorageObjectByKey";
+import {setLocalStorageObjectByKey} from "../../../persistant/setLocalStorageObjectByKey";
+import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
 
 
 
@@ -239,16 +242,15 @@ export const MyPage = () => {
   const [triggerGetUserVIPALLInfo, {currentData: vipAllInfo}] = useLazyGetUserVIPAllInfoQuery();
 
   const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
-  const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
+
+
+  const {userVIPInfo} = useLocalstorageGetUserVIPInfo();
 
   useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     if(token && token !== "" && token !== "undefined") {
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
-        token,
-      });
-      triggerGetUserVIPInfo({
         token,
       });
     }
@@ -261,9 +263,6 @@ export const MyPage = () => {
       const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
       triggerGetSignConfig({
         onlyGetSignInConfig: true,
-        token,
-      });
-      triggerGetUserVIPInfo({
         token,
       });
       triggerGetUserVIPALLInfo(null);

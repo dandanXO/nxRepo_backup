@@ -1,6 +1,6 @@
 
 import { notification } from "antd";
-import { environment } from "apps/gambling/src/environments/environment";
+import { environment } from "../../../../environments/environment";
 import cx from "classnames";
 import copy from "copy-to-clipboard";
 import { ReactElement } from "react";
@@ -22,9 +22,9 @@ export const CopyIcon = (props: ICopyIcon) => {
     });
   };
   return (
-    <button onClick={onClickToCopy}>
+    <button className={cx('p-2 hover:rounded-full hover:bg-[rgba(255,255,255,0.7)]')} onClick={onClickToCopy}>
       {contextHolder}
-      {icon ? icon : <img className={cx(`w-[14px] h-[14px] ml-1`, className)} src={`assets/${environment.assetPrefix}/icon-copy-yellow.png`} alt="" />}
+      {icon ? icon : <img className={cx(`w-[24px] h-[24px]`, className)} src={`assets/${environment.assetPrefix}/icon=copy.png`} alt="" />}
     </button>
   )
 }

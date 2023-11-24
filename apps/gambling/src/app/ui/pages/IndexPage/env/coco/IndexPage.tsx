@@ -114,8 +114,18 @@ export const IndexPage = ({
         </AppCarousel>
       </div>
 
-      <Container className="bg-[var(--background-primary)]">
-        {/*Tabs*/}
+      {/*Tabs*/}
+      <Container
+        className={cx(
+          "",
+          {
+            "bg-[var(--primary-variant)] sticky top-[52.5px] left-0 right-0 z-20": isMobile
+          },
+          {
+            "bg-[var(--background-primary)]" : !isMobile
+          }
+        )}
+      >
         {isMobile ? (
           <>
             <div className="mb-4"  onClick={()=>setIsSearch(true)}>
@@ -137,16 +147,14 @@ export const IndexPage = ({
             <div className={"mb-2 sticky top-[52.5px] left-0 right-0 z-20 whitespace-nowrap "}>
               <DragScrollContainer className="flex flex-row items-center bg-[var(--background-primary)] px-0.5 ">
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
-                  <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
                 {/* </section> */}
               </DragScrollContainer>
             </div>
-
           </>
           ): (
-            <div className={"flex flex-row justify-center items-baseline "}>
-
-              <div className="grow min-w-[100px] mb-4 mr-4">
+            <div className={"flex flex-row justify-center items-baseline"}>
+              <div className="grow min-w-[100px] mr-2">
                 <ScrollTab className="items-center">
                   <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
                 </ScrollTab>
@@ -155,6 +163,7 @@ export const IndexPage = ({
               <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={()=>setIsSearch(true)}>
                 {/*NOTICE: refactor me*/}
                 <Input
+                  pureContainer={true}
                   className={cx(
                     "py-0.5 px-2.5 text-xs rounded",
                     "!border-[var(--stroke-textfields)] bg-[var(--background-textfields)]"
@@ -167,15 +176,35 @@ export const IndexPage = ({
                   }}
                 />
               </div>
+
             </div>
+
         )}
-
-        <div className="bg-[var(--background-primary)]">
-          {gameList()}
-        </div>
-
       </Container>
 
+      {/*SearchInput*/}
+      {isMobile ? (
+        <Container y={false} className="bg-[var(--background-primary)] pt-2" onClick={handleToSearchPage}>
+          {/*NOTICE: refactor me*/}
+          <Input
+            pureContainer={true}
+            className={cx(
+              "py-0.5 px-2.5 text-xs rounded",
+              "!border-[var(--stroke-textfields)] bg-[var(--background-textfields)]"
+            )}
+            inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
+            placeholder={"Por favor insira o nome do jogo"}
+            prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
+            onChange={(event: any) => {
+              setSearchInput(event.target.value)
+            }}
+          />
+        </Container>
+      ): null}
+
+      <Container y={false} className="bg-[var(--background-primary)]">
+        {gameList()}
+      </Container>
     </>
   )
 }

@@ -88,6 +88,7 @@ export const DesktopGameItem = (props: IItem) => {
   return (
     <StyledGameItem
       className={" w-[150px] p-1 game-item rounded flex flex-col items-center relative group shrink-0"}
+      onClick={props.onClick}
       onMouseOver={() => {
         setHover(true);
       }}
@@ -122,7 +123,7 @@ export const DesktopGameItem = (props: IItem) => {
         favorite={props.favorite || false}
       />
       {hover && (
-        <DesktopGameItemButton onClick={props.onClick} />
+        <DesktopGameItemButton />
       )}
     </StyledGameItem>
   )

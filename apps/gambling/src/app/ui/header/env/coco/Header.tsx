@@ -18,23 +18,7 @@ import { AppLocalStorage } from "../../../../persistant/localstorage";
 import { usePageNavigate } from "../../../hooks/usePageNavigate";
 import {IUserInfo} from "../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
-
-
-const Notification = styled.section`
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    border: 2px solid currentColor;
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity .2s ease-in-out;
-  }
-`
+import {NotificationAnimationIcon} from "../../../components/Icons/animation/NotificationAnimationIcon";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -43,7 +27,6 @@ const DirectionIcon = styled.img<{
   width: 12px;
   transform: rotate(${props => props.active ? 180 : 0}deg);
 `
-
 
 export type IHeader = {
   className?: string;
@@ -85,7 +68,7 @@ export const Header = (props: IHeader) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
-  const [hover, setHover] = useState(true);
+  const [hover, setHover] = useState(false);
   const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
 
 
@@ -125,7 +108,7 @@ export const Header = (props: IHeader) => {
           }}
         >
           <div
-            className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)] cursor-pointer"}
+            className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)] cursor-pointer flex row justify-center items-center"}
             onClick={() => onClickToIndex()}
           >
             <img className="max-w-[56px] max-h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
@@ -195,32 +178,19 @@ export const Header = (props: IHeader) => {
                   src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
                 />
               </div>
-              <div className='text-base text-[#ff76ff] leading-none'>ID:{user.user_id}</div>
+              <div className='text-base text-[var(--text-tertiary)] leading-none'>ID:{user.user_id}</div>
             </div>
           </section>
 
           <section className={"relative flex justify-center"}>
-            <button onClick={() => {
-              props.onClickToOpenNotificationDrawer();
-            }}>
-              <Notification>
-                <img
-                  className="w-[30px] h-[36px] min-w-[30px] min-h-[36px]"
-                  alt={"notification"}
-                  src={`assets/${environment.assetPrefix}/ic_notification.png`}
-                />
-                {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
-              </Notification>
-            </button>
+            <div
+              onClick={() => {
+                props.onClickToOpenNotificationDrawer();
+              }}
+            >
+              <NotificationAnimationIcon messageCount={messageCount}/>
+            </div>
           </section>
-
-          {/*<section className={""} onClick={() => {*/}
-          {/*  props.onClickToChangeLogoutPopover(!props.openLogoutPopover);*/}
-          {/*}}>*/}
-          {/*  <button>*/}
-          {/*    <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"logout"} src={`assets/${environment.assetPrefix}/ic_signout.png`} />*/}
-          {/*  </button>*/}
-          {/*</section>*/}
 
         </section>
       )}

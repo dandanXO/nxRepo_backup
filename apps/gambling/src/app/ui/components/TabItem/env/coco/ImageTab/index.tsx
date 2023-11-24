@@ -4,7 +4,7 @@ export const ImageTab = styled.div<{
   active: boolean;
   color?: string;
 }>`
-  width: 100px;
+  //width: 100px;
   height: 32px;
   line-height: 32px;
   text-align: center;
@@ -13,6 +13,7 @@ export const ImageTab = styled.div<{
 
   border-radius: 16px 4px 16px 4px;
   margin-right: 8px;
+  padding: 0 10px;
 
   ${props => {
     if (!props.active) {
@@ -22,7 +23,7 @@ export const ImageTab = styled.div<{
           `;
     } else {
       return `
-            background-image: linear-gradient(var(--button-gametab-focus-from), var(--button-gametab-focus-via), var(--button-gametab-focus-to));
+            background-image: linear-gradient(var(--button-gametab-focus-from), var(--button-gametab-focus-via) 15.65%, var(--button-gametab-focus-to));
             color: var(--white);
           `
     }

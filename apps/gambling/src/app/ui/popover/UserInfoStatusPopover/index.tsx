@@ -32,6 +32,7 @@ import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/User
 import { UserInfoStatusPopoverNavigator as PernambucanaNavigator } from "./env/pernambucana/UserInfoStatusPopoverNavigator";
 import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/coco/UserINfoStatusPopoverUserInfo'
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
 
 
 const PopoverContainer = renderByPlatform({
@@ -255,11 +256,11 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   }, [inviteInfo])
 
 
-
-  const [triggerGetUserVIPALLInfo, {currentData: vipAllInfo}] = useLazyGetUserVIPAllInfoQuery();
-
   const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
-  const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
+
+  // const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
+  const {userVIPInfo} = useLocalstorageGetUserVIPInfo();
+
 
   useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
@@ -268,11 +269,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
         onlyGetSignInConfig: true,
         token,
       });
-      triggerGetUserVIPInfo({
-        token,
-      });
     }
-    triggerGetUserVIPALLInfo(null);
   }, []);
 
   useEffect(() => {
@@ -282,10 +279,6 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
         onlyGetSignInConfig: true,
         token,
       });
-      triggerGetUserVIPInfo({
-        token,
-      });
-      triggerGetUserVIPALLInfo(null);
     }
     window.addEventListener("focus", handler)
     return () => {

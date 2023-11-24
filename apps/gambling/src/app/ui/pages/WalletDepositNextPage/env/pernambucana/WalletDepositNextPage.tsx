@@ -10,11 +10,11 @@ import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import {useAllowLoginRouterRules} from "../../../../router/useAllowLoginRouterRules";
 import {environment} from "../../../../../../environments/environment";
 import {notification} from "antd";
-import {ButtonPro} from "../../../../components/Buttons/Button";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
 
 const Notice = styled.div`
   height: 60px;

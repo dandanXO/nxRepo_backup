@@ -19,7 +19,7 @@ interface IDepositButton {
   onClick: () => void;
 }
 
-export const DepositButton = (props: IDepositButton) => {
+export const DepositMoneyButton = (props: IDepositButton) => {
   const { isMobile } = useBreakpoint();
 
   const {

@@ -12,6 +12,8 @@ import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRouterRules";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
+import { formatMoney } from "../../../../../utils/formatMoney";
+import {ViewRecordButton} from "../../../../../components/Buttons/env/coco/ViewRecordButton";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -231,7 +233,7 @@ export const DayList = ({
 
               {
                 !checked && (
-                  <div className='break-all text-sm  text-white mb-[24px]'>R$ {(config?.cashback || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits:2}) }</div>
+                  <div className='break-all text-sm  text-white mb-[24px]'>R$ {formatMoney((config?.cashback || 0))}</div>
                 )
               }
 
@@ -370,11 +372,7 @@ const CocoDailySignInPage = ({
             <div className='absolute bottom-0 translate-y-[80px] left-[50%] translate-x-[-50%] text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </Container>
 
-          <button
-            className='text-white text-xl mt-20 mr-10 mb-20'
-            onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
-          >{'visualizar registros >'}
-          </button>
+          <ViewRecordButton onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}/>
         </div>
       </BackGround>
     </div>

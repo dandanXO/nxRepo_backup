@@ -1,4 +1,3 @@
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation"
 import { ChargeButton } from "../../../../components/Buttons/ChargeButton"
 import useBreakpoint from "../../../../hooks/useBreakpoint"
 import { usePageNavigate } from "../../../../hooks/usePageNavigate"

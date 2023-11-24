@@ -8,16 +8,18 @@ import { useNavigate } from "react-router";
 import { useEffect, useMemo, useState } from "react";
 import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../external/RechargeInfoGetEndpoint";
 import { environment } from "../../../../environments/environment";
-import { ButtonPro, ProButton } from "../../components/Buttons/Button";
 import { tcx } from "../../utils/tcx";
 import { DepositNoticeSection } from "./DepositNoticeSection";
-import { DepositButton } from "./DepositButton";
+import { DepositMoneyButton } from "../../components/Buttons/DepositMoneyButton";
 import { DepositInput } from "./DepositInput";
 
 import {renderByPlatform} from "../../utils/renderByPlatform";
 import {depositButtonProps as PDepositButtonProps} from "./env/pernambucana/depositButtonProps";
 import {depositButtonProps as WDepositButtonProps} from "./env/wild/depositButtonProps";
 import {depositButtonProps as CDepositButtonProps} from "./env/coco/depositButtonProps";
+import { formatMoney } from "../../utils/formatMoney";
+import {ButtonPro} from "../../components/Buttons/ButtonPro";
+import {ProButton} from "../../components/Buttons/ProButton";
 
 
 const Item = styled.div.attrs((props) => ({
@@ -181,9 +183,9 @@ export const DepositPanel = (props: IDepositPanel) => {
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
             const isShowRate = Number(config?.rate) > 0 || (Number(rechargeValue) * Number(config?.rate)).toFixed(2) > config?.amount_min;
-            const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? (Number(rechargeValue) * Number(config?.rate)).toFixed(2) : ""
+            const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? formatMoney(Number(rechargeValue) * Number(config?.rate)) : ""
             return (
-              <DepositButton
+              <DepositMoneyButton
                 key={index}
                 onClick={() => {
                   setSelectedIndex(index);

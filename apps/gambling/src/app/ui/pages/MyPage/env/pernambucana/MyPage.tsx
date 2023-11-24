@@ -177,7 +177,7 @@ interface IPernambucana777BetMyPageProps {
   currentLevel: number
 }
 
-const BetMyPage = ({
+const MyPage = ({
   userVIPInfo,
   currentLevel
 }: IPernambucana777BetMyPageProps) => {
@@ -327,4 +327,4 @@ const BetMyPage = ({
   )
 }
 
-export default BetMyPage;
+export default MyPage;

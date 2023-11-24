@@ -7,7 +7,7 @@ import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { InviteCopySection } from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";
-import { CopyIcon } from "../../../../components/CopyIcon";
+import { CopyIcon } from "../../../../components/Icons/CopyIcon";
 import { MobileMenuItem } from "./MobileMenuItem";
 import styled from "styled-components";
 import { environment } from "../../../../../../environments/environment";
