@@ -37,7 +37,7 @@ export const DepositMoneyButton = (props: IDepositButton) => {
 
   return (
     <button
-      className={cx(`flex font-bold lg:flex-row flex-col mb-2 mx-1 basis-[30%] flex-1`,
+      className={cx(`flex :flex-col lg:flex-row font-bold  mb-2 mx-1 basis-[30%] max-w-[33%] flex-1 overflow-hidden`,
         " min-h-[55px] whitespace-nowrap",
         {
           [bgStyle]: !isActive,
@@ -49,7 +49,7 @@ export const DepositMoneyButton = (props: IDepositButton) => {
         props.onClick && props.onClick()
       }}
     >
-      <div className={cx("value items-baseline text-base xl:text-4xl lg:text-2xl md:text-lg md:mr-2", {
+      <div className={cx("value items-baseline lg:mr-2", {
         [rechargeClassName ? rechargeClassName : "text-white"]: !isActive,
         [activeRechargeClassName ? activeRechargeClassName : "text-main-primary-varient"]: isActive,
       })}>
