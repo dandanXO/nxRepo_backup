@@ -8,7 +8,6 @@ import { useNavigate } from "react-router";
 import { useEffect, useMemo, useState } from "react";
 import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../external/RechargeInfoGetEndpoint";
 import { environment } from "../../../../environments/environment";
-import { ButtonPro, ProButton } from "../../components/Buttons/Button";
 import { tcx } from "../../utils/tcx";
 import { DepositNoticeSection } from "./DepositNoticeSection";
 import { DepositMoneyButton } from "../../components/Buttons/DepositMoneyButton";
@@ -19,6 +18,8 @@ import {depositButtonProps as PDepositButtonProps} from "./env/pernambucana/depo
 import {depositButtonProps as WDepositButtonProps} from "./env/wild/depositButtonProps";
 import {depositButtonProps as CDepositButtonProps} from "./env/coco/depositButtonProps";
 import { formatMoney } from "../../utils/formatMoney";
+import {ButtonPro} from "../../components/Buttons/ButtonPro";
+import {ProButton} from "../../components/Buttons/ProButton";
 
 
 const Item = styled.div.attrs((props) => ({

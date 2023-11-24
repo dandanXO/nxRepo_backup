@@ -7,7 +7,7 @@ import { notification } from 'antd';
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { SectionContainer } from "../../components/container/SectionContainer";
 import { Input, InputValue } from "../../components/Inputs/Input";
-import { Button, ButtonPro } from "../../components/Buttons/Button";
+import { Button } from "../../components/Buttons/Button";
 import { useGetWithdrawLimitMutation, useWithdrawMutation } from "../../../external";
 import { environment } from "../../../../environments/environment";
 import { AppLocalStorage } from "../../../persistant/localstorage";
@@ -22,6 +22,7 @@ import { WithdrawPanel as CWithdrawPanel } from './env/coco/WithdrawPanel';
 import { WithdrawPanel as PWithdrawPanel } from './env/pernambucana/WithdrawPanel'
 import { WithdrawPanel as WWithdrawPanel } from './env/wild/WithdrawPanel'
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import {ButtonPro} from "../../components/Buttons/ButtonPro";
 
 
 
