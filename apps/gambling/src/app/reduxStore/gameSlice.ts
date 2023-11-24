@@ -44,21 +44,18 @@ export const gameSlice = createSlice({
     },
     setGameList: (state: InitialState, action: PayloadAction<GetGameListResponseData>) => {
       const gameData = action.payload;
-      const allGame = gameData && Object.entries(gameData?.type).reduce((result: any, [key, value]) => {
 
-        const subGamesList = [] as any
-        value.map(label => {
-          subGamesList.push(...gameData[key][label]);
-        });
-        const game = {
-          gameType: key,
+      const allGame = gameData && gameData?.label.reduce((acc: any , currentType:string) => {
+        const subGamesList = gameData.type[currentType].reduce((acc: any, currentSubType: string) => {
+          return [...acc, ...gameData[currentType][currentSubType]]
+        }, [])
+        return [...acc, {
+          gameType: currentType,
           data: {
-            subGameType: key,
+            subGameType: currentType,
             games: subGamesList
           }
-        }
-        result.push(game);
-        return result
+        }]
       }, [])
 
      const typeGameList = gameData && Object.entries(gameData?.type).reduce((result: any, [key, value]) => {
