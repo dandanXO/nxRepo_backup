@@ -182,3 +182,13 @@ html {
 .rmc-picker-item  {
   color: white;
 }
+
+.ant-picker-focused .ant-picker-separator,
+.ant-picker-focused .ant-picker-range-separator,
+.ant-picker-separator,
+.ant-picker-range-separator{
+  color: white;
+}
+.ant-picker-suffix{
+  color: white;
+}
