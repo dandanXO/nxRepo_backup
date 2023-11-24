@@ -24,7 +24,7 @@ export const InviteCopySection = () => {
 
   return (
     <div className="w-full text-center sm:text-left">
-      <p className="my-3.5 sm:mb-2 text-[var(--secondary-assistant)] sm:text-white text-sm md:text:xl">{`${!isMobile ? 'Passo 1:' : ''}Clique no botão para copiar o link do convite`}</p>
+      <p className="my-3.5 sm:mb-2 text-[var(--secondary-assistant)] sm:text-white text-sm md:text-xl">{`${!isMobile ? 'Passo 1:' : ''}Clique no botão para copiar o link do convite`}</p>
       <CopyInputUrlItem url={isLogin ? inviteUrl : location.href} className={'rounded break-all text-left'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
     </div>
   )
