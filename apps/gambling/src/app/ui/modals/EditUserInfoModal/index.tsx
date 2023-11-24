@@ -42,6 +42,7 @@ export const EditUserInfoModal = ({
 }: IEditUserInfoModalProps) => {
   const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
   const [userNickname, setUserNickname] = useState(nickname);
+  const [nickNameInvalidatedMessage, setNickNameInvalidatedMessage] = useState('');
   const [triggerUpdateUserInfo, { isLoading }] = useUpdateUserInfoMutation({});
   const [selectedAvatar, setSelectedAvatar] = useState(Number(userInfo.avatar) || 1)
 
@@ -60,26 +61,47 @@ export const EditUserInfoModal = ({
     });
   };
 
+  const nickNameValidator = (nickName: string) => {
+    if (nickName === '') {
+      setNickNameInvalidatedMessage('Insira um apelido')
+      return;
+    }
+
+    if (/[^0-9a-zA-Z]/.test(nickName)) {
+      setNickNameInvalidatedMessage('Apenas inglês ou números são suportados')
+      return;
+    }
+
+    if (nickName.length < 6 || nickName.length > 16) {
+      setNickNameInvalidatedMessage('nome de usuário (6-16 letras e números)')
+      return;
+    }
+
+    setNickNameInvalidatedMessage('')
+  }
+
   const handleConfirm = () => {
-    triggerUpdateUserInfo({
-      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
-      nickname: userNickname,
-      avatar: `${selectedAvatar}`
-    }).then((response) => {
-      promiseHandler.then(
-        response,
-        () => {
-          if ((response as any).data.code === 200) {
-            AppLocalStorage.setItem(
-              AppLocalStorageKey.userInfo,
-              JSON.stringify((response as any).data.data.user_info || '{}')
-            );
-            close(true);
-          }
-        },
-        openNotificationWithIcon
-      );
-    });
+    if(nickNameInvalidatedMessage === '') {
+      triggerUpdateUserInfo({
+        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
+        nickname: userNickname,
+        avatar: `${selectedAvatar}`
+      }).then((response) => {
+        promiseHandler.then(
+          response,
+          () => {
+            if ((response as any).data.code === 200) {
+              AppLocalStorage.setItem(
+                AppLocalStorageKey.userInfo,
+                JSON.stringify((response as any).data.data.user_info || '{}')
+              );
+              close(true);
+            }
+          },
+          openNotificationWithIcon
+        );
+      });
+    }
   };
 
   return (
@@ -116,7 +138,12 @@ export const EditUserInfoModal = ({
             prefix={<UserOutlined className="mr-2" />}
             className="mt-4 md:mt-8 w-full items-center rounded-full p-3 text-xs md:text-3xl"
             value={userNickname}
-            onChange={(event: any) => setUserNickname(event.target.value)}
+            onChange={(event: any) => {
+              setUserNickname(event.target.value);
+              nickNameValidator(event.target.value);
+            }}
+            validation={nickNameInvalidatedMessage === ''}
+            errorMessage={nickNameInvalidatedMessage}
           />
         </div>
 
