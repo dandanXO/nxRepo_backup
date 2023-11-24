@@ -10,6 +10,7 @@ import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {SearchButton} from "./SearchButton";
 import {RegisterButton} from "../../../components/Buttons/env/pernambucana/RegisterButton";
+import {MenuIcon} from "../../../components/Icons/MenuIcon";
 
 
 export type IHeaderMobile = {
@@ -37,29 +38,24 @@ export const HeaderMobile = (props: IHeaderMobile) => {
       )}
     >
       <div className={"flex flex-row items-center"}>
-        <button className={"mr-4"}>
-          <img
-            alt={"menu"}
-            className={"w-[22.5px] h-[22.5px]"}
-            src={`assets/${environment.assetPrefix}/ic_menu.png`}
-            onClick={() => {
-              props.clickToOpenMenuDrawer();
-            }}
-          />
-        </button>
+        <div className={"mr-4"} onClick={() => {
+          props.clickToOpenMenuDrawer();
+        }}>
+          <MenuIcon/>
+        </div>
 
-        <button className={"w-[40px]"}>
+        <div className={"w-[40px]"} onClick={() => {
+          navigate(PageOrModalPathEnum.IndexPage)
+        }}>
           <a>
             <img
               alt={"logo"}
               className={""}
               src={`assets/${environment.assetPrefix}/logo_h5.png`}
-              onClick={() => {
-                navigate(PageOrModalPathEnum.IndexPage)
-              }}
+
             />
           </a>
-        </button>
+        </div>
       </div>
 
       {!login ? (

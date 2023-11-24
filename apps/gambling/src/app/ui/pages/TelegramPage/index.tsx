@@ -13,6 +13,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 import { FragmentContainer } from "../../components/FragmentContainer";
 import cx from 'classnames';
 import { Banner } from "../../components/Banner";
+import {TelegramButton} from "../../components/Buttons/TelegramButton";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
@@ -85,15 +86,11 @@ export const TelegramPage = () => {
         {isCoco777bet && <div className="text-2xl font-bold mb-4 sm:mb-2.5"><span className="text-white mr-2">Canal De</span><span className="text-[var(--primary-assistant)]">Telegram</span></div>}
         <div className={"text-left w-full mb-4 sm:mb-3"}>{environment.platformGroup} ({environment.platformName}) sinceramente convida você a se juntar ao nosso canal de telegrama e vamos nos comunicar mais profundamente!</div>
 
-        <button className={`rounded-lg mx-auto my-4 sm:hidden w-[90%] flex-1 py-2 text-center
-          items-center justify-center text-white text-xl flex
-          bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]`}
+        <TelegramButton
           onClick={() => {
             window.open(telegramUrl, '_blank')
-          }} >
-          <img className={"w-[30px] mr-4"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />
-          Junte-se
-        </button>
+          }}
+        />
 
         <div className={"text-left w-full mb-4 sm:mb-3"}>Anunciaremos as seguintes atividades ou informações relacionadas no canal de telegrama:</div>
         <ul className={"text-left w-full list-decimal list-inside marker:text-[var(--primary-assistant)] marker:text-xl "}>

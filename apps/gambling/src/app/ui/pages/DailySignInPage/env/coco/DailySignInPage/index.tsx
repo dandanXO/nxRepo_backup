@@ -13,6 +13,7 @@ import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRou
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import { formatMoney } from "../../../../../utils/formatMoney";
+import {ViewRecordButton} from "../../../../../components/Buttons/env/coco/ViewRecordButton";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -371,11 +372,7 @@ const CocoDailySignInPage = ({
             <div className='absolute bottom-0 translate-y-[80px] left-[50%] translate-x-[-50%] text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </Container>
 
-          <button
-            className='text-white text-xl mt-20 mr-10 mb-20'
-            onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
-          >{'visualizar registros >'}
-          </button>
+          <ViewRecordButton onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}/>
         </div>
       </BackGround>
     </div>

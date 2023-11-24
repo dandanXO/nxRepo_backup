@@ -11,7 +11,7 @@ import { environment } from "../../../../environments/environment";
 import { ButtonPro, ProButton } from "../../components/Buttons/Button";
 import { tcx } from "../../utils/tcx";
 import { DepositNoticeSection } from "./DepositNoticeSection";
-import { DepositButton } from "./DepositButton";
+import { DepositMoneyButton } from "../../components/Buttons/DepositMoneyButton";
 import { DepositInput } from "./DepositInput";
 
 import {renderByPlatform} from "../../utils/renderByPlatform";
@@ -184,7 +184,7 @@ export const DepositPanel = (props: IDepositPanel) => {
             const isShowRate = Number(config?.rate) > 0 || (Number(rechargeValue) * Number(config?.rate)).toFixed(2) > config?.amount_min;
             const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? formatMoney(Number(rechargeValue) * Number(config?.rate)) : ""
             return (
-              <DepositButton
+              <DepositMoneyButton
                 key={index}
                 onClick={() => {
                   setSelectedIndex(index);

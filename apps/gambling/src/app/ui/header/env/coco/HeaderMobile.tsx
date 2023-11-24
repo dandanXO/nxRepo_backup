@@ -11,6 +11,7 @@ import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import { RegisterButton} from "../../../components/Buttons/RegisterButton";
 import { MessageCountBadge } from "../../../components/MessageCountBadge";
 import {AssetMappingCoco} from "../../../../../assets/assetMapping.coco";
+import {MenuIcon} from "../../../components/Icons/MenuIcon";
 
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;
@@ -40,17 +41,14 @@ export const HeaderMobile = (props: IHeaderMobile) => {
       )}
     >
       <div className={"flex flex-row justify-between items-center w-full"}>
-        <button className={"mr-4"}>
-          <img
-            alt={"menu"}
-            // className={"w-[22.5px] h-[22.5px]"}
-            className={"w-[23px] h-[18px]"}
-            src={AssetMappingCoco.header.menu}
-            onClick={() => {
-              props.clickToOpenMenuDrawer();
-            }}
-          />
-        </button>
+        <div
+          className={"mr-4"}
+          onClick={() => {
+            props.clickToOpenMenuDrawer();
+          }}
+        >
+          <MenuIcon/>
+        </div>
 
         {!isLogin && (
           <section>
