@@ -21,7 +21,7 @@ const CurrentLevelInfoCard = ({
     <div
       className={
         tcx(
-          'p-6 border-4 border-[var(--stroke-dashboard-main)] bg-gradient-to-b from-[var(--background-vip-level-from)] to-[var(--background-vip-level-to)] rounded-lg flex items-center text-white gap-6',
+          'p-6 border-2 border-[var(--stroke-dashboard-main)] bg-gradient-to-b from-[var(--background-vip-level-from)] to-[var(--background-vip-level-to)] rounded-lg flex items-center text-white gap-6',
           ['flex-col', isMobile]
         )}>
       <div className='flex items-center justify-center'>
@@ -66,7 +66,7 @@ const CurrentLevelInfoCard = ({
           <div className={isMobile? 'hidden': ''}>VIP{currentLevel + 1}</div>
         </div>
 
-        <div>Número total de apostas</div>
+        <div>Número total de apostas:</div>
         {
           isMobile && (
             <div className='flex justify-between text-sm mb-1'>
