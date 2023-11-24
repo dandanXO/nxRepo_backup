@@ -6,7 +6,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
 // import {MobileInput} from "../../../../components/Inputs/MobileInput";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useForm} from "../../../../hooks/useForm";
 import {useRegisterMutation} from "../../../../../external";
 import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
@@ -28,6 +28,7 @@ import {Captcha} from "../Captcha";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 import {CheckableICON} from "../../../../components/Icons/CheckableICON";
+import axios from "axios";
 
 const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
@@ -97,6 +98,25 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
     errorMessage: '',
   });
   const dispatch = useDispatch();
+
+  const [imgSrc, setImgSrc] = useState<string|null>(null);
+  const [isCaptchaLoading, setIsCaptchaLoading] = useState(false)
+  const onClickCaptcha = () => {
+    setIsCaptchaLoading(true);
+    axios.get(`${environment.captcha}?${new Date().getTime()}`, { responseType: 'arraybuffer' }).then(res => {
+      setImgSrc(`data:${res.headers['content-type']};base64,${btoa(String.fromCharCode(...new Uint8Array(res.data)))}`);
+      if(res.headers["captcha-image-key"]) {
+        const key = res.headers["captcha-image-key"];
+        // console.log("captcha-image-key", key)
+        onGetCaptchaKey(key)
+      }
+    }).finally(() => {
+      setIsCaptchaLoading(false)
+    })
+  }
+  useEffect(() => {
+    onClickCaptcha();
+  }, [])
 
   const [triggerRegister, {isLoading, isError, isSuccess}] = useRegisterMutation();
 
@@ -196,6 +216,8 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           dispatch(appSlice.actions.setIsShowInviteBonusModal(true));
 
           props.confirmToRegister();
+        } else {
+          onClickCaptcha();
         }
       }).catch((error) => {
         console.error(error);
@@ -275,7 +297,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         className={"rounded-br-[0px] rounded-tr-[0px] border-r-[0px]"}
         // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         prefix={<SecuritySvg className={"mr-2"}/>}
-        outerSuffix={<Captcha onGetCaptchaKey={onGetCaptchaKey}/>}
+        outerSuffix={<Captcha onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading}/>}
         placeholder={"Código de verificação"}
         value={captchaInput.data}
         validation={captchaInput.isValidation}
