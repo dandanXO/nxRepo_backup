@@ -50,7 +50,9 @@ export const DepositMobileTable = () => {
           {data?.data?.map((record) => (
             <Container
               key={record.id}
-              className="mb-4 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
+              className={cx("mb-4 flex flex-col rounded-2xl py-2 text-white text-base border border-solid border-main-primary-main",
+              "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
+              )}
             >
               <div
                 className={

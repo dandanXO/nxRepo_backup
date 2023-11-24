@@ -28,6 +28,7 @@ import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
+import {useScrollToCarousel} from "../../useScrollToCarousel";
 
 
 export type TTotalFavoriteLocalState = {
@@ -53,6 +54,8 @@ type ICoco777betIndexPage = {
   setViewType: (value: any) => void;
   setSearchInput: (value: any) => void;
   gameList: any;
+  showFixForIOSStickTab: boolean;
+  scrollToCarousel: () => void;
 }
 
 export const IndexPage = ({
@@ -64,7 +67,9 @@ export const IndexPage = ({
                                               setActiveTab,
                                               setViewType,
                                               setSearchInput,
-                                              gameList
+                                              gameList,
+  scrollToCarousel,
+  showFixForIOSStickTab,
 }:ICoco777betIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
@@ -85,29 +90,7 @@ export const IndexPage = ({
     }
   }
 
-  // NOTICE: 使用 Javascript 方式替換純 CSS stikcy，因為 iOS sticky 會滾到一半就直接上去
-  const [showFixForIOSStickTab, setShowFixForIOSStickTab] = useState(false);
-  const [carouselHeight, setCarouselHeight] = useState(0);
 
-  useEffect(() => {
-    const scroll = () => {
-      const carousel = document.getElementById("app-carousel");
-      let carouselHeight = 0;
-      if(carousel && carousel.offsetHeight) {
-        carouselHeight = carousel.offsetHeight;
-        setCarouselHeight(carouselHeight);
-      }
-      if(window.scrollY > carouselHeight) {
-        setShowFixForIOSStickTab(true)
-      } else {
-        setShowFixForIOSStickTab(false)
-      }
-    }
-    window.addEventListener("scroll", scroll);
-    return () => {
-      window.removeEventListener("scroll", scroll);
-    }
-  }, []);
 
   return (
     <>
@@ -160,9 +143,7 @@ export const IndexPage = ({
                   label={label}
                   setActiveTab={(tab: number) => {
                     setActiveTab(tab);
-                    if(window.scrollY > carouselHeight) {
-                      window.scrollTo({ top: carouselHeight, behavior: "smooth" });
-                    }
+                    scrollToCarousel()
                   }}
                   setViewType={setViewType}
                 />

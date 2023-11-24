@@ -170,8 +170,15 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
           </section>
         </div>
       </SectionContainer>
-      {!isMobile && <section className={"md:display flex flex-col justify-center items-center my-6"}>
-        <ButtonPro className="w-1/2 whitespace-nowrap" onClick={props.onClickToWithdraw}>Retirar</ButtonPro>
+      {!isMobile &&
+        <section className={cx("md:display flex flex-col justify-center items-center my-6")}>
+        {/*<ButtonPro className="w-1/2 whitespace-nowrap" onClick={props.onClickToWithdraw}>Retirar</ButtonPro>*/}
+        <button
+          className={"w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)] font-medium"}
+          onClick={props.onClickToWithdraw}
+        >
+          RETIRAR
+        </button>
       </section>}
 
       <WithdrawNoticeSection
@@ -183,13 +190,19 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
 
 
       {isMobile && (
-        <section className={"fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
-          <ButtonPro
-            size={"small"}
+        <section className={"bg-[rgba(0,0,0,.5)] fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
+          {/*<ButtonPro*/}
+          {/*  size={"small"}*/}
+          {/*  onClick={props.onClickToWithdraw}*/}
+          {/*>*/}
+          {/*  RETIRAR*/}
+          {/*</ButtonPro>*/}
+          <button
+            className={"w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)] font-medium"}
             onClick={props.onClickToWithdraw}
           >
             RETIRAR
-          </ButtonPro>
+          </button>
         </section>
       )}
 

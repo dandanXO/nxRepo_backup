@@ -16,6 +16,7 @@ import {IndexPage as PIndexPage} from "./env/pernambucana/IndexPage";
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
 import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import {useScrollToCarousel} from "./useScrollToCarousel";
 
 
 export type TTotalFavoriteLocalState = {
@@ -72,6 +73,7 @@ export const IndexPage = () => {
       )
     })
   }
+  const {showFixForIOSStickTab, scrollToCarousel} = useScrollToCarousel();
 
   const renderTypeGameList=()=>{
     let list: { subGameType: string, games: { gameId: string }[] }[] = []
@@ -87,14 +89,41 @@ export const IndexPage = () => {
     }
 
     return list.map(({subGameType,games}: any, index: number) => {
-      return <GameTypeSectionList isLatestItem={list.length - 1 === index} key={index} gameTypeName={subGameType} data={games} onClick={() => setViewType(subGameType)} isViewAll={viewType!==''} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} setViewType={setViewType}/>
+      return (
+        <GameTypeSectionList
+          isLatestItem={list.length - 1 === index}
+          key={index}
+          gameTypeName={subGameType}
+          data={games}
+          onClick={() => {
+            setViewType(subGameType);
+            scrollToCarousel();
+          }}
+          isViewAll={viewType!==''}
+          totalFavoriteLocalState={totalFavoriteLocalState}
+          setTotalFavoriteLocalState={setTotalFavoriteLocalState}
+          setViewType={setViewType}
+        />
+      )
     })
   }
 
   const gameList = () => {
     if (searchInput !== '') {
       return searchResults.length > 0
-        ? <GameTypeSectionList isLatestItem={true} gameTypeName={'null'} data={searchResults} onClick={() => navigate(PageOrModalPathEnum.IndexSlotPage)} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
+        ? (
+          <GameTypeSectionList
+            isLatestItem={true}
+            gameTypeName={'null'}
+            data={searchResults}
+            onClick={() => {
+              navigate(PageOrModalPathEnum.IndexSlotPage)
+              window.scrollTo({ left: 0, behavior: "smooth"});
+            }}
+            totalFavoriteLocalState={totalFavoriteLocalState}
+            setTotalFavoriteLocalState={setTotalFavoriteLocalState}
+          />
+        )
         : <></>
     } else {
       return (activeTab === "Todos" || activeTab === "Salão") ? renderAllGameList() : renderTypeGameList()
@@ -105,9 +134,13 @@ export const IndexPage = () => {
     gameList();
   }, [activeTab])
 
+
+
   return renderByPlatform({
     "wild777bet": (
       <WIndexPage
+        showFixForIOSStickTab={showFixForIOSStickTab}
+        scrollToCarousel={scrollToCarousel}
         allGameList={allGameList}
         totalFavoriteLocalState={totalFavoriteLocalState}
         setTotalFavoriteLocalState={setTotalFavoriteLocalState}
@@ -121,6 +154,8 @@ export const IndexPage = () => {
     ),
     "coco777bet": (
       <CIndexPage
+        showFixForIOSStickTab={showFixForIOSStickTab}
+        scrollToCarousel={scrollToCarousel}
         allGameList={allGameList}
         totalFavoriteLocalState={totalFavoriteLocalState}
         setTotalFavoriteLocalState={setTotalFavoriteLocalState}
@@ -135,6 +170,8 @@ export const IndexPage = () => {
   }, (
     (
       <PIndexPage
+        showFixForIOSStickTab={showFixForIOSStickTab}
+        scrollToCarousel={scrollToCarousel}
         allGameList={allGameList}
         totalFavoriteLocalState={totalFavoriteLocalState}
         setTotalFavoriteLocalState={setTotalFavoriteLocalState}

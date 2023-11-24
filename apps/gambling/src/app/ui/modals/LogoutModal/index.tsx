@@ -6,7 +6,7 @@ import cx from "classnames";
 
 
 const Container = styled.div`
-  background: rgba(9,11,15,.93);
+  background: rgba(255,255,255,0.5);
   //background: rgba(9,11,15,1);
   box-shadow: 0 0 .1rem #000 !important;
 
@@ -42,8 +42,8 @@ export type ILogoutModal = {
 export const LogoutModal = (props:ILogoutModal) => {
 
   return (
-    <LogoutSectionContainer className={"bg-assistant"}>
-      <LogoutSection className={"border-[var(--stroke-modal)] border-[1] bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] p-4 rounded-sm"}/>
+    <LogoutSectionContainer className={"bg-[rgba(0,0,0,0.5)]"}>
+      <LogoutSection className={"border-[var(--stroke-modal)] border-[1px] rounded-md bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] p-4 "}/>
     </LogoutSectionContainer>
   )
 }
