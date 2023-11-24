@@ -1,6 +1,4 @@
-import {SectionContainer} from "../../components/container/SectionContainer";
 import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
-import {useNavigate} from "react-router";
 import { GetSignInRecordResponseData, useGetSignInRecordMutation } from "../../../external";
 import { useEffect, useState } from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
@@ -8,6 +6,9 @@ import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import { Table } from "../../components/Table";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import useBreakpoint from "../../hooks/useBreakpoint";
+import { MobileDailySignInRecordPage } from "./MobileDailySignInRecordPage";
+import { formatMoney } from "../../utils/formatMoney";
 
 
 export const DailySignInRecordPage = () => {
@@ -18,6 +19,7 @@ export const DailySignInRecordPage = () => {
   const [records, setRecords] = useState<GetSignInRecordResponseData[]>([])
 
 
+  const { isMobile } = useBreakpoint();
 
   const handleFetchData = () => {
     if(page < (data?.page?.page_count || 0)) {
@@ -31,13 +33,13 @@ export const DailySignInRecordPage = () => {
     { title: 'ID', name: 'id', key: 'id'},
     { title: 'Nivel VIP', name: 'vip_level', key: 'vip_level'},
     { title: 'Coleta Contínua', name: 'days', key: 'days', render: (record:any) => record.days === 1 ? `${record.days}dia`: `${record.days}dias`},
-    { title: 'Obter Recompensas', name: 'cashback', key: 'cashback', render: (record: any) => `R$ ${(record.cashback / 100).toLocaleString()}`},
+    { title: 'Obter Recompensas', name: 'cashback', key: 'cashback', render: (record: any) => `R$ ${formatMoney(record.cashback / 100)}`},
     { title: 'Tempo', name: 'created_at', key: 'created_at' },
   ]
 
   useEffect(() => {
     triggerGetSignInRecord({
-      limit: 10,
+      limit: isMobile ? 10000: 10 ,
       page: page,
       token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
     })
@@ -47,23 +49,28 @@ export const DailySignInRecordPage = () => {
     setRecords([...records, ...(data?.data || [])])
   }, [data?.data])
 
+  if(isMobile) {
+    return <MobileDailySignInRecordPage records={records} />
+  }
+
   return (
     <>
-      <div className={"p-8"}>
+      <div className='px-[84px]'>
+        <BackNavigation
+          onClick={() => onClickToCheckInDaily()}
+          title={<div className='ml-2 font-medium text-2xl'>Registro Diário de Presença</div>}
+        />
+      </div>
 
-        <SectionContainer id={"game-record-section"}>
-
-          <BackNavigation onClick={() => onClickToCheckInDaily()}/>
-
-          <div className='rounded-lg h-[80vh] overflow-hidden'>
-            <Table
-              fetchData={handleFetchData}
-              dataSource={records}
-              columns={columns}
-              dataCount={data?.page?.count || 0}
-            />
-          </div>
-        </SectionContainer>
+      <div className='px-[96px] text-white mt-3'>
+        <div className='rounded-lg h-[80vh] overflow-hidden'>
+          <Table
+            fetchData={handleFetchData}
+            dataSource={records}
+            columns={columns}
+            dataCount={data?.page?.count || 0}
+          />
+        </div>
       </div>
 
     </>

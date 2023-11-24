@@ -111,7 +111,7 @@ const MobileDailySignInPage = ({
         </SignInButton>
 
         <div
-          className='mt-[14px] mb-6 text-white text-sm text-center'
+          className='relative mt-[14px] mb-6 text-white text-sm text-center'
           onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
         >{'visualizar registros >'}</div>
 

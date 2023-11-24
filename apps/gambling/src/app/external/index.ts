@@ -347,8 +347,8 @@ export type GetSignInRecordResponseData = {
   id: string;
   user_id: string;
   vip_level: string;
-  days: string;
-  cashback: string;
+  days: number;
+  cashback: number;
   bonus: string;
   bonus_finish: string;
   created_at: string;
