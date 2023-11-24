@@ -20,7 +20,7 @@ import {AppCarouselContent6} from "../../Carousel/env/coco/AppCarouselContent6";
 import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
 import { CocoTabItem } from "../../../../components/TabItem/CocoTabItem";
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
@@ -30,6 +30,7 @@ import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
+import { GameSearchModal } from "../../../../modals/GameSearchModal";
 
 
 export type TTotalFavoriteLocalState = {
@@ -71,6 +72,7 @@ export const IndexPage = ({
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
   const { isLogin } = useSelector((state: RootState) => state.app);
+  const [isSearch, setIsSearch] = useState(false);
 
   const {onClickToSearch} = usePageNavigate();
 
@@ -94,6 +96,7 @@ export const IndexPage = ({
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
         // "p-4": !isMobile,
       })}>
+        {isSearch && <GameSearchModal onClose={()=>setIsSearch(false)}/>}
         {isMobile && <CompanySloganLabel/>}
         <AppCarousel>
           <AppCarouselContent/>
@@ -115,7 +118,7 @@ export const IndexPage = ({
         {/*Tabs*/}
         {isMobile ? (
           <>
-            <div className="mb-4" onClick={handleToSearchPage}>
+            <div className="mb-4"  onClick={()=>setIsSearch(true)}>
               {/*NOTICE: refactor me*/}
               <Input
                 className={cx(
@@ -149,7 +152,7 @@ export const IndexPage = ({
                 </ScrollTab>
               </div>
 
-              <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]">
+              <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={()=>setIsSearch(true)}>
                 {/*NOTICE: refactor me*/}
                 <Input
                   className={cx(
