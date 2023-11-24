@@ -354,7 +354,12 @@ export const AppRouter = () => {
           )}/>
 
           <Route path={PageOrModalPathEnum.TelegramPage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showMobileFooter={false}
+              showTabbar={false}
+              showToolboxConfig={{mobile:{ customerService: false }}}
+            >
               <TelegramPage/>
             </PageTemplate>
           )}/>
