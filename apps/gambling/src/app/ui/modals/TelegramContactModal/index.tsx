@@ -54,7 +54,7 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
       <Container
         className={tcx(
           "w-[410px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl flex flex-col items-center relative px-5 py-6",
-          ['w-[242px] px-[14px] py-5', isMobile]
+          ['w-[330px] px-[14px] py-5', isMobile]
           )}
         onClick={(event) => {
         event.stopPropagation();
@@ -70,7 +70,7 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
               props.close();
             }}
           >
-            <CloseICON/>
+            <CloseICON outLined={isMobile}/>
           </div>
         </div>
 
