@@ -3,33 +3,22 @@ import {environment} from "../../../../../environments/environment";
 import axios from "axios";
 
 type ICaptcha = {
-  onGetCaptchaKey: (key: string) => void;
+  imgSrc: string | null;
+  onClickCaptcha: () => void;
+  isLoading: boolean;
 }
 export const Captcha = (props: ICaptcha) => {
-  const [imgSrc, setImgSrc] = useState<string|null>(null);
-
-  useEffect(() => {
-    onClickCaptcha();
-  }, []);
-
-  const onClickCaptcha = () => {
-    axios.get(`${environment.captcha}?${new Date().getTime()}`, { responseType: 'arraybuffer' }).then(res => {
-      setImgSrc(`data:${res.headers['content-type']};base64,${btoa(String.fromCharCode(...new Uint8Array(res.data)))}`);
-      if(res.headers["captcha-image-key"]) {
-        const key = res.headers["captcha-image-key"];
-        // console.log("captcha-image-key", key)
-        props.onGetCaptchaKey(key)
-      }
-    });
-  }
-  if(!imgSrc) return null;
+  if(!props.imgSrc) return null;
+  // if(props.isLoading) {
+  //   return <div className={"h-[50px] cursor-pointer rounded-br-[8px] rounded-tr-[8px] bg-white"}/>
+  // }
   return (
     // border-bottom-right-radius: 8px;
   // border-top-right-radius: 8px;
     <img
-      className={"h-[50px] cursor-pointer rounded-br-[8px] rounded-tr-[8px]"} src={imgSrc}
+      className={"h-[50px] cursor-pointer rounded-br-[8px] rounded-tr-[8px]"} src={props.imgSrc}
       onClick={() => {
-        onClickCaptcha();
+        props.onClickCaptcha();
       }}
     />
   )
