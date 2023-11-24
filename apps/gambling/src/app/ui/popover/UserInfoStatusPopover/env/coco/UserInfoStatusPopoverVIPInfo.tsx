@@ -44,7 +44,7 @@ export const UserInfoStatusPopoverVIPInfo = ({
         <RightOutlined />
       </div>
 
-      <div className='flex flex-col gap-2 text-sm'>
+      <div className='flex flex-col gap-2 text-xs'>
         <div className='mt-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
             <div className='text-white'>Próximo nível: {depositPercent > 100 ? 100 : depositPercent.toFixed(0)}%</div>
