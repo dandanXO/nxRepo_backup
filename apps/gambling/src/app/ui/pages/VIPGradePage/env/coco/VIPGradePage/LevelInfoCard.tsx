@@ -44,7 +44,7 @@ const LevelInfoCard = ({
           />
           {
              level >= 20 && (
-              <div className='text-base text-center'>
+              <div className='text-base text-center text-[var(--secondary-assistant)]'>
                 <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
                 <div>Ou numerário de valor equivalente</div>
               </div>
@@ -58,7 +58,7 @@ const LevelInfoCard = ({
         <div className={tcx('w-1/2 flex flex-col gap-2 text-xl', ['text-sm', isMobile])}>
           <div className={isMobile?'text-lg font-bold':'text-2xl font-medium'}>Privilégio</div>
 
-          <div className={tcx(['absolute top-0 left-[-10000px]', isMobile], ['hidden', level >= 20])}>Recompensa de atualização：
+          <div className={tcx( ['hidden', level >= 20])}>Recompensa de atualização：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {formatMoney(upRewardAmout ? upRewardAmout / 100 : 0)}
             </span>
