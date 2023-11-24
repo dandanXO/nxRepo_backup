@@ -13,6 +13,7 @@ export const ImageTab = styled.div<{
 
   border-radius: 16px 4px 16px 4px;
   margin-right: 8px;
+  padding: 0 10px;
 
   ${props => {
     if (!props.active) {
