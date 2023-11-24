@@ -26,7 +26,7 @@ export const NotificationAnimationIcon = (props: INotificationAnimationIcon) => 
   return (
     <Notification>
       <img
-        className="w-[30px] h-[36px] min-w-[30px] min-h-[36px]"
+        className="w-[30px] h-[36px] min-w-[30px] min-h-[36px] hover:opacity-70"
         alt={"notification"}
         src={`assets/${environment.assetPrefix}/ic_notification.png`}
       />
