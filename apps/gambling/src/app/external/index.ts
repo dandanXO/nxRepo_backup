@@ -347,8 +347,8 @@ export type GetSignInRecordResponseData = {
   id: string;
   user_id: string;
   vip_level: string;
-  days: string;
-  cashback: string;
+  days: number;
+  cashback: number;
   bonus: string;
   bonus_finish: string;
   created_at: string;
@@ -788,7 +788,8 @@ export const API = createApi({
       >({
         query: (query: GetRewardRecordRequest) => ({
           method: 'get',
-          url: `/japi/invite/userInvite/getRewardRecordList?userId=${query.userId}&pageNum=${query.pageNum}&pageSize=${query.pageSize}&startTime=${query.startTime}&endTime=${query.endTime}`,
+          // url: `/japi/invite/userInvite/getRewardRecordList?userId=${query.userId}&pageNum=${query.pageNum}&pageSize=${query.pageSize}&startTime=${query.startTime}&endTime=${query.endTime}`,
+          url: `/japi/invite/userInvite/getRewardRecordList`,
           params: query,
         }),
       }),

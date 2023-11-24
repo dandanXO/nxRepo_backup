@@ -5,14 +5,15 @@ import { useEffect, useState } from 'react';
 import { GetUserGameRecordResponse, useGetUserGameRecordMutation } from "../../../external";
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { SectionContainer } from '../../components/container/SectionContainer';
-import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
 import { environment } from "../../../../environments/environment"
-import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
-import {usePageNavigate} from "../../hooks/usePageNavigate";
+import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
+import { usePageNavigate } from "../../hooks/usePageNavigate";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { Table } from "../../components/Table";
 import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
+import { datePickerStyle } from '../../components/DatePickers/DatePicker';
 
 
 const { RangePicker } = DatePicker;
@@ -26,15 +27,9 @@ export const GameRecordPage = () => {
   const dateFormat = 'YYYYMMDD';
   const [dates, setDates] = useState([min, max]);
 
-  const datePickerStyle = {
-    backgroundColor: 'var(--table-main)',
-    borderRadius: '10px',
-    border: 'none',
-    color: '#ffffff',
-  };
 
   const [triggerGetRecord, { data }] = useGetUserGameRecordMutation({});
-  const [resetRecords, setResetRecords]= useState(false);
+  const [resetRecords, setResetRecords] = useState(false);
   const [records, setRecords] = useState<GetUserGameRecordResponse["rows"]>([])
   const [page, setPage] = useState(1)
 
@@ -64,7 +59,8 @@ export const GameRecordPage = () => {
         </div>
       )
     },
-    { title: 'Tempo',
+    {
+      title: 'Tempo',
       name: 'createTime',
       key: 'createTime',
       render: (record: any) => (
@@ -74,12 +70,12 @@ export const GameRecordPage = () => {
         </>
       )
     },
-    { title: 'Valor Da Aposta', name: 'bet', key: 'bet', render:(record: any) => (record.bet / 100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) },
-    { title: 'Lucro', name: 'win', key: 'win', render:(record: any) => (record.win / 100).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) }
+    { title: 'Valor Da Aposta', name: 'bet', key: 'bet', render: (record: any) => (record.bet / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) },
+    { title: 'Lucro', name: 'win', key: 'win', render: (record: any) => (record.win / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
   ]
 
   const handleFetchData = () => {
-    if(records.length < (data?.total || 0)) {
+    if (records.length < (data?.total || 0)) {
       setPage((records.length / pageSize) + 1)
     }
   }
@@ -95,17 +91,17 @@ export const GameRecordPage = () => {
     });
   }, [page, dates]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setResetRecords(true)
     setPage(1)
   }, [dates])
 
 
-  useEffect(()=> {
-    if(resetRecords) {
+  useEffect(() => {
+    if (resetRecords) {
       setRecords(data?.rows || [])
       setResetRecords(false)
-    }else {
+    } else {
       setRecords([...records, ...(data?.rows || [])])
     }
   }, [data?.rows])
@@ -114,51 +110,50 @@ export const GameRecordPage = () => {
 
 
   return (
-    <>
-      <div className={'flex h-full flex-col p-4 md:p-8'}>
-        <SectionContainer
-          className="flex h-full flex-col"
-          id={'game-record-section'}
-        >
-          <BackNavigation onClick={() => onClickToIndex()}/>
 
-          <section className={'mb-4 text-left text-white'}>
-            {
-              isMobile ?
-                (<RangeDatePicker
-                  min='2023-01-01'
-                  max={max.format('YYYY-MM-DD')}
-                  onConfirm={(values)=> setDates([moment(values[0], 'YYYY-MM-DD'), moment(values[1], 'YYYY-MM-DD')])}
-                  value={[dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]}
-                />):
-                (
-                  <RangePicker
-                    value={[dates[0], dates[1]]}
-                    allowClear={false}
-                    format="YYYY-MM-DD"
-                    onChange={(dates) => {
-                      if (dates) {
-                        setDates(dates as Moment[]);
-                      }
-                    }}
-                    style={datePickerStyle}
-                    disabledDate={(current) => current > max}
-                  />
-                )
-            }
-          </section>
+    <div className={'flex h-full flex-col p-4 md:p-8'}>
+      <SectionContainer
+        className="flex h-full flex-col"
+        id={'game-record-section'}
+      >
+        <BackNavigation onClick={() => onClickToIndex()} />
 
-          <div className='h-[80vh] rounded-lg overflow-hidden overflow-x-scroll'>
-            <Table
-              fetchData={handleFetchData}
-              dataSource={records}
-              columns={columns}
-              dataCount={data?.total || 0}
-            />
-          </div>
+        <section className={'mb-4 text-left text-white'}>
+          {
+            isMobile ?
+              (<RangeDatePicker
+                min='2023-01-01'
+                max={max.format('YYYY-MM-DD')}
+                onConfirm={(values) => setDates([moment(values[0], 'YYYY-MM-DD'), moment(values[1], 'YYYY-MM-DD')])}
+                value={[dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]}
+              />) :
+              (
+                <RangePicker
+                  value={[dates[0], dates[1]]}
+                  allowClear={false}
+                  format="YYYY-MM-DD"
+                  onChange={(dates) => {
+                    if (dates) {
+                      setDates(dates as Moment[]);
+                    }
+                  }}
+                  style={datePickerStyle}
+                  disabledDate={(current) => current > max}
+                />
+              )
+          }
+        </section>
 
-        </SectionContainer>
-      </div>
-    </>
+        <div className='h-[80vh] rounded-lg overflow-hidden overflow-x-scroll'>
+          <Table
+            fetchData={handleFetchData}
+            dataSource={records}
+            columns={columns}
+            dataCount={data?.total || 0}
+          />
+        </div>
+
+      </SectionContainer>
+    </div>
   );
 };

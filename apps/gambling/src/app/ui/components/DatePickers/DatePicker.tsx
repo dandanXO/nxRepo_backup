@@ -6,7 +6,20 @@ import RMCDatePicker from "rmc-date-picker";
 import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'
 
-export const dateToString  = (date: any) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+export const dateToString = (date: any) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+
+export const datePickerStyle = {
+  padding: '4px 8px',
+  width: '250px',
+  color: 'white',
+  backgroundColor: 'var(--primary-variant)',
+  border: '1px solid rgba(255,255,255,30%)',
+  borderRadius: '4px',
+  display: 'flex',
+  gap: '10px',
+  alignItems: 'center',
+};
+
 
 export const DatePickerBlock = styled.div`
   padding: 4px 8px;
@@ -39,7 +52,7 @@ const DatePicker = ({
 
   const handleConfirm = () => {
     setOpen(false)
-    setTimeout(()=>{
+    setTimeout(() => {
       setDrawerOpen(false);
       setOpen(true)
     }, DrawerDelay)
@@ -49,7 +62,7 @@ const DatePicker = ({
   return (
     <>
       <DatePickerBlock
-        onClick={()=>setDrawerOpen(true)}
+        onClick={() => setDrawerOpen(true)}
       >
         <div>
           {value}
@@ -59,10 +72,11 @@ const DatePicker = ({
       {
         drawerOpen && (
           <Drawer
-            className='w-full bg-[var(--primary-variant)] text-white'
-            onClose={()=>{
+            // className='w-full bg-[var(--primary-variant)] text-white'
+            onClose={() => {
               setDrawerOpen(false)
-              setOpen(true)}
+              setOpen(true)
+            }
             }
             open={open}
             setOpen={setOpen}
@@ -74,15 +88,17 @@ const DatePicker = ({
             </div>
 
             <RMCDatePicker
+              className=""
               date={selectedDate}
               mode='date'
-              onDateChange={(date)=> setSelectedDate(date)}
-              minDate={min ? new Date(min): undefined}
-              maxDate={max ? new Date(max): undefined}
+              onDateChange={(date) => setSelectedDate(date)}
+              minDate={min ? new Date(min) : undefined}
+              maxDate={max ? new Date(max) : undefined}
             />
           </Drawer>
         )
       }
+
     </>
   )
 }
