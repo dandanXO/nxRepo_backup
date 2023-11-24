@@ -152,7 +152,7 @@ export const CocoLevelList = ({
                 </div>
               )
             }
-            <div className={isMobile?'italic':''}>VIP{level}</div>
+            <div>VIP{level}</div>
           </LevelButton>
         )
       })}
