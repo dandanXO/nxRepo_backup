@@ -17,6 +17,7 @@ import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
 import {HeaderMobile} from "../../../header/env/pernambucana/HeaderMobile";
 import {Header} from "../../../header/env/pernambucana/Header";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
+import { TShowToolboxConfig } from "../../index";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -71,7 +72,6 @@ type IProps = {
   isMobile: boolean;
   isShowMobileFooter: boolean;
   isShowDesktopFooter: boolean;
-  isShowToolbox: boolean;
   isShowDesktopHeader: boolean;
   isShowDesktopMenuDrawer: boolean;
   isLogin: boolean;
@@ -96,10 +96,10 @@ type IProps = {
   setOpenInitailChargeModal: (value: any) => void;
   isShowMobileHeader: boolean;
   isShowTabbar: boolean;
-  showToolbox?: boolean;
   onClickToDownload: () => void;
   onClickToOpenTelegramManager: () => void;
   isUILoading: boolean;
+  showToolboxConfig?: TShowToolboxConfig
 }
 
 export const PageTemplate = ({
@@ -109,7 +109,6 @@ export const PageTemplate = ({
                                                  isMobile,
                                                   isShowMobileFooter,
                                                   isShowDesktopFooter,
-                                                  isShowToolbox,
                                                  isShowDesktopHeader,
                                                  isLogin,
                                                  setIsLogin,
@@ -133,12 +132,11 @@ export const PageTemplate = ({
                                                  isShowInviteBonusModal,
                                                  setOpenInitailChargeModal,
                                                  isShowMobileHeader,
-                                                 showToolbox,
                                                  onClickToDownload,
                                                  onClickToOpenTelegramManager,
                                                  isShowTabbar,
                                                  isUILoading,
-
+showToolboxConfig
 }: IProps) => {
 
   return (
@@ -229,8 +227,8 @@ export const PageTemplate = ({
           )}
 
           {/*Toolbox*/}
-          {isShowToolbox && (
-            <Toolbox showToolbox={showToolbox} onClickToDownload={onClickToDownload} onClickToOpenTelegramManager={onClickToOpenTelegramManager} onClickToOpenTelegramService={onClickToOpenTelegramService}/>
+          {showToolboxConfig !== false && (
+            <Toolbox onClickToDownload={onClickToDownload} onClickToOpenTelegramManager={onClickToOpenTelegramManager} onClickToOpenTelegramService={onClickToOpenTelegramService}/>
           )}
         </div>
       </div>

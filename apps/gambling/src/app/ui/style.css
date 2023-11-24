@@ -19,6 +19,12 @@
 /*  src: url("assets/fonts/Heebo-Bold.ttf") format("truetype");*/
 /*}*/
 
+html, body, #root {
+  /*feat: 不能用vh計算有些瀏覽器會有自訂工具列, html, body, root: height: 100%*/
+  height: 100%;
+}
+
+
 html,
 body {
   /*height: 100%;*/

@@ -2,23 +2,20 @@ import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {GameTypeSectionList} from "../../../../components-bs/GameTypeSection";
+
 import {Input} from "../../../../components/Inputs/Input";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
-import {environment} from "../../../../../../environments/environment"
+
 import {IndexTabs} from "../../IndexTabs";
-import FakeBanner from "./FakeBanner.png";
+
 import {AppCarousel} from "../../Carousel";
-import styled from "styled-components";
+
 import {AppCarouselContent} from "../../Carousel/env/coco/AppCarouselContent";
 import {AppCarouselContent2} from "../../Carousel/env/coco/AppCarouselContent2";
 import {AppCarouselContent3} from "../../Carousel/env/coco/AppCarouselContent3";
 import {AppCarouselContent4} from "../../Carousel/env/coco/AppCarouselContent4";
 import {AppCarouselContent5} from "../../Carousel/env/coco/AppCarouselContent5";
-import {AppCarouselContent6} from "../../Carousel/env/coco/AppCarouselContent6";
-import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
-import { CocoTabItem } from "../../../../components/TabItem/CocoTabItem";
+
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
 import { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
