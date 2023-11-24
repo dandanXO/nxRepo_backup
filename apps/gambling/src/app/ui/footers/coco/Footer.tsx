@@ -39,9 +39,7 @@ export const Footer = (props: IFooter) => {
           'flex justify-center text-white p-4 pb-[80px]',
           "bg-[var(--unknown)]",
         )}>
-          <div className={"flex flex-col"}>
-
-
+          <div className={"flex flex-col px-4"}>
 
             <div className={"mb-2"}>
               <section className={"flex flex-col items-start"}>
@@ -54,7 +52,7 @@ export const Footer = (props: IFooter) => {
                     })
                  }}
                 >
-                  <span className={"font-text-gray-500 font-extrabold"}>Jogo</span>
+                  <span className={"text-[var(--white)"}>Jogo</span>
                   {!footerExpands.gameTypes ? <DownOutlined /> : <UpOutlined />}
                 </button>
 
@@ -82,7 +80,7 @@ export const Footer = (props: IFooter) => {
                     })
                   }}
                 >
-                  <span className="relative z-10 font-extrabold">Ajuda</span>
+                  <span className="relative z-10 text-[var(--white)]">Ajuda</span>
 
                   {!footerExpands.helpers ? <DownOutlined /> : <UpOutlined />}
                   <div className="absolute bottom-0 left-0 w-full h-0.5" style={{ transform: 'translateY(50%)'}} />
@@ -99,7 +97,7 @@ export const Footer = (props: IFooter) => {
               </section>
             </div>
 
-            <section className={""}>
+            <section className={"mt-2 text-[var(--text-tertiary)]"}>
 
               <div className={cx("", {
 
@@ -162,7 +160,7 @@ export const Footer = (props: IFooter) => {
           <div className={"flex gap-3 w-11/12 mt-3"}>
 
               <section className={"flex flex-col gap-3 w-1/12 items-start"}>
-                <div className='text-gray-500'>Jogo</div>
+                <div className='text-[var(--white)'>Jogo</div>
                 {
                   ["Salão", ...label].map((gameName: string, index: number) => {
                     return (
@@ -173,7 +171,7 @@ export const Footer = (props: IFooter) => {
               </section>
 
               <section className={"flex flex-col gap-3 w-3/12 items-start"}>
-                <div className=''>Ajuda</div>
+                <div className='text-[var(--white)'>Ajuda</div>
                 <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                 <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
                 <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
