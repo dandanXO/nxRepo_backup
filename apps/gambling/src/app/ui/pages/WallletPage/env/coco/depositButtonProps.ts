@@ -10,7 +10,6 @@ export const depositButtonProps = ({
   isMobile,
   rate,
 }: IdepositButtonProps) => {
-  console.log(rate)
 
   const rechargeStyle = 
   `
