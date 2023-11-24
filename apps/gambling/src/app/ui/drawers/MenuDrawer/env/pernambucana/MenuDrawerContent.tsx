@@ -2,18 +2,15 @@ import cx from "classnames";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {environment} from "../../../../../../environments/environment";
-import styled from "styled-components";
-import {BackgroundButton} from "../../../../components/Buttons/BackgroundButton";
-import {useState} from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useLocation, useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {DepositButton} from "../../../../components/Buttons/DepositButton";
-import {CashBackButton} from "../../../../components/Buttons/CashBackButton";
+import {DepositButton} from "../../../../components/Buttons/BackgroundButton/DepositButton";
+import {CashBackButton} from "../../../../components/Buttons/BackgroundButton/CashBackButton";
 import {DrawerButton} from "../../../../components/Buttons/DrawerButton";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import {HomeButton} from "../../../../components/Buttons/HomeButton";
+import {HomeButton} from "../../../../components/Buttons/BackgroundButton/HomeButton";
 
 export const MenuDrawerContent = () => {
   const location = useLocation();

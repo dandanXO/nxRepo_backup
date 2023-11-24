@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { formatMoney } from "../../../../utils/formatMoney";
+import {PopoverDepositButton} from "../../../../components/Buttons/env/coco/PopoverDepositButton";
+import {PopoverWithdrawButton} from "../../../../components/Buttons/env/coco/PopoverWithdrawButton";
 
 const Container = styled.div`
   background: rgb(from var(--primary-assistant) r g b / 20%);
@@ -34,22 +36,12 @@ export const UserInfoStatusPopoverBalanceInfo = ({
         <div className='w-1/2 px-3 pb-4 pt-2 flex flex-col gap-2'>
           <div className='text-lg'>R$ {formatMoney(totalBalanceSheetValue)}</div>
           <div >Balanço Total</div>
-          <button
-            className='w-full bg-gradient-to-r from-[var(--button-deposit-from)] to-[var(--button-deposit-to)] py-[10px] rounded-lg'
-            onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
-          >
-            Depósito
-          </button>
+          <PopoverDepositButton onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}/>
         </div>
         <div className='w-1/2 px-3 pb-4 pt-2 flex flex-col gap-2'>
           <div className='text-lg'>R$ {formatMoney(totalReasableValue)}</div>
           <div >Retirável Total</div>
-          <button
-            className='w-full bg-gradient-to-r from-[var(--button-withdraw-from)] to-[var(--button-withdraw-to)] py-[10px] rounded-lg'
-            onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
-          >
-            Retirar
-          </button>
+          <PopoverWithdrawButton onClick={()=>navigate(PageOrModalPathEnum.WalletPage)} />
         </div>
       </Container>
     </div>

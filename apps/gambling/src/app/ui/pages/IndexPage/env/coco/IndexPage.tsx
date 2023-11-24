@@ -2,25 +2,22 @@ import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {GameTypeSectionList} from "../../../../components-bs/GameTypeSection";
+
 import {Input} from "../../../../components/Inputs/Input";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
-import {environment} from "../../../../../../environments/environment"
+
 import {IndexTabs} from "../../IndexTabs";
-import FakeBanner from "./FakeBanner.png";
+
 import {AppCarousel} from "../../Carousel";
-import styled from "styled-components";
+
 import {AppCarouselContent} from "../../Carousel/env/coco/AppCarouselContent";
 import {AppCarouselContent2} from "../../Carousel/env/coco/AppCarouselContent2";
 import {AppCarouselContent3} from "../../Carousel/env/coco/AppCarouselContent3";
 import {AppCarouselContent4} from "../../Carousel/env/coco/AppCarouselContent4";
 import {AppCarouselContent5} from "../../Carousel/env/coco/AppCarouselContent5";
-import {AppCarouselContent6} from "../../Carousel/env/coco/AppCarouselContent6";
-import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
-import { CocoTabItem } from "../../../../components/TabItem/CocoTabItem";
+
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
@@ -30,6 +27,7 @@ import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
+import { GameSearchModal } from "../../../../modals/GameSearchModal";
 
 
 export type TTotalFavoriteLocalState = {
@@ -71,6 +69,7 @@ export const IndexPage = ({
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
   const { isLogin } = useSelector((state: RootState) => state.app);
+  const [isSearch, setIsSearch] = useState(false);
 
   const {onClickToSearch} = usePageNavigate();
 
@@ -94,6 +93,7 @@ export const IndexPage = ({
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
         // "p-4": !isMobile,
       })}>
+        {isSearch && <GameSearchModal onClose={()=>setIsSearch(false)}/>}
         {isMobile && <CompanySloganLabel/>}
         <AppCarousel>
           <AppCarouselContent/>
@@ -124,16 +124,18 @@ export const IndexPage = ({
         )}
       >
         {isMobile ? (
+
           <div className={""}>
             <div className={"whitespace-nowrap"}>
               <DragScrollContainer className="flex flex-row items-center">
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
-                <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType}/>
+                <IndexTabs hideIcon={true} activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
                 {/* </section> */}
               </DragScrollContainer>
             </div>
           </div>
-          ): (
+
+        ) : (
             <div className={"flex flex-row justify-center items-baseline"}>
               <div className="grow min-w-[100px] mr-2">
                 <ScrollTab className="items-center">
@@ -141,7 +143,7 @@ export const IndexPage = ({
                 </ScrollTab>
               </div>
 
-              <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]">
+              <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={()=>setIsSearch(true)}>
                 {/*NOTICE: refactor me*/}
                 <Input
                   pureContainer={true}
@@ -165,7 +167,7 @@ export const IndexPage = ({
 
       {/*SearchInput*/}
       {isMobile ? (
-        <Container y={false} className="bg-[var(--background-primary)] pt-2" onClick={handleToSearchPage}>
+        <Container y={false} className="bg-[var(--background-primary)] pt-2" onClick={()=>setIsSearch(true)}>
           {/*NOTICE: refactor me*/}
           <Input
             pureContainer={true}

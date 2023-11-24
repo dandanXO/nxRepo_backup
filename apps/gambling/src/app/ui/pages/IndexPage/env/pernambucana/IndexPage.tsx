@@ -68,7 +68,7 @@ export const IndexPage = ({
         {/*遊戲列表背景*/}
         {isMobile ? (
           allGameList !== undefined && allGameList.map((i: any, index: number) => {
-            return <GameTypeSectionList key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClick={()=>navigate(PageOrModalPathEnum.IndexSlotPage)} />
+            return <GameTypeSectionList isLatestItem={allGameList.length - 1 === index} key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClick={()=>navigate(PageOrModalPathEnum.IndexSlotPage)} />
           })
         ) : (
             <section className="flex flex-col bg-[rgba(1,62,66,0.6)] ml-20 p-4 rounded-lg " style={{ border: '1px solid #2CFD99' }}>

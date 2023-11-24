@@ -20,15 +20,14 @@ const TermsOfServicePage = () => {
     <div className='text-white mx-4 my-0 md:mx-[6vw] md:my-5 text-xs md:text-base'>
       <div className='relative mt-5 md:mt-0'>
         <BackNavigation
-          title={isMobile ? (<div></div>): undefined}
+          title={isMobile ? (<div className='ml-14 font-medium text-lg'>Termos de Serviço</div>): undefined}
           onClick={()=>navigate(PageOrModalPathEnum.IndexPage)}
         />
-        { isMobile && <div className='absolute top-0 left-[50%] -translate-x-[50%] font-medium text-lg leading-5'>Service Terms</div>}
       </div>
 
       {
         !isMobile && (
-          <div className='text-2xl my-4 text-center'>Terms and conditions of use and services</div>
+          <div className='text-2xl my-4 md:my-8 text-center'>Termos de Serviço</div>
         )
       }
 

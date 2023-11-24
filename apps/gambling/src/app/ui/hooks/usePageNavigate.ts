@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
 import {appSlice} from "../../reduxStore/appSlice";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+import { GameItem } from "../components-bs/GameTypeSection";
 
 export const usePageNavigate = () => {
   const navigate = useNavigate();
@@ -102,6 +103,14 @@ export const usePageNavigate = () => {
   const onClickToPrivacyAgreement = () => {
     navigate(PageOrModalPathEnum.PrivacyAgreementPage)
   }
+
+  const onClickGameItem = (item: GameItem) => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(`${PageOrModalPathEnum.GamePage}?gameId=${item.gameId}&label=${item.type === "null" ? item.label : item.type}`)
+    }
+  }
   return {
     onClickToIndex,
     onClickToSlot,
@@ -117,5 +126,6 @@ export const usePageNavigate = () => {
     onClickToGameRecord,
     onClickToSetting,
     onClickToPrivacyAgreement,
+    onClickGameItem
   }
 }

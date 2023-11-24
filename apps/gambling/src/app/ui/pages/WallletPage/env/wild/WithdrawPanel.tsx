@@ -3,11 +3,11 @@ import Select from 'react-select';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {SectionContainer} from "../../../../components/container/SectionContainer";
 import {Input} from "../../../../components/Inputs/Input";
-import {ButtonPro} from "../../../../components/Buttons/Button";
 import {tcx} from "../../../../utils/tcx";
 import {MobileInput} from "../../../../components/Inputs/MobileInput";
 import {WithdrawNoticeSection} from './WithdrawNoticeSection';
 import {IWithdrawPanelCommon} from "../../WithdrawPanel";
+import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
 
 
 export const WithdrawPanel = (props: IWithdrawPanelCommon) => {

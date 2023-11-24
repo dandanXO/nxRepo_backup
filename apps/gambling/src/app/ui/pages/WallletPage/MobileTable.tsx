@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import { formatMoney } from "../../utils/formatMoney";
+import { CopyIcon } from '../../components/Icons/CopyIcon';
 
 const Container = styled.div`
   /* background: rgba(255, 255, 255, 0.1); */
@@ -57,7 +58,7 @@ export const DepositMobileTable = () => {
                 }
               >
                 <span>ID da ordem: {record.id}</span>
-                <CopyOutlined className={'text-main-primary-main'} />
+                <CopyIcon className={'text-main-primary-main'} copyText={record.id}/>
               </div>
 
               <div

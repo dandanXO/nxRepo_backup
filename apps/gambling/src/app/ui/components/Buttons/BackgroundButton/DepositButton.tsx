@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {BackgroundButton} from "./BackgroundButton";
-import {environment} from "../../../../environments/environment";
+import {BackgroundButton} from "../BackgroundButton";
+import {environment} from "../../../../../environments/environment";
 
 export const DepositButton = styled(BackgroundButton)`
     //background: url(assets/${environment.assetPrefix}/btn_FirstDeposit.png) no-repeat center/100%;

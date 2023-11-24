@@ -22,7 +22,7 @@ export const CopyIcon = (props: ICopyIcon) => {
     });
   };
   return (
-    <button className={cx('p-2 hover:rounded-full hover:bg-[rgba(255,255,255,0.7)]')} onClick={onClickToCopy}>
+    <button className={cx('hover:rounded-full hover:bg-[rgba(255,255,255,0.7)]')} onClick={onClickToCopy}>
       {contextHolder}
       {icon ? icon : <img className={cx(`w-[24px] h-[24px]`, className)} src={`assets/${environment.assetPrefix}/icon=copy.png`} alt="" />}
     </button>

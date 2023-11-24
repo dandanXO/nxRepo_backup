@@ -60,7 +60,16 @@ export const IndexPage = () => {
 
   const renderAllGameList = () => {
     return allGameList !== undefined && allGameList.map((i: any, index: number) => {
-      return <GameTypeSectionList  key={index} gameTypeName={i.gameType} data={i.data.games} onClick={() => setActiveTab(i.gameType)} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
+      return (
+        <GameTypeSectionList
+          isLatestItem={allGameList.length - 1 === index}
+          key={index}
+          gameTypeName={i.gameType}
+          data={i.data.games}
+          onClick={() => setActiveTab(i.gameType)}
+          totalFavoriteLocalState={totalFavoriteLocalState}
+          setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
+      )
     })
   }
 
@@ -78,20 +87,19 @@ export const IndexPage = () => {
     }
 
     return list.map(({subGameType,games}: any, index: number) => {
-      return <GameTypeSectionList key={index} gameTypeName={subGameType} data={games} onClick={() => setViewType(subGameType)} isViewAll={viewType!==''} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} setViewType={setViewType}/>
+      return <GameTypeSectionList isLatestItem={list.length - 1 === index} key={index} gameTypeName={subGameType} data={games} onClick={() => setViewType(subGameType)} isViewAll={viewType!==''} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} setViewType={setViewType}/>
     })
   }
 
   const gameList = () => {
     if (searchInput !== '') {
       return searchResults.length > 0
-        ? <GameTypeSectionList gameTypeName={'null'} data={searchResults} onClick={() => navigate(PageOrModalPathEnum.IndexSlotPage)} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
+        ? <GameTypeSectionList isLatestItem={true} gameTypeName={'null'} data={searchResults} onClick={() => navigate(PageOrModalPathEnum.IndexSlotPage)} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
         : <></>
     } else {
       return (activeTab === "Todos" || activeTab === "Salão") ? renderAllGameList() : renderTypeGameList()
     }
   }
-
 
   useEffect(() => {
     gameList();

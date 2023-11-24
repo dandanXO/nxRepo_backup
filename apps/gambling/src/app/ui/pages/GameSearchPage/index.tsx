@@ -39,7 +39,7 @@ export const GameSearchPage = () => {
   const gameList = () => {
     if (searchInput.data !== '') {
       if (searchResults.length > 0) {
-        return <GameTypeSectionList totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={'null'} data={searchResults} />
+        return <GameTypeSectionList isLatestItem={true} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={'null'} data={searchResults} />
       } else {
         return <></>
       }

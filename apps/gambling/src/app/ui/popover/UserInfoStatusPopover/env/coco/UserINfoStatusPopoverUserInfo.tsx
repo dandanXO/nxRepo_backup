@@ -36,9 +36,9 @@ export const UserINfoStatusPopoverUserInfo = () => {
         </div>
       </div>
 
-      <button onClick={()=>setOpenLogoutPopover(true)}>
+      <a onClick={()=>setOpenLogoutPopover(true)}>
         <SignoutICON/>
-      </button>
+      </a>
     </div>
   )
 }

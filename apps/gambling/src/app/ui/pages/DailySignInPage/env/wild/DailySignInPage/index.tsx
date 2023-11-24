@@ -12,6 +12,7 @@ import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRouterRules";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
+import {ViewRecordButton} from "../../../../../components/Buttons/env/coco/ViewRecordButton";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -431,11 +432,7 @@ const CocoDailySignInPage = ({
             <div className='mt-3 mb-[30px] my-auto text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </VIPRight>
 
-          <button
-            className='absolute bottom-[6%] right-[7%] text-white text-xl z-20'
-            onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}
-          >{'visualizar registros >'}
-          </button>
+          <ViewRecordButton onClick={()=>navigate(PageOrModalPathEnum.DailySingInRecordPage)}/>
 
           <VIPIcon>
             <ResponsiveContainer>

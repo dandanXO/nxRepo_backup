@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {BackgroundButton} from "./BackgroundButton";
+import {BackgroundButton} from "../BackgroundButton";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {environment} from "../../../../environments/environment";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {environment} from "../../../../../environments/environment";
 
 const StyledWebsiteButton = styled(BackgroundButton)`
   background: url(assets/${environment.assetPrefix}/group_di.png) no-repeat center/400px 80px;

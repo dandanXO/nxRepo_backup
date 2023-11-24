@@ -13,6 +13,7 @@ import {InfoCircleOutlined, PhoneOutlined, UserOutlined,} from "@ant-design/icon
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
+import {EditButton} from "../../../../components/Icons/EditButton";
 
 
 type IProps = {
@@ -67,23 +68,7 @@ export const SettingPage = ({
             </div>
             <div className='flex gap-2 items-center'>
               <div>{nickname}</div>
-              <button
-                className={tcx(
-                  'flex items-center',
-                  ['bg-red-600 rounded-3xl px-3 bg-gradient-to-r from-[#FFA305] to-[#FFCC5A]', !isMobile]
-                )}
-                onClick={()=> setEditing(true)
-              }>
-                {
-                  isMobile ? (
-                    <img
-                      className='w-[20px] h-[20px]'
-                      alt='edit'
-                      src={`assets/${environment.assetPrefix}/ic_account_edit.png`}
-                    />
-                  ): 'Editar'
-                }
-              </button>
+              <EditButton onClick={()=> setEditing(true)}/>
             </div>
             {/*<ViewButton*/}
             {/*  onClick={() => setEditing(true)}*/}

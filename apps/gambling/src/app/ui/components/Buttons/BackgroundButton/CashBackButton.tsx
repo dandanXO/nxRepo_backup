@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {BackgroundButton} from "./BackgroundButton";
+import {BackgroundButton} from "../BackgroundButton";
 
 export const CashBackButton = styled(BackgroundButton)`
   background: linear-gradient(180deg,#8692FF 0%,#55F1D5 100%);

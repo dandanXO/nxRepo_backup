@@ -13,6 +13,7 @@ import {Avatar} from "../../../components/Avatar";
 import {AvatarAccountInfo} from "../../../components/AvatarAccountInfo";
 import {CompanyButton} from "./CompanyButton";
 import {WebsiteLogo} from "./WebsiteLogo";
+import {NotificationAnimationIcon} from "../../../components/Icons/animation/NotificationAnimationIcon";
 
 
 const Notification = styled.section`
@@ -77,23 +78,20 @@ export const Header = (props: IHeader) => {
 
 
           <section className={"relative mr-4"}>
-            <button onClick={() => {
+            <div onClick={() => {
               props.onClickToOpenNotificationDrawer();
             }}>
-              <Notification>
-                <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"notification"} src={`assets/${environment.assetPrefix}/ic_notification.png`}/>
-                {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
-              </Notification>
-            </button>
+              <NotificationAnimationIcon messageCount={messageCount}/>
+            </div>
           </section>
 
-          <section className={""} onClick={() => {
-            props.onClickToChangeLogoutPopover(!props.openLogoutPopover);
-          }}>
-            <button>
-              <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"logout"} src={`assets/${environment.assetPrefix}/ic_signout.png`}/>
-            </button>
-          </section>
+          {/*<section className={""} onClick={() => {*/}
+          {/*  props.onClickToChangeLogoutPopover(!props.openLogoutPopover);*/}
+          {/*}}>*/}
+          {/*  <button>*/}
+          {/*    <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"logout"} src={`assets/${environment.assetPrefix}/ic_signout.png`}/>*/}
+          {/*  </button>*/}
+          {/*</section>*/}
 
         </section>
       )}

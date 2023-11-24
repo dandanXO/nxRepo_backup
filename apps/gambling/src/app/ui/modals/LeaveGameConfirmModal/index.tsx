@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { tcx } from "../../utils/tcx";
 import { CheckBox } from "../../components/CheckBox";
+import {GameLeaveCancelButton} from "../../components/Buttons/GameLeaveCancelButton";
+import {GameLeaveConfirmButton} from "../../components/Buttons/GameLeaveConfirmButton";
 
 interface ILeaveGameConfirmModalProps {
   onConfirm: (addFavorite: boolean) => void
@@ -34,8 +36,8 @@ export const LeaveGameConfirmModal = ({
         </div>
 
         <div className={tcx('flex gap-4', ['gap-[14px]', isMobile])}>
-          <button className='rounded-lg w-full py-3 bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)]' onClick={onClose}>Concelar</button>
-          <button className='rounded-lg w-full py-3 bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]' onClick={()=>onConfirm(addFavorite)}>Confirme</button>
+          <GameLeaveCancelButton onClick={onClose}/>
+          <GameLeaveConfirmButton onClick={()=>onConfirm(addFavorite)} />
         </div>
       </div>
     </div>
