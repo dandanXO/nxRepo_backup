@@ -369,7 +369,7 @@ export const PageTemplate = (props: IPage) => {
       )}
 
       {
-        isShowDepositModal && (
+        isShowDepositModal && !isShowTelegramModal && !isShowInviteBonusModal && (
           <DepositAdvertisementModal
             close={()=>dispatch(appSlice.actions.setShowDepositModal(false))}
             onConfirm={()=>{
@@ -380,7 +380,7 @@ export const PageTemplate = (props: IPage) => {
         )
       }
 
-      {isShowTelegramModal && (
+      {isShowTelegramModal && !isShowInviteBonusModal && (
         <TelegramContactModal close={() => {
           dispatch(appSlice.actions.setShowTelegramModal(false))
         }} toTelegram={() => {
