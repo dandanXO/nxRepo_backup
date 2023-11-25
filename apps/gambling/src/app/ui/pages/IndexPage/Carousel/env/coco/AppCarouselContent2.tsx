@@ -29,6 +29,7 @@ export const AppCarouselContent2 = () => {
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/h5_banner_1.png`}
           />
         </div>
@@ -45,6 +46,7 @@ export const AppCarouselContent2 = () => {
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </Container>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/banner_1.png`}
           />
         </div>

@@ -28,7 +28,10 @@ export const AppCarouselContent4 = () => {
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
             Prêmio upgrade VIP<br/> Só esperando você coletar!
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`}/>
+          <img
+            className={"w-[100vw]"}
+            src={`assets/${environment.assetPrefix}/h5_banner_4.png`}
+          />
         </div>
       ) : (
         <div
@@ -43,6 +46,7 @@ export const AppCarouselContent4 = () => {
             Prêmio upgrade VIP<br/> Só esperando você coletar!
           </Container>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/banner_4.png`}
           />
         </div>

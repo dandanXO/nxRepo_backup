@@ -29,6 +29,7 @@ export const AppCarouselContent3 = () => {
             A maior recompensa<br/>para uma pessoa é R$20
           </p>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/h5_banner_3.png`}
           />
         </div>
@@ -45,6 +46,7 @@ export const AppCarouselContent3 = () => {
             A maior recompensa<br/>para uma pessoa é R$20
           </Container>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/banner_3.png`}
           />
         </div>
