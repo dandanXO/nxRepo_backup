@@ -46,6 +46,7 @@ import TermsOfServicePage from "../pages/TermsOfServicePage";
 import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
 import {IUserInfo} from "../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
+import {userLogout} from "../../usecase/userLogout";
 
 
 export const AppRouter = () => {
@@ -153,7 +154,12 @@ export const AppRouter = () => {
         // dispatch(appSlice.actions.setUserVIPLevel((response as any).data.data.user_info.vip_level));
 
         const url = AppLocalStorage.getItem(AppLocalStorageKey.ip);
-        if(url && token) connect(url, token);
+        console.log("ws.url", url);
+        if((url && url.indexOf("ws") > -1 || url && url?.indexOf("wss") > -1) && url !=="undefined" && url && token) {
+          connect(url, token);
+        } else {
+          userLogout();
+        }
         dispatch(appSlice.actions.setIsLogin(true));
         dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
         dispatch(appSlice.actions.setShowTelegramModal(true))
