@@ -19,13 +19,17 @@ export type IInput = {
   errorMessage?: string;
   outerSuffix?: React.ReactNode;
   pureContainer?: boolean;
-
+  disable?: boolean;
+  onClick?: () => void;
 }
 
 const BaseInput = (props: IInput) => {
   // const inputRef = useRef();
   const [focus, setFocus] = useState(false);
   const isPureContainer = typeof props.pureContainer == "undefined" ? false : props.pureContainer;
+  const isDisable = typeof props.disable === "undefined" ? false : props.disable
+  // console.log("isDisable props.placeholder", isDisable, props.placeholder);
+
   return (
     <div className={cx({
       "mb-3 md:mb-4": !isPureContainer
@@ -46,18 +50,22 @@ const BaseInput = (props: IInput) => {
           {props.children ? (props.children) : (
             <input
               // ref={inputRef as any}
-              className={cx(props.inputClassName, "bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder:text-[var(--input-placeholder-color)]")}
+              onClick={() => props.onClick && props.onClick()}
+              className={cx(props.inputClassName,
+                "bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder:text-[var(--input-placeholder-color)]", {
+                "select-none": isDisable
+                })}
               type={props.type || "text"}
               placeholder={props.placeholder}
-              value={props.value}
+              value={isDisable ? "" :props.value}
               onFocus={() => {
-                setFocus(true)
+                if(!isDisable) setFocus(true)
               }}
               onBlur={() => {
-                setFocus(false)
+                if(!isDisable) setFocus(false)
               }}
               onChange={(event: any) => {
-                props.onChange && props.onChange(event)
+                if(!isDisable) props.onChange && props.onChange(event)
               }}
             />
           )}
