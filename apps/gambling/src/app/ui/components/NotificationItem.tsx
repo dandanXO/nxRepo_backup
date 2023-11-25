@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const NotificationItemContainer = styled.div.attrs((props) => ({
-  className: 'text-lg',
+  className: '',
 }))<{
   last?: boolean;
   first?: boolean;

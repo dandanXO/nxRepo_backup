@@ -34,10 +34,10 @@ const FixedToolContainer = styled.div`
 `
 
 export type IToolbox = {
-  onClickToDownload: () => void;
-  onClickToOpenTelegramManager: () => void;
-  onClickToOpenTelegramService: () => void;
   showToolboxConfig?: TShowToolboxConfig;
+  onClickToDownload: () => void;
+  onClickToOpenTelegramService: () => void;
+  onClickToOpenTelegramManager: () => void;
 }
 
 const ToolButton = renderByPlatform({
@@ -96,20 +96,21 @@ export const Toolbox = (props: IToolbox) => {
                     onClick={props.onClickToDownload}>
                     <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
                   </ToolButton>
-
                 </FixedToolContainer>
               )
             }
 
             {
               (desktopShowCustomerService || desktopShowManage) && (
-                <FixedToolContainer className={"flex flex-col justify-center items-center p-4"}>
+                <FixedToolContainer className={"flex flex-col justify-center items-center p-4 text-center"}>
                   <div className={"text-xs font-lights mb-2 whitespace-nowrap"}>Contate-nos</div>
                   {
                     desktopShowCustomerService && (
                       <div className={"mb-2"}>
                         <ToolButton
-                          onClick={props.onClickToOpenTelegramService}>
+                          className={"mb-1"}
+                          onClick={props.onClickToOpenTelegramService}
+                        >
                           <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
                         </ToolButton>
                         <div className={"text-xs font-light"}>Serviço</div>
@@ -121,7 +122,9 @@ export const Toolbox = (props: IToolbox) => {
                     desktopShowManage && (
                       <div className={""}>
                         <ToolButton
-                          onClick={props.onClickToOpenTelegramManager}>
+                          className={"mb-1"}
+                          onClick={props.onClickToOpenTelegramManager}
+                        >
                           <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
                         </ToolButton>
                         <div className={"text-xs font-lights"}>Gerente</div>
