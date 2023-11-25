@@ -42,6 +42,9 @@ export type IGameTypeSectionList = {
 }
 
 
+const MobileGameNumber = 15;
+const DesktopGameNumber = 30;
+
 export const GameTypeSectionList = (props: IGameTypeSectionList) => {
 
   const { isMobile } = useBreakpoint();
@@ -51,11 +54,11 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const MainGameList = isMobile ? MobileGameList : GameList
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem
 
-  const [listSize, setListSize] = useState(isMobile ? 9 : 20);
+  const [listSize, setListSize] = useState(isMobile ? MobileGameNumber : DesktopGameNumber);
   const displayedItems = props?.data && props?.data.slice(0, listSize);
 
   const loadMore = () => {
-    const number = isMobile ? 9 : 20;
+    const number = isMobile ? MobileGameNumber : DesktopGameNumber;
     setListSize(listSize + number); // 每次點擊按鈕增加10筆
   }
 
