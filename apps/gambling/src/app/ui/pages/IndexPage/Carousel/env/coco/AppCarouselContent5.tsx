@@ -30,6 +30,7 @@ export const AppCarouselContent5 = () => {
             <span>Check-in todos os dias <br/> O dinheiro não para!</span>
           </p>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/h5_banner_5.png`}
           />
         </div>
@@ -46,6 +47,7 @@ export const AppCarouselContent5 = () => {
             <span>Check-in todos os dias <br/> O dinheiro não para!</span>
           </Container>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/banner_5.png`}
           />
         </div>

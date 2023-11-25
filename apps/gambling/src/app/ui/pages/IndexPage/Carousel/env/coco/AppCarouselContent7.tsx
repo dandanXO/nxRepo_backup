@@ -29,6 +29,7 @@ export const AppCarouselContent7= () => {
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/h5_banner_7.png`}
           />
         </div>
@@ -45,6 +46,7 @@ export const AppCarouselContent7= () => {
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </Container>
           <img
+            className={"w-[100vw]"}
             src={`assets/${environment.assetPrefix}/banner_7.png`}
             // className="rounded-box"
           />
