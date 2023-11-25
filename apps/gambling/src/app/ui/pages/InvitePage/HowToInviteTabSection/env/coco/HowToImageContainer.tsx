@@ -32,6 +32,7 @@ export const HowToImage = (props: any) => {
         <div className={`text-3xl font-extrabold text-[var(--text-popup)] mb-2 sm:text-4xl sm:font-bold sm:text-white sm:mb-2.5`}>Como convidar usuários?</div>
         <HowToImageText />
       </div>
+
       <div className={cx("w-full flex flex-col text-center sm:text-left sm:flex-row sm:rounded-2xl sm:pb-4 sm:pt-0.5 sm:px-8", {
         'border border-solid border-[var(--stroke-block)] bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]': !isMobile
       })}>
@@ -44,6 +45,7 @@ export const HowToImage = (props: any) => {
           <img className={"w-[400px]"} src={`assets/${environment.assetPrefix}/pic_social_media_logo.png`} />
         </div>
       </div>
+
       {!isMobile && <div className={`text-4xl font-bold text-white my-8 w-full`}>Instruções diárias de recompensa de comissão</div>}
     </HowToImageContainer>
   )

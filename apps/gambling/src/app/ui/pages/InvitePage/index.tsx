@@ -11,6 +11,7 @@ import {TabItem, Tabs} from "../../components/TabItem/TabItem";
 import {Container} from "../../components/container/Container";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
+import cx from "classnames";
 
 // const InviteCommmonButton = styled.div`
 //   color: #fff;
@@ -77,13 +78,38 @@ export const InvitePage = () => {
         <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
           <div>
             <Tabs className={"game-type-tab-list"}>
-              <TabItem mode={"howto"} className={""} name={"Como convidar"} active={panelMode === "howto"} size={"big"} onClick={() => {
-                setPanelMode("howto")
-              }}
+              <TabItem
+                mode={"howto"}
+                // pureColor={true}
+                background={"--var(primary-variant)"}
+                // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
+                activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
+                className={cx("px-6",{
+                  "rounded-md": panelMode === "howto"
+                })}
+                name={isMobile ? "Convidar" : "Como convidar"}
+                active={panelMode === "howto"}
+                size={"big"}
+                onClick={() => {
+                  setPanelMode("howto")
+                }}
               />
-              <TabItem mode={"data"} className={""} name={"Convite diariamente"} active={panelMode === "daily"} size={"big"} onClick={() => {
-                setPanelMode("daily")
-              }}/>
+              <TabItem
+                mode={"data"}
+                // pureColor={true}
+                background={"--var(primary-variant)"}
+                // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
+                activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
+                className={cx("px-6",{
+                  "rounded-md": panelMode === "daily"
+                })}
+                name={isMobile ? "Dados diários" :"Convite diariamente"}
+                active={panelMode === "daily"}
+                size={"big"}
+                onClick={() => {
+                  setPanelMode("daily")
+                }}
+              />
             </Tabs>
           </div>
 

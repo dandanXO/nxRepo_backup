@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { ITabItem } from "../../TabItem";
 import { environment } from "../../../../../../environments/environment";
-import howToActiveImg from "./howto-tab-active.png"
-import howToInactiveImg from "./howto-tab-inactive.png"
-import dataActiveImg from "./data-tab-active.png";
-import dataInactiveImg from "./data-tab-inactive.png";
+// import howToActiveImg from "./howto-tab-active.png"
+// import howToInactiveImg from "./howto-tab-inactive.png"
+// import dataActiveImg from "./data-tab-active.png";
+// import dataInactiveImg from "./data-tab-inactive.png";
+import howToActiveImg from "./icon=add-user.png"
+import howToInactiveImg from "./icon=add-user.png"
+import dataActiveImg from "./icon=bar-chart.png";
+import dataInactiveImg from "./icon=bar-chart.png";
 
 const StyledTabItemNoICON = styled.button<ITabItem>`
   //min-width: 96px;
@@ -31,18 +35,18 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
           // background-size: 100% 100%;
           // background-position:  center;
           color: #ffffff;
-          &:after {
-            display: block;
-            content: "";
-            width: 40px;
-            height: 3px;
-            bottom: 0px;
-            transform: translateX(50%) translateX(-50%);
-            transition-duration: 0.3s;
-            background: #0691f5;
-            box-shadow: 0 0 10px #0272c2;
-            margin: auto;
-          }
+          // &:after {
+          //   display: block;
+          //   content: "";
+          //   width: 40px;
+          //   height: 3px;
+          //   bottom: 0px;
+          //   transform: translateX(50%) translateX(-50%);
+          //   transition-duration: 0.3s;
+          //   background: #0691f5;
+          //   box-shadow: 0 0 10px #0272c2;
+          //   margin: auto;
+          // }
         `;
     } else {
       if (props.active) {

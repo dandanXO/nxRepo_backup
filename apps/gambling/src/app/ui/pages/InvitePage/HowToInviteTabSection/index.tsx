@@ -25,7 +25,6 @@ import { QuestionContent as PQuestionContent } from "./env/pernambucana/Question
 interface IHowToInviteTabSection {
   inviteUrl: string;
 }
-
 export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
   return (
