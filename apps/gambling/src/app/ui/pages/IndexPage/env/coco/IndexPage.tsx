@@ -179,6 +179,7 @@ export const IndexPage = ({
             <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={()=>setIsSearch(true)}>
               {/*NOTICE: refactor me*/}
               <Input
+                disable={true}
                 pureContainer={true}
                 className={cx(
                   "py-0.5 px-2.5 text-xs rounded",
@@ -187,9 +188,6 @@ export const IndexPage = ({
                 inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
                 placeholder={"Pesquisar nome do jogo"}
                 prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
-                onChange={(event: any) => {
-                  setSearchInput(event.target.value)
-                }}
               />
             </div>
 
@@ -202,6 +200,7 @@ export const IndexPage = ({
         <Container y={false} className="bg-[var(--background-primary)] pt-2" onClick={()=>setIsSearch(true)}>
           {/*NOTICE: refactor me*/}
           <Input
+            disable={true}
             pureContainer={true}
             className={cx(
               "py-0.5 px-2.5 text-xs rounded",
@@ -210,9 +209,6 @@ export const IndexPage = ({
             inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
             placeholder={"Por favor insira o nome do jogo"}
             prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
-            onChange={(event: any) => {
-              setSearchInput(event.target.value)
-            }}
           />
         </Container>
       ): null}
