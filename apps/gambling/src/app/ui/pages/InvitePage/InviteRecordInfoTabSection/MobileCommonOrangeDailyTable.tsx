@@ -36,16 +36,18 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
         <TableTabItem {...tabItemProps(props.type === "3")} active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'}>Nível 3</TableTabItem>
       </div>
 
-        {props.isProxy && (
-          <div className={"flex flex-row justify-end"}>
-            <span className={"text-base text-[#ffffff]"}>Dividends: R$ {props.records && props.records[0] && props.records[0].dividendos || 0.00}</span>
-          </div>
-        )}
+
 
         <div className={"text-[transparent] mb-2"}>
           <DatePicker onConfirm={props.onRecordDateSelect} value={props.recordDate} min={moment().subtract(1, 'days').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
         </div>
+
         <MobileTableContainer>
+          {props.isProxy && (
+            <div className={"flex flex-row justify-end"}>
+              <span className={"text-base text-[#ffffff]"}>Dividends: R$ {props.records && props.records[0] && props.records[0].dividendos || "0.00"}</span>
+            </div>
+          )}
         <div className={"flex flex-col mb-2 mt-2"}>
           <span className={"text-xl text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].totalReward || '0,00'}</span>
           <span className="text-xs font-hairline">Obter bônus</span>
