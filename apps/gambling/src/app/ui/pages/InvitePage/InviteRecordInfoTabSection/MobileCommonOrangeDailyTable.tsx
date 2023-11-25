@@ -38,7 +38,7 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
 
         {props.isProxy && (
           <div className={"flex flex-row justify-end"}>
-            <span className={"text-2xl text-[#ffffff]"}>Dividends: R$ {props.records && props.records[0] && props.records[0].dividendos || 0.00}</span>
+            <span className={"text-base text-[#ffffff]"}>Dividends: R$ {props.records && props.records[0] && props.records[0].dividendos || 0.00}</span>
           </div>
         )}
 
