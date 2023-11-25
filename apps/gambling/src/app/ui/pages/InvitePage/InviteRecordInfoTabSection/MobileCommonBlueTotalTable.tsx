@@ -76,12 +76,12 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
 
         {props.type === "1" && (
           <div className={"flex flex-row justify-around items-center mb-5"}>
-            <div className={"flex flex-col"}>
+            <div className={"flex flex-col flex-1 justify-center"}>
               <span className={"text-sm text-[#ffffff]"}>{props.data.numRecharge || 0}</span>
               <span className="text-xs font-hairline">Usuário de recarga</span>
             </div>
 
-            <div className={"flex flex-col"}>
+            <div className={"flex flex-col flex-1 justify-center"}>
               <span className={"text-sm text-[#ffffff]"}>R$ {props.data.firstRecharge}</span>
               <span className="text-xs font-hairline">Obter bônus</span>
             </div>
@@ -89,14 +89,14 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
         )}
 
         <div className={"flex flex-row justify-around mb-2"}>
-          <div className={"flex flex-col"}>
+          <div className={"flex flex-col flex-1 justify-center"}>
             <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRecharge}</span>
             <span className="text-xs font-hairline">Valor da transação do jogo</span>
           </div>
 
-          <div className={"flex flex-col"} onClick={() => setInviteBonusInfoOpen(true)}>
-            <div className='flex gap-2 items-center'>
-              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRechargeReward}</span>
+          <div className={"flex flex-col flex-1"} onClick={() => setInviteBonusInfoOpen(true)}>
+            <div className='flex items-center  justify-center'>
+              <span className={"text-sm mr-1 text-[#ffffff]"}>R$ {props.data.gameRechargeReward}</span>
               <QuestionCircleOutlined style={{ color: isCoco777bet ? 'white' : '#FF8A00' }} />
             </div>
             <span className="text-xs font-hairline">Obter bônus</span>
