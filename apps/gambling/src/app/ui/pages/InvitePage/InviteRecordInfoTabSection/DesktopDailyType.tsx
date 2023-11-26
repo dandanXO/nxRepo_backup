@@ -39,22 +39,27 @@ export const DesktopDailyType = (props: IDailyType) => {
               <tr key={index}>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.day}</td>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.numRecharge}</td>
-                {props.type === "1" && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.firstRecharge}</td>}
-                {props.isProxy && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.dividendos}</td>}
+                {props.type === "1" && (
+                  <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.firstRecharge}</td>
+                )}
+                {props.isProxy && (
+                  <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.dividendos}</td>
+                )}
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRecharge}</td>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRechargeReward}</td>
-                <td>{s.totalReward}</td>
+                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.totalReward}</td>
               </tr>
             )
           }
-          ) : (<tr>
-            <td colSpan={props.type === "1" ? 6 : 5}>
-              <div className="flex flex-col items-center p-12">
-                <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
-                <div>Nada aqui</div>
-              </div>
-            </td>
-          </tr>
+          ) : (
+            <tr>
+              <td colSpan={props.type === "1" && props.isProxy ? 7 : props.isProxy ? 6 : 5}>
+                <div className="flex flex-col items-center p-12">
+                  <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
+                  <div>Nada aqui</div>
+                </div>
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
