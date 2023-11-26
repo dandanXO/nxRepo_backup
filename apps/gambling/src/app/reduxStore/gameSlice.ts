@@ -95,7 +95,6 @@ export const gameSlice = createSlice({
        result.push(game);
        return result
      }, [])
-
       state.allGameList = allGame;
       state.typeGameList = typeGameList;
       // console.log('allGame',typeGameList)

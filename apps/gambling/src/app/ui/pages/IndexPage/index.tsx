@@ -67,6 +67,7 @@ export const IndexPage = () => {
     return allGameList !== undefined && allGameList.map((i: any, index: number) => {
       return (
         <GameTypeSectionList
+          hotGames={true}
           isLatestItem={allGameList.length - 1 === index}
           key={index}
           gameTypeName={i.gameType}
