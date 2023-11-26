@@ -1,0 +1,8 @@
+{
+  "url": "https://sentry.ttgroup.vip",
+  "dsn": "https://ced020ceb486b2331e761e06d0bd7ea6@sentry.ttgroup.vip/2",
+  "org": "sentry",
+  "project": "api-app",
+  "projectId": 2,
+  "authToken": "cce66c545bb359ea84929edcb5f50b2319bf027bd5fa2790253f43052f247f2e"
+}

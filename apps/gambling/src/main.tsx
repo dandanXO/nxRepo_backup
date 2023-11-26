@@ -1,5 +1,4 @@
-
-
+import "./app/module/sentry/index";
 import React, { StrictMode } from 'react';
 import { ErrorBoundary } from "react-error-boundary";
 

@@ -125,7 +125,7 @@ module.exports = (config, context) => {
       new webpack.DefinePlugin({
         AppInfo: {
           VERSION: JSON.stringify(gitRevisionPlugin.version()),
-          COMMITHASH: JSON.stringify(gitRevisionPlugin.commithash()),
+          COMMIT_HASH: JSON.stringify(gitRevisionPlugin.commithash()),
           BRANCH: JSON.stringify(gitRevisionPlugin.branch()),
           UI_VERSION: process.env.NODE_UI_VERSION,
         },
