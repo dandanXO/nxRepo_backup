@@ -65,29 +65,8 @@ export const IndexPage = () => {
 
   const renderAllGameList = () => {
     return allGameList !== undefined && allGameList.map((i: any, index: number) => {
-      let maximunGameItemCount = undefined;
-
-      if(activeTab === "Todos" || activeTab === "Salão") {
-        if(isMobile) {
-          if(index === 0) {
-            maximunGameItemCount = 15
-          } else {
-            maximunGameItemCount = 3
-          }
-        } else {
-          if(index === 0) {
-            maximunGameItemCount = 30
-          } else {
-            maximunGameItemCount = 6
-          }
-        }
-      }
-
-      console.log("maximunGameItemCount", maximunGameItemCount);
-
       return (
         <GameTypeSectionList
-          maxGameItemCount={maximunGameItemCount}
           isLatestItem={allGameList.length - 1 === index}
           key={index}
           gameTypeName={i.gameType}
