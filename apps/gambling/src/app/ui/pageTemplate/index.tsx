@@ -191,9 +191,6 @@ export const PageTemplate = (props: IPage) => {
     setOpenDownloadModal(!openDownloadModal);
   }
 
-  const onClickToOpenTelegramManager = () => {
-    window.open(telegramManagerUrl,'_blank')
-  }
 
   const openNotificationWithIcon = (props: IOpenNotificationWithIcon) => {
     const type = props.type || "error";
@@ -207,11 +204,16 @@ export const PageTemplate = (props: IPage) => {
   // openNotificationWithIcon('error')
   const telegramServiceId = AppLocalStorage.getItem(AppLocalStorageKey.telegramService);
   const telegramManagerId = AppLocalStorage.getItem(AppLocalStorageKey.telegramManager);
+  const telegramGroupId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
+
   const userInfoString = AppLocalStorage.getItem(AppLocalStorageKey.userInfo);
   const userInfo = userInfoString && userInfoString !== "undefined"  ? JSON.parse(userInfoString) : null;
   const user_id = userInfo?.user_id || '';
-  const telegramServiceUrl=`https://t.me/${telegramServiceId}?start=${user_id}`
-  const telegramManagerUrl=`https://t.me/${telegramManagerId}?start=${user_id}`
+
+  const telegramServiceUrl=`https://t.me/${telegramServiceId}`
+  const telegramManagerUrl=`https://t.me/${telegramManagerId}`
+  const telegramGroupUrl=`https://t.me/${telegramGroupId}?start=${user_id}`
+
 
   const location = useLocation();
   // console.log("location", location);
@@ -221,6 +223,13 @@ export const PageTemplate = (props: IPage) => {
     window.open(telegramServiceUrl,'_blank')
   }
 
+  const onClickToOpenTelegramManager = () => {
+    window.open(telegramManagerUrl,'_blank')
+  }
+
+  const onClickToOpenTelegramGroup = () => {
+    window.open(telegramGroupUrl,'_blank')
+  }
 
   return (
     <>
@@ -381,12 +390,15 @@ export const PageTemplate = (props: IPage) => {
       }
 
       {isShowTelegramModal && !isShowInviteBonusModal && (
-        <TelegramContactModal close={() => {
-          dispatch(appSlice.actions.setShowTelegramModal(false))
-        }} toTelegram={() => {
-          dispatch(appSlice.actions.setShowTelegramModal(false))
-          onClickToOpenTelegramService()
-        }}/>
+        <TelegramContactModal
+          close={() => {
+            dispatch(appSlice.actions.setShowTelegramModal(false))
+          }}
+          toTelegramGroup={() => {
+            dispatch(appSlice.actions.setShowTelegramModal(false))
+            onClickToOpenTelegramGroup();
+          }}
+        />
       )}
 
       {/*比 TelegramContactModal 還上層*/}
