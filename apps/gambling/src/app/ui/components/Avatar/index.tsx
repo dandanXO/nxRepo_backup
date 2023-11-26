@@ -33,7 +33,8 @@ export const Avatar = (props: {
           className={tcx("rounded-full",
             ["w-[44px] h-[44px] min-w-[44px] min-h-[44px]}", !props.big],
             ["w-[82px] h-[82px]", !!props.big],
-            props.className)}
+            props.className
+          )}
           alt="avatar"
           src={`assets/${environment.assetPrefix}/avatar_${userInfo.avatar || 1}.png`}
         />
