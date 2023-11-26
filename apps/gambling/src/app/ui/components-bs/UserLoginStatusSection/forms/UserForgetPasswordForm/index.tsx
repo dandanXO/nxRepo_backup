@@ -25,6 +25,7 @@ import {connect} from "../../../../../gateway/socket";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import styled from "styled-components";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 
 
 const onValidateCaptchaInput = (data: string, setCaptchaInput: any) => {
@@ -96,7 +97,8 @@ const SendSMSCodeButton = (props: IProps) => {
   if(state === "ready") {
     strState = "Enviar"
   } else if(state === "counting") {
-    strState = "Esquerda " + secondState
+    // strState = "Esquerda " + secondState
+    strState = secondState + "s"
   } else {
     strState = "Reenviar"
   }
@@ -232,8 +234,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         type={"number"}
         prefix={
           <>
-            {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
-            <PhoneSvg fill={"#6c7083"} className={"mr-2 w-[14px] h-[20px]"}/>
+            <PhoneSvg fill={"#6c7083"} className={"mr-1"}/>
             <span className={"text-[#01FF52] mr-2"}>+55</span>
           </>
         }
@@ -249,8 +250,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
       <div style={{ position: 'relative' }}>
         <Input
           type={"text"}
-          // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-          prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+          prefix={<SecuritySvg className={"mr-1"}/>}
           suffix={
             <SendSMSCodeButton
               valid={phoneInput.data.length > 0 && phoneInput.isValidation || false}
@@ -278,18 +278,13 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
 
       <Input
         type={isPasswordVisible ? 'text' : 'password'}
-        // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[20px] h-[20px]"}/>}
+        prefix={<KeySvg fill={"#6c7083"} className={"mr-1"}/>}
         suffix={(
           <div
             className="password-toggle"
             onClick={togglePasswordVisibility}
           >
-            {isPasswordVisible ? (
-              <EyeOutlined className={"text-[#8B619E]"}/>
-            ) : (
-              <EyeInvisibleOutlined className={"text-[#8B619E]"}/>
-            )}
+            <HidableEyeSvg hide={!isPasswordVisible}/>
           </div>
         )}
         placeholder={"Senha (4-12 letras e números)"}

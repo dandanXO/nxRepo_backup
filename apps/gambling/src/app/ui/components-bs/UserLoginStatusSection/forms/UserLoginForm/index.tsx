@@ -193,7 +193,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             prefix={
               <>
                 {/*<PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />*/}
-                <PhoneSvg className="mr-2" />
+                <PhoneSvg className="mr-1" />
                 <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
               </>
             }
@@ -207,7 +207,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
         <Input
             type={isPasswordVisible ? 'text' : 'password'}
             // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-            prefix={<KeySvg className={"mr-2"}/>}
+            prefix={<KeySvg className={"mr-1"}/>}
             placeholder={"Senha (4-12 letras e números)"}
             value={passwordInput.data}
             validation={passwordInput.isValidation}
