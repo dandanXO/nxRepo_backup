@@ -105,6 +105,11 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
     setIsCaptchaLoading(true);
     axios.get(`${environment.captcha}?${new Date().getTime()}`, { responseType: 'arraybuffer' }).then(res => {
       setImgSrc(`data:${res.headers['content-type']};base64,${btoa(String.fromCharCode(...new Uint8Array(res.data)))}`);
+      setCaptchaInput({
+        data: "",
+        isValidation: undefined,
+        errorMessage: "",
+      })
       if(res.headers["captcha-image-key"]) {
         const key = res.headers["captcha-image-key"];
         // console.log("captcha-image-key", key)
