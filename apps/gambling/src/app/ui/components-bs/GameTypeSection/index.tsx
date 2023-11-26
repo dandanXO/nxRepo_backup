@@ -39,12 +39,12 @@ export type IGameTypeSectionList = {
   setTotalFavoriteLocalState: Dispatch<SetStateAction<TTotalFavoriteLocalState>>;
   setViewType?:Dispatch<SetStateAction<string>>;
   isLatestItem: boolean;
-  // maxGameItemCount?: number
+  hotGames?: boolean;
 }
 
 export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const { isMobile } = useBreakpoint();
-
+  const haveHotgames = typeof props.hotGames !== "undefined" ? props.hotGames : false;
   const maximunGameItemCount = isMobile ? MobileGameNumber : DesktopGameNumber;
 
   const { onClickGameItem } = usePageNavigate();
@@ -53,18 +53,28 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const MainGameList = isMobile ? MobileGameList : GameList
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem
 
-  const [listSize, setListSize] = useState(isMobile ? MobileGameNumber : DesktopGameNumber);
+  const initialListSize = haveHotgames ? props?.data?.length : isMobile ? MobileGameNumber : DesktopGameNumber;
+
+  const [listSize, setListSize] = useState(initialListSize || 0);
   const displayedItems = props?.data && props?.data.slice(0, listSize);
 
   // console.log("props.gameTypeName", props.gameTypeName);
   // NOTE: reset by changing game brand
   useEffect(() => {
-    setListSize(isMobile ? MobileGameNumber : DesktopGameNumber);
+    if(haveHotgames) {
+      setListSize(props && props?.data && props?.data?.length || 0);
+    } else {
+      setListSize(isMobile ? MobileGameNumber : DesktopGameNumber);
+    }
   }, [props.gameTypeName])
 
   const loadMore = () => {
-    const number = isMobile ? MobileGameNumber : DesktopGameNumber;
-    setListSize(listSize + number); // 每次點擊按鈕增加10筆
+    if(haveHotgames) {
+      setListSize(props && props?.data && props?.data?.length || 0);
+    } else {
+      const number = isMobile ? MobileGameNumber : DesktopGameNumber;
+      setListSize(listSize + number); // 每次點擊按鈕增加10筆
+    }
   }
 
 
@@ -105,27 +115,30 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
           "flex flex-row flex-wrap justify-start items-center": !isMobile
         })}
       >
-        {displayedItems && displayedItems.filter((item: any, index: number) => {
-          if(typeof props.isViewAll === "undefined") {
-            if(index < maximunGameItemCount) return item;
-          } else {
-            return item;
-          }
+        {displayedItems && displayedItems
+          .filter((item: any, index: number) => {
+            if(haveHotgames) {
+              return item
+            } else if(typeof props.isViewAll === "undefined") {
+              if(index < maximunGameItemCount) return item;
+            } else {
+              return item;
+            }
+          })
+          .map((item, index) => {
 
-        }).map((item, index) => {
-
-          return (
-            <MainGameItem
-              key={index}
-              gameId={Number(item.gameId)}
-              name={item.name}
-              // imageURL={`${environment.s3URLImages}/${item.gameId}.jpg`}
-              imageURL={`https://resources.ttgroup.vip/icon/${item.gameId}-small.png`}
-              onClick={() => onClickGameItem(item)}
-              favorite={(userFavorite).includes(Number(item.gameId))}
-              onClickFavorite={() => onClickFavoriteGameItem(item)}
-            />
-          )
+            return (
+              <MainGameItem
+                key={index}
+                gameId={Number(item.gameId)}
+                name={item.name}
+                // imageURL={`${environment.s3URLImages}/${item.gameId}.jpg`}
+                imageURL={`https://resources.ttgroup.vip/icon/${item.gameId}-small.png`}
+                onClick={() => onClickGameItem(item)}
+                favorite={(userFavorite).includes(Number(item.gameId))}
+                onClickFavorite={() => onClickFavoriteGameItem(item)}
+              />
+            )
         })}
       </MainGameList>
 
