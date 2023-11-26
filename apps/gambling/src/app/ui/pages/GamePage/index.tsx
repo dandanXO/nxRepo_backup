@@ -13,6 +13,8 @@ import {GameBackNavigation} from "../../components/BackNavigation/GameBackNaviga
 import { LeaveGameConfirmModal } from "../../modals/LeaveGameConfirmModal";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
+import {appSlice} from "../../../reduxStore/appSlice";
+import {useDispatch} from "react-redux";
 
 export const GamePage = () => {
     useAllowLoginRouterRules();
@@ -82,6 +84,7 @@ export const GamePage = () => {
     const {isMobile} = useBreakpoint();
 
     useEffect(() => {
+        dispatch(appSlice.actions.setIsUILoading(true));
         const gameID = Number(gameId);
         const gameBrand = getGameBrand(Number(gameId)) //urlParam[label as keyof typeof urlParam];
         if(gameBrand) {
@@ -90,6 +93,8 @@ export const GamePage = () => {
             exitStatus: 0,
             gameId: gameID,
             gameBrand: gameBrand
+          }).finally(() => {
+            dispatch(appSlice.actions.setIsUILoading(false));
           })
         } else {
           alert("Game Brand is error")
@@ -120,6 +125,14 @@ export const GamePage = () => {
       }
     }
 
+    const dispatch = useDispatch();
+
+    // const onIframeLoadStart = () => {
+      // dispatch(appSlice.actions.setIsUILoading(true));
+    // }
+    // const onIframeLoad = () => {
+    //   dispatch(appSlice.actions.setIsUILoading(false));
+    // }
     return (
         <>
           {
@@ -127,19 +140,26 @@ export const GamePage = () => {
               <GameBackNavigation onClick={() => setCloseGame(true)} />
             )
           }
-
           {
             closeGame && (
               <LeaveGameConfirmModal
                 onConfirm={onConfirmClose}
-                onClose={()=> setCloseGame(false)}
+                onClose={()=>{
+                  setCloseGame(false)
+                  dispatch(appSlice.actions.setIsUILoading(false));
+                }}
               />
             )
           }
 
           {data !== undefined && (
             // <iframe className={`w-full h-full`} src={data.link} />
-            <iframe className={`w-[100vw] h-[100%]`} src={data.link} />
+            <iframe
+              className={`w-[100vw] h-[100%]`}
+              src={data.link}
+              // onLoadStart={onIframeLoadStart}
+              // onLoad={onIframeLoad}
+            />
           )}
         </>
     );
