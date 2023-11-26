@@ -39,7 +39,7 @@ const ModalButton = styled.button`
 
 export type ITelegramContactModal = {
   close: () => void;
-  toTelegram: () => void;
+  toTelegramGroup: () => void;
 }
 
 export const TelegramContactModal = (props: ITelegramContactModal) => {
@@ -95,7 +95,7 @@ export const TelegramContactModal = (props: ITelegramContactModal) => {
           <div className={"flex flex-col justify-center items-center"}>
             <ModalButton
               className={tcx('text-lg w-[168px] h-[52px]', ['text-sm w-[99px] h-[31px]', isMobile])}
-              onClick={() => props.toTelegram() }
+              onClick={() => props.toTelegramGroup() }
             >
               {/*<img alt={"telegram"} className="w-[14px] h-[10px] mr-4"/>*/}
               <span className={"font-bold"}>Junte-se</span>

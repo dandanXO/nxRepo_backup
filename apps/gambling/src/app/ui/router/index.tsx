@@ -57,7 +57,8 @@ export const AppRouter = () => {
   const [firstLogin, setFirstLogin] = useState(false);
 
   const [triggerGetConfig, {data, isLoading, isSuccess, isError}] = useGetConfigMutation();
-  const [triggerGetList, { currentData:gameData, isFetching }] = useLazyGetGameListQuery({
+
+  const [triggerGetList, { currentData: gameData, isFetching }] = useLazyGetGameListQuery({
     pollingInterval: 0,
     refetchOnFocus: false,
     refetchOnReconnect: false,
@@ -90,14 +91,14 @@ export const AppRouter = () => {
   useEffect(() => {
     if(!isSetup) return;
     if (data !== undefined) {
-      if(data.data['group_telegram']) {
-        AppLocalStorage.setItem(AppLocalStorageKey.telegramGroup, data.data['group_telegram']);
-      }
       if(data.data['service_telegram']) {
         AppLocalStorage.setItem(AppLocalStorageKey.telegramService, data.data['service_telegram']);
       }
       if(data.data['manager_telegram']) {
         AppLocalStorage.setItem(AppLocalStorageKey.telegramManager, data.data['manager_telegram']);
+      }
+      if(data.data['group_telegram']) {
+        AppLocalStorage.setItem(AppLocalStorageKey.telegramGroup, data.data['group_telegram']);
       }
       AppLocalStorage.setItem(AppLocalStorageKey.downloadUrl, data.data['url_download']);
     }
