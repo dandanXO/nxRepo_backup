@@ -43,7 +43,7 @@ let isMobile = false;
 if (0 < windowSize.width && windowSize.width < 640) {
   isMobile = true
 }
-const MaxHotGameBrandGameCount = isMobile ? 15 : 18;
+const MaxHotGameBrandGameCount = isMobile ? 9 : 18;
 const OtherMaxHotGameBrandGameCount = isMobile ? 3 : 6;
 
 export const gameSlice = createSlice({
