@@ -1,8 +1,8 @@
-interface appInfo {
+interface IAppInfo {
   VERSION: string;
   COMMITHASH: string;
   BRANCH: string;
   UI_VERSION: string;
 }
 
-declare let AppInfo: appInfo;
+declare let AppInfo: IAppInfo;
