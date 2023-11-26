@@ -39,17 +39,13 @@ export type IGameTypeSectionList = {
   setTotalFavoriteLocalState: Dispatch<SetStateAction<TTotalFavoriteLocalState>>;
   setViewType?:Dispatch<SetStateAction<string>>;
   isLatestItem: boolean;
-  maxGameItemCount?: number
+  // maxGameItemCount?: number
 }
-
-
-
 
 export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const { isMobile } = useBreakpoint();
 
-  const maximunGameItemCount = typeof props.maxGameItemCount !== "undefined" ? props.maxGameItemCount : isMobile ? MobileGameNumber : DesktopGameNumber;
-
+  const maximunGameItemCount = isMobile ? MobileGameNumber : DesktopGameNumber;
 
   const { onClickGameItem } = usePageNavigate();
   const { onClickFavoriteGameItem, userFavorite } = useClickFavoriteGameItem();
@@ -60,10 +56,17 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const [listSize, setListSize] = useState(isMobile ? MobileGameNumber : DesktopGameNumber);
   const displayedItems = props?.data && props?.data.slice(0, listSize);
 
+  // console.log("props.gameTypeName", props.gameTypeName);
+  // NOTE: reset by changing game brand
+  useEffect(() => {
+    setListSize(isMobile ? MobileGameNumber : DesktopGameNumber);
+  }, [props.gameTypeName])
+
   const loadMore = () => {
     const number = isMobile ? MobileGameNumber : DesktopGameNumber;
     setListSize(listSize + number); // 每次點擊按鈕增加10筆
   }
+
 
   const [animating, setAnimating] = useState(true)
   useEffect(() => {
@@ -104,10 +107,11 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       >
         {displayedItems && displayedItems.filter((item: any, index: number) => {
           if(typeof props.isViewAll === "undefined") {
-            if(maximunGameItemCount >= index + 1) return item;
+            if(index < maximunGameItemCount) return item;
           } else {
             return item;
           }
+
         }).map((item, index) => {
 
           return (

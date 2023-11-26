@@ -35,6 +35,17 @@ const initGameList: InitialState = {
   label: [],
 }
 
+// NOTICE: refactor me
+const windowSize = {
+  width: window.innerWidth,
+};
+let isMobile = false;
+if (0 < windowSize.width && windowSize.width < 640) {
+  isMobile = true
+}
+const MaxHotGameBrandGameCount = isMobile ? 15 : 18;
+const OtherMaxHotGameBrandGameCount = isMobile ? 3 : 6;
+
 export const gameSlice = createSlice({
   name: 'gameList',
   initialState:initGameList,
@@ -45,10 +56,20 @@ export const gameSlice = createSlice({
     setGameList: (state: InitialState, action: PayloadAction<GetGameListResponseData>) => {
       const gameData = action.payload;
 
+      let hotGameBrandIndex = 0
       const allGame = gameData && gameData?.label.reduce((acc: any , currentType:string) => {
+
         const subGamesList = gameData.type[currentType].reduce((acc: any, currentSubType: string) => {
-          return [...acc, ...gameData[currentType][currentSubType]]
+          // console.log("gameData[currentType][currentSubType]", gameData[currentType][currentSubType]);
+          let currentBrandGames: any[] = gameData[currentType][currentSubType];
+          currentBrandGames = currentBrandGames.slice(0, hotGameBrandIndex === 0 ? MaxHotGameBrandGameCount : OtherMaxHotGameBrandGameCount)
+          // return [...acc, ...gameData[currentType][currentSubType]]
+          hotGameBrandIndex = hotGameBrandIndex + 1;
+          return [...acc, ...currentBrandGames]
         }, [])
+
+        hotGameBrandIndex = 0;
+
         return [...acc, {
           gameType: currentType,
           data: {
@@ -57,6 +78,8 @@ export const gameSlice = createSlice({
           }
         }]
       }, [])
+
+      // console.log("allGame", allGame);
 
      const typeGameList = gameData && Object.entries(gameData?.type).reduce((result: any, [key, value]) => {
        const subGames = value.map(i => {

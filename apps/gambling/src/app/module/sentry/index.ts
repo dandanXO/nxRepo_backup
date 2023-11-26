@@ -1,12 +1,7 @@
 import * as Sentry from '@sentry/react';
 import {BrowserTracing} from '@sentry/tracing';
-
-// import { AppFlag } from '../../../environments/flag';
-// import { NativeAppInfo } from '../../application/nativeAppInfo';
 import {AppEnvironment} from '../../device/appEnvironment';
-// import { AppProxy } from '../../proxy/appProxy';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
-
 
 // NOTE: 初始化
 let loaded = false;
