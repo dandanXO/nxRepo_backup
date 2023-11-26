@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import {TTotalFavoriteLocalState} from "../../pages/IndexPage";
+import {DesktopGameNumber, MobileGameNumber, TTotalFavoriteLocalState} from "../../pages/IndexPage";
 import cx from "classnames";
 import {environment} from "../../../../environments/environment"
 import {MobileGameList} from "./GameList/MobileGameList";
@@ -39,15 +39,18 @@ export type IGameTypeSectionList = {
   setTotalFavoriteLocalState: Dispatch<SetStateAction<TTotalFavoriteLocalState>>;
   setViewType?:Dispatch<SetStateAction<string>>;
   isLatestItem: boolean;
+  maxGameItemCount?: number
 }
 
 
-const MobileGameNumber = 15;
-const DesktopGameNumber = 30;
+
 
 export const GameTypeSectionList = (props: IGameTypeSectionList) => {
-
   const { isMobile } = useBreakpoint();
+
+  const maximunGameItemCount = typeof props.maxGameItemCount !== "undefined" ? props.maxGameItemCount : isMobile ? MobileGameNumber : DesktopGameNumber;
+
+
   const { onClickGameItem } = usePageNavigate();
   const { onClickFavoriteGameItem, userFavorite } = useClickFavoriteGameItem();
 
@@ -80,6 +83,8 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     "wild777bet": WmobileGameTypeHeaderProps,
   }, PmobileGameTypeHeaderProps)
 
+  console.log("props.isViewAll", props.isViewAll);
+
   return (
     <section className={cx({
       "flex flex-col mb-4": !props.isLatestItem,
@@ -97,7 +102,14 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
           "flex flex-row flex-wrap justify-start items-center": !isMobile
         })}
       >
-        {displayedItems && displayedItems.map((item, index) => {
+        {displayedItems && displayedItems.filter((item: any, index: number) => {
+          if(typeof props.isViewAll === "undefined") {
+            if(maximunGameItemCount >= index + 1) return item;
+          } else {
+            return item;
+          }
+        }).map((item, index) => {
+
           return (
             <MainGameItem
               key={index}
