@@ -14,6 +14,9 @@ import {Header} from "../../../header/env/coco/Header";
 import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
 import { TShowToolboxConfig } from "../../index";
+import {Logo} from "../../../footers/coco/Logo";
+import {tcx} from "../../../utils/tcx";
+import {LoadingBar} from "../../../components/LoadingBar";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -212,8 +215,17 @@ export const PageTemplate = ({
 
         {isUILoading && (
           <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-[var(--unknown)] flex flex-col justify-center items-center"}>
-            <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/LOGO.png`}/>
-            <ThreeDots height={25} className={'inline-block'} />
+            <div className={"mb-4"}>
+              {/*<img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/LOGO.png`}/>*/}
+              <Logo
+                className={tcx(
+                  "w-[140px] h-[140px]",
+                  "border-[4px] border-solid border-[var(--white)] rounded-[14.25px]",
+                )}
+              />
+            </div>
+            {/*<ThreeDots height={25} className={'inline-block'} />*/}
+            <LoadingBar/>
           </div>
         )}
 

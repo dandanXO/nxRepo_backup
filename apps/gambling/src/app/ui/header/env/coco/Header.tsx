@@ -1,16 +1,10 @@
 import styled from "styled-components";
 import cx from "classnames";
 import React, { useState } from "react";
-import { ConfirmButton } from "../../../components/Buttons/ConfirmButton";
 import { UserMoneyStatusSection } from "../../UserMoneyStatusSection";
-import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
-import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reduxStore";
-import { MessageCountBadge } from "../../../components/MessageCountBadge";
 import { environment } from "../../../../../environments/environment";
-import { Avatar } from "../../../components/Avatar";
-import { AvatarAccountInfo } from "../../../components/AvatarAccountInfo";
 import { LoginButton } from "../../../components/Buttons/LoginButton";
 import { HeaderMenu } from "./HeaderMenu";
 import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
