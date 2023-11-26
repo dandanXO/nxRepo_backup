@@ -43,7 +43,7 @@ if (loaded === false) {
 
   // NOTE: AppEnvironment.isLocalhost()
   if (!AppEnvironment.isLocalhost()) {
-    sentryConfig.release = AppInfo.COMMITHASH;
+    sentryConfig.release = AppInfo.COMMIT_HASH;
   }
   console.log('[app] sentryConfig', sentryConfig);
   Sentry.init(sentryConfig);
