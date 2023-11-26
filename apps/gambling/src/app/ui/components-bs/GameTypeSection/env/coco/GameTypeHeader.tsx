@@ -28,9 +28,9 @@ export const GameTypeHeader = (props: {
             <LeftOutlined className={"text-white text-xl mr-2"}/>
           </button>
         )}
-
         {/*<img className="w-[36px] h-[30px] mr-4" alt={"map"} src={`assets/${environment.assetPrefix}/ic_game.png`}/>*/}
-        <img className="w-[36px] h-[30px] mr-4" alt={"map"} src={todos}/>
+        {/*<img className="w-[36px] h-[30px] mr-4" alt={"map"} src={todos}/>*/}
+        <img className="w-[24px] h-[24px] mr-2" alt={"map"} src={todos}/>
         <span className={"text-xl font-bold text-white"}>{props.gameTypeName}</span>
       </span>
 
@@ -39,7 +39,7 @@ export const GameTypeHeader = (props: {
           <button
             onClick={props.onClick}
             className={
-              cx("rounded-2xl border-[1px] px-4 pt-[5px] pb-[2px] text-sm !font-bold",
+              cx("rounded-lg border-[1px] px-4 pt-[5px] pb-[2px] text-sm !font-bold",
                 "text-[var(--primary-assistant)] border-[var(--primary-assistant)] hover:opacity-70")
             }
           >{isMobile ? "Tudo" : `Ver todos ${props?.count}`}</button>

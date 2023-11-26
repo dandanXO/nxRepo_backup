@@ -117,7 +117,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
         <div className="flex-1 mt-10 justify-center flex">
           <button
             onClick={loadMore}
-            className="text-main-primary-varient bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] py-1.5 px-6 rounded-2xl font-bold"
+            className="text-[var(--primary-assistant)] bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] py-1.5 px-6 rounded-2xl font-bold"
           >
             Ver mais
           </button>
