@@ -1,6 +1,7 @@
 // https://react-multi-carousel.surge.sh/
-import Carousel from "react-multi-carousel";
+import Carousel, {StateCallBack} from "react-multi-carousel";
 import useBreakpoint from "../../../hooks/useBreakpoint";
+import cx from "classnames";
 
 // const responsive = {
 //   superLargeDesktop: {
@@ -25,6 +26,7 @@ import useBreakpoint from "../../../hooks/useBreakpoint";
 //     partialVisible:true
 //   }
 // };
+
 
 const responsive = {
   superLargeDesktop: {
@@ -60,28 +62,37 @@ type IAppCarousel = {
 export const AppCarousel = (props: IAppCarousel) => {
   const {isMobile} = useBreakpoint();
   return (
-    <Carousel
-      showDots={true}
-      arrows={false}
-      responsive={responsive}
-      // autoPlay={false}
-      autoPlay={true}
-      autoPlaySpeed={3000}
-      infinite={true}
-      // removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头
-      // ssr={true} // means to render carousel on server-side.
-      customTransition="transform 1s ease-in-out"
-      keyBoardControl={false}
-      // transitionDuration={500}
-      containerClass="carousel-container"
-      // removeArrowOnDeviceType={["tablet", "mobile"]}
-      // deviceType={this.props.deviceType}
-      // deviceType={"mobile"}
-      dotListClass="custom-dot-list-style"
-      itemClass="carousel-item-padding-40-px"
-    >
-      {props.children}
-    </Carousel>
+    <div className={cx({
+      "isdesktop": !isMobile
+    })}>
+      <Carousel
+        // customDot={<div className={"bg-red w-[30px] h-[20px]"}/>}
+        swipeable={true}
+        draggable={true}
+        showDots={true}
+        arrows={false}
+        responsive={responsive}
+        autoPlay={true}
+        // autoPlay={false}
+        autoPlaySpeed={3000}
+        // transitionDuration={500}
+        infinite={true}
+        // renderDotsOutside={true}
+        // deviceType={"mobile"}
+        // deviceType={deviceType}
+        removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头
+        // removeArrowOnDeviceType={["tablet", "mobile"]}
+        // ssr={true} // means to render carousel on server-side.
+        customTransition="transform 1s ease-in-out"
+        keyBoardControl={false}
+
+        containerClass="carousel-container"
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-40-px"
+      >
+        {props.children}
+      </Carousel>
+    </div>
   )
 
 }
