@@ -245,7 +245,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         prefix={
           <>
             {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
-            <PhoneSvg className={"mr-2"}/>
+            <PhoneSvg className={"mr-1"}/>
             <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
           </>
         }
@@ -263,7 +263,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           prefix={
             <>
               {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
-              <PhoneSvg className={"mr-2"}/>
+              <PhoneSvg className={"mr-1"}/>
               <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
             </>
           }
@@ -279,7 +279,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       <Input
         type={isPasswordVisible ? 'text' : 'password'}
         // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        prefix={<KeySvg className={"mr-2"}/>}
+        prefix={<KeySvg className={"mr-1"}/>}
         placeholder={"Senha (4-12 letras e números)"}
         value={passwordInput.data}
         validation={passwordInput.isValidation}
@@ -301,7 +301,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         type={"text"}
         className={"rounded-br-[0px] rounded-tr-[0px] border-r-[0px]"}
         // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        prefix={<SecuritySvg className={"mr-2"}/>}
+        prefix={<SecuritySvg className={"mr-1"}/>}
         outerSuffix={<Captcha onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading}/>}
         placeholder={"Código de verificação"}
         value={captchaInput.data}
