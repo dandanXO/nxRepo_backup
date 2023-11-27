@@ -29,6 +29,7 @@ import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
 import {useScrollToCarousel} from "../../useScrollToCarousel";
+import { GameItem } from "../../../../components-bs/GameTypeSection";
 
 
 export type TTotalFavoriteLocalState = {
@@ -46,8 +47,6 @@ export type TTotalFavoriteLocalState = {
 
 type ICoco777betIndexPage = {
   allGameList: any;
-  totalFavoriteLocalState: any;
-  setTotalFavoriteLocalState: (value: any) => void;
   label: any;
   activeTab: any;
   setActiveTab: (value: any) => void;
@@ -56,12 +55,12 @@ type ICoco777betIndexPage = {
   gameList: any;
   showFixForIOSStickTab: boolean;
   scrollToCarousel: () => void;
+  userFavorite: number[]
+  onClickFavoriteGameItem: (item: GameItem) => void
 }
 
 export const IndexPage = ({
                                               allGameList,
-                                              totalFavoriteLocalState,
-                                              setTotalFavoriteLocalState,
                                               label,
                                               activeTab,
                                               setActiveTab,
@@ -70,6 +69,8 @@ export const IndexPage = ({
                                               gameList,
   scrollToCarousel,
   showFixForIOSStickTab,
+  userFavorite,
+  onClickFavoriteGameItem
 }:ICoco777betIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
@@ -100,7 +101,7 @@ export const IndexPage = ({
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
         // "p-4": !isMobile,
       })}>
-        {isSearch && <GameSearchModal onClose={()=>setIsSearch(false)}/>}
+        {isSearch && <GameSearchModal userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} onClose={()=>setIsSearch(false)}/>}
         {isMobile && <CompanySloganLabel/>}
         <AppCarousel>
           <AppCarouselContent/>

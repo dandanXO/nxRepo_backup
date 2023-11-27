@@ -16,9 +16,12 @@ import { useSelector } from "react-redux";
 import { NoData } from "../../components/Icons/NoData";
 import { environment } from "apps/gambling/src/environments/environment";
 import { Icon } from "../../components/Icons";
+import { GameItem } from "../../components-bs/GameTypeSection";
 
 interface IGameSearchModal {
   onClose: () => void
+  userFavorite: number[]
+  onClickFavoriteGameItem: (item: GameItem) => void
 }
 export const GameSearchModal = (props: IGameSearchModal) => {
   const [searchInput, setSearchInput] = useState<InputValue<string>>({
@@ -38,7 +41,6 @@ export const GameSearchModal = (props: IGameSearchModal) => {
 
   const { isMobile } = useBreakpoint();
   const { onClickGameItem } = usePageNavigate();
-  const { onClickFavoriteGameItem, userFavorite } = useClickFavoriteGameItem();
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem;
   const gameList = (data: any) => {
     if (data?.length > 0) {
@@ -52,8 +54,8 @@ export const GameSearchModal = (props: IGameSearchModal) => {
                 name={item.name}
                 imageURL={`https://resources.ttgroup.vip/icon/${item.gameId}-small.png`}
                 onClick={() => { onClickGameItem(item) }}
-                favorite={(userFavorite).includes(Number(item.gameId))}
-                onClickFavorite={() => { onClickFavoriteGameItem(item) }}
+                favorite={(props.userFavorite).includes(Number(item.gameId))}
+                onClickFavorite={() => { props.onClickFavoriteGameItem(item) }}
               />
             )
           })}

@@ -17,34 +17,24 @@ import {TelegramPage} from "../pages/TelegramPage";
 import {InviteSettlementRecordPage} from "../pages/InviteSettlementRecordPage";
 import {MyPage} from "../pages/MyPage";
 import {WalletDepositNextPage} from "../pages/WalletDepositNextPage";
-import {
-  selectConfigResult,
-  useGetConfigMutation,
-  useLazyGetGameListQuery,
-  useLoginMutation
-} from "../../external";
-import {useEffect, useRef, useState} from "react";
+import {useGetConfigMutation, useLazyGetGameListQuery, useLoginMutation} from "../../external";
+import {useEffect, useState} from "react";
 import {appSlice} from "../../reduxStore/appSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
-import { GamePage } from '../pages/GamePage';
-import { AppLocalStorage } from '../../persistant/localstorage';
+import {GamePage} from '../pages/GamePage';
+import {AppLocalStorage} from '../../persistant/localstorage';
 import {NotificationPage} from "../pages/NotificationPage";
 import {GameSearchPage} from "../pages/GameSearchPage";
-import { gameSlice } from '../../reduxStore/gameSlice';
+import {gameSlice} from '../../reduxStore/gameSlice';
 import {PrivacyAgreementPage} from "../pages/PrivacyAgreementPage";
 import {environment} from "../../../environments/environment";
-import {ErrorBoundary} from "react-error-boundary";
 import {PageTemplate} from "../pageTemplate";
 import useBreakpoint from "../hooks/useBreakpoint";
-import styled from "styled-components";
-import {promiseHandler} from "../../gateway/promiseHanlder";
-import {setLoginLocalStorage} from "../../persistant/setLoginLocalStorage";
 import {connect} from "../../gateway/socket";
 import {notification} from "antd";
 import TermsOfServicePage from "../pages/TermsOfServicePage";
 import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
-import {IUserInfo} from "../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 import {userLogout} from "../../usecase/userLogout";
 
@@ -121,57 +111,64 @@ export const AppRouter = () => {
   // const [triggerLogin] = useLoginMutation()
 
 
+  const [triggerLogin] = useLoginMutation()
+  const [previousOffline, setPreviousOffline] = useState(false);
+
   useEffect(() => {
+    if(!previousOffline) {
+      const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
+      if(!token) {
+        setIsSetup(true);
+        dispatch(appSlice.actions.showLoginDrawerOrModal(true));
+        return;
+      }
+      const url = AppLocalStorage.getItem(AppLocalStorageKey.ip);
+      console.log("ws.url", url);
+
+      if((url && url.indexOf("ws") > -1 || url && url?.indexOf("wss") > -1) && url !=="undefined" && url && token) {
+        connect(url, token);
+      } else {
+        userLogout();
+      }
+      dispatch(appSlice.actions.setIsLogin(true));
+      dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
+      dispatch(appSlice.actions.setShowTelegramModal(true))
+      dispatch(appSlice.actions.setShowDepositModal(true))
+      // props.confirmToLogin();
+      // setIsSetup(true);
+    }
+  }, [previousOffline])
+
+  const offline = () => {
+    setPreviousOffline(true);
+  }
+
+  useAutoUpdateBalance();
+
+  const online = () => {
+    console.log("[app] online triggerLogin");
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
     if(!token) {
-      setIsSetup(true);
-      dispatch(appSlice.actions.showLoginDrawerOrModal(true));
       return;
     }
+    console.log("[app] relogin with token: ", token);
 
-    // triggerLogin({
-    //   "appChannel": "pc",
-    //   "appPackageName": environment.appPackageName,
-    //   "deviceId": AppLocalStorage.getItem("deviceId") || "",
-    //   "deviceModel": "WEB",
-    //   "deviceVersion": "WEB",
-    //   "appVersion": environment.appVersion,
-    //   "sysTimezone": null,
-    //   "sysLanguage": null,
-    //   token,
-    // }).then((response) => {
-      // console.log("token", token);
-      // if(!(response as any).error) {
-        // console.log("triggerLogin-data", response)
-        // setLoginLocalStorage({
-        //   token: (response as any).data.data.token,
-        //   userInfo: (response as any).data.data.user_info,
-        //   kPhone: phoneInput.data,
-        //   kPassword: passwordInput.data,
-        //   amount: 100,
-        //   ip: (response as any).data.data.connection.ip,
-        // })
-        // AppLocalStorage.setItem("token", (response as any).data.data.token);
-        // dispatch(appSlice.actions.setUserVIPLevel((response as any).data.data.user_info.vip_level));
+    const websocketURL = AppLocalStorage.getItem(AppLocalStorageKey.ip);
+    if((websocketURL && websocketURL.indexOf("ws") > -1 || websocketURL && websocketURL?.indexOf("wss") > -1) && websocketURL !=="undefined" && websocketURL && token) {
+      connect(websocketURL, token);
+    }
+  }
 
-        const url = AppLocalStorage.getItem(AppLocalStorageKey.ip);
-        console.log("ws.url", url);
-        if((url && url.indexOf("ws") > -1 || url && url?.indexOf("wss") > -1) && url !=="undefined" && url && token) {
-          connect(url, token);
-        } else {
-          userLogout();
-        }
-        dispatch(appSlice.actions.setIsLogin(true));
-        dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-        dispatch(appSlice.actions.setShowTelegramModal(true))
-        dispatch(appSlice.actions.setShowDepositModal(true))
-        // props.confirmToLogin();
-        setIsSetup(true);
-      // }
-    // }).catch((error: any) => {
-    //   console.error(error);
-    // })
+  useEffect(() =>  {
+    window.addEventListener("offline", offline);
+    window.addEventListener("online", online);
+    return () => {
+      window.addEventListener("offline", offline)
+      window.removeEventListener("online", online)
+    }
   }, [])
+
+
 
   //const mounted = useRef(false);
   // useEffect(() => {
@@ -251,7 +248,7 @@ export const AppRouter = () => {
     }
   }, [globalMessage]);
 
-  useAutoUpdateBalance();
+
 
   return (
     <>
@@ -263,11 +260,11 @@ export const AppRouter = () => {
               <IndexPage />
             </PageTemplate>
           )}/>
-          <Route path={PageOrModalPathEnum.IndexSlotPage} element={(
-            <PageTemplate>
-              <IndexSlotPage />
-            </PageTemplate>
-          )}/>
+          {/*<Route path={PageOrModalPathEnum.IndexSlotPage} element={(*/}
+          {/*  <PageTemplate>*/}
+          {/*    <IndexSlotPage />*/}
+          {/*  </PageTemplate>*/}
+          {/*)}/>*/}
           <Route path={PageOrModalPathEnum.InvitePage} element={(
             <PageTemplate showMobileHeader={false} showMobileFooter={false}>
               <InvitePage/>

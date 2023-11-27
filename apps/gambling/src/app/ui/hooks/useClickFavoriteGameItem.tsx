@@ -1,11 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
 import { AppLocalStorage } from "../../persistant/localstorage";
-import { TTotalFavoriteLocalState } from "../pages/IndexPage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reduxStore";
 import { GameItem } from "../components-bs/GameTypeSection";
 import { appSlice } from "../../reduxStore/appSlice";
+
+type TTotalFavoriteLocalState = {
+  local: { [key: number]: number [] },
+  localArr: {
+    [key: number]: {
+      gameId: number,
+      name: string,
+      img: string,
+      label: string,
+      type: string
+    }[]
+  }
+}
 
 export const useClickFavoriteGameItem = (props?: any) => {
   const { isLogin } = useSelector((state: RootState) => state.app);
@@ -25,7 +37,6 @@ export const useClickFavoriteGameItem = (props?: any) => {
     if (!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
-      
       const userFavoriteArr = totalFavoriteLocalState.localArr[userInfo?.user_id] || []
       const isFavoriteID = userFavorite?.find((favorite: number) => favorite === Number(item.gameId))
 
@@ -50,6 +61,7 @@ export const useClickFavoriteGameItem = (props?: any) => {
 
   return {
     onClickFavoriteGameItem,
-    userFavorite
+    userFavorite,
+    totalFavoriteLocalState
   }
 }

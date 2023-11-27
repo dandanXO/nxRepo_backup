@@ -50,7 +50,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
 
         {/*<img alt="title" className={"w-[269px] h-[16px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>*/}
         {/*<img alt="title" className={"w-[269px]"} src={`assets/${environment.assetPrefix}/Convite de recompensa.png`}/>*/}
-        <div className={"text-3xl font-extrabold text-[var(--text-popup)] mt-4 mb-2"}>Convite Recompensa</div>
+        <div className={"text-2xl font-extrabold text-[var(--text-popup)] mt-4 mb-2"}>Convite Recompensa</div>
 
         <div className={"mb-2"}>
           <Description/>

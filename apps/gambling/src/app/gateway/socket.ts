@@ -100,6 +100,7 @@ export class Socket {
   reLoginTimes: number = 3;
   reConnectTimes: number = 3;
   heartInterval: number = 10;
+
   timeHandle: number | null = null;
 
   constructor(url: string, token: string) {
@@ -109,15 +110,21 @@ export class Socket {
   }
 
   connect() {
+
     console.log("[gateway] [Socket] connect")
     this.ws = new WebSocket(this.url);
     this.creatorTime(true);
 
     this.ws.onopen = (event: Event) => {
+      console.log("[gateway] [Socket] onopen")
       this.onopen(event);
+
+      window.addEventListener("offline", this.offline)
+      window.addEventListener("online", this.online)
     };
 
     this.ws.onclose = (t: CloseEvent) => {
+      console.log("[gateway] [Socket] onclose")
       this.onclose(t);
     };
 
@@ -129,6 +136,16 @@ export class Socket {
       this.onerror(t);
     };
   }
+
+  online() {
+    console.log("[gateway] [Socket] online")
+  }
+
+  offline() {
+    console.log("[gateway] [Socket] offline", ws)
+    ws.close();
+  }
+
 
   protoEncode(t: number, n: any){
     return protoEncode(t, n);
@@ -154,6 +171,7 @@ export class Socket {
       this.stopTime();
       this.reLoginTimes = 3;
       this.reConnectTimes = 3;
+      console.log("[gateway] this.token", this.token);
       this.send(100, {
         token: this.token,
       });
@@ -164,6 +182,7 @@ export class Socket {
   send(t: number, n: any) {
     console.log("[gateway] [send] protoid====", t);
     console.log("[gateway] [send] 编码=============", n);
+    console.log("this.ws && this.ws.readyState", this.ws && this.ws.readyState);
 
     let o = this.encode(t, n);
     let s = Math.floor(new Date().getTime() / 1000);
@@ -182,23 +201,27 @@ export class Socket {
     }
   }
 
+  retry() {
+    this.reLoginTimes--;
+
+    setTimeout(() => {
+      this.connect();
+    }, 10000);
+
+    if (this.reLoginTimes === -1) {
+      // userStore$3.websocketTipsDialog = true;
+      // console.log("[gateway] [websocket][104] userStore$3", userStore);
+      updateUserStore({
+        ...getUserStore(),
+        websocketTipsDialog: true,
+      })
+    }
+  }
+
   onclose(t: CloseEvent) {
     if (t != null && !Object.is(t.target, this.ws)) {
       this.close();
-      this.reLoginTimes--;
-      setTimeout(() => {
-        this.connect();
-      }, 10000);
-
-      if (this.reLoginTimes === -1) {
-        // userStore$3.websocketTipsDialog = true;
-        // console.log("[gateway] [websocket][104] userStore$3", userStore);
-        updateUserStore({
-          ...getUserStore(),
-          websocketTipsDialog: true,
-        })
-
-      }
+      this.retry();
     }
   }
 
@@ -208,6 +231,7 @@ export class Socket {
 
   close() {
     if (this.ws) {
+      console.log("[gateway] [Socket] close")
       this.ws.close();
       this.ws = null;
       this.stopTime();
@@ -272,6 +296,7 @@ export class Socket {
 
   stopTime() {
     if (this.timeHandle !== null) {
+      console.log("[gateway] [Socket] stopTime")
       window.clearInterval(this.timeHandle);
       this.timeHandle = null;
     }
@@ -297,6 +322,8 @@ export class Socket {
     this.send(3, {});
   }
 
-  stopHeartTime() {}
+  stopHeartTime() {
+    console.log("[gateway] [Socket] stopHeartTime")
+  }
 }
 
