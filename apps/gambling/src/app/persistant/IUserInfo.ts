@@ -30,4 +30,9 @@ export type IUserInfo = {
   "ab": string;
   "ab_open": number;
   "alterarImg": string;
+
+  // NOTE: 用 Token 刷新 Token 才有
+  "player_id"?: number;
+  // NOTE: 用 Token 刷新 Token 才有
+  "token"?: string;
 }
