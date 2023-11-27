@@ -49,7 +49,7 @@ export const IndexPage = () => {
   // const [activeTab, setActiveTab] = useState("Todos");
   // "Salão"
   const [activeTab, setActiveTab] = useState("Todos");
-  const [viewType, setViewType] = useState('');
+  const [expandedBrand, setExpandedBrand] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const { searchResults, handleSearchGames } = useSearchGames(searchInput);
 
@@ -72,7 +72,7 @@ export const IndexPage = () => {
           key={index}
           gameTypeName={i.gameType}
           data={i.data.games}
-          onClick={() => setActiveTab(i.gameType)}
+          onClickExpand={() => setActiveTab(i.gameType)}
           totalFavoriteLocalState={totalFavoriteLocalState}
           setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
       )
@@ -93,7 +93,7 @@ export const IndexPage = () => {
       list = [{ subGameType: 'Recente', games: recentGames}]
     } else {
       const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === activeTab)[0]?.data
-      list = viewType !== '' ? data.filter((i: any) => i.subGameType === viewType) : data;
+      list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
     }
 
     return list?.map(({subGameType,games}: any, index: number) => {
@@ -103,14 +103,15 @@ export const IndexPage = () => {
           key={index}
           gameTypeName={subGameType}
           data={games}
-          onClick={() => {
-            setViewType(subGameType);
+          onClickExpand={() => {
+            setExpandedBrand(subGameType);
             scrollToCarousel();
           }}
-          isViewAll={viewType!==''}
+          isViewAll={['Favoritos', 'Recente'].includes(subGameType)}
+          expandedBrand={expandedBrand}
+          setExpandedBrand={setExpandedBrand}
           totalFavoriteLocalState={totalFavoriteLocalState}
           setTotalFavoriteLocalState={setTotalFavoriteLocalState}
-          setViewType={setViewType}
         />
       )
     })
@@ -124,7 +125,7 @@ export const IndexPage = () => {
             isLatestItem={true}
             gameTypeName={'null'}
             data={searchResults}
-            onClick={() => {
+            onClickExpand={() => {
               navigate(PageOrModalPathEnum.IndexSlotPage)
               window.scrollTo({ left: 0, behavior: "smooth"});
             }}
@@ -155,7 +156,7 @@ export const IndexPage = () => {
         label={label}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        setViewType={setViewType}
+        setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
       />
@@ -170,7 +171,7 @@ export const IndexPage = () => {
         label={label}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        setViewType={setViewType}
+        setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
       />
@@ -186,7 +187,7 @@ export const IndexPage = () => {
         label={label}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        setViewType={setViewType}
+        setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
       />

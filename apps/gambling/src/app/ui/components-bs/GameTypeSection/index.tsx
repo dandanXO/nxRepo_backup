@@ -33,11 +33,12 @@ export type GameItem = {
 export type IGameTypeSectionList = {
   gameTypeName: string;
   data?: GameItem[]
-  onClick?: () => void;
+  onClickExpand?: () => void;
+  expandedBrand?: string;
   isViewAll?: boolean;
   totalFavoriteLocalState: TTotalFavoriteLocalState
   setTotalFavoriteLocalState: Dispatch<SetStateAction<TTotalFavoriteLocalState>>;
-  setViewType?:Dispatch<SetStateAction<string>>;
+  setExpandedBrand?:Dispatch<SetStateAction<string>>;
   isLatestItem: boolean;
   hotGames?: boolean;
 }
@@ -53,7 +54,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const MainGameList = isMobile ? MobileGameList : GameList
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem
 
-  const initialListSize = haveHotgames ? props?.data?.length : isMobile ? MobileGameNumber : DesktopGameNumber;
+  const initialListSize = (haveHotgames || props.isViewAll) ? props?.data?.length : isMobile ? MobileGameNumber : DesktopGameNumber;
 
   const [listSize, setListSize] = useState(initialListSize || 0);
   const displayedItems = props?.data && props?.data.slice(0, listSize);
@@ -61,7 +62,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   // console.log("props.gameTypeName", props.gameTypeName);
   // NOTE: reset by changing game brand
   useEffect(() => {
-    if(haveHotgames) {
+    if(haveHotgames || props.isViewAll) {
       setListSize(props && props?.data && props?.data?.length || 0);
     } else {
       setListSize(isMobile ? MobileGameNumber : DesktopGameNumber);
@@ -81,7 +82,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const [animating, setAnimating] = useState(true)
   useEffect(() => {
     setAnimating(true)
-  }, [props.gameTypeName,props.isViewAll])
+  }, [props.gameTypeName,props.expandedBrand])
 
   useEffect(() => {
     if (animating) {
@@ -96,7 +97,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     "wild777bet": WmobileGameTypeHeaderProps,
   }, PmobileGameTypeHeaderProps)
 
-  console.log("props.isViewAll", props.isViewAll);
+  console.log("props.expandedBrand", props.expandedBrand);
 
   return (
     <section className={cx({
@@ -104,9 +105,9 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     })}>
 
       {props.gameTypeName ==='null' ? <div></div> : isMobile ? (
-        <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClick} isViewAll={props.isViewAll} setViewType={props.setViewType} {...mobileGameTypeHeaderProps}/>
+        <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll} {...mobileGameTypeHeaderProps}/>
       ): (
-        <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.data?.length} onClick={props.onClick} isViewAll={props.isViewAll} setViewType={props.setViewType}/>
+        <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.data?.length} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll}/>
       )}
 
       <MainGameList
@@ -116,17 +117,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
         })}
       >
         {displayedItems && displayedItems
-          .filter((item: any, index: number) => {
-            if(haveHotgames) {
-              return item
-            } else if(typeof props.isViewAll === "undefined") {
-              if(index < maximunGameItemCount) return item;
-            } else {
-              return item;
-            }
-          })
           .map((item, index) => {
-
             return (
               <MainGameItem
                 key={index}
@@ -142,7 +133,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
         })}
       </MainGameList>
 
-      {(props.data && listSize < props.data?.length) && props.isViewAll &&
+      {(props.data && listSize < props.data?.length) && props.expandedBrand &&
         <div className="flex-1 mt-10 justify-center flex">
           <button
             onClick={loadMore}

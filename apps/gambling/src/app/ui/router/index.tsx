@@ -263,11 +263,11 @@ export const AppRouter = () => {
               <IndexPage />
             </PageTemplate>
           )}/>
-          <Route path={PageOrModalPathEnum.IndexSlotPage} element={(
-            <PageTemplate>
-              <IndexSlotPage />
-            </PageTemplate>
-          )}/>
+          {/*<Route path={PageOrModalPathEnum.IndexSlotPage} element={(*/}
+          {/*  <PageTemplate>*/}
+          {/*    <IndexSlotPage />*/}
+          {/*  </PageTemplate>*/}
+          {/*)}/>*/}
           <Route path={PageOrModalPathEnum.InvitePage} element={(
             <PageTemplate showMobileHeader={false} showMobileFooter={false}>
               <InvitePage/>

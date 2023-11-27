@@ -68,7 +68,7 @@ export const IndexSlotPage = () => {
   const gameList = () => {
     return allGameList && activeTab === "Salão"
       ? allGameList !== undefined && allGameList.map((i: any, index:number) => {
-        return <GameTypeSectionList isLatestItem={allGameList.length - 1 === index} key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClick={() => setActiveTab(i.gameType)} />
+        return <GameTypeSectionList isLatestItem={allGameList.length - 1 === index} key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClickExpand={() => setActiveTab(i.gameType)} />
       }) :
       renderTypeGameList()
   }
