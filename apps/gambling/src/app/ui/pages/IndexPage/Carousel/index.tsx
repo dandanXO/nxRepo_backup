@@ -84,6 +84,7 @@ export const AppCarousel = (props: IAppCarousel) => {
         // removeArrowOnDeviceType={["tablet", "mobile"]}
         // ssr={true} // means to render carousel on server-side.
         customTransition="transform 1s ease-in-out"
+        transitionDuration={1000}
         keyBoardControl={false}
 
         containerClass="carousel-container"
