@@ -5,7 +5,7 @@ import {UserRegisterForm} from "./forms/UserRegisterForm";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import {UserForgetPasswordForm} from "./forms/UserForgetPasswordForm";
 import {environment} from "../../../../environments/environment";
-import {Logo} from "../../footers/coco/Logo";
+import {Logo} from "../../footer/coco/Logo";
 
 export type IUserLoginStatusSection = {
   // onClickToLogin: () => void;

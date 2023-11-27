@@ -22,8 +22,7 @@ export const clearLoginLocalStorage = () => {
   AppLocalStorage.removeItem(AppLocalStorageKey.userInfo);
   AppLocalStorage.removeItem(AppLocalStorageKey.ip);
   AppLocalStorage.removeItem(AppLocalStorageKey.userInfo);
-  AppLocalStorage.removeItem(AppLocalStorageKey.favoriteLocal)
-  AppLocalStorage.removeItem(AppLocalStorageKey.favoriteLocalArr)
+  AppLocalStorage.removeItem(AppLocalStorageKey.gameRecentLocal)
   AppLocalStorage.removeItem(AppLocalStorageKey.useLazyGetUserVIPAllInfoQuery)
   AppLocalStorage.removeItem(AppLocalStorageKey.useGetVIPInfoMutation)
 }

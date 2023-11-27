@@ -8,7 +8,7 @@ import { Table } from "../../components/Table";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { MobileDailySignInRecordPage } from "./MobileDailySignInRecordPage";
-import { formatMoney } from "../../utils/formatMoney";
+import { format } from "../../utils/format";
 
 
 export const DailySignInRecordPage = () => {
@@ -33,7 +33,7 @@ export const DailySignInRecordPage = () => {
     { title: 'ID', name: 'id', key: 'id'},
     { title: 'Nivel VIP', name: 'vip_level', key: 'vip_level'},
     { title: 'Coleta Contínua', name: 'days', key: 'days', render: (record:any) => record.days === 1 ? `${record.days}dia`: `${record.days}dias`},
-    { title: 'Obter Recompensas', name: 'cashback', key: 'cashback', render: (record: any) => `R$ ${formatMoney(record.cashback / 100)}`},
+    { title: 'Obter Recompensas', name: 'cashback', key: 'cashback', render: (record: any) => `R$ ${format(record.cashback / 100)}`},
     { title: 'Tempo', name: 'created_at', key: 'created_at' },
   ]
 

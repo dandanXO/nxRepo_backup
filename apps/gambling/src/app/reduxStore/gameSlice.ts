@@ -59,9 +59,9 @@ export const gameSlice = createSlice({
       let hotGameBrandIndex = 0
       const allGame = gameData && gameData?.label.reduce((acc: any , currentType:string) => {
 
-        const subGamesList = gameData.type[currentType].reduce((acc: any, currentSubType: string) => {
+        const subGamesList = gameData.type[currentType]?.reduce((acc: any, currentSubType: string) => {
           // console.log("gameData[currentType][currentSubType]", gameData[currentType][currentSubType]);
-          let currentBrandGames: any[] = gameData[currentType][currentSubType];
+          let currentBrandGames: any[] = gameData[currentType] ? gameData[currentType][currentSubType] || [] : [];
           currentBrandGames = currentBrandGames.slice(0, hotGameBrandIndex === 0 ? MaxHotGameBrandGameCount : OtherMaxHotGameBrandGameCount)
           // return [...acc, ...gameData[currentType][currentSubType]]
           hotGameBrandIndex = hotGameBrandIndex + 1;

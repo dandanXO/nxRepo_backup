@@ -11,6 +11,7 @@ export enum AppLocalStorageKey {
 
   favoriteLocal = "favoriteLocal",
   favoriteLocalArr = "favoriteLocalArr",
+  gameRecentLocal = "gameRecentLocal",
 
   useLazyGetUserVIPAllInfoQuery = "useLazyGetUserVIPAllInfoQuery",
   useGetVIPInfoMutation = "useGetVIPInfoMutation",

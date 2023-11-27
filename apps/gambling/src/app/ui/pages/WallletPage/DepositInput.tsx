@@ -5,7 +5,7 @@ import {DepositInput as PDepositInput} from "./env/pernambucana/DepositInput";
 import {DepositInput as WDepositInput} from "./env/wild/DepositInput"
 import {DepositInput as CDepositInput} from "./env/coco/DepositInput";
 import {InputValue} from "../../components/Inputs/Input";
-import { formatMoney } from "../../utils/formatMoney";
+import { format } from "../../utils/format";
 
 interface IDepositInput {
   minimunValue: number;
@@ -18,7 +18,7 @@ interface IDepositInput {
 export const DepositInput = (props: IDepositInput) => {
   const { inputValue, setInputValue, selectedIndexConfig } = props;
   const isShowInputTag = selectedIndexConfig && Number(selectedIndexConfig?.rate) > 0
-  const extraDepositBonus = formatMoney(Number(inputValue.data) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1));
+  const extraDepositBonus = format(Number(inputValue.data) * Number(selectedIndexConfig && selectedIndexConfig?.rate || 1));
 
   return renderByPlatform({
     "wild777bet": (

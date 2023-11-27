@@ -36,7 +36,7 @@ export const IndexTabs = ({
     todos,
     todos,
     favorite,
-    // recent
+    recent
   ]
   const {isMobile} = useBreakpoint();
   return (
@@ -46,7 +46,7 @@ export const IndexTabs = ({
         {
           // ["Todos", ...label, 'Favoritos']
           // ["Salão", ...label, 'Favoritos']
-          ["Todos", ...label, 'Favoritos'].map((tab: string, index: number) => {
+          ["Todos", ...label, 'Favoritos', 'Recente'].map((tab: string, index: number) => {
             return (
               <ImageTab
                 className={cx("flex row justify-center items-center px-5 md:px-6",{

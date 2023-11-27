@@ -11,7 +11,7 @@ import {AppLocalStorage} from "../../../../persistant/localstorage";
 import {MobilePanel} from "./MobilePanel";
 import {DesktopPanel} from "./DesktopPanel";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
-import { formatMoney } from "../../../utils/formatMoney";
+import { format } from "../../../utils/format";
 
 
 export interface ITabType {
@@ -50,7 +50,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
     // 1 代理 0 全民
     const isProxy = props?.inviteInfo?.data.proxyType === 1
     const convertRecharge = (num1: number | string, num2: number | string) => {
-        return formatMoney((Number(num1) + Number(num2)) / 100)
+        return format((Number(num1) + Number(num2)) / 100)
     }
 
     const [triggerGetInviteUserDay, { currentData: inviteUserDay, isFetching: isInviteUserDayeFetching }] =
@@ -94,24 +94,24 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
     const totalRewardData = {
         // 历史总佣金 + 待领取佣金
         // x.reward + y.firstRechargeReward + y.flow1Reward + y.rewd1Reward + y.flow2Reward + y.rewd2Reward + y.flow3Reward + y.rewd3Reward
-        totalReward: formatMoney((Number(x.reward) + Number(y.firstRechargeReward) + Number(y.flow1Reward) + Number(y.rewd1Reward) + Number(y.flow2Reward) + Number(y.rewd2Reward) + Number(y.flow3Reward) + Number(y.rewd3Reward))/100),
+        totalReward: format((Number(x.reward) + Number(y.firstRechargeReward) + Number(y.flow1Reward) + Number(y.rewd1Reward) + Number(y.flow2Reward) + Number(y.rewd2Reward) + Number(y.flow3Reward) + Number(y.rewd3Reward))/100),
         // 历史总佣金
         // x.reward
-        paidReward: formatMoney(Number(x.reward) / 100),
+        paidReward: format(Number(x.reward) / 100),
         // 待领取佣金
         // y.firstRechargeReward + y.flow1Reward + y.rewd1Reward + y.flow2Reward + y.rewd2Reward + y.flow3Reward + y.rewd3Reward
-        waitForCalReward: formatMoney((Number(y.firstRechargeReward) + Number(y.flow1Reward) + Number(y.rewd1Reward) + Number(y.flow2Reward) + Number(y.rewd2Reward) + Number(y.flow3Reward) + Number(y.rewd3Reward))/100)
+        waitForCalReward: format((Number(y.firstRechargeReward) + Number(y.flow1Reward) + Number(y.rewd1Reward) + Number(y.flow2Reward) + Number(y.rewd2Reward) + Number(y.flow3Reward) + Number(y.rewd3Reward))/100)
     }
 
     const totalInviteData = {
       '1': {
         // Dividends （仅限代理显示） 后台未显示
         // x.rewd1Reward
-        dividendos: formatMoney(x.rewd1Reward / 100),
+        dividendos: format(x.rewd1Reward / 100),
 
         // 首充奖励 + 流水奖励
         // x.firstRechargeReward + y.firstRechargeReward + x.flow1Reward + y.flow1Reward
-        totalReward: formatMoney((
+        totalReward: format((
           Number(x.firstRechargeReward) + Number(y.firstRechargeReward) +
           Number(x.flow1Reward) + Number(y.flow1Reward)
         ) / 100),
@@ -122,57 +122,57 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
 
         // 直推首充奖励 + 直推首充待结算奖励
         // x.firstRechargeReward + y.firstRechargeReward
-        firstRecharge: formatMoney((Number(x.firstRechargeReward) + Number(y.firstRechargeReward))/100),
+        firstRecharge: format((Number(x.firstRechargeReward) + Number(y.firstRechargeReward))/100),
 
         // 直推流水 + 直推待结算流水
         // x.flow1 + y.flow1
-        gameRecharge: formatMoney((Number(x.flow1) + Number(y.flow1))/100),
+        gameRecharge: format((Number(x.flow1) + Number(y.flow1))/100),
 
         // 直推流水奖励 + 直推待结算流水奖励
         // x.flow1Reward + y.flow1Reward
-        gameRechargeReward: formatMoney((Number(x.flow1Reward) + Number(y.flow1Reward))/100),
+        gameRechargeReward: format((Number(x.flow1Reward) + Number(y.flow1Reward))/100),
 
       },
       '2': {
         // Dividends （仅限代理显示） 后台未显示
         // x.rewd2Reward
-        dividendos: formatMoney(x.rewd2Reward / 100),
+        dividendos: format(x.rewd2Reward / 100),
 
         // 二级流水返利 + 二级待结算流水奖励
         // x.flow2Reward + y.flow2Reward
-        totalReward: formatMoney((Number(x.flow2Reward) + Number(y.flow2Reward))/100),
+        totalReward: format((Number(x.flow2Reward) + Number(y.flow2Reward))/100),
 
         // NOTICE: 2級沒有使用這欄位
         numRecharge: 0,
 
         // 二级流水 + 二级待结算流水
         // x.flow2 + y.flow2
-        gameRecharge: formatMoney((Number(x.flow2) + Number(y.flow2))/100),
+        gameRecharge: format((Number(x.flow2) + Number(y.flow2))/100),
 
         // 二级流水返利 + 二级待结算流水奖励
         // x.flow2Reward + y.flow2Reward
-        gameRechargeReward: formatMoney((Number(x.flow2Reward) + Number(y.flow2Reward))/100),
+        gameRechargeReward: format((Number(x.flow2Reward) + Number(y.flow2Reward))/100),
 
       },
       '3': {
         // Dividends （仅限代理显示） 后台未显示
         // x.rewd3Reward
-        dividendos: formatMoney(x.rewd3Reward / 100),
+        dividendos: format(x.rewd3Reward / 100),
 
         // 三级流水返利 + 三级待结算流水奖励
         // x.flow3Reward + y.flow3Reward
-        totalReward: formatMoney((Number(x.flow3Reward) + Number(y.flow3Reward))/100),
+        totalReward: format((Number(x.flow3Reward) + Number(y.flow3Reward))/100),
 
         // NOTICE: 3級沒有使用這欄位
         numRecharge: 0,
 
         // 三级流水 + 三级待结算流水
         // x.flow3 + y.flow3
-        gameRecharge: formatMoney((Number(x.flow3) + Number(y.flow3))/100),
+        gameRecharge: format((Number(x.flow3) + Number(y.flow3))/100),
 
         // 三级流水返利 + 三级待结算流水奖励
         // x.flow3Reward + y.flow3Reward
-        gameRechargeReward: formatMoney((Number(x.flow3Reward) + Number(y.flow3Reward))/100),
+        gameRechargeReward: format((Number(x.flow3Reward) + Number(y.flow3Reward))/100),
       }
     }[isMobile ? mobileTotalPanelMode : totalPanelMode]
 
@@ -199,13 +199,13 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         const totalReward = (() => {
           if(dataType === "1") {
             // z.firstRechargeReward + z.flow1Reward
-            return formatMoney((z.firstRechargeReward + z.flow1Reward) / 100)
+            return format((z.firstRechargeReward + z.flow1Reward) / 100)
           } else if (dataType === "2") {
             // z.flow2Reward
-            return formatMoney(z.flow2Reward / 100)
+            return format(z.flow2Reward / 100)
           } else {
             // z.flow3Reward
-            return formatMoney(z.flow3Reward / 100);
+            return format(z.flow3Reward / 100);
           }
         })()
         // console.log("dailyData2", totalReward);
@@ -219,20 +219,20 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         // 當天有產生首充邀請獎勵
         // NOTICE: 2.3 級沒有這數據
         // z.firstRechargeReward
-        const firstRecharge = formatMoney(dataType === "1" ? Number(z.firstRechargeReward / 100) : 0);
+        const firstRecharge = format(dataType === "1" ? Number(z.firstRechargeReward / 100) : 0);
         // console.log("dailyData4", firstRecharge);
 
         // 當天邀請玩家的總流水
         const gameRecharge = (() => {
           if(dataType === "1") {
             // z.flow1
-            return formatMoney(z.flow1 / 100)
+            return format(z.flow1 / 100)
           } else if (dataType === "2") {
             // z.flow2
-            return formatMoney(z.flow2 / 100)
+            return format(z.flow2 / 100)
           } else {
             // z.flow3
-            return formatMoney(z.flow3 / 100)
+            return format(z.flow3 / 100)
           }
         })()
         // console.log("dailyData5", gameRecharge);
@@ -240,13 +240,13 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         const gameRechargeReward = (() => {
           if(dataType === "1") {
             // z.flow1Reward
-            return formatMoney(z.flow1Reward / 100)
+            return format(z.flow1Reward / 100)
           } else if (dataType === "2") {
             // z.flow2Reward
-            return formatMoney(z.flow2Reward / 100)
+            return format(z.flow2Reward / 100)
           } else {
             // z.flow3Reward
-            return formatMoney(z.flow3Reward / 100)
+            return format(z.flow3Reward / 100)
           }
         })()
         // console.log("dailyData6", gameRechargeReward);

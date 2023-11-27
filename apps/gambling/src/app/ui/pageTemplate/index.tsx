@@ -17,8 +17,8 @@ import {environment} from "../../../environments/environment";
 
 import {NotificationDrawer} from "../drawers/NotificationDrawer";
 
-import {UserInfoStatusPopover} from "../popover/UserInfoStatusPopover";
-import {LogoutPopover} from "../popover/LogoutPopover";
+import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
+import {LogoutPopover} from "../popovers/LogoutPopover";
 
 import {DownloadModal} from "../modals/DownloadModal";
 import {TelegramContactModal} from "../modals/TelegramContactModal";

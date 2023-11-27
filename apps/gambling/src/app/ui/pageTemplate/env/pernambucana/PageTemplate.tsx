@@ -5,7 +5,7 @@ import cx from "classnames";
 
 import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
-import {Footer} from "../../../footers/coco/Footer";
+import {Footer} from "../../../footer/coco/Footer";
 import {TabBar} from "../../../tabBar";
 import {Toolbox} from "../../../components/Toolbox";
 import {ThreeDots} from "react-loading-icons";

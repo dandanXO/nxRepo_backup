@@ -4,6 +4,8 @@ import {RootState} from "../../reduxStore";
 import {appSlice} from "../../reduxStore/appSlice";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import { GameItem } from "../components-bs/GameTypeSection";
+import { AppLocalStorage } from "../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
 
 export const usePageNavigate = () => {
   const navigate = useNavigate();
@@ -109,8 +111,22 @@ export const usePageNavigate = () => {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
       navigate(`${PageOrModalPathEnum.GamePage}?gameId=${item.gameId}&label=${item.type === "null" ? item.label : item.type}`)
+      addGameToRecent(item)
     }
   }
+
+  const addGameToRecent = (gameItem: GameItem) => {
+    const gameRecentLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.gameRecentLocal) || '[]')
+    if(gameRecentLocal) {
+      const indexInGameRecentLocal = gameRecentLocal.findIndex((recentGameItem: GameItem) => recentGameItem.gameId === gameItem.gameId)
+      indexInGameRecentLocal != -1 && gameRecentLocal.splice(indexInGameRecentLocal, 1)
+      gameRecentLocal.unshift(gameItem)
+      AppLocalStorage.setItem(AppLocalStorageKey.gameRecentLocal, JSON.stringify(gameRecentLocal))
+    } else {
+      AppLocalStorage.setItem(AppLocalStorageKey.gameRecentLocal, JSON.stringify(gameItem))
+    }
+  }
+
   return {
     onClickToIndex,
     onClickToSlot,

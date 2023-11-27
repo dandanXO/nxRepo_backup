@@ -169,7 +169,7 @@ export const IndexPage = ({
             }
           )}
         >
-          <div className={"flex flex-row justify-center items-baseline"}>
+          <div className={"flex flex-row justify-center items-center"}>
             <div className="grow min-w-[100px] mr-2">
               <ScrollTab className="items-center">
                 <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
