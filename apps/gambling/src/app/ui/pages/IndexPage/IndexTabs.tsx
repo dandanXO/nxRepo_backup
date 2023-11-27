@@ -49,6 +49,7 @@ export const IndexTabs = ({
           ["Todos", ...label, 'Favoritos', 'Recente'].map((tab: string, index: number) => {
             return (
               <ImageTab
+                key={index}
                 className={cx("flex row justify-center items-center px-5 md:px-6",{
 
                 })}

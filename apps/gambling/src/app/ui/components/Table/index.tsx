@@ -86,8 +86,8 @@ export const Table = (props: ITable) => {
             {dataSource.length === 0 ? <tr>
               <NoData />
             </tr> :
-              dataSource.map((data: any) => {
-                return <tr>
+              dataSource.map((data: any, index: number) => {
+                return <tr key={index}>
                   {columns?.map((col: any, colIndex: number) => (
                     <td key={col.key + colIndex}
                       className={tcx('py-4 px-3 border-[rgba(255,255,255,0.2)] sm:break-all text-center',

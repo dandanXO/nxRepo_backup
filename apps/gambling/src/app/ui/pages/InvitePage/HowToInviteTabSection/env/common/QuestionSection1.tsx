@@ -16,10 +16,10 @@ export const QuestionSection1 = () => {
         if (currentConfig.length - 1 !== index) {
           // NOTICE: 型別遺失 這個沒有寫 number 沒有被檢測到要number, money={Number(item.reward)}
           return (
-            <div>{`Convidar ${item.num} - ${Number(currentConfig[index + 1]?.num) - 1} pessoas, recompense R$ ${(Number(item.reward) / 100)}`}</div>)
+            <div key={index}>{`Convidar ${item.num} - ${Number(currentConfig[index + 1]?.num) - 1} pessoas, recompense R$ ${(Number(item.reward) / 100)}`}</div>)
         } else {
           return (
-            <div >{`Mais de ${item.num} pessoas, recompensa R$ ${Number(item.reward) / 100}`}</div>
+            <div key={index}>{`Mais de ${item.num} pessoas, recompensa R$ ${Number(item.reward) / 100}`}</div>
           )
         }
       })}

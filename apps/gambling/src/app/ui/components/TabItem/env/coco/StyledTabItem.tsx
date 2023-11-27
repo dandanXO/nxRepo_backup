@@ -75,7 +75,7 @@ ${(props) => {
 
     } else {
       if (props.background) {
-        console.log('props.background)',props.background)
+        // console.log('props.background)',props.background)
         return `
         background: ${props.background};
         color:  var(--primary-assistant);
