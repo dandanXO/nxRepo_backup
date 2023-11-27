@@ -364,12 +364,13 @@ module.exports = (config, context) => {
   }
 
   // isProduction
-  if (false) {
+  // if (true) {
     // finalConfig.plugins.push(
     //   new CleanWebpackPlugin({
     //     verbose: true,
     //   })
     // );
+  if(isProduction) {
     finalConfig.plugins.push(
       new SentryCliPlugin({
         debug: true,
@@ -390,6 +391,8 @@ module.exports = (config, context) => {
       })
     );
   }
+
+  // }
 
   if (isDashboard) {
     finalConfig.plugins.push(new DashboardPlugin());
