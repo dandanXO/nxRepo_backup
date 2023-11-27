@@ -7,7 +7,7 @@ import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "
 import { useEffect } from "react";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import { formatMoney } from "../../utils/formatMoney";
+import { format } from "../../utils/format";
 import { CopyIcon } from '../../components/Icons/CopyIcon';
 
 const Container = styled.div`
@@ -69,7 +69,7 @@ export const DepositMobileTable = () => {
                 }
               >
                 <span className={''}>Valor</span>
-                <span className={''}>R${formatMoney(Number(record.amount))}</span>
+                <span className={''}>R${format(Number(record.amount))}</span>
               </div>
 
               <div
@@ -79,7 +79,7 @@ export const DepositMobileTable = () => {
               >
                 <span className={''}>valor do bônus</span>
                 <span className={''}>
-                  R${formatMoney(Number(record.amount) * Number(record.rate))}
+                  R${format(Number(record.amount) * Number(record.rate))}
                 </span>
               </div>
 
@@ -142,7 +142,7 @@ export const WithdrawMobileTable = () => {
                 }
               >
                 <span className={''}>Valor</span>
-                <span className={''}>R${formatMoney(Number(record.amount))}</span>
+                <span className={''}>R${format(Number(record.amount))}</span>
               </div>
 
               <div
@@ -151,7 +151,7 @@ export const WithdrawMobileTable = () => {
                 }
               >
                 <span className={''}>Taxa de retirada</span>
-                <span className={''}>R${formatMoney(Number(record.fee))}</span>
+                <span className={''}>R${format(Number(record.fee))}</span>
               </div>
 
               <div

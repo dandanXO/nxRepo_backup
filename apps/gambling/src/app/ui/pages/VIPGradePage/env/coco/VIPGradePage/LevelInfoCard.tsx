@@ -4,7 +4,7 @@ import { tcx } from "../../../../../utils/tcx";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";
 import { environment } from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
-import { formatMoney } from "../../../../../utils/formatMoney";
+import { format } from "../../../../../utils/format";
 
 interface ILevelInfoCardProps extends GetUserVIPAllInfoResponseData {
   signInBonus: number
@@ -60,18 +60,18 @@ const LevelInfoCard = ({
 
           <div className={tcx( ['hidden', level >= 20])}>Recompensa de atualização：
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {formatMoney(upRewardAmout ? upRewardAmout / 100 : 0)}
+              R$ {format(upRewardAmout ? upRewardAmout / 100 : 0)}
             </span>
           </div>
           <div>Recompensa total de check-in de 7 dias：
             <span className='text-[var(--secondary-assistant)]'>
-              {formatMoney(signInBonus)}
+              {format(signInBonus)}
             </span>
           </div>
           <div>Limite máximo de retirada única：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {
-              formatMoney(withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0)}
+              format(withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0)}
             </span>
           </div>
           <div>Número de retiradas por dia：
@@ -84,12 +84,12 @@ const LevelInfoCard = ({
           <div className={tcx('text-2xl text-left font-medium', ['text-lg font-bold', isMobile])}>Condição</div>
           <div>Quantidade total de recarga:
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {formatMoney(rechargeAmountLimit ? rechargeAmountLimit / 100 : 0)}
+              R$ {format(rechargeAmountLimit ? rechargeAmountLimit / 100 : 0)}
             </span>
           </div>
           <div>Número total de apostas:
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {formatMoney(flowLimit ? flowLimit / 100 : 0)}
+              R$ {format(flowLimit ? flowLimit / 100 : 0)}
             </span>
           </div>
         </div>
