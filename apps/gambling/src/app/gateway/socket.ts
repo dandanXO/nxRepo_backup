@@ -150,28 +150,36 @@ export class Socket {
     };
 
     this.ws.onmessage = (t: MessageEvent) => {
-      Sentry.addBreadcrumb({
-        level: "info",
-        category: "Socket Message",
-        message: JSON.stringify(t),
-        // type,
-        // event_id?: string;
-        // data: JSON.stringify(t),
-        // timestamp?: number;
-      })
+      try {
+        Sentry.addBreadcrumb({
+          level: "info",
+          category: "Socket Message",
+          message: JSON.stringify(t),
+          // type,
+          // event_id?: string;
+          // data: JSON.stringify(t),
+          // timestamp?: number;
+        })
+      } catch (e){
+        console.log(e)
+      }
       this.onmessage(t);
     };
 
     this.ws.onerror = (t: Event) => {
-      Sentry.addBreadcrumb({
-        level: "info",
-        category: "Socket Error",
-        message: JSON.stringify(t),
-        // type,
-        // event_id?: string;
-        // data: JSON.stringify(t),
-        // timestamp?: number;
-      })
+      try {
+        Sentry.addBreadcrumb({
+          level: "info",
+          category: "Socket Error",
+          message: JSON.stringify(t),
+          // type,
+          // event_id?: string;
+          // data: JSON.stringify(t),
+          // timestamp?: number;
+        })
+      } catch (e) {
+        console.log(e)
+      }
       this.onerror(t);
     };
   }
