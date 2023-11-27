@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import {DesktopGameNumber, MobileGameNumber, TTotalFavoriteLocalState} from "../../pages/IndexPage";
+import {DesktopGameNumber, MobileGameNumber} from "../../pages/IndexPage";
 import cx from "classnames";
 import {environment} from "../../../../environments/environment"
 import {MobileGameList} from "./GameList/MobileGameList";
@@ -36,12 +36,12 @@ export type IGameTypeSectionList = {
   onClickExpand?: () => void;
   expandedBrand?: string;
   isViewAll?: boolean;
-  totalFavoriteLocalState: TTotalFavoriteLocalState
-  setTotalFavoriteLocalState: Dispatch<SetStateAction<TTotalFavoriteLocalState>>;
   setExpandedBrand?:Dispatch<SetStateAction<string>>;
   isLatestItem: boolean;
   hotGames?: boolean;
-  expandCount?: number
+  expandCount?: number;
+  userFavorite: number[]
+  onClickFavoriteGameItem: (item: GameItem) => void
 }
 
 export const GameTypeSectionList = (props: IGameTypeSectionList) => {
@@ -50,7 +50,6 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   const maximunGameItemCount = isMobile ? MobileGameNumber : DesktopGameNumber;
 
   const { onClickGameItem } = usePageNavigate();
-  const { onClickFavoriteGameItem, userFavorite } = useClickFavoriteGameItem();
 
   const MainGameList = isMobile ? MobileGameList : GameList
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem
@@ -59,6 +58,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
 
   const [listSize, setListSize] = useState(initialListSize || 0);
   const displayedItems = props?.data && props?.data.slice(0, listSize);
+
 
   // console.log("props.gameTypeName", props.gameTypeName);
   // NOTE: reset by changing game brand
@@ -127,8 +127,8 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
                 // imageURL={`${environment.s3URLImages}/${item.gameId}.jpg`}
                 imageURL={`https://resources.ttgroup.vip/icon/${item.gameId}-small.png`}
                 onClick={() => onClickGameItem(item)}
-                favorite={(userFavorite).includes(Number(item.gameId))}
-                onClickFavorite={() => onClickFavoriteGameItem(item)}
+                favorite={(props.userFavorite).includes(Number(item.gameId))}
+                onClickFavorite={() => props.onClickFavoriteGameItem(item)}
               />
             )
         })}

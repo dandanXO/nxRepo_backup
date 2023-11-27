@@ -3,7 +3,7 @@ import cx from "classnames";
 import 'react-multi-carousel/lib/styles.css';
 import {AppCarousel} from "../../Carousel";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {GameTypeSectionList} from "../../../../components-bs/GameTypeSection";
+import { GameItem, GameTypeSectionList } from "../../../../components-bs/GameTypeSection";
 import {Input} from "../../../../components/Inputs/Input";
 // @ts-ignore
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
@@ -11,6 +11,7 @@ import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../environments/environment"
 import {PernambucanaAppCarouselContent} from "../../Carousel/env/pernambucana/PernambucanaAppCarouselContent";
+import { useClickFavoriteGameItem } from "../../../../hooks/useClickFavoriteGameItem";
 
 
 export type TTotalFavoriteLocalState = {
@@ -28,8 +29,6 @@ export type TTotalFavoriteLocalState = {
 
 type IPernambucana777BetIndexPage = {
   allGameList: any;
-  totalFavoriteLocalState: any;
-  setTotalFavoriteLocalState: (value: any) => void;
   label: any;
   activeTab: any;
   setActiveTab: (value: any) => void;
@@ -38,18 +37,20 @@ type IPernambucana777BetIndexPage = {
   gameList: any;
   showFixForIOSStickTab: boolean;
   scrollToCarousel: () => void;
+  userFavorite: number[]
+  onClickFavoriteGameItem: (item: GameItem) => void
 }
 
 export const IndexPage = ({
                                               allGameList,
-                                              totalFavoriteLocalState,
-                                              setTotalFavoriteLocalState,
                                               label,
                                               activeTab,
                                               setActiveTab,
                                               setViewType,
                                               setSearchInput,
-                                              gameList
+                                              gameList,
+  userFavorite,
+  onClickFavoriteGameItem
 }:IPernambucana777BetIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ export const IndexPage = ({
         {/*遊戲列表背景*/}
         {isMobile ? (
           allGameList !== undefined && allGameList.map((i: any, index: number) => {
-            return <GameTypeSectionList isLatestItem={allGameList.length - 1 === index} key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClickExpand={()=>navigate(PageOrModalPathEnum.IndexSlotPage)} />
+            return <GameTypeSectionList userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} isLatestItem={allGameList.length - 1 === index} key={index}  gameTypeName={i.gameType} data={i.data.games} onClickExpand={()=>navigate(PageOrModalPathEnum.IndexSlotPage)} />
           })
         ) : (
             <section className="flex flex-col bg-[rgba(1,62,66,0.6)] ml-20 p-4 rounded-lg " style={{ border: '1px solid #2CFD99' }}>

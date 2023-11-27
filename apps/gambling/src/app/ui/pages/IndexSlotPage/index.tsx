@@ -6,9 +6,9 @@ import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
 import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import {TTotalFavoriteLocalState} from "../IndexPage";
 import {ScrollTab} from "../../components/TabItem/ScrollTab";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 
 
 const StyledIndexPage = styled.div`
@@ -37,16 +37,10 @@ const StyledIndexPage = styled.div`
 
 
 export const IndexSlotPage = () => {
-  const favoriteLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocal) || '{}')
-  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
-  const [totalFavoriteLocalState, setTotalFavoriteLocalState] = useState<TTotalFavoriteLocalState>({
-    local: favoriteLocal,
-    localArr: favoriteLocalArr
-  })
-
   const { isMobile } = useBreakpoint();
   const [activeTab, setActiveTab] = useState("Salão");
   const { allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
+  const { userFavorite, onClickFavoriteGameItem} = useClickFavoriteGameItem()
 
   const renderTypeGameList=()=>{
     let list: { subGameType: string, games: { gameId: string }[] }[] = []
@@ -61,14 +55,14 @@ export const IndexSlotPage = () => {
     }
 
     return list.map(({ subGameType, games }: any, index: number) => {
-      return <GameTypeSectionList isLatestItem={list.length - 1 === index}  key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={subGameType} data={games} />
+      return <GameTypeSectionList userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} isLatestItem={list.length - 1 === index}  key={index} gameTypeName={subGameType} data={games} />
     })
   }
 
   const gameList = () => {
     return allGameList && activeTab === "Salão"
       ? allGameList !== undefined && allGameList.map((i: any, index:number) => {
-        return <GameTypeSectionList isLatestItem={allGameList.length - 1 === index} key={index} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={i.gameType} data={i.data.games} onClickExpand={() => setActiveTab(i.gameType)} />
+        return <GameTypeSectionList userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} isLatestItem={allGameList.length - 1 === index} key={index} gameTypeName={i.gameType} data={i.data.games} onClickExpand={() => setActiveTab(i.gameType)} />
       }) :
       renderTypeGameList()
   }

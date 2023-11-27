@@ -6,12 +6,12 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import { GameTypeSectionList } from "../../components-bs/GameTypeSection";
 import { AppLocalStorage } from "../../../persistant/localstorage";
-import { TTotalFavoriteLocalState } from "../IndexPage";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import { SearchInput } from "../../components/Inputs/SearchInput";
 import { SearchPageContainer } from "./SearchPageContainer";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 // import {onValidatePasswordInput} from "../../components/UserLoginStatusSection/forms/UserLoginForm";
 
 export const GameSearchPage = () => {
@@ -21,13 +21,9 @@ export const GameSearchPage = () => {
     errorMessage: '',
   });
 
-  const favoriteLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocal) || '{}')
+  const { userFavorite, onClickFavoriteGameItem } = useClickFavoriteGameItem()
+
   const navigate = useNavigate();
-  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
-  const [totalFavoriteLocalState, setTotalFavoriteLocalState] = useState<TTotalFavoriteLocalState>({
-    local: favoriteLocal,
-    localArr: favoriteLocalArr
-  })
 
   const { isMobile } = useBreakpoint();
   const Input = isMobile ? MobileInput : DesktopInput;
@@ -39,7 +35,7 @@ export const GameSearchPage = () => {
   const gameList = () => {
     if (searchInput.data !== '') {
       if (searchResults.length > 0) {
-        return <GameTypeSectionList isLatestItem={true} totalFavoriteLocalState={totalFavoriteLocalState} setTotalFavoriteLocalState={setTotalFavoriteLocalState} gameTypeName={'null'} data={searchResults} />
+        return <GameTypeSectionList userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} isLatestItem={true} gameTypeName={'null'} data={searchResults} />
       } else {
         return <></>
       }
