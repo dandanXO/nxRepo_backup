@@ -11,7 +11,7 @@ import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../../header/env/wild/Header";
 import {HeaderMobile} from "../../../header/env/wild/HeaderMobile";
-import {Footer} from "../../../footers/wild/Footer";
+import {Footer} from "../../../footer/wild/Footer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
 import { TShowToolboxConfig } from "../../index";
 

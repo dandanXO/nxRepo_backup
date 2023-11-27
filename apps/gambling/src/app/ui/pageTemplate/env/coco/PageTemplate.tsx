@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
-import {Footer} from "../../../footers/coco/Footer";
+import {Footer} from "../../../footer/coco/Footer";
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
 import {TabBar} from "../../../tabBar";
 import {Toolbox} from "../../../components/Toolbox";
@@ -14,7 +14,7 @@ import {Header} from "../../../header/env/coco/Header";
 import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
 import { TShowToolboxConfig } from "../../index";
-import {Logo} from "../../../footers/coco/Logo";
+import {Logo} from "../../../footer/coco/Logo";
 import {tcx} from "../../../utils/tcx";
 import {LoadingBar} from "../../../components/LoadingBar";
 
