@@ -12,11 +12,12 @@ import { MobileMenuItem } from "./MobileMenuItem";
 import styled from "styled-components";
 import { environment } from "../../../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import { IUserInfo } from "../../../../../persistant/IUserInfo";
 
 
 export const MenuDrawerContent = () => {
   const location = useLocation();
-  const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
+  const userInfo: IUserInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
   const {
     onClickToFirstDeposit,
     onClickToDepositCashback,
@@ -45,7 +46,7 @@ export const MenuDrawerContent = () => {
         <div className={'mt-10 flex  flex-col justify-center items-center'}>
           <CocoAvatar />
           {userInfo.user_id && <div className="user-info flex mt-2 items-center">
-            <p className="user-name text-white font-bold mr-2 text-sm">G{userInfo.user_id}</p>
+            <p className="user-name text-white font-bold mr-2 text-sm">{userInfo.nickname}</p>
             <div className="user-code flex text-xs text-white items-center" >
               <p>ID:{userInfo.user_id || ''}</p>
               <CopyIcon copyText={userInfo.user_id || ''} />
