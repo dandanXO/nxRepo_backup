@@ -88,12 +88,15 @@ export const IndexPage = () => {
       const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
 
       list = [{ subGameType: 'Favoritos', games: favoriteLocalArr[userInfo.user_id]}]
+    } else if (activeTab === 'Recente') {
+      const recentGames = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.gameRecentLocal) || '[]')
+      list = [{ subGameType: 'Recente', games: recentGames}]
     } else {
       const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === activeTab)[0]?.data
       list = viewType !== '' ? data.filter((i: any) => i.subGameType === viewType) : data;
     }
 
-    return list.map(({subGameType,games}: any, index: number) => {
+    return list?.map(({subGameType,games}: any, index: number) => {
       return (
         <GameTypeSectionList
           isLatestItem={list.length - 1 === index}
