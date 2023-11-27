@@ -65,6 +65,9 @@ export const IndexPage = () => {
 
   const renderAllGameList = () => {
     return allGameList !== undefined && allGameList.map((i: any, index: number) => {
+      const typeGame = typeGameList.filter((item: any) => item.gameType === i.gameType)[0] || {}
+      const expandCount = typeGame.data?.reduce((acc: number, current: any) => acc + current.games.length , 0)
+
       return (
         <GameTypeSectionList
           hotGames={true}
@@ -74,7 +77,9 @@ export const IndexPage = () => {
           data={i.data.games}
           onClickExpand={() => setActiveTab(i.gameType)}
           totalFavoriteLocalState={totalFavoriteLocalState}
-          setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
+          setTotalFavoriteLocalState={setTotalFavoriteLocalState}
+          expandCount={expandCount}
+        />
       )
     })
   }

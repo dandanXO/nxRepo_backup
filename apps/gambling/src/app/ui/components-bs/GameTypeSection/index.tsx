@@ -41,6 +41,7 @@ export type IGameTypeSectionList = {
   setExpandedBrand?:Dispatch<SetStateAction<string>>;
   isLatestItem: boolean;
   hotGames?: boolean;
+  expandCount?: number
 }
 
 export const GameTypeSectionList = (props: IGameTypeSectionList) => {
@@ -107,7 +108,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       {props.gameTypeName ==='null' ? <div></div> : isMobile ? (
         <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll} {...mobileGameTypeHeaderProps}/>
       ): (
-        <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.data?.length} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll}/>
+        <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.expandCount || props.data?.length} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll}/>
       )}
 
       <MainGameList
