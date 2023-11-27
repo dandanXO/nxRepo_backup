@@ -1,8 +1,8 @@
 {
-  "url": "https://sentry.xu-jie-tech.com",
-  "authToken": "f011dbb05ecf47568bda70647512f773e8a9d3dc54e24f6d96ff8f9d48ef20a8",
+  "url": "https://sentry.ttgroup.vip",
+  "dsn": "https://ced020ceb486b2331e761e06d0bd7ea6@sentry.ttgroup.vip/2",
   "org": "sentry",
   "project": "api-app",
   "projectId": 2,
-  "dsn": "https://d90d01b7732c41d79ff57f964858e4cf@sentry.xu-jie-tech.com/2"
+  "authToken": "cce66c545bb359ea84929edcb5f50b2319bf027bd5fa2790253f43052f247f2e"
 }
