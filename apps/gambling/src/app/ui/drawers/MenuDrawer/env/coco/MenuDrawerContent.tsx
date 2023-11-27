@@ -12,11 +12,12 @@ import { MobileMenuItem } from "./MobileMenuItem";
 import styled from "styled-components";
 import { environment } from "../../../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import { IUserInfo } from "../../../../../persistant/IUserInfo";
 
 
 export const MenuDrawerContent = () => {
   const location = useLocation();
-  const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
+  const userInfo: IUserInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
   const {
     onClickToFirstDeposit,
     onClickToDepositCashback,

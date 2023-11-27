@@ -55,6 +55,8 @@ const responsive = {
   }
 };
 
+const TransitionDuration = 1
+
 type IAppCarousel = {
   children: React.ReactNode;
 }
@@ -83,7 +85,8 @@ export const AppCarousel = (props: IAppCarousel) => {
         removeArrowOnDeviceType={[]} // 在所有设备上都移除箭头
         // removeArrowOnDeviceType={["tablet", "mobile"]}
         // ssr={true} // means to render carousel on server-side.
-        customTransition="transform 1s ease-in-out"
+        customTransition={`transform ${TransitionDuration}s ease-in-out`}
+        transitionDuration={TransitionDuration * 1000}
         keyBoardControl={false}
 
         containerClass="carousel-container"

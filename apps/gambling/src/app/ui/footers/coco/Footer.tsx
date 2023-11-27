@@ -208,7 +208,7 @@ export const Footer = (props: IFooter) => {
                 <div className='flex justify-center mb-4'>
                   <img alt='footer1' className='h-5' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
                 </div>
-                <div className='mb-4'>@ 2023 {environment.platformName} All rights</div>
+                <div className='mb-4 text-center'>@ 2023 {environment.platformName} All rights</div>
               </section>
             </div>
           </div>

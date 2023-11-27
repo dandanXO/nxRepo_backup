@@ -4,7 +4,7 @@ import { IUserInfoStatusPopoverInviteInfoProps } from "../../index";
 import { useNavigate } from "react-router";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import { formatMoney } from "../../../../utils/formatMoney";
+import { format } from "../../../../utils/format";
 
 const Container = styled.div`
   background: rgb(from var(--primary-assistant) r g b / 20%);
@@ -33,15 +33,15 @@ export const UserInfoStatusPopoverInviteInfo = ({
         className='rounded-b-xl flex text-xs text-center py-3 gap-2'
       >
         <div className='w-1/3'>
-          <div className='text-base'>R$ {formatMoney(totalPrize)}</div>
+          <div className='text-base'>R$ {format(totalPrize)}</div>
           <div>Prêmio total</div>
         </div>
         <div className='w-1/3'>
-          <div className='text-base'>R$ {formatMoney(bonusAwaitingSettlement)}</div>
+          <div className='text-base'>R$ {format(bonusAwaitingSettlement)}</div>
           <div>Bônus aguardando liquidação</div>
         </div>
         <div className='w-1/3'>
-          <div className='text-base'>R$ {formatMoney(fullWithdrawable)}</div>
+          <div className='text-base'>R$ {format(fullWithdrawable)}</div>
           <div>Bônus já liquidados</div>
         </div>
       </Container>

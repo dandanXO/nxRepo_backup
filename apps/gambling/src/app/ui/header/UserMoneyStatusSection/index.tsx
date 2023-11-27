@@ -13,7 +13,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 import { PersonalControl as CocoPersonalControl } from '../env/coco/PersonalControl'
 import { PersonalControl as WildPersonalControl } from '../env/wild/PersonalControl'
 import { PersonalControl as PernambucanaPersonalControl } from '../env/pernambucana/PersonalControl'
-import { formatMoney } from "../../utils/formatMoney";
+import { format } from "../../utils/format";
 
 
 const PersonalControl = renderByPlatform({
@@ -50,7 +50,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
       </button>
       {/*main-secondary-main*/}
       <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-bold"}>{
-        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${formatMoney(totalBalanceSheetValue)}`
+        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${format(totalBalanceSheetValue)}`
       }</div>
       <button onClick={() => {
         navigate(PageOrModalPathEnum.WalletPage);

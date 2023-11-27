@@ -17,7 +17,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import {depositButtonProps as PDepositButtonProps} from "./env/pernambucana/depositButtonProps";
 import {depositButtonProps as WDepositButtonProps} from "./env/wild/depositButtonProps";
 import {depositButtonProps as CDepositButtonProps} from "./env/coco/depositButtonProps";
-import { formatMoney } from "../../utils/formatMoney";
+import { format } from "../../utils/format";
 import {ButtonPro} from "../../components/Buttons/ButtonPro";
 import {ProButton} from "../../components/Buttons/ProButton";
 import { useRechargeMutation } from "../../../external";
@@ -204,7 +204,7 @@ export const DepositPanel = (props: IDepositPanel) => {
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
             const isShowRate = Number(config?.rate) > 0 || (Number(rechargeValue) * Number(config?.rate)).toFixed(2) > config?.amount_min;
-            const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? formatMoney(Number(rechargeValue) * Number(config?.rate)) : ""
+            const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? format(Number(rechargeValue) * Number(config?.rate)) : ""
             return (
               <DepositMoneyButton
                 key={index}

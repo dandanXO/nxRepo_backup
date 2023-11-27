@@ -12,7 +12,7 @@ import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRouterRules";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
-import { formatMoney } from "../../../../../utils/formatMoney";
+import { format } from "../../../../../utils/format";
 import {ViewRecordButton} from "../../../../../components/Buttons/env/coco/ViewRecordButton";
 
 const SignInButton = styled.div<{
@@ -233,7 +233,7 @@ export const DayList = ({
 
               {
                 !checked && (
-                  <div className='break-all text-sm  text-white mb-[24px]'>R$ {formatMoney((config?.cashback || 0))}</div>
+                  <div className='break-all text-sm  text-white mb-[24px]'>R$ {format((config?.cashback || 0))}</div>
                 )
               }
 
