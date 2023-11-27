@@ -44,8 +44,6 @@ export type TTotalFavoriteLocalState = {
 
 type ICoco777betIndexPage = {
   allGameList: any;
-  totalFavoriteLocalState: any;
-  setTotalFavoriteLocalState: (value: any) => void;
   label: any;
   activeTab: any;
   setActiveTab: (value: any) => void;
@@ -58,8 +56,6 @@ type ICoco777betIndexPage = {
 
 export const IndexPage = ({
                                               allGameList,
-                                              totalFavoriteLocalState,
-                                              setTotalFavoriteLocalState,
                                               label,
                                               activeTab,
                                               setActiveTab,

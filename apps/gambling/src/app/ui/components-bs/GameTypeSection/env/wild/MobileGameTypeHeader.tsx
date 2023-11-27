@@ -10,17 +10,17 @@ export const MobileGameTypeHeader = (props: {
   seeMoreText?: string;
   titleClassName?: string
   textClassName?: string;
+  expandedBrand?: string;
+  setExpandedBrand?: Dispatch<SetStateAction<string>>;
   isViewAll?: boolean;
-  setViewType?: Dispatch<SetStateAction<string>>;
-
 }) => {
   const { containerClassName = '', titleClassName = '', showIcon = true, textClassName = '', seeMoreText = '' } = props;
   // console.log('mobileGameTypeHeaderProps', props)
   return (
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>
       <div className="flex">
-        {props.isViewAll && <div onClick={() => {
-          props?.setViewType && props?.setViewType('')
+        {props.expandedBrand && <div onClick={() => {
+          props?.setExpandedBrand && props?.setExpandedBrand('')
         }}>
           <img data-v-ddc8133e="" className="backSlots w-[24px] h-[24px] mr-4"
             src={`assets/${environment.assetPrefix}/ic_gameHeader_back.png`}
@@ -29,7 +29,7 @@ export const MobileGameTypeHeader = (props: {
         {showIcon && <img src={`assets/${environment.assetPrefix}/ic_game.png`} />}
         <span className={titleClassName}>{props.gameTypeName}</span>
       </div>
-      {props?.onClick && !props.isViewAll &&(
+      {props?.onClick && !props.expandedBrand && !props.isViewAll &&(
         <div className={cx("flex justify-center items-center", textClassName)} onClick={props?.onClick}>
           <p className="z-10">{seeMoreText ? seeMoreText : 'Tudo'}</p>
         </div>

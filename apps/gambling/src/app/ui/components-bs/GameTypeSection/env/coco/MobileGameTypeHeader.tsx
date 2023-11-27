@@ -11,9 +11,9 @@ export const MobileGameTypeHeader = (props: {
   seeMoreText?: string;
   titleClassName?: string
   textClassName?: string;
+  expandedBrand?: string;
+  setExpandedBrand?: Dispatch<SetStateAction<string>>;
   isViewAll?: boolean;
-  setViewType?: Dispatch<SetStateAction<string>>;
-
 }) => {
   const { containerClassName = '', titleClassName = '', showIcon = true, textClassName = '', seeMoreText = '' } = props;
   // console.log('mobileGameTypeHeaderProps', props)
@@ -21,10 +21,10 @@ export const MobileGameTypeHeader = (props: {
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>
 
       <div className="flex">
-        {props.isViewAll && (
+        {props.expandedBrand && (
           <button
             onClick={() => {
-              props?.setViewType && props?.setViewType('')
+              props?.setExpandedBrand && props?.setExpandedBrand('')
             }}
           >
             {/*<img data-v-ddc8133e="" className="backSlots w-[24px] h-[24px] mr-4"*/}
@@ -38,7 +38,7 @@ export const MobileGameTypeHeader = (props: {
       </div>
 
 
-      {props?.onClick && !props.isViewAll &&(
+      {props?.onClick && !props.expandedBrand && !props.isViewAll &&(
         <div>
           <button
             onClick={props.onClick}

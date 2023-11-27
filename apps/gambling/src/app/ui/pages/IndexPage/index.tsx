@@ -17,41 +17,22 @@ import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
 import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useScrollToCarousel} from "./useScrollToCarousel";
-
-
-export type TTotalFavoriteLocalState = {
-  local: { [key: number]: number [] },
-  localArr: {
-    [key: number]: {
-      gameId: number,
-      name: string,
-      img: string,
-      label: string,
-      type: string
-    }[]
-  }
-}
+import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 
 export const MobileGameNumber = 15;
 export const DesktopGameNumber = 30;
 
 
 export const IndexPage = () => {
-  const favoriteLocal = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocal) || '{}')
-  const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
-  const [totalFavoriteLocalState, setTotalFavoriteLocalState] = useState<TTotalFavoriteLocalState>({
-    local: favoriteLocal,
-    localArr: favoriteLocalArr
-  })
-
   const { isMobile } = useBreakpoint();
   const { allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
   // const [activeTab, setActiveTab] = useState("Todos");
   // "Salão"
   const [activeTab, setActiveTab] = useState("Todos");
-  const [viewType, setViewType] = useState('');
+  const [expandedBrand, setExpandedBrand] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const { searchResults, handleSearchGames } = useSearchGames(searchInput);
+  const { userFavorite, onClickFavoriteGameItem, totalFavoriteLocalState } = useClickFavoriteGameItem()
 
   const navigate = useNavigate();
 
@@ -65,52 +46,58 @@ export const IndexPage = () => {
 
   const renderAllGameList = () => {
     return allGameList !== undefined && allGameList.map((i: any, index: number) => {
+      const typeGame = typeGameList.filter((item: any) => item.gameType === i.gameType)[0] || {}
+      const expandCount = typeGame.data?.reduce((acc: number, current: any) => acc + current.games.length , 0)
+
       return (
         <GameTypeSectionList
+          userFavorite={userFavorite}
+          onClickFavoriteGameItem={onClickFavoriteGameItem}
           hotGames={true}
           isLatestItem={allGameList.length - 1 === index}
           key={index}
           gameTypeName={i.gameType}
           data={i.data.games}
-          onClick={() => setActiveTab(i.gameType)}
-          totalFavoriteLocalState={totalFavoriteLocalState}
-          setTotalFavoriteLocalState={setTotalFavoriteLocalState}/>
+          onClickExpand={() => setActiveTab(i.gameType)}
+          expandCount={expandCount}
+        />
       )
     })
   }
   const {showFixForIOSStickTab, scrollToCarousel} = useScrollToCarousel();
 
   const renderTypeGameList=()=>{
-    let list: { subGameType: string, games: { gameId: string }[] }[] = []
+    let list: { subGameType: string, games: { gameId: number }[] }[] = []
 
     if(activeTab === 'Favoritos') {
       const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
       const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
 
-      list = [{ subGameType: 'Favoritos', games: favoriteLocalArr[userInfo.user_id]}]
+      list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] }]
     } else if (activeTab === 'Recente') {
       const recentGames = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.gameRecentLocal) || '[]')
       list = [{ subGameType: 'Recente', games: recentGames}]
     } else {
       const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === activeTab)[0]?.data
-      list = viewType !== '' ? data.filter((i: any) => i.subGameType === viewType) : data;
+      list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
     }
 
     return list?.map(({subGameType,games}: any, index: number) => {
       return (
         <GameTypeSectionList
+          userFavorite={userFavorite}
+          onClickFavoriteGameItem={onClickFavoriteGameItem}
           isLatestItem={list.length - 1 === index}
           key={index}
           gameTypeName={subGameType}
           data={games}
-          onClick={() => {
-            setViewType(subGameType);
+          onClickExpand={() => {
+            setExpandedBrand(subGameType);
             scrollToCarousel();
           }}
-          isViewAll={viewType!==''}
-          totalFavoriteLocalState={totalFavoriteLocalState}
-          setTotalFavoriteLocalState={setTotalFavoriteLocalState}
-          setViewType={setViewType}
+          isViewAll={['Favoritos', 'Recente'].includes(subGameType)}
+          expandedBrand={expandedBrand}
+          setExpandedBrand={setExpandedBrand}
         />
       )
     })
@@ -121,15 +108,15 @@ export const IndexPage = () => {
       return searchResults.length > 0
         ? (
           <GameTypeSectionList
+            userFavorite={userFavorite}
+            onClickFavoriteGameItem={onClickFavoriteGameItem}
             isLatestItem={true}
             gameTypeName={'null'}
             data={searchResults}
-            onClick={() => {
+            onClickExpand={() => {
               navigate(PageOrModalPathEnum.IndexSlotPage)
               window.scrollTo({ left: 0, behavior: "smooth"});
             }}
-            totalFavoriteLocalState={totalFavoriteLocalState}
-            setTotalFavoriteLocalState={setTotalFavoriteLocalState}
           />
         )
         : <></>
@@ -150,27 +137,25 @@ export const IndexPage = () => {
         showFixForIOSStickTab={showFixForIOSStickTab}
         scrollToCarousel={scrollToCarousel}
         allGameList={allGameList}
-        totalFavoriteLocalState={totalFavoriteLocalState}
-        setTotalFavoriteLocalState={setTotalFavoriteLocalState}
         label={label}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        setViewType={setViewType}
+        setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
       />
     ),
     "coco777bet": (
       <CIndexPage
+        userFavorite={userFavorite}
+        onClickFavoriteGameItem={onClickFavoriteGameItem}
         showFixForIOSStickTab={showFixForIOSStickTab}
         scrollToCarousel={scrollToCarousel}
         allGameList={allGameList}
-        totalFavoriteLocalState={totalFavoriteLocalState}
-        setTotalFavoriteLocalState={setTotalFavoriteLocalState}
         label={label}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        setViewType={setViewType}
+        setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
       />
@@ -178,15 +163,15 @@ export const IndexPage = () => {
   }, (
     (
       <PIndexPage
+        userFavorite={userFavorite}
+        onClickFavoriteGameItem={onClickFavoriteGameItem}
         showFixForIOSStickTab={showFixForIOSStickTab}
         scrollToCarousel={scrollToCarousel}
         allGameList={allGameList}
-        totalFavoriteLocalState={totalFavoriteLocalState}
-        setTotalFavoriteLocalState={setTotalFavoriteLocalState}
         label={label}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
-        setViewType={setViewType}
+        setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
       />
