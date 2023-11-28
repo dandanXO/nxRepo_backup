@@ -28,7 +28,7 @@ export const CopyInputUrlItem = (props: ICopyInputUrlItem) => {
       className
     )}>
       {contextHolder}
-      <div className={cx("py-1 px-2 text-xs", urlClassName)}>{url}</div>
+      <div className={cx("", urlClassName)}>{url}</div>
       <button onClick={onClickToCopy}
         className={cx(`
         px-5

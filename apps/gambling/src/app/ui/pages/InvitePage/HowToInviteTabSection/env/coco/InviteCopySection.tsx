@@ -24,7 +24,7 @@ export const InviteCopySection = () => {
 
   return (
     <div className="w-full text-center sm:text-left">
-      <CopyInputUrlItem url={isLogin ? inviteUrl : location.href} className={'rounded break-all text-left'} urlClassName="py-2 text-sm" buttonClassName={'rounded'} />
+      <CopyInputUrlItem url={isLogin ? inviteUrl : location.href} className={'rounded break-all text-left'} urlClassName="p-3.5 sm:py-3 sm:px-6 text-sm sm:text-base" buttonClassName={'rounded'} />
     </div>
   )
 }
