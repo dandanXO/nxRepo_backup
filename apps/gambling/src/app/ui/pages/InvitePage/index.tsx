@@ -84,7 +84,7 @@ export const InvitePage = () => {
                 background={"var(--primary-variant)"}
                 // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
                 activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6 rounded-md mr-2",{
+                className={cx("px-6 rounded-md mr-2 whitespace-nowrap",{
 
                 })}
                 name={"Como convidar"}
@@ -100,7 +100,7 @@ export const InvitePage = () => {
                 background={"var(--primary-variant)"}
                 // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
                 activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6 rounded-md",{
+                className={cx("px-6 rounded-md whitespace-nowrap",{
 
                 })}
                 name={"Dados diários"}
