@@ -68,7 +68,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     } else {
       setListSize(isMobile ? MobileGameNumber : DesktopGameNumber);
     }
-  }, [props.gameTypeName])
+  }, [props.gameTypeName, props.data?.length])
 
   const loadMore = () => {
     if(haveHotgames) {

@@ -409,6 +409,8 @@ export const PageTemplate = (props: IPage) => {
           }}
           onConfirm={() => {
             setOpenInitailChargeModal(false);
+            dispatch(appSlice.actions.setShowTelegramModal(false))
+            dispatch(appSlice.actions.setShowDepositModal(false));
             navigate(PageOrModalPathEnum.InvitePage);
           }}/>
       )}
