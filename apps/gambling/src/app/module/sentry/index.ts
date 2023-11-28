@@ -35,7 +35,7 @@ if (loaded === false) {
     replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   };
 
-  if (Array.isArray(sentryConfig.integrations)) {
+  if (!AppEnvironment.isLocalhost() && Array.isArray(sentryConfig.integrations)) {
     sentryConfig.integrations.push(new Sentry.Replay(replayConfig));
   }
 
