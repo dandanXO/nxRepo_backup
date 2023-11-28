@@ -3,6 +3,7 @@ import { GetSignInRecordResponseData } from "../../../external";
 import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { format } from "../../utils/format";
+import { NoData } from "../../components/Icons/NoData";
 
 const Title = ({ children }:{children: React.ReactNode}) => (
   <td className='w-1/3 px-1 h-10 flex justify-center items-center border-r border-[rgba(255,255,255,0.2)]'>
@@ -37,9 +38,9 @@ export const MobileDailySignInRecordPage = ({
       </div>
       <div className='grow h-full mx-4 my-4 overflow-y-auto'>
         {
-          records.map((record, index: number) => {
+          records?.map((record, index: number) => {
             return (
-              <table key={index} className='table table-zebra mb-4 rounded-lg overflow-hidden w-full text-white text-center text-sm font-bold'>
+              <table key={index}  className='table table-zebra mb-4 rounded-lg overflow-hidden w-full text-white text-center text-sm font-bold'>
                 <tbody>
                   <tr className='flex'>
                     <Title>ID</Title>
@@ -65,6 +66,14 @@ export const MobileDailySignInRecordPage = ({
               </table>
             )
           })
+        }
+        {
+          records?.length === 0 && (
+            <div className='h-full w-full flex flex-col gap-4 justify-center items-center'>
+              <NoData className='h-[76px] w-[76px]' />
+              <div className='text-white text-center font-medium text-lg'>Nada aqui</div>
+            </div>
+          )
         }
       </div>
     </div>

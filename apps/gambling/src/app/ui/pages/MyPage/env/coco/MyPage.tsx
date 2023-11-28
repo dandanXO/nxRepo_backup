@@ -127,7 +127,7 @@ const MyPage = ({
           >
             <div className='h-full flex px-3 items-center justify-center'>
               <div className='text-xs text-[var(--text-deposit)]'>
-                Próximo nível {clamp(((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ), 0, 100)}%
+                Próximo nível {clamp(((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ), 0, 100).toFixed(0)}%
               </div>
             </div>
           </ProgressBar>
@@ -154,7 +154,7 @@ const MyPage = ({
           >
             <div className='h-full flex px-3 items-center justify-center'>
               <div className='text-xs text-[var(--text-deposit)]'>
-                Próximo nível {clamp(((userVIPInfo?.data?.flow || 0) / (userVIPInfo?.data?.next_level_flow || 1)*100), 0, 100)}%
+                Próximo nível {clamp(userVIPInfo?.data?.flow_progress || 0, 0, 100).toFixed(0)}%
               </div>
             </div>
           </ProgressBar>

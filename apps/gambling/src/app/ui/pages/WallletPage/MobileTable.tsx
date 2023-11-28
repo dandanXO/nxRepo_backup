@@ -90,11 +90,12 @@ export const DepositMobileTable = () => {
 
               <div className={'flex flex-row justify-between border-assistant px-4 py-1'}>
                 <span className={''}>{record.created_at}</span>
-                <span style={{ color:
-                    record.status === 2 ? '#FFA500' :   // 橘色
-                      record.status === 3 ? '#FF0000' :   // 红色
-                        record.status === 1 ? '#008000' :   // 绿色
-                          '#FFFFFF'  // 白色 (默认)
+                <span style={{
+                  color:
+                      record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
+                      record.status === 3 ? 'var(--state-error-main)' :   // 红色
+                      record.status === 1 ? 'var(--state-success-main)' :   // 绿色
+                      'var(--white)'  // 白色 (默认)
                 }}>{TradeStatusMap[record.status]}</span>
               </div>
             </Container>
@@ -165,11 +166,11 @@ export const WithdrawMobileTable = () => {
 
               <div className={'flex flex-row justify-between border-assistant px-4 py-1'}>
                 <span className={''}>{record.created_at}</span>
-                <span style={{ color:
-                    record.status === 2 ? '#FFA500' :   // 橘色
-                      record.status === 3 ? '#FF0000' :   // 红色
-                        record.status === 1 ? '#008000' :   // 绿色
-                          '#FFFFFF'  // 白色 (默认)
+                <span style={{
+                  color: record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
+                         record.status === 3 ? 'var(--state-error-main)' :   // 红色
+                         record.status === 1 ? 'var(--state-success-main)' :   // 绿色
+                         'var(--white)'  // 白色 (默认)
                 }}>{TradeStatusMap[record.status]}</span>
               </div>
             </Container>
