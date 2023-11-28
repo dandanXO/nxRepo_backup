@@ -87,7 +87,7 @@ export const InvitePage = () => {
                 className={cx("px-6 rounded-md mr-2",{
 
                 })}
-                name={isMobile ? "Convidar" : "Como convidar"}
+                name={"Como convidar"}
                 active={panelMode === "howto"}
                 size={"big"}
                 onClick={() => {
@@ -103,7 +103,7 @@ export const InvitePage = () => {
                 className={cx("px-6 rounded-md",{
 
                 })}
-                name={isMobile ? "Dados diários" :"Convite diariamente"}
+                name={"Dados diários"}
                 active={panelMode === "daily"}
                 size={"big"}
                 onClick={() => {
