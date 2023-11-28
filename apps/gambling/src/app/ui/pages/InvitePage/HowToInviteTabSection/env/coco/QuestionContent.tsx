@@ -17,7 +17,7 @@ export const QuestionContent = (props: any) => {
       <div className="mb-4 text-white"><QuestionSection1 /></div>
       <div className="mb-3 py-3.5 px-6 py-sm:mb-4 sm:py-6 sm:px-9 border border-dashed border-[var(--stroke-block)] rounded-2xl text-white"><QuestionSection2 /></div>
       <div className="mb-3 sm:mb-4 text-[var(--secondary-assistant)]"><QuestionSection3 /></div>
-      <div className="sm:mb-4 sm:py-3.5 sm:px-8 sm:bg-[#f051514d] text-[var(--state-error-main)]"><QuestionSection4 /></div>
+      <div className="sm:mb-4 p-2 sm:py-3.5 sm:px-8 bg-[var(--state-error-main-30)] text-[var(--state-error-main)]"><QuestionSection4 /></div>
     </div>
   )
 
