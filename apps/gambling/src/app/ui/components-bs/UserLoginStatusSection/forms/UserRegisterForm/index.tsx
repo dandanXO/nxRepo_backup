@@ -177,7 +177,6 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         try {
           const newDeviceId = uuidv4();
           finalDeviceId = newDeviceId;
-          AppLocalStorage.setItem(AppLocalStorageKey.deviceId, newDeviceId);
           Sentry.captureMessage("DeviceId Initialize Error, so generate new", {
             level: 'fatal',
             tags: {},
@@ -188,10 +187,11 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           });
         } catch (e) {
           console.log(e);
+          finalDeviceId = customDeviceId;
           Sentry.captureException(e, );
         }
       }
-
+      AppLocalStorage.setItem(AppLocalStorageKey.deviceId, finalDeviceId || customDeviceId);
       triggerRegister({
           "appChannel": "pc",
           "deviceId": finalDeviceId || customDeviceId,
