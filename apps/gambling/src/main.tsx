@@ -3,14 +3,12 @@ import React, { StrictMode } from 'react';
 import { ErrorBoundary } from "react-error-boundary";
 
 import * as ReactDOM from 'react-dom/client';
-
 import {CoreMain} from "./main.core";
 import {AppRouter} from "./app/ui/router/index";
-import {AppLocalStorage} from "./app/persistant/localstorage";
 import {ErrorPage} from "./app/ui/pages/ErrorPage";
-import { v4 as uuidv4, validate, version } from 'uuid';
-import {tryCatch} from "ramda";
+import {AppLocalStorage} from "./app/persistant/localstorage";
 import {AppLocalStorageKey} from "./app/persistant/AppLocalStorageKey";
+import {v4 as uuidv4, validate, version} from "uuid";
 
 
 declare global {
@@ -34,7 +32,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-
 const render = () => {
   root.render(
     <ErrorBoundary fallback={<ErrorPage/>}>
@@ -45,19 +42,21 @@ const render = () => {
   );
 }
 
-// NOTE: remove device id which use fingerprintjs
-const deviceId = AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "";
-console.log("[debug] deviceId:", deviceId)
 
-try {
-  if(!validate(deviceId) && version(deviceId) !== 4) {
-    AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
-  }
-} catch (e) {
-  console.log("[debug] deviceId-get-try-catch:")
-  console.log(e);
-  AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
-}
+
+// NOTE: remove device id which use fingerprintjs
+// const deviceId = AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "";
+// console.log("[debug] deviceId:", deviceId)
+//
+// try {
+//   if(!validate(deviceId) && version(deviceId) !== 4) {
+//     AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
+//   }
+// } catch (e) {
+//   console.log("[debug] deviceId-get-try-catch:")
+//   console.log(e);
+//   AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
+// }
 
 if(!AppLocalStorage.getItem(AppLocalStorageKey.deviceId)) {
   try {
@@ -68,8 +67,6 @@ if(!AppLocalStorage.getItem(AppLocalStorageKey.deviceId)) {
     console.log("[debug] deviceId-generate-try-catch:")
     console.log(e);
   }
-  render();
-} else {
-  render();
 }
 
+render();

@@ -1,20 +1,16 @@
 import {PhoneSvg} from "../../../../components/Icons/PhoneSvg";
 import {KeySvg} from "../../../../components/Icons/KeySvg";
 import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
-import {CheckCircleOutlined, CloseCircleOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
 // import {MobileInput} from "../../../../components/Inputs/MobileInput";
+import * as Sentry from "@sentry/browser";
 
 import {useEffect, useState} from "react";
 import {useForm} from "../../../../hooks/useForm";
 import {useRegisterMutation} from "../../../../../external";
 import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
-import {promiseHandler} from "../../../../../gateway/promiseHanlder";
 import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
-import {PostRegisterRequest} from "../../../../../external/RegisterEndpoint";
-// import {LoginFormData} from "./UserLoginForm/LoginFormData";
-import {validate} from "class-validator";
 import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"
 import {environment} from "../../../../../../environments/environment"
 import {SecuritySvg} from "../../../../components/Icons/SecuritySvg";
@@ -22,13 +18,13 @@ import {connect} from "../../../../../gateway/socket";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import { useDispatch } from "react-redux";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
-import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {Captcha} from "../Captcha";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 import {CheckableICON} from "../../../../components/Icons/CheckableICON";
 import axios from "axios";
+import {v4 as uuidv4} from "uuid";
 
 const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
@@ -174,9 +170,31 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       if(!captchaKey) {
         return;
       }
+      const deviceId = AppLocalStorage.getItem(AppLocalStorageKey.deviceId);
+      let finalDeviceId = deviceId;
+      const customDeviceId = `CUSTOM_DEVICE_ID_${phoneInput.data}_${Date.now()}`;
+      if(!deviceId) {
+        try {
+          const newDeviceId = uuidv4();
+          finalDeviceId = newDeviceId;
+          AppLocalStorage.setItem(AppLocalStorageKey.deviceId, newDeviceId);
+          Sentry.captureMessage("DeviceId Initialize Error, so generate new", {
+            level: 'fatal',
+            tags: {},
+            extra: {
+              original_deviceId: deviceId,
+              new_deviceId: newDeviceId
+            }
+          });
+        } catch (e) {
+          console.log(e);
+          Sentry.captureException(e, );
+        }
+      }
+
       triggerRegister({
           "appChannel": "pc",
-          "deviceId": AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
+          "deviceId": finalDeviceId || customDeviceId,
           "appPackageName": environment.appPackageName,
           "deviceModel": "WEB",
           "deviceVersion": "WEB",
@@ -192,7 +210,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
             "webgl": "f2334ad6094e54920ca9fb85c526c843",
             "userAgent": navigator.userAgent,
             "screenWidth": window.innerWidth,
-            "inviteUrl": location.href,
+            "inviteUrl": window.location.href,
           },
           "installTime": String(new Date().getTime()),
           // TODO:
