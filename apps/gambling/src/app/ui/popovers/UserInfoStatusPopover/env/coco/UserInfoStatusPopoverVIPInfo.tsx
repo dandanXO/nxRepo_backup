@@ -1,18 +1,13 @@
 import React from "react";
 import {
   IUserInfoStatusPopoverVIPInfoProps,
-  ProgressBar1,
-  ProgressBar2,
-  VIPBorderStyleContainer,
-  VIPContainer
 } from "../../index";
-import { environment } from "../../../../../../environments/environment";
 import { RightOutlined } from "@ant-design/icons";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import CurrentVIPIcon from "../../../../components/CurrentVIPIcon";
 import ProgressBar from "../../../../pages/VIPGradePage/env/coco/VIPGradePage/ProgressBar";
-import { format } from "../../../../utils/format";
+import { clamp, format } from "../../../../utils/format";
 
 export const UserInfoStatusPopoverVIPInfo = ({
   userVIPInfo,
@@ -47,7 +42,7 @@ export const UserInfoStatusPopoverVIPInfo = ({
       <div className='flex flex-col gap-2 text-xs'>
         <div className='mt-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
-            <div className='text-white'>Próximo nível: {depositPercent > 100 ? 100 : depositPercent.toFixed(0)}%</div>
+            <div className='text-white'>Próximo nível: {clamp(depositPercent, 0, 100).toFixed(0)}%</div>
             <div className='text-[var(--secondary-assistant)]'>Depósitos totais: R$ {format(vipScore? vipScore / 100 : 0)}</div>
           </div>
           <ProgressBar
@@ -66,7 +61,7 @@ export const UserInfoStatusPopoverVIPInfo = ({
 
         <div className='mt-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
-            <div className='text-white'>Próximo nível: {flowProgress}%</div>
+            <div className='text-white'>Próximo nível: {clamp(flowProgress, 0, 100).toFixed(0)}%</div>
             <div className='text-[var(--secondary-assistant)]'>Pontos de apostas: R$ {format(flow ? flow/100 : 0)}</div>
           </div>
           <ProgressBar
