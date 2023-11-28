@@ -59,7 +59,7 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
       <MobileTableContainer>
         {props.isProxy && (
           <div className={"flex flex-row justify-end"}>
-            <span className={"text-base text-[#ffffff]"}>Dividends: R$ {props.data.dividendos || "0.00"}</span>
+            <span className={"text-xs text-[var(--secondary-assistant)]"}>Dividends: R$ {props.data.dividendos || "0.00"}</span>
           </div>
         )}
         {/* data: {

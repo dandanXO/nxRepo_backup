@@ -37,6 +37,7 @@ export const HowToImage = (props: any) => {
         'border border-solid border-[var(--stroke-block)] bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]': !isMobile
       })}>
         <div className={'flex-1'}>
+          <p className="mb-3.5 sm:mb-2 text-white text-sm md:text-xl">{`Passo 1: Clique no botão para copiar o link do convite`}</p>
           <InviteCopySection />
         </div>
         {!isMobile && <div className="border-r border-r-solid border-white mx-11 sm:mx-5"></div>}

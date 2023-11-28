@@ -110,6 +110,7 @@ export const MenuDrawerContent = () => {
           closeMenuDrawer();
         }}
       />
+      <p className="text-center text-xs text-[var(--secondary-assistant)] mb-4">Copie o link e cole-o no navegador do seu computador para abri-lo em seu computador</p>
       <InviteCopySection />
     </>
   )
