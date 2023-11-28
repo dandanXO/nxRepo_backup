@@ -11,7 +11,8 @@ export const ImageTab = styled.div<{
   font-size: 14px;
   cursor: pointer;
 
-  border-radius: 16px 4px 16px 4px;
+  //border-radius: 16px 4px 16px 4px;
+  border-radius: 8px;
   margin-right: 8px;
   //padding: 0 10px;
 

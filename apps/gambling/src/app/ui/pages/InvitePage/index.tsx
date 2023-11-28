@@ -81,11 +81,11 @@ export const InvitePage = () => {
               <TabItem
                 mode={"howto"}
                 // pureColor={true}
-                background={"--var(primary-variant)"}
+                background={"var(--primary-variant)"}
                 // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
                 activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6",{
-                  "rounded-md": panelMode === "howto"
+                className={cx("px-6 rounded-md mr-2",{
+
                 })}
                 name={isMobile ? "Convidar" : "Como convidar"}
                 active={panelMode === "howto"}
@@ -97,11 +97,11 @@ export const InvitePage = () => {
               <TabItem
                 mode={"data"}
                 // pureColor={true}
-                background={"--var(primary-variant)"}
+                background={"var(--primary-variant)"}
                 // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
                 activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6",{
-                  "rounded-md": panelMode === "daily"
+                className={cx("px-6 rounded-md",{
+
                 })}
                 name={isMobile ? "Dados diários" :"Convite diariamente"}
                 active={panelMode === "daily"}
@@ -130,7 +130,6 @@ export const InvitePage = () => {
           {/*</div>*/}
 
         </section>
-
 
         {panelMode === "howto" ? (
           <HowToInviteTabSection inviteUrl={inviteInfo?.data?.inviteUrl || ''} />

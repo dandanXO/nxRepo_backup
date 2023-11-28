@@ -13,7 +13,8 @@ import dataInactiveImg from "./icon=bar-chart.png";
 const StyledTabItemNoICON = styled.button<ITabItem>`
   //min-width: 96px;
   //min-height: 35px;
-  color: #6c7083;
+  //color: #6c7083;
+  color: var(--white);
   ${(props) => {
   if (props.pureColor === true) {
     if (!props.active) {
@@ -64,21 +65,21 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
     }
   }}
 
-${(props) => {
+  ${(props) => {
     if (props.active) {
       if (props.activeBackground) {
         return `
-        background: ${props.activeBackground};
-        color:white;
+          background: ${props.activeBackground};
+          color:white;
         `
       }
 
     } else {
       if (props.background) {
-        // console.log('props.background)',props.background)
         return `
-        background: ${props.background};
-        color:  var(--primary-assistant);
+          background: ${props.background};
+          // color:  var(--primary-assistant);
+          border: 1px solid rgba(255, 255, 255, 0.3);
         `
       }
     }
