@@ -9,7 +9,6 @@ import {protoDecode} from "../external/websocket/protoDecode";
 import { encode, decode } from 'js-base64';
 import {onMessageError} from "../external/websocket/onMessageError";
 import {onProtoMessage} from "../external/websocket/onProtoMessage";
-import * as Sentry from "@sentry/react";
 
 const Base64 = {
   encode,
@@ -119,7 +118,7 @@ export class Socket {
     this.ws.onopen = (event: Event) => {
       console.log("[gateway] [Socket] onopen")
 
-      Sentry.addBreadcrumb({
+      console.log({
         level: "debug",
         category: "Socket Open",
         // type: "open",
@@ -137,7 +136,7 @@ export class Socket {
 
     this.ws.onclose = (t: CloseEvent) => {
       console.log("[gateway] [Socket] onclose")
-      Sentry.addBreadcrumb({
+      console.log({
         level: "info",
         category: "Socket Close",
         // type,
@@ -151,7 +150,7 @@ export class Socket {
 
     this.ws.onmessage = (t: MessageEvent) => {
       try {
-        Sentry.addBreadcrumb({
+        console.log({
           level: "info",
           category: "Socket Message",
           message: JSON.stringify(t),
@@ -168,7 +167,7 @@ export class Socket {
 
     this.ws.onerror = (t: Event) => {
       try {
-        Sentry.addBreadcrumb({
+        console.log({
           level: "info",
           category: "Socket Error",
           message: JSON.stringify(t),
@@ -186,7 +185,7 @@ export class Socket {
 
   online() {
     console.log("[gateway] [Socket] online")
-    Sentry.addBreadcrumb({
+    console.log({
       level: "info",
       category: "Socket Online",
       // message: JSON.stringify(t),
@@ -199,7 +198,7 @@ export class Socket {
 
   offline() {
     console.log("[gateway] [Socket] offline", ws)
-    Sentry.addBreadcrumb({
+    console.log({
       level: "info",
       category: "Socket Offline",
       // message: JSON.stringify(t),
@@ -298,7 +297,7 @@ export class Socket {
     if (this.ws) {
       console.log("[gateway] [Socket] close")
 
-      Sentry.addBreadcrumb({
+      console.log({
         level: "info",
         category: "Socket Close",
         // type: "close"
