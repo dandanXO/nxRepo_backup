@@ -1,5 +1,6 @@
-import * as Sentry from '@sentry/react';
-import {BrowserTracing} from '@sentry/tracing';
+import * as Sentry from "@sentry/browser";
+// import {BrowserTracing} from '@sentry/tracing';
+
 import {AppEnvironment} from '../../device/appEnvironment';
 import WebpackSentryConfig from './WebpackSentryConfig.json';
 import {AppLocalStorage} from "../../persistant/localstorage";
@@ -25,7 +26,7 @@ if (loaded === false) {
     // NOTE: self-hosting
     dsn: WebpackSentryConfig.dsn,
     environment: environmentName,
-    integrations: [new BrowserTracing()],
+    // integrations: [new BrowserTracing()],
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
@@ -73,3 +74,5 @@ if(AppLocalStorage.getItem(AppLocalStorageKey.token)) {
   console.log("[sentry] accountInfo", accountInfo);
   Sentry.setUser(accountInfo);
 }
+
+
