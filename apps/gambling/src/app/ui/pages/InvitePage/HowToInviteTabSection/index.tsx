@@ -31,7 +31,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
     <div className={'mb-[80px] min-w-[300px]'}>
       {renderByPlatform({
         "wild777bet": <WHowToImage className="p-4 rounded-2xl" />,
-        "coco777bet": <CHowToImage className="p-4 rounded-2xl" />,
+        "coco777bet": <CHowToImage className="p-4 sm:p-0 rounded-2xl" />,
       }, <PHowToImage className="p-4 rounded-2xl" />)}
       {renderByPlatform({
         "wild777bet": <WQuestionContent />,

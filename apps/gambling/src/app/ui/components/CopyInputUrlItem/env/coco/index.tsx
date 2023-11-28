@@ -31,7 +31,7 @@ export const CopyInputUrlItem = (props: ICopyInputUrlItem) => {
       <div className={cx("py-1 px-2 text-xs", urlClassName)}>{url}</div>
       <button onClick={onClickToCopy}
         className={cx(`
-        px-2
+        px-5
         rounded-tr-xl rounded-br-xl
         text-base text-white whitespace-nowrap
         bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] `,
