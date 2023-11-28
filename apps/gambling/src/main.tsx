@@ -1,7 +1,7 @@
 import "./app/module/sentry/index";
 import React, { StrictMode } from 'react';
 import { ErrorBoundary } from "react-error-boundary";
-
+import * as Sentry from "@sentry/browser"
 import * as ReactDOM from 'react-dom/client';
 import {CoreMain} from "./main.core";
 import {AppRouter} from "./app/ui/router/index";
@@ -10,6 +10,27 @@ import {AppLocalStorage} from "./app/persistant/localstorage";
 import {AppLocalStorageKey} from "./app/persistant/AppLocalStorageKey";
 import {v4 as uuidv4, validate, version} from "uuid";
 
+const feature = {
+  localStorage: (function () {
+    try {
+      window.localStorage.setItem("featurejs-test", "foobar");
+      window.localStorage.removeItem("featurejs-test");
+      return true;
+    } catch (err) {
+      // no content in the cache means it couldn't be added to at all (old
+      // Safari) otherwise we just went over a non-zero quota
+      return !!window.localStorage.length;
+    }
+  })(),
+}
+if (feature.localStorage) {
+  console.log("[feature] localStorage supported");
+} else {
+  Sentry.captureMessage("[feature] localStorage not supported", {
+
+  })
+  console.log("[feature] localStorage not supported");
+}
 
 declare global {
   interface Window {
