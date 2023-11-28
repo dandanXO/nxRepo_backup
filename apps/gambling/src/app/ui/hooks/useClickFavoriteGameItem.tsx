@@ -42,12 +42,12 @@ export const useClickFavoriteGameItem = (props?: any) => {
 
       const newUserFavorite = isFavoriteID ?
         userFavorite.filter((favorite: number) => favorite !== isFavoriteID) :
-        item.gameId ? [...userFavorite, Number(item.gameId)] : userFavorite
+        item.gameId ? [Number(item.gameId), ...userFavorite] : userFavorite
       const newTotalFavoriteLocal = { ...totalFavoriteLocalState.local, [userInfo.user_id]: newUserFavorite }
 
       const newUserFavoriteArr = isFavoriteID ?
         userFavoriteArr.filter((favorite: { gameId: number }) => favorite.gameId !== isFavoriteID) :
-        item.gameId ? [...userFavoriteArr, { gameId: Number(item.gameId), name: item.name || '', img: item.imageURL || '', label: item.label || '', type: item.type || '' }] : userFavoriteArr
+        item.gameId ? [{ gameId: Number(item.gameId), name: item.name || '', img: item.imageURL || '', label: item.label || '', type: item.type || '' }, ...userFavoriteArr] : userFavoriteArr
       const newTotalFavoriteLocalArr = { ...totalFavoriteLocalState.localArr, [userInfo.user_id]: newUserFavoriteArr }
 
       setTotalFavoriteLocalState({

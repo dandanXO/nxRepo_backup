@@ -71,7 +71,9 @@ export const IndexPage = () => {
 
     if(activeTab === 'Favoritos') {
       const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
-      const favoriteLocalArr = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.favoriteLocalArr) || '{}')
+
+      console.log("GGGG");
+      console.log(totalFavoriteLocalState.localArr[userInfo.user_id]);
 
       list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] }]
     } else if (activeTab === 'Recente') {
