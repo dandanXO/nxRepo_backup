@@ -98,7 +98,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     "wild777bet": WmobileGameTypeHeaderProps,
   }, PmobileGameTypeHeaderProps)
 
-  console.log("props.expandedBrand", props.expandedBrand);
+  // console.log("props.expandedBrand", props.expandedBrand);
 
   return (
     <section className={cx({

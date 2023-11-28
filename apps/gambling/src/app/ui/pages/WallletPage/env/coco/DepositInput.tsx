@@ -23,9 +23,9 @@ export const DepositInput = (props: IDepositInput) => {
         value={props.inputValue.data}
         onChange={(event: any) => {
           const inputValue = event.target.value;
-          console.log("inputValue", inputValue);
-          console.log("inputValue.props.minimunValue", props.minimunValue);
-          console.log("inputValue.props.maximunValue", props.maximunValue);
+          // console.log("inputValue", inputValue);
+          // console.log("inputValue.props.minimunValue", props.minimunValue);
+          // console.log("inputValue.props.maximunValue", props.maximunValue);
           if(Number(inputValue) < props.minimunValue) {
             props.setInputValue({
               data: inputValue,

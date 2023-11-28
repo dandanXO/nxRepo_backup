@@ -113,7 +113,7 @@ export const InviteSettlementRecordPage = () => {
               {currentData?.rows.length === 0 ? <tr><NoData /></tr> : (
                 currentData?.rows.map((itme, index) => {
                   return (
-                    <tr>
+                    <tr key={index}>
                       <td className='p-12 border-r border-[rgba(255,255,255,0.2)]'>{itme.updateTime}</td>
                       <td className='p-12'>R$: {format(itme.reward / 100)}</td>
                     </tr>

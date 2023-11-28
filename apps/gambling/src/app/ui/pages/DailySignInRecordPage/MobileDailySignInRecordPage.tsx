@@ -38,9 +38,9 @@ export const MobileDailySignInRecordPage = ({
       </div>
       <div className='grow h-full mx-4 my-4 overflow-y-auto'>
         {
-          records?.map((record) => {
+          records?.map((record, index: number) => {
             return (
-              <table className='table table-zebra mb-4 rounded-lg overflow-hidden w-full text-white text-center text-sm font-bold'>
+              <table key={index}  className='table table-zebra mb-4 rounded-lg overflow-hidden w-full text-white text-center text-sm font-bold'>
                 <tbody>
                   <tr className='flex'>
                     <Title>ID</Title>

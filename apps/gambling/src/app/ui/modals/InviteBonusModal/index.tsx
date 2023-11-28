@@ -65,11 +65,11 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
               if(currentConfig.length - 1 !== index) {
                 // NOTICE: 型別遺失 這個沒有寫 number 沒有被檢測到要number, money={Number(item.reward)}
                 return (
-                  <Item title={`Convidar ${item.num}-${Number(currentConfig[index + 1]?.num) - 1}`} money={(Number(item.reward)/100)}/>
+                  <Item key={index} title={`Convidar ${item.num}-${Number(currentConfig[index + 1]?.num) - 1}`} money={(Number(item.reward)/100)}/>
                 )
               } else {
                 return (
-                  <Item title={`Convidar > ${item.num}`} money={Number(item.reward)/100}/>
+                  <Item key={index} title={`Convidar > ${item.num}`} money={Number(item.reward)/100}/>
                 )
               }
             })}

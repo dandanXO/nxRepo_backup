@@ -51,11 +51,11 @@ export const IndexPage = () => {
 
       return (
         <GameTypeSectionList
+          key={index}
           userFavorite={userFavorite}
           onClickFavoriteGameItem={onClickFavoriteGameItem}
           hotGames={true}
           isLatestItem={allGameList.length - 1 === index}
-          key={index}
           gameTypeName={i.gameType}
           data={i.data.games}
           onClickExpand={() => setActiveTab(i.gameType)}
@@ -87,10 +87,10 @@ export const IndexPage = () => {
     return list?.map(({subGameType,games}: any, index: number) => {
       return (
         <GameTypeSectionList
+          key={index}
           userFavorite={userFavorite}
           onClickFavoriteGameItem={onClickFavoriteGameItem}
           isLatestItem={list.length - 1 === index}
-          key={index}
           gameTypeName={subGameType}
           data={games}
           onClickExpand={() => {

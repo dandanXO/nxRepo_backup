@@ -47,17 +47,27 @@ const render = () => {
 
 // NOTE: remove device id which use fingerprintjs
 const deviceId = AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "";
+console.log("[debug] deviceId:", deviceId)
+
 try {
   if(!validate(deviceId) && version(deviceId) !== 4) {
     AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
   }
 } catch (e) {
+  console.log("[debug] deviceId-get-try-catch:")
+  console.log(e);
   AppLocalStorage.removeItem(AppLocalStorageKey.deviceId);
 }
 
-
 if(!AppLocalStorage.getItem(AppLocalStorageKey.deviceId)) {
-  AppLocalStorage.setItem(AppLocalStorageKey.deviceId, uuidv4());
+  try {
+    const newDeviceID = uuidv4();
+    console.log("[debug] deviceId-generate:", newDeviceID);
+    AppLocalStorage.setItem(AppLocalStorageKey.deviceId, newDeviceID);
+  } catch (e) {
+    console.log("[debug] deviceId-generate-try-catch:")
+    console.log(e);
+  }
   render();
 } else {
   render();

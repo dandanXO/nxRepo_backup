@@ -364,19 +364,20 @@ module.exports = (config, context) => {
   }
 
   // isProduction
-  if (false) {
+  // if (true) {
     // finalConfig.plugins.push(
     //   new CleanWebpackPlugin({
     //     verbose: true,
     //   })
     // );
+  if(isProduction) {
     finalConfig.plugins.push(
       new SentryCliPlugin({
-        debug: true,
-        url: WebpackSentryConfig.url,
-        authToken: WebpackSentryConfig.authToken,
         org: WebpackSentryConfig.org,
         project: WebpackSentryConfig.project,
+        authToken: WebpackSentryConfig.authToken,
+        debug: true,
+        url: WebpackSentryConfig.url,
         include: './dist/apps/gambling',
         ignoreFile: '.sentrycliignore',
         ignore: ['node_modules', 'webpack.config.js'],
@@ -390,6 +391,8 @@ module.exports = (config, context) => {
       })
     );
   }
+
+  // }
 
   if (isDashboard) {
     finalConfig.plugins.push(new DashboardPlugin());

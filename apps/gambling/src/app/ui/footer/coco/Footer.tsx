@@ -61,7 +61,7 @@ export const Footer = (props: IFooter) => {
                     {
                       ["Salão", ...label].map((gameName: string, index: number) => {
                         return (
-                          <button className={"h-[44px]"} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
+                          <button key={index} className={"h-[44px]"} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
                         )
                       })
                     }
@@ -164,7 +164,7 @@ export const Footer = (props: IFooter) => {
                 {
                   ["Salão", ...label].map((gameName: string, index: number) => {
                     return (
-                      <button onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
+                      <button key={index} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
                     )
                   })
                 }
