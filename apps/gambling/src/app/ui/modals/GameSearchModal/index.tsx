@@ -96,8 +96,20 @@ export const GameSearchModal = (props: IGameSearchModal) => {
           />
           <div className="text-white text-xs text-center">Insira pelo menos 3 símbolos para iniciar a pesquisa</div>
         </div>
-        {searchInput.data.length >= 3 && (<GameListSection className="text-white" icon={<SearchOutlined className={"text-white text-sm mr-2"} />} title={'Procurar Resultados'} children={gameList(searchResults)} />)}
-        <GameListSection className="text-white" icon={<Icon className="w-[24px] h-[24px] mr-1" img={`assets/${environment.assetPrefix}/icon=recommend.png`} name={'recommend'} />} title={'Procurar Resultados'} children={gameList(typeGameList[0]?.data[0]?.games)} />
+        {searchInput.data.length >= 3 && (
+          <GameListSection
+            className="text-white"
+            icon={<SearchOutlined className={"text-white text-sm mr-2"} />}
+            title={'Procurar Resultados'}
+            children={gameList(searchResults)}
+          />)
+        }
+        <GameListSection
+          className="text-white"
+          icon={<Icon className="w-[24px] h-[24px] mr-1" img={`assets/${environment.assetPrefix}/icon=recommend.png`} name={'recommend'} />}
+          title={'Jogos que você deveria experimentar'}
+          children={gameList(typeGameList[0]?.data[0]?.games)}
+        />
       </div>
     </div>
   )
