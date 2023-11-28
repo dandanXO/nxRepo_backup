@@ -1,7 +1,10 @@
 import {ViewButton} from "../../../../components/Buttons/deprecated/ViewButton";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../reduxStore";
 
 export const WithdrawNoticeSection = (props: any) => {
   const { onClickToVIP, vip_level, withdrawLimitMin, withdrawLimitMax } = props;
+  const { withdrawBegin, withdrawEnd } = useSelector((state: RootState) => state.app)
 
   const sectionStyle = `
   p-2.5 md:p-6
@@ -44,8 +47,8 @@ export const WithdrawNoticeSection = (props: any) => {
 
       <section className={sectionStyle}>
         Prezado cliente: Olá! Em resposta às exigências do Banco Central do Brasil e do recém-criado comitê de agências reguladoras relevantes no Brasil, a plataforma precisa concluir a troca de dados entre o Banco Central e as agências reguladoras relevantes das
-        <span className={"text-[var(--secondary-assistant)]"}> 22h </span> às
-        <span className={"text-[var(--secondary-assistant)]"}> 1h </span>, horário brasileiro!Todos os nossos esforços são para garantir que a operação da plataforma esteja mais em conformidade com as leis e regulamentos brasileiros relevantes! Proteger a privacidade dos utilizadores e os direitos e interesses conexos. Obrigado pela sua compreensão. As retiradas serão normais durante outros períodos de tempo na plataforma.
+        <span className={"text-[var(--secondary-assistant)]"}> {withdrawBegin}h </span> às
+        <span className={"text-[var(--secondary-assistant)]"}> {withdrawEnd}h </span>, horário brasileiro!Todos os nossos esforços são para garantir que a operação da plataforma esteja mais em conformidade com as leis e regulamentos brasileiros relevantes! Proteger a privacidade dos utilizadores e os direitos e interesses conexos. Obrigado pela sua compreensão. As retiradas serão normais durante outros períodos de tempo na plataforma.
       </section>
     </div>
   )

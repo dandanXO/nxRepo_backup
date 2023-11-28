@@ -111,8 +111,8 @@ export type GetResponseData = {
   "service_telegram_broker01": string;
   "service_telegram_broker02": string;
   "service_telegram_broker08": string;
-  "withdraw_begin": number;
-  "withdraw_end": number;
+  "withdraw_begin": string;
+  "withdraw_end": string;
   "ip_user_limit": number;
   "invite_hig_reward": number;
   "new_user_balance": number;

@@ -23,6 +23,7 @@ import { WithdrawPanel as PWithdrawPanel } from './env/pernambucana/WithdrawPane
 import { WithdrawPanel as WWithdrawPanel } from './env/wild/WithdrawPanel'
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {ButtonPro} from "../../components/Buttons/ButtonPro";
+import moment from "moment";
 
 
 
@@ -66,6 +67,7 @@ export type IWithdrawPanelCommon = {
   onClickToWithdrawRecord: () => void;
 
   contextHolder: any;
+  isDuringRestrictTime: boolean
 }
 export const WithdrawPanel = (props: IWithdrawPanel) => {
 
@@ -94,6 +96,23 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   });
 
 
+  const { withdrawBegin, withdrawEnd } = useSelector((state: RootState) => state.app);
+
+  const duringRestrictWithdrawTime = (begin: string, end: string) => {
+    const beginNumber = Number(begin.replace(':', ''))
+    const endNumber = Number(end.replace(':', ''))
+    const nowGmtMinus3String = moment().utcOffset(-3).format('HH:mm')
+    const nowGmtMinus3Number = Number(nowGmtMinus3String.replace(':', ''))
+
+    if (endNumber < beginNumber) {
+      // 表示區間有跨日
+      return nowGmtMinus3Number >= beginNumber || nowGmtMinus3Number <= endNumber
+    } else {
+      return nowGmtMinus3Number >= beginNumber && nowGmtMinus3Number <= endNumber
+    }
+  }
+
+  const isDuringRestrictTime = duringRestrictWithdrawTime(withdrawBegin, withdrawEnd)
 
   const tipoPixOptions = [
     { value: 'CPF', label: 'CPF' },
@@ -314,6 +333,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           onClickToVIP={onClickToVIP}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
+          isDuringRestrictTime={isDuringRestrictTime}
         />
       ),
       "wild777bet": (
@@ -340,6 +360,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           onClickToVIP={onClickToVIP}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
+          isDuringRestrictTime={isDuringRestrictTime}
         />
       )
     }, (
@@ -366,6 +387,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         onClickToVIP={onClickToVIP}
         onClickToWithdrawRecord={props.onClickToWithdrawRecord}
         contextHolder={contextHolder}
+        isDuringRestrictTime={isDuringRestrictTime}
       />
     ))
   )

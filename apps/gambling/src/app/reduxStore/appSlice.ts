@@ -18,6 +18,8 @@ export type InitialState = {
   messageCount: number;
   vip_level: number;
   globalMessage: null | string;
+  withdrawBegin: string
+  withdrawEnd: string
 };
 
 const userStore$3: IUserStore= {
@@ -68,6 +70,8 @@ const initialState: InitialState = {
   isShowDepositModal: false,
   isShowInviteBonusModal: false,
   messageCount: 0,
+  withdrawBegin: "00:00",
+  withdrawEnd: "00:00"
 };
 
 export const appSlice = createSlice({
@@ -113,6 +117,12 @@ export const appSlice = createSlice({
     setMessageCount: (state: InitialState, action: PayloadAction<number>) => {
       state.messageCount = action.payload;
     },
+    setWithdrawBegin: (state: InitialState, action: PayloadAction<string>) => {
+      state.withdrawBegin = action.payload
+    },
+    setWithdrawEnd: (state: InitialState, action: PayloadAction<string>) => {
+      state.withdrawEnd = action.payload
+    }
   },
 });
 

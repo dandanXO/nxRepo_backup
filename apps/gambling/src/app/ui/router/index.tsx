@@ -91,6 +91,8 @@ export const AppRouter = () => {
         AppLocalStorage.setItem(AppLocalStorageKey.telegramGroup, data.data['group_telegram']);
       }
       AppLocalStorage.setItem(AppLocalStorageKey.downloadUrl, data.data['url_download']);
+      dispatch(appSlice.actions.setWithdrawBegin(data.data.withdraw_begin))
+      dispatch(appSlice.actions.setWithdrawEnd(data.data.withdraw_end))
     }
   }, [data])
 
