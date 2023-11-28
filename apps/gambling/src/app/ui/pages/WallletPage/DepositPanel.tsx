@@ -23,6 +23,7 @@ import {ProButton} from "../../components/Buttons/ProButton";
 import { useRechargeMutation } from "../../../external";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
+import { ArrowRight } from "../../components/Icons/ArrowRight";
 
 
 const Item = styled.div.attrs((props) => ({
@@ -75,6 +76,29 @@ interface IDepositPanel {
     options: GetRechargeResponseOption;
   }
 }
+
+interface DepositToNextPageButtonProps {
+  onClick: (e:any) => void;
+  className?: string;
+}
+
+const DepositToNextPageButton = (props:DepositToNextPageButtonProps) => {
+  return (
+    <button
+      className={cx(`w-[264px] h-[45px] rounded-md 
+      bg-gradient-to-r from-[var(--button-deposit-from)] to-[var(--button-deposit-to)] 
+      text-[var(--white)] flex justify-between items-center px-3.5 py-2 text-xl font-bold
+      shadow-[4px_4px_4px_0px_rgba(255,255,255,0.25)_inset,-4px_-4px_4px_0px_rgba(255,255,255,0.25)_inset]
+      `, props.className)}
+      onClick={props.onClick}
+    >
+      <span>Depósito</span>
+      <ArrowRight />
+    </button>
+  )
+};
+
+
 // let clicked = false;
 export const DepositPanel = (props: IDepositPanel) => {
 
@@ -239,38 +263,13 @@ export const DepositPanel = (props: IDepositPanel) => {
 
         {isMobile ? (
           <section className={"bg-[rgba(0,0,0,.5)] fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
-            {/*<ButtonPro*/}
-            {/*  size="small"*/}
-            {/*  onClick={onClickToNextDepositPage}*/}
-            {/*>*/}
-            {/*  DEPÓSITO*/}
-            {/*</ButtonPro>*/}
-
-            <button
-              className={cx("w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--button-deposit-from)] to-[var(--button-deposit-to)] text-[var(--white)] font-medium", {
-                "opacity-50": !isLoaded,
-              })}
-              onClick={onClickToNextDepositPage}
-            >
-              DEPÓSITO
-            </button>
+            <DepositToNextPageButton onClick={onClickToNextDepositPage} className={cx({ "opacity-50": !isLoaded })} />
           </section>
         ) : isLoaded ? (
           <section className={"flex flex-col justify-center items-center w-full"}>
-            {/*<ProButton*/}
-            {/*  className={"bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] text-main-primary-varient font-bold text-2xl"}*/}
-            {/*  onClick={onClickToNextDepositPage}*/}
-            {/*>*/}
-            {/*  Depósito*/}
-            {/*</ProButton>*/}
-            <button
-              className={"w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--button-deposit-from)] to-[var(--button-deposit-to)] text-[var(--white)] font-medium"}
-              onClick={onClickToNextDepositPage}
-            >
-              DEPÓSITO
-            </button>
+            <DepositToNextPageButton onClick={onClickToNextDepositPage} />
           </section>
-        ): null}
+        ) : null}
       </section>
     </SectionContainer>
   )
