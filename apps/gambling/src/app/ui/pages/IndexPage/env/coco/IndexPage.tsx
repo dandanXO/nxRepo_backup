@@ -92,7 +92,7 @@ export const IndexPage = ({
   }
 
   const [isMoving, setIsMoving] = useState(false);
-
+  const DesktopXPadding = "!pl-12 !pr-[90px]";
   return (
     <>
       <div id="app-carousel" className={cx("w-full bg-[#020E29]",
@@ -167,7 +167,9 @@ export const IndexPage = ({
             },
             {
               "bg-[var(--background-primary)]" : !isMobile
-            }
+            },
+            // "md:pr-[86px]",
+            DesktopXPadding,
           )}
         >
           <div className={"flex flex-row justify-center items-center"}>
@@ -214,7 +216,9 @@ export const IndexPage = ({
         </Container>
       ): null}
 
-      <Container className="bg-[var(--background-primary)]">
+      <Container className={cx("bg-[var(--background-primary)]", {
+        [DesktopXPadding]: !isMobile
+      })}>
         {gameList()}
       </Container>
     </>

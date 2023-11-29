@@ -45,10 +45,11 @@ export const GameSearchModal = (props: IGameSearchModal) => {
   const gameList = (data: any) => {
     if (data?.length > 0) {
       return (
-        <>
+        <div className={"flex"}>
           {data && data.map((item: any, index: any) => {
             return (
               <MainGameItem
+                className={"mr-[16px] grow-0 shrink-0 basis-[150px] h-[170px]"}
                 key={index}
                 gameId={Number(item.gameId)}
                 name={item.name}
@@ -59,7 +60,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
               />
             )
           })}
-        </>
+        </div>
       )
     } else {
       return <div className="flex flex-col flex-1 justify-center items-center py-3.5">
@@ -71,7 +72,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
 
 
   return (
-    <div className="fixed left-0 top-0 right-0 bottom-0 z-[1000] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
+    <div className="fixed left-0 top-0 right-0 bottom-0 z-[1002] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
       <div className={cx("fixed  bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] rounded-lg", {
         "w-[80%]": !isMobile,
         "w-[90%]": isMobile

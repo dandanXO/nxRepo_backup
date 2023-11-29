@@ -24,13 +24,13 @@ export const GameListSection = (props: IGameListSection) => {
 
   const handleClickToLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft -= 50; // 根据需要调整滚动距离
+      scrollContainerRef.current.scrollLeft -= 150 + 16; // 根据需要调整滚动距离
     }
   };
 
   const handleClickToRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft += 50; // 根据需要调整滚动距离
+      scrollContainerRef.current.scrollLeft += 150 + 16; // 根据需要调整滚动距离
     }
   };
 

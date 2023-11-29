@@ -87,7 +87,7 @@ export const DesktopGameItem = (props: IItem) => {
   const [onLoad, setOnLoad] = useState(false);
   return (
     <StyledGameItem
-      className={" w-[150px] p-1 game-item rounded flex flex-col items-center relative group shrink-0"}
+      className={cx("game-item w-full h-full rounded flex flex-col items-center relative group shrink-0", props.className)}
       onClick={props.onClick}
       onMouseOver={() => {
         setHover(true);
@@ -95,17 +95,24 @@ export const DesktopGameItem = (props: IItem) => {
       onMouseOut={() => {
         setHover(false);
       }}>
-      {!onLoad && (
-        <Skeleton className={"absolute rounded-xl w-[150px] h-[150px]  flex justify-center items-center"}>
-          <TailSpin/>
-        </Skeleton>
-      )}
-      <div className={"w-full"}>
+
+      <div
+        className={cx("w-full h-full",
+        )}
+      >
+        {!onLoad && (
+          <Skeleton className={"rounded-xl flex justify-center items-center w-full h-[calc(100%-20px)]"}>
+            <TailSpin/>
+          </Skeleton>
+        )}
         <img alt={"name"}
-             className={cx("rounded-xl hover:blur-[2px] hover:brightness-50 w-[150px] h-[150px] object-cover group-hover:blur-[2px] group-hover:brightness-50", {
-               // "hide": !onLoad,
-               "invisible": !onLoad,
-               "basis-[calc(100%-1rem)]": onLoad
+             className={cx(
+               // NOTE: 20px title height
+               "w-full h-[calc(100%-20px)]",
+               "rounded-xl hover:blur-[2px] hover:brightness-50 object-cover group-hover:blur-[2px] group-hover:brightness-50", {
+               "hide": !onLoad,
+               // "invisible": !onLoad,
+               "basis-[calc(100%-1rem)]": onLoad,
              })}
              src={`${environment.s3URLImages}/${props.gameId}-small.png`}
              srcSet={`${environment.s3URLImages}/${props.gameId}-small.png 1x, ${environment.s3URLImages}/${props.gameId}-medium.png 2x, ${environment.s3URLImages}/${props.gameId}-large.png 3x`}
@@ -115,6 +122,7 @@ export const DesktopGameItem = (props: IItem) => {
         />
         <div className={"text-[#d7e8ff] block text-ellipsis truncate text-sm md:text-base sm:text-center w-full sm:text-center md:text-left basis-[20px] shrink-0"}>{props.name}</div>
       </div>
+
       <FavoriteSection
         onClickFavorite={(event: any) => {
           event.stopPropagation();
@@ -143,4 +151,5 @@ export type IItem ={
   onClick?: () => void;
   onClickFavorite?: () => void;
   favorite?: boolean
+  className?: string;
 }
