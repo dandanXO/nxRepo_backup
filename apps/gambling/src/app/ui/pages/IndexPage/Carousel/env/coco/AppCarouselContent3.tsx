@@ -41,7 +41,6 @@ export const AppCarouselContent3 = (props: IAppCarouselContent) => {
         >
           <Container
             className={cx("absolute top-1/2 transform -translate-y-1/2",
-              "pl-4",
               "font-bold text-6xl text-left"
             )}
           >

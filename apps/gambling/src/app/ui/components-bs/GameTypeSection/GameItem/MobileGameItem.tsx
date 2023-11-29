@@ -23,7 +23,7 @@ export const MobileGameItem = (props: IItem) => {
     <StyledMobileGameItem
       className={cx("p-1 shrink-0 grow-0 basis-[33%] overflow-hidden w-[33vw] h-[33vw] rounded-2xl flex flex-col items-center relative", {
 
-      })}
+      }, props.className)}
     >
       <div
         onClick={props.onClick}

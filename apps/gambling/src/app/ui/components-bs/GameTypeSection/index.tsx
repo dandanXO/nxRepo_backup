@@ -103,6 +103,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   return (
     <section className={cx({
       "flex flex-col mb-4": !props.isLatestItem,
+      // "mr-10": !isMobile,
     })}>
 
       {props.gameTypeName ==='null' ? <div></div> : isMobile ? (
