@@ -1,27 +1,26 @@
 import cx from "classnames";
-import {useState} from "react";
 
 type IProps = {
   className?: string;
   children: React.ReactNode;
-  onClickBanner?: () => void;
+  onClickBanner?: (event: any) => void;
+  isMoving: boolean;
 }
 export const CarouselContainer = (props: IProps) => {
-  const [canClick, setCanClick] = useState<boolean>(true);
   return (
-    // <div className={cx("pointer-events-none", props.className)}>{props.children}</div>
-    <button className={cx("", props.className)}
-        // onDragStart={() => {
-        //   setCanClick(false)
-        // }}
-        //  onDragEnd={() => {
-        //    setCanClick(true)
-        //  }}
-         onClick={() => {
-           canClick && props.onClickBanner && props.onClickBanner();
-        }}
+    <div
+      onClick={(event) => {
+        if(props.isMoving) {
+          event.preventDefault();
+        } else {
+          props.onClickBanner && props.onClickBanner(event);
+        }
+      }}
     >
-      {props.children}
-    </button>
+      {/*解決圖片會被拖曳*/}
+      <button className={cx("pointer-events-none", props.className)}>
+        {props.children}
+      </button>
+    </div>
   )
 }

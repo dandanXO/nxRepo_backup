@@ -10,15 +10,18 @@ import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
 import {Container} from "../../../../../components/container/Container";
+import {IAppCarouselContent} from "../../types";
 
-export const AppCarouselContent = () => {
+
+export const AppCarouselContent = (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
   const {onClickToFirstDeposit} = usePageNavigate();
 
   return (
     <CarouselContainer
+      isMoving={props.isMoving}
       className={"text-[22.5px] text-white"}
-      onClickBanner={() => {
+      onClickBanner={(event) => {
         onClickToFirstDeposit();
       }}
     >

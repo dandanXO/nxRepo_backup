@@ -55,14 +55,16 @@ const responsive = {
   }
 };
 
-const TransitionDuration = 1
 
 type IAppCarousel = {
   children: React.ReactNode;
+  setIsMoving: (isMoving: boolean) => void;
 }
 
 export const AppCarousel = (props: IAppCarousel) => {
   const {isMobile} = useBreakpoint();
+  const TransitionDuration = 0.3
+
   return (
     <div className={cx({
       "isdesktop": !isMobile
@@ -72,7 +74,7 @@ export const AppCarousel = (props: IAppCarousel) => {
         swipeable={true}
         draggable={true}
         showDots={true}
-        arrows={false}
+        arrows={!isMobile}
         responsive={responsive}
         autoPlay={true}
         // autoPlay={false}
@@ -92,6 +94,8 @@ export const AppCarousel = (props: IAppCarousel) => {
         containerClass="carousel-container"
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
+        beforeChange={() => props.setIsMoving && props.setIsMoving(true)}
+        afterChange={() => props.setIsMoving && props.setIsMoving(false)}
       >
         {props.children}
       </Carousel>

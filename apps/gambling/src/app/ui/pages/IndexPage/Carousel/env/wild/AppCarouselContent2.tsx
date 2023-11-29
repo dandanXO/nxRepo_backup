@@ -9,15 +9,16 @@ import {environment} from "../../../../../../../environments/environment";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
+import {IAppCarouselContent} from "../../types";
 
-export const AppCarouselContent2 = () => {
+export const AppCarouselContent2 = (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToFirstDeposit} = usePageNavigate();
   return (
-    <CarouselContainer className={"text-[22.5px] font-[Heebo] text-white"}>
+    <CarouselContainer isMoving={props.isMoving} className={"text-[22.5px] font-[Heebo] text-white"}>
       {isMobile ? (
         <div
           onClick={() => {
