@@ -32,12 +32,12 @@ export const MaintenanceModal = (props: IMaintenanceModal) => {
   const maintenanceStart = moment(maintenance.start).format('DD-MM-YYYY HH:mm');
   const maintenanceEnd = moment(maintenance.end).format('DD-MM-YYYY HH:mm');
   const maintenanceMinutes = moment(maintenance.end).diff(moment(maintenance.start), 'minutes');
-  const maintenanceHours = Math.ceil(370 / 60);
+  const maintenanceHours = Math.ceil(maintenanceMinutes / 60);
   const maintenanceLeftTime = maintenanceMinutes >= 180 ? `${maintenanceHours} horas` : `${maintenanceMinutes} minutos`;
 
 
   return (
-    <div className="fixed left-0 top-0 right-0 bottom-0 z-[999] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
+    <div className="fixed left-0 top-0 right-0 bottom-0 z-[1002] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
       <div className={cx("flex flex-col fixed bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] rounded-lg py-6", {
         // NOTE: mt-[46px]:圖往上74px-24px(mb-6)
         "mt-[50px] px-6 w-[80%] lg:w-[778px] max-h-[calc(100%-120px)]": !isMobile,
@@ -52,7 +52,7 @@ export const MaintenanceModal = (props: IMaintenanceModal) => {
         </div>
         <div className="overflow-auto flex-1">
           <Paragraph text={'Prezados usuários VIP:'} />
-          <Paragraph text={`O serviço do sistema ${environment.platformName} está sendo atualizado e mantido. 
+          <Paragraph text={`O serviço do sistema ${environment.platformName} está sendo atualizado e mantido.
           De ${maintenanceStart} (Brasil) até ${maintenanceEnd}, o tempo estimado de manutenção é de ${maintenanceLeftTime}. Durante a manutenção do sistema, evite cadastro, login, jogos e outras operações. Obrigado pela sua compreensão e apoio!`} />
           <Paragraph text={
             <div>

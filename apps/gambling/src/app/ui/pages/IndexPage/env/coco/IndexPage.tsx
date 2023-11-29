@@ -216,8 +216,8 @@ export const IndexPage = ({
         </Container>
       ): null}
 
-      <Container className={cx("bg-[var(--background-primary)]", {
-        [DesktopXPadding]: !isMobile
+      <Container className={cx("pb-16 bg-[var(--background-primary)]", {
+        [DesktopXPadding]: !isMobile,
       })}>
         {gameList()}
       </Container>
