@@ -181,12 +181,12 @@ html {
   padding: 0;
 }
 
-.rmc-picker-mask {
-  background-image: linear-gradient(to bottom, rgba(32, 73, 142, 0.95), rgba(32, 73, 142, 0.6)), linear-gradient(to top, rgba(32, 73, 142, 0.95), rgba(32, 73, 142, 0.6));
+.custom-date-picker .rmc-picker-mask {
+  background-image: linear-gradient(to bottom, rgb(from var(--white) r g b / 0.95), rgb(from var(--white) r g b / 0.60)), linear-gradient(to top, rgb(from var(--white) r g b / 0.95), rgb(from var(--white) r g b / 0.60));
 }
 
-.rmc-picker-item  {
-  color: white;
+.custom-date-picker .rmc-picker-item  {
+  color: var(--black);
 }
 
 .ant-picker-focused .ant-picker-separator,
