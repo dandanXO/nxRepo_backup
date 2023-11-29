@@ -32,7 +32,7 @@ export const MaintenanceModal = (props: IMaintenanceModal) => {
   const maintenanceStart = moment(maintenance.start).format('DD-MM-YYYY HH:mm');
   const maintenanceEnd = moment(maintenance.end).format('DD-MM-YYYY HH:mm');
   const maintenanceMinutes = moment(maintenance.end).diff(moment(maintenance.start), 'minutes');
-  const maintenanceHours = Math.ceil(370 / 60);
+  const maintenanceHours = Math.ceil(maintenanceMinutes / 60);
   const maintenanceLeftTime = maintenanceMinutes >= 180 ? `${maintenanceHours} horas` : `${maintenanceMinutes} minutos`;
 
 
