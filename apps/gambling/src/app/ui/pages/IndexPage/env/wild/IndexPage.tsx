@@ -19,7 +19,7 @@ import {AppCarouselContent6} from "../../Carousel/env/wild/AppCarouselContent6";
 import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
 import { CocoTabItem } from "../../../../components/TabItem/CocoTabItem";
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
@@ -80,6 +80,7 @@ export const IndexPage = ({
       onClickToSearch();
     }
   }
+  const [isMoving, setIsMoving] = useState(false);
 
   return (
     <>
@@ -90,12 +91,12 @@ export const IndexPage = ({
         // "p-4": !isMobile,
       })}>
         {isMobile && <CompanySloganLabel/>}
-        <AppCarousel>
-          <AppCarouselContent/>
-          <AppCarouselContent2/>
-          <AppCarouselContent3/>
-          <AppCarouselContent4/>
-          <AppCarouselContent5/>
+        <AppCarousel setIsMoving={setIsMoving}>
+          <AppCarouselContent isMoving={isMoving}/>
+          <AppCarouselContent2 isMoving={isMoving}/>
+          <AppCarouselContent3 isMoving={isMoving}/>
+          <AppCarouselContent4 isMoving={isMoving}/>
+          <AppCarouselContent5 isMoving={isMoving}/>
           {/*<CocoAppCarouselContent6/>*/}
         </AppCarousel>
       </div>

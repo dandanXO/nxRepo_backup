@@ -19,7 +19,7 @@ export const LeaveGameConfirmModal = ({
   const { isMobile } = useBreakpoint();
 
   return (
-    <div className='z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center w-full h-full bg-[rgba(0,0,0,0.50)]'>
+    <div className='z-[1000] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center w-full h-full bg-[rgba(0,0,0,0.50)]'>
       <div className={tcx(
         'text-2xl py-7 px-8 w-[618px] gap-6 text-white font-medium flex flex-col bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] border-2 border-[var(--stroke-modal)] rounded-xl',
         ['text-sm py-4 px-5 w-[328px] h-[208px] gap-3', isMobile])}>

@@ -87,7 +87,7 @@ export const Footer = (props: IFooter) => {
                 </button>
 
                 {footerExpands.helpers === true && (
-                  <div className={"pl-4 flex flex-col items-start ml-6 mt-2"}>
+                  <div className={"pl-4 flex flex-col items-start  mt-2"}>
                     <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</div>
                     <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</div>
                     <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</div>
@@ -134,7 +134,7 @@ export const Footer = (props: IFooter) => {
                 <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{footerTextExpand ? 'jogue fora': 'ver tudo'}</button>
               </div>
 
-              <div className='mt-3 flex justify-center mb-4 flex-nowrap'>
+              <div className='mt-3 flex justify-center mb-4 flex-nowrap relative left-[-6px]'>
                 <img alt='footer1' className='w-[6%] h-[89%] flex-1' src={`assets/${environment.assetPrefix}/footer1.aa87e40b.png`}/>
                 <img alt='footer1' className='w-[16%] h-[60%] flex-1 mt-1' src={`assets/${environment.assetPrefix}/footer2.43ad4696.png`} />
                 <img alt='footer1' className='w-[16%] h-[72%] flex-1' src={`assets/${environment.assetPrefix}/footer3.e3ce7aaa.png`}  onClick={()=>window.open('https://www.skrill.com/pt/')}/>

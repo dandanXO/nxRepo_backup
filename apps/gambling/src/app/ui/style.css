@@ -234,7 +234,19 @@ html {
   background: var(--primary-variant);
 }
 
-/*NOTE: 解決最下腳留白的縫隙*/
+.react-multiple-carousel__arrow.react-multiple-carousel__arrow--left  {
+  left: 2px !important;
+}
+
+.react-multiple-carousel__arrow.react-multiple-carousel__arrow--right {
+  right: 2px !important;
+}
+
+.react-multiple-carousel__arrow:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+  /*NOTE: 解決最下腳留白的縫隙*/
 .react-multi-carousel-track {
   margin-bottom: -6px;
 }

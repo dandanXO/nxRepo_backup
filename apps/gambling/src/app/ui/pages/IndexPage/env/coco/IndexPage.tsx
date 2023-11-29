@@ -91,7 +91,7 @@ export const IndexPage = ({
     }
   }
 
-
+  const [isMoving, setIsMoving] = useState(false);
 
   return (
     <>
@@ -103,12 +103,12 @@ export const IndexPage = ({
       })}>
         {isSearch && <GameSearchModal userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} onClose={()=>setIsSearch(false)}/>}
         {isMobile && <CompanySloganLabel/>}
-        <AppCarousel>
-          <AppCarouselContent/>
-          <AppCarouselContent2/>
-          <AppCarouselContent3/>
-          <AppCarouselContent4/>
-          <AppCarouselContent5/>
+        <AppCarousel setIsMoving={setIsMoving}>
+          <AppCarouselContent isMoving={isMoving}/>
+          <AppCarouselContent2 isMoving={isMoving}/>
+          <AppCarouselContent3 isMoving={isMoving}/>
+          <AppCarouselContent4 isMoving={isMoving}/>
+          <AppCarouselContent5 isMoving={isMoving}/>
           {/*NOTE: 公司簡介目前沒有*/}
           {/*<AppCarouselContent6/>*/}
           {/*NOTE: 暫時備用*/}

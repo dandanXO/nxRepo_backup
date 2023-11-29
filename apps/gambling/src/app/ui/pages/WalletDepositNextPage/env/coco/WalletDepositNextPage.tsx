@@ -17,6 +17,7 @@ import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
+import { format } from "../../../../utils/format";
 
 const ShadowContainer = styled.div.attrs<{
   className?: string;
@@ -111,7 +112,7 @@ export const WalletDepositNextPage = () => {
         />
 
         {isMobile && (
-          <div className={"text-3xl text-center text-[var(--secondary-assistant)]"}>R$ {amount}</div>
+          <div className={"text-3xl text-center text-[var(--secondary-assistant)]"}>R$ {format(Number(amount))}</div>
         )}
 
         <div className={cx("text-sm text-[var(--secondary-assistant)] leading-5 mb-4 mt-2 text-center",

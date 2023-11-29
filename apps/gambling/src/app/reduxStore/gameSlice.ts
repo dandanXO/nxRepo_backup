@@ -24,13 +24,14 @@ interface GameListType {
 
 export type InitialState = {
   allGameList: GameListType[];
+  hotBrandGameList: GameListType[];
   typeGameList: GameType[];
   label: string[];
-
 }
 
 const initGameList: InitialState = {
   allGameList: [],
+  hotBrandGameList: [],
   typeGameList:[],
   label: [],
 }
@@ -57,18 +58,32 @@ export const gameSlice = createSlice({
       const gameData = action.payload;
 
       let hotGameBrandIndex = 0
-      const allGame = gameData && gameData?.label.reduce((acc: any , currentType:string) => {
+      const hotBrandGameList = gameData && gameData?.label?.reduce((acc: any , currentType:string) => {
 
-        const subGamesList = gameData.type[currentType]?.reduce((acc: any, currentSubType: string) => {
+        const subGamesList = gameData.type ? gameData.type[currentType]?.reduce((acc: any, currentSubType: string) => {
           // console.log("gameData[currentType][currentSubType]", gameData[currentType][currentSubType]);
           let currentBrandGames: any[] = gameData[currentType] ? gameData[currentType][currentSubType] || [] : [];
           currentBrandGames = currentBrandGames.slice(0, hotGameBrandIndex === 0 ? MaxHotGameBrandGameCount : OtherMaxHotGameBrandGameCount)
           // return [...acc, ...gameData[currentType][currentSubType]]
           hotGameBrandIndex = hotGameBrandIndex + 1;
           return [...acc, ...currentBrandGames]
-        }, [])
+        }, []) : []
 
         hotGameBrandIndex = 0;
+
+        return [...acc, {
+          gameType: currentType,
+          data: {
+            subGameType: currentType,
+            games: subGamesList
+          }
+        }]
+      }, [])
+
+      const allGameList = gameData && gameData?.label?.reduce((acc: any , currentType:string) => {
+        const subGamesList = gameData ? gameData.type[currentType]?.reduce((acc: any, currentSubType: string) => {
+          return [...acc, ...gameData[currentType][currentSubType]]
+        }, []) : []
 
         return [...acc, {
           gameType: currentType,
@@ -95,7 +110,8 @@ export const gameSlice = createSlice({
        result.push(game);
        return result
      }, [])
-      state.allGameList = allGame;
+      state.allGameList = allGameList;
+      state.hotBrandGameList = hotBrandGameList;
       state.typeGameList = typeGameList;
       // console.log('allGame',typeGameList)
     },

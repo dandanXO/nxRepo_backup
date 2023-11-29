@@ -29,7 +29,7 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
 
   return (
     <div
-      className={"bg-[rgba(0,0,0,.6)] z-[999] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}
+      className={"bg-[rgba(0,0,0,.6)] z-[1000] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}
       onClick={() => {
         // NOTE: 手機版用戶會誤點
         !isMobile && props.close()
