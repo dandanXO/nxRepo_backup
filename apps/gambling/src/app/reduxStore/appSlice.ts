@@ -4,6 +4,12 @@ import {AppLocalStorage} from "../persistant/localstorage";
 import {RootState} from "./index";
 import {AppLocalStorageKey} from "../persistant/AppLocalStorageKey";
 
+
+interface IMaintenance{
+  flag: number;
+  start: string;
+  end: string;
+}
 export type InitialState = {
   isMobile: boolean;
   isUserMoneyStatusLoading: boolean;
@@ -15,11 +21,13 @@ export type InitialState = {
   isShowTelegramModal: boolean;
   isShowDepositModal: boolean;
   isShowInviteBonusModal: boolean;
+  isShowMaintenanceModal: boolean;
   messageCount: number;
   vip_level: number;
   globalMessage: null | string;
   withdrawBegin: string
-  withdrawEnd: string
+  withdrawEnd: string;
+  maintenance: IMaintenance;
 };
 
 const userStore$3: IUserStore= {
@@ -69,9 +77,15 @@ const initialState: InitialState = {
   isShowTelegramModal: false,
   isShowDepositModal: false,
   isShowInviteBonusModal: false,
+  isShowMaintenanceModal: false,
   messageCount: 0,
   withdrawBegin: "00:00",
-  withdrawEnd: "00:00"
+  withdrawEnd: "00:00",
+  maintenance: {
+    flag: 0,
+    start: "",
+    end: "",
+  }
 };
 
 export const appSlice = createSlice({
@@ -111,6 +125,9 @@ export const appSlice = createSlice({
     setIsShowInviteBonusModal: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isShowInviteBonusModal = action.payload;
     },
+    setShowMaintenanceModal: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.isShowMaintenanceModal = action.payload;
+    },
     setIsMobile: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isMobile = action.payload;
     },
@@ -122,7 +139,13 @@ export const appSlice = createSlice({
     },
     setWithdrawEnd: (state: InitialState, action: PayloadAction<string>) => {
       state.withdrawEnd = action.payload
-    }
+    },
+    setMaintenance: (state: InitialState, action: PayloadAction<IMaintenance>) => {
+      state.maintenance = action.payload
+      if (Number(action.payload.flag) === 1) {
+        state.isShowMaintenanceModal = true
+      }
+    },
   },
 });
 
