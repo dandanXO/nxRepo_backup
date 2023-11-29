@@ -107,6 +107,10 @@ import PHv7 from './philippines/v7/tailwind.theme';
 import PHv8 from './philippines/v8/tailwind.theme';
 import PHv9 from './philippines/v9/tailwind.theme';
 import PHv10 from './philippines/v10/tailwind.theme';
+import PHv11 from './philippines/v11/tailwind.theme';
+import PHv12 from './philippines/v12/tailwind.theme';
+import PHv13 from './philippines/v13/tailwind.theme';
+import PHv14 from './philippines/v14/tailwind.theme';
 
 export const DEFAULT_INDIA_THEME = 'v55';
 export const DEFAULT_PAKISTAN_THEME = 'v15';
@@ -222,5 +226,9 @@ export const themes: IThemes = {
     v8: PHv8,
     v9: PHv9,
     v10: PHv10,
+    v11: PHv11,
+    v12: PHv12,
+    v13: PHv13,
+    v14: PHv14,
   },
 };
