@@ -25,7 +25,7 @@ export const DesktopGameNumber = 30;
 
 export const IndexPage = () => {
   const { isMobile } = useBreakpoint();
-  const { allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
+  const { hotBrandGameList = [], allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
   // const [activeTab, setActiveTab] = useState("Todos");
   // "Salão"
   const [activeTab, setActiveTab] = useState("Todos");
@@ -44,8 +44,8 @@ export const IndexPage = () => {
     handleSearchGames(searchInput)
   }, [searchInput])
 
-  const renderAllGameList = () => {
-    return allGameList !== undefined && allGameList.map((i: any, index: number) => {
+  const renderHotBrandGameList = () => {
+    return hotBrandGameList !== undefined && hotBrandGameList.map((i: any, index: number) => {
       const typeGame = typeGameList.filter((item: any) => item.gameType === i.gameType)[0] || {}
       const expandCount = typeGame.data?.reduce((acc: number, current: any) => acc + current.games.length , 0)
 
@@ -55,7 +55,7 @@ export const IndexPage = () => {
           userFavorite={userFavorite}
           onClickFavoriteGameItem={onClickFavoriteGameItem}
           hotGames={true}
-          isLatestItem={allGameList.length - 1 === index}
+          isLatestItem={hotBrandGameList.length - 1 === index}
           gameTypeName={i.gameType}
           data={i.data.games}
           onClickExpand={() => setActiveTab(i.gameType)}
@@ -123,7 +123,7 @@ export const IndexPage = () => {
         )
         : <></>
     } else {
-      return (activeTab === "Todos" || activeTab === "Salão") ? renderAllGameList() : renderTypeGameList()
+      return (activeTab === "Todos" || activeTab === "Salão") ? renderHotBrandGameList() : renderTypeGameList()
     }
   }
 

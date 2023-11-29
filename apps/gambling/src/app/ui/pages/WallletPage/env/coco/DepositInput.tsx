@@ -2,6 +2,7 @@ import cx from "classnames";
 import { MobileInput } from "../../../../components/Inputs/MobileInput";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {InputValue} from "../../../../components/Inputs/Input";
+import React from "react";
 
 type IDepositInput = {
   inputValue: InputValue<string>;
@@ -17,6 +18,11 @@ export const DepositInput = (props: IDepositInput) => {
   return (
     <div className={cx("relative", { 'my-10': !isMobile })}>
       <MobileInput
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>)=>{
+          if (e.key === '.' || e.key === 'e' || e.key === '-') {
+            e.preventDefault();
+          }
+        }}
         type={"number"}
         className={cx({ 'py-2.5 px-4': isMobile })}
         inputClassName={'text-white'}

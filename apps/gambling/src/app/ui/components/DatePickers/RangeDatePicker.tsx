@@ -59,7 +59,7 @@ const RangeDatePicker = ({
       {
         drawerOpen && (
           <Drawer
-            className='w-full bg-[#20498E]'
+            className='w-full bg-[var(--white)]'
             onClose={()=> {
               setDrawerOpen(false)
               setOpen(true)
@@ -67,13 +67,13 @@ const RangeDatePicker = ({
             open={open}
             setOpen={setOpen}
           >
-            <div className='p-4 flex text-base justify-between items-center'>
-              <div className='text-sm text-[#969799]'>Cancelar</div>
+            <div className='p-4 flex text-base font-medium justify-between items-center text-[var(--black)]'>
+              <div className='text-xs'>Cancelar</div>
               <div className='font-bold'>Selecione a data</div>
-              <div className='text-sm text-[#ffe700]' onClick={handleConfirm}>Confirme</div>
+              <div className='text-xs' onClick={handleConfirm}>Confirme</div>
             </div>
 
-            <div className='flex p-4 gap-4'>
+            <div className='flex p-4 gap-4 text-[var(--black)]'>
               <div className='flex flex-col items-center gap-1'>
                 <div className={tcx(['opacity-50', anchor === 2])} onClick={()=>setAnchor(1)}>data de início</div>
                 { anchor === 1 && <div className='h-1 bg-white w-12 rounded-full' />}
@@ -87,6 +87,7 @@ const RangeDatePicker = ({
             {
               anchor === 1 &&
               <DatePicker
+                className="custom-date-picker"
                 date={selectedDate[0]}
                 mode='date'
                 onDateChange={(date) => onDateChange(1, date)}
@@ -98,6 +99,7 @@ const RangeDatePicker = ({
             {
               anchor === 2 &&
               <DatePicker
+                className="custom-date-picker"
                 date={selectedDate[1]}
                 onDateChange={(date) => onDateChange(2, date)}
                 mode='date'
