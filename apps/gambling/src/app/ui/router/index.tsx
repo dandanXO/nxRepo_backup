@@ -93,6 +93,7 @@ export const AppRouter = () => {
       AppLocalStorage.setItem(AppLocalStorageKey.downloadUrl, data.data['url_download']);
       dispatch(appSlice.actions.setWithdrawBegin(data.data.withdraw_begin))
       dispatch(appSlice.actions.setWithdrawEnd(data.data.withdraw_end))
+      dispatch(appSlice.actions.setMaintenance(data.data.maintenance))
     }
   }, [data])
 
@@ -117,28 +118,31 @@ export const AppRouter = () => {
   const [previousOffline, setPreviousOffline] = useState(false);
 
   useEffect(() => {
-    if(!previousOffline) {
-      const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
-      if(!token) {
-        setIsSetup(true);
-        dispatch(appSlice.actions.showLoginDrawerOrModal(true));
-        return;
+    // if (data !== undefined) {
+      if (!previousOffline && Number(data?.data.maintenance.flag) !== 1) {
+        const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
+        if(!token) {
+          setIsSetup(true);
+          dispatch(appSlice.actions.showLoginDrawerOrModal(true));
+          return;
+        }
+        const url = AppLocalStorage.getItem(AppLocalStorageKey.ip);
+        console.log("ws.url", url);
+  
+        if((url && url.indexOf("ws") > -1 || url && url?.indexOf("wss") > -1) && url !=="undefined" && url && token) {
+          connect(url, token);
+        } else {
+          userLogout();
+        }
+        dispatch(appSlice.actions.setIsLogin(true));
+        dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
+        dispatch(appSlice.actions.setShowTelegramModal(true))
+        dispatch(appSlice.actions.setShowDepositModal(true))
+        // props.confirmToLogin();
+        // setIsSetup(true);
       }
-      const url = AppLocalStorage.getItem(AppLocalStorageKey.ip);
-      console.log("ws.url", url);
-
-      if((url && url.indexOf("ws") > -1 || url && url?.indexOf("wss") > -1) && url !=="undefined" && url && token) {
-        connect(url, token);
-      } else {
-        userLogout();
-      }
-      dispatch(appSlice.actions.setIsLogin(true));
-      dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-      dispatch(appSlice.actions.setShowTelegramModal(true))
-      dispatch(appSlice.actions.setShowDepositModal(true))
-      // props.confirmToLogin();
-      // setIsSetup(true);
-    }
+    // }
+    
   }, [previousOffline])
 
   const offline = () => {

@@ -31,6 +31,7 @@ import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 import { DepositAdvertisementModal } from "../modals/DepositAdvertisementModal";
+import { MaintenanceModal } from "../modals/MaintenanceModal";
 
 
 console.log("[APP] environment", environment);
@@ -157,7 +158,7 @@ export const PageTemplate = (props: IPage) => {
   //   }
   // },[])
 
-  const { isShowMobileLogoutModal , isShowTelegramModal, isShowDepositModal, isShowInviteBonusModal } = useSelector((state: RootState) => state.app)
+  const { isShowMobileLogoutModal , isShowTelegramModal, isShowDepositModal, isShowInviteBonusModal ,isShowMaintenanceModal , } = useSelector((state: RootState) => state.app)
 
   // NOTE: NotificationDrawer
   const [openDesktopNotificationDrawer, setOpenDesktopNotificationDrawer] = useState(false);
@@ -422,7 +423,13 @@ export const PageTemplate = (props: IPage) => {
           setOpenDownloadModal(false)
         }}/>
       )}
-
+      {
+        isShowMaintenanceModal && (
+          <MaintenanceModal
+             onClickToOpenTelegramService={onClickToOpenTelegramService}
+          />
+        )
+      }
       {contextHolder}
 
     </>
