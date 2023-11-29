@@ -21,6 +21,7 @@ export type IInput = {
   pureContainer?: boolean;
   disable?: boolean;
   onClick?: () => void;
+  onKeyDown?: (event:React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const BaseInput = (props: IInput) => {
@@ -49,6 +50,7 @@ const BaseInput = (props: IInput) => {
           {props.prefix}
           {props.children ? (props.children) : (
             <input
+              onKeyDown={props.onKeyDown}
               // ref={inputRef as any}
               onClick={() => props.onClick && props.onClick()}
               className={cx(props.inputClassName,
