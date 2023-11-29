@@ -26,6 +26,12 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
         <SectionContainer id={"withdraw-section"}>
           <div className="text-base md:text-2xl">
             <MainInput
+              type='number'
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>)=>{
+                if (e.key === '.' || e.key === 'e' || e.key === '-') {
+                  e.preventDefault();
+                }
+              }}
               inputClassName={"leading-none"}
               themeStyle={"simple"}
               className="w-full rounded-lg"

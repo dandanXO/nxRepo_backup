@@ -24,6 +24,8 @@ import { WithdrawPanel as WWithdrawPanel } from './env/wild/WithdrawPanel'
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {ButtonPro} from "../../components/Buttons/ButtonPro";
 import moment from "moment";
+import { totalReasableSelector } from "../../../reduxStore/appSlice";
+import { format } from "../../utils/format";
 
 
 
@@ -97,6 +99,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
 
 
   const { withdrawBegin, withdrawEnd } = useSelector((state: RootState) => state.app);
+  const totalReasableValue = useSelector(totalReasableSelector);
 
   const duringRestrictWithdrawTime = (begin: string, end: string) => {
     const beginNumber = Number(begin.replace(':', ''))
@@ -146,12 +149,16 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   const validateAmount = (value: string) => {
     const isOutOfRange = Number(value) > Number(withdrawLimitMax) || Number(value) < Number(withdrawLimitMin);
     const isValueError = value === "" || isNaN(Number(value))
-    const isError = isOutOfRange || isValueError;
+    const isNotBaseOn10 = Number(value) % 10
+    const isOverTotalReasableValue = Number(value) > totalReasableValue ;
+    const isError = isOutOfRange || isValueError || isNotBaseOn10 || isOverTotalReasableValue;
     // 錯誤訊息 (超過可提取): 可提取金額為0.00 - > O valor que pode ser sacado é 0.00
     // 錯誤訊息 (欄位空白): Valor da retirada (50 - 100)
     const errorMessage =
-      isOutOfRange ? `O valor que pode ser sacado é ${Number(withdrawLimitMin).toFixed(2)} - ${Number(withdrawLimitMax).toFixed(2)}` :
-        isValueError ? `Valor da retirada (${Number(withdrawLimitMin).toFixed(2)} - ${Number(withdrawLimitMax).toFixed(2)})` : ''
+      isOutOfRange ? `O valor que pode ser sacado é ${format(withdrawLimitMin)} - ${format(withdrawLimitMax)}` :
+        isValueError ? `Valor da retirada (${format(withdrawLimitMin)} - ${format(withdrawLimitMax)})` :
+          isNotBaseOn10? 'O valor da retirada deve ser em múltiplos de 50. Por exemplo:  50, 100, 1100, 1650, 28650…':
+            isOverTotalReasableValue ? `O valor que pode ser sacado é ${Number((totalReasableValue / 10).toFixed(0)) * 10}` : ''
 
     setAmountInput({
       data: value,
