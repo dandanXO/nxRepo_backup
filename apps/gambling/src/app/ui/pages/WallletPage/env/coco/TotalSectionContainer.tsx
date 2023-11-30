@@ -55,8 +55,6 @@ const MobileTotalDetailItem = (props: any) => {
       {
         noticeShow && (
           <ConfirmDrawer
-            className='bg-gradient-to-t from-[#2E104C] to-[#3F28AF]'
-            buttonStyle='bg-gradient-to-t from-[#d88c19] to-[#ffae1a]'
             title='Descrição detalhada'
             content={noticeText}
             buttonText='Eu vejo'

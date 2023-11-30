@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { DownOutlined } from "@ant-design/icons";
-import Drawer, { DrawerDelay } from "../Drawers/Drawer";
+import Drawer, { DrawerDelay } from "../Drawers/AnimateDrawer";
 import RMCDatePicker from "rmc-date-picker";
 import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'

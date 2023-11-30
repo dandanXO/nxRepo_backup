@@ -41,7 +41,7 @@ interface IDrawerProps {
 
 }
 
-const Drawer = ({
+const AnimateDrawer = ({
   open,
   setOpen,
   children,
@@ -74,5 +74,5 @@ const Drawer = ({
   )
 }
 
-export default Drawer;
+export default AnimateDrawer;
 

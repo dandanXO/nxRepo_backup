@@ -276,7 +276,7 @@ export const AppRouter = () => {
           )}/>
 
           <Route path={PageOrModalPathEnum.InviteSettlementRecordPage} element={(
-            <PageTemplate>
+            <PageTemplate showMobileFooter={false}>
               <InviteSettlementRecordPage/>
             </PageTemplate>
           )}/>
