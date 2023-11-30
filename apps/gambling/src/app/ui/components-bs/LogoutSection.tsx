@@ -53,7 +53,7 @@ export const LogoutSection = (props: ILogoutPopover) => {
   }
 
   return (
-    <div className={cx("flex flex-col", props.className)}>
+    <div className={cx("flex flex-col text-sm md:text-base", props.className)}>
       <div className={"mb-2 text-[var(--white)]"}>Tem certeza que deseja sair?</div>
       <div className={"flex flex-row justify-center"}>
         <LogoutCancelButton onClick={onHandleCancel}/>
