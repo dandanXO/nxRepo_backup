@@ -35,11 +35,11 @@ export const RecordPanelDeposit = () => {
 
   const tableColumns = [
     {
-      title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', width: '200px',
+      title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', width: '250px',
       render: (record: any) => {
         return (
-          <div className='flex gap-2'>
-            <div>{record.pay_serial_no}</div>
+          <div className='flex'>
+            <div className='flex-1'>{record.pay_serial_no}</div>
             <button className='' onClick={()=>onClickToCopy(record.pay_serial_no)}>
               <img className="h-[20px] w-[22px]" alt={'copy'}
                    src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
