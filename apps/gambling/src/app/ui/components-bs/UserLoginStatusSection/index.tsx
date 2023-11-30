@@ -69,9 +69,6 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
             }}
             className={cx("font-bold pb-2",{
               "text-main-secondary-main": switchToLoginOrRegister === "forget",
-              "border-b-2": switchToLoginOrRegister === "forget",
-              "border-b-solid": switchToLoginOrRegister === "forget",
-              "border-b-main-secondary-main": switchToLoginOrRegister === "forget",
             })}
           >
             Esqueça A Senha?

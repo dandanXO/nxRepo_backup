@@ -20,6 +20,7 @@ import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {MobileInput} from "../../../../components/Inputs/MobileInput";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
+import {PhonePrefix} from "../../PhonePrefix";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
@@ -194,7 +195,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
               <>
                 {/*<PhoneSvg fill="#6c7083" className="mr-2 w-[24px] h-[24px]" />*/}
                 <PhoneSvg className="mr-1" />
-                <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
+                <PhonePrefix/>
               </>
             }
             placeholder="Tu número de celular"
@@ -232,7 +233,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
               props.onSwitchToForgetPassword();
             }}
           >Esqueça A Eenha?</button>
-          <ConfirmButton className="!w-full" onClick={() => onFormConfirm()}>Entrar</ConfirmButton>
+          <ConfirmButton className="!w-full text-sm md:text-base my-2 "onClick={() => onFormConfirm()}>Entrar</ConfirmButton>
         </section>
 
       </div>

@@ -83,8 +83,6 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
               inviteBonusInfoOpen && (
                 <ConfirmDrawer
                   onClose={() => setInviteBonusInfoOpen(false)}
-                  className='bg-gradient-to-t from-[#2E104C] to-[#3F28AF]'
-                  buttonStyle='bg-gradient-to-t from-[#d88c19] to-[#ffae1a]'
                   buttonText='Eu vejo'
                   title='Descrição detalhada'
                   content='As recompensas são liquidadas toda segunda-feira'

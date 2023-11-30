@@ -36,7 +36,7 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
       }}
     >
 
-      <Container className={"w-full p-4 rounded-2xl"} onClick={(event: any) => {
+      <Container className={"w-full sm:w-[396px] p-4 rounded-2xl"} onClick={(event: any) => {
         event.stopPropagation();
       }}>
 

@@ -6,10 +6,12 @@ import { useEffect, useRef, useState } from 'react';
 import { DragScrollContainer } from '../../../components/DragScrollContainer';
 import { useGesture } from '@use-gesture/react';
 import { useSpring } from '@react-spring/web';
+import { tcx } from "../../../utils/tcx";
 
 interface IGameListSection {
   icon?: React.ReactElement;
-  title: string;
+  title: string | React.ReactElement[] | React.ReactElement;
+  headerClassName?: string;
   className?: string;
   gameListClassName?: string;
   children: React.ReactElement[] | React.ReactElement;
@@ -17,7 +19,7 @@ interface IGameListSection {
 }
 export const GameListSection = (props: IGameListSection) => {
   const { isMobile } = useBreakpoint();
-  const { icon, title, className, gameListClassName, children, isShowHeader = true } = props;
+  const { headerClassName, icon, title, className, gameListClassName, children, isShowHeader = true } = props;
 
 
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -81,10 +83,10 @@ export const GameListSection = (props: IGameListSection) => {
       'px-2': isMobile
     }, className)}>
       {isShowHeader &&
-        (<div className='flex flex-row justify-between mb-2 sm:mb-3.5 pl-1 sm:pl-0'>
+        (<div className={tcx('flex flex-row justify-between mb-2 sm:mb-3.5 pl-1 sm:pl-0', headerClassName)}>
           <div className='flex justify-center items-center'>
             <div>{icon && icon}</div>
-            <div className='text-xs sm:text-base'>{title}</div>
+            <div className='text-xs sm:text-base items-center flex'>{title}</div>
           </div>
           {!isMobile && isOverflowedX && <div className='flex '>
             <button onClick={handleClickToLeft}><ArrowLeft /></button>

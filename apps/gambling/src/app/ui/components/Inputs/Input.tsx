@@ -54,7 +54,7 @@ const BaseInput = (props: IInput) => {
               // ref={inputRef as any}
               onClick={() => props.onClick && props.onClick()}
               className={cx(props.inputClassName,
-                "bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder:text-[var(--input-placeholder-color)]", {
+                "text-xs md:text-sm bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder:text-[var(--input-placeholder-color)]", {
                 "select-none": isDisable
                 })}
               type={props.type || "text"}

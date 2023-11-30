@@ -26,6 +26,7 @@ import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import styled from "styled-components";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
+import {PhonePrefix} from "../../PhonePrefix";
 
 
 const onValidateCaptchaInput = (data: string, setCaptchaInput: any) => {
@@ -235,7 +236,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         prefix={
           <>
             <PhoneSvg fill={"#6c7083"} className={"mr-1"}/>
-            <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
+            <PhonePrefix/>
           </>
         }
          placeholder={"Tu nùmero de celular"}
@@ -311,7 +312,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
 
       <section className={"flex flex-col"}>
         <ConfirmButton
-          className="!w-full"
+          className="!w-full my-2 text-sm md:text-base"
           onClick={() => onFormConfirm()}
         >Redefinir senha</ConfirmButton>
       </section>
