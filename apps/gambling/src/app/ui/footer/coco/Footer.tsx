@@ -37,7 +37,7 @@ export const Footer = (props: IFooter) => {
       {isMobile && isShowMobileFooter? (
         <div className={cx(
           'flex justify-center text-white p-4 pb-[80px]',
-          "bg-[var(--unknown)]",
+          "bg-[var(--background-footer)]",
         )}>
           <div className={"flex flex-col px-4"}>
 
@@ -155,7 +155,7 @@ export const Footer = (props: IFooter) => {
           </div>
         </div>
       ): isShowDesktopFooter ? (
-        <div className='bg-[var(--unknown)] text-white flex justify-center pt-20'>
+        <div className='bg-[var(--background-footer)] text-white flex justify-center pt-8'>
           {/*h-[400px]*/}
           <div className={"flex gap-3 w-11/12 mt-3"}>
 
