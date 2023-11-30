@@ -55,6 +55,15 @@ html {
   }
 }
 
+@keyframes recentGameListShow {
+  from {
+    transform: translateX(20%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
 .text-transparent {
   /*color: #fff;*/
   /*font-weight: 600;*/
@@ -131,7 +140,12 @@ html {
   background: rgb(from var(--white) r g b / 20%);
 }
 
-
+/* scrollbar for safari - 滾軸出現時，thead 不壓縮 */
+@supports (-webkit-touch-callout: none) {
+  .customTable-thead{
+    padding-right: 0px;
+  }
+}
 /* scrollbar */
 /* Works on Firefox */
 .customTable-tbody {

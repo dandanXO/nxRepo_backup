@@ -55,7 +55,7 @@ export type IUserForgetPasswordForm = {
 }
 
 const StyledSendSMSCodeButton = styled.button`
-  background: var(--main-primary-main);
+
 `
 {/*Enviar*/}
 {/*Esquerda 120s*/}
@@ -104,7 +104,7 @@ const SendSMSCodeButton = (props: IProps) => {
   }
   return (
     <StyledSendSMSCodeButton
-      className="px-2 py-1 rounded-xl"
+      className="px-2 py-0 rounded-2xl bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)]"
       onClick={() => {
         props.onClick && props.onClick(state === "counting");
         if(!props.valid) return;
@@ -235,7 +235,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         prefix={
           <>
             <PhoneSvg fill={"#6c7083"} className={"mr-1"}/>
-            <span className={"text-[#01FF52] mr-2"}>+55</span>
+            <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
           </>
         }
          placeholder={"Tu nùmero de celular"}
@@ -313,7 +313,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         <ConfirmButton
           className="!w-full"
           onClick={() => onFormConfirm()}
-        >Entrar</ConfirmButton>
+        >Redefinir senha</ConfirmButton>
       </section>
 
     </section>

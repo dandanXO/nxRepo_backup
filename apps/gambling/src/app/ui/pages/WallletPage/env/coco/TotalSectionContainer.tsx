@@ -8,7 +8,7 @@ import {
   totalReasableSelector
 } from "../../../../../reduxStore/appSlice";
 import cx from "classnames";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { QuestionCircleFilled, QuestionCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import ConfirmDrawer from "../../../../components/Drawers/ConfirmDrawer";
@@ -38,17 +38,17 @@ const MobileTotalDetailItem = (props: any) => {
 
 
   return (
-    <div className={"flex flex-col flex-nowrap flex-1 px-3.5 pt-4 pb-3.5 "} onClick={() => setNoticeShow(!noticeShow)}>
+    <div className={"flex flex-col flex-nowrap flex-1 px-3.5 pt-5 pb-3.5 "} onClick={() => setNoticeShow(!noticeShow)}>
       <div className={"whitespace-nowrap flex flex-row items-center mb-3"}>
         <div className={"font-[Heebo] font-bold text-sm"}>{titleText}</div>
 
-        <div className={"text-sm ml- flex items-center"}><QuestionCircleOutlined /></div>
+        <div className={"text-sm flex self-baseline"}><QuestionCircleFilled  className="text-xs ml-2 self-baseline"/></div>
       </div>
       <div className={"flex flex-row items-center text-xs mb-2.5"}>
         <div className={"flex flex-col text-xs md:text-base mr-1"}>Balanço: </div>
         <div className={"flex flex-col text-xs md:text-base"}> R$ {balanceValue}</div>
       </div>
-      <div className={"flex flex-row items-center text-xs"}>
+      <div className={"flex flex-row items-center text-xs mb-2"}>
         <div className={"flex flex-col text-xs md:text-base mr-1"}>Retirável: </div>
         <div className={"flex flex-col text-xs md:text-base"}> R$ {removeableValue}</div>
       </div>
@@ -121,7 +121,7 @@ export const TotalSectionContainer = () => {
         <div className={"w-full flex-[2] flex flex-row "}>
           <div className={"flex-1 flex flex-col justify-center items-center"}>
             <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {format(totalBalanceSheetValue)}</div>
-            <div className={cx("flex flex-col text-sm md:text-xl", {
+            <div className={cx("flex flex-col text-sm md:text-xl mt-3 md:mt-4", {
               'text-white font-normal': isMobile,
 
             })}>Balanço Total</div>
@@ -129,7 +129,7 @@ export const TotalSectionContainer = () => {
 
           <div className={"flex-1 flex flex-col justify-center items-center"}>
             <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {format(totalReasableValue)}</div>
-            <div className={cx("flex flex-col text-sm md:text-xl", {
+            <div className={cx("flex flex-col text-sm md:text-xl  mt-3 md:mt-4", {
               'text-white font-normal': isMobile
             })}>Retirável Total</div>
           </div>

@@ -231,7 +231,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             onClick={() => {
               props.onSwitchToForgetPassword();
             }}
-          >Esqueça a senha?</button>
+          >Esqueça A Eenha?</button>
           <ConfirmButton className="!w-full" onClick={() => onFormConfirm()}>Entrar</ConfirmButton>
         </section>
 

@@ -24,12 +24,12 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
     <div>
       <section className={"mb-2 flex justify-center items-center"}>
         {switchToLoginOrRegister !== "forget" && (
-          <div className="flex pb-2" style={{ width: "350px" }}>
+          <div className="flex pb-2 justify-center" style={{ width: "350px" }}>
             <button
               onClick={() => {
                 setSwitchToLoginOrRegister("login")
               }}
-              className={cx("flex-1 font-bold pb-2 ml-7 mr-7", {
+              className={cx("font-bold pb-2 px-1 mr-6", {
                 // "border-b-short": switchToLoginOrRegister === "login", // 新增的类
               })}
             >
@@ -46,7 +46,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
               onClick={() => {
                 setSwitchToLoginOrRegister("register")
               }}
-              className={cx("flex-1 font-bold pb-2 mr-7 ml-7",{
+              className={cx("font-bold pb-2 px-1",{
 
               })}
             >
@@ -74,7 +74,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
               "border-b-main-secondary-main": switchToLoginOrRegister === "forget",
             })}
           >
-            Esqueça a senha
+            Esqueça A Senha?
           </button>
         )}
       </section>

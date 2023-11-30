@@ -6,11 +6,13 @@ import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';
 import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';
 import cx from "classnames";
-import {RecordButton} from "../../components/Buttons/RecordButton";
+import {RecordButton,RecordButton2} from "../../components/Buttons/RecordButton";
 
 type IRecordPanel = {
   recordPanelMode: 'deposit' | 'withdraw';
 }
+
+
 export const RecordPanel = (props: IRecordPanel) => {
   const [selectedValueIndex, setSelectedValueIndex] = useState(0);
 

@@ -39,6 +39,7 @@ type IPernambucana777BetIndexPage = {
   scrollToCarousel: () => void;
   userFavorite: number[]
   onClickFavoriteGameItem: (item: GameItem) => void
+  recentGameList: GameItem[]
 }
 
 export const IndexPage = ({

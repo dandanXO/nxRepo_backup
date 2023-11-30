@@ -2,6 +2,7 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import {tcx} from "../../utils/tcx";
 import { environment } from "../../../../environments/environment";
+import cx from 'classnames'
 
 const NoData = () => {
   return (
@@ -62,18 +63,19 @@ export const Table = (props: ITable) => {
   }, [dataSource])
 
   return (
-    <div className={tcx('h-full w-full md:min-w-[500px] overflow-hidden flex flex-col')}>
-      <div className={tcx(['pr-[3px]', isScrollbarVisible])}>
+    <div className={tcx('h-full w-full  overflow-hidden flex flex-col')}>
+      <div className={tcx('customTable-thead',['pr-[3px]', isScrollbarVisible])}>
         <table className='relative table w-full no-scrollbar table-fixed'>
           <thead className=''>
             {columns?.map((col: any, colIndex: number) => (
               <th key={col.key}
-                className={tcx('p-2 sm:break-all',
-                  ['border-r border-[rgba(255,255,255,0.2)]', colIndex !== columns.length - 1],
-                  [`w-[${col.width}]`, col.width !== undefined],
+                className={cx(`p-2 sm:break-all `,
+                  {'border-r border-[rgba(255,255,255,0.2)]':colIndex !== columns.length - 1},
                   props.className,
                   props.titleStyle
-                )}>
+                )}
+                style={{width:`${col.width !== undefined ? col.width : 'auto'}`}}
+                >
                 {col.title}
               </th>
             ))}
@@ -90,12 +92,12 @@ export const Table = (props: ITable) => {
                 return <tr key={index}>
                   {columns?.map((col: any, colIndex: number) => (
                     <td key={col.key + colIndex}
-                      className={tcx('py-4 px-3 border-[rgba(255,255,255,0.2)] sm:break-all text-center',
-                        ['border-r', colIndex !== columns.length - 1],
-                        [`w-[${col.width}]`, col.width !== undefined],
-                        props.className,
+                      className={cx(`py-4 px-3 border-[rgba(255,255,255,0.2)] sm:break-all text-center`,
+                        {'border-r': colIndex !== columns.length - 1},                        props.className,
                         props.contentStyle
-                      )}>
+                      )}
+                      style={{width:`${col.width !== undefined ? col.width : 'auto'}`}}
+                      >
                       {col.render !== undefined ? col.render(data as any) : data[col.name]}
                     </td>
                   ))}
