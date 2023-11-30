@@ -29,7 +29,7 @@ export const MobileCurrentLevelInfoCard = ({
 
         <div className='flex items-center w-full mb-[14px]'>
           <ProgressBar
-            className='bg-white h-7'
+            className='bg-white h-6'
             rounded='rounded-full'
             progress={(userVIPInfo?.data?.vip_score || 0) /
               (userVIPInfo?.data?.next_level_score || 1)
@@ -56,7 +56,7 @@ export const MobileCurrentLevelInfoCard = ({
 
         <div className='flex items-center w-full'>
           <ProgressBar
-            className='bg-white h-7'
+            className='bg-white h-6'
             rounded='rounded-full'
             progress={
               userVIPInfo?.data?.flow_progress

@@ -33,7 +33,7 @@ export const MobileLevelInfoCard = ({
           {
             level >= 20 && (
               <div className='flex flex-col w-full justify-center items-center'>
-                <img className='w-[179px] object-contain mb-1' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
+                <img className='w-[154px] object-contain mb-1' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
                 <div className='text-xs text-center text-[var(--secondary-assistant)]'>
                   <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
                   <div>Ou numerário de valor equivalente</div>
