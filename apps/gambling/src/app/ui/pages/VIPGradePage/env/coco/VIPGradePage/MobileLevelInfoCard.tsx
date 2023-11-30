@@ -20,27 +20,6 @@ export const MobileLevelInfoCard = ({
       <div className='flex gap-3'>
         <div className='w-[100px] flex justify-center items-center'>
           <div className='w-[100px] flex flex-col items-center justify-center'>
-            {/*{*/}
-            {/*  level < 20 && (*/}
-            {/*   */}
-            {/*  )*/}
-            {/*}*/}
-
-            {/*{*/}
-            {/*  level >= 20 && (*/}
-            {/*    <>*/}
-            {/*      <img*/}
-            {/*        alt={`levelInfoIcon`}*/}
-            {/*        src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}*/}
-            {/*        className='w-[230px] mb-[10px]'*/}
-            {/*      />*/}
-            {/*      <div className='text-base text-center text-[var(--secondary-assistant)] mb-2'>*/}
-            {/*        <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>*/}
-            {/*        <div>Ou numerário de valor equivalente</div>*/}
-            {/*      </div>*/}
-            {/*    </>*/}
-            {/*  )*/}
-            {/*}*/}
             <img
               alt={`levelInfoIcon`}
               src={`assets/${environment.assetPrefix}/icon_vip_info.png`}
@@ -54,7 +33,7 @@ export const MobileLevelInfoCard = ({
           {
             level >= 20 && (
               <div className='flex flex-col w-full justify-center items-center'>
-                <img className='w-[85px] object-contain mb-1' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
+                <img className='w-[179px] object-contain mb-1' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
                 <div className='text-xs text-center text-[var(--secondary-assistant)]'>
                   <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
                   <div>Ou numerário de valor equivalente</div>
@@ -89,7 +68,7 @@ export const MobileLevelInfoCard = ({
 
       {
         level > 0 && (
-          <div className='w-full text-sm bg-[rgba(255,255,255,20%)] p-2 rounded-md border border-[var(--primary-assistant)] flex flex-col gap-2'>
+          <div className='w-full text-xs font-medium bg-[rgba(255,255,255,20%)] p-2 rounded-md border border-[var(--primary-assistant)] flex flex-col gap-2'>
             <div className='text-base text-left font-bold'>Condição</div>
             <div>Quantidade total de recarga：
               <span className='text-[var(--secondary-assistant)]'>

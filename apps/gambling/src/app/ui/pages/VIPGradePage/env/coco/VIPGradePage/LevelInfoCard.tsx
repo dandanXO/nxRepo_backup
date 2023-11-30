@@ -64,7 +64,7 @@ const LevelInfoCard = ({
                 <img
                   alt={`levelInfoIcon`}
                   src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}
-                  className='w-[230px] mb-[10px] object-contain'
+                  className='w-[280px] mb-1 object-contain'
                 />
                 <div className='text-base text-center text-[var(--secondary-assistant)] mb-2'>
                   <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
@@ -79,8 +79,8 @@ const LevelInfoCard = ({
       </div>
 
       <div className='flex flex-grow w-full gap-3'>
-        <div className={tcx('w-1/2 flex flex-col gap-2 text-xl', ['text-sm', isMobile])}>
-          <div className={isMobile?'text-lg font-bold':'text-2xl font-medium'}>Privilégio</div>
+        <div className='w-1/2 flex flex-col gap-2 text-xl'>
+          <div className='text-2xl font-medium'>Privilégio</div>
 
           <div className={tcx( ['hidden', level >= 20])}>Recompensa de atualização：
             <span className='text-[var(--secondary-assistant)]'>
@@ -105,7 +105,7 @@ const LevelInfoCard = ({
         </div>
 
         <div className='w-1/2 bg-[rgba(255,255,255,20%)] p-2 rounded-md border border-[var(--primary-assistant)] flex flex-col gap-2'>
-          <div className={tcx('text-2xl text-left font-medium', ['text-lg font-bold', isMobile])}>Condição</div>
+          <div className='text-2xl text-left font-medium'>Condição</div>
           <div>Quantidade total de recarga：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {format(rechargeAmountLimit ? rechargeAmountLimit / 100 : 0)}
