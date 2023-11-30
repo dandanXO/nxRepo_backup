@@ -26,7 +26,7 @@ const NoData = () => {
   return (
     <div className=' flex flex-col justify-center items-center py-10'>
       <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
-      <div>Nada aq</div>
+      <div>Nada aqui</div>
     </div>
   )
 }
@@ -50,31 +50,21 @@ export const DepositMobileTable = () => {
           {data?.data?.map((record) => (
             <Container
               key={record.id}
-              className={cx("mb-4 flex flex-col rounded-2xl py-2 text-white text-base border border-solid border-main-primary-main",
+              className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
               "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
               )}
             >
-              <div
-                className={
-                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1 text-main-primary-main '
-                }
-              >
+              <div className={'flex flex-row justify-between px-5 pt-3 pb-2'}>
                 <span>ID da ordem: {record.id}</span>
-                <CopyIcon className={'text-main-primary-main'} copyText={record.id}/>
+                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.id}/>
               </div>
-
-              <div
-                className={
-                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
-                }
-              >
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Valor</span>
                 <span className={''}>R${format(Number(record.amount))}</span>
               </div>
 
               <div
-                className={
-                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
+                className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'
                 }
               >
                 <span className={''}>valor do bônus</span>
@@ -83,12 +73,12 @@ export const DepositMobileTable = () => {
                 </span>
               </div>
 
-              <div className={'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'}>
+              <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-assistant px-4 py-1'}>
+              <div className={'flex flex-row justify-between border-assistant px-5 pt-3 pb-2'}>
                 <span className={''}>{record.created_at}</span>
                 <span style={{
                   color:
@@ -126,45 +116,29 @@ export const WithdrawMobileTable = () => {
           {data?.data?.map((record) => (
             <Container
               key={record.id}
-              className="mb-4 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
+              className="mb-2 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
             >
-              <div
-                className={
-                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1 text-main-primary-main '
-                }
-              >
+              <div className={'flex flex-row justify-between px-5 pt-3 pb-2 text-main-primary-main '}>
                 <span>ID da ordem: {record.pay_serial_no}</span>
                 <CopyOutlined className={'text-main-primary-main'} />
               </div>
 
-              <div
-                className={
-                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
-                }
-              >
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Valor</span>
                 <span className={''}>R${format(Number(record.amount))}</span>
               </div>
 
-              <div
-                className={
-                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
-                }
-              >
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Taxa de retirada</span>
                 <span className={''}>R${format(Number(record.fee))}</span>
               </div>
 
-              <div
-                className={
-                  'mb-2 flex flex-row justify-between border-b-[1px] border-assistant px-4 py-1'
-                }
-              >
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-assistant px-4 py-1'}>
+              <div className={'flex flex-row justify-between border-assistant px-5 pt-3 pb-2'}>
                 <span className={''}>{record.created_at}</span>
                 <span style={{
                   color: record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
