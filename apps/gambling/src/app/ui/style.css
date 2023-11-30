@@ -130,8 +130,9 @@ html {
 .table-zebra tbody tr:nth-child(even) td {
   background: rgb(from var(--white) r g b / 20%);
 }
+
+/* scrollbar for safari - 滾軸出現時，thead 不壓縮 */
 @supports (-webkit-touch-callout: none) {
-  
   .customTable-thead{
     padding-right: 0px;
   }

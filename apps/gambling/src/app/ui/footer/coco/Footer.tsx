@@ -36,15 +36,15 @@ export const Footer = (props: IFooter) => {
     <div>
       {isMobile && isShowMobileFooter? (
         <div className={cx(
-          'flex justify-center text-white p-4 pb-[80px]',
+          'flex justify-center text-white p-8 pb-[80px] text-xs',
           "bg-[var(--background-footer)]",
         )}>
-          <div className={"flex flex-col px-4"}>
+          <div className={"flex flex-col"}>
 
             <div className={"mb-2"}>
               <section className={"flex flex-col items-start"}>
                 <button
-                  className='h-[44px] text-white w-full flex flex-row justify-between'
+                  className='mb-2 text-white w-full flex flex-row justify-between'
                   onClick={() => {
                     setFooterExpands({
                       ...footerExpands,
@@ -53,7 +53,7 @@ export const Footer = (props: IFooter) => {
                  }}
                 >
                   <span className={"text-[var(--white)"}>Jogo</span>
-                  {!footerExpands.gameTypes ? <DownOutlined /> : <UpOutlined />}
+                  {!footerExpands.gameTypes ? <DownOutlined className="w-[14px] h-[14px]"/> : <UpOutlined className="w-[14px] h-[14px]"/>}
                 </button>
 
                 {footerExpands.gameTypes === true && (
@@ -61,7 +61,7 @@ export const Footer = (props: IFooter) => {
                     {
                       ["Salão", ...label].map((gameName: string, index: number) => {
                         return (
-                          <button key={index} className={"h-[44px]"} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
+                          <button key={index} className={"mb-2"} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
                         )
                       })
                     }
@@ -97,60 +97,57 @@ export const Footer = (props: IFooter) => {
               </section>
             </div>
 
-            <section className={"mt-2 text-[var(--text-tertiary)]"}>
+            <section className={"mt-2 text-center text-[var(--text-tertiary)] leading-4"}>
 
               <div className={cx("", {
 
               })}>
-                <span>&ensp;&ensp;{environment.platformName} é um excelente jogo de caça-níqueis online especialmente desenvolvido para os amantes de cassinos. Rege-se pelos princípios da concorrência leal e do controle legal local. Oferece aos jogadores com mais de 18 </span>
+                <span>{environment.platformName} é um excelente jogo de caça-níqueis online especialmente desenvolvido para os amantes de cassinos. Rege-se pelos princípios da concorrência leal e do controle legal local. Oferece aos jogadores com mais de 18 </span>
                 {!footerTextExpand ? " a..." : ""}
                 {footerTextExpand && <span>anos uma variedade de métodos de apostas diferentes e jogabilidade especial. Os jogadores só precisam escolher seu tipo de jogo de caça-níqueis preferido e, em seguida, fazer sua aposta, girar a máquina caça-níqueis para ter chances iguais de ganhar.</span>}
               </div>
 
               {footerTextExpand && (
                 <>
-                  <div className={cx(" mt-4", {
+                  <div className={cx("", {
 
                   })}>
-                    &ensp;&ensp;Entendemos as preferências dos jogadores brasileiros, o que é uma das razões do nosso sucesso no mercado brasileiro. Forneça os tipos de jogos de caça-níqueis mais populares e métodos de jogo característicos, cada tipo de jogo tem seus recursos e métodos de jogo exclusivos para atender às necessidades de diferentes jogadores. Portanto, também fornecemos métodos de pagamento convenientes e excelente suporte ao cliente e atualizamos regularmente o conteúdo do jogo para garantir que os jogadores desfrutem da melhor experiência de jogo nos {environment.platformName}.
+                    Entendemos as preferências dos jogadores brasileiros, o que é uma das razões do nosso sucesso no mercado brasileiro. Forneça os tipos de jogos de caça-níqueis mais populares e métodos de jogo característicos, cada tipo de jogo tem seus recursos e métodos de jogo exclusivos para atender às necessidades de diferentes jogadores. Portanto, também fornecemos métodos de pagamento convenientes e excelente suporte ao cliente e atualizamos regularmente o conteúdo do jogo para garantir que os jogadores desfrutem da melhor experiência de jogo nos {environment.platformName}.
                   </div>
 
-                  <div className={cx(" mt-4", {
+                  <div className={cx("", {
 
                   })}>
-                    &ensp;&ensp;O {environment.platformName} oferece aos jogadores a experiência de usuário da mais alta qualidade. O design da interface do jogo é meticuloso, permitindo que os jogadores sintam a alta qualidade e sofisticação do jogo. Com belos efeitos sonoros, ele pode não apenas aumentar a tensão e a emoção do jogo, mas também proporcionar aos jogadores uma experiência audiovisual chocante. O jogo roda sem problemas, sem gaguejar ou travar. Também fornecemos uma interface de usuário amigável e operações fáceis de entender, tornando mais fácil para os jogadores começarem.
+                    O {environment.platformName} oferece aos jogadores a experiência de usuário da mais alta qualidade. O design da interface do jogo é meticuloso, permitindo que os jogadores sintam a alta qualidade e sofisticação do jogo. Com belos efeitos sonoros, ele pode não apenas aumentar a tensão e a emoção do jogo, mas também proporcionar aos jogadores uma experiência audiovisual chocante. O jogo roda sem problemas, sem gaguejar ou travar. Também fornecemos uma interface de usuário amigável e operações fáceis de entender, tornando mais fácil para os jogadores começarem.
                   </div>
 
-                  <div className={cx(" mt-4", {
+                  <div className={cx("", {
 
                   })}>
-                    &ensp;&ensp;Resumindo, você vem ao cassino do jogo {environment.platformName} para girar.
+                    Resumindo, você vem ao cassino do jogo {environment.platformName} para girar.
                   </div>
                 </>
               )}
 
 
-              <div className='flex justify-center underline text-blue-500 mt-2 mt-46'>
-                <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{footerTextExpand ? 'jogue fora': 'ver tudo'}</button>
+              <div className='flex justify-center text-[var(--state-info-main)] mt-1'>
+                <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{footerTextExpand ? 'Colocar fora': 'Mostrar'}</button>
               </div>
 
-              <div className='mt-3 flex justify-center mb-4 flex-nowrap relative left-[-6px]'>
-                <img alt='footer1' className='w-[6%] h-[89%] flex-1' src={`assets/${environment.assetPrefix}/footer1.aa87e40b.png`}/>
-                <img alt='footer1' className='w-[16%] h-[60%] flex-1 mt-1' src={`assets/${environment.assetPrefix}/footer2.43ad4696.png`} />
-                <img alt='footer1' className='w-[16%] h-[72%] flex-1' src={`assets/${environment.assetPrefix}/footer3.e3ce7aaa.png`}  onClick={()=>window.open('https://www.skrill.com/pt/')}/>
-                <img alt='footer1' className='w-[16%] h-[60%] flex-1 mt-1' src={`assets/${environment.assetPrefix}/footer5.3cd11f0c.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
-                <img alt='footer1' className='w-[8%] h-[89%] flex-1' src={`assets/${environment.assetPrefix}/footer6.a8ba450a.png`}  onClick={()=>window.open('https://www.interac.ca/en/')}/>
-                <img alt='footer1' className='w-[6%] h-[72%] flex-1 mt-0.5' src={`assets/${environment.assetPrefix}/footer4.e6cdeca2.png`}  onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
+              <div className='mt-4 mb-2 flex justify-center flex-nowrap relative left-[-6px] h-[20px]'>
+                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer1.aa87e40b.png`}/>
+                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer2.43ad4696.png`} />
+                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer3.e3ce7aaa.png`}  onClick={()=>window.open('https://www.skrill.com/pt/')}/>
+                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer5.3cd11f0c.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
+                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer6.a8ba450a.png`}  onClick={()=>window.open('https://www.interac.ca/en/')}/>
+                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer4.e6cdeca2.png`}  onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
               </div>
 
-              <div className='flex justify-center mb-4'>
-                <img alt='footer1' className='h-[13px]' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
+              <div className='flex justify-center mb-2 '>
+                <img alt='footer1' className='h-[12px] px-1.5' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
               </div>
 
-              <div className='mb-4 text-center'>@ 2023 {environment.platformName} All rights</div>
-
-
-
+              <div className='mb-4 text-center text-xs'>@ 2023 {environment.platformName} All rights</div>
             </section>
           </div>
         </div>
@@ -186,7 +183,7 @@ export const Footer = (props: IFooter) => {
                 <div className={cx("flex-auto flex-nowrap leading-6 text-ellipsis overflow-hidden text-left", {
                   "max-h-24": !footerTextExpand
                 })}>
-                  &ensp;&ensp;{environment.platformName} é um excelente jogo de caça-níqueis online especialmente desenvolvido para os amantes de cassinos. Rege-se pelos princípios da concorrência leal e do controle legal local. Oferece aos jogadores com mais de 18 anos uma variedade de métodos de apostas diferentes e jogabilidade especial. Os jogadores só precisam escolher seu tipo de jogo de caça-níqueis preferido e, em seguida, fazer sua aposta, girar a máquina caça-níqueis para ter chances iguais de ganhar.
+                  {environment.platformName} é um excelente jogo de caça-níqueis online especialmente desenvolvido para os amantes de cassinos. Rege-se pelos princípios da concorrência leal e do controle legal local. Oferece aos jogadores com mais de 18 anos uma variedade de métodos de apostas diferentes e jogabilidade especial. Os jogadores só precisam escolher seu tipo de jogo de caça-níqueis preferido e, em seguida, fazer sua aposta, girar a máquina caça-níqueis para ter chances iguais de ganhar.
                   Entendemos as preferências dos jogadores brasileiros, o que é uma das razões do nosso sucesso no mercado brasileiro. Forneça os tipos de jogos de caça-níqueis mais populares e métodos de jogo característicos, cada tipo de jogo tem seus recursos e métodos de jogo exclusivos para atender às necessidades de diferentes jogadores. Portanto, também fornecemos métodos de pagamento convenientes e excelente suporte ao cliente e atualizamos regularmente o conteúdo do jogo para garantir que os jogadores desfrutem da melhor experiência de jogo nos {environment.platformName}.
                   O {environment.platformName} oferece aos jogadores a experiência de usuário da mais alta qualidade. O design da interface do jogo é meticuloso, permitindo que os jogadores sintam a alta qualidade e sofisticação do jogo. Com belos efeitos sonoros, ele pode não apenas aumentar a tensão e a emoção do jogo, mas também proporcionar aos jogadores uma experiência audiovisual chocante. O jogo roda sem problemas, sem gaguejar ou travar. Também fornecemos uma interface de usuário amigável e operações fáceis de entender, tornando mais fácil para os jogadores começarem.
                   Resumindo, você vem ao cassino do jogo {environment.platformName} para girar.
