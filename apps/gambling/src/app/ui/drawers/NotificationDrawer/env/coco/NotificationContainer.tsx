@@ -11,7 +11,7 @@ export const NotificationContainer = (props: INotificationContainer) => {
   return (
     <div
       className={cx(
-        'z-[1002] flex-between fixed right-0 top-44 bottom-0 flex w-[450px] flex-col bg-[var(--background-primary)] p-4 text-left',
+        'flex-between fixed right-0 top-[44px] bottom-0 flex w-[450px] flex-col bg-[var(--background-primary)] p-4 text-left',
         {}
       )}
     >{props.children}
