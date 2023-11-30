@@ -41,7 +41,8 @@ export const MobileGameItem = (props: IItem) => {
           alt={props.name}
           // className={cx("border-[#FFFA05] border-[1px] border-solid",
           // 解決金邊缺角
-          className={cx({
+          className={cx("active:blur-[2px] active:brightness-50",
+            {
             // "van-image": isMobile,
             "invisible": !onLoad,
           })}

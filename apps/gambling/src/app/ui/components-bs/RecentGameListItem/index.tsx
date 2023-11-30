@@ -35,8 +35,12 @@ export const RecentGameItem = ({
     <div
       onClick={onClick}
       className={tcx('relative group flex-shrink-0 cursor-pointer w-[108px] h-[108px]',['w-[60px] h-[60px]', isMobile], className)}
-      onMouseOver={() => {
-        setHover(true);
+      onMouseOver={(event) => {
+        if (isMobile) {
+          event.preventDefault();
+        } else {
+          setHover(true);
+        }
       }}
       onMouseOut={() => {
         setHover(false);
@@ -52,7 +56,9 @@ export const RecentGameItem = ({
       <img
         className={
           tcx(
-            'rounded-md hover:blur-[2px] hover:brightness-50 group-hover:blur-[2px] group-hover:brightness-50',
+            'rounded-md',
+            ['hover:blur-[2px] group-hover:blur-[2px] hover:brightness-50 group-hover:brightness-50', !isMobile],
+            ['active:blur-[2px] group-active:blur-[2px] active:brightness-50 group-active:brightness-50', isMobile],
             ["hidden", !onLoad],
             ["basis-[calc(100%-1rem)]", onLoad],
           )

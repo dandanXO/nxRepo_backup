@@ -88,9 +88,9 @@ export const Footer = (props: IFooter) => {
 
                 {footerExpands.helpers === true && (
                   <div className={"pl-4 flex flex-col items-start  mt-2"}>
-                    <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</div>
-                    <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</div>
-                    <div className={"h-[30px]"} onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</div>
+                    <button className={"mb-2"} onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
+                    <button className={"mb-2"} onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
+                    <button className={"mb-2"} onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
                   </div>
                 )}
 
