@@ -17,7 +17,7 @@ import {AppCarouselContent4} from "../../Carousel/env/coco/AppCarouselContent4";
 import {AppCarouselContent5} from "../../Carousel/env/coco/AppCarouselContent5";
 
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
@@ -30,8 +30,10 @@ import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
 import {useScrollToCarousel} from "../../useScrollToCarousel";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
-import { RecentGameSection } from "../../../../components-bs/RecentGameSection";
 import { tcx } from "../../../../utils/tcx";
+import { RecentGameItem } from "../../../../components-bs/RecentGameListItem";
+import { GameListSection } from "../../../../modals/GameSearchModal/components/GameListSection";
+import { environment } from "../../../../../../environments/environment";
 
 
 export type TTotalFavoriteLocalState = {
@@ -81,7 +83,7 @@ export const IndexPage = ({
   const { isLogin } = useSelector((state: RootState) => state.app);
   const [isSearch, setIsSearch] = useState(false);
 
-  const {onClickToSearch} = usePageNavigate();
+  const {onClickToSearch, onClickGameItem } = usePageNavigate();
 
   // useEffect(() => {
   //   if (activeTab === "Todos") {
@@ -97,6 +99,28 @@ export const IndexPage = ({
 
   const [isMoving, setIsMoving] = useState(false);
   const DesktopXPadding = "!pl-12 !pr-[90px]";
+
+  const recentGameListRender = (recentGameList: GameItem[]) => {
+    if(recentGameList.length > 0) {
+      return (
+        <>
+          {
+            recentGameList.map((gameItem) => (
+              <RecentGameItem
+                key={gameItem.gameId}
+                className='mr-4'
+                gameId={Number(gameItem.gameId)}
+                onClick={()=>onClickGameItem(gameItem)}
+              />
+            ))
+          }
+        </>
+      )
+    } else {
+      return <div></div>
+    }
+  }
+
   return (
     <>
       <div id="app-carousel" className={cx("w-full bg-[#020E29]",
@@ -223,9 +247,26 @@ export const IndexPage = ({
       {
         recentGameList.length > 0 && (
           <Container
-            className={tcx('bg-[var(--background-primary)]', [DesktopXPadding, !isMobile])}
+            className={tcx('bg-[var(--background-primary)] overflow-hidden', [DesktopXPadding, !isMobile])}
           >
-            <RecentGameSection recentGameList={recentGameList} />
+            <GameListSection
+              className='mb-0 pl-0 px-0'
+              title={(
+                <div className='flex items-center gap-2 font-bold'>
+                  {
+                    !isMobile && (
+                      <img className='w-6 h-6' src={`assets/${environment.assetPrefix}/icon_recent.png`} alt="recentIcon" />
+                    )
+                  }
+                  <div className='text-xl text-white'>Recente</div>
+                  <div className='text-sm text-[var(--secondary-assistant)]'>+{recentGameList.length}</div>
+                </div>
+              )}
+              isShowHeader
+              headerClassName={tcx('mb-0 sm:mb-0 pl-0 py-[14px]', ['py-0', isMobile])}
+              children={recentGameListRender(recentGameList)}
+              gameListClassName='py-[14px] animate-[recentGameListShow_0.8s_ease]'
+            />
           </Container>
         )
       }
