@@ -93,7 +93,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
   return (
     <div
       className={cx(
-        'fixed right-0 top-0 bottom-0 left-0 z-30 w-full bg-[#090B0F] bg-[rgba(0,0,0,0.6)]',
+        'z-[1000] fixed right-0 top-0 bottom-0 left-0 w-full bg-[#090B0F] bg-[rgba(0,0,0,0.6)]',
         {}
       )}
       onClick={(event) => {

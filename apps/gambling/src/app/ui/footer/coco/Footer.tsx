@@ -131,7 +131,7 @@ export const Footer = (props: IFooter) => {
 
 
               <div className='flex justify-center text-[var(--state-info-main)] mt-1'>
-                <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{footerTextExpand ? 'Colocar fora': 'Mostrar'}</button>
+                <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{!footerTextExpand ? 'Mostrar' : 'Colocar fora'}</button>
               </div>
 
               <div className='mt-4 mb-2 flex justify-center flex-nowrap relative left-[-6px] h-[20px]'>
@@ -190,7 +190,7 @@ export const Footer = (props: IFooter) => {
                 </div>
 
                 <div className='flex justify-center underline text-blue-500 mt-46'>
-                  <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{footerTextExpand ? 'jogue fora': 'ver tudo'}</button>
+                  <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{!footerTextExpand ? 'Mostrar' : 'Colocar fora'}</button>
                 </div>
 
                 <div className='mt-3 flex justify-center mb-4'>
