@@ -49,7 +49,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
           {data && data.map((item: any, index: any) => {
             return (
               <MainGameItem
-                className={"mr-[16px] grow-0 shrink-0 basis-[150px] h-[170px]"}
+                className={"mr-[16px] grow-0 shrink-0 !basis-[150px] !h-[170px]"}
                 key={index}
                 gameId={Number(item.gameId)}
                 name={item.name}
