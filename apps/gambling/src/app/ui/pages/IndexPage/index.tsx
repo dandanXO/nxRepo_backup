@@ -99,6 +99,7 @@ export const IndexPage = () => {
     })
   }
 
+  const {scrollToWindowTop} = useScrollToCarousel();
   const gameList = () => {
     if (searchInput !== '') {
       return searchResults.length > 0
@@ -111,7 +112,7 @@ export const IndexPage = () => {
             data={searchResults}
             onClickExpand={() => {
               navigate(PageOrModalPathEnum.IndexSlotPage)
-              window.scrollTo({ left: 0, behavior: "smooth"});
+              scrollToWindowTop();
             }}
           />
         )
