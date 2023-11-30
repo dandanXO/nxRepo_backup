@@ -1,13 +1,13 @@
 import React from "react";
 import { environment } from "../../../../../../../environments/environment";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";
-import { tcx } from "../../../../../utils/tcx";
 import ProgressBar from "./ProgressBar";
 import { GetVIPInfoResponse } from "../../../../../../external";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
 import { format } from "../../../../../utils/format";
+import { MobileCurrentLevelInfoCard } from "./MobileCurrentLevelInfoCard";
 
-interface ICurrentLabelInfoCardProps {
+export interface ICurrentLabelInfoCardProps {
   currentLevel: number
   userVIPInfo?: GetVIPInfoResponse
 }
@@ -17,44 +17,38 @@ const CurrentLevelInfoCard = ({
   currentLevel
 }: ICurrentLabelInfoCardProps) => {
   const { isMobile } = useBreakpoint();
+
+  if(isMobile) {
+    return <MobileCurrentLevelInfoCard currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
+  }
+
   return (
     <div
-      className={
-        tcx(
-          'p-6 border-2 border-[var(--stroke-dashboard-main)] bg-gradient-to-b from-[var(--background-vip-level-from)] to-[var(--background-vip-level-to)] rounded-lg flex items-center text-white gap-6',
-          ['flex-col', isMobile]
-        )}>
-      <div className='flex items-center justify-center'>
+      className='w-full p-6 border-2 border-[var(--stroke-dashboard-main)] bg-gradient-to-b from-[var(--background-vip-level-from)] to-[var(--background-vip-level-to)] rounded-lg flex items-center text-white gap-6'>
+      <div className='w-[280px]'>
         <CurrentVIPIcon
-          className={tcx('w-[280px]', ['gap-[15px]', isMobile])}
-          imageClassName='px-12 py-3 object-contain'
+          className='w-[280px] h-[198px]'
+          imageClassName='w-[184px] object-contain'
           level={currentLevel}
-          textClassName={tcx('w-[102px]', ['hidden', !isMobile])}
+          textClassName='hidden'
         />
       </div>
       <div className='flex-grow w-full text-left text-base font-medium'>
-        <img className={tcx('w-[104px]', ['hidden', isMobile])} alt='vip_level' src={`assets/${environment.assetPrefix}/ic_vip_${currentLevel}.png`}/>
+        <img className='w-[104px]' alt='vip_level' src={`assets/${environment.assetPrefix}/ic_vip_${currentLevel}.png`}/>
 
         <div>Quantidade total de recarga:</div>
-        {
-          isMobile && (
-            <div className='flex justify-between text-sm mb-1'>
-              <div>VIP{currentLevel}</div>
-              <div>VIP{currentLevel + 1}</div>
-            </div>
-          )
-        }
+
         <div className='flex items-center w-full mb-[14px]'>
-          <div className={isMobile? 'hidden': ''}>VIP{currentLevel}</div>
+          <div>VIP{currentLevel}</div>
           <ProgressBar
-            className={tcx('bg-white mx-2 h-7', ['mx-0', isMobile])}
+            className='bg-white mx-2 h-7'
             rounded='rounded-full'
             progress={(userVIPInfo?.data?.vip_score || 0) /
               (userVIPInfo?.data?.next_level_score || 1)
           }
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className={tcx('h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center', ['px-4', isMobile])}>
+            <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center'>
               <div>
                 R$
                 {format(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
@@ -63,22 +57,15 @@ const CurrentLevelInfoCard = ({
               </div>
             </div>
           </ProgressBar>
-          <div className={isMobile? 'hidden': ''}>VIP{currentLevel + 1}</div>
+          <div>VIP{currentLevel + 1}</div>
         </div>
 
         <div>Número total de apostas:</div>
-        {
-          isMobile && (
-            <div className='flex justify-between text-sm mb-1'>
-              <div>VIP{currentLevel}</div>
-              <div>VIP{currentLevel + 1}</div>
-            </div>
-          )
-        }
+
         <div className='flex items-center w-full'>
-          <div className={isMobile? 'hidden': ''}>VIP{currentLevel}</div>
+          <div>VIP{currentLevel}</div>
           <ProgressBar
-            className={tcx('bg-white mx-2 h-7', ['mx-0', isMobile])}
+            className='bg-white mx-2 h-7'
             rounded='rounded-full'
             progress={
               userVIPInfo?.data?.flow_progress
@@ -87,7 +74,7 @@ const CurrentLevelInfoCard = ({
             }
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className={tcx('h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center', ['px-4', isMobile])}>
+            <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center'>
               <div>
                 R$
                 {format(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
@@ -96,7 +83,7 @@ const CurrentLevelInfoCard = ({
               </div>
             </div>
           </ProgressBar>
-          <div className={isMobile? 'hidden': ''}>VIP{currentLevel + 1}</div>
+          <div>VIP{currentLevel + 1}</div>
         </div>
       </div>
     </div>

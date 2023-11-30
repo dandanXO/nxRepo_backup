@@ -5,8 +5,9 @@ import useBreakpoint from "../../../../../hooks/useBreakpoint";
 import { environment } from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
 import { format } from "../../../../../utils/format";
+import { MobileLevelInfoCard } from "./MobileLevelInfoCard";
 
-interface ILevelInfoCardProps extends GetUserVIPAllInfoResponseData {
+export interface ILevelInfoCardProps extends GetUserVIPAllInfoResponseData {
   signInBonus: number
   className?: string
 }
@@ -19,53 +20,76 @@ const LevelInfoCard = ({
   withdrawAmountLimitDay,
   withdrawTimesLimitDay,
   rechargeAmountLimit,
-  flowLimit
+  receiveAmountLimitDay,
+  flowLimit,
+  display
 }:ILevelInfoCardProps) => {
 
   const { isMobile } = useBreakpoint();
 
+  if(isMobile) {
+    return  (
+      <MobileLevelInfoCard
+        className={className}
+        signInBonus={signInBonus}
+        level={level}
+        rechargeAmountLimit={rechargeAmountLimit}
+        flowLimit={flowLimit}
+        withdrawAmountLimitDay={withdrawAmountLimitDay}
+        withdrawTimesLimitDay={withdrawTimesLimitDay}
+        upRewardAmout={upRewardAmout}
+        receiveAmountLimitDay={receiveAmountLimitDay}
+        display={display}
+        />
+    )
+  }
+
   return (
-    <div className={tcx(
-        'p-6 border-2 border-[var(--stroke-dashboard-secondary)] rounded-lg flex text-white bg-[var(--background-dashboard-secondary)] text-left text-lg gap-6',
-        ['flex-col text-sm gap-3', isMobile],
-        className,
-      )}>
-      <div className='flex items-center'>
-        <div className={tcx(
-            'flex flex-col w-[280px] justify-center items-center ',
-          ['w-full', isMobile]
-        )}>
-          <img
-            className={tcx('px-[93px] object-contain', ['px-0', level >= 20])}
-            src={
-              level < 20 ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
-                `assets/${environment.assetPrefix}/${JackpotMap[level].image}`
-            }
-          />
+    <div className={tcx('p-6 border-2 border-[var(--stroke-dashboard-secondary)] rounded-lg flex text-white bg-[var(--background-dashboard-secondary)] text-left text-lg gap-6', className)}>
+      <div className='w-[280px] flex justify-center items-center'>
+        <div className='w-[280px] flex flex-col items-center justify-center'>
           {
-             level >= 20 && (
-              <div className='text-base text-center text-[var(--secondary-assistant)]'>
-                <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
-                <div>Ou numerário de valor equivalente</div>
-              </div>
+            level < 20 && (
+              <img
+                alt={`levelInfoIcon`}
+                src={`assets/${environment.assetPrefix}/icon_vip_info.png`}
+                className='w-[94px] mb-[10px] object-contain'
+              />
             )
           }
-          <img className={tcx('w-[102px] mt-[6px]', ['mt-[14px]', isMobile])} alt='vip_level' src={`assets/${environment.assetPrefix}/ic_vip_${level}.png`} />
+
+          {
+            level >= 20 && (
+              <>
+                <img
+                  alt={`levelInfoIcon`}
+                  src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}
+                  className='w-[280px] mb-1 object-contain'
+                />
+                <div className='text-base text-center text-[var(--secondary-assistant)] mb-2'>
+                  <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
+                  <div>Ou numerário de valor equivalente</div>
+                </div>
+              </>
+            )
+          }
+
+          <img className={tcx('w-[113px]', ['w-[160px]'])} alt='vipLevel' src={`assets/${environment.assetPrefix}/ic_vip_${level}.png`} />
         </div>
       </div>
 
-      <div className='flex w-full gap-3'>
-        <div className={tcx('w-1/2 flex flex-col gap-2 text-xl', ['text-sm', isMobile])}>
-          <div className={isMobile?'text-lg font-bold':'text-2xl font-medium'}>Privilégio</div>
+      <div className='flex flex-grow w-full gap-3'>
+        <div className='w-1/2 flex flex-col gap-2 text-xl'>
+          <div className='text-2xl font-medium'>Privilégio</div>
 
           <div className={tcx( ['hidden', level >= 20])}>Recompensa de atualização：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {format(upRewardAmout ? upRewardAmout / 100 : 0)}
             </span>
           </div>
-          <div>Recompensa total de check-in de 7 dias：
+          <div>Recompensa total de check-in de <span className='text-[var(--secondary-assistant)]'>7</span> dias：
             <span className='text-[var(--secondary-assistant)]'>
-              {format(signInBonus)}
+              R$ {format(signInBonus)}
             </span>
           </div>
           <div>Limite máximo de retirada única：
@@ -81,13 +105,13 @@ const LevelInfoCard = ({
         </div>
 
         <div className='w-1/2 bg-[rgba(255,255,255,20%)] p-2 rounded-md border border-[var(--primary-assistant)] flex flex-col gap-2'>
-          <div className={tcx('text-2xl text-left font-medium', ['text-lg font-bold', isMobile])}>Condição</div>
-          <div>Quantidade total de recarga:
+          <div className='text-2xl text-left font-medium'>Condição</div>
+          <div>Quantidade total de recarga：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {format(rechargeAmountLimit ? rechargeAmountLimit / 100 : 0)}
             </span>
           </div>
-          <div>Número total de apostas:
+          <div>Número total de apostas：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {format(flowLimit ? flowLimit / 100 : 0)}
             </span>
