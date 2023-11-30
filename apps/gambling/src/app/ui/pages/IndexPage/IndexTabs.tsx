@@ -46,7 +46,7 @@ export const IndexTabs = ({
         {
           // ["Todos", ...label, 'Favoritos']
           // ["Salão", ...label, 'Favoritos']
-          ["Todos", ...label, 'Favoritos', 'Recente'].map((tab: string, index: number) => {
+          ["Todos", ...label, 'Favoritos' ].map((tab: string, index: number) => {
             return (
               <ImageTab
                 key={index}

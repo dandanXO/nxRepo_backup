@@ -1,7 +1,7 @@
 export const mobileGameTypeHeaderProps = {
   showIcon: false,
-  containerClassName:'mx-1 mb-1.5',
-  titleClassName: 'text-2xl font-medium text-white',
+  containerClassName:'mb-1.5',
+  titleClassName: 'text-xl font-bold text-white',
   seeMoreText: 'Ver mais',
   textClassName: `text-sm text-white text-center w-[78px] h-[24px]
     after:content-['']

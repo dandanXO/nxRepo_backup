@@ -55,6 +55,15 @@ html {
   }
 }
 
+@keyframes recentGameListShow {
+  from {
+    transform: translateX(20%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
 .text-transparent {
   /*color: #fff;*/
   /*font-weight: 600;*/

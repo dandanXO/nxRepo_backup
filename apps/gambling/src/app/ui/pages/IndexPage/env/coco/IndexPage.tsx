@@ -30,6 +30,8 @@ import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
 import {useScrollToCarousel} from "../../useScrollToCarousel";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
+import { RecentGameSection } from "../../../../components-bs/RecentGameSection";
+import { tcx } from "../../../../utils/tcx";
 
 
 export type TTotalFavoriteLocalState = {
@@ -57,6 +59,7 @@ type ICoco777betIndexPage = {
   scrollToCarousel: () => void;
   userFavorite: number[]
   onClickFavoriteGameItem: (item: GameItem) => void
+  recentGameList: GameItem[]
 }
 
 export const IndexPage = ({
@@ -70,7 +73,8 @@ export const IndexPage = ({
   scrollToCarousel,
   showFixForIOSStickTab,
   userFavorite,
-  onClickFavoriteGameItem
+  onClickFavoriteGameItem,
+  recentGameList
 }:ICoco777betIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
@@ -215,6 +219,16 @@ export const IndexPage = ({
           />
         </Container>
       ): null}
+
+      {
+        recentGameList.length > 0 && (
+          <Container
+            className={tcx('bg-[var(--background-primary)]', [DesktopXPadding, !isMobile])}
+          >
+            <RecentGameSection recentGameList={recentGameList} />
+          </Container>
+        )
+      }
 
       <Container className={cx("pb-16 bg-[var(--background-primary)]", {
         [DesktopXPadding]: !isMobile,
