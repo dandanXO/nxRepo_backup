@@ -25,6 +25,7 @@ import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 import {CheckableICON} from "../../../../components/Icons/CheckableICON";
 import axios from "axios";
 import {v4 as uuidv4} from "uuid";
+import {PhonePrefix} from "../../PhonePrefix";
 
 const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
@@ -264,7 +265,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           <>
             {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
             <PhoneSvg className={"mr-1"}/>
-            <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
+            <PhonePrefix/>
           </>
         }
         placeholder={"Tu nùmero de celular"}
@@ -282,7 +283,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
             <>
               {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
               <PhoneSvg className={"mr-1"}/>
-              <span className="text-[var(--input-text-color)] mr-2 leading-[24px]">+55</span>
+              <PhonePrefix/>
             </>
           }
           placeholder={"Confirme o número do celular"}
@@ -321,7 +322,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         prefix={<SecuritySvg className={"mr-1"}/>}
         outerSuffix={<Captcha onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading}/>}
-        placeholder={"Código de verificação"}
+        placeholder={ isMobile ? "Código gráfico" : "Código de verificação"}
         value={captchaInput.data}
         validation={captchaInput.isValidation}
         errorMessage={captchaInput.errorMessage}
@@ -332,7 +333,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
       <section className={"flex flex-col mb-4"}>
         <ConfirmButton
-          className="!w-full"
+          className="!w-full my-2 "
           disable={!isChecked}
           onClick={() => isChecked && onFormConfirm()}
         >Register agora</ConfirmButton>
@@ -346,8 +347,8 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           className={"text-white font-thin text-md"}
           // style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}
         >
-          <span className={"text-[var(--text-tertiary)] font-medium mr-1"} onClick={toggleCheck} >Eu concordo</span>
-          <span className={"text-[var(--white)] font-medium underline break-all"} onClick={() => {
+          <span className={"text-[var(--text-tertiary)] font-medium mr-1 my-2 text-sm md:text-base"} onClick={toggleCheck} >Eu concordo</span>
+          <span className={"text-[var(--white)] font-medium underline break-all text-base"} onClick={() => {
             onClickToPrivacyAgreement();
           }}>Condições e condições, política de privacidade</span>
         </a>

@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction } from "react";
 import { environment } from "../../../../../../environments/environment";
 import cx from 'classnames';
 import {LeftOutlined} from "@ant-design/icons";
+import {useScrollToCarousel} from "../../../../pages/IndexPage/useScrollToCarousel";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 export const MobileGameTypeHeader = (props: {
   gameTypeName: string;
@@ -17,6 +19,8 @@ export const MobileGameTypeHeader = (props: {
 }) => {
   const { containerClassName = '', titleClassName = '', showIcon = true, textClassName = '', seeMoreText = '' } = props;
   // console.log('mobileGameTypeHeaderProps', props)
+  const {scrollToCarousel} = useScrollToCarousel();
+  const {isMobile} = useBreakpoint();
   return (
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>
 
@@ -25,6 +29,7 @@ export const MobileGameTypeHeader = (props: {
           <button
             onClick={() => {
               props?.setExpandedBrand && props?.setExpandedBrand('')
+              isMobile && scrollToCarousel();
             }}
           >
             {/*<img data-v-ddc8133e="" className="backSlots w-[24px] h-[24px] mr-4"*/}
@@ -41,7 +46,10 @@ export const MobileGameTypeHeader = (props: {
       {props?.onClick && !props.expandedBrand && !props.isViewAll &&(
         <div>
           <button
-            onClick={props.onClick}
+            onClick={(event) => {
+              props.onClick && props.onClick();
+              isMobile && scrollToCarousel();
+            }}
             className={
               cx("rounded-lg border-[1px] px-4 pt-[5px] pb-[2px] text-sm !font-bold",
                 "text-[var(--primary-assistant)] border-[var(--primary-assistant)]")
