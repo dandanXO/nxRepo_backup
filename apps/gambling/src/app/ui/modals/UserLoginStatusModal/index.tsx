@@ -29,14 +29,14 @@ export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
 
   return (
     <div
-      className={"bg-[rgba(0,0,0,.6)] z-[1002] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full"}
+      className={"bg-[rgba(0,0,0,.6)] z-[1002] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center px-5 w-full h-full"}
       onClick={() => {
         // NOTE: 手機版用戶會誤點
         !isMobile && props.close()
       }}
     >
 
-      <Container className={"p-4 rounded-2xl max-w-[340px]"} onClick={(event: any) => {
+      <Container className={"w-full p-4 rounded-2xl"} onClick={(event: any) => {
         event.stopPropagation();
       }}>
 

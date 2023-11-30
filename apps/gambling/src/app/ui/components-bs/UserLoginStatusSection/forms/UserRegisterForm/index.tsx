@@ -346,8 +346,8 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           className={"text-white font-thin text-md"}
           // style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}
         >
-          <span className={"text-[#a5a5a5] mr-1"} onClick={toggleCheck} >Eu concordo</span>
-          <span className={"text-[var(--white)]"} onClick={() => {
+          <span className={"text-[var(--text-tertiary)] font-medium mr-1"} onClick={toggleCheck} >Eu concordo</span>
+          <span className={"text-[var(--white)] font-medium underline break-all"} onClick={() => {
             onClickToPrivacyAgreement();
           }}>Condições e condições, política de privacidade</span>
         </a>
