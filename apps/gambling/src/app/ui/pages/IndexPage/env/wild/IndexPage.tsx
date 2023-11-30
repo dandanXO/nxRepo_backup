@@ -27,6 +27,7 @@ import {Container} from "../../../../components/container/Container";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
+import { GameItem } from "../../../../components-bs/GameTypeSection";
 
 
 export type TTotalFavoriteLocalState = {
@@ -52,6 +53,7 @@ type ICoco777betIndexPage = {
   gameList: any;
   showFixForIOSStickTab: boolean;
   scrollToCarousel: () => void;
+  recentGameList: GameItem[]
 }
 
 export const IndexPage = ({

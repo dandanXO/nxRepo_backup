@@ -33,6 +33,7 @@ export const IndexPage = () => {
   const [searchInput, setSearchInput] = useState('');
   const { searchResults, handleSearchGames } = useSearchGames(searchInput);
   const { userFavorite, onClickFavoriteGameItem, totalFavoriteLocalState } = useClickFavoriteGameItem()
+  const recentGameList = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.gameRecentLocal) || '[]')
 
   const navigate = useNavigate();
 
@@ -71,14 +72,7 @@ export const IndexPage = () => {
 
     if(activeTab === 'Favoritos') {
       const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
-
-      console.log("GGGG");
-      console.log(totalFavoriteLocalState.localArr[userInfo.user_id]);
-
       list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] }]
-    } else if (activeTab === 'Recente') {
-      const recentGames = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.gameRecentLocal) || '[]')
-      list = [{ subGameType: 'Recente', games: recentGames}]
     } else {
       const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === activeTab)[0]?.data
       list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
@@ -97,7 +91,7 @@ export const IndexPage = () => {
             setExpandedBrand(subGameType);
             scrollToCarousel();
           }}
-          isViewAll={['Favoritos', 'Recente'].includes(subGameType)}
+          isViewAll={['Favoritos'].includes(subGameType)}
           expandedBrand={expandedBrand}
           setExpandedBrand={setExpandedBrand}
         />
@@ -145,6 +139,7 @@ export const IndexPage = () => {
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
+        recentGameList={recentGameList}
       />
     ),
     "coco777bet": (
@@ -160,6 +155,7 @@ export const IndexPage = () => {
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
+        recentGameList={recentGameList}
       />
     )
   }, (
@@ -176,6 +172,7 @@ export const IndexPage = () => {
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
+        recentGameList={recentGameList}
       />
     )
   ))
