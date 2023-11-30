@@ -31,8 +31,13 @@ export const useScrollToCarousel = () => {
     }
   }
 
+  const scrollToWindowTop = () => {
+    window.scrollTo({ left: 0, behavior: "smooth"});
+  }
+
   return {
     showFixForIOSStickTab,
     scrollToCarousel,
+    scrollToWindowTop,
   }
 }

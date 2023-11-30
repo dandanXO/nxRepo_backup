@@ -71,8 +71,6 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
     }
   }, [props.gameTypeName, props.data?.length])
 
-  const {scrollToCarousel} = useScrollToCarousel();
-
   const loadMore = () => {
     if(haveHotgames) {
       setListSize(props && props?.data && props?.data?.length || 0);
@@ -80,7 +78,6 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       const number = isMobile ? MobileGameNumber : DesktopGameNumber;
       setListSize(listSize + number); // 每次點擊按鈕增加10筆
     }
-    isMobile && scrollToCarousel();
   }
 
 

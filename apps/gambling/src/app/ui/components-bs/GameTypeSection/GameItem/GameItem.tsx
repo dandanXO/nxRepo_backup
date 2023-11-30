@@ -25,7 +25,7 @@ const StyledGameItem = styled.div.attrs<IGameItem>(props => ({
   //padding: 4px;
 `
 
-const Skeleton = styled.div`
+export const Skeleton = styled.div`
   @keyframes waveAnimation {
     0% {
       background-position: -200px 0;
@@ -110,7 +110,7 @@ export const DesktopGameItem = (props: IItem) => {
                // NOTE: 20px title height
                "w-full h-[calc(100%-20px)]",
                "rounded-xl hover:blur-[2px] hover:brightness-50 object-cover group-hover:blur-[2px] group-hover:brightness-50", {
-               "hide": !onLoad,
+               "hidden": !onLoad,
                // "invisible": !onLoad,
                "basis-[calc(100%-1rem)]": onLoad,
              })}
