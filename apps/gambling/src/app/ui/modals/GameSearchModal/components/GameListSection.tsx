@@ -9,7 +9,7 @@ import { useSpring } from '@react-spring/web';
 
 interface IGameListSection {
   icon?: React.ReactElement;
-  title: string;
+  title: string | React.ReactElement[] | React.ReactElement;
   className?: string;
   gameListClassName?: string;
   children: React.ReactElement[] | React.ReactElement;
@@ -84,7 +84,7 @@ export const GameListSection = (props: IGameListSection) => {
         (<div className='flex flex-row justify-between mb-2 sm:mb-3.5 pl-1 sm:pl-0'>
           <div className='flex justify-center items-center'>
             <div>{icon && icon}</div>
-            <div className='text-xs sm:text-base'>{title}</div>
+            <div className='text-xs sm:text-base items-center flex'>{title}</div>
           </div>
           {!isMobile && isOverflowedX && <div className='flex '>
             <button onClick={handleClickToLeft}><ArrowLeft /></button>
