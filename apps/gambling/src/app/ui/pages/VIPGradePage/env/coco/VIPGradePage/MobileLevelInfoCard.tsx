@@ -29,7 +29,7 @@ export const MobileLevelInfoCard = ({
           </div>
         </div>
 
-        <div className='flex-grow w-full flex flex-col gap-1 text-sm font-medium'>
+        <div className='flex-grow w-full flex flex-col gap-1 text-xs font-medium'>
           {
             level >= 20 && (
               <div className='flex flex-col w-full justify-center items-center'>

@@ -13,7 +13,7 @@ export const MobileCurrentLevelInfoCard = ({
       className='p-[10px] border-2 flex-col border-[var(--stroke-dashboard-main)] bg-gradient-to-b from-[var(--background-vip-level-from)] to-[var(--background-vip-level-to)] rounded-lg flex items-center text-white gap-2'>
       <CurrentVIPIcon
         className='flex-row gap-2'
-        imageClassName='w-[65px] object-contain'
+        imageClassName='w-[102px] object-contain'
         level={currentLevel}
         textClassName='w-[102px]'
       />
@@ -36,7 +36,7 @@ export const MobileCurrentLevelInfoCard = ({
             }
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center px-4'>
+            <div className='h-full flex items-center text-sm font-medium text-[var(--text-deposit)] justify-center px-4'>
               <div>
                 R$
                 {format(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
@@ -65,7 +65,7 @@ export const MobileCurrentLevelInfoCard = ({
             }
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center px-4'>
+            <div className='h-full flex items-center text-sm font-medium text-[var(--text-deposit)] justify-center px-4'>
               <div>
                 R$
                 {format(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
