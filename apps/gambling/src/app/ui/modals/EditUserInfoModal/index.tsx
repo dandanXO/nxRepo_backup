@@ -135,8 +135,8 @@ export const EditUserInfoModal = ({
 
         <div className='w-full'>
           <Input
-            prefix={<UserOutlined className="mr-2" />}
-            className="mt-4 md:mt-8 w-full items-center rounded-full p-3 text-xs md:text-3xl"
+            prefix={<img alt='user' src={`assets/${environment.assetPrefix}/icon=user.png`} className="h-[14px] w-[14px] mr-2" />}
+            className="mt-4 md:mt-8 w-full items-center rounded-full p-3 text-xs md:text-3xl bg-[var(--primary-variant)]"
             value={userNickname}
             onChange={(event: any) => {
               setUserNickname(event.target.value);
