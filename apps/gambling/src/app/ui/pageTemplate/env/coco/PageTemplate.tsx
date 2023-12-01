@@ -216,7 +216,6 @@ export const PageTemplate = ({
         {isUILoading && (
           <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-[var(--unknown)] flex flex-col justify-center items-center"}>
             <div className={"mb-4"}>
-              {/*<img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/LOGO.png`}/>*/}
               <Logo
                 className={tcx(
                   "w-[140px] h-[140px]",

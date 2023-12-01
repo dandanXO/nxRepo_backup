@@ -81,7 +81,7 @@ export const TelegramPage = () => {
         </div>
       </section> */}
 
-      <Banner imgClassName={`rounded-lg mb-4 md:mb-8`} src={`assets/${environment.assetPrefix}/banner_telegram.png`} bannerText={
+      <Banner imgClassName={`rounded-lg mb-4 md:mb-8`} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_telegram.png`} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
           <div className={"text-white text-base sm:text-3xl md:text-4xl  lg:text-5xl font-bold lg:mb-2"}>Sample wordingptas y</div>
           <div className={"text-white text-base sm:text-3xl md:text-4xl lg:text-5xl font-bold"}>reconoces que has leído la .</div>

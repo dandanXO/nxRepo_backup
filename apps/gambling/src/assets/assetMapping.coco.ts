@@ -5,7 +5,7 @@
 // const LOGO = require(`./coco777bet/LOGO.png`)
 
 export type IAssetMapping =  {
-  logo: any;
+  // logo: any;
   //header
   header: {
     menu: any
@@ -23,7 +23,7 @@ export type IAssetMapping =  {
 }
 
 export const AssetMappingCoco: IAssetMapping = {
-  logo: require(`./coco777bet/LOGO.png`),
+  // logo: require(`./coco777bet/LOGO.png`),
   //header
   //header
   game: {

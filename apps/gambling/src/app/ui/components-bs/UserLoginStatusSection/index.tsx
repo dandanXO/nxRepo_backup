@@ -79,8 +79,6 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
       {(switchToLoginOrRegister === "login" ? (
         <div className={""}>
           <section className={"flex flex-col justify-center items-center mb-4"}>
-            {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>*/}
-            {/*<img className={"mb-2"} alt={"website-small-logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>*/}
             <div className={"mb-2"}>
               <Logo className={"w-[76px] h-[76px] rounded-[10px] border-solid border-white border-[2px]"}/>
             </div>
