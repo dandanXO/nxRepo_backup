@@ -282,7 +282,12 @@ export const AppRouter = () => {
           )}/>
 
           <Route path={PageOrModalPathEnum.WalletPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={false}
+              showMobileFooter={false}
+              showToolboxConfig={{mobile:{ customerService: false }}}
+            >
               <WallletPage />
             </PageTemplate>
           )}/>
@@ -307,7 +312,12 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.DailySignInPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={false}
+              showMobileFooter={false}
+              showToolboxConfig={{mobile:{ customerService: false }}}
+            >
               <DailySignInPage/>
             </PageTemplate>
           )}/>
@@ -322,7 +332,12 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.SettingPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showTabbar={false}
+              showMobileFooter={false}
+              showToolboxConfig={{mobile:{ customerService: false}}}
+            >
               <SettingPage/>
             </PageTemplate>
           )}/>
@@ -351,7 +366,12 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.InitialChargePage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showMobileFooter={false}
+              showTabbar={false}
+              showToolboxConfig={{mobile:{ customerService: false }}}
+            >
               <InitialChargePage/>
             </PageTemplate>
           )}/>
@@ -395,7 +415,11 @@ export const AppRouter = () => {
 
           {/*NOTE: Mobile*/}
           <Route path={PageOrModalPathEnum.MyPage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showMobileFooter={false}
+              showToolboxConfig={{ mobile: { customerService: false }}}
+            >
               <MyPage/>
             </PageTemplate>
           )}/>

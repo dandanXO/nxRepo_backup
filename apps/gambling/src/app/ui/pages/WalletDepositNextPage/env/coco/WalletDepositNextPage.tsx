@@ -17,12 +17,14 @@ import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
-import { format } from "../../../../utils/format";
+import { formatLocaleMoney } from "../../../../utils/format";
+import { QRcodeCopyButton } from "../../../../components/Buttons/env/coco/QRcodeCopyButton";
+import { DepositNextPageBackButton } from "../../../../components/Buttons/env/coco/DepositNextPageBackButton";
 
 const ShadowContainer = styled.div.attrs<{
   className?: string;
 }>(props => ({
-  className: cx("rounded-2xl", props.className)
+  className: cx("", props.className)
 }))`
   /* box-shadow: inset 0 0 36px 5px rgba(255,255,255,.08);
   border-color: var(--stroke-textfields);
@@ -77,21 +79,22 @@ export const WalletDepositNextPage = () => {
     return () => clearTimeout(timer);
   }, [countdown]);
 
-  const message = 'Ordem de pagamento criada com sucesso, pague em 15 minutos!';
+  const message = `Ordem de pagamento criada com sucesso, pague em ${moment().startOf('day').seconds(countdown).format('mm:ss')} minutos!`;
 
-  const mobileShadowContainerStyle = `
-  p-4 mb-3 text-sm
+  const baseStyle = `
   flex flex-row justify-between
-  bg-[var(--primary-variant)]
-  border border-solid border-[var(--stroke-textfields)]
-  shadow-[inset_0_0_36px_5px_rgba(255,255,255,0.08)]
+  bg-[var(--background-dashboard-secondary)]
+  border-b border-solid border-[var(--stroke-dashboard-main)]
+  `
+  const mobileShadowContainerStyle = `
+  py-3 px-3.5 mb-2 text-sm
+  rounded-lg
+  ${baseStyle}
   `;
 
   const deskTopShadowContainerStyle = `
-  flex flex-row justify-between
   p-5 mb-4 text-lg rounded-xl
-  bg-[var(--background-dashboard-secondary)]
-  border-b border-solid border-[var(--primary-assistant)]
+  ${baseStyle}
   `;
 
 
@@ -100,24 +103,24 @@ export const WalletDepositNextPage = () => {
   const {onClickToWallet} = usePageNavigate();
 
   return (
-    <div className={"p-5 md:p-10 md:pt-0 w-full"}>
-      <div className={cx("", { " md:bg-[var(--game-block)] md:rounded-2xl md:py-5 md:px-14 ": !isMobile })}>
+    <div className={"p-4 pb-12 pt-2 md:p-10 md:pt-0 w-full"}>
+      <div className={cx("", { "md:rounded-2xl md:py-5 md:px-14 ": !isMobile })}>
         {contextHolder}
 
         <BackNavigation
           title={(
-            <span className={cx("ml-2 text-white text-xl font-bold text-center md:text-left flex-1")}>{isMobile ? "Depósito" : "Retornar"}</span>
+            <span className={cx("ml-2 text-white text-xl text-center md:text-left flex-1")}>{isMobile ? "Depósito" : "Retornar"}</span>
           )}
           onClick={()=> onClickToWallet()}
         />
 
         {isMobile && (
-          <div className={"text-3xl text-center text-[var(--secondary-assistant)]"}>R$ {format(Number(amount))}</div>
+          <div className={"text-3xl text-center text-[var(--secondary-assistant)] font-bold mb-5 mt-5"}>R$ {formatLocaleMoney(Number(amount))}</div>
         )}
 
         <div className={cx("text-sm text-[var(--secondary-assistant)] leading-5 mb-4 mt-2 text-center",
           {
-            'md:text-3xl md:mb-6 md:text-white': !isMobile
+            'md:text-3xl md:mb-6': !isMobile
           })}>
           {message}
         </div>
@@ -140,10 +143,10 @@ export const WalletDepositNextPage = () => {
             </ShadowContainer>
 
 
-            {!isMobile && (<ShadowContainer className={cx(shadowContainerStyle, 'flex-col items-center border-b-4 border-[var(--stroke-dashboard-main)]')}>
+            {!isMobile && (<ShadowContainer className={cx(shadowContainerStyle, 'flex-col items-center')}>
               <div className={"text-white text-left mb-4 w-full"}>Pague a corda</div>
               <div className={"text-white break-all mb-4"}>{data?.data?.channelData?.paymentLink || ''}</div>
-              <ButtonPro className="w-1/2 whitespace-nowrap" type="blue" size="medium" onClick={onClickToCopy}>Copiar código de pix</ButtonPro>
+              <QRcodeCopyButton onClick={onClickToCopy}/>
             </ShadowContainer>
             )}
 
@@ -151,7 +154,7 @@ export const WalletDepositNextPage = () => {
 
           {!isMobile && (
             <section className={cx("w-full mb-4 ", { "md:w-[40%]": !isMobile })}>
-              <ShadowContainer className={"flex flex-col justify-between items-center h-full bg-[var(--background-dashboard-secondary)] border-b-4 border-[var(--primary-assistant)]"}>
+              <ShadowContainer className={`${shadowContainerStyle} flex-col items-center h-full`}>
                 <div className={"text-white text-center font-bold w-full rounded-xl text-4xl py-4 text-[var(--secondary-assistant)]"}>R${amount}</div>
                 <div className="h-full flex justify-center items-center">
                   <QRCode className={cx("w-[80%] min-w-[100px] max-w-[280px] mb-5",)} value={String(data?.data?.channelData?.paymentLink || '')} />
@@ -160,20 +163,20 @@ export const WalletDepositNextPage = () => {
             </section>
           )}
           {isMobile && (
-            <div className={"mt-2 rounded-lg flex flex-col justify-between items-center h-full px-4 py-5 text-center bg-[var(--background-dashboard-secondary)]"}>
-              <div className={"text-white text-base mb-2.5 w-full font-bold"}>Data de criaqao</div>
+            <ShadowContainer className={`${baseStyle} rounded-lg flex-col items-center justify-center p-6 h-full`}>
+            <div className={"text-white text-base mb-2.5 w-full text-center"}>Data de criaqao</div>
               <div className={"text-white text-sm break-all mb-4"}>{data?.data?.channelData?.paymentLink || ''}</div>
               <div className="h-full flex justify-center items-center">
-                <QRCode className={cx("w-[80%] min-w-[100px] max-w-[280px] mb-6",)} value={String(data?.data?.channelData?.paymentLink || '')} />
+                <QRCode className={cx("w-[228px] min-w-[100px] max-w-[280px] mb-6",)} value={String(data?.data?.channelData?.paymentLink || '')} />
               </div>
-              <ButtonPro className="whitespace-nowrap w-full" type="green" size="small" onClick={onClickToCopy}>Copiar código de pix</ButtonPro>
-            </div>
+              <QRcodeCopyButton onClick={onClickToCopy}/>
+            </ShadowContainer>
           )}
 
         </section>
 
-        {!isMobile && (<section className={"flex justify-center items-center mt-12"}>
-          <ButtonPro onClick={handleToWalletPage}>Ja pago</ButtonPro>
+        {!isMobile && (<section className={"flex justify-center items-center mt-4"}>
+          <DepositNextPageBackButton onClick={handleToWalletPage} />
         </section>
         )}
 

@@ -4,7 +4,7 @@ import useBreakpoint from "../../../../../hooks/useBreakpoint";
 import ProgressBar from "./ProgressBar";
 import { GetVIPInfoResponse } from "../../../../../../external";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
-import { format } from "../../../../../utils/format";
+import { formatLocaleMoney } from "../../../../../utils/format";
 import { MobileCurrentLevelInfoCard } from "./MobileCurrentLevelInfoCard";
 
 export interface ICurrentLabelInfoCardProps {
@@ -51,9 +51,9 @@ const CurrentLevelInfoCard = ({
             <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center'>
               <div>
                 R$
-                {format(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
                 /R$
-                {format(userVIPInfo?.data?.next_level_score ? userVIPInfo?.data?.next_level_score / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.next_level_score ? userVIPInfo?.data?.next_level_score / 100 : 0)}
               </div>
             </div>
           </ProgressBar>
@@ -77,9 +77,9 @@ const CurrentLevelInfoCard = ({
             <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center'>
               <div>
                 R$
-                {format(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
                 /R$
-                {format(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow / 100 : 0)}
               </div>
             </div>
           </ProgressBar>

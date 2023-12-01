@@ -265,7 +265,7 @@ export const IndexPage = ({
               isShowHeader
               headerClassName={tcx('mb-0 sm:mb-0 pl-0 py-[14px]', ['py-0', isMobile])}
               children={recentGameListRender(recentGameList)}
-              gameListClassName='py-[14px] animate-[recentGameListShow_0.8s_ease]'
+              gameListClassName={tcx('py-[14px] animate-[recentGameListShow_0.8s_ease]', ['py-0 pt-2', isMobile])}
             />
           </Container>
         )

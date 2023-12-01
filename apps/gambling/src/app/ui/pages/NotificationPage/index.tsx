@@ -18,6 +18,7 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 export const NotificationPage = () => {
   useAllowLoginRouterRules();
@@ -28,6 +29,7 @@ export const NotificationPage = () => {
   const [triggerPostLetterRead] = usePostLetterReadMutation();
 
   const navigate = useNavigate();
+  const { isMobile } = useBreakpoint();
 
   const handleClick = (
     event: React.MouseEvent<HTMLDivElement>,
@@ -67,6 +69,12 @@ export const NotificationPage = () => {
     }
   }, [data]);
 
+  useEffect(()=>{
+    if(!isMobile) {
+      navigate(PageOrModalPathEnum.IndexPage);
+    }
+  }, [isMobile])
+
   return (
       <div className="flex h-full flex-col px-3 py-3 text-white">
 
@@ -75,7 +83,7 @@ export const NotificationPage = () => {
             navigate(PageOrModalPathEnum.IndexPage);
           }}
           title={
-            <div className="pl-10 text-lg font-bold text-[var(--white)]">
+            <div className="absolute left-0 w-full text-center text-lg font-bold text-[var(--white)]">
               Centro de Notificação
             </div>
           }

@@ -1,4 +1,4 @@
-import { format } from "../../../../utils/format";
+import { formatLocaleMoney } from "../../../../utils/format";
 
 type IdepositButtonProps = {
   rechargeValue: number;
@@ -28,7 +28,7 @@ export const depositButtonProps = ({
   `;
 
   return {
-    rechargeValue: `R$ ${format(rechargeValue)}`,
+    rechargeValue: `R$ ${formatLocaleMoney(rechargeValue)}`,
     rechargeClassName: rechargeStyle,
     className: `flex-col-reverse px-3 py-2 min-h-[50px] rounded-md text-white  items-center justify-center`,
     activeRechargeClassName: `${rechargeStyle} text-[var(--text-deposit)]`,

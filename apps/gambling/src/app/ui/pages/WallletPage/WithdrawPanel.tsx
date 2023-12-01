@@ -25,7 +25,7 @@ import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {ButtonPro} from "../../components/Buttons/ButtonPro";
 import moment from "moment";
 import { totalReasableSelector } from "../../../reduxStore/appSlice";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 
 
 
@@ -155,8 +155,8 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     // 錯誤訊息 (超過可提取): 可提取金額為0.00 - > O valor que pode ser sacado é 0.00
     // 錯誤訊息 (欄位空白): Valor da retirada (50 - 100)
     const errorMessage =
-      isOutOfRange ? `O valor que pode ser sacado é ${format(withdrawLimitMin)} - ${format(withdrawLimitMax)}` :
-        isValueError ? `Valor da retirada (${format(withdrawLimitMin)} - ${format(withdrawLimitMax)})` :
+      isOutOfRange ? `O valor que pode ser sacado é ${formatLocaleMoney(withdrawLimitMin)} - ${formatLocaleMoney(withdrawLimitMax)}` :
+        isValueError ? `Valor da retirada (${formatLocaleMoney(withdrawLimitMin)} - ${formatLocaleMoney(withdrawLimitMax)})` :
           isNotBaseOn10? 'O valor da retirada deve ser em múltiplos de 50. Por exemplo:  50, 100, 1100, 1650, 28650…':
             isOverTotalReasableValue ? `O valor que pode ser sacado é ${Number((totalReasableValue / 10).toFixed(0)) * 10}` : ''
 
@@ -302,9 +302,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         })
       }
     }).catch((error) => {
-      api.error(({
-        message: JSON.stringify(error)
-      }))
+      console.log(error);
     })
   }
 

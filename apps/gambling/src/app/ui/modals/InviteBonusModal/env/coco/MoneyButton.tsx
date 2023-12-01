@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import cx from "classnames";
-import { format } from "../../../../utils/format";
+import { formatLocaleMoney } from "../../../../utils/format";
 
 const StyledMoneyButton = styled.div.attrs((props) => ({
   className: cx("flex flex-row justify-center items-center", props.className)
@@ -36,7 +36,7 @@ export const MoneyButton = (props: IMoneyButton) => {
         // style={{
         //   textShadow: '3px 0 0 white, -3px 0 0 white, 0 1.5px 0 white, 0 -1.5px 0 white' /* 增加阴影的偏移值以使阴影比字体更大 */
         // }}
-      >R$ {format(props.money)}</span>
+      >R$ {formatLocaleMoney(props.money)}</span>
     </StyledMoneyButton>
   )
 }

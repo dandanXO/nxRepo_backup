@@ -8,7 +8,7 @@ import { notification } from "antd";
 import copy from "copy-to-clipboard";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 
 const WithdrawStatusMap: { [key: number]: string } = {
   1: 'Completed',
@@ -50,8 +50,8 @@ export const RecordPanelWithdraw = () => {
         )
       }
     },
-    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => <div>R${format(Number(record.amount))}</div> },
-    { title: 'Taxa De Retirada', name: 'fee', key: 'fee', render: (record: any) => <div>R${format(Number(record.fee))}</div> },
+    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => <div>R${formatLocaleMoney(Number(record.amount))}</div> },
+    { title: 'Taxa De Retirada', name: 'fee', key: 'fee', render: (record: any) => <div>R${formatLocaleMoney(Number(record.fee))}</div> },
     { title: 'Método De Retirada', name: 'pay_channel', key: 'pay_channel' },
     { title: 'Status De Retirada', name: 'status', key: 'status', render: (record: any) => <div>{WithdrawStatusMap[record.status]}</div> },
     { title: 'Tempo', name: 'created_at', key: 'created_at' },
