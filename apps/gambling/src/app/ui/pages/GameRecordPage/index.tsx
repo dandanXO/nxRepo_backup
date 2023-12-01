@@ -15,6 +15,7 @@ import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { datePickerStyle } from '../../components/DatePickers/DatePicker';
 import { formatLocaleMoney } from "../../utils/format";
+import { tcx } from "../../utils/tcx";
 
 
 const { RangePicker } = DatePicker;
@@ -110,12 +111,16 @@ export const GameRecordPage = () => {
 
   return (
 
-    <div className={'flex h-full flex-col p-4 md:p-8'}>
+    <div className={'flex h-full flex-col px-4 md:px-8'}>
       <SectionContainer
         className="flex h-full flex-col"
         id={'game-record-section'}
       >
-        <BackNavigation onClick={() => onClickToIndex()} />
+        <BackNavigation
+          className={tcx('pl-0 pt-5 pb-6', ['pb-7', isMobile])}
+          onClick={() => onClickToIndex()}
+          title={isMobile?(<div className='absolute left-0 w-full text-center font-bold text-lg'>Registro do jogo</div>):undefined}
+        />
 
         <section className={'mb-4 text-left text-white'}>
           {

@@ -18,6 +18,7 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 export const NotificationPage = () => {
   useAllowLoginRouterRules();
@@ -28,6 +29,7 @@ export const NotificationPage = () => {
   const [triggerPostLetterRead] = usePostLetterReadMutation();
 
   const navigate = useNavigate();
+  const { isMobile } = useBreakpoint();
 
   const handleClick = (
     event: React.MouseEvent<HTMLDivElement>,
@@ -66,6 +68,12 @@ export const NotificationPage = () => {
       setMessages(data.data);
     }
   }, [data]);
+
+  useEffect(()=>{
+    if(!isMobile) {
+      navigate(PageOrModalPathEnum.IndexPage);
+    }
+  }, [isMobile])
 
   return (
       <div className="flex h-full flex-col px-3 py-3 text-white">

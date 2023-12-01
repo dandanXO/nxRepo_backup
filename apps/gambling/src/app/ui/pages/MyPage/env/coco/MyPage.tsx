@@ -126,7 +126,7 @@ const MyPage = ({
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
             <div className='h-full flex px-3 items-center justify-center'>
-              <div className='text-xs text-[var(--text-deposit)]'>
+              <div className='text-xs text-[var(--text-deposit)] font-medium'>
                 Próximo nível {clampNumber(((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ), 0, 100).toFixed(0)}%
               </div>
             </div>
@@ -152,7 +152,7 @@ const MyPage = ({
             }
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className='h-full flex px-3 items-center justify-center'>
+            <div className='h-full flex px-3 items-center justify-center font-medium'>
               <div className='text-xs text-[var(--text-deposit)]'>
                 Próximo nível {clampNumber(userVIPInfo?.data?.flow_progress || 0, 0, 100).toFixed(0)}%
               </div>
@@ -164,7 +164,11 @@ const MyPage = ({
       <List
         className={"bg-[var(--primary-variant)]"}
       >
-        <ListHeader>Outras funções</ListHeader>
+        <ListHeader>
+          <div className='bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-transparent'>
+            Outras funções
+          </div>
+        </ListHeader>
         <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>
         <ListItem title={"Registro do jogo"} onClick={() => onClickToGameRecord()}/>
         <ListItem title={"Configuração"} onClick={() => onClickToSetting()}/>

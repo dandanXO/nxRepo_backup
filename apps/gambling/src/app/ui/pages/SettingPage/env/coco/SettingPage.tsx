@@ -40,20 +40,22 @@ export const SettingPage = ({
     <Container>
       {contextHolder}
       <BackNavigation
+        className={tcx('pl-0 pt-1 pb-4', ['pt-3 pb-9', isMobile])}
         onClick={() => {
           if (isMobile) {
             navigate(PageOrModalPathEnum.MyPage);
           } else {
             navigate(PageOrModalPathEnum.IndexPage);
           }
-          }
-      }/>
+          }}
+        title={isMobile?(<div className='absolute left-0 w-full text-center font-bold text-lg'>Configuração</div>): undefined}
+      />
 
-      <List className={"bg-[#3F28AC]"}>
+      <List className={"bg-[var(--primary-variant)] mt-0"}>
         <ListItem title={
           <div className={"w-full flex flex-row justify-between items-center"}>
-            <div className={"flex flex-row justify-center items-center"}>
-              <PhoneOutlined className={"mr-2"}/>
+            <div className={"flex flex-row justify-center items-center gap-[10px]"}>
+              <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon_account_phone.png`} alt="phone" />
               <div>Número de telefone</div>
             </div>
             <div>{phone}</div>
@@ -62,8 +64,8 @@ export const SettingPage = ({
 
         <ListItem title={
           <div className={"w-full flex flex-row justify-between items-center"}>
-            <div className={"flex flex-row justify-center items-center"}>
-              <UserOutlined className={"mr-2"}/>
+            <div className={"flex flex-row justify-center items-center gap-[10px]"}>
+              <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon_user.png`} alt="user" />
               <div>Apelido</div>
             </div>
             <div className='flex gap-2 items-center'>
@@ -81,8 +83,8 @@ export const SettingPage = ({
 
         <ListItem isEnd={true} title={
           <div className={"w-full flex flex-row justify-between items-center"}>
-            <div className={"flex flex-row justify-center items-center"}>
-              <InfoCircleOutlined className={"mr-2"}/>
+            <div className={"flex flex-row justify-center items-center gap-[10px]"}>
+              <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon_account_version.png`} alt="version" />
               <div>Verifique actualizações</div>
             </div>
             <div>{"1.0.1"}</div>
@@ -92,12 +94,12 @@ export const SettingPage = ({
 
       </List>
 
-      <List className={"bg-[#3F28AC]"}>
+      <List className={"bg-[var(--primary-variant)]"}>
         <ListItem isEnd={true} title={
             <div className={"w-full flex flex-row justify-between items-center"}>
-              <div className={"flex flex-row justify-center items-center"}>
-                <InfoCircleOutlined className={"mr-2"}/>
-                <div>Política de Privacidad</div>
+              <div className={"flex flex-row justify-center items-center gap-[10px]"}>
+                <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon=terms.png`} alt="terms" />
+                <div>Politica de Privacidade</div>
               </div>
             </div>
           }
