@@ -1,6 +1,6 @@
 import {ITotal} from "./MobileCommonBlueTotalTable";
 import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
 
 export const DesktopTotalType = (props: ITotal & { type: string }) => {
   return (
@@ -18,7 +18,7 @@ export const DesktopTotalType = (props: ITotal & { type: string }) => {
             <span className='ml-2'>
               <IconTooltip
                 id='game-bonus-tooltip'
-                icon={<QuestionCircleOutlined style={{ color: '#FF8A00'}} className='text-base' />}
+                icon={<QuestionTipsIcon className={'text-base'}/>}
                 content='As recompensas são liquidadas toda segunda-feira'
               />
             </span>

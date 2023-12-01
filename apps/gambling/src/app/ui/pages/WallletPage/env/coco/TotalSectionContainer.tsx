@@ -155,8 +155,8 @@ export const TotalSectionContainer = () => {
           <TotalDetailItem titleText={(<div className="flex flex-col justify-center items-center">
             <div>Depositar conta</div>
             <div className="whitespace-nowrap flex items-center">
-              <span className="mr-1">(Atividade)</span>
-              <IconTooltip icon={<QuestionCircleOutlined className={'text-2xl'} />} id={"deposit-tooltip"} content="Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc." />
+              <span className="mr-1 self-end">(Atividade)</span>
+              <IconTooltip icon={<QuestionCircleFilled className={'text-2xl'} />} id={"deposit-tooltip"} content="Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc." />
             </div>
           </div>
           )}
@@ -167,8 +167,8 @@ export const TotalSectionContainer = () => {
             titleText={(<div className="flex flex-col justify-center items-center">
               <div>Conta Promovida</div>
               <div className="whitespace-nowrap flex items-center">
-                <span className="mr-1">(Atividade)</span>
-                <IconTooltip icon={<QuestionCircleOutlined className={'text-2xl'} />} id={"Conta-tooltip"} content="Uma conta composta por recompensas por convidar amigos e retorno de comissões com base no valor da transação dos usuários convidados. " />
+                <span className="mr-1 self-end">(Atividade)</span>
+                <IconTooltip icon={<QuestionCircleFilled className={'text-2xl'} />} id={"Conta-tooltip"} content="Uma conta composta por recompensas por convidar amigos e retorno de comissões com base no valor da transação dos usuários convidados. " />
               </div>
 
             </div>

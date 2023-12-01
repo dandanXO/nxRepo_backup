@@ -8,12 +8,12 @@ import { MobileOrangeBackgroundShadowContainer as CMobileOrangeBackgroundShadowC
 import { renderByPlatform } from "../../../utils/renderByPlatform";
 import DatePicker from "../../../components/DatePickers/DatePicker";
 import { useState } from "react";
-import { QuestionCircleOutlined } from "@ant-design/icons";
 import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import { TabItem } from "../../../components/TabItem/TabItem";
 import { tabItemProps } from "./env/coco/tabItemProps";
 import { MobileTableContainer } from "./env/components/MobileTableContainer";
+import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
 
 const MobileOrangeBackgroundShadowContainer = renderByPlatform({
   "wild777bet": WMobileOrangeBackgroundShadowContainer,
@@ -76,7 +76,7 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
           <div className={"flex flex-col flex-1"} onClick={() => setInviteBonusInfoOpen(true)}>
             <div className='flex items-center justify-center'>
               <span className={"text-sm text-[#ffffff] mr-1"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || '0,00'}</span>
-              <QuestionCircleOutlined style={{ color: isCoco777bet ? 'white' : '#FF8A00' }} />
+              <QuestionTipsIcon  className="text-xs  self-baseline" />
             </div>
             <span className="text-xs font-hairline">Obter bônus</span>
             {

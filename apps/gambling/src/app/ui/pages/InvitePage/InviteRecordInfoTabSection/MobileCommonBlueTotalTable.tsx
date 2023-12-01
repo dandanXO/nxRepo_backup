@@ -1,5 +1,5 @@
 import { ReactElement, useState } from "react";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { QuestionCircleFilled, QuestionCircleOutlined } from "@ant-design/icons";
 import { ITabType } from "./index";
 
 import { CommonTableTabG } from "../../../components/TabItem/CommonTableTabG";
@@ -14,6 +14,7 @@ import { environment } from "apps/gambling/src/environments/environment";
 import { tabItemProps } from "./env/coco/tabItemProps";
 import cx from 'classnames';
 import { MobileTableContainer } from "./env/components/MobileTableContainer";
+import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
 
 
 const MobileBlueBackgroundShadowContainer = renderByPlatform({
@@ -96,8 +97,8 @@ export const MobileCommonBlueTotalTable = (props: IMobileCommonBlueTable) => {
 
           <div className={"flex flex-col flex-1"} onClick={() => setInviteBonusInfoOpen(true)}>
             <div className='flex items-center  justify-center'>
-              <span className={"text-sm mr-1 text-[#ffffff]"}>R$ {props.data.gameRechargeReward}</span>
-              <QuestionCircleOutlined style={{ color: isCoco777bet ? 'white' : '#FF8A00' }} />
+              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRechargeReward}</span>
+              <QuestionTipsIcon  className="text-xs ml-1 self-baseline" />
             </div>
             <span className="text-xs font-hairline">Obter bônus</span>
             {
