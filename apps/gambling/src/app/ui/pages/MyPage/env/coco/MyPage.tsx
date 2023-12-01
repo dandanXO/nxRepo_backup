@@ -20,7 +20,7 @@ import {ListItem} from "../../../../components/List/ListItem";
 import {CopyIcon} from "../../../../components/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import { clamp, format } from "../../../../utils/format";
+import { clampNumber, formatLocaleMoney } from "../../../../utils/format";
 
 
 
@@ -75,7 +75,7 @@ const MyPage = ({
 
       <section className='flex justify-between text-center mt-[26px] mb-5'>
         <div className='w-full px-3 flex flex-col gap-3 items-center'>
-          <div className='text-xl text-white'>R$ {format(totalBalanceSheetValue)}</div>
+          <div className='text-xl text-white'>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
             className='w-[126px]'
@@ -84,7 +84,7 @@ const MyPage = ({
         </div>
 
         <div className='w-full px-3 flex flex-col gap-3 items-center'>
-          <div className='text-xl text-white'>R$ {format(totalReasableValue)}</div>
+          <div className='text-xl text-white'>R$ {formatLocaleMoney(totalReasableValue)}</div>
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
             className='w-[126px]'
@@ -111,9 +111,9 @@ const MyPage = ({
             <div>Depósitos totais:</div>
             <div className='text-[var(--secondary-assistant)]'>
               {
-                format(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score/100: 0)
+                formatLocaleMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score/100: 0)
               } / {
-                format(userVIPInfo?.data?.next_level_score? userVIPInfo?.data?.next_level_score/100 : 0)
+                formatLocaleMoney(userVIPInfo?.data?.next_level_score? userVIPInfo?.data?.next_level_score/100 : 0)
               }
             </div>
           </div>
@@ -127,7 +127,7 @@ const MyPage = ({
           >
             <div className='h-full flex px-3 items-center justify-center'>
               <div className='text-xs text-[var(--text-deposit)]'>
-                Próximo nível {clamp(((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ), 0, 100).toFixed(0)}%
+                Próximo nível {clampNumber(((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ), 0, 100).toFixed(0)}%
               </div>
             </div>
           </ProgressBar>
@@ -136,9 +136,9 @@ const MyPage = ({
             <div>Pontos de apostas:</div>
             <div className='text-[var(--secondary-assistant)]'>
               {
-                format(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow/100 : 0)
+                formatLocaleMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow/100 : 0)
               } / {
-                format(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow/100 : 0)
+                formatLocaleMoney(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow/100 : 0)
               }
             </div>
           </div>
@@ -154,7 +154,7 @@ const MyPage = ({
           >
             <div className='h-full flex px-3 items-center justify-center'>
               <div className='text-xs text-[var(--text-deposit)]'>
-                Próximo nível {clamp(userVIPInfo?.data?.flow_progress || 0, 0, 100).toFixed(0)}%
+                Próximo nível {clampNumber(userVIPInfo?.data?.flow_progress || 0, 0, 100).toFixed(0)}%
               </div>
             </div>
           </ProgressBar>

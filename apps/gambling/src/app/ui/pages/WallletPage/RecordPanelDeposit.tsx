@@ -7,7 +7,7 @@ import copy from 'copy-to-clipboard';
 import {notification} from 'antd';
 import { DragScrollContainer } from '../../components/DragScrollContainer';
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 
 
 const DepositStatusMap: { [key: number]: string } = {
@@ -49,8 +49,8 @@ export const RecordPanelDeposit = () => {
         )
       }
     },
-    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => <div>R${format(Number(record.amount))}</div> },
-    { title: 'Bônus', name: 'rate', key: 'rate', render: (record: any) => <div>R${(format(Number(record.amount) * Number(record.rate)))}</div> },
+    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => <div>R${formatLocaleMoney(Number(record.amount))}</div> },
+    { title: 'Bônus', name: 'rate', key: 'rate', render: (record: any) => <div>R${(formatLocaleMoney(Number(record.amount) * Number(record.rate)))}</div> },
     { title: 'Método De Depósito', name: 'pay_channel', key: 'pay_channel' },
     { title: 'Estado Do Depósito', name: 'status', key: 'status', render: (record: any) => <div>{DepositStatusMap[record.status]}</div> },
     { title: 'Tempo', name: 'created_at', key: 'created_at' },

@@ -4,7 +4,7 @@ import { IUserInfoStatusPopoverBalanceInfoProps } from "../../index";
 import { useNavigate } from "react-router";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import { format } from "../../../../utils/format";
+import { formatLocaleMoney } from "../../../../utils/format";
 import {PopoverDepositButton} from "../../../../components/Buttons/env/coco/PopoverDepositButton";
 import {PopoverWithdrawButton} from "../../../../components/Buttons/env/coco/PopoverWithdrawButton";
 
@@ -34,12 +34,12 @@ export const UserInfoStatusPopoverBalanceInfo = ({
         className='rounded-b-xl flex text-sm text-center'
       >
         <div className='w-1/2 px-3 pb-4 pt-2 flex flex-col gap-2'>
-          <div className='text-lg'>R$ {format(totalBalanceSheetValue)}</div>
+          <div className='text-lg'>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
           <div >Balanço Total</div>
           <PopoverDepositButton onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}/>
         </div>
         <div className='w-1/2 px-3 pb-4 pt-2 flex flex-col gap-2'>
-          <div className='text-lg'>R$ {format(totalReasableValue)}</div>
+          <div className='text-lg'>R$ {formatLocaleMoney(totalReasableValue)}</div>
           <div >Retirável Total</div>
           <PopoverWithdrawButton onClick={()=>navigate(PageOrModalPathEnum.WalletPage)} />
         </div>

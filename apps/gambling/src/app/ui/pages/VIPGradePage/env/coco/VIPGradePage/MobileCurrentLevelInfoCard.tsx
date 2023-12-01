@@ -2,7 +2,7 @@ import React from "react";
 import { ICurrentLabelInfoCardProps } from "./CurrentLevelInfoCard";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
 import ProgressBar from "./ProgressBar";
-import { format } from "../../../../../utils/format";
+import { formatLocaleMoney } from "../../../../../utils/format";
 
 export const MobileCurrentLevelInfoCard = ({
   currentLevel,
@@ -39,9 +39,9 @@ export const MobileCurrentLevelInfoCard = ({
             <div className='h-full flex items-center text-sm font-medium text-[var(--text-deposit)] justify-center px-4'>
               <div>
                 R$
-                {format(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
                 /R$
-                {format(userVIPInfo?.data?.next_level_score ? userVIPInfo?.data?.next_level_score / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.next_level_score ? userVIPInfo?.data?.next_level_score / 100 : 0)}
               </div>
             </div>
           </ProgressBar>
@@ -68,9 +68,9 @@ export const MobileCurrentLevelInfoCard = ({
             <div className='h-full flex items-center text-sm font-medium text-[var(--text-deposit)] justify-center px-4'>
               <div>
                 R$
-                {format(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
                 /R$
-                {format(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow / 100 : 0)}
+                {formatLocaleMoney(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow / 100 : 0)}
               </div>
             </div>
           </ProgressBar>

@@ -7,7 +7,7 @@ import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "
 import { useEffect } from "react";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 import { CopyIcon } from '../../components/Icons/CopyIcon';
 
 const Container = styled.div`
@@ -60,7 +60,7 @@ export const DepositMobileTable = () => {
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Valor</span>
-                <span className={''}>R${format(Number(record.amount))}</span>
+                <span className={''}>R${formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
               <div
@@ -69,7 +69,7 @@ export const DepositMobileTable = () => {
               >
                 <span className={''}>valor do bônus</span>
                 <span className={''}>
-                  R${format(Number(record.amount) * Number(record.rate))}
+                  R${formatLocaleMoney(Number(record.amount) * Number(record.rate))}
                 </span>
               </div>
 
@@ -125,12 +125,12 @@ export const WithdrawMobileTable = () => {
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Valor</span>
-                <span className={''}>R${format(Number(record.amount))}</span>
+                <span className={''}>R${formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Taxa de retirada</span>
-                <span className={''}>R${format(Number(record.fee))}</span>
+                <span className={''}>R${formatLocaleMoney(Number(record.fee))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>

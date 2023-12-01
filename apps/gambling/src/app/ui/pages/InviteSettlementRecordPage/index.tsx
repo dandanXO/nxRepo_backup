@@ -11,7 +11,7 @@ import { AppLocalStorage } from "../../../persistant/localstorage";
 import { environment } from "../../../../environments/environment";
 import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
 import { datePickerStyle } from "../../components/DatePickers/DatePicker";
@@ -115,7 +115,7 @@ export const InviteSettlementRecordPage = () => {
                   return (
                     <tr key={index}>
                       <td className='p-12 border-r border-[rgba(255,255,255,0.2)]'>{itme.updateTime}</td>
-                      <td className='p-12'>R$: {format(itme.reward / 100)}</td>
+                      <td className='p-12'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
                     </tr>
                   )
                 })

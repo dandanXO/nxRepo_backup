@@ -4,7 +4,7 @@ import { tcx } from "../../../../../utils/tcx";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";
 import { environment } from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
-import { format } from "../../../../../utils/format";
+import { formatLocaleMoney } from "../../../../../utils/format";
 import { MobileLevelInfoCard } from "./MobileLevelInfoCard";
 
 export interface ILevelInfoCardProps extends GetUserVIPAllInfoResponseData {
@@ -84,18 +84,18 @@ const LevelInfoCard = ({
 
           <div className={tcx( ['hidden', level >= 20])}>Recompensa de atualização：
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {format(upRewardAmout ? upRewardAmout / 100 : 0)}
+              R$ {formatLocaleMoney(upRewardAmout ? upRewardAmout / 100 : 0)}
             </span>
           </div>
           <div>Recompensa total de check-in de <span className='text-[var(--secondary-assistant)]'>7</span> dias：
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {format(signInBonus)}
+              R$ {formatLocaleMoney(signInBonus)}
             </span>
           </div>
           <div>Limite máximo de retirada única：
             <span className='text-[var(--secondary-assistant)]'>
               R$ {
-              format(withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0)}
+              formatLocaleMoney(withdrawAmountLimitDay ? withdrawAmountLimitDay / 100 : 0)}
             </span>
           </div>
           <div>Número de retiradas por dia：
@@ -108,12 +108,12 @@ const LevelInfoCard = ({
           <div className='text-2xl text-left font-medium'>Condição</div>
           <div>Quantidade total de recarga：
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {format(rechargeAmountLimit ? rechargeAmountLimit / 100 : 0)}
+              R$ {formatLocaleMoney(rechargeAmountLimit ? rechargeAmountLimit / 100 : 0)}
             </span>
           </div>
           <div>Número total de apostas：
             <span className='text-[var(--secondary-assistant)]'>
-              R$ {format(flowLimit ? flowLimit / 100 : 0)}
+              R$ {formatLocaleMoney(flowLimit ? flowLimit / 100 : 0)}
             </span>
           </div>
         </div>
