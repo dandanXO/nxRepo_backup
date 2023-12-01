@@ -13,7 +13,7 @@ import {
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
 import {environment} from "../../../../environments/environment";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 
 const Container = styled.div`
   //width: 94%;
@@ -76,12 +76,12 @@ export const BlueBoard = () => {
       >
         <section className={"info-total flex flex-row"}>
           <section className={"left flex-1 flex flex-col"}>
-            <span className={"value-money text-base"}>R$ {format(totalBalanceSheetValue)}</span>
+            <span className={"value-money text-base"}>R$ {formatLocaleMoney(totalBalanceSheetValue)}</span>
             <span className={"title-money text-xs text-[#00718c]"}>Balanço Total</span>
           </section>
 
           <section className={"right flex-1 flex flex-col"}>
-            <span className={"value-money text-base"}>R$ {format(totalReasableValue)}</span>
+            <span className={"value-money text-base"}>R$ {formatLocaleMoney(totalReasableValue)}</span>
             <span className={"title-money text-xs text-[#00718c]"}>Retirável Total</span>
           </section>
         </section>

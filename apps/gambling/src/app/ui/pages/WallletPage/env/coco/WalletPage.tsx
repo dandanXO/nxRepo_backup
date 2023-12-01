@@ -21,9 +21,13 @@ export const WalletPage = (props: IWalletPage) => {
 
   return (
     <>
-      {isMobile && (
-        <BackNavigation onClick={props.onClickToIndex}/>
-      )}
+      <div className='mx-auto w-[94%]'>
+        <BackNavigation
+          className='pl-0 pt-5 pb-6 text-2xl'
+          onClick={props.onClickToIndex}
+          title={isMobile?(<div className='absolute left-0 w-full text-center font-bold text-lg'>Conta</div>): undefined}
+        />
+      </div>
 
       <div className={"m-auto w-[94%] pb-16"}>
         <TotalSectionContainer />

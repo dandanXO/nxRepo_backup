@@ -2,7 +2,7 @@ import React from "react";
 import { GetSignInRecordResponseData } from "../../../external";
 import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 import { NoData } from "../../components/Icons/NoData";
 
 const Title = ({ children }:{children: React.ReactNode}) => (
@@ -56,7 +56,7 @@ export const MobileDailySignInRecordPage = ({
                   </tr>
                   <tr className='flex'>
                     <Title>Obter Recompensas</Title>
-                    <Content>R$ {format(record.cashback / 100)}</Content>
+                    <Content>R$ {formatLocaleMoney(record.cashback / 100)}</Content>
                   </tr>
                   <tr className='flex'>
                     <Title>Tempo</Title>

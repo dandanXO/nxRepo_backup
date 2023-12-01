@@ -17,7 +17,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import {depositButtonProps as PDepositButtonProps} from "./env/pernambucana/depositButtonProps";
 import {depositButtonProps as WDepositButtonProps} from "./env/wild/depositButtonProps";
 import {depositButtonProps as CDepositButtonProps} from "./env/coco/depositButtonProps";
-import { format } from "../../utils/format";
+import { formatLocaleMoney } from "../../utils/format";
 import {ButtonPro} from "../../components/Buttons/ButtonPro";
 import {ProButton} from "../../components/Buttons/ProButton";
 import { useRechargeMutation } from "../../../external";
@@ -85,8 +85,8 @@ interface DepositToNextPageButtonProps {
 const DepositToNextPageButton = (props:DepositToNextPageButtonProps) => {
   return (
     <button
-      className={cx(`w-[264px] h-[45px] rounded-md 
-      bg-gradient-to-r from-[var(--button-deposit-from)] to-[var(--button-deposit-to)] 
+      className={cx(`w-[264px] h-[45px] rounded-md
+      bg-gradient-to-r from-[var(--button-deposit-from)] to-[var(--button-deposit-to)]
       text-[var(--white)] flex justify-between items-center px-3.5 py-2 text-xl font-bold
       shadow-[4px_4px_4px_0px_rgba(255,255,255,0.25)_inset,-4px_-4px_4px_0px_rgba(255,255,255,0.25)_inset]
       `, props.className)}
@@ -228,7 +228,7 @@ export const DepositPanel = (props: IDepositPanel) => {
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
             const isShowRate = Number(config?.rate) > 0 || (Number(rechargeValue) * Number(config?.rate)).toFixed(2) > config?.amount_min;
-            const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? format(Number(rechargeValue) * Number(config?.rate)) : ""
+            const rate = config && config?.rate && parseFloat(config?.rate) !== 0 ? formatLocaleMoney(Number(rechargeValue) * Number(config?.rate)) : ""
             return (
               <DepositMoneyButton
                 key={index}

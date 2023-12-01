@@ -13,7 +13,7 @@ import { useState } from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import ConfirmDrawer from "../../../../components/Drawers/ConfirmDrawer";
 import { IconTooltip } from "../../../../components/Tooltips/IconTooltip";
-import { format } from "../../../../utils/format";
+import { formatLocaleMoney } from "../../../../utils/format";
 
 const StyledTotalSectionContainer = styled.div`
   border-radius: 16px;
@@ -118,7 +118,7 @@ export const TotalSectionContainer = () => {
 
         <div className={"w-full flex-[2] flex flex-row "}>
           <div className={"flex-1 flex flex-col justify-center items-center"}>
-            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {format(totalBalanceSheetValue)}</div>
+            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
             <div className={cx("flex flex-col text-sm md:text-xl mt-3 md:mt-4", {
               'text-white font-normal': isMobile,
 
@@ -126,7 +126,7 @@ export const TotalSectionContainer = () => {
           </div>
 
           <div className={"flex-1 flex flex-col justify-center items-center"}>
-            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {format(totalReasableValue)}</div>
+            <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {formatLocaleMoney(totalReasableValue)}</div>
             <div className={cx("flex flex-col text-sm md:text-xl  mt-3 md:mt-4", {
               'text-white font-normal': isMobile
             })}>Retirável Total</div>
@@ -138,14 +138,14 @@ export const TotalSectionContainer = () => {
         (<TotalSectionBottomContent className={" flex flex-row flex-wrap justify-between items-center text-base md:text-medium text-[var(--secondary-assistant)]"}>
           <MobileTotalDetailItem
             titleText={'Depositar conta'}
-            balanceValue={format(totalBalanceSheetValue)}
-            removeableValue={format(totalReasableValue)}
+            balanceValue={formatLocaleMoney(totalBalanceSheetValue)}
+            removeableValue={formatLocaleMoney(totalReasableValue)}
             noticeText={'Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc. '}
           />
           <MobileTotalDetailItem
             titleText={'Conta Promovida'}
-            balanceValue={format(accountPromotedSwingValue)}
-            removeableValue={format(accountPromotedWithdrawableValue)}
+            balanceValue={formatLocaleMoney(accountPromotedSwingValue)}
+            removeableValue={formatLocaleMoney(accountPromotedWithdrawableValue)}
             noticeText={'Uma conta composta por recompensas por convidar amigos e retorno de comissões com base no valor da transação dos usuários convidados. '}
           />
         </TotalSectionBottomContent>
@@ -160,8 +160,8 @@ export const TotalSectionContainer = () => {
             </div>
           </div>
           )}
-            balanceValue={format(totalBalanceSheetValue)}
-            removeableValue={format(totalReasableValue)}
+            balanceValue={formatLocaleMoney(totalBalanceSheetValue)}
+            removeableValue={formatLocaleMoney(totalReasableValue)}
           />
           <TotalDetailItem
             titleText={(<div className="flex flex-col justify-center items-center">
@@ -173,8 +173,8 @@ export const TotalSectionContainer = () => {
 
             </div>
             )}
-            balanceValue={format(accountPromotedSwingValue)}
-            removeableValue={format(accountPromotedWithdrawableValue)}
+            balanceValue={formatLocaleMoney(accountPromotedSwingValue)}
+            removeableValue={formatLocaleMoney(accountPromotedWithdrawableValue)}
           />
         </TotalSectionBottomContent>)}
     </StyledTotalSectionContainer>
