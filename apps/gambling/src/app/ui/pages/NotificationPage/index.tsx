@@ -75,7 +75,7 @@ export const NotificationPage = () => {
             navigate(PageOrModalPathEnum.IndexPage);
           }}
           title={
-            <div className="pl-10 text-lg font-bold text-[var(--white)]">
+            <div className="absolute left-0 w-full text-center text-lg font-bold text-[var(--white)]">
               Centro de Notificação
             </div>
           }
