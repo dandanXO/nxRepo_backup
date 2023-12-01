@@ -260,7 +260,7 @@ export const AppRouter = () => {
         <Routes>
           {/*NOTE: Common*/}
           <Route path={PageOrModalPathEnum.IndexPage} element={(
-            <PageTemplate showToolboxConfig={{mobile: {download: true}}}>
+            <PageTemplate showToolboxConfig={{mobile: {download: true, customerService: true}}}>
               <IndexPage />
             </PageTemplate>
           )}/>
@@ -270,7 +270,7 @@ export const AppRouter = () => {
           {/*  </PageTemplate>*/}
           {/*)}/>*/}
           <Route path={PageOrModalPathEnum.InvitePage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showToolboxConfig={{mobile: { customerService: true }}}>
               <InvitePage/>
             </PageTemplate>
           )}/>
@@ -286,7 +286,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showTabbar={false}
               showMobileFooter={false}
-              showToolboxConfig={{mobile:{ customerService: false }}}
             >
               <WallletPage />
             </PageTemplate>
@@ -301,13 +300,12 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showTabbar={false}
               showMobileFooter={false}
-              showToolboxConfig={{mobile:{ customerService: false}}}
             >
               <GameRecordPage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.VIPGradePage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
+            <PageTemplate showMobileHeader={false} showMobileFooter={false} showToolboxConfig={{mobile:{ customerService: true }}}>
               <VIPGradePage />
             </PageTemplate>
           )}/>
@@ -316,7 +314,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showTabbar={false}
               showMobileFooter={false}
-              showToolboxConfig={{mobile:{ customerService: false }}}
             >
               <DailySignInPage/>
             </PageTemplate>
@@ -326,7 +323,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showTabbar={false}
               showMobileFooter={false}
-              showToolboxConfig={{mobile:{ customerService: false}}}
             >
               <DailySignInRecordPage/>
             </PageTemplate>
@@ -336,7 +332,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showTabbar={false}
               showMobileFooter={false}
-              showToolboxConfig={{mobile:{ customerService: false}}}
             >
               <SettingPage/>
             </PageTemplate>
@@ -345,7 +340,6 @@ export const AppRouter = () => {
             <PageTemplate
               showMobileHeader={false}
               showTabbar={!isMobile}
-              showToolboxConfig={{mobile:{ customerService: false}}}
             >
               <PrivacyAgreementPage/>
             </PageTemplate>
@@ -355,7 +349,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showTabbar={false}
               showMobileFooter={!isMobile}
-              showToolboxConfig={{mobile:{ customerService: false}}}
             >
               <TermsOfServicePage />
             </PageTemplate>
@@ -370,7 +363,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showMobileFooter={false}
               showTabbar={false}
-              showToolboxConfig={{mobile:{ customerService: false }}}
             >
               <InitialChargePage/>
             </PageTemplate>
@@ -386,7 +378,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showMobileFooter={false}
               showTabbar={false}
-              showToolboxConfig={{mobile:{ customerService: false }}}
             >
               <TelegramPage/>
             </PageTemplate>
@@ -418,7 +409,7 @@ export const AppRouter = () => {
             <PageTemplate
               showMobileHeader={false}
               showMobileFooter={false}
-              showToolboxConfig={{ mobile: { customerService: false }}}
+              showToolboxConfig={{ mobile: { customerService: true }}}
             >
               <MyPage/>
             </PageTemplate>
@@ -428,7 +419,6 @@ export const AppRouter = () => {
               showMobileHeader={false}
               showTabbar={false}
               showMobileFooter={false}
-              showToolboxConfig={{mobile:{ customerService: false}}}
             >
               <NotificationPage/>
             </PageTemplate>

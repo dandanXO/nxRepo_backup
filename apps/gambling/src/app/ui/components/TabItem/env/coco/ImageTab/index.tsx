@@ -15,16 +15,18 @@ export const ImageTab = styled.div<{
   border-radius: 8px;
   margin-right: 8px;
   //padding: 0 10px;
+  font-weight: normal;
 
   ${props => {
     if (!props.active) {
       return `
             background: var(--primary-variant);
-            color: var(--white);
+            color: var(--primary-assistant);
+            border: 1px solid var(--primary-assistant);
           `;
     } else {
       return `
-            background-image: linear-gradient(var(--button-gametab-focus-from), var(--button-gametab-focus-via) 15.65%, var(--button-gametab-focus-to));
+            background: linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);
             color: var(--white);
           `
     }
