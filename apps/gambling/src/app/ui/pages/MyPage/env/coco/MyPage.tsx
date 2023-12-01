@@ -21,6 +21,7 @@ import {CopyIcon} from "../../../../components/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import { clampNumber, formatLocaleMoney } from "../../../../utils/format";
+import { tcx } from "../../../../utils/tcx";
 
 
 
@@ -51,6 +52,12 @@ const MyPage = ({
     onClickToSetting,
   } = usePageNavigate();
 
+  const depositString = `R$ ${formatLocaleMoney(totalBalanceSheetValue)}`
+  const withdrawString = `R$ ${formatLocaleMoney(totalReasableValue)}`
+
+  const vipDepositString = `${formatLocaleMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score/100: 0)} / ${formatLocaleMoney(userVIPInfo?.data?.next_level_score? userVIPInfo?.data?.next_level_score/100 : 0)}`
+  const vipFlowString = `${formatLocaleMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow/100 : 0)} / ${formatLocaleMoney(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow/100 : 0)}`
+
   return (
     <Container className={"!pt-4 pb-[80px]"}>
       <section className='flex justify-between items-center'>
@@ -74,8 +81,8 @@ const MyPage = ({
       </section>
 
       <section className='flex justify-between text-center mt-[26px] mb-5'>
-        <div className='w-full px-3 flex flex-col gap-3 items-center'>
-          <div className='text-xl text-white'>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
+        <div className='w-full flex flex-col gap-3 items-center'>
+          <div className={tcx('text-lg text-white', ['text-sm', depositString.length > 12 || withdrawString.length > 12])}>{depositString}</div>
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
             className='w-[126px]'
@@ -83,8 +90,8 @@ const MyPage = ({
           >Depósito</DepositButton>
         </div>
 
-        <div className='w-full px-3 flex flex-col gap-3 items-center'>
-          <div className='text-xl text-white'>R$ {formatLocaleMoney(totalReasableValue)}</div>
+        <div className='w-full flex flex-col gap-3 items-center'>
+          <div className={tcx('text-lg text-white', ['text-sm', depositString.length > 12 || withdrawString.length > 12])}>{withdrawString}</div>
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
             className='w-[126px]'
@@ -109,16 +116,12 @@ const MyPage = ({
         <div className='w-2/3 text-white'>
           <div className='mb-1'>
             <div>Depósitos totais:</div>
-            <div className='text-[var(--secondary-assistant)]'>
-              {
-                formatLocaleMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score/100: 0)
-              } / {
-                formatLocaleMoney(userVIPInfo?.data?.next_level_score? userVIPInfo?.data?.next_level_score/100 : 0)
-              }
+            <div className={tcx('text-[var(--secondary-assistant)]', ['text-xs', vipDepositString.length > 24 || vipFlowString.length > 24])}>
+              {vipDepositString}
             </div>
           </div>
           <ProgressBar
-            className='h-6 bg-white mb-3'
+            className='h-5 bg-white mb-3'
             rounded='rounded-xl'
             progress={
               (userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)
@@ -126,7 +129,7 @@ const MyPage = ({
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
             <div className='h-full flex px-3 items-center justify-center'>
-              <div className='text-xs text-[var(--text-deposit)] font-medium'>
+              <div className='text-xs text-[var(--text-deposit)] font-normal'>
                 Próximo nível {clampNumber(((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ), 0, 100).toFixed(0)}%
               </div>
             </div>
@@ -134,16 +137,12 @@ const MyPage = ({
 
           <div className='mb-1'>
             <div>Pontos de apostas:</div>
-            <div className='text-[var(--secondary-assistant)]'>
-              {
-                formatLocaleMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow/100 : 0)
-              } / {
-                formatLocaleMoney(userVIPInfo?.data?.next_level_flow ? userVIPInfo?.data?.next_level_flow/100 : 0)
-              }
+            <div className={tcx('text-[var(--secondary-assistant)]', ['text-xs', vipDepositString.length > 24 || vipFlowString.length > 24])}>
+              {vipFlowString}
             </div>
           </div>
           <ProgressBar
-            className='h-6 bg-white'
+            className='h-5 bg-white'
             rounded='rounded-xl'
             progress={
               userVIPInfo?.data?.flow_progress
@@ -152,7 +151,7 @@ const MyPage = ({
             }
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
-            <div className='h-full flex px-3 items-center justify-center font-medium'>
+            <div className='h-full flex px-3 items-center justify-center font-normal'>
               <div className='text-xs text-[var(--text-deposit)]'>
                 Próximo nível {clampNumber(userVIPInfo?.data?.flow_progress || 0, 0, 100).toFixed(0)}%
               </div>

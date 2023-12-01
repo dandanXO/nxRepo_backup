@@ -207,9 +207,9 @@ export const DayList = ({
         const checked = currentSelectedLevel === vipLevel && index + 1 <= signInTotalDays;
 
         return (
-          <div className='relative'>
+          <div className='relative mr-[2px] 2xl:mr-[50px]'>
             <DayItem key={day} className={tcx(
-              'flex flex-col justify-between w-[128px] min-w-[128px] h-[188px] text-center mr-[2px] 2xl:mr-[50px]',
+              'flex flex-col justify-between w-[128px] min-w-[128px] h-[188px] text-center',
               ['grayscale', checked],
               ['w-[108px] min-w-[108px] h-[160px]', isMobile]
             )}>
@@ -240,7 +240,7 @@ export const DayList = ({
             </DayItem>
             {
               checked && (
-                <div className='absolute top-[30%] left-[15%] w-[70%]'>
+                <div className='absolute top-[30%] left-[50%] translate-x-[-50%] w-[80px]'>
                   <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
                 </div>
               )
