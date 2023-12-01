@@ -43,6 +43,14 @@ const RangeDatePicker = ({
     onConfirm([dateToString(selectedDate[0]), dateToString(selectedDate[1])])
   }
 
+  const handleCancel = () => {
+    setOpen(false)
+    setTimeout(() => {
+      setDrawerOpen(false);
+      setOpen(true)
+    }, DrawerDelay)
+  }
+
   return (
     <>
       <DatePickerBlock
@@ -68,7 +76,7 @@ const RangeDatePicker = ({
             setOpen={setOpen}
           >
             <div className='p-4 flex text-base font-medium justify-between items-center text-[var(--black)]'>
-              <div className='text-xs'>Cancelar</div>
+              <div className='text-xs' onClick={handleCancel}>Cancelar</div>
               <div className='font-bold'>Selecione a data</div>
               <div className='text-xs' onClick={handleConfirm}>Confirme</div>
             </div>

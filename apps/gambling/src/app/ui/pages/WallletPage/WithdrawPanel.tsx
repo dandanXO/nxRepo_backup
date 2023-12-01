@@ -302,9 +302,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         })
       }
     }).catch((error) => {
-      api.error(({
-        message: JSON.stringify(error)
-      }))
+      console.log(error);
     })
   }
 

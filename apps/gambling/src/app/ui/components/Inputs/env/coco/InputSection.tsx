@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import cx from "classnames";
+import { tcx } from "../../../../utils/tcx";
 
 export const InputSection = styled.a.attrs((props) => ({
-  className: cx("py-3 px-4 border-solid border rounded-lg", props.className),
+  className: tcx("py-3 px-4 border-solid border rounded-lg bg-[var(--input-background)]", props.className),
 }))<{
   focus?: boolean;
   validation?: boolean;
@@ -20,5 +20,4 @@ export const InputSection = styled.a.attrs((props) => ({
     border-color: var(--input-invalidation-border);
   `}
 
-  background: var(--input-background);
 `
