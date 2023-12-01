@@ -179,6 +179,7 @@ export const PageTemplate = ({
           <MenuDrawer
             className={""}
             isTabletShow={false}
+            isShowCloseButton={false}
           >
             <MenuDrawerContent/>
           </MenuDrawer>

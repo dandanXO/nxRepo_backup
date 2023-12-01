@@ -40,7 +40,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
       }}
     >
       <StyledMenuDrawerContainer
-        className={cx("p-6 flex flex-col flex-between",
+        className={cx("py-8 px-6 flex flex-col flex-between",
           "border-r border-r-[var(--drawer-border)]",
           "fixed bottom-0 w-[276px] min-w-[276px] h-full z-30",
           "bg-[var(--drawer-bg)]",
