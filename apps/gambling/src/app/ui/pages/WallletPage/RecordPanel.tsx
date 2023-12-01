@@ -7,10 +7,19 @@ import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';
 import cx from "classnames";
 import {RecordButton,RecordButton2} from "../../components/Buttons/RecordButton";
+import { renderByPlatform } from '../../utils/renderByPlatform';
+import { RecordButton as CRecordButton } from '../../components/Buttons/env/coco/RecordButton';
 
 type IRecordPanel = {
   recordPanelMode: 'deposit' | 'withdraw';
 }
+
+
+const RecordTabButton = renderByPlatform({
+  "wild777bet": RecordButton,
+  "coco777bet": CRecordButton,
+}, RecordButton)
+
 
 
 export const RecordPanel = (props: IRecordPanel) => {
@@ -36,25 +45,25 @@ export const RecordPanel = (props: IRecordPanel) => {
         <TotalSectionContainer/>
       )} */}
 
-      <section className={cx('button-list flex flex-row mb-5',{"md:mb-10":!isMobile})}>
-        <RecordButton
-          className={'p-2'}
+      <section className={cx('button-list flex flex-row mb-2',{"md:mb-4":!isMobile})}>
+        <RecordTabButton
+          className={cx("py-1 px-3.5 md:py-2 md:px-6 flex-none")}
           active={recordPanelMode === 'deposit'}
           onClick={() => {
             setRecordPanelMode('deposit');
           }}
         >
           Depósito
-        </RecordButton>
-        <RecordButton
-          className={'p-2'}
+        </RecordTabButton>
+        <RecordTabButton
+          className={cx("py-1 px-3.5 md:py-2 md:px-6 flex-none")}
           active={recordPanelMode === 'withdraw'}
           onClick={() => {
             setRecordPanelMode('withdraw');
           }}
         >
           Retirar
-        </RecordButton>
+        </RecordTabButton>
       </section>
 
       {isMobile && recordPanelMode === 'deposit' && (

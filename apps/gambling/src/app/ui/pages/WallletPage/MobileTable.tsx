@@ -54,9 +54,9 @@ export const DepositMobileTable = () => {
               "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
               )}
             >
-              <div className={'flex flex-row justify-between px-5 pt-3 pb-2'}>
-                <span>ID da ordem: {record.id}</span>
-                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.id}/>
+              <div className={'flex flex-row justify-between px-5 pt-2.5 pb-1.5 text-main-primary-main items-center'}>
+                <div className='font-bold text-white'>ID da ordem: {record.id}</div>
+                <CopyIcon className={'text-[var(--secondary-assistant)] self-baseline'} copyText={record.id} />
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Valor</span>
@@ -118,9 +118,9 @@ export const WithdrawMobileTable = () => {
               key={record.id}
               className="mb-2 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
             >
-              <div className={'flex flex-row justify-between px-5 pt-3 pb-2 text-main-primary-main '}>
-                <span>ID da ordem: {record.pay_serial_no}</span>
-                <CopyOutlined className={'text-main-primary-main'} />
+              <div className={'flex flex-row justify-between px-5 pt-2.5 pb-2 text-main-primary-main items-center'}>
+                <div className='font-bold'>ID da ordem: {record.pay_serial_no}</div>
+                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.id}/>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>

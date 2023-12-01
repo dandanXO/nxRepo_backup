@@ -4,6 +4,7 @@ import { environment } from "../../../../environments/environment";
 import cx from "classnames";
 import copy from "copy-to-clipboard";
 import { ReactElement } from "react";
+import { CopyOutlined } from "@ant-design/icons";
 
 interface ICopyIcon {
   copyText: any;
@@ -24,7 +25,7 @@ export const CopyIcon = (props: ICopyIcon) => {
   return (
     <button className={cx('hover:rounded-full hover:bg-[rgba(255,255,255,0.7)]')} onClick={onClickToCopy}>
       {contextHolder}
-      {icon ? icon : <img className={cx(`w-[24px] h-[24px]`, className)} src={`assets/${environment.assetPrefix}/icon=copy.png`} alt="" />}
+      {icon ? icon : <CopyOutlined className={cx(`text-base`, className)}  />}
     </button>
   )
 }

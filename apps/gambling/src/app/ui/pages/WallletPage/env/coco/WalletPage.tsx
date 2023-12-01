@@ -21,7 +21,7 @@ export const WalletPage = (props: IWalletPage) => {
 
   return (
     <>
-      <div className='mx-auto w-[94%]'>
+      <div className='mx-4 md:mx-24'>
         <BackNavigation
           className='pl-0 pt-5 pb-6 text-2xl'
           onClick={props.onClickToIndex}
@@ -29,14 +29,14 @@ export const WalletPage = (props: IWalletPage) => {
         />
       </div>
 
-      <div className={"m-auto w-[94%] pb-16"}>
+      <div className={"m-4 mt-0 md:mx-24 pb-16"}>
         <TotalSectionContainer />
 
         <div id={"tab-item"}>
-          <Tabs className={"game-type-tab-list flex font-bold my-4 md:my-5  justify-center items-center"}>
-            <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} color={'#d3abff'} active={props.panelMode === "deposit"} onClick={() => {props.setPanelMode("deposit")}}>Depósito</CommonTableTabG>
-            <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} color={'#d3abff'} active={props.panelMode === "withdraw"} onClick={() => {props.setPanelMode("withdraw")}} >Retirar</CommonTableTabG>
-            <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} color={'#d3abff'} active={props.panelMode === "record"} onClick={() => {props.setPanelMode("record")}} >Registro</CommonTableTabG>
+          <Tabs className={"game-type-tab-list flex font-bold mt-3 mb-[18px] md:my-8  justify-center items-center"}>
+            <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} active={props.panelMode === "deposit"} onClick={() => {props.setPanelMode("deposit")}}>Depósito</CommonTableTabG>
+            <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} active={props.panelMode === "withdraw"} onClick={() => {props.setPanelMode("withdraw")}} >Retirar</CommonTableTabG>
+            <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} active={props.panelMode === "record"} onClick={() => {props.setPanelMode("record")}} >Registro</CommonTableTabG>
           </Tabs>
         </div>
 

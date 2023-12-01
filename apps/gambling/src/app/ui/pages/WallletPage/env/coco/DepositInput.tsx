@@ -16,7 +16,7 @@ export const DepositInput = (props: IDepositInput) => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <div className={cx("relative", { 'my-10': !isMobile })}>
+    <div className={cx("relative")}>
       <MobileInput
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>)=>{
           if (e.key === '.' || e.key === 'e' || e.key === '-') {

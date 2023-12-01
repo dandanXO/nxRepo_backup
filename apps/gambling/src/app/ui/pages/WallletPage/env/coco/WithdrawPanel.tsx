@@ -11,6 +11,7 @@ import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
+import { ArrowRight } from '../../../../components/Icons/ArrowRight';
 
 
 export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
@@ -52,11 +53,11 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               <span className={"text-[#ffdd14]"}>R${props.withdrawLimitMax}</span>.
             </div>
 
-            <div className={cx(`text-white leading-none  rounded-xl
+            <div className={cx(`text-white leading-none rounded-lg
             p-3.5 md:py-6 md:px-4
             my-4 md:my-6
             text-xs md:text-xl
-            text-center md:text-left
+            text-left
             leading-4 md:leading-7
             bg-gradient-to-b from-[var(--background-alert-text-from)] to-[var(--background-alert-text-to)]
           `)}>
@@ -90,7 +91,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                   themeStyle={"simple"}
                   className="w-full rounded-lg"
                   inputClassName={"text-main-primary-main leading-none "}
-                  placeholder={"Insira o seu código CPF"}
+                  placeholder={"Insira o seu código CPF/CNPJ"}
                   value={props.CPFInput.data}
                   validation={props.CPFInput.isValidation}
                   errorMessage={props.CPFInput.errorMessage}
@@ -215,10 +216,11 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
             {/*  RETIRAR*/}
             {/*</ButtonPro>*/}
             <button
-              className={"w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)] font-medium"}
+              className={"flex justify-between items-center px-3.5 py-2 text-xl  w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)] font-medium"}
               onClick={props.onClickToWithdraw}
             >
               RETIRAR
+              <ArrowRight className="w-[24px] h-[24px]"/>
             </button>
           </section>
         )}

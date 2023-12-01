@@ -22,7 +22,7 @@ export const WithdrawNoticeSection = (props: any) => {
           <span className={"text-[var(--secondary-assistant)]"}> R${withdrawLimitMin}</span> e o valor máximo de saque é de
           <span className={"text-[var(--secondary-assistant)]"}> R${withdrawLimitMax}</span>.
         </div>
-        <div className="text-center m-2">
+        <div className="text-left m-2">
           <button className="py-2 px-5 rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-xs md:text-base" onClick={onClickToVIP}>Cheque</button>
         </div>
 
