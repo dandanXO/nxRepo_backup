@@ -47,7 +47,7 @@ export const RecordPanel = (props: IRecordPanel) => {
 
       <section className={cx('button-list flex flex-row mb-2',{"md:mb-4":!isMobile})}>
         <RecordTabButton
-          className={cx("py-1 px-3.5 md:py-2 md:px-6 flex-none")}
+          className={cx(" px-3.5 md:px-6 flex-none")}
           active={recordPanelMode === 'deposit'}
           onClick={() => {
             setRecordPanelMode('deposit');
@@ -56,7 +56,7 @@ export const RecordPanel = (props: IRecordPanel) => {
           Depósito
         </RecordTabButton>
         <RecordTabButton
-          className={cx("py-1 px-3.5 md:py-2 md:px-6 flex-none")}
+          className={cx("px-3.5 md:px-6 flex-none")}
           active={recordPanelMode === 'withdraw'}
           onClick={() => {
             setRecordPanelMode('withdraw');

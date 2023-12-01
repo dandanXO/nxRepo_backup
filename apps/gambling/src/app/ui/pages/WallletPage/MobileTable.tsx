@@ -2,11 +2,11 @@ import { CopyOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 import cx from "classnames"
-import {environment} from "../../../../environments/environment";
+import { environment } from "../../../../environments/environment";
 import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "../../../external";
 import { useEffect } from "react";
 import { AppLocalStorage } from "../../../persistant/localstorage";
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../utils/format";
 import { CopyIcon } from '../../components/Icons/CopyIcon';
 
@@ -25,7 +25,7 @@ const TradeStatusMap: { [key: number]: string } = {
 const NoData = () => {
   return (
     <div className=' flex flex-col justify-center items-center py-10'>
-      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
+      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
       <div>Nada aqui</div>
     </div>
   )
@@ -33,7 +33,7 @@ const NoData = () => {
 export const DepositMobileTable = () => {
   const [triggerGetDepositRecord, { data }] = useRechargeHistoryListMutation()
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetDepositRecord({
       limit: 1000,
@@ -51,7 +51,7 @@ export const DepositMobileTable = () => {
             <Container
               key={record.id}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
-              "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
+                "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
               )}
             >
               <div className={'flex flex-row justify-between px-5 pt-2.5 pb-1.5 text-main-primary-main items-center'}>
@@ -82,10 +82,10 @@ export const DepositMobileTable = () => {
                 <span className={''}>{record.created_at}</span>
                 <span style={{
                   color:
-                      record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
+                    record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
                       record.status === 3 ? 'var(--state-error-main)' :   // 红色
-                      record.status === 1 ? 'var(--state-success-main)' :   // 绿色
-                      'var(--white)'  // 白色 (默认)
+                        record.status === 1 ? 'var(--state-success-main)' :   // 绿色
+                          'var(--white)'  // 白色 (默认)
                 }}>{TradeStatusMap[record.status]}</span>
               </div>
             </Container>
@@ -99,7 +99,7 @@ export const DepositMobileTable = () => {
 export const WithdrawMobileTable = () => {
   const [triggerGetWithdrawRecord, { data }] = useWithdrawHistoryListMutation({})
 
-  useEffect(()=>{
+  useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
       limit: 1000,
@@ -116,11 +116,13 @@ export const WithdrawMobileTable = () => {
           {data?.data?.map((record) => (
             <Container
               key={record.id}
-              className="mb-2 flex flex-col rounded-2xl py-2 text-white bg-varient text-base border border-solid border-main-primary-main"
+              className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
+                "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
+              )}
             >
               <div className={'flex flex-row justify-between px-5 pt-2.5 pb-2 text-main-primary-main items-center'}>
                 <div className='font-bold'>ID da ordem: {record.pay_serial_no}</div>
-                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.id}/>
+                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.id} />
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
@@ -142,9 +144,9 @@ export const WithdrawMobileTable = () => {
                 <span className={''}>{record.created_at}</span>
                 <span style={{
                   color: record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
-                         record.status === 3 ? 'var(--state-error-main)' :   // 红色
-                         record.status === 1 ? 'var(--state-success-main)' :   // 绿色
-                         'var(--white)'  // 白色 (默认)
+                    record.status === 3 ? 'var(--state-error-main)' :   // 红色
+                      record.status === 1 ? 'var(--state-success-main)' :   // 绿色
+                        'var(--white)'  // 白色 (默认)
                 }}>{TradeStatusMap[record.status]}</span>
               </div>
             </Container>
