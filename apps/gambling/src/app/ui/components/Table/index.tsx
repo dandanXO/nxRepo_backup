@@ -92,7 +92,7 @@ export const Table = (props: ITable) => {
                 return <tr key={index}>
                   {columns?.map((col: any, colIndex: number) => (
                     <td key={col.key + colIndex}
-                      className={cx(`py-4 px-3 border-[rgba(255,255,255,0.2)] sm:break-all text-center`,
+                      className={cx(`py-4 px-3 border-[rgba(255,255,255,0.2)] break-all text-center`,
                         {'border-r': colIndex !== columns.length - 1},                        props.className,
                         props.contentStyle
                       )}

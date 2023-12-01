@@ -47,7 +47,7 @@ export const GameRecordPage = () => {
       name: 'gameName',
       key: 'gameName',
       render: (record: any) => (
-        <div>
+        <div className='flex flex-col gap-1'>
           <img
             alt='gameLogo'
             className='mx-auto w-12 object-cover'
@@ -150,6 +150,8 @@ export const GameRecordPage = () => {
 
         <div className='h-[80vh] rounded-lg overflow-hidden'>
           <Table
+            className={tcx('text-base', ['text-xs', isMobile])}
+            titleStyle={tcx('text-sm', ['text-xs', isMobile])}
             fetchData={handleFetchData}
             dataSource={records}
             columns={columns}
