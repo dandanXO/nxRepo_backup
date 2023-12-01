@@ -1,4 +1,5 @@
 import cx from "classnames";
+import {useRef} from "react";
 
 type IProps = {
   className?: string;
@@ -9,6 +10,9 @@ type IProps = {
 export const CarouselContainer = (props: IProps) => {
   return (
     <div
+      style={{
+        touchAction: "none",
+      }}
       onClick={(event) => {
         if(props.isMoving) {
           event.preventDefault();
