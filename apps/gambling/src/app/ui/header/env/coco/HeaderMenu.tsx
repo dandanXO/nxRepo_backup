@@ -22,11 +22,11 @@ export const HeaderMenu = () => {
 
   return (
     <div className="py-6 h-[205px] z-10 w-full fixed top-[66px] left-0 flex items-center bg-[var(--background-submenu)]">
-      <div className="w-[160px]"></div>
-      <div className="basis-[104px] self-start flex justify-center">
+      <div className="w-[158px]"></div>
+      <div className="basis-[116px] shrink-0 self-start flex justify-center">
         <MenuItem menuText={'Telegrama'} className="" onClick={onClickToTelegram} />
       </div>
-      <div className="flex flex-col basis-[120px] justify-between self-start">
+      <div className="basis-[116px] shrink-0 flex flex-col justify-between self-start">
         <MenuItem menuText={'Check-in'} onClick={onClickToCheckInDaily}/>
         <MenuItem menuText={<div className="">Primeiro depósito<span className="ml-1 text-[var(--state-error-main)]">+20%</span></div>} onClick={onClickToFirstDeposit}/>
         <MenuItem menuText={<div className="">Recarregar Cashback<span className="ml-1 text-[var(--state-error-main)]">+10%</span></div>} onClick={onClickToDepositCashback}/>
