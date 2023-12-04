@@ -23,10 +23,10 @@ export const InitialChargePage = () => {
     <div className={"px-4 md:px-10"}>
       <BackNavigation
         onClick={() => onClickToIndex()}
-        title={<div className={"w-full text-center md:text-left ml-2"}>Primeira recarga</div>}
+        title={isMobile && <div className={"w-full font-bold text-center"}>Primeira recarga</div>}
       />
       <Banner
-        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`}
+        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6 md:mt-0`}
         src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_20.png`}
         bannerText={
           <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>

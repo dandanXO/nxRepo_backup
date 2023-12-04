@@ -1,4 +1,4 @@
-import { ChargeButton } from "../../../../components/Buttons/ChargeButton"
+import { ChargeButton } from "../../../../components/Buttons/env/coco/ChargeButton"
 import useBreakpoint from "../../../../hooks/useBreakpoint"
 import { usePageNavigate } from "../../../../hooks/usePageNavigate"
 
@@ -12,13 +12,13 @@ export const InitialChargeContent = () => {
   const RechargeButton = () => {
     return (
       <section className={"flex justify-center items-center "}>
-        <ChargeButton onClick={onClickToWallet} className={"text-white text-xl md:text-lg mb-4 md:my-8"}>Recarrague agora</ChargeButton>
+        <ChargeButton onClick={onClickToWallet} className={"text-white text-xl md:text-lg mt-3 mb-4 md:my-8"}>Recarrague agora</ChargeButton>
       </section>
     )
   }
 
   return (
-    <section className={"px-2 sm:px-0"}>
+    <section className={""}>
       <div className="md:px-8 text-white my-4 md:my-8">
         <div className="text-2xl font-bold mb-4">Primeira recarga</div>
         <BenefitSection className="mb-3 md:mb-1" />

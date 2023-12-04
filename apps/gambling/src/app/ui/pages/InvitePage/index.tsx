@@ -12,6 +12,8 @@ import {Container} from "../../components/container/Container";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import cx from "classnames";
+import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
+import { usePageNavigate } from "../../hooks/usePageNavigate";
 
 // const InviteCommmonButton = styled.div`
 //   color: #fff;
@@ -32,6 +34,7 @@ export const QuestionContainer = styled.div`
 
 export const InvitePage = () => {
   useAllowLoginRouterRules();
+  const { onClickToIndex } = usePageNavigate();
 
   const [panelMode, setPanelMode] = useState<"howto" | "daily" >("howto");
   const {isMobile} = useBreakpoint();
@@ -74,7 +77,15 @@ export const InvitePage = () => {
 
   return (
     <>
-      <Container>
+      <Container className="pt-7 md:pt-0">
+        {
+          !isMobile && (
+            <BackNavigation
+              className={'md:pb-2'}
+              onClick={onClickToIndex}
+            />
+          )
+        }
         <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
           <div>
             <Tabs className={"game-type-tab-list"}>

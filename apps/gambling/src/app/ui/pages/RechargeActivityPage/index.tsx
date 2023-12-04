@@ -43,10 +43,10 @@ export const RechargeActivityPage = () => {
     <div className={"px-4 md:px-10 w-full"}>
       <BackNavigation
         onClick={() => onClickToIndex()}
-        title={<div className={"w-full text-center md:text-left md:ml-2"}>Recarga benefícios</div>}
+        title={isMobile && <div className={"w-full text-center font-bold"}>Recarga benefícios</div>}
       />
       <Banner
-        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`}
+        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6 md:mt-0`}
         src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_10.png`}
         bannerText={
           <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
