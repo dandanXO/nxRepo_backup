@@ -15,7 +15,6 @@ import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
 import { TShowToolboxConfig } from "../../index";
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
-import {tcx} from "../../../utils/tcx";
 import {LoadingBar} from "../../../components/LoadingBar";
 
 type IStyledPage = {
@@ -213,17 +212,6 @@ export const PageTemplate = ({
           />
         )}
 
-
-        {isUILoading && (
-          <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-[var(--unknown)] flex flex-col justify-center items-center"}>
-            <div className={"mb-4"}>
-              <LoadingLogo/>
-            </div>
-            {/*<ThreeDots height={25} className={'inline-block'} />*/}
-            <LoadingBar/>
-          </div>
-        )}
-
         {/*Login*/}
         {isShowLoginModal && (
           <UserLoginStatusModal
@@ -234,6 +222,16 @@ export const PageTemplate = ({
             }}
             setIsLogin={(login: boolean) => setIsLogin(login)}
           />
+        )}
+
+        {isUILoading && (
+          <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-[var(--unknown)] flex flex-col justify-center items-center"}>
+            <div className={"mb-4"}>
+              <LoadingLogo/>
+            </div>
+            {/*<ThreeDots height={25} className={'inline-block'} />*/}
+            <LoadingBar/>
+          </div>
         )}
 
       </StyledPage>

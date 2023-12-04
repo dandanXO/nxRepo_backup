@@ -84,7 +84,8 @@ export const Header = (props: IHeader) => {
 
       <div className='flex'>
         {
-          hover && (
+          hover &&
+          (
             <div
               onMouseOver={() => { setHover(true) }}
               onMouseOut={() => { setHover(false) }}

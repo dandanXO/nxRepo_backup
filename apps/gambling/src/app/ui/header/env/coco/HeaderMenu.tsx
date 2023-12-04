@@ -22,8 +22,8 @@ export const HeaderMenu = () => {
 
   return (
     <div className="py-6 h-[205px] z-10 w-full fixed top-[66px] left-0 flex items-center bg-[var(--background-submenu)]">
-      <div className="w-[110px]"></div>
-      <div className=" basis-[120px] self-start flex justify-center">
+      <div className="w-[160px]"></div>
+      <div className="basis-[104px] self-start flex justify-center">
         <MenuItem menuText={'Telegrama'} className="" onClick={onClickToTelegram} />
       </div>
       <div className="flex flex-col basis-[120px] justify-between self-start">
