@@ -30,8 +30,8 @@ import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
-import { DepositAdvertisementModal } from "../modals/DepositAdvertisementModal";
-import { MaintenanceModal } from "../modals/MaintenanceModal";
+import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
+import {MaintenanceModal} from "../modals/MaintenanceModal";
 
 
 console.log("[APP] environment", environment);
@@ -231,6 +231,45 @@ export const PageTemplate = (props: IPage) => {
   const onClickToOpenTelegramGroup = () => {
     window.open(telegramGroupUrl,'_blank')
   }
+
+  // NOTE: 登入後，沒有儲值過則 25秒彈跳一次，最多三次。
+  const [startInterval, setStartInterval] = useState(false);
+  const [timesOfShowDepositModal, setTimesOfShowDepositModal] = useState(0);
+  useEffect(() => {
+    let timer: any;
+    if(!isLogin) return;
+    if(!startInterval) {
+      setStartInterval(startInterval => {
+        if(!startInterval) {
+          const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "");
+          const recharge_amount = userInfo?.recharge_amount;
+          if(recharge_amount === 0) {
+            timer = setInterval(() => {
+              setTimesOfShowDepositModal((timesOfShowDepositModal) => {
+                if(isShowDepositModal) return timesOfShowDepositModal ;
+                if(timesOfShowDepositModal >= 3) {
+                  clearTimeout(timer);
+                  return timesOfShowDepositModal;
+                } else {
+                  if(!isShowDepositModal) {
+                    dispatch(appSlice.actions.setShowDepositModal(true))
+                  }
+                  return timesOfShowDepositModal + 1
+                }
+              });
+            }, 25000)
+          }
+          return true
+        } else {
+          return false;
+        }
+      });
+    }
+    return () => {
+      window.clearInterval(timer);
+    };
+
+  }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal])
 
   return (
     <>
