@@ -32,7 +32,7 @@ export const AppCarouselContent3 = (props: IAppCarouselContent) => {
           </p>
           <img
             className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/h5_banner_3.png`}
+            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_3.png`}
           />
         </div>
       ) : (
@@ -48,7 +48,7 @@ export const AppCarouselContent3 = (props: IAppCarouselContent) => {
           </Container>
           <img
             className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/banner_3.png`}
+            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_3.png`}
           />
         </div>
       )}

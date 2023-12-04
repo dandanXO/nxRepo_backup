@@ -105,7 +105,7 @@ export const Header = (props: IHeader) => {
             className={"px-8 py-2 -mr-1 bg-gradient-to-r from-[rgba(163,16,16,1)] via-[rgba(211,20,20,0.5) to-[rgba(0,39,115,0)] cursor-pointer flex row justify-center items-center"}
             onClick={() => onClickToIndex()}
           >
-            <img className="max-w-[56px] max-h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
+            <img className="max-w-[56px] max-h-[56px]" alt={"logo"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/LOGO.png`} />
           </div>
           <HeaderButton>
             <HeaderButtonText onClick={onClickToIndex}>Jogos</HeaderButtonText>
