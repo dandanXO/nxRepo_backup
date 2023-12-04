@@ -10,6 +10,6 @@ export const ChargeButton = styled.button`
   align-items: center;
   color: var(--white);
   padding: 14px 48px;
-  font-weight: bold;
+  font-weight: medium;
 `
 

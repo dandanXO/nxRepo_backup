@@ -21,15 +21,15 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
-  background: linear-gradient(270deg,#00A9E7 0%,#007DD3 100%);
-  box-shadow: inset 0 0 10px rgba(255,255,255,.5);
-  border-radius: 10px;
-  width: 300px;
-  height: 60px;
+  background: linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%); 
+  border-radius: 8px;
+  /* width: 300px; */
+  /* height: 60px; */
+  padding: 14px 96px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 60px auto 40px;
+  margin: 32px auto 64px;
 `
 
 const ListItem = (props: { count: string; text: string; }) => {
@@ -137,8 +137,8 @@ export const TelegramPage = () => {
         <GoToTelegram onClick={() => {
           window.open(telegramUrl, '_blank')
           // navigate(PageOrModalPathEnum.WalletPage);
-        }} className={"text-white text-lg"}>
-          <img className={"w-[30px] h-[26px] mr-4"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA6CAMAAAAz+392AAAApVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+4/eNVAAAANnRSTlMA+gbpCsZVHhrjwJyFKhT38YoO7diwpndoS0VA27qsln8u9LShdHBsYVs7NiPS0MqQUDLevNQ7eFNdAAACGElEQVRIx63W13KrQBAE0AEUSMoJlHOWLdm+/f+fdmURDOwuIyyfR1FQYnqrGXpFdW6XNy/cr99WGu4G9Eu1loHAmH6jtLcRa1BxH7MmEgwqqL17Q5pNhYz6DWS1CtxvDsaQqDwdod/TIFWlp5xdCwrGUxEevpDSaJ16iKyItbh2kFau0enntzkXofeOjKZHNEwcDJ/yHNdLZPVMokoy2Top1TddCKzvBD0kfJLKcCqLcNa+X5ojqa+qAWmE3SPdzZAiqwu9MoGM5urfV/tIG+XUgJjkXSn7eK2UrYEy5Jq7YMRCxBdKOjlx2mKSwYzEjJxEhNsLVIxK+JKSIXtxhEENyDn18KB1IPoIJrD9hFo3Grm/hKihP/7eGGqaG038oElzelz7B7XygkJbSF0fF7uAOsmIC7lDMGfVWVj9NJoDhXNUKu5FkWSg1INCJ9mNg7KQZKRtQ2WSqXhvEg99PEocujcouWLNHabLMMnYOS/zm7StfedrkSxfCzlM4o06yGER79ZAnimx9hpy8fvNAIwhu4uB02aXGTC6xBmCsSZOBYwdcTwwTi8HounEaTGPeCeWE3dPRXrMZ8SaItDTqSprtj2xwqaZPr7GkreqESuomn44NN/IljPxrPTxMe3ie/Py8dVNcIvuzbo49KFRbG82gavwm11obzbXPonmGrc380aGsOkVVg/WrSO9YmtB29CLqm36W/8BYjhU0q0V+48AAAAASUVORK5CYII="} />
+        }} className={"text-white text-lg "}>
+          <img className={"w-[30px] mr-4"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />
           Junte-se</GoToTelegram>
       </section>
     </div>

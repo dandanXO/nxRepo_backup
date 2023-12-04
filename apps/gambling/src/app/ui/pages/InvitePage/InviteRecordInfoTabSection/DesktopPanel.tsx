@@ -51,7 +51,7 @@ export const DesktopPanel = ({
     <QuestionContainer>
       <DesktopColorfulBoard data={totalRewardData} />
       <section>
-        <div className={"text-left text-white text-lg mb-2"}>Dados totals</div>
+        <div className={"text-left text-white text-lg mb-2 font-bold"}>Dados totals</div>
 
         <div className={"flex flex-row justify-between items-center"}>
 
@@ -83,7 +83,7 @@ export const DesktopPanel = ({
       </section>
 
       <section>
-        <div className={"text-left text-white text-lg mb-2"}>Dados diários</div>
+        <div className={"text-left text-white text-lg mb-2 font-bold"}>Dados diários</div>
 
         <div className={"flex flex-row justify-between items-center"}>
 
