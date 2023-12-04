@@ -95,7 +95,7 @@ export const Header = (props: IHeader) => {
           )
         }
 
-        <div className={"flex  flex-row min-w-[680px] max-h-[67px] -mb-[1px]"}
+        <div className={"flex  flex-row min-w-[738px] max-h-[67px] -mb-[1px]"}
           onMouseOver={() => {
             setHover(true);
           }}
