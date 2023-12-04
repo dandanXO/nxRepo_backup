@@ -306,7 +306,10 @@ const CocoDailySignInPage = ({
       <BackGround>
         {contextHolder}
 
-        <BackNavigation onClick={() => onClickToIndex()}/>
+        <div className='px-24'>
+          <BackNavigation onClick={() => onClickToIndex()} />
+        </div>
+       
 
         <div className='px-24 flex flex-col items-end'>
           <Container className='relative

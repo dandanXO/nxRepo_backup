@@ -17,6 +17,7 @@ import {TelegramButton} from "../../components/Buttons/TelegramButton";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
@@ -44,6 +45,7 @@ export const TelegramPage = () => {
   useAllowLoginRouterRules();
 
   const navigate = useNavigate();
+  const { isMobile } = useBreakpoint();
 
   const telegramId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
   const userInfoString = AppLocalStorage.getItem(AppLocalStorageKey.userInfo);
@@ -78,7 +80,7 @@ export const TelegramPage = () => {
 
       <BackNavigation
         onClick={() => onClickToIndex()}
-        title={<div className={"w-full text-center md:text-left"}>Retornar</div>}
+        title={isMobile && <div className={"w-full text-center font-bold"}>Canal De Telegram</div>}
       />
       {/*<section className={"rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
       {/*  <img className="w-full" src={`assets/${environment.assetPrefix}/bg.761d8ab4.png`}/>*/}
@@ -97,7 +99,7 @@ export const TelegramPage = () => {
         </div>
       </section> */}
 
-      <Banner imgClassName={`rounded-lg mb-4 md:mb-8`} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_telegram.png`} bannerText={
+      <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-3 md:mt-0`} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_telegram.png`} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
           <div className={"text-white text-base sm:text-3xl md:text-4xl  lg:text-5xl font-bold lg:mb-2"}>Sample wordingptas y</div>
           <div className={"text-white text-base sm:text-3xl md:text-4xl lg:text-5xl font-bold"}>reconoces que has leído la .</div>

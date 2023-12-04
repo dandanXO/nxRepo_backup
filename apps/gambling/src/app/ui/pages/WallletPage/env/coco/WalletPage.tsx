@@ -33,7 +33,7 @@ export const WalletPage = (props: IWalletPage) => {
         <TotalSectionContainer />
 
         <div id={"tab-item"}>
-          <Tabs className={"game-type-tab-list flex font-bold mt-3 mb-[18px] md:my-8  justify-center items-center"}>
+          <Tabs className={"game-type-tab-list flex font-bold md:font-normal mt-3 mb-[18px] md:my-8  justify-center items-center"}>
             <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} active={props.panelMode === "deposit"} onClick={() => {props.setPanelMode("deposit")}}>Depósito</CommonTableTabG>
             <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} active={props.panelMode === "withdraw"} onClick={() => {props.setPanelMode("withdraw")}} >Retirar</CommonTableTabG>
             <CommonTableTabG className={cx("px-4 md:px-[80px] flex-1 md:flex-none")} active={props.panelMode === "record"} onClick={() => {props.setPanelMode("record")}} >Registro</CommonTableTabG>

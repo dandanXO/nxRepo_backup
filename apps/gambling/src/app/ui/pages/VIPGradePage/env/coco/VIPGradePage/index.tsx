@@ -62,7 +62,7 @@ const Coco777betVIPGradePage = ({
       }
 
       <section>
-        <div className={tcx('text-start text-4xl py-6 font-bold text-[var(--primary-assistant)]', ['text-lg py-2', isMobile])}>Meu progresso VIP</div>
+        <div className={tcx('text-start text-4xl pb-6 font-bold text-[var(--primary-assistant)]', ['text-lg pb-2 pt-5', isMobile])}>Meu progresso VIP</div>
         <CurrentLevelInfoCard userVIPInfo={userVIPInfo} currentLevel={currentLevel} />
       </section>
 

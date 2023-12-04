@@ -8,7 +8,7 @@ import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
 
 export const HowToImageContainer = styled.div`
   position: relative;
-  min-height: 380px;
+  /* min-height: 380px; */
   color: var(--white);
   overflow: hidden;
   display: flex;
@@ -46,8 +46,6 @@ export const HowToImage = (props: any) => {
           <img className={"w-[400px]"} src={`assets/${environment.assetPrefix}/pic_social_media_logo.png`} />
         </div>
       </div>
-
-      {!isMobile && <div className={`text-4xl font-bold text-white my-8 w-full`}>Instruções diárias de recompensa de comissão</div>}
     </HowToImageContainer>
   )
 

@@ -290,7 +290,7 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.WalletDepositNextPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false}>
+            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false} >
               <WalletDepositNextPage/>
             </PageTemplate>
           )}/>

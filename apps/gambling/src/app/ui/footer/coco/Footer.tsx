@@ -152,7 +152,7 @@ export const Footer = (props: IFooter) => {
             </section>
           </div>
         </div>
-      ): isShowDesktopFooter ? (
+      ): (!isMobile && isShowDesktopFooter) ? (
         <div className='bg-[var(--background-footer)] text-white flex justify-center pt-8'>
           {/*h-[400px]*/}
           <div className={"flex gap-3 w-11/12 mt-3"}>

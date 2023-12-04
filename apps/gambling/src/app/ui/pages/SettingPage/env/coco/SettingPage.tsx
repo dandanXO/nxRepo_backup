@@ -37,10 +37,10 @@ export const SettingPage = ({
   const { isMobile } = useBreakpoint();
 
   return (
-    <Container>
+    <Container className=''>
       {contextHolder}
       <BackNavigation
-        className={tcx('pl-0 pt-1 pb-4', ['pt-3 pb-9', isMobile])}
+        className={''}
         onClick={() => {
           if (isMobile) {
             navigate(PageOrModalPathEnum.MyPage);
@@ -51,7 +51,7 @@ export const SettingPage = ({
         title={isMobile?(<div className='absolute left-0 w-full text-center font-bold text-lg'>Configuração</div>): undefined}
       />
 
-      <List className={"bg-[var(--primary-variant)] mt-0"}>
+      <List className={"bg-[var(--primary-variant)] mt-6 md:mt-0"}>
         <ListItem title={
           <div className={"w-full flex flex-row justify-between items-center"}>
             <div className={"flex flex-row justify-center items-center gap-[10px]"}>

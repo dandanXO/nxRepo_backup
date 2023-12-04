@@ -280,7 +280,7 @@ export const PageTemplate = (props: IPage) => {
             contextHolder={contextHolder}
             isMobile={isMobile}
             isShowMobileFooter={isShowMobileFooter}
-            isShowDesktopFooter={isShowMobileFooter}
+            isShowDesktopFooter={isShowDesktopFooter}
             isShowDesktopHeader={isShowDesktopHeader}
             isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
             isLogin={isLogin}
