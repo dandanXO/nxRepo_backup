@@ -156,7 +156,7 @@ export const WalletDepositNextPage = () => {
               <ShadowContainer className={`${shadowContainerStyle} flex-col items-center h-full`}>
                 <div className={"text-white text-center font-bold w-full rounded-xl text-4xl py-4 text-[var(--secondary-assistant)]"}>R${amount}</div>
                 <div className="h-full flex justify-center items-center">
-                  <QRCode className={cx("w-[80%] min-w-[100px] max-w-[280px] mb-5",)} value={String(data?.data?.channelData?.paymentLink || '')} />
+                  <QRCode className={cx("w-full min-w-[100px] max-w-[280px] mb-5",)} value={String(data?.data?.channelData?.paymentLink || '')} />
                 </div>
               </ShadowContainer>
             </section>

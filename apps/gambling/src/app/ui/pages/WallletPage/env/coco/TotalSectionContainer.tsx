@@ -102,9 +102,9 @@ export const TotalSectionContainer = () => {
   return (
     <StyledTotalSectionContainer className={"flex flex-col text-white relative"}>
 
-      <TotalSectionTopContent className={"flex-1 flex flex-col p-3.5 md:p-6 md:flex-row justify-around items-center font-bold w-full relative"}>
+      <TotalSectionTopContent className={"flex-1 flex flex-col p-3.5 md:p-6 md:flex-row justify-around items-center w-full relative"}>
         <div className={cx("w-full flex-1 flex flex-row items-center md:justify-center mb-3")}>
-          <div className={cx("text-left text-xs md:text-3xl font-normal", {
+          <div className={cx("text-left text-xs md:text-3xl md:font-bold", {
           })}>Total Da Conta</div>
           <section
             className={cx(
@@ -119,17 +119,12 @@ export const TotalSectionContainer = () => {
         <div className={"w-full flex-[2] flex flex-row "}>
           <div className={"flex-1 flex flex-col justify-center items-center"}>
             <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
-            <div className={cx("flex flex-col text-sm md:text-xl mt-3 md:mt-4", {
-              'text-white font-normal': isMobile,
-
-            })}>Balanço Total</div>
+            <div className={cx("flex flex-col text-sm md:text-xl mt-3 md:mt-4 text-white font-noraml")}>Balanço Total</div>
           </div>
 
           <div className={"flex-1 flex flex-col justify-center items-center"}>
             <div className={"flex flex-col text-xl md:text-3xl font-[Heebo] font-bold"}>R$ {formatLocaleMoney(totalReasableValue)}</div>
-            <div className={cx("flex flex-col text-sm md:text-xl  mt-3 md:mt-4", {
-              'text-white font-normal': isMobile
-            })}>Retirável Total</div>
+            <div className={cx("flex flex-col text-sm md:text-xl  mt-3 md:mt-4  text-white font-noraml")}>Retirável Total</div>
           </div>
         </div>
       </TotalSectionTopContent>

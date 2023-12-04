@@ -15,7 +15,6 @@ export const ImageTab = styled.div<{
   border-radius: 8px;
   margin-right: 8px;
   //padding: 0 10px;
-  font-weight: normal;
 
   ${props => {
     if (!props.active) {
