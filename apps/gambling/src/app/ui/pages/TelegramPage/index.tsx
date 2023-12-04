@@ -14,6 +14,9 @@ import { FragmentContainer } from "../../components/FragmentContainer";
 import cx from 'classnames';
 import { Banner } from "../../components/Banner";
 import {TelegramButton} from "../../components/Buttons/TelegramButton";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {appSlice} from "../../../reduxStore/appSlice";
 import useBreakpoint from "../../hooks/useBreakpoint";
 
 const GoToTelegram = styled.div`
@@ -58,6 +61,19 @@ export const TelegramPage = () => {
   }, VIPBorderStyleContainer);
 
   const isCoco777bet = environment.assetPrefix === 'coco777bet';
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(appSlice.actions.setShowTelegramModal(true))
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    }
+  }, []);
+
   return (
 
     <div className={"px-4 sm:px-10 w-full"}>

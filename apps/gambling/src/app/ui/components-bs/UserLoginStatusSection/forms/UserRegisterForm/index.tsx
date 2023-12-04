@@ -235,7 +235,6 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           if(url && token) connect(url, token);
 
           dispatch(appSlice.actions.setIsLogin(true));
-          dispatch(appSlice.actions.setShowTelegramModal(true))
           dispatch(appSlice.actions.setShowDepositModal(true))
           dispatch(appSlice.actions.setIsShowInviteBonusModal(true));
 
@@ -347,8 +346,8 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           className={"text-white font-thin text-md"}
           // style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}
         >
-          <span className={"text-[var(--text-tertiary)] font-medium mr-1 my-2 text-sm md:text-base"} onClick={toggleCheck} >Eu concordo</span>
-          <span className={"text-[var(--white)] font-medium underline break-all text-base"} onClick={() => {
+          <span className={"text-[var(--text-tertiary)] font-medium mr-1 my-2 text-sm"} onClick={toggleCheck} >Eu concordo</span>
+          <span className={"text-[var(--white)] font-medium underline break-all text-sm"} onClick={() => {
             onClickToPrivacyAgreement();
           }}>Condições e condições, política de privacidade</span>
         </a>
