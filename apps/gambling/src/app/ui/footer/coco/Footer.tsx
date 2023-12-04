@@ -6,7 +6,8 @@ import React, {useState} from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
-import {Logo} from "./Logo"
+import {LoadingLogo} from "../../components/Logos/LoadingLogo"
+import {FooterLogo} from "../../components/Logos/FooterLogo";
 
 export type IFooter = {
   // showFooter?: boolean;
@@ -176,7 +177,7 @@ export const Footer = (props: IFooter) => {
 
               <section className={"w-8/12 mt-3"}>
                 <div className={"flex gap-3 items-center mb-2"}>
-                  <Logo/>
+                  <FooterLogo/>
                   <span className="text-lg">{environment.platformName}</span>
                 </div>
 

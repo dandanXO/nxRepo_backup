@@ -5,7 +5,8 @@ import {UserRegisterForm} from "./forms/UserRegisterForm";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import {UserForgetPasswordForm} from "./forms/UserForgetPasswordForm";
 import {environment} from "../../../../environments/environment";
-import {Logo} from "../../footer/coco/Logo";
+import {LoadingLogo} from "../../components/Logos/LoadingLogo";
+import {LoginModalLogo} from "../../components/Logos/LoginModalLogo";
 
 export type IUserLoginStatusSection = {
   // onClickToLogin: () => void;
@@ -80,7 +81,8 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
         <div className={""}>
           <section className={"flex flex-col justify-center items-center mb-4"}>
             <div className={"mb-2"}>
-              <Logo className={"w-[76px] h-[76px] rounded-[10px] border-solid border-white border-[2px]"}/>
+              {/*<Logo className={"w-[76px] h-[76px] rounded-[10px] border-solid border-white border-[2px]"}/>*/}
+              <LoginModalLogo/>
             </div>
             {/*{props.showPlatformLogo && (*/}
               <span className={"text-white text-sm"}>{environment.platformName}</span>
