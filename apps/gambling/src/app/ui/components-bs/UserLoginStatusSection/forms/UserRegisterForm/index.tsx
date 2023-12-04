@@ -235,7 +235,6 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
           if(url && token) connect(url, token);
 
           dispatch(appSlice.actions.setIsLogin(true));
-          dispatch(appSlice.actions.setShowTelegramModal(true))
           dispatch(appSlice.actions.setShowDepositModal(true))
           dispatch(appSlice.actions.setIsShowInviteBonusModal(true));
 
