@@ -12,7 +12,7 @@ export const WithdrawNoticeSection = (props: any) => {
   text-xs md:text-xl
   bg-[var(--primary-variant)] text-white rounded-lg  `
   return (
-    <div className={"p-2.5 bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}>
+    <div className={"p-2.5 md:py-8 md:px-6 rounded bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}>
       <div className="text-white font-bold text-base md:text-4xl mb-2 md:mb-6">Regras de Retirada</div>
       <section className={`${sectionStyle} md:flex`}>
         <div>
@@ -22,8 +22,8 @@ export const WithdrawNoticeSection = (props: any) => {
           <span className={"text-[var(--secondary-assistant)]"}> R${withdrawLimitMin}</span> e o valor máximo de saque é de
           <span className={"text-[var(--secondary-assistant)]"}> R${withdrawLimitMax}</span>.
         </div>
-        <div className="text-left m-2">
-          <button className="py-2 px-5 rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-xs md:text-base" onClick={onClickToVIP}>Cheque</button>
+        <div className="text-center m-2 mb-0">
+          <button className="py-2 px-8 md:px-14 rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-xs md:text-base" onClick={onClickToVIP}>Cheque</button>
         </div>
 
       </section>

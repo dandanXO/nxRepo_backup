@@ -224,7 +224,7 @@ export const DepositPanel = (props: IDepositPanel) => {
             maximunValue={props.data?.config && props.data?.config[props.data?.config.length - 1]  ? Number(props.data?.config && props.data?.config[props.data?.config.length - 1].amount_max) : 0}
           />
         )}
-        <div className={tcx("flex flex-1 m-auto flex-row flex-wrap w-full justify-start items-stretch", [`mb-20 `, !isMobile])}>
+        <div className={tcx("flex flex-1 -ml-1 -mr-1 flex-row flex-wrap basis-[100%] justify-start items-stretch", [`mb-20 `, !isMobile])}>
           {recharge_options?.map((rechargeValue, index) => {
             const config = getConfig(rechargeValue);
             const isShowRate = Number(config?.rate) > 0 || (Number(rechargeValue) * Number(config?.rate)).toFixed(2) > config?.amount_min;
