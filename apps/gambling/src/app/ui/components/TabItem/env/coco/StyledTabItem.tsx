@@ -99,7 +99,7 @@ export const StyledTabItem = (props: ITabItem) => {
       background={props.background}
       activeBackground={props.activeBackground}
     >
-      <div className={"flex flex-row"}>
+      <div className={"flex flex-row items-center"}>
         {props.mode === "howto" ? (
           // <img alt={"howto"} className={"w-[20px] h-[20px] pr-2"} src={props.active ? howToActiveImg : howToInactiveImg}/>
           <img alt={"howto"} className={"h-[20px] pr-2"} src={props.active ? howToActiveImg : howToInactiveImg} />

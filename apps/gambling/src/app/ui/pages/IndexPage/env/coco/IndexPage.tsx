@@ -155,7 +155,7 @@ export const IndexPage = ({
             {
               "bg-[var(--primary-variant)] z-20": isMobile,
               // "sticky top-[52.5px] left-0 right-0": isMobile,
-              "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
+              "fixed top-[52px] left-0 right-0": showFixForIOSStickTab && isMobile,
             },
             {
               "bg-[var(--background-primary)]" : !isMobile

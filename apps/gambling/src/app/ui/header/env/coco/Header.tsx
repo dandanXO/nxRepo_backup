@@ -36,7 +36,7 @@ export type IHeader = {
 }
 
 const HeaderButton = styled.button.attrs((props) => ({
-  className: cx("font-bold", props.className),
+  className: cx("", props.className),
 })) <{
   className?: string;
 }>`
