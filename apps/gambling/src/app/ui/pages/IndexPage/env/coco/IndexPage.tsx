@@ -163,7 +163,7 @@ export const IndexPage = ({
           )}
         >
           <div className={""}>
-            <div className={"whitespace-nowrap"}>
+            <div className={"whitespace-nowrap px-4"}>
               <DragScrollContainer className="flex flex-row items-center">
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
                 <IndexTabs

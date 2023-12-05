@@ -41,7 +41,7 @@ export const IndexTabs = ({
   const {isMobile} = useBreakpoint();
   return (
       <Tabs className={cx("game-type-tab-list", {
-        "pl-4": isMobile
+        // "pl-4": isMobile
       })}>
         {
           // ["Todos", ...label, 'Favoritos']
