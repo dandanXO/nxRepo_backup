@@ -7,6 +7,10 @@ import {ToolButton as PToolButton} from "../components/Buttons/env/pernambucana/
 import {ToolButton as WToolButton} from "../components/Buttons/env/wild/ToolButton"
 import {ToolButton as CToolButton} from "../components/Buttons/env/coco/ToolButton"
 import { TShowToolboxConfig } from "../pageTemplate";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../reduxStore";
+import { TelegramMobileModal } from "../modals/TelegramMobileModal";
+import { appSlice } from "../../reduxStore/appSlice";
 
 
 const defaultFixedToolStyle = {
@@ -60,9 +64,22 @@ export const Toolbox = (props: IToolbox) => {
   const desktopShowManage = showToolboxConfig === undefined || (typeof showToolboxConfig !== 'boolean' && (showToolboxConfig.desktop === undefined || (typeof showToolboxConfig.desktop !=='boolean' && showToolboxConfig.desktop.manager !==false)))
 
   const {isMobile} = useBreakpoint();
+  const dispatch=useDispatch();
+  const {isShowTelegramMobileModal} = useSelector((state: RootState) => state.app);
 
   return (
     <>
+      {
+        isShowTelegramMobileModal && (
+          <TelegramMobileModal
+            onClickToOpenTelegramService={props.onClickToOpenTelegramService}
+            onClickToOpenTelegramManager={props.onClickToOpenTelegramManager}
+            onClose={() => {
+              dispatch(appSlice.actions.setShowTelegramMobileModal(false))
+            }}
+          />
+        )
+      }
       {
         isMobile && mobileShowToolbox && (mobileShowDownload || mobileShowCustomerService) && (
           <div className={"z-10 fixed right-[16px] bottom-[68px]"}>
@@ -76,8 +93,10 @@ export const Toolbox = (props: IToolbox) => {
             {
               mobileShowCustomerService && (
                 <div>
-                  <ToolButton isMobile={isMobile} className={""} onClick={props.onClickToOpenTelegramService}>
-                    <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/customer-service-2.png`}/>
+                  <ToolButton isMobile={isMobile} className={""} onClick={() => {
+                    dispatch(appSlice.actions.setShowTelegramMobileModal(true))
+                  }}>
+                    <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/customer-service-2.png`} />
                   </ToolButton>
                 </div>
               )
