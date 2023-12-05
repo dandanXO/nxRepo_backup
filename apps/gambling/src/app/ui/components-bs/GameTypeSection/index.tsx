@@ -137,12 +137,12 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       </MainGameList>
 
       {(props.data && listSize < props.data?.length) && props.expandedBrand &&
-        <div className="flex-1 mt-10 justify-center flex">
+        <div className="flex-1 mt-20 justify-center flex">
           <button
             onClick={loadMore}
-            className="text-[var(--primary-assistant)] bg-gradient-to-b from-[var(--btn-gradient1-from)] to-[var(--btn-gradient1-to)] py-1.5 px-6 rounded-2xl font-bold"
+            className="text-white bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)] py-2 px-4 rounded-[32px] font-medium"
           >
-            Ver mais
+            Ver Mais
           </button>
         </div>
       }
