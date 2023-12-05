@@ -7,7 +7,7 @@ import {
 const CollectOverdueCollectDetailApi = API.injectEndpoints({
     overrideExisting: false,
     endpoints: (builder) => ({
-        // [GET] 當日催收明細
+        // [GET] 逾期催收明細
         getCollectOverdueCollectDetail: builder.query<
             GetCollectOverdueCollectDetailResponse,
             GetCollectOverdueCollectDetailQueryString

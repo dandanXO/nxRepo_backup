@@ -11,8 +11,8 @@ import useGetMerchantEnum from '../../../shared/hooks/common/useGetMerchantEnum'
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import {
     useGetCollectOverDueCollectorListQuery,
-    useGetCollectOverdueCollectTeamListQuery
-} from "../../api/CollectOverDueApi";
+    useGetCollectOverdueCollectTeamListQuery,
+} from '../../api/CollectOverDueApi';
 import { useLazyGetCollectOverdueCollectDetailQuery } from '../../api/CollectOverdueCollectDetailApi';
 import { GetCollectOverdueCollectDetail } from '../../api/types/getCollectOverdueCollectDetail';
 import CollectorLoginLogsModal from './CollectorLoginLogsModal';
@@ -163,6 +163,12 @@ const ReportTable = (): JSX.Element => {
         {
             title: t('urgeCollection:followUpTimes'),
             dataIndex: 'followUpTimes',
+            hideInSearch: true,
+            width: 100,
+        },
+        {
+            title: t('urgeCollection:numberOfOrderCount'),
+            dataIndex: 'numberOfOrderCount',
             hideInSearch: true,
             width: 100,
         },
@@ -412,36 +418,37 @@ const ReportTable = (): JSX.Element => {
                                 <Cell index={7}>{currentData?.statistics?.numberOfFollowUps}</Cell>
                             )}
                             {columnStateMap.followUpTimes.show && <Cell index={8} />}
-                            {columnStateMap.coverageRate.show && <Cell index={9} />}
+                            {columnStateMap.numberOfOrderCount.show && <Cell index={9} />}
+                            {columnStateMap.coverageRate.show && <Cell index={10} />}
                             {columnStateMap.fullRepaymentOrders.show && (
-                                <Cell index={10}>{currentData?.statistics?.fullRepaymentOrders}</Cell>
+                                <Cell index={11}>{currentData?.statistics?.fullRepaymentOrders}</Cell>
                             )}
                             {columnStateMap.numberOfExtensionOrders.show && (
-                                <Cell index={11}>{currentData?.statistics?.numberOfExtensionOrders}</Cell>
+                                <Cell index={12}>{currentData?.statistics?.numberOfExtensionOrders}</Cell>
                             )}
                             {columnStateMap.extensionRate.show && (
-                                <Cell index={12}>{currentData?.statistics?.extensionRate}</Cell>
+                                <Cell index={13}>{currentData?.statistics?.extensionRate}</Cell>
                             )}
                             {columnStateMap.totalNumberOfRepaymentsReceived.show && (
-                                <Cell index={13}>{currentData?.statistics?.totalNumberOfRepaymentsReceived}</Cell>
+                                <Cell index={14}>{currentData?.statistics?.totalNumberOfRepaymentsReceived}</Cell>
                             )}
                             {columnStateMap.orderPaymentRate.show && (
-                                <Cell index={14}>{currentData?.statistics?.orderPaymentRate}</Cell>
+                                <Cell index={15}>{currentData?.statistics?.orderPaymentRate}</Cell>
                             )}
                             {columnStateMap.receiptAmount.show && (
-                                <Cell index={15}>{currentData?.statistics?.receiptAmount?.toLocaleString()}</Cell>
+                                <Cell index={16}>{currentData?.statistics?.receiptAmount?.toLocaleString()}</Cell>
                             )}
                             {columnStateMap.followUpAmount.show && (
-                                <Cell index={16}>{currentData?.statistics?.followUpAmount?.toLocaleString()}</Cell>
+                                <Cell index={17}>{currentData?.statistics?.followUpAmount?.toLocaleString()}</Cell>
                             )}
                             {columnStateMap.paymentAmountRatio.show && (
-                                <Cell index={17}>{currentData?.statistics?.paymentAmountRatio}</Cell>
+                                <Cell index={18}>{currentData?.statistics?.paymentAmountRatio}</Cell>
                             )}
                             {columnStateMap.numberOfRepeatLoans.show && (
-                                <Cell index={18}>{currentData?.statistics?.numberOfRepeatLoans}</Cell>
+                                <Cell index={19}>{currentData?.statistics?.numberOfRepeatLoans}</Cell>
                             )}
                             {columnStateMap.numberOfRepeatLoansRate.show && (
-                                <Cell index={19}>{currentData?.statistics?.numberOfRepeatLoansRate}</Cell>
+                                <Cell index={20}>{currentData?.statistics?.numberOfRepeatLoansRate}</Cell>
                             )}
                         </Row>
                     </Summary>

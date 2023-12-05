@@ -32,6 +32,7 @@ export interface GetCollectOverdueCollectDetail {
     merchantName?: string; // 商戶名
     numberOfExtensionOrders?: number; // 展期筆數
     numberOfFollowUps?: number; // 跟進筆數
+    numberOfOrderCount?: number; // 催收案件筆數
     orderPaymentRate?: string; // 單數回收率
     paymentAmountRatio?: string; // 金額回收率
     receiptAmount?: number; // 回收金額

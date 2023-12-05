@@ -41,6 +41,7 @@
     "loginLogs": "Registros de inicio de sesión",
     "merchantName": "Nombre del comerciante",
     "numberOfFollowUps": "Número de seguimientos",
+    "numberOfOrderCount": "Todos los casos de cobro",
     "numberOfRepeatLoans": "Número de préstamos adicionales",
     "orderLabel": "Etiqueta del pedido",
     "orderLabelStatus": {
