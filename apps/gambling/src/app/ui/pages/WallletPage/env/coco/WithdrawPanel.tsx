@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
 import { ArrowRight } from '../../../../components/Icons/ArrowRight';
+import { formatLocaleMoney } from '../../../../utils/format';
 
 
 export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
@@ -49,8 +50,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               Atualmente <button className={"text-[#ffdd14]"}
                                  onClick={props.onClickToVIP}>VIP{props.vip_level}</button>, o valor mínimo de saque
               diário é de
-              <span className={"text-[#ffdd14]"}>R${props.withdrawLimitMin}</span> e o valor máximo de saque é de
-              <span className={"text-[#ffdd14]"}>R${props.withdrawLimitMax}</span>.
+              <span className={"text-[#ffdd14]"}> R${formatLocaleMoney(props.withdrawLimitMin)}</span> e o valor máximo de saque é de
+              <span className={"text-[#ffdd14]"}> R${formatLocaleMoney(props.withdrawLimitMax)}</span>.
             </div>
 
             <div className={cx(`text-white leading-none rounded-lg
