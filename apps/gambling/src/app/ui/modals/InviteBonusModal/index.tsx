@@ -78,8 +78,8 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
           </div>
 
           <div className={"flex flex-row justify-between items-center text-sm"}>
-            <EarnButton className={"text-sm font-bold"} onClick={()=>props.close()}>Ganhar dinheiro</EarnButton>
-            <InviteButton className={"text-sm font-bold"} onClick={() => props.onConfirm()}>Convide agora</InviteButton>
+            <EarnButton className={"text-sm font-bold"} onClick={()=>props.close()}>Ganhar Dinheiro</EarnButton>
+            <InviteButton className={"text-sm font-bold"} onClick={() => props.onConfirm()}>Convide Agora</InviteButton>
           </div>
 
         </div>
