@@ -101,14 +101,14 @@ export const DesktopGameItem = (props: IItem) => {
         )}
       >
         {!onLoad && (
-          <Skeleton className={"rounded-xl flex justify-center items-center w-full h-[calc(100%-20px)]"}>
+          <Skeleton className={"rounded-xl flex justify-center items-center w-full h-[calc(100%-20px)] !min-h-[150px]"}>
             <TailSpin/>
           </Skeleton>
         )}
         <img alt={"name"}
              className={cx(
                // NOTE: 20px title height
-               "w-full h-[calc(100%-20px)]",
+               "w-full h-[calc(100%-20px)] !min-h-[150px]",
                "rounded-xl hover:blur-[2px] hover:brightness-50 object-cover group-hover:blur-[2px] group-hover:brightness-50", {
                "hidden": !onLoad,
                // "invisible": !onLoad,
