@@ -11,10 +11,10 @@ type IProps = {
 
 export const BackNavigation = (props: IProps) => {
   return (
-    <div className={tcx("relative pl-3 pt-3 pb-3 text-xl text-left text-white", props.className)}>
+    <div className={tcx("relative pt-4 md:pt-5 pb-3 md:pb-6 text-xl text-left text-white", props.className)}>
       <div
         // className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
-        className={'mb-2 flex flex-row items-center justify-start'}
+        className={'flex flex-row items-center justify-start'}
       >
         <LeftOutlined className='relative z-10' onClick={() => props.onClick && props.onClick()}/>
         {props.title ? props.title : <div className={'ml-2'}>Retornar</div>}

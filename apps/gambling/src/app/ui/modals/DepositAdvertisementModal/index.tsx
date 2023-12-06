@@ -56,8 +56,8 @@ export const DepositAdvertisementModal = ({
 
       <Container
         className={tcx(
-          "w-[410px] w-min-[80vh] w-max-[400px] h-auto bg-[black] rounded-2xl flex flex-col items-center relative px-5 py-8",
-          ['w-[330px] px-3 py-4', isMobile]
+          "bg-[black] rounded-2xl flex flex-col items-center relative px-5 py-8",
+          "w-[90vw] max-w-[400px] h-auto",
         )}
         onClick={(event) => {
           event.stopPropagation();

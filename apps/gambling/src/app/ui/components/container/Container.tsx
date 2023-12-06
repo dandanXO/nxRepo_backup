@@ -13,7 +13,7 @@ export const Container = (props: IContainer) => {
   return (
     <div
       className={cx({
-        "px-3": isMobile,
+        "px-4": isMobile,
         "py-2": isMobile && isY,
         // "sm:px-2": !isMobile,
         // "sm:py-4": !isMobile && isY,

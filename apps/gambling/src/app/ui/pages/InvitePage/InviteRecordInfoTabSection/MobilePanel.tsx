@@ -53,7 +53,7 @@ export const MobilePanel = ({
         <div className={cx(" text-base text-left mb-1", {
           'text-[#4E91EF] font-bold': !isCoco777bet,
           'text-white': isCoco777bet
-        })}>Dados totais<span className={"text-sm"}> (Atualize a cada 30 minutos)</span></div>
+        })}><span className="font-bold mr-2">Dados totais</span><span className={"text-sm"}>(Atualize a cada 30 minutos)</span></div>
         <MobileCommonBlueTotalTable isProxy={isProxy} data={totalInviteData} type={mobileTotalPanelMode} onClick={(type) => setMobileTotalPanelMode(type as "1" | "2" | "3")} />
       </section>
 
@@ -61,7 +61,7 @@ export const MobilePanel = ({
         <div className={cx("  text-base text-left mb-1", {
           'text-[#EE9544] font-bold': !isCoco777bet,
           'text-white': isCoco777bet
-        })}>Dados diários<span className={"text-sm"}> (Atualize a cada 30 minutos)</span></div>
+        })}><span className="font-bold mr-2">Dados diários</span><span className={"text-sm"}>(Atualize a cada 30 minutos)</span></div>
         <MobileCommonOrangeDailyTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} recordDate={orangeRecordDate} onRecordDateSelect={onOrangeRecordDateSelect} />
       </section>
     </div>

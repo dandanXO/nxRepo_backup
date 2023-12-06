@@ -33,12 +33,14 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
     >
 
       <Container
-        className={""}
+        className={
+          "w-[90vw] max-w-[336px] sm:max-w-[80vw] md:max-w-[340px] h-auto"
+        }
         onClick={(event: any) => {
           event.stopPropagation();
         }}
       >
-        <div className={"flex flex-row justify-end mb-2 absolute right-[10px] top-[18px]"}>
+        <div className={"flex flex-row justify-end mb-2 absolute right-[10px] top-[10px]"}>
           <div
             onClick={() => {
               props.close();

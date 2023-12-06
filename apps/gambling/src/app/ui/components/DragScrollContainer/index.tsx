@@ -14,7 +14,7 @@ export const DragScrollContainer = (props: IDragScrollContainer) => {
   const [, api] = useSpring(() => ({
     from: { left: 0 },
     onChange(v: any) {
-      contentRef.current!.scroll({ left: v.value.left });
+      contentRef.current?.scroll({ left: v.value.left });
     }
   }));
 

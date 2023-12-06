@@ -103,22 +103,21 @@ export const WalletDepositNextPage = () => {
   const {onClickToWallet} = usePageNavigate();
 
   return (
-    <div className={"p-4 pb-12 pt-2 md:p-10 md:pt-0 w-full"}>
-      <div className={cx("", { "md:rounded-2xl md:py-5 md:px-14 ": !isMobile })}>
+      <div className={cx("px-4 pb-14 md:px-24")}>
         {contextHolder}
 
         <BackNavigation
-          title={(
-            <span className={cx("ml-2 text-white text-xl text-center md:text-left flex-1")}>{isMobile ? "Depósito" : "Retornar"}</span>
+          title={isMobile && (
+            <span className={cx("text-white text-lg text-center flex-1 font-bold")}>{"Depósito"}</span>
           )}
           onClick={()=> onClickToWallet()}
         />
 
         {isMobile && (
-          <div className={"text-3xl text-center text-[var(--secondary-assistant)] font-bold mb-5 mt-5"}>R$ {formatLocaleMoney(Number(amount))}</div>
+          <div className={"text-3xl text-center text-[var(--secondary-assistant)] font-bold mb-5 mt-6"}>R$ {formatLocaleMoney(Number(amount))}</div>
         )}
 
-        <div className={cx("text-sm text-[var(--secondary-assistant)] leading-5 mb-4 mt-2 text-center",
+        <div className={cx("text-sm text-[var(--secondary-assistant)] leading-5 mb-4 text-center",
           {
             'md:text-3xl md:mb-6': !isMobile
           })}>
@@ -157,7 +156,7 @@ export const WalletDepositNextPage = () => {
               <ShadowContainer className={`${shadowContainerStyle} flex-col items-center h-full`}>
                 <div className={"text-white text-center font-bold w-full rounded-xl text-4xl py-4 text-[var(--secondary-assistant)]"}>R${amount}</div>
                 <div className="h-full flex justify-center items-center">
-                  <QRCode className={cx("w-[80%] min-w-[100px] max-w-[280px] mb-5",)} value={String(data?.data?.channelData?.paymentLink || '')} />
+                  <QRCode className={cx("w-full min-w-[100px] max-w-[280px] mb-5",)} value={String(data?.data?.channelData?.paymentLink || '')} />
                 </div>
               </ShadowContainer>
             </section>
@@ -181,6 +180,5 @@ export const WalletDepositNextPage = () => {
         )}
 
       </div>
-    </div>
   )
 }

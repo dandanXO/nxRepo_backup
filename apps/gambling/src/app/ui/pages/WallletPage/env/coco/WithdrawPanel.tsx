@@ -104,8 +104,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               <section className={"mb-2"}>
                 <label className={"text-white font-bold block mb-2 "}>Tipo Pix</label>
                 <Select
-                  menuPlacement={'top'}
-                  className="rounded-lg "
+                  menuPlacement={'bottom'}
+                  className="rounded-lg text-sm md:text-xl"
                   isSearchable={false}
                   styles={{
                     control: (baseStyle, states) => {

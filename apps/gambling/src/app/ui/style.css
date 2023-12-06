@@ -214,57 +214,6 @@ html {
 }
 
 
-/*carousel*/
-.react-multi-carousel-dot {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.react-multi-carousel-dot--active button, .react-multi-carousel-dot button {
-  width: 20px;
-  height: 3px;
-  border-radius: 8px;
-}
-
-.react-multi-carousel-dot--active button {
-  background: rgba(255, 255, 255, 1);
-  border-width: 0px;
-}
-
-.react-multi-carousel-list.carousel-container {
-  padding-bottom: 30px;
-}
-
-.react-multi-carousel-dot-list.custom-dot-list-style {
-  height: 30px
-}
-
-.isdesktop .react-multi-carousel-dot, .isdesktop .react-multi-carousel-dot-list  {
-  background-color: var(--background-primary);
-}
-
-.react-multi-carousel-list.carousel-container, .react-multi-carousel-dot--active {
-  background: var(--primary-variant);
-}
-
-.react-multiple-carousel__arrow.react-multiple-carousel__arrow--left  {
-  left: 2px !important;
-}
-
-.react-multiple-carousel__arrow.react-multiple-carousel__arrow--right {
-  right: 2px !important;
-}
-
-.react-multiple-carousel__arrow:hover {
-  background: rgba(255,255,255,0.2);
-}
-
-  /*NOTE: 解決最下腳留白的縫隙*/
-.react-multi-carousel-track {
-  margin-bottom: -6px;
-}
-
 
 @keyframes loading-fade-in {
   0% {

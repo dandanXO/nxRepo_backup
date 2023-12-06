@@ -8,7 +8,25 @@ import viver from "../../env/coco/index-tab-viver.png"
 import favorite from "../../env/coco/index-tab-favorite.png"
 import recent from "../../env/coco/index-tab-recent.png"
 import useBreakpoint from "../../hooks/useBreakpoint";
+import styled from "styled-components";
 
+const IndexImageTab = styled(ImageTab)`
+  margin-bottom: 2px;
+  ${props => {
+    if (!props.active) {
+      return `
+            background: var(--primary-variant);
+            color: var(--white);
+          `;
+    } else {
+      return `
+            box-shadow: 0 1px 2px rgba(6,240,246,1);
+            background-image: linear-gradient(var(--button-gametab-focus-from), var(--button-gametab-focus-via) 15.65%, var(--button-gametab-focus-to));
+            color: var(--white);
+          `
+    }
+  }};
+`
 type IIndexTabs = {
   label: any;
   activeTab: any;
@@ -40,18 +58,16 @@ export const IndexTabs = ({
   ]
   const {isMobile} = useBreakpoint();
   return (
-      <Tabs className={cx("game-type-tab-list", {
-        "pl-4": isMobile
-      })}>
+      <Tabs className={cx("game-type-tab-list")}>
         {
           // ["Todos", ...label, 'Favoritos']
           // ["Salão", ...label, 'Favoritos']
           ["Todos", ...label, 'Favoritos' ].map((tab: string, index: number) => {
             return (
-              <ImageTab
+              <IndexImageTab
                 key={index}
-                className={cx("flex row justify-center items-center px-5 md:px-6",{
-
+                className={cx("flex row justify-center items-center px-5 md:px-6 mr-4 !rounded-[16px_4px_16px_4px]",
+                  "!border-none",{
                 })}
                 active={activeTab === tab}
                 onClick={() => {
@@ -61,7 +77,7 @@ export const IndexTabs = ({
               >
                 {!hideIcon && <img className="w-[20px] h-[20px] mr-1" src={icons[index] ? icons[index] : icons[0]} />}
                 <span>{tab}</span>
-              </ImageTab>
+              </IndexImageTab>
             )
             // return (
             //   <TabItem

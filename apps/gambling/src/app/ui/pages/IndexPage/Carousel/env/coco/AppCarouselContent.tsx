@@ -11,6 +11,9 @@ import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
 import {Container} from "../../../../../components/container/Container";
 import {IAppCarouselContent} from "../../types";
+import {CarouselTitle} from "./CarouselTitle";
+import {CarouselImage} from "./CarouselImage";
+import {CarouselTitleSection} from "./CarouselTitleSection";
 
 
 export const AppCarouselContent = (props: IAppCarouselContent) => {
@@ -25,35 +28,17 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
         onClickToFirstDeposit();
       }}
     >
-      {isMobile ? (
-        <div
-        >
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
-            Primeiro depósito <br/> + bônus de 20%
-          </p>
-          <img
-            className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_2.png`}
-          />
-        </div>
-      ) : (
-        <div
-          className="banner w-screen"
-        >
-          <Container
-            className={cx("absolute top-1/2 transform -translate-y-1/2",
-              "font-bold text-6xl text-left"
-            )}
-          >
-            Primeiro depósito <br/> bônus de 20%
-          </Container>
-          <img
-            className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_2.png`}
-          />
-        </div>
-      )}
-      </CarouselContainer>
+      <div className={""}>
+        <CarouselTitleSection>
+          Primeiro depósito <br/> bônus de 20%
+        </CarouselTitleSection>
+        {isMobile ? (
+          <CarouselImage alt={"h5_banner_2"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_2.png`}/>
+        ): (
+          <CarouselImage alt={"banner_2"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_2.png`}/>
+        )}
+      </div>
+    </CarouselContainer>
   )
 }
 

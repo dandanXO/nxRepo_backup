@@ -152,13 +152,13 @@ export const Footer = (props: IFooter) => {
             </section>
           </div>
         </div>
-      ): isShowDesktopFooter ? (
+      ): (!isMobile && isShowDesktopFooter) ? (
         <div className='bg-[var(--background-footer)] text-white flex justify-center pt-8'>
           {/*h-[400px]*/}
           <div className={"flex gap-3 w-11/12 mt-3"}>
 
               <section className={"flex flex-col gap-3 w-1/12 items-start"}>
-                <div className='text-[var(--white)'>Jogo</div>
+                <div className='text-[var(--white) text-base'>Jogo</div>
                 {
                   ["Salão", ...label].map((gameName: string, index: number) => {
                     return (
@@ -169,7 +169,7 @@ export const Footer = (props: IFooter) => {
               </section>
 
               <section className={"flex flex-col gap-3 w-3/12 items-start"}>
-                <div className='text-[var(--white)'>Ajuda</div>
+                <div className='text-[var(--white) text-base'>Ajuda</div>
                 <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                 <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
                 <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>

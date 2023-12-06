@@ -4,7 +4,7 @@ import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
 import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useLoginMutation} from "../../../../../external";
 import {environment} from "../../../../../../environments/environment";
 import {MockTriggerLoginResponse} from "../../mock/MockTriggetLoginResponse";
@@ -14,13 +14,14 @@ import {promiseHandler} from "../../../../../gateway/promiseHanlder";
 import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {connect} from "../../../../../gateway/socket";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {MobileInput} from "../../../../components/Inputs/MobileInput";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../PhonePrefix";
+import {RootState} from "../../../../../reduxStore";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
@@ -154,7 +155,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
           phone: phoneInput.data,
           password: passwordInput.data,
         }).then((response) => {
-            // console.log("triggerLogin-data", response)
+            console.log("[debug]triggerLogin-data", response)
             if(!(response as any).error) {
               setLoginLocalStorage({
                 token: (response as any).data?.data?.token,
@@ -172,8 +173,8 @@ export const UserLoginForm = (props: IUserLoginForm) => {
 
               dispatch(appSlice.actions.setIsLogin(true));
               dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-              dispatch(appSlice.actions.setShowTelegramModal(true))
               dispatch(appSlice.actions.setShowDepositModal(true))
+
 
               props.confirmToLogin();
             }

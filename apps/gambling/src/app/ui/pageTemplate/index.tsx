@@ -30,8 +30,8 @@ import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
-import { DepositAdvertisementModal } from "../modals/DepositAdvertisementModal";
-import { MaintenanceModal } from "../modals/MaintenanceModal";
+import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
+import {MaintenanceModal} from "../modals/MaintenanceModal";
 
 
 console.log("[APP] environment", environment);
@@ -232,6 +232,8 @@ export const PageTemplate = (props: IPage) => {
     window.open(telegramGroupUrl,'_blank')
   }
 
+
+
   return (
     <>
       {renderByPlatform({
@@ -241,7 +243,7 @@ export const PageTemplate = (props: IPage) => {
             contextHolder={contextHolder}
             isMobile={isMobile}
             isShowMobileFooter={isShowMobileFooter}
-            isShowDesktopFooter={isShowMobileFooter}
+            isShowDesktopFooter={isShowDesktopFooter}
             isShowDesktopHeader={isShowDesktopHeader}
             isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
             isLogin={isLogin}
@@ -379,7 +381,7 @@ export const PageTemplate = (props: IPage) => {
       )}
 
       {
-        isShowDepositModal && !isShowTelegramModal && !isShowInviteBonusModal && (
+        isShowDepositModal && !isShowInviteBonusModal && (
           <DepositAdvertisementModal
             close={()=>dispatch(appSlice.actions.setShowDepositModal(false))}
             onConfirm={()=>{
@@ -390,7 +392,7 @@ export const PageTemplate = (props: IPage) => {
         )
       }
 
-      {isShowTelegramModal && !isShowInviteBonusModal && (
+      {isShowTelegramModal && (
         <TelegramContactModal
           close={() => {
             dispatch(appSlice.actions.setShowTelegramModal(false))

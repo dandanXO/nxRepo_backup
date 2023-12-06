@@ -12,6 +12,8 @@ import {Container} from "../../components/container/Container";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import cx from "classnames";
+import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
+import { usePageNavigate } from "../../hooks/usePageNavigate";
 
 // const InviteCommmonButton = styled.div`
 //   color: #fff;
@@ -32,6 +34,7 @@ export const QuestionContainer = styled.div`
 
 export const InvitePage = () => {
   useAllowLoginRouterRules();
+  const { onClickToIndex } = usePageNavigate();
 
   const [panelMode, setPanelMode] = useState<"howto" | "daily" >("howto");
   const {isMobile} = useBreakpoint();
@@ -74,7 +77,15 @@ export const InvitePage = () => {
 
   return (
     <>
-      <Container>
+      <Container className="pt-7 md:pt-0">
+        {
+          !isMobile && (
+            <BackNavigation
+              className={'md:pb-2'}
+              onClick={onClickToIndex}
+            />
+          )
+        }
         <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
           <div>
             <Tabs className={"game-type-tab-list"}>
@@ -84,7 +95,7 @@ export const InvitePage = () => {
                 background={"var(--primary-variant)"}
                 // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
                 activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6 rounded-md mr-2 whitespace-nowrap",{
+                className={cx("px-6 rounded-md mr-2 whitespace-nowrap text-sm sm:text-2xl",{
 
                 })}
                 name={"Como convidar"}
@@ -100,7 +111,7 @@ export const InvitePage = () => {
                 background={"var(--primary-variant)"}
                 // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
                 activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6 rounded-md whitespace-nowrap",{
+                className={cx("px-6 rounded-md whitespace-nowrap text-sm sm:text-2xl",{
 
                 })}
                 name={"Dados diários"}

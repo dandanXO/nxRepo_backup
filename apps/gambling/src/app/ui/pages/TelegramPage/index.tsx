@@ -14,18 +14,22 @@ import { FragmentContainer } from "../../components/FragmentContainer";
 import cx from 'classnames';
 import { Banner } from "../../components/Banner";
 import {TelegramButton} from "../../components/Buttons/TelegramButton";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {appSlice} from "../../../reduxStore/appSlice";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
-  background: linear-gradient(270deg,#00A9E7 0%,#007DD3 100%);
-  box-shadow: inset 0 0 10px rgba(255,255,255,.5);
-  border-radius: 10px;
-  width: 300px;
-  height: 60px;
+  background: linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%); 
+  border-radius: 8px;
+  /* width: 300px; */
+  /* height: 60px; */
+  padding: 14px 96px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 60px auto 40px;
+  margin: 32px auto 64px;
 `
 
 const ListItem = (props: { count: string; text: string; }) => {
@@ -41,6 +45,7 @@ export const TelegramPage = () => {
   useAllowLoginRouterRules();
 
   const navigate = useNavigate();
+  const { isMobile } = useBreakpoint();
 
   const telegramId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
   const userInfoString = AppLocalStorage.getItem(AppLocalStorageKey.userInfo);
@@ -56,13 +61,26 @@ export const TelegramPage = () => {
   }, VIPBorderStyleContainer);
 
   const isCoco777bet = environment.assetPrefix === 'coco777bet';
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(appSlice.actions.setShowTelegramModal(true))
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    }
+  }, []);
+
   return (
 
     <div className={"px-4 sm:px-10 w-full"}>
 
       <BackNavigation
         onClick={() => onClickToIndex()}
-        title={<div className={"w-full text-center md:text-left"}>Retornar</div>}
+        title={isMobile && <div className={"w-full text-center font-bold"}>Canal De Telegram</div>}
       />
       {/*<section className={"rounded-3xl text-white font-bold overflow-hidden relative mb-8"}>*/}
       {/*  <img className="w-full" src={`assets/${environment.assetPrefix}/bg.761d8ab4.png`}/>*/}
@@ -81,7 +99,7 @@ export const TelegramPage = () => {
         </div>
       </section> */}
 
-      <Banner imgClassName={`rounded-lg mb-4 md:mb-8`} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_telegram.png`} bannerText={
+      <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-3 md:mt-0`} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_telegram.png`} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
           <div className={"text-white text-base sm:text-3xl md:text-4xl  lg:text-5xl font-bold lg:mb-2"}>Sample wordingptas y</div>
           <div className={"text-white text-base sm:text-3xl md:text-4xl lg:text-5xl font-bold"}>reconoces que has leído la .</div>
@@ -119,8 +137,8 @@ export const TelegramPage = () => {
         <GoToTelegram onClick={() => {
           window.open(telegramUrl, '_blank')
           // navigate(PageOrModalPathEnum.WalletPage);
-        }} className={"text-white text-lg"}>
-          <img className={"w-[30px] h-[26px] mr-4"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEIAAAA6CAMAAAAz+392AAAApVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+4/eNVAAAANnRSTlMA+gbpCsZVHhrjwJyFKhT38YoO7diwpndoS0VA27qsln8u9LShdHBsYVs7NiPS0MqQUDLevNQ7eFNdAAACGElEQVRIx63W13KrQBAE0AEUSMoJlHOWLdm+/f+fdmURDOwuIyyfR1FQYnqrGXpFdW6XNy/cr99WGu4G9Eu1loHAmH6jtLcRa1BxH7MmEgwqqL17Q5pNhYz6DWS1CtxvDsaQqDwdod/TIFWlp5xdCwrGUxEevpDSaJ16iKyItbh2kFau0enntzkXofeOjKZHNEwcDJ/yHNdLZPVMokoy2Top1TddCKzvBD0kfJLKcCqLcNa+X5ojqa+qAWmE3SPdzZAiqwu9MoGM5urfV/tIG+XUgJjkXSn7eK2UrYEy5Jq7YMRCxBdKOjlx2mKSwYzEjJxEhNsLVIxK+JKSIXtxhEENyDn18KB1IPoIJrD9hFo3Grm/hKihP/7eGGqaG038oElzelz7B7XygkJbSF0fF7uAOsmIC7lDMGfVWVj9NJoDhXNUKu5FkWSg1INCJ9mNg7KQZKRtQ2WSqXhvEg99PEocujcouWLNHabLMMnYOS/zm7StfedrkSxfCzlM4o06yGER79ZAnimx9hpy8fvNAIwhu4uB02aXGTC6xBmCsSZOBYwdcTwwTi8HounEaTGPeCeWE3dPRXrMZ8SaItDTqSprtj2xwqaZPr7GkreqESuomn44NN/IljPxrPTxMe3ie/Py8dVNcIvuzbo49KFRbG82gavwm11obzbXPonmGrc380aGsOkVVg/WrSO9YmtB29CLqm36W/8BYjhU0q0V+48AAAAASUVORK5CYII="} />
+        }} className={"text-white text-lg "}>
+          <img className={"w-[30px] mr-4"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />
           Junte-se</GoToTelegram>
       </section>
     </div>

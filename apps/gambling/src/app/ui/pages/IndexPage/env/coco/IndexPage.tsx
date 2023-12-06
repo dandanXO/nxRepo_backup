@@ -130,7 +130,7 @@ export const IndexPage = ({
         // "p-4": !isMobile,
       })}>
         {isSearch && <GameSearchModal userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} onClose={()=>setIsSearch(false)}/>}
-        {isMobile && <CompanySloganLabel/>}
+        {/*{isMobile && <CompanySloganLabel/>}*/}
         <AppCarousel setIsMoving={setIsMoving}>
           <AppCarouselContent isMoving={isMoving}/>
           <AppCarouselContent2 isMoving={isMoving}/>
@@ -155,7 +155,7 @@ export const IndexPage = ({
             {
               "bg-[var(--primary-variant)] z-20": isMobile,
               // "sticky top-[52.5px] left-0 right-0": isMobile,
-              "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
+              "fixed top-[52px] left-0 right-0": showFixForIOSStickTab && isMobile,
             },
             {
               "bg-[var(--background-primary)]" : !isMobile
@@ -163,7 +163,7 @@ export const IndexPage = ({
           )}
         >
           <div className={""}>
-            <div className={"whitespace-nowrap"}>
+            <div className={"whitespace-nowrap px-4"}>
               <DragScrollContainer className="flex flex-row items-center">
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
                 <IndexTabs
@@ -189,7 +189,7 @@ export const IndexPage = ({
           className={cx(
             "",
             {
-              "bg-[var(--primary-variant)] z-20": isMobile,
+              "bg-[var(--background-primary)] z-20": isMobile,
               // "sticky top-[52.5px] left-0 right-0": isMobile,
               "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
             },

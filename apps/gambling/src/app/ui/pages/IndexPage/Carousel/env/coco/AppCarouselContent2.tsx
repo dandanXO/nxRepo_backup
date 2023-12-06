@@ -11,6 +11,9 @@ import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
 import {Container} from "../../../../../components/container/Container";
 import {IAppCarouselContent} from "../../types";
+import {CarouselTitle} from "./CarouselTitle";
+import {CarouselImage} from "./CarouselImage";
+import {CarouselTitleSection} from "./CarouselTitleSection";
 
 export const AppCarouselContent2 = (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
@@ -24,34 +27,16 @@ export const AppCarouselContent2 = (props: IAppCarouselContent) => {
         onClickToDepositCashback();
       }}
     >
-      {isMobile ? (
-        <div
-        >
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
-            Benefícios-ofertasde deposito<br/>Ate 10% bônus
-          </p>
-          <img
-            className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_1.png`}
-          />
-        </div>
-      ) : (
-        <div
-          className="banner w-screen"
-        >
-          <Container
-            className={cx("absolute top-1/2 transform -translate-y-1/2",
-              "font-bold text-6xl text-left"
-            )}
-          >
-            Benefícios-ofertasde deposito<br/>Ate 10% bônus
-          </Container>
-          <img
-            className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_1.png`}
-          />
-        </div>
-      )}
+      <div className={""}>
+        <CarouselTitleSection>
+          Benefícios-ofertasde deposito<br/>Ate 10% bônus
+        </CarouselTitleSection>
+        {isMobile ? (
+          <CarouselImage alt={"h5_banner_1"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_1.png`}/>
+        ): (
+          <CarouselImage alt={"banner_2"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_1.png`}/>
+        )}
+      </div>
     </CarouselContainer>
   )
 }

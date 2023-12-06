@@ -49,8 +49,8 @@ export const UserMoneyStatusSection = (props: IProps) => {
         <img alt={"refresh"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
       </button>
       {/*main-secondary-main*/}
-      <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-bold"}>{
-        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$${formatLocaleMoney(totalBalanceSheetValue)}`
+      <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-medium"}>{
+        isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$ ${formatLocaleMoney(totalBalanceSheetValue)}`
       }</div>
       <button onClick={() => {
         navigate(PageOrModalPathEnum.WalletPage);

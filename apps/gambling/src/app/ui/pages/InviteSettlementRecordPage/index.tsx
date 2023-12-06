@@ -15,6 +15,7 @@ import { formatLocaleMoney } from "../../utils/format";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
 import { datePickerStyle } from "../../components/DatePickers/DatePicker";
+import { Container } from "../../components/container/Container";
 
 const { RangePicker } = DatePicker;
 
@@ -59,13 +60,13 @@ export const InviteSettlementRecordPage = () => {
 
 
   return (
-    <div className={"p-4 sm:p-8"}>
+      <SectionContainer id={"game-record-section"} className="px-4 md:px-24">
+        <BackNavigation
+          title={isMobile && <div className={"w-full text-center font-bold"}>Registros de liquidação</div>}
+          onClick={() => navigate(PageOrModalPathEnum.InvitePage)}
+        />
 
-      <SectionContainer id={"game-record-section"}>
-
-        <BackNavigation onClick={() => navigate(PageOrModalPathEnum.InvitePage)} />
-
-        <section className={"text-left mb-3 sm:mb-8 flex flex-row justify-between items-center"}>
+        <section className={"text-left mt-4 md:mt-5 mb-3 sm:mb-8 flex flex-row justify-between items-center"}>
 
           {!isMobile &&
             (<section>
@@ -125,8 +126,5 @@ export const InviteSettlementRecordPage = () => {
           </table>
         </div>
       </SectionContainer>
-
-    </div>
-
   )
 }

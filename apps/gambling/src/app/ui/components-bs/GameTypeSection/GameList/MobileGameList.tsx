@@ -11,5 +11,7 @@ export const MobileGameList = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  margin-left: -4px;
+  margin-right: -10px;
 
 `

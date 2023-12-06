@@ -31,8 +31,8 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
   return (
     <MobileOrangeBackgroundShadowContainer className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
       <div className={"flex flex-row text-lg font-bold justify-around mb-2"}>
-        <TableTabItem {...tabItemProps(props.type === "1")} active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'}>Nível 1</TableTabItem>
-        <TableTabItem {...tabItemProps(props.type === "2")} active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'}>Nível 2</TableTabItem>
+        <TableTabItem {...tabItemProps(props.type === "1",'mr-2')} active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'}>Nível 1</TableTabItem>
+        <TableTabItem {...tabItemProps(props.type === "2",'mr-2')} active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'}>Nível 2</TableTabItem>
         <TableTabItem {...tabItemProps(props.type === "3")} active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'}>Nível 3</TableTabItem>
       </div>
 
