@@ -14,6 +14,8 @@
     "build:gcoco777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v1 --verbose",
     "serve:gola777slot": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-coco777bet-v2",
     "build:gola777slot": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v2 --verbose",
+    "serve:gkwai777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-coco777bet-v3",
+    "build:gkwai777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v3 --verbose",
     "serve:glegend": "cross-env NODE_ENV=development NODE_COUNTRY=legend pnpm nx serve gambling -c=dev-legend",
     "serve:gbmw": "cross-env NODE_ENV=development NODE_COUNTRY=bmw pnpm nx serve gambling -c=dev-bmw",
     "prepare:g": "husky install",
