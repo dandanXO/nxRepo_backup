@@ -21,7 +21,7 @@ export const MobileGameItem = (props: IItem) => {
 
   return (
     <StyledMobileGameItem
-      className={cx("p-2 shrink-0 grow-0 basis-[33%] overflow-hidden rounded-2xl flex flex-col items-center relative", {
+      className={cx("p-1 shrink-0 grow-0 basis-[33%] overflow-hidden w-[33vw] h-[33vw] rounded-2xl flex flex-col items-center relative", {
 
       }, props.className)}
     >
@@ -63,7 +63,7 @@ export const MobileGameItem = (props: IItem) => {
         />
 
       </div>
-      <div className={"basis-[20px] text-[#d7e8ff] block text-ellipsis truncate text-sm md:text-base sm:text-center w-full sm:text-center md:text-left"}>{props.name}</div>
+      <div className={"basis-[20px] text-[#d7e8ff] block text-ellipsis truncate text-xs sm:text-sm md:text-base sm:text-center w-full sm:text-center md:text-left"}>{props.name}</div>
     </StyledMobileGameItem>
 
   )
