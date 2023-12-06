@@ -199,7 +199,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
 
 
       {isMobile && (
-        <section className={"fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
+        <section className={"fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(0,0,0,.5)] py-4 z-10"}>
           <ButtonPro
             size={"small"}
             onClick={props.onClickToWithdraw}

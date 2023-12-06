@@ -262,7 +262,7 @@ export const DepositPanel = (props: IDepositPanel) => {
 
 
         {isMobile ? (
-          <section className={"bg-[rgba(0,0,0,.5)] fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full bg-[rgba(1,62,66,0.6)] py-4 z-10"}>
+          <section className={"bg-[rgba(0,0,0,.5)] fixed bottom-0 left-0 right-0 flex flex-col justify-center items-center w-full py-4 z-10"}>
             <DepositToNextPageButton onClick={onClickToNextDepositPage} className={cx({ "opacity-50": !isLoaded })} />
           </section>
         ) : isLoaded ? (
