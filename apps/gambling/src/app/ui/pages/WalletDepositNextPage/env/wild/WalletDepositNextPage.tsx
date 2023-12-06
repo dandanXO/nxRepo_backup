@@ -15,6 +15,7 @@ import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { ButtonPro } from "../../../../components/Buttons/ButtonPro";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 
 const Notice = styled.div`
   height: 60px;
@@ -81,6 +82,7 @@ export const WalletDepositNextPage = () => {
   const [countdown, setCountdown] = useState(900); // 15分钟的秒数
   const location = useLocation();
   const navigate = useNavigate();
+  const {onClickToWallet} = usePageNavigate();
   const [api, contextHolder] = notification.useNotification();
   const data = location.state.data || {};
   const amount = location.state.amount || 0;
@@ -93,13 +95,13 @@ export const WalletDepositNextPage = () => {
 
   useEffect(() => {
     if (location.state.amount === 0) {
-      navigate(PageOrModalPathEnum.WalletPage)
+      handleToWalletPage();
     }
   }, [location.state.amount])
 
 
   const handleToWalletPage = () => {
-    navigate(PageOrModalPathEnum.WalletPage)
+    onClickToWallet({'panelType':'deposit'})
   }
 
   useEffect(() => {
@@ -119,9 +121,7 @@ export const WalletDepositNextPage = () => {
       <div className={cx("", { "md:border md:border-solid md:border-main-primary-main md:mt-10 md:bg-[var(--game-block)] md:rounded-2xl md:py-16 md:px-14 ": !isMobile })}>
         {contextHolder}
 
-        <button className={cx("flex flex-col mb-4", { 'md:flex-row md:mb-10': !isMobile })} onClick={() => {
-          navigate(PageOrModalPathEnum.WalletPage);
-        }}>
+        <button className={cx("flex flex-col mb-4", { 'md:flex-row md:mb-10': !isMobile })} onClick={handleToWalletPage}>
           <img className={cx("w-[21px] h-[21px] mr-3 mb-5", { "md:mb-0": !isMobile })} alt={"back"} src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAMAAADfNcjQAAAAZlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+Vn2moAAAAIXRSTlMA5QjW6825oZSHeFMpIRoUD/Xw397dxMOurWtpXUI9MzAmTIk1AAAAlElEQVQ4y7XURxbEIAwDUBzS+/RJD/e/ZKIDKFqF7ec9wLZwd63KrLryMYRgF16eHjz3Ah7v1HO41dQz+KdhHP3hvqWewpOOef+F/3rmXQJPI+athw/Umzc8Y+xqg+fUtxheUF+f8JL68oBP1N0LPhMkG+gR+pL6mbpQutS6WbrdemD0yOmh1WOvg6Ojp8Or468/kAMmXBWDCW3GHwAAAABJRU5ErkJggg=="} />
           <span className={cx("text-white text-xl font-bold", { "text-2xl": !isMobile })}>Depósito</span>
         </button>

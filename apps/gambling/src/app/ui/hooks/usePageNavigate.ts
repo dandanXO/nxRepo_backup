@@ -7,6 +7,19 @@ import { GameItem } from "../components-bs/GameTypeSection";
 import { AppLocalStorage } from "../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
 
+
+interface IQueryStringProps{
+  [key: string]: string;
+}
+const queryStringParams = (queryString:IQueryStringProps) => {
+  return queryString
+    ? `?${Object.entries(queryString)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&')}`
+    : '';
+} 
+
+
 export const usePageNavigate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,11 +40,12 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.InitialChargePage)
     }
   }
-  const onClickToWallet = () => {
-    if(!isLogin) {
+  const onClickToWallet = (queryString?:IQueryStringProps) => {
+  
+    if (!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
-      navigate(PageOrModalPathEnum.WalletPage)
+      navigate(`${PageOrModalPathEnum.WalletPage}${queryStringParams(queryString || {})}`)
     }
   }
 

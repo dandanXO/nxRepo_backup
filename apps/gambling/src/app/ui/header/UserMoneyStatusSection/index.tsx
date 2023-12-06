@@ -14,6 +14,7 @@ import { PersonalControl as CocoPersonalControl } from '../env/coco/PersonalCont
 import { PersonalControl as WildPersonalControl } from '../env/wild/PersonalControl'
 import { PersonalControl as PernambucanaPersonalControl } from '../env/pernambucana/PersonalControl'
 import { formatLocaleMoney } from "../../utils/format";
+import { usePageNavigate } from "../../hooks/usePageNavigate";
 
 
 const PersonalControl = renderByPlatform({
@@ -26,6 +27,8 @@ type IProps = {
 }
 export const UserMoneyStatusSection = (props: IProps) => {
   const navigate = useNavigate();
+  const {onClickToWallet} = usePageNavigate();
+
 
   // const { userAmount } = useSelector((state: RootState) => state.app.userStore as IUserStore)
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
@@ -52,9 +55,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
       <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-medium"}>{
         isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$ ${formatLocaleMoney(totalBalanceSheetValue)}`
       }</div>
-      <button onClick={() => {
-        navigate(PageOrModalPathEnum.WalletPage);
-      }}>
+      <button onClick={()=>onClickToWallet({'panelType':'deposit'})}>
         <img alt={"add"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_add.png`}/>
       </button>
     </PersonalControl>

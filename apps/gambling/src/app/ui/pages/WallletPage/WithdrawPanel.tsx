@@ -215,7 +215,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
       setSelectInput({
         data: value,
         isValidation: !isError,
-        errorMessage: !isError ? "" : value === "" ? "Por favor insira seu e-mail" : "Informe o CPF no formato correto",
+        errorMessage: !isError ? "" : value === "" ? "Por favor insira seu e-mail" : "Insira o formato correto",
       })
     } else if (selectOption.label === 'Telefone(+55)') {
       isError = isNaN(Number(value)) || value === "" || (value.length !== 10 && value.length !== 11)

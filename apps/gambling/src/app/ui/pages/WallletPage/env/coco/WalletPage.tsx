@@ -34,9 +34,9 @@ export const WalletPage = (props: IWalletPage) => {
 
         <div id={"tab-item"}>
           <Tabs className={"game-type-tab-list flex font-medium mt-3 mb-[18px] md:my-8 justify-between md:justify-center items-center"}>
-            <CommonTableTabG className={cx("px-4 lg:px-[80px] flex-1 lg:flex-none mr-2")} active={props.panelMode === "deposit"} onClick={() => {props.setPanelMode("deposit")}}>Depósito</CommonTableTabG>
-            <CommonTableTabG className={cx("px-4 lg:px-[80px] flex-1 lg:flex-none mr-2")} active={props.panelMode === "withdraw"} onClick={() => {props.setPanelMode("withdraw")}} >Retirar</CommonTableTabG>
-            <CommonTableTabG className={cx("px-4 lg:px-[80px] flex-1 lg:flex-none")} active={props.panelMode === "record"} onClick={() => {props.setPanelMode("record")}} >Registro</CommonTableTabG>
+            <CommonTableTabG className={cx("px-4 lg:px-[80px] flex-1 lg:!text-lg lg:flex-none mr-2 lg:mr-4")} active={props.panelMode === "deposit"} onClick={() => {props.setPanelMode("deposit")}}>Depósito</CommonTableTabG>
+            <CommonTableTabG className={cx("px-4 lg:px-[80px] flex-1 lg:!text-lg lg:flex-none mr-2 lg:mr-4")} active={props.panelMode === "withdraw"} onClick={() => {props.setPanelMode("withdraw")}} >Retirar</CommonTableTabG>
+            <CommonTableTabG className={cx("px-4 lg:px-[80px] flex-1 lg:!text-lg lg:flex-none")} active={props.panelMode === "record"} onClick={() => {props.setPanelMode("record")}} >Registro</CommonTableTabG>
           </Tabs>
         </div>
 

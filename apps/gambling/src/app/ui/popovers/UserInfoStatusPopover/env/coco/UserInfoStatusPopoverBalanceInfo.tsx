@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { formatLocaleMoney } from "../../../../utils/format";
 import {PopoverDepositButton} from "../../../../components/Buttons/env/coco/PopoverDepositButton";
 import {PopoverWithdrawButton} from "../../../../components/Buttons/env/coco/PopoverWithdrawButton";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 
 const Container = styled.div`
   background: rgb(from var(--primary-assistant) r g b / 20%);
@@ -17,6 +18,8 @@ export const UserInfoStatusPopoverBalanceInfo = ({
   totalReasableValue
 }: IUserInfoStatusPopoverBalanceInfoProps) => {
   const navigate = useNavigate();
+  const {onClickToWallet} = usePageNavigate();
+
 
   return (
     <div
@@ -24,7 +27,7 @@ export const UserInfoStatusPopoverBalanceInfo = ({
     >
       <div
         className='flex justify-between items-center py-3 px-[14px] text-base bg-[rgba(255,255,255,30%)] rounded-t-xl cursor-pointer'
-        onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}
+        onClick={()=>onClickToWallet({'panelType':'deposit'})}
       >
         <div>Total Da Conta</div>
         <RightOutlined />
@@ -36,12 +39,12 @@ export const UserInfoStatusPopoverBalanceInfo = ({
         <div className='w-1/2 px-3 pb-4 pt-2 flex flex-col gap-2'>
           <div className='text-lg'>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
           <div >Balanço Total</div>
-          <PopoverDepositButton onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}/>
+          <PopoverDepositButton onClick={()=>onClickToWallet({'panelType':'deposit'})}/>
         </div>
         <div className='w-1/2 px-3 pb-4 pt-2 flex flex-col gap-2'>
           <div className='text-lg'>R$ {formatLocaleMoney(totalReasableValue)}</div>
           <div >Retirável Total</div>
-          <PopoverWithdrawButton onClick={()=>navigate(PageOrModalPathEnum.WalletPage)} />
+          <PopoverWithdrawButton onClick={()=>onClickToWallet({'panelType':'withdraw'})} />
         </div>
       </Container>
     </div>

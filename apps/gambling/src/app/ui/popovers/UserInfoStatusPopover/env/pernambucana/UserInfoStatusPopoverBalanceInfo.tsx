@@ -3,17 +3,18 @@ import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { Button } from "../../../../components/Buttons/Button";
 import { ContaContainer, IUserInfoStatusPopoverBalanceInfoProps } from "../../index";
 import { useNavigate } from "react-router";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 
 export const UserInfoStatusPopoverBalanceInfo = ({
   totalBalanceSheetValue,
   totalReasableValue
 }: IUserInfoStatusPopoverBalanceInfoProps) => {
   const navigate = useNavigate();
+  const {onClickToWallet} = usePageNavigate();
+
 
   return (
-    <ContaContainer onClick={() => {
-      navigate(PageOrModalPathEnum.WalletPage);
-    }}>
+    <ContaContainer onClick={()=>onClickToWallet({'panelType':'deposit'})}>
       <Button className={"text-sm mb-4 !shadow-none"} >
         <span className={"text-base"}>Total Da Conta</span>
         <img className="w-[22px] h-[22px]" alt="arrow" src={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAMAAAC7IEhfAAAAPFBMVEUAAAD////////////////////////////////////////////////////////////////////////////YSWgTAAAAE3RSTlMAwBAHqS747+PUj1hAtbQdc3Icl2kucgAAAG9JREFUOMvtk0sWgCAMA1UQPyiCc/+7eoVxwY6s572maToNdVBYJXgTgwSZFwMuMxyvMhlhd0ZP2C5FVkhZkTlBU+S1wanIdUcG+hx/Ai0WvPVou4yMRwZeBdcgZVsKWzNZ3EfMLfZyhRjsuw711QcU+AVTejTE/gAAAABJRU5ErkJggg=="}/>

@@ -78,7 +78,7 @@ const Coco777BetMyPage = ({
           <div className='text-xl text-white'>R$ {totalBalanceSheetValue.toLocaleString()}</div>
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
-            onClick={() => onClickToWallet()}
+            onClick={()=>onClickToWallet({'panelType':'deposit'})}
           >Depósito</DepositButton>
         </div>
 
@@ -86,7 +86,7 @@ const Coco777BetMyPage = ({
           <div className='text-xl text-white'>R$ {totalReasableValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
-            onClick={() => onClickToWallet()}
+            onClick={()=>onClickToWallet({'panelType':'withdraw'})}
           >
             Retirar
           </WithdrawButton>
@@ -148,7 +148,7 @@ const Coco777BetMyPage = ({
         className={"bg-gradient-to-b from-[#0F1744] to-[#2E1555]"}
       >
         <ListHeader>Outras funções</ListHeader>
-        <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>
+        <ListItem title={"Registros de cobrança"} onClick={()=>onClickToWallet({'panelType':'record'})}/>
         <ListItem title={"Registro do jogo"} onClick={() => onClickToGameRecord()}/>
         <ListItem title={"Configuração"} onClick={() => onClickToSetting()}/>
         <ListItem isEnd={true} title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>

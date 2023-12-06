@@ -86,7 +86,7 @@ const MyPage = ({
           <div className='text-sm text-white'>Fundos totais</div>
           <DepositButton
             className='w-[126px]'
-            onClick={() => onClickToWallet()}
+            onClick={()=>onClickToWallet({'panelType':'deposit'})}
           >Depósito</DepositButton>
         </div>
 
@@ -95,7 +95,7 @@ const MyPage = ({
           <div className='text-sm text-white'>Retirável Total</div>
           <WithdrawButton
             className='w-[126px]'
-            onClick={() => onClickToWallet()}
+            onClick={()=>onClickToWallet({'panelType':'withdraw'})}
           >
             Retirar
           </WithdrawButton>
@@ -168,7 +168,7 @@ const MyPage = ({
             Outras funções
           </div>
         </ListHeader>
-        <ListItem title={"Registros de cobrança"} onClick={() => onClickToWallet()}/>
+        <ListItem title={"Registros de cobrança"} onClick={()=>onClickToWallet({'panelType':'record'})}/>
         <ListItem title={"Registro do jogo"} onClick={() => onClickToGameRecord()}/>
         <ListItem title={"Configuração"} onClick={() => onClickToSetting()}/>
         <ListItem isEnd={true} title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>

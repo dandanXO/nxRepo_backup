@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
 import { ArrowRight } from '../../../../components/Icons/ArrowRight';
+import { formatLocaleMoney } from '../../../../utils/format';
 
 
 export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
@@ -33,7 +34,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                   e.preventDefault();
                 }
               }}
-              inputClassName={"leading-none"}
+              inputClassName={"text-main-primary-main leading-none text-sm md:text-xl"}
               themeStyle={"simple"}
               className="w-full rounded-lg"
               placeholder={`Retirada mínima R$${props.withdrawLimitMin}`}
@@ -49,8 +50,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               Atualmente <button className={"text-[#ffdd14]"}
                                  onClick={props.onClickToVIP}>VIP{props.vip_level}</button>, o valor mínimo de saque
               diário é de
-              <span className={"text-[#ffdd14]"}>R${props.withdrawLimitMin}</span> e o valor máximo de saque é de
-              <span className={"text-[#ffdd14]"}>R${props.withdrawLimitMax}</span>.
+              <span className={"text-[#ffdd14]"}> R${formatLocaleMoney(props.withdrawLimitMin)}</span> e o valor máximo de saque é de
+              <span className={"text-[#ffdd14]"}> R${formatLocaleMoney(props.withdrawLimitMax)}</span>.
             </div>
 
             <div className={cx(`text-white leading-none rounded-lg
@@ -71,7 +72,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                 <label className={"text-white font-bold block mb-2 "}>Nome do usuário</label>
 
                 <MainInput
-                  inputClassName={"text-main-primary-main leading-none"}
+                  inputClassName={"text-main-primary-main leading-none text-sm md:text-xl"}
                   themeStyle={"simple"}
                   className="w-full rounded-lg"
                   placeholder={"Insira o nome do titular do cartão"}
@@ -90,7 +91,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                 <MainInput
                   themeStyle={"simple"}
                   className="w-full rounded-lg"
-                  inputClassName={"text-main-primary-main leading-none "}
+                  inputClassName={"text-main-primary-main leading-none text-sm md:text-xl"}
                   placeholder={"Insira o seu código CPF/CNPJ"}
                   value={props.CPFInput.data}
                   validation={props.CPFInput.isValidation}
@@ -111,11 +112,11 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                     control: (baseStyle, states) => {
                       return {
                         ...baseStyle,
-                        background: 'var(--primary-variant)',
-                        borderColor: 'var(--stroke-textfields)',
+                        background: 'var(--background-textfields)',
+                        borderColor: 'var(--primary-assistant)',
                         color: 'white',
-                        padding: '6px',
-                        borderRadius: '8px',
+                        padding: isMobile ? '2px' :'8px',
+                        borderRadius: '10px',
                         outline: 'none',
                         boxShadow: "none",
                         backgroundClip: isMobile ? 'padding-box,border-box' : '',
@@ -125,7 +126,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                         },
                         '&:focus': {
                           ...baseStyle,
-                          borderColor: 'var(--stroke-textfields)',
+                          borderColor: 'var(--primary-assistant)',
                           border: 'solid 1px'
                         }
                       };
@@ -144,7 +145,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                       return {
                         ...styles,
                         borderColor: 'var(--input-border)',
-                        background: isFocused ? 'linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%)' : 'var(--primary-variant)',
+                        background: isFocused ? 'linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%)' : 'var(--background-textfields)',
                         color: 'var(--input-text-color)',
                         marginTop: '-5px',
                         marginBottom: '-5px',
@@ -157,7 +158,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                     },
                     singleValue: (provided, state) => ({
                       ...provided,
-                      color: 'var(--stroke-textfields)',
+                      color: 'var(--main-primary-main)',
                     })
                   }}
                   value={props.selectOption}
@@ -172,13 +173,13 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                 <label className={"text-white font-bold block mb-2 "}>{props.selectOption.label}</label>
                 <MainInput
                   className="w-full rounded-lg"
-                  inputClassName={"leading-none"}
+                  inputClassName={"text-main-primary-main leading-none text-sm md:text-xl"}
                   themeStyle={"simple"}
                   placeholder={props.selectOption.label}
                   value={props.selectInput.data}
                   validation={props.selectInput.isValidation}
                   errorMessage={props.selectInput.errorMessage}
-                  prefix={props.selectOption.label === 'Telefone(+55)' ? <div className="mr-2">+55</div> : ''}
+                  prefix={props.selectOption.label === 'Telefone(+55)' ? <div className="mr-2 text-sm md:text-xl">+55</div> : ''}
                   onChange={(event: any) => {
                     props.validateSelectInput(event.target.value)
                   }}
@@ -191,10 +192,11 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
           <section className={cx("md:display flex flex-col justify-center items-center my-6")}>
             {/*<ButtonPro className="w-1/2 whitespace-nowrap" onClick={props.onClickToWithdraw}>Retirar</ButtonPro>*/}
             <button
-              className={"w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)] font-medium"}
+              className={"flex justify-between items-center px-3.5 py-4 text-xl w-[264px] h-[45px] rounded-md bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)] font-medium"}
               onClick={props.onClickToWithdraw}
             >
               RETIRAR
+              <ArrowRight className="w-[24px] h-[24px]"/>
             </button>
           </section>}
 

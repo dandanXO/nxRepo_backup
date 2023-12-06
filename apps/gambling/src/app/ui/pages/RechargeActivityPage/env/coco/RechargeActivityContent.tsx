@@ -11,7 +11,7 @@ export const RechargeActivityContent = () => {
   const RechargeButton = () => {
     return (
       <section className={"flex justify-center items-center "}>
-        <ChargeButton onClick={onClickToWallet} className={"text-white text-xl md:text-lg mt-1 mb-4 md:my-8"}>Recarregue agora</ChargeButton>
+        <ChargeButton onClick={()=>onClickToWallet({'panelType':'deposit'})} className={"text-white text-xl md:text-lg mt-1 mb-4 md:my-8"}>Recarregue agora</ChargeButton>
       </section>
     )
   }
