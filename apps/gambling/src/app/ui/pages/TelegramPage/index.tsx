@@ -136,7 +136,6 @@ export const TelegramPage = () => {
       <section className={"flex justify-center items-center invisible sm:visible"}>
         <GoToTelegram onClick={() => {
           window.open(telegramUrl, '_blank')
-          // navigate(PageOrModalPathEnum.WalletPage);
         }} className={"text-white text-lg "}>
           <img className={"w-[30px] mr-4"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />
           Junte-se</GoToTelegram>

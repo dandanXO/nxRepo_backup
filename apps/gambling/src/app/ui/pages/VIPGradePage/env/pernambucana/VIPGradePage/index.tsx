@@ -13,6 +13,7 @@ import {
 import { LevelList } from "../../../../DailySignInPage";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
+import { usePageNavigate } from "apps/gambling/src/app/ui/hooks/usePageNavigate";
 
 const VIPContainer = styled.div`
   background-color: rgba(40, 112, 82, 0.1);
@@ -213,6 +214,7 @@ const Pernambucana777BetVIPGradePage = ({
 }: IPernambucana777BetVIPGradePageProps) => {
 
   const navigate = useNavigate();
+  const {onClickToWallet} = usePageNavigate();
 
   if (isMobile) {
     return <Pernambucana777BetVIPGradeMobileTemplate
@@ -308,7 +310,7 @@ const Pernambucana777BetVIPGradePage = ({
               />
 
               <div className={'shrink-0'}>
-                <IRLevelButton className='text-2xl px-14 py-4' onClick={()=> navigate(PageOrModalPathEnum.WalletPage)}>
+                <IRLevelButton className='text-2xl px-14 py-4' onClick={()=>onClickToWallet({'panelType':'deposit'})}>
                   <span className={'text-lg font-bold'}>IR</span>
                 </IRLevelButton>
               </div>

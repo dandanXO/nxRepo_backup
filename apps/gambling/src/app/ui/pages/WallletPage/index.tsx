@@ -19,6 +19,7 @@ import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"
 import { WalletPage as WWallletPage } from "./env/wild/WalletPage";
 import { WalletPage as CWallletPage } from "./env/coco/WalletPage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import queryString from 'query-string';
 
 export type IPanelType = "deposit" | "withdraw" | "record";
 export type IRecordPanelType = 'deposit' | 'withdraw';
@@ -28,8 +29,8 @@ export const WallletPage = () => {
   useAllowLoginRouterRules();
 
   const {onClickToIndex} = usePageNavigate();
-
-  const [panelMode, setPanelMode] = useState<IPanelType>("deposit");
+  const {panelType}  = queryString.parse(window.location.search) ||  "deposit";
+  const [panelMode, setPanelMode] = useState<IPanelType>(panelType as IPanelType);
 
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
   useEffect(() => {
@@ -37,6 +38,7 @@ export const WallletPage = () => {
       triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
     }
   }, [panelMode])
+
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)
 
   const [recordPanelMode, setRecordPanelMode] = useState<IRecordPanelType>('deposit');

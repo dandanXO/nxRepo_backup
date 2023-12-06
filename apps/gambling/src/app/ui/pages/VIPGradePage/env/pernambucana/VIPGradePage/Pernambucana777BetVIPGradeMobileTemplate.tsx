@@ -15,6 +15,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../../../../reduxStore";
 import {environment} from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
+import { usePageNavigate } from 'apps/gambling/src/app/ui/hooks/usePageNavigate';
 
 export const LevelListBottomBr = styled.div`
   height: 1rem;
@@ -92,7 +93,7 @@ const Pernambucana777BetVIPGradeMobileTemplate = ({
   }, [vip_level]);
 
   const navigate = useNavigate();
-
+  const {onClickToWallet} = usePageNavigate();
   const currentLevelInfo = allLevelInfo?.find(
     (info) => info.level === currentSelectedLevel
   );
@@ -175,7 +176,7 @@ const Pernambucana777BetVIPGradeMobileTemplate = ({
               />
 
               <div className={'shrink-0'}>
-                <IRLevelButton className='text-base px-8 py-2' onClick={()=>navigate(PageOrModalPathEnum.WalletPage)}>
+                <IRLevelButton className='text-base px-8 py-2' onClick={()=>onClickToWallet({'panelType':'deposit'})}>
                   <span className={'text-[#247855] font-bold'}>IR</span>
                 </IRLevelButton>
               </div>

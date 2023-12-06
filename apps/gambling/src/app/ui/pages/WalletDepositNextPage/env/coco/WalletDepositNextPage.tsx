@@ -44,6 +44,7 @@ export const WalletDepositNextPage = () => {
   // const [triggerRecharge, { data, isLoading, isSuccess, isError }] = useRechargeMutation();
   const location = useLocation();
   const navigate = useNavigate();
+  const {onClickToWallet} = usePageNavigate();
   const data = location.state.data || {};
   const amount = location.state.amount || 0;
   const [api, contextHolder] = notification.useNotification();
@@ -57,7 +58,7 @@ export const WalletDepositNextPage = () => {
 
   useEffect(() => {
     if (location.state.amount === 0) {
-      navigate(PageOrModalPathEnum.WalletPage)
+      handleToWalletPage()
     }
   }, [location.state.amount])
 
@@ -65,7 +66,7 @@ export const WalletDepositNextPage = () => {
 
 
   const handleToWalletPage = () => {
-    navigate(PageOrModalPathEnum.WalletPage)
+    onClickToWallet({'panelType':'deposit'})
   }
 
   useEffect(() => {
@@ -100,7 +101,7 @@ export const WalletDepositNextPage = () => {
 
   const shadowContainerStyle = isMobile ? mobileShadowContainerStyle : deskTopShadowContainerStyle
 
-  const {onClickToWallet} = usePageNavigate();
+
 
   return (
       <div className={cx("px-4 pb-14 md:px-24")}>
@@ -110,7 +111,7 @@ export const WalletDepositNextPage = () => {
           title={isMobile && (
             <span className={cx("text-white text-lg text-center flex-1 font-bold")}>{"Depósito"}</span>
           )}
-          onClick={()=> onClickToWallet()}
+          onClick={()=>onClickToWallet({'panelType':'deposit'})}
         />
 
         {isMobile && (

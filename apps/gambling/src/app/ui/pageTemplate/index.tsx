@@ -32,6 +32,7 @@ import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
 import {MaintenanceModal} from "../modals/MaintenanceModal";
+import { usePageNavigate } from "../hooks/usePageNavigate";
 
 
 console.log("[APP] environment", environment);
@@ -217,6 +218,8 @@ export const PageTemplate = (props: IPage) => {
 
 
   const location = useLocation();
+  const {onClickToWallet} = usePageNavigate();
+
   // console.log("location", location);
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
 
@@ -386,7 +389,7 @@ export const PageTemplate = (props: IPage) => {
             close={()=>dispatch(appSlice.actions.setShowDepositModal(false))}
             onConfirm={()=>{
               dispatch(appSlice.actions.setShowDepositModal(false));
-              navigate(PageOrModalPathEnum.WalletPage);
+              onClickToWallet({'panelType':'deposit'})
             }}
           />
         )

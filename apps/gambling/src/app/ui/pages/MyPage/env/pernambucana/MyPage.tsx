@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import styled, { keyframes } from "styled-components";
 import { GetVIPInfoResponse } from "../../../../../external";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 
 const ListItemContainer = styled.div`
   background: var(--varient);
@@ -188,6 +189,8 @@ const MyPage = ({
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {onClickToWallet} = usePageNavigate();
+
 
   return (
     <>
@@ -255,17 +258,15 @@ const MyPage = ({
             <div className={"item flex-1"}>
               <div className={"title text-white mb-2"}>Fundos totais</div>
               <div className={"money text-lg mb text-main-secondary-main"}>R${totalBalanceSheetValue}</div>
-              <MyPageButtonD onClick={() => {
-                navigate(PageOrModalPathEnum.WalletPage)
-              }} className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Depósito</MyPageButtonD>
+              <MyPageButtonD  onClick={()=>onClickToWallet({'panelType':'deposit'})}
+               className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Depósito</MyPageButtonD>
             </div>
 
             <div className={"item flex-1"}>
               <div className={"title text-white mb-2"}>Retirável Total</div>
               <div className={"money text-lg mb text-main-secondary-main"}>R${totalReasableValue}</div>
-              <MyPageButtonW onClick={() => {
-                navigate(PageOrModalPathEnum.WalletPage)
-              }} className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Retirar</MyPageButtonW>
+              <MyPageButtonW  onClick={()=>onClickToWallet({'panelType':'withdraw'})}
+               className={"rounded-xl px-4 py-3 text-white font-bold text-lg"}>Retirar</MyPageButtonW>
             </div>
 
           </section>
@@ -274,9 +275,7 @@ const MyPage = ({
         <div className={"text-white text-lg font-bold text-left mb-2 mt-5"}>Outras funções</div>
 
         <ListItemContainer className={"control-item text-white !font-sm"}>
-          <ListItem first={true} bottomBorder={true} onClick={() => {
-            navigate(PageOrModalPathEnum.WalletPage)
-          }}>
+          <ListItem first={true} bottomBorder={true} onClick={()=>onClickToWallet({'panelType':'record'})}>
             <div className={"flex flex flex-row items-center"}>
               <img alt={"order-record"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_account_bill.png`}/>
               <span className={"font-bold"}>Registros de cobrança</span>
