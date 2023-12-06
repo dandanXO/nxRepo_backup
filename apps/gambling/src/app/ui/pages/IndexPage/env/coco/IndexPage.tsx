@@ -189,7 +189,7 @@ export const IndexPage = ({
           className={cx(
             "",
             {
-              "bg-[var(--primary-variant)] z-20": isMobile,
+              "bg-[var(--background-primary)] z-20": isMobile,
               // "sticky top-[52.5px] left-0 right-0": isMobile,
               "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
             },

@@ -11,9 +11,10 @@ export const ImageTab = styled.div<{
   font-size: 14px;
   cursor: pointer;
 
+  // NOTICE: 左上右下斜邊
   //border-radius: 16px 4px 16px 4px;
   border-radius: 8px;
-  /* margin-right: 8px; */
+
   //padding: 0 10px;
   flex-basis: auto;
 
