@@ -50,7 +50,7 @@ export const IndexTabs = ({
             return (
               <ImageTab
                 key={index}
-                className={cx("flex row justify-center items-center px-5 md:px-6",{
+                className={cx("flex row justify-center items-center px-4 md:px-6",{
 
                 })}
                 active={activeTab === tab}

@@ -21,7 +21,7 @@ export const MobileGameItem = (props: IItem) => {
 
   return (
     <StyledMobileGameItem
-      className={cx("p-1 shrink-0 grow-0 basis-[33%] overflow-hidden  rounded-2xl flex flex-col items-center relative", {
+      className={cx("p-2 shrink-0 grow-0 basis-[33%] overflow-hidden rounded-2xl flex flex-col items-center relative", {
 
       }, props.className)}
     >

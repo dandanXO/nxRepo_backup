@@ -11,6 +11,9 @@ import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
 import {Container} from "../../../../../components/container/Container";
 import {IAppCarouselContent} from "../../types";
+import {CarouselTitle} from "./CarouselTitle";
+import {CarouselImage} from "./CarouselImage";
+import {CarouselTitleSection} from "./CarouselTitleSection";
 
 export const AppCarouselContent4 = (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
@@ -24,34 +27,16 @@ export const AppCarouselContent4 = (props: IAppCarouselContent) => {
         onClickToVipGrade();
       }}
     >
-      {isMobile ? (
-        <div
-        >
-          <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 font-bold text-2xl md:text-3xl text-left">
-            Prêmio upgrade VIP<br/> Só esperando você coletar!
-          </p>
-          <img
-            className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_4.png`}
-          />
-        </div>
-      ) : (
-        <div
-          className="banner w-screen"
-        >
-          <Container
-            className={cx("absolute top-1/2 transform -translate-y-1/2",
-              "font-bold text-6xl text-left"
-            )}
-          >
-            Prêmio upgrade VIP<br/> Só esperando você coletar!
-          </Container>
-          <img
-            className={"w-[100vw]"}
-            src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_4.png`}
-          />
-        </div>
-      )}
+      <div className={""}>
+        <CarouselTitleSection>
+          Prêmio upgrade VIP<br/> Só esperando você coletar!
+        </CarouselTitleSection>
+        {isMobile ? (
+          <CarouselImage alt={"h5_banner_4"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_4.png`}/>
+        ): (
+          <CarouselImage alt={"banner_4"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_4.png`}/>
+        )}
+      </div>
     </CarouselContainer>
   )
 }

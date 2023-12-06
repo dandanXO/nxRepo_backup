@@ -66,14 +66,16 @@ export const DownloadModal = (props: IInitialChargeModal) => {
             "rounded-2xl border-solid border-[1px] border-[var(--primary-assistant)]",
             "bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)]",
             "flex flex-col items-center",
-            "p-6 w-[400px] w-min-[80vh] w-max-[400px] h-auto",
+            "p-4",
             "text-center text-white",
+            // NOTE:
+            "w-[90vw] max-w-[336px] h-auto",
           )}
         onClick={(event: any) => {
           event.stopPropagation();
         }}
       >
-        <div className={"flex flex-row justify-end mb-2 absolute right-[20px] top-[20px]"}>
+        <div className={"flex flex-row justify-end mb-2 absolute right-[10px] top-[10px]"}>
           <div
             onClick={() => {
               props.close();
@@ -83,14 +85,14 @@ export const DownloadModal = (props: IInitialChargeModal) => {
           </div>
         </div>
 
-        <div className="info text-white mb-8">
+        <div className="info text-white mt-5 mb-2">
           <div>Ao digitalizar o código QR, você pode</div>
           <div>jogos de cliente</div>
           <div>instantaneamente e sem problemas.</div>
         </div>
 
         <section className={""}>
-          <QRCode className="w-[270px] h-[270px] mb-6" value={String(downloadUrl)} />
+          <QRCode className="w-full px-4 mb-2" value={String(downloadUrl)} />
           {/* <img className={"w-[100%] h-[100%]"} src={"https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg"}/> */}
 
           <div className={""}>

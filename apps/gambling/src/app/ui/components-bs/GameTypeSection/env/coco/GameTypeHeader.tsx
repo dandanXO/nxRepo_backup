@@ -40,7 +40,7 @@ export const GameTypeHeader = (props: {
           <button
             onClick={props.onClick}
             className={
-              cx("rounded-lg border-[1px] px-4 pt-[5px] pb-[2px] text-sm !font-bold",
+              cx("rounded-lg border-[1px] px-4 py-1 text-sm !font-bold",
                 "text-[var(--primary-assistant)] border-[var(--primary-assistant)] hover:opacity-70")
             }
           >{isMobile ? "Tudo" : `Ver todos ${props?.count}`}</button>

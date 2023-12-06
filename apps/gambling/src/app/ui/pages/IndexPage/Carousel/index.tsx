@@ -1,8 +1,9 @@
 // https://react-multi-carousel.surge.sh/
 import Carousel, {StateCallBack} from "react-multi-carousel";
+import "./style.scss";
+
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import cx from "classnames";
-
 // const responsive = {
 //   superLargeDesktop: {
 //     // the naming can be any, depends on you.
@@ -67,7 +68,8 @@ export const AppCarousel = (props: IAppCarousel) => {
 
   return (
     <div className={cx({
-      "isdesktop": !isMobile
+      "isdesktop": !isMobile,
+      "ismobile": isMobile
     })}>
       <Carousel
         // customDot={<div className={"bg-red w-[30px] h-[20px]"}/>}

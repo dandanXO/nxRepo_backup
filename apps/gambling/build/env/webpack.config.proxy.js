@@ -18,7 +18,7 @@ if(!isProduction) {
       break;
     }
     case 'coco777bet': {
-      proxyURL = 'https://www.hxj-dev.com';
+      proxyURL = 'https://www.ttgroup-dev.vip';
       PORT = 4002;
       break;
     }
