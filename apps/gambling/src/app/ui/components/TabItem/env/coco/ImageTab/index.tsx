@@ -13,8 +13,9 @@ export const ImageTab = styled.div<{
 
   //border-radius: 16px 4px 16px 4px;
   border-radius: 8px;
-  margin-right: 8px;
+  /* margin-right: 8px; */
   //padding: 0 10px;
+  flex-basis: auto;
 
   ${props => {
     if (!props.active) {

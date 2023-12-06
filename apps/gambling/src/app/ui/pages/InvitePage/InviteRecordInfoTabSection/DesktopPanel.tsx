@@ -57,12 +57,12 @@ export const DesktopPanel = ({
 
           <div className={"w-[510px] mb-4"}>
             <Tabs className={"game-type-tab-list"}>
-              <TabItem {...tabItemProps(totalPanelMode === "1")} name={"Promoção nível 1"} active={totalPanelMode === "1"} size={"auto"}
+              <TabItem {...tabItemProps(totalPanelMode === "1",'mr-5')} name={"Promoção nível 1"} active={totalPanelMode === "1"} size={"auto"}
                 onClick={() => {
                   setTotalPanelMode("1")
                 }}
               />
-              <TabItem {...tabItemProps(totalPanelMode === "2")} name={"Promoção nível 2"} active={totalPanelMode === "2"} size={"auto"}
+              <TabItem {...tabItemProps(totalPanelMode === "2",'mr-5')} name={"Promoção nível 2"} active={totalPanelMode === "2"} size={"auto"}
                 onClick={() => {
                   setTotalPanelMode("2")
                 }} />
@@ -89,14 +89,14 @@ export const DesktopPanel = ({
 
           <div className={"w-[510px] mb-4"}>
             <Tabs className={"game-type-tab-list"}>
-              <TabItem {...tabItemProps(dailyPanelMode === "1")} name={"Promoção nível 1"} active={dailyPanelMode === "1"} size={"auto"} onClick={() => {
+              <TabItem {...tabItemProps(dailyPanelMode === "1",'mr-5')} name={"Promoção nível 1"} active={dailyPanelMode === "1"} size={"auto"} onClick={() => {
                 setDailyPanelMode("1")
               }}
               />
-              <TabItem {...tabItemProps(dailyPanelMode === "2")} name={"Promoção nível 2"} active={dailyPanelMode === "2"} size={"auto"} onClick={() => {
+              <TabItem {...tabItemProps(dailyPanelMode === "2",'mr-5')} name={"Promoção nível 2"} active={dailyPanelMode === "2"} size={"auto"} onClick={() => {
                 setDailyPanelMode("2")
               }} />
-              <TabItem {...tabItemProps(dailyPanelMode === "3")} name={"Promoção nível 3"} active={dailyPanelMode === "3"} size={"auto"} onClick={() => {
+              <TabItem {...tabItemProps(dailyPanelMode === "3",'mr-5')} name={"Promoção nível 3"} active={dailyPanelMode === "3"} size={"auto"} onClick={() => {
                 setDailyPanelMode("3")
               }} />
             </Tabs>
