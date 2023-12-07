@@ -1,20 +1,20 @@
 import styled from "styled-components";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {appStore, RootState} from "../../../reduxStore";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {appStore, RootState} from "../../../../reduxStore";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
-import {totalBalanceSheetSelector} from "../../../reduxStore/appSlice";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
+import {totalBalanceSheetSelector} from "../../../../reduxStore/appSlice";
+import {useAutoUpdateBalance} from "../../../hooks/useAutoUpdateBalance";
 import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "react-loading-icons";
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../../../environments/environment";
 import cx from "classnames";
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByPlatform } from "../../../utils/renderByPlatform";
 import { PersonalControl as CocoPersonalControl } from '../env/coco/PersonalControl'
 import { PersonalControl as WildPersonalControl } from '../env/wild/PersonalControl'
 import { PersonalControl as PernambucanaPersonalControl } from '../env/pernambucana/PersonalControl'
-import { formatLocaleMoney } from "../../utils/format";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import { formatLocaleMoney } from "../../../utils/format";
+import { usePageNavigate } from "../../../hooks/usePageNavigate";
 
 
 const PersonalControl = renderByPlatform({

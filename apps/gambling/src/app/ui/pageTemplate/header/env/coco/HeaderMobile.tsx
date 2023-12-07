@@ -3,15 +3,15 @@ import {useNavigate} from "react-router";
 import {useSelector} from "react-redux";
 import cx from "classnames";
 
-import useBreakpoint from "../../../hooks/useBreakpoint";
-import {RootState} from "../../../../reduxStore";
-import {environment} from "../../../../../environments/environment";
-import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {RootState} from "../../../../../reduxStore";
+import {environment} from "../../../../../../environments/environment";
+import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import { RegisterButton} from "../../../components/Buttons/RegisterButton";
-import { MessageCountBadge } from "../../../components/MessageCountBadge";
-import {AssetMappingCoco} from "../../../../../assets/assetMapping.coco";
-import {MenuIcon} from "../../../components/Icons/MenuIcon";
+import { RegisterButton} from "../../../../components/Buttons/RegisterButton";
+import { MessageCountBadge } from "../../../../components/MessageCountBadge";
+import {AssetMappingCoco} from "../../../../../../assets/assetMapping.coco";
+import {MenuIcon} from "../../../../components/Icons/MenuIcon";
 
 export type IHeaderMobile = {
   clickToOpenMenuDrawer: () => void;

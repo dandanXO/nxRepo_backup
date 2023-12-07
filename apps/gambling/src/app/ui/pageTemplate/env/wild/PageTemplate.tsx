@@ -3,15 +3,15 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
-import {TabBar} from "../../../tabBar";
+import {TabBar} from "../../tabBar";
 import {Toolbox} from "../../../components/Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";
-import {Header} from "../../../header/env/wild/Header";
-import {HeaderMobile} from "../../../header/env/wild/HeaderMobile";
-import {Footer} from "../../../footer/wild/Footer";
+import {Header} from "../../header/env/wild/Header";
+import {HeaderMobile} from "../../header/env/wild/HeaderMobile";
+import {Footer} from "../../footer/wild/Footer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
 import { TShowToolboxConfig } from "../../index";
 

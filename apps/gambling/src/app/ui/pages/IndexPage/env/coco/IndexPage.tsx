@@ -130,7 +130,7 @@ export const IndexPage = ({
         // "p-4": !isMobile,
       })}>
         {isSearch && <GameSearchModal userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} onClose={()=>setIsSearch(false)}/>}
-        {/*{isMobile && <CompanySloganLabel/>}*/}
+        {isMobile && <CompanySloganLabel/>}
         <AppCarousel setIsMoving={setIsMoving}>
           <AppCarouselContent isMoving={isMoving}/>
           <AppCarouselContent2 isMoving={isMoving}/>
