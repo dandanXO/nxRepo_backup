@@ -27,6 +27,7 @@
     "payOutSuccess": "放款成功",
     "payeeAccount": "收款帐户",
     "paymentMethod": "收款方式",
+    "paymentOrderNumber": "代付訂單編號",
     "productName": "申请产品",
     "receiverName": "收款人姓名",
     "reductionAmount": "减免金额({{unit}})",

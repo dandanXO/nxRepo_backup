@@ -27,6 +27,7 @@
     "payOutSuccess": "Transferencia exitosa",
     "payeeAccount": "Cuenta del Beneficiario",
     "paymentMethod": "Método de Pago",
+    "paymentOrderNumber": "Número de Orden de Pago",
     "productName": "Nombre del producto",
     "receiverName": "Nombre del Beneficiario",
     "reductionAmount": "Monto de reducción ({{unit}})",

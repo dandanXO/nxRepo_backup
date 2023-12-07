@@ -28,7 +28,7 @@ export const useEnum = (
     CurrentDayOrderStatusEnum: any;
     OverDueOrderStatusEnum: any;
     TotalOverdueStageEnum: any;
-    PayOutStatusEnum: Record<TPayOutStatus, { text: string; color: string }>;
+    PayOutStatusEnum: Map<TPayOutStatus, { text: string; color: string }>;
     PayOutMethodEnum: Map<TPayOutMethod, string>;
 } => {
     const { t } = useTranslation(translationNameSpase);
@@ -129,11 +129,11 @@ export const useEnum = (
         },
     };
 
-    const PayOutStatusEnum: Record<TPayOutStatus, { text: string; color: string }> = {
-        finish: { text: t('order:payOutSuccess'), color: 'blue' },
-        fail: { text: t('order:payOutFail'), color: 'red' },
-        pending: { text: t('order:payOutPending'), color: '' },
-    };
+    const PayOutStatusEnum: Map<TPayOutStatus, { text: string; color: string }> = new Map([
+        ['finish', { text: t('order:payOutSuccess'), color: 'blue' }],
+        ['fail', { text: t('order:payOutFail'), color: 'red' }],
+        ['pending', { text: t('order:payOutPending'), color: '' }],
+    ]);
 
     const PayOutMethodEnum: Map<TPayOutMethod, string> = new Map([
         ['BANK_ACCOUNT', t('common:bankCard')],

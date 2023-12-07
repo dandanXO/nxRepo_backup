@@ -205,7 +205,11 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 title: t('common:status'),
                 dataIndex: 'loanCertificate.status',
                 render: (value) =>
-                    value ? <Tag color={PayOutStatusEnum[value].color}>{PayOutStatusEnum[value].text}</Tag> : '-',
+                    value ? (
+                        <Tag color={PayOutStatusEnum.get(value).color}>{PayOutStatusEnum.get(value).text}</Tag>
+                    ) : (
+                        '-'
+                    ),
             },
             {
                 title: t('order:payOutAmount', { unit: AMOUNT_UNIT }),
@@ -221,6 +225,10 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 title: t('order:payOutFinishTime'),
                 dataIndex: 'loanCertificate.finishTime',
                 render: (value) => moment(value).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            {
+                title: t('order:paymentOrderNumber'),
+                dataIndex: 'loanCertificate.orderNo',
             },
             {
                 title: t('order:receiverName'),

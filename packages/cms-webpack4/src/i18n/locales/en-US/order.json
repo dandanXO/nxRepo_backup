@@ -27,6 +27,7 @@
     "payOutSuccess": "Transfer Successful",
     "payeeAccount": "Payee's Account",
     "paymentMethod": "Payment Method",
+    "paymentOrderNumber": "Payment Order Number",
     "productName": "Product Name",
     "receiverName": "Payee's Name",
     "reductionAmount": "Reduction Amount({{unit}})",
