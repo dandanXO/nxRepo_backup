@@ -42,8 +42,11 @@ const useRepayCreate = () => {
           }
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
-            // window.location.href = data.nextUrl;
+            // NOTE: For iOS
+            window.location.href = data.nextUrl;
+            // NOTE: For Android
             window.open(data.nextUrl)
+
             navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
 
              // NOTICE: 取得是否要跳出複借預約彈窗
