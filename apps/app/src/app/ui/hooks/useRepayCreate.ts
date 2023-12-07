@@ -43,7 +43,7 @@ const useRepayCreate = () => {
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
             // NOTE: For iOS
-            // window.location.href = data.nextUrl;
+            window.location.href = data.nextUrl;
             console.log("data.nextUrl:", data.nextUrl);
             // NOTE: For Android
             window.open(data.nextUrl)
