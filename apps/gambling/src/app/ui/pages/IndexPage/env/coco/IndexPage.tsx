@@ -123,7 +123,7 @@ export const IndexPage = ({
 
   return (
     <>
-      <div id="app-carousel" className={cx("w-full bg-[#020E29]",
+      <div id="app-carousel" className={cx("w-full",
         // "max-h-[160px] md:h-[400px] bg-[red]",
         {
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
@@ -150,20 +150,15 @@ export const IndexPage = ({
       {/*Tabs - mobile*/}
       {isMobile && (
         <div
-          className={cx(
-            "py-2",
-            {
-              "bg-[var(--primary-variant)] z-20": isMobile,
-              // "sticky top-[52.5px] left-0 right-0": isMobile,
-              "fixed top-[52px] left-0 right-0": showFixForIOSStickTab && isMobile,
-            },
-            {
-              "bg-[var(--background-primary)]" : !isMobile
-            }
-          )}
-        >
+        className={cx(
+          "py-2 bg-[var(--primary-variant)] z-20 border border-solid border-[var(--white-20)]",
+          {
+            "fixed top-[52px] left-0 right-0": showFixForIOSStickTab && isMobile,
+          },
+        )}
+      >
           <div className={""}>
-            <div className={"whitespace-nowrap px-4"}>
+            <div className={"whitespace-nowrap px-4  "}>
               <DragScrollContainer className="flex flex-row items-center">
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
                 <IndexTabs
@@ -188,15 +183,6 @@ export const IndexPage = ({
         <Container
           className={cx(
             "",
-            {
-              "bg-[var(--background-primary)] z-20": isMobile,
-              // "sticky top-[52.5px] left-0 right-0": isMobile,
-              "fixed top-[52.5px] left-0 right-0": showFixForIOSStickTab && isMobile,
-            },
-            {
-              "bg-[var(--background-primary)]" : !isMobile
-            },
-            // "md:pr-[86px]",
             DesktopXPadding,
           )}
         >
@@ -228,7 +214,7 @@ export const IndexPage = ({
 
       {/*SearchInput*/}
       {isMobile ? (
-        <Container y={false} className="bg-[var(--background-primary)] pt-2" onClick={()=>setIsSearch(true)}>
+        <Container y={false} className="pt-2" onClick={()=>setIsSearch(true)}>
           {/*NOTICE: refactor me*/}
           <Input
             disable={true}
@@ -247,7 +233,7 @@ export const IndexPage = ({
       {
         recentGameList.length > 0 && (
           <Container
-            className={tcx('bg-[var(--background-primary)] overflow-hidden', [DesktopXPadding, !isMobile])}
+            className={tcx('overflow-hidden', [DesktopXPadding, !isMobile])}
           >
             <GameListSection
               className='mb-0 pl-0 px-0'
@@ -271,7 +257,7 @@ export const IndexPage = ({
         )
       }
 
-      <Container className={cx("pb-16 bg-[var(--background-primary)]", {
+      <Container className={cx("pb-16", {
         [DesktopXPadding]: !isMobile,
       })}>
         {gameList()}
