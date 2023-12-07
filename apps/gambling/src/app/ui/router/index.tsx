@@ -429,6 +429,7 @@ export const AppRouter = () => {
             <PageTemplate
               // common
               showMobileFooter={false}
+              showDesktopFooter={false}
               showToolboxConfig={false}
               // desktop
               showDesktopHeader={false}
@@ -441,7 +442,10 @@ export const AppRouter = () => {
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.GameSearchPage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false}>
+            <PageTemplate
+              showMobileHeader={false}
+              showMobileFooter={false}
+            >
               <GameSearchPage/>
             </PageTemplate>
           )}/>
