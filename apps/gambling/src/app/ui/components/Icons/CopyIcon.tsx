@@ -25,7 +25,7 @@ export const CopyIcon = (props: ICopyIcon) => {
   return (
     <button className={cx('hover:rounded-full hover:bg-[rgba(255,255,255,0.7)]')} onClick={onClickToCopy}>
       {contextHolder}
-      {icon ? icon : <CopyOutlined className={cx(`text-base`, className)}  />}
+      {icon ? icon : <CopyOutlined className={cx(`text-base flex justify-center items-center`, className)}  />}
     </button>
   )
 }

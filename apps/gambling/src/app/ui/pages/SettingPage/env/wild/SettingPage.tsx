@@ -70,7 +70,7 @@ export const SettingPage = ({
               <button
                 className={tcx(
                   'flex items-center',
-                  ['bg-red-600 rounded-3xl px-3 bg-gradient-to-r from-[#FFA305] to-[#FFCC5A]', !isMobile]
+                  ['bg-transparent rounded-3xl px-3 bg-gradient-to-r from-[#FFA305] to-[#FFCC5A]', !isMobile]
                 )}
                 onClick={()=> setEditing(true)
               }>
