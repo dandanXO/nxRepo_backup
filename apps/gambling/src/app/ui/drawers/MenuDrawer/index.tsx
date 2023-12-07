@@ -44,6 +44,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
           "border-r border-r-[var(--drawer-border)]",
           "fixed bottom-0 w-[276px] min-w-[276px] h-full z-30",
           "bg-[var(--drawer-bg)]",
+          "overflow-auto",
           {
             "ease-in-out duration-300": isMobile,
             // "w-[0px]": !isShowDesktopMenuDrawer,

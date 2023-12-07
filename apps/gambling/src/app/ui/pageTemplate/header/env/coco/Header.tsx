@@ -3,17 +3,17 @@ import cx from "classnames";
 import React, { useState } from "react";
 import { UserMoneyStatusSection } from "../../UserMoneyStatusSection";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../reduxStore";
-import { environment } from "../../../../../environments/environment";
-import { LoginButton } from "../../../components/Buttons/LoginButton";
+import { RootState } from "../../../../../reduxStore";
+import { environment } from "../../../../../../environments/environment";
+import { LoginButton } from "../../../../components/Buttons/LoginButton";
 import { HeaderMenu } from "./HeaderMenu";
-import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
-import { AppLocalStorage } from "../../../../persistant/localstorage";
-import { usePageNavigate } from "../../../hooks/usePageNavigate";
-import {IUserInfo} from "../../../../persistant/IUserInfo";
-import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
-import {NotificationAnimationIcon} from "../../../components/Icons/animation/NotificationAnimationIcon";
-import {MenuLogo} from "../../../components/Logos/MenuLogo";
+import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import {IUserInfo} from "../../../../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {NotificationAnimationIcon} from "../../../../components/Icons/animation/NotificationAnimationIcon";
+import {MenuLogo} from "../../../../components/Logos/MenuLogo";
 
 const DirectionIcon = styled.img<{
   active?: boolean

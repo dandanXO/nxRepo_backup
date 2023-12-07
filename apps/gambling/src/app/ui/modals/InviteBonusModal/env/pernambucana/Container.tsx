@@ -4,7 +4,7 @@ import cx from "classnames";
 
 export const Container = styled.div.attrs((props) => ({
   className: cx(
-    "w-[90vh] max-w-[350px] rounded-2xl flex flex-col items-center relative",
+    "rounded-2xl flex flex-col items-center relative",
     "bg-[black] text-white",
     props.className
   ),

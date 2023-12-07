@@ -34,7 +34,8 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
 
       <Container
         className={
-          "w-[90vw] max-w-[336px] sm:max-w-[80vw] md:max-w-[340px] h-auto"
+          // NOTE:
+          "w-[90vw] max-w-[336px] h-auto"
         }
         onClick={(event: any) => {
           event.stopPropagation();

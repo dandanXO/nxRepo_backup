@@ -18,6 +18,8 @@ import v65 from './india/v65/tailwind.theme';
 import v66 from './india/v66/tailwind.theme';
 import v67 from './india/v67/tailwind.theme';
 import v68 from './india/v68/tailwind.theme';
+// NOTICE: Android 之前版本把 68 帶錯成 26
+import v26 from './india/v68/tailwind.theme';
 import v69 from './india/v69/tailwind.theme';
 import v70 from './india/v70/tailwind.theme';
 import v71 from './india/v71/tailwind.theme';
@@ -127,6 +129,7 @@ export const DEFAULT_PHILIPPINES_THEME = 'v1';
 // REFACTOR:
 export const themes: IThemes = {
   [AllCountriesEnum.india]: {
+    v26,
     v38,
     v49,
     v55,

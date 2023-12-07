@@ -3,15 +3,15 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
-import {Footer} from "../../../footer/coco/Footer";
+import {Footer} from "../../footer/coco/Footer";
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
-import {TabBar} from "../../../tabBar";
+import {TabBar} from "../../tabBar";
 import {Toolbox} from "../../../components/Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";
-import {Header} from "../../../header/env/coco/Header";
-import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
+import {Header} from "../../header/env/coco/Header";
+import {HeaderMobile} from "../../header/env/coco/HeaderMobile";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
 import { TShowToolboxConfig } from "../../index";
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
