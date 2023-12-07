@@ -16,11 +16,12 @@ interface IGameListSection {
   gameListClassName?: string;
   children: React.ReactElement[] | React.ReactElement;
   isShowHeader?: boolean;
+  loadMore?:()=>void;
+  expandedBrand?:boolean;
 }
 export const GameListSection = (props: IGameListSection) => {
   const { isMobile } = useBreakpoint();
   const { headerClassName, icon, title, className, gameListClassName, children, isShowHeader = true } = props;
-
 
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -85,7 +86,7 @@ export const GameListSection = (props: IGameListSection) => {
       {isShowHeader &&
         (<div className={tcx('flex flex-row justify-between mb-2 sm:mb-3.5 pl-1 sm:pl-0', headerClassName)}>
           <div className='flex justify-center items-center'>
-            <div>{icon && icon}</div>
+            <div className=''>{icon && icon}</div>
             <div className='text-xs sm:text-base items-center flex'>{title}</div>
           </div>
           {!isMobile && isOverflowedX && <div className='flex '>
@@ -100,6 +101,16 @@ export const GameListSection = (props: IGameListSection) => {
         : (<DragScrollContainer className={cx("flex flex-1 overflow-hidden", gameListClassName)}>
           {children}
         </DragScrollContainer>)
+      }
+       {props.expandedBrand &&
+        <div className="flex-1 mt-4 justify-center flex">
+          <button
+            onClick={props.loadMore}
+            className="text-white bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)] py-2 px-4 rounded-[32px] font-medium"
+          >
+            Ver Mais
+          </button>
+        </div>
       }
 
     </div>
