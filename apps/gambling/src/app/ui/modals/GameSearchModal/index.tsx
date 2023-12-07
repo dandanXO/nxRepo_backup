@@ -55,7 +55,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
     if (data?.length > 0) {
       return (
         <div className={cx("flex", {
-          "flex-wrap": isMobile
+          "flex-wrap w-full": isMobile
         })}>
           {data && data.map((item: any, index: any) => {
             return (
@@ -101,7 +101,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
               <button onClick={props.onClose} className="-m-2"><CloseICON /></button>
 
             </div>
-            <SearchInput 
+            <SearchInput
               placeholder={"Pesquisar nome do jogo"}
               value={searchInput.data}
               onChange={(event: any) => {
