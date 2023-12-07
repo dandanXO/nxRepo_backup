@@ -44,6 +44,7 @@ const useRepayCreate = () => {
             // NOTICE: 跳轉至付款頁面
             // NOTE: 最初的 Android, For iOS,
             window.location.href = data.nextUrl;
+            window.location.replace(data.nextUrl);
             console.log("data.nextUrl:", data.nextUrl);
             // NOTE: For Android
             window.open(data.nextUrl)
