@@ -33,6 +33,7 @@ const converData = (obj = {}) => {
         bankInfo: obj['bank'],
         expireTime: obj['expireTime'] ? moment(Number(obj['expireTime']) * 1000).format('YYYY-MM-DD HH:mm:ss') : '',
         couponUsageAmount: obj['couponUsageAmount'],
+      loanCertificate: obj['loanCertificate'] || {}
     }
 };
 const userConvertData = (obj = {}) => {

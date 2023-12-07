@@ -1,5 +1,6 @@
 {
   "country": "Philippines",
+  "currency": "₹",
   "Registrations": false,
   "timezone":"Asia/Manila",
   "waterMarkColor":"rgba(0,0,0,.6)"
