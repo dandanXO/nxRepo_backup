@@ -1,5 +1,5 @@
 import {Avatar} from "./index";
-import {AvatarContainer} from "../../header/env/coco/AvatarContainer";
+import {AvatarContainer} from "../../pageTemplate/header/env/coco/AvatarContainer";
 import { tcx } from "../../utils/tcx";
 
 interface ICocoAvatarProps {

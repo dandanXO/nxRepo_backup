@@ -1,23 +1,23 @@
 import styled from "styled-components";
 import cx from "classnames";
 import React, { useState } from "react";
-import { ConfirmButton } from "../../../components/Buttons/ConfirmButton";
+import { ConfirmButton } from "../../../../components/Buttons/ConfirmButton";
 import { UserMoneyStatusSection } from "../../UserMoneyStatusSection";
-import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
+import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../reduxStore";
-import { MessageCountBadge } from "../../../components/MessageCountBadge";
-import { environment } from "../../../../../environments/environment";
-import { Avatar } from "../../../components/Avatar";
-import { AvatarAccountInfo } from "../../../components/AvatarAccountInfo";
+import { RootState } from "../../../../../reduxStore";
+import { MessageCountBadge } from "../../../../components/MessageCountBadge";
+import { environment } from "../../../../../../environments/environment";
+import { Avatar } from "../../../../components/Avatar";
+import { AvatarAccountInfo } from "../../../../components/AvatarAccountInfo";
 import { LoginButton } from "./LoginButton";
 import { HeaderMenu } from "./HeaderMenu";
-import { CocoAvatar } from "../../../components/Avatar/CocoAvatar";
-import { AppLocalStorage } from "../../../../persistant/localstorage";
-import { usePageNavigate } from "../../../hooks/usePageNavigate";
-import {IUserInfo} from "../../../../persistant/IUserInfo";
-import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
+import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import {IUserInfo} from "../../../../../persistant/IUserInfo";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 
 
 const Notification = styled.section`

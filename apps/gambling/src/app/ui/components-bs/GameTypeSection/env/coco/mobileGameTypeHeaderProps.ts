@@ -1,6 +1,6 @@
 export const mobileGameTypeHeaderProps = {
   showIcon: false,
-  containerClassName:'mb-1.5',
+  containerClassName:'mb-3 py-1', // NOTE: mb-3 (已經扣掉遊戲的 p-1)
   titleClassName: 'text-xl font-bold text-white',
   seeMoreText: 'Ver mais',
   textClassName: `text-sm text-white text-center w-[78px] h-[24px]

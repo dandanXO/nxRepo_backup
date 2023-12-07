@@ -14,7 +14,7 @@ export const GameTypeHeader = (props: {
 }) => {
   const {isMobile} = useBreakpoint();
   return (
-    <header className={"flex flex-row justify-between mb-3 relative"}>
+    <header className={"flex flex-row justify-between relative py-3.5"}>
 
       <span className={"flex flex-row items-center"}>
         {props.expandedBrand && (
@@ -40,7 +40,7 @@ export const GameTypeHeader = (props: {
           <button
             onClick={props.onClick}
             className={
-              cx("rounded-lg border-[1px] px-4 py-1 text-sm !font-bold",
+              cx("rounded-lg border-[1px] px-4 py-1 text-sm md:text-lg !font-bold",
                 "text-[var(--primary-assistant)] border-[var(--primary-assistant)] hover:opacity-70")
             }
           >{isMobile ? "Tudo" : `Ver todos ${props?.count}`}</button>

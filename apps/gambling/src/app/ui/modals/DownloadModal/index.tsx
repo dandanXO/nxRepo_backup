@@ -69,7 +69,7 @@ export const DownloadModal = (props: IInitialChargeModal) => {
             "p-4",
             "text-center text-white",
             // NOTE:
-            "w-[90vw] max-w-[336px] h-auto",
+            "w-[90vw] max-w-[336px] h-auto"
           )}
         onClick={(event: any) => {
           event.stopPropagation();

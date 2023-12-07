@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import cx from "classnames";
 import React from "react";
-import {ConfirmButton} from "../../../components/Buttons/ConfirmButton";
+import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useNavigate} from "react-router";
 import {useSelector} from "react-redux";
-import {RootState} from "../../../../reduxStore";
-import {MessageCountBadge} from "../../../components/MessageCountBadge";
-import {environment} from "../../../../../environments/environment";
-import {Avatar} from "../../../components/Avatar";
-import {AvatarAccountInfo} from "../../../components/AvatarAccountInfo";
+import {RootState} from "../../../../../reduxStore";
+import {MessageCountBadge} from "../../../../components/MessageCountBadge";
+import {environment} from "../../../../../../environments/environment";
+import {Avatar} from "../../../../components/Avatar";
+import {AvatarAccountInfo} from "../../../../components/AvatarAccountInfo";
 import {CompanyButton} from "./CompanyButton";
 import {WebsiteLogo} from "./WebsiteLogo";
-import {NotificationAnimationIcon} from "../../../components/Icons/animation/NotificationAnimationIcon";
+import {NotificationAnimationIcon} from "../../../../components/Icons/animation/NotificationAnimationIcon";
 
 
 const Notification = styled.section`
