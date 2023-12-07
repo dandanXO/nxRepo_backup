@@ -134,8 +134,10 @@ export const AppRouter = () => {
         userLogout();
       }
       dispatch(appSlice.actions.setIsLogin(true));
-      dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-      dispatch(appSlice.actions.setShowDepositModal(true))
+      if(location.pathname !== PageOrModalPathEnum.GamePage) {
+        dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
+        dispatch(appSlice.actions.setShowDepositModal(true))
+      }
       // props.confirmToLogin();
       // setIsSetup(true);
     }
