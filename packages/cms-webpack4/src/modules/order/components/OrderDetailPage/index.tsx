@@ -21,7 +21,7 @@ const OrderDetailPage = (): JSX.Element => {
     }, []);
 
     const tabs = [
-        { label: '订单信息', key: 'orderInfo', children: <OrderInfo orderId={orderId} /> }, // 务必填写 key
+        { label: '订单信息', key: 'orderInfo', children: <OrderInfo orderId={orderId} showLoanCertificate /> }, // 务必填写 key
         { label: '用户信息', key: 'userInfo', children: <UserInfo userId={userId} type="order" /> },
         { label: '通讯录', key: 'addressBook', children: <AddressBook userId={userId} /> },
         { label: '手机短信', key: 'smsMessage', children: <SmsMessage userId={userId} /> },
