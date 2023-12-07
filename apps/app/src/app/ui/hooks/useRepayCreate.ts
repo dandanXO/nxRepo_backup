@@ -43,8 +43,12 @@ const useRepayCreate = () => {
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
             // NOTE: 最初的 Android, For iOS,
-            window.location.href = data.nextUrl;
-            window.location.replace(data.nextUrl);
+            // window.location.href = data.nextUrl;
+            // NOTE: https://codeantenna.com/a/Cn5jLWH9gG
+            // eslint-disable-next-line no-restricted-globals
+            location.href = data.nextUrl;
+            // NOTE: https://juejin.cn/s/ios%20window.location.href%20%E4%B8%8D%E8%B7%B3%E8%BD%AC
+            // window.location.replace(data.nextUrl);
             console.log("data.nextUrl:", data.nextUrl);
             // NOTE: For Android
             window.open(data.nextUrl)
