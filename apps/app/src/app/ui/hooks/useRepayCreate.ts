@@ -41,18 +41,21 @@ const useRepayCreate = () => {
             return;
           }
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
+            // console.log("data.nextUrl:", data.nextUrl);
             // NOTICE: 跳轉至付款頁面
-            // NOTE: 最初的 Android, For iOS,
+            // NOTE: 最初的 Android
             // window.location.href = data.nextUrl;
-            // NOTE: https://codeantenna.com/a/Cn5jLWH9gG
+            // NOTE: 失敗 https://codeantenna.com/a/Cn5jLWH9gG
             // eslint-disable-next-line no-restricted-globals
             // location.href = data.nextUrl;
-            window.location.assign(data.nextUrl);
-            // NOTE: https://juejin.cn/s/ios%20window.location.href%20%E4%B8%8D%E8%B7%B3%E8%BD%AC
+            // window.alert(data.nextUrl)
+            // window.location.assign(data.nextUrl);
+            // NOTE: 失敗 https://juejin.cn/s/ios%20window.location.href%20%E4%B8%8D%E8%B7%B3%E8%BD%AC
             // window.location.replace(data.nextUrl);
-            console.log("data.nextUrl:", data.nextUrl);
             // NOTE: For Android
-            window.open(data.nextUrl)
+            // window.open(data.nextUrl)
+            // NOTE: For iOS and Android
+            window.open(data.nextUrl, "_self")
 
             navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
 
