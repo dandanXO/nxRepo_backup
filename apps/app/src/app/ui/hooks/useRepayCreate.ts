@@ -46,7 +46,8 @@ const useRepayCreate = () => {
             // window.location.href = data.nextUrl;
             // NOTE: https://codeantenna.com/a/Cn5jLWH9gG
             // eslint-disable-next-line no-restricted-globals
-            location.href = data.nextUrl;
+            // location.href = data.nextUrl;
+            window.location.assign(data.nextUrl);
             // NOTE: https://juejin.cn/s/ios%20window.location.href%20%E4%B8%8D%E8%B7%B3%E8%BD%AC
             // window.location.replace(data.nextUrl);
             console.log("data.nextUrl:", data.nextUrl);
