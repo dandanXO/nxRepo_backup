@@ -4,6 +4,7 @@ import i18next from 'i18next';
 import moment from 'moment';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { record } from 'zod';
 
 import { useGetAdminSwitchQuery } from '../../../shared/api/commonApi';
 import { CopyTextIcon } from '../../../shared/components/other/CopyTextIcon';
@@ -14,6 +15,7 @@ import {
     TableCard,
 } from '../../../shared/components/withQueryHook/Cards';
 import { DescriptionsCardDescriptions } from '../../../shared/components/withQueryHook/Cards/DescriptionsCard';
+import { AMOUNT_UNIT } from '../../../shared/constants/constant';
 import { useEnum } from '../../../shared/constants/useEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { formatPrice } from '../../../shared/utils/format/formatPrice';
@@ -27,15 +29,7 @@ import {
 } from '../../api/CollectTodayApi';
 import { UrgeModal } from './UrgeModal';
 
-const amountUnitMap = {
-    India: '₹',
-    Pakistan: 'PKR',
-    Bangladesh: '৳',
-    Mexico: 'MXN',
-    Philipine: '₱',
-};
-
-const amountUnit = amountUnitMap[appInfo.COUNTRY];
+const amountUnit = AMOUNT_UNIT;
 
 interface IOrderDetailContentProps {
     userId: string;
@@ -63,7 +57,9 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         FollowUpResultEnum,
         EmergencyContactEnum,
         GenerateRePayLinkEnum,
-    } = useEnum('urgeCollection');
+        PayOutStatusEnum,
+        PayOutMethodEnum,
+    } = useEnum();
 
     const fetched = !orderInfoFetching && !adminSwitchFetching && !generateLinkSwitchFetching;
 
@@ -214,6 +210,43 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 dataIndex: 'merchantName',
             });
         }
+
+        const loanCertificateDescriptions: DescriptionsCardDescriptions[] = [
+            {
+                title: t('common:status'),
+                dataIndex: 'loanCertificate.status',
+                render: (value) =>
+                    value ? <Tag color={PayOutStatusEnum[value].color}>{PayOutStatusEnum[value].text}</Tag> : '-',
+            },
+            {
+                title: t('order:payOutAmount', { unit: AMOUNT_UNIT }),
+                dataIndex: 'loanCertificate.amount',
+                render: (value) => formatPrice(value),
+            },
+            {
+                title: t('order:payOutCreateTime'),
+                dataIndex: 'loanCertificate.createTime',
+                render: (value) => moment(value).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            {
+                title: t('order:payOutFinishTime'),
+                dataIndex: 'loanCertificate.finishTime',
+                render: (value) => moment(value).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            {
+                title: t('order:receiverName'),
+                dataIndex: 'loanCertificate.name',
+            },
+            {
+                title: t('order:paymentMethod'),
+                dataIndex: 'loanCertificate.payoutMethod',
+                render: (value) => PayOutMethodEnum.get(value),
+            },
+            {
+                title: t('order:payeeAccount'),
+                dataIndex: 'loanCertificate.account',
+            },
+        ];
 
         const repaymentProofDescriptions: DescriptionsCardDescriptions[] = [
             {
@@ -391,6 +424,13 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                     descriptions={orderInfoDescriptions}
                     hook={useGetCollectTodayOrderDetailQuery}
                     params={{ collectId }}
+                />
+                <DescriptionsCard
+                    title={t('order:loanCertificate')}
+                    descriptions={loanCertificateDescriptions}
+                    hook={useGetCollectTodayOrderDetailQuery}
+                    params={{ collectId }}
+                    column={2}
                 />
                 <TableCard
                     title={t('urgeCollection:urgeRecord')}

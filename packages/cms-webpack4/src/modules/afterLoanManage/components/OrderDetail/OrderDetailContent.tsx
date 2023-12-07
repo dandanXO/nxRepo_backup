@@ -14,10 +14,10 @@ import {
     TableCard,
 } from '../../../shared/components/withQueryHook/Cards';
 import { DescriptionsCardDescriptions } from '../../../shared/components/withQueryHook/Cards/DescriptionsCard';
+import { AMOUNT_UNIT } from '../../../shared/constants/constant';
 import { useEnum } from '../../../shared/constants/useEnum';
 import { getIsSuperAdmin } from '../../../shared/storage/getUserInfo';
 import { formatPrice } from '../../../shared/utils/format/formatPrice';
-import { useGetCollectTodayOrderDetailQuery } from '../../../todayLoanManage/api/CollectTodayApi';
 import {
     useGetCollectOverDueGenerateLinkSwitchQuery,
     useGetCollectOverDueOrderDetailQuery,
@@ -28,15 +28,7 @@ import {
 } from '../../api/CollectOverDueApi';
 import { UrgeModal } from './UrgeModal';
 
-const amountUnitMap = {
-    India: '₹',
-    Pakistan: 'PKR',
-    Bangladesh: '৳',
-    Mexico: 'MXN',
-    Philipine: '₱',
-};
-
-const amountUnit = amountUnitMap[appInfo.COUNTRY];
+const amountUnit = AMOUNT_UNIT;
 
 interface IOrderDetailContentProps {
     userId: string;
@@ -57,8 +49,15 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
         useGetCollectOverDueGenerateLinkSwitchQuery({ overdueId: collectId });
 
     const { t } = useTranslation();
-    const { OverDueOrderStatusEnum, OrderLabelEnum, FollowUpResultEnum, EmergencyContactEnum, GenerateRePayLinkEnum } =
-        useEnum();
+    const {
+        OverDueOrderStatusEnum,
+        OrderLabelEnum,
+        FollowUpResultEnum,
+        EmergencyContactEnum,
+        GenerateRePayLinkEnum,
+        PayOutStatusEnum,
+        PayOutMethodEnum,
+    } = useEnum();
 
     const fetched = !orderInfoFetching && !adminSwitchFetching && !generateLinkSwitchFetching;
 
@@ -200,6 +199,43 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                 dataIndex: 'merchantName',
             });
         }
+
+        const loanCertificateDescriptions: DescriptionsCardDescriptions[] = [
+            {
+                title: t('common:status'),
+                dataIndex: 'loanCertificate.status',
+                render: (value) =>
+                    value ? <Tag color={PayOutStatusEnum[value].color}>{PayOutStatusEnum[value].text}</Tag> : '-',
+            },
+            {
+                title: t('order:payOutAmount', { unit: AMOUNT_UNIT }),
+                dataIndex: 'loanCertificate.amount',
+                render: (value) => formatPrice(value),
+            },
+            {
+                title: t('order:payOutCreateTime'),
+                dataIndex: 'loanCertificate.createTime',
+                render: (value) => moment(value).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            {
+                title: t('order:payOutFinishTime'),
+                dataIndex: 'loanCertificate.finishTime',
+                render: (value) => moment(value).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            {
+                title: t('order:receiverName'),
+                dataIndex: 'loanCertificate.name',
+            },
+            {
+                title: t('order:paymentMethod'),
+                dataIndex: 'loanCertificate.payoutMethod',
+                render: (value) => PayOutMethodEnum.get(value),
+            },
+            {
+                title: t('order:payeeAccount'),
+                dataIndex: 'loanCertificate.account',
+            },
+        ];
 
         const repaymentProofDescriptions: DescriptionsCardDescriptions[] = [
             {
@@ -375,6 +411,13 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
                     descriptions={orderInfoDescriptions}
                     hook={useGetCollectOverDueOrderDetailQuery}
                     params={{ collectId }}
+                />
+                <DescriptionsCard
+                    title={t('order:loanCertificate')}
+                    descriptions={loanCertificateDescriptions}
+                    hook={useGetCollectOverDueOrderDetailQuery}
+                    params={{ collectId }}
+                    column={2}
                 />
                 <TableCard
                     title={t('urgeCollection:urgeRecord')}
