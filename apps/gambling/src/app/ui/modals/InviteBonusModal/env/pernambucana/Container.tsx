@@ -17,5 +17,6 @@ export const Container = styled.div.attrs((props) => ({
   //background-size: 100% auto;
   background-size: cover;
   border-radius: 20px;
-  padding: 16px;
+  //padding: 16px;
+  padding: 14px;
 `;
