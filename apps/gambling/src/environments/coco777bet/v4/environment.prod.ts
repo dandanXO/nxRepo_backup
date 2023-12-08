@@ -3,7 +3,7 @@ export const environment = {
   assetPrefix: "coco777bet",
   assetVersionPrefix: "v4",
   mockBackend: false,
-  platformName: "Dev BBQ777Slots",
+  platformName: "BBQ777Slots",
   platformGroup: "O JS Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",
