@@ -152,7 +152,7 @@ export const EditUserInfoModal = ({
             [1,2,3,4,5,6,7,8,9,10,11,12].map((item) => (
               <div key={item} className='relative' onClick={()=>setSelectedAvatar(item)}>
                 <img
-                  className='w-full rounded-xl md:rounded-3xl bg-red-600'
+                  className='w-full rounded-xl md:rounded-3xl bg-transparent'
                   alt={`avatar${item}`} src={`assets/${environment.assetPrefix}/avatar_${item}.png`}
                 />
                 {selectedAvatar === item &&
