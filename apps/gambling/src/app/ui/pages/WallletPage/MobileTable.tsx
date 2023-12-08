@@ -122,7 +122,7 @@ export const WithdrawMobileTable = () => {
             >
               <div className={'flex flex-row justify-between px-5 pt-2.5 pb-2 items-center'}>
                 <div className='font-bold'>ID da ordem: {record.pay_serial_no}</div>
-                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.id} />
+                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.pay_serial_no} />
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
