@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
@@ -16,6 +16,9 @@ import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawer
 import { TShowToolboxConfig } from "../../index";
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../../reduxStore";
+import {appSlice} from "../../../../reduxStore/appSlice";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -135,8 +138,20 @@ export const PageTemplate = ({
                                          isUILoading,
                                          showToolboxConfig
                                        }: ICoco777betIndexPageTemplate) => {
+
+
+  const dispatch = useDispatch();
+
   return (
-      <StyledPage isCurrentPageCompanyProfile={false}>
+      <StyledPage
+        isCurrentPageCompanyProfile={false}
+        onClick={() => {
+          // NOTE: 關閉 Coco Desktop Logout Popover
+          if(isShowMobileLogoutModal) {
+            dispatch(appSlice.actions.showMobileLogoutModal(false));
+          }
+        }}
+      >
         {isMobile && isShowMobileHeader && (
           <HeaderMobile
             className={"!h-[52.5px]"}

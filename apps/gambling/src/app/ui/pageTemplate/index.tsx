@@ -236,7 +236,6 @@ export const PageTemplate = (props: IPage) => {
   }
 
 
-
   return (
     <>
       {renderByPlatform({
