@@ -26,6 +26,7 @@ import {CheckableICON} from "../../../../components/Icons/CheckableICON";
 import axios from "axios";
 import {v4 as uuidv4} from "uuid";
 import {PhonePrefix} from "../../PhonePrefix";
+import {useGetDeviceId} from "../../../../hooks/useGetDeviceId";
 
 const onValidateConfirmPhoneInput = (first: string, second: string, setConfirmPhoneInput: any) => {
   if(first !== second) {
@@ -158,6 +159,9 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         setIsPasswordVisible(!isPasswordVisible);
     };
 
+  const {deviceId} = useGetDeviceId(phoneInput.data, "register");
+  console.log("register.deviceId", deviceId);
+
   const {onFormConfirm} = useForm({
     onFormConfirm: () =>  {
       if(!onValidatePhoneInput(phoneInput.data, setPhoneInput) ||
@@ -171,31 +175,10 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       if(!captchaKey) {
         return;
       }
-      const deviceId = AppLocalStorage.getItem(AppLocalStorageKey.deviceId);
-      let finalDeviceId = deviceId;
-      const customDeviceId = `CUSTOM_DEVICE_ID_${phoneInput.data}_${Date.now()}`;
-      if(!deviceId) {
-        try {
-          const newDeviceId = uuidv4();
-          finalDeviceId = newDeviceId;
-          Sentry.captureMessage("DeviceId Initialize Error, so generate new", {
-            level: 'fatal',
-            tags: {},
-            extra: {
-              original_deviceId: deviceId,
-              new_deviceId: newDeviceId
-            }
-          });
-        } catch (e) {
-          console.log(e);
-          finalDeviceId = customDeviceId;
-          Sentry.captureException(e, );
-        }
-      }
-      AppLocalStorage.setItem(AppLocalStorageKey.deviceId, finalDeviceId || customDeviceId);
+
       triggerRegister({
           "appChannel": "pc",
-          "deviceId": finalDeviceId || customDeviceId,
+          "deviceId": deviceId,
           "appPackageName": environment.appPackageName,
           "deviceModel": "WEB",
           "deviceVersion": "WEB",

@@ -22,6 +22,7 @@ import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../PhonePrefix";
 import {RootState} from "../../../../../reduxStore";
+import {useGetDeviceId} from "../../../../hooks/useGetDeviceId";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
@@ -119,6 +120,9 @@ export const UserLoginForm = (props: IUserLoginForm) => {
   const [triggerLogin] = useLoginMutation()
 
 
+  const {deviceId} = useGetDeviceId(phoneInput.data, "login");
+  console.log("login.deviceId", deviceId);
+
   const {onFormConfirm} = useForm({
 
     onFormConfirm: () => {
@@ -146,7 +150,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
         triggerLogin({
           "appChannel": "pc",
           "appPackageName": environment.appPackageName,
-          "deviceId": AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
+          "deviceId": deviceId,
           "deviceModel": "WEB",
           "deviceVersion": "WEB",
           "appVersion": environment.appVersion,
