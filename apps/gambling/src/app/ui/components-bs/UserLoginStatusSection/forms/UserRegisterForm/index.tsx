@@ -160,7 +160,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
     };
 
   const {deviceId} = useGetDeviceId(phoneInput.data, "register");
-  console.log("register.deviceId", deviceId);
+  console.log("[useGetDeviceId] register.deviceId", deviceId);
 
   const {onFormConfirm} = useForm({
     onFormConfirm: () =>  {

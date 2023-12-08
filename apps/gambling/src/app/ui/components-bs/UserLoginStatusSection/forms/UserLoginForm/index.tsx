@@ -121,7 +121,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
 
 
   const {deviceId} = useGetDeviceId(phoneInput.data, "login");
-  console.log("login.deviceId", deviceId);
+  console.log("[useGetDeviceId] login.deviceId", deviceId);
 
   const {onFormConfirm} = useForm({
 

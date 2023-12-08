@@ -3,7 +3,7 @@ import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 import {v4 as uuidv4} from "uuid";
 import * as Sentry from "@sentry/browser";
 
-export const useGetDeviceId = (phoneNumber: string, type: "login" | "register") => {
+export const useGetDeviceId = (phoneNumber: string, type: "login" | "register" | "forget") => {
   const deviceId = AppLocalStorage.getItem(AppLocalStorageKey.deviceId);
   let finalDeviceId = deviceId;
   const customDeviceId = `CUSTOM_DEVICE_ID_${phoneNumber}_${Date.now()}`;

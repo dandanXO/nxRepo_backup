@@ -27,6 +27,7 @@ import styled from "styled-components";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../PhonePrefix";
+import {useGetDeviceId} from "../../../../hooks/useGetDeviceId";
 
 
 const onValidateCaptchaInput = (data: string, setCaptchaInput: any) => {
@@ -183,6 +184,9 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
   //   }))
   // }
 
+  const {deviceId} = useGetDeviceId(phoneInput.data, "forget");
+  console.log("[useGetDeviceId] forget.deviceId", deviceId);
+
   const {onFormConfirm} = useForm({
     onFormConfirm: () =>  {
       if(!onValidatePhoneInput(phoneInput.data, setPhoneInput) ||
@@ -197,7 +201,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         password: passwordInput.data,
         "verifyCode": captchaInput.data,
         "appChannel": "mobile",
-        "deviceId": AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
+        "deviceId": deviceId,
         "deviceModel": "WEB",
         "deviceVersion": "WEB",
         "sysTimezone": null,
