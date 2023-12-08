@@ -4,7 +4,6 @@ import i18next from 'i18next';
 import moment from 'moment';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { record } from 'zod';
 
 import { useGetAdminSwitchQuery } from '../../../shared/api/commonApi';
 import { CopyTextIcon } from '../../../shared/components/other/CopyTextIcon';

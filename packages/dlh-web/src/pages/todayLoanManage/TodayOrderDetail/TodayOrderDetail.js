@@ -336,18 +336,18 @@ class OrderDetail extends Component{
                     {/*</Row>*/}
                 {/*</Card>*/}
 
-              <Card style={{ marginTop: '20px'}} bodyStyle={{ padding: 0, marginTop: '-1px' }} type={'inner'} title={intl.formatMessage({ id: "order.loanCertificate" })}>
-                <Descriptions size="small" bordered column={2}>
-                  <Item label={intl.formatMessage({ id: "common.status" })}>{loanCertificate.status ? <Tag color={payOutStatusEnum.get(loanCertificate.status).color}>{payOutStatusEnum.get(loanCertificate.status).text}</Tag> : "-"}</Item>
-                  <Item label={intl.formatMessage({ id: "order.payOutAmount" }, { unit: conf.currency })}>{loanCertificate.amount ? loanCertificate.amount.toLocaleString() : '-'}</Item>
-                  <Item label={intl.formatMessage({ id: "order.payOutCreateTime" })}>{loanCertificate.createTime ? moment(loanCertificate.createTime).format('YYYY-MM-DD HH:mm:ss') : '-'}</Item>
-                  <Item label={intl.formatMessage({ id: "order.payOutFinishTime" })}>{loanCertificate.finishTime ? moment(loanCertificate.finishTime).format('YYYY-MM-DD HH:mm:ss') : '-'}</Item>
-                  <Item label={intl.formatMessage({ id: "order.paymentOrderNumber" })}>{loanCertificate.orderNo || '-' }</Item>
-                  <Item label={intl.formatMessage({ id: "order.receiverName" })}>{loanCertificate.name || '-' }</Item>
-                  <Item label={intl.formatMessage({ id: "order.paymentMethod" })}>{loanCertificate.payoutMethod ? payOutMethodEnum.get(loanCertificate.payoutMethod): '-' }</Item>
-                  <Item label={intl.formatMessage({ id: "order.payeeAccount" })}>{loanCertificate.account || '-' }</Item>
-                </Descriptions>
-              </Card>
+                <Card style={{ marginTop: '20px'}} bodyStyle={{ padding: 0, marginTop: '-1px' }} type={'inner'} title={intl.formatMessage({ id: "order.loanCertificate" })}>
+                  <Descriptions size="small" bordered column={2}>
+                    <Item label={intl.formatMessage({ id: "common.status" })}>{loanCertificate.status ? <Tag color={payOutStatusEnum.get(loanCertificate.status).color}>{payOutStatusEnum.get(loanCertificate.status).text}</Tag> : "-"}</Item>
+                    <Item label={intl.formatMessage({ id: "order.payOutAmount" }, { unit: conf.currency })}>{loanCertificate.amount ? loanCertificate.amount.toLocaleString() : '-'}</Item>
+                    <Item label={intl.formatMessage({ id: "order.payOutCreateTime" })}>{loanCertificate.createTime ? moment(loanCertificate.createTime).format('YYYY-MM-DD HH:mm:ss') : '-'}</Item>
+                    <Item label={intl.formatMessage({ id: "order.payOutFinishTime" })}>{loanCertificate.finishTime ? moment(loanCertificate.finishTime).format('YYYY-MM-DD HH:mm:ss') : '-'}</Item>
+                    <Item label={intl.formatMessage({ id: "order.paymentOrderNumber" })}>{loanCertificate.orderNo || '-' }</Item>
+                    <Item label={intl.formatMessage({ id: "order.receiverName" })}>{loanCertificate.name || '-' }</Item>
+                    <Item label={intl.formatMessage({ id: "order.paymentMethod" })}>{loanCertificate.payoutMethod ? payOutMethodEnum.get(loanCertificate.payoutMethod): '-' }</Item>
+                    <Item label={intl.formatMessage({ id: "order.payeeAccount" })}>{loanCertificate.account || '-' }</Item>
+                  </Descriptions>
+                </Card>
 
                 <CommonTable columns={this.backRecordColumns} dataSource={orderInfo['backRecord'] || []} title={() => <div><FormattedMessage id="windowPage.repayment.record" /></div>}/>
                 <div className={`${styles.card} ${styles.labelStyle}`}>
