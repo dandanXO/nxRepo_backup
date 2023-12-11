@@ -115,7 +115,7 @@ export const InviteSettlementRecordPage = () => {
                 currentData?.rows.map((itme, index) => {
                   return (
                     <tr key={index}>
-                      <td className='p-12 border-r border-[rgba(255,255,255,0.2)]'>{itme.updateTime}</td>
+                      <td className='p-12 border-r border-[rgba(255,255,255,0.2)]'>{moment(itme.updateTime).format('DD.MM-YYYY HH:mm:ss')}</td>
                       <td className='p-12'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
                     </tr>
                   )

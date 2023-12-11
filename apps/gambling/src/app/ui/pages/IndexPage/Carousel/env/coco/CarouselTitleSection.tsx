@@ -20,7 +20,7 @@ export const CarouselTitleSection = (props: ICarouselSubTitle) => {
           "mb-[8px] sm:mb-[8px] md:mb-[20px] lg:mb-[20px]",
           "text-xs sm:text-xs md:text-xl lg:text-2xl",
         )}>
-          <div>{environment.platformName} ({environment.platformGroup}) <span className={"hidden lg:block"}>merece a sua confiança</span></div>
+          <div>{environment.platformName} ({environment.platformGroup}) <span className={"hidden sm:inline-block sm:ml-3"}>merece a sua confiança</span></div>
           {/*{isMobile && (<div>merece a sua confiança</div>)}*/}
           {!isMobile && <div className={"none md:block"}>O usuário é o primeiro, o jogo é justo e os fundos estão seguros</div>}
         </div>

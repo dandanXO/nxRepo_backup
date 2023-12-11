@@ -112,30 +112,35 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       ): (
         <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.expandCount || props.data?.length} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll}/>
       )}
-
-      <MainGameList
-        className={cx("list", {
-          'animate-[gameListShow_0.8s_ease]':animating && isMobile,
-          "flex flex-row flex-wrap justify-start items-center": !isMobile
-        })}
-      >
-        {displayedItems && displayedItems
-          .map((item, index) => {
-            return (
-              <MainGameItem
-                key={index}
-                gameId={Number(item.gameId)}
-                name={item.name}
-                // imageURL={`${environment.s3URLImages}/${item.gameId}.jpg`}
-                imageURL={`https://resources.ttgroup.vip/icon/${item.gameId}-small.png`}
-                onClick={() => onClickGameItem(item)}
-                favorite={(props.userFavorite).includes(Number(item.gameId))}
-                onClickFavorite={() => props.onClickFavoriteGameItem(item)}
-              />
-            )
-        })}
-      </MainGameList>
-
+      {props.gameTypeName === 'Favoritos' && displayedItems?.length === 0 ? (
+        <div className="my-8 py-6 text-center text-xl text-[var(--primary-assistant)]">
+          Clique no coração no canto superior direito do jogo para adicioná-lo à sua coleção!
+        </div>
+      ) : (
+        <MainGameList
+          className={cx("list", {
+            'animate-[gameListShow_0.8s_ease]': animating && isMobile,
+            "flex flex-row flex-wrap justify-start items-center": !isMobile
+          })}
+        >
+          {displayedItems && displayedItems
+            .map((item, index) => {
+              return (
+                <MainGameItem
+                  key={index}
+                  gameId={Number(item.gameId)}
+                  name={item.name}
+                  // imageURL={`${environment.s3URLImages}/${item.gameId}.jpg`}
+                  imageURL={`https://resources.ttgroup.vip/icon/${item.gameId}-small.png`}
+                  onClick={() => onClickGameItem(item)}
+                  favorite={(props.userFavorite).includes(Number(item.gameId))}
+                  onClickFavorite={() => props.onClickFavoriteGameItem(item)}
+                />
+              )
+            })}
+        </MainGameList>
+      )
+      }
       {(props.data && listSize < props.data?.length) && props.expandedBrand &&
         <div className="flex-1 mt-20 justify-center flex">
           <button

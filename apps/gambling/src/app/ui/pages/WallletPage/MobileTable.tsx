@@ -60,16 +60,16 @@ export const DepositMobileTable = () => {
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Valor</span>
-                <span className={''}>R${formatLocaleMoney(Number(record.amount))}</span>
+                <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
               <div
                 className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'
                 }
               >
-                <span className={''}>valor do bônus</span>
+                <span className={''}>bônus</span>
                 <span className={''}>
-                  R${formatLocaleMoney(Number(record.amount) * Number(record.rate))}
+                  R$ {formatLocaleMoney(Number(record.amount) * Number(record.rate))}
                 </span>
               </div>
 
@@ -127,12 +127,12 @@ export const WithdrawMobileTable = () => {
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Valor</span>
-                <span className={''}>R${formatLocaleMoney(Number(record.amount))}</span>
+                <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
                 <span className={''}>Taxa de retirada</span>
-                <span className={''}>R${formatLocaleMoney(Number(record.fee))}</span>
+                <span className={''}>R$ {formatLocaleMoney(Number(record.fee))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
