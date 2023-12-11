@@ -10,6 +10,7 @@ import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import { MexicoCountry, PhilippinesCountry } from '@frontend/shared/domain';
 import { environment } from 'apps/app/src/environments/environmentModule/environment';
+import {openWindow} from "../../application/openWindow";
 
 const useExtendCreate = () => {
   const navigate = useNavigate();
@@ -35,8 +36,7 @@ const useExtendCreate = () => {
           }
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
-            // window.location.href = data.nextUrl;
-            window.open(data.nextUrl);
+            openWindow(data.nextUrl);
             navigate(
               `${
                 PageOrModalPathEnum.RepaymentDetailPage

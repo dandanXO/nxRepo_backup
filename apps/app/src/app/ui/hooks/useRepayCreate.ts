@@ -17,6 +17,7 @@ import { CustomAxiosError } from '../../externel/backend/rtk/axiosBaseQuery';
 import { PageOrModalPathEnum } from '../PageOrModalPathEnum';
 import { RepaymentDetailPageUseCaseActions } from '../pages/RepaymentDetailPage/userUsecaseSaga';
 import { AllCountryIdentityName } from 'libs/shared/domain/src/country/enum/AllCountryIdentityName';
+import {openWindow} from "../../application/openWindow";
 
 const useRepayCreate = () => {
   const navigate = useNavigate();
@@ -31,10 +32,6 @@ const useRepayCreate = () => {
     usePostRepayCreateMutation();
   const postRepayCreateRequest = (props: PostRepayCreateRequest) =>
     new Promise((resolve, reject) => {
-      // console.log('[repay] postRepayCreateRequest.props', props);
-      // NOTE: iOS 放這段可以直接成功，但移動到 下方 promise，得加上 setTimeout 方能成功
-      // window.open("http://www.google.com", "_self")
-      // return;
       postRepayCreate(props)
         .unwrap()
         .then((data: PostRepayCreateResponse) => {
@@ -45,22 +42,7 @@ const useRepayCreate = () => {
           }
           if (data.nextStep === 'jumpUrl' || data.nextStep === 'html') {
             // NOTICE: 跳轉至付款頁面
-            // NOTE: 最初的 Android, For iOS,
-            // window.location.href = data.nextUrl;
-            // NOTE: 嘗試失敗 https://codeantenna.com/a/Cn5jLWH9gG
-            // eslint-disable-next-line no-restricted-globals
-            // location.href = data.nextUrl;
-            // window.alert(data.nextUrl)
-            // window.location.assign(data.nextUrl);
-            // NOTE: 嘗試失敗 https://juejin.cn/s/ios%20window.location.href%20%E4%B8%8D%E8%B7%B3%E8%BD%AC
-            // window.location.replace(data.nextUrl);
-            // console.log("data.nextUrl:", data.nextUrl);
-            // NOTE: For Android
-            // window.open(data.nextUrl)
-            // NOTE: 自己方式 For iOS and Android,
-            setTimeout(() => {
-              window.open(data.nextUrl, "_self");
-            }, 0)
+            openWindow(data.nextUrl);
 
             navigate(`${PageOrModalPathEnum.RepaymentDetailPage}?token=${getToken()}&orderNo=${props.orderNo}`, { replace: true });
 
