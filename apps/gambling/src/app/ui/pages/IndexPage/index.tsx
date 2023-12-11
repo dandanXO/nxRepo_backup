@@ -72,7 +72,7 @@ export const IndexPage = () => {
 
     if(activeTab === 'Favoritos') {
       const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
-      list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] }]
+      list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] || [] }]
     } else {
       const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === activeTab)[0]?.data
       list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
