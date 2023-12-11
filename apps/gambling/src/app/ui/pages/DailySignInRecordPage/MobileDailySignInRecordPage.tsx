@@ -4,14 +4,15 @@ import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../utils/format";
 import { NoData } from "../../components/Icons/NoData";
+import { Container } from "../../components/container/Container";
 
-const Title = ({ children }:{children: React.ReactNode}) => (
+const Title = ({ children }: { children: React.ReactNode }) => (
   <td className='w-1/3 px-1 h-10 flex justify-center items-center border-r border-[rgba(255,255,255,0.2)]'>
     {children}
   </td>
 )
 
-const Content = ({ children }:{children: React.ReactNode}) => (
+const Content = ({ children }: { children: React.ReactNode }) => (
   <td className='w-2/3 justify-center items-center flex'>
     {children}
   </td>
@@ -27,20 +28,17 @@ export const MobileDailySignInRecordPage = ({
 }: IMobileDailySignInRecordPageProps) => {
 
   const { onClickToCheckInDaily } = usePageNavigate();
-
   return (
-    <div className='flex flex-col h-[100vh]'>
-      <div className='px-1 pt-2 pb-1'>
-        <BackNavigation
-          onClick={()=> onClickToCheckInDaily()}
-          title={<div className='ml-10 font-bold text-lg'>Registro Diário de Presença</div>}
-        />
-      </div>
-      <div className='grow h-full mx-4 my-4 overflow-y-auto'>
+    <Container y={false} >
+      <BackNavigation
+        onClick={() => onClickToCheckInDaily()}
+        title={<div className={"w-full font-bold text-center"}>Registro Diário de Presença</div>}
+      />
+      <div className='grow h-full overflow-y-auto mt-6'>
         {
           records?.map((record, index: number) => {
             return (
-              <table key={index}  className='table table-zebra mb-4 rounded-lg overflow-hidden w-full text-white text-center text-sm font-bold'>
+              <table key={index} className='table table-zebra mb-4 rounded-lg overflow-hidden w-full text-white text-center text-sm font-bold'>
                 <tbody>
                   <tr className='flex'>
                     <Title>ID</Title>
@@ -52,7 +50,7 @@ export const MobileDailySignInRecordPage = ({
                   </tr>
                   <tr className='flex'>
                     <Title>Coleta Contínua</Title>
-                    <Content>{record.days} dia{record.days > 1 ? 's': ''}</Content>
+                    <Content>{record.days} dia{record.days > 1 ? 's' : ''}</Content>
                   </tr>
                   <tr className='flex'>
                     <Title>Obter Recompensas</Title>
@@ -76,6 +74,6 @@ export const MobileDailySignInRecordPage = ({
           )
         }
       </div>
-    </div>
+    </Container>
   )
 }
