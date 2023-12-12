@@ -73,32 +73,56 @@ appStore.subscribe(() => {
 
 const handleResize = () => {
   const preIsMobile = appStore.getState().app.isMobile;
+  const preIsTablet = appStore.getState().app.isTablet;
+  const preIsDesktop = appStore.getState().app.isDesktop;
+
   const windowSize = {
     width: window.innerWidth,
   };
 
   let isMobile = true;
+  let isTablet = false;
+  let isDesktop = false;
+
   if (0 < windowSize.width && windowSize.width < 640) {
     isMobile = true
+    isTablet = false
+    isDesktop = false
   }
   if (640 <= windowSize.width && windowSize.width < 768) {
     isMobile = false
+    isTablet = true
+    isDesktop = false
   }
   if (768 <= windowSize.width && windowSize.width < 1024) {
     isMobile = false
+    isTablet = false
+    isDesktop = true
   }
   if (1024 <= windowSize.width && windowSize.width < 1280) {
     isMobile = false
+    isTablet = false
+    isDesktop = true
   }
   if (1280 <= windowSize.width && windowSize.width < 1536) {
     isMobile = false
+    isTablet = false
+    isDesktop = true
   }
   if (windowSize.width >= 1536) {
     isMobile = false
+    isTablet = false
+    isDesktop = true
   }
-  if(preIsMobile !== isMobile) {
-    appStore.dispatch(appSlice.actions.setIsMobile(isMobile));
-  }
+  // if(preIsMobile !== isMobile) {
+  //   appStore.dispatch(appSlice.actions.setIsMobile(isMobile));
+  // }
+  // if(preIsMobile !== isMobile) {
+  //   appStore.dispatch(appSlice.actions.setIsMobile(isMobile));
+  // }
+  appStore.dispatch(appSlice.actions.setIsMobile(isMobile));
+  appStore.dispatch(appSlice.actions.setIsTablet(isTablet));
+  appStore.dispatch(appSlice.actions.setIsDesktop(isDesktop));
 };
 
 
