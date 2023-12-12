@@ -2,7 +2,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {MobileInviteBonusModal} from "./MobileInviteBonusModal";
 import {TabletInviteBonusModal} from "./TabletInviteBonusModal";
 import {DesktopInviteBonusModal} from "./DesktopInviteBonusModal";
-import {renderByRWD} from "../../../../hooks/renderByRWD";
+import {renderByRWD} from "../../../../utils/renderByRWD";
 
 export const InviteBonusModal = () => {
   const device = useBreakpoint();
