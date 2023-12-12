@@ -165,7 +165,7 @@ export const DailySignInPage = () => {
         setCurrentSelectedLevel={setCurrentSelectedLevel}
       />
     ),
-    "wild": (
+    "wild777bet": (
       <WDailySignInPage
         onClickToSignIn={onClickToSignIn}
         signInConfig={signInConfig?.data?.signInConfig || []}
