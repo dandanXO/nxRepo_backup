@@ -29,6 +29,9 @@
         "dev-coco777bet-v4":  {
           "buildTarget": "gambling:build:dev-coco777bet-v4"
         },
+        "dev-riojungle777bet-v1": {
+          "buildTarget": "gambling:build:dev-riojungle777bet-v1"
+        },
         "dev-bmw": {
           "buildTarget": "gambling:build:dev-bmw"
         },
@@ -58,6 +61,46 @@
       },
       "configurations": {
         "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "dev-bmw": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/bmw/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/bmw/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/index.replacement.html",
+              "with": "apps/gambling/src/environments/bmw/index.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "dev-legend": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/legend/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/legend/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/index.replacement.html",
+              "with": "apps/gambling/src/environments/legend/index.html"
+            }
+          ],
           "extractLicenses": false,
           "optimization": false,
           "sourceMap": true,
@@ -293,39 +336,19 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "dev-bmw": {
+        "dev-riojungle777bet-v1": {
           "fileReplacements": [
             {
-              "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/bmw/environment.dev.ts"
-            },
-            {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/bmw/theme.css"
+              "with": "apps/gambling/src/environments/riojungle777bet/theme.css"
             },
-            {
-              "replace": "apps/gambling/src/index.replacement.html",
-              "with": "apps/gambling/src/environments/bmw/index.html"
-            }
-          ],
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
-        },
-        "dev-legend": {
-          "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/legend/environment.dev.ts"
+              "with": "apps/gambling/src/environments/riojungle777bet/v1/environment.dev.ts"
             },
             {
-              "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/legend/theme.css"
-            },
-            {
-              "replace": "apps/gambling/src/index.replacement.html",
-              "with": "apps/gambling/src/environments/legend/index.html"
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/riojungle777bet/v1/index.html"
             }
           ],
           "extractLicenses": false,

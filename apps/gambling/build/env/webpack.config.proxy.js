@@ -6,7 +6,7 @@ let PORT = 4002;
 if(!isProduction) {
   // NOTE: Proxy URL
 
-  switch (process.env.NODE_COUNTRY) {
+  switch (process.env.NODE_DEV_SERVER_PROXY) {
     case 'pernambucana777bet': {
       proxyURL = 'https://www.hxj-dev.com';
       PORT = 4001;
