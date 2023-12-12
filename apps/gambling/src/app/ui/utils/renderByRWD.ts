@@ -8,13 +8,13 @@ export const renderByRWD = (renderElements: {
   isTablet: boolean;
   isDesktop: boolean;
 }) => {
-  if (device.isMobile) {
+  if(renderElements.shared) {
+    return renderElements.shared;
+  } else if (device.isMobile) {
     return renderElements.mobile;
   } else if (device.isTablet) {
     return renderElements.tablet;
   } else if (device.isDesktop) {
     return renderElements.desktop;
-  } else {
-    return renderElements.shared;
   }
 }

@@ -6,8 +6,8 @@ import { RightOutlined } from "@ant-design/icons";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import CurrentVIPIcon from "../../../../components/CurrentVIPIcon";
-import ProgressBar from "../../../../pages/VIPGradePage/env/coco/VIPGradePage/ProgressBar";
 import { clampNumber, formatLocaleMoney } from "../../../../utils/format";
+import { ProgressBar } from "../../../../components/ProgressBar";
 
 export const UserInfoStatusPopoverVIPInfo = ({
   userVIPInfo,
