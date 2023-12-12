@@ -1,15 +1,12 @@
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {MobileInviteBonusModal} from "./MobileInviteBonusModal";
-import {TabletInviteBonusModal} from "./TabletInviteBonusModal";
-import {DesktopInviteBonusModal} from "./DesktopInviteBonusModal";
 import {renderByRWD} from "../../../../utils/renderByRWD";
+import {SharedInviteBonusModal} from "./SharedInviteBonusModal";
+import {IInitialChargeModal} from "../../index";
 
-export const InviteBonusModal = () => {
+export const InviteBonusModal = (props: IInitialChargeModal) => {
   const device = useBreakpoint();
 
   return renderByRWD( {
-    mobile: <MobileInviteBonusModal/>,
-    tablet: <TabletInviteBonusModal/>,
-    desktop: <DesktopInviteBonusModal/>,
+    shared: <SharedInviteBonusModal onConfirm={props.onConfirm} close={props.close}/>,
   }, device)
 }
