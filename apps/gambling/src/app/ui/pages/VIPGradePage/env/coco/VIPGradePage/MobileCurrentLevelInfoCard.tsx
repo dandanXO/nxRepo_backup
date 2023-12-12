@@ -1,8 +1,8 @@
 import React from "react";
 import { ICurrentLabelInfoCardProps } from "./CurrentLevelInfoCard";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
-import ProgressBar from "./ProgressBar";
 import { formatLocaleMoney } from "../../../../../utils/format";
+import { ProgressBar } from "../../../../../components/ProgressBar";
 
 export const MobileCurrentLevelInfoCard = ({
   currentLevel,
