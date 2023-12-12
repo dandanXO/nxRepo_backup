@@ -47,7 +47,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
             <CHowToImage className="p-4 sm:p-0 rounded-2xl" />
             <CQuestionContent />
           </>),
-        "riojungle": <RHowToInviteTabSection />,
+        "riojungle777bet": <RHowToInviteTabSection />,
       }, (
         <>
           <PHowToImage className="p-4 rounded-2xl" />
