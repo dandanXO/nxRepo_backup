@@ -2,11 +2,9 @@ import React from "react";
 import {GetVIPInfoResponse} from "../../../../../external";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
-import {environment} from "../../../../../../environments/environment";
 import {useDispatch, useSelector} from "react-redux";
 import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../../../reduxStore/appSlice";
 import CurrentVIPIcon from "../../../../components/CurrentVIPIcon";
-import ProgressBar from "../../../VIPGradePage/env/coco/VIPGradePage/ProgressBar";
 import styled from "styled-components";
 import {CheckInButton} from "../../../../components/Buttons/CheckInButton";
 import {DepositButton} from "../../../../components/Buttons/DepositButton2";
@@ -20,6 +18,7 @@ import {ListItem} from "../../../../components/List/ListItem";
 import {CopyIcon} from "../../../../components/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import { ProgressBar } from "../../../../components/ProgressBar";
 
 
 
