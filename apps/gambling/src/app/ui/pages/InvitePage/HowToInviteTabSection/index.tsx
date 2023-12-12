@@ -21,22 +21,38 @@ import { HowToImage as PHowToImage } from "./env/pernambucana/HowToImageContaine
 import { QuestionContent as CQuestionContent } from "./env/coco/QuestionContent";
 import { QuestionContent as WQuestionContent } from "./env/wild/QuestionContent";
 import { QuestionContent as PQuestionContent } from "./env/pernambucana/QuestionContent";
+import { HowToInviteTabSection as RHowToInviteTabSection } from './env/riojungle'
 
 interface IHowToInviteTabSection {
   inviteUrl: string;
 }
 export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
+
+
+
   return (
+
     <div className={'mb-[80px] min-w-[300px]'}>
       {renderByPlatform({
-        "wild777bet": <WHowToImage className="p-4 rounded-2xl" />,
-        "coco777bet": <CHowToImage className="p-4 sm:p-0 rounded-2xl" />,
-      }, <PHowToImage className="p-4 rounded-2xl" />)}
-      {renderByPlatform({
-        "wild777bet": <WQuestionContent />,
-        "coco777bet": <CQuestionContent />,
-      }, <PQuestionContent />)}
+        "wild777bet": (
+          <>
+            <WHowToImage className="p-4 rounded-2xl" />
+            <WQuestionContent />
+          </>
+        )
+        ,
+        "coco777bet": (
+          <>
+            <CHowToImage className="p-4 sm:p-0 rounded-2xl" />
+            <CQuestionContent />
+          </>),
+        "riojungle": <RHowToInviteTabSection />,
+      }, (
+        <>
+          <PHowToImage className="p-4 rounded-2xl" />
+          <PQuestionContent />
+        </>))}
     </div>
   );
 };
