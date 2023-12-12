@@ -17,8 +17,3 @@ export const renderByPlatform = (
     return props[countryComponentKey];
   }
 };
-
-
-export const exportByPlarform = () => {
-
-}
