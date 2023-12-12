@@ -1,4 +1,4 @@
-import { renderByPlatform } from "apps/gambling/src/app/ui/utils/renderByPlatform"
+import { renderByPlatform } from "../../../../../utils/renderByPlatform"
 import { MobileOpacityBackgroundContainer } from "../coco/MobileOpacityBackgroundContainer"
 import { FragmentContainer } from "apps/gambling/src/app/ui/components/FragmentContainer"
 

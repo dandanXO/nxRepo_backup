@@ -8,7 +8,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 
 const StyledTabItem = renderByPlatform({
   "coco777bet": CtyledTabItem,
-  "wild": WStyledTabItem,
+  "wild777bet": WStyledTabItem,
 }, PStyledTabItem)
 
 export type ITabs = {

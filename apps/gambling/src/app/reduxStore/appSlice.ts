@@ -12,6 +12,8 @@ interface IMaintenance{
 }
 export type InitialState = {
   isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
   isUserMoneyStatusLoading: boolean;
   isLogin: boolean;
   isUILoading: boolean;
@@ -71,6 +73,8 @@ const initialState: InitialState = {
   isUILoading: true,
   isUserMoneyStatusLoading: false,
   isMobile: true,
+  isTablet: false,
+  isDesktop: false,
   isLogin: !!AppLocalStorage.getItem(AppLocalStorageKey.token),
   userStore: userStore$3,
   isShowLoginModal: false,
@@ -135,6 +139,12 @@ export const appSlice = createSlice({
     },
     setIsMobile: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isMobile = action.payload;
+    },
+    setIsTablet: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.isTablet = action.payload;
+    },
+    setIsDesktop: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.isDesktop = action.payload;
     },
     setMessageCount: (state: InitialState, action: PayloadAction<number>) => {
       state.messageCount = action.payload;
