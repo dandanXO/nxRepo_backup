@@ -29,12 +29,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
         <SectionContainer id={'withdraw-section'}>
           <div className="text-base md:text-2xl">
             <MainInput
-              type="number"
-              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                if (e.key === '.' || e.key === 'e' || e.key === '-') {
-                  e.preventDefault();
-                }
-              }}
+              type="text"
               inputmode="numeric"
               inputClassName={
                 'text-main-primary-main leading-none text-sm md:text-xl'
@@ -46,7 +41,9 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               validation={props.amountInput.isValidation}
               errorMessage={props.amountInput.errorMessage}
               onChange={(event: any) => {
-                const isError = props.validateAmount(event.target.value);
+                const inputValue = event.target.value;
+                const numericValue = inputValue.replace(/[^0-9]/g, '');
+                const isError = props.validateAmount(numericValue);
               }}
             />
 

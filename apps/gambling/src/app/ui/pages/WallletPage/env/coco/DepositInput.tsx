@@ -19,38 +19,33 @@ export const DepositInput = (props: IDepositInput) => {
   return (
     <div className={cx('relative')}>
       <MobileInput
-        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-          if (e.key === '.' || e.key === 'e' || e.key === '-') {
-            e.preventDefault();
-          }
-        }}
-        type={'number'}
+        type='text'
         inputmode="numeric"
         className={cx({ 'py-2.5 px-4': isMobile })}
         inputClassName={'text-white'}
         value={props.inputValue.data}
         onChange={(event: any) => {
           const inputValue = event.target.value;
-          // console.log("inputValue", inputValue);
+          const numericValue = inputValue.replace(/[^0-9]/g, '');
           // console.log("inputValue.props.minimunValue", props.minimunValue);
           // console.log("inputValue.props.maximunValue", props.maximunValue);
-          if (Number(inputValue) < props.minimunValue) {
+          if (Number(numericValue) < props.minimunValue) {
             props.setInputValue({
-              data: inputValue,
+              data: numericValue,
               isValidation: false,
               errorMessage: `Depósito mínimo ${props.minimunValue}`,
             });
             return;
-          } else if (Number(inputValue) > props.maximunValue) {
+          } else if (Number(numericValue) > props.maximunValue) {
             props.setInputValue({
-              data: inputValue,
+              data: numericValue,
               isValidation: false,
               errorMessage: `O valor máximo de recarga é ${props.maximunValue}`,
             });
             return;
           } else {
             props.setInputValue({
-              data: inputValue,
+              data: numericValue,
               isValidation: true,
               errorMessage: '',
             });
