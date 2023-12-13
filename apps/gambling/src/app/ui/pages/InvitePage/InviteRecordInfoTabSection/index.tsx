@@ -143,7 +143,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         totalReward: formatLocaleMoney((Number(x.flow2Reward) + Number(y.flow2Reward))/100),
 
         // NOTICE: 2級沒有使用這欄位
-        numRecharge: 0,
+        numRecharge: x?.num2Recharge,
 
         // 二级流水 + 二级待结算流水
         // x.flow2 + y.flow2
@@ -164,7 +164,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         totalReward: formatLocaleMoney((Number(x.flow3Reward) + Number(y.flow3Reward))/100),
 
         // NOTICE: 3級沒有使用這欄位
-        numRecharge: 0,
+        numRecharge: x?.num3Recharge,
 
         // 三级流水 + 三级待结算流水
         // x.flow3 + y.flow3
