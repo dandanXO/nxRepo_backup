@@ -8,6 +8,8 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import {
   accountPromotedSwingSelector,
   accountPromotedWithdrawableSelector,
+  toDepositAccountRemovableSelector,
+  toDepositAccountSwingSelector,
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
@@ -18,6 +20,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"
 import { WalletPage as WWallletPage } from "./env/wild/WalletPage";
 import { WalletPage as CWallletPage } from "./env/coco/WalletPage";
+import { WalletPage as RWallletPage } from './env/riojungle/WalletPage';
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import queryString from 'query-string';
 
@@ -45,9 +48,25 @@ export const WallletPage = () => {
 
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
   const totalReasableValue = useSelector(totalReasableSelector);
-
+  const toDepositAccountSwingValue = useSelector(toDepositAccountSwingSelector);
+  const toDepositAccountRemovableValue = useSelector(toDepositAccountRemovableSelector);
   const accountPromotedSwingValue = useSelector(accountPromotedSwingSelector);
   const accountPromotedWithdrawableValue = useSelector(accountPromotedWithdrawableSelector);
+
+  const totalSectionValues = {
+    total:{
+      balance: useSelector(totalBalanceSheetSelector)||0,
+      retrievable: useSelector(totalReasableSelector)||0,
+    },
+    deposit:{
+      balance: useSelector(toDepositAccountSwingSelector)||0,
+      retrievable: useSelector(toDepositAccountRemovableSelector)||0,
+    },
+    promotion:{
+      balance: useSelector(accountPromotedSwingSelector)||0,
+      retrievable: useSelector(accountPromotedWithdrawableSelector)||0,
+    }
+  };
 
   return renderByPlatform({
     "wild777bet": (
@@ -56,6 +75,9 @@ export const WallletPage = () => {
     "coco777bet": (
       <CWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
+    "riojungle777bet": (
+      <RWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode} totalSectionValues={totalSectionValues}/>
+    )
   }, (
     <PWalletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
   ))
