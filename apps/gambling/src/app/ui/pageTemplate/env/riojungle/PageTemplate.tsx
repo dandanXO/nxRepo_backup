@@ -22,6 +22,7 @@ import {Header} from "../../../pageTemplateLayers/header/env/coco/Header";
 import {MobileHeader} from "../../../pageTemplateLayers/header/env/riojungle/MobileHeader";
 import {DesktopHeader} from "../../../pageTemplateLayers/header/env/riojungle/DesktopHeader";
 import {MenuDrawer} from "../../../pageTemplateLayers/drawers/MenuDrawer/env/riojungle/MenuDrawer";
+import cx from "classnames";
 
 type IPageTemplate = IUseSingletonPageTemplateConfig & {
   children: React.ReactNode;
@@ -38,12 +39,14 @@ export const PageTemplate = (props:IPageTemplate) => {
     isShowDesktopMenuDrawer,
     isShowMobileFooter,
     isShowDesktopFooter,
-    isShowTabbar,
+    isShowMobileTabbar,
   } = useSingletonPageTemplateConfig(props);
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
 
   const device = useBreakpoint();
+
+  const {isMobile} = useBreakpoint();
 
   return (
     <BaseStyledPageTemplate>
@@ -67,7 +70,11 @@ export const PageTemplate = (props:IPageTemplate) => {
             <MenuDrawer/>
           </div>
         )}
-        <div className={"ml-[248px] mt-24"}>
+        <div
+          className={cx("mt-24", {
+            "ml-[248px]": !isMobile
+          })}
+        >
           <BaseErrorBoundary>
             {props.children}
           </BaseErrorBoundary>
@@ -79,7 +86,7 @@ export const PageTemplate = (props:IPageTemplate) => {
         </div>
       </div>
 
-      {isShowTabbar && (
+      {isShowMobileTabbar && (
         <TabBar isShowSlot={false} size={"big"}/>
       )}
 

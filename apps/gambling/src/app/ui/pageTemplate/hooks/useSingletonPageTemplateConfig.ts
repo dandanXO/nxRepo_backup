@@ -21,12 +21,16 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
 
   const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
 
+  const isShowMobileTabbar = props.showTabbar === undefined ? true : props.showTabbar;
+
   return {
     isShowMobileHeader: isShowMobileHeader && isMobile,
     isShowDesktopHeader: isShowDesktopHeader && !isMobile,
     isShowDesktopMenuDrawer: isShowDesktopMenuDrawer && !isMobile,
     isShowMobileFooter: isShowMobileFooter && isMobile,
     isShowDesktopFooter: isShowDesktopFooter && !isMobile,
+    //NOTE: refactor
     isShowTabbar: isShowTabbar && isMobile,
+    isShowMobileTabbar: isShowMobileTabbar && isMobile,
   }
 }
