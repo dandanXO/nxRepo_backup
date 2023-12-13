@@ -3,10 +3,11 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
 import {
-  GetUserVIPAllInfoResponse,
+  GetSignInConfigResponse,
+  GetUserVIPAllInfoResponse, GetVIPInfoResponse,
   useGetSignInConfigMutation,
-  useLazyGetUserVIPAllInfoQuery,
-} from '../../../external';
+  useLazyGetUserVIPAllInfoQuery
+} from "../../../external";
 import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
@@ -18,6 +19,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import PVIPGradePage from "./env/pernambucana/VIPGradePage";
 import WVIPGradePage from "./env/wild/VIPGradePage";
 import CVIPGradePage from "./env/coco/VIPGradePage";
+import RioJungleVIPGradePage from './env/riojungle'
 
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {getLocalStorageObjectByKey} from "../../../persistant/getLocalStorageObjectByKey";
@@ -82,6 +84,13 @@ export const JackpotMap: {
     label: 'helicóptero',
   },
 };
+
+  export interface IVIPGradePageProps {
+    currentLevel: number;
+    allLevelInfo: GetUserVIPAllInfoResponse['data']
+    allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig']
+    userVIPInfo?: GetVIPInfoResponse
+  }
 
  export const VIPGradePage = () => {
   useAllowLoginRouterRules();
@@ -202,6 +211,14 @@ export const JackpotMap: {
         userVIPInfo={userVIPInfo}
         currentLevel={currentLevel}
         allLevelInfo={allLevelInfo}
+        allSignInConfig={allSignInConfig}
+      />
+    ),
+    "riojungle777bet": (
+      <RioJungleVIPGradePage
+        currentLevel={currentLevel}
+        allLevelInfo={allLevelInfo}
+        userVIPInfo={userVIPInfo}
         allSignInConfig={allSignInConfig}
       />
     )
