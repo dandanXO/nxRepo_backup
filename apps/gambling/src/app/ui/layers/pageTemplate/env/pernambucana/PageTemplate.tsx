@@ -10,14 +10,15 @@ import {TabBar} from "../../../tabBar";
 import {Toolbox} from "../../../../components/Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";
-import {MenuDrawer} from "../../../drawers/MenuDrawer";
+import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
 
 import {HeaderMobile} from "../../../header/env/pernambucana/HeaderMobile";
 import {Header} from "../../../header/env/pernambucana/Header";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
-import { TShowToolboxConfig } from "../../index";
+
+import {TShowToolboxConfig} from "../../base/types";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -140,10 +141,11 @@ showToolboxConfig
 }: IProps) => {
 
   return (
-    <StyledPage isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}>
+    <StyledPage
+      isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+    >
 
-      {/*Refactor ME*/}{/*Refactor ME*/}
-      {contextHolder}
+      {/*Refactor ME*/}
       {contextHolder}
 
       {!isMobile && isShowDesktopHeader && (
@@ -178,9 +180,9 @@ showToolboxConfig
         {/*    }}/>*/}
         {/*)}*/}
         {isShowDesktopMenuDrawer && (
-          <MenuDrawer className={"rounded-r-3xl"}>
+          <MenuDrawerContainer className={"rounded-r-3xl"}>
             <MenuDrawerContent/>
-          </MenuDrawer>
+          </MenuDrawerContainer>
         )}
 
         <div className={cx("w-full h-full", {

@@ -11,8 +11,8 @@ import {MessageCountBadge} from "../../../../components/MessageCountBadge";
 import {environment} from "../../../../../../environments/environment";
 import {Avatar} from "../../../../components/Avatar";
 import {AvatarAccountInfo} from "../../../../components/AvatarAccountInfo";
-import {CompanyButton} from "./CompanyButton";
-import {WebsiteLogo} from "./WebsiteLogo";
+import {CompanyButton} from "./components/CompanyButton";
+import {WebsiteLogo} from "./components/WebsiteLogo";
 import {NotificationAnimationIcon} from "../../../../components/Icons/animation/NotificationAnimationIcon";
 
 

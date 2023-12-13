@@ -4,7 +4,8 @@ import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
 import {Footer} from "../../../footer/coco/Footer";
-import {MenuDrawer} from "../../../drawers/MenuDrawer";
+import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
+import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
 import {TabBar} from "../../../tabBar";
 import {Toolbox} from "../../../../components/Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
@@ -12,13 +13,13 @@ import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {environment} from "../../../../../../environments/environment";
 import {Header} from "../../../header/env/coco/Header";
 import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
-import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
-import { TShowToolboxConfig } from "../../index";
+
 import {LoadingLogo} from "../../../../components/Logos/LoadingLogo";
 import {LoadingBar} from "../../../../components/LoadingBar";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {appSlice} from "../../../../../reduxStore/appSlice";
+import {TShowToolboxConfig} from "../../base/types";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -190,14 +191,15 @@ export const PageTemplate = ({
         )}
 
         {isShowDesktopMenuDrawer && (
-          <MenuDrawer
+          <MenuDrawerContainer
             className={""}
             isTabletShow={false}
             isShowCloseButton={false}
           >
             <MenuDrawerContent/>
-          </MenuDrawer>
+          </MenuDrawerContainer>
         )}
+
         {/*NOTE: 佔據有 Header 時的高度*/}
         {isMobile && isShowMobileHeader && <div className={"w-full h-[52.5px]"}/>}
 

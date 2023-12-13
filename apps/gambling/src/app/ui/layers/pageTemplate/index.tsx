@@ -25,14 +25,19 @@ import {TelegramContactModal} from "../modals/TelegramContactModal";
 import {InviteBonusModal} from "../modals/InviteBonusModal";
 import {LogoutModal} from "../modals/LogoutModal";
 
+import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
+import {MaintenanceModal} from "../modals/MaintenanceModal";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
+
 import {renderByPlatform} from "../../utils/renderByPlatform";
 import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
-import {MaintenanceModal} from "../modals/MaintenanceModal";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import {PageTemplate as RPageTemplate} from "./env/riojungle/PageTemplate";
+import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
+import {TShowToolboxConfig} from "./base/types";
+import {UIlayers} from "./UIlayers";
 
 
 console.log("[APP] environment", environment);
@@ -48,17 +53,7 @@ export type IOpenNotificationWithIcon = {
 //   isUserLogin: !!AppLocalStorage.getItem("token"),
 // });
 
-export type TShowToolboxConfig = {
-  mobile?: {
-    download?: boolean;
-    customerService?: boolean;
-  } | boolean;
-  desktop?: {
-    download?: boolean;
-    customerService?: boolean;
-    manager?: boolean
-  } | boolean;
-} | boolean;
+
 
 export type IPage = {
   children: React.ReactNode;
@@ -171,13 +166,25 @@ export const PageTemplate = (props: IPage) => {
     dispatch(appSlice.actions.setIsShowInviteBonusModal(show))
   }
 
-  const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
-  const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
-  const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
-  const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
+  const {
+    isShowMobileHeader,
+    isShowDesktopHeader,
+    isShowDesktopMenuDrawer,
+    isShowMobileFooter,
+    isShowDesktopFooter,
+    isShowTabbar,
+  } = useSingletonPageTemplateConfig(props);
 
-  const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
-  const isShowDesktopMenuDrawer = props.showDesktopMenuDrawer === undefined ? true : props.showDesktopMenuDrawer;
+  // const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
+  // const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
+  //
+  // const isShowDesktopMenuDrawer = props.showDesktopMenuDrawer === undefined ? true : props.showDesktopMenuDrawer;
+  //
+  // const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
+  // const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
+  //
+  // const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
+
 
   // NOTE: LogoutPopover
   // const [openLogoutPopover, setOpenLogoutPopover] = useState(false);
@@ -239,6 +246,46 @@ export const PageTemplate = (props: IPage) => {
   return (
     <>
       {renderByPlatform({
+        "wild777bet": (
+          <WPageTemplate
+            isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+            contextHolder={contextHolder}
+            isMobile={isMobile}
+            isShowMobileFooter={isShowMobileFooter}
+            isShowDesktopFooter={isShowMobileFooter}
+            isShowDesktopHeader={isShowDesktopHeader}
+            isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+            isLogin={isLogin}
+
+            setIsLogin={setIsLogin}
+            showLoginModal={showLoginModal}
+            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
+            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+            openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+            setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+            setOpenLogoutPopover={setOpenLogoutPopover}
+            isShowMobileLogoutModal={isShowMobileLogoutModal}
+
+            openMenuDrawer={openMenuDrawer}
+            setOpenMenuDrawer={setOpenMenuDrawer}
+            isShowLoginModal={isShowLoginModal}
+            openNotificationWithIcon={openNotificationWithIcon}
+            openDownloadModal={openDownloadModal}
+            setOpenDownloadModal={setOpenDownloadModal}
+            isShowTelegramModal={isShowTelegramModal}
+            onClickToOpenTelegramService={onClickToOpenTelegramService}
+            isShowInviteBonusModal={isShowInviteBonusModal}
+            setOpenInitailChargeModal={setOpenInitailChargeModal}
+            isShowMobileHeader={isShowMobileHeader}
+            isShowTabbar={isShowTabbar}
+            onClickToDownload={onClickToDownload}
+            onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+            isUILoading={isUILoading}
+            showToolboxConfig={props.showToolboxConfig}
+          >
+            {props.children}
+          </WPageTemplate>
+        ),
         "coco777bet": (
           <CPageTemplate
             isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
@@ -279,45 +326,15 @@ export const PageTemplate = (props: IPage) => {
             {props.children}
           </CPageTemplate>
         ),
-        "wild777bet": (
-          <WPageTemplate
-            isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
-            contextHolder={contextHolder}
-            isMobile={isMobile}
-            isShowMobileFooter={isShowMobileFooter}
-            isShowDesktopFooter={isShowMobileFooter}
-            isShowDesktopHeader={isShowDesktopHeader}
-            isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
-            isLogin={isLogin}
-
-            setIsLogin={setIsLogin}
-            showLoginModal={showLoginModal}
-            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
-            openDesktopNotificationDrawer={openDesktopNotificationDrawer}
-            setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
-            setOpenLogoutPopover={setOpenLogoutPopover}
-            isShowMobileLogoutModal={isShowMobileLogoutModal}
-
-            openMenuDrawer={openMenuDrawer}
-            setOpenMenuDrawer={setOpenMenuDrawer}
-            isShowLoginModal={isShowLoginModal}
-            openNotificationWithIcon={openNotificationWithIcon}
-            openDownloadModal={openDownloadModal}
-            setOpenDownloadModal={setOpenDownloadModal}
-            isShowTelegramModal={isShowTelegramModal}
-            onClickToOpenTelegramService={onClickToOpenTelegramService}
-            isShowInviteBonusModal={isShowInviteBonusModal}
-            setOpenInitailChargeModal={setOpenInitailChargeModal}
-            isShowMobileHeader={isShowMobileHeader}
-            isShowTabbar={isShowTabbar}
+        "riojungle777bet": (
+          <RPageTemplate
+            showToolboxConfig={props.showToolboxConfig}
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
-            isUILoading={isUILoading}
-            showToolboxConfig={props.showToolboxConfig}
+            onClickToOpenTelegramService={onClickToOpenTelegramService}
           >
-            {props.children}
-          </WPageTemplate>
+          {props.children}
+          </RPageTemplate>
         )
       }, (
         <PPageTemplate
@@ -360,80 +377,26 @@ export const PageTemplate = (props: IPage) => {
       ))}
 
 
-      {/*Logout*/}
-      {isMobile && isShowMobileLogoutModal && (
-        <LogoutModal/>
-      )}
-      {!isMobile && isShowMobileLogoutModal && (
-        <LogoutPopover close={() => {
-          setOpenLogoutPopover(false);
-        }}/>
-      )}
+      <UIlayers
+        isMobile={isMobile}
+        isShowMobileLogoutModal={isShowMobileLogoutModal}
+        setOpenLogoutPopover={setOpenLogoutPopover}
+        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+        setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
+        openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+        setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+        isShowDepositModal={isShowDepositModal}
+        isShowInviteBonusModal={isShowInviteBonusModal}
+        onClickToWallet={onClickToWallet}
+        isShowTelegramModal={isShowTelegramModal}
+        onClickToOpenTelegramGroup={onClickToOpenTelegramGroup}
+        setOpenInitailChargeModal={setOpenInitailChargeModal}
+        openDownloadModal={openDownloadModal}
+        setOpenDownloadModal={setOpenDownloadModal}
+        isShowMaintenanceModal={isShowMaintenanceModal}
+        onClickToOpenTelegramService={onClickToOpenTelegramService}
+      />
 
-      {openDesktopUserInfoStatusDrawer && (
-        <UserInfoStatusPopover
-          close={() => setOpenDesktopUserInfoStatusDrawer(false)}
-        />
-      )}
-
-      {openDesktopNotificationDrawer && (
-        <NotificationDrawer closeDrawer={() => {
-          setOpenDesktopNotificationDrawer(false)
-        }}/>
-      )}
-
-      {
-        isShowDepositModal && !isShowInviteBonusModal && (
-          <DepositAdvertisementModal
-            close={()=>dispatch(appSlice.actions.setShowDepositModal(false))}
-            onConfirm={()=>{
-              dispatch(appSlice.actions.setShowDepositModal(false));
-              onClickToWallet({'panelType':'deposit'})
-            }}
-          />
-        )
-      }
-
-      {isShowTelegramModal && (
-        <TelegramContactModal
-          close={() => {
-            dispatch(appSlice.actions.setShowTelegramModal(false))
-          }}
-          toTelegramGroup={() => {
-            dispatch(appSlice.actions.setShowTelegramModal(false))
-            onClickToOpenTelegramGroup();
-          }}
-        />
-      )}
-
-      {/*比 TelegramContactModal 還上層*/}
-      {isShowInviteBonusModal && (
-        <InviteBonusModal
-          close={() => {
-            setOpenInitailChargeModal(false);
-          }}
-          onConfirm={() => {
-            setOpenInitailChargeModal(false);
-            dispatch(appSlice.actions.setShowTelegramModal(false))
-            dispatch(appSlice.actions.setShowDepositModal(false));
-            navigate(PageOrModalPathEnum.InvitePage);
-          }}/>
-      )}
-
-
-      {/*Download*/}
-      {openDownloadModal && (
-        <DownloadModal close={() => {
-          setOpenDownloadModal(false)
-        }}/>
-      )}
-      {
-        isShowMaintenanceModal && (
-          <MaintenanceModal
-             onClickToOpenTelegramService={onClickToOpenTelegramService}
-          />
-        )
-      }
       {contextHolder}
 
     </>

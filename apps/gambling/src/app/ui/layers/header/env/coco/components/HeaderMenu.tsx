@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import cx from 'classnames';
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../../hooks/usePageNavigate";
 
 const MenuItem = (props: {
   menuText: string | ReactElement | ReactElement[],

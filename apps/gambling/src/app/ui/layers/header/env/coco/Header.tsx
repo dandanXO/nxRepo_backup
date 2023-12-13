@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { environment } from "../../../../../../environments/environment";
 import { LoginButton } from "../../../../components/Buttons/LoginButton";
-import { HeaderMenu } from "./HeaderMenu";
+import { HeaderMenu } from "./components/HeaderMenu";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";

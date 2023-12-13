@@ -1,4 +1,4 @@
-import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../../../../PageOrModalPathEnum";
 import React from "react";
 import {useNavigate} from "react-router";
 

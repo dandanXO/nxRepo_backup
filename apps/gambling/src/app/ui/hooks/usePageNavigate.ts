@@ -8,7 +8,7 @@ import { AppLocalStorage } from "../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
 
 
-interface IQueryStringProps{
+export interface IQueryStringProps{
   [key: string]: string;
 }
 const queryStringParams = (queryString:IQueryStringProps) => {
@@ -17,7 +17,7 @@ const queryStringParams = (queryString:IQueryStringProps) => {
       .map(([key, value]) => `${key}=${value}`)
       .join('&')}`
     : '';
-} 
+}
 
 
 export const usePageNavigate = () => {
@@ -41,7 +41,7 @@ export const usePageNavigate = () => {
     }
   }
   const onClickToWallet = (queryString?:IQueryStringProps) => {
-  
+
     if (!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {

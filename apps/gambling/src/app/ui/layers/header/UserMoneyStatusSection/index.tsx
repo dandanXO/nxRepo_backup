@@ -10,9 +10,9 @@ import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "
 import {environment} from "../../../../../environments/environment";
 import cx from "classnames";
 import { renderByPlatform } from "../../../utils/renderByPlatform";
-import { PersonalControl as CocoPersonalControl } from '../env/coco/PersonalControl'
-import { PersonalControl as WildPersonalControl } from '../env/wild/PersonalControl'
-import { PersonalControl as PernambucanaPersonalControl } from '../env/pernambucana/PersonalControl'
+import { PersonalControl as CocoPersonalControl } from '../env/coco/components/PersonalControl'
+import { PersonalControl as WildPersonalControl } from '../env/wild/components/PersonalControl'
+import { PersonalControl as PernambucanaPersonalControl } from '../env/pernambucana/components/PersonalControl'
 import { formatLocaleMoney } from "../../../utils/format";
 import { usePageNavigate } from "../../../hooks/usePageNavigate";
 

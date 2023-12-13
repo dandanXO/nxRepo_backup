@@ -2,18 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 
-import {MenuDrawer} from "../../../drawers/MenuDrawer";
-import {TabBar} from "../../../tabBar";
+import {Header} from "../../../header/env/wild/Header";
+import {HeaderMobile} from "../../../header/env/wild/HeaderMobile";
+import {Footer} from "../../../footer/wild/Footer";
+
+import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
+import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
 import {Toolbox} from "../../../../components/Toolbox";
+
+import {TabBar} from "../../../tabBar";
+
 import {ThreeDots} from "react-loading-icons";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../../environments/environment";
-import {Header} from "../../../header/env/wild/Header";
-import {HeaderMobile} from "../../../header/env/wild/HeaderMobile";
-import {Footer} from "../../../footer/wild/Footer";
-import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
-import { TShowToolboxConfig } from "../../index";
+
+
+import {TShowToolboxConfig} from "../../base/types";
 
 
 type IStyledPage = {
@@ -175,12 +180,12 @@ export const PageTemplate = ({
         )}
 
         {isShowDesktopMenuDrawer && (
-          <MenuDrawer
+          <MenuDrawerContainer
             className={""}
             isTabletShow={false}
           >
             <MenuDrawerContent/>
-          </MenuDrawer>
+          </MenuDrawerContainer>
         )}
         {/*NOTE: 佔據有 Header 時的高度*/}
         {isMobile && isShowMobileHeader && <div className={"w-full h-[52.5px]"}/>}
