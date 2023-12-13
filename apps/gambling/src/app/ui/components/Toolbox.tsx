@@ -9,7 +9,7 @@ import {ToolButton as CToolButton} from "../components/Buttons/env/coco/ToolButt
 import { TShowToolboxConfig } from "../pageTemplate";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reduxStore";
-import { TelegramMobileModal } from "../modals/TelegramMobileModal";
+import { TelegramMobileModal } from "../layers/modals/TelegramMobileModal";
 import { appSlice } from "../../reduxStore/appSlice";
 
 

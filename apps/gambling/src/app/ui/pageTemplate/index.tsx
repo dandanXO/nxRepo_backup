@@ -15,23 +15,23 @@ import {AppLocalStorage} from "../../persistant/localstorage";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {environment} from "../../../environments/environment";
 
-import {NotificationDrawer} from "../drawers/NotificationDrawer";
+import {NotificationDrawer} from "../layers/drawers/NotificationDrawer";
 
-import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
-import {LogoutPopover} from "../popovers/LogoutPopover";
+import {UserInfoStatusPopover} from "../layers/popovers/UserInfoStatusPopover";
+import {LogoutPopover} from "../layers/popovers/LogoutPopover";
 
-import {DownloadModal} from "../modals/DownloadModal";
-import {TelegramContactModal} from "../modals/TelegramContactModal";
-import {InviteBonusModal} from "../modals/InviteBonusModal";
-import {LogoutModal} from "../modals/LogoutModal";
+import {DownloadModal} from "../layers/modals/DownloadModal";
+import {TelegramContactModal} from "../layers/modals/TelegramContactModal";
+import {InviteBonusModal} from "../layers/modals/InviteBonusModal";
+import {LogoutModal} from "../layers/modals/LogoutModal";
 
 import {renderByPlatform} from "../utils/renderByPlatform";
 import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
-import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
-import {MaintenanceModal} from "../modals/MaintenanceModal";
+import {DepositAdvertisementModal} from "../layers/modals/DepositAdvertisementModal";
+import {MaintenanceModal} from "../layers/modals/MaintenanceModal";
 import { usePageNavigate } from "../hooks/usePageNavigate";
 
 
