@@ -1,6 +1,6 @@
 
 import {UserLoginStatusSection} from "../../../components-bs/UserLoginStatusSection";
-import {IOpenNotificationWithIcon} from "../../../pageTemplate";
+import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
 

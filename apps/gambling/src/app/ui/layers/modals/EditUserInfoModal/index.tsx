@@ -8,7 +8,7 @@ import { AppLocalStorage } from '../../../../persistant/localstorage';
 import { Input as DesktopInput } from '../../../components/Inputs/Input';
 import { MobileInput } from '../../../components/Inputs/MobileInput';
 import useBreakpoint from '../../../hooks/useBreakpoint';
-import { IOpenNotificationWithIcon } from '../../../pageTemplate';
+import { IOpenNotificationWithIcon } from '../../pageTemplate';
 import { tcx } from "../../../utils/tcx";
 import { UserOutlined } from "@ant-design/icons";
 import { environment } from "../../../../../environments/environment";

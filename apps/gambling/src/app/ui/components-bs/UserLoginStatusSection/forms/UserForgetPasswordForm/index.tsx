@@ -14,7 +14,7 @@ import {
 } from "../../../../../external";
 import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
 import {promiseHandler} from "../../../../../gateway/promiseHanlder";
-import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
+import {IOpenNotificationWithIcon} from "../../../../layers/pageTemplate";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";
 import {validate} from "class-validator";
 import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"

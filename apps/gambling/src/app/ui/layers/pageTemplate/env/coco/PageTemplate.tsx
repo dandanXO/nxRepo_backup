@@ -3,22 +3,22 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
-import {Footer} from "../../footer/coco/Footer";
-import {MenuDrawer} from "../../../layers/drawers/MenuDrawer";
-import {TabBar} from "../../tabBar";
-import {Toolbox} from "../../../components/Toolbox";
-import {UserLoginStatusModal} from "../../../layers/modals/UserLoginStatusModal";
+import {Footer} from "../../../footer/coco/Footer";
+import {MenuDrawer} from "../../../drawers/MenuDrawer";
+import {TabBar} from "../../../tabBar";
+import {Toolbox} from "../../../../components/Toolbox";
+import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
-import {environment} from "../../../../../environments/environment";
-import {Header} from "../../header/env/coco/Header";
-import {HeaderMobile} from "../../header/env/coco/HeaderMobile";
-import {MenuDrawerContent} from "../../../layers/drawers/MenuDrawer/env/coco/MenuDrawerContent";
+import {environment} from "../../../../../../environments/environment";
+import {Header} from "../../../header/env/coco/Header";
+import {HeaderMobile} from "../../../header/env/coco/HeaderMobile";
+import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
 import { TShowToolboxConfig } from "../../index";
-import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
-import {LoadingBar} from "../../../components/LoadingBar";
+import {LoadingLogo} from "../../../../components/Logos/LoadingLogo";
+import {LoadingBar} from "../../../../components/LoadingBar";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../reduxStore";
-import {appSlice} from "../../../../reduxStore/appSlice";
+import {RootState} from "../../../../../reduxStore";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;

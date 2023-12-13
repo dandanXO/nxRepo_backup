@@ -6,7 +6,7 @@ import {renderByPlatform} from "../utils/renderByPlatform";
 import {ToolButton as PToolButton} from "../components/Buttons/env/pernambucana/ToolButton"
 import {ToolButton as WToolButton} from "../components/Buttons/env/wild/ToolButton"
 import {ToolButton as CToolButton} from "../components/Buttons/env/coco/ToolButton"
-import { TShowToolboxConfig } from "../pageTemplate";
+import { TShowToolboxConfig } from "../layers/pageTemplate";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reduxStore";
 import { TelegramMobileModal } from "../layers/modals/TelegramMobileModal";
