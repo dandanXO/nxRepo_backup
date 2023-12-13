@@ -10,7 +10,7 @@ import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import {GameBackNavigation} from "../../components/BackNavigation/GameBackNavigation";
-import { LeaveGameConfirmModal } from "../../pageTemplateLayers/modals/LeaveGameConfirmModal";
+import { LeaveGameConfirmModal } from "../../modals/LeaveGameConfirmModal";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import {appSlice} from "../../../reduxStore/appSlice";

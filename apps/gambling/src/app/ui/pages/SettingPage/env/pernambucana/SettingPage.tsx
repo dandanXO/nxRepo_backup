@@ -6,7 +6,7 @@ import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { Input } from '../../../../components/Inputs/Input';
 import { SectionContainer } from '../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../hooks/useBreakpoint';
-import { EditUserInfoModal } from '../../../../pageTemplateLayers/modals/EditUserInfoModal';
+import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"
 import {Container} from "../../../../components/container/Container";

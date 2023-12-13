@@ -7,7 +7,7 @@ import React from "react";
 import {Footer} from "../../../pageTemplateLayers/footer/env/coco/Footer";
 import {TabBar} from "../../../pageTemplateLayers/tabBar/env/coco";
 import {Toolbox} from "../../../components/Toolbox";
-import {UserLoginStatusModal} from "../../../pageTemplateLayers/modals/UserLoginStatusModal";
+import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";
 import {BaseLoadingOverlay} from "../../base/BaseLoadingOverlay";
@@ -21,7 +21,7 @@ import {HeaderMobile} from "../../../pageTemplateLayers/header/env/coco/HeaderMo
 import {Header} from "../../../pageTemplateLayers/header/env/coco/Header";
 import {MobileHeader} from "../../../pageTemplateLayers/header/env/riojungle/MobileHeader";
 import {DesktopHeader} from "../../../pageTemplateLayers/header/env/riojungle/DesktopHeader";
-import {MenuDrawer} from "../../../pageTemplateLayers/drawers/MenuDrawer/env/riojungle/MenuDrawer";
+import {MenuDrawer} from "../../../drawers/MenuDrawer/env/riojungle/MenuDrawer";
 import cx from "classnames";
 
 type IPageTemplate = IUseSingletonPageTemplateConfig & {

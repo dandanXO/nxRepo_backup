@@ -1,17 +1,21 @@
-import {LogoutModal} from "./modals/LogoutModal";
-import {LogoutPopover} from "./popovers/LogoutPopover";
-import {UserInfoStatusPopover} from "./popovers/UserInfoStatusPopover";
-import {NotificationDrawer} from "./drawers/NotificationDrawer";
-import {DepositAdvertisementModal} from "./modals/DepositAdvertisementModal";
-import {appSlice} from "../../reduxStore/appSlice";
-import {TelegramContactModal} from "./modals/TelegramContactModal";
-import {InviteBonusModal} from "./modals/InviteBonusModal";
-import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
-import {DownloadModal} from "./modals/DownloadModal";
-import {MaintenanceModal} from "./modals/MaintenanceModal";
 import React from "react";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
+import {appSlice} from "../../reduxStore/appSlice";
+
+import {NotificationDrawer} from "../drawers/NotificationDrawer";
+
+import {LogoutModal} from "../modals/LogoutModal";
+import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
+import {TelegramContactModal} from "../modals/TelegramContactModal";
+import {InviteBonusModal} from "../modals/InviteBonusModal";
+import {DownloadModal} from "../modals/DownloadModal";
+import {MaintenanceModal} from "../modals/MaintenanceModal";
+
+import {LogoutPopover} from "../popovers/LogoutPopover";
+import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
+
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {IQueryStringProps} from "../hooks/usePageNavigate";
 
 type IModalOpen = {

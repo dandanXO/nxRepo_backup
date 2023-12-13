@@ -3,20 +3,20 @@ import {environment} from "../../../../../environments/environment";
 
 import cx from "classnames";
 
-import {LogoutModal} from "../../../pageTemplateLayers/modals/LogoutModal";
+import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
 import {Footer} from "../../../pageTemplateLayers/footer/env/coco/Footer";
 import {TabBar} from "../../../pageTemplateLayers/tabBar/env/coco";
 import {Toolbox} from "../../../components/Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";
-import {MenuDrawerContainer} from "../../../pageTemplateLayers/drawers/MenuDrawer/MenuDrawerContainer";
-import {UserLoginStatusModal} from "../../../pageTemplateLayers/modals/UserLoginStatusModal";
-import {UserLoginStatusDrawers} from "../../../pageTemplateLayers/drawers/UserLoginStatusDrawers";
+import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
+import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
+import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
 
 import {HeaderMobile} from "../../../pageTemplateLayers/header/env/pernambucana/HeaderMobile";
 import {Header} from "../../../pageTemplateLayers/header/env/pernambucana/Header";
-import {MenuDrawerContent} from "../../../pageTemplateLayers/drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
+import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
 
 import {TShowToolboxConfig} from "../../base/types";
 
