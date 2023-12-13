@@ -133,8 +133,8 @@ export const TotalSectionContainer = () => {
         (<TotalSectionBottomContent className={" flex flex-row flex-wrap justify-between items-center text-base md:text-medium text-[var(--secondary-assistant)]"}>
           <MobileTotalDetailItem
             titleText={'Depositar conta'}
-            balanceValue={formatLocaleMoney(totalBalanceSheetValue)}
-            removeableValue={formatLocaleMoney(totalReasableValue)}
+            balanceValue={formatLocaleMoney(toDepositAccountSwingValue)}
+            removeableValue={formatLocaleMoney(toDepositAccountRemovableValue)}
             noticeText={'Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc. '}
           />
           <MobileTotalDetailItem
@@ -155,8 +155,8 @@ export const TotalSectionContainer = () => {
             </div>
           </div>
           )}
-            balanceValue={formatLocaleMoney(totalBalanceSheetValue)}
-            removeableValue={formatLocaleMoney(totalReasableValue)}
+            balanceValue={formatLocaleMoney(toDepositAccountSwingValue)}
+            removeableValue={formatLocaleMoney(toDepositAccountRemovableValue)}
           />
           <TotalDetailItem
             titleText={(<div className="flex flex-col justify-center items-center">

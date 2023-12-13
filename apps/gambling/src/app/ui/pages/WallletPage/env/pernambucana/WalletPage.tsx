@@ -9,7 +9,13 @@ import React from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";
 
-
+export type TotalSectionType = 'total' | 'deposite' | 'promotion'
+export interface ITotalSectionValues {
+  [key: string]: {
+    balance: number;
+    retrievable: number;
+  };
+}
 export type IWalletPage = {
   onClickToIndex: () => void;
   panelMode: IPanelType;
@@ -18,6 +24,7 @@ export type IWalletPage = {
 
   recordPanelMode: IRecordPanelType;
   setRecordPanelMode: (type: IRecordPanelType) => void;
+  totalSectionValues?: ITotalSectionValues;
 
 }
 export const WalletPage = (props: IWalletPage) => {
