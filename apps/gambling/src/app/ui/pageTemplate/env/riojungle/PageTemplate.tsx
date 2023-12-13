@@ -55,27 +55,29 @@ export const PageTemplate = (props:IPageTemplate) => {
           <MobileHeader/>
         ),
         desktop: (
-          <DesktopHeader/>
+          <div className={"h-24 fixed top-0 left-0 right-0 z-10"}>
+            <DesktopHeader/>
+          </div>
         )
       }, device)}
 
-      <div className={"flex row"}>
+      <div className={""}>
         {isShowDesktopMenuDrawer && (
-          <div className={"shrink-0 grow-0"}>
+          <div className={"w-[248px] fixed top-24 left-0"}>
             <MenuDrawer/>
           </div>
         )}
-        <div className={""}>
+        <div className={"ml-[248px] mt-24"}>
           <BaseErrorBoundary>
             {props.children}
           </BaseErrorBoundary>
+
+          <Footer
+            showMobileFooter={isShowMobileFooter}
+            showDesktopFooter={isShowDesktopFooter}
+          />
         </div>
       </div>
-
-      <Footer
-        showMobileFooter={isShowMobileFooter}
-        showDesktopFooter={isShowDesktopFooter}
-      />
 
       {isShowTabbar && (
         <TabBar isShowSlot={false} size={"big"}/>
