@@ -32,7 +32,7 @@ export const WallletPage = () => {
   useAllowLoginRouterRules();
 
   const {onClickToIndex} = usePageNavigate();
-  const {panelType}  = queryString.parse(window.location.search) ||  "deposit";
+  const panelType = queryString.parse(window.location.search)?.panelType || "deposit";
   const [panelMode, setPanelMode] = useState<IPanelType>(panelType as IPanelType);
 
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();

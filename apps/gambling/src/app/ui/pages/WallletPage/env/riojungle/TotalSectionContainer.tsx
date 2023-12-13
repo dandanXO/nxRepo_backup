@@ -1,7 +1,7 @@
-import Banner from './TotalSectionBanner.png';
-import iconTotal from './iconTotal.png';
-import iconPromotion from './iconPromotion.png'
-import iconDeposit from './iconDeposit.png'
+import Banner from './assets/TotalSectionBanner.png';
+import iconTotal from './assets/iconTotal.png';
+import iconPromotion from './assets/iconPromotion.png'
+import iconDeposit from './assets/iconDeposit.png'
 import { ReactElement, useState } from 'react';
 import { formatLocaleMoney } from '../../../../utils/format';
 import { ITotalSectionValues, TotalSectionType } from '../pernambucana/WalletPage';
@@ -38,7 +38,7 @@ export const TotalSectionContainer = (props: ITotalSectionContainer) => {
 
 
   return (
-    <div>
+    <div className='w-full'>
       <div className='relative'>
         <img src={Banner} className='w-full h-[124px] md:h-[144px] lg:h-[195px]' />
         <div className='w-full flex absolute top-0 left-0 h-full  '>
