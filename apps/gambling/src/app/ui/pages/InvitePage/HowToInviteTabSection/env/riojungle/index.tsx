@@ -75,19 +75,21 @@ export const HowToInviteTabSection = () => {
           }
           {
             isMobile && (
-              <div className="bg-[linear-gradient(145deg,_#8547eb_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col pb-2 gap-2 w-full items-start rounded-lg">
-                <div className="text-sm font-['Inter'] font-bold leading-[20px] text-[#4b80bd] bg-white/80 flex flex-row justify-center pt-1 w-full items-start rounded-tl-lg rounded-tr-lg">
+              <div className="bg-gradient-to-br from-[#8547eb]  to-[#10b98f] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col gap-2 w-full items-start rounded-lg">
+
+                <div className="text-sm font-['Inter'] font-bold leading-[20px] text-[#4b80bd] bg-white flex flex-row justify-center pt-1 w-full items-start rounded-tl-lg rounded-tr-lg">
                   Copie o link para seus amigos!
                 </div>
-                <div className="font-['Inter'] font-bold leading-[24px] text-white ml-4">
-                  https://ds.imperador777bet.com/invite
+                <div className='p-2 w-full'>
+
+                  <div className="font-['Inter'] font-bold leading-[24px] text-white  text-center w-full mb-2">
+                    https://ds.imperador777bet.com/invite
+                  </div>
+                  <button className="font-['Inter'] font-medium leading-[24px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
+                  >
+                    Convide Amigos
+                  </button>
                 </div>
-                <button
-                  id="Btn"
-                  className="font-['Inter'] font-medium leading-[24px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center ml-2 pt-2 w-full h-10 cursor-pointer items-start rounded-[100px]"
-                >
-                  Convide Amigos
-                </button>
               </div>
             )
           }
@@ -108,10 +110,10 @@ export const HowToInviteTabSection = () => {
             responsabilidades legais relevantes serão assumidas.
           </div>
 
-          <div className="w-full py-5 px-8  max-md:max-w-full max-md:pr-5 bg-[#333]">
-            <div className="gap-5 flex flex-col lg:flex-row max-md:items-stretch max-md:gap-0">
+          <div className="w-full p-2 md:p-5 lg:px-8 bg-[#333]">
+            <div className="flex flex-col lg:flex-row ">
               <div className="flex flex-col items-center w-full  lg:w-[63%] max-md:ml-0">
-                <div className="items-stretch flex grow flex-col max-md:max-w-full max-md:mt-5">
+                <div className="items-stretch flex grow flex-col max-md:max-w-full ">
                   <div className="text-white text-3xl font-bold leading-9 max-md:max-w-full">
                     Programa de referência
                   </div>
