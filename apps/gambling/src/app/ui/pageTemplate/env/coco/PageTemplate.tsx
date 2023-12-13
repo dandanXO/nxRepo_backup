@@ -3,16 +3,16 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
-import {Footer} from "../../../pageTemplateLayers/footer/env/coco/Footer";
+import {Footer} from "../../footer/env/coco/Footer";
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
-import {TabBar} from "../../../pageTemplateLayers/tabBar/env/coco";
+import {TabBar} from "../../tabBar/env/coco";
 import {Toolbox} from "../../../components/Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";
-import {Header} from "../../../pageTemplateLayers/header/env/coco/Header";
-import {HeaderMobile} from "../../../pageTemplateLayers/header/env/coco/HeaderMobile";
+import {Header} from "../../header/env/coco/Header";
+import {HeaderMobile} from "../../header/env/coco/HeaderMobile";
 
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";

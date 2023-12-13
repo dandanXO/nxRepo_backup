@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 
-import {Header} from "../../../pageTemplateLayers/header/env/wild/Header";
-import {HeaderMobile} from "../../../pageTemplateLayers/header/env/wild/HeaderMobile";
-import {Footer} from "../../../pageTemplateLayers/footer/env/wild/Footer";
+import {Header} from "../../header/env/wild/Header";
+import {HeaderMobile} from "../../header/env/wild/HeaderMobile";
+import {Footer} from "../../footer/env/wild/Footer";
 
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
 import {Toolbox} from "../../../components/Toolbox";
 
-import {TabBar} from "../../../pageTemplateLayers/tabBar/env/coco";
+import {TabBar} from "../../tabBar/env/coco";
 
 import {ThreeDots} from "react-loading-icons";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
