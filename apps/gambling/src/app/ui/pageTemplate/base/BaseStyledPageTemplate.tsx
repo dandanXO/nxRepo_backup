@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {environment} from "../../../../../environments/environment";
-import {appSlice} from "../../../../reduxStore/appSlice";
+import {environment} from "../../../../environments/environment";
+import {appSlice} from "../../../reduxStore/appSlice";
 
 type IStyledPage = {
 

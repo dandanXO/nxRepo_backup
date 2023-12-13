@@ -1,24 +1,24 @@
-import {LogoutModal} from "../modals/LogoutModal";
-import {LogoutPopover} from "../popovers/LogoutPopover";
-import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
-import {NotificationDrawer} from "../drawers/NotificationDrawer";
-import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {TelegramContactModal} from "../modals/TelegramContactModal";
-import {InviteBonusModal} from "../modals/InviteBonusModal";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {DownloadModal} from "../modals/DownloadModal";
-import {MaintenanceModal} from "../modals/MaintenanceModal";
+import {LogoutModal} from "./modals/LogoutModal";
+import {LogoutPopover} from "./popovers/LogoutPopover";
+import {UserInfoStatusPopover} from "./popovers/UserInfoStatusPopover";
+import {NotificationDrawer} from "./drawers/NotificationDrawer";
+import {DepositAdvertisementModal} from "./modals/DepositAdvertisementModal";
+import {appSlice} from "../../reduxStore/appSlice";
+import {TelegramContactModal} from "./modals/TelegramContactModal";
+import {InviteBonusModal} from "./modals/InviteBonusModal";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+import {DownloadModal} from "./modals/DownloadModal";
+import {MaintenanceModal} from "./modals/MaintenanceModal";
 import React from "react";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
-import {IQueryStringProps} from "../../hooks/usePageNavigate";
+import {IQueryStringProps} from "../hooks/usePageNavigate";
 
 type IModalOpen = {
   isOpen: boolean;
   open: (open: boolean) => void;
 }
-export type IUIlayers = {
+export type IPageTemplateLayers = {
   isMobile: boolean;
   isShowMobileLogoutModal: IModalOpen["isOpen"];
   setOpenLogoutPopover: IModalOpen["open"];
@@ -44,7 +44,8 @@ export type IUIlayers = {
 
   isShowMaintenanceModal: IModalOpen["isOpen"];
 }
-export const UIlayers = ({
+
+export const PageTemplateLayers = ({
                            isMobile,
                            isShowMobileLogoutModal,
                            setOpenLogoutPopover,
@@ -62,7 +63,7 @@ export const UIlayers = ({
                            setOpenDownloadModal,
                            isShowMaintenanceModal,
                            onClickToOpenTelegramService,
-                         }: IUIlayers) => {
+                         }: IPageTemplateLayers) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

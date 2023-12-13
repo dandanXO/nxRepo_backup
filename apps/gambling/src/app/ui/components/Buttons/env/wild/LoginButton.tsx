@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Login from "../../../../layers/header/env/coco/components/login.png";
+import Login from "../../../../pageTemplateLayers/header/env/coco/components/login.png";
 
 export const LoginButton = styled.button`
   width: 197px;

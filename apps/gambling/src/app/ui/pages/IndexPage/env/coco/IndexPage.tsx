@@ -27,12 +27,12 @@ import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
-import { GameSearchModal } from "../../../../layers/modals/GameSearchModal";
+import { GameSearchModal } from "../../../../pageTemplateLayers/modals/GameSearchModal";
 import {useScrollToCarousel} from "../../useScrollToCarousel";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
 import { tcx } from "../../../../utils/tcx";
 import { RecentGameItem } from "../../../../components-bs/RecentGameListItem";
-import { GameListSection } from "../../../../layers/modals/GameSearchModal/components/GameListSection";
+import { GameListSection } from "../../../../pageTemplateLayers/modals/GameSearchModal/components/GameListSection";
 import { environment } from "../../../../../../environments/environment";
 
 

@@ -4,40 +4,28 @@ import {notification} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router";
 
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
+import useBreakpoint from "../hooks/useBreakpoint";
+import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
 
-import {RootState} from "../../../reduxStore";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {uiSlice} from "../../../reduxStore/uiSlice";
+import {RootState} from "../../reduxStore";
+import {appSlice} from "../../reduxStore/appSlice";
+import {uiSlice} from "../../reduxStore/uiSlice";
 
-import {AppLocalStorage} from "../../../persistant/localstorage";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {environment} from "../../../../environments/environment";
+import {AppLocalStorage} from "../../persistant/localstorage";
+import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+import {environment} from "../../../environments/environment";
 
-import {NotificationDrawer} from "../drawers/NotificationDrawer";
+import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
+import {usePageNavigate} from "../hooks/usePageNavigate";
 
-import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
-import {LogoutPopover} from "../popovers/LogoutPopover";
-
-import {DownloadModal} from "../modals/DownloadModal";
-import {TelegramContactModal} from "../modals/TelegramContactModal";
-import {InviteBonusModal} from "../modals/InviteBonusModal";
-import {LogoutModal} from "../modals/LogoutModal";
-
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
-import {MaintenanceModal} from "../modals/MaintenanceModal";
-import {usePageNavigate} from "../../hooks/usePageNavigate";
-
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByPlatform} from "../utils/renderByPlatform";
 import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
-import {PageTemplate as RPageTemplate} from "./env/riojungle/PageTemplate";
+import {PageTemplate as RiojunglePageTemplate} from "./env/riojungle/PageTemplate";
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
 import {TShowToolboxConfig} from "./base/types";
-import {UIlayers} from "./UIlayers";
+import {PageTemplateLayers} from "../pageTemplateLayers";
 
 
 console.log("[APP] environment", environment);
@@ -327,14 +315,14 @@ export const PageTemplate = (props: IPage) => {
           </CPageTemplate>
         ),
         "riojungle777bet": (
-          <RPageTemplate
+          <RiojunglePageTemplate
             showToolboxConfig={props.showToolboxConfig}
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             onClickToOpenTelegramService={onClickToOpenTelegramService}
           >
           {props.children}
-          </RPageTemplate>
+          </RiojunglePageTemplate>
         )
       }, (
         <PPageTemplate
@@ -377,7 +365,7 @@ export const PageTemplate = (props: IPage) => {
       ))}
 
 
-      <UIlayers
+      <PageTemplateLayers
         isMobile={isMobile}
         isShowMobileLogoutModal={isShowMobileLogoutModal}
         setOpenLogoutPopover={setOpenLogoutPopover}

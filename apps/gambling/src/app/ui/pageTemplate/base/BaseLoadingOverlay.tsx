@@ -1,5 +1,5 @@
-import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
-import {LoadingBar} from "../../../components/LoadingBar";
+import {LoadingLogo} from "../../components/Logos/LoadingLogo";
+import {LoadingBar} from "../../components/LoadingBar";
 import React from "react";
 
 export const BaseLoadingOverlay = () => {
