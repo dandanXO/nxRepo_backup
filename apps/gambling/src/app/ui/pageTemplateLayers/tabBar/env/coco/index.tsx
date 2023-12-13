@@ -1,12 +1,12 @@
-import {environment} from "../../../../environments/environment";
-import {RootState} from "../../../reduxStore";
+import {environment} from "../../../../../../environments/environment";
+import {RootState} from "../../../../../reduxStore";
 import {useDispatch, useSelector} from "react-redux";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
-import {appSlice} from "../../../reduxStore/appSlice";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 import {useLocation, useNavigate} from "react-router";
-import {usePageNavigate} from "../../hooks/usePageNavigate";
-import {AssetMappingCoco} from "../../../../assets/assetMapping.coco";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {AssetMappingCoco} from "../../../../../../assets/assetMapping.coco";
 
 export type IFooter = {
   isShowHome?: boolean;

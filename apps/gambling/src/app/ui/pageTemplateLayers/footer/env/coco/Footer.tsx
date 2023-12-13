@@ -1,13 +1,13 @@
-import {environment} from "../../../../../environments/environment";
+import {environment} from "../../../../../../environments/environment";
 import {DownOutlined, UpOutlined} from "@ant-design/icons";
-import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
 import React, {useState} from "react";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
-import {LoadingLogo} from "../../../components/Logos/LoadingLogo"
-import {FooterLogo} from "../../../components/Logos/FooterLogo";
+import {LoadingLogo} from "../../../../components/Logos/LoadingLogo"
+import {FooterLogo} from "../../../../components/Logos/FooterLogo";
 
 export type IFooter = {
   // showFooter?: boolean;

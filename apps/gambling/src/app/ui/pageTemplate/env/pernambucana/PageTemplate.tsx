@@ -5,8 +5,8 @@ import cx from "classnames";
 
 import {LogoutModal} from "../../../pageTemplateLayers/modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
-import {Footer} from "../../../pageTemplateLayers/footer/coco/Footer";
-import {TabBar} from "../../../pageTemplateLayers/tabBar";
+import {Footer} from "../../../pageTemplateLayers/footer/env/coco/Footer";
+import {TabBar} from "../../../pageTemplateLayers/tabBar/env/coco";
 import {Toolbox} from "../../../components/Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";

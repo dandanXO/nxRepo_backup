@@ -4,13 +4,13 @@ import {ErrorBoundary} from "react-error-boundary";
 
 import {Header} from "../../../pageTemplateLayers/header/env/wild/Header";
 import {HeaderMobile} from "../../../pageTemplateLayers/header/env/wild/HeaderMobile";
-import {Footer} from "../../../pageTemplateLayers/footer/wild/Footer";
+import {Footer} from "../../../pageTemplateLayers/footer/env/wild/Footer";
 
 import {MenuDrawerContainer} from "../../../pageTemplateLayers/drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../pageTemplateLayers/drawers/MenuDrawer/env/wild/MenuDrawerContent";
 import {Toolbox} from "../../../components/Toolbox";
 
-import {TabBar} from "../../../pageTemplateLayers/tabBar";
+import {TabBar} from "../../../pageTemplateLayers/tabBar/env/coco";
 
 import {ThreeDots} from "react-loading-icons";
 import {UserLoginStatusModal} from "../../../pageTemplateLayers/modals/UserLoginStatusModal";

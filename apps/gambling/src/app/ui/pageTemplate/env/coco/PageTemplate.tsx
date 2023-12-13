@@ -3,10 +3,10 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
-import {Footer} from "../../../pageTemplateLayers/footer/coco/Footer";
+import {Footer} from "../../../pageTemplateLayers/footer/env/coco/Footer";
 import {MenuDrawerContainer} from "../../../pageTemplateLayers/drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../pageTemplateLayers/drawers/MenuDrawer/env/coco/MenuDrawerContent";
-import {TabBar} from "../../../pageTemplateLayers/tabBar";
+import {TabBar} from "../../../pageTemplateLayers/tabBar/env/coco";
 import {Toolbox} from "../../../components/Toolbox";
 import {UserLoginStatusModal} from "../../../pageTemplateLayers/modals/UserLoginStatusModal";
 
