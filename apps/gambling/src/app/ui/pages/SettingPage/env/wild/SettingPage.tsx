@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import useBreakpoint from '../../../../hooks/useBreakpoint';
-import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
+import { EditUserInfoModal } from '../../../../layers/modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"
 import {Container} from "../../../../components/container/Container";

@@ -11,7 +11,7 @@ import {MockTriggerLoginResponse} from "../../mock/MockTriggetLoginResponse";
 import {useForm} from "../../../../hooks/useForm";
 import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
 import {promiseHandler} from "../../../../../gateway/promiseHanlder";
-import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
+import {IOpenNotificationWithIcon} from "../../../../layers/pageTemplate";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {connect} from "../../../../../gateway/socket";
 import {useDispatch, useSelector} from "react-redux";

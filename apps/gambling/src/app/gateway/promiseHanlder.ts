@@ -1,4 +1,4 @@
-import {IOpenNotificationWithIcon} from "../ui/pageTemplate";
+import {IOpenNotificationWithIcon} from "../ui/layers/pageTemplate";
 
 export const promiseHandler = {
   then: (response: any, done: () => void, openNotificationWithIcon: (props: IOpenNotificationWithIcon) => void) => {

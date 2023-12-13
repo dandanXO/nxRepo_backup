@@ -29,7 +29,7 @@ import {GameSearchPage} from "../pages/GameSearchPage";
 import {gameSlice} from '../../reduxStore/gameSlice';
 import {PrivacyAgreementPage} from "../pages/PrivacyAgreementPage";
 import {environment} from "../../../environments/environment";
-import {PageTemplate} from "../pageTemplate";
+import {PageTemplate} from "../layers/pageTemplate";
 import useBreakpoint from "../hooks/useBreakpoint";
 import {connect} from "../../gateway/socket";
 import {notification} from "antd";

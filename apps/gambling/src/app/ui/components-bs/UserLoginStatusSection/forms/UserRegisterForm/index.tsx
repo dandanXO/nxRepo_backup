@@ -10,7 +10,7 @@ import {useEffect, useState} from "react";
 import {useForm} from "../../../../hooks/useForm";
 import {useRegisterMutation} from "../../../../../external";
 import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
-import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
+import {IOpenNotificationWithIcon} from "../../../../layers/pageTemplate";
 import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"
 import {environment} from "../../../../../../environments/environment"
 import {SecuritySvg} from "../../../../components/Icons/SecuritySvg";
