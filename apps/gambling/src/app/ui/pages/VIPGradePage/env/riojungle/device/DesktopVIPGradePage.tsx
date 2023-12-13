@@ -5,6 +5,8 @@ import CaretDown from '../images/CaretDown.png';
 import CaretUP from '../images/CaretUp.png';
 import { VerticalVIPButtonList } from "../components/VerticalVIPButtonList";
 import { useEffect, useRef, useState } from "react";
+import { ProgressBar } from "../../../../../components/ProgressBar";
+import { formatLocaleMoney } from "../../../../../utils/format";
 
 
 export const DesktopVIPGradePage = ({
@@ -16,7 +18,6 @@ export const DesktopVIPGradePage = ({
   const [selectedVIP, setSelectedVIP] = useState(currentLevel);
 
   const vipWrapperRef = useRef<HTMLDivElement | null>(null);
-
 
   useEffect(()=>{
     setSelectedVIP(currentLevel);
@@ -54,13 +55,28 @@ export const DesktopVIPGradePage = ({
           </div>
 
           <div className='w-[85%] h-[298px] pt-10 pl-10 pr-5 pb-9 flex gap-5'>
-            <div className='w-[22%] h-full flex items-center'>
+            <div className='w-[218px] flex-shrink-0 h-full flex items-center'>
               <div className='relative'>
                 <img src={VIPIcon} alt="vipIcon" />
-                <div className='text-white font-bold absolute bottom-[7%] left-[50%] translate-x-[-50%] text-xl 2xl:text-3xl'>VIP{selectedVIP}</div>
+                <div className='text-white font-bold absolute bottom-[20px] left-[50%] translate-x-[-50%] text-3xl'>VIP{selectedVIP}</div>
               </div>
             </div>
-            <div className='w-full h-full'></div>
+            <div className='w-full h-full flex flex-col justify-center'>
+              <div className='w-full flex justify-between text-base font-medium text-[#808080]'>
+                <div>Valor total da recarga</div>
+                <div>
+                  <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.vip_score || 0) / 100)}</span>
+                  /R$ {formatLocaleMoney(allLevelInfo[selectedVIP].rechargeAmountLimit / 100)}
+                </div>
+              </div>
+              <ProgressBar
+                className='h-14 py-[18px] px-5 mt-2 text-white text-xl'
+                progress={
+                  ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
+                }
+                progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+              />
+            </div>
           </div>
         </div>
       </div>

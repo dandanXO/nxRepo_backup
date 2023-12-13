@@ -28,6 +28,7 @@ export const VerticalVIPButtonList = ({
 
     return (
       <div
+        key={vip}
         className={tcx(
           backgroundColor,
           shadowClassName,
