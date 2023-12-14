@@ -79,15 +79,15 @@ export const VIPInfoTab = ({
   return (
     <div className={tcx('w-full', className)}>
       {/*TAB Selector*/}
-      <div className='flex w-full h-14 md:h-[124px] lg:h-[146px]'>
+      <div className='flex w-full h-14 sm:h-[124px] lg:h-[146px]'>
         {
           vipInfoTabList.map((item, index) => (
             <div
               key={index}
-              className={tcx('h-full w-1/4 flex flex-col items-center justify-center md:px-3 lg:px-[50px]', ['bg-[#10B98F] rounded-t-2xl', index === selected])}
+              className={tcx('h-full w-1/4 flex flex-col items-center justify-center sm:px-3 lg:px-[50px]', ['bg-[#10B98F] rounded-t-2xl', index === selected])}
               onClick={() => setSelected(index)}
             >
-              <img alt={`icon${item.title}`} src={item.icon} className={tcx('w-8 h-8 md:w-12 md:h-12', ['brightness-[0.7]', index !== selected])} />
+              <img alt={`icon${item.title}`} src={item.icon} className={tcx('w-8 h-8 sm:w-12 sm:h-12', ['brightness-[0.7]', index !== selected])} />
               {
                 !isMobile && <div className={tcx('text-sm lg:text-base font-medium text-[#B3B3B3] text-center', ['text-white', index ===selected])}>{item.title}</div>
               }
@@ -96,7 +96,7 @@ export const VIPInfoTab = ({
         }
       </div>
       <div className='h-1 w-full bg-[#10B98F]' />
-      <div className='w-full bg-[#333333] rounded-b-2xl mb-[66px] grid grid-cols-3 gap-2 p-2 md:gap-5 md:p-5'>
+      <div className={tcx('w-full bg-[#333333] rounded-b-2xl mb-[66px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-2 sm:gap-5 sm:p-5')}>
         {
           allLevelInfoWithBonus.map((info) => {
             const isJackPot = (info.level >= 20) && selected === 1
