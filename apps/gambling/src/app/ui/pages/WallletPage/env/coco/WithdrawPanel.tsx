@@ -79,10 +79,18 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
             bg-gradient-to-b from-[var(--background-alert-text-from)] to-[var(--background-alert-text-to)]
           `)}
             >
+              {/*NOTICE: CPF/CNPJ*/}
+              {/*Por favor, preencha o número do CPF corretamente.Se a informação*/}
+              {/*estiver incorreta, o saque falhará.Certifique - se de verificar as*/}
+              {/*informações com atenção. Uma conta só pode ser vinculada a um*/}
+              {/*número de CPF/CNPJ para saque, uma vez vinculada não pode ser*/}
+              {/*alterada.*/}
+
+              {/*NOTICE: CPF*/}
               Por favor, preencha o número do CPF corretamente.Se a informação
               estiver incorreta, o saque falhará.Certifique - se de verificar as
               informações com atenção. Uma conta só pode ser vinculada a um
-              número de CPF/CNPJ para saque, uma vez vinculada não pode ser
+              número de CPF para saque, uma vez vinculada não pode ser
               alterada.
             </div>
 
@@ -110,7 +118,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
 
               <section className={''}>
                 <label className={'text-white font-bold block mb-2 '}>
-                  Código CPF/CNPJ
+                  {/*Código CPF/CNPJ*/}
+                  Código CPF
                 </label>
                 <MainInput
                   themeStyle={'simple'}
@@ -118,7 +127,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
                   inputClassName={
                     'text-main-primary-main leading-none text-sm md:text-xl'
                   }
-                  placeholder={'Insira o seu código CPF/CNPJ'}
+                  // placeholder={'Insira o seu código CPF/CNPJ'}
+                  placeholder={'Insira o seu código CPF'}
                   value={props.CPFInput.data}
                   validation={props.CPFInput.isValidation}
                   errorMessage={props.CPFInput.errorMessage}

@@ -121,7 +121,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     { value: 'CPF', label: 'CPF' },
     { value: 'E-mail', label: 'E-mail' },
     { value: 'Telefone(+55)', label: 'Telefone(+55)' },
-    { value: 'CNPJ', label: 'CNPJ' },
+    // { value: 'CNPJ', label: 'CNPJ' },
   ]
 
   const [selectOption, setSelectOption] = useState(tipoPixOptions[0]);
@@ -179,11 +179,14 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   }
 
   const validateCPForCNPJ = (value: string) => {
-    const isError = isNaN(Number(value)) || value === "" || (value.length !== 11 && value.length !== 14);
+    // NOTE: CPF, CNPJ
+    // const isError = isNaN(Number(value)) || value === "" || (value.length !== 11 && value.length !== 14);
+    // NOTE: CPF
+    const isError = isNaN(Number(value)) || value === "" || (value.length !== 11);
     setCPFInput({
       data: value,
       isValidation: !isError,
-      errorMessage: !isError ? "" : "Insira seu CPF/CNPJ no formato correto",
+      errorMessage: !isError ? "" : "Insira seu CPF no formato correto",
     });
 
     // CPF 11, CNPJ 14
@@ -200,6 +203,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         errorMessage: !isError ? "" : errorMessage,
       })
 
+      // NOTE: 後端暫時不支援此方法
     } else if (selectOption.label === 'CNPJ') {
       isError = isNaN(Number(value)) || value === "" || value.length !== 14
       const errorMessage = "Insira seu CNPJ no formato correto"
