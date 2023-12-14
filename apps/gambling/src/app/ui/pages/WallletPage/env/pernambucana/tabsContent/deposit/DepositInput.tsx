@@ -4,7 +4,7 @@ import {Input} from "../../../../../../components/Inputs/Input";
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 import styled from "styled-components";
 import {environment} from "../../../../../../../../environments/environment";
-import { IDepositInput } from "../../../../tabsContent/deposit/DepositInput";
+import { IDepositInput } from "../../../../components/deposit/DepositInput";
 
 const InputTag = styled.div`
   position: absolute;

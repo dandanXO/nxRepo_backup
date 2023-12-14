@@ -5,16 +5,16 @@ import {
   toDepositAccountSwingSelector,
   totalBalanceSheetSelector,
   totalReasableSelector
-} from "../../../reduxStore/appSlice";
+} from "../../../../reduxStore/appSlice";
 import cx from "classnames";
 
 import {useEffect, useState} from "react";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 
-import { TotalSectionContainer as PTotalSectionContainer } from "./env/pernambucana/TotalSectionContainer";
-import { TotalSectionContainer as WTotalSectionContainer } from "./env/wild/TotalSectionContainer";
-import { TotalSectionContainer as CTotalSectionContainer } from "./env/coco/TotalSectionContainer";
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import { TotalSectionContainer as PTotalSectionContainer } from "../env/pernambucana/TotalSectionContainer";
+import { TotalSectionContainer as WTotalSectionContainer } from "../env/wild/TotalSectionContainer";
+import { TotalSectionContainer as CTotalSectionContainer } from "../env/coco/TotalSectionContainer";
+import {renderByPlatform} from "../../../utils/renderByPlatform";
 
 export const TotalSectionContainer = () => {
   const {isMobile} = useBreakpoint();

@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRechargeHistoryListMutation } from '../../../external';
-import { RechargeListResponseData } from '../../../external/RechargeHistoryListEndpoint';
-import { AppLocalStorage } from '../../../persistant/localstorage';
-import { Table } from '../../components/Table';
+import { useRechargeHistoryListMutation } from '../../../../../external';
+import { RechargeListResponseData } from '../../../../../external/RechargeHistoryListEndpoint';
+import { AppLocalStorage } from '../../../../../persistant/localstorage';
+import { Table } from '../../../../components/Table';
 import copy from 'copy-to-clipboard';
 import {notification} from 'antd';
-import { DragScrollContainer } from '../../components/DragScrollContainer';
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import { formatLocaleMoney } from "../../utils/format";
+import { DragScrollContainer } from '../../../../components/DragScrollContainer';
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import { formatLocaleMoney } from "../../../../utils/format";
 
 
 const DepositStatusMap: { [key: number]: string } = {

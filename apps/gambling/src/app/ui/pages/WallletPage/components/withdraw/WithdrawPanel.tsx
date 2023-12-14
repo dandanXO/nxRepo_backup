@@ -4,28 +4,28 @@ import { useSelector } from "react-redux";
 import Select from 'react-select';
 import { notification } from 'antd';
 
-import useBreakpoint from "../../hooks/useBreakpoint";
-import { SectionContainer } from "../../components/container/SectionContainer";
-import { Input, InputValue } from "../../components/Inputs/Input";
-import { Button } from "../../components/Buttons/Button";
-import { useGetWithdrawLimitMutation, useWithdrawMutation } from "../../../external";
-import { environment } from "../../../../environments/environment";
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
-import { useAutoUpdateBalance } from "../../hooks/useAutoUpdateBalance";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
+import { SectionContainer } from "../../../../components/container/SectionContainer";
+import { Input, InputValue } from "../../../../components/Inputs/Input";
+import { Button } from "../../../../components/Buttons/Button";
+import { useGetWithdrawLimitMutation, useWithdrawMutation } from "../../../../../external";
+import { environment } from "../../../../../../environments/environment";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
+import { useAutoUpdateBalance } from "../../../../hooks/useAutoUpdateBalance";
 
-import { RootState } from "../../../reduxStore";
-import { tcx } from "../../utils/tcx";
-import { MobileInput } from "../../components/Inputs/MobileInput";
-import { renderByPlatform } from "../../utils/renderByPlatform";
-import { WithdrawPanel as CWithdrawPanel } from './env/coco/WithdrawPanel';
-import { WithdrawPanel as PWithdrawPanel } from './env/pernambucana/WithdrawPanel'
-import { WithdrawPanel as WWithdrawPanel } from './env/wild/WithdrawPanel'
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {ButtonPro} from "../../components/Buttons/ButtonPro";
+import { RootState } from "../../../../../reduxStore";
+import { tcx } from "../../../../utils/tcx";
+import { MobileInput } from "../../../../components/Inputs/MobileInput";
+import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { WithdrawPanel as CWithdrawPanel } from '../../env/coco/WithdrawPanel';
+import { WithdrawPanel as PWithdrawPanel } from '../../env/pernambucana/WithdrawPanel'
+import { WithdrawPanel as WWithdrawPanel } from '../../env/wild/WithdrawPanel'
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
 import moment from "moment";
-import { totalReasableSelector } from "../../../reduxStore/appSlice";
-import { formatLocaleMoney } from "../../utils/format";
+import { totalReasableSelector } from "../../../../../reduxStore/appSlice";
+import { formatLocaleMoney } from "../../../../utils/format";
 
 
 

@@ -1,4 +1,4 @@
-import { IDepositPanel } from "../tabsContent/deposit/DepositPanel";
+import { IDepositPanel } from "../components/deposit/DepositPanel";
 
 export const useGetConfig = (props: IDepositPanel) => {
   const getConfig = (rechargeValue: number) => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { formatLocaleMoney } from "../../../utils/format";
 import { InputValue } from "../../../components/Inputs/Input";
-import { IDepositPanel } from "../tabsContent/deposit/DepositPanel";
+import { IDepositPanel } from "../components/deposit/DepositPanel";
 import { RechargeResponseConfig } from "apps/gambling/src/app/external/RechargeInfoGetEndpoint";
 import { useGetConfig } from "./useGetConfig";
 

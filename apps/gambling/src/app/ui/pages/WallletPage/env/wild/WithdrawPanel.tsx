@@ -6,7 +6,7 @@ import {Input} from "../../../../components/Inputs/Input";
 import {tcx} from "../../../../utils/tcx";
 import {MobileInput} from "../../../../components/Inputs/MobileInput";
 import {WithdrawNoticeSection} from './WithdrawNoticeSection';
-import {IWithdrawPanelCommon} from "../../WithdrawPanel";
+import {IWithdrawPanelCommon} from "../../components/withdraw/WithdrawPanel";
 import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
 
 

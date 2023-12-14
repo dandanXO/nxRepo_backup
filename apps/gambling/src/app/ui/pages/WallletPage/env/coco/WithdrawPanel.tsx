@@ -11,7 +11,7 @@ import { SectionContainer } from '../../../../components/container/SectionContai
 import useBreakpoint from '../../../../hooks/useBreakpoint';
 import { formatLocaleMoney } from '../../../../utils/format';
 import { tcx } from '../../../../utils/tcx';
-import { IWithdrawPanelCommon } from '../../WithdrawPanel';
+import { IWithdrawPanelCommon } from '../../components/withdraw/WithdrawPanel';
 import { WithdrawNoticeSection } from './WithdrawNoticeSection';
 
 export const WithdrawPanel = (props: IWithdrawPanelCommon) => {

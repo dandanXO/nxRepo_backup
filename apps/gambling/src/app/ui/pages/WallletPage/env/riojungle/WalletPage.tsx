@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import { DepositPanel } from "../../tabsContent/deposit/DepositPanel";
-import { WithdrawPanel } from "../../WithdrawPanel";
-import { RecordPanel } from "../../RecordPanel";
+import { DepositPanel } from "../../components/deposit/DepositPanel";
+import { WithdrawPanel } from "../../components/withdraw/WithdrawPanel";
+import { RecordPanel } from "../../components/record/RecordPanel";
 
 import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
 import { TotalSectionContainer } from "./TotalSectionContainer";

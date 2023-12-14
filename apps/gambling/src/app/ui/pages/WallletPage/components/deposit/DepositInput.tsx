@@ -14,7 +14,7 @@ export interface IDepositInput {
   minimunValue?: number;
   maximunValue?: number;
 }
-export const DepositInput = (props: any) => {
+export const DepositInput = (props: IDepositInput) => {
 
   return renderByPlatform({
     "wild777bet": (<WDepositInput {...props} />),

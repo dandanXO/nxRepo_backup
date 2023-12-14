@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { LeftOutlined } from "@ant-design/icons";
-import { DepositPanel } from "../../tabsContent/deposit/DepositPanel";
-import { WithdrawPanel } from "../../WithdrawPanel";
-import { RecordPanel } from "../../RecordPanel";
+import { DepositPanel } from "../../components/deposit/DepositPanel";
+import { WithdrawPanel } from "../../components/withdraw/WithdrawPanel";
+import { RecordPanel } from "../../components/record/RecordPanel";
 import { useGetRechargeMutation } from "../../../../../external";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { useSelector } from "react-redux";
@@ -18,7 +18,7 @@ import {
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../../../reduxStore/appSlice";
-import { TotalSectionContainer } from "../../TotalSectionContainer";
+import { TotalSectionContainer } from "../../components/TotalSectionContainer";
 import { CommonTableTabG } from "../../../../components/TabItem/CommonTableTabG";
 import cx from "classnames";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";

@@ -1,14 +1,14 @@
-import { WithdrawHistoryListEndpointResponseData } from '../../../external/WithdrawHistoryListEndpoint';
+import { WithdrawHistoryListEndpointResponseData } from '../../../../../external/WithdrawHistoryListEndpoint';
 import cx from "classnames";
-import {environment} from "../../../../environments/environment";
-import { Table } from "../../components/Table";
+import {environment} from "../../../../../../environments/environment";
+import { Table } from "../../../../components/Table";
 import { useEffect, useState } from "react";
-import { useWithdrawHistoryListMutation } from "../../../external";
+import { useWithdrawHistoryListMutation } from "../../../../../external";
 import { notification } from "antd";
 import copy from "copy-to-clipboard";
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import { formatLocaleMoney } from "../../utils/format";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import { formatLocaleMoney } from "../../../../utils/format";
 
 const WithdrawStatusMap: { [key: number]: string } = {
   1: 'Completed',

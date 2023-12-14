@@ -1,10 +1,10 @@
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {TabItem, Tabs} from "../../../../components/TabItem/TabItem";
-import {TotalSectionContainer} from "../../TotalSectionContainer";
+import {TotalSectionContainer} from "../../components/TotalSectionContainer";
 import {tcx} from "../../../../utils/tcx";
-import {DepositPanel} from "../../tabsContent/deposit/DepositPanel";
-import {WithdrawPanel} from "../../WithdrawPanel";
-import {RecordPanel} from "../../RecordPanel";
+import {DepositPanel} from "../../components/deposit/DepositPanel";
+import {WithdrawPanel} from "../../components/withdraw/WithdrawPanel";
+import {RecordPanel} from "../../components/record/RecordPanel";
 import React from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";

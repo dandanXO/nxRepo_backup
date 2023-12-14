@@ -2,13 +2,13 @@ import { CopyOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 
 import cx from "classnames"
-import { environment } from "../../../../environments/environment";
-import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "../../../external";
+import { environment } from "../../../../../../environments/environment";
+import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "../../../../../external";
 import { useEffect } from "react";
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
-import { formatLocaleMoney } from "../../utils/format";
-import { CopyIcon } from '../../components/Icons/CopyIcon';
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
+import { formatLocaleMoney } from "../../../../utils/format";
+import { CopyIcon } from '../../../../components/Icons/CopyIcon';
 
 const Container = styled.div`
   /* background: rgba(255, 255, 255, 0.1); */

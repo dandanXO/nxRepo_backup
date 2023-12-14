@@ -2,7 +2,7 @@ import cx from "classnames";
 import { MobileInput } from "../../../../../../components/Inputs/MobileInput";
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 import React from "react";
-import { IDepositInput } from "../../../../tabsContent/deposit/DepositInput";
+import { IDepositInput } from "../../../../components/deposit/DepositInput";
 
 export const DepositInput = (props: IDepositInput) => {
   const { isMobile } = useBreakpoint();
@@ -27,7 +27,7 @@ export const DepositInput = (props: IDepositInput) => {
       {props.isShowInputTag &&
         (<div className={cx(`
           absolute top-0 right-0
-          bg-[#8547eb] 
+          bg-[#8547eb]
           px-2 py-1
           text-xs md:text-xl text-white
           rounded-tr-[10px] rounded-bl-[10px] rounded-tl-none rounded-tb-none
