@@ -8,13 +8,15 @@ import { useEffect, useRef, useState } from "react";
 import { ProgressBar } from "../../../../../components/ProgressBar";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { VIP0Text } from "../components/VIP0Text";
+import { VIPInfoTab } from "../components/VIPInfoTab";
 
 
 export const DesktopVIPGradePage = ({
   currentLevel,
   allLevelInfo,
   allSignInConfig,
-  userVIPInfo
+  userVIPInfo,
+  signInDayConfig
 }: IVIPGradePageProps) => {
   const [selectedVIP, setSelectedVIP] = useState(currentLevel);
 
@@ -110,6 +112,12 @@ export const DesktopVIPGradePage = ({
             }
           </div>
         </div>
+
+
+        {/*VIP INFO TAB*/}
+        <VIPInfoTab className='mt-9' signInDayConfig={signInDayConfig} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig} />
+
+
       </div>
     </div>
   )

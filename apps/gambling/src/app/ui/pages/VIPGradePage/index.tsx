@@ -87,6 +87,7 @@ export const JackpotMap: {
 
   export interface IVIPGradePageProps {
     currentLevel: number;
+    signInDayConfig: number;
     allLevelInfo: GetUserVIPAllInfoResponse['data']
     allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig']
     userVIPInfo?: GetVIPInfoResponse
@@ -216,6 +217,7 @@ export const JackpotMap: {
     ),
     "riojungle777bet": (
       <RioJungleVIPGradePage
+        signInDayConfig={signInConfig?.data?.signInConfig?.length || 0}
         currentLevel={currentLevel}
         allLevelInfo={allLevelInfo}
         userVIPInfo={userVIPInfo}
