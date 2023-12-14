@@ -95,9 +95,10 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   }, [animating])
 
   const mobileGameTypeHeaderProps = renderByPlatform({
-    "coco777bet": CmobileGameTypeHeaderProps,
     "wild777bet": WmobileGameTypeHeaderProps,
-  }, PmobileGameTypeHeaderProps)
+    "coco777bet": CmobileGameTypeHeaderProps,
+  // }, PmobileGameTypeHeaderProps)
+  }, CmobileGameTypeHeaderProps)
 
   // console.log("props.expandedBrand", props.expandedBrand);
 

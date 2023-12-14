@@ -12,7 +12,6 @@ import { SearchInput } from "../../components/Inputs/SearchInput";
 import { SearchPageContainer } from "./SearchPageContainer";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
-// import {onValidatePasswordInput} from "../../components/UserLoginStatusSection/forms/UserLoginForm";
 
 export const GameSearchPage = () => {
   const [searchInput, setSearchInput] = useState<InputValue<string>>({

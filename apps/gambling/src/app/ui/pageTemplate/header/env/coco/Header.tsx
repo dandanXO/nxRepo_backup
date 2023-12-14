@@ -1,19 +1,19 @@
 import styled from "styled-components";
 import cx from "classnames";
-import React, { useState } from "react";
-import { UserMoneyStatusSection } from "../../UserMoneyStatusSection";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../../reduxStore";
-import { environment } from "../../../../../../environments/environment";
-import { LoginButton } from "../../../../components/Buttons/LoginButton";
-import { HeaderMenu } from "./components/HeaderMenu";
-import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
-import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import React, {useState} from "react";
+import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../../reduxStore";
+import {LoginButton} from "../../../../components/Buttons/LoginButton";
+import {HeaderMenu} from "./components/HeaderMenu";
+import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
+import {AppLocalStorage} from "../../../../../persistant/localstorage";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {NotificationAnimationIcon} from "../../../../components/Icons/animation/NotificationAnimationIcon";
 import {MenuLogo} from "../../../../components/Logos/MenuLogo";
+import {IHeader} from "../../types/IHeader";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -22,18 +22,6 @@ const DirectionIcon = styled.img<{
   width: 12px;
   transform: rotate(${props => props.active ? 180 : 0}deg);
 `
-
-export type IHeader = {
-  className?: string;
-  onClickUserLoginStatusDrawer: () => void;
-  onClickToPopupUserInfoStatusPopover: () => void;
-  isLogin: boolean;
-  onClickToOpenNotificationDrawer: () => void;
-  openLogoutPopover: boolean;
-  openDesktopUserInfoStatusDrawer: boolean;
-  onClickToChangeLogoutPopover: (display: boolean) => void;
-  onClickToDownload: () => void;
-}
 
 const HeaderButton = styled.button.attrs((props) => ({
   className: cx("", props.className),

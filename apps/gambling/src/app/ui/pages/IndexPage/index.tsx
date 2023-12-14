@@ -160,22 +160,20 @@ export const IndexPage = () => {
       />
     )
   }, (
-    (
-      <PIndexPage
-        userFavorite={userFavorite}
-        onClickFavoriteGameItem={onClickFavoriteGameItem}
-        showFixForIOSStickTab={showFixForIOSStickTab}
-        scrollToCarousel={scrollToCarousel}
-        allGameList={allGameList}
-        label={label}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        setViewType={setExpandedBrand}
-        setSearchInput={setSearchInput}
-        gameList={gameList}
-        recentGameList={recentGameList}
-      />
-    )
+    <CIndexPage
+      userFavorite={userFavorite}
+      onClickFavoriteGameItem={onClickFavoriteGameItem}
+      showFixForIOSStickTab={showFixForIOSStickTab}
+      scrollToCarousel={scrollToCarousel}
+      allGameList={allGameList}
+      label={label}
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+      setViewType={setExpandedBrand}
+      setSearchInput={setSearchInput}
+      gameList={gameList}
+      recentGameList={recentGameList}
+    />
   ))
 
 }

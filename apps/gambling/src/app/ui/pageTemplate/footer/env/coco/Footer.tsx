@@ -9,12 +9,8 @@ import { useSelector } from "react-redux";
 import {LoadingLogo} from "../../../../components/Logos/LoadingLogo"
 import {FooterLogo} from "../../../../components/Logos/FooterLogo";
 
-export type IFooter = {
-  // showFooter?: boolean;
-  showTabbar?: boolean;
-  showMobileFooter?: boolean;
-  showDesktopFooter?: boolean;
-}
+import {IFooter} from "../../types/IFooter";
+
 
 export const Footer = (props: IFooter) => {
   const {isMobile} = useBreakpoint();
@@ -136,16 +132,16 @@ export const Footer = (props: IFooter) => {
               </div>
 
               <div className='mt-4 mb-2 flex justify-center flex-nowrap relative left-[-6px] h-[20px]'>
-                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer1.aa87e40b.png`}/>
-                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer2.43ad4696.png`} />
-                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer3.e3ce7aaa.png`}  onClick={()=>window.open('https://www.skrill.com/pt/')}/>
-                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer5.3cd11f0c.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
-                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer6.a8ba450a.png`}  onClick={()=>window.open('https://www.interac.ca/en/')}/>
-                <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer4.e6cdeca2.png`}  onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
+                <img alt='footer1' className='flex-1' src={`assets/shared/footer1.png`}/>
+                <img alt='footer2' className='flex-1' src={`assets/shared/footer2.png`} />
+                <img alt='footer3' className='flex-1' src={`assets/shared/footer3.png`}  onClick={()=>window.open('https://www.skrill.com/pt/')}/>
+                <img alt='footer5' className='flex-1' src={`assets/shared/footer5.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
+                <img alt='footer6' className='flex-1' src={`assets/shared/footer6.png`}  onClick={()=>window.open('https://www.interac.ca/en/')}/>
+                <img alt='footer4' className='flex-1' src={`assets/shared/footer4.png`}  onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
               </div>
 
               <div className='flex justify-center mb-2 '>
-                <img alt='footer1' className='h-[12px] px-1.5' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
+                <img alt='footer7' className='h-[12px] px-1.5' src={`assets/shared/footer7.png`}/>
               </div>
 
               <div className='mb-4 text-center text-xs'>@ 2023 {environment.platformName} All rights</div>
@@ -195,16 +191,16 @@ export const Footer = (props: IFooter) => {
                 </div>
 
                 <div className='mt-3 flex justify-center mb-4'>
-                  <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer1.aa87e40b.png`}/>
-                  <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer2.43ad4696.png`}/>
-                  <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer3.e3ce7aaa.png`} onClick={()=>window.open('https://www.skrill.com/pt/')}/>
-                  <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer5.3cd11f0c.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
-                  <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer6.a8ba450a.png`} onClick={()=>window.open('https://www.interac.ca/en/')}/>
-                  <img alt='footer1' className='h-10' src={`assets/${environment.assetPrefix}/footer4.e6cdeca2.png`} onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
+                  <img alt='footer1' className='h-10' src={`assets/shared/footer1.png`}/>
+                  <img alt='footer2' className='h-10' src={`assets/shared/footer2.png`}/>
+                  <img alt='footer3' className='h-10' src={`assets/shared/footer3.png`} onClick={()=>window.open('https://www.skrill.com/pt/')}/>
+                  <img alt='footer5' className='h-10' src={`assets/shared/footer5.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
+                  <img alt='footer6' className='h-10' src={`assets/shared/footer6.png`} onClick={()=>window.open('https://www.interac.ca/en/')}/>
+                  <img alt='footer4' className='h-10' src={`assets/shared/footer4.png`} onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
                 </div>
 
                 <div className='flex justify-center mb-4'>
-                  <img alt='footer1' className='h-5' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
+                  <img alt='footer7' className='h-5' src={`assets/shared/footer7.png`}/>
                 </div>
                 <div className='mb-4 text-center'>@ 2023 {environment.platformName} All rights</div>
               </section>

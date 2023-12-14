@@ -277,7 +277,9 @@ export const AppRouter = () => {
                   return timesOfShowDepositModal;
                 } else {
                   if(!isShowDepositModal) {
-                    dispatch(appSlice.actions.setShowDepositModal(true))
+                    if(location.pathname !== PageOrModalPathEnum.GamePage) {
+                      dispatch(appSlice.actions.setShowDepositModal(true))
+                    }
                   }
                   return timesOfShowDepositModal + 1
                 }

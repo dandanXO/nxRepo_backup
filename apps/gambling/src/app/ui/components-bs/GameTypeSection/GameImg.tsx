@@ -5,4 +5,5 @@ import {GameImg as CGameImg} from "./env/coco/GameImg"
 export const GameImg = renderByPlatform({
   "wild777bet": WGameImg,
   "coco777bet": CGameImg,
-}, PGameImg)
+// }, PGameImg)
+}, CGameImg)

@@ -30,6 +30,7 @@ export const MenuDrawerContainer = (props: IMenuDrawer) => {
   }
 
   if(!isMobile && !tabletShow) return ;
+
   return (
     <div
       className={cx("", {

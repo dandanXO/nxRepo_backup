@@ -1,28 +1,25 @@
-import styled from "styled-components";
-import {environment} from "../../../../../environments/environment";
+
 import {BaseStyledPageTemplate} from "../../base/BaseStyledPageTemplate";
 import {IUseSingletonPageTemplateConfig, useSingletonPageTemplateConfig} from "../../hooks/useSingletonPageTemplateConfig";
-import {ErrorBoundary} from "react-error-boundary";
+
 import React from "react";
-import {Footer} from "../../footer/env/coco/Footer";
+
+import {Footer} from "../../footer";
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../../components/Toolbox";
+import {Toolbox} from "../../Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
-import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
-import {LoadingBar} from "../../../components/LoadingBar";
 import {BaseLoadingOverlay} from "../../base/BaseLoadingOverlay";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {BaseErrorBoundary} from "../../base/BaseErrorBoundary";
 import {TShowToolboxConfig} from "../../base/types";
-import {renderByRWD} from "../../../utils/renderByRWD";
 import useBreakpoint from "../../../hooks/useBreakpoint";
-import {HeaderMobile} from "../../header/env/coco/HeaderMobile";
-import {Header} from "../../header/env/coco/Header";
-import {MobileHeader} from "../../header/env/riojungle/MobileHeader";
-import {DesktopHeader} from "../../header/env/riojungle/DesktopHeader";
-import {MenuDrawer} from "../../../drawers/MenuDrawer/env/riojungle/MenuDrawer";
+
+import {MenuDrawer} from "../../../drawers/MenuDrawer";
+
 import cx from "classnames";
+import {Header} from "../../header";
+import {twMerge} from "tailwind-merge";
 
 type IPageTemplate = IUseSingletonPageTemplateConfig & {
   children: React.ReactNode;
@@ -30,8 +27,57 @@ type IPageTemplate = IUseSingletonPageTemplateConfig & {
   onClickToDownload: () => void;
   onClickToOpenTelegramManager: () => void;
   onClickToOpenTelegramService: () => void;
+} & {
+  isCurrentPageCompanyProfile: boolean;
+  contextHolder: any;
+  isMobile: boolean;
+  isShowMobileFooter: boolean;
+  isShowDesktopFooter: boolean;
+  isShowDesktopHeader: boolean;
+  isShowDesktopMenuDrawer: boolean;
+  isLogin: boolean;
+  setIsLogin: (value: any) => void;
+  showLoginModal: (value: any) => void;
+  setOpenDesktopUserInfoStatusDrawer: (value: any) => void;
+  openDesktopUserInfoStatusDrawer: boolean;
+  openDesktopNotificationDrawer: boolean;
+  setOpenDesktopNotificationDrawer: (value: any) => void;
+  setOpenLogoutPopover: (value: any) => void;
+  isShowMobileLogoutModal: boolean;
+
+  openMenuDrawer: boolean;
+  setOpenMenuDrawer: (value: any) => void;
+  openNotificationWithIcon: (value: any) => void;
+  openDownloadModal: boolean;
+  setOpenDownloadModal: (value: any) => void;
+  isShowTelegramModal: boolean;
+  isShowInviteBonusModal: boolean;
+  setOpenInitailChargeModal: (value: any) => void;
+  isShowMobileHeader: boolean;
+  isShowTabbar: boolean;
+  isUILoading: boolean;
 }
-export const PageTemplate = (props:IPageTemplate) => {
+
+export const PageTemplate = ({
+                              children,
+                              showLoginModal,
+                              setOpenDesktopUserInfoStatusDrawer,
+                              openDesktopUserInfoStatusDrawer,
+                              setOpenDesktopNotificationDrawer,
+                              setOpenLogoutPopover,
+                              isShowMobileLogoutModal,
+                              onClickToOpenTelegramService,
+                              onClickToDownload,
+                              onClickToOpenTelegramManager,
+                              showToolboxConfig,
+
+                               showMobileHeader,
+                               showDesktopHeader,
+                               showDesktopMenuDrawer,
+                               showMobileFooter,
+                               showDesktopFooter,
+                               showTabbar,
+                             }:IPageTemplate) => {
 
   const {
     isShowMobileHeader,
@@ -40,43 +86,77 @@ export const PageTemplate = (props:IPageTemplate) => {
     isShowMobileFooter,
     isShowDesktopFooter,
     isShowMobileTabbar,
-  } = useSingletonPageTemplateConfig(props);
+  } = useSingletonPageTemplateConfig({
+    showMobileHeader,
+    showDesktopHeader,
+    showDesktopMenuDrawer,
+    showMobileFooter,
+    showDesktopFooter,
+    showTabbar,
+  });
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
-
-  const device = useBreakpoint();
+  const {isLogin} = useSelector((state: RootState) => state.app)
 
   const {isMobile} = useBreakpoint();
 
+  const HeaderHeight = 72;
+  const DrawerWidth = 248;
+  const ZIndex = "z-[1001]";
+
   return (
     <BaseStyledPageTemplate>
-      {renderByRWD({
-        mobile: (
-          <MobileHeader/>
-        ),
-        tablet: (
-          <MobileHeader/>
-        ),
-        desktop: (
-          <div className={"h-24 fixed top-0 left-0 right-0 z-10"}>
-            <DesktopHeader/>
-          </div>
-        )
-      }, device)}
+
+      <div className={twMerge("fixed top-0 left-0 right-0 w-full", ZIndex)}>
+        <Header
+          className={""}
+          // NOTE: Login
+          isLogin={isLogin}
+          onClickUserLoginStatusDrawer={() => {
+            // setOpenNonMobileUserLoginStatusDrawer(true);
+            showLoginModal(true)
+          }}
+          onClickToPopupUserInfoStatusPopover={() => {
+            setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
+          }}
+          onClickToChangeLogoutPopover={(display: boolean) => {
+            setOpenLogoutPopover(display);
+          }}
+          openLogoutPopover={isShowMobileLogoutModal}
+          // NOTE: User Info
+          openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+          // NOTE: Notification
+          onClickToOpenNotificationDrawer={() => {
+            setOpenDesktopNotificationDrawer(true)
+          }}
+          // NOTE: Download
+          onClickToDownload={onClickToDownload}
+        />
+      </div>
 
       <div className={""}>
         {isShowDesktopMenuDrawer && (
-          <div className={"w-[248px] fixed top-24 left-0"}>
+          <div
+            className={twMerge("fixed left-0", ZIndex)}
+            style={{
+              top: HeaderHeight,
+            }}
+          >
             <MenuDrawer/>
           </div>
         )}
+
         <div
-          className={cx("mt-24", {
-            "ml-[248px]": !isMobile
+          className={cx("", {
+
           })}
+          style={{
+            marginTop: HeaderHeight,
+            marginLeft: !isMobile ? DrawerWidth : 0,
+          }}
         >
           <BaseErrorBoundary>
-            {props.children}
+            {children}
           </BaseErrorBoundary>
 
           <Footer
@@ -90,12 +170,12 @@ export const PageTemplate = (props:IPageTemplate) => {
         <TabBar isShowSlot={false} size={"big"}/>
       )}
 
-      {props.showToolboxConfig !== false && (
+      {showToolboxConfig !== false && (
         <Toolbox
-          showToolboxConfig={props.showToolboxConfig}
-          onClickToDownload={props.onClickToDownload}
-          onClickToOpenTelegramManager={props.onClickToOpenTelegramManager}
-          onClickToOpenTelegramService={props.onClickToOpenTelegramService}
+          showToolboxConfig={showToolboxConfig}
+          onClickToDownload={onClickToDownload}
+          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+          onClickToOpenTelegramService={onClickToOpenTelegramService}
         />
       )}
 

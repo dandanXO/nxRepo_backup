@@ -3,12 +3,12 @@ import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 
 import {Header} from "../../header/env/wild/Header";
-import {HeaderMobile} from "../../header/env/wild/HeaderMobile";
+import {MobileHeader} from "../../header/env/wild/MobileHeader";
 import {Footer} from "../../footer/env/wild/Footer";
 
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
-import {Toolbox} from "../../../components/Toolbox";
+import {Toolbox} from "../../Toolbox";
 
 import {TabBar} from "../../tabBar/env/coco";
 
@@ -144,7 +144,7 @@ export const PageTemplate = ({
 
 
         {isMobile && isShowMobileHeader && (
-          <HeaderMobile
+          <MobileHeader
             className={"!h-[52.5px]"}
             clickToOpenMenuDrawer={() => {
               setOpenMenuDrawer(!openMenuDrawer)

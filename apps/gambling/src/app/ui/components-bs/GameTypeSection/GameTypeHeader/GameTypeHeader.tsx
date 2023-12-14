@@ -6,4 +6,5 @@ import {GameTypeHeader as CGameTypeHeader} from "../env/coco/GameTypeHeader"
 export const GameTypeHeader = renderByPlatform({
   "wild777bet": WGameTypeHeader,
   "coco777bet": CGameTypeHeader,
-}, PGameTypeHeader)
+// }, PGameTypeHeader)
+}, CGameTypeHeader)

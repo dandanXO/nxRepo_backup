@@ -7,14 +7,14 @@ import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
 import {Footer} from "../../footer/env/coco/Footer";
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../../components/Toolbox";
+import {Toolbox} from "../../Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
 
-import {HeaderMobile} from "../../header/env/pernambucana/HeaderMobile";
+import {MobileHeader} from "../../header/env/pernambucana/MobileHeader";
 import {Header} from "../../header/env/pernambucana/Header";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
 
@@ -179,6 +179,7 @@ showToolboxConfig
         {/*      setOpenMenuDrawer(false)*/}
         {/*    }}/>*/}
         {/*)}*/}
+
         {isShowDesktopMenuDrawer && (
           <MenuDrawerContainer className={"rounded-r-3xl"}>
             <MenuDrawerContent/>
@@ -193,7 +194,7 @@ showToolboxConfig
         })} style={{
         }}>
           {isMobile && isShowMobileHeader && (
-            <HeaderMobile
+            <MobileHeader
               clickToOpenMenuDrawer={() => {
                 setOpenMenuDrawer(!openMenuDrawer)
               }}

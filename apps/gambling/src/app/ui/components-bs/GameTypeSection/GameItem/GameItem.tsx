@@ -57,7 +57,8 @@ export const Skeleton = styled.div`
 const DesktopGameItemButton = renderByPlatform({
   "wild777bet": WPlayButton,
   "coco777bet": CPlayButton,
-}, PPlayButton)
+// }, PPlayButton)
+}, CPlayButton)
 
 // const FavoriteSection = styled.div`
 //   //&:after {

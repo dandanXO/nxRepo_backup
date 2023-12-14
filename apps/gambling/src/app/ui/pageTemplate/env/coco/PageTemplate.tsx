@@ -4,15 +4,14 @@ import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
 import {Footer} from "../../footer/env/coco/Footer";
-import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
-import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
+
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../../components/Toolbox";
+import {Toolbox} from "../../Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../header/env/coco/Header";
-import {HeaderMobile} from "../../header/env/coco/HeaderMobile";
+import {MobileHeader} from "../../header/env/coco/MobileHeader";
 
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";
@@ -20,6 +19,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import {TShowToolboxConfig} from "../../base/types";
+import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -154,7 +154,7 @@ export const PageTemplate = ({
         }}
       >
         {isMobile && isShowMobileHeader && (
-          <HeaderMobile
+          <MobileHeader
             className={"!h-[52.5px]"}
             clickToOpenMenuDrawer={() => {
               setOpenMenuDrawer(!openMenuDrawer)
@@ -190,14 +190,8 @@ export const PageTemplate = ({
           />
         )}
 
-        {isShowDesktopMenuDrawer && (
-          <MenuDrawerContainer
-            className={""}
-            isTabletShow={false}
-            isShowCloseButton={false}
-          >
-            <MenuDrawerContent/>
-          </MenuDrawerContainer>
+        {(isShowDesktopMenuDrawer) && (
+          <MenuDrawer/>
         )}
 
         {/*NOTE: 佔據有 Header 時的高度*/}
@@ -226,18 +220,6 @@ export const PageTemplate = ({
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             onClickToOpenTelegramService={onClickToOpenTelegramService}
-          />
-        )}
-
-        {/*Login*/}
-        {isShowLoginModal && (
-          <UserLoginStatusModal
-            showCloseButton={true}
-            openNotificationWithIcon={openNotificationWithIcon}
-            close={() => {
-              showLoginModal(false)
-            }}
-            setIsLogin={(login: boolean) => setIsLogin(login)}
           />
         )}
 

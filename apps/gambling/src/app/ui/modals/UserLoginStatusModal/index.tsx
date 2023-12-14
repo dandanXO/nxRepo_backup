@@ -13,7 +13,7 @@ import {CloseICON} from "../../components/Icons/CloseICON";
 const Container = renderByPlatform({
   "wild777bet": WContainer,
   "coco777bet": CContainer,
-}, PContainer)
+}, CContainer)
 
 export type IUserLoginStatusModal = {
   setIsLogin: (login: boolean) => void;

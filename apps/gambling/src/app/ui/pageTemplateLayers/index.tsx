@@ -17,6 +17,8 @@ import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
 
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {IQueryStringProps} from "../hooks/usePageNavigate";
+import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
+import {IOpenNotificationWithIcon} from "../pageTemplate";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -24,6 +26,10 @@ type IModalOpen = {
 }
 export type IPageTemplateLayers = {
   isMobile: boolean;
+  isShowLoginModal: boolean;
+  showLoginModal: IModalOpen["open"];
+  setIsLogin: (login: boolean) => void;
+  openNotificationWithIcon: (props: IOpenNotificationWithIcon) => void;
   isShowMobileLogoutModal: IModalOpen["isOpen"];
   setOpenLogoutPopover: IModalOpen["open"];
 
@@ -51,6 +57,10 @@ export type IPageTemplateLayers = {
 
 export const PageTemplateLayers = ({
                            isMobile,
+                           isShowLoginModal,
+                           showLoginModal,
+                           setIsLogin,
+                           openNotificationWithIcon,
                            isShowMobileLogoutModal,
                            setOpenLogoutPopover,
                            openDesktopUserInfoStatusDrawer,
@@ -74,6 +84,19 @@ export const PageTemplateLayers = ({
 
   return (
     <>
+
+      {/*Login*/}
+      {isShowLoginModal && (
+        <UserLoginStatusModal
+          showCloseButton={true}
+          openNotificationWithIcon={openNotificationWithIcon}
+          close={() => {
+            showLoginModal(false)
+          }}
+          setIsLogin={(login: boolean) => setIsLogin(login)}
+        />
+      )}
+
       {/*Logout*/}
       {isMobile && isShowMobileLogoutModal && (
         <LogoutModal/>

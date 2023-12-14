@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import {CloseCircleOutlined} from "@ant-design/icons";
-import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection";
 import {LogoutSection} from "../../components-bs/LogoutSection";
 import cx from "classnames";
 import { LogoutPopoverContainer } from "../../popovers/LogoutPopover/LogoutPopoverContainer";
