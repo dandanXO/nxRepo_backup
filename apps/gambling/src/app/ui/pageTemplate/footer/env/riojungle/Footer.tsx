@@ -8,8 +8,8 @@ import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
 import {LoadingLogo} from "../../../../components/Logos/LoadingLogo"
 import {FooterLogo} from "../../../../components/Logos/FooterLogo";
-import {IFooter} from "../../index";
 import {renderByRWD} from "../../../../utils/renderByRWD";
+import {IFooter} from "../../types/IFooter";
 
 
 

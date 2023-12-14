@@ -320,6 +320,45 @@ export const PageTemplate = (props: IPage) => {
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             onClickToOpenTelegramService={onClickToOpenTelegramService}
+
+
+            isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+            contextHolder={contextHolder}
+            isMobile={isMobile}
+            isShowMobileFooter={isShowMobileFooter}
+            isShowDesktopFooter={isShowMobileFooter}
+            isShowDesktopHeader={isShowDesktopHeader}
+            isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+            showLoginModal={showLoginModal}
+            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
+            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+            openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+            setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+            setOpenLogoutPopover={setOpenLogoutPopover}
+            isShowMobileLogoutModal={isShowMobileLogoutModal}
+
+            openMenuDrawer={openMenuDrawer}
+            setOpenMenuDrawer={setOpenMenuDrawer}
+            isShowLoginModal={isShowLoginModal}
+            openNotificationWithIcon={openNotificationWithIcon}
+            openDownloadModal={openDownloadModal}
+            setOpenDownloadModal={setOpenDownloadModal}
+            isShowTelegramModal={isShowTelegramModal}
+            isShowInviteBonusModal={isShowInviteBonusModal}
+            setOpenInitailChargeModal={setOpenInitailChargeModal}
+
+            isShowMobileHeader={isShowMobileHeader}
+            isShowTabbar={isShowTabbar}
+            isUILoading={isUILoading}
+
+            showMobileHeader={isShowMobileHeader}
+            showDesktopHeader={isShowDesktopHeader}
+            showDesktopMenuDrawer={isShowDesktopMenuDrawer}
+            showMobileFooter={isShowMobileHeader}
+            showDesktopFooter={isShowDesktopFooter}
+            showTabbar={isShowTabbar}
           >
           {props.children}
           </RiojunglePageTemplate>

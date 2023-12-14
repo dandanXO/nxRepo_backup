@@ -6,7 +6,8 @@ import React, {useState} from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
-import {IFooter} from "../../index";
+
+import {IFooter} from "../../types/IFooter";
 
 
 export const Footer = (props: IFooter) => {

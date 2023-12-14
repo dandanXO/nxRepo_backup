@@ -8,7 +8,8 @@ import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
 import {LoadingLogo} from "../../../../components/Logos/LoadingLogo"
 import {FooterLogo} from "../../../../components/Logos/FooterLogo";
-import {IFooter} from "../../index";
+
+import {IFooter} from "../../types/IFooter";
 
 
 export const Footer = (props: IFooter) => {

@@ -26,8 +26,58 @@ type IPageTemplate = IUseSingletonPageTemplateConfig & {
   onClickToDownload: () => void;
   onClickToOpenTelegramManager: () => void;
   onClickToOpenTelegramService: () => void;
+} & {
+  isCurrentPageCompanyProfile: boolean;
+  contextHolder: any;
+  isMobile: boolean;
+  isShowMobileFooter: boolean;
+  isShowDesktopFooter: boolean;
+  isShowDesktopHeader: boolean;
+  isShowDesktopMenuDrawer: boolean;
+  isLogin: boolean;
+  setIsLogin: (value: any) => void;
+  showLoginModal: (value: any) => void;
+  setOpenDesktopUserInfoStatusDrawer: (value: any) => void;
+  openDesktopUserInfoStatusDrawer: boolean;
+  openDesktopNotificationDrawer: boolean;
+  setOpenDesktopNotificationDrawer: (value: any) => void;
+  setOpenLogoutPopover: (value: any) => void;
+  isShowMobileLogoutModal: boolean;
+
+  openMenuDrawer: boolean;
+  setOpenMenuDrawer: (value: any) => void;
+  isShowLoginModal: boolean;
+  openNotificationWithIcon: (value: any) => void;
+  openDownloadModal: boolean;
+  setOpenDownloadModal: (value: any) => void;
+  isShowTelegramModal: boolean;
+  isShowInviteBonusModal: boolean;
+  setOpenInitailChargeModal: (value: any) => void;
+  isShowMobileHeader: boolean;
+  isShowTabbar: boolean;
+  isUILoading: boolean;
 }
-export const PageTemplate = (props:IPageTemplate) => {
+
+export const PageTemplate = ({
+                              children,
+                              showLoginModal,
+                              setOpenDesktopUserInfoStatusDrawer,
+                              openDesktopUserInfoStatusDrawer,
+                              setOpenDesktopNotificationDrawer,
+                              setOpenLogoutPopover,
+                              isShowMobileLogoutModal,
+                              onClickToOpenTelegramService,
+                              onClickToDownload,
+                              onClickToOpenTelegramManager,
+                              showToolboxConfig,
+
+                               showMobileHeader,
+                               showDesktopHeader,
+                               showDesktopMenuDrawer,
+                               showMobileFooter,
+                               showDesktopFooter,
+                               showTabbar,
+                             }:IPageTemplate) => {
 
   const {
     isShowMobileHeader,
@@ -36,16 +86,42 @@ export const PageTemplate = (props:IPageTemplate) => {
     isShowMobileFooter,
     isShowDesktopFooter,
     isShowMobileTabbar,
-  } = useSingletonPageTemplateConfig(props);
+  } = useSingletonPageTemplateConfig({
+    showMobileHeader,
+    showDesktopHeader,
+    showDesktopMenuDrawer,
+    showMobileFooter,
+    showDesktopFooter,
+    showTabbar,
+  });
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
-
+  const {isLogin} = useSelector((state: RootState) => state.app)
 
   const {isMobile} = useBreakpoint();
 
   return (
     <BaseStyledPageTemplate>
-      <Header/>
+      <Header
+        onClickUserLoginStatusDrawer={() => {
+          // setOpenNonMobileUserLoginStatusDrawer(true);
+          showLoginModal(true)
+        }}
+        className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
+        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+        onClickToPopupUserInfoStatusPopover={() => {
+          setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
+        }}
+        onClickToOpenNotificationDrawer={() => {
+          setOpenDesktopNotificationDrawer(true)
+        }}
+        onClickToChangeLogoutPopover={(display: boolean) => {
+          setOpenLogoutPopover(display);
+        }}
+        onClickToDownload={onClickToDownload}
+        openLogoutPopover={isShowMobileLogoutModal}
+        isLogin={isLogin}
+      />
 
       <div className={""}>
         {isShowDesktopMenuDrawer && (
@@ -59,7 +135,7 @@ export const PageTemplate = (props:IPageTemplate) => {
           })}
         >
           <BaseErrorBoundary>
-            {props.children}
+            {children}
           </BaseErrorBoundary>
 
           <Footer
@@ -73,12 +149,12 @@ export const PageTemplate = (props:IPageTemplate) => {
         <TabBar isShowSlot={false} size={"big"}/>
       )}
 
-      {props.showToolboxConfig !== false && (
+      {showToolboxConfig !== false && (
         <Toolbox
-          showToolboxConfig={props.showToolboxConfig}
-          onClickToDownload={props.onClickToDownload}
-          onClickToOpenTelegramManager={props.onClickToOpenTelegramManager}
-          onClickToOpenTelegramService={props.onClickToOpenTelegramService}
+          showToolboxConfig={showToolboxConfig}
+          onClickToDownload={onClickToDownload}
+          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+          onClickToOpenTelegramService={onClickToOpenTelegramService}
         />
       )}
 
