@@ -36,9 +36,10 @@ import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserV
 
 
 const PopoverContainer = renderByPlatform({
+  "wild777bet": WildPopoverContainer,
   "coco777bet": CocoPopoverContainer,
-  "wild777bet": WildPopoverContainer
-}, PernambucanaPopoverContainer)
+// }, PernambucanaPopoverContainer)
+}, CocoPopoverContainer)
 
 export interface IUserInfoStatusPopoverVIPInfoProps {
   currentLevel: number
@@ -341,34 +342,6 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
         }}>
         {
           renderByPlatform({
-            "coco777bet": (
-              <>
-                <CocoUserInfo />
-                <CocoVIPInfo
-                  userVIPInfo={userVIPInfo}
-                  currentLevel={currentLevel}
-                />
-                <CocoBalanceInfo
-                  totalBalanceSheetValue={totalBalanceSheetValue}
-                  totalReasableValue={totalReasableValue}
-                />
-                <CocoInviteInfo
-                  totalPrize={totalPrize}
-                  bonusAwaitingSettlement={bonusAwaitingSettlement}
-                  fullWithdrawable={fullWithdrawable}
-                />
-                <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
-                  <div>
-                    Registro Do Jogo
-                  </div>
-                </CocoNavigator>
-                <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
-                  <div>
-                    Modificar Dados
-                  </div>
-                </CocoNavigator>
-              </>
-            ) ,
             "wild777bet": (
               <>
                 <WildVIPInfo
@@ -397,36 +370,94 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                   </div>
                 </WildNavigator>
               </>
-            )
+            ),
+            "coco777bet": (
+              <>
+                <CocoUserInfo />
+                <CocoVIPInfo
+                  userVIPInfo={userVIPInfo}
+                  currentLevel={currentLevel}
+                />
+                <CocoBalanceInfo
+                  totalBalanceSheetValue={totalBalanceSheetValue}
+                  totalReasableValue={totalReasableValue}
+                />
+                <CocoInviteInfo
+                  totalPrize={totalPrize}
+                  bonusAwaitingSettlement={bonusAwaitingSettlement}
+                  fullWithdrawable={fullWithdrawable}
+                />
+                <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
+                  <div>
+                    Registro Do Jogo
+                  </div>
+                </CocoNavigator>
+                <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
+                  <div>
+                    Modificar Dados
+                  </div>
+                </CocoNavigator>
+              </>
+            ),
+
           }, (
             <>
-              <PernambucanaVIPInfo
+              <CocoUserInfo />
+              <CocoVIPInfo
                 userVIPInfo={userVIPInfo}
                 currentLevel={currentLevel}
               />
-              <PernambucanaBalanceInfo
+              <CocoBalanceInfo
                 totalBalanceSheetValue={totalBalanceSheetValue}
                 totalReasableValue={totalReasableValue}
               />
-              <PernambucanaInviteInfo
+              <CocoInviteInfo
                 totalPrize={totalPrize}
                 bonusAwaitingSettlement={bonusAwaitingSettlement}
                 fullWithdrawable={fullWithdrawable}
               />
-              <PernambucanaNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
-                <div className={"flex flex flex-row items-center"}>
-                  <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
-                  <span>Modificar dados</span>
+              <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
+                <div>
+                  Registro Do Jogo
                 </div>
-              </PernambucanaNavigator>
-              <PernambucanaNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
-                <div className={"flex flex flex-row items-center"}>
-                  <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
-                  <span>Registro do jogo</span>
+              </CocoNavigator>
+              <CocoNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
+                <div>
+                  Modificar Dados
                 </div>
-              </PernambucanaNavigator>
+              </CocoNavigator>
             </>
-          ) )
+          )
+          // (
+          //   <>
+          //     <PernambucanaVIPInfo
+          //       userVIPInfo={userVIPInfo}
+          //       currentLevel={currentLevel}
+          //     />
+          //     <PernambucanaBalanceInfo
+          //       totalBalanceSheetValue={totalBalanceSheetValue}
+          //       totalReasableValue={totalReasableValue}
+          //     />
+          //     <PernambucanaInviteInfo
+          //       totalPrize={totalPrize}
+          //       bonusAwaitingSettlement={bonusAwaitingSettlement}
+          //       fullWithdrawable={fullWithdrawable}
+          //     />
+          //     <PernambucanaNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
+          //       <div className={"flex flex flex-row items-center"}>
+          //         <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
+          //         <span>Modificar dados</span>
+          //       </div>
+          //     </PernambucanaNavigator>
+          //     <PernambucanaNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
+          //       <div className={"flex flex flex-row items-center"}>
+          //         <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
+          //         <span>Registro do jogo</span>
+          //       </div>
+          //     </PernambucanaNavigator>
+          //   </>
+          // )
+          )
         }
 
       </PopoverContainer>
