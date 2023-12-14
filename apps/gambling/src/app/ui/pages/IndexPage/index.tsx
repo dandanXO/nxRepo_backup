@@ -161,7 +161,7 @@ export const IndexPage = () => {
     )
   }, (
     (
-      <PIndexPage
+      <CIndexPage
         userFavorite={userFavorite}
         onClickFavoriteGameItem={onClickFavoriteGameItem}
         showFixForIOSStickTab={showFixForIOSStickTab}
