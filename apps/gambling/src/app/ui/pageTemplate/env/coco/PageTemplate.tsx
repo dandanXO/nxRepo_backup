@@ -4,8 +4,7 @@ import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
 
 import {Footer} from "../../footer/env/coco/Footer";
-import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
-import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/coco/MenuDrawerContent";
+
 import {TabBar} from "../../tabBar/env/coco";
 import {Toolbox} from "../../../components/Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
@@ -20,6 +19,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import {TShowToolboxConfig} from "../../base/types";
+import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -191,13 +191,7 @@ export const PageTemplate = ({
         )}
 
         {isShowDesktopMenuDrawer && (
-          <MenuDrawerContainer
-            className={""}
-            isTabletShow={false}
-            isShowCloseButton={false}
-          >
-            <MenuDrawerContent/>
-          </MenuDrawerContainer>
+          <MenuDrawer/>
         )}
 
         {/*NOTE: 佔據有 Header 時的高度*/}

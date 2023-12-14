@@ -15,8 +15,8 @@ import {BaseErrorBoundary} from "../../base/BaseErrorBoundary";
 import {TShowToolboxConfig} from "../../base/types";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 
+import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
-import {MenuDrawer} from "../../../drawers/MenuDrawer/env/riojungle/MenuDrawer";
 import cx from "classnames";
 import {Header} from "../../header";
 
