@@ -10,16 +10,10 @@ import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import { RegisterButton} from "../../../../components/Buttons/RegisterButton";
 import { MessageCountBadge } from "../../../../components/MessageCountBadge";
-import {AssetMappingCoco} from "../../../../../../assets/assetMapping.coco";
 import {MenuIcon} from "../../../../components/Icons/MenuIcon";
+import {IMobileHeader} from "../../types/IMobileHeader";
 
-export type IHeaderMobile = {
-  clickToOpenMenuDrawer: () => void;
-  clickToOpenUserLoginStatusModal: () => void;
-  className?: string;
-}
-
-export const HeaderMobile = (props: IHeaderMobile) => {
+export const MobileHeader = (props: IMobileHeader) => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
 

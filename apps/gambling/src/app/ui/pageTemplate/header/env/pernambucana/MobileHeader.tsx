@@ -11,15 +11,10 @@ import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {SearchButton} from "./components/SearchButton";
 import {RegisterButton} from "../../../../components/Buttons/env/pernambucana/RegisterButton";
 import {MenuIcon} from "../../../../components/Icons/MenuIcon";
+import {IMobileHeader} from "../../types/IMobileHeader";
 
 
-export type IHeaderMobile = {
-  clickToOpenMenuDrawer: () => void;
-  clickToOpenUserLoginStatusModal: () => void;
-  className?: string;
-}
-
-export const HeaderMobile = (props: IHeaderMobile) => {
+export const MobileHeader = (props: IMobileHeader) => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
 

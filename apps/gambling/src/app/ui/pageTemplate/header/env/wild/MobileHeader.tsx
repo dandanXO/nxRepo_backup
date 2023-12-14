@@ -17,7 +17,7 @@ export type IHeaderMobile = {
   className?: string;
 }
 
-export const HeaderMobile = (props: IHeaderMobile) => {
+export const MobileHeader = (props: IHeaderMobile) => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
 

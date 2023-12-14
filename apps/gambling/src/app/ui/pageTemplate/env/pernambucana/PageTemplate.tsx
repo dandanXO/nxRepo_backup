@@ -14,7 +14,7 @@ import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContain
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
 
-import {HeaderMobile} from "../../header/env/pernambucana/HeaderMobile";
+import {MobileHeader} from "../../header/env/pernambucana/MobileHeader";
 import {Header} from "../../header/env/pernambucana/Header";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
 
@@ -194,7 +194,7 @@ showToolboxConfig
         })} style={{
         }}>
           {isMobile && isShowMobileHeader && (
-            <HeaderMobile
+            <MobileHeader
               clickToOpenMenuDrawer={() => {
                 setOpenMenuDrawer(!openMenuDrawer)
               }}

@@ -11,7 +11,7 @@ import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../header/env/coco/Header";
-import {HeaderMobile} from "../../header/env/coco/HeaderMobile";
+import {MobileHeader} from "../../header/env/coco/MobileHeader";
 
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";
@@ -154,7 +154,7 @@ export const PageTemplate = ({
         }}
       >
         {isMobile && isShowMobileHeader && (
-          <HeaderMobile
+          <MobileHeader
             className={"!h-[52.5px]"}
             clickToOpenMenuDrawer={() => {
               setOpenMenuDrawer(!openMenuDrawer)
