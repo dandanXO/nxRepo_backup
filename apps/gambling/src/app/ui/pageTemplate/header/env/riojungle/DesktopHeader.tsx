@@ -13,7 +13,6 @@ import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {NotificationAnimationIcon} from "../../../../components/Icons/animation/NotificationAnimationIcon";
 import {MenuLogo} from "../../../../components/Logos/MenuLogo";
 import {IHeader} from "../../types/IHeader";
-import {HeaderMenu} from "../coco/components/HeaderMenu";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 
 const DirectionIcon = styled.img<{
@@ -24,30 +23,6 @@ const DirectionIcon = styled.img<{
   transform: rotate(${props => props.active ? 180 : 0}deg);
 `
 
-const HeaderButton = styled.button.attrs((props) => ({
-  className: cx("", props.className),
-})) <{
-  className?: string;
-}>`
-  width: 100%;
-  background-color: var(--primary-varient);
-  color: var(--white);
-  transform: skew(-8deg);
-  font-size: 16px;
-  &:hover {
-   color:var(--secondary-main-to);
-   border-bottom: 3px solid var(--secondary-main-to);
-  }
-`
-
-const HeaderButtonText = styled.div`
-  transform: skew(8deg);
-  /* height: 100%; */
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
 export const DesktopHeader = (props: IHeader) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 

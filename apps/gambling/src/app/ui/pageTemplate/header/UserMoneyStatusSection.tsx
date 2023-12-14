@@ -1,49 +1,32 @@
 import styled from "styled-components";
 import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
-import {appStore, RootState} from "../../../../reduxStore";
+import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
+import {appStore, RootState} from "../../../reduxStore";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
-import {totalBalanceSheetSelector} from "../../../../reduxStore/appSlice";
-import {useAutoUpdateBalance} from "../../../hooks/useAutoUpdateBalance";
+import {totalBalanceSheetSelector} from "../../../reduxStore/appSlice";
+import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {ThreeDots, Bars, BallTriangle, Grid, Oval, Puff, Rings, TailSpin} from "react-loading-icons";
-import {environment} from "../../../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import cx from "classnames";
-import { renderByPlatform } from "../../../utils/renderByPlatform";
-import { PersonalControl as CocoPersonalControl } from '../env/coco/components/PersonalControl'
-import { PersonalControl as WildPersonalControl } from '../env/wild/components/PersonalControl'
-import { PersonalControl as PernambucanaPersonalControl } from '../env/pernambucana/components/PersonalControl'
-import { formatLocaleMoney } from "../../../utils/format";
-import { usePageNavigate } from "../../../hooks/usePageNavigate";
-
-
-const PersonalControl = renderByPlatform({
-  "coco777bet": CocoPersonalControl,
-  "wild777bet" : WildPersonalControl
-}, PernambucanaPersonalControl)
+import { formatLocaleMoney } from "../../utils/format";
+import { usePageNavigate } from "../../hooks/usePageNavigate";
+import {PersonalControl} from "./PersonalControl";
 
 type IProps = {
   className?: string;
 }
 export const UserMoneyStatusSection = (props: IProps) => {
-  const navigate = useNavigate();
   const {onClickToWallet} = usePageNavigate();
 
-
-  // const { userAmount } = useSelector((state: RootState) => state.app.userStore as IUserStore)
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
-  // console.log("userAmount", userAmount);
-  // const [triggerRefreshBalance, {currentData}] = useLazyGetSimpleBalanceQuery()
-
-  // useEffect(() => {
-  //   triggerRefreshBalance({});
-  // }, [])
 
   const { update } = useAutoUpdateBalance({
     autoWindowFocusRefresh: false,
   });
 
   const isUserMoneyStatusLoading = useSelector((state: RootState) => state.app.isUserMoneyStatusLoading)
+
   return (
     <PersonalControl className={cx("px-3 flex flex-row justify-between items-center gap-2 h-8 md:h-11", props.className)}>
       <button className={"refresh"} onClick={() => {
