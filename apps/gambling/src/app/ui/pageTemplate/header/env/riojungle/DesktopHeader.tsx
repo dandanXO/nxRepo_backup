@@ -2,7 +2,7 @@ import styled from "styled-components";
 import cx from "classnames";
 import React, {useState} from "react";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {LoginButton} from "../../../../components/Buttons/LoginButton";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
@@ -14,6 +14,7 @@ import {NotificationAnimationIcon} from "../../../../components/Icons/animation/
 import {MenuLogo} from "../../../../components/Logos/MenuLogo";
 import {IHeader} from "../../types/IHeader";
 import {HeaderMenu} from "../coco/components/HeaderMenu";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -54,6 +55,8 @@ export const DesktopHeader = (props: IHeader) => {
   const [hover, setHover] = useState(false);
   const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
 
+  const dispatch = useDispatch();
+  const isShowLoginModal = useSelector((state: RootState) => state.app.isShowLoginModal)
 
   return (
     <header
@@ -74,7 +77,8 @@ export const DesktopHeader = (props: IHeader) => {
             <LoginButton
               className={"text-white text-lg"}
               onClick={() => {
-                props.onClickUserLoginStatusDrawer()
+                // props.onClickUserLoginStatusDrawer()
+                dispatch(appSlice.actions.showLoginDrawerOrModal(true))
               }}
             >Connecte-se</LoginButton>
         </div>

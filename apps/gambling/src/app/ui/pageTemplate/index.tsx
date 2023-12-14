@@ -302,7 +302,6 @@ export const PageTemplate = (props: IPage) => {
 
             openMenuDrawer={openMenuDrawer}
             setOpenMenuDrawer={setOpenMenuDrawer}
-            isShowLoginModal={isShowLoginModal}
             openNotificationWithIcon={openNotificationWithIcon}
             openDownloadModal={openDownloadModal}
             setOpenDownloadModal={setOpenDownloadModal}
@@ -364,9 +363,12 @@ export const PageTemplate = (props: IPage) => {
         </PPageTemplate>
       ))}
 
-
       <PageTemplateLayers
         isMobile={isMobile}
+        isShowLoginModal={isShowLoginModal}
+        showLoginModal={showLoginModal}
+        setIsLogin={setIsLogin}
+        openNotificationWithIcon={openNotificationWithIcon}
         isShowMobileLogoutModal={isShowMobileLogoutModal}
         setOpenLogoutPopover={setOpenLogoutPopover}
         openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}

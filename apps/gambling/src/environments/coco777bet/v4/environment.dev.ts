@@ -10,4 +10,7 @@ export const environment = {
   captcha: "/japi/user/captcha/image",
   appVersion: "1.0.0",
   s3URLImages: "https://resources.ttgroup.vip/icon",
+  app: {
+    isDesktopShowMenuDrawer: false,
+  }
 };

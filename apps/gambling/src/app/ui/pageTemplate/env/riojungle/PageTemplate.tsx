@@ -46,7 +46,6 @@ type IPageTemplate = IUseSingletonPageTemplateConfig & {
 
   openMenuDrawer: boolean;
   setOpenMenuDrawer: (value: any) => void;
-  isShowLoginModal: boolean;
   openNotificationWithIcon: (value: any) => void;
   openDownloadModal: boolean;
   setOpenDownloadModal: (value: any) => void;
@@ -106,23 +105,27 @@ export const PageTemplate = ({
     <BaseStyledPageTemplate>
       <Header
         className={"fixed top-0 left-0 right-0 w-full z-[1001]"}
+        // NOTE: Login
+        isLogin={isLogin}
         onClickUserLoginStatusDrawer={() => {
           // setOpenNonMobileUserLoginStatusDrawer(true);
           showLoginModal(true)
         }}
-        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
         onClickToPopupUserInfoStatusPopover={() => {
           setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
-        }}
-        onClickToOpenNotificationDrawer={() => {
-          setOpenDesktopNotificationDrawer(true)
         }}
         onClickToChangeLogoutPopover={(display: boolean) => {
           setOpenLogoutPopover(display);
         }}
-        onClickToDownload={onClickToDownload}
         openLogoutPopover={isShowMobileLogoutModal}
-        isLogin={isLogin}
+        // NOTE: User Info
+        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+        // NOTE: Notification
+        onClickToOpenNotificationDrawer={() => {
+          setOpenDesktopNotificationDrawer(true)
+        }}
+        // NOTE: Download
+        onClickToDownload={onClickToDownload}
       />
 
       <div className={""}>

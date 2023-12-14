@@ -179,6 +179,7 @@ showToolboxConfig
         {/*      setOpenMenuDrawer(false)*/}
         {/*    }}/>*/}
         {/*)}*/}
+
         {isShowDesktopMenuDrawer && (
           <MenuDrawerContainer className={"rounded-r-3xl"}>
             <MenuDrawerContent/>

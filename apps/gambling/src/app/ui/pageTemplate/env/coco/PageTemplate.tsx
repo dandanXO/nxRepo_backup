@@ -190,7 +190,7 @@ export const PageTemplate = ({
           />
         )}
 
-        {isShowDesktopMenuDrawer && (
+        {(isShowDesktopMenuDrawer) && (
           <MenuDrawer/>
         )}
 
@@ -220,18 +220,6 @@ export const PageTemplate = ({
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             onClickToOpenTelegramService={onClickToOpenTelegramService}
-          />
-        )}
-
-        {/*Login*/}
-        {isShowLoginModal && (
-          <UserLoginStatusModal
-            showCloseButton={true}
-            openNotificationWithIcon={openNotificationWithIcon}
-            close={() => {
-              showLoginModal(false)
-            }}
-            setIsLogin={(login: boolean) => setIsLogin(login)}
           />
         )}
 
