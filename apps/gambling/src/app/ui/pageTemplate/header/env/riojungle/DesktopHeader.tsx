@@ -57,80 +57,28 @@ export const DesktopHeader = (props: IHeader) => {
 
   return (
     <header
-      className={cx("z-[1001] sticky top-[0] h-24 max-h-[24]",
-        "flex flex-row justify-between items-center relative bg-[var(--primary-variant)] ",
-        // "bg-purple-500"
+      className={cx("h-[72px]",
+        "bg-[var(--primary-variant)]",
+        "flex flex-row justify-between items-center relative",
       )}
-      // style={{
-      //   backgroundImage: `url("assets/${environment.assetPrefix}/top_di.png")`, // 替换成背景图片路径
-      //   backgroundSize: 'cover', // 调整背景图片大小以填充整个元素
-      //   backgroundPosition: '90% 50%', // 调整背景图片位置
-      //   backgroundRepeat: 'no-repeat', // 禁止背景图片重复
-      //   backgroundColor: '#013E42', // 设置背景颜色
-      // }}
     >
-
-      <div className='flex'>
-        {
-          hover &&
-          (
-            <div
-              onMouseOver={() => { setHover(true) }}
-              onMouseOut={() => { setHover(false) }}
-            >
-              <HeaderMenu />
-            </div>
-          )
-        }
-
-        <div className={"flex  flex-row min-w-[738px] max-h-[67px] -mb-[1px]"}
-             onMouseOver={() => {
-               setHover(true);
-             }}
-             onMouseOut={() => {
-               setHover(false)
-             }}
-        >
-          <div
-            className={"-mr-1 cursor-pointer flex row justify-center items-center"}
-            onClick={() => onClickToIndex()}
-          >
-            <MenuLogo/>
-          </div>
-
-          <HeaderButton>
-            <HeaderButtonText onClick={onClickToIndex}>Jogos</HeaderButtonText>
-          </HeaderButton>
-          <HeaderButton>
-            <HeaderButtonText>Atividade</HeaderButtonText>
-          </HeaderButton>
-          <HeaderButton>
-            <HeaderButtonText onClick={onClickToInvite}>Convidar</HeaderButtonText>
-          </HeaderButton>
-          <HeaderButton>
-            <HeaderButtonText onClick={onClickToVipGrade}>VIP</HeaderButtonText>
-          </HeaderButton>
-          <HeaderButton>
-            <HeaderButtonText onClick={props.onClickToDownload}>Download</HeaderButtonText>
-          </HeaderButton>
-        </div>
+      <div
+        className={"cursor-pointer"}
+        onClick={() => onClickToIndex()}
+      >
+        <MenuLogo/>
       </div>
 
-
-      {!isLogin && (
+      {!isLogin ? (
         <div className="flex-1 flex justify-end mr-4">
-          <LoginButton
-            className={"text-white text-lg"}
-            onClick={() => {
-              props.onClickUserLoginStatusDrawer()
-            }}
-          >Connecte-se</LoginButton>
+            <LoginButton
+              className={"text-white text-lg"}
+              onClick={() => {
+                props.onClickUserLoginStatusDrawer()
+              }}
+            >Connecte-se</LoginButton>
         </div>
-      )}
-
-
-      {/*[How to Align Last Flex Item to Right](https://medium.com/@iamryanyu/how-to-align-last-flex-item-to-right-73512e4e5912)*/}
-      {isLogin && (
+        ): (
         <section className={"flex flex-row items-center gap-6 mr-6"}>
 
           <div className={"hidden lg:block"}>
@@ -179,7 +127,6 @@ export const DesktopHeader = (props: IHeader) => {
 
         </section>
       )}
-
     </header>
   )
 }

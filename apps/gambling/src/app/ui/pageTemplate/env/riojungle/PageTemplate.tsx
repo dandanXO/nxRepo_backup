@@ -100,10 +100,12 @@ export const PageTemplate = ({
 
   const {isMobile} = useBreakpoint();
 
+  const HeaderHeight = 72;
+  const DrawerWidth = 248;
   return (
     <BaseStyledPageTemplate>
       <Header
-        className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
+        className={"fixed top-0 left-0 right-0 w-full z-[1001]"}
         onClickUserLoginStatusDrawer={() => {
           // setOpenNonMobileUserLoginStatusDrawer(true);
           showLoginModal(true)
@@ -125,14 +127,23 @@ export const PageTemplate = ({
 
       <div className={""}>
         {isShowDesktopMenuDrawer && (
-          <div className={"w-[248px] fixed top-24 left-0"}>
+          <div
+            className={"fixed left-0"}
+            style={{
+              top: HeaderHeight,
+            }}
+          >
             <MenuDrawer/>
           </div>
         )}
         <div
-          className={cx("mt-24", {
-            "ml-[248px]": !isMobile
+          className={cx("", {
+
           })}
+          style={{
+            marginTop: HeaderHeight,
+            marginLeft: !isMobile ? DrawerWidth : 0,
+          }}
         >
           <BaseErrorBoundary>
             {children}

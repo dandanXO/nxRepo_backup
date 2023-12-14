@@ -2,7 +2,7 @@ export const MenuDrawer = () => {
   return (
     <div
       id="TabBarRoot"
-      className="bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-56 items-start"
+      className="w-[248px] bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-56 items-start"
     >
       <div className="flex flex-col mr-[-52px] gap-5 w-[120.97%] h-[802px] items-start">
         <div className="flex flex-col gap-3 w-full items-start">
