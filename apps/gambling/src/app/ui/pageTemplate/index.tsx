@@ -11,11 +11,9 @@ import {RootState} from "../../reduxStore";
 import {appSlice} from "../../reduxStore/appSlice";
 import {uiSlice} from "../../reduxStore/uiSlice";
 
-import {AppLocalStorage} from "../../persistant/localstorage";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {environment} from "../../../environments/environment";
 
-import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 import {usePageNavigate} from "../hooks/usePageNavigate";
 
 import {renderByPlatform} from "../utils/renderByPlatform";
@@ -24,11 +22,12 @@ import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
 import {PageTemplate as RiojunglePageTemplate} from "./env/riojungle/PageTemplate";
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
-import {TShowToolboxConfig} from "./base/types";
 import {PageTemplateLayers} from "../pageTemplateLayers";
+import {IPage} from "./types/IPage";
 
 
 console.log("[APP] environment", environment);
+
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 export type IOpenNotificationWithIcon = {
@@ -37,22 +36,6 @@ export type IOpenNotificationWithIcon = {
   description: string
 }
 
-// export const AppContext = createContext({
-//   isUserLogin: !!AppLocalStorage.getItem("token"),
-// });
-
-
-
-export type IPage = {
-  children: React.ReactNode;
-  showMobileHeader?: boolean;
-  showTabbar?: boolean;
-  showDesktopHeader?: boolean;
-  showDesktopMenuDrawer?: boolean;
-  showMobileFooter?: boolean;
-  showDesktopFooter?: boolean;
-  showToolboxConfig?: TShowToolboxConfig
-}
 export const PageTemplate = (props: IPage) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -198,38 +181,16 @@ export const PageTemplate = (props: IPage) => {
     });
   };
 
-  // openNotificationWithIcon('error')
-  const telegramServiceId = AppLocalStorage.getItem(AppLocalStorageKey.telegramService);
-  const telegramManagerId = AppLocalStorage.getItem(AppLocalStorageKey.telegramManager);
-  const telegramGroupId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
 
-  const userInfoString = AppLocalStorage.getItem(AppLocalStorageKey.userInfo);
-  const userInfo = userInfoString && userInfoString !== "undefined"  ? JSON.parse(userInfoString) : null;
-  const user_id = userInfo?.user_id || '';
-
-  const telegramServiceUrl=`https://t.me/${telegramServiceId}`
-  const telegramManagerUrl=`https://t.me/${telegramManagerId}`
-  const telegramGroupUrl=`https://t.me/${telegramGroupId}?start=${user_id}`
-
+  const {
+    onClickToWallet,
+    onClickToOpenTelegramService,
+    onClickToOpenTelegramManager,
+    onClickToOpenTelegramGroup,
+  } = usePageNavigate();
 
   const location = useLocation();
-  const {onClickToWallet} = usePageNavigate();
-
-  // console.log("location", location);
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
-
-  const onClickToOpenTelegramService = () => {
-    window.open(telegramServiceUrl,'_blank')
-  }
-
-  const onClickToOpenTelegramManager = () => {
-    window.open(telegramManagerUrl,'_blank')
-  }
-
-  const onClickToOpenTelegramGroup = () => {
-    window.open(telegramGroupUrl,'_blank')
-  }
-
 
   return (
     <>

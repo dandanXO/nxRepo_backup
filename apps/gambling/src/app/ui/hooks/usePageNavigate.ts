@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../reduxStore";
 import {appSlice} from "../../reduxStore/appSlice";
@@ -141,6 +141,32 @@ export const usePageNavigate = () => {
     }
   }
 
+
+  const telegramServiceId = AppLocalStorage.getItem(AppLocalStorageKey.telegramService);
+  const telegramManagerId = AppLocalStorage.getItem(AppLocalStorageKey.telegramManager);
+  const telegramGroupId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
+
+  const userInfoString = AppLocalStorage.getItem(AppLocalStorageKey.userInfo);
+  const userInfo = userInfoString && userInfoString !== "undefined"  ? JSON.parse(userInfoString) : null;
+  const user_id = userInfo?.user_id || '';
+
+  const telegramServiceUrl=`https://t.me/${telegramServiceId}`
+  const telegramManagerUrl=`https://t.me/${telegramManagerId}`
+  const telegramGroupUrl=`https://t.me/${telegramGroupId}?start=${user_id}`
+
+
+  const onClickToOpenTelegramService = () => {
+    window.open(telegramServiceUrl,'_blank')
+  }
+
+  const onClickToOpenTelegramManager = () => {
+    window.open(telegramManagerUrl,'_blank')
+  }
+
+  const onClickToOpenTelegramGroup = () => {
+    window.open(telegramGroupUrl,'_blank')
+  }
+
   return {
     onClickToIndex,
     onClickToSlot,
@@ -156,6 +182,10 @@ export const usePageNavigate = () => {
     onClickToGameRecord,
     onClickToSetting,
     onClickToPrivacyAgreement,
-    onClickGameItem
+    onClickGameItem,
+    // NOTE: window
+    onClickToOpenTelegramService,
+    onClickToOpenTelegramManager,
+    onClickToOpenTelegramGroup,
   }
 }
