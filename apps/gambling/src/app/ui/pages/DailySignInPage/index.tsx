@@ -153,6 +153,18 @@ export const DailySignInPage = () => {
   }, []);
 
   return renderByPlatform({
+    "wild777bet": (
+      <WDailySignInPage
+        onClickToSignIn={onClickToSignIn}
+        signInConfig={signInConfig?.data?.signInConfig || []}
+        signInAllConfig={signInConfig?.data?.signInAllConfig || []}
+        signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
+        todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
+        vipLevel={signInConfig?.data?.vipLevel || 0}
+        currentSelectedLevel={currentSelectedLevel}
+        setCurrentSelectedLevel={setCurrentSelectedLevel}
+      />
+    ),
     "coco777bet": (
       <CocoDailySignInPage
         onClickToSignIn={onClickToSignIn}
@@ -165,23 +177,10 @@ export const DailySignInPage = () => {
         setCurrentSelectedLevel={setCurrentSelectedLevel}
       />
     ),
-    "wild777bet": (
-      <WDailySignInPage
-        onClickToSignIn={onClickToSignIn}
-        signInConfig={signInConfig?.data?.signInConfig || []}
-        signInAllConfig={signInConfig?.data?.signInAllConfig || []}
-        signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
-        todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
-        vipLevel={signInConfig?.data?.vipLevel || 0}
-        currentSelectedLevel={currentSelectedLevel}
-        setCurrentSelectedLevel={setCurrentSelectedLevel}
-      />
-    )
   }, (
-    <PernambucanaDailySignInPage
+    <CocoDailySignInPage
       onClickToSignIn={onClickToSignIn}
-      currentLevel={signInConfig?.data?.vipLevel || 0}
-      signInConfig={signInConfig?.data?.signInConfig}
+      signInConfig={signInConfig?.data?.signInConfig || []}
       signInAllConfig={signInConfig?.data?.signInAllConfig || []}
       signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
       todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
@@ -190,4 +189,18 @@ export const DailySignInPage = () => {
       setCurrentSelectedLevel={setCurrentSelectedLevel}
     />
   ))
+
+  // (
+  //   <PernambucanaDailySignInPage
+  //     onClickToSignIn={onClickToSignIn}
+  //     currentLevel={signInConfig?.data?.vipLevel || 0}
+  //     signInConfig={signInConfig?.data?.signInConfig}
+  //     signInAllConfig={signInConfig?.data?.signInAllConfig || []}
+  //     signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
+  //     todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
+  //     vipLevel={signInConfig?.data?.vipLevel || 0}
+  //     currentSelectedLevel={currentSelectedLevel}
+  //     setCurrentSelectedLevel={setCurrentSelectedLevel}
+  //   />
+  // ))
 };

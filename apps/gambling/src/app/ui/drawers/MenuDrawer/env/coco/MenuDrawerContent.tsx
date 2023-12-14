@@ -1,19 +1,18 @@
-import { useLocation, useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../../../reduxStore";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import { MobileMenuLink } from "../../components/MobileMenuLink";
-import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
-import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { InviteCopySection } from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
-import { uiSlice } from "../../../../../reduxStore/uiSlice";
-import { CopyIcon } from "../../../../components/Icons/CopyIcon";
-import { MobileMenuItem } from "./MobileMenuItem";
-import styled from "styled-components";
-import { environment } from "../../../../../../environments/environment";
+import {useLocation} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../../../reduxStore";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {MobileMenuLink} from "../../components/MobileMenuLink";
+import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
+import {AppLocalStorage} from "../../../../../persistant/localstorage";
+import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
+import {uiSlice} from "../../../../../reduxStore/uiSlice";
+import {CopyIcon} from "../../../../components/Icons/CopyIcon";
+import {MobileMenuItem} from "./MobileMenuItem";
+import {environment} from "../../../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import { IUserInfo } from "../../../../../persistant/IUserInfo";
-import { appSlice } from "../../../../../reduxStore/appSlice";
+import {IUserInfo} from "../../../../../persistant/IUserInfo";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 
 
 export const MenuDrawerContent = () => {
@@ -29,7 +28,6 @@ export const MenuDrawerContent = () => {
     onClickToCheckInDaily,
     onClickToTelegram,
   } = usePageNavigate();
-
 
   const dispatch = useDispatch();
   const closeMenuDrawer = () => {
