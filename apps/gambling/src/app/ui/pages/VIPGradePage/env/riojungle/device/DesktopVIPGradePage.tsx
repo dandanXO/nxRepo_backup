@@ -7,13 +7,16 @@ import { VerticalVIPButtonList } from "../components/VerticalVIPButtonList";
 import { useEffect, useRef, useState } from "react";
 import { ProgressBar } from "../../../../../components/ProgressBar";
 import { formatLocaleMoney } from "../../../../../utils/format";
+import { VIP0Text } from "../components/VIP0Text";
+import { VIPInfoTab } from "../components/VIPInfoTab";
 
 
 export const DesktopVIPGradePage = ({
   currentLevel,
   allLevelInfo,
   allSignInConfig,
-  userVIPInfo
+  userVIPInfo,
+  signInDayConfig
 }: IVIPGradePageProps) => {
   const [selectedVIP, setSelectedVIP] = useState(currentLevel);
 
@@ -37,9 +40,12 @@ export const DesktopVIPGradePage = ({
     <div className='w-full flex justify-center'>
       <div className='w-[90%] 2xl:w-[72%]'>
         <img src={VIPStatue} alt="statue" className='mt-10' />
-        <div className='w-full flex rounded-2xl bg-[#333333] mt-[-45px]'>
 
-          <div className='w-[15%] h-[298px] border-r border-r-[#666666] flex flex-col items-center group cursor-pointer'>
+        {/*VIP 進度卡*/}
+        <div className='w-full h-[298px] flex rounded-2xl bg-[#333333] mt-[-45px]'>
+
+          {/*VIP選單*/}
+          <div className='w-[15%] border-r border-r-[#666666] flex flex-col items-center group cursor-pointer'>
             <img alt='up' src={CaretUP} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={() => vipWrapperRef.current?.scrollBy(0,-242)} />
             <div
               className='h-[242px] w-[78%] py-1 overflow-y-scroll vip-tab-items flex flex-col gap-4 items-center relative'
@@ -54,31 +60,64 @@ export const DesktopVIPGradePage = ({
             <img alt='down' src={CaretDown} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={() => vipWrapperRef.current?.scrollBy(0,242)} />
           </div>
 
-          <div className='w-[85%] h-[298px] pt-10 pl-10 pr-5 pb-9 flex gap-5'>
+          {/*VIP 進度卡右側*/}
+          <div className='w-[85%] pt-10 pl-10 pr-5 pb-9 flex items-center gap-5'>
+            {/*VIP Icon*/}
             <div className='w-[218px] flex-shrink-0 h-full flex items-center'>
               <div className='relative'>
                 <img src={VIPIcon} alt="vipIcon" />
                 <div className='text-white font-bold absolute bottom-[20px] left-[50%] translate-x-[-50%] text-3xl'>VIP{selectedVIP}</div>
               </div>
             </div>
-            <div className='w-full h-full flex flex-col justify-center'>
-              <div className='w-full flex justify-between text-base font-medium text-[#808080]'>
-                <div>Valor total da recarga</div>
-                <div>
-                  <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.vip_score || 0) / 100)}</span>
-                  /R$ {formatLocaleMoney(allLevelInfo[selectedVIP].rechargeAmountLimit / 100)}
+
+            {/*VIP進度條*/}
+            {
+              selectedVIP !== 0 && (
+                <div className='w-full h-full flex flex-col justify-center'>
+                  <div className='w-full flex justify-between text-base font-medium text-[#808080]'>
+                    <div>Valor total da recarga</div>
+                    <div>
+                      <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.vip_score || 0) / 100)}</span>
+                      /R$ {formatLocaleMoney(allLevelInfo[selectedVIP].rechargeAmountLimit / 100)}
+                    </div>
+                  </div>
+                  <ProgressBar
+                    className='h-14 py-[18px] px-5 mt-2 text-white text-xl'
+                    progress={
+                      ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
+                    }
+                    progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+                  />
+                  <div className='w-full flex justify-between text-base font-medium text-[#808080] mt-5'>
+                    <div>Número total de apostas</div>
+                    <div>
+                      <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.flow || 0) / 100)}</span>
+                      /R$ {formatLocaleMoney(allLevelInfo[selectedVIP].flowLimit / 100)}
+                    </div>
+                  </div>
+                  <ProgressBar
+                    className='h-14 py-[18px] px-5 mt-2 text-white text-xl'
+                    progress={
+                      ((userVIPInfo?.data?.flow || 0) / 100) / (allLevelInfo[selectedVIP].flowLimit / 100 || 1)
+                    }
+                    progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+                  />
                 </div>
-              </div>
-              <ProgressBar
-                className='h-14 py-[18px] px-5 mt-2 text-white text-xl'
-                progress={
-                  ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
-                }
-                progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
-              />
-            </div>
+              )
+            }
+
+            {/*VIP 0提示文字*/}
+            {
+              selectedVIP === 0 && <VIP0Text />
+            }
           </div>
         </div>
+
+
+        {/*VIP INFO TAB*/}
+        <VIPInfoTab className='mt-9' signInDayConfig={signInDayConfig} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig} />
+
+
       </div>
     </div>
   )
