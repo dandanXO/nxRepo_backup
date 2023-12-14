@@ -19,6 +19,7 @@ import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
 import cx from "classnames";
 import {Header} from "../../header";
+import {twMerge} from "tailwind-merge";
 
 type IPageTemplate = IUseSingletonPageTemplateConfig & {
   children: React.ReactNode;
@@ -101,10 +102,12 @@ export const PageTemplate = ({
 
   const HeaderHeight = 72;
   const DrawerWidth = 248;
+  const ZIndex = "z-[1001]";
+
   return (
     <BaseStyledPageTemplate>
 
-      <div className={"fixed top-0 left-0 right-0 w-full z-[1001]"}>
+      <div className={twMerge("fixed top-0 left-0 right-0 w-full", ZIndex)}>
         <Header
           className={""}
           // NOTE: Login
@@ -134,7 +137,7 @@ export const PageTemplate = ({
       <div className={""}>
         {isShowDesktopMenuDrawer && (
           <div
-            className={"fixed left-0"}
+            className={twMerge("fixed left-0", ZIndex)}
             style={{
               top: HeaderHeight,
             }}
@@ -142,6 +145,7 @@ export const PageTemplate = ({
             <MenuDrawer/>
           </div>
         )}
+
         <div
           className={cx("", {
 

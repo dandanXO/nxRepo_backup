@@ -6,4 +6,5 @@ import {FavoriteSection as CFavoriteSection} from "./env/coco/FavoriteSection";
 export const FavoriteSection = renderByPlatform({
   "wild777bet": WFavoriteSection,
   "coco777bet": CFavoriteSection,
-}, PFavoriteSection)
+// }, PFavoriteSection)
+}, CFavoriteSection)
