@@ -103,11 +103,11 @@ export const PageTemplate = ({
   return (
     <BaseStyledPageTemplate>
       <Header
+        className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
         onClickUserLoginStatusDrawer={() => {
           // setOpenNonMobileUserLoginStatusDrawer(true);
           showLoginModal(true)
         }}
-        className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
         openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
         onClickToPopupUserInfoStatusPopover={() => {
           setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
