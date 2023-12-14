@@ -18,9 +18,7 @@ export const Header = (props: IHeader | IMobileHeader) => {
           <MobileHeader {...props as IMobileHeader}/>
         ),
         desktop: (
-          <div className={"h-24 fixed top-0 left-0 right-0 z-10"}>
-            <DesktopHeader {...props as IHeader}/>
-          </div>
+          <DesktopHeader {...props as IHeader}/>
         )
       }, device)}
     </>

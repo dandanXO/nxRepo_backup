@@ -103,30 +103,33 @@ export const PageTemplate = ({
   const DrawerWidth = 248;
   return (
     <BaseStyledPageTemplate>
-      <Header
-        className={"fixed top-0 left-0 right-0 w-full z-[1001]"}
-        // NOTE: Login
-        isLogin={isLogin}
-        onClickUserLoginStatusDrawer={() => {
-          // setOpenNonMobileUserLoginStatusDrawer(true);
-          showLoginModal(true)
-        }}
-        onClickToPopupUserInfoStatusPopover={() => {
-          setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
-        }}
-        onClickToChangeLogoutPopover={(display: boolean) => {
-          setOpenLogoutPopover(display);
-        }}
-        openLogoutPopover={isShowMobileLogoutModal}
-        // NOTE: User Info
-        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
-        // NOTE: Notification
-        onClickToOpenNotificationDrawer={() => {
-          setOpenDesktopNotificationDrawer(true)
-        }}
-        // NOTE: Download
-        onClickToDownload={onClickToDownload}
-      />
+
+      <div className={"fixed top-0 left-0 right-0 w-full z-[1001]"}>
+        <Header
+          className={""}
+          // NOTE: Login
+          isLogin={isLogin}
+          onClickUserLoginStatusDrawer={() => {
+            // setOpenNonMobileUserLoginStatusDrawer(true);
+            showLoginModal(true)
+          }}
+          onClickToPopupUserInfoStatusPopover={() => {
+            setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
+          }}
+          onClickToChangeLogoutPopover={(display: boolean) => {
+            setOpenLogoutPopover(display);
+          }}
+          openLogoutPopover={isShowMobileLogoutModal}
+          // NOTE: User Info
+          openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
+          // NOTE: Notification
+          onClickToOpenNotificationDrawer={() => {
+            setOpenDesktopNotificationDrawer(true)
+          }}
+          // NOTE: Download
+          onClickToDownload={onClickToDownload}
+        />
+      </div>
 
       <div className={""}>
         {isShowDesktopMenuDrawer && (

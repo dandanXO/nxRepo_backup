@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import cx from "classnames";
+import {twMerge} from "tailwind-merge";
 import React, {useState} from "react";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {useDispatch, useSelector} from "react-redux";
@@ -35,9 +36,10 @@ export const DesktopHeader = (props: IHeader) => {
 
   return (
     <header
-      className={cx("h-[72px]",
+      className={twMerge("h-[72px]",
         "bg-[var(--primary-variant)]",
-        "flex flex-row justify-between items-center relative",
+        "flex flex-row justify-between items-center",
+        props.className
       )}
     >
       <div
