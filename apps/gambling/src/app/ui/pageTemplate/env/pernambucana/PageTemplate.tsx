@@ -7,7 +7,7 @@ import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
 import {Footer} from "../../footer/env/coco/Footer";
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../../components/Toolbox";
+import {Toolbox} from "../../Toolbox";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";

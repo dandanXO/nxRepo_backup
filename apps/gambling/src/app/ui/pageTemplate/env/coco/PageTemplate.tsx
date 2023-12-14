@@ -6,7 +6,7 @@ import {ThreeDots} from "react-loading-icons";
 import {Footer} from "../../footer/env/coco/Footer";
 
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../../components/Toolbox";
+import {Toolbox} from "../../Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";

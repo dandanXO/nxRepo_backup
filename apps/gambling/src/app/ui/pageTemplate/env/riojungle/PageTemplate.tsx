@@ -6,7 +6,7 @@ import React from "react";
 
 import {Footer} from "../../footer";
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../../components/Toolbox";
+import {Toolbox} from "../../Toolbox";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {BaseLoadingOverlay} from "../../base/BaseLoadingOverlay";
 import {useSelector} from "react-redux";

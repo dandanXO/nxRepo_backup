@@ -3,14 +3,16 @@ import React from "react";
 import useBreakpoint from "../hooks/useBreakpoint";
 import styled from "styled-components";
 import {renderByPlatform} from "../utils/renderByPlatform";
+
 import {ToolButton as PToolButton} from "../components/Buttons/env/pernambucana/ToolButton"
 import {ToolButton as WToolButton} from "../components/Buttons/env/wild/ToolButton"
 import {ToolButton as CToolButton} from "../components/Buttons/env/coco/ToolButton"
+
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reduxStore";
 import { TelegramMobileModal } from "../modals/TelegramMobileModal";
 import { appSlice } from "../../reduxStore/appSlice";
-import {TShowToolboxConfig} from "../pageTemplate/base/types";
+import {TShowToolboxConfig} from "./base/types";
 
 
 const defaultFixedToolStyle = {
