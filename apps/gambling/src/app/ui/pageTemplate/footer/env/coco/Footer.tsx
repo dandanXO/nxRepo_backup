@@ -8,13 +8,8 @@ import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
 import {LoadingLogo} from "../../../../components/Logos/LoadingLogo"
 import {FooterLogo} from "../../../../components/Logos/FooterLogo";
+import {IFooter} from "../../index";
 
-export type IFooter = {
-  // showFooter?: boolean;
-  showTabbar?: boolean;
-  showMobileFooter?: boolean;
-  showDesktopFooter?: boolean;
-}
 
 export const Footer = (props: IFooter) => {
   const {isMobile} = useBreakpoint();
