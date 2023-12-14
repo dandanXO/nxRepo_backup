@@ -1,5 +1,5 @@
 import cx from "classnames";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 
 export const DepositNoticeSection = () => {
   const {isMobile} = useBreakpoint();

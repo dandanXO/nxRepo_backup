@@ -2,12 +2,13 @@ import {BackNavigation} from "../../../../components/BackNavigation/BackNavigati
 import {TabItem, Tabs} from "../../../../components/TabItem/TabItem";
 import {TotalSectionContainer} from "../../TotalSectionContainer";
 import {tcx} from "../../../../utils/tcx";
-import {DepositPanel} from "../../DepositPanel";
+import {DepositPanel} from "../../tabsContent/deposit/DepositPanel";
 import {WithdrawPanel} from "../../WithdrawPanel";
 import {RecordPanel} from "../../RecordPanel";
 import React from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";
+import { GetRechargeResponseOption, RechargeResponseConfig ,GetRechargeResponse} from "apps/gambling/src/app/external/RechargeInfoGetEndpoint";
 
 export type TotalSectionType = 'total' | 'deposite' | 'promotion'
 export interface ITotalSectionValues {
@@ -16,6 +17,12 @@ export interface ITotalSectionValues {
     retrievable: number;
   };
 }
+
+export interface IRechargeData{
+  "config": RechargeResponseConfig[],
+  "options": GetRechargeResponseOption;
+}
+
 export type IWalletPage = {
   onClickToIndex: () => void;
   panelMode: IPanelType;
@@ -29,7 +36,7 @@ export type IWalletPage = {
 }
 export const WalletPage = (props: IWalletPage) => {
   const { isMobile } = useBreakpoint();
-
+console.log(props?.rechargeData)
   return (
     <>
       {isMobile && (
@@ -76,7 +83,7 @@ export const WalletPage = (props: IWalletPage) => {
         )}>
 
           {props.panelMode === "deposit" ? (
-            <DepositPanel data={props.rechargeData?.data} />
+            <DepositPanel data={props?.rechargeData?.data} />
           ) : props.panelMode === "withdraw" ? (
             <WithdrawPanel onClickToWithdrawRecord={() => {
               props.setPanelMode("record");

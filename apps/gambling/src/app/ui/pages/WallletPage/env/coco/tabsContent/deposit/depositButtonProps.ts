@@ -1,4 +1,4 @@
-import { formatLocaleMoney } from "../../../../utils/format";
+import { formatLocaleMoney } from "../../../../../../utils/format";
 
 type IdepositButtonProps = {
   rechargeValue: number;

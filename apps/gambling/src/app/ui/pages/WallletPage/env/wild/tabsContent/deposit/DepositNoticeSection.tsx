@@ -1,11 +1,11 @@
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 import cx from "classnames";
 
 export const DepositNoticeSection = () => {
   const {isMobile} = useBreakpoint();
 
   return (
-    <div className={cx("text-[var(--secondary-assistant)] font-[Heebo]  text-left my-3.5 md:my-8")}>
+    <div className={cx("text-[#ffba00] font-[Heebo]  text-left my-5")}>
       {
         isMobile
           ? (<p className=" text-xs leading-tight">

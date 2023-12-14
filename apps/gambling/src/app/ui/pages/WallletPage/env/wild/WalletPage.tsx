@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { LeftOutlined } from "@ant-design/icons";
-import { DepositPanel } from "../../DepositPanel";
+import { DepositPanel } from "../../tabsContent/deposit/DepositPanel";
 import { WithdrawPanel } from "../../WithdrawPanel";
 import { RecordPanel } from "../../RecordPanel";
 import { useGetRechargeMutation } from "../../../../../external";
