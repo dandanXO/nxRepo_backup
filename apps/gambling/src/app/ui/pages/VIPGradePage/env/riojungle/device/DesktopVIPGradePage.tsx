@@ -1,6 +1,6 @@
 import { IVIPGradePageProps } from "../../../index";
 import VIPStatue from '../images/vip_statue.png'
-import VIPIcon from '../images/vip-icon.png'
+
 import CaretDown from '../images/CaretDown.png';
 import CaretUP from '../images/CaretUp.png';
 import { VerticalVIPButtonList } from "../components/VerticalVIPButtonList";
@@ -21,6 +21,8 @@ export const DesktopVIPGradePage = ({
   const [selectedVIP, setSelectedVIP] = useState(currentLevel);
 
   const vipWrapperRef = useRef<HTMLDivElement | null>(null);
+
+  const VIPIcon = require(`../images/vip${selectedVIP}_pic.png`);
 
   useEffect(()=>{
     setSelectedVIP(currentLevel);
@@ -64,10 +66,7 @@ export const DesktopVIPGradePage = ({
           <div className='w-[85%] pt-10 pl-10 pr-5 pb-9 flex items-center gap-5'>
             {/*VIP Icon*/}
             <div className='w-[218px] flex-shrink-0 h-full flex items-center'>
-              <div className='relative'>
-                <img src={VIPIcon} alt="vipIcon" />
-                <div className='text-white font-bold absolute bottom-[20px] left-[50%] translate-x-[-50%] text-3xl'>VIP{selectedVIP}</div>
-              </div>
+              <img src={VIPIcon} alt="vipIcon" />
             </div>
 
             {/*VIP進度條*/}
