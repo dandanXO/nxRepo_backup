@@ -6,6 +6,7 @@ import slots from "../../env/coco/index-tab-slots.png"
 import vivo from "../../env/coco/index-tab-vivo.png"
 import viver from "../../env/coco/index-tab-viver.png"
 import favorite from "../../env/coco/index-tab-favorite.png"
+import fishing from "../../env/coco/index-tab-fishing.png";
 import recent from "../../env/coco/index-tab-recent.png"
 import useBreakpoint from "../../hooks/useBreakpoint";
 import styled from "styled-components";
@@ -44,18 +45,28 @@ export const IndexTabs = ({
   // const icons = {
   //   "Todos":
   // }
-  const icons = [
-    todos,
-    slots,
-    viver,
-    vivo,
-    todos,
-    todos,
-    todos,
-    todos,
-    favorite,
-    recent
-  ]
+  // const icons = [
+  //   todos,
+  //   slots,
+  //   viver,
+  //   vivo,
+  //   todos,
+  //   todos,
+  //   todos,
+  //   todos,
+  //   favorite,
+  //   recent
+  // ]
+
+  const iconsMap : { [key: string]: string} = {
+    "Todos": todos,
+    "Viver": viver,
+    "Vivo": vivo,
+    "Slots": slots,
+    "Fishing": fishing,
+    "Favoritos": favorite
+  }
+
   const {isMobile} = useBreakpoint();
   return (
       <Tabs className={cx("game-type-tab-list")}>
@@ -75,7 +86,7 @@ export const IndexTabs = ({
                   setViewType('')
                 }}
               >
-                {!hideIcon && <img className="w-[20px] h-[20px] mr-1" src={icons[index] ? icons[index] : icons[0]} />}
+                {!hideIcon && <img className="w-[20px] h-[20px] mr-1" src={iconsMap[tab] ? iconsMap[tab] : iconsMap['Todos']} />}
                 <span>{tab}</span>
               </IndexImageTab>
             )
