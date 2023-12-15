@@ -1354,5 +1354,6 @@
   "riskFee": "Risk Fee",
   "world_tone": "Worldtone",
   "refresh.balance": "refresh",
-  "current.balance": "current balance"
+  "current.balance": "current balance",
+  "detail.user.company.name": "Company Name"
 }

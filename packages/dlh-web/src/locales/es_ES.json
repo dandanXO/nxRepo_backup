@@ -1343,5 +1343,6 @@
   "riskFee": "Tarifa de riesgo",
   "world_tone": "Worldtone",
   "refresh.balance": "Actualizar",
-  "current.balance": "Saldo actual"
+  "current.balance": "Saldo actual",
+  "detail.user.company.name": "Nombre de la Empresa"
 }

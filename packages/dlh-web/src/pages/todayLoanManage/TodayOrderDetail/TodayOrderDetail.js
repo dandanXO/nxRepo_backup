@@ -367,6 +367,8 @@ class OrderDetail extends Component{
                                     <Paragraph style={{ width: '150px', display: 'inline-block' }} copyable={{ text: userInfo.userSource }} ellipsis={true}>{userInfo.userSource}</Paragraph>
                                 </Tooltip> : ''}
                         </Col>
+
+                        {conf.country !== 'India' && <Col className={styles.col} lg={12} xl={8}><span className={styles.title}><FormattedMessage id="detail.user.company.name" />：</span><span>{userInfo.companyName || ''}</span></Col>}
                     </Row>
                 </Card>
 

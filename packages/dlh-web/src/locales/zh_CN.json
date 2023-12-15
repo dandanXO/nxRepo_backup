@@ -1364,5 +1364,6 @@
   "riskFee": "风控余额",
   "world_tone": "Worldtone",
   "refresh.balance": "最新余额",
-  "current.balance": "当前余额"
+  "current.balance": "当前余额",
+  "detail.user.company.name": "公司名称"
 }
