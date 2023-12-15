@@ -1,8 +1,7 @@
-import cx from 'classnames';
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 
-import {GetSignInConfigResponse, useGetSignInConfigMutation} from '../../../external';
+import {useGetSignInConfigMutation} from '../../../external';
 import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
@@ -11,9 +10,9 @@ import {environment} from "../../../../environments/environment";
 import {tcx} from "../../utils/tcx";
 
 import {renderByPlatform} from "../../utils/renderByPlatform";
-import PernambucanaDailySignInPage from "./env/pernambucana/DailySignInPage";
 import WDailySignInPage from "./env/wild/DailySignInPage";
 import CocoDailySignInPage from "./env/coco/DailySignInPage";
+import RioDailySignInPage from "./env/riojungle"
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 const Daily = styled.div<{
@@ -135,8 +134,6 @@ export const DailySignInPage = () => {
     }
   }, [signInConfig?.data?.vipLevel ])
 
-  const { isMobile } = useBreakpoint();
-
   const onClickToSignIn = () => {
     triggerGetSignInConfig({
       onlyGetSignInConfig: false,
@@ -177,6 +174,9 @@ export const DailySignInPage = () => {
         setCurrentSelectedLevel={setCurrentSelectedLevel}
       />
     ),
+    "riojungle777bet": (
+      <RioDailySignInPage />
+    )
   }, (
     <CocoDailySignInPage
       onClickToSignIn={onClickToSignIn}
