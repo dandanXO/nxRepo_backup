@@ -2,8 +2,10 @@ import { IVIPGradePageProps } from "../../../index";
 import VIPStatue from '../images/vip_statue.png'
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { ProgressBar } from "../../../../../components/ProgressBar";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { VIPInfoTab } from "../components/VIPInfoTab";
+import { VIPButtonList } from "../components/VIPButtonList";
+import { VIP0Text } from "../components/VIP0Text";
 
 
 
@@ -16,21 +18,44 @@ export const MobileVIPGradePage = ({
 }: IVIPGradePageProps) => {
   const [selectedVIP, setSelectedVIP] = useState(currentLevel);
 
+  const vipWrapperRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(()=>{
     setSelectedVIP(currentLevel);
   }, [currentLevel])
+
+  useEffect(()=> {
+    const currentItem = vipWrapperRef.current?.children[selectedVIP] as HTMLElement | undefined
+    if(currentItem) {
+      vipWrapperRef.current?.scrollTo({
+        left: currentItem.offsetLeft  - ((vipWrapperRef.current?.offsetWidth || 0) - currentItem.offsetWidth ) / 2,
+        behavior: 'smooth'
+      })
+    }
+  }, [selectedVIP])
 
   return (
     <div className='px-4 w-full flex flex-col items-centers'>
       <img src={VIPStatue} alt="statue" className='mt-4' />
 
+      <div
+        className='w-full mt-4 overflow-x-scroll vip-tab-items flex gap-2 items-center relative'
+        ref={vipWrapperRef}
+      >
+        <VIPButtonList
+          selectedVIP={selectedVIP}
+          currentVIP={currentLevel}
+          onSelect={(vip)=> setSelectedVIP(vip)}
+        />
+      </div>
+
       {/*VIP 進度卡*/}
-      <div className='w-full h-[148px] flex rounded-lg bg-[#333333] mt-3 p-2'>
+      <div className='w-full h-fit flex rounded-lg bg-[#333333] mt-3 p-2'>
         {/*VIP進度條*/}
         {
           selectedVIP !== 0 && (
             <div className='w-full h-full flex flex-col justify-center'>
-              <div className='w-full flex justify-between items-end text-sm font-medium text-[#808080]'>
+              <div className='w-full flex justify-between gap-2 items-end text-sm font-medium text-[#808080]'>
                 <div className='flex-1'>Valor total da recarga</div>
                 <div>
                   <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.vip_score || 0) / 100)}</span>
@@ -45,7 +70,7 @@ export const MobileVIPGradePage = ({
                 }
                 progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
               />
-              <div className='w-full flex justify-between items-end text-sm font-medium text-[#808080] mt-2'>
+              <div className='w-full flex justify-between gap-2 items-end text-sm font-medium text-[#808080] mt-2'>
                 <div className='flex-1'>Número total de apostas</div>
                 <div>
                   <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.flow || 0) / 100)}</span>
@@ -63,6 +88,12 @@ export const MobileVIPGradePage = ({
             </div>
           )
         }
+
+        {/*VIP 0提示文字*/}
+        {
+          selectedVIP === 0 && <VIP0Text className='text-sm' />
+        }
+
       </div>
 
       {/*VIP INFO TAB*/}
