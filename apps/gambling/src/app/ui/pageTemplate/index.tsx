@@ -462,7 +462,7 @@ export const PageTemplate = (props: IPage) => {
       }
 
       <>
-        {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut/>}
+        {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
         {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
       </>
 
