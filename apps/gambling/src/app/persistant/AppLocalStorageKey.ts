@@ -21,4 +21,7 @@ export enum AppLocalStorageKey {
   telegramService = "telegramService",
   telegramManager = "telegramManager",
   downloadUrl = "downloadUrl",
+
+  // addToMobileShortcut
+  hideAddToMobileShortcut = "hideAddToMobileShortcut",
 }

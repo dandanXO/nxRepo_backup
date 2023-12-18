@@ -26,4 +26,12 @@ export const AppEnvironment = {
     }
     return `${envMachine}:${environment.platformName}`;
   },
+  isAndroid: function () {
+    const ua = navigator.userAgent.toLowerCase();
+    const isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+    return isAndroid;
+  },
+  isIOS: function () {
+    return !this.isAndroid();
+  },
 };

@@ -17,7 +17,7 @@ const queryStringParams = (queryString:IQueryStringProps) => {
       .map(([key, value]) => `${key}=${value}`)
       .join('&')}`
     : '';
-} 
+}
 
 
 export const usePageNavigate = () => {
@@ -41,7 +41,7 @@ export const usePageNavigate = () => {
     }
   }
   const onClickToWallet = (queryString?:IQueryStringProps) => {
-  
+
     if (!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
@@ -141,6 +141,11 @@ export const usePageNavigate = () => {
     }
   }
 
+  const downloadUrl= AppLocalStorage.getItem(AppLocalStorageKey.downloadUrl) || ""
+  const onClickToOpenDownload = () => {
+    if(downloadUrl !== null) window.open(downloadUrl);
+  }
+
   return {
     onClickToIndex,
     onClickToSlot,
@@ -156,6 +161,8 @@ export const usePageNavigate = () => {
     onClickToGameRecord,
     onClickToSetting,
     onClickToPrivacyAgreement,
-    onClickGameItem
+    onClickGameItem,
+    onClickToOpenDownload,
+    downloadUrl,
   }
 }

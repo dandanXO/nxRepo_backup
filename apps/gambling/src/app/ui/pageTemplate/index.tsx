@@ -32,7 +32,10 @@ import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 import {DepositAdvertisementModal} from "../modals/DepositAdvertisementModal";
 import {MaintenanceModal} from "../modals/MaintenanceModal";
-import { usePageNavigate } from "../hooks/usePageNavigate";
+import {usePageNavigate} from "../hooks/usePageNavigate";
+import {AddToMobileShortcut} from "../popovers/AddToMobileShortcut";
+import {useLocalStorage} from "usehooks-ts";
+import {IOSDownloadModal} from "../modals/IOSDownloadModal";
 
 
 console.log("[APP] environment", environment);
@@ -235,6 +238,29 @@ export const PageTemplate = (props: IPage) => {
     window.open(telegramGroupUrl,'_blank')
   }
 
+  const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
+
+  // useEffect(() => {
+  //   window.addEventListener('storage', function(event){
+  //     // if (event.storageArea === localStorage) {
+  //     //   It's local storage
+  //       console.log("debug.event", event)
+  //     // }
+  //   }, false);
+  // }, [])
+
+  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
+
+  useEffect(() => {
+    const handleStorage = () => {
+      // Place for a function responsible for
+      // pulling and displaying local storage data
+      console.log("debug")
+    }
+
+    window.addEventListener('storage', handleStorage)
+    return () => window.removeEventListener('storage', handleStorage)
+  }, [])
 
   return (
     <>
@@ -434,6 +460,12 @@ export const PageTemplate = (props: IPage) => {
           />
         )
       }
+
+      <>
+        {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut/>}
+        {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
+      </>
+
       {contextHolder}
 
     </>
