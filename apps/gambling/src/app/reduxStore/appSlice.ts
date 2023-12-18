@@ -25,6 +25,7 @@ export type InitialState = {
   isShowInviteBonusModal: boolean;
   isShowMaintenanceModal: boolean;
   isShowTelegramMobileModal: boolean;
+  isShowiOSDownloadPopover: boolean;
   messageCount: number;
   vip_level: number;
   globalMessage: null | string;
@@ -84,6 +85,7 @@ const initialState: InitialState = {
   isShowInviteBonusModal: false,
   isShowMaintenanceModal: false,
   isShowTelegramMobileModal: false,
+  isShowiOSDownloadPopover: false,
   messageCount: 0,
   withdrawBegin: "00:00",
   withdrawEnd: "00:00",
@@ -160,6 +162,9 @@ export const appSlice = createSlice({
       if (Number(action.payload.flag) === 1) {
         state.isShowMaintenanceModal = true
       }
+    },
+    setShowiOSDownloadPopover: (state: InitialState, action: PayloadAction<boolean>) => {
+     state.isShowiOSDownloadPopover = action.payload;
     },
   },
 });

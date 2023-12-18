@@ -28,7 +28,8 @@
 
     "serve:griojungle777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_DEV_SERVER_PROXY=coco777bet pnpm nx serve gambling -c=dev-riojungle777bet-v1",
     "build:griojungle777bet": "cross-env NODE_ENV=production NODE_DEV_SERVER_PROXY=coco777bet pnpm nx run-many --target=build --projects=gambling --configuration=prod-riojungle777bet-v1 --verbose",
-
+    "serve:gnatal777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-coco777bet-v6",
+    "build:gnatal777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v6 --verbose",
 
 
     "serve:min": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve:in mobile -c=development",
@@ -163,6 +164,7 @@
     "tslib": "2.3.0",
     "umi-request": "1.4.0",
     "use-error-boundary": "^2.0.6",
+    "usehooks-ts": "^2.9.1",
     "uuid": "8.3.2",
     "xstate": "^4.38.2",
     "zod": "3.18.0"

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {ReactDOM, useEffect, useRef, useState} from "react";
 import styled from 'styled-components';
 import {LeftOutlined} from "@ant-design/icons";
 
@@ -133,6 +133,19 @@ export const GamePage = () => {
     // const onIframeLoad = () => {
     //   dispatch(appSlice.actions.setIsUILoading(false));
     // }
+
+    const htmlRef = useRef();
+    useEffect(() => {
+      if (data?.startType === "HTML" && data.htmlContent) {
+        if(htmlRef && htmlRef.current) {
+          const iframe = htmlRef.current as HTMLIFrameElement;
+          if(iframe?.contentWindow && iframe?.contentWindow?.document) {
+            iframe.contentWindow.document.write(data.htmlContent);
+          }
+        }
+      }
+    }, [htmlRef.current, data?.htmlContent])
+
     return (
         <>
           {
@@ -152,13 +165,20 @@ export const GamePage = () => {
             )
           }
 
-          {data !== undefined && (
-            // <iframe className={`w-full h-full`} src={data.link} />
+          {data !== undefined && data.startType === "LINK" && (
             <iframe
               className={`w-[100vw] h-[100%]`}
               src={data.link}
               // onLoadStart={onIframeLoadStart}
               // onLoad={onIframeLoad}
+            />
+          )}
+
+          {data !== undefined && data.startType === "HTML" && data.htmlContent && (
+            <iframe
+              id="game-iframe"
+              ref={htmlRef as any}
+              className={`w-full h-full`}
             />
           )}
         </>

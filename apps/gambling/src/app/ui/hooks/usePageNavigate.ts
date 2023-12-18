@@ -167,6 +167,12 @@ export const usePageNavigate = () => {
     window.open(telegramGroupUrl,'_blank')
   }
 
+
+  const downloadUrl= AppLocalStorage.getItem(AppLocalStorageKey.downloadUrl) || ""
+  const onClickToOpenDownload = () => {
+    if(downloadUrl !== null) window.open(downloadUrl);
+  }
+
   return {
     onClickToIndex,
     onClickToSlot,
@@ -183,6 +189,8 @@ export const usePageNavigate = () => {
     onClickToSetting,
     onClickToPrivacyAgreement,
     onClickGameItem,
+    onClickToOpenDownload,
+    downloadUrl,
     // NOTE: window
     onClickToOpenTelegramService,
     onClickToOpenTelegramManager,

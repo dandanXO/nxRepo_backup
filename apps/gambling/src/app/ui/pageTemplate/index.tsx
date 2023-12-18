@@ -24,7 +24,10 @@ import {PageTemplate as RiojunglePageTemplate} from "./env/riojungle/PageTemplat
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
 import {PageTemplateLayers} from "../pageTemplateLayers";
 import {IPage} from "./types/IPage";
-
+import {AddToMobileShortcut} from "../popovers/AddToMobileShortcut";
+import {useLocalStorage} from "usehooks-ts";
+import {IOSDownloadModal} from "../modals/IOSDownloadModal";
+import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 
 console.log("[APP] environment", environment);
 
@@ -191,6 +194,10 @@ export const PageTemplate = (props: IPage) => {
 
   const location = useLocation();
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
+
+  // NOTE: hideAddToMobileShortcut, isShowiOSDownloadPopover
+  const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
+  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
 
   return (
     <>
@@ -386,6 +393,11 @@ export const PageTemplate = (props: IPage) => {
         isShowMaintenanceModal={isShowMaintenanceModal}
         onClickToOpenTelegramService={onClickToOpenTelegramService}
       />
+
+      <>
+        {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut/>}
+        {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
+      </>
 
       {contextHolder}
 

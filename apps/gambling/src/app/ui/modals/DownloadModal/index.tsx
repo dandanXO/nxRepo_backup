@@ -6,6 +6,7 @@ import {environment} from "../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {CloseICON} from "../../components/Icons/CloseICON";
 import cx from "classnames";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
 
 export type IInitialChargeModal = {
   close: () => void;
@@ -43,15 +44,13 @@ export const DownloadModal = (props: IInitialChargeModal) => {
       refetchOnReconnect: false,
     });
 
-  const downloadUrl= AppLocalStorage.getItem(AppLocalStorageKey.downloadUrl)
-
+  const {onClickToOpenDownload, downloadUrl} = usePageNavigate();
 
   const handleDownload = (device: string) => {
     // triggerDownload({
     //   packageName: environment.appPackageName,
     // })
-    if(downloadUrl !== null) window.open(downloadUrl);
-
+    onClickToOpenDownload();
   }
 
 
@@ -92,7 +91,7 @@ export const DownloadModal = (props: IInitialChargeModal) => {
         </div>
 
         <section className={""}>
-          <QRCode className="w-full px-4 mb-2" value={String(downloadUrl)} />
+          <QRCode className="w-full px-4 mb-2" value={downloadUrl} />
           {/* <img className={"w-[100%] h-[100%]"} src={"https://cdn.britannica.com/17/155017-050-9AC96FC8/Example-QR-code.jpg"}/> */}
 
           <div className={""}>

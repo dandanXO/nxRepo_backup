@@ -10,10 +10,15 @@ type StartGameRequest = {
 }
 
 type StartGameResponse = {
-  "link": string;
-  "html"?: any;
+  // "accountId"?: null;
   "code": number;
-}
+  // "error"?: null,
+  "htmlContent"?: string,
+  "link"?: string;
+  "html"?: any;
+  "startType": "HTML" | "LINK";
+  // "status"?: string;
+};
 
 export const StartGameEndpoint = (builder: ExternelEndpoint) => builder.mutation<StartGameResponse, StartGameRequest>({
   query: (requestData: StartGameRequest) => {
