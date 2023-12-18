@@ -146,15 +146,6 @@ export const GamePage = () => {
       }
     }, [htmlRef.current, data?.htmlContent])
 
-
-    // useEffect(() => {
-    //   if (data?.startType === "HTML" && data.htmlContent) {
-    //     const container = ((document.getElementById('game-iframe') as any)).contentWindow.document as any;
-    //     container.write(data.htmlContent);
-    //   }
-    // }, [data?.htmlContent])
-
-
     return (
         <>
           {
