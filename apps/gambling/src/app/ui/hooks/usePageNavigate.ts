@@ -80,6 +80,15 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.DailySignInPage)
     }
   }
+
+  const onCLickToDailySignInRecord = () => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(PageOrModalPathEnum.DailySingInRecordPage)
+    }
+  }
+
   const onClickToTelegram = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
@@ -182,6 +191,7 @@ export const usePageNavigate = () => {
     onClickToInvite,
     onClickToVipGrade,
     onClickToCheckInDaily,
+    onCLickToDailySignInRecord,
     onClickToTelegram,
     onClickToProfile,
     onClickToSearch,

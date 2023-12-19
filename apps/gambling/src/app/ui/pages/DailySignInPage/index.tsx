@@ -14,6 +14,7 @@ import WDailySignInPage from "./env/wild/DailySignInPage";
 import CocoDailySignInPage from "./env/coco/DailySignInPage";
 import RioDailySignInPage from "./env/riojungle"
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
+import { notification } from "antd";
 
 const Daily = styled.div<{
   disable: boolean;
@@ -135,13 +136,24 @@ export const DailySignInPage = () => {
   }, [signInConfig?.data?.vipLevel ])
 
   const onClickToSignIn = () => {
-    triggerGetSignInConfig({
+    return triggerGetSignInConfig({
       onlyGetSignInConfig: false,
       token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
-    }).then(() => {
-      // done
-    })
+    }).then((result) => {
+        if('data' in result){
+          if(result.data.code === 200) {
+            return true
+          }
+          else {
+            return false
+          }
+        }else {
+          return false
+        }
+      }
+    ).catch(()=> false)
   }
+
   useEffect(() => {
     triggerGetSignInConfig({
       onlyGetSignInConfig: true,
@@ -175,7 +187,14 @@ export const DailySignInPage = () => {
       />
     ),
     "riojungle777bet": (
-      <RioDailySignInPage />
+      <RioDailySignInPage
+        onClickToSignIn={onClickToSignIn}
+        currentVIP={signInConfig?.data?.vipLevel || 0}
+        signInConfig={signInConfig?.data?.signInConfig || []}
+        signInAllConfig={signInConfig?.data?.signInAllConfig || []}
+        todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
+        signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
+      />
     )
   }, (
     <CocoDailySignInPage
