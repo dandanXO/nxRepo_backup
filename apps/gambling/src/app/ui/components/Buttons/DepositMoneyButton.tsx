@@ -37,7 +37,7 @@ export const DepositMoneyButton = (props: IDepositButton) => {
 
   return (
     <button
-      className={cx(`flex flex-col lg:flex-row font-bold  mb-2 mx-1 basis-[30%] max-w-[33%] flex-1 overflow-hidden`,
+      className={cx(`flex flex-col lg:flex-row font-bold flex-1 mb-2 overflow-hidden w-full`,
         " min-h-[55px] whitespace-nowrap",
         {
           [bgStyle]: !isActive,

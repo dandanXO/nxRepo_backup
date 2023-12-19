@@ -43,19 +43,21 @@ export const DepositPanel = (props: IDepositPanelProps) => {
         {isLoaded && (
           <DepositInput {...props.depositInputProps} />
         )}
-        <div className={tcx("flex flex-1 -ml-1 -mr-1 flex-row flex-wrap basis-[100%] justify-start items-stretch", [`mb-20 `, !isMobile])}>
+        <div className={tcx("flex flex-1 flex-row flex-wrap basis-[100%] justify-start items-stretch", [`mb-20 `, !isMobile])}>
           {props?.depositButtonsOptions?.map((options: any, index: number) => {
             const { rechargeValue, isShowRate, config, rate } = options;
             return (
-              <DepositMoneyButton
-                key={index}
-                onClick={() => {
-                  props.handleClickDepositMoneyButton(rechargeValue, index, config)
-                }}
-                isActive={props.selectedIndex === index}
-                isShowRate={isShowRate}
-                {...depositButtonProps({ rechargeValue, isMobile, rate })}
-              />
+              <div className={`basis-[30%] max-w-[33%] flex-1 ${index % 3 === 1 ? 'mx-2' : ''}`}>
+                <DepositMoneyButton
+                  key={index}
+                  onClick={() => {
+                    props.handleClickDepositMoneyButton(rechargeValue, index, config)
+                  }}
+                  isActive={props.selectedIndex === index}
+                  isShowRate={isShowRate}
+                  {...depositButtonProps({ rechargeValue, isMobile, rate })}
+                />
+              </div>
             )
           })}
           {
@@ -64,7 +66,7 @@ export const DepositPanel = (props: IDepositPanelProps) => {
               return (
                 <div
                   key={index}
-                  className={cx('basis-[30%] flex-1 mx-1')}
+                  className={cx('basis-[30%] max-w-[33%] flex-1')}
                 ></div>
               )
             })
