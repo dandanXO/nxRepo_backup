@@ -10,10 +10,11 @@ import {INotificationDrawer} from "../../types/INotificationDrawer";
 
 import {NotificationContainer} from "./NotificationContainer";
 import {useNotificationDrawer} from "../../hooks/useNotificationDrawer";
+import { NotificationElement } from "../../../../components/NotificationElement";
 
 export const NotificationDrawer = ({
-                                     closeDrawer,
-                                   }: INotificationDrawer) => {
+  closeDrawer,
+}: INotificationDrawer) => {
   const {
     messages,
     expandableIndex,
@@ -36,53 +37,71 @@ export const NotificationDrawer = ({
           Centro de Notificação
         </div>
 
-        <div className={'overflow-y-auto text-base text-white'}>
-          {messages &&
+        <div className={'overflow-y-auto text-white text-xs lg:text-sm'}>
+          {
             messages.map((message, index) => (
-              <NotificationItemContainer
+              <NotificationElement
                 key={message.id}
-                expand={expandableIndex === index}
-                first={
-                  index === 0 ||
-                  (expandableIndex !== null && index === expandableIndex + 1)
-                }
-                last={
-                  index === messages.length - 1 ||
-                  (expandableIndex !== null && index === expandableIndex - 1)
-                }
-                onClick={(event) => {
-                  handleClick(event, index, message.is_read === 0, message.id);
-                }}
-              >
-                <NotificationItemTitle
-                  className="item flex flex-row items-center"
-                  expand={expandableIndex === index}
-                  last={
-                    index === messages.length - 1 ||
-                    (expandableIndex !== null && index === expandableIndex - 1)
-                  }
-                >
-                  <div className='flex items-center w-2/3'>
-                    {message.is_read === 0 && <NotificationItemRedDot />}
-                    <div className="text-ellipsis overflow-hidden">{message.title}</div>
-                  </div>
+                isRead={message.is_read === 1}
+                title={message.title}
+                time={message.created_at}
+                content={message.content}
+                expanded={expandableIndex === index}
+                isFirst={index === 0}
+                isLast={index === messages.length - 1}
+                isBeforeExpanded={expandableIndex !== null && index === expandableIndex - 1}
+                isAfterExpanded={expandableIndex !== null && index === expandableIndex + 1}
+                onClick={(event: React.MouseEvent<HTMLDivElement>) => handleClick(event, index, message.is_read === 0, message.id)}
+              />
+            ))
+          }
 
-                  <div className='flex items-center w-1/3'>
-                    <div className={'date mr-2'}>{message.created_at}</div>
-                    {expandableIndex !== index ? (
-                      <DownOutlined style={{ fontSize: '14px' }} />
-                    ) : (
-                      <UpOutlined style={{ fontSize: '14px' }} />
-                    )}
-                  </div>
-                </NotificationItemTitle>
-                {expandableIndex === index && (
-                  <NotificationItemExpandable>
-                    {message.content}
-                  </NotificationItemExpandable>
-                )}
-              </NotificationItemContainer>
-            ))}
+          {/*{messages &&*/}
+          {/*  messages.map((message, index) => (*/}
+          {/*    <NotificationItemContainer*/}
+          {/*      key={message.id}*/}
+          {/*      expand={expandableIndex === index}*/}
+          {/*      first={*/}
+          {/*        index === 0 ||*/}
+          {/*        (expandableIndex !== null && index === expandableIndex + 1)*/}
+          {/*      }*/}
+          {/*      last={*/}
+          {/*        index === messages.length - 1 ||*/}
+          {/*        (expandableIndex !== null && index === expandableIndex - 1)*/}
+          {/*      }*/}
+          {/*      onClick={(event) => {*/}
+          {/*        handleClick(event, index, message.is_read === 0, message.id);*/}
+          {/*      }}*/}
+          {/*    >*/}
+          {/*      <NotificationItemTitle*/}
+          {/*        className="item flex flex-row items-center"*/}
+          {/*        expand={expandableIndex === index}*/}
+          {/*        last={*/}
+          {/*          index === messages.length - 1 ||*/}
+          {/*          (expandableIndex !== null && index === expandableIndex - 1)*/}
+          {/*        }*/}
+          {/*      >*/}
+          {/*        <div className='flex items-center w-2/3'>*/}
+          {/*          {message.is_read === 0 && <NotificationItemRedDot />}*/}
+          {/*          <div className="text-ellipsis overflow-hidden">{message.title}</div>*/}
+          {/*        </div>*/}
+
+          {/*        <div className='flex items-center w-1/3'>*/}
+          {/*          <div className={'date mr-2'}>{message.created_at}</div>*/}
+          {/*          {expandableIndex !== index ? (*/}
+          {/*            <DownOutlined style={{ fontSize: '14px' }} />*/}
+          {/*          ) : (*/}
+          {/*            <UpOutlined style={{ fontSize: '14px' }} />*/}
+          {/*          )}*/}
+          {/*        </div>*/}
+          {/*      </NotificationItemTitle>*/}
+          {/*      {expandableIndex === index && (*/}
+          {/*        <NotificationItemExpandable>*/}
+          {/*          {message.content}*/}
+          {/*        </NotificationItemExpandable>*/}
+          {/*      )}*/}
+          {/*    </NotificationItemContainer>*/}
+          {/*  ))}*/}
         </div>
       </NotificationContainer>
     </div>
