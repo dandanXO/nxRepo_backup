@@ -18,11 +18,13 @@ import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
 import { MobileInput } from "../../../../components/Inputs/MobileInput";
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
-import { WithdrawPanel as CWithdrawPanel } from '../../env/coco/WithdrawPanel';
-import { WithdrawPanel as PWithdrawPanel } from '../../env/pernambucana/WithdrawPanel'
-import { WithdrawPanel as WWithdrawPanel } from '../../env/wild/WithdrawPanel'
-import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
+import { WithdrawPanel as CWithdrawPanel } from '../../env/coco/tabsContent/withdraw/WithdrawPanel';
+import { WithdrawPanel as PWithdrawPanel } from '../../env/pernambucana/tabsContent/withdraw/WithdrawPanel'
+import { WithdrawPanel as WWithdrawPanel } from '../../env/wild/tabsContent/withdraw/WithdrawPanel';
+import { WithdrawPanel as RWithdrawPanel } from '../../env/riojungle/tabsContent/withdraw/WithdrawPanel';
+
+import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
+import { ButtonPro } from "../../../../components/Buttons/ButtonPro";
 import moment from "moment";
 import { totalReasableSelector } from "../../../../../reduxStore/appSlice";
 import { formatLocaleMoney } from "../../../../utils/format";
@@ -150,14 +152,14 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     const isOutOfRange = Number(value) > Number(withdrawLimitMax) || Number(value) < Number(withdrawLimitMin);
     const isValueError = value === "" || isNaN(Number(value))
     const isNotBaseOn10 = Number(value) % 10
-    const isOverTotalReasableValue = Number(value) > totalReasableValue ;
+    const isOverTotalReasableValue = Number(value) > totalReasableValue;
     const isError = isOutOfRange || isValueError || isNotBaseOn10 || isOverTotalReasableValue;
     // 錯誤訊息 (超過可提取): 可提取金額為0.00 - > O valor que pode ser sacado é 0.00
     // 錯誤訊息 (欄位空白): Valor da retirada (50 - 100)
     const errorMessage =
       isOutOfRange ? `O valor que pode ser sacado é ${formatLocaleMoney(withdrawLimitMin)} - ${formatLocaleMoney(withdrawLimitMax)}` :
         isValueError ? `Valor da retirada (${formatLocaleMoney(withdrawLimitMin)} - ${formatLocaleMoney(withdrawLimitMax)})` :
-          isNotBaseOn10? 'O valor da retirada deve ser em múltiplos de 50. Por exemplo:  50, 100, 1100, 1650, 28650…':
+          isNotBaseOn10 ? 'O valor da retirada deve ser em múltiplos de 50. Por exemplo:  50, 100, 1100, 1650, 28650…' :
             isOverTotalReasableValue ? `O valor que pode ser sacado é ${Number((totalReasableValue / 10).toFixed(0)) * 10}` : ''
 
     setAmountInput({
@@ -347,6 +349,32 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
       ),
       "wild777bet": (
         <WWithdrawPanel
+          vip_level={vip_level}
+          withdrawLimitMin={withdrawLimitMin}
+          withdrawLimitMax={withdrawLimitMax}
+          amountInput={amountInput}
+          setAmountInput={setAmountInput}
+          validateAmount={validateAmount}
+          nameInput={nameInput}
+          setNameInput={setNameInput}
+          validateName={validateName}
+          CPFInput={CPFInput}
+          setCPFInput={setCPFInput}
+          validateCPForCNPJ={validateCPForCNPJ}
+          selectInput={selectInput}
+          setSelectInput={setSelectInput}
+          selectOption={selectOption}
+          setSelectOption={setSelectOption}
+          validateSelectInput={validateSelectInput}
+          tipoPixOptions={tipoPixOptions}
+          onClickToWithdraw={onClickToWithdraw}
+          onClickToVIP={onClickToVIP}
+          onClickToWithdrawRecord={props.onClickToWithdrawRecord}
+          contextHolder={contextHolder}
+          isDuringRestrictTime={isDuringRestrictTime}
+        />
+      ), "riojungle777bet": (
+        <RWithdrawPanel
           vip_level={vip_level}
           withdrawLimitMin={withdrawLimitMin}
           withdrawLimitMax={withdrawLimitMax}
