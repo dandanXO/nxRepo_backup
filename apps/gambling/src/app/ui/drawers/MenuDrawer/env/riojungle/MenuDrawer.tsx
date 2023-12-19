@@ -74,16 +74,13 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <div
-            id="LineRoot"
-            className="w-full h-[1px] bg-gray"
-          />
+          <div className="opacity-50 bg-gradient-to-r from-transparent via-white to-transparent h-px"></div>
         </div>
 
 
         <div className={"w-full flex flex-col px-5"}>
           <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.InvitePage,
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.InvitePage,
           })} onClick={onClickToInvite}>
             <img
               src={icon＿thumbsup}
@@ -97,7 +94,7 @@ export const MenuDrawer = () => {
 
         <div className={"w-full flex flex-col px-5"}>
           <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.VIPGradePage,
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.VIPGradePage,
           })} onClick={onClickToVipGrade}>
             <img
               src={icon＿crownsimple}
@@ -111,7 +108,7 @@ export const MenuDrawer = () => {
 
         <div className={"w-full flex flex-col px-5"}>
           <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.DailySignInPage,
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.DailySignInPage,
           })} onClick={onClickToCheckInDaily}>
             <img
               src={icon＿calendarcheck}
@@ -126,7 +123,7 @@ export const MenuDrawer = () => {
 
         <div className={"w-full flex flex-col px-5"}>
           <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
           })} onClick={onClickToTelegram}>
             <img
               src={icon＿users}
@@ -140,7 +137,7 @@ export const MenuDrawer = () => {
 
         <div className={"w-full flex flex-col px-5"}>
           <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
           })} onClick={onClickToTelegram}>
             <img
               src={icon＿telegramlogo}
@@ -154,7 +151,7 @@ export const MenuDrawer = () => {
 
         <div className={"w-full flex flex-col px-5"}>
           <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
           })} onClick={onClickToTelegram}>
             <img
               src={icon＿telegramlogo}
@@ -167,10 +164,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <div
-            id="LineRoot"
-            className="w-full h-[1px] bg-gray"
-          />
+          <div className={"w-full flex flex-col px-5"}>
+            <div className="opacity-50 bg-gradient-to-r from-transparent via-white to-transparent h-px"></div>
+          </div>
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
