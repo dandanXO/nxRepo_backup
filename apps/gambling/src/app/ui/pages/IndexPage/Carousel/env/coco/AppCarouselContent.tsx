@@ -33,6 +33,8 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
           Prêmio upgrade VIP
           <br/>
           Só esperando você coletar!
+          <br/>
+          VIP0 Pode Retirar
         </CarouselTitleSection>
 
         {isMobile ? (
@@ -41,16 +43,16 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
           <CarouselImage alt={"banner_2"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_2.png`}/>
         )}
 
-        <Container
+        {/* <Container
           className={cx("absolute top-[74%] transform -translate-y-1/2",
           )}
         >
-          <div className="w-full bg-[rgba(255,255,255,0.5)] px-3 md:px-3 md:py-2 xl:px-4 xl:py-3 flex flex-row justify-center items-start rounded-lg">
+          <div className="w-full px-3 md:px-3 md:py-2 xl:px-4 xl:py-3 flex flex-row justify-center items-start rounded-lg">
             <div className="text-lg md:text-3xl xl:text-6xl font-bold leading-7 md:leading-9 xl:leading-none text-white">
               VIP0 Pode Retirar
             </div>
           </div>
-        </Container>
+        </Container> */}
       </div>
     </CarouselContainer>
   )
