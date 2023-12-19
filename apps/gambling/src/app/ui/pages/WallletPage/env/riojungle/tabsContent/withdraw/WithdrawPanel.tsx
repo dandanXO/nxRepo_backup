@@ -24,6 +24,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
     (state: RootState) => state.app
   );
 
+  const inputClassName='text-white leading-none text-sm md:text-xl'
+// leading-5 md:leading-6 lg:leading-7
   if (!isDuringRestrictTime) {
     return (
       <div>
@@ -32,11 +34,9 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
             <MainInput
               type="text"
               inputmode="numeric"
-              inputClassName={
-                'text-main-primary-main leading-none text-sm md:text-xl'
-              }
-              themeStyle={'simple'}
-              className="w-full rounded-lg"
+              inputClassName={inputClassName}
+              themeStyle={'normal'}
+              className="w-full"
               placeholder={`Retirada mínima R$${props.withdrawLimitMin}`}
               value={props.amountInput.data}
               validation={props.amountInput.isValidation}
@@ -83,7 +83,10 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               Por favor, preencha o número do CPF corretamente. Se a informação estiver incorreta, o saque falhará. Certifique - se de verificar as informações com atenção.
             </div>
 
-            <WithdrawForm {...props} titleClassName='text-white text-sm md:text-base lg:text-lg mb-1' />
+            <WithdrawForm {...props}
+              titleClassName='text-white text-sm md:text-base lg:text-lg mb-1'
+              inputClassName={inputClassName}
+            />
           </div>
         </SectionContainer>
 

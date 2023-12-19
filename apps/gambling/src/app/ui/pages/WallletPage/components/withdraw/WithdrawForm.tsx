@@ -5,7 +5,7 @@ import Select from 'react-select';
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
 
 import { selectInputStyleProps as WselectInputStyleProps } from '../../env/wild/tabsContent/withdraw/selectInputStyleProps';
-import { selectInputStyleProps as RselectInputStyleProps } from '../../env/riojungle/tabsContent/withdraw/selectInputStyleProps';
+import { SelectInputStyleProps as RSelectInputStyleProps } from '../../env/riojungle/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as CselectInputStyleProps } from '../../env/coco/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as PselectInputStyleProps } from '../../env/pernambucana/tabsContent/withdraw/selectInputStyleProps';
 
@@ -41,10 +41,10 @@ export type IWithdrawForm = {
 }
 
 export const WithdrawForm = (props: IWithdrawForm) => {
-  const { isMobile } = useBreakpoint();
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const MainInput = isMobile ? MobileInput : Input;
   const inputSectionClassName = props?.inputSectionClassName ? props?.inputSectionClassName : 'mb-2 md:mb-4 lg:mb-5';
-  const titleClassName = props?.titleClassName ? props?.titleClassName : 'text-white font-bold block mb-2 '
+  const titleClassName = props?.titleClassName ? props?.titleClassName : 'text-white font-bold block mb-1 '
   const inputClassName = props?.inputClassName ? props.inputClassName : 'text-main-primary-main leading-none text-sm md:text-xl';
 
   return (
@@ -56,7 +56,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
 
         <MainInput
           inputClassName={inputClassName}
-          themeStyle={'simple'}
+          themeStyle={'normal'}          
           className="w-full rounded-lg"
           placeholder={'Insira o nome do titular do cartão'}
           value={props.nameInput.data}
@@ -75,7 +75,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
           Código CPF
         </label>
         <MainInput
-          themeStyle={'simple'}
+           themeStyle={'normal'}
           className="w-full rounded-lg"
           inputClassName={
             inputClassName
@@ -103,7 +103,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
           styles={renderByPlatform({
             "wild777bet": WselectInputStyleProps(isMobile),
             "coco777bet": CselectInputStyleProps(isMobile),
-            "riojungle777bet": RselectInputStyleProps(isMobile)
+            "riojungle777bet": RSelectInputStyleProps
           }, PselectInputStyleProps(isMobile))}
           value={props.selectOption}
           onChange={(item: any) => {
@@ -119,10 +119,8 @@ export const WithdrawForm = (props: IWithdrawForm) => {
         </label>
         <MainInput
           className="w-full rounded-lg"
-          inputClassName={
-            inputClassName
-          }
-          themeStyle={'simple'}
+          inputClassName={inputClassName}
+          themeStyle={'normal'}
           placeholder={props.selectOption.label}
           value={props.selectInput.data}
           validation={props.selectInput.isValidation}

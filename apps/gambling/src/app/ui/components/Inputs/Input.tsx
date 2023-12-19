@@ -72,11 +72,10 @@ const BaseInput = (props: IInput) => {
               // ref={inputRef as any}
               onClick={() => props.onClick && props.onClick()}
               className={cx(
-                props.inputClassName,
-                'text-xs md:text-sm bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder:text-[var(--input-placeholder-color)]',
+                'text-sm md:text-xl bg-transparent focus:outline-none w-full text-[var(--input-text-color)] placeholder:text-[var(--input-placeholder-color)]',
                 {
                   'select-none': isDisable,
-                }
+                },props.inputClassName
               )}
               type={props.type || 'text'}
               inputMode={props.inputmode}
@@ -120,6 +119,7 @@ export const Input = renderByPlatform(
   {
     coco777bet: BaseInput,
     wild777bet: BaseInput,
+    riojungle777bet:BaseInput
   },
   BaseInput
 );

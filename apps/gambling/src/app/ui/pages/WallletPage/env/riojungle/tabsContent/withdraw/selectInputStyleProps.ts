@@ -1,4 +1,8 @@
-export const selectInputStyleProps = (isMobile: boolean) => {
+
+import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+
+export const SelectInputStyleProps = () => {
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
 
   return {
     control: (baseStyle: any, states: any) => {
@@ -6,7 +10,7 @@ export const selectInputStyleProps = (isMobile: boolean) => {
         ...baseStyle,
         background: '#333',
         color: '#fff',
-        padding: isMobile ? '2px' : '10px',
+        padding: isTablet ? '8px 10px' : '10px',
         borderRadius: '8px',
         outline: 'none',
         boxShadow: 'none',
@@ -22,19 +26,27 @@ export const selectInputStyleProps = (isMobile: boolean) => {
         },
         '&:focus': {
           ...baseStyle,
-          borderColor: '#808080',
-         
+          border: 'solid 2px #8547EB',
+
         },
       };
     },
     valueContainer: (style: any, state: any) => ({
       ...style,
       color: 'white',
+      padding: 0,
+      margin: 0
     }),
     //@ts-ignore
     indicatorSeparator: (provided) => ({
       ...provided,
       display: 'none',
+
+    }),
+    dropdownIndicator: (base: any) => ({
+      ...base,
+      paddingTop: '0px',
+      paddingBottom: '0px'
     }),
     //@ts-ignore
     option: (

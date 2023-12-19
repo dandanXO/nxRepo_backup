@@ -23,7 +23,7 @@
   --state-success-variant: #E2FFE8;
   --state-error-main: #F05151;
   --state-error-main-30: rgba(240, 81, 81, 0.30);
-  --state-error-variant: #FF9696;
+  --state-error-variant: #EF4444;
 
   --state-info-main: #51B7F0;
   --state-info-variant: #A4DEFF;
@@ -220,7 +220,7 @@
   /*NOTE: figma 沒有 自己拆出來的*/
   --input-border: var(--stroke-textfields);
   --input-background: var(--background-textfields);
-  --input-placeholder-color: var(--text-tertiary);
+  --input-placeholder-color: #808080;
   --input-text-color: var(--white);
 
 
