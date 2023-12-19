@@ -5,6 +5,7 @@ import useBreakpoint from "../../../../../hooks/useBreakpoint";
 
 type ICarouselSubTitle = {
   children: React.ReactNode;
+  className?: string;
 }
 export const CarouselTitleSection = (props: ICarouselSubTitle) => {
   const {isMobile} = useBreakpoint();
@@ -12,7 +13,8 @@ export const CarouselTitleSection = (props: ICarouselSubTitle) => {
     <Container
       className={cx("absolute transform -translate-y-1/2",
         "top-1/2",
-        "leading-none"
+        "leading-none",
+        props.className,
       )}
     >
       {!isMobile && (
