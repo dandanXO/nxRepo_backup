@@ -135,14 +135,14 @@ export const AppRouter = () => {
       }
       dispatch(appSlice.actions.setIsLogin(true));
       if(location.pathname !== PageOrModalPathEnum.GamePage) {
-        dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
-        dispatch(appSlice.actions.setShowDepositModal(true))
+        // dispatch(appSlice.actions.setIsShowInviteBonusModal(true))
+        // dispatch(appSlice.actions.setShowDepositModal(true))
       }
       // props.confirmToLogin();
       // setIsSetup(true);
     }
 
-  }, [previousOffline, data])
+  }, [previousOffline, data, location.pathname])
 
   const offline = () => {
     setPreviousOffline(true);
@@ -296,7 +296,7 @@ export const AppRouter = () => {
       window.clearInterval(timer);
     };
 
-  }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal])
+  }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal, location.pathname])
 
   return (
     <>
