@@ -16,6 +16,9 @@ import icon＿slot from "./icon＿slot.png";
 import icon＿fishing from "./icon＿fishing.png";
 import icon＿vivo from "./icon＿vivo.png";
 import icon＿viver from "./icon＿viver.png";
+import cx from "classnames";
+import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
+import {useLocation} from "react-router";
 
 export const MenuDrawer = () => {
   const {
@@ -25,8 +28,10 @@ export const MenuDrawer = () => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
+    onClickToIndex,
   } = usePageNavigate();
 
+  const location = useLocation();
   return (
     <div
       id="TabBarRoot"
@@ -77,7 +82,9 @@ export const MenuDrawer = () => {
 
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToInvite}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.InvitePage,
+          })} onClick={onClickToInvite}>
             <img
               src={icon＿thumbsup}
               className="w-5"
@@ -89,7 +96,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToVipGrade}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.VIPGradePage,
+          })} onClick={onClickToVipGrade}>
             <img
               src={icon＿crownsimple}
               className="w-5"
@@ -101,7 +110,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToCheckInDaily}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.DailySignInPage,
+          })} onClick={onClickToCheckInDaily}>
             <img
               src={icon＿calendarcheck}
               className="w-5"
@@ -114,7 +125,9 @@ export const MenuDrawer = () => {
 
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+          })} onClick={onClickToTelegram}>
             <img
               src={icon＿users}
               className="w-5"
@@ -126,7 +139,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+          })} onClick={onClickToTelegram}>
             <img
               src={icon＿telegramlogo}
               className="w-5"
@@ -138,7 +153,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+          })} onClick={onClickToTelegram}>
             <img
               src={icon＿telegramlogo}
               className="w-5"
@@ -157,7 +174,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
+          })} onClick={onClickToIndex}>
             <img
               src={icon＿slot}
               className="w-5"
@@ -169,7 +188,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
+          })} onClick={onClickToIndex}>
             <img
               src={icon＿fishing}
               className="w-5"
@@ -181,7 +202,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
+          })} onClick={onClickToIndex}>
             <img
               src={icon＿vivo}
               className="w-5"
@@ -193,7 +216,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
+          })} onClick={onClickToIndex}>
             <img
               src={icon＿viver}
               className="w-5"
@@ -206,7 +231,9 @@ export const MenuDrawer = () => {
 
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
+          })} onClick={onClickToIndex}>
             <img
               src={icon＿favorite}
               className="w-5"
@@ -218,7 +245,9 @@ export const MenuDrawer = () => {
         </div>
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]" onClick={onClickToTelegram}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
+          })} onClick={onClickToIndex}>
             <img
               src={icon＿recent}
               className="w-5"
