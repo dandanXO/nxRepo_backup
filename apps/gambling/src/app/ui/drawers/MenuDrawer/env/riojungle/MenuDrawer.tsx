@@ -1,21 +1,21 @@
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import tenPercent from "./genie-3-wishes_genie3.png"
-import twentyPercent from "./genie-3-wishes_genie2.png"
-import icon＿calendarcheck from "./icon＿calendarcheck.png";
-import icon＿crownsimple from "./icon＿crownsimple.png";
+import tenPercent from "./assets/genie-3-wishes_genie3.png"
+import twentyPercent from "./assets/genie-3-wishes_genie2.png"
+import icon＿calendarcheck from "./assets/icon＿calendarcheck.png";
+import icon＿crownsimple from "./assets/icon＿crownsimple.png";
 
-import icon＿telegramlogo from "./icon＿telegramlogo.png";
-import icon＿thumbsup from "./icon＿thumbsup.png";
-import icon＿users from "./icon＿users.png";
+import icon＿telegramlogo from "./assets/icon＿telegramlogo.png";
+import icon＿thumbsup from "./assets/icon＿thumbsup.png";
+import icon＿users from "./assets/icon＿users.png";
 
-import icon＿favorite from "./icon＿favorite.png";
-import icon＿recent from "./icon＿recent.png";
-import icon＿download from "./icon＿download.png";
+import icon＿favorite from "./assets/icon＿favorite.png";
+import icon＿recent from "./assets/icon＿recent.png";
+import icon＿download from "./assets/icon＿download.png";
 
-import icon＿slot from "./icon＿slot.png";
-import icon＿fishing from "./icon＿fishing.png";
-import icon＿vivo from "./icon＿vivo.png";
-import icon＿viver from "./icon＿viver.png";
+import icon＿slot from "./assets/icon＿slot.png";
+import icon＿fishing from "./assets/icon＿fishing.png";
+import icon＿vivo from "./assets/icon＿vivo.png";
+import icon＿viver from "./assets/icon＿viver.png";
 import cx from "classnames";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useLocation} from "react-router";
