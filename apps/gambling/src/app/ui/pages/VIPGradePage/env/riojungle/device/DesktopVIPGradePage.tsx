@@ -25,7 +25,7 @@ export const DesktopVIPGradePage = ({
   const VIPIcon = require(`../images/vip${selectedVIP}_pic.png`);
 
   useEffect(()=>{
-    setSelectedVIP(currentLevel);
+    setSelectedVIP(currentLevel === 25? currentLevel: currentLevel + 1);
   }, [currentLevel])
 
   useEffect(()=> {

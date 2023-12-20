@@ -21,7 +21,7 @@ export const MobileVIPGradePage = ({
   const vipWrapperRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(()=>{
-    setSelectedVIP(currentLevel);
+    setSelectedVIP(currentLevel === 25? currentLevel: currentLevel + 1);
   }, [currentLevel])
 
   useEffect(()=> {

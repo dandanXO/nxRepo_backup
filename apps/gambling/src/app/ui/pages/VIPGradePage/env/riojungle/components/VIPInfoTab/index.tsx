@@ -110,7 +110,7 @@ export const VIPInfoTab = ({
             }
 
             return (
-              <div className={tcx('text-white flex w-full bg-[#4D4D4D] rounded-full', ['bg-[#666666]', isJackPot])}>
+              <div key={info.level} className={tcx('text-white flex w-full bg-[#4D4D4D] rounded-full', ['bg-[#666666]', isJackPot])}>
                 <div className={tcx('text-sm lg:text-lg font-bold flex-shrink-0 bg-[#8547EB] rounded-full w-20 lg:w-[100px] flex items-center justify-center py-[10px] px-4 lg:px-[22px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]', ['bg-[#F59E0B]', isJackPot])}>VIP {info.level}</div>
                 <div className={tcx('text-sm lg:text-base font-medium w-full flex justify-center items-center text-center overflow-ellipsis', ['text-xs lg:text-xs', isJackPot])}>
                   {
