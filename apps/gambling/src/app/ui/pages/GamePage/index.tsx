@@ -166,10 +166,9 @@ export const GamePage = () => {
               />
             )
           }
-
           {data !== undefined && data.startType === "LINK" && (
             <iframe
-              className={`w-[100vw] h-[100%]`}
+              className={`w-[100vw] h-[calc(100%-56px)] relative top-[56px]`}
               src={data.link}
               // onLoadStart={onIframeLoadStart}
               // onLoad={onIframeLoad}
