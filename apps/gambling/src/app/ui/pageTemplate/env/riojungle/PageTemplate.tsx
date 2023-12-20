@@ -100,7 +100,7 @@ export const PageTemplate = ({
 
   const {isMobile} = useBreakpoint();
 
-  const HeaderHeight = 72;
+  const HeaderHeight = 52.5;
   const DrawerWidth = 248;
   const ZIndex = "z-[1001]";
 
