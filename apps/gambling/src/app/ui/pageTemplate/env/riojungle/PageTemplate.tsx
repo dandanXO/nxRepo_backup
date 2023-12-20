@@ -98,9 +98,9 @@ export const PageTemplate = ({
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
   const {isLogin} = useSelector((state: RootState) => state.app)
 
-  const {isMobile} = useBreakpoint();
+  const {isMobile, isDesktop} = useBreakpoint();
 
-  const HeaderHeight = 52.5;
+  const HeaderHeight = isDesktop ? 72 : 52.5;
   const DrawerWidth = 248;
   const ZIndex = "z-[1001]";
 
