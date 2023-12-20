@@ -1,10 +1,10 @@
-import { MobileCommonGreenBriefTotalTable } from "./MobileCommonGreenBriefTotalTable";
 import { MobileCommonBlueTotalTable } from "./MobileCommonBlueTotalTable";
 import { MobileCommonOrangeDailyTable } from "./MobileCommonOrangeDailyTable";
 import cx from 'classnames'
 
 import styled from "styled-components";
 import { environment } from "apps/gambling/src/environments/environment";
+import { MobileCommonTotalTable } from "./components/MobileCommonTotalTable";
 
 
 const GreenHRline = styled.div`
@@ -45,7 +45,7 @@ export const MobilePanel = ({
   return (
     <div>
       <section className={"mb-4"}>
-        <MobileCommonGreenBriefTotalTable data={totalRewardData} />
+        <MobileCommonTotalTable data={totalRewardData} />
         {!isCoco777bet && <GreenHRline className={"my-4"} />}
       </section>
 

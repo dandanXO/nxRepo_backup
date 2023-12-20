@@ -1,4 +1,4 @@
-import { QuestionContainer } from "../index";
+import { IPanelMode, QuestionContainer } from "../index";
 import styled from "styled-components";
 import copy from "copy-to-clipboard";
 import { notification } from 'antd';
@@ -23,10 +23,10 @@ import { QuestionContent as WQuestionContent } from "./env/wild/QuestionContent"
 import { QuestionContent as PQuestionContent } from "./env/pernambucana/QuestionContent";
 import { HowToInviteTabSection as RHowToInviteTabSection } from './env/riojungle'
 
-interface IHowToInviteTabSection {
+export type IHowToInviteTabSection = {
   inviteUrl: string;
-}
-export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
+} & IPanelMode
+export const HowToInviteTabSection = (props: IHowToInviteTabSection ) => {
 
 
 
@@ -47,7 +47,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
             <CHowToImage className="p-4 sm:p-0 rounded-2xl" />
             <CQuestionContent />
           </>),
-        "riojungle777bet": <RHowToInviteTabSection />,
+        "riojungle777bet": <RHowToInviteTabSection {...props}/>,
       }, (
         <>
           <PHowToImage className="p-4 rounded-2xl" />

@@ -12,6 +12,7 @@ import {MobilePanel} from "./MobilePanel";
 import {DesktopPanel} from "./DesktopPanel";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../utils/format";
+import { IPanelMode } from "..";
 
 
 export interface ITabType {
@@ -30,10 +31,10 @@ export interface IBoardData {
   }
 }
 
-interface IInviteRecordInfoTabSection {
+export type IInviteRecordInfoTabSection = {
     inviteInfo: GetInviteRewardDataResponse;
     inviteUnsettle: GetUnsettleInviteRewardDataResponse;
-}
+} & IPanelMode
 
 export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) => {
     const {isMobile} = useBreakpoint();

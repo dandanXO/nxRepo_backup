@@ -1,26 +1,27 @@
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import styled from "styled-components";
-import {useEffect, useState} from "react";
-import {HowToInviteTabSection} from "./HowToInviteTabSection";
-import {InviteRecordInfoTabSection} from "./InviteRecordInfoTabSection/index";
+import { ReactNode, useEffect, useState } from "react";
+import { HowToInviteTabSection } from "./HowToInviteTabSection";
+import { InviteRecordInfoTabSection } from "./InviteRecordInfoTabSection/index";
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery} from "../../../external";
-import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
+import { useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery } from "../../../external";
+import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
 
-import {TabItem, Tabs} from "../../components/TabItem/TabItem";
-import {Container} from "../../components/container/Container";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../reduxStore";
+import { TabItem, Tabs } from "../../components/TabItem/TabItem";
+import { Container } from "../../components/container/Container";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reduxStore";
 import cx from "classnames";
 import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
+import { InvitePage as CInvitePage } from './env/coco/InvitePage';
+import { InvitePage as PInvitePage } from './env/pernambucana/InvitePage';
+import { InvitePage as RInvitePage } from './env/riojungle/InvitePage';
+import { InvitePage as WInvitePage } from './env/wild/InvitePage';
+import { renderByPlatform } from "../../utils/renderByPlatform";
 
-// const InviteCommmonButton = styled.div`
-//   color: #fff;
-//   background: linear-gradient(149deg,#FFF600 0%,#4FFB0C 100%);
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// `
+
+
 
 
 
@@ -31,36 +32,44 @@ export const QuestionContainer = styled.div`
   margin: 20px 0;
 `
 
+export interface IPanelMode{
+  panelMode: "howto" | "daily";
+  setPanelMode: React.Dispatch<React.SetStateAction<"howto" | "daily">>;
+}
+export type IInvitePage = {
+  children: ReactNode;
+} & IPanelMode
+
 
 export const InvitePage = () => {
   useAllowLoginRouterRules();
   const { onClickToIndex } = usePageNavigate();
 
-  const [panelMode, setPanelMode] = useState<"howto" | "daily" >("howto");
-  const {isMobile} = useBreakpoint();
-  const {isLogin} = useSelector((state: RootState) => state.app)
+  const [panelMode, setPanelMode] = useState<"howto" | "daily">("howto");
+  const { isMobile } = useBreakpoint();
+  const { isLogin } = useSelector((state: RootState) => state.app)
 
   const [triggerGetInviteReward, { currentData: inviteInfo, isFetching: isInviteInfoFetching }] =
-  useLazyGetInviteRewardDataQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+    useLazyGetInviteRewardDataQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
   const [triggerGetUnsettleInviteReward, { currentData: inviteUnsettle, isFetching: isInviteUnsettleFetching }] =
-  useLazyGetUnsettleInviteRewardDataQuery({
-    pollingInterval: 0,
-    refetchOnFocus: false,
-    refetchOnReconnect: false,
-  });
+    useLazyGetUnsettleInviteRewardDataQuery({
+      pollingInterval: 0,
+      refetchOnFocus: false,
+      refetchOnReconnect: false,
+    });
 
-  useEffect(()=>{
-    if(isLogin) {
+  useEffect(() => {
+    if (isLogin) {
       triggerGetInviteReward({});
       triggerGetUnsettleInviteReward({})
     }
 
-  },[])
+  }, [])
 
 
   // NOTE: window focus change
@@ -75,82 +84,23 @@ export const InvitePage = () => {
     }
   }, [])
 
-  return (
-    <>
-      <Container className="pt-7 md:pt-0">
-        {
-          !isMobile && (
-            <BackNavigation
-              className={'md:pb-2'}
-              onClick={onClickToIndex}
-            />
-          )
-        }
-        <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
-          <div>
-            <Tabs className={"game-type-tab-list"}>
-              <TabItem
-                mode={"howto"}
-                // pureColor={true}
-                background={"var(--primary-variant)"}
-                // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
-                activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6 rounded-md mr-2 whitespace-nowrap text-sm sm:text-2xl",{
+  const TabContent = () => {
+    return (
+      panelMode === "howto" ? (
+        <HowToInviteTabSection inviteUrl={inviteInfo?.data?.inviteUrl || ''} panelMode={panelMode} setPanelMode={setPanelMode}/>
+      ) : (
+        inviteInfo !== undefined && inviteUnsettle !== undefined &&
+        <InviteRecordInfoTabSection inviteInfo={inviteInfo} inviteUnsettle={inviteUnsettle} panelMode={panelMode} setPanelMode={setPanelMode}/>
+      )
+    )
+  }
+  return renderByPlatform(
+    {
+      "coco777bet": <CInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
+      "wild777bet": <WInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
+      "riojungle777bet": <RInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
+    },
+    <PInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
+  );
 
-                })}
-                name={"Como convidar"}
-                active={panelMode === "howto"}
-                size={"big"}
-                onClick={() => {
-                  setPanelMode("howto")
-                }}
-              />
-              <TabItem
-                mode={"data"}
-                // pureColor={true}
-                background={"var(--primary-variant)"}
-                // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
-                activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-                className={cx("px-6 rounded-md whitespace-nowrap text-sm sm:text-2xl",{
-
-                })}
-                name={"Dados diários"}
-                active={panelMode === "daily"}
-                size={"big"}
-                onClick={() => {
-                  setPanelMode("daily")
-                }}
-              />
-            </Tabs>
-          </div>
-
-          {/*<div>*/}
-          {/*  <TabButton active={panelMode === "howto"} onClick={() => {*/}
-          {/*    setPanelMode("howto")*/}
-          {/*  }}>*/}
-          {/*    <TabTextConVidar className={"text-sm font-bold"}>{isMobile ? "Convidar" :"Como convidar"}</TabTextConVidar>*/}
-          {/*  </TabButton>*/}
-
-          {/*  <TabButton active={panelMode === "daily"} onClick={() => {*/}
-          {/*    setPanelMode("daily")*/}
-          {/*  }}>*/}
-          {/*    <TabTextDados className={"text-sm font-bold"}>*/}
-          {/*      {isMobile ? "Dados diários" : "Convite diariamente"}*/}
-          {/*    </TabTextDados>*/}
-          {/*  </TabButton>*/}
-          {/*</div>*/}
-
-        </section>
-
-        {panelMode === "howto" ? (
-          <HowToInviteTabSection inviteUrl={inviteInfo?.data?.inviteUrl || ''} />
-        ) : (
-          inviteInfo!==undefined && inviteUnsettle!==undefined &&
-            <InviteRecordInfoTabSection inviteInfo={inviteInfo} inviteUnsettle={inviteUnsettle}/>
-        )}
-      </Container>
-
-      {/*<InviteCommmonButton className={"rounded-xl"}>Como convidar</InviteCommmonButton>*/}
-    </>
-  )
 }

@@ -1,4 +1,4 @@
-import { DesktopColorfulBoard } from "./DesktopColorfulBoard";
+import { DesktopBoard } from "./components/DesktopBoard";
 import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
 import { TabItem, Tabs } from "../../../components/TabItem/TabItem";
 import { DesktopTotalType } from "./DesktopTotalType";
@@ -49,7 +49,7 @@ export const DesktopPanel = ({
 
   return (
     <QuestionContainer>
-      <DesktopColorfulBoard data={totalRewardData} />
+      <DesktopBoard data={totalRewardData} />
       <section>
         <div className={"text-left text-white text-lg mb-2 font-bold"}>Dados totals</div>
 

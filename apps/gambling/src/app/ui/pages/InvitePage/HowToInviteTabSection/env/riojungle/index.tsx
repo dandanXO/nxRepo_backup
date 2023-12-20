@@ -3,7 +3,8 @@ import Level from './level.png';
 import Gift from './gift.png';
 import GameChips from './gameChips.png';
 import useBreakpoint from 'apps/gambling/src/app/ui/hooks/useBreakpoint';
-export const HowToInviteTabSection = () => {
+import { IHowToInviteTabSection } from '../..';
+export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
   const {
     isMobile,
     isTablet,
@@ -15,15 +16,11 @@ export const HowToInviteTabSection = () => {
   return (
     <div className="w-full flex flex-col justify-between gap-10 w-full items-center">
       <button
+        onClick={() => props.setPanelMode('daily')}
         id="Btn"
-        className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
+        className=" leading-[28px] text-white mb-1 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
       >
-        <div
-          id="Button1"
-          className="text-lg font-['Inter'] leading-[28px] text-white mb-1"
-        >
-          Convidar conta
-        </div>
+        Convidar conta
         <img
           src="https://file.rendit.io/n/0spjSovL9AiUbj6b8ZeC.svg"
           alt="ArrowRight"
@@ -49,7 +46,7 @@ export const HowToInviteTabSection = () => {
                   Copie o link para seus amigos!
                 </div>
                 <div className="pl-[117px] lg:pl-[196px] text-base md:text-xl lg:text-3xl font-['Inter'] font-bold leading-[36px] text-white break-all">
-                  https://ds.imperador777bet.com/invite
+                  {props?.inviteUrl}
                 </div>
               </div>
               <div className='self-center justify-start ml-1'>
@@ -139,110 +136,6 @@ export const HowToInviteTabSection = () => {
               <div className="w-full lg:w-[37%] self-end">
                 <img className="w-full" src={Level} />
               </div>
-              {/* <div className="flex flex-col items-stretch w-[37%] ml-5 max-md:w-full max-md:ml-0">
-                <div className="items-center flex flex-col max-md:mt-5">
-                  <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-violet-600 self-center px-7 py-3.5 rounded-[100px] max-md:px-5">
-                    Você
-                  </div>
-                  <div className="items-stretch self-center flex w-[84px] max-w-full flex-col mt-2 pl-5 pr-2.5">
-                    <div className="text-white text-xs leading-4 whitespace-nowrap">
-                      Convidar
-                    </div>
-                    <img
-                      loading="lazy"
-                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/3df4648537716a71394693cb4f35b44529f91155f0f797b8a33eaad2f328dc2c?"
-                      className="aspect-[1.5] object-contain object-center w-[9px] fill-white overflow-hidden self-center max-w-full"
-                    />
-                  </div>
-                  <div className="items-stretch self-center flex w-[186px] max-w-full gap-5 mt-2">
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-emerald-500 grow pl-6 pr-8 py-3.5 rounded-[100px] max-md:px-5">
-                      Nível 1
-                    </div>
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-emerald-500 z-[1] grow pl-6 pr-8 py-3.5 rounded-[100px] max-md:px-5">
-                      Nível 1
-                    </div>
-                  </div>
-                  <div className="items-stretch self-center flex w-[186px] max-w-full gap-5 mt-2">
-                    <div className="items-stretch flex grow basis-[0%] flex-col pl-4 pr-7 max-md:pr-5">
-                      <div className="text-white text-xs leading-4 whitespace-nowrap">
-                        Convidar
-                      </div>
-                      <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5241d2afe905c28e5f7c2210fb28b2d977194f73fb5db8dd7215016e5d48a58a?"
-                        className="aspect-[1.5] object-contain object-center w-[9px] fill-white overflow-hidden self-center max-w-full"
-                      />
-                    </div>
-                    <div className="items-stretch z-[1] flex grow basis-[0%] flex-col pl-5 pr-7 max-md:pr-5">
-                      <div className="text-white text-xs leading-4 whitespace-nowrap">
-                        Convidar
-                      </div>
-                      <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5241d2afe905c28e5f7c2210fb28b2d977194f73fb5db8dd7215016e5d48a58a?"
-                        className="aspect-[1.5] object-contain object-center w-[9px] fill-white overflow-hidden self-center max-w-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="items-stretch self-center flex w-[290px] max-w-full gap-5 mt-2 max-md:justify-center">
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-amber-500 grow px-6 py-3.5 rounded-[100px] max-md:px-5">
-                      Nível 2
-                    </div>
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-amber-500 grow px-6 py-3.5 rounded-[100px] max-md:px-5">
-                      Nível 2
-                    </div>
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-amber-500 z-[1] grow px-6 py-3.5 rounded-[100px] max-md:px-5">
-                      Nível 2
-                    </div>
-                  </div>
-                  <div className="items-stretch self-center flex w-[290px] max-w-full gap-5 mt-2 max-md:justify-center">
-                    <div className="items-stretch flex grow basis-[0%] flex-col px-5">
-                      <div className="text-white text-xs leading-4 whitespace-nowrap">
-                        Convidar
-                      </div>
-                      <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/3df4648537716a71394693cb4f35b44529f91155f0f797b8a33eaad2f328dc2c?"
-                        className="aspect-[1.5] object-contain object-center w-[9px] fill-white overflow-hidden self-center max-w-full"
-                      />
-                    </div>
-                    <div className="items-stretch flex grow basis-[0%] flex-col px-5">
-                      <div className="text-white text-xs leading-4 whitespace-nowrap">
-                        Convidar
-                      </div>
-                      <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/3df4648537716a71394693cb4f35b44529f91155f0f797b8a33eaad2f328dc2c?"
-                        className="aspect-[1.5] object-contain object-center w-[9px] fill-white overflow-hidden self-center max-w-full"
-                      />
-                    </div>
-                    <div className="items-stretch z-[1] flex grow basis-[0%] flex-col px-5">
-                      <div className="text-white text-xs leading-4 whitespace-nowrap">
-                        Convidar
-                      </div>
-                      <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/3df4648537716a71394693cb4f35b44529f91155f0f797b8a33eaad2f328dc2c?"
-                        className="aspect-[1.5] object-contain object-center w-[9px] fill-white overflow-hidden self-center max-w-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="items-stretch flex gap-5 mt-2 pr-12 self-start max-md:max-w-full max-md:flex-wrap max-md:pr-5">
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-blue-500 grow pl-6 pr-4 py-3.5 rounded-[100px] max-md:pl-5">
-                      Nível 3
-                    </div>
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-blue-500 grow pl-6 pr-4 py-3.5 rounded-[100px] max-md:pl-5">
-                      Nível 3
-                    </div>
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-blue-500 grow pl-6 pr-4 py-3.5 rounded-[100px] max-md:pl-5">
-                      Nível 3
-                    </div>
-                    <div className="text-white text-sm font-medium leading-5 whitespace-nowrap justify-center items-stretch shadow bg-blue-500 grow pl-6 pr-4 py-3.5 rounded-[100px] max-md:pl-5">
-                      Nível 3
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </div>
           </div>
           <div className="flex flex-row bg-gradient-to-l from-[#ffffff00] to-[#ffffff1a] w-full pl-8 items-center max-md:max-w-full max-md:px-5">
@@ -273,12 +166,6 @@ export const HowToInviteTabSection = () => {
           </div>
         </div>
       </div>
-      <button
-        id="Btn2"
-        className="text-xl font-['Inter'] font-medium leading-[28px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] relative flex flex-row justify-center pt-3 w-full h-12 cursor-pointer items-start rounded-lg"
-      >
-        Convidar conta
-      </button>
     </div>
   )
 
