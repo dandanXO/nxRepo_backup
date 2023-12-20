@@ -11,6 +11,7 @@ interface IMaintenance{
   end: string;
 }
 export type InitialState = {
+  inNativeApp: boolean;
   isMobile: boolean;
   isUserMoneyStatusLoading: boolean;
   isLogin: boolean;
@@ -67,6 +68,7 @@ const userStore$3: IUserStore= {
 }
 
 const initialState: InitialState = {
+  inNativeApp: false,
   globalMessage: null,
   vip_level: 0,
   isUILoading: true,
@@ -155,6 +157,9 @@ export const appSlice = createSlice({
     },
     setShowiOSDownloadPopover: (state: InitialState, action: PayloadAction<boolean>) => {
      state.isShowiOSDownloadPopover = action.payload;
+    },
+    setInNativeApp: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.inNativeApp = action.payload
     },
   },
 });

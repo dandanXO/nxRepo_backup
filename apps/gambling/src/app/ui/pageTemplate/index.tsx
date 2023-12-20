@@ -262,6 +262,9 @@ export const PageTemplate = (props: IPage) => {
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
 
+
+  const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
+
   return (
     <>
       {renderByPlatform({
@@ -461,11 +464,12 @@ export const PageTemplate = (props: IPage) => {
         )
       }
 
-      <>
-        {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
-        {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
-      </>
-
+      {inNativeApp && (
+        <>
+          {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
+          {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
+        </>
+      )}
       {contextHolder}
 
     </>

@@ -298,6 +298,13 @@ export const AppRouter = () => {
 
   }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal])
 
+  const queryParams = new URLSearchParams(location.search);
+  const inNativeApp = queryParams.get('inNativeApp') === "true";
+
+  useEffect(() => {
+    dispatch(appSlice.actions.setInNativeApp(inNativeApp))
+  }, [inNativeApp])
+
   return (
     <>
       {isSetup && (
