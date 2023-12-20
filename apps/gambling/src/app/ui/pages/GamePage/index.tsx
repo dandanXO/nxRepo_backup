@@ -77,6 +77,8 @@ export const GamePage = () => {
             return "cq9";
         } else if (140000 <= gameId && gameId < 141000) {
             return "oneapi";
+        } else if(150000 <= gameId && gameId < 151000) {
+            return "pgapi";
         } else {
             return null;
         }
