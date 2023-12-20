@@ -94,6 +94,11 @@ export const AppRouter = () => {
       dispatch(appSlice.actions.setWithdrawBegin(data.data.withdraw_begin))
       dispatch(appSlice.actions.setWithdrawEnd(data.data.withdraw_end))
       dispatch(appSlice.actions.setMaintenance(data.data.maintenance))
+      dispatch(appSlice.actions.setConfig({
+        invite_hig_reward: data.data.invite_hig_reward,
+        recharge_cashback_rate: data.data.recharge_cashback_rate,
+        recharge_first_cashback_rate: data.data.recharge_first_cashback_rate,
+      }))
     }
   }, [data])
 

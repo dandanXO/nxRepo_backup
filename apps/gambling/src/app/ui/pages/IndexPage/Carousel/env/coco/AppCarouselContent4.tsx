@@ -28,9 +28,14 @@ export const AppCarouselContent4 = (props: IAppCarouselContent) => {
       }}
     >
       <div className={""}>
-        <CarouselTitleSection>
-          Prêmio upgrade VIP<br/> Só esperando você coletar!
+        <CarouselTitleSection className={"sm:top-[45%] md:top-[35%]"}>
+          Prêmio upgrade VIP
+          <br/>
+          Só esperando você coletar!
+          <br/>
+          VIP0 Pode Retirar
         </CarouselTitleSection>
+
         {isMobile ? (
           <CarouselImage alt={"h5_banner_4"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_4.png`}/>
         ): (

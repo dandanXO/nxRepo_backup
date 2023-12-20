@@ -10,6 +10,11 @@ interface IMaintenance{
   start: string;
   end: string;
 }
+interface Config {
+  invite_hig_reward?: number
+  recharge_cashback_rate?: string;
+  recharge_first_cashback_rate?: string;
+}
 export type InitialState = {
   inNativeApp: boolean;
   isMobile: boolean;
@@ -31,6 +36,7 @@ export type InitialState = {
   withdrawBegin: string
   withdrawEnd: string;
   maintenance: IMaintenance;
+  config: Config;
 };
 
 const userStore$3: IUserStore= {
@@ -91,7 +97,13 @@ const initialState: InitialState = {
     flag: 0,
     start: "",
     end: "",
+  },
+  config: {
+    invite_hig_reward: undefined,
+    recharge_cashback_rate: undefined,
+    recharge_first_cashback_rate: undefined,
   }
+
 };
 
 export const appSlice = createSlice({
@@ -160,6 +172,9 @@ export const appSlice = createSlice({
     },
     setInNativeApp: (state: InitialState, action: PayloadAction<boolean>) => {
       state.inNativeApp = action.payload
+    },
+    setConfig: (state: InitialState, action: PayloadAction<Config>) => {
+      state.config = action.payload
     },
   },
 });
