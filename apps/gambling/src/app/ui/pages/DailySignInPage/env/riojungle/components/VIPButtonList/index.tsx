@@ -1,18 +1,13 @@
 import { tcx } from "../../../../../../utils/tcx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import LockOpen from '../../images/LockOpen.png';
 import Lock from '../../images/Lock.png';
 
-const vips: number[] = [];
-
-for (let i = 0; i <= 25; i += 1) {
-  vips.push(i);
-}
-
 const shadowClassName = 'shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
 
 interface IVIPButtonListProps {
+  startVIP: number,
   selectedVIP: number
   setSelectedVIP: React.Dispatch<React.SetStateAction<number>>
   currentVIP: number
@@ -22,6 +17,7 @@ interface IVIPButtonListProps {
 }
 
 export const VIPButtonList = ({
+  startVIP,
   selectedVIP,
   setSelectedVIP,
   currentVIP,
@@ -32,10 +28,6 @@ export const VIPButtonList = ({
 
   const vipWrapperRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(()=>{
-    setSelectedVIP(currentVIP);
-  }, [currentVIP])
-
   useEffect(()=> {
     const currentItem = vipWrapperRef.current?.children[selectedVIP] as HTMLElement | undefined
     if(currentItem) {
@@ -45,6 +37,12 @@ export const VIPButtonList = ({
       })
     }
   }, [selectedVIP])
+
+  const vips: number[] = [];
+
+  for (let i = startVIP; i <= 25; i += 1) {
+    vips.push(i);
+  }
 
   return (
     <div
