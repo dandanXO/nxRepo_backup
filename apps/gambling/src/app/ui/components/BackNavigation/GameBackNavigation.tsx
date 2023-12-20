@@ -6,5 +6,6 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 
 export const GameBackNavigation = renderByPlatform({
   "coco777bet": CocoGameBackNavigation,
-  "wild777bet": WildGameBackNavigation
+  "wild777bet": WildGameBackNavigation,
+  "riojungle777bet": CocoGameBackNavigation,
 }, PernambucanaGameBackNavigation);
