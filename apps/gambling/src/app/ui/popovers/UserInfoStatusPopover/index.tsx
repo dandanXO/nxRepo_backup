@@ -328,6 +328,8 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   //   }
   // }, []);
 
+  // const mouseOverDesktopHeader = useSelector((rootState: RootState) => rootState.ui.mouseOverDesktopHeader)
+
   return (
     <div
       className={"z-[999] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full"}
@@ -336,9 +338,13 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
       }}
     >
       <PopoverContainer
-        onMouseLeave={() => {
-          props.close();
-        }}>
+        // onMouseLeave={() => {
+        //   console.log("mouseOverDesktopHeader", mouseOverDesktopHeader);
+        //   if(!mouseOverDesktopHeader) {
+        //     props.close();
+        //   }
+        // }}
+      >
         {
           renderByPlatform({
             "coco777bet": (
