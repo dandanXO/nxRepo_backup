@@ -19,8 +19,8 @@ export const WithdrawNoticeSection = (props: any) => {
       <section className={`${sectionStyle} md:flex`}>
         <div>
           O valor e a frequência do saque diário estão diretamente relacionados ao seu nível VIP.
-          Nível atual
-          <button className={"text-[var(--secondary-assistant)]"} onClick={onClickToVIP}> VIP{vip_level}</button>, o valor mínimo de saque diário é de
+          Nível atual{' '}
+          <button className={"text-[var(--secondary-assistant)]"} onClick={onClickToVIP}>VIP{vip_level}</button>, o valor mínimo de saque diário é de
           <span className={"text-[var(--secondary-assistant)]"}> R$ {withdrawLimitMin}</span> e o valor máximo de saque é de
           <span className={"text-[var(--secondary-assistant)]"}> R$ {withdrawLimitMax}</span>.
         </div>

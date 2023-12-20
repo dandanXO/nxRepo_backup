@@ -5,7 +5,7 @@ import Select from 'react-select';
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
 
 import { selectInputStyleProps as WselectInputStyleProps } from '../../env/wild/tabsContent/withdraw/selectInputStyleProps';
-import { SelectInputStyleProps as RSelectInputStyleProps } from '../../env/riojungle/tabsContent/withdraw/selectInputStyleProps';
+import { selectInputStyleProps as RselectInputStyleProps } from '../../env/riojungle/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as CselectInputStyleProps } from '../../env/coco/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as PselectInputStyleProps } from '../../env/pernambucana/tabsContent/withdraw/selectInputStyleProps';
 
@@ -57,7 +57,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
         <MainInput
           inputClassName={inputClassName}
           themeStyle={'normal'}          
-          className="w-full rounded-lg"
+          className="w-full "
           placeholder={'Insira o nome do titular do cartão'}
           value={props.nameInput.data}
           validation={props.nameInput.isValidation}
@@ -98,12 +98,12 @@ export const WithdrawForm = (props: IWithdrawForm) => {
         </label>
         <Select
           menuPlacement={'bottom'}
-          className="rounded-lg text-sm md:text-xl"
+          className="rounded-lg leading-none text-sm md:text-xl"
           isSearchable={false}
           styles={renderByPlatform({
             "wild777bet": WselectInputStyleProps(isMobile),
             "coco777bet": CselectInputStyleProps(isMobile),
-            "riojungle777bet": RSelectInputStyleProps
+            "riojungle777bet": RselectInputStyleProps(isMobile)
           }, PselectInputStyleProps(isMobile))}
           value={props.selectOption}
           onChange={(item: any) => {

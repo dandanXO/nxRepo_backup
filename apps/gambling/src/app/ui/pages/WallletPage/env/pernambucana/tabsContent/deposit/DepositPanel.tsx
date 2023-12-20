@@ -47,7 +47,7 @@ export const DepositPanel = (props: IDepositPanelProps) => {
           {props?.depositButtonsOptions?.map((options: any, index: number) => {
             const { rechargeValue, isShowRate, config, rate } = options;
             return (
-              <div className={`basis-[30%] max-w-[33%] flex-1 ${index % 3 === 1 ? 'mx-2' : ''}`}>
+              <div className={`basis-[30%] max-w-[33%] flex-1 overflow-hidden ${index % 3 === 1 ? 'mx-2' : ''}`}>
                 <DepositMoneyButton
                   key={index}
                   onClick={() => {

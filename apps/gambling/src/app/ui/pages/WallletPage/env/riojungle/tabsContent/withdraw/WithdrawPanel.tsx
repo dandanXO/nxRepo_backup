@@ -24,8 +24,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
     (state: RootState) => state.app
   );
 
-  const inputClassName='text-white leading-none text-sm md:text-xl'
-// leading-5 md:leading-6 lg:leading-7
+  const inputClassName = 'text-white leading-none text-sm md:text-xl'
   if (!isDuringRestrictTime) {
     return (
       <div>
@@ -48,26 +47,12 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               }}
             />
 
-            <div
-              className={
-                'text-white text-xs md:text-xl text-left leading-none mt-3 md:mt-6'
-              }
-            >
+            <div className={'text-[#B3B3B3] text-xs lg:text-base text-center md:text-left mt-3 md:mt-4 lg:mt-5 leading-5 lg:leading-6'}>
               Atualmente{' '}
-              <button className={'text-[#ffdd14]'} onClick={props.onClickToVIP}>
+              <button onClick={props.onClickToVIP}>
                 VIP{props.vip_level}
               </button>
-              , o valor mínimo de saque diário é de
-              <span className={'text-[#ffdd14]'}>
-                {' '}
-                R${formatLocaleMoney(props.withdrawLimitMin)}
-              </span>{' '}
-              e o valor máximo de saque é de
-              <span className={'text-[#ffdd14]'}>
-                {' '}
-                R${formatLocaleMoney(props.withdrawLimitMax)}
-              </span>
-              .
+              , o valor mínimo de saque diário é de R${formatLocaleMoney(props.withdrawLimitMin)}  e o valor máximo de saque é de  R${formatLocaleMoney(props.withdrawLimitMax)}.
             </div>
 
             <div
@@ -100,31 +85,22 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
           withdrawLimitMin={props.withdrawLimitMin}
           withdrawLimitMax={props.withdrawLimitMax}
         />
-
-
-
         {/*NOTICE: z-index*/}
         {props.contextHolder}
       </div>
     );
   } else {
     return (
-      <div
-        className={tcx(
-          'grow h-full w-full flex flex-col justify-center items-center text-center text-lg font-medium text-[var(--secondary-assistant)] py-[64px] px-[240px]',
-          ['text-sm px-3 py-8', isMobile]
-        )}
-      >
+      <div className={`leading-5 md:leading-6 lg:leading-7 p-2 md:p-2.5 lg:p-5 bg-[#333333] flex flex-col font-normal text-left lg:text-center justify-center w-full items-start rounded-lg text-white  text-sm md:text-base lg:text-xl`}>
         <div>
           Prezado cliente: Olá! Em resposta às exigências do Banco Central do
           Brasil e do recém-criado comitê de agências reguladoras relevantes no
           Brasil, a plataforma precisa concluir a troca de dados entre o Banco
           Central e as agências reguladoras relevantes das{' '}
-          <span className="text-[var(--white)]">{withdrawBegin}</span>h às{' '}
-          <span className="text-[var(--white)]">{withdrawEnd}</span>h, horário
+          <span className="text-[#f59e0b]">{withdrawBegin}</span>h às{' '}
+          <span className="text-[#f59e0b]">{withdrawEnd}</span>h, horário
           brasileiro!
         </div>
-        <br />
         <br />
         <div>
           Todos os nossos esforços são para garantir que a operação da
@@ -133,10 +109,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
           direitos e interesses conexos. Obrigado pela sua compreensão.
         </div>
         <br />
-        <br />
-        <div>
-          As retiradas serão normais durante outros períodos de tempo na
-          plataforma.
+        <div className='text-left lg:text-center w-full'>
+          As retiradas serão normais durante outros períodos de tempo na plataforma.
         </div>
       </div>
     );

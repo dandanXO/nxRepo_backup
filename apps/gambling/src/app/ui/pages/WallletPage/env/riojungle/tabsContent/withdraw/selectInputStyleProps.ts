@@ -1,8 +1,5 @@
 
-import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
-
-export const SelectInputStyleProps = () => {
-  const { isMobile, isTablet, isDesktop } = useBreakpoint();
+export const selectInputStyleProps = (isMobile: boolean) => {
 
   return {
     control: (baseStyle: any, states: any) => {
@@ -10,7 +7,7 @@ export const SelectInputStyleProps = () => {
         ...baseStyle,
         background: '#333',
         color: '#fff',
-        padding: isTablet ? '8px 10px' : '10px',
+        padding: '8px 10px',
         borderRadius: '8px',
         outline: 'none',
         boxShadow: 'none',
