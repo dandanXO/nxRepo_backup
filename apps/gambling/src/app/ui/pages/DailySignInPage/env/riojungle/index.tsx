@@ -5,7 +5,7 @@ import { tcx } from "../../../../utils/tcx";
 import ArrowRight from './images/ArrowRight.png';
 import { GetSignInConfigResponse } from "../../../../../external";
 import { VIPButtonList } from "./components/VIPButtonList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DailySignInBonusList } from "./components/DailySignInBonusList";
 import { notification } from "antd";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
@@ -22,14 +22,14 @@ interface IDailySignInPageProps {
 }
 
 const DailySignInPage = ({
-                           currentVIP,
-                           signInConfig,
-                           signInAllConfig,
-                           todayIsSignIn,
-                           onClickToSignIn,
-                           signInTotalDays
-                         }: IDailySignInPageProps) => {
-  const [selectedVIP, setSelectedVIP] = useState(currentVIP);
+ currentVIP,
+ signInConfig,
+ signInAllConfig,
+ todayIsSignIn,
+ onClickToSignIn,
+ signInTotalDays
+}: IDailySignInPageProps) => {
+  const [selectedVIP, setSelectedVIP] = useState(1);
 
   const [notice, contextHolder] = notification.useNotification();
 
@@ -38,6 +38,10 @@ const DailySignInPage = ({
   const { isMobile, isTablet, isDesktop } = useBreakpoint();
 
   const disableSignInButton = currentVIP === 0 || todayIsSignIn
+
+  useEffect(()=> {
+    setSelectedVIP(currentVIP === 0? 1: currentVIP)
+  }, [currentVIP])
 
   return (
     <div className={tcx('px-4 sm:px-8', ['px-0 flex justify-center', isDesktop])}>
@@ -96,6 +100,7 @@ const DailySignInPage = ({
         {/*VIP選單*/}
         <VIPButtonList
           className='mt-5 gap-2 sm:gap-4'
+          startVIP={1}
           selectedVIP={selectedVIP}
           setSelectedVIP={setSelectedVIP}
           currentVIP={currentVIP}
@@ -145,7 +150,7 @@ const DailySignInPage = ({
             onClickToSignIn().then((success) => {
               if(success) {
                 notice.success({
-                  message: "SUCCESS RRRRRRR"
+                  message: "Check-in concluído"
                 })
               }
             })
