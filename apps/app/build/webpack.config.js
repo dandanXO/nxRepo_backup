@@ -58,6 +58,9 @@ infoLog('build');
 
 const { hostIP } = require('./getNetworkInterface');
 
+const { SubresourceIntegrityPlugin } = require("webpack-subresource-integrity");
+
+
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
     // NOTE: [Webpack-Devtool](https://webpack.js.org/configuration/devtool/)
@@ -135,8 +138,9 @@ module.exports = (config, context) => {
         matchZones: ['Asia/Kolkata', 'Asia/Karachi', 'Asia/Dhaka'],
       }),
       new HtmlWebpackPlugin({
+        // inject: true,
         // 配置 HTML 模板路徑與生成名稱 (第三步)
-        template: path.resolve(__dirname, '../src/index.html'),
+        template: !isProduction ? path.resolve(__dirname, '../src/index.dev.html') : path.resolve(__dirname, '../src/index.prod.html'),
         // publicPath: "/v2",
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main', 'errorhandler'],
@@ -425,6 +429,16 @@ module.exports = (config, context) => {
       }
     );
     finalConfig.optimization.minimizer = minimizers;
+
+    if (process.env.NODE_COUNTRY === 'pk') {
+      // NOTE: webpack-subresource-integrity: the following setting is required for SRI to work:
+      finalConfig.output.crossOriginLoading = "anonymous";
+      finalConfig.plugins.push(
+        new SubresourceIntegrityPlugin()
+      );
+    }
+
+
     console.log(
       'after finalConfig.optimization.minimizer',
       finalConfig.optimization.minimizer

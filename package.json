@@ -273,7 +273,8 @@
     "webpack": "5.89.0",
     "webpack-bundle-analyzer": "^4.9.1",
     "webpack-dashboard": "^3.3.8",
-    "webpack-merge": "5.8.0"
+    "webpack-merge": "5.8.0",
+    "webpack-subresource-integrity": "5.2.0-rc.1"
   },
   "engines": {
     "node": "16.16.0"

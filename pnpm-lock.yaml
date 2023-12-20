@@ -567,6 +567,9 @@ devDependencies:
   webpack-merge:
     specifier: 5.8.0
     version: 5.8.0
+  webpack-subresource-integrity:
+    specifier: 5.2.0-rc.1
+    version: 5.2.0-rc.1(html-webpack-plugin@5.5.0)(webpack@5.89.0)
 
 packages:
 
@@ -23849,6 +23852,20 @@ packages:
     dependencies:
       html-webpack-plugin: 5.5.0(webpack@5.89.0)
       typed-assert: 1.0.9
+      webpack: 5.89.0(@swc/core@1.3.95)(esbuild@0.18.20)
+    dev: true
+
+  /webpack-subresource-integrity@5.2.0-rc.1(html-webpack-plugin@5.5.0)(webpack@5.89.0):
+    resolution: {integrity: sha512-SyjlQ3VZVwpNeVPIMpYf9Qt6oTnq9G3lCcr5YNwjW9TfUoip70MlB9ZDNhJPhkHvfvajMDQwZFfDVVL1QVwnLQ==}
+    engines: {node: '>= 12'}
+    peerDependencies:
+      html-webpack-plugin: '>= 5.0.0-beta.1 < 6'
+      webpack: ^5.12.0
+    peerDependenciesMeta:
+      html-webpack-plugin:
+        optional: true
+    dependencies:
+      html-webpack-plugin: 5.5.0(webpack@5.89.0)
       webpack: 5.89.0(@swc/core@1.3.95)(esbuild@0.18.20)
     dev: true
 

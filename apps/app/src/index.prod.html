@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>App</title>
+    <base href="/" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <% for (let index in htmlWebpackPlugin.files.js) { %>
+    <script
+      src="<%= htmlWebpackPlugin.files.js[index] %>"
+      integrity="<%= htmlWebpackPlugin.files.jsIntegrity[index] %>"
+      crossorigin="<%= webpackConfig.output.crossOriginLoading %>"
+    ></script>
+    <% } %>
+
+    <% for (let index in htmlWebpackPlugin.files.css) { %>
+    <link
+      rel="stylesheet"
+      href="<%= htmlWebpackPlugin.files.css[index] %>"
+      integrity="<%= htmlWebpackPlugin.files.cssIntegrity[index] %>"
+      crossorigin="<%= webpackConfig.output.crossOriginLoading %>"
+    />
+    <% } %>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self';">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
