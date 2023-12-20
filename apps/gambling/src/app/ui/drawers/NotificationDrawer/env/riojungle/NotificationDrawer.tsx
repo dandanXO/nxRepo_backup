@@ -1,16 +1,11 @@
 import React from "react";
 import cx from "classnames";
-import {
-  NotificationItemContainer, NotificationItemExpandable,
-  NotificationItemRedDot,
-  NotificationItemTitle
-} from "../../../../components/NotificationItem";
-import {DownOutlined, UpOutlined} from "@ant-design/icons";
 import {INotificationDrawer} from "../../types/INotificationDrawer";
 
 import {NotificationContainer} from "./NotificationContainer";
 import {useNotificationDrawer} from "../../hooks/useNotificationDrawer";
 import { NotificationElement } from "../../../../components/NotificationElement";
+import XCircle from './images/XCircle.png';
 
 export const NotificationDrawer = ({
   closeDrawer,
@@ -29,11 +24,12 @@ export const NotificationDrawer = ({
       )}
       onClick={(event) => {
         event.stopPropagation();
-        closeDrawer();
       }}
     >
       <NotificationContainer>
-        <div className={'mb-2 text-2xl font-bold text-[var(--white)]'} >
+        <img alt='close' src={XCircle} className='h-10 w-10 cursor-pointer' onClick={()=>closeDrawer()}/>
+
+        <div className={'mt-3 mb-5 text-lg text-[var(--white)]'} >
           Centro de Notificação
         </div>
 
