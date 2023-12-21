@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { IBoardData } from "../.."
 import { IBoardContainer } from "../../components/DesktopBoard";
 
-export const MobileCommonTotalTable = (props: IBoardData) => {
+export const MobileMainBoard = (props: IBoardData) => {
   const navigate = useNavigate();
   const BoardContainer = (props: IBoardContainer) => {
     return (<div className={`

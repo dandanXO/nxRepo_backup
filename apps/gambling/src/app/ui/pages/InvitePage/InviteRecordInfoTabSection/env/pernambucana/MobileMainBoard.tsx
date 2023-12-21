@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { environment } from "apps/gambling/src/environments/environment";
 
 
-const MobileCommonTotalTableContainer = styled.div`
+const MobileMainBoardContainer = styled.div`
   //background: linear-gradient(45deg,#478E51 0%,#5DDC54 100%);
   //box-shadow: inset 0 -0.16rem 0.34rem #72fc6c;
   background: url("assets/${environment.assetPrefix}/h5_invite_dashboard_2.png") center center no-repeat;
@@ -14,10 +14,10 @@ const MobileCommonTotalTableContainer = styled.div`
 `
 
 
-export const MobileCommonTotalTable = (props: IBoardData) => {
+export const MobileMainBoard = (props: IBoardData) => {
   const navigate = useNavigate();
   return (
-    <MobileCommonTotalTableContainer className={"flex flex-col rounded-2xl px-3 py-5 text-white"}>
+    <MobileMainBoardContainer className={"flex flex-col rounded-2xl px-3 py-5 text-white"}>
 
     <div className={"flex flex-row justify-around  mb-2"}>
       <div className={"flex flex-col"}>
@@ -44,6 +44,6 @@ export const MobileCommonTotalTable = (props: IBoardData) => {
         </span>
     </div>
 
-  </MobileCommonTotalTableContainer>
+  </MobileMainBoardContainer>
   )
 }

@@ -36,6 +36,27 @@ export type IInviteRecordInfoTabSection = {
     inviteUnsettle: GetUnsettleInviteRewardDataResponse;
 } & IPanelMode
 
+
+export interface ITotal {
+  data: {
+    // 總邀請獎勵
+    totalReward: string;
+    // 邀請玩家總數
+    numRecharge: number;
+    // 邀請首充獎勵
+    firstRecharge?: string;
+    // 邀請玩家總流水
+    gameRecharge: string;
+    // 邀請玩家總流水獎金
+    gameRechargeReward: string;
+
+    dividendos: string;
+  };
+  isProxy: boolean;
+}
+
+export type IMobileTotalTable = ITabType & ITotal;
+
 export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) => {
     const {isMobile} = useBreakpoint();
 

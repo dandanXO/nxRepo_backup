@@ -1,10 +1,10 @@
-import { MobileCommonBlueTotalTable } from "./MobileCommonBlueTotalTable";
 import { MobileCommonOrangeDailyTable } from "./MobileCommonOrangeDailyTable";
 import cx from 'classnames'
 
 import styled from "styled-components";
 import { environment } from "apps/gambling/src/environments/environment";
-import { MobileCommonTotalTable } from "./components/MobileCommonTotalTable";
+import { MobileMainBoard } from "./components/MobileMainBoard";
+import { MobileTotalTable } from "./components/MobileTotalTable";
 
 
 const GreenHRline = styled.div`
@@ -45,7 +45,7 @@ export const MobilePanel = ({
   return (
     <div>
       <section className={"mb-4"}>
-        <MobileCommonTotalTable data={totalRewardData} />
+        <MobileMainBoard data={totalRewardData} />
         {!isCoco777bet && <GreenHRline className={"my-4"} />}
       </section>
 
@@ -54,7 +54,7 @@ export const MobilePanel = ({
           'text-[#4E91EF] font-bold': !isCoco777bet,
           'text-white': isCoco777bet
         })}><span className="font-bold mr-2">Dados totais</span><span className={"text-sm"}>(Atualize a cada 30 minutos)</span></div>
-        <MobileCommonBlueTotalTable isProxy={isProxy} data={totalInviteData} type={mobileTotalPanelMode} onClick={(type) => setMobileTotalPanelMode(type as "1" | "2" | "3")} />
+        <MobileTotalTable isProxy={isProxy} data={totalInviteData} type={mobileTotalPanelMode} onClick={(type) => setMobileTotalPanelMode(type as "1" | "2" | "3")} />
       </section>
 
       <section className={"mb-4"}>

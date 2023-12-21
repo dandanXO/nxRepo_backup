@@ -1,6 +1,6 @@
-import {ITotal} from "./MobileCommonBlueTotalTable";
 import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
 import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
+import { ITotal } from ".";
 
 export const DesktopTotalType = (props: ITotal & { type: string }) => {
   return (

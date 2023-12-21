@@ -4,7 +4,7 @@ import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import {IBoardData} from "../../index";
 import styled from "styled-components";
 
-export const MobileCommonTotalTableContainer = styled.div`
+export const MobileMainBoardContainer = styled.div`
   border: 2px solid transparent;
   background-clip: padding-box,border-box;
   background-origin: padding-box,border-box;
@@ -13,10 +13,10 @@ export const MobileCommonTotalTableContainer = styled.div`
 `
 
 
-export const MobileCommonTotalTable = (props: IBoardData) => {
+export const MobileMainBoard = (props: IBoardData) => {
   const navigate = useNavigate();
   return (
-    <MobileCommonTotalTableContainer className={"flex flex-col rounded-2xl px-3 py-5 text-white"}>
+    <MobileMainBoardContainer className={"flex flex-col rounded-2xl px-3 py-5 text-white"}>
 
     <div className={"flex flex-row justify-around  mb-2"}>
       <div className={"flex flex-col"}>
@@ -43,6 +43,6 @@ export const MobileCommonTotalTable = (props: IBoardData) => {
         </span>
     </div>
 
-  </MobileCommonTotalTableContainer>
+  </MobileMainBoardContainer>
   )
 }
