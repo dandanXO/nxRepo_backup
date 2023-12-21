@@ -34,6 +34,8 @@ export const MobileVIPGradePage = ({
     }
   }, [selectedVIP])
 
+  if(allLevelInfo.length === 0) return <div></div>
+
   return (
     <div className='px-4 w-full flex flex-col items-centers'>
       <img src={VIPStatue} alt="statue" className='mt-4' />
@@ -68,7 +70,6 @@ export const MobileVIPGradePage = ({
                 progress={
                   ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
                 }
-                progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
               />
               <div className='w-full flex justify-between gap-2 items-end text-sm font-medium text-[#808080] mt-2'>
                 <div className='flex-1'>Número total de apostas</div>
@@ -83,7 +84,6 @@ export const MobileVIPGradePage = ({
                 progress={
                   ((userVIPInfo?.data?.flow || 0) / 100) / (allLevelInfo[selectedVIP].flowLimit / 100 || 1)
                 }
-                progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
               />
             </div>
           )

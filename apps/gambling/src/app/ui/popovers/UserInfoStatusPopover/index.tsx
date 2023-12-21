@@ -408,6 +408,11 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                 userVIPInfo={userVIPInfo}
                 close={props.close}
                 currentLevel={currentLevel}
+                totalBalanceSheetValue={totalBalanceSheetValue}
+                totalReasableValue={totalReasableValue}
+                totalPrize={totalPrize}
+                bonusAwaitingSettlement={bonusAwaitingSettlement}
+                fullWithdrawable={fullWithdrawable}
               />
             )
           }, (
