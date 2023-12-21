@@ -1,10 +1,10 @@
-import { MobileCommonOrangeDailyTable } from "./MobileCommonOrangeDailyTable";
 import cx from 'classnames'
 
 import styled from "styled-components";
 import { environment } from "apps/gambling/src/environments/environment";
 import { MobileMainBoard } from "./components/MobileMainBoard";
 import { MobileTotalTable } from "./components/MobileTotalTable";
+import { MobileDailyTable } from "./components/MobileDailyTable";
 
 
 const GreenHRline = styled.div`
@@ -62,7 +62,7 @@ export const MobilePanel = ({
           'text-[#EE9544] font-bold': !isCoco777bet,
           'text-white': isCoco777bet
         })}><span className="font-bold mr-2">Dados diários</span><span className={"text-sm"}>(Atualize a cada 30 minutos)</span></div>
-        <MobileCommonOrangeDailyTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} recordDate={orangeRecordDate} onRecordDateSelect={onOrangeRecordDateSelect} />
+        <MobileDailyTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} recordDate={orangeRecordDate} onRecordDateSelect={onOrangeRecordDateSelect} />
       </section>
     </div>
   )

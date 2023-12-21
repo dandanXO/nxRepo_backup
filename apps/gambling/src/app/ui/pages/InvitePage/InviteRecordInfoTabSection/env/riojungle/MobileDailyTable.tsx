@@ -1,16 +1,18 @@
+import moment from "moment/moment";
 import { useState } from "react";
-import { IMobileTotalTable, ITabType } from "../../index";
-import ConfirmDrawer from "../../../../../components/Drawers/ConfirmDrawer";
+import { CommonTableTabG } from "apps/gambling/src/app/ui/components/TabItem/CommonTableTabG";
 import { environment } from "apps/gambling/src/environments/environment";
-import cx from 'classnames';
-import { QuestionTipsIcon } from "../../../../../components/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "apps/gambling/src/app/ui/components/Icons/QuestionTipsIcon";
+import ConfirmDrawer from "apps/gambling/src/app/ui/components/Drawers/ConfirmDrawer";
+import DatePicker from "apps/gambling/src/app/ui/components/DatePickers/DatePicker";
+import { IMobileDailyTable } from "../..";
 import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
 
 
-export const MobileTotalTable = (props: IMobileTotalTable) => {
+export const MobileDailyTable = (props: IMobileDailyTable) => {
   const [inviteBonusInfoOpen, setInviteBonusInfoOpen] = useState(false)
   return (
-    <div className={"flex flex-col rounded-2xl pb-2 text-[#ffffff] text-left"}>
+    <div className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
       <div id={"tab-item"} className="w-full flex justify-start items-start my-3 md:my-5">
         <div className="bg-[#333333] flex flex-row rounded-[100px]">
           <TabItem active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'} />
@@ -18,26 +20,29 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
           <TabItem active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'} />
         </div>
       </div>
-      <div className="py-3 bg-[var(--white-20)] text-white text-center px-2">
+      <div className={"text-[transparent] mb-2"}>
+        <DatePicker onConfirm={props.onRecordDateSelect} value={props.recordDate} min={moment().subtract(1, 'days').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
+      </div>
+      <div>
         {props.isProxy && (
           <div className={"flex flex-row justify-end"}>
-            <span className={"text-xs text-[var(--secondary-assistant)]"}>Dividends: R$ {props.data.dividendos || "0.00"}</span>
+            <span className={"text-xs text-[var(--secondary-assistant)]"}>Dividends: R$ {props.records && props.records[0] && props.records[0].dividendos || "0.00"}</span>
           </div>
         )}
-        <div className={"flex flex-col mb-2"}>
-          <span className={"text-xl text-[#ffffff]"}>R$ {props.data.totalReward}</span>
+        <div className={"flex flex-col mb-2 mt-2"}>
+          <span className={"text-xl text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].totalReward || '0,00'}</span>
           <span className="text-xs font-hairline">Obter bônus</span>
         </div>
 
         {props.type === "1" && (
-          <div className={"flex flex-row justify-around items-center mb-5"}>
+          <div className={"flex flex-row justify-around mb-2"}>
             <div className={"flex flex-col flex-1 justify-center"}>
-              <span className={"text-sm text-[#ffffff]"}>{props.data.numRecharge || 0}</span>
+              <span className={"text-sm text-[#ffffff]"}>{props.records && props.records[0] && props.records[0].numRecharge || 0}</span>
               <span className="text-xs font-hairline">Usuário de recarga</span>
             </div>
 
             <div className={"flex flex-col flex-1 justify-center"}>
-              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.firstRecharge}</span>
+              <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].firstRecharge || '0,00'}</span>
               <span className="text-xs font-hairline">Obter bônus</span>
             </div>
           </div>
@@ -45,14 +50,14 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
 
         <div className={"flex flex-row justify-around mb-2"}>
           <div className={"flex flex-col flex-1 justify-center"}>
-            <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRecharge}</span>
+            <span className={"text-sm text-[#ffffff]"}>R$ {props.records && props.records[0] && props.records[0].gameRecharge || '0,00'}</span>
             <span className="text-xs font-hairline">Valor da transação do jogo</span>
           </div>
 
           <div className={"flex flex-col flex-1"} onClick={() => setInviteBonusInfoOpen(true)}>
-            <div className='flex items-center  justify-center'>
-              <span className={"text-sm text-[#ffffff]"}>R$ {props.data.gameRechargeReward}</span>
-              <QuestionTipsIcon className="text-xs ml-1 self-baseline" />
+            <div className='flex items-center justify-center'>
+              <span className={"text-sm text-[#ffffff] mr-1"}>R$ {props.records && props.records[0] && props.records[0].gameRechargeReward || '0,00'}</span>
+              <QuestionTipsIcon className="text-xs  self-baseline" />
             </div>
             <span className="text-xs font-hairline">Obter bônus</span>
             {

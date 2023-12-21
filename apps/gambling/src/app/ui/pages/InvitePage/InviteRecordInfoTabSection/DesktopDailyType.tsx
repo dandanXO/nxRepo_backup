@@ -9,6 +9,7 @@ interface IDailyType {
 }
 
 export const DesktopDailyType = (props: IDailyType) => {
+  console.log('props.recoird',props.records)
   return (
     <div className="overflow-x-auto text-white text-center rounded-xl" >
       <table className="table table-zebra w-full">
@@ -35,6 +36,7 @@ export const DesktopDailyType = (props: IDailyType) => {
         </thead>
         <tbody>
           {props.records !== undefined && props.records?.length > 0 ? props.records?.map((s: any, index: number) => {
+          
             return (
               <tr key={index}>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.day}</td>
