@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import {ArrowLeft} from "../../../Icons/ArrowLeft";
+import cx from "classnames";
 
 type IGameBackNavigation = {
   onClick?: () => void;
+  className?: string;
 }
 
 export const GameBackNavigation = (props: IGameBackNavigation) => {
   return (
-    <div className="bg-[#1a1a1a] flex flex-row w-full items-center h-[40px] md:h-[52px] lg:h-[56px] py-3 px-6 fixed">
+    <div className={cx("bg-[#1a1a1a] flex flex-row w-full items-center py-3 px-6 fixed", props.className)}>
       <span onClick={() => props.onClick && props.onClick()}>
         <ArrowLeft className='relative z-10 text-white mr-1'/>
       </span>

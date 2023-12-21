@@ -152,7 +152,7 @@ export const GamePage = () => {
         <>
           {
             !closeGame && (
-              <GameBackNavigation onClick={() => setCloseGame(true)} />
+              <GameBackNavigation className="h-[40px] md:h-[52px] lg:h-[56px]" onClick={() => setCloseGame(true)} />
             )
           }
           {
@@ -168,7 +168,7 @@ export const GamePage = () => {
           }
           {data !== undefined && data.startType === "LINK" && (
             <iframe
-              className={`w-[100vw] h-[calc(100%-56px)] relative top-[56px]`}
+              className={`w-[100vw] h-[calc(100%-40px)] md:h-[calc(100%-52px)] lg:h-[calc(100%-56px)] relative top-[40px] md:top-[52px] lg:top-[56px]`}
               src={data.link}
               // onLoadStart={onIframeLoadStart}
               // onLoad={onIframeLoad}
