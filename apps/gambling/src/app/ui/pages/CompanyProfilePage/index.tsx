@@ -5,6 +5,7 @@ import {Container} from "../../components/container/Container";
 import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
 import React from "react";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
+import styled from "styled-components";
 
 type IItem = {
   title: string;
@@ -26,12 +27,18 @@ const Item = (props: IItem) => {
     </div>
   )
 }
+
+const License = styled.div`
+  background-image: url(${licenseImage});
+  background-size: cover;
+`
+
 export const CompanyProfilePage = () => {
   const {onClickToIndex} = usePageNavigate();
 
   return (
-    <Container className={""} y={false}>
-      <div className="text-white text-left px-8">
+    <Container className={"pb-4"} y={false} >
+      <div className="text-white text-left">
         <BackNavigation
           onClick={() => onClickToIndex()}
           title={
@@ -80,8 +87,8 @@ export const CompanyProfilePage = () => {
 
         </div>
 
-        <div className={"flex flex-col rounded-xl bg-[rgba(11,25,72,1) bg-[var(--background-footer)] p-5 relative"}>
-          <img className="absolute" src={licenseImage}/>
+        <License className={"flex flex-col rounded-xl bg-[rgba(11,25,72,1) bg-[var(--background-footer)] p-5 relative"}>
+          {/*<img className="absolute" src={licenseImage}/>*/}
           <div className="text-center font-bold text-base md:text-2xl lg:text-2xl leading-6 md:leading-8 lg:leading-8 text-white mb-4">
             Licenciamento Legal da Empresa
           </div>
@@ -100,7 +107,7 @@ export const CompanyProfilePage = () => {
             obrigações de combate à lavagem de dinheiro, conforme estabelecido pela
             legislação de Curaçao.
           </div>
-        </div>
+        </License>
 
 
       </div>
