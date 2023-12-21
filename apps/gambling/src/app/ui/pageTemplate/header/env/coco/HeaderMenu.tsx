@@ -18,13 +18,15 @@ const MenuItem = (props: {
 
 }
 export const HeaderMenu = () => {
-  const { onClickToTelegram, onClickToCheckInDaily, onClickToFirstDeposit, onClickToDepositCashback } = usePageNavigate();
+  const { onClickToTelegram, onClickToCheckInDaily, onClickToFirstDeposit, onClickToDepositCashback, onClickToCompanyProfile } = usePageNavigate();
 
   return (
     <div className="py-6 h-[205px] z-10 w-full fixed top-[66px] left-0 flex items-center bg-[var(--background-submenu)]">
       <div className="w-[158px]"></div>
       <div className="basis-[116px] shrink-0 self-start flex justify-center">
         <MenuItem menuText={'Telegrama'} className="" onClick={onClickToTelegram} />
+        <MenuItem menuText={'About Us'} className="" onClick={onClickToCompanyProfile} />
+
       </div>
       <div className="basis-[116px] shrink-0 flex flex-col justify-between self-start">
         <MenuItem menuText={'Check-in'} onClick={onClickToCheckInDaily}/>

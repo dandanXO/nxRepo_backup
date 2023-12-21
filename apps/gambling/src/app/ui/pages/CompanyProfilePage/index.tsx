@@ -30,9 +30,8 @@ export const CompanyProfilePage = () => {
   const {onClickToIndex} = usePageNavigate();
 
   return (
-    <div className={"p-4"}>
+    <Container className={""} y={false}>
       <div className="text-white text-left px-8">
-
         <BackNavigation
           onClick={() => onClickToIndex()}
           title={
@@ -105,6 +104,6 @@ export const CompanyProfilePage = () => {
 
 
       </div>
-    </div>
+    </Container>
   )
 }
