@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
@@ -19,6 +19,7 @@ import {LoadingBar} from "../../../components/LoadingBar";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {appSlice} from "../../../../reduxStore/appSlice";
+import {usePageSnowEffect} from "../../hooks/usePageSnowEffect/usePageSnowEffect";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -142,7 +143,18 @@ export const PageTemplate = ({
 
   const dispatch = useDispatch();
 
+
+  const {affect} = usePageSnowEffect();
+
+  const canvasRef = useRef();
+  useEffect(() => {
+    affect(canvasRef.current as any)
+  }, [canvasRef.current])
+
   return (
+    <>
+      <canvas className="fixed z-[-1]" ref={canvasRef as any}/>
+
       <StyledPage
         isCurrentPageCompanyProfile={false}
         onClick={() => {
@@ -152,6 +164,7 @@ export const PageTemplate = ({
           }
         }}
       >
+
         {isMobile && isShowMobileHeader && (
           <HeaderMobile
             className={"!h-[52.5px]"}
@@ -250,6 +263,8 @@ export const PageTemplate = ({
         )}
 
       </StyledPage>
+    </>
+
   )
 }
 
