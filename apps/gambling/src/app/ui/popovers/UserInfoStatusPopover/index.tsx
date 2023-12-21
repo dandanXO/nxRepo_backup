@@ -36,6 +36,7 @@ import { UserInfoStatusPopover as RioUserInfoStatusPopover } from './env/riojung
 
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
+import { useInviteReward } from "../../hooks/useInviteReward";
 
 
 const PopoverContainer = renderByPlatform({
@@ -216,49 +217,11 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   const totalReasableValue = useSelector(totalReasableSelector);
   // const accountPromotedSwingValue = useSelector(accountPromotedSwingSelector);
 
-  const [triggerGetInviteReward, { currentData: inviteInfo, isFetching: isInviteInfoFetching }] =
-    useLazyGetInviteRewardDataQuery({
-      pollingInterval: 0,
-      refetchOnFocus: false,
-      refetchOnReconnect: false,
-    });
-
-  const [triggerGetUnsettleInviteReward, { currentData: inviteUnsettle, isFetching: isInviteUnsettleFetching }] =
-    useLazyGetUnsettleInviteRewardDataQuery({
-      pollingInterval: 0,
-      refetchOnFocus: false,
-      refetchOnReconnect: false,
-    });
+  const { totalPrize, bonusAwaitingSettlement, fullWithdrawable } = useInviteReward();
 
   // console.log("inviteInfo", inviteInfo);
   // console.log("inviteUnsettle", inviteUnsettle);
 
-  const { isLogin } = useSelector((state: RootState) => state.app);
-
-  useEffect(() => {
-    if(isLogin) {
-      triggerGetInviteReward({});
-      triggerGetUnsettleInviteReward({})
-    }
-
-  }, [])
-
-  // A = /japi/invite/userInvite/queryInviteRewardData
-  // B = /japi/invite/userInvite/queryUnsettleInviteRewardData
-  const totalPrize = useMemo(() => {
-    if(!inviteInfo || !inviteUnsettle) return 0;
-    return parseFloat(((inviteInfo?.data?.reward + inviteUnsettle?.data?.reward + inviteUnsettle?.data?.firstRechargeReward)/100).toFixed(2))
-  }, [inviteInfo, inviteUnsettle]);
-
-  const bonusAwaitingSettlement = useMemo(() => {
-    if(!inviteUnsettle) return 0
-    return parseFloat(((inviteUnsettle?.data?.reward + inviteUnsettle?.data?.firstRechargeReward)/100).toFixed(2))
-  }, [inviteUnsettle]);
-
-  const fullWithdrawable = useMemo(() => {
-    if(!inviteInfo) return 0
-    return parseFloat(((inviteInfo?.data?.reward)/100).toFixed(2))
-  }, [inviteInfo])
 
 
   const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
