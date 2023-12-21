@@ -71,7 +71,7 @@ export const DesktopHeader = (props: IHeader) => {
             onClick={() => props.onClickToPopupUserInfoStatusPopover()}
             onMouseOver={() => {
               // console.log("onMouseOver")
-              props.onClickToPopupUserInfoStatusPopover();
+              // props.onClickToPopupUserInfoStatusPopover();
             }}
             onMouseOut={() => {
               // console.log("onMouseOut")

@@ -25,7 +25,7 @@ export const DesktopVIPGradePage = ({
   const VIPIcon = require(`../images/vip${selectedVIP}_pic.png`);
 
   useEffect(()=>{
-    setSelectedVIP(currentLevel);
+    setSelectedVIP(currentLevel === 25? currentLevel: currentLevel + 1);
   }, [currentLevel])
 
   useEffect(()=> {
@@ -37,6 +37,8 @@ export const DesktopVIPGradePage = ({
       })
     }
   }, [selectedVIP])
+
+  if(allLevelInfo.length === 0) return <div></div>
 
   return (
     <div className='w-full flex justify-center'>
@@ -85,7 +87,6 @@ export const DesktopVIPGradePage = ({
                     progress={
                       ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
                     }
-                    progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
                   />
                   <div className='w-full flex justify-between text-base font-medium text-[#808080] mt-5'>
                     <div>Número total de apostas</div>
@@ -99,7 +100,6 @@ export const DesktopVIPGradePage = ({
                     progress={
                       ((userVIPInfo?.data?.flow || 0) / 100) / (allLevelInfo[selectedVIP].flowLimit / 100 || 1)
                     }
-                    progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
                   />
                 </div>
               )

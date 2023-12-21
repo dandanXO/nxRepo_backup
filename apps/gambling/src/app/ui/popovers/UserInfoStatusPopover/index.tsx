@@ -16,6 +16,7 @@ import { AppLocalStorage } from "../../../persistant/localstorage";
 import { environment } from "../../../../environments/environment"
 import { UserInfoStatusPopoverContainer as CocoPopoverContainer } from './env/coco/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverContainer as WildPopoverContainer } from './env/wild/UserInfoStatusPopoverContainer';
+import { UserInfoStatusPopoverContainer as RioPopoverContainer } from './env/riojungle/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverContainer as PernambucanaPopoverContainer } from './env/pernambucana/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverVIPInfo as CocoVIPInfo} from './env/coco/UserInfoStatusPopoverVIPInfo'
 import { UserInfoStatusPopoverVIPInfo as WildVIPInfo} from './env/wild/UserInfoStatusPopoverVIPInfo'
@@ -31,6 +32,8 @@ import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/coco/User
 import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/UserInfoStatusPopoverNavigator";
 import { UserInfoStatusPopoverNavigator as PernambucanaNavigator } from "./env/pernambucana/UserInfoStatusPopoverNavigator";
 import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/coco/UserINfoStatusPopoverUserInfo'
+import { UserInfoStatusPopover as RioUserInfoStatusPopover } from './env/riojungle';
+
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
 
@@ -38,6 +41,7 @@ import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserV
 const PopoverContainer = renderByPlatform({
   "wild777bet": WildPopoverContainer,
   "coco777bet": CocoPopoverContainer,
+  "riojungle777bet": RioPopoverContainer,
 // }, PernambucanaPopoverContainer)
 }, CocoPopoverContainer)
 
@@ -399,7 +403,18 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                 </CocoNavigator>
               </>
             ),
-
+            "riojungle777bet": (
+              <RioUserInfoStatusPopover
+                userVIPInfo={userVIPInfo}
+                close={props.close}
+                currentLevel={currentLevel}
+                totalBalanceSheetValue={totalBalanceSheetValue}
+                totalReasableValue={totalReasableValue}
+                totalPrize={totalPrize}
+                bonusAwaitingSettlement={bonusAwaitingSettlement}
+                fullWithdrawable={fullWithdrawable}
+              />
+            )
           }, (
             <>
               <CocoUserInfo />

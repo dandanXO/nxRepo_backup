@@ -24,7 +24,7 @@ export const VerticalVIPButtonList = ({
 }: IVerticalVIPButtonListProps) => {
   return vips.map((vip) => {
 
-    const backgroundColor = currentVIP === vip ? 'bg-[#10B98F]': vip > currentVIP ? 'bg-[#666666]' : 'bg-[#8547EB]';
+    const backgroundColor = (currentVIP === 25 ? currentVIP: currentVIP + 1) === vip ? 'bg-[#10B98F]': vip > currentVIP ? 'bg-[#666666]' : 'bg-[#8547EB]';
 
     return (
       <div
@@ -37,8 +37,8 @@ export const VerticalVIPButtonList = ({
         }
         onClick={()=>onSelect(vip)}
       >
-        {vip === currentVIP && <img alt='lockOpen' src={LockOpen} className='w-4 h-4' />}
-        {vip > currentVIP && <img alt='lockOpen' src={Lock} className='w-4 h-4' />}
+        {vip === (currentVIP === 25 ? currentVIP: currentVIP + 1) && <img alt='lockOpen' src={LockOpen} className='w-4 h-4' />}
+        {vip > (currentVIP === 25 ? currentVIP: currentVIP + 1) && <img alt='lockOpen' src={Lock} className='w-4 h-4' />}
         <div>VIP{vip}</div>
       </div>
     )

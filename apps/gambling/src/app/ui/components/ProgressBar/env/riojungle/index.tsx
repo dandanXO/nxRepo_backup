@@ -18,7 +18,7 @@ export const ProgressBar = ({
       'w-full flex items-center gap-4  bg-[#808080] rounded-full shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]',
       className)
     }>
-      <div className={tcx('w-full h-3 bg-white rounded-full overflow-hidden', progressClassName)}>
+      <div className={tcx('w-full h-3 bg-[#4D4D4D] rounded-full overflow-hidden', progressClassName)}>
         <Progress
           className='rounded-full shadow-[inset_0px_-2px_0px_0px_rgba(0,_0,_0,_0.25),_inset_0px_2px_4px_0px_rgba(255,_255,_255,_0.25)]'
           progress={progress > 1 ? 100 : progress * 100}
