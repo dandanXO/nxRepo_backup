@@ -284,6 +284,8 @@ export const AppRouter = () => {
                   if(!isShowDepositModal) {
                     if(location.pathname !== PageOrModalPathEnum.GamePage) {
                       dispatch(appSlice.actions.setShowDepositModal(true))
+                    } else {
+                      window.clearInterval(timer);
                     }
                   }
                   return timesOfShowDepositModal + 1
@@ -302,6 +304,7 @@ export const AppRouter = () => {
     };
 
   }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal])
+
 
   const queryParams = new URLSearchParams(location.search);
   const inNativeApp = queryParams.get('inNativeApp') === "true";
