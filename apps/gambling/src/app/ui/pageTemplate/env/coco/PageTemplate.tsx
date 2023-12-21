@@ -20,6 +20,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import {usePageSnowEffect} from "../../hooks/usePageSnowEffect/usePageSnowEffect";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {useLocation} from "react-router";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -144,7 +146,7 @@ export const PageTemplate = ({
   const dispatch = useDispatch();
 
 
-  const {affect} = usePageSnowEffect();
+  const {affect, stop, isPlay} = usePageSnowEffect();
 
   const canvasRef = useRef();
   useEffect(() => {
@@ -153,6 +155,20 @@ export const PageTemplate = ({
       affect(canvasRef.current as any)
     }
   }, [canvasRef.current])
+
+  const location = useLocation();
+
+  // useEffect(() => {
+  //   if(location.pathname === PageOrModalPathEnum.GamePage) {
+  //     stop();
+  //   } else {
+  //     // if(!isPlay) {
+  //       if(environment.assetVersionPrefix === "v6") {
+  //         affect(canvasRef.current as any)
+  //       }
+  //     // }
+  //   }
+  // }, [location.pathname, canvasRef.current, isPlay]);
 
   return (
     <>

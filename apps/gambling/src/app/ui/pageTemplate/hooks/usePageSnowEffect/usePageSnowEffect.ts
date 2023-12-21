@@ -45,6 +45,8 @@ export const usePageSnowEffect = () => {
   }
 
   function affect (canvas: HTMLCanvasElement) {
+    setIsPlay(true);
+
     setCanvas(canvas);
 
     //canvas init
@@ -68,6 +70,9 @@ export const usePageSnowEffect = () => {
 
 
   const intervalTimerId = useRef<number>();
+
+  const [isPlay, setIsPlay] = useState<boolean>(false);
+
   useEffect(() => {
     if(typeof ctx === "undefined") return;
     if(!particles) return;
@@ -184,8 +189,19 @@ export const usePageSnowEffect = () => {
 
   }, [canvas, ctx, W, H])
 
+  const stop = () => {
+    if(intervalTimerId && intervalTimerId.current) {
+      setIsPlay(false);
+      if(ctx && W && H) {
+        ctx.clearRect(0, 0, W, H);
+      }
+      clearInterval(intervalTimerId.current);
+    }
+  }
 
   return {
-    affect
+    affect,
+    stop,
+    isPlay,
   }
 }
