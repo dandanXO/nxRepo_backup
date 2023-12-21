@@ -176,7 +176,7 @@ export const usePageSnowEffect = () => {
 
       (intervalTimerId as any).current = setInterval(() => {
         draw();
-      }, 20)
+      }, 40)
     }
 
     drawHandler();

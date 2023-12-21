@@ -28,7 +28,7 @@ export const AppCarouselContent4 = (props: IAppCarouselContent) => {
       }}
     >
       <div className={""}>
-        <CarouselTitleSection className={"sm:top-[45%] md:top-[35%]"}>
+        <CarouselTitleSection className={"sm:top-[45%] md:top-[45%]"}>
           Prêmio upgrade VIP
           <br/>
           Só esperando você coletar!
