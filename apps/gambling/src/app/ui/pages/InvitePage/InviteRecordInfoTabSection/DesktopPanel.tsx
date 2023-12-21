@@ -10,6 +10,8 @@ import { environment } from "apps/gambling/src/environments/environment";
 import { CocoTabItem } from "../../../components/TabItem/CocoTabItem";
 import cx from 'classnames';
 import { tabItemProps } from "./env/coco/tabItemProps";
+import { DesktopTotalTable } from "./components/DesktopTotalTable";
+import { DesktopDailyTable } from "./components/DesktopDailyTable";
 
 type IDesktopPanel = {
   isProxy: boolean;
@@ -77,7 +79,7 @@ export const DesktopPanel = ({
         </div>
 
         <div className={"mb-4"}>
-          <DesktopTotalType isProxy={isProxy} type={totalPanelMode} data={totalInviteData}/>
+          <DesktopTotalTable isProxy={isProxy} type={totalPanelMode} data={totalInviteData}/>
         </div>
 
       </section>
@@ -106,7 +108,7 @@ export const DesktopPanel = ({
         </div>
 
         <div className={"mb-4"}>
-          <DesktopDailyType isProxy={isProxy} type={dailyPanelMode} records={dailyData}/>
+          <DesktopDailyTable isProxy={isProxy} type={dailyPanelMode} records={dailyData}/>
         </div>
 
       </section>

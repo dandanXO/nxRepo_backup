@@ -1,6 +1,6 @@
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import styled from "styled-components";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import { HowToInviteTabSection } from "./HowToInviteTabSection";
 import { InviteRecordInfoTabSection } from "./InviteRecordInfoTabSection/index";
 import useBreakpoint from "../../hooks/useBreakpoint";
@@ -84,7 +84,7 @@ export const InvitePage = () => {
     }
   }, [])
 
-  const TabContent = () => {
+  const TabContent = useCallback(() => {
     return (
       panelMode === "howto" ? (
         <HowToInviteTabSection inviteUrl={inviteInfo?.data?.inviteUrl || ''} panelMode={panelMode} setPanelMode={setPanelMode}/>
@@ -93,7 +93,7 @@ export const InvitePage = () => {
         <InviteRecordInfoTabSection inviteInfo={inviteInfo} inviteUnsettle={inviteUnsettle} panelMode={panelMode} setPanelMode={setPanelMode}/>
       )
     )
-  }
+  },[panelMode])
   return renderByPlatform(
     {
       "coco777bet": <CInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,

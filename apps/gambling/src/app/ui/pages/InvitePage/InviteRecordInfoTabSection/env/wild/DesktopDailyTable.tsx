@@ -1,6 +1,6 @@
-import {environment} from "../../../../../environments/environment";
-import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
-import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
+import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
+import { QuestionTipsIcon } from "apps/gambling/src/app/ui/components/Icons/QuestionTipsIcon";
+import { environment } from "apps/gambling/src/environments/environment";
 
 interface IDailyType {
   type: string;
@@ -8,7 +8,7 @@ interface IDailyType {
   isProxy: boolean;
 }
 
-export const DesktopDailyType = (props: IDailyType) => {
+export const DesktopDailyTable = (props: IDailyType) => {
   return (
     <div className="overflow-x-auto text-white text-center rounded-xl" >
       <table className="table table-zebra w-full">
@@ -23,19 +23,19 @@ export const DesktopDailyType = (props: IDailyType) => {
             <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>
               Recompensas De Troca De Jogos
               <span className='ml-2'>
-              <IconTooltip
-                id='game-bonus-tooltip'
-                icon={<QuestionTipsIcon className={'text-base'}/>}
-                content='As recompensas são liquidadas toda segunda-feira'
-              />
-            </span>
+                <IconTooltip
+                  id='game-bonus-tooltip'
+                  icon={<QuestionTipsIcon className={'text-base'} />}
+                  content='As recompensas são liquidadas toda segunda-feira'
+                />
+              </span>
             </th>
             <th className='p-4'>Recompensa Total </th>
           </tr>
         </thead>
         <tbody>
           {props.records !== undefined && props.records?.length > 0 ? props.records?.map((s: any, index: number) => {
-          
+
             return (
               <tr key={index}>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.day}</td>

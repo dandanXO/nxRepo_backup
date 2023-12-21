@@ -22,7 +22,7 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
       <div className={"text-[transparent] mb-2"}>
         <DatePicker onConfirm={props.onRecordDateSelect} value={props.recordDate} min={moment().subtract(1, 'days').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
       </div>
-      <div>
+      <div className="py-3 bg-[var(--white-20)] text-white text-center px-2">
         {props.isProxy && (
           <div className={"flex flex-row justify-end"}>
             <span className={"text-xs text-[var(--secondary-assistant)]"}>Dividends: R$ {props.records && props.records[0] && props.records[0].dividendos || "0.00"}</span>

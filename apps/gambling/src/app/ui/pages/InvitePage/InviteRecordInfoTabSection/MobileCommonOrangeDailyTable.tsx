@@ -1,10 +1,6 @@
 import moment from "moment/moment";
 import { ITabType } from "./index";
 import { CommonTableTabG } from "../../../components/TabItem/CommonTableTabG";
-
-import { MobileOrangeBackgroundShadowContainer as PMobileOrangeBackgroundShadowContainer } from "./env/pernambucana/MobileOrangeBackgroundShadowContainer";
-import { MobileOrangeBackgroundShadowContainer as WMobileOrangeBackgroundShadowContainer } from "./env/wild/MobileOrangeBackgroundShadowContainer";
-import { MobileOrangeBackgroundShadowContainer as CMobileOrangeBackgroundShadowContainer } from "./env/coco/MobileOrangeBackgroundShadowContainer";
 import { renderByPlatform } from "../../../utils/renderByPlatform";
 import DatePicker from "../../../components/DatePickers/DatePicker";
 import { useState } from "react";
@@ -15,10 +11,6 @@ import { tabItemProps } from "./env/coco/tabItemProps";
 import { MobileTableContainer } from "./env/components/MobileTableContainer";
 import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
 
-const MobileOrangeBackgroundShadowContainer = renderByPlatform({
-  "wild777bet": WMobileOrangeBackgroundShadowContainer,
-  "coco777bet": CMobileOrangeBackgroundShadowContainer,
-}, PMobileOrangeBackgroundShadowContainer)
 
 
 type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; recordDate: string; onRecordDateSelect: (date: string) => void }
@@ -29,7 +21,7 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
   const isCoco777bet = environment.assetPrefix === 'coco777bet';
   const TableTabItem = isCoco777bet ? TabItem : CommonTableTabG;
   return (
-    <MobileOrangeBackgroundShadowContainer className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
+    <div className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
       <div className={"flex flex-row text-lg font-bold justify-around mb-2"}>
         <TableTabItem {...tabItemProps(props.type === "1",'mr-2')} active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'}>Nível 1</TableTabItem>
         <TableTabItem {...tabItemProps(props.type === "2",'mr-2')} active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'}>Nível 2</TableTabItem>
@@ -92,6 +84,6 @@ export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) =>
           </div>
         </div>
       </MobileTableContainer>
-    </MobileOrangeBackgroundShadowContainer>
+    </div>
   )
 }

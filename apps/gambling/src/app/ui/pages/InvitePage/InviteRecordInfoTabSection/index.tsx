@@ -58,7 +58,11 @@ export interface ITotal {
 export type IMobileTotalTable = ITabType & ITotal;
 
 export type IMobileDailyTable = ITabType & { records: any; isProxy: boolean; recordDate: string; onRecordDateSelect: (date: string) => void }
-
+export interface IDailyType {
+  type: string;
+  records?: any;
+  isProxy: boolean;
+}
 
 export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) => {
     const {isMobile} = useBreakpoint();
