@@ -8,7 +8,23 @@ import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
 import {LoadingLogo} from "../../../components/Logos/LoadingLogo"
 import {FooterLogo} from "../../../components/Logos/FooterLogo";
+import licenseLogo from "../license.png";
 
+type ILicenseSection = {
+  className?: string;
+}
+const LicenseSection = (props: ILicenseSection) => {
+  return (
+    <div className={cx("flex flex-col items-center md:flex-row md:justify-items-start", props.className)}>
+      <img className="w-[76px] h-[70px] md:mr-2 mb-4 md:mb-0" src={licenseLogo}/>
+      <div className="text-xs md:text-base font-medium leading-4 md:leading-6 text-[#bebebe] w-full">
+        {environment.platformName} is operated by Block balancing A.C. (Commercial
+        register of Curaçao no. 158191, Emancipatie Boulevard Dominico F. "Don"
+        Martina 52, Curaçao) under the main gaming license #5517/JAZ.
+      </div>
+    </div>
+  )
+}
 export type IFooter = {
   // showFooter?: boolean;
   showTabbar?: boolean;
@@ -144,9 +160,13 @@ export const Footer = (props: IFooter) => {
                 <img alt='footer1' className='flex-1' src={`assets/${environment.assetPrefix}/footer4.e6cdeca2.png`}  onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
               </div>
 
-              <div className='flex justify-center mb-2 '>
+              <div className='flex justify-center mb-4'>
                 <img alt='footer1' className='h-[12px] px-1.5' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
               </div>
+
+
+              <LicenseSection className={"mb-4"}/>
+
 
               <div className='mb-4 text-center text-xs'>@ 2023 {environment.platformName} All rights</div>
             </section>
@@ -206,6 +226,9 @@ export const Footer = (props: IFooter) => {
                 <div className='flex justify-center mb-4'>
                   <img alt='footer1' className='h-5' src={`assets/${environment.assetPrefix}/footer7.a1b2fb6d.png`}/>
                 </div>
+
+                <LicenseSection className={"mb-4"}/>
+
                 <div className='mb-4 text-center'>@ 2023 {environment.platformName} All rights</div>
               </section>
             </div>
