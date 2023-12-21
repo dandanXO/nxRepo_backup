@@ -1,111 +1,110 @@
 import {environment} from "../../../../environments/environment";
+import badgeImage from "./icon=badge.png"
+import licenseImage from "./bg_license.svg";
+import {Container} from "../../components/container/Container";
+import {BackNavigation} from "../../components/BackNavigation/BackNavigation";
+import React from "react";
+import {usePageNavigate} from "../../hooks/usePageNavigate";
 
-export const CompanyProfilePage = () => {
+type IItem = {
+  title: string;
+  description: string;
+  className?: string;
+}
+const Item = (props: IItem) => {
   return (
-    <>
-      <div className="companyInfo text-white text-left px-8">
-        <div className="title">
-          <span className={"text-4xl"}>{environment.platformGroup}</span>
-          <span className={"text-4xl"}>—Fundada em Cingapura em 1993</span>
+    <div className={props.className}>
+      <div>
+        <div className="text-base md:text-2xl lg:text-2xl leading-6 md:leading-8 lg:leading-8 font-bold  text-white flex row mb-3">
+          <img alt="badge" className="w-[24px] h-[24px] md:w-[32px] md:h-[32px] mr-2" src={badgeImage} />
+          {props.title}
+        </div>
+        <div className="text-xs md:text-base lg:text-base leading-4 md:leading-6 lg:leading-6 font-medium text-white">
+          {props.description}
+        </div>
+      </div>
+    </div>
+  )
+}
+export const CompanyProfilePage = () => {
+  const {onClickToIndex} = usePageNavigate();
+
+  return (
+    <div className={"p-4"}>
+      <div className="text-white text-left px-8">
+
+        <BackNavigation
+          onClick={() => onClickToIndex()}
+          title={
+            <div className="text-lg md:text-2xl lg:text-2xl leading-7 md:leading-9 lg:leading-9 font-bold text-white m-auto lg:ml-2">
+              Sobre Nós
+            </div>
+          }
+        />
+
+        <div className="pt-4 text-base md:text-3xl lg:text-3xl font-bold leading-4 md:leading-6 lg:leading-6 mb-4 md:mb-5 lg:mb-5 text-white">
+          Turismo e Jogos para uma Nova Geração
         </div>
 
-        <div className="info text-base">Configurar centros de operação do grupo em 7 países sucessivamente</div>
+        <div className={"mb-8"}>
+          <Item
+            className={"mb-5"}
+            title={"2023 Novo Território no Brasil"}
+            description={`Investimos 2 bilhões de dólares no Brasil, adquirindo bancos digitais
+              relacionados à rede, obtendo licenças para cassinos online. Em apenas seis
+              meses, nos tornamos uma das três principais empresas no setor de transações de
+              jogos.`}
+          />
+          <Item
+            className={"mb-5"}
+            title={"2021 Nova Direção no Brasil"}
+            description={`Investimos em setores relacionados à internet no Brasil para fortalecer ainda mais as raízes de nossos empreendimentos e buscar novos desenvolvimentos em mercados emergentes e regiões geográficas.`}
+          />
 
-        <div className="countryItem">
-          <div  className="v-responsive v-img v-img--booting" style={{width: "580px"}}>
-            <div className="v-responsive__sizer" style={{"paddingBottom": "14.1884%"}}></div>
-            <img className="v-img__img v-img__img--contain" src={`assets/${environment.assetPrefix}/img1.be3894ae.png`}/>
-          </div>
+          <Item
+            className={"mb-5"}
+            title={"2015 Destino em Singapura"}
+            description={`Com a abertura do resort, nosso investimento representou a maior despesa para um resort desse tipo. A icônica estrutura tornou-se uma das principais atrações arquitetônicas de Singapura, influenciando significativamente a imagem da cidade como um principal destino global para conferências e férias.`}
+          />
+
+          <Item
+            className={"mb-5"}
+            title={"2012 Expansão em Macau"}
+            description={`Após anos de crescimento em Macau, inauguramos nosso resort integrado avançado em 2012. Atualmente, operamos cinco resorts principais em Macau, alguns dos quais incluem várias marcas de hotéis.`}
+          />
+
+          <Item
+            className={"mb-5"}
+            title={"2001 Fundação da Empresa"}
+            description={`Fundamos nossa empresa em 2001, com um histórico sólido de impacto positivo nas regiões em que operamos. Nos destacamos por inovação no desenvolvimento e promoção de produtos que impulsionam as indústrias de turismo e jogos offline.`}
+          />
+
         </div>
 
-        <div className="info text-base" style={{"marginTop": "30px"}}>Atualmente, envolve cinco grandes indústrias
-          e continua a se desenvolver
-        </div>
-
-        <div className="industryItem mb-4">
-          <div  className="v-responsive v-img v-img--booting" style={{width: "580px"}}>
-            <div className="v-responsive__sizer" style={{"paddingBottom": "15.8983%"}}></div>
-            <img className="v-img__img v-img__img--contain" src={`assets/${environment.assetPrefix}/img2.6ebaa7a5.png`}/>
-          </div>
-        </div>
-
-        <div className="distanceItem mb-4">
-
-          <div className="distanceTitle text-3xl border-l-[4px] border-l-green-500 border-l-[linear-gradient(180deg,#00B125 0%,#00FE5A 99%)] pl-2 mb-2">
-            <div className="line" ></div>
-            2023
+        <div className={"flex flex-col rounded-xl bg-[rgba(11,25,72,1) bg-[var(--background-footer)] p-5 relative"}>
+          <img className="absolute" src={licenseImage}/>
+          <div className="text-center font-bold text-base md:text-2xl lg:text-2xl leading-6 md:leading-8 lg:leading-8 text-white mb-4">
+            Licenciamento Legal da Empresa
           </div>
 
-          <div className="distanceInfo mb-2" >Em janeiro, ele gastou uma quantia enorme de dinheiro para
-            adquirir bancos digitais relacionados à Internet no Brasil. Ficou em primeiro lugar na categoria de
-            transações de jogos em apenas 4 meses, e o volume diário de transações ultrapassou 200 milhões de reais
-          </div>
-
-          <div className="distanceInfo mb-2" >Em abril, preparou-se para investir 1 bilhão de dólares
-            americanos para entrar oficialmente na operação da indústria de jogos digitais a dinheiro real online no
-            Brasil
-          </div>
-
-          <div className="distanceInfo mb-2" >A versão 1.0 do {environment.platformName} foi lançada no dia 14 de maio,
-            e no primeiro dia de operação de teste recarregou mais de um milhão de reais. Obrigado aos usuários
-            respeitados no Brasil pela confiança
-          </div>
-          <div className="distanceInfo" >{environment.platformName} lançará oficialmente a versão 2.0 em 23º de
-            setembro de 2023
-          </div>
-        </div>
-
-
-        <div className="distanceItem mb-4">
-          <div className="distanceTitle text-3xl border-l-[4px] border-l-green-500 border-l-[linear-gradient(180deg,#00B125 0%,#00FE5A 99%)] pl-2 mb-2">
-            <div className="line" ></div>
-            2022
-          </div>
-          <div className="distanceInfo mb-2" >Formalmente envolvido nos campos relevantes da Internet no
-            Brasil e lançado com sucesso software de transação blockchain relacionado, com um total de mais de 10
-            milhões de usuários instalados, e o volume diário de transações está no nível mais alto do mesmo setor.<br
-              /> A receita excede 21,36 bilhões de dólares americanos e ganhou muitos certificados
-              honorários nacionais em indústrias relacionadas.</div>
-        </div>
-
-
-        <div className="distanceItem mb-4">
-          <div className="distanceTitle text-3xl border-l-[4px] border-l-green-500 border-l-[linear-gradient(180deg,#00B125 0%,#00FE5A 99%)] pl-2 mb-2">
-            <div className="line" ></div>
-            2021
-          </div>
-          <div className="distanceInfo mb-2" >Adquiriu a Behemoth Software Technology, uma empresa
-            unicórnio chinesa de jogos casuais.
-          </div>
-        </div>
-
-        <div className="distanceItem mb-4">
-          <div className="distanceTitle text-3xl border-l-[4px] border-l-green-500 border-l-[linear-gradient(180deg,#00B125 0%,#00FE5A 99%)] pl-2 mb-2">
-            <div className="line" ></div>
-            2017
-          </div>
-          <div className="distanceInfo mb-2" > Em junho, a aquisição da Kolts, a maior empresa de software
-            de desenvolvimento de jogos online de dinheiro real em Israel, estabeleceu uma base sólida para o grupo
-            entrar em jogos online de dinheiro real.
-          </div>
-          <div className="distanceInfo mb-2" > O grupo possuiu sucessivamente qualificações operacionais de
-            cassino off-line nas Filipinas, Nigéria e Macau, China. Ele possuiu integralmente o Four Seasons Sunshine
-            Casino nas Filipinas, o Four Seasons Spring Casino na Nigéria e o Four Seasons Good Luck Casino em Macau ,
-            China.
+          <div className="text-center text-xs md:text-base lg:text-base font-medium leading-4 md:leading-6 lg:leading-6 text-white">
+            {environment.platformName}, a nova versão foi lançada em agosto, e no primeiro
+            dia de operação, o volume de transações de recarga ultrapassou 5 milhões de
+            reais.
+            <br />
+            {environment.platformName} é operado pela Block balancing A.C. (Registro
+            Comercial de Curaçao nº 158191, Emancipatie Boulevard Dominico F. "Don"
+            Martina 52, Curaçao), de acordo com a licença principal de jogos #5517/JAZ.
+            Conforme declaração de política da empresa, {environment.platformName} opera sob
+            a sublicença CIL. Sob a sublicença CIL, {environment.platformName} é operado em
+            conformidade com as leis de Curaçao. A Block balancing A.C. está sujeita a
+            obrigações de combate à lavagem de dinheiro, conforme estabelecido pela
+            legislação de Curaçao.
           </div>
         </div>
 
-        <div className="distanceItem">
-          <div className="distanceTitle text-3xl border-l-[4px] border-l-green-500 border-l-[linear-gradient(180deg,#00B125 0%,#00FE5A 99%)] pl-2 mb-2">
-            <div className="line" ></div>
-            2016
-          </div>
-          <div className="distanceInfo mb-2" >Em julho, o grupo entrou formalmente na indústria de jogos
-            por meio de uma importante decisão
-          </div>
-        </div>
 
       </div>
-    </>
+    </div>
   )
 }
