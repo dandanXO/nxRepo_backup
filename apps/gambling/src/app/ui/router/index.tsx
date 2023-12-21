@@ -307,7 +307,12 @@ export const AppRouter = () => {
   const inNativeApp = queryParams.get('inNativeApp') === "true";
 
   useEffect(() => {
-    dispatch(appSlice.actions.setInNativeApp(inNativeApp))
+    // NOTE: 只吃首頁開啟後的 inNativeApp
+    if(location.pathname === PageOrModalPathEnum.IndexPage) {
+      if(inNativeApp) {
+        dispatch(appSlice.actions.setInNativeApp(inNativeApp))
+      }
+    }
   }, [inNativeApp])
 
   return (
