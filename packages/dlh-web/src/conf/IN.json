@@ -1,5 +1,6 @@
 {
     "country": "India",
+    "currency": "₹",
     "Registrations": true,
     "timezone":"Asia/Kolkata",
     "waterMarkColor":"rgba(0,0,0,.6)"

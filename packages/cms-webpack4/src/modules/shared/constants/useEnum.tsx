@@ -11,6 +11,10 @@ export type TFollowUpResult =
     | 'Other';
 export type TGenerateRePayLink = 'NONE' | 'PARTIAL_REPAYMENT' | 'REPAYMENT_LINK' | 'EXTENSION_LINK';
 
+export type TPayOutMethod = 'BANK_ACCOUNT' | 'MOBILE_WALLET';
+
+export type TPayOutStatus = 'fail' | 'finish' | 'pending';
+
 export const useEnum = (
     translationNameSpase?: string,
 ): {
@@ -24,6 +28,8 @@ export const useEnum = (
     CurrentDayOrderStatusEnum: any;
     OverDueOrderStatusEnum: any;
     TotalOverdueStageEnum: any;
+    PayOutStatusEnum: Map<TPayOutStatus, { text: string; color: string }>;
+    PayOutMethodEnum: Map<TPayOutMethod, string>;
 } => {
     const { t } = useTranslation(translationNameSpase);
 
@@ -123,6 +129,17 @@ export const useEnum = (
         },
     };
 
+    const PayOutStatusEnum: Map<TPayOutStatus, { text: string; color: string }> = new Map([
+        ['finish', { text: t('order:payOutSuccess'), color: 'blue' }],
+        ['fail', { text: t('order:payOutFail'), color: 'red' }],
+        ['pending', { text: t('order:payOutPending'), color: '' }],
+    ]);
+
+    const PayOutMethodEnum: Map<TPayOutMethod, string> = new Map([
+        ['BANK_ACCOUNT', t('common:bankCard')],
+        ['MOBILE_WALLET', t('common:eWallet')],
+    ]);
+
     return {
         OverDueOrderStatusEnum,
         CurrentDayOrderStatusEnum,
@@ -134,5 +151,7 @@ export const useEnum = (
         EmergencyContactEnum,
         GenerateRePayLinkEnum,
         TotalOverdueStageEnum,
+        PayOutStatusEnum,
+        PayOutMethodEnum,
     };
 };

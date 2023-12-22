@@ -1,5 +1,6 @@
 {
     "country": "Pakistan",
+    "currency": "₹",
     "Registrations": false,
     "timezone":"Asia/Karachi",
     "waterMarkColor":"rgba(244,133,78,.6)"
