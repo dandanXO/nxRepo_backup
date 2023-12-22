@@ -5,6 +5,7 @@ import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
 import {SettingPage as PSettingPage} from "./env/pernambucana/SettingPage";
 import {SettingPage as WSettingPage} from "./env/wild/SettingPage";
 import {SettingPage as CSettingPage} from "./env/coco/SettingPage";
+import { SettingPage as RioSettingPage } from './env/riojungle';
 import {renderByPlatform} from "../../utils/renderByPlatform";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
@@ -22,6 +23,9 @@ export const SettingPage = () => {
     ),
     "coco777bet": (
       <CSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
+    ),
+    "riojungle777bet": (
+      <RioSettingPage nickname={nickname} phone={phone} />
     )
   }, (
     <PSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
