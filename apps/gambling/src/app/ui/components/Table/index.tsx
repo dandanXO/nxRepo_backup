@@ -28,6 +28,7 @@ interface ITable {
   titleStyle?: string;
   contentStyle?: string;
   dataCount: number;
+  containeerClassName?:string;
 
 }
 
@@ -63,13 +64,13 @@ export const Table = (props: ITable) => {
   }, [dataSource])
 
   return (
-    <div className={tcx('h-full w-full  overflow-hidden flex flex-col')}>
+    <div className={tcx('h-full w-full overflow-hidden flex flex-col', props?.containeerClassName)}>
       <div className={tcx('customTable-thead',['pr-[3px]', isScrollbarVisible])}>
         <table className='relative table w-full no-scrollbar table-fixed'>
           <thead className=''>
             {columns?.map((col: any, colIndex: number) => (
               <th key={col.key}
-                className={cx(`p-2 sm:break-all border-[rgba(255,255,255,0.2)]`,
+                className={cx(`p-2 text-center sm:break-all border-[rgba(255,255,255,0.2)]`,
                   {'border-r ':colIndex !== columns.length - 1},
                   props.className,
                   props.titleStyle

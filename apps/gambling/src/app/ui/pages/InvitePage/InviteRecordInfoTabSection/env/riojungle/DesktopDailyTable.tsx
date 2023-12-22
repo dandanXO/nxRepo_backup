@@ -16,7 +16,7 @@ export const DesktopDailyTable = (props: IDailyType) => {
     { title: 'Primeira Recarga Recompensas', name: 'numRecharge', key: 'numRecharge' },
     { title: 'Valor Da Transação Do Jogo', name: 'gameRecharge', key: 'gameRecharge' },
     {
-      title: <div className="flex">
+      title: <div className="flex items-center justify-center">
         <div>Recompensas De Troca De Jogos</div>
         <div className='ml-1 self-start'>
           <IconTooltip
@@ -26,22 +26,25 @@ export const DesktopDailyTable = (props: IDailyType) => {
           />
         </div>
       </div>,
-      name: 'gameRechargeReward', key: 'gameRechargeReward'
+      name: 'gameRechargeReward', key: 'gameRechargeReward', width: '300px'
     },
     { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward' },
   ]
 
   const data = [...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || []]
   return (
-    <div className="riojungle777bet-table overflow-x-auto text-white text-center rounded-xl h-[50vh] p-5 bg-[#333]" >
-      {props.records !== undefined && props.records?.length > 0 &&
+    <div className=" riojungle777bet-table overflow-x-auto text-white text-center rounded-xl max-h-[400px] p-5 bg-[#333]" >
+      
         <Table
-          className={' !bg-[#333] border-r-0 border-b'}
-          dataSource={data}
+          containeerClassName={`min-w-[500px]`}
+          className={'w-full overflow-x-auto !bg-[#333] border-r-0 '}
+          titleStyle={`text-[#B3B3B3] font-normal text-xs lg:text-sm`}
+          contentStyle={"border-b text-xs lg:text-sm"}
+          dataSource={props.records !== undefined && props.records?.length > 0 ? props.records:[]}
           columns={columns}
           dataCount={0}
         />
-      }
+      
       {/* <table className="table table-zebra w-full">
         <thead>
           <tr>
