@@ -72,7 +72,7 @@ export const EditUserInfoModal = ({
       return;
     }
 
-    if (nickName.length < 6 || nickName.length > 16) {
+    if (nickName.length < 4 || nickName.length > 16) {
       setNickNameInvalidatedMessage('nome de usuário (6-16 letras e números)')
       return;
     }
