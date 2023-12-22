@@ -1357,5 +1357,6 @@
   "order.payOutFail": "Transferencia fallida",
   "order.payOutPending": "Pendiente",
   "common.bankcard": "Tarjeta Bancaria",
-  "common.eWallet": "Billetera Electrónica"
+  "common.eWallet": "Billetera Electrónica",
+  "detail.user.company.name": "Nombre de la Empresa"
 }

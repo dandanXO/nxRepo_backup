@@ -54,7 +54,8 @@ const userConvertData = (obj = {}) => {
         position: userAuthInfo['position'],
         salaryRange: userAuthInfo['salaryRange'],
         emergencyContactInfos: userAuthInfo['emergencyContactInfos'],
-        education: userAuthInfo['education']
+        education: userAuthInfo['education'],
+        companyName: userAuthInfo['companyName']
     };
 }
 export { converData, userConvertData };

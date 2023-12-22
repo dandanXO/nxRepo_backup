@@ -1,6 +1,7 @@
 {
     "address": "家庭地址",
     "birthDay": "出生日期",
+    "companyName": "公司名称",
     "education": "教育程度",
     "email": "Email",
     "emergencyContact": "紧急联络人",

@@ -369,6 +369,10 @@ export const OrderDetailContent = ({ userId, collectId }: IOrderDetailContentPro
             { title: t('user:address'), dataIndex: 'personaInfo.address' },
         ];
 
+        if (appInfo.COUNTRY !== 'India') {
+            personalDescriptions.push({ title: t('user:companyName'), dataIndex: 'personaInfo.companyName' });
+        }
+
         const emergencyContactColumns = [
             {
                 title: t('common:table.contactType'),

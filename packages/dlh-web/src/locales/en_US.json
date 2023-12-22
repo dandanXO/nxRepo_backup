@@ -1355,6 +1355,7 @@
   "world_tone": "Worldtone",
   "refresh.balance": "refresh",
   "current.balance": "current balance",
+  "detail.user.company.name": "Company Name",
   "common.status": "Status",
   "order.loanCertificate": "Loan Voucher",
   "order.payOutAmount": "Loan Amount({unit})",
