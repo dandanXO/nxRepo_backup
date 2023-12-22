@@ -279,7 +279,10 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
           }
         })()
         // console.log("dailyData6", gameRechargeReward);
-        return { numRecharge, firstRecharge, gameRecharge, gameRechargeReward, totalReward, dividendos }
+
+        const day = z.day
+
+        return { numRecharge, firstRecharge, gameRecharge, gameRechargeReward, totalReward, dividendos, day }
     })
     // console.log("dailyData", dailyData);
 
