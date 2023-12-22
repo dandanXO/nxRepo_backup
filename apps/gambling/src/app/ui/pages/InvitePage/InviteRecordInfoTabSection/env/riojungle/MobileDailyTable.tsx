@@ -13,11 +13,17 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
   const [inviteBonusInfoOpen, setInviteBonusInfoOpen] = useState(false)
   return (
     <div className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
-      <div id={"tab-item"} className="w-full flex justify-start items-start my-3 md:my-5">
-        <div className="bg-[#333333] flex flex-row rounded-[100px]">
-          <TabItem active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'} />
-          <TabItem active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'} />
-          <TabItem active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'} />
+      <div className={"flex flex-col justify-center items-center flex-wrap my-3"}>
+        <div id={"tab-item"} className="w-full flex justify-center items-center">
+          <div className="bg-[#333333] flex flex-row rounded-[100px]">
+            <TabItem active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'} />
+            <TabItem active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'} />
+            <TabItem active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'} />
+          </div>
+        </div>
+        <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
+          {props.isProxy && <div className="text-[#3B82F6]">Dividends:R$ {props.records && props.records[0] && props.records[0].dividendos || "0.00"}</div>}
+          <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
         </div>
       </div>
       <div className={"text-[transparent] mb-2"}>

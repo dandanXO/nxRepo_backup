@@ -8,11 +8,11 @@ import {
 import moment from "moment";
 
 import {AppLocalStorage} from "../../../../persistant/localstorage";
-import {MobilePanel} from "./MobilePanel";
-import {DesktopPanel} from "./DesktopPanel";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../utils/format";
 import { IPanelMode } from "..";
+import { DesktopPanel } from "./components/DesktopPanel";
+import { MobilePanel } from "./components/MobilePanel";
 
 
 export interface ITabType {
@@ -62,6 +62,40 @@ export interface IDailyType {
   type: string;
   records?: any;
   isProxy: boolean;
+}
+
+export type IDesktopPanel = {
+  isProxy: boolean;
+
+  totalRewardData: any;
+
+  totalInviteData: any;
+  // mobileTotalPanelMode: any;
+  // setMobileTotalPanelMode: (value: "1" | "2" | "3") => void;
+  totalPanelMode: any;
+  setTotalPanelMode: (value: "1" | "2" | "3") => void;
+
+  dailyData: any;
+  // mobileDailyPanelMode: any;
+  // setMobileDailyPanelMode: (value: "1" | "2" | "3") => void;
+  dailyPanelMode: any;
+  setDailyPanelMode: (value: "1" | "2" | "3") => void;
+}
+
+export type IMobilePanel = {
+  isProxy: boolean;
+
+  totalRewardData: any;
+
+  totalInviteData: any;
+  mobileTotalPanelMode: any;
+  setMobileTotalPanelMode: (value: "1" | "2" | "3") => void;
+
+  dailyData: any;
+  mobileDailyPanelMode: any;
+  setMobileDailyPanelMode: (value: "1" | "2" | "3") => void;
+  orangeRecordDate: string
+  onOrangeRecordDateSelect: (date: string) => void
 }
 
 export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) => {
@@ -213,13 +247,13 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         const dividendos = (() => {
           if(dataType === "1") {
             // z.rewd1Reward
-            return z.rewd1Reward;
+            return formatLocaleMoney(z.rewd1Reward);
           } else if (dataType === "2") {
             // z.rewd2Reward
-            return z.rewd2Reward
+            return formatLocaleMoney(z.rewd2Reward)
           } else {
             // z.rewd3Reward
-            return z.rewd3Reward
+            return formatLocaleMoney(z.rewd3Reward)
           }
         })()
         // console.log("dailyData1", dailyData);

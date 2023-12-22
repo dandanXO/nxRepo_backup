@@ -26,7 +26,7 @@ export const DesktopDailyTable = (props: IDailyType) => {
           />
         </div>
       </div>,
-      name: 'gameRechargeReward', key: 'gameRechargeReward', width: '300px'
+      name: 'gameRechargeReward', key: 'gameRechargeReward'
     },
     { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward' },
   ]

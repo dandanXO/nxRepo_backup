@@ -1,36 +1,14 @@
-import { DesktopBoard } from "./components/DesktopBoard";
-import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
-import { TabItem, Tabs } from "../../../components/TabItem/TabItem";
-import { DesktopTotalType } from "./DesktopTotalType";
-import { DesktopDailyType } from "./DesktopDailyType";
-import { QuestionContainer } from "../index";
+import { DesktopBoard } from "../../components/DesktopBoard";
+import { TabItem, Tabs } from "../../../../../components/TabItem/TabItem";
 import { useNavigate } from "react-router";
-import { RecordButton2 } from "../../../components/Buttons/RecordButton";
 import { environment } from "apps/gambling/src/environments/environment";
-import { CocoTabItem } from "../../../components/TabItem/CocoTabItem";
 import cx from 'classnames';
-import { tabItemProps } from "./env/coco/tabItemProps";
-import { DesktopTotalTable } from "./components/DesktopTotalTable";
-import { DesktopDailyTable } from "./components/DesktopDailyTable";
-import { Container } from "../../../components/container/Container";
+import { tabItemProps } from "./tabItemProps";
+import { DesktopDailyTable } from "./DesktopDailyTable";
+import { IDesktopPanel } from "../..";
+import { Container } from "apps/gambling/src/app/ui/components/container/Container";
+import { DesktopTotalTable } from "./DesktopTotalTable";
 
-type IDesktopPanel = {
-  isProxy: boolean;
-
-  totalRewardData: any;
-
-  totalInviteData: any;
-  // mobileTotalPanelMode: any;
-  // setMobileTotalPanelMode: (value: "1" | "2" | "3") => void;
-  totalPanelMode: any;
-  setTotalPanelMode: (value: "1" | "2" | "3") => void;
-
-  dailyData: any;
-  // mobileDailyPanelMode: any;
-  // setMobileDailyPanelMode: (value: "1" | "2" | "3") => void;
-  dailyPanelMode: any;
-  setDailyPanelMode: (value: "1" | "2" | "3") => void;
-}
 export const DesktopPanel = ({
   isProxy,
   totalRewardData,

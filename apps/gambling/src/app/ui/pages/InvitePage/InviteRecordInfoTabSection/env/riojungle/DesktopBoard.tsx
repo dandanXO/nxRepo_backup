@@ -28,17 +28,17 @@ export const DesktopBoard = (props: IBoardData) => {
 
         </button>
       </section> */}
-      <section className={"flex flex-col md:flex-row w-full mb-4 [&>*:nth-child(2)]:md:mx-5 "}>
+      <section className={"flex flex-col md:flex-row w-full [&>*:nth-child(2)]:md:mx-5 "}>
         <BoardContainer>
-          <div className={"text-base md:text-xl lg:text-3xl text-white"}>R${props.data.totalReward}</div>
+          <div className={"text-base md:text-xl lg:text-3xl text-white"}>{props.data.totalReward}</div>
           <div className={"text-sm lg:text-lg text-white md:mt-5"}>Prêmio total</div>
         </BoardContainer>
         <BoardContainer>
-          <div className={"text-base md:text-xl lg:text-3xl text-white"}>R${props.data.paidReward}</div>
+          <div className={"text-base md:text-xl lg:text-3xl text-white"}>{props.data.paidReward}</div>
           <div className={"text-sm lg:text-lg text-white md:mt-5"}>Bônus já liquidados</div>
         </BoardContainer>
         <BoardContainer>
-          <div className={"text-base md:text-xl lg:text-3xl text-white"}>R${props.data.waitForCalReward}</div>
+          <div className={"text-base md:text-xl lg:text-3xl text-white"}>{props.data.waitForCalReward}</div>
           <div className={"text-sm lg:text-lg text-center text-white leading-5 lg:leading-7 md:mt-5"}>Bônus aguardando liquidação</div>
           <div className={"text-sm lg:text-lg text-center text-white leading-5 lg:leading-7"}>(Atualizar a cada 24 horas)</div>
         </BoardContainer>

@@ -4,8 +4,8 @@ import { ITotal } from "../..";
 
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {
 
-  const thStyle = "px-2 lg:px-3 border-r border-[rgba(255,255,255,0.2)] text-[#b3b3b3]";
-  const tdStyle = 'px-2 lg:px-3 text-center pt-5 border-r border-[rgba(255,255,255,0.2)] text-white'
+  const thStyle = "px-2 lg:px-3 border-r border-[rgba(255,255,255,0.2)] text-[#b3b3b3] font-normal lg:font-bold";
+  const tdStyle = 'px-2 lg:px-3 text-center pt-5 border-r border-[rgba(255,255,255,0.2)] text-white font-bold'
 
   return (
     <div className="overflow-x-auto px-3 lg:p-5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] rounded-lg">
