@@ -299,11 +299,16 @@ export const AppRouter = () => {
         }
       });
     }
+
+    if(location.pathname === PageOrModalPathEnum.GamePage) {
+      setTimesOfShowDepositModal(3)
+    }
+
     return () => {
       window.clearInterval(timer);
     };
 
-  }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal])
+  }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal, location])
 
 
   const queryParams = new URLSearchParams(location.search);
