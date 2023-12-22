@@ -14,7 +14,7 @@ const NoData = () => {
 }
 
 interface IColumns {
-  title: string;
+  title: string | ReactElement;
   name: string;
   key: string;
   render?: (i: any) => ReactElement | string;
@@ -69,8 +69,8 @@ export const Table = (props: ITable) => {
           <thead className=''>
             {columns?.map((col: any, colIndex: number) => (
               <th key={col.key}
-                className={cx(`p-2 sm:break-all `,
-                  {'border-r border-[rgba(255,255,255,0.2)]':colIndex !== columns.length - 1},
+                className={cx(`p-2 sm:break-all border-[rgba(255,255,255,0.2)]`,
+                  {'border-r ':colIndex !== columns.length - 1},
                   props.className,
                   props.titleStyle
                 )}
@@ -93,7 +93,8 @@ export const Table = (props: ITable) => {
                   {columns?.map((col: any, colIndex: number) => (
                     <td key={col.key + colIndex}
                       className={cx(`py-4 px-3 border-[rgba(255,255,255,0.2)] break-all text-center`,
-                        {'border-r': colIndex !== columns.length - 1},                        props.className,
+                        {'border-r': colIndex !== columns.length - 1},                        
+                        props.className,
                         props.contentStyle
                       )}
                       style={{width:`${col.width !== undefined ? col.width : 'auto'}`}}

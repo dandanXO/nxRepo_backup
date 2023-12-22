@@ -1,6 +1,7 @@
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 import { QuestionTipsIcon } from "apps/gambling/src/app/ui/components/Icons/QuestionTipsIcon";
 import { environment } from "apps/gambling/src/environments/environment";
+import { Table } from "apps/gambling/src/app/ui/components/Table";
 
 interface IDailyType {
   type: string;
@@ -9,10 +10,39 @@ interface IDailyType {
 }
 
 export const DesktopDailyTable = (props: IDailyType) => {
+
+  const columns = [
+    { title: 'Data', name: 'day', key: 'day' },
+    { title: 'Primeira Recarga Recompensas', name: 'numRecharge', key: 'numRecharge' },
+    { title: 'Valor Da Transação Do Jogo', name: 'gameRecharge', key: 'gameRecharge' },
+    {
+      title: <div className="flex">
+        <div>Recompensas De Troca De Jogos</div>
+        <div className='ml-1 self-start'>
+          <IconTooltip
+            id='game-bonus-tooltip'
+            icon={<QuestionTipsIcon className={'text-base'} />}
+            content='As recompensas são liquidadas toda segunda-feira'
+          />
+        </div>
+      </div>,
+      name: 'gameRechargeReward', key: 'gameRechargeReward'
+    },
+    { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward' },
+  ]
+
+  const data = [...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || []]
   return (
-    <div className="overflow-x-auto text-white text-center rounded-xl" >
-      <table className="table table-zebra w-full">
-        {/* head */}
+    <div className="riojungle777bet-table overflow-x-auto text-white text-center rounded-xl h-[50vh] p-5 bg-[#333]" >
+      {props.records !== undefined && props.records?.length > 0 &&
+        <Table
+          className={' !bg-[#333] border-r-0 border-b'}
+          dataSource={data}
+          columns={columns}
+          dataCount={0}
+        />
+      }
+      {/* <table className="table table-zebra w-full">
         <thead>
           <tr>
             <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Data</th>
@@ -63,7 +93,7 @@ export const DesktopDailyTable = (props: IDailyType) => {
             </tr>
           )}
         </tbody>
-      </table>
+      </table> */}
     </div>
   )
 }

@@ -3,40 +3,45 @@ import { QuestionTipsIcon } from "apps/gambling/src/app/ui/components/Icons/Ques
 import { ITotal } from "../..";
 
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {
+
+  const thStyle = "px-2 lg:px-3 border-r border-[rgba(255,255,255,0.2)] text-[#b3b3b3]";
+  const tdStyle = 'px-2 lg:px-3 text-center pt-5 border-r border-[rgba(255,255,255,0.2)] text-white'
+
   return (
-    <div className="overflow-x-auto text-white text-center rounded-xl">
-      <table className="table table-zebra w-full">
-        {/* head */}
+    <div className="overflow-x-auto px-3 lg:p-5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] rounded-lg">
+      <table className="">
         <thead>
-        <tr>
-          <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Usuário De Recarga</th>
-          {props.type === "1" && <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Primeira Recarga Recompensas</th>}
-          {props.isProxy && <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Dividendos</th>}
-          <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Valor Da Transação Do Jogo</th>
-          <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>
-            Recompensas De Troca De Jogos
-            <span className='ml-2'>
-              <IconTooltip
-                id='game-bonus-tooltip'
-                icon={<QuestionTipsIcon className={'text-base'}/>}
-                content='As recompensas são liquidadas toda segunda-feira'
-              />
-            </span>
-          </th>
-          <th className='p-4'>Recompensa Total</th>
-        </tr>
+          <tr>
+            <th className={thStyle}>Usuário De Recarga</th>
+            {props.type === "1" && <th className={thStyle}>Primeira Recarga Recompensas</th>}
+            {/* {props.isProxy && <th className={thStyle}>Dividendos</th>} */}
+            <th className={thStyle}>Valor Da Transação Do Jogo</th>
+            <th className={`${thStyle}`}>
+              <div className="flex">
+                <div>Recompensas De Troca De Jogos</div>
+                <div className='ml-1 self-start'>
+                  <IconTooltip
+                    id='game-bonus-tooltip'
+                    icon={<QuestionTipsIcon className={'text-base'} />}
+                    content='As recompensas são liquidadas toda segunda-feira'
+                  />
+                </div>
+              </div>
+            </th>
+            <th className='p-4 text-[#b3b3b3]'>Recompensa Total</th>
+          </tr>
         </thead>
 
         <tbody>
-        {/* row 1 */}
-        <tr>
-          <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{props?.data.numRecharge || 0}</td>
-          {props.type === "1" && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.firstRecharge}</td>}
-          {props.isProxy && <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.dividendos}</td>}
-          <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.gameRecharge}</td>
-          <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>R${props?.data.gameRechargeReward}</td>
-          <td className='p-4'>R${props?.data.totalReward}</td>
-        </tr>
+          {/* row 1 */}
+          <tr>
+            <td className={tdStyle}>{props?.data.numRecharge || 0}</td>
+            {props.type === "1" && <td className={tdStyle}>R${props?.data.firstRecharge}</td>}
+            {/* {props.isProxy && <td className={tdStyle}>R${props?.data.dividendos}</td>} */}
+            <td className={tdStyle}>R${props?.data.gameRecharge}</td>
+            <td className={tdStyle}>R${props?.data.gameRechargeReward}</td>
+            <td className='text-center pt-5 text-white'>R${props?.data.totalReward}</td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -171,6 +171,30 @@ html {
 
 }
 
+.riojungle777bet-table{
+  /* scrollbar */
+  /* Works on Firefox */
+  .customTable-tbody {
+    scrollbar-width: thin;
+    scrollbar-color: #10B98F;
+  }
+  .customTable-tbody::-webkit-scrollbar {
+    width: 3px;
+    height: 10px;
+    background: #4D4D4D;
+    position: relative;
+  }
+  .customTable-tbody::-webkit-scrollbar-track {
+    background: transparent;
+    position: absolute;
+    top:0;
+    right: 0;
+  }
+ .customTable-tbody::-webkit-scrollbar-thumb {
+    background: #10B98F;
+  }
+}
+
 
 .vip-tab-items::-webkit-scrollbar {
   display: none;
