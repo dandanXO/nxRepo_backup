@@ -20,7 +20,7 @@ export const DesktopDailyTable = (props: IDailyType) => {
         <div>Recompensas De Troca De Jogos</div>
         <div className='ml-1 self-start'>
           <IconTooltip
-            id='game-bonus-tooltip'
+            id='game-bonus-tooltip-desktop'
             icon={<QuestionTipsIcon className={'text-base'} />}
             content='As recompensas são liquidadas toda segunda-feira'
           />
@@ -31,7 +31,6 @@ export const DesktopDailyTable = (props: IDailyType) => {
     { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward' },
   ]
 
-  const data = [...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || [], ...props?.records || []]
   return (
     <div className=" riojungle777bet-table overflow-x-auto text-white text-center rounded-xl max-h-[400px] p-5 bg-[#333]" >
       
