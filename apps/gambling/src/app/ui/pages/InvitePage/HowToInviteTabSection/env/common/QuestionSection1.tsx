@@ -24,11 +24,10 @@ export const QuestionSection1 = () => {
         }
       })}
       <div>
-        As recompensas serão distribuídas
-        às 11 horas do dia seguinte. Ao mesmo tempo, realizamos
-        anticomissões de acordo com o valor da aposta do jogo do usuário do
-        jogo na plataforma do jogo (a comissão é considerável). A taxa de
-        comissão varia de jogo para jogo.
+        As recompensas serão distribuídas às 11 horas do dia seguinte.
+        Observe que o número de pessoas que você convidar naquele dia será zerado no dia seguinte e não será acumulado.
+        Ao mesmo tempo, realizamos anticomissões de acordo com o valor da aposta do jogo do usuário do jogo na plataforma do jogo (a comissão é considerável).
+        A taxa de comissão varia de jogo para jogo.
       </div>
     </>
   )
