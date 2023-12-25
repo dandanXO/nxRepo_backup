@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Row, Col, Button, Input, Select, DatePicker } from 'antd';
 import { injectIntl, FormattedMessage } from "react-intl";
+import moment from "moment";
 
 const { RangePicker } = DatePicker;
 
@@ -21,7 +22,7 @@ class SearchList extends Component {
         handleSearch(getFieldsValue());
     }
     render () {
-        const { form: { getFieldDecorator }, intl, init } = this.props;
+        const { form: { getFieldDecorator }, intl, initSearch } = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
@@ -59,9 +60,9 @@ class SearchList extends Component {
                           <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.tel.sale.createTime" })}>
                             {
                               getFieldDecorator('time', {
-                                initialValue: ['', '']
+                                initialValue: [moment(initSearch['createTimeStart']), moment(initSearch['createTimeEnd'])]
                               })(
-                                <RangePicker placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]} />
+                                <RangePicker allowClear={false} placeholder={[intl.formatMessage({id : "page.search.list.select"}), intl.formatMessage({id : "page.search.list.select"})]} />
                               )
                             }
                           </Form.Item>
