@@ -9,7 +9,7 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
 
   return (
     <div className="border border-solid border-[#666] overflow-x-auto px-3 lg:p-5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] rounded-lg">
-      <table className="">
+      <table className="w-full">
         <thead>
           <tr>
             <th className={thStyle}>Usuário De Recarga</th>

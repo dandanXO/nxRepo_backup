@@ -34,13 +34,12 @@ export const DesktopDailyTable = (props: IDailyType) => {
   ]
 
   return (
-    <div className=" riojungle777bet-table overflow-x-auto text-white text-center rounded-xl max-h-[400px] p-5 bg-[#333]" >
-
+    <div className=" riojungle777bet-table overflow-x-auto text-white text-center rounded-xl  p-5 bg-[#333]" >
       <Table
-        containerClassName={`min-w-[500px]`}
+        containerClassName={`min-w-[500px] max-h-[400px]`}
         className={'w-full overflow-x-auto !bg-[#333] border-r-0 '}
         titleStyle={`text-[#B3B3B3] font-normal text-xs lg:text-sm`}
-        contentStyle={"border-b text-sm"}
+        contentStyle={`border-b text-sm`}
         dataSource={props.records !== undefined && props.records?.length > 0 ? props.records : []}
         columns={columns}
         dataCount={0}

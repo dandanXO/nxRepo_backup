@@ -165,10 +165,16 @@ html {
   position: absolute;
   top:0;
   right: 0;
+
 }
 .customTable-tbody::-webkit-scrollbar-thumb {
   background: rgba(170, 170, 170,0.6);
 
+}
+
+/* thead出現滾軸時，預留的scroll寬度 */
+.customTable-thead-scrollPadding{
+  padding-right: 3px;
 }
 
 .riojungle777bet-table{
@@ -179,19 +185,27 @@ html {
     scrollbar-color: #10B98F;
   }
   .customTable-tbody::-webkit-scrollbar {
-    width: 3px;
+    width: 8px;
     height: 10px;
     background: #4D4D4D;
     position: relative;
+    border-radius: 10px;
   }
   .customTable-tbody::-webkit-scrollbar-track {
     background: transparent;
     position: absolute;
     top:0;
     right: 0;
+    border-radius: 10px;
   }
  .customTable-tbody::-webkit-scrollbar-thumb {
     background: #10B98F;
+    border-radius: 10px;
+  }
+
+  /* thead出現滾軸時，預留的scroll寬度 */
+  .customTable-thead-scrollPadding{
+    padding-right: 8px;
   }
 }
 

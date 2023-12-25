@@ -70,7 +70,7 @@ export const Table = (props: ITable) => {
 
   return (
     <div className={tcx('h-full w-full overflow-hidden flex flex-col', props?.containerClassName)}>
-      <div className={tcx('customTable-thead', ['pr-[3px]', isScrollbarVisible])}>
+      <div className={tcx('customTable-thead', ['customTable-thead-scrollPadding', isScrollbarVisible])}>
         <table className='relative table w-full no-scrollbar table-fixed'>
           <thead className=''>
             {columns?.map((col: any, colIndex: number) => {
