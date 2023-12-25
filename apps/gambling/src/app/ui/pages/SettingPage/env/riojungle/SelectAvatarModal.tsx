@@ -6,11 +6,13 @@ import { tcx } from "../../../../utils/tcx";
 interface ISelectAvatarModalProps {
   close : () => void
   selectedAvatar: number
+  onConfirm: (value: number) => void
 }
 
 export const SelectAvatarModal = ({
   close,
-  selectedAvatar
+  selectedAvatar,
+  onConfirm
 }: ISelectAvatarModalProps) => {
   const [selected, setSelected] = useState(selectedAvatar)
 
@@ -40,6 +42,24 @@ export const SelectAvatarModal = ({
               </div>
             ))
           }
+        </div>
+
+        <div className='w-full text-white flex justify-between gap-3 sm:gap-4 mt-5 sm:mt-9 lg:mt-10 text-sm lg:text-lg'>
+          <button
+            className='rounded-full w-full py-[10px] lg:py-[6px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#999999]'
+            onClick={close}
+          >
+            Cancelar
+          </button>
+          <button
+            className='rounded-full w-full py-[10px] lg:py-[6px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f]'
+            onClick={()=>{
+              close();
+              onConfirm(selected);
+            }}
+          >
+            Confieme
+          </button>
         </div>
 
       </div>

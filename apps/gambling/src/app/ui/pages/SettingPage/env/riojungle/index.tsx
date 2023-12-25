@@ -9,6 +9,10 @@ import { tcx } from "../../../../utils/tcx";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { SelectAvatarModal } from "./SelectAvatarModal";
+import { notification } from "antd";
+import { useUpdateUserInfoMutation } from "../../../../../external";
+import { useNavigate } from "react-router";
+import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 
 
 const Title = ({ title, className }:{ title: string, className?: string}) => (
@@ -34,6 +38,13 @@ export const SettingPage = ({
   const [errorMessage, setErrorMessage] = useState('')
   const [openSelectAvatarModal, setOpenSelectAvatarModal] = useState(false);
 
+  const [triggerUpdateUserInfo] = useUpdateUserInfoMutation({});
+  const [api, contextHolder] = notification.useNotification();
+
+  const navigate = useNavigate();
+
+  const { isMobile } = useBreakpoint();
+
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
 
   const nickNameValidator = (nickname: string) => {
@@ -53,11 +64,49 @@ export const SettingPage = ({
     setErrorMessage('')
   }
 
+  const handleSave = () => {
+    if(errorMessage === '') {
+      triggerUpdateUserInfo({
+        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
+        nickname: nicknameInput,
+        avatar: `${selectedAvatar}`
+      }).then((response) => {
+        if('data' in response) {
+          if (response.data.code === 200) {
+            AppLocalStorage.setItem(
+              AppLocalStorageKey.userInfo,
+              JSON.stringify(response.data.data.user_info || '{}')
+            )
+            api.success({
+              message: 'Configurações salvas'
+            })
+            navigate(PageOrModalPathEnum.SettingPage)
+          }
+        }
+      })
+    }
+  }
+
   return (
     <div className='flex justify-center'>
-      { openSelectAvatarModal && <SelectAvatarModal close={()=>setOpenSelectAvatarModal(false)} selectedAvatar={selectedAvatar} />}
+      {contextHolder}
+      { openSelectAvatarModal && (
+        <SelectAvatarModal
+          close={()=>setOpenSelectAvatarModal(false)}
+          selectedAvatar={selectedAvatar}
+          onConfirm={(value)=>setSelectedAvatar(value)}
+        />
+      )}
       <div className='w-full lg:w-[80%] px-4 sm:px-8 lg:px-0'>
-        <BackNavigation />
+        <BackNavigation
+          onClick={()=>{
+            if (isMobile) {
+              navigate(PageOrModalPathEnum.MyPage);
+            } else {
+              navigate(PageOrModalPathEnum.IndexPage);
+            }
+          }}
+        />
 
         {/*頭像*/}
         <div
@@ -97,6 +146,7 @@ export const SettingPage = ({
 
         <button
           className='w-full rounded-lg text-sm sm:text-base lg:text-xl lg:mt-10 mt-5 sm:mt-8 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] py-[10px] sm:py-3 lg:py-[14px]'
+          onClick={handleSave}
         >
           Salvar
         </button>
