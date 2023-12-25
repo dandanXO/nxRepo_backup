@@ -14,7 +14,7 @@ interface Config {
   invite_hig_reward?: number
   recharge_cashback_rate?: string;
   recharge_first_cashback_rate?: string;
-  reward_daily_reset: boolean;
+  reward_daily_reset?: boolean;
 }
 export type InitialState = {
   inNativeApp: boolean;
