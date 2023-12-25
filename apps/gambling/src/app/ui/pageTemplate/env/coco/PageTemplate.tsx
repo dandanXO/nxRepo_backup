@@ -151,7 +151,7 @@ export const PageTemplate = ({
   const canvasRef = useRef();
   useEffect(() => {
     // NOTE: Natal777bet
-    if(environment.assetVersionPrefix === "v6") {
+    if(environment.assetVersionPrefix === "v6" || environment.assetVersionPrefix === "v7") {
       affect(canvasRef.current as any)
     }
   }, [canvasRef.current])

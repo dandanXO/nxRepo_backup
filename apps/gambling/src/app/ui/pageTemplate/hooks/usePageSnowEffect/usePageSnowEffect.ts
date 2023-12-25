@@ -4,6 +4,12 @@ import snow2Image from "./snow_2.png"
 import snow3Image from "./snow_3.png"
 import snow4Image from "./snow_4.png"
 import snow5Image from "./snow_5.png"
+import snow01Image from "./snow_01.png"
+import snow02Image from "./snow_02.png"
+import snow03Image from "./snow_03.png"
+import snow04Image from "./snow_04.png"
+import snow05Image from "./snow_05.png"
+import {environment} from "../../../../../environments/environment";
 
 type IParticle = {
   x: number;
@@ -23,7 +29,7 @@ export const usePageSnowEffect = () => {
   const [H, setH] = useState<number>()
   const mp = 50; //max particles
 
-  const snows = [snow1Image, snow2Image, snow3Image, snow4Image, snow5Image]
+  const snows = environment.assetVersionPrefix === "v6" ? [snow1Image, snow2Image, snow3Image, snow4Image, snow5Image] : [snow01Image, snow02Image, snow03Image, snow04Image, snow05Image]
 
   function renewSnowflake(width: number, height: number) {
 
