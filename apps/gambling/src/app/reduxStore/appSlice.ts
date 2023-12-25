@@ -11,10 +11,11 @@ interface IMaintenance{
   end: string;
 }
 interface Config {
-  invite_hig_reward?: number
+  invite_hig_reward?: number;
   recharge_cashback_rate?: string;
   recharge_first_cashback_rate?: string;
   reward_daily_reset?: boolean;
+  recharge_bonus_start?: number;
 }
 export type InitialState = {
   inNativeApp: boolean;
