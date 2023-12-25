@@ -26,7 +26,7 @@ export const HeaderMenu = () => {
 
       <div className="basis-[116px] shrink-0 flex flex-col justify-between self-start">
         <MenuItem menuText={'Telegrama'} className="" onClick={onClickToTelegram} />
-        <MenuItem menuText={'About Us'} className="" onClick={onClickToCompanyProfile} />
+        <MenuItem menuText={'Sobre nós'} className="" onClick={onClickToCompanyProfile} />
       </div>
 
       <div className="basis-[116px] shrink-0 flex flex-col justify-between self-start">
