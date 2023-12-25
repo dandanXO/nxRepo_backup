@@ -4,11 +4,11 @@ import { ITotal } from "../..";
 
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {
 
-  const thStyle = "px-2 lg:px-3 border-r border-[rgba(255,255,255,0.2)] text-[#b3b3b3] font-normal lg:font-bold";
-  const tdStyle = 'px-2 lg:px-3 text-center pt-5 border-r border-[rgba(255,255,255,0.2)] text-white font-bold'
+  const thStyle = "text-sm lg:text-base px-2 lg:px-3 border-r border-[rgba(255,255,255,0.2)] text-[#b3b3b3] font-normal lg:font-bold";
+  const tdStyle = 'text-sm lg:text-lg px-2 lg:px-3 text-center pt-5 border-r border-[rgba(255,255,255,0.2)] text-white font-bold'
 
   return (
-    <div className="overflow-x-auto px-3 lg:p-5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] rounded-lg">
+    <div className="border border-solid border-[#666] overflow-x-auto px-3 lg:p-5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] rounded-lg">
       <table className="">
         <thead>
           <tr>
@@ -28,7 +28,7 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
                 </div>
               </div>
             </th>
-            <th className='p-4 text-[#b3b3b3]'>Recompensa Total</th>
+            <th className='text-sm lg:text-base p-4 text-[#b3b3b3]'>Recompensa Total</th>
           </tr>
         </thead>
 
@@ -40,7 +40,7 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
             {/* {props.isProxy && <td className={tdStyle}>R${props?.data.dividendos}</td>} */}
             <td className={tdStyle}>R${props?.data.gameRecharge}</td>
             <td className={tdStyle}>R${props?.data.gameRechargeReward}</td>
-            <td className='text-center pt-5 text-white'>R${props?.data.totalReward}</td>
+            <td className='text-sm lg:text-lg text-center pt-5 text-white'>R${props?.data.totalReward}</td>
           </tr>
         </tbody>
       </table>

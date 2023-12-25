@@ -2,6 +2,7 @@ import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTo
 import { QuestionTipsIcon } from "apps/gambling/src/app/ui/components/Icons/QuestionTipsIcon";
 import { environment } from "apps/gambling/src/environments/environment";
 import { Table } from "apps/gambling/src/app/ui/components/Table";
+import { formatLocaleMoney } from "apps/gambling/src/app/ui/utils/format";
 
 interface IDailyType {
   type: string;
@@ -13,8 +14,9 @@ export const DesktopDailyTable = (props: IDailyType) => {
 
   const columns = [
     { title: 'Data', name: 'day', key: 'day' },
-    { title: 'Primeira Recarga Recompensas', name: 'numRecharge', key: 'numRecharge' },
-    { title: 'Valor Da Transação Do Jogo', name: 'gameRecharge', key: 'gameRecharge' },
+    { title: 'Usuário De Recarga', name: 'numRecharge', key: 'numRecharge', render: (i: any) => `R$ ${formatLocaleMoney(i.numRecharge)}` },
+    { title: 'Primeira Recarga Recompensas', name: 'firstRecharge', key: 'firstRecharge', isShow: props.type === "1", render: (i: any) => `R$ ${formatLocaleMoney(i.firstRecharge)}` },
+    { title: 'Valor Da Transação Do Jogo', name: 'gameRecharge', key: 'gameRecharge', render: (i: any) => `R$ ${formatLocaleMoney(i.gameRecharge)}` },
     {
       title: <div className="flex items-center justify-center">
         <div>Recompensas De Troca De Jogos</div>
@@ -26,76 +28,23 @@ export const DesktopDailyTable = (props: IDailyType) => {
           />
         </div>
       </div>,
-      name: 'gameRechargeReward', key: 'gameRechargeReward'
+      name: 'gameRechargeReward', key: 'gameRechargeReward', render: (i: any) => `R$ ${formatLocaleMoney(i.gameRechargeReward)}`
     },
-    { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward' },
+    { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward', render: (i: any) => `R$ ${formatLocaleMoney(i.totalReward)}` },
   ]
 
   return (
     <div className=" riojungle777bet-table overflow-x-auto text-white text-center rounded-xl max-h-[400px] p-5 bg-[#333]" >
-      
-        <Table
-          containeerClassName={`min-w-[500px]`}
-          className={'w-full overflow-x-auto !bg-[#333] border-r-0 '}
-          titleStyle={`text-[#B3B3B3] font-normal text-xs lg:text-sm`}
-          contentStyle={"border-b text-xs lg:text-sm"}
-          dataSource={props.records !== undefined && props.records?.length > 0 ? props.records:[]}
-          columns={columns}
-          dataCount={0}
-        />
-      
-      {/* <table className="table table-zebra w-full">
-        <thead>
-          <tr>
-            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Data</th>
-            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Usuário De Recarga</th>
-            {props.type === "1" && <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Primeira Recarga Recompensas</th>}
-            {props.isProxy && <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Dividendos</th>}
-            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>Valor Da Transação Do Jogo</th>
-            <th className='p-4 border-r border-[rgba(255,255,255,0.2)]'>
-              Recompensas De Troca De Jogos
-              <span className='ml-2'>
-                <IconTooltip
-                  id='game-bonus-tooltip'
-                  icon={<QuestionTipsIcon className={'text-base'} />}
-                  content='As recompensas são liquidadas toda segunda-feira'
-                />
-              </span>
-            </th>
-            <th className='p-4'>Recompensa Total </th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.records !== undefined && props.records?.length > 0 ? props.records?.map((s: any, index: number) => {
 
-            return (
-              <tr key={index}>
-                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.day}</td>
-                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.numRecharge}</td>
-                {props.type === "1" && (
-                  <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.firstRecharge}</td>
-                )}
-                {props.isProxy && (
-                  <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.dividendos}</td>
-                )}
-                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRecharge}</td>
-                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.gameRechargeReward}</td>
-                <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.totalReward}</td>
-              </tr>
-            )
-          }
-          ) : (
-            <tr>
-              <td colSpan={props.type === "1" ? (props.isProxy ? 7 : 6) : (props.isProxy ? 6 : 5)}>
-                <div className="flex flex-col items-center p-12">
-                  <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
-                  <div>Nada aqui</div>
-                </div>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table> */}
+      <Table
+        containerClassName={`min-w-[500px]`}
+        className={'w-full overflow-x-auto !bg-[#333] border-r-0 '}
+        titleStyle={`text-[#B3B3B3] font-normal text-xs lg:text-sm`}
+        contentStyle={"border-b text-sm"}
+        dataSource={props.records !== undefined && props.records?.length > 0 ? props.records : []}
+        columns={columns}
+        dataCount={0}
+      />
     </div>
   )
 }

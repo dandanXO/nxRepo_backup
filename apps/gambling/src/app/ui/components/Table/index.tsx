@@ -1,13 +1,13 @@
 
 import { ReactElement, useEffect, useRef, useState } from 'react';
-import {tcx} from "../../utils/tcx";
+import { tcx } from "../../utils/tcx";
 import { environment } from "../../../../environments/environment";
 import cx from 'classnames'
 
 const NoData = () => {
   return (
     <td className='flex flex-col justify-center items-center py-[50px] gap-1'>
-      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`}/>
+      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
       <div className='text-lg font-medium'>Nada aqui</div>
     </td>
   )
@@ -18,6 +18,7 @@ interface IColumns {
   name: string;
   key: string;
   render?: (i: any) => ReactElement | string;
+  isShow?: boolean;
 }
 
 interface ITable {
@@ -28,7 +29,8 @@ interface ITable {
   titleStyle?: string;
   contentStyle?: string;
   dataCount: number;
-  containeerClassName?:string;
+  containerClassName?: string;
+
 
 }
 
@@ -64,22 +66,27 @@ export const Table = (props: ITable) => {
   }, [dataSource])
 
   return (
-    <div className={tcx('h-full w-full overflow-hidden flex flex-col', props?.containeerClassName)}>
-      <div className={tcx('customTable-thead',['pr-[3px]', isScrollbarVisible])}>
+    <div className={tcx('h-full w-full overflow-hidden flex flex-col', props?.containerClassName)}>
+      <div className={tcx('customTable-thead', ['pr-[3px]', isScrollbarVisible])}>
         <table className='relative table w-full no-scrollbar table-fixed'>
           <thead className=''>
-            {columns?.map((col: any, colIndex: number) => (
-              <th key={col.key}
-                className={cx(`p-2 text-center sm:break-all border-[rgba(255,255,255,0.2)]`,
-                  {'border-r ':colIndex !== columns.length - 1},
-                  props.className,
-                  props.titleStyle
-                )}
-                style={{width:`${col.width !== undefined ? col.width : 'auto'}`}}
-                >
-                {col.title}
-              </th>
-            ))}
+            {columns?.map((col: any, colIndex: number) => {
+              if (col.isShow !== undefined ? col.isShow : true) {
+                return (
+                  <th key={col.key}
+                    className={cx(`p-2 text-center sm:break-all border-[rgba(255,255,255,0.2)]`,
+                      { 'border-r ': colIndex !== columns.length - 1 },
+                      props.className,
+                      props.titleStyle
+                    )}
+                    style={{ width: `${col.width !== undefined ? col.width : 'auto'}` }}
+                  >
+                    {col.title}
+                  </th>
+                )
+              }
+            }
+            )}
           </thead>
         </table>
       </div>
@@ -91,18 +98,22 @@ export const Table = (props: ITable) => {
             </tr> :
               dataSource.map((data: any, index: number) => {
                 return <tr key={index}>
-                  {columns?.map((col: any, colIndex: number) => (
-                    <td key={col.key + colIndex}
-                      className={cx(`py-4 px-3 border-[rgba(255,255,255,0.2)] break-all text-center`,
-                        {'border-r': colIndex !== columns.length - 1},                        
-                        props.className,
-                        props.contentStyle
-                      )}
-                      style={{width:`${col.width !== undefined ? col.width : 'auto'}`}}
-                      >
-                      {col.render !== undefined ? col.render(data as any) : data[col.name]}
-                    </td>
-                  ))}
+                  {columns?.map((col: any, colIndex: number) => {
+                    if (col.isShow !== undefined ? col.isShow : true) {
+                      return (
+                        <td key={col.key + colIndex}
+                          className={cx(`py-4 px-3 border-[rgba(255,255,255,0.2)] break-all text-center`,
+                            { 'border-r': colIndex !== columns.length - 1 },
+                            props.className,
+                            props.contentStyle
+                          )}
+                          style={{ width: `${col.width !== undefined ? col.width : 'auto'}` }}
+                        >
+                          {col.render !== undefined ? col.render(data as any) : data[col.name]}
+                        </td>
+                      )
+                    }
+                  })}
                 </tr>
               })
             }

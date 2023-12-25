@@ -80,7 +80,7 @@ export type IDesktopPanel = {
   // setMobileDailyPanelMode: (value: "1" | "2" | "3") => void;
   dailyPanelMode: any;
   setDailyPanelMode: (value: "1" | "2" | "3") => void;
-}
+} & IPanelMode
 
 export type IMobilePanel = {
   isProxy: boolean;
@@ -96,7 +96,7 @@ export type IMobilePanel = {
   setMobileDailyPanelMode: (value: "1" | "2" | "3") => void;
   orangeRecordDate: string
   onOrangeRecordDateSelect: (date: string) => void
-}
+} & IPanelMode
 
 export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) => {
     const {isMobile} = useBreakpoint();
@@ -323,9 +323,9 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
   return (
     <div className={"mb-[80px]"}>
       {isMobile ? (
-        <MobilePanel isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} mobileTotalPanelMode={mobileTotalPanelMode} setMobileTotalPanelMode={setMobileTotalPanelMode} dailyData={dailyData} mobileDailyPanelMode={mobileDailyPanelMode} setMobileDailyPanelMode={setMobileDailyPanelMode} orangeRecordDate={orangeRecordSelectedDate.format('YYYY-MM-DD')} onOrangeRecordDateSelect={(date)=> setOrangeRecordSelectedDate(moment(date, 'YYYY-MM-DD'))}/>
+        <MobilePanel panelMode={props.panelMode} setPanelMode={props.setPanelMode} isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} mobileTotalPanelMode={mobileTotalPanelMode} setMobileTotalPanelMode={setMobileTotalPanelMode} dailyData={dailyData} mobileDailyPanelMode={mobileDailyPanelMode} setMobileDailyPanelMode={setMobileDailyPanelMode} orangeRecordDate={orangeRecordSelectedDate.format('YYYY-MM-DD')} onOrangeRecordDateSelect={(date)=> setOrangeRecordSelectedDate(moment(date, 'YYYY-MM-DD'))}/>
       ) : (
-        <DesktopPanel isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} totalPanelMode={totalPanelMode} setTotalPanelMode={setTotalPanelMode} dailyData={dailyData} dailyPanelMode={dailyPanelMode} setDailyPanelMode={setDailyPanelMode}/>
+        <DesktopPanel panelMode={props.panelMode} setPanelMode={props.setPanelMode} isProxy={isProxy} totalRewardData={totalRewardData} totalInviteData={totalInviteData} totalPanelMode={totalPanelMode} setTotalPanelMode={setTotalPanelMode} dailyData={dailyData} dailyPanelMode={dailyPanelMode} setDailyPanelMode={setDailyPanelMode}/>
       )}
     </div>
   )
