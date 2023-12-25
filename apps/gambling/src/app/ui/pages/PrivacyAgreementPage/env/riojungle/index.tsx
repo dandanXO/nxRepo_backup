@@ -11,7 +11,7 @@ export const PrivacyAgreementPage = () => {
   return (
     <div className='w-full flex justify-center text-sm lg:text-lg text-white'>
       <div className='w-full px-[21px] sm:px-8 lg:px-0 lg:w-[70%]'>
-        <BackNavigation onClick={()=>onClickToIndex()} />
+        <BackNavigation className='text-base sm:text-lg lg:text-2xl' onClick={()=>onClickToIndex()} />
 
         <div className='text-lg lg:text-2xl font-medium pb-5 sm:pb-8 lg:pb-10'>Privacy Policy and Personal Data Protection</div>
 
