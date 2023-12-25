@@ -20,7 +20,8 @@ export const MenuDrawerContent = () => {
   const location = useLocation();
   const userInfo: IUserInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}');
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
-
+  const recharge_first_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_first_cashback_rate);
+  const recharge_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_cashback_rate);
   const {
     onClickToFirstDeposit,
     onClickToDepositCashback,
@@ -73,7 +74,7 @@ export const MenuDrawerContent = () => {
         }}
       />
       <MobileMenuItem
-        text={'Primeiro depósito +20%'}
+        text={`Primeiro depósito +${recharge_first_cashback_rate}`}
         className={`after:bg-gradient-to-b from-[#2BE681] to-[#0E735B]`}
         onClick={() => {
           onClickToFirstDeposit();
@@ -81,7 +82,7 @@ export const MenuDrawerContent = () => {
         }}
       />
       <MobileMenuItem
-        text={'Recarregar Cashback +10%'}
+        text={`Recarregar Cashback +${recharge_cashback_rate}`}
         className={`after:bg-gradient-to-b from-[#FF8E8E] to-[#FF3838]`}
         onClick={() => {
           onClickToDepositCashback();
