@@ -9,6 +9,7 @@ import { IMobileDailyTable } from "../..";
 import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
 import { MobileTableListItem } from "./components/MobileTableListItem";
 import cx from 'classnames';
+import { NoData } from "apps/gambling/src/app/ui/components/Table/env/riojungle/NoData";
 
 
 export const MobileDailyTable = (props: IMobileDailyTable) => {
@@ -66,7 +67,7 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
               </div>
             )
           }) :
-            <div>no data</div>
+            <NoData/>
         }
       </div>
     </div>

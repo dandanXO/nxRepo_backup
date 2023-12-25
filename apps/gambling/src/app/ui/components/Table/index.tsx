@@ -2,16 +2,19 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { tcx } from "../../utils/tcx";
 import { environment } from "../../../../environments/environment";
-import cx from 'classnames'
+import cx from 'classnames';
+import { NoData as CNoData } from './env/coco/NoData';
+import { NoData as PNoData } from './env/pernambucana/NoData';
+import { NoData as WNoData } from './env/wild/NoData';
+import { NoData as RNoData } from './env/riojungle/NoData';
+import { renderByPlatform } from '../../utils/renderByPlatform';
 
-const NoData = () => {
-  return (
-    <td className='flex flex-col justify-center items-center py-[50px] gap-1'>
-      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
-      <div className='text-lg font-medium'>Nada aqui</div>
-    </td>
-  )
-}
+const NoData = ()=> renderByPlatform({
+  "coco777bet": <CNoData  />,
+  "wild777bet": <WNoData  />,
+  "riojungle777bet": <RNoData  />,
+}, <PNoData  />
+)
 
 interface IColumns {
   title: string | ReactElement;
