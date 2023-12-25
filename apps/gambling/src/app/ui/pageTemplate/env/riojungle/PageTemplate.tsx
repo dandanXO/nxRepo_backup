@@ -102,12 +102,13 @@ export const PageTemplate = ({
 
   const HeaderHeight = isDesktop ? 72 : 52.5;
   const DrawerWidth = 248;
-  const ZIndex = "z-[1001]";
+  const HeaderZIndex = "z-[1002]";
+  const MenudrawerZIndex = "z-[1001]";
 
   return (
     <BaseStyledPageTemplate>
 
-      <div className={twMerge("fixed top-0 left-0 right-0 w-full", ZIndex)}>
+      <div className={twMerge("fixed top-0 left-0 right-0 w-full", HeaderZIndex)}>
         <Header
           className={""}
           // NOTE: Login
@@ -137,7 +138,7 @@ export const PageTemplate = ({
       <div className={""}>
         {isShowDesktopMenuDrawer && (
           <div
-            className={twMerge("fixed left-0", ZIndex)}
+            className={twMerge("fixed left-0", MenudrawerZIndex)}
             style={{
               top: HeaderHeight,
             }}
