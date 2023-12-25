@@ -37,7 +37,7 @@ export const MenuDrawer = () => {
       id="TabBarRoot"
       className="w-[248px] h-[calc(100vh-72px)] bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto"
     >
-      <div className="w-full flex flex-col items-start gap-3 pt-3">
+      <div className="w-full flex flex-col items-start gap-3 pt-7">
 
         <div className={"w-full flex flex-col px-5"}>
           <button className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-end gap-2 items-start border rounded-lg" onClick={onClickToDepositCashback}>

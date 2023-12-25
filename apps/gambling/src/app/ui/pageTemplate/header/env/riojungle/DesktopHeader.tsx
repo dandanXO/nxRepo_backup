@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import cx from "classnames";
 import {twMerge} from "tailwind-merge";
 import React, {useState} from "react";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
@@ -12,9 +11,10 @@ import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {NotificationAnimationIcon} from "../../../../components/Icons/animation/NotificationAnimationIcon";
-import {MenuLogo} from "../../../../components/Logos/MenuLogo";
 import {IHeader} from "../../types/IHeader";
 import {appSlice} from "../../../../../reduxStore/appSlice";
+import LogoContainerImg from "./LogoContainer.svg";
+import {MenuLogo} from "./MenuLogo";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -37,16 +37,22 @@ export const DesktopHeader = (props: IHeader) => {
   return (
     <header
       className={twMerge("h-[72px]",
-        "bg-[var(--primary-variant)]",
+        "bg-gradient-to-b from-[var(--background-header-from)] to-[var(--background-header-to)]",
         "flex flex-row justify-between items-center",
         props.className
       )}
     >
-      <div
-        className={"cursor-pointer"}
-        onClick={() => onClickToIndex()}
-      >
-        <MenuLogo/>
+      <div className={"relative"}>
+        <img
+          className={"w-[300px] h-[96px] relative top-[12px] left-[-30px]"}
+          src={LogoContainerImg}
+        />
+        <div
+          className={"cursor-pointer absolute top-[26px] left-[42px]"}
+          onClick={() => onClickToIndex()}
+        >
+          <MenuLogo/>
+        </div>
       </div>
 
       {!isLogin ? (

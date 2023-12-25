@@ -52,6 +52,8 @@
   --background-modal-telegram-to: #6272FF;
   --background-footer: #0B1948;
 
+
+
   --stroke-textfields: #AAC6FF;
   --stroke-block: #ABDCFF;
   --stroke-dashboard-main:#00FFEF;
@@ -217,6 +219,14 @@
   --tab-text-color-active: #FFFFFF;
 
 
+  --drawer-bg: #17103F;
+  --drawer-border: rgba(50,63,91,.7);
+
+  /* riojungle777bet */
+  --background-tabbar: #262626;
+  --background-header-from: #262626;
+  --background-header-to: #333;
+
   /*NOTE: figma 沒有 自己拆出來的*/
   --input-border: var(--stroke-textfields);
   --input-background: var(--background-textfields);
@@ -228,8 +238,5 @@
   --input-focus-background: var(--background-textfields);
   --input-invalidation-border: var(--state-error-variant);
   --input-invalidation-text-color: var(--state-error-variant);
-
-  --drawer-bg: #17103F;
-  --drawer-border: rgba(50,63,91,.7);
 
 }
