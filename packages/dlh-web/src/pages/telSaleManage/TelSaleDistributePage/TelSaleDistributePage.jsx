@@ -9,6 +9,7 @@ import SearchList  from "./SearchList/SearchList";
 import ImportModal from './ImportModal/ImportModal';
 import { Button, message } from 'antd';
 import { CommonTable, UrgePersonModal, CopyText } from 'components';
+import moment from "moment";
 
 function TelSaleDistributePage ({
     intl,
@@ -25,7 +26,9 @@ function TelSaleDistributePage ({
     urgePersonModalVisible,
     importModalVisible
 }) {
-    const [searchParams, setSearchParams] = useState({ page: 0, size: 10, phoneNo: "", status: "", createTimeStart: "", createTimeEnd: "" });
+
+    const todayString = moment().format('YYYY-MM-DD')
+    const [searchParams, setSearchParams] = useState({ page: 0, size: 10, phoneNo: "", status: "", createTimeStart: `${todayString} 00:00:00`, createTimeEnd: `${todayString} 23:59:59` });
     const [selectedRow, setSelectedRow] = useState([]);
 
     useEffect(() => {
@@ -95,7 +98,7 @@ function TelSaleDistributePage ({
     }
     return (
         <div>
-            <SearchList handleSearch={handleSearch} />
+            <SearchList handleSearch={handleSearch} initSearch={searchParams} />
             <div className={styles.operation}>
                 <Button type={'danger'} onClick={handleDeleteDistribute}><FormattedMessage id="page.table.delete" /></Button>
                 <Button type={"primary"} onClick={handleModalVisible}><FormattedMessage id="windowPage.distribute.tel.sale" /></Button>
