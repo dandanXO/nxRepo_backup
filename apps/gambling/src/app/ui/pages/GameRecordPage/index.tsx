@@ -16,6 +16,8 @@ import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { datePickerStyle } from '../../components/DatePickers/DatePicker';
 import { formatLocaleMoney } from "../../utils/format";
 import { tcx } from "../../utils/tcx";
+import { GameRecordPage as CocoGameRecordPage } from './env/coco'
+import { renderByPlatform } from "../../utils/renderByPlatform";
 
 
 const { RangePicker } = DatePicker;
@@ -24,10 +26,11 @@ export const GameRecordPage = () => {
   useAllowLoginRouterRules();
 
   const pageSize = 10
-  const min = moment().subtract(7, 'days');
+  const startDate = moment().subtract(7, 'days');
+  const endDate = moment();
   const max = moment();
   const dateFormat = 'YYYYMMDD';
-  const [dates, setDates] = useState([min, max]);
+  const [dates, setDates] = useState([startDate, endDate]);
 
 
   const [triggerGetRecord, { data }] = useGetUserGameRecordMutation({});
@@ -109,57 +112,23 @@ export const GameRecordPage = () => {
 
 
 
-  return (
-
-    <div className={'flex h-full flex-col px-4 md:px-8'}>
-      <SectionContainer
-        className="flex h-full flex-col"
-        id={'game-record-section'}
-      >
-        <BackNavigation
-          className={tcx('pl-0 pt-5 pb-6', ['pb-7', isMobile])}
-          onClick={() => onClickToIndex()}
-          title={isMobile?(<div className='absolute left-0 w-full text-center font-bold text-lg'>Registro do jogo</div>):undefined}
-        />
-
-        <section className={'mb-4 text-left text-white'}>
-          {
-            isMobile ?
-              (<RangeDatePicker
-                min='2023-01-01'
-                max={max.format('YYYY-MM-DD')}
-                onConfirm={(values) => setDates([moment(values[0], 'YYYY-MM-DD'), moment(values[1], 'YYYY-MM-DD')])}
-                value={[dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]}
-              />) :
-              (
-                <RangePicker
-                  value={[dates[0], dates[1]]}
-                  allowClear={false}
-                  format="YYYY-MM-DD"
-                  onChange={(dates) => {
-                    if (dates) {
-                      setDates(dates as Moment[]);
-                    }
-                  }}
-                  style={datePickerStyle}
-                  disabledDate={(current) => current > max}
-                />
-              )
-          }
-        </section>
-
-        <div className='h-[80vh] rounded-lg overflow-hidden'>
-          <Table
-            className={tcx('text-base', ['text-xs', isMobile])}
-            titleStyle={tcx('text-sm', ['text-xs', isMobile])}
-            fetchData={handleFetchData}
-            dataSource={records}
-            columns={columns}
-            dataCount={data?.total || 0}
-          />
-        </div>
-
-      </SectionContainer>
-    </div>
-  );
+  return renderByPlatform({
+    "coco777bet": (
+      <CocoGameRecordPage
+        dates={dates}
+        setDates={setDates}
+        handleFetchData={handleFetchData}
+        records={records}
+        dataCount={data?.total || 0}
+      />
+    )
+  }, (
+    <CocoGameRecordPage
+      dates={dates}
+      setDates={setDates}
+      handleFetchData={handleFetchData}
+      records={records}
+      dataCount={data?.total || 0}
+    />
+  ))
 };
