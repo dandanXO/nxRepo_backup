@@ -105,6 +105,7 @@ const initialState: InitialState = {
     recharge_cashback_rate: undefined,
     recharge_first_cashback_rate: undefined,
     reward_daily_reset: undefined,
+    recharge_bonus_start: undefined,
   }
 
 };

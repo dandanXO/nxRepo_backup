@@ -99,6 +99,7 @@ export const AppRouter = () => {
         recharge_cashback_rate: data.data.recharge_cashback_rate,
         recharge_first_cashback_rate: data.data.recharge_first_cashback_rate,
         reward_daily_reset: data.data.reward_daily_reset,
+        recharge_bonus_start: data.data.recharge_bonus_start,
       }))
     }
   }, [data])
