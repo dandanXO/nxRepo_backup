@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
-import Drawer, { DrawerDelay } from "../Drawers/AnimateDrawer";
+import Drawer, { DrawerDelay } from "../../Drawers/AnimateDrawer";
 import DatePicker from "rmc-date-picker";
 import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'
-import { tcx } from "../../utils/tcx";
-import { DatePickerBlock, dateToString } from "./DatePicker";
+import { tcx } from "../../../utils/tcx";
+import { DatePickerBlock, dateToString } from "../DatePicker";
+import { RangeDatePickerContent as CocoRangeDatePickerContent } from './env/coco/RangeDatePickerContent';
+import { RangeDatePickerContent as RioRangeDatePickerContent } from './env/riojungle/RangeDatePickerContent';
+import { renderByPlatform } from "../../../utils/renderByPlatform";
 
+const RangeDatePickerContent = renderByPlatform({
+  "coco777bet": CocoRangeDatePickerContent,
+  "riojungle777bet": RioRangeDatePickerContent
+}, CocoRangeDatePickerContent)
 
 interface IRangeDatePickerProps {
   onConfirm: (values: [string, string]) => void
@@ -56,12 +63,7 @@ const RangeDatePicker = ({
       <DatePickerBlock
         onClick={()=>setDrawerOpen(true)}
       >
-        <div>
-          {value[0]}
-          {' - '}
-          {value[1]}
-        </div>
-        <DownOutlined />
+        <RangeDatePickerContent value={value} />
       </DatePickerBlock>
 
       {

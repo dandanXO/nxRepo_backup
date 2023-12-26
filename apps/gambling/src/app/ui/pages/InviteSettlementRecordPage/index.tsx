@@ -13,7 +13,7 @@ import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../utils/format";
 import useBreakpoint from "../../hooks/useBreakpoint";
-import RangeDatePicker from "../../components/DatePickers/RangeDatePicker";
+import Index from "../../components/DatePickers/RangeDatePicker";
 import { datePickerStyle } from "../../components/DatePickers/DatePicker";
 import { Container } from "../../components/container/Container";
 
@@ -77,7 +77,7 @@ export const InviteSettlementRecordPage = () => {
           }
           {
             isMobile ?
-              (<RangeDatePicker
+              (<Index
                 min='2023-01-01'
                 max={max.format('YYYY-MM-DD')}
                 onConfirm={(values: any) => setDates([moment(values[0], 'YYYY-MM-DD'), moment(values[1], 'YYYY-MM-DD')])}

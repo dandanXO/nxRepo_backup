@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { DownOutlined } from "@ant-design/icons";
-import Drawer, { DrawerDelay } from "../Drawers/AnimateDrawer";
+import Drawer, { DrawerDelay } from "../../Drawers/AnimateDrawer";
 import RMCDatePicker from "rmc-date-picker";
 import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'
+import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { DatePickerBlock as CocoDatePickerBlock } from './env/coco/DatePickerBlock'
+import { DatePickerBlock as RioDatePickerBlock } from './env/riojungle/DatePickerBlock'
 
 export const dateToString = (date: any) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
 
@@ -21,17 +23,10 @@ export const datePickerStyle = {
 };
 
 
-export const DatePickerBlock = styled.div`
-  padding: 4px 8px;
-  width: fit-content;
-  color: white;
-  background-color: var(--primary-variant);
-  border: 1px solid rgba(255,255,255,30%);
-  border-radius: 4px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-`
+export const DatePickerBlock = renderByPlatform({
+  "coco777bet": CocoDatePickerBlock,
+  "riojungle777bet": RioDatePickerBlock
+},CocoDatePickerBlock)
 
 interface IDatePickerProps {
   onConfirm: (values: string) => void
