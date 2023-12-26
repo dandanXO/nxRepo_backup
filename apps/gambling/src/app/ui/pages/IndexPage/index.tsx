@@ -12,12 +12,14 @@ import {useSearchGames} from "../../hooks/useSearchGames";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 
 import {renderByPlatform} from "../../utils/renderByPlatform";
-import {IndexPage as PIndexPage} from "./env/pernambucana/IndexPage";
-import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
-import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useScrollToCarousel} from "./useScrollToCarousel";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
+
+import {IndexPage as PIndexPage} from "./env/pernambucana/IndexPage";
+import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
+import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
+import {IndexPage as RIndexPage} from "./env/riojungle/IndexPage";
 
 export const MobileGameNumber = 15;
 export const DesktopGameNumber = 30;
@@ -145,6 +147,22 @@ export const IndexPage = () => {
     ),
     "coco777bet": (
       <CIndexPage
+        userFavorite={userFavorite}
+        onClickFavoriteGameItem={onClickFavoriteGameItem}
+        showFixForIOSStickTab={showFixForIOSStickTab}
+        scrollToCarousel={scrollToCarousel}
+        allGameList={allGameList}
+        label={label}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        setViewType={setExpandedBrand}
+        setSearchInput={setSearchInput}
+        gameList={gameList}
+        recentGameList={recentGameList}
+      />
+    ),
+    "riojungle777bet": (
+      <RIndexPage
         userFavorite={userFavorite}
         onClickFavoriteGameItem={onClickFavoriteGameItem}
         showFixForIOSStickTab={showFixForIOSStickTab}

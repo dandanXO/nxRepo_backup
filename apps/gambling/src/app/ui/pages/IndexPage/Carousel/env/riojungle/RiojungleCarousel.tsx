@@ -1,53 +1,26 @@
 // https://react-multi-carousel.surge.sh/
 import Carousel, {StateCallBack} from "react-multi-carousel";
-import "./style.scss";
 
-import useBreakpoint from "../../../hooks/useBreakpoint";
+
 import cx from "classnames";
-import {renderByPlatform} from "../../../utils/renderByPlatform";
-import {AppCarousel as RiojungleAppCarousel} from "./env/riojungle/RiojungleCarousel"
-
-// const responsive = {
-//   superLargeDesktop: {
-//     // the naming can be any, depends on you.
-//     breakpoint: { max: 4000, min: 3000 },
-//     items: 1,
-//     partialVisible:true
-//   },
-//   desktop: {
-//     breakpoint: { max: 3000, min: 1024 },
-//     items: 1,
-//     partialVisible:true
-//   },
-//   tablet: {
-//     breakpoint: { max: 1024, min: 464 },
-//     items: 1,
-//     partialVisible:true
-//   },
-//   mobile: {
-//     breakpoint: { max: 464, min: 0 },
-//     items:1,
-//     partialVisible:true
-//   }
-// };
-
+import useBreakpoint from "../../../../../hooks/useBreakpoint";
 
 const responsive = {
   superLargeDesktop: {
     breakpoint: { min: 1024, max: 999999},
-    items: 1,
+    items: 3,
     partialVisible: true,
     // partialVisible: false,
   },
   desktop: {
     breakpoint: { min: 768, max: 1024 },
-    items: 1,
+    items: 3,
     partialVisible:true
     // partialVisible: false,
   },
   tablet: {
     breakpoint: { min: 640, max: 768 },
-    items: 1,
+    items: 2,
     partialVisible:true
     // partialVisible: false,
   },
@@ -65,7 +38,7 @@ type IAppCarousel = {
   setIsMoving: (isMoving: boolean) => void;
 }
 
-const CocoAppCarousel = (props: IAppCarousel) => {
+export const AppCarousel = (props: IAppCarousel) => {
   const {isMobile} = useBreakpoint();
   const TransitionDuration = 0.3
 
@@ -107,12 +80,4 @@ const CocoAppCarousel = (props: IAppCarousel) => {
     </div>
   )
 
-}
-
-export const AppCarousel = (props: IAppCarousel) => {
-  return renderByPlatform({
-    "wild777bet": <CocoAppCarousel {...props}/>,
-    "coco777bet": <CocoAppCarousel {...props}/>,
-    "riojungle777bet": <RiojungleAppCarousel {...props}/>,
-  }, CocoAppCarousel)
 }
