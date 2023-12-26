@@ -1,4 +1,5 @@
 {
+    "bankCard": "Bank Card",
     "breadcrumb": {
         "orderDetails": "Order Details",
         "overDueDetails": "Overdue Details"
@@ -11,6 +12,7 @@
         "list": "Contact List"
     },
     "currentPageTotal": "Current Page Total",
+    "eWallet": "E-Wallet",
     "endDate": "End Date",
     "export": "Export",
     "followUpResultStatus": {
@@ -58,6 +60,7 @@
     "saved": "Saved",
     "search": "Search",
     "startDate": "Start Date",
+    "status": "Status",
     "tab": {
         "contractList": "Contact List",
         "orderInfo": "Order Information",

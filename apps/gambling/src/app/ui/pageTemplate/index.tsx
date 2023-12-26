@@ -199,6 +199,20 @@ export const PageTemplate = (props: IPage) => {
   const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
   const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
 
+  useEffect(() => {
+    const handleStorage = () => {
+      // Place for a function responsible for
+      // pulling and displaying local storage data
+      console.log("debug")
+    }
+
+    window.addEventListener('storage', handleStorage)
+    return () => window.removeEventListener('storage', handleStorage)
+  }, [])
+
+
+  const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
+
   return (
     <>
       {renderByPlatform({
@@ -394,11 +408,12 @@ export const PageTemplate = (props: IPage) => {
         onClickToOpenTelegramService={onClickToOpenTelegramService}
       />
 
-      <>
-        {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
-        {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
-      </>
-
+      {!inNativeApp && (
+        <>
+          {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
+          {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
+        </>
+      )}
       {contextHolder}
 
     </>

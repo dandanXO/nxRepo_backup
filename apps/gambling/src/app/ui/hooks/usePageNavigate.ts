@@ -29,6 +29,11 @@ export const usePageNavigate = () => {
     navigate(PageOrModalPathEnum.IndexPage)
   }
 
+  const onClickToCompanyProfile = () => {
+    navigate(PageOrModalPathEnum.CompanyProfilePage)
+  }
+
+
   const onClickToSlot = () => {
     navigate(PageOrModalPathEnum.IndexSlotPage)
   }
@@ -188,6 +193,7 @@ export const usePageNavigate = () => {
 
   return {
     onClickToIndex,
+    onClickToCompanyProfile,
     onClickToSlot,
     onClickToFirstDeposit,
     onClickToWallet,

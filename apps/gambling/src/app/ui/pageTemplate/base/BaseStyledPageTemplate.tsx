@@ -18,7 +18,10 @@ export const BaseStyledPageTemplate = styled.div.attrs((props) => ({
     top: 0;
     left: 0;
     z-index: -2;
+
     background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
+
+    background: var(--gray-scale-10);
 
     @media (max-width: 768px) {
       background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;

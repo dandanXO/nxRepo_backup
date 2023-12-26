@@ -26,31 +26,11 @@ import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import styled from "styled-components";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
-import {PhonePrefix} from "../../PhonePrefix";
+import {PhonePrefix} from "../../components/PhonePrefix";
 import {useGetDeviceId} from "../../../../hooks/useGetDeviceId";
+import {useUserForgetPasswordForm} from "../../hooks/useUserForgetPasswordForm";
 
 
-const onValidateCaptchaInput = (data: string, setCaptchaInput: any) => {
-  if(data !== "") {
-    setCaptchaInput({
-      data,
-      isValidation: true,
-      errorMessage: "",
-    });
-  } else {
-    setCaptchaInput({
-      data,
-      isValidation: false,
-      errorMessage: "por favor insira o código de verificação",
-    })
-  }
-
-  if(data !== "") {
-    return true;
-  } else {
-    return false;
-  }
-}
 export type IUserForgetPasswordForm = {
   confirmToRegister: () => void;
   openNotificationWithIcon: (props: IOpenNotificationWithIcon) => void;
@@ -124,112 +104,30 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
   const {isMobile} = useBreakpoint();
   const Input = isMobile ? MobileInput : DesktopInput;
 
+  const {
+    // Phone
+    phoneInput,
+    onChangePhoneInput,
 
-  const [isChecked, setIsChecked] = useState(false);
+    // Captcha
+    captchaInput,
+    onChangeCaptchaInput,
 
-  const toggleCheck = () => {
-    setIsChecked(!isChecked);
-  };
+    // Password
+    isPasswordVisible,
+    togglePasswordVisibility,
+    passwordInput,
+    onChangePasswordInput,
 
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [password, setPassword] = useState('');
+    // SMS Code
+    onClickSendSMSCode,
+    isValidSMSCode,
 
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-
-  // NOTO: 2023101601 / test1234
-  // refactor:
-  const [phoneInput, setPhoneInput] = useState<InputValue<string>>({
-    data: '',
-    isValidation: true,
-    errorMessage: '',
+    // Form
+    onFormConfirm,
+  } = useUserForgetPasswordForm({
+    confirmToRegister: props.confirmToRegister
   });
-
-  const [passwordInput, setPasswordInput] = useState<InputValue<string>>({
-    data: '',
-    isValidation: true,
-    errorMessage: '',
-  });
-
-  const [captchaInput, setCaptchaInput] = useState<InputValue<string>>({
-    data: '',
-    isValidation: true,
-    errorMessage: '',
-  });
-
-  const [triggerForgetpassword] = useForgetPasswordMutation();
-  const [triggerSendForgetPasswordSMSCode] = useSendForgetPasswordSMSCodeMutation();
-  // const onFormInputChange = (inputItems: Partial<PostRegisterRequest>) => {
-  //   const loginFormData = new LoginFormData({
-  //     appChannel: "",
-  //     appPackageName: "",
-  //     appVersion: "",
-  //     deviceId: "",
-  //     deviceModel: "",
-  //     deviceVersion: "",
-  //     password: "",
-  //     phone: "",
-  //     sysLanguage: null,
-  //     sysTimezone: null,
-  //   });
-  //   loginFormData.phone = inputItems.phone || "";
-  //
-  //   validate(loginFormData).then((errors => {
-  //     if(errors.length > 0) {
-  //       console.log(errors);
-  //     } else {
-  //       console.log()
-  //     }
-  //   }))
-  // }
-
-  const {deviceId} = useGetDeviceId(phoneInput.data, "forget");
-  console.log("[useGetDeviceId] forget.deviceId", deviceId);
-
-  const {onFormConfirm} = useForm({
-    onFormConfirm: () =>  {
-      if(!onValidatePhoneInput(phoneInput.data, setPhoneInput) ||
-        !onValidateCaptchaInput(captchaInput.data, setCaptchaInput) ||
-        !onValidatePasswordInput(passwordInput.data, setPasswordInput)
-      ) {
-        return;
-      }
-
-      triggerForgetpassword({
-        phone: phoneInput.data,
-        password: passwordInput.data,
-        "verifyCode": captchaInput.data,
-        "appChannel": "mobile",
-        "deviceId": deviceId,
-        "deviceModel": "WEB",
-        "deviceVersion": "WEB",
-        "sysTimezone": null,
-        "sysLanguage": null,
-        "appPackageName": environment.appPackageName,
-        "appVersion": environment.appVersion,
-      }).then((response) => {
-        // console.log("triggerRegister-data", response)
-        if(!(response as any).error) {
-          setLoginLocalStorage({
-            token: (response as any).data?.data?.token,
-            userInfo: (response as any).data?.data?.user_info,
-            kPhone: phoneInput.data,
-            kPassword: passwordInput.data,
-            amount: 100,
-            ip: (response as any).data?.data?.connection?.ip,
-          })
-
-          const url = (response as any).data?.data?.connection?.ip;
-          const token = (response as any).data?.data?.token;
-          if(url && token) connect(url, token)
-          props.confirmToRegister();
-        }
-      }).catch((error) => {
-        console.error(error);
-      })
-    }
-  })
 
 
   return (
@@ -247,9 +145,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
          value={phoneInput.data}
          validation={phoneInput.isValidation}
          errorMessage={phoneInput.errorMessage}
-         onChange={(event: any) => {
-            onValidatePhoneInput(event.target.value, setPhoneInput)
-         }}
+         onChange={onChangePhoneInput}
       />
 
       <div style={{ position: 'relative' }}>
@@ -258,26 +154,14 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           prefix={<SecuritySvg className={"mr-1"}/>}
           suffix={
             <SendSMSCodeButton
-              valid={phoneInput.data.length > 0 && phoneInput.isValidation || false}
-              onClick={(isCounting) => {
-                if(isCounting) return;
-                if(onValidatePhoneInput(phoneInput.data, setPhoneInput)) {
-                  triggerSendForgetPasswordSMSCode({
-                    appPackageName: environment.appPackageName,
-                    deviceId: AppLocalStorage.getItem(AppLocalStorageKey.deviceId) || "",
-                    phone: phoneInput.data,
-                    verifyType: 1
-                  });
-                }
-              }}/>
+              valid={isValidSMSCode}
+              onClick={onClickSendSMSCode}/>
           }
           placeholder={"Código de verificação"}
           value={captchaInput.data}
           validation={captchaInput.isValidation}
           errorMessage={captchaInput.errorMessage}
-          onChange={(event: any) => {
-            onValidateCaptchaInput(event.target.value, setCaptchaInput);
-          }}
+          onChange={onChangeCaptchaInput}
         />
       </div>
 
@@ -296,22 +180,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
         value={passwordInput.data}
         validation={passwordInput.isValidation}
         errorMessage={passwordInput.errorMessage}
-        onChange={(event: any) => {
-          if(onValidatePasswordInput(event.target.value, setPasswordInput)) {
-            setPasswordInput({
-              data: event.target.value,
-              isValidation: true,
-              errorMessage: "",
-            });
-          } else {
-            setPasswordInput({
-              data: event.target.value,
-              isValidation: false,
-              errorMessage: "Senha (4-12 letras e números)",
-            })
-          }
-
-        }}
+        onChange={onChangePasswordInput}
       />
 
       <section className={"flex flex-col"}>

@@ -11,6 +11,8 @@ import { InitialChargeContent as PInitialChargeContent } from "./env/pernambucan
 
 import { InitialChargeContent as WInitialChargeContent } from "./env/wild/InitialChargeContent";
 import { renderByPlatform } from "../../utils/renderByPlatform";
+import {RootState} from "../../../reduxStore";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
@@ -18,6 +20,8 @@ export const InitialChargePage = () => {
   const navigate = useNavigate();
   const { isMobile } = useBreakpoint();
   const { onClickToIndex } = usePageNavigate();
+  const recharge_first_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_first_cashback_rate);
+
   return (
 
     <div className={"px-4 md:px-10"}>
@@ -31,7 +35,7 @@ export const InitialChargePage = () => {
         bannerText={
           <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
             <div className={"text-white text-sm md:text-xl lg:text-4xl mb-2 md:mb-4 lg:mb-9"}>Primeiro depósito</div>
-            <div className={"text-white text-xl md:text-3xl lg:text-8xl"}>+ bônus de 20%</div>
+            <div className={"text-white text-xl md:text-3xl lg:text-8xl"}>+ bônus de {recharge_first_cashback_rate}</div>
           </div>
         }
       />

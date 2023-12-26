@@ -36,11 +36,11 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
           {/* row 1 */}
           <tr>
             <td className={tdStyle}>{props?.data.numRecharge || 0}</td>
-            {props.type === "1" && <td className={tdStyle}>R${props?.data.firstRecharge}</td>}
+            {props.type === "1" && <td className={tdStyle}>{props?.data.firstRecharge}</td>}
             {/* {props.isProxy && <td className={tdStyle}>R${props?.data.dividendos}</td>} */}
-            <td className={tdStyle}>R${props?.data.gameRecharge}</td>
-            <td className={tdStyle}>R${props?.data.gameRechargeReward}</td>
-            <td className='text-sm lg:text-lg text-center pt-5 text-white'>R${props?.data.totalReward}</td>
+            <td className={tdStyle}>{props?.data.gameRecharge}</td>
+            <td className={tdStyle}>{props?.data.gameRechargeReward}</td>
+            <td className='text-sm lg:text-lg text-center pt-5 text-white'>{props?.data.totalReward}</td>
           </tr>
         </tbody>
       </table>

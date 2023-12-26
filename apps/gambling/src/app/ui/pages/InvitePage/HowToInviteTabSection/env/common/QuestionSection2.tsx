@@ -3,8 +3,7 @@ import cx from 'classnames';
 
 export const QuestionSection2 = () => {
   return (
-    <>
-      <div>Por exemplo:</div>
+   
       <div>
         Tom se cadastrou como usuário válido de {environment.platformName}{' '}
         em 10 de abril de 2023. Enquanto ganhava o grande prêmio na
@@ -21,6 +20,6 @@ export const QuestionSection2 = () => {
         descontos de apostas. Em todo o mês de abril, Tom ganhou um total de
         51.089 reais em comissões.
       </div>
-    </>
+
   )
 }

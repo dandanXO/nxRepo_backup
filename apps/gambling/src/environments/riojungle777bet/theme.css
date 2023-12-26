@@ -228,6 +228,8 @@
   --background-header-from: #262626;
   --background-header-to: #333;
 
+  --gray-scale-10: #1A1A1A;
+
   /*NOTE: figma 沒有 自己拆出來的*/
   --input-border: var(--stroke-textfields);
   --input-background: var(--background-textfields);

@@ -57,7 +57,7 @@ export const DesktopGameRecordPage = ({
       key: 'createTime',
       render: (record: any) => (
         <>
-          <div>{moment(record.createTime.split(" ")[0]).format('DD.MM-YYYY')}</div>
+          <div>{moment(record.createTime.split(" ")[0]).format('DD.MM.YYYY')}</div>
           <div>{record.createTime.split(" ")[1]}</div>
         </>
       )

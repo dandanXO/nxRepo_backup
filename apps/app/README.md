@@ -1,3 +1,12 @@
+* India 登入頁面
+  * 需要參數
+    * appName=Oasis
+    * appID=com.api
+    * appDomain=https://www.oasis-gold.com
+  * example
+    * https://frontend.india-api-dev.com/v2/login?appName=Oasis&appID=com.api&appDomain=https://www.oasis-gold.com
+
+---
 - 差異化
   - 元件差異化看能不能找到靈感
     - [bit.dev](https://bit.dev/)
@@ -15,10 +24,10 @@
     - 盡量不去使用 useEffect 完成功能，而用 redux + redux saga 使用
   - state
     - rtk 有 immer 去改變 redux 狀態
-    - 複雜邏輯 使用 xstate 去建構 state, event 改變 state 與 context
+    - ~~複雜邏輯 使用 xstate 去建構 state, event 改變 state 與 context~~
   - actions
     - 使用 rtk createAction 去建構事件
-    - 再更複雜頁面邏輯使用 xstate 或是後續再引用 rxjs
+    - ~~再更複雜頁面邏輯使用 xstate 或是後續再引用 rxjs~~
   - API
     - 使用 rtk query OpenAPI 去產生後端 API 對應的 typescript interface。
       - 發生錯誤時，請與後端確認 swagger model 不能為中文名字，否則工具無法產生對應 ts file
@@ -42,9 +51,9 @@
   - 使用 chai, sinon chai 方式 assert
   - 未來再考慮使用 BDD, ATDD 方式改變開發流程
 - 監控部分
-  - 未來考慮使用 sentry
+  - sentry
 - Martech
-  - mixpanel
+  - ~~mixpanel~~
 
 ---
 

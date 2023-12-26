@@ -10,7 +10,15 @@ interface IMaintenance{
   start: string;
   end: string;
 }
+interface Config {
+  invite_hig_reward?: number;
+  recharge_cashback_rate?: string;
+  recharge_first_cashback_rate?: string;
+  reward_daily_reset?: boolean;
+  recharge_bonus_start?: number;
+}
 export type InitialState = {
+  inNativeApp: boolean;
   isMobile: boolean;
   isTablet: boolean;
   isDesktop: boolean;
@@ -32,6 +40,7 @@ export type InitialState = {
   withdrawBegin: string
   withdrawEnd: string;
   maintenance: IMaintenance;
+  config: Config;
 };
 
 const userStore$3: IUserStore= {
@@ -69,6 +78,7 @@ const userStore$3: IUserStore= {
 }
 
 const initialState: InitialState = {
+  inNativeApp: false,
   globalMessage: null,
   vip_level: 0,
   isUILoading: true,
@@ -93,7 +103,15 @@ const initialState: InitialState = {
     flag: 0,
     start: "",
     end: "",
+  },
+  config: {
+    invite_hig_reward: undefined,
+    recharge_cashback_rate: undefined,
+    recharge_first_cashback_rate: undefined,
+    reward_daily_reset: undefined,
+    recharge_bonus_start: undefined,
   }
+
 };
 
 export const appSlice = createSlice({
@@ -165,6 +183,12 @@ export const appSlice = createSlice({
     },
     setShowiOSDownloadPopover: (state: InitialState, action: PayloadAction<boolean>) => {
      state.isShowiOSDownloadPopover = action.payload;
+    },
+    setInNativeApp: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.inNativeApp = action.payload
+    },
+    setConfig: (state: InitialState, action: PayloadAction<Config>) => {
+      state.config = action.payload
     },
   },
 });
