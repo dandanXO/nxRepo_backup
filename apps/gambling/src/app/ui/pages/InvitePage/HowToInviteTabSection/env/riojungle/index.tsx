@@ -1,24 +1,36 @@
-import InviteBanner from './inviteBanner.png';
+import InviteBanner from './desktop_recomendar_pic.png';
 import Level from './level.png';
 import Gift from './gift.png';
 import GameChips from './gameChips.png';
 import useBreakpoint from 'apps/gambling/src/app/ui/hooks/useBreakpoint';
 import { IHowToInviteTabSection } from '../..';
-export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
+import { QuestionSection1 } from '../common/QuestionSection1';
+import { QuestionSection2 } from '../common/QuestionSection2';
+import { QuestionSection3 } from '../common/QuestionSection3';
+import copy from "copy-to-clipboard";
+import { notification } from 'antd';
+import { environment } from 'apps/gambling/src/environments/environment';
+
+
+export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
   const {
     isMobile,
     isTablet,
     isDesktop,
   } = useBreakpoint();
-
+  const [api, contextHolder] = notification.useNotification();
   const productName = ''
-
+  const onClickToCopy = () => {
+    copy(props.inviteUrl);
+    api.success({
+      message: 'Copiado!',
+    });
+  };
   return (
-    <div className="w-full flex flex-col justify-between gap-10 w-full items-center">
+    <div className="w-full flex flex-col justify-between w-full items-center">
       <button
         onClick={() => props.setPanelMode('daily')}
-        id="Btn"
-        className=" leading-[28px] text-white mb-1 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
+        className=" leading-[28px] text-white mb-3 md:mb-4 lg:mb-10 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
       >
         Convidar conta
         <img
@@ -28,35 +40,36 @@ export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
           className="mt-px w-6"
         />
       </button>
-      <div className="relative flex flex-col justify-between gap-5 w-full">
+      <div className="relative flex flex-col justify-between w-full">
         <div className="flex flex-col gap-1 w-full items-center">
           <img
-            src="https://file.rendit.io/n/hfrpfk4EkOV4d3C1WWWL.png"
+            src={InviteBanner}
             alt="Image1"
             id="Image1"
             className=""
           />
 
-          <div className="mb-10 w-full text-center text-white text-sm md:text-base lg:text-xl font-bold font-['Inter'] leading-5 md:leading-6 lg:leading-7">{`Programa de recomendação exclusivo da plataforma {Group name}-${productName}, recomende aos amigos e ganhe comissões sem limite máximo! Esperamos sinceramente que mais jogadores se juntem a nós!`}</div>
+          <div className="mb-5 md:mb-8 lg:mb-10 w-full text-center text-white text-sm md:text-base lg:text-xl font-bold font-['Inter'] leading-5 md:leading-6 lg:leading-7">{`Programa de recomendação exclusivo da plataforma ${environment.platformGroup}-${environment.platformName}, recomende aos amigos e ganhe comissões sem limite máximo! Esperamos sinceramente que mais jogadores se juntem a nós!`}</div>
 
-          {!isMobile && <div className="pr-3 lg:pr-8 relative w-full bg-[linear-gradient(145deg,_#8547eb_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row gap-16 items-start rounded-lg flex-wrap">
+          {!isMobile && <div className="mb-5 pr-3 lg:pr-8 relative w-full bg-[linear-gradient(145deg,_#8547eb_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row gap-16 items-start rounded-lg flex-wrap">
             <div className='flex-1 flex flex-row flex-nowrap  justify-between'>
               <div className="flex flex-col mb-5 items-start flex-1 ">
                 <div className="break-all pl-[117px] pr-9 lg:pl-[196px] text-sm md:text-base lg:text-lg font-['Inter'] font-bold leading-[32px] text-[#4b80bd] bg-white flex flex-row whitespace-nowrap items-start py-2.5 rounded-tl-lg rounded-br-[100px] ">
                   Copie o link para seus amigos!
                 </div>
-                <div className="pl-[117px] lg:pl-[196px] text-base md:text-xl lg:text-3xl font-['Inter'] font-bold leading-[36px] text-white break-all">
+                <div className="pl-[117px] lg:pl-[196px] pt-5 text-base md:text-xl lg:text-3xl font-['Inter'] font-bold leading-7 lg:leading-9 text-white break-all">
                   {props?.inviteUrl}
                 </div>
               </div>
               <div className='self-center justify-start ml-1'>
                 <button
-                  id="Btn1"
-                  className="p-2 lg:py-3 lg:px-10 text-left text-base md:text-lg lg:text-2xl font-['Inter'] font-medium text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb]  rounded-[100px]"
+                  onClick={onClickToCopy}
+                  className="p-2 lg:py-3 lg:px-10 text-left text-base md:text-xl lg:text-3xl font-['Inter'] font-medium text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb]  rounded-[100px]"
                 >
                   Convide Amigos
                 </button>
               </div>
+              {contextHolder}
             </div>
 
 
@@ -65,24 +78,24 @@ export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
                 src={Gift}
                 alt="Image2"
                 id="Image2"
-                className="relative mt-12"
+                className="relative"
               />
             </div>
           </div>
           }
           {
             isMobile && (
-              <div className="bg-gradient-to-br from-[#8547eb]  to-[#10b98f] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col gap-2 w-full items-start rounded-lg">
+              <div className="mb-5 bg-gradient-to-br from-[#8547eb]  to-[#10b98f] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col w-full items-start rounded-lg">
 
-                <div className="text-sm font-['Inter'] font-bold leading-[20px] text-[#4b80bd] bg-white flex flex-row justify-center pt-1 w-full items-start rounded-tl-lg rounded-tr-lg">
+                <div className="text-sm font-bold leading-5 text-[#4b80bd] bg-white flex flex-row justify-center py-1 w-full items-start rounded-tl-lg rounded-tr-lg">
                   Copie o link para seus amigos!
                 </div>
                 <div className='p-2 w-full'>
 
-                  <div className="font-['Inter'] font-bold leading-[24px] text-white  text-center w-full mb-2">
-                    https://ds.imperador777bet.com/invite
+                  <div className="text-base font-normal leading-6 text-white text-center w-full mb-2">
+                  {props?.inviteUrl}
                   </div>
-                  <button className="font-['Inter'] font-medium leading-[24px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
+                  <button className="text-base font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
                   >
                     Convide Amigos
                   </button>
@@ -93,15 +106,13 @@ export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
 
         </div>
 
-        <div className=" flex flex-row w-full border rounded-lg border-solid border-[#333333] bg-[#1a1a1a]">
-          <div className="p-2 md:px-5 lg:py-3 text-sm lg:text-base text-center font-['Inter'] leading-[24px] text-[#f59e0b] mb-3">
-            {`Regras de liquidação da plataforma ${productName}:A comissão devolvida pelo ${productName} é atualizada a cada 10 a 30
-              minutos, e a comissão devolvida será liberada toda segunda-feira, horário do Brasil. Clique em &quot;Dados diários&quot; para ver os
-              detalhes da comissão.`}
+        <div className="mb-3 md:mb-5 flex flex-row w-full border rounded-lg border-solid border-[#333333] bg-[#1a1a1a]">
+          <div className="p-2 md:px-5 lg:py-3 text-sm lg:text-base text-center leading-5 lg:leading-6 text-[#f59e0b]">
+            <QuestionSection3 />
           </div>
         </div>
-        <div className="text-sm lg:text-base overflow-hidden bg-[#333333] flex flex-col justify-between gap-5 w-full items-start rounded-lg">
-          <div className="bg-gradient-to-l from-[#ffffff00] to-[#ffffff1a] text-zinc-400 flex w-full p-2 md:p-5 lg:p-8 justify-center items-center gap-10">
+        <div className="text-sm lg:text-base overflow-hidden bg-[#333333] flex flex-col justify-between w-full items-start rounded-lg">
+          <div className="bg-gradient-to-l from-[#ffffff00] to-[#ffffff1a] text-zinc-400 flex w-full p-2 py-3 md:p-5 lg:p-8 justify-center items-center">
             Nota: Para garantir a justiça, os usuários trapaceiros serão banidos
             permanentemente, os fundos obtidos ilegalmente serão congelados e as
             responsabilidades legais relevantes serão assumidas.
@@ -111,53 +122,26 @@ export const HowToInviteTabSection = (props:IHowToInviteTabSection) => {
             <div className="flex flex-col lg:flex-row ">
               <div className="flex flex-col items-center w-full  lg:w-[63%] max-md:ml-0">
                 <div className="items-stretch flex grow flex-col max-md:max-w-full ">
-                  <div className="text-white text-3xl font-bold leading-9 max-md:max-w-full">
+                  <div className="text-white text-base md:text-xl lg:text-3xl font-bold leading-6 md:leading-7 lg:leading-9 max-md:max-w-full">
                     Programa de referência
                   </div>
-                  <div className="text-zinc-400 text-base font-medium leading-6 mt-5 max-md:max-w-full">{`
-                Fornecer à ${productName} um convite efetivo ao
-                cliente (o cliente deve preencher o registro do número do
-                celular e concluir uma recarga).
-                <br />
-                Convide {1 - 10} pessoas, recompense R${15}
-                <br />
-                Convide {11 - 20} pessoas, recompense R${20}
-                <br />
-                Mais de {21} pessoas, recompensa R${25}
-                <br />
-                As recompensas serão distribuídas às 11 horas do dia seguinte.
-                Ao mesmo tempo, realizamos anticomissões de acordo com o valor
-                da aposta do jogo do usuário do jogo na plataforma do jogo (a
-                comissão é considerável). A taxa de comissão varia de jogo
-                para jogo.`}
+                  <div className="text-zinc-400 text-sm lg:text-base font-medium leading-5 lg:leading-6 mt-2 md:mt-3 lg:mt-5 max-md:max-w-full">
+                    <QuestionSection1 />
                   </div>
                 </div>
               </div>
-              <div className="w-full lg:w-[37%] self-end">
+              <div className="w-full md:w-[50%] lg:w-[40%] self-center lg:self-end mt-2 md:mt-0">
                 <img className="w-full" src={Level} />
               </div>
             </div>
           </div>
-          <div className="flex flex-row bg-gradient-to-l from-[#ffffff00] to-[#ffffff1a] w-full pl-8 items-center max-md:max-w-full max-md:px-5">
+          <div className="pt-3 px-2 md:pt-5 md:pl-5 md:pr-4 lg:pl-8 lg:pr-0 items-center flex flex-row bg-gradient-to-l from-[#ffffff00] to-[#ffffff1a] w-full  ">
             <div className='flex-1'>
-              <div className="pt-5 pb-6 text-white text-3xl font-bold leading-9 max-w-[848px] ">
+              <div className="mb-2 md:mb-3 lg:mb-4 text-white text-base md:text-xl lg:text-3xl font-bold leading-6 md:leading-7 lg:leading-9 max-md:max-w-full">
                 Estudos de caso
               </div>
-              <div className="text-zinc-400 text-base font-medium leading-6 pb-8">
-                {`Tom se cadastrou como usuário válido de ${productName} em 10
-          de abril de 2023. Enquanto ganhava o grande prêmio na plataforma,
-          ele também recomendou um colega da empresa. O colega concluiu o
-          cadastro e recarregou 50 reais, e tom ganhou a recompensa de
-          R${15} reais , Este colega é profundamente apaixonado por
-          jogos de ${productName}. O valor total das apostas por 3
-          dias consecutivos é de 534.034 reais. De acordo com a política de
-          descontos do ${productName}, tom recebe novamente 2.670,17
-          reais de comissão. Ao mesmo tempo, este colega recomenda
-          ${productName} para seus amigos , de acordo com a política
-          de descontos de ${productName}, tom também desfruta das
-          políticas relevantes de seus colegas e amigos de descontos de
-          apostas. Em todo o mês de abril, Tom ganhou um total de 51.089 reais
-          em comissões.`}
+              <div className="text-zinc-400 text-sm lg:text-base font-medium leading-5 lg:leading-6 font-medium pb-3 md:pb-5 lg:pb-8">
+                <QuestionSection2 />
               </div>
             </div>
             <div className="origin-top-left bottom-0 h-full self-end">

@@ -93,7 +93,7 @@ export const InvitePage = () => {
         <InviteRecordInfoTabSection inviteInfo={inviteInfo} inviteUnsettle={inviteUnsettle} panelMode={panelMode} setPanelMode={setPanelMode}/>
       )
     )
-  },[panelMode])
+  },[panelMode,inviteUnsettle,inviteInfo])
   return renderByPlatform(
     {
       "coco777bet": <CInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
