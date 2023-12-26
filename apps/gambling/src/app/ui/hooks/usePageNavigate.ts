@@ -142,7 +142,7 @@ export const usePageNavigate = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
-      navigate(`${PageOrModalPathEnum.GamePage}?gameId=${item.gameId}&label=${item.type === "null" ? item.label : item.type}`)
+      navigate(`${PageOrModalPathEnum.GamePage}?gameName=${item.name}&gameId=${item.gameId}&label=${item.type === "null" ? item.label : item.type}`)
       addGameToRecent(item)
     }
   }
