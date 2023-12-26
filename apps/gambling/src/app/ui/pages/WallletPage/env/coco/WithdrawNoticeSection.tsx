@@ -29,8 +29,8 @@ export const WithdrawNoticeSection = (props: any) => {
       </section>
 
       <section className={sectionStyle}>
-        O valor da retirada deve ser em múltiplos de 50.
-        Por exemplo:  50, 100, 1100, 1650, 28650…
+        O valor da retirada deve ser em múltiplos de 10.
+        Por exemplo:  10, 20, 110, 920, 28620…
       </section>
 
       <section className={sectionStyle}>
@@ -45,11 +45,11 @@ export const WithdrawNoticeSection = (props: any) => {
         Por favor, preencha o número do CPF corretamente. Se a informação estiver incorreta, o saque falhará. Certifique-se de verificar as informações com atenção.
       </section>
 
-      <section className={sectionStyle}>
+      {/* <section className={sectionStyle}>
         Prezado cliente: Olá! Em resposta às exigências do Banco Central do Brasil e do recém-criado comitê de agências reguladoras relevantes no Brasil, a plataforma precisa concluir a troca de dados entre o Banco Central e as agências reguladoras relevantes das
         <span className={"text-[var(--secondary-assistant)]"}> {withdrawBegin}h </span> às
         <span className={"text-[var(--secondary-assistant)]"}> {withdrawEnd}h </span>, horário brasileiro!Todos os nossos esforços são para garantir que a operação da plataforma esteja mais em conformidade com as leis e regulamentos brasileiros relevantes! Proteger a privacidade dos utilizadores e os direitos e interesses conexos. Obrigado pela sua compreensão. As retiradas serão normais durante outros períodos de tempo na plataforma.
-      </section>
+      </section> */}
     </div>
   )
 }
