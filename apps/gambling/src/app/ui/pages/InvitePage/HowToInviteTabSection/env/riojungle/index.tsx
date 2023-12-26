@@ -73,7 +73,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
             </div>
 
 
-            <div className='absolute left-[-5%] bottom-0 w-[130px] lg:w-[224px] '>
+            <div className='absolute left-[-25px] bottom-0 w-[130px] lg:w-[224px] '>
               <img
                 src={Gift}
                 alt="Image2"
