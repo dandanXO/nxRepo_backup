@@ -1,12 +1,12 @@
-import {EarnButton} from "../../components/Buttons/EarnButton";
-import {InviteButton} from "../../components/Buttons/InviteButton";
+import {EarnButton} from "../../components-bs/theme/Buttons/EarnButton";
+import {InviteButton} from "../../components-bs/theme/Buttons/InviteButton";
 
 import {Description} from "./Description";
 import {Container} from "./container";
 import {Item} from "./item";
 
 import { useInviteConfig } from "../../hooks/useInviteConfig";
-import {CloseICON} from "../../components/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
 import { InviteBonusModal as RioInviteBonusModal} from "./env/riojungle/InviteBonusModal";
 import {renderByPlatform} from "../../utils/renderByPlatform";
 

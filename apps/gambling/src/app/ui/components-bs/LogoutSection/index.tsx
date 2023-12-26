@@ -8,8 +8,8 @@ import {RootState} from "../../../reduxStore";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {userLogout} from "../../../usecase/userLogout";
-import {LogoutCancelButton} from "../../components/Buttons/LogoutCancelButton";
-import {LogoutConfirmButton} from "../../components/Buttons/LogoutConfirmButton";
+import {LogoutCancelButton} from "../theme/Buttons/LogoutCancelButton";
+import {LogoutConfirmButton} from "../theme/Buttons/LogoutConfirmButton";
 
 
 const CancelButton = styled.button`

@@ -1,8 +1,8 @@
-import {PhoneSvg} from "../../../../components/Icons/PhoneSvg";
-import {KeySvg} from "../../../../components/Icons/KeySvg";
-import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
+import {PhoneSvg} from "../../../theme/Icons/PhoneSvg";
+import {KeySvg} from "../../../theme/Icons/KeySvg";
+import {ConfirmButton} from "../../../theme/Buttons/ConfirmButton";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
+import {Input as DesktopInput, Input, InputValue} from "../../../theme/Inputs/Input";
 // import {MobileInput} from "../../../../components/Inputs/MobileInput";
 import * as Sentry from "@sentry/browser";
 
@@ -13,7 +13,7 @@ import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStora
 import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
 import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"
 import {environment} from "../../../../../../environments/environment"
-import {SecuritySvg} from "../../../../components/Icons/SecuritySvg";
+import {SecuritySvg} from "../../../theme/Icons/SecuritySvg";
 import {connect} from "../../../../../gateway/socket";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import { useDispatch } from "react-redux";
@@ -21,8 +21,8 @@ import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {Captcha} from "./Captcha";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
-import {CheckableICON} from "../../../../components/Icons/CheckableICON";
+import {HidableEyeSvg} from "../../../theme/Icons/HidableEyeSvg";
+import {CheckableICON} from "../../../theme/Icons/CheckableICON";
 import axios from "axios";
 import {v4 as uuidv4} from "uuid";
 import {PhonePrefix} from "../../components/PhonePrefix";

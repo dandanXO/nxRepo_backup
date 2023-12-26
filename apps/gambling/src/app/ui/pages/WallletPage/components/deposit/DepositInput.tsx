@@ -3,7 +3,7 @@ import { DepositInput as PDepositInput } from "../../env/pernambucana/tabsConten
 import { DepositInput as WDepositInput } from "../../env/wild/tabsContent/deposit/DepositInput"
 import { DepositInput as CDepositInput } from "../../env/coco/tabsContent/deposit/DepositInput";
 import { DepositInput as RDepositInput } from "../../env/riojungle/tabsContent/deposit/DepositInput";
-import { InputValue } from "../../../../components/Inputs/Input";
+import { InputValue } from "../../../../components-bs/theme/Inputs/Input";
 
 export interface IDepositInput {
   inputValue: InputValue<string>;

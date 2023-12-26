@@ -12,7 +12,7 @@ import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRouterRules";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
-import {ViewRecordButton} from "../../../../../components/Buttons/env/coco/ViewRecordButton";
+import {ViewRecordButton} from "../../../../../components-bs/theme/Buttons/env/coco/ViewRecordButton";
 
 const SignInButton = styled.div<{
   disable: boolean

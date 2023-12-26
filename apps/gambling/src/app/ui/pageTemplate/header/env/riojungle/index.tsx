@@ -1,8 +1,7 @@
-import {renderByRWD} from "../../../../utils/renderByRWD";
-import {MobileHeader} from "./MobileHeader";
-import {DesktopHeader} from "./DesktopHeader";
 import React from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {renderByRWD} from "../../../../utils/renderByRWD";
+import {Header as SharedHeader} from "./Header";
 import {IHeader} from "../../types/IHeader";
 import {IMobileHeader} from "../../types/IMobileHeader";
 
@@ -11,15 +10,9 @@ export const Header = (props: IHeader | IMobileHeader) => {
   return (
     <>
       {renderByRWD({
-        mobile: (
-          <MobileHeader {...props as IMobileHeader}/>
+        shared: (
+          <SharedHeader {...props as IHeader}/>
         ),
-        tablet: (
-          <MobileHeader {...props as IMobileHeader}/>
-        ),
-        desktop: (
-          <DesktopHeader {...props as IHeader}/>
-        )
       }, device)}
     </>
   )

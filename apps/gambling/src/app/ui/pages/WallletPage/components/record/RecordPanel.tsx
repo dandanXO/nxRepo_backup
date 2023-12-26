@@ -6,9 +6,9 @@ import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';
 import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';
 import cx from "classnames";
-import {RecordButton,RecordButton2} from "../../../../components/Buttons/RecordButton";
+import {RecordButton,RecordButton2} from "../../../../components-bs/theme/Buttons/RecordButton";
 import { renderByPlatform } from '../../../../utils/renderByPlatform';
-import { RecordButton as CRecordButton } from '../../../../components/Buttons/env/coco/RecordButton';
+import { RecordButton as CRecordButton } from '../../../../components-bs/theme/Buttons/env/coco/RecordButton';
 
 type IRecordPanel = {
   recordPanelMode: 'deposit' | 'withdraw';

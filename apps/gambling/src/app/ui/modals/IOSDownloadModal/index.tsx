@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {rootState} from "../../../../../../../packages/dlh-web/src/store/root";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {environment} from "../../../../environments/environment";
-import {LoadingLogo} from "../../components/Logos/LoadingLogo";
+import {LoadingLogo} from "../../components-bs/theme/Logos/LoadingLogo";
 
 export const IOSDownloadModal = () => {
   const dispatch = useDispatch();

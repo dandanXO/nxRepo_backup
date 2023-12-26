@@ -1,4 +1,4 @@
-import {LoadingLogo} from "../../components/Logos/LoadingLogo";
+import {LoadingLogo} from "../../components-bs/theme/Logos/LoadingLogo";
 import {LoadingBar} from "../../components/LoadingBar";
 import React from "react";
 

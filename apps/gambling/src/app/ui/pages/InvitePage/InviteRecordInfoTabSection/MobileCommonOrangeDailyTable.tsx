@@ -9,7 +9,7 @@ import { environment } from "apps/gambling/src/environments/environment";
 import { TabItem } from "../../../components/TabItem/TabItem";
 import { tabItemProps } from "./env/coco/tabItemProps";
 import { MobileTableContainer } from "./env/components/MobileTableContainer";
-import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../components-bs/theme/Icons/QuestionTipsIcon";
 
 
 

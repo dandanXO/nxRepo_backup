@@ -5,15 +5,15 @@ import styled from 'styled-components';
 import { useUpdateUserInfoMutation } from '../../../external';
 import { promiseHandler } from '../../../gateway/promiseHanlder';
 import { AppLocalStorage } from '../../../persistant/localstorage';
-import { Input as DesktopInput } from '../../components/Inputs/Input';
-import { MobileInput } from '../../components/Inputs/MobileInput';
+import { Input as DesktopInput } from '../../components-bs/theme/Inputs/Input';
+import { MobileInput } from '../../components-bs/theme/Inputs/MobileInput';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { IOpenNotificationWithIcon } from '../../pageTemplate';
 import { tcx } from "../../utils/tcx";
 import { UserOutlined } from "@ant-design/icons";
 import { environment } from "../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {CloseICON} from "../../components/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
 
 
 interface IEditUserInfoModalProps {

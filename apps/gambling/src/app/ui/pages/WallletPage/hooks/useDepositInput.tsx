@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { formatLocaleMoney } from "../../../utils/format";
-import { InputValue } from "../../../components/Inputs/Input";
+import { InputValue } from "../../../components-bs/theme/Inputs/Input";
 import { IDepositPanel } from "../components/deposit/DepositPanel";
 
 

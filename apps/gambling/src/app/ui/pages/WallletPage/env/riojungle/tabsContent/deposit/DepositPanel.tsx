@@ -1,4 +1,4 @@
-import { DepositMoneyButton } from "apps/gambling/src/app/ui/components/Buttons/DepositMoneyButton";
+import { DepositMoneyButton } from "../../../../../../components-bs/theme/Buttons/DepositMoneyButton";
 import { DepositInput } from "../../../../components/deposit/DepositInput"
 import { DepositNoticeSection } from "./DepositNoticeSection"
 import cx from 'classnames';

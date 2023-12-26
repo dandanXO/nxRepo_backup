@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { IBoardData } from "../.."
-import { RecordButton3 } from "apps/gambling/src/app/ui/components/Buttons/RecordButton";
+import { RecordButton3 } from "../../../../../components-bs/theme/Buttons/RecordButton";
 import { PageOrModalPathEnum } from "apps/gambling/src/app/ui/PageOrModalPathEnum";
 import { IBoardContainer } from "../../components/DesktopBoard";
 

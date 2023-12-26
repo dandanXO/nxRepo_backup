@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {InputValue} from "../../../components/Inputs/Input";
+import {InputValue} from "../../theme/Inputs/Input";
 import {useForgetPasswordMutation, useSendForgetPasswordSMSCodeMutation} from "../../../../external";
 import {useGetDeviceId} from "../../../hooks/useGetDeviceId";
 import {useForm} from "../../../hooks/useForm";

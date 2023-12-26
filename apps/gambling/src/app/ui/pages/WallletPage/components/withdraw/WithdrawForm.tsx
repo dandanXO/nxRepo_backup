@@ -1,5 +1,5 @@
-import { Input, InputValue } from "../../../../components/Inputs/Input";
-import { MobileInput } from "../../../../components/Inputs/MobileInput";
+import { Input, InputValue } from "../../../../components-bs/theme/Inputs/Input";
+import { MobileInput } from "../../../../components-bs/theme/Inputs/MobileInput";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import Select from 'react-select';
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
@@ -56,7 +56,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
 
         <MainInput
           inputClassName={inputClassName}
-          themeStyle={'normal'}          
+          themeStyle={'normal'}
           className="w-full "
           placeholder={'Insira o nome do titular do cartão'}
           value={props.nameInput.data}

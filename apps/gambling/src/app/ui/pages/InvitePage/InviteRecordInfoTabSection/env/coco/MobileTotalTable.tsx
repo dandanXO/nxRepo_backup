@@ -5,7 +5,7 @@ import ConfirmDrawer from "../../../../../components/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import { tabItemProps } from "./tabItemProps";
 import cx from 'classnames';
-import { QuestionTipsIcon } from "../../../../../components/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../../../components-bs/theme/Icons/QuestionTipsIcon";
 
 export const MobileTotalTable = (props: IMobileTotalTable) => {
   const [inviteBonusInfoOpen, setInviteBonusInfoOpen] = useState(false)

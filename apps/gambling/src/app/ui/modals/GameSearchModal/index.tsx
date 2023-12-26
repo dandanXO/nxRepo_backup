@@ -1,8 +1,8 @@
 import { SearchOutlined } from "@ant-design/icons"
-import { CloseICON } from "../../components/Icons/CloseICON"
-import { Input, InputValue } from "../../components/Inputs/Input";
+import { CloseICON } from "../../components-bs/theme/Icons/CloseICON"
+import { Input, InputValue } from "../../components-bs/theme/Inputs/Input";
 import cx from 'classnames';
-import { SearchInput } from "../../components/Inputs/SearchInput";
+import { SearchInput } from "../../components-bs/theme/Inputs/SearchInput";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import { useEffect, useState } from "react";
 import { GameListSection } from "./components/GameListSection";
@@ -13,9 +13,9 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 import { useSelector } from "react-redux";
-import { NoData } from "../../components/Icons/NoData";
+import { NoData } from "../../components-bs/theme/Icons/NoData";
 import { environment } from "../../../../environments/environment";
-import { Icon } from "../../components/Icons";
+import { Icon } from "../../components-bs/theme/Icons";
 import { GameItem } from "../../components-bs/GameTypeSection";
 
 interface IGameSearchModal {

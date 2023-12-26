@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import cx from "classnames";
 import React from "react";
-import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
+import {ConfirmButton} from "../../../../components-bs/theme/Buttons/ConfirmButton";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useNavigate} from "react-router";
@@ -13,7 +13,7 @@ import {Avatar} from "../../../../components/Avatar";
 import {AvatarAccountInfo} from "../../../../components/AvatarAccountInfo";
 import {CompanyButton} from "./components/CompanyButton";
 import {WebsiteLogo} from "./components/WebsiteLogo";
-import {NotificationAnimationIcon} from "../../../../components/Icons/animation/NotificationAnimationIcon";
+import {NotificationAnimationIcon} from "../../../../components-bs/theme/Icons/animation/NotificationAnimationIcon";
 
 
 const Notification = styled.section`

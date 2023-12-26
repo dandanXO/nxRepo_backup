@@ -8,7 +8,7 @@ import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
 import licenseLogo from "../../license.png";
 
-import {FooterLogo} from "../../../../components/Logos/FooterLogo";
+import {FooterLogo} from "../../../../components-bs/theme/Logos/FooterLogo";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 type ILicenseSection = {

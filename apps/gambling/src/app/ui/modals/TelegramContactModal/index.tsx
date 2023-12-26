@@ -6,7 +6,7 @@ import {environment} from "../../../../environments/environment";
 import { tcx } from "../../utils/tcx";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { CloseCircleOutlined } from "@ant-design/icons";
-import {CloseICON} from "../../components/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
 
 
 const Container = styled.div`

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { tcx } from "../../utils/tcx";
 import { CheckBox } from "../../components/CheckBox";
-import {GameLeaveCancelButton} from "../../components/Buttons/GameLeaveCancelButton";
-import {GameLeaveConfirmButton} from "../../components/Buttons/GameLeaveConfirmButton";
+import {GameLeaveCancelButton} from "../../components-bs/theme/Buttons/GameLeaveCancelButton";
+import {GameLeaveConfirmButton} from "../../components-bs/theme/Buttons/GameLeaveConfirmButton";
 
 interface ILeaveGameConfirmModalProps {
   onConfirm: (addFavorite: boolean) => void

@@ -7,7 +7,7 @@ import { Avatar } from "../../../../components/Avatar";
 import { IUserInfo } from "../../../../../persistant/IUserInfo";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
-import { CopyIcon } from "../../../../components/Icons/CopyIcon";
+import { CopyIcon } from "../../../../components-bs/theme/Icons/CopyIcon";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { ProgressBar } from "../../../../components/ProgressBar";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";

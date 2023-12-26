@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Input as DesktopInput, InputValue } from "../../components/Inputs/Input";
-import { SearchICON } from "../../components/Icons/SearchICON";
-import { MobileInput } from "../../components/Inputs/MobileInput";
+import { Input as DesktopInput, InputValue } from "../../components-bs/theme/Inputs/Input";
+import { SearchICON } from "../../components-bs/theme/Icons/SearchICON";
+import { MobileInput } from "../../components-bs/theme/Inputs/MobileInput";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import { GameTypeSectionList } from "../../components-bs/GameTypeSection";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
-import { SearchInput } from "../../components/Inputs/SearchInput";
+import { SearchInput } from "../../components-bs/theme/Inputs/SearchInput";
 import { SearchPageContainer } from "./SearchPageContainer";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
