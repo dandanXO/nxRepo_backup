@@ -28,6 +28,7 @@ export const MenuDrawer = () => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
+    onClickToLicense,
     onClickToIndex,
   } = usePageNavigate();
 
@@ -120,6 +121,20 @@ export const MenuDrawer = () => {
           </button>
         </div>
 
+
+        <div className={"w-full flex flex-col px-5"}>
+          <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+            // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+          })} onClick={onClickToLicense}>
+            <img
+              src={icon＿users}
+              className="w-5"
+            />
+            <div className="text-sm font-medium leading-[20px]">
+              Licença De Curaçao
+            </div>
+          </button>
+        </div>
 
         <div className={"w-full flex flex-col px-5"}>
           <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {

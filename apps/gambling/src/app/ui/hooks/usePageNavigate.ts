@@ -96,6 +96,10 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.TelegramPage)
     }
   }
+  const onClickToLicense = () =>{
+    navigate(PageOrModalPathEnum.LicensePage)
+  }
+
   const onClickToProfile = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
@@ -193,6 +197,7 @@ export const usePageNavigate = () => {
     onClickToCheckInDaily,
     onCLickToDailySignInRecord,
     onClickToTelegram,
+    onClickToLicense,
     onClickToProfile,
     onClickToSearch,
     onClickToGameRecord,

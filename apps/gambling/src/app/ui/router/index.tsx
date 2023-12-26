@@ -14,6 +14,7 @@ import {CompanyProfilePage} from "../pages/CompanyProfilePage";
 import {InitialChargePage} from "../pages/InitialChargePage";
 import {RechargeActivityPage} from "../pages/RechargeActivityPage";
 import {TelegramPage} from "../pages/TelegramPage";
+import {LicensePage} from "../pages/LicensePage";
 import {InviteSettlementRecordPage} from "../pages/InviteSettlementRecordPage";
 import {MyPage} from "../pages/MyPage";
 import {WalletDepositNextPage} from "../pages/WalletDepositNextPage";
@@ -414,6 +415,16 @@ export const AppRouter = () => {
           <Route path={PageOrModalPathEnum.RechargeActivityPage} element={(
             <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
               <RechargeActivityPage/>
+            </PageTemplate>
+          )}/>
+
+          <Route path={PageOrModalPathEnum.LicensePage} element={(
+            <PageTemplate
+              showMobileHeader={false}
+              showMobileFooter={false}
+              showTabbar={false}
+            >
+              <LicensePage/>
             </PageTemplate>
           )}/>
 

@@ -15,6 +15,7 @@ export enum PageOrModalPathEnum {
   TermsOfService = "/terms_of_service",
   CompanyProfilePage = "/company-profile",
   VIPGradePage = "/vip-grade",
+  LicensePage = "/license",
   DailySignInPage = "/daily-sign-in",
   DailySingInRecordPage = "/daily-sign-in-record",
   InvitePage = "/invite",
