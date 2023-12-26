@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { IBoardData } from "../.."
-import { RecordButton3 } from "apps/gambling/src/app/ui/components/Buttons/RecordButton";
+import { RecordButton3 } from "../../../../../components-bs/theme/Buttons/RecordButton";
 import { PageOrModalPathEnum } from "apps/gambling/src/app/ui/PageOrModalPathEnum";
 import { IBoardContainer } from "../../components/DesktopBoard";
 
@@ -11,8 +11,8 @@ export const DesktopBoard = (props: IBoardData) => {
     boardContainer
     p-3 md:py-5 md:px-3 lg:py-8 lg:px-10
     mt-2 md:mt-0
-    shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] 
-    bg-[#333333] flex flex-col w-full items-center justify-start rounded-lg 
+    shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]
+    bg-[#333333] flex flex-col w-full items-center justify-start rounded-lg
     `}>
       {props.children}
     </div>)

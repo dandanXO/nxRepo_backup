@@ -1,6 +1,6 @@
 
 import {useEffect, useState} from "react";
-import {InputValue} from "../../../components/Inputs/Input";
+import {InputValue} from "../../theme/Inputs/Input";
 import {useDispatch} from "react-redux";
 import axios from "axios";
 import {environment} from "../../../../../environments/environment";

@@ -3,7 +3,7 @@ import { IMobileTotalTable, ITabType } from "../../index";
 import ConfirmDrawer from "../../../../../components/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';
-import { QuestionTipsIcon } from "../../../../../components/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../../../components-bs/theme/Icons/QuestionTipsIcon";
 import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
 import styled from "styled-components";
 import { MobileTableListItem } from "./components/MobileTableListItem";

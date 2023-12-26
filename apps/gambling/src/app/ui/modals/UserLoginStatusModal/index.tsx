@@ -8,7 +8,7 @@ import {Container as PContainer} from "./env/pernambucana/Container";
 import {Container as WContainer} from "./env/wild/Container";
 import {Container as CContainer} from "./env/coco/Container";
 import {useEffect} from "react";
-import {CloseICON} from "../../components/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
 
 const Container = renderByPlatform({
   "wild777bet": WContainer,

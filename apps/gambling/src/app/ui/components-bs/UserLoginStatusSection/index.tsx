@@ -5,8 +5,7 @@ import {UserRegisterForm} from "./forms/UserRegisterForm";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import {UserForgetPasswordForm} from "./forms/UserForgetPasswordForm";
 import {environment} from "../../../../environments/environment";
-import {LoadingLogo} from "../../components/Logos/LoadingLogo";
-import {LoginModalLogo} from "../../components/Logos/LoginModalLogo";
+import {LoginModalLogo} from "../theme/Logos/LoginModalLogo";
 
 export type IUserLoginStatusSection = {
   // onClickToLogin: () => void;

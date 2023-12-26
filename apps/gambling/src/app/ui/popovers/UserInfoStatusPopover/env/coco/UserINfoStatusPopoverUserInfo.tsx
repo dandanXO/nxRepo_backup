@@ -1,13 +1,13 @@
 import React from "react";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { CopyIcon } from "../../../../components/Icons/CopyIcon";
+import { CopyIcon } from "../../../../components-bs/theme/Icons/CopyIcon";
 import { environment } from "../../../../../../environments/environment";
 import { useDispatch } from "react-redux";
 import { appSlice } from "../../../../../reduxStore/appSlice";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {SignoutICON} from "../../../../components/Icons/SignoutICON";
+import {SignoutICON} from "../../../../components-bs/theme/Icons/SignoutICON";
 
 export const UserINfoStatusPopoverUserInfo = () => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};

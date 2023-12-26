@@ -1,4 +1,4 @@
-import { ChargeButton } from "../../../../components/Buttons/env/coco/ChargeButton"
+import { ChargeButton } from "../../../../components-bs/theme/Buttons/env/coco/ChargeButton"
 import useBreakpoint from "../../../../hooks/useBreakpoint"
 import { usePageNavigate } from "../../../../hooks/usePageNavigate"
 

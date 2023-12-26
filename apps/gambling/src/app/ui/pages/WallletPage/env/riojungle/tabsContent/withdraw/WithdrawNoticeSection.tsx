@@ -20,9 +20,9 @@ export const WithdrawNoticeSection = (props: any) => {
         <div>
           O valor e a frequência do saque diário estão diretamente relacionados ao seu nível VIP.
           Nível atual{' '}
-          <button className={"text-[var(--secondary-assistant)]"} onClick={onClickToVIP}>VIP{vip_level}</button>, o valor mínimo de saque diário é de
-          <span className={"text-[var(--secondary-assistant)]"}> R$ {withdrawLimitMin}</span> e o valor máximo de saque é de
-          <span className={"text-[var(--secondary-assistant)]"}> R$ {withdrawLimitMax}</span>.
+          <button className={"text-[#B3B3B3]"} onClick={onClickToVIP}>VIP{vip_level}</button>, o valor mínimo de saque diário é de
+          <span className={"text-[#B3B3B3]"}> R$ {withdrawLimitMin}</span> e o valor máximo de saque é de
+          <span className={"text-[#B3B3B3]"}> R$ {withdrawLimitMax}</span>.
         </div>
         <div className="flex text-center mt-3 md:mt-0 md:ml-2.5 lg:ml-5 justify-center items-center">
           <button className="text-white w-full md:w-auto py-2 px-8 md:py-1.5 rounded-md shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] text-base md:text-lg rounded-[100px]" onClick={onClickToVIP}>Cheque</button>
@@ -49,8 +49,8 @@ export const WithdrawNoticeSection = (props: any) => {
 
       <section className={sectionStyle}>
         Prezado cliente: Olá! Em resposta às exigências do Banco Central do Brasil e do recém-criado comitê de agências reguladoras relevantes no Brasil, a plataforma precisa concluir a troca de dados entre o Banco Central e as agências reguladoras relevantes das
-        <span className={"text-[var(--secondary-assistant)]"}> {withdrawBegin}h </span> às
-        <span className={"text-[var(--secondary-assistant)]"}> {withdrawEnd}h </span>, horário brasileiro!Todos os nossos esforços são para garantir que a operação da plataforma esteja mais em conformidade com as leis e regulamentos brasileiros relevantes! Proteger a privacidade dos utilizadores e os direitos e interesses conexos. Obrigado pela sua compreensão. As retiradas serão normais durante outros períodos de tempo na plataforma.
+        <span className={"text-[#F59E0B]"}> {withdrawBegin}h </span> 
+        <span className={"text-[#F59E0B]"}>às {withdrawEnd}h </span>, horário brasileiro!Todos os nossos esforços são para garantir que a operação da plataforma esteja mais em conformidade com as leis e regulamentos brasileiros relevantes! Proteger a privacidade dos utilizadores e os direitos e interesses conexos. Obrigado pela sua compreensão. As retiradas serão normais durante outros períodos de tempo na plataforma.
       </section>
     </div>
   )

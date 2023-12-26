@@ -12,8 +12,7 @@ import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../header/env/coco/Header";
 import {MobileHeader} from "../../header/env/coco/MobileHeader";
-
-import {LoadingLogo} from "../../../components/Logos/LoadingLogo";
+import {LoadingLogo} from "../../../components-bs/theme/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";

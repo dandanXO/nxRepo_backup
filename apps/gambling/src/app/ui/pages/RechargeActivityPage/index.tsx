@@ -3,7 +3,7 @@ import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import styled from "styled-components";
 import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
 import { environment } from "../../../../environments/environment";
-import { ChargeButton } from "../../components/Buttons/ChargeButton";
+import { ChargeButton } from "../../components-bs/theme/Buttons/ChargeButton";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { BackNavigation } from "../../components/BackNavigation/BackNavigation";

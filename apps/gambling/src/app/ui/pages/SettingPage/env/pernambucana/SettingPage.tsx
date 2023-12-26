@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 import { AppLocalStorage } from '../../../../../persistant/localstorage';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import { Input } from '../../../../components/Inputs/Input';
+import { Input } from '../../../../components-bs/theme/Inputs/Input';
 import { SectionContainer } from '../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
@@ -11,7 +11,7 @@ import { useAllowLoginRouterRules } from '../../../../router/useAllowLoginRouter
 import { environment } from "../../../../../../environments/environment"
 import {Container} from "../../../../components/container/Container";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
-import {InputSection} from "../../../../components/Inputs/env/pernambucana/InputSection";
+import {InputSection} from "../../../../components-bs/theme/Inputs/env/pernambucana/InputSection";
 
 
 type IProps = {

@@ -2,7 +2,7 @@ import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {Input} from "../../../../components/Inputs/Input";
+import {Input} from "../../../../components-bs/theme/Inputs/Input";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../environments/environment"

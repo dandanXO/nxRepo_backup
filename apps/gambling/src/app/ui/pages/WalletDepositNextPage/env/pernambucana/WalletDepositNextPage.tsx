@@ -14,7 +14,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
-import { ButtonPro } from "../../../../components/Buttons/ButtonPro";
+import { ButtonPro } from "../../../../components-bs/theme/Buttons/ButtonPro";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 
 const Notice = styled.div`

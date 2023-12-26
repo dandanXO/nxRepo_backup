@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { environment } from "../../../../environments/environment";
 import { tcx } from "../../utils/tcx";
 import { CloseCircleOutlined } from "@ant-design/icons";
-import {CloseICON} from "../../components/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
 import {RootState} from "../../../reduxStore";
 import { useDispatch, useSelector } from "react-redux";
 

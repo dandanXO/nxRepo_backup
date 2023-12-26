@@ -13,7 +13,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 import { FragmentContainer } from "../../components/FragmentContainer";
 import cx from 'classnames';
 import { Banner } from "../../components/Banner";
-import {TelegramButton} from "../../components/Buttons/TelegramButton";
+import {TelegramButton} from "../../components-bs/theme/Buttons/TelegramButton";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
@@ -21,7 +21,7 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
-  background: linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%); 
+  background: linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);
   border-radius: 8px;
   /* width: 300px; */
   /* height: 60px; */

@@ -1,10 +1,10 @@
-import {PhoneSvg} from "../../../../components/Icons/PhoneSvg";
-import {KeySvg} from "../../../../components/Icons/KeySvg";
-import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
+import {PhoneSvg} from "../../../theme/Icons/PhoneSvg";
+import {KeySvg} from "../../../theme/Icons/KeySvg";
+import {ConfirmButton} from "../../../theme/Buttons/ConfirmButton";
 import {CheckCircleOutlined, EyeInvisibleOutlined, EyeOutlined} from "@ant-design/icons";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
-import {MobileInput} from "../../../../components/Inputs/MobileInput";
+import {Input as DesktopInput, Input, InputValue} from "../../../theme/Inputs/Input";
+import {MobileInput} from "../../../theme/Inputs/MobileInput";
 import {useEffect, useState} from "react";
 import {useForm} from "../../../../hooks/useForm";
 import {
@@ -20,12 +20,12 @@ import {validate} from "class-validator";
 import {onValidatePhoneInput, onValidatePasswordInput} from "../UserLoginForm"
 
 import {environment} from "../../../../../../environments/environment"
-import {SecuritySvg} from "../../../../components/Icons/SecuritySvg";
+import {SecuritySvg} from "../../../theme/Icons/SecuritySvg";
 import {connect} from "../../../../../gateway/socket";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import styled from "styled-components";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
+import {HidableEyeSvg} from "../../../theme/Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../components/PhonePrefix";
 import {useGetDeviceId} from "../../../../hooks/useGetDeviceId";
 import {useUserForgetPasswordForm} from "../../hooks/useUserForgetPasswordForm";

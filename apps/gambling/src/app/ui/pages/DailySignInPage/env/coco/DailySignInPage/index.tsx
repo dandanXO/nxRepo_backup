@@ -13,7 +13,7 @@ import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRou
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../../utils/format";
-import {ViewRecordButton} from "../../../../../components/Buttons/env/coco/ViewRecordButton";
+import {ViewRecordButton} from "../../../../../components-bs/theme/Buttons/env/coco/ViewRecordButton";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -309,7 +309,7 @@ const CocoDailySignInPage = ({
         <div className='px-24'>
           <BackNavigation onClick={() => onClickToIndex()} />
         </div>
-       
+
 
         <div className='px-24 flex flex-col items-end'>
           <Container className='relative

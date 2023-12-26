@@ -1,7 +1,7 @@
-import {PhoneSvg} from "../../../../components/Icons/PhoneSvg";
-import {KeySvg} from "../../../../components/Icons/KeySvg";
-import {ConfirmButton} from "../../../../components/Buttons/ConfirmButton";
-import {Input as DesktopInput, Input, InputValue} from "../../../../components/Inputs/Input";
+import {PhoneSvg} from "../../../theme/Icons/PhoneSvg";
+import {KeySvg} from "../../../theme/Icons/KeySvg";
+import {ConfirmButton} from "../../../theme/Buttons/ConfirmButton";
+import {Input as DesktopInput, Input, InputValue} from "../../../theme/Inputs/Input";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 import {useEffect, useState} from "react";
@@ -17,9 +17,9 @@ import {connect} from "../../../../../gateway/socket";
 import {useDispatch, useSelector} from "react-redux";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
-import {MobileInput} from "../../../../components/Inputs/MobileInput";
+import {MobileInput} from "../../../theme/Inputs/MobileInput";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {HidableEyeSvg} from "../../../../components/Icons/HidableEyeSvg";
+import {HidableEyeSvg} from "../../../theme/Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../components/PhonePrefix";
 import {RootState} from "../../../../../reduxStore";
 import {useGetDeviceId} from "../../../../hooks/useGetDeviceId";

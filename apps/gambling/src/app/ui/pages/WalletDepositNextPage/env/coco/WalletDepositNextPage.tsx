@@ -16,10 +16,10 @@ import cx from "classnames";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import {ButtonPro} from "../../../../components/Buttons/ButtonPro";
+import {ButtonPro} from "../../../../components-bs/theme/Buttons/ButtonPro";
 import { formatLocaleMoney } from "../../../../utils/format";
-import { QRcodeCopyButton } from "../../../../components/Buttons/env/coco/QRcodeCopyButton";
-import { DepositNextPageBackButton } from "../../../../components/Buttons/env/coco/DepositNextPageBackButton";
+import { QRcodeCopyButton } from "../../../../components-bs/theme/Buttons/env/coco/QRcodeCopyButton";
+import { DepositNextPageBackButton } from "../../../../components-bs/theme/Buttons/env/coco/DepositNextPageBackButton";
 
 const ShadowContainer = styled.div.attrs<{
   className?: string;

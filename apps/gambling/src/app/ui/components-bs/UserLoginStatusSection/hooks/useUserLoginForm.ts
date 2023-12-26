@@ -1,5 +1,5 @@
-import {MobileInput} from "../../../components/Inputs/MobileInput";
-import {Input as DesktopInput, InputValue} from "../../../components/Inputs/Input";
+import {MobileInput} from "../../theme/Inputs/MobileInput";
+import {Input as DesktopInput, InputValue} from "../../theme/Inputs/Input";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {useLoginMutation} from "../../../../external";

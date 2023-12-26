@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { RootState } from '../../../../../../../reduxStore';
-import { ButtonPro } from '../../../../../../components/Buttons/ButtonPro';
-import { ArrowRight } from '../../../../../../components/Icons/ArrowRight';
-import { Input } from '../../../../../../components/Inputs/Input';
-import { MobileInput } from '../../../../../../components/Inputs/MobileInput';
+import { ButtonPro } from '../../../../../../components-bs/theme/Buttons/ButtonPro';
+import { ArrowRight } from '../../../../../../components-bs/theme/Icons/ArrowRight';
+import { Input } from '../../../../../../components-bs/theme/Inputs/Input';
+import { MobileInput } from '../../../../../../components-bs/theme/Inputs/MobileInput';
 import { SectionContainer } from '../../../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../../../hooks/useBreakpoint';
 import { formatLocaleMoney } from '../../../../../../utils/format';
@@ -58,11 +58,11 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
             <div
               className={cx(`
               my-3 md:my-4 lg:my-5
-              p-2 md:p-2.5 lg:py-3 lg:px-5 
+              p-2 md:p-2.5 lg:py-3 lg:px-5
               text-sm lg:text-base
               leading-5 md:leading-6 lg:leading-7
               border-solid border-[#333333] bg-[#1a1a1a] flex flex-row w-full border rounded-lg
-              text-[#808080] text-center  
+              text-[#808080] text-center
           `)}
             >
               Por favor, preencha o número do CPF corretamente. Se a informação estiver incorreta, o saque falhará. Certifique - se de verificar as informações com atenção.

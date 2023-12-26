@@ -1,5 +1,5 @@
 import {environment} from "../../../../../environments/environment";
-import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../components-bs/theme/Icons/QuestionTipsIcon";
 import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
 
 interface IDailyType {
@@ -35,7 +35,7 @@ export const DesktopDailyType = (props: IDailyType) => {
         </thead>
         <tbody>
           {props.records !== undefined && props.records?.length > 0 ? props.records?.map((s: any, index: number) => {
-          
+
             return (
               <tr key={index}>
                 <td className='p-4 border-r border-[rgba(255,255,255,0.2)]'>{s.day}</td>

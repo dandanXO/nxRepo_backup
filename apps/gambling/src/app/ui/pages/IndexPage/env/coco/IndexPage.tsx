@@ -3,7 +3,7 @@ import cx from "classnames";
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
-import {Input} from "../../../../components/Inputs/Input";
+import {Input} from "../../../../components-bs/theme/Inputs/Input";
 import {useNavigate} from "react-router";
 
 import {IndexTabs} from "../../IndexTabs";

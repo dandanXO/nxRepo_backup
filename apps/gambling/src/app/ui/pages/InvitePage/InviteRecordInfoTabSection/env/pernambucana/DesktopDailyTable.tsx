@@ -1,5 +1,5 @@
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
-import { QuestionTipsIcon } from "apps/gambling/src/app/ui/components/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../../../components-bs/theme/Icons/QuestionTipsIcon";
 import { environment } from "apps/gambling/src/environments/environment";
 
 interface IDailyType {
