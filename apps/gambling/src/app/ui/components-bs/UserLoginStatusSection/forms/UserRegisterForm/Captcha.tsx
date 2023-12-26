@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {environment} from "../../../../../environments/environment";
+import {environment} from "../../../../../../environments/environment";
 import axios from "axios";
 
 type ICaptcha = {
