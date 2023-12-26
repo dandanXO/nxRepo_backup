@@ -1,4 +1,5 @@
 {
+    "bankCard": "Tarjeta Bancaria",
     "breadcrumb": {
         "orderDetails": "Detalles del pedido",
         "overDueDetails": "Overdue Details"
@@ -11,6 +12,7 @@
         "list": "Lista de contactos"
     },
     "currentPageTotal": "Total actual de la página",
+    "eWallet": "Billetera Electrónica",
     "endDate": "Fecha de finalización",
     "export": "Exportar",
     "followUpResultStatus": {
@@ -58,6 +60,7 @@
     "saved": "Guardado",
     "search": "Buscar",
     "startDate": "Fecha de inicio",
+    "status": "Estado",
     "tab": {
         "contractList": "Lista de contactos",
         "orderInfo": "Información del pedido",

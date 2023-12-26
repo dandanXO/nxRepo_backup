@@ -1,39 +1,20 @@
-import {LeftOutlined} from "@ant-design/icons";
 import React from "react";
 import styled from "styled-components";
-import { environment } from "../../../../../../environments/environment";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
-
-const BackButton = styled.div`
-  left: 20px;
-  top: 20px;
-  z-index: 99;
-  padding: 4px 10px;
-  border-radius: 20px;
-  text-align: center;
-  position: absolute;
-  display: flex;
-  align-content: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-`
+import {ArrowLeft} from "../../../Icons/ArrowLeft";
+import cx from "classnames";
 
 type IGameBackNavigation = {
   onClick?: () => void;
+  className?: string;
 }
 
 export const GameBackNavigation = (props: IGameBackNavigation) => {
-
-  const { isMobile } = useBreakpoint();
-
   return (
-    <BackButton
-      className={"fixed top-[10px] left-[10px] text-white flex flex-row justify-center items-center"}
-      onClick={props.onClick}
-    >
-      <img className={isMobile? 'w-[24px] h-[24px]': 'w-[50px] h-[50px]'} alt='leaveIcon' src={`assets/${environment.assetPrefix}/icon_game_close.png`}/>
-    </BackButton>
+    <div className={cx("bg-[#1a1a1a] flex flex-row w-full items-center py-3 px-6 fixed", props.className)}>
+      <span onClick={() => props.onClick && props.onClick()}>
+        <ArrowLeft className='relative z-10 text-white mr-1'/>
+      </span>
+      <div className="text-base md:text-lg lg:text-2xl font-medium leading-6 md:leading-7 lg:leading-8 text-white">Retornar</div>
+    </div>
   )
 }

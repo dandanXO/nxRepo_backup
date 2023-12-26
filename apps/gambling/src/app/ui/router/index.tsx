@@ -95,6 +95,13 @@ export const AppRouter = () => {
       dispatch(appSlice.actions.setWithdrawBegin(data.data.withdraw_begin))
       dispatch(appSlice.actions.setWithdrawEnd(data.data.withdraw_end))
       dispatch(appSlice.actions.setMaintenance(data.data.maintenance))
+      dispatch(appSlice.actions.setConfig({
+        invite_hig_reward: data.data.invite_hig_reward,
+        recharge_cashback_rate: data.data.recharge_cashback_rate,
+        recharge_first_cashback_rate: data.data.recharge_first_cashback_rate,
+        reward_daily_reset: data.data.reward_daily_reset,
+        recharge_bonus_start: data.data.recharge_bonus_start,
+      }))
     }
   }, [data])
 
@@ -280,6 +287,8 @@ export const AppRouter = () => {
                   if(!isShowDepositModal) {
                     if(location.pathname !== PageOrModalPathEnum.GamePage) {
                       dispatch(appSlice.actions.setShowDepositModal(true))
+                    } else {
+                      window.clearInterval(timer);
                     }
                   }
                   return timesOfShowDepositModal + 1
@@ -293,11 +302,30 @@ export const AppRouter = () => {
         }
       });
     }
+
+    if(location.pathname === PageOrModalPathEnum.GamePage) {
+      setTimesOfShowDepositModal(3)
+    }
+
     return () => {
       window.clearInterval(timer);
     };
 
-  }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal, location.pathname])
+}, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal, location.pathname])
+
+
+  const queryParams = new URLSearchParams(location.search);
+  const inNativeApp = queryParams.get('inNativeApp') === "true";
+
+  useEffect(() => {
+    // NOTE: 只吃首頁開啟後的 inNativeApp
+    if(location.pathname === PageOrModalPathEnum.IndexPage) {
+      if(inNativeApp) {
+        dispatch(appSlice.actions.setInNativeApp(inNativeApp))
+      }
+    }
+  }, [inNativeApp])
+
 
   return (
     <>

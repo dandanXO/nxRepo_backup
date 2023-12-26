@@ -5,6 +5,8 @@ import { InviteCopySection } from "./InviteCopySection";
 import cx from 'classnames';
 import { environment } from "apps/gambling/src/environments/environment";
 import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../../../reduxStore";
 
 export const HowToImageContainer = styled.div`
   position: relative;
@@ -22,6 +24,7 @@ export const HowToImageContainer = styled.div`
 
 export const HowToImage = (props: any) => {
   const { isMobile } = useBreakpoint();
+  const invite_hig_reward = useSelector((rootState: RootState) => rootState.app.config.invite_hig_reward)
 
   return (
     <HowToImageContainer className={cx(`${props.className}`, {
@@ -30,7 +33,7 @@ export const HowToImage = (props: any) => {
     })}>
       <div className="mb-3.5 sm:mb-8 w-full">
         <div className={`text-center sm:text-left text-2xl sm:text-4xl font-bold text-[var(--secondary-assistant)] mb-2 sm:mb-2.5`}>Como convidar usuários?</div>
-        <div className="text-sm sm:text-xl">Convide usuários válidos para recarga, o bônus pode chegar a até R$ 20 ! O que você está esperando, convide seus amigos para participar!</div>
+        <div className="text-sm sm:text-xl">Convide usuários válidos para recarga, o bônus pode chegar a até R$ {invite_hig_reward} ! O que você está esperando, convide seus amigos para participar!</div>
       </div>
 
       <div className={cx("w-full flex flex-col text-center sm:text-left sm:flex-row sm:rounded-2xl sm:pb-4 sm:pt-5 sm:px-8", {

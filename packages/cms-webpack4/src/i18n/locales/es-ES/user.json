@@ -1,6 +1,7 @@
 {
     "address": "Dirección de casa",
     "birthDay": "Fecha de nacimiento",
+    "companyName": "Nombre de la Empresa",
     "education": "Educación",
     "email": "Correo electrónico",
     "emergencyContact": "Contacto de emergencia",

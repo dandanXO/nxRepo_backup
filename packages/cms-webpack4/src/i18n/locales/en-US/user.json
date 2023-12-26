@@ -1,6 +1,7 @@
 {
     "address": "Address",
     "birthDay": "Date of birth",
+    "companyName": "Company Name",
     "education": "Education",
     "email": "Email",
     "emergencyContact": "Emergency Contact",

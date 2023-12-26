@@ -1,4 +1,6 @@
 {
+    "country": "Mexico",
+    "currency": "₹",
     "Registrations": false,
     "timezone":"America/Mexico_City",
     "waterMarkColor":"rgba(0,0,0,.6)"
