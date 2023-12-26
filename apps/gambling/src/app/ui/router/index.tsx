@@ -94,7 +94,7 @@ export const AppRouter = () => {
       AppLocalStorage.setItem(AppLocalStorageKey.downloadUrl, data.data['url_download']);
       dispatch(appSlice.actions.setWithdrawBegin(data.data.withdraw_begin))
       dispatch(appSlice.actions.setWithdrawEnd(data.data.withdraw_end))
-      dispatch(appSlice.actions.setMaintenance({flag: 1, start: '1', end:'2'}))
+      dispatch(appSlice.actions.setMaintenance(data.data.maintenance))
       dispatch(appSlice.actions.setConfig({
         invite_hig_reward: data.data.invite_hig_reward,
         recharge_cashback_rate: data.data.recharge_cashback_rate,
