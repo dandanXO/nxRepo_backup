@@ -51,7 +51,7 @@ export const AppCarousel = (props: IAppCarousel) => {
         // customDot={<div className={"bg-red w-[30px] h-[20px]"}/>}
         swipeable={true}
         draggable={true}
-        showDots={true}
+        showDots={false}
         arrows={!isMobile}
         responsive={responsive}
         autoPlay={true}
