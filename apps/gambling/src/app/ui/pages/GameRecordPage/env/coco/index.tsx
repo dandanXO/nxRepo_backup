@@ -13,17 +13,12 @@ import { Table } from "../../../../components/Table";
 import { GetUserGameRecordResponse } from "../../../../../external";
 import { environment } from "../../../../../../environments/environment";
 import { formatLocaleMoney } from "../../../../utils/format";
+import { IGameRecordPageProps } from "../../index";
 
 const { RangePicker } = DatePicker;
 
 
-interface IGameRecordPageProps {
-  dates: moment.Moment[]
-  setDates: Dispatch<SetStateAction<moment.Moment[]>>
-  handleFetchData: () => void
-  records: GetUserGameRecordResponse['rows']
-  dataCount: number
-}
+
 
 export const GameRecordPage = ({
   dates,
