@@ -5,6 +5,8 @@ import { environment } from "../../../../environments/environment";
 import { tcx } from "../../utils/tcx";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import {CloseICON} from "../../components/Icons/CloseICON";
+import {RootState} from "../../../reduxStore";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const Container = styled.div`
@@ -48,6 +50,7 @@ export const DepositAdvertisementModal = ({
 }:IDepositAdvertisementModalProps) => {
 
   const { isMobile } = useBreakpoint();
+  const recharge_first_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_first_cashback_rate);
 
   return (
     <div className={"z-[1002] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event) => {
@@ -86,7 +89,7 @@ export const DepositAdvertisementModal = ({
         />
 
         <div className={tcx("mb-4 text-white text-center text-lg font-medium mt-4", ['text-xs mt-1', isMobile])}>
-          Caros clientes VIP, você pode obter até {20}% de recompensa ao recarregar. Quanto mais você recarrega, mais bônus você recebe! Sem limite de tempo!
+          Caros clientes VIP, você pode obter até {recharge_first_cashback_rate} de recompensa ao recarregar. Quanto mais você recarrega, mais bônus você recebe! Sem limite de tempo!
         </div>
 
         <div className={"flex flex-col justify-center items-center"}>

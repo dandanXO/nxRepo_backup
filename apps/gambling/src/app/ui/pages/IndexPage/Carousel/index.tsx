@@ -4,6 +4,9 @@ import "./style.scss";
 
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import cx from "classnames";
+import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {AppCarousel as RiojungleAppCarousel} from "./env/riojungle/RiojungleCarousel"
+
 // const responsive = {
 //   superLargeDesktop: {
 //     // the naming can be any, depends on you.
@@ -62,7 +65,7 @@ type IAppCarousel = {
   setIsMoving: (isMoving: boolean) => void;
 }
 
-export const AppCarousel = (props: IAppCarousel) => {
+const CocoAppCarousel = (props: IAppCarousel) => {
   const {isMobile} = useBreakpoint();
   const TransitionDuration = 0.3
 
@@ -104,4 +107,12 @@ export const AppCarousel = (props: IAppCarousel) => {
     </div>
   )
 
+}
+
+export const AppCarousel = (props: IAppCarousel) => {
+  return renderByPlatform({
+    "wild777bet": <CocoAppCarousel {...props}/>,
+    "coco777bet": <CocoAppCarousel {...props}/>,
+    "riojungle777bet": <RiojungleAppCarousel {...props}/>,
+  }, CocoAppCarousel)
 }

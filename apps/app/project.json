@@ -45,7 +45,7 @@
               "with": "apps/app/src/environments/environmentModule/pakistan/environment.pk.prod.ts"
             }
           ],
-          "webpackConfig": "apps/app/build/webpack.config.main.pk.js",
+          "webpackConfig": "apps/app/build/webpack.config.main.js",
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
@@ -108,7 +108,7 @@
         "compiler": "babel",
         "outputPath": "dist/apps/app",
         "baseHref": "/",
-        "index": "apps/app/src/index.html",
+        "index": "apps/app/src/index.dev.html",
         "generateIndexHtml": false,
         "main": "apps/app/src/main.in.tsx",
         "tsConfig": "apps/app/tsconfig.app.json",

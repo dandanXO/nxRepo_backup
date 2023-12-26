@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 import {ThreeDots} from "react-loading-icons";
@@ -18,6 +18,9 @@ import {LoadingBar} from "../../../components/LoadingBar";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {appSlice} from "../../../../reduxStore/appSlice";
+import {usePageSnowEffect} from "../../hooks/usePageSnowEffect/usePageSnowEffect";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {useLocation} from "react-router";
 import {TShowToolboxConfig} from "../../base/types";
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
@@ -48,9 +51,9 @@ export const StyledPage = styled.div.attrs((props) => ({
     top: 0;
     left: 0;
     z-index: -2;
-    background-image: url("assets/${environment.assetPrefix}/bg_web.png");
+    background-image: url("assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/bg_web.png");
     @media (max-width: 768px) {
-      background-image: url("assets/${environment.assetPrefix}/bg_h5.png");
+      background-image: url("assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/bg_h5.png");
     }
     background-size: cover;
     background-repeat: no-repeat;
@@ -143,7 +146,35 @@ export const PageTemplate = ({
 
   const dispatch = useDispatch();
 
+
+  const {affect, stop, isPlay} = usePageSnowEffect();
+
+  const canvasRef = useRef();
+  useEffect(() => {
+    // NOTE: Natal777bet
+    if(environment.assetVersionPrefix === "v6" || environment.assetVersionPrefix === "v7") {
+      affect(canvasRef.current as any)
+    }
+  }, [canvasRef.current])
+
+  const location = useLocation();
+
+  // useEffect(() => {
+  //   if(location.pathname === PageOrModalPathEnum.GamePage) {
+  //     stop();
+  //   } else {
+  //     // if(!isPlay) {
+  //       if(environment.assetVersionPrefix === "v6") {
+  //         affect(canvasRef.current as any)
+  //       }
+  //     // }
+  //   }
+  // }, [location.pathname, canvasRef.current, isPlay]);
+
   return (
+    <>
+      <canvas className="fixed z-[-1]" ref={canvasRef as any}/>
+
       <StyledPage
         isCurrentPageCompanyProfile={false}
         onClick={() => {
@@ -153,6 +184,7 @@ export const PageTemplate = ({
           }
         }}
       >
+
         {isMobile && isShowMobileHeader && (
           <MobileHeader
             className={"!h-[52.5px]"}
@@ -234,6 +266,8 @@ export const PageTemplate = ({
         )}
 
       </StyledPage>
+    </>
+
   )
 }
 

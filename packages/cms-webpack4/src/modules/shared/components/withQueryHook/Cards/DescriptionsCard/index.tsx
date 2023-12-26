@@ -20,16 +20,23 @@ interface IDescriptionsCardProps {
     descriptions: DescriptionsCardDescriptions[];
     hook: UseQuery<any>;
     params: any;
+    column?: number;
 }
 
-export const DescriptionsCard = ({ title, descriptions, hook, params = {} }: IDescriptionsCardProps): JSX.Element => {
+export const DescriptionsCard = ({
+    title,
+    descriptions,
+    hook,
+    column,
+    params = {},
+}: IDescriptionsCardProps): JSX.Element => {
     const { data, isFetching } = hook(params);
 
     if (isFetching) return null;
 
     return (
         <InformationCard title={title}>
-            <AntDescriptions size="small" bordered>
+            <AntDescriptions size="small" bordered column={column}>
                 {descriptions.map((part) => {
                     const value = part.dataIndex.split('.').reduce((acc, current) => (acc ? acc[current] : null), data);
 

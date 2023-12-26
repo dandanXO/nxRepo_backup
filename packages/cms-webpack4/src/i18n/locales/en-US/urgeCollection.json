@@ -41,6 +41,7 @@
     "loginLogs": "Login Logs",
     "merchantName": "Merchant Name",
     "numberOfFollowUps": "Number of Follow-ups",
+    "numberOfOrderCount": "All Collection Cases",
     "numberOfRepeatLoans": "Number of Repeat Loans",
     "orderLabel": "Order Label",
     "orderLabelStatus": {

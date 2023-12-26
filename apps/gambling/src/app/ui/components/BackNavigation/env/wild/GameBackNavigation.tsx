@@ -29,7 +29,7 @@ export const GameBackNavigation = (props: IGameBackNavigation) => {
       className={"fixed top-[10px] left-[10px] p-4 text-white flex flex-row justify-center items-center"}
       onClick={props.onClick}
     >
-      <LeftOutlined className={"mr-1text-white text-base relative top-[-2px] left-[-3px]"}/>
+      <LeftOutlined className={"mr-1 text-white text-base relative top-[-2px] left-[-3px]"}/>
       <div>Retornar</div>
     </BackButton>
   )

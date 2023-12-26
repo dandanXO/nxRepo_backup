@@ -1,3 +1,5 @@
+import { TPayOutMethod, TPayOutStatus } from '../../constants/useEnum';
+
 export interface GetOrderDetailRequestQuerystring {
     orderId?: number;
 }
@@ -26,4 +28,15 @@ export interface GetOrderDetailResponse {
     utr?: string; // UTR
     couponUsageAmount?: number; // 使用优惠券金额
     lastUpdateTime?: string; //最后更新时间
+    loanCertificate?: {
+        // 放款憑證
+        account: string; // 收款帐户
+        amount: number; // 放款金额
+        createTime: string; // 放款启动时间
+        finishTime: string; // 放款确认时间
+        name: string; // 收款人姓名
+        orderNo: string; // 订单编号
+        payoutMethod: TPayOutMethod; // 收款方式
+        status: TPayOutStatus; // 状态
+    };
 }

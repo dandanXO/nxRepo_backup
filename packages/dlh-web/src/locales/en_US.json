@@ -1354,5 +1354,20 @@
   "riskFee": "Risk Fee",
   "world_tone": "Worldtone",
   "refresh.balance": "refresh",
-  "current.balance": "current balance"
+  "current.balance": "current balance",
+  "detail.user.company.name": "Company Name",
+  "common.status": "Status",
+  "order.loanCertificate": "Loan Voucher",
+  "order.payOutAmount": "Loan Amount({unit})",
+  "order.payOutCreateTime": "Loan Initiation Time",
+  "order.payOutFinishTime": "Payment Order Number",
+  "order.paymentOrderNumber": "Payment Order Number",
+  "order.paymentMethod": "Payment Method",
+  "order.payeeAccount": "Payee's Account",
+  "order.receiverName": "Payee's Name",
+  "order.payOutSuccess": "Transfer Successful",
+  "order.payOutFail": "Transfer failed",
+  "order.payOutPending": "Pending",
+  "common.bankcard": "Bank Card",
+  "common.eWallet": "E-Wallet"
 }

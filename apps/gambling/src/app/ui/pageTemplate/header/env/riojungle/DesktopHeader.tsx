@@ -57,13 +57,30 @@ export const DesktopHeader = (props: IHeader) => {
 
       {!isLogin ? (
         <div className="flex-1 flex justify-end mr-4">
-            <LoginButton
-              className={"text-white text-lg"}
-              onClick={() => {
-                // props.onClickUserLoginStatusDrawer()
-                dispatch(appSlice.actions.showLoginDrawerOrModal(true))
-              }}
-            >Connecte-se</LoginButton>
+          <button
+            id="BtnloginRoot"
+            className="w-[91px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] flex flex-row justify-center pt-1 cursor-pointer items-start rounded-lg mr-3"
+            onClick={() => {
+              // props.onClickUserLoginStatusDrawer()
+              dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+            }}
+          >
+            <div className="text-xl font-['Inter'] font-medium leading-[28px] text-white mb-1">
+              Entrar
+            </div>
+          </button>
+          <button
+            id="BtnregisterRoot"
+            className="w-[112px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center pt-1 cursor-pointer items-start rounded-lg"
+            onClick={() => {
+              // props.onClickUserLoginStatusDrawer()
+              dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+            }}
+          >
+            <div className="text-xl font-['Inter'] font-medium leading-[28px] text-white mb-1">
+              Registro
+            </div>
+          </button>
         </div>
         ): (
         <section className={"flex flex-row items-center gap-6 mr-6"}>

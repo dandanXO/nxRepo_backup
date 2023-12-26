@@ -17,6 +17,8 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
   const dispatch = useDispatch();
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
   const {onClickToFirstDeposit} = usePageNavigate();
+
+  const recharge_first_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_first_cashback_rate);
   return (
     <CarouselContainer isMoving={props.isMoving} className={"text-[22.5px] font-[Heebo] text-white"}>
       {isMobile ? (
@@ -26,7 +28,7 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
           }}
         >
           <p className="absolute left-0 top-1/2 transform -translate-y-1/2 pl-4 italic font-bold text-2xl md:text-3xl text-left">
-            Primeiro depósito <br/> + bônus de 20%
+            Primeiro depósito <br/> + bônus de {recharge_first_cashback_rate}
           </p>
           <img
               src={`assets/${environment.assetPrefix}/h5_banner_1.jpeg`}

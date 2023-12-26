@@ -107,6 +107,8 @@ export type GetResponseData = {
   "withdraw_system_rate": number;
   "recharge_first_cashback_rate": string;
   "recharge_cashback_rate": string;
+  "reward_daily_reset": boolean;
+  "recharge_bonus_start": number;
   "service_telegram_01": string;
   "service_telegram_broker01": string;
   "service_telegram_broker02": string;

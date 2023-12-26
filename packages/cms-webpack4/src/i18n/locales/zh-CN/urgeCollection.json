@@ -41,6 +41,7 @@
     "loginLogs": "登录纪录",
     "merchantName": "商户名",
     "numberOfFollowUps": "跟进笔数",
+    "numberOfOrderCount": "催案笔数",
     "numberOfRepeatLoans": "复借笔数",
     "orderLabel": "订单标签",
     "orderLabelStatus": {

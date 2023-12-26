@@ -77,6 +77,8 @@ export const GamePage = () => {
             return "cq9";
         } else if (140000 <= gameId && gameId < 141000) {
             return "oneapi";
+        } else if(150000 <= gameId && gameId < 151000) {
+            return "pgapi";
         } else {
             return null;
         }
@@ -150,7 +152,7 @@ export const GamePage = () => {
         <>
           {
             !closeGame && (
-              <GameBackNavigation onClick={() => setCloseGame(true)} />
+              <GameBackNavigation className="h-[40px] md:h-[52px] lg:h-[56px]" onClick={() => setCloseGame(true)} />
             )
           }
           {
@@ -164,10 +166,9 @@ export const GamePage = () => {
               />
             )
           }
-
           {data !== undefined && data.startType === "LINK" && (
             <iframe
-              className={`w-[100vw] h-[100%]`}
+              className={`w-[100vw] h-[calc(100%-40px)] md:h-[calc(100%-52px)] lg:h-[calc(100%-56px)] relative top-[40px] md:top-[52px] lg:top-[56px]`}
               src={data.link}
               // onLoadStart={onIframeLoadStart}
               // onLoad={onIframeLoad}

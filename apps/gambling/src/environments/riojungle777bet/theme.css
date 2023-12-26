@@ -16,6 +16,7 @@
 
   --black: #000000;
   --white: #FFFFFF;
+  --white-40: #B3B3B3;
   --white-30: rgba(255, 255, 255, 0.3);
   --white-20: rgba(255, 255, 255, 0.2);
 
@@ -226,6 +227,8 @@
   --background-tabbar: #262626;
   --background-header-from: #262626;
   --background-header-to: #333;
+
+  --gray-scale-10: #1A1A1A;
 
   /*NOTE: figma 沒有 自己拆出來的*/
   --input-border: var(--stroke-textfields);

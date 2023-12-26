@@ -1,10 +1,12 @@
 import { useInviteConfig } from "apps/gambling/src/app/ui/hooks/useInviteConfig";
 import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../../../reduxStore";
 
 export const QuestionSection1 = () => {
   const { currentConfig } = useInviteConfig();
-
+  const reward_daily_reset = useSelector((rootState: RootState) => rootState.app.config.reward_daily_reset)
   return (
     <>
       <div>
@@ -24,11 +26,10 @@ export const QuestionSection1 = () => {
         }
       })}
       <div>
-        As recompensas serão distribuídas
-        às 11 horas do dia seguinte. Ao mesmo tempo, realizamos
-        anticomissões de acordo com o valor da aposta do jogo do usuário do
-        jogo na plataforma do jogo (a comissão é considerável). A taxa de
-        comissão varia de jogo para jogo.
+        As recompensas serão distribuídas às 11 horas do dia seguinte.
+        {reward_daily_reset && "Observe que o número de pessoas que você convidar naquele dia será zerado no dia seguinte e não será acumulado."}
+        Ao mesmo tempo, realizamos anticomissões de acordo com o valor da aposta do jogo do usuário do jogo na plataforma do jogo (a comissão é considerável).
+        A taxa de comissão varia de jogo para jogo.
       </div>
     </>
   )

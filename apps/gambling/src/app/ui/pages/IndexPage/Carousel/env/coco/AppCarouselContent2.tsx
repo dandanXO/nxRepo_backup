@@ -18,7 +18,7 @@ import {CarouselTitleSection} from "./CarouselTitleSection";
 export const AppCarouselContent2 = (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
   const {onClickToDepositCashback} = usePageNavigate();
-
+  const recharge_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_cashback_rate)
   return (
     <CarouselContainer
       isMoving={props.isMoving}
@@ -29,7 +29,7 @@ export const AppCarouselContent2 = (props: IAppCarouselContent) => {
     >
       <div className={""}>
         <CarouselTitleSection>
-          Benefícios-ofertasde deposito<br/>Ate 10% bônus
+          Benefícios-ofertasde deposito<br/>Ate {recharge_cashback_rate} bônus
         </CarouselTitleSection>
         {isMobile ? (
           <CarouselImage alt={"h5_banner_1"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_1.png`}/>

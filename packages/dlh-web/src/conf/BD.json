@@ -1,5 +1,6 @@
 {
   "country": "Bangladesh",
+  "currency": "₹",
   "Registrations": false,
   "timezone":"Asia/Dhaka",
   "waterMarkColor":"rgba(0,0,0,.6)"
