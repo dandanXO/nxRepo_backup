@@ -244,9 +244,9 @@ export class Socket {
   }
 
   send(t: number, n: any) {
-    console.log("[gateway] [send] protoid====", t);
-    console.log("[gateway] [send] 编码=============", n);
-    console.log("this.ws && this.ws.readyState", this.ws && this.ws.readyState);
+    // console.log("[gateway] [send] protoid====", t);
+    // console.log("[gateway] [send] 编码=============", n);
+    // console.log("this.ws && this.ws.readyState", this.ws && this.ws.readyState);
 
     let o = this.encode(t, n);
     let s = Math.floor(new Date().getTime() / 1000);
@@ -327,7 +327,7 @@ export class Socket {
     }
     this.decode(n, (o: any) => {
       if (o.protoid) {
-        console.log("[gateway] 解码==========", o);
+        // console.log("[gateway] 解码==========", o);
         this.onProtoMessage(o);
       }
     });
@@ -371,7 +371,7 @@ export class Socket {
 
   stopTime() {
     if (this.timeHandle !== null) {
-      console.log("[gateway] [Socket] stopTime")
+      // console.log("[gateway] [Socket] stopTime")
       window.clearInterval(this.timeHandle);
       this.timeHandle = null;
     }
@@ -398,7 +398,7 @@ export class Socket {
   }
 
   stopHeartTime() {
-    console.log("[gateway] [Socket] stopHeartTime")
+    // console.log("[gateway] [Socket] stopHeartTime")
   }
 }
 

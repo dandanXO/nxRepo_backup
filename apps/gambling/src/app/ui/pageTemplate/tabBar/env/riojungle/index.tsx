@@ -26,7 +26,7 @@ export const TabBar = (props: ITabBar) => {
   // const iconSize = size === "big" ? "w-[40px] h-[40px]" : "w-[27px] h-[27px]";
   // const iconSize = size === "big" ? "w-[34px] h-[34px]" : "w-[27px] h-[27px]";
   const iconSize = "w-[24px] h-[24px]";
-  console.log("isShowMenuDrawer", props.isShowMenuDrawer);
+  // console.log("isShowMenuDrawer", props.isShowMenuDrawer);
   const {
     onClickToIndex,
     onClickToInvite,

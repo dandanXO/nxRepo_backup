@@ -62,7 +62,7 @@ export const gateway = async (
         data: result?.data?.msg,
       };
     }
-    console.log('[gateway] runAxios.result', result);
+    // console.log('[gateway] runAxios.result', result);
 
     return {
       // success: true,
