@@ -5,7 +5,7 @@ import {ConfirmButton} from "../../../../components-bs/theme/Buttons/ConfirmButt
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useNavigate} from "react-router";
-import {useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {MessageCountBadge} from "../../../../components/MessageCountBadge";
 import {environment} from "../../../../../../environments/environment";
@@ -14,6 +14,7 @@ import {AvatarAccountInfo} from "../../../../components/AvatarAccountInfo";
 import {CompanyButton} from "./components/CompanyButton";
 import {WebsiteLogo} from "./components/WebsiteLogo";
 import {NotificationAnimationIcon} from "../../../../components-bs/theme/Icons/animation/NotificationAnimationIcon";
+import { uiSlice } from "../../../../../reduxStore/uiSlice";
 
 
 const Notification = styled.section`
@@ -36,7 +37,6 @@ const Notification = styled.section`
 export type IHeader = {
   className?: string;
   onClickUserLoginStatusDrawer: () => void;
-  onClickToPopupUserInfoStatusPopover: () => void;
   isLogin: boolean;
   onClickToOpenNotificationDrawer: () => void;
   openLogoutPopover: boolean;
@@ -46,6 +46,8 @@ export type IHeader = {
 export const Header = (props: IHeader) => {
   const navigate = useNavigate()
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app)
+  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui);
+  const dispatch = useDispatch();
 
   return (
     <header className={cx("flex flex-row justify-start items-center px-5", props.className)} style={{
@@ -69,7 +71,7 @@ export const Header = (props: IHeader) => {
           </div>
 
           <section className={"mr-6"}>
-            <Avatar onClickToPopupUserInfoStatusPopover={() => props.onClickToPopupUserInfoStatusPopover()}/>
+            <Avatar onClickToPopupUserInfoStatusPopover={() => dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}/>
           </section>
 
           <section className={"mr-3"}>

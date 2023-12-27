@@ -44,7 +44,7 @@ export const PageTemplate = (props: IPage) => {
   const dispatch = useDispatch();
 
   // const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
-  const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
+  const {openMenuDrawer, openUserInfoStatusPopover} = useSelector((state: RootState) => state.ui);
   const setOpenMenuDrawer = (show: boolean) => {
     dispatch(uiSlice.actions.setOpenMenuDrawer(show));
   }
@@ -105,18 +105,15 @@ export const PageTemplate = (props: IPage) => {
     autoWindowFocusRefresh: false,
   });
 
-  // NOTE: UserInfoStatusDrawer
-  const [openDesktopUserInfoStatusDrawer, setOpenDesktopUserInfoStatusDrawer] = useState(false);
-
   useEffect(() => {
-    if(isMobile && openDesktopUserInfoStatusDrawer) {
-      setOpenDesktopUserInfoStatusDrawer(false)
+    if(isMobile && openUserInfoStatusPopover) {
+      dispatch(uiSlice.actions.closeUserInfoStatusPopover());
     }
   }, [isMobile]);
 
   useEffect(() => {
-    if(openDesktopUserInfoStatusDrawer) update();
-  }, [openDesktopUserInfoStatusDrawer])
+    if(openUserInfoStatusPopover) update();
+  }, [openUserInfoStatusPopover])
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
   // useEffect(() => {
@@ -147,7 +144,10 @@ export const PageTemplate = (props: IPage) => {
     isShowMobileFooter,
     isShowDesktopFooter,
     isShowTabbar,
-  } = useSingletonPageTemplateConfig(props);
+  } = useSingletonPageTemplateConfig({
+    ...props,
+    showDesktopMenuDrawer: props. showDesktopMenuDrawer && openMenuDrawer,
+  });
 
   // const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
   // const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
@@ -229,8 +229,6 @@ export const PageTemplate = (props: IPage) => {
 
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
-            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             openDesktopNotificationDrawer={openDesktopNotificationDrawer}
             setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
             setOpenLogoutPopover={setOpenLogoutPopover}
@@ -269,8 +267,6 @@ export const PageTemplate = (props: IPage) => {
 
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
-            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             openDesktopNotificationDrawer={openDesktopNotificationDrawer}
             setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
             setOpenLogoutPopover={setOpenLogoutPopover}
@@ -314,8 +310,6 @@ export const PageTemplate = (props: IPage) => {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
-            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             openDesktopNotificationDrawer={openDesktopNotificationDrawer}
             setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
             setOpenLogoutPopover={setOpenLogoutPopover}
@@ -356,8 +350,6 @@ export const PageTemplate = (props: IPage) => {
           isLogin={isLogin}
           setIsLogin={setIsLogin}
           showLoginModal={showLoginModal}
-          setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-          openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
           openDesktopNotificationDrawer={openDesktopNotificationDrawer}
           setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
           setOpenLogoutPopover={setOpenLogoutPopover}
@@ -392,8 +384,6 @@ export const PageTemplate = (props: IPage) => {
         openNotificationWithIcon={openNotificationWithIcon}
         isShowMobileLogoutModal={isShowMobileLogoutModal}
         setOpenLogoutPopover={setOpenLogoutPopover}
-        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
-        setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
         openDesktopNotificationDrawer={openDesktopNotificationDrawer}
         setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
         isShowDepositModal={isShowDepositModal}

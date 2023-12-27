@@ -14,8 +14,12 @@ import {NotificationAnimationIcon} from "../../../../components-bs/theme/Icons/a
 import {IHeader} from "../../types/IHeader";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import LogoContainerImg from "./LogoContainer.svg";
-import {MenuLogo} from "./MenuLogo";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {MenuSmallLogo} from "../../../../components-bs/theme/Logos/env/riojungle/MenuSmallLogo";
+import {renderByRWD} from "../../../../utils/renderByRWD";
+import {MenuLogo} from "../../../../components-bs/theme/Logos/MenuLogo";
+import {MenuMediumLogo} from "../../../../components-bs/theme/Logos/env/riojungle/MenuMediumLogo";
+import { uiSlice } from "../../../../../reduxStore/uiSlice";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -26,10 +30,12 @@ const DirectionIcon = styled.img<{
 `
 
 export const Header = (props: IHeader) => {
-  const {isMobile} = useBreakpoint();
+  const {isMobile, isTablet, isDesktop} = useBreakpoint();
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
+  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui)
+
   const [hover, setHover] = useState(false);
   const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
 
@@ -38,28 +44,50 @@ export const Header = (props: IHeader) => {
 
   return (
     <header
-      className={twMerge("h-[56px] md:h-[72px]",
+      className={twMerge("h-[56px] sm:h-[72px]",
         "bg-gradient-to-b from-[var(--background-header-from)] to-[var(--background-header-to)]",
         "flex flex-row justify-between items-center",
         "px-4 md:px-8",
+        "py-0 sm:py-3",
         props.className
       )}
     >
-      {!isMobile && (
-        <div className={"relative"}>
-          <img
-            className={"w-[300px] h-[96px] relative top-[12px] left-[-30px]"}
-            src={LogoContainerImg}
-          />
+      {renderByRWD({
+        mobile: (
           <div
-            className={"cursor-pointer absolute top-[26px] left-[42px]"}
+            className={"cursor-pointer"}
             onClick={() => onClickToIndex()}
           >
-            <MenuLogo/>
+            <MenuSmallLogo/>
           </div>
-        </div>
-      )}
-
+        ),
+        tablet: (
+          <div
+            className={"cursor-pointer"}
+            onClick={() => onClickToIndex()}
+          >
+            <MenuMediumLogo/>
+          </div>
+        ),
+        desktop: (
+          <div className={"relative"}>
+            <img
+              className={"w-[300px] h-[96px] relative top-[12px] left-[-30px]"}
+              src={LogoContainerImg}
+            />
+            <div
+              className={"cursor-pointer absolute top-[26px] left-[42px]"}
+              onClick={() => onClickToIndex()}
+            >
+              <MenuLogo/>
+            </div>
+          </div>
+        )
+      }, {
+        isMobile,
+        isTablet,
+        isDesktop
+      })}
 
       {!isLogin ? (
         <div className="flex-1 flex justify-end mr-4">
@@ -97,7 +125,7 @@ export const Header = (props: IHeader) => {
 
           <section
             className='hidden lg:flex gap-2 items-center'
-            onClick={() => props.onClickToPopupUserInfoStatusPopover()}
+            onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}}
             onMouseOver={() => {
               // console.log("onMouseOver")
               // props.onClickToPopupUserInfoStatusPopover();
@@ -116,7 +144,7 @@ export const Header = (props: IHeader) => {
               <div className='text-lg text-white flex gap-2'>
                 <div>{user.nickname}</div>
                 <DirectionIcon
-                  active={props.openDesktopUserInfoStatusDrawer}
+                  active={openUserInfoStatusPopover}
                   className='mx-auto my-auto'
                   src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
                 />

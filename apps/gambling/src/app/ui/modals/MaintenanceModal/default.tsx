@@ -37,7 +37,7 @@ export const DMaintenanceModal = (props: IMaintenanceModal) => {
 
 
   return (
-    <div className="fixed left-0 top-0 right-0 bottom-0 z-[1002] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
+    <div className="fixed left-0 top-0 right-0 bottom-0 z-[1005] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
       <div className={cx("flex flex-col fixed bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] rounded-lg py-6", {
         // NOTE: mt-[46px]:圖往上74px-24px(mb-6)
         "mt-[50px] px-6 w-[80%] lg:w-[778px] max-h-[calc(100%-120px)]": !isMobile,

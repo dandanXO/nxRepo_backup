@@ -1,6 +1,6 @@
 export const protoDecode = (t: number, n: Uint8Array) => {
-  console.log(`[websocket] protoDecode case ${t}`)
-  console.log(`[websocket] protoDecode data ${n}`)
+  // console.log(`[websocket] protoDecode case ${t}`)
+  // console.log(`[websocket] protoDecode data ${n}`)
 
   switch (t) {
     case 101:

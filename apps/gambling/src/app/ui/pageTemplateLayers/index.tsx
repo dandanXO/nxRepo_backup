@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {appSlice} from "../../reduxStore/appSlice";
 
 import {NotificationDrawer} from "../drawers/NotificationDrawer";
@@ -19,6 +19,8 @@ import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {IQueryStringProps} from "../hooks/usePageNavigate";
 import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
 import {IOpenNotificationWithIcon} from "../pageTemplate";
+import { RootState } from "../../reduxStore";
+import { uiSlice } from "../../reduxStore/uiSlice";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -32,9 +34,6 @@ export type IPageTemplateLayers = {
   openNotificationWithIcon: (props: IOpenNotificationWithIcon) => void;
   isShowMobileLogoutModal: IModalOpen["isOpen"];
   setOpenLogoutPopover: IModalOpen["open"];
-
-  openDesktopUserInfoStatusDrawer: IModalOpen["isOpen"];
-  setOpenDesktopUserInfoStatusDrawer: IModalOpen["open"];
 
   openDesktopNotificationDrawer: IModalOpen["isOpen"];
   setOpenDesktopNotificationDrawer: IModalOpen["open"];
@@ -63,8 +62,6 @@ export const PageTemplateLayers = ({
                            openNotificationWithIcon,
                            isShowMobileLogoutModal,
                            setOpenLogoutPopover,
-                           openDesktopUserInfoStatusDrawer,
-                           setOpenDesktopUserInfoStatusDrawer,
                            openDesktopNotificationDrawer,
                            setOpenDesktopNotificationDrawer,
                            isShowDepositModal,
@@ -78,6 +75,8 @@ export const PageTemplateLayers = ({
                            isShowMaintenanceModal,
                            onClickToOpenTelegramService,
                          }: IPageTemplateLayers) => {
+
+  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -110,9 +109,9 @@ export const PageTemplateLayers = ({
       )}
 
       {/*UserInfoStatusPopover*/}
-      {openDesktopUserInfoStatusDrawer && (
+      {openUserInfoStatusPopover && (
         <UserInfoStatusPopover
-          close={() => setOpenDesktopUserInfoStatusDrawer(false)}
+          close={() => dispatch(uiSlice.actions.closeUserInfoStatusPopover())}
         />
       )}
 
