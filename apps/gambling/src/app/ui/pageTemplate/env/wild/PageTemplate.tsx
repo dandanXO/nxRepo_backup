@@ -8,7 +8,7 @@ import {Footer} from "../../footer/env/wild/Footer";
 
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
-import {Toolbox} from "../../Toolbox";
+import {Toolbox} from "../../Toolbox/env/coco";
 
 import {TabBar} from "../../tabBar/env/coco";
 

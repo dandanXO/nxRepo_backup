@@ -11,7 +11,11 @@ import {useDispatch} from "react-redux";
 import {useLocation} from "react-router";
 import cx from "classnames";
 
-export const AddToMobileShortcut = ({isShowTabbar}:{isShowTabbar: boolean}) => {
+type IAddToMobileShortcut  = {
+  isShowTabbar: boolean;
+  className?: string
+}
+export const AddToMobileShortcut = (props: IAddToMobileShortcut) => {
   const dispatch = useDispatch();
   const [_, setHideAddToMobileShortcut ] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
   const onClose = () => {
@@ -31,11 +35,10 @@ export const AddToMobileShortcut = ({isShowTabbar}:{isShowTabbar: boolean}) => {
   }
 
   return (
-    <div className={cx("w-full h-[40px] md:h-[56px] bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] px-4 py-3 z-10",
-        "fixed left-0 right-0",
+    <div className={cx("bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)]",
+        "px-4",
         "flex row justify-between",
-        {"bottom-[60px]": isShowTabbar},
-        {"bottom-0": !isShowTabbar},
+        props.className
       )}>
       <div className={"w-full flex row justify-between items-center"}>
         <span className={"flex row items-center w-full"} onClick={onDownload}>

@@ -1,15 +1,15 @@
-import {environment} from "../../../../environments/environment";
+import {environment} from "../../../../../../environments/environment";
 import React from "react";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
 import styled from "styled-components";
 
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../reduxStore";
-import {TelegramMobileModal} from "../../modals/TelegramMobileModal";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {TShowToolboxConfig} from "../base/types";
-import {FixedToolStyle} from "./FixedToolStyle";
-import {ToolButton} from "./ToolButton";
+import {RootState} from "../../../../../reduxStore";
+import {TelegramMobileModal} from "../../../../modals/TelegramMobileModal";
+import {appSlice} from "../../../../../reduxStore/appSlice";
+import {TShowToolboxConfig} from "../../../base/types";
+import {FixedToolStyle} from "../../FixedToolStyle";
+import {ToolButton} from "../../ToolButton";
 
 const FixedToolContainer = styled.div`
     width: 80px;
@@ -46,6 +46,7 @@ export const Toolbox = (props: IToolbox) => {
 
   return (
     <>
+      {/*NOTICE: refactor em */}
       {
         isShowTelegramMobileModal && (
           <TelegramMobileModal
@@ -57,6 +58,7 @@ export const Toolbox = (props: IToolbox) => {
           />
         )
       }
+
       {
         isMobile && mobileShowToolbox && (mobileShowDownload || mobileShowCustomerService) && (
           <div className={"z-10 fixed right-[16px] bottom-[68px]"}>

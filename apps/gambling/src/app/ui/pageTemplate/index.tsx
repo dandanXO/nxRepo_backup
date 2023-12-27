@@ -195,9 +195,6 @@ export const PageTemplate = (props: IPage) => {
   const location = useLocation();
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
 
-  // NOTE: hideAddToMobileShortcut, isShowiOSDownloadPopover
-  const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
-  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
 
   useEffect(() => {
     const handleStorage = () => {
@@ -211,7 +208,7 @@ export const PageTemplate = (props: IPage) => {
   }, [])
 
 
-  const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
+
 
   return (
     <>
@@ -398,14 +395,8 @@ export const PageTemplate = (props: IPage) => {
         onClickToOpenTelegramService={onClickToOpenTelegramService}
       />
 
-      {!inNativeApp && (
-        <>
-          {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
-          {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
-        </>
-      )}
-      {contextHolder}
 
+      {contextHolder}
     </>
   )
 

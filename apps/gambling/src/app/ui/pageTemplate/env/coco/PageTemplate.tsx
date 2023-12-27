@@ -6,7 +6,7 @@ import {ThreeDots} from "react-loading-icons";
 import {Footer} from "../../footer/env/coco/Footer";
 
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../Toolbox";
+import {Toolbox} from "../../Toolbox/env/coco";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";
@@ -22,6 +22,11 @@ import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {useLocation} from "react-router";
 import {TShowToolboxConfig} from "../../base/types";
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
+import {AddToMobileShortcut} from "../../../popovers/AddToMobileShortcut";
+import {IOSDownloadModal} from "../../../modals/IOSDownloadModal";
+import {useLocalStorage} from "usehooks-ts";
+import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
+import {twMerge} from "tailwind-merge";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -166,6 +171,12 @@ export const PageTemplate = ({
   //   }
   // }, [location.pathname, canvasRef.current, isPlay]);
 
+  // NOTE: hideAddToMobileShortcut, isShowiOSDownloadPopover
+  const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
+  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
+  const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
+
+
   return (
     <>
       <canvas className="fixed z-[-1]" ref={canvasRef as any}/>
@@ -256,7 +267,20 @@ export const PageTemplate = ({
           </div>
         )}
 
+        {!inNativeApp && (
+          <div
+            className={twMerge("fixed z-10 w-full h-[40px] md:h-[56px]",
+              isShowTabbar && "bottom-[60px]",
+              !isShowTabbar && "bottom-0",
+            )}
+          >
+            {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
+          </div>
+        )}
+        {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
+
       </StyledPage>
+
     </>
 
   )
