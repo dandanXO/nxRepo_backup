@@ -48,7 +48,7 @@ export const PageTemplate = (props: IPage) => {
   const setOpenMenuDrawer = (show: boolean) => {
     dispatch(uiSlice.actions.setOpenMenuDrawer(show));
   }
-  const {isMobile} = useBreakpoint();
+  const {isMobile, isDesktop} = useBreakpoint();
 
   useEffect(() => {
     if(!isMobile) {
@@ -106,10 +106,10 @@ export const PageTemplate = (props: IPage) => {
   });
 
   useEffect(() => {
-    if(isMobile && openUserInfoStatusPopover) {
+    if(!isDesktop && openUserInfoStatusPopover) {
       dispatch(uiSlice.actions.closeUserInfoStatusPopover());
     }
-  }, [isMobile]);
+  }, [isDesktop]);
 
   useEffect(() => {
     if(openUserInfoStatusPopover) update();
