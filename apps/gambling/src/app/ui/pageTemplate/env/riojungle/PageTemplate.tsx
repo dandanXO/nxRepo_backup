@@ -104,8 +104,9 @@ export const PageTemplate = ({
 
   // NOTICE: refactor me
   const HeaderHeight = isDesktop || isTablet ? 72 : 0;
+  const MenuTop = isDesktop ? 72 : 0;
   const DrawerWidth = 248;
-  const HeaderZIndex = "z-[1002]";
+  const HeaderZIndex = isDesktop ? "z-[1004]" : "z-[1002]";
   const MenudrawerZIndex = "z-[1003]";
   const TabZIndex = "z-[1004]";
 
@@ -144,7 +145,7 @@ export const PageTemplate = ({
           <div
             className={twMerge("fixed left-0", MenudrawerZIndex)}
             style={{
-              top: HeaderHeight,
+              top: MenuTop,
             }}
           >
             <MenuDrawer/>
