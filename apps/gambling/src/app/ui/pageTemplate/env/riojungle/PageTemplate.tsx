@@ -100,14 +100,17 @@ export const PageTemplate = ({
 
 
   // NOTICE: refactor me
-  // const HeaderHeight = isDesktop || isTablet ? 72 : 52.5;
+  // NOTE: Header
   const HeaderHeight = isDesktop ? 72 : isTablet ? 72 : 56;
-  const TabHeight = isShowTabbar ? 72 : 0;
-
-  const MenuTop = isDesktop ? 72 : 0;
-  const DrawerWidth = 248;
   const HeaderZIndex = isDesktop ? "z-[1004]" : "z-[1002]";
+
+  // NOTE: MenuDrawer
+  const DrawerWidth = 248;
+  const MenuDrawerTop = isDesktop ? 72 : 0;
   const MenudrawerZIndex = "z-[1003]";
+
+  // NOTE: TabBar
+  const TabHeight = isShowTabbar ? 72 : 0;
   const TabZIndex = "z-[1004]";
 
 
@@ -117,7 +120,6 @@ export const PageTemplate = ({
       //   height: isShowTabbar ? `calc(100% - ${TabHeight}px)` : "100%",
       // }}
     >
-
       <div
         className={twMerge("fixed top-0 left-0 right-0 w-full", HeaderZIndex)}
         // style={{
@@ -145,29 +147,30 @@ export const PageTemplate = ({
         />
       </div>
 
+      {isShowDesktopMenuDrawer && (
+        <div
+          className={twMerge("fixed left-0", MenudrawerZIndex)}
+          style={{
+            top: MenuDrawerTop,
+          }}
+        >
+          <MenuDrawer/>
+        </div>
+      )}
+
       <div
         className={"page-container"}
         style={{
           position: 'fixed',
+          top: HeaderHeight,
           width: '100%',
           height: `calc(100% - ${HeaderHeight}px - ${TabHeight}px)`,
         }}
       >
-        {isShowDesktopMenuDrawer && (
-          <div
-            className={twMerge("fixed left-0", MenudrawerZIndex)}
-            style={{
-              top: MenuTop,
-            }}
-          >
-            <MenuDrawer/>
-          </div>
-        )}
-
         <div
           className={twMerge("h-full overflow-auto")}
           style={{
-            marginTop: HeaderHeight,
+            // marginTop: HeaderHeight,
             marginLeft: isDesktop ? DrawerWidth : 0,
           }}
         >
