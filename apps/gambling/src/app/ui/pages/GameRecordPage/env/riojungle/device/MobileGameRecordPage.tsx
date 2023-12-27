@@ -6,6 +6,7 @@ import moment from "moment";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
+import { environment } from "../../../../../../../environments/environment";
 
 const BottomLine = styled.div`
  height: 1px;
@@ -92,6 +93,14 @@ export const MobileGameRecordPage = ({
               </div>
             </div>
           ))
+        }
+        {
+          records.length === 0 && (
+            <div className="h-full border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">
+              <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
+              <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>
+            </div>
+          )
         }
       </div>
     </div>
