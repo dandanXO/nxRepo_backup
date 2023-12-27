@@ -103,7 +103,7 @@ export const PageTemplate = ({
   // console.log("debug.isTablet", isTablet)
 
   // NOTICE: refactor me
-  const HeaderHeight = isDesktop || isTablet ? 72 : 0;
+  const HeaderHeight = isDesktop || isTablet ? 72 : 52.5;
   const MenuTop = isDesktop ? 72 : 0;
   const DrawerWidth = 248;
   const HeaderZIndex = isDesktop ? "z-[1004]" : "z-[1002]";
