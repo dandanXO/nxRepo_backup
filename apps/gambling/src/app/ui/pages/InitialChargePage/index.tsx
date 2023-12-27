@@ -41,8 +41,9 @@ export const InitialChargePage = () => {
       />
 
       {renderByPlatform({
+        "wild777bet": <WInitialChargeContent />,
         "coco777bet": <CInitialChargeContent />,
-        "wild777bet": <WInitialChargeContent />
+        "riojungle777bet": <CInitialChargeContent />,
       }, <PInitialChargeContent />)};
     </div>
 
