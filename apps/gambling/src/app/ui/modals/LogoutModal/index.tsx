@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {LogoutSection} from "../../components-bs/LogoutSection";
+import {LogoutSection} from "../../components-bs/UserLogoutSection";
 import cx from "classnames";
 import { LogoutPopoverContainer } from "../../popovers/LogoutPopover/LogoutPopoverContainer";
 

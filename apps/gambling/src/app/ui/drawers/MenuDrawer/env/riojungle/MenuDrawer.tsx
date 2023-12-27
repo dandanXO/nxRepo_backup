@@ -16,9 +16,15 @@ import icon＿slot from "./assets/icon＿slot.png";
 import icon＿fishing from "./assets/icon＿fishing.png";
 import icon＿vivo from "./assets/icon＿vivo.png";
 import icon＿viver from "./assets/icon＿viver.png";
+import closeSVG from "./icon-close.svg";
+
 import cx from "classnames";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useLocation} from "react-router";
+import {twMerge} from "tailwind-merge";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {useDispatch} from "react-redux";
+import {uiSlice} from "../../../../../reduxStore/uiSlice";
 
 export const MenuDrawer = () => {
   const {
@@ -32,13 +38,26 @@ export const MenuDrawer = () => {
     onClickToIndex,
   } = usePageNavigate();
 
+  const dispatch = useDispatch();
   const location = useLocation();
+  const {isMobile, isDesktop, isTablet} = useBreakpoint();
   return (
     <div
       id="TabBarRoot"
-      className="w-[248px] h-[calc(100vh-72px)] bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto"
+      // NOTICE: cx->twMerge 下面 bg 會失效 (refactor me)
+      className={cx(
+        "w-[248px]",
+        !isMobile && "h-[calc(100dvh-72px)]",
+        isMobile && "h-[calc(100dvh-72px)]",
+        "bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto")}
     >
-      <div className="w-full flex flex-col items-start gap-3 pt-7">
+      {!isDesktop && (<img alt={"close"} className="absolute right-3 top-3" src={closeSVG}
+        onClick={() => {
+          dispatch(uiSlice.actions.setOpenMenuDrawer(false));
+        }}
+      />)}
+
+      <div className={twMerge("w-full flex flex-col items-start gap-3", (isDesktop) && "pt-7", (!isDesktop) && "pt-[64px]")}>
 
         <div className={"w-full flex flex-col px-5"}>
           <button className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-end gap-2 items-start border rounded-lg" onClick={onClickToDepositCashback}>

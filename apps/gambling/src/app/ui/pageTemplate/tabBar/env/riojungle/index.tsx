@@ -1,29 +1,22 @@
-import {environment} from "../../../../../../environments/environment";
-import {RootState} from "../../../../../reduxStore";
-import {useDispatch, useSelector} from "react-redux";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
-import {appSlice} from "../../../../../reduxStore/appSlice";
-import {useLocation, useNavigate} from "react-router";
+import {useLocation} from "react-router";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import {AssetMappingCoco} from "../../../../../../assets/assetMapping.coco";
+import {ITabBar} from "../../type";
+import {uiSlice} from "../../../../../reduxStore/uiSlice";
+import {useDispatch} from "react-redux";
+import {twMerge} from "tailwind-merge";
 
-export type IFooter = {
-  isShowHome?: boolean;
-  isShowSlot?: boolean;
-  isShowInvite?: boolean;
-  isShowVIP?: boolean;
-  isShowProfile?: boolean;
-  size?: "big" | "small"
-}
+import {MenuSVGIcon} from "./MenuSVGIcon";
+import {ThumbsUPSVGIcon} from "./ThumbsUPSVGIcon";
+import {CrownSVGIcon} from "./CrownSVGIcon";
+import {UserSVGIcon} from "./UserSVGIcon";
+import {GameControllerSVGIcon} from "./GameControllerSVGIcon";
 
-export const TabBar = (props: IFooter) => {
-  const location = useLocation();
+export const TabBar = (props: ITabBar) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const {isLogin} = useSelector((state: RootState) => state.app)
+  const location = useLocation();
   const showHome = props.isShowHome === undefined ? true : props.isShowHome;
-  const showSlot = props.isShowSlot === undefined ? true : props.isShowSlot;
   const showInvite = props.isShowInvite === undefined ? true : props.isShowInvite;
   const showVIP = props.isShowVIP === undefined ? true : props.isShowVIP;
   const showProfile = props.isShowProfile === undefined ? true : props.isShowProfile;
@@ -32,127 +25,144 @@ export const TabBar = (props: IFooter) => {
   // const iconSize = size === "big" ? "w-[40px] h-[40px]" : "w-[27px] h-[27px]";
   // const iconSize = size === "big" ? "w-[34px] h-[34px]" : "w-[27px] h-[27px]";
   const iconSize = "w-[24px] h-[24px]";
-
+  console.log("isShowMenuDrawer", props.isShowMenuDrawer);
   const {
     onClickToIndex,
-    onClickToSlot,
     onClickToInvite,
     onClickToVipGrade,
     onClickToProfile,
   } = usePageNavigate();
+
+  const isActive = (active: boolean) => active ? "#9c6aef" : "#b3b3b3";
+
   return (
     <footer
-      className={cx("fixed bottom-0 flex flex-row justify-between h-[60px] z-10 w-full",
-        "bg-gradient-to-t from-[var(--tab-primary-from)] to-[var(--tab-primary-to)]",
-        "border-t-[1px] border-[var(--tab-border-top)]",
-        {
-          "p-2": size === "small",
-        })}
+      className={twMerge(
+        "h-[72px] w-full",
+        "bg-[#333333]",
+        "z-10 fixed bottom-0",
+        "flex flex-row justify-between",
+        props.className
+      )}
     >
-      {showHome && (
-        <section
-          className={cx("flex-1 flex flex-col items-center justify-center", {
-            "font-bold": location.pathname === PageOrModalPathEnum.IndexPage ||
-              location.pathname === PageOrModalPathEnum.GameSearchPage
-          })}
-          onClick={() => {
-            onClickToIndex();
-          }}
-        >
-          {(
-            location.pathname === PageOrModalPathEnum.IndexPage ||
-            location.pathname === PageOrModalPathEnum.GameSearchPage
-          ) ? (
-            <img className={cx(iconSize)} src={AssetMappingCoco.tab.home}/>
-          ): (
-            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.home}/>
-          )}
-          <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
-            "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.IndexPage,
-          })}>Jogos</span>
-        </section>
-      )}
 
-      {showSlot && (
-        <section
-          className={cx("flex-1 flex flex-col items-center justify-center", {
-            "font-bold": location.pathname === PageOrModalPathEnum.IndexSlotPage
-          })}
-          onClick={() => {
-             onClickToSlot();
-          }}
-        >
-          {location.pathname === PageOrModalPathEnum.IndexSlotPage  ? (
-            <img className={iconSize} src={AssetMappingCoco.tab.home}/>
-          ): (
-            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.home}/>
+      <section
+        className={cx("flex-1 flex flex-col items-center justify-center")}
+        onClick={() => {
+          dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+        }}
+      >
+        <MenuSVGIcon color={isActive(props.isShowMenuDrawer || false)}/>
+        <div
+          className={twMerge("text-sm font-medium leading-5",
+            props.isShowMenuDrawer && "text-[#9c6aef]",
+            !props.isShowMenuDrawer && "text-[#b3b3b3]",
           )}
-          <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
-            "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.IndexSlotPage,
-          })}>Casino</span>
-        </section>
-      )}
+        >
+          Menu
+        </div>
+      </section>
+
 
       {showInvite && (
         <section
-          className={cx("flex-1 flex flex-col items-center justify-center", {
-            "font-bold": location.pathname === PageOrModalPathEnum.InvitePage
-          })}
+          className={cx("flex-1 flex flex-col items-center justify-center")}
           onClick={() => {
             onClickToInvite();
           }}
         >
-          {location.pathname === PageOrModalPathEnum.InvitePage  ? (
-            <img className={iconSize} src={AssetMappingCoco.tab.invite}/>
-          ): (
-            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.invite}/>
-          )}
-          <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
-            "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.InvitePage,
-          })}>Convidar</span>
+          <ThumbsUPSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.InvitePage)}/>
+          <div
+            className={twMerge("text-sm font-medium leading-5",
+              location.pathname === PageOrModalPathEnum.InvitePage && "text-[#9c6aef]",
+              location.pathname !== PageOrModalPathEnum.InvitePage && "text-[#b3b3b3]",
+            )}
+          >
+            Convidar
+          </div>
+
+        </section>
+      )}
+
+      {showHome && (
+        <section
+          className={cx("flex-1 flex flex-col items-center justify-center")}
+          onClick={() => {
+            onClickToIndex();
+          }}
+        >
+
+          <div className={"w-[28px] h-[28px]"}/>
+
+          <div className="absolute top-[-35px] bg-[#333333] flex flex-row items-start pt-1 px-1 rounded-[100px]">
+            <div className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[linear-gradient(145deg,_#8547eb_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-center mb-1 pt-4 w-16 h-16 items-start rounded-[100px]">
+              <GameControllerSVGIcon color={isActive((location.pathname === PageOrModalPathEnum.IndexPage ||
+                location.pathname === PageOrModalPathEnum.GameSearchPage))}/>
+            </div>
+          </div>
+
+
+          <div
+            className={twMerge("text-sm font-medium leading-5",
+              (location.pathname === PageOrModalPathEnum.IndexPage ||
+              location.pathname === PageOrModalPathEnum.GameSearchPage) && "text-[#9c6aef]",
+              !(location.pathname === PageOrModalPathEnum.IndexPage ||
+                location.pathname === PageOrModalPathEnum.GameSearchPage)  && "text-[#b3b3b3]",
+            )}
+          >
+            Casino
+          </div>
+
         </section>
       )}
 
       {showVIP && (
         <section
-          className={cx("flex-1 flex flex-col items-center justify-center", {
-            "font-bold": location.pathname === PageOrModalPathEnum.VIPGradePage
-          })}
+          className={cx("flex-1 flex flex-col items-center justify-center")}
           onClick={() => {
             onClickToVipGrade();
           }}
         >
-          {location.pathname === PageOrModalPathEnum.VIPGradePage  ? (
-            <img className={iconSize} src={AssetMappingCoco.tab.vip}/>
-          ): (
-            <img className={cx(iconSize, "opacity-50")} src={AssetMappingCoco.tab.vip}/>
-          )}
-          <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
-            "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.VIPGradePage,
-          })}>VIP</span>
+          <CrownSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.VIPGradePage)}/>
+
+          <div
+            className={twMerge("text-sm font-medium leading-5",
+              location.pathname === PageOrModalPathEnum.VIPGradePage && "text-[#9c6aef]",
+              location.pathname !== PageOrModalPathEnum.VIPGradePage && "text-[#b3b3b3]",
+            )}
+          >
+            VIP
+          </div>
         </section>
       )}
-
 
       {showProfile && (
+
         <section
-          className={cx("flex-1 flex flex-col items-center justify-center", {
-            "font-bold": location.pathname === PageOrModalPathEnum.MyPage
-          })}
+          className={cx("flex-1 flex flex-col items-center justify-center")}
           onClick={() => {
             onClickToProfile();
-           }}
+          }}
         >
-          {location.pathname === PageOrModalPathEnum.MyPage  ? (
-            <img className={iconSize} src={AssetMappingCoco.tab.account}/>
-          ): (
-            <img className={cx(iconSize, "opacity-50")}src={AssetMappingCoco.tab.account}/>
-          )}
-          <span className={cx("text-sm text-[var(--tab-text-color-normal)]", {
-            "text-[var(--tab-text-color-active)]": location.pathname === PageOrModalPathEnum.MyPage,
-          })}>Minha</span>
+          <div className="relative">
+            <UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)}/>
+            <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[#ef4444] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
+              9
+            </div>
+          </div>
+
+          <div
+            className={twMerge("text-sm font-medium leading-5",
+              location.pathname === PageOrModalPathEnum.MyPage && "text-[#9c6aef]",
+              location.pathname !== PageOrModalPathEnum.MyPage && "text-[#b3b3b3]",
+            )}
+          >
+            Minha
+          </div>
         </section>
+
       )}
+
 
     </footer>
   )

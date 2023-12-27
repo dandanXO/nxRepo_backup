@@ -147,7 +147,10 @@ export const PageTemplate = (props: IPage) => {
     isShowMobileFooter,
     isShowDesktopFooter,
     isShowTabbar,
-  } = useSingletonPageTemplateConfig(props);
+  } = useSingletonPageTemplateConfig({
+    ...props,
+    showDesktopMenuDrawer: props. showDesktopMenuDrawer && openMenuDrawer,
+  });
 
   // const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
   // const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
