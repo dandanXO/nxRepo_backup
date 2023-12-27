@@ -150,9 +150,11 @@ export const TabBar = (props: ITabBar) => {
         >
           <div className="relative">
             <UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)}/>
-            <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[#ef4444] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
-              {messageCount}
-            </div>
+            {messageCount > 0 && (
+              <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[#ef4444] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
+                {messageCount}
+              </div>
+            )}
           </div>
 
           <div
