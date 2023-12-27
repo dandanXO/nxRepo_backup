@@ -8,7 +8,7 @@ type ILogo = {
 export const LoadingLogo = (props: ILogo) => {
   return (
     <img alt="logo-loading" className={tcx(
-      "w-[140px] h-[140px]",
+      "w-[80px] h-[80px]",
       // "border-[4px] border-solid border-[var(--white)] rounded-[14.25px]",
       props.className
     )} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo-loading.png`}/>
