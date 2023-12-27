@@ -20,7 +20,7 @@ export const IOSDownloadModal = () => {
           // NOTE:
           "w-full h-[98%] max-h-[740px] fixed bottom-0"
         }
-        onClick={(event: any) => {
+        onClick={(event) => {
           event.stopPropagation();
           dispatch(appSlice.actions.setShowiOSDownloadPopover(false));
         }}
