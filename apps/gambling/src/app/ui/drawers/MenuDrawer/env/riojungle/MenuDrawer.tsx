@@ -1,6 +1,7 @@
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import tenPercent from "./assets/genie-3-wishes_genie3.png"
-import twentyPercent from "./assets/genie-3-wishes_genie2.png"
+import twentyPercent from "./assets/genie-20.png"
+import tenPercent from "./assets/genie-10.png"
+import tabThree from "./assets/tab3.png"
 import icon＿calendarcheck from "./assets/icon＿calendarcheck.png";
 import icon＿crownsimple from "./assets/icon＿crownsimple.png";
 
@@ -72,18 +73,47 @@ export const MenuDrawer = () => {
           event.stopPropagation();
         }}
       >
-        {!isDesktop && (<img alt={"close"} className="absolute right-3 top-3 cursor-pointer" src={closeSVG}
-                             onClick={() => {
-                               dispatch(uiSlice.actions.setOpenMenuDrawer(false));
-                             }}
+        {!isDesktop && (
+          <img
+            alt={"close"}
+            className="absolute right-3 top-3 cursor-pointer" src={closeSVG}
+            onClick={() => {
+              dispatch(uiSlice.actions.setOpenMenuDrawer(false));
+            }}
         />)}
 
         {/*NOTICE: refactor me*/}
         <div className={twMerge("w-full flex flex-col items-start gap-3", (isDesktop) && "pt-7", (isTablet) && "pt-[72px]", (isMobile) && "pt-[64px]")}>
 
+
+
           <div className={"w-full flex flex-col px-5"}>
             <button
-              className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-end gap-2 items-start border rounded-lg"
+              className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
+              onClick={() => {
+                onClickToFirstDeposit();
+                close();
+              }}
+            >
+              <div className="flex flex-col mt-px items-start">
+                <div className="text-sm font-medium leading-[20px] text-white">
+                  Primeira recarga
+                </div>
+                <div className="font-medium leading-[24px] text-white">
+                  +20%
+                </div>
+              </div>
+              <img
+                src={twentyPercent}
+                className="w-20 mt-0 mb-[-38px]"
+              />
+            </button>
+          </div>
+
+
+          <div className={"w-full flex flex-col px-5"}>
+            <button
+              className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
               onClick={() => {
                 onClickToDepositCashback();
                 close();
@@ -106,26 +136,28 @@ export const MenuDrawer = () => {
 
           <div className={"w-full flex flex-col px-5"}>
             <button
-              className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-end gap-2 items-start border rounded-lg"
+              className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-0 items-start border rounded-lg"
               onClick={() => {
-                onClickToFirstDeposit();
+                onClickToDepositCashback();
                 close();
               }}
             >
               <div className="flex flex-col mt-px items-start">
                 <div className="text-sm font-medium leading-[20px] text-white">
-                  Primeira recarga
+                  Bônus de suporte
                 </div>
                 <div className="font-medium leading-[24px] text-white">
-                  +20%
+                  diário de perdaa
                 </div>
               </div>
               <img
-                src={twentyPercent}
+                src={tabThree}
                 className="w-20 mt-0 mb-[-38px]"
               />
             </button>
           </div>
+
+
 
           <div className={"w-full flex flex-col px-5"}>
             <div className="opacity-50 bg-gradient-to-r from-transparent via-white to-transparent h-px"></div>
