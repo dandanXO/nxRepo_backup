@@ -4,7 +4,7 @@ import {useLocation} from "react-router";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {ITabBar} from "../../type";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {twMerge} from "tailwind-merge";
 
 import {MenuSVGIcon} from "./MenuSVGIcon";
@@ -12,6 +12,7 @@ import {ThumbsUPSVGIcon} from "./ThumbsUPSVGIcon";
 import {CrownSVGIcon} from "./CrownSVGIcon";
 import {UserSVGIcon} from "./UserSVGIcon";
 import {GameControllerSVGIcon} from "./GameControllerSVGIcon";
+import {RootState} from "../../../../../reduxStore";
 
 export const TabBar = (props: ITabBar) => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export const TabBar = (props: ITabBar) => {
   } = usePageNavigate();
 
   const isActive = (active: boolean) => active ? "#9c6aef" : "#b3b3b3";
+  const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
 
   return (
     <footer
@@ -52,11 +54,10 @@ export const TabBar = (props: ITabBar) => {
           dispatch(uiSlice.actions.setOpenMenuDrawer(true));
         }}
       >
-        <MenuSVGIcon color={isActive(props.isShowMenuDrawer || false)}/>
+        <MenuSVGIcon/>
         <div
           className={twMerge("text-sm font-medium leading-5",
-            props.isShowMenuDrawer && "text-[#9c6aef]",
-            !props.isShowMenuDrawer && "text-[#b3b3b3]",
+            "text-[#b3b3b3]",
           )}
         >
           Menu
@@ -68,6 +69,7 @@ export const TabBar = (props: ITabBar) => {
         <section
           className={cx("flex-1 flex flex-col items-center justify-center")}
           onClick={() => {
+            dispatch(uiSlice.actions.setOpenMenuDrawer(false));
             onClickToInvite();
           }}
         >
@@ -88,6 +90,7 @@ export const TabBar = (props: ITabBar) => {
         <section
           className={cx("flex-1 flex flex-col items-center justify-center")}
           onClick={() => {
+            dispatch(uiSlice.actions.setOpenMenuDrawer(false));
             onClickToIndex();
           }}
         >
@@ -120,6 +123,7 @@ export const TabBar = (props: ITabBar) => {
         <section
           className={cx("flex-1 flex flex-col items-center justify-center")}
           onClick={() => {
+            dispatch(uiSlice.actions.setOpenMenuDrawer(false));
             onClickToVipGrade();
           }}
         >
@@ -141,6 +145,7 @@ export const TabBar = (props: ITabBar) => {
         <section
           className={cx("flex-1 flex flex-col items-center justify-center")}
           onClick={() => {
+            dispatch(uiSlice.actions.setOpenMenuDrawer(false));
             onClickToProfile();
           }}
         >
