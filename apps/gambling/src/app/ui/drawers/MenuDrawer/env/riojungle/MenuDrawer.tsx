@@ -49,11 +49,11 @@ export const MenuDrawer = () => {
 
   return (
     <div
-      className={"bg-[rgba(0,0,0,.6)] z-[1002] fixed left-0 top-0 right-0 bottom-0 w-full h-full"}
+      className={twMerge(((isMobile || isTablet) && "bg-[rgba(0,0,0,.6)] z-[1002] fixed left-0 top-0 right-0 bottom-0 w-full h-full"))}
       // NOTE: onclick 改用，避免拖拉文字到modal外層會直接關閉
       onMouseDown={() => {
         // NOTE: 手機版用戶會誤點
-        !isMobile && close()
+        (isMobile || isTablet) && close()
       }}
     >
       <div
@@ -61,8 +61,10 @@ export const MenuDrawer = () => {
         // NOTICE: cx->twMerge 下面 bg 會失效 (refactor me)
         className={cx(
           "w-[248px]",
-          !isMobile && "h-[calc(100dvh-72px)]",
           isMobile && "h-[calc(100dvh-72px)]",
+          (isTablet) && "h-[calc(100dvh-72px)]",
+          (isDesktop) && "h-[calc(100dvh-72px)]",
+          // (isTablet||isDesktop) && "h-full",
           "bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto",
           "relative"
         )}
@@ -73,7 +75,8 @@ export const MenuDrawer = () => {
                              }}
         />)}
 
-        <div className={twMerge("w-full flex flex-col items-start gap-3", (isDesktop) && "pt-7", (!isDesktop) && "pt-[64px]")}>
+        {/*NOTICE: refactor me*/}
+        <div className={twMerge("w-full flex flex-col items-start gap-3", (isDesktop) && "pt-7", (isTablet) && "pt-[72px]", (isMobile) && "pt-[64px]")}>
 
           <div className={"w-full flex flex-col px-5"}>
             <button className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-end gap-2 items-start border rounded-lg" onClick={onClickToDepositCashback}>

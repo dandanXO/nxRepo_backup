@@ -10,7 +10,7 @@ export const IOSDownloadModal = () => {
   const dispatch = useDispatch();
   return (
     <div
-      className={"z-[1002] fixed left-0 top-0 right-0 bottom-0  flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"}
+      className={"z-[1005] fixed left-0 top-0 right-0 bottom-0  flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"}
       onClick={(event) => {
         dispatch(appSlice.actions.setShowiOSDownloadPopover(false));
       }}

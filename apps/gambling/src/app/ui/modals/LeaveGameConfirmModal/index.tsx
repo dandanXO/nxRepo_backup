@@ -14,7 +14,7 @@ export const LeaveGameConfirmModal = ({
 }: ILeaveGameConfirmModalProps) => {
 
   return (
-    <div className='z-[1002] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center w-full h-full bg-[rgba(0,0,0,0.50)]'>
+    <div className='z-[1005] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center w-full h-full bg-[rgba(0,0,0,0.50)]'>
       {
         renderByPlatform({
           "coco777bet": (
