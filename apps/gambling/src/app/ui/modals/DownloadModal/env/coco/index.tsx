@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { useLazyDownloadQuery } from "../../../external";
+import { useLazyDownloadQuery } from "../../../../../external";
 import QRCode from 'react-qr-code';
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import {environment} from "../../../../environments/environment";
-import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import {environment} from "../../../../../../environments/environment";
+import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import {CloseICON} from "../../../../components-bs/theme/Icons/CloseICON";
 import cx from "classnames";
-import {usePageNavigate} from "../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 export type IInitialChargeModal = {
   close: () => void;
@@ -36,7 +36,7 @@ const DownloadButton = styled.div`
   //letter-spacing: 0;
   color: #fff;
 `
-export const DDownloadModal = (props: IInitialChargeModal) => {
+export const CocoDownloadModal = (props: IInitialChargeModal) => {
   const [triggerDownload, { currentData, isFetching }] =
     useLazyDownloadQuery({
       pollingInterval: 0,

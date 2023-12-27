@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import {environment} from "../../../../environments/environment";
-import { tcx } from "../../utils/tcx";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
+import {environment} from "../../../../../../environments/environment";
+import { tcx } from "../../../../utils/tcx";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {CloseICON} from "../../../../components-bs/theme/Icons/CloseICON";
 
 
 const Container = styled.div`
@@ -38,7 +38,7 @@ export type ITelegramContactModal = {
   toTelegramGroup: () => void;
 }
 
-export const DTelegramContactModal = (props: ITelegramContactModal) => {
+export const CocoTelegramContactModal = (props: ITelegramContactModal) => {
 
   const { isMobile } = useBreakpoint();
 

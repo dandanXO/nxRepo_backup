@@ -1,5 +1,5 @@
 import {renderByPlatform} from "../../utils/renderByPlatform";
-import { DIOSDownloadModal } from "./default"
+import { CocoIOSDownloadModal } from "./env/coco"
 import { RiojungleIOSDownloadModal } from "./env/riojungle"
 
 export type IInitialChargeModal = {
@@ -10,5 +10,5 @@ export type IInitialChargeModal = {
 export const IOSDownloadModal = () => {
   return renderByPlatform({
     "riojungle777bet": <RiojungleIOSDownloadModal />,
-  }, <DIOSDownloadModal />);
+  }, <CocoIOSDownloadModal />);
 }

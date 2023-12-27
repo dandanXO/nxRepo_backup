@@ -1,4 +1,4 @@
-import {DMaintenanceModal} from "./default"
+import { CocoMaintenanceModal } from "./env/coco/"
 import { RiojungleMaintenanceModal } from "./env/riojungle/modal"
 import {renderByPlatform} from "../../utils/renderByPlatform";
 
@@ -9,5 +9,5 @@ interface IMaintenanceModal {
 export const MaintenanceModal = (props: IMaintenanceModal) => {
   return renderByPlatform({
     "riojungle777bet": <RiojungleMaintenanceModal {...props}/>,
-  }, <DMaintenanceModal {...props}/>);
+  }, <CocoMaintenanceModal {...props}/>);
 }

@@ -1,11 +1,11 @@
-import { environment } from "../../../../environments/environment";
-import useBreakpoint from "../../hooks/useBreakpoint"
+import { environment } from "../../../../../../environments/environment";
+import useBreakpoint from "../../../../hooks/useBreakpoint"
 import cx from 'classnames';
 import { useSelector } from "react-redux";
-import { RootState } from "../../../reduxStore";
+import { RootState } from "../../../../../reduxStore";
 import moment from "moment";
-import { AppLocalStorage } from "../../../persistant/localstorage";
-import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { ReactElement } from "react";
 
 interface IMaintenanceModal {
@@ -23,7 +23,7 @@ const Paragraph = ({ text }: { text: string | ReactElement }) => {
     </div>
   )
 }
-export const DMaintenanceModal = (props: IMaintenanceModal) => {
+export const CocoMaintenanceModal = (props: IMaintenanceModal) => {
 
   const { isMobile } = useBreakpoint();
   const { maintenance } = useSelector((state: RootState) => state.app);
