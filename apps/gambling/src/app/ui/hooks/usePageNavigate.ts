@@ -26,7 +26,7 @@ export const usePageNavigate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
-  const { isMobile } = useBreakpoint();
+  const { isDesktop } = useBreakpoint();
 
   const onClickToIndex = () => {
     navigate(PageOrModalPathEnum.IndexPage)
@@ -112,10 +112,8 @@ export const usePageNavigate = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
-      if(isMobile){
+      if(!isDesktop){
         navigate(PageOrModalPathEnum.MyPage)
-      } else {
-        dispatch(uiSlice.actions.openUserInfoStatusPopover())
       }
     }
   }

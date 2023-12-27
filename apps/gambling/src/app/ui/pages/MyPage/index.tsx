@@ -39,14 +39,13 @@ export const MyPage = () => {
   useAllowLoginRouterRules();
   const navigate = useNavigate();
 
-  const {isMobile} = useBreakpoint();
-  // console.log("mypage isMobile", isMobile)
+  const { isDesktop} = useBreakpoint();
 
   useEffect(() => {
-    if(!isMobile) {
+    if(isDesktop) {
       navigate(PageOrModalPathEnum.IndexPage)
     }
-  }, [isMobile])
+  }, [isDesktop])
 
 
   // const { userAmount } = useSelector((state: RootState) => state.app.userStore as IUserStore)
