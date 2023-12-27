@@ -131,20 +131,14 @@ export const PageTemplate = ({
 
 
   return (
-    <BaseStyledPageTemplate
-      // style={{
-      //   height: isShowTabbar ? `calc(100% - ${TabHeight}px)` : "100%",
-      // }}
-    >
+    <BaseStyledPageTemplate>
+
       {isUILoading && (
         <BaseLoadingOverlay className={"z-[9999] fixed top-0 left-0 right-0 bottom-0"}/>
       )}
 
       <div
         className={twMerge(HeaderZIndex, "fixed top-0 left-0 right-0 w-full")}
-        // style={{
-        //    height: isShowTabbar ? `calc(100% - ${TabHeight}px)` : "100%",
-        // }}
       >
         <Header
           className={""}
@@ -179,7 +173,6 @@ export const PageTemplate = ({
       )}
 
       <div
-        className={"page-container"}
         style={{
           position: 'fixed',
           top: HeaderHeight,
