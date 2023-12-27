@@ -37,8 +37,6 @@ type IPageTemplate = IUseSingletonPageTemplateConfig & {
   isLogin: boolean;
   setIsLogin: (value: any) => void;
   showLoginModal: (value: any) => void;
-  setOpenDesktopUserInfoStatusDrawer: (value: any) => void;
-  openDesktopUserInfoStatusDrawer: boolean;
   openDesktopNotificationDrawer: boolean;
   setOpenDesktopNotificationDrawer: (value: any) => void;
   setOpenLogoutPopover: (value: any) => void;
@@ -60,8 +58,6 @@ type IPageTemplate = IUseSingletonPageTemplateConfig & {
 export const PageTemplate = ({
                               children,
                               showLoginModal,
-                              setOpenDesktopUserInfoStatusDrawer,
-                              openDesktopUserInfoStatusDrawer,
                               setOpenDesktopNotificationDrawer,
                               setOpenLogoutPopover,
                               isShowMobileLogoutModal,
@@ -122,15 +118,10 @@ export const PageTemplate = ({
             // setOpenNonMobileUserLoginStatusDrawer(true);
             showLoginModal(true)
           }}
-          onClickToPopupUserInfoStatusPopover={() => {
-            setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
-          }}
           onClickToChangeLogoutPopover={(display: boolean) => {
             setOpenLogoutPopover(display);
           }}
           openLogoutPopover={isShowMobileLogoutModal}
-          // NOTE: User Info
-          openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
           // NOTE: Notification
           onClickToOpenNotificationDrawer={() => {
             setOpenDesktopNotificationDrawer(true)

@@ -19,6 +19,7 @@ import {MenuSmallLogo} from "../../../../components-bs/theme/Logos/env/riojungle
 import {renderByRWD} from "../../../../utils/renderByRWD";
 import {MenuLogo} from "../../../../components-bs/theme/Logos/MenuLogo";
 import {MenuMediumLogo} from "../../../../components-bs/theme/Logos/env/riojungle/MenuMediumLogo";
+import { uiSlice } from "../../../../../reduxStore/uiSlice";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -33,6 +34,8 @@ export const Header = (props: IHeader) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
+  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui)
+
   const [hover, setHover] = useState(false);
   const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
 
@@ -122,7 +125,7 @@ export const Header = (props: IHeader) => {
 
           <section
             className='hidden lg:flex gap-2 items-center'
-            onClick={() => props.onClickToPopupUserInfoStatusPopover()}
+            onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}}
             onMouseOver={() => {
               // console.log("onMouseOver")
               // props.onClickToPopupUserInfoStatusPopover();
@@ -141,7 +144,7 @@ export const Header = (props: IHeader) => {
               <div className='text-lg text-white flex gap-2'>
                 <div>{user.nickname}</div>
                 <DirectionIcon
-                  active={props.openDesktopUserInfoStatusDrawer}
+                  active={openUserInfoStatusPopover}
                   className='mx-auto my-auto'
                   src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
                 />

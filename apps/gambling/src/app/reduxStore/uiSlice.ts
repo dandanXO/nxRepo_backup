@@ -2,9 +2,11 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 type IUISlice = {
   openMenuDrawer: boolean;
+  openUserInfoStatusPopover: boolean;
 }
 const initialState = {
-  openMenuDrawer: false
+  openMenuDrawer: false,
+  openUserInfoStatusPopover: false,
 }
 export const uiSlice = createSlice({
   name: "ui",
@@ -18,6 +20,16 @@ export const uiSlice = createSlice({
     },
     closeMenuDrawer: (state: IUISlice, action: PayloadAction<IUISlice["openMenuDrawer"]>) => {
       state.openMenuDrawer = false;
+    },
+    setUserInfoStatusPopover: (state: IUISlice, action: PayloadAction<IUISlice["openUserInfoStatusPopover"]>) => {
+      state.openUserInfoStatusPopover = action.payload;
+    },
+    openUserInfoStatusPopover: (state: IUISlice) => {
+      state.openUserInfoStatusPopover = true;
+    },
+    closeUserInfoStatusPopover: (state: IUISlice) => {
+      state.openUserInfoStatusPopover = false;
     }
+
   }
 })

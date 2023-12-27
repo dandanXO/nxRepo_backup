@@ -6,6 +6,8 @@ import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import { GameItem } from "../components-bs/GameTypeSection";
 import { AppLocalStorage } from "../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
+import useBreakpoint from "./useBreakpoint";
+import { uiSlice } from "../../reduxStore/uiSlice";
 
 
 export interface IQueryStringProps{
@@ -24,6 +26,7 @@ export const usePageNavigate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
+  const { isMobile } = useBreakpoint();
 
   const onClickToIndex = () => {
     navigate(PageOrModalPathEnum.IndexPage)
@@ -109,7 +112,11 @@ export const usePageNavigate = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
-      navigate(PageOrModalPathEnum.MyPage)
+      if(isMobile){
+        navigate(PageOrModalPathEnum.MyPage)
+      } else {
+        dispatch(uiSlice.actions.openUserInfoStatusPopover())
+      }
     }
   }
 
