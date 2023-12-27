@@ -44,9 +44,9 @@ export const MenuDrawer = () => {
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
 
   const close = () => {
-    dispatch(uiSlice.actions.setOpenMenuDrawer(false))
+    const canClose = (isMobile || isTablet);
+    canClose && dispatch(uiSlice.actions.setOpenMenuDrawer(false))
   }
-
 
   return (
     <div
@@ -54,7 +54,7 @@ export const MenuDrawer = () => {
       // NOTE: onclick 改用，避免拖拉文字到modal外層會直接關閉
       onMouseDown={() => {
         // NOTE: 手機版用戶會誤點
-        (isMobile || isTablet) && close()
+        close();
       }}
     >
       <div
