@@ -36,7 +36,7 @@ export const TabBar = (props: ITabBar) => {
 
   const isActive = (active: boolean) => active ? "#9c6aef" : "#b3b3b3";
   const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
-
+  const { messageCount } = useSelector((state: RootState) => state.app);
   return (
     <footer
       className={twMerge(
@@ -151,7 +151,7 @@ export const TabBar = (props: ITabBar) => {
           <div className="relative">
             <UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)}/>
             <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[#ef4444] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
-              9
+              {messageCount}
             </div>
           </div>
 
