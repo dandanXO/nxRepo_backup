@@ -45,8 +45,8 @@ export const MyPage = ({
   const flowPercent = flow / nextLevelFlow
 
   return (
-    <div className='fixed w-full h-[calc(100vh-52.5px-60px)] grow bg-[#1A1A1A] px-4 pt-4 text-xs'>
-      <div className='relative w-full h-[calc(100vh-52.5px-140px)] overflow-y-scroll text-white pb-10'>
+    <div className='w-full grow bg-[#1A1A1A] px-4 pt-4 text-xs'>
+      <div className='relative w-full overflow-y-scroll text-white pb-10'>
         {/*通知Icon*/}
         <div className='absolute top-0 right-0 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex items-center justify-center w-12 h-12 rounded-[100px]'>
           <div className='relative'>
@@ -176,7 +176,7 @@ export const MyPage = ({
 
       </div>
 
-      <div className='absolute bottom-10 left-0 w-full px-4'>
+      <div className='sticky bottom-0 left-0 w-full px-4 pb-4'>
         <button
           className='w-full py-[10px] text-white text-sm font-medium flex items-center justify-center gap-2 bg-[#10B98F] rounded-[20px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
           onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}

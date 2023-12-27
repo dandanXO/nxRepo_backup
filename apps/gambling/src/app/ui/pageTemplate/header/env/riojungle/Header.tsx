@@ -20,6 +20,7 @@ import {renderByRWD} from "../../../../utils/renderByRWD";
 import {MenuLogo} from "../../../../components-bs/theme/Logos/MenuLogo";
 import {MenuMediumLogo} from "../../../../components-bs/theme/Logos/env/riojungle/MenuMediumLogo";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";
+import searchSVGICON from "./MagnifyingGlass.svg";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -29,18 +30,85 @@ const DirectionIcon = styled.img<{
   transform: rotate(${props => props.active ? 180 : 0}deg);
 `
 
+const SearchSection = () => {
+  return (
+    <div className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex flex-row p-1 justify-center items-center rounded-lg">
+      <img
+        src={searchSVGICON}
+        alt="MagnifyingGlass"
+        id="MagnifyingGlass"
+        className="w-[32px] h-[32px]"
+      />
+    </div>
+  )
+}
+
+type IUserMoneyStatusSection = {
+  onClickToOpenNotificationDrawer: () => void;
+}
+const UserMoneyStatusSectionItem = (props: IUserMoneyStatusSection) => {
+
+  const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
+  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui)
+  const dispatch = useDispatch();
+  const { messageCount } = useSelector((state: RootState) => state.app);
+
+  return (
+    <section className={"flex flex-row items-center gap-6"}>
+
+      <div className={""}>
+        <UserMoneyStatusSection />
+      </div>
+
+      <section
+        className='hidden lg:flex gap-2 items-center'
+        onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}}
+        onMouseOver={() => {
+          // console.log("onMouseOver")
+          // props.onClickToPopupUserInfoStatusPopover();
+        }}
+        onMouseOut={() => {
+          // console.log("onMouseOut")
+        }}
+        onMouseLeave={() => {
+          // console.log("onMouseLeave")
+          // NOTICE: StatusPopover 不能有 mash div 佔滿全部螢幕，不然會導致 over out leave 瞬間連續觸發
+          // props.onClickToPopupUserInfoStatusPopover();
+        }}
+      >
+        <CocoAvatar className='w-[44px] h-[44px]' />
+        <div>
+          <div className='text-lg text-white flex mb-2'>
+            <div className='text-base leading-none'>LV:{user.vip_level}</div>
+            <DirectionIcon
+              active={openUserInfoStatusPopover}
+              className='mx-auto my-auto'
+              src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
+            />
+          </div>
+          <div className='text-base text-white leading-none'>ID:{user.user_id}</div>
+        </div>
+      </section>
+
+      <section className={"hidden lg:flex relative justify-center"}>
+        <div
+          onClick={() => {
+            props.onClickToOpenNotificationDrawer();
+          }}
+        >
+          <NotificationAnimationIcon messageCount={messageCount}/>
+        </div>
+      </section>
+
+    </section>
+  )
+}
+
 export const Header = (props: IHeader) => {
   const {isMobile, isTablet, isDesktop} = useBreakpoint();
-  const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
-
-  const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
-  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui)
-
-  const [hover, setHover] = useState(false);
-  const { onClickToIndex, onClickToInvite, onClickToVipGrade } = usePageNavigate();
-
+  const { isLogin } = useSelector((state: RootState) => state.app);
+  const { onClickToIndex } = usePageNavigate();
   const dispatch = useDispatch();
-  const isShowLoginModal = useSelector((state: RootState) => state.app.isShowLoginModal)
 
   return (
     <header
@@ -103,6 +171,7 @@ export const Header = (props: IHeader) => {
               Entrar
             </div>
           </button>
+
           <button
             id="BtnregisterRoot"
             className="w-[112px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center pt-1 cursor-pointer items-start rounded-lg"
@@ -115,57 +184,12 @@ export const Header = (props: IHeader) => {
               Registro
             </div>
           </button>
+
         </div>
-        ): (
-        <section className={"flex flex-row items-center gap-6 mr-6"}>
+        ): <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer}/>}
 
-          <div className={""}>
-            <UserMoneyStatusSection />
-          </div>
+      <SearchSection/>
 
-          <section
-            className='hidden lg:flex gap-2 items-center'
-            onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}}
-            onMouseOver={() => {
-              // console.log("onMouseOver")
-              // props.onClickToPopupUserInfoStatusPopover();
-            }}
-            onMouseOut={() => {
-              // console.log("onMouseOut")
-            }}
-            onMouseLeave={() => {
-              // console.log("onMouseLeave")
-              // NOTICE: StatusPopover 不能有 mash div 佔滿全部螢幕，不然會導致 over out leave 瞬間連續觸發
-              // props.onClickToPopupUserInfoStatusPopover();
-            }}
-          >
-            <CocoAvatar className='w-[44px] h-[44px]' />
-            <div>
-              <div className='text-lg text-white flex gap-2'>
-                <div>{user.nickname}</div>
-                <DirectionIcon
-                  active={openUserInfoStatusPopover}
-                  className='mx-auto my-auto'
-                  src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
-                />
-              </div>
-              <div className='text-base text-[var(--text-tertiary)] leading-none'>ID:{user.user_id}</div>
-            </div>
-          </section>
-
-          <section className={"hidden lg:flex relative justify-center"}>
-            <div
-              onClick={() => {
-                props.onClickToOpenNotificationDrawer();
-              }}
-            >
-              <NotificationAnimationIcon messageCount={messageCount}/>
-            </div>
-          </section>
-
-
-        </section>
-      )}
     </header>
   )
 }

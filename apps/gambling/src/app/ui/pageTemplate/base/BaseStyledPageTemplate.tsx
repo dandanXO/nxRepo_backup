@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import {environment} from "../../../../environments/environment";
 import {appSlice} from "../../../reduxStore/appSlice";
+import {unknown} from "zod";
 
 type IStyledPage = {
-
+  style?: unknown;
 }
 
 export const BaseStyledPageTemplate = styled.div.attrs((props) => ({
-  className: "h-full"
+  className: "h-full",
 }))<IStyledPage>`
 
   &:after {
