@@ -148,6 +148,8 @@ export const PageTemplate = ({
       <div
         className={"page-container"}
         style={{
+          position: 'fixed',
+          width: '100%',
           height: `calc(100% - ${HeaderHeight}px - ${TabHeight}px)`,
         }}
       >

@@ -81,6 +81,14 @@ export const usePageNavigate = () => {
     }
   }
 
+  const onClickToNotification = () => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(PageOrModalPathEnum.NotificationPage)
+    }
+  }
+
   const onClickToCheckInDaily = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
@@ -221,5 +229,6 @@ export const usePageNavigate = () => {
     onClickToOpenTelegramService,
     onClickToOpenTelegramManager,
     onClickToOpenTelegramGroup,
+    onClickToNotification,
   }
 }
