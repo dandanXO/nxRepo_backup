@@ -56,22 +56,21 @@ export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
       }}>
 
         <div className={tcx(
-          "flex flex-row justify-end mb-2 absolute right-[20px]",
-          ['top-[20px]'],
+          "flex flex-row justify-end mb-2 absolute right-0 top-0",
         )}>
           <div
             onClick={() => {
               props.close();
             }}
           >
-            <CloseICON className="w-[40px] h-[40px] p-0" btnClassName={'p-1 hover:rounded-full hover:bg-[rgba(255,255,255,0.1)]'} outLined={true}/>
+            <CloseICON className="w-[40px] h-[40px] " btnClassName={'mt-4 mr-4 hover:rounded-full hover:bg-[rgba(255,255,255,0.1)]'} outLined={true}/>
           </div>
         </div>
 
 
-        <img alt='icon' className={tcx('w-[130px] mt-6 mb-3', ['w-[120px] mt-10 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
+        <img alt='icon' className={tcx('w-[96px] mt-[40px] mb-8', ['w-[80px] mt-10 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
         <div className={"flex flex-col"}>
-          <div className={"mb-2 text-white"}>
+          <div className={"mb-8 text-white"}>
             {/* <ModalTitle
               style={{
               // background: 'linear-gradient(180deg, var(--text-gradient-ad-tg-from) 0%, var(--text-gradient-ad-tg-to) 100%)',
@@ -80,7 +79,7 @@ export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
               }}
               className={tcx('text-[32px]', ['text-base', isMobile])}
             >Junte-se a nós</ModalTitle> */}
-            <div className={tcx("text-text-telegram text-center text-lg font-medium mt-4", ['text-[14px] mt-0', isMobile])}>
+            <div className={tcx("text-text-telegram text-center text-lg font-medium", ['text-[14px] mt-0', isMobile])}>
               Para cooperação comercial, entre em contato com o gerente
             </div>
           </div>
