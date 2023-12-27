@@ -134,28 +134,28 @@ export const MenuDrawer = () => {
             </button>
           </div>
 
-          <div className={"w-full flex flex-col px-5"}>
-            <button
-              className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-0 items-start border rounded-lg"
-              onClick={() => {
-                onClickToDepositCashback();
-                close();
-              }}
-            >
-              <div className="flex flex-col mt-px items-start">
-                <div className="text-sm font-medium leading-[20px] text-white">
-                  Bônus de suporte
-                </div>
-                <div className="font-medium leading-[24px] text-white">
-                  diário de perdaa
-                </div>
-              </div>
-              <img
-                src={tabThree}
-                className="w-20 mt-0 mb-[-38px]"
-              />
-            </button>
-          </div>
+          {/*<div className={"w-full flex flex-col px-5"}>*/}
+          {/*  <button*/}
+          {/*    className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-0 items-start border rounded-lg"*/}
+          {/*    onClick={() => {*/}
+          {/*      onClickToDepositCashback();*/}
+          {/*      close();*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    <div className="flex flex-col mt-px items-start">*/}
+          {/*      <div className="text-sm font-medium leading-[20px] text-white">*/}
+          {/*        Bônus de suporte*/}
+          {/*      </div>*/}
+          {/*      <div className="font-medium leading-[24px] text-white">*/}
+          {/*        diário de perdaa*/}
+          {/*      </div>*/}
+          {/*    </div>*/}
+          {/*    <img*/}
+          {/*      src={tabThree}*/}
+          {/*      className="w-20 mt-0 mb-[-38px]"*/}
+          {/*    />*/}
+          {/*  </button>*/}
+          {/*</div>*/}
 
 
 

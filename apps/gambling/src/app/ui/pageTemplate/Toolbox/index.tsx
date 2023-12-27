@@ -1,35 +1,15 @@
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import React from "react";
-import useBreakpoint from "../hooks/useBreakpoint";
+import useBreakpoint from "../../hooks/useBreakpoint";
 import styled from "styled-components";
-import {renderByPlatform} from "../utils/renderByPlatform";
 
-import {ToolButton as PToolButton} from "../components-bs/theme/Buttons/env/pernambucana/ToolButton"
-import {ToolButton as WToolButton} from "../components-bs/theme/Buttons/env/wild/ToolButton"
-import {ToolButton as CToolButton} from "../components-bs/theme/Buttons/env/coco/ToolButton"
-
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../reduxStore";
-import { TelegramMobileModal } from "../modals/TelegramMobileModal";
-import { appSlice } from "../../reduxStore/appSlice";
-import {TShowToolboxConfig} from "./base/types";
-
-
-const defaultFixedToolStyle = {
-  backgroundColor: 'rgba(119, 136, 120, 0.4)'
-}
-
-const coco777betFixedToolStyle = {
-  background: `linear-gradient(135deg, var(--lineary-blue-from) 8.58%, var(--lineary-blue-to) 91.42%)`,
-  border: '1px solid var(--primary-assistant)',
-  borderRight: '0px',
-  boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)'
-}
-
-const FixedToolStyle = renderByPlatform({
-  "wild777bet": defaultFixedToolStyle,
-  "coco777bet": coco777betFixedToolStyle,
-}, defaultFixedToolStyle)
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../reduxStore";
+import {TelegramMobileModal} from "../../modals/TelegramMobileModal";
+import {appSlice} from "../../../reduxStore/appSlice";
+import {TShowToolboxConfig} from "../base/types";
+import {FixedToolStyle} from "./FixedToolStyle";
+import {ToolButton} from "./ToolButton";
 
 const FixedToolContainer = styled.div`
     width: 80px;
@@ -45,11 +25,6 @@ export type IToolbox = {
   onClickToOpenTelegramService: () => void;
   onClickToOpenTelegramManager: () => void;
 }
-
-const ToolButton = renderByPlatform({
-  "wild777bet": WToolButton,
-  "coco777bet": CToolButton,
-}, PToolButton)
 
 export const Toolbox = (props: IToolbox) => {
   const { showToolboxConfig } = props;
