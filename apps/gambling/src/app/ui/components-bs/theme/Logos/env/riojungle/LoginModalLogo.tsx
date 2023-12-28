@@ -8,7 +8,7 @@ type ILoginModalLogo = {
 }
 export const LoginModalLogo = (props: ILoginModalLogo) => {
   return (
-    <img alt="logo-login-modal"  className={twMerge("w-[51.25px] h-[20px]",
+    <img alt="logo-login-modal"  className={twMerge("w-[196px] h-[77px]",
       )} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo.png`}/>
     // <img className={twMerge("w-[50px] h-[50px]", props.className)} src={AssetMappingCoco["logo"]}/>
   )

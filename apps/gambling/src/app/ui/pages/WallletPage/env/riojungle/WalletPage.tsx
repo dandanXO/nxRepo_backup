@@ -1,29 +1,18 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import { DepositPanel } from "../../components/deposit/DepositPanel";
-import { WithdrawPanel } from "../../components/withdraw/WithdrawPanel";
-import { RecordPanel } from "../../components/record/RecordPanel";
+import {DepositPanel} from "../../components/deposit/DepositPanel";
+import {WithdrawPanel} from "../../components/withdraw/WithdrawPanel";
+import {RecordPanel} from "../../components/record/RecordPanel";
 
-import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
-import { TotalSectionContainer } from "./TotalSectionContainer";
-import cx from "classnames";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
-import { IWalletPage } from "../pernambucana/WalletPage";
+import {useAllowLoginRouterRules} from "../../../../router/useAllowLoginRouterRules";
+import {TotalSectionContainer} from "./TotalSectionContainer";
+import {IWalletPage} from "../pernambucana/WalletPage";
 import TabDeposit from './assets/icon-tab-deposit.png'
 import TabWithdraw from './assets/icon-tab-withdraw.png'
 import TabRecord from './assets/icon-tab-record.png'
-import { Container } from "../../../../components/container/Container";
-import { TabItem } from "../../../../components/TabItem/env/riojungle/TabItem";
-
-
-
-const Tabs = (props: { children: ReactElement[] }) => {
-  return (
-    <div className="bg-[#333333] flex flex-row rounded-[100px]">
-      {props.children}
-    </div>
-  )
-}
+import {Container} from "../../../../components/container/Container";
+import {TabItem} from "../../../../components/TabItem/env/riojungle/TabItem";
+import {Tabs} from "../../../../components/Tabs";
 
 export const WalletPage = (props: IWalletPage) => {
 
