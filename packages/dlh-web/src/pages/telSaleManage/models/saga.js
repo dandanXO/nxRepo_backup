@@ -1,30 +1,30 @@
 import { put, call, takeEvery, all, fork } from 'redux-saga/effects';
 import {
-    DISTRIBUTELIST,
-    distributeList,
-    IMPORT_TEL_SALE_PHONE_NUMBERS,
-    changeTelSaleImportModalVisible,
-    DELETE_TEL_SALE_PHONE_NUMBERS,
-    PERSON_OR_GROUP_LIST,
-    personOrGroupList,
-    DISTRIBUTE_TEL_SALE,
-    changeUrgePersonModalVisible,
-    RECORDLIST,
-    recordList,
-    TEL_SALE_LIST_ADD_COLLECTION_RECORD_DATA,
-    TEL_SALE_LIST,
-    telSaleList,
-    GUEST_INFO,
-    guestInfo,
-    USER_CONTACTS,
-    userContacts,
-    OVERDUE_COLLECTION,
-    overdueCollection,
-    STATISTICS_LIST,
-    statisticsList,
-    TEL_SALE_COLLECTOR_LIST,
-    telSaleCollectorList,
-} from './actions';
+  DISTRIBUTELIST,
+  distributeList,
+  IMPORT_TEL_SALE_PHONE_NUMBERS,
+  changeTelSaleImportModalVisible,
+  DELETE_TEL_SALE_PHONE_NUMBERS,
+  PERSON_OR_GROUP_LIST,
+  personOrGroupList,
+  DISTRIBUTE_TEL_SALE,
+  changeUrgePersonModalVisible,
+  RECORDLIST,
+  recordList,
+  TEL_SALE_LIST_ADD_COLLECTION_RECORD_DATA,
+  TEL_SALE_LIST,
+  telSaleList,
+  GUEST_INFO,
+  guestInfo,
+  USER_CONTACTS,
+  userContacts,
+  OVERDUE_COLLECTION,
+  overdueCollection,
+  STATISTICS_LIST,
+  statisticsList,
+  TEL_SALE_COLLECTOR_LIST,
+  telSaleCollectorList, TEL_SALE_GROUP_LIST, telSaleGroupList
+} from "./actions";
 import {
     getTelSaleDistribute,
     importPhoneNumbers,
@@ -39,6 +39,7 @@ import {
     getOverdueCollection,
     getTelSaleStatistics,
     getCollectors,
+    getGroups
 } from '../api';
 
 import { utilSaga } from 'utils'
@@ -212,8 +213,18 @@ function* getTelSaleCollectorListData (action) {
     } catch (e) { }
 }
 
+function* getTelSaleGroupListData (action) {
+  try {
+    yield fork(getTableData, telSaleGroupList, getGroups, action);
+  } catch (e) { }
+}
+
 function* watchGetTelSaleCollectorListData () {
     yield takeEvery(TEL_SALE_COLLECTOR_LIST['GET'], getTelSaleCollectorListData);
+}
+
+function* watchGetTelSaleGroupListData() {
+  yield takeEvery(TEL_SALE_GROUP_LIST['GET'], getTelSaleGroupListData)
 }
 
 export default function* root () {
@@ -231,5 +242,6 @@ export default function* root () {
         fork(watchGetOverdueCollectionData),
         fork(watchGetStatisticsList),
         fork(watchGetTelSaleCollectorListData),
+        fork(watchGetTelSaleGroupListData),
     ])
 }

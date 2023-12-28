@@ -15,6 +15,8 @@ function TelSaleStatisticsPage ({
      getCollectorList,
      statisticsList,
      collectorList,
+     getGroupList,
+     groupList,
      loading,
 }) {
     const initTime = [
@@ -37,6 +39,7 @@ function TelSaleStatisticsPage ({
 
     useEffect(() => {
         getCollectorList();
+        getGroupList();
     }, []);
 
     useEffect(() => {
@@ -44,7 +47,7 @@ function TelSaleStatisticsPage ({
     }, [searchParams])
 
     const columns = [
-
+        { title: intl.formatMessage({ id: "table.tel.sale.group" }), dataIndex: 'groupName', key: 'groupName' },
         { title: intl.formatMessage({ id: "page.search.customer.service" }), dataIndex: 'collectorName', key: 'collectorName', render (text) { return <CopyText text={text} /> } },
         { title: intl.formatMessage({ id: "page.table.assigneda.total" }), dataIndex: 'totalAssigned', key: 'totalAssigned' },
         { title: intl.formatMessage({ id: "page.table.assigned.new.guest" }), dataIndex: 'newGuestAssigned', key: 'newGuestAssigned' },
@@ -70,7 +73,7 @@ function TelSaleStatisticsPage ({
 
 
     const handleSearch = (obj) => {
-      const { loanTime, assignedTime, registerTime, collectorId } = obj
+      const { loanTime, assignedTime, registerTime, collectorId, groupId } = obj
       const convertStartTime = (time) => time ? time.format('YYYY-MM-DD 00:00:00') : '';
       const convertEndTime = (time) => time ? time.format('YYYY-MM-DD 23:59:59'): '';
 
@@ -81,14 +84,15 @@ function TelSaleStatisticsPage ({
         assignedEndTime: convertEndTime(assignedTime[1]),
         registerStartTime: convertStartTime(registerTime[0]),
         registerEndTime: convertEndTime(registerTime[1]),
-        collectorId
+        collectorId,
+        groupId
       });
     }
 
 
     return (
         <div className={''}>
-            <SearchList handleSearch={handleSearch} time={initTime} collectors={collectorList}/>
+            <SearchList handleSearch={handleSearch} time={initTime} collectors={collectorList} groups={groupList}/>
             <CommonTable
                 dataSource={statisticsList}
                 columns={columns}
@@ -104,12 +108,14 @@ const mapStateToProps = (state) => {
         statisticsList: telSaleState['statisticsListData'],
         loading: telSaleState['statisticsListLoading'],
         collectorList:telSaleState['telSaleCollectorListData'],
+        groupList: telSaleState['telSaleGroupListData']
     }
 };
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         getStatisticsList: telSaleAction.statisticsList.get,
         getCollectorList: telSaleAction.telSaleCollectorList.get,
+        getGroupList: telSaleAction.telSaleGroupList.get
     }, dispatch)
 }
 

@@ -24,7 +24,7 @@ class SearchList extends Component{
     }
 
     render() {
-        const { form: { getFieldDecorator }, intl, collectors ,time} = this.props;
+        const { form: { getFieldDecorator }, intl, collectors, groups ,time} = this.props;
         return (
             <div>
                 <Form onSubmit={this.submit}>
@@ -62,7 +62,18 @@ class SearchList extends Component{
                           }
                         </Form.Item>
                       </Col>
-                      <Col lg={10} xl={4}>
+                      <Col lg={12} xl={6}>
+                        <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "table.tel.sale.group" })}>
+                          {
+                            getFieldDecorator('groupId', { initialValue: ''})
+                            (<Select>
+                              <Option value={''}><FormattedMessage id="page.search.list.no.restrict" /></Option>
+                              {groups.map(i => <Option value={i.groupId}>{i.groupName}</Option>)}
+                            </Select>)
+                          }
+                        </Form.Item>
+                      </Col>
+                      <Col lg={12} xl={6}>
                         <Form.Item {...formItemLayout} label={intl.formatMessage({ id: "page.table.tel.sale.collector.name" })}>
                             {
                                 getFieldDecorator('collectorId', { initialValue: ''})
