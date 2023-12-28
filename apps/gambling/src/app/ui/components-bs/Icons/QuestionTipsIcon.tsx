@@ -1,5 +1,5 @@
 import { QuestionCircleFilled, QuestionCircleOutlined } from "@ant-design/icons";
-import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { renderByPlatform } from "../../utils/renderByPlatform";
 import cx from 'classnames'
 
 

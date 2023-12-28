@@ -2,7 +2,7 @@ import { useState } from "react";
 import ConfirmDrawer from "../../../../../components/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';
-import { QuestionTipsIcon } from "../../../../../components-bs/theme/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import { CommonTableTabG } from "apps/gambling/src/app/ui/components/TabItem/CommonTableTabG";
 import { IMobileTotalTable } from "../..";
 

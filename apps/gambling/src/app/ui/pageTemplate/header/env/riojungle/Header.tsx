@@ -10,7 +10,7 @@ import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {NotificationAnimationIcon} from "../../../../components-bs/theme/Icons/animation/NotificationAnimationIcon";
+import {NotificationAnimationIcon} from "../../../../components-bs/Icons/animation/NotificationAnimationIcon";
 import {IHeader} from "../../types/IHeader";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import LogoContainerImg from "./LogoContainer.svg";

@@ -3,7 +3,7 @@ import { GetSignInRecordResponseData } from "../../../external";
 import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../utils/format";
-import { NoData } from "../../components-bs/theme/Icons/NoData";
+import { NoData } from "../../components-bs/Icons/NoData";
 import { Container } from "../../components/container/Container";
 
 const Title = ({ children }: { children: React.ReactNode }) => (

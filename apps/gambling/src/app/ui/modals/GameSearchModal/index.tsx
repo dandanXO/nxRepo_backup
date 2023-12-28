@@ -1,5 +1,5 @@
 import { SearchOutlined } from "@ant-design/icons"
-import { CloseICON } from "../../components-bs/theme/Icons/CloseICON"
+import { CloseICON } from "../../components-bs/Icons/CloseICON"
 import { Input, InputValue } from "../../components-bs/theme/Inputs/Input";
 import cx from 'classnames';
 import { SearchInput } from "../../components-bs/theme/Inputs/SearchInput";
@@ -13,9 +13,9 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 import { useSelector } from "react-redux";
-import { NoData } from "../../components-bs/theme/Icons/NoData";
+import { NoData } from "../../components-bs/Icons/NoData";
 import { environment } from "../../../../environments/environment";
-import { Icon } from "../../components-bs/theme/Icons";
+import { Icon } from "../../components-bs/Icons";
 import { GameItem } from "../../components-bs/GameTypeSection";
 
 interface IGameSearchModal {

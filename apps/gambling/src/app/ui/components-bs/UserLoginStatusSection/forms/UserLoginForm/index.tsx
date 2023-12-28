@@ -1,10 +1,10 @@
-import {PhoneSvg} from "../../../theme/Icons/PhoneSvg";
-import {KeySvg} from "../../../theme/Icons/KeySvg";
+import {PhoneSvg} from "../../../Icons/PhoneSvg";
+import {KeySvg} from "../../../Icons/KeySvg";
 
 import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
 
 
-import {HidableEyeSvg} from "../../../theme/Icons/HidableEyeSvg";
+import {HidableEyeSvg} from "../../../Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../components/PhonePrefix";
 import {useUserLoginForm} from "../../hooks/useUserLoginForm";
 

@@ -1,5 +1,5 @@
-import { environment } from "../../../../../environments/environment";
-import {ISVGComponent} from "../../../ISVGComponent";
+import { environment } from "../../../../environments/environment";
+import {ISVGComponent} from "../../ISVGComponent";
 
 export const SearchICON = (props: ISVGComponent) => {
   return (

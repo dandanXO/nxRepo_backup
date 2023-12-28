@@ -1,6 +1,6 @@
 
 import cx from "classnames";
-import {environment} from "../../../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 type IICON = {
   className?: string;

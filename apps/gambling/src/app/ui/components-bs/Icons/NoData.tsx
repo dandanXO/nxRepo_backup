@@ -1,7 +1,7 @@
 
 import cx from "classnames";
-import { environment } from "../../../../../environments/environment";
-import { tcx } from "../../../utils/tcx";
+import { environment } from "../../../../environments/environment";
+import { tcx } from "../../utils/tcx";
 
 type IICON = {
   className?: string;

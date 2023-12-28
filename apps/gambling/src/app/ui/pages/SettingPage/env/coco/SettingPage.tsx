@@ -13,7 +13,7 @@ import {InfoCircleOutlined, PhoneOutlined, UserOutlined,} from "@ant-design/icon
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
-import {EditButton} from "../../../../components-bs/theme/Icons/EditButton";
+import {EditButton} from "../../../../components-bs/Icons/EditButton";
 
 
 type IProps = {

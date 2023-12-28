@@ -4,7 +4,7 @@ import QRCode from 'react-qr-code';
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import {environment} from "../../../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {CloseICON} from "../../../../components-bs/theme/Icons/CloseICON";
+import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 import cx from "classnames";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 

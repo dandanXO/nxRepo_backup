@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import useBreakpoint from '../../../hooks/useBreakpoint';
-import { ArrowLeft } from '../../../components-bs/theme/Icons/ArrowLeft';
-import { ArrowRight } from '../../../components-bs/theme/Icons/ArrowRight';
+import { ArrowLeft } from '../../../components-bs/Icons/ArrowLeft';
+import { ArrowRight } from '../../../components-bs/Icons/ArrowRight';
 import { useEffect, useRef, useState } from 'react';
 import { DragScrollContainer } from '../../../components/DragScrollContainer';
 import { useGesture } from '@use-gesture/react';

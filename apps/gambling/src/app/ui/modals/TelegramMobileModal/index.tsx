@@ -2,7 +2,7 @@ import { environment } from "../../../../environments/environment";
 import { ListItem } from "../../components/List/ListItem";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
-import { CloseICON } from "../../components-bs/theme/Icons/CloseICON";
+import { CloseICON } from "../../components-bs/Icons/CloseICON";
 
 interface ITelegramMobileModal {
   onClose: () => void;

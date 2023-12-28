@@ -1,5 +1,5 @@
-import {ISVGComponent} from "../../../ISVGComponent";
-import {environment} from "../../../../../environments/environment";
+import {ISVGComponent} from "../../ISVGComponent";
+import {environment} from "../../../../environments/environment";
 import cx from "classnames";
 
 export const PhoneSvg = (props: ISVGComponent) => {

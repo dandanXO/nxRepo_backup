@@ -1,5 +1,5 @@
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
-import { QuestionTipsIcon } from "../../../../../components-bs/theme/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import { environment } from "apps/gambling/src/environments/environment";
 import { Table } from "apps/gambling/src/app/ui/components/Table";
 import { formatLocaleMoney } from "apps/gambling/src/app/ui/utils/format";

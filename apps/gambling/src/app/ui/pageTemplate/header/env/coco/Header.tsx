@@ -11,7 +11,7 @@ import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {NotificationAnimationIcon} from "../../../../components-bs/theme/Icons/animation/NotificationAnimationIcon";
+import {NotificationAnimationIcon} from "../../../../components-bs/Icons/animation/NotificationAnimationIcon";
 import {MenuLogo} from "../../../../components-bs/theme/Logos/env/coco/MenuLogo";
 import {IHeader} from "../../types/IHeader";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";

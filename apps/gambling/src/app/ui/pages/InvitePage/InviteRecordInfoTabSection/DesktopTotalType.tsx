@@ -1,5 +1,5 @@
 import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
-import { QuestionTipsIcon } from "../../../components-bs/theme/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../components-bs/Icons/QuestionTipsIcon";
 import { ITotal } from ".";
 
 export const DesktopTotalType = (props: ITotal & { type: string }) => {

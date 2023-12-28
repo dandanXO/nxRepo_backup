@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { AppLocalStorage } from "../../../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../../../utils/format";
-import { CopyIcon } from '../../../../../../components-bs/theme/Icons/CopyIcon';
+import { CopyIcon } from '../../../../../../components-bs/Icons/CopyIcon';
 
 const Container = styled.div`
   /* background: rgba(255, 255, 255, 0.1); */
@@ -59,7 +59,7 @@ export const DepositMobileTable = () => {
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
                   <CopyIcon className={'text-white self-baseline'} copyText={record.pay_serial_no} />
-                </div>  
+                </div>
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
                 <span className={'text-[var(--white-40)]'}>Valor</span>
@@ -83,7 +83,7 @@ export const DepositMobileTable = () => {
 
               <div className={'flex flex-row justify-between border-assistant p-2'}>
                 <span className='text-[var(--white-40)]'> Tempo </span>
-                
+
                 <span style={{
                   color:
                     record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色

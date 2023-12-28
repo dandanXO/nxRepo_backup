@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CommonTableTabG } from "apps/gambling/src/app/ui/components/TabItem/CommonTableTabG";
 import { environment } from "apps/gambling/src/environments/environment";
 import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/TabItem";
-import { QuestionTipsIcon } from "../../../../../components-bs/theme/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import ConfirmDrawer from "apps/gambling/src/app/ui/components/Drawers/ConfirmDrawer";
 import DatePicker from "../../../../../components/DatePickers/DatePicker";
 import { IMobileDailyTable, ITabType } from "../..";

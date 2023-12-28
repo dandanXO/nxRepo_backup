@@ -1,6 +1,6 @@
 
 import { notification } from "antd";
-import { environment } from "../../../../../environments/environment";
+import { environment } from "../../../../environments/environment";
 import cx from "classnames";
 import copy from "copy-to-clipboard";
 import { ReactElement } from "react";

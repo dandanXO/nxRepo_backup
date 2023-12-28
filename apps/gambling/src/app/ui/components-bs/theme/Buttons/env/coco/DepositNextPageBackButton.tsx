@@ -1,4 +1,4 @@
-import { ArrowRight } from "../../../Icons/ArrowRight";
+import { ArrowRight } from "../../../../Icons/ArrowRight";
 import cx from 'classnames';
 export const DepositNextPageBackButton = (props: { className?: string; onClick: () => void }) => {
   return (

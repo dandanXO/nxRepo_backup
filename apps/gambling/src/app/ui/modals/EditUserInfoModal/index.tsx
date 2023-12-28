@@ -13,7 +13,7 @@ import { tcx } from "../../utils/tcx";
 import { UserOutlined } from "@ant-design/icons";
 import { environment } from "../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/Icons/CloseICON";
 
 
 interface IEditUserInfoModalProps {

@@ -1,5 +1,5 @@
 import {EyeInvisibleOutlined, EyeOutlined} from "@ant-design/icons";
-import {environment} from "../../../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import cx from "classnames";
 
 type IHidableEyeSvg = {

@@ -1,4 +1,4 @@
-import {environment} from "../../../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import React from "react";
 import cx from "classnames";
 

@@ -13,7 +13,7 @@ import {Avatar} from "../../../../components/Avatar";
 import {AvatarAccountInfo} from "../../../../components/AvatarAccountInfo";
 import {CompanyButton} from "./components/CompanyButton";
 import {WebsiteLogo} from "./components/WebsiteLogo";
-import {NotificationAnimationIcon} from "../../../../components-bs/theme/Icons/animation/NotificationAnimationIcon";
+import {NotificationAnimationIcon} from "../../../../components-bs/Icons/animation/NotificationAnimationIcon";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";
 
 

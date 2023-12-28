@@ -3,7 +3,7 @@ import {rootState} from "../../../../../../../../../packages/dlh-web/src/store/r
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {environment} from "../../../../../../environments/environment";
 import {LoadingLogo} from "../../../../components-bs/theme/Logos/LoadingLogo";
-import {CloseICON} from "../../../../components-bs/theme/Icons/CloseICON";
+import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 
 export const RiojungleIOSDownloadModal = () => {
   const dispatch = useDispatch();

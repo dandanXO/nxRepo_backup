@@ -1,5 +1,5 @@
-import {environment} from "../../../../../../environments/environment";
-import {MessageCountBadge} from "../../../../components/MessageCountBadge";
+import {environment} from "../../../../../environments/environment";
+import {MessageCountBadge} from "../../../components/MessageCountBadge";
 import React from "react";
 import styled from "styled-components";
 

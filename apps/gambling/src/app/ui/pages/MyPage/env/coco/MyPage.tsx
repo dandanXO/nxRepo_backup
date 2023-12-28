@@ -15,7 +15,7 @@ import {Container} from "../../../../components/container/Container";
 import {List} from "../../../../components/List";
 import {ListHeader} from "../../../../components/List/ListHeader";
 import {ListItem} from "../../../../components/List/ListItem";
-import {CopyIcon} from "../../../../components-bs/theme/Icons/CopyIcon";
+import {CopyIcon} from "../../../../components-bs/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import { clampNumber, formatLocaleMoney } from "../../../../utils/format";

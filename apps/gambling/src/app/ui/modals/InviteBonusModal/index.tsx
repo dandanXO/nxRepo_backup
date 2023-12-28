@@ -6,7 +6,7 @@ import {Container} from "./container";
 import {Item} from "./item";
 
 import { useInviteConfig } from "../../hooks/useInviteConfig";
-import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/Icons/CloseICON";
 import { InviteBonusModal as RioInviteBonusModal} from "./env/riojungle/InviteBonusModal";
 import {renderByPlatform} from "../../utils/renderByPlatform";
 

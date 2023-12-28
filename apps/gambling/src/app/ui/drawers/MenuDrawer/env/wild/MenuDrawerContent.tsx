@@ -11,7 +11,7 @@ import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
-import {CopyIcon} from "../../../../components-bs/theme/Icons/CopyIcon";
+import {CopyIcon} from "../../../../components-bs/Icons/CopyIcon";
 import {MobileMenuItem} from "./MobileMenuItem";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 

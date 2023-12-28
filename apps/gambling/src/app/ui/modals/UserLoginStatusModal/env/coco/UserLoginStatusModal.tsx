@@ -2,7 +2,7 @@
 
 import {Container as WContainer} from "../../env/wild/Container";
 import {Container as CContainer} from "../../env/coco/Container";
-import {CloseICON} from "../../../../../ui/components-bs/theme/Icons/CloseICON";
+import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 
 import {renderByPlatform} from "../../../../utils/renderByPlatform";
 import useBreakpoint from "../../../../hooks/useBreakpoint";

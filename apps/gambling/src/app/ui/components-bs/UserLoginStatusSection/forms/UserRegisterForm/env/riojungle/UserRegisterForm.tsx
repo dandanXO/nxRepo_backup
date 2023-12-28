@@ -1,5 +1,5 @@
-import {PhoneSvg} from "../../../../../theme/Icons/PhoneSvg";
-import {KeySvg} from "../../../../../theme/Icons/KeySvg";
+import {PhoneSvg} from "../../../../../Icons/PhoneSvg";
+import {KeySvg} from "../../../../../Icons/KeySvg";
 
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 import {Input} from "../../../../../theme/Inputs/Input";
@@ -7,11 +7,11 @@ import {Input} from "../../../../../theme/Inputs/Input";
 import {IOpenNotificationWithIcon} from "../../../../../../pageTemplate";
 import {onValidatePasswordInput, onValidatePhoneInput} from "../../../UserLoginForm"
 
-import {SecuritySvg} from "../../../../../theme/Icons/SecuritySvg";
+import {SecuritySvg} from "../../../../../Icons/SecuritySvg";
 import {usePageNavigate} from "../../../../../../hooks/usePageNavigate";
 import {Captcha} from "../../Captcha";
-import {HidableEyeSvg} from "../../../../../theme/Icons/HidableEyeSvg";
-import {CheckableICON} from "../../../../../theme/Icons/CheckableICON";
+import {HidableEyeSvg} from "../../../../../Icons/HidableEyeSvg";
+import {CheckableICON} from "../../../../../Icons/CheckableICON";
 import {PhonePrefix} from "../../../../components/PhonePrefix";
 import {useUserRegisterForm} from "../../../../hooks/useUserRegisterForm";
 import {renderByPlatform} from "../../../../../../utils/renderByPlatform";

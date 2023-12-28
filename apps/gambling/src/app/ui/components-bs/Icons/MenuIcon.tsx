@@ -1,4 +1,4 @@
-import {AssetMappingCoco} from "../../../../../assets/assetMapping.coco";
+import {AssetMappingCoco} from "../../../../assets/assetMapping.coco";
 import React from "react";
 
 export const MenuIcon = () => {
