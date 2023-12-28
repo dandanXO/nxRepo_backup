@@ -43,7 +43,7 @@ export const Toolbox = (props: IToolbox) => {
   const desktopShowCustomerService = showToolboxConfig === undefined || (typeof showToolboxConfig !== 'boolean' && (showToolboxConfig.desktop === undefined || (typeof showToolboxConfig.desktop !=='boolean' && showToolboxConfig.desktop.customerService !==false)))
   const desktopShowManage = showToolboxConfig === undefined || (typeof showToolboxConfig !== 'boolean' && (showToolboxConfig.desktop === undefined || (typeof showToolboxConfig.desktop !=='boolean' && showToolboxConfig.desktop.manager !==false)))
 
-  const {isMobile} = useBreakpoint();
+  const {isDesktop, isMobile} = useBreakpoint();
   const dispatch=useDispatch();
   const {isShowTelegramMobileModal} = useSelector((state: RootState) => state.app);
 
@@ -63,22 +63,22 @@ export const Toolbox = (props: IToolbox) => {
       }
 
       {
-        isMobile && mobileShowToolbox && (mobileShowDownload || mobileShowCustomerService) && (
+        !isDesktop && mobileShowToolbox && (mobileShowDownload || mobileShowCustomerService) && (
           <div className={twMerge(props.className)}>
             {mobileShowDownload && (
               <div className={"mb-2"}>
-                <ToolButton isMobile={isMobile} className={""} onClick={props.onClickToDownload}>
-                  <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
+                <ToolButton isMobile={!isDesktop} className='bg-[#8547EB]' onClick={props.onClickToDownload}>
+                  <img alt={"download"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.assetPrefix}/icon-download-mobile.png`}/>
                 </ToolButton>
               </div>
             )}
             {
               mobileShowCustomerService && (
                 <div>
-                  <ToolButton isMobile={isMobile} className={""} onClick={() => {
+                  <ToolButton isMobile={!isDesktop} className='bg-[#10B98F]' onClick={() => {
                     dispatch(appSlice.actions.setShowTelegramMobileModal(true))
                   }}>
-                    <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/customer-service-2.png`} />
+                    <img alt={"telegram"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.assetPrefix}/icon-telegram-mobile.png`} />
                   </ToolButton>
                 </div>
               )
@@ -88,12 +88,12 @@ export const Toolbox = (props: IToolbox) => {
       }
 
       {
-        !isMobile && desktopShowToolbox && (desktopShowDownload || desktopShowCustomerService || desktopShowManage) && (
-          <div className={"fixed right-0 bottom-[68px] text-white flex flex-col z-20"}>
+        isDesktop && desktopShowToolbox && (desktopShowDownload || desktopShowCustomerService || desktopShowManage) && (
+          <div className={"fixed right-0 bottom-[300px] text-white flex flex-col z-20"}>
 
             {
               desktopShowDownload && (
-                <FixedToolContainer className={"flex flex-col justify-center items-center px2 py-3 mb-4"}>
+                <FixedToolContainer className={"flex flex-col justify-center items-center px2 py-3 mb-4 bg-[#8547EB]"}>
                   <div className={"text-xs font-light mb-2"}>Download</div>
                   <ToolButton
                     onClick={props.onClickToDownload}>
@@ -105,35 +105,34 @@ export const Toolbox = (props: IToolbox) => {
 
             {
               (desktopShowCustomerService || desktopShowManage) && (
-                <FixedToolContainer className={"flex flex-col justify-center items-center p-4 text-center"}>
+                <FixedToolContainer className={"flex flex-col justify-center items-center p-4 text-center bg-[#10B98F]"}>
                   <div className={"text-xs font-lights mb-2 whitespace-nowrap"}>Contate-nos</div>
                   {
                     desktopShowCustomerService && (
-                      <div className={"mb-2"}>
+                      <div>
                         <ToolButton
                           className={"mb-1"}
                           onClick={props.onClickToOpenTelegramService}
                         >
                           <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
                         </ToolButton>
-                        <div className={"text-xs font-light"}>Serviço</div>
                       </div>
                     )
                   }
 
-                  {
-                    desktopShowManage && (
-                      <div className={""}>
-                        <ToolButton
-                          className={"mb-1"}
-                          onClick={props.onClickToOpenTelegramManager}
-                        >
-                          <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
-                        </ToolButton>
-                        <div className={"text-xs font-lights"}>Gerente</div>
-                      </div>
-                    )
-                  }
+                  {/*{*/}
+                  {/*  desktopShowManage && (*/}
+                  {/*    <div className={""}>*/}
+                  {/*      <ToolButton*/}
+                  {/*        className={"mb-1"}*/}
+                  {/*        onClick={props.onClickToOpenTelegramManager}*/}
+                  {/*      >*/}
+                  {/*        <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>*/}
+                  {/*      </ToolButton>*/}
+                  {/*      <div className={"text-xs font-lights"}>Gerente</div>*/}
+                  {/*    </div>*/}
+                  {/*  )*/}
+                  {/*}*/}
                 </FixedToolContainer>
               )
             }

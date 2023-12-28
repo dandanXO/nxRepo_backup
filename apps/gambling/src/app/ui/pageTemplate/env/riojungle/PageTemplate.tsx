@@ -223,7 +223,7 @@ export const PageTemplate = ({
       )}
 
       {showToolboxConfig !== false && (
-        <div className={"z-10 fixed right-[16px] bottom-[100px]"}>
+        <div className={"z-10 fixed right-[16px] bottom-[400px]"}>
           <Toolbox
             className={""}
             showToolboxConfig={showToolboxConfig}
