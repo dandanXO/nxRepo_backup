@@ -253,7 +253,7 @@ export const IndexPage = ({
       }
 
       <Container className={cx("pb-16", {
-        [DesktopXPadding]: !isMobile,
+        // [DesktopXPadding]: !isMobile,
       })}>
         {gameList()}
       </Container>
