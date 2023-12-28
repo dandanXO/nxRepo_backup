@@ -89,11 +89,12 @@ export const RecordPanelDeposit = () => {
 
   return (
     <DragScrollContainer className='h-[40vh] rounded-xl overflow-hidden' >
-      {/* {contextHolder} */}
+      {contextHolder}
+      {/* Table className  可以控制table內部整體css 去覆蓋預設設定 */}
       <Table
         className='!bg-[#333333]'
-        titleStyle='text-sm'
-        contentStyle='text-base'
+        titleStyle='text-sm border-transparent'
+        contentStyle='text-base !border-x-0 !border-y'
         columns={tableColumns}
         dataSource={records}
         fetchData={handleFetchData}

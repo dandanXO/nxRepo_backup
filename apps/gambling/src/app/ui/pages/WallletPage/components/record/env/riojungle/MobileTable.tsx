@@ -51,42 +51,49 @@ export const DepositMobileTable = () => {
             <Container
               key={record.id}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
-                "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
+                "bg-[var(--background-tabbar)]"
               )}
             >
-              <div className={'flex flex-row justify-between px-5 pt-2.5 pb-1.5 items-center'}>
-                <div className='font-bold text-white'>ID da ordem: {record.pay_serial_no}</div>
-                <CopyIcon className={'text-[var(--secondary-assistant)] self-baseline'} copyText={record.pay_serial_no} />
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
+                <div className='font-bold text-[var(--white-40)]'>Identificador</div>
+                <div>
+                  <span className='mr-1'>{record.pay_serial_no}</span>
+                  <CopyIcon className={'text-white self-baseline'} copyText={record.pay_serial_no} />
+                </div>  
               </div>
-              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
-                <span className={''}>Valor</span>
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
+                <span className={'text-[var(--white-40)]'}>Valor</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
               <div
-                className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'
+                className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'
                 }
               >
-                <span className={''}>bônus</span>
+                <span className={'text-[var(--white-40)]'}>bônus</span>
                 <span className={''}>
                   R$ {formatLocaleMoney(Number(record.amount) * Number(record.rate))}
                 </span>
               </div>
 
-              <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
-                <span className={''}>Modelo</span>
+              <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
+                <span className={'text-[var(--white-40)]'}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-assistant px-5 pt-3 pb-2'}>
-                <span className={''}>{record.created_at}</span>
+              <div className={'flex flex-row justify-between border-assistant p-2'}>
+                <span className='text-[var(--white-40)]'> Tempo </span>
+                
                 <span style={{
                   color:
                     record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
                       record.status === 3 ? 'var(--state-error-main)' :   // 红色
                         record.status === 1 ? 'var(--state-success-main)' :   // 绿色
                           'var(--white)'  // 白色 (默认)
-                }}>{TradeStatusMap[record.status]}</span>
+                }}>
+                  <span className={'text-white'}>{record.created_at}</span>
+                  {TradeStatusMap[record.status]}
+                </span>
               </div>
             </Container>
           ))}

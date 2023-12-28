@@ -84,6 +84,9 @@ export const RecordPanelWithdraw = () => {
     <div className='h-[40vh] rounded-xl overflow-hidden'>
       {contextHolder}
       <Table
+        className='!bg-[#333333]'
+        titleStyle='text-sm border-transparent'
+        contentStyle='text-base !border-x-0 !border-y'
         fetchData={handleFetchData}
         dataSource={records}
         columns={columns}

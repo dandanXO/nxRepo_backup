@@ -3,7 +3,7 @@ import cx from "classnames";
 import styled from "styled-components";
 
 const StyledRecordButton = styled.button.attrs<{ className?: string; }>((props) => ({
-  className: cx(props.className, "text-transparent"),
+  className: cx(props.className, "text-transparent grow"),
 }))`
   width: 120px;
   height: 40px;

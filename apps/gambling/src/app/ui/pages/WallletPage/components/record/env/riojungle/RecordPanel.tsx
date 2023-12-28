@@ -40,17 +40,17 @@ export const RecordPanel = (props: IRecordPanel) => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <SectionContainer id={'record-section'}>
+    <SectionContainer id={'record-section'} className='bg-[#333333] rounded-lg p-5'>
       {/*{isMobile && <BlueBoard />}*/}
 
       {/* {isMobile && (
         <TotalSectionContainer/>
       )} */}
 
-      <section className={cx('button-list flex flex-row mb-2 md:mb-4 font-medium')}>
-        <div className="bg-[#4d4d4d] flex flex-row rounded-[100px]">
+      <section className={cx('button-list flex flex-row mb-2 md:mb-4 md:justify-start font-medium')}>
+        <div className="bg-[#4d4d4d] flex flex-row rounded-[100px] sm:w-auto w-full justify-between">
           <RecordTabButton
-            className={cx("mr-3 px-3.5 md:px-6 flex-none ",{'!text-lg':!isMobile})}
+            className={cx("mr-3 px-3.5 md:px-6 flex-none ",{'!text-lg':!isMobile, '!grow': isMobile})}
             active={recordPanelMode === 'deposit'}
             onClick={() => {
               setRecordPanelMode('deposit');
@@ -59,7 +59,7 @@ export const RecordPanel = (props: IRecordPanel) => {
             Depósito
           </RecordTabButton>
           <RecordTabButton
-            className={cx("mr-3 px-3.5 md:px-6 flex-none ",{'!text-lg':!isMobile})}
+            className={cx("mr-3 px-3.5 md:px-6 flex-none ",{'!text-lg':!isMobile,'!grow': isMobile})}
             active={recordPanelMode === 'withdraw'}
             onClick={() => {
               setRecordPanelMode('withdraw');
