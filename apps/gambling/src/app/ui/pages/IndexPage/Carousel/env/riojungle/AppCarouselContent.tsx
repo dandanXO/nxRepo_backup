@@ -33,9 +33,9 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
           Primeiro depósito <br/> bônus de {recharge_first_cashback_rate}
         </CarouselTitleSection>
         {isMobile ? (
-          <CarouselImage alt={"h5_banner_2"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_2.png`}/>
+          <CarouselImage alt={"h5_banner_1"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_1.png`}/>
         ): (
-          <CarouselImage alt={"banner_2"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_2.png`}/>
+          <CarouselImage alt={"banner_1"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_1.png`}/>
         )}
       </div>
     </CarouselContainer>

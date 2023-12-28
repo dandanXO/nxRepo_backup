@@ -20,7 +20,7 @@
 
 .isdesktop {
   .react-multi-carousel-list.carousel-container {
-    padding-bottom: 30px;
+    margin-bottom: 30px;
   }
   .react-multi-carousel-dot-list.custom-dot-list-style {
     height: 30px;
@@ -69,4 +69,8 @@
 /*NOTE: 解決最下腳留白的縫隙*/
 .react-multi-carousel-track {
   margin-bottom: -6px;
+}
+
+.image-item {
+  padding-right: 20px;
 }
