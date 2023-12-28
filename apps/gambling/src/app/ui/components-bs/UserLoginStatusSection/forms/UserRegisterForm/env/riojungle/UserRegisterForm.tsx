@@ -128,6 +128,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       />
 
       <section className={"flex flex-col mb-4"}>
+        {/*NOTICE: refactor*/}
         {renderByPlatform({
           "coco777bet": (
             <CocoConfirmButton

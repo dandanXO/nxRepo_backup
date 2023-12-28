@@ -231,13 +231,14 @@
   --gray-scale-10: #1A1A1A;
 
   /*NOTE: figma 沒有 自己拆出來的*/
-  --input-border: var(--stroke-textfields);
-  --input-background: var(--background-textfields);
-  --input-placeholder-color: #808080;
-  --input-text-color: var(--white);
+  --input-border: transparent;
+  --input-background: #4D4D4D;
+  --input-placeholder-color: #666666;
+  --input-text-color: #FFFFFF;
 
-  --input-focus-border: var(--stroke-textfields);
-  --input-focus-background: var(--background-textfields);
-  --input-invalidation-border: var(--state-error-variant);
-  --input-invalidation-text-color: var(--state-error-variant);
+  --input-focus-border: transparent;
+  --input-focus-background: transparent;
+
+  --input-invalidation-border: #EF4444;
+  --input-invalidation-text-color: #EF4444;
 }
