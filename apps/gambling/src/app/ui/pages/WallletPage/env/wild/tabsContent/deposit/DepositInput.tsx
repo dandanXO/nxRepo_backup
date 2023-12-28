@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { MobileInput } from "../../../../../../components-bs/theme/Inputs/MobileInput";
+import { MobileInput } from "../../../../../../components-bs/Inputs/MobileInput";
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 import { IDepositInput } from "../../../../components/deposit/DepositInput";
 

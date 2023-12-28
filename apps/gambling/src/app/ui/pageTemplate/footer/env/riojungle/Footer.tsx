@@ -6,7 +6,7 @@ import React, {useState} from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
-import {FooterLogo} from "../../../../components-bs/theme/Logos/FooterLogo";
+import {FooterLogo} from "../../../../components-bs/Logos/FooterLogo";
 import {renderByRWD} from "../../../../utils/renderByRWD";
 import {IFooter} from "../../types/IFooter";
 

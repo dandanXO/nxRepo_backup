@@ -1,4 +1,4 @@
-import { DepositMoneyButton } from "../../../../../../components-bs/theme/Buttons/DepositMoneyButton";
+import { DepositMoneyButton } from "../../../../../../components-bs/Buttons/DepositMoneyButton";
 import { DepositInput } from "../../../../components/deposit/DepositInput"
 import { DepositNoticeSection } from "./DepositNoticeSection"
 import cx from 'classnames';

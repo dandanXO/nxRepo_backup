@@ -1,5 +1,5 @@
-import { Input, InputValue } from "../../../../components-bs/theme/Inputs/Input";
-import { MobileInput } from "../../../../components-bs/theme/Inputs/MobileInput";
+import { Input, InputValue } from "../../../../components-bs/Inputs/Input";
+import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import Select from 'react-select';
 import { renderByPlatform } from "../../../../utils/renderByPlatform";

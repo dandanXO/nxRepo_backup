@@ -1,8 +1,8 @@
 import { SearchOutlined } from "@ant-design/icons"
 import { CloseICON } from "../../components-bs/Icons/CloseICON"
-import { Input, InputValue } from "../../components-bs/theme/Inputs/Input";
+import { Input, InputValue } from "../../components-bs/Inputs/Input";
 import cx from 'classnames';
-import { SearchInput } from "../../components-bs/theme/Inputs/SearchInput";
+import { SearchInput } from "../../components-bs/Inputs/SearchInput";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import { useEffect, useState } from "react";
 import { GameListSection } from "./components/GameListSection";

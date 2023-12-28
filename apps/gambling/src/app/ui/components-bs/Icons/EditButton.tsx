@@ -2,7 +2,7 @@ import {tcx} from "../../utils/tcx";
 import {environment} from "../../../../environments/environment";
 import React from "react";
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {IButton} from "../theme/Buttons/IButton";
+import {IButton} from "../Buttons/IButton";
 
 export const EditButton = (props: IButton) => {
   const {isMobile} = useBreakpoint();

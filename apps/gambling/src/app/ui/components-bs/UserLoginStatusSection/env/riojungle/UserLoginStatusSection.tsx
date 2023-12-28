@@ -3,11 +3,11 @@ import React, {useState} from "react";
 import {UserLoginForm} from "../../forms/UserLoginForm";
 import {UserRegisterForm} from "../../forms/UserRegisterForm";
 import {UserForgetPasswordForm} from "../../forms/UserForgetPasswordForm";
-import {environment} from "../../../../../../environments/environment";
-import {LoginModalLogo} from "../../../theme/Logos/LoginModalLogo";
+import {LoginModalLogo} from "../../../Logos/LoginModalLogo";
 import {IUserLoginStatusSection} from "../../types";
 import {TabItem} from "../../../../components/TabItem/env/riojungle/TabItem";
 import {Tabs} from "../../../../components/Tabs";
+import {ArrowLeft} from "../../../Icons/ArrowLeft";
 
 export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
   const [switchToLoginOrRegister, setSwitchToLoginOrRegister] = useState<"login"|"register"|"forget">("login");
@@ -15,12 +15,13 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
   return (
     <div className={"flex flex-col"}>
 
-      <section className={"flex flex-col justify-center items-center mb-5"}>
-        <LoginModalLogo/>
-      </section>
-
-      <section className={"mb-5 flex justify-center items-center"}>
-        {switchToLoginOrRegister !== "forget" && (
+      {switchToLoginOrRegister !== "forget" && (
+        <section className={"flex flex-col justify-center items-center mb-5"}>
+          <LoginModalLogo/>
+        </section>
+      )}
+      {switchToLoginOrRegister !== "forget" && (
+        <section className={"mb-5 flex justify-center items-center"}>
           <Tabs className={"w-full"}>
             <TabItem
               className={"flex-1"}
@@ -32,33 +33,35 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
             />
             <TabItem
               className={"flex-1"}
-              name={'Cadastre-Se'}
+              name={'Registro'}
               active={switchToLoginOrRegister === "register"}
               onClick={() => {
                 setSwitchToLoginOrRegister("register")
               }}
             />
           </Tabs>
-        )}
+        </section>
+      )}
 
-        {switchToLoginOrRegister === "forget" && (
+      {switchToLoginOrRegister === "forget" && (
+        <section className={"mb-5 flex justify-start items-center"}>
           <button
             onClick={() => {
-              setSwitchToLoginOrRegister("register")
+              setSwitchToLoginOrRegister("login")
             }}
-            className={cx("font-bold pb-2",{
-              "text-main-secondary-main": switchToLoginOrRegister === "forget",
-            })}
+            className={cx("font-bold text-white",
+              "text-2xl leading-8",
+              "flex flex-row justify-center items-center"
+            )}
           >
-            Esqueça A Senha?
+            <ArrowLeft className={"mr-2"}/>
+            <span>Esqueça a senha</span>
           </button>
-        )}
-      </section>
-
+        </section>
+      )}
 
       {(switchToLoginOrRegister === "login" ? (
         <div className={""}>
-
           <UserLoginForm
             confirmToLogin={() => {
               props.confirmToLogin()

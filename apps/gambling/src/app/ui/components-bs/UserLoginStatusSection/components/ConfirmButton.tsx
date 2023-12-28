@@ -1,5 +1,5 @@
 import {twMerge} from "tailwind-merge";
-import {ConfirmButton as COCOConfirmButton } from "../../theme/Buttons/ConfirmButton";
+import {ConfirmButton as COCOConfirmButton } from "../../Buttons/ConfirmButton";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
 import cx from "classnames";
 

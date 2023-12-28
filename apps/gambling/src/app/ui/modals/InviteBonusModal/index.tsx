@@ -1,5 +1,5 @@
-import {EarnButton} from "../../components-bs/theme/Buttons/EarnButton";
-import {InviteButton} from "../../components-bs/theme/Buttons/InviteButton";
+import {EarnButton} from "../../components-bs/Buttons/EarnButton";
+import {InviteButton} from "../../components-bs/Buttons/InviteButton";
 
 import {Description} from "./Description";
 import {Container} from "./container";

@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import { useDispatch, useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {LoginButton} from "../../../../components-bs/theme/Buttons/LoginButton";
+import {LoginButton} from "../../../../components-bs/Buttons/LoginButton";
 import {HeaderMenu} from "./components/HeaderMenu";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
@@ -12,7 +12,7 @@ import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {NotificationAnimationIcon} from "../../../../components-bs/Icons/animation/NotificationAnimationIcon";
-import {MenuLogo} from "../../../../components-bs/theme/Logos/env/coco/MenuLogo";
+import {MenuLogo} from "../../../../components-bs/Logos/env/coco/MenuLogo";
 import {IHeader} from "../../types/IHeader";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";
 

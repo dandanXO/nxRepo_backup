@@ -1,4 +1,4 @@
-import {LoadingLogo} from "../../components-bs/theme/Logos/LoadingLogo";
+import {LoadingLogo} from "../../components-bs/Logos/LoadingLogo";
 import {LoadingBar} from "../../components/LoadingBar";
 import React from "react";
 import {twMerge} from "tailwind-merge";

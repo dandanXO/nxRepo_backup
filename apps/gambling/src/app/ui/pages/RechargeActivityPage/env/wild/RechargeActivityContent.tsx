@@ -1,4 +1,4 @@
-import { ChargeButton } from "../../../../components-bs/theme/Buttons/ChargeButton"
+import { ChargeButton } from "../../../../components-bs/Buttons/ChargeButton"
 import useBreakpoint from "../../../../hooks/useBreakpoint"
 import { usePageNavigate } from "../../../../hooks/usePageNavigate"
 import { BenefitSection } from "./BenefitSection"

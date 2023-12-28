@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { IBoardData } from "../.."
-import { RecordButton2, RecordButton3 } from "../../../../../components-bs/theme/Buttons/RecordButton";
+import { RecordButton2, RecordButton3 } from "../../../../../components-bs/Buttons/RecordButton";
 import { PageOrModalPathEnum } from "apps/gambling/src/app/ui/PageOrModalPathEnum";
 import styled from "styled-components";
 import { environment } from "apps/gambling/src/environments/environment";

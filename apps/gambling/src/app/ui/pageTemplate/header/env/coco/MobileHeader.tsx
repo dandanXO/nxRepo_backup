@@ -8,7 +8,7 @@ import {RootState} from "../../../../../reduxStore";
 import {environment} from "../../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import { RegisterButton} from "../../../../components-bs/theme/Buttons/RegisterButton";
+import { RegisterButton} from "../../../../components-bs/Buttons/RegisterButton";
 import { MessageCountBadge } from "../../../../components/MessageCountBadge";
 import {MenuIcon} from "../../../../components-bs/Icons/MenuIcon";
 import {IMobileHeader} from "../../types/IMobileHeader";

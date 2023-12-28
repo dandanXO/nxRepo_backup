@@ -2,12 +2,12 @@ import Select from 'react-select';
 
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 import {SectionContainer} from "../../../../../../components/container/SectionContainer";
-import {Input} from "../../../../../../components-bs/theme/Inputs/Input";
+import {Input} from "../../../../../../components-bs/Inputs/Input";
 import {tcx} from "../../../../../../utils/tcx";
-import {MobileInput} from "../../../../../../components-bs/theme/Inputs/MobileInput";
+import {MobileInput} from "../../../../../../components-bs/Inputs/MobileInput";
 import {WithdrawNoticeSection} from './WithdrawNoticeSection';
 import {IWithdrawPanelCommon} from "../../../../components/withdraw/WithdrawPanel";
-import {ButtonPro} from "../../../../../../components-bs/theme/Buttons/ButtonPro";
+import {ButtonPro} from "../../../../../../components-bs/Buttons/ButtonPro";
 import { WithdrawForm } from '../../../../components/withdraw/WithdrawForm';
 
 export const WithdrawPanel = (props: IWithdrawPanelCommon) => {

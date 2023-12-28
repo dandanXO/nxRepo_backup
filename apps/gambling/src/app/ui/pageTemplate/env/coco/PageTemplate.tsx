@@ -11,7 +11,7 @@ import {Toolbox} from "../../Toolbox/env/coco";
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../header/env/coco/Header";
 import {MobileHeader} from "../../header/env/coco/MobileHeader";
-import {LoadingLogo} from "../../../components-bs/theme/Logos/LoadingLogo";
+import {LoadingLogo} from "../../../components-bs/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";

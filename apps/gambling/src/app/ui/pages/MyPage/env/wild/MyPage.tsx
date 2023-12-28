@@ -6,9 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../../../reduxStore/appSlice";
 import CurrentVIPIcon from "../../../../components/CurrentVIPIcon";
 import styled from "styled-components";
-import {CheckInButton} from "../../../../components-bs/theme/Buttons/CheckInButton";
-import {DepositButton} from "../../../../components-bs/theme/Buttons/DepositButton2";
-import {WithdrawButton} from "../../../../components-bs/theme/Buttons/WithdrawButton";
+import {CheckInButton} from "../../../../components-bs/Buttons/CheckInButton";
+import {DepositButton} from "../../../../components-bs/Buttons/DepositButton2";
+import {WithdrawButton} from "../../../../components-bs/Buttons/WithdrawButton";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {Container} from "../../../../components/container/Container";
 

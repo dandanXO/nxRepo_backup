@@ -1,8 +1,8 @@
 import { ILeaveGameConfirmModalProps } from "../../index";
 import { tcx } from "../../../../utils/tcx";
 import { CheckBox } from "../../../../components/CheckBox";
-import { GameLeaveCancelButton } from "../../../../components-bs/theme/Buttons/GameLeaveCancelButton";
-import { GameLeaveConfirmButton } from "../../../../components-bs/theme/Buttons/GameLeaveConfirmButton";
+import { GameLeaveCancelButton } from "../../../../components-bs/Buttons/GameLeaveCancelButton";
+import { GameLeaveConfirmButton } from "../../../../components-bs/Buttons/GameLeaveConfirmButton";
 import React, { useState } from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 

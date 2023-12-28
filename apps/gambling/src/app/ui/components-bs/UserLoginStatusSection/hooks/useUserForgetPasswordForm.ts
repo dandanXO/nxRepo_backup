@@ -1,9 +1,9 @@
 import {useState} from "react";
-import {InputValue} from "../../theme/Inputs/Input";
+import {InputValue} from "../../Inputs/Input";
 import {useForgetPasswordMutation, useSendForgetPasswordSMSCodeMutation} from "../../../../external";
 import {useGetDeviceId} from "../../../hooks/useGetDeviceId";
 import {useForm} from "../../../hooks/useForm";
-import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm";
+import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm/env/coco/UserLoginForm";
 import {environment} from "../../../../../environments/environment";
 import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
 import {connect} from "../../../../gateway/socket";

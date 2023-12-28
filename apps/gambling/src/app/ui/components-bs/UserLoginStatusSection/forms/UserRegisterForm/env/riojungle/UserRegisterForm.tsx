@@ -2,10 +2,10 @@ import {PhoneSvg} from "../../../../../Icons/PhoneSvg";
 import {KeySvg} from "../../../../../Icons/KeySvg";
 
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
-import {Input} from "../../../../../theme/Inputs/Input";
+import {Input} from "../../../../../Inputs/Input";
 
 import {IOpenNotificationWithIcon} from "../../../../../../pageTemplate";
-import {onValidatePasswordInput, onValidatePhoneInput} from "../../../UserLoginForm"
+import {onValidatePasswordInput, onValidatePhoneInput} from "../../../UserLoginForm/env/coco/UserLoginForm"
 
 import {SecuritySvg} from "../../../../../Icons/SecuritySvg";
 import {usePageNavigate} from "../../../../../../hooks/usePageNavigate";
@@ -16,7 +16,7 @@ import {PhonePrefix} from "../../../../components/PhonePrefix";
 import {useUserRegisterForm} from "../../../../hooks/useUserRegisterForm";
 import {renderByPlatform} from "../../../../../../utils/renderByPlatform";
 
-import {ConfirmButton as CocoConfirmButton} from "../../../../../theme/Buttons/ConfirmButton";
+import {ConfirmButton as CocoConfirmButton} from "../../../../../Buttons/ConfirmButton";
 import {ConfirmButton} from "../../../../components/ConfirmButton";
 
 export type IUserRegisterForm = {
@@ -166,14 +166,11 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         <button className={"mr-2 relative top-[1px] shrink-0"} onClick={toggleCheck}>
           <CheckableICON isChecked={isChecked}/>
         </button>
-        <a
-          className={"text-white font-thin text-md"}
-          // style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis', maxWidth: '300px' }}
-        >
+        <a className={"text-white font-thin text-md"}>
           <span className={"text-[var(--text-tertiary)] font-medium mr-1 my-2 text-sm"} onClick={toggleCheck} >Eu concordo</span>
-          <span className={"text-[var(--white)] font-medium underline break-all text-sm"} onClick={() => {
+          <span className={"text-[#3B82F6] font-medium break-all text-sm"} onClick={() => {
             onClickToPrivacyAgreement();
-          }}>Condições e condições, política de privacidade</span>
+          }}>Condições, política de privacidade</span>
         </a>
       </section>
 

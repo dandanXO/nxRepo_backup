@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
 import { RootState } from '../../../../../../../reduxStore';
-import { ButtonPro } from '../../../../../../components-bs/theme/Buttons/ButtonPro';
+import { ButtonPro } from '../../../../../../components-bs/Buttons/ButtonPro';
 import { ArrowRight } from '../../../../../../components-bs/Icons/ArrowRight';
-import { Input } from '../../../../../../components-bs/theme/Inputs/Input';
-import { MobileInput } from '../../../../../../components-bs/theme/Inputs/MobileInput';
+import { Input } from '../../../../../../components-bs/Inputs/Input';
+import { MobileInput } from '../../../../../../components-bs/Inputs/MobileInput';
 import { SectionContainer } from '../../../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../../../hooks/useBreakpoint';
 import { formatLocaleMoney } from '../../../../../../utils/format';
