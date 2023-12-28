@@ -86,7 +86,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
 
 
   return (
-    <div className="fixed left-0 top-0 right-0 bottom-0 z-[1005] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
+    <div className="z-[1005] fixed left-0 top-0 right-0 bottom-0 flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
       <div className={cx("fixed  bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] rounded-lg", {
         "w-[80%]": !isMobile,
         "w-[90%] h-[90%]": isMobile

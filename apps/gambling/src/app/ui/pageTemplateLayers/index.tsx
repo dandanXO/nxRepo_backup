@@ -21,6 +21,8 @@ import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
 import {IOpenNotificationWithIcon} from "../pageTemplate";
 import { RootState } from "../../reduxStore";
 import { uiSlice } from "../../reduxStore/uiSlice";
+import {GameSearchModal} from "../modals/GameSearchModal";
+import {useClickFavoriteGameItem} from "../hooks/useClickFavoriteGameItem";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -80,6 +82,8 @@ export const PageTemplateLayers = ({
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isShowGameSearchModal } = useSelector((state: RootState) => state.app);
+  const { userFavorite, onClickFavoriteGameItem } = useClickFavoriteGameItem()
 
   return (
     <>
@@ -174,6 +178,13 @@ export const PageTemplateLayers = ({
             onClickToOpenTelegramService={onClickToOpenTelegramService}
           />
       )}
+
+      {/*NOTICE: GameSearchModal*/}
+      {isShowGameSearchModal && <GameSearchModal
+        userFavorite={userFavorite}
+        onClickFavoriteGameItem={onClickFavoriteGameItem}
+        onClose={() => dispatch(appSlice.actions.setShowGameSearchModal(false))}
+      />}
 
     </>
   )

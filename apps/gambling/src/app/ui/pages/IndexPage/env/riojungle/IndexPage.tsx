@@ -18,7 +18,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { CompanySloganLabel } from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { Container } from "../../../../components/container/Container";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { ScrollTab } from "../../../../components/TabItem/ScrollTab";
 
@@ -48,6 +48,7 @@ import favorite from "./assets/index-tab-favorite.png"
 import fishing from "./assets/index-tab-fishing.png";
 import recent from "./assets/index-tab-recent.png";
 import { AppCarouselContent6 } from "../../Carousel/env/riojungle/AppCarouselContent6";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number[] },
@@ -93,8 +94,8 @@ export const IndexPage = ({
 }: ICoco777betIndexPage) => {
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isLogin } = useSelector((state: RootState) => state.app);
-  const [isSearch, setIsSearch] = useState(false);
 
   const { onClickToSearch, onClickGameItem } = usePageNavigate();
 
@@ -175,8 +176,8 @@ export const IndexPage = ({
   return (
     <>
       <Container >
-        {/*NOTICE: refactor*/}
-        {isSearch && <GameSearchModal userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} onClose={() => setIsSearch(false)} />}
+
+
         {isMobile && <CompanySloganLabel />}
 
         <AppCarousel setIsMoving={setIsMoving}>
@@ -211,7 +212,9 @@ export const IndexPage = ({
         <div className={"flex flex-row justify-between items-center w-full"}>
           <IndexTabs />
           {!isMobile && (
-            <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={() => setIsSearch(true)}>
+            <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]"
+                 onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
+            >
               <Input
                 disable={true}
                 pureContainer={true}
