@@ -28,6 +28,7 @@ export const DesktopGameNumber = 30;
 export const IndexPage = () => {
   const { isMobile } = useBreakpoint();
   const { hotBrandGameList = [], allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
+  console.log('hotBrandGameList----',hotBrandGameList)
   // const [activeTab, setActiveTab] = useState("Todos");
   // "Salão"
   const [activeTab, setActiveTab] = useState("Todos");

@@ -1,7 +1,7 @@
 import cx from 'classnames';
 export const TabItem = (props: { active: boolean; icon?: string; name: string; onClick: () => void }) => {
   return (
-    <div onClick={props.onClick} className={cx(`text-white text-xs lg:text-sm flex flex-row justify-center items-center  rounded-[100px] font-normal`,
+    <div onClick={props.onClick} className={cx(`whitespace-nowrap text-white text-xs lg:text-sm flex flex-row justify-center items-center  rounded-[100px] font-normal`,
       {
         'py-2.5 px-4': props?.icon !== undefined,
         'py-3 lg:py-2.5 px-8 lg:px-9': props?.icon === undefined,

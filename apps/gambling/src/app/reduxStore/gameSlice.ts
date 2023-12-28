@@ -11,6 +11,8 @@ type GameType = {
     order: number;
   }[];
 }
+
+
 interface SubGameType {
   subGameType: string;
   games: GameType[];
@@ -27,13 +29,15 @@ export type InitialState = {
   hotBrandGameList: GameListType[];
   typeGameList: GameType[];
   label: string[];
+  typeGameCount: { [key: string]: number }
 }
 
 const initGameList: InitialState = {
   allGameList: [],
   hotBrandGameList: [],
-  typeGameList:[],
+  typeGameList: [],
   label: [],
+  typeGameCount: {}
 }
 
 // NOTICE: refactor me
@@ -113,7 +117,22 @@ export const gameSlice = createSlice({
       state.allGameList = allGameList;
       state.hotBrandGameList = hotBrandGameList;
       state.typeGameList = typeGameList;
-      // console.log('allGame',typeGameList)
+      // console.log('allGameList',allGameList)
+
+      const allGameListCount = allGameList.reduce((acc: any, item: any) => {
+        return acc + (item.data?.games.length || 0);
+      }, 0);
+
+      const typeGameCount = allGameList !== undefined && allGameList?.reduce((acc: any, item: any) => {
+        const gameType = item?.gameType;
+        console.log('gameType', gameType)
+        if (gameType) {
+          return { ...acc, ...{ [item?.gameType]: item.data.games.length } }
+        }
+      }, { Todos: allGameListCount });
+      state.typeGameCount = typeGameCount
+      // console.log(typeGameCount);
+      // console.log('gameTypeCount',allGameListCount)
     },
   },
 });

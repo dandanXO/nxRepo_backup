@@ -40,7 +40,7 @@ export const DragScrollContainer = (props: IDragScrollContainer) => {
     }
   );
   return (
-    <div className={cx('overflow-x-auto no-scrollbar', props.className)} {...bind()} ref={contentRef}>
+    <div className={cx('overflow-x-auto no-scrollbar cursor-pointer', props.className)} {...bind()} ref={contentRef}>
       {props.children}
     </div>
   )
