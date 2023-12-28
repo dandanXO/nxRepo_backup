@@ -200,11 +200,11 @@ export const PageTemplate = ({
 
       {!inNativeApp && (
         <div
-          className={twMerge("fixed w-full",
+          className={twMerge("fixed w-full flex justify-center",
             AddShortCutZIndex,
           )}
           style={{
-            bottom: 16,
+            bottom: 20,
           }}
         >
           {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}

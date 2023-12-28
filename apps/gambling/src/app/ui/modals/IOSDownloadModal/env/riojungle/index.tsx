@@ -17,7 +17,7 @@ export const RiojungleIOSDownloadModal = () => {
       <div
         className={
           // NOTE:
-          "w-full h-[98%] max-h-[740px] fixed bottom-0 px-4"
+          "w-full max-h-[740px] fixed bottom-0 px-4"
         }
         onClick={(event) => {
           event.stopPropagation();
@@ -32,7 +32,7 @@ export const RiojungleIOSDownloadModal = () => {
             Adicione à tela inicial
           </div>
 
-          <div className={"max-h-full overflow-y-auto pb-4"}>
+          <div className={"max-h-full overflow-y-auto -mb-2"}>
             <div className="text-lg leading-5 text-white mb-4">
               Toque no ícone “Mais” e, em seguida, toque em Adicionar ao ecrã principal
             </div>
@@ -98,12 +98,12 @@ export const RiojungleIOSDownloadModal = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <img
+            <img
                   src={`assets/${environment.assetPrefix}/hand1.png`}
                   alt="hand icon"
-                  className="w-12 h-12 relative left-[45%] bottom-0"
+                  className="w-12 h-12 relative left-[50%] -translate-x-2/4 bottom-2"
                 />
+          </div>
         </div>
       </div>
     </div>
