@@ -177,8 +177,7 @@ export const IndexPage = ({
     <>
       <Container >
 
-
-        {isMobile && <CompanySloganLabel />}
+        {/*{isMobile && <CompanySloganLabel />}*/}
 
         <AppCarousel setIsMoving={setIsMoving}>
           <AppCarouselContent isMoving={isMoving} />
