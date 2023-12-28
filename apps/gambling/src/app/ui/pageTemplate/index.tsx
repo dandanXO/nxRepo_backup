@@ -44,11 +44,11 @@ export const PageTemplate = (props: IPage) => {
   const dispatch = useDispatch();
 
   // const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
-  const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
+  const {openMenuDrawer, openUserInfoStatusPopover} = useSelector((state: RootState) => state.ui);
   const setOpenMenuDrawer = (show: boolean) => {
     dispatch(uiSlice.actions.setOpenMenuDrawer(show));
   }
-  const {isMobile} = useBreakpoint();
+  const {isMobile, isDesktop} = useBreakpoint();
 
   useEffect(() => {
     if(!isMobile) {
@@ -105,18 +105,15 @@ export const PageTemplate = (props: IPage) => {
     autoWindowFocusRefresh: false,
   });
 
-  // NOTE: UserInfoStatusDrawer
-  const [openDesktopUserInfoStatusDrawer, setOpenDesktopUserInfoStatusDrawer] = useState(false);
-
   useEffect(() => {
-    if(isMobile && openDesktopUserInfoStatusDrawer) {
-      setOpenDesktopUserInfoStatusDrawer(false)
+    if(!isDesktop && openUserInfoStatusPopover) {
+      dispatch(uiSlice.actions.closeUserInfoStatusPopover());
     }
-  }, [isMobile]);
+  }, [isDesktop]);
 
   useEffect(() => {
-    if(openDesktopUserInfoStatusDrawer) update();
-  }, [openDesktopUserInfoStatusDrawer])
+    if(openUserInfoStatusPopover) update();
+  }, [openUserInfoStatusPopover])
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
   // useEffect(() => {
@@ -147,7 +144,10 @@ export const PageTemplate = (props: IPage) => {
     isShowMobileFooter,
     isShowDesktopFooter,
     isShowTabbar,
-  } = useSingletonPageTemplateConfig(props);
+  } = useSingletonPageTemplateConfig({
+    ...props,
+    showDesktopMenuDrawer: props. showDesktopMenuDrawer && openMenuDrawer,
+  });
 
   // const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
   // const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
@@ -195,9 +195,6 @@ export const PageTemplate = (props: IPage) => {
   const location = useLocation();
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
 
-  // NOTE: hideAddToMobileShortcut, isShowiOSDownloadPopover
-  const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
-  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
 
   useEffect(() => {
     const handleStorage = () => {
@@ -211,7 +208,7 @@ export const PageTemplate = (props: IPage) => {
   }, [])
 
 
-  const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
+
 
   return (
     <>
@@ -229,8 +226,6 @@ export const PageTemplate = (props: IPage) => {
 
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
-            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             openDesktopNotificationDrawer={openDesktopNotificationDrawer}
             setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
             setOpenLogoutPopover={setOpenLogoutPopover}
@@ -269,8 +264,6 @@ export const PageTemplate = (props: IPage) => {
 
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
-            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             openDesktopNotificationDrawer={openDesktopNotificationDrawer}
             setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
             setOpenLogoutPopover={setOpenLogoutPopover}
@@ -314,8 +307,6 @@ export const PageTemplate = (props: IPage) => {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
-            setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
             openDesktopNotificationDrawer={openDesktopNotificationDrawer}
             setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
             setOpenLogoutPopover={setOpenLogoutPopover}
@@ -356,8 +347,6 @@ export const PageTemplate = (props: IPage) => {
           isLogin={isLogin}
           setIsLogin={setIsLogin}
           showLoginModal={showLoginModal}
-          setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
-          openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
           openDesktopNotificationDrawer={openDesktopNotificationDrawer}
           setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
           setOpenLogoutPopover={setOpenLogoutPopover}
@@ -392,8 +381,6 @@ export const PageTemplate = (props: IPage) => {
         openNotificationWithIcon={openNotificationWithIcon}
         isShowMobileLogoutModal={isShowMobileLogoutModal}
         setOpenLogoutPopover={setOpenLogoutPopover}
-        openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
-        setOpenDesktopUserInfoStatusDrawer={setOpenDesktopUserInfoStatusDrawer}
         openDesktopNotificationDrawer={openDesktopNotificationDrawer}
         setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
         isShowDepositModal={isShowDepositModal}
@@ -408,14 +395,8 @@ export const PageTemplate = (props: IPage) => {
         onClickToOpenTelegramService={onClickToOpenTelegramService}
       />
 
-      {!inNativeApp && (
-        <>
-          {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
-          {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
-        </>
-      )}
-      {contextHolder}
 
+      {contextHolder}
     </>
   )
 

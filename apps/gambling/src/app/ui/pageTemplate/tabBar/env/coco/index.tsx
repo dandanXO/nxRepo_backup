@@ -1,27 +1,13 @@
-import {environment} from "../../../../../../environments/environment";
-import {RootState} from "../../../../../reduxStore";
-import {useDispatch, useSelector} from "react-redux";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
-import {appSlice} from "../../../../../reduxStore/appSlice";
-import {useLocation, useNavigate} from "react-router";
+import {useLocation} from "react-router";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {AssetMappingCoco} from "../../../../../../assets/assetMapping.coco";
+import {ITabBar} from "../../type";
 
-export type IFooter = {
-  isShowHome?: boolean;
-  isShowSlot?: boolean;
-  isShowInvite?: boolean;
-  isShowVIP?: boolean;
-  isShowProfile?: boolean;
-  size?: "big" | "small"
-}
 
-export const TabBar = (props: IFooter) => {
+export const TabBar = (props: ITabBar) => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const {isLogin} = useSelector((state: RootState) => state.app)
   const showHome = props.isShowHome === undefined ? true : props.isShowHome;
   const showSlot = props.isShowSlot === undefined ? true : props.isShowSlot;
   const showInvite = props.isShowInvite === undefined ? true : props.isShowInvite;
@@ -40,6 +26,7 @@ export const TabBar = (props: IFooter) => {
     onClickToVipGrade,
     onClickToProfile,
   } = usePageNavigate();
+
   return (
     <footer
       className={cx("fixed bottom-0 flex flex-row justify-between h-[60px] z-10 w-full",

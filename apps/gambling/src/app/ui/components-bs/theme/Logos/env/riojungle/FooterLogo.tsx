@@ -1,13 +1,16 @@
 import React from "react";
 import {environment} from "../../../../../../../environments/environment";
-import cx from "classnames";
+import {twMerge} from "tailwind-merge";
 
 type IFooterLogo = {
   className?: string;
 }
 export const FooterLogo = (props: IFooterLogo) => {
   return (
-    <img alt="logo-footer" className={cx("w-[50px] h-[50px]",
-    )} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo-footer.png`}/>
+    <img
+      alt="logo-footer"
+      className={twMerge("w-[82px] h-[32px]", props.className)}
+      src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo.png`}
+    />
   )
 }

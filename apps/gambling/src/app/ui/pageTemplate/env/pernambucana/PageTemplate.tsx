@@ -7,7 +7,7 @@ import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
 import {Footer} from "../../footer/env/coco/Footer";
 import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../Toolbox";
+import {Toolbox} from "../../Toolbox/env/coco";
 import {ThreeDots} from "react-loading-icons";
 import React from "react";
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
@@ -78,8 +78,6 @@ type IProps = {
   isLogin: boolean;
   setIsLogin: (value: any) => void;
   showLoginModal: (value: any) => void;
-  setOpenDesktopUserInfoStatusDrawer: (value: any) => void;
-  openDesktopUserInfoStatusDrawer: boolean;
   openDesktopNotificationDrawer: boolean;
   setOpenDesktopNotificationDrawer: (value: any) => void;
   setOpenLogoutPopover: (value: any) => void;
@@ -114,8 +112,6 @@ export const PageTemplate = ({
                                                  isLogin,
                                                  setIsLogin,
                                                  showLoginModal,
-                                                 setOpenDesktopUserInfoStatusDrawer,
-                                                 openDesktopUserInfoStatusDrawer,
                                                  openDesktopNotificationDrawer,
                                                  setOpenDesktopNotificationDrawer,
                                                  setOpenLogoutPopover,
@@ -156,9 +152,6 @@ showToolboxConfig
             showLoginModal(true)
           }}
           className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
-          onClickToPopupUserInfoStatusPopover={() => {
-            setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
-          }}
           onClickToOpenNotificationDrawer={() => {
             setOpenDesktopNotificationDrawer(true)
           }}

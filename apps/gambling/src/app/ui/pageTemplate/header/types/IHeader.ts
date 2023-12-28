@@ -6,9 +6,6 @@ export type IHeader = {
   onClickUserLoginStatusDrawer: () => void;
   onClickToChangeLogoutPopover: (display: boolean) => void;
 
-  openDesktopUserInfoStatusDrawer: boolean;
-
-  onClickToPopupUserInfoStatusPopover: () => void;
   onClickToOpenNotificationDrawer: () => void;
 
   onClickToDownload: () => void;

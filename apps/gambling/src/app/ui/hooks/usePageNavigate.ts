@@ -6,6 +6,8 @@ import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import { GameItem } from "../components-bs/GameTypeSection";
 import { AppLocalStorage } from "../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
+import useBreakpoint from "./useBreakpoint";
+import { uiSlice } from "../../reduxStore/uiSlice";
 
 
 export interface IQueryStringProps{
@@ -24,6 +26,7 @@ export const usePageNavigate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
+  const { isDesktop } = useBreakpoint();
 
   const onClickToIndex = () => {
     navigate(PageOrModalPathEnum.IndexPage)
@@ -78,6 +81,14 @@ export const usePageNavigate = () => {
     }
   }
 
+  const onClickToNotification = () => {
+    if(!isLogin) {
+      dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+    } else {
+      navigate(PageOrModalPathEnum.NotificationPage)
+    }
+  }
+
   const onClickToCheckInDaily = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
@@ -109,7 +120,9 @@ export const usePageNavigate = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
-      navigate(PageOrModalPathEnum.MyPage)
+      if(!isDesktop){
+        navigate(PageOrModalPathEnum.MyPage)
+      }
     }
   }
 
@@ -142,7 +155,7 @@ export const usePageNavigate = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
-      navigate(`${PageOrModalPathEnum.GamePage}?gameId=${item.gameId}&label=${item.type === "null" ? item.label : item.type}`)
+      navigate(`${PageOrModalPathEnum.GamePage}?gameName=${item.name}&gameId=${item.gameId}&label=${item.type === "null" ? item.label : item.type}`)
       addGameToRecent(item)
     }
   }
@@ -216,5 +229,6 @@ export const usePageNavigate = () => {
     onClickToOpenTelegramService,
     onClickToOpenTelegramManager,
     onClickToOpenTelegramGroup,
+    onClickToNotification,
   }
 }

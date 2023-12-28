@@ -56,8 +56,9 @@ export const RechargeActivityPage = () => {
         }
       />
       {renderByPlatform({
+        "wild777bet": <WRechargeActivityContent />,
         "coco777bet": <CRechargeActivityContent />,
-        "wild777bet": <WRechargeActivityContent />
+        "riojungle777bet": <CRechargeActivityContent />,
       }, <PRechargeActivityContent />)};
     </div>
   )

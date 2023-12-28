@@ -1,4 +1,4 @@
-import {LogoutSection} from "../../components-bs/LogoutSection";
+import {LogoutSection} from "../../components-bs/UserLogoutSection";
 import {LogoutPopoverContainer} from "./LogoutPopoverContainer";
 
 type ILogoutPopover = {

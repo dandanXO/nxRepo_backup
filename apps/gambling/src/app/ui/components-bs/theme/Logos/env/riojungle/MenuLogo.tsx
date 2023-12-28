@@ -1,13 +1,15 @@
 import {environment} from "../../../../../../../environments/environment";
 import React from "react";
+import {twMerge} from "tailwind-merge";
+import {ILogo} from "../types";
 
-export const MenuLogo = () => {
+export const MenuLogo = (props: ILogo) => {
   return (
     <img
       alt="logo-menu"
       // className="max-w-[56px] max-h-[56px]"
-      className="max-w-[160px] max-h-[66px]"
-      src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo-menu.png`}
+      className={twMerge("w-[148px] h-[58px]", props.className)}
+      src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo.png`}
     />
   )
 }

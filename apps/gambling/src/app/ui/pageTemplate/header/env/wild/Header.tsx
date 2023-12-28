@@ -5,7 +5,7 @@ import { ConfirmButton } from "../../../../components-bs/theme/Buttons/ConfirmBu
 import { UserMoneyStatusSection } from "../../UserMoneyStatusSection";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { MessageCountBadge } from "../../../../components/MessageCountBadge";
 import { environment } from "../../../../../../environments/environment";
@@ -18,6 +18,7 @@ import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
+import { uiSlice } from "../../../../../reduxStore/uiSlice";
 
 
 const Notification = styled.section`
@@ -48,11 +49,9 @@ const DirectionIcon  = styled.img<{
 export type IHeader = {
   className?: string;
   onClickUserLoginStatusDrawer: () => void;
-  onClickToPopupUserInfoStatusPopover: () => void;
   isLogin: boolean;
   onClickToOpenNotificationDrawer: () => void;
   openLogoutPopover: boolean;
-  openDesktopUserInfoStatusDrawer: boolean;
   onClickToChangeLogoutPopover: (display: boolean) => void;
   onClickToDownload: () => void;
 }
@@ -86,9 +85,11 @@ export const Header = (props: IHeader) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
   const { isLogin, messageCount } = useSelector((state: RootState) => state.app);
+  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui);
   const [hover, setHover] = useState(false);
   const {onClickToIndex,onClickToInvite,onClickToVipGrade} = usePageNavigate();
 
+  const dispatch = useDispatch();
 
   return (
     <header
@@ -162,14 +163,14 @@ export const Header = (props: IHeader) => {
 
           <section
             className='flex gap-4 items-center mr-6 py-5'
-            onClick={()=>props.onClickToPopupUserInfoStatusPopover()}
+            onClick={()=>dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}
           >
             <CocoAvatar />
             <div>
               <div className='text-lg text-white flex gap-2'>
                 <div>{user.nickname}</div>
                 <DirectionIcon
-                  active={props.openDesktopUserInfoStatusDrawer}
+                  active={openUserInfoStatusPopover}
                   className='mx-auto my-auto'
                   src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAMAAAA/D5+aAAAATlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////+QlxstAAAAGnRSTlMAmWYJlZFeE4yBcU0xIRCJfGxZR0Q4LCYcBOMgs9gAAABiSURBVBjTjc9HDoAgAETRURCUZm/3v6iKhtA0vu1fTAafZJlixiZRpCpuE2mSQlfceB2n2a3pKiwScFRQGHyTV8SOwOBKQxDpn1JzxEhnC9VImfZKCjnbeWFE3kIZ3hD8dAA6kgJgxoBGKwAAAABJRU5ErkJggg=='
                 />

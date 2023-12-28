@@ -1,5 +1,10 @@
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {environment} from "../../../../environments/environment";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../../reduxStore";
+import {useEffect} from "react";
+import {appSlice} from "../../../reduxStore/appSlice";
+import {uiSlice} from "../../../reduxStore/uiSlice";
 
 export type IUseSingletonPageTemplateConfig = {
   showMobileHeader?: boolean;
@@ -10,7 +15,7 @@ export type IUseSingletonPageTemplateConfig = {
   showTabbar?: boolean;
 }
 export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateConfig) => {
-  const {isMobile} = useBreakpoint();
+  const {isMobile, isDesktop, isTablet} = useBreakpoint();
 
   // Header
   const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
@@ -26,17 +31,32 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
 
   // NOTICE:
   const isShowDesktopMenuDrawer = props.showDesktopMenuDrawer === undefined ? true : props.showDesktopMenuDrawer;
-  const showDesktopMenuDrawerFlag = environment.app && environment.app.isDesktopShowMenuDrawer ? !isMobile: isMobile;
+  const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
+
+  // const showDesktopMenuDrawerFlag = isMobile ? openMenuDrawer : environment.app && environment.app.isDesktopShowMenuDrawer && isDesktop;
+  const showDesktopMenuDrawerFlag = openMenuDrawer;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if(isMobile || isTablet) {
+      dispatch(uiSlice.actions.setOpenMenuDrawer(false));
+    } else {
+      dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+    }
+  }, [isMobile, isDesktop, isTablet])
+
+  // NOTICE: refactor me
+  const isPlatformShowTabBarFlag = environment.assetPrefix === "riojungle777bet" && (isMobile || isTablet);
 
   return {
     isShowMobileHeader: isShowMobileHeader && isMobile,
     isShowDesktopHeader: isShowDesktopHeader && !isMobile,
-    isShowDesktopMenuDrawer: isShowDesktopMenuDrawer && showDesktopMenuDrawerFlag,
+    // isShowDesktopMenuDrawer: isShowDesktopMenuDrawer && showDesktopMenuDrawerFlag && openMenuDrawer,
+    isShowDesktopMenuDrawer: showDesktopMenuDrawerFlag,
 
     isShowMobileFooter: isShowMobileFooter && isMobile,
     isShowDesktopFooter: isShowDesktopFooter && !isMobile,
     //NOTE: refactor
-    isShowTabbar: isShowTabbar && isMobile,
-    isShowMobileTabbar: isShowMobileTabbar && isMobile,
+    isShowTabbar: isShowTabbar && isPlatformShowTabBarFlag,
   }
 }

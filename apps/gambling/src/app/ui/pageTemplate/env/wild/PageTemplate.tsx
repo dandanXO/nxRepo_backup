@@ -8,7 +8,7 @@ import {Footer} from "../../footer/env/wild/Footer";
 
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
-import {Toolbox} from "../../Toolbox";
+import {Toolbox} from "../../Toolbox/env/coco";
 
 import {TabBar} from "../../tabBar/env/coco";
 
@@ -77,8 +77,6 @@ type ICoco777betIndexPageTemplate = {
   isLogin: boolean;
   setIsLogin: (value: any) => void;
   showLoginModal: (value: any) => void;
-  setOpenDesktopUserInfoStatusDrawer: (value: any) => void;
-  openDesktopUserInfoStatusDrawer: boolean;
   openDesktopNotificationDrawer: boolean;
   setOpenDesktopNotificationDrawer: (value: any) => void;
   setOpenLogoutPopover: (value: any) => void;
@@ -113,8 +111,6 @@ export const PageTemplate = ({
                                          isLogin,
                                          setIsLogin,
                                          showLoginModal,
-                                         setOpenDesktopUserInfoStatusDrawer,
-                                         openDesktopUserInfoStatusDrawer,
                                          openDesktopNotificationDrawer,
                                          setOpenDesktopNotificationDrawer,
                                          setOpenLogoutPopover,
@@ -164,9 +160,6 @@ export const PageTemplate = ({
               showLoginModal(true)
             }}
             className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
-            onClickToPopupUserInfoStatusPopover={() => {
-              setOpenDesktopUserInfoStatusDrawer(!openDesktopUserInfoStatusDrawer)
-            }}
             onClickToOpenNotificationDrawer={() => {
               setOpenDesktopNotificationDrawer(true)
             }}
@@ -175,7 +168,6 @@ export const PageTemplate = ({
             }}
             onClickToDownload={onClickToDownload}
             openLogoutPopover={isShowMobileLogoutModal}
-            openDesktopUserInfoStatusDrawer={openDesktopUserInfoStatusDrawer}
           />
         )}
 

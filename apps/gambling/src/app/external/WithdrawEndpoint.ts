@@ -27,7 +27,7 @@ export interface WithdrawRequest {
 export const WithdrawEndpoint = (builder: ExternelEndpoint) =>
   builder.mutation<WithdrawResponse, WithdrawRequest>({
   query: (requestData: WithdrawRequest) => ({
-    url: "/prod-api/payment/balance-less",
+    url: `/prod-api/payment/balance-less`,
     method: "post",
     data: requestData,
   })
