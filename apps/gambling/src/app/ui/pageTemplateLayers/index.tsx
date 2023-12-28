@@ -16,13 +16,14 @@ import {LogoutPopover} from "../popovers/LogoutPopover";
 import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
 
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
-import {IQueryStringProps} from "../hooks/usePageNavigate";
+import {IQueryStringProps, usePageNavigate} from "../hooks/usePageNavigate";
 import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
 import {IOpenNotificationWithIcon} from "../pageTemplate";
 import { RootState } from "../../reduxStore";
 import { uiSlice } from "../../reduxStore/uiSlice";
 import {GameSearchModal} from "../modals/GameSearchModal";
 import {useClickFavoriteGameItem} from "../hooks/useClickFavoriteGameItem";
+import {TelegramMobileModal} from "../modals/TelegramMobileModal";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -84,6 +85,11 @@ export const PageTemplateLayers = ({
   const dispatch = useDispatch();
   const { isShowGameSearchModal } = useSelector((state: RootState) => state.app);
   const { userFavorite, onClickFavoriteGameItem } = useClickFavoriteGameItem()
+  const {isShowTelegramMobileModal} = useSelector((state: RootState) => state.app);
+
+  const {
+    onClickToOpenTelegramManager,
+  } = usePageNavigate();
 
   return (
     <>
@@ -185,6 +191,16 @@ export const PageTemplateLayers = ({
         onClickFavoriteGameItem={onClickFavoriteGameItem}
         onClose={() => dispatch(appSlice.actions.setShowGameSearchModal(false))}
       />}
+
+      {isShowTelegramMobileModal && (
+        <TelegramMobileModal
+          onClickToOpenTelegramService={onClickToOpenTelegramService}
+          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+          onClose={() => {
+            dispatch(appSlice.actions.setShowTelegramMobileModal(false))
+          }}
+        />
+      )}
 
     </>
   )

@@ -44,7 +44,6 @@ const ListItem = (props: { count: string; text: string; }) => {
 export const TelegramPage = () => {
   useAllowLoginRouterRules();
 
-  const navigate = useNavigate();
   const { isMobile } = useBreakpoint();
 
   const telegramId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);

@@ -46,19 +46,6 @@ export const Toolbox = (props: IToolbox) => {
 
   return (
     <>
-      {/*NOTICE: refactor em */}
-      {
-        isShowTelegramMobileModal && (
-          <TelegramMobileModal
-            onClickToOpenTelegramService={props.onClickToOpenTelegramService}
-            onClickToOpenTelegramManager={props.onClickToOpenTelegramManager}
-            onClose={() => {
-              dispatch(appSlice.actions.setShowTelegramMobileModal(false))
-            }}
-          />
-        )
-      }
-
       {
         isMobile && mobileShowToolbox && (mobileShowDownload || mobileShowCustomerService) && (
           <div className={"z-10 fixed right-[16px] bottom-[68px]"}>

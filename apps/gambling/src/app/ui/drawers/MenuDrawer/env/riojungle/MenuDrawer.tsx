@@ -27,6 +27,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useDispatch, useSelector} from "react-redux";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CloseICON} from "../../../../components-bs/env/riojungle/CloseICON";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 
 
 type IGameType = "Slots" | "Fishing" | "Vivo" | "Viver";
@@ -280,7 +281,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
             })}
                     onClick={() => {
-                      onClickToTelegram();
+                      dispatch(appSlice.actions.setShowTelegramMobileModal(true))
                       close();
                     }}
             >

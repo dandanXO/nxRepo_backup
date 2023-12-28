@@ -45,23 +45,10 @@ export const Toolbox = (props: IToolbox) => {
 
   const {isDesktop, isMobile} = useBreakpoint();
   const dispatch=useDispatch();
-  const {isShowTelegramMobileModal} = useSelector((state: RootState) => state.app);
+
 
   return (
     <>
-      {/*NOTICE: refactor em */}
-      {
-        isShowTelegramMobileModal && (
-          <TelegramMobileModal
-            onClickToOpenTelegramService={props.onClickToOpenTelegramService}
-            onClickToOpenTelegramManager={props.onClickToOpenTelegramManager}
-            onClose={() => {
-              dispatch(appSlice.actions.setShowTelegramMobileModal(false))
-            }}
-          />
-        )
-      }
-
       {
         !isDesktop && mobileShowToolbox && (mobileShowDownload || mobileShowCustomerService) && (
           <div className={twMerge(props.className)}>
