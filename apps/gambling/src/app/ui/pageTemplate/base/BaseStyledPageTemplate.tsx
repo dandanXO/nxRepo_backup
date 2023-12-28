@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import {environment} from "../../../../environments/environment";
-import {appSlice} from "../../../reduxStore/appSlice";
-import {unknown} from "zod";
 
 type IStyledPage = {
   style?: unknown;

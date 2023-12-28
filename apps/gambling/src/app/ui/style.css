@@ -29,7 +29,7 @@ html,
 body {
   /*height: 100%;*/
   font-family: var(--font-family);
-  background: var(--unknown);
+  background: var(--page-background);
 }
 
 html {
