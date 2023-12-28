@@ -1,10 +1,12 @@
 import {twMerge} from "tailwind-merge";
 import {ConfirmButton as COCOConfirmButton } from "../../theme/Buttons/ConfirmButton";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
+import cx from "classnames";
 
 type IButton = {
   children: React.ReactNode;
   disable?: boolean;
+  className?: string;
 }
 const RiojungleConfirmButton = (props: IButton) => {
   return (
@@ -27,7 +29,7 @@ const RiojungleConfirmButton = (props: IButton) => {
 
 const CocoConfirmButton = (props: IButton) => {
   return (
-    <COCOConfirmButton className="!w-full text-sm md:text-base my-2">{props.children}</COCOConfirmButton>
+    <COCOConfirmButton className={cx("!w-full text-sm md:text-base my-2", props.className)}>{props.children}</COCOConfirmButton>
   )
 }
 

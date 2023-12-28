@@ -17,19 +17,20 @@ import {CarouselTitleSection} from "./CarouselTitleSection";
 
 export const AppCarouselContent3 = (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
-  const {onClickToInvite} = usePageNavigate();
-  const invite_hig_reward = useSelector((rootState: RootState) => rootState.app.config.invite_hig_reward)
+  const {onClickToVipGrade} = usePageNavigate();
   return (
     <CarouselContainer
       isMoving={props.isMoving}
       className={"text-[22.5px] text-white"}
       onClickBanner={(event) => {
-        onClickToInvite();
+        onClickToVipGrade();
       }}
     >
       <div className={""}>
         <CarouselTitleSection>
-          A maior recompensa<br/>para uma pessoa é R${invite_hig_reward}
+          Venha e colete<br/>
+          Recompensas VIP<br/>
+          VIP0 Pode Retirar<br/>
         </CarouselTitleSection>
         {isMobile ? (
           <CarouselImage alt={"h5_banner_3"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_3.png`}/>

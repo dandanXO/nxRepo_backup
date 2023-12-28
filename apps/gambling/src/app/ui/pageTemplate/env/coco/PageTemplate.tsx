@@ -7,7 +7,6 @@ import {Footer} from "../../footer/env/coco/Footer";
 
 import {TabBar} from "../../tabBar/env/coco";
 import {Toolbox} from "../../Toolbox/env/coco";
-import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../header/env/coco/Header";

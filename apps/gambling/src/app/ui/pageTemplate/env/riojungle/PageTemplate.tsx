@@ -6,7 +6,6 @@ import React from "react";
 
 import {Footer} from "../../footer";
 
-import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {BaseLoadingOverlay} from "../../base/BaseLoadingOverlay";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";

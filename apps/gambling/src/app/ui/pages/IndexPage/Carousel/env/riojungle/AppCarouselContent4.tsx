@@ -17,23 +17,19 @@ import {CarouselTitleSection} from "./CarouselTitleSection";
 
 export const AppCarouselContent4 = (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
-  const {onClickToVipGrade} = usePageNavigate();
+  const {onClickToCheckInDaily} = usePageNavigate();
 
   return (
     <CarouselContainer
       isMoving={props.isMoving}
       className={"text-[22.5px] text-white"}
       onClickBanner={(event) => {
-        onClickToVipGrade();
+        onClickToCheckInDaily();
       }}
     >
       <div className={""}>
         <CarouselTitleSection className={"sm:top-[45%] md:top-[45%]"}>
-          Prêmio upgrade VIP
-          <br/>
-          Só esperando você coletar!
-          <br/>
-          VIP0 Pode Retirar
+          Colete denheiro sem parar todos os dias!
         </CarouselTitleSection>
 
         {isMobile ? (

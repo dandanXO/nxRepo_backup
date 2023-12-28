@@ -1,19 +1,22 @@
 import {PhoneSvg} from "../../../theme/Icons/PhoneSvg";
 import {KeySvg} from "../../../theme/Icons/KeySvg";
 
-import {Input as DesktopInput, Input} from "../../../theme/Inputs/Input";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
-import {MobileInput} from "../../../theme/Inputs/MobileInput";
+
+
 import {HidableEyeSvg} from "../../../theme/Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../components/PhonePrefix";
 import {useUserLoginForm} from "../../hooks/useUserLoginForm";
+
+
+import {renderByPlatform} from "../../../../utils/renderByPlatform";
+
 import {ConfirmButton} from "../../components/ConfirmButton";
+import {ConfirmButton as CocoConfirmButton} from "../../../theme/Buttons/ConfirmButton";
+
+import {Input} from "../../../theme/Inputs/Input";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
-  const customInputStyle = {
-    border: "1px solid var(--main-primary-main)",
-  };
 
   const valid = data.length === 10 || data.length === 11;
   if(valid) {
@@ -70,9 +73,6 @@ type IUserLoginForm = {
   onSwitchToForgetPassword: () => void;
 }
 export const UserLoginForm = (props: IUserLoginForm) => {
-  const {isMobile} = useBreakpoint();
-  const Input = isMobile ? MobileInput : DesktopInput;
-
   const {
     phoneInput,
     setPhoneInput,
@@ -134,9 +134,22 @@ export const UserLoginForm = (props: IUserLoginForm) => {
             }}
           >Esqueça A Eenha?</button>
 
-          <div onClick={onFormConfirm}>
-            <ConfirmButton>Entrar</ConfirmButton>
-          </div>
+          {renderByPlatform({
+            "coco777bet": (
+              <div className={"w-full"} onClick={() => onFormConfirm()}>
+                <CocoConfirmButton className="!w-full text-sm md:text-base my-2" >Entrar</CocoConfirmButton>
+              </div>
+            ),
+            "riojungle777bet": (
+              <div className={"w-full"} onClick={() => onFormConfirm()}>
+                <ConfirmButton>Entrar</ConfirmButton>
+              </div>
+            )
+          }, (
+            <div className={"w-full"} onClick={() => onFormConfirm()}>
+              <CocoConfirmButton className="!w-full text-sm md:text-base my-2" >Entrar</CocoConfirmButton>
+            </div>
+          ))}
 
         </section>
 
