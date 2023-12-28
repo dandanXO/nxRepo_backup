@@ -1,4 +1,5 @@
 import {renderByPlatform} from "../../utils/renderByPlatform";
+import React from "react";
 
 
 
@@ -13,9 +14,12 @@ const coco777betFixedToolStyle = {
   boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)'
 }
 
+const riojungle777betFixedToolStyle: React.CSSProperties = {
+
+}
 
 export const FixedToolStyle = renderByPlatform({
   "wild777bet": defaultFixedToolStyle,
   "coco777bet": coco777betFixedToolStyle,
-  "riojungle777bet": coco777betFixedToolStyle,
+  "riojungle777bet": riojungle777betFixedToolStyle,
 }, coco777betFixedToolStyle)

@@ -26,6 +26,7 @@ import {twMerge} from "tailwind-merge";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useDispatch} from "react-redux";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
+import {CloseICON} from "../../../../components-bs/env/riojungle/CloseICON";
 
 type IMenuDrawer = {
   className?: string;
@@ -77,18 +78,19 @@ export const MenuDrawer = (props: IMenuDrawer) => {
         }}
       >
         {!isDesktop && (
-          <img
-            alt={"close"}
-            className="absolute right-3 top-3 cursor-pointer" src={closeSVG}
+          <div
+            className={"absolute right-3 top-3"}
             onClick={() => {
-              dispatch(uiSlice.actions.setOpenMenuDrawer(false));
+             dispatch(uiSlice.actions.setOpenMenuDrawer(false));
             }}
-        />)}
+          >
+            <CloseICON
+            />
+          </div>
+        )}
 
         {/*NOTICE: refactor me*/}
         <div className={twMerge("w-full flex flex-col items-start gap-3", (isDesktop) && "pt-7", (isTablet) && "pt-[72px]", (isMobile) && "pt-[64px]")}>
-
-
 
           <div className={"w-full flex flex-col px-5"}>
             <button

@@ -1,5 +1,4 @@
 
-import {CloseCircleOutlined} from "@ant-design/icons";
 import cx from "classnames";
 import {environment} from "../../../../../environments/environment";
 

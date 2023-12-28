@@ -47,6 +47,7 @@ import viver from "./assets/index-tab-viver.png"
 import favorite from "./assets/index-tab-favorite.png"
 import fishing from "./assets/index-tab-fishing.png";
 import recent from "./assets/index-tab-recent.png";
+import { AppCarouselContent6 } from "../../Carousel/env/riojungle/AppCarouselContent6";
 
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number[] },
@@ -184,6 +185,7 @@ export const IndexPage = ({
           <AppCarouselContent3 isMoving={isMoving} />
           <AppCarouselContent4 isMoving={isMoving} />
           <AppCarouselContent5 isMoving={isMoving} />
+          <AppCarouselContent6 isMoving={isMoving} />
           {/*NOTE: 公司簡介目前沒有*/}
           {/*<AppCarouselContent6/>*/}
           {/*NOTE: 暫時備用*/}
@@ -253,7 +255,7 @@ export const IndexPage = ({
       }
 
       <Container className={cx("pb-16", {
-        [DesktopXPadding]: !isMobile,
+        // [DesktopXPadding]: !isMobile,
       })}>
         {gameList()}
       </Container>

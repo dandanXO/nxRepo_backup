@@ -6,7 +6,6 @@ import React from "react";
 
 import {Footer} from "../../footer";
 
-import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {BaseLoadingOverlay} from "../../base/BaseLoadingOverlay";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
@@ -225,7 +224,7 @@ export const PageTemplate = ({
       )}
 
       {showToolboxConfig !== false && (
-        <div className={"z-10 fixed right-[16px] bottom-[100px]"}>
+        <div className={"z-10 fixed right-[16px] bottom-[400px]"}>
           <Toolbox
             className={""}
             showToolboxConfig={showToolboxConfig}

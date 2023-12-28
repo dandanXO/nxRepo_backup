@@ -10,6 +10,8 @@ import { renderByPlatform } from "../../../utils/renderByPlatform";
 import { PlayButton as CPlayButton } from "../env/coco/PlayButton";
 import { PlayButton as WPlayButton } from "../env/wild/PlayButton";
 import { PlayButton as PPlayButton } from "../env/pernambucana/PlayButton";
+import { PlayButton as RPlayButton } from "../env/riojungle/PlayButton";
+
 import { FavoriteSection } from "../FavoriteSection";
 
 export type IGameItem = {
@@ -57,6 +59,7 @@ export const Skeleton = styled.div`
 const DesktopGameItemButton = renderByPlatform({
   "wild777bet": WPlayButton,
   "coco777bet": CPlayButton,
+  "riojungle777bet": RPlayButton,
 // }, PPlayButton)
 }, CPlayButton)
 
