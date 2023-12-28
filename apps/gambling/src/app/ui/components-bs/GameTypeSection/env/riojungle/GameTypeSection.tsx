@@ -13,6 +13,7 @@ import { IGameTypeSection, IGameTypeSectionList } from "../..";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { Button } from "../../../theme/Buttons/env/riojungle/Button";
 import { NoData } from "../../../../components/Table/env/riojungle/NoData";
+import { environment } from "apps/gambling/src/environments/environment";
 
 export type GameItem = {
   name: string;
@@ -50,7 +51,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
           seeMoreText={
             <div className="flex items-center justify-center text-xs md:text-sm lg:text-base p-3 md:py-2.5 md:px-4">
               Ver tudo
-              <ArrowRightOutlined className="ml-1" />
+              <img src={`assets/${environment.assetPrefix}/ArrowRight.png`} className="ml-1 w-[16px]" />
             </div>
           }
         />
