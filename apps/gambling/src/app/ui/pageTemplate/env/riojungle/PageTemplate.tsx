@@ -168,7 +168,9 @@ export const PageTemplate = ({
             top: MenuDrawerTop,
           }}
         >
-          <MenuDrawer/>
+          <MenuDrawer
+            onClickToDownload={onClickToDownload}
+          />
         </div>
       )}
 

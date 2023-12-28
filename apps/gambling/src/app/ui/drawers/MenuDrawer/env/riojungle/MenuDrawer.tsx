@@ -29,6 +29,7 @@ import {uiSlice} from "../../../../../reduxStore/uiSlice";
 
 type IMenuDrawer = {
   className?: string;
+  onClickToDownload: () => void;
 }
 export const MenuDrawer = (props: IMenuDrawer) => {
   const {
@@ -41,7 +42,6 @@ export const MenuDrawer = (props: IMenuDrawer) => {
     onClickToLicense,
     onClickToIndex,
   } = usePageNavigate();
-
   const dispatch = useDispatch();
   const location = useLocation();
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
@@ -422,7 +422,9 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
 
         <div className={"w-full flex flex-col px-5"}>
-          <button className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex flex-row justify-center pt-2 gap-3 w-full h-10 items-start rounded-lg">
+          <button className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex flex-row justify-center pt-2 gap-3 w-full h-10 items-start rounded-lg"
+             onClick={props.onClickToDownload}
+          >
             <img
               src={icon＿download}
               alt="DownloadSimple"
