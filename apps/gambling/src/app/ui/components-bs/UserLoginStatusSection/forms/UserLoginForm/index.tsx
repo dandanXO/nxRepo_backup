@@ -1,29 +1,14 @@
 import {PhoneSvg} from "../../../theme/Icons/PhoneSvg";
 import {KeySvg} from "../../../theme/Icons/KeySvg";
-import {ConfirmButton} from "../../../theme/Buttons/ConfirmButton";
-import {Input as DesktopInput, Input, InputValue} from "../../../theme/Inputs/Input";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
 
-import {useEffect, useState} from "react";
-import {useLoginMutation} from "../../../../../external";
-import {environment} from "../../../../../../environments/environment";
-import {MockTriggerLoginResponse} from "../../mock/MockTriggetLoginResponse";
-import {useForm} from "../../../../hooks/useForm";
-import {setLoginLocalStorage} from "../../../../../persistant/setLoginLocalStorage";
-import {promiseHandler} from "../../../../../gateway/promiseHanlder";
+import {Input as DesktopInput, Input} from "../../../theme/Inputs/Input";
+import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {IOpenNotificationWithIcon} from "../../../../pageTemplate";
-import {AppLocalStorage} from "../../../../../persistant/localstorage";
-import {connect} from "../../../../../gateway/socket";
-import {useDispatch, useSelector} from "react-redux";
-import {appSlice} from "../../../../../reduxStore/appSlice";
-import {EyeOutlined, EyeInvisibleOutlined} from "@ant-design/icons";
 import {MobileInput} from "../../../theme/Inputs/MobileInput";
-import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {HidableEyeSvg} from "../../../theme/Icons/HidableEyeSvg";
 import {PhonePrefix} from "../../components/PhonePrefix";
-import {RootState} from "../../../../../reduxStore";
-import {useGetDeviceId} from "../../../../hooks/useGetDeviceId";
 import {useUserLoginForm} from "../../hooks/useUserLoginForm";
+import {ConfirmButton} from "../../components/ConfirmButton";
 
 export const onValidatePhoneInput = (data: string, setPhoneInput: any) => {
   const customInputStyle = {
@@ -148,7 +133,11 @@ export const UserLoginForm = (props: IUserLoginForm) => {
               props.onSwitchToForgetPassword();
             }}
           >Esqueça A Eenha?</button>
-          <ConfirmButton className="!w-full text-sm md:text-base my-2 "onClick={() => onFormConfirm()}>Entrar</ConfirmButton>
+
+          <div onClick={onFormConfirm}>
+            <ConfirmButton>Entrar</ConfirmButton>
+          </div>
+
         </section>
 
       </div>

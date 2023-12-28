@@ -1,6 +1,6 @@
 import {PhoneSvg} from "../../../../../theme/Icons/PhoneSvg";
 import {KeySvg} from "../../../../../theme/Icons/KeySvg";
-import {ConfirmButton} from "../../../../../theme/Buttons/ConfirmButton";
+
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
 import {Input} from "../../../../../theme/Inputs/Input";
 
@@ -14,6 +14,10 @@ import {HidableEyeSvg} from "../../../../../theme/Icons/HidableEyeSvg";
 import {CheckableICON} from "../../../../../theme/Icons/CheckableICON";
 import {PhonePrefix} from "../../../../components/PhonePrefix";
 import {useUserRegisterForm} from "../../../../hooks/useUserRegisterForm";
+import {renderByPlatform} from "../../../../../../utils/renderByPlatform";
+
+import {ConfirmButton as CocoConfirmButton} from "../../../../../theme/Buttons/ConfirmButton";
+import {ConfirmButton} from "../../../../components/ConfirmButton";
 
 export type IUserRegisterForm = {
   confirmToRegister: () => void;
@@ -124,11 +128,37 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       />
 
       <section className={"flex flex-col mb-4"}>
-        <ConfirmButton
-          className="!w-full my-2 "
-          disable={!isChecked}
-          onClick={() => isChecked && onFormConfirm()}
-        >Register agora</ConfirmButton>
+        {renderByPlatform({
+          "coco777bet": (
+            <CocoConfirmButton
+              className="!w-full my-2 "
+              disable={!isChecked}
+              onClick={() => isChecked && onFormConfirm()}
+            >
+              Register agora
+            </CocoConfirmButton>
+          ),
+          "riojungle777bet": (
+            <div
+              onClick={() => isChecked && onFormConfirm()}
+            >
+              <ConfirmButton
+                disable={!isChecked}
+              >Register agora</ConfirmButton>
+            </div>
+          ),
+        }, (
+          <CocoConfirmButton
+            className="!w-full my-2 "
+            disable={!isChecked}
+            onClick={() => isChecked && onFormConfirm()}
+          >
+            Register agora
+          </CocoConfirmButton>
+        ))}
+
+
+
       </section>
 
       <section className={"flex flex-row items-center mb-4"}>

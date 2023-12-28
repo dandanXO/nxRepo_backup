@@ -1,5 +1,5 @@
 import cx from "classnames";
-import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection";
+import {UserLoginStatusSection} from "../../components-bs/UserLoginStatusSection/env/coco/UserLoginStatusSection";
 import {IOpenNotificationWithIcon} from "../../pageTemplate";
 import { environment } from "../../../../environments/environment"
 
