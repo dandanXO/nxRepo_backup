@@ -29,7 +29,7 @@ export const AppCarouselContent2 = (props: IAppCarouselContent) => {
     >
       <div className={""}>
         <CarouselTitleSection>
-          Benefícios-ofertasde deposito<br/>Ate {recharge_cashback_rate} bônus
+          Bem-estar Oferta de depósito<br/>Ate {recharge_cashback_rate} bônus
         </CarouselTitleSection>
         {isMobile ? (
           <CarouselImage alt={"h5_banner_2"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_2.png`}/>

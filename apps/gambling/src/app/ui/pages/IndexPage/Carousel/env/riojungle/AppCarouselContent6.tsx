@@ -17,19 +17,20 @@ import {CarouselTitleSection} from "./CarouselTitleSection";
 
 export const AppCarouselContent6= (props: IAppCarouselContent) => {
   const {isMobile} = useBreakpoint();
-  const {onClickToFirstDeposit} = usePageNavigate();
+  const {onClickToLicense} = usePageNavigate();
 
   return (
     <CarouselContainer
       isMoving={props.isMoving}
       className={"text-[22.5px] text-white"}
       onClickBanner={(event) => {
-        onClickToFirstDeposit();
+        onClickToLicense();
       }}
     >
       <div className={""}>
         <CarouselTitleSection>
-          <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
+          <div><img alt='licenseLogo' className='w-[150px]' src={`assets/license/logo.png`}/></div>
+          <span>{environment.platformName}<br/>Um cassino responsável</span>
         </CarouselTitleSection>
         {isMobile ? (
           <CarouselImage alt={"h5_banner_6"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_6.png`}/>
