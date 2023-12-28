@@ -236,10 +236,8 @@
   --input-placeholder-color: #808080;
   --input-text-color: var(--white);
 
-
   --input-focus-border: var(--stroke-textfields);
   --input-focus-background: var(--background-textfields);
   --input-invalidation-border: var(--state-error-variant);
   --input-invalidation-text-color: var(--state-error-variant);
-
 }
