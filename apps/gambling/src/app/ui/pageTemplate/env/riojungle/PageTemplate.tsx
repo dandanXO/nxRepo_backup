@@ -133,7 +133,10 @@ export const PageTemplate = ({
   const location = useLocation();
 
   return (
-    <BaseStyledPageTemplate isCurrentPageCompanyProfile={location.pathname === PageOrModalPathEnum.CompanyProfilePage}>
+    <BaseStyledPageTemplate
+      bgType={"color"}
+      isCurrentPageCompanyProfile={location.pathname === PageOrModalPathEnum.CompanyProfilePage}
+    >
 
       {isUILoading && (
         <BaseLoadingOverlay className={"z-[9999] fixed top-0 left-0 right-0 bottom-0"}/>

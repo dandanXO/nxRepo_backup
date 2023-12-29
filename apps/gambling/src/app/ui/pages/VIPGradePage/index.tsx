@@ -10,7 +10,7 @@ import {
 } from "../../../external";
 import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../hooks/useBreakpoint';
-import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
+import {useAllowLoginRouterRules} from '../../router/hooks/useAllowLoginRouterRules';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";

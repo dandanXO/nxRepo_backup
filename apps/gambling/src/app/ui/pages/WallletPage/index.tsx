@@ -4,7 +4,7 @@ import {useGetRechargeMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {useSelector} from "react-redux";
 
-import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
+import {useAllowLoginRouterRules} from "../../router/hooks/useAllowLoginRouterRules";
 import {
   accountPromotedSwingSelector,
   accountPromotedWithdrawableSelector,

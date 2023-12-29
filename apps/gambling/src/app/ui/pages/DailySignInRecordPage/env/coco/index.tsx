@@ -1,4 +1,4 @@
-import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 import { GetSignInRecordResponseData, useGetSignInRecordMutation } from "../../../../../external";
 import { useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";

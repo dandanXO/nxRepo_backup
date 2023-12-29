@@ -4,6 +4,7 @@ import {environment} from "../../../../environments/environment";
 type IStyledPage = {
   style?: unknown;
   isCurrentPageCompanyProfile?: boolean;
+  bgType?: "color" | "image";
 }
 
 export const BaseStyledPageTemplate = styled.div.attrs((props) => ({
@@ -19,18 +20,21 @@ export const BaseStyledPageTemplate = styled.div.attrs((props) => ({
     left: 0;
     z-index: -2;
 
-    background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
-    background-color: var(--gray-scale-10);
+    ${(props) => (typeof props.bgType === "undefined" || props.bgType === "image") && `
+      background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
 
-    @media (max-width: 768px) {
-      background: url("assets/${environment.assetPrefix}/bg_tablet.png") center bottom /130% auto;
-      background-color: var(--gray-scale-10);
-    }
+      @media (max-width: 768px) {
+        background: url("assets/${environment.assetPrefix}/bg_tablet.png") center bottom /130% auto;
+      }
 
-    @media (max-width: 376px) {
-      background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
+      @media (max-width: 376px) {
+        background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
+      }
+    `}
+
+    ${(props) => props.bgType === "color" && `
       background-color: var(--gray-scale-10);
-    }
+    `}
 
     ${(props) => props.isCurrentPageCompanyProfile && `
       background: url("assets/${environment.assetPrefix}/bg_company_web.png") no-repeat center center/100% auto;

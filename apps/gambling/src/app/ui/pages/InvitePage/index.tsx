@@ -5,7 +5,7 @@ import { HowToInviteTabSection } from "./HowToInviteTabSection";
 import { InviteRecordInfoTabSection } from "./InviteRecordInfoTabSection/index";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery } from "../../../external";
-import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 
 import { TabItem, Tabs } from "../../components/TabItem/TabItem";
 import { Container } from "../../components/container/Container";
