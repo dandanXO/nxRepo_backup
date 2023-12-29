@@ -24,6 +24,8 @@ import {IOSDownloadModal} from "../../../modals/IOSDownloadModal";
 import {useLocalStorage} from "usehooks-ts";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import cx from "classnames";
+import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
+import {useLocation} from "react-router";
 
 
 type IPageTemplate = IUseSingletonPageTemplateConfig & {
@@ -128,9 +130,10 @@ export const PageTemplate = ({
   const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
   const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
 
+  const location = useLocation();
 
   return (
-    <BaseStyledPageTemplate>
+    <BaseStyledPageTemplate isCurrentPageCompanyProfile={location.pathname === PageOrModalPathEnum.CompanyProfilePage}>
 
       {isUILoading && (
         <BaseLoadingOverlay className={"z-[9999] fixed top-0 left-0 right-0 bottom-0"}/>

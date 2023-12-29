@@ -1,11 +1,10 @@
 import {environment} from "../../../../../../environments/environment";
 import badgeImage from "./icon=badge.png"
-import licenseImage from "./bg_license.svg";
 import {Container} from "../../../../components/container/Container";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import React from "react";
+import {twMerge} from "tailwind-merge";
+import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import styled from "styled-components";
 
 type IItem = {
   title: string;
@@ -16,11 +15,23 @@ const Item = (props: IItem) => {
   return (
     <div className={props.className}>
       <div>
-        <div className="text-base md:text-2xl lg:text-2xl leading-6 md:leading-8 lg:leading-8 font-bold  text-white flex row mb-3">
-          <img alt="badge" className="w-[24px] h-[24px] md:w-[32px] md:h-[32px] mr-2" src={badgeImage} />
+        <div className={twMerge(
+          "text-sm leading-5 font-normal",
+          "md:text-sm md:leading-5 md:font-normal",
+          "lg:text-lg lg:leading-7 lg:font-normal",
+          "text-white",
+          "flex row",
+        )}>
+          <img alt="badge" className="w-[28px] h-[28px] mr-2" src={badgeImage} />
           {props.title}
         </div>
-        <div className="text-xs md:text-base lg:text-base leading-4 md:leading-6 lg:leading-6 font-medium text-white">
+        <div className={twMerge(
+          "text-xs leading-5 font-normal",
+          "md:text-sm leading-5 font-normal",
+          "lg:text-base lg:leading-6 font-medium",
+          "text-[#B3B3B3]",
+          "lg:ml-[36px]"
+        )}>
           {props.description}
         </div>
       </div>
@@ -28,20 +39,26 @@ const Item = (props: IItem) => {
   )
 }
 
-const License = styled.div`
-  background-image: url(${licenseImage});
-  background-size: cover;
-`
-
 export const CompanyProfilePage = () => {
-  const {onClickToIndex} = usePageNavigate();
-
   return (
-    <Container className={"pb-4"} y={false} >
+    <Container className={"pb-4"}>
       <div className="text-white text-left">
+        <div className={twMerge(
+          "text-base leading-6font-medium",
+          "md:text-lg md:leading-7 md:font-medium",
+          "lg:text-2xl lg:leading-8 lg:font-medium",
+          "text-lg text-white m-auto"
+        )}>
+          Sobre Nós
+        </div>
 
-
-        <div className="pt-4 text-base md:text-3xl lg:text-3xl font-bold leading-4 md:leading-6 lg:leading-6 mb-4 md:mb-5 lg:mb-5 text-white">
+        <div className={twMerge(
+          "text-sm leading-5 font-medium mb-1 ",
+          "md:text-base md:leading-6 md:font-medium md:mb-3",
+          "lg:text-xl lg:leading-7 lg:font-medium lg:mb-5",
+          "pt-4",
+          "text-white",
+        )}>
           Turismo e Jogos para uma Nova Geração
         </div>
 
@@ -49,10 +66,7 @@ export const CompanyProfilePage = () => {
           <Item
             className={"mb-5"}
             title={"2023 Novo Território no Brasil"}
-            description={`Investimos 2 bilhões de dólares no Brasil, adquirindo bancos digitais
-              relacionados à rede, obtendo licenças para cassinos online. Em apenas seis
-              meses, nos tornamos uma das três principais empresas no setor de transações de
-              jogos.`}
+            description={`Investimos 2 bilhões de dólares no Brasil, adquirindo bancos digitais relacionados à rede, obtendo licenças para cassinos online. Em apenas seis meses, nos tornamos uma das três principais empresas no setor de transações de jogos.`}
           />
           <Item
             className={"mb-5"}
@@ -80,27 +94,32 @@ export const CompanyProfilePage = () => {
 
         </div>
 
-        <License className={"flex flex-col rounded-xl bg-[rgba(11,25,72,1) bg-[var(--background-footer)] p-5 relative"}>
+        <div className={twMerge("flex flex-col rounded-xl relative",
+          )}>
           {/*<img className="absolute" src={licenseImage}/>*/}
-          <div className="text-center font-bold text-base md:text-2xl lg:text-2xl leading-6 md:leading-8 lg:leading-8 text-white mb-4">
+          <div className={twMerge(
+            "text-sm leading-5 font-medium",
+            "md:text-base md:leading-6 md:font-medium",
+            "lg:text-xl lg:leading-7 lg:font-medium",
+            "text-white",
+            "mb-4",
+          )}>
             Licenciamento Legal da Empresa
           </div>
 
-          <div className="text-center text-xs md:text-base lg:text-base font-medium leading-4 md:leading-6 lg:leading-6 text-white">
-            {environment.platformName}, a nova versão foi lançada em agosto, e no primeiro
-            dia de operação, o volume de transações de recarga ultrapassou 5 milhões de
-            reais.
-            <br />
-            {environment.platformName} é operado pela Block balancing A.C. (Registro
-            Comercial de Curaçao nº 158191, Emancipatie Boulevard Dominico F. "Don"
-            Martina 52, Curaçao), de acordo com a licença principal de jogos #5517/JAZ.
-            Conforme declaração de política da empresa, {environment.platformName} opera sob
-            a sublicença CIL. Sob a sublicença CIL, {environment.platformName} é operado em
-            conformidade com as leis de Curaçao. A Block balancing A.C. está sujeita a
-            obrigações de combate à lavagem de dinheiro, conforme estabelecido pela
-            legislação de Curaçao.
+          <div className={twMerge(
+            "text-sm leading-5 font-normal",
+            "md:text-sm md:leading-5 md:font-normal",
+            "lg:text-base lg:leading-6 lg:font-medium",
+            "text-[#B3B3B3]",
+          )}>
+            {environment.platformName}, a nova versão foi lançada em agosto, e no primeiro dia de operação, o volume de transações de recarga ultrapassou 5 milhões de reais.
+            <br/>/
+            {environment.platformName} é operado pela Block balancing A.C. (Registro Comercial de Curaçao nº 158191, Emancipatie Boulevard Dominico F. "Don" Martina 52, Curaçao), de acordo com a licença principal de jogos #5517/JAZ. Conforme declaração de política da empresa,
+            {environment.platformName} opera sob a sublicença CIL. Sob a sublicença CIL,
+            {environment.platformName} é operado em conformidade com as leis de Curaçao. A Block balancing A.C. está sujeita a obrigações de combate à lavagem de dinheiro, conforme estabelecido pela legislação de Curaçao.
           </div>
-        </License>
+        </div>
 
 
       </div>

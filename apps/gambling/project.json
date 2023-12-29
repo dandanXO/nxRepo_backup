@@ -38,6 +38,9 @@
         "dev-coco777bet-v7":  {
           "buildTarget": "gambling:build:dev-coco777bet-v7"
         },
+        "dev-u1-v8-sambafortunebet":  {
+          "buildTarget": "gambling:build:dev-u1-v8-sambafortunebet"
+        },
         "dev-u2-v1-riojungle777bet": {
           "buildTarget": "gambling:build:dev-u2-v1-riojungle777bet"
         },
@@ -462,6 +465,48 @@
             {
               "replace": "apps/gambling/src/index.html",
               "with": "apps/gambling/src/environments/coco777bet/v7/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "dev-u1-v8-sambafortunebet": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/coco777bet/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/coco777bet/v8/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/coco777bet/v8/index.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "prod-u1-v8-sambafortunebet": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/coco777bet/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/coco777bet/v8/environment.prod.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/coco777bet/v8/index.html"
             }
           ],
           "optimization": true,
