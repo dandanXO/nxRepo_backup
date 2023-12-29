@@ -32,6 +32,8 @@ export const WallletPage = () => {
   useAllowLoginRouterRules();
 
   const {onClickToIndex} = usePageNavigate();
+
+  // NOTE: querystring
   const panelType = queryString.parse(window.location.search)?.panelType || "deposit";
   const [panelMode, setPanelMode] = useState<IPanelType>(panelType as IPanelType);
 

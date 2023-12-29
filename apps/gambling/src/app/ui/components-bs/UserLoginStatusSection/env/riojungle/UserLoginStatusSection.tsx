@@ -8,9 +8,14 @@ import {IUserLoginStatusSection} from "../../types";
 import {TabItem} from "../../../../components/TabItem/env/riojungle/TabItem";
 import {Tabs} from "../../../../components/Tabs";
 import {ArrowLeft} from "../../../Icons/ArrowLeft";
+import {ILoginUIStatusType} from "../../../../../reduxStore/appSlice";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../../reduxStore";
 
 export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
-  const [switchToLoginOrRegister, setSwitchToLoginOrRegister] = useState<"login"|"register"|"forget">("login");
+
+  const loginUIStatusType = useSelector((rootState: RootState) => rootState.app.loginUIStatusType)
+  const [switchToLoginOrRegister, setSwitchToLoginOrRegister] = useState<ILoginUIStatusType>(loginUIStatusType);
 
   return (
     <div className={"flex flex-col"}>

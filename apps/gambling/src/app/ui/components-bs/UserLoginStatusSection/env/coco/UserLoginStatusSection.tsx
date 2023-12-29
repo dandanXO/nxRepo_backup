@@ -6,9 +6,13 @@ import {UserForgetPasswordForm} from "../../forms/UserForgetPasswordForm";
 import {environment} from "../../../../../../environments/environment";
 import {LoginModalLogo} from "../../../Logos/LoginModalLogo";
 import {IUserLoginStatusSection} from "../../types";
+import {useSelector} from "react-redux";
+import {RootState} from "../../../../../reduxStore";
 
 export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
-  const [switchToLoginOrRegister, setSwitchToLoginOrRegister] = useState<"login"|"register"|"forget">("login");
+  const loginUIStatusType = useSelector((rootState: RootState) => rootState.app.loginUIStatusType)
+  const [switchToLoginOrRegister, setSwitchToLoginOrRegister] = useState<"login"|"register"|"forget">(loginUIStatusType);
+
   return (
     <div>
       <section className={"mb-2 flex justify-center items-center"}>
