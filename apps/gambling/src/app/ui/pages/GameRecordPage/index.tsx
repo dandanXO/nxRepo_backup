@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { GetUserGameRecordResponse, useGetUserGameRecordMutation } from "../../../external";
 import { AppLocalStorage } from '../../../persistant/localstorage';
-import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { GameRecordPage as CocoGameRecordPage } from './env/coco';
 import { GameRecordPage as RioGameRecordPage } from './env/riojungle';

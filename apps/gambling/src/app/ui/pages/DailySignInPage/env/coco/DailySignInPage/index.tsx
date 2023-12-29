@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { environment } from "../../../../../../../environments/environment";
 import { tcx } from "../../../../../utils/tcx";
 import { notification } from "antd";
-import { useAllowLoginRouterRules } from "../../../../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../../../../router/hooks/useAllowLoginRouterRules";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../../utils/format";

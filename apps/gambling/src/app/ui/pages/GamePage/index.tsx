@@ -6,7 +6,7 @@ import {useLocation, useNavigate} from "react-router";
 import queryString from 'query-string';
 
 import {useStartGameMutation} from '../../../external';
-import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
+import {useAllowLoginRouterRules} from "../../router/hooks/useAllowLoginRouterRules";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
 import {GameBackNavigation} from "../../components/BackNavigation/GameBackNavigation";

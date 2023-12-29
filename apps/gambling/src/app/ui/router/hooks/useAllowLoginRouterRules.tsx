@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
-import {RootState} from "../../reduxStore";
+import {RootState} from "../../../reduxStore";
 import {useLocation, useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
+import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useEffect, useState} from "react";
 
 export const useAllowLoginRouterRules = () => {

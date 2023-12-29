@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {AppLocalStorage} from '../../../persistant/localstorage';
-import {useAllowLoginRouterRules} from '../../router/useAllowLoginRouterRules';
+import {useAllowLoginRouterRules} from '../../router/hooks/useAllowLoginRouterRules';
 
 import {SettingPage as PSettingPage} from "./env/pernambucana/SettingPage";
 import {SettingPage as WSettingPage} from "./env/wild/SettingPage";

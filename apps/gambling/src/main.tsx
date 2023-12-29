@@ -4,7 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import * as Sentry from "@sentry/browser"
 import * as ReactDOM from 'react-dom/client';
 import {CoreMain} from "./main.core";
-import {AppRouter} from "./app/ui/router/index";
+import {AppRouter} from "./app/ui/router";
 import {ErrorPage} from "./app/ui/pages/ErrorPage";
 import {AppLocalStorage} from "./app/persistant/localstorage";
 import {AppLocalStorageKey} from "./app/persistant/AppLocalStorageKey";

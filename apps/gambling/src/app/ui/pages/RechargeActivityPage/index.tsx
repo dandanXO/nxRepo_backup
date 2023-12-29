@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
 import styled from "styled-components";
-import { useAllowLoginRouterRules } from "../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 import { environment } from "../../../../environments/environment";
 import { ChargeButton } from "../../components-bs/Buttons/ChargeButton";
 import useBreakpoint from "../../hooks/useBreakpoint";

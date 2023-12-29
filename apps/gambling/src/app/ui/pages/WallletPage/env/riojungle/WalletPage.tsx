@@ -4,7 +4,7 @@ import {DepositPanel} from "../../components/deposit/DepositPanel";
 import {WithdrawPanel} from "../../components/withdraw/WithdrawPanel";
 import {RecordPanel} from "../../components/record/RecordPanel";
 
-import {useAllowLoginRouterRules} from "../../../../router/useAllowLoginRouterRules";
+import {useAllowLoginRouterRules} from "../../../../router/hooks/useAllowLoginRouterRules";
 import {TotalSectionContainer} from "./TotalSectionContainer";
 import {IWalletPage} from "../pernambucana/WalletPage";
 import TabDeposit from './assets/icon-tab-deposit.png'

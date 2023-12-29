@@ -7,7 +7,7 @@ import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import QRCode from 'react-qr-code';
 import copy from 'copy-to-clipboard';
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
-import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 import { environment } from "../../../../../../environments/environment";
 import { notification } from "antd";
 import useBreakpoint from "../../../../hooks/useBreakpoint";

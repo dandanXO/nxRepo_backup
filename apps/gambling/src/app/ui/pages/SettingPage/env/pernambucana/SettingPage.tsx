@@ -7,7 +7,7 @@ import { Input } from '../../../../components-bs/Inputs/Input';
 import { SectionContainer } from '../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
-import { useAllowLoginRouterRules } from '../../../../router/useAllowLoginRouterRules';
+import { useAllowLoginRouterRules } from '../../../../router/hooks/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"
 import {Container} from "../../../../components/container/Container";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
