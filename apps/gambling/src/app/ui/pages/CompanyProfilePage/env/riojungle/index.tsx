@@ -45,7 +45,7 @@ export const CompanyProfilePage = () => {
   } = usePageNavigate();
 
   return (
-    <Container className={"pb-4"} y={false} >
+    <Container className={"pb-4"}>
       <div className="text-white text-left">
         <div className={twMerge(
           "text-base leading-6font-medium",
