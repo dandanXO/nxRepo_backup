@@ -17,6 +17,9 @@ import icon＿slot from "./assets/icon＿slot.png";
 import icon＿fishing from "./assets/icon＿fishing.png";
 import icon＿vivo from "./assets/icon＿vivo.png";
 import icon＿viver from "./assets/icon＿viver.png";
+import icon__buildings from "./assets/icon__buildings.png";
+import icon__files from "./assets/icon__files.png";
+
 import closeSVG from "./icon-close.svg";
 
 import cx from "classnames";
@@ -44,6 +47,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
+    onClickToCompanyProfile,
     onClickToLicense,
     onClickToIndex,
   } = usePageNavigate();
@@ -242,26 +246,6 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                 // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
               })}
               onClick={() => {
-                onClickToLicense();
-                close();
-              }}
-            >
-              <img
-                src={icon＿users}
-                className="w-5"
-              />
-              <div className="text-sm font-medium leading-[20px]">
-                Licença De Curaçao
-              </div>
-            </button>
-          </div>
-
-          <div className={"w-full flex flex-col px-5"}>
-            <button
-              className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
-              })}
-              onClick={() => {
                 onClickToTelegram();
                 close();
               }}
@@ -281,7 +265,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
             })}
                     onClick={() => {
-                      dispatch(appSlice.actions.setShowTelegramMobileModal(true))
+                      dispatch(appSlice.actions.setShowTelegramDetailContactModal(true))
                       close();
                     }}
             >
@@ -299,17 +283,37 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
               // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
             })}
-                    onClick={() => {
-                      onClickToTelegram();
-                      close();
-                    }}
+            onClick={() => {
+              onClickToCompanyProfile();
+              close();
+            }}
             >
               <img
-                src={icon＿telegramlogo}
+                src={icon__buildings}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
                 Sobre Nós
+              </div>
+            </button>
+          </div>
+
+          <div className={"w-full flex flex-col px-5"}>
+            <button
+              className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+              })}
+              onClick={() => {
+                onClickToLicense();
+                close();
+              }}
+            >
+              <img
+                src={icon__files}
+                className="w-5"
+              />
+              <div className="text-sm font-medium leading-[20px]">
+                Gaming Curaçao
               </div>
             </button>
           </div>

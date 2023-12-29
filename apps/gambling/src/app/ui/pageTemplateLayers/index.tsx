@@ -23,7 +23,7 @@ import { RootState } from "../../reduxStore";
 import { uiSlice } from "../../reduxStore/uiSlice";
 import {GameSearchModal} from "../modals/GameSearchModal";
 import {useClickFavoriteGameItem} from "../hooks/useClickFavoriteGameItem";
-import {TelegramMobileModal} from "../modals/TelegramMobileModal";
+import {TelegramDetailContactModal} from "../modals/TelegramDetailContactModal";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -85,7 +85,7 @@ export const PageTemplateLayers = ({
   const dispatch = useDispatch();
   const { isShowGameSearchModal } = useSelector((state: RootState) => state.app);
   const { userFavorite, onClickFavoriteGameItem } = useClickFavoriteGameItem()
-  const {isShowTelegramMobileModal} = useSelector((state: RootState) => state.app);
+  const {isShowTelegramDetailContactModal} = useSelector((state: RootState) => state.app);
 
   const {
     onClickToOpenTelegramManager,
@@ -192,12 +192,12 @@ export const PageTemplateLayers = ({
         onClose={() => dispatch(appSlice.actions.setShowGameSearchModal(false))}
       />}
 
-      {isShowTelegramMobileModal && (
-        <TelegramMobileModal
+      {isShowTelegramDetailContactModal && (
+        <TelegramDetailContactModal
           onClickToOpenTelegramService={onClickToOpenTelegramService}
           onClickToOpenTelegramManager={onClickToOpenTelegramManager}
           onClose={() => {
-            dispatch(appSlice.actions.setShowTelegramMobileModal(false))
+            dispatch(appSlice.actions.setShowTelegramDetailContactModal(false))
           }}
         />
       )}
