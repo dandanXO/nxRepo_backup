@@ -7,11 +7,13 @@ export const useScrollToCarousel = () => {
 
   useEffect(() => {
     const pageContainer = document.getElementById("page-container");
+    const getScrollY = () => pageContainer ? pageContainer.scrollTop : window.scrollY;
 
     const scroll = () => {
+
       // console.log("debug.scroll")
       // const targetContainer = pageContainer ? pageContainer : window;
-      const scrollY = pageContainer ? pageContainer.scrollTop : window.scrollY;
+
       // console.log("debug.pageContainer", pageContainer)
       // console.log("debug.targetContainer", targetContainer)
       // console.log("debug.scrollY", scrollY)
@@ -20,11 +22,11 @@ export const useScrollToCarousel = () => {
 
       if(carousel && carousel.offsetHeight) {
         carouselHeight = carousel.offsetHeight;
-        console.log("debug.carouselHeight", carouselHeight)
-        console.log("debug.scrollY", scrollY)
+        // console.log("debug.carouselHeight", carouselHeight)
+        // console.log("debug.scrollY", getScrollY())
         setCarouselHeight(carouselHeight);
       }
-      if(scrollY > carouselHeight) {
+      if(getScrollY() > carouselHeight) {
         setShowFixForIOSStickTab(true)
       } else {
         setShowFixForIOSStickTab(false)
@@ -48,13 +50,19 @@ export const useScrollToCarousel = () => {
   }, []);
 
   const scrollToCarousel = () => {
-    if(window.scrollY > carouselHeight) {
-      window.scrollTo({ top: carouselHeight, behavior: "smooth" });
+    const pageContainer = document.getElementById("page-container");
+    const getScrollY = () => pageContainer ? pageContainer.scrollTop : window.scrollY;
+
+    if(getScrollY() > carouselHeight) {
+      const targetContainer = pageContainer ? pageContainer : window;
+      targetContainer.scrollTo({ top: carouselHeight, behavior: "smooth" });
     }
   }
 
   const scrollToWindowTop = () => {
-    window.scrollTo({ left: 0, behavior: "smooth"});
+    const pageContainer = document.getElementById("page-container");
+    const targetContainer = pageContainer ? pageContainer : window;
+    targetContainer.scrollTo({ left: 0, behavior: "smooth"});
   }
 
   return {
