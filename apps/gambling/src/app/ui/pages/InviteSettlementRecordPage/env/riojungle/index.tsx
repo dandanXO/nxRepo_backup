@@ -1,7 +1,7 @@
 import { SectionContainer } from "../../../../components/container/SectionContainer";
 import moment, { Moment } from "moment/moment";
 import { DatePicker } from "antd";
-import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import { useLazyGetUserInviteRewardRecordQuery } from "../../../../../external";

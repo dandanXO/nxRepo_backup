@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 import { environment } from "../../../../../../environments/environment";
 import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
