@@ -11,7 +11,7 @@ import {Toolbox} from "../../Toolbox/env/coco";
 import {environment} from "../../../../../environments/environment";
 import {Header} from "../../header/env/coco/Header";
 import {MobileHeader} from "../../header/env/coco/MobileHeader";
-import {LoadingLogo} from "../../../components-bs/theme/Logos/LoadingLogo";
+import {LoadingLogo} from "../../../components-bs/Logos/LoadingLogo";
 import {LoadingBar} from "../../../components/LoadingBar";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
@@ -257,7 +257,7 @@ export const PageTemplate = ({
         )}
 
         {isUILoading && (
-          <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-[var(--unknown)] flex flex-col justify-center items-center"}>
+          <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-[var(--page-background)] flex flex-col justify-center items-center"}>
             <div className={"mb-4"}>
               <LoadingLogo/>
             </div>

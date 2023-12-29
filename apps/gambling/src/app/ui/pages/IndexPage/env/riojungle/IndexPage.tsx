@@ -3,14 +3,13 @@ import cx from "classnames";
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
-import { Input } from "../../../../components-bs/theme/Inputs/Input";
+import { Input } from "../../../../components-bs/Inputs/Input";
 import { useNavigate } from "react-router";
 
 import { IndexTabs } from "../../IndexTabs";
 
 import { AppCarousel } from "../../Carousel";
 
-import { useScrollToCarousel } from "../../useScrollToCarousel";
 
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
 import React, { useEffect, useState } from "react";
@@ -18,7 +17,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { CompanySloganLabel } from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { Container } from "../../../../components/container/Container";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { ScrollTab } from "../../../../components/TabItem/ScrollTab";
 
@@ -48,6 +47,7 @@ import favorite from "./assets/index-tab-favorite.png"
 import fishing from "./assets/index-tab-fishing.png";
 import recent from "./assets/index-tab-recent.png";
 import { AppCarouselContent6 } from "../../Carousel/env/riojungle/AppCarouselContent6";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 
 export type TTotalFavoriteLocalState = {
   local: { [key: number]: number[] },
@@ -91,10 +91,10 @@ export const IndexPage = ({
   onClickFavoriteGameItem,
   recentGameList
 }: ICoco777betIndexPage) => {
-  const { isMobile } = useBreakpoint();
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isLogin } = useSelector((state: RootState) => state.app);
-  const [isSearch, setIsSearch] = useState(false);
 
   const { onClickToSearch, onClickGameItem } = usePageNavigate();
 
@@ -170,48 +170,51 @@ export const IndexPage = ({
     )
   }
 
+  const isFixedGameTypeTabs = showFixForIOSStickTab && !isDesktop;
 
 
   return (
     <>
-      <Container >
-        {/*NOTICE: refactor*/}
-        {isSearch && <GameSearchModal userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} onClose={() => setIsSearch(false)} />}
-        {isMobile && <CompanySloganLabel />}
+      <Container id={"app-carousel"}>
+        {/*{isMobile && <CompanySloganLabel />}*/}
+        <div>
+          <AppCarousel setIsMoving={setIsMoving}>
+            <AppCarouselContent isMoving={isMoving} />
+            <AppCarouselContent2 isMoving={isMoving} />
+            <AppCarouselContent3 isMoving={isMoving} />
+            <AppCarouselContent4 isMoving={isMoving} />
+            <AppCarouselContent5 isMoving={isMoving} />
+            <AppCarouselContent6 isMoving={isMoving} />
+            {/*NOTE: 公司簡介目前沒有*/}
+            {/*<AppCarouselContent6/>*/}
+            {/*NOTE: 暫時備用*/}
+            {/*<AppCarouselContent7/>*/}
+            {/*NOTE: 暫時備用*/}
+            {/*<AppCarouselContent8/>*/}
+            {/*<CocoAppCarouselContent6/>*/}
+          </AppCarousel>
+        </div>
 
-        <AppCarousel setIsMoving={setIsMoving}>
-          <AppCarouselContent isMoving={isMoving} />
-          <AppCarouselContent2 isMoving={isMoving} />
-          <AppCarouselContent3 isMoving={isMoving} />
-          <AppCarouselContent4 isMoving={isMoving} />
-          <AppCarouselContent5 isMoving={isMoving} />
-          <AppCarouselContent6 isMoving={isMoving} />
-          {/*NOTE: 公司簡介目前沒有*/}
-          {/*<AppCarouselContent6/>*/}
-          {/*NOTE: 暫時備用*/}
-          {/*<AppCarouselContent7/>*/}
-          {/*NOTE: 暫時備用*/}
-          {/*<AppCarouselContent8/>*/}
-          {/*<CocoAppCarouselContent6/>*/}
-        </AppCarousel>
       </Container>
 
       <Container
         className={cx(
-          "py-2 z-20 bg-[#1A1A1A] ",
-          // DesktopXPadding,
+          "z-[2]",
+          "py-2 bg-[#1A1A1A]",
           {
-            "fixed top-[72px] right-0 left-[248px]": showFixForIOSStickTab && !isMobile,
-          },
-          {
-            "fixed top-[52px] left-0 right-0": showFixForIOSStickTab && isMobile,
+            "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },
         )}
+        style={{
+
+        }}
       >
         <div className={"flex flex-row justify-between items-center w-full"}>
           <IndexTabs />
           {!isMobile && (
-            <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={() => setIsSearch(true)}>
+            <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]"
+                 onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
+            >
               <Input
                 disable={true}
                 pureContainer={true}
@@ -230,7 +233,11 @@ export const IndexPage = ({
       {
         recentGameList.length > 0 && (
           <Container
-            className={tcx('overflow-hidden', [DesktopXPadding, !isMobile])}
+            className={cx(
+              'overflow-hidden',
+              [DesktopXPadding, !isMobile], {
+
+            })}
           >
             <GameListSection
               className='mb-0 pl-0 px-0'
@@ -254,9 +261,11 @@ export const IndexPage = ({
         )
       }
 
-      <Container className={cx("pb-16", {
-        // [DesktopXPadding]: !isMobile,
-      })}>
+      <Container
+        className={cx("pb-16", {
+        "pt-[58px]": isFixedGameTypeTabs,
+        })}
+      >
         {gameList()}
       </Container>
     </>

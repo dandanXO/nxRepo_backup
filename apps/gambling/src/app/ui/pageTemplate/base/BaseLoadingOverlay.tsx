@@ -1,4 +1,4 @@
-import {LoadingLogo} from "../../components-bs/theme/Logos/LoadingLogo";
+import {LoadingLogo} from "../../components-bs/Logos/LoadingLogo";
 import {LoadingBar} from "../../components/LoadingBar";
 import React from "react";
 import {twMerge} from "tailwind-merge";
@@ -9,7 +9,7 @@ type IBaseLoadingOverlay = {
 
 export const BaseLoadingOverlay = (props: IBaseLoadingOverlay) => {
   return (
-    <div className={twMerge("bg-[var(--unknown)] flex flex-col justify-center items-center", props.className)}>
+    <div className={twMerge("bg-[var(--page-background)] flex flex-col justify-center items-center", props.className)}>
       <div className={"mb-4"}>
         <LoadingLogo/>
       </div>

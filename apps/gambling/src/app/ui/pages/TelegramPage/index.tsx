@@ -13,7 +13,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 import { FragmentContainer } from "../../components/FragmentContainer";
 import cx from 'classnames';
 import { Banner } from "../../components/Banner";
-import {TelegramButton} from "../../components-bs/theme/Buttons/TelegramButton";
+import {TelegramButton} from "../../components-bs/Buttons/TelegramButton";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {appSlice} from "../../../reduxStore/appSlice";
@@ -44,7 +44,6 @@ const ListItem = (props: { count: string; text: string; }) => {
 export const TelegramPage = () => {
   useAllowLoginRouterRules();
 
-  const navigate = useNavigate();
   const { isMobile } = useBreakpoint();
 
   const telegramId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);

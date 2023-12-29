@@ -16,11 +16,14 @@ import {LogoutPopover} from "../popovers/LogoutPopover";
 import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
 
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
-import {IQueryStringProps} from "../hooks/usePageNavigate";
+import {IQueryStringProps, usePageNavigate} from "../hooks/usePageNavigate";
 import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
 import {IOpenNotificationWithIcon} from "../pageTemplate";
 import { RootState } from "../../reduxStore";
 import { uiSlice } from "../../reduxStore/uiSlice";
+import {GameSearchModal} from "../modals/GameSearchModal";
+import {useClickFavoriteGameItem} from "../hooks/useClickFavoriteGameItem";
+import {TelegramDetailContactModal} from "../modals/TelegramDetailContactModal";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -80,6 +83,13 @@ export const PageTemplateLayers = ({
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isShowGameSearchModal } = useSelector((state: RootState) => state.app);
+  const { userFavorite, onClickFavoriteGameItem } = useClickFavoriteGameItem()
+  const {isShowTelegramDetailContactModal} = useSelector((state: RootState) => state.app);
+
+  const {
+    onClickToOpenTelegramManager,
+  } = usePageNavigate();
 
   return (
     <>
@@ -173,6 +183,23 @@ export const PageTemplateLayers = ({
           <MaintenanceModal
             onClickToOpenTelegramService={onClickToOpenTelegramService}
           />
+      )}
+
+      {/*NOTICE: GameSearchModal*/}
+      {isShowGameSearchModal && <GameSearchModal
+        userFavorite={userFavorite}
+        onClickFavoriteGameItem={onClickFavoriteGameItem}
+        onClose={() => dispatch(appSlice.actions.setShowGameSearchModal(false))}
+      />}
+
+      {isShowTelegramDetailContactModal && (
+        <TelegramDetailContactModal
+          onClickToOpenTelegramService={onClickToOpenTelegramService}
+          onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+          onClose={() => {
+            dispatch(appSlice.actions.setShowTelegramDetailContactModal(false))
+          }}
+        />
       )}
 
     </>

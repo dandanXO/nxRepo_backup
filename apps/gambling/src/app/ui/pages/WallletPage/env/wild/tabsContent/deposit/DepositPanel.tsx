@@ -1,4 +1,4 @@
-import { DepositMoneyButton } from "../../../../../../components-bs/theme/Buttons/DepositMoneyButton";
+import { DepositMoneyButton } from "../../../../../../components-bs/Buttons/DepositMoneyButton";
 import { DepositInput } from "../../../../components/deposit/DepositInput"
 import { DepositNoticeSection } from "./DepositNoticeSection"
 import cx from 'classnames';
@@ -6,7 +6,7 @@ import { depositButtonProps } from "./depositButtonProps";
 import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
 import { tcx } from "apps/gambling/src/app/ui/utils/tcx";
 import { IDepositPanelProps } from "../../../../components/deposit/DepositPanel";
-import { ArrowRight } from "../../../../../../components-bs/theme/Icons/ArrowRight";
+import { ArrowRight } from "../../../../../../components-bs/Icons/ArrowRight";
 import { SectionContainer } from "apps/gambling/src/app/ui/components/container/SectionContainer";
 
 interface DepositToNextPageButtonProps {

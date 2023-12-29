@@ -9,8 +9,8 @@ import {environment} from "../../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
 import {SearchButton} from "./components/SearchButton";
-import {RegisterButton} from "../../../../components-bs/theme/Buttons/env/pernambucana/RegisterButton";
-import {MenuIcon} from "../../../../components-bs/theme/Icons/MenuIcon";
+import {RegisterButton} from "../../../../components-bs/Buttons/env/pernambucana/RegisterButton";
+import {MenuIcon} from "../../../../components-bs/Icons/MenuIcon";
 import {IMobileHeader} from "../../types/IMobileHeader";
 
 

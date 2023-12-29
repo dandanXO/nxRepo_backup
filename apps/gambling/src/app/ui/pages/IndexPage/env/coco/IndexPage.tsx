@@ -3,7 +3,7 @@ import cx from "classnames";
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
-import {Input} from "../../../../components-bs/theme/Inputs/Input";
+import {Input} from "../../../../components-bs/Inputs/Input";
 import {useNavigate} from "react-router";
 
 import {IndexTabs} from "../../IndexTabs";
@@ -22,18 +22,18 @@ import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {Container} from "../../../../components/container/Container";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
-import { GameSearchModal } from "../../../../modals/GameSearchModal";
 import {useScrollToCarousel} from "../../useScrollToCarousel";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
 import { tcx } from "../../../../utils/tcx";
 import { RecentGameItem } from "../../../../components-bs/RecentGameListItem";
 import { GameListSection } from "../../../../modals/GameSearchModal/components/GameListSection";
 import { environment } from "../../../../../../environments/environment";
+import {appSlice} from "../../../../../reduxStore/appSlice";
 
 
 export type TTotalFavoriteLocalState = {
@@ -78,11 +78,9 @@ export const IndexPage = ({
   onClickFavoriteGameItem,
   recentGameList
 }:ICoco777betIndexPage) => {
+  const dispatch = useDispatch();
   const { isMobile } = useBreakpoint();
-  const navigate = useNavigate();
   const { isLogin } = useSelector((state: RootState) => state.app);
-  const [isSearch, setIsSearch] = useState(false);
-
   const {onClickToSearch, onClickGameItem } = usePageNavigate();
 
   // useEffect(() => {
@@ -90,12 +88,6 @@ export const IndexPage = ({
   //     setActiveTab("Salão")
   //   }
   // }, [])
-
-  const handleToSearchPage = () => {
-    if (isLogin) {
-      onClickToSearch();
-    }
-  }
 
   const [isMoving, setIsMoving] = useState(false);
   const DesktopXPadding = "!pl-12 !pr-[90px]";
@@ -121,6 +113,8 @@ export const IndexPage = ({
     }
   }
 
+
+
   return (
     <>
       <div id="app-carousel" className={cx("w-full",
@@ -129,7 +123,6 @@ export const IndexPage = ({
         // "w-[calc(100vw-265px)] ml-20": !isMobile,
         // "p-4": !isMobile,
       })}>
-        {isSearch && <GameSearchModal userFavorite={userFavorite} onClickFavoriteGameItem={onClickFavoriteGameItem} onClose={()=>setIsSearch(false)}/>}
         {isMobile && <CompanySloganLabel/>}
         <AppCarousel setIsMoving={setIsMoving}>
           <AppCarouselContent isMoving={isMoving}/>
@@ -193,7 +186,9 @@ export const IndexPage = ({
               </ScrollTab>
             </div>
 
-            <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]" onClick={()=>setIsSearch(true)}>
+            <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]"
+                 onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
+            >
               {/*NOTICE: refactor me*/}
               <Input
                 disable={true}
@@ -214,7 +209,9 @@ export const IndexPage = ({
 
       {/*SearchInput*/}
       {isMobile ? (
-        <Container y={false} className="pt-2" onClick={()=>setIsSearch(true)}>
+        <Container y={false} className="pt-2"
+                   onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
+        >
           {/*NOTICE: refactor me*/}
           <Input
             disable={true}

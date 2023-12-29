@@ -3,7 +3,7 @@ import { Avatar } from "../../../../components/Avatar";
 import { IUserInfo } from "../../../../../persistant/IUserInfo";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
-import { CopyIcon } from "../../../../components-bs/theme/Icons/CopyIcon";
+import { CopyIcon } from "../../../../components-bs/Icons/CopyIcon";
 import { useDispatch } from "react-redux";
 import { appSlice } from "../../../../../reduxStore/appSlice";
 import { GetVIPInfoResponse } from "../../../../../external";

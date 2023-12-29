@@ -68,7 +68,7 @@ export const IndexPage = () => {
       )
     })
   }
-  const {showFixForIOSStickTab, scrollToCarousel} = useScrollToCarousel();
+  const {showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop} = useScrollToCarousel();
 
   const renderTypeGameList=()=>{
     let list: { subGameType: string, games: { gameId: number }[] }[] = []
@@ -102,7 +102,6 @@ export const IndexPage = () => {
     })
   }
 
-  const {scrollToWindowTop} = useScrollToCarousel();
   const gameList = () => {
     if (searchInput !== '') {
       return searchResults.length > 0
@@ -128,7 +127,6 @@ export const IndexPage = () => {
   useEffect(() => {
     gameList();
   }, [activeTab])
-
 
 
   return renderByPlatform({

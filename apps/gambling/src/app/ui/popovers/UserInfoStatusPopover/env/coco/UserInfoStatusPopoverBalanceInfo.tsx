@@ -5,8 +5,8 @@ import { useNavigate } from "react-router";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { formatLocaleMoney } from "../../../../utils/format";
-import {PopoverDepositButton} from "../../../../components-bs/theme/Buttons/env/coco/PopoverDepositButton";
-import {PopoverWithdrawButton} from "../../../../components-bs/theme/Buttons/env/coco/PopoverWithdrawButton";
+import {PopoverDepositButton} from "../../../../components-bs/Buttons/env/coco/PopoverDepositButton";
+import {PopoverWithdrawButton} from "../../../../components-bs/Buttons/env/coco/PopoverWithdrawButton";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 
 const Container = styled.div`

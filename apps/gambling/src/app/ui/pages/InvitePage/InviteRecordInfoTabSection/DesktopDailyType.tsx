@@ -1,5 +1,5 @@
 import {environment} from "../../../../../environments/environment";
-import { QuestionTipsIcon } from "../../../components-bs/theme/Icons/QuestionTipsIcon";
+import { QuestionTipsIcon } from "../../../components-bs/Icons/QuestionTipsIcon";
 import { IconTooltip } from "../../../components/Tooltips/IconTooltip";
 
 interface IDailyType {

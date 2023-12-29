@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import cx from "classnames";
 import React, { useState } from "react";
-import { ConfirmButton } from "../../../../components-bs/theme/Buttons/ConfirmButton";
+import { ConfirmButton } from "../../../../components-bs/Buttons/ConfirmButton";
 import { UserMoneyStatusSection } from "../../UserMoneyStatusSection";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";

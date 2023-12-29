@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {ArrowLeft} from "../../../../components-bs/theme/Icons/ArrowLeft";
+import {ArrowLeft} from "../../../../components-bs/Icons/ArrowLeft";
 import cx from "classnames";
 
 type IGameBackNavigation = {

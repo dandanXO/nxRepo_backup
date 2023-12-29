@@ -5,15 +5,15 @@ import styled from 'styled-components';
 import { useUpdateUserInfoMutation } from '../../../external';
 import { promiseHandler } from '../../../gateway/promiseHanlder';
 import { AppLocalStorage } from '../../../persistant/localstorage';
-import { Input as DesktopInput } from '../../components-bs/theme/Inputs/Input';
-import { MobileInput } from '../../components-bs/theme/Inputs/MobileInput';
+import { Input as DesktopInput } from '../../components-bs/Inputs/Input';
+import { MobileInput } from '../../components-bs/Inputs/MobileInput';
 import useBreakpoint from '../../hooks/useBreakpoint';
 import { IOpenNotificationWithIcon } from '../../pageTemplate';
 import { tcx } from "../../utils/tcx";
 import { UserOutlined } from "@ant-design/icons";
 import { environment } from "../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {CloseICON} from "../../components-bs/theme/Icons/CloseICON";
+import {CloseICON} from "../../components-bs/Icons/CloseICON";
 
 
 interface IEditUserInfoModalProps {
@@ -106,7 +106,7 @@ export const EditUserInfoModal = ({
 
   return (
     <div
-      className="fixed left-0 top-0 right-0 bottom-0 z-[1005] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]"
+      className="z-[1005] fixed left-0 top-0 right-0 bottom-0 flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]"
       onClick={() => close()}
     >
       {contextHolder}

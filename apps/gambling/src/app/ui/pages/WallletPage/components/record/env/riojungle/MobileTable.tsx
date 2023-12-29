@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { AppLocalStorage } from "../../../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../../../utils/format";
-import { CopyIcon } from '../../../../../../components-bs/theme/Icons/CopyIcon';
+import { CopyIcon } from '../../../../../../components-bs/Icons/CopyIcon';
 
 const Container = styled.div`
   /* background: rgba(255, 255, 255, 0.1); */

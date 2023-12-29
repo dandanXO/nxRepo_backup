@@ -2,8 +2,8 @@ import {useDispatch} from "react-redux";
 import {rootState} from "../../../../../../../../../packages/dlh-web/src/store/root";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {environment} from "../../../../../../environments/environment";
-import {LoadingLogo} from "../../../../components-bs/theme/Logos/LoadingLogo";
-import {CloseICON} from "../../../../components-bs/theme/Icons/CloseICON";
+import {LoadingLogo} from "../../../../components-bs/Logos/LoadingLogo";
+import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 
 export const RiojungleIOSDownloadModal = () => {
   const dispatch = useDispatch();

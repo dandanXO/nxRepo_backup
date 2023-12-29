@@ -29,7 +29,7 @@ html,
 body {
   /*height: 100%;*/
   font-family: var(--font-family);
-  background: var(--unknown);
+  background: var(--page-background);
 }
 
 html {
@@ -177,37 +177,40 @@ html {
   padding-right: 3px;
 }
 
-.riojungle777bet-table{
+
   /* scrollbar */
   /* Works on Firefox */
-  .customTable-tbody {
+  .riojungle777bet-customTable-tbody,
+  .riojungle777bet-game-search-list {
     scrollbar-width: thin;
     scrollbar-color: #10B98F;
   }
-  .customTable-tbody::-webkit-scrollbar {
+  .riojungle777bet-customTable-tbody::-webkit-scrollbar,
+  .riojungle777bet-game-search-list::-webkit-scrollbar {
     width: 8px;
     height: 10px;
     background: #4D4D4D;
     position: relative;
     border-radius: 10px;
   }
-  .customTable-tbody::-webkit-scrollbar-track {
+  .riojungle777bet-customTable-tbody::-webkit-scrollbar-track,
+  .riojungle777bet-game-search-list::-webkit-scrollbar-track {
     background: transparent;
     position: absolute;
     top:0;
     right: 0;
     border-radius: 10px;
   }
- .customTable-tbody::-webkit-scrollbar-thumb {
+ .riojungle777bet-customTable-tbody::-webkit-scrollbar-thumb,
+ .riojungle777bet-game-search-list::-webkit-scrollbar-thumb {
     background: #10B98F;
     border-radius: 10px;
   }
 
   /* thead出現滾軸時，預留的scroll寬度 */
-  .customTable-thead-scrollPadding{
+  .riojungle777bet-customTable-thead-scrollPadding{
     padding-right: 8px;
   }
-}
 
 
 .vip-tab-items::-webkit-scrollbar {

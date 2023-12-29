@@ -1,7 +1,34 @@
 
 import {IInitialChargeModal} from "../../index";
+import React from "react";
+import {MoneyButton} from "../coco/MoneyButton";
+import {useInviteConfig} from "../../../../hooks/useInviteConfig";
 
+type IItem = {
+  title: string;
+  money: number;
+}
+const Item = (props: IItem) => {
+  return (
+    <div className="bg-[rgba(0,0,0,0.08)] border-solid border-white/20 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-gray-200 flex flex-row justify-between w-full h-16 items-start pt-2 px-2 rounded-lg">
+      <div className="flex flex-col w-2/5 items-start">
+        <div className="font-['Inter'] font-bold leading-[24px] text-white">
+          {props.title}
+        </div>
+        <div className="text-sm font-['Inter'] font-medium leading-[20px] text-white">
+          Prêmio
+        </div>
+      </div>
+      <div className="text-right font-['Inter'] font-bold leading-[24px] text-white mt-2">
+        <MoneyButton money={props.money}/>
+      </div>
+    </div>
+  )
+}
 export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
+
+  const {currentConfig} = useInviteConfig();
+
   return (
     <div
       className={"z-[1005] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"}
@@ -59,48 +86,18 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
                   Bônus de primeira recarga para usuários convidados
                 </div>
 
-                <div className="border-solid border-white/20 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-gray-200 flex flex-row justify-between w-full h-16 items-start pt-2 px-2 rounded-lg">
-                  <div className="flex flex-col w-2/5 items-start">
-                    <div className="font-['Inter'] font-bold leading-[24px] text-white">
-                      Convidar 1-10
-                    </div>
-                    <div className="text-sm font-['Inter'] font-medium leading-[20px] text-white">
-                      Prêmio
-                    </div>
-                  </div>
-                  <div className="text-right font-['Inter'] font-bold leading-[24px] text-white mt-2">
-                    R$ 15,00
-                  </div>
-                </div>
-
-                <div className="border-solid border-white/20 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-black/10 flex flex-row justify-between w-full h-16 items-start pt-2 px-2 rounded-lg">
-                  <div className="flex flex-col w-2/5 items-start">
-                    <div className="font-['Inter'] font-bold leading-[24px] text-white">
-                      Convidar 11-20
-                    </div>
-                    <div className="text-sm font-['Inter'] font-medium leading-[20px] text-white">
-                      Prêmio
-                    </div>
-                  </div>
-                  <div className="text-right font-['Inter'] font-bold leading-[24px] text-white mt-2">
-                    R$ 20,00
-                  </div>
-                </div>
-
-                <div className="border-solid border-white/20 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-black/10 flex flex-row justify-between w-full h-16 items-start pt-2 px-2 rounded-lg">
-                  <div className="flex flex-col w-2/5 items-start">
-                    <div className="font-['Inter'] font-bold leading-[24px] text-white">
-                      Convidar 11-20
-                    </div>
-                    <div className="text-sm font-['Inter'] font-medium leading-[20px] text-white">
-                      Prêmio
-                    </div>
-                  </div>
-                  <div className="text-right font-['Inter'] font-bold leading-[24px] text-white mt-2">
-                    R$ 20,00
-                  </div>
-                </div>
-
+                {currentConfig?.map((item, index) => {
+                  if(currentConfig.length - 1 !== index) {
+                    // NOTICE: 型別遺失 這個沒有寫 number 沒有被檢測到要number, money={Number(item.reward)}
+                    return (
+                      <Item key={index} title={`Convidar ${item.num}-${Number(currentConfig[index + 1]?.num) - 1}`} money={(Number(item.reward)/100)}/>
+                    )
+                  } else {
+                    return (
+                      <Item key={index} title={`Convidar > ${item.num}`} money={Number(item.reward)/100}/>
+                    )
+                  }
+                })}
 
               </div>
 
@@ -108,12 +105,18 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
                 <button
                   id="Btn"
                   className="text-sm font-['Inter'] font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
+                  onClick={() => {
+                    props.close();
+                  }}
                 >
                   Ganhar Dinheiro
                 </button>
                 <button
                   id="Btn1"
                   className="text-sm font-['Inter'] font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
+                  onClick={() => {
+                    props.onConfirm();
+                  }}
                 >
                   Convide Agora
                 </button>

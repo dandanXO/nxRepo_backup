@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {environment} from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {CloseICON} from "../../../../components-bs/theme/Icons/CloseICON";
+import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 

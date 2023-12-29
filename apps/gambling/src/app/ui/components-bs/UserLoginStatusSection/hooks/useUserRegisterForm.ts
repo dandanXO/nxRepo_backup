@@ -1,12 +1,12 @@
 
 import {useEffect, useState} from "react";
-import {InputValue} from "../../theme/Inputs/Input";
+import {InputValue} from "../../Inputs/Input";
 import {useDispatch} from "react-redux";
 import axios from "axios";
 import {environment} from "../../../../../environments/environment";
 import {useRegisterMutation} from "../../../../external";
 
-import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm";
+import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm/env/coco/UserLoginForm";
 import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
 import {connect} from "../../../../gateway/socket";
 import {appSlice} from "../../../../reduxStore/appSlice";

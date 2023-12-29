@@ -1,8 +1,8 @@
 import { SearchOutlined } from "@ant-design/icons"
-import { CloseICON } from "../../components-bs/theme/Icons/CloseICON"
-import { Input, InputValue } from "../../components-bs/theme/Inputs/Input";
+import { CloseICON } from "../../components-bs/Icons/CloseICON"
+import { Input, InputValue } from "../../components-bs/Inputs/Input";
 import cx from 'classnames';
-import { SearchInput } from "../../components-bs/theme/Inputs/SearchInput";
+import { SearchInput } from "../../components-bs/Inputs/SearchInput";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import { useEffect, useState } from "react";
 import { GameListSection } from "./components/GameListSection";
@@ -13,10 +13,13 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 import { useSelector } from "react-redux";
-import { NoData } from "../../components-bs/theme/Icons/NoData";
+import { NoData } from "../../components-bs/Icons/NoData";
 import { environment } from "../../../../environments/environment";
-import { Icon } from "../../components-bs/theme/Icons";
+import { Icon } from "../../components-bs/Icons";
 import { GameItem } from "../../components-bs/GameTypeSection";
+import { renderByPlatform } from "../../utils/renderByPlatform";
+import { CloseButton } from "./components/CloseButton";
+import { SearchNotice } from "./components/SearchNotice";
 
 interface IGameSearchModal {
   onClose: () => void
@@ -84,23 +87,22 @@ export const GameSearchModal = (props: IGameSearchModal) => {
     }
   }
 
-
+  const backgroundProps = () => {
+    return renderByPlatform({
+      "coco777bet": 'bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)]',
+      "riojungle777bet": 'bg-[#333]',
+    }, 'bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)]')
+  }
   return (
-    <div className="fixed left-0 top-0 right-0 bottom-0 z-[1005] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
-      <div className={cx("fixed  bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)] rounded-lg", {
+    <div className="z-[1005] fixed left-0 top-0 right-0 bottom-0 flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
+      <div className={cx("fixed rounded-lg pt-8 p-3 md:p-6 lg:p-8 relative", {
         "w-[80%]": !isMobile,
         "w-[90%] h-[90%]": isMobile
-      })}>
-
+      }, backgroundProps())}>
+        <button className={'absolute top-[12px] right-[12px]'} onClick={props.onClose} ><CloseButton /></button>
         <div className="h-full flex flex-col">
-
-
-          <div className={"flex-none px-3 py-3.5 sm:p-6"}>
-            <div className="flex justify-between items-center mb-2 sm:mb-3.5">
-              <div className="text-base text-white">Procurar</div>
-              <button onClick={props.onClose} className="-m-2"><CloseICON /></button>
-
-            </div>
+          <div className={"flex-none"}>
+          <div className="text-lg md:text-2xl lg:text-4xl text-white mb-2 md:mb-3 lg:mb-8">Procurar</div>
             <SearchInput
               placeholder={"Pesquisar nome do jogo"}
               value={searchInput.data}
@@ -113,13 +115,13 @@ export const GameSearchModal = (props: IGameSearchModal) => {
 
               }}
             />
-            <div className="text-white text-xs text-center">Insira pelo menos 3 símbolos para iniciar a pesquisa</div>
+            <SearchNotice />
           </div>
-          <div className="flex-1 overflow-auto game-list ">
+          <div className={`flex-1 overflow-auto ${environment.assetPrefix}-game-search-list `}>
             {searchInput.data.length >= 3 && (
               <GameListSection
                 className="text-white "
-                icon={<SearchOutlined className={"text-white text-sm mr-2 flex justify-center items-center"} />}
+                icon={<SearchOutlined className={"text-2xl md:text-[28px] lg:text-[32px] text-white mr-2 flex justify-center items-center"} />}
                 title={'Procurar Resultados'}
                 children={gameList(searchResults)}
                 expandedBrand={false}
@@ -127,13 +129,14 @@ export const GameSearchModal = (props: IGameSearchModal) => {
             }
             <GameListSection
               className="text-white"
-              icon={<Icon className="w-[24px] h-[24px] mr-1" img={`assets/${environment.assetPrefix}/icon=recommend.png`} name={'recommend'} />}
+              icon={<Icon className="w-[24px] h-[24px] md:w-[28px] md:h-[28px] lg:w-[32px] lg:h-[32px] mr-1" img={`assets/${environment.assetPrefix}/icon=recommend.png`} name={'recommend'} />}
               title={'Jogos que você deveria experimentar'}
               children={gameList(recommendItems)}
               expandedBrand={isMobile}
               loadMore={loadMore}
+
             />
-            </div>
+          </div>
         </div>
       </div>
     </div>

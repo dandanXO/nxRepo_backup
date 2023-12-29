@@ -1,5 +1,5 @@
-import {MobileInput} from "../../theme/Inputs/MobileInput";
-import {Input as DesktopInput, InputValue} from "../../theme/Inputs/Input";
+import {MobileInput} from "../../Inputs/MobileInput";
+import {Input as DesktopInput, InputValue} from "../../Inputs/Input";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {useLoginMutation} from "../../../../external";
@@ -9,7 +9,7 @@ import {environment} from "../../../../../environments/environment";
 import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import {connect} from "../../../../gateway/socket";
-import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm";
+import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm/env/coco/UserLoginForm";
 
 type IUseUserLoginForm = {
   confirmToLogin: () => void;

@@ -1,6 +1,6 @@
 import React from "react";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
-import { Button } from "../../../../components-bs/theme/Buttons/Button";
+import { Button } from "../../../../components-bs/Buttons/Button";
 import { ContaContainer, IUserInfoStatusPopoverBalanceInfoProps } from "../../index";
 import { useNavigate } from "react-router";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";

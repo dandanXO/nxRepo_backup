@@ -4,7 +4,7 @@ import {UserLoginForm} from "../../forms/UserLoginForm";
 import {UserRegisterForm} from "../../forms/UserRegisterForm";
 import {UserForgetPasswordForm} from "../../forms/UserForgetPasswordForm";
 import {environment} from "../../../../../../environments/environment";
-import {LoginModalLogo} from "../../../theme/Logos/LoginModalLogo";
+import {LoginModalLogo} from "../../../Logos/LoginModalLogo";
 import {IUserLoginStatusSection} from "../../types";
 
 export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {

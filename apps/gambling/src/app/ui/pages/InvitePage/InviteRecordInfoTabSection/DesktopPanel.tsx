@@ -5,7 +5,7 @@ import { DesktopTotalType } from "./DesktopTotalType";
 import { DesktopDailyType } from "./DesktopDailyType";
 import { QuestionContainer } from "../index";
 import { useNavigate } from "react-router";
-import { RecordButton2 } from "../../../components-bs/theme/Buttons/RecordButton";
+import { RecordButton2 } from "../../../components-bs/Buttons/RecordButton";
 import { environment } from "apps/gambling/src/environments/environment";
 import { CocoTabItem } from "../../../components/TabItem/CocoTabItem";
 import cx from 'classnames';

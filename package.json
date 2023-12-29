@@ -32,6 +32,8 @@
     "build:gnatal777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v6 --verbose",
     "serve:gcarnaval777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-coco777bet-v7",
     "build:gcarnaval777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v7 --verbose",
+    "serve:gsambafortunebet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-u1-v8-sambafortunebet",
+    "build:gsambafortunebet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-u1-v8-sambafortunebet --verbose",
 
 
 

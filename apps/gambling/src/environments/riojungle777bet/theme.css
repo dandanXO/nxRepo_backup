@@ -127,7 +127,7 @@
   --light: #06F2ED;
 
 
-  --unknown: #152951;
+  --page-background: #1A1A1A;
 
   /*bg-other*/
   --game-block: #212B5C;
@@ -241,4 +241,5 @@
 
   --input-invalidation-border: #EF4444;
   --input-invalidation-text-color: #EF4444;
+
 }

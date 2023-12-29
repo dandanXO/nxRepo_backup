@@ -140,7 +140,7 @@ module.exports = (config, context) => {
       new HtmlWebpackPlugin({
         // inject: true,
         // 配置 HTML 模板路徑與生成名稱 (第三步)
-        template: !isProduction ? path.resolve(__dirname, '../src/index.dev.html') : path.resolve(__dirname, '../src/index.prod.html'),
+        template: !isProduction ? path.resolve(__dirname, '../src/index.dev.html') : process.env.NODE_COUNTRY === 'pk' ? path.resolve(__dirname, '../src/index.prod.pk.html') : path.resolve(__dirname, '../src/index.prod.html'),
         // publicPath: "/v2",
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main'],
         // chunks: ['runtime', 'vendors', 'common', 'sentry', 'main', 'errorhandler'],

@@ -6,8 +6,8 @@ import { notification } from 'antd';
 
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { SectionContainer } from "../../../../components/container/SectionContainer";
-import { Input, InputValue } from "../../../../components-bs/theme/Inputs/Input";
-import { Button } from "../../../../components-bs/theme/Buttons/Button";
+import { Input, InputValue } from "../../../../components-bs/Inputs/Input";
+import { Button } from "../../../../components-bs/Buttons/Button";
 import { useGetWithdrawLimitMutation, useWithdrawMutation } from "../../../../../external";
 import { environment } from "../../../../../../environments/environment";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
@@ -16,7 +16,7 @@ import { useAutoUpdateBalance } from "../../../../hooks/useAutoUpdateBalance";
 
 import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
-import { MobileInput } from "../../../../components-bs/theme/Inputs/MobileInput";
+import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
 import { WithdrawPanel as CWithdrawPanel } from '../../env/coco/tabsContent/withdraw/WithdrawPanel';
 import { WithdrawPanel as PWithdrawPanel } from '../../env/pernambucana/tabsContent/withdraw/WithdrawPanel'
@@ -24,7 +24,7 @@ import { WithdrawPanel as WWithdrawPanel } from '../../env/wild/tabsContent/with
 import { WithdrawPanel as RWithdrawPanel } from '../../env/riojungle/tabsContent/withdraw/WithdrawPanel';
 
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
-import { ButtonPro } from "../../../../components-bs/theme/Buttons/ButtonPro";
+import { ButtonPro } from "../../../../components-bs/Buttons/ButtonPro";
 import moment from "moment";
 import { totalReasableSelector } from "../../../../../reduxStore/appSlice";
 import { formatLocaleMoney } from "../../../../utils/format";

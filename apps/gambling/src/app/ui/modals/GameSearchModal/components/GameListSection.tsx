@@ -1,12 +1,13 @@
 import cx from 'classnames';
 import useBreakpoint from '../../../hooks/useBreakpoint';
-import { ArrowLeft } from '../../../components-bs/theme/Icons/ArrowLeft';
-import { ArrowRight } from '../../../components-bs/theme/Icons/ArrowRight';
+import { ArrowLeft } from '../../../components-bs/Icons/ArrowLeft';
+import { ArrowRight } from '../../../components-bs/Icons/ArrowRight';
 import { useEffect, useRef, useState } from 'react';
 import { DragScrollContainer } from '../../../components/DragScrollContainer';
 import { useGesture } from '@use-gesture/react';
 import { useSpring } from '@react-spring/web';
 import { tcx } from "../../../utils/tcx";
+import { PrevAndNextButtons } from './PrevAndNextButtons';
 
 interface IGameListSection {
   icon?: React.ReactElement;
@@ -79,20 +80,17 @@ export const GameListSection = (props: IGameListSection) => {
     }
   );
   return (
-    <div className={cx("flex flex-col w-full mb-3.5", {
-      'px-6': !isMobile,
-      'px-2': isMobile
+    <div className={cx("flex flex-col w-full mb-2 md:mb-4 lg:mb-8", {
+      // 'px-6': !isMobile,
+      // 'px-2': isMobile
     }, className)}>
       {isShowHeader &&
         (<div className={tcx('flex flex-row justify-between mb-2 sm:mb-3.5 pl-1 sm:pl-0', headerClassName)}>
           <div className='flex justify-center items-center'>
             <div className=''>{icon && icon}</div>
-            <div className='text-xs sm:text-base items-center flex'>{title}</div>
+            <div className='text-base md:text-lg lg:text-2xl items-center flex'>{title}</div>
           </div>
-          {!isMobile && isOverflowedX && <div className='flex '>
-            <button onClick={handleClickToLeft}><ArrowLeft /></button>
-            <button onClick={handleClickToRight}><ArrowRight /></button>
-          </div>}
+          {!isMobile && isOverflowedX && <PrevAndNextButtons handleClickToLeft={handleClickToLeft} handleClickToRight={handleClickToRight}/>}
         </div>)}
       {!isMobile ?
         (<div {...bind()} ref={scrollContainerRef} className={cx("GameListSection-PC flex flex-1 overflow-hidden", gameListClassName)}>

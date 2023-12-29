@@ -207,9 +207,6 @@ export const PageTemplate = (props: IPage) => {
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
 
-
-
-
   return (
     <>
       {renderByPlatform({

@@ -17,6 +17,9 @@ import icon＿slot from "./assets/icon＿slot.png";
 import icon＿fishing from "./assets/icon＿fishing.png";
 import icon＿vivo from "./assets/icon＿vivo.png";
 import icon＿viver from "./assets/icon＿viver.png";
+import icon__buildings from "./assets/icon__buildings.png";
+import icon__files from "./assets/icon__files.png";
+
 import closeSVG from "./icon-close.svg";
 
 import cx from "classnames";
@@ -24,9 +27,13 @@ import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useLocation} from "react-router";
 import {twMerge} from "tailwind-merge";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CloseICON} from "../../../../components-bs/env/riojungle/CloseICON";
+import {appSlice} from "../../../../../reduxStore/appSlice";
+
+
+type IGameType = "Slots" | "Fishing" | "Vivo" | "Viver";
 
 type IMenuDrawer = {
   className?: string;
@@ -40,6 +47,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
+    onClickToCompanyProfile,
     onClickToLicense,
     onClickToIndex,
   } = usePageNavigate();
@@ -51,6 +59,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
     const canClose = (isMobile || isTablet);
     canClose && dispatch(uiSlice.actions.setOpenMenuDrawer(false))
   }
+
+  const { label } = useSelector((state: any) => state.gameList);
 
   return (
     <div
@@ -236,26 +246,6 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                 // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
               })}
               onClick={() => {
-                onClickToLicense();
-                close();
-              }}
-            >
-              <img
-                src={icon＿users}
-                className="w-5"
-              />
-              <div className="text-sm font-medium leading-[20px]">
-                Licença De Curaçao
-              </div>
-            </button>
-          </div>
-
-          <div className={"w-full flex flex-col px-5"}>
-            <button
-              className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
-              })}
-              onClick={() => {
                 onClickToTelegram();
                 close();
               }}
@@ -274,36 +264,37 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
               // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
             })}
-                    onClick={() => {
-                      onClickToTelegram();
-                      close();
-                    }}
+            onClick={() => {
+              onClickToCompanyProfile();
+              close();
+            }}
             >
               <img
-                src={icon＿telegramlogo}
+                src={icon__buildings}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
-                Gerente
+                Sobre Nós
               </div>
             </button>
           </div>
 
           <div className={"w-full flex flex-col px-5"}>
-            <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-              // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
-            })}
-                    onClick={() => {
-                      onClickToTelegram();
-                      close();
-                    }}
+            <button
+              className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+              })}
+              onClick={() => {
+                onClickToLicense();
+                close();
+              }}
             >
               <img
-                src={icon＿telegramlogo}
+                src={icon__files}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
-                Sobre Nós
+                Gaming Curaçao
               </div>
             </button>
           </div>
@@ -314,77 +305,38 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             </div>
           </div>
 
-          <div className={"w-full flex flex-col px-5"}>
-            <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-              // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
-            })}
-                    onClick={() => {
-                      onClickToIndex();
-                      close();
-                    }}
-            >
-              <img
-                src={icon＿slot}
-                className="w-5"
-              />
-              <div className="text-sm font-medium leading-[20px]">
-                Slots
-              </div>
-            </button>
-          </div>
-
-          <div className={"w-full flex flex-col px-5"}>
-            <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-              // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
-            })} onClick={() => {
+          {label.map((item: IGameType) => {
+            console.log("label", item);
+            let img;
+            if(item === "Slots") {
+              img = icon＿slot;
+            } else if(item === "Vivo") {
+              img = icon＿vivo;
+            } else if(item === "Viver") {
+              img = icon＿viver;
+            } else if(item === "Fishing") {
+              img = icon＿fishing;
+            }
+            return (
+              <div className={"w-full flex flex-col px-5"}>
+                <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                })}
+                onClick={() => {
                   onClickToIndex();
                   close();
                 }}
-            >
-              <img
-                src={icon＿fishing}
-                className="w-5"
-              />
-              <div className="text-sm font-medium leading-[20px]">
-                Fishing
+                >
+                  <img
+                    src={img}
+                    className="w-5"
+                  />
+                  <div className="text-sm font-medium leading-[20px]">
+                    {item}
+                  </div>
+                </button>
               </div>
-            </button>
-          </div>
-
-          <div className={"w-full flex flex-col px-5"}>
-            <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-              // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
-            })} onClick={() => {
-              onClickToIndex();
-              close();
-            }}>
-              <img
-                src={icon＿vivo}
-                className="w-5"
-              />
-              <div className="text-sm font-medium leading-[20px]">
-                Vivo
-              </div>
-            </button>
-          </div>
-
-          <div className={"w-full flex flex-col px-5"}>
-            <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-              // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
-            })} onClick={() => {
-              onClickToIndex();
-              close();
-            }}>
-              <img
-                src={icon＿viver}
-                className="w-5"
-              />
-              <div className="text-sm font-medium leading-[20px]">
-                Viver
-              </div>
-            </button>
-          </div>
-
+            )
+          })}
 
           <div className={"w-full flex flex-col px-5"}>
             <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {

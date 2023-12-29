@@ -32,8 +32,9 @@ export type InitialState = {
   isShowDepositModal: boolean;
   isShowInviteBonusModal: boolean;
   isShowMaintenanceModal: boolean;
-  isShowTelegramMobileModal: boolean;
+  isShowTelegramDetailContactModal: boolean;
   isShowiOSDownloadPopover: boolean;
+  isShowGameSearchModal: boolean;
   messageCount: number;
   vip_level: number;
   globalMessage: null | string;
@@ -94,8 +95,9 @@ const initialState: InitialState = {
   isShowDepositModal: false,
   isShowInviteBonusModal: false,
   isShowMaintenanceModal: false,
-  isShowTelegramMobileModal: false,
+  isShowTelegramDetailContactModal: false,
   isShowiOSDownloadPopover: false,
+  isShowGameSearchModal: false,
   messageCount: 0,
   withdrawBegin: "00:00",
   withdrawEnd: "00:00",
@@ -154,8 +156,8 @@ export const appSlice = createSlice({
     setShowMaintenanceModal: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isShowMaintenanceModal = action.payload;
     },
-    setShowTelegramMobileModal: (state: InitialState, action: PayloadAction<boolean>) => {
-      state.isShowTelegramMobileModal = action.payload;
+    setShowTelegramDetailContactModal: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.isShowTelegramDetailContactModal = action.payload;
     },
     setIsMobile: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isMobile = action.payload;
@@ -183,6 +185,9 @@ export const appSlice = createSlice({
     },
     setShowiOSDownloadPopover: (state: InitialState, action: PayloadAction<boolean>) => {
      state.isShowiOSDownloadPopover = action.payload;
+    },
+    setShowGameSearchModal: (state: InitialState, action: PayloadAction<boolean>) => {
+      state.isShowGameSearchModal = action.payload;
     },
     setInNativeApp: (state: InitialState, action: PayloadAction<boolean>) => {
       state.inNativeApp = action.payload

@@ -1,24 +1,24 @@
 import styled from "styled-components";
-import {twMerge} from "tailwind-merge";
-import React, {useState} from "react";
-import {UserMoneyStatusSection} from "../../UserMoneyStatusSection";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../../reduxStore";
-import {LoginButton} from "../../../../components-bs/theme/Buttons/LoginButton";
-import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
-import {AppLocalStorage} from "../../../../../persistant/localstorage";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import {IUserInfo} from "../../../../../persistant/IUserInfo";
-import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {NotificationAnimationIcon} from "../../../../components-bs/theme/Icons/animation/NotificationAnimationIcon";
-import {IHeader} from "../../types/IHeader";
-import {appSlice} from "../../../../../reduxStore/appSlice";
+import { twMerge } from "tailwind-merge";
+import React, { useState } from "react";
+import { UserMoneyStatusSection } from "../../UserMoneyStatusSection";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../../reduxStore";
+import { LoginButton } from "../../../../components-bs/Buttons/LoginButton";
+import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { IUserInfo } from "../../../../../persistant/IUserInfo";
+import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
+import { NotificationAnimationIcon } from "../../../../components-bs/Icons/animation/NotificationAnimationIcon";
+import { IHeader } from "../../types/IHeader";
+import { appSlice } from "../../../../../reduxStore/appSlice";
 import LogoContainerImg from "./LogoContainer.svg";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import {MenuSmallLogo} from "../../../../components-bs/theme/Logos/env/riojungle/MenuSmallLogo";
-import {renderByRWD} from "../../../../utils/renderByRWD";
-import {MenuLogo} from "../../../../components-bs/theme/Logos/MenuLogo";
-import {MenuMediumLogo} from "../../../../components-bs/theme/Logos/env/riojungle/MenuMediumLogo";
+import { MenuSmallLogo } from "../../../../components-bs/Logos/env/riojungle/MenuSmallLogo";
+import { renderByRWD } from "../../../../utils/renderByRWD";
+import { MenuLogo } from "../../../../components-bs/Logos/MenuLogo";
+import { MenuMediumLogo } from "../../../../components-bs/Logos/env/riojungle/MenuMediumLogo";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";
 import searchSVGICON from "./MagnifyingGlass.svg";
 
@@ -31,8 +31,12 @@ const DirectionIcon = styled.img<{
 `
 
 const SearchSection = () => {
+  const dispatch = useDispatch();
+
   return (
-    <div className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex flex-row p-1 justify-center items-center rounded-lg">
+    <div className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex flex-row p-1 justify-center items-center rounded-lg"
+      onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
+    >
       <img
         src={searchSVGICON}
         alt="MagnifyingGlass"
@@ -56,7 +60,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
     <>
       <section
         className='flex gap-2 items-center'
-        onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}}
+        onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover)) }}
         onMouseOver={() => {
           // console.log("onMouseOver")
           // props.onClickToPopupUserInfoStatusPopover();
@@ -73,7 +77,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
         <CocoAvatar className='w-[44px] h-[44px]' />
         <div>
           <div className='text-lg text-white flex mb-2'>
-            <div className='text-base leading-none'>LV:{user.vip_level}</div>
+            <div className='text-base leading-none mr-2'>LV:{user.vip_level}</div>
             <DirectionIcon
               active={openUserInfoStatusPopover}
               className='mx-auto my-auto'
@@ -90,7 +94,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
             props.onClickToOpenNotificationDrawer();
           }}
         >
-          <NotificationAnimationIcon messageCount={messageCount}/>
+          <NotificationAnimationIcon messageCount={messageCount} />
         </div>
       </section>
     </>
@@ -114,10 +118,10 @@ const UserMoneyStatusSectionItem = (props: IUserMoneyStatusSection) => {
       {renderByRWD({
         "mobile": <></>,
         "tablet": (
-          <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer}/>
+          <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
         ),
         "desktop": (
-          <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer}/>
+          <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
         )
       }, devices)}
 
@@ -134,7 +138,7 @@ const LogoBaseContainer = () => {
   )
 }
 const RWDLogo = () => {
-  const {isMobile, isTablet, isDesktop} = useBreakpoint();
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const { onClickToIndex } = usePageNavigate();
   return (
     <>
@@ -144,7 +148,7 @@ const RWDLogo = () => {
             className={"cursor-pointer"}
             onClick={() => onClickToIndex()}
           >
-            <MenuSmallLogo/>
+            <MenuSmallLogo />
           </div>
         ),
         tablet: (
@@ -152,17 +156,17 @@ const RWDLogo = () => {
             className={"cursor-pointer"}
             onClick={() => onClickToIndex()}
           >
-            <MenuMediumLogo/>
+            <MenuMediumLogo />
           </div>
         ),
         desktop: (
           <div className={"relative"}>
-            <LogoBaseContainer/>
+            <LogoBaseContainer />
             <div
               className={"cursor-pointer absolute top-[26px] left-[42px]"}
               onClick={() => onClickToIndex()}
             >
-              <MenuLogo/>
+              <MenuLogo />
             </div>
           </div>
         )
@@ -225,40 +229,40 @@ export const Header = (props: IHeader) => {
       {renderByRWD({
         "mobile": (
           <div className={"flex flex-row justify-between items-center w-full"}>
-            <RWDLogo/>
+            <RWDLogo />
             {!isLogin ? (
-              <UserActionSection/>
-            ):(
+              <UserActionSection />
+            ) : (
               <>
-                <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer}/>
-                <SearchSection/>
+                <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
+                <SearchSection />
               </>
             )}
           </div>
         ),
         "tablet": (
           <div className={"flex flex-row justify-between items-center w-full"}>
-            <RWDLogo/>
+            <RWDLogo />
             {!isLogin ? (
-              <UserActionSection/>
-            ):(
+              <UserActionSection />
+            ) : (
               <div className={"flex flex-row"}>
                 <div className={"mr-6"}>
-                  <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer}/>
+                  <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
                 </div>
-                <SearchSection/>
+                <SearchSection />
               </div>
             )}
           </div>
         ),
         "desktop": (
           <div className={"flex flex-row justify-between items-center w-full"}>
-            <RWDLogo/>
+            <RWDLogo />
             {!isLogin ? (
-              <UserActionSection/>
-            ):(
+              <UserActionSection />
+            ) : (
               <div className={"flex flex-row"}>
-                <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer}/>
+                <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
               </div>
             )}
           </div>

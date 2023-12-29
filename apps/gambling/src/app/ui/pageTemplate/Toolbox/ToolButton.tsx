@@ -1,7 +1,7 @@
 import {renderByPlatform} from "../../utils/renderByPlatform";
-import {ToolButton as WToolButton} from "../../components-bs/theme/Buttons/env/wild/ToolButton";
-import {ToolButton as CToolButton} from "../../components-bs/theme/Buttons/env/coco/ToolButton";
-import {ToolButton as RToolButton} from "../../components-bs/theme/Buttons/env/riojungle/ToolButton";
+import {ToolButton as WToolButton} from "../../components-bs/Buttons/env/wild/ToolButton";
+import {ToolButton as CToolButton} from "../../components-bs/Buttons/env/coco/ToolButton";
+import {ToolButton as RToolButton} from "../../components-bs/Buttons/env/riojungle/ToolButton";
 
 export const ToolButton = renderByPlatform({
   "wild777bet": WToolButton,

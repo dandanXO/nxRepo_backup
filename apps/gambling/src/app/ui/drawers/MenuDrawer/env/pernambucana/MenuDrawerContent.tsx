@@ -6,11 +6,11 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {useLocation, useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {DepositButton} from "../../../../components-bs/theme/Buttons/BackgroundButton/DepositButton";
-import {CashBackButton} from "../../../../components-bs/theme/Buttons/BackgroundButton/CashBackButton";
-import {DrawerButton} from "../../../../components-bs/theme/Buttons/DrawerButton";
+import {DepositButton} from "../../../../components-bs/Buttons/BackgroundButton/DepositButton";
+import {CashBackButton} from "../../../../components-bs/Buttons/BackgroundButton/CashBackButton";
+import {DrawerButton} from "../../../../components-bs/Buttons/DrawerButton";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import {HomeButton} from "../../../../components-bs/theme/Buttons/BackgroundButton/HomeButton";
+import {HomeButton} from "../../../../components-bs/Buttons/BackgroundButton/HomeButton";
 
 export const MenuDrawerContent = () => {
   const location = useLocation();
