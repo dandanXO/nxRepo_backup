@@ -31,6 +31,9 @@ const api = {
     // 電銷員下拉選單 (新客、老客、統計)
     collectors:'/hs/admin/tel-sale/statistics/distribuion-names',
 
+    // 電銷團隊下拉選單
+    groups: '/hs/admin/tel-sale/statistics/group-names',
+
 };
 
 const getTelSaleDistribute = ({params}) => axios.get(api.telSaleDistribute, { params });
@@ -46,6 +49,7 @@ const getUserContacts = (params) => axios.post(api.userContacts, params);
 const getOverdueCollection = ({ params }) => axios.get(api.overdueCollection, { ...params });
 const getTelSaleStatistics = ({params}) => axios.get(api.telSaleStatistics, { params });
 const getCollectors = (params) => axios.get(api.collectors, params);
+const getGroups = (params) => axios.get(api.groups, params);
 
 export {
     getTelSaleDistribute,
@@ -61,4 +65,5 @@ export {
     getOverdueCollection,
     getTelSaleStatistics,
     getCollectors,
+    getGroups,
 };
