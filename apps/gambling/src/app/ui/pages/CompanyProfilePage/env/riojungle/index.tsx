@@ -40,10 +40,6 @@ const Item = (props: IItem) => {
 }
 
 export const CompanyProfilePage = () => {
-  const {
-    onClickToIndex
-  } = usePageNavigate();
-
   return (
     <Container className={"pb-4"}>
       <div className="text-white text-left">
