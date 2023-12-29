@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';
 import { DesktopDailyTable } from "./DesktopDailyTable";
+import { MobileDailyTable } from "./MobileDailyTable"
 import { IDesktopPanel } from "../..";
 import { Container } from "apps/gambling/src/app/ui/components/container/Container";
 import { DesktopTotalTable } from "./DesktopTotalTable";
@@ -10,6 +11,7 @@ import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojung
 import { BackNavigation } from "apps/gambling/src/app/ui/components/BackNavigation/BackNavigation";
 import { IPanelMode } from "../../..";
 import { PageOrModalPathEnum } from "apps/gambling/src/app/ui/PageOrModalPathEnum";
+import useBreakpoint from "../../../../../hooks/useBreakpoint";
 
 export const DesktopPanel = ({
   isProxy,
@@ -22,13 +24,15 @@ export const DesktopPanel = ({
   setTotalPanelMode,
 
   dailyData,
-  // mobileDailyPanelMode,
-  // setMobileDailyPanelMode,
+  mobileDailyPanelMode,
+  setMobileDailyPanelMode,
+  orangeRecordDate,
+  onOrangeRecordDateSelect,
   dailyPanelMode,
   setDailyPanelMode,
   setPanelMode
 }: IDesktopPanel) => {
-
+  const { isTablet } = useBreakpoint();
   const navigate = useNavigate();
   return (
     <>
@@ -84,7 +88,12 @@ export const DesktopPanel = ({
         </div>
 
         <div className={"mb-4"}>
-          <DesktopDailyTable isProxy={isProxy} type={dailyPanelMode} records={dailyData} />
+          {isTablet?(
+            <MobileDailyTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} recordDate={orangeRecordDate} onRecordDateSelect={onOrangeRecordDateSelect} />
+          ):(
+            <DesktopDailyTable isProxy={isProxy} type={dailyPanelMode} records={dailyData} />
+          )}
+          
         </div>
 
       </section>
