@@ -3,6 +3,7 @@ import {environment} from "../../../../environments/environment";
 
 type IStyledPage = {
   style?: unknown;
+  isCurrentPageCompanyProfile?: boolean;
 }
 
 export const BaseStyledPageTemplate = styled.div.attrs((props) => ({
@@ -19,11 +20,33 @@ export const BaseStyledPageTemplate = styled.div.attrs((props) => ({
     z-index: -2;
 
     background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
-    background: var(--gray-scale-10);
+    background-color: var(--gray-scale-10);
+
     @media (max-width: 768px) {
-      background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
-      background: var(--gray-scale-10);
+      background: url("assets/${environment.assetPrefix}/bg_tablet.png") center bottom /130% auto;
+      background-color: var(--gray-scale-10);
     }
+
+    @media (max-width: 376px) {
+      background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
+      background-color: var(--gray-scale-10);
+    }
+
+    ${(props) => props.isCurrentPageCompanyProfile && `
+      background: url("assets/${environment.assetPrefix}/bg_company_web.png") no-repeat center center/100% auto;
+      background-color: var(--gray-scale-10);
+
+      @media (max-width: 768px) {
+        background: url("assets/${environment.assetPrefix}/bg_company_tablet.png") no-repeat center center/100% auto;
+        background-color: var(--gray-scale-10);
+      }
+
+      @media (max-width: 376px) {
+        background: url("assets/${environment.assetPrefix}/bg_company_h5.png") no-repeat center center/100% auto;
+        background-color: var(--gray-scale-10);
+      }
+    `};
+
   }
 `;
 
