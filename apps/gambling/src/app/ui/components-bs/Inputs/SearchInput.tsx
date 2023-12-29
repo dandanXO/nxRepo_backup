@@ -7,6 +7,8 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import {SearchInput as CSearchInput} from "./env/coco/SearchInput";
 import {SearchInput as WSearchInput} from "./env/wild/SearchInput";
 import {SearchInput as PSearchInput} from "./env/pernambucana/SearchInput";
+import {SearchInput as RSearchInput} from "./env/riojungle/SearchInput";
+
 export const SearchInput = (props: IInput) => {
   return renderByPlatform({
     "coco777bet": (
@@ -14,6 +16,9 @@ export const SearchInput = (props: IInput) => {
     ),
     "wild777bet": (
       <WSearchInput {...props}/>
+    ),
+    "riojungle777bet": (
+      <RSearchInput {...props}/>
     )
   }, <PSearchInput {...props}/>)
 }
