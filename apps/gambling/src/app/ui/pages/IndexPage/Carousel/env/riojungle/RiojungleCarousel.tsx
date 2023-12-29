@@ -16,7 +16,7 @@ const responsive = {
   },
   desktop: {
     breakpoint: { min: 768, max: 1024 },
-    items: 3,
+    items: 2,
     partialVisible:true,
     partialVisibilityGutter: 20
     // partialVisible: false,

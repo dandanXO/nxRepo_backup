@@ -161,29 +161,32 @@ export const Footer = (props: IFooter) => {
         desktop: (
           <div>
             {isShowDesktopFooter && (
-              <div className='bg-[var(--background-footer)] text-white flex justify-center pt-8'>
-                {/*h-[400px]*/}
-                <div className={"flex gap-3 w-11/12 mt-3"}>
+              <div className='bg-[#262626] text-[#B3B3B3] pt-10 px-12'>
+                <div className={"flex gap-5 w-full"}>
 
-                  <section className={"flex flex-col gap-3 w-1/12 items-start"}>
-                    <div className='text-[var(--white) text-base'>Jogo</div>
+                  <section className={"flex flex-col gap-3 items-start w-[82px]"}>
+                    <div className='pb-3 text-white text-lg font-bold border-b border-[#666666] w-full'>Jogo</div>
                     {
                       ["Salão", ...label].map((gameName: string, index: number) => {
                         return (
-                          <button key={index} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
+                          <button
+                            key={index}
+                            onClick={() => navigate(PageOrModalPathEnum.IndexPage)}
+                            className='text-sm'
+                          >{gameName}</button>
                         )
                       })
                     }
                   </section>
 
-                  <section className={"flex flex-col gap-3 w-3/12 items-start"}>
-                    <div className='text-[var(--white) text-base'>Ajuda</div>
+                  <section className={"flex flex-col gap-3 items-start w-[183px]"}>
+                    <div className='text-white font-bold pb-3 text-lg border-b border-[#666666] w-full'>Ajuda</div>
                     <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                     <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
                     <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
                   </section>
 
-                  <section className={"w-8/12 mt-3"}>
+                  <section className={"flex-1"}>
                     <div className={"flex gap-3 items-center mb-2"}>
                       <FooterLogo/>
                       <span className="text-lg">{environment.platformName}</span>
@@ -201,22 +204,42 @@ export const Footer = (props: IFooter) => {
                     <div className='flex justify-center underline text-blue-500 mt-46'>
                       <button onClick={()=>setFooterTextExpand(!footerTextExpand)}>{!footerTextExpand ? 'Mostrar' : 'Colocar fora'}</button>
                     </div>
-
-                    <div className='mt-3 flex justify-center mb-4'>
-                      <img alt='footer1' className='h-10' src={`assets/shared/footer1.png`}/>
-                      <img alt='footer2' className='h-10' src={`assets/shared/footer2.png`}/>
-                      <img alt='footer3' className='h-10' src={`assets/shared/footer3.png`} onClick={()=>window.open('https://www.skrill.com/pt/')}/>
-                      <img alt='footer5' className='h-10' src={`assets/shared/footer5.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
-                      <img alt='footer6' className='h-10' src={`assets/shared/footer6.png`} onClick={()=>window.open('https://www.interac.ca/en/')}/>
-                      <img alt='footer4' className='h-10' src={`assets/shared/footer4.png`} onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
-                    </div>
-
-                    <div className='flex justify-center mb-4'>
-                      <img alt='footer7' className='h-5' src={`assets/shared/footer7.png`}/>
-                    </div>
                     {/*<div className='mb-4 text-center'>@ 2023 {environment.platformName} All rights</div>*/}
                   </section>
                 </div>
+
+
+                <div className='mt-5 w-full grid grid-cols-7 gap-5'>
+                  <img alt='footer1' src={`assets/shared/footer-18+.png`}/>
+                  <img alt='footer1' src={`assets/shared/footer-gaming-curacao.png`}/>
+                  <img alt='footer1' src={`assets/shared/footer-skrill.png`} onClick={()=>window.open('https://www.skrill.com/pt/')}/>
+                  <img alt='footer1' src={`assets/shared/footer-beGambleAware.png`} onClick={()=>window.open('https://www.begambleaware.org/')}/>
+                  <img alt='footer1' src={`assets/shared/footer-interac.png`} onClick={()=>window.open('https://www.interac.ca/en/')}/>
+                  <img alt='footer1' src={`assets/shared/footer-gamCare.png`} onClick={()=>window.open('https://www.gamcare.org.uk/')}/>
+                  <img alt='footer1' src={`assets/shared/footer-google.png`}/>
+                </div>
+
+                <div className='mt-5 w-full grid grid-cols-7 gap-5'>
+                  <img alt='footer1' src={`assets/shared/footer-revolver.png`}/>
+                  <img alt='footer1' src={`assets/shared/footer-kiron.png`}/>
+                  <img alt='footer1' src={`assets/shared/footer-evolution.png`} />
+                  <img alt='footer1' src={`assets/shared/footer-merkur.png`} />
+                  <img alt='footer1' src={`assets/shared/footer-elk.png`} />
+                  <img alt='footer1' src={`assets/shared/footer-caleta.png`} />
+                  <img alt='footer1' src={`assets/shared/footer-evoplay.png`}/>
+                </div>
+
+                <div className='flex mt-5 gap-5'>
+                  <img alt='licensedBy' className='w-10' src={`assets/shared/footer-licensedBy.png`}/>
+                  <div className='text-sm font-medium text-[#BEBEBE]'>
+                    {environment.platformName} is operated by Block balancing A.C. (Commercial register of Curaçao no. 158191, Emancipatie Boulevard Dominico F. "Don" Martina 52, Curaçao) under the main gaming license #5517/JAZ.
+                  </div>
+                </div>
+
+                <div className='mt-5 text-[#B3B3B3] text-xs w-full text-center pb-10'>
+                  @ 2023 {environment.platformName} All rights
+                </div>
+
               </div>
             )}
           </div>
