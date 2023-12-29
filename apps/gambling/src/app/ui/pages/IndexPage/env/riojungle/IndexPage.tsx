@@ -10,7 +10,6 @@ import { IndexTabs } from "../../IndexTabs";
 
 import { AppCarousel } from "../../Carousel";
 
-import { useScrollToCarousel } from "../../useScrollToCarousel";
 
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
 import React, { useEffect, useState } from "react";
@@ -92,7 +91,7 @@ export const IndexPage = ({
   onClickFavoriteGameItem,
   recentGameList
 }: ICoco777betIndexPage) => {
-  const { isMobile } = useBreakpoint();
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLogin } = useSelector((state: RootState) => state.app);
@@ -175,38 +174,39 @@ export const IndexPage = ({
 
   return (
     <>
-      <Container >
-
+      <Container id={"app-carousel"}>
         {/*{isMobile && <CompanySloganLabel />}*/}
+        <div>
+          <AppCarousel setIsMoving={setIsMoving}>
+            <AppCarouselContent isMoving={isMoving} />
+            <AppCarouselContent2 isMoving={isMoving} />
+            <AppCarouselContent3 isMoving={isMoving} />
+            <AppCarouselContent4 isMoving={isMoving} />
+            <AppCarouselContent5 isMoving={isMoving} />
+            <AppCarouselContent6 isMoving={isMoving} />
+            {/*NOTE: 公司簡介目前沒有*/}
+            {/*<AppCarouselContent6/>*/}
+            {/*NOTE: 暫時備用*/}
+            {/*<AppCarouselContent7/>*/}
+            {/*NOTE: 暫時備用*/}
+            {/*<AppCarouselContent8/>*/}
+            {/*<CocoAppCarouselContent6/>*/}
+          </AppCarousel>
+        </div>
 
-        <AppCarousel setIsMoving={setIsMoving}>
-          <AppCarouselContent isMoving={isMoving} />
-          <AppCarouselContent2 isMoving={isMoving} />
-          <AppCarouselContent3 isMoving={isMoving} />
-          <AppCarouselContent4 isMoving={isMoving} />
-          <AppCarouselContent5 isMoving={isMoving} />
-          <AppCarouselContent6 isMoving={isMoving} />
-          {/*NOTE: 公司簡介目前沒有*/}
-          {/*<AppCarouselContent6/>*/}
-          {/*NOTE: 暫時備用*/}
-          {/*<AppCarouselContent7/>*/}
-          {/*NOTE: 暫時備用*/}
-          {/*<AppCarouselContent8/>*/}
-          {/*<CocoAppCarouselContent6/>*/}
-        </AppCarousel>
       </Container>
 
       <Container
         className={cx(
-          "py-2 z-20 bg-[#1A1A1A] ",
-          // DesktopXPadding,
+          "z-[2]",
+          "py-2 bg-[#1A1A1A]",
           {
-            "fixed top-[72px] right-0 left-[248px]": showFixForIOSStickTab && !isMobile,
-          },
-          {
-            "fixed top-[52px] left-0 right-0": showFixForIOSStickTab && isMobile,
+            "fixed top-[52px] left-0 right-0 ": showFixForIOSStickTab && !isDesktop,
           },
         )}
+        style={{
+
+        }}
       >
         <div className={"flex flex-row justify-between items-center w-full"}>
           <IndexTabs />
@@ -232,7 +232,11 @@ export const IndexPage = ({
       {
         recentGameList.length > 0 && (
           <Container
-            className={tcx('overflow-hidden', [DesktopXPadding, !isMobile])}
+            className={cx(
+              'overflow-hidden',
+              [DesktopXPadding, !isMobile], {
+
+            })}
           >
             <GameListSection
               className='mb-0 pl-0 px-0'
@@ -258,6 +262,7 @@ export const IndexPage = ({
 
       <Container className={cx("pb-16", {
         // [DesktopXPadding]: !isMobile,
+        "pt-[58px]": showFixForIOSStickTab && !isDesktop,
       })}>
         {gameList()}
       </Container>

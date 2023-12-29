@@ -6,22 +6,44 @@ export const useScrollToCarousel = () => {
   const [carouselHeight, setCarouselHeight] = useState(0);
 
   useEffect(() => {
+    const pageContainer = document.getElementById("page-container");
+
     const scroll = () => {
+      console.log("debug.scroll2")
+
+      const targetContainer = pageContainer ? pageContainer : window;
+      const scrollY = pageContainer ? pageContainer.scrollTop : window.scrollY;
+      console.log("debug.pageContainer", pageContainer)
+      console.log("debug.targetContainer", targetContainer)
+      console.log("debug.scrollY", scrollY)
+
       const carousel = document.getElementById("app-carousel");
+
       let carouselHeight = 0;
       if(carousel && carousel.offsetHeight) {
         carouselHeight = carousel.offsetHeight;
+        console.log("debug.carouselHeight", carouselHeight)
+        console.log("debug.scrollY", scrollY)
         setCarouselHeight(carouselHeight);
       }
-      if(window.scrollY > carouselHeight) {
+      if(scrollY > carouselHeight) {
         setShowFixForIOSStickTab(true)
       } else {
         setShowFixForIOSStickTab(false)
       }
     }
-    window.addEventListener("scroll", scroll);
+
+    if(pageContainer) {
+      pageContainer.addEventListener("scroll", scroll, true);
+    }
+    window.addEventListener("scroll", scroll, true);
     return () => {
-      window.removeEventListener("scroll", scroll);
+      console.log("debug.scroll-remove")
+      const pageContainer = document.getElementById("page-container");
+      if(pageContainer) {
+        pageContainer.removeEventListener("scroll", scroll, true);
+      }
+      window.removeEventListener("scroll", scroll, true);
     }
   }, []);
 
