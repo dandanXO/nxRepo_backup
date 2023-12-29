@@ -17,6 +17,9 @@ interface Config {
   reward_daily_reset?: boolean;
   recharge_bonus_start?: number;
 }
+
+export type ILoginUIStatusType = "login" | "register" | "forget";
+
 export type InitialState = {
   inNativeApp: boolean;
   isMobile: boolean;
@@ -27,6 +30,7 @@ export type InitialState = {
   isUILoading: boolean;
   userStore?: IUserStore;
   isShowLoginModal: boolean;
+  loginUIStatusType: ILoginUIStatusType;
   isShowMobileLogoutModal: boolean;
   isShowTelegramModal: boolean;
   isShowDepositModal: boolean;
@@ -88,6 +92,7 @@ const initialState: InitialState = {
   isTablet: false,
   isDesktop: false,
   isLogin: !!AppLocalStorage.getItem(AppLocalStorageKey.token),
+  loginUIStatusType: "login",
   userStore: userStore$3,
   isShowLoginModal: false,
   isShowMobileLogoutModal: false,
@@ -99,6 +104,7 @@ const initialState: InitialState = {
   isShowiOSDownloadPopover: false,
   isShowGameSearchModal: false,
   messageCount: 0,
+
   withdrawBegin: "00:00",
   withdrawEnd: "00:00",
   maintenance: {
@@ -140,6 +146,9 @@ export const appSlice = createSlice({
     },
     showLoginDrawerOrModal:  (state: InitialState, action: PayloadAction<boolean>) => {
       state.isShowLoginModal = action.payload;
+    },
+    setLoginUIStatusType: (state: InitialState, action: PayloadAction<ILoginUIStatusType>) => {
+      state.loginUIStatusType = action.payload;
     },
     showMobileLogoutModal: (state: InitialState, action: PayloadAction<boolean>) => {
       state.isShowMobileLogoutModal = action.payload;
