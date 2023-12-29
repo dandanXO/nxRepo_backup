@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 
 import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
 import { Container } from "../../../../components/container/Container";

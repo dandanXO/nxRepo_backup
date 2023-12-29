@@ -5,7 +5,7 @@ import {DepositPanel} from "../../components/deposit/DepositPanel";
 import {WithdrawPanel} from "../../components/withdraw/WithdrawPanel";
 import {RecordPanel} from "../../components/record/RecordPanel";
 
-import {useAllowLoginRouterRules} from "../../../../router/useAllowLoginRouterRules";
+import {useAllowLoginRouterRules} from "../../../../router/hooks/useAllowLoginRouterRules";
 import {TotalSectionContainer} from "../../components/TotalSectionContainer";
 import {CommonTableTabG} from "../../../../components/TabItem/CommonTableTabG";
 import cx from "classnames";

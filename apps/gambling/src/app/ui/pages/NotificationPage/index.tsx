@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import {useAllowLoginRouterRules} from "../../router/useAllowLoginRouterRules";
+import {useAllowLoginRouterRules} from "../../router/hooks/useAllowLoginRouterRules";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 

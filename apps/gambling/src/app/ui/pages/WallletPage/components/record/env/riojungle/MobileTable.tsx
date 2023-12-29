@@ -58,8 +58,10 @@ export const DepositMobileTable = () => {
                 <div className='font-bold text-[var(--white-40)]'>Identificador</div>
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
-                  <CopyIcon className={'text-white self-baseline'} copyText={record.pay_serial_no} />
-                </div>
+                  <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
+                    src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
+                  />
+                </div>  
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
                 <span className={'text-[var(--white-40)]'}>Valor</span>
@@ -77,13 +79,12 @@ export const DepositMobileTable = () => {
               </div>
 
               <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Modelo</span>
+                <span className={'text-[var(--white-40)]'}>Método De Depósito</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-assistant p-2'}>
-                <span className='text-[var(--white-40)]'> Tempo </span>
-
+              <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
+                <span className={'text-[var(--white-40)]'}>Estado Do Depósito</span>
                 <span style={{
                   color:
                     record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
@@ -91,9 +92,13 @@ export const DepositMobileTable = () => {
                         record.status === 1 ? 'var(--state-success-main)' :   // 绿色
                           'var(--white)'  // 白色 (默认)
                 }}>
-                  <span className={'text-white'}>{record.created_at}</span>
                   {TradeStatusMap[record.status]}
                 </span>
+              </div>
+
+              <div className={'flex flex-row justify-between border-assistant p-2'}>
+                <span className='text-[var(--white-40)]'> Tempo </span>
+                <span className={'text-white'}>{record.created_at}</span>
               </div>
             </Container>
           ))}
@@ -124,37 +129,49 @@ export const WithdrawMobileTable = () => {
             <Container
               key={record.id}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
-                "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
+                "bg-[var(--background-tabbar)]"
               )}
             >
-              <div className={'flex flex-row justify-between px-5 pt-2.5 pb-2 items-center'}>
-                <div className='font-bold'>ID da ordem: {record.pay_serial_no}</div>
-                <CopyIcon className={'text-[var(--secondary-assistant)]'} copyText={record.pay_serial_no} />
+               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
+                <div className='font-bold text-[var(--white-40)]'>Identificador</div>
+                <div>
+                  <span className='mr-1'>{record.pay_serial_no}</span>
+                  <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
+                    src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
+                  />
+                </div>  
               </div>
 
-              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
-                <span className={''}>Valor</span>
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
+                <span className={'text-[var(--white-40)]'}>Valor</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
-                <span className={''}>Taxa de retirada</span>
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
+                <span className={'text-[var(--white-40)]'}>Taxa de retirada</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.fee))}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] px-5 pt-3 pb-2'}>
-                <span className={''}>Modelo</span>
+              <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
+                <span className={'text-[var(--white-40)]'}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
-              <div className={'flex flex-row justify-between border-assistant px-5 pt-3 pb-2'}>
-                <span className={''}>{record.created_at}</span>
+              <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
+                <span className={'text-[var(--white-40)]'}>Estado Do Depósito</span>
                 <span style={{
-                  color: record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
-                    record.status === 3 ? 'var(--state-error-main)' :   // 红色
-                      record.status === 1 ? 'var(--state-success-main)' :   // 绿色
-                        'var(--white)'  // 白色 (默认)
-                }}>{TradeStatusMap[record.status]}</span>
+                  color:
+                    record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
+                      record.status === 3 ? 'var(--state-error-main)' :   // 红色
+                        record.status === 1 ? 'var(--state-success-main)' :   // 绿色
+                          'var(--white)'  // 白色 (默认)
+                }}>
+                  {TradeStatusMap[record.status]}
+                </span>
+              </div>
+              <div className={'flex flex-row justify-between border-assistant p-2'}>
+                <span className='text-[var(--white-40)]'> Tempo </span>
+                <span className={'text-white'}>{record.created_at}</span>
               </div>
             </Container>
           ))}

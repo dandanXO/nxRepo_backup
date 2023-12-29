@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import QRCode from 'react-qr-code';
 import copy from 'copy-to-clipboard';
-import { useAllowLoginRouterRules } from "../../../../router/useAllowLoginRouterRules";
+import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 import { notification } from "antd";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import cx from "classnames";
