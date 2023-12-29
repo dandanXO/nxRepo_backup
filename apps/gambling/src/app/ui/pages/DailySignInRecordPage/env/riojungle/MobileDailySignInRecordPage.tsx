@@ -3,9 +3,10 @@ import { GetSignInRecordResponseData } from "../../../../../external";
 import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
-import { NoData } from "../../../../components-bs/theme/Icons/NoData";
+
 import { Container } from "../../../../components/container/Container";
 import cx from "classnames"
+import {NoData} from "../../../../components-bs/Icons/NoData";
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <td className='w-1/3 px-1 h-10 flex justify-center items-center border-r border-[rgba(255,255,255,0.2)]'>
@@ -55,7 +56,7 @@ export const MobileDailySignInRecordPage = ({
                   <div className='font-bold text-[var(--white-40)]'>ID</div>
                   <div>
                     <span className='mr-1'>{record.id}</span>
-                  </div>  
+                  </div>
                 </div>
                 <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
                   <span className={'text-[var(--white-40)]'}>Nivel VIP</span>
