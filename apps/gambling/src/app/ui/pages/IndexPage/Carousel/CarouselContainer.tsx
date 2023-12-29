@@ -20,6 +20,7 @@ export const CarouselContainer = (props: IProps) => {
           props.onClickBanner && props.onClickBanner(event);
         }
       }}
+      className='group'
     >
       <button className={cx("", props.className)}>
         {props.children}
