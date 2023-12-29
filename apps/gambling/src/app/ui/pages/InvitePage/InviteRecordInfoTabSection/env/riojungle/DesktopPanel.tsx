@@ -88,11 +88,9 @@ export const DesktopPanel = ({
         </div>
 
         <div className={"mb-4"}>
-          {isTablet?(
-            <MobileDailyTable isProxy={isProxy} records={dailyData} type={mobileDailyPanelMode} onClick={(type) => setMobileDailyPanelMode(type as "1" | "2" | "3")} recordDate={orangeRecordDate} onRecordDateSelect={onOrangeRecordDateSelect} />
-          ):(
+          {
             <DesktopDailyTable isProxy={isProxy} type={dailyPanelMode} records={dailyData} />
-          )}
+          }
           
         </div>
 
