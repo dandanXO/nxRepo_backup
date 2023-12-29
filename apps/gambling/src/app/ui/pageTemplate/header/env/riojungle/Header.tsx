@@ -73,7 +73,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
         <CocoAvatar className='w-[44px] h-[44px]' />
         <div>
           <div className='text-lg text-white flex mb-2'>
-            <div className='text-base leading-none'>LV:{user.vip_level}</div>
+            <div className='text-base leading-none mr-2'>LV:{user.vip_level}</div>
             <DirectionIcon
               active={openUserInfoStatusPopover}
               className='mx-auto my-auto'

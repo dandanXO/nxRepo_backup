@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {TelegramMobileModal} from "../../../../modals/TelegramMobileModal";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {TShowToolboxConfig} from "../../../base/types";
 import {FixedToolStyle} from "../../FixedToolStyle";
@@ -42,7 +41,6 @@ export const Toolbox = (props: IToolbox) => {
 
   const {isMobile} = useBreakpoint();
   const dispatch=useDispatch();
-  const {isShowTelegramMobileModal} = useSelector((state: RootState) => state.app);
 
   return (
     <>
@@ -60,7 +58,7 @@ export const Toolbox = (props: IToolbox) => {
               mobileShowCustomerService && (
                 <div>
                   <ToolButton isMobile={isMobile} className={""} onClick={() => {
-                    dispatch(appSlice.actions.setShowTelegramMobileModal(true))
+                    dispatch(appSlice.actions.setShowTelegramDetailContactModal(true))
                   }}>
                     <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/customer-service-2.png`} />
                   </ToolButton>

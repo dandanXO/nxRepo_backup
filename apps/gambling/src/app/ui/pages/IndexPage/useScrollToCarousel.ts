@@ -6,33 +6,63 @@ export const useScrollToCarousel = () => {
   const [carouselHeight, setCarouselHeight] = useState(0);
 
   useEffect(() => {
+    const pageContainer = document.getElementById("page-container");
+    const getScrollY = () => pageContainer ? pageContainer.scrollTop : window.scrollY;
+
     const scroll = () => {
+
+      // console.log("debug.scroll")
+      // const targetContainer = pageContainer ? pageContainer : window;
+
+      // console.log("debug.pageContainer", pageContainer)
+      // console.log("debug.targetContainer", targetContainer)
+      // console.log("debug.scrollY", scrollY)
       const carousel = document.getElementById("app-carousel");
       let carouselHeight = 0;
+
       if(carousel && carousel.offsetHeight) {
         carouselHeight = carousel.offsetHeight;
+        // console.log("debug.carouselHeight", carouselHeight)
+        // console.log("debug.scrollY", getScrollY())
         setCarouselHeight(carouselHeight);
       }
-      if(window.scrollY > carouselHeight) {
+      if(getScrollY() > carouselHeight) {
         setShowFixForIOSStickTab(true)
       } else {
         setShowFixForIOSStickTab(false)
       }
     }
-    window.addEventListener("scroll", scroll);
+
+    if(pageContainer) {
+      pageContainer.addEventListener("scroll", scroll);
+    } else {
+      window.addEventListener("scroll", scroll);
+    }
+
     return () => {
-      window.removeEventListener("scroll", scroll);
+      if(pageContainer) {
+        pageContainer.removeEventListener("scroll", scroll);
+      } else {
+        window.removeEventListener("scroll", scroll);
+      }
+
     }
   }, []);
 
   const scrollToCarousel = () => {
-    if(window.scrollY > carouselHeight) {
-      window.scrollTo({ top: carouselHeight, behavior: "smooth" });
+    const pageContainer = document.getElementById("page-container");
+    const getScrollY = () => pageContainer ? pageContainer.scrollTop : window.scrollY;
+
+    if(getScrollY() > carouselHeight) {
+      const targetContainer = pageContainer ? pageContainer : window;
+      targetContainer.scrollTo({ top: carouselHeight, behavior: "smooth" });
     }
   }
 
   const scrollToWindowTop = () => {
-    window.scrollTo({ left: 0, behavior: "smooth"});
+    const pageContainer = document.getElementById("page-container");
+    const targetContainer = pageContainer ? pageContainer : window;
+    targetContainer.scrollTo({ left: 0, behavior: "smooth"});
   }
 
   return {
