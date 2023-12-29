@@ -28,6 +28,7 @@ export const MenuDrawerContent = () => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
+    onClickToCompanyProfile
   } = usePageNavigate();
 
   const dispatch = useDispatch();
@@ -111,6 +112,15 @@ export const MenuDrawerContent = () => {
         icon={<img className="w-[14px] h-[14px] mr-2" alt={"vip"} src={`assets/${environment.assetPrefix}/icon=vip.png`} />}
         onClick={() => {
           onClickToVipGrade();
+          closeMenuDrawer();
+        }}
+      />
+      <MobileMenuLink
+        text={'Sobre nós'}
+        className="text-white"
+        icon={<img className="w-[14px] h-[14px] mr-2" alt={"about"} src={`assets/${environment.assetPrefix}/icon=building.png`} />}
+        onClick={() => {
+          onClickToCompanyProfile();
           closeMenuDrawer();
         }}
       />
