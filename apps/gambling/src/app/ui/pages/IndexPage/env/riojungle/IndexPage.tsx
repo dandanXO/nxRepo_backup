@@ -170,6 +170,7 @@ export const IndexPage = ({
     )
   }
 
+  const isFixedGameTypeTabs = showFixForIOSStickTab && !isDesktop;
 
 
   return (
@@ -201,7 +202,7 @@ export const IndexPage = ({
           "z-[2]",
           "py-2 bg-[#1A1A1A]",
           {
-            "fixed top-[52px] left-0 right-0 ": showFixForIOSStickTab && !isDesktop,
+            "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },
         )}
         style={{
@@ -260,10 +261,11 @@ export const IndexPage = ({
         )
       }
 
-      <Container className={cx("pb-16", {
-        // [DesktopXPadding]: !isMobile,
-        "pt-[58px]": showFixForIOSStickTab && !isDesktop,
-      })}>
+      <Container
+        className={cx("pb-16", {
+        "pt-[58px]": isFixedGameTypeTabs,
+        })}
+      >
         {gameList()}
       </Container>
     </>

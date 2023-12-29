@@ -9,17 +9,15 @@ export const useScrollToCarousel = () => {
     const pageContainer = document.getElementById("page-container");
 
     const scroll = () => {
-      console.log("debug.scroll2")
-
-      const targetContainer = pageContainer ? pageContainer : window;
+      // console.log("debug.scroll")
+      // const targetContainer = pageContainer ? pageContainer : window;
       const scrollY = pageContainer ? pageContainer.scrollTop : window.scrollY;
-      console.log("debug.pageContainer", pageContainer)
-      console.log("debug.targetContainer", targetContainer)
-      console.log("debug.scrollY", scrollY)
-
+      // console.log("debug.pageContainer", pageContainer)
+      // console.log("debug.targetContainer", targetContainer)
+      // console.log("debug.scrollY", scrollY)
       const carousel = document.getElementById("app-carousel");
-
       let carouselHeight = 0;
+
       if(carousel && carousel.offsetHeight) {
         carouselHeight = carousel.offsetHeight;
         console.log("debug.carouselHeight", carouselHeight)
@@ -34,16 +32,18 @@ export const useScrollToCarousel = () => {
     }
 
     if(pageContainer) {
-      pageContainer.addEventListener("scroll", scroll, true);
+      pageContainer.addEventListener("scroll", scroll);
+    } else {
+      window.addEventListener("scroll", scroll);
     }
-    window.addEventListener("scroll", scroll, true);
+
     return () => {
-      console.log("debug.scroll-remove")
-      const pageContainer = document.getElementById("page-container");
       if(pageContainer) {
-        pageContainer.removeEventListener("scroll", scroll, true);
+        pageContainer.removeEventListener("scroll", scroll);
+      } else {
+        window.removeEventListener("scroll", scroll);
       }
-      window.removeEventListener("scroll", scroll, true);
+
     }
   }, []);
 
