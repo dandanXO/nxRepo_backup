@@ -56,7 +56,7 @@ export const DesktopPanel = ({
             </div>
           </div>
           <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-            {isProxy !== undefined && <div className="text-[#3B82F6]">Dividends:R$ {totalInviteData?.dividendos !== undefined && totalInviteData?.dividendos}</div>}
+            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {totalInviteData?.dividendos !== undefined && totalInviteData?.dividendos}</div>}
             <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
           </div>
         </div>
@@ -78,7 +78,7 @@ export const DesktopPanel = ({
             </div>
           </div>
           <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-            {isProxy !== undefined && <div className="text-[#3B82F6]">Dividends:R$ {dailyData !== undefined ? dailyData[0]?.dividendos : ''}</div>}
+            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {dailyData !== undefined ? dailyData[0]?.dividendos : ''}</div>}
             <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
           </div>
         </div>
