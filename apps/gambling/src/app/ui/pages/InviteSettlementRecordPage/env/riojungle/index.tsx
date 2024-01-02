@@ -13,6 +13,7 @@ import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey
 import { formatLocaleMoney } from "../../../../utils/format";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import Index from "../../../../components/DatePickers/RangeDatePicker";
+import cx from "classnames"
 import { DragScrollContainer } from '../../../../components/DragScrollContainer';
 import { Table } from '../../../../components/Table';
 const { RangePicker } = DatePicker;
@@ -25,6 +26,16 @@ const NoData = () => {
         <div>Nada aqui</div>
       </div>
     </td>
+  )
+}
+const NoDataMobile = () => {
+  return (
+      <div className="bg-[#333333] p-2">
+        <div className='flex flex-col py-4 justify-center items-center bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
+          <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
+          <div>Nada aqui</div>
+        </div>
+      </div>
   )
 }
 
@@ -83,6 +94,7 @@ export const InviteSettlementRecordPage = () => {
                 value={[dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]}
               />) :
               ( 
+                <div>
                   <RangePicker
                     separator = {'-'}
                     value={[dates[0], dates[1]]}
@@ -94,7 +106,6 @@ export const InviteSettlementRecordPage = () => {
                         setDates(dates as Moment[]);
                       }
                     }}
-                    // className={`before:content-[url('assets/riojungle777bet/Calendar.png')]`}
                     style={
                       {
                         width: '250px',
@@ -109,12 +120,51 @@ export const InviteSettlementRecordPage = () => {
                     }
                     disabledDate={(current) => current > max}
                   />
+                </div>
               )
           }
         </section>
 
         <div className="overflow-x-auto rounded-lg mb-[80px]">
-          <table className="table table-zebra w-full text-center">
+        {
+          isMobile ?
+          (currentData?.rows.length === 0 ? <NoDataMobile />:
+            <div className='grow h-full overflow-y-auto mt-6 bg-[#333333] rounded-lg px-2'>
+              {
+                (
+                  currentData?.rows.map((record, index: number) => {
+                    return (
+                        <div
+                        key={record.id}
+                        className={cx("flex flex-col rounded-lg text-white text-sm",
+                          "bg-[#262626] border-[#4d4d4d] my-1 border-solid border-2",
+                          {
+                            'mt-2': index === 0
+                          },
+                          {
+                            'mb-2': index === currentData?.rows.length-1
+                          }
+                        )}
+                      >
+                        <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
+                          <div className='font-bold text-[var(--white-40)]'>Hora De Entrada</div>
+                          <div>
+                            <span className='mr-1'>{moment(record.updateTime).format('DD.MM-YYYY HH:mm:ss')}</span>
+                          </div>
+                        </div>
+                        <div className={'flex flex-row justify-between border-[var(--white-20)] p-2'}>
+                          <span className={'text-[var(--white-40)]'}>Bônus</span>
+                          <span className={''}>{formatLocaleMoney(record.reward / 100)}</span>
+                        </div>
+                      </div>
+                    )
+                  })
+                )
+              }
+            </div>
+          )
+          :
+            <table className="table table-zebra w-full text-center">
             {/* head */}
             <thead>
               <tr>
@@ -137,6 +187,7 @@ export const InviteSettlementRecordPage = () => {
             </tbody>
 
           </table>
+          }
         </div>
       </SectionContainer>
   )
