@@ -1,11 +1,7 @@
 import {LogoutSection} from "../../components-bs/UserLogoutSection";
 import {LogoutPopoverContainer} from "./LogoutPopoverContainer";
 
-type ILogoutPopover = {
-  close: () => void;
-}
-
-export const LogoutPopover = (props: ILogoutPopover) => {
+export const LogoutPopover = () => {
 
   return (
     <LogoutPopoverContainer className={""}>

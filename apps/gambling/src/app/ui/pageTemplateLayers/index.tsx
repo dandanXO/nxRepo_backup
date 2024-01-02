@@ -24,6 +24,7 @@ import { uiSlice } from "../../reduxStore/uiSlice";
 import {GameSearchModal} from "../modals/GameSearchModal";
 import {useClickFavoriteGameItem} from "../hooks/useClickFavoriteGameItem";
 import {TelegramDetailContactModal} from "../modals/TelegramDetailContactModal";
+import { renderByPlatform } from "../utils/renderByPlatform";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -107,16 +108,13 @@ export const PageTemplateLayers = ({
       )}
 
       {/*Logout*/}
-      {isMobile && isShowMobileLogoutModal && (
-        <LogoutModal/>
-      )}
-
-      {/*LogoutPopover*/}
-      {!isMobile && isShowMobileLogoutModal && (
-        <LogoutPopover close={() => {
-          setOpenLogoutPopover(false);
-        }}/>
-      )}
+      {
+        isShowMobileLogoutModal && (
+          renderByPlatform({
+            "riojungle777bet": <LogoutModal />
+          }, isMobile ? <LogoutModal />: <LogoutPopover />)
+        )
+      }
 
       {/*UserInfoStatusPopover*/}
       {openUserInfoStatusPopover && (
