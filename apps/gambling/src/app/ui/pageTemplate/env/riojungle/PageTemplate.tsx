@@ -56,27 +56,24 @@ type IPageTemplate = {
 } & IUseSingletonPageTemplateConfig
 
 export const PageTemplate = ({
-                              children,
-                              showLoginModal,
-                              setOpenDesktopNotificationDrawer,
-                              setOpenLogoutPopover,
-                              isShowMobileLogoutModal,
-                              onClickToOpenTelegramService,
-                              onClickToDownload,
-                              onClickToOpenTelegramManager,
-                              showToolboxConfig,
+                               children,
+                               showLoginModal,
+                               setOpenDesktopNotificationDrawer,
+                               setOpenLogoutPopover,
+                               isShowMobileLogoutModal,
+                               onClickToOpenTelegramService,
+                               onClickToDownload,
+                               onClickToOpenTelegramManager,
+                               showToolboxConfig,
 
 
-                              // NOTICE:
-                                header,
-                                footer,
-                                tabBar,
-                                menuDrawer,
+                                // NOTICE:
+                               header,
+                               footer,
+                               tabBar,
+                               menuDrawer,
                                showMenuDrawer,
-                                // NOTICE: deprecated
-                                // showTabbar,
                              }:IPageTemplate) => {
-
 
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
@@ -84,33 +81,39 @@ export const PageTemplate = ({
 
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
 
-
   // NOTICE: refactor me
-  // NOTE: Header
+  // NOTE: Style - Header
   const HeaderHeight = isDesktop ? 72 : isTablet ? 72 : 56;
   const HeaderZIndex = isDesktop ? "z-[1004]" : "z-[1002]";
 
-  // NOTE: MenuDrawer
+  // NOTE: Style - MenuDrawer
   const DrawerWidth = 248;
   const MenuDrawerTop = isDesktop ? 72 : 0;
   const MenudrawerZIndex = "z-[1003]";
 
-  // NOTE: AddShortCut
+  // NOTE: Style - AddShortCut
   const AddShortCutZIndex = "z-[1005]"
 
-  // NOTE: TabBar
+  // NOTE: Style - TabBar
   const TabHeight = (tabBar.mobile || tabBar.tablet || tabBar.desktop) ? 72 : 0;
   const TabZIndex = "z-[1004]";
 
+  // NOTE: show
+  const isShowHeader = header.mobile || header.tablet || header.desktop;
+  const isShowFooter = footer.mobile || footer.tablet || footer.desktop;
+  const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
+  const isShowTabBar = tabBar.mobile || tabBar.tablet || tabBar.desktop;
 
-  // NOTE: hideAddToMobileShortcut, isShowiOSDownloadPopover
-  const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
-  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
+  // NOTE: AddToMobileShortCut
   const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
+  const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
+  const isShowAddToMobileShortCut = isMobile && !inNativeApp && !hideAddToMobileShortcut
+
+  // NOTE: iOSDownloadPopover
+  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
+  const isShowIOSDOwnloadModal = isShowiOSDownloadPopover && isMobile;
 
   const location = useLocation();
-
-  const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
 
   return (
     <BaseStyledPageTemplate
@@ -123,7 +126,7 @@ export const PageTemplate = ({
       )}
 
       {
-        (header.mobile || header.tablet || header.desktop)
+        isShowHeader
         &&
         (
           <div
@@ -151,7 +154,6 @@ export const PageTemplate = ({
           </div>
         )
       }
-
 
       {isShowMenuDrawer && (
         <div
@@ -185,36 +187,14 @@ export const PageTemplate = ({
             {children}
           </BaseErrorBoundary>
 
-          {(footer.mobile || footer.tablet || footer.desktop) && (
+          {isShowFooter && (
             <Footer/>
           )}
         </div>
 
       </div>
 
-      {!inNativeApp && (
-        <div
-          className={twMerge("fixed w-full flex justify-center",
-            AddShortCutZIndex,
-          )}
-          style={{
-            bottom: 20,
-          }}
-        >
-          {!hideAddToMobileShortcut && isMobile &&
-            <AddToMobileShortcut isShowTabbar={(tabBar.mobile || tabBar.tablet || tabBar.desktop) || true}/>
-          }
-        </div>
-      )}
-
-      {/*NOTICE: Refactor me*/}
-      {isShowiOSDownloadPopover && isMobile && (
-        <div className={twMerge("z-[1006]", "fixed bottom-0")}>
-          {<IOSDownloadModal/>}
-        </div>
-      )}
-
-      {(tabBar.mobile || tabBar.tablet || tabBar.desktop) && (
+      {isShowTabBar && (
         <TabBar className={TabZIndex} isShowSlot={false} size={"big"} isShowMenuDrawer={showMenuDrawer}/>
       )}
 
@@ -229,6 +209,28 @@ export const PageTemplate = ({
           />
         </div>
       )}
+
+      {/*NOTE: AddToMobileShortcut*/}
+      {isShowAddToMobileShortCut && (
+        <div
+          className={twMerge("fixed w-full flex justify-center",
+            AddShortCutZIndex,
+          )}
+          style={{
+            bottom: 20,
+          }}
+        >
+          <AddToMobileShortcut isShowTabbar={isShowTabBar}/>
+        </div>
+      )}
+
+      {/*NOTE: IOSDownloadModal*/}
+      {isShowIOSDOwnloadModal && (
+        <div className={twMerge("z-[1006]", "fixed bottom-0")}>
+          {<IOSDownloadModal/>}
+        </div>
+      )}
+
 
     </BaseStyledPageTemplate>
   )
