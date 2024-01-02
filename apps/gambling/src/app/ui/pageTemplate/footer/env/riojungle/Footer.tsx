@@ -13,12 +13,9 @@ import {IFooter} from "../../types/IFooter";
 
 
 export const Footer = (props: IFooter) => {
-  const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
   const { label } = useSelector((state: any) => state.gameList);
 
-  const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
-  const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
 
   // NOTE: mobile footer expands
   const [footerExpands, setFooterExpands] = useState({
@@ -35,7 +32,7 @@ export const Footer = (props: IFooter) => {
       {renderByRWD({
         mobile: (
           <div>
-            {isShowMobileFooter && (
+            {(
               <div className={cx(
                 'text-[#B3B3B3] px-4 pt-8 pb-[80px] text-xs bg-[#262626]',
               )}>
@@ -203,7 +200,7 @@ export const Footer = (props: IFooter) => {
         ),
         desktop: (
           <div>
-            {isShowDesktopFooter && (
+            {(
               <div className='bg-[#262626] text-[#B3B3B3] pt-10 px-12'>
                 <div className={"flex gap-5 w-full"}>
 

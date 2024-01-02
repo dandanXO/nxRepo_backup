@@ -18,10 +18,12 @@ const { RangePicker } = DatePicker;
 
 const NoData = () => {
   return (
-    <td colSpan={2} className=''>
-      <div className='p-12'>
-        <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
-        <div>Nada aqui</div>
+    <td colSpan={2} className='!bg-[#333333]'>
+      <div className="bg-[#333333] p-2">
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
+          <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
+          <div>Nada aqui</div>
+        </div>
       </div>
     </td>
   )
@@ -29,7 +31,7 @@ const NoData = () => {
 const NoDataMobile = () => {
   return (
       <div className="bg-[#333333] p-2">
-        <div className='flex flex-col py-4 justify-center items-center bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
           <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
           <div>Nada aqui</div>
         </div>
@@ -166,8 +168,8 @@ export const InviteSettlementRecordPage = () => {
             {/* head */}
             <thead>
               <tr>
-                <th className='text-[#B3B3B3] p-4 border-[rgba(255,255,255,0.2)]'>Hora De Entrada</th>
-                <th className='text-[#B3B3B3] p-4'>Bônus</th>
+                <th className='text-[#B3B3B3] !bg-[#333333] p-4 border-[rgba(255,255,255,0.2)]'>Hora De Entrada</th>
+                <th className='text-[#B3B3B3] !bg-[#333333] p-4'>Bônus</th>
               </tr>
             </thead>
 
@@ -176,8 +178,8 @@ export const InviteSettlementRecordPage = () => {
                 currentData?.rows.map((itme, index) => {
                   return (
                     <tr key={index} className="bg-[#4d4d4d]">
-                      <td className='!bg-[#4d4d4d] py-4 border-[rgba(255,255,255,0.2)]'>{moment(itme.updateTime).format('DD.MM-YYYY HH:mm:ss')}</td>
-                      <td className='!bg-[#4d4d4d] py-4'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
+                      <td className='!bg-[#333333] py-4 border-[rgba(255,255,255,0.2)]'>{moment(itme.updateTime).format('DD.MM-YYYY HH:mm:ss')}</td>
+                      <td className='!bg-[#333333] py-4'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
                     </tr>
                   )
                 })

@@ -24,10 +24,6 @@ import {PageTemplate as RiojunglePageTemplate} from "./env/riojungle/PageTemplat
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
 import {PageTemplateLayers} from "../pageTemplateLayers";
 import {IPage} from "./types/IPage";
-import {AddToMobileShortcut} from "../popovers/AddToMobileShortcut";
-import {useLocalStorage} from "usehooks-ts";
-import {IOSDownloadModal} from "../modals/IOSDownloadModal";
-import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 
 console.log("[APP] environment", environment);
 
@@ -139,25 +135,36 @@ export const PageTemplate = (props: IPage) => {
 
   const {
     isShowMobileHeader,
+    isShowTabletHeader,
     isShowDesktopHeader,
-    isShowDesktopMenuDrawer,
-    isShowMobileFooter,
-    isShowDesktopFooter,
-    isShowTabbar,
-  } = useSingletonPageTemplateConfig({
-    ...props,
-    showDesktopMenuDrawer: props. showDesktopMenuDrawer && openMenuDrawer,
-  });
 
-  // const isShowMobileHeader = props.showMobileHeader === undefined ? true : props.showMobileHeader;
-  // const isShowDesktopHeader = props.showDesktopHeader === undefined ? true : props.showDesktopHeader;
-  //
-  // const isShowDesktopMenuDrawer = props.showDesktopMenuDrawer === undefined ? true : props.showDesktopMenuDrawer;
-  //
-  // const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
-  // const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
-  //
-  // const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
+    // NOTE: Footer
+    isShowMobileFooter,
+    isShowTabletFooter,
+    isShowDesktopFooter,
+
+    // NOTE: MenuDrawer
+    isShowMobileMenuDrawer,
+    isShowTabletMenuDrawer,
+    // NOTE: deprecated
+    isShowDesktopMenuDrawer,
+
+    // NOTE: TabBar
+    isShowMobileTabBar,
+    isShowTabletTabBar,
+    isShowDesktopTabBar,
+    // NOTE: deprecated
+    isShowTabbar,
+
+  } = useSingletonPageTemplateConfig({
+    header: props.header,
+    footer: props.footer,
+    tabBar: props.tabBar,
+    menuDrawer: props.menuDrawer,
+    // NOTE: deprecated
+    showTabbar: props.showTabbar,
+    showMenuDrawer: props. showMenuDrawer && openMenuDrawer,
+  });
 
 
   // NOTE: LogoutPopover
@@ -207,6 +214,19 @@ export const PageTemplate = (props: IPage) => {
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
 
+
+  // console.log("debug.02.header.isShowMobileHeader: ", isShowMobileTabBar)
+  // console.log("debug.02.header.isShowTabletHeader: ", isShowTabletHeader)
+  // console.log("debug.02.header.isShowDesktopHeader: ", isShowDesktopHeader)
+  //
+  // console.log("debug.02.header.isShowMobileFooter: ", isShowMobileFooter)
+  // console.log("debug.02.header.isShowTabletFooter: ", isShowTabletFooter)
+  // console.log("debug.02.header.isShowDesktopFooter: ", isShowDesktopFooter)
+  //
+  // console.log("debug.02.header.isShowMobileTabBar: ", isShowMobileTabBar)
+  // console.log("debug.02.header.isShowTabletTabBar: ", isShowTabletTabBar)
+  // console.log("debug.02.header.isShowDesktopTabBar: ", isShowDesktopTabBar)
+
   return (
     <>
       {renderByPlatform({
@@ -253,12 +273,7 @@ export const PageTemplate = (props: IPage) => {
             isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
             contextHolder={contextHolder}
             isMobile={isMobile}
-            isShowMobileFooter={isShowMobileFooter}
-            isShowDesktopFooter={isShowDesktopFooter}
-            isShowDesktopHeader={isShowDesktopHeader}
-            isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
             isLogin={isLogin}
-
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
             openDesktopNotificationDrawer={openDesktopNotificationDrawer}
@@ -276,12 +291,19 @@ export const PageTemplate = (props: IPage) => {
             onClickToOpenTelegramService={onClickToOpenTelegramService}
             isShowInviteBonusModal={isShowInviteBonusModal}
             setOpenInitailChargeModal={setOpenInitailChargeModal}
-            isShowMobileHeader={isShowMobileHeader}
-            isShowTabbar={isShowTabbar}
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             isUILoading={isUILoading}
+
+            // NOTICE: refactor
+            isShowMobileFooter={isShowMobileFooter}
+            isShowDesktopFooter={isShowDesktopFooter}
+            isShowDesktopHeader={isShowDesktopHeader}
+            isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+            isShowMobileHeader={isShowMobileHeader}
+            isShowTabbar={isShowTabbar}
             showToolboxConfig={props.showToolboxConfig}
+
           >
             {props.children}
           </CPageTemplate>
@@ -292,15 +314,8 @@ export const PageTemplate = (props: IPage) => {
             onClickToDownload={onClickToDownload}
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             onClickToOpenTelegramService={onClickToOpenTelegramService}
-
-
             isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
             contextHolder={contextHolder}
-            isMobile={isMobile}
-            isShowMobileFooter={isShowMobileFooter}
-            isShowDesktopFooter={isShowMobileFooter}
-            isShowDesktopHeader={isShowDesktopHeader}
-            isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
             isLogin={isLogin}
             setIsLogin={setIsLogin}
             showLoginModal={showLoginModal}
@@ -308,26 +323,34 @@ export const PageTemplate = (props: IPage) => {
             setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
             setOpenLogoutPopover={setOpenLogoutPopover}
             isShowMobileLogoutModal={isShowMobileLogoutModal}
-
-            openMenuDrawer={openMenuDrawer}
-            setOpenMenuDrawer={setOpenMenuDrawer}
             openNotificationWithIcon={openNotificationWithIcon}
             openDownloadModal={openDownloadModal}
             setOpenDownloadModal={setOpenDownloadModal}
             isShowTelegramModal={isShowTelegramModal}
             isShowInviteBonusModal={isShowInviteBonusModal}
             setOpenInitailChargeModal={setOpenInitailChargeModal}
-
-            isShowMobileHeader={isShowMobileHeader}
-            isShowTabbar={isShowTabbar}
             isUILoading={isUILoading}
 
-            showMobileHeader={isShowMobileHeader}
-            showDesktopHeader={isShowDesktopHeader}
-            showDesktopMenuDrawer={isShowDesktopMenuDrawer}
-            showMobileFooter={isShowMobileHeader}
-            showDesktopFooter={isShowDesktopFooter}
-            showTabbar={isShowTabbar}
+            header={{
+              mobile: isShowMobileHeader,
+              tablet: isShowTabletHeader,
+              desktop: isShowDesktopHeader,
+            }}
+            footer={{
+              mobile: isShowMobileFooter,
+              tablet: isShowTabletFooter,
+              desktop: isShowDesktopFooter,
+            }}
+            tabBar={{
+              mobile: isShowMobileTabBar,
+              tablet: isShowTabletTabBar,
+              desktop: isShowDesktopTabBar,
+            }}
+            menuDrawer={{
+              mobile: isShowMobileMenuDrawer,
+              tablet: isShowTabletMenuDrawer,
+              desktop: isShowDesktopMenuDrawer,
+            }}
           >
           {props.children}
           </RiojunglePageTemplate>
@@ -360,6 +383,7 @@ export const PageTemplate = (props: IPage) => {
           isShowInviteBonusModal={isShowInviteBonusModal}
           setOpenInitailChargeModal={setOpenInitailChargeModal}
           isShowMobileHeader={isShowMobileHeader}
+          // Deprecated
           isShowTabbar={isShowTabbar}
           onClickToDownload={onClickToDownload}
           onClickToOpenTelegramManager={onClickToOpenTelegramManager}

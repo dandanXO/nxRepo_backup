@@ -15,7 +15,6 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 interface IDailySignInPageProps {
   onClickToSignIn: () => Promise<boolean>
   currentVIP: GetSignInConfigResponse['data']['vipLevel']
-  signInConfig: GetSignInConfigResponse['data']['signInConfig']
   signInAllConfig: GetSignInConfigResponse['data']['signInAllConfig']
   todayIsSignIn: GetSignInConfigResponse['data']['todayIsSignIn']
   signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays'];
@@ -23,7 +22,6 @@ interface IDailySignInPageProps {
 
 const DailySignInPage = ({
  currentVIP,
- signInConfig,
  signInAllConfig,
  todayIsSignIn,
  onClickToSignIn,
@@ -38,6 +36,14 @@ const DailySignInPage = ({
   const { isMobile, isTablet, isDesktop } = useBreakpoint();
 
   const disableSignInButton = currentVIP === 0 || todayIsSignIn
+
+  const vipConfig = signInAllConfig?.find(
+    (config) =>
+      config.identifier.split('::')[2].replace('V', '') ===
+      `${selectedVIP}`
+  )
+
+  const dayConfigs = JSON.parse(vipConfig?.value || '[]');
 
   useEffect(()=> {
     setSelectedVIP(currentVIP === 0? 1: currentVIP)
@@ -94,7 +100,7 @@ const DailySignInPage = ({
 
         {/*領取規則*/}
         <div className='mt-5 border border-[#333333] text-[#F59E0B] rounded-lg py-2 sm:py-3 px-2 sm:px-4 lg:px-5'>
-          Regras de recompensa diária VIP:Cada nível só pode receber recompensas por {signInConfig.length} dias no total. As recompensas serão creditadas na próxima vez que você as reivindicar. Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
+          Regras de recompensa diária VIP:Cada nível só pode receber recompensas por {dayConfigs.length} dias no total. As recompensas serão creditadas na próxima vez que você as reivindicar. Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
         </div>
 
         {/*VIP選單*/}
@@ -120,11 +126,10 @@ const DailySignInPage = ({
         {/*Daily Sign in Bonus list*/}
         <DailySignInBonusList
           className='mt-5 lg:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-5'
-          signInConfig={signInConfig}
           selectedVIP={selectedVIP}
           currentVIP={currentVIP}
-          signInAllConfig={signInAllConfig}
           signInTotalDays={signInTotalDays}
+          dayConfigs={dayConfigs}
         />
 
         {/*Sign in Button*/}

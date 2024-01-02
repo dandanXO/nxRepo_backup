@@ -172,7 +172,6 @@ export const PageTemplate = ({
 
   // NOTE: hideAddToMobileShortcut, isShowiOSDownloadPopover
   const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
-  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
   const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
 
 
@@ -276,8 +275,6 @@ export const PageTemplate = ({
             {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
           </div>
         )}
-        {isShowiOSDownloadPopover && isMobile && <IOSDownloadModal/>}
-
       </StyledPage>
 
     </>
