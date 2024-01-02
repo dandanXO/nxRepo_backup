@@ -91,12 +91,15 @@ export const PageTemplate = ({
   const MenuDrawerTop = isDesktop ? 72 : 0;
   const MenudrawerZIndex = "z-[1003]";
 
-  // NOTE: Style - AddShortCut
+  // NOTE: Style - AddShortCut (fixed)
   const AddShortCutZIndex = "z-[1005]"
 
   // NOTE: Style - TabBar
   const TabHeight = (tabBar.mobile || tabBar.tablet || tabBar.desktop) ? 72 : 0;
   const TabZIndex = "z-[1004]";
+
+  // NOTE: Style - Toolbox (fixed)
+  const ToolboxZIndex = "z-10"
 
   // NOTE: show
   const isShowHeader = header.mobile || header.tablet || header.desktop;
@@ -121,35 +124,31 @@ export const PageTemplate = ({
         <BaseLoadingOverlay className={"z-[9999] fixed top-0 left-0 right-0 bottom-0"}/>
       )}
 
-      {
-        isShowHeader
-        &&
-        (
-          <div
-            className={twMerge(HeaderZIndex, "fixed top-0 left-0 right-0 w-full")}
-          >
-            <Header
-              className={""}
-              // NOTE: Login
-              isLogin={isLogin}
-              onClickUserLoginStatusDrawer={() => {
-                // setOpenNonMobileUserLoginStatusDrawer(true);
-                showLoginModal(true)
-              }}
-              onClickToChangeLogoutPopover={(display: boolean) => {
-                setOpenLogoutPopover(display);
-              }}
-              openLogoutPopover={isShowMobileLogoutModal}
-              // NOTE: Notification
-              onClickToOpenNotificationDrawer={() => {
-                setOpenDesktopNotificationDrawer(true)
-              }}
-              // NOTE: Download
-              onClickToDownload={onClickToDownload}
-            />
-          </div>
-        )
-      }
+      {isShowHeader && (
+        <div
+          className={twMerge(HeaderZIndex, "fixed top-0 left-0 right-0 w-full")}
+        >
+          <Header
+            className={""}
+            // NOTE: Login
+            isLogin={isLogin}
+            onClickUserLoginStatusDrawer={() => {
+              // setOpenNonMobileUserLoginStatusDrawer(true);
+              showLoginModal(true)
+            }}
+            onClickToChangeLogoutPopover={(display: boolean) => {
+              setOpenLogoutPopover(display);
+            }}
+            openLogoutPopover={isShowMobileLogoutModal}
+            // NOTE: Notification
+            onClickToOpenNotificationDrawer={() => {
+              setOpenDesktopNotificationDrawer(true)
+            }}
+            // NOTE: Download
+            onClickToDownload={onClickToDownload}
+          />
+        </div>
+      )}
 
       {isShowMenuDrawer && (
         <div
@@ -209,7 +208,7 @@ export const PageTemplate = ({
       )}
 
       {showToolboxConfig !== false && (
-        <div className={"z-10 fixed right-[16px] bottom-[400px]"}>
+        <div className={cx(ToolboxZIndex, "fixed right-[16px] bottom-[400px]")}>
           <Toolbox
             className={""}
             showToolboxConfig={showToolboxConfig}
