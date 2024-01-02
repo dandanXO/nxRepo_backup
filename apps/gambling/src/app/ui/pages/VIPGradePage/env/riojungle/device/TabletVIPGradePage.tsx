@@ -6,6 +6,8 @@ import { formatLocaleMoney } from "../../../../../utils/format";
 import { ProgressBar } from "../../../../../components/ProgressBar";
 import { VIP0Text } from "../components/VIP0Text";
 import { VIPInfoTab } from "../components/VIPInfoTab";
+import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
+import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
 
 
 
@@ -16,23 +18,8 @@ export const TabletVIPGradePage = ({
   userVIPInfo,
   signInDayConfig
 }: IVIPGradePageProps) => {
-  const [selectedVIP, setSelectedVIP] = useState(currentLevel);
-
-  const vipWrapperRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(()=>{
-    setSelectedVIP(currentLevel === 25? currentLevel: currentLevel + 1);
-  }, [currentLevel])
-
-  useEffect(()=> {
-    const currentItem = vipWrapperRef.current?.children[selectedVIP] as HTMLElement | undefined
-    if(currentItem) {
-      vipWrapperRef.current?.scrollTo({
-        top: currentItem.offsetTop  - ((vipWrapperRef.current?.offsetHeight || 0) - currentItem.offsetHeight ) / 2,
-        behavior: 'smooth'
-      })
-    }
-  }, [selectedVIP])
+  const { selectedVIP, setSelectedVIP} = useRioVIPGradePage(currentLevel, userVIPInfo?.data.vip_score)
+  const { scrollWrapperRef } = useScrollSelectFixCenter(selectedVIP, true);
 
   if(allLevelInfo.length === 0) return <div></div>
 
@@ -47,7 +34,7 @@ export const TabletVIPGradePage = ({
         <div className='w-[25%] py-5 border-r border-r-[#666666] flex flex-col items-center'>
           <div
             className='h-[200px] w-[69%] overflow-y-scroll vip-tab-items flex flex-col gap-4 items-center relative'
-            ref={vipWrapperRef}
+            ref={scrollWrapperRef}
           >
             <VerticalVIPButtonList
               selectedVIP={selectedVIP}

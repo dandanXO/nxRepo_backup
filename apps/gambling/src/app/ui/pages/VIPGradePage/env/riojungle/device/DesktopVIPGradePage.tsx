@@ -9,6 +9,8 @@ import { ProgressBar } from "../../../../../components/ProgressBar";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { VIP0Text } from "../components/VIP0Text";
 import { VIPInfoTab } from "../components/VIPInfoTab";
+import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
+import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
 
 
 export const DesktopVIPGradePage = ({
@@ -18,25 +20,10 @@ export const DesktopVIPGradePage = ({
   userVIPInfo,
   signInDayConfig
 }: IVIPGradePageProps) => {
-  const [selectedVIP, setSelectedVIP] = useState(currentLevel);
-
-  const vipWrapperRef = useRef<HTMLDivElement | null>(null);
+  const {selectedVIP, setSelectedVIP} = useRioVIPGradePage(currentLevel, userVIPInfo?.data.vip_score)
+  const { scrollWrapperRef } = useScrollSelectFixCenter(selectedVIP, true);
 
   const VIPIcon = require(`../images/vip${selectedVIP}_pic.png`);
-
-  useEffect(()=>{
-    setSelectedVIP(currentLevel === 25? currentLevel: currentLevel + 1);
-  }, [currentLevel])
-
-  useEffect(()=> {
-    const currentItem = vipWrapperRef.current?.children[selectedVIP] as HTMLElement | undefined
-    if(currentItem) {
-      vipWrapperRef.current?.scrollTo({
-        top: currentItem.offsetTop  - ((vipWrapperRef.current?.offsetHeight || 0) - currentItem.offsetHeight ) / 2,
-        behavior: 'smooth'
-      })
-    }
-  }, [selectedVIP])
 
   if(allLevelInfo.length === 0) return <div></div>
 
@@ -53,7 +40,7 @@ export const DesktopVIPGradePage = ({
             <img alt='up' src={CaretUP} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={()=> { if(selectedVIP !== 0) { setSelectedVIP(selectedVIP - 1)} }} />
             <div
               className='h-[242px] w-[78%] py-1 overflow-y-scroll vip-tab-items flex flex-col gap-4 items-center relative'
-              ref={vipWrapperRef}
+              ref={scrollWrapperRef}
             >
               <VerticalVIPButtonList
                 selectedVIP={selectedVIP}

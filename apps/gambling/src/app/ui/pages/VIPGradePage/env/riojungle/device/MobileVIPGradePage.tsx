@@ -6,6 +6,8 @@ import { useEffect, useRef, useState } from "react";
 import { VIPInfoTab } from "../components/VIPInfoTab";
 import { VIPButtonList } from "../components/VIPButtonList";
 import { VIP0Text } from "../components/VIP0Text";
+import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
+import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
 
 
 
@@ -16,23 +18,8 @@ export const MobileVIPGradePage = ({
   userVIPInfo,
   signInDayConfig
 }: IVIPGradePageProps) => {
-  const [selectedVIP, setSelectedVIP] = useState(currentLevel);
-
-  const vipWrapperRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(()=>{
-    setSelectedVIP(currentLevel === 25? currentLevel: currentLevel + 1);
-  }, [currentLevel])
-
-  useEffect(()=> {
-    const currentItem = vipWrapperRef.current?.children[selectedVIP] as HTMLElement | undefined
-    if(currentItem) {
-      vipWrapperRef.current?.scrollTo({
-        left: currentItem.offsetLeft  - ((vipWrapperRef.current?.offsetWidth || 0) - currentItem.offsetWidth ) / 2,
-        behavior: 'smooth'
-      })
-    }
-  }, [selectedVIP])
+  const { selectedVIP, setSelectedVIP} = useRioVIPGradePage(currentLevel, userVIPInfo?.data.vip_score);
+  const { scrollWrapperRef } = useScrollSelectFixCenter(selectedVIP, false);
 
   if(allLevelInfo.length === 0) return <div></div>
 
@@ -42,7 +29,7 @@ export const MobileVIPGradePage = ({
 
       <div
         className='w-full mt-4 overflow-x-scroll vip-tab-items flex gap-2 items-center relative'
-        ref={vipWrapperRef}
+        ref={scrollWrapperRef}
       >
         <VIPButtonList
           selectedVIP={selectedVIP}
