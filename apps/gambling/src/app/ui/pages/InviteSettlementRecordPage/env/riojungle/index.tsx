@@ -82,33 +82,33 @@ export const InviteSettlementRecordPage = () => {
                 onConfirm={(values: any) => setDates([moment(values[0], 'YYYY-MM-DD'), moment(values[1], 'YYYY-MM-DD')])}
                 value={[dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]}
               />) :
-              (
-                <RangePicker
-                  separator = {'-'}
-                  value={[dates[0], dates[1]]}
-                  allowClear={false}
-                  suffixIcon={false}
-                  format="YYYY-MM-DD"
-                  onChange={(dates) => {
-                    if (dates) {
-                      setDates(dates as Moment[]);
+              ( 
+                  <RangePicker
+                    separator = {'-'}
+                    value={[dates[0], dates[1]]}
+                    allowClear={false}
+                    suffixIcon={false}
+                    format="YYYY-MM-DD"
+                    onChange={(dates) => {
+                      if (dates) {
+                        setDates(dates as Moment[]);
+                      }
+                    }}
+                    // className={`before:content-[url('assets/riojungle777bet/Calendar.png')]`}
+                    style={
+                      {
+                        width: '250px',
+                        color: 'white',
+                        backgroundColor: '#333333',
+                        border: '0px',
+                        borderRadius: '100px',
+                        display: 'flex',
+                        gap: '10px',
+                        alignItems: 'center',
+                      }
                     }
-                  }}
-                  style={
-                    {
-                      padding: '6px 25px',
-                      width: '250px',
-                      color: 'white',
-                      backgroundColor: '#333333',
-                      border: '0px',
-                      borderRadius: '100px',
-                      display: 'flex',
-                      gap: '10px',
-                      alignItems: 'center',
-                    }
-                  }
-                  disabledDate={(current) => current > max}
-                />
+                    disabledDate={(current) => current > max}
+                  />
               )
           }
         </section>
