@@ -31,6 +31,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CloseICON} from "../../../../components-bs/env/riojungle/CloseICON";
 import {appSlice} from "../../../../../reduxStore/appSlice";
+import { RootState } from "../../../../../reduxStore";
 
 
 type IGameType = "Slots" | "Fishing" | "Vivo" | "Viver";
@@ -54,6 +55,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
+
+  const { recharge_first_cashback_rate, recharge_cashback_rate } = useSelector((rootState: RootState) => rootState.app.config);
 
   const close = () => {
     const canClose = (isMobile || isTablet);
@@ -115,12 +118,12 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                   Primeira recarga
                 </div>
                 <div className="font-medium leading-[24px] text-white">
-                  +20%
+                  +{recharge_first_cashback_rate}
                 </div>
               </div>
               <img
                 src={twentyPercent}
-                className="w-20 mt-0 mb-[-38px]"
+                className="w-[64px] mt-0 mb-[-38px]"
               />
             </button>
           </div>
@@ -139,7 +142,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                   Recarregar
                 </div>
                 <div className="font-medium leading-[24px] text-white">
-                  Cashback+10%
+                  Cashback+{recharge_cashback_rate}
                 </div>
               </div>
               <img
