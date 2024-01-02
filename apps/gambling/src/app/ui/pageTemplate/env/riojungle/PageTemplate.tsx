@@ -178,7 +178,7 @@ export const PageTemplate = ({
           id={"page-container"}
           className={twMerge("h-full overflow-auto")}
           style={{
-            marginLeft: isShowMenuDrawer ? DrawerWidth : 0,
+            marginLeft: isDesktop ? DrawerWidth : 0,
           }}
         >
           <BaseErrorBoundary>
