@@ -14,8 +14,6 @@ import { formatLocaleMoney } from "../../../../utils/format";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import Index from "../../../../components/DatePickers/RangeDatePicker";
 import cx from "classnames"
-import { DragScrollContainer } from '../../../../components/DragScrollContainer';
-import { Table } from '../../../../components/Table';
 const { RangePicker } = DatePicker;
 
 const NoData = () => {
@@ -106,9 +104,9 @@ export const InviteSettlementRecordPage = () => {
                         setDates(dates as Moment[]);
                       }
                     }}
+                    className="before:translate-y-0.5 before:content-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAcCAYAAACdz7SqAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAF9SURBVHgB7VbRUcMwDJW5/FM2CBMQJiBMAExQmACYgGOClgnSDWADygZhgmSDphOYp0M5mmDXCnGBj767dzo7sl8sKVaI/iustZOYfpqNrsGV0rcC70J+iWMhv+3lxtQFOGFxCiMFz+DbyLgxxrwEV2FBYePita9hHKIVzDvYhontLXhMYfDaJ3Au4xmY4bSdtYln8QqOtbxECbNsx9vQ98V47fJLQhthgwXMghSA76nGzyfKhZPSeBy6Jn05TSkeam1O30gZ0gCm5DiAT7SSXI4Copa7RA/oDxCsXobcUgW4ebfeIxqlPH+AWWM81+ynEhW0grnYRir8GczAJX1dCluhCi9OwHfouWzMeJQLIKfPnNU0AENzmomdcsi52MCjnYpC4AqGT5xStxMNglqU+yTIJz2RqYZ+iCHVy51mJlOlqk+OEeVCgjCHlU/KL9AXvKHu5zReVIRr8hSMpu1pRHfaZb6Bfy9sXBR9DeMR5s8hzu8k8s81QXv8Fj4Axp4rRafIlxYAAAAASUVORK5CYII=')]"
                     style={
                       {
-                        width: '250px',
                         color: 'white',
                         backgroundColor: '#333333',
                         border: '0px',
