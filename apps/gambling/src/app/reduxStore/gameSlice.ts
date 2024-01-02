@@ -30,6 +30,7 @@ export type InitialState = {
   typeGameList: GameType[];
   label: string[];
   typeGameCount: { [key: string]: number }
+  indexPagecurrentSelectLabel: string
 }
 
 const initGameList: InitialState = {
@@ -37,7 +38,8 @@ const initGameList: InitialState = {
   hotBrandGameList: [],
   typeGameList: [],
   label: [],
-  typeGameCount: {}
+  typeGameCount: {},
+  indexPagecurrentSelectLabel: 'Todos'
 }
 
 // NOTICE: refactor me
@@ -55,6 +57,9 @@ export const gameSlice = createSlice({
   name: 'gameList',
   initialState:initGameList,
   reducers: {
+    setIndexPagecurrentSelectLabel: (state: InitialState, action: PayloadAction<InitialState['indexPagecurrentSelectLabel']>) => {
+      state.indexPagecurrentSelectLabel = action.payload;
+    },
     setLabel: (state: InitialState, action: PayloadAction<InitialState['label']>) => {
       state.label = action.payload;
     },

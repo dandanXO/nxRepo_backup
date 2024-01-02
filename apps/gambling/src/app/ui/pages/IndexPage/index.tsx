@@ -2,10 +2,11 @@
 import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
-// @ts-ignore
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
+import {useDispatch} from "react-redux";
+import { gameSlice } from "../../../reduxStore/gameSlice";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useSelector} from "react-redux";
 import {useSearchGames} from "../../hooks/useSearchGames";
@@ -16,7 +17,6 @@ import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useScrollToCarousel} from "./useScrollToCarousel";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 
-import {IndexPage as PIndexPage} from "./env/pernambucana/IndexPage";
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
 import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
 import {IndexPage as RIndexPage} from "./env/riojungle/IndexPage";
@@ -26,12 +26,14 @@ export const DesktopGameNumber = 30;
 
 
 export const IndexPage = () => {
+  const dispatch = useDispatch();
   const { isMobile } = useBreakpoint();
   const { hotBrandGameList = [], allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
   console.log('hotBrandGameList----',hotBrandGameList)
   // const [activeTab, setActiveTab] = useState("Todos");
   // "Salão"
   const [activeTab, setActiveTab] = useState("Todos");
+  const { indexPagecurrentSelectLabel } = useSelector((state: any) => state.gameList);
   const [expandedBrand, setExpandedBrand] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const { searchResults, handleSearchGames } = useSearchGames(searchInput);
@@ -62,15 +64,18 @@ export const IndexPage = () => {
           isLatestItem={hotBrandGameList.length - 1 === index}
           gameTypeName={i.gameType}
           data={i.data.games}
-          onClickExpand={() => setActiveTab(i.gameType)}
+          onClickExpand={() => {
+            // 兼容兩者
+            setActiveTab(i.gameType)
+            return dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(i.gameType))
+          }}
           expandCount={expandCount}
         />
       )
     })
   }
   const {showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop} = useScrollToCarousel();
-
-  const renderTypeGameList=()=>{
+  const renderTypeGameListOld=()=>{
     let list: { subGameType: string, games: { gameId: number }[] }[] = []
 
     if(activeTab === 'Favoritos') {
@@ -102,6 +107,37 @@ export const IndexPage = () => {
     })
   }
 
+  const renderTypeGameList=()=>{
+    let list: { subGameType: string, games: { gameId: number }[] }[] = []
+
+    if(indexPagecurrentSelectLabel === 'Favoritos') {
+      const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
+      list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] || [] }]
+    } else {
+      const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === indexPagecurrentSelectLabel)[0]?.data
+      list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
+    }
+
+    return list?.map(({subGameType,games}: any, index: number) => {
+      return (
+        <GameTypeSectionList
+          key={index}
+          userFavorite={userFavorite}
+          onClickFavoriteGameItem={onClickFavoriteGameItem}
+          isLatestItem={list.length - 1 === index}
+          gameTypeName={subGameType}
+          data={games}
+          onClickExpand={() => {
+            setExpandedBrand(subGameType);
+            scrollToCarousel();
+          }}
+          isViewAll={['Favoritos'].includes(subGameType)}
+          expandedBrand={expandedBrand}
+          setExpandedBrand={setExpandedBrand}
+        />
+      )
+    })
+  }
   const gameList = () => {
     if (searchInput !== '') {
       return searchResults.length > 0
@@ -120,12 +156,37 @@ export const IndexPage = () => {
         )
         : <></>
     } else {
-      return (activeTab === "Todos" || activeTab === "Salão") ? renderHotBrandGameList() : renderTypeGameList()
+      return (indexPagecurrentSelectLabel === "Todos" || indexPagecurrentSelectLabel === "Salão") ? renderHotBrandGameList() : renderTypeGameList()
+    }
+  }
+  const gameListOld = () => {
+    if (searchInput !== '') {
+      return searchResults.length > 0
+        ? (
+          <GameTypeSectionList
+            userFavorite={userFavorite}
+            onClickFavoriteGameItem={onClickFavoriteGameItem}
+            isLatestItem={true}
+            gameTypeName={'null'}
+            data={searchResults}
+            onClickExpand={() => {
+              navigate(PageOrModalPathEnum.IndexSlotPage)
+              scrollToWindowTop();
+            }}
+          />
+        )
+        : <></>
+    } else {
+      return (activeTab === "Todos" || activeTab === "Salão") ? renderHotBrandGameList() : renderTypeGameListOld()
     }
   }
 
   useEffect(() => {
     gameList();
+  }, [indexPagecurrentSelectLabel])
+
+  useEffect(() => {
+    gameListOld();
   }, [activeTab])
 
 
@@ -168,8 +229,7 @@ export const IndexPage = () => {
         scrollToCarousel={scrollToCarousel}
         allGameList={allGameList}
         label={label}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        activeTab={indexPagecurrentSelectLabel}
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
