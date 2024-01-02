@@ -28,7 +28,7 @@ import {PageOrModalPathEnum} from "../../../PageOrModalPathEnum";
 import {useLocation} from "react-router";
 
 
-type IPageTemplate = IUseSingletonPageTemplateConfig & {
+type IPageTemplate = {
   children: React.ReactNode;
   showToolboxConfig?: TShowToolboxConfig;
   onClickToDownload: () => void;
@@ -37,11 +37,6 @@ type IPageTemplate = IUseSingletonPageTemplateConfig & {
 } & {
   isCurrentPageCompanyProfile: boolean;
   contextHolder: any;
-  isMobile: boolean;
-  isShowMobileFooter: boolean;
-  isShowDesktopFooter: boolean;
-  isShowDesktopHeader: boolean;
-  isShowDesktopMenuDrawer: boolean;
   isLogin: boolean;
   setIsLogin: (value: any) => void;
   showLoginModal: (value: any) => void;
@@ -50,18 +45,15 @@ type IPageTemplate = IUseSingletonPageTemplateConfig & {
   setOpenLogoutPopover: (value: any) => void;
   isShowMobileLogoutModal: boolean;
 
-  openMenuDrawer: boolean;
-  setOpenMenuDrawer: (value: any) => void;
   openNotificationWithIcon: (value: any) => void;
   openDownloadModal: boolean;
   setOpenDownloadModal: (value: any) => void;
   isShowTelegramModal: boolean;
   isShowInviteBonusModal: boolean;
   setOpenInitailChargeModal: (value: any) => void;
-  isShowMobileHeader: boolean;
-  isShowTabbar: boolean;
+
   isUILoading: boolean;
-}
+} & IUseSingletonPageTemplateConfig
 
 export const PageTemplate = ({
                               children,
@@ -74,37 +66,23 @@ export const PageTemplate = ({
                               onClickToOpenTelegramManager,
                               showToolboxConfig,
 
-                               showMobileHeader,
-                               showDesktopHeader,
-                               showDesktopMenuDrawer,
-                               showMobileFooter,
-                               showDesktopFooter,
-                               showTabbar,
+
+                              // NOTICE:
+                                header,
+                                footer,
+                                tabBar,
+                                menuDrawer,
+                               showMenuDrawer,
+                                // NOTICE: deprecated
+                                // showTabbar,
                              }:IPageTemplate) => {
 
-  const {
-    isShowMobileHeader,
-    isShowDesktopHeader,
-    isShowDesktopMenuDrawer,
-    isShowMobileFooter,
-    isShowDesktopFooter,
-    isShowTabbar,
-  } = useSingletonPageTemplateConfig({
-    showMobileHeader,
-    showDesktopHeader,
-    showDesktopMenuDrawer,
-    showMobileFooter,
-    showDesktopFooter,
-    showTabbar,
-  });
+
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
   const {isLogin} = useSelector((state: RootState) => state.app)
 
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
-  // console.log("debug.isMobile", isMobile)
-  // console.log("debug.isDesktop", isDesktop)
-  // console.log("debug.isTablet", isTablet)
 
 
   // NOTICE: refactor me
@@ -121,7 +99,7 @@ export const PageTemplate = ({
   const AddShortCutZIndex = "z-[1005]"
 
   // NOTE: TabBar
-  const TabHeight = isShowTabbar ? 72 : 0;
+  const TabHeight = (tabBar.mobile || tabBar.tablet || tabBar.desktop) ? 72 : 0;
   const TabZIndex = "z-[1004]";
 
 
@@ -131,6 +109,8 @@ export const PageTemplate = ({
   const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
 
   const location = useLocation();
+
+  const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
 
   return (
     <BaseStyledPageTemplate
@@ -142,31 +122,38 @@ export const PageTemplate = ({
         <BaseLoadingOverlay className={"z-[9999] fixed top-0 left-0 right-0 bottom-0"}/>
       )}
 
-      <div
-        className={twMerge(HeaderZIndex, "fixed top-0 left-0 right-0 w-full")}
-      >
-        <Header
-          className={""}
-          // NOTE: Login
-          isLogin={isLogin}
-          onClickUserLoginStatusDrawer={() => {
-            // setOpenNonMobileUserLoginStatusDrawer(true);
-            showLoginModal(true)
-          }}
-          onClickToChangeLogoutPopover={(display: boolean) => {
-            setOpenLogoutPopover(display);
-          }}
-          openLogoutPopover={isShowMobileLogoutModal}
-          // NOTE: Notification
-          onClickToOpenNotificationDrawer={() => {
-            setOpenDesktopNotificationDrawer(true)
-          }}
-          // NOTE: Download
-          onClickToDownload={onClickToDownload}
-        />
-      </div>
+      {
+        (header.mobile || header.tablet || header.desktop)
+        &&
+        (
+          <div
+            className={twMerge(HeaderZIndex, "fixed top-0 left-0 right-0 w-full")}
+          >
+            <Header
+              className={""}
+              // NOTE: Login
+              isLogin={isLogin}
+              onClickUserLoginStatusDrawer={() => {
+                // setOpenNonMobileUserLoginStatusDrawer(true);
+                showLoginModal(true)
+              }}
+              onClickToChangeLogoutPopover={(display: boolean) => {
+                setOpenLogoutPopover(display);
+              }}
+              openLogoutPopover={isShowMobileLogoutModal}
+              // NOTE: Notification
+              onClickToOpenNotificationDrawer={() => {
+                setOpenDesktopNotificationDrawer(true)
+              }}
+              // NOTE: Download
+              onClickToDownload={onClickToDownload}
+            />
+          </div>
+        )
+      }
 
-      {isShowDesktopMenuDrawer && (
+
+      {isShowMenuDrawer && (
         <div
           className={twMerge(MenudrawerZIndex, "fixed left-0")}
           style={{
@@ -182,27 +169,26 @@ export const PageTemplate = ({
       <div
         style={{
           position: 'fixed',
-          top: HeaderHeight,
+          top: isShowMenuDrawer ? HeaderHeight : 0,
           width: '100%',
-          height: `calc(100% - ${HeaderHeight}px - ${TabHeight}px)`,
+          height: isShowMenuDrawer ? `calc(100% - ${HeaderHeight}px - ${TabHeight}px)` : "100%",
         }}
       >
         <div
           id={"page-container"}
           className={twMerge("h-full overflow-auto")}
           style={{
-            // marginTop: HeaderHeight,
-            marginLeft: isDesktop ? DrawerWidth : 0,
+            marginLeft: isShowMenuDrawer ? DrawerWidth : 0,
           }}
         >
           <BaseErrorBoundary>
             {children}
           </BaseErrorBoundary>
 
-          <Footer
-            showMobileFooter={isShowMobileFooter}
-            showDesktopFooter={isShowDesktopFooter}
-          />
+          {(footer.mobile || footer.tablet || footer.desktop) && (
+            <Footer/>
+          )}
+
         </div>
       </div>
 
@@ -215,7 +201,9 @@ export const PageTemplate = ({
             bottom: 20,
           }}
         >
-          {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
+          {!hideAddToMobileShortcut && isMobile &&
+            <AddToMobileShortcut isShowTabbar={(tabBar.mobile || tabBar.tablet || tabBar.desktop) || true}/>
+          }
         </div>
       )}
 
@@ -226,8 +214,8 @@ export const PageTemplate = ({
         </div>
       )}
 
-      {isShowTabbar && (
-        <TabBar className={TabZIndex} isShowSlot={false} size={"big"} isShowMenuDrawer={isShowDesktopMenuDrawer}/>
+      {(tabBar.mobile || tabBar.tablet || tabBar.desktop) && (
+        <TabBar className={TabZIndex} isShowSlot={false} size={"big"} isShowMenuDrawer={showMenuDrawer}/>
       )}
 
       {showToolboxConfig !== false && (

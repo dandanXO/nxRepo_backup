@@ -59,6 +59,10 @@ infoLog('build');
 
 module.exports = (config, context) => {
   let finalConfig = merge(config, {
+    // cache: {
+    //   type: 'filesystem',
+    //   cacheDirectory: path.resolve(__dirname, '../../.webpack-tmp'),
+    // },
     // NOTE: [Webpack-Devtool](https://webpack.js.org/configuration/devtool/)
     devtool: !isProduction ? 'inline-source-map' : 'source-map',
     // NOTICE: 被 NX project 控制住
@@ -154,6 +158,7 @@ module.exports = (config, context) => {
       //   verbose: true,
       // }),
     ],
+
     target: 'browserslist',
     output: {
       publicPath: PUBLIC_PATH,

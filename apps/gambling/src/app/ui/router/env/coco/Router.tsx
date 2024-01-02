@@ -42,124 +42,430 @@ export const AppRouter = () => {
         <Routes>
           {/*NOTE: Common*/}
           <Route path={PageOrModalPathEnum.IndexPage} element={(
-            <PageTemplate showToolboxConfig={{mobile: {download: true, customerService: true}}}>
+            <PageTemplate
+              header={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              showToolboxConfig={{mobile: {download: true, customerService: true}}}
+            >
               <IndexPage />
             </PageTemplate>
           )}/>
+
           {/*<Route path={PageOrModalPathEnum.IndexSlotPage} element={(*/}
           {/*  <PageTemplate>*/}
           {/*    <IndexSlotPage />*/}
           {/*  </PageTemplate>*/}
           {/*)}/>*/}
+
           <Route path={PageOrModalPathEnum.InvitePage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false} showToolboxConfig={{mobile: { customerService: true }}}>
+            <PageTemplate
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              showToolboxConfig={{mobile: { customerService: true }}}
+            >
               <InvitePage/>
             </PageTemplate>
           )}/>
 
           <Route path={PageOrModalPathEnum.InviteSettlementRecordPage} element={(
-            <PageTemplate showMobileFooter={false}>
+            <PageTemplate
+              header={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+            >
               <InviteSettlementRecordPage/>
             </PageTemplate>
           )}/>
 
           <Route path={PageOrModalPathEnum.WalletPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <WallletPage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.WalletDepositNextPage} element={(
-            <PageTemplate showMobileHeader={false} showTabbar={false} showMobileFooter={false} >
+            <PageTemplate
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+            >
               <WalletDepositNextPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.GameRecordPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <GameRecordPage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.VIPGradePage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false} showToolboxConfig={{mobile:{ customerService: true }}}>
+            <PageTemplate
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              showToolboxConfig={{mobile:{ customerService: true }}}
+            >
               <VIPGradePage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.DailySignInPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <DailySignInPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.DailySingInRecordPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <DailySignInRecordPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.SettingPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <SettingPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.PrivacyAgreementPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={!isMobile}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <PrivacyAgreementPage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.TermsOfService} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={false}
-              showMobileFooter={!isMobile}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <TermsOfServicePage />
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.CompanyProfilePage} element={(
-            <PageTemplate>
+            <PageTemplate
+              header={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+            >
               <CompanyProfilePage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.InitialChargePage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showMobileFooter={false}
-              showTabbar={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <InitialChargePage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.RechargeActivityPage} element={(
-            <PageTemplate showMobileHeader={false} showMobileFooter={false} showTabbar={false}>
+            <PageTemplate
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+            >
               <RechargeActivityPage/>
             </PageTemplate>
           )}/>
 
           <Route path={PageOrModalPathEnum.LicensePage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showMobileFooter={false}
-              showTabbar={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <LicensePage/>
             </PageTemplate>
@@ -167,9 +473,26 @@ export const AppRouter = () => {
 
           <Route path={PageOrModalPathEnum.TelegramPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showMobileFooter={false}
-              showTabbar={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <TelegramPage/>
             </PageTemplate>
@@ -177,24 +500,53 @@ export const AppRouter = () => {
 
           <Route path={PageOrModalPathEnum.GamePage} element={(
             <PageTemplate
-              // common
-              showMobileFooter={false}
-              showDesktopFooter={false}
+              header={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              footer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
               showToolboxConfig={false}
-              // desktop
-              showDesktopHeader={false}
-              showDesktopMenuDrawer={false}
-              // mobile
-              showMobileHeader={false}
-              showTabbar={false}
             >
               <GamePage/>
             </PageTemplate>
           )}/>
           <Route path={PageOrModalPathEnum.GameSearchPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: true,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <GameSearchPage/>
             </PageTemplate>
@@ -203,18 +555,54 @@ export const AppRouter = () => {
           {/*NOTE: Mobile*/}
           <Route path={PageOrModalPathEnum.MyPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: false,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: false,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: true,
+                tablet: true,
+                desktop: true,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
               showToolboxConfig={{ mobile: { customerService: true }}}
             >
               <MyPage/>
             </PageTemplate>
           )}/>
+
           <Route path={PageOrModalPathEnum.NotificationPage} element={(
             <PageTemplate
-              showMobileHeader={false}
-              showTabbar={false}
-              showMobileFooter={false}
+              header={{
+                mobile: false,
+                tablet: false,
+                desktop: true,
+              }}
+              footer={{
+                mobile: false,
+                tablet: false,
+                desktop: true,
+              }}
+              tabBar={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
+              menuDrawer={{
+                mobile: false,
+                tablet: false,
+                desktop: false,
+              }}
             >
               <NotificationPage/>
             </PageTemplate>
