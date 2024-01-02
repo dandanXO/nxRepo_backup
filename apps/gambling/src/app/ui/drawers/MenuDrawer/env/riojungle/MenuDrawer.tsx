@@ -21,7 +21,7 @@ import icon__buildings from "./assets/icon__buildings.png";
 import icon__files from "./assets/icon__files.png";
 
 import closeSVG from "./icon-close.svg";
-
+import { gameSlice } from "../../../../../reduxStore/gameSlice";
 import cx from "classnames";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useLocation} from "react-router";
@@ -326,6 +326,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                 })}
                 onClick={() => {
                   onClickToIndex();
+                  dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(item))
                   close();
                 }}
                 >
@@ -346,6 +347,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
             })} onClick={() => {
               onClickToIndex();
+              dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel('Favoritos'))
               close();
             }}>
               <img
