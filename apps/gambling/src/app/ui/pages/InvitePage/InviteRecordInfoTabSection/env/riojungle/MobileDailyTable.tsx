@@ -10,6 +10,7 @@ import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojung
 import { MobileTableListItem } from "./components/MobileTableListItem";
 import cx from 'classnames';
 import { NoData } from "apps/gambling/src/app/ui/components/Table/env/riojungle/NoData";
+import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 
 
 export const MobileDailyTable = (props: IMobileDailyTable) => {
@@ -48,26 +49,21 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
                 <MobileTableListItem className="text-xs" title={'Valor da transação do jogo'} text={`R$ ${record.gameRecharge || '0,00'} `} />
                 <MobileTableListItem className="text-xs" title={<div className='flex items-center'>
                   <div className="text-[#B3B3B3]">{'Recompensas De Troca De Jogos'}</div>
-                  <div onClick={() => setInviteBonusInfoOpen(true)}>
-                    <QuestionTipsIcon className="text-lg ml-1 flex" />
+                  <div className='ml-1 self-start' onClick={() => setInviteBonusInfoOpen(true)}>
+                    <IconTooltip
+                      tooltipStyle={{ fontSize: '14px', width: '200px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}
+                      id='game-bonus-tooltip-desktop'
+                      icon={<QuestionTipsIcon className={'text-base'} />}
+                      content='As recompensas são liquidadas toda segunda-feira'
+                    />
                   </div>
-                  {
-                    inviteBonusInfoOpen && (
-                      <ConfirmDrawer
-                        onClose={() => setInviteBonusInfoOpen(false)}
-                        buttonText='Eu vejo'
-                        title='Descrição detalhada'
-                        content='As recompensas são liquidadas toda segunda-feira'
-                      />
-                    )
-                  }
                 </div>} text={`R$ ${record.gameRechargeReward || '0,00'}`}
                 />
                 <MobileTableListItem className="text-xs" title={'Bônus'} text={`R$ ${record.totalReward || '0,00'}`} bottomLine={false} />
               </div>
             )
           }) :
-            <NoData/>
+            <NoData />
         }
       </div>
     </div>

@@ -7,6 +7,7 @@ import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTip
 import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
 import styled from "styled-components";
 import { MobileTableListItem } from "./components/MobileTableListItem";
+import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 
 
 
@@ -31,24 +32,21 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
       <div className={'border-solid border-[#666666] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] flex flex-col justify-center w-full px-2 py-1 border rounded-lg'}>
         <MobileTableListItem textClassName="font-bold" title={'Usuário de recarga'} text={props.data.numRecharge || 0} />
         {props.type === "1" &&
-          <MobileTableListItem title={'Primeira Recarga Recompensas'} text={props.data.firstRecharge} />
+          <MobileTableListItem title={'Primeira Recarga Recompensas'} textClassName="font-bold" text={props.data.firstRecharge} />
         }
         <MobileTableListItem textClassName="font-bold" title={'Valor da transação do jogo'} text={props.data.gameRecharge} />
         <MobileTableListItem textClassName="font-bold" title={<div className='flex items-center'>
-          <div onClick={() => setInviteBonusInfoOpen(true)}>
-            <QuestionTipsIcon className="text-lg mr-1 flex" />
-          </div>
-          <div className="text-[#B3B3B3]">{'Recompensas De Troca De Jogos'}</div>
-          {
-            inviteBonusInfoOpen && (
-              <ConfirmDrawer
-                onClose={() => setInviteBonusInfoOpen(false)}
-                buttonText='Eu vejo'
-                title='Descrição detalhada'
+          <div>
+            <div className='mr-1 self-start' onClick={() => setInviteBonusInfoOpen(true)}>
+              <IconTooltip
+                tooltipStyle={{ fontSize: '14px', width: '200px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}
+                id='game-bonus-tooltip-desktop'
+                icon={<QuestionTipsIcon className={'text-base'} />}
                 content='As recompensas são liquidadas toda segunda-feira'
               />
-            )
-          }
+            </div>
+          </div>
+          <div className="text-[#B3B3B3]">{'Recompensas De Troca De Jogos'}</div>
         </div>} text={props.data.gameRechargeReward || 0}
         />
         <MobileTableListItem textClassName="font-bold" title={'Recompensa Total'} text={props.data.totalReward || 0} bottomLine={false} />
