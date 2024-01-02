@@ -50,7 +50,7 @@ export const DesktopVIPGradePage = ({
 
           {/*VIP選單*/}
           <div className='w-[15%] border-r border-r-[#666666] flex flex-col items-center group cursor-pointer'>
-            <img alt='up' src={CaretUP} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={() => vipWrapperRef.current?.scrollBy(0,-242)} />
+            <img alt='up' src={CaretUP} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={()=> { if(selectedVIP !== 0) { setSelectedVIP(selectedVIP - 1)} }} />
             <div
               className='h-[242px] w-[78%] py-1 overflow-y-scroll vip-tab-items flex flex-col gap-4 items-center relative'
               ref={vipWrapperRef}
@@ -61,7 +61,7 @@ export const DesktopVIPGradePage = ({
                 onSelect={(vip)=> setSelectedVIP(vip)}
               />
             </div >
-            <img alt='down' src={CaretDown} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={() => vipWrapperRef.current?.scrollBy(0,242)} />
+            <img alt='down' src={CaretDown} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={() => { if(selectedVIP !== 25){ setSelectedVIP(selectedVIP + 1) } } } />
           </div>
 
           {/*VIP 進度卡右側*/}
