@@ -89,7 +89,7 @@ export const MobileGameRecordPage = ({
               <BottomLine />
               <div className='w-full flex justify-between pt-2'>
                 <div>Lucro</div>
-                <div>R$ {formatLocaleMoney(record.win / 100)}</div>
+                <div>{formatLocaleMoney(record.win / 100)}</div>
               </div>
             </div>
           ))
