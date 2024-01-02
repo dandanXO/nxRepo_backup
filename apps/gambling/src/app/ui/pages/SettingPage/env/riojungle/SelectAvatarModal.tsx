@@ -58,7 +58,7 @@ export const SelectAvatarModal = ({
               onConfirm(selected);
             }}
           >
-            Confieme
+            Confirme
           </button>
         </div>
 
