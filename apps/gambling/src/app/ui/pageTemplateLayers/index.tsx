@@ -25,6 +25,8 @@ import {GameSearchModal} from "../modals/GameSearchModal";
 import {useClickFavoriteGameItem} from "../hooks/useClickFavoriteGameItem";
 import {TelegramDetailContactModal} from "../modals/TelegramDetailContactModal";
 import { renderByPlatform } from "../utils/renderByPlatform";
+import {twMerge} from "tailwind-merge";
+import {IOSDownloadModal} from "../modals/IOSDownloadModal";
 
 type IModalOpen = {
   isOpen: boolean;
@@ -91,6 +93,10 @@ export const PageTemplateLayers = ({
   const {
     onClickToOpenTelegramManager,
   } = usePageNavigate();
+
+  // NOTE: iOSDownloadPopover
+  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
+  const isShowIOSDOwnloadModal = isShowiOSDownloadPopover && isMobile;
 
   return (
     <>
@@ -198,6 +204,13 @@ export const PageTemplateLayers = ({
             dispatch(appSlice.actions.setShowTelegramDetailContactModal(false))
           }}
         />
+      )}
+
+      {/*NOTE: IOSDownloadModal*/}
+      {isShowIOSDOwnloadModal && (
+        <div className={twMerge("z-[1006]", "fixed bottom-0")}>
+          {<IOSDownloadModal/>}
+        </div>
       )}
 
     </>

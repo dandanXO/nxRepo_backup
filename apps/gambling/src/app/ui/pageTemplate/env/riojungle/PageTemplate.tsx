@@ -109,10 +109,6 @@ export const PageTemplate = ({
   const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
   const isShowAddToMobileShortCut = isMobile && !inNativeApp && !hideAddToMobileShortcut
 
-  // NOTE: iOSDownloadPopover
-  const isShowiOSDownloadPopover = useSelector((state: RootState) => state.app.isShowiOSDownloadPopover);
-  const isShowIOSDOwnloadModal = isShowiOSDownloadPopover && isMobile;
-
   const location = useLocation();
 
   return (
@@ -194,6 +190,20 @@ export const PageTemplate = ({
 
       </div>
 
+      {/*NOTE: AddToMobileShortcut*/}
+      {isShowAddToMobileShortCut && (
+        <div
+          className={twMerge("fixed w-full flex justify-center",
+            AddShortCutZIndex,
+          )}
+          style={{
+            bottom: 20,
+          }}
+        >
+          <AddToMobileShortcut isShowTabbar={isShowTabBar}/>
+        </div>
+      )}
+
       {isShowTabBar && (
         <TabBar className={TabZIndex} isShowSlot={false} size={"big"} isShowMenuDrawer={showMenuDrawer}/>
       )}
@@ -209,28 +219,6 @@ export const PageTemplate = ({
           />
         </div>
       )}
-
-      {/*NOTE: AddToMobileShortcut*/}
-      {isShowAddToMobileShortCut && (
-        <div
-          className={twMerge("fixed w-full flex justify-center",
-            AddShortCutZIndex,
-          )}
-          style={{
-            bottom: 20,
-          }}
-        >
-          <AddToMobileShortcut isShowTabbar={isShowTabBar}/>
-        </div>
-      )}
-
-      {/*NOTE: IOSDownloadModal*/}
-      {isShowIOSDOwnloadModal && (
-        <div className={twMerge("z-[1006]", "fixed bottom-0")}>
-          {<IOSDownloadModal/>}
-        </div>
-      )}
-
 
     </BaseStyledPageTemplate>
   )
