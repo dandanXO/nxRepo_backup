@@ -6,7 +6,6 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { Input } from "../../../../components-bs/Inputs/Input";
 import { useNavigate } from "react-router";
 
-import { IndexTabs } from "../../IndexTabs";
 
 import { AppCarousel } from "../../Carousel";
 
@@ -22,6 +21,7 @@ import { RootState } from "../../../../../reduxStore";
 import { ScrollTab } from "../../../../components/TabItem/ScrollTab";
 
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
+import { gameSlice } from "../../../../../reduxStore/gameSlice";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
 import { tcx } from "../../../../utils/tcx";
 import { RecentGameItem } from "../../../../components-bs/RecentGameListItem";
@@ -66,7 +66,6 @@ type ICoco777betIndexPage = {
   allGameList: any;
   label: any;
   activeTab: any;
-  setActiveTab: (value: any) => void;
   setViewType: (value: any) => void;
   setSearchInput: (value: any) => void;
   gameList: any;
@@ -81,7 +80,6 @@ export const IndexPage = ({
   allGameList,
   label,
   activeTab,
-  setActiveTab,
   setViewType,
   setSearchInput,
   gameList,
@@ -145,6 +143,7 @@ export const IndexPage = ({
 
   const { typeGameCount } = useSelector((state: any) => state.gameList);
 
+
   const IndexTabs = () => {
     return (
       <DragScrollContainer className="flex flex-row items-center rounded-[100px]">
@@ -156,7 +155,7 @@ export const IndexPage = ({
                 <TabItem
                   active={activeTab === tab}
                   onClick={() => {
-                    setActiveTab(tab);
+                    dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(tab));
                     setViewType('')
                   }}
                   icon={iconsMap[tab]}

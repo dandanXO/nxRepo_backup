@@ -38,10 +38,10 @@ export const DesktopGameRecordPage = ({
       name: 'gameName',
       key: 'gameName',
       render: (record: any) => (
-        <div className='flex flex-col gap-1'>
+        <div className='flex gap-2 items-center'>
           <img
             alt='gameLogo'
-            className='mx-auto w-12 object-cover'
+            className='w-12 object-cover'
             src={`${environment.s3URLImages}/${record.gameId}-small.png`}
           />
           <div>
@@ -56,12 +56,11 @@ export const DesktopGameRecordPage = ({
       key: 'createTime',
       render: (record: any) => (
         <>
-          <div>{moment(record.createTime.split(" ")[0]).format('DD.MM.YYYY')}</div>
-          <div>{record.createTime.split(" ")[1]}</div>
+          <div>{moment(record.createTime).format('DD.MM.YYYY HH:mm:ss')}</div>
         </>
       )
     },
-    { title: 'Valor Da Aposta', name: 'bet', key: 'bet', render: (record: any) => formatLocaleMoney(record.bet / 100) },
+    { title: 'Valor Da Aposta', name: 'bet', key: 'bet', render: (record: any) => `R$ ${formatLocaleMoney(record.bet / 100)}` },
     { title: 'Lucro', name: 'win', key: 'win', render: (record: any) => formatLocaleMoney(record.win / 100) }
   ]
 
