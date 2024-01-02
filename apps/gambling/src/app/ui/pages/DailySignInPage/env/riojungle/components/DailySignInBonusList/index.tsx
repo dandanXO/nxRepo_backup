@@ -9,32 +9,23 @@ interface IDailySignInBonusListProps {
   currentVIP: number
   selectedVIP: number
   signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays'];
-  signInConfig: GetSignInConfigResponse['data']['signInConfig']
-  signInAllConfig: GetSignInConfigResponse['data']['signInAllConfig']
   className?: string
+  dayConfigs: { days: number, cashback: number}[]
 }
 
 export const  DailySignInBonusList = ({
   selectedVIP,
-  signInConfig,
   signInTotalDays,
   currentVIP,
-  signInAllConfig,
-  className
+  className,
+  dayConfigs
 }: IDailySignInBonusListProps) => {
-  const vipConfig = signInAllConfig?.find(
-    (config) =>
-      config.identifier.split('::')[2].replace('V', '') ===
-      `${selectedVIP}`
-  )
-
-  const dayConfigs = JSON.parse(vipConfig?.value || '[]');
 
   return (
     <div className={tcx('w-full', className)}>
       {
         dayConfigs.map(
-          (config: { days: number, cashback: number}, index: number) => {
+          (config, index: number) => {
 
             const checked = currentVIP === selectedVIP && index + 1 <= signInTotalDays
 

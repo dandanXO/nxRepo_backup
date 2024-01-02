@@ -190,7 +190,6 @@ export const DailySignInPage = () => {
       <RioDailySignInPage
         onClickToSignIn={onClickToSignIn}
         currentVIP={signInConfig?.data?.vipLevel || 0}
-        signInConfig={signInConfig?.data?.signInConfig || []}
         signInAllConfig={signInConfig?.data?.signInAllConfig || []}
         todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
         signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
