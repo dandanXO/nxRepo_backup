@@ -10,6 +10,8 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {userLogout} from "../../../usecase/userLogout";
 import {LogoutCancelButton} from "../Buttons/LogoutCancelButton";
 import {LogoutConfirmButton} from "../Buttons/LogoutConfirmButton";
+import { UserLogoutSection as RioUserLogoutSection } from "./env/riojungle";
+import { renderByPlatform } from "../../utils/renderByPlatform";
 
 
 const CancelButton = styled.button`
@@ -31,6 +33,10 @@ const ConfirmButton = styled.button`
   text-shadow: 0 1px 2px #036A02;
 `
 
+export interface IUserLogoutSectionProps {
+  onHandleCancel: () => void
+  onHandleLogout: () => void
+}
 
 type ILogoutPopover = {
   className?: string;
@@ -52,7 +58,14 @@ export const LogoutSection = (props: ILogoutPopover) => {
     navigate(PageOrModalPathEnum.IndexPage);
   }
 
-  return (
+  return renderByPlatform({
+    "riojungle777bet": (
+      <RioUserLogoutSection
+        onHandleCancel={onHandleCancel}
+        onHandleLogout={onHandleLogout}
+      />
+    )
+  },(
     <div className={cx("flex flex-col text-sm md:text-base", props.className)}>
       <div className={"mb-2 text-[var(--white)]"}>Tem certeza que deseja sair?</div>
       <div className={"flex flex-row justify-center"}>
@@ -60,5 +73,5 @@ export const LogoutSection = (props: ILogoutPopover) => {
         <LogoutConfirmButton onClick={onHandleLogout}/>
       </div>
     </div>
-  )
+  ))
 }
