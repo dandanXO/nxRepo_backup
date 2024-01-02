@@ -169,9 +169,9 @@ export const PageTemplate = ({
       <div
         style={{
           position: 'fixed',
-          top: isShowMenuDrawer ? HeaderHeight : 0,
+          top: HeaderHeight,
           width: '100%',
-          height: isShowMenuDrawer ? `calc(100% - ${HeaderHeight}px - ${TabHeight}px)` : "100%",
+          height: `calc(100% - ${HeaderHeight}px - ${TabHeight}px)`,
         }}
       >
         <div
@@ -188,8 +188,8 @@ export const PageTemplate = ({
           {(footer.mobile || footer.tablet || footer.desktop) && (
             <Footer/>
           )}
-
         </div>
+
       </div>
 
       {!inNativeApp && (
