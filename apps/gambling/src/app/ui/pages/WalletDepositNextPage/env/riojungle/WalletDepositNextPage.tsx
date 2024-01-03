@@ -150,7 +150,7 @@ export const WalletDepositNextPage = () => {
           <ShadowContainer className={`flex bg-[#333] rounded-lg flex-col items-center h-full`}>
             <div className="pt-2 pb-2.5 md:pt-3 md:pb-3.5 lg:pt-3.5 lg:pb-5 opacity-80 bg-[#4d4d4d] flex flex-col justify-center  w-full  rounded-tl-lg rounded-tr-lg">
               <div className="text-sm md:text-base lg:text-xl leading-5 md:leading-6 lg:leading-7 text-white text-center mb-[2px] md:mb-3.5 lg:mb-5">Quantia</div>
-              <div className="text-center text-base md:text-xl lg:text-4xl font-bold leading-6 md:leading-7 lg:leading-9 text-white">
+              <div className="text-center text-base md:text-xl lg:text-3xl font-bold leading-6 md:leading-7 lg:leading-9 text-white">
                 R$ {formatLocaleMoney(amount)}
               </div>
             </div>
@@ -160,7 +160,7 @@ export const WalletDepositNextPage = () => {
           </ShadowContainer>
         </section>
       </section>
-      <Button className={'my-5 md:my-8 lg:my-10 bg-[#8547EB] w-full rounded-lg py-3 text-sm md:text-base lg:text-3xl'} onClick={handleToWalletPage} text={'Ja pago'} />
+      <Button className={'my-5 md:my-8 lg:my-10 bg-[#8547EB] w-full rounded-lg py-3 text-sm md:text-base lg:text-xl'} onClick={handleToWalletPage} text={'Ja pago'} />
     </PageContainer>
   )
 }
