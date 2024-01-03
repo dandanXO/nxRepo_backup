@@ -69,7 +69,7 @@
         "scripts": [],
         "isolatedConfig": true,
         "webpackConfig": "apps/gambling/build/webpack.config.main.js",
-        "postcssConfig": "apps/gambling/build/postcss.config.js"
+        "postcssConfig": "apps/gambling/src/environments/postcss.config.js"
       },
       "configurations": {
         "development": {
@@ -181,7 +181,12 @@
           "vendorChunk": true
         },
         "dev-coco777bet-v1": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -201,7 +206,12 @@
           "vendorChunk": true
         },
         "prod-coco777bet-v1": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -223,7 +233,12 @@
           "vendorChunk": false
         },
         "dev-coco777bet-v2": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -243,7 +258,12 @@
           "vendorChunk": true
         },
         "prod-coco777bet-v2": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -265,7 +285,12 @@
           "vendorChunk": false
         },
         "dev-coco777bet-v3": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -285,7 +310,12 @@
           "vendorChunk": true
         },
         "prod-coco777bet-v3": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -307,7 +337,12 @@
           "vendorChunk": false
         },
         "dev-coco777bet-v4": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -327,7 +362,12 @@
           "vendorChunk": true
         },
         "prod-coco777bet-v4": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -349,7 +389,12 @@
           "vendorChunk": false
         },
         "dev-coco777bet-v5": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -369,7 +414,12 @@
           "vendorChunk": true
         },
         "prod-coco777bet-v5": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -391,7 +441,12 @@
           "vendorChunk": false
         },
         "dev-coco777bet-v6": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -411,7 +466,12 @@
           "vendorChunk": true
         },
         "prod-coco777bet-v6": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -433,7 +493,12 @@
           "vendorChunk": false
         },
         "dev-coco777bet-v7": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -453,7 +518,12 @@
           "vendorChunk": true
         },
         "prod-coco777bet-v7": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -475,7 +545,12 @@
           "vendorChunk": false
         },
         "dev-u1-v8-sambafortunebet": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -495,7 +570,12 @@
           "vendorChunk": true
         },
         "prod-u1-v8-sambafortunebet": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/coco777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/coco777bet/theme.css"
@@ -517,7 +597,12 @@
           "vendorChunk": false
         },
         "dev-u2-v1-riojungle777bet": {
+          "postcssConfig": "apps/gambling/src/environments/riojungle777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/riojungle777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/riojungle777bet/theme.css"
@@ -537,7 +622,12 @@
           "vendorChunk": true
         },
         "prod-u2-v1-riojungle777bet": {
+          "postcssConfig": "apps/gambling/src/environments/riojungle777bet/postcss.config.js",
           "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/riojungle777bet/tailwind.variables"
+            },
             {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/riojungle777bet/theme.css"

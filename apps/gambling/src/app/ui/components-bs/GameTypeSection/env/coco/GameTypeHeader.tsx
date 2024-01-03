@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction} from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import cx from "classnames";
-import todos from "../../../../env/coco/index-tab-todos.png"
+import todos from "../../../Icons/tabs/env/coco/index-tab-todos.png"
 import {LeftOutlined} from "@ant-design/icons"
 
 export const GameTypeHeader = (props: {
@@ -29,8 +29,6 @@ export const GameTypeHeader = (props: {
             <LeftOutlined className={"text-white text-xl mr-2"}/>
           </button>
         )}
-        {/*<img className="w-[36px] h-[30px] mr-4" alt={"map"} src={`assets/${environment.assetPrefix}/ic_game.png`}/>*/}
-        {/*<img className="w-[36px] h-[30px] mr-4" alt={"map"} src={todos}/>*/}
         <img className="w-[24px] h-[24px] mr-2" alt={"map"} src={todos}/>
         <span className={"text-xl font-bold text-white"}>{props.gameTypeName}</span>
       </span>
