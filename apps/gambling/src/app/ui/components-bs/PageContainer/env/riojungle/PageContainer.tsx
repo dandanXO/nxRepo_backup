@@ -10,6 +10,7 @@ export const PageContainer = (props: IContainer) => {
     <div
       id={props.id}
       className={twMerge(
+        "page-core-container",
         // isMobile && "px-4",
         // isMobile && isY && "py-2",
         // !isMobile && "px-12",

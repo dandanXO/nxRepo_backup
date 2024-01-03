@@ -3,18 +3,20 @@ const { join } = require('path');
 const colors = require('tailwindcss/colors');
 const plugin = require('tailwindcss/plugin');
 
-// const customColors = require("./src/environments/theme/india/v55/tailwind.colors");
+const {tailwindVariables} = require("./tailwind.variables");
+console.log("tailwindVariables", tailwindVariables);
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     join(
       __dirname,
-      '../{src,pages,components}/**/*!(*.stories|*.spec).{ts,tsx,html}'
+      '../../../{src,pages,components}/**/*!(*.stories|*.spec).{ts,tsx,html}',
     ),
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
+    screens: tailwindVariables.theme.screens,
     extend: {
       bgGradientDeg: {
         75: '75deg',

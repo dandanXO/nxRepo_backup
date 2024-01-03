@@ -6,7 +6,7 @@ import {Input} from "../../../../components-bs/Inputs/Input";
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../environments/environment"
-import {IndexTabs} from "../../IndexTabs";
+import {IndexTabs} from "../coco/IndexTabs";
 import FakeBanner from "./FakeBanner.png";
 import {AppCarousel} from "../../Carousel";
 import styled from "styled-components";

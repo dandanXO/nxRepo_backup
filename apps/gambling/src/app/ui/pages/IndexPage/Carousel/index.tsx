@@ -6,55 +6,31 @@ import useBreakpoint from "../../../hooks/useBreakpoint";
 import cx from "classnames";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
 import {AppCarousel as RiojungleAppCarousel} from "./env/riojungle/RiojungleCarousel"
+import {tailwindVariables} from "../../../../../environments/tailwind.variables";
 
-// const responsive = {
-//   superLargeDesktop: {
-//     // the naming can be any, depends on you.
-//     breakpoint: { max: 4000, min: 3000 },
-//     items: 1,
-//     partialVisible:true
-//   },
-//   desktop: {
-//     breakpoint: { max: 3000, min: 1024 },
-//     items: 1,
-//     partialVisible:true
-//   },
-//   tablet: {
-//     breakpoint: { max: 1024, min: 464 },
-//     items: 1,
-//     partialVisible:true
-//   },
-//   mobile: {
-//     breakpoint: { max: 464, min: 0 },
-//     items:1,
-//     partialVisible:true
-//   }
-// };
-
+const mobilePoint = parseInt(tailwindVariables.theme.screens.mobile.replace("px", ""));
+const tabletPoint = parseInt(tailwindVariables.theme.screens.tablet.replace("px", ""));
+const desktopPoint = parseInt(tailwindVariables.theme.screens.desktop.replace("px", ""));
 
 const responsive = {
-  superLargeDesktop: {
-    breakpoint: { min: 1024, max: 999999},
-    items: 1,
-    partialVisible: true,
-    // partialVisible: false,
-  },
   desktop: {
-    breakpoint: { min: 768, max: 1024 },
-    items: 1,
-    partialVisible:true
+    breakpoint: { min: tabletPoint, max: 9999999999 },
+    items: 3,
+    partialVisible:true,
+    partialVisibilityGutter: 20
     // partialVisible: false,
   },
   tablet: {
-    breakpoint: { min: 640, max: 768 },
-    items: 1,
-    partialVisible:true
+    breakpoint: { min: mobilePoint, max: tabletPoint },
+    items: 2,
+    partialVisible:true,
+    partialVisibilityGutter: 20
     // partialVisible: false,
   },
   mobile: {
-    breakpoint: { min: 0, max: 640 },
+    breakpoint: { min: 0, max: mobilePoint },
     items: 1,
-    partialVisible:true
+    partialVisible:true,
     // partialVisible: false,
   }
 };

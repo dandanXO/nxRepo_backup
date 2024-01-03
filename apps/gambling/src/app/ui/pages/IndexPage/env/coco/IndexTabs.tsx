@@ -1,14 +1,16 @@
-import {TabItem, Tabs} from "../../components-bs/TabItem/TabItem";
-import {ImageTab} from "../../components-bs/TabItem/ImageTab";
+import {TabItem, Tabs} from "../../../../components-bs/TabItem/TabItem";
+import {ImageTab} from "../../../../components-bs/TabItem/ImageTab";
 import cx from "classnames";
-import todos from "../../env/coco/index-tab-todos.png"
-import slots from "../../env/coco/index-tab-slots.png"
-import vivo from "../../env/coco/index-tab-vivo.png"
-import viver from "../../env/coco/index-tab-viver.png"
-import favorite from "../../env/coco/index-tab-favorite.png"
-import fishing from "../../env/coco/index-tab-fishing.png";
-import recent from "../../env/coco/index-tab-recent.png"
-import useBreakpoint from "../../hooks/useBreakpoint";
+
+import todos from "../../../../components-bs/Icons/tabs/env/coco/index-tab-todos.png"
+import slots from "../../../../components-bs/Icons/tabs/env/coco/index-tab-slots.png"
+import vivo from "../../../../components-bs/Icons/tabs/env/coco/index-tab-vivo.png"
+import viver from "../../../../components-bs/Icons/tabs/env/coco/index-tab-viver.png"
+import favorite from "../../../../components-bs/Icons/tabs/env/coco/index-tab-favorite.png"
+import fishing from "../../../../components-bs/Icons/tabs/env/coco/index-tab-fishing.png";
+
+import recent from "../../../../components-bs/Icons/tabs/env/coco/index-tab-recent.png"
+import useBreakpoint from "../../../../hooks/useBreakpoint";
 import styled from "styled-components";
 
 const IndexImageTab = styled(ImageTab)`

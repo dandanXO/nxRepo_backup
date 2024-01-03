@@ -6,7 +6,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {Input} from "../../../../components-bs/Inputs/Input";
 import {useNavigate} from "react-router";
 
-import {IndexTabs} from "../../IndexTabs";
+import {IndexTabs} from "./IndexTabs";
 
 import {AppCarousel} from "../../Carousel";
 

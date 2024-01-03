@@ -87,7 +87,6 @@ const UserStatusSection = (props: IUserStatusSection) => {
           <div className='text-base text-white leading-none'>ID:{user.user_id}</div>
         </div>
       </section>
-
       <section className={"flex relative justify-center"}>
         <div
           onClick={() => {
@@ -118,7 +117,7 @@ const UserMoneyStatusSectionItem = (props: IUserMoneyStatusSection) => {
       {renderByRWD({
         "mobile": <></>,
         "tablet": (
-          <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
+          <></>
         ),
         "desktop": (
           <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
