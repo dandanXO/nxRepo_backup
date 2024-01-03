@@ -58,14 +58,14 @@ export const GameSearchModal = (props: IGameSearchModal) => {
     if (data?.length > 0) {
       return (
         <div className={cx("flex", {
-          "flex-wrap w-full": isMobile
+          "flex-wrap w-full": isMobile,
         })}>
           {data && data.map((item: any, index: any) => {
             return (
               <MainGameItem
-                className={cx(" grow-0 shrink-0 ", {
-                  "w-[33vw] h-[33vw]": isMobile,
-                  "mr-[16px] !basis-[150px] !h-[170px]": !isMobile
+                className={cx("grow-0 shrink-0", {
+                  "w-[32vw] h-[32vw]": isMobile,
+                  "mr-[16px] max-w-[150px] !basis-[150px] !h-[170px]": !isMobile
                 })}
                 key={index}
                 gameId={Number(item.gameId)}
