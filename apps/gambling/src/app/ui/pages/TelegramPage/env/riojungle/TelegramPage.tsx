@@ -29,7 +29,7 @@ export const TelegramPage = (props: ITelegramPage) => {
 
   return (
 
-    <PageContainer className={'relative '}>
+    <PageContainer className={'relative pb-0'}>
 
       <Banner imgClassName={`rounded-lg mb-5 md:mb-8 lg:mb-10 `} src={bannerSrc} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2 w-[75%] md:w-[80%]"}>
@@ -38,7 +38,7 @@ export const TelegramPage = (props: ITelegramPage) => {
         </div>
       } />
 
-      <div className={cx("flex flex-col text-left pb-20 md:pb-0")}>
+      <div className={cx("flex flex-col text-left pb-5 md:pb-0")}>
         <div className="text-white text-base md:text-lg lg:text-xl leading-6 md:leading-7 mb-5">
           {environment.platformGroup} ({environment.platformName}) sinceramente convida você a se juntar ao nosso canal de telegrama e vamos nos comunicar mais profundamente!
         </div>
@@ -48,10 +48,10 @@ export const TelegramPage = (props: ITelegramPage) => {
         </div>
       </div>
 
-      <div className={cx({"w-full px-4 fixed bottom-0 left-0 bg-[#1A1A1A]":isMobile})}>
+      <div className={cx({"w-full sticky pb-10 bottom-0 left-0 bg-[#1A1A1A]":isMobile})}>
         <Button
           onClick={props.handleClickToTelegram}
-          className={cx("m-0 my-4 md:my-8 md:my-10 text-white text-sm md:text-base lg:text-xl bg-[#8547EB] py-3 w-full rounded-lg", {
+          className={cx("m-0 md:my-8 md:my-10 text-white text-sm md:text-base lg:text-xl bg-[#8547EB] py-3 w-full rounded-lg", {
             '': isMobile
           })}
           text={'Junte-se'}

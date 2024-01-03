@@ -482,7 +482,7 @@ export const AppRouter = () => {
                 desktop: true,
               }}
               footer={{
-                mobile: true,
+                mobile: false,
                 tablet: true,
                 desktop: true,
               }}
