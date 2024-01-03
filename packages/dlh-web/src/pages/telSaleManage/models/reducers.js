@@ -1,16 +1,16 @@
 import {
-    DISTRIBUTELIST,
-    CHANGE_TEL_SALE_IMPORT_MODAL_VISIBLE,
-    PERSON_OR_GROUP_LIST,
-    CHANGE_TEL_SALE_URGEPERSON_MODAL_VISIBLE,
-    RECORDLIST,
-    TEL_SALE_LIST,
-    GUEST_INFO,
-    USER_CONTACTS,
-    OVERDUE_COLLECTION,
-    CHANGE_OVERDUE_COLLECTION_MODAL_VISIBLE,
-    STATISTICS_LIST,
-    TEL_SALE_COLLECTOR_LIST,
+  DISTRIBUTELIST,
+  CHANGE_TEL_SALE_IMPORT_MODAL_VISIBLE,
+  PERSON_OR_GROUP_LIST,
+  CHANGE_TEL_SALE_URGEPERSON_MODAL_VISIBLE,
+  RECORDLIST,
+  TEL_SALE_LIST,
+  GUEST_INFO,
+  USER_CONTACTS,
+  OVERDUE_COLLECTION,
+  CHANGE_OVERDUE_COLLECTION_MODAL_VISIBLE,
+  STATISTICS_LIST,
+  TEL_SALE_COLLECTOR_LIST, TEL_SALE_GROUP_LIST
 } from "./actions";
 
 import { utilReducer } from 'utils';
@@ -27,6 +27,7 @@ const userContactsState=createPageInitState('userContacts', tableData);
 const overdueCollectionState = createPageInitState('overdueCollection', tableData, true);
 const statisticsListState=createPageInitState('statisticsList', tableData);
 const telSaleCollectorListState=createPageInitState('telSaleCollectorList', tableData);
+const telSaleGroupListState=createPageInitState('telSaleGroupList', tableData)
 
 const initState = {
     ...distributeListState,
@@ -40,6 +41,7 @@ const initState = {
     ...overdueCollectionState,
     ...statisticsListState,
     ...telSaleCollectorListState,
+    ...telSaleGroupListState
 };
 
 const telSaleState = (state = initState, action) => {
@@ -74,6 +76,8 @@ const telSaleState = (state = initState, action) => {
             return { ...state, statisticsListLoading: action.option };
         case TEL_SALE_COLLECTOR_LIST['SET']:
             return { ...state, telSaleCollectorListData: action.data };
+        case TEL_SALE_GROUP_LIST['SET']:
+            return { ...state, telSaleGroupListData: action.data };
         default:
             return state;
     }

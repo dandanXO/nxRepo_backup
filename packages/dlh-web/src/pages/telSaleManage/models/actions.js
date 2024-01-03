@@ -95,3 +95,11 @@ export const telSaleCollectorList = {
     set: (data) => ({ type: TEL_SALE_COLLECTOR_LIST['SET'], data }),
     loading: (option) => ({ type: TEL_SALE_COLLECTOR_LIST['LOADING'], option }),
 }
+
+// 電銷團隊下拉選單
+export const TEL_SALE_GROUP_LIST = createRequestActionTypes('TEL_SALE_GROUP_LIST');
+export const telSaleGroupList = {
+  get: (params, status) => ({ type: TEL_SALE_GROUP_LIST['GET'], params, status }),
+  set: (data) => ({ type: TEL_SALE_GROUP_LIST['SET'], data }),
+  loading: (option) => ({ type: TEL_SALE_GROUP_LIST['LOADING'], option }),
+}

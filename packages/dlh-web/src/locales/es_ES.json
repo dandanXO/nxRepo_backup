@@ -1358,5 +1358,6 @@
   "order.payOutPending": "Pendiente",
   "common.bankcard": "Tarjeta Bancaria",
   "common.eWallet": "Billetera Electrónica",
-  "detail.user.company.name": "Nombre de la Empresa"
+  "detail.user.company.name": "Nombre de la Empresa",
+  "table.tel.sale.group": "Equipo de Ventas Telefónicas"
 }
