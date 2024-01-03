@@ -230,10 +230,8 @@ export const IndexPage = ({
         recentGameList.length > 0 && (
           <PageContainer
             className={cx(
-              'overflow-hidden',
-              [DesktopXPadding, !isMobile], {
-
-            })}
+              'overflow-hidden'
+            )}
           >
             <GameListSection
               className='mb-0 pl-0 px-0'

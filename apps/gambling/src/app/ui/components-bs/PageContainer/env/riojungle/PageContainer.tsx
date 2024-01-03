@@ -21,7 +21,7 @@ export const PageContainer = (props: IContainer) => {
         // tablet (768px)
         "md:px-8",
         // desktop (1920px)
-        "lg:max-w-[1200px] lg:mx-auto",
+        "lg:max-w-[1200px] lg:mx-auto lg:px-24",
         props.className
       )}
       onClick={props.onClick}
