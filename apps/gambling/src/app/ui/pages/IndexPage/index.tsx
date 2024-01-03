@@ -29,7 +29,7 @@ export const IndexPage = () => {
   const dispatch = useDispatch();
   const { isMobile } = useBreakpoint();
   const { hotBrandGameList = [], allGameList = [], typeGameList = [], label } = useSelector((state: any) => state.gameList);
-  console.log('hotBrandGameList----',hotBrandGameList)
+  // console.log('hotBrandGameList----',hotBrandGameList)
   // const [activeTab, setActiveTab] = useState("Todos");
   // "Salão"
   const [activeTab, setActiveTab] = useState("Todos");
