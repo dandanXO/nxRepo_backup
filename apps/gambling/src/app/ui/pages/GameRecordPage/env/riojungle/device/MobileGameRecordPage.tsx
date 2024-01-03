@@ -52,7 +52,7 @@ export const MobileGameRecordPage = ({
   }, [records])
 
   return (
-    <PageContainer className=''>
+    <div className='fixed flex flex-col w-full h-[calc(100vh-52.5px)] px-4'>
 
       <BackNavigation onClick={onClickToIndex} />
 
@@ -105,6 +105,6 @@ export const MobileGameRecordPage = ({
           )
         }
       </div>
-    </PageContainer>
+    </div>
   )
 }
