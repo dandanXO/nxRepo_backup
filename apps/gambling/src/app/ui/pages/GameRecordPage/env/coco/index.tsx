@@ -1,5 +1,4 @@
 import { DatePicker } from 'antd';
-import { SectionContainer } from "../../../../components/container/SectionContainer";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
@@ -69,8 +68,8 @@ export const GameRecordPage = ({
 
   return (
     <div className='flex h-full flex-col px-4 md:px-8'>
-      <SectionContainer
-        className='flex h-full flex-col'
+      <div
+        className='flex h-full flex-col text-white'
       >
         <BackNavigation
           className={tcx('pl-0 pt-5 pb-6', ['pb-7', isMobile])}
@@ -117,7 +116,7 @@ export const GameRecordPage = ({
           />
         </div>
 
-      </SectionContainer>
+      </div>
     </div>
   )
 }

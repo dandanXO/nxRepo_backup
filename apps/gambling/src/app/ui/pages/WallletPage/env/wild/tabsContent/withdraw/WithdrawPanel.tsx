@@ -1,7 +1,5 @@
 import Select from 'react-select';
-
 import useBreakpoint from "../../../../../../hooks/useBreakpoint";
-import {SectionContainer} from "../../../../../../components/container/SectionContainer";
 import {Input} from "../../../../../../components-bs/Inputs/Input";
 import {tcx} from "../../../../../../utils/tcx";
 import {MobileInput} from "../../../../../../components-bs/Inputs/MobileInput";
@@ -18,7 +16,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
   return (
     <div>
 
-      <SectionContainer id={"withdraw-section"}>
+      <div id={"text-white withdraw-section"}>
 
         {/*{isMobile && (*/}
         {/*  <BlueBoard/>*/}
@@ -66,7 +64,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
           <WithdrawForm {...props} />
 
         </div>
-      </SectionContainer>
+      </div>
 
       <WithdrawNoticeSection
         onClickToVIP={props.onClickToVIP}

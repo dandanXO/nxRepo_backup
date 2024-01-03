@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import Select from 'react-select';
 import { notification } from 'antd';
 
-import useBreakpoint from "../../../../hooks/useBreakpoint";
-import { SectionContainer } from "../../../../components/container/SectionContainer";
+
 import { Input, InputValue } from "../../../../components-bs/Inputs/Input";
 import { Button } from "../../../../components-bs/Buttons/Button";
 import { useGetWithdrawLimitMutation, useWithdrawMutation } from "../../../../../external";

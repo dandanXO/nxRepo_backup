@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router';
-
-import { AppLocalStorage } from '../../../../../persistant/localstorage';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { Input } from '../../../../components-bs/Inputs/Input';
-import { SectionContainer } from '../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/hooks/useAllowLoginRouterRules';
@@ -40,7 +36,7 @@ export const SettingPage = ({
         />
       )}
       <div className={`${isMobile ? 'bg-varient' : 'border border-solid border-green-500 rounded-lg bg-varient m-4 mb-40 mt-8'}`}>
-        <SectionContainer id={'game-record-section'}>
+        <div id={'text-white game-record-section'}>
 
           <BackNavigation onClick={() => {
             if (isMobile) {
@@ -135,7 +131,7 @@ export const SettingPage = ({
               <img src={`assets/${environment.assetPrefix}/icon_41.png`}/>
             </InputSection>
           </div>
-        </SectionContainer>
+        </div>
         <div className={'h-20'}></div>
       </div>
     </Container>

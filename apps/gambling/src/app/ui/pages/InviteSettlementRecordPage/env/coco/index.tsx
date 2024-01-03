@@ -1,4 +1,3 @@
-import { SectionContainer } from "../../../../components/container/SectionContainer";
 import moment, { Moment } from "moment/moment";
 import { DatePicker } from "antd";
 import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
@@ -58,7 +57,7 @@ export const InviteSettlementRecordPage = () => {
 
 
   return (
-      <SectionContainer id={"game-record-section"} className="px-4 md:px-24">
+      <div id={"game-record-section"} className="text-white px-4 md:px-24">
         <BackNavigation
           title={isMobile && <div className={"w-full text-center font-bold"}>Registros de liquidação</div>}
           onClick={() => navigate(PageOrModalPathEnum.InvitePage)}
@@ -123,6 +122,6 @@ export const InviteSettlementRecordPage = () => {
 
           </table>
         </div>
-      </SectionContainer>
+      </div>
   )
 }
