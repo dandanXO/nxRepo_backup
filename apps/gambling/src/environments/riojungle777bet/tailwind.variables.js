@@ -2,9 +2,9 @@ module.exports = {
   tailwindVariables: {
     theme: {
       screens: {
-        mobile: '376px',
-        tablet: '768px',
-        desktop: '1920px',
+        mobile: '768px',
+        tablet: '1440px',
+        desktop: '1440px',
       }
     },
   }
