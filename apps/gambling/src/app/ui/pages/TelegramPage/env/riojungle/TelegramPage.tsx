@@ -17,7 +17,7 @@ import { appSlice } from "../../../../../reduxStore/appSlice";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { ITelegramPage } from "../..";
 import { TelegrmaNotice } from "../components/TelegramNotice";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 import { Button } from "../../../../components-bs/Buttons/env/riojungle/Button";
 
 
@@ -29,7 +29,7 @@ export const TelegramPage = (props: ITelegramPage) => {
 
   return (
 
-    <Container y={false} className={'relative py-4 md:py-5 lg:py-10'}>
+    <PageContainer y={false} className={'relative py-4 md:py-5 lg:py-10'}>
       <Banner imgClassName={`rounded-lg mb-5 md:mb-8 lg:mb-10 `} src={bannerSrc} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2 w-[75%] md:w-[80%]"}>
           <div className={"text-white text-base md:text-2xl lg:text-4xl font-bold leading-6 md:leading-8 lg:leading-10"}>Junte-se ao telegram</div>
@@ -57,6 +57,6 @@ export const TelegramPage = (props: ITelegramPage) => {
         />
       </div>
 
-    </Container>
+    </PageContainer>
   )
 }

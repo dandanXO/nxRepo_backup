@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { CompanySloganLabel } from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { ScrollTab } from "../../../../components/TabItem/ScrollTab";
@@ -174,7 +174,7 @@ export const IndexPage = ({
 
   return (
     <>
-      <Container id={"app-carousel"}>
+      <PageContainer id={"app-carousel"}>
         {/*{isMobile && <CompanySloganLabel />}*/}
         <div>
           <AppCarousel setIsMoving={setIsMoving}>
@@ -194,9 +194,9 @@ export const IndexPage = ({
           </AppCarousel>
         </div>
 
-      </Container>
+      </PageContainer>
 
-      <Container
+      <PageContainer
         className={cx(
           "z-[2]",
           "py-2 bg-[#1A1A1A]",
@@ -227,11 +227,11 @@ export const IndexPage = ({
               />
             </div>)}
         </div>
-      </Container>
+      </PageContainer>
 
       {
         recentGameList.length > 0 && (
-          <Container
+          <PageContainer
             className={cx(
               'overflow-hidden',
               [DesktopXPadding, !isMobile], {
@@ -256,17 +256,17 @@ export const IndexPage = ({
               children={recentGameListRender(recentGameList)}
               gameListClassName={tcx('py-[14px] animate-[recentGameListShow_0.8s_ease]', ['py-0 pt-2', isMobile])}
             />
-          </Container>
+          </PageContainer>
         )
       }
 
-      <Container
+      <PageContainer
         className={cx("pb-16", {
         "pt-[58px]": isFixedGameTypeTabs,
         })}
       >
         {gameList()}
-      </Container>
+      </PageContainer>
     </>
   )
 }

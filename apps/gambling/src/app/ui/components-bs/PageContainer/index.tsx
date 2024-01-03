@@ -9,7 +9,7 @@ type IContainer = {
   style?: unknown;
   id?: string;
 }
-export const Container = (props: IContainer) => {
+export const PageContainer = (props: IContainer) => {
   const isY = typeof props.y === "undefined" ? true : props.y;
   const {isMobile} = useBreakpoint();
   return (

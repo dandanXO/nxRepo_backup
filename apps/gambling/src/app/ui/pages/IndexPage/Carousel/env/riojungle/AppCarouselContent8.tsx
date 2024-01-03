@@ -9,7 +9,7 @@ import {environment} from "../../../../../../../environments/environment";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
-import {Container} from "../../../../../components/container/Container";
+import {PageContainer} from "../../../../../components-bs/PageContainer";
 import {IAppCarouselContent} from "../../types";
 import {CarouselTitle} from "./CarouselTitle";
 import {CarouselImage} from "./CarouselImage";

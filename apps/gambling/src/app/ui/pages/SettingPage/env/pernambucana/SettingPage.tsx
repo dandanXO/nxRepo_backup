@@ -5,7 +5,7 @@ import useBreakpoint from '../../../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/hooks/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"
-import {Container} from "../../../../components/container/Container";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import {InputSection} from "../../../../components-bs/Inputs/env/pernambucana/InputSection";
 
@@ -28,7 +28,7 @@ export const SettingPage = ({
   const { isMobile } = useBreakpoint();
 
   return (
-    <Container>
+    <PageContainer>
       {editing && (
         <EditUserInfoModal
           nickname={nickname}
@@ -134,6 +134,6 @@ export const SettingPage = ({
         </div>
         <div className={'h-20'}></div>
       </div>
-    </Container>
+    </PageContainer>
   );
 };

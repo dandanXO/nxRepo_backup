@@ -5,7 +5,7 @@ import { tcx } from "../../../../../utils/tcx";
 import CurrentLevelInfoCard from "./CurrentLevelInfoCard";
 import { GetSignInConfigResponse, GetUserVIPAllInfoResponse, GetVIPInfoResponse } from "../../../../../../external";
 import LevelInfoCard from "./LevelInfoCard";
-import {Container} from "../../../../../components/container/Container";
+import {PageContainer} from "../../../../../components-bs/PageContainer";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 
 interface ICoco777betVIPGradePageProps {
@@ -48,7 +48,7 @@ const Coco777betVIPGradePage = ({
 
 
   return (
-    <Container>
+    <PageContainer>
 
       <BackNavigation
         onClick={() => {
@@ -69,7 +69,7 @@ const Coco777betVIPGradePage = ({
           ))
         }
       </section>
-    </Container>
+    </PageContainer>
   )
 }
 

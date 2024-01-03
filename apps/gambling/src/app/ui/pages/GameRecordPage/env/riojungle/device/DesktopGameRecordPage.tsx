@@ -3,7 +3,7 @@ import { IGameRecordPageProps } from "../../../index";
 import { BackNavigation } from "../../../../../components/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../../hooks/usePageNavigate";
 import moment, { Moment } from "moment";
-import { Table } from "../../../../../components/Table";
+import { Table } from "../../../../../components-bs/Table";
 import { environment } from "../../../../../../../environments/environment";
 import { formatLocaleMoney } from "../../../../../utils/format";
 

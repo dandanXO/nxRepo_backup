@@ -12,7 +12,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { IGameTypeSection, IGameTypeSectionList } from "../..";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { Button } from "../../../Buttons/env/riojungle/Button";
-import { NoData } from "../../../../components/Table/env/riojungle/NoData";
+import { NoData } from "../../../Table/env/riojungle/NoData";
 import { environment } from "apps/gambling/src/environments/environment";
 
 export type GameItem = {

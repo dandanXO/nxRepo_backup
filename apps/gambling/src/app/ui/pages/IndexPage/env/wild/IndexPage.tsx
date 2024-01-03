@@ -23,7 +23,7 @@ import {useEffect, useState} from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import {Container} from "../../../../components/container/Container";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
@@ -103,7 +103,7 @@ export const IndexPage = ({
         </AppCarousel>
       </div>
 
-      <Container className="bg-[#020E29]">
+      <PageContainer className="bg-[#020E29]">
         {/*Tabs*/}
         {isMobile ? (
           <>
@@ -171,7 +171,7 @@ export const IndexPage = ({
           {gameList()}
         </div>
 
-      </Container>
+      </PageContainer>
 
     </>
   )

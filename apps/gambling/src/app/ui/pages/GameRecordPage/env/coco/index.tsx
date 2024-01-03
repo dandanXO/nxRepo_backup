@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction } from "react";
 import moment from "moment";
 import { Moment } from "moment/moment";
 import { datePickerStyle } from "../../../../components/DatePickers/DatePicker";
-import { Table } from "../../../../components/Table";
+import { Table } from "../../../../components-bs/Table";
 import { GetUserGameRecordResponse } from "../../../../../external";
 import { environment } from "../../../../../../environments/environment";
 import { formatLocaleMoney } from "../../../../utils/format";

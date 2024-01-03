@@ -12,7 +12,7 @@ import cx from 'classnames';
 import { tabItemProps } from "./env/coco/tabItemProps";
 import { DesktopTotalTable } from "./components/DesktopTotalTable";
 import { DesktopDailyTable } from "./components/DesktopDailyTable";
-import { Container } from "../../../components/container/Container";
+import { PageContainer } from "../../../components-bs/PageContainer";
 
 type IDesktopPanel = {
   isProxy: boolean;
@@ -51,7 +51,7 @@ export const DesktopPanel = ({
   const navigate = useNavigate();
 
   return (
-    <Container>
+    <PageContainer>
       <DesktopBoard data={totalRewardData} />
       <section>
         <div className={"text-left text-white text-lg mb-2 font-bold"}>Dados totals</div>
@@ -113,6 +113,6 @@ export const DesktopPanel = ({
         </div>
 
       </section>
-    </Container>
+    </PageContainer>
   )
 }

@@ -1,6 +1,6 @@
 import {environment} from "../../../../../../environments/environment";
 import badgeImage from "./icon=badge.png"
-import {Container} from "../../../../components/container/Container";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 import React from "react";
 import {twMerge} from "tailwind-merge";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
@@ -41,7 +41,7 @@ const Item = (props: IItem) => {
 
 export const CompanyProfilePage = () => {
   return (
-    <Container className={"pb-4"}>
+    <PageContainer className={"pb-4"}>
       <div className="text-white text-left">
         <div className={twMerge(
           "text-base leading-6font-medium",
@@ -123,6 +123,6 @@ export const CompanyProfilePage = () => {
 
 
       </div>
-    </Container>
+    </PageContainer>
   )
 }

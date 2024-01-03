@@ -5,7 +5,7 @@ import cx from 'classnames';
 import { DesktopDailyTable } from "./DesktopDailyTable";
 import { MobileDailyTable } from "./MobileDailyTable"
 import { IDesktopPanel } from "../..";
-import { Container } from "apps/gambling/src/app/ui/components/container/Container";
+import { PageContainer } from "../../../../../components-bs/PageContainer";
 import { DesktopTotalTable } from "./DesktopTotalTable";
 import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
 import { BackNavigation } from "apps/gambling/src/app/ui/components/BackNavigation/BackNavigation";
@@ -91,7 +91,7 @@ export const DesktopPanel = ({
           {
             <DesktopDailyTable isProxy={isProxy} type={dailyPanelMode} records={dailyData} />
           }
-          
+
         </div>
 
       </section>

@@ -1,7 +1,7 @@
 import {environment} from "../../../../../../environments/environment";
 import badgeImage from "./icon=badge.png"
 import licenseImage from "./bg_license.svg";
-import {Container} from "../../../../components/container/Container";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
 import React from "react";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
@@ -37,7 +37,7 @@ export const CompanyProfilePage = () => {
   const {onClickToIndex} = usePageNavigate();
 
   return (
-    <Container className={"pb-4"} y={false} >
+    <PageContainer className={"pb-4"} y={false} >
       <div className="text-white text-left">
         <BackNavigation
           onClick={() => onClickToIndex()}
@@ -111,6 +111,6 @@ export const CompanyProfilePage = () => {
 
 
       </div>
-    </Container>
+    </PageContainer>
   )
 }

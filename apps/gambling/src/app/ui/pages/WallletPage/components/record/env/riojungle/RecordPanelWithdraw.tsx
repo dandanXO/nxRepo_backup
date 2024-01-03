@@ -1,7 +1,7 @@
 import { WithdrawHistoryListEndpointResponseData } from '../../../../../../../external/WithdrawHistoryListEndpoint';
 import cx from "classnames";
 import {environment} from "../../../../../../../../environments/environment";
-import { Table } from "../../../../../../components/Table";
+import { Table } from "../../../../../../components-bs/Table";
 import { useEffect, useState } from "react";
 import { useWithdrawHistoryListMutation } from "../../../../../../../external";
 import { notification } from "antd";

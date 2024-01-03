@@ -1,7 +1,7 @@
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import { environment } from "apps/gambling/src/environments/environment";
-import { Table } from "apps/gambling/src/app/ui/components/Table";
+import { Table } from "apps/gambling/src/app/ui/components-bs/Table";
 import { formatLocaleMoney } from "apps/gambling/src/app/ui/utils/format";
 import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
 

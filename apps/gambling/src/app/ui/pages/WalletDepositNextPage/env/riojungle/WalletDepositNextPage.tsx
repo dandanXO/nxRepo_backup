@@ -13,7 +13,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { QRcodeCopyButton } from "../../../../components-bs/Buttons/env/coco/QRcodeCopyButton";
 import { DepositNextPageBackButton } from "../../../../components-bs/Buttons/env/coco/DepositNextPageBackButton";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 import { Button } from "../../../../components-bs/Buttons/env/riojungle/Button";
 import { CopyIcon } from "../../../../components-bs/Icons/CopyIcon";
 import { environment } from "apps/gambling/src/environments/environment";
@@ -103,7 +103,7 @@ export const WalletDepositNextPage = () => {
   const shadowContainerStyle = isMobile ? mobileShadowContainerStyle : deskTopShadowContainerStyle
 
   return (
-    <Container y={false}>
+    <PageContainer y={false}>
       {contextHolder}
 
       <BackNavigation
@@ -161,6 +161,6 @@ export const WalletDepositNextPage = () => {
         </section>
       </section>
       <Button className={'my-5 md:my-8 lg:my-10 bg-[#8547EB] w-full rounded-lg py-3 text-sm md:text-base lg:text-3xl'} onClick={handleToWalletPage} text={'Ja pago'} />
-    </Container>
+    </PageContainer>
   )
 }

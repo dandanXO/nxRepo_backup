@@ -1,4 +1,4 @@
-import { environment } from "apps/gambling/src/environments/environment"
+import { environment } from "../../../../../../environments/environment"
 
 export const NoData = () => {
   return (

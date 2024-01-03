@@ -8,7 +8,7 @@ import { useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuer
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 
 import { TabItem, Tabs } from "../../components/TabItem/TabItem";
-import { Container } from "../../components/container/Container";
+import { PageContainer } from "../../components-bs/PageContainer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reduxStore";
 import cx from "classnames";

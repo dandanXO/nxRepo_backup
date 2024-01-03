@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 import { tcx } from "../../../../../utils/tcx";
 import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
-import {Container} from "../../../../../components/container/Container";
+import {PageContainer} from "../../../../../components-bs/PageContainer";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -154,7 +154,7 @@ const MobileDailySignInPage = ({
   const disableButton = vipLevel === 0 || todayIsSignIn
   const {onClickToIndex} = usePageNavigate();
   return (
-    <Container>
+    <PageContainer>
       {contextHolder}
 
       {/*<nav className='flex items-center gap-4'>*/}
@@ -227,7 +227,7 @@ const MobileDailySignInPage = ({
           Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
         </div>
       </SignInIngoContainer>
-    </Container>
+    </PageContainer>
   )
 }
 

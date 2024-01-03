@@ -9,7 +9,7 @@ import { IMobileDailyTable } from "../..";
 import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
 import { MobileTableListItem } from "./components/MobileTableListItem";
 import cx from 'classnames';
-import { NoData } from "apps/gambling/src/app/ui/components/Table/env/riojungle/NoData";
+import { NoData } from "../../../../../components-bs/Table/env/riojungle/NoData";
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 
 
