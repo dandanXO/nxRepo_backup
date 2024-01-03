@@ -16,8 +16,8 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    screens: tailwindVariables.theme.screens,
     extend: {
+      screens: tailwindVariables.theme.screens,
       bgGradientDeg: {
         75: '75deg',
       },
