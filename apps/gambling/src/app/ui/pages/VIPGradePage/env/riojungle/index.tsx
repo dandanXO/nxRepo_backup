@@ -12,6 +12,7 @@ const VIPGradePage = (props: IVIPGradePageProps) => {
   return renderByRWD({
     mobile: <MobileVIPGradePage {...props} />,
     tablet: <TabletVIPGradePage {...props} />,
+    // tablet: <MobileVIPGradePage {...props} />,
     desktop: <DesktopVIPGradePage {...props} />,
   }, device)
 }
