@@ -111,7 +111,7 @@ export const UserInfoStatusPopover = ({
               className='mt-5 py-[6px] w-full text-lg text-white font-medium rounded-full bg-[#EA7F00] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
               onClick={()=> {
                 close();
-                onClickToWallet();
+                onClickToWallet({'panelType':'deposit'});
               }}
             >Depósito</button>
           </div>
@@ -122,7 +122,7 @@ export const UserInfoStatusPopover = ({
               className='mt-5 py-[6px] w-full text-lg text-white font-medium rounded-full bg-[#0077CE] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
               onClick={()=> {
                 close();
-                onClickToWallet();
+                onClickToWallet({'panelType':'withdraw'});
               }}
             >Retirar</button>
           </div>
