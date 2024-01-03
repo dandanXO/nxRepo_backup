@@ -1,4 +1,4 @@
-import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
+import { TabItem, Tabs } from "../../../../components-bs/TabItem/TabItem";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
@@ -19,9 +19,9 @@ import {
   totalReasableSelector
 } from "../../../../../reduxStore/appSlice";
 import { TotalSectionContainer } from "../../components/TotalSectionContainer";
-import { CommonTableTabG } from "../../../../components/TabItem/CommonTableTabG";
+import { CommonTableTabG } from "../../../../components-bs/TabItem/CommonTableTabG";
 import cx from "classnames";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {IWalletPage} from "../pernambucana/WalletPage";

@@ -6,7 +6,7 @@ import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/hooks/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"
 import {PageContainer} from "../../../../components-bs/PageContainer";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import {InputSection} from "../../../../components-bs/Inputs/env/pernambucana/InputSection";
 
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 import { environment } from "../../../../../../environments/environment";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { VIPBorderStyleContainer } from "../../../../components/VIPBorderStyleContainer";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";

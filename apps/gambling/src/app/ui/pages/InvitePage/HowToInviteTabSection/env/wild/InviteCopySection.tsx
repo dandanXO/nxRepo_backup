@@ -1,4 +1,4 @@
-import {CopyInputUrlItem} from "../../../../../components/CopyInputUrlItem";
+import {CopyInputUrlItem} from "../../../../../components-bs/CopyInputUrlItem";
 import {useLazyGetInviteRewardDataQuery} from "../../../../../../external";
 import {useEffect} from "react";
 import {useSelector} from "react-redux";

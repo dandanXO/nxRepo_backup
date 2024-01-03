@@ -1,7 +1,7 @@
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { useNavigate } from "react-router";
 import React from "react";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { environment } from "../../../../../../environments/environment";
 

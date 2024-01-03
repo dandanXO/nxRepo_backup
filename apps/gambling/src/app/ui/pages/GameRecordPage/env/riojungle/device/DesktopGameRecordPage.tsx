@@ -1,6 +1,6 @@
 import { DatePicker } from 'antd';
 import { IGameRecordPageProps } from "../../../index";
-import { BackNavigation } from "../../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../../hooks/usePageNavigate";
 import moment, { Moment } from "moment";
 import { Table } from "../../../../../components-bs/Table";

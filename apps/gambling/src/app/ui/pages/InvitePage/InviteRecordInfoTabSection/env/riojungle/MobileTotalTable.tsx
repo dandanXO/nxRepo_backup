@@ -1,10 +1,10 @@
 import { ReactElement, ReactNode, useState } from "react";
 import { IMobileTotalTable, ITabType } from "../../index";
-import ConfirmDrawer from "../../../../../components/Drawers/ConfirmDrawer";
+import ConfirmDrawer from "../../../../../components-bs/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
-import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
+import { TabItem } from "../../../../../components-bs/TabItem/env/riojungle/TabItem";
 import styled from "styled-components";
 import { MobileTableListItem } from "./components/MobileTableListItem";
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";

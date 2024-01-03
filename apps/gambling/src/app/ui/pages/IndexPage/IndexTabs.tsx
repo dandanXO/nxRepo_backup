@@ -1,5 +1,5 @@
-import {TabItem, Tabs} from "../../components/TabItem/TabItem";
-import {ImageTab} from "../../components/TabItem/ImageTab";
+import {TabItem, Tabs} from "../../components-bs/TabItem/TabItem";
+import {ImageTab} from "../../components-bs/TabItem/ImageTab";
 import cx from "classnames";
 import todos from "../../env/coco/index-tab-todos.png"
 import slots from "../../env/coco/index-tab-slots.png"

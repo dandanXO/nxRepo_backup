@@ -24,7 +24,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
+import {ScrollTab} from "../../../../components-bs/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 import {useScrollToCarousel} from "../../useScrollToCarousel";

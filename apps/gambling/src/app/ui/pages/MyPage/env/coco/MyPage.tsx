@@ -20,7 +20,7 @@ import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import { clampNumber, formatLocaleMoney } from "../../../../utils/format";
 import { tcx } from "../../../../utils/tcx";
-import { ProgressBar } from "../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../components-bs/ProgressBar";
 
 
 

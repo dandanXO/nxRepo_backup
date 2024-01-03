@@ -1,7 +1,7 @@
 import { IGameRecordPageProps } from "../../../index";
-import { BackNavigation } from "../../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../../hooks/usePageNavigate";
-import RangeDatePicker from "../../../../../components/DatePickers/RangeDatePicker";
+import RangeDatePicker from "../../../../../components-bs/DatePickers/RangeDatePicker";
 import moment from "moment";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { useEffect, useRef } from "react";

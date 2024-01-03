@@ -7,12 +7,12 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import { useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery } from "../../../external";
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 
-import { TabItem, Tabs } from "../../components/TabItem/TabItem";
+import { TabItem, Tabs } from "../../components-bs/TabItem/TabItem";
 import { PageContainer } from "../../components-bs/PageContainer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reduxStore";
 import cx from "classnames";
-import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { InvitePage as CInvitePage } from './env/coco/InvitePage';
 import { InvitePage as PInvitePage } from './env/pernambucana/InvitePage';

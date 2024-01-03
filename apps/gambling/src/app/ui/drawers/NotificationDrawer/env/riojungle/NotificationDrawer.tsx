@@ -4,7 +4,7 @@ import {INotificationDrawer} from "../../types/INotificationDrawer";
 
 import {NotificationContainer} from "./NotificationContainer";
 import {useNotificationDrawer} from "../../hooks/useNotificationDrawer";
-import { NotificationElement } from "../../../../components/NotificationElement";
+import { NotificationElement } from "../../../../components-bs/NotificationElement";
 import XCircle from './images/XCircle.png';
 
 export const NotificationDrawer = ({

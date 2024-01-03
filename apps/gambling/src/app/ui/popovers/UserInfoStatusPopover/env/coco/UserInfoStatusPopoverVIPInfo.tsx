@@ -7,7 +7,7 @@ import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import CurrentVIPIcon from "../../../../components/CurrentVIPIcon";
 import { clampNumber, formatLocaleMoney } from "../../../../utils/format";
-import { ProgressBar } from "../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../components-bs/ProgressBar";
 
 export const UserInfoStatusPopoverVIPInfo = ({
   userVIPInfo,

@@ -1,9 +1,9 @@
 import moment from "moment/moment";
 import { useState } from "react";
-import { CommonTableTabG } from "apps/gambling/src/app/ui/components/TabItem/CommonTableTabG";
+import { CommonTableTabG } from "../../../../../components-bs/TabItem/CommonTableTabG";
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
-import ConfirmDrawer from "apps/gambling/src/app/ui/components/Drawers/ConfirmDrawer";
-import DatePicker from "../../../../../components/DatePickers/DatePicker";
+import ConfirmDrawer from "../../../../../components-bs/Drawers/ConfirmDrawer";
+import DatePicker from "../../../../../components-bs/DatePickers/DatePicker";
 import { IMobileDailyTable, } from "../..";
 import styled from "styled-components";
 import { environment } from "apps/gambling/src/environments/environment";

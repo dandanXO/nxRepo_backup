@@ -7,8 +7,8 @@ import { MobileDailyTable } from "./MobileDailyTable"
 import { IDesktopPanel } from "../..";
 import { PageContainer } from "../../../../../components-bs/PageContainer";
 import { DesktopTotalTable } from "./DesktopTotalTable";
-import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
-import { BackNavigation } from "apps/gambling/src/app/ui/components/BackNavigation/BackNavigation";
+import { TabItem } from "../../../../../components-bs/TabItem/env/riojungle/TabItem";
+import { BackNavigation } from "../../../../../components-bs/BackNavigation/BackNavigation";
 import { IPanelMode } from "../../..";
 import { PageOrModalPathEnum } from "apps/gambling/src/app/ui/PageOrModalPathEnum";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";

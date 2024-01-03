@@ -16,8 +16,8 @@ import {AppCarouselContent3} from "../../Carousel/env/wild/AppCarouselContent3";
 import {AppCarouselContent4} from "../../Carousel/env/wild/AppCarouselContent4";
 import {AppCarouselContent5} from "../../Carousel/env/wild/AppCarouselContent5";
 import {AppCarouselContent6} from "../../Carousel/env/wild/AppCarouselContent6";
-import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
-import { CocoTabItem } from "../../../../components/TabItem/CocoTabItem";
+import { TabItem, Tabs } from "../../../../components-bs/TabItem/TabItem";
+import { CocoTabItem } from "../../../../components-bs/TabItem/CocoTabItem";
 import { DragScrollContainer } from "../../../../components/DragScrollContainer";
 import {useEffect, useState} from "react";
 import { SearchOutlined } from "@ant-design/icons";
@@ -26,7 +26,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 import { useSelector } from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
+import {ScrollTab} from "../../../../components-bs/TabItem/ScrollTab";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
 
 

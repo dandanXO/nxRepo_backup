@@ -10,7 +10,7 @@ import { environment } from "../../../../../../../environments/environment";
 import { tcx } from "../../../../../utils/tcx";
 import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../../router/hooks/useAllowLoginRouterRules";
-import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import {ViewRecordButton} from "../../../../../components-bs/Buttons/env/coco/ViewRecordButton";

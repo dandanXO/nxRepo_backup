@@ -14,7 +14,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 import cx from "classnames";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 import {ButtonPro} from "../../../../components-bs/Buttons/ButtonPro";
 import { formatLocaleMoney } from "../../../../utils/format";

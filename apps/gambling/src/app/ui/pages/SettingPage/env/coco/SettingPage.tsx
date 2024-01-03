@@ -10,7 +10,7 @@ import {PageContainer} from "../../../../components-bs/PageContainer";
 import {List} from "../../../../components/List";
 import {ListItem} from "../../../../components/List/ListItem";
 import {InfoCircleOutlined, PhoneOutlined, UserOutlined,} from "@ant-design/icons";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
 import {EditButton} from "../../../../components-bs/Icons/EditButton";

@@ -9,7 +9,7 @@ import { notification } from "antd";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import { tcx } from "../../../../../utils/tcx";
-import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
 import {PageContainer} from "../../../../../components-bs/PageContainer";
 

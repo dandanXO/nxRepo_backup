@@ -9,7 +9,7 @@ import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { CopyIcon } from "../../../../components-bs/Icons/CopyIcon";
 import { formatLocaleMoney } from "../../../../utils/format";
-import { ProgressBar } from "../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../components-bs/ProgressBar";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { CaretRight } from "../../../../popovers/UserInfoStatusPopover/env/riojungle/components/CaretRight";
 import { useInviteReward } from "../../../../hooks/useInviteReward";

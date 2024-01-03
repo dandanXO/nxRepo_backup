@@ -11,7 +11,7 @@ import TabDeposit from './assets/icon-tab-deposit.png'
 import TabWithdraw from './assets/icon-tab-withdraw.png'
 import TabRecord from './assets/icon-tab-record.png'
 import {PageContainer} from "../../../../components-bs/PageContainer";
-import {TabItem} from "../../../../components/TabItem/env/riojungle/TabItem";
+import {TabItem} from "../../../../components-bs/TabItem/env/riojungle/TabItem";
 import {Tabs} from "../../../../components/Tabs";
 
 export const WalletPage = (props: IWalletPage) => {

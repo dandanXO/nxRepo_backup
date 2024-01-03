@@ -7,11 +7,11 @@ import { useLazyGetUserInviteRewardRecordQuery } from "../../../../../external";
 import React, { useCallback, useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { environment } from "../../../../../../environments/environment";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../utils/format";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import Index from "../../../../components/DatePickers/RangeDatePicker";
+import Index from "../../../../components-bs/DatePickers/RangeDatePicker";
 import cx from "classnames"
 const { RangePicker } = DatePicker;
 

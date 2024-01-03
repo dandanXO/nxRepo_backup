@@ -1,4 +1,4 @@
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { environment } from "../../../../../../environments/environment";
 import React from "react";

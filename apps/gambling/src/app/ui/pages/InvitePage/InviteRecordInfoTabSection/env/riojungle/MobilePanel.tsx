@@ -6,7 +6,7 @@ import { MobileMainBoard } from "../../components/MobileMainBoard";
 import { MobileTotalTable } from "../../components/MobileTotalTable";
 import { MobileDailyTable } from "../../components/MobileDailyTable";
 import { IMobilePanel } from '../..';
-import { BackNavigation } from 'apps/gambling/src/app/ui/components/BackNavigation/BackNavigation';
+import { BackNavigation } from '../../../../../components-bs/BackNavigation/BackNavigation';
 import { useNavigate } from 'react-router';
 import { PageOrModalPathEnum } from 'apps/gambling/src/app/ui/PageOrModalPathEnum';
 

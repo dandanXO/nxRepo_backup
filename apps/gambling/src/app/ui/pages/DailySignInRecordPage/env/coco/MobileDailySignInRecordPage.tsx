@@ -1,6 +1,6 @@
 import React from "react";
 import { GetSignInRecordResponseData } from "../../../../../external";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { NoData } from "../../../../components-bs/Icons/NoData";

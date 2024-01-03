@@ -8,7 +8,7 @@ import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLogin
 import { notification } from "antd";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import cx from "classnames";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { QRcodeCopyButton } from "../../../../components-bs/Buttons/env/coco/QRcodeCopyButton";

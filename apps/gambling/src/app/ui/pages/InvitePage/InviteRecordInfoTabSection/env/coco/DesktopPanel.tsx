@@ -1,5 +1,5 @@
 import { DesktopBoard } from "../../components/DesktopBoard";
-import { TabItem, Tabs } from "../../../../../components/TabItem/TabItem";
+import { TabItem, Tabs } from "../../../../../components-bs/TabItem/TabItem";
 import { useNavigate } from "react-router";
 import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';

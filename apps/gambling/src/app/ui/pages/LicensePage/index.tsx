@@ -1,5 +1,5 @@
 import { environment } from "../../../../environments/environment";
-import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 
 export const LicensePage = () => {
@@ -28,7 +28,7 @@ export const LicensePage = () => {
           <img alt='license' src={`assets/license/licenseWord.png`}/>
         </div>
       </div>
-      
+
       </section>
     </div>
   )

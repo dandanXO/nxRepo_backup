@@ -18,7 +18,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { PageContainer } from "../../../../components-bs/PageContainer";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../../../../../reduxStore";
-import { ScrollTab } from "../../../../components/TabItem/ScrollTab";
+import { ScrollTab } from "../../../../components-bs/TabItem/ScrollTab";
 
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
 import { gameSlice } from "../../../../../reduxStore/gameSlice";
@@ -36,7 +36,7 @@ import { AppCarouselContent4 } from "../../Carousel/env/riojungle/AppCarouselCon
 import { AppCarouselContent5 } from "../../Carousel/env/riojungle/AppCarouselContent5";
 import { AppCarouselContent7 } from "../../Carousel/env/riojungle/AppCarouselContent7";
 import { AppCarouselContent8 } from "../../Carousel/env/riojungle/AppCarouselContent8";
-import { TabItem } from "../../../../components/TabItem/env/riojungle/TabItem";
+import { TabItem } from "../../../../components-bs/TabItem/env/riojungle/TabItem";
 
 
 import todos from "./assets/index-tab-todos.png"

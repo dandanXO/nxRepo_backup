@@ -3,7 +3,7 @@ import badgeImage from "./icon=badge.png"
 import {PageContainer} from "../../../../components-bs/PageContainer";
 import React from "react";
 import {twMerge} from "tailwind-merge";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 type IItem = {

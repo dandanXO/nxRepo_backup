@@ -5,7 +5,7 @@ import { GetVIPInfoResponse } from "../../../../../../external";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { MobileCurrentLevelInfoCard } from "./MobileCurrentLevelInfoCard";
-import { ProgressBar } from "../../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../../components-bs/ProgressBar";
 
 export interface ICurrentLabelInfoCardProps {
   currentLevel: number

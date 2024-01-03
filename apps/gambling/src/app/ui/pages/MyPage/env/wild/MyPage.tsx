@@ -18,7 +18,7 @@ import {ListItem} from "../../../../components/List/ListItem";
 import {CopyIcon} from "../../../../components-bs/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import { ProgressBar } from "../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../components-bs/ProgressBar";
 
 
 

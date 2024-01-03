@@ -1,13 +1,13 @@
 import { DatePicker } from 'antd';
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import RangeDatePicker from "../../../../components/DatePickers/RangeDatePicker";
+import RangeDatePicker from "../../../../components-bs/DatePickers/RangeDatePicker";
 import { Dispatch, SetStateAction } from "react";
 import moment from "moment";
 import { Moment } from "moment/moment";
-import { datePickerStyle } from "../../../../components/DatePickers/DatePicker";
+import { datePickerStyle } from "../../../../components-bs/DatePickers/DatePicker";
 import { Table } from "../../../../components-bs/Table";
 import { GetUserGameRecordResponse } from "../../../../../external";
 import { environment } from "../../../../../../environments/environment";

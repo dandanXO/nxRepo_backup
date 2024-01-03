@@ -4,7 +4,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate"
 
 import { BenefitSection } from "../components/BenefitSection"
 import { NoticeSection } from "../components/NoticeSection"
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { Banner } from "../../../../components/Banner";
 import { environment } from "../../../../../../environments/environment";
 import { useSelector } from "react-redux";

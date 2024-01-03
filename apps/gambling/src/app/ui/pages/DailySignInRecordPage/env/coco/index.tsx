@@ -2,7 +2,7 @@ import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLogin
 import { GetSignInRecordResponseData, useGetSignInRecordMutation } from "../../../../../external";
 import { useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { Table } from "../../../../components-bs/Table";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
