@@ -57,9 +57,9 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
   //NOTICE: MenuDrawer
   const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
   // const isShowDynamicMenuDrawerFlag = isShowStaticMenuDrawer && openMenuDrawer;
-  const isShowMobileDynamicMenuDrawerFlag = isShowMobileMenuDrawer || openMenuDrawer;
-  const isShowTabletDynamicMenuDrawerFlag = isShowTabletMenuDrawer || openMenuDrawer;
-  const isShowDesktopDynamicMenuDrawerFlag = isShowDesktopMenuDrawer || openMenuDrawer;
+  const isShowMobileDynamicMenuDrawerFlag = isShowMobileMenuDrawer && openMenuDrawer;
+  const isShowTabletDynamicMenuDrawerFlag = isShowTabletMenuDrawer && openMenuDrawer;
+  const isShowDesktopDynamicMenuDrawerFlag = isShowDesktopMenuDrawer && openMenuDrawer;
 
   const dispatch = useDispatch();
   const [preDevice, setPreDevice] = useState<"mobile" | "tablet" | "desktop">()
@@ -79,12 +79,21 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
     }
 
     if(isMobile) {
+      if(isShowMobileMenuDrawer) {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowMobileMenuDrawer));
+      }
       setPreDevice("mobile");
     }
     if(isTablet) {
+      if(isShowTabletMenuDrawer) {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowTabletMenuDrawer));
+      }
       setPreDevice("tablet");
     }
     if(isDesktop) {
+      if(isShowDesktopMenuDrawer) {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowDesktopMenuDrawer));
+      }
       setPreDevice("desktop");
     }
 

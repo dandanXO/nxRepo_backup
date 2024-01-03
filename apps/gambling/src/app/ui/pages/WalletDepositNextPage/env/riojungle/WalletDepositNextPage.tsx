@@ -103,13 +103,13 @@ export const WalletDepositNextPage = () => {
   const shadowContainerStyle = isMobile ? mobileShadowContainerStyle : deskTopShadowContainerStyle
 
   return (
-    <PageContainer y={false}>
+    <PageContainer >
       {contextHolder}
 
       <BackNavigation
-
         onClick={() => onClickToWallet({ 'panelType': 'deposit' })}
       />
+
       <div className="md:mt-2 lg:mt-4 mb-5 py-2 px-3 lg:py-3 lg:px-5 px-text-sm md:text-base lg:text-xl text-[#10b98f] border-solid border-[#4d4d4d] bg-[#1a1a1a] flex flex-row w-full border rounded-lg">
         {message}
       </div>

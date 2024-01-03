@@ -13,15 +13,16 @@ export const PrivacyAgreementPage = () => {
   const { showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop } = useScrollToCarousel();
 
   return (
-    <div className='w-full flex flex-col justify-center'>
-      <PageContainer y={false} className={cx('py-3 md:py-5 lg:py-10',{
-        'fixed top-[56px] sm:top-[72px] left-[0] lg:left-[248px] right-0 sm:right-[20px] bg-[#1A1A1A]': showFixForIOSStickTab
-      })}>
-        <BackNavigation className={cx('text-base sm:text-lg lg:text-2xl !p-0',)} onClick={() => onClickToIndex()} />
+    <PageContainer >
+
+      <PageContainer className={cx(
+        {
+          'fixed top-[56px] sm:top-[72px] left-[0] lg:left-[248px] right-0 sm:right-[20px] bg-[#1A1A1A]': showFixForIOSStickTab
+        })}>
+        <BackNavigation onClick={() => onClickToIndex()} />
       </PageContainer>
 
-
-      <PageContainer y={false}>
+      <div >
         <div className='text-white text-lg lg:text-2xl font-medium pb-5 md:pb-8 lg:pb-10'>Privacy Policy and Personal Data Protection</div>
         <div className="text-[#E6E6E6] text-sm lg:text-lg font-normal">
           <div>1. Introduction:</div>
@@ -734,7 +735,7 @@ export const PrivacyAgreementPage = () => {
             this Policy.
           </div>
         </div>
-      </PageContainer>
-    </div>
+      </div>
+    </PageContainer>
   )
 }

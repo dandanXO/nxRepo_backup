@@ -55,7 +55,7 @@ export const DailySignInRecordPage = () => {
   }
 
   return (
-    <PageContainer className="">
+    <PageContainer>
       <BackNavigation
         onClick={() => onClickToCheckInDaily()}
         title={<div className='ml-2 font-medium text-2xl'>Registro Diário de Presença</div>}

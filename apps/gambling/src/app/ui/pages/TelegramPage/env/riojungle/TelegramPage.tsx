@@ -29,7 +29,8 @@ export const TelegramPage = (props: ITelegramPage) => {
 
   return (
 
-    <PageContainer y={false} className={'relative py-4 md:py-5 lg:py-10'}>
+    <PageContainer className={'relative '}>
+
       <Banner imgClassName={`rounded-lg mb-5 md:mb-8 lg:mb-10 `} src={bannerSrc} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2 w-[75%] md:w-[80%]"}>
           <div className={"text-white text-base md:text-2xl lg:text-4xl font-bold leading-6 md:leading-8 lg:leading-10"}>Junte-se ao telegram</div>

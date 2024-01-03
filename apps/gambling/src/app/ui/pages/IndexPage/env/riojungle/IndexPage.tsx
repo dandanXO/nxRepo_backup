@@ -204,9 +204,6 @@ export const IndexPage = ({
             "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },
         )}
-        style={{
-
-        }}
       >
         <div className={"flex flex-row justify-between items-center w-full"}>
           <IndexTabs />

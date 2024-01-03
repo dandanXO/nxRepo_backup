@@ -7,6 +7,7 @@ import { formatLocaleMoney } from "../../../../../utils/format";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { environment } from "../../../../../../../environments/environment";
+import {PageContainer} from "../../../../../components-bs/PageContainer";
 
 const BottomLine = styled.div`
  height: 1px;
@@ -51,7 +52,8 @@ export const MobileGameRecordPage = ({
   }, [records])
 
   return (
-    <div className='fixed flex flex-col w-full h-[calc(100vh-52.5px)] px-4'>
+    <PageContainer className=''>
+
       <BackNavigation onClick={onClickToIndex} />
 
       <RangeDatePicker
@@ -103,6 +105,6 @@ export const MobileGameRecordPage = ({
           )
         }
       </div>
-    </div>
+    </PageContainer>
   )
 }

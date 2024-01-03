@@ -19,7 +19,7 @@ export const WalletPage = (props: IWalletPage) => {
   useAllowLoginRouterRules();
   const { isMobile } = useBreakpoint();
   return (
-    <PageContainer y={false} className="py-3 md:py-5 lg:py-8">
+    <PageContainer>
       <TotalSectionContainer totalSectionValues={props.totalSectionValues} />
       <div id={"tab-item"} className="w-full flex justify-center items-center my-3 md:my-5">
         <Tabs>

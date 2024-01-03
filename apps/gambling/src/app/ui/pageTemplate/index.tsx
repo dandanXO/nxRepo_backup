@@ -181,7 +181,6 @@ export const PageTemplate = (props: IPage) => {
     setOpenDownloadModal(!openDownloadModal);
   }
 
-
   const openNotificationWithIcon = (props: IOpenNotificationWithIcon) => {
     const type = props.type || "error";
     const msg = props.message || "Message"

@@ -41,7 +41,7 @@ const Item = (props: IItem) => {
 
 export const CompanyProfilePage = () => {
   return (
-    <PageContainer className={"pb-4"}>
+    <PageContainer>
       <div className="text-white text-left">
         <div className={twMerge(
           "text-base leading-6font-medium",

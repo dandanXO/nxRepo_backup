@@ -1,6 +1,7 @@
 import cx from "classnames";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {IContainer} from "../../index";
+import {twMerge} from "tailwind-merge";
 
 export const PageContainer = (props: IContainer) => {
   const isY = typeof props.y === "undefined" ? true : props.y;
@@ -8,14 +9,21 @@ export const PageContainer = (props: IContainer) => {
   return (
     <div
       id={props.id}
-      className={cx({
-        "px-4": isMobile,
-        "py-2": isMobile && isY,
-        // "sm:px-2": !isMobile,
-        // "sm:py-4": !isMobile && isY,
-        "px-12": !isMobile,
-        "py-4": !isMobile && isY,
-      }, props.className)}
+      className={twMerge(
+        // isMobile && "px-4",
+        // isMobile && isY && "py-2",
+        // !isMobile && "px-12",
+        // !isMobile && isY && "py-4",
+        // common
+        "pt-5 pb-5",
+        // mobile
+        "px-4",
+        // tablet (768px)
+        "md:px-8",
+        // desktop (1920px)
+        "lg:max-w-[1200px] lg:mx-auto",
+        props.className
+      )}
       onClick={props.onClick}
     >{props.children}</div>
   )

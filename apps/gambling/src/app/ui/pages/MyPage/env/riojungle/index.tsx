@@ -13,6 +13,7 @@ import { ProgressBar } from "../../../../components-bs/ProgressBar";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { CaretRight } from "../../../../popovers/UserInfoStatusPopover/env/riojungle/components/CaretRight";
 import { useInviteReward } from "../../../../hooks/useInviteReward";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 
 interface IMyPageProps {
   userVIPInfo: GetVIPInfoResponse
@@ -45,7 +46,7 @@ export const MyPage = ({
   const flowPercent = flow / nextLevelFlow
 
   return (
-    <div className='w-full h-full bg-[#1A1A1A] px-4 pt-4 text-xs'>
+    <PageContainer className='bg-[#1A1A1A]'>
       <div className='relative w-full overflow-y-scroll text-white pb-10'>
         {/*通知Icon*/}
         <div
@@ -188,6 +189,6 @@ export const MyPage = ({
           <img alt='signOut' className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon=sign-out.png`}/>
         </button>
       </div>
-    </div>
+    </PageContainer>
   )
 }
