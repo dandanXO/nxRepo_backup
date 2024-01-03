@@ -1,7 +1,8 @@
-import cx from "classnames";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import {renderByPlatform} from "../../utils/renderByPlatform";
+import {PageContainer as CocoPageContainer} from "./env/coco/PageContainer";
+import {PageContainer as RiojungleContainer} from "./env/riojungle/PageContainer";
 
-type IContainer = {
+export type IContainer = {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
@@ -9,21 +10,14 @@ type IContainer = {
   style?: unknown;
   id?: string;
 }
+
 export const PageContainer = (props: IContainer) => {
-  const isY = typeof props.y === "undefined" ? true : props.y;
-  const {isMobile} = useBreakpoint();
-  return (
-    <div
-      id={props.id}
-      className={cx({
-        "px-4": isMobile,
-        "py-2": isMobile && isY,
-        // "sm:px-2": !isMobile,
-        // "sm:py-4": !isMobile && isY,
-        "px-12": !isMobile,
-        "py-4": !isMobile && isY,
-      }, props.className)}
-      onClick={props.onClick}
-    >{props.children}</div>
-  )
+  return renderByPlatform({
+    "coco777bet": (
+      <CocoPageContainer {...props}/>
+    ),
+    "riojungle777bet": (
+      <RiojungleContainer {...props}/>
+    ),
+  }, <CocoPageContainer {...props}/>)
 }
