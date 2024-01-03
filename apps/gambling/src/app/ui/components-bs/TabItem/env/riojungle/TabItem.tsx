@@ -17,9 +17,10 @@ export const TabItem = (props: ITabItem) => {
         "text-xs lg:text-sm",
         "font-normal",
         "whitespace-nowrap",
+        "flex-1",
         {
           'py-2.5 px-4': props?.icon !== undefined,
-          'py-3 lg:py-2.5 px-8 lg:px-9': props?.icon === undefined,
+          'py-3 px-4 md:px-8 lg:py-2.5 lg:px-9': props?.icon === undefined,
           'text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] ': props.active,
           'bg-[#333] text-[rgba(255,255,255,1)]': !props.active
         },

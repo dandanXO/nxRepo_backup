@@ -16,9 +16,9 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
 
   return (
     <div className={"flex flex-col rounded-2xl text-[#ffffff] text-left"}>
-      <div className={"flex flex-col justify-center items-center flex-wrap my-3"}>
-        <div id={"tab-item"} className="w-full flex justify-center items-center">
-          <div className="bg-[#333333] flex flex-row rounded-[100px]">
+      <div className={"flex flex-col justify-center items-center flex-wrap my-3 px-4"}>
+        <div id={"tab-item"} className="w-full flex justify-center items-center ">
+          <div className="w-full bg-[#333333] flex flex-row rounded-[100px] ">
             <TabItem active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'} />
             <TabItem active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'} />
             <TabItem active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'} />

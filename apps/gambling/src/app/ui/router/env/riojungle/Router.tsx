@@ -76,8 +76,8 @@ export const AppRouter = () => {
                 desktop: true,
               }}
               footer={{
-                mobile: true,
-                tablet: true,
+                mobile: false,
+                tablet: false,
                 desktop: true,
               }}
               tabBar={{

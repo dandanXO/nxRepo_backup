@@ -28,9 +28,9 @@ export const MobilePanel = ({
 
   return (
     <>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center mb-3'>
         <BackNavigation
-          className='text-base mb-3'
+          className='text-base'
           onClick={() => setPanelMode("howto")}
         />
         <button

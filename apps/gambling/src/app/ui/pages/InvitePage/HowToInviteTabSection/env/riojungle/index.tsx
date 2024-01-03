@@ -49,22 +49,22 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
             className=""
           />
 
-          <div className="mb-5 md:mb-8 lg:mb-10 w-full text-center text-white text-sm md:text-base lg:text-xl font-bold font-['Inter'] leading-5 md:leading-6 lg:leading-7">{`Programa de recomendação exclusivo da plataforma ${environment.platformGroup}-${environment.platformName}, recomende aos amigos e ganhe comissões sem limite máximo! Esperamos sinceramente que mais jogadores se juntem a nós!`}</div>
+          <div className="mb-5 md:mb-8 lg:mb-10 w-full text-center text-white text-sm md:text-base lg:text-xl font-bold leading-5 md:leading-6 lg:leading-7">{`Programa de recomendação exclusivo da plataforma ${environment.platformGroup}-${environment.platformName}, recomende aos amigos e ganhe comissões sem limite máximo! Esperamos sinceramente que mais jogadores se juntem a nós!`}</div>
 
           {!isMobile && <div className="mb-5 pr-3 lg:pr-8 relative w-full bg-[linear-gradient(145deg,_#8547eb_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row gap-16 items-start rounded-lg flex-wrap">
             <div className='flex-1 flex flex-row flex-nowrap  justify-between'>
               <div className="flex flex-col mb-5 items-start flex-1 ">
-                <div className="break-all pl-[117px] pr-9 lg:pl-[196px] text-sm md:text-base lg:text-lg font-['Inter'] font-bold leading-[32px] text-[#4b80bd] bg-white flex flex-row whitespace-nowrap items-start py-2.5 rounded-tl-lg rounded-br-[100px] ">
+                <div className="break-all pl-[117px] pr-9 lg:pl-[196px] text-sm md:text-base lg:text-lg font-bold leading-[32px] text-[#4b80bd] bg-white flex flex-row whitespace-nowrap items-start py-2.5 rounded-tl-lg rounded-br-[100px] ">
                   Copie o link para seus amigos!
                 </div>
-                <div className="pl-[117px] lg:pl-[196px] pt-5 text-base md:text-xl lg:text-3xl font-['Inter'] font-bold leading-7 lg:leading-9 text-white break-all">
+                <div className="pl-[117px] lg:pl-[196px] pt-5 text-base md:text-xl lg:text-3xl font-bold leading-7 lg:leading-9 text-white break-all">
                   {props?.inviteUrl}
                 </div>
               </div>
               <div className='self-center justify-start ml-1'>
                 <button
                   onClick={onClickToCopy}
-                  className="p-2 lg:py-3 lg:px-10 text-left text-base md:text-xl lg:text-3xl font-['Inter'] font-medium text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb]  rounded-[100px]"
+                  className="p-2 lg:py-3 lg:px-10 text-left text-base md:text-xl lg:text-3xl font-medium text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb]  rounded-[100px]"
                 >
                   Convide Amigos
                 </button>
