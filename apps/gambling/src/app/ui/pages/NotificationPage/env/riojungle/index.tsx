@@ -17,7 +17,7 @@ export const NotificationPage = () => {
   const { onClickToProfile } = usePageNavigate()
 
   return (
-    <PageContainer className='flex flex-col w-full h-screen fixed bg-[#333333] py-5 px-4 text-white'>
+    <div className='flex flex-col w-full h-screen fixed bg-[#333333] py-5 px-4 text-white'>
       <BackNavigation
         className='pt-0 pb-0'
         onClick={onClickToProfile}
@@ -46,6 +46,6 @@ export const NotificationPage = () => {
 
       </div>
 
-    </PageContainer>
+    </div>
   )
 }
