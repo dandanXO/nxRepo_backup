@@ -60,7 +60,7 @@ export const DepositMoneyButton = (props: IDepositButton) => {
       {isShowRate &&
         (isRateTag
           ? (<div className={cx(rateTagClassName)}>{rate}</div>)
-          : (<div className={cx("text-base lg:text-2xl md:text-base", {
+          : (<div className={cx("", {
             [rateClassName ? rateClassName : "text-main-secondary-main"]: !isActive,
             [activeRateClassName ? activeRateClassName : "text-varient "]: isActive,
           })}>

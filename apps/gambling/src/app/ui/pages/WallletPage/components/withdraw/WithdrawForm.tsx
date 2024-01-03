@@ -3,7 +3,7 @@ import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import Select from 'react-select';
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
-
+import cx from 'classnames';
 import { selectInputStyleProps as WselectInputStyleProps } from '../../env/wild/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as RselectInputStyleProps } from '../../env/riojungle/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as CselectInputStyleProps } from '../../env/coco/tabsContent/withdraw/selectInputStyleProps';
@@ -128,7 +128,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
           pureContainer={true}
           prefix={
             props.selectOption.label === 'Telefone(+55)' ? (
-              <div className="mr-2 text-sm md:text-xl">+55</div>
+              <div className={cx(`mr-2 text-sm md:text-xl`,inputClassName)}>+55</div>
             ) : (
               ''
             )

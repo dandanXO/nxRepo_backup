@@ -25,7 +25,7 @@ export const WithdrawNoticeSection = (props: any) => {
           <span className={"text-[#B3B3B3]"}> R$ {withdrawLimitMax}</span>.
         </div>
         <div className="flex text-center mt-3 md:mt-0 md:ml-2.5 lg:ml-5 justify-center items-center">
-          <button className="text-white w-full md:w-auto py-2 px-8 md:py-1.5 rounded-md shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] text-base md:text-lg rounded-[100px]" onClick={onClickToVIP}>Cheque</button>
+          <button className="text-white w-full md:w-auto py-2 px-8 md:py-1.5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] text-base md:text-lg rounded-[100px] font-normal" onClick={onClickToVIP}>Cheque</button>
         </div>
 
       </section>

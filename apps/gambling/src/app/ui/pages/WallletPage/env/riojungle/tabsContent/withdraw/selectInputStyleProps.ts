@@ -11,7 +11,7 @@ export const selectInputStyleProps = (isMobile: boolean) => {
         borderRadius: '8px',
         outline: 'none',
         boxShadow: 'none',
-        border: 'solid 1px #808080',
+        // border: 'solid 1px #808080',
         backgroundClip: isMobile
           ? 'padding-box,border-box'
           : '',
@@ -20,12 +20,17 @@ export const selectInputStyleProps = (isMobile: boolean) => {
           : '',
         '&:hover': {
           // borderColor: 'none',
+          // border: 'solid 2px #8547EB',
         },
         '&:focus': {
           ...baseStyle,
           border: 'solid 2px #8547EB',
 
         },
+        
+        border: states.isFocused ? 'solid 2px #8547EB' : 'solid 1px #808080',
+
+        
       };
     },
     valueContainer: (style: any, state: any) => ({
@@ -52,17 +57,16 @@ export const selectInputStyleProps = (isMobile: boolean) => {
     ) => {
       return {
         ...styles,
-        borderColor: '#808080',
+        // borderColor: '#808080',
         color: isFocused || isSelected ? '#fff' : '#B3B3B3',
         marginTop: '-5px',
         marginBottom: '-5px',
         ':active': {
           ...styles[':active'],
-          backgroundColor: isSelected ? 'red' : 'blue',
-          borderColor: 'var(--input-border)',
+          backgroundColor: isFocused || isSelected ? '#808080' : '#B3B3B3',
         },
         background:
-          isFocused // 聚焦时的颜色
+          isFocused && !isMobile // 聚焦时的颜色
             ? '#4D4D4D' :
             isSelected
               ? '#808080' // 被选中的颜色

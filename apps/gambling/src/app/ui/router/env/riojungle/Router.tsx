@@ -25,6 +25,7 @@ import {PageTemplate} from "../../../pageTemplate";
 import TermsOfServicePage from "../../../pages/TermsOfServicePage";
 import {useUIRouter} from "../../hooks/useUIRouter";
 import useBreakpoint from "../../../hooks/useBreakpoint";
+import { flush } from 'redux-saga/effects';
 
 
 export const AppRouter = () => {
@@ -130,8 +131,8 @@ export const AppRouter = () => {
                 desktop: true,
               }}
               footer={{
-                mobile: true,
-                tablet: true,
+                mobile: false,
+                tablet: false,
                 desktop: true,
               }}
               tabBar={{

@@ -11,6 +11,7 @@ export const depositButtonProps = ({
   return {
     rechargeValue: `${rechargeValue}`,
     rate: `+ ${rate}`,
-    className: 'italic'
+    className: 'italic',
+    rateClassName: `text-base lg:text-2xl md:text-base`,
   }
 }
