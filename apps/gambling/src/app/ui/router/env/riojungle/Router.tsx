@@ -61,6 +61,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
               showToolboxConfig={{mobile: {download: true, customerService: true}}}
             >
@@ -89,6 +90,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
               showToolboxConfig={{mobile: { customerService: true }}}
             >
@@ -117,6 +119,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <InviteSettlementRecordPage/>
@@ -144,6 +147,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <WallletPage />
@@ -171,6 +175,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <WalletDepositNextPage/>
@@ -198,6 +203,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <GameRecordPage />
@@ -225,6 +231,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
               showToolboxConfig={{mobile:{ customerService: true }}}
             >
@@ -253,6 +260,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <DailySignInPage/>
@@ -280,6 +288,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <DailySignInRecordPage/>
@@ -307,6 +316,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <SettingPage/>
@@ -334,6 +344,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <PrivacyAgreementPage/>
@@ -361,6 +372,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <TermsOfServicePage />
@@ -388,6 +400,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <CompanyProfilePage/>
@@ -415,6 +428,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <InitialChargePage/>
@@ -442,6 +456,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <RechargeActivityPage/>
@@ -469,6 +484,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <LicensePage/>
@@ -496,6 +512,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <TelegramPage/>
@@ -523,6 +540,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: false,
+                desktopOverChildren: false,
               }}
             >
               <GamePage/>
@@ -550,6 +568,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <GameSearchPage/>
@@ -578,6 +597,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
               showToolboxConfig={{ mobile: { customerService: true }}}
             >
@@ -606,6 +626,7 @@ export const AppRouter = () => {
                 mobile: false,
                 tablet: false,
                 desktop: true,
+                desktopOverChildren: false,
               }}
             >
               <NotificationPage/>

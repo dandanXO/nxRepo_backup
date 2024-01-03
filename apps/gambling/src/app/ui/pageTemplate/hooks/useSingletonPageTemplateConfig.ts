@@ -8,8 +8,11 @@ import {uiSlice} from "../../../reduxStore/uiSlice";
 
 type IDevices = {
   mobile: boolean;
+  mobileOverChildren?: boolean;
   tablet: boolean;
+  tabletOverChildren?: boolean;
   desktop: boolean;
+  desktopOverChildren?: boolean;
 }
 
 export type IUseSingletonPageTemplateConfig = {
@@ -27,6 +30,7 @@ export type IUseSingletonPageTemplateConfig = {
 export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateConfig) => {
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
   const devices = useBreakpoint();
+  // console.log("useSingletonPageTemplateConfig.devices", devices);
 
   // Header
   const isShowMobileHeader = props.header.mobile === undefined ? false : props.header.mobile;
@@ -44,7 +48,6 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
   const isShowTabletTabBar = props.tabBar.tablet === undefined ? false : props.tabBar.tablet;
   const isShowDesktopTabBar = props.tabBar.desktop === undefined ? false : props.tabBar.desktop;
 
-
   // Deprecated
   const isShowTabbar = props.showTabbar === undefined ? true : props.showTabbar;
 
@@ -57,9 +60,17 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
   //NOTICE: MenuDrawer
   const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
   // const isShowDynamicMenuDrawerFlag = isShowStaticMenuDrawer && openMenuDrawer;
-  const isShowMobileDynamicMenuDrawerFlag = isShowMobileMenuDrawer && openMenuDrawer;
-  const isShowTabletDynamicMenuDrawerFlag = isShowTabletMenuDrawer && openMenuDrawer;
-  const isShowDesktopDynamicMenuDrawerFlag = isShowDesktopMenuDrawer && openMenuDrawer;
+  // const isShowMobileDynamicMenuDrawerFlag = isShowMobileMenuDrawer && openMenuDrawer;
+  // const isShowTabletDynamicMenuDrawerFlag = isShowTabletMenuDrawer && openMenuDrawer;
+  // const isShowDesktopDynamicMenuDrawerFlag = isShowDesktopMenuDrawer && openMenuDrawer;
+  const isShowMobileDynamicMenuDrawerFlag = openMenuDrawer;
+  const isShowTabletDynamicMenuDrawerFlag = openMenuDrawer;
+  const isShowDesktopDynamicMenuDrawerFlag = openMenuDrawer;
+
+  // console.log("useSingletonPageTemplateConfig.isShowMobileDynamicMenuDrawerFlag", isShowMobileDynamicMenuDrawerFlag);
+  // console.log("useSingletonPageTemplateConfig.isShowTabletDynamicMenuDrawerFlag", isShowTabletDynamicMenuDrawerFlag);
+  // console.log("useSingletonPageTemplateConfig.isShowDesktopDynamicMenuDrawerFlag", isShowDesktopDynamicMenuDrawerFlag);
+
 
   const dispatch = useDispatch();
   const [preDevice, setPreDevice] = useState<"mobile" | "tablet" | "desktop">()
@@ -79,21 +90,21 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
     }
 
     if(isMobile) {
-      if(isShowMobileMenuDrawer) {
-        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowMobileMenuDrawer));
-      }
+      // if(isShowMobileMenuDrawer) {
+      //   dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+      // }
       setPreDevice("mobile");
     }
     if(isTablet) {
-      if(isShowTabletMenuDrawer) {
-        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowTabletMenuDrawer));
-      }
+      // if(isShowTabletMenuDrawer) {
+      //   dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+      // }
       setPreDevice("tablet");
     }
     if(isDesktop) {
-      if(isShowDesktopMenuDrawer) {
-        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowDesktopMenuDrawer));
-      }
+      // if(isShowDesktopMenuDrawer) {
+      //   dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+      // }
       setPreDevice("desktop");
     }
 
@@ -119,6 +130,10 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
     isShowMobileMenuDrawer: isShowMobileDynamicMenuDrawerFlag && isMobile,
     isShowTabletMenuDrawer: isShowTabletDynamicMenuDrawerFlag && isTablet,
     isShowDesktopMenuDrawer: isShowDesktopDynamicMenuDrawerFlag && isDesktop,
+
+    mobileOverChildren: props.menuDrawer.mobileOverChildren === undefined ? true : props.menuDrawer.mobileOverChildren,
+    tabletOverChildren: props.menuDrawer.tabletOverChildren === undefined ? true : props.menuDrawer.tabletOverChildren,
+    desktopOverChildren: props.menuDrawer.desktopOverChildren === undefined ? true : props.menuDrawer.desktopOverChildren,
 
     // NOTE: TabBar
     isShowTabbar: isShowTabbar && isPlatformShowTabBarFlag,
