@@ -63,6 +63,7 @@ export type TTotalFavoriteLocalState = {
 }
 
 type ICoco777betIndexPage = {
+  subGameMenu: any;
   allGameList: any;
   label: any;
   activeTab: any;
@@ -77,6 +78,7 @@ type ICoco777betIndexPage = {
 }
 
 export const IndexPage = ({
+  subGameMenu,
   allGameList,
   label,
   activeTab,
@@ -259,6 +261,9 @@ export const IndexPage = ({
         "pt-[58px]": isFixedGameTypeTabs,
         })}
       >
+        {/* 二級選項 */}
+        {subGameMenu()}
+         {/* 每個選項的渲染 */}
         {gameList()}
       </PageContainer>
     </>
