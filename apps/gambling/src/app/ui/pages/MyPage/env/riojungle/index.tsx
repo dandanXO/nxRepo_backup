@@ -46,7 +46,7 @@ export const MyPage = ({
   const flowPercent = flow / nextLevelFlow
 
   return (
-    <PageContainer className='bg-[#1A1A1A]'>
+    <PageContainer className='bg-[#1A1A1A] pb-0'>
       <div className='relative w-full overflow-y-scroll text-white pb-10'>
         {/*通知Icon*/}
         <div
