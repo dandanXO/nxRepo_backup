@@ -22,27 +22,27 @@
   --liner-main-to: #10B98F;
 
   --state-error-main: #EF4444;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-error-light: #FEE2E2;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-error-dark: #B91C1C;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-success-main: #10B965;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-success-light: #D1FAE5;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-success-dark: #04783E;
 
   --state-info-main: #3B82F6;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-info-light: #DBEAFE;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-info-dark: #1D4ED8;
 
   --state-warn-main: #F59E0B;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-warn-light: #FEF3C7;
-  /*x*/
+  /*NOTE: 沒用到*/
   --state-warn-dark: #B45309;
 
   /*?*/
@@ -60,9 +60,9 @@
   --grayscale-90: #E6E6E6;
   --grayscale-100: #FFFFFF;
 
-  /*x*/
+  /*NOTE: 沒用到*/
   --background-tabbar: #152951;
-  /*x*/
+  /*NOTE: 沒用到*/
   --background-header: #2D3047;
 
 
