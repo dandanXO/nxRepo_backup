@@ -12,7 +12,7 @@ const CompanyLabel = styled.div`
 export const CompanySloganLabel = () => {
 const { onClickToCompanyProfile } = usePageNavigate();
   return (
-    <div className={"p-2 pb-1 bg-[#020E29] font-[Heebo] leading-none"}>
+    <div className={"p-2 pb-1 bg-[var(--primary-variant)] font-[Heebo] leading-none"}>
       <CompanyLabel onClick={onClickToCompanyProfile} className={"font-[600]"}>{environment.platformName} ({environment.platformGroup}) </CompanyLabel>
       <div onClick={onClickToCompanyProfile} className={"text-sm text-[rgba(255,255,255,.8)]"}>merece a sua confiança</div>
     </div>

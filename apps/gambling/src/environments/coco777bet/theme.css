@@ -61,6 +61,8 @@
   --stroke-popup: #FFB84C;
   --stroke-dashboard-main:#00FFEF;
   --stroke-dashboard-secondary: #393FC4;
+  --stroke-button: rgba(6,240,246,1);
+
 
 
   --button-login-1-from: #FFC121;
@@ -210,9 +212,9 @@
   --text-gradient-ad-tg-from: #D071FD;
   --text-gradient-ad-tg-to: #003BC6;
 
+  --tab-primary-from: var(--primary-main-to);
+  --tab-primary-to: var(--primary-main-from);
 
-  --tab-primary-from: #0044C7;
-  --tab-primary-to: #45CCF7;
   --tab-border-top: #5964F5;
   --tab-text-color-normal: #FFFFFF;
   --tab-text-color-active: #FFFFFF;
