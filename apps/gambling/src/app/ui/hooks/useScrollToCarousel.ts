@@ -62,7 +62,7 @@ export const useScrollToCarousel = () => {
   const scrollToWindowTop = () => {
     const pageContainer = document.getElementById("page-container");
     const targetContainer = pageContainer ? pageContainer : window;
-    targetContainer.scrollTo({ left: 0, behavior: "smooth"});
+    targetContainer.scrollTo({ top: 0, behavior: "smooth"});
   }
 
   return {

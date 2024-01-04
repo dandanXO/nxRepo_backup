@@ -24,6 +24,7 @@ import {PageTemplate as RiojunglePageTemplate} from "./env/riojungle/PageTemplat
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
 import {PageTemplateLayers} from "../pageTemplateLayers";
 import {IPage} from "./types/IPage";
+import {useScrollToCarousel} from "../hooks/useScrollToCarousel";
 
 console.log("[APP] environment", environment);
 
@@ -174,6 +175,12 @@ export const PageTemplate = (props: IPage) => {
     window.addEventListener('storage', handleStorage)
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
+
+  const {scrollToWindowTop} = useScrollToCarousel();
+
+  useEffect(() => {
+    scrollToWindowTop();
+  }, [location.pathname]);
 
   return (
     <>

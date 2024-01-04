@@ -89,11 +89,6 @@ export const useUIRouter = () => {
     }
   }, [gameData])
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [location]);
-
-
 
   // const [triggerLogin] = useLoginMutation()
 

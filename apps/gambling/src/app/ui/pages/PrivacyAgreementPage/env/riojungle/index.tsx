@@ -3,7 +3,7 @@ import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { environment } from "../../../../../../environments/environment";
 import React from "react";
 import { PageContainer } from "../../../../components-bs/PageContainer";
-import { useScrollToCarousel } from "../../../IndexPage/useScrollToCarousel";
+import { useScrollToCarousel } from "../../../../hooks/useScrollToCarousel";
 import cx from 'classnames';
 
 

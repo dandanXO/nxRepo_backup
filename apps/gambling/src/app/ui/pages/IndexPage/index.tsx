@@ -14,7 +14,7 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 
 import {renderByPlatform} from "../../utils/renderByPlatform";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {useScrollToCarousel} from "./useScrollToCarousel";
+import {useScrollToCarousel} from "../../hooks/useScrollToCarousel";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
@@ -171,7 +171,6 @@ export const IndexPage = () => {
             data={searchResults}
             onClickExpand={() => {
               navigate(PageOrModalPathEnum.IndexSlotPage)
-              scrollToWindowTop();
             }}
           />
         )

@@ -22,7 +22,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
-import { useScrollToCarousel } from "../../pages/IndexPage/useScrollToCarousel";
+import { useScrollToCarousel } from "../../hooks/useScrollToCarousel";
 import { GameTypeSection as RGameTypeSectionList } from "./env/riojungle/GameTypeSection";
 import { GameTypeSection as WGameTypeSectionList } from "./env/wild/GameTypeSection";
 import { GameTypeSection as CGameTypeSectionList } from "./env/coco/GameTypeSection";

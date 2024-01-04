@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { environment } from "../../../../../../environments/environment";
 import cx from 'classnames';
 import {LeftOutlined} from "@ant-design/icons";
-import {useScrollToCarousel} from "../../../../pages/IndexPage/useScrollToCarousel";
+import {useScrollToCarousel} from "../../../../hooks/useScrollToCarousel";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 
 export const MobileGameTypeHeader = (props: {
