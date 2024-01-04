@@ -63,7 +63,7 @@ export const Footer = (props: IFooter) => {
                 <section className='mt-3'>
                   <div className={"flex gap-3 items-center mb-2"}>
                     <FooterLogo/>
-                    <span className="text-sm font-bold">{environment.platformName}</span>
+                    <span className="text-sm font-bold text-white">{environment.platformName}</span>
                   </div>
 
                   <div className={cx("flex-auto flex-nowrap leading-6 text-ellipsis overflow-hidden text-left", {
@@ -145,7 +145,7 @@ export const Footer = (props: IFooter) => {
               <section className={"flex-1"}>
                 <div className={"flex gap-3 items-center mb-2"}>
                   <FooterLogo/>
-                  <span className="text-sm font-bold">{environment.platformName}</span>
+                  <span className="text-sm font-bold text-white">{environment.platformName}</span>
                 </div>
 
                 <div className={cx("flex-auto flex-nowrap leading-6 text-ellipsis overflow-hidden text-left", {
@@ -229,7 +229,7 @@ export const Footer = (props: IFooter) => {
                   <section className={"flex-1"}>
                     <div className={"flex gap-3 items-center mb-2"}>
                       <FooterLogo/>
-                      <span className="text-lg">{environment.platformName}</span>
+                      <span className="text-lg font-bold text-white">{environment.platformName}</span>
                     </div>
 
                     <div className={cx("flex-auto flex-nowrap leading-6 text-ellipsis overflow-hidden text-left", {
