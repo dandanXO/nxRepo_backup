@@ -50,7 +50,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
           buttonClassName={`bg-[#10B98F] items-center text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]  relative flex flex-row justify-center cursor-pointer  rounded-[100px]`}
           seeMoreText={
             <div className="flex items-center justify-center text-xs md:text-sm lg:text-base p-3 md:py-2.5 md:px-4">
-              Ver tudo
+              Ver tudos
               <img src={`assets/${environment.assetPrefix}/ArrowRight.png`} className="ml-1 w-[16px]" />
             </div>
           }

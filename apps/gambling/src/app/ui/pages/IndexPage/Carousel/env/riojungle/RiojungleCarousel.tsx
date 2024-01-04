@@ -91,6 +91,7 @@ export const AppCarousel = (props: IAppCarousel) => {
         afterChange={() => props.setIsMoving && props.setIsMoving(false)}
         customLeftArrow={<CustomLeftArrow />}
         customRightArrow={<CustomRightArrow />}
+        removeArrowOnDeviceType={['mobile']}
       >
         {props.children}
       </Carousel>
