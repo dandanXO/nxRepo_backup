@@ -52,7 +52,7 @@ export const MobileGameRecordPage = ({
   }, [records])
 
   return (
-    <PageContainer className='min-h-full flex flex-col'>
+    <PageContainer className='flex flex-col h-full'>
 
       <BackNavigation onClick={onClickToIndex} />
 
@@ -63,48 +63,93 @@ export const MobileGameRecordPage = ({
         value={[dates[0].format('YYYY-MM-DD'), dates[1].format('YYYY-MM-DD')]}
       />
 
-      <div
-        ref={wrapperRef}
-        className='grow flex flex-col mb-5 mt-3 rounded-lg w-full bg-[#333333] p-2 overflow-y-scroll'
-        onScroll={handleOnScroll}
-      >
-        {
-          records.map((record) => (
-            <div
-              key={record.roomId}
-              className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[#4D4D4D]'
-            >
-              <div className='w-full flex justify-between pb-2'>
-                <div>Nome Do Jogo</div>
-                <div>{record.gameName}</div>
+      <div className='relative grow h-full mt-3 mb-10'>
+        <div
+          ref={wrapperRef}
+          className='absolute top-0 bottom-0 flex flex-col rounded-lg w-full bg-[#333333] p-2 overflow-y-scroll'
+          onScroll={handleOnScroll}
+        >
+          {
+            records.map((record) => (
+              <div
+                key={record.roomId}
+                className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[#4D4D4D]'
+              >
+                <div className='w-full flex justify-between pb-2'>
+                  <div>Nome Do Jogo</div>
+                  <div>{record.gameName}</div>
+                </div>
+                <BottomLine />
+                <div className='w-full flex justify-between py-2'>
+                  <div>Tempo</div>
+                  <div>{moment(record.createTime).format('DD.MM.YYYY HH:mm:ss')}</div>
+                </div>
+                <BottomLine />
+                <div className='w-full flex justify-between py-2'>
+                  <div>Valor Da Aposta</div>
+                  <div>R$ {formatLocaleMoney(record.bet / 100)}</div>
+                </div>
+                <BottomLine />
+                <div className='w-full flex justify-between pt-2'>
+                  <div>Lucro</div>
+                  <div>{formatLocaleMoney(record.win / 100)}</div>
+                </div>
               </div>
-              <BottomLine />
-              <div className='w-full flex justify-between py-2'>
-                <div>Tempo</div>
-                <div>{moment(record.createTime).format('DD.MM.YYYY HH:mm:ss')}</div>
+            ))
+          }
+          {
+            records.length === 0 && (
+              <div className="grow border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">
+                <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
+                <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>
               </div>
-              <BottomLine />
-              <div className='w-full flex justify-between py-2'>
-                <div>Valor Da Aposta</div>
-                <div>R$ {formatLocaleMoney(record.bet / 100)}</div>
-              </div>
-              <BottomLine />
-              <div className='w-full flex justify-between pt-2'>
-                <div>Lucro</div>
-                <div>{formatLocaleMoney(record.win / 100)}</div>
-              </div>
-            </div>
-          ))
-        }
-        {
-          records.length === 0 && (
-            <div className="grow border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">
-              <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
-              <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>
-            </div>
-          )
-        }
+            )
+          }
+        </div>
       </div>
+
+      {/*<div*/}
+      {/*  ref={wrapperRef}*/}
+      {/*  className='flex flex-col mb-5 mt-3 rounded-lg w-full bg-[#333333] p-2 overflow-y-scroll'*/}
+      {/*  onScroll={handleOnScroll}*/}
+      {/*>*/}
+      {/*  {*/}
+      {/*    records.map((record) => (*/}
+      {/*      <div*/}
+      {/*        key={record.roomId}*/}
+      {/*        className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[#4D4D4D]'*/}
+      {/*      >*/}
+      {/*        <div className='w-full flex justify-between pb-2'>*/}
+      {/*          <div>Nome Do Jogo</div>*/}
+      {/*          <div>{record.gameName}</div>*/}
+      {/*        </div>*/}
+      {/*        <BottomLine />*/}
+      {/*        <div className='w-full flex justify-between py-2'>*/}
+      {/*          <div>Tempo</div>*/}
+      {/*          <div>{moment(record.createTime).format('DD.MM.YYYY HH:mm:ss')}</div>*/}
+      {/*        </div>*/}
+      {/*        <BottomLine />*/}
+      {/*        <div className='w-full flex justify-between py-2'>*/}
+      {/*          <div>Valor Da Aposta</div>*/}
+      {/*          <div>R$ {formatLocaleMoney(record.bet / 100)}</div>*/}
+      {/*        </div>*/}
+      {/*        <BottomLine />*/}
+      {/*        <div className='w-full flex justify-between pt-2'>*/}
+      {/*          <div>Lucro</div>*/}
+      {/*          <div>{formatLocaleMoney(record.win / 100)}</div>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    ))*/}
+      {/*  }*/}
+      {/*  {*/}
+      {/*    records.length === 0 && (*/}
+      {/*      <div className="grow border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">*/}
+      {/*        <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />*/}
+      {/*        <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>*/}
+      {/*      </div>*/}
+      {/*    )*/}
+      {/*  }*/}
+      {/*</div>*/}
     </PageContainer>
   )
 }
