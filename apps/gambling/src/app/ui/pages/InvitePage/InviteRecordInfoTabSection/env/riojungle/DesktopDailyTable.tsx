@@ -1,8 +1,9 @@
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import { environment } from "apps/gambling/src/environments/environment";
-import { Table } from "apps/gambling/src/app/ui/components/Table";
+import { Table } from "apps/gambling/src/app/ui/components-bs/Table";
 import { formatLocaleMoney } from "apps/gambling/src/app/ui/utils/format";
+import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
 
 interface IDailyType {
   type: string;
@@ -11,6 +12,7 @@ interface IDailyType {
 }
 
 export const DesktopDailyTable = (props: IDailyType) => {
+  const { isTablet } = useBreakpoint()
 
   const columns = [
     { title: 'Data', name: 'day', key: 'day' },
@@ -22,6 +24,7 @@ export const DesktopDailyTable = (props: IDailyType) => {
         <div>Recompensas De Troca De Jogos</div>
         <div className='ml-1 self-start'>
           <IconTooltip
+            tooltipStyle={{ fontSize: isTablet ? '14px' : '16px', width: '250px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}
             id='game-bonus-tooltip-desktop'
             icon={<QuestionTipsIcon className={'text-base'} />}
             content='As recompensas são liquidadas toda segunda-feira'

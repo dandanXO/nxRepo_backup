@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ImageTab } from "../../../../components/TabItem/ImageTab";
+import { ImageTab } from "../../../TabItem/ImageTab";
 
 export const RecordButton = styled(ImageTab) <{
   active: boolean;

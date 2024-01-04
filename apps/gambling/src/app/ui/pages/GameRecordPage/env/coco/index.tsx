@@ -1,15 +1,14 @@
 import { DatePicker } from 'antd';
-import { SectionContainer } from "../../../../components/container/SectionContainer";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import RangeDatePicker from "../../../../components/DatePickers/RangeDatePicker";
+import RangeDatePicker from "../../../../components-bs/DatePickers/RangeDatePicker";
 import { Dispatch, SetStateAction } from "react";
 import moment from "moment";
 import { Moment } from "moment/moment";
-import { datePickerStyle } from "../../../../components/DatePickers/DatePicker";
-import { Table } from "../../../../components/Table";
+import { datePickerStyle } from "../../../../components-bs/DatePickers/DatePicker";
+import { Table } from "../../../../components-bs/Table";
 import { GetUserGameRecordResponse } from "../../../../../external";
 import { environment } from "../../../../../../environments/environment";
 import { formatLocaleMoney } from "../../../../utils/format";
@@ -69,8 +68,8 @@ export const GameRecordPage = ({
 
   return (
     <div className='flex h-full flex-col px-4 md:px-8'>
-      <SectionContainer
-        className='flex h-full flex-col'
+      <div
+        className='flex h-full flex-col text-white'
       >
         <BackNavigation
           className={tcx('pl-0 pt-5 pb-6', ['pb-7', isMobile])}
@@ -117,7 +116,7 @@ export const GameRecordPage = ({
           />
         </div>
 
-      </SectionContainer>
+      </div>
     </div>
   )
 }

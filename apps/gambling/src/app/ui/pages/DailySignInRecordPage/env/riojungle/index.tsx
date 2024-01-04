@@ -2,14 +2,14 @@ import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLogin
 import { GetSignInRecordResponseData, useGetSignInRecordMutation } from "../../../../../external";
 import { useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import { Table } from "../../../../components/Table";
+import { Table } from "../../../../components-bs/Table";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { MobileDailySignInRecordPage } from "./MobileDailySignInRecordPage";
 import { formatLocaleMoney } from "../../../../utils/format";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 
 
 export const DailySignInRecordPage = () => {
@@ -55,7 +55,7 @@ export const DailySignInRecordPage = () => {
   }
 
   return (
-    <Container className="">
+    <PageContainer>
       <BackNavigation
         onClick={() => onClickToCheckInDaily()}
         title={<div className='ml-2 font-medium text-2xl'>Registro Diário de Presença</div>}
@@ -79,7 +79,7 @@ export const DailySignInRecordPage = () => {
           />
         </div>
       </div>
-    </Container>
+    </PageContainer>
   )
 }
 

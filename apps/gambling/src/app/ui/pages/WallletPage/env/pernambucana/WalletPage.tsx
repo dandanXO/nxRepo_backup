@@ -1,5 +1,5 @@
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
-import {TabItem, Tabs} from "../../../../components/TabItem/TabItem";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
+import {TabItem, Tabs} from "../../../../components-bs/TabItem/TabItem";
 import {TotalSectionContainer} from "../../components/TotalSectionContainer";
 import {tcx} from "../../../../utils/tcx";
 import {DepositPanel} from "../../components/deposit/DepositPanel";

@@ -8,6 +8,7 @@ import { AppLocalStorage } from "../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
 import useBreakpoint from "./useBreakpoint";
 import { uiSlice } from "../../reduxStore/uiSlice";
+import { IPanelType } from "../pages/WallletPage";
 
 
 export interface IQueryStringProps{
@@ -48,7 +49,7 @@ export const usePageNavigate = () => {
       navigate(PageOrModalPathEnum.InitialChargePage)
     }
   }
-  const onClickToWallet = (queryString?:IQueryStringProps) => {
+  const onClickToWallet = (queryString?: { 'panelType'?: IPanelType }) => {
 
     if (!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))

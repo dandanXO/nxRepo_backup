@@ -3,7 +3,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint"
 import { usePageNavigate } from "../../../../hooks/usePageNavigate"
 import { BenefitSection } from "./BenefitSection"
 import { NoticeSection } from "./NoticeSection"
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { environment } from "../../../../../../environments/environment";
 import { Banner } from "../../../../components/Banner";
 

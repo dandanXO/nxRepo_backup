@@ -1,5 +1,5 @@
 
-import {Container as BaseContainer} from "../../../../components/container/Container";
+import {PageContainer as BaseContainer} from "../../../../components-bs/PageContainer";
 
 type IContainer = {
   onClickToIndex: () => void;

@@ -1,4 +1,4 @@
-import {Tabs} from "../../../../components/TabItem/TabItem";
+import {Tabs} from "../../../../components-bs/TabItem/TabItem";
 import React from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {DepositPanel} from "../../components/deposit/DepositPanel";
@@ -7,9 +7,9 @@ import {RecordPanel} from "../../components/record/RecordPanel";
 
 import {useAllowLoginRouterRules} from "../../../../router/hooks/useAllowLoginRouterRules";
 import {TotalSectionContainer} from "../../components/TotalSectionContainer";
-import {CommonTableTabG} from "../../../../components/TabItem/CommonTableTabG";
+import {CommonTableTabG} from "../../../../components-bs/TabItem/CommonTableTabG";
 import cx from "classnames";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import {IWalletPage} from "../pernambucana/WalletPage";
 
 

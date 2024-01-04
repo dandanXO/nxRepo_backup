@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-
-import { SectionContainer } from '../../../../../../components/container/SectionContainer'
 import useBreakpoint from '../../../../../../hooks/useBreakpoint';
 import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';
 import { RecordPanelDeposit } from './RecordPanelDeposit';
@@ -40,7 +38,7 @@ export const RecordPanel = (props: IRecordPanel) => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <SectionContainer id={'record-section'} className='bg-[#333333] rounded-lg p-5'>
+    <div id={'record-section'} className='text-white bg-[#333333] rounded-lg p-5'>
       {/*{isMobile && <BlueBoard />}*/}
 
       {/* {isMobile && (
@@ -144,6 +142,6 @@ export const RecordPanel = (props: IRecordPanel) => {
       ) : (
         <RecordPanelWithdraw />
       )}
-    </SectionContainer>
+    </div>
   );
 };

@@ -22,9 +22,7 @@ export const depositButtonProps = ({
 
   const rateStyle =
   `
-  text-xs md:text-xs lg:text-xs  
-  mt-1 rounded-lg px-3.5 py-0.5
- 
+  text-xs mt-1 rounded-xl px-3.5 py-0.5 
   `;
 
   return {
@@ -32,11 +30,11 @@ export const depositButtonProps = ({
     rechargeClassName: rechargeStyle,
     className: `min-h-[68px] flex-col lg:flex-col bg-[#333333] py-3 md:py-2.5 lg:py-2 md:mb-4 lg:mb-5 rounded-lg items-center justify-center`,
     activeRechargeClassName: `${rechargeStyle} text-[#10b98f]`,
-    bgClassName: 'bg-[#333333]',
+    bgClassName: 'bg-[#333333] border-2 border-solid border-[#333333]',
     activeBgClassName: 'bg-[#333333] border-2 border-solid border-[#10B98F]',
     rate: `R$ ${rate}`,
-    rateClassName: `text-[#e6e6e6] bg-[#4d4d4d] ${rateStyle} `,
-    activeRateClassName: `text-[#333333] bg-[#10b98f] ${rateStyle}`,
+    rateClassName: `font-normal text-[#e6e6e6] bg-[#4d4d4d] ${rateStyle} `,
+    activeRateClassName: `font-bold text-[#333333] bg-[#10b98f] ${rateStyle}`,
     isRateTag: false,
     rateTagClassName: '',
   }

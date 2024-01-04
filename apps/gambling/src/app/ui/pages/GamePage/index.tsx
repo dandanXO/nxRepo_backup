@@ -9,7 +9,7 @@ import {useStartGameMutation} from '../../../external';
 import {useAllowLoginRouterRules} from "../../router/hooks/useAllowLoginRouterRules";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {usePageNavigate} from "../../hooks/usePageNavigate";
-import {GameBackNavigation} from "../../components/BackNavigation/GameBackNavigation";
+import {GameBackNavigation} from "../../components-bs/BackNavigation/GameBackNavigation";
 import { LeaveGameConfirmModal } from "../../modals/LeaveGameConfirmModal";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";

@@ -1,6 +1,7 @@
 import { environment } from "../../../../environments/environment";
-import { BackNavigation } from "../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../hooks/usePageNavigate";
+import {PageContainer} from "../../components-bs/PageContainer";
 
 export const LicensePage = () => {
 
@@ -9,11 +10,12 @@ export const LicensePage = () => {
 
   return (
 
-    <div className={"px-4 sm:px-20 w-full"}>
+    <PageContainer>
 
       <BackNavigation
         onClick={() => onClickToIndex()}
       />
+
       <section>
       <div className="flex flex-col justify-center items-center">
         <div><img alt='logo' className='' src={`assets/license/logo.png`}/></div>
@@ -28,8 +30,8 @@ export const LicensePage = () => {
           <img alt='license' src={`assets/license/licenseWord.png`}/>
         </div>
       </div>
-      
+
       </section>
-    </div>
+    </PageContainer>
   )
 }

@@ -6,11 +6,11 @@ import useBreakpoint from '../../../../hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/hooks/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"
-import {Container} from "../../../../components/container/Container";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 import {List} from "../../../../components/List";
 import {ListItem} from "../../../../components/List/ListItem";
 import {InfoCircleOutlined, PhoneOutlined, UserOutlined,} from "@ant-design/icons";
-import {BackNavigation} from "../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
 import { notification } from "antd";
 
@@ -36,7 +36,7 @@ export const SettingPage = ({
   const { isMobile } = useBreakpoint();
 
   return (
-    <Container>
+    <PageContainer>
       {contextHolder}
       <BackNavigation
         onClick={() => {
@@ -135,6 +135,6 @@ export const SettingPage = ({
         />
       )}
 
-    </Container>
+    </PageContainer>
   );
 };

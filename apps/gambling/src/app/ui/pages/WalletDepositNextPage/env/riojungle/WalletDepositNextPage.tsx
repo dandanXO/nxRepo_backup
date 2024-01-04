@@ -8,12 +8,12 @@ import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLogin
 import { notification } from "antd";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import cx from "classnames";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { QRcodeCopyButton } from "../../../../components-bs/Buttons/env/coco/QRcodeCopyButton";
 import { DepositNextPageBackButton } from "../../../../components-bs/Buttons/env/coco/DepositNextPageBackButton";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 import { Button } from "../../../../components-bs/Buttons/env/riojungle/Button";
 import { CopyIcon } from "../../../../components-bs/Icons/CopyIcon";
 import { environment } from "apps/gambling/src/environments/environment";
@@ -103,13 +103,13 @@ export const WalletDepositNextPage = () => {
   const shadowContainerStyle = isMobile ? mobileShadowContainerStyle : deskTopShadowContainerStyle
 
   return (
-    <Container y={false}>
+    <PageContainer >
       {contextHolder}
 
       <BackNavigation
-
         onClick={() => onClickToWallet({ 'panelType': 'deposit' })}
       />
+
       <div className="md:mt-2 lg:mt-4 mb-5 py-2 px-3 lg:py-3 lg:px-5 px-text-sm md:text-base lg:text-xl text-[#10b98f] border-solid border-[#4d4d4d] bg-[#1a1a1a] flex flex-row w-full border rounded-lg">
         {message}
       </div>
@@ -150,7 +150,7 @@ export const WalletDepositNextPage = () => {
           <ShadowContainer className={`flex bg-[#333] rounded-lg flex-col items-center h-full`}>
             <div className="pt-2 pb-2.5 md:pt-3 md:pb-3.5 lg:pt-3.5 lg:pb-5 opacity-80 bg-[#4d4d4d] flex flex-col justify-center  w-full  rounded-tl-lg rounded-tr-lg">
               <div className="text-sm md:text-base lg:text-xl leading-5 md:leading-6 lg:leading-7 text-white text-center mb-[2px] md:mb-3.5 lg:mb-5">Quantia</div>
-              <div className="text-center text-base md:text-xl lg:text-4xl font-bold leading-6 md:leading-7 lg:leading-9 text-white">
+              <div className="text-center text-base md:text-xl lg:text-3xl font-bold leading-6 md:leading-7 lg:leading-9 text-white">
                 R$ {formatLocaleMoney(amount)}
               </div>
             </div>
@@ -160,7 +160,7 @@ export const WalletDepositNextPage = () => {
           </ShadowContainer>
         </section>
       </section>
-      <Button className={'my-5 md:my-8 lg:my-10 bg-[#8547EB] w-full rounded-lg py-3 text-sm md:text-base lg:text-3xl'} onClick={handleToWalletPage} text={'Ja pago'} />
-    </Container>
+      <Button className={'my-5 md:my-8 lg:my-10 bg-[#8547EB] w-full rounded-lg py-3 text-sm md:text-base lg:text-xl'} onClick={handleToWalletPage} text={'Ja pago'} />
+    </PageContainer>
   )
 }

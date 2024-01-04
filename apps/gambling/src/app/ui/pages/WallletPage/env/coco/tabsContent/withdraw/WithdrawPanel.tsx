@@ -7,7 +7,6 @@ import { ButtonPro } from '../../../../../../components-bs/Buttons/ButtonPro';
 import { ArrowRight } from '../../../../../../components-bs/Icons/ArrowRight';
 import { Input } from '../../../../../../components-bs/Inputs/Input';
 import { MobileInput } from '../../../../../../components-bs/Inputs/MobileInput';
-import { SectionContainer } from '../../../../../../components/container/SectionContainer';
 import useBreakpoint from '../../../../../../hooks/useBreakpoint';
 import { formatLocaleMoney } from '../../../../../../utils/format';
 import { tcx } from '../../../../../../utils/tcx';
@@ -27,7 +26,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
   if (!isDuringRestrictTime) {
     return (
       <div>
-        <SectionContainer id={'withdraw-section'}>
+        <div id={'text-white withdraw-section'}>
           <div className="text-base md:text-2xl">
             <MainInput
               type="text"
@@ -98,7 +97,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
             <WithdrawForm {...props} />
 
           </div>
-        </SectionContainer>
+        </div>
         {!isMobile && (
           <section
             className={cx(

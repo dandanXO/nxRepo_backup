@@ -1,4 +1,3 @@
-import { SectionContainer } from "../../../../components/container/SectionContainer";
 import moment, { Moment } from "moment/moment";
 import { DatePicker } from "antd";
 import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
@@ -8,12 +7,12 @@ import { useLazyGetUserInviteRewardRecordQuery } from "../../../../../external";
 import React, { useCallback, useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { environment } from "../../../../../../environments/environment";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../utils/format";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import Index from "../../../../components/DatePickers/RangeDatePicker";
-import { datePickerStyle } from "../../../../components/DatePickers/DatePicker";
+import Index from "../../../../components-bs/DatePickers/RangeDatePicker";
+import { datePickerStyle } from "../../../../components-bs/DatePickers/DatePicker";
 
 const { RangePicker } = DatePicker;
 
@@ -58,7 +57,7 @@ export const InviteSettlementRecordPage = () => {
 
 
   return (
-      <SectionContainer id={"game-record-section"} className="px-4 md:px-24">
+      <div id={"game-record-section"} className="text-white px-4 md:px-24">
         <BackNavigation
           title={isMobile && <div className={"w-full text-center font-bold"}>Registros de liquidação</div>}
           onClick={() => navigate(PageOrModalPathEnum.InvitePage)}
@@ -123,6 +122,6 @@ export const InviteSettlementRecordPage = () => {
 
           </table>
         </div>
-      </SectionContainer>
+      </div>
   )
 }

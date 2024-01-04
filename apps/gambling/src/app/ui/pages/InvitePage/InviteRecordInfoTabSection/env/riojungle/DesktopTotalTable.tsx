@@ -1,11 +1,13 @@
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import { ITotal } from "../..";
+import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
 
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {
 
   const thStyle = "text-sm lg:text-base px-2 lg:px-3 border-r border-[rgba(255,255,255,0.2)] text-[#b3b3b3] font-normal lg:font-bold";
   const tdStyle = 'text-sm lg:text-lg px-2 lg:px-3 text-center pt-5 border-r border-[rgba(255,255,255,0.2)] text-white font-bold'
+  const { isTablet } = useBreakpoint()
 
   return (
     <div className="border border-solid border-[#666] overflow-x-auto px-3 lg:p-5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] rounded-lg">
@@ -21,6 +23,7 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
                 <div>Recompensas De Troca De Jogos</div>
                 <div className='ml-1 self-start'>
                   <IconTooltip
+                    tooltipStyle={{ fontSize: isTablet ? '14px' : '16px', width: '250px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}
                     id='game-bonus-tooltip'
                     icon={<QuestionTipsIcon className={'text-base'} />}
                     content='As recompensas são liquidadas toda segunda-feira'

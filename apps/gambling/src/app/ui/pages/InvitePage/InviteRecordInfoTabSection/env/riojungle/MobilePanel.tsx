@@ -6,7 +6,7 @@ import { MobileMainBoard } from "../../components/MobileMainBoard";
 import { MobileTotalTable } from "../../components/MobileTotalTable";
 import { MobileDailyTable } from "../../components/MobileDailyTable";
 import { IMobilePanel } from '../..';
-import { BackNavigation } from 'apps/gambling/src/app/ui/components/BackNavigation/BackNavigation';
+import { BackNavigation } from '../../../../../components-bs/BackNavigation/BackNavigation';
 import { useNavigate } from 'react-router';
 import { PageOrModalPathEnum } from 'apps/gambling/src/app/ui/PageOrModalPathEnum';
 
@@ -28,9 +28,9 @@ export const MobilePanel = ({
 
   return (
     <>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center mb-3'>
         <BackNavigation
-          className='text-base mb-3'
+          className='text-base'
           onClick={() => setPanelMode("howto")}
         />
         <button

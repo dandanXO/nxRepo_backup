@@ -1,5 +1,5 @@
 import cx from "classnames";
-import {Container} from "../../../../../components/container/Container";
+import {PageContainer} from "../../../../../components-bs/PageContainer";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";
 
 export type ICarouselTitle = {
@@ -15,12 +15,12 @@ export const CarouselTitle = (props: ICarouselTitle) => {
     )
   }
   return (
-    <Container
+    <PageContainer
       className={cx("absolute top-1/2 transform -translate-y-1/2",
         "font-bold text-7xl text-left"
       )}
     >
       {props.children}
-    </Container>
+    </PageContainer>
   )
 }

@@ -31,7 +31,7 @@ export const WallletPage = () => {
 
   useAllowLoginRouterRules();
 
-  const {onClickToIndex} = usePageNavigate();
+  const {onClickToIndex,onClickToWallet} = usePageNavigate();
 
   // NOTE: querystring
   const panelType = queryString.parse(window.location.search)?.panelType || "deposit";
@@ -42,7 +42,18 @@ export const WallletPage = () => {
     if (panelMode === "deposit") {
       triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
     }
+
+    // NOTE: setPanelMode時，一併更新queryString
+    onClickToWallet({ 'panelType': panelMode })
   }, [panelMode])
+
+  // NOTE: 依queryString更新panelMode
+  useEffect(() => {
+    if (panelMode !== panelType) {
+      setPanelMode(panelType as IPanelType)
+    }
+  }, [panelType])
+
 
   // const { userAmount, user: {withdrawAmount} } = useSelector((state: RootState) => state.app.userStore as IUserStore)
 

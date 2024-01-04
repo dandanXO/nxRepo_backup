@@ -36,15 +36,14 @@ export const TotalSectionContainer = (props: ITotalSectionContainer) => {
   const { totalSectionValues = {} } = props;
 
 
-
   return (
     <div className='w-full'>
       <div className='relative'>
         <img src={Banner} className='w-full h-[124px] md:h-[144px] lg:h-[195px]' />
         <div className='w-full flex absolute top-0 left-0 h-full  '>
-          <IconTabItem icon={iconTotal} text={<><div>Total</div><div>Conta</div></>} onClick={() => setAccountTab('total')} />
-          <IconTabItem icon={iconDeposit} text={<><div>Depositar</div><div>Conta</div></>} onClick={() => setAccountTab('deposite')} />
-          <IconTabItem icon={iconPromotion} text={<><div>Conta</div><div>Promovida</div></>} onClick={() => setAccountTab('promotion')} />
+          <IconTabItem icon={iconTotal} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Total</div><div>Conta</div></div>} onClick={() => setAccountTab('total')} />
+          <IconTabItem icon={iconDeposit} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Depositar</div><div>Conta</div></div>} onClick={() => setAccountTab('deposite')} />
+          <IconTabItem icon={iconPromotion} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Conta</div><div>Promovida</div></div>} onClick={() => setAccountTab('promotion')} />
         </div>
       </div>
       <div className="relative px-2 md:px-5 lg:px-8 -mt-3 md:-mt-12 lg:-mt-14 z-10">

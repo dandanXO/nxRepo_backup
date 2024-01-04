@@ -1,5 +1,5 @@
 import useBreakpoint from "../../../../hooks/useBreakpoint";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { IUserInfo } from "../../../../../persistant/IUserInfo";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";

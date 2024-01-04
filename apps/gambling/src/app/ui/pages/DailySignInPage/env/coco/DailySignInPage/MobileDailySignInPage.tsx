@@ -7,9 +7,9 @@ import styled from "styled-components";
 import { notification } from "antd";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
-import {BackNavigation} from "../../../../../components/BackNavigation/BackNavigation";
+import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
-import {Container} from "../../../../../components/container/Container";
+import {PageContainer} from "../../../../../components-bs/PageContainer";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -50,7 +50,7 @@ const MobileDailySignInPage = ({
   return (
     <div className='relative bg-gradient-to-b from-[var(--background-checkin-from)] to-[var(--background-checkin-to)]'>
       <img className='absolute top-[50px] left-[50%] translate-x-[-50%]' alt='bg' src={`assets/${environment.assetPrefix}/bg_daily_sign_in.png`}/>
-      <Container>
+      <PageContainer>
         {contextHolder}
 
         <BackNavigation
@@ -123,7 +123,7 @@ const MobileDailySignInPage = ({
             Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
           </div>
         </div>
-      </Container>
+      </PageContainer>
     </div>
   )
 }

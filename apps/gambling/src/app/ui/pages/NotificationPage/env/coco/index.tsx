@@ -1,5 +1,5 @@
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import React from "react";
 import {
   NotificationItemContainer, NotificationItemExpandable,

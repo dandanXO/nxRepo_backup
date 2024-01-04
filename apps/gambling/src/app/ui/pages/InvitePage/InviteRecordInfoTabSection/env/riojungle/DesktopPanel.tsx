@@ -5,10 +5,10 @@ import cx from 'classnames';
 import { DesktopDailyTable } from "./DesktopDailyTable";
 import { MobileDailyTable } from "./MobileDailyTable"
 import { IDesktopPanel } from "../..";
-import { Container } from "apps/gambling/src/app/ui/components/container/Container";
+import { PageContainer } from "../../../../../components-bs/PageContainer";
 import { DesktopTotalTable } from "./DesktopTotalTable";
-import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
-import { BackNavigation } from "apps/gambling/src/app/ui/components/BackNavigation/BackNavigation";
+import { TabItem } from "../../../../../components-bs/TabItem/env/riojungle/TabItem";
+import { BackNavigation } from "../../../../../components-bs/BackNavigation/BackNavigation";
 import { IPanelMode } from "../../..";
 import { PageOrModalPathEnum } from "apps/gambling/src/app/ui/PageOrModalPathEnum";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";
@@ -60,7 +60,7 @@ export const DesktopPanel = ({
             </div>
           </div>
           <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {totalInviteData?.dividendos !== undefined && totalInviteData?.dividendos}</div>}
+            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {totalInviteData?.dividendos !== undefined ? totalInviteData?.dividendos : "0.00"}</div>}
             <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
           </div>
         </div>
@@ -82,7 +82,7 @@ export const DesktopPanel = ({
             </div>
           </div>
           <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {dailyData !== undefined ? dailyData[0]?.dividendos : ''}</div>}
+            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {dailyData !== undefined ? dailyData[0]?.dividendos : "0.00"}</div>}
             <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export const DesktopPanel = ({
           {
             <DesktopDailyTable isProxy={isProxy} type={dailyPanelMode} records={dailyData} />
           }
-          
+
         </div>
 
       </section>

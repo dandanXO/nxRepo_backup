@@ -1,12 +1,12 @@
 import moment from "moment/moment";
 import { ITabType } from "./index";
-import { CommonTableTabG } from "../../../components/TabItem/CommonTableTabG";
+import { CommonTableTabG } from "../../../components-bs/TabItem/CommonTableTabG";
 import { renderByPlatform } from "../../../utils/renderByPlatform";
-import DatePicker from "../../../components/DatePickers/DatePicker";
+import DatePicker from "../../../components-bs/DatePickers/DatePicker";
 import { useState } from "react";
-import ConfirmDrawer from "../../../components/Drawers/ConfirmDrawer";
+import ConfirmDrawer from "../../../components-bs/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
-import { TabItem } from "../../../components/TabItem/TabItem";
+import { TabItem } from "../../../components-bs/TabItem/TabItem";
 import { tabItemProps } from "./env/coco/tabItemProps";
 import { MobileTableContainer } from "./env/components/MobileTableContainer";
 import { QuestionTipsIcon } from "../../../components-bs/Icons/QuestionTipsIcon";

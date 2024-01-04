@@ -10,7 +10,7 @@ import {CheckInButton} from "../../../../components-bs/Buttons/CheckInButton";
 import {DepositButton} from "../../../../components-bs/Buttons/DepositButton2";
 import {WithdrawButton} from "../../../../components-bs/Buttons/WithdrawButton";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
-import {Container} from "../../../../components/container/Container";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 
 import {List} from "../../../../components/List";
 import {ListHeader} from "../../../../components/List/ListHeader";
@@ -18,7 +18,7 @@ import {ListItem} from "../../../../components/List/ListItem";
 import {CopyIcon} from "../../../../components-bs/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
-import { ProgressBar } from "../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../components-bs/ProgressBar";
 
 
 
@@ -53,7 +53,7 @@ const Coco777BetMyPage = ({
   } = usePageNavigate();
 
   return (
-    <Container className={"!pt-4 pb-[80px]"}>
+    <PageContainer className={"!pt-4 pb-[80px]"}>
       <section className='flex justify-between items-center'>
 
         <div className='flex gap-4 items-center'>
@@ -153,7 +153,7 @@ const Coco777BetMyPage = ({
         <ListItem isEnd={true} title={"Sair"} onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}/>
       </List>
 
-    </Container>
+    </PageContainer>
   )
 }
 

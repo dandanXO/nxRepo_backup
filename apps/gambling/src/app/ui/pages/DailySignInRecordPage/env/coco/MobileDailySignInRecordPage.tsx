@@ -1,10 +1,10 @@
 import React from "react";
 import { GetSignInRecordResponseData } from "../../../../../external";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { NoData } from "../../../../components-bs/Icons/NoData";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 
 const Title = ({ children }: { children: React.ReactNode }) => (
   <td className='w-1/3 px-1 h-10 flex justify-center items-center border-r border-[rgba(255,255,255,0.2)]'>
@@ -29,7 +29,7 @@ export const MobileDailySignInRecordPage = ({
 
   const { onClickToCheckInDaily } = usePageNavigate();
   return (
-    <Container y={false} >
+    <PageContainer y={false} >
       <BackNavigation
         onClick={() => onClickToCheckInDaily()}
         title={<div className={"w-full font-bold text-center"}>Registro Diário de Presença</div>}
@@ -74,6 +74,6 @@ export const MobileDailySignInRecordPage = ({
           )
         }
       </div>
-    </Container>
+    </PageContainer>
   )
 }

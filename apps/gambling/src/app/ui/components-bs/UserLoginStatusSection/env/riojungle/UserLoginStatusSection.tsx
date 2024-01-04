@@ -5,7 +5,7 @@ import {UserRegisterForm} from "../../forms/UserRegisterForm";
 import {UserForgetPasswordForm} from "../../forms/UserForgetPasswordForm";
 import {LoginModalLogo} from "../../../Logos/LoginModalLogo";
 import {IUserLoginStatusSection} from "../../types";
-import {TabItem} from "../../../../components/TabItem/env/riojungle/TabItem";
+import {TabItem} from "../../../TabItem/env/riojungle/TabItem";
 import {Tabs} from "../../../../components/Tabs";
 import {ArrowLeft} from "../../../Icons/ArrowLeft";
 import {ILoginUIStatusType} from "../../../../../reduxStore/appSlice";

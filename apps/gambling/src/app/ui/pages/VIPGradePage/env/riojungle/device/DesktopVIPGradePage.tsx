@@ -5,7 +5,7 @@ import CaretDown from '../images/CaretDown.png';
 import CaretUP from '../images/CaretUp.png';
 import { VerticalVIPButtonList } from "../components/VerticalVIPButtonList";
 import { useEffect, useRef, useState } from "react";
-import { ProgressBar } from "../../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../../components-bs/ProgressBar";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { VIP0Text } from "../components/VIP0Text";
 import { VIPInfoTab } from "../components/VIPInfoTab";

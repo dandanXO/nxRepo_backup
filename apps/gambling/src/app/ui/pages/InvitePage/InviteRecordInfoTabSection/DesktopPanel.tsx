@@ -1,18 +1,18 @@
 import { DesktopBoard } from "./components/DesktopBoard";
 import { PageOrModalPathEnum } from "../../../PageOrModalPathEnum";
-import { TabItem, Tabs } from "../../../components/TabItem/TabItem";
+import { TabItem, Tabs } from "../../../components-bs/TabItem/TabItem";
 import { DesktopTotalType } from "./DesktopTotalType";
 import { DesktopDailyType } from "./DesktopDailyType";
 import { QuestionContainer } from "../index";
 import { useNavigate } from "react-router";
 import { RecordButton2 } from "../../../components-bs/Buttons/RecordButton";
 import { environment } from "apps/gambling/src/environments/environment";
-import { CocoTabItem } from "../../../components/TabItem/CocoTabItem";
+import { CocoTabItem } from "../../../components-bs/TabItem/CocoTabItem";
 import cx from 'classnames';
 import { tabItemProps } from "./env/coco/tabItemProps";
 import { DesktopTotalTable } from "./components/DesktopTotalTable";
 import { DesktopDailyTable } from "./components/DesktopDailyTable";
-import { Container } from "../../../components/container/Container";
+import { PageContainer } from "../../../components-bs/PageContainer";
 
 type IDesktopPanel = {
   isProxy: boolean;
@@ -51,7 +51,7 @@ export const DesktopPanel = ({
   const navigate = useNavigate();
 
   return (
-    <Container>
+    <PageContainer>
       <DesktopBoard data={totalRewardData} />
       <section>
         <div className={"text-left text-white text-lg mb-2 font-bold"}>Dados totals</div>
@@ -113,6 +113,6 @@ export const DesktopPanel = ({
         </div>
 
       </section>
-    </Container>
+    </PageContainer>
   )
 }

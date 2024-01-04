@@ -9,10 +9,11 @@ import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { CopyIcon } from "../../../../components-bs/Icons/CopyIcon";
 import { formatLocaleMoney } from "../../../../utils/format";
-import { ProgressBar } from "../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../components-bs/ProgressBar";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { CaretRight } from "../../../../popovers/UserInfoStatusPopover/env/riojungle/components/CaretRight";
 import { useInviteReward } from "../../../../hooks/useInviteReward";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 
 interface IMyPageProps {
   userVIPInfo: GetVIPInfoResponse
@@ -45,7 +46,7 @@ export const MyPage = ({
   const flowPercent = flow / nextLevelFlow
 
   return (
-    <div className='w-full h-full bg-[#1A1A1A] px-4 pt-4 text-xs'>
+    <PageContainer className='bg-[#1A1A1A]'>
       <div className='relative w-full overflow-y-scroll text-white pb-10'>
         {/*通知Icon*/}
         <div
@@ -102,7 +103,7 @@ export const MyPage = ({
               className='mt-5 py-[6px] w-full text-sm text-white font-medium rounded-full bg-[#EA7F00] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
               onClick={()=> {
                 close();
-                onClickToWallet();
+                onClickToWallet({'panelType':'deposit'});
               }}
             >Depósito</button>
           </div>
@@ -113,7 +114,7 @@ export const MyPage = ({
               className='mt-5 py-[6px] w-full text-sm text-white font-medium rounded-full bg-[#0077CE] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
               onClick={()=> {
                 close();
-                onClickToWallet();
+                onClickToWallet({'panelType':'withdraw'});
               }}
             >Retirar</button>
           </div>
@@ -188,6 +189,6 @@ export const MyPage = ({
           <img alt='signOut' className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon=sign-out.png`}/>
         </button>
       </div>
-    </div>
+    </PageContainer>
   )
 }

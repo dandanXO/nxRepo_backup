@@ -1,7 +1,7 @@
 import { IVIPGradePageProps } from "../../../index";
 import VIPStatue from '../images/vip_statue.png'
 import { formatLocaleMoney } from "../../../../../utils/format";
-import { ProgressBar } from "../../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../../components-bs/ProgressBar";
 import { useEffect, useRef, useState } from "react";
 import { VIPInfoTab } from "../components/VIPInfoTab";
 import { VIPButtonList } from "../components/VIPButtonList";

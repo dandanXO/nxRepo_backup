@@ -1380,5 +1380,6 @@
   "order.payOutFail": "放款失败",
   "order.payOutPending": "未支付",
   "common.bankcard": "银行卡",
-  "common.eWallet": "电子钱包"
+  "common.eWallet": "电子钱包",
+  "table.tel.sale.group": "电销团队"
 }

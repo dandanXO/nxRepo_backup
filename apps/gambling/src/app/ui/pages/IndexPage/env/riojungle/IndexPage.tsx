@@ -15,10 +15,10 @@ import React, { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { CompanySloganLabel } from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../../../../../reduxStore";
-import { ScrollTab } from "../../../../components/TabItem/ScrollTab";
+import { ScrollTab } from "../../../../components-bs/TabItem/ScrollTab";
 
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
 import { gameSlice } from "../../../../../reduxStore/gameSlice";
@@ -36,7 +36,7 @@ import { AppCarouselContent4 } from "../../Carousel/env/riojungle/AppCarouselCon
 import { AppCarouselContent5 } from "../../Carousel/env/riojungle/AppCarouselContent5";
 import { AppCarouselContent7 } from "../../Carousel/env/riojungle/AppCarouselContent7";
 import { AppCarouselContent8 } from "../../Carousel/env/riojungle/AppCarouselContent8";
-import { TabItem } from "../../../../components/TabItem/env/riojungle/TabItem";
+import { TabItem } from "../../../../components-bs/TabItem/env/riojungle/TabItem";
 
 
 import todos from "./assets/index-tab-todos.png"
@@ -174,7 +174,7 @@ export const IndexPage = ({
 
   return (
     <>
-      <Container id={"app-carousel"}>
+      <PageContainer id={"app-carousel"}>
         {/*{isMobile && <CompanySloganLabel />}*/}
         <div>
           <AppCarousel setIsMoving={setIsMoving}>
@@ -194,9 +194,9 @@ export const IndexPage = ({
           </AppCarousel>
         </div>
 
-      </Container>
+      </PageContainer>
 
-      <Container
+      <PageContainer
         className={cx(
           "z-[2]",
           "py-2 bg-[#1A1A1A]",
@@ -204,9 +204,6 @@ export const IndexPage = ({
             "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },
         )}
-        style={{
-
-        }}
       >
         <div className={"flex flex-row justify-between items-center w-full"}>
           <IndexTabs />
@@ -227,16 +224,14 @@ export const IndexPage = ({
               />
             </div>)}
         </div>
-      </Container>
+      </PageContainer>
 
       {
         recentGameList.length > 0 && (
-          <Container
+          <PageContainer
             className={cx(
-              'overflow-hidden',
-              [DesktopXPadding, !isMobile], {
-
-            })}
+              'overflow-hidden'
+            )}
           >
             <GameListSection
               className='mb-0 pl-0 px-0'
@@ -256,17 +251,17 @@ export const IndexPage = ({
               children={recentGameListRender(recentGameList)}
               gameListClassName={tcx('py-[14px] animate-[recentGameListShow_0.8s_ease]', ['py-0 pt-2', isMobile])}
             />
-          </Container>
+          </PageContainer>
         )
       }
 
-      <Container
+      <PageContainer
         className={cx("pb-16", {
         "pt-[58px]": isFixedGameTypeTabs,
         })}
       >
         {gameList()}
-      </Container>
+      </PageContainer>
     </>
   )
 }

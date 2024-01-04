@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IMobileTotalTable, ITabType } from "../../index";
-import { TabItem } from "../../../../../components/TabItem/TabItem";
-import ConfirmDrawer from "../../../../../components/Drawers/ConfirmDrawer";
+import { TabItem } from "../../../../../components-bs/TabItem/TabItem";
+import ConfirmDrawer from "../../../../../components-bs/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import { tabItemProps } from "./tabItemProps";
 import cx from 'classnames';

@@ -1,24 +1,25 @@
 import moment from "moment/moment";
 import { useState } from "react";
-import { CommonTableTabG } from "apps/gambling/src/app/ui/components/TabItem/CommonTableTabG";
+import { CommonTableTabG } from "../../../../../components-bs/TabItem/CommonTableTabG";
 import { environment } from "apps/gambling/src/environments/environment";
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
-import ConfirmDrawer from "apps/gambling/src/app/ui/components/Drawers/ConfirmDrawer";
-import DatePicker from "../../../../../components/DatePickers/DatePicker";
+import ConfirmDrawer from "../../../../../components-bs/Drawers/ConfirmDrawer";
+import DatePicker from "../../../../../components-bs/DatePickers/DatePicker";
 import { IMobileDailyTable } from "../..";
-import { TabItem } from "apps/gambling/src/app/ui/components/TabItem/env/riojungle/TabItem";
+import { TabItem } from "../../../../../components-bs/TabItem/env/riojungle/TabItem";
 import { MobileTableListItem } from "./components/MobileTableListItem";
 import cx from 'classnames';
-import { NoData } from "apps/gambling/src/app/ui/components/Table/env/riojungle/NoData";
+import { NoData } from "../../../../../components-bs/Table/env/riojungle/NoData";
+import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 
 
 export const MobileDailyTable = (props: IMobileDailyTable) => {
   const [inviteBonusInfoOpen, setInviteBonusInfoOpen] = useState(false)
   return (
     <div className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
-      <div className={"flex flex-col justify-center items-center flex-wrap my-3"}>
-        <div id={"tab-item"} className="w-full flex justify-center items-center">
-          <div className="bg-[#333333] flex flex-row rounded-[100px]">
+      <div className={"flex flex-col justify-center items-center flex-wrap my-3 px-4"}>
+        <div id={"tab-item"} className="w-full flex justify-center items-center ">
+          <div className="w-full bg-[#333333] flex flex-row rounded-[100px] ">
             <TabItem active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'} />
             <TabItem active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'} />
             <TabItem active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'} />
@@ -48,26 +49,21 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
                 <MobileTableListItem className="text-xs" title={'Valor da transação do jogo'} text={`R$ ${record.gameRecharge || '0,00'} `} />
                 <MobileTableListItem className="text-xs" title={<div className='flex items-center'>
                   <div className="text-[#B3B3B3]">{'Recompensas De Troca De Jogos'}</div>
-                  <div onClick={() => setInviteBonusInfoOpen(true)}>
-                    <QuestionTipsIcon className="text-lg ml-1 flex" />
+                  <div className='ml-1 self-start' onClick={() => setInviteBonusInfoOpen(true)}>
+                    <IconTooltip
+                      tooltipStyle={{ fontSize: '14px', width: '200px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}
+                      id='game-bonus-tooltip-desktop'
+                      icon={<QuestionTipsIcon className={'text-base'} />}
+                      content='As recompensas são liquidadas toda segunda-feira'
+                    />
                   </div>
-                  {
-                    inviteBonusInfoOpen && (
-                      <ConfirmDrawer
-                        onClose={() => setInviteBonusInfoOpen(false)}
-                        buttonText='Eu vejo'
-                        title='Descrição detalhada'
-                        content='As recompensas são liquidadas toda segunda-feira'
-                      />
-                    )
-                  }
                 </div>} text={`R$ ${record.gameRechargeReward || '0,00'}`}
                 />
                 <MobileTableListItem className="text-xs" title={'Bônus'} text={`R$ ${record.totalReward || '0,00'}`} bottomLine={false} />
               </div>
             )
           }) :
-            <NoData/>
+            <NoData />
         }
       </div>
     </div>

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { IMobileTotalTable, ITabType } from "../../index";
-import { TabItem } from "../../../../../components/TabItem/TabItem";
-import ConfirmDrawer from "../../../../../components/Drawers/ConfirmDrawer";
+import { TabItem } from "../../../../../components-bs/TabItem/TabItem";
+import ConfirmDrawer from "../../../../../components-bs/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import styled from "styled-components";
-import { CommonTableTabG } from "apps/gambling/src/app/ui/components/TabItem/CommonTableTabG";
+import { CommonTableTabG } from "../../../../../components-bs/TabItem/CommonTableTabG";
 
 const MobileTotalTableContainer = styled.div`
   background: url("assets/${environment.assetPrefix}/h5_invite_dashboard_1.png") center center no-repeat;

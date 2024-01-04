@@ -155,7 +155,9 @@ export const PageTemplate = (props: IPage) => {
     isShowDesktopTabBar,
     // NOTE: deprecated
     isShowTabbar,
-
+    mobileOverChildren,
+    tabletOverChildren,
+    desktopOverChildren,
   } = useSingletonPageTemplateConfig({
     header: props.header,
     footer: props.footer,
@@ -180,7 +182,6 @@ export const PageTemplate = (props: IPage) => {
   const onClickToDownload = () => {
     setOpenDownloadModal(!openDownloadModal);
   }
-
 
   const openNotificationWithIcon = (props: IOpenNotificationWithIcon) => {
     const type = props.type || "error";
@@ -350,6 +351,9 @@ export const PageTemplate = (props: IPage) => {
               mobile: isShowMobileMenuDrawer,
               tablet: isShowTabletMenuDrawer,
               desktop: isShowDesktopMenuDrawer,
+              mobileOverChildren,
+              tabletOverChildren,
+              desktopOverChildren
             }}
           >
           {props.children}

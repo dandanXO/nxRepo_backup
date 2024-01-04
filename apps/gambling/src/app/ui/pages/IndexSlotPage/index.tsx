@@ -1,12 +1,12 @@
 import styled from "styled-components";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import useBreakpoint from "../../hooks/useBreakpoint";
-import {TabItem, Tabs} from "../../components/TabItem/TabItem";
+import {TabItem, Tabs} from "../../components-bs/TabItem/TabItem";
 import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
 import {useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {AppLocalStorage} from "../../../persistant/localstorage";
-import {ScrollTab} from "../../components/TabItem/ScrollTab";
+import {ScrollTab} from "../../components-bs/TabItem/ScrollTab";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 

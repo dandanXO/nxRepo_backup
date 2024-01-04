@@ -7,7 +7,6 @@ import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
 import { tcx } from "apps/gambling/src/app/ui/utils/tcx";
 import { IDepositPanelProps } from "../../../../components/deposit/DepositPanel";
 import { ArrowRight } from "../../../../../../components-bs/Icons/ArrowRight";
-import { SectionContainer } from "apps/gambling/src/app/ui/components/container/SectionContainer";
 
 interface DepositToNextPageButtonProps {
   onClick: (e: any) => void;
@@ -37,7 +36,7 @@ export const DepositPanel = (props: IDepositPanelProps) => {
 
 
   return (
-    <SectionContainer id={"deposit-section"}>
+    <div id={"text-white deposit-section"}>
       <DepositNoticeSection />
       <section className={"flex flex-col w-full"}>
         {isLoaded && (
@@ -82,6 +81,6 @@ export const DepositPanel = (props: IDepositPanelProps) => {
           </section>
         ) : null}
       </section>
-    </SectionContainer>
+    </div>
   )
 }

@@ -6,7 +6,7 @@ import useBreakpoint from "../../../../hooks/useBreakpoint";
 import {Input} from "../../../../components-bs/Inputs/Input";
 import {useNavigate} from "react-router";
 
-import {IndexTabs} from "../../IndexTabs";
+import {IndexTabs} from "./IndexTabs";
 
 import {AppCarousel} from "../../Carousel";
 
@@ -21,10 +21,10 @@ import React, { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
-import {Container} from "../../../../components/container/Container";
+import {PageContainer} from "../../../../components-bs/PageContainer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {ScrollTab} from "../../../../components/TabItem/ScrollTab";
+import {ScrollTab} from "../../../../components-bs/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
 import {useScrollToCarousel} from "../../useScrollToCarousel";
@@ -173,7 +173,7 @@ export const IndexPage = ({
 
       {/*Tabs - desktop*/}
       {!isMobile && (
-        <Container
+        <PageContainer
           className={cx(
             "",
             DesktopXPadding,
@@ -204,13 +204,13 @@ export const IndexPage = ({
             </div>
 
           </div>
-        </Container>
+        </PageContainer>
       )}
 
       {/*SearchInput*/}
       {isMobile ? (
-        <Container y={false} className="pt-2"
-                   onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
+        <PageContainer y={false} className="pt-2"
+                       onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
         >
           {/*NOTICE: refactor me*/}
           <Input
@@ -224,12 +224,12 @@ export const IndexPage = ({
             placeholder={"Por favor insira o nome do jogo"}
             prefix={<SearchOutlined className={cx("text-xl mr-2", "text-[rgba(255,255,255,0.3)]")} />}
           />
-        </Container>
+        </PageContainer>
       ): null}
 
       {
         recentGameList.length > 0 && (
-          <Container
+          <PageContainer
             className={tcx('overflow-hidden', [DesktopXPadding, !isMobile])}
           >
             <GameListSection
@@ -250,15 +250,15 @@ export const IndexPage = ({
               children={recentGameListRender(recentGameList)}
               gameListClassName={tcx('py-[14px] animate-[recentGameListShow_0.8s_ease]', ['py-0 pt-2', isMobile])}
             />
-          </Container>
+          </PageContainer>
         )
       }
 
-      <Container className={cx("pb-16", {
+      <PageContainer className={cx("pb-16", {
         [DesktopXPadding]: !isMobile,
       })}>
         {gameList()}
-      </Container>
+      </PageContainer>
     </>
   )
 }

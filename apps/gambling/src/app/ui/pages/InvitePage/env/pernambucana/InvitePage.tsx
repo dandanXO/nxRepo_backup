@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import useBreakpoint from "../../../../hooks/useBreakpoint";
 import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 
-import { TabItem, Tabs } from "../../../../components/TabItem/TabItem";
-import { Container } from "../../../../components/container/Container";
+import { TabItem, Tabs } from "../../../../components-bs/TabItem/TabItem";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 
 import cx from "classnames";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { IInvitePage } from "../..";
 
@@ -19,7 +19,7 @@ export const InvitePage = (props: IInvitePage) => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <Container className="pt-7 md:pt-0">
+    <PageContainer className="pt-7 md:pt-0">
       {
         !isMobile && (
           <BackNavigation
@@ -66,6 +66,6 @@ export const InvitePage = (props: IInvitePage) => {
         </div>
       </section>
       {children}
-    </Container>
+    </PageContainer>
   )
 }

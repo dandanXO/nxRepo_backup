@@ -1,6 +1,6 @@
 
 import {BaseStyledPageTemplate} from "../../base/BaseStyledPageTemplate";
-import {IUseSingletonPageTemplateConfig, useSingletonPageTemplateConfig} from "../../hooks/useSingletonPageTemplateConfig";
+import {IUseSingletonPageTemplateConfig} from "../../hooks/useSingletonPageTemplateConfig";
 
 import React from "react";
 
@@ -81,9 +81,17 @@ export const PageTemplate = ({
 
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
 
+  // NOTE: show
+  const isShowHeader = header.mobile || header.tablet || header.desktop;
+  const isShowFooter = footer.mobile || footer.tablet || footer.desktop;
+  const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
+  // console.log("menuDrawer", menuDrawer);
+
+  const isShowTabBar = tabBar.mobile || tabBar.tablet || tabBar.desktop;
+
   // NOTICE: refactor me
   // NOTE: Style - Header
-  const HeaderHeight = isDesktop ? 72 : isTablet ? 72 : 56;
+  const HeaderHeight =  !isShowHeader ? 0 : isDesktop ? 72 :  isTablet ? 72 : 56;
   const HeaderZIndex = isDesktop ? "z-[1004]" : "z-[1002]";
 
   // NOTE: Style - MenuDrawer
@@ -101,11 +109,6 @@ export const PageTemplate = ({
   // NOTE: Style - Toolbox (fixed)
   const ToolboxZIndex = "z-10"
 
-  // NOTE: show
-  const isShowHeader = header.mobile || header.tablet || header.desktop;
-  const isShowFooter = footer.mobile || footer.tablet || footer.desktop;
-  const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
-  const isShowTabBar = tabBar.mobile || tabBar.tablet || tabBar.desktop;
 
   // NOTE: AddToMobileShortCut
   const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
@@ -113,6 +116,10 @@ export const PageTemplate = ({
   const isShowAddToMobileShortCut = isMobile && !inNativeApp && !hideAddToMobileShortcut
 
   const location = useLocation();
+
+  const childrenMarginLeft = (isMobile && menuDrawer.mobile && menuDrawer.mobileOverChildren ||
+    isTablet && menuDrawer.tablet && menuDrawer.tabletOverChildren ||
+    isDesktop && menuDrawer.desktop && menuDrawer.desktopOverChildren) ? 0 : DrawerWidth;
 
   return (
     <BaseStyledPageTemplate
@@ -175,7 +182,7 @@ export const PageTemplate = ({
           id={"page-container"}
           className={twMerge("h-full overflow-auto")}
           style={{
-            marginLeft: isDesktop ? DrawerWidth : 0,
+            marginLeft: isShowMenuDrawer ? childrenMarginLeft : 0,
           }}
         >
           <BaseErrorBoundary>

@@ -1,12 +1,13 @@
 import { IGameRecordPageProps } from "../../../index";
-import { BackNavigation } from "../../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../../hooks/usePageNavigate";
-import RangeDatePicker from "../../../../../components/DatePickers/RangeDatePicker";
+import RangeDatePicker from "../../../../../components-bs/DatePickers/RangeDatePicker";
 import moment from "moment";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { environment } from "../../../../../../../environments/environment";
+import {PageContainer} from "../../../../../components-bs/PageContainer";
 
 const BottomLine = styled.div`
  height: 1px;
@@ -52,6 +53,7 @@ export const MobileGameRecordPage = ({
 
   return (
     <div className='fixed flex flex-col w-full h-[calc(100vh-52.5px)] px-4'>
+
       <BackNavigation onClick={onClickToIndex} />
 
       <RangeDatePicker

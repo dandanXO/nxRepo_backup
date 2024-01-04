@@ -59,7 +59,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
   return (
     <>
       <section
-        className='flex gap-2 items-center'
+        className='flex gap-2 items-center cursor-pointer'
         onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover)) }}
         onMouseOver={() => {
           // console.log("onMouseOver")
@@ -87,7 +87,6 @@ const UserStatusSection = (props: IUserStatusSection) => {
           <div className='text-base text-white leading-none'>ID:{user.user_id}</div>
         </div>
       </section>
-
       <section className={"flex relative justify-center"}>
         <div
           onClick={() => {
@@ -118,7 +117,7 @@ const UserMoneyStatusSectionItem = (props: IUserMoneyStatusSection) => {
       {renderByRWD({
         "mobile": <></>,
         "tablet": (
-          <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
+          <></>
         ),
         "desktop": (
           <UserStatusSection onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />

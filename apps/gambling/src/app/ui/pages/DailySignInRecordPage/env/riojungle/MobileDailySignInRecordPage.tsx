@@ -1,9 +1,9 @@
 import React from "react";
 import { GetSignInRecordResponseData } from "../../../../../external";
-import { BackNavigation } from "../../../../components/BackNavigation/BackNavigation";
+import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
-import { Container } from "../../../../components/container/Container";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 import cx from "classnames"
 import {NoData} from "../../../../components-bs/Icons/NoData";
 
@@ -30,7 +30,7 @@ export const MobileDailySignInRecordPage = ({
 
   const { onClickToCheckInDaily } = usePageNavigate();
   return (
-    <Container y={false} >
+    <PageContainer y={false} >
       <BackNavigation
         onClick={() => onClickToCheckInDaily()}
         title={<div className={"w-full font-bold text-center"}>Registro Diário de Presença</div>}
@@ -39,7 +39,7 @@ export const MobileDailySignInRecordPage = ({
         {
           records?.map((record, index: number) => {
             return (
-                <Container
+                <PageContainer
                 key={record.id}
                 className={cx("flex flex-col rounded-lg text-white text-sm",
                   "bg-[#262626] border-[#4d4d4d] my-1",
@@ -80,7 +80,7 @@ export const MobileDailySignInRecordPage = ({
                   <span className='text-[var(--white-40)]'> Tempo </span>
                   <span className={'text-white'}>{record.created_at}</span>
                 </div>
-              </Container>
+              </PageContainer>
             )
           })
         }
@@ -93,6 +93,6 @@ export const MobileDailySignInRecordPage = ({
           )
         }
       </div>
-    </Container>
+    </PageContainer>
   )
 }

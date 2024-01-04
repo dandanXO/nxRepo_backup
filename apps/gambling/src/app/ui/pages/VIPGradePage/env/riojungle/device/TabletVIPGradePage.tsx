@@ -3,7 +3,7 @@ import VIPStatue from '../images/vip_statue.png'
 import { useEffect, useRef, useState } from "react";
 import { VerticalVIPButtonList } from "../components/VerticalVIPButtonList";
 import { formatLocaleMoney } from "../../../../../utils/format";
-import { ProgressBar } from "../../../../../components/ProgressBar";
+import { ProgressBar } from "../../../../../components-bs/ProgressBar";
 import { VIP0Text } from "../components/VIP0Text";
 import { VIPInfoTab } from "../components/VIPInfoTab";
 import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
