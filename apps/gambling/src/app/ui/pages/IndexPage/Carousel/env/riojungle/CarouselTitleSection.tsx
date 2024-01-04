@@ -1,6 +1,4 @@
-import {environment} from "../../../../../../../environments/environment";
 import cx from "classnames";
-import {PageContainer} from "../../../../../components-bs/PageContainer";
 import useBreakpoint from "../../../../../hooks/useBreakpoint";
 
 type ICarouselSubTitle = {
@@ -10,8 +8,8 @@ type ICarouselSubTitle = {
 export const CarouselTitleSection = (props: ICarouselSubTitle) => {
   const {isMobile} = useBreakpoint();
   return (
-    <PageContainer
-      className={cx("absolute transform -translate-y-1/2",
+    <div
+      className={cx("absolute transform -translate-y-1/2 pl-6 w-4/5",
         "top-1/2",
         "leading-none",
         props.className,
@@ -34,6 +32,6 @@ export const CarouselTitleSection = (props: ICarouselSubTitle) => {
       )}>
         {props.children}
       </div>
-    </PageContainer>
+    </div>
   )
 }
