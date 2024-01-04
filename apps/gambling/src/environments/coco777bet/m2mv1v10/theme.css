@@ -232,7 +232,7 @@
 
   --tab-primary-from: var(--primary-main-to);
   --tab-primary-to: var(--primary-main-from);
-  --tab-border-top: #5964F5;
+
   --tab-text-color-normal: #FFFFFF;
   --tab-text-color-active: #FFFFFF;
 

@@ -44,7 +44,6 @@ export const TabBar = (props: IFooter) => {
     <footer
       className={cx("fixed bottom-0 flex flex-row justify-between h-[60px] z-10 w-full",
         "bg-gradient-to-t from-[var(--tab-primary-from)] to-[var(--tab-primary-to)]",
-        "border-t-[1px] border-[var(--tab-border-top)]",
         {
           "p-2": size === "small",
         })}
