@@ -52,7 +52,7 @@ export const MobileGameRecordPage = ({
   }, [records])
 
   return (
-    <div className='fixed flex flex-col w-full h-[calc(100vh-52.5px)] px-4'>
+    <PageContainer className='min-h-full flex flex-col'>
 
       <BackNavigation onClick={onClickToIndex} />
 
@@ -65,7 +65,7 @@ export const MobileGameRecordPage = ({
 
       <div
         ref={wrapperRef}
-        className='grow mb-5 mt-3 rounded-lg w-full bg-[#333333] p-2 overflow-y-scroll'
+        className='grow flex flex-col mb-5 mt-3 rounded-lg w-full bg-[#333333] p-2 overflow-y-scroll'
         onScroll={handleOnScroll}
       >
         {
@@ -98,13 +98,13 @@ export const MobileGameRecordPage = ({
         }
         {
           records.length === 0 && (
-            <div className="h-full border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">
+            <div className="grow border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">
               <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
               <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>
             </div>
           )
         }
       </div>
-    </div>
+    </PageContainer>
   )
 }
