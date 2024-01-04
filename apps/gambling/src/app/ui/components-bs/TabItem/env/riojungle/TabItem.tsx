@@ -18,6 +18,7 @@ export const TabItem = (props: ITabItem) => {
         "font-normal",
         "whitespace-nowrap",
         "flex-1",
+        "cursor-pointer",
         {
           'py-2.5 px-4': props?.icon !== undefined,
           'py-3 px-4 md:px-8 lg:py-2.5 lg:px-9': props?.icon === undefined,
