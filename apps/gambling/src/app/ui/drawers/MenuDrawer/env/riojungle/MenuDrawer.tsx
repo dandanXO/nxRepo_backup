@@ -35,7 +35,7 @@ import { RootState } from "../../../../../reduxStore";
 import {useScrollToPartPageTemplate} from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
 
 
-type IGameType = "Slots" | "Fishing" | "Vivo" | "Viver";
+export type IGameType = "Slots" | "Fishing" | "Vivo" | "Viver";
 
 type IMenuDrawer = {
   className?: string;

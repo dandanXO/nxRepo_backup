@@ -5,11 +5,14 @@ import cx from "classnames";
 import React, {useState} from "react";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {FooterLogo} from "../../../../components-bs/Logos/FooterLogo";
 import {renderByRWD} from "../../../../utils/renderByRWD";
 import {IFooter} from "../../types/IFooter";
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
+import { gameSlice } from "../../../../../reduxStore/gameSlice";
+import { IGameType } from "../../../../drawers/MenuDrawer/env/riojungle/MenuDrawer";
+import { useScrollToPartPageTemplate } from "../../../hooks/useScrollToPartPageTemplate";
 
 
 
@@ -17,6 +20,7 @@ export const Footer = (props: IFooter) => {
   const navigate = useNavigate();
   const { label } = useSelector((state: any) => state.gameList);
 
+  const dispatch = useDispatch();
 
   // NOTE: mobile footer expands
   const [footerExpands, setFooterExpands] = useState({
@@ -28,7 +32,9 @@ export const Footer = (props: IFooter) => {
 
   const device = useBreakpoint();
 
-  const { onClickToCompanyProfile } = usePageNavigate();
+  const { onClickToCompanyProfile, onClickToIndex } = usePageNavigate();
+
+  const { scrollToWindowTop } = useScrollToPartPageTemplate();
 
   return (
     <div>
@@ -43,13 +49,17 @@ export const Footer = (props: IFooter) => {
                   <section className={"flex flex-col gap-3 items-start w-1/2"}>
                     <div className='pb-3 text-white text-sm font-bold border-b border-[#666666] w-full'>Jogo</div>
                     {
-                      ["Salão", ...label].map((gameName: string, index: number) => {
+                      ["Salão", ...label].map((gameType: IGameType | 'Salão', index: number) => {
                         return (
                           <button
                             key={index}
-                            onClick={() => navigate(PageOrModalPathEnum.IndexPage)}
+                            onClick={() => {
+                              onClickToIndex();
+                              dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameType === 'Salão'? 'Todos': gameType))
+                              scrollToWindowTop();
+                            }}
                             className='text-xs'
-                          >{gameName}</button>
+                          >{gameType}</button>
                         )
                       })
                     }
@@ -126,13 +136,17 @@ export const Footer = (props: IFooter) => {
               <section className={"flex flex-col gap-3 items-start w-[44px]"}>
                 <div className='pb-3 text-white text-sm font-bold border-b border-[#666666] w-full'>Jogo</div>
                 {
-                  ["Salão", ...label].map((gameName: string, index: number) => {
+                  ["Salão", ...label].map((gameType: IGameType | 'Salão', index: number) => {
                     return (
                       <button
                         key={index}
-                        onClick={() => navigate(PageOrModalPathEnum.IndexPage)}
+                        onClick={() => {
+                          onClickToIndex();
+                          dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameType === 'Salão'? 'Todos': gameType))
+                          scrollToWindowTop();
+                        }}
                         className='text-xs'
-                      >{gameName}</button>
+                      >{gameType}</button>
                     )
                   })
                 }
@@ -210,13 +224,17 @@ export const Footer = (props: IFooter) => {
                   <section className={"flex flex-col gap-3 items-start w-[82px]"}>
                     <div className='pb-3 text-white text-lg font-bold border-b border-[#666666] w-full'>Jogo</div>
                     {
-                      ["Salão", ...label].map((gameName: string, index: number) => {
+                      ["Salão", ...label].map((gameType: IGameType | 'Salão', index: number) => {
                         return (
                           <button
                             key={index}
-                            onClick={() => navigate(PageOrModalPathEnum.IndexPage)}
+                            onClick={() => {
+                              onClickToIndex();
+                              dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameType === 'Salão'? 'Todos': gameType))
+                              scrollToWindowTop();
+                            }}
                             className='text-sm'
-                          >{gameName}</button>
+                          >{gameType}</button>
                         )
                       })
                     }
