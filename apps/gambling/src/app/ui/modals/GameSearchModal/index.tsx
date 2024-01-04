@@ -64,7 +64,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
             return (
               <MainGameItem
                 className={cx("grow-0 shrink-0", {
-                  "w-[32vw] h-[32vw]": isMobile,
+                  "w-[32vw] h-[31vw]": isMobile,
                   "mr-[16px] max-w-[150px] !basis-[150px] !h-[170px]": !isMobile
                 })}
                 key={index}
@@ -101,7 +101,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
       }, backgroundProps())}>
         <button className={'absolute top-[12px] right-[12px]'} onClick={props.onClose} ><CloseButton /></button>
         <div className="h-full flex flex-col">
-          <div className={"flex-none"}>
+          <div className={"flex-none mb-2 md:mb-4 lg:mb-8"}>
           <div className="text-lg md:text-2xl lg:text-4xl text-white mb-2 md:mb-3 lg:mb-8">Procurar</div>
             <SearchInput
               placeholder={"Pesquisar nome do jogo"}

@@ -231,12 +231,12 @@
   --gray-scale-10: #1A1A1A;
 
   /*NOTE: figma 沒有 自己拆出來的*/
-  --input-border: transparent;
-  --input-background: #4D4D4D;
-  --input-placeholder-color: #666666;
+  --input-border: #808080;
+  --input-background: #333;
+  --input-placeholder-color: #808080;
   --input-text-color: #FFFFFF;
 
-  --input-focus-border: transparent;
+  --input-focus-border: #8547EB;
   --input-focus-background: transparent;
 
   --input-invalidation-border: #EF4444;

@@ -99,7 +99,7 @@ const BaseInput = (props: IInput) => {
       {props.validation === false && (
         <div
           className={
-            'text-left text-[var(--input-invalidation-text-color)] pl-4'
+            'text-left text-[var(--input-invalidation-text-color)] text-sm leading-5 pt-1'
           }
         >
           {props.errorMessage}
