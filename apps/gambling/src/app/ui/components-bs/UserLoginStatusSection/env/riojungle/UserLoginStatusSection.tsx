@@ -26,10 +26,10 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
         </section>
       )}
       {switchToLoginOrRegister !== "forget" && (
-        <section className={"mb-5 flex justify-center items-center"}>
-          <Tabs className={"w-full"}>
+        <section className={"mb-5 flex justify-center items-center bg-[#333333]"}>
+          <Tabs className="w-full bg-[#4D4D4D]">
             <TabItem
-              className={"flex-1"}
+              className={cx({ 'bg-[#4D4D4D]': switchToLoginOrRegister !== "login" })}
               name={'Entrar'}
               active={switchToLoginOrRegister === "login"}
               onClick={() => {
@@ -37,8 +37,8 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
               }}
             />
             <TabItem
-              className={"flex-1"}
-              name={'Registro'}
+              className={cx({ 'bg-[#4D4D4D]': switchToLoginOrRegister !== "register" })}
+              name={'Cadastre-Se'}
               active={switchToLoginOrRegister === "register"}
               onClick={() => {
                 setSwitchToLoginOrRegister("register")

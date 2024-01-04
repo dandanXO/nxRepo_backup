@@ -15,7 +15,7 @@ export const DepositAdvertisementModal = ({
 
   return (
     <div
-      className='relative flex flex-col items-center text-white rounded-2xl bg-gradient-to-br from-[#8547EB] to-[#10B98F] w-4/5 sm:w-[320px] lg:w-[480px] p-6 text-center'
+      className='relative flex flex-col items-center text-white rounded-2xl bg-gradient-to-br from-[var(--liner-main-from)] to-[var(--liner-main-to)] w-4/5 sm:w-[320px] lg:w-[480px] p-6 text-center'
       onClick={(event) => {
         event.stopPropagation();
       }}
@@ -38,7 +38,7 @@ export const DepositAdvertisementModal = ({
       </div>
 
       <button
-        className='mt-5 py-[10px] sm:py-[12px] lg:py-[14px] text-sm sm:text-base lg:text-xl bg-[#8547EB] rounded-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] w-full'
+        className='mt-5 py-[10px] sm:py-[12px] lg:py-[14px] text-sm sm:text-base lg:text-xl bg-[var(--primary-main-from)] rounded-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] w-full'
         onClick={onConfirm}
       >
         Depósito

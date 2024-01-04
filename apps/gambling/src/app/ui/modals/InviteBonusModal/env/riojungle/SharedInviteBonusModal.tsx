@@ -12,14 +12,14 @@ const Item = (props: IItem) => {
   return (
     <div className="bg-[rgba(0,0,0,0.08)] border-solid border-white/20 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-gray-200 flex flex-row justify-between w-full h-16 items-start pt-2 px-2 rounded-lg">
       <div className="flex flex-col w-2/5 items-start">
-        <div className="font-['Inter'] font-bold leading-[24px] text-white">
+        <div className="font-bold leading-[24px] text-white">
           {props.title}
         </div>
-        <div className="text-sm font-['Inter'] font-medium leading-[20px] text-white">
+        <div className="text-sm font-medium leading-[20px] text-white">
           Prêmio
         </div>
       </div>
-      <div className="text-right font-['Inter'] font-bold leading-[24px] text-white mt-2">
+      <div className="text-right font-bold leading-[24px] text-white mt-2">
         <MoneyButton money={props.money}/>
       </div>
     </div>
@@ -48,7 +48,7 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
         <div id="NewRootRoot" className="flex flex-row w-full items-start">
           <div
             id="Alert1"
-            className="bg-[linear-gradient(145deg,_#8547eb_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col pb-4 gap-5 w-full items-start rounded-lg p-4"
+            className="bg-[linear-gradient(145deg,var(--liner-main-from)_-7%,var(--liner-main-to)_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col pb-4 gap-5 w-full items-start rounded-lg p-4"
           >
             <div className="flex flex-col w-full items-start mt-[-48px]">
               <div className="flex flex-row ml-[108px] gap-20 w-2/3 items-start">
@@ -82,7 +82,7 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
 
             <div className="flex flex-col gap-4 w-full items-start">
               <div className="flex flex-col justify-between gap-2 w-full items-start">
-                <div className="text-center font-['Inter'] font-medium leading-[24px] text-white h-12">
+                <div className="text-center font-medium leading-[24px] text-white h-12">
                   Bônus de primeira recarga para usuários convidados
                 </div>
 
@@ -104,7 +104,7 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
               <div className="flex flex-row gap-3 items-start w-full">
                 <button
                   id="Btn"
-                  className="text-sm font-['Inter'] font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
+                  className="text-sm font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
                   onClick={() => {
                     props.close();
                   }}
@@ -113,7 +113,7 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
                 </button>
                 <button
                   id="Btn1"
-                  className="text-sm font-['Inter'] font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
+                  className="text-sm font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main-from)] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
                   onClick={() => {
                     props.onConfirm();
                   }}

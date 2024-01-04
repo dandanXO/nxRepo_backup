@@ -52,7 +52,7 @@ export const Toolbox = (props: IToolbox) => {
           <div className={twMerge(props.className)}>
             {mobileShowDownload && (
               <div className={"mb-2"}>
-                <ToolButton isMobile={!isDesktop} className='bg-[#8547EB]' onClick={props.onClickToDownload}>
+                <ToolButton isMobile={!isDesktop} className='bg-[var(--primary-main)]' onClick={props.onClickToDownload}>
                   <img alt={"download"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.assetPrefix}/icon-download-mobile.png`}/>
                 </ToolButton>
               </div>
@@ -78,7 +78,7 @@ export const Toolbox = (props: IToolbox) => {
 
             {
               desktopShowDownload && (
-                <FixedToolContainer className={"flex flex-col justify-center items-center px2 py-3 mb-4 bg-[#8547EB]"}>
+                <FixedToolContainer className={"flex flex-col justify-center items-center px2 py-3 mb-4 bg-[var(--primary-main)]"}>
                   <div className={"text-xs font-light mb-2"}>Download</div>
                   <ToolButton
                     onClick={props.onClickToDownload}>

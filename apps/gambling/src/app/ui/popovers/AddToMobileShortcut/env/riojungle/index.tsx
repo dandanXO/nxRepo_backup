@@ -37,7 +37,7 @@ export const RionjungleAddToMobileShortcut = (props: IAddToMobileShortcut) => {
   }
 
   return (
-    <Container className={cx("bg-gradient-144 from-[#8547EB] to-[#10B98F]",
+    <Container className={cx("bg-gradient-144 from-[var(--liner-main-from)] to-[var(--liner-main-to)]",
         "px-4 py-1.5 w-[95%] rounded-md",
         "flex row justify-between",
         props.className

@@ -160,7 +160,7 @@ export const WalletDepositNextPage = () => {
           </ShadowContainer>
         </section>
       </section>
-      <Button className={'my-5 md:my-8 lg:my-10 bg-[#8547EB] w-full rounded-lg py-3 text-sm md:text-base lg:text-xl'} onClick={handleToWalletPage} text={'Ja pago'} />
+      <Button className={'my-5 md:my-8 lg:my-10 bg-[var(--primary-main)] w-full rounded-lg py-3 text-sm md:text-base lg:text-xl'} onClick={handleToWalletPage} text={'Ja pago'} />
     </PageContainer>
   )
 }

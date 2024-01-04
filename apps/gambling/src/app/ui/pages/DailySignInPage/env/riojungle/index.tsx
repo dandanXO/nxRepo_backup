@@ -135,7 +135,7 @@ const DailySignInPage = ({
       {/*Sign in Button*/}
       <button
         className={tcx(
-          'w-full rounded-lg bg-[#8547EB] text-sm sm:text-base lg:text-xl mb-10 sm:mb-16 lg:mb-20 mt-[30px] sm:mt-8 lg:mt-10 py-[10px] sm:py-3 lg:py-[14px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]',
+          'w-full rounded-lg bg-[var(--primary-main)] text-sm sm:text-base lg:text-xl mb-10 sm:mb-16 lg:mb-20 mt-[30px] sm:mt-8 lg:mt-10 py-[10px] sm:py-3 lg:py-[14px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]',
           ['shadow-none bg-opacity-50', disableSignInButton]
         )
         }
