@@ -60,7 +60,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               p-2 md:p-2.5 lg:py-3 lg:px-5
               text-sm lg:text-base
               leading-5 md:leading-6 lg:leading-7
-              border-solid border-[#333333] bg-[#1a1a1a] flex flex-row w-full border rounded-lg
+              border-solid border-[#333333] bg-[var(--grayscale-10)] flex flex-row w-full border rounded-lg
               text-[#808080] text-center
           `)}
             >
@@ -96,8 +96,8 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
           Brasil e do recém-criado comitê de agências reguladoras relevantes no
           Brasil, a plataforma precisa concluir a troca de dados entre o Banco
           Central e as agências reguladoras relevantes das{' '}
-          <span className="text-[#f59e0b]">{withdrawBegin}</span>h às{' '}
-          <span className="text-[#f59e0b]">{withdrawEnd}</span>h, horário
+          <span className="text-[var(--state-warn-main)]">{withdrawBegin}</span>h às{' '}
+          <span className="text-[var(--state-warn-main)]">{withdrawEnd}</span>h, horário
           brasileiro!
         </div>
         <br />

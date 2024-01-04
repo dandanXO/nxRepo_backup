@@ -26,8 +26,8 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
           </div>
         </div>
         <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-          {props.isProxy && <div className="text-[#3B82F6]">Dividends:R$ {props.records && props.records[0] && props.records[0].dividendos || "0.00"}</div>}
-          <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
+          {props.isProxy && <div className="text-[var(--state-info-main)]">Dividends:R$ {props.records && props.records[0] && props.records[0].dividendos || "0.00"}</div>}
+          <div className="text-[var(--state-warn-main)]">Atualize a cada 30 minutos</div>
         </div>
       </div>
       {/* <div className={"text-[transparent] mb-2"}>

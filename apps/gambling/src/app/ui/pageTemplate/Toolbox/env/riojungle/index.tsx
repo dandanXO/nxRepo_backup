@@ -60,7 +60,7 @@ export const Toolbox = (props: IToolbox) => {
             {
               mobileShowCustomerService && (
                 <div>
-                  <ToolButton isMobile={!isDesktop} className='bg-[#10B98F]' onClick={() => {
+                  <ToolButton isMobile={!isDesktop} className='bg-[var(--secondary-main)]' onClick={() => {
                     dispatch(appSlice.actions.setShowTelegramDetailContactModal(true))
                   }}>
                     <img alt={"telegram"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.assetPrefix}/icon-telegram-mobile.png`} />
@@ -90,7 +90,7 @@ export const Toolbox = (props: IToolbox) => {
 
             {
               (desktopShowCustomerService || desktopShowManage) && (
-                <FixedToolContainer className={"flex flex-col justify-center items-center p-4 text-center bg-[#10B98F]"}>
+                <FixedToolContainer className={"flex flex-col justify-center items-center p-4 text-center bg-[var(--secondary-main)]"}>
                   <div className={"text-xs font-lights mb-2 whitespace-nowrap"}>Contate-nos</div>
                   {
                     desktopShowCustomerService && (

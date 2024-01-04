@@ -90,7 +90,7 @@ const DailySignInPage = ({
       {/*簽到紀錄按鈕*/}
       <div className='flex justify-end mt-3 sm:mt-5 text-sm lg:text-lg text-white'>
         <button
-          className='flex gap-2 items-center justify-center py-[10px] px-5 rounded-full shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f]'
+          className='flex gap-2 items-center justify-center py-[10px] px-5 rounded-full shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)]'
           onClick={onCLickToDailySignInRecord}
         >
           <div>Registros</div>
@@ -99,7 +99,7 @@ const DailySignInPage = ({
       </div>
 
       {/*領取規則*/}
-      <div className='mt-5 border border-[#333333] text-[#F59E0B] rounded-lg py-2 sm:py-3 px-2 sm:px-4 lg:px-5'>
+      <div className='mt-5 border border-[#333333] text-[var(--state-warn-main)] rounded-lg py-2 sm:py-3 px-2 sm:px-4 lg:px-5'>
         Regras de recompensa diária VIP:Cada nível só pode receber recompensas por {dayConfigs.length} dias no total. As recompensas serão creditadas na próxima vez que você as reivindicar. Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
       </div>
 

@@ -30,7 +30,7 @@ export const NotificationElement = ({
   return (
     <div
       className={tcx(
-        'bg-[#1A1A1A] w-full font-medium cursor-pointer',
+        'bg-[var(--grayscale-10)] w-full font-medium cursor-pointer',
         ['mb-5', expanded && !isLast],
         ['mt-5', expanded && !isFirst],
         ['rounded-t-lg', isAfterExpanded || isFirst || expanded],
@@ -40,7 +40,7 @@ export const NotificationElement = ({
     >
       <div className={tcx('p-3 flex justify-between gap-5 items-center border-b border-[#333333]', ['text-[#808080]', isRead && !expanded])}>
         <div className='flex gap-2 flex-1 items-center'>
-          {!isRead && <div className='h-2 w-2 bg-[#EF4444] rounded-full'/>}
+          {!isRead && <div className='h-2 w-2 bg-[var(--state-error-main)] rounded-full'/>}
           <div>{title}</div>
         </div>
         <div className='flex gap-2 flex-shrink-0 items-center'>

@@ -110,7 +110,7 @@ export const WalletDepositNextPage = () => {
         onClick={() => onClickToWallet({ 'panelType': 'deposit' })}
       />
 
-      <div className="md:mt-2 lg:mt-4 mb-5 py-2 px-3 lg:py-3 lg:px-5 px-text-sm md:text-base lg:text-xl text-[#10b98f] border-solid border-[#4d4d4d] bg-[#1a1a1a] flex flex-row w-full border rounded-lg">
+      <div className="md:mt-2 lg:mt-4 mb-5 py-2 px-3 lg:py-3 lg:px-5 px-text-sm md:text-base lg:text-xl text-[var(--secondary-main)] border-solid border-[#4d4d4d] bg-[var(--grayscale-10)] flex flex-row w-full border rounded-lg">
         {message}
       </div>
 
@@ -135,7 +135,7 @@ export const WalletDepositNextPage = () => {
           <ShadowContainer className={cx(shadowContainerStyle, 'flex-col items-center')}>
             <div className={`${titleStyle} mb-1 md:mb-3 lg:mb-4.5 w-full`}>Pague a corda</div>
             <div className={`${textStyle} break-all mb-3 lg:mb-5`}>{data?.data?.channelData?.paymentLink || ''}</div>
-            <Button className={'bg-[#10B98F] w-full rounded-[100px] py-2.5 lg:py-1.5'} onClick={onClickToCopy}
+            <Button className={'bg-[var(--secondary-main)] w-full rounded-[100px] py-2.5 lg:py-1.5'} onClick={onClickToCopy}
               text={<div className="text-white flex items-center justify-center">
                 <img className="mr-2 w-[20px] h-[20px]" src={`assets/${environment.assetPrefix}/icon=copy.png`} alt="copy" />
                 Copy

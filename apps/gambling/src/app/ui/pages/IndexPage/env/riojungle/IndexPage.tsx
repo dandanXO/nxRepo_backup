@@ -201,7 +201,7 @@ export const IndexPage = ({
       <PageContainer
         className={cx(
           "z-[2]",
-          "py-2 bg-[#1A1A1A]",
+          "py-2 bg-[var(--grayscale-10)]",
           {
             "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },
@@ -218,7 +218,7 @@ export const IndexPage = ({
                 pureContainer={true}
                 className={cx(
                   "p-2.5 text-sm rounded-lg h-[40px] flex items-center",
-                  "!border-[#4D4D4D] bg-[#1A1A1A]"
+                  "!border-[#4D4D4D] bg-[var(--grayscale-10)]"
                 )}
                 inputClassName={"text-sm placeholder:text-[#B3B3B3] placeholder:text-sm placeholder:items-center"}
                 placeholder={"Procurar"}

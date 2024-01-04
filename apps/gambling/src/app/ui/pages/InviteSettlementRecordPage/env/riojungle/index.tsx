@@ -78,7 +78,7 @@ export const InviteSettlementRecordPage = () => {
 
           {!isMobile &&
             (<section>
-              <button className="py-1.5 px-5 mr-2 text-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] flex flex-row  cursor-pointer justify-center items-center rounded-[100px]" onClick={() => {
+              <button className="py-1.5 px-5 mr-2 text-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] flex flex-row  cursor-pointer justify-center items-center rounded-[100px]" onClick={() => {
                 refresh(moment().subtract(7, 'days').format('YYYY-MM-DD 00:00:00'), moment().format('YYYY-MM-DD 23:59:59'));
               }}>Registros de liquidação
                 <img className="w-[24px] h-[24px]" alt="reload" src={`assets/${environment.assetPrefix}/Repeat.png`}/>

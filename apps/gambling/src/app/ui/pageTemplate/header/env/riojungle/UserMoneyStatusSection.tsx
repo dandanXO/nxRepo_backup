@@ -38,7 +38,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
 
       <button
         id="Headerbtn"
-        className="h-full p-2 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] flex flex-row  cursor-pointer justify-center items-center rounded-tr-lg rounded-br-lg"
+        className="h-full p-2 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] flex flex-row  cursor-pointer justify-center items-center rounded-tr-lg rounded-br-lg"
         onClick={()=>onClickToWallet({'panelType':'deposit'})}
       >
         <img alt={"add"} className={"w-[24px] h-[24px]"} src={plusICON}/>

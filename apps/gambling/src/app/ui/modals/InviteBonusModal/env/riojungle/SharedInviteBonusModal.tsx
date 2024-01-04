@@ -104,7 +104,7 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
               <div className="flex flex-row gap-3 items-start w-full">
                 <button
                   id="Btn"
-                  className="text-sm font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
+                  className="text-sm font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
                   onClick={() => {
                     props.close();
                   }}

@@ -30,7 +30,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
     <div className="w-full flex flex-col justify-between w-full items-center">
       <button
         onClick={() => props.setPanelMode('daily')}
-        className=" leading-[28px] text-white mb-3 md:mb-4 lg:mb-10 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
+        className=" leading-[28px] text-white mb-3 md:mb-4 lg:mb-10 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
       >
         Convidar conta
         <img
@@ -106,8 +106,8 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
         </div>
 
-        <div className="mb-3 md:mb-5 flex flex-row w-full border rounded-lg border-solid border-[#333333] bg-[#1a1a1a]">
-          <div className="p-2 md:px-5 lg:py-3 text-sm lg:text-base text-center leading-5 lg:leading-6 text-[#f59e0b]">
+        <div className="mb-3 md:mb-5 flex flex-row w-full border rounded-lg border-solid border-[#333333] bg-[var(--grayscale-10)]">
+          <div className="p-2 md:px-5 lg:py-3 text-sm lg:text-base text-center leading-5 lg:leading-6 text-[var(--state-warn-main)]">
             <QuestionSection3 />
           </div>
         </div>

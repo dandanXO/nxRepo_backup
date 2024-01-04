@@ -84,7 +84,7 @@ export const VIPInfoTab = ({
           vipInfoTabList.map((item, index) => (
             <div
               key={index}
-              className={tcx('h-full w-1/4 flex flex-col items-center justify-center sm:px-3 lg:px-[50px]', ['bg-[#10B98F] rounded-t-2xl', index === selected])}
+              className={tcx('h-full w-1/4 flex flex-col items-center justify-center sm:px-3 lg:px-[50px]', ['bg-[var(--secondary-main)] rounded-t-2xl', index === selected])}
               onClick={() => setSelected(index)}
             >
               <img alt={`icon${item.title}`} src={item.icon} className={tcx('w-8 h-8 sm:w-12 sm:h-12', ['brightness-[0.7]', index !== selected])} />
@@ -95,7 +95,7 @@ export const VIPInfoTab = ({
           ))
         }
       </div>
-      <div className='h-1 w-full bg-[#10B98F]' />
+      <div className='h-1 w-full bg-[var(--secondary-main)]' />
       <div className={tcx('w-full bg-[#333333] rounded-b-2xl mb-[66px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-2 sm:gap-5 sm:p-5')}>
         {
           isMobile && <div className='text-sm text-white text-center font-medium'>{vipInfoTabList[selected].title}</div>
@@ -111,7 +111,7 @@ export const VIPInfoTab = ({
 
             return (
               <div key={info.level} className={tcx('text-white flex w-full bg-[#4D4D4D] rounded-full', ['bg-[#666666]', isJackPot])}>
-                <div className={tcx('text-sm lg:text-lg font-bold flex-shrink-0 bg-[var(--primary-main)] rounded-full w-20 lg:w-[100px] flex items-center justify-center py-[10px] px-4 lg:px-[22px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]', ['bg-[#F59E0B]', isJackPot])}>VIP {info.level}</div>
+                <div className={tcx('text-sm lg:text-lg font-bold flex-shrink-0 bg-[var(--primary-main)] rounded-full w-20 lg:w-[100px] flex items-center justify-center py-[10px] px-4 lg:px-[22px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]', ['bg-[var(--state-warn-main)]', isJackPot])}>VIP {info.level}</div>
                 <div className={tcx('text-sm lg:text-base font-medium w-full flex justify-center items-center text-center overflow-ellipsis', ['text-xs lg:text-xs', isJackPot])}>
                   {
                     !isJackPot && info[vipInfoTabList[selected].contentKey]

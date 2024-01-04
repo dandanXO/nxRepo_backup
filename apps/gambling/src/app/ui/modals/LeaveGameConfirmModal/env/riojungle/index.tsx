@@ -28,7 +28,7 @@ export const LeaveGameConfirmModal = ({
 
       <div className='w-full flex justify-between gap-3 sm:gap-5 mt-5 lg:mt-10'>
         <button
-          className='w-full rounded-lg py-[10px] sm:py-3 lg:py-[14px] text-sm sm:text-base lg:text-xl bg-[#10B98F] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
+          className='w-full rounded-lg py-[10px] sm:py-3 lg:py-[14px] text-sm sm:text-base lg:text-xl bg-[var(--secondary-main)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
           onClick={onClose}
         >
           Concelar

@@ -192,7 +192,7 @@ html {
   .riojungle777bet-customTable-tbody,
   .riojungle777bet-game-search-list {
     scrollbar-width: thin;
-    scrollbar-color: #10B98F;
+    scrollbar-color: var(--secondary-main);
   }
   .riojungle777bet-customTable-tbody::-webkit-scrollbar,
   .riojungle777bet-game-search-list::-webkit-scrollbar {
@@ -212,7 +212,7 @@ html {
   }
  .riojungle777bet-customTable-tbody::-webkit-scrollbar-thumb,
  .riojungle777bet-game-search-list::-webkit-scrollbar-thumb {
-    background: #10B98F;
+    background: var(--secondary-main);
     border-radius: 10px;
   }
 

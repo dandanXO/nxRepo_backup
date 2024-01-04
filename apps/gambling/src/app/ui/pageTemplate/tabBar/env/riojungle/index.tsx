@@ -76,7 +76,7 @@ export const TabBar = (props: ITabBar) => {
           <ThumbsUPSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.InvitePage)}/>
           <div
             className={twMerge("text-sm font-medium leading-5",
-              location.pathname === PageOrModalPathEnum.InvitePage && "text-[#9c6aef]",
+              location.pathname === PageOrModalPathEnum.InvitePage && "text-[var(--primary-hover)]",
               location.pathname !== PageOrModalPathEnum.InvitePage && "text-[#b3b3b3]",
             )}
           >
@@ -107,7 +107,7 @@ export const TabBar = (props: ITabBar) => {
           <div
             className={twMerge("text-sm font-medium leading-5",
               (location.pathname === PageOrModalPathEnum.IndexPage ||
-              location.pathname === PageOrModalPathEnum.GameSearchPage) && "text-[#9c6aef]",
+              location.pathname === PageOrModalPathEnum.GameSearchPage) && "text-[var(--primary-hover)]",
               !(location.pathname === PageOrModalPathEnum.IndexPage ||
                 location.pathname === PageOrModalPathEnum.GameSearchPage)  && "text-[#b3b3b3]",
             )}
@@ -130,7 +130,7 @@ export const TabBar = (props: ITabBar) => {
 
           <div
             className={twMerge("text-sm font-medium leading-5",
-              location.pathname === PageOrModalPathEnum.VIPGradePage && "text-[#9c6aef]",
+              location.pathname === PageOrModalPathEnum.VIPGradePage && "text-[var(--primary-hover)]",
               location.pathname !== PageOrModalPathEnum.VIPGradePage && "text-[#b3b3b3]",
             )}
           >
@@ -151,7 +151,7 @@ export const TabBar = (props: ITabBar) => {
           <div className="relative">
             <UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)}/>
             {messageCount > 0 && (
-              <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[#ef4444] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
+              <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[var(--state-error-main)] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
                 {messageCount}
               </div>
             )}
@@ -159,7 +159,7 @@ export const TabBar = (props: ITabBar) => {
 
           <div
             className={twMerge("text-sm font-medium leading-5",
-              location.pathname === PageOrModalPathEnum.MyPage && "text-[#9c6aef]",
+              location.pathname === PageOrModalPathEnum.MyPage && "text-[var(--primary-hover)]",
               location.pathname !== PageOrModalPathEnum.MyPage && "text-[#b3b3b3]",
             )}
           >

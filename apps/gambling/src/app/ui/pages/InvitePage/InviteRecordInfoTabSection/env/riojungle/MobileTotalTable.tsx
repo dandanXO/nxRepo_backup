@@ -25,8 +25,8 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
           </div>
         </div>
         <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-          {props.isProxy && <div className="text-[#3B82F6]">Dividends:R$ {props.data.dividendos || "0.00"}</div>}
-          <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
+          {props.isProxy && <div className="text-[var(--state-info-main)]">Dividends:R$ {props.data.dividendos || "0.00"}</div>}
+          <div className="text-[var(--state-warn-main)]">Atualize a cada 30 minutos</div>
         </div>
       </div>
       <div className={'border-solid border-[#666666] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] flex flex-col justify-center w-full px-2 py-1 border rounded-lg'}>
