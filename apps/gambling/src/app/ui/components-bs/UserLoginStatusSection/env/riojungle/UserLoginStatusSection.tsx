@@ -49,13 +49,13 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
       )}
 
       {switchToLoginOrRegister === "forget" && (
-        <section className={"mb-5 flex justify-start items-center"}>
+        <section className={"mb-3 md:mb-5 flex justify-start items-center"}>
           <button
             onClick={() => {
               setSwitchToLoginOrRegister("login")
             }}
-            className={cx("font-bold text-white",
-              "text-2xl leading-8",
+            className={cx("text-white",
+              "text-base md:text-lg lg:text-2xl leading-6 md:leading-7 lg:leading-8",
               "flex flex-row justify-center items-center"
             )}
           >

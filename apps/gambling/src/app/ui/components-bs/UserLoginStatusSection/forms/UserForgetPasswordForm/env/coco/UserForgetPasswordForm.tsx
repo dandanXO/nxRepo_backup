@@ -67,6 +67,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           prefix={<SecuritySvg className={"mr-1"}/>}
           suffix={
             <SendSMSCodeButton
+              className="px-2 py-0 rounded-2xl bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)]"
               valid={isValidSMSCode}
               onClick={onClickSendSMSCode}/>
           }

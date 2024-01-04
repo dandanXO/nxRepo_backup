@@ -12,6 +12,7 @@ type ICountingButtonType = "ready" | "counting" | "finished";
 type IProps = {
   onClick: (isCounting: boolean) => void;
   valid: boolean;
+  className: string;
 }
 
 export const SendSMSCodeButton = (props: IProps) => {
@@ -53,7 +54,7 @@ export const SendSMSCodeButton = (props: IProps) => {
   }
   return (
     <StyledSendSMSCodeButton
-      className="px-2 py-0 rounded-2xl bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-[var(--white)]"
+      className={props.className}
       onClick={() => {
         props.onClick && props.onClick(state === "counting");
         if (!props.valid) return;
