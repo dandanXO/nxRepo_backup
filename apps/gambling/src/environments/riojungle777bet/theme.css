@@ -3,16 +3,19 @@
 
 
   /*taipei colors-start*/
-  --primary-main-from: #45CCF7;
-  --primary-main-to: #0044C7;
-  --primary-variant: rgba(77, 77, 77, 1);
-  --primary-assistant: #A1C1FF;
-  --primary-assistant-20: #A1C1FF;
+  --primary-main: #8547EB;
+  --primary-light-disable: #6C3ABE;
+  --primary-dark-active: #6C3ABE;
+  --primary-hover: #9C6AEF;
 
-  --secondary-main-from: #FFEF61;
-  --secondary-main-to: #FF7E21;
-  --secondary-variant: #A25700;
-  --secondary-assistant: #FDEF70;
+  --secondary-main: #10B98F;
+  --secondary-light-disable: #0D9574;
+  --secondary-dark-active: #0D9574;
+  --secondary-hover: #3EC6A4;
+  --liner-main-from: #8547EB;
+  --liner-main-to: #10B98F;
+
+
 
   --black: #000000;
   --white: #FFFFFF;

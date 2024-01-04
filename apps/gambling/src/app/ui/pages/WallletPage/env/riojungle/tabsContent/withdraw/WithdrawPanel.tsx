@@ -74,7 +74,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
           </div>
         </div>
 
-        <button onClick={props.onClickToWithdraw} className="my-5 md:mt-6 md:mb-3 lg:my-10 py-3 lg:py-3.5 text-sm md:text-base lg:text-lg text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center w-full cursor-pointer  rounded-lg leading-5 md:leading-6 lg:leading-7">
+        <button onClick={props.onClickToWithdraw} className="my-5 md:mt-6 md:mb-3 lg:my-10 py-3 lg:py-3.5 text-sm md:text-base lg:text-lg text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center w-full cursor-pointer  rounded-lg leading-5 md:leading-6 lg:leading-7">
           Retirar
         </button>
 

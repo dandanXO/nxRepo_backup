@@ -24,7 +24,7 @@ export const RiojungleIOSDownloadModal = () => {
           dispatch(appSlice.actions.setShowiOSDownloadPopover(false));
         }}
       >
-        <div className={"w-full h-full shadow-[inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] relative bg-gradient-144 from-[#8547EB] to-[#10B98F] bg-cover bg-50%_50% flex flex-col px-6 rounded-tl-3xl rounded-tr-3xl"}>
+        <div className={"w-full h-full shadow-[inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] relative bg-gradient-144 from-[var(--liner-main-from)] to-[var(--liner-main-to)] bg-cover bg-50%_50% flex flex-col px-6 rounded-tl-3xl rounded-tr-3xl"}>
           <CloseICON  className="w-[32px] h-[32px]" btnClassName="p-0 mt-5 -mr-4 flex justify-end"/>
           <div
             className="text-white text-center text-xl font-bold leading-[28px] mb-5 -mt-3"
@@ -57,7 +57,7 @@ export const RiojungleIOSDownloadModal = () => {
                   </div>
 
                   <div className="relative flex flex-row justify-center items-start">
-                    <div className="text-sm md:text-xl font-medium leading-7 text-[#1678ff] relative border-solid border-[#8547EB] border-2 rounded-lg px-1">
+                    <div className="text-sm md:text-xl font-medium leading-7 text-[#1678ff] relative border-solid border-[var(--primary-main-from)] border-2 rounded-lg px-1">
                       Adicionar
                     </div>
                     <img

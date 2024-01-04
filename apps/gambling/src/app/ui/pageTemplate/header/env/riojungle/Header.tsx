@@ -198,7 +198,7 @@ const UserActionSection = () => {
 
       <button
         id="BtnregisterRoot"
-        className="w-[112px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center pt-1 cursor-pointer items-start rounded-lg"
+        className="w-[112px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center pt-1 cursor-pointer items-start rounded-lg"
         onClick={() => {
           // props.onClickUserLoginStatusDrawer()
           dispatch(appSlice.actions.setLoginUIStatusType("register"));

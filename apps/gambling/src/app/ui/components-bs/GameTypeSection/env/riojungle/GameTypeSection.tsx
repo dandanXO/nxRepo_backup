@@ -85,7 +85,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
         <div className="flex-1 mt-20 justify-center flex">
           <Button
             onClick={loadMore}
-            className="bg-[#8547EB] items-center py-3 px-4 rounded"
+            className="bg-[var(--primary-main)] items-center py-3 px-4 rounded"
             text={'Ver Mais'}
           />
         </div>

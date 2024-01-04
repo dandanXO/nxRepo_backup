@@ -27,7 +27,7 @@ export const DepositInput = (props: IDepositInput) => {
       {props.isShowInputTag &&
         (<div className={cx(`
           absolute top-0 right-0
-          bg-[#8547eb]
+          bg-[var(--primary-main)]
           px-2 py-1
           text-xs md:text-xl text-white
           rounded-tr-[10px] rounded-bl-[10px] rounded-tl-none rounded-tb-none

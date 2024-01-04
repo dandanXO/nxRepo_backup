@@ -72,7 +72,7 @@ export const UserInfoStatusPopover = ({
         <div className='flex flex-col items-center'>
           <div className='relative border rounded-lg border-white'>
             <Avatar className='rounded-lg w-20 h-20' />
-            <div className='absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[50%] text-white text-xs font-bold w-16 rounded-[10px] py-[2px] text-center bg-[#8547EB] border border-white'>LV{currentLevel}</div>
+            <div className='absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[50%] text-white text-xs font-bold w-16 rounded-[10px] py-[2px] text-center bg-[var(--primary-main)] border border-white'>LV{currentLevel}</div>
           </div>
           <div className='mt-[22px] text-xl font-medium text-white'>{user.nickname}</div>
           <div className='mt-2 flex gap-1 text-white text-lg'>

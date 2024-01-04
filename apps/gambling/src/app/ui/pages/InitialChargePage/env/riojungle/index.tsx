@@ -43,7 +43,7 @@ export const InitialChargePage = () => {
       </div>
 
       <button
-        className='w-full mb-10 sm:mb-[96px] text-sm sm:text-base lg:text-xl bg-[#8547EB] py-[10px] sm:py-3 lg:py-[14px] mt-5 sm:mt-8 lg:mt-10 rounded-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
+        className='w-full mb-10 sm:mb-[96px] text-sm sm:text-base lg:text-xl bg-[var(--primary-main)] py-[10px] sm:py-3 lg:py-[14px] mt-5 sm:mt-8 lg:mt-10 rounded-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
         onClick={()=>onClickToWallet()}
       >
         Recarrague agora
