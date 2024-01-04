@@ -20,7 +20,6 @@ import {twMerge} from "tailwind-merge";
 import {TabBar} from "../../tabBar";
 import {Toolbox} from "../../Toolbox/env/riojungle/index";
 import {AddToMobileShortcut} from "../../../popovers/AddToMobileShortcut";
-import {IOSDownloadModal} from "../../../modals/IOSDownloadModal";
 import {useLocalStorage} from "usehooks-ts";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import cx from "classnames";

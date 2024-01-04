@@ -5,6 +5,7 @@ import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import {BaseModal} from "../../../BaseModal";
 
 
 const Container = styled.div`
@@ -42,7 +43,7 @@ export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
   const { isMobile } = useBreakpoint();
   const telegramId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
   return (
-    <div className={"z-[1005] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event) => {
+    <BaseModal className={"flex flex-col justify-center items-center"} onClose={(event) => {
       props.close();
     }}>
 
@@ -97,7 +98,7 @@ export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
 
 
       </Container>
-    </div>
+    </BaseModal>
   )
 }
 

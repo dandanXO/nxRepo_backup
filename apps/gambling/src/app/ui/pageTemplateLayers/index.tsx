@@ -182,6 +182,13 @@ export const PageTemplateLayers = ({
         }}/>
       )}
 
+      {/*NOTE: IOSDownloadModal*/}
+      {isShowIOSDOwnloadModal && (
+        <div className={twMerge("z-[1006]", "fixed left-0 top-0 right-0 bottom-0")}>
+          {<IOSDownloadModal/>}
+        </div>
+      )}
+
       {/*MaintenanceModal*/}
       {isShowMaintenanceModal && (
           <MaintenanceModal
@@ -206,12 +213,7 @@ export const PageTemplateLayers = ({
         />
       )}
 
-      {/*NOTE: IOSDownloadModal*/}
-      {isShowIOSDOwnloadModal && (
-        <div className={twMerge("z-[1006]", "fixed bottom-0")}>
-          {<IOSDownloadModal/>}
-        </div>
-      )}
+
 
     </>
   )

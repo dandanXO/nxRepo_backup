@@ -32,6 +32,7 @@ import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CloseICON} from "../../../../components-bs/env/riojungle/CloseICON";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import { RootState } from "../../../../../reduxStore";
+import {useScrollToPartPageTemplate} from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
 
 
 type IGameType = "Slots" | "Fishing" | "Vivo" | "Viver";
@@ -64,6 +65,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
   }
 
   const { label } = useSelector((state: any) => state.gameList);
+
+  const {scrollToWindowTop} = useScrollToPartPageTemplate();
 
   return (
     <div
@@ -327,6 +330,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                 onClick={() => {
                   onClickToIndex();
                   dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(item))
+                  scrollToWindowTop();
                   close();
                 }}
                 >
@@ -348,6 +352,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             })} onClick={() => {
               onClickToIndex();
               dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel('Favoritos'))
+              scrollToWindowTop();
               close();
             }}>
               <img

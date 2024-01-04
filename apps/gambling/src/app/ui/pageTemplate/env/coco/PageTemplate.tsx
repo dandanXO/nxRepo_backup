@@ -22,7 +22,6 @@ import {useLocation} from "react-router";
 import {TShowToolboxConfig} from "../../base/types";
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
 import {AddToMobileShortcut} from "../../../popovers/AddToMobileShortcut";
-import {IOSDownloadModal} from "../../../modals/IOSDownloadModal";
 import {useLocalStorage} from "usehooks-ts";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import {twMerge} from "tailwind-merge";
