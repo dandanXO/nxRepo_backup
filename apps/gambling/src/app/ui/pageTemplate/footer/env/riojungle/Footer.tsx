@@ -103,7 +103,7 @@ export const Footer = (props: IFooter) => {
 
                 <div className='flex mt-3 gap-5 items-center'>
                   <img alt='licensedBy' className='w-10' src={`assets/shared/footer-licensedBy.png`}/>
-                  <div className='text-sm font-medium text-[#BEBEBE]'>
+                  <div className='text-xs font-medium text-[#BEBEBE]'>
                     {environment.platformName} is operated by Block balancing A.C. (Commercial register of Curaçao no. 158191, Emancipatie Boulevard Dominico F. "Don" Martina 52, Curaçao) under the main gaming license #5517/JAZ.
                   </div>
                 </div>

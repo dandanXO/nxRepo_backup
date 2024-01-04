@@ -22,16 +22,17 @@ interface GameListType {
   gameType: string;
   data: SubGameType[];
 }
-
+export type indexPagecurrentSelectLabel= 'Todos'| 'Favoritos' | "Slots" | "Fishing" | "Vivo" | "Viver";
 
 export type InitialState = {
   allGameList: GameListType[];
   hotBrandGameList: GameListType[];
   typeGameList: GameType[];
   label: string[];
-  typeGameCount: { [key: string]: number }
-  indexPagecurrentSelectLabel: string
+  typeGameCount: { [key: string]: number };
+  indexPagecurrentSelectLabel: indexPagecurrentSelectLabel;
 }
+
 
 const initGameList: InitialState = {
   allGameList: [],
