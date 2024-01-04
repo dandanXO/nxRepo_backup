@@ -36,6 +36,8 @@
   --background-checkin-to: #1E083A;
   --background-modal-from: #577DDE;
   --background-modal-to: #000691;
+  --background-footer: #0B1948;
+
 
   --background-add-money: #2AD2E9;
   --background-vip-level-from: #7C91FF;
@@ -50,16 +52,15 @@
   --background-dashboard-secondary: #252A99;
   --background-modal-telegram-from: #0E3E9B;
   --background-modal-telegram-to: #6272FF;
-  --background-footer: #0B1948;
+
 
   --stroke-textfields: #AAC6FF;
   --stroke-block: #ABDCFF;
-  --stroke-dashboard-main:#00FFEF;
-  --stroke-dashboard-secondary: #393FC4;
   /* stroke/modal Solid, 70%, Normal #40F4FF -> rgba to hex : #40f4ffb3*/
   --stroke-modal: #40f4ffb3;
   --stroke-popup: #FFB84C;
-
+  --stroke-dashboard-main:#00FFEF;
+  --stroke-dashboard-secondary: #393FC4;
 
 
   --button-login-1-from: #FFC121;
