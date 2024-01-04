@@ -112,21 +112,23 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         )}
       />
 
-      <Input
-        type={"text"}
-        className={"rounded-br-[0px] rounded-tr-[0px] border-r-[0px]"}
-        // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
-        prefix={<SecuritySvg className={"mr-1"}/>}
-        outerSuffix={<Captcha onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading}/>}
-        placeholder={ isMobile ? "Código gráfico" : "Código de verificação"}
-        value={captchaInput.data}
-        validation={captchaInput.isValidation}
-        errorMessage={captchaInput.errorMessage}
-        onChange={(event: any) => {
-          onValidateCaptchaInput(event.target.value, setCaptchaInput);
-        }}
-      />
+      <section className="flex">
+        <Input
+          type={"text"}
+          className={"mr-3 md:mr-5"}
+          // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
+          prefix={<SecuritySvg className={"mr-1"} />}
+          placeholder={isMobile ? "Código gráfico" : "Código de verificação"}
+          value={captchaInput.data}
+          validation={captchaInput.isValidation}
+          errorMessage={captchaInput.errorMessage}
+          onChange={(event: any) => {
+            onValidateCaptchaInput(event.target.value, setCaptchaInput);
+          }}
+        />
 
+        <Captcha className="rounded-lg" onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading} />
+      </section>
       <section className={"flex flex-col mb-4"}>
         {/*NOTICE: refactor*/}
         {renderByPlatform({

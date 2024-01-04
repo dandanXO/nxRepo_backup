@@ -107,7 +107,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         className={"rounded-br-[0px] rounded-tr-[0px] border-r-[0px]"}
         // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         prefix={<SecuritySvg className={"mr-1"}/>}
-        outerSuffix={<Captcha onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading}/>}
+        outerSuffix={<Captcha className="rounded-br-[8px] rounded-tr-[8px]" onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading}/>}
         placeholder={ isMobile ? "Código gráfico" : "Código de verificação"}
         value={captchaInput.data}
         validation={captchaInput.isValidation}
