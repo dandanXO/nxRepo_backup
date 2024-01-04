@@ -13,6 +13,7 @@ import { notification } from "antd";
 import { useUpdateUserInfoMutation } from "../../../../../external";
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 
 
 const Title = ({ title, className }:{ title: string, className?: string}) => (
@@ -88,7 +89,7 @@ export const SettingPage = ({
   }
 
   return (
-    <div className='flex justify-center'>
+    <PageContainer>
       {contextHolder}
       { openSelectAvatarModal && (
         <SelectAvatarModal
@@ -97,61 +98,58 @@ export const SettingPage = ({
           onConfirm={(value)=>setSelectedAvatar(value)}
         />
       )}
-      <div className='w-full lg:w-[80%] px-4 sm:px-8 lg:px-0'>
-        <BackNavigation
-          onClick={()=>{
-            if (isMobile) {
-              navigate(PageOrModalPathEnum.MyPage);
-            } else {
-              navigate(PageOrModalPathEnum.IndexPage);
-            }
-          }}
-        />
+      <BackNavigation
+        onClick={()=>{
+          if (isMobile) {
+            navigate(PageOrModalPathEnum.MyPage);
+          } else {
+            navigate(PageOrModalPathEnum.IndexPage);
+          }
+        }}
+      />
 
-        {/*頭像*/}
-        <div
-          className='w-full flex justify-center cursor-pointer'
-          onClick={()=>setOpenSelectAvatarModal(true)}
-        >
-          <div className='relative border border-white rounded-lg'>
-            <img className='rounded-lg w-20 h-20 lg:w-[120px] lg:h-[120px]' alt='avatar' src={`assets/${environment.assetPrefix}/avatar_${selectedAvatar}.png`} />
-            <div className='text-center absolute bottom-0 left-0 right-0 bg-[rgba(0,0,0,0.8)] text-white rounded-b-lg sm:py-[2px] lg:py-1 font-bold text-xs lg:text-sm'>
-              Editar
-            </div>
+      {/*頭像*/}
+      <div
+        className='w-full flex justify-center cursor-pointer'
+        onClick={()=>setOpenSelectAvatarModal(true)}
+      >
+        <div className='relative border border-white rounded-lg'>
+          <img className='rounded-lg w-20 h-20 lg:w-[120px] lg:h-[120px]' alt='avatar' src={`assets/${environment.assetPrefix}/avatar_${selectedAvatar}.png`} />
+          <div className='text-center absolute bottom-0 left-0 right-0 bg-[rgba(0,0,0,0.8)] text-white rounded-b-lg sm:py-[2px] lg:py-1 font-bold text-xs lg:text-sm'>
+            Editar
           </div>
         </div>
-
-        <Title className='mt-10' title='Apelido' />
-        <input
-          className={tcx('w-full mt-1 text-sm sm:text-base lg:text-xl text-[#808080] p-[10px] rounded-lg bg-[#333333] border border-[#808080] focus:border-white focus:outline-none', ['text-red-500 border-red-500 focus:border-red-500', errorMessage])}
-          value={nicknameInput}
-          onChange={(e)=>{
-            nickNameValidator(e.target.value);
-            setNicknameInput(e.target.value);
-          }}
-        />
-        <div className='text-red-500 h-3 lg:h-5 text-xs'>{errorMessage}</div>
-
-        <Title title='Número de telefone' />
-        <Content content={phone} />
-
-        <Title className='lg:mt-5 mt-3' title='ID' />
-        <Content content={userInfo.user_id} />
-
-        <Title className='lg:mt-5 mt-3' title='Nível' />
-        <Content content={`VIP${vip_level}`} />
-
-        <Title className='lg:mt-5 mt-3' title='Verifique actualizações' />
-        <Content content='1.0.1' />
-
-        <button
-          className='w-full rounded-lg text-sm sm:text-base lg:text-xl lg:mt-10 mt-5 sm:mt-8 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] py-[10px] sm:py-3 lg:py-[14px]'
-          onClick={handleSave}
-        >
-          Salvar
-        </button>
-
       </div>
-    </div>
+
+      <Title className='mt-10' title='Apelido' />
+      <input
+        className={tcx('w-full mt-1 text-sm sm:text-base lg:text-xl text-[#808080] p-[10px] rounded-lg bg-[#333333] border border-[#808080] focus:border-white focus:outline-none', ['text-red-500 border-red-500 focus:border-red-500', errorMessage])}
+        value={nicknameInput}
+        onChange={(e)=>{
+          nickNameValidator(e.target.value);
+          setNicknameInput(e.target.value);
+        }}
+      />
+      <div className='text-red-500 h-3 lg:h-5 text-xs'>{errorMessage}</div>
+
+      <Title title='Número de telefone' />
+      <Content content={phone} />
+
+      <Title className='lg:mt-5 mt-3' title='ID' />
+      <Content content={userInfo.user_id} />
+
+      <Title className='lg:mt-5 mt-3' title='Nível' />
+      <Content content={`VIP${vip_level}`} />
+
+      <Title className='lg:mt-5 mt-3' title='Verifique actualizações' />
+      <Content content='1.0.1' />
+
+      <button
+        className='w-full rounded-lg text-sm sm:text-base lg:text-xl lg:mt-10 mt-5 sm:mt-8 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] py-[10px] sm:py-3 lg:py-[14px]'
+        onClick={handleSave}
+      >
+        Salvar
+      </button>
+    </PageContainer>
   )
 }

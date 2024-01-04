@@ -2,12 +2,12 @@ import { IVIPGradePageProps } from "../../../index";
 import VIPStatue from '../images/vip_statue.png'
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { ProgressBar } from "../../../../../components-bs/ProgressBar";
-import { useEffect, useRef, useState } from "react";
 import { VIPInfoTab } from "../components/VIPInfoTab";
 import { VIPButtonList } from "../components/VIPButtonList";
 import { VIP0Text } from "../components/VIP0Text";
 import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
 import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
+import { PageContainer } from "../../../../../components-bs/PageContainer";
 
 
 
@@ -24,7 +24,7 @@ export const MobileVIPGradePage = ({
   if(allLevelInfo.length === 0) return <div></div>
 
   return (
-    <div className='px-4 w-full flex flex-col items-centers'>
+    <PageContainer>
       <img src={VIPStatue} alt="statue" className='mt-4' />
 
       <div
@@ -86,6 +86,6 @@ export const MobileVIPGradePage = ({
       {/*VIP INFO TAB*/}
       <VIPInfoTab className='mt-3' signInDayConfig={signInDayConfig} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig} />
 
-    </div>
+    </PageContainer>
   )
 }

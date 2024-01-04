@@ -1,6 +1,5 @@
 import { IVIPGradePageProps } from "../../../index";
 import VIPStatue from '../images/vip_statue.png'
-import { useEffect, useRef, useState } from "react";
 import { VerticalVIPButtonList } from "../components/VerticalVIPButtonList";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { ProgressBar } from "../../../../../components-bs/ProgressBar";
@@ -8,6 +7,7 @@ import { VIP0Text } from "../components/VIP0Text";
 import { VIPInfoTab } from "../components/VIPInfoTab";
 import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
 import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
+import { PageContainer } from "../../../../../components-bs/PageContainer";
 
 
 
@@ -24,7 +24,7 @@ export const TabletVIPGradePage = ({
   if(allLevelInfo.length === 0) return <div></div>
 
   return (
-    <div className='px-8 w-full flex flex-col items-centers'>
+    <PageContainer>
       <img src={VIPStatue} alt="statue" className='mt-8' />
 
       {/*VIP 進度卡*/}
@@ -91,6 +91,6 @@ export const TabletVIPGradePage = ({
 
       {/*VIP INFO TAB*/}
       <VIPInfoTab className='mt-5' signInDayConfig={signInDayConfig} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig} />
-    </div>
+    </PageContainer>
   )
 }
