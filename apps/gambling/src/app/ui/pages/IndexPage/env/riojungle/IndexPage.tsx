@@ -207,7 +207,7 @@ export const IndexPage = ({
           },
         )}
       >
-        <div className={"flex flex-row justify-between items-center w-full"}>
+        <div className={"flex flex-row justify-between items-center w-full mb-4"}>
           <IndexTabs />
           {!isMobile && (
             <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]"
@@ -226,6 +226,8 @@ export const IndexPage = ({
               />
             </div>)}
         </div>
+        {/* 二級選項 */}
+        {subGameMenu()}
       </PageContainer>
       {
         recentGameList.length > 0 && (
@@ -261,8 +263,6 @@ export const IndexPage = ({
         "pt-[58px]": isFixedGameTypeTabs,
         })}
       >
-        {/* 二級選項 */}
-        {subGameMenu()}
          {/* 每個選項的渲染 */}
         {gameList()}
       </PageContainer>
