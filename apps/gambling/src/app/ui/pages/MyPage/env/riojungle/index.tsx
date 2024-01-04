@@ -46,7 +46,7 @@ export const MyPage = ({
   const flowPercent = flow / nextLevelFlow
 
   return (
-    <PageContainer className='bg-[#1A1A1A] pb-0'>
+    <PageContainer className='bg-[var(--grayscale-10)] pb-0'>
       <div className='relative w-full overflow-y-scroll text-white pb-10'>
         {/*通知Icon*/}
         <div
@@ -64,7 +64,7 @@ export const MyPage = ({
         <div className='flex flex-col items-center'>
           <div className='relative border rounded-lg border-white'>
             <Avatar className='rounded-lg w-20 h-20' />
-            <div className='absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[50%] text-white text-xs font-bold w-16 rounded-[10px] py-[2px] text-center bg-[#8547EB] border border-white'>LV{currentLevel}</div>
+            <div className='absolute bottom-0 left-[50%] translate-x-[-50%] translate-y-[50%] text-white text-xs font-bold w-16 rounded-[10px] py-[2px] text-center bg-[var(--primary-main)] border border-white'>LV{currentLevel}</div>
           </div>
           <div className='mt-[22px] text-sm font-medium text-white'>{user.nickname}</div>
           <div className='mt-2 flex gap-1 text-white text-sm'>
@@ -75,7 +75,7 @@ export const MyPage = ({
 
         {/*VIP 資訊*/}
         <div className='flex justify-between text-xs mt-5 items-end'>
-          <div className='font-medium text-[#10B98F] flex-1'>Valor total da recarga</div>
+          <div className='font-medium text-[var(--secondary-main)] flex-1'>Valor total da recarga</div>
           <div className='text-white'>R$ {formatLocaleMoney(vipScore / 100)}<span className='text-[#808080]'>/R$ {formatLocaleMoney(nextLevelScore/100)}</span></div>
         </div>
         <ProgressBar
@@ -84,7 +84,7 @@ export const MyPage = ({
           progressClassName='bg-[#808080]'
         />
         <div className='flex justify-between text-xs mt-5 items-end'>
-          <div className='font-medium text-[#10B98F] flex-1'>Número total de apostas</div>
+          <div className='font-medium text-[var(--secondary-main)] flex-1'>Número total de apostas</div>
           <div className='text-white'>R$ {formatLocaleMoney(flow / 100)}<span className='text-[#808080]'>/R$ {formatLocaleMoney(nextLevelFlow/100)}</span></div>
         </div>
         <ProgressBar
@@ -94,7 +94,7 @@ export const MyPage = ({
         />
 
         {/*帳戶資訊*/}
-        <div className='font-medium text-[#10B98F] text-xs mt-5'>Total Da Conta</div>
+        <div className='font-medium text-[var(--secondary-main)] text-xs mt-5'>Total Da Conta</div>
         <div className='mt-2 p-5 flex gap-5 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#4d4d4d] rounded-lg border border-[#4D4D4D]'>
           <div className='w-1/2 flex flex-col items-center text-center justify-between'>
             <div className='text-white text-sm font-medium'>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
@@ -128,7 +128,7 @@ export const MyPage = ({
             onClickToInvite();
           }}
         >
-          <div className='text-xs font-medium text-[#10B98F]'>Conta Promovida</div>
+          <div className='text-xs font-medium text-[var(--secondary-main)]'>Conta Promovida</div>
           <CaretRight color='#10B98F' />
         </div>
         <div className='mt-2 w-full rounded-lg border border-[#4d4d4d] shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#4d4d4d]'>
@@ -180,7 +180,7 @@ export const MyPage = ({
 
       </div>
 
-      <div className='sticky bottom-0 left-0 w-full h-[60px] bg-[#1A1A1A]'>
+      <div className='sticky bottom-0 left-0 w-full h-[60px] bg-[var(--grayscale-10)]'>
         <button
           className='absolute top-0 -translate-y-[50%] w-full py-[10px] text-white text-sm font-medium flex items-center justify-center gap-2 bg-[#10B98F] rounded-[20px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
           onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}

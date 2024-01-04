@@ -63,6 +63,7 @@ export type TTotalFavoriteLocalState = {
 }
 
 type ICoco777betIndexPage = {
+  subGameMenu: any;
   allGameList: any;
   label: any;
   activeTab: any;
@@ -77,6 +78,7 @@ type ICoco777betIndexPage = {
 }
 
 export const IndexPage = ({
+  subGameMenu,
   allGameList,
   label,
   activeTab,
@@ -199,13 +201,13 @@ export const IndexPage = ({
       <PageContainer
         className={cx(
           "z-[2]",
-          "py-2 bg-[#1A1A1A]",
+          "py-2 bg-[var(--grayscale-10)]",
           {
             "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },
         )}
       >
-        <div className={"flex flex-row justify-between items-center w-full"}>
+        <div className={"flex flex-row justify-between items-center w-full mb-4"}>
           <IndexTabs />
           {!isMobile && (
             <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]"
@@ -216,7 +218,7 @@ export const IndexPage = ({
                 pureContainer={true}
                 className={cx(
                   "p-2.5 text-sm rounded-lg h-[40px] flex items-center",
-                  "!border-[#4D4D4D] bg-[#1A1A1A]"
+                  "!border-[#4D4D4D] bg-[var(--grayscale-10)]"
                 )}
                 inputClassName={"text-sm placeholder:text-[#B3B3B3] placeholder:text-sm placeholder:items-center"}
                 placeholder={"Procurar"}
@@ -224,6 +226,8 @@ export const IndexPage = ({
               />
             </div>)}
         </div>
+        {/* 二級選項 */}
+        {subGameMenu()}
       </PageContainer>
       {
         recentGameList.length > 0 && (
@@ -259,6 +263,7 @@ export const IndexPage = ({
         "pt-[58px]": isFixedGameTypeTabs,
         })}
       >
+         {/* 每個選項的渲染 */}
         {gameList()}
       </PageContainer>
     </>

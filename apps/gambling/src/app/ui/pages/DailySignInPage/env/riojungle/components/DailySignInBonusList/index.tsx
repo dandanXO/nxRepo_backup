@@ -33,7 +33,7 @@ export const  DailySignInBonusList = ({
               <div
                 key={config.days}
                 className={tcx(
-                  'w-full rounded-lg flex flex-col gap-1 sm:gap-3 justify-center items-center h-[140px] sm:h-[180px] lg:h-[308px] bg-gradient-to-br from-[#8547EB] to-[#10B98F]',
+                  'w-full rounded-lg flex flex-col gap-1 sm:gap-3 justify-center items-center h-[140px] sm:h-[180px] lg:h-[308px] bg-gradient-to-br from-[var(--liner-main-from)] to-[var(--liner-main-to)]',
                   ['from-[#333333] to-[#333333]', checked]
                 )}
               >

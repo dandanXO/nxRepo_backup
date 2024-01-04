@@ -48,10 +48,10 @@ export const TelegramPage = (props: ITelegramPage) => {
         </div>
       </div>
 
-      <div className={cx({"w-full sticky pb-10 bottom-0 left-0 bg-[#1A1A1A]":isMobile})}>
+      <div className={cx({"w-full sticky pb-10 bottom-0 left-0 bg-[var(--grayscale-10)]":isMobile})}>
         <Button
           onClick={props.handleClickToTelegram}
-          className={cx("m-0 md:my-8 md:my-10 text-white text-sm md:text-base lg:text-xl bg-[#8547EB] py-3 w-full rounded-lg", {
+          className={cx("m-0 md:my-8 md:my-10 text-white text-sm md:text-base lg:text-xl bg-[var(--primary-main)] py-3 w-full rounded-lg", {
             '': isMobile
           })}
           text={'Junte-se'}

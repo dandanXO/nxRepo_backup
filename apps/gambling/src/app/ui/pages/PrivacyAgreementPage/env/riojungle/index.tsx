@@ -17,7 +17,7 @@ export const PrivacyAgreementPage = () => {
 
       <PageContainer className={cx(
         {
-          'fixed top-[56px] sm:top-[72px] left-[0] lg:left-[248px] right-0 sm:right-[20px] bg-[#1A1A1A]': showFixForIOSStickTab
+          'fixed top-[56px] sm:top-[72px] left-[0] lg:left-[248px] right-0 sm:right-[20px] bg-[var(--grayscale-10)]': showFixForIOSStickTab
         })}>
         <BackNavigation onClick={() => onClickToIndex()} />
       </PageContainer>

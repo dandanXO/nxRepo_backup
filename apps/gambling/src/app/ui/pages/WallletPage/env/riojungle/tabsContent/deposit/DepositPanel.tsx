@@ -52,7 +52,7 @@ export const DepositPanel = (props: IDepositPanelProps) => {
           })
         }
       </div>
-      <button onClick={onClickToNextDepositPage} className="mb-10 md:mb-16 lg:mb-20 py-3 lg:py-3.5 text-sm md:text-base lg:text-lg text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center w-full cursor-pointer  rounded-lg">
+      <button onClick={onClickToNextDepositPage} className="mb-10 md:mb-16 lg:mb-20 py-3 lg:py-3.5 text-sm md:text-base lg:text-lg text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center w-full cursor-pointer  rounded-lg">
         Depósito
       </button>
     </div>

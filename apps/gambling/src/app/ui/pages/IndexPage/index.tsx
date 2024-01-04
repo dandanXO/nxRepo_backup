@@ -4,6 +4,7 @@ import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
 import React, {useEffect, useState} from "react";
+import {environment} from "../../../../environments/environment";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import { gameSlice } from "../../../reduxStore/gameSlice";
@@ -16,6 +17,8 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useScrollToPartPageTemplate} from "../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
+import { DragScrollContainer } from "../../components/DragScrollContainer";
+import { SubTabItem } from "../../components-bs/TabItem/env/riojungle/TabItem";
 
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
 import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
@@ -33,6 +36,7 @@ export const IndexPage = () => {
   // const [activeTab, setActiveTab] = useState("Todos");
   // "Salão"
   const [activeTab, setActiveTab] = useState("Todos");
+  const [subGameactiveTab, setSubGameActiveTab] = useState("All");
   const { indexPagecurrentSelectLabel } = useSelector((state: any) => state.gameList);
   const [expandedBrand, setExpandedBrand] = useState('');
   const [searchInput, setSearchInput] = useState('');
@@ -109,34 +113,48 @@ export const IndexPage = () => {
 
   const renderTypeGameList=()=>{
     let list: { subGameType: string, games: { gameId: number }[] }[] = []
-
     if(indexPagecurrentSelectLabel === 'Favoritos') {
       const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
       list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] || [] }]
     } else {
       const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === indexPagecurrentSelectLabel)[0]?.data
+      console.log(data, 'dataa')
       list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
     }
-
-    return list?.map(({subGameType,games}: any, index: number) => {
-      return (
-        <GameTypeSectionList
-          key={index}
-          userFavorite={userFavorite}
-          onClickFavoriteGameItem={onClickFavoriteGameItem}
-          isLatestItem={list.length - 1 === index}
-          gameTypeName={subGameType}
-          data={games}
-          onClickExpand={() => {
-            setExpandedBrand(subGameType);
-            scrollToCarousel();
-          }}
-          isViewAll={['Favoritos'].includes(subGameType)}
-          expandedBrand={expandedBrand}
-          setExpandedBrand={setExpandedBrand}
-        />
-      )
-    })
+    if(subGameactiveTab!== 'All'){
+      // eslint-disable-next-line array-callback-return
+      const findedList = list.filter(item => {
+        if(item.subGameType === subGameactiveTab){
+          return item
+        }
+      })
+      list = findedList
+    }
+    return (
+      <div>
+        {
+          list?.map(({subGameType,games}: any, index: number) => {
+            return (
+              <GameTypeSectionList
+                key={index}
+                userFavorite={userFavorite}
+                onClickFavoriteGameItem={onClickFavoriteGameItem}
+                isLatestItem={list.length - 1 === index}
+                gameTypeName={subGameType}
+                data={games}
+                onClickExpand={() => {
+                  setExpandedBrand(subGameType);
+                  scrollToCarousel();
+                }}
+                isViewAll={['Favoritos'].includes(subGameType)}
+                expandedBrand={expandedBrand}
+                setExpandedBrand={setExpandedBrand}
+              />
+            )
+          })
+        }
+      </div>
+    )
   }
   const gameList = () => {
     if (searchInput !== '') {
@@ -156,7 +174,7 @@ export const IndexPage = () => {
         )
         : <></>
     } else {
-      return (indexPagecurrentSelectLabel === "Todos" || indexPagecurrentSelectLabel === "Salão") ? renderHotBrandGameList() : renderTypeGameList()
+      return (indexPagecurrentSelectLabel === "Todos" || indexPagecurrentSelectLabel === "Salão"  ) ? renderHotBrandGameList() : renderTypeGameList()
     }
   }
   const gameListOld = () => {
@@ -179,8 +197,41 @@ export const IndexPage = () => {
       return (activeTab === "Todos" || activeTab === "Salão") ? renderHotBrandGameList() : renderTypeGameListOld()
     }
   }
-
+  const subGameMenu = ()=>{
+    let subGameMenuList:string[] = []
+    const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === indexPagecurrentSelectLabel)[0]?.data
+      if(!data){
+        // 遊戲之外的東西不會有二級選項
+        return null
+      }
+      subGameMenuList = data.reduce((acc:string[], current:{[key: string]: string;})=> {
+        acc.push(current.subGameType)
+        return acc
+      } , [] as string[])
+    return (
+      <DragScrollContainer className="flex flex-row items-center rounded-[8px]">
+      <div className="bg-[#333333] flex flex-row rounded-[8px] p-2">
+        {
+          ["All", ...subGameMenuList].map((tab: string, index: number) => {
+            return (
+              <SubTabItem
+                active={subGameactiveTab === tab}
+                onClick={() => {
+                  setSubGameActiveTab(tab)
+                }}
+                name={tab}
+                imgUrl={`assets/${environment.assetPrefix}/shared/${tab.split('-')[0]}-logo.png`}
+              />
+            )
+          })
+        }
+      </div>
+    </DragScrollContainer>
+    )
+  }
   useEffect(() => {
+    // 第二層子遊戲選單 切換遊戲大類 必須重置回ＡＬＬ
+    setSubGameActiveTab('All')
     gameList();
   }, [indexPagecurrentSelectLabel])
 
@@ -200,7 +251,7 @@ export const IndexPage = () => {
         setActiveTab={setActiveTab}
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
-        gameList={gameList}
+        gameList={gameListOld}
         recentGameList={recentGameList}
       />
     ),
@@ -216,7 +267,7 @@ export const IndexPage = () => {
         setActiveTab={setActiveTab}
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
-        gameList={gameList}
+        gameList={gameListOld}
         recentGameList={recentGameList}
       />
     ),
@@ -231,6 +282,7 @@ export const IndexPage = () => {
         activeTab={indexPagecurrentSelectLabel}
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
+        subGameMenu={subGameMenu}
         gameList={gameList}
         recentGameList={recentGameList}
       />
@@ -247,7 +299,7 @@ export const IndexPage = () => {
       setActiveTab={setActiveTab}
       setViewType={setExpandedBrand}
       setSearchInput={setSearchInput}
-      gameList={gameList}
+      gameList={gameListOld}
       recentGameList={recentGameList}
     />
   ))

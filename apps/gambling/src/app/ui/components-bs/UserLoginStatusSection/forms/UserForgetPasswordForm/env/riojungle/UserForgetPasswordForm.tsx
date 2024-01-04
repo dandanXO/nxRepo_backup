@@ -72,8 +72,8 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
             <SendSMSCodeButton
               className={`
                 text-lg
-                px-5  rounded-r-lg 
-                bg-[#10B98F] text-[var(--white)] 
+                px-5  rounded-r-lg
+                bg-[var(--secondary-main)] text-[var(--white)]
                 -m-2.5 md:-my-2 md:-mx-2.5 lg:-m-2.5
                 shadow-[0px_-4px_4px_0px_rgba(0,0,0,0.25)_inset,0px_4px_4px_0px_rgba(255,255,255,0.25)_inset]
               `}
@@ -85,7 +85,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
           validation={captchaInput.isValidation}
           errorMessage={captchaInput.errorMessage}
           onChange={onChangeCaptchaInput}
-     
+
         />
       </div>
 

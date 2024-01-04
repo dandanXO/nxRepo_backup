@@ -24,13 +24,13 @@ export const selectInputStyleProps = (isMobile: boolean) => {
         },
         '&:focus': {
           ...baseStyle,
-          border: 'solid 2px #8547EB',
+          border: 'solid 2px var(--primary-main)',
 
         },
-        
-        border: states.isFocused ? 'solid 2px #8547EB' : 'solid 1px #808080',
 
-        
+        border: states.isFocused ? 'solid 2px var(--primary-main)' : 'solid 1px #808080',
+
+
       };
     },
     valueContainer: (style: any, state: any) => ({

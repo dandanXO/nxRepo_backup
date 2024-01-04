@@ -38,7 +38,7 @@ export const RiojungleMaintenanceModal = (props: IMaintenanceModal) => {
 
   return (
     <BaseModal>
-      <div className={cx("flex flex-col fixed bg-gradient-144 from-[#8547EB] to-[#10B98F] rounded-lg py-6", {
+      <div className={cx("flex flex-col fixed bg-gradient-144 from-[var(--liner-main-from)] to-[var(--liner-main-to)] rounded-lg py-6", {
         // NOTE: mt-[46px]:圖往上74px-24px(mb-6)
         "mt-[50px] px-6 w-[80%] lg:w-[778px] max-h-[calc(100%-120px)]": !isMobile,
         // NOTE: mt-[75px]:圖往上99px-24px(mb-6)

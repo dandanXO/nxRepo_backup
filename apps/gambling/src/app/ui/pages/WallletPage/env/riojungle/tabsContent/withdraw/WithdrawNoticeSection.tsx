@@ -10,7 +10,7 @@ export const WithdrawNoticeSection = (props: any) => {
   p-2 md:py-2 md:px-2.5 lg:py-3 lg:px-5
   mb-4 lg:mb-5
   text-sm md:text-base lg:text-xl
-  bg-[#333] text-[#B3B3B3] rounded-lg  
+  bg-[#333] text-[#B3B3B3] rounded-lg
   leading-5 md:leading-6 lg:leading-7
   `
   return (
@@ -25,7 +25,7 @@ export const WithdrawNoticeSection = (props: any) => {
           <span className={"text-[#B3B3B3]"}> R$ {withdrawLimitMax}</span>.
         </div>
         <div className="flex text-center mt-3 md:mt-0 md:ml-2.5 lg:ml-5 justify-center items-center">
-          <button className="text-white w-full md:w-auto py-2 px-8 md:py-1.5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] text-base md:text-lg rounded-[100px] font-normal" onClick={onClickToVIP}>Cheque</button>
+          <button className="text-white w-full md:w-auto py-2 px-8 md:py-1.5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] text-base md:text-lg rounded-[100px] font-normal" onClick={onClickToVIP}>Cheque</button>
         </div>
 
       </section>
@@ -49,8 +49,8 @@ export const WithdrawNoticeSection = (props: any) => {
 
       {/* <section className={sectionStyle}>
         Prezado cliente: Olá! Em resposta às exigências do Banco Central do Brasil e do recém-criado comitê de agências reguladoras relevantes no Brasil, a plataforma precisa concluir a troca de dados entre o Banco Central e as agências reguladoras relevantes das
-        <span className={"text-[#F59E0B]"}> {withdrawBegin}h </span> 
-        <span className={"text-[#F59E0B]"}>às {withdrawEnd}h </span>, horário brasileiro!Todos os nossos esforços são para garantir que a operação da plataforma esteja mais em conformidade com as leis e regulamentos brasileiros relevantes! Proteger a privacidade dos utilizadores e os direitos e interesses conexos. Obrigado pela sua compreensão. As retiradas serão normais durante outros períodos de tempo na plataforma.
+        <span className={"text-[var(--state-warn-main)]"}> {withdrawBegin}h </span>
+        <span className={"text-[var(--state-warn-main)]"}>às {withdrawEnd}h </span>, horário brasileiro!Todos os nossos esforços são para garantir que a operação da plataforma esteja mais em conformidade com as leis e regulamentos brasileiros relevantes! Proteger a privacidade dos utilizadores e os direitos e interesses conexos. Obrigado pela sua compreensão. As retiradas serão normais durante outros períodos de tempo na plataforma.
       </section> */}
     </div>
   )

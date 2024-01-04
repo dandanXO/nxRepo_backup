@@ -71,7 +71,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
 
         <section className={"flex flex-col"}>
           <button
-            className={"text-[var(--white)] text-right mb-3 ml-3 text-[#3B82F6]"}
+            className={"text-[var(--white)] text-right mb-3 ml-3 text-[var(--state-info-main)]"}
             onClick={() => {
               props.onSwitchToForgetPassword();
             }}

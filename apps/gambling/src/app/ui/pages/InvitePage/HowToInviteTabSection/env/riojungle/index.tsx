@@ -30,7 +30,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
     <div className="w-full flex flex-col justify-between w-full items-center">
       <button
         onClick={() => props.setPanelMode('daily')}
-        className=" leading-[28px] text-white mb-3 md:mb-4 lg:mb-10 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
+        className=" leading-[28px] text-white mb-3 md:mb-4 lg:mb-10 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] relative flex flex-row justify-center py-1.5 px-5 gap-2 cursor-pointer self-end rounded-[100px]"
       >
         Convidar conta
         <img
@@ -51,7 +51,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
           <div className="mb-5 md:mb-8 lg:mb-10 w-full text-center text-white text-sm md:text-base lg:text-xl font-bold leading-5 md:leading-6 lg:leading-7">{`Programa de recomendação exclusivo da plataforma ${environment.platformGroup}-${environment.platformName}, recomende aos amigos e ganhe comissões sem limite máximo! Esperamos sinceramente que mais jogadores se juntem a nós!`}</div>
 
-          {!isMobile && <div className="mb-5 pr-3 lg:pr-8 relative w-full bg-[linear-gradient(145deg,_#8547eb_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row gap-16 items-start rounded-lg flex-wrap">
+          {!isMobile && <div className="mb-5 pr-3 lg:pr-8 relative w-full bg-[linear-gradient(145deg,_var(--liner-main-from)_-7%,var(--liner-main-to)_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row gap-16 items-start rounded-lg flex-wrap">
             <div className='flex-1 flex flex-row flex-nowrap  justify-between'>
               <div className="flex flex-col mb-5 items-start flex-1 ">
                 <div className="break-all pl-[117px] pr-9 lg:pl-[196px] text-sm md:text-base lg:text-lg font-bold leading-[32px] text-[#4b80bd] bg-white flex flex-row whitespace-nowrap items-start py-2.5 rounded-tl-lg rounded-br-[100px] ">
@@ -64,7 +64,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
               <div className='self-center justify-start ml-1'>
                 <button
                   onClick={onClickToCopy}
-                  className="p-2 lg:py-3 lg:px-10 text-left text-base md:text-xl lg:text-3xl font-medium text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb]  rounded-[100px]"
+                  className="p-2 lg:py-3 lg:px-10 text-left text-base md:text-xl lg:text-3xl font-medium text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)]  rounded-[100px]"
                 >
                   Convide Amigos
                 </button>
@@ -85,7 +85,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
           }
           {
             isMobile && (
-              <div className="mb-5 bg-gradient-to-br from-[#8547eb]  to-[#10b98f] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col w-full items-start rounded-lg">
+              <div className="mb-5 bg-gradient-to-br from-[var(--liner-main-from)] to-[var(--liner-main-to)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col w-full items-start rounded-lg">
 
                 <div className="text-sm font-bold leading-5 text-[#4b80bd] bg-white flex flex-row justify-center py-1 w-full items-start rounded-tl-lg rounded-tr-lg">
                   Copie o link para seus amigos!
@@ -95,7 +95,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
                   <div className="text-base font-normal leading-6 text-white text-center w-full mb-2">
                   {props?.inviteUrl}
                   </div>
-                  <button className="text-base font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#8547eb] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
+                  <button className="text-base font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
                   >
                     Convide Amigos
                   </button>
@@ -106,8 +106,8 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
         </div>
 
-        <div className="mb-3 md:mb-5 flex flex-row w-full border rounded-lg border-solid border-[#333333] bg-[#1a1a1a]">
-          <div className="p-2 md:px-5 lg:py-3 text-sm lg:text-base text-center leading-5 lg:leading-6 text-[#f59e0b]">
+        <div className="mb-3 md:mb-5 flex flex-row w-full border rounded-lg border-solid border-[#333333] bg-[var(--grayscale-10)]">
+          <div className="p-2 md:px-5 lg:py-3 text-sm lg:text-base text-center leading-5 lg:leading-6 text-[var(--state-warn-main)]">
             <QuestionSection3 />
           </div>
         </div>

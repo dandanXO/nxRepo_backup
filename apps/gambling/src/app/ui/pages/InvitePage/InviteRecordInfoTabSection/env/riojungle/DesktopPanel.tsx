@@ -43,7 +43,7 @@ export const DesktopPanel = ({
         />
         <button
           onClick={() => navigate(PageOrModalPathEnum.InviteSettlementRecordPage)}
-          className="text-sm lg:text-lg leading-5 lg:leading-7 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#10b98f] relative flex flex-row justify-center py-2.5 lg:py-1.5 px-5 cursor-pointer rounded-[100px]"
+          className="text-sm lg:text-lg leading-5 lg:leading-7 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] relative flex flex-row justify-center py-2.5 lg:py-1.5 px-5 cursor-pointer rounded-[100px]"
         >
           Registro
         </button>
@@ -60,8 +60,8 @@ export const DesktopPanel = ({
             </div>
           </div>
           <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {totalInviteData?.dividendos !== undefined ? totalInviteData?.dividendos : "0.00"}</div>}
-            <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
+            {isProxy && <div className="text-[var(--state-info-main)]">Dividends:R$ {totalInviteData?.dividendos !== undefined ? totalInviteData?.dividendos : "0.00"}</div>}
+            <div className="text-[var(--state-warn-main)]">Atualize a cada 30 minutos</div>
           </div>
         </div>
 
@@ -82,8 +82,8 @@ export const DesktopPanel = ({
             </div>
           </div>
           <div className={"text-sm lg:text-base text-center lg:text-right mt-2 lg:mt-0 font-bold"}>
-            {isProxy && <div className="text-[#3B82F6]">Dividends:R$ {dailyData !== undefined ? dailyData[0]?.dividendos : "0.00"}</div>}
-            <div className="text-[#F59E0B]">Atualize a cada 30 minutos</div>
+            {isProxy && <div className="text-[var(--state-info-main)]">Dividends:R$ {dailyData !== undefined ? dailyData[0]?.dividendos : "0.00"}</div>}
+            <div className="text-[var(--state-warn-main)]">Atualize a cada 30 minutos</div>
           </div>
         </div>
 

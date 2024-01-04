@@ -173,7 +173,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         </button>
         <a className={"text-white font-thin text-md"}>
           <span className={"text-[var(--text-tertiary)] font-medium mr-1 my-2 text-sm"} onClick={toggleCheck} >Eu concordo</span>
-          <span className={"text-[#3B82F6] font-medium break-all text-sm"} onClick={() => {
+          <span className={"text-[var(--state-info-main)] font-medium break-all text-sm"} onClick={() => {
             onClickToPrivacyAgreement();
           }}>Condições, política de privacidade</span>
         </a>

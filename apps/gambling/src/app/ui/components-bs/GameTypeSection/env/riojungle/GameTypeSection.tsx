@@ -47,10 +47,10 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
           // setExpandedBrand={props.setExpandedBrand}
           // isViewAll={props.isViewAll}
           titleClassName={' text-white text-base md:text-lg lg:text-2xl py-2'}
-          buttonClassName={`bg-[#10B98F] items-center text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]  relative flex flex-row justify-center cursor-pointer  rounded-[100px]`}
+          buttonClassName={`bg-[var(--secondary-main)] items-center text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]  relative flex flex-row justify-center cursor-pointer  rounded-[100px]`}
           seeMoreText={
             <div className="flex items-center justify-center text-xs md:text-sm lg:text-base p-3 md:py-2.5 md:px-4">
-              Ver tudo
+              Ver tudos
               <img src={`assets/${environment.assetPrefix}/ArrowRight.png`} className="ml-1 w-[16px]" />
             </div>
           }
@@ -85,7 +85,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
         <div className="flex-1 mt-20 justify-center flex">
           <Button
             onClick={loadMore}
-            className="bg-[#8547EB] items-center py-3 px-4 rounded"
+            className="bg-[var(--primary-main)] items-center py-3 px-4 rounded"
             text={'Ver Mais'}
           />
         </div>
