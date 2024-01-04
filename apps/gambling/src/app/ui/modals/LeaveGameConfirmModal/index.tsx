@@ -2,6 +2,7 @@ import React from "react";
 import { LeaveGameConfirmModal as CocoLeaveGameConfirmModal } from './env/coco'
 import { LeaveGameConfirmModal as RioLeaveGameConfirmModal } from './env/riojungle'
 import { renderByPlatform } from "../../utils/renderByPlatform";
+import {BaseModal} from "../BaseModal";
 
 export interface ILeaveGameConfirmModalProps {
   onConfirm: (addFavorite: boolean) => void
@@ -14,7 +15,7 @@ export const LeaveGameConfirmModal = ({
 }: ILeaveGameConfirmModalProps) => {
 
   return (
-    <div className='z-[1005] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center w-full h-full bg-[rgba(0,0,0,0.50)]'>
+    <BaseModal>
       {
         renderByPlatform({
           "coco777bet": (
@@ -36,6 +37,6 @@ export const LeaveGameConfirmModal = ({
           />
         ))
       }
-    </div>
+    </BaseModal>
   )
 }

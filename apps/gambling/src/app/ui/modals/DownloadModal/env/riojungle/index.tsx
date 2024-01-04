@@ -7,6 +7,7 @@ import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 import cx from "classnames";
 import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
+import {BaseModal} from "../../../BaseModal";
 
 export type IInitialChargeModal = {
   close: () => void;
@@ -49,11 +50,12 @@ export const RiojungleDownloadModal = (props: IInitialChargeModal) => {
     onClickToOpenDownload();
   }
 
-
   return (
-    <div className={"z-[1002] fixed left-0 top-0 right-0 bottom-0 flex flex-col justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"} onClick={(event: any) => {
-      props.close();
-    }}>
+    <BaseModal
+      onClose={(event: any) => {
+        props.close();
+      }}
+    >
 
       <Container
         className={cx(
@@ -114,11 +116,8 @@ export const RiojungleDownloadModal = (props: IInitialChargeModal) => {
           </div>
 
         </section>
-
-
-
       </Container>
-    </div>
+    </BaseModal>
   )
 }
 

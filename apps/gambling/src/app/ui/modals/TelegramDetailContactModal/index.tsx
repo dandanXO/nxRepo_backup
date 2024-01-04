@@ -4,6 +4,7 @@ import { AppLocalStorage } from "../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { CloseICON } from "../../components-bs/Icons/CloseICON";
 import cx from "classnames";
+import {BaseModal} from "../BaseModal";
 
 interface ITelegramMobileModal {
   onClose: () => void;
@@ -27,9 +28,8 @@ export const TelegramDetailContactModal = (props: ITelegramMobileModal) => {
   }
 
   return (
-    <div className={cx("z-[1005] w-full h-full fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center bg-[rgba(0,0,0,0.65)]",
-    )}
-      onClick={(event: any) => {
+    <BaseModal
+      onClose={(event: any) => {
         props.onClose();
       }}>
       <div className={cx(`
@@ -67,6 +67,6 @@ export const TelegramDetailContactModal = (props: ITelegramMobileModal) => {
 
       </div>
 
-    </div>
+    </BaseModal>
   )
 }
