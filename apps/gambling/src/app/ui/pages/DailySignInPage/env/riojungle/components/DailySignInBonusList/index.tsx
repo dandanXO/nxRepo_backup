@@ -27,7 +27,7 @@ export const  DailySignInBonusList = ({
         dayConfigs.map(
           (config, index: number) => {
 
-            const checked = currentVIP === selectedVIP && index + 1 <= signInTotalDays
+            const checked = currentVIP === selectedVIP && index + 1 <= signInTotalDays || selectedVIP < currentVIP
 
             return (
               <div

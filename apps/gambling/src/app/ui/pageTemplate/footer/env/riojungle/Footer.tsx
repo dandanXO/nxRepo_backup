@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import {FooterLogo} from "../../../../components-bs/Logos/FooterLogo";
 import {renderByRWD} from "../../../../utils/renderByRWD";
 import {IFooter} from "../../types/IFooter";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 
 
 
@@ -26,6 +27,8 @@ export const Footer = (props: IFooter) => {
   const [footerTextExpand, setFooterTextExpand] = useState(false)
 
   const device = useBreakpoint();
+
+  const { onClickToCompanyProfile } = usePageNavigate();
 
   return (
     <div>
@@ -102,7 +105,7 @@ export const Footer = (props: IFooter) => {
                 </div>
 
                 <div className='flex mt-3 gap-5 items-center'>
-                  <img alt='licensedBy' className='w-10' src={`assets/shared/footer-licensedBy.png`}/>
+                  <img alt='licensedBy' className='w-10' src={`assets/shared/footer-licensedBy.png`} onClick={onClickToCompanyProfile}/>
                   <div className='text-xs font-medium text-[#BEBEBE]'>
                     {environment.platformName} is operated by Block balancing A.C. (Commercial register of Curaçao no. 158191, Emancipatie Boulevard Dominico F. "Don" Martina 52, Curaçao) under the main gaming license #5517/JAZ.
                   </div>
@@ -186,7 +189,7 @@ export const Footer = (props: IFooter) => {
             </div>
 
             <div className='flex mt-5 gap-5'>
-              <img alt='licensedBy' className='w-10' src={`assets/shared/footer-licensedBy.png`}/>
+              <img alt='licensedBy' className='w-10' src={`assets/shared/footer-licensedBy.png`} onClick={onClickToCompanyProfile}/>
               <div className='text-sm font-medium text-[#BEBEBE]'>
                 {environment.platformName} is operated by Block balancing A.C. (Commercial register of Curaçao no. 158191, Emancipatie Boulevard Dominico F. "Don" Martina 52, Curaçao) under the main gaming license #5517/JAZ.
               </div>
@@ -270,7 +273,7 @@ export const Footer = (props: IFooter) => {
                 </div>
 
                 <div className='flex mt-5 gap-5'>
-                  <img alt='licensedBy' className='w-10' src={`assets/shared/footer-licensedBy.png`}/>
+                  <img alt='licensedBy' className='w-10 cursor-pointer' src={`assets/shared/footer-licensedBy.png`} onClick={onClickToCompanyProfile}/>
                   <div className='text-sm font-medium text-[#BEBEBE]'>
                     {environment.platformName} is operated by Block balancing A.C. (Commercial register of Curaçao no. 158191, Emancipatie Boulevard Dominico F. "Don" Martina 52, Curaçao) under the main gaming license #5517/JAZ.
                   </div>
