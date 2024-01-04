@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import {ErrorBoundary} from "react-error-boundary";
 
@@ -19,6 +19,7 @@ import {environment} from "../../../../../environments/environment";
 
 
 import {TShowToolboxConfig} from "../../base/types";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 
 
 type IStyledPage = {
@@ -134,6 +135,15 @@ export const PageTemplate = ({
                                          isUILoading,
   showToolboxConfig
                                        }: ICoco777betIndexPageTemplate) => {
+
+  useEffect(() => {
+    if(!isMobile) {
+      setOpenMenuDrawer(true)
+    } else {
+      setOpenMenuDrawer(false);
+    }
+  }, [isMobile]);
+
   return (
       <StyledPage isCurrentPageCompanyProfile={false}>
 

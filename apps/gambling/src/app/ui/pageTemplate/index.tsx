@@ -39,39 +39,17 @@ export const PageTemplate = (props: IPage) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const [openMenuDrawer, setOpenMenuDrawer] = useState(false);
   const {openMenuDrawer, openUserInfoStatusPopover} = useSelector((state: RootState) => state.ui);
   const setOpenMenuDrawer = (show: boolean) => {
     dispatch(uiSlice.actions.setOpenMenuDrawer(show));
   }
   const {isMobile, isDesktop} = useBreakpoint();
 
-  useEffect(() => {
-    if(!isMobile) {
-      setOpenMenuDrawer(true)
-    } else {
-      setOpenMenuDrawer(false);
-    }
-  }, [isMobile]);
-
-  // NOTE: UserLoginStatusModal
-  const [showUserLoginStatusMobileModal, setShowUserLoginStatusMobileModal] = useState(false);
-
   // useEffect(() => {
   //   if(!isMobile) {
-  //     setShowUserLoginStatusMobileModal(false)
+  //     setOpenMenuDrawer(true)
   //   } else {
-  //     setShowUserLoginStatusMobileModal(true);
-  //   }
-  // }, [isMobile]);
-
-  // NOTE: LoginStatus
-  const [openNonMobileUserLoginStatusDrawer, setOpenNonMobileUserLoginStatusDrawer] = useState(false);
-  // useEffect(() => {
-  //   if(!isMobile) {
-  //     setOpenNonMobileUserLoginStatusDrawer(false)
-  //   } else {
-  //     setOpenNonMobileUserLoginStatusDrawer(true);
+  //     setOpenMenuDrawer(false);
   //   }
   // }, [isMobile]);
 
@@ -88,10 +66,6 @@ export const PageTemplate = (props: IPage) => {
   }
 
   // NOTE: isLogin
-  // const {user: { isUserLogin }} = usePageTemplatePresenter();
-  // const { isUserLogin} = useContext(AppContext);
-  // const [isLogin, setIsLogin] = useState(isUserLogin);
-
   const isLogin = useSelector((state: RootState) => state.app.isLogin);
   const setIsLogin = (login: boolean) => {
     dispatch(appSlice.actions.setIsLogin(login))
@@ -112,14 +86,6 @@ export const PageTemplate = (props: IPage) => {
   }, [openUserInfoStatusPopover])
 
   const isUILoading = useSelector((state: RootState) => state.app.isUILoading);
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false)
-  //   }, 2000)
-  //   return () => {
-  //     clearTimeout(timer);
-  //   }
-  // },[])
 
   const { isShowMobileLogoutModal , isShowTelegramModal, isShowDepositModal, isShowInviteBonusModal ,isShowMaintenanceModal , } = useSelector((state: RootState) => state.app)
 
@@ -127,11 +93,10 @@ export const PageTemplate = (props: IPage) => {
   const [openDesktopNotificationDrawer, setOpenDesktopNotificationDrawer] = useState(false);
 
   // NOTE: InitialChargeModal
-  // const [openInitailChargeModal, setOpenInitailChargeModal] = useState(isLogin);
-
   const setOpenInitailChargeModal = (show: boolean) => {
     dispatch(appSlice.actions.setIsShowInviteBonusModal(show))
   }
+  const location = useLocation();
 
   const {
     isShowMobileHeader,
@@ -170,8 +135,6 @@ export const PageTemplate = (props: IPage) => {
 
 
   // NOTE: LogoutPopover
-  // const [openLogoutPopover, setOpenLogoutPopover] = useState(false);
-
   const setOpenLogoutPopover = (show: boolean) => {
     dispatch(appSlice.actions.showMobileLogoutModal(show))
   }
@@ -192,7 +155,6 @@ export const PageTemplate = (props: IPage) => {
     });
   };
 
-
   const {
     onClickToWallet,
     onClickToOpenTelegramService,
@@ -200,7 +162,6 @@ export const PageTemplate = (props: IPage) => {
     onClickToOpenTelegramGroup,
   } = usePageNavigate();
 
-  const location = useLocation();
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
 
 
@@ -210,23 +171,9 @@ export const PageTemplate = (props: IPage) => {
       // pulling and displaying local storage data
       console.log("debug")
     }
-
     window.addEventListener('storage', handleStorage)
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
-
-
-  // console.log("debug.02.header.isShowMobileHeader: ", isShowMobileTabBar)
-  // console.log("debug.02.header.isShowTabletHeader: ", isShowTabletHeader)
-  // console.log("debug.02.header.isShowDesktopHeader: ", isShowDesktopHeader)
-  //
-  // console.log("debug.02.header.isShowMobileFooter: ", isShowMobileFooter)
-  // console.log("debug.02.header.isShowTabletFooter: ", isShowTabletFooter)
-  // console.log("debug.02.header.isShowDesktopFooter: ", isShowDesktopFooter)
-  //
-  // console.log("debug.02.header.isShowMobileTabBar: ", isShowMobileTabBar)
-  // console.log("debug.02.header.isShowTabletTabBar: ", isShowTabletTabBar)
-  // console.log("debug.02.header.isShowDesktopTabBar: ", isShowDesktopTabBar)
 
   return (
     <>

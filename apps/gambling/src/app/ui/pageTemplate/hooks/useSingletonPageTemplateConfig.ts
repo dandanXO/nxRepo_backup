@@ -5,6 +5,7 @@ import {RootState} from "../../../reduxStore";
 import {useEffect, useState} from "react";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {uiSlice} from "../../../reduxStore/uiSlice";
+import {useLocation} from "react-router";
 
 type IDevices = {
   mobile: boolean;
@@ -28,6 +29,7 @@ export type IUseSingletonPageTemplateConfig = {
   menuDrawer: IDevices;
 }
 export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateConfig) => {
+  // console.log("useSingletonPageTemplateConfig.props:", props);
   const {isMobile, isDesktop, isTablet} = useBreakpoint();
   const devices = useBreakpoint();
   // console.log("useSingletonPageTemplateConfig.devices", devices);
@@ -59,62 +61,53 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
 
   //NOTICE: MenuDrawer
   const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
-  // const isShowDynamicMenuDrawerFlag = isShowStaticMenuDrawer && openMenuDrawer;
-  // const isShowMobileDynamicMenuDrawerFlag = isShowMobileMenuDrawer && openMenuDrawer;
-  // const isShowTabletDynamicMenuDrawerFlag = isShowTabletMenuDrawer && openMenuDrawer;
-  // const isShowDesktopDynamicMenuDrawerFlag = isShowDesktopMenuDrawer && openMenuDrawer;
+
   const isShowMobileDynamicMenuDrawerFlag = openMenuDrawer;
   const isShowTabletDynamicMenuDrawerFlag = openMenuDrawer;
   const isShowDesktopDynamicMenuDrawerFlag = openMenuDrawer;
 
-  // console.log("useSingletonPageTemplateConfig.isShowMobileDynamicMenuDrawerFlag", isShowMobileDynamicMenuDrawerFlag);
-  // console.log("useSingletonPageTemplateConfig.isShowTabletDynamicMenuDrawerFlag", isShowTabletDynamicMenuDrawerFlag);
-  // console.log("useSingletonPageTemplateConfig.isShowDesktopDynamicMenuDrawerFlag", isShowDesktopDynamicMenuDrawerFlag);
-
-
   const dispatch = useDispatch();
   const [preDevice, setPreDevice] = useState<"mobile" | "tablet" | "desktop">()
 
+  const location = useLocation();
+  const [preLocation, setPrelocation] = useState(location.pathname);
+
   useEffect(() => {
-
-    if(preDevice !== "mobile" && isMobile) {
-      dispatch(uiSlice.actions.setOpenMenuDrawer(isShowMobileMenuDrawer));
+    if((preDevice !== "mobile" || location.pathname !== preLocation) && isMobile) {
+      if(isShowMobileMenuDrawer) {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+      } else {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowMobileMenuDrawer));
+      }
     }
-
-    if(preDevice !== "tablet" && isTablet) {
-      dispatch(uiSlice.actions.setOpenMenuDrawer(isShowTabletMenuDrawer));
+    if((preDevice !== "tablet" || location.pathname !== preLocation) && isTablet) {
+      if(isShowTabletMenuDrawer) {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+      } else {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowTabletMenuDrawer));
+      }
     }
-
-    if(preDevice !== "desktop" && isDesktop) {
-      dispatch(uiSlice.actions.setOpenMenuDrawer(isShowDesktopMenuDrawer));
+    if((preDevice !== "desktop" || location.pathname !== preLocation)&& isDesktop) {
+      if(isShowDesktopMenuDrawer) {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(true));
+      } else {
+        dispatch(uiSlice.actions.setOpenMenuDrawer(isShowDesktopMenuDrawer));
+      }
     }
-
     if(isMobile) {
-      // if(isShowMobileMenuDrawer) {
-      //   dispatch(uiSlice.actions.setOpenMenuDrawer(true));
-      // }
       setPreDevice("mobile");
     }
     if(isTablet) {
-      // if(isShowTabletMenuDrawer) {
-      //   dispatch(uiSlice.actions.setOpenMenuDrawer(true));
-      // }
       setPreDevice("tablet");
     }
     if(isDesktop) {
-      // if(isShowDesktopMenuDrawer) {
-      //   dispatch(uiSlice.actions.setOpenMenuDrawer(true));
-      // }
       setPreDevice("desktop");
     }
+    setPrelocation(location.pathname)
 
-  }, [isMobile, isTablet, isDesktop, isShowMobileDynamicMenuDrawerFlag, isShowTabletDynamicMenuDrawerFlag, isShowDesktopDynamicMenuDrawerFlag])
+  }, [location.pathname, openMenuDrawer, isMobile, isTablet, isDesktop, isShowMobileMenuDrawer, isShowTabletMenuDrawer, isShowDesktopMenuDrawer])
 
-  // NOTICE: refactor me
-  const isU2 = environment.assetPrefix === "riojungle777bet";
-  const isPlatformShowTabBarFlag = isU2 && (isMobile || isTablet);
-
-  return {
+  const output = {
     // NOTE: Header
     isShowMobileHeader: isShowMobileHeader && isMobile,
     isShowTabletHeader: isShowTabletHeader && isTablet,
@@ -136,11 +129,13 @@ export const useSingletonPageTemplateConfig = (props: IUseSingletonPageTemplateC
     desktopOverChildren: props.menuDrawer.desktopOverChildren === undefined ? true : props.menuDrawer.desktopOverChildren,
 
     // NOTE: TabBar
-    isShowTabbar: isShowTabbar && isPlatformShowTabBarFlag,
+    isShowTabbar: isShowTabbar,
 
     isShowMobileTabBar: isShowMobileTabBar && isMobile,
     isShowTabletTabBar: isShowTabletTabBar && isTablet,
     isShowDesktopTabBar: isShowDesktopTabBar && isDesktop,
-
   }
+
+  // console.log("output", output);
+  return output;
 }

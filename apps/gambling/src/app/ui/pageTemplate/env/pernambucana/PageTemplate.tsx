@@ -9,7 +9,7 @@ import {Footer} from "../../footer/env/coco/Footer";
 import {TabBar} from "../../tabBar/env/coco";
 import {Toolbox} from "../../Toolbox/env/coco";
 import {ThreeDots} from "react-loading-icons";
-import React from "react";
+import React, {useEffect} from "react";
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
@@ -19,6 +19,7 @@ import {Header} from "../../header/env/pernambucana/Header";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
 
 import {TShowToolboxConfig} from "../../base/types";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -135,6 +136,14 @@ export const PageTemplate = ({
                                                  isUILoading,
 showToolboxConfig
 }: IProps) => {
+
+  useEffect(() => {
+    if(!isMobile) {
+      setOpenMenuDrawer(true)
+    } else {
+      setOpenMenuDrawer(false);
+    }
+  }, [isMobile]);
 
   return (
     <StyledPage
