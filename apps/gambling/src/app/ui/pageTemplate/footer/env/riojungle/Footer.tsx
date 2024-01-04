@@ -109,7 +109,7 @@ export const Footer = (props: IFooter) => {
                 </div>
 
                 <div className='mt-3 text-[#B3B3B3] text-xs w-full text-center pb-10'>
-                  @ 2023 {environment.platformName} All rights
+                  @ 2023 {window.location.host} All rights
                 </div>
 
               </div>
@@ -193,7 +193,7 @@ export const Footer = (props: IFooter) => {
             </div>
 
             <div className='mt-5 text-[#B3B3B3] text-xs w-full text-center pb-10'>
-              @ 2023 {environment.platformName} All rights
+              @ 2023 {window.location.host} All rights
             </div>
 
           </div>
@@ -277,7 +277,7 @@ export const Footer = (props: IFooter) => {
                 </div>
 
                 <div className='mt-5 text-[#B3B3B3] text-xs w-full text-center pb-10'>
-                  @ 2023 {environment.platformName} All rights
+                  @ 2023 {window.location.host} All rights
                 </div>
 
               </div>

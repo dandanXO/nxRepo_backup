@@ -92,7 +92,7 @@ export const AppRouter = () => {
                 desktop: true,
                 desktopOverChildren: false,
               }}
-              showToolboxConfig={{mobile: { customerService: true }}}
+              showToolboxConfig={{mobile: { customerService: true, download: true }}}
             >
               <InvitePage/>
             </PageTemplate>
@@ -233,7 +233,7 @@ export const AppRouter = () => {
                 desktop: true,
                 desktopOverChildren: false,
               }}
-              showToolboxConfig={{mobile:{ customerService: true }}}
+              showToolboxConfig={{mobile:{ customerService: true, download: true }}}
             >
               <VIPGradePage />
             </PageTemplate>
@@ -599,7 +599,7 @@ export const AppRouter = () => {
                 desktop: true,
                 desktopOverChildren: false,
               }}
-              showToolboxConfig={{ mobile: { customerService: true }}}
+              showToolboxConfig={{ mobile: { customerService: true, download: true }}}
             >
               <MyPage/>
             </PageTemplate>

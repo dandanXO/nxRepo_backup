@@ -214,7 +214,7 @@ export const PageTemplate = ({
       )}
 
       {showToolboxConfig !== false && (
-        <div className={cx(ToolboxZIndex, "fixed right-[16px] bottom-[400px]")}>
+        <div className={cx(ToolboxZIndex, "fixed right-[16px] bottom-[160px]")}>
           <Toolbox
             className={""}
             showToolboxConfig={showToolboxConfig}
