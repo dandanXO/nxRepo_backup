@@ -2,7 +2,7 @@ import cx from "classnames";
 import {DownOutlined, QuestionCircleFilled, UpOutlined} from "@ant-design/icons";
 import styled from "styled-components";
 import {environment} from "../../../../../../environments/environment";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 
 
 const StyledTotalSectionContainer = styled.div`

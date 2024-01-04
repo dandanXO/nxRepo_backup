@@ -11,7 +11,7 @@ import { TabItem } from "../../../../../components-bs/TabItem/env/riojungle/TabI
 import { BackNavigation } from "../../../../../components-bs/BackNavigation/BackNavigation";
 import { IPanelMode } from "../../..";
 import { PageOrModalPathEnum } from "apps/gambling/src/app/ui/PageOrModalPathEnum";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 
 export const DesktopPanel = ({
   isProxy,

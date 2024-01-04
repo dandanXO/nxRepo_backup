@@ -3,7 +3,7 @@ import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTip
 import { environment } from "apps/gambling/src/environments/environment";
 import { Table } from "apps/gambling/src/app/ui/components-bs/Table";
 import { formatLocaleMoney } from "apps/gambling/src/app/ui/utils/format";
-import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 
 interface IDailyType {
   type: string;

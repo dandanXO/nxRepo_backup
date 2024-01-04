@@ -4,7 +4,7 @@ import licenseImage from "./bg_license.svg";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
 import React from "react";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import styled from "styled-components";
 
 type IItem = {

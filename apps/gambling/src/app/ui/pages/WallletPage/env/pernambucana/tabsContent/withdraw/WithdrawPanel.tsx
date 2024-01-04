@@ -1,6 +1,6 @@
 import Select from 'react-select';
 
-import useBreakpoint from "../../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import {Input} from "../../../../../../components-bs/Inputs/Input";
 import {tcx} from "../../../../../../utils/tcx";
 import {MobileInput} from "../../../../../../components-bs/Inputs/MobileInput";

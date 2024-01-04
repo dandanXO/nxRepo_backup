@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { environment } from "../../../../environments/environment";
 import { tcx } from "../../utils/tcx";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { renderByPlatform } from "../../utils/renderByPlatform";
 import { PlayButton as PPPlayButton } from "../GameTypeSection/env/pernambucana/PlayButton";
 import { PlayButton as WPlayButton } from "../GameTypeSection/env/wild/PlayButton";

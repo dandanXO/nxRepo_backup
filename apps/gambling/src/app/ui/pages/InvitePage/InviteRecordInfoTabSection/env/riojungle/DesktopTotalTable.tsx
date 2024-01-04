@@ -1,7 +1,7 @@
 import { IconTooltip } from "apps/gambling/src/app/ui/components/Tooltips/IconTooltip";
 import { QuestionTipsIcon } from "../../../../../components-bs/Icons/QuestionTipsIcon";
 import { ITotal } from "../..";
-import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {
 

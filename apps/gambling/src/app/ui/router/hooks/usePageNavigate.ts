@@ -1,14 +1,14 @@
 import {useLocation, useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../reduxStore";
-import {appSlice} from "../../reduxStore/appSlice";
-import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
-import { GameItem } from "../components-bs/GameTypeSection";
-import { AppLocalStorage } from "../../persistant/localstorage";
-import { AppLocalStorageKey } from "../../persistant/AppLocalStorageKey";
-import useBreakpoint from "./useBreakpoint";
-import { uiSlice } from "../../reduxStore/uiSlice";
-import { IPanelType } from "../pages/WallletPage";
+import {RootState} from "../../../reduxStore";
+import {appSlice} from "../../../reduxStore/appSlice";
+import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
+import { GameItem } from "../../components-bs/GameTypeSection";
+import { AppLocalStorage } from "../../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
+import { uiSlice } from "../../../reduxStore/uiSlice";
+import { IPanelType } from "../../pages/WallletPage";
 
 
 export interface IQueryStringProps{

@@ -1,4 +1,4 @@
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "./useBreakpoint";
 import {environment} from "../../../../environments/environment";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";

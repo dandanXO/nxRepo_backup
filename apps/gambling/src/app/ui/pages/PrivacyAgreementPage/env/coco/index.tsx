@@ -1,4 +1,4 @@
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { useNavigate } from "react-router";
 import { tcx } from "../../../../utils/tcx";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";

@@ -1,7 +1,7 @@
 import {useLocation} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import {MobileMenuLink} from "../../components/MobileMenuLink";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";

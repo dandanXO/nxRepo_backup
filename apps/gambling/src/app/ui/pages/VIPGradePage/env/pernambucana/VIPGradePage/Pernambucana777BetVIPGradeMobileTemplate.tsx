@@ -15,7 +15,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../../../../reduxStore";
 import {environment} from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
-import { usePageNavigate } from 'apps/gambling/src/app/ui/hooks/usePageNavigate';
+import { usePageNavigate } from '../../../../../router/hooks/usePageNavigate';
 
 export const LevelListBottomBr = styled.div`
   height: 1rem;

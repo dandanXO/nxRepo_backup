@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import cx from 'classnames';
 import {useDispatch, useSelector} from "react-redux";
-import { usePageNavigate } from "../../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../../router/hooks/usePageNavigate";
 import {RootState} from "../../../../../../reduxStore";
 
 const MenuItem = (props: {

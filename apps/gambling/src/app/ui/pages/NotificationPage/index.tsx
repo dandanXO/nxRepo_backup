@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 
 import {useAllowLoginRouterRules} from "../../router/hooks/useAllowLoginRouterRules";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
+import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 
 import { NotificationPage as CocoNotificationPage } from './env/coco'
 import { NotificationPage as RioNotificationPage } from './env/riojungle'

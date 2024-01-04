@@ -3,7 +3,7 @@ import {DownOutlined, UpOutlined} from "@ant-design/icons";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
 import React, {useState} from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
 import {FooterLogo} from "../../../../components-bs/Logos/FooterLogo";

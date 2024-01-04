@@ -3,7 +3,7 @@ import { environment } from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
 import { CloseICON } from "../../../../components-bs/Icons/CloseICON";
 import React from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import { IDepositAdvertisementModalProps } from "../../index";

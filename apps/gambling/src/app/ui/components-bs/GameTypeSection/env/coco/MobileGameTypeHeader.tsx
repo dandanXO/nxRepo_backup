@@ -2,8 +2,8 @@ import { Dispatch, SetStateAction } from "react";
 import { environment } from "../../../../../../environments/environment";
 import cx from 'classnames';
 import {LeftOutlined} from "@ant-design/icons";
-import {useScrollToCarousel} from "../../../../hooks/useScrollToCarousel";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import {useScrollToPartPageTemplate} from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 
 export const MobileGameTypeHeader = (props: {
   gameTypeName: string;
@@ -19,7 +19,7 @@ export const MobileGameTypeHeader = (props: {
 }) => {
   const { containerClassName = '', titleClassName = '', showIcon = true, textClassName = '', seeMoreText = '' } = props;
   // console.log('mobileGameTypeHeaderProps', props)
-  const {scrollToCarousel} = useScrollToCarousel();
+  const {scrollToCarousel} = useScrollToPartPageTemplate();
   const {isMobile} = useBreakpoint();
   return (
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>

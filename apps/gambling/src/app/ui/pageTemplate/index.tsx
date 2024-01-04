@@ -4,7 +4,7 @@ import {notification} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router";
 
-import useBreakpoint from "../hooks/useBreakpoint";
+import useBreakpoint from "./hooks/useBreakpoint";
 import {useAutoUpdateBalance} from "../hooks/useAutoUpdateBalance";
 
 import {RootState} from "../../reduxStore";
@@ -14,7 +14,7 @@ import {uiSlice} from "../../reduxStore/uiSlice";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {environment} from "../../../environments/environment";
 
-import {usePageNavigate} from "../hooks/usePageNavigate";
+import {usePageNavigate} from "../router/hooks/usePageNavigate";
 
 import {renderByPlatform} from "../utils/renderByPlatform";
 import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
@@ -24,7 +24,7 @@ import {PageTemplate as RiojunglePageTemplate} from "./env/riojungle/PageTemplat
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
 import {PageTemplateLayers} from "../pageTemplateLayers";
 import {IPage} from "./types/IPage";
-import {useScrollToCarousel} from "../hooks/useScrollToCarousel";
+import {useScrollToPartPageTemplate} from "./hooks/useScrollToPartPageTemplate";
 
 console.log("[APP] environment", environment);
 
@@ -176,7 +176,7 @@ export const PageTemplate = (props: IPage) => {
     return () => window.removeEventListener('storage', handleStorage)
   }, [])
 
-  const {scrollToWindowTop} = useScrollToCarousel();
+  const {scrollToWindowTop} = useScrollToPartPageTemplate();
 
   useEffect(() => {
     scrollToWindowTop();

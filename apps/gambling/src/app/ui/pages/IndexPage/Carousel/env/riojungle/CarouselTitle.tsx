@@ -1,6 +1,6 @@
 import cx from "classnames";
 import {PageContainer} from "../../../../../components-bs/PageContainer";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 
 export type ICarouselTitle = {
   children: React.ReactNode;

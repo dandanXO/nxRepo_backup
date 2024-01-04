@@ -1,6 +1,6 @@
 import cx from 'classnames';
 import { environment } from "apps/gambling/src/environments/environment";
-import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import { QuestionSection1 } from "../common/QuestionSection1";
 import { QuestionSection2 } from "../common/QuestionSection2";
 import { QuestionSection3 } from "../common/QuestionSection3";
@@ -25,7 +25,7 @@ export const QuestionContent = (props: any) => {
         <div className="sm:mb-4 p-2 sm:py-3.5 sm:px-8 bg-[var(--state-error-main-30)] text-[var(--state-error-main)]"><QuestionSection4 /></div>
       </div>
     </div>
-   
+
   )
 
 }

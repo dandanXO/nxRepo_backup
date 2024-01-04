@@ -1,7 +1,7 @@
 import React from "react";
 import { GetSignInRecordResponseData } from "../../../../../external";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { PageContainer } from "../../../../components-bs/PageContainer";
 import cx from "classnames"

@@ -2,7 +2,7 @@ import { TabItem, Tabs } from "../../../../components-bs/TabItem/TabItem";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { LeftOutlined } from "@ant-design/icons";
 import { DepositPanel } from "../../components/deposit/DepositPanel";
 import { WithdrawPanel } from "../../components/withdraw/WithdrawPanel";
@@ -22,7 +22,7 @@ import { TotalSectionContainer } from "../../components/TotalSectionContainer";
 import { CommonTableTabG } from "../../../../components-bs/TabItem/CommonTableTabG";
 import cx from "classnames";
 import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {IWalletPage} from "../pernambucana/WalletPage";
 

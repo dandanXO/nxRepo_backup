@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {environment} from "../../../../../../environments/environment";
 
 export const GameTypeHeader = (props: {

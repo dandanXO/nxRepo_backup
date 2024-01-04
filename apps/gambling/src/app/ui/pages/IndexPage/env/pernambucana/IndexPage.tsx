@@ -2,7 +2,7 @@ import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
 import {AppCarousel} from "../../Carousel";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { GameItem, GameTypeSectionList } from "../../../../components-bs/GameTypeSection";
 import {Input} from "../../../../components-bs/Inputs/Input";
 // @ts-ignore

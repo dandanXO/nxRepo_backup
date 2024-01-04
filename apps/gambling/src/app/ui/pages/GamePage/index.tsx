@@ -7,8 +7,8 @@ import queryString from 'query-string';
 
 import {useStartGameMutation} from '../../../external';
 import {useAllowLoginRouterRules} from "../../router/hooks/useAllowLoginRouterRules";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import {usePageNavigate} from "../../hooks/usePageNavigate";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
+import {usePageNavigate} from "../../router/hooks/usePageNavigate";
 import {GameBackNavigation} from "../../components-bs/BackNavigation/GameBackNavigation";
 import { LeaveGameConfirmModal } from "../../modals/LeaveGameConfirmModal";
 import { AppLocalStorage } from "../../../persistant/localstorage";

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {environment} from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 
 

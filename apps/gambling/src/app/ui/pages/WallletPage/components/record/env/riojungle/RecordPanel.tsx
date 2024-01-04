@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useBreakpoint from '../../../../../../hooks/useBreakpoint';
+import useBreakpoint from '../../../../../../pageTemplate/hooks/useBreakpoint';
 import { DepositMobileTable, WithdrawMobileTable } from './MobileTable';
 import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';

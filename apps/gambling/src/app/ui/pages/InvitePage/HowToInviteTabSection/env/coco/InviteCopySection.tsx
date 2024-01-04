@@ -3,7 +3,7 @@ import { useLazyGetInviteRewardDataQuery } from "../../../../../../external";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../../reduxStore";
-import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 
 export const InviteCopySection = () => {
   const { isLogin } = useSelector((state: RootState) => state.app);

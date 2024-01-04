@@ -1,4 +1,4 @@
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {useState} from "react";
 import cx from "classnames";
 import {ITabItem} from "./TabItem";

@@ -1,4 +1,4 @@
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import React from "react";
 import {

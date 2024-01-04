@@ -1,7 +1,7 @@
 import React from "react";
 import { GetUserVIPAllInfoResponseData } from "../../../../../../external";
 import { tcx } from "../../../../../utils/tcx";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import { environment } from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
 import { formatLocaleMoney } from "../../../../../utils/format";

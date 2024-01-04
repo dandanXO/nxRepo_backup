@@ -1,5 +1,5 @@
 import cx from "classnames";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {IContainer} from "../../index";
 import {twMerge} from "tailwind-merge";
 

@@ -1,4 +1,4 @@
-import useBreakpoint from 'apps/gambling/src/app/ui/hooks/useBreakpoint';
+import useBreakpoint from '../../../../../../pageTemplate/hooks/useBreakpoint';
 import cx from 'classnames';
 export const WithdrawNoticeSection = (props: any) => {
   const { onClickToVIP, vip_level, withdrawLimitMin, withdrawLimitMax } = props;

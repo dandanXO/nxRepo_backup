@@ -9,7 +9,7 @@ import {
   useLazyGetUserVIPAllInfoQuery
 } from "../../../external";
 import {AppLocalStorage} from '../../../persistant/localstorage';
-import useBreakpoint from '../../hooks/useBreakpoint';
+import useBreakpoint from '../../pageTemplate/hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/hooks/useAllowLoginRouterRules';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";

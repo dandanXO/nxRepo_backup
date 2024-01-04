@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ReactNode, useCallback, useEffect, useState } from "react";
 import { HowToInviteTabSection } from "./HowToInviteTabSection";
 import { InviteRecordInfoTabSection } from "./InviteRecordInfoTabSection/index";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery } from "../../../external";
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 
@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reduxStore";
 import cx from "classnames";
 import { BackNavigation } from "../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import { InvitePage as CInvitePage } from './env/coco/InvitePage';
 import { InvitePage as PInvitePage } from './env/pernambucana/InvitePage';
 import { InvitePage as RInvitePage } from './env/riojungle/InvitePage';

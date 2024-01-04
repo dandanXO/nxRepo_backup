@@ -7,7 +7,7 @@ import {appSlice} from "../../../reduxStore/appSlice";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {gameSlice} from "../../../reduxStore/gameSlice";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {connect} from "../../../gateway/socket";
 import {userLogout} from "../../../usecase/userLogout";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";

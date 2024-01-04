@@ -1,14 +1,14 @@
 import {PhoneSvg} from "../../../../../Icons/PhoneSvg";
 import {KeySvg} from "../../../../../Icons/KeySvg";
 
-import useBreakpoint from "../../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import {Input} from "../../../../../Inputs/Input";
 
 import {IOpenNotificationWithIcon} from "../../../../../../pageTemplate";
 import {onValidatePasswordInput, onValidatePhoneInput} from "../../../UserLoginForm/env/coco/UserLoginForm"
 
 import {SecuritySvg} from "../../../../../Icons/SecuritySvg";
-import {usePageNavigate} from "../../../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../../../router/hooks/usePageNavigate";
 import {Captcha} from "../../Captcha";
 import {HidableEyeSvg} from "../../../../../Icons/HidableEyeSvg";
 import {CheckableICON} from "../../../../../Icons/CheckableICON";

@@ -8,7 +8,7 @@ import {LoginButton} from "../../../../components-bs/Buttons/LoginButton";
 import {HeaderMenu} from "./components/HeaderMenu";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {NotificationAnimationIcon} from "../../../../components-bs/Icons/animation/NotificationAnimationIcon";

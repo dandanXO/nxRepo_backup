@@ -15,7 +15,7 @@ import { LoginButton } from "./components/LoginButton";
 import { HeaderMenu } from "./components/HeaderMenu";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";

@@ -1,7 +1,7 @@
 import { IGameRecordPageProps } from "../../index";
 import { DesktopGameRecordPage } from './device/DesktopGameRecordPage'
 import { MobileGameRecordPage } from './device/MobileGameRecordPage';
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { renderByRWD } from "../../../../utils/renderByRWD";
 
 

@@ -4,7 +4,7 @@ import { HowToImageText } from "../common/HowToImageText";
 import { InviteCopySection } from "./InviteCopySection";
 import cx from 'classnames';
 import { environment } from "apps/gambling/src/environments/environment";
-import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../../../reduxStore";
 

@@ -1,6 +1,6 @@
 import { IGameRecordPageProps } from "../../../index";
 import { BackNavigation } from "../../../../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../../router/hooks/usePageNavigate";
 import RangeDatePicker from "../../../../../components-bs/DatePickers/RangeDatePicker";
 import moment from "moment";
 import { formatLocaleMoney } from "../../../../../utils/format";

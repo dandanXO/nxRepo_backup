@@ -9,8 +9,8 @@ import { GameListSection } from "./components/GameListSection";
 
 import { MobileGameItem } from "../../components-bs/GameTypeSection/GameItem/MobileGameItem";
 import { DesktopGameItem } from "../../components-bs/GameTypeSection/GameItem/GameItem";
-import useBreakpoint from "../../hooks/useBreakpoint";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
+import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 import { useSelector } from "react-redux";
 import { NoData } from "../../components-bs/Icons/NoData";

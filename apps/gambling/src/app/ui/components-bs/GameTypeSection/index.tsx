@@ -1,4 +1,4 @@
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { DesktopGameItem } from "./GameItem/GameItem";
 import { MobileGameItem } from "./GameItem/MobileGameItem";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -20,9 +20,9 @@ import { mobileGameTypeHeaderProps as WmobileGameTypeHeaderProps } from "./env/w
 import { mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps } from "./env/coco/mobileGameTypeHeaderProps";
 import { renderByPlatform } from "../../utils/renderByPlatform";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
-import { useScrollToCarousel } from "../../hooks/useScrollToCarousel";
+import { useScrollToPartPageTemplate } from "../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import { GameTypeSection as RGameTypeSectionList } from "./env/riojungle/GameTypeSection";
 import { GameTypeSection as WGameTypeSectionList } from "./env/wild/GameTypeSection";
 import { GameTypeSection as CGameTypeSectionList } from "./env/coco/GameTypeSection";

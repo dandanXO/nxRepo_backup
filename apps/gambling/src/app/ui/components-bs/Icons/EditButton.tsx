@@ -1,7 +1,7 @@
 import {tcx} from "../../utils/tcx";
 import {environment} from "../../../../environments/environment";
 import React from "react";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {IButton} from "../Buttons/IButton";
 
 export const EditButton = (props: IButton) => {

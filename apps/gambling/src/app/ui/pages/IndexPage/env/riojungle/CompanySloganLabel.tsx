@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {environment} from "../../../../../../environments/environment";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 
 const CompanyLabel = styled.div`
   background-image: linear-gradient(0deg,#fff 0%,#2b3aff 100%);

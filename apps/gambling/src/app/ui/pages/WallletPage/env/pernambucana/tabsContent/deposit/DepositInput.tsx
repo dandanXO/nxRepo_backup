@@ -1,7 +1,7 @@
 import cx from "classnames";
 import {MobileInput} from "../../../../../../components-bs/Inputs/MobileInput";
 import {Input} from "../../../../../../components-bs/Inputs/Input";
-import useBreakpoint from "../../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import styled from "styled-components";
 import {environment} from "../../../../../../../../environments/environment";
 import { IDepositInput } from "../../../../components/deposit/DepositInput";

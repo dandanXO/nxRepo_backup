@@ -9,7 +9,7 @@ import { appSlice } from "../../../../../reduxStore/appSlice";
 import { GetVIPInfoResponse } from "../../../../../external";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { ProgressBar } from "../../../../components-bs/ProgressBar";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { CaretRight } from "./components/CaretRight";
 
 

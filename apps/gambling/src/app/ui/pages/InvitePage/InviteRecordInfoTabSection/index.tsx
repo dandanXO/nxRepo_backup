@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 import {
   GetInviteRewardDataResponse,
   GetUnsettleInviteRewardDataResponse,

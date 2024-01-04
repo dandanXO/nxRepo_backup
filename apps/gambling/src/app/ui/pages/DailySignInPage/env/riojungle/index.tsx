@@ -1,5 +1,5 @@
 import { environment } from "../../../../../../environments/environment";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 
 import ArrowRight from './images/ArrowRight.png';
@@ -8,7 +8,7 @@ import { VIPButtonList } from "./components/VIPButtonList";
 import { useEffect, useState } from "react";
 import { DailySignInBonusList } from "./components/DailySignInBonusList";
 import { notification } from "antd";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 
 

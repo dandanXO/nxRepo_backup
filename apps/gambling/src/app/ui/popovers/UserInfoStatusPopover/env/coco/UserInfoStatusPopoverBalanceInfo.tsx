@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { formatLocaleMoney } from "../../../../utils/format";
 import {PopoverDepositButton} from "../../../../components-bs/Buttons/env/coco/PopoverDepositButton";
 import {PopoverWithdrawButton} from "../../../../components-bs/Buttons/env/coco/PopoverWithdrawButton";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 
 const Container = styled.div`
   background: rgb(from var(--primary-assistant) r g b / 20%);

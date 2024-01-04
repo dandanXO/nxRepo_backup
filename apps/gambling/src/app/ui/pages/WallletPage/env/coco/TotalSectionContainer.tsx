@@ -10,7 +10,7 @@ import {
 import cx from "classnames";
 import { QuestionCircleFilled, QuestionCircleOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import ConfirmDrawer from "../../../../components-bs/Drawers/ConfirmDrawer";
 import { IconTooltip } from "../../../../components/Tooltips/IconTooltip";
 import { formatLocaleMoney } from "../../../../utils/format";

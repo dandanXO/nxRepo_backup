@@ -6,7 +6,7 @@ import {environment} from "../../../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 import cx from "classnames";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 
 export type IInitialChargeModal = {
   close: () => void;

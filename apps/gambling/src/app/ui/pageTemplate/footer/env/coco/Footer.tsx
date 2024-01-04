@@ -3,13 +3,13 @@ import {DownOutlined, UpOutlined} from "@ant-design/icons";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
 import React, {useState} from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
 import { useSelector } from "react-redux";
 import licenseLogo from "../../license.png";
 
 import {FooterLogo} from "../../../../components-bs/Logos/FooterLogo";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 
 type ILicenseSection = {
   className?: string;

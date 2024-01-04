@@ -26,7 +26,7 @@ import {IOSDownloadModal} from "../../../modals/IOSDownloadModal";
 import {useLocalStorage} from "usehooks-ts";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import {twMerge} from "tailwind-merge";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;

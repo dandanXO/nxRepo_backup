@@ -1,7 +1,7 @@
 
 import { SearchOutlined } from "@ant-design/icons";
 import { Input as DesktopInput, IInput, InputValue } from "./Input";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { MobileInput } from "./MobileInput";
 import {renderByPlatform} from "../../utils/renderByPlatform";
 import {SearchInput as CSearchInput} from "./env/coco/SearchInput";

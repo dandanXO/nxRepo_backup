@@ -1,5 +1,5 @@
 import cx from "classnames";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 
 type ICarouselSubTitle = {
   children: React.ReactNode;

@@ -3,10 +3,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../../reduxStore";
 import {appSlice} from "../../../../../../reduxStore/appSlice";
 
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import {PageOrModalPathEnum} from "../../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../../environments/environment";
-import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../../router/hooks/usePageNavigate";
 import cx from "classnames";
 import {CarouselContainer} from "../../CarouselContainer";
 import {IAppCarouselContent} from "../../types";

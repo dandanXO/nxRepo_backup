@@ -1,6 +1,6 @@
 import {Tabs} from "../../../../components-bs/TabItem/TabItem";
 import React from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {DepositPanel} from "../../components/deposit/DepositPanel";
 import {WithdrawPanel} from "../../components/withdraw/WithdrawPanel";
 import {RecordPanel} from "../../components/record/RecordPanel";

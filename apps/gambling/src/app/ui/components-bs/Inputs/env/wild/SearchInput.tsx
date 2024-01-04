@@ -1,7 +1,7 @@
 import {SearchOutlined} from "@ant-design/icons";
 import {IInput, Input as DesktopInput} from "../../Input";
 import {MobileInput} from "../../MobileInput";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 
 export const SearchInput = (props: IInput) => {
   const { isMobile } = useBreakpoint();

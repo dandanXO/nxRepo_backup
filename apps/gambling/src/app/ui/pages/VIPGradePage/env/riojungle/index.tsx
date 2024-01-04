@@ -1,5 +1,5 @@
 import { IVIPGradePageProps } from "../../index";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { renderByRWD } from "../../../../utils/renderByRWD";
 import { MobileVIPGradePage } from "./device/MobileVIPGradePage";
 import { TabletVIPGradePage } from "./device/TabletVIPGradePage";

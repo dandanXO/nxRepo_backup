@@ -5,7 +5,7 @@ import {Container as CContainer} from "../../env/coco/Container";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 
 import {renderByPlatform} from "../../../../utils/renderByPlatform";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {UserLoginStatusSection} from "../../../../components-bs/UserLoginStatusSection";
 import {IUserLoginStatusModal} from "../../types";
 

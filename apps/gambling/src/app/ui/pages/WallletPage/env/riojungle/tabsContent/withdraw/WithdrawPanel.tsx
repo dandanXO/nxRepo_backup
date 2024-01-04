@@ -7,7 +7,7 @@ import { ButtonPro } from '../../../../../../components-bs/Buttons/ButtonPro';
 import { ArrowRight } from '../../../../../../components-bs/Icons/ArrowRight';
 import { Input } from '../../../../../../components-bs/Inputs/Input';
 import { MobileInput } from '../../../../../../components-bs/Inputs/MobileInput';
-import useBreakpoint from '../../../../../../hooks/useBreakpoint';
+import useBreakpoint from '../../../../../../pageTemplate/hooks/useBreakpoint';
 import { formatLocaleMoney } from '../../../../../../utils/format';
 import { tcx } from '../../../../../../utils/tcx';
 import { IWithdrawPanelCommon } from '../../../../components/withdraw/WithdrawPanel';

@@ -1,7 +1,7 @@
 import { environment } from "../../../../../../environments/environment";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 
 

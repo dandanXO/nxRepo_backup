@@ -1,4 +1,4 @@
-import {RootState} from "../../reduxStore";
+import {RootState} from "../../../reduxStore";
 import {useSelector} from "react-redux";
 
 export const useBreakpoint = () => {

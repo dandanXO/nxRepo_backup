@@ -3,7 +3,7 @@ import Carousel, { ArrowProps, StateCallBack } from "react-multi-carousel";
 
 
 import cx from "classnames";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import { environment } from "../../../../../../../environments/environment";
 import {tailwindVariables} from "../../../../../../../environments/tailwind.variables";
 

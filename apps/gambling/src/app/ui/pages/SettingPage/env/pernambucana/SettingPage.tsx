@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
 import { Input } from '../../../../components-bs/Inputs/Input';
-import useBreakpoint from '../../../../hooks/useBreakpoint';
+import useBreakpoint from '../../../../pageTemplate/hooks/useBreakpoint';
 import { EditUserInfoModal } from '../../../../modals/EditUserInfoModal';
 import { useAllowLoginRouterRules } from '../../../../router/hooks/useAllowLoginRouterRules';
 import { environment } from "../../../../../../environments/environment"

@@ -1,16 +1,16 @@
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { environment } from "../../../../../../environments/environment";
 import React from "react";
 import { PageContainer } from "../../../../components-bs/PageContainer";
-import { useScrollToCarousel } from "../../../../hooks/useScrollToCarousel";
+import { useScrollToPartPageTemplate } from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import cx from 'classnames';
 
 
 export const PrivacyAgreementPage = () => {
 
   const { onClickToIndex } = usePageNavigate();
-  const { showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop } = useScrollToCarousel();
+  const { showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop } = useScrollToPartPageTemplate();
 
   return (
     <PageContainer >

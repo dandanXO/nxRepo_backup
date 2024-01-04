@@ -3,7 +3,7 @@ import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 import { environment } from "../../../../../../environments/environment";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { VIPBorderStyleContainer } from "../../../../components/VIPBorderStyleContainer";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
@@ -14,7 +14,7 @@ import { TelegramButton } from "../../../../components-bs/Buttons/TelegramButton
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { appSlice } from "../../../../../reduxStore/appSlice";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { ITelegramPage } from "../..";
 import { TelegrmaNotice } from "../components/TelegramNotice";
 

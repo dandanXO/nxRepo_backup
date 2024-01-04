@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import useBreakpoint from '../../../../../../hooks/useBreakpoint';
+import useBreakpoint from '../../../../../../pageTemplate/hooks/useBreakpoint';
 export const WithdrawNoticeSection = (props: any) => {
   const { onClickToVIP, vip_level, withdrawLimitMin, withdrawLimitMax } = props;
   const isMobile = useBreakpoint();

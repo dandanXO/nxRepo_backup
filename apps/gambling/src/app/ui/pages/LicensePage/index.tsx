@@ -1,6 +1,6 @@
 import { environment } from "../../../../environments/environment";
 import { BackNavigation } from "../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../components-bs/PageContainer";
 
 export const LicensePage = () => {

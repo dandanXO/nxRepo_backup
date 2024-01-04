@@ -24,7 +24,7 @@ import {PrivacyAgreementPage} from "../../../pages/PrivacyAgreementPage";
 import {PageTemplate} from "../../../pageTemplate";
 import TermsOfServicePage from "../../../pages/TermsOfServicePage";
 import {useUIRouter} from "../../hooks/useUIRouter";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 import { flush } from 'redux-saga/effects';
 
 

@@ -10,7 +10,7 @@ import favorite from "../../../../components-bs/Icons/tabs/env/coco/index-tab-fa
 import fishing from "../../../../components-bs/Icons/tabs/env/coco/index-tab-fishing.png";
 
 import recent from "../../../../components-bs/Icons/tabs/env/coco/index-tab-recent.png"
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import styled from "styled-components";
 
 const IndexImageTab = styled(ImageTab)`

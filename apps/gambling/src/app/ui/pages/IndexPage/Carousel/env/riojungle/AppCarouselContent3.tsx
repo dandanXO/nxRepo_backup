@@ -1,5 +1,5 @@
 import {environment} from "../../../../../../../environments/environment";
-import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../../router/hooks/usePageNavigate";
 import {CarouselContainer} from "../../CarouselContainer";
 import {IAppCarouselContent} from "../../types";
 import {CarouselImage} from "./CarouselImage";

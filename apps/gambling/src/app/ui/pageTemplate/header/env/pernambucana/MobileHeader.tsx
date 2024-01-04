@@ -3,7 +3,7 @@ import {useNavigate} from "react-router";
 import {useSelector} from "react-redux";
 import cx from "classnames";
 
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 import {RootState} from "../../../../../reduxStore";
 import {environment} from "../../../../../../environments/environment";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";

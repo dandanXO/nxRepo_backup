@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import {renderByPlatform} from "../../utils/renderByPlatform";
 
 import {SearchPageContainer as PContaniner} from "./env/pernambucana/SearchPageContainer";

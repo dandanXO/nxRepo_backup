@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../../../reduxStore";
 import {BaseErrorBoundary} from "../../base/BaseErrorBoundary";
 import {TShowToolboxConfig} from "../../base/types";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../hooks/useBreakpoint";
 import {MenuDrawer} from "../../../drawers/MenuDrawer";
 
 import {Header} from "../../header";

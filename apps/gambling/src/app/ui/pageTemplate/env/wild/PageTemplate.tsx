@@ -19,7 +19,7 @@ import {environment} from "../../../../../environments/environment";
 
 
 import {TShowToolboxConfig} from "../../base/types";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 
 type IStyledPage = {

@@ -1,4 +1,4 @@
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import twentyPercent from "./assets/genie-20.png"
 import tenPercent from "./assets/genie-10.png"
 import tabThree from "./assets/tab3.png"
@@ -26,7 +26,7 @@ import cx from "classnames";
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {useLocation} from "react-router";
 import {twMerge} from "tailwind-merge";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {useDispatch, useSelector} from "react-redux";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CloseICON} from "../../../../components-bs/env/riojungle/CloseICON";

@@ -1,7 +1,7 @@
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
 import {useLocation} from "react-router";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import {ITabBar} from "../../type";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {useDispatch, useSelector} from "react-redux";

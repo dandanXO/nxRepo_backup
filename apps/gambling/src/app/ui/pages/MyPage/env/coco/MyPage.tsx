@@ -9,7 +9,7 @@ import styled from "styled-components";
 import {CheckInButton} from "../../../../components-bs/Buttons/CheckInButton";
 import {DepositButton} from "../../../../components-bs/Buttons/DepositButton2";
 import {WithdrawButton} from "../../../../components-bs/Buttons/WithdrawButton";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 
 import {List} from "../../../../components/List";

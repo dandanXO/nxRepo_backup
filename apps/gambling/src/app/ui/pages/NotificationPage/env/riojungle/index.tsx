@@ -1,5 +1,5 @@
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { useNotificationDrawer } from "../../../../drawers/NotificationDrawer/hooks/useNotificationDrawer";
 import { NotificationElement } from "../../../../components-bs/NotificationElement";
 import React from "react";

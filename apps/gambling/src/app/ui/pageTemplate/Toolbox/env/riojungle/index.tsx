@@ -1,6 +1,6 @@
 
 import React from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 import styled from "styled-components";
 
 import {useDispatch, useSelector} from "react-redux";

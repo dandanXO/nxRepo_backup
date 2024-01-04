@@ -1,6 +1,6 @@
 import { Input, InputValue } from "../../../../components-bs/Inputs/Input";
 import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import Select from 'react-select';
 import { renderByPlatform } from "../../../../utils/renderByPlatform";
 import cx from 'classnames';

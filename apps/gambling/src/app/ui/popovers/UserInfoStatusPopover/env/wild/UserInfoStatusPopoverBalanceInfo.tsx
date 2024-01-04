@@ -3,7 +3,7 @@ import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import { Button } from "../../../../components-bs/Buttons/Button";
 import { ContaContainer, IUserInfoStatusPopoverBalanceInfoProps } from "../../index";
 import { useNavigate } from "react-router";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 
 export const UserInfoStatusPopoverBalanceInfo = ({
   totalBalanceSheetValue,

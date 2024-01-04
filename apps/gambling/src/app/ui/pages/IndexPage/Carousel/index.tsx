@@ -2,7 +2,7 @@
 import Carousel, {StateCallBack} from "react-multi-carousel";
 import "./style.scss";
 
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 import cx from "classnames";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
 import {AppCarousel as RiojungleAppCarousel} from "./env/riojungle/RiojungleCarousel"

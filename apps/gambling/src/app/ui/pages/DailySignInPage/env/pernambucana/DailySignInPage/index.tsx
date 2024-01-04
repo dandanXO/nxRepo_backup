@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAllowLoginRouterRules } from "../../../../../router/hooks/useAllowLoginRouterRules";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import { CurrentLevelButton, OtherLevelButton } from "../../../../VIPGradePage";
 import { environment } from "../../../../../../../environments/environment";
 import { tcx } from "../../../../../utils/tcx";

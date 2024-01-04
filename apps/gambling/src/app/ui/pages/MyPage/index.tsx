@@ -10,7 +10,7 @@ import {
 
 import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../reduxStore/appSlice";
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {useEffect, useState} from "react";
 import {useGetLetterListMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";

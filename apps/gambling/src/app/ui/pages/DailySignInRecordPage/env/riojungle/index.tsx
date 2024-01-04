@@ -3,10 +3,10 @@ import { GetSignInRecordResponseData, useGetSignInRecordMutation } from "../../.
 import { useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { Table } from "../../../../components-bs/Table";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { MobileDailySignInRecordPage } from "./MobileDailySignInRecordPage";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { PageContainer } from "../../../../components-bs/PageContainer";

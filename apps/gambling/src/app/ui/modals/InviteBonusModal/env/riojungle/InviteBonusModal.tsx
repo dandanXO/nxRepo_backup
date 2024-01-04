@@ -1,4 +1,4 @@
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {renderByRWD} from "../../../../utils/renderByRWD";
 import {SharedInviteBonusModal} from "./SharedInviteBonusModal";
 import {IInitialChargeModal} from "../../index";

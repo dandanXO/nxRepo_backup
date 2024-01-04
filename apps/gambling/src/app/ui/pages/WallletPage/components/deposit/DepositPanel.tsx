@@ -1,5 +1,5 @@
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import cx from "classnames";
 import { useNavigate } from "react-router";
 import { useEffect, useMemo, useState } from "react";

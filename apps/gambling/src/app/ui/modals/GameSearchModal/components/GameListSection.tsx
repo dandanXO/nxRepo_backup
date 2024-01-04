@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import useBreakpoint from '../../../hooks/useBreakpoint';
+import useBreakpoint from '../../../pageTemplate/hooks/useBreakpoint';
 import { ArrowLeft } from '../../../components-bs/Icons/ArrowLeft';
 import { ArrowRight } from '../../../components-bs/Icons/ArrowRight';
 import { useEffect, useRef, useState } from 'react';

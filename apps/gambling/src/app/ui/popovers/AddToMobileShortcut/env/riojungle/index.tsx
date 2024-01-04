@@ -2,7 +2,7 @@ import {environment} from "../../../../../../environments/environment";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import {useLocalStorage} from "usehooks-ts";
 import {AppEnvironment} from "../../../../../device/appEnvironment";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {useDispatch} from "react-redux";
 import cx from "classnames";

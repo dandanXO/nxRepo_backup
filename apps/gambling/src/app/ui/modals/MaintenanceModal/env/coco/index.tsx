@@ -1,5 +1,5 @@
 import { environment } from "../../../../../../environments/environment";
-import useBreakpoint from "../../../../hooks/useBreakpoint"
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint"
 import cx from 'classnames';
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";

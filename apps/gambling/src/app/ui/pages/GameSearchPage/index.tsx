@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Input as DesktopInput, InputValue } from "../../components-bs/Inputs/Input";
 import { SearchICON } from "../../components-bs/Icons/SearchICON";
 import { MobileInput } from "../../components-bs/Inputs/MobileInput";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { useSearchGames } from "../../hooks/useSearchGames";
 import { GameTypeSectionList } from "../../components-bs/GameTypeSection";
 import { AppLocalStorage } from "../../../persistant/localstorage";

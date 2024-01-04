@@ -8,7 +8,7 @@ import { notification } from "antd";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
-import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../../components-bs/PageContainer";
 
 const SignInButton = styled.div<{

@@ -13,7 +13,7 @@ import {
 import { LevelList } from "../../../../DailySignInPage";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
-import { usePageNavigate } from "apps/gambling/src/app/ui/hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../../router/hooks/usePageNavigate";
 
 const VIPContainer = styled.div`
   background-color: rgba(40, 112, 82, 0.1);

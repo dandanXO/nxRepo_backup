@@ -1,7 +1,7 @@
 import cx from "classnames";
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 
 import {Input} from "../../../../components-bs/Inputs/Input";
 import {useNavigate} from "react-router";
@@ -20,14 +20,14 @@ import { DragScrollContainer } from "../../../../components/DragScrollContainer"
 import React, { useEffect, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import {CompanySloganLabel} from "./CompanySloganLabel";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components-bs/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
 import {AppCarouselContent8} from "../../Carousel/env/coco/AppCarouselContent8";
-import {useScrollToCarousel} from "../../../../hooks/useScrollToCarousel";
+import {useScrollToPartPageTemplate} from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
 import { tcx } from "../../../../utils/tcx";
 import { RecentGameItem } from "../../../../components-bs/RecentGameListItem";

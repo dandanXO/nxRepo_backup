@@ -4,7 +4,7 @@ import {PageContainer} from "../../../../components-bs/PageContainer";
 import React from "react";
 import {twMerge} from "tailwind-merge";
 import {BackNavigation} from "../../../../components-bs/BackNavigation/BackNavigation";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 
 type IItem = {
   title: string;

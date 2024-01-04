@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GetSignInConfigResponse } from "../../../../../../external";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import MobileDailySignInPage from "./MobileDailySignInPage";
 import { LeftOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router";
@@ -11,7 +11,7 @@ import { tcx } from "../../../../../utils/tcx";
 import { notification } from "antd";
 import { useAllowLoginRouterRules } from "../../../../../router/hooks/useAllowLoginRouterRules";
 import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
-import {usePageNavigate} from "../../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../../router/hooks/usePageNavigate";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import {ViewRecordButton} from "../../../../../components-bs/Buttons/env/coco/ViewRecordButton";
 

@@ -2,7 +2,7 @@ import InviteBanner from './desktop_recomendar_pic.png';
 import Level from './level.png';
 import Gift from './gift.png';
 import GameChips from './gameChips.png';
-import useBreakpoint from 'apps/gambling/src/app/ui/hooks/useBreakpoint';
+import useBreakpoint from '../../../../../pageTemplate/hooks/useBreakpoint';
 import { IHowToInviteTabSection } from '../..';
 import { QuestionSection1 } from '../common/QuestionSection1';
 import { QuestionSection2 } from '../common/QuestionSection2';

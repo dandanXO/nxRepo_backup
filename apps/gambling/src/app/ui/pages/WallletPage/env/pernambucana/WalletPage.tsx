@@ -6,7 +6,7 @@ import {DepositPanel} from "../../components/deposit/DepositPanel";
 import {WithdrawPanel} from "../../components/withdraw/WithdrawPanel";
 import {RecordPanel} from "../../components/record/RecordPanel";
 import React from "react";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";
 import { GetRechargeResponseOption, RechargeResponseConfig ,GetRechargeResponse} from "apps/gambling/src/app/external/RechargeInfoGetEndpoint";
 

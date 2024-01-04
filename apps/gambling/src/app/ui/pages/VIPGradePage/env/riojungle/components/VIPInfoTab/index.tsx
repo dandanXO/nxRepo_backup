@@ -3,7 +3,7 @@ import GiftIcon from '../../images/Gift.png'
 import StarIcon from '../../images/Star.png'
 import TrendUpIcon from '../../images/TrendUp.png'
 import MoneyIcon from '../../images/Money.png'
-import useBreakpoint from "../../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import React, { useState } from "react";
 import { GetSignInConfigResponse, GetUserVIPAllInfoResponse } from "../../../../../../../external";
 import { formatLocaleMoney } from "../../../../../../utils/format";

@@ -14,7 +14,7 @@ import {
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
 
-import { usePageNavigate } from "../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import {renderByPlatform} from "../../utils/renderByPlatform";
 
 import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"

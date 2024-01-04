@@ -1,6 +1,6 @@
 import cx from "classnames";
 import { MobileInput } from "../../../../../../components-bs/Inputs/MobileInput";
-import useBreakpoint from "../../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import { IDepositInput } from "../../../../components/deposit/DepositInput";
 
 export const DepositInput = (props: IDepositInput) => {

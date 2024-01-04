@@ -3,7 +3,7 @@ import { DepositInput } from "../../../../components/deposit/DepositInput"
 import { DepositNoticeSection } from "./DepositNoticeSection"
 import cx from 'classnames';
 import { depositButtonProps } from "./depositButtonProps";
-import useBreakpoint from "apps/gambling/src/app/ui/hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import { tcx } from "apps/gambling/src/app/ui/utils/tcx";
 import { IDepositPanelProps } from "../../../../components/deposit/DepositPanel";
 import { ArrowRight } from "../../../../../../components-bs/Icons/ArrowRight";

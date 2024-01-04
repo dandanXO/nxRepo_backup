@@ -9,7 +9,7 @@ import {
 import cx from "classnames";
 
 import {useEffect, useState} from "react";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 
 import { TotalSectionContainer as PTotalSectionContainer } from "../env/pernambucana/TotalSectionContainer";
 import { TotalSectionContainer as WTotalSectionContainer } from "../env/wild/TotalSectionContainer";

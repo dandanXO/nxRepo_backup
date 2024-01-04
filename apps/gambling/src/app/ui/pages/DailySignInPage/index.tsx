@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import {useGetSignInConfigMutation} from '../../../external';
 import {AppLocalStorage} from '../../../persistant/localstorage';
-import useBreakpoint from '../../hooks/useBreakpoint';
+import useBreakpoint from '../../pageTemplate/hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/hooks/useAllowLoginRouterRules';
 import {CurrentLevelButton, OtherLevelButton} from '../VIPGradePage';
 import {environment} from "../../../../environments/environment";

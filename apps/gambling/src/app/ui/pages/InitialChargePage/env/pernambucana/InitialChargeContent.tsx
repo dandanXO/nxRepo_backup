@@ -1,7 +1,7 @@
 import { environment } from "apps/gambling/src/environments/environment";
 import { ChargeButton } from "../../../../components-bs/Buttons/ChargeButton"
-import useBreakpoint from "../../../../hooks/useBreakpoint"
-import { usePageNavigate } from "../../../../hooks/usePageNavigate"
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint"
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate"
 import { NoticeSection } from "../components/NoticeSection";
 import { BenefitSection } from "../components/BenefitSection";
 

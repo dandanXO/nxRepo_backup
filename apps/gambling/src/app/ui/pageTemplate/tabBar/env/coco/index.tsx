@@ -1,7 +1,7 @@
 import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import cx from "classnames";
 import {useLocation} from "react-router";
-import {usePageNavigate} from "../../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import {AssetMappingCoco} from "../../../../../../assets/assetMapping.coco";
 import {ITabBar} from "../../type";
 

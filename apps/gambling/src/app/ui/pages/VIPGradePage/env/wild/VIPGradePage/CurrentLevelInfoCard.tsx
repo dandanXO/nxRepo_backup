@@ -1,6 +1,6 @@
 import React from "react";
 import { environment } from "../../../../../../../environments/environment";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import { tcx } from "../../../../../utils/tcx";
 import ProgressBar from "./ProgressBar";
 import { GetVIPInfoResponse } from "../../../../../../external";

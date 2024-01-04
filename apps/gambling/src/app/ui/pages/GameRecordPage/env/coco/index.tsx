@@ -1,8 +1,8 @@
 import { DatePicker } from 'antd';
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { tcx } from "../../../../utils/tcx";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import RangeDatePicker from "../../../../components-bs/DatePickers/RangeDatePicker";
 import { Dispatch, SetStateAction } from "react";
 import moment from "moment";

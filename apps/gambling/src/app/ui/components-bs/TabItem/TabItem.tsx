@@ -1,6 +1,6 @@
 import cx from "classnames";
 import {useState} from "react";
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {StyledTabItem as PStyledTabItem} from "./env/pernambucana/StyledTabItem";
 import {StyledTabItem as CtyledTabItem} from "./env/coco/StyledTabItem"
 import {StyledTabItem as WStyledTabItem} from "./env/wild/StyledTabItem"

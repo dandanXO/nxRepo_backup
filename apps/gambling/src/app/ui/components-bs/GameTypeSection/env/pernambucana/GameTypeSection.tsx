@@ -1,11 +1,11 @@
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { DesktopGameItem } from "../../GameItem/GameItem";
 import { MobileGameItem } from "../../GameItem/MobileGameItem";
 import cx from "classnames";
 import { MobileGameList } from "../../GameList/MobileGameList";
 import { GameList } from "../../GameList/GameList";
 import { GameTypeHeader } from "../../GameTypeHeader/GameTypeHeader";
-import { usePageNavigate } from "../../../../hooks/usePageNavigate";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { IGameTypeSection, IGameTypeSectionList } from "../..";
 import { mobileGameTypeHeaderProps } from "./mobileGameTypeHeaderProps";
 import { MobileGameTypeHeader } from "./MobileGameTypeHeader";

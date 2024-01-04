@@ -1,4 +1,4 @@
-import {usePageNavigate} from "../../../hooks/usePageNavigate";
+import {usePageNavigate} from "../../../router/hooks/usePageNavigate";
 import {useSelector} from "react-redux";
 import {useAutoUpdateBalance} from "../../../hooks/useAutoUpdateBalance";
 import {RootState} from "../../../../reduxStore";

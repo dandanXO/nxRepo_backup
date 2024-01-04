@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-export const useScrollToCarousel = () => {
+export const useScrollToPartPageTemplate = () => {
   // NOTICE: 使用 Javascript 方式替換純 CSS stikcy，因為 iOS sticky 會滾到一半就直接上去
   const [showFixForIOSStickTab, setShowFixForIOSStickTab] = useState(false);
   const [carouselHeight, setCarouselHeight] = useState(0);

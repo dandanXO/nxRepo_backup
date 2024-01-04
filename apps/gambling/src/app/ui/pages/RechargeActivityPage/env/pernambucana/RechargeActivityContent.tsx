@@ -1,6 +1,6 @@
 import { ChargeButton } from "../../../../components-bs/Buttons/ChargeButton"
-import useBreakpoint from "../../../../hooks/useBreakpoint"
-import { usePageNavigate } from "../../../../hooks/usePageNavigate"
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint"
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate"
 import { BenefitSection } from "./BenefitSection"
 import { NoticeSection } from "./NoticeSection"
 

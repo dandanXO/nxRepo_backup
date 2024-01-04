@@ -16,7 +16,7 @@ import {LogoutPopover} from "../popovers/LogoutPopover";
 import {UserInfoStatusPopover} from "../popovers/UserInfoStatusPopover";
 
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
-import {IQueryStringProps, usePageNavigate} from "../hooks/usePageNavigate";
+import {IQueryStringProps, usePageNavigate} from "../router/hooks/usePageNavigate";
 import {UserLoginStatusModal} from "../modals/UserLoginStatusModal";
 import {IOpenNotificationWithIcon} from "../pageTemplate";
 import { RootState } from "../../reduxStore";

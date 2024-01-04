@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import useBreakpoint from "../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 
 type ICarouselImage = {
   genieSrc?: string;

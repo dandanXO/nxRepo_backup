@@ -1,7 +1,7 @@
 import {PhoneSvg} from "../../../../../Icons/PhoneSvg";
 import {KeySvg} from "../../../../../Icons/KeySvg";
 import {ConfirmButton} from "../../../../../Buttons/ConfirmButton";
-import useBreakpoint from "../../../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import {Input as DesktopInput, Input} from "../../../../../Inputs/Input";
 import {MobileInput} from "../../../../../Inputs/MobileInput";
 // import {LoginFormData} from "./UserLoginForm/LoginFormData";

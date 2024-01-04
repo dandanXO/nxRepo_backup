@@ -19,7 +19,7 @@ import {Header} from "../../header/env/pernambucana/Header";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
 
 import {TShowToolboxConfig} from "../../base/types";
-import useBreakpoint from "../../../hooks/useBreakpoint";
+import useBreakpoint from "../../hooks/useBreakpoint";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;

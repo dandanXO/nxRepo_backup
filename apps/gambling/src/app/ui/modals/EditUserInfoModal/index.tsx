@@ -7,7 +7,7 @@ import { promiseHandler } from '../../../gateway/promiseHanlder';
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { Input as DesktopInput } from '../../components-bs/Inputs/Input';
 import { MobileInput } from '../../components-bs/Inputs/MobileInput';
-import useBreakpoint from '../../hooks/useBreakpoint';
+import useBreakpoint from '../../pageTemplate/hooks/useBreakpoint';
 import { IOpenNotificationWithIcon } from '../../pageTemplate';
 import { tcx } from "../../utils/tcx";
 import { UserOutlined } from "@ant-design/icons";

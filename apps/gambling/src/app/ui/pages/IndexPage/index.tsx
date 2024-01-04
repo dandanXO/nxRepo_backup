@@ -1,6 +1,6 @@
 // NOTE; https://www.npmjs.com/package/react-multi-carousel
 import 'react-multi-carousel/lib/styles.css';
-import useBreakpoint from "../../hooks/useBreakpoint";
+import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {GameTypeSectionList} from "../../components-bs/GameTypeSection";
 // import { default as data } from "../../components/GameTypeSection/mock/gameList.json";
 import React, {useEffect, useState} from "react";
@@ -14,7 +14,7 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 
 import {renderByPlatform} from "../../utils/renderByPlatform";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
-import {useScrollToCarousel} from "../../hooks/useScrollToCarousel";
+import {useScrollToPartPageTemplate} from "../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
@@ -74,7 +74,7 @@ export const IndexPage = () => {
       )
     })
   }
-  const {showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop} = useScrollToCarousel();
+  const {showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop} = useScrollToPartPageTemplate();
   const renderTypeGameListOld=()=>{
     let list: { subGameType: string, games: { gameId: number }[] }[] = []
 

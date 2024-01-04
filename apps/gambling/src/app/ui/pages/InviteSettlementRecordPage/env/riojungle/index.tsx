@@ -10,7 +10,7 @@ import { environment } from "../../../../../../environments/environment";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../utils/format";
-import useBreakpoint from "../../../../hooks/useBreakpoint";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import Index from "../../../../components-bs/DatePickers/RangeDatePicker";
 import cx from "classnames"
 import {PageContainer} from "../../../../components-bs/PageContainer";
