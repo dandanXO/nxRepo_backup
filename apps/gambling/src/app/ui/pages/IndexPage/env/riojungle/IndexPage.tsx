@@ -21,7 +21,7 @@ import { RootState } from "../../../../../reduxStore";
 import { ScrollTab } from "../../../../components-bs/TabItem/ScrollTab";
 
 import { GameSearchModal } from "../../../../modals/GameSearchModal";
-import { gameSlice } from "../../../../../reduxStore/gameSlice";
+import { gameSlice, indexPagecurrentSelectLabel } from "../../../../../reduxStore/gameSlice";
 import { GameItem } from "../../../../components-bs/GameTypeSection";
 import { tcx } from "../../../../utils/tcx";
 import { RecentGameItem } from "../../../../components-bs/RecentGameListItem";
@@ -149,7 +149,7 @@ export const IndexPage = ({
       <DragScrollContainer className="flex flex-row items-center rounded-[100px]">
         <div className="bg-[#333333] flex flex-row rounded-[100px]">
           {
-            ["Todos", ...label, 'Favoritos'].map((tab: string, index: number) => {
+            ["Todos", ...label, 'Favoritos'].map((tab: indexPagecurrentSelectLabel, index: number) => {
               const gameCount = tab !== 'Favoritos' ? typeGameCount[tab] : userFavorite.length;
               return (
                 <TabItem
@@ -225,7 +225,6 @@ export const IndexPage = ({
             </div>)}
         </div>
       </PageContainer>
-
       {
         recentGameList.length > 0 && (
           <PageContainer
