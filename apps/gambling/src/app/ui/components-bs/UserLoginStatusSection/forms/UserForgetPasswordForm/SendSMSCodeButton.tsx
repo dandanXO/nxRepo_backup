@@ -17,7 +17,7 @@ type IProps = {
 
 export const SendSMSCodeButton = (props: IProps) => {
   const [state, setState] = useState<ICountingButtonType>("ready")
-  const [secondState, setSecondState] = useState<number>(120)
+  const [secondState, setSecondState] = useState<number>(60)
   let strState
 
   useEffect(() => {
