@@ -70,7 +70,7 @@ export const InviteSettlementRecordPage = () => {
   return (
       <PageContainer id={"game-record-section"} className="text-white">
         <BackNavigation
-          title={isMobile && <div className={"w-full text-center font-bold"}>Registros de liquidação</div>}
+          // title={isMobile && <div className={"w-full text-center font-bold"}>Registros de liquidação</div>}
           onClick={() => navigate(PageOrModalPathEnum.InvitePage)}
         />
 

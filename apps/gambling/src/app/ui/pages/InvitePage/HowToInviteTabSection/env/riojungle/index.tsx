@@ -9,7 +9,7 @@ import { QuestionSection2 } from '../common/QuestionSection2';
 import { QuestionSection3 } from '../common/QuestionSection3';
 import copy from "copy-to-clipboard";
 import { notification } from 'antd';
-import { environment } from 'apps/gambling/src/environments/environment';
+import { environment } from '../../../../../../../environments/environment';
 
 
 export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
@@ -18,11 +18,11 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
     isTablet,
     isDesktop,
   } = useBreakpoint();
-  const [api, contextHolder] = notification.useNotification();
+  const [notefy, contextHolder] = notification.useNotification();
   const productName = ''
   const onClickToCopy = () => {
     copy(props.inviteUrl);
-    api.success({
+    notefy.success({
       message: 'Copiado!',
     });
   };
@@ -95,11 +95,16 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
                   <div className="text-base font-normal leading-6 text-white text-center w-full mb-2">
                   {props?.inviteUrl}
                   </div>
-                  <button className="text-base font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
-                  >
-                    Convide Amigos
-                  </button>
+                  <div>
+                    <button 
+                      onClick={onClickToCopy}
+                      className="text-base font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
+                    >
+                      Convide Amigos
+                    </button>
+                  </div>
                 </div>
+                {contextHolder}
               </div>
             )
           }

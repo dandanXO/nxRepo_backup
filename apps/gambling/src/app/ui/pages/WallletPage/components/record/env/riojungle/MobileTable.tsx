@@ -24,7 +24,7 @@ const TradeStatusMap: { [key: number]: string } = {
 
 const NoData = () => {
   return (
-    <div className=' flex flex-col justify-center items-center py-10'>
+    <div className=' flex flex-col justify-center items-center py-10 border-[#B3B3B3] border-dashed border-2 rounded-lg'>
       <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
       <div>Nada aqui</div>
     </div>
@@ -51,7 +51,8 @@ export const DepositMobileTable = () => {
             <Container
               key={record.id}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
-                "bg-[var(--background-tabbar)]"
+                "bg-[var(--background-tabbar)]",
+                "border-[#4D4D4D] border-solid border rounded-lg"
               )}
             >
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
@@ -129,7 +130,8 @@ export const WithdrawMobileTable = () => {
             <Container
               key={record.id}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
-                "bg-[var(--background-tabbar)]"
+                "bg-[var(--background-tabbar)]",
+                "border-[#4D4D4D] border-solid border rounded-lg"
               )}
             >
                <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
