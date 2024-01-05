@@ -27,7 +27,9 @@ export const LicensePage = () => {
           A Licença de Jogos de Curaçao é uma das licenças de jogos eletrônicos mais populares do mundo. Os principais fornecedores de software são licenciados pelo Conselho de Controle de Jogos de Curaçao. Uma licença abrange todos os jogos, como cassinos online, caça-níqueis, apostas esportivas e jogos eletrônicos. Atletismo, loterias e jogos de habilidade e azar. Esta agência de licenciamento é apoiada pelo governo de Curaçao e foi criada para garantir que todas as operadoras cumpram a estrutura regulatória e o código de conduta. A seguir está a descrição da licença da plataforma ({environment.platformName}). Por favor, não roube e infratores será processado.
         </div>
         <div className="flex justify-center items-center mt-3 xl:mt-5 md:mt-4">
-          <img alt='license' src={`assets/license/licenseWord.png`}/>
+          <div className='rounded-lg overflow-hidden'>
+            <img alt='license' className='w-[308px]' src={`assets/license/license.jpeg`}/>
+          </div>
         </div>
       </div>
 
