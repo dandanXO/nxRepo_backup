@@ -39,7 +39,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
                 <PhonePrefix/>
               </>
             }
-            className={`bg-[#4D4D4D]`}
+            className={`bg-[var(--grayscale-30)]`}
             placeholder="Tu número de celular"
             value={phoneInput.data}
             validation={phoneInput.isValidation}
@@ -49,7 +49,7 @@ export const UserLoginForm = (props: IUserLoginForm) => {
 
         <Input
             type={isPasswordVisible ? 'text' : 'password'}
-            className={`bg-[#4D4D4D]`}
+            className={`bg-[var(--grayscale-30)]`}
             // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
             prefix={<KeySvg className={"mr-1"}/>}
             placeholder={"Senha (4-12 letras e números)"}

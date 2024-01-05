@@ -54,7 +54,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
               <PhonePrefix/>
             </>
           }
-          className={'bg-[#4D4D4D]'}
+          className={'bg-[var(--grayscale-30)]'}
           placeholder={"Tu nùmero de celular"}
           value={phoneInput.data}
           validation={phoneInput.isValidation}
@@ -66,7 +66,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
       <div className={"mb-2"}>
         <Input
           type={"text"}
-          className={'bg-[#4D4D4D]'}
+          className={'bg-[var(--grayscale-30)]'}
           prefix={<SecuritySvg className={"mr-1"}/>}
           suffix={
             <SendSMSCodeButton
@@ -92,7 +92,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
       <div className={"mb-5"}>
         <Input
           type={isPasswordVisible ? 'text' : 'password'}
-          className={'bg-[#4D4D4D]'}
+          className={'bg-[var(--grayscale-30)]'}
           prefix={<KeySvg fill={"#6c7083"} className={"mr-1"}/>}
           suffix={(
             <div

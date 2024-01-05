@@ -4,7 +4,7 @@ export const environment = {
   assetVersionPrefix: "v1",
   mockBackend: false,
   platformName: "Rio Jungle bet",
-  platformGroup: "O TT Group",
+  platformGroup: "YH Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",
   captcha: "/japi/user/captcha/image",
