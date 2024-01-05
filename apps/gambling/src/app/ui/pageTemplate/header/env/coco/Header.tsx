@@ -136,7 +136,7 @@ export const Header = (props: IHeader) => {
             onClick={() => {
               props.onClickUserLoginStatusDrawer()
             }}
-          >Connecte-se</LoginButton>
+          >Conecte-se</LoginButton>
         </div>
       )}
 
