@@ -93,7 +93,7 @@ export const RecordPanelDeposit = () => {
       {/* Table className  可以控制table內部整體css 去覆蓋預設設定 */}
       <Table
         className='!bg-[#333333]'
-        titleStyle='text-sm border-transparent'
+        titleStyle='text-sm border-transparent text-[#b3b3b3]'
         contentStyle='text-base !border-x-0 !border-y'
         columns={tableColumns}
         dataSource={records}
