@@ -33,13 +33,13 @@ export const RiojungleIOSDownloadModal = () => {
           </div>
 
           <div className={"max-h-full overflow-y-auto -mb-2"}>
-            <div className="text-lg leading-5 text-white mb-4">
+            <div className="text-base leading-5 text-white mb-4">
               Toque no ícone “Mais” e, em seguida, toque em Adicionar ao ecrã principal
             </div>
 
             <img className="w-full mb-5" alt="guid-line"  src={`assets/${environment.assetPrefix}/add to home screen first_1.png`}/>
 
-            <div className="text-lg leading-5 text-white mb-5">
+            <div className="text-base leading-5 text-white mb-5">
               Clique em Adicionar e selecione ”Adicionar”
             </div>
             {/*<img className="w-full" src={flow2Image}/>*/}
