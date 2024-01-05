@@ -1,14 +1,19 @@
 import {useEffect, useRef, useState} from "react";
-import snow1Image from "./snow_1.png"
-import snow2Image from "./snow_2.png"
-import snow3Image from "./snow_3.png"
-import snow4Image from "./snow_4.png"
-import snow5Image from "./snow_5.png"
-import snow01Image from "./snow_01.png"
-import snow02Image from "./snow_02.png"
-import snow03Image from "./snow_03.png"
-import snow04Image from "./snow_04.png"
-import snow05Image from "./snow_05.png"
+import snowflake01 from "./image/snowflake/snowflake01.png"
+import snowflake02 from "./image/snowflake/snowflake02.png"
+import snowflake03 from "./image/snowflake/snowflake03.png"
+import snowflake04 from "./image/snowflake/snowflake04.png"
+import snowflake05 from "./image/snowflake/snowflake05.png"
+import snowDot01 from "./image/snowDot/snowDot01.png"
+import snowDot02 from "./image/snowDot/snowDot02.png"
+import snowDot03 from "./image/snowDot/snowDot03.png"
+import snowDot04 from "./image/snowDot/snowDot04.png"
+import snowDot05 from "./image/snowDot/snowDot05.png"
+import sakura01 from "./image/sakura/sakura01.png"
+import sakura02 from "./image/sakura/sakura02.png"
+import sakura03 from "./image/sakura/sakura03.png"
+import sakura04 from "./image/sakura/sakura04.png"
+import sakura05 from "./image/sakura/sakura05.png"
 import {environment} from "../../../../../environments/environment";
 
 type IParticle = {
@@ -20,6 +25,17 @@ type IParticle = {
   imgIndex: number;
 }
 
+function snowImages(){
+  switch (environment.snowEffects){
+    case "snowDot":
+      return [snowDot01, snowDot02, snowDot03, snowDot04, snowDot05];
+    case "sakura":
+      return [sakura01, sakura02, sakura03, sakura04, sakura05];
+    case "snowflake":
+    default:
+      return [snowflake01, snowflake02, snowflake03, snowflake04, snowflake05];
+  }
+}
 
 export const usePageSnowEffect = () => {
   const [canvas, setCanvas] = useState<HTMLCanvasElement>()
@@ -29,7 +45,7 @@ export const usePageSnowEffect = () => {
   const [H, setH] = useState<number>()
   const mp = 50; //max particles
 
-  const snows = environment.assetVersionPrefix === "v6" ? [snow1Image, snow2Image, snow3Image, snow4Image, snow5Image] : [snow01Image, snow02Image, snow03Image, snow04Image, snow05Image]
+  const snows = snowImages();
 
   function renewSnowflake(width: number, height: number) {
 
