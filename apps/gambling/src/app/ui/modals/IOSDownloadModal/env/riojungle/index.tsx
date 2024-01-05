@@ -17,7 +17,7 @@ export const RiojungleIOSDownloadModal = () => {
       <div
         className={
           // NOTE:
-          "w-full max-h-[740px] fixed bottom-0 px-4"
+          "w-full max-h-[600px] sm:max-h-[740px] overflow-auto  fixed bottom-0 px-4"
         }
         onClick={(event) => {
           event.stopPropagation();
