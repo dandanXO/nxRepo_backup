@@ -186,7 +186,7 @@ export const AppRouter = () => {
             <PageTemplate
               header={{
                 mobile: false,
-                tablet: true,
+                tablet: false,
                 desktop: true,
               }}
               footer={{
@@ -299,12 +299,12 @@ export const AppRouter = () => {
             <PageTemplate
               header={{
                 mobile: false,
-                tablet: true,
+                tablet: false,
                 desktop: true,
               }}
               footer={{
-                mobile: true,
-                tablet: true,
+                mobile: false,
+                tablet: false,
                 desktop: true,
               }}
               tabBar={{
