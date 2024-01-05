@@ -11,6 +11,20 @@ import { Button } from "../../../Buttons/env/riojungle/Button";
 import { NoData } from "../../../Table/env/riojungle/NoData";
 import { environment } from "../../../../../../environments/environment";
 
+const FavoriteNoData = () => {
+  return (
+    <div className='rounded-lg w-full bg-[var(--grayscale-20)] text-[var(--grayscale-70)] p-2 md:p-5 font-medium text-sm md:text-base lg:text-xl'>
+      <div className='rounded-lg border border-dashed border-[var(--grayscale-70)] flex flex-col justify-center items-center p-3 md:p-4 lg:p-5'>
+        <div className='flex flex-col items-center py-[68px] md:py-[94px] lg:py-[154px]'>
+          <img className={'h-[64px] md:h-[104px] lg:h-[120px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
+          <div>Nada aqui</div>
+        </div>
+        <div className='text-[var(--secondary-main)] text-center'>Clique no coração no canto superior direito do jogo para adicioná-lo à sua coleção!</div>
+      </div>
+    </div>
+  )
+}
+
 
 export type GameItem = {
   name: string;
@@ -55,7 +69,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
         />
       }
       {displayedItems?.length === 0
-        ? (<NoData />)
+        ? (props.gameTypeName === 'Favoritos'? <FavoriteNoData />:<NoData />)
         : (<MainGameList
           className={cx("list", {
             'animate-[gameListShow_0.8s_ease]': animating && isMobile,
