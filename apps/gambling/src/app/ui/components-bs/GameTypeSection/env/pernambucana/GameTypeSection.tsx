@@ -9,6 +9,7 @@ import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { IGameTypeSection, IGameTypeSectionList } from "../..";
 import { mobileGameTypeHeaderProps } from "./mobileGameTypeHeaderProps";
 import { MobileGameTypeHeader } from "./MobileGameTypeHeader";
+import { LoadMoreButton } from "../../../Buttons/LoadMoreButton";
 
 export type GameItem = {
   name: string;
@@ -69,12 +70,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
       }
       {(props.data && listSize < props.data?.length) && props.expandedBrand &&
         <div className="flex-1 mt-20 justify-center flex">
-          <button
-            onClick={loadMore}
-            className="text-white bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)] py-2 px-4 rounded-[32px] font-medium"
-          >
-            Ver Mais
-          </button>
+          <LoadMoreButton onClick={loadMore}/>
         </div>
       }
     </section>

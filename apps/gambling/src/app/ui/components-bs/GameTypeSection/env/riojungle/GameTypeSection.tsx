@@ -10,6 +10,7 @@ import { IGameTypeSection, IGameTypeSectionList } from "../..";
 import { Button } from "../../../Buttons/env/riojungle/Button";
 import { NoData } from "../../../Table/env/riojungle/NoData";
 import { environment } from "../../../../../../environments/environment";
+import { LoadMoreButton } from "../../../Buttons/LoadMoreButton";
 
 const FavoriteNoData = () => {
   return (
@@ -95,11 +96,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
       }
       {(props.data && listSize < props.data?.length) && props.expandedBrand &&
         <div className="flex-1 mt-20 justify-center flex">
-          <Button
-            onClick={loadMore}
-            className="bg-[var(--primary-main)] items-center py-3 px-4 rounded"
-            text={'Ver Mais'}
-          />
+          <LoadMoreButton onClick={loadMore}/>
         </div>
       }
     </section>

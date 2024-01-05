@@ -8,6 +8,8 @@ import { useGesture } from '@use-gesture/react';
 import { useSpring } from '@react-spring/web';
 import { tcx } from "../../../utils/tcx";
 import { PrevAndNextButtons } from './PrevAndNextButtons';
+import { LoadMoreButton } from '../../../components-bs/Buttons/LoadMoreButton';
+
 
 interface IGameListSection {
   icon?: React.ReactElement;
@@ -102,12 +104,7 @@ export const GameListSection = (props: IGameListSection) => {
       }
        {props.expandedBrand &&
         <div className="flex-1 mt-4 justify-center flex">
-          <button
-            onClick={props.loadMore}
-            className="text-white bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)] py-2 px-4 rounded-[32px] font-medium"
-          >
-            Ver Mais
-          </button>
+          <LoadMoreButton onClick={()=> props.loadMore && props.loadMore()}/>
         </div>
       }
 

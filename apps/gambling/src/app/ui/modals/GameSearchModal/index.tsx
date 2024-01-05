@@ -64,7 +64,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
             return (
               <MainGameItem
                 className={cx("grow-0 shrink-0", {
-                  "w-[32vw] h-[31vw]": isMobile,
+                  "w-[32vw] h-[32vw]": isMobile,
                   "mr-[16px] max-w-[150px] !basis-[150px] !h-[170px]": !isMobile
                 })}
                 key={index}
