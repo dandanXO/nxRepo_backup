@@ -57,7 +57,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
     <section className={"flex flex-col"}>
       <Input
         type={"number"}
-        className={'bg-[#4D4D4D]'}
+        className={'bg-[var(--grayscale-30)]'}
         prefix={
           <>
             {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
@@ -76,7 +76,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
       <Input
         type={"number"}
-        className={'bg-[#4D4D4D]'}
+        className={'bg-[var(--grayscale-30)]'}
         prefix={
           <>
             {/*<PhoneSvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>*/}
@@ -95,7 +95,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
       <Input
         type={isPasswordVisible ? 'text' : 'password'}
-        className={'bg-[#4D4D4D]'}
+        className={'bg-[var(--grayscale-30)]'}
         // prefix={<KeySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
         prefix={<KeySvg className={"mr-1"}/>}
         placeholder={"Senha (4-12 letras e números)"}
@@ -118,7 +118,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       <section className="flex">
         <Input
           type={"text"}
-          className={"mr-3 md:mr-5 bg-[#4D4D4D]"}
+          className={"mr-3 md:mr-5 bg-[var(--grayscale-30)]"}
           // prefix={<SecuritySvg fill={"#6c7083"} className={"mr-2 w-[24px] h-[24px]"}/>}
           prefix={<SecuritySvg className={"mr-1"} />}
           placeholder={isMobile ? "Código gráfico" : "Código de verificação"}
