@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import QRCode from 'react-qr-code';
 import copy from 'copy-to-clipboard';
@@ -77,7 +77,7 @@ export const WalletDepositNextPage = () => {
     return () => clearTimeout(timer);
   }, [countdown]);
 
-  const message = `Ordem de pagamento criada com sucesso, pague em ${moment().startOf('day').seconds(countdown).format('mm:ss')} minutos!`;
+  const message = `Ordem de pagamento criada com sucesso, pague em 15 minutos!`;
 
   const baseStyle = `
     flex flex-row justify-between
@@ -101,7 +101,7 @@ export const WalletDepositNextPage = () => {
   text-sm md:text-base lg:text-xl text-right text-white
   `
   const shadowContainerStyle = isMobile ? mobileShadowContainerStyle : deskTopShadowContainerStyle
-
+  const initialDateTimeRef = useRef(moment());
   return (
     <PageContainer >
       {contextHolder}
@@ -118,13 +118,13 @@ export const WalletDepositNextPage = () => {
         <section className={cx("mr-4 lg:mr-5 w-full", { "md:w-[60%]": !isMobile })}>
           <ShadowContainer className={shadowContainerStyle}>
             <div className={titleStyle}>Data de criaqao</div>
-            <div className={textStyle}>{moment().format('YYYY-MM-DD HH:mm:ss')}</div>
+            <div className={textStyle}>{initialDateTimeRef.current.format('YYYY-MM-DD HH:mm:ss')}</div>
           </ShadowContainer>
 
-          {!isMobile && <ShadowContainer className={shadowContainerStyle}>
+          <ShadowContainer className={shadowContainerStyle}>
             <div className={titleStyle}>Tempo</div>
             <div className={textStyle}>{moment().startOf('day').seconds(countdown).format('mm:ss')}</div>
-          </ShadowContainer>}
+          </ShadowContainer>
 
           <ShadowContainer className={shadowContainerStyle}>
             <div className={titleStyle}>Numero solicitado</div>
