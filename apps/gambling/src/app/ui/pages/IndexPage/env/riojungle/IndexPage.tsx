@@ -176,7 +176,7 @@ export const IndexPage = ({
 
   return (
     <>
-      <PageContainer id={"app-carousel"}>
+      <PageContainer id={"app-carousel"} className='pb-0'>
         {/*{isMobile && <CompanySloganLabel />}*/}
         <div>
           <AppCarousel setIsMoving={setIsMoving}>
@@ -201,13 +201,13 @@ export const IndexPage = ({
       <PageContainer
         className={cx(
           "z-[2]",
-          "py-2 bg-[var(--grayscale-10)]",
+          "py-3 md:py-8 lg:py-5 bg-[var(--grayscale-10)]",
           {
             "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },
         )}
       >
-        <div className={"flex flex-row justify-between items-center w-full mb-4"}>
+        <div className={"flex flex-row justify-between items-center w-full"}>
           <IndexTabs />
           {!isMobile && (
             <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]"
@@ -259,7 +259,7 @@ export const IndexPage = ({
       }
 
       <PageContainer
-        className={cx("pb-16", {
+        className={cx("pb-16 pt-0", {
         "pt-[58px]": isFixedGameTypeTabs,
         })}
       >
