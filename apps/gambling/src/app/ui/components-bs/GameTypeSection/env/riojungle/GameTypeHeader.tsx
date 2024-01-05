@@ -35,7 +35,9 @@ export const GameTypeHeader = (props: {
             <LeftOutlined className={"text-white text-xl mr-2"} />
           </button>
         )}
-        {icon && icon}
+        <div className="flex items-center mr-2">
+          <img className='w-6 h-6' src={`assets/${environment.assetPrefix}/shared/index-tab-${props.gameTypeName.toLocaleLowerCase()}.png`} alt="recentIcon" />
+        </div>
         <span className={titleClassName}>{props.gameTypeName}</span>
       </div>
 

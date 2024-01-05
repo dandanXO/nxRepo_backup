@@ -1,19 +1,16 @@
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { DesktopGameItem } from "../../GameItem/GameItem";
 import { MobileGameItem } from "../../GameItem/MobileGameItem";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-
-import { DesktopGameNumber, MobileGameNumber } from "../../../../pages/IndexPage";
 import cx from "classnames";
 import { MobileGameList } from "../../GameList/MobileGameList";
 import { GameList } from "../../GameList/GameList";
 import { GameTypeHeader } from "../../GameTypeHeader/GameTypeHeader";
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { IGameTypeSection, IGameTypeSectionList } from "../..";
-import { ArrowRightOutlined } from "@ant-design/icons";
 import { Button } from "../../../Buttons/env/riojungle/Button";
 import { NoData } from "../../../Table/env/riojungle/NoData";
-import { environment } from "apps/gambling/src/environments/environment";
+import { environment } from "../../../../../../environments/environment";
+
 
 export type GameItem = {
   name: string;
@@ -22,6 +19,7 @@ export type GameItem = {
   label?: string;
   type?: string;
 }
+
 
 
 export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) => {

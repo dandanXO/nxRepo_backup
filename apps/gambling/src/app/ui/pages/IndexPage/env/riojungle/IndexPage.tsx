@@ -39,13 +39,13 @@ import { AppCarouselContent8 } from "../../Carousel/env/riojungle/AppCarouselCon
 import { TabItem } from "../../../../components-bs/TabItem/env/riojungle/TabItem";
 
 
-import todos from "./assets/index-tab-todos.png"
-import slots from "./assets/index-tab-slots.png"
-import vivo from "./assets/index-tab-vivo.png"
-import viver from "./assets/index-tab-viver.png"
-import favorite from "./assets/index-tab-favorite.png"
-import fishing from "./assets/index-tab-fishing.png";
-import recent from "./assets/index-tab-recent.png";
+import todos from "../../../../../../assets/riojungle777bet/shared/index-tab-todos.png"
+import slots from "../../../../../../assets/riojungle777bet/shared/index-tab-slots.png"
+import vivo from "../../../../../../assets/riojungle777bet/shared/index-tab-vivo.png"
+import viver from "../../../../../../assets/riojungle777bet/shared/index-tab-viver.png"
+import favorite from "../../../../../../assets/riojungle777bet/shared/index-tab-favorite.png"
+import fishing from "../../../../../../assets/riojungle777bet/shared/index-tab-fishing.png";
+import recent from "../../../../../../assets/riojungle777bet/shared/index-tab-recent.png";
 import { AppCarouselContent6 } from "../../Carousel/env/riojungle/AppCarouselContent6";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 
@@ -241,7 +241,7 @@ export const IndexPage = ({
               title={(
                 <div className='flex items-center gap-2 font-bold'>
                   {
-                    !isMobile && (
+                    (
                       <img className='w-6 h-6' src={`assets/${environment.assetPrefix}/icon_recent.png`} alt="recentIcon" />
                     )
                   }

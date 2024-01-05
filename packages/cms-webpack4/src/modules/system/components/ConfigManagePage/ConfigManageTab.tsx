@@ -51,7 +51,6 @@ const ConfigManageTab = (): JSX.Element => {
     };
 
     const renderConfigTypes = (props) => {
-        console.log('props', props);
         const { key } = props;
         const inputProps = {
             ...props,

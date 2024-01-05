@@ -50,7 +50,6 @@ class CustomModal extends React.Component<CustomModalProp, CustomModalState> {
   };
   constructor(props: CustomModalProp) {
     super(props);
-    console.log('props', props);
     this.state = {
       show: props.show ? props.show : true,
     };
