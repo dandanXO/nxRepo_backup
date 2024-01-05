@@ -21,7 +21,7 @@
   --state-success-main: #32D957;
   --state-success-variant: #E2FFE8;
   --state-error-main: #F05151;
-  --state-error-main-30: #F05151;
+  --state-error-main-30: rgba(240, 81, 81, 0.30);
   --state-error-variant: #FF9696;
 
   --state-info-main: #51B7F0 ;

@@ -4,8 +4,7 @@ import { environment } from "../../../../../../../environments/environment";
 const containerStyle = environment.assetPrefix === 'coco777bet' ?
 `
 border-radius: 16px;
-border: 1px solid var(--background-dashboard-main, #5754F3);
-background: var(--background-dashboard-main, linear-gradient(180deg, #5754F3 0%, #121C78 85.42%, #0D1DA4 100%));
+background: var(--background-dashboard-main);
 box-shadow: 4px 4px 4px 0px rgba(255, 255, 255, 0.25) inset, -4px -4px 4px 0px rgba(255, 255, 255, 0.25) inset;
 ` : 
 `
