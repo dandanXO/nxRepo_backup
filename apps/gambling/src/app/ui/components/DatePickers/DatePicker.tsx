@@ -10,7 +10,7 @@ export const dateToString = (date: any) => `${date.getFullYear()}-${String(date.
 
 export const datePickerStyle = {
   padding: '4px 8px',
-  width: '250px',
+  width: '280px',
   color: 'white',
   backgroundColor: 'var(--primary-variant)',
   border: '1px solid rgba(255,255,255,30%)',
