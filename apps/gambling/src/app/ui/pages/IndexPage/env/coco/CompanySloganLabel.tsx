@@ -3,7 +3,7 @@ import {environment} from "../../../../../../environments/environment";
 import {usePageNavigate} from "../../../../hooks/usePageNavigate";
 
 const CompanyLabel = styled.div`
-  background-image: linear-gradient(0deg,#fff 0%,#2b3aff 100%);
+  background-image: linear-gradient(0deg,var(--text-group-from) 0%,var(--text-group-to) 100%);
   //background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
