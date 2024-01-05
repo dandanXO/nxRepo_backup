@@ -47,6 +47,13 @@ export const WithdrawForm = (props: IWithdrawForm) => {
   const titleClassName = props?.titleClassName ? props?.titleClassName : 'text-white font-bold block mb-1 '
   const inputClassName = props?.inputClassName ? props.inputClassName : 'text-main-primary-main leading-none text-sm md:text-xl';
 
+
+  const selectedInputPlaceholder = {
+    'CPF': 'Por favor insira seu CPF',
+    'E-mail': 'Por favor insira seu e-mail',
+    'Telefone(+55)': ''
+  }[props.selectOption.label]
+
   return (
     <section className={'text-left'}>
       <section className={inputSectionClassName}>
@@ -121,7 +128,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
           className="w-full rounded-lg"
           inputClassName={inputClassName}
           themeStyle={'normal'}
-          placeholder={props.selectOption.label}
+          placeholder={selectedInputPlaceholder}
           value={props.selectInput.data}
           validation={props.selectInput.isValidation}
           errorMessage={props.selectInput.errorMessage}
