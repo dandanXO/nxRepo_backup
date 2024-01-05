@@ -185,7 +185,7 @@ export const AppRouter = () => {
           <Route path={PageOrModalPathEnum.GameRecordPage} element={(
             <PageTemplate
               header={{
-                mobile: true,
+                mobile: false,
                 tablet: true,
                 desktop: true,
               }}
@@ -298,7 +298,7 @@ export const AppRouter = () => {
           <Route path={PageOrModalPathEnum.SettingPage} element={(
             <PageTemplate
               header={{
-                mobile: true,
+                mobile: false,
                 tablet: true,
                 desktop: true,
               }}
