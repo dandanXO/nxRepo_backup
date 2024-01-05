@@ -22,6 +22,8 @@ export const GameTypeHeader = (props: {
   const { containerClassName = '', titleClassName = '', buttonClassName = '', icon, seeMoreText = '' } = props;
   const { scrollToCarousel } = useScrollToPartPageTemplate();
   const { isMobile } = useBreakpoint();
+  let gameTypeName = props.gameTypeName.split('-')[1] ? props.gameTypeName.split('-')[1] : props.gameTypeName.split('-')[0]
+  gameTypeName = gameTypeName.toLocaleLowerCase()
   return (
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>
       <div className="flex">
@@ -36,7 +38,7 @@ export const GameTypeHeader = (props: {
           </button>
         )}
         <div className="flex items-center mr-2">
-          <img className='w-6 h-6' src={`assets/${environment.assetPrefix}/shared/index-tab-${props.gameTypeName.toLocaleLowerCase()}.png`} alt="recentIcon" />
+          <img className='w-6 h-6' src={`assets/${environment.assetPrefix}/shared/index-tab-${gameTypeName}.png`} alt="recentIcon" />
         </div>
         <span className={titleClassName}>{props.gameTypeName}</span>
       </div>
