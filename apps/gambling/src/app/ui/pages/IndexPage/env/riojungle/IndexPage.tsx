@@ -233,11 +233,11 @@ export const IndexPage = ({
         recentGameList.length > 0 && (
           <PageContainer
             className={cx(
-              'overflow-hidden'
+              'overflow-hidden py-0'
             )}
           >
             <GameListSection
-              className='mb-0 pl-0 px-0'
+              className='mb-0 md:mb-0 lg:mb-0 pl-0 px-0'
               title={(
                 <div className='flex items-center gap-2 font-bold'>
                   {
@@ -250,9 +250,9 @@ export const IndexPage = ({
                 </div>
               )}
               isShowHeader
-              headerClassName={tcx('mb-0 sm:mb-0 pl-0 py-[14px]', ['py-0', isMobile])}
+              headerClassName={tcx('mb-0 sm:mb-0 pl-0 py-0', ['py-0', isMobile])}
               children={recentGameListRender(recentGameList)}
-              gameListClassName={tcx('py-[14px] animate-[recentGameListShow_0.8s_ease]', ['py-0 pt-2', isMobile])}
+              gameListClassName={tcx('py-[20px] animate-[recentGameListShow_0.8s_ease]', ['py-0 pt-2', isMobile])}
             />
           </PageContainer>
         )
