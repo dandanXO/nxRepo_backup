@@ -318,7 +318,7 @@ export const InviteRecordInfoTabSection = (props: IInviteRecordInfoTabSection) =
         })()
         // console.log("dailyData6", gameRechargeReward);
 
-        const day = z.day
+        const day = moment(`${z.day}`, 'YYYYMMDD').format('DD.MM.YYYY')
 
         return { numRecharge, firstRecharge, gameRecharge, gameRechargeReward, totalReward, dividendos, day }
     })
