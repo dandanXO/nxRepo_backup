@@ -17,7 +17,7 @@ export const NotificationPage = () => {
   const { onClickToProfile } = usePageNavigate()
 
   return (
-    <PageContainer className='text-white bg-[#333333]'>
+    <PageContainer className='text-white bg-[#333333] h-full'>
       <BackNavigation
         className='pt-0 pb-0'
         onClick={onClickToProfile}
@@ -25,7 +25,7 @@ export const NotificationPage = () => {
 
       <div className='my-3 text-sm'>Centro de Notificaciones</div>
 
-      <div className='grow h-full overflow-y-auto mb-20'>
+      <div className='h-[80%] overflow-y-auto'>
         {
           messages.map((message, index)=>(
             <NotificationElement
