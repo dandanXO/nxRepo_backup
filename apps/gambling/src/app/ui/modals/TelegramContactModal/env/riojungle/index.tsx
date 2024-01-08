@@ -70,7 +70,7 @@ export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
         </div>
 
 
-        <img alt='icon' className={tcx('w-[216px] mb-8', ['w-[160px] mt-10 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
+        <img alt='icon' className={tcx('w-[216px] mb-8', ['w-[160px] mt-10 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram_modal.png`} />
         <div className={"flex flex-col"}>
           <div className={"mb-8 text-white"}>
             <div
