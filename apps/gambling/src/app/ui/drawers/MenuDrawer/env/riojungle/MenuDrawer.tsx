@@ -72,6 +72,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
   width:248px;
 `;
   const {scrollToWindowTop} = useScrollToPartPageTemplate();
+
   return (
     <div
       className={twMerge((isMobile || isTablet) && "bg-[rgba(0,0,0,.6)] fixed left-0 top-0 right-0 bottom-0 w-full h-full", props.className)}
@@ -81,8 +82,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
         close();
       }}
     >
-      <Wraaper>
-        <div
+        <Wraaper
           id="TabBarRoot"
           // NOTICE: cx->twMerge 下面 bg 會失效 (refactor me)
           className={cx(
@@ -390,8 +390,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
           </div>
 
 
-        </div>
-      </Wraaper>
+        </Wraaper>
     </div>
   )
 }
