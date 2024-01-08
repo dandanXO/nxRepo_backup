@@ -19,16 +19,16 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
             {/* {props.isProxy && <th className={thStyle}>Dividendos</th>} */}
             <th className={thStyle}>Valor Da Transação Do Jogo</th>
             <th className={`${thStyle}`}>
-              <div className="flex">
-                <div>Recompensas De Troca De Jogos</div>
-                <div className='ml-1 self-start'>
+              <div>
+                Recompensas De Troca De Jogos
+                <span className='ml-2'>
                   <IconTooltip
                     tooltipStyle={{ fontSize: isTablet ? '14px' : '16px', width: '250px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}
                     id='game-bonus-tooltip'
                     icon={<QuestionTipsIcon className={'text-base'} />}
                     content='As recompensas são liquidadas toda segunda-feira'
                   />
-                </div>
+                </span>
               </div>
             </th>
             <th className='text-sm lg:text-base p-4 text-[#b3b3b3]'>Recompensa Total</th>
