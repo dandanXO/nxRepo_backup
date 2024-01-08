@@ -17,7 +17,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
   } = useUserMoneyStatusSection();
 
   return (
-    <div className="w-[264px] h-[40px] bg-[#4d4d4d] flex flex-row justify-between items-center rounded-lg"
+    <div className="w-full h-[40px] bg-[#4d4d4d] flex flex-row justify-between items-center rounded-lg"
          // className={twMerge("px-3 flex flex-row justify-between items-center  md:h-11", props.className)}>
     >
       <div className="flex flex-row items-center pl-2 pr-6 py-[6px]">
@@ -30,7 +30,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
         </button>
 
         <div className="flex flex-row items-start">
-          <div className="text-xl font-medium leading-[28px] text-white">
+          <div className="text-sm lg:text-base xl:text-xl font-medium leading-[28px] text-white">
             {isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$ ${formatLocaleMoney(totalBalanceSheetValue)}`}
           </div>
         </div>
