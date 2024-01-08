@@ -5,10 +5,11 @@ import cx from "classnames"
 import { environment } from "../../../../../../../../environments/environment";
 import { useRechargeHistoryListMutation, useWithdrawHistoryListMutation } from "../../../../../../../external";
 import { useEffect } from "react";
+import copy from "copy-to-clipboard";
+import { notification } from "antd";
 import { AppLocalStorage } from "../../../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../../../utils/format";
-import { CopyIcon } from '../../../../../../components-bs/Icons/CopyIcon';
 
 const Container = styled.div`
   /* background: rgba(255, 255, 255, 0.1); */
@@ -21,7 +22,6 @@ const TradeStatusMap: { [key: number]: string } = {
   4: 'Falhar',
   5: 'Congelados',
 };
-
 const NoData = () => {
   return (
     <div className=' flex flex-col justify-center items-center py-10 border-[#B3B3B3] border-dashed border-2 rounded-lg'>
@@ -31,6 +31,13 @@ const NoData = () => {
   )
 }
 export const DepositMobileTable = () => {
+  const [notice, contextHolder] = notification.useNotification()
+  const onClickToCopy = (copyText: string) => {
+    copy(copyText || '');
+    notice.success({
+      message: "Copiado!"
+    })
+  }
   const [triggerGetDepositRecord, { data }] = useRechargeHistoryListMutation()
 
   useEffect(() => {
@@ -44,6 +51,7 @@ export const DepositMobileTable = () => {
 
   return (
     <div>
+      {contextHolder}
       {data?.data?.length === 0
         ? <NoData />
         : <div className="h-[80vh] overflow-y-auto">
@@ -60,6 +68,7 @@ export const DepositMobileTable = () => {
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
                   <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
+                    onClick={()=>onClickToCopy(record.pay_serial_no)}
                     src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
                   />
                 </div>  
@@ -111,7 +120,13 @@ export const DepositMobileTable = () => {
 
 export const WithdrawMobileTable = () => {
   const [triggerGetWithdrawRecord, { data }] = useWithdrawHistoryListMutation({})
-
+  const [notice, contextHolder] = notification.useNotification()
+  const onClickToCopy = (copyText: string) => {
+    copy(copyText || '');
+    notice.success({
+      message: "Copiado!"
+    })
+  }
   useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
@@ -123,6 +138,7 @@ export const WithdrawMobileTable = () => {
 
   return (
     <div>
+      {contextHolder}
       {data?.data?.length === 0
         ? <NoData />
         : <div className={cx("overflow-y-auto", { "h-[80vh]": data?.data?.length || 0 > 0 })}>
@@ -139,6 +155,7 @@ export const WithdrawMobileTable = () => {
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
                   <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
+                  onClick={()=>onClickToCopy(record.pay_serial_no)}
                     src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
                   />
                 </div>  
