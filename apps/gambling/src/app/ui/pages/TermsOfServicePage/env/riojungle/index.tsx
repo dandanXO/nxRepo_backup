@@ -20,8 +20,7 @@ export const TermsOfServicePage = () => {
       <BackNavigation className='text-base sm:text-lg lg:text-2xl' onClick={()=>onClickToIndex()} />
 
       <div className='text-lg lg:text-2xl font-medium pb-5 sm:pb-8 lg:pb-10'>Termos de Serviço</div>
-
-      ALL USERS OF {environment.platformName} ONLINE GAMES, SERVICES, AND WEBSITES MUST ACKNOWLEDGE THAT THEY HAVE READ, UNDERSTOOD, AND AGREED TO BE SUBJECT TO THESE TERMS.
+      ALL USERS OF {environment.platformName} ONLINE GAMES,SERVICES, AND WEBSITES MUST ACKNOWLEDGE THAT THEY HAVE READ, UNDERSTOOD, AND AGREED TO BE SUBJECT TO THESE TERMS
       <TermsBr/>
       {environment.platformName} respects your privacy and understands the importance of protecting your personal information. We will only collect information we need to fulfill your requests and our legitimate business objectives. We will never send you marketing communications without your consent and we will never share your personal information with third parties who are not bound by our privacy policy, unless you give us your consent.
       <TermsBr/>
