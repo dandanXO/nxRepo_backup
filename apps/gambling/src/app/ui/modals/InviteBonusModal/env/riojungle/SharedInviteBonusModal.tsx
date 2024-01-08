@@ -113,7 +113,7 @@ export const SharedInviteBonusModal = (props: IInitialChargeModal) => {
                 </button>
                 <button
                   id="Btn1"
-                  className="text-sm font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main-from)] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
+                  className="text-sm font-medium leading-[20px] text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center pt-2 w-1/2 h-10 cursor-pointer items-start rounded-lg"
                   onClick={() => {
                     props.onConfirm();
                   }}
