@@ -97,7 +97,9 @@ export const Toolbox = (props: IToolbox) => {
                       <div>
                         <ToolButton
                           className={"mb-1"}
-                          onClick={props.onClickToOpenTelegramService}
+                          onClick={()=>{
+                            dispatch(appSlice.actions.setShowTelegramDetailContactModal(true))
+                          }}
                         >
                           <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
                         </ToolButton>
