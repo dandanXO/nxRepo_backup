@@ -59,7 +59,6 @@ export const AppCarousel = (props: IAppCarousel) => {
 
   return (
     <div className={cx({
-      "isdesktop": !isMobile,
       "ismobile": isMobile
     })}>
       <Carousel

@@ -178,16 +178,14 @@ export const MyPage = ({
           <CaretRight />
         </button>
 
-      </div>
-
-      <div className='sticky bottom-0 left-0 w-full h-[60px] bg-[var(--grayscale-10)]'>
         <button
-          className='absolute top-0 -translate-y-[50%] w-full py-[10px] text-white text-sm font-medium flex items-center justify-center gap-2 bg-[#10B98F] rounded-[20px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
+          className='my-5 w-full py-[10px] text-white text-sm font-medium flex items-center justify-center gap-2 bg-[#10B98F] rounded-[20px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
           onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}
         >
           <div>Sair</div>
           <img alt='signOut' className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon=sign-out.png`}/>
         </button>
+
       </div>
     </PageContainer>
   )
