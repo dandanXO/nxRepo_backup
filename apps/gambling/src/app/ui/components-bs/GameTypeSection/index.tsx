@@ -46,6 +46,7 @@ export type IGameTypeSectionList = {
   hotGames?: boolean;
   expandCount?: number;
   userFavorite: number[]
+  labelImgUrl?: string;
   onClickFavoriteGameItem: (item: GameItem) => void;
 }
 

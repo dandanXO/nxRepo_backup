@@ -59,7 +59,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
   return (
     <>
       <section
-        className='flex gap-2 items-center cursor-pointer'
+        className='flex gap-2 items-center cursor-pointer w-full'
         onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover)) }}
         onMouseOver={() => {
           // console.log("onMouseOver")
@@ -108,9 +108,9 @@ const UserMoneyStatusSectionItem = (props: IUserMoneyStatusSection) => {
 
   const devices = useBreakpoint();
   return (
-    <section className={"flex flex-row items-center gap-6 mr-3"}>
+    <section className={"flex flex-row items-center gap-6 mr-3 grow w-full"}>
 
-      <div className={""}>
+      <div className={"w-full min-w-[250px]"}>
         <UserMoneyStatusSection />
       </div>
 
@@ -248,7 +248,7 @@ export const Header = (props: IHeader) => {
               <UserActionSection />
             ) : (
               <div className={"flex flex-row"}>
-                <div className={"mr-6"}>
+                <div className={"mr-6 min-w-[250px]"}>
                   <UserMoneyStatusSectionItem onClickToOpenNotificationDrawer={props.onClickToOpenNotificationDrawer} />
                 </div>
                 <SearchSection />

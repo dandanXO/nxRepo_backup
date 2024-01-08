@@ -33,6 +33,7 @@ export type GameItem = {
   gameId?: string;
   label?: string;
   type?: string;
+  labelImgUrl?: string
 }
 
 
@@ -44,7 +45,6 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
 
   const MainGameList = isMobile ? MobileGameList : GameList
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem
-
   return (
     <section className={cx({
       "flex flex-col mb-4": !props.isLatestItem,
