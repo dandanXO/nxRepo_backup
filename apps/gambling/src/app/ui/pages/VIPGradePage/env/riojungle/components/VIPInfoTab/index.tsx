@@ -19,7 +19,7 @@ const jackpotMap: { [key: string]: string} = {
 }
 
 interface IVIPInfoTabProps {
-  signInDayConfig: number;
+  signInTotalDays?: number;
   allLevelInfo: GetUserVIPAllInfoResponse['data'];
   allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig'];
   className?: string;
@@ -27,7 +27,7 @@ interface IVIPInfoTabProps {
 
 export const VIPInfoTab = ({
   className,
-  signInDayConfig,
+  signInTotalDays,
   allLevelInfo,
   allSignInConfig
 }: IVIPInfoTabProps) => {
@@ -37,7 +37,7 @@ export const VIPInfoTab = ({
 
   const vipInfoTabList: { title: string, icon: string, contentKey: 'signInBonus' | 'upRewardAmout' | 'withdrawAmountLimitDay' | 'withdrawTimesLimitDay' }[] = [
     {
-      title: `Recompensa total de check-in de ${signInDayConfig} dias`,
+      title: `Recompensa total de check-in de ${signInTotalDays} dias`,
       icon: GiftIcon,
       contentKey: 'signInBonus'
     },
