@@ -68,6 +68,7 @@ const BaseInput = (props: IInput) => {
             props.children
           ) : (
             <input
+              onWheel={(e) => e.currentTarget.blur()}
               onKeyDown={props.onKeyDown}
               // ref={inputRef as any}
               onClick={() => props.onClick && props.onClick()}
