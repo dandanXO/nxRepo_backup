@@ -26,7 +26,7 @@ const queryStringParams = (queryString:IQueryStringProps) => {
 export const usePageNavigate = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {isLogin, isShowLoginModal} = useSelector((state: RootState) => state.app)
+  const {isLogin, isShowLoginModal, isShowGameSearchModal} = useSelector((state: RootState) => state.app)
   const { isDesktop } = useBreakpoint();
 
   const onClickToIndex = () => {
@@ -156,6 +156,9 @@ export const usePageNavigate = () => {
     if(!isLogin) {
       dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     } else {
+      if(isShowGameSearchModal) {
+        dispatch(appSlice.actions.setShowGameSearchModal(false))
+      }
       navigate(`${PageOrModalPathEnum.GamePage}?gameName=${item.name}&gameId=${item.gameId}&label=${item.type === "null" ? item.label : item.type}`)
       addGameToRecent(item)
     }
