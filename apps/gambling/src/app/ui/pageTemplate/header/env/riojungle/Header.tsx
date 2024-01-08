@@ -108,7 +108,7 @@ const UserMoneyStatusSectionItem = (props: IUserMoneyStatusSection) => {
 
   const devices = useBreakpoint();
   return (
-    <section className={"flex flex-row items-center gap-6 mr-3 grow w-full"}>
+    <section className={"flex flex-row items-center gap-6 mr-3 grow w-8/12"}>
 
       <div className={"w-full min-w-[250px]"}>
         <UserMoneyStatusSection />
