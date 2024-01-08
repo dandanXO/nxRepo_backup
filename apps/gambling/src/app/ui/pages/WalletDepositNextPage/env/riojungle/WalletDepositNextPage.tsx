@@ -98,7 +98,7 @@ export const WalletDepositNextPage = () => {
   text-left text-[#B3B3B3] text-sm lg:text-xl
   `
   const textStyle = `
-  text-sm md:text-base lg:text-xl text-right text-white
+  text-sm md:text-base lg:text-xl text-right text-white font-bold
   `
   const shadowContainerStyle = isMobile ? mobileShadowContainerStyle : deskTopShadowContainerStyle
   const initialDateTimeRef = useRef(moment());
@@ -118,7 +118,7 @@ export const WalletDepositNextPage = () => {
         <section className={cx("mr-4 lg:mr-5 w-full", { "md:w-[60%]": !isMobile })}>
           <ShadowContainer className={shadowContainerStyle}>
             <div className={titleStyle}>Data de criaqao</div>
-            <div className={textStyle}>{initialDateTimeRef.current.format('YYYY-MM-DD HH:mm:ss')}</div>
+            <div className={textStyle}>{initialDateTimeRef.current.format('DD.MM.YYYY HH:mm:ss')}</div>
           </ShadowContainer>
 
           <ShadowContainer className={shadowContainerStyle}>
