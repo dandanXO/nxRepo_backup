@@ -58,11 +58,13 @@ export const SubTabItem = (props: ITabItem) => {
         props.className
       )}
     > 
-    {props.imgUrl && (!imgError)?
-      <img className='w-[64px] h-[32px] ' src={props.imgUrl} alt='img' onError={handleImageOnError}  />
-      :
-      props.name
-    }
+    {
+    props.name === "All" ? props.name :
+      props.imgUrl && (!imgError)?
+        <img className='w-[64px] h-[32px] ' src={props.imgUrl} alt='img' onError={handleImageOnError}  />
+        :
+        props.name
+      }
       
     </div>
   )
