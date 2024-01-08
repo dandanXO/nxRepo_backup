@@ -87,10 +87,10 @@ export const JackpotMap: {
 
   export interface IVIPGradePageProps {
     currentLevel: number;
-    signInDayConfig: number;
     allLevelInfo: GetUserVIPAllInfoResponse['data']
     allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig']
     userVIPInfo?: GetVIPInfoResponse
+    signInTotalDays?: number
   }
 
  export const VIPGradePage = () => {
@@ -196,6 +196,8 @@ export const JackpotMap: {
     0
   );
 
+  const signInTotalDays = JSON.parse((allSignInConfig[0] || {}).value || '[]').length
+
   return renderByPlatform({
     "wild777bet": (
       <WVIPGradePage
@@ -217,7 +219,7 @@ export const JackpotMap: {
     ),
     "riojungle777bet": (
       <RioJungleVIPGradePage
-        signInDayConfig={signInConfig?.data?.signInConfig?.length || 0}
+        signInTotalDays={signInTotalDays}
         currentLevel={currentLevel}
         allLevelInfo={allLevelInfo}
         userVIPInfo={userVIPInfo}

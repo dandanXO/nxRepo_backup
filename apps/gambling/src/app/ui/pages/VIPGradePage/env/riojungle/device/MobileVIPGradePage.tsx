@@ -16,7 +16,7 @@ export const MobileVIPGradePage = ({
   allLevelInfo,
   allSignInConfig,
   userVIPInfo,
-  signInDayConfig
+  signInTotalDays
 }: IVIPGradePageProps) => {
   const { selectedVIP, setSelectedVIP} = useRioVIPGradePage(currentLevel, userVIPInfo?.data.vip_score);
   const { scrollWrapperRef } = useScrollSelectFixCenter(selectedVIP, false);
@@ -84,7 +84,7 @@ export const MobileVIPGradePage = ({
       </div>
 
       {/*VIP INFO TAB*/}
-      <VIPInfoTab className='mt-3' signInDayConfig={signInDayConfig} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig} />
+      <VIPInfoTab className='mt-3' signInTotalDays={signInTotalDays} allLevelInfo={allLevelInfo} allSignInConfig={allSignInConfig} />
 
     </PageContainer>
   )
