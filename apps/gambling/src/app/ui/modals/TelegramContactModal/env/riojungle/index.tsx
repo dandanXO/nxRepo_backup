@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {environment} from "../../../../../../environments/environment";
 import { tcx } from "../../../../utils/tcx";
+import cx from "classnames"
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
@@ -18,8 +19,7 @@ const Container = styled.div`
 
 
 const ModalButton = styled.button`
-  border-radius: 25px;
-  background: #33ABE0;
+  border-radius: 8px;
   box-shadow: 0px -4px 4px 0px #00000040 inset;
   box-shadow: 0px 4px 4px 0px #FFFFFF40 inset;
   width: 100%;
@@ -40,7 +40,7 @@ export type ITelegramContactModal = {
 
 export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
 
-  const { isMobile } = useBreakpoint();
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const telegramId = AppLocalStorage.getItem(AppLocalStorageKey.telegramGroup);
   return (
     <BaseModal className={"flex flex-col justify-center items-center"} onClose={(event) => {
@@ -49,7 +49,8 @@ export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
 
       <Container
         className={tcx(
-          "w-[410px] w-min-[80vh] w-max-[400px] h-auto bg-[#333333] rounded-2xl flex flex-col items-center relative px-5 py-6",
+          "shadow-[inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] relative bg-gradient-144 from-[var(--liner-main-from)] to-[var(--liner-main-to)]",
+          "w-[410px] w-min-[80vh] w-max-[400px] h-auto rounded-xl flex flex-col items-center relative px-5 py-6",
           ['w-[330px] py-4', isMobile]
           )}
         onClick={(event) => {
@@ -64,34 +65,41 @@ export const RiojungleTelegramContactModal = (props: ITelegramContactModal) => {
               props.close();
             }}
           >
-            <CloseICON className="w-[40px] h-[40px] " btnClassName={'mt-4 mr-4 hover:rounded-full hover:bg-[rgba(255,255,255,0.1)]'} outLined={true}/>
+            <CloseICON className="w-[40px] h-[40px] " btnClassName={'mt-3 mr-3 hover:rounded-full hover:bg-[rgba(255,255,255,0.1)]'} outLined={true}/>
           </div>
         </div>
 
 
-        <img alt='icon' className={tcx('w-[96px] mt-[40px] mb-8', ['w-[80px] mt-10 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
+        <img alt='icon' className={tcx('w-[216px] mb-8', ['w-[160px] mt-10 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
         <div className={"flex flex-col"}>
           <div className={"mb-8 text-white"}>
-            {/* <ModalTitle
+            <div
               style={{
               // background: 'linear-gradient(180deg, var(--text-gradient-ad-tg-from) 0%, var(--text-gradient-ad-tg-to) 100%)',
               // WebkitBackgroundClip: 'text',
               color: 'white',
               }}
-              className={tcx('text-[32px]', ['text-base', isMobile])}
-            >Junte-se a nós</ModalTitle> */}
-            <div className={tcx("text-text-telegram text-center text-lg font-medium", ['text-[14px] mt-0', isMobile])}>
-              Para cooperação comercial, entre em contato com o gerente
+              className={tcx('text-[24px] text-center font-bold',['text-lg', isTablet] , ['text-base', isMobile])}
+            >Junte-se a nós</div>
+            <div className={tcx("text-text-telegram text-center text-base font-normal", ['text-[14px] mt-0', isMobile])}>
+            Prezados clientes VIP, juntem-se ao nosso canal oficial do Telegram. Realizaremos vários eventos de loteria de tempos em tempos. Dezenas de milhares de reais estão esperando por você para reivindicar.
             </div>
           </div>
 
           <div className={"flex flex-col justify-center items-center"}>
             <ModalButton
-              className={tcx('text-lg w-[168px] h-[31px]', ['text-sm w-[99px] h-[31px]', isMobile])}
+              className={cx(
+                {'text-sm': isMobile},
+                {'text-base': isTablet},
+                {'text-lg': isDesktop},
+                'py-3',
+                  'text-white bg-[var(--primary-main)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] flex flex-row justify-center cursor-pointer'
+                )}
               onClick={() => props.toTelegramGroup() }
             >
-              <img alt='icon' className={tcx('w-[24px] mr-2', ['w-[20px] mr-2', isMobile])} src={`assets/${environment.assetPrefix}/TelegramLogoOutline.png`} />
-              <span className={"font-bold"}>{telegramId}</span>
+              <span>Junte-se</span>
+              {/* <img alt='icon' className={tcx('w-[24px] mr-2', ['w-[20px] mr-2', isMobile])} src={`assets/${environment.assetPrefix}/TelegramLogoOutline.png`} /> */}
+              {/* <span className={"font-bold"}>{telegramId}</span> */}
             </ModalButton>
           </div>
         </div>
