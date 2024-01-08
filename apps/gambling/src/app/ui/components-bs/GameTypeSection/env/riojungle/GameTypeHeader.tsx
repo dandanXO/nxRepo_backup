@@ -17,12 +17,16 @@ export const GameTypeHeader = (props: {
   setExpandedBrand?: Dispatch<SetStateAction<string>>;
   isViewAll?: boolean;
   icon?: ReactElement;
-
+  data?: any
 }) => {
-  const { containerClassName = '', titleClassName = '', buttonClassName = '', icon, seeMoreText = '' } = props;
+  const { containerClassName = '', titleClassName = '', buttonClassName = '', icon, seeMoreText = '', data = [] } = props;
   const { scrollToCarousel } = useScrollToPartPageTemplate();
   const { isMobile } = useBreakpoint();
   let gameTypeName = props.gameTypeName.split('-')[1] ? props.gameTypeName.split('-')[1] : props.gameTypeName.split('-')[0]
+  if(props?.data[0]) {
+    // 防呆處理 
+    gameTypeName = props.data[0].label
+  }
   gameTypeName = gameTypeName.toLocaleLowerCase()
   return (
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>
