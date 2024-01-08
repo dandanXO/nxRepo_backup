@@ -1,6 +1,7 @@
 import { Dispatch, ReactElement, SetStateAction } from "react";
 import { environment } from "../../../../../../environments/environment";
 import cx from 'classnames';
+import { useSelector} from "react-redux";
 import { LeftOutlined } from "@ant-design/icons";
 import { useScrollToPartPageTemplate } from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
@@ -23,6 +24,8 @@ export const GameTypeHeader = (props: {
   const { containerClassName = '', titleClassName = '', buttonClassName = '', icon, seeMoreText = '', data = [] } = props;
   const { scrollToCarousel } = useScrollToPartPageTemplate();
   const { isMobile } = useBreakpoint();
+  const { indexPagecurrentSelectLabel } = useSelector((state: any) => state.gameList);
+  console.log('indexPagecurrentSelectLabel', indexPagecurrentSelectLabel)
   let gameTypeName = props.gameTypeName.split('-')[1] ? props.gameTypeName.split('-')[1] : props.gameTypeName.split('-')[0]
   if(props.isViewAll){
     if(props?.data[0]) {
@@ -34,6 +37,9 @@ export const GameTypeHeader = (props: {
       // 防呆處理  後端結構可能會改因此預留
       gameTypeName = props.data[0]?.type.split('-')[0] as string
     }
+  }
+  if(indexPagecurrentSelectLabel === 'Favoritos'){
+    gameTypeName = 'favoritos'
   }
   
   return (
