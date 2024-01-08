@@ -1,9 +1,8 @@
 import {useDispatch} from "react-redux";
-import {rootState} from "../../../../../../../../../packages/dlh-web/src/store/root";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import {environment} from "../../../../../../environments/environment";
-import {LoadingLogo} from "../../../../components-bs/Logos/LoadingLogo";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
+import { MenuSmallLogo } from "../../../../components-bs/Logos/env/riojungle/MenuSmallLogo";
 
 export const RiojungleIOSDownloadModal = () => {
   const dispatch = useDispatch();
@@ -71,7 +70,7 @@ export const RiojungleIOSDownloadModal = () => {
                 <div className="flex flex-col w-full items-start">
                   <div className="bg-white flex flex-row justify-start w-full items-center px-3 py-4">
 
-                    <LoadingLogo className={"w-[54px] h-[54px] mr-2"}/>
+                    <MenuSmallLogo className={"w-[54px] h-[54px] mr-2"}/>
 
                     <div className="flex flex-col items-start overflow-auto ml-3">
                       <div className="flex flex-col w-full items-start">

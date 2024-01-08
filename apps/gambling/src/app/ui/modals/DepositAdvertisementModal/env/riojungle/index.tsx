@@ -38,7 +38,7 @@ export const DepositAdvertisementModal = ({
       </div>
 
       <button
-        className='mt-5 py-[10px] sm:py-[12px] lg:py-[14px] text-sm sm:text-base lg:text-xl bg-[var(--primary-main-from)] rounded-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] w-full'
+        className='mt-5 py-[10px] sm:py-[12px] lg:py-[14px] text-sm sm:text-base lg:text-xl bg-[var(--primary-main)] rounded-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] w-full'
         onClick={onConfirm}
       >
         Depósito
