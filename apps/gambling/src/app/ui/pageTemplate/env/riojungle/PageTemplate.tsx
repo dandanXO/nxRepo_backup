@@ -112,9 +112,15 @@ export const PageTemplate = ({
   // NOTE: AddToMobileShortCut
   const inNativeApp = useSelector((rootState: RootState) => rootState.app.inNativeApp);
   const [hideAddToMobileShortcut] = useLocalStorage(AppLocalStorageKey.hideAddToMobileShortcut, false)
-  const isShowAddToMobileShortCut = isMobile && !inNativeApp && !hideAddToMobileShortcut
-
   const location = useLocation();
+  // 是否在遊戲中 如果在遊戲中 需要隱藏MobileShortCut 且不影響 前面三者功能的判斷
+  let isIngameRoute = false
+  if(location.pathname === '/game'){
+    isIngameRoute = true
+  }
+  const isShowAddToMobileShortCut = isMobile && !inNativeApp && !hideAddToMobileShortcut && !isIngameRoute
+
+  
 
   const childrenMarginLeft = (isMobile && menuDrawer.mobile && menuDrawer.mobileOverChildren ||
     isTablet && menuDrawer.tablet && menuDrawer.tabletOverChildren ||
