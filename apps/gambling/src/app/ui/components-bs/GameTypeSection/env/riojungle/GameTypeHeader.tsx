@@ -26,8 +26,9 @@ export const GameTypeHeader = (props: {
   let gameTypeName = props.gameTypeName.split('-')[1] ? props.gameTypeName.split('-')[1] : props.gameTypeName.split('-')[0]
   if(props.isViewAll){
     if(props?.data[0]) {
-      gameTypeName = props.data[0].label.toLowerCase()
+      gameTypeName = props.data[0].label
     }
+    gameTypeName = gameTypeName.toLowerCase()
   }else{
     if(props?.data[0]) {
       // 防呆處理  後端結構可能會改因此預留
