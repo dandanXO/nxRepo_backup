@@ -5,7 +5,7 @@ import { InviteCopySection } from "./InviteCopySection";
 
 export const HowToImageContainer = styled.div`
   position: relative;
-  background-image: url("assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_1.png");
+  background-image: url("assets/${environment.uVersion}/${environment.mvVersion}/banner_1.png");
   background-size: 1524px 423px;
   //background-size: cover;
   overflow: hidden;

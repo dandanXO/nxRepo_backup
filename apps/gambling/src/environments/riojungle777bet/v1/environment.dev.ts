@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   uVersion: "riojungle777bet",
-  assetVersionPrefix: "v1",
+  mvVersion: "v1",
   mockBackend: false,
   platformName: "Dev Rio Jungle bet",
   platformGroup: "YH Group",

@@ -20,7 +20,7 @@ export const InitialChargePage = () => {
     <PageContainer className='text-white'>
       {/*Banner*/}
       <div className='relative w-full'>
-        <img alt='banner' src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_10.png`}/>
+        <img alt='banner' src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_10.png`}/>
         <div className='absolute left-3 sm:left-10 lg:left-16 top-1/2 -translate-y-1/2'>
           <div className='text-xl sm:text-[36px] sm:leading-[36px] lg:text-[60px] lg:leading-[60px] font-bold'>Bônus de primeira <br/> recarga</div>
           <button

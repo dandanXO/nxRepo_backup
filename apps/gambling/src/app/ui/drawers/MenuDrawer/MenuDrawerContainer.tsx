@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {environment} from "../../../../environments/environment";
 
 const StyledMenuDrawerContainer = styled.div`
-  background: url(assets/${environment.uVersion}/${environment.assetVersionPrefix}/bg_sidebar_mobile.png);
+  background: url(assets/${environment.uVersion}/${environment.mvVersion}/bg_sidebar_mobile.png);
 `
 
 export type IMenuDrawer = {

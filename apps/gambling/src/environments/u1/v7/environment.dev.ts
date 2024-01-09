@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   uVersion: "u1",
-  assetVersionPrefix: "v7",
+  mvVersion: "v7",
   mockBackend: false,
   platformName: "Dev Carnaval777Bet",
   platformGroup: "O TT Group",

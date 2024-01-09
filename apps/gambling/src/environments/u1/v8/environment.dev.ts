@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   uVersion: "u1",
-  assetVersionPrefix: "v8",
+  mvVersion: "v8",
   mockBackend: false,
   platformName: "Dev SambaFortuneBet",
   platformGroup: "O E STAR Group",

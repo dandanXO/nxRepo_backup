@@ -19,8 +19,8 @@ export const AppCarouselContent4 = (props: IAppCarouselContent) => {
       <div className={""}>
         <CarouselImage
           alt={"banner_4"}
-          src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_4.png`}
-          genieSrc={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/genie_4.png`}
+          src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_4.png`}
+          genieSrc={`assets/${environment.uVersion}/${environment.mvVersion}/genie_4.png`}
         />
         <CarouselTitleSection className={"sm:top-[45%] md:top-[45%]"}>
           Colete denheiro sem parar todos os dias!

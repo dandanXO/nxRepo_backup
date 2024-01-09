@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   uVersion: "u1",
-  assetVersionPrefix: "m2mv1v10",
+  mvVersion: "m2mv1v10",
   mockBackend: false,
   platformName: "Dev BrasilSlotsBet",
   platformGroup: "O E STAR Group",

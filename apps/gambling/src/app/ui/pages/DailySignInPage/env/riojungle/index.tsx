@@ -56,7 +56,7 @@ const DailySignInPage = ({
 
       {/*Banner*/}
       <div className='relative text-white font-bold'>
-        <img alt='banner' src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/daily_sign_in_banner.png`}/>
+        <img alt='banner' src={`assets/${environment.uVersion}/${environment.mvVersion}/daily_sign_in_banner.png`}/>
         <div className={tcx('absolute left-[5%] top-1/2 transform -translate-y-1/2 text-[3vw] leading-[3vw]', ['text-xl leading-none', isMobile])}>
           {
             isDesktop && (

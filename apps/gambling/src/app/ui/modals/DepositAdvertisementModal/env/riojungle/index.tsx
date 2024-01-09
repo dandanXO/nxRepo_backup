@@ -27,7 +27,7 @@ export const DepositAdvertisementModal = ({
       />
       <img
         alt='genie'
-        src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/deposit-genie.png`}
+        src={`assets/${environment.uVersion}/${environment.mvVersion}/deposit-genie.png`}
         className='w-3/5 -mt-[50px] sm:-mt-[50px]'
       />
 
