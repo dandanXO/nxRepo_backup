@@ -12,7 +12,7 @@ type IProps = {
 export const BackNavigation = (props: IProps) => {
   return (
     <div className={tcx("relative text-xl text-left text-white",
-      "pb-3",
+      "p-3",
       "md:pb-6",
       props.className)}>
       <div

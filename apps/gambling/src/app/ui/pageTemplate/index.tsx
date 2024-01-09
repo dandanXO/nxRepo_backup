@@ -259,6 +259,29 @@ export const PageTemplate = (props: IPage) => {
             isShowTabbar={isShowTabbar}
             showToolboxConfig={props.showToolboxConfig}
 
+            header={{
+              mobile: isShowMobileHeader,
+              tablet: isShowTabletHeader,
+              desktop: isShowDesktopHeader,
+            }}
+            footer={{
+              mobile: isShowMobileFooter,
+              tablet: isShowTabletFooter,
+              desktop: isShowDesktopFooter,
+            }}
+            tabBar={{
+              mobile: isShowMobileTabBar,
+              tablet: isShowTabletTabBar,
+              desktop: isShowDesktopTabBar,
+            }}
+            menuDrawer={{
+              mobile: isShowMobileMenuDrawer,
+              tablet: isShowTabletMenuDrawer,
+              desktop: isShowDesktopMenuDrawer,
+              mobileOverChildren,
+              tabletOverChildren,
+              desktopOverChildren
+            }}
           >
             {props.children}
           </CPageTemplate>
