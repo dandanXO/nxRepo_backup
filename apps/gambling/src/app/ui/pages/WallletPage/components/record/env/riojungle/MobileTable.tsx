@@ -64,7 +64,7 @@ export const DepositMobileTable = () => {
               )}
             >
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                <div className='font-bold text-[var(--white-40)]'>Identificador</div>
+                <div className='text-[#B3B3B3] font-normal'>Identificador</div>
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
                   <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
@@ -74,7 +74,7 @@ export const DepositMobileTable = () => {
                 </div>  
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Valor</span>
+                <span className={'text-[#B3B3B3] font-normal'}>Valor</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
@@ -82,19 +82,19 @@ export const DepositMobileTable = () => {
                 className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'
                 }
               >
-                <span className={'text-[var(--white-40)]'}>bônus</span>
+                <span className={'text-[#B3B3B3] font-normal'}>bônus</span>
                 <span className={''}>
                   R$ {formatLocaleMoney(Number(record.amount) * Number(record.rate))}
                 </span>
               </div>
 
               <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Método De Depósito</span>
+                <span className={'text-[#B3B3B3] font-normal'}>Método De Depósito</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
               <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Estado Do Depósito</span>
+                <span className={'text-[#B3B3B3] font-normal'}>Estado Do Depósito</span>
                 <span style={{
                   color:
                     record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
@@ -107,7 +107,7 @@ export const DepositMobileTable = () => {
               </div>
 
               <div className={'flex flex-row justify-between border-assistant p-2'}>
-                <span className='text-[var(--white-40)]'> Tempo </span>
+                <span className='text-[#B3B3B3] font-normal'> Tempo </span>
                 <span className={'text-white'}>{record.created_at}</span>
               </div>
             </Container>
@@ -151,7 +151,7 @@ export const WithdrawMobileTable = () => {
               )}
             >
                <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                <div className='font-bold text-[var(--white-40)]'>Identificador</div>
+                <div className='text-[#B3B3B3] font-normal'>Identificador</div>
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
                   <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
@@ -162,22 +162,22 @@ export const WithdrawMobileTable = () => {
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Valor</span>
+                <span className={'text-[#B3B3B3] font-normal'}>Valor</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Taxa de retirada</span>
+                <span className={'text-[#B3B3B3] font-normal'}>Taxa de retirada</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.fee))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Modelo</span>
+                <span className={'text-[#B3B3B3] font-normal'}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
               <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[var(--white-40)]'}>Estado Do Depósito</span>
+                <span className={'text-[#B3B3B3] font-normal'}>Estado Do Depósito</span>
                 <span style={{
                   color:
                     record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
@@ -189,7 +189,7 @@ export const WithdrawMobileTable = () => {
                 </span>
               </div>
               <div className={'flex flex-row justify-between border-assistant p-2'}>
-                <span className='text-[var(--white-40)]'> Tempo </span>
+                <span className='text-[#B3B3B3] font-normal'> Tempo </span>
                 <span className={'text-white'}>{record.created_at}</span>
               </div>
             </Container>
