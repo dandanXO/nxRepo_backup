@@ -6,7 +6,7 @@ import {SettingPage as PSettingPage} from "./env/pernambucana/SettingPage";
 import {SettingPage as WSettingPage} from "./env/wild/SettingPage";
 import {SettingPage as CSettingPage} from "./env/coco/SettingPage";
 import { SettingPage as RioSettingPage } from './env/riojungle';
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 
 
@@ -17,14 +17,14 @@ export const SettingPage = () => {
   const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}');
   const { phone, nickname } = userInfo;
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
     ),
-    "coco777bet": (
+    "u1": (
       <CSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RioSettingPage nickname={nickname} phone={phone} />
     )
   }, (

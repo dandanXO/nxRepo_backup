@@ -1,11 +1,11 @@
 import {GameBackNavigation as CocoGameBackNavigation} from "./env/coco/GameBackNavigation";
 import {GameBackNavigation as PernambucanaGameBackNavigation} from "./env/pernambucana/GameBackNavigation";
 import {GameBackNavigation as WildGameBackNavigation} from "./env/wild/GameBackNavigation";
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 
 
-export const GameBackNavigation = renderByPlatform({
-  "coco777bet": CocoGameBackNavigation,
+export const GameBackNavigation = renderByUVersion({
+  "u1": CocoGameBackNavigation,
   "wild777bet": WildGameBackNavigation,
-  "riojungle777bet": CocoGameBackNavigation,
+  "u2": CocoGameBackNavigation,
 }, PernambucanaGameBackNavigation);

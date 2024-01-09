@@ -8,11 +8,11 @@ import { tcx } from "../../../utils/tcx";
 import { DatePickerBlock, dateToString } from "../DatePicker";
 import { RangeDatePickerContent as CocoRangeDatePickerContent } from './env/coco/RangeDatePickerContent';
 import { RangeDatePickerContent as RioRangeDatePickerContent } from './env/riojungle/RangeDatePickerContent';
-import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../utils/renderByUVersion";
 
-const RangeDatePickerContent = renderByPlatform({
-  "coco777bet": CocoRangeDatePickerContent,
-  "riojungle777bet": RioRangeDatePickerContent
+const RangeDatePickerContent = renderByUVersion({
+  "u1": CocoRangeDatePickerContent,
+  "u2": RioRangeDatePickerContent
 }, CocoRangeDatePickerContent)
 
 interface IRangeDatePickerProps {

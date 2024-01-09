@@ -1,4 +1,4 @@
-import {renderByPlatform} from "../utils/renderByPlatform";
+import {renderByUVersion} from "../utils/renderByUVersion";
 import {AppRouter as CocoAppRouter} from "./env/coco/Router";
 import {AppRouter as RiojungleAppRouter} from "./env/riojungle/Router";
 import {useEffect} from "react";
@@ -22,11 +22,11 @@ export const AppRouter = () => {
     }
   }, [isDesktop, location.pathname])
 
-  return renderByPlatform({
-    "coco777bet": (
+  return renderByUVersion({
+    "u1": (
       <CocoAppRouter/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RiojungleAppRouter/>
     )
   }, <CocoAppRouter/>)

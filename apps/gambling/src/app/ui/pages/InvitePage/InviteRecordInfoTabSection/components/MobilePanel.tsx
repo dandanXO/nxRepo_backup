@@ -4,13 +4,13 @@ import { MobilePanel as CMobilePanel } from "../env/coco/MobilePanel";
 import { MobilePanel as PMobilePanel } from "../env/pernambucana/MobilePanel";
 import { MobilePanel as WMobilePanel } from "../env/wild/MobilePanel";
 import { MobilePanel as RMobilePanel } from "../env/riojungle/MobilePanel";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export const MobilePanel = (props: IMobilePanel) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WMobilePanel {...props} />,
-    "coco777bet": <CMobilePanel {...props} />,
-    "riojungle777bet": <RMobilePanel {...props} />
+    "u1": <CMobilePanel {...props} />,
+    "u2": <RMobilePanel {...props} />
   }, <PMobilePanel {...props} />)
 }
 

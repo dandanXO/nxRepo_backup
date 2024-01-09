@@ -3,13 +3,13 @@ import { DesktopDailyTable as CDesktopDailyTable } from "../env/coco/DesktopDail
 import { DesktopDailyTable as PDesktopDailyTable } from "../env/pernambucana/DesktopDailyTable";
 import { DesktopDailyTable as WDesktopDailyTable } from "../env/wild/DesktopDailyTable";
 import { DesktopDailyTable as RDesktopDailyTable } from "../env/riojungle/DesktopDailyTable";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export const DesktopDailyTable = (props: IDailyType) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WDesktopDailyTable {...props} />,
-    "coco777bet": <CDesktopDailyTable {...props} />,
-    "riojungle777bet": <RDesktopDailyTable {...props} />
+    "u1": <CDesktopDailyTable {...props} />,
+    "u2": <RDesktopDailyTable {...props} />
   }, <PDesktopDailyTable {...props} />)
 }
 

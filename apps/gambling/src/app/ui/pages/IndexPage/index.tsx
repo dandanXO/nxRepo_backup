@@ -13,7 +13,7 @@ import {useSelector} from "react-redux";
 import {useSearchGames} from "../../hooks/useSearchGames";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useScrollToPartPageTemplate} from "../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
@@ -245,7 +245,7 @@ export const IndexPage = () => {
   }, [activeTab])
 
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WIndexPage
         showFixForIOSStickTab={showFixForIOSStickTab}
@@ -260,7 +260,7 @@ export const IndexPage = () => {
         recentGameList={recentGameList}
       />
     ),
-    "coco777bet": (
+    "u1": (
       <CIndexPage
         userFavorite={userFavorite}
         onClickFavoriteGameItem={onClickFavoriteGameItem}
@@ -276,7 +276,7 @@ export const IndexPage = () => {
         recentGameList={recentGameList}
       />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RIndexPage
         userFavorite={userFavorite}
         onClickFavoriteGameItem={onClickFavoriteGameItem}

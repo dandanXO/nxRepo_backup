@@ -7,12 +7,12 @@ import { NoData as CNoData } from './env/coco/NoData';
 import { NoData as PNoData } from './env/pernambucana/NoData';
 import { NoData as WNoData } from './env/wild/NoData';
 import { NoData as RNoData } from './env/riojungle/NoData';
-import { renderByPlatform } from '../../utils/renderByPlatform';
+import { renderByUVersion } from '../../utils/renderByUVersion';
 
-const NoData = ()=> renderByPlatform({
-  "coco777bet": <CNoData  />,
+const NoData = ()=> renderByUVersion({
+  "u1": <CNoData  />,
   "wild777bet": <WNoData  />,
-  "riojungle777bet": <RNoData  />,
+  "u2": <RNoData  />,
 }, <PNoData  />
 )
 

@@ -15,7 +15,7 @@ import {useEffect, useState} from "react";
 import {useGetLetterListMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import PBetMyPage from "./env/pernambucana/MyPage";
 import WBetMyPage  from "./env/wild/MyPage";
 import CBetMyPage from "./env/coco/MyPage";
@@ -119,14 +119,14 @@ export const MyPage = () => {
 
 
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
     ),
-    "coco777bet": (
+    "u1": (
       <CBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RioMyPage userVIPInfo={userVIPInfo} currentLevel={currentLevel} />
     )
   }, (

@@ -1,14 +1,14 @@
-import {renderByPlatform} from "../../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../../utils/renderByUVersion";
 import {UserLoginForm as CUserLoginForm} from "./env/coco/UserLoginForm";
 import {UserLoginForm as RUserLoginForm} from "./env/riojungle/UserLoginForm";
 import {IUserLoginForm} from "./types";
 
 export const UserLoginForm = (props: IUserLoginForm) => {
-  return renderByPlatform({
-    "coco777bet": (
+  return renderByUVersion({
+    "u1": (
       <CUserLoginForm {...props} />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RUserLoginForm {...props} />
     )
   }, <CUserLoginForm {...props} />)

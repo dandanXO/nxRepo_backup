@@ -16,7 +16,7 @@ import { useAutoUpdateBalance } from "../../../../hooks/useAutoUpdateBalance";
 import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
 import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 import { WithdrawPanel as CWithdrawPanel } from '../../env/coco/tabsContent/withdraw/WithdrawPanel';
 import { WithdrawPanel as PWithdrawPanel } from '../../env/pernambucana/tabsContent/withdraw/WithdrawPanel'
 import { WithdrawPanel as WWithdrawPanel } from '../../env/wild/tabsContent/withdraw/WithdrawPanel';
@@ -315,8 +315,8 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
   }
 
   return (
-    renderByPlatform({
-      "coco777bet": (
+    renderByUVersion({
+      "u1": (
         <CWithdrawPanel
           vip_level={vip_level}
           withdrawLimitMin={withdrawLimitMin}
@@ -369,7 +369,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
         />
-      ), "riojungle777bet": (
+      ), "u2": (
         <RWithdrawPanel
           vip_level={vip_level}
           withdrawLimitMin={withdrawLimitMin}

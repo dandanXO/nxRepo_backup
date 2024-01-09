@@ -1,14 +1,14 @@
 
 
-import { renderByPlatform } from "../../../../utils/renderByPlatform"
+import { renderByUVersion } from "../../../../utils/renderByUVersion"
 import { ListItem as CListItem } from "../coco/ListItem";
 import { ListItem as RListItem } from "../riojungle/ListItem";
 
 
 export const ListItem = (props: { count: string; text: string; }) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <CListItem {...props} />,
-    "coco777bet": <CListItem {...props} />,
-    "riojungle777bet": <RListItem {...props} />
+    "u1": <CListItem {...props} />,
+    "u2": <RListItem {...props} />
   }, <CListItem {...props} />)
 }

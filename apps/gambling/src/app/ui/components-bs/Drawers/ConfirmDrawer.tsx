@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { tcx } from "../../utils/tcx";
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 import { Drawer as CDrawer } from "./env/coco/Drawer";
 import { Drawer } from "./env/default/Drawer";
 
@@ -22,11 +22,11 @@ export interface IAnimateDrawerProps {
 const ConfirmDrawer = (props: IConfirmDrawerProps) => {
   const [open, setOpen] = useState(true)
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <Drawer {...props} open={open} setOpen={setOpen} />
     ),
-    "coco777bet": (
+    "u1": (
       <CDrawer {...props} open={open} setOpen={setOpen} />
     ),
   }, <Drawer {...props} open={open} setOpen={setOpen} />)

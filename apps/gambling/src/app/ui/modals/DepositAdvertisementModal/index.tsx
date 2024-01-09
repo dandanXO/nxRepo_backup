@@ -1,7 +1,7 @@
 import React from "react";
 import { DepositAdvertisementModal as CocoDepositAdvertisementModal} from './env/coco';
 import { DepositAdvertisementModal as RioDepositAdvertisementModal} from './env/riojungle';
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 export interface IDepositAdvertisementModalProps {
   close: () => void;
@@ -19,9 +19,9 @@ export const DepositAdvertisementModal = ({
       close();
     }}>
       {
-        renderByPlatform({
-          "coco777bet": <CocoDepositAdvertisementModal onConfirm={onConfirm} close={close} />,
-          "riojungle777bet": <RioDepositAdvertisementModal onConfirm={onConfirm} close={close} />
+        renderByUVersion({
+          "u1": <CocoDepositAdvertisementModal onConfirm={onConfirm} close={close} />,
+          "u2": <RioDepositAdvertisementModal onConfirm={onConfirm} close={close} />
         }, <CocoDepositAdvertisementModal onConfirm={onConfirm} close={close} />)
       }
     </div>

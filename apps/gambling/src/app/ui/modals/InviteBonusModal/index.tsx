@@ -8,7 +8,7 @@ import {Item} from "./item";
 import { useInviteConfig } from "../../hooks/useInviteConfig";
 import {CloseICON} from "../../components-bs/Icons/CloseICON";
 import { InviteBonusModal as RioInviteBonusModal} from "./env/riojungle/InviteBonusModal";
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 
 import React from "react";
 
@@ -28,8 +28,8 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
   //   <RioInviteBonusModal/>
   // )
 
-  return renderByPlatform({
-      "coco777bet": (
+  return renderByUVersion({
+      "u1": (
         <div
           className={"z-[1005] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"}
           onClick={(event) => {
@@ -96,7 +96,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
       "wild777bet": (
         <div></div>
       ),
-      "riojungle777bet": (
+      "u2": (
         <RioInviteBonusModal onConfirm={props.onConfirm} close={props.close}/>
       )
     },

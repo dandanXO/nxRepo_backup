@@ -5,12 +5,12 @@ import {WalletDepositNextPage as CWalletDepositNextPage} from './env/coco/Wallet
 import {WalletDepositNextPage as RWalletDepositNextPage} from './env/riojungle/WalletDepositNextPage';
 
 
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 
 
-export const WalletDepositNextPage = renderByPlatform({
-  "coco777bet": CWalletDepositNextPage,
+export const WalletDepositNextPage = renderByUVersion({
+  "u1": CWalletDepositNextPage,
   "wild777bet": WWalletDepositNextPage,
-  "riojungle777bet": RWalletDepositNextPage,
+  "u2": RWalletDepositNextPage,
 }, PWalletDepositNextPage);

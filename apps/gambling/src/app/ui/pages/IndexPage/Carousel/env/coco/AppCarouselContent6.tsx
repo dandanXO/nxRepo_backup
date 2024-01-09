@@ -32,9 +32,9 @@ export const AppCarouselContent6= (props: IAppCarouselContent) => {
           <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
         </CarouselTitleSection>
         {isMobile ? (
-          <CarouselImage alt={"h5_banner_6"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/h5_banner_6.png`}/>
+          <CarouselImage alt={"h5_banner_6"} src={`assets/${environment.uVersion}/${environment.mvVersion}/h5_banner_6.png`}/>
         ): (
-          <CarouselImage alt={"banner_6"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_6.png`}/>
+          <CarouselImage alt={"banner_6"} src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_6.png`}/>
         )}
       </div>
     </CarouselContainer>

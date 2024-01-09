@@ -27,17 +27,17 @@ export const AssetMappingCoco: IAssetMapping = {
   //header
   //header
   game: {
-    unfavorite: require(`./coco777bet/icon=favorite-default.png`),
-    favorite: require(`./coco777bet/icon=favorite-active.png`),
+    unfavorite: require(`./u1/icon=favorite-default.png`),
+    favorite: require(`./u1/icon=favorite-active.png`),
   },
   header: {
-    menu: require(`./coco777bet/icon=menu.png`)
+    menu: require(`./u1/icon=menu.png`)
   },
   //tab
   tab: {
-    home: require(`./coco777bet/icon=tab-home.png`),
-    invite: require(`./coco777bet/icon=tab-convidar.png`),
-    vip: require(`./coco777bet/icon=tab-vip.png`),
-    account: require(`./coco777bet/icon=tab-account.png`),
+    home: require(`./u1/icon=tab-home.png`),
+    invite: require(`./u1/icon=tab-convidar.png`),
+    vip: require(`./u1/icon=tab-vip.png`),
+    account: require(`./u1/icon=tab-account.png`),
   }
 }

@@ -1,4 +1,4 @@
-import {renderByPlatform} from "../../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../../utils/renderByUVersion";
 
 import {DepositNoticeSection as PDepositNoticeSection} from "../../env/pernambucana/tabsContent/deposit/DepositNoticeSection";
 import {DepositNoticeSection as WDepositNoticeSection} from "../../env/wild/tabsContent/deposit/DepositNoticeSection";
@@ -6,11 +6,11 @@ import {DepositNoticeSection as CDepositNoticeSection} from "../../env/coco/tabs
 
 export const DepositNoticeSection = () => {
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WDepositNoticeSection />
     ),
-    "coco777bet": (
+    "u1": (
       <CDepositNoticeSection />
     )
   }, (

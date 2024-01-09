@@ -4,7 +4,7 @@ import "./style.scss";
 import {responsive} from "./responsive";
 import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 import cx from "classnames";
-import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../utils/renderByUVersion";
 import {AppCarousel as RiojungleAppCarousel} from "./env/riojungle/RiojungleCarousel"
 import {tailwindVariables} from "../../../../../environments/tailwind.variables";
 
@@ -58,9 +58,9 @@ const CocoAppCarousel = (props: IAppCarousel) => {
 }
 
 export const AppCarousel = (props: IAppCarousel) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <CocoAppCarousel {...props}/>,
-    "coco777bet": <CocoAppCarousel {...props}/>,
-    "riojungle777bet": <RiojungleAppCarousel {...props}/>,
+    "u1": <CocoAppCarousel {...props}/>,
+    "u2": <RiojungleAppCarousel {...props}/>,
   }, <CocoAppCarousel {...props}/>)
 }

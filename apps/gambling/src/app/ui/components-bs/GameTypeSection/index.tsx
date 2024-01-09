@@ -18,7 +18,7 @@ import { GameTypeHeader } from "./GameTypeHeader/GameTypeHeader";
 import { mobileGameTypeHeaderProps as PmobileGameTypeHeaderProps } from "./env/pernambucana/mobileGameTypeHeaderProps";
 import { mobileGameTypeHeaderProps as WmobileGameTypeHeaderProps } from "./env/wild/mobileGameTypeHeaderProps";
 import { mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps } from "./env/coco/mobileGameTypeHeaderProps";
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
@@ -98,7 +98,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
   }, [animating])
 
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WGameTypeSectionList
       {...props}
       displayedItems={displayedItems}
@@ -106,14 +106,14 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       listSize={listSize}
       loadMore={loadMore}
     />,
-    "coco777bet": <CGameTypeSectionList
+    "u1": <CGameTypeSectionList
       {...props}
       displayedItems={displayedItems}
       animating={animating}
       listSize={listSize}
       loadMore={loadMore}
     />,
-    "riojungle777bet": <RGameTypeSectionList
+    "u2": <RGameTypeSectionList
       {...props}
       displayedItems={displayedItems}
       animating={animating}

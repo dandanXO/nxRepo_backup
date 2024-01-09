@@ -1,4 +1,4 @@
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import {PageContainer as CocoPageContainer} from "./env/coco/PageContainer";
 import {PageContainer as RiojungleContainer} from "./env/riojungle/PageContainer";
 
@@ -12,11 +12,11 @@ export type IContainer = {
 }
 
 export const PageContainer = (props: IContainer) => {
-  return renderByPlatform({
-    "coco777bet": (
+  return renderByUVersion({
+    "u1": (
       <CocoPageContainer {...props}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RiojungleContainer {...props}/>
     ),
   }, <CocoPageContainer {...props}/>)
