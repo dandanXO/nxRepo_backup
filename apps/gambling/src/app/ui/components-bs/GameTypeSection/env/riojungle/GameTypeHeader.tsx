@@ -66,7 +66,7 @@ export const GameTypeHeader = (props: {
         <span className={titleClassName}>{props.gameTypeName}</span>
       </div>
 
-      {props?.onClick && !props.expandedBrand && !props.isViewAll && (
+      {props?.onClick && !props.expandedBrand && (
         <div>
           <button
             onClick={(event) => {
