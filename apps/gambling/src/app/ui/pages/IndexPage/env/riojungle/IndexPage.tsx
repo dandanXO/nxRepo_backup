@@ -148,13 +148,14 @@ export const IndexPage = ({
 
   const IndexTabs = () => {
     return (
-      <DragScrollContainer className="flex flex-row items-center rounded-[100px]">
-        <div className="bg-[#333333] flex flex-row rounded-[100px]">
+      <DragScrollContainer className={cx("flex flex-row items-center rounded-[100px] ", { 'flex-1': !isDesktop })}>
+        <div className="bg-[var(--grayscale-20)] flex flex-row rounded-[100px] flex-1">
           {
             ["Todos", ...label, 'Favoritos'].map((tab: indexPagecurrentSelectLabel, index: number) => {
               const gameCount = tab !== 'Favoritos' ? typeGameCount[tab] : userFavorite.length;
               return (
                 <TabItem
+                  className="flex-1 text-xs md:text-sm lg:text-base px-5"
                   active={activeTab === tab}
                   onClick={() => {
                     dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(tab));
@@ -209,7 +210,7 @@ export const IndexPage = ({
       >
         <div className={"flex flex-row justify-between items-center w-full"}>
           <IndexTabs />
-          {!isMobile && (
+          {isDesktop && (
             <div className="ml-4 shirnk-0 grow-0 basis-[200px] min-w-[200px]"
                  onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
             >
@@ -218,11 +219,11 @@ export const IndexPage = ({
                 pureContainer={true}
                 className={cx(
                   "p-2.5 text-sm rounded-lg h-[40px] flex items-center",
-                  "!border-[#4D4D4D] bg-[var(--grayscale-10)]"
+                  "!border-[var(--grayscale-30)] bg-[var(--grayscale-10)]"
                 )}
-                inputClassName={"text-sm placeholder:text-[#B3B3B3] placeholder:text-sm placeholder:items-center"}
+                inputClassName={"text-sm placeholder:text-[var(--grayscale-70)] placeholder:text-sm placeholder:items-center"}
                 placeholder={"Procurar"}
-                prefix={<SearchOutlined className={cx("text-lg mr-1", "text-[#B3B3B3]")} />}
+                prefix={<SearchOutlined className={cx("text-lg mr-1", "text-[var(--grayscale-70]")} />}
               />
             </div>)}
         </div>
