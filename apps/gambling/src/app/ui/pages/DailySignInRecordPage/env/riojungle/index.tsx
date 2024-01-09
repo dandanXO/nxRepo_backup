@@ -60,7 +60,7 @@ export const DailySignInRecordPage = () => {
         onClick={() => onClickToCheckInDaily()}
       />
       <div className='text-white '>
-        <div className='rounded-lg h-[80vh] overflow-hidden'>
+        <div className='rounded-lg max-h-[80vh] overflow-hidden'>
           {/* <Table
             fetchData={handleFetchData}
             dataSource={records}
