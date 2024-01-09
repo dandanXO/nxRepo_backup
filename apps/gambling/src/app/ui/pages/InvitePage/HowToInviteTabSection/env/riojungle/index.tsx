@@ -54,7 +54,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
           {!isMobile && <div className="mb-5 pr-3 lg:pr-8 relative w-full bg-[linear-gradient(145deg,_var(--liner-main-from)_-7%,var(--liner-main-to)_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row gap-16 items-start rounded-lg flex-wrap">
             <div className='flex-1 flex flex-row flex-nowrap  justify-between'>
               <div className="flex flex-col mb-5 items-start flex-1 ">
-                <div className="break-all pl-[117px] pr-9 lg:pl-[196px] text-sm md:text-base lg:text-lg font-bold leading-[32px] text-[#4b80bd] bg-white flex flex-row whitespace-nowrap items-start py-2.5 rounded-tl-lg rounded-br-[100px] ">
+                <div className="break-all pl-[117px] pr-9 lg:pl-[196px] text-sm md:text-base lg:text-2xl font-bold leading-[32px] text-[#4b80bd] bg-white flex flex-row whitespace-nowrap items-start py-2.5 rounded-tl-lg rounded-br-[100px] ">
                   Copie o link para seus amigos!
                 </div>
                 <div className="pl-[117px] lg:pl-[196px] pt-5 text-base md:text-xl lg:text-3xl font-bold leading-7 lg:leading-9 text-white break-all">
@@ -87,18 +87,18 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
             isMobile && (
               <div className="mb-5 bg-gradient-to-br from-[var(--liner-main-from)] to-[var(--liner-main-to)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col w-full items-start rounded-lg">
 
-                <div className="text-sm font-bold leading-5 text-[#4b80bd] bg-white flex flex-row justify-center py-1 w-full items-start rounded-tl-lg rounded-tr-lg">
+                <div className="text-sm md:text-base lg:text-2xl font-bold leading-5 text-[#4b80bd] bg-white flex flex-row justify-center py-1 w-full items-start rounded-tl-lg rounded-tr-lg">
                   Copie o link para seus amigos!
                 </div>
                 <div className='p-2 w-full'>
 
-                  <div className="text-base font-normal leading-6 text-white text-center w-full mb-2">
+                  <div className="text-base md:text-xl lg:text-3xl font-normal leading-6 text-white text-center w-full mb-2">
                   {props?.inviteUrl}
                   </div>
                   <div>
                     <button 
                       onClick={onClickToCopy}
-                      className="text-base font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
+                      className="text-base md:text-xl lg:text-3xl font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
                     >
                       Convide Amigos
                     </button>
