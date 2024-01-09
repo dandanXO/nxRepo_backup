@@ -60,7 +60,7 @@ export const DailySignInRecordPage = () => {
         onClick={() => onClickToCheckInDaily()}
       />
       <div className='text-white '>
-        <div className='rounded-lg h-[80vh] overflow-hidden'>
+        <div className='rounded-lg max-h-[80vh] overflow-hidden'>
           {/* <Table
             fetchData={handleFetchData}
             dataSource={records}
@@ -69,7 +69,7 @@ export const DailySignInRecordPage = () => {
           /> */}
           <Table
             className='!bg-[#333333]'
-            titleStyle='text-sm border-transparent !border-x-0 text-[var(--white-40)]'
+            titleStyle='text-sm border-transparent !border-x-0 text-[#B3B3B3]'
             contentStyle='text-base !border-x-0 !border-b !py-6'
             fetchData={handleFetchData}
             dataSource={records}
