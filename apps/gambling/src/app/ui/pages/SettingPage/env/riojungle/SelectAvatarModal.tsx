@@ -37,7 +37,7 @@ export const SelectAvatarModal = ({
                   alt={`avatar${item}`} src={`assets/${environment.assetPrefix}/avatar_${item}.png`}
                 />
                 {selected === item &&
-                  <div className='absolute top-0 left-0 h-full w-full rounded-lg border-4 border-[#19b28a] z-10' />
+                  <div className='absolute top-0 left-0 h-full w-full rounded-lg border-4 border-[#19b28a] z-10 shadow-[0_0_20px_rgba(25,178,138,0.9)]' />
                 }
               </div>
             ))
