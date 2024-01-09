@@ -260,7 +260,7 @@ export const IndexPage = () => {
         recentGameList={recentGameList}
       />
     ),
-    "coco777bet": (
+    "u1": (
       <CIndexPage
         userFavorite={userFavorite}
         onClickFavoriteGameItem={onClickFavoriteGameItem}

@@ -36,7 +36,7 @@ const CocoConfirmButton = (props: IButton) => {
 
 export const ConfirmButton = (props: IButton) => {
   return renderByPlatform({
-    "coco777bet": <CocoConfirmButton {...props}/>,
+    "u1": <CocoConfirmButton {...props}/>,
     "riojungle777bet": <RiojungleConfirmButton {...props}/>,
   }, <CocoConfirmButton {...props}/>)
 }

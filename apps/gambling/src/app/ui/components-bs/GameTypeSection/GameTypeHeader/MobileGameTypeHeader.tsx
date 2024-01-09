@@ -9,6 +9,6 @@ import {MobileGameTypeHeader as CMobileGameTypeHeader} from "../env/coco/MobileG
 
 export const MobileGameTypeHeader = renderByPlatform({
   "wild777bet": WMobileGameTypeHeader,
-  "coco777bet": CMobileGameTypeHeader,
+  "u1": CMobileGameTypeHeader,
 // }, PMobileGameTypeHeader);
 }, CMobileGameTypeHeader);

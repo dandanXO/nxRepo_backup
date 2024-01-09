@@ -5,5 +5,5 @@ import {Container as PContainer} from "./env/pernambucana/Container";
 
 export const Container = renderByPlatform({
   "wild777bet": WContainer,
-  "coco777bet": CContainer,
+  "u1": CContainer,
 }, PContainer)

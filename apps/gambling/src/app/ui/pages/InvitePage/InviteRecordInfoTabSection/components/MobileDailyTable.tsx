@@ -8,7 +8,7 @@ import { renderByPlatform } from "../../../../utils/renderByPlatform";
 export const MobileDailyTable = (props: IMobileDailyTable) => {
   return renderByPlatform({
     "wild777bet": <WMobileDailyTable {...props} />,
-    "coco777bet": <CMobileDailyTable {...props} />,
+    "u1": <CMobileDailyTable {...props} />,
     "riojungle777bet": <RMobileDailyTable {...props} />
   }, <PMobileDailyTable {...props} />)
 }

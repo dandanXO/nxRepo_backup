@@ -5,7 +5,7 @@ import {IUserRegisterForm} from "./types";
 
 export const UserRegisterForm = (props: IUserRegisterForm) => {
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CUserRegisterForm {...props}/>
     ),
     "riojungle777bet": (

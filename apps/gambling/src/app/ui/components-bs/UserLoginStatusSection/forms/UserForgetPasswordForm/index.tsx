@@ -5,7 +5,7 @@ import {IUserForgetPasswordForm} from "./types";
 
 export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CUserForgetPasswordForm {...props}/>
     ),
     "riojungle777bet": (

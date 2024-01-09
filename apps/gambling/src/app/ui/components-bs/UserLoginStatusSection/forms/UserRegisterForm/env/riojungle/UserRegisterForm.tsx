@@ -137,7 +137,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
       <section className={"flex flex-col mb-4"}>
         {/*NOTICE: refactor*/}
         {renderByPlatform({
-          "coco777bet": (
+          "u1": (
             <CocoConfirmButton
               className="!w-full my-2 "
               disable={!isChecked}

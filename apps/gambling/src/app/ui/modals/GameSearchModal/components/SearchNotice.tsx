@@ -8,7 +8,7 @@ import { renderByPlatform } from "../../../utils/renderByPlatform";
 
 export const SearchNotice = () => {
   return renderByPlatform({
-    "coco777bet": <CSearchNotice />,
+    "u1": <CSearchNotice />,
     "riojungle777bet": <RSearchNotice />
   }, <CSearchNotice />)
 }

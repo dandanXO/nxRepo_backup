@@ -4,5 +4,5 @@ import { FragmentContainer } from "apps/gambling/src/app/ui/components/FragmentC
 
 export const MobileTableContainer = renderByPlatform({
   "wild777bet": FragmentContainer,
-  "coco777bet": FragmentContainer,
+  "u1": FragmentContainer,
 }, FragmentContainer)

@@ -5,5 +5,5 @@ import {LoginButton as CLoginButton} from "./env/coco/LoginButton";
 
 export const LoginButton = renderByPlatform({
   "wild777bet": WLoginButton,
-  "coco777bet": CLoginButton,
+  "u1": CLoginButton,
 }, PLoginButton)

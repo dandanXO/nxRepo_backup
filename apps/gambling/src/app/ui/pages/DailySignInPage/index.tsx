@@ -174,7 +174,7 @@ export const DailySignInPage = () => {
         setCurrentSelectedLevel={setCurrentSelectedLevel}
       />
     ),
-    "coco777bet": (
+    "u1": (
       <CocoDailySignInPage
         onClickToSignIn={onClickToSignIn}
         signInConfig={signInConfig?.data?.signInConfig || []}

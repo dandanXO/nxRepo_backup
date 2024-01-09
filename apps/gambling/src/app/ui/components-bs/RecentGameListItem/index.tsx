@@ -12,7 +12,7 @@ import { TailSpin } from "react-loading-icons";
 const DesktopGameItemButton = renderByPlatform(
   {
     "wild777bet": WPlayButton,
-    "coco777bet": CPlayButton,
+    "u1": CPlayButton,
   }, PPPlayButton)
 
 interface IRecentGameItemProps {

@@ -6,7 +6,7 @@ import {ITabBar} from "./type";
 export const TabBar = (props: ITabBar) => {
   return renderByPlatform({
     "wild777bet": <CTabBar {...props}/>,
-    "coco777bet": <CTabBar {...props}/>,
+    "u1": <CTabBar {...props}/>,
     "riojungle777bet": <RTabBar {...props}/>,
   }, <CTabBar {...props}/>);
 }

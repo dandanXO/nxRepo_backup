@@ -11,7 +11,7 @@ export const RechargeActivityPage = () => {
 
   return renderByPlatform({
     "wild777bet": <WRechargeActivityContent />,
-    "coco777bet": <CRechargeActivityContent />,
+    "u1": <CRechargeActivityContent />,
     "riojungle777bet": <RioRechargeActivityPage />,
   }, <PRechargeActivityContent />)
 }

@@ -18,7 +18,7 @@ export const SearchPageContainer = (props: Props) => {
     "wild777bet": (
       <WContaniner onClickToIndex={onClickToIndex}>{props.children}</WContaniner>
     ),
-    "coco777bet": (
+    "u1": (
       <CContaniner onClickToIndex={onClickToIndex}>{props.children}</CContaniner>
     ),
   }, <PContaniner onClickToIndex={onClickToIndex}>{props.children}</PContaniner>)

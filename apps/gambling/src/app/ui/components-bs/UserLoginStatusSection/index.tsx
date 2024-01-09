@@ -6,7 +6,7 @@ import {IUserLoginStatusSection} from "./types";
 
 export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CUserLoginStatusSection {...props} />
     ),
     "riojungle777bet": (

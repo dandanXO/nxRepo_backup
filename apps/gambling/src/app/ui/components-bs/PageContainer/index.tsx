@@ -13,7 +13,7 @@ export type IContainer = {
 
 export const PageContainer = (props: IContainer) => {
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CocoPageContainer {...props}/>
     ),
     "riojungle777bet": (

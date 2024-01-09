@@ -5,5 +5,5 @@ import {Item as PItem} from "./env/pernambucana/Item";
 
 export const Item = renderByPlatform({
   "wild777bet": WItem,
-  "coco777bet": CItem,
+  "u1": CItem,
 }, PItem)

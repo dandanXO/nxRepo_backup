@@ -109,7 +109,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
           isSearchable={false}
           styles={renderByPlatform({
             "wild777bet": WselectInputStyleProps(isMobile),
-            "coco777bet": CselectInputStyleProps(isMobile),
+            "u1": CselectInputStyleProps(isMobile),
             "riojungle777bet": RselectInputStyleProps(isMobile)
           }, PselectInputStyleProps(isMobile))}
           value={props.selectOption}

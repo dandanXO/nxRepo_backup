@@ -5,5 +5,5 @@ import {PersonalControl as CocoPersonalControl} from "./env/coco/PersonalControl
 
 export const PersonalControl = renderByPlatform({
   "wild777bet" : WildPersonalControl,
-  "coco777bet": CocoPersonalControl,
+  "u1": CocoPersonalControl,
 }, CocoPersonalControl)

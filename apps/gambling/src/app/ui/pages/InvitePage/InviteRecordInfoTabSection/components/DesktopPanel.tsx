@@ -9,7 +9,7 @@ import { renderByPlatform } from "../../../../utils/renderByPlatform";
 export const DesktopPanel = (props: IDesktopPanel) => {
   return renderByPlatform({
     "wild777bet": <WDesktopPanel {...props} />,
-    "coco777bet": <CDesktopPanel {...props} />,
+    "u1": <CDesktopPanel {...props} />,
     "riojungle777bet": <RDesktopPanel {...props} />
   }, <PDesktopPanel {...props} />)
 }

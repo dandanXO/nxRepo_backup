@@ -316,7 +316,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
 
   return (
     renderByPlatform({
-      "coco777bet": (
+      "u1": (
         <CWithdrawPanel
           vip_level={vip_level}
           withdrawLimitMin={withdrawLimitMin}

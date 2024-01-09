@@ -6,7 +6,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 export const PrivacyAgreementPage = () => {
 
   return renderByPlatform({
-    "coco777bet": <CocoPrivacyAgreementPage />,
+    "u1": <CocoPrivacyAgreementPage />,
     "riojungle777bet": <RioPrivacyAgreementPage />,
   }, <CocoPrivacyAgreementPage />)
 };

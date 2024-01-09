@@ -4,5 +4,5 @@ import {InviteButton as WInviteButton} from "./env/wild/InviteButton";
 import {InviteButton as CInviteButton} from "./env/coco/InviteButton";
 export const InviteButton = renderByPlatform({
   "wild777bet": WInviteButton,
-  "coco777bet": CInviteButton,
+  "u1": CInviteButton,
 }, PInviteButton)

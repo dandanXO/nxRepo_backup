@@ -11,7 +11,7 @@ export const InitialChargePage = () => {
 
   return renderByPlatform({
     "wild777bet": <WInitialChargeContent />,
-    "coco777bet": <CInitialChargeContent />,
+    "u1": <CInitialChargeContent />,
     "riojungle777bet": <RioInitialChargePage />,
   }, <PInitialChargeContent />)
 }

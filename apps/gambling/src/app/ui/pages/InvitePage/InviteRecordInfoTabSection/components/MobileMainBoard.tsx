@@ -13,7 +13,7 @@ export interface IBoardContainer {
 export const MobileMainBoard = (props: IBoardData) => {
   return renderByPlatform({
     "wild777bet": <WMobileMainBoard {...props} />,
-    "coco777bet": <CMobileMainBoard {...props} />,
+    "u1": <CMobileMainBoard {...props} />,
     "riojungle777bet": <RMobileMainBoard {...props} />
   }, <PMobileMainBoard {...props} />)
 }

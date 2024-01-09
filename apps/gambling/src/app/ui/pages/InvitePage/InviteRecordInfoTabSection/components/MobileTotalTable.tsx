@@ -9,7 +9,7 @@ import { renderByPlatform } from "../../../../utils/renderByPlatform";
 export const MobileTotalTable = (props: IMobileTotalTable) => {
   return renderByPlatform({
     "wild777bet": <WMobileTotalTable {...props} />,
-    "coco777bet": <CMobileTotalTable {...props} />,
+    "u1": <CMobileTotalTable {...props} />,
     "riojungle777bet": <RMobileTotalTable {...props} />
   }, <PMobileTotalTable {...props} />)
 }

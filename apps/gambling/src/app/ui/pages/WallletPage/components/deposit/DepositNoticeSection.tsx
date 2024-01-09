@@ -10,7 +10,7 @@ export const DepositNoticeSection = () => {
     "wild777bet": (
       <WDepositNoticeSection />
     ),
-    "coco777bet": (
+    "u1": (
       <CDepositNoticeSection />
     )
   }, (

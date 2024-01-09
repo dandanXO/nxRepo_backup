@@ -5,6 +5,6 @@ import {ImageTab as CImageTab} from "../env/coco/ImageTab"
 
 export const ImageTab = renderByPlatform({
   "wild777bet": WImageTab,
-  "coco777bet": CImageTab,
+  "u1": CImageTab,
 }, PImageTab)
 

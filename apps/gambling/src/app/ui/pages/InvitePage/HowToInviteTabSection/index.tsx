@@ -42,7 +42,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection ) => {
           </>
         )
         ,
-        "coco777bet": (
+        "u1": (
           <>
             <CHowToImage className="p-4 sm:p-0 rounded-2xl" />
             <CQuestionContent />

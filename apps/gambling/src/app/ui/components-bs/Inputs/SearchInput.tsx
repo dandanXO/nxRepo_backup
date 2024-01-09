@@ -11,7 +11,7 @@ import {SearchInput as RSearchInput} from "./env/riojungle/SearchInput";
 
 export const SearchInput = (props: IInput) => {
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CSearchInput {...props}/>
     ),
     "wild777bet": (

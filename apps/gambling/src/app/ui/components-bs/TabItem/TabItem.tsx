@@ -7,7 +7,7 @@ import {StyledTabItem as WStyledTabItem} from "./env/wild/StyledTabItem"
 import {renderByPlatform} from "../../utils/renderByPlatform";
 
 const StyledTabItem = renderByPlatform({
-  "coco777bet": CtyledTabItem,
+  "u1": CtyledTabItem,
   "wild777bet": WStyledTabItem,
 }, PStyledTabItem)
 

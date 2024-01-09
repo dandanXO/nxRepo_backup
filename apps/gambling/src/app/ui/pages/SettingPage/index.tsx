@@ -21,7 +21,7 @@ export const SettingPage = () => {
     "wild777bet": (
       <WSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
     ),
-    "coco777bet": (
+    "u1": (
       <CSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
     ),
     "riojungle777bet": (

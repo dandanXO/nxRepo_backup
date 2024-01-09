@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  uVersion: "coco777bet",
+  uVersion: "u1",
   assetVersionPrefix: "v1",
   mockBackend: false,
   captcha: "/japi/user/captcha/image",

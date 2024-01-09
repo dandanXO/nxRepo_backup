@@ -15,7 +15,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
         "wild777bet": (
           <CNotificationDrawer closeDrawer={props.closeDrawer}/>
         ),
-        "coco777bet": (
+        "u1": (
           <CNotificationDrawer closeDrawer={props.closeDrawer}/>
         ),
         "riojungle777bet": (

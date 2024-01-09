@@ -9,7 +9,7 @@ import {IContainer} from "./types";
 export const Container = (props: IContainer) => {
   return renderByPlatform({
     "wild777bet": <WContainer {...props}/>,
-    "coco777bet": <CContainer {...props}/>,
+    "u1": <CContainer {...props}/>,
     "riojungle777bet": <RContainer {...props}/>,
   }, <CContainer {...props}/>);
 }

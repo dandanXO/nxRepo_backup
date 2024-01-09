@@ -10,7 +10,7 @@ import { NoData as RNoData } from './env/riojungle/NoData';
 import { renderByPlatform } from '../../utils/renderByPlatform';
 
 const NoData = ()=> renderByPlatform({
-  "coco777bet": <CNoData  />,
+  "u1": <CNoData  />,
   "wild777bet": <WNoData  />,
   "riojungle777bet": <RNoData  />,
 }, <PNoData  />

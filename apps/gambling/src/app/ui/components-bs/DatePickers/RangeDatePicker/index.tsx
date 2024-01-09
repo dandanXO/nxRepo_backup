@@ -11,7 +11,7 @@ import { RangeDatePickerContent as RioRangeDatePickerContent } from './env/rioju
 import { renderByPlatform } from "../../../utils/renderByPlatform";
 
 const RangeDatePickerContent = renderByPlatform({
-  "coco777bet": CocoRangeDatePickerContent,
+  "u1": CocoRangeDatePickerContent,
   "riojungle777bet": RioRangeDatePickerContent
 }, CocoRangeDatePickerContent)
 

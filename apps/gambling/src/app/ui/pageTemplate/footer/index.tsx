@@ -7,7 +7,7 @@ import {IFooter} from "./types/IFooter";
 export const Footer = (props: IFooter) => {
   return renderByPlatform({
     "wild777bet": <WFooter {...props}/>,
-    "coco777bet": <CFooter {...props}/>,
+    "u1": <CFooter {...props}/>,
     "riojungle777bet": <RFooter {...props}/>,
   }, <WFooter {...props}/>);
 }

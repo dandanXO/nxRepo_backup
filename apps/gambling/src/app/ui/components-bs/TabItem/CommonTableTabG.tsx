@@ -6,5 +6,5 @@ import {ImageTab} from "./ImageTab";
 
 export const CommonTableTabG = renderByPlatform({
   "wild777bet": ImageTab,
-  "coco777bet": ImageTab,
+  "u1": ImageTab,
 }, PCImageTab)

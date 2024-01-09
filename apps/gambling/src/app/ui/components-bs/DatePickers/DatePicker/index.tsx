@@ -24,7 +24,7 @@ export const datePickerStyle = {
 
 
 export const DatePickerBlock = renderByPlatform({
-  "coco777bet": CocoDatePickerBlock,
+  "u1": CocoDatePickerBlock,
   "riojungle777bet": RioDatePickerBlock
 },CocoDatePickerBlock)
 

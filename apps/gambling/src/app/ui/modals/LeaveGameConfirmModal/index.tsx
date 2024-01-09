@@ -18,7 +18,7 @@ export const LeaveGameConfirmModal = ({
     <BaseModal>
       {
         renderByPlatform({
-          "coco777bet": (
+          "u1": (
             <CocoLeaveGameConfirmModal
               onConfirm={onConfirm}
               onClose={onClose}

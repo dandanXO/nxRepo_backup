@@ -7,7 +7,7 @@ import {ILogo} from "./env/types";
 export const LoadingLogo = (props: ILogo) => {
   return renderByPlatform({
     "wild777bet": <CLoadingLogo {...props}/>,
-    "coco777bet":  <CLoadingLogo {...props}/>,
+    "u1":  <CLoadingLogo {...props}/>,
     "riojungle777bet": <RLoadingLogo {...props}/>,
   }, <CLoadingLogo {...props}/>,)
 }

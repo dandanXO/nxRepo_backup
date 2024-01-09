@@ -4,7 +4,7 @@ import {BackNavigation as WildBackNavigation} from "./env/wild/BackNavigation";
 import {renderByPlatform} from "../../utils/renderByPlatform";
 
 export const BackNavigation = renderByPlatform({
-    "coco777bet": CocoBackNavigation,
+    "u1": CocoBackNavigation,
     "wild777bet": WildBackNavigation,
     "riojungle777bet": CocoBackNavigation
   }, PernambucanaBackNavigation);

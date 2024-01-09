@@ -6,7 +6,7 @@ import { LoadMoreButton as RLoadMoreButton } from "./env/riojungle/LoadMoreButto
 
 export const LoadMoreButton = (props: { onClick: () => void }) => {
   return renderByPlatform({
-    "coco777bet": <CLoadMoreButton  {...props} />,
+    "u1": <CLoadMoreButton  {...props} />,
     "riojungle777bet": <RLoadMoreButton {...props} />
   }, <CLoadMoreButton  {...props} />)
 }

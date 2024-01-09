@@ -20,6 +20,6 @@ const riojungle777betFixedToolStyle: React.CSSProperties = {
 
 export const FixedToolStyle = renderByPlatform({
   "wild777bet": defaultFixedToolStyle,
-  "coco777bet": coco777betFixedToolStyle,
+  "u1": coco777betFixedToolStyle,
   "riojungle777bet": riojungle777betFixedToolStyle,
 }, coco777betFixedToolStyle)

@@ -8,7 +8,7 @@ type IProps = {
 }
 export const UserMoneyStatusSection = (props: IProps) => {
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CUserMoneyStatusSection/>
     ),
     "riojungle777bet": (

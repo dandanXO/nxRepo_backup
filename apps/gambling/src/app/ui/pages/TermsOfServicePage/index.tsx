@@ -7,7 +7,7 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 const TermsOfServicePage = () => {
 
   return renderByPlatform({
-    "coco777bet": <CocoTermsOfServicePage />,
+    "u1": <CocoTermsOfServicePage />,
     "riojungle777bet": <RioTermsOfServicePage />
   }, <CocoTermsOfServicePage />)
 }

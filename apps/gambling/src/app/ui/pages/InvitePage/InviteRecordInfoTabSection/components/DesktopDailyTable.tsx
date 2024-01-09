@@ -8,7 +8,7 @@ import { renderByPlatform } from "../../../../utils/renderByPlatform";
 export const DesktopDailyTable = (props: IDailyType) => {
   return renderByPlatform({
     "wild777bet": <WDesktopDailyTable {...props} />,
-    "coco777bet": <CDesktopDailyTable {...props} />,
+    "u1": <CDesktopDailyTable {...props} />,
     "riojungle777bet": <RDesktopDailyTable {...props} />
   }, <PDesktopDailyTable {...props} />)
 }

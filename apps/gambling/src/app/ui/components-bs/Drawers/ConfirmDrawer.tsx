@@ -26,7 +26,7 @@ const ConfirmDrawer = (props: IConfirmDrawerProps) => {
     "wild777bet": (
       <Drawer {...props} open={open} setOpen={setOpen} />
     ),
-    "coco777bet": (
+    "u1": (
       <CDrawer {...props} open={open} setOpen={setOpen} />
     ),
   }, <Drawer {...props} open={open} setOpen={setOpen} />)

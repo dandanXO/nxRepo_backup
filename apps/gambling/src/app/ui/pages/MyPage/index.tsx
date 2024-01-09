@@ -123,7 +123,7 @@ export const MyPage = () => {
     "wild777bet": (
       <WBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
     ),
-    "coco777bet": (
+    "u1": (
       <CBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
     ),
     "riojungle777bet": (

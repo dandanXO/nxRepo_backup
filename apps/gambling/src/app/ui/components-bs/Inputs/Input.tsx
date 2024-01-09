@@ -118,7 +118,7 @@ export type InputValue<T> = {
 
 export const Input = renderByPlatform(
   {
-    coco777bet: BaseInput,
+    u1: BaseInput,
     wild777bet: BaseInput,
     riojungle777bet: BaseInput
   },

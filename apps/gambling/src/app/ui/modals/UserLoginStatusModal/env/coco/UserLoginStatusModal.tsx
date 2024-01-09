@@ -11,7 +11,7 @@ import {IUserLoginStatusModal} from "../../types";
 
 const Container = renderByPlatform({
   "wild777bet": WContainer,
-  "coco777bet": CContainer,
+  "u1": CContainer,
 }, CContainer)
 
 export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {

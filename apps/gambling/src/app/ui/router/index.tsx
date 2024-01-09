@@ -23,7 +23,7 @@ export const AppRouter = () => {
   }, [isDesktop, location.pathname])
 
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CocoAppRouter/>
     ),
     "riojungle777bet": (

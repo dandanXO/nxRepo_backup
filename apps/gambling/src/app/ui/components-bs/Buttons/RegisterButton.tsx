@@ -10,5 +10,5 @@ export type IRegisterButton = {
 }
 export const RegisterButton = renderByPlatform({
   "wild777bet": WRegisterButton,
-  "coco777bet": CRegisterButton,
+  "u1": CRegisterButton,
 }, PRegisterButton)

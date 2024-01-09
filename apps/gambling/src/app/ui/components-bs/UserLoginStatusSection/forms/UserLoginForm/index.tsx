@@ -5,7 +5,7 @@ import {IUserLoginForm} from "./types";
 
 export const UserLoginForm = (props: IUserLoginForm) => {
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CUserLoginForm {...props} />
     ),
     "riojungle777bet": (

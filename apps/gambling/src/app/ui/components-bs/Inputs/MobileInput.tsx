@@ -7,7 +7,7 @@ import {renderByPlatform} from "../../utils/renderByPlatform";
 
 // export const MobileInput = WithdrawMobileInput;
 export const MobileInput = renderByPlatform({
-  "coco777bet": CWithdrawMobileInput,
+  "u1": CWithdrawMobileInput,
   "wild777bet": WWithdrawMobileInput,
   "riojungle777bet": RWithdrawMobileInput
 }, PCWithdrawMobileInput);

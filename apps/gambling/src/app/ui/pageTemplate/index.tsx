@@ -223,7 +223,7 @@ export const PageTemplate = (props: IPage) => {
             {props.children}
           </WPageTemplate>
         ),
-        "coco777bet": (
+        "u1": (
           <CPageTemplate
             isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
             contextHolder={contextHolder}

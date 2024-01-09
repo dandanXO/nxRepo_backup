@@ -11,7 +11,7 @@ export interface IPrevAndNextButtons {
 
 export const PrevAndNextButtons = (props: IPrevAndNextButtons) => {
   return renderByPlatform({
-    "coco777bet": <CPrevAndNextButtons {...props} />,
+    "u1": <CPrevAndNextButtons {...props} />,
     "riojungle777bet": <RPrevAndNextButtons {...props} />
   }, <CPrevAndNextButtons {...props} />)
 }

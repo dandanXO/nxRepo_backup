@@ -8,7 +8,7 @@ import { renderByPlatform } from "../../../../utils/renderByPlatform";
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {
   return renderByPlatform({
     "wild777bet": <WDesktopTotalTable {...props} />,
-    "coco777bet": <CDesktopTotalTable {...props} />,
+    "u1": <CDesktopTotalTable {...props} />,
     "riojungle777bet": <RDesktopTotalTable {...props} />
   }, <PDesktopTotalTable {...props} />)
 }

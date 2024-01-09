@@ -4,6 +4,6 @@ import {ConfirmButton as PConfirmButton} from "./env/pernambucana/ConfirmButton"
 import {ConfirmButton as WConfirmButton} from "./env/wild/ConfirmButton";
 
 export const ConfirmButton = renderByPlatform({
-  "coco777bet": CConfirmButton,
+  "u1": CConfirmButton,
   "wild777bet": WConfirmButton
 }, PConfirmButton);

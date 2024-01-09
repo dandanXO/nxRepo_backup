@@ -8,7 +8,7 @@ import { ListItem as RListItem } from "../riojungle/ListItem";
 export const ListItem = (props: { count: string; text: string; }) => {
   return renderByPlatform({
     "wild777bet": <CListItem {...props} />,
-    "coco777bet": <CListItem {...props} />,
+    "u1": <CListItem {...props} />,
     "riojungle777bet": <RListItem {...props} />
   }, <CListItem {...props} />)
 }

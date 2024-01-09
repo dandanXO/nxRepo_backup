@@ -75,7 +75,7 @@ export const TelegramPage = () => {
 
   return renderByPlatform(
     {
-      "coco777bet": <CTelegramPage handleClickToTelegram={handleClickToTelegram} />,
+      "u1": <CTelegramPage handleClickToTelegram={handleClickToTelegram} />,
       "wild777bet": <WTelegramPage handleClickToTelegram={handleClickToTelegram} />,
       "riojungle777bet": <RTelegramPage handleClickToTelegram={handleClickToTelegram} />,
     },

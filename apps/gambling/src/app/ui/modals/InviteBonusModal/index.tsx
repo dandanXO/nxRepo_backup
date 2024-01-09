@@ -29,7 +29,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
   // )
 
   return renderByPlatform({
-      "coco777bet": (
+      "u1": (
         <div
           className={"z-[1005] fixed left-0 top-0 right-0 bottom-0 flex flex-col flex justify-center items-center w-full h-full bg-[rgba(0,0,0,0.65)]"}
           onClick={(event) => {

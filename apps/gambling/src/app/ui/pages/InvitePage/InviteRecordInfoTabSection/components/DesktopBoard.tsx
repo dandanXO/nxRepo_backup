@@ -13,7 +13,7 @@ export interface IBoardContainer {
 export const DesktopBoard = (props: IBoardData) => {
   return renderByPlatform({
     "wild777bet": <WDesktopBoard {...props} />,
-    "coco777bet": <CDesktopBoard {...props} />,
+    "u1": <CDesktopBoard {...props} />,
     "riojungle777bet": <RDesktopBoard {...props} />
   }, <PDesktopBoard {...props} />)
 }

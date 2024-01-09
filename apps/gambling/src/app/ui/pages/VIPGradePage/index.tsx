@@ -208,7 +208,7 @@ export const JackpotMap: {
         allSignInConfig={allSignInConfig}
       />
     ),
-    "coco777bet": (
+    "u1": (
       <CVIPGradePage
         isMobile={isMobile}
         userVIPInfo={userVIPInfo}

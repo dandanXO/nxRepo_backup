@@ -41,7 +41,7 @@ import { useInviteReward } from "../../hooks/useInviteReward";
 
 const PopoverContainer = renderByPlatform({
   "wild777bet": WildPopoverContainer,
-  "coco777bet": CocoPopoverContainer,
+  "u1": CocoPopoverContainer,
   "riojungle777bet": RioPopoverContainer,
 // }, PernambucanaPopoverContainer)
 }, CocoPopoverContainer)
@@ -344,7 +344,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                 </WildNavigator>
               </>
             ),
-            "coco777bet": (
+            "u1": (
               <>
                 <CocoUserInfo />
                 <CocoVIPInfo

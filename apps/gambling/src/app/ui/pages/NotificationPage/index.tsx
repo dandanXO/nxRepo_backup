@@ -13,7 +13,7 @@ export const NotificationPage = () => {
   useAllowLoginRouterRules();
 
   return renderByPlatform({
-    "coco777bet": <CocoNotificationPage />,
+    "u1": <CocoNotificationPage />,
     "riojungle777bet": <RioNotificationPage />
   }, (<CocoNotificationPage />))
 };

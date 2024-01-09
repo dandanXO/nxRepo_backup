@@ -60,7 +60,7 @@ const CocoAppCarousel = (props: IAppCarousel) => {
 export const AppCarousel = (props: IAppCarousel) => {
   return renderByPlatform({
     "wild777bet": <CocoAppCarousel {...props}/>,
-    "coco777bet": <CocoAppCarousel {...props}/>,
+    "u1": <CocoAppCarousel {...props}/>,
     "riojungle777bet": <RiojungleAppCarousel {...props}/>,
   }, <CocoAppCarousel {...props}/>)
 }

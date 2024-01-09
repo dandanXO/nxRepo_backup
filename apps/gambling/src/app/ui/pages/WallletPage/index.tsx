@@ -85,7 +85,7 @@ export const WallletPage = () => {
     "wild777bet": (
       <WWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
-    "coco777bet": (
+    "u1": (
       <CWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
     "riojungle777bet": (

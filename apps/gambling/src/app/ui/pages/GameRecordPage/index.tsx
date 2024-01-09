@@ -68,7 +68,7 @@ export const GameRecordPage = () => {
 
 
   return renderByPlatform({
-    "coco777bet": (
+    "u1": (
       <CocoGameRecordPage
         dates={dates}
         setDates={setDates}

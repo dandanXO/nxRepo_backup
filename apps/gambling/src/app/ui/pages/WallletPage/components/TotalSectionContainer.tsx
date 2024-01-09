@@ -39,7 +39,7 @@ export const TotalSectionContainer = () => {
     "wild777bet": (
       <WTotalSectionContainer />
     ),
-    "coco777bet": (
+    "u1": (
       <CTotalSectionContainer />
     ),
   }, (
