@@ -16,7 +16,7 @@ export const PageContainer = (props: IContainer) => {
     "u1": (
       <CocoPageContainer {...props}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RiojungleContainer {...props}/>
     ),
   }, <CocoPageContainer {...props}/>)

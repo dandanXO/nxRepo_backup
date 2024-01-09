@@ -19,7 +19,7 @@ export const DepositInput = (props: IDepositInput) => {
   return renderByPlatform({
     "wild777bet": (<WDepositInput {...props} />),
     "u1": (<CDepositInput {...props} />),
-    "riojungle777bet": (<RDepositInput {...props} />)
+    "u2": (<RDepositInput {...props} />)
   }, (
     <PDepositInput {...props} />
   ))

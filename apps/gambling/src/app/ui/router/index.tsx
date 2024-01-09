@@ -26,7 +26,7 @@ export const AppRouter = () => {
     "u1": (
       <CocoAppRouter/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RiojungleAppRouter/>
     )
   }, <CocoAppRouter/>)

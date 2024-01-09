@@ -7,5 +7,5 @@ import {LogoutPopoverContainer as RioLogoutPopoverContainer} from "./env/riojung
 export const LogoutPopoverContainer = renderByPlatform({
   "wild777bet": WLogoutPopoverContainer,
   "u1": CLogoutPopoverContainer,
-  "riojungle777bet": RioLogoutPopoverContainer
+  "u2": RioLogoutPopoverContainer
 }, PLogoutPopoverContainer)

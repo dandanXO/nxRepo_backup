@@ -7,5 +7,5 @@ import { InputSection as RInputSection } from "./env/riojungle/InputSection"
 export const InputSection = renderByPlatform({
   "wild777bet": WInputSection,
   "u1": CInputSection,
-  "riojungle777bet": RInputSection
+  "u2": RInputSection
 }, PInputSection)

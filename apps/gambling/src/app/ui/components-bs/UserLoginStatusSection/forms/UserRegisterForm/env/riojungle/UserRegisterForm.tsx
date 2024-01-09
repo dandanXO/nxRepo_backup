@@ -146,7 +146,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
               Register agora
             </CocoConfirmButton>
           ),
-          "riojungle777bet": (
+          "u2": (
             <div
               onClick={() => isChecked && onFormConfirm()}
             >

@@ -8,6 +8,6 @@ export const Footer = (props: IFooter) => {
   return renderByPlatform({
     "wild777bet": <WFooter {...props}/>,
     "u1": <CFooter {...props}/>,
-    "riojungle777bet": <RFooter {...props}/>,
+    "u2": <RFooter {...props}/>,
   }, <WFooter {...props}/>);
 }

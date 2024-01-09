@@ -25,7 +25,7 @@ export const datePickerStyle = {
 
 export const DatePickerBlock = renderByPlatform({
   "u1": CocoDatePickerBlock,
-  "riojungle777bet": RioDatePickerBlock
+  "u2": RioDatePickerBlock
 },CocoDatePickerBlock)
 
 interface IDatePickerProps {

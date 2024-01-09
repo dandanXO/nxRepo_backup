@@ -369,7 +369,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
         />
-      ), "riojungle777bet": (
+      ), "u2": (
         <RWithdrawPanel
           vip_level={vip_level}
           withdrawLimitMin={withdrawLimitMin}

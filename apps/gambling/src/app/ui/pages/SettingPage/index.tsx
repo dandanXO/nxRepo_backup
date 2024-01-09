@@ -24,7 +24,7 @@ export const SettingPage = () => {
     "u1": (
       <CSettingPage editing={editing} setEditing={setEditing} phone={phone} nickname={nickname}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RioSettingPage nickname={nickname} phone={phone} />
     )
   }, (

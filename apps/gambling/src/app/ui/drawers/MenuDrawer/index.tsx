@@ -6,6 +6,6 @@ export const MenuDrawer = (props: any) => {
   return renderByPlatform({
     // "wild777bet": <WFooter {...props}/>,
     "u1": <CMenuDrawer {...props}/>,
-    "riojungle777bet": <RMenuDrawer {...props}/>
+    "u2": <RMenuDrawer {...props}/>
   }, <RMenuDrawer {...props}/>);
 }

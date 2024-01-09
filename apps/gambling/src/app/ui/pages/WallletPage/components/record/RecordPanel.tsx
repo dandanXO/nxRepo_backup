@@ -9,7 +9,7 @@ type IRecordPanel = {
 export const RecordPanel = (props: IRecordPanel) => {
 
   return renderByPlatform({
-    "riojungle777bet": <RioRecordPanel {...props}/>,
+    "u2": <RioRecordPanel {...props}/>,
   }, <CRecordPanel {...props}/>);
 }
 

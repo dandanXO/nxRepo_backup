@@ -10,7 +10,7 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
   return renderByPlatform({
     "wild777bet": <WMobileTotalTable {...props} />,
     "u1": <CMobileTotalTable {...props} />,
-    "riojungle777bet": <RMobileTotalTable {...props} />
+    "u2": <RMobileTotalTable {...props} />
   }, <PMobileTotalTable {...props} />)
 }
 

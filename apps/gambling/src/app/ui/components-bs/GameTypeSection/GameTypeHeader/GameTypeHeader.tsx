@@ -7,5 +7,5 @@ import { GameTypeHeader as RGameTypeHeader } from "../env/riojungle/GameTypeHead
 export const GameTypeHeader = renderByPlatform({
   "wild777bet": WGameTypeHeader,
   "u1": CGameTypeHeader,
-  "riojungle777bet": RGameTypeHeader
+  "u2": RGameTypeHeader
 }, CGameTypeHeader)

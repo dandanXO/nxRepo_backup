@@ -10,7 +10,7 @@ export type ITelegramContactModal = {
 export const TelegramContactModal = (props: ITelegramContactModal) => {
 
   return renderByPlatform({
-    "riojungle777bet": <RiojungleTelegramContactModal {...props}/>,
+    "u2": <RiojungleTelegramContactModal {...props}/>,
   }, <CocoTelegramContactModal {...props}/>);
 }
 

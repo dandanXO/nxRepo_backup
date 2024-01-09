@@ -286,7 +286,7 @@ export const PageTemplate = (props: IPage) => {
             {props.children}
           </CPageTemplate>
         ),
-        "riojungle777bet": (
+        "u2": (
           <RiojunglePageTemplate
             showToolboxConfig={props.showToolboxConfig}
             onClickToDownload={onClickToDownload}

@@ -8,6 +8,6 @@ export type IInitialChargeModal = {
 
 export const DownloadModal = (props: IInitialChargeModal) => {
   return renderByPlatform({
-    "riojungle777bet": <RiojungleDownloadModal {...props}/>,
+    "u2": <RiojungleDownloadModal {...props}/>,
   }, <CocoDownloadModal {...props}/>);
 }

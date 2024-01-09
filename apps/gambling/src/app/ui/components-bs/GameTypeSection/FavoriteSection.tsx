@@ -7,6 +7,6 @@ import {FavoriteSection as RFavoriteSection} from "./env/riojungle/FavoriteSecti
 export const FavoriteSection = renderByPlatform({
   "wild777bet": WFavoriteSection,
   "u1": CFavoriteSection,
-  "riojungle777bet": RFavoriteSection,
+  "u2": RFavoriteSection,
 // }, PFavoriteSection)
 }, CFavoriteSection)

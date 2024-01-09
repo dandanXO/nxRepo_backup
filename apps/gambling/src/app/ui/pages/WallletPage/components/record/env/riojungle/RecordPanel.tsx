@@ -17,7 +17,7 @@ type IRecordPanel = {
 const RecordTabButton = renderByPlatform({
   "wild777bet": RecordButton,
   "u1": CRecordButton,
-  "riojungle777bet": RioRecordButton
+  "u2": RioRecordButton
 }, RecordButton)
 
 

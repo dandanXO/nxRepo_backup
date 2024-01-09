@@ -6,6 +6,6 @@ import {UserLoginStatusModal as RUserLoginStatusModal} from "./env/riojungle/Use
 export const UserLoginStatusModal = (props:IUserLoginStatusModal) => {
   return renderByPlatform({
     "u1": <CUserLoginStatusModal {...props} />,
-    "riojungle777bet": <RUserLoginStatusModal {...props} />
+    "u2": <RUserLoginStatusModal {...props} />
   }, <CUserLoginStatusModal {...props} />);
 }

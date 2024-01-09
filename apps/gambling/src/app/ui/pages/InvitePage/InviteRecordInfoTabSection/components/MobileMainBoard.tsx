@@ -14,7 +14,7 @@ export const MobileMainBoard = (props: IBoardData) => {
   return renderByPlatform({
     "wild777bet": <WMobileMainBoard {...props} />,
     "u1": <CMobileMainBoard {...props} />,
-    "riojungle777bet": <RMobileMainBoard {...props} />
+    "u2": <RMobileMainBoard {...props} />
   }, <PMobileMainBoard {...props} />)
 }
 

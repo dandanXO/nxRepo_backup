@@ -90,7 +90,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
   const backgroundProps = () => {
     return renderByPlatform({
       "u1": 'bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)]',
-      "riojungle777bet": 'bg-[#333]',
+      "u2": 'bg-[#333]',
     }, 'bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)]')
   }
   return (

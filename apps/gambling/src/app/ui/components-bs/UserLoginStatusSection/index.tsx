@@ -9,7 +9,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
     "u1": (
       <CUserLoginStatusSection {...props} />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RUserLoginStatusSection {...props} />
     )
   }, <CUserLoginStatusSection {...props} />)

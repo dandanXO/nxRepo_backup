@@ -8,7 +8,7 @@ const TermsOfServicePage = () => {
 
   return renderByPlatform({
     "u1": <CocoTermsOfServicePage />,
-    "riojungle777bet": <RioTermsOfServicePage />
+    "u2": <RioTermsOfServicePage />
   }, <CocoTermsOfServicePage />)
 }
 

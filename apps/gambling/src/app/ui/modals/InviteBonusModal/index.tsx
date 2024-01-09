@@ -96,7 +96,7 @@ export const InviteBonusModal = (props: IInitialChargeModal) => {
       "wild777bet": (
         <div></div>
       ),
-      "riojungle777bet": (
+      "u2": (
         <RioInviteBonusModal onConfirm={props.onConfirm} close={props.close}/>
       )
     },

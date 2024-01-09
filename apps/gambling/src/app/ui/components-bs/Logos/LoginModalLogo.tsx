@@ -8,6 +8,6 @@ export const LoginModalLogo = (props: ILogo) => {
   return renderByPlatform({
     "wild777bet": <CLoginModalLogo {...props}/>,
     "u1":  <CLoginModalLogo {...props}/>,
-    "riojungle777bet": <RLoginModalLogo {...props}/>,
+    "u2": <RLoginModalLogo {...props}/>,
   }, <CLoginModalLogo {...props}/>,)
 }

@@ -77,7 +77,7 @@ export const GameRecordPage = () => {
         dataCount={data?.total || 0}
       />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RioGameRecordPage
         dates={dates}
         setDates={setDates}

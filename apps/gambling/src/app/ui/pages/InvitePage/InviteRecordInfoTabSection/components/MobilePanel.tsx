@@ -10,7 +10,7 @@ export const MobilePanel = (props: IMobilePanel) => {
   return renderByPlatform({
     "wild777bet": <WMobilePanel {...props} />,
     "u1": <CMobilePanel {...props} />,
-    "riojungle777bet": <RMobilePanel {...props} />
+    "u2": <RMobilePanel {...props} />
   }, <PMobilePanel {...props} />)
 }
 

@@ -110,7 +110,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
           styles={renderByPlatform({
             "wild777bet": WselectInputStyleProps(isMobile),
             "u1": CselectInputStyleProps(isMobile),
-            "riojungle777bet": RselectInputStyleProps(isMobile)
+            "u2": RselectInputStyleProps(isMobile)
           }, PselectInputStyleProps(isMobile))}
           value={props.selectOption}
           onChange={(item: any) => {

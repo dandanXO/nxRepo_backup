@@ -8,6 +8,6 @@ interface IMaintenanceModal {
 
 export const MaintenanceModal = (props: IMaintenanceModal) => {
   return renderByPlatform({
-    "riojungle777bet": <RiojungleMaintenanceModal {...props}/>,
+    "u2": <RiojungleMaintenanceModal {...props}/>,
   }, <CocoMaintenanceModal {...props}/>);
 }

@@ -98,7 +98,7 @@ export const InvitePage = () => {
     {
       "u1": <CInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
       "wild777bet": <WInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
-      "riojungle777bet": <RInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
+      "u2": <RInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
     },
     <PInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
   );

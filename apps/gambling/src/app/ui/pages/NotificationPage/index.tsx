@@ -14,6 +14,6 @@ export const NotificationPage = () => {
 
   return renderByPlatform({
     "u1": <CocoNotificationPage />,
-    "riojungle777bet": <RioNotificationPage />
+    "u2": <RioNotificationPage />
   }, (<CocoNotificationPage />))
 };

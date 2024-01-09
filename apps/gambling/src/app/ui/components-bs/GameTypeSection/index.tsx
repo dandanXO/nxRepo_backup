@@ -113,7 +113,7 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
       listSize={listSize}
       loadMore={loadMore}
     />,
-    "riojungle777bet": <RGameTypeSectionList
+    "u2": <RGameTypeSectionList
       {...props}
       displayedItems={displayedItems}
       animating={animating}

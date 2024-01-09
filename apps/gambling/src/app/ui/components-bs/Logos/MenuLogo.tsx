@@ -8,6 +8,6 @@ export const MenuLogo = (props: ILogo) => {
   return renderByPlatform({
     "wild777bet": <CMenuLogo {...props}/>,
     "u1":  <CMenuLogo {...props}/>,
-    "riojungle777bet": <RMenuLogo {...props}/>,
+    "u2": <RMenuLogo {...props}/>,
   }, <CMenuLogo {...props}/>)
 }

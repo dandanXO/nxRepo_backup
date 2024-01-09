@@ -18,7 +18,7 @@ export const NotificationDrawer = (props: INotificationDrawer) => {
         "u1": (
           <CNotificationDrawer closeDrawer={props.closeDrawer}/>
         ),
-        "riojungle777bet": (
+        "u2": (
           <RNotificationDrawer closeDrawer={props.closeDrawer}/>
         ),
       }, (

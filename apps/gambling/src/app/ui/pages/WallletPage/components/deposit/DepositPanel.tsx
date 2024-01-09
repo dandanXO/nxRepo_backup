@@ -168,7 +168,7 @@ export const DepositPanel = (props: IDepositPanel) => {
         onClickToNextDepositPage={onClickToNextDepositPage}
       />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RDepositPanel
         {...props}
         isLoaded={isLoaded}

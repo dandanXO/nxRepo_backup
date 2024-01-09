@@ -46,8 +46,8 @@
     "serve:gbrasilslotsbet": "cross-env NODE_ENV=development NODE_DEV_SERVER_PROXY=coco777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-u1-m2-mv1-v10-brasilbet",
     "build:gbrasilslotsbet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-u1-m2-mv1-v10-brasilbet --verbose",
 
-    "serve:griojunglebet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_DEV_SERVER_PROXY=coco777bet pnpm nx serve gambling -c=dev-u2-v1-riojungle777bet",
-    "build:griojunglebet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-u2-v1-riojungle777bet --verbose",
+    "serve:griojunglebet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_DEV_SERVER_PROXY=coco777bet pnpm nx serve gambling -c=dev-u2-m1-mv1-v9-riojungle777bet",
+    "build:griojunglebet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-u2-m1-mv1-v9-riojungle777bet --verbose",
 
     "serve:min": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve:in mobile -c=development",
     "serve:mpk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve:pk mobile -c=development",

@@ -88,7 +88,7 @@ export const WallletPage = () => {
     "u1": (
       <CWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode} totalSectionValues={totalSectionValues}/>
     )
   }, (

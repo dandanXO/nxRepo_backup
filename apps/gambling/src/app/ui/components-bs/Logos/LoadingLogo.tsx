@@ -8,6 +8,6 @@ export const LoadingLogo = (props: ILogo) => {
   return renderByPlatform({
     "wild777bet": <CLoadingLogo {...props}/>,
     "u1":  <CLoadingLogo {...props}/>,
-    "riojungle777bet": <RLoadingLogo {...props}/>,
+    "u2": <RLoadingLogo {...props}/>,
   }, <CLoadingLogo {...props}/>,)
 }

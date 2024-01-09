@@ -10,6 +10,6 @@ type IAddToMobileShortcut  = {
 
 export const AddToMobileShortcut = (props: IAddToMobileShortcut) => {
   return renderByPlatform({
-    "riojungle777bet": <RionjungleAddToMobileShortcut {...props} />,
+    "u2": <RionjungleAddToMobileShortcut {...props} />,
   }, <CocoAddToMobileShortcut {...props} />);
 }

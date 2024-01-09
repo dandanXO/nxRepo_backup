@@ -6,5 +6,5 @@ import {ToolButton as RToolButton} from "../../components-bs/Buttons/env/riojung
 export const ToolButton = renderByPlatform({
   "wild777bet": WToolButton,
   "u1": CToolButton,
-  "riojungle777bet": RToolButton,
+  "u2": RToolButton,
 }, CToolButton)

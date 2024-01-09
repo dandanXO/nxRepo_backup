@@ -59,7 +59,7 @@ export const Skeleton = styled.div`
 const DesktopGameItemButton = renderByPlatform({
   "wild777bet": WPlayButton,
   "u1": CPlayButton,
-  "riojungle777bet": RPlayButton,
+  "u2": RPlayButton,
 // }, PPlayButton)
 }, CPlayButton)
 

@@ -7,6 +7,6 @@ export const TabBar = (props: ITabBar) => {
   return renderByPlatform({
     "wild777bet": <CTabBar {...props}/>,
     "u1": <CTabBar {...props}/>,
-    "riojungle777bet": <RTabBar {...props}/>,
+    "u2": <RTabBar {...props}/>,
   }, <CTabBar {...props}/>);
 }

@@ -217,7 +217,7 @@ export const JackpotMap: {
         allSignInConfig={allSignInConfig}
       />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RioJungleVIPGradePage
         signInTotalDays={signInTotalDays}
         currentLevel={currentLevel}

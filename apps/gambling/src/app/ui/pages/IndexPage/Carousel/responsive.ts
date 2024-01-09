@@ -4,5 +4,5 @@ import {responsive as RiojungleResponsive} from "./env/riojungle/responsive";
 
 export const responsive = renderByPlatform({
   "u1": CocoResponsive,
-  "riojungle777bet": RiojungleResponsive,
+  "u2": RiojungleResponsive,
 }, CocoResponsive)

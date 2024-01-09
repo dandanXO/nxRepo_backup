@@ -8,6 +8,6 @@ export const Header = (props: IHeader) => {
   return renderByPlatform({
     "wild777bet": <WHeader {...props}/>,
     "u1": <CHeader {...props}/>,
-    "riojungle777bet": <RHeader {...props}/>,
+    "u2": <RHeader {...props}/>,
   }, <CHeader {...props}/>);
 }

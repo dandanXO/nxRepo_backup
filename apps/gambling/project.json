@@ -41,8 +41,8 @@
         "dev-u1-v8-sambafortunebet":  {
           "buildTarget": "gambling:build:dev-u1-v8-sambafortunebet"
         },
-        "dev-u2-v1-riojungle777bet": {
-          "buildTarget": "gambling:build:dev-u2-v1-riojungle777bet"
+        "dev-u2-m1-mv1-v9-riojungle777bet": {
+          "buildTarget": "gambling:build:dev-u2-m1-mv1-v9-riojungle777bet"
         },
         "dev-bmw": {
           "buildTarget": "gambling:build:dev-bmw"
@@ -599,24 +599,24 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "dev-u2-v1-riojungle777bet": {
-          "postcssConfig": "apps/gambling/src/environments/riojungle777bet/postcss.config.js",
+        "dev-u2-m1-mv1-v9-riojungle777bet": {
+          "postcssConfig": "apps/gambling/src/environments/u2/postcss.config.js",
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/tailwind.variables",
-              "with": "apps/gambling/src/environments/riojungle777bet/tailwind.variables"
+              "with": "apps/gambling/src/environments/u2/tailwind.variables"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/riojungle777bet/theme.css"
+              "with": "apps/gambling/src/environments/u2/theme.css"
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/riojungle777bet/v1/environment.dev.ts"
+              "with": "apps/gambling/src/environments/u2/v1/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/riojungle777bet/v1/index.html"
+              "with": "apps/gambling/src/environments/u2/v1/index.html"
             }
           ],
           "extractLicenses": false,
@@ -624,24 +624,24 @@
           "sourceMap": true,
           "vendorChunk": true
         },
-        "prod-u2-v1-riojungle777bet": {
-          "postcssConfig": "apps/gambling/src/environments/riojungle777bet/postcss.config.js",
+        "prod-u2-m1-mv1-v9-riojungle777bet": {
+          "postcssConfig": "apps/gambling/src/environments/u2/postcss.config.js",
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/tailwind.variables",
-              "with": "apps/gambling/src/environments/riojungle777bet/tailwind.variables"
+              "with": "apps/gambling/src/environments/u2/tailwind.variables"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/riojungle777bet/theme.css"
+              "with": "apps/gambling/src/environments/u2/theme.css"
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/riojungle777bet/v1/environment.prod.ts"
+              "with": "apps/gambling/src/environments/u2/v1/environment.prod.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/riojungle777bet/v1/index.html"
+              "with": "apps/gambling/src/environments/u2/v1/index.html"
             }
           ],
           "optimization": true,

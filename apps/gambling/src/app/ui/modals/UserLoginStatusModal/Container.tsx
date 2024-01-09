@@ -10,6 +10,6 @@ export const Container = (props: IContainer) => {
   return renderByPlatform({
     "wild777bet": <WContainer {...props}/>,
     "u1": <CContainer {...props}/>,
-    "riojungle777bet": <RContainer {...props}/>,
+    "u2": <RContainer {...props}/>,
   }, <CContainer {...props}/>);
 }

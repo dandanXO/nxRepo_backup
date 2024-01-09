@@ -77,7 +77,7 @@ export const TelegramPage = () => {
     {
       "u1": <CTelegramPage handleClickToTelegram={handleClickToTelegram} />,
       "wild777bet": <WTelegramPage handleClickToTelegram={handleClickToTelegram} />,
-      "riojungle777bet": <RTelegramPage handleClickToTelegram={handleClickToTelegram} />,
+      "u2": <RTelegramPage handleClickToTelegram={handleClickToTelegram} />,
     },
     <PTelegramPage handleClickToTelegram={handleClickToTelegram} />,
   );

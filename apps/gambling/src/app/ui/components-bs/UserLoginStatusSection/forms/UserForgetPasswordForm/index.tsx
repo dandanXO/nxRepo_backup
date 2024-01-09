@@ -8,7 +8,7 @@ export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
     "u1": (
       <CUserForgetPasswordForm {...props}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RUserForgetPasswordForm {...props}/>
     )
   }, <CUserForgetPasswordForm {...props}/>)

@@ -9,7 +9,7 @@ export const DesktopDailyTable = (props: IDailyType) => {
   return renderByPlatform({
     "wild777bet": <WDesktopDailyTable {...props} />,
     "u1": <CDesktopDailyTable {...props} />,
-    "riojungle777bet": <RDesktopDailyTable {...props} />
+    "u2": <RDesktopDailyTable {...props} />
   }, <PDesktopDailyTable {...props} />)
 }
 

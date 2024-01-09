@@ -9,7 +9,7 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
   return renderByPlatform({
     "wild777bet": <WMobileDailyTable {...props} />,
     "u1": <CMobileDailyTable {...props} />,
-    "riojungle777bet": <RMobileDailyTable {...props} />
+    "u2": <RMobileDailyTable {...props} />
   }, <PMobileDailyTable {...props} />)
 }
 

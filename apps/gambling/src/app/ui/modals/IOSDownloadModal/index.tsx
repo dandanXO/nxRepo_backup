@@ -9,6 +9,6 @@ export type IInitialChargeModal = {
 
 export const IOSDownloadModal = () => {
   return renderByPlatform({
-    "riojungle777bet": <RiojungleIOSDownloadModal />,
+    "u2": <RiojungleIOSDownloadModal />,
   }, <CocoIOSDownloadModal />);
 }

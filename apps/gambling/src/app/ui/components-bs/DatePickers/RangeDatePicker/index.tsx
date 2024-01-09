@@ -12,7 +12,7 @@ import { renderByPlatform } from "../../../utils/renderByPlatform";
 
 const RangeDatePickerContent = renderByPlatform({
   "u1": CocoRangeDatePickerContent,
-  "riojungle777bet": RioRangeDatePickerContent
+  "u2": RioRangeDatePickerContent
 }, CocoRangeDatePickerContent)
 
 interface IRangeDatePickerProps {

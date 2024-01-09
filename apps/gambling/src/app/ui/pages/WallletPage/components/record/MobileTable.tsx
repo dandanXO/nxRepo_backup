@@ -6,14 +6,14 @@ import { DepositMobileTable as RioDepositMobileTable, WithdrawMobileTable as Rio
 export const DepositMobileTable = () => {
 
   return renderByPlatform({
-    "riojungle777bet": <RioDepositMobileTable />,
+    "u2": <RioDepositMobileTable />,
   }, <CDepositMobileTable />);
 }
 
 export const WithdrawMobileTable = () => {
 
   return renderByPlatform({
-    "riojungle777bet": <RioWithdrawMobileTable />,
+    "u2": <RioWithdrawMobileTable />,
   }, <CWithdrawMobileTable />);
 }
 

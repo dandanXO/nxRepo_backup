@@ -1,9 +1,9 @@
 export const environment = {
-  production: true,
-  uVersion: "riojungle777bet",
+  production: false,
+  uVersion: "u2",
   mvVersion: "v1",
   mockBackend: false,
-  platformName: "Rio Jungle bet",
+  platformName: "Dev Rio Jungle bet",
   platformGroup: "YH Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",

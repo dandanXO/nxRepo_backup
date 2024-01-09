@@ -59,7 +59,7 @@ export const LogoutSection = (props: ILogoutPopover) => {
   }
 
   return renderByPlatform({
-    "riojungle777bet": (
+    "u2": (
       <RioUserLogoutSection
         onHandleCancel={onHandleCancel}
         onHandleLogout={onHandleLogout}

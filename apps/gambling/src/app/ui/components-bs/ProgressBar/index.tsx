@@ -5,5 +5,5 @@ import { ProgressBar as RioProgressBar } from './env/riojungle'
 
 export const ProgressBar = renderByPlatform({
   "u1": CocoProgressBar,
-  "riojungle777bet": RioProgressBar
+  "u2": RioProgressBar
 }, CocoProgressBar)

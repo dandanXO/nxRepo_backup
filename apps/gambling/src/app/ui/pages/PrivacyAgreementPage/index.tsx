@@ -7,6 +7,6 @@ export const PrivacyAgreementPage = () => {
 
   return renderByPlatform({
     "u1": <CocoPrivacyAgreementPage />,
-    "riojungle777bet": <RioPrivacyAgreementPage />,
+    "u2": <RioPrivacyAgreementPage />,
   }, <CocoPrivacyAgreementPage />)
 };

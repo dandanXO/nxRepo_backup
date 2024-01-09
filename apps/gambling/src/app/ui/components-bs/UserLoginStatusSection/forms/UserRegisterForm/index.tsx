@@ -8,7 +8,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
     "u1": (
       <CUserRegisterForm {...props}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RUserRegisterForm {...props}/>
     )
   }, <CUserRegisterForm {...props}/>)

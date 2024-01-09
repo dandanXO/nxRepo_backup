@@ -276,7 +276,7 @@ export const IndexPage = () => {
         recentGameList={recentGameList}
       />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RIndexPage
         userFavorite={userFavorite}
         onClickFavoriteGameItem={onClickFavoriteGameItem}

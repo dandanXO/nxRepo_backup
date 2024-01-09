@@ -10,7 +10,7 @@ export const DesktopPanel = (props: IDesktopPanel) => {
   return renderByPlatform({
     "wild777bet": <WDesktopPanel {...props} />,
     "u1": <CDesktopPanel {...props} />,
-    "riojungle777bet": <RDesktopPanel {...props} />
+    "u2": <RDesktopPanel {...props} />
   }, <PDesktopPanel {...props} />)
 }
 

@@ -7,7 +7,7 @@ import { RecordPanelDeposit as RioRecordPanelDeposit } from './env/riojungle/Rec
 export const RecordPanelDeposit = () => {
 
   return renderByPlatform({
-    "riojungle777bet": <RioRecordPanelDeposit />,
+    "u2": <RioRecordPanelDeposit />,
   }, <CRecordPanelDeposit />);
 }
 

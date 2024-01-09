@@ -24,7 +24,7 @@ export const LeaveGameConfirmModal = ({
               onClose={onClose}
             />
           ),
-          "riojungle777bet": (
+          "u2": (
             <RioLeaveGameConfirmModal
               onConfirm={onConfirm}
               onClose={onClose}

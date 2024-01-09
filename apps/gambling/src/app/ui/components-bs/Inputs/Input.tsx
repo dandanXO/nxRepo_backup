@@ -120,7 +120,7 @@ export const Input = renderByPlatform(
   {
     u1: BaseInput,
     wild777bet: BaseInput,
-    riojungle777bet: BaseInput
+    u2: BaseInput
   },
   BaseInput
 );

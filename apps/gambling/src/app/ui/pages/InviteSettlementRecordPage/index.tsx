@@ -6,6 +6,6 @@ import { InviteSettlementRecordPage as RioInviteSettlementRecordPage } from "./e
 export const InviteSettlementRecordPage = () => {
 
   return renderByPlatform({
-    "riojungle777bet": <RioInviteSettlementRecordPage />,
+    "u2": <RioInviteSettlementRecordPage />,
   }, <CInviteSettlementRecordPage />);
 }

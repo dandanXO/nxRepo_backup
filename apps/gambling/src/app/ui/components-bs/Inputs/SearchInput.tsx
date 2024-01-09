@@ -17,7 +17,7 @@ export const SearchInput = (props: IInput) => {
     "wild777bet": (
       <WSearchInput {...props}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RSearchInput {...props}/>
     )
   }, <PSearchInput {...props}/>)

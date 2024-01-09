@@ -12,5 +12,5 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 export const WalletDepositNextPage = renderByPlatform({
   "u1": CWalletDepositNextPage,
   "wild777bet": WWalletDepositNextPage,
-  "riojungle777bet": RWalletDepositNextPage,
+  "u2": RWalletDepositNextPage,
 }, PWalletDepositNextPage);

@@ -12,7 +12,7 @@ export interface ITelegramDetailContactModalProps {
 export const TelegramDetailContactModal = (props: ITelegramDetailContactModalProps) =>
   renderByPlatform({
     "u1": <CocoTelegramDetailContactModal {...props} />,
-    "riojungle777bet": <RioTelegramDetailContactModal {...props} />,
+    "u2": <RioTelegramDetailContactModal {...props} />,
   },<CocoTelegramDetailContactModal {...props} />)
 
 

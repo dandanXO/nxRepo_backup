@@ -14,7 +14,7 @@ export const DesktopBoard = (props: IBoardData) => {
   return renderByPlatform({
     "wild777bet": <WDesktopBoard {...props} />,
     "u1": <CDesktopBoard {...props} />,
-    "riojungle777bet": <RDesktopBoard {...props} />
+    "u2": <RDesktopBoard {...props} />
   }, <PDesktopBoard {...props} />)
 }
 

@@ -126,7 +126,7 @@ export const MyPage = () => {
     "u1": (
       <CBetMyPage currentLevel={currentLevel} userVIPInfo={userVIPInfo} />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RioMyPage userVIPInfo={userVIPInfo} currentLevel={currentLevel} />
     )
   }, (

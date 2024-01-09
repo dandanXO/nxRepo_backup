@@ -9,6 +9,6 @@ export const FooterLogo = (props: ILogo) => {
   return renderByPlatform({
     "wild777bet": <CFooterLogo {...props}/>,
     "u1":  <CFooterLogo {...props}/>,
-    "riojungle777bet": <RFooterLogo {...props}/>,
+    "u2": <RFooterLogo {...props}/>,
   }, <CFooterLogo {...props}/>,)
 }

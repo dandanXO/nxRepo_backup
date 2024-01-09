@@ -117,7 +117,7 @@ export const PageTemplateLayers = ({
       {
         isShowMobileLogoutModal && (
           renderByPlatform({
-            "riojungle777bet": <LogoutModal />
+            "u2": <LogoutModal />
           }, isMobile ? <LogoutModal />: <LogoutPopover />)
         )
       }

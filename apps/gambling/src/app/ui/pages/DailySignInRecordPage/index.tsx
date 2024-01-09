@@ -6,7 +6,7 @@ import { DailySignInRecordPage as RioDailySignInRecordPage } from "./env/riojung
 export const DailySignInRecordPage = () => {
 
   return renderByPlatform({
-    "riojungle777bet": <RioDailySignInRecordPage />,
+    "u2": <RioDailySignInRecordPage />,
   }, <CDailySignInRecordPage />);
 }
 

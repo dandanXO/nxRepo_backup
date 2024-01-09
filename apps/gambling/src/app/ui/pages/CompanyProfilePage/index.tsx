@@ -6,7 +6,7 @@ export const CompanyProfilePage = () => {
     "u1": (
       <CCompanyProfilePage/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RCompanyProfilePage/>
     ),
   }, <CCompanyProfilePage/>)

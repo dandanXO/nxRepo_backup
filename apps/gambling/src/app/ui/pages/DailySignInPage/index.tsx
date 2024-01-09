@@ -186,7 +186,7 @@ export const DailySignInPage = () => {
         setCurrentSelectedLevel={setCurrentSelectedLevel}
       />
     ),
-    "riojungle777bet": (
+    "u2": (
       <RioDailySignInPage
         onClickToSignIn={onClickToSignIn}
         currentVIP={signInConfig?.data?.vipLevel || 0}

@@ -21,7 +21,7 @@ export const DepositAdvertisementModal = ({
       {
         renderByPlatform({
           "u1": <CocoDepositAdvertisementModal onConfirm={onConfirm} close={close} />,
-          "riojungle777bet": <RioDepositAdvertisementModal onConfirm={onConfirm} close={close} />
+          "u2": <RioDepositAdvertisementModal onConfirm={onConfirm} close={close} />
         }, <CocoDepositAdvertisementModal onConfirm={onConfirm} close={close} />)
       }
     </div>

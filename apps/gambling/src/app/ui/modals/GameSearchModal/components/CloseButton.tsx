@@ -8,7 +8,7 @@ import { renderByPlatform } from "../../../utils/renderByPlatform";
 export const CloseButton = () => {
   return renderByPlatform({
     "u1": <CloseICON  />,
-    "riojungle777bet": <CloseICON className="w-[40px] h-[40px] text-[#B3B3B3]" outLined={true} btnClassName={'p-0'} />
+    "u2": <CloseICON className="w-[40px] h-[40px] text-[#B3B3B3]" outLined={true} btnClassName={'p-0'} />
   }, <CloseICON />)
 }
 

@@ -6,7 +6,7 @@ import { RecordPanelWithdraw as RioRecordPanelWithdraw } from './env/riojungle/R
 export const RecordPanelDeposit = () => {
 
   return renderByPlatform({
-    "riojungle777bet": <RioRecordPanelWithdraw />,
+    "u2": <RioRecordPanelWithdraw />,
   }, <CRecordPanelWithdraw />);
 }
 

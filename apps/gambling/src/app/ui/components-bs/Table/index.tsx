@@ -12,7 +12,7 @@ import { renderByPlatform } from '../../utils/renderByPlatform';
 const NoData = ()=> renderByPlatform({
   "u1": <CNoData  />,
   "wild777bet": <WNoData  />,
-  "riojungle777bet": <RNoData  />,
+  "u2": <RNoData  />,
 }, <PNoData  />
 )
 

@@ -9,7 +9,7 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
   return renderByPlatform({
     "wild777bet": <WDesktopTotalTable {...props} />,
     "u1": <CDesktopTotalTable {...props} />,
-    "riojungle777bet": <RDesktopTotalTable {...props} />
+    "u2": <RDesktopTotalTable {...props} />
   }, <PDesktopTotalTable {...props} />)
 }
 
