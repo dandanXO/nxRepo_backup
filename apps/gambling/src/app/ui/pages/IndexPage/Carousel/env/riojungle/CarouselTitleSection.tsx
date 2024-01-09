@@ -27,7 +27,7 @@ export const CarouselTitleSection = (props: ICarouselSubTitle) => {
       {/*)}*/}
 
       <div className={cx("text-left",
-        "text-base sm:text-base md:text-lg lg:text-[1.5vw]",
+        "text-2xl sm:text-base md:text-2xl lg:text-[28px]",
         "font-extrabold"
       )}>
         {props.children}
