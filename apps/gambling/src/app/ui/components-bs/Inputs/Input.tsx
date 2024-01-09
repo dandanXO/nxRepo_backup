@@ -1,7 +1,7 @@
 import cx from 'classnames';
 import { useState } from 'react';
 
-import { renderByPlatform } from '../../utils/renderByPlatform';
+import { renderByUVersion } from '../../utils/renderByUVersion';
 import { tcx } from '../../utils/tcx';
 import { InputSection } from './InputSection';
 
@@ -116,7 +116,7 @@ export type InputValue<T> = {
   errorMessage?: string;
 };
 
-export const Input = renderByPlatform(
+export const Input = renderByUVersion(
   {
     u1: BaseInput,
     wild777bet: BaseInput,

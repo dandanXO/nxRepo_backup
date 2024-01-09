@@ -4,14 +4,14 @@ import { MobileMainBoard as CMobileMainBoard } from "../env/coco/MobileMainBoard
 import { MobileMainBoard as PMobileMainBoard } from "../env/pernambucana/MobileMainBoard";
 import { MobileMainBoard as WMobileMainBoard } from "../env/wild/MobileMainBoard";
 import { MobileMainBoard as RMobileMainBoard } from "../env/riojungle/MobileMainBoard";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export interface IBoardContainer {
   children: ReactNode | ReactNode[];
 }
 
 export const MobileMainBoard = (props: IBoardData) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WMobileMainBoard {...props} />,
     "u1": <CMobileMainBoard {...props} />,
     "u2": <RMobileMainBoard {...props} />

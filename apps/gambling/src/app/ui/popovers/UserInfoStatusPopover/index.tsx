@@ -21,7 +21,7 @@ import { UserInfoStatusPopoverContainer as PernambucanaPopoverContainer } from '
 import { UserInfoStatusPopoverVIPInfo as CocoVIPInfo} from './env/coco/UserInfoStatusPopoverVIPInfo'
 import { UserInfoStatusPopoverVIPInfo as WildVIPInfo} from './env/wild/UserInfoStatusPopoverVIPInfo'
 import { UserInfoStatusPopoverVIPInfo as PernambucanaVIPInfo} from './env/pernambucana/UserInfoStatusPopoverVIPInfo'
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 import { UserInfoStatusPopoverBalanceInfo as CocoBalanceInfo } from "./env/coco/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverBalanceInfo as WildBalanceInfo } from "./env/wild/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverBalanceInfo as PernambucanaBalanceInfo } from "./env/pernambucana/UserInfoStatusPopoverBalanceInfo";
@@ -39,7 +39,7 @@ import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserV
 import { useInviteReward } from "../../hooks/useInviteReward";
 
 
-const PopoverContainer = renderByPlatform({
+const PopoverContainer = renderByUVersion({
   "wild777bet": WildPopoverContainer,
   "u1": CocoPopoverContainer,
   "u2": RioPopoverContainer,
@@ -314,7 +314,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
         // }}
       >
         {
-          renderByPlatform({
+          renderByUVersion({
             "wild777bet": (
               <>
                 <WildVIPInfo

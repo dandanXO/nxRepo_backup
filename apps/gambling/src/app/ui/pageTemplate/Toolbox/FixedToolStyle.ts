@@ -1,4 +1,4 @@
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import React from "react";
 
 
@@ -18,7 +18,7 @@ const riojungle777betFixedToolStyle: React.CSSProperties = {
 
 }
 
-export const FixedToolStyle = renderByPlatform({
+export const FixedToolStyle = renderByUVersion({
   "wild777bet": defaultFixedToolStyle,
   "u1": coco777betFixedToolStyle,
   "u2": riojungle777betFixedToolStyle,

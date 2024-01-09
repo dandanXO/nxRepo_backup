@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import {TailSpin} from 'react-loading-icons';
 import {environment} from "../../../../../environments/environment";
 
-import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../utils/renderByUVersion";
 import { PlayButton as CPlayButton } from "../env/coco/PlayButton";
 import { PlayButton as WPlayButton } from "../env/wild/PlayButton";
 import { PlayButton as PPlayButton } from "../env/pernambucana/PlayButton";
@@ -56,7 +56,7 @@ export const Skeleton = styled.div`
 
 `
 
-const DesktopGameItemButton = renderByPlatform({
+const DesktopGameItemButton = renderByUVersion({
   "wild777bet": WPlayButton,
   "u1": CPlayButton,
   "u2": RPlayButton,

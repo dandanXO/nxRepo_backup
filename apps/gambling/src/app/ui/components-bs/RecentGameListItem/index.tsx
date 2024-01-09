@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { environment } from "../../../../environments/environment";
 import { tcx } from "../../utils/tcx";
 import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 import { PlayButton as PPPlayButton } from "../GameTypeSection/env/pernambucana/PlayButton";
 import { PlayButton as WPlayButton } from "../GameTypeSection/env/wild/PlayButton";
 import { PlayButton as CPlayButton } from "../GameTypeSection/env/coco/PlayButton";
 import { Skeleton } from "../GameTypeSection/Skeleton";
 import { TailSpin } from "react-loading-icons";
 
-const DesktopGameItemButton = renderByPlatform(
+const DesktopGameItemButton = renderByUVersion(
   {
     "wild777bet": WPlayButton,
     "u1": CPlayButton,

@@ -1,4 +1,4 @@
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 import { DepositInput as PDepositInput } from "../../env/pernambucana/tabsContent/deposit/DepositInput";
 import { DepositInput as WDepositInput } from "../../env/wild/tabsContent/deposit/DepositInput"
 import { DepositInput as CDepositInput } from "../../env/coco/tabsContent/deposit/DepositInput";
@@ -16,7 +16,7 @@ export interface IDepositInput {
 }
 export const DepositInput = (props: IDepositInput) => {
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (<WDepositInput {...props} />),
     "u1": (<CDepositInput {...props} />),
     "u2": (<RDepositInput {...props} />)

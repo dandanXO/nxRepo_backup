@@ -7,7 +7,7 @@ import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouter
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { GameRecordPage as CocoGameRecordPage } from './env/coco';
 import { GameRecordPage as RioGameRecordPage } from './env/riojungle';
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 export interface IGameRecordPageProps {
   dates: moment.Moment[]
@@ -67,7 +67,7 @@ export const GameRecordPage = () => {
 
 
 
-  return renderByPlatform({
+  return renderByUVersion({
     "u1": (
       <CocoGameRecordPage
         dates={dates}

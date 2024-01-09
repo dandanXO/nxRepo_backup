@@ -1,4 +1,4 @@
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import { CocoTelegramContactModal } from "./env/coco"
 import { RiojungleTelegramContactModal } from './env/riojungle'
 
@@ -9,7 +9,7 @@ export type ITelegramContactModal = {
 
 export const TelegramContactModal = (props: ITelegramContactModal) => {
 
-  return renderByPlatform({
+  return renderByUVersion({
     "u2": <RiojungleTelegramContactModal {...props}/>,
   }, <CocoTelegramContactModal {...props}/>);
 }

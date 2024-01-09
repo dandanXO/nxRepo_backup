@@ -2,9 +2,9 @@ import {environment} from "../../../environments/environment";
 import React from "react";
 import {UVersions} from "../../../environments/types";
 
-export const renderByPlatform = (
+export const renderByUVersion = (
   props: {
-    [platform in UVersions]?: React.ReactElement | any;
+    [uiVersion in UVersions]?: React.ReactElement | any;
   },
   defaultComponent: React.ReactElement | any
 ) => {

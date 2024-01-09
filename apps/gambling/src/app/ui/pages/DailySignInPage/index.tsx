@@ -9,7 +9,7 @@ import {CurrentLevelButton, OtherLevelButton} from '../VIPGradePage';
 import {environment} from "../../../../environments/environment";
 import {tcx} from "../../utils/tcx";
 
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import WDailySignInPage from "./env/wild/DailySignInPage";
 import CocoDailySignInPage from "./env/coco/DailySignInPage";
 import RioDailySignInPage from "./env/riojungle"
@@ -161,7 +161,7 @@ export const DailySignInPage = () => {
     });
   }, []);
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WDailySignInPage
         onClickToSignIn={onClickToSignIn}

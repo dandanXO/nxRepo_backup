@@ -3,10 +3,10 @@ import { DesktopTotalTable as CDesktopTotalTable } from "../env/coco/DesktopTota
 import { DesktopTotalTable as PDesktopTotalTable } from "../env/pernambucana/DesktopTotalTable";
 import { DesktopTotalTable as WDesktopTotalTable } from "../env/wild/DesktopTotalTable";
 import { DesktopTotalTable as RDesktopTotalTable } from "../env/riojungle/DesktopTotalTable";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WDesktopTotalTable {...props} />,
     "u1": <CDesktopTotalTable {...props} />,
     "u2": <RDesktopTotalTable {...props} />

@@ -14,7 +14,7 @@ import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 import { TotalSectionContainer as PTotalSectionContainer } from "../env/pernambucana/TotalSectionContainer";
 import { TotalSectionContainer as WTotalSectionContainer } from "../env/wild/TotalSectionContainer";
 import { TotalSectionContainer as CTotalSectionContainer } from "../env/coco/TotalSectionContainer";
-import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../utils/renderByUVersion";
 
 export const TotalSectionContainer = () => {
   const {isMobile} = useBreakpoint();
@@ -35,7 +35,7 @@ export const TotalSectionContainer = () => {
     }
   }, [isMobile])
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WTotalSectionContainer />
     ),

@@ -17,7 +17,7 @@ import { NoData } from "../../components-bs/Icons/NoData";
 import { environment } from "../../../../environments/environment";
 import { Icon } from "../../components-bs/Icons";
 import { GameItem } from "../../components-bs/GameTypeSection";
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 import { CloseButton } from "./components/CloseButton";
 import { SearchNotice } from "./components/SearchNotice";
 
@@ -88,7 +88,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
   }
 
   const backgroundProps = () => {
-    return renderByPlatform({
+    return renderByUVersion({
       "u1": 'bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)]',
       "u2": 'bg-[#333]',
     }, 'bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-to)]')

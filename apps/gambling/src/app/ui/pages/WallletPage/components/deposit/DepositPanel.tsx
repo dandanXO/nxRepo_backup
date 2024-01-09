@@ -7,7 +7,7 @@ import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../../.
 import { environment } from "../../../../../../environments/environment";
 import { IDepositInput } from "./DepositInput";
 
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 import { formatLocaleMoney } from "../../../../utils/format";
 import { useRechargeMutation } from "../../../../../external";
@@ -145,7 +145,7 @@ export const DepositPanel = (props: IDepositPanel) => {
 
 
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WDepositPanel
         {...props}

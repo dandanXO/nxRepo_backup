@@ -4,10 +4,10 @@ import { MobileTotalTable as CMobileTotalTable } from "../env/coco/MobileTotalTa
 import { MobileTotalTable as PMobileTotalTable } from "../env/pernambucana/MobileTotalTable";
 import { MobileTotalTable as WMobileTotalTable } from "../env/wild/MobileTotalTable";
 import { MobileTotalTable as RMobileTotalTable } from "../env/riojungle/MobileTotalTable";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export const MobileTotalTable = (props: IMobileTotalTable) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WMobileTotalTable {...props} />,
     "u1": <CMobileTotalTable {...props} />,
     "u2": <RMobileTotalTable {...props} />

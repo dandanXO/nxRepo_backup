@@ -6,7 +6,7 @@ import { RecordPanelDeposit } from './RecordPanelDeposit';
 import { RecordPanelWithdraw } from './RecordPanelWithdraw';
 import cx from "classnames";
 import {RecordButton,RecordButton2} from "../../../../../../components-bs/Buttons/RecordButton";
-import { renderByPlatform } from '../../../../../../utils/renderByPlatform';
+import { renderByUVersion } from '../../../../../../utils/renderByUVersion';
 import { RecordButton as CRecordButton } from '../../../../../../components-bs/Buttons/env/coco/RecordButton';
 
 type IRecordPanel = {
@@ -14,7 +14,7 @@ type IRecordPanel = {
 }
 
 
-const RecordTabButton = renderByPlatform({
+const RecordTabButton = renderByUVersion({
   "wild777bet": RecordButton,
   "u1": CRecordButton,
 }, RecordButton)

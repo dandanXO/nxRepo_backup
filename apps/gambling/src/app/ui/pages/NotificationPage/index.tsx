@@ -6,13 +6,13 @@ import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 
 import { NotificationPage as CocoNotificationPage } from './env/coco'
 import { NotificationPage as RioNotificationPage } from './env/riojungle'
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 
 export const NotificationPage = () => {
   useAllowLoginRouterRules();
 
-  return renderByPlatform({
+  return renderByUVersion({
     "u1": <CocoNotificationPage />,
     "u2": <RioNotificationPage />
   }, (<CocoNotificationPage />))

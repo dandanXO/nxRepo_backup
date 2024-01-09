@@ -4,14 +4,14 @@ import { DesktopBoard as CDesktopBoard } from "../env/coco/DesktopBoard";
 import { DesktopBoard as PDesktopBoard } from "../env/pernambucana/DesktopBoard";
 import { DesktopBoard as WDesktopBoard } from "../env/wild/DesktopBoard";
 import { DesktopBoard as RDesktopBoard } from "../env/riojungle/DesktopBoard";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export interface IBoardContainer {
   children: ReactNode | ReactNode[];
 }
 
 export const DesktopBoard = (props: IBoardData) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WDesktopBoard {...props} />,
     "u1": <CDesktopBoard {...props} />,
     "u2": <RDesktopBoard {...props} />

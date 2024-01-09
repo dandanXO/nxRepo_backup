@@ -14,7 +14,7 @@ import {HidableEyeSvg} from "../../../../../Icons/HidableEyeSvg";
 import {CheckableICON} from "../../../../../Icons/CheckableICON";
 import {PhonePrefix} from "../../../../components/PhonePrefix";
 import {useUserRegisterForm} from "../../../../hooks/useUserRegisterForm";
-import {renderByPlatform} from "../../../../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../../../../utils/renderByUVersion";
 
 import {ConfirmButton as CocoConfirmButton} from "../../../../../Buttons/ConfirmButton";
 import {ConfirmButton} from "../../../../components/ConfirmButton";
@@ -136,7 +136,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
       <section className={"flex flex-col mb-4"}>
         {/*NOTICE: refactor*/}
-        {renderByPlatform({
+        {renderByUVersion({
           "u1": (
             <CocoConfirmButton
               className="!w-full my-2 "

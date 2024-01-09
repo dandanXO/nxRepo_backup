@@ -1,6 +1,6 @@
 import {twMerge} from "tailwind-merge";
 import {ConfirmButton as COCOConfirmButton } from "../../Buttons/ConfirmButton";
-import {renderByPlatform} from "../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../utils/renderByUVersion";
 import cx from "classnames";
 
 type IButton = {
@@ -35,7 +35,7 @@ const CocoConfirmButton = (props: IButton) => {
 
 
 export const ConfirmButton = (props: IButton) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "u1": <CocoConfirmButton {...props}/>,
     "u2": <RiojungleConfirmButton {...props}/>,
   }, <CocoConfirmButton {...props}/>)

@@ -24,7 +24,7 @@ import { uiSlice } from "../../reduxStore/uiSlice";
 import {GameSearchModal} from "../modals/GameSearchModal";
 import {useClickFavoriteGameItem} from "../hooks/useClickFavoriteGameItem";
 import {TelegramDetailContactModal} from "../modals/TelegramDetailContactModal";
-import { renderByPlatform } from "../utils/renderByPlatform";
+import { renderByUVersion } from "../utils/renderByUVersion";
 import {twMerge} from "tailwind-merge";
 import {IOSDownloadModal} from "../modals/IOSDownloadModal";
 
@@ -116,7 +116,7 @@ export const PageTemplateLayers = ({
       {/*Logout*/}
       {
         isShowMobileLogoutModal && (
-          renderByPlatform({
+          renderByUVersion({
             "u2": <LogoutModal />
           }, isMobile ? <LogoutModal />: <LogoutPopover />)
         )

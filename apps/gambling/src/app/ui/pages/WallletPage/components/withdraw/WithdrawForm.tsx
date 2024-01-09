@@ -2,7 +2,7 @@ import { Input, InputValue } from "../../../../components-bs/Inputs/Input";
 import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import Select from 'react-select';
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 import cx from 'classnames';
 import { selectInputStyleProps as WselectInputStyleProps } from '../../env/wild/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as RselectInputStyleProps } from '../../env/riojungle/tabsContent/withdraw/selectInputStyleProps';
@@ -107,7 +107,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
           menuPlacement={'bottom'}
           className="rounded-lg leading-none text-sm md:text-xl"
           isSearchable={false}
-          styles={renderByPlatform({
+          styles={renderByUVersion({
             "wild777bet": WselectInputStyleProps(isMobile),
             "u1": CselectInputStyleProps(isMobile),
             "u2": RselectInputStyleProps(isMobile)

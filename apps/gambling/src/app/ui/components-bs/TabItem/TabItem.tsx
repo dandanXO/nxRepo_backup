@@ -4,9 +4,9 @@ import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {StyledTabItem as PStyledTabItem} from "./env/pernambucana/StyledTabItem";
 import {StyledTabItem as CtyledTabItem} from "./env/coco/StyledTabItem"
 import {StyledTabItem as WStyledTabItem} from "./env/wild/StyledTabItem"
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 
-const StyledTabItem = renderByPlatform({
+const StyledTabItem = renderByUVersion({
   "u1": CtyledTabItem,
   "wild777bet": WStyledTabItem,
 }, PStyledTabItem)

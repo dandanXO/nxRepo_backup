@@ -1,10 +1,10 @@
-import {renderByPlatform} from "../../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../../utils/renderByUVersion";
 import {UserForgetPasswordForm as CUserForgetPasswordForm} from "./env/coco/UserForgetPasswordForm";
 import {UserForgetPasswordForm as RUserForgetPasswordForm} from "./env/riojungle/UserForgetPasswordForm";
 import {IUserForgetPasswordForm} from "./types";
 
 export const UserForgetPasswordForm = (props: IUserForgetPasswordForm) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "u1": (
       <CUserForgetPasswordForm {...props}/>
     ),

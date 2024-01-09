@@ -3,13 +3,13 @@ import { InitialChargeContent as PInitialChargeContent } from "./env/pernambucan
 import { InitialChargePage as RioInitialChargePage } from './env/riojungle';
 
 import { InitialChargeContent as WInitialChargeContent } from "./env/wild/InitialChargeContent";
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 
 
 export const InitialChargePage = () => {
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WInitialChargeContent />,
     "u1": <CInitialChargeContent />,
     "u2": <RioInitialChargePage />,

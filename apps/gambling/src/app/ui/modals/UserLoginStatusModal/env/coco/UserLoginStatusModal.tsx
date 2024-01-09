@@ -4,12 +4,12 @@ import {Container as WContainer} from "../../env/wild/Container";
 import {Container as CContainer} from "../../env/coco/Container";
 import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 
-import {renderByPlatform} from "../../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../../utils/renderByUVersion";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {UserLoginStatusSection} from "../../../../components-bs/UserLoginStatusSection";
 import {IUserLoginStatusModal} from "../../types";
 
-const Container = renderByPlatform({
+const Container = renderByUVersion({
   "wild777bet": WContainer,
   "u1": CContainer,
 }, CContainer)

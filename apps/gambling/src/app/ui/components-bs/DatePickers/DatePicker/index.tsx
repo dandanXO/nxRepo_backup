@@ -4,7 +4,7 @@ import Drawer, { DrawerDelay } from "../../Drawers/AnimateDrawer";
 import RMCDatePicker from "rmc-date-picker";
 import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'
-import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../utils/renderByUVersion";
 import { DatePickerBlock as CocoDatePickerBlock } from './env/coco/DatePickerBlock'
 import { DatePickerBlock as RioDatePickerBlock } from './env/riojungle/DatePickerBlock'
 
@@ -23,7 +23,7 @@ export const datePickerStyle = {
 };
 
 
-export const DatePickerBlock = renderByPlatform({
+export const DatePickerBlock = renderByUVersion({
   "u1": CocoDatePickerBlock,
   "u2": RioDatePickerBlock
 },CocoDatePickerBlock)

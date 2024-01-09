@@ -6,7 +6,7 @@ import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNav
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { VIPBorderStyleContainer } from "../../../../components/VIPBorderStyleContainer";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 import { FragmentContainer } from "../../../../components/FragmentContainer";
 import cx from 'classnames';
 import { Banner } from "../../../../components/Banner";

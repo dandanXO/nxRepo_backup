@@ -15,7 +15,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {appSlice} from "../../../reduxStore/appSlice";
 
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import PVIPGradePage from "./env/pernambucana/VIPGradePage";
 import WVIPGradePage from "./env/wild/VIPGradePage";
 import CVIPGradePage from "./env/coco/VIPGradePage";
@@ -198,7 +198,7 @@ export const JackpotMap: {
 
   const signInTotalDays = JSON.parse((allSignInConfig[0] || {}).value || '[]').length
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WVIPGradePage
         isMobile={isMobile}

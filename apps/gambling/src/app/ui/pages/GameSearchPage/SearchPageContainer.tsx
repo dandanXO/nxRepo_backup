@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { usePageNavigate } from "../../router/hooks/usePageNavigate";
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 
 import {SearchPageContainer as PContaniner} from "./env/pernambucana/SearchPageContainer";
 import {SearchPageContainer as WContaniner} from "./env/wild/SearchPageContainer";
@@ -14,7 +14,7 @@ interface Props {
 export const SearchPageContainer = (props: Props) => {
   const {onClickToIndex} = usePageNavigate();
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WContaniner onClickToIndex={onClickToIndex}>{props.children}</WContaniner>
     ),
