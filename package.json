@@ -44,6 +44,9 @@
     "serve:gbrasilslotsbet": "cross-env NODE_ENV=development NODE_COUNTRY=coco777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-u1-m2-mv1-v10-brasilbet",
     "build:gbrasilslotsbet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-u1-m2-mv1-v10-brasilbet --verbose",
 
+    "serve:gbreezeslotsbet": "cross-env NODE_ENV=development NODE_COUNTRY=coco777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-u1-m1-mv9-v12-breezeslotsbet",
+    "build:gbreezeslotsbet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-u1-m1-mv9-v12-breezeslotsbet --verbose",
+
     "serve:min": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve:in mobile -c=development",
     "serve:mpk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve:pk mobile -c=development",
     "serve:mbd": "cross-env NODE_ENV=development NODE_COUNTRY=bd pnpm nx serve:bd mobile -c=development",
