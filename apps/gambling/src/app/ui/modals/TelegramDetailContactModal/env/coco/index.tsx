@@ -14,7 +14,7 @@ export const TelegramDetailContactModal = (props: ITelegramDetailContactModalPro
   const ListTitle = ({ text }: { text: string }) => {
     return (
       <div className="flex items-center">
-        <img className={"w-[30px] mr-3.5"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />
+        <img className={"w-[30px] mr-3.5"} src={`assets/${environment.uVersion}/icon=telegram.png`} />
         <div className="text-base">{text}</div>
       </div>
     )

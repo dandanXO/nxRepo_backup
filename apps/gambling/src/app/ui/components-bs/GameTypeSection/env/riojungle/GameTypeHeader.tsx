@@ -41,7 +41,7 @@ export const GameTypeHeader = (props: {
   if(indexPagecurrentSelectLabel === 'Favoritos'){
     gameTypeName = 'favoritos'
   }
-  
+
   return (
     <header className={cx(`flex flex-row relative tab-item-title-box justify-between items-center`, containerClassName)}>
       <div className="flex">
@@ -57,11 +57,11 @@ export const GameTypeHeader = (props: {
         )}
         <div className="flex items-center mr-2">
           {
-            props.isViewAll ? 
-            (<img className='w-6 h-6' src={`assets/${environment.assetPrefix}/shared/index-tab-${gameTypeName}.png`} alt="recentIcon" />)
-            : (<img className='w-[64px] md:w-[88px]' src={`assets/${environment.assetPrefix}/shared/${gameTypeName}-logo.png`} alt="recentIcon" />)
+            props.isViewAll ?
+            (<img className='w-6 h-6' src={`assets/${environment.uVersion}/shared/index-tab-${gameTypeName}.png`} alt="recentIcon" />)
+            : (<img className='w-[64px] md:w-[88px]' src={`assets/${environment.uVersion}/shared/${gameTypeName}-logo.png`} alt="recentIcon" />)
           }
-          
+
         </div>
         <span className={titleClassName}>{props.gameTypeName}</span>
       </div>

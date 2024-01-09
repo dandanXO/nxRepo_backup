@@ -63,7 +63,7 @@ export const UserInfoStatusPopover = ({
           <img
             alt='close'
             className='absolute left-0 top-0 h-10 w-10 cursor-pointer'
-            src={`assets/${environment.assetPrefix}/XCircle.png`}
+            src={`assets/${environment.uVersion}/XCircle.png`}
             onClick={close}
           />
         </div>
@@ -77,7 +77,7 @@ export const UserInfoStatusPopover = ({
           <div className='mt-[22px] text-xl font-medium text-white'>{user.nickname}</div>
           <div className='mt-2 flex gap-1 text-white text-lg'>
             <div>ID: {user.user_id}</div>
-            <CopyIcon copyText={user.user_id} icon={<img alt='cooy' className='w-6 h-6' src={`assets/${environment.assetPrefix}/icon=copy.png`} />} />
+            <CopyIcon copyText={user.user_id} icon={<img alt='cooy' className='w-6 h-6' src={`assets/${environment.uVersion}/icon=copy.png`} />} />
           </div>
         </div>
 
@@ -196,7 +196,7 @@ export const UserInfoStatusPopover = ({
           }}
         >
           <div className='text-white text-lg font-medium'>Sair</div>
-          <img alt='signOut' className='w-6 h-6' src={`assets/${environment.assetPrefix}/icon=sign-out.png`} />
+          <img alt='signOut' className='w-6 h-6' src={`assets/${environment.uVersion}/icon=sign-out.png`} />
         </button>
       </div>
     </div>

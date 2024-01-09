@@ -37,9 +37,9 @@ export const AppCarouselContent4 = (props: IAppCarouselContent) => {
         </CarouselTitleSection>
 
         {isMobile ? (
-          <CarouselImage alt={"h5_banner_4"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/h5_banner_4.png`}/>
+          <CarouselImage alt={"h5_banner_4"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/h5_banner_4.png`}/>
         ): (
-          <CarouselImage alt={"banner_4"} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_4.png`}/>
+          <CarouselImage alt={"banner_4"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_4.png`}/>
         )}
       </div>
     </CarouselContainer>

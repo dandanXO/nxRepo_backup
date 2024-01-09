@@ -25,7 +25,7 @@ const TradeStatusMap: { [key: number]: string } = {
 const NoData = () => {
   return (
     <div className=' flex flex-col justify-center items-center py-10'>
-      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
+      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.uVersion}/noData.png`} />
       <div>Nada aqui</div>
     </div>
   )

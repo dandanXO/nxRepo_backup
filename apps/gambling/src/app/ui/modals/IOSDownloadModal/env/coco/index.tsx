@@ -35,7 +35,7 @@ export const CocoIOSDownloadModal = () => {
               1. Toque no ícone “Mais” e, em seguida, toque em Adicionar ao ecrã principal
             </div>
 
-            <img className="w-full mb-9" alt="guid-line"  src={`assets/${environment.assetPrefix}/add to home screen first_1.png`}/>
+            <img className="w-full mb-9" alt="guid-line"  src={`assets/${environment.uVersion}/add to home screen first_1.png`}/>
 
             <div className="text-sm leading-5 text-white mb-4">
               2.Clique em Adicionar e selecione ”Adicionar”
@@ -59,7 +59,7 @@ export const CocoIOSDownloadModal = () => {
                       Adicionar
                     </div>
                     <img
-                      src={`assets/${environment.assetPrefix}/hand.svg`}
+                      src={`assets/${environment.uVersion}/hand.svg`}
                       alt="hand icon"
                       className="w-8 h-12 absolute top-6 left-[24px]"
                     />

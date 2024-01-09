@@ -135,7 +135,7 @@ export const EditUserInfoModal = ({
 
         <div className='w-full'>
           <Input
-            prefix={<img alt='user' src={`assets/${environment.assetPrefix}/icon=user.png`} className="h-[14px] w-[14px] mr-2" />}
+            prefix={<img alt='user' src={`assets/${environment.uVersion}/icon=user.png`} className="h-[14px] w-[14px] mr-2" />}
             className="mt-4 md:mt-8 w-full items-center rounded-full p-3 text-xs md:text-3xl bg-[var(--primary-variant)]"
             value={userNickname}
             onChange={(event: any) => {
@@ -153,7 +153,7 @@ export const EditUserInfoModal = ({
               <div key={item} className='relative' onClick={()=>setSelectedAvatar(item)}>
                 <img
                   className='w-full rounded-xl md:rounded-3xl bg-transparent'
-                  alt={`avatar${item}`} src={`assets/${environment.assetPrefix}/avatar_${item}.png`}
+                  alt={`avatar${item}`} src={`assets/${environment.uVersion}/avatar_${item}.png`}
                 />
                 {selectedAvatar === item &&
                   <div className='absolute top-0 left-0 h-full w-full rounded-xl md:rounded-3xl border-4 border-[#FDEF70] z-10' />

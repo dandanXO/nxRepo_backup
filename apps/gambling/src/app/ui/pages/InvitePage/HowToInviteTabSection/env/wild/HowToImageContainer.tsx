@@ -37,17 +37,17 @@ export const HowToImageContainer = styled.div`
 export const HowToImage = (props: any) => {
   return (
     <HowToImageContainer className={props.className}>
-      <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.assetPrefix}/topTitle1.ed9276b2.png`} />
-      <img className={"display sm:hidden"} src={`assets/${environment.assetPrefix}/team_title-7d5515fe.png`} />
+      <img className="hidden sm:block w-max-[100%] h-auto" src={`assets/${environment.uVersion}/topTitle1.ed9276b2.png`} />
+      <img className={"display sm:hidden"} src={`assets/${environment.uVersion}/team_title-7d5515fe.png`} />
       <div className="mb-2 md:mx-16 md:my-5">
         <HowToImageText />
       </div>
-      <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={`assets/${environment.assetPrefix}/topTitle2.396e135e.png`} />
-      <img className={"mb-2 display sm:hidden"} src={`assets/${environment.assetPrefix}/invite-code-title-c456ebc9.png`} />
+      <img className={"mb-2 hidden sm:block w-max-[100%] h-auto"} src={`assets/${environment.uVersion}/topTitle2.396e135e.png`} />
+      <img className={"mb-2 display sm:hidden"} src={`assets/${environment.uVersion}/invite-code-title-c456ebc9.png`} />
       <InviteCopySection/>
       <div className={"text-center"}>
         <div className={"text-[#ffd624] mb-2"}>Partilhar ligações através de software social</div>
-        <img className={""} src={`assets/${environment.assetPrefix}/pic_social_media_logo.png`} />
+        <img className={""} src={`assets/${environment.uVersion}/pic_social_media_logo.png`} />
       </div>
     </HowToImageContainer>
   )

@@ -13,7 +13,7 @@ export const Container = styled.div.attrs((props) => ({
 }>`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/${environment.assetPrefix}/ad_bg_1.png);
+  background-image: url(assets/${environment.uVersion}/ad_bg_1.png);
   //background-size: 100% auto;
   background-size: cover;
   border-radius: 20px;

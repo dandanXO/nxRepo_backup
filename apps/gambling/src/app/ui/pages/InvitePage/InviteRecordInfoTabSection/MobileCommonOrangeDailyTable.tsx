@@ -18,7 +18,7 @@ type IMobileCommonOrangeTable = ITabType & { records: any; isProxy: boolean; rec
 
 export const MobileCommonOrangeDailyTable = (props: IMobileCommonOrangeTable) => {
   const [inviteBonusInfoOpen, setInviteBonusInfoOpen] = useState(false)
-  const isCoco777bet = environment.assetPrefix === 'coco777bet';
+  const isCoco777bet = environment.uVersion === 'coco777bet';
   const TableTabItem = isCoco777bet ? TabItem : CommonTableTabG;
   return (
     <div className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>

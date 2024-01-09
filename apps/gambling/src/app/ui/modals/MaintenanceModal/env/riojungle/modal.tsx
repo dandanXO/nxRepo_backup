@@ -49,7 +49,7 @@ export const RiojungleMaintenanceModal = (props: IMaintenanceModal) => {
           'my-5 w-[200px] h-[187px]': isTablet,
           "w-[80px] h-[80px] mb-1 mt-1": isMobile
         })}>
-          <img className={'w-full h-full'} src={`assets/${environment.assetPrefix}/maintenance_popup_icon.png`} alt={'icon'} />
+          <img className={'w-full h-full'} src={`assets/${environment.uVersion}/maintenance_popup_icon.png`} alt={'icon'} />
         </div>
         <div className="overflow-auto flex-1">
           <Paragraph text={'Prezados usuários VIP:'} />

@@ -290,11 +290,11 @@ const DayList = ({
                 <div className='relative flex'>
                   <div className='flex-1'>
                     <div className='w-4/5 mx-auto relative'>
-                      <img alt='money' src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}/>
+                      <img alt='money' src={`assets/${environment.uVersion}/daily_sign_in_money.png`}/>
                       {
                         checked && (
                           <div className='absolute top-[17%] left-[15%] w-[70%]'>
-                            <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
+                            <img alt='checked-icon' src={`assets/${environment.uVersion}/daily_sign_in_checked.png`}/>
                           </div>
                         )
                       }
@@ -372,7 +372,7 @@ const CocoDailySignInPage = ({
             <VIPRightTitle>
               <ResponsiveContainer>
                 <div className='pb-[10.6804%]'></div>
-                <img alt='title' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>
+                <img alt='title' src={`/assets/${environment.uVersion}/daily_sign_in_title.png`}/>
               </ResponsiveContainer>
             </VIPRightTitle>
 
@@ -426,7 +426,7 @@ const CocoDailySignInPage = ({
                 }
               }}
             >
-              <img alt='signInButton' src={`assets/${environment.assetPrefix}/daily_sign_in_button.png`}/>
+              <img alt='signInButton' src={`assets/${environment.uVersion}/daily_sign_in_button.png`}/>
             </SignInButton>
 
             <div className='mt-3 mb-[30px] my-auto text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
@@ -440,7 +440,7 @@ const CocoDailySignInPage = ({
               <img
                 className='absolute top-0 left-0 w-full h-full z-[-1]'
                 alt='god'
-                src={`assets/${environment.assetPrefix}/daily_sign_in_god.png`}
+                src={`assets/${environment.uVersion}/daily_sign_in_god.png`}
               />
             </ResponsiveContainer>
           </VIPIcon>

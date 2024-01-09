@@ -9,7 +9,7 @@ export const renderByPlatform = (
   defaultComponent: React.ReactElement | any
 ) => {
   const countryComponent = Object.keys(props).filter((item) => {
-    return item === environment.assetPrefix;
+    return item === environment.uVersion;
   });
   const countryComponentKey = countryComponent[0] as PlatformNames;
   if (!countryComponentKey) {

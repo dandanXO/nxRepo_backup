@@ -50,7 +50,7 @@ export const Toolbox = (props: IToolbox) => {
             {mobileShowDownload && (
               <div className={"mb-2"}>
                 <ToolButton isMobile={isMobile} className={""} onClick={props.onClickToDownload}>
-                  <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
+                  <img alt={"download"} className="w-[40px]" src={`assets/${environment.uVersion}/icon-download.png`}/>
                 </ToolButton>
               </div>
             )}
@@ -60,7 +60,7 @@ export const Toolbox = (props: IToolbox) => {
                   <ToolButton isMobile={isMobile} className={""} onClick={() => {
                     dispatch(appSlice.actions.setShowTelegramDetailContactModal(true))
                   }}>
-                    <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/customer-service-2.png`} />
+                    <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.uVersion}/customer-service-2.png`} />
                   </ToolButton>
                 </div>
               )
@@ -79,7 +79,7 @@ export const Toolbox = (props: IToolbox) => {
                   <div className={"text-xs font-light mb-2"}>Download</div>
                   <ToolButton
                     onClick={props.onClickToDownload}>
-                    <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
+                    <img alt={"download"} className="w-[40px]" src={`assets/${environment.uVersion}/icon-download.png`}/>
                   </ToolButton>
                 </FixedToolContainer>
               )
@@ -96,7 +96,7 @@ export const Toolbox = (props: IToolbox) => {
                           className={"mb-1"}
                           onClick={props.onClickToOpenTelegramService}
                         >
-                          <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
+                          <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.uVersion}/icon-telegram.png`}/>
                         </ToolButton>
                         <div className={"text-xs font-light"}>Serviço</div>
                       </div>
@@ -110,7 +110,7 @@ export const Toolbox = (props: IToolbox) => {
                           className={"mb-1"}
                           onClick={props.onClickToOpenTelegramManager}
                         >
-                          <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
+                          <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.uVersion}/icon-telegram.png`}/>
                         </ToolButton>
                         <div className={"text-xs font-lights"}>Gerente</div>
                       </div>

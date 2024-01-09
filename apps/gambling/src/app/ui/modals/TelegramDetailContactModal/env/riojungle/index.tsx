@@ -19,8 +19,8 @@ export const TelegramDetailContactModal = ({
         className='flex flex-col items-center relative text-sm md:text-base lg:text-xl bg-[#333333] text-[var(--grayscale-100)] rounded-2xl px-4 pb-4 md:px-6 md:pb-8 w-[296px] md:w-[378px]'
         onClick={(event)=> event.stopPropagation()}
       >
-        <img alt='close' className='absolute top-2 right-2 cursor-pointer w-12 ' src={`assets/${environment.assetPrefix}/WXCircle.png`} onClick={onClose}/>
-        <img alt="icon" className="w-[56px] md:w-[72px] lg:w-[96px] mt-[56px] md:mt-[60px]" src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
+        <img alt='close' className='absolute top-2 right-2 cursor-pointer w-12 ' src={`assets/${environment.uVersion}/WXCircle.png`} onClick={onClose}/>
+        <img alt="icon" className="w-[56px] md:w-[72px] lg:w-[96px] mt-[56px] md:mt-[60px]" src={`assets/${environment.uVersion}/ic_telegram.png`} />
         <div className='mt-2 text-[var(--grayscale-70)] text-sm lg:text-lg'>Clique no botão para pular</div>
 
         <div className='mt-3 md:mt-4 font-bold'>Se precisar de ajuda, entre em contato com o <span className='text-[#33ABE0]'>atendimento ao cliente</span></div>
@@ -29,7 +29,7 @@ export const TelegramDetailContactModal = ({
           className='mt-1 md:mt-2 w-full py-[10px] md:py-3 font-medium bg-[#33ABE0] rounded-lg flex justify-center items-center gap-[10px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
           onClick={onClickToOpenTelegramService}
         >
-          <img alt='telegram' className='w-5 md:w-6 lg:w-8' src={`assets/${environment.assetPrefix}/icon-telegram-mobile.png`}/>
+          <img alt='telegram' className='w-5 md:w-6 lg:w-8' src={`assets/${environment.uVersion}/icon-telegram-mobile.png`}/>
           <div>{telegramService}</div>
         </button>
 
@@ -39,7 +39,7 @@ export const TelegramDetailContactModal = ({
           className='mt-1 md:mt-2 w-full py-[10px] md:py-3 font-medium bg-[#33ABE0] rounded-lg flex justify-center items-center gap-[10px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
           onClick={onClickToOpenTelegramManager}
         >
-          <img alt='telegram' className='w-5 md:w-6 lg:w-8' src={`assets/${environment.assetPrefix}/icon-telegram-mobile.png`}/>
+          <img alt='telegram' className='w-5 md:w-6 lg:w-8' src={`assets/${environment.uVersion}/icon-telegram-mobile.png`}/>
           <div>{telegramManager}</div>
         </button>
       </div>

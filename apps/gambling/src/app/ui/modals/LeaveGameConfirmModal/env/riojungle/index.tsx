@@ -14,7 +14,7 @@ export const LeaveGameConfirmModal = ({
     <div className='relative text-white rounded-2xl w-[90%] sm:w-[400px] lg:w-[480px] pt-[52px] px-4 sm:px-6 pb-4 sm:pb-6 lg:pb-8 bg-gradient-to-br from-[var(--liner-main-from)] to-[var(--liner-main-to)]'>
       <img
         alt='close'
-        className='cursor-pointer absolute top-2 right-2 w-12 h-12' src={`assets/${environment.assetPrefix}/WXCircle.png`}
+        className='cursor-pointer absolute top-2 right-2 w-12 h-12' src={`assets/${environment.uVersion}/WXCircle.png`}
         onClick={onClose}
       />
       <div className='text-base sm:text-xl lg:text-3xl font-medium'>Deixar</div>

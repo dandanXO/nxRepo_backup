@@ -40,9 +40,9 @@ export const MenuDrawerContent = () => {
             }
           }}>
             {location.pathname === PageOrModalPathEnum.IndexPage ? (
-              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_home.png`}/>
+              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.uVersion}/ic_home.png`}/>
             ): (
-              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_home.png`}/>
+              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.uVersion}/ic_home.png`}/>
             )}
             <span className={cx({
               "text-transparent": location.pathname === PageOrModalPathEnum.IndexPage,
@@ -61,9 +61,9 @@ export const MenuDrawerContent = () => {
       >
           <span className={"pr-3"}>
           {location.pathname === PageOrModalPathEnum.InvitePage ? (
-            <img className="w-[25px] h-[25px] ml-0" alt={"invite"} src={`assets/${environment.assetPrefix}/ic_first_deposit.png`}/>
+            <img className="w-[25px] h-[25px] ml-0" alt={"invite"} src={`assets/${environment.uVersion}/ic_first_deposit.png`}/>
           ): (
-            <img className="w-[25px] h-[25px] ml-0" alt={"invite"} src={`assets/${environment.assetPrefix}/ic_first_deposit.png`}/>
+            <img className="w-[25px] h-[25px] ml-0" alt={"invite"} src={`assets/${environment.uVersion}/ic_first_deposit.png`}/>
           )}
           </span>
           <div className={"flex flex-col text-sm mr-1"}>
@@ -71,7 +71,7 @@ export const MenuDrawerContent = () => {
             <div className={"flex"}>+ 20%</div>
           </div>
           <span>
-            <img className="h-[58px] w-[58px]" alt={"invite"} src={`assets/${environment.assetPrefix}/Group.png`} style={{verticalAlign: 'middle'}}/>
+            <img className="h-[58px] w-[58px]" alt={"invite"} src={`assets/${environment.uVersion}/Group.png`} style={{verticalAlign: 'middle'}}/>
           </span>
       </DepositButton>
 
@@ -85,9 +85,9 @@ export const MenuDrawerContent = () => {
       >
         <span className={'pr-1'}>
           {location.pathname === PageOrModalPathEnum.InvitePage ? (
-            <img className="w-[24px] h-[24px]" alt={"invite"} src={`assets/${environment.assetPrefix}/ic_cashback.png`}/>
+            <img className="w-[24px] h-[24px]" alt={"invite"} src={`assets/${environment.uVersion}/ic_cashback.png`}/>
           ): (
-            <img className="w-[25px] h-[25px]" alt={"invite"} src={`assets/${environment.assetPrefix}/ic_cashback.png`}/>
+            <img className="w-[25px] h-[25px]" alt={"invite"} src={`assets/${environment.uVersion}/ic_cashback.png`}/>
           )}
         </span>
         <div className={"flex flex-col"}>
@@ -95,7 +95,7 @@ export const MenuDrawerContent = () => {
           <div className={"flex"} style={{ fontSize: '14px' }}>+ 10%</div>
         </div>
         <span>
-           <img className="" alt={"invite"} src={`assets/${environment.assetPrefix}/gup.png`} style={{verticalAlign: 'middle'}}/>
+           <img className="" alt={"invite"} src={`assets/${environment.uVersion}/gup.png`} style={{verticalAlign: 'middle'}}/>
         </span>
       </CashBackButton>
 
@@ -109,9 +109,9 @@ export const MenuDrawerContent = () => {
       >
           <span className={"pr-4"}>
             {location.pathname === PageOrModalPathEnum.InvitePage ? (
-              <img className="w-[24px] h-[24px] mr-2" alt={"invite"} src={`assets/${environment.assetPrefix}/ic_invite_friends.png`}/>
+              <img className="w-[24px] h-[24px] mr-2" alt={"invite"} src={`assets/${environment.uVersion}/ic_invite_friends.png`}/>
             ): (
-              <img className="w-[25px] h-[25px]" alt={"invite"} src={`assets/${environment.assetPrefix}/ic_invite_friends.png`}/>
+              <img className="w-[25px] h-[25px]" alt={"invite"} src={`assets/${environment.uVersion}/ic_invite_friends.png`}/>
             )}
           </span>
           <span className={cx(
@@ -132,9 +132,9 @@ export const MenuDrawerContent = () => {
         }}>
           <span className={"pr-4"}>
             {location.pathname === PageOrModalPathEnum.VIPGradePage ? (
-              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_vip.png`}/>
+              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.uVersion}/ic_vip.png`}/>
             ): (
-              <img className="w-[25px] h-[25px]" alt={"vip"} src={`assets/${environment.assetPrefix}/ic_vip.png`}/>
+              <img className="w-[25px] h-[25px]" alt={"vip"} src={`assets/${environment.uVersion}/ic_vip.png`}/>
             )}
           </span>
         <span className={cx("text-white", {
@@ -152,9 +152,9 @@ export const MenuDrawerContent = () => {
       >
           <span className={"pr-4"}>
             {location.pathname === PageOrModalPathEnum.DailySignInPage ? (
-              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.assetPrefix}/ic_checkin.png`}/>
+              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.uVersion}/ic_checkin.png`}/>
             ): (
-              <img className="w-[25px] h-[25px]" alt={"Check-in diário"} src={`assets/${environment.assetPrefix}/ic_checkin.png`}/>
+              <img className="w-[25px] h-[25px]" alt={"Check-in diário"} src={`assets/${environment.uVersion}/ic_checkin.png`}/>
             )}
           </span>
           <span className={cx(
@@ -175,9 +175,9 @@ export const MenuDrawerContent = () => {
       >
           <span className={"pr-4"}>
             {location.pathname === PageOrModalPathEnum.TelegramPage ? (
-              <img className="w-[24px] h-[24px]  mr-2" alt={"telegram"} src={`assets/${environment.assetPrefix}/ic_tg.png`}/>
+              <img className="w-[24px] h-[24px]  mr-2" alt={"telegram"} src={`assets/${environment.uVersion}/ic_tg.png`}/>
             ): (
-              <img className="w-[25px] h-[25px]" alt={"telegram"} src={`assets/${environment.assetPrefix}/ic_tg.png`}/>
+              <img className="w-[25px] h-[25px]" alt={"telegram"} src={`assets/${environment.uVersion}/ic_tg.png`}/>
             )}
           </span>
          <span className={cx(
@@ -192,15 +192,15 @@ export const MenuDrawerContent = () => {
         <section className={"flex flex-col items-center justify-end h-full"}>
           <div className={"w-[276px]"} style={{ position: 'relative' }}>
             <a>
-              <img alt={"logo"} src={`assets/${environment.assetPrefix}/Rectangle 88.png`} style={{
+              <img alt={"logo"} src={`assets/${environment.uVersion}/Rectangle 88.png`} style={{
                 position: 'relative',
               }}/>
-              <img alt={"anotherImage"} src={`assets/${environment.assetPrefix}/Group.png`} style={{
+              <img alt={"anotherImage"} src={`assets/${environment.uVersion}/Group.png`} style={{
                 position: 'absolute',
                 left: '0',
                 top: '0'
               }}/>
-              <img alt={"thirdImage"} src={`assets/${environment.assetPrefix}/Products of SKY group.png`} style={{
+              <img alt={"thirdImage"} src={`assets/${environment.uVersion}/Products of SKY group.png`} style={{
                 position: 'absolute',
                 left: '20px', /* 調整第三張圖片的水平位置 */
                 top: '27px' /* 調整第三張圖片的垂直位置 */

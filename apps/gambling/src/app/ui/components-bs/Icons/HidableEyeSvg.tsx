@@ -12,9 +12,9 @@ export const HidableEyeSvg = (props: IHidableEyeSvg) => {
       {
         props.hide ? (
           // <EyeOutlined className={"text-[#8B619E]"}/>
-          <img className={cx("w-[23px] h-[20px]",props.className)} src={`assets/${environment.assetPrefix}/icon=eye-close.png`} alt="eye-close" />
+          <img className={cx("w-[23px] h-[20px]",props.className)} src={`assets/${environment.uVersion}/icon=eye-close.png`} alt="eye-close" />
         ) : (
-          <img className={cx("w-[23px] h-[20px]",props.className)}  src={`assets/${environment.assetPrefix}/icon=eye-show.png`} alt="eye-open" />
+          <img className={cx("w-[23px] h-[20px]",props.className)} src={`assets/${environment.uVersion}/icon=eye-show.png`} alt="eye-open" />
         )
       }
     </>

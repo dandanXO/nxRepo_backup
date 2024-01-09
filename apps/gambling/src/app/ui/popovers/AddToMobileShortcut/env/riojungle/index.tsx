@@ -48,7 +48,7 @@ export const RionjungleAddToMobileShortcut = (props: IAddToMobileShortcut) => {
           <span className={"text-sm leading-8 text-white"}>Clique em Adicionar ao ecrã principal</span>
         </span>
         <img
-          className="w-[24px] h-[24px] md:w-[32px] md:h-[32px] cursor-pointer" alt={"close"} src={`assets/${environment.assetPrefix}/icon=close.png`}
+          className="w-[24px] h-[24px] md:w-[32px] md:h-[32px] cursor-pointer" alt={"close"} src={`assets/${environment.uVersion}/icon=close.png`}
           onClick={onClose}
         />
       </div>

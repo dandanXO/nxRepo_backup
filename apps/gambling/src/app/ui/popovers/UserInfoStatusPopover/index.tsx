@@ -91,7 +91,7 @@ const Progress = styled.div<{ progress: number }>`
   box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.5);
   border-radius: 50px;
   //background-image: linear-gradient(45deg, #C2F00D 100%, #FFFF00 0%);
-  background: url("assets/${environment.assetPrefix}/process_bar_web_account.png") center center no-repeat;
+  background: url("assets/${environment.uVersion}/process_bar_web_account.png") center center no-repeat;
   height: inherit;
   animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
 `;
@@ -332,13 +332,13 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
                 />
                 <WildNavigator onClick={()=>navigate(PageOrModalPathEnum.SettingPage)}>
                   <div className={"flex flex flex-row items-center"}>
-                    <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
+                    <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.uVersion}/ic_account_edit.png`}/>
                     <span>Modificar dados</span>
                   </div>
                 </WildNavigator>
                 <WildNavigator onClick={()=>navigate(PageOrModalPathEnum.GameRecordPage)}>
                   <div className={"flex flex flex-row items-center"}>
-                    <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
+                    <img className="w-[26px] h-[26px] mr-2" alt="arrow" src={`assets/${environment.uVersion}/ic_account_record.png`}/>
                     <span>Registro do jogo</span>
                   </div>
                 </WildNavigator>

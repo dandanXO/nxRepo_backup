@@ -22,14 +22,14 @@ export const UserMoneyStatusSection = (props: IProps) => {
       <button className={"refresh"} onClick={() => {
         update();
       }}>
-        <img alt={"refresh"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_refresh.png`}/>
+        <img alt={"refresh"} className={"w-[24px] h-[24px]"} src={`assets/${environment.uVersion}/ic_refresh.png`}/>
       </button>
       {/*main-secondary-main*/}
       <div className={"flex-auto text-white text-center  justify-center md:text-lg flex md:justify-start basis-1/2 font-medium"}>{
         isUserMoneyStatusLoading ? <ThreeDots className={'w-1/2'} /> : `R$ ${formatLocaleMoney(totalBalanceSheetValue)}`
       }</div>
       <button onClick={()=>onClickToWallet({'panelType':'deposit'})}>
-        <img alt={"add"} className={"w-[24px] h-[24px]"} src={`assets/${environment.assetPrefix}/ic_add.png`}/>
+        <img alt={"add"} className={"w-[24px] h-[24px]"} src={`assets/${environment.uVersion}/ic_add.png`}/>
       </button>
     </PersonalControl>
   )

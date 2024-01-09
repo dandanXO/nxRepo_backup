@@ -21,13 +21,13 @@ export const TabButton = styled.button<ITabButton>`
 
   background: ${(props) =>
     props.active
-      ? `url('assets/${environment.assetPrefix}/btn_invite_friend.png') center center no-repeat`
+      ? `url('assets/${environment.uVersion}/btn_invite_friend.png') center center no-repeat`
       : ""};
 
   @media (max-width: 768px) {
     background: ${(props) =>
       props.active
-        ? `url('assets/${environment.assetPrefix}/btn_invite_friend_h5.png') center center no-repeat`
+        ? `url('assets/${environment.uVersion}/btn_invite_friend_h5.png') center center no-repeat`
         : ""};
   }
 `
@@ -36,7 +36,7 @@ export const TabButton = styled.button<ITabButton>`
 export const TabTextConVidar = styled.div`
   padding: 10px 30px;
   //color: #fff;
-  //background: url("assets/${environment.assetPrefix}/btn_green01.png") center center no-repeat;
+  //background: url("assets/${environment.uVersion}/btn_green01.png") center center no-repeat;
   //width: 150px;
   //height: 60px;
   //border-radius: 10px;
@@ -48,7 +48,7 @@ export const TabTextConVidar = styled.div`
 export const TabTextDados = styled.div`
   padding: 10px 30px;
   //color: #fff;
-  //background: url("assets/${environment.assetPrefix}/icon_yellow.png") center center no-repeat;
+  //background: url("assets/${environment.uVersion}/icon_yellow.png") center center no-repeat;
   //width: 150px;
   //height: 60px;
   //border-radius: 10px;

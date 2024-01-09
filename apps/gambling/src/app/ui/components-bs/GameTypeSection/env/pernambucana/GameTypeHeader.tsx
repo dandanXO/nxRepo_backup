@@ -18,10 +18,10 @@ export const GameTypeHeader = (props: {
           props?.setExpandedBrand && props?.setExpandedBrand('')
         }}>
           <img data-v-ddc8133e="" className="backSlots w-[24px] h-[24px] mr-4"
-               src={`assets/${environment.assetPrefix}/ic_gameHeader_back.png`}
+               src={`assets/${environment.uVersion}/ic_gameHeader_back.png`}
                alt=""></img>
         </div>}
-        <img className="w-[36px] h-[30px] mr-4" alt={"map"} src={`assets/${environment.assetPrefix}/ic_game.png`}/>
+        <img className="w-[36px] h-[30px] mr-4" alt={"map"} src={`assets/${environment.uVersion}/ic_game.png`}/>
         <span className={"text-xl font-bold text-white"}>{props.gameTypeName}</span>
       </span>
 

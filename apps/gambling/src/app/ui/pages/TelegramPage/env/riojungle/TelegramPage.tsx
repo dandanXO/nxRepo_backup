@@ -25,7 +25,7 @@ export const TelegramPage = (props: ITelegramPage) => {
   useAllowLoginRouterRules();
   const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const bannerImg = `${isMobile ? 'h5_' : isTablet ? 'tablet_' : ''}banner_telegram.png`
-  const bannerSrc = `assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/${bannerImg}`
+  const bannerSrc = `assets/${environment.uVersion}/${environment.assetVersionPrefix}/${bannerImg}`
 
   return (
 

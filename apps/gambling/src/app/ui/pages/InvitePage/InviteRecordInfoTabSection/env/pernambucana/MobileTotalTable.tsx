@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { CommonTableTabG } from "../../../../../components-bs/TabItem/CommonTableTabG";
 
 const MobileTotalTableContainer = styled.div`
-  background: url("assets/${environment.assetPrefix}/h5_invite_dashboard_1.png") center center no-repeat;
+  background: url("assets/${environment.uVersion}/h5_invite_dashboard_1.png") center center no-repeat;
   background-size: cover;
 `
 export const MobileTotalTable = (props: IMobileTotalTable) => {

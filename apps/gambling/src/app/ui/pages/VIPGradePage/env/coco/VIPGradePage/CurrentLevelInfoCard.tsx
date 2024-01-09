@@ -34,7 +34,7 @@ const CurrentLevelInfoCard = ({
         />
       </div>
       <div className='flex-grow w-full text-left text-base font-medium'>
-        <img className='w-[104px]' alt='vip_level' src={`assets/${environment.assetPrefix}/ic_vip_${currentLevel}.png`}/>
+        <img className='w-[104px]' alt='vip_level' src={`assets/${environment.uVersion}/ic_vip_${currentLevel}.png`}/>
 
         <div>Quantidade total de recarga:</div>
 

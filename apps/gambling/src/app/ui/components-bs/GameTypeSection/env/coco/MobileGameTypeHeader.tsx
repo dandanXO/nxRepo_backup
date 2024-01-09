@@ -38,7 +38,7 @@ export const MobileGameTypeHeader = (props: {
             <LeftOutlined className={"text-white text-xl mr-2"}/>
           </button>
         )}
-        {showIcon && <img src={`assets/${environment.assetPrefix}/ic_game.png`} />}
+        {showIcon && <img src={`assets/${environment.uVersion}/ic_game.png`} />}
         <span className={titleClassName}>{props.gameTypeName}</span>
       </div>
 

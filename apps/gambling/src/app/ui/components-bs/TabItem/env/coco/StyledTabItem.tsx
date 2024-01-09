@@ -32,7 +32,7 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
   ${(props) => {
     if (!props.pureColor) {
       return props.active && `
-          // background: ${props.background ? props.background : `url("assets/${environment.assetPrefix}/select_btn.png")`};
+          // background: ${props.background ? props.background : `url("assets/${environment.uVersion}/select_btn.png")`};
           // background-size: 100% 100%;
           // background-position:  center;
           color: #ffffff;

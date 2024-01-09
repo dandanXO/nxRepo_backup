@@ -25,7 +25,7 @@ const ListItemContainer = styled.div`
 `;
 
 const MyPageButtonD = styled.button`
-  background-image: url("assets/${environment.assetPrefix}/btn_green05.png");
+  background-image: url("assets/${environment.uVersion}/btn_green05.png");
   background-size: 100% 100%;
   padding: 4px 31px;
   text-shadow: 0 1px 2px #036A02;
@@ -34,7 +34,7 @@ const MyPageButtonD = styled.button`
 const MyPageButtonW = styled.button`
   //background: none;
   //border-radius: 0.2rem;
-  background-image: url("assets/${environment.assetPrefix}/btn_yellow05.png"); /* 设置背景图像的路径 */
+  background-image: url("assets/${environment.uVersion}/btn_yellow05.png"); /* 设置背景图像的路径 */
   background-size: 100% 100%;
   //box-shadow: 0 0.04rem #036a02, inset 0 0.02rem 0.06rem rgba(255,255,255,.5);
 
@@ -104,7 +104,7 @@ const Progress = styled.div<{ progress: number }>`
   box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.5);
   border-radius: 50px;
   //background-image: linear-gradient(45deg, #C2F00D 100%, #FFFF00 0%);
-  background: url("assets/${environment.assetPrefix}/process_bar_web_account.png") center center no-repeat;
+  background: url("assets/${environment.uVersion}/process_bar_web_account.png") center center no-repeat;
   height: inherit;
   animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
 `;
@@ -205,7 +205,7 @@ const MyPage = ({
             </div>
           </div>
           <button className="relative" onClick={() => navigate(PageOrModalPathEnum.NotificationPage)}>
-            <img alt={"message"} className="w-[30px] h-[30px]" src={`assets/${environment.assetPrefix}/icon_44.png`}/>
+            <img alt={"message"} className="w-[30px] h-[30px]" src={`assets/${environment.uVersion}/icon_44.png`}/>
             {messageCount !== 0 && <MessageCountBadge>{messageCount}</MessageCountBadge>}
           </button>
         </section>
@@ -213,7 +213,7 @@ const MyPage = ({
         <div>
           <VIPContainer>
             <div className={"flex flex flex-row items-center mt-3 w-full"}>
-              <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.assetPrefix}/ic_vip01.png`}/>
+              <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.uVersion}/ic_vip01.png`}/>
               <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, var(--btn-gradient-vip-from), var(--btn-gradient-vip-to))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
               <div className="flex-grow"></div>
               <RightOutlined className="flex-grow" style={{ fontSize: 25, color: 'white', fontWeight: 1000 }} onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)} />      </div>
@@ -277,7 +277,7 @@ const MyPage = ({
         <ListItemContainer className={"control-item text-white !font-sm"}>
           <ListItem first={true} bottomBorder={true} onClick={()=>onClickToWallet({'panelType':'record'})}>
             <div className={"flex flex flex-row items-center"}>
-              <img alt={"order-record"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_account_bill.png`}/>
+              <img alt={"order-record"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.uVersion}/ic_account_bill.png`}/>
               <span className={"font-bold"}>Registros de cobrança</span>
             </div>
             <RightOutlined style={{ fontSize: 16 }}/>
@@ -289,7 +289,7 @@ const MyPage = ({
             navigate(PageOrModalPathEnum.GameRecordPage)
           }}>
             <div className={"flex flex flex-row items-center"}>
-              <img alt={"game-register"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_account_record.png`}/>
+              <img alt={"game-register"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.uVersion}/ic_account_record.png`}/>
               <span className={"font-bold"}>Registro do jogo</span>
             </div>
             <RightOutlined style={{ fontSize: 16 }}/>
@@ -301,7 +301,7 @@ const MyPage = ({
             navigate(PageOrModalPathEnum.SettingPage)
           }}>
             <div className={"flex flex flex-row items-center"}>
-              <img alt={"setting"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_account_edit.png`}/>
+              <img alt={"setting"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.uVersion}/ic_account_edit.png`}/>
               <span className={"font-bold"}>Configuração</span>
             </div>
             <RightOutlined style={{ fontSize: 16 }}/>
@@ -313,7 +313,7 @@ const MyPage = ({
             dispatch(appSlice.actions.showMobileLogoutModal(true));
           }}>
             <div className={"flex flex flex-row items-center"}>
-              <img alt={"log-out"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.assetPrefix}/ic_signout.png`}/>
+              <img alt={"log-out"} className={"w-[16px] h-[20px] mr-2"} src={`assets/${environment.uVersion}/ic_signout.png`}/>
               <span className={"font-bold"}>Sair</span>
             </div>
             <RightOutlined style={{ fontSize: 16 }}/>

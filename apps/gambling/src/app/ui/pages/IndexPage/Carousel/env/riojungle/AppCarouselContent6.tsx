@@ -19,8 +19,8 @@ export const AppCarouselContent6= (props: IAppCarouselContent) => {
       <div className={""}>
         <CarouselImage
           alt={"banner_6"}
-          src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_6.png`}
-          genieSrc={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/genie_6.png`}
+          src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_6.png`}
+          genieSrc={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/genie_6.png`}
         />
         <CarouselTitleSection>
           <div><img alt='licenseLogo' className='w-[150px]' src={`assets/license/logo.png`}/></div>

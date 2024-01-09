@@ -242,7 +242,7 @@ const Pernambucana777BetVIPGradeMobileTemplate = ({
             <img
               className={'h-[43px] w-[70px]'}
               alt={''}
-              src={`assets/${environment.assetPrefix}/icon_vip_context_2.png`}
+              src={`assets/${environment.uVersion}/icon_vip_context_2.png`}
             />
             <div className='flex flex-col justify-center text-right font-bold leading-5'>
               <div>Recompensas de upgrade</div>
@@ -255,7 +255,7 @@ const Pernambucana777BetVIPGradeMobileTemplate = ({
             <img
               className={'h-[43px] w-[70px]'}
               alt={''}
-              src={`assets/${environment.assetPrefix}/icon_vip_context_1.png`}
+              src={`assets/${environment.uVersion}/icon_vip_context_1.png`}
             />
             <div className='flex flex-col justify-center text-right font-bold leading-5'>
               <div>Recompensa total de</div>

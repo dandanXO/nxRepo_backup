@@ -52,7 +52,7 @@ const LevelInfoCard = ({
             level < 20 && (
               <img
                 alt={`levelInfoIcon`}
-                src={`assets/${environment.assetPrefix}/icon_vip_info.png`}
+                src={`assets/${environment.uVersion}/icon_vip_info.png`}
                 className='w-[94px] mb-[10px] object-contain'
               />
             )
@@ -63,7 +63,7 @@ const LevelInfoCard = ({
               <>
                 <img
                   alt={`levelInfoIcon`}
-                  src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}
+                  src={`assets/${environment.uVersion}/${JackpotMap[level].image}`}
                   className='w-[280px] mb-1 object-contain'
                 />
                 <div className='text-base text-center text-[var(--secondary-assistant)] mb-2'>
@@ -74,7 +74,7 @@ const LevelInfoCard = ({
             )
           }
 
-          <img className={tcx('w-[113px]', ['w-[160px]'])} alt='vipLevel' src={`assets/${environment.assetPrefix}/ic_vip_${level}.png`} />
+          <img className={tcx('w-[113px]', ['w-[160px]'])} alt='vipLevel' src={`assets/${environment.uVersion}/ic_vip_${level}.png`} />
         </div>
       </div>
 

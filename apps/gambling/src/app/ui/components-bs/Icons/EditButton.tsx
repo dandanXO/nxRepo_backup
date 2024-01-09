@@ -19,7 +19,7 @@ export const EditButton = (props: IButton) => {
           <img
             className='w-[20px] h-[20px]'
             alt='edit'
-            src={`assets/${environment.assetPrefix}/ic_account_edit.png`}
+            src={`assets/${environment.uVersion}/ic_account_edit.png`}
           />
         ): 'Editar'
       }

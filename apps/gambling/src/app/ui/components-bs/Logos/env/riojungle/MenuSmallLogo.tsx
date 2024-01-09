@@ -11,7 +11,7 @@ export const MenuSmallLogo = (props: IMenuSmallLogo) => {
       alt="logo-menu"
       // className="max-w-[56px] max-h-[56px]"
       className={twMerge("w-[40px] h-[40px]", props.className)}
-      src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo-mobile.png`}
+      src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/logo-mobile.png`}
     />
   )
 }

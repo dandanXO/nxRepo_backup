@@ -20,7 +20,7 @@ export const UserInfoStatusPopoverVIPInfo = ({
   return (
     <VIPContainer>
       <div className={"mt-4 flex flex flex-row items-center"}>
-        <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.assetPrefix}/ic_vip01.png`}/>
+        <img className="w-9 h-9 mr-3 ml-3" src={`assets/${environment.uVersion}/ic_vip01.png`}/>
         <span className="text-3xl font-bold pr-4 mr-7" style={{ background: 'linear-gradient(45deg, var(--btn-gradient-vip-from), var(--btn-gradient-vip-to))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>VIP{currentLevel}</span>
         <RightOutlined className="ml-40" style={{ fontSize: 25, color: 'white', fontWeight: 1000 }} onClick={() => navigate(PageOrModalPathEnum.VIPGradePage)}/>
       </div>

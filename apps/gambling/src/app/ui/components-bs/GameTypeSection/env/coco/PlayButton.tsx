@@ -9,7 +9,7 @@ export const PlayButton = (props: IPlayButton) => {
     <DesktopGameItemButton
       onClick={props.onClick}
     >
-     <img className="w-[64px] h-[64px]" src={`assets/${environment.assetPrefix}/icon=play.png`} alt="play" />
+     <img className="w-[64px] h-[64px]" src={`assets/${environment.uVersion}/icon=play.png`} alt="play" />
     </DesktopGameItemButton>
   )
 }

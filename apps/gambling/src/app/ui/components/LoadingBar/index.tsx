@@ -70,21 +70,21 @@ export const LoadingBar = () => {
       {/*<animated.div style={props}>*/}
         <img
           className={"w-[14px] h-[14px] mr-2 loading-animation-1"}
-          src={`assets/${environment.assetPrefix}/Subtract.png`}
+          src={`assets/${environment.uVersion}/Subtract.png`}
         />
       {/*</animated.div>*/}
 
       {/*<animated.div style={props2}>*/}
         <img
           className={"w-[14px] h-[14px] mr-2 loading-animation-2"}
-          src={`assets/${environment.assetPrefix}/Dice-Two.png`}
+          src={`assets/${environment.uVersion}/Dice-Two.png`}
         />
       {/*</animated.div>*/}
 
       {/*<animated.div style={props3}>*/}
         <img
           className={"w-[14px] h-[14px] mr-2 loading-animation-3"}
-          src={`assets/${environment.assetPrefix}/Dice-Two.png`}
+          src={`assets/${environment.uVersion}/Dice-Two.png`}
         />
       {/*</animated.div>*/}
     </div>

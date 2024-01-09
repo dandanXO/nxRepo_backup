@@ -17,7 +17,7 @@ const Container = styled.div`
   //height: 100%;
   //width: 100%;
   //height: 100%;
-  // background-image: url(assets/${environment.assetPrefix}/downBg.png);
+  // background-image: url(assets/${environment.uVersion}/downBg.png);
   background-size: 100% 100%;
   //text-align: center;
 `;
@@ -117,7 +117,7 @@ export const CocoDownloadModal = (props: IInitialChargeModal) => {
               <img
                 className={"w-[24px] h-[24px] mr-2"}
                 alt={"android"}
-                src={`/assets/${environment.assetPrefix}/icon=logo-android.png`}
+                src={`/assets/${environment.uVersion}/icon=logo-android.png`}
               /> <span>Baixar Android</span>
             </DownloadButton>
 
