@@ -242,7 +242,7 @@ export const IndexPage = ({
                 <div className='flex items-center gap-2 font-bold'>
                   {
                     (
-                      <img className='w-6 h-6' src={`assets/${environment.assetPrefix}/icon_recent.png`} alt="recentIcon" />
+                      <img className='w-6 h-6' src={`assets/${environment.uVersion}/icon_recent.png`} alt="recentIcon" />
                     )
                   }
                   <div className='text-xl text-white'>Recente</div>

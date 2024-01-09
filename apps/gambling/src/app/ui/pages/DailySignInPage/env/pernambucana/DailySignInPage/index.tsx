@@ -111,7 +111,7 @@ export const DayList = (props: {
             {/*<div className={"w-[88px] h-[74px]"}>*/}
             {/*</div>*/}
             <div>
-              <img alt={'money'} src={`assets/${environment.assetPrefix}/gold.png`} />
+              <img alt={'money'} src={`assets/${environment.uVersion}/gold.png`} />
             </div>
             <div className="h-10"></div>
             <div className="flex-grow flex flex-col justify-center items-center">

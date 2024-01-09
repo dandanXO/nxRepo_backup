@@ -10,7 +10,7 @@ export const TelegramButton = (props: IButton) => {
       }
       onClick={props.onClick}
     >
-      <img className={"w-[30px] mr-4"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />
+      <img className={"w-[30px] mr-4"} src={`assets/${environment.uVersion}/icon=telegram.png`} />
       Junte-se
     </button>
   )

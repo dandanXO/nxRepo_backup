@@ -7,6 +7,6 @@ type IICON = {
 }
 export const ArrowLeft = (props: IICON) => {
   return (
-    <img className={cx("w-[24px] h-[24px]",props.className)}  src={`assets/${environment.assetPrefix}/icon=arrow-left.png`} alt="Close Icon" />
+    <img className={cx("w-[24px] h-[24px]",props.className)} src={`assets/${environment.uVersion}/icon=arrow-left.png`} alt="Close Icon" />
   )
 }

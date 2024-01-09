@@ -37,13 +37,13 @@ const responsive = {
 
 const CustomLeftArrow = ({ onClick }: ArrowProps) => (
   <button onClick={onClick} className='absolute top-1/2 -translate-y-[50%] left-0 px-[10px] py-[30px] text-white bg-[rgba(0,0,0,0.5)] border border-[#4D4D4D] rounded'>
-    <img alt='arrowLeft' className='w-5' src={`assets/${environment.assetPrefix}/ArrowLeft.png`}/>
+    <img alt='arrowLeft' className='w-5' src={`assets/${environment.uVersion}/ArrowLeft.png`}/>
   </button>
 )
 
 const CustomRightArrow = ({ onClick }: ArrowProps) => (
   <button onClick={onClick} className='absolute top-1/2 -translate-y-[50%] right-0 px-[10px] py-[30px] text-white bg-[rgba(0,0,0,0.5)] border border-[#4D4D4D] rounded'>
-    <img alt='arrowLeft' className='w-5' src={`assets/${environment.assetPrefix}/ArrowRight.png`}/>
+    <img alt='arrowLeft' className='w-5' src={`assets/${environment.uVersion}/ArrowRight.png`}/>
   </button>
 )
 

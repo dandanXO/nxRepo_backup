@@ -36,7 +36,7 @@ export const Avatar = (props: {
             props.className
           )}
           alt="avatar"
-          src={`assets/${environment.assetPrefix}/avatar_${userInfo.avatar || 1}.png`}
+          src={`assets/${environment.uVersion}/avatar_${userInfo.avatar || 1}.png`}
         />
         {/*<AvatarBorder/>*/}
       </div>

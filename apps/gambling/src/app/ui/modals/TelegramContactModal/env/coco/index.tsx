@@ -8,7 +8,7 @@ import {CloseICON} from "../../../../components-bs/Icons/CloseICON";
 const Container = styled.div`
   //width: 100%;
   //height: 100%;
-  background-image: url(assets/${environment.assetPrefix}/ad_bg_2.png);
+  background-image: url(assets/${environment.uVersion}/ad_bg_2.png);
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 20px;
@@ -71,7 +71,7 @@ export const CocoTelegramContactModal = (props: ITelegramContactModal) => {
         </div>
 
 
-        <img alt='icon' className={tcx('w-[180px] mt-6 mb-3', ['w-[105px] mt-0 mb-2', isMobile])} src={`assets/${environment.assetPrefix}/ic_telegram.png`} />
+        <img alt='icon' className={tcx('w-[180px] mt-6 mb-3', ['w-[105px] mt-0 mb-2', isMobile])} src={`assets/${environment.uVersion}/ic_telegram.png`} />
 
         <div className={"flex flex-col"}>
           <div className={"mb-4 text-white"}>

@@ -56,7 +56,7 @@ export const DesktopDailyTable = (props: IDailyType) => {
             <tr>
               <td colSpan={props.type === "1" ? (props.isProxy ? 7 : 6) : (props.isProxy ? 6 : 5)}>
                 <div className="flex flex-col items-center p-12">
-                  <div><img className={'h-[100px]'} src={`assets/${environment.assetPrefix}/noData.png`} /></div>
+                  <div><img className={'h-[100px]'} src={`assets/${environment.uVersion}/noData.png`} /></div>
                   <div>Nada aqui</div>
                 </div>
               </td>

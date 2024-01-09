@@ -117,7 +117,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
             />
             <SearchNotice />
           </div>
-          <div className={`flex-1 overflow-auto ${environment.assetPrefix}-game-search-list `}>
+          <div className={`flex-1 overflow-auto ${environment.uVersion}-game-search-list `}>
             {searchInput.data.length >= 3 && (
               <GameListSection
                 className="text-white "
@@ -129,7 +129,7 @@ export const GameSearchModal = (props: IGameSearchModal) => {
             }
             <GameListSection
               className="text-white"
-              icon={<Icon className="w-[24px] h-[24px] md:w-[28px] md:h-[28px] lg:w-[32px] lg:h-[32px] mr-1" img={`assets/${environment.assetPrefix}/icon=recommend.png`} name={'recommend'} />}
+              icon={<Icon className="w-[24px] h-[24px] md:w-[28px] md:h-[28px] lg:w-[32px] lg:h-[32px] mr-1" img={`assets/${environment.uVersion}/icon=recommend.png`} name={'recommend'} />}
               title={'Jogos que você deveria experimentar'}
               children={gameList(recommendItems)}
               expandedBrand={isMobile}

@@ -131,7 +131,7 @@ export const Footer = (props: IFooter) => {
               <div className='mb-4'>@ 2023 {environment.platformName} All rights</div>
 
               <div className='flex justify-center mb-4'>
-                <img alt='footer1' className='h-[13px]' src={`assets/${environment.assetPrefix}/footer7.png`}/>
+                <img alt='footer1' className='h-[13px]' src={`assets/${environment.uVersion}/footer7.png`}/>
               </div>
 
             </section>
@@ -162,7 +162,7 @@ export const Footer = (props: IFooter) => {
 
               <section className={"w-8/12 mt-3"}>
                 <div className={"flex gap-3 items-center mb-2"}>
-                  <img className={"w-[100px] h-[50px]"} src={`assets/${environment.assetPrefix}/logo_web.png`}/>
+                  <img className={"w-[100px] h-[50px]"} src={`assets/${environment.uVersion}/logo_web.png`}/>
                   {/*<span className="text-lg">{environment.platformName}</span>*/}
                 </div>
 

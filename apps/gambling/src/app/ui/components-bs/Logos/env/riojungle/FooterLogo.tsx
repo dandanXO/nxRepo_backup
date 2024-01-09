@@ -10,7 +10,7 @@ export const FooterLogo = (props: IFooterLogo) => {
     <img
       alt="logo-footer"
       className={twMerge("w-[82px] h-[32px]", props.className)}
-      src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo.png`}
+      src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/logo.png`}
     />
   )
 }

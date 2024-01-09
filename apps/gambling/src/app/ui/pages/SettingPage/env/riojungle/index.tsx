@@ -114,7 +114,7 @@ export const SettingPage = ({
         onClick={()=>setOpenSelectAvatarModal(true)}
       >
         <div className='relative border border-white rounded-lg'>
-          <img className='rounded-lg w-20 h-20 lg:w-[120px] lg:h-[120px]' alt='avatar' src={`assets/${environment.assetPrefix}/avatar_${selectedAvatar}.png`} />
+          <img className='rounded-lg w-20 h-20 lg:w-[120px] lg:h-[120px]' alt='avatar' src={`assets/${environment.uVersion}/avatar_${selectedAvatar}.png`} />
           <div className='text-center absolute bottom-0 left-0 right-0 bg-[rgba(0,0,0,0.8)] text-white rounded-b-lg sm:py-[2px] lg:py-1 font-bold text-xs lg:text-sm'>
             Editar
           </div>

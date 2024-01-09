@@ -5,15 +5,15 @@ export const CompanyButton = () => {
   return (
     <div className={"w-[276px]"} style={{ position: 'relative' }}>
       <a>
-        <img alt={"logo"} src={`assets/${environment.assetPrefix}/Rectangle 88.png`} style={{
+        <img alt={"logo"} src={`assets/${environment.uVersion}/Rectangle 88.png`} style={{
           position: 'relative',
         }}/>
-        <img alt={"anotherImage"} src={`assets/${environment.assetPrefix}/Group.png`} style={{
+        <img alt={"anotherImage"} src={`assets/${environment.uVersion}/Group.png`} style={{
           position: 'absolute',
           left: '0',
           top: '0'
         }}/>
-        <img alt={"thirdImage"} src={`assets/${environment.assetPrefix}/Products of SKY group.png`} style={{
+        <img alt={"thirdImage"} src={`assets/${environment.uVersion}/Products of SKY group.png`} style={{
           position: 'absolute',
           left: '20px', /* 调整第三张图片的水平位置 */
           top: '27px' /* 调整第三张图片的垂直位置 */

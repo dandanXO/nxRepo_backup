@@ -24,8 +24,8 @@ export const AppCarouselContent5 = (props: IAppCarouselContent) => {
       <div className={""}>
         <CarouselImage
           alt={"banner_5"}
-          src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_5.png`}
-          genieSrc={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/genie_5.png`}
+          src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_5.png`}
+          genieSrc={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/genie_5.png`}
         />
         <CarouselTitleSection>
           <span>Convide uma pessoa e receba <br/> Até R${invite_hig_reward}</span>

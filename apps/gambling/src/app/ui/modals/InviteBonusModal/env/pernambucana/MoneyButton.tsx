@@ -31,7 +31,7 @@ type IMoneyButton = {
 export const MoneyButton = (props: IMoneyButton) => {
   return (
     <StyledMoneyButton>
-      <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.assetPrefix}/icon_36.png`}/>
+      <img alt="money" className={'w-[36px] h-[36px]'} src={`assets/${environment.uVersion}/icon_36.png`}/>
       <span
         className={"ml-2 font-bold text-lg money-value text-[var(--dashboard-block2)]"}
         style={{

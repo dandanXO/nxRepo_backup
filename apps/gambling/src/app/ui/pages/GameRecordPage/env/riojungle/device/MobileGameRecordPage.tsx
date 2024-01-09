@@ -100,7 +100,7 @@ export const MobileGameRecordPage = ({
           {
             records.length === 0 && (
               <div className="grow border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">
-                <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
+                <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.uVersion}/noData.png`} />
                 <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>
               </div>
             )

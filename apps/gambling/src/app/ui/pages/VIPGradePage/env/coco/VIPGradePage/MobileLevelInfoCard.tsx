@@ -22,10 +22,10 @@ export const MobileLevelInfoCard = ({
           <div className='w-[100px] flex flex-col items-center justify-center'>
             <img
               alt={`levelInfoIcon`}
-              src={`assets/${environment.assetPrefix}/icon_vip_info.png`}
+              src={`assets/${environment.uVersion}/icon_vip_info.png`}
               className='w-[76px] mb-3 object-contain'
             />
-            <img className={tcx('w-[45px]', ['w-[57px]', level > 9])} alt='vipLevel' src={`assets/${environment.assetPrefix}/ic_vip_${level}.png`} />
+            <img className={tcx('w-[45px]', ['w-[57px]', level > 9])} alt='vipLevel' src={`assets/${environment.uVersion}/ic_vip_${level}.png`} />
           </div>
         </div>
 
@@ -33,7 +33,7 @@ export const MobileLevelInfoCard = ({
           {
             level >= 20 && (
               <div className='flex flex-col w-full justify-center items-center'>
-                <img className='w-[154px] object-contain mb-1' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
+                <img className='w-[154px] object-contain mb-1' alt={`jackpot${level}`} src={`assets/${environment.uVersion}/${JackpotMap[level].image}`}/>
                 <div className='text-xs text-center text-[var(--secondary-assistant)]'>
                   <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
                   <div>Ou numerário de valor equivalente</div>

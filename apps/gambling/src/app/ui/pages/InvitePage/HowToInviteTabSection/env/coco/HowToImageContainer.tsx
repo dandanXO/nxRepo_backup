@@ -46,7 +46,7 @@ export const HowToImage = (props: any) => {
         {!isMobile && <div className="border-r border-r-solid border-white mx-11 sm:mx-5"></div>}
         <div className={" flex-1 flex flex-col items-center sm:items-start"}>
           <div className={"text-white my-3.5 sm:mt-0 sm:mb-2 text-sm md:text-xl"}>{`Passo 2 : Partilhar ligações através de software social`}</div>
-          <img className={"w-[400px]"} src={`assets/${environment.assetPrefix}/pic_social_media_logo.png`} />
+          <img className={"w-[400px]"} src={`assets/${environment.uVersion}/pic_social_media_logo.png`} />
         </div>
       </div>
     </HowToImageContainer>

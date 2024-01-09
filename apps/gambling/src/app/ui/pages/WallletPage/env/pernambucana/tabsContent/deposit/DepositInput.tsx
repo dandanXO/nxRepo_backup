@@ -20,13 +20,13 @@ const InputTag = styled.div`
   color: #fff;
   min-width: 117px;
   z-index: 1;
-  background-image: url("assets/${environment.assetPrefix}/giveaway.png");
+  background-image: url("assets/${environment.uVersion}/giveaway.png");
   background-repeat: no-repeat;
   background-position: center center;
 `;
 
 const MobileTag = styled(InputTag)`
-  background-image: url("assets/${environment.assetPrefix}/giveaway.png");
+  background-image: url("assets/${environment.uVersion}/giveaway.png");
   background-size: 82px;
   background-position: center 23px;
   font-size: 18px;

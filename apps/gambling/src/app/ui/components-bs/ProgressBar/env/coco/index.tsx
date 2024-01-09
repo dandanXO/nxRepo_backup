@@ -27,7 +27,7 @@ export const ProgressBar = ({
       <Progress
         className={rounded}
         progress={progress > 1 ? 100 : progress * 100}
-        backgroundImageUrl={backgroundImageUrl || `assets/${environment.assetPrefix}/process_bar.png`}
+        backgroundImageUrl={backgroundImageUrl || `assets/${environment.uVersion}/process_bar.png`}
         progressColor={progressColor}
       />
       <span className={tcx('absolute font-bold top-0 left-0 w-full h-full', rounded)}>

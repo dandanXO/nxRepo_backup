@@ -23,10 +23,10 @@ export const MobileGameTypeHeader = (props: {
           props?.setExpandedBrand && props?.setExpandedBrand('')
         }}>
           <img data-v-ddc8133e="" className="backSlots w-[24px] h-[24px] mr-4"
-            src={`assets/${environment.assetPrefix}/ic_gameHeader_back.png`}
+            src={`assets/${environment.uVersion}/ic_gameHeader_back.png`}
             alt=""></img>
         </div>}
-        {showIcon && <img src={`assets/${environment.assetPrefix}/ic_game.png`} />}
+        {showIcon && <img src={`assets/${environment.uVersion}/ic_game.png`} />}
         <span className={titleClassName}>{props.gameTypeName}</span>
       </div>
       {props?.onClick && !props.expandedBrand && !props.isViewAll &&(

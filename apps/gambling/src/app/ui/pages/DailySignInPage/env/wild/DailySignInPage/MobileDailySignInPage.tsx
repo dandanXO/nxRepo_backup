@@ -46,7 +46,7 @@ const DayItem = styled.div<{
   position: relative;
   z-index: 1;
   margin-right: -0.3rem;
-  background: url(assets/${environment.assetPrefix}/daily_sign_in_mobile_wrapper.png) no-repeat center/100% 100%;
+  background: url(assets/${environment.uVersion}/daily_sign_in_mobile_wrapper.png) no-repeat center/100% 100%;
 `
 
 const DayTitle = styled.div`
@@ -110,11 +110,11 @@ const DayList = ({
                     src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAR1JREFUOE/Vk69Lg2EUhZ8THFgGgoKChgVXLEuW2WwGwaIg2Gyzubgmi2JzNqOIYUEQQVHcP7NklIGiRy58k89vP9xkIN72wnuf973nnCsmVJoQh78H2V4DroBHSbu/+pHtVeAOyAPPkmbHBtkuAQ/ADPAG7EhqjgWyvRKjAHPAO7An6SIMGxlkexl4AhaAD2Bf0nnX9W8g2zlJr9lI2C4kkCXAQEVSI33vC2T7FignM990L9leBFpAwAJyKOkk+1ga1AbmgQ6wKenedpxjnGLSWJNU7xfiNGgduAamgZcQEjgCQuCouqTaoE3IarQBNIFcpuFYUnXYOvW4ZnsLuASmksZTSZWfdrKv/ba3gTMgMnIgKUQeWiPn6P+BPgHf3FMTEyIoFgAAAABJRU5ErkJggg==' />
                 }
               </DayTitle>
-              <img className='h-[55px] mx-auto mt-8' alt='money' src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}/>
+              <img className='h-[55px] mx-auto mt-8' alt='money' src={`assets/${environment.uVersion}/daily_sign_in_money.png`}/>
               {
                 checked && (
                   <div className='absolute top-[43%] left-[35%] w-[30%]'>
-                    <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
+                    <img alt='checked-icon' src={`assets/${environment.uVersion}/daily_sign_in_checked.png`}/>
                   </div>
                 )
               }
@@ -162,7 +162,7 @@ const MobileDailySignInPage = ({
       {/*</nav>*/}
 
       <BackNavigation
-        title={<img alt='title' className='h-[26px] ml-2' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>}
+        title={<img alt='title' className='h-[26px] ml-2' src={`/assets/${environment.uVersion}/daily_sign_in_title.png`}/>}
         onClick={() => onClickToIndex()}
       />
 
@@ -211,7 +211,7 @@ const MobileDailySignInPage = ({
           }
         }}
       >
-        <img alt='signInButton' src={`assets/${environment.assetPrefix}/daily_sign_in_button.png`}/>
+        <img alt='signInButton' src={`assets/${environment.uVersion}/daily_sign_in_button.png`}/>
       </SignInButton>
 
       <div

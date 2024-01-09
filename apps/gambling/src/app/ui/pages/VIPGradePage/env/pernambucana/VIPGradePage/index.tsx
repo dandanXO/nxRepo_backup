@@ -116,7 +116,7 @@ const VIPLabel = styled.div`
   float: right;
   font-weight: bold;
   background: linear-gradient(180deg, var(--dashboard-block3-gradient-from) 0%, var(--dashboard-block3-gradient-to) 100%);
-  // background: url("assets/${environment.assetPrefix}/vip_di.png") no-repeat center;
+  // background: url("assets/${environment.uVersion}/vip_di.png") no-repeat center;
 `;
 
 const VIPTitle = styled.span`
@@ -140,7 +140,7 @@ const increment = (target: number) => keyframes`
 
 const Progress = styled.div<{ progress: number }>`
   border-radius: 50px;
-  background-image: url("assets/${environment.assetPrefix}/process_bar.png");
+  background-image: url("assets/${environment.uVersion}/process_bar.png");
   background-size: contain;
   height: inherit;
   animation: ${(props) => increment(props.progress)} 0.5s linear forwards;
@@ -238,7 +238,7 @@ const Pernambucana777BetVIPGradePage = ({
               <img
                 alt="vip"
                 className={'h-[38px] w-[54px]'}
-                src={`assets/${environment.assetPrefix}/vip.1bf683b6.png`}
+                src={`assets/${environment.uVersion}/vip.1bf683b6.png`}
               />
               <img
                 alt="0"
@@ -252,7 +252,7 @@ const Pernambucana777BetVIPGradePage = ({
               <img
                 alt="introduce to vip"
                 className={'h-[50px] w-[500px]'}
-                src={`assets/${environment.assetPrefix}/title1.d89d4f0c.png`}
+                src={`assets/${environment.uVersion}/title1.d89d4f0c.png`}
               />
             </section>
           </section>
@@ -384,7 +384,7 @@ const Pernambucana777BetVIPGradePage = ({
               >
                 <img
                   alt={''}
-                  src={`assets/${environment.assetPrefix}/icon_vip_context_2.png`}
+                  src={`assets/${environment.uVersion}/icon_vip_context_2.png`}
                 />
                 <div className={'flex flex-col text-2xl italic leading-none font-bold text-white'}>
                   <span>Recompensa total de</span>
@@ -395,7 +395,7 @@ const Pernambucana777BetVIPGradePage = ({
               <VIPLightBorderStyleContainer className={'flex-1'}>
                 <img
                   alt={''}
-                  src={`assets/${environment.assetPrefix}/icon_vip_context_1.png`}
+                  src={`assets/${environment.uVersion}/icon_vip_context_1.png`}
                 />
                 <div className={'flex flex-col text-2xl italic leading-none font-bold text-white'}>
                   <span className='text-end'>recompensa de</span>

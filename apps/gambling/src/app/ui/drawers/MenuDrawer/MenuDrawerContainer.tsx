@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {environment} from "../../../../environments/environment";
 
 const StyledMenuDrawerContainer = styled.div`
-  background: url(assets/${environment.assetPrefix}/bg_sidebar_mobile.png);
+  background: url(assets/${environment.uVersion}/bg_sidebar_mobile.png);
 `
 
 export type IMenuDrawer = {
@@ -77,7 +77,7 @@ export const MenuDrawerContainer = (props: IMenuDrawer) => {
             <button>
               <img
                 onClick={() => closeMenuDrawer() }
-                className="w-[40px] h-[40px]" alt={"close"} src={`assets/${environment.assetPrefix}/icon=close.png`}
+                className="w-[40px] h-[40px]" alt={"close"} src={`assets/${environment.uVersion}/icon=close.png`}
               />
             </button>
           </div>

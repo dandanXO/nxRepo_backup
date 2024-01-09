@@ -14,7 +14,7 @@ export const NotificationContainer = (props: INotificationContainer) => {
         'flex-between fixed right-0 top-0 bottom-0 z-10 flex w-[450px] flex-col bg-[#090B0F] p-4 text-left',
         {}
       )}
-      style={{background: `url("assets/${environment.assetPrefix}/bg_web_login_1.png")`}}
+      style={{background: `url("assets/${environment.uVersion}/bg_web_login_1.png")`}}
     >{props.children}
     </div>
   )

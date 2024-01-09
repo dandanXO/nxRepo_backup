@@ -125,7 +125,7 @@ export const Header = (props: IHeader) => {
         }}
       >
         <div className={"min-w-[100px] max-w-[130px] p-4 bg-[#5939f7] -mr-1"} onClick={() => onClickToIndex()}>
-          <img alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`} />
+          <img alt={"logo"} src={`assets/${environment.uVersion}/LOGO.png`} />
         </div>
         <HeaderButton>
           <HeaderButtonText onClick={onClickToIndex}>Jogos</HeaderButtonText>
@@ -198,7 +198,7 @@ export const Header = (props: IHeader) => {
             props.onClickToChangeLogoutPopover(!props.openLogoutPopover);
           }}>
             <button>
-              <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"logout"} src={`assets/${environment.assetPrefix}/ic_signout.png`} />
+              <img className="w-[36px] h-[36px] min-w-[36px] min-h-[36px]" alt={"logout"} src={`assets/${environment.uVersion}/ic_signout.png`} />
             </button>
           </section>
 

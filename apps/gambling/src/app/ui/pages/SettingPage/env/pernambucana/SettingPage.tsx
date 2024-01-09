@@ -128,7 +128,7 @@ export const SettingPage = ({
                 {/*/>*/}
                 <div>Política de Privacidad</div>
               </div>
-              <img src={`assets/${environment.assetPrefix}/icon_41.png`}/>
+              <img src={`assets/${environment.uVersion}/icon_41.png`}/>
             </InputSection>
           </div>
         </div>

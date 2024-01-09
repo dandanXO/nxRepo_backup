@@ -20,7 +20,7 @@ export const UserLoginStatusDrawers = (props: IUserLoginStatusDrawers) => {
 
         })}
            style={{
-             backgroundImage: `url("assets/${environment.assetPrefix}/bg_web_login.png")`,
+             backgroundImage: `url("assets/${environment.uVersion}/bg_web_login.png")`,
              backgroundPosition: 'center bottom', // 将垂直位置设置为底部
              backgroundRepeat: 'no-repeat'
            }}

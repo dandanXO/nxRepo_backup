@@ -36,9 +36,9 @@ const LevelInfoCard = ({
             ['w-[30%]', !isMobile]
         )}>
           <img
-            src={isMobile ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
-               level < 20 ? `assets/${environment.assetPrefix}/icon_vip_info.png` :
-                 `assets/${environment.assetPrefix}/${JackpotMap[level].image}`
+            src={isMobile ? `assets/${environment.uVersion}/icon_vip_info.png` :
+               level < 20 ? `assets/${environment.uVersion}/icon_vip_info.png` :
+                 `assets/${environment.uVersion}/${JackpotMap[level].image}`
           }
             className={tcx("p-2", ['w-32 p-0', isMobile])}
           />
@@ -59,7 +59,7 @@ const LevelInfoCard = ({
           {
             isMobile && level >= 20 && (
               <div className='border-b border-purple-400 flex flex-col items-center'>
-                <img className='p-3' alt={`jackpot${level}`} src={`assets/${environment.assetPrefix}/${JackpotMap[level].image}`}/>
+                <img className='p-3' alt={`jackpot${level}`} src={`assets/${environment.uVersion}/${JackpotMap[level].image}`}/>
                 <div>Nível Mega Jackpot: {JackpotMap[level].label}</div>
                 <div>Ou numerário de valor equivalente</div>
               </div>

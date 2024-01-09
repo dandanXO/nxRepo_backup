@@ -3,7 +3,7 @@ import {environment} from "../../../../environments/environment";
 
 export const ChargeButton = styled.button`
   cursor: pointer;
-  // background: url("assets/${environment.assetPrefix}/btn_agora.png") center center no-repeat;
+  // background: url("assets/${environment.uVersion}/btn_agora.png") center center no-repeat;
   background: linear-gradient(45deg,var(--btn-gradient1-from) 0%,var(--btn-gradient1-to) 100%);
   background-size: cover; /* 背景圖片尺寸適應容器 */
   box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);

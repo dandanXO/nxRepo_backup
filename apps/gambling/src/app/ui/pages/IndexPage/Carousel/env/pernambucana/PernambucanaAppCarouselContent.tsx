@@ -75,7 +75,7 @@ export const PernambucanaAppCarouselContent = () => {
             Primeiro depósito <br/> bônus de 20%
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/h5_banner_1.png`}
+            src={`assets/${environment.uVersion}/h5_banner_1.png`}
           />
         </div>
       ) : (
@@ -91,7 +91,7 @@ export const PernambucanaAppCarouselContent = () => {
           }}>
             Primeiro depósito <br/> bônus de 20%
           </p>
-          <img src={`assets/${environment.assetPrefix}/banner1.png`} className="rounded-box" style={{ display: 'block', borderRadius: '10px' }}/>
+          <img src={`assets/${environment.uVersion}/banner1.png`} className="rounded-box" style={{ display: 'block', borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -143,7 +143,7 @@ export const PernambucanaAppCarouselContent = () => {
           }}>
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_2.png`}/>
+          <img src={`assets/${environment.uVersion}/h5_banner_2.png`}/>
         </div>
       ) : (
         <div className={""} onClick={() => {
@@ -158,7 +158,7 @@ export const PernambucanaAppCarouselContent = () => {
           }}>
             Benefícios-ofertasde deposito<br/>Ate 10% bônus
           </p>
-          <img src={`assets/${environment.assetPrefix}/banner3.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
+          <img src={`assets/${environment.uVersion}/banner3.png`} className="rounded-box" style={{ display: 'block',borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -206,13 +206,13 @@ export const PernambucanaAppCarouselContent = () => {
             navigate(PageOrModalPathEnum.VIPGradePage)
           }
         }}>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_4.png`}/>
+          <img src={`assets/${environment.uVersion}/h5_banner_4.png`}/>
         </div>
       ) : (
         <div className={''} onClick={() => {
           navigate(PageOrModalPathEnum.VIPGradePage);
         }}>
-          <img src={`assets/${environment.assetPrefix}/banner2.png`} className="rounded-box"  style={{ display: 'block', borderRadius: '10px' }}/>
+          <img src={`assets/${environment.uVersion}/banner2.png`} className="rounded-box" style={{ display: 'block', borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -243,7 +243,7 @@ export const PernambucanaAppCarouselContent = () => {
             navigate(PageOrModalPathEnum.DailySignInPage)
           }
         }}>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_5.png`}/>
+          <img src={`assets/${environment.uVersion}/h5_banner_5.png`}/>
         </div>
       ) : (
         <div className={''} onClick={() => {
@@ -253,7 +253,7 @@ export const PernambucanaAppCarouselContent = () => {
             navigate(PageOrModalPathEnum.DailySignInPage)
           }
         }}>
-          <img src={`assets/${environment.assetPrefix}/banner5.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
+          <img src={`assets/${environment.uVersion}/banner5.png`} className="rounded-box" style={{ display: 'block',borderRadius: '10px' }}/>
         </div>
       )}
 
@@ -291,7 +291,7 @@ export const PernambucanaAppCarouselContent = () => {
           }}>
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
-          <img src={`assets/${environment.assetPrefix}/h5_banner_3.png`}/>
+          <img src={`assets/${environment.uVersion}/h5_banner_3.png`}/>
         </div>
       ) : (
         <div className={""} onClick={() => {
@@ -307,7 +307,7 @@ export const PernambucanaAppCarouselContent = () => {
           }}>
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
-          <img src={`assets/${environment.assetPrefix}/banner4.png`} className="rounded-box"  style={{ display: 'block',borderRadius: '10px' }}/>
+          <img src={`assets/${environment.uVersion}/banner4.png`} className="rounded-box" style={{ display: 'block',borderRadius: '10px' }}/>
         </div>
       )}
 

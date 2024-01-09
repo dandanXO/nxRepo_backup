@@ -62,7 +62,7 @@ export const IndexPage = () => {
       return (
         <GameTypeSectionList
           isViewAll={indexPagecurrentSelectLabel === "Todos"}
-          labelImgUrl={`assets/${environment.assetPrefix}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
+          labelImgUrl={`assets/${environment.uVersion}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
           key={index}
           userFavorite={userFavorite}
           onClickFavoriteGameItem={onClickFavoriteGameItem}
@@ -95,7 +95,7 @@ export const IndexPage = () => {
     return list?.map(({subGameType,games}: any, index: number) => {
       return (
         <GameTypeSectionList
-          labelImgUrl={`assets/${environment.assetPrefix}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
+          labelImgUrl={`assets/${environment.uVersion}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
           key={index}
           userFavorite={userFavorite}
           onClickFavoriteGameItem={onClickFavoriteGameItem}
@@ -138,7 +138,7 @@ export const IndexPage = () => {
           list?.map(({subGameType,games}: any, index: number) => {
             return (
               <GameTypeSectionList
-                labelImgUrl={`assets/${environment.assetPrefix}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
+                labelImgUrl={`assets/${environment.uVersion}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
                 key={index}
                 userFavorite={userFavorite}
                 onClickFavoriteGameItem={onClickFavoriteGameItem}
@@ -164,7 +164,7 @@ export const IndexPage = () => {
       return searchResults.length > 0
         ? (
           <GameTypeSectionList
-            labelImgUrl={`assets/${environment.assetPrefix}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
+            labelImgUrl={`assets/${environment.uVersion}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
             userFavorite={userFavorite}
             onClickFavoriteGameItem={onClickFavoriteGameItem}
             isLatestItem={true}
@@ -186,7 +186,7 @@ export const IndexPage = () => {
       return searchResults.length > 0
         ? (
           <GameTypeSectionList
-            labelImgUrl={`assets/${environment.assetPrefix}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
+            labelImgUrl={`assets/${environment.uVersion}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
             userFavorite={userFavorite}
             onClickFavoriteGameItem={onClickFavoriteGameItem}
             isLatestItem={true}
@@ -225,7 +225,7 @@ export const IndexPage = () => {
                   setSubGameActiveTab(tab)
                 }}
                 name={tab}
-                imgUrl={`assets/${environment.assetPrefix}/shared/${tab.split('-')[0]}-logo.png`}
+                imgUrl={`assets/${environment.uVersion}/shared/${tab.split('-')[0]}-logo.png`}
               />
             )
           })

@@ -15,8 +15,8 @@ const SignInButton = styled.div<{
   disable: boolean
 }>`
   background-image: url(${props =>
-    props.disable?`assets/${environment.assetPrefix}/daily_sign_in_button_disable.png`:
-      `assets/${environment.assetPrefix}/daily_sign_in_button.png`});
+    props.disable?`assets/${environment.uVersion}/daily_sign_in_button_disable.png`:
+      `assets/${environment.uVersion}/daily_sign_in_button.png`});
   background-size: 100%;
   background-repeat: no-repeat;
 `
@@ -49,12 +49,12 @@ const MobileDailySignInPage = ({
   const {onClickToIndex} = usePageNavigate();
   return (
     <div className='relative bg-gradient-to-b from-[var(--background-checkin-from)] to-[var(--background-checkin-to)]'>
-      <img className='absolute top-[50px] left-[50%] translate-x-[-50%]' alt='bg' src={`assets/${environment.assetPrefix}/bg_daily_sign_in.png`}/>
+      <img className='absolute top-[50px] left-[50%] translate-x-[-50%]' alt='bg' src={`assets/${environment.uVersion}/bg_daily_sign_in.png`}/>
       <PageContainer>
         {contextHolder}
 
         <BackNavigation
-          title={<img alt='title' className='w-[80%] ml-6' src={`/assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>}
+          title={<img alt='title' className='w-[80%] ml-6' src={`/assets/${environment.uVersion}/daily_sign_in_title.png`}/>}
           onClick={() => onClickToIndex()}
         />
 

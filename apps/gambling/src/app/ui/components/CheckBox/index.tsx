@@ -13,5 +13,5 @@ export const CheckBox = ({
   className,
   onClick
 }: ICheckBoxProps) => {
-  return <img onClick={onClick} className={tcx('cursor-pointer', className)} alt='checkBox' src={`assets/${environment.assetPrefix}/ic_check_box_${checked? 'checked':'unchecked'}.png`}/>
+  return <img onClick={onClick} className={tcx('cursor-pointer', className)} alt='checkBox' src={`assets/${environment.uVersion}/ic_check_box_${checked? 'checked':'unchecked'}.png`}/>
 }

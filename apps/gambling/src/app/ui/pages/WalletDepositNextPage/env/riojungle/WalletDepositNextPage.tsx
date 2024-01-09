@@ -137,7 +137,7 @@ export const WalletDepositNextPage = () => {
             <div className={`${textStyle} break-all mb-3 lg:mb-5`}>{data?.data?.channelData?.paymentLink || ''}</div>
             <Button className={'bg-[var(--secondary-main)] w-full rounded-[100px] py-2.5 lg:py-1.5'} onClick={onClickToCopy}
               text={<div className="text-white flex items-center justify-center">
-                <img className="mr-2 w-[20px] h-[20px]" src={`assets/${environment.assetPrefix}/icon=copy.png`} alt="copy" />
+                <img className="mr-2 w-[20px] h-[20px]" src={`assets/${environment.uVersion}/icon=copy.png`} alt="copy" />
                 Copy
               </div>
               }

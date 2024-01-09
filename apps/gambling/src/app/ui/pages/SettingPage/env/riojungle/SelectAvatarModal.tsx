@@ -22,7 +22,7 @@ export const SelectAvatarModal = ({
       <div className='relative px-4 sm:px-6 pb-4 sm:pb-8 pt-[56px] sm:pt-[60px] bg-[#333333] rounded-2xl w-[78%] sm:w-[320px] lg:w-[428px] h-fit'>
         <img
           alt='close'
-          className='cursor-pointer w-12 h-12 absolute right-2 top-2' src={`assets/${environment.assetPrefix}/XCircle.png`}
+          className='cursor-pointer w-12 h-12 absolute right-2 top-2' src={`assets/${environment.uVersion}/XCircle.png`}
           onClick={close}
         />
 
@@ -34,7 +34,7 @@ export const SelectAvatarModal = ({
               <div key={item} className='relative' onClick={()=>setSelected(item)}>
                 <img
                   className='w-full rounded-lg bg-transparent'
-                  alt={`avatar${item}`} src={`assets/${environment.assetPrefix}/avatar_${item}.png`}
+                  alt={`avatar${item}`} src={`assets/${environment.uVersion}/avatar_${item}.png`}
                 />
                 {selected === item &&
                   <div className='absolute top-0 left-0 h-full w-full rounded-lg border-4 border-[#19b28a] z-10 shadow-[0_0_20px_rgba(25,178,138,0.9)]' />

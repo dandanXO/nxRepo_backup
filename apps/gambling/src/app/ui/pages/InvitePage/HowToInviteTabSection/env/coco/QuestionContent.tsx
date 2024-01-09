@@ -15,7 +15,7 @@ export const QuestionContent = (props: any) => {
     <div>
       <div className='text-sm md:text-4xl text-white font-bold my-4 md:my-8'>Instruções diárias de recompensa de comissão</div>
       <div className={cx(`border border-solid border-[var(--stroke-block)] text-xs p-3 sm:p-12 sm:mt-0 sm:text-base`, props.className)}>
-        <img className={'mb-4 mx-auto'} src={`assets/${environment.assetPrefix}/acting.png`} />
+        <img className={'mb-4 mx-auto'} src={`assets/${environment.uVersion}/acting.png`} />
         <div className="mb-4 text-white"><QuestionSection1 /></div>
         <div className="mb-3 py-3.5 px-6 py-sm:mb-4 sm:py-6 sm:px-9 border border-dashed border-[var(--stroke-block)] rounded-2xl text-white">
           <div>Por exemplo:</div>

@@ -64,7 +64,7 @@ export const DepositAdvertisementModal = ({
       <img
         alt='icon'
         className={tcx('w-[220px] h-[220px] mt-6 mb-3', ['w-[100px] h-[100px] mt-3 mb-2', isMobile])}
-        src={`assets/${environment.assetPrefix}/ic_advertisement_deposit.png`}
+        src={`assets/${environment.uVersion}/ic_advertisement_deposit.png`}
       />
 
       <div className={tcx("mb-4 text-white text-center text-lg font-medium mt-4", ['text-xs mt-1', isMobile])}>

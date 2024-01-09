@@ -23,7 +23,7 @@ const VIPLabel = styled.div`
   margin-top: 6px;
   //float: right;
   font-weight: bold;
-  background: url("assets/${environment.assetPrefix}/account_vip.png") no-repeat 3px center/70%;
+  background: url("assets/${environment.uVersion}/account_vip.png") no-repeat 3px center/70%;
 `
 
 export type IAvatarAccountInfo = {
@@ -59,7 +59,7 @@ export const AvatarAccountInfo = (props: IAvatarAccountInfo) => {
       <span className={"flex flex-row"}>
         <span className={"text-white mr-2"}>ID:{user.user_id}</span>
         <button>
-          <img className="w-[22px] h-[20px]" alt={"copy"} src={`assets/${environment.assetPrefix}/ic_copy.png`}/>
+          <img className="w-[22px] h-[20px]" alt={"copy"} src={`assets/${environment.uVersion}/ic_copy.png`}/>
         </button>
       </span>
       <div style={contentStyles}>

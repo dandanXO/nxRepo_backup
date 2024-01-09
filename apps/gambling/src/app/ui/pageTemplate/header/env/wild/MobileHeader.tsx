@@ -45,7 +45,7 @@ export const MobileHeader = (props: IHeaderMobile) => {
             alt={"menu"}
             // className={"w-[22.5px] h-[22.5px]"}
             className={"w-[23px] h-[18px]"}
-            src={`assets/${environment.assetPrefix}/ic_menu.png`}
+            src={`assets/${environment.uVersion}/ic_menu.png`}
             onClick={() => {
               props.clickToOpenMenuDrawer();
             }}

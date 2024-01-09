@@ -25,7 +25,7 @@ const TradeStatusMap: { [key: number]: string } = {
 const NoData = () => {
   return (
     <div className=' flex flex-col justify-center items-center py-10 border-[#B3B3B3] border-dashed border-2 rounded-lg'>
-      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
+      <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.uVersion}/noData.png`} />
       <div>Nada aqui</div>
     </div>
   )
@@ -71,7 +71,7 @@ export const DepositMobileTable = () => {
                     onClick={()=>onClickToCopy(record.pay_serial_no)}
                     src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
                   />
-                </div>  
+                </div>
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
                 <span className={'text-[#B3B3B3] font-normal'}>Valor</span>
@@ -158,7 +158,7 @@ export const WithdrawMobileTable = () => {
                   onClick={()=>onClickToCopy(record.pay_serial_no)}
                     src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACYAAAAkBAMAAAAX21WWAAAALVBMVEUAAAD///////////////////////////////////////////////////////+hSKubAAAAD3RSTlMAslqHLVh8VSU4cCENn3Foj007AAAAbUlEQVQoz2MgDbAkG0NAJkKMVxAGGuBibHCxAoTCFhcw8BMMwDCXCZ/YNGOYpXAxDkGEpTAxdoRYAVQMqH4JxFIvQQWEmALUgpEoVoAhxi24AUOM4QyCiWCQKoYIeyAXI46AXIy4BHIx4pwkAABWmSbbBWXeeAAAAABJRU5ErkJggg=='}
                   />
-                </div>  
+                </div>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
