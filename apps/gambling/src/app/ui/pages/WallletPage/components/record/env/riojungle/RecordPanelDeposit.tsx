@@ -35,7 +35,7 @@ export const RecordPanelDeposit = () => {
 
   const tableColumns = [
     {
-      title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', width: '250px',
+      title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', maxWidth: '250px',
       render: (record: any) => {
         return (
           <div className='flex'>

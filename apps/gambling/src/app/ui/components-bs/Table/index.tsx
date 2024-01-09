@@ -82,7 +82,8 @@ export const Table = (props: ITable) => {
                       props.className,
                       props.titleStyle
                     )}
-                    style={{ width: `${col.width !== undefined ? col.width : 'auto'}` }}
+                    style={{ width: `${col.width !== undefined ? col.width : 'auto'}`
+                  }}
                   >
                     {col.title}
                   </th>
@@ -110,7 +111,10 @@ export const Table = (props: ITable) => {
                             props.className,
                             props.contentStyle
                           )}
-                          style={{ width: `${col.width !== undefined ? col.width : 'auto'}` }}
+                          style={{ width: `${col.width !== undefined ? col.width : 'auto'}`,
+                            maxWidth: col.maxWidth ? col.maxWidth : '100%'
+                          }
+                        }
                         >
                           {col.render !== undefined ? col.render(data as any) : data[col.name]}
                         </td>
