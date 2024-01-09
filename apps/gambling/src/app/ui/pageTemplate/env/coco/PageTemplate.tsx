@@ -26,6 +26,7 @@ import {useLocalStorage} from "usehooks-ts";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import {twMerge} from "tailwind-merge";
 import useBreakpoint from "../../hooks/useBreakpoint";
+import {IUseSingletonPageTemplateConfig} from "../../hooks/useSingletonPageTemplateConfig";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -106,7 +107,8 @@ type ICoco777betIndexPageTemplate = {
   onClickToOpenTelegramManager: () => void;
   isUILoading: boolean;
   showToolboxConfig?: TShowToolboxConfig
-}
+} & IUseSingletonPageTemplateConfig;
+
 export const PageTemplate = ({
                                          children,
                                          isCurrentPageCompanyProfile,
@@ -139,9 +141,20 @@ export const PageTemplate = ({
                                          onClickToOpenTelegramManager,
                                          isShowTabbar,
                                          isUILoading,
-                                         showToolboxConfig
+                                         showToolboxConfig,
+                                         header,
+                                         footer,
+                                         menuDrawer,
+                                         tabBar,
                                        }: ICoco777betIndexPageTemplate) => {
 
+  // NOTE: show
+  const isShowHeader = header.mobile || header.tablet || header.desktop;
+  const isShowFooter = footer.mobile || footer.tablet || footer.desktop;
+  const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
+  // console.log("menuDrawer", menuDrawer);
+
+  const isShowTabBar = tabBar.mobile || tabBar.tablet || tabBar.desktop;
 
   const dispatch = useDispatch();
 
@@ -151,7 +164,7 @@ export const PageTemplate = ({
   const canvasRef = useRef();
   useEffect(() => {
     // NOTE: Natal777bet
-    if(environment.assetVersionPrefix === "v6" || environment.assetVersionPrefix === "v7") {
+    if(environment.snowEffects !== "none") {
       affect(canvasRef.current as any)
     }
   }, [canvasRef.current])
@@ -190,7 +203,7 @@ export const PageTemplate = ({
         }}
       >
 
-        {isMobile && isShowMobileHeader && (
+        {isMobile && isShowHeader && (
           <MobileHeader
             className={"!h-[52.5px]"}
             clickToOpenMenuDrawer={() => {
@@ -203,7 +216,7 @@ export const PageTemplate = ({
           />
         )}
 
-        {!isMobile && isShowDesktopHeader && (
+        {!isMobile && isShowHeader && (
           <Header
             isLogin={isLogin}
             onClickUserLoginStatusDrawer={() => {
@@ -223,7 +236,7 @@ export const PageTemplate = ({
           />
         )}
 
-        {(isShowDesktopMenuDrawer) && (
+        {(isShowMenuDrawer) && (
           <MenuDrawer/>
         )}
 
@@ -238,12 +251,13 @@ export const PageTemplate = ({
           {children}
         </ErrorBoundary>
 
-        {<Footer showMobileFooter={isShowMobileFooter}
-                 showDesktopFooter={isShowDesktopFooter}
-        />}
+        {isShowFooter && (
+          <Footer showMobileFooter={isShowFooter}
+                  showDesktopFooter={isShowFooter}
+          />
+        )}
 
-
-        {isMobile && isShowTabbar && (
+        {isShowTabBar && (
           <TabBar isShowSlot={false} size={"big"}/>
         )}
 

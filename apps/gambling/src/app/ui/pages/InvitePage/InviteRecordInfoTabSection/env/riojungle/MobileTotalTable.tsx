@@ -41,7 +41,7 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
               <IconTooltip
                 tooltipStyle={{ fontSize: '14px', width: '200px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}
                 id='game-bonus-tooltip-desktop'
-                icon={<QuestionTipsIcon className={'text-base'} />}
+                icon={<QuestionTipsIcon className={'text-base text-[#F59E0B]'} />}
                 content='As recompensas são liquidadas toda segunda-feira'
               />
             </div>

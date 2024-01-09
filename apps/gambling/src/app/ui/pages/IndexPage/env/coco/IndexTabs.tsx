@@ -23,7 +23,7 @@ const IndexImageTab = styled(ImageTab)`
           `;
     } else {
       return `
-            box-shadow: 0 1px 2px rgba(6,240,246,1);
+            box-shadow: 0 1px 2px var(--stroke-button);
             background-image: linear-gradient(var(--button-gametab-focus-from), var(--button-gametab-focus-via) 15.65%, var(--button-gametab-focus-to));
             color: var(--white);
           `

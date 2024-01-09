@@ -1,40 +1,12 @@
 // https://react-multi-carousel.surge.sh/
 import Carousel, {StateCallBack} from "react-multi-carousel";
 import "./style.scss";
-
+import {responsive} from "./responsive";
 import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 import cx from "classnames";
 import {renderByPlatform} from "../../../utils/renderByPlatform";
 import {AppCarousel as RiojungleAppCarousel} from "./env/riojungle/RiojungleCarousel"
 import {tailwindVariables} from "../../../../../environments/tailwind.variables";
-
-const mobilePoint = parseInt(tailwindVariables.theme.screens.mobile.replace("px", ""));
-const tabletPoint = parseInt(tailwindVariables.theme.screens.tablet.replace("px", ""));
-const desktopPoint = parseInt(tailwindVariables.theme.screens.desktop.replace("px", ""));
-
-const responsive = {
-  desktop: {
-    breakpoint: { min: tabletPoint, max: 9999999999 },
-    items: 3,
-    partialVisible:true,
-    partialVisibilityGutter: 20
-    // partialVisible: false,
-  },
-  tablet: {
-    breakpoint: { min: mobilePoint, max: tabletPoint },
-    items: 2,
-    partialVisible:true,
-    partialVisibilityGutter: 20
-    // partialVisible: false,
-  },
-  mobile: {
-    breakpoint: { min: 0, max: mobilePoint },
-    items: 1,
-    partialVisible:true,
-    // partialVisible: false,
-  }
-};
-
 
 type IAppCarousel = {
   children: React.ReactNode;
@@ -90,5 +62,5 @@ export const AppCarousel = (props: IAppCarousel) => {
     "wild777bet": <CocoAppCarousel {...props}/>,
     "coco777bet": <CocoAppCarousel {...props}/>,
     "riojungle777bet": <RiojungleAppCarousel {...props}/>,
-  }, CocoAppCarousel)
+  }, <CocoAppCarousel {...props}/>)
 }
