@@ -155,14 +155,14 @@ export const InviteSettlementRecordPage = () => {
                         )}
                       >
                         <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                          <div className='font-bold text-[var(--white-40)]'>Hora De Entrada</div>
+                          <div className='text-[#B3B3B3)]'>Hora De Entrada</div>
                           <div>
                             <span className='mr-1'>{moment(record.updateTime).format('DD.MM-YYYY HH:mm:ss')}</span>
                           </div>
                         </div>
                         <div className={'flex flex-row justify-between border-[var(--white-20)] p-2'}>
-                          <span className={'text-[var(--white-40)]'}>Bônus</span>
-                          <span className={''}>{formatLocaleMoney(record.reward / 100)}</span>
+                          <span className={'text-[#B3B3B3] font-normal'}>Bônus</span>
+                          <span className={''}>R$ {formatLocaleMoney(record.reward / 100)}</span>
                         </div>
                       </div>
                     )
