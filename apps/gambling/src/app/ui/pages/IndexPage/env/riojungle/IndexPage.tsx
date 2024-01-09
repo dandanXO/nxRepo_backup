@@ -259,9 +259,7 @@ export const IndexPage = ({
       }
 
       <PageContainer
-        className={cx("pb-16 pt-0", {
-        "pt-[58px]": isFixedGameTypeTabs,
-        })}
+        className={cx("pb-16 pt-0")}
       >
          {/* 每個選項的渲染 */}
         {gameList()}
