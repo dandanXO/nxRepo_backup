@@ -13,6 +13,7 @@ import {CrownSVGIcon} from "./CrownSVGIcon";
 import {UserSVGIcon} from "./UserSVGIcon";
 import {GameControllerSVGIcon} from "./GameControllerSVGIcon";
 import {RootState} from "../../../../../reduxStore";
+import useBreakpoint from "../../../hooks/useBreakpoint";
 
 export const TabBar = (props: ITabBar) => {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ export const TabBar = (props: ITabBar) => {
   const isActive = (active: boolean) => active ? "#9c6aef" : "#b3b3b3";
   const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
   const { messageCount } = useSelector((state: RootState) => state.app);
+
+  const { isMobile } = useBreakpoint();
+
   return (
     <footer
       className={twMerge(
@@ -54,7 +58,7 @@ export const TabBar = (props: ITabBar) => {
           dispatch(uiSlice.actions.setOpenMenuDrawer(true));
         }}
       >
-        <MenuSVGIcon/>
+        <MenuSVGIcon size={isMobile ? 28: undefined}/>
         <div
           className={twMerge("text-sm font-medium leading-5",
             "text-[#b3b3b3]",
@@ -73,7 +77,7 @@ export const TabBar = (props: ITabBar) => {
             onClickToInvite();
           }}
         >
-          <ThumbsUPSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.InvitePage)}/>
+          <ThumbsUPSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.InvitePage)} size={isMobile ? 28: undefined}/>
           <div
             className={twMerge("text-sm font-medium leading-5",
               location.pathname === PageOrModalPathEnum.InvitePage && "text-[var(--primary-hover)]",
@@ -99,7 +103,7 @@ export const TabBar = (props: ITabBar) => {
 
           <div className="absolute top-[-35px] bg-[#333333] flex flex-row items-start pt-1 px-1 rounded-[100px]">
             <div className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[linear-gradient(145deg,_var(--primary-main)_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-center mb-1 pt-4 w-16 h-16 items-start rounded-[100px]">
-              <GameControllerSVGIcon/>
+              <GameControllerSVGIcon size={isMobile ? 28: undefined}/>
             </div>
           </div>
 
@@ -126,7 +130,7 @@ export const TabBar = (props: ITabBar) => {
             onClickToVipGrade();
           }}
         >
-          <CrownSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.VIPGradePage)}/>
+          <CrownSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.VIPGradePage)} size={isMobile ? 28: undefined} />
 
           <div
             className={twMerge("text-sm font-medium leading-5",
@@ -149,7 +153,7 @@ export const TabBar = (props: ITabBar) => {
           }}
         >
           <div className="relative">
-            <UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)}/>
+            <UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)} size={isMobile ? 28: undefined} />
             {messageCount > 0 && (
               <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[var(--state-error-main)] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
                 {messageCount}

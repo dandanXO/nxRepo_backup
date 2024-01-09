@@ -5,6 +5,7 @@ import React from "react";
 import { PageContainer } from "../../../../components-bs/PageContainer";
 import { useScrollToPartPageTemplate } from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import cx from 'classnames';
+import { twMerge } from "tailwind-merge";
 
 
 export const PrivacyAgreementPage = () => {
@@ -15,10 +16,10 @@ export const PrivacyAgreementPage = () => {
   return (
     <PageContainer >
 
-      <PageContainer className={cx(
-        {
-          'fixed top-[56px] sm:top-[72px] left-[0] lg:left-[248px] right-0 sm:right-[20px] bg-[var(--grayscale-10)]': showFixForIOSStickTab
-        })}>
+      <PageContainer className={twMerge(
+        'px-0 md:px-0 lg:px-0',
+        showFixForIOSStickTab && 'fixed top-[56px] sm:top-[72px] left-[0] lg:left-[248px] right-0 sm:right-[20px] bg-[var(--grayscale-10)]'
+        )}>
         <BackNavigation onClick={() => onClickToIndex()} />
       </PageContainer>
 
