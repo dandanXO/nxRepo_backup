@@ -77,22 +77,22 @@ export const MobileGameRecordPage = ({
               >
                 <div className='w-full flex justify-between pb-2'>
                   <div>Nome Do Jogo</div>
-                  <div>{record.gameName}</div>
+                  <div className='text-[var(--grayscale-100)]'>{record.gameName}</div>
                 </div>
                 <BottomLine />
                 <div className='w-full flex justify-between py-2'>
                   <div>Tempo</div>
-                  <div>{moment(record.createTime).format('DD.MM.YYYY HH:mm:ss')}</div>
+                  <div className='text-[var(--grayscale-100)]'>{moment(record.createTime).format('DD.MM.YYYY HH:mm:ss')}</div>
                 </div>
                 <BottomLine />
                 <div className='w-full flex justify-between py-2'>
                   <div>Valor Da Aposta</div>
-                  <div>R$ {formatLocaleMoney(record.bet / 100)}</div>
+                  <div className='text-[var(--grayscale-100)]'>R$ {formatLocaleMoney(record.bet / 100)}</div>
                 </div>
                 <BottomLine />
                 <div className='w-full flex justify-between pt-2'>
                   <div>Lucro</div>
-                  <div>{formatLocaleMoney(record.win / 100)}</div>
+                  <div className='text-[var(--grayscale-100)]'>{formatLocaleMoney(record.win / 100)}</div>
                 </div>
               </div>
             ))
