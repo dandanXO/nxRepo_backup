@@ -32,9 +32,9 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
       <div className={'border-solid border-[#666666] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] flex flex-col justify-center w-full px-2 py-1 border rounded-lg'}>
         <MobileTableListItem textClassName="font-bold" title={'Usuário de recarga'} text={props.data.numRecharge || 0} />
         {props.type === "1" &&
-          <MobileTableListItem title={'Primeira Recarga Recompensas'} textClassName="font-bold" text={props.data.firstRecharge} />
+          <MobileTableListItem title={'Primeira Recarga Recompensas'} textClassName="font-bold" text={`R$ ${props.data.firstRecharge || '0,00'} `} />
         }
-        <MobileTableListItem textClassName="font-bold" title={'Valor da transação do jogo'} text={props.data.gameRecharge} />
+        <MobileTableListItem textClassName="font-bold" title={'Valor da transação do jogo'} text={`R$ ${props.data.gameRecharge || '0,00'} `} />
         <MobileTableListItem textClassName="font-bold" title={<div className='flex items-center'>
           <div>
             <div className='mr-1 self-start' onClick={() => setInviteBonusInfoOpen(true)}>
@@ -47,9 +47,9 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
             </div>
           </div>
           <div className="text-[#B3B3B3]">{'Recompensas De Troca De Jogos'}</div>
-        </div>} text={props.data.gameRechargeReward || 0}
+        </div>} text={`R$ ${props.data.gameRechargeReward}` || '0,00'}
         />
-        <MobileTableListItem textClassName="font-bold" title={'Recompensa Total'} text={props.data.totalReward || 0} bottomLine={false} />
+        <MobileTableListItem textClassName="font-bold" title={'Recompensa Total'} text={`R$ ${props.data.totalReward}` || '0,00'} bottomLine={false} />
       </div>
     </div>
   )

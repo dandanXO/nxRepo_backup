@@ -16,15 +16,15 @@ export const MobileMainBoard = (props: IBoardData) => {
   return (
     <section className={"flex flex-col w-full [&>*:nth-child(2)]:my-2"}>
       <BoardContainer>
-        <div className={"text-base text-white"}>{props.data.totalReward}</div>
+        <div className={"text-base text-white"}>R$ {props.data.totalReward || '0,00'}</div>
         <div className={"text-sm text-[#B3B3B3] md:mt-5"}>Prêmio total</div>
       </BoardContainer>
       <BoardContainer>
-        <div className={"text-base text-white"}>{props.data.paidReward}</div>
+        <div className={"text-base text-white"}>R$ {props.data.paidReward || '0,00'}</div>
         <div className={"text-sm  text-[#B3B3B3] md:mt-5"}>Bônus já liquidados</div>
       </BoardContainer>
       <BoardContainer>
-        <div className={"text-base text-white"}>{props.data.waitForCalReward}</div>
+        <div className={"text-base text-white"}>R$ {props.data.waitForCalReward || '0,00'}</div>
         <div className={"text-sm text-center text-[#B3B3B3] leading-5 lg:leading-7 md:mt-5"}>Bônus aguardando liquidação</div>
         <div className={"text-sm text-center text-[#B3B3B3] leading-5 lg:leading-7"}>(Atualizar a cada 24 horas)</div>
       </BoardContainer>

@@ -33,7 +33,6 @@ export const MobileDailySignInRecordPage = ({
     <PageContainer y={false} >
       <BackNavigation
         onClick={() => onClickToCheckInDaily()}
-        title={<div className={"w-full font-bold text-center"}>Registro Diário de Presença</div>}
       />
       <div className='grow h-full overflow-y-auto mt-6 bg-[#333333] rounded-lg px-2'>
         {
@@ -42,7 +41,7 @@ export const MobileDailySignInRecordPage = ({
                 <PageContainer
                 key={record.id}
                 className={cx("flex flex-col rounded-lg text-white text-sm",
-                  "bg-[#262626] border-[#4d4d4d] my-1",
+                  "bg-[#262626] border border-[var(--grayscale-30)] my-1",
                   {
                     'mt-2': index === 0
                   },
@@ -52,32 +51,32 @@ export const MobileDailySignInRecordPage = ({
                 )}
               >
                 <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                  <div className='font-bold text-[var(--white-40)]'>ID</div>
+                  <div className='text-[var(--grayscale-70)]'>ID</div>
                   <div>
-                    <span className='mr-1'>{record.id}</span>
+                    {record.id}
                   </div>
                 </div>
                 <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                  <span className={'text-[var(--white-40)]'}>Nivel VIP</span>
-                  <span className={''}>{record.vip_level}</span>
+                  <span className={'text-[var(--grayscale-70)]'}>Nivel VIP</span>
+                  <span>LV{record.vip_level}</span>
                 </div>
 
                 <div
                   className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}
                 >
-                  <span className={'text-[var(--white-40)]'}>Coleta Contínua</span>
+                  <span className={'text-[var(--grayscale-70)]'}>Coleta Contínua</span>
                   <span className={''}>
                     {record.days} dia{record.days > 1 ? 's' : ''}
                   </span>
                 </div>
 
                 <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                  <span className={'text-[var(--white-40)]'}>Recompensas</span>
-                  <span className={''}>{formatLocaleMoney(record.cashback / 100)}</span>
+                  <span className={'text-[var(--grayscale-70)]'}>Recompensas</span>
+                  <span>R$ {formatLocaleMoney(record.cashback / 100)}</span>
                 </div>
 
                 <div className={'flex flex-row justify-between border-assistant p-2'}>
-                  <span className='text-[var(--white-40)]'> Tempo </span>
+                  <span className='text-[var(--grayscale-70)]'> Tempo </span>
                   <span className={'text-white'}>{record.created_at}</span>
                 </div>
               </PageContainer>
