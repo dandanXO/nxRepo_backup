@@ -124,7 +124,10 @@ export const DesktopGameItem = (props: IItem) => {
                setOnLoad(true);
              }}
         />
-        <div className={"text-[#d7e8ff] block text-ellipsis truncate text-sm md:text-base sm:text-center w-full sm:text-center md:text-left basis-[20px] shrink-0"}>{props.name}</div>
+        <div className={cx("text-[#d7e8ff] block text-ellipsis truncate text-sm md:text-base sm:text-center w-full sm:text-center md:text-left basis-[20px] shrink-0",
+        {
+          'font-bold':hover
+        })}>{props.name}</div>
       </div>
 
       <FavoriteSection

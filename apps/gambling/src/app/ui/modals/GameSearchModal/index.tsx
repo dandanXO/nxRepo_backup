@@ -50,22 +50,24 @@ export const GameSearchModal = (props: IGameSearchModal) => {
     setListSize(listSize + 9);
   }
 
-  const { isMobile } = useBreakpoint();
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const { onClickGameItem } = usePageNavigate();
-  const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem;
+  const MainGameItem = !isDesktop ? MobileGameItem : DesktopGameItem;
 
   const gameList = (data: any) => {
     if (data?.length > 0) {
       return (
         <div className={cx("flex", {
-          "flex-wrap w-full": isMobile,
+          "flex-wrap w-full": !isDesktop,
         })}>
           {data && data.map((item: any, index: any) => {
+
             return (
               <MainGameItem
                 className={cx("grow-0 shrink-0", {
-                  "!w-[32vw] !h-[32vw]": isMobile,
-                  "mr-[16px] max-w-[150px] !basis-[150px] !h-[150px]": !isMobile
+                  "!w-[32vw] !h-[32vw] ": isMobile,
+                  "!basis-[20vw] !h-[22vw] !flex-1": isTablet,
+                  "mr-[16px] max-w-[150px] !basis-[150px]": isDesktop
                 })}
                 key={index}
                 gameId={Number(item.gameId)}
@@ -76,7 +78,19 @@ export const GameSearchModal = (props: IGameSearchModal) => {
                 onClickFavorite={() => { props.onClickFavoriteGameItem(item) }}
               />
             )
-          })}
+          })
+          }
+          {
+            // NOTE: 排版用，塞空的的區塊補齊空位 (Tablet)
+            Array.from({ length: 4 - (data?.length) % 4 }, (_, index) => {
+              return (
+                isTablet && <div
+                  key={index}
+                  className={cx({ "!basis-[20vw] !h-[22vw] !flex-1": isTablet })}
+                ></div>
+              )
+            })
+          }
         </div>
       )
     } else {
@@ -96,13 +110,13 @@ export const GameSearchModal = (props: IGameSearchModal) => {
   return (
     <div className="z-[1005] fixed left-0 top-0 right-0 bottom-0 flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]">
       <div className={cx("fixed rounded-lg pt-8 p-3 md:p-6 lg:p-8 relative", {
-        "w-[80%]": !isMobile,
-        "w-[90%] h-[90%]": isMobile
+        "w-[80%]": isDesktop,
+        "w-[90%] h-[90%]": !isDesktop
       }, backgroundProps())}>
         <button className={'absolute top-[12px] right-[12px]'} onClick={props.onClose} ><CloseButton /></button>
         <div className="h-full flex flex-col">
           <div className={"flex-none mb-2 md:mb-4 lg:mb-8"}>
-          <div className="text-lg md:text-2xl lg:text-4xl text-white mb-2 md:mb-3 lg:mb-8">Procurar</div>
+            <div className="text-lg md:text-2xl lg:text-4xl text-white mb-2 md:mb-3 lg:mb-8">Procurar</div>
             <SearchInput
               placeholder={"Pesquisar nome do jogo"}
               value={searchInput.data}
