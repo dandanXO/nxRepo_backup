@@ -52,6 +52,9 @@
         },
         "dev-u1-m2-mv1-v10-brasilbet": {
           "buildTarget": "gambling:build:dev-u1-m2-mv1-v10-brasilbet"
+        },
+        "dev-u1-m1-mv9-v12-breezeslotsbet": {
+          "buildTarget": "gambling:build:dev-u1-m1-mv9-v12-breezeslotsbet"
         }
       }
     },
@@ -655,6 +658,10 @@
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/u1/tailwind.variables"
+            },
+            {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/u1/m2mv1v10/theme.css"
             },
@@ -678,6 +685,10 @@
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/u1/tailwind.variables"
+            },
+            {
               "replace": "apps/gambling/src/environments/theme.css",
               "with": "apps/gambling/src/environments/u1/m2mv1v10/theme.css"
             },
@@ -688,6 +699,60 @@
             {
               "replace": "apps/gambling/src/index.html",
               "with": "apps/gambling/src/environments/u1/m2mv1v10/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "dev-u1-m1-mv9-v12-breezeslotsbet": {
+          "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/u1/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u1/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u1/m1mv9v12/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u1/m1mv9v12/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "prod-u1-m1-mv9-v12-breezeslotsbet": {
+          "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
+          "fileReplacements": [
+            {
+              "with": "apps/gambling/src/environments/u1/tailwind.variables",
+              "replace": "apps/gambling/src/environments/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u1/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u1/m1mv9v12/environment.prod.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u1/m1mv9v12/index.html"
             }
           ],
           "optimization": true,
