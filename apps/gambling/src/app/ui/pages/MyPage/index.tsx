@@ -37,19 +37,6 @@ export const VIPBorderStyleContainer = styled.div`
 
 export const MyPage = () => {
   useAllowLoginRouterRules();
-  const navigate = useNavigate();
-
-  const { isDesktop} = useBreakpoint();
-
-  useEffect(() => {
-    if(isDesktop) {
-      navigate(PageOrModalPathEnum.IndexPage)
-    }
-  }, [isDesktop])
-
-
-  // const { userAmount } = useSelector((state: RootState) => state.app.userStore as IUserStore)
-
 
   const dispatch = useDispatch();
 

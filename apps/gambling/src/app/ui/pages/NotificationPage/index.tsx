@@ -12,15 +12,6 @@ import { renderByPlatform } from "../../utils/renderByPlatform";
 export const NotificationPage = () => {
   useAllowLoginRouterRules();
 
-  const { onClickToIndex } = usePageNavigate();
-  const { isDesktop } = useBreakpoint();
-
-  useEffect(()=>{
-    if(isDesktop) {
-      onClickToIndex();
-    }
-  }, [isDesktop])
-
   return renderByPlatform({
     "coco777bet": <CocoNotificationPage />,
     "riojungle777bet": <RioNotificationPage />

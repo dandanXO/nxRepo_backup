@@ -652,6 +652,7 @@
           "vendorChunk": false
         },
         "dev-u1-m2-mv1-v10-brasilbet": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/theme.css",
@@ -674,6 +675,7 @@
           "vendorChunk": false
         },
         "prod-u1-m2-mv1-v10-brasilbet": {
+          "postcssConfig": "apps/gambling/src/environments/coco777bet/postcss.config.js",
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/theme.css",
