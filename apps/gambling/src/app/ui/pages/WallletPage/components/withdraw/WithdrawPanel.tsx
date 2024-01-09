@@ -27,6 +27,8 @@ import { ButtonPro } from "../../../../components-bs/Buttons/ButtonPro";
 import moment from "moment";
 import { totalReasableSelector } from "../../../../../reduxStore/appSlice";
 import { formatLocaleMoney } from "../../../../utils/format";
+import { useNavigate } from "react-router";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 
 
 
@@ -75,6 +77,7 @@ export type IWithdrawPanelCommon = {
 export const WithdrawPanel = (props: IWithdrawPanel) => {
 
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
+  const { onClickToVipGrade } = usePageNavigate();
 
   const [amountInput, setAmountInput] = useState<InputValue<string>>({
     data: '',
@@ -311,12 +314,6 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     })
   }
 
-
-  const onClickToVIP = () => {
-    window.open(PageOrModalPathEnum.VIPGradePage);
-  }
-
-
   return (
     renderByPlatform({
       "coco777bet": (
@@ -340,7 +337,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           validateSelectInput={validateSelectInput}
           tipoPixOptions={tipoPixOptions}
           onClickToWithdraw={onClickToWithdraw}
-          onClickToVIP={onClickToVIP}
+          onClickToVIP={onClickToVipGrade}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
@@ -367,7 +364,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           validateSelectInput={validateSelectInput}
           tipoPixOptions={tipoPixOptions}
           onClickToWithdraw={onClickToWithdraw}
-          onClickToVIP={onClickToVIP}
+          onClickToVIP={onClickToVipGrade}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
@@ -393,7 +390,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           validateSelectInput={validateSelectInput}
           tipoPixOptions={tipoPixOptions}
           onClickToWithdraw={onClickToWithdraw}
-          onClickToVIP={onClickToVIP}
+          onClickToVIP={onClickToVipGrade}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
@@ -420,7 +417,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         validateSelectInput={validateSelectInput}
         tipoPixOptions={tipoPixOptions}
         onClickToWithdraw={onClickToWithdraw}
-        onClickToVIP={onClickToVIP}
+        onClickToVIP={onClickToVipGrade}
         onClickToWithdrawRecord={props.onClickToWithdrawRecord}
         contextHolder={contextHolder}
         isDuringRestrictTime={isDuringRestrictTime}

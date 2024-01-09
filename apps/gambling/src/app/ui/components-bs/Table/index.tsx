@@ -77,7 +77,7 @@ export const Table = (props: ITable) => {
               if (col.isShow !== undefined ? col.isShow : true) {
                 return (
                   <th key={col.key}
-                    className={cx(`p-2 text-center sm:break-all border-[rgba(255,255,255,0.2)]`,
+                    className={cx(`p-2 text-center break-normal border-[rgba(255,255,255,0.2)]`,
                       { 'border-r ': colIndex !== columns.length - 1 },
                       props.className,
                       props.titleStyle
