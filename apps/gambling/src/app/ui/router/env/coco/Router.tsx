@@ -89,8 +89,8 @@ export const AppRouter = () => {
               }}
               tabBar={{
                 mobile: true,
-                tablet: true,
-                desktop: true,
+                tablet: false,
+                desktop: false,
               }}
               menuDrawer={{
                 mobile: false,
@@ -222,8 +222,8 @@ export const AppRouter = () => {
               }}
               tabBar={{
                 mobile: true,
-                tablet: true,
-                desktop: true,
+                tablet: false,
+                desktop: false,
               }}
               menuDrawer={{
                 mobile: false,
@@ -379,8 +379,8 @@ export const AppRouter = () => {
               }}
               tabBar={{
                 mobile: true,
-                tablet: true,
-                desktop: true,
+                tablet: false,
+                desktop: false,
               }}
               menuDrawer={{
                 mobile: false,
@@ -539,8 +539,8 @@ export const AppRouter = () => {
               }}
               tabBar={{
                 mobile: true,
-                tablet: true,
-                desktop: true,
+                tablet: false,
+                desktop: false,
               }}
               menuDrawer={{
                 mobile: false,
@@ -563,12 +563,12 @@ export const AppRouter = () => {
               footer={{
                 mobile: false,
                 tablet: false,
-                desktop: true,
+                desktop: false,
               }}
               tabBar={{
                 mobile: true,
-                tablet: true,
-                desktop: true,
+                tablet: false,
+                desktop: false,
               }}
               menuDrawer={{
                 mobile: false,
