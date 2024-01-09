@@ -121,7 +121,6 @@ export const IndexPage = () => {
       list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] || [] }]
     } else {
       const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === indexPagecurrentSelectLabel)[0]?.data
-      console.log(data, 'dataa')
       list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
     }
     if(subGameactiveTab!== 'All'){
