@@ -10,5 +10,5 @@ export const LoginButton = styled.button`
   &:hover {
     opacity: 0.9;
   }
-  background: linear-gradient(180deg, #45CCF7 0%, #0044C7 100%);
+  background: linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);
 `

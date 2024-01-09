@@ -148,7 +148,7 @@ export const Header = (props: IHeader) => {
         <div className="flex-1 flex justify-end">
           <LoginButton className={"text-white text-lg"} onClick={() => {
             props.onClickUserLoginStatusDrawer()
-          }}>Connecte-se</LoginButton>
+          }}>Conecte-se</LoginButton>
         </div>
       )}
 

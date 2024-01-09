@@ -26,13 +26,13 @@ const CancelButton = styled.button`
   padding: 10px 0;
   border-radius: 8px;
   font-size: 16px;
-  background: linear-gradient(180deg, #FFEF61 0%, #FF7E21 100%);
+  background: linear-gradient(180deg, var(--secondary-main-from) 0%, var(--secondary-main-to) 100%);
 `;
 const ConfirmButton = styled.button`
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
-  background: linear-gradient(180deg, #45CCF7 0%, #0044C7 99%);
+  background: linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 99%);
   border-radius: 8px;
 `;
 
@@ -114,7 +114,7 @@ export const EditUserInfoModal = ({
         className={tcx(
           `
           flex w-[400px] md:w-[656px] flex-col items-center rounded-2xl px-8 pt-8 pb-10 text-white
-          bg-gradient-to-b from-[#577DDE] to-[#000691]
+          bg-gradient-to-b from-[var(--background-modal-from)] to-[var(--background-modal-from)]
           `,
           ['w-[382px] px-6 pt-4 pb-5', isMobile]
         )}

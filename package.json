@@ -10,6 +10,9 @@
     "format": "pnpm nx format:write --projects app,mobile",
     "serve:glegend": "cross-env NODE_ENV=development NODE_COUNTRY=legend pnpm nx serve gambling -c=dev-legend",
     "serve:gbmw": "cross-env NODE_ENV=development NODE_COUNTRY=bmw pnpm nx serve gambling -c=dev-bmw",
+    "serve:gwild777bet": "cross-env NODE_ENV=development NODE_COUNTRY=wild777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-wild777bet",
+    "serve:gpernambucana777bet": "cross-env NODE_ENV=development NODE_COUNTRY=pernambucana777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-pernambucana777bet",
+
     "prepare:g": "husky install",
     "build:g:proto:deprecated": "protoc ./apps/gambling/proto/**.proto --js_out=./proto",
     "build:g:protojs": "sh ./apps/gambling/proto/protoc_pb.sh",
@@ -26,8 +29,6 @@
     "serve:gpurasorte777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-coco777bet-v5",
     "build:gpurasorte777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v5 --verbose",
 
-    "serve:griojunglebet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_DEV_SERVER_PROXY=coco777bet pnpm nx serve gambling -c=dev-u2-v1-riojungle777bet",
-    "build:griojunglebet": "cross-env NODE_ENV=production NODE_DEV_SERVER_PROXY=coco777bet pnpm nx run-many --target=build --projects=gambling --configuration=prod-u2-v1-riojungle777bet --verbose",
     "serve:gnatal777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-coco777bet-v6",
     "build:gnatal777bet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-coco777bet-v6 --verbose",
     "serve:gcarnaval777bet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-coco777bet-v7",
@@ -35,7 +36,12 @@
     "serve:gsambafortunebet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_COUNTRY=coco777bet pnpm nx serve gambling -c=dev-u1-v8-sambafortunebet",
     "build:gsambafortunebet": "cross-env NODE_ENV=production NODE_COUNTRY=hxj-dev pnpm nx run-many --target=build --projects=gambling --configuration=prod-u1-v8-sambafortunebet --verbose",
 
+    "serve:gbrasilslotsbet": "cross-env NODE_ENV=development NODE_COUNTRY=coco777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-u1-m2-mv1-v10-brasilbet",
+    "build:gbrasilslotsbet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-u1-m2-mv1-v10-brasilbet --verbose",
 
+
+    "serve:griojunglebet": "cross-env NODE_DEV_SERVER_HOST_IP=192.168.50.112 NODE_ENV=development NODE_DEV_SERVER_PROXY=coco777bet pnpm nx serve gambling -c=dev-u2-v1-riojungle777bet",
+    "build:griojunglebet": "cross-env NODE_ENV=production NODE_DEV_SERVER_PROXY=coco777bet pnpm nx run-many --target=build --projects=gambling --configuration=prod-u2-v1-riojungle777bet --verbose",
 
     "serve:min": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve:in mobile -c=development",
     "serve:mpk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve:pk mobile -c=development",
@@ -54,6 +60,7 @@
     "e2e:min:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-in --watch --baseUrl=https://frontend.com",
     "e2e:mpk:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-pk --watch --baseUrl=https://frontend.com",
     "e2e:mbd:w:domain": "cross-env NODE_ENV=development nx run mobile-e2e:e2e:dev-bd --watch --baseUrl=https://frontend.com",
+
     "serve:ain:56": "cross-env NODE_UI_VERSION=56 NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
     "serve:ain:57": "cross-env NODE_UI_VERSION=57 NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
     "serve:ain:58": "cross-env NODE_UI_VERSION=58 NODE_ENV=development NODE_COUNTRY=in pnpm nx serve-in app -c=development",
