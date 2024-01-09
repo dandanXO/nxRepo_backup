@@ -58,7 +58,7 @@ export const TelegramPage = (props: ITelegramPage) => {
         title={isMobile && <div className={"w-full text-center font-bold"}>Canal De Telegram</div>}
       />
 
-      <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-3 md:mt-0`} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_telegram.png`} bannerText={
+      <Banner imgClassName={`rounded-lg mb-4 md:mb-8 mt-3 md:mt-0`} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_telegram.png`} bannerText={
         <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
           <div className={"text-white text-base sm:text-3xl md:text-4xl  lg:text-5xl font-bold lg:mb-2"}>Sample wordingptas y</div>
           <div className={"text-white text-base sm:text-3xl md:text-4xl lg:text-5xl font-bold"}>reconoces que has leído la .</div>
@@ -78,7 +78,7 @@ export const TelegramPage = (props: ITelegramPage) => {
 
       <section className={"flex justify-center items-center invisible sm:visible"}>
         <GoToTelegram onClick={props.handleClickToTelegram} className={"text-white text-lg "}>
-          <img className={"w-[30px] mr-4"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />
+          <img className={"w-[30px] mr-4"} src={`assets/${environment.uVersion}/icon=telegram.png`} />
           Junte-se</GoToTelegram>
       </section>
     </div>

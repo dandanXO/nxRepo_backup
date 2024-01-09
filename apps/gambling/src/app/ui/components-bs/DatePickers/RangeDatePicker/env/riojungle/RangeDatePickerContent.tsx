@@ -9,7 +9,7 @@ export const RangeDatePickerContent = ({
       <img
         alt='calendar'
         className='w-[28px] h-[28px]'
-        src={`assets/${environment.assetPrefix}/Calendar.png`}
+        src={`assets/${environment.uVersion}/Calendar.png`}
       />
       {value[0]}
       {' - '}

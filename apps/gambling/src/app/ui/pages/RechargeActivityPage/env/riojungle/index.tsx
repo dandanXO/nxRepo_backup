@@ -15,7 +15,7 @@ export const RechargeActivityPage = () => {
    <PageContainer className={"text-white"}>
      {/*Banner*/}
      <div className='relative w-full mt-1 sm:mt-2 lg:mt-5'>
-       <img alt='banner' src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/banner_20.png`}/>
+       <img alt='banner' src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_20.png`}/>
        <div className='absolute left-3 sm:left-10 lg:left-16 top-1/2 -translate-y-1/2'>
          <div className='text-xl sm:text-[36px] sm:leading-[36px] lg:text-[60px] lg:leading-[60px] font-bold'>Bem-estar Oferta <br/> de depósito Ate</div>
          <button

@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  assetPrefix: "coco777bet",
+  uVersion: "coco777bet",
   assetVersionPrefix: "v7",
   mockBackend: false,
   platformName: "Dev Carnaval777Bet",

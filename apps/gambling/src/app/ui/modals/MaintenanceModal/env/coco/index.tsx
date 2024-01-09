@@ -48,7 +48,7 @@ export const CocoMaintenanceModal = (props: IMaintenanceModal) => {
           'w-[290px] h-[290px] mb-6 mt-[-74px]': !isMobile,
           "w-[150px] h-[150px] mb-6 mt-[-99px]": isMobile
         })}>
-          <img className={'w-full h-full'} src={`assets/${environment.assetPrefix}/maintenance_popup_icon.png`} alt={'icon'} />
+          <img className={'w-full h-full'} src={`assets/${environment.uVersion}/maintenance_popup_icon.png`} alt={'icon'} />
         </div>
         <div className="overflow-auto flex-1">
           <Paragraph text={'Prezados usuários VIP:'} />

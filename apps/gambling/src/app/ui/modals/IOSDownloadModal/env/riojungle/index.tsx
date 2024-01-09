@@ -36,7 +36,7 @@ export const RiojungleIOSDownloadModal = () => {
               Toque no ícone “Mais” e, em seguida, toque em Adicionar ao ecrã principal
             </div>
 
-            <img className="w-full mb-5" alt="guid-line"  src={`assets/${environment.assetPrefix}/add to home screen first_1.png`}/>
+            <img className="w-full mb-5" alt="guid-line"  src={`assets/${environment.uVersion}/add to home screen first_1.png`}/>
 
             <div className="text-base leading-5 text-white mb-5">
               Clique em Adicionar e selecione ”Adicionar”
@@ -60,7 +60,7 @@ export const RiojungleIOSDownloadModal = () => {
                       Adicionar
                     </div>
                     <img
-                      src={`assets/${environment.assetPrefix}/hand3.png`}
+                      src={`assets/${environment.uVersion}/hand3.png`}
                       alt="hand icon"
                       className="w-12 h-12 absolute top-6 left-[20px]"
                     />
@@ -98,7 +98,7 @@ export const RiojungleIOSDownloadModal = () => {
               </div>
             </div>
             <img
-                  src={`assets/${environment.assetPrefix}/hand1.png`}
+                  src={`assets/${environment.uVersion}/hand1.png`}
                   alt="hand icon"
                   className="w-12 h-12 relative left-[50%] -translate-x-2/4 bottom-2"
                 />

@@ -11,7 +11,7 @@ export const LoadingLogo = (props: ILogo) => {
       "w-[140px] h-[140px]",
       // "border-[4px] border-solid border-[var(--white)] rounded-[14.25px]",
       props.className
-    )} src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo-loading.png`}/>
+    )} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/logo-loading.png`}/>
     // <img className={twMerge("w-[50px] h-[50px]", props.className)} src={AssetMappingCoco["logo"]}/>
   )
 }

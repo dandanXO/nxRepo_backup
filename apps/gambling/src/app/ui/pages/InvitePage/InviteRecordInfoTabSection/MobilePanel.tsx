@@ -41,7 +41,7 @@ export const MobilePanel = ({
   onOrangeRecordDateSelect
 }: IMobilePanel) => {
 
-  const isCoco777bet=environment.assetPrefix === 'coco777bet';
+  const isCoco777bet=environment.uVersion === 'coco777bet';
   return (
     <div>
       <section className={"mb-4"}>

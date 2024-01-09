@@ -31,7 +31,7 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
             Primeiro depósito <br/> + bônus de {recharge_first_cashback_rate}
           </p>
           <img
-              src={`assets/${environment.assetPrefix}/h5_banner_1.jpeg`}
+              src={`assets/${environment.uVersion}/h5_banner_1.jpeg`}
           />
         </div>
       ) : (
@@ -51,7 +51,7 @@ export const AppCarouselContent = (props: IAppCarouselContent) => {
             Primeiro depósito <br/> bônus de 20%
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/banner1.jpeg`}
+            src={`assets/${environment.uVersion}/banner1.jpeg`}
             // className="rounded-box"
           />
         </div>

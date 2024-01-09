@@ -21,7 +21,7 @@ const NoData = () => {
     <td colSpan={2} className='!bg-[#333333]'>
       <div className="bg-[#333333] p-2">
         <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
-          <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
+          <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
       </div>
@@ -32,7 +32,7 @@ const NoDataMobile = () => {
   return (
       <div className="bg-[#333333] p-2">
         <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
-          <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
+          <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
       </div>
@@ -81,7 +81,7 @@ export const InviteSettlementRecordPage = () => {
               <button className="py-1.5 px-5 mr-2 text-lg shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] flex flex-row  cursor-pointer justify-center items-center rounded-[100px]" onClick={() => {
                 refresh(moment().subtract(7, 'days').format('YYYY-MM-DD 00:00:00'), moment().format('YYYY-MM-DD 23:59:59'));
               }}>Registros de liquidação
-                <img className="w-[24px] h-[24px]" alt="reload" src={`assets/${environment.assetPrefix}/Repeat.png`}/>
+                <img className="w-[24px] h-[24px]" alt="reload" src={`assets/${environment.uVersion}/Repeat.png`}/>
               </button>
             </section>)
           }
@@ -91,7 +91,7 @@ export const InviteSettlementRecordPage = () => {
                 <button className="py-2.5 px-5 mr-2 mb-3 text-lg w-full shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] flex flex-row  cursor-pointer justify-center items-center rounded-[100px]" onClick={() => {
                   refresh(moment().subtract(7, 'days').format('YYYY-MM-DD 00:00:00'), moment().format('YYYY-MM-DD 23:59:59'));
                 }}>Registros de liquidação
-                  <img className="w-[24px] h-[24px]" alt="reload" src={`assets/${environment.assetPrefix}/Repeat.png`}/>
+                  <img className="w-[24px] h-[24px]" alt="reload" src={`assets/${environment.uVersion}/Repeat.png`}/>
                 </button>
                 <Index
                   min='2023-01-01'
@@ -155,14 +155,14 @@ export const InviteSettlementRecordPage = () => {
                         )}
                       >
                         <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                          <div className='font-bold text-[var(--white-40)]'>Hora De Entrada</div>
+                          <div className='text-[#B3B3B3)]'>Hora De Entrada</div>
                           <div>
                             <span className='mr-1'>{moment(record.updateTime).format('DD.MM-YYYY HH:mm:ss')}</span>
                           </div>
                         </div>
                         <div className={'flex flex-row justify-between border-[var(--white-20)] p-2'}>
-                          <span className={'text-[var(--white-40)]'}>Bônus</span>
-                          <span className={''}>{formatLocaleMoney(record.reward / 100)}</span>
+                          <span className={'text-[#B3B3B3] font-normal'}>Bônus</span>
+                          <span className={''}>R$ {formatLocaleMoney(record.reward / 100)}</span>
                         </div>
                       </div>
                     )

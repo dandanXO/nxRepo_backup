@@ -31,7 +31,7 @@ export const DailySignInRecordPage = () => {
 
   const columns = [
     { title: 'ID', name: 'id', key: 'id' },
-    { title: 'Nivel VIP', name: 'vip_level', key: 'vip_level' },
+    { title: 'Nivel VIP', name: 'vip_level', key: 'vip_level', render: (record: any) => `LV${record.vip_level}`  },
     { title: 'Coleta Contínua', name: 'days', key: 'days', render: (record: any) => record.days === 1 ? `${record.days}dia` : `${record.days}dias` },
     { title: 'Obter Recompensas', name: 'cashback', key: 'cashback', render: (record: any) => `R$ ${formatLocaleMoney(record.cashback / 100)}` },
     { title: 'Tempo', name: 'created_at', key: 'created_at' },
@@ -69,7 +69,7 @@ export const DailySignInRecordPage = () => {
           /> */}
           <Table
             className='!bg-[#333333]'
-            titleStyle='text-sm border-transparent !border-x-0 text-[var(--white-40)]'
+            titleStyle='text-sm border-transparent !border-x-0 text-[var(--grayscale-70)]'
             contentStyle='text-base !border-x-0 !border-b !py-6'
             fetchData={handleFetchData}
             dataSource={records}

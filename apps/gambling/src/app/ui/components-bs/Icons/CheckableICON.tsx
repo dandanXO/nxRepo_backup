@@ -7,9 +7,9 @@ export const CheckableICON = (props: ICheckableICON) => {
   return (
     <>
       {!props.isChecked ? (
-        <img className="w-[24px] h-[24px]" src={`assets/${environment.assetPrefix}/icon=uncheckbox.png`} />
+        <img className="w-[24px] h-[24px]" src={`assets/${environment.uVersion}/icon=uncheckbox.png`} />
       ) : (
-        <img className="w-[24px] h-[24px]" src={`assets/${environment.assetPrefix}/icon=checkbox.png`} alt="Checked" />
+        <img className="w-[24px] h-[24px]" src={`assets/${environment.uVersion}/icon=checkbox.png`} alt="Checked" />
       )}
     </>
   )

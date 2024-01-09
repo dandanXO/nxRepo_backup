@@ -19,8 +19,8 @@ const SignInButton = styled.div<{
   disable: boolean
 }>`
   background-image: url(${props =>
-    props.disable?`assets/${environment.assetPrefix}/daily_sign_in_button_disable.png`:
-                  `assets/${environment.assetPrefix}/daily_sign_in_button.png`});
+    props.disable?`assets/${environment.uVersion}/daily_sign_in_button_disable.png`:
+                  `assets/${environment.uVersion}/daily_sign_in_button.png`});
   background-size: 100%;
   width: 20vw;
   height: calc(0.33 * 20vw);
@@ -28,7 +28,7 @@ const SignInButton = styled.div<{
 `
 
 const DayItem = styled.div`
-  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_wrapper.png");
+  background-image: url("assets/${environment.uVersion}/daily_sign_in_wrapper.png");
   background-size: 100%;
   background-repeat: no-repeat;
 `
@@ -37,13 +37,13 @@ const Container = styled.div`
   margin-top: 50px;
   width: 70vw;
   height: calc(0.48 * 70vw);
-  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_container.png");
+  background-image: url("assets/${environment.uVersion}/daily_sign_in_container.png");
   background-size: 100%;
   background-repeat: no-repeat;
 `
 
 const BackGround = styled.div`
-  background-image: url("assets/${environment.assetPrefix}/bg_desktop.png");
+  background-image: url("assets/${environment.uVersion}/bg_desktop.png");
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -57,17 +57,17 @@ const LevelButton = styled.button.attrs<{className?:string}>((props)=>({
 `
 
 const CurrentButton = styled(LevelButton)`
-  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_current_vip.png");
+  background-image: url("assets/${environment.uVersion}/daily_sign_in_current_vip.png");
   background-size: 100%;
 
 `
 
 const OtherButton = styled(LevelButton)`
-  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_other_vip.png");
+  background-image: url("assets/${environment.uVersion}/daily_sign_in_other_vip.png");
   background-size: 100%;
 `
 const DisableButton = styled(LevelButton) `
-  background-image: url("assets/${environment.assetPrefix}/daily_sign_in_button_checked.png");
+  background-image: url("assets/${environment.uVersion}/daily_sign_in_button_checked.png");
   background-size: 100%;
 `
 
@@ -146,8 +146,8 @@ export const CocoLevelList = ({
                 <div>
                   {
                     level === currentLevel ?
-                      <img className='w-6 h-6' alt='current' src={`assets/${environment.assetPrefix}/daily_sign_in_current_mark.png`} />
-                      : <img className='w-6 h-6' alt='lock' src={`assets/${environment.assetPrefix}/daily_sign_in_lock.png`}/>
+                      <img className='w-6 h-6' alt='current' src={`assets/${environment.uVersion}/daily_sign_in_current_mark.png`} />
+                      : <img className='w-6 h-6' alt='lock' src={`assets/${environment.uVersion}/daily_sign_in_lock.png`}/>
                   }
                 </div>
               )
@@ -225,7 +225,7 @@ export const DayList = ({
                     <img
                       className={tcx('w-[90px]', ['w-[72px]', isMobile])}
                       alt='money'
-                      src={`assets/${environment.assetPrefix}/daily_sign_in_money.png`}
+                      src={`assets/${environment.uVersion}/daily_sign_in_money.png`}
                     />
                   </div>
                 )
@@ -241,7 +241,7 @@ export const DayList = ({
             {
               checked && (
                 <div className='absolute top-[30%] left-[50%] translate-x-[-50%] w-[80px]'>
-                  <img alt='checked-icon' src={`assets/${environment.assetPrefix}/daily_sign_in_checked.png`}/>
+                  <img alt='checked-icon' src={`assets/${environment.uVersion}/daily_sign_in_checked.png`}/>
                 </div>
               )
             }
@@ -369,8 +369,8 @@ const CocoDailySignInPage = ({
             >
               <div className='text-2xl font-medium text-white mt-[14%]'>Colete cupons</div>
             </SignInButton>
-            <img className='absolute left-0 top-[50%] translate-x-[-90%] translate-y-[-50%] w-[35%]' alt='hook' src={`assets/${environment.assetPrefix}/daily_sign_in_god.png`}/>
-            <img className='absolute top-0 left-[50%] translate-x-[-50%] translate-y-[-85%] w-[95%]' alt='title' src={`assets/${environment.assetPrefix}/daily_sign_in_title.png`}/>
+            <img className='absolute left-0 top-[50%] translate-x-[-90%] translate-y-[-50%] w-[35%]' alt='hook' src={`assets/${environment.uVersion}/daily_sign_in_god.png`}/>
+            <img className='absolute top-0 left-[50%] translate-x-[-50%] translate-y-[-85%] w-[95%]' alt='title' src={`assets/${environment.uVersion}/daily_sign_in_title.png`}/>
 
             <div className='absolute bottom-0 translate-y-[80px] left-[50%] translate-x-[-50%] text-[#fcff00] text-center text-3xl'>Nível atual: VIP{vipLevel}</div>
           </Container>

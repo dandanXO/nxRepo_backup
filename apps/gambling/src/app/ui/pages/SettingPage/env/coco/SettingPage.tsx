@@ -55,7 +55,7 @@ export const SettingPage = ({
         <ListItem title={
           <div className={"w-full flex flex-row justify-between items-center"}>
             <div className={"flex flex-row justify-center items-center gap-[10px]"}>
-              <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon_account_phone.png`} alt="phone" />
+              <img className='w-5 h-5' src={`assets/${environment.uVersion}/icon_account_phone.png`} alt="phone" />
               <div>Número de telefone</div>
             </div>
             <div>{phone}</div>
@@ -65,7 +65,7 @@ export const SettingPage = ({
         <ListItem title={
           <div className={"w-full flex flex-row justify-between items-center"}>
             <div className={"flex flex-row justify-center items-center gap-[10px]"}>
-              <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon_user.png`} alt="user" />
+              <img className='w-5 h-5' src={`assets/${environment.uVersion}/icon_user.png`} alt="user" />
               <div>Apelido</div>
             </div>
             <div className='flex gap-2 items-center'>
@@ -84,7 +84,7 @@ export const SettingPage = ({
         <ListItem isEnd={true} title={
           <div className={"w-full flex flex-row justify-between items-center"}>
             <div className={"flex flex-row justify-center items-center gap-[10px]"}>
-              <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon_account_version.png`} alt="version" />
+              <img className='w-5 h-5' src={`assets/${environment.uVersion}/icon_account_version.png`} alt="version" />
               <div>Verifique actualizações</div>
             </div>
             <div>{"1.0.1"}</div>
@@ -98,7 +98,7 @@ export const SettingPage = ({
         <ListItem isEnd={true} title={
             <div className={"w-full flex flex-row justify-between items-center"}>
               <div className={"flex flex-row justify-center items-center gap-[10px]"}>
-                <img className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon=terms.png`} alt="terms" />
+                <img className='w-5 h-5' src={`assets/${environment.uVersion}/icon=terms.png`} alt="terms" />
                 <div>Politica de Privacidade</div>
               </div>
             </div>

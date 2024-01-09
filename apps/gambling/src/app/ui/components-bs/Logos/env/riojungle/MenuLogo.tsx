@@ -9,7 +9,7 @@ export const MenuLogo = (props: ILogo) => {
       alt="logo-menu"
       // className="max-w-[56px] max-h-[56px]"
       className={twMerge("w-[148px] h-[58px]", props.className)}
-      src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/logo.png`}
+      src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/logo.png`}
     />
   )
 }

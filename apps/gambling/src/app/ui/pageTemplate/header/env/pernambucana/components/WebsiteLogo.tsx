@@ -11,7 +11,7 @@ export const WebsiteLogo = () => {
       <a>
         <img onClick={() => {
           onClickToIndex()
-        }} alt={"logo"} src={`assets/${environment.assetPrefix}/LOGO.png`}/>
+        }} alt={"logo"} src={`assets/${environment.uVersion}/LOGO.png`}/>
       </a>
     </div>
   )

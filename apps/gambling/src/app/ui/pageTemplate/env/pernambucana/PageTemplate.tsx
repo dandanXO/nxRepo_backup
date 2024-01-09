@@ -48,15 +48,15 @@ export const StyledPage = styled.div.attrs((props) => ({
     top: 0;
     left: 0;
     z-index: -2;
-    background: url("assets/${environment.assetPrefix}/bg_web.png") center bottom no-repeat;
+    background: url("assets/${environment.uVersion}/bg_web.png") center bottom no-repeat;
 
     @media (max-width: 768px) {
-      background: url("assets/${environment.assetPrefix}/bg_h5.png") center bottom /130% auto;
+      background: url("assets/${environment.uVersion}/bg_h5.png") center bottom /130% auto;
     }
   }
 
   ${(props) => props.isCurrentPageCompanyProfile && `
-    background: url("assets/${environment.assetPrefix}/bg.888bcf29.png") no-repeat center center/100% auto;
+    background: url("assets/${environment.uVersion}/bg.888bcf29.png") no-repeat center center/100% auto;
     background-color:#090b0f;
   `};
   @media (min-width: 640px) {
@@ -240,7 +240,7 @@ showToolboxConfig
 
       {isUILoading && (
         <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
-          <img className={"w-[60px] mb-6"} src={`/assets/${environment.assetPrefix}/logo_h5.png`}/>
+          <img className={"w-[60px] mb-6"} src={`/assets/${environment.uVersion}/logo_h5.png`}/>
           <ThreeDots height={25} className={'inline-block'} />
         </div>
       )}

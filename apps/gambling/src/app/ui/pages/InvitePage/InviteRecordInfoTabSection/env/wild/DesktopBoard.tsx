@@ -10,19 +10,19 @@ import { environment } from "apps/gambling/src/environments/environment";
 const BlueBoardContainer = styled.div`
   //background: linear-gradient(45deg,#194BCA 0%,#5392FE 100%);
   //box-shadow: inset 0 -8px 17px #0ab8f5;
-  background: url("assets/${environment.assetPrefix}/invite_dashboard_1.png") center center no-repeat;
+  background: url("assets/${environment.uVersion}/invite_dashboard_1.png") center center no-repeat;
 `
 
 const GreenBoardContainer = styled.div`
   //background: linear-gradient(45deg,#478E51 0%,#5DDC54 100%);
   //box-shadow: inset 0 -8px 17px #72fc6c;
-  background: url("assets/${environment.assetPrefix}/invite_dashboard_2.png") center center no-repeat;
+  background: url("assets/${environment.uVersion}/invite_dashboard_2.png") center center no-repeat;
 `
 
 const OrangeBoardContainer = styled.div`
   //background: linear-gradient(45deg,#FC6728 0%,#F7B122 100%);
   //box-shadow: inset 0 -8px 17px #ffb558;
-  background: url("assets/${environment.assetPrefix}/invite_dashboard_3.png") center center no-repeat;
+  background: url("assets/${environment.uVersion}/invite_dashboard_3.png") center center no-repeat;
 `
 
 export const DesktopBoard = (props: IBoardData) => {

@@ -13,7 +13,7 @@ const StyledTotalSectionContainer = styled.div`
 `;
 
 const TotalSectionTopContent = styled.div`
-  background-image: url(assets/${environment.assetPrefix}/Group.png) ,linear-gradient(to top, var(--btn-gradient1-from) 30%, var(--btn-gradient1-to) 100%);
+  background-image: url(assets/${environment.uVersion}/Group.png) ,linear-gradient(to top, var(--btn-gradient1-from) 30%, var(--btn-gradient1-to) 100%);
   border-radius: 19px;
 `;
 

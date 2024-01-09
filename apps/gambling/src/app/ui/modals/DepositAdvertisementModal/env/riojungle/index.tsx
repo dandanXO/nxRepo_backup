@@ -22,12 +22,12 @@ export const DepositAdvertisementModal = ({
     >
       <img
         alt='close'
-        className='absolute cursor-pointer top-2 right-2 w-12' src={`assets/${environment.assetPrefix}/WXCircle.png`}
+        className='absolute cursor-pointer top-2 right-2 w-12' src={`assets/${environment.uVersion}/WXCircle.png`}
         onClick={()=>close()}
       />
       <img
         alt='genie'
-        src={`assets/${environment.assetPrefix}/${environment.assetVersionPrefix}/deposit-genie.png`}
+        src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/deposit-genie.png`}
         className='w-3/5 -mt-[50px] sm:-mt-[50px]'
       />
 

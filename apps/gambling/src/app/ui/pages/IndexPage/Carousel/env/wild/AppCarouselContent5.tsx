@@ -29,7 +29,7 @@ export const AppCarouselContent5 = (props: IAppCarouselContent) => {
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/h5_banner_5.jpeg`}
+            src={`assets/${environment.uVersion}/h5_banner_5.jpeg`}
           />
         </div>
       ) : (
@@ -49,7 +49,7 @@ export const AppCarouselContent5 = (props: IAppCarouselContent) => {
             <span>Convide Amigos A maior recompensa para<br/>uma pessoa é R$20</span>
           </p>
           <img
-            src={`assets/${environment.assetPrefix}/banner5.jpeg`}
+            src={`assets/${environment.uVersion}/banner5.jpeg`}
             // className="rounded-box"
           />
         </div>

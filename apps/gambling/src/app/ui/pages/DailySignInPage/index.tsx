@@ -90,8 +90,8 @@ export const LevelList = ({
         const isReachLevel = numberValue === currentSelectedLevel
         const LevelButton = isReachLevel ? CurrentLevelButton : OtherLevelButton;
         const vipIcon = isReachLevel
-          ? `assets/${environment.assetPrefix}/icon_vip_box_open.png`
-          : `assets/${environment.assetPrefix}/icon_vip_box_open.png`;
+          ? `assets/${environment.uVersion}/icon_vip_box_open.png`
+          : `assets/${environment.uVersion}/icon_vip_box_open.png`;
           return (
             <LevelButton
               className={tcx('mr-3 p-2 text-3xl rounded-xl', ['p-1 pr-2 text-base rounded-lg', isMobile])}
@@ -105,7 +105,7 @@ export const LevelList = ({
                 alt={isReachLevel ?"king" : "lock"}
                 src={currentLevel >= numberValue
                   ? vipIcon
-                  : `assets/${environment.assetPrefix}/icon_vip_box_close.png`
+                  : `assets/${environment.uVersion}/icon_vip_box_close.png`
                 }
               />
               <span className={'text-[#fff] font-bold'}>VIP{numberValue}</span>

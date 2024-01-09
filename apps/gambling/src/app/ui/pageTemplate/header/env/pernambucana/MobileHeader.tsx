@@ -46,7 +46,7 @@ export const MobileHeader = (props: IMobileHeader) => {
             <img
               alt={"logo"}
               className={""}
-              src={`assets/${environment.assetPrefix}/logo_h5.png`}
+              src={`assets/${environment.uVersion}/logo_h5.png`}
 
             />
           </a>

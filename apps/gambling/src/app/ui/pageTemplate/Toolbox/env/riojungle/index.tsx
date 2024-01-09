@@ -53,7 +53,7 @@ export const Toolbox = (props: IToolbox) => {
             {mobileShowDownload && (
               <div className={"mb-2"}>
                 <ToolButton isMobile={!isDesktop} className='bg-[var(--primary-main)]' onClick={props.onClickToDownload}>
-                  <img alt={"download"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.assetPrefix}/icon-download-mobile.png`}/>
+                  <img alt={"download"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.uVersion}/icon-download-mobile.png`}/>
                 </ToolButton>
               </div>
             )}
@@ -63,7 +63,7 @@ export const Toolbox = (props: IToolbox) => {
                   <ToolButton isMobile={!isDesktop} className='bg-[var(--secondary-main)]' onClick={() => {
                     dispatch(appSlice.actions.setShowTelegramDetailContactModal(true))
                   }}>
-                    <img alt={"telegram"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.assetPrefix}/icon-telegram-mobile.png`} />
+                    <img alt={"telegram"} className={twMerge("w-8", isMobile && "w-6")} src={`assets/${environment.uVersion}/icon-telegram-mobile.png`} />
                   </ToolButton>
                 </div>
               )
@@ -82,7 +82,7 @@ export const Toolbox = (props: IToolbox) => {
                   <div className={"text-xs font-light mb-2"}>Download</div>
                   <ToolButton
                     onClick={props.onClickToDownload}>
-                    <img alt={"download"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-download.png`}/>
+                    <img alt={"download"} className="w-[40px]" src={`assets/${environment.uVersion}/icon-download.png`}/>
                   </ToolButton>
                 </FixedToolContainer>
               )
@@ -101,7 +101,7 @@ export const Toolbox = (props: IToolbox) => {
                             dispatch(appSlice.actions.setShowTelegramDetailContactModal(true))
                           }}
                         >
-                          <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.assetPrefix}/icon-telegram.png`}/>
+                          <img alt={"telegram"} className="w-[40px]" src={`assets/${environment.uVersion}/icon-telegram.png`}/>
                         </ToolButton>
                       </div>
                     )

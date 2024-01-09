@@ -20,7 +20,7 @@ const NoData = () => {
   return (
     <td colSpan={2} className=''>
       <div className='p-12'>
-        <img style={{ display: 'unset' }} className={'h-[100px] margin-auto'} src={`assets/${environment.assetPrefix}/noData.png`} />
+        <img style={{ display: 'unset' }} className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
         <div>Nada aqui</div>
       </div>
     </td>

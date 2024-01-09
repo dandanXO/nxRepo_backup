@@ -7,7 +7,7 @@ const {environment} = require("./environment");
 // See: https://nx.dev/guides/using-tailwind-css-in-react#step-4:-applying-configuration-to-libraries
 
 
-const config = join(__dirname, '../src/environments/' + environment.assetPrefix + 'tailwind.config.js');
+const config = join(__dirname, '../src/environments/' + environment.uVersion + 'tailwind.config.js');
 console.log("config", config);
 
 module.exports = {

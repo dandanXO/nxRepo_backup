@@ -8,6 +8,6 @@ type IICON = {
 }
 export const NoData = (props: IICON) => {
   return (
-    <img className={tcx('h-[100px]', props.className)} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />
+    <img className={tcx('h-[100px]', props.className)} alt="NoData" src={`assets/${environment.uVersion}/noData.png`} />
   )
 }

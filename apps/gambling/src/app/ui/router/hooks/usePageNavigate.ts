@@ -9,6 +9,7 @@ import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { uiSlice } from "../../../reduxStore/uiSlice";
 import { IPanelType } from "../../pages/WallletPage";
+import { gameSlice } from "../../../reduxStore/gameSlice";
 
 
 export interface IQueryStringProps{
@@ -30,6 +31,7 @@ export const usePageNavigate = () => {
   const { isDesktop } = useBreakpoint();
 
   const onClickToIndex = () => {
+    dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel('Todos'))
     navigate(PageOrModalPathEnum.IndexPage)
   }
 

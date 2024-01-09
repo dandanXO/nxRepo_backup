@@ -40,7 +40,7 @@ export const MenuDrawerContent = () => {
       <div className="user-info flex flex-col justify-center items-center mb-3.5 relative">
         <div className="w-[80px] px-2.5 flex flex-col justify-center self-start items-center">
           <img
-            src={`assets/${environment.assetPrefix}/icon_vip_info.png`}
+            src={`assets/${environment.uVersion}/icon_vip_info.png`}
             className={'w-[39px] h-[37px] mb-1.5'}
           />
           <div className="text-white text-base">VIP {userInfo.vip_level || 0}</div>
@@ -66,7 +66,7 @@ export const MenuDrawerContent = () => {
         text={'Canal De Telegram'}
         className={`py-1.5 justify-between after:bg-gradient-to-b from-[var(--button-drawer-linear01-from)] to-[var(--button-drawer-linear01-to)]`}
         iconSuffix={true}
-        icon={<img className="w-[14px] h-[14px]" alt={"telegram"} src={`assets/${environment.assetPrefix}/icon=telegram.png`} />}
+        icon={<img className="w-[14px] h-[14px]" alt={"telegram"} src={`assets/${environment.uVersion}/icon=telegram.png`} />}
         onClick={() => {
           onClickToTelegram();
           closeMenuDrawer();
@@ -100,7 +100,7 @@ export const MenuDrawerContent = () => {
       <MobileMenuLink
         text={'Bónus de Convite'}
         className="text-white mt-1 mb-6"
-        icon={<img className="w-[14px] h-[14px] mr-2" alt={"invite"} src={`assets/${environment.assetPrefix}/icon=treasure.png`} />}
+        icon={<img className="w-[14px] h-[14px] mr-2" alt={"invite"} src={`assets/${environment.uVersion}/icon=treasure.png`} />}
         onClick={() => {
           onClickToInvite();
           closeMenuDrawer();
@@ -109,7 +109,7 @@ export const MenuDrawerContent = () => {
       <MobileMenuLink
         text={'Introdução ao nível VIP'}
         className="text-white"
-        icon={<img className="w-[14px] h-[14px] mr-2" alt={"vip"} src={`assets/${environment.assetPrefix}/icon=vip.png`} />}
+        icon={<img className="w-[14px] h-[14px] mr-2" alt={"vip"} src={`assets/${environment.uVersion}/icon=vip.png`} />}
         onClick={() => {
           onClickToVipGrade();
           closeMenuDrawer();
@@ -118,7 +118,7 @@ export const MenuDrawerContent = () => {
       <MobileMenuLink
         text={'Sobre nós'}
         className="text-white"
-        icon={<img className="w-[14px] h-[14px] mr-2" alt={"about"} src={`assets/${environment.assetPrefix}/icon=building.png`} />}
+        icon={<img className="w-[14px] h-[14px] mr-2" alt={"about"} src={`assets/${environment.uVersion}/icon=building.png`} />}
         onClick={() => {
           onClickToCompanyProfile();
           closeMenuDrawer();

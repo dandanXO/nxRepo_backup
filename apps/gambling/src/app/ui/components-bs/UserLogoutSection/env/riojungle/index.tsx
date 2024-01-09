@@ -9,7 +9,7 @@ export const UserLogoutSection = ({
   <div className='flex flex-col gap-8 text-white'>
     <img
       alt='close'
-      className='cursor-pointer absolute top-2 right-2 sm:right-6 sm:top-5 w-12 sm:w-10' src={`assets/${environment.assetPrefix}/WXCircle.png`}
+      className='cursor-pointer absolute top-2 right-2 sm:right-6 sm:top-5 w-12 sm:w-10' src={`assets/${environment.uVersion}/WXCircle.png`}
       onClick={onHandleCancel}
     />
     <div className='mt-[56px] sm:mt-[60px] text-sm sm:text-xl'>Tem certeza que deseja sair?</div>

@@ -54,7 +54,7 @@ export const MyPage = ({
           onClick={onClickToNotification}
         >
           <div className='relative'>
-            <img alt='notification' className='w-8 h-8' src={`assets/${environment.assetPrefix}/ic_notification.png`}/>
+            <img alt='notification' className='w-8 h-8' src={`assets/${environment.uVersion}/ic_notification.png`}/>
             {messageCount !== 0 && (<div
               className="absolute -top-2 -right-2 bg-red-600 rounded-full flex justify-center items-center w-5 h-5 text-center">{messageCount}</div>)}
           </div>
@@ -69,7 +69,7 @@ export const MyPage = ({
           <div className='mt-[22px] text-sm font-medium text-white'>{user.nickname}</div>
           <div className='mt-2 flex gap-1 text-white text-sm'>
             <div>ID: {user.user_id}</div>
-            <CopyIcon copyText={user.user_id} icon={<img alt='cooy' className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon=copy.png`} />} />
+            <CopyIcon copyText={user.user_id} icon={<img alt='cooy' className='w-5 h-5' src={`assets/${environment.uVersion}/icon=copy.png`} />} />
           </div>
         </div>
 
@@ -183,7 +183,7 @@ export const MyPage = ({
           onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}
         >
           <div>Sair</div>
-          <img alt='signOut' className='w-5 h-5' src={`assets/${environment.assetPrefix}/icon=sign-out.png`}/>
+          <img alt='signOut' className='w-5 h-5' src={`assets/${environment.uVersion}/icon=sign-out.png`}/>
         </button>
 
       </div>

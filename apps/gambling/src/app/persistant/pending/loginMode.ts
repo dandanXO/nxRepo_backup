@@ -90,7 +90,7 @@ const userinfo = {
   "created_at": 1696919651,
   "ab": "A",
   "ab_open": 0,
-  "alterarImg": `https://ds.bmw777slots.com/assets/${environment.assetPrefix}/alterar_2.9083d2ef.png`
+  "alterarImg": `https://ds.bmw777slots.com/assets/${environment.uVersion}/alterar_2.9083d2ef.png`
 }
 const bank = {}
 const ip = "wss://m.bmw777slots.com/websocket";

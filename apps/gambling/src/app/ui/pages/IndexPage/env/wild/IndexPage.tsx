@@ -158,7 +158,7 @@ export const IndexPage = ({
               <div className="shirnk-0 grow-0 basis-[150px]">
                 <Input
                   className="items-baseline"
-                  prefix={<img src={`assets/${environment.assetPrefix}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
+                  prefix={<img src={`assets/${environment.uVersion}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
                   onChange={(event: any) => {
                     setSearchInput(event.target.value)
                   }}
