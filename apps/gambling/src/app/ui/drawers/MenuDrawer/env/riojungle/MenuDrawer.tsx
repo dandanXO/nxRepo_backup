@@ -350,7 +350,9 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                 </div>
               )
             })}
-
+            <div className={"w-full flex flex-col px-5"}>
+              <div className="opacity-50 bg-gradient-to-r from-transparent via-white to-transparent h-px"></div>
+            </div>
             <div className={"w-full flex flex-col px-5"}>
               <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
                 // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
@@ -361,6 +363,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                 close();
               }}>
                 <img
+                  alt="icon＿favorite"
                   src={icon＿favorite}
                   className="w-5"
                 />
