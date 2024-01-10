@@ -4,7 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 
 import {Input} from "../../../../components-bs/Inputs/Input";
-import {useNavigate} from "react-router";
+import { useLocation } from 'react-router';
 
 import {IndexTabs} from "./IndexTabs";
 
@@ -23,6 +23,7 @@ import {CompanySloganLabel} from "./CompanySloganLabel";
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
 import {useDispatch, useSelector} from "react-redux";
+import { gameSlice } from "../../../../../reduxStore/gameSlice";
 import {RootState} from "../../../../../reduxStore";
 import {ScrollTab} from "../../../../components-bs/TabItem/ScrollTab";
 import {AppCarouselContent7} from "../../Carousel/env/coco/AppCarouselContent7";
@@ -79,16 +80,23 @@ export const IndexPage = ({
   recentGameList
 }:ICoco777betIndexPage) => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { isMobile } = useBreakpoint();
   const { isLogin } = useSelector((state: RootState) => state.app);
   const {onClickToSearch, onClickGameItem } = usePageNavigate();
-
-  // useEffect(() => {
-  //   if (activeTab === "Todos") {
-  //     setActiveTab("Salão")
-  //   }
-  // }, [])
-
+  const { indexPagecurrentSelectLabel } = useSelector((state: any) => state.gameList);
+  useEffect(() => {
+    // 初始化 使用 redux
+    if (indexPagecurrentSelectLabel === "nothing_select") {
+      dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel('Todos'))
+    }
+  }, [])
+  useEffect(() => {
+    if(location?.state?.gameTab){
+      dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(location.state.gameTab));
+    }
+  }, [location])
+  console.log(location, 'location')
   const [isMoving, setIsMoving] = useState(false);
   const DesktopXPadding = "!pl-12 !pr-[90px]";
 
@@ -156,10 +164,10 @@ export const IndexPage = ({
                 {/* <section className={"flex flex-row items-center bg-[#000C26] px-0.5 w"}> */}
                 <IndexTabs
                   hideIcon={true}
-                  activeTab={activeTab}
+                  activeTab={indexPagecurrentSelectLabel}
                   label={label}
-                  setActiveTab={(tab: number) => {
-                    setActiveTab(tab);
+                  setActiveTab={(tab) => {
+                    dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(tab));
                     scrollToCarousel()
                   }}
                   setViewType={setViewType}
@@ -182,7 +190,12 @@ export const IndexPage = ({
           <div className={"flex flex-row justify-center items-center"}>
             <div className="grow min-w-[100px] mr-2">
               <ScrollTab className="items-center">
-                <IndexTabs activeTab={activeTab} label={label} setActiveTab={setActiveTab} setViewType={setViewType} />
+                <IndexTabs activeTab={indexPagecurrentSelectLabel} label={label} 
+                  setActiveTab={(tab) => {
+                    console.log(tab, 'tab')
+                    dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(tab));
+                  }}
+                  setViewType={setViewType} />
               </ScrollTab>
             </div>
 
