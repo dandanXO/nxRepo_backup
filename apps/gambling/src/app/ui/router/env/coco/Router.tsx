@@ -117,8 +117,8 @@ export const AppRouter = () => {
               }}
               tabBar={{
                 mobile: true,
-                tablet: true,
-                desktop: true,
+                tablet: false,
+                desktop: false,
               }}
               menuDrawer={{
                 mobile: false,
