@@ -1,9 +1,9 @@
 export const environment = {
-  production: true,
+  production: false,
   uVersion: "u1",
-  mvVersion: "m1mv9v12",
+  mvVersion: "m1v9",
   mockBackend: false,
-  platformName: "BreezeSlotsBet",
+  platformName: "Dev BreezeSlotsBet",
   platformGroup: "O LGD Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",

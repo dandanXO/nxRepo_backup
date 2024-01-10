@@ -1,10 +1,10 @@
 export const environment = {
   production: false,
   uVersion: "u1",
-  mvVersion: "m1mv9v12",
+  mvVersion: "m2v1",
   mockBackend: false,
-  platformName: "Dev BreezeSlotsBet",
-  platformGroup: "O LGD Group",
+  platformName: "Dev BrasilSlotsBet",
+  platformGroup: "O E STAR Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",
   captcha: "/japi/user/captcha/image",

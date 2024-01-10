@@ -11,6 +11,12 @@
         "hmr": true
       },
       "configurations": {
+        "dev-bmw": {
+          "buildTarget": "gambling:build:dev-bmw"
+        },
+        "dev-legend": {
+          "buildTarget": "gambling:build:dev-legend"
+        },
         "dev-wild777bet": {
           "buildTarget": "gambling:build:dev-wild777bet"
         },
@@ -41,20 +47,14 @@
         "dev-u1-v8-sambafortunebet":  {
           "buildTarget": "gambling:build:dev-u1-v8-sambafortunebet"
         },
-        "dev-u2-m1-mv1-v9-riojungle777bet": {
-          "buildTarget": "gambling:build:dev-u2-m1-mv1-v9-riojungle777bet"
+        "dev-v10-u1-m2v1-brasilbet": {
+          "buildTarget": "gambling:build:dev-v10-u1-m2v1-brasilbet"
         },
-        "dev-bmw": {
-          "buildTarget": "gambling:build:dev-bmw"
+        "dev-v12-u1-m1v9-breezeslotsbet": {
+          "buildTarget": "gambling:build:dev-v12-u1-m1v9-breezeslotsbet"
         },
-        "dev-legend": {
-          "buildTarget": "gambling:build:dev-legend"
-        },
-        "dev-u1-m2-mv1-v10-brasilbet": {
-          "buildTarget": "gambling:build:dev-u1-m2-mv1-v10-brasilbet"
-        },
-        "dev-u1-m1-mv9-v12-breezeslotsbet": {
-          "buildTarget": "gambling:build:dev-u1-m1-mv9-v12-breezeslotsbet"
+        "dev-v9-u2-m1v1-riojungle777bet": {
+          "buildTarget": "gambling:build:dev-v9-u2-m1v1-riojungle777bet"
         }
       }
     },
@@ -88,15 +88,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/bmw/environment.dev.ts"
+              "with": "apps/gambling/src/environments/deprecated/bmw/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/bmw/theme.css"
+              "with": "apps/gambling/src/environments/deprecated/bmw/theme.css"
             },
             {
               "replace": "apps/gambling/src/index.replacement.html",
-              "with": "apps/gambling/src/environments/bmw/index.html"
+              "with": "apps/gambling/src/environments/deprecated/bmw/index.html"
             }
           ],
           "extractLicenses": false,
@@ -108,15 +108,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/legend/environment.dev.ts"
+              "with": "apps/gambling/src/environments/deprecated/legend/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/legend/theme.css"
+              "with": "apps/gambling/src/environments/deprecated/legend/theme.css"
             },
             {
               "replace": "apps/gambling/src/index.replacement.html",
-              "with": "apps/gambling/src/environments/legend/index.html"
+              "with": "apps/gambling/src/environments/deprecated/legend/index.html"
             }
           ],
           "extractLicenses": false,
@@ -128,15 +128,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/pernambucana777bet/environment.dev.ts"
+              "with": "apps/gambling/src/environments/deprecated/pernambucana777bet/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/pernambucana777bet/theme.css"
+              "with": "apps/gambling/src/environments/deprecated/pernambucana777bet/theme.css"
             },
             {
               "replace": "apps/gambling/src/index.replacement.html",
-              "with": "apps/gambling/src/environments/pernambucana777bet/index.html"
+              "with": "apps/gambling/src/environments/deprecated/pernambucana777bet/index.html"
             }
           ],
           "extractLicenses": false,
@@ -170,15 +170,15 @@
           "fileReplacements": [
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/wild777bet/environment.dev.ts"
+              "with": "apps/gambling/src/environments/deprecated/wild777bet/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/wild777bet/theme.css"
+              "with": "apps/gambling/src/environments/deprecated/wild777bet/theme.css"
             },
             {
               "replace": "apps/gambling/src/index.replacement.html",
-              "with": "apps/gambling/src/environments/wild777bet/index.html"
+              "with": "apps/gambling/src/environments/deprecated/wild777bet/index.html"
             }
           ],
           "extractLicenses": false,
@@ -602,7 +602,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "dev-u2-m1-mv1-v9-riojungle777bet": {
+        "dev-v9-u2-m1v1-riojungle777bet": {
           "postcssConfig": "apps/gambling/src/environments/u2/postcss.config.js",
           "fileReplacements": [
             {
@@ -615,11 +615,11 @@
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/u2/v1/environment.dev.ts"
+              "with": "apps/gambling/src/environments/u2/m1v1/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/u2/v1/index.html"
+              "with": "apps/gambling/src/environments/u2/m1v1/index.html"
             }
           ],
           "extractLicenses": false,
@@ -627,7 +627,7 @@
           "sourceMap": true,
           "vendorChunk": true
         },
-        "prod-u2-m1-mv1-v9-riojungle777bet": {
+        "prod-v9-u2-m1v1-riojungle777bet": {
           "postcssConfig": "apps/gambling/src/environments/u2/postcss.config.js",
           "fileReplacements": [
             {
@@ -640,11 +640,11 @@
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/u2/v1/environment.prod.ts"
+              "with": "apps/gambling/src/environments/u2/m1v1/environment.prod.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/u2/v1/index.html"
+              "with": "apps/gambling/src/environments/u2/m1v1/index.html"
             }
           ],
           "optimization": true,
@@ -654,7 +654,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "dev-u1-m2-mv1-v10-brasilbet": {
+        "dev-v10-u1-m2v1-brasilbet": {
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
@@ -663,15 +663,15 @@
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/u1/m2mv1v10/theme.css"
+              "with": "apps/gambling/src/environments/u1/m2v1/theme.css"
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/u1/m2mv1v10/environment.dev.ts"
+              "with": "apps/gambling/src/environments/u1/m2v1/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/u1/m2mv1v10/index.html"
+              "with": "apps/gambling/src/environments/u1/m2v1/index.html"
             }
           ],
           "optimization": true,
@@ -681,7 +681,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "prod-u1-m2-mv1-v10-brasilbet": {
+        "prod-v10-u1-m2v1-brasilbet": {
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
@@ -690,15 +690,15 @@
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/u1/m2mv1v10/theme.css"
+              "with": "apps/gambling/src/environments/u1/m2v1/theme.css"
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/u1/m2mv1v10/environment.prod.ts"
+              "with": "apps/gambling/src/environments/u1/m2v1/environment.prod.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/u1/m2mv1v10/index.html"
+              "with": "apps/gambling/src/environments/u1/m2v1/index.html"
             }
           ],
           "optimization": true,
@@ -708,7 +708,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "dev-u1-m1-mv9-v12-breezeslotsbet": {
+        "dev-v12-u1-m1v9-breezeslotsbet": {
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
@@ -721,11 +721,11 @@
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/u1/m1mv9v12/environment.dev.ts"
+              "with": "apps/gambling/src/environments/u1/m1v9/environment.dev.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/u1/m1mv9v12/index.html"
+              "with": "apps/gambling/src/environments/u1/m1v9/index.html"
             }
           ],
           "optimization": true,
@@ -735,7 +735,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "prod-u1-m1-mv9-v12-breezeslotsbet": {
+        "prod-v12-u1-m1v9-breezeslotsbet": {
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
@@ -748,11 +748,11 @@
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
-              "with": "apps/gambling/src/environments/u1/m1mv9v12/environment.prod.ts"
+              "with": "apps/gambling/src/environments/u1/m1v9/environment.prod.ts"
             },
             {
               "replace": "apps/gambling/src/index.html",
-              "with": "apps/gambling/src/environments/u1/m1mv9v12/index.html"
+              "with": "apps/gambling/src/environments/u1/m1v9/index.html"
             }
           ],
           "optimization": true,
