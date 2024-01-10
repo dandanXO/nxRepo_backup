@@ -1,0 +1,113 @@
+:root {
+  --font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;;
+
+  /*bg*/
+  --main: #025C50;
+  --varient: #014F4B;
+  --assistant: #013E42;
+  --medium: #069D5C;
+  --light: #31B77D;
+
+  /*bg-other*/
+  --game-block: #013E42;
+  --footer: #005B46;
+
+  /*main*/
+  --main-primary-main: #16FF8F;
+  --main-primary-varient: #047A70;
+  --main-primary-assistant: #10DB8D;
+  --main-secondary-main: #FBFF3F;
+  --main-state-error: #FF7777;
+  --main-state-warning: #FFCF45;
+
+  /*table*/
+  --table-main: #008B8D;
+  --table-varient: #006D79;
+  --table-asisstant: #005265;
+  --table-light: #58DCC7;
+
+  /*button*/
+  /*btn/button*/
+  --btn-gradient1-from: #C8F568;
+  --btn-gradient1-to: #16FF8F;
+
+  /*btn/button_2*/
+  --btn-gradient2-from: #56F0D6;
+  --btn-gradient2-to: #8499FD;
+
+  /*btn/button_inactive*/
+  --btn-gradient-inactive-from: #D9D9D9;
+  --btn-gradient-inactive-to: #C2C2C2;
+
+  /*btn/icon*/
+  --btn-gradient-icon-from: #99EDFF;
+  --btn-gradient-icon-to: #16FF8F;
+
+  /*btn-vip*/
+  --btn-gradient-vip-from: #FE6060;
+  --btn-gradient-vip-to: #FFA24D;
+
+  /*dashboard*/
+  /*dashboard/block_1*/
+  --dashboard-block1-gradient-from: #8692FF;
+  --dashboard-block1-gradient-to: #55F1D5;
+  /*dashboard/block_2*/
+  --dashboard-block2-gradient-from: #1EE59E;
+  --dashboard-block2-gradient-to: #E2FD97;
+  /*dashboard/block_3*/
+  --dashboard-block3-gradient-from: #FFA73F;
+  --dashboard-block3-gradient-to: #FFB8B8;
+
+
+  /*dashboard/dashboard_base*/
+  --dashboard-base: #F2FFDD;
+  /*dashboard/block_1*/
+  --dashboard-block1: #6432F1;
+
+  /*dashboard/block_2*/
+  --dashboard-block2: #028350;
+  /*dashboard/block_3*/
+  --dashboard-block3: #CA044B;
+
+
+
+  /*text*/
+  /*text/telegram*/
+  --text-telegram: #003BC6;
+  /*text/black*/
+  --black: #000000;
+  /*text/white*/
+  --white: #FFFFFF;
+  /*text/grey*/
+  --gray: #D9D9D9;
+
+  /*text-dashboard*/
+  --text-block1: #6432F1;
+  /*text-ad*/
+  --text-gradient-ad-from: #FFEF00;
+  --text-gradient-ad-to: #FFC100;
+
+  /*text-ad_tg*/
+  --text-gradient-ad-tg-from: #D071FD;
+  --text-gradient-ad-tg-to: #003BC6;
+
+  --tab-primary-from: #013E42;
+  --tab-primary-to: #013E42;
+  --tab-text-color-normal: #2CFD99;
+  --tab-text-color-active: #E5F041;
+
+
+  --input-text-color: #ffffff;
+  --input-placeholder-color: #d2afff;
+  /*--input-mobile-border: transparent;*/
+  --input-border: #5a3af7b3;
+  --input-background: #341972;
+  --input-focus-background: #E47174;
+  --input-focus-border: #1A7BFF;
+  --input-invalidation-border: #8B619E;
+  --input-invalidation-text-color: #E47174;
+
+  --drawer-bg: #17103F;
+  --drawer-border: rgba(50,63,91,.7);
+}
+
