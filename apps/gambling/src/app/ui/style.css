@@ -139,14 +139,14 @@ html {
 }
 .table th {
   text-transform: none;
-  background: var(--primary-variant);
+  background: var(--table-thead);
 }
 .table :where(tbody th, tbody td) {
-  background: rgb(from var(--primary-assistant) r g b / 20%);
+  background: var(--table-tbody);
 }
 
 .table-zebra tbody tr:nth-child(even) td {
-  background: rgb(from var(--white) r g b / 20%);
+  background: var(--table-tbody-zebra);
 }
 
 /* scrollbar for safari - 滾軸出現時，thead 不壓縮 */
@@ -189,35 +189,35 @@ html {
 
   /* scrollbar */
   /* Works on Firefox */
-  .riojungle777bet-customTable-tbody,
-  .riojungle777bet-game-search-list {
+  .u2-customTable-tbody,
+  .u2-game-search-list {
     scrollbar-width: thin;
     scrollbar-color: var(--secondary-main);
   }
-  .riojungle777bet-customTable-tbody::-webkit-scrollbar,
-  .riojungle777bet-game-search-list::-webkit-scrollbar {
+  .u2-customTable-tbody::-webkit-scrollbar,
+  .u2-game-search-list::-webkit-scrollbar {
     width: 8px;
     height: 10px;
     background: #4D4D4D;
     position: relative;
     border-radius: 10px;
   }
-  .riojungle777bet-customTable-tbody::-webkit-scrollbar-track,
-  .riojungle777bet-game-search-list::-webkit-scrollbar-track {
+  .u2-customTable-tbody::-webkit-scrollbar-track,
+  .u2-game-search-list::-webkit-scrollbar-track {
     background: transparent;
     position: absolute;
     top:0;
     right: 0;
-    border-radius: 10px;
+    /* border-radius: 10px; */
   }
- .riojungle777bet-customTable-tbody::-webkit-scrollbar-thumb,
- .riojungle777bet-game-search-list::-webkit-scrollbar-thumb {
+ .u2-customTable-tbody::-webkit-scrollbar-thumb,
+ .u2-game-search-list::-webkit-scrollbar-thumb {
     background: var(--secondary-main);
     border-radius: 10px;
   }
 
   /* thead出現滾軸時，預留的scroll寬度 */
-  .riojungle777bet-customTable-thead-scrollPadding{
+  .u2-customTable-thead-scrollPadding{
     padding-right: 8px;
   }
 

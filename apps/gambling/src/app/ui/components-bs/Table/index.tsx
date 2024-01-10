@@ -72,7 +72,7 @@ export const Table = (props: ITable) => {
     <div className={tcx('h-full w-full overflow-hidden flex flex-col', props?.containerClassName)}>
       <div className={tcx(`${environment.uVersion}-customTable-thead customTable-thead`, ['customTable-thead-scrollPadding', isScrollbarVisible])}>
         <table className='relative table w-full no-scrollbar table-fixed'>
-          <thead className=''>
+          <thead className='bg-[var(--table-thead)] text-[var(--table-thead-text)]'>
             {columns?.map((col: any, colIndex: number) => {
               if (col.isShow !== undefined ? col.isShow : true) {
                 return (
@@ -95,8 +95,8 @@ export const Table = (props: ITable) => {
         </table>
       </div>
       <div className={`${environment.uVersion}-customTable-tbody customTable-tbody h-full overflow-y-auto flex-1`} ref={tbodyRef} onScroll={handleOnScroll}>
-        <table className={tcx('table-zebra relative table w-full table-fixed h-full')}>
-          <tbody className='h-full'>
+        <table className={tcx('table-zebra relative table w-full table-fixed')}>
+          <tbody className=' bg-[var(--table-tbody)] [&>*:nth-child(even)]:bg-[var(--table-tbody-zebra)] text-[var(--table-tbody-text)]'>
             {dataSource.length === 0 ? <tr>
               <NoData />
             </tr> :

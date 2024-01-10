@@ -224,6 +224,13 @@
   --table-asisstant: #005265;
   --table-light: #26E5FF;
 
+  /* Table 樣式 */
+  --table-thead: var(--grayscale-20);
+  --table-thead-text:var(--grayscale-70);
+  --table-tbody: var(--grayscale-20);
+  --table-tbody-zebra: var(--grayscale-20);
+  --table-tbody-text:var(--grayscale-100);
+
   /*button*/
   /*btn/button*/
   --btn-gradient1-from: #58DDFF;

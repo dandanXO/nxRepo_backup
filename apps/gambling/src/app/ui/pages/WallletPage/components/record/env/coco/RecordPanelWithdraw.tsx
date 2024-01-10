@@ -81,7 +81,7 @@ export const RecordPanelWithdraw = () => {
   }, [withdrawRecordData?.data])
 
   return (
-    <div className='h-[40vh] rounded-xl overflow-hidden'>
+    <div className='max-h-[40vh] rounded-xl overflow-hidden'>
       {contextHolder}
       <Table
         fetchData={handleFetchData}
