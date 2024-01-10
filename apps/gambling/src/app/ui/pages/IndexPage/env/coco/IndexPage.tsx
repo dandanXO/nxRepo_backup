@@ -96,7 +96,6 @@ export const IndexPage = ({
       dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(location.state.gameTab));
     }
   }, [location])
-  console.log(location, 'location')
   const [isMoving, setIsMoving] = useState(false);
   const DesktopXPadding = "!pl-12 !pr-[90px]";
 
