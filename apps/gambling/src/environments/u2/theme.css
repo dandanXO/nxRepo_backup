@@ -312,5 +312,10 @@
   --gray-scale-10: #1A1A1A;
 
 
+  /* scrollbar */
+  --scrollbar-width: 8px;
+  --scrollbar-color: var(--secondary-main);
+  --scrollbar-background: var(--grayscale-30);
+  --scrollbar-rounded: 10px;
 
 }

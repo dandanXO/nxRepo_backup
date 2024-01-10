@@ -155,71 +155,40 @@ html {
     padding-right: 0px;
   }
 }
-/* scrollbar */
-/* Works on Firefox */
-.customTable-tbody {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(170, 170, 170,0.6);
-}
-
-/* Works on Chrome, Edge, and Safari */
-.customTable-tbody::-webkit-scrollbar {
-  width: 3px;
-  height: 10px;
-  background: transparent;
-  position: relative;
-}
-.customTable-tbody::-webkit-scrollbar-track {
-  background: transparent;
-  position: absolute;
-  top:0;
-  right: 0;
-
-}
-.customTable-tbody::-webkit-scrollbar-thumb {
-  background: rgba(170, 170, 170,0.6);
-
-}
-
-/* thead出現滾軸時，預留的scroll寬度 */
-.customTable-thead-scrollPadding{
-  padding-right: 3px;
-}
-
-
   /* scrollbar */
   /* Works on Firefox */
-  .u2-customTable-tbody,
+  .customTable-tbody,
   .u2-game-search-list {
     scrollbar-width: thin;
-    scrollbar-color: var(--secondary-main);
+    scrollbar-color: var(--scrollbar-color);
   }
-  .u2-customTable-tbody::-webkit-scrollbar,
+  .customTable-tbody::-webkit-scrollbar,
   .u2-game-search-list::-webkit-scrollbar {
-    width: 8px;
+    width: var(--scrollbar-width);
     height: 10px;
-    background: #4D4D4D;
+    background:  var(--scrollbar-background);
     position: relative;
-    border-radius: 10px;
+    border-radius: var(--scrollbar-rounded);
   }
-  .u2-customTable-tbody::-webkit-scrollbar-track,
+  .customTable-tbody::-webkit-scrollbar-track,
   .u2-game-search-list::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--scrollbar-background);
     position: absolute;
     top:0;
     right: 0;
-    /* border-radius: 10px; */
+    border-radius: var(--scrollbar-rounded);
   }
- .u2-customTable-tbody::-webkit-scrollbar-thumb,
+ .customTable-tbody::-webkit-scrollbar-thumb,
  .u2-game-search-list::-webkit-scrollbar-thumb {
-    background: var(--secondary-main);
-    border-radius: 10px;
+    background: var(--scrollbar-color);
+    border-radius: var(--scrollbar-rounded);
   }
 
   /* thead出現滾軸時，預留的scroll寬度 */
-  .u2-customTable-thead-scrollPadding{
-    padding-right: 8px;
+  .customTable-thead-scrollPadding{
+    padding-right:var(--scrollbar-width);
   }
+
 
 
 .vip-tab-items::-webkit-scrollbar {

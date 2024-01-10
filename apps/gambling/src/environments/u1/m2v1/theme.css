@@ -245,5 +245,9 @@
   --tab-text-color-normal: #FFFFFF;
   --tab-text-color-active: #FFFFFF;
 
-
+  /* scrollbar */
+  --scrollbar-width: 3px;
+  --scrollbar-color: var(--white-20);
+  --scrollbar-background: 'transparent';
+  --scrollbar-rounded: 10px;
 }
