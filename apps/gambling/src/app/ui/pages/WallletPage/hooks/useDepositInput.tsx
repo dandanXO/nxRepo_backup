@@ -23,7 +23,7 @@ export const useDepositInput = (props: IDepositPanel) => {
       setInputValue({
         data: inputValue,
         isValidation: false,
-        errorMessage: `Depósito mínimo ${minimunValue}`
+        errorMessage: `Depósito mínimo R$ ${minimunValue}`
       });
       return;
     } else if (Number(inputValue) > maximunValue) {

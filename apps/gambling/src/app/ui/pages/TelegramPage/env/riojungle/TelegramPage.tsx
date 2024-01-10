@@ -6,7 +6,7 @@ import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNav
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { VIPBorderStyleContainer } from "../../../../components/VIPBorderStyleContainer";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 import { FragmentContainer } from "../../../../components/FragmentContainer";
 import cx from 'classnames';
 import { Banner } from "../../../../components/Banner";
@@ -25,7 +25,7 @@ export const TelegramPage = (props: ITelegramPage) => {
   useAllowLoginRouterRules();
   const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const bannerImg = `${isMobile ? 'h5_' : isTablet ? 'tablet_' : ''}banner_telegram.png`
-  const bannerSrc = `assets/${environment.uVersion}/${environment.assetVersionPrefix}/${bannerImg}`
+  const bannerSrc = `assets/${environment.uVersion}/${environment.mvVersion}/${bannerImg}`
 
   return (
 

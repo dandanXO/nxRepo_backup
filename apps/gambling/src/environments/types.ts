@@ -1,1 +1,1 @@
-export type PlatformNames = "coco777bet" | "wild777bet" | "riojungle777bet";
+export type UVersions = "u1" | "u2" | "wild777bet";

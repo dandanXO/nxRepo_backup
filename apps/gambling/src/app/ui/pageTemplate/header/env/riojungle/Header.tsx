@@ -21,6 +21,7 @@ import { MenuLogo } from "../../../../components-bs/Logos/MenuLogo";
 import { MenuMediumLogo } from "../../../../components-bs/Logos/env/riojungle/MenuMediumLogo";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";
 import searchSVGICON from "./MagnifyingGlass.svg";
+import { Button } from "../../../../components-bs/Buttons/env/riojungle/Button";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -182,33 +183,25 @@ const UserActionSection = () => {
   const dispatch = useDispatch();
   return (
     <div className="flex-1 flex justify-end mr-4">
-      <button
-        id="BtnloginRoot"
-        className="w-[91px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] flex flex-row justify-center pt-1 cursor-pointer items-start rounded-lg mr-3"
+      <Button
+        className="bg-[var(--secondary-main)] text-sm md:text-base lg:text-xl py-2.5 px-4 md:py-2 lg:py-1.5 mr-3 rounded-lg"
         onClick={() => {
           // props.onClickUserLoginStatusDrawer()
           dispatch(appSlice.actions.setLoginUIStatusType("login"));
           dispatch(appSlice.actions.showLoginDrawerOrModal(true))
         }}
-      >
-        <div className="text-xl font-['Inter'] font-medium leading-[28px] text-white mb-1">
-          Entrar
-        </div>
-      </button>
+        text={'Entrar'}
+      />
 
-      <button
-        id="BtnregisterRoot"
-        className="w-[112px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center pt-1 cursor-pointer items-start rounded-lg"
+      <Button
+        className="bg-[var(--primary-main)] text-sm md:text-base lg:text-xl py-2.5 px-4 md:py-2 lg:py-1.5 rounded-lg"
         onClick={() => {
           // props.onClickUserLoginStatusDrawer()
           dispatch(appSlice.actions.setLoginUIStatusType("register"));
           dispatch(appSlice.actions.showLoginDrawerOrModal(true))
         }}
-      >
-        <div className="text-xl font-['Inter'] font-medium leading-[28px] text-white mb-1">
-          Registro
-        </div>
-      </button>
+        text={'Cadastre-Se'}
+      />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { LeaveGameConfirmModal as CocoLeaveGameConfirmModal } from './env/coco'
 import { LeaveGameConfirmModal as RioLeaveGameConfirmModal } from './env/riojungle'
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 import {BaseModal} from "../BaseModal";
 
 export interface ILeaveGameConfirmModalProps {
@@ -17,14 +17,14 @@ export const LeaveGameConfirmModal = ({
   return (
     <BaseModal>
       {
-        renderByPlatform({
-          "coco777bet": (
+        renderByUVersion({
+          "u1": (
             <CocoLeaveGameConfirmModal
               onConfirm={onConfirm}
               onClose={onClose}
             />
           ),
-          "riojungle777bet": (
+          "u2": (
             <RioLeaveGameConfirmModal
               onConfirm={onConfirm}
               onClose={onClose}

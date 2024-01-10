@@ -9,7 +9,7 @@ import {PhonePrefix} from "../../../../components/PhonePrefix";
 import {useUserLoginForm} from "../../../../hooks/useUserLoginForm";
 
 
-import {renderByPlatform} from "../../../../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../../../../utils/renderByUVersion";
 
 import {ConfirmButton} from "../../../../components/ConfirmButton";
 import {ConfirmButton as CocoConfirmButton} from "../../../../../Buttons/ConfirmButton";

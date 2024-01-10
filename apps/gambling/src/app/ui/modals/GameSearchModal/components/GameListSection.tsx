@@ -23,7 +23,7 @@ interface IGameListSection {
   expandedBrand?:boolean;
 }
 export const GameListSection = (props: IGameListSection) => {
-  const { isMobile } = useBreakpoint();
+  const { isMobile ,isDesktop} = useBreakpoint();
   const { headerClassName, icon, title, className, gameListClassName, children, isShowHeader = true } = props;
 
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
@@ -92,9 +92,9 @@ export const GameListSection = (props: IGameListSection) => {
             <div className=''>{icon && icon}</div>
             <div className='text-base md:text-lg lg:text-2xl items-center flex'>{title}</div>
           </div>
-          {!isMobile && isOverflowedX && <PrevAndNextButtons handleClickToLeft={handleClickToLeft} handleClickToRight={handleClickToRight}/>}
+          {isDesktop && isOverflowedX && <PrevAndNextButtons handleClickToLeft={handleClickToLeft} handleClickToRight={handleClickToRight}/>}
         </div>)}
-      {!isMobile ?
+      {isDesktop ?
         (<div {...bind()} ref={scrollContainerRef} className={cx("GameListSection-PC flex flex-1 overflow-hidden", gameListClassName)}>
           {children}
         </div>)

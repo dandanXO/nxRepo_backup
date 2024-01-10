@@ -1,4 +1,4 @@
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 import { CocoDownloadModal } from "./env/coco"
 import { RiojungleDownloadModal } from "./env/riojungle"
 
@@ -7,7 +7,7 @@ export type IInitialChargeModal = {
 }
 
 export const DownloadModal = (props: IInitialChargeModal) => {
-  return renderByPlatform({
-    "riojungle777bet": <RiojungleDownloadModal {...props}/>,
+  return renderByUVersion({
+    "u2": <RiojungleDownloadModal {...props}/>,
   }, <CocoDownloadModal {...props}/>);
 }

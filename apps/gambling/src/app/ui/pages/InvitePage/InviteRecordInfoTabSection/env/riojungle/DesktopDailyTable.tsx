@@ -16,9 +16,9 @@ export const DesktopDailyTable = (props: IDailyType) => {
 
   const columns = [
     { title: 'Data', name: 'day', key: 'day' },
-    { title: 'Usuário De Recarga', name: 'numRecharge', key: 'numRecharge', render: (i: any) => `R$ ${formatLocaleMoney(i.numRecharge)}` },
-    { title: 'Primeira Recarga Recompensas', name: 'firstRecharge', key: 'firstRecharge', isShow: props.type === "1", render: (i: any) => `R$ ${formatLocaleMoney(i.firstRecharge)}` },
-    { title: 'Valor Da Transação Do Jogo', name: 'gameRecharge', key: 'gameRecharge', render: (i: any) => `R$ ${formatLocaleMoney(i.gameRecharge)}` },
+    { title: 'Usuário De Recarga', name: 'numRecharge', key: 'numRecharge' },
+    { title: 'Primeira Recarga Recompensas', name: 'firstRecharge', key: 'firstRecharge', isShow: props.type === "1", render: (i: any) => `R$ ${i.firstRecharge || '0,00'}` },
+    { title: 'Valor Da Transação Do Jogo', name: 'gameRecharge', key: 'gameRecharge', render: (i: any) => `R$ ${i.gameRecharge || '0,00'}` },
     {
       title: <div className="flex items-center justify-center">
         <div>Recompensas De Troca De Jogos</div>
@@ -31,9 +31,9 @@ export const DesktopDailyTable = (props: IDailyType) => {
           />
         </div>
       </div>,
-      name: 'gameRechargeReward', key: 'gameRechargeReward', render: (i: any) => `R$ ${formatLocaleMoney(i.gameRechargeReward)}`
+      name: 'gameRechargeReward', key: 'gameRechargeReward', render: (i: any) => `R$ ${i.gameRechargeReward || '0,00'}`
     },
-    { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward', render: (i: any) => `R$ ${formatLocaleMoney(i.totalReward)}` },
+    { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward', render: (i: any) => `R$ ${i.totalReward || '0,00'}` },
   ]
 
   return (

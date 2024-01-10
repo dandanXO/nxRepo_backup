@@ -16,7 +16,7 @@ import { useAutoUpdateBalance } from "../../../../hooks/useAutoUpdateBalance";
 import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
 import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 import { WithdrawPanel as CWithdrawPanel } from '../../env/coco/tabsContent/withdraw/WithdrawPanel';
 import { WithdrawPanel as PWithdrawPanel } from '../../env/pernambucana/tabsContent/withdraw/WithdrawPanel'
 import { WithdrawPanel as WWithdrawPanel } from '../../env/wild/tabsContent/withdraw/WithdrawPanel';
@@ -27,6 +27,8 @@ import { ButtonPro } from "../../../../components-bs/Buttons/ButtonPro";
 import moment from "moment";
 import { totalReasableSelector } from "../../../../../reduxStore/appSlice";
 import { formatLocaleMoney } from "../../../../utils/format";
+import { useNavigate } from "react-router";
+import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 
 
 
@@ -75,6 +77,7 @@ export type IWithdrawPanelCommon = {
 export const WithdrawPanel = (props: IWithdrawPanel) => {
 
   const vip_level = useSelector((state: RootState) => state.app?.vip_level)
+  const { onClickToVipGrade } = usePageNavigate();
 
   const [amountInput, setAmountInput] = useState<InputValue<string>>({
     data: '',
@@ -311,15 +314,9 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     })
   }
 
-
-  const onClickToVIP = () => {
-    window.open(PageOrModalPathEnum.VIPGradePage);
-  }
-
-
   return (
-    renderByPlatform({
-      "coco777bet": (
+    renderByUVersion({
+      "u1": (
         <CWithdrawPanel
           vip_level={vip_level}
           withdrawLimitMin={withdrawLimitMin}
@@ -340,7 +337,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           validateSelectInput={validateSelectInput}
           tipoPixOptions={tipoPixOptions}
           onClickToWithdraw={onClickToWithdraw}
-          onClickToVIP={onClickToVIP}
+          onClickToVIP={onClickToVipGrade}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
@@ -367,12 +364,12 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           validateSelectInput={validateSelectInput}
           tipoPixOptions={tipoPixOptions}
           onClickToWithdraw={onClickToWithdraw}
-          onClickToVIP={onClickToVIP}
+          onClickToVIP={onClickToVipGrade}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
         />
-      ), "riojungle777bet": (
+      ), "u2": (
         <RWithdrawPanel
           vip_level={vip_level}
           withdrawLimitMin={withdrawLimitMin}
@@ -393,7 +390,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
           validateSelectInput={validateSelectInput}
           tipoPixOptions={tipoPixOptions}
           onClickToWithdraw={onClickToWithdraw}
-          onClickToVIP={onClickToVIP}
+          onClickToVIP={onClickToVipGrade}
           onClickToWithdrawRecord={props.onClickToWithdrawRecord}
           contextHolder={contextHolder}
           isDuringRestrictTime={isDuringRestrictTime}
@@ -420,7 +417,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
         validateSelectInput={validateSelectInput}
         tipoPixOptions={tipoPixOptions}
         onClickToWithdraw={onClickToWithdraw}
-        onClickToVIP={onClickToVIP}
+        onClickToVIP={onClickToVipGrade}
         onClickToWithdrawRecord={props.onClickToWithdrawRecord}
         contextHolder={contextHolder}
         isDuringRestrictTime={isDuringRestrictTime}

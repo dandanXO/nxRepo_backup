@@ -7,12 +7,12 @@ import { NoData as CNoData } from './env/coco/NoData';
 import { NoData as PNoData } from './env/pernambucana/NoData';
 import { NoData as WNoData } from './env/wild/NoData';
 import { NoData as RNoData } from './env/riojungle/NoData';
-import { renderByPlatform } from '../../utils/renderByPlatform';
+import { renderByUVersion } from '../../utils/renderByUVersion';
 
-const NoData = ()=> renderByPlatform({
-  "coco777bet": <CNoData  />,
+const NoData = ()=> renderByUVersion({
+  "u1": <CNoData  />,
   "wild777bet": <WNoData  />,
-  "riojungle777bet": <RNoData  />,
+  "u2": <RNoData  />,
 }, <PNoData  />
 )
 
@@ -77,7 +77,7 @@ export const Table = (props: ITable) => {
               if (col.isShow !== undefined ? col.isShow : true) {
                 return (
                   <th key={col.key}
-                    className={cx(`p-2 text-center sm:break-all border-[rgba(255,255,255,0.2)]`,
+                    className={cx(`p-2 text-center break-normal border-[rgba(255,255,255,0.2)]`,
                       { 'border-r ': colIndex !== columns.length - 1 },
                       props.className,
                       props.titleStyle

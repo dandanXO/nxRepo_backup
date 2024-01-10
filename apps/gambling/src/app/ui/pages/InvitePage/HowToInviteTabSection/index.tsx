@@ -13,7 +13,7 @@ import { InviteCopySection as WInviteCopySection } from "./env/wild/InviteCopySe
 import { InviteCopySection as CInviteCopySection } from "./env/coco/InviteCopySection";
 
 import shareListImg from "../HowToInviteTabSection/env/coco/share-list.png";
-import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../utils/renderByUVersion";
 import { HowToImageText } from "./env/common/HowToImageText";
 import { HowToImage as CHowToImage } from "./env/coco/HowToImageContainer";
 import { HowToImage as WHowToImage } from "./env/wild/HowToImageContainer";
@@ -34,7 +34,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection ) => {
   return (
 
     <div className={'mb-[80px] min-w-[300px]'}>
-      {renderByPlatform({
+      {renderByUVersion({
         "wild777bet": (
           <>
             <WHowToImage className="p-4 rounded-2xl" />
@@ -42,12 +42,12 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection ) => {
           </>
         )
         ,
-        "coco777bet": (
+        "u1": (
           <>
             <CHowToImage className="p-4 sm:p-0 rounded-2xl" />
             <CQuestionContent />
           </>),
-        "riojungle777bet": <RHowToInviteTabSection {...props}/>,
+        "u2": <RHowToInviteTabSection {...props}/>,
       }, (
         <>
           <PHowToImage className="p-4 rounded-2xl" />

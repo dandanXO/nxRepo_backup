@@ -1,14 +1,14 @@
 import React from "react";
 import { TermsOfServicePage as CocoTermsOfServicePage } from './env/coco';
 import { TermsOfServicePage as RioTermsOfServicePage } from './env/riojungle';
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 
 const TermsOfServicePage = () => {
 
-  return renderByPlatform({
-    "coco777bet": <CocoTermsOfServicePage />,
-    "riojungle777bet": <RioTermsOfServicePage />
+  return renderByUVersion({
+    "u1": <CocoTermsOfServicePage />,
+    "u2": <RioTermsOfServicePage />
   }, <CocoTermsOfServicePage />)
 }
 

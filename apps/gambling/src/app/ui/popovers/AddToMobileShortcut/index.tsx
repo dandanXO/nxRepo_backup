@@ -1,4 +1,4 @@
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 import { CocoAddToMobileShortcut } from "./env/coco"
 import { RionjungleAddToMobileShortcut } from "./env/riojungle"
 
@@ -9,7 +9,7 @@ type IAddToMobileShortcut  = {
 
 
 export const AddToMobileShortcut = (props: IAddToMobileShortcut) => {
-  return renderByPlatform({
-    "riojungle777bet": <RionjungleAddToMobileShortcut {...props} />,
+  return renderByUVersion({
+    "u2": <RionjungleAddToMobileShortcut {...props} />,
   }, <CocoAddToMobileShortcut {...props} />);
 }

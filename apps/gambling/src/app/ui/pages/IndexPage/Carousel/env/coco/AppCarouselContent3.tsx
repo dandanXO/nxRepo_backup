@@ -32,9 +32,9 @@ export const AppCarouselContent3 = (props: IAppCarouselContent) => {
           A maior recompensa<br/>para uma pessoa é R${invite_hig_reward}
         </CarouselTitleSection>
         {isMobile ? (
-          <CarouselImage alt={"h5_banner_3"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/h5_banner_3.png`}/>
+          <CarouselImage alt={"h5_banner_3"} src={`assets/${environment.uVersion}/${environment.mvVersion}/h5_banner_3.png`}/>
         ): (
-          <CarouselImage alt={"banner_3"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_3.png`}/>
+          <CarouselImage alt={"banner_3"} src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_3.png`}/>
         )}
       </div>
     </CarouselContainer>

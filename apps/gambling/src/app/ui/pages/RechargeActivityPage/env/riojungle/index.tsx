@@ -15,11 +15,11 @@ export const RechargeActivityPage = () => {
    <PageContainer className={"text-white"}>
      {/*Banner*/}
      <div className='relative w-full mt-1 sm:mt-2 lg:mt-5'>
-       <img alt='banner' src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_20.png`}/>
+       <img alt='banner' src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_20.png`}/>
        <div className='absolute left-3 sm:left-10 lg:left-16 top-1/2 -translate-y-1/2'>
          <div className='text-xl sm:text-[36px] sm:leading-[36px] lg:text-[60px] lg:leading-[60px] font-bold'>Bem-estar Oferta <br/> de depósito Ate</div>
          <button
-           className='font-bold rounded-lg bg-[var(--secondary-main)] mt-3 sm:mt-8 px-2 sm:px-5 py-1 sm:py-3 text-base sm:text-xl lg:text-3xl shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'>
+           className='cursor-default font-bold rounded-lg bg-[var(--secondary-main)] mt-3 sm:mt-8 px-2 sm:px-5 py-1 sm:py-3 text-base sm:text-xl lg:text-3xl shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'>
            Ate {recharge_cashback_rate} bônus
          </button>
        </div>

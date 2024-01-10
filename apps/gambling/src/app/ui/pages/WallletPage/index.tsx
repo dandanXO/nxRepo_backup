@@ -15,7 +15,7 @@ import {
 } from "../../../reduxStore/appSlice";
 
 import { usePageNavigate } from "../../router/hooks/usePageNavigate";
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 
 import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"
 import { WalletPage as WWallletPage } from "./env/wild/WalletPage";
@@ -81,14 +81,14 @@ export const WallletPage = () => {
     }
   };
 
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": (
       <WWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
-    "coco777bet": (
+    "u1": (
       <CWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode}/>
     ),
-    "riojungle777bet": (
+    "u2": (
       <RWallletPage onClickToIndex={onClickToIndex} panelMode={panelMode} setPanelMode={setPanelMode} rechargeData={rechargeData} recordPanelMode={recordPanelMode} setRecordPanelMode={setRecordPanelMode} totalSectionValues={totalSectionValues}/>
     )
   }, (

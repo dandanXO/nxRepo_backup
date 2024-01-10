@@ -39,13 +39,13 @@ import { AppCarouselContent8 } from "../../Carousel/env/riojungle/AppCarouselCon
 import { TabItem } from "../../../../components-bs/TabItem/env/riojungle/TabItem";
 
 
-import todos from "../../../../../../assets/riojungle777bet/shared/index-tab-todos.png"
-import slots from "../../../../../../assets/riojungle777bet/shared/index-tab-slots.png"
-import vivo from "../../../../../../assets/riojungle777bet/shared/index-tab-vivo.png"
-import viver from "../../../../../../assets/riojungle777bet/shared/index-tab-viver.png"
-import favorite from "../../../../../../assets/riojungle777bet/shared/index-tab-favorite.png"
-import fishing from "../../../../../../assets/riojungle777bet/shared/index-tab-fishing.png";
-import recent from "../../../../../../assets/riojungle777bet/shared/index-tab-recent.png";
+import todos from "../../../../../../assets/u2/shared/index-tab-todos.png"
+import slots from "../../../../../../assets/u2/shared/index-tab-slots.png"
+import vivo from "../../../../../../assets/u2/shared/index-tab-vivo.png"
+import viver from "../../../../../../assets/u2/shared/index-tab-viver.png"
+import favorite from "../../../../../../assets/u2/shared/index-tab-favorite.png"
+import fishing from "../../../../../../assets/u2/shared/index-tab-fishing.png";
+import recent from "../../../../../../assets/u2/shared/index-tab-recent.png";
 import { AppCarouselContent6 } from "../../Carousel/env/riojungle/AppCarouselContent6";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 

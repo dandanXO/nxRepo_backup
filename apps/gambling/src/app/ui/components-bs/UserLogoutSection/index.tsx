@@ -11,7 +11,7 @@ import {userLogout} from "../../../usecase/userLogout";
 import {LogoutCancelButton} from "../Buttons/LogoutCancelButton";
 import {LogoutConfirmButton} from "../Buttons/LogoutConfirmButton";
 import { UserLogoutSection as RioUserLogoutSection } from "./env/riojungle";
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 
 const CancelButton = styled.button`
@@ -58,8 +58,8 @@ export const LogoutSection = (props: ILogoutPopover) => {
     navigate(PageOrModalPathEnum.IndexPage);
   }
 
-  return renderByPlatform({
-    "riojungle777bet": (
+  return renderByUVersion({
+    "u2": (
       <RioUserLogoutSection
         onHandleCancel={onHandleCancel}
         onHandleLogout={onHandleLogout}

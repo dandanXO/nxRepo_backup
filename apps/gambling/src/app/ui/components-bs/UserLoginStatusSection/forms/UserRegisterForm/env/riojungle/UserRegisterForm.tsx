@@ -14,7 +14,7 @@ import {HidableEyeSvg} from "../../../../../Icons/HidableEyeSvg";
 import {CheckableICON} from "../../../../../Icons/CheckableICON";
 import {PhonePrefix} from "../../../../components/PhonePrefix";
 import {useUserRegisterForm} from "../../../../hooks/useUserRegisterForm";
-import {renderByPlatform} from "../../../../../../utils/renderByPlatform";
+import {renderByUVersion} from "../../../../../../utils/renderByUVersion";
 
 import {ConfirmButton as CocoConfirmButton} from "../../../../../Buttons/ConfirmButton";
 import {ConfirmButton} from "../../../../components/ConfirmButton";
@@ -133,11 +133,21 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
         </div>
         <Captcha className="rounded-lg" onClickCaptcha={onClickCaptcha} imgSrc={imgSrc} isLoading={isCaptchaLoading} />
       </section>
-
+      <section className={"flex flex-row items-center mb-5 lg:mb-10 md:mt-1"}>
+        <button className={"mr-2 relative top-[1px] shrink-0"} onClick={toggleCheck}>
+          <CheckableICON isChecked={isChecked}/>
+        </button>
+        <a className={"text-white font-thin text-md"}>
+          <span className={"text-[var(--text-tertiary)] font-medium mr-1 my-2 text-sm"} onClick={toggleCheck} >Eu concordo</span>
+          <span className={"text-[var(--state-info-main)] font-medium break-all text-sm"} onClick={() => {
+            onClickToPrivacyAgreement();
+          }}>Condições, política de privacidade</span>
+        </a>
+      </section>
       <section className={"flex flex-col mb-4"}>
         {/*NOTICE: refactor*/}
-        {renderByPlatform({
-          "coco777bet": (
+        {renderByUVersion({
+          "u1": (
             <CocoConfirmButton
               className="!w-full my-2 "
               disable={!isChecked}
@@ -146,7 +156,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
               Register agora
             </CocoConfirmButton>
           ),
-          "riojungle777bet": (
+          "u2": (
             <div
               onClick={() => isChecked && onFormConfirm()}
             >
@@ -169,17 +179,7 @@ export const UserRegisterForm = (props: IUserRegisterForm) => {
 
       </section>
 
-      <section className={"flex flex-row items-center mb-4"}>
-        <button className={"mr-2 relative top-[1px] shrink-0"} onClick={toggleCheck}>
-          <CheckableICON isChecked={isChecked}/>
-        </button>
-        <a className={"text-white font-thin text-md"}>
-          <span className={"text-[var(--text-tertiary)] font-medium mr-1 my-2 text-sm"} onClick={toggleCheck} >Eu concordo</span>
-          <span className={"text-[var(--state-info-main)] font-medium break-all text-sm"} onClick={() => {
-            onClickToPrivacyAgreement();
-          }}>Condições, política de privacidade</span>
-        </a>
-      </section>
+     
 
 
     </section>

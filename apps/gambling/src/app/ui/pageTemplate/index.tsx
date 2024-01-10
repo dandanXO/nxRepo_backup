@@ -16,7 +16,7 @@ import {environment} from "../../../environments/environment";
 
 import {usePageNavigate} from "../router/hooks/usePageNavigate";
 
-import {renderByPlatform} from "../utils/renderByPlatform";
+import {renderByUVersion} from "../utils/renderByUVersion";
 import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/coco/PageTemplate";
@@ -184,7 +184,7 @@ export const PageTemplate = (props: IPage) => {
 
   return (
     <>
-      {renderByPlatform({
+      {renderByUVersion({
         "wild777bet": (
           <WPageTemplate
             isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
@@ -223,7 +223,7 @@ export const PageTemplate = (props: IPage) => {
             {props.children}
           </WPageTemplate>
         ),
-        "coco777bet": (
+        "u1": (
           <CPageTemplate
             isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
             contextHolder={contextHolder}
@@ -286,7 +286,7 @@ export const PageTemplate = (props: IPage) => {
             {props.children}
           </CPageTemplate>
         ),
-        "riojungle777bet": (
+        "u2": (
           <RiojunglePageTemplate
             showToolboxConfig={props.showToolboxConfig}
             onClickToDownload={onClickToDownload}

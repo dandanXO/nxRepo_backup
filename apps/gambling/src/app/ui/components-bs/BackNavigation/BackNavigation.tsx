@@ -1,10 +1,10 @@
 import {BackNavigation as CocoBackNavigation} from "./env/coco/BackNavigation";
 import {BackNavigation as PernambucanaBackNavigation} from "./env/pernambucana/BackNavigation";
 import {BackNavigation as WildBackNavigation} from "./env/wild/BackNavigation";
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 
-export const BackNavigation = renderByPlatform({
-    "coco777bet": CocoBackNavigation,
+export const BackNavigation = renderByUVersion({
+    "u1": CocoBackNavigation,
     "wild777bet": WildBackNavigation,
-    "riojungle777bet": CocoBackNavigation
+    "u2": CocoBackNavigation
   }, PernambucanaBackNavigation);

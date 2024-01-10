@@ -6,7 +6,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import {TailSpin} from 'react-loading-icons';
 import {environment} from "../../../../../environments/environment";
 
-import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../utils/renderByUVersion";
 import { PlayButton as CPlayButton } from "../env/coco/PlayButton";
 import { PlayButton as WPlayButton } from "../env/wild/PlayButton";
 import { PlayButton as PPlayButton } from "../env/pernambucana/PlayButton";
@@ -56,10 +56,10 @@ export const Skeleton = styled.div`
 
 `
 
-const DesktopGameItemButton = renderByPlatform({
+const DesktopGameItemButton = renderByUVersion({
   "wild777bet": WPlayButton,
-  "coco777bet": CPlayButton,
-  "riojungle777bet": RPlayButton,
+  "u1": CPlayButton,
+  "u2": RPlayButton,
 // }, PPlayButton)
 }, CPlayButton)
 
@@ -124,7 +124,10 @@ export const DesktopGameItem = (props: IItem) => {
                setOnLoad(true);
              }}
         />
-        <div className={"text-[#d7e8ff] block text-ellipsis truncate text-sm md:text-base sm:text-center w-full sm:text-center md:text-left basis-[20px] shrink-0"}>{props.name}</div>
+        <div className={cx("text-[#d7e8ff] block text-ellipsis truncate text-sm md:text-base sm:text-center w-full sm:text-center md:text-left basis-[20px] shrink-0",
+        {
+          'font-bold':hover
+        })}>{props.name}</div>
       </div>
 
       <FavoriteSection

@@ -27,7 +27,7 @@ export const RechargeActivityContent = () => {
       />
       <Banner
         imgClassName={`rounded-lg mb-4 md:mb-8 mt-6 md:mt-0`}
-        src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_10.png`}
+        src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_10.png`}
         bannerText={
           <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
             <div className={"text-white text-sm md:text-xl lg:text-4xl mb-2 md:mb-4 lg:mb-9"}>Benefícios-ofertasde deposito</div>

@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  uVersion: "coco777bet",
-  assetVersionPrefix: "v1",
+  uVersion: "u1",
+  mvVersion: "v1",
   mockBackend: false,
   captcha: "/japi/user/captcha/image",
   baseUrl: "",

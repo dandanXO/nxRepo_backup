@@ -1,7 +1,7 @@
 import moment from "moment/moment";
 import { ITabType } from "./index";
 import { CommonTableTabG } from "../../../components-bs/TabItem/CommonTableTabG";
-import { renderByPlatform } from "../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../utils/renderByUVersion";
 import DatePicker from "../../../components-bs/DatePickers/DatePicker";
 import { useState } from "react";
 import ConfirmDrawer from "../../../components-bs/Drawers/ConfirmDrawer";

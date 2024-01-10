@@ -55,9 +55,9 @@ export const StyledPage = styled.div.attrs((props) => ({
     top: 0;
     left: 0;
     z-index: -2;
-    background-image: url("assets/${environment.uVersion}/${environment.assetVersionPrefix}/bg_web.png");
+    background-image: url("assets/${environment.uVersion}/${environment.mvVersion}/bg_web.png");
     @media (max-width: 768px) {
-      background-image: url("assets/${environment.uVersion}/${environment.assetVersionPrefix}/bg_h5.png");
+      background-image: url("assets/${environment.uVersion}/${environment.mvVersion}/bg_h5.png");
     }
     background-size: cover;
     background-repeat: no-repeat;
@@ -280,7 +280,7 @@ export const PageTemplate = ({
           </div>
         )}
 
-        {!inNativeApp && (
+        {isMobile && !inNativeApp && (
           <div
             className={twMerge("fixed z-10 w-full h-[40px] md:h-[56px]",
               isShowTabbar && "bottom-[60px]",

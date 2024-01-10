@@ -18,7 +18,7 @@ import { InvitePage as CInvitePage } from './env/coco/InvitePage';
 import { InvitePage as PInvitePage } from './env/pernambucana/InvitePage';
 import { InvitePage as RInvitePage } from './env/riojungle/InvitePage';
 import { InvitePage as WInvitePage } from './env/wild/InvitePage';
-import { renderByPlatform } from "../../utils/renderByPlatform";
+import { renderByUVersion } from "../../utils/renderByUVersion";
 
 
 
@@ -94,11 +94,11 @@ export const InvitePage = () => {
       )
     )
   },[panelMode,inviteUnsettle,inviteInfo])
-  return renderByPlatform(
+  return renderByUVersion(
     {
-      "coco777bet": <CInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
+      "u1": <CInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
       "wild777bet": <WInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
-      "riojungle777bet": <RInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
+      "u2": <RInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
     },
     <PInvitePage panelMode={panelMode} setPanelMode={setPanelMode} children={<TabContent />} />,
   );

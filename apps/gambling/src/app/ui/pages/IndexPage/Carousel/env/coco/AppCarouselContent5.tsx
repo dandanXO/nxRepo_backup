@@ -33,9 +33,9 @@ export const AppCarouselContent5 = (props: IAppCarouselContent) => {
           <span>Check-in todos os dias <br/> O dinheiro não para!</span>
         </CarouselTitleSection>
         {isMobile ? (
-          <CarouselImage alt={"h5_banner_5"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/h5_banner_5.png`}/>
+          <CarouselImage alt={"h5_banner_5"} src={`assets/${environment.uVersion}/${environment.mvVersion}/h5_banner_5.png`}/>
         ): (
-          <CarouselImage alt={"banner_5"} src={`assets/${environment.uVersion}/${environment.assetVersionPrefix}/banner_5.png`}/>
+          <CarouselImage alt={"banner_5"} src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_5.png`}/>
         )}
       </div>
     </CarouselContainer>

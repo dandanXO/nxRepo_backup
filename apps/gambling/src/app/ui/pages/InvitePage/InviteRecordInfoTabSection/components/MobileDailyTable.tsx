@@ -3,13 +3,13 @@ import { MobileDailyTable as CMobileDailyTable } from "../env/coco/MobileDailyTa
 import { MobileDailyTable as PMobileDailyTable } from "../env/pernambucana/MobileDailyTable";
 import { MobileDailyTable as WMobileDailyTable } from "../env/wild/MobileDailyTable";
 import { MobileDailyTable as RMobileDailyTable } from "../env/riojungle/MobileDailyTable";
-import { renderByPlatform } from "../../../../utils/renderByPlatform";
+import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export const MobileDailyTable = (props: IMobileDailyTable) => {
-  return renderByPlatform({
+  return renderByUVersion({
     "wild777bet": <WMobileDailyTable {...props} />,
-    "coco777bet": <CMobileDailyTable {...props} />,
-    "riojungle777bet": <RMobileDailyTable {...props} />
+    "u1": <CMobileDailyTable {...props} />,
+    "u2": <RMobileDailyTable {...props} />
   }, <PMobileDailyTable {...props} />)
 }
 

@@ -3,11 +3,11 @@ import {WithdrawMobileInput as CWithdrawMobileInput} from "./env/coco/WithdrawMo
 import {WithdrawMobileInput as WWithdrawMobileInput} from "./env/wild/WithdrawMobileInput";
 import {WithdrawMobileInput as RWithdrawMobileInput} from "./env/riojungle/WithdrawMobileInput";
 
-import {renderByPlatform} from "../../utils/renderByPlatform";
+import {renderByUVersion} from "../../utils/renderByUVersion";
 
 // export const MobileInput = WithdrawMobileInput;
-export const MobileInput = renderByPlatform({
-  "coco777bet": CWithdrawMobileInput,
+export const MobileInput = renderByUVersion({
+  "u1": CWithdrawMobileInput,
   "wild777bet": WWithdrawMobileInput,
-  "riojungle777bet": RWithdrawMobileInput
+  "u2": RWithdrawMobileInput
 }, PCWithdrawMobileInput);
