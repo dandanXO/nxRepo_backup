@@ -5,9 +5,9 @@ import cx from "classnames";
 import React, {useState} from "react";
 import useBreakpoint from "../../../hooks/useBreakpoint";
 import {useNavigate} from "react-router";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import licenseLogo from "../../license.png";
-
+import { gameSlice, indexPagecurrentSelectLabel } from "../../../../../reduxStore/gameSlice";
 import {FooterLogo} from "../../../../components-bs/Logos/FooterLogo";
 import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 
@@ -36,7 +36,9 @@ export type IFooter = {
 export const Footer = (props: IFooter) => {
   const {isMobile} = useBreakpoint();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { label } = useSelector((state: any) => state.gameList);
+
 
   const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
   const isShowDesktopFooter = props.showDesktopFooter === undefined ? true : props.showDesktopFooter;
@@ -77,9 +79,13 @@ export const Footer = (props: IFooter) => {
                 {footerExpands.gameTypes === true && (
                   <div className={"pl-4 flex flex-col items-start"}>
                     {
-                      ["Salão", ...label].map((gameName: string, index: number) => {
+                      ["Salão", ...label].map((gameName: indexPagecurrentSelectLabel, index: number) => {
                         return (
-                          <button key={index} className={"mb-2"} onClick={() => navigate(PageOrModalPathEnum.IndexPage)}>{gameName}</button>
+                          <button key={index} onClick={() => {
+                            dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameName))
+                            return navigate(PageOrModalPathEnum.IndexPage)
+                          }
+                        }>{gameName}</button>
                         )
                       })
                     }
@@ -181,9 +187,13 @@ export const Footer = (props: IFooter) => {
               <section className={"flex flex-col gap-3 w-1/12 items-start"}>
                 <div className='text-[var(--white) text-base'>Jogo</div>
                 {
-                  ["Salão", ...label].map((gameName: string, index: number) => {
+                  ["Salão", ...label].map((gameName: indexPagecurrentSelectLabel, index: number) => {
                     return (
-                      <button key={index} onClick={() => navigate(PageOrModalPathEnum.IndexPage, {state:{gameTab: gameName}})}>{gameName}</button>
+                      <button key={index} onClick={() => {
+                          dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameName))
+                          return navigate(PageOrModalPathEnum.IndexPage)
+                        }
+                      }>{gameName}</button>
                     )
                   })
                 }

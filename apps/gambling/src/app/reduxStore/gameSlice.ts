@@ -22,7 +22,7 @@ interface GameListType {
   gameType: string;
   data: SubGameType[];
 }
-export type indexPagecurrentSelectLabel = 'Todos'| 'Favoritos' | "Slots" | "Fishing" | "Vivo" | "Viver" | 'nothing_select';
+export type indexPagecurrentSelectLabel = 'Todos'| 'Favoritos' | "Slots" | "Fishing" | "Vivo" | "Viver" | 'nothing_select' | 'Salão';
 
 export type InitialState = {
   allGameList: GameListType[];
