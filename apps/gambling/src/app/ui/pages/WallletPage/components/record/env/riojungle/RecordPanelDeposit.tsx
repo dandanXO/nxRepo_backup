@@ -8,6 +8,7 @@ import {notification} from 'antd';
 import { DragScrollContainer } from '../../../../../../components/DragScrollContainer';
 import {AppLocalStorageKey} from "../../../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../../../utils/format";
+import { width } from 'tailwindcss-classnames';
 
 
 const DepositStatusMap: { [key: number]: string } = {
@@ -35,10 +36,10 @@ export const RecordPanelDeposit = () => {
 
   const tableColumns = [
     {
-      title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', maxWidth: '250px',
+      title: 'Identificador', name: 'pay_serial_no', key: 'pay_serial_no', width: '230px',
       render: (record: any) => {
         return (
-          <div className='flex'>
+          <div className='flex text-xs lg:text-sm'>
             <div className='flex-1'>{record.pay_serial_no}</div>
             <button className='' onClick={()=>onClickToCopy(record.pay_serial_no)}>
               <img className="h-[20px] w-[22px]" alt={'copy'}
@@ -49,10 +50,10 @@ export const RecordPanelDeposit = () => {
         )
       }
     },
-    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => <div>R${formatLocaleMoney(Number(record.amount))}</div> },
-    { title: 'Bônus', name: 'rate', key: 'rate', render: (record: any) => <div>R${(formatLocaleMoney(Number(record.amount) * Number(record.rate)))}</div> },
+    { title: 'Valor', name: 'amount', key: 'amount', render: (record: any) => `R$ ${formatLocaleMoney(Number(record.amount))}` },
+    { title: 'Bônus', name: 'rate', key: 'rate', render: (record: any) => `R$ ${(formatLocaleMoney(Number(record.amount) * Number(record.rate)))}` },
     { title: 'Método De Depósito', name: 'pay_channel', key: 'pay_channel' },
-    { title: 'Estado Do Depósito', name: 'status', key: 'status', render: (record: any) => <div>{DepositStatusMap[record.status]}</div> },
+    { title: 'Estado Do Depósito', name: 'status', key: 'status', render: (record: any) => DepositStatusMap[record.status]},
     { title: 'Tempo', name: 'created_at', key: 'created_at' },
   ]
 
@@ -88,13 +89,12 @@ export const RecordPanelDeposit = () => {
   }
 
   return (
-    <DragScrollContainer className='h-[40vh] rounded-xl overflow-hidden' >
+    <DragScrollContainer className='h-[40vh] overflow-hidden' >
       {contextHolder}
       {/* Table className  可以控制table內部整體css 去覆蓋預設設定 */}
       <Table
-        className='!bg-[#333333]'
-        titleStyle='text-sm border-transparent text-[#b3b3b3]'
-        contentStyle='text-base !border-x-0 !border-y'
+        titleStyle='text-xs lg:text-sm border-transparent'
+        contentStyle='text-xs lg:text-sm !border-x-0 !border-y'
         columns={tableColumns}
         dataSource={records}
         fetchData={handleFetchData}

@@ -90,8 +90,8 @@ export const TabletGameRecordPage = ({
         <div className='absolute top-0 bottom-0 w-full riojungle777bet-table text-white text-center p-5 bg-[#333]'>
           <Table
             containerClassName={`min-w-[500px] max-h-[652px]`}
-            className={'w-full overflow-x-auto !bg-[#333] border-r-0 '}
-            titleStyle={`text-[#B3B3B3] font-normal text-xs lg:text-sm`}
+            className={'w-full overflow-x-auto border-r-0 '}
+            titleStyle={`font-normal text-sm lg:text-base`}
             contentStyle={`border-b text-sm`}
             dataSource={records}
             columns={columns}

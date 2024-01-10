@@ -61,15 +61,8 @@ export const DailySignInRecordPage = () => {
       />
       <div className='text-white '>
         <div className='rounded-lg max-h-[80vh] overflow-hidden'>
-          {/* <Table
-            fetchData={handleFetchData}
-            dataSource={records}
-            columns={columns}
-            dataCount={data?.page?.count || 0}
-          /> */}
           <Table
-            className='!bg-[#333333]'
-            titleStyle='text-sm border-transparent !border-x-0 text-[var(--grayscale-70)]'
+            titleStyle='text-sm border-transparent !border-x-0'
             contentStyle='text-base !border-x-0 !border-b !py-6'
             fetchData={handleFetchData}
             dataSource={records}

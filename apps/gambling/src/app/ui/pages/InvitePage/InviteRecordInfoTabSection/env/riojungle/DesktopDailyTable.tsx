@@ -42,8 +42,8 @@ export const DesktopDailyTable = (props: IDailyType) => {
     <div className=" riojungle777bet-table overflow-x-auto text-white text-center rounded-xl  p-5 bg-[#333]" >
       <Table
         containerClassName={`min-w-[500px] max-h-[400px]`}
-        className={'w-full overflow-x-auto !bg-[#333] border-r-0 '}
-        titleStyle={`text-[#B3B3B3] font-normal text-xs lg:text-sm`}
+        className={'w-full overflow-x-auto border-r-0 '}
+        titleStyle={`font-normal text-xs lg:text-sm`}
         contentStyle={`border-b text-sm`}
         dataSource={props.records !== undefined && props.records?.length > 0 ? props.records : []}
         columns={columns}
