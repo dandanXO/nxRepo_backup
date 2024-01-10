@@ -3,7 +3,7 @@ export const environment = {
   uVersion: "u1",
   mvVersion: "m1mv9v12",
   mockBackend: false,
-  platformName: "BrasilSlotsBet",
+  platformName: "BreezeSlotsBet",
   platformGroup: "O LGD Group",
   baseUrl: "",
   appPackageName: "com.ttgroup.phxj",
