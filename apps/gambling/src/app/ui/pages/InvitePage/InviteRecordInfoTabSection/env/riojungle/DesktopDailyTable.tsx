@@ -13,7 +13,6 @@ interface IDailyType {
 
 export const DesktopDailyTable = (props: IDailyType) => {
   const { isTablet } = useBreakpoint()
-
   const columns = [
     { title: 'Data', name: 'day', key: 'day' },
     { title: 'Usuário De Recarga', name: 'numRecharge', key: 'numRecharge' },
@@ -35,6 +34,9 @@ export const DesktopDailyTable = (props: IDailyType) => {
     },
     { title: 'Recompensa Total', name: 'totalReward', key: 'totalReward', render: (i: any) => `R$ ${i.totalReward || '0,00'}` },
   ]
+  if(props.isProxy){
+    columns.unshift({title: 'Dividends', name: 'dividendos', key: 'dividendos', render: (i: any) => `R$ ${i.dividendos || '0,00'}`})
+  }
 
   return (
     <div className=" riojungle777bet-table overflow-x-auto text-white text-center rounded-xl  p-5 bg-[#333]" >
