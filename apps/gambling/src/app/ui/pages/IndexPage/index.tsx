@@ -71,7 +71,6 @@ export const IndexPage = () => {
           gameTypeName={i.gameType}
           data={i.data.games}
           onClickExpand={() => {
-            // 兼容兩者
             setActiveTab(i.gameType)
             return dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(i.gameType))
           }}
@@ -81,49 +80,24 @@ export const IndexPage = () => {
     })
   }
   const {showFixForIOSStickTab, scrollToCarousel, scrollToWindowTop} = useScrollToPartPageTemplate();
-  const renderTypeGameListOld=()=>{
-    let list: { subGameType: string, games: { gameId: number }[] }[] = []
-
-    if(activeTab === 'Favoritos') {
-      const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
-      list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] || [] }]
-    } else {
-      const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === activeTab)[0]?.data
-      list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
-    }
-
-    return list?.map(({subGameType,games}: any, index: number) => {
-      return (
-        <GameTypeSectionList
-          labelImgUrl={`assets/${environment.uVersion}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
-          key={index}
-          userFavorite={userFavorite}
-          onClickFavoriteGameItem={onClickFavoriteGameItem}
-          isLatestItem={list.length - 1 === index}
-          gameTypeName={subGameType}
-          data={games}
-          onClickExpand={() => {
-            setExpandedBrand(subGameType);
-            scrollToCarousel();
-          }}
-          isViewAll={['Favoritos'].includes(subGameType)}
-          expandedBrand={expandedBrand}
-          setExpandedBrand={setExpandedBrand}
-        />
-      )
-    })
-  }
-
   const renderTypeGameList=()=>{
     let list: { subGameType: string, games: { gameId: number }[] }[] = []
-    if(indexPagecurrentSelectLabel === 'Favoritos') {
+    if(indexPagecurrentSelectLabel === 'Favoritos' || activeTab === 'Favoritos') {
       const userInfo = JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || '{}')
       list = [{ subGameType: 'Favoritos', games: totalFavoriteLocalState.localArr[userInfo.user_id] || [] }]
     } else {
-      const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === indexPagecurrentSelectLabel)[0]?.data
-      list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
+      // 未使用 redux 因此去 componet status去找
+      if(indexPagecurrentSelectLabel === "nothing_select"){
+        const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === activeTab)[0]?.data
+        list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
+      }else{
+        const data = typeGameList !== undefined && typeGameList.filter((i: any) => i.gameType === indexPagecurrentSelectLabel)[0]?.data
+        list = expandedBrand !== '' ? data.filter((i: any) => i.subGameType === expandedBrand) : data;
+      }
     }
-    if(subGameactiveTab!== 'All'){
+    // 大部分版本 因為沒有二級選項可以用  subGameactiveTab 永遠都會是 All
+    // 因此這部分不會一直被執行 filter
+    if(subGameactiveTab !== 'All'){
       // eslint-disable-next-line array-callback-return
       const findedList = list.filter(item => {
         if(item.subGameType === subGameactiveTab){
@@ -178,28 +152,13 @@ export const IndexPage = () => {
         )
         : <></>
     } else {
-      return (indexPagecurrentSelectLabel === "Todos" || indexPagecurrentSelectLabel === "Salão"  ) ? renderHotBrandGameList() : renderTypeGameList()
-    }
-  }
-  const gameListOld = () => {
-    if (searchInput !== '') {
-      return searchResults.length > 0
-        ? (
-          <GameTypeSectionList
-            labelImgUrl={`assets/${environment.uVersion}/shared/${subGameactiveTab.split('-')[0]}-logo.png`}
-            userFavorite={userFavorite}
-            onClickFavoriteGameItem={onClickFavoriteGameItem}
-            isLatestItem={true}
-            gameTypeName={'null'}
-            data={searchResults}
-            onClickExpand={() => {
-              navigate(PageOrModalPathEnum.IndexSlotPage)
-            }}
-          />
-        )
-        : <></>
-    } else {
-      return (activeTab === "Todos" || activeTab === "Salão") ? renderHotBrandGameList() : renderTypeGameListOld()
+      // 未使用 redux 因此去 componet status去找
+      if(indexPagecurrentSelectLabel === 'nothing_select'){
+        return (activeTab === "Todos" || activeTab === "Salão") ? renderHotBrandGameList() : renderTypeGameList()
+      } else {
+        return (indexPagecurrentSelectLabel === "Todos" || indexPagecurrentSelectLabel === "Salão"  ) ? renderHotBrandGameList() : renderTypeGameList()
+      }
+      
     }
   }
   const subGameMenu = ()=>{
@@ -241,7 +200,7 @@ export const IndexPage = () => {
   }, [indexPagecurrentSelectLabel])
 
   useEffect(() => {
-    gameListOld();
+    gameList();
   }, [activeTab])
 
 
@@ -256,7 +215,7 @@ export const IndexPage = () => {
         setActiveTab={setActiveTab}
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
-        gameList={gameListOld}
+        gameList={gameList}
         recentGameList={recentGameList}
       />
     ),
@@ -272,7 +231,7 @@ export const IndexPage = () => {
         setActiveTab={setActiveTab}
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
-        gameList={gameListOld}
+        gameList={gameList}
         recentGameList={recentGameList}
       />
     ),
@@ -304,7 +263,7 @@ export const IndexPage = () => {
       setActiveTab={setActiveTab}
       setViewType={setExpandedBrand}
       setSearchInput={setSearchInput}
-      gameList={gameListOld}
+      gameList={gameList}
       recentGameList={recentGameList}
     />
   ))

@@ -22,7 +22,7 @@ interface GameListType {
   gameType: string;
   data: SubGameType[];
 }
-export type indexPagecurrentSelectLabel= 'Todos'| 'Favoritos' | "Slots" | "Fishing" | "Vivo" | "Viver";
+export type indexPagecurrentSelectLabel = 'Todos'| 'Favoritos' | "Slots" | "Fishing" | "Vivo" | "Viver" | 'nothing_select';
 
 export type InitialState = {
   allGameList: GameListType[];
@@ -40,7 +40,7 @@ const initGameList: InitialState = {
   typeGameList: [],
   label: [],
   typeGameCount: {},
-  indexPagecurrentSelectLabel: 'Todos'
+  indexPagecurrentSelectLabel: 'nothing_select'
 }
 
 // NOTICE: refactor me

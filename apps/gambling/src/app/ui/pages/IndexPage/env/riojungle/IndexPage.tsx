@@ -98,11 +98,12 @@ export const IndexPage = ({
 
   const { onClickToSearch, onClickGameItem } = usePageNavigate();
 
-  // useEffect(() => {
-  //   if (activeTab === "Todos") {
-  //     setActiveTab("Salão")
-  //   }
-  // }, [])
+  useEffect(() => {
+    // 初始化 使用 redux
+    if (indexPagecurrentSelectLabel === "nothing_select") {
+      dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel('Todos'))
+    }
+  })
 
   const handleToSearchPage = () => {
     if (isLogin) {
@@ -143,7 +144,7 @@ export const IndexPage = ({
   }
 
 
-  const { typeGameCount } = useSelector((state: any) => state.gameList);
+  const { typeGameCount, indexPagecurrentSelectLabel } = useSelector((state: any) => state.gameList);
 
 
   const IndexTabs = () => {
