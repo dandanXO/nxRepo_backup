@@ -47,7 +47,7 @@ export const Footer = (props: IFooter) => {
               )}>
                 <div className='w-full flex gap-3'>
                   <section className={"flex flex-col gap-3 items-start w-1/2"}>
-                    <div className='pb-3 text-white text-sm font-bold border-b border-[#666666] w-full'>Jogo</div>
+                    <div className='pb-3 text-white text-sm font-bold border-b border-[var(--grayscale-40)] w-full'>Jogo</div>
                     {
                       ["Salão", ...label].map((gameType: IGameType | 'Salão', index: number) => {
                         return (
@@ -66,7 +66,7 @@ export const Footer = (props: IFooter) => {
                   </section>
 
                   <section className={"flex flex-col gap-3 items-start w-1/2 text-xs"}>
-                    <div className='text-white font-bold pb-3 text-sm border-b border-[#666666] w-full'>Ajuda</div>
+                    <div className='text-white font-bold pb-3 text-sm border-b border-[var(--grayscale-40)] w-full'>Ajuda</div>
                     <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                     <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
                     <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
@@ -134,7 +134,7 @@ export const Footer = (props: IFooter) => {
             <div className={"flex gap-4 w-full"}>
 
               <section className={"flex flex-col gap-3 items-start w-[44px]"}>
-                <div className='pb-3 text-white text-sm font-bold border-b border-[#666666] w-full'>Jogo</div>
+                <div className='pb-3 text-white text-sm font-bold border-b border-[var(--grayscale-40)] w-full'>Jogo</div>
                 {
                   ["Salão", ...label].map((gameType: IGameType | 'Salão', index: number) => {
                     return (
@@ -153,7 +153,7 @@ export const Footer = (props: IFooter) => {
               </section>
 
               <section className={"flex flex-col gap-3 items-start w-[164px] text-xs"}>
-                <div className='text-white font-bold pb-3 text-sm border-b border-[#666666] w-full'>Ajuda</div>
+                <div className='text-white font-bold pb-3 text-sm border-b border-[var(--grayscale-40)] w-full'>Ajuda</div>
                 <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                 <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
                 <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
@@ -222,7 +222,7 @@ export const Footer = (props: IFooter) => {
                 <div className={"flex gap-5 w-full"}>
 
                   <section className={"flex flex-col gap-3 items-start w-[82px]"}>
-                    <div className='pb-3 text-white text-lg font-bold border-b border-[#666666] w-full'>Jogo</div>
+                    <div className='pb-3 text-white text-lg font-bold border-b border-[var(--grayscale-40)] w-full'>Jogo</div>
                     {
                       ["Salão", ...label].map((gameType: IGameType | 'Salão', index: number) => {
                         return (
@@ -241,7 +241,7 @@ export const Footer = (props: IFooter) => {
                   </section>
 
                   <section className={"flex flex-col gap-3 items-start w-[183px] text-sm"}>
-                    <div className='text-white font-bold pb-3 text-lg border-b border-[#666666] w-full'>Ajuda</div>
+                    <div className='text-white font-bold pb-3 text-lg border-b border-[var(--grayscale-40)] w-full'>Ajuda</div>
                     <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                     <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
                     <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>

@@ -31,7 +31,7 @@ export const TabletVIPGradePage = ({
       <div className='w-full h-[240px] flex rounded-2xl bg-[var(--grayscale-20)] mt-5'>
 
         {/*VIP選單*/}
-        <div className='w-[25%] py-5 border-r border-r-[#666666] flex flex-col items-center'>
+        <div className='w-[25%] py-5 border-r border-r-[var(--grayscale-40)] flex flex-col items-center'>
           <div
             className='h-[200px] w-[69%] overflow-y-scroll vip-tab-items flex flex-col gap-4 items-center relative'
             ref={scrollWrapperRef}

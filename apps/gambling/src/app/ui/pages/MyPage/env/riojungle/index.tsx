@@ -132,11 +132,11 @@ export const MyPage = ({
           <CaretRight color='#10B98F' />
         </div>
         <div className='mt-2 w-full rounded-lg border border-[var(--grayscale-30)] shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[var(--grayscale-30)]'>
-          <div className='flex justify-between px-3 py-3 border-b border-[#666666]'>
+          <div className='flex justify-between px-3 py-3 border-b border-[var(--grayscale-40)]'>
             <div className='text-[#B3B3B3]'>Prêmio total</div>
             <div className='text-white font-medium'>R$ {formatLocaleMoney(totalPrize)}</div>
           </div>
-          <div className='flex justify-between px-3 py-3 border-b border-[#666666]'>
+          <div className='flex justify-between px-3 py-3 border-b border-[var(--grayscale-40)]'>
             <div className='text-[#B3B3B3]'>Bônus aguardando liquidação</div>
             <div className='text-white font-medium'>R$ {formatLocaleMoney(bonusAwaitingSettlement)}</div>
           </div>

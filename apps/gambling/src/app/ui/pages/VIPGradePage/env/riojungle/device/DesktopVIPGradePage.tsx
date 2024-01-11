@@ -35,7 +35,7 @@ export const DesktopVIPGradePage = ({
       <div className='w-full h-[298px] flex rounded-2xl bg-[var(--grayscale-20)] mt-10'>
 
         {/*VIP選單*/}
-        <div className='w-[15%] border-r border-r-[#666666] flex flex-col items-center group cursor-pointer'>
+        <div className='w-[15%] border-r border-r-[var(--grayscale-40)] flex flex-col items-center group cursor-pointer'>
           <img alt='up' src={CaretUP} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={()=> { if(selectedVIP !== 0) { setSelectedVIP(selectedVIP - 1)} }} />
           <div
             className='h-[242px] w-[78%] py-1 overflow-y-scroll vip-tab-items flex flex-col gap-4 items-center relative'
