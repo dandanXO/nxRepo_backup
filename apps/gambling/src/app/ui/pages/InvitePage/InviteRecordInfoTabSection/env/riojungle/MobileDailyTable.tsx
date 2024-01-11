@@ -49,7 +49,7 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
                 }
                 <MobileTableListItem className="text-xs" title={'Valor da transação do jogo'} text={`R$ ${record.gameRecharge || '0,00'} `} />
                 <MobileTableListItem className="text-xs" title={<div className='flex items-center'>
-                  <div className="text-[#B3B3B3]">{'Recompensas De Troca De Jogos'}</div>
+                  <div className="text-[var(--grayscale-70)]">{'Recompensas De Troca De Jogos'}</div>
                   <div className='ml-1 self-start' onClick={() => setInviteBonusInfoOpen(true)}>
                     <IconTooltip
                       tooltipStyle={{ fontSize: '14px', width: '200px', background: "#999", color: '#333', borderRadius: '8px', zIndex: 10, fontWeight: '500' }}

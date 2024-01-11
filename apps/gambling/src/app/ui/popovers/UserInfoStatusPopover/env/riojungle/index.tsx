@@ -106,7 +106,7 @@ export const UserInfoStatusPopover = ({
         <div className='mt-2 p-5 flex gap-5 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[var(--grayscale-30)] rounded-lg border border-[var(--grayscale-30)]'>
           <div className='w-1/2 flex flex-col items-center text-center justify-between'>
             <div className='text-white text-base font-medium'>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
-            <div className='text-sm text-[#B3B3B3] mt-2'>Balanço Total</div>
+            <div className='text-sm text-[var(--grayscale-70)] mt-2'>Balanço Total</div>
             <button
               className='mt-5 py-[6px] w-full text-lg text-white font-medium rounded-full bg-[#EA7F00] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
               onClick={()=> {
@@ -117,7 +117,7 @@ export const UserInfoStatusPopover = ({
           </div>
           <div className='w-1/2 flex flex-col items-center text-center justify-between'>
             <div className='text-white text-base font-medium'>R$ {formatLocaleMoney(totalReasableValue)}</div>
-            <div className='text-sm text-[#B3B3B3] mt-2'>Retirável Total</div>
+            <div className='text-sm text-[var(--grayscale-70)] mt-2'>Retirável Total</div>
             <button
               className='mt-5 py-[6px] w-full text-lg text-white font-medium rounded-full bg-[#0077CE] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
               onClick={()=> {
@@ -141,15 +141,15 @@ export const UserInfoStatusPopover = ({
         </div>
         <div className='mt-2 w-full rounded-lg border border-[var(--grayscale-30)] shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[var(--grayscale-30)]'>
           <div className='flex justify-between px-5 py-[10px] border-b border-[var(--grayscale-40)]'>
-            <div className='text-[#B3B3B3]'>Prêmio total</div>
+            <div className='text-[var(--grayscale-70)]'>Prêmio total</div>
             <div className='text-white font-medium'>R$ {formatLocaleMoney(totalPrize)}</div>
           </div>
           <div className='flex justify-between px-5 py-[10px] border-b border-[var(--grayscale-40)]'>
-            <div className='text-[#B3B3B3]'>Bônus aguardando liquidação</div>
+            <div className='text-[var(--grayscale-70)]'>Bônus aguardando liquidação</div>
             <div className='text-white font-medium'>R$ {formatLocaleMoney(bonusAwaitingSettlement)}</div>
           </div>
           <div className='flex justify-between px-5 py-[10px]'>
-            <div className='text-[#B3B3B3]'>Bônus já liquidados</div>
+            <div className='text-[var(--grayscale-70)]'>Bônus já liquidados</div>
             <div className='text-white font-medium'>R$ {formatLocaleMoney(fullWithdrawable)}</div>
           </div>
         </div>

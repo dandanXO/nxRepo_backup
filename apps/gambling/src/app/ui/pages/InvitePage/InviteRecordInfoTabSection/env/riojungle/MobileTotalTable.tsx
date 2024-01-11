@@ -46,7 +46,7 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
               />
             </div>
           </div>
-          <div className="text-[#B3B3B3]">{'Recompensas De Troca De Jogos'}</div>
+          <div className="text-[var(--grayscale-70)]">{'Recompensas De Troca De Jogos'}</div>
         </div>} text={`R$ ${props.data.gameRechargeReward}` || '0,00'}
         />
         <MobileTableListItem textClassName="font-bold" title={'Recompensa Total'} text={`R$ ${props.data.totalReward}` || '0,00'} bottomLine={false} />

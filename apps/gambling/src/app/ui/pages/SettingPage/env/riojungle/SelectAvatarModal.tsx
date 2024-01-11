@@ -46,7 +46,7 @@ export const SelectAvatarModal = ({
 
         <div className='w-full text-white flex justify-between gap-3 sm:gap-4 mt-5 sm:mt-9 lg:mt-10 text-sm lg:text-lg'>
           <button
-            className='rounded-full w-full py-[10px] lg:py-[6px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#999999]'
+            className='rounded-full w-full py-[10px] lg:py-[6px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-60)]'
             onClick={close}
           >
             Cancelar

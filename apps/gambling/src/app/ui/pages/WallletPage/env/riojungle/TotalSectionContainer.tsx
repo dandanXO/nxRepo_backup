@@ -51,7 +51,7 @@ export const TotalSectionContainer = (props: ITotalSectionContainer) => {
       <div className="relative px-2 md:px-5 lg:px-8 -mt-3 md:-mt-12 lg:-mt-14 z-10">
         <div className='bg-[var(--grayscale-20)] flex flex-col justify-center  w-full items-center rounded-lg p-2 md:p-4 lg:p-5"'>
           <div className={`
-               text-[#999999] font-medium text-center mb-3 md:mb-5
+               text-[var(--grayscale-60)] font-medium text-center mb-3 md:mb-5
                text-sm lg:text-base leading-5 lg:leading-6
                bg-gradient-to-r from-transparent via-[#ffffff1a] to-transparent
                flex flex-row justify-center py-1 md:py-2 lg:py-2.5 w-full

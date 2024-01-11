@@ -29,11 +29,11 @@ export const RechargeActivityPage = () => {
        A partir de agora, a recarga pode obter recompensas extras em dinheiro. Quanto mais você recarregar, maior será a taxa de recompensa, até {recharge_cashback_rate}. Após a recarga, o dinheiro extra também será transferido diretamente para a sua conta.
      </div>
 
-     <div className='mt-5 lg:mt-10 text-sm sm:text-base lg:text-xl font-bold text-[#B3B3B3]'>
+     <div className='mt-5 lg:mt-10 text-sm sm:text-base lg:text-xl font-bold text-[var(--grayscale-70)]'>
        Nota especial:
      </div>
 
-     <div className='mt-5 text-[#B3B3B3] text-sm lg:text-base'>
+     <div className='mt-5 text-[var(--grayscale-70)] text-sm lg:text-base'>
        Certifique-se de que o seu número de conta, número de telemóvel e CPF são únicos. Se o mesmo usuário registrar várias contas para obter bônus, consideraremos isso trapaceando e as contas relevantes serão congeladas permanentemente.Não faremos qualquer compensação pelas perdas causadas por trapaça.
      </div>
 

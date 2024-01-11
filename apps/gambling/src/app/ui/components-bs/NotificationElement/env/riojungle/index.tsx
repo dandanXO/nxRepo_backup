@@ -49,7 +49,7 @@ export const NotificationElement = ({
         </div>
       </div>
       {
-        expanded && <div className='text-[#B3B3B3] p-3'>{content}</div>
+        expanded && <div className='text-[var(--grayscale-70)] p-3'>{content}</div>
       }
     </div>
   )

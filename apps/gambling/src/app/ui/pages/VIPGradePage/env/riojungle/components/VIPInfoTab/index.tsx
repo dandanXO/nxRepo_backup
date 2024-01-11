@@ -89,7 +89,7 @@ export const VIPInfoTab = ({
             >
               <img alt={`icon${item.title}`} src={item.icon} className={tcx('w-8 h-8 sm:w-12 sm:h-12', ['brightness-[0.7]', index !== selected])} />
               {
-                !isMobile && <div className={tcx('text-sm lg:text-base font-medium text-[#B3B3B3] text-center', ['text-white', index ===selected])}>{item.title}</div>
+                !isMobile && <div className={tcx('text-sm lg:text-base font-medium text-[var(--grayscale-70)] text-center', ['text-white', index ===selected])}>{item.title}</div>
               }
             </div>
           ))

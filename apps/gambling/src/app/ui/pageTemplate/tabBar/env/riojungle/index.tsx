@@ -61,7 +61,7 @@ export const TabBar = (props: ITabBar) => {
         <MenuSVGIcon size={isMobile ? 28: undefined}/>
         <div
           className={twMerge("text-sm font-medium leading-5",
-            "text-[#b3b3b3]",
+            "text-[var(--grayscale-70)]",
           )}
         >
           Menu
@@ -81,7 +81,7 @@ export const TabBar = (props: ITabBar) => {
           <div
             className={twMerge("text-sm font-medium leading-5",
               location.pathname === PageOrModalPathEnum.InvitePage && "text-[var(--primary-hover)]",
-              location.pathname !== PageOrModalPathEnum.InvitePage && "text-[#b3b3b3]",
+              location.pathname !== PageOrModalPathEnum.InvitePage && "text-[var(--grayscale-70)]",
             )}
           >
             Convidar
@@ -113,7 +113,7 @@ export const TabBar = (props: ITabBar) => {
               (location.pathname === PageOrModalPathEnum.IndexPage ||
               location.pathname === PageOrModalPathEnum.GameSearchPage) && "text-[var(--primary-hover)]",
               !(location.pathname === PageOrModalPathEnum.IndexPage ||
-                location.pathname === PageOrModalPathEnum.GameSearchPage)  && "text-[#b3b3b3]",
+                location.pathname === PageOrModalPathEnum.GameSearchPage)  && "text-[var(--grayscale-70)]",
             )}
           >
             Casino
@@ -135,7 +135,7 @@ export const TabBar = (props: ITabBar) => {
           <div
             className={twMerge("text-sm font-medium leading-5",
               location.pathname === PageOrModalPathEnum.VIPGradePage && "text-[var(--primary-hover)]",
-              location.pathname !== PageOrModalPathEnum.VIPGradePage && "text-[#b3b3b3]",
+              location.pathname !== PageOrModalPathEnum.VIPGradePage && "text-[var(--grayscale-70)]",
             )}
           >
             VIP
@@ -164,7 +164,7 @@ export const TabBar = (props: ITabBar) => {
           <div
             className={twMerge("text-sm font-medium leading-5",
               location.pathname === PageOrModalPathEnum.MyPage && "text-[var(--primary-hover)]",
-              location.pathname !== PageOrModalPathEnum.MyPage && "text-[#b3b3b3]",
+              location.pathname !== PageOrModalPathEnum.MyPage && "text-[var(--grayscale-70)]",
             )}
           >
             Minha

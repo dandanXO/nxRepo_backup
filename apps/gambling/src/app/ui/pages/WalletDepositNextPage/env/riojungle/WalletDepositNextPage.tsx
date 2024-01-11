@@ -95,7 +95,7 @@ export const WalletDepositNextPage = () => {
   `;
 
   const titleStyle = `
-  text-left text-[#B3B3B3] text-sm lg:text-xl
+  text-left text-[var(--grayscale-70)] text-sm lg:text-xl
   `
   const textStyle = `
   text-sm md:text-base lg:text-xl text-right text-white font-bold

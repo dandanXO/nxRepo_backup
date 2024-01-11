@@ -73,7 +73,7 @@ export const MobileGameRecordPage = ({
             records.map((record) => (
               <div
                 key={record.roomId}
-                className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[var(--grayscale-30)]'
+                className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[var(--grayscale-70)] mb-[10px] border border-[var(--grayscale-30)]'
               >
                 <div className='w-full flex justify-between pb-2'>
                   <div>Nome Do Jogo</div>
@@ -99,9 +99,9 @@ export const MobileGameRecordPage = ({
           }
           {
             records.length === 0 && (
-              <div className="grow border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">
+              <div className="grow border-dashed border-[var(--grayscale-70)] flex flex-col justify-center w-full items-center border-2 rounded-lg">
                 <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.uVersion}/noData.png`} />
-                <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>
+                <div className='text-sm font-normal text-[var(--grayscale-70)]'>Nada aqui</div>
               </div>
             )
           }
@@ -117,7 +117,7 @@ export const MobileGameRecordPage = ({
       {/*    records.map((record) => (*/}
       {/*      <div*/}
       {/*        key={record.roomId}*/}
-      {/*        className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[var(--grayscale-30)]'*/}
+      {/*        className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[var(--grayscale-70)] mb-[10px] border border-[var(--grayscale-30)]'*/}
       {/*      >*/}
       {/*        <div className='w-full flex justify-between pb-2'>*/}
       {/*          <div>Nome Do Jogo</div>*/}
@@ -143,9 +143,9 @@ export const MobileGameRecordPage = ({
       {/*  }*/}
       {/*  {*/}
       {/*    records.length === 0 && (*/}
-      {/*      <div className="grow border-dashed border-[#b3b3b3] flex flex-col justify-center w-full items-center border-2 rounded-lg">*/}
+      {/*      <div className="grow border-dashed border-[var(--grayscale-70)] flex flex-col justify-center w-full items-center border-2 rounded-lg">*/}
       {/*        <img className={'h-[64px] mb-2'} alt="NoData" src={`assets/${environment.assetPrefix}/noData.png`} />*/}
-      {/*        <div className='text-sm font-normal text-[#B3B3B3]'>Nada aqui</div>*/}
+      {/*        <div className='text-sm font-normal text-[var(--grayscale-70)]'>Nada aqui</div>*/}
       {/*      </div>*/}
       {/*    )*/}
       {/*  }*/}

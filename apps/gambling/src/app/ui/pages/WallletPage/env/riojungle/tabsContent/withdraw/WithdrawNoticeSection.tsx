@@ -10,7 +10,7 @@ export const WithdrawNoticeSection = (props: any) => {
   p-2 md:py-2 md:px-2.5 lg:py-3 lg:px-5
   mb-4 lg:mb-5
   text-sm md:text-base lg:text-xl
-  bg-[#333] text-[#B3B3B3] rounded-lg
+  bg-[#333] text-[var(--grayscale-70)] rounded-lg
   leading-5 md:leading-6 lg:leading-7
   `
   return (
@@ -20,9 +20,9 @@ export const WithdrawNoticeSection = (props: any) => {
         <div>
           O valor e a frequência do saque diário estão diretamente relacionados ao seu nível VIP.
           Nível atual{' '}
-          <button className={"text-[#B3B3B3]"} onClick={onClickToVIP}>VIP{vip_level}</button>, o valor mínimo de saque diário é de
-          <span className={"text-[#B3B3B3]"}> R$ {withdrawLimitMin}</span> e o valor máximo de saque é de
-          <span className={"text-[#B3B3B3]"}> R$ {withdrawLimitMax}</span>.
+          <button className={"text-[var(--grayscale-70)]"} onClick={onClickToVIP}>VIP{vip_level}</button>, o valor mínimo de saque diário é de
+          <span className={"text-[var(--grayscale-70)]"}> R$ {withdrawLimitMin}</span> e o valor máximo de saque é de
+          <span className={"text-[var(--grayscale-70)]"}> R$ {withdrawLimitMax}</span>.
         </div>
         <div className="flex text-center mt-3 md:mt-0 md:ml-2.5 lg:ml-5 justify-center items-center">
           <button className="text-white w-full md:w-auto py-2 px-8 md:py-1.5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--secondary-main)] text-base md:text-lg rounded-[100px] font-normal" onClick={onClickToVIP}>Cheque</button>

@@ -46,7 +46,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               }}
             />
 
-            <div className={'text-[#B3B3B3] text-xs lg:text-base text-center md:text-left mt-3 md:mt-4 lg:mt-5 leading-5 lg:leading-6'}>
+            <div className={'text-[var(--grayscale-70)] text-xs lg:text-base text-center md:text-left mt-3 md:mt-4 lg:mt-5 leading-5 lg:leading-6'}>
               Atualmente{' '}
               <button onClick={props.onClickToVIP}>
                 VIP{props.vip_level}

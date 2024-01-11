@@ -29,7 +29,7 @@ const Item = (props: IItem) => {
           "text-xs leading-5 font-normal",
           "md:text-sm leading-5 font-normal",
           "lg:text-base lg:leading-6 font-medium",
-          "text-[#B3B3B3]",
+          "text-[var(--grayscale-70)]",
           "lg:ml-[36px]"
         )}>
           {props.description}
@@ -111,7 +111,7 @@ export const CompanyProfilePage = () => {
             "text-sm leading-5 font-normal",
             "md:text-sm md:leading-5 md:font-normal",
             "lg:text-base lg:leading-6 lg:font-medium",
-            "text-[#B3B3B3]",
+            "text-[var(--grayscale-70)]",
           )}>
             {environment.platformName}, a nova versão foi lançada em agosto, e no primeiro dia de operação, o volume de transações de recarga ultrapassou 5 milhões de reais.
             <br/>/

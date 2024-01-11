@@ -21,7 +21,7 @@ const NoData = () => {
   return (
     <td colSpan={2} className='!bg-[var(--grayscale-20)]'>
       <div className="bg-[var(--grayscale-20)] p-2">
-        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[#B3B3B3]'>
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[var(--grayscale-70)]'>
           <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
@@ -32,7 +32,7 @@ const NoData = () => {
 const NoDataMobile = () => {
   return (
       <div className="bg-[var(--grayscale-20)] p-2">
-        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[#B3B3B3]'>
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[var(--grayscale-70)]'>
           <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
@@ -161,13 +161,13 @@ export const InviteSettlementRecordPage = () => {
                         )}
                       >
                         <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                          <div className='text-[#B3B3B3)]'>Hora De Entrada</div>
+                          <div className='text-[var(--grayscale-70))]'>Hora De Entrada</div>
                           <div>
                             <span className='mr-1'>{moment(record.updateTime).format('DD.MM-YYYY HH:mm:ss')}</span>
                           </div>
                         </div>
                         <div className={'flex flex-row justify-between border-[var(--white-20)] p-2'}>
-                          <span className={'text-[#B3B3B3] font-normal'}>Bônus</span>
+                          <span className={'text-[var(--grayscale-70)] font-normal'}>Bônus</span>
                           <span className={''}>R$ {formatLocaleMoney(record.reward / 100)}</span>
                         </div>
                       </div>

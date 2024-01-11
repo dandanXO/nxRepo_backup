@@ -24,7 +24,7 @@ const TradeStatusMap: { [key: number]: string } = {
 };
 const NoData = () => {
   return (
-    <div className=' flex flex-col justify-center items-center py-10 border-[#B3B3B3] border-dashed border-2 rounded-lg'>
+    <div className=' flex flex-col justify-center items-center py-10 border-[var(--grayscale-70)] border-dashed border-2 rounded-lg'>
       <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.uVersion}/noData.png`} />
       <div>Nada aqui</div>
     </div>
@@ -64,7 +64,7 @@ export const DepositMobileTable = () => {
               )}
             >
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                <div className='text-[#B3B3B3] font-normal'>Identificador</div>
+                <div className='text-[var(--grayscale-70)] font-normal'>Identificador</div>
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
                   <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
@@ -74,7 +74,7 @@ export const DepositMobileTable = () => {
                 </div>
               </div>
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[#B3B3B3] font-normal'}>Valor</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>Valor</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
@@ -82,19 +82,19 @@ export const DepositMobileTable = () => {
                 className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'
                 }
               >
-                <span className={'text-[#B3B3B3] font-normal'}>bônus</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>bônus</span>
                 <span className={''}>
                   R$ {formatLocaleMoney(Number(record.amount) * Number(record.rate))}
                 </span>
               </div>
 
               <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[#B3B3B3] font-normal'}>Método De Depósito</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>Método De Depósito</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
               <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[#B3B3B3] font-normal'}>Estado Do Depósito</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>Estado Do Depósito</span>
                 <span style={{
                   color:
                     record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
@@ -107,7 +107,7 @@ export const DepositMobileTable = () => {
               </div>
 
               <div className={'flex flex-row justify-between border-assistant p-2'}>
-                <span className='text-[#B3B3B3] font-normal'> Tempo </span>
+                <span className='text-[var(--grayscale-70)] font-normal'> Tempo </span>
                 <span className={'text-white'}>{record.created_at}</span>
               </div>
             </Container>
@@ -151,7 +151,7 @@ export const WithdrawMobileTable = () => {
               )}
             >
                <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                <div className='text-[#B3B3B3] font-normal'>Identificador</div>
+                <div className='text-[var(--grayscale-70)] font-normal'>Identificador</div>
                 <div>
                   <span className='mr-1'>{record.pay_serial_no}</span>
                   <img className="h-[16px] w-[16px] inline-block" alt={'copy'}
@@ -162,22 +162,22 @@ export const WithdrawMobileTable = () => {
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[#B3B3B3] font-normal'}>Valor</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>Valor</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.amount))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[#B3B3B3] font-normal'}>Taxa de retirada</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>Taxa de retirada</span>
                 <span className={''}>R$ {formatLocaleMoney(Number(record.fee))}</span>
               </div>
 
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[#B3B3B3] font-normal'}>Modelo</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>Modelo</span>
                 <span className={''}>{record.pay_channel}</span>
               </div>
 
               <div className={' flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2'}>
-                <span className={'text-[#B3B3B3] font-normal'}>Estado Do Depósito</span>
+                <span className={'text-[var(--grayscale-70)] font-normal'}>Estado Do Depósito</span>
                 <span style={{
                   color:
                     record.status === 2 ? 'var(--secondary-assistant)' :   // 橘色
@@ -189,7 +189,7 @@ export const WithdrawMobileTable = () => {
                 </span>
               </div>
               <div className={'flex flex-row justify-between border-assistant p-2'}>
-                <span className='text-[#B3B3B3] font-normal'> Tempo </span>
+                <span className='text-[var(--grayscale-70)] font-normal'> Tempo </span>
                 <span className={'text-white'}>{record.created_at}</span>
               </div>
             </Container>
