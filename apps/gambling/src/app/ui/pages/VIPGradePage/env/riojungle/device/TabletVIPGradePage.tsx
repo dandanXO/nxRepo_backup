@@ -51,7 +51,7 @@ export const TabletVIPGradePage = ({
           {
             selectedVIP !== 0 && (
               <div className='w-full h-full flex flex-col justify-center'>
-                <div className='w-full flex justify-between text-sm font-medium text-[#808080]'>
+                <div className='w-full flex justify-between text-sm font-medium text-[var(--grayscale-50)]'>
                   <div>Valor total da recarga</div>
                   <div>
                     <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.vip_score || 0) / 100)}</span>
@@ -64,7 +64,7 @@ export const TabletVIPGradePage = ({
                     ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
                   }
                 />
-                <div className='w-full flex justify-between text-sm font-medium text-[#808080] mt-5'>
+                <div className='w-full flex justify-between text-sm font-medium text-[var(--grayscale-50)] mt-5'>
                   <div>Número total de apostas</div>
                   <div>
                     <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.flow || 0) / 100)}</span>

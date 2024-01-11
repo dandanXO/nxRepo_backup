@@ -21,7 +21,7 @@ const Title = ({ title, className }:{ title: string, className?: string}) => (
 )
 
 const Content = ({ content }: { content: string | number }) => (
-  <div className='mt-1 text-sm sm:text-base lg:text-xl text-[#808080] bg-[var(--grayscale-30)] rounded-lg p-[10px]'>{content}</div>
+  <div className='mt-1 text-sm sm:text-base lg:text-xl text-[var(--grayscale-50)] bg-[var(--grayscale-30)] rounded-lg p-[10px]'>{content}</div>
 )
 
 interface ISettingPageProps {
@@ -123,7 +123,7 @@ export const SettingPage = ({
 
       <Title className='mt-10' title='Apelido' />
       <input
-        className={tcx('w-full mt-1 text-sm sm:text-base lg:text-xl text-[#808080] p-[10px] rounded-lg bg-[var(--grayscale-20)] border border-[#808080] focus:border-white focus:outline-none', ['text-red-500 border-red-500 focus:border-red-500', errorMessage])}
+        className={tcx('w-full mt-1 text-sm sm:text-base lg:text-xl text-[var(--grayscale-50)] p-[10px] rounded-lg bg-[var(--grayscale-20)] border border-[var(--grayscale-50)] focus:border-white focus:outline-none', ['text-red-500 border-red-500 focus:border-red-500', errorMessage])}
         value={nicknameInput}
         onChange={(e)=>{
           nickNameValidator(e.target.value);

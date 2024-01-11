@@ -61,7 +61,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               text-sm lg:text-base
               leading-5 md:leading-6 lg:leading-7
               border-solid border-[var(--grayscale-20)] bg-[var(--grayscale-10)] flex flex-row w-full border rounded-lg
-              text-[#808080] text-center
+              text-[var(--grayscale-50)] text-center
           `)}
             >
               Por favor, preencha o número do CPF corretamente. Se a informação estiver incorreta, o saque falhará. Certifique - se de verificar as informações com atenção.

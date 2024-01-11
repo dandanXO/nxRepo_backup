@@ -84,21 +84,21 @@ export const UserInfoStatusPopover = ({
         {/*VIP 資訊*/}
         <div className='flex justify-between text-sm mt-5 items-end'>
           <div className='font-medium text-[var(--secondary-main)] flex-1'>Valor total da recarga</div>
-          <div className='text-white'>R$ {formatLocaleMoney(vipScore / 100)}<span className='text-[#808080]'>/R$ {formatLocaleMoney(nextLevelScore/100)}</span></div>
+          <div className='text-white'>R$ {formatLocaleMoney(vipScore / 100)}<span className='text-[var(--grayscale-50)]'>/R$ {formatLocaleMoney(nextLevelScore/100)}</span></div>
         </div>
         <ProgressBar
           className='h-11 py-[10px] px-5 mt-2 text-white text-base bg-[var(--grayscale-30)] border border-[var(--grayscale-30)]'
           progress={depositPercent}
-          progressClassName='bg-[#808080]'
+          progressClassName='bg-[var(--grayscale-50)]'
         />
         <div className='flex justify-between text-sm mt-5 items-end'>
           <div className='font-medium text-[var(--secondary-main)] flex-1'>Número total de apostas</div>
-          <div className='text-white'>R$ {formatLocaleMoney(flow / 100)}<span className='text-[#808080]'>/R$ {formatLocaleMoney(nextLevelFlow/100)}</span></div>
+          <div className='text-white'>R$ {formatLocaleMoney(flow / 100)}<span className='text-[var(--grayscale-50)]'>/R$ {formatLocaleMoney(nextLevelFlow/100)}</span></div>
         </div>
         <ProgressBar
           className='h-11 py-[10px] px-5 mt-2 text-white text-base bg-[var(--grayscale-30)] border border-[var(--grayscale-30)]'
           progress={flowPercent}
-          progressClassName='bg-[#808080]'
+          progressClassName='bg-[var(--grayscale-50)]'
         />
 
         {/*帳戶資訊*/}
