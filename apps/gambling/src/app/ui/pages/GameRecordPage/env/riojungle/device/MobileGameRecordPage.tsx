@@ -66,7 +66,7 @@ export const MobileGameRecordPage = ({
       <div className='relative grow h-full mt-3 mb-10'>
         <div
           ref={wrapperRef}
-          className='absolute top-0 bottom-0 flex flex-col rounded-lg w-full bg-[#333333] p-2 overflow-y-scroll'
+          className='absolute top-0 bottom-0 flex flex-col rounded-lg w-full bg-[var(--grayscale-20)] p-2 overflow-y-scroll'
           onScroll={handleOnScroll}
         >
           {

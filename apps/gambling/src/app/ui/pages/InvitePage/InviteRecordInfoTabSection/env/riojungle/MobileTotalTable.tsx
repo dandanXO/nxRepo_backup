@@ -18,7 +18,7 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
     <div className={"flex flex-col rounded-2xl text-[#ffffff] text-left"}>
       <div className={"flex flex-col justify-center items-center flex-wrap my-3 px-4"}>
         <div id={"tab-item"} className="w-full flex justify-center items-center ">
-          <div className="w-full bg-[#333333] flex flex-row rounded-[100px] ">
+          <div className="w-full bg-[var(--grayscale-20)] flex flex-row rounded-[100px] ">
             <TabItem active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'} />
             <TabItem active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'} />
             <TabItem active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'} />
@@ -29,7 +29,7 @@ export const MobileTotalTable = (props: IMobileTotalTable) => {
           <div className="text-[var(--state-warn-main)]">Atualize a cada 30 minutos</div>
         </div>
       </div>
-      <div className={'border-solid border-[#666666] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#333333] flex flex-col justify-center w-full px-2 py-1 border rounded-lg'}>
+      <div className={'border-solid border-[#666666] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-20)] flex flex-col justify-center w-full px-2 py-1 border rounded-lg'}>
         <MobileTableListItem textClassName="font-bold" title={'Usuário de recarga'} text={props.data.numRecharge || 0} />
         {props.type === "1" &&
           <MobileTableListItem title={'Primeira Recarga Recompensas'} textClassName="font-bold" text={`R$ ${props.data.firstRecharge || '0,00'} `} />

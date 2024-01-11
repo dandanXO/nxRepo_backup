@@ -43,7 +43,7 @@ export const Footer = (props: IFooter) => {
           <div>
             {(
               <div className={cx(
-                'text-[#B3B3B3] px-4 pt-8 pb-[80px] text-xs bg-[#262626]',
+                'text-[#B3B3B3] px-4 pt-8 pb-[80px] text-xs bg-[var(--grayscale-15)]',
               )}>
                 <div className='w-full flex gap-3'>
                   <section className={"flex flex-col gap-3 items-start w-1/2"}>
@@ -130,7 +130,7 @@ export const Footer = (props: IFooter) => {
           </div>
         ),
         tablet: (
-          <div className='bg-[#262626] text-[#B3B3B3] pt-8 px-8'>
+          <div className='bg-[var(--grayscale-15)] text-[#B3B3B3] pt-8 px-8'>
             <div className={"flex gap-4 w-full"}>
 
               <section className={"flex flex-col gap-3 items-start w-[44px]"}>
@@ -218,7 +218,7 @@ export const Footer = (props: IFooter) => {
         desktop: (
           <div>
             {(
-              <div className='bg-[#262626] text-[#B3B3B3] pt-10 px-12'>
+              <div className='bg-[var(--grayscale-15)] text-[#B3B3B3] pt-10 px-12'>
                 <div className={"flex gap-5 w-full"}>
 
                   <section className={"flex flex-col gap-3 items-start w-[82px]"}>

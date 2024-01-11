@@ -60,7 +60,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
               p-2 md:p-2.5 lg:py-3 lg:px-5
               text-sm lg:text-base
               leading-5 md:leading-6 lg:leading-7
-              border-solid border-[#333333] bg-[var(--grayscale-10)] flex flex-row w-full border rounded-lg
+              border-solid border-[var(--grayscale-20)] bg-[var(--grayscale-10)] flex flex-row w-full border rounded-lg
               text-[#808080] text-center
           `)}
             >
@@ -90,7 +90,7 @@ export const WithdrawPanel = (props: IWithdrawPanelCommon) => {
     );
   } else {
     return (
-      <div className={`leading-5 md:leading-6 lg:leading-7 p-2 md:p-2.5 lg:p-5 bg-[#333333] flex flex-col font-normal text-left lg:text-center justify-center w-full items-start rounded-lg text-white  text-sm md:text-base lg:text-xl`}>
+      <div className={`leading-5 md:leading-6 lg:leading-7 p-2 md:p-2.5 lg:p-5 bg-[var(--grayscale-20)] flex flex-col font-normal text-left lg:text-center justify-center w-full items-start rounded-lg text-white  text-sm md:text-base lg:text-xl`}>
         <div>
           Prezado cliente: Olá! Em resposta às exigências do Banco Central do
           Brasil e do recém-criado comitê de agências reguladoras relevantes no

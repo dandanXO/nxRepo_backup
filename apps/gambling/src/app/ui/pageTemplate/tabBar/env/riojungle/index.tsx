@@ -45,7 +45,7 @@ export const TabBar = (props: ITabBar) => {
     <footer
       className={twMerge(
         "h-[72px] w-full",
-        "bg-[#333333]",
+        "bg-[var(--grayscale-20)]",
         "z-10 fixed bottom-0",
         "flex flex-row justify-between",
         props.className
@@ -101,7 +101,7 @@ export const TabBar = (props: ITabBar) => {
 
           <div className={"w-[28px] h-[28px]"}/>
 
-          <div className="absolute top-[-35px] bg-[#333333] flex flex-row items-start pt-1 px-1 rounded-[100px]">
+          <div className="absolute top-[-35px] bg-[var(--grayscale-20)] flex flex-row items-start pt-1 px-1 rounded-[100px]">
             <div className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[linear-gradient(145deg,_var(--primary-main)_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-center mb-1 pt-4 w-16 h-16 items-start rounded-[100px]">
               <GameControllerSVGIcon size={isMobile ? 28: undefined}/>
             </div>

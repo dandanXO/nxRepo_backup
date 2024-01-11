@@ -38,7 +38,7 @@ export const RecordPanel = (props: IRecordPanel) => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <div id={'record-section'} className='text-white bg-[#333333] rounded-lg p-5'>
+    <div id={'record-section'} className='text-white bg-[var(--grayscale-20)] rounded-lg p-5'>
       {/*{isMobile && <BlueBoard />}*/}
 
       {/* {isMobile && (

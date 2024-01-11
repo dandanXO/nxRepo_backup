@@ -7,9 +7,11 @@
   /*NOTE: 沒用到*/
   --primary-dark-active: #6C3ABE;
   /*NOTE: js 部分還沒換*/
+  /* gambling/src/app/ui/pageTemplate/tabBar/env/riojungle/index.tsx */
   --primary-hover: #9C6AEF;
 
   /*NOTE: js 部分還沒換, 還有寫死的 js*/
+  /* gambling/src/app/ui/components-bs/ProgressBar/env/riojungle/index.tsx */
   --secondary-main: #10B98F;
   /*NOTE: 沒用到*/
   --secondary-light-disable: #0D9574;
@@ -19,6 +21,7 @@
   --secondary-hover: #3EC6A4;
   /*NOTE: 沒用到*/
   --liner-main-from: #8547EB;
+
   --liner-main-to: #10B98F;
 
   --state-error-main: #EF4444;
@@ -48,9 +51,10 @@
   /*?*/
   --grayscale-00: #000000;
   --grayscale-10: #1A1A1A;
-  /*TODO: 接續*/
   --grayscale-15: #262626;
+  /* u1 u2 其它站點會共用的組件 就先不改 u2都已經改*/
   --grayscale-20: #333333;
+  /*TODO: 接續*/
   --grayscale-30: #4D4D4D;
   --grayscale-40: #666666;
   --grayscale-50: #808080;

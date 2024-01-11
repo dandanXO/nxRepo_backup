@@ -19,7 +19,7 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
     <div className={"pb-2 flex flex-col rounded-2xl text-[#ffffff] text-left"}>
       <div className={"flex flex-col justify-center items-center flex-wrap my-3 px-4"}>
         <div id={"tab-item"} className="w-full flex justify-center items-center ">
-          <div className="w-full bg-[#333333] flex flex-row rounded-[100px] ">
+          <div className="w-full bg-[var(--grayscale-20)] flex flex-row rounded-[100px] ">
             <TabItem active={props.type === "1"} onClick={() => props.onClick("1")} name={'Nível 1'} />
             <TabItem active={props.type === "2"} onClick={() => props.onClick("2")} name={'Nível 2'} />
             <TabItem active={props.type === "3"} onClick={() => props.onClick("3")} name={'Nível 3'} />
@@ -33,12 +33,12 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
       {/* <div className={"text-[transparent] mb-2"}>
         <DatePicker onConfirm={props.onRecordDateSelect} value={props.recordDate} min={moment().subtract(1, 'days').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
       </div> */}
-      <div className="bg-[#333333] flex flex-col p-2 rounded-lg">
+      <div className="bg-[var(--grayscale-20)] flex flex-col p-2 rounded-lg">
         {
           props.records !== undefined && props.records?.length > 0 ? props.records.map((record: any, index: number) => {
             return (
 
-              <div className={cx("border-solid border-[#4d4d4d] bg-[#262626] flex flex-col  w-full border px-2 rounded-lg", {
+              <div className={cx("border-solid border-[#4d4d4d] bg-[var(--grayscale-15)] flex flex-col  w-full border px-2 rounded-lg", {
                 'mb-2.5': index !== props.records?.length - 1
               })}>
                 {props.isProxy ? (<MobileTableListItem className="text-xs" title={'Dividends'} text={`R$ ${record.dividendos || '0,00'}`} bottomLine={false} />) : null}

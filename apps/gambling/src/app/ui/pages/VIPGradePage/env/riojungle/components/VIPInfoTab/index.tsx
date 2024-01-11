@@ -96,7 +96,7 @@ export const VIPInfoTab = ({
         }
       </div>
       <div className='h-1 w-full bg-[var(--secondary-main)]' />
-      <div className={tcx('w-full bg-[#333333] rounded-b-2xl mb-[66px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-2 sm:gap-5 sm:p-5')}>
+      <div className={tcx('w-full bg-[var(--grayscale-20)] rounded-b-2xl mb-[66px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 p-2 sm:gap-5 sm:p-5')}>
         {
           isMobile && <div className='text-sm text-white text-center font-medium'>{vipInfoTabList[selected].title}</div>
         }

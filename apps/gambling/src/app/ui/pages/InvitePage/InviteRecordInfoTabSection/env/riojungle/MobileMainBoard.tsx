@@ -8,7 +8,7 @@ export const MobileMainBoard = (props: IBoardData) => {
     return (<div className={`
     boardContainer px-3 h-[80px] font-bold
     shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] 
-    bg-[#333333] flex flex-col w-full items-center justify-center rounded-lg 
+    bg-[var(--grayscale-20)] flex flex-col w-full items-center justify-center rounded-lg 
     `}>
       {props.children}
     </div>)

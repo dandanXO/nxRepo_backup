@@ -19,13 +19,13 @@ export const DesktopTotalTable = (props: ITotal & { type: string }) => {
   return (
     <div className="border border-solid border-[var(--grayscale-40)] overflow-x-auto px-3 md:p-5 shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-20)] rounded-lg">
       <Table 
-              className='!bg-[#333333]'
+              className='!bg-[var(--grayscale-20)]'
               titleStyle='p-4 text-sm !border-b-0 text-[var(--grayscale-70)]'
               contentStyle='text-base !py-6 text-white '
               columns={columns} 
               dataSource={props?.data !== undefined && props?.data ? [props?.data] : [] } 
               dataCount={0}
-              noDataClassName={'!bg-[#333333]'}
+              noDataClassName={'!bg-[var(--grayscale-20)]'}
             />
     </div>
   );

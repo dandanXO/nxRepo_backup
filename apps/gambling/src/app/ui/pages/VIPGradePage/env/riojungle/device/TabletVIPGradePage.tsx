@@ -28,7 +28,7 @@ export const TabletVIPGradePage = ({
       <img src={VIPStatue} alt="statue" className='mt-8' />
 
       {/*VIP 進度卡*/}
-      <div className='w-full h-[240px] flex rounded-2xl bg-[#333333] mt-5'>
+      <div className='w-full h-[240px] flex rounded-2xl bg-[var(--grayscale-20)] mt-5'>
 
         {/*VIP選單*/}
         <div className='w-[25%] py-5 border-r border-r-[#666666] flex flex-col items-center'>

@@ -190,7 +190,7 @@ export const MyPage = ({
         </button>
 
         <button
-          className='my-5 w-full py-[10px] text-white text-sm font-medium flex items-center justify-center gap-2 bg-[#10B98F] rounded-[20px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
+          className='my-5 w-full py-[10px] text-white text-sm font-medium flex items-center justify-center gap-2 bg-[var(--secondary-main)] rounded-[20px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)]'
           onClick={() => dispatch(appSlice.actions.showMobileLogoutModal(true))}
         >
           <div>Sair</div>

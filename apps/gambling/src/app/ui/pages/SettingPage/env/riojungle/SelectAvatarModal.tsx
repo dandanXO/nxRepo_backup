@@ -19,7 +19,7 @@ export const SelectAvatarModal = ({
 
   return (
     <div className='fixed left-0 top-0 right-0 bottom-0 z-[1002] flex h-full w-full flex-col items-center justify-center bg-[rgba(0,0,0,0.65)]'>
-      <div className='relative px-4 sm:px-6 pb-4 sm:pb-8 pt-[56px] sm:pt-[60px] bg-[#333333] rounded-2xl w-[78%] sm:w-[320px] lg:w-[428px] h-fit'>
+      <div className='relative px-4 sm:px-6 pb-4 sm:pb-8 pt-[56px] sm:pt-[60px] bg-[var(--grayscale-20)] rounded-2xl w-[78%] sm:w-[320px] lg:w-[428px] h-fit'>
         <img
           alt='close'
           className='cursor-pointer w-12 h-12 absolute right-2 top-2' src={`assets/${environment.uVersion}/XCircle.png`}

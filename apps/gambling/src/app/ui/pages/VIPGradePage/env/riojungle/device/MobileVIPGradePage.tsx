@@ -39,7 +39,7 @@ export const MobileVIPGradePage = ({
       </div>
 
       {/*VIP 進度卡*/}
-      <div className='w-full h-fit flex rounded-lg bg-[#333333] mt-3 p-2'>
+      <div className='w-full h-fit flex rounded-lg bg-[var(--grayscale-20)] mt-3 p-2'>
         {/*VIP進度條*/}
         {
           selectedVIP !== 0 && (

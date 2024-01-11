@@ -34,14 +34,14 @@ export const MobileDailySignInRecordPage = ({
       <BackNavigation
         onClick={() => onClickToCheckInDaily()}
       />
-      <div className='grow h-full overflow-y-auto mt-6 bg-[#333333] rounded-lg px-2'>
+      <div className='grow h-full overflow-y-auto mt-6 bg-[var(--grayscale-20)] rounded-lg px-2'>
         {
           records?.map((record, index: number) => {
             return (
                 <PageContainer
                 key={record.id}
                 className={cx("flex flex-col rounded-lg text-white text-sm",
-                  "bg-[#262626] border border-[var(--grayscale-30)] my-1",
+                  "bg-[var(--grayscale-15)] border border-[var(--grayscale-30)] my-1",
                   {
                     'mt-2': index === 0
                   },

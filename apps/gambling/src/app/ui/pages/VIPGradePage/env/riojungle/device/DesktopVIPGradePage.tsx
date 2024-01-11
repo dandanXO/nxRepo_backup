@@ -32,7 +32,7 @@ export const DesktopVIPGradePage = ({
       <img src={VIPStatue} alt="statue" className='mt-10' />
 
       {/*VIP 進度卡*/}
-      <div className='w-full h-[298px] flex rounded-2xl bg-[#333333] mt-10'>
+      <div className='w-full h-[298px] flex rounded-2xl bg-[var(--grayscale-20)] mt-10'>
 
         {/*VIP選單*/}
         <div className='w-[15%] border-r border-r-[#666666] flex flex-col items-center group cursor-pointer'>

@@ -13,7 +13,7 @@ export const depositButtonProps = ({
 
   const rechargeStyle =
   `
-  bg-[#333333] flex flex-row justify-center rounded-lg
+  bg-[var(--grayscale-20)] flex flex-row justify-center rounded-lg
   text-base md:text-lg lg:text-2xl
   font-medium text-white
 
@@ -28,13 +28,13 @@ export const depositButtonProps = ({
   return {
     rechargeValue: `R$ ${formatLocaleMoney(rechargeValue)}`,
     rechargeClassName: rechargeStyle,
-    className: `min-h-[68px] flex-col lg:flex-col bg-[#333333] py-3 md:py-2.5 lg:py-2 md:mb-4 lg:mb-5 rounded-lg items-center justify-center`,
+    className: `min-h-[68px] flex-col lg:flex-col bg-[var(--grayscale-20)] py-3 md:py-2.5 lg:py-2 md:mb-4 lg:mb-5 rounded-lg items-center justify-center`,
     activeRechargeClassName: `${rechargeStyle} text-[var(--secondary-main)]`,
-    bgClassName: 'bg-[#333333] border-2 border-solid border-[#333333]',
-    activeBgClassName: 'bg-[#333333] border-2 border-solid border-[var(--secondary-main)]',
+    bgClassName: 'bg-[var(--grayscale-20)] border-2 border-solid border-[var(--grayscale-20)]',
+    activeBgClassName: 'bg-[var(--grayscale-20)] border-2 border-solid border-[var(--secondary-main)]',
     rate: `R$ ${rate}`,
     rateClassName: `font-normal text-[#e6e6e6] bg-[#4d4d4d] ${rateStyle} `,
-    activeRateClassName: `font-bold text-[#333333] bg-[var(--secondary-main)] ${rateStyle}`,
+    activeRateClassName: `font-bold text-[var(--grayscale-20)] bg-[var(--secondary-main)] ${rateStyle}`,
     isRateTag: false,
     rateTagClassName: '',
   }

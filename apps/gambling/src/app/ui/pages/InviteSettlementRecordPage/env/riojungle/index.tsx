@@ -19,9 +19,9 @@ const { RangePicker } = DatePicker;
 
 const NoData = () => {
   return (
-    <td colSpan={2} className='!bg-[#333333]'>
-      <div className="bg-[#333333] p-2">
-        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
+    <td colSpan={2} className='!bg-[var(--grayscale-20)]'>
+      <div className="bg-[var(--grayscale-20)] p-2">
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[#B3B3B3]'>
           <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
@@ -31,8 +31,8 @@ const NoData = () => {
 }
 const NoDataMobile = () => {
   return (
-      <div className="bg-[#333333] p-2">
-        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
+      <div className="bg-[var(--grayscale-20)] p-2">
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[#B3B3B3]'>
           <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
@@ -124,7 +124,7 @@ export const InviteSettlementRecordPage = () => {
                     style={
                       {
                         color: 'white',
-                        backgroundColor: '#333333',
+                        backgroundColor: 'var(--grayscale-20)',
                         border: '0px',
                         borderRadius: '100px',
                         display: 'flex',
@@ -143,7 +143,7 @@ export const InviteSettlementRecordPage = () => {
         {
           isMobile ?
           (currentData?.rows.length === 0 ? <NoDataMobile />:
-            <div className='grow h-full overflow-y-auto mt-6 bg-[#333333] rounded-lg px-2'>
+            <div className='grow h-full overflow-y-auto mt-6 bg-[var(--grayscale-20)] rounded-lg px-2'>
               {
                 (
                   currentData?.rows.map((record, index: number) => {
@@ -151,7 +151,7 @@ export const InviteSettlementRecordPage = () => {
                         <div
                         key={record.id}
                         className={cx("flex flex-col rounded-lg text-white text-sm",
-                          "bg-[#262626] border-[#4d4d4d] my-1 border-solid border-2",
+                          "bg-[var(--grayscale-15)] border-[#4d4d4d] my-1 border-solid border-2",
                           {
                             'mt-2': index === 0
                           },
@@ -179,13 +179,13 @@ export const InviteSettlementRecordPage = () => {
           )
           :
           <Table 
-              className='!bg-[#333333]'
+              className='!bg-[var(--grayscale-20)]'
               titleStyle='p-4 text-sm border-transparent !border-x-0 text-[var(--grayscale-70)]'
               contentStyle='text-base !border-x-0 !border-b !py-6'
               columns={columns} 
               dataSource={currentData?.rows !== undefined && currentData.rows?.length > 0 ? currentData.rows:[] } 
               dataCount={0}
-              noDataClassName={'!bg-[#333333]'}
+              noDataClassName={'!bg-[var(--grayscale-20)]'}
             />
           }
         </div>
