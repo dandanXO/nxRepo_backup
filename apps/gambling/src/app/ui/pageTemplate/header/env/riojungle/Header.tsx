@@ -60,7 +60,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
   return (
     <>
       <section
-        className='flex items-center justify-end cursor-pointer ml-6 mr-6'
+        className='flex items-center justify-end cursor-pointer ml-6 mr-6 gap-2'
         onClick={() => { dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover)) }}
         onMouseOver={() => {
           // console.log("onMouseOver")
