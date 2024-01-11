@@ -31,7 +31,9 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
     <div className="flex grow flex-col">
       <Form className="grow">
         <div className="text-ctext-primary mb-1 text-xs">
-          {t('For KYC, your Cardholder name and PAN card name should be match.')}
+          To ensure a successful loan disbursement, your Cardholder name must match the name on your PAN card. Also, please carefully verify your{' '}
+          <span className='font-bold underline'>account number</span> and{' '}
+          <span className='font-bold underline'>IFSC code</span> to ensure are correct and correspond to the same card.
         </div>
         <Input
           className="mb-3 text-sm"
