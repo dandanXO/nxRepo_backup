@@ -22,6 +22,10 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
     ifscData,
     setIFSCData,
     validateIFSC,
+    // NOTE: Confirm IFSC,
+    confirmIFSCData,
+    setConfirmIFSCData,
+    validateConfirmIFSCData,
     // NOTE: UPI
     upiData,
     setUpiData,
@@ -81,6 +85,19 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           validateData={() => validateIFSC(ifscData.data)}
           inputLength={11}
         />
+
+        <ValidateInput
+          name='confirmIFSC'
+          className="mb-3 text-sm"
+          label='Confirm IFSC Code'
+          value={confirmIFSCData.data}
+          errorMessage={confirmIFSCData.errorMessage}
+          inputData={confirmIFSCData}
+          setInputData={setConfirmIFSCData}
+          validateData={validateConfirmIFSCData}
+          inputLength={11}
+        />
+
         <ValidateInput
           name={'UPI ID'}
           className="mb-4 text-sm"
@@ -102,7 +119,6 @@ export const BankAccountForm = (props: IIndiaBankAccountForm) => {
           setInputData={setUpiData}
           validateData={() => validateUpiId(upiData.data)}
         />
-
       </Form>
       <div className="mb-4">
         <Button

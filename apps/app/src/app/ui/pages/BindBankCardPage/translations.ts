@@ -29,6 +29,7 @@ export const i18nBankBindAccountPage: i18nComponent = {
       'IFSC must be 11 digits only.': 'IFSC must be 11 digits only.',
       'The IFSC code must consist of 11 characters. Please ensure that you have entered the correct format.':
         'The IFSC code must consist of 11 characters. Please ensure that you have entered the correct format.',
+      'Please make sure your IFSC code match.':'Please make sure your IFSC code match.',
       'Invalid UPI ID format. Please retry or refer to the provided instructions and try again.':
         'Invalid UPI ID format. Please retry or refer to the provided instructions and try again.',
 
