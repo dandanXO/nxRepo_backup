@@ -9,10 +9,10 @@ import { NoData as WNoData } from './env/wild/NoData';
 import { NoData as RNoData } from './env/riojungle/NoData';
 import { renderByUVersion } from '../../utils/renderByUVersion';
 
-const NoData = ()=> renderByUVersion({
+const NoData = (props?:{noDataClassName: string})=> renderByUVersion({
   "u1": <CNoData  />,
   "wild777bet": <WNoData  />,
-  "u2": <RNoData  />,
+  "u2": <RNoData className={props?.noDataClassName || ''} />,
 }, <PNoData  />
 )
 
@@ -33,7 +33,7 @@ interface ITable {
   contentStyle?: string;
   dataCount: number;
   containerClassName?: string;
-
+  noDataClassName?: string;
 
 }
 
@@ -98,7 +98,7 @@ export const Table = (props: ITable) => {
         <table className={tcx('table-zebra relative table w-full table-fixed h-full')}>
           <tbody className='h-full'>
             {dataSource.length === 0 ? <tr>
-              <NoData />
+              <NoData noDataClassName={props?.noDataClassName || ''} />
             </tr> :
               dataSource.map((data: any, index: number) => {
                 return <tr key={index}>

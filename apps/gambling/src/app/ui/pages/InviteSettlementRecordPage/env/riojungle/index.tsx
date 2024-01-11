@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { environment } from "../../../../../../environments/environment";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
+import { Table } from "../../../../components-bs/Table";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../utils/format";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
@@ -62,6 +63,11 @@ export const InviteSettlementRecordPage = () => {
     })
 
   }, [])
+
+  const columns = [
+    { title: 'Hora De Entrada', name: 'updateTime', key: 'updateTime', render: (record: any) => moment(record.updateTime).format('DD.MM-YYYY HH:mm:ss') },
+    { title: 'Bônus', name: 'reward', key: 'reward', render: (record: any) => `R$: ${formatLocaleMoney(record.reward / 100)}` },
+  ]
 
   useEffect(() => {
     refresh(dates[0].format(dateFormat), dates[1].format(dateFormat));
@@ -172,29 +178,15 @@ export const InviteSettlementRecordPage = () => {
             </div>
           )
           :
-            <table className="table table-zebra w-full text-center">
-            {/* head */}
-            <thead>
-              <tr>
-                <th className='text-[#B3B3B3] !bg-[#333333] p-4 border-[rgba(255,255,255,0.2)]'>Hora De Entrada</th>
-                <th className='text-[#B3B3B3] !bg-[#333333] p-4'>Bônus</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {currentData?.rows.length === 0 ? <tr><NoData /></tr> : (
-                currentData?.rows.map((itme, index) => {
-                  return (
-                    <tr key={index} className="bg-[#4d4d4d]">
-                      <td className='!bg-[#333333] py-4 border-[rgba(255,255,255,0.2)]'>{moment(itme.updateTime).format('DD.MM-YYYY HH:mm:ss')}</td>
-                      <td className='!bg-[#333333] py-4'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
-                    </tr>
-                  )
-                })
-              )}
-            </tbody>
-
-          </table>
+          <Table 
+              className='!bg-[#333333]'
+              titleStyle='p-4 text-sm border-transparent !border-x-0 text-[var(--grayscale-70)]'
+              contentStyle='text-base !border-x-0 !border-b !py-6'
+              columns={columns} 
+              dataSource={currentData?.rows !== undefined && currentData.rows?.length > 0 ? currentData.rows:[] } 
+              dataCount={0}
+              noDataClassName={'!bg-[#333333]'}
+            />
           }
         </div>
       </PageContainer>
