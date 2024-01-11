@@ -10,7 +10,7 @@ type IItem = {
 }
 const Item = (props: IItem) => {
   return (
-    <div className="bg-[rgba(255,255,255,0.2)] border-solid border-white/20 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-gray-200 flex flex-row justify-between w-full h-16 items-start pt-2 px-2 rounded-lg">
+    <div className="bg-[rgba(255,255,255,0.2)] border-solid border-white/20 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] flex flex-row justify-between w-full h-16 items-start pt-2 px-2 rounded-lg">
       <div className="flex flex-col w-2/5 items-start">
         <div className="font-bold leading-[24px] text-white">
           {props.title}
