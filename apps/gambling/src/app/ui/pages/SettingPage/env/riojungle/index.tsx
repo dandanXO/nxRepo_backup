@@ -21,7 +21,7 @@ const Title = ({ title, className }:{ title: string, className?: string}) => (
 )
 
 const Content = ({ content }: { content: string | number }) => (
-  <div className='mt-1 text-sm sm:text-base lg:text-xl text-[#808080] bg-[#4D4D4D] rounded-lg p-[10px]'>{content}</div>
+  <div className='mt-1 text-sm sm:text-base lg:text-xl text-[#808080] bg-[var(--grayscale-30)] rounded-lg p-[10px]'>{content}</div>
 )
 
 interface ISettingPageProps {

@@ -151,7 +151,7 @@ export const InviteSettlementRecordPage = () => {
                         <div
                         key={record.id}
                         className={cx("flex flex-col rounded-lg text-white text-sm",
-                          "bg-[var(--grayscale-15)] border-[#4d4d4d] my-1 border-solid border-2",
+                          "bg-[var(--grayscale-15)] border-[var(--grayscale-30)] my-1 border-solid border-2",
                           {
                             'mt-2': index === 0
                           },

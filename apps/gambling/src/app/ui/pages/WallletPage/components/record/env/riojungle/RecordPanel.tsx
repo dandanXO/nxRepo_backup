@@ -46,7 +46,7 @@ export const RecordPanel = (props: IRecordPanel) => {
       )} */}
 
       <section className={cx('button-list flex flex-row mb-2 md:mb-4 md:justify-start font-medium')}>
-        <div className="bg-[#4d4d4d] flex flex-row rounded-[100px] sm:w-auto w-full justify-between">
+        <div className="bg-[var(--grayscale-30)] flex flex-row rounded-[100px] sm:w-auto w-full justify-between">
           <RecordTabButton
             className={cx("mr-3 px-3.5 md:px-6 flex-none ",{'!text-lg':!isMobile, '!grow': isMobile})}
             active={recordPanelMode === 'deposit'}

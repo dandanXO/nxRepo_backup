@@ -115,7 +115,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
+                className="border-solid border-[var(--grayscale-30)] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
                 onClick={() => {
                   onClickToFirstDeposit();
                   close();
@@ -139,7 +139,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
+                className="border-solid border-[var(--grayscale-30)] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
                 onClick={() => {
                   onClickToDepositCashback();
                   close();
@@ -162,7 +162,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             {/*<div className={"w-full flex flex-col px-5"}>*/}
             {/*  <button*/}
-            {/*    className="border-solid border-[#4d4d4d] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-0 items-start border rounded-lg"*/}
+            {/*    className="border-solid border-[var(--grayscale-30)] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-0 items-start border rounded-lg"*/}
             {/*    onClick={() => {*/}
             {/*      onClickToDepositCashback();*/}
             {/*      close();*/}
@@ -192,8 +192,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                  // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.InvitePage,
+                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                  // "bg-[var(--grayscale-30)] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.InvitePage,
                 })}
                 onClick={() => {
                   onClickToInvite();
@@ -212,8 +212,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                  // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.VIPGradePage,
+                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                  // "bg-[var(--grayscale-30)] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.VIPGradePage,
                 })}
                 onClick={() => {
                   onClickToVipGrade();
@@ -232,8 +232,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                  // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.DailySignInPage,
+                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                  // "bg-[var(--grayscale-30)] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.DailySignInPage,
                 })}
                 onClick={() => {
                   onClickToCheckInDaily();
@@ -253,8 +253,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                  // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                  // "bg-[var(--grayscale-30)] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
                 })}
                 onClick={() => {
                   onClickToTelegram();
@@ -272,8 +272,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             </div>
 
             <div className={"w-full flex flex-col px-5"}>
-              <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+              <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                // "bg-[var(--grayscale-30)] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
               })}
               onClick={() => {
                 onClickToCompanyProfile();
@@ -292,8 +292,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                  // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
+                className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                  // "bg-[var(--grayscale-30)] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.TelegramPage,
                 })}
                 onClick={() => {
                   onClickToLicense();
@@ -330,7 +330,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               }
               return (
                 <div className={"w-full flex flex-col px-5"}>
-                  <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                  <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
                   })}
                   onClick={() => {
                     onClickToIndex();
@@ -354,8 +354,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               <div className="opacity-50 bg-gradient-to-r from-transparent via-white to-transparent h-px"></div>
             </div>
             <div className={"w-full flex flex-col px-5"}>
-              <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[#4D4D4D] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
-                // "bg-[#4D4D4D] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
+              <button className={cx("flex flex-row gap-3 items-start px-4 py-2 hover:bg-[var(--grayscale-30)] hover:rounded-lg text-[#b3b3b3] hover:text-[rgb(255,255,255)]", {
+                // "bg-[var(--grayscale-30)] rounded-lg text-[rgb(255,255,255)]": location.pathname === PageOrModalPathEnum.IndexPage,
               })} onClick={() => {
                 onClickToIndex();
                 dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel('Favoritos'))
@@ -377,7 +377,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
 
           <div className={"w-full flex flex-col px-5"}>
-            <button className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex flex-row justify-center pt-2 gap-3 w-full h-10 items-start rounded-lg"
+            <button className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-30)] flex flex-row justify-center pt-2 gap-3 w-full h-10 items-start rounded-lg"
               onClick={props.onClickToDownload}
             >
               <img

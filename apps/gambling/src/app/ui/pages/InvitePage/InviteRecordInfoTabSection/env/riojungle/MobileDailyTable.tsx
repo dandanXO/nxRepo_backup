@@ -38,7 +38,7 @@ export const MobileDailyTable = (props: IMobileDailyTable) => {
           props.records !== undefined && props.records?.length > 0 ? props.records.map((record: any, index: number) => {
             return (
 
-              <div className={cx("border-solid border-[#4d4d4d] bg-[var(--grayscale-15)] flex flex-col  w-full border px-2 rounded-lg", {
+              <div className={cx("border-solid border-[var(--grayscale-30)] bg-[var(--grayscale-15)] flex flex-col  w-full border px-2 rounded-lg", {
                 'mb-2.5': index !== props.records?.length - 1
               })}>
                 {props.isProxy ? (<MobileTableListItem className="text-xs" title={'Dividends'} text={`R$ ${record.dividendos || '0,00'}`} bottomLine={false} />) : null}

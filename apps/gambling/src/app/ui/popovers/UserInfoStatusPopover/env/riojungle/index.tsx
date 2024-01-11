@@ -87,7 +87,7 @@ export const UserInfoStatusPopover = ({
           <div className='text-white'>R$ {formatLocaleMoney(vipScore / 100)}<span className='text-[#808080]'>/R$ {formatLocaleMoney(nextLevelScore/100)}</span></div>
         </div>
         <ProgressBar
-          className='h-11 py-[10px] px-5 mt-2 text-white text-base bg-[#4D4D4D] border border-[#4d4d4d]'
+          className='h-11 py-[10px] px-5 mt-2 text-white text-base bg-[var(--grayscale-30)] border border-[var(--grayscale-30)]'
           progress={depositPercent}
           progressClassName='bg-[#808080]'
         />
@@ -96,14 +96,14 @@ export const UserInfoStatusPopover = ({
           <div className='text-white'>R$ {formatLocaleMoney(flow / 100)}<span className='text-[#808080]'>/R$ {formatLocaleMoney(nextLevelFlow/100)}</span></div>
         </div>
         <ProgressBar
-          className='h-11 py-[10px] px-5 mt-2 text-white text-base bg-[#4D4D4D] border border-[#4d4d4d]'
+          className='h-11 py-[10px] px-5 mt-2 text-white text-base bg-[var(--grayscale-30)] border border-[var(--grayscale-30)]'
           progress={flowPercent}
           progressClassName='bg-[#808080]'
         />
 
         {/*帳戶資訊*/}
         <div className='font-medium text-[var(--secondary-main)] text-sm mt-5'>Total Da Conta</div>
-        <div className='mt-2 p-5 flex gap-5 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#4d4d4d] rounded-lg border border-[#4D4D4D]'>
+        <div className='mt-2 p-5 flex gap-5 shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[var(--grayscale-30)] rounded-lg border border-[var(--grayscale-30)]'>
           <div className='w-1/2 flex flex-col items-center text-center justify-between'>
             <div className='text-white text-base font-medium'>R$ {formatLocaleMoney(totalBalanceSheetValue)}</div>
             <div className='text-sm text-[#B3B3B3] mt-2'>Balanço Total</div>
@@ -139,7 +139,7 @@ export const UserInfoStatusPopover = ({
           <div className='text-sm font-medium text-[var(--secondary-main)]'>Conta Promovida</div>
           <CaretRight color='#10B98F' />
         </div>
-        <div className='mt-2 w-full rounded-lg border border-[#4d4d4d] shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[#4d4d4d]'>
+        <div className='mt-2 w-full rounded-lg border border-[var(--grayscale-30)] shadow-[inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)] bg-[var(--grayscale-30)]'>
           <div className='flex justify-between px-5 py-[10px] border-b border-[#666666]'>
             <div className='text-[#B3B3B3]'>Prêmio total</div>
             <div className='text-white font-medium'>R$ {formatLocaleMoney(totalPrize)}</div>
@@ -156,7 +156,7 @@ export const UserInfoStatusPopover = ({
 
         {/*導航區塊*/}
         <button
-          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-5 rounded-lg border border-[#4d4d4d] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d]'
+          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-5 rounded-lg border border-[var(--grayscale-30)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-30)]'
           onClick={()=>{
             close();
             onClickToSetting();
@@ -166,7 +166,7 @@ export const UserInfoStatusPopover = ({
           <CaretRight />
         </button>
         <button
-          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[#4d4d4d] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d]'
+          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[var(--grayscale-30)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-30)]'
           onClick={()=>{
             close();
             onClickToGameRecord();
@@ -176,7 +176,7 @@ export const UserInfoStatusPopover = ({
           <CaretRight />
         </button>
         <button
-          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[#4d4d4d] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d]'
+          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[var(--grayscale-30)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-30)]'
           onClick={()=>{
             close();
             onClickToPrivacyAgreement();
@@ -187,7 +187,7 @@ export const UserInfoStatusPopover = ({
         </button>
 
         <button
-          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[#4d4d4d] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d]'
+          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[var(--grayscale-30)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-30)]'
           onClick={()=>{
             close();
             onClickToCompanyProfile();

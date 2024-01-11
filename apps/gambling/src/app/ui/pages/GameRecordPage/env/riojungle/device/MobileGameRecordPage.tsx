@@ -73,7 +73,7 @@ export const MobileGameRecordPage = ({
             records.map((record) => (
               <div
                 key={record.roomId}
-                className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[#4D4D4D]'
+                className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[var(--grayscale-30)]'
               >
                 <div className='w-full flex justify-between pb-2'>
                   <div>Nome Do Jogo</div>
@@ -117,7 +117,7 @@ export const MobileGameRecordPage = ({
       {/*    records.map((record) => (*/}
       {/*      <div*/}
       {/*        key={record.roomId}*/}
-      {/*        className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[#4D4D4D]'*/}
+      {/*        className='bg-[#262626] w-full rounded-lg p-2 text-sm text-[#B3B3B3] mb-[10px] border border-[var(--grayscale-30)]'*/}
       {/*      >*/}
       {/*        <div className='w-full flex justify-between pb-2'>*/}
       {/*          <div>Nome Do Jogo</div>*/}

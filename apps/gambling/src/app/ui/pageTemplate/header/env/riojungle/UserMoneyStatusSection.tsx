@@ -17,7 +17,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
   } = useUserMoneyStatusSection();
 
   return (
-    <div className="w-full h-[40px] bg-[#4d4d4d] flex flex-row justify-between items-center rounded-lg"
+    <div className="w-full h-[40px] bg-[var(--grayscale-30)] flex flex-row justify-between items-center rounded-lg"
          // className={twMerge("px-3 flex flex-row justify-between items-center  md:h-11", props.className)}>
     >
       <div className="flex flex-row items-center pl-2 pr-6 py-[6px]">

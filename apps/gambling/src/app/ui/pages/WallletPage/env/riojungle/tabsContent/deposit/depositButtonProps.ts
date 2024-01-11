@@ -33,7 +33,7 @@ export const depositButtonProps = ({
     bgClassName: 'bg-[var(--grayscale-20)] border-2 border-solid border-[var(--grayscale-20)]',
     activeBgClassName: 'bg-[var(--grayscale-20)] border-2 border-solid border-[var(--secondary-main)]',
     rate: `R$ ${rate}`,
-    rateClassName: `font-normal text-[#e6e6e6] bg-[#4d4d4d] ${rateStyle} `,
+    rateClassName: `font-normal text-[#e6e6e6] bg-[var(--grayscale-30)] ${rateStyle} `,
     activeRateClassName: `font-bold text-[var(--grayscale-20)] bg-[var(--secondary-main)] ${rateStyle}`,
     isRateTag: false,
     rateTagClassName: '',

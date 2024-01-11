@@ -35,7 +35,7 @@ const SearchSection = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-[40px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d] flex flex-row p-1 justify-center items-center rounded-lg"
+    <div className="w-[40px] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--grayscale-30)] flex flex-row p-1 justify-center items-center rounded-lg"
       onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
     >
       <img

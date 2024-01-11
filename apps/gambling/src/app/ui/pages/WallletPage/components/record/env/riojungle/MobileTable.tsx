@@ -60,7 +60,7 @@ export const DepositMobileTable = () => {
               key={record.id}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
                 "bg-[var(--background-tabbar)]",
-                "border-[#4D4D4D] border-solid border rounded-lg"
+                "border-[var(--grayscale-30)] border-solid border rounded-lg"
               )}
             >
               <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
@@ -147,7 +147,7 @@ export const WithdrawMobileTable = () => {
               key={record.id}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
                 "bg-[var(--background-tabbar)]",
-                "border-[#4D4D4D] border-solid border rounded-lg"
+                "border-[var(--grayscale-30)] border-solid border rounded-lg"
               )}
             >
                <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
