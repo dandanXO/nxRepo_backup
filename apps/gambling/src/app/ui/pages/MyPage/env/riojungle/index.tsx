@@ -35,7 +35,7 @@ export const MyPage = ({
 
   const dispatch = useDispatch();
 
-  const { onClickToWallet, onClickToInvite, onClickToSetting, onClickToGameRecord, onClickToPrivacyAgreement, onClickToNotification } = usePageNavigate();
+  const { onClickToWallet, onClickToInvite, onClickToSetting, onClickToGameRecord, onClickToPrivacyAgreement, onClickToNotification, onClickToCompanyProfile } = usePageNavigate();
 
   const vipScore = userVIPInfo?.data?.vip_score || 0
   const nextLevelScore = userVIPInfo?.data?.next_level_score || 1
@@ -175,6 +175,17 @@ export const MyPage = ({
           }}
         >
           <div>Política de Privacidade</div>
+          <CaretRight />
+        </button>
+
+        <button
+          className='w-full flex justify-between items-center text-xs text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[#4d4d4d] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d]'
+          onClick={()=>{
+            close();
+            onClickToCompanyProfile();
+          }}
+        >
+          <div>Sobre Nós</div>
           <CaretRight />
         </button>
 

@@ -37,7 +37,7 @@ export const UserInfoStatusPopover = ({
 }: IUserInfoStatusPopoverProps) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
 
-  const { onClickToWallet, onClickToInvite, onClickToSetting, onClickToGameRecord, onClickToPrivacyAgreement } = usePageNavigate();
+  const { onClickToWallet, onClickToInvite, onClickToSetting, onClickToGameRecord, onClickToPrivacyAgreement, onClickToCompanyProfile } = usePageNavigate();
 
   const dispatch = useDispatch();
 
@@ -183,6 +183,17 @@ export const UserInfoStatusPopover = ({
           }}
         >
           <div>Política de Privacidade</div>
+          <CaretRight />
+        </button>
+
+        <button
+          className='w-full flex justify-between items-center text-sm text-white px-5 py-[14px] font-medium mt-3 rounded-lg border border-[#4d4d4d] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[#4d4d4d]'
+          onClick={()=>{
+            close();
+            onClickToCompanyProfile();
+          }}
+        >
+          <div>Sobre Nós</div>
           <CaretRight />
         </button>
       </div>

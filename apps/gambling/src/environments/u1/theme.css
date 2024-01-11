@@ -7,7 +7,7 @@
   --primary-main-to: #0044C7;
   --primary-variant: #002773;
   --primary-assistant: #A1C1FF;
-  --primary-assistant-20: #A1C1FF;
+  --primary-assistant-20: rgba(161, 193, 255, 0.20);
 
   --secondary-main-from: #FFEF61;
   --secondary-main-to: #FF7E21;
@@ -149,6 +149,13 @@
   --table-asisstant: #005265;
   --table-light: #26E5FF;
 
+  /* Table 樣式 */
+  --table-thead: var(--primary-variant);
+  --table-thead-text: var(--white);
+  --table-tbody: var(--primary-assistant-20);
+  --table-tbody-zebra: var(--white-20);
+  --table-tbody-text: var(--white);
+
   /*button*/
   /*btn/button*/
   --btn-gradient1-from: #58DDFF;
@@ -236,4 +243,9 @@
   --drawer-bg: #17103F;
   --drawer-border: rgba(50,63,91,.7);
 
+  /* scrollbar */
+  --scrollbar-width: 3px;
+  --scrollbar-color: var(--white-20);
+  --scrollbar-background: 'transparent';
+  --scrollbar-rounded: 10px;
 }
