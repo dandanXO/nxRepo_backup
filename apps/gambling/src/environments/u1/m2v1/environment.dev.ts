@@ -11,4 +11,5 @@ export const environment = {
   appVersion: "1.0.0",
   s3URLImages: "https://resources.ttgroup.vip/icon",
   snowEffects: "sakura",
+  packgroundVideoUrl: "https://xb-web.s3.sa-east-1.amazonaws.com/video/calica777slots_video.mp4"
 };

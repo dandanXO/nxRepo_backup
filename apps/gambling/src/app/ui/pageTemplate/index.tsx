@@ -1,5 +1,5 @@
 // import { space, layout, typography, color } from 'styled-system'
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useMemo} from "react";
 import {notification} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useNavigate} from "react-router";
@@ -164,8 +164,17 @@ export const PageTemplate = (props: IPage) => {
   } = usePageNavigate();
 
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
-
-
+  const isIndexPage = location.pathname === PageOrModalPathEnum.IndexPage
+  const showVideoBackgound = isIndexPage && environment.packgroundVideoUrl
+  const videoElement = useMemo(() => {
+    return (
+        <div className="fixed z-[-1] right-0 bottom-0 w-full h-full">
+            <video autoPlay loop muted className="absolute top-0 left-0 w-full h-full object-cover">
+                <source src={environment.packgroundVideoUrl} type="video/mp4" />
+            </video>
+            <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+        </div>
+    )}, [])
   useEffect(() => {
     const handleStorage = () => {
       // Place for a function responsible for
@@ -184,6 +193,7 @@ export const PageTemplate = (props: IPage) => {
 
   return (
     <>
+      {showVideoBackgound  ? videoElement : null}
       {renderByUVersion({
         "wild777bet": (
           <WPageTemplate
