@@ -287,7 +287,7 @@ export const PageTemplate = ({
               !isShowTabbar && "bottom-0",
             )}
           >
-            {!hideAddToMobileShortcut && isMobile && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
+            {true && <AddToMobileShortcut isShowTabbar={isShowTabbar}/>}
           </div>
         )}
       </StyledPage>
