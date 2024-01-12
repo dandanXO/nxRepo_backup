@@ -58,7 +58,7 @@ export const WithdrawForm = (props: IWithdrawForm) => {
     <section className={'text-left'}>
       <section className={inputSectionClassName}>
         <label className={titleClassName}>
-          Nome do usuário
+          Nome do titular da conta
         </label>
 
         <MainInput

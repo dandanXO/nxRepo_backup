@@ -25,7 +25,7 @@ export const PrivacyAgreementPage = () => {
 
       <div >
         <div className='text-white text-lg lg:text-2xl font-medium pb-5 md:pb-8 lg:pb-10'>Privacy Policy and Personal Data Protection</div>
-        <div className="text-[#E6E6E6] text-sm lg:text-lg font-normal">
+        <div className="text-[var(--grayscale-90)] text-sm lg:text-lg font-normal">
           <div>1. Introduction:</div>
           <div>
             At {environment.platformName}, we aim to provide the best possible experience to

@@ -13,7 +13,7 @@ const { RangePicker } = DatePicker;
 const datePickerStyle = {
   padding: '6px 25px',
   color: 'white',
-  backgroundColor: '#333333',
+  backgroundColor: 'var(--grayscale-20)',
   border: 'none',
   borderRadius: '100px',
   display: 'flex',
@@ -86,9 +86,9 @@ export const DesktopGameRecordPage = ({
         />
       </div>
 
-      <div className='riojungle777bet-table overflow-x-auto text-white text-center rounded-xl p-5 bg-[#333] mb-5'>
+      <div className='max-h-[652px]  overflow-x-auto text-white text-center rounded-xl p-5 bg-[var(--grayscale-20)] mb-5'>
         <Table
-          containerClassName={`min-w-[500px] max-h-[652px]`}
+          containerClassName={`min-w-[500px] `}
           className={'w-full overflow-x-auto border-r-0 '}
           titleStyle={`font-normal text-sm lg:text-base`}
           contentStyle={`border-b text-sm`}

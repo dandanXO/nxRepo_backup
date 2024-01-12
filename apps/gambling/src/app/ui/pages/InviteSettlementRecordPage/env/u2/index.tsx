@@ -8,6 +8,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { environment } from "../../../../../../environments/environment";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
+import { Table } from "../../../../components-bs/Table";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../utils/format";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
@@ -18,9 +19,9 @@ const { RangePicker } = DatePicker;
 
 const NoData = () => {
   return (
-    <td colSpan={2} className='!bg-[#333333]'>
-      <div className="bg-[#333333] p-2">
-        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
+    <td colSpan={2} className='!bg-[var(--grayscale-20)]'>
+      <div className="bg-[var(--grayscale-20)] p-2">
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[var(--grayscale-70)]'>
           <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
@@ -30,8 +31,8 @@ const NoData = () => {
 }
 const NoDataMobile = () => {
   return (
-      <div className="bg-[#333333] p-2">
-        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[#333333] border-dashed border-2 border-[#B3B3B3]'>
+      <div className="bg-[var(--grayscale-20)] p-2">
+        <div className='flex flex-col py-4 justify-center items-center rounded-lg bg-[var(--grayscale-20)] border-dashed border-2 border-[var(--grayscale-70)]'>
           <img style={{ display: 'unset' }} alt="" className={'h-[100px] margin-auto'} src={`assets/${environment.uVersion}/noData.png`} />
           <div>Nada aqui</div>
         </div>
@@ -62,6 +63,11 @@ export const InviteSettlementRecordPage = () => {
     })
 
   }, [])
+
+  const columns = [
+    { title: 'Hora De Entrada', name: 'updateTime', key: 'updateTime', render: (record: any) => moment(record.updateTime).format('DD.MM-YYYY HH:mm:ss') },
+    { title: 'Bônus', name: 'reward', key: 'reward', render: (record: any) => `R$: ${formatLocaleMoney(record.reward / 100)}` },
+  ]
 
   useEffect(() => {
     refresh(dates[0].format(dateFormat), dates[1].format(dateFormat));
@@ -118,7 +124,7 @@ export const InviteSettlementRecordPage = () => {
                     style={
                       {
                         color: 'white',
-                        backgroundColor: '#333333',
+                        backgroundColor: 'var(--grayscale-20)',
                         border: '0px',
                         borderRadius: '100px',
                         display: 'flex',
@@ -137,7 +143,7 @@ export const InviteSettlementRecordPage = () => {
         {
           isMobile ?
           (currentData?.rows.length === 0 ? <NoDataMobile />:
-            <div className='grow h-full overflow-y-auto mt-6 bg-[#333333] rounded-lg px-2'>
+            <div className='grow h-full overflow-y-auto mt-6 bg-[var(--grayscale-20)] rounded-lg px-2'>
               {
                 (
                   currentData?.rows.map((record, index: number) => {
@@ -145,7 +151,7 @@ export const InviteSettlementRecordPage = () => {
                         <div
                         key={record.id}
                         className={cx("flex flex-col rounded-lg text-white text-sm",
-                          "bg-[#262626] border-[#4d4d4d] my-1 border-solid border-2",
+                          "bg-[var(--grayscale-15)] border-[var(--grayscale-30)] my-1 border-solid border-2",
                           {
                             'mt-2': index === 0
                           },
@@ -155,13 +161,13 @@ export const InviteSettlementRecordPage = () => {
                         )}
                       >
                         <div className={'flex flex-row justify-between border-b-[1px] border-[var(--white-20)] p-2 items-center'}>
-                          <div className='text-[#B3B3B3)]'>Hora De Entrada</div>
+                          <div className='text-[var(--grayscale-70))]'>Hora De Entrada</div>
                           <div>
                             <span className='mr-1'>{moment(record.updateTime).format('DD.MM-YYYY HH:mm:ss')}</span>
                           </div>
                         </div>
                         <div className={'flex flex-row justify-between border-[var(--white-20)] p-2'}>
-                          <span className={'text-[#B3B3B3] font-normal'}>Bônus</span>
+                          <span className={'text-[var(--grayscale-70)] font-normal'}>Bônus</span>
                           <span className={''}>R$ {formatLocaleMoney(record.reward / 100)}</span>
                         </div>
                       </div>
@@ -172,29 +178,15 @@ export const InviteSettlementRecordPage = () => {
             </div>
           )
           :
-            <table className="table table-zebra w-full text-center">
-            {/* head */}
-            <thead>
-              <tr>
-                <th className='text-[#B3B3B3] !bg-[#333333] p-4 border-[rgba(255,255,255,0.2)]'>Hora De Entrada</th>
-                <th className='text-[#B3B3B3] !bg-[#333333] p-4'>Bônus</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {currentData?.rows.length === 0 ? <tr><NoData /></tr> : (
-                currentData?.rows.map((itme, index) => {
-                  return (
-                    <tr key={index} className="bg-[#4d4d4d]">
-                      <td className='!bg-[#333333] py-4 border-[rgba(255,255,255,0.2)]'>{moment(itme.updateTime).format('DD.MM-YYYY HH:mm:ss')}</td>
-                      <td className='!bg-[#333333] py-4'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
-                    </tr>
-                  )
-                })
-              )}
-            </tbody>
-
-          </table>
+          <Table 
+              className='!bg-[var(--grayscale-20)]'
+              titleStyle='p-4 text-sm border-transparent !border-x-0 text-[var(--grayscale-70)]'
+              contentStyle='text-base !border-x-0 !border-b !py-6'
+              columns={columns} 
+              dataSource={currentData?.rows !== undefined && currentData.rows?.length > 0 ? currentData.rows:[] } 
+              dataCount={0}
+              noDataClassName={'!bg-[var(--grayscale-20)]'}
+            />
           }
         </div>
       </PageContainer>

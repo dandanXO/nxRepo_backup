@@ -99,7 +99,7 @@ const DailySignInPage = ({
       </div>
 
       {/*領取規則*/}
-      <div className='mt-5 border border-[#333333] text-[var(--state-warn-main)] rounded-lg py-2 sm:py-3 px-2 sm:px-4 lg:px-5'>
+      <div className='mt-5 border border-[var(--grayscale-20)] text-[var(--state-warn-main)] rounded-lg py-2 sm:py-3 px-2 sm:px-4 lg:px-5'>
         Regras de recompensa diária VIP:Cada nível só pode receber recompensas por {dayConfigs.length} dias no total. As recompensas serão creditadas na próxima vez que você as reivindicar. Para garantir a justiça da plataforma, a plataforma adota uma estratégia antitrapaça, os usuários trapaceiros serão banidos e forneceremos atendimento ao cliente 24 horas para resolver seus problemas.
       </div>
 

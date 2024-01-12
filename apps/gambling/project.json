@@ -55,6 +55,12 @@
         },
         "dev-v9-u2-m1v1-riojungle777bet": {
           "buildTarget": "gambling:build:dev-v9-u2-m1v1-riojungle777bet"
+        },
+        "dev-v11-u2-m1v2-praia777bet": {
+          "buildTarget": "gambling:build:dev-v11-u2-m1v2-praia777bet"
+        },
+        "dev-v14-u2-m2v10-tropicaSlotsBet": {
+          "buildTarget": "gambling:build:dev-v14-u2-m2v10-tropicaSlotsBet"
         }
       }
     },
@@ -708,6 +714,58 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
+        "dev-v11-u2-m1v2-praia777bet": {
+          "postcssConfig": "apps/gambling/src/environments/u2/postcss.config.js",
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/u2/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u2/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u2/m1v2/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u2/m1v2/index.html"
+            }
+          ],
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "prod-v11-u2-m1v2-praia777bet": {
+          "postcssConfig": "apps/gambling/src/environments/u2/postcss.config.js",
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/u2/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u2/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u2/m1v2/environment.prod.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u2/m1v2/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
         "dev-v12-u1-m1v9-breezeslotsbet": {
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
@@ -753,6 +811,60 @@
             {
               "replace": "apps/gambling/src/index.html",
               "with": "apps/gambling/src/environments/u1/m1v9/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "dev-v14-u2-m2v10-tropicaSlotsBet": {
+          "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/u1/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u1/m2v10/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u1/m2v10/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u1/m2v10/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "prod-v14-u2-m2v10-tropicaSlotsBet": {
+          "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
+          "fileReplacements": [
+            {
+              "with": "apps/gambling/src/environments/u1/tailwind.variables",
+              "replace": "apps/gambling/src/environments/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u1/m2v10/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u1/m2v10/environment.prod.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u1/m2v10/index.html"
             }
           ],
           "optimization": true,

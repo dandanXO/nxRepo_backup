@@ -13,7 +13,7 @@ const { RangePicker } = DatePicker;
 const datePickerStyle = {
   padding: '6px 25px',
   color: 'white',
-  backgroundColor: '#333333',
+  backgroundColor: 'var(--grayscale-20)',
   border: 'none',
   borderRadius: '100px',
   display: 'flex',
@@ -86,19 +86,17 @@ export const TabletGameRecordPage = ({
         />
       </div>
 
-      <div className='relative grow h-full mt-3 mb-20 rounded-xl overflow-hidden'>
-        <div className='absolute top-0 bottom-0 w-full riojungle777bet-table text-white text-center p-5 bg-[#333]'>
-          <Table
-            containerClassName={`min-w-[500px] max-h-[652px]`}
-            className={'w-full overflow-x-auto border-r-0 '}
-            titleStyle={`font-normal text-sm lg:text-base`}
-            contentStyle={`border-b text-sm`}
-            dataSource={records}
-            columns={columns}
-            dataCount={dataCount}
-            fetchData={handleFetchData}
-          />
-        </div>
+      <div className='h-[652px] w-full text-white text-center p-5 bg-[var(--grayscale-20)] mt-3 mb-20 rounded-xl'>
+        <Table
+          containerClassName={`min-w-[500px] `}
+          className={'w-full overflow-x-auto border-r-0 '}
+          titleStyle={`font-normal text-sm lg:text-base`}
+          contentStyle={`border-b text-sm`}
+          dataSource={records}
+          columns={columns}
+          dataCount={dataCount}
+          fetchData={handleFetchData}
+        />
       </div>
     </PageContainer>
   )

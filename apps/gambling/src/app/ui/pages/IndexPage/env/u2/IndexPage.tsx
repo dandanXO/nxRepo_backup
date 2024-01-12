@@ -203,7 +203,7 @@ export const IndexPage = ({
       <PageContainer
         className={cx(
           "z-[2]",
-          "py-3 md:py-8 lg:py-5 bg-[var(--grayscale-10)]",
+          "py-3 md:py-8 lg:py-5",
           {
             "fixed top-[52px] left-0 right-0 ": isFixedGameTypeTabs,
           },

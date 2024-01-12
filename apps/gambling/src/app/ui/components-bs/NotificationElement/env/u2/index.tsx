@@ -38,7 +38,7 @@ export const NotificationElement = ({
       )}
       onClick={(e)=>onClick(e)}
     >
-      <div className={tcx('p-3 flex justify-between gap-5 items-center border-b border-[#333333]', ['text-[#808080]', isRead && !expanded])}>
+      <div className={tcx('p-3 flex justify-between gap-5 items-center border-b border-[var(--grayscale-20)]', ['text-[var(--grayscale-50)]', isRead && !expanded])}>
         <div className='flex gap-2 flex-1 items-center'>
           {!isRead && <div className='h-2 w-2 bg-[var(--state-error-main)] rounded-full'/>}
           <div>{title}</div>
@@ -49,7 +49,7 @@ export const NotificationElement = ({
         </div>
       </div>
       {
-        expanded && <div className='text-[#B3B3B3] p-3'>{content}</div>
+        expanded && <div className='text-[var(--grayscale-70)] p-3'>{content}</div>
       }
     </div>
   )

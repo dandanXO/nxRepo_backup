@@ -19,7 +19,7 @@ export const MobileTableListItem = (props: IMobileTableListItem) => {
   return (
     <div className={cx("text-sm flex flex-col", className)}>
       <div className="flex justify-between py-2">
-        <div className="text-[#B3B3B3]">{title}</div>
+        <div className="text-[var(--grayscale-70)]">{title}</div>
         <div className={cx("text-white", props.textClassName)}>{text}</div>
       </div>
       {bottomLine && <BottomLine />}

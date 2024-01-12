@@ -52,7 +52,7 @@ export const VIPButtonList = ({
       {
         vips.map((vip) => {
 
-          const backgroundColor = currentVIP === vip ? 'bg-[var(--secondary-main)]': vip > currentVIP ? 'bg-[#666666]' : 'bg-[var(--primary-main)]';
+          const backgroundColor = currentVIP === vip ? 'bg-[var(--secondary-main)]': vip > currentVIP ? 'bg-[var(--grayscale-40)]' : 'bg-[var(--primary-main)]';
 
           return (
             <div

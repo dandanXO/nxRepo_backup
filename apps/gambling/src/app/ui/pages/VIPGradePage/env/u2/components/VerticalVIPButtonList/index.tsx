@@ -24,7 +24,7 @@ export const VerticalVIPButtonList = ({
 }: IVerticalVIPButtonListProps) => {
   return vips.map((vip) => {
 
-    const backgroundColor = (currentVIP === 25 ? currentVIP: currentVIP + 1) === vip ? 'bg-[var(--secondary-main)]': vip > currentVIP ? 'bg-[#666666]' : 'bg-[var(--primary-main)]';
+    const backgroundColor = (currentVIP === 25 ? currentVIP: currentVIP + 1) === vip ? 'bg-[var(--secondary-main)]': vip > currentVIP ? 'bg-[var(--grayscale-40)]' : 'bg-[var(--primary-main)]';
 
     return (
       <div

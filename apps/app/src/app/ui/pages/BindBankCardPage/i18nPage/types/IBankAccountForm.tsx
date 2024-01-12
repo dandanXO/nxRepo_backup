@@ -26,6 +26,10 @@ export type IIndiaBankAccountForm = IBankAccountForm & {
   setIFSCData:React.Dispatch<React.SetStateAction<InputValue<string>>>;
   validateIFSC:(val:string)=>void;
 
+  confirmIFSCData: InputValue<string>;
+  setConfirmIFSCData: React.Dispatch<React.SetStateAction<InputValue<string>>>;
+  validateConfirmIFSCData: (value: string) => void;
+
   upiData: InputValue<string>;
   setUpiData:React.Dispatch<React.SetStateAction<InputValue<string>>>;
   validateUpiId:(val:string)=>void;

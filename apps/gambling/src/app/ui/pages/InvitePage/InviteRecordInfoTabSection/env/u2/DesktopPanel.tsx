@@ -53,7 +53,7 @@ export const DesktopPanel = ({
 
         <div className={"flex flex-col lg:flex-row justify-between items-center flex-wrap my-3 md:my-5 lg:my-8"}>
           <div id={"tab-item"} className="flex justify-start items-start ">
-            <div className="bg-[#333333] flex flex-row rounded-[100px]">
+            <div className="bg-[var(--grayscale-20)] flex flex-row rounded-[100px]">
               <TabItem active={totalPanelMode === "1"} onClick={() => setTotalPanelMode("1")} name={'Nível 1'} />
               <TabItem active={totalPanelMode === "2"} onClick={() => setTotalPanelMode("2")} name={'Nível 2'} />
               <TabItem active={totalPanelMode === "3"} onClick={() => setTotalPanelMode("3")} name={'Nível 3'} />
@@ -75,7 +75,7 @@ export const DesktopPanel = ({
 
         <div className={"flex flex-col lg:flex-row justify-between items-center flex-wrap my-3 md:my-5 lg:my-8"}>
           <div id={"tab-item"} className="flex justify-start items-start">
-            <div className="bg-[#333333] flex flex-row rounded-[100px]">
+            <div className="bg-[var(--grayscale-20)] flex flex-row rounded-[100px]">
               <TabItem active={dailyPanelMode === "1"} onClick={() => setDailyPanelMode("1")} name={'Nível 1'} />
               <TabItem active={dailyPanelMode === "2"} onClick={() => setDailyPanelMode("2")} name={'Nível 2'} />
               <TabItem active={dailyPanelMode === "3"} onClick={() => setDailyPanelMode("3")} name={'Nível 3'} />

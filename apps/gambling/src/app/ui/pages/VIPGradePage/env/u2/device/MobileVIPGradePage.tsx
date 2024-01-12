@@ -39,12 +39,12 @@ export const MobileVIPGradePage = ({
       </div>
 
       {/*VIP 進度卡*/}
-      <div className='w-full h-fit flex rounded-lg bg-[#333333] mt-3 p-2'>
+      <div className='w-full h-fit flex rounded-lg bg-[var(--grayscale-20)] mt-3 p-2'>
         {/*VIP進度條*/}
         {
           selectedVIP !== 0 && (
             <div className='w-full h-full flex flex-col justify-center'>
-              <div className='w-full flex justify-between gap-2 items-end text-sm font-medium text-[#808080]'>
+              <div className='w-full flex justify-between gap-2 items-end text-sm font-medium text-[var(--grayscale-50)]'>
                 <div className='flex-1'>Valor total da recarga</div>
                 <div>
                   <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.vip_score || 0) / 100)}</span>
@@ -58,7 +58,7 @@ export const MobileVIPGradePage = ({
                   ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
                 }
               />
-              <div className='w-full flex justify-between gap-2 items-end text-sm font-medium text-[#808080] mt-2'>
+              <div className='w-full flex justify-between gap-2 items-end text-sm font-medium text-[var(--grayscale-50)] mt-2'>
                 <div className='flex-1'>Número total de apostas</div>
                 <div>
                   <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.flow || 0) / 100)}</span>

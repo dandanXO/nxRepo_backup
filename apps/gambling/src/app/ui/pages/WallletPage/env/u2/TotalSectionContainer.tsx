@@ -13,7 +13,7 @@ const IconTabItem = (props: { selected:boolean, icon: string; text: ReactElement
     <button onClick={props.onClick} className='flex flex-col justify-center items-center basis-[30%] flex-1 pt-3 pb-6 md:pt-5 md:pb-14 lg:pt-8'>
       <img className={twMerge("w-[40px] lg:w-[48px]", !props.selected && 'opacity-40')} src={props.icon} />
       <div className={twMerge('text-sm lg:text-base text-white', !props.selected && 'opacity-40')}>{props.text}</div>
-      {props.selected && <div className='-mb-5 inline-block border-[#333333] border-r-[15px] sm:border-r-[30px] lg:border-r-[60px] border-l-[15px] sm:border-l-[30px] lg:border-l-[60px] border-b-[12px] sm:border-b-[30px] border-r-transparent border-l-transparent' />}
+      {props.selected && <div className='-mb-5 inline-block border-[var(--grayscale-20)] border-r-[15px] sm:border-r-[30px] lg:border-r-[60px] border-l-[15px] sm:border-l-[30px] lg:border-l-[60px] border-b-[12px] sm:border-b-[30px] border-r-transparent border-l-transparent' />}
     </button>
   )
 }
@@ -49,9 +49,9 @@ export const TotalSectionContainer = (props: ITotalSectionContainer) => {
         </div>
       </div>
       <div className="relative px-2 md:px-5 lg:px-8 -mt-3 md:-mt-12 lg:-mt-14 z-10">
-        <div className='bg-[#333333] flex flex-col justify-center  w-full items-center rounded-lg p-2 md:p-4 lg:p-5"'>
+        <div className='bg-[var(--grayscale-20)] flex flex-col justify-center  w-full items-center rounded-lg p-2 md:p-4 lg:p-5"'>
           <div className={`
-               text-[#999999] font-medium text-center mb-3 md:mb-5
+               text-[var(--grayscale-60)] font-medium text-center mb-3 md:mb-5
                text-sm lg:text-base leading-5 lg:leading-6
                bg-gradient-to-r from-transparent via-[#ffffff1a] to-transparent
                flex flex-row justify-center py-1 md:py-2 lg:py-2.5 w-full

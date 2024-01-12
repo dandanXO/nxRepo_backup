@@ -32,10 +32,10 @@ export const DesktopVIPGradePage = ({
       <img src={VIPStatue} alt="statue" className='mt-10' />
 
       {/*VIP 進度卡*/}
-      <div className='w-full h-[298px] flex rounded-2xl bg-[#333333] mt-10'>
+      <div className='w-full h-[298px] flex rounded-2xl bg-[var(--grayscale-20)] mt-10'>
 
         {/*VIP選單*/}
-        <div className='w-[15%] border-r border-r-[#666666] flex flex-col items-center group cursor-pointer'>
+        <div className='w-[15%] border-r border-r-[var(--grayscale-40)] flex flex-col items-center group cursor-pointer'>
           <img alt='up' src={CaretUP} className='invisible text-white group-hover:visible w-[20px] h-[20px] my-1' onClick={()=> { if(selectedVIP !== 0) { setSelectedVIP(selectedVIP - 1)} }} />
           <div
             className='h-[242px] w-[78%] py-1 overflow-y-scroll vip-tab-items flex flex-col gap-4 items-center relative'
@@ -61,7 +61,7 @@ export const DesktopVIPGradePage = ({
           {
             selectedVIP !== 0 && (
               <div className='w-full h-full flex flex-col justify-center'>
-                <div className='w-full flex justify-between text-base font-medium text-[#808080]'>
+                <div className='w-full flex justify-between text-base font-medium text-[var(--grayscale-50)]'>
                   <div>Valor total da recarga</div>
                   <div>
                     <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.vip_score || 0) / 100)}</span>
@@ -74,7 +74,7 @@ export const DesktopVIPGradePage = ({
                     ((userVIPInfo?.data?.vip_score || 0) / 100) / (allLevelInfo[selectedVIP].rechargeAmountLimit / 100 || 1)
                   }
                 />
-                <div className='w-full flex justify-between text-base font-medium text-[#808080] mt-5'>
+                <div className='w-full flex justify-between text-base font-medium text-[var(--grayscale-50)] mt-5'>
                   <div>Número total de apostas</div>
                   <div>
                     <span className='text-white'>R$ {formatLocaleMoney((userVIPInfo?.data?.flow || 0) / 100)}</span>

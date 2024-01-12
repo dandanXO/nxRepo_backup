@@ -542,6 +542,7 @@ export const AppRouter = () => {
                 desktop: false,
                 desktopOverChildren: false,
               }}
+              showToolboxConfig={false}
             >
               <GamePage/>
             </PageTemplate>

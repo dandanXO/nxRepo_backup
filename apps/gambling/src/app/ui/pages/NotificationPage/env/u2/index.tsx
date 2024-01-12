@@ -17,7 +17,7 @@ export const NotificationPage = () => {
   const { onClickToProfile } = usePageNavigate()
 
   return (
-    <PageContainer className='text-white bg-[#333333] h-full'>
+    <PageContainer className='text-white bg-[var(--grayscale-20)] h-full'>
       <BackNavigation
         className='pt-0 pb-0'
         onClick={onClickToProfile}
