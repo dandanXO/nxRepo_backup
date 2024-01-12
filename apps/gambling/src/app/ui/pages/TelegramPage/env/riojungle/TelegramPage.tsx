@@ -42,7 +42,7 @@ export const TelegramPage = (props: ITelegramPage) => {
         <div className="text-white text-base md:text-lg lg:text-xl leading-6 md:leading-7 mb-5">
           {environment.platformGroup} ({environment.platformName}) sinceramente convida você a se juntar ao nosso canal de telegrama e vamos nos comunicar mais profundamente!
         </div>
-        <div className="text-[#B3B3B3]">
+        <div className="text-[var(--grayscale-70)]">
           <div className="text-sm md:text-base mb-5">Nota especial:</div>
           <TelegrmaNotice />
         </div>

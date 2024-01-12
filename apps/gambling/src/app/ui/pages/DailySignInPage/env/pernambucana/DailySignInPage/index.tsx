@@ -18,7 +18,7 @@ const Panel = styled.div`
   //  rgba(152, 122, 255, 0.8) 0%,
   //  rgba(71, 50, 164, 0.8) 100%
   //);
-  //background: linear-gradient(to bottom, #808080, #2b2b2b);
+  //background: linear-gradient(to bottom, var(--grayscale-50), #2b2b2b);
 `;
 
 const DailySignInContainer = styled.div`

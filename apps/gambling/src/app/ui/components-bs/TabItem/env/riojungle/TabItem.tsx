@@ -52,7 +52,7 @@ export const SubTabItem = (props: ITabItem) => {
         "whitespace-nowrap",
         "flex-1",
         {
-          'text-white border-[#8547EB] border-solid border-2' : props.active,
+          'text-white border-[var(--primary-main)] border-solid border-2' : props.active,
           'bg-[#333] text-[rgba(255,255,255,1)] border-2 border-[#333]': !props.active
         },
         props.className

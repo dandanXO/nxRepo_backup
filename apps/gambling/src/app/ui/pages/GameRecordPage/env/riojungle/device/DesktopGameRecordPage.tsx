@@ -13,7 +13,7 @@ const { RangePicker } = DatePicker;
 const datePickerStyle = {
   padding: '6px 25px',
   color: 'white',
-  backgroundColor: '#333333',
+  backgroundColor: 'var(--grayscale-20)',
   border: 'none',
   borderRadius: '100px',
   display: 'flex',

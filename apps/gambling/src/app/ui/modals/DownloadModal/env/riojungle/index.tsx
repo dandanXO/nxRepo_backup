@@ -61,7 +61,7 @@ export const RiojungleDownloadModal = (props: IInitialChargeModal) => {
         className={cx(
           "relative",
             "rounded-2xl border-solid ",
-            "bg-[#333333]",
+            "bg-[var(--grayscale-20)]",
             "flex flex-col items-center",
             "",
             "text-center text-white",

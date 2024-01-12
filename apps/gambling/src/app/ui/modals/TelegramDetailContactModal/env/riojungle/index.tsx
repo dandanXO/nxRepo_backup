@@ -16,7 +16,7 @@ export const TelegramDetailContactModal = ({
   return (
     <BaseModal onClose={onClose} >
       <div
-        className='flex flex-col items-center relative text-sm md:text-base lg:text-xl bg-[#333333] text-[var(--grayscale-100)] rounded-2xl px-4 pb-4 md:px-6 md:pb-8 w-[296px] md:w-[378px]'
+        className='flex flex-col items-center relative text-sm md:text-base lg:text-xl bg-[var(--grayscale-20)] text-[var(--grayscale-100)] rounded-2xl px-4 pb-4 md:px-6 md:pb-8 w-[296px] md:w-[378px]'
         onClick={(event)=> event.stopPropagation()}
       >
         <img alt='close' className='absolute top-2 right-2 cursor-pointer w-12 ' src={`assets/${environment.uVersion}/WXCircle.png`} onClick={onClose}/>

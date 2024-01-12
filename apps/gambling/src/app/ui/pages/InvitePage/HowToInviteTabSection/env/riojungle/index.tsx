@@ -111,12 +111,12 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
 
         </div>
 
-        <div className="mb-3 md:mb-5 flex flex-row w-full border rounded-lg border-solid border-[#333333] bg-[var(--grayscale-10)]">
+        <div className="mb-3 md:mb-5 flex flex-row w-full border rounded-lg border-solid border-[var(--grayscale-20)] bg-[var(--grayscale-10)]">
           <div className="p-2 md:px-5 lg:py-3 text-sm lg:text-base text-center leading-5 lg:leading-6 text-[var(--state-warn-main)]">
             <QuestionSection3 />
           </div>
         </div>
-        <div className="text-sm lg:text-base overflow-hidden bg-[#333333] flex flex-col justify-between w-full items-start rounded-lg">
+        <div className="text-sm lg:text-base overflow-hidden bg-[var(--grayscale-20)] flex flex-col justify-between w-full items-start rounded-lg">
           <div className="bg-gradient-to-l from-[#ffffff00] to-[#ffffff1a] text-zinc-400 flex w-full p-2 py-3 md:p-5 lg:p-8 justify-center items-center">
             Nota: Para garantir a justiça, os usuários trapaceiros serão banidos
             permanentemente, os fundos obtidos ilegalmente serão congelados e as

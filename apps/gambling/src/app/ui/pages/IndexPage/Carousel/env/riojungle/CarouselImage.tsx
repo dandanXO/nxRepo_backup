@@ -11,7 +11,7 @@ export const CarouselImage = (props: ICarouselImage) => {
   const { isDesktop } = useBreakpoint();
 
   return (
-    <div className='relative rounded-lg border border-[#4D4D4D] overflow-hidden'>
+    <div className='relative rounded-lg border border-[var(--grayscale-30)] overflow-hidden'>
       <img
         alt={props.alt}
         className={"w-[100vw]"}

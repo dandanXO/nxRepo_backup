@@ -95,7 +95,7 @@ export const WalletDepositNextPage = () => {
   `;
 
   const titleStyle = `
-  text-left text-[#B3B3B3] text-sm lg:text-xl
+  text-left text-[var(--grayscale-70)] text-sm lg:text-xl
   `
   const textStyle = `
   text-sm md:text-base lg:text-xl text-right text-white font-bold
@@ -110,7 +110,7 @@ export const WalletDepositNextPage = () => {
         onClick={() => onClickToWallet({ 'panelType': 'deposit' })}
       />
 
-      <div className="md:mt-2 lg:mt-4 mb-5 py-2 px-3 lg:py-3 lg:px-5 px-text-sm md:text-base lg:text-xl text-[var(--secondary-main)] border-solid border-[#4d4d4d] bg-[var(--grayscale-10)] flex flex-row w-full border rounded-lg">
+      <div className="md:mt-2 lg:mt-4 mb-5 py-2 px-3 lg:py-3 lg:px-5 px-text-sm md:text-base lg:text-xl text-[var(--secondary-main)] border-solid border-[var(--grayscale-30)] bg-[var(--grayscale-10)] flex flex-row w-full border rounded-lg">
         {message}
       </div>
 
@@ -148,7 +148,7 @@ export const WalletDepositNextPage = () => {
         </section>
         <section className={cx("w-full mb-3 lg:mb-5", { "md:w-[40%]": !isMobile })}>
           <ShadowContainer className={`flex bg-[#333] rounded-lg flex-col items-center h-full`}>
-            <div className="pt-2 pb-2.5 md:pt-3 md:pb-3.5 lg:pt-3.5 lg:pb-5 opacity-80 bg-[#4d4d4d] flex flex-col justify-center  w-full  rounded-tl-lg rounded-tr-lg">
+            <div className="pt-2 pb-2.5 md:pt-3 md:pb-3.5 lg:pt-3.5 lg:pb-5 opacity-80 bg-[var(--grayscale-30)] flex flex-col justify-center  w-full  rounded-tl-lg rounded-tr-lg">
               <div className="text-sm md:text-base lg:text-xl leading-5 md:leading-6 lg:leading-7 text-white text-center mb-[2px] md:mb-3.5 lg:mb-5">Quantia</div>
               <div className="text-center text-base md:text-xl lg:text-3xl font-bold leading-6 md:leading-7 lg:leading-9 text-white">
                 R$ {formatLocaleMoney(amount)}

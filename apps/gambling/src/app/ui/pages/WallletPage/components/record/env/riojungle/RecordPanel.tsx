@@ -38,7 +38,7 @@ export const RecordPanel = (props: IRecordPanel) => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <div id={'record-section'} className='text-white bg-[#333333] rounded-lg p-5'>
+    <div id={'record-section'} className='text-white bg-[var(--grayscale-20)] rounded-lg p-5'>
       {/*{isMobile && <BlueBoard />}*/}
 
       {/* {isMobile && (
@@ -46,7 +46,7 @@ export const RecordPanel = (props: IRecordPanel) => {
       )} */}
 
       <section className={cx('button-list flex flex-row mb-2 md:mb-4 md:justify-start font-medium')}>
-        <div className="bg-[#4d4d4d] flex flex-row rounded-[100px] sm:w-auto w-full justify-between">
+        <div className="bg-[var(--grayscale-30)] flex flex-row rounded-[100px] sm:w-auto w-full justify-between">
           <RecordTabButton
             className={cx("mr-3 px-3.5 md:px-6 flex-none ",{'!text-lg':!isMobile, '!grow': isMobile})}
             active={recordPanelMode === 'deposit'}

@@ -26,7 +26,7 @@ export const UserLoginStatusSection = (props: IUserLoginStatusSection) => {
         </section>
       )}
       {switchToLoginOrRegister !== "forget" && (
-        <section className={"mb-5 flex justify-center items-center bg-[#333333]"}>
+        <section className={"mb-5 flex justify-center items-center bg-[var(--grayscale-20)]"}>
           <Tabs className="w-full bg-[var(--grayscale-30)]">
             <TabItem
               className={cx({ 'bg-[var(--grayscale-30)]': switchToLoginOrRegister !== "login" })}
