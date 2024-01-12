@@ -46,7 +46,7 @@ export const Toolbox = (props: IToolbox) => {
     <>
       {
         isMobile && mobileShowToolbox && (mobileShowDownload || mobileShowCustomerService) && (
-          <div className={"z-10 fixed right-[16px] bottom-[68px]"}>
+          <div className={"z-20 fixed right-[16px] bottom-[68px]"}>
             {mobileShowDownload && (
               <div className={"mb-2"}>
                 <ToolButton isMobile={isMobile} className={""} onClick={props.onClickToDownload}>
