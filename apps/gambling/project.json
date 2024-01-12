@@ -829,7 +829,7 @@
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/u1/theme.css"
+              "with": "apps/gambling/src/environments/u1/m2v10/theme.css"
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
@@ -856,7 +856,7 @@
             },
             {
               "replace": "apps/gambling/src/environments/theme.css",
-              "with": "apps/gambling/src/environments/u1/theme.css"
+              "with": "apps/gambling/src/environments/u1/m2v10/theme.css"
             },
             {
               "replace": "apps/gambling/src/environments/environment.ts",
