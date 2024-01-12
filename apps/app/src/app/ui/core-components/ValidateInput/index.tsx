@@ -4,6 +4,10 @@ import React, { ClipboardEvent, useEffect } from 'react';
 import { Input } from '@frontend/mobile/shared/ui';
 
 import { InputValue } from '../form/InputValue';
+import { environment } from "../../../../environments/environmentModule/environment";
+import {
+  PakistanCountry,
+} from '@frontend/shared/domain';
 
 type Props = {
   inputData: InputValue<string>;
@@ -54,7 +58,7 @@ const ValidateInput = (props: Props) => {
       {...props}
       onChange={handleOnchange}
       onBlur={handleOnblur}
-      onCopy={(e) => preventCopyPaste(e)}
+      onCopy={(e) => { if(environment.country === PakistanCountry.country) { preventCopyPaste(e)}}}
       onCut={(e) => preventCutPaste(e)}
     />
   );
