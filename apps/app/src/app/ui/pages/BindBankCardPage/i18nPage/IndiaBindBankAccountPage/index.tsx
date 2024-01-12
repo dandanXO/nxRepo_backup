@@ -25,6 +25,10 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
     ifscData,
     setIFSCData,
     validateIFSC,
+    // NOTE: confirm IFSC
+    confirmIFSCData,
+    setConfirmIFSCData,
+    validateConfirmIFSCData,
     // NOTE: UPI
     upiData,
     setUpiData,
@@ -47,6 +51,9 @@ export const IndiaBindBankAccountPage = (props: IUseBindBankAccountPage) => {
       ifscData={ifscData}
       setIFSCData={setIFSCData}
       validateIFSC={validateIFSC}
+      confirmIFSCData={confirmIFSCData}
+      setConfirmIFSCData={setConfirmIFSCData}
+      validateConfirmIFSCData={validateConfirmIFSCData}
       bankcardNoData={bankcardNoData}
       onAccountNumberChange={onAccountNumberChange}
       onAccountNumberBlur={onAccountNumberBlur}

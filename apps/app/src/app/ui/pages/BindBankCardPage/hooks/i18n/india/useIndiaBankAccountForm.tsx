@@ -25,6 +25,14 @@ export const useIndiaBankAccountForm = () => {
     isEdit: false,
   });
 
+  // NOTE: FormInput - IFSC
+  const [confirmIFSCData, setConfirmIFSCData] = useState<InputValue<string>>({
+    data: '',
+    isValidation: false,
+    errorMessage: '',
+    isEdit: false,
+  });
+
   const validateIFSC = (ifscValue: string) => {
     const ifscRex = new RegExp('^[A-Za-z]{4}0[0-9]{6}$');
     const invalidErrorMessage = t(
@@ -47,6 +55,18 @@ export const useIndiaBankAccountForm = () => {
       isEdit: true,
     };
   };
+
+  const validateConfirmIFSCData = (confirmIFSCValue: string) => {
+
+    const isValidation = confirmIFSCValue === ifscData.data
+
+    return {
+      data: confirmIFSCValue,
+      isValidation,
+      errorMessage: !isValidation ? t('Please make sure your IFSC code match.'): '',
+      isEdit: true
+    }
+  }
 
 
   // NOTE: FormInput - UPI
@@ -96,8 +116,9 @@ export const useIndiaBankAccountForm = () => {
   const validate = () => {
     // NOTE: FormInput
     setIFSCData(validateIFSC(ifscData.data))
+    setConfirmIFSCData(validateConfirmIFSCData(confirmIFSCData.data))
     setUpiData(validateUpiId(upiData.data))
-    return ifscData.isValidation && upiData.isValidation
+    return ifscData.isValidation && confirmIFSCData.isValidation && upiData.isValidation
   };
 
   return {
@@ -108,6 +129,11 @@ export const useIndiaBankAccountForm = () => {
     setIFSCData,
     ifscData,
     validateIFSC,
+
+    // NOTE: Confirm IFSC
+    confirmIFSCData,
+    setConfirmIFSCData,
+    validateConfirmIFSCData,
 
     // NOTE: UPI
     setUpiData,
