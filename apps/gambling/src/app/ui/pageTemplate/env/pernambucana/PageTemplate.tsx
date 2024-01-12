@@ -5,9 +5,9 @@ import cx from "classnames";
 
 import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
-import {Footer} from "../../footer/env/coco/Footer";
-import {TabBar} from "../../tabBar/env/coco";
-import {Toolbox} from "../../Toolbox/env/coco";
+import {Footer} from "../../footer/env/u1/Footer";
+import {TabBar} from "../../tabBar/env/u1";
+import {Toolbox} from "../../Toolbox/env/u1";
 import {ThreeDots} from "react-loading-icons";
 import React, {useEffect} from "react";
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";

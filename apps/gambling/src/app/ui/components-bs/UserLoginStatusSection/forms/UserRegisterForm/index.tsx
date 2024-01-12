@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../../../utils/renderByUVersion";
-import {UserRegisterForm as CUserRegisterForm} from "./env/coco/UserRegisterForm";
-import {UserRegisterForm as RUserRegisterForm} from "./env/riojungle/UserRegisterForm";
+import {UserRegisterForm as CUserRegisterForm} from "./env/u1/UserRegisterForm";
+import {UserRegisterForm as RUserRegisterForm} from "./env/u2/UserRegisterForm";
 import {IUserRegisterForm} from "./types";
 
 export const UserRegisterForm = (props: IUserRegisterForm) => {

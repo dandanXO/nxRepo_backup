@@ -1,6 +1,6 @@
 import React from "react";
-import { TermsOfServicePage as CocoTermsOfServicePage } from './env/coco';
-import { TermsOfServicePage as RioTermsOfServicePage } from './env/riojungle';
+import { TermsOfServicePage as CocoTermsOfServicePage } from './env/u1';
+import { TermsOfServicePage as RioTermsOfServicePage } from './env/u2';
 import { renderByUVersion } from "../../utils/renderByUVersion";
 
 

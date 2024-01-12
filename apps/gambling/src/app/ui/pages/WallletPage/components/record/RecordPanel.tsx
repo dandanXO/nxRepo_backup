@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../../../utils/renderByUVersion";
-import { RecordPanel as CRecordPanel } from "./env/coco/RecordPanel"
-import { RecordPanel as RioRecordPanel } from './env/riojungle/RecordPanel'
+import { RecordPanel as CRecordPanel } from "./env/u1/RecordPanel"
+import { RecordPanel as RioRecordPanel } from './env/u2/RecordPanel'
 
 type IRecordPanel = {
   recordPanelMode: 'deposit' | 'withdraw';

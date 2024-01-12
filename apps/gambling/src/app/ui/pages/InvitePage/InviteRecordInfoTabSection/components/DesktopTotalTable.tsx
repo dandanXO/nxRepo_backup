@@ -1,8 +1,8 @@
 import { ITotal } from "../index";
-import { DesktopTotalTable as CDesktopTotalTable } from "../env/coco/DesktopTotalTable";
+import { DesktopTotalTable as CDesktopTotalTable } from "../env/u1/DesktopTotalTable";
 import { DesktopTotalTable as PDesktopTotalTable } from "../env/pernambucana/DesktopTotalTable";
 import { DesktopTotalTable as WDesktopTotalTable } from "../env/wild/DesktopTotalTable";
-import { DesktopTotalTable as RDesktopTotalTable } from "../env/riojungle/DesktopTotalTable";
+import { DesktopTotalTable as RDesktopTotalTable } from "../env/u2/DesktopTotalTable";
 import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export const DesktopTotalTable = (props: ITotal & { type: string }) => {

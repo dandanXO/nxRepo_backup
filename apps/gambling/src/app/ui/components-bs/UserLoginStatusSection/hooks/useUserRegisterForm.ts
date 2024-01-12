@@ -6,7 +6,7 @@ import axios from "axios";
 import {environment} from "../../../../../environments/environment";
 import {useRegisterMutation} from "../../../../external";
 
-import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm/env/coco/UserLoginForm";
+import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm/env/u1/UserLoginForm";
 import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
 import {connect} from "../../../../gateway/socket";
 import {appSlice} from "../../../../reduxStore/appSlice";

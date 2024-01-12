@@ -9,7 +9,7 @@ import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { MobileMenuLink } from "../../components/MobileMenuLink";
 import { CocoAvatar } from "../../../../components/Avatar/CocoAvatar";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
-import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSection/env/coco/InviteCopySection";
+import {InviteCopySection} from "../../../../pages/InvitePage/HowToInviteTabSection/env/u1/InviteCopySection";
 import {uiSlice} from "../../../../../reduxStore/uiSlice";
 import {CopyIcon} from "../../../../components-bs/Icons/CopyIcon";
 import {MobileMenuItem} from "./MobileMenuItem";

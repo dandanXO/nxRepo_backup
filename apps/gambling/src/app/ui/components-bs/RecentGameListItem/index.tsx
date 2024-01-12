@@ -5,7 +5,7 @@ import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { renderByUVersion } from "../../utils/renderByUVersion";
 import { PlayButton as PPPlayButton } from "../GameTypeSection/env/pernambucana/PlayButton";
 import { PlayButton as WPlayButton } from "../GameTypeSection/env/wild/PlayButton";
-import { PlayButton as CPlayButton } from "../GameTypeSection/env/coco/PlayButton";
+import { PlayButton as CPlayButton } from "../GameTypeSection/env/u1/PlayButton";
 import { Skeleton } from "../GameTypeSection/Skeleton";
 import { TailSpin } from "react-loading-icons";
 

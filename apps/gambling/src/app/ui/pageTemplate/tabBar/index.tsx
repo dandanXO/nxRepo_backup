@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {TabBar as CTabBar} from "./env/coco/index"
-import {TabBar as RTabBar} from "./env/riojungle/index"
+import {TabBar as CTabBar} from "./env/u1/index"
+import {TabBar as RTabBar} from "./env/u2/index"
 import {ITabBar} from "./type";
 
 export const TabBar = (props: ITabBar) => {

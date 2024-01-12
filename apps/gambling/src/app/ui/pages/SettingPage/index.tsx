@@ -4,8 +4,8 @@ import {useAllowLoginRouterRules} from '../../router/hooks/useAllowLoginRouterRu
 
 import {SettingPage as PSettingPage} from "./env/pernambucana/SettingPage";
 import {SettingPage as WSettingPage} from "./env/wild/SettingPage";
-import {SettingPage as CSettingPage} from "./env/coco/SettingPage";
-import { SettingPage as RioSettingPage } from './env/riojungle';
+import {SettingPage as CSettingPage} from "./env/u1/SettingPage";
+import { SettingPage as RioSettingPage } from './env/u2';
 import {renderByUVersion} from "../../utils/renderByUVersion";
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 

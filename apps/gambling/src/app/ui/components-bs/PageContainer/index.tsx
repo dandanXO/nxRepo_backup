@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {PageContainer as CocoPageContainer} from "./env/coco/PageContainer";
-import {PageContainer as RiojungleContainer} from "./env/riojungle/PageContainer";
+import {PageContainer as CocoPageContainer} from "./env/u1/PageContainer";
+import {PageContainer as RiojungleContainer} from "./env/u2/PageContainer";
 
 export type IContainer = {
   children: React.ReactNode;

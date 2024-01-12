@@ -18,11 +18,11 @@ import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useScrollToPartPageTemplate} from "../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 import { DragScrollContainer } from "../../components/DragScrollContainer";
-import { SubTabItem } from "../../components-bs/TabItem/env/riojungle/TabItem";
+import { SubTabItem } from "../../components-bs/TabItem/env/u2/TabItem";
 
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
-import {IndexPage as CIndexPage} from "./env/coco/IndexPage";
-import {IndexPage as RIndexPage} from "./env/riojungle/IndexPage";
+import {IndexPage as CIndexPage} from "./env/u1/IndexPage";
+import {IndexPage as RIndexPage} from "./env/u2/IndexPage";
 
 export const MobileGameNumber = 15;
 export const DesktopGameNumber = 30;
@@ -158,7 +158,7 @@ export const IndexPage = () => {
       } else {
         return (indexPagecurrentSelectLabel === "Todos" || indexPagecurrentSelectLabel === "Salão"  ) ? renderHotBrandGameList() : renderTypeGameList()
       }
-      
+
     }
   }
   const subGameMenu = ()=>{

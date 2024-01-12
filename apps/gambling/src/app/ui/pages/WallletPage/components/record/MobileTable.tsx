@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../../../utils/renderByUVersion";
-import { DepositMobileTable as CDepositMobileTable, WithdrawMobileTable as CWithdrawMobileTable } from "./env/coco/MobileTable"
-import { DepositMobileTable as RioDepositMobileTable, WithdrawMobileTable as RioWithdrawMobileTable } from './env/riojungle/MobileTable'
+import { DepositMobileTable as CDepositMobileTable, WithdrawMobileTable as CWithdrawMobileTable } from "./env/u1/MobileTable"
+import { DepositMobileTable as RioDepositMobileTable, WithdrawMobileTable as RioWithdrawMobileTable } from './env/u2/MobileTable'
 
 
 export const DepositMobileTable = () => {

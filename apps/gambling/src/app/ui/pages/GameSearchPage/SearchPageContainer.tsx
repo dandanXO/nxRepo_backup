@@ -5,7 +5,7 @@ import {renderByUVersion} from "../../utils/renderByUVersion";
 
 import {SearchPageContainer as PContaniner} from "./env/pernambucana/SearchPageContainer";
 import {SearchPageContainer as WContaniner} from "./env/wild/SearchPageContainer";
-import {SearchPageContainer as CContaniner} from "./env/coco/SearchPageContainer";
+import {SearchPageContainer as CContaniner} from "./env/u1/SearchPageContainer";
 
 
 interface Props {

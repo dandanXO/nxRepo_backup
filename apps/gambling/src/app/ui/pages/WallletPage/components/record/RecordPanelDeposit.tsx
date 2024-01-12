@@ -1,7 +1,7 @@
 
 import {renderByUVersion} from "../../../../utils/renderByUVersion";
-import { RecordPanelDeposit as CRecordPanelDeposit } from "./env/coco/RecordPanelDeposit"
-import { RecordPanelDeposit as RioRecordPanelDeposit } from './env/riojungle/RecordPanelDeposit'
+import { RecordPanelDeposit as CRecordPanelDeposit } from "./env/u1/RecordPanelDeposit"
+import { RecordPanelDeposit as RioRecordPanelDeposit } from './env/u2/RecordPanelDeposit'
 
 
 export const RecordPanelDeposit = () => {

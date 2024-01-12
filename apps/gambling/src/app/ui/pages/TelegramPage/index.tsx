@@ -18,9 +18,9 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { appSlice } from "../../../reduxStore/appSlice";
 import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
-import { TelegramPage as CTelegramPage } from "./env/coco/TelegramPage";
+import { TelegramPage as CTelegramPage } from "./env/u1/TelegramPage";
 import { TelegramPage as WTelegramPage } from "./env/wild/TelegramPage";
-import { TelegramPage as RTelegramPage } from "./env/riojungle/TelegramPage";
+import { TelegramPage as RTelegramPage } from "./env/u2/TelegramPage";
 import { TelegramPage as PTelegramPage } from "./env/pernambucana/TelegramPage";
 
 

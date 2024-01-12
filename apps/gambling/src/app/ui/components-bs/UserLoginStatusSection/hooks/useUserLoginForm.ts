@@ -9,7 +9,7 @@ import {environment} from "../../../../../environments/environment";
 import {setLoginLocalStorage} from "../../../../persistant/setLoginLocalStorage";
 import {appSlice} from "../../../../reduxStore/appSlice";
 import {connect} from "../../../../gateway/socket";
-import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm/env/coco/UserLoginForm";
+import {onValidatePasswordInput, onValidatePhoneInput} from "../forms/UserLoginForm/env/u1/UserLoginForm";
 
 type IUseUserLoginForm = {
   confirmToLogin: () => void;

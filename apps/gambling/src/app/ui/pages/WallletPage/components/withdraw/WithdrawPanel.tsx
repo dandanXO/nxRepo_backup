@@ -17,10 +17,10 @@ import { RootState } from "../../../../../reduxStore";
 import { tcx } from "../../../../utils/tcx";
 import { MobileInput } from "../../../../components-bs/Inputs/MobileInput";
 import { renderByUVersion } from "../../../../utils/renderByUVersion";
-import { WithdrawPanel as CWithdrawPanel } from '../../env/coco/tabsContent/withdraw/WithdrawPanel';
+import { WithdrawPanel as CWithdrawPanel } from '../../env/u1/tabsContent/withdraw/WithdrawPanel';
 import { WithdrawPanel as PWithdrawPanel } from '../../env/pernambucana/tabsContent/withdraw/WithdrawPanel'
 import { WithdrawPanel as WWithdrawPanel } from '../../env/wild/tabsContent/withdraw/WithdrawPanel';
-import { WithdrawPanel as RWithdrawPanel } from '../../env/riojungle/tabsContent/withdraw/WithdrawPanel';
+import { WithdrawPanel as RWithdrawPanel } from '../../env/u2/tabsContent/withdraw/WithdrawPanel';
 
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { ButtonPro } from "../../../../components-bs/Buttons/ButtonPro";

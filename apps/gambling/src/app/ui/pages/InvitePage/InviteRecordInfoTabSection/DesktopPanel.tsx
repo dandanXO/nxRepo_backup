@@ -9,7 +9,7 @@ import { RecordButton2 } from "../../../components-bs/Buttons/RecordButton";
 import { environment } from "apps/gambling/src/environments/environment";
 import { CocoTabItem } from "../../../components-bs/TabItem/CocoTabItem";
 import cx from 'classnames';
-import { tabItemProps } from "./env/coco/tabItemProps";
+import { tabItemProps } from "./env/u1/tabItemProps";
 import { DesktopTotalTable } from "./components/DesktopTotalTable";
 import { DesktopDailyTable } from "./components/DesktopDailyTable";
 import { PageContainer } from "../../../components-bs/PageContainer";

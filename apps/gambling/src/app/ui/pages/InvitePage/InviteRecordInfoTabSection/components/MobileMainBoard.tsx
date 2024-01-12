@@ -1,9 +1,9 @@
 import { IBoardData } from "../index";
 import { ReactElement, ReactNode } from "react";
-import { MobileMainBoard as CMobileMainBoard } from "../env/coco/MobileMainBoard";
+import { MobileMainBoard as CMobileMainBoard } from "../env/u1/MobileMainBoard";
 import { MobileMainBoard as PMobileMainBoard } from "../env/pernambucana/MobileMainBoard";
 import { MobileMainBoard as WMobileMainBoard } from "../env/wild/MobileMainBoard";
-import { MobileMainBoard as RMobileMainBoard } from "../env/riojungle/MobileMainBoard";
+import { MobileMainBoard as RMobileMainBoard } from "../env/u2/MobileMainBoard";
 import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export interface IBoardContainer {

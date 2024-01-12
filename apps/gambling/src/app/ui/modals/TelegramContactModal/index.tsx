@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import { CocoTelegramContactModal } from "./env/coco"
-import { RiojungleTelegramContactModal } from './env/riojungle'
+import { CocoTelegramContactModal } from "./env/u1"
+import { RiojungleTelegramContactModal } from './env/u2'
 
 export type ITelegramContactModal = {
   close: () => void;

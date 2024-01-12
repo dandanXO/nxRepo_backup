@@ -7,7 +7,7 @@ import { useState } from "react";
 import ConfirmDrawer from "../../../components-bs/Drawers/ConfirmDrawer";
 import { environment } from "apps/gambling/src/environments/environment";
 import { TabItem } from "../../../components-bs/TabItem/TabItem";
-import { tabItemProps } from "./env/coco/tabItemProps";
+import { tabItemProps } from "./env/u1/tabItemProps";
 import { MobileTableContainer } from "./env/components/MobileTableContainer";
 import { QuestionTipsIcon } from "../../../components-bs/Icons/QuestionTipsIcon";
 

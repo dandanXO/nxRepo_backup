@@ -5,7 +5,7 @@ import {responsive} from "./responsive";
 import useBreakpoint from "../../../pageTemplate/hooks/useBreakpoint";
 import cx from "classnames";
 import {renderByUVersion} from "../../../utils/renderByUVersion";
-import {AppCarousel as RiojungleAppCarousel} from "./env/riojungle/RiojungleCarousel"
+import {AppCarousel as RiojungleAppCarousel} from "./env/u2/RiojungleCarousel"
 import {tailwindVariables} from "../../../../../environments/tailwind.variables";
 
 type IAppCarousel = {

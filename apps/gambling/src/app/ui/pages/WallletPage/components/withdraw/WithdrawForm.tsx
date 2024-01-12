@@ -5,8 +5,8 @@ import Select from 'react-select';
 import { renderByUVersion } from "../../../../utils/renderByUVersion";
 import cx from 'classnames';
 import { selectInputStyleProps as WselectInputStyleProps } from '../../env/wild/tabsContent/withdraw/selectInputStyleProps';
-import { selectInputStyleProps as RselectInputStyleProps } from '../../env/riojungle/tabsContent/withdraw/selectInputStyleProps';
-import { selectInputStyleProps as CselectInputStyleProps } from '../../env/coco/tabsContent/withdraw/selectInputStyleProps';
+import { selectInputStyleProps as RselectInputStyleProps } from '../../env/u2/tabsContent/withdraw/selectInputStyleProps';
+import { selectInputStyleProps as CselectInputStyleProps } from '../../env/u1/tabsContent/withdraw/selectInputStyleProps';
 import { selectInputStyleProps as PselectInputStyleProps } from '../../env/pernambucana/tabsContent/withdraw/selectInputStyleProps';
 
 

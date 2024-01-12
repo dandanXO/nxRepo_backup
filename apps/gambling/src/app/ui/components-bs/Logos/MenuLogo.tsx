@@ -1,7 +1,7 @@
 import React from "react";
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {MenuLogo as CMenuLogo} from "./env/coco/MenuLogo";
-import {MenuLogo as RMenuLogo} from "./env/riojungle/MenuLogo";
+import {MenuLogo as CMenuLogo} from "./env/u1/MenuLogo";
+import {MenuLogo as RMenuLogo} from "./env/u2/MenuLogo";
 import {ILogo} from "./env/types";
 
 export const MenuLogo = (props: ILogo) => {

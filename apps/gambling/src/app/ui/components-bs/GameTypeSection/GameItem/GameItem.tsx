@@ -7,10 +7,10 @@ import {TailSpin} from 'react-loading-icons';
 import {environment} from "../../../../../environments/environment";
 
 import { renderByUVersion } from "../../../utils/renderByUVersion";
-import { PlayButton as CPlayButton } from "../env/coco/PlayButton";
+import { PlayButton as CPlayButton } from "../env/u1/PlayButton";
 import { PlayButton as WPlayButton } from "../env/wild/PlayButton";
 import { PlayButton as PPlayButton } from "../env/pernambucana/PlayButton";
-import { PlayButton as RPlayButton } from "../env/riojungle/PlayButton";
+import { PlayButton as RPlayButton } from "../env/u2/PlayButton";
 
 import { FavoriteSection } from "../FavoriteSection";
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { DepositAdvertisementModal as CocoDepositAdvertisementModal} from './env/coco';
-import { DepositAdvertisementModal as RioDepositAdvertisementModal} from './env/riojungle';
+import { DepositAdvertisementModal as CocoDepositAdvertisementModal} from './env/u1';
+import { DepositAdvertisementModal as RioDepositAdvertisementModal} from './env/u2';
 import { renderByUVersion } from "../../utils/renderByUVersion";
 
 export interface IDepositAdvertisementModalProps {

@@ -5,8 +5,8 @@ import RMCDatePicker from "rmc-date-picker";
 import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'
 import { renderByUVersion } from "../../../utils/renderByUVersion";
-import { DatePickerBlock as CocoDatePickerBlock } from './env/coco/DatePickerBlock'
-import { DatePickerBlock as RioDatePickerBlock } from './env/riojungle/DatePickerBlock'
+import { DatePickerBlock as CocoDatePickerBlock } from './env/u1/DatePickerBlock'
+import { DatePickerBlock as RioDatePickerBlock } from './env/u2/DatePickerBlock'
 
 export const dateToString = (date: any) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
 

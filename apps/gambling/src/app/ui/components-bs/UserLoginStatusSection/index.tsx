@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {UserLoginStatusSection as CUserLoginStatusSection} from "./env/coco/UserLoginStatusSection"
-import {UserLoginStatusSection as RUserLoginStatusSection} from "./env/riojungle/UserLoginStatusSection"
+import {UserLoginStatusSection as CUserLoginStatusSection} from "./env/u1/UserLoginStatusSection"
+import {UserLoginStatusSection as RUserLoginStatusSection} from "./env/u2/UserLoginStatusSection"
 import {IUserLoginStatusSection} from "./types";
 
 

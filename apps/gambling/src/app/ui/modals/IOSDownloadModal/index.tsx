@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import { CocoIOSDownloadModal } from "./env/coco"
-import { RiojungleIOSDownloadModal } from "./env/riojungle"
+import { CocoIOSDownloadModal } from "./env/u1"
+import { RiojungleIOSDownloadModal } from "./env/u2"
 
 export type IInitialChargeModal = {
   close: () => void;

@@ -14,25 +14,25 @@ import styled, { keyframes } from "styled-components";
 import { RootState } from "../../../reduxStore";
 import { AppLocalStorage } from "../../../persistant/localstorage";
 import { environment } from "../../../../environments/environment"
-import { UserInfoStatusPopoverContainer as CocoPopoverContainer } from './env/coco/UserInfoStatusPopoverContainer';
+import { UserInfoStatusPopoverContainer as CocoPopoverContainer } from './env/u1/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverContainer as WildPopoverContainer } from './env/wild/UserInfoStatusPopoverContainer';
-import { UserInfoStatusPopoverContainer as RioPopoverContainer } from './env/riojungle/UserInfoStatusPopoverContainer';
+import { UserInfoStatusPopoverContainer as RioPopoverContainer } from './env/u2/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverContainer as PernambucanaPopoverContainer } from './env/pernambucana/UserInfoStatusPopoverContainer';
-import { UserInfoStatusPopoverVIPInfo as CocoVIPInfo} from './env/coco/UserInfoStatusPopoverVIPInfo'
+import { UserInfoStatusPopoverVIPInfo as CocoVIPInfo} from './env/u1/UserInfoStatusPopoverVIPInfo'
 import { UserInfoStatusPopoverVIPInfo as WildVIPInfo} from './env/wild/UserInfoStatusPopoverVIPInfo'
 import { UserInfoStatusPopoverVIPInfo as PernambucanaVIPInfo} from './env/pernambucana/UserInfoStatusPopoverVIPInfo'
 import { renderByUVersion } from "../../utils/renderByUVersion";
-import { UserInfoStatusPopoverBalanceInfo as CocoBalanceInfo } from "./env/coco/UserInfoStatusPopoverBalanceInfo";
+import { UserInfoStatusPopoverBalanceInfo as CocoBalanceInfo } from "./env/u1/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverBalanceInfo as WildBalanceInfo } from "./env/wild/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverBalanceInfo as PernambucanaBalanceInfo } from "./env/pernambucana/UserInfoStatusPopoverBalanceInfo";
-import { UserInfoStatusPopoverInviteInfo as CocoInviteInfo } from "./env/coco/UserInfoStatusPopoverInviteInfo";
+import { UserInfoStatusPopoverInviteInfo as CocoInviteInfo } from "./env/u1/UserInfoStatusPopoverInviteInfo";
 import { UserInfoStatusPopoverInviteInfo as WildInviteInfo } from "./env/wild/UserInfoStatusPopoverInviteInfo";
 import { UserInfoStatusPopoverInviteInfo as PernambucanaInviteInfo } from "./env/pernambucana/UserInfoStatusPopoverInviteInfo";
-import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/coco/UserInfoStatusPopoverNavigator";
+import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/u1/UserInfoStatusPopoverNavigator";
 import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/UserInfoStatusPopoverNavigator";
 import { UserInfoStatusPopoverNavigator as PernambucanaNavigator } from "./env/pernambucana/UserInfoStatusPopoverNavigator";
-import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/coco/UserINfoStatusPopoverUserInfo'
-import { UserInfoStatusPopover as RioUserInfoStatusPopover } from './env/riojungle';
+import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/u1/UserINfoStatusPopoverUserInfo'
+import { UserInfoStatusPopover as RioUserInfoStatusPopover } from './env/u2';
 
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";

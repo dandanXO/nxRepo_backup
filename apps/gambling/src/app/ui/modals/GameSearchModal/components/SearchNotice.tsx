@@ -1,7 +1,7 @@
 
 import { ReactElement, ReactNode } from "react";
-import { SearchNotice as CSearchNotice } from "../env/coco/SearchNotice";
-import { SearchNotice as RSearchNotice } from "../env/riojungle/SearchNotice";
+import { SearchNotice as CSearchNotice } from "../env/u1/SearchNotice";
+import { SearchNotice as RSearchNotice } from "../env/u2/SearchNotice";
 import { renderByUVersion } from "../../../utils/renderByUVersion";
 
 

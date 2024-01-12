@@ -1,7 +1,7 @@
 import React from "react";
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {UserMoneyStatusSection as CUserMoneyStatusSection} from "./env/coco/UserMoneyStatusSection";
-import {UserMoneyStatusSection as RUserMoneyStatusSection} from "./env/riojungle/UserMoneyStatusSection";
+import {UserMoneyStatusSection as CUserMoneyStatusSection} from "./env/u1/UserMoneyStatusSection";
+import {UserMoneyStatusSection as RUserMoneyStatusSection} from "./env/u2/UserMoneyStatusSection";
 
 type IProps = {
   className?: string;

@@ -19,8 +19,8 @@ import {renderByUVersion} from "../../utils/renderByUVersion";
 
 import { WalletPage as PWalletPage} from "./env/pernambucana/WalletPage"
 import { WalletPage as WWallletPage } from "./env/wild/WalletPage";
-import { WalletPage as CWallletPage } from "./env/coco/WalletPage";
-import { WalletPage as RWallletPage } from './env/riojungle/WalletPage';
+import { WalletPage as CWallletPage } from "./env/u1/WalletPage";
+import { WalletPage as RWallletPage } from './env/u2/WalletPage';
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import queryString from 'query-string';
 

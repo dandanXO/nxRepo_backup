@@ -5,8 +5,8 @@ import { GetUserGameRecordResponse, useGetUserGameRecordMutation } from "../../.
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
-import { GameRecordPage as CocoGameRecordPage } from './env/coco';
-import { GameRecordPage as RioGameRecordPage } from './env/riojungle';
+import { GameRecordPage as CocoGameRecordPage } from './env/u1';
+import { GameRecordPage as RioGameRecordPage } from './env/u2';
 import { renderByUVersion } from "../../utils/renderByUVersion";
 
 export interface IGameRecordPageProps {

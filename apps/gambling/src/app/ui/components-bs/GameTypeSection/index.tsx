@@ -17,15 +17,15 @@ import { MobileGameTypeHeader } from "./GameTypeHeader/MobileGameTypeHeader";
 import { GameTypeHeader } from "./GameTypeHeader/GameTypeHeader";
 import { mobileGameTypeHeaderProps as PmobileGameTypeHeaderProps } from "./env/pernambucana/mobileGameTypeHeaderProps";
 import { mobileGameTypeHeaderProps as WmobileGameTypeHeaderProps } from "./env/wild/mobileGameTypeHeaderProps";
-import { mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps } from "./env/coco/mobileGameTypeHeaderProps";
+import { mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps } from "./env/u1/mobileGameTypeHeaderProps";
 import { renderByUVersion } from "../../utils/renderByUVersion";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
 import { useScrollToPartPageTemplate } from "../../pageTemplate/hooks/useScrollToPartPageTemplate";
-import { GameTypeSection as RGameTypeSectionList } from "./env/riojungle/GameTypeSection";
+import { GameTypeSection as RGameTypeSectionList } from "./env/u2/GameTypeSection";
 import { GameTypeSection as WGameTypeSectionList } from "./env/wild/GameTypeSection";
-import { GameTypeSection as CGameTypeSectionList } from "./env/coco/GameTypeSection";
+import { GameTypeSection as CGameTypeSectionList } from "./env/u1/GameTypeSection";
 import { GameTypeSection as PGameTypeSectionList } from "./env/pernambucana/GameTypeSection";
 
 export type GameItem = {

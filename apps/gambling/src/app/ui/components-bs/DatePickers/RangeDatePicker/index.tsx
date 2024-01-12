@@ -6,8 +6,8 @@ import 'rmc-date-picker/assets/index.css';
 import 'rmc-picker/assets/index.css'
 import { tcx } from "../../../utils/tcx";
 import { DatePickerBlock, dateToString } from "../DatePicker";
-import { RangeDatePickerContent as CocoRangeDatePickerContent } from './env/coco/RangeDatePickerContent';
-import { RangeDatePickerContent as RioRangeDatePickerContent } from './env/riojungle/RangeDatePickerContent';
+import { RangeDatePickerContent as CocoRangeDatePickerContent } from './env/u1/RangeDatePickerContent';
+import { RangeDatePickerContent as RioRangeDatePickerContent } from './env/u2/RangeDatePickerContent';
 import { renderByUVersion } from "../../../utils/renderByUVersion";
 
 const RangeDatePickerContent = renderByUVersion({

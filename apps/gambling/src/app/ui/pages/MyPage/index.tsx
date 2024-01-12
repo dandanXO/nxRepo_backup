@@ -18,8 +18,8 @@ import {AppLocalStorage} from "../../../persistant/localstorage";
 import {renderByUVersion} from "../../utils/renderByUVersion";
 import PBetMyPage from "./env/pernambucana/MyPage";
 import WBetMyPage  from "./env/wild/MyPage";
-import CBetMyPage from "./env/coco/MyPage";
-import { MyPage as RioMyPage } from './env/riojungle'
+import CBetMyPage from "./env/u1/MyPage";
+import { MyPage as RioMyPage } from './env/u2'
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
 

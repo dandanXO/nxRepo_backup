@@ -14,9 +14,9 @@ import { RootState } from "../../../reduxStore";
 import cx from "classnames";
 import { BackNavigation } from "../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../router/hooks/usePageNavigate";
-import { InvitePage as CInvitePage } from './env/coco/InvitePage';
+import { InvitePage as CInvitePage } from './env/u1/InvitePage';
 import { InvitePage as PInvitePage } from './env/pernambucana/InvitePage';
-import { InvitePage as RInvitePage } from './env/riojungle/InvitePage';
+import { InvitePage as RInvitePage } from './env/u2/InvitePage';
 import { InvitePage as WInvitePage } from './env/wild/InvitePage';
 import { renderByUVersion } from "../../utils/renderByUVersion";
 

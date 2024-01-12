@@ -1,8 +1,8 @@
 import React from 'react';
 import {renderByUVersion} from "../../utils/renderByUVersion";
 
-import {NotificationDrawer as CNotificationDrawer} from "./env/coco/NotificationDrawer";
-import {NotificationDrawer as RNotificationDrawer} from "./env/riojungle/NotificationDrawer";
+import {NotificationDrawer as CNotificationDrawer} from "./env/u1/NotificationDrawer";
+import {NotificationDrawer as RNotificationDrawer} from "./env/u2/NotificationDrawer";
 
 export type INotificationDrawer = {
   closeDrawer: () => void;

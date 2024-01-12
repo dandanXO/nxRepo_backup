@@ -1,9 +1,9 @@
 import { IBoardData } from "../index";
 import { ReactElement, ReactNode } from "react";
-import { DesktopBoard as CDesktopBoard } from "../env/coco/DesktopBoard";
+import { DesktopBoard as CDesktopBoard } from "../env/u1/DesktopBoard";
 import { DesktopBoard as PDesktopBoard } from "../env/pernambucana/DesktopBoard";
 import { DesktopBoard as WDesktopBoard } from "../env/wild/DesktopBoard";
-import { DesktopBoard as RDesktopBoard } from "../env/riojungle/DesktopBoard";
+import { DesktopBoard as RDesktopBoard } from "../env/u2/DesktopBoard";
 import { renderByUVersion } from "../../../../utils/renderByUVersion";
 
 export interface IBoardContainer {

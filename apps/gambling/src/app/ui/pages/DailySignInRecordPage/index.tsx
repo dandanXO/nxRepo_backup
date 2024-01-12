@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import { DailySignInRecordPage as CDailySignInRecordPage } from "./env/coco/"
-import { DailySignInRecordPage as RioDailySignInRecordPage } from "./env/riojungle"
+import { DailySignInRecordPage as CDailySignInRecordPage } from "./env/u1/"
+import { DailySignInRecordPage as RioDailySignInRecordPage } from "./env/u2"
 
 
 export const DailySignInRecordPage = () => {

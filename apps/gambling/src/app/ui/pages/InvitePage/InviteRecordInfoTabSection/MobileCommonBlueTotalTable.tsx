@@ -9,9 +9,9 @@
 // import { renderByPlatform } from "../../../utils/renderByPlatform";
 // import { MobileBlueBackgroundShadowContainer as PMobileBlueBackgroundShadowContainer } from "./env/pernambucana/MobileBlueBackgroundShadowContainer";
 // import { MobileBlueBackgroundShadowContainer as WMobileBlueBackgroundShadowContainer } from "./env/wild/MobileBlueBackgroundShadowContainer";
-// import { MobileBlueBackgroundShadowContainer as CMobileBlueBackgroundShadowContainer } from "./env/coco/MobileBlueBackgroundShadowContainer";
+// import { MobileBlueBackgroundShadowContainer as CMobileBlueBackgroundShadowContainer } from "./env/u1/MobileBlueBackgroundShadowContainer";
 // import { environment } from "apps/gambling/src/environments/environment";
-// import { tabItemProps } from "./env/coco/tabItemProps";
+// import { tabItemProps } from "./env/u1/tabItemProps";
 // import cx from 'classnames';
 // import { MobileTableContainer } from "./env/components/MobileTableContainer";
 // import { QuestionTipsIcon } from "../../../components/Icons/QuestionTipsIcon";

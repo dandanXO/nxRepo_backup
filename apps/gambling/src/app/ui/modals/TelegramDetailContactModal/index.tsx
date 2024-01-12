@@ -1,5 +1,5 @@
-import { TelegramDetailContactModal as CocoTelegramDetailContactModal } from "./env/coco";
-import { TelegramDetailContactModal as RioTelegramDetailContactModal } from "./env/riojungle";
+import { TelegramDetailContactModal as CocoTelegramDetailContactModal } from "./env/u1";
+import { TelegramDetailContactModal as RioTelegramDetailContactModal } from "./env/u2";
 import { renderByUVersion } from "../../utils/renderByUVersion";
 
 

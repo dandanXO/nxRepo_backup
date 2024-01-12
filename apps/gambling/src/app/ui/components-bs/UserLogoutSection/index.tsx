@@ -10,7 +10,7 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {userLogout} from "../../../usecase/userLogout";
 import {LogoutCancelButton} from "../Buttons/LogoutCancelButton";
 import {LogoutConfirmButton} from "../Buttons/LogoutConfirmButton";
-import { UserLogoutSection as RioUserLogoutSection } from "./env/riojungle";
+import { UserLogoutSection as RioUserLogoutSection } from "./env/u2";
 import { renderByUVersion } from "../../utils/renderByUVersion";
 
 

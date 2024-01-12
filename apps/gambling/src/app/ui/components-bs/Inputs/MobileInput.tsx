@@ -1,7 +1,7 @@
 import {WithdrawMobileInput as PCWithdrawMobileInput} from "./env/pernambucana/WithdrawMobileInput";
-import {WithdrawMobileInput as CWithdrawMobileInput} from "./env/coco/WithdrawMobileInput";
+import {WithdrawMobileInput as CWithdrawMobileInput} from "./env/u1/WithdrawMobileInput";
 import {WithdrawMobileInput as WWithdrawMobileInput} from "./env/wild/WithdrawMobileInput";
-import {WithdrawMobileInput as RWithdrawMobileInput} from "./env/riojungle/WithdrawMobileInput";
+import {WithdrawMobileInput as RWithdrawMobileInput} from "./env/u2/WithdrawMobileInput";
 
 import {renderByUVersion} from "../../utils/renderByUVersion";
 

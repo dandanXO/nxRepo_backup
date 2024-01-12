@@ -14,8 +14,8 @@ import { useRechargeMutation } from "../../../../../external";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 
-import { DepositPanel as RDepositPanel } from '../../env/riojungle/tabsContent/deposit/DepositPanel';
-import { DepositPanel as CDepositPanel } from '../../env/coco/tabsContent/deposit/DepositPanel';
+import { DepositPanel as RDepositPanel } from '../../env/u2/tabsContent/deposit/DepositPanel';
+import { DepositPanel as CDepositPanel } from '../../env/u1/tabsContent/deposit/DepositPanel';
 import { DepositPanel as WDepositPanel } from '../../env/wild/tabsContent/deposit/DepositPanel';
 import { DepositPanel as PDepositPanel } from '../../env/pernambucana/tabsContent/deposit/DepositPanel';
 

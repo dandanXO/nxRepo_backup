@@ -3,10 +3,10 @@ import { ReactElement, useEffect, useRef, useState } from 'react';
 import { tcx } from "../../utils/tcx";
 import { environment } from "../../../../environments/environment";
 import cx from 'classnames';
-import { NoData as CNoData } from './env/coco/NoData';
+import { NoData as CNoData } from './env/u1/NoData';
 import { NoData as PNoData } from './env/pernambucana/NoData';
 import { NoData as WNoData } from './env/wild/NoData';
-import { NoData as RNoData } from './env/riojungle/NoData';
+import { NoData as RNoData } from './env/u2/NoData';
 import { renderByUVersion } from '../../utils/renderByUVersion';
 
 const NoData = ()=> renderByUVersion({

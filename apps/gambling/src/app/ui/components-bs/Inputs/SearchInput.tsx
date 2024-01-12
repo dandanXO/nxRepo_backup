@@ -4,10 +4,10 @@ import { Input as DesktopInput, IInput, InputValue } from "./Input";
 import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { MobileInput } from "./MobileInput";
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {SearchInput as CSearchInput} from "./env/coco/SearchInput";
+import {SearchInput as CSearchInput} from "./env/u1/SearchInput";
 import {SearchInput as WSearchInput} from "./env/wild/SearchInput";
 import {SearchInput as PSearchInput} from "./env/pernambucana/SearchInput";
-import {SearchInput as RSearchInput} from "./env/riojungle/SearchInput";
+import {SearchInput as RSearchInput} from "./env/u2/SearchInput";
 
 export const SearchInput = (props: IInput) => {
   return renderByUVersion({

@@ -1,6 +1,6 @@
 import React from "react";
-import { LeaveGameConfirmModal as CocoLeaveGameConfirmModal } from './env/coco'
-import { LeaveGameConfirmModal as RioLeaveGameConfirmModal } from './env/riojungle'
+import { LeaveGameConfirmModal as CocoLeaveGameConfirmModal } from './env/u1'
+import { LeaveGameConfirmModal as RioLeaveGameConfirmModal } from './env/u2'
 import { renderByUVersion } from "../../utils/renderByUVersion";
 import {BaseModal} from "../BaseModal";
 

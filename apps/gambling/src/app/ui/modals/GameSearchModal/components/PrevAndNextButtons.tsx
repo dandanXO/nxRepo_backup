@@ -1,7 +1,7 @@
 
 import { ReactElement, ReactNode } from "react";
-import { PrevAndNextButtons as CPrevAndNextButtons } from "../env/coco/PrevAndNextButtons";
-import { PrevAndNextButtons as RPrevAndNextButtons } from "../env/riojungle/PrevAndNextButtons";
+import { PrevAndNextButtons as CPrevAndNextButtons } from "../env/u1/PrevAndNextButtons";
+import { PrevAndNextButtons as RPrevAndNextButtons } from "../env/u2/PrevAndNextButtons";
 import { renderByUVersion } from "../../../utils/renderByUVersion";
 
 export interface IPrevAndNextButtons {

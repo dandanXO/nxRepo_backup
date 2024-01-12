@@ -11,8 +11,8 @@ import {tcx} from "../../utils/tcx";
 
 import {renderByUVersion} from "../../utils/renderByUVersion";
 import WDailySignInPage from "./env/wild/DailySignInPage";
-import CocoDailySignInPage from "./env/coco/DailySignInPage";
-import RioDailySignInPage from "./env/riojungle"
+import CocoDailySignInPage from "./env/u1/DailySignInPage";
+import RioDailySignInPage from "./env/u2"
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import { notification } from "antd";
 

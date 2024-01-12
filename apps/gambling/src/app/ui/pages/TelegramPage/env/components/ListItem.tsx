@@ -1,8 +1,8 @@
 
 
 import { renderByUVersion } from "../../../../utils/renderByUVersion"
-import { ListItem as CListItem } from "../coco/ListItem";
-import { ListItem as RListItem } from "../riojungle/ListItem";
+import { ListItem as CListItem } from "../u1/ListItem";
+import { ListItem as RListItem } from "../u2/ListItem";
 
 
 export const ListItem = (props: { count: string; text: string; }) => {

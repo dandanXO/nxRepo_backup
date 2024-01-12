@@ -7,7 +7,7 @@ import {Item} from "./item";
 
 import { useInviteConfig } from "../../hooks/useInviteConfig";
 import {CloseICON} from "../../components-bs/Icons/CloseICON";
-import { InviteBonusModal as RioInviteBonusModal} from "./env/riojungle/InviteBonusModal";
+import { InviteBonusModal as RioInviteBonusModal} from "./env/u2/InviteBonusModal";
 import {renderByUVersion} from "../../utils/renderByUVersion";
 
 import React from "react";

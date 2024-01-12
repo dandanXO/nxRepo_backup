@@ -1,6 +1,6 @@
 import React from 'react';
-import { PrivacyAgreementPage as CocoPrivacyAgreementPage } from './env/coco';
-import { PrivacyAgreementPage as RioPrivacyAgreementPage } from './env/riojungle';
+import { PrivacyAgreementPage as CocoPrivacyAgreementPage } from './env/u1';
+import { PrivacyAgreementPage as RioPrivacyAgreementPage } from './env/u2';
 import { renderByUVersion } from "../../utils/renderByUVersion";
 
 export const PrivacyAgreementPage = () => {

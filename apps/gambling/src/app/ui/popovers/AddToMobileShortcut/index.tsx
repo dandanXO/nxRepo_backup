@@ -1,6 +1,6 @@
 import { renderByUVersion } from "../../utils/renderByUVersion";
-import { CocoAddToMobileShortcut } from "./env/coco"
-import { RionjungleAddToMobileShortcut } from "./env/riojungle"
+import { CocoAddToMobileShortcut } from "./env/u1"
+import { RionjungleAddToMobileShortcut } from "./env/u2"
 
 type IAddToMobileShortcut  = {
   isShowTabbar: boolean;

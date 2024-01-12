@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../utils/renderByUVersion";
-import {AppRouter as CocoAppRouter} from "./env/coco/Router";
-import {AppRouter as RiojungleAppRouter} from "./env/riojungle/Router";
+import {AppRouter as CocoAppRouter} from "./env/u1/Router";
+import {AppRouter as RiojungleAppRouter} from "./env/u2/Router";
 import {useEffect} from "react";
 import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {useLocation, useNavigate} from "react-router";

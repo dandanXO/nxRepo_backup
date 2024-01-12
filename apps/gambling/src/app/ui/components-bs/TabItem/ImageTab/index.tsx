@@ -1,7 +1,7 @@
 import {renderByUVersion} from "../../../utils/renderByUVersion";
 import {ImageTab as PImageTab} from "../env/pernambucana/ImageTab"
 import {ImageTab as WImageTab} from "../env/wild/ImageTab"
-import {ImageTab as CImageTab} from "../env/coco/ImageTab"
+import {ImageTab as CImageTab} from "../env/u1/ImageTab"
 
 export const ImageTab = renderByUVersion({
   "wild777bet": WImageTab,

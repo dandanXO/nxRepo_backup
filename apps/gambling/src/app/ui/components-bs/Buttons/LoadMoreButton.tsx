@@ -1,6 +1,6 @@
 import { renderByUVersion } from "../../utils/renderByUVersion"
-import { LoadMoreButton as CLoadMoreButton } from "./env/coco/LoadMoreButton"
-import { LoadMoreButton as RLoadMoreButton } from "./env/riojungle/LoadMoreButton"
+import { LoadMoreButton as CLoadMoreButton } from "./env/u1/LoadMoreButton"
+import { LoadMoreButton as RLoadMoreButton } from "./env/u2/LoadMoreButton"
 
 
 

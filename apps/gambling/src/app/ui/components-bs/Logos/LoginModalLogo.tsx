@@ -1,7 +1,7 @@
 import React from "react";
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {LoginModalLogo as CLoginModalLogo} from "./env/coco/LoginModalLogo";
-import {LoginModalLogo as RLoginModalLogo} from "./env/riojungle/LoginModalLogo";
+import {LoginModalLogo as CLoginModalLogo} from "./env/u1/LoginModalLogo";
+import {LoginModalLogo as RLoginModalLogo} from "./env/u2/LoginModalLogo";
 import {ILogo} from "./env/types";
 
 export const LoginModalLogo = (props: ILogo) => {

@@ -1,8 +1,8 @@
 import React from "react";
 
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {FooterLogo as CFooterLogo} from "./env/coco/FooterLogo";
-import {FooterLogo as RFooterLogo} from "./env/riojungle/FooterLogo";
+import {FooterLogo as CFooterLogo} from "./env/u1/FooterLogo";
+import {FooterLogo as RFooterLogo} from "./env/u2/FooterLogo";
 import {ILogo} from "./env/types";
 
 export const FooterLogo = (props: ILogo) => {

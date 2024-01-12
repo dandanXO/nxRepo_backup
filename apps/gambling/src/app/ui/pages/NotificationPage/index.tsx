@@ -4,8 +4,8 @@ import {useAllowLoginRouterRules} from "../../router/hooks/useAllowLoginRouterRu
 import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import { usePageNavigate } from "../../router/hooks/usePageNavigate";
 
-import { NotificationPage as CocoNotificationPage } from './env/coco'
-import { NotificationPage as RioNotificationPage } from './env/riojungle'
+import { NotificationPage as CocoNotificationPage } from './env/u1'
+import { NotificationPage as RioNotificationPage } from './env/u2'
 import { renderByUVersion } from "../../utils/renderByUVersion";
 
 

@@ -1,5 +1,5 @@
-import { CocoMaintenanceModal } from "./env/coco/"
-import { RiojungleMaintenanceModal } from "./env/riojungle/modal"
+import { CocoMaintenanceModal } from "./env/u1/"
+import { RiojungleMaintenanceModal } from "./env/u2/modal"
 import {renderByUVersion} from "../../utils/renderByUVersion";
 
 interface IMaintenanceModal {

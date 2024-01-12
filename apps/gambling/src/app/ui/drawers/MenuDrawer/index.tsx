@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../utils/renderByUVersion";
-import {MenuDrawer as CMenuDrawer} from "./env/coco/MenuDrawer";
-import {MenuDrawer as RMenuDrawer} from "./env/riojungle/MenuDrawer";
+import {MenuDrawer as CMenuDrawer} from "./env/u1/MenuDrawer";
+import {MenuDrawer as RMenuDrawer} from "./env/u2/MenuDrawer";
 
 export const MenuDrawer = (props: any) => {
   return renderByUVersion({

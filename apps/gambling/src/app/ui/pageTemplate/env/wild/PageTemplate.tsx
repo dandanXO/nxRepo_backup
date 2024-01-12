@@ -8,9 +8,9 @@ import {Footer} from "../../footer/env/wild/Footer";
 
 import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContainer";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/wild/MenuDrawerContent";
-import {Toolbox} from "../../Toolbox/env/coco";
+import {Toolbox} from "../../Toolbox/env/u1";
 
-import {TabBar} from "../../tabBar/env/coco";
+import {TabBar} from "../../tabBar/env/u1";
 
 import {ThreeDots} from "react-loading-icons";
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";

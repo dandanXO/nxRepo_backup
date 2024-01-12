@@ -1,6 +1,6 @@
 import {renderByUVersion} from "../../../../utils/renderByUVersion";
-import {UserLoginForm as CUserLoginForm} from "./env/coco/UserLoginForm";
-import {UserLoginForm as RUserLoginForm} from "./env/riojungle/UserLoginForm";
+import {UserLoginForm as CUserLoginForm} from "./env/u1/UserLoginForm";
+import {UserLoginForm as RUserLoginForm} from "./env/u2/UserLoginForm";
 import {IUserLoginForm} from "./types";
 
 export const UserLoginForm = (props: IUserLoginForm) => {

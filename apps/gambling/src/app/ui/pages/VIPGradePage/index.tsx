@@ -18,8 +18,8 @@ import {appSlice} from "../../../reduxStore/appSlice";
 import {renderByUVersion} from "../../utils/renderByUVersion";
 import PVIPGradePage from "./env/pernambucana/VIPGradePage";
 import WVIPGradePage from "./env/wild/VIPGradePage";
-import CVIPGradePage from "./env/coco/VIPGradePage";
-import RioJungleVIPGradePage from './env/riojungle'
+import CVIPGradePage from "./env/u1/VIPGradePage";
+import RioJungleVIPGradePage from './env/u2'
 
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {getLocalStorageObjectByKey} from "../../../persistant/getLocalStorageObjectByKey";
