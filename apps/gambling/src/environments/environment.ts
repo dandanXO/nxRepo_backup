@@ -11,5 +11,4 @@ export const environment = {
   appVersion: "1.0.0",
   s3URLImages: "https://xb-web.s3.amazonaws.com/game3",
   snowEffects: "none",
-  packgroundVideoUrl: "",
 };

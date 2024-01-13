@@ -165,12 +165,12 @@ export const PageTemplate = (props: IPage) => {
 
   const isCurrentPageCompanyProfile = location.pathname === PageOrModalPathEnum.CompanyProfilePage
   const isIndexPage = location.pathname === PageOrModalPathEnum.IndexPage
-  const showVideoBackgound = isIndexPage && environment.packgroundVideoUrl
+  const showVideoBackground = isIndexPage && environment.backgroundVideoUrl
   const videoElement = useMemo(() => {
     return (
         <div className="fixed z-[-1] right-0 bottom-0 w-full h-full">
             <video autoPlay loop muted  playsInline className="absolute top-0 left-0 w-full h-full object-cover">
-                <source src={environment.packgroundVideoUrl} type="video/mp4" />
+                <source src={environment.backgroundVideoUrl} type="video/mp4" />
             </video>
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
         </div>
@@ -193,7 +193,7 @@ export const PageTemplate = (props: IPage) => {
 
   return (
     <>
-      {showVideoBackgound  ? videoElement : null}
+      {showVideoBackground  ? videoElement : null}
       {renderByUVersion({
         "wild777bet": (
           <WPageTemplate
