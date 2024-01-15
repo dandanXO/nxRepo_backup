@@ -283,11 +283,11 @@ export const PageTemplate = ({
         {isMobile && !inNativeApp && !hideAddToMobileShortcut && location.pathname !== PageOrModalPathEnum.GamePage && (
           <div
             className={twMerge("fixed z-10 w-full h-[40px] md:h-[56px]",
-              isShowTabbar && "bottom-[60px]",
-              !isShowTabbar && "bottom-0",
+              isShowTabBar && "bottom-[60px]",
+              !isShowTabBar && "bottom-0",
             )}
           >
-            <AddToMobileShortcut isShowTabbar={isShowTabbar}/>
+            <AddToMobileShortcut isShowTabbar={isShowTabBar}/>
           </div>
         )}
       </StyledPage>
