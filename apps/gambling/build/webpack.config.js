@@ -23,7 +23,7 @@ const {
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const WebpackSentryConfig = require('./WebpackSentryConfig.json');
 const AppBabelLoader = path.join(__dirname, './loader/app-babel-loader.js');
@@ -207,25 +207,25 @@ module.exports = (config, context) => {
     optimization: {
       minimize: isProduction,
       minimizer: [
-        new UglifyJsPlugin({
-          parallel: true,
-          cache: path.resolve(__dirname, '../../../tmp_uglify'),
-          // uglifyOptions: {
-          // warnings: false,
-          // parse: {},
-          // compress: {},
-          // mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
-          // output: {
-          //   comments: /@license/i,
-          //   comments: false
-          // },
-          // toplevel: false,
-          // nameCache: null,
-          // ie8: true,
-          // keep_fnames: false,
-          // },
-          extractComments: false,
-        }),
+        // new UglifyJsPlugin({
+        //   parallel: true,
+        //   cache: path.resolve(__dirname, '../../../tmp_uglify'),
+        //   // uglifyOptions: {
+        //   // warnings: false,
+        //   // parse: {},
+        //   // compress: {},
+        //   // mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
+        //   // output: {
+        //   //   comments: /@license/i,
+        //   //   comments: false
+        //   // },
+        //   // toplevel: false,
+        //   // nameCache: null,
+        //   // ie8: true,
+        //   // keep_fnames: false,
+        //   // },
+        //   extractComments: false,
+        // }),
         // NOTICE: minimizer.TerserPlugin 混肴壓縮後 不支援 double question mark
         // NOTICE : [Nullish coalescing / optional chaining support #567](https://github.com/terser/terser/issues/567)
         // new TerserPlugin({
@@ -433,7 +433,7 @@ module.exports = (config, context) => {
 
   if (!isProduction) {
     // finalConfig = smp.wrap(finalConfig);
-    console.log('finalConfig.plugins', finalConfig.plugins);
+    console.log('finalConfig.plssugins', finalConfig.plugins);
     console.log('finalConfig', finalConfig);
     return finalConfig;
   } else {
