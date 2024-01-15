@@ -1,6 +1,4 @@
 import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
-import twentyPercent from "./assets/genie-20.png"
-import tenPercent from "./assets/genie-10.png"
 import tabThree from "./assets/tab3.png"
 import icon＿calendarcheck from "./assets/icon＿calendarcheck.png";
 import icon＿crownsimple from "./assets/icon＿crownsimple.png";
@@ -34,6 +32,7 @@ import {CloseICON} from "../../../../components-bs/env/u1/CloseICON";
 import {appSlice} from "../../../../../reduxStore/appSlice";
 import { RootState } from "../../../../../reduxStore";
 import {useScrollToPartPageTemplate} from "../../../../pageTemplate/hooks/useScrollToPartPageTemplate";
+import { environment } from "../../../../../../environments/environment";
 
 
 export type IGameType = "Slots" | "Fishing" | "Vivo" | "Viver";
@@ -130,7 +129,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                   </div>
                 </div>
                 <img
-                  src={twentyPercent}
+                  src={`assets/${environment.uVersion}/${environment.mvVersion}/genie-initial-charge.png`}
                   className="w-[64px] mt-0 mb-[-38px]"
                 />
               </button>
@@ -154,8 +153,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                   </div>
                 </div>
                 <img
-                  src={tenPercent}
-                  className="w-20 mt-0 mb-[-38px]"
+                  src={`assets/${environment.uVersion}/${environment.mvVersion}/genie-recharge-activity.png`}
+                  className="w-[60px] mt-0 mb-[-38px]"
                 />
               </button>
             </div>

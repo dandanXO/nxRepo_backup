@@ -8,7 +8,7 @@ import {CarouselImage} from "./CarouselImage";
 import {CarouselTitleSection} from "./CarouselTitleSection";
 
 export const AppCarouselContent5 = (props: IAppCarouselContent) => {
-  const {onClickToCheckInDaily} = usePageNavigate();
+  const { onClickToInvite } = usePageNavigate();
 
   const invite_hig_reward = useSelector((rootState: RootState) => rootState.app.config.invite_hig_reward)
 
@@ -17,7 +17,7 @@ export const AppCarouselContent5 = (props: IAppCarouselContent) => {
       isMoving={props.isMoving}
       className={"text-[22.5px] text-white"}
       onClickBanner={(event) => {
-        onClickToCheckInDaily();
+        onClickToInvite();
 
       }}
     >
