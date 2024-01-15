@@ -59,8 +59,8 @@
         "dev-v11-u2-m1v2-praia777bet": {
           "buildTarget": "gambling:build:dev-v11-u2-m1v2-praia777bet"
         },
-        "dev-v14-u2-m2v10-tropicaSlotsBet": {
-          "buildTarget": "gambling:build:dev-v14-u2-m2v10-tropicaSlotsBet"
+        "dev-v14-u1-m2v10-tropicaSlotsBet": {
+          "buildTarget": "gambling:build:dev-v14-u1-m2v10-tropicaSlotsBet"
         }
       }
     },
@@ -820,7 +820,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "dev-v14-u2-m2v10-tropicaSlotsBet": {
+        "dev-v14-u1-m2v10-tropicaSlotsBet": {
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
@@ -847,7 +847,7 @@
           "extractLicenses": true,
           "vendorChunk": false
         },
-        "prod-v14-u2-m2v10-tropicaSlotsBet": {
+        "prod-v14-u1-m2v10-tropicaSlotsBet": {
           "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
           "fileReplacements": [
             {
