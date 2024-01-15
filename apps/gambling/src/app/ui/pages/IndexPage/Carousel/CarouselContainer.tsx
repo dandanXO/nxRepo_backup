@@ -22,7 +22,7 @@ export const CarouselContainer = (props: IProps) => {
       }}
       className='group'
     >
-      <button className={cx("", props.className)}>
+      <button className={cx("pointer-events-none", props.className)}>
         {props.children}
       </button>
     </div>
