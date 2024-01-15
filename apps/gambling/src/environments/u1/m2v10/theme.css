@@ -29,7 +29,7 @@
   --state-disable-main: #C5C5C5;
   --state-disable-variant: #969696;
 
-  --background-primary: #172013;;
+  --background-primary: #172013;
   --background-textfields: #3A3A3A;
   --background-checkin-from: #641FA9;
   --background-checkin-to: #1E083A;
@@ -145,6 +145,7 @@
   --medium: #A1C1FF;
   --light: #06F2ED;
 
+  --page-background: #172013;
 
   --unknown: #172013 ;
 
