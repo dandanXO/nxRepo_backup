@@ -280,7 +280,7 @@ export const PageTemplate = ({
           </div>
         )}
 
-        {isMobile && !inNativeApp && !hideAddToMobileShortcut && (
+        {isMobile && !inNativeApp && !hideAddToMobileShortcut && location.pathname !== PageOrModalPathEnum.GamePage && (
           <div
             className={twMerge("fixed z-10 w-full h-[40px] md:h-[56px]",
               isShowTabbar && "bottom-[60px]",
