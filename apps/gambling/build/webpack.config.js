@@ -23,7 +23,7 @@ const {
 const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const WebpackSentryConfig = require('./WebpackSentryConfig.json');
 const AppBabelLoader = path.join(__dirname, './loader/app-babel-loader.js');
@@ -64,7 +64,7 @@ module.exports = (config, context) => {
     //   cacheDirectory: path.resolve(__dirname, '../../.webpack-tmp'),
     // },
     // NOTE: [Webpack-Devtool](https://webpack.js.org/configuration/devtool/)
-    devtool: !isProduction ? 'inline-source-map' : 'source-map',
+    devtool: !isProduction ? 'inline-source-map' : false,
     // NOTICE: 被 NX project 控制住
     // entry: {
     // main: path.resolve(__dirname, '../src/main.tsx'),
@@ -207,25 +207,25 @@ module.exports = (config, context) => {
     optimization: {
       minimize: isProduction,
       minimizer: [
-        new UglifyJsPlugin({
-          parallel: true,
-          cache: path.resolve(__dirname, '../../../tmp_uglify'),
-          // uglifyOptions: {
-          // warnings: false,
-          // parse: {},
-          // compress: {},
-          // mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
-          // output: {
-          //   comments: /@license/i,
-          //   comments: false
-          // },
-          // toplevel: false,
-          // nameCache: null,
-          // ie8: true,
-          // keep_fnames: false,
-          // },
-          extractComments: false,
-        }),
+        // new UglifyJsPlugin({
+        //   parallel: true,
+        //   cache: path.resolve(__dirname, '../../../tmp_uglify'),
+        //   // uglifyOptions: {
+        //   // warnings: false,
+        //   // parse: {},
+        //   // compress: {},
+        //   // mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
+        //   // output: {
+        //   //   comments: /@license/i,
+        //   //   comments: false
+        //   // },
+        //   // toplevel: false,
+        //   // nameCache: null,
+        //   // ie8: true,
+        //   // keep_fnames: false,
+        //   // },
+        //   extractComments: false,
+        // }),
         // NOTICE: minimizer.TerserPlugin 混肴壓縮後 不支援 double question mark
         // NOTICE : [Nullish coalescing / optional chaining support #567](https://github.com/terser/terser/issues/567)
         // new TerserPlugin({
@@ -249,7 +249,7 @@ module.exports = (config, context) => {
             filter: (source, sourcePath) => {
               var svgRegExp = new RegExp('.svg$', 'g');
               if (svgRegExp.test(sourcePath)) {
-                console.log('sourcePath', sourcePath);
+                // console.log('sourcePath', sourcePath);
                 return true;
               } else {
                 return false;
@@ -393,7 +393,14 @@ module.exports = (config, context) => {
         // repo: "frontend",
         // commit: gitRevisionPlugin.commithash(),
         // }
-      })
+      }),
+      new function() {
+        this.apply = (compiler) => {
+            compiler.hooks.done.tap("Log On Done Plugin", () => {
+                console.log(("\n[" + new Date().toLocaleString() + "]") + " Begin a new compilation.\n");
+            });
+        };
+    }
     );
   }
 
@@ -423,21 +430,21 @@ module.exports = (config, context) => {
   finalConfig.module.rules = rules;
 
   finalConfig.module.rules.map((rule, index) => {
-    console.log('after-filter-finalConfig.module.rule', rule);
+    // console.log('after-filter-finalConfig.module.rule', rule);
     if (rule.oneOf) {
       rule.oneOf.map((one) => {
-        console.log('finalConfig.module.rule.one', one);
+        // console.log('finalConfig.module.rule.one', one);
       });
     }
   });
 
   if (!isProduction) {
     // finalConfig = smp.wrap(finalConfig);
-    console.log('finalConfig.plugins', finalConfig.plugins);
-    console.log('finalConfig', finalConfig);
+    // console.log('finalConfig.plssugins', finalConfig.plugins);
+    // console.log('finalConfig', finalConfig);
     return finalConfig;
   } else {
-    console.log('finalConfig.plugins', finalConfig.plugins);
+    // console.log('finalConfig.plugins', finalConfig.plugins);
     // console.log('before finalConfig.optimization.minimizer', finalConfig.optimization.minimizer);
     // NOTICE: 後續要會被加上 TerserPlugin, HashedModuleIdsPlugin, CssMinimizerPlugin
     // NOTICE: 移除 TerserPlugin,
@@ -447,12 +454,12 @@ module.exports = (config, context) => {
       }
     );
     finalConfig.optimization.minimizer = minimizers;
-    console.log(
-      'after finalConfig.optimization.minimizer',
-      finalConfig.optimization.minimizer
-    );
+    // console.log(
+    //   'after finalConfig.optimization.minimizer',
+    //   finalConfig.optimization.minimizer
+    // );
 
-    console.log('finalConfig', finalConfig);
+    // console.log('finalConfig', finalConfig);
     return finalConfig;
   }
 };
