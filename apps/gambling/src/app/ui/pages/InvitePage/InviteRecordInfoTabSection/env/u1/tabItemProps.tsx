@@ -2,7 +2,7 @@ import { environment } from "apps/gambling/src/environments/environment";
 import cx from 'classnames';
 
 export const tabItemProps = (isActive: boolean, className?: string) => {
-  const isCoco777bet = environment.uVersion === 'coco777bet'
+  const isCoco777bet = environment.uVersion === 'u1'
   if (isCoco777bet) {
     return {
       className: cx('rounded-lg whitespace-nowrap text-sm sm:text-lg flex-1 sm:flex-0 flex justify-center', {

@@ -9,6 +9,7 @@ import cx from "classnames";
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { IInvitePage } from "../..";
+import { twMerge } from "tailwind-merge";
 
 
 
@@ -37,9 +38,9 @@ export const InvitePage = (props: IInvitePage) => {
               background={"var(--primary-variant)"}
               // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
               activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-              className={cx("px-6 rounded-md mr-2 whitespace-nowrap text-sm sm:text-2xl", {
-
-              })}
+              className={twMerge("px-6 text-white rounded-md mr-2 whitespace-nowrap text-sm sm:text-2xl",
+                panelMode !== "howto" && 'border border-solid border-[rgba(255,255,255,0.3)]'
+                )}
               name={"Como convidar"}
               active={panelMode === "howto"}
               size={"big"}
@@ -53,8 +54,8 @@ export const InvitePage = (props: IInvitePage) => {
               background={"var(--primary-variant)"}
               // activeBackground={"bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"}
               activeBackground={"linear-gradient(180deg, var(--primary-main-from) 0%, var(--primary-main-to) 100%);"}
-              className={cx("px-6 rounded-md whitespace-nowrap text-sm sm:text-2xl", {
-              })}
+              className={twMerge("px-6 text-white rounded-md whitespace-nowrap text-sm sm:text-2xl",
+                panelMode !== "daily" && 'border border-solid border-[rgba(255,255,255,0.3)]')}
               name={"Dados diários"}
               active={panelMode === "daily"}
               size={"big"}

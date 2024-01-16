@@ -14,12 +14,12 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
   //min-width: 96px;
   //min-height: 35px;
   //color: #6c7083;
-  color: var(--white);
+  // color: var(--white);
   ${(props) => {
   if (props.pureColor === true) {
     if (!props.active) {
       return `
-          color: var(--white);
+          // color: var(--white);
         `;
     } else {
       return `
@@ -79,7 +79,7 @@ const StyledTabItemNoICON = styled.button<ITabItem>`
         return `
           background: ${props.background};
           // color:  var(--primary-assistant);
-          border: 1px solid rgba(255, 255, 255, 0.3);
+          // border: 1px solid rgba(255, 255, 255, 0.3);
         `
       }
     }
