@@ -33,7 +33,7 @@ if(!isProduction) {
       break;
     }
     default: {
-      throw new Error(APP_IDENTIFICATION + 'please setting proxy url');
+      // throw new Error(APP_IDENTIFICATION + 'please setting proxy url');
     }
   }
 
