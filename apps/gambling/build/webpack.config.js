@@ -207,6 +207,7 @@ module.exports = (config, context) => {
     optimization: {
       minimize: isProduction,
       minimizer: [
+        isProduction?
         new UglifyJsPlugin({
           parallel: true,
           cache: path.resolve(__dirname, '../../../tmp_uglify'),
@@ -225,7 +226,7 @@ module.exports = (config, context) => {
           // keep_fnames: false,
           // },
           extractComments: false,
-        }),
+        }) : console.log('not use UglifyJsPlugin'),
         // NOTICE: minimizer.TerserPlugin 混肴壓縮後 不支援 double question mark
         // NOTICE : [Nullish coalescing / optional chaining support #567](https://github.com/terser/terser/issues/567)
         // new TerserPlugin({
