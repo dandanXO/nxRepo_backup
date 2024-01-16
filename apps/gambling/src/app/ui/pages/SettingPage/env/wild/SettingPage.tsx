@@ -100,7 +100,7 @@ export const SettingPage = ({
               <InfoCircleOutlined className={"mr-2"}/>
               <div>Verifique actualizações</div>
             </div>
-            <div>{"1.0.1"}</div>
+            <div>{environment.appVersion}</div>
           </div>
         }
         />
