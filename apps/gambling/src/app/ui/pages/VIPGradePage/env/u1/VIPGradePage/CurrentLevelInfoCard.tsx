@@ -1,11 +1,11 @@
 import React from "react";
 import { environment } from "../../../../../../../environments/environment";
 import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
-import { GetVIPInfoResponse } from "../../../../../../external";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { MobileCurrentLevelInfoCard } from "./MobileCurrentLevelInfoCard";
 import { ProgressBar } from "../../../../../components-bs/ProgressBar";
+import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
 
 export interface ICurrentLabelInfoCardProps {
   currentLevel: number

@@ -3,10 +3,11 @@ import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { tcx } from "../../../../../utils/tcx";
 import CurrentLevelInfoCard from "./CurrentLevelInfoCard";
-import { GetSignInConfigResponse, GetUserVIPAllInfoResponse, GetVIPInfoResponse } from "../../../../../../external";
+import { GetSignInConfigResponse, GetUserVIPAllInfoResponse } from "../../../../../../external";
 import LevelInfoCard from "./LevelInfoCard";
 import {PageContainer} from "../../../../../components-bs/PageContainer";
 import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
+import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
 
 interface ICoco777betVIPGradePageProps {
   currentLevel: number

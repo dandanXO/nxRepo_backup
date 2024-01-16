@@ -1,8 +1,7 @@
 import {
-  GetVIPInfoResponse,
   useGetMailCountMutation,
-  useGetVIPInfoMutation,
   useLazyGetBalanceQuery,
+  useLazyGetVIPInfoQuery
 } from "../../external";
 import {useEffect, useState} from "react";
 import {AppLocalStorage} from "../../persistant/localstorage";
@@ -15,6 +14,7 @@ import {PageOrModalPathEnum} from "../PageOrModalPathEnum";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
 import {getLocalStorageObjectByKey} from "../../persistant/getLocalStorageObjectByKey";
 import {setLocalStorageObjectByKey} from "../../persistant/setLocalStorageObjectByKey";
+import { GetVIPInfoResponse } from "../../external/UserEndpoint";
 
 type IUseAutoUpdateBalance = {
   autoWindowFocusRefresh?: boolean;
@@ -31,7 +31,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
 
 
   // NOTICE: get or set by LocalStorage
-  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useGetVIPInfoMutation();
+  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useLazyGetVIPInfoQuery();
   const prevUserVIPInfo = getLocalStorageObjectByKey<GetVIPInfoResponse>(AppLocalStorageKey.useGetVIPInfoMutation);
   const [vipAllInfo, setVipAllInfo] = useState<GetVIPInfoResponse>(prevUserVIPInfo)
   useEffect(() => {

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import {
   GetSignInConfigResponse,
-  GetUserVIPAllInfoResponse, GetVIPInfoResponse,
+  GetUserVIPAllInfoResponse,
   useGetSignInConfigMutation,
   useLazyGetUserVIPAllInfoQuery
 } from "../../../external";
@@ -25,6 +25,7 @@ import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {getLocalStorageObjectByKey} from "../../../persistant/getLocalStorageObjectByKey";
 import {setLocalStorageObjectByKey} from "../../../persistant/setLocalStorageObjectByKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
+import { GetVIPInfoResponse } from "../../../external/UserEndpoint";
 
 const LevelButton = styled.button.attrs<{
   className?: string;

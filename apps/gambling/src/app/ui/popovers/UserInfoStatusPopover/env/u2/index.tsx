@@ -6,11 +6,11 @@ import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey
 import { CopyIcon } from "../../../../components-bs/Icons/CopyIcon";
 import { useDispatch } from "react-redux";
 import { appSlice } from "../../../../../reduxStore/appSlice";
-import { GetVIPInfoResponse } from "../../../../../external";
 import { formatLocaleMoney } from "../../../../utils/format";
 import { ProgressBar } from "../../../../components-bs/ProgressBar";
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { CaretRight } from "./components/CaretRight";
+import { GetVIPInfoResponse } from "../../../../../external/UserEndpoint";
 
 
 interface IUserInfoStatusPopoverProps {

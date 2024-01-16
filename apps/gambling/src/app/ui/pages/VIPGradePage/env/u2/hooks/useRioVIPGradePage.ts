@@ -1,5 +1,5 @@
-import { GetVIPInfoResponse } from "../../../../../../external";
 import { useEffect, useState } from "react";
+import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
 
 
 export const useRioVIPGradePage = (currentLevel: number, userVIPScore?: GetVIPInfoResponse['data']['vip_score']) => {

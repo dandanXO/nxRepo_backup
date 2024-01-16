@@ -1,4 +1,3 @@
-import { GetVIPInfoResponse } from "../../../../../external";
 import { environment } from "../../../../../../environments/environment";
 import { useDispatch, useSelector } from "react-redux";
 import { appSlice, totalBalanceSheetSelector, totalReasableSelector } from "../../../../../reduxStore/appSlice";
@@ -14,6 +13,7 @@ import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { CaretRight } from "../../../../popovers/UserInfoStatusPopover/env/u2/components/CaretRight";
 import { useInviteReward } from "../../../../hooks/useInviteReward";
 import {PageContainer} from "../../../../components-bs/PageContainer";
+import { GetVIPInfoResponse } from "../../../../../external/UserEndpoint";
 
 interface IMyPageProps {
   userVIPInfo: GetVIPInfoResponse

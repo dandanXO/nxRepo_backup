@@ -1,5 +1,4 @@
 import React from "react";
-import {GetVIPInfoResponse} from "../../../../../external";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {useDispatch, useSelector} from "react-redux";
@@ -21,6 +20,7 @@ import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import { clampNumber, formatLocaleMoney } from "../../../../utils/format";
 import { tcx } from "../../../../utils/tcx";
 import { ProgressBar } from "../../../../components-bs/ProgressBar";
+import { GetVIPInfoResponse } from "../../../../../external/UserEndpoint";
 
 
 

@@ -6,9 +6,9 @@ import {
   totalBalanceSheetSelector,
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
-import {GetVIPInfoResponse,
+import {
   useGetSignInConfigMutation,
-  useGetVIPInfoMutation, useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery, useLazyGetUserVIPAllInfoQuery} from "../../../external";
+  useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery, useLazyGetUserVIPAllInfoQuery} from "../../../external";
 import React, {useEffect, useMemo, useState} from "react";
 import styled, { keyframes } from "styled-components";
 import { RootState } from "../../../reduxStore";
@@ -37,6 +37,7 @@ import { UserInfoStatusPopover as RioUserInfoStatusPopover } from './env/u2';
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
 import { useInviteReward } from "../../hooks/useInviteReward";
+import { GetVIPInfoResponse } from "../../../external/UserEndpoint";
 
 
 const PopoverContainer = renderByUVersion({

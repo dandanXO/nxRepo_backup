@@ -11,8 +11,8 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
 import styled, { keyframes } from "styled-components";
-import { GetVIPInfoResponse } from "../../../../../external";
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
+import { GetVIPInfoResponse } from "../../../../../external/UserEndpoint";
 
 const ListItemContainer = styled.div`
   background: var(--varient);

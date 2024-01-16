@@ -5,8 +5,7 @@ import styled, {keyframes} from 'styled-components';
 
 import {
   GetSignInConfigResponse,
-  GetUserVIPAllInfoResponse,
-  GetVIPInfoResponse,
+  GetUserVIPAllInfoResponse
 } from '../../../../../../external';
 import { PageOrModalPathEnum } from '../../../../../PageOrModalPathEnum';
 import { LevelList } from '../../../../DailySignInPage';
@@ -16,6 +15,7 @@ import {RootState} from "../../../../../../reduxStore";
 import {environment} from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
 import { usePageNavigate } from '../../../../../router/hooks/usePageNavigate';
+import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
 
 export const LevelListBottomBr = styled.div`
   height: 1rem;

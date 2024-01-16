@@ -1,13 +1,13 @@
-import {GetVIPInfoResponse, useGetVIPInfoMutation} from "../../external";
+import { useLazyGetVIPInfoQuery } from "../../external";
 import {getLocalStorageObjectByKey} from "../../persistant/getLocalStorageObjectByKey";
 import {useEffect, useState} from "react";
 import {setLocalStorageObjectByKey} from "../../persistant/setLocalStorageObjectByKey";
 import {AppLocalStorage} from "../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../persistant/AppLocalStorageKey";
+import { GetVIPInfoResponse } from "../../external/UserEndpoint";
 
 export const useLocalstorageGetUserVIPInfo = () => {
-  // const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
-  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useGetVIPInfoMutation();
+  const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useLazyGetVIPInfoQuery();
   const prevUserVIPInfo = getLocalStorageObjectByKey<GetVIPInfoResponse>(AppLocalStorageKey.useGetVIPInfoMutation);
   const [userVIPInfo, setUserVIPInfo] = useState<GetVIPInfoResponse>(prevUserVIPInfo)
   useEffect(() => {

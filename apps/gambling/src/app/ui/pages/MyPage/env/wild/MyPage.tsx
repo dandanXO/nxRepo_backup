@@ -1,5 +1,4 @@
 import React from "react";
-import {GetVIPInfoResponse} from "../../../../../external";
 import {CocoAvatar} from "../../../../components/Avatar/CocoAvatar";
 import {AppLocalStorage} from "../../../../../persistant/localstorage";
 import {useDispatch, useSelector} from "react-redux";
@@ -19,6 +18,7 @@ import {CopyIcon} from "../../../../components-bs/Icons/CopyIcon";
 import {IUserInfo} from "../../../../../persistant/IUserInfo";
 import {AppLocalStorageKey} from "../../../../../persistant/AppLocalStorageKey";
 import { ProgressBar } from "../../../../components-bs/ProgressBar";
+import { GetVIPInfoResponse } from "../../../../../external/UserEndpoint";
 
 
 

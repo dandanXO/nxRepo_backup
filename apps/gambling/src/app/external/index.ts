@@ -21,6 +21,7 @@ import {Page} from "./types/Page";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
+import { GetVIPInfoEndpoint } from "./UserEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -288,23 +289,6 @@ export type GetUnsettleInviteRewardDataResponse = {
 
 type GetVIInfoPRequest = {
   token: string;
-};
-
-export type GetVIPInfoResponse = {
-  code: number;
-  msg: string;
-  data: {
-    vip_level: number;
-    vip_score: number;
-    level_score: number;
-    withdraw_limit: number;
-    next_level_score: number;
-    flow: number;
-    level_flow: number;
-    next_level_flow: number;
-    progress: number;
-    flow_progress: number;
-  };
 };
 
 export type GetUserVIPAllInfoResponseData = {
@@ -639,13 +623,7 @@ export const API = createApi({
       getBoxInfo: GetBoxInfoEndpoint(builder),
       getBoxReceive: GetBoxReceiveEndpoint(builder),
       getBoxReceiveRecordEndpoint: GetBoxReceiveRecordEndpoint(builder),
-      getVIPInfo: builder.mutation<GetVIPInfoResponse, GetVIInfoPRequest>({
-        query: (data: GetVIInfoPRequest) => ({
-          method: 'post',
-          url: `/prod-api/vip/info`,
-          data,
-        }),
-      }),
+      getVIPInfo: GetVIPInfoEndpoint(builder),
       getUserVIPAllInfo: builder.query<GetUserVIPAllInfoResponse, null>({
         query: () => ({
           method: 'get',
@@ -832,7 +810,7 @@ export const {
   useGetSignInConfigMutation,
   useGetSignInRecordMutation,
   useLazyGetUserVIPAllInfoQuery,
-  useGetVIPInfoMutation,
+  useLazyGetVIPInfoQuery,
   useLazyDownloadQuery,
   usePostLetterReadMutation,
   useGetMailCountMutation

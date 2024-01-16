@@ -3,8 +3,8 @@ import { environment } from "../../../../../../../environments/environment";
 import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import { tcx } from "../../../../../utils/tcx";
 import ProgressBar from "./ProgressBar";
-import { GetVIPInfoResponse } from "../../../../../../external";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
+import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
 
 interface ICurrentLabelInfoCardProps {
   currentLevel: number
