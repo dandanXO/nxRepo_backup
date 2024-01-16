@@ -1,4 +1,5 @@
 import { ExternelEndpoint } from "./types";
+import { DOWN_LOAD_URL } from "./ApiUrl";
 
 export type DownloadResponse = {
   "code": number;
@@ -17,7 +18,7 @@ type DownloadRequest = {
 export const DownloadEndpoint = (builder: ExternelEndpoint) => builder.query<DownloadResponse, DownloadRequest>({
   query: (query: DownloadRequest) => ({
     method: 'get',
-    url: `/japi/invite/api/finger/download`,
+    url: DOWN_LOAD_URL,
     params: query,
   }),
 });

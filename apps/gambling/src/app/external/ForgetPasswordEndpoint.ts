@@ -4,6 +4,7 @@ import {ExternelEndpoint} from "./types";
 import {CommonLoginRequestData} from "./RegisterEndpoint";
 
 import {IUserInfo} from "../persistant/IUserInfo";
+import { FORGET_PASSWORD_URL } from "./ApiUrl";
 
 export type ForgetPasswordRequestExtraData = {
   // adjust_ad_id: "0",
@@ -40,7 +41,7 @@ export type PostForgetPasswordResponse =  {
 export const ForgetPasswordEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostForgetPasswordResponse, PostForgetPasswordRequest>({
   query: (requestData: PostForgetPasswordRequest) => ({
     method: 'post',
-    url: `/prod-api/player/sign-in`,
+    url: FORGET_PASSWORD_URL,
     data: requestData,
   }),
 });

@@ -18,6 +18,9 @@ import { WithdrawEndpoint } from './WithdrawEndpoint';
 import {SendForgetPasswordSMSCodeEndpoint} from "./SendForgetPasswordSMSCodeEndpoint";
 import {WithdrawInfoGetEndpoint} from "./WithdrawInfoGetEndpoint";
 import {Page} from "./types/Page";
+import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
+import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
+import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -633,6 +636,9 @@ export const API = createApi({
       startGame: StartGameEndpoint(builder),
       getGameList: GetGameListEndpoint(builder),
       download: DownloadEndpoint(builder),
+      getBoxInfo: GetBoxInfoEndpoint(builder),
+      getBoxReceive: GetBoxReceiveEndpoint(builder),
+      getBoxReceiveRecordEndpoint: GetBoxReceiveRecordEndpoint(builder),
       getVIPInfo: builder.mutation<GetVIPInfoResponse, GetVIInfoPRequest>({
         query: (data: GetVIInfoPRequest) => ({
           method: 'post',
@@ -684,13 +690,6 @@ export const API = createApi({
         query: (query: GetInviteConfigRequest) => ({
           method: 'get',
           url: `/japi/invite/userInvite/getInviteConfig`,
-          params: query,
-        }),
-      }),
-      getBoxInfo: builder.query<GetBoxInfoRequest, GetBoxInfoResponse>({
-        query: (query: GetBoxInfoRequest) => ({
-          method: 'get',
-          url: `/japi/invite/boxConfig/boxInfo`,
           params: query,
         }),
       }),
