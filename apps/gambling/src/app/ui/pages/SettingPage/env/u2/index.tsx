@@ -142,7 +142,7 @@ export const SettingPage = ({
       <Content content={`VIP${vip_level}`} />
 
       <Title className='lg:mt-5 mt-3' title='Verifique actualizações' />
-      <Content content='1.0.1' />
+      <Content content={environment.appVersion} />
 
       <button
         className='w-full rounded-lg text-sm sm:text-base lg:text-xl lg:mt-10 mt-5 sm:mt-8 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] py-[10px] sm:py-3 lg:py-[14px]'

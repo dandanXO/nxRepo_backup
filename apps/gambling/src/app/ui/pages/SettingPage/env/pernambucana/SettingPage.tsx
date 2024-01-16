@@ -110,7 +110,7 @@ export const SettingPage = ({
                   </div>
                 </div>
               }
-              value={'1.0.1'}
+              value={environment.appVersion}
               className={'mb-4 w-full'}
               inputClassName={'text-right'}
             />

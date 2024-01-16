@@ -87,7 +87,7 @@ export const SettingPage = ({
               <img className='w-5 h-5' src={`assets/${environment.uVersion}/icon_account_version.png`} alt="version" />
               <div>Verifique actualizações</div>
             </div>
-            <div>{"1.0.1"}</div>
+            <div>{environment.appVersion}</div>
           </div>
         }
         />
