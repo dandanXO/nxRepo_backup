@@ -1,4 +1,5 @@
 import { ExternelEndpoint } from "./types";
+import { GET_BOX_RECEIVE_RECORD_URL } from "./ApiUrl";
 
 
 export type GetBoxReceiveRecordResponse = {
@@ -20,6 +21,7 @@ export type GetBoxReceiveRecordResponse = {
 // 寶箱領取紀錄
 export const GetBoxReceiveRecordEndpoint = (builder: ExternelEndpoint) => builder.query<GetBoxReceiveRecordResponse, number>({
   query: () => ({
-
+    method: 'get',
+    url: GET_BOX_RECEIVE_RECORD_URL
   })
 })
