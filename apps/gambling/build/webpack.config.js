@@ -226,11 +226,7 @@ module.exports = (config, context) => {
           // keep_fnames: false,
           // },
           extractComments: false,
-<<<<<<< HEAD
-        }),
-=======
         }) : console.log('not use UglifyJsPlugin'),
->>>>>>> 4f824281bc960e4c6d6ac417eebde962de470b5d
         // NOTICE: minimizer.TerserPlugin 混肴壓縮後 不支援 double question mark
         // NOTICE : [Nullish coalescing / optional chaining support #567](https://github.com/terser/terser/issues/567)
         // new TerserPlugin({
