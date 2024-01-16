@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 
 export const DatePickerBlock = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 4px 8px;
   width: fit-content;
   color: white;
