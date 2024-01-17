@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {
-  GetLetterResponseData,
-  useGetLetterListMutation, useLazyGetMailCountQuery,
+  useLazyGetLetterListQuery,
+  useLazyGetMailCountQuery,
   usePostLetterReadMutation
 } from "../../../../external";
 import {useDispatch} from "react-redux";
 import {AppLocalStorage} from "../../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import {appSlice} from "../../../../reduxStore/appSlice";
+import { GetMailListResponseData } from "../../../../external/MailEndpoint";
 
 export const useNotificationDrawer = () => {
-  const [messages, setMessages] = useState<GetLetterResponseData[]>([]);
+  const [messages, setMessages] = useState<GetMailListResponseData[]>([]);
   const [expandableIndex, setExpandableIndex] = useState<null | number>(0);
 
-  const [triggerGetLetter, { data }] = useGetLetterListMutation({});
+  const [triggerGetLetter, { data }] = useLazyGetLetterListQuery({});
   const [triggerPostLetterRead] = usePostLetterReadMutation();
   const dispatch = useDispatch();
   const [triggerGetMailCount, { data: getMailCountData }] = useLazyGetMailCountQuery();

@@ -4,15 +4,14 @@ import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {
-  useGetSignInConfigMutation,
-  useLazyGetUserVIPAllInfoQuery,
-} from '../../../external';
+  useGetSignInConfigMutation, useLazyGetLetterListQuery,
+  useLazyGetUserVIPAllInfoQuery
+} from "../../../external";
 
 import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../reduxStore/appSlice";
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {useEffect, useState} from "react";
-import {useGetLetterListMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 
 import {renderByUVersion} from "../../utils/renderByUVersion";
@@ -40,7 +39,7 @@ export const MyPage = () => {
 
   const dispatch = useDispatch();
 
-  const [triggerGetLetter, { data }] = useGetLetterListMutation({});
+  const [triggerGetLetter, { data }] = useLazyGetLetterListQuery({});
 
   useEffect(() => {
     triggerGetLetter({

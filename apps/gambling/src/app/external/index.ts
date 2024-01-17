@@ -19,7 +19,7 @@ import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
-import { GetMailCountEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
+import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -97,11 +97,6 @@ type MailCountRequest = {
   token: string;
 };
 
-type MailCountResponse = {
-  code: number;
-  mailCount: number;
-  msg: string;
-};
 
 type ExtraInfoRequest = {
   //
@@ -123,34 +118,6 @@ type GetDamaResponse = {
   msg: any;
   data: any;
   total: number;
-};
-
-type GetLetterRequest = {
-  token: string;
-};
-
-export type GetLetterResponseData = {
-  id: number;
-  from_user_id: number;
-  from: {
-    nickname: string;
-    avatar: number;
-    fb_avatar: string;
-  };
-  user_id: number;
-  type: number;
-  title: string;
-  content: string;
-  is_read: number;
-  attaches: any;
-  attaches_status: number;
-  created_at: string;
-  created_timestamp: number;
-};
-type GetLetterResponse = {
-  code: 200;
-  msg: 'success';
-  data: GetLetterResponseData[];
 };
 
 type GetBankRequest = {
@@ -688,13 +655,7 @@ export const API = createApi({
         }),
       }),
       postLetterRead: PostMailReadEndpoint(builder),
-      getLetterList: builder.mutation<GetLetterResponse, GetLetterRequest>({
-        query: (data: GetLetterRequest) => ({
-          method: 'post',
-          url: `/prod-api/letters/list`,
-          data,
-        }),
-      }),
+      getLetterList: GetMailListEndpoint(builder),
 
       getBank: builder.query<GetBankResponse, GetBankRequest>({
         query: (query: GetDamaRequest) => ({
@@ -783,7 +744,7 @@ export const {
   useGetRechargeMutation,
   useUpdateUserInfoMutation,
   useRechargeMutation,
-  useGetLetterListMutation,
+  useLazyGetLetterListQuery,
   useRechargeHistoryListMutation,
   useLazyGetInviteConfigQuery,
   useLazyGetInviteRewardDataQuery,
