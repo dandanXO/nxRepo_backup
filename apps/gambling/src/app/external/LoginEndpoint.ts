@@ -1,5 +1,5 @@
 import {ExternelEndpoint} from "./types";
-import {CommonLoginRequestData, PostRegisterResponse} from "./RegisterEndpoint";
+import { CommonLoginRequestData, PostRegisterResponse } from "./UserEndpoint";
 
 export type PostLoginRequest = CommonLoginRequestData;
 export type PostLoginResponse = PostRegisterResponse;

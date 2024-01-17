@@ -8,7 +8,6 @@ import { LoginEndpoint } from './LoginEndpoint';
 import { RechargeActionEndpoint } from './RechargeActionEndpoint';
 import { RechargeHistoryListEndpoint } from './RechargeHistoryListEndpoint';
 import { RechargeInfoGetEndpoint } from './RechargeInfoGetEndpoint';
-import { RegisterEndpoint } from './RegisterEndpoint';
 import { StartGameEndpoint } from './StartGameEndpoint';
 import {WithdrawHistoryListEndpoint, WithdrawHistoryListEndpointResponseData} from './WithdrawHistoryListEndpoint';
 import { DownloadEndpoint } from './DownloadEndpoint';
@@ -21,7 +20,7 @@ import {Page} from "./types/Page";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
-import { GetVIPInfoEndpoint } from "./UserEndpoint";
+import { GetVIPInfoEndpoint, RegisterEndpoint } from "./UserEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
