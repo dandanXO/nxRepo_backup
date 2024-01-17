@@ -8,6 +8,7 @@ const GET_VIP_INFO_URL = '/japi/user/vip-info' // 取得VIP訊息
 
 // mail
 const GET_MAIL_COUNT_URL = '/japi/user/mail/info' // 取得未讀訊息數量
+const POST_MAIL_READ_URL = (mailId: number) => `/japi/user/mail/read/${mailId}` // 設定訊息為已讀
 
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
@@ -22,6 +23,7 @@ export {
   GET_VIP_INFO_URL,
 
   GET_MAIL_COUNT_URL,
+  POST_MAIL_READ_URL,
 
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,

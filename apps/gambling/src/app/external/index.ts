@@ -19,7 +19,7 @@ import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
-import { GetMailCountEndpoint } from "./MailEndpoint";
+import { GetMailCountEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -687,13 +687,7 @@ export const API = createApi({
           params: query,
         }),
       }),
-      postLetterRead: builder.mutation<null, { mailId: number; token: string }>({
-        query: (data: { mailId: number; token: string }) => ({
-          method: 'post',
-          url: '/prod-api/letters/read',
-          data,
-        }),
-      }),
+      postLetterRead: PostMailReadEndpoint(builder),
       getLetterList: builder.mutation<GetLetterResponse, GetLetterRequest>({
         query: (data: GetLetterRequest) => ({
           method: 'post',
