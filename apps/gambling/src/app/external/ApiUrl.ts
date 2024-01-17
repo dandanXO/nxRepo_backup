@@ -11,6 +11,9 @@ const GET_MAIL_COUNT_URL = '/japi/user/mail/info' // 取得未讀訊息數量
 const POST_MAIL_READ_URL = (mailId: number) => `/japi/user/mail/read/${mailId}` // 設定訊息為已讀
 const GET_MAIL_LIST_URL = '/japi/user/mail/list'  // 取得訊息列表
 
+// system
+const GET_GLOBAL_CONFIG_URL = '/japi/user/global-config' // 獲取全局配置
+
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
 const GET_BOX_RECEIVE_RECORD_URL = '/japi/invite/boxConfig/boxReceiveRecord' // 取得寶箱領取紀錄
@@ -26,6 +29,8 @@ export {
   GET_MAIL_COUNT_URL,
   POST_MAIL_READ_URL,
   GET_MAIL_LIST_URL,
+
+  GET_GLOBAL_CONFIG_URL,
 
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,

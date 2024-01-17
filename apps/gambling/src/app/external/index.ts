@@ -2,7 +2,6 @@ import { createSelector } from '@reduxjs/toolkit';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { axiosBaseQuery } from '../gateway/axiosBaseQuery';
-import { GetConfigEndpoint, GetRequest } from './GetConfigEndpoint';
 import { GetGameListEndpoint } from './GetGameListEndpoint';
 import { RechargeActionEndpoint } from './RechargeActionEndpoint';
 import { RechargeHistoryListEndpoint } from './RechargeHistoryListEndpoint';
@@ -20,6 +19,7 @@ import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
+import { GetGlobalConfigEndpoint } from "./SystemEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -564,7 +564,7 @@ export const API = createApi({
   // refetchOnMountOrArgChange: 60,
   endpoints: (builder) => {
     return ({
-      getConfig: GetConfigEndpoint(builder),
+      getConfig: GetGlobalConfigEndpoint(builder),
       register: RegisterEndpoint(builder),
       sendForgetPasswordSMSCode: SendForgetPasswordSMSCodeEndpoint(builder),
       forgetPassword: ForgetPasswordEndpoint(builder),
@@ -732,7 +732,7 @@ export const API = createApi({
 });
 
 export const {
-  useGetConfigMutation,
+  useLazyGetConfigQuery,
   useLazyGetGameListQuery,
   useLoginMutation,
   useLazyGetBalanceQuery,
