@@ -1,6 +1,5 @@
 import {
-  useGetMailCountMutation,
-  useLazyGetBalanceQuery,
+  useLazyGetBalanceQuery, useLazyGetMailCountQuery,
   useLazyGetVIPInfoQuery
 } from "../../external";
 import {useEffect, useState} from "react";
@@ -41,7 +40,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
     }
   }, [isUninitialized, isGetUserVIPInfoLoading, userVIPInfoResponseData])
 
-  const [triggerGetMailCount, { data: messageData }] = useGetMailCountMutation();
+  const [triggerGetMailCount, { data: getMailCountData }] = useLazyGetMailCountQuery();
 
   const isValidToken = () => {
     if(!isLogin) return false;
@@ -83,10 +82,10 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
   }, [isGetBalanceLoading, isGetUserVIPInfoLoading])
 
   useEffect(() => {
-    if (messageData) {
-      dispatch(appSlice.actions.setMessageCount(messageData?.mailCount || 0));
+    if (getMailCountData?.data) {
+      dispatch(appSlice.actions.setMessageCount(getMailCountData.data.mailCount || 0));
     }
-  }, [messageData]);
+  }, [getMailCountData]);
 
   // NOTE: login change
   // useEffect(() => {

@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {
   GetLetterResponseData,
-  useGetLetterListMutation,
-  useGetMailCountMutation,
+  useGetLetterListMutation, useLazyGetMailCountQuery,
   usePostLetterReadMutation
 } from "../../../../external";
 import {useDispatch} from "react-redux";
@@ -17,7 +16,7 @@ export const useNotificationDrawer = () => {
   const [triggerGetLetter, { data }] = useGetLetterListMutation({});
   const [triggerPostLetterRead] = usePostLetterReadMutation();
   const dispatch = useDispatch();
-  const [triggerGetMailCount, { data: messageData }] = useGetMailCountMutation();
+  const [triggerGetMailCount, { data: getMailCountData }] = useLazyGetMailCountQuery();
 
 
   const handleClick = (
@@ -60,10 +59,10 @@ export const useNotificationDrawer = () => {
   }, [data]);
 
   useEffect(() => {
-    if (messageData) {
-      dispatch(appSlice.actions.setMessageCount(messageData?.mailCount || 0));
+    if (getMailCountData?.data) {
+      dispatch(appSlice.actions.setMessageCount(getMailCountData.data.mailCount || 0));
     }
-  }, [messageData]);
+  }, [getMailCountData]);
 
   return {
     messages,

@@ -19,6 +19,7 @@ import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
+import { GetMailCountEndpoint } from "./MailEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -644,13 +645,7 @@ export const API = createApi({
           data: reqeustData
         })
       }),
-      getMailCount: builder.mutation<MailCountResponse, MailCountRequest>({
-        query: (query: MailCountRequest) => ({
-          method: 'post',
-          url: `/prod-api/mail/getMailCount`,
-          params: query,
-        }),
-      }),
+      getMailCount: GetMailCountEndpoint(builder),
       getExtraInfo: builder.query<ExtraInfoResponse, ExtraInfoRequest>({
         query: (query: MailCountRequest) => ({
           method: 'get',
@@ -810,7 +805,7 @@ export const {
   useLazyGetVIPInfoQuery,
   useLazyDownloadQuery,
   usePostLetterReadMutation,
-  useGetMailCountMutation
+  useLazyGetMailCountQuery
 } = API;
 
 export const API3 = createApi({

@@ -1,9 +1,13 @@
 const DOWN_LOAD_URL = '/japi/invite/api/finger/download'  //  取得apk下載連結
 
+// user
 const REGISTER_URL = '/japi/user/register' // 註冊
 const LOGIN_URL = '/japi/user/login'  // 登入
 const FORGET_PASSWORD_URL = '/japi/user/forget-password'  // 忘記密碼
 const GET_VIP_INFO_URL = '/japi/user/vip-info' // 取得VIP訊息
+
+// mail
+const GET_MAIL_COUNT_URL = '/japi/user/mail/info' // 取得未讀訊息數量
 
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
@@ -16,6 +20,8 @@ export {
   REGISTER_URL,
   LOGIN_URL,
   GET_VIP_INFO_URL,
+
+  GET_MAIL_COUNT_URL,
 
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,
