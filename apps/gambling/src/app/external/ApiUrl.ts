@@ -2,6 +2,7 @@ const DOWN_LOAD_URL = '/japi/invite/api/finger/download'  //  取得apk下載連
 const FORGET_PASSWORD_URL = '/prod-api/player/sign-in'  // 忘記密碼
 
 const REGISTER_URL = '/japi/user/register'
+const LOGIN_URL = '/japi/user/login'
 const GET_VIP_INFO_URL = '/japi/user/vip-info'
 
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo'
@@ -13,6 +14,7 @@ export {
   FORGET_PASSWORD_URL,
 
   REGISTER_URL,
+  LOGIN_URL,
   GET_VIP_INFO_URL,
 
   GET_BOX_INFO_URL,

@@ -4,7 +4,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from '../gateway/axiosBaseQuery';
 import { GetConfigEndpoint, GetRequest } from './GetConfigEndpoint';
 import { GetGameListEndpoint } from './GetGameListEndpoint';
-import { LoginEndpoint } from './LoginEndpoint';
 import { RechargeActionEndpoint } from './RechargeActionEndpoint';
 import { RechargeHistoryListEndpoint } from './RechargeHistoryListEndpoint';
 import { RechargeInfoGetEndpoint } from './RechargeInfoGetEndpoint';
@@ -20,7 +19,7 @@ import {Page} from "./types/Page";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
-import { GetVIPInfoEndpoint, RegisterEndpoint } from "./UserEndpoint";
+import { GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;

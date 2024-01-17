@@ -1,5 +1,5 @@
 import { ExternelEndpoint } from "./types";
-import { GET_VIP_INFO_URL, REGISTER_URL } from "./ApiUrl";
+import { GET_VIP_INFO_URL, LOGIN_URL, REGISTER_URL } from "./ApiUrl";
 import { IUserInfo } from "../persistant/IUserInfo";
 
 type RegisterRequestExtraData = {
@@ -57,6 +57,8 @@ type PostRegisterResponse =  {
   }
 }
 
+type PostLoginRequest = CommonLoginRequestData;
+type PostLoginResponse = PostRegisterResponse;
 
 type GetVIPInfoResponse = {
   code: number;
@@ -88,6 +90,14 @@ const RegisterEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostReg
   }),
 });
 
+// 登入
+const LoginEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostLoginResponse, PostLoginRequest>({
+  query: (requestData: PostLoginRequest) => ({
+    method: 'post',
+    url: LOGIN_URL,
+    data: requestData,
+  }),
+});
 
 // 取得VIP訊息
 const GetVIPInfoEndpoint = (builder: ExternelEndpoint) => builder.query<GetVIPInfoResponse, GetVIInfoRequest>({
@@ -104,9 +114,11 @@ export {
   CommonLoginRequestData,
   PostRegisterResponse,
   PostRegisterRequest,
+  PostLoginRequest,
 
   GetVIPInfoResponse,
 
   RegisterEndpoint,
+  LoginEndpoint,
   GetVIPInfoEndpoint
 }
