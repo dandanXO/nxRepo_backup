@@ -114,11 +114,11 @@ export const DepositPanel = (props: IDepositPanel) => {
       setClicked(true);
       triggerRecharge({
         amount: Number(inputValue.data),
-        appPackageName: environment.appPackageName,
-        appVersion: environment.appVersion,
+        // appPackageName: environment.appPackageName,
+        // appVersion: environment.appVersion,
         configId: Number(selectedIndexConfig?.id),
-        phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
-        qr: 1,
+        // phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
+        // qr: 1,
         token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
       }).then(({ data }: any) => {
         navigate(PageOrModalPathEnum.WalletDepositNextPage, {
