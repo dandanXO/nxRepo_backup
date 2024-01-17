@@ -13,6 +13,7 @@ const GET_MAIL_LIST_URL = '/japi/user/mail/list'  // 取得訊息列表
 
 // system
 const GET_GLOBAL_CONFIG_URL = '/japi/user/global-config' // 獲取全局配置
+const GET_MAINTENANCE_URL = '/japi/user/maintenance-config'
 
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
@@ -31,6 +32,7 @@ export {
   GET_MAIL_LIST_URL,
 
   GET_GLOBAL_CONFIG_URL,
+  GET_MAINTENANCE_URL,
 
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,

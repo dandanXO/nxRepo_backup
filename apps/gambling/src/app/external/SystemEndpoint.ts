@@ -1,5 +1,5 @@
 import { ExternelEndpoint } from "./types";
-import { GET_GLOBAL_CONFIG_URL } from "./ApiUrl";
+import { GET_GLOBAL_CONFIG_URL, GET_MAINTENANCE_URL } from "./ApiUrl";
 
 type GetGlobalConfigResponseData = {
   withdraw_begin: string; // 禁止提现开始时间
@@ -29,6 +29,15 @@ type GetGlobalConfigResponse = {
   data: GetGlobalConfigResponseData
 }
 
+type GetMaintenanceResponse = {
+  code: number;
+  msg: string;
+  data: {
+    flag: number;
+    start: string;
+    end: string
+  }
+}
 
 // 取得全局配置
 const GetGlobalConfigEndpoint = (builder: ExternelEndpoint) => builder.query<GetGlobalConfigResponse, null>({
@@ -38,6 +47,15 @@ const GetGlobalConfigEndpoint = (builder: ExternelEndpoint) => builder.query<Get
   })
 })
 
+// 取得維護資訊
+const GetMaintenanceEndpoint = (builder: ExternelEndpoint) => builder.query<GetMaintenanceResponse, null>({
+  query: () => ({
+    method: 'get',
+    url: GET_MAINTENANCE_URL
+  })
+})
+
 export {
-  GetGlobalConfigEndpoint
+  GetGlobalConfigEndpoint,
+  GetMaintenanceEndpoint
 }

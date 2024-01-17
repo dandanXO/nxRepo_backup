@@ -19,7 +19,7 @@ import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
-import { GetGlobalConfigEndpoint } from "./SystemEndpoint";
+import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint } from "./SystemEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -84,13 +84,6 @@ type GetBoxSimpleBalanceResponse = {
     inviteAmount: number;
   };
   total: number;
-};
-
-type PostMainsRequest = {};
-type PostMainsResponse = {
-  code: number;
-  msg: string;
-  data: string;
 };
 
 type MailCountRequest = {
@@ -640,13 +633,7 @@ export const API = createApi({
           params: query,
         }),
       }),
-      Mains: builder.mutation<PostMainsResponse, PostMainsRequest>({
-        query: (requestData: PostMainsRequest) => ({
-          method: 'post',
-          url: `/prod-api/set/mains`,
-          data: requestData,
-        }),
-      }),
+      Mains: GetMaintenanceEndpoint(builder),
       getDama: builder.query<GetDamaResponse, GetDamaRequest>({
         query: (query: GetDamaRequest) => ({
           method: 'get',
