@@ -1,5 +1,5 @@
 import { ExternelEndpoint } from "./types";
-import { GET_VIP_INFO_URL, LOGIN_URL, REGISTER_URL } from "./ApiUrl";
+import { FORGET_PASSWORD_URL, GET_VIP_INFO_URL, LOGIN_URL, REGISTER_URL } from "./ApiUrl";
 import { IUserInfo } from "../persistant/IUserInfo";
 
 type RegisterRequestExtraData = {
@@ -60,6 +60,36 @@ type PostRegisterResponse =  {
 type PostLoginRequest = CommonLoginRequestData;
 type PostLoginResponse = PostRegisterResponse;
 
+type ForgetPasswordRequestExtraData = {
+  verifyCode: string;
+}
+
+type PostForgetPasswordRequest = CommonLoginRequestData & ForgetPasswordRequestExtraData;
+
+type PostForgetPasswordResponse =  {
+  "code": number;
+  "msg": string;
+  "data": {
+    "user_info": IUserInfo;
+    "bank": any;
+    "pay_account": {
+      "email": string
+      "phone": string
+      "name": string
+    },
+    "connection": {
+      "ip": string
+      "port": number,
+      "server_id": number
+      "api": string;
+    },
+    "token": string;
+    "recharge_dot": [],
+    "hide_entrance": [],
+    "game_list": number[];
+  }
+}
+
 type GetVIPInfoResponse = {
   code: number;
   msg: string;
@@ -99,6 +129,15 @@ const LoginEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostLoginR
   }),
 });
 
+// 忘記密碼
+const ForgetPasswordEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostForgetPasswordResponse, PostForgetPasswordRequest>({
+  query: (requestData: PostForgetPasswordRequest) => ({
+    method: 'post',
+    url: FORGET_PASSWORD_URL,
+    data: requestData,
+  }),
+});
+
 // 取得VIP訊息
 const GetVIPInfoEndpoint = (builder: ExternelEndpoint) => builder.query<GetVIPInfoResponse, GetVIInfoRequest>({
   query: (params) => ({
@@ -115,10 +154,14 @@ export {
   PostRegisterResponse,
   PostRegisterRequest,
   PostLoginRequest,
+  ForgetPasswordRequestExtraData,
+  PostForgetPasswordRequest,
+  PostForgetPasswordResponse,
 
   GetVIPInfoResponse,
 
   RegisterEndpoint,
   LoginEndpoint,
+  ForgetPasswordEndpoint,
   GetVIPInfoEndpoint
 }

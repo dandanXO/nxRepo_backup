@@ -10,7 +10,6 @@ import { RechargeInfoGetEndpoint } from './RechargeInfoGetEndpoint';
 import { StartGameEndpoint } from './StartGameEndpoint';
 import {WithdrawHistoryListEndpoint, WithdrawHistoryListEndpointResponseData} from './WithdrawHistoryListEndpoint';
 import { DownloadEndpoint } from './DownloadEndpoint';
-import {ForgetPasswordEndpoint} from "./ForgetPasswordEndpoint";
 import {environment} from "../../environments/environment";
 import { WithdrawEndpoint } from './WithdrawEndpoint';
 import {SendForgetPasswordSMSCodeEndpoint} from "./SendForgetPasswordSMSCodeEndpoint";
@@ -19,7 +18,7 @@ import {Page} from "./types/Page";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
-import { GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
+import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
