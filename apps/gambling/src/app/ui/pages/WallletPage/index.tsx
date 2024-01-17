@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 
-import {useGetRechargeMutation} from "../../../external";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 import {useSelector} from "react-redux";
 
@@ -23,6 +22,7 @@ import { WalletPage as CWallletPage } from "./env/u1/WalletPage";
 import { WalletPage as RWallletPage } from './env/u2/WalletPage';
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import queryString from 'query-string';
+import { useLazyGetRechargeQuery } from "../../../external";
 
 export type IPanelType = "deposit" | "withdraw" | "record";
 export type IRecordPanelType = 'deposit' | 'withdraw';
@@ -37,10 +37,10 @@ export const WallletPage = () => {
   const panelType = queryString.parse(window.location.search)?.panelType || "deposit";
   const [panelMode, setPanelMode] = useState<IPanelType>(panelType as IPanelType);
 
-  const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useGetRechargeMutation();
+  const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useLazyGetRechargeQuery();
   useEffect(() => {
     if (panelMode === "deposit") {
-      triggerGetRecharge({ type: 'all', token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
+      triggerGetRecharge({ token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
     }
 
     // NOTE: setPanelMode時，一併更新queryString

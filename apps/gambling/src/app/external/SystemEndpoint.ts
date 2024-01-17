@@ -1,5 +1,5 @@
 import { ExternelEndpoint } from "./types";
-import { GET_GLOBAL_CONFIG_URL, GET_MAINTENANCE_URL } from "./ApiUrl";
+import { GET_GLOBAL_CONFIG_URL, GET_MAINTENANCE_URL, GET_RECHARGE_CONFIG_URL } from "./ApiUrl";
 
 type GetGlobalConfigResponseData = {
   withdraw_begin: string; // 禁止提现开始时间
@@ -39,6 +39,41 @@ type GetMaintenanceResponse = {
   }
 }
 
+type GetRechargeConfigResponseConfig = {
+  id: number;
+  amount_min: string; // 金额区间小值
+  amount_max: string; // 金额区间大值
+  rate: string; // 充值奖励
+  bonus_rate: string; // 充值bonus
+  bonus_finish: number; // 充值bonus效期(hr)
+  status: 0 | 1; // 1开启，0关闭
+  user_count_day: number; // 用户单日限购次数，0=不限制
+  start_at: number; // 开始时间
+  end_at: number; // 结束时间
+  week_start_at: number; // 周几开始
+  week_end_at: number; // 周几结束
+  mail_title: string; // 邮件标题
+  mail_content: string; // 邮件内容
+  min_recharge_amount: string; // 最小充值金额
+  max_recharge_amount: string; // 最大充值金额
+  total_rebate: string; // 总返利
+  buyTimes: number; // 购买次数
+}
+
+type GetRechargeConfigResponseOption = {
+  recharge_options: number[]; // 充值选项
+  recharge_options_default: number; // 默认充值选项
+}
+
+type GetRechargeConfigResponse = {
+  code: number;
+  msg: string;
+  data: {
+    config: GetRechargeConfigResponseConfig[],
+    options: GetRechargeConfigResponseOption;
+  }
+}
+
 // 取得全局配置
 const GetGlobalConfigEndpoint = (builder: ExternelEndpoint) => builder.query<GetGlobalConfigResponse, null>({
   query: () => ({
@@ -55,7 +90,20 @@ const GetMaintenanceEndpoint = (builder: ExternelEndpoint) => builder.query<GetM
   })
 })
 
+// 取得充值配置
+const GetRechargeConfig = (builder: ExternelEndpoint) => builder.query<GetRechargeConfigResponse, { token: string }>({
+  query: (params) => ({
+    method: 'get',
+    url: GET_RECHARGE_CONFIG_URL,
+    params
+  })
+})
+
 export {
+  GetRechargeConfigResponseConfig,
+  GetRechargeConfigResponseOption,
+
   GetGlobalConfigEndpoint,
-  GetMaintenanceEndpoint
+  GetMaintenanceEndpoint,
+  GetRechargeConfig
 }

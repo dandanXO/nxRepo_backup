@@ -5,7 +5,6 @@ import { axiosBaseQuery } from '../gateway/axiosBaseQuery';
 import { GetGameListEndpoint } from './GetGameListEndpoint';
 import { RechargeActionEndpoint } from './RechargeActionEndpoint';
 import { RechargeHistoryListEndpoint } from './RechargeHistoryListEndpoint';
-import { RechargeInfoGetEndpoint } from './RechargeInfoGetEndpoint';
 import { StartGameEndpoint } from './StartGameEndpoint';
 import {WithdrawHistoryListEndpoint, WithdrawHistoryListEndpointResponseData} from './WithdrawHistoryListEndpoint';
 import { DownloadEndpoint } from './DownloadEndpoint';
@@ -19,7 +18,7 @@ import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
-import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint } from "./SystemEndpoint";
+import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint, GetRechargeConfig } from "./SystemEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -562,7 +561,7 @@ export const API = createApi({
       sendForgetPasswordSMSCode: SendForgetPasswordSMSCodeEndpoint(builder),
       forgetPassword: ForgetPasswordEndpoint(builder),
       login: LoginEndpoint(builder),
-      getRecharge: RechargeInfoGetEndpoint(builder),
+      getRecharge: GetRechargeConfig(builder),
       recharge: RechargeActionEndpoint(builder),
       rechargeHistoryList: RechargeHistoryListEndpoint(builder),
       getWithdrawLimit: WithdrawInfoGetEndpoint(builder),
@@ -728,7 +727,7 @@ export const {
   useRegisterMutation,
   useSendForgetPasswordSMSCodeMutation,
   useForgetPasswordMutation,
-  useGetRechargeMutation,
+  useLazyGetRechargeQuery,
   useUpdateUserInfoMutation,
   useRechargeMutation,
   useLazyGetLetterListQuery,
