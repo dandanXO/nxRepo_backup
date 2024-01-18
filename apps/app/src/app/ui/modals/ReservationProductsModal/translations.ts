@@ -7,7 +7,7 @@ export const i18nReservationProductsModal: i18nComponent = {
       'Good News': 'Good News',
       'Congratulations! Your credit has been upgraded! We have selected some excellent options for you. Please choose the product you want to reserve based on your needs':
         'Congratulations! You have been qualified for the coupon, click below to make an appointment to apply for a loan and get the corresponding coupon!',
-      'Maximum Amount': 'Maximum Amount',
+      'Amount': 'Amount',
       'Loan amount': 'Loan amount',
       'Service fee': 'Service fee',
       IVA: 'IVA',
