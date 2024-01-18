@@ -16,6 +16,7 @@ import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndp
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
 import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint, GetRechargeConfig } from "./SystemEndpoint";
 import {
+  GetBankEndpoint,
   GetRechargeRecordEndpoint,
   GetWithdrawLimitEndpoint,
   GetWithdrawRecordEndpoint,
@@ -54,7 +55,6 @@ type GetInviteConfigResponse = {
   total: 0;
 };
 
-type GetBoxInfoRequest = {};
 
 type GetBoxInfoContextVo = {
   amount: number;
@@ -112,16 +112,6 @@ type GetDamaResponse = {
   msg: any;
   data: any;
   total: number;
-};
-
-type GetBankRequest = {
-  token: string;
-};
-
-type GetBankResponse = {
-  code: number;
-  msg: string;
-  data: any;
 };
 
 type GetInviteRewardDataRequest = {
@@ -645,13 +635,7 @@ export const API = createApi({
       postLetterRead: PostMailReadEndpoint(builder),
       getLetterList: GetMailListEndpoint(builder),
 
-      getBank: builder.query<GetBankResponse, GetBankRequest>({
-        query: (query: GetDamaRequest) => ({
-          method: 'get',
-          url: `/prod-api/pay-service/bank`,
-          params: query,
-        }),
-      }),
+      getBank: GetBankEndpoint(builder),
 
       getInviteRewardData: builder.query<
         GetInviteRewardDataResponse,

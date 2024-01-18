@@ -1,5 +1,11 @@
 import { ExternelEndpoint } from "./types";
-import { GET_RECHARGE_RECORD_URL, GET_WITHDRAW_LIMIT_URL, GET_WITHDRAW_RECORD_URL, POST_RECHARGE_URL } from "./ApiUrl";
+import {
+  GET_BANK_URL,
+  GET_RECHARGE_RECORD_URL,
+  GET_WITHDRAW_LIMIT_URL,
+  GET_WITHDRAW_RECORD_URL,
+  POST_RECHARGE_URL
+} from "./ApiUrl";
 import { Page } from "./types/Page";
 
 type PostRechargeRequestData = {
@@ -80,6 +86,27 @@ type GetWithdrawLimitResponse = {
   }
 }
 
+type GetBankResponse = {
+  code: number;
+  msg: string;
+  data: {
+    email: string;
+    phone: string;
+    panNo: string;
+    realname: string;
+    ifsc: string;
+    upi: string;
+    pix: {
+      customerName: string;
+      customerCert: string;
+      accountType: string
+      accountNum: string;
+    };
+    bind_type: number;
+    bank_no: string;
+    account_lock: number
+  }
+}
 
 // 充值
 const PostRechargeEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostRechargeResponse, PostRechargeRequestData>({
@@ -134,7 +161,14 @@ const GetWithdrawLimitEndpoint = (builder: ExternelEndpoint) => builder.mutation
   query: (params) => ({
     method: 'post',
     url: GET_WITHDRAW_LIMIT_URL,
-    params
+  })
+})
+
+// 取得銀行資訊
+const GetBankEndpoint = (builder: ExternelEndpoint) => builder.query<GetBankResponse, null>({
+  query: () => ({
+    method: 'get',
+    url: GET_BANK_URL
   })
 })
 
@@ -146,5 +180,6 @@ export {
   PostRechargeEndpoint,
   GetRechargeRecordEndpoint,
   GetWithdrawRecordEndpoint,
-  GetWithdrawLimitEndpoint
+  GetWithdrawLimitEndpoint,
+  GetBankEndpoint
 }
