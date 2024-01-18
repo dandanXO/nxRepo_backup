@@ -63,11 +63,9 @@ export const RecordPanelDeposit = () => {
 
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetDepositRecord({
       limit: 10,
       page: page,
-      token,
     });
 
   }, [page]);

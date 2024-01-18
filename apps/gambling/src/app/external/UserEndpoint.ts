@@ -107,10 +107,6 @@ type GetVIPInfoResponse = {
   };
 };
 
-type GetVIInfoRequest = {
-  token: string
-}
-
 // 註冊
 const RegisterEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostRegisterResponse, PostRegisterRequest>({
   query: (requestData: PostRegisterRequest) => ({
@@ -139,11 +135,10 @@ const ForgetPasswordEndpoint = (builder: ExternelEndpoint) => builder.mutation<P
 });
 
 // 取得VIP訊息
-const GetVIPInfoEndpoint = (builder: ExternelEndpoint) => builder.query<GetVIPInfoResponse, GetVIInfoRequest>({
-  query: (params) => ({
+const GetVIPInfoEndpoint = (builder: ExternelEndpoint) => builder.query<GetVIPInfoResponse, null>({
+  query: () => ({
     method: 'get',
     url: GET_VIP_INFO_URL,
-    params
   })
 })
 

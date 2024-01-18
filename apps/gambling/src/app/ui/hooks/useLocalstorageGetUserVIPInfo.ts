@@ -18,20 +18,13 @@ export const useLocalstorageGetUserVIPInfo = () => {
   }, [isUninitialized, isGetUserVIPInfoLoading, userVIPInfoResponseData ])
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
-    if(token && token !== "" && token !== "undefined") {
-      triggerGetUserVIPInfo({
-        token,
-      });
-    }
+    triggerGetUserVIPInfo(null);
   }, []);
 
   useEffect(() => {
     const handler = () => {
       const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
-      triggerGetUserVIPInfo({
-        token,
-      });
+      triggerGetUserVIPInfo(null);
     }
     window.addEventListener("focus", handler)
     return () => {

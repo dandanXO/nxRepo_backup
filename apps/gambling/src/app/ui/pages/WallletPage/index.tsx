@@ -40,7 +40,7 @@ export const WallletPage = () => {
   const [triggerGetRecharge, { data: rechargeData, isLoading, isSuccess, isError }] = useLazyGetRechargeQuery();
   useEffect(() => {
     if (panelMode === "deposit") {
-      triggerGetRecharge({ token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
+      triggerGetRecharge(null)
     }
 
     // NOTE: setPanelMode時，一併更新queryString

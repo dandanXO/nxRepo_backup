@@ -64,11 +64,9 @@ export const RecordPanelWithdraw = () => {
   }
 
   useEffect(()=>{
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
       limit: 10,
       page,
-      token
     })
   }, [page])
 

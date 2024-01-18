@@ -91,11 +91,10 @@ const GetMaintenanceEndpoint = (builder: ExternelEndpoint) => builder.query<GetM
 })
 
 // 取得充值配置
-const GetRechargeConfig = (builder: ExternelEndpoint) => builder.query<GetRechargeConfigResponse, { token: string }>({
-  query: (params) => ({
+const GetRechargeConfig = (builder: ExternelEndpoint) => builder.query<GetRechargeConfigResponse, null>({
+  query: () => ({
     method: 'get',
     url: GET_RECHARGE_CONFIG_URL,
-    params
   })
 })
 

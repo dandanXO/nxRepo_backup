@@ -11,7 +11,6 @@ import { Page } from "./types/Page";
 type PostRechargeRequestData = {
   amount: number; // 充值金额(元)
   configId: number; // 充值配置ID
-  token: string;
 }
 
 type PostRechargeResponse = {
@@ -33,7 +32,6 @@ type PostRechargeResponse = {
 type GetRechargeRecordRequest = {
   limit: number;
   page: number;
-  token: string;
 }
 
 type GetRechargeRecordResponseData = {
@@ -56,7 +54,6 @@ type GetRechargeRecordResponse = {
 type GetWithdrawRecordRequest = {
   limit: number;
   page: number;
-  token: string;
 };
 
 type GetWithdrawRecordResponseData = {
@@ -110,50 +107,30 @@ type GetBankResponse = {
 
 // 充值
 const PostRechargeEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostRechargeResponse, PostRechargeRequestData>({
-  query: (data) => {
-    const { token } = data;
-
-    return {
-      method: 'post',
-      url: POST_RECHARGE_URL,
-      params: {
-        token
-      },
-      data
-    }
-  }
+  query: (data) => ({
+    method: 'post',
+    url: POST_RECHARGE_URL,
+    data
+  })
 })
 
 // 取得充值紀錄
 const GetRechargeRecordEndpoint = (builder: ExternelEndpoint) => builder.mutation<GetRechargeRecordResponse, GetRechargeRecordRequest>({
-  query: (data) => {
-    const { token } = data;
-
-    return {
-      method: 'post',
-      url: GET_RECHARGE_RECORD_URL,
-      params: {
-        token
-      },
-      data
-    }
-  }
+  query: (data) => ({
+    method: 'post',
+    url: GET_RECHARGE_RECORD_URL,
+    data
+  })
 })
 
 
 // 取得提現紀錄
 const GetWithdrawRecordEndpoint = (builder: ExternelEndpoint) => builder.mutation<GetWithdrawRecordResponse, GetWithdrawRecordRequest>({
-  query: (data) => {
-    const { token } = data;
-    return {
-      method: 'post',
-      url: GET_WITHDRAW_RECORD_URL,
-      params: {
-        token
-      },
-      data
-    }
-  }
+  query: (data) => ({
+    method: 'post',
+    url: GET_WITHDRAW_RECORD_URL,
+    data
+  })
 })
 
 // 取得提現限制

@@ -34,11 +34,9 @@ export const DepositMobileTable = () => {
   const [triggerGetDepositRecord, { data }] = useRechargeHistoryListMutation()
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetDepositRecord({
       limit: 1000,
       page: 1,
-      token
     })
   }, [])
 
@@ -100,11 +98,9 @@ export const WithdrawMobileTable = () => {
   const [triggerGetWithdrawRecord, { data }] = useWithdrawHistoryListMutation({})
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
       limit: 1000,
       page: 1,
-      token
     })
   }, [])
 

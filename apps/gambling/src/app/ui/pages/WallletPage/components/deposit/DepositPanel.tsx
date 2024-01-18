@@ -119,7 +119,6 @@ export const DepositPanel = (props: IDepositPanel) => {
         configId: Number(selectedIndexConfig?.id),
         // phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
         // qr: 1,
-        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
       }).then(({ data }: any) => {
         navigate(PageOrModalPathEnum.WalletDepositNextPage, {
           state: {
