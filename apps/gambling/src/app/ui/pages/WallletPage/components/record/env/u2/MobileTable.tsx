@@ -144,7 +144,7 @@ export const WithdrawMobileTable = () => {
         : <div className={cx("overflow-y-auto", { "h-[80vh]": data?.data?.length || 0 > 0 })}>
           {data?.data?.map((record) => (
             <Container
-              key={record.id}
+              key={record.pay_serial_no}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
                 "bg-[var(--background-tabbar)]",
                 "border-[var(--grayscale-30)] border-solid border rounded-lg"

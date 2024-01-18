@@ -4,7 +4,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from '../gateway/axiosBaseQuery';
 import { GetGameListEndpoint } from './GetGameListEndpoint';
 import { StartGameEndpoint } from './StartGameEndpoint';
-import {WithdrawHistoryListEndpoint, WithdrawHistoryListEndpointResponseData} from './WithdrawHistoryListEndpoint';
 import { DownloadEndpoint } from './DownloadEndpoint';
 import {environment} from "../../environments/environment";
 import { WithdrawEndpoint } from './WithdrawEndpoint';
@@ -17,7 +16,7 @@ import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
 import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint, GetRechargeConfig } from "./SystemEndpoint";
-import { GetRechargeRecordEndpoint, PostRechargeEndpoint } from "./PaymentEndpoint";
+import { GetRechargeRecordEndpoint, GetWithdrawRecordEndpoint, PostRechargeEndpoint } from "./PaymentEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -565,7 +564,7 @@ export const API = createApi({
       rechargeHistoryList: GetRechargeRecordEndpoint(builder),
       getWithdrawLimit: WithdrawInfoGetEndpoint(builder),
       withdraw: WithdrawEndpoint(builder),
-      withdrawHistoryList: WithdrawHistoryListEndpoint(builder),
+      withdrawHistoryList: GetWithdrawRecordEndpoint(builder),
       getBalance: builder.query<GetBalanceResponse, GetBalanceRequest>({
         query: (data: GetBalanceRequest) => ({
           method: 'get',
