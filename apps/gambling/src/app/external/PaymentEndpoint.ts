@@ -1,5 +1,6 @@
 import { ExternelEndpoint } from "./types";
-import { POST_RECHARGE_URL } from "./ApiUrl";
+import { GET_RECHARGE_RECORD_URL, POST_RECHARGE_URL } from "./ApiUrl";
+import { Page } from "./types/Page";
 
 type PostRechargeRequestData = {
   amount: number; // 充值金额(元)
@@ -23,6 +24,29 @@ type PostRechargeResponse = {
   }
 }
 
+type GetRechargeRecordRequest = {
+  limit: number;
+  page: number;
+  token: string;
+}
+
+type GetRechargeRecordResponseData = {
+  amount: string; // 充值金额
+  user_id: number;  // 用户ID
+  rate: string; // 充值返利
+  pay_serial_no: string;  // 充值流水号
+  pay_channel: string;  // 充值渠道
+  created_at: string; // 创建时间
+  status: 1 | 2 |3;
+};
+
+type GetRechargeRecordResponse = {
+  code: number;
+  msg: string;
+  data: GetRechargeRecordResponseData[]
+  page: Page
+}
+
 const PostRechargeEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostRechargeResponse, PostRechargeRequestData>({
   query: (data) => {
     const { token } = data;
@@ -38,7 +62,25 @@ const PostRechargeEndpoint = (builder: ExternelEndpoint) => builder.mutation<Pos
   }
 })
 
+const GetRechargeRecordEndpoint = (builder: ExternelEndpoint) => builder.mutation<GetRechargeRecordResponse, GetRechargeRecordRequest>({
+  query: (data) => {
+    const { token } = data;
+
+    return {
+      method: 'post',
+      url: GET_RECHARGE_RECORD_URL,
+      params: {
+        token
+      },
+      data
+    }
+  }
+})
+
 
 export {
-  PostRechargeEndpoint
+  GetRechargeRecordResponseData,
+
+  PostRechargeEndpoint,
+  GetRechargeRecordEndpoint
 }

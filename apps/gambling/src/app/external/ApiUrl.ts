@@ -18,6 +18,7 @@ const GET_RECHARGE_CONFIG_URL = '/japi/user/recharge-config' // 取得充值配�
 
 // payment
 const POST_RECHARGE_URL = '/japi/user/recharge' // 充值
+const GET_RECHARGE_RECORD_URL = '/japi/user/recharge-list' // 取得充值紀錄
 
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
@@ -40,6 +41,7 @@ export {
   GET_RECHARGE_CONFIG_URL,
 
   POST_RECHARGE_URL,
+  GET_RECHARGE_RECORD_URL,
 
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,

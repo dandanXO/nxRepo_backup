@@ -3,7 +3,6 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { axiosBaseQuery } from '../gateway/axiosBaseQuery';
 import { GetGameListEndpoint } from './GetGameListEndpoint';
-import { RechargeHistoryListEndpoint } from './RechargeHistoryListEndpoint';
 import { StartGameEndpoint } from './StartGameEndpoint';
 import {WithdrawHistoryListEndpoint, WithdrawHistoryListEndpointResponseData} from './WithdrawHistoryListEndpoint';
 import { DownloadEndpoint } from './DownloadEndpoint';
@@ -18,7 +17,7 @@ import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
 import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint, GetRechargeConfig } from "./SystemEndpoint";
-import { PostRechargeEndpoint } from "./PaymentEndpoint";
+import { GetRechargeRecordEndpoint, PostRechargeEndpoint } from "./PaymentEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -563,7 +562,7 @@ export const API = createApi({
       login: LoginEndpoint(builder),
       getRecharge: GetRechargeConfig(builder),
       recharge: PostRechargeEndpoint(builder),
-      rechargeHistoryList: RechargeHistoryListEndpoint(builder),
+      rechargeHistoryList: GetRechargeRecordEndpoint(builder),
       getWithdrawLimit: WithdrawInfoGetEndpoint(builder),
       withdraw: WithdrawEndpoint(builder),
       withdrawHistoryList: WithdrawHistoryListEndpoint(builder),
