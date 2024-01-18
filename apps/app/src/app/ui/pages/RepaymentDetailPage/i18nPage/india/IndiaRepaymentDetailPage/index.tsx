@@ -32,7 +32,7 @@ import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList'
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
 import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
-import IndiaReservationProductsModal from "../../../../../modals/ReservationProductsModal/i18n/IndiaReservationProductsModal";
+import IndiaReservationProductsModal from '../../../../../modals/ReservationProductsModal/i18n/IndiaReservationProductsModal';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
