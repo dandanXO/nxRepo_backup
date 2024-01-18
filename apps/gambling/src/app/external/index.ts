@@ -8,7 +8,6 @@ import { DownloadEndpoint } from './DownloadEndpoint';
 import {environment} from "../../environments/environment";
 import { WithdrawEndpoint } from './WithdrawEndpoint';
 import {SendForgetPasswordSMSCodeEndpoint} from "./SendForgetPasswordSMSCodeEndpoint";
-import {WithdrawInfoGetEndpoint} from "./WithdrawInfoGetEndpoint";
 import {Page} from "./types/Page";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
@@ -16,7 +15,12 @@ import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
 import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
 import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint, GetRechargeConfig } from "./SystemEndpoint";
-import { GetRechargeRecordEndpoint, GetWithdrawRecordEndpoint, PostRechargeEndpoint } from "./PaymentEndpoint";
+import {
+  GetRechargeRecordEndpoint,
+  GetWithdrawLimitEndpoint,
+  GetWithdrawRecordEndpoint,
+  PostRechargeEndpoint
+} from "./PaymentEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -562,7 +566,7 @@ export const API = createApi({
       getRecharge: GetRechargeConfig(builder),
       recharge: PostRechargeEndpoint(builder),
       rechargeHistoryList: GetRechargeRecordEndpoint(builder),
-      getWithdrawLimit: WithdrawInfoGetEndpoint(builder),
+      getWithdrawLimit: GetWithdrawLimitEndpoint(builder),
       withdraw: WithdrawEndpoint(builder),
       withdrawHistoryList: GetWithdrawRecordEndpoint(builder),
       getBalance: builder.query<GetBalanceResponse, GetBalanceRequest>({

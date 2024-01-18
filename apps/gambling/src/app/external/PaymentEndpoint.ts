@@ -1,5 +1,5 @@
 import { ExternelEndpoint } from "./types";
-import { GET_RECHARGE_RECORD_URL, GET_WITHDRAW_RECORD_URL, POST_RECHARGE_URL } from "./ApiUrl";
+import { GET_RECHARGE_RECORD_URL, GET_WITHDRAW_LIMIT_URL, GET_WITHDRAW_RECORD_URL, POST_RECHARGE_URL } from "./ApiUrl";
 import { Page } from "./types/Page";
 
 type PostRechargeRequestData = {
@@ -70,6 +70,18 @@ type GetWithdrawRecordResponse = {
   page: Page;
 }
 
+type GetWithdrawLimitResponse = {
+  code: number;
+  msg: string;
+  data: {
+    withdrawMin: number;
+    withdrawMax: number;
+    withdrawFeeRate: number;
+  }
+}
+
+
+// 充值
 const PostRechargeEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostRechargeResponse, PostRechargeRequestData>({
   query: (data) => {
     const { token } = data;
@@ -85,6 +97,7 @@ const PostRechargeEndpoint = (builder: ExternelEndpoint) => builder.mutation<Pos
   }
 })
 
+// 取得充值紀錄
 const GetRechargeRecordEndpoint = (builder: ExternelEndpoint) => builder.mutation<GetRechargeRecordResponse, GetRechargeRecordRequest>({
   query: (data) => {
     const { token } = data;
@@ -100,6 +113,8 @@ const GetRechargeRecordEndpoint = (builder: ExternelEndpoint) => builder.mutatio
   }
 })
 
+
+// 取得提現紀錄
 const GetWithdrawRecordEndpoint = (builder: ExternelEndpoint) => builder.mutation<GetWithdrawRecordResponse, GetWithdrawRecordRequest>({
   query: (data) => {
     const { token } = data;
@@ -114,6 +129,14 @@ const GetWithdrawRecordEndpoint = (builder: ExternelEndpoint) => builder.mutatio
   }
 })
 
+// 取得提現限制
+const GetWithdrawLimitEndpoint = (builder: ExternelEndpoint) => builder.mutation<GetWithdrawLimitResponse, { token: string }>({
+  query: (params) => ({
+    method: 'post',
+    url: GET_WITHDRAW_LIMIT_URL,
+    params
+  })
+})
 
 
 export {
@@ -122,5 +145,6 @@ export {
 
   PostRechargeEndpoint,
   GetRechargeRecordEndpoint,
-  GetWithdrawRecordEndpoint
+  GetWithdrawRecordEndpoint,
+  GetWithdrawLimitEndpoint
 }
