@@ -23,6 +23,9 @@ const GET_WITHDRAW_RECORD_URL = '/japi/user/withdraw-list'  // 取得提現紀�
 const GET_WITHDRAW_LIMIT_URL = '/japi/user/withdraw-limit'  // 取得提現限制
 const GET_BANK_URL = '/japi/user/bank'  // 取得銀行資訊
 
+// punch in
+const POST_PUNCH_IN_URL = '/japi/user/punch-in' // 簽到
+
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
 const GET_BOX_RECEIVE_RECORD_URL = '/japi/invite/boxConfig/boxReceiveRecord' // 取得寶箱領取紀錄
@@ -48,6 +51,8 @@ export {
   GET_WITHDRAW_RECORD_URL,
   GET_WITHDRAW_LIMIT_URL,
   GET_BANK_URL,
+
+  POST_PUNCH_IN_URL,
 
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,
