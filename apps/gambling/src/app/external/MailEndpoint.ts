@@ -1,10 +1,6 @@
 import { ExternelEndpoint } from "./types";
 import { GET_MAIL_COUNT_URL, GET_MAIL_LIST_URL, POST_MAIL_READ_URL } from "./ApiUrl";
 
-type GetMailCountRequest = {
-  token: string;
-};
-
 type GetMailCountResponse = {
   code: number;
   data: {
@@ -39,31 +35,26 @@ type GetMailListResponse = {
 };
 
 // 設定訊息為已讀
-const PostMailReadEndpoint = (builder: ExternelEndpoint) => builder.mutation<{code: number; msg: string}, { mailId: number; token: string}>({
+const PostMailReadEndpoint = (builder: ExternelEndpoint) => builder.mutation<{code: number; msg: string}, { mailId: number}>({
   query: (data) => ({
     method: 'post',
     url: POST_MAIL_READ_URL(data.mailId),
-    params: {
-      token: data.token
-    }
   })
 })
 
 // 取得訊息列表
-const GetMailListEndpoint = (builder: ExternelEndpoint) => builder.query<GetMailListResponse, { token: string}>({
-  query: (params) => ({
+const GetMailListEndpoint = (builder: ExternelEndpoint) => builder.query<GetMailListResponse, null>({
+  query: () => ({
     method: 'get',
     url: GET_MAIL_LIST_URL,
-    params
   })
 })
 
 // 取得未讀訊息數量
-const GetMailCountEndpoint = (builder: ExternelEndpoint) => builder.query<GetMailCountResponse, GetMailCountRequest>({
-  query: (params)=> ({
+const GetMailCountEndpoint = (builder: ExternelEndpoint) => builder.query<GetMailCountResponse, null>({
+  query: ()=> ({
     method: 'get',
     url: GET_MAIL_COUNT_URL,
-    params
   })
 })
 

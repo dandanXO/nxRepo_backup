@@ -64,15 +64,13 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
       location.pathname !== PageOrModalPathEnum.VIPGradePage &&
       location.pathname !== PageOrModalPathEnum.MyPage
     ) {
-      triggerGetUserVIPInfo({
-        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ""
-      });
+      triggerGetUserVIPInfo(null);
     }
   }
 
   const updateMailCount = () => {
     if(isValidToken()) {
-      triggerGetMailCount({ token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
+      triggerGetMailCount(null)
     }
   }
 

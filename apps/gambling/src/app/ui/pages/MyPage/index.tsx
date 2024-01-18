@@ -42,9 +42,7 @@ export const MyPage = () => {
   const [triggerGetLetter, { data }] = useLazyGetLetterListQuery({});
 
   useEffect(() => {
-    triggerGetLetter({
-      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
-    });
+    triggerGetLetter(null);
   }, [])
 
 

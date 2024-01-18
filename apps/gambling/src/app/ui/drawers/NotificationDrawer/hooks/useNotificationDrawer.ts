@@ -32,10 +32,9 @@ export const useNotificationDrawer = () => {
     } else {
       if (unRead) {
         triggerPostLetterRead({
-          token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
           mailId,
         });
-        triggerGetMailCount({ token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
+        triggerGetMailCount(null)
 
         const tempMessages = [...messages];
         const tempMessage = { ...messages[index] };
@@ -49,9 +48,7 @@ export const useNotificationDrawer = () => {
   };
 
   useEffect(() => {
-    triggerGetLetter({
-      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
-    });
+    triggerGetLetter(null);
   }, []);
 
   useEffect(() => {
