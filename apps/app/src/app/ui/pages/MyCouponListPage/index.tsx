@@ -22,7 +22,7 @@ const MyCouponListPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [listStatus, setListStatus] = useState('Usable');
-  const [couponInfoOpen, setCouponInfoOpen] = useState(true);
+  const [couponInfoOpen, setCouponInfoOpen] = useState(false);
 
   const [triggerGetList, { currentData, isFetching }] =
     useLazyGetCouponListQuery({
