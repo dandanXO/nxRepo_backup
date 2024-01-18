@@ -57,6 +57,8 @@
     "serve:gbingo777bet": "cross-env NODE_ENV=development NODE_DEV_SERVER_PROXY=coco777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-v15-u1-m1v11-bingo777bet",
     "build:gbingo777bet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-v15-u1-m1v11-bingo777bet --verbose",
     "build-dev:gbingo777bet": "cross-env NODE_ENV=development pnpm nx run-many --target=build --projects=gambling --configuration=prod-v15-u1-m1v11-bingo777bet --verbose",
+    "serve:cariocas777bet": "cross-env NODE_ENV=develonvmpment NODE_DEV_SERVER_PROXY=coco777bet NODE_DEV_SERVER_HOST_IP=192.168.50.112 pnpm nx serve gambling -c=dev-v13-u2-m1v3-cariocas777bet",
+    "build:cariocas777bet": "cross-env NODE_ENV=production pnpm nx run-many --target=build --projects=gambling --configuration=prod-v13-u2-m1v3-cariocas777bet --verbose",
     "serve:min": "cross-env NODE_ENV=development NODE_COUNTRY=in pnpm nx serve:in mobile -c=development",
     "serve:mpk": "cross-env NODE_ENV=development NODE_COUNTRY=pk pnpm nx serve:pk mobile -c=development",
     "serve:mbd": "cross-env NODE_ENV=development NODE_COUNTRY=bd pnpm nx serve:bd mobile -c=development",
