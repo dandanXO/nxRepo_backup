@@ -5,6 +5,7 @@ const REGISTER_URL = '/japi/user/register' // 註冊
 const LOGIN_URL = '/japi/user/login'  // 登入
 const FORGET_PASSWORD_URL = '/japi/user/forget-password'  // 忘記密碼
 const GET_VIP_INFO_URL = '/japi/user/vip-info' // 取得VIP訊息
+const GET_GAME_RECORD_URL = '/japi/report/api/user/game-records' // 取得遊戲紀錄
 
 // mail
 const GET_MAIL_COUNT_URL = '/japi/user/mail/info' // 取得未讀訊息數量
@@ -38,6 +39,7 @@ export {
   REGISTER_URL,
   LOGIN_URL,
   GET_VIP_INFO_URL,
+  GET_GAME_RECORD_URL,
 
   GET_MAIL_COUNT_URL,
   POST_MAIL_READ_URL,

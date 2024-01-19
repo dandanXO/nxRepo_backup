@@ -1,5 +1,5 @@
 import { ExternelEndpoint } from "./types";
-import { FORGET_PASSWORD_URL, GET_VIP_INFO_URL, LOGIN_URL, REGISTER_URL } from "./ApiUrl";
+import { FORGET_PASSWORD_URL, GET_GAME_RECORD_URL, GET_VIP_INFO_URL, LOGIN_URL, REGISTER_URL } from "./ApiUrl";
 import { IUserInfo } from "../persistant/IUserInfo";
 
 type RegisterRequestExtraData = {
@@ -107,6 +107,36 @@ type GetVIPInfoResponse = {
   };
 };
 
+type GetGameRecordResponse = {
+  total: number;
+  data: {
+    size: number;
+    total: number;
+    records: {
+      gameId: number;
+      roomId: number;
+      userId: number;
+      bet: number;
+      win: number;
+      jackpotWin: number;
+      currentBalance: number;
+      createTime: string;
+      day: number;
+      gameName: number;
+      provider: number;
+    }[]
+  };
+  code: number;
+  msg: string;
+};
+
+type GetGameRecordRequest = {
+  pageNum: number;
+  pageSize: number;
+  dayMin: string;
+  dayMax: string;
+}
+
 // 註冊
 const RegisterEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostRegisterResponse, PostRegisterRequest>({
   query: (requestData: PostRegisterRequest) => ({
@@ -142,6 +172,15 @@ const GetVIPInfoEndpoint = (builder: ExternelEndpoint) => builder.query<GetVIPIn
   })
 })
 
+// 取得遊戲紀錄
+const GetGameRecordEndpoint = (builder: ExternelEndpoint) => builder.query<GetGameRecordResponse, GetGameRecordRequest>({
+  query: (params) => ({
+    method: 'get',
+    url: GET_GAME_RECORD_URL,
+    params
+  })
+})
+
 
 export {
   RegisterRequestExtraData,
@@ -154,9 +193,11 @@ export {
   PostForgetPasswordResponse,
 
   GetVIPInfoResponse,
+  GetGameRecordResponse,
 
   RegisterEndpoint,
   LoginEndpoint,
   ForgetPasswordEndpoint,
-  GetVIPInfoEndpoint
+  GetVIPInfoEndpoint,
+  GetGameRecordEndpoint
 }

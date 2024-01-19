@@ -12,7 +12,13 @@ import {Page} from "./types/Page";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
-import { ForgetPasswordEndpoint, GetVIPInfoEndpoint, LoginEndpoint, RegisterEndpoint } from "./UserEndpoint";
+import {
+  ForgetPasswordEndpoint,
+  GetGameRecordEndpoint,
+  GetVIPInfoEndpoint,
+  LoginEndpoint,
+  RegisterEndpoint
+} from "./UserEndpoint";
 import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
 import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint, GetRechargeConfig } from "./SystemEndpoint";
 import {
@@ -629,16 +635,7 @@ export const API = createApi({
           params: query,
         }),
       }),
-      getUserGameRecord: builder.mutation<
-        GetUserGameRecordResponse,
-        GetUserGameRecordRequest
-      >({
-        query: (query: GetInviteRewardDataRequest) => ({
-          method: 'post',
-          url: `/prod-api/playGame/queryUserGameRecord`,
-          data: query,
-        }),
-      }),
+      getUserGameRecord: GetGameRecordEndpoint(builder),
       getInviteUserDayReportData: builder.query<
         GetInviteUserDayReportDataResponse,
         GetInviteUserDayReportDataRequest
@@ -681,7 +678,7 @@ export const {
   useLoginMutation,
   useLazyGetBalanceQuery,
   useLazyGetSimpleBalanceQuery,
-  useGetUserGameRecordMutation,
+  useLazyGetUserGameRecordQuery,
   useRegisterMutation,
   useSendForgetPasswordSMSCodeMutation,
   useForgetPasswordMutation,
