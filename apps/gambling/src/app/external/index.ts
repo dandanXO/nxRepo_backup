@@ -22,6 +22,7 @@ import {
   GetWithdrawRecordEndpoint,
   PostRechargeEndpoint
 } from "./PaymentEndpoint";
+import { PostPunchInEndpoint } from "./PunchInEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -589,6 +590,7 @@ export const API = createApi({
           data,
         }),
       }),
+      postPunchIn: PostPunchInEndpoint(builder),
       getSignInRecord: builder.mutation<GetSignInRecordResponse, GetSignInRecordRequest>({
         query: (reqeustData: GetSignInRecordRequest) => ({
           method: 'post',
@@ -732,7 +734,8 @@ export const {
   useLazyGetVIPInfoQuery,
   useLazyDownloadQuery,
   usePostLetterReadMutation,
-  useLazyGetMailCountQuery
+  useLazyGetMailCountQuery,
+  usePostPunchInMutation
 } = API;
 
 export const API3 = createApi({

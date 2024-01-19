@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 
-import {useGetSignInConfigMutation} from '../../../external';
+import { useGetSignInConfigMutation, usePostPunchInMutation } from "../../../external";
 import {AppLocalStorage} from '../../../persistant/localstorage';
 import useBreakpoint from '../../pageTemplate/hooks/useBreakpoint';
 import {useAllowLoginRouterRules} from '../../router/hooks/useAllowLoginRouterRules';
@@ -126,6 +126,8 @@ export const DailySignInPage = () => {
   const [triggerGetSignInConfig, { data: signInConfig }] =
     useGetSignInConfigMutation();
 
+  const [triggerPostPunchIn] = usePostPunchInMutation()
+
 
   // console.log("signInConfig", signInConfig);
 
@@ -136,12 +138,9 @@ export const DailySignInPage = () => {
   }, [signInConfig?.data?.vipLevel ])
 
   const onClickToSignIn = () => {
-    return triggerGetSignInConfig({
-      onlyGetSignInConfig: false,
-      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
-    }).then((result) => {
+    return triggerPostPunchIn(null).then((result) => {
         if('data' in result){
-          if(result.data.code === 200) {
+          if(result.data?.code === 200) {
             return true
           }
           else {
