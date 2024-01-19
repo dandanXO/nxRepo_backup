@@ -137,7 +137,7 @@ const IndiaReservationProductsModal = () => {
           </div>
           <div className="border-cstate-disable-main mt-3 mb-5 w-full rounded-lg border border-solid p-4">
             <div className="text-base">{t('Amount')}</div>
-            <div className="text-2xl font-bold">{`${formatPrice(
+            <div className="text-2xl font-bold">{`₹ ${formatPrice(
               productAmount
             )}`}</div>
           </div>
