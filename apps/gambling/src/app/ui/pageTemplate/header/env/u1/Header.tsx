@@ -146,7 +146,10 @@ export const Header = (props: IHeader) => {
           <section
             className='flex gap-2 items-center'
             onClick={() => dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}
-            onMouseOver={debounce(()=>dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover)), 200)}
+            onMouseOver={debounce(()=>{
+              if(openUserInfoStatusPopover) return
+              return dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))
+            }, 10)}
             onMouseOut={() => {
               // console.log("onMouseOut")
             }}
