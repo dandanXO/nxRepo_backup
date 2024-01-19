@@ -8,7 +8,7 @@ export const environment = {
   platformName: "Cat777bet",
   platformGroup: "Group",
   appPackageName: "com.slots.big",
-  appVersion: "1.0.0",
+  appVersion: "1.0.2",
   s3URLImages: "https://xb-web.s3.amazonaws.com/game3",
   snowEffects: "none",
   backgroundVideoUrl: ""

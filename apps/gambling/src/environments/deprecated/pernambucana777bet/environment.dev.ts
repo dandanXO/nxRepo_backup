@@ -7,6 +7,6 @@ export const environment = {
   baseUrl: "",
   appPackageName: "com.pernambucana777bet.big",
   captcha: "/japi/user/captcha/image",
-  appVersion: "1.0.0",
+  appVersion: "1.0.2",
   s3URLImages: "https://xb-web.s3.amazonaws.com/game3",
 };
