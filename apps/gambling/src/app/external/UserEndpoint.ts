@@ -192,6 +192,7 @@ export {
   ForgetPasswordRequestExtraData,
   PostForgetPasswordRequest,
   PostForgetPasswordResponse,
+  PostLoginResponse,
 
   GetVIPInfoResponse,
   GetGameRecordResponse,
