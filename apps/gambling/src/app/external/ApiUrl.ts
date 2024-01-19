@@ -25,6 +25,7 @@ const GET_BANK_URL = '/japi/user/bank'  // 取得銀行資訊
 
 // punch in
 const POST_PUNCH_IN_URL = '/japi/user/punch-in' // 簽到
+const GET_PUNCH_IN_CONFIG_URL = '/japi/user/punch-in-config' // 取得簽到配置
 
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
@@ -53,6 +54,7 @@ export {
   GET_BANK_URL,
 
   POST_PUNCH_IN_URL,
+  GET_PUNCH_IN_CONFIG_URL,
 
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,

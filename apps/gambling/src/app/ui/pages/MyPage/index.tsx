@@ -1,16 +1,13 @@
 import styled from "styled-components";
-import {useNavigate} from "react-router";
-import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../reduxStore";
 import {
-  useGetSignInConfigMutation, useLazyGetLetterListQuery,
+  useLazyGetLetterListQuery, useLazyGetPunchInConfigQuery,
   useLazyGetUserVIPAllInfoQuery
 } from "../../../external";
 
-import {appSlice, totalBalanceSheetSelector, totalReasableSelector} from "../../../reduxStore/appSlice";
+import {appSlice} from "../../../reduxStore/appSlice";
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
-import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
 import {useEffect, useState} from "react";
 import {AppLocalStorage} from "../../../persistant/localstorage";
 
@@ -48,7 +45,7 @@ export const MyPage = () => {
 
   const [triggerGetUserVIPALLInfo, {currentData: vipAllInfo}] = useLazyGetUserVIPAllInfoQuery();
 
-  const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
+  const [triggerGetSignConfig, { data: signInConfig }] = useLazyGetPunchInConfigQuery();
 
 
   const {userVIPInfo} = useLocalstorageGetUserVIPInfo();
@@ -56,10 +53,7 @@ export const MyPage = () => {
   useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     if(token && token !== "" && token !== "undefined") {
-      triggerGetSignConfig({
-        onlyGetSignInConfig: true,
-        token,
-      });
+      triggerGetSignConfig(null);
     }
     triggerGetUserVIPALLInfo(null);
 
@@ -68,10 +62,7 @@ export const MyPage = () => {
   useEffect(() => {
     const handler = () => {
       const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
-      triggerGetSignConfig({
-        onlyGetSignInConfig: true,
-        token,
-      });
+      triggerGetSignConfig(null);
       triggerGetUserVIPALLInfo(null);
     }
     window.addEventListener("focus", handler)

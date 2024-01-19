@@ -1,5 +1,5 @@
 import { ExternelEndpoint } from "./types";
-import { POST_PUNCH_IN_URL } from "./ApiUrl";
+import { GET_PUNCH_IN_CONFIG_URL, POST_PUNCH_IN_URL } from "./ApiUrl";
 
 
 type PostPunchInResponse = {
@@ -28,6 +28,27 @@ type PostPunchInResponse = {
   }
 }
 
+type GetPunchInConfigResponse = {
+  code: number;
+  msg: string;
+  data: {
+    vipLevel: number;
+    signInConfig: {
+      bonus_finish: number;
+      bonus: number;
+      days: number;
+      cashback: number
+    }[];
+    signInRefreshTimestamp: number;
+    signInTotalDays: number;
+    todayIsSignIn: boolean;
+    signInAllConfig: {
+      identifier: string;
+      value: string
+    }[];
+  }
+}
+
 
 const PostPunchInEndpoint = (builder: ExternelEndpoint) => builder.mutation<PostPunchInResponse, null>({
   query: () => ({
@@ -36,8 +57,17 @@ const PostPunchInEndpoint = (builder: ExternelEndpoint) => builder.mutation<Post
   })
 })
 
+const GetPunchInConfigEndpoint = (builder: ExternelEndpoint) => builder.query<GetPunchInConfigResponse, null>({
+  query: () => ({
+    method: 'get',
+    url: GET_PUNCH_IN_CONFIG_URL
+  })
+})
+
 export {
+  GetPunchInConfigResponse,
   PostPunchInResponse,
 
-  PostPunchInEndpoint
+  PostPunchInEndpoint,
+  GetPunchInConfigEndpoint
 }

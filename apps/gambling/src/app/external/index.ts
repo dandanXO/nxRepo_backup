@@ -22,7 +22,7 @@ import {
   GetWithdrawRecordEndpoint,
   PostRechargeEndpoint
 } from "./PaymentEndpoint";
-import { PostPunchInEndpoint } from "./PunchInEndpoint";
+import { GetPunchInConfigEndpoint, PostPunchInEndpoint } from "./PunchInEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -257,27 +257,6 @@ export type GetUserVIPAllInfoResponse = {
   msg: string;
   total: number;
   data: GetUserVIPAllInfoResponseData[];
-};
-
-export type GetSignInConfigResponse = {
-  code: number;
-  msg: string;
-  data: {
-    vipLevel: number;
-    todayIsSignIn: boolean;
-    signInTotalDays: number;
-    signInRefreshTimestamp: number;
-    signInConfig: {
-      days: number;
-      cashback: number;
-      bonus: number;
-      bonus_finish: number;
-    }[];
-    signInAllConfig?: {
-      identifier: string;
-      value: string;
-    }[];
-  };
 };
 
 export type GetSignInRecordResponseData = {
@@ -580,17 +559,8 @@ export const API = createApi({
           url: '/japi/user/vip/getAllDisplayVo',
         }),
       }),
-      getSignInConfig: builder.mutation<
-        GetSignInConfigResponse,
-        { token: string; onlyGetSignInConfig: boolean }
-      >({
-        query: (data: { token: string; onlyGetSignInConfig: boolean }) => ({
-          method: 'post',
-          url: '/prod-api/sign-in/sign-in',
-          data,
-        }),
-      }),
       postPunchIn: PostPunchInEndpoint(builder),
+      getPunchInConfig: GetPunchInConfigEndpoint(builder),
       getSignInRecord: builder.mutation<GetSignInRecordResponse, GetSignInRecordRequest>({
         query: (reqeustData: GetSignInRecordRequest) => ({
           method: 'post',
@@ -728,14 +698,14 @@ export const {
   useGetWithdrawLimitMutation,
   useWithdrawMutation,
   useWithdrawHistoryListMutation,
-  useGetSignInConfigMutation,
   useGetSignInRecordMutation,
   useLazyGetUserVIPAllInfoQuery,
   useLazyGetVIPInfoQuery,
   useLazyDownloadQuery,
   usePostLetterReadMutation,
   useLazyGetMailCountQuery,
-  usePostPunchInMutation
+  usePostPunchInMutation,
+  useLazyGetPunchInConfigQuery
 } = API;
 
 export const API3 = createApi({

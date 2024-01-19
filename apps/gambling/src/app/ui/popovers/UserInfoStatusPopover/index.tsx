@@ -7,8 +7,8 @@ import {
   totalReasableSelector
 } from "../../../reduxStore/appSlice";
 import {
-  useGetSignInConfigMutation,
-  useLazyGetInviteRewardDataQuery, useLazyGetUnsettleInviteRewardDataQuery, useLazyGetUserVIPAllInfoQuery} from "../../../external";
+  useLazyGetPunchInConfigQuery,
+} from "../../../external";
 import React, {useEffect, useMemo, useState} from "react";
 import styled, { keyframes } from "styled-components";
 import { RootState } from "../../../reduxStore";
@@ -17,20 +17,15 @@ import { environment } from "../../../../environments/environment"
 import { UserInfoStatusPopoverContainer as CocoPopoverContainer } from './env/u1/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverContainer as WildPopoverContainer } from './env/wild/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverContainer as RioPopoverContainer } from './env/u2/UserInfoStatusPopoverContainer';
-import { UserInfoStatusPopoverContainer as PernambucanaPopoverContainer } from './env/pernambucana/UserInfoStatusPopoverContainer';
 import { UserInfoStatusPopoverVIPInfo as CocoVIPInfo} from './env/u1/UserInfoStatusPopoverVIPInfo'
 import { UserInfoStatusPopoverVIPInfo as WildVIPInfo} from './env/wild/UserInfoStatusPopoverVIPInfo'
-import { UserInfoStatusPopoverVIPInfo as PernambucanaVIPInfo} from './env/pernambucana/UserInfoStatusPopoverVIPInfo'
 import { renderByUVersion } from "../../utils/renderByUVersion";
 import { UserInfoStatusPopoverBalanceInfo as CocoBalanceInfo } from "./env/u1/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverBalanceInfo as WildBalanceInfo } from "./env/wild/UserInfoStatusPopoverBalanceInfo";
-import { UserInfoStatusPopoverBalanceInfo as PernambucanaBalanceInfo } from "./env/pernambucana/UserInfoStatusPopoverBalanceInfo";
 import { UserInfoStatusPopoverInviteInfo as CocoInviteInfo } from "./env/u1/UserInfoStatusPopoverInviteInfo";
 import { UserInfoStatusPopoverInviteInfo as WildInviteInfo } from "./env/wild/UserInfoStatusPopoverInviteInfo";
-import { UserInfoStatusPopoverInviteInfo as PernambucanaInviteInfo } from "./env/pernambucana/UserInfoStatusPopoverInviteInfo";
 import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/u1/UserInfoStatusPopoverNavigator";
 import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/UserInfoStatusPopoverNavigator";
-import { UserInfoStatusPopoverNavigator as PernambucanaNavigator } from "./env/pernambucana/UserInfoStatusPopoverNavigator";
 import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/u1/UserINfoStatusPopoverUserInfo'
 import { UserInfoStatusPopover as RioUserInfoStatusPopover } from './env/u2';
 
@@ -225,7 +220,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
 
 
 
-  const [triggerGetSignConfig, { data: signInConfig }] = useGetSignInConfigMutation();
+  const [triggerGetSignConfig, { data: signInConfig }] = useLazyGetPunchInConfigQuery();
 
   // const [triggerGetUserVIPInfo, { data: userVIPInfo }] = useGetVIPInfoMutation();
   const {userVIPInfo} = useLocalstorageGetUserVIPInfo();
@@ -234,20 +229,14 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
     if(token && token !== "" && token !== "undefined") {
-      triggerGetSignConfig({
-        onlyGetSignInConfig: true,
-        token,
-      });
+      triggerGetSignConfig(null);
     }
   }, []);
 
   useEffect(() => {
     const handler = () => {
       const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
-      triggerGetSignConfig({
-        onlyGetSignInConfig: true,
-        token,
-      });
+      triggerGetSignConfig(null);
     }
     window.addEventListener("focus", handler)
     return () => {
