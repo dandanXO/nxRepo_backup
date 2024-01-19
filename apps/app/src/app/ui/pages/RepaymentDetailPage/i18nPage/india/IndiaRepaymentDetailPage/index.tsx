@@ -2,7 +2,7 @@ import { MdExpandLess } from '@react-icons/all-files/md/MdExpandLess';
 import { MdExpandMore } from '@react-icons/all-files/md/MdExpandMore';
 import cx from 'classnames';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -32,6 +32,7 @@ import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList'
 import { i18nLoanDetailsPage } from '../../../translations';
 import VipIcon from '../../component/VipIcon';
 import { repaymentDetailPageInitialState, repaymentDetailPageSlice } from 'apps/app/src/app/reduxStore/repaymentDetailPageSlice';
+import IndiaReservationProductsModal from '../../../../../modals/ReservationProductsModal/i18n/IndiaReservationProductsModal';
 
 type IRepaymentDetailPage = {
   currentData?: GetLoanDetailResponse;
@@ -98,7 +99,7 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   return (
     <PageContent className={'w-full pb-0'}>
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
-      {modalState.reservationProductsModal.show && <ReservationProductsModal />}
+      {modalState.reservationProductsModal.show && <IndiaReservationProductsModal />}
       {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
       {/*{currentData && currentData?.status === "UNPAID" || currentData?.status === 'OVERDUE' && (*/}
       {/*  <div className={`bg-cstate-info-variant text-cstate-info-main py-2 text-center text-sm`}>*/}
