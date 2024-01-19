@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router";
 import {PageOrModalPathEnum} from "../../PageOrModalPathEnum";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 
 import {
   totalBalanceSheetSelector,
@@ -28,6 +28,7 @@ import { UserInfoStatusPopoverNavigator as CocoNavigator } from "./env/u1/UserIn
 import { UserInfoStatusPopoverNavigator as WildNavigator } from "./env/wild/UserInfoStatusPopoverNavigator";
 import { UserINfoStatusPopoverUserInfo as CocoUserInfo } from './env/u1/UserINfoStatusPopoverUserInfo'
 import { UserInfoStatusPopover as RioUserInfoStatusPopover } from './env/u2';
+import { uiSlice } from "../../../reduxStore/uiSlice";
 
 import {AppLocalStorageKey} from "../../../persistant/AppLocalStorageKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
@@ -252,7 +253,8 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   // console.log("user", user);
 
   // const userStore = useSelector((state: RootState) => state?.app?.userStore);
-  const userData = useSelector((state: RootState) => state.app?.userStore)
+  // const userData = useSelector((state: RootState) => state.app?.userStore)
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(appSlice.actions.setUserStore({
@@ -287,7 +289,7 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
   // }, []);
 
   // const mouseOverDesktopHeader = useSelector((rootState: RootState) => rootState.ui.mouseOverDesktopHeader)
-
+  const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui);
   return (
     <div
       className={"z-[1000] fixed left-0 top-0 right-0 bottom-0 flex-col flex justify-center items-center w-full h-full"}
@@ -296,12 +298,12 @@ export const UserInfoStatusPopover = (props: IUserInfoStatusPopover) => {
       }}
     >
       <PopoverContainer
-        // onMouseLeave={() => {
-        //   console.log("mouseOverDesktopHeader", mouseOverDesktopHeader);
-        //   if(!mouseOverDesktopHeader) {
-        //     props.close();
-        //   }
-        // }}
+        onMouseLeave={() => {
+          console.log("mouseOverDesktopHeader", openUserInfoStatusPopover);
+          if(openUserInfoStatusPopover) {
+            dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))
+          }
+        }}
       >
         {
           renderByUVersion({
