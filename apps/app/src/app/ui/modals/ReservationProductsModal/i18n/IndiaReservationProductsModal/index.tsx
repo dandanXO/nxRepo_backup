@@ -17,6 +17,8 @@ import moment from 'moment';
 import AdSVG from '../IndiaReservationProductsModal/coupon_demo.svg';
 import handAdSVG from '../IndiaReservationProductsModal/ic_hand.svg';
 import cx from "classnames";
+import {Checkbox} from "../../../../core-components/Checkbox";
+import {AiFillCheckSquare} from "@react-icons/all-files/ai/AiFillCheckSquare";
 
 
 const IndiaReservationProductsModal = () => {
@@ -145,7 +147,7 @@ const IndiaReservationProductsModal = () => {
                 <Product
                   key={index}
                   product={product}
-                  checkable={true}
+                  checkable={false}
                   checkboxProps={{
                     disable: false,
                     checked: true,
