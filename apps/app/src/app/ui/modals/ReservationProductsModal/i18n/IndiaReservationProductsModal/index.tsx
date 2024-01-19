@@ -176,18 +176,6 @@ const IndiaReservationProductsModal = () => {
           <div className={`mb-2 relative w-full`}>
             <img className={`w-full mt-2`} src={AdSVG}/>
             <img className={`pr-2 absolute top-0 right-0 justify-self-end animate-bounce`} src={handAdSVG}/>
-            <div
-              className={`ml-2 pb-2 w-1/5  absolute top-1/2 left-0 text-ctext-primary text-center text-base leading-none`}>
-              <span className={`font-normal`}>{"₹"}</span>
-              <span className={`font-bold `}>{"200"}</span>
-            </div>
-            <div
-              className={`absolute mt-2 pb-2 top-0 left-[28%] right-[50px] bg-blend-color text-left text-[0.55rem] text-white leading-none grid place-items-center h-full justify-start`}>
-              <div>
-                <p className={`font-bold`}>{t(`COUPON`)}</p>
-                <p className={`font-normal`}>{t(`Repayment can benefit from discounts by using coupons.`)}</p>
-              </div>
-            </div>
           </div>
 
           <div

@@ -15,9 +15,6 @@ export const i18nReservationProductsModal: i18nComponent = {
       'Due Date': 'Due Date',
       Cancel: 'Cancel',
       'Apply and Get Coupon': 'Apply and Get Coupon',
-      // 'Reserve Application': 'Reserve Application',
-      'COUPON': 'COUPON',
-      'Repayment can benefit from discounts by using coupons.': 'Repayment can benefit \nfrom discounts by using coupons.',
       'Notes': 'Notes:',
       'Click': 'Click',
       '"Account" >"My Coupons"' :
