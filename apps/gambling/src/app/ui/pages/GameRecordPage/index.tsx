@@ -8,6 +8,7 @@ import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
 import { GameRecordPage as CocoGameRecordPage } from './env/u1';
 import { GameRecordPage as RioGameRecordPage } from './env/u2';
 import { renderByUVersion } from "../../utils/renderByUVersion";
+import { IUserInfo } from "../../../persistant/IUserInfo";
 
 export interface IGameRecordPageProps {
   dates: moment.Moment[]
@@ -32,6 +33,8 @@ export const GameRecordPage = () => {
   const [records, setRecords] = useState<GetUserGameRecordResponse["rows"]>([])
   const [page, setPage] = useState(1)
 
+  const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
+
   const handleFetchData = () => {
     if (records.length < (data?.data.total || 0)) {
       setPage((records.length / pageSize) + 1)
@@ -41,6 +44,7 @@ export const GameRecordPage = () => {
 
   useEffect(() => {
     triggerGetRecord({
+      userId: user.user_id,
       dayMin: dates[0].format(dateFormat),
       dayMax: dates[1].format(dateFormat),
       pageNum: page,
@@ -73,7 +77,7 @@ export const GameRecordPage = () => {
         setDates={setDates}
         handleFetchData={handleFetchData}
         records={records}
-        dataCount={data?.total || 0}
+        dataCount={data?.data.total || 0}
       />
     ),
     "u2": (
@@ -82,7 +86,7 @@ export const GameRecordPage = () => {
         setDates={setDates}
         handleFetchData={handleFetchData}
         records={records}
-        dataCount={data?.total || 0}
+        dataCount={data?.data.total || 0}
       />
     )
   }, (
@@ -91,7 +95,7 @@ export const GameRecordPage = () => {
       setDates={setDates}
       handleFetchData={handleFetchData}
       records={records}
-      dataCount={data?.total || 0}
+      dataCount={data?.data.total || 0}
     />
   ))
 };

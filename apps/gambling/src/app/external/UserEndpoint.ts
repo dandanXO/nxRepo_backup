@@ -132,6 +132,7 @@ type GetGameRecordResponse = {
 
 type GetGameRecordRequest = {
   pageNum: number;
+  userId: number;
   pageSize: number;
   dayMin: string;
   dayMax: string;
