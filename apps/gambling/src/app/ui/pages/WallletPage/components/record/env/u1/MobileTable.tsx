@@ -34,11 +34,9 @@ export const DepositMobileTable = () => {
   const [triggerGetDepositRecord, { data }] = useRechargeHistoryListMutation()
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetDepositRecord({
       limit: 1000,
       page: 1,
-      token
     })
   }, [])
 
@@ -49,7 +47,7 @@ export const DepositMobileTable = () => {
         : <div className="h-[80vh] overflow-y-auto">
           {data?.data?.map((record) => (
             <Container
-              key={record.id}
+              key={record.pay_serial_no}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
                 "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
               )}
@@ -100,11 +98,9 @@ export const WithdrawMobileTable = () => {
   const [triggerGetWithdrawRecord, { data }] = useWithdrawHistoryListMutation({})
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
       limit: 1000,
       page: 1,
-      token
     })
   }, [])
 
@@ -115,7 +111,7 @@ export const WithdrawMobileTable = () => {
         : <div className={cx("overflow-y-auto", { "h-[80vh]": data?.data?.length || 0 > 0 })}>
           {data?.data?.map((record) => (
             <Container
-              key={record.id}
+              key={record.pay_serial_no}
               className={cx("mb-2 flex flex-col rounded-2xl text-white text-sm",
                 "bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]"
               )}

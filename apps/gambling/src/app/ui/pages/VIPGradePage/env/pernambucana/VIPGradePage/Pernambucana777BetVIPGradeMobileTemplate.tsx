@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router';
 import styled, {keyframes} from 'styled-components';
 
 import {
-  GetSignInConfigResponse,
   GetUserVIPAllInfoResponse
 } from '../../../../../../external';
 import { PageOrModalPathEnum } from '../../../../../PageOrModalPathEnum';
@@ -16,6 +15,7 @@ import {environment} from "../../../../../../../environments/environment";
 import { JackpotMap } from "../../../index";
 import { usePageNavigate } from '../../../../../router/hooks/usePageNavigate';
 import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
+import { GetPunchInConfigResponse } from "../../../../../../external/PunchInEndpoint";
 
 export const LevelListBottomBr = styled.div`
   height: 1rem;
@@ -62,7 +62,7 @@ const Container = styled.div`
 interface IVIPGradeMobileTemplateProps {
   userVIPInfo?: GetVIPInfoResponse;
   allLevelInfo: GetUserVIPAllInfoResponse['data'];
-  allSignInConfig: GetSignInConfigResponse['data']['signInAllConfig'];
+  allSignInConfig: GetPunchInConfigResponse['data']['signInAllConfig'];
 }
 
 const VIPTitle = styled.button.attrs<{

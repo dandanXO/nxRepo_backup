@@ -1,9 +1,7 @@
 import { PageOrModalPathEnum } from "../../../../PageOrModalPathEnum";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
-import cx from "classnames";
 import { useNavigate } from "react-router";
-import { useEffect, useMemo, useState } from "react";
-import { RechargeResponseConfig, GetRechargeResponseOption } from "../../../../../external/RechargeInfoGetEndpoint";
+import { useEffect, useState } from "react";
 import { environment } from "../../../../../../environments/environment";
 import { IDepositInput } from "./DepositInput";
 
@@ -22,14 +20,18 @@ import { DepositPanel as PDepositPanel } from '../../env/pernambucana/tabsConten
 import { useDepositInput } from "../../hooks/useDepositInput";
 import { useGetConfig } from "../../hooks/useGetConfig";
 import { useDepositMoneyButton } from "../../hooks/useDepositMoneyButton";
+import {
+  GetRechargeConfigResponseConfig,
+  GetRechargeConfigResponseOption
+} from "../../../../../external/SystemEndpoint";
 
 
 
 
 export interface IDepositPanel {
   data?: {
-    config: RechargeResponseConfig[],
-    options: GetRechargeResponseOption;
+    config: GetRechargeConfigResponseConfig[],
+    options: GetRechargeConfigResponseOption;
   }
 }
 
@@ -37,10 +39,10 @@ export type IDepositPanelProps = IDepositPanel & {
   isLoaded: boolean;
   selectedIndex: number;
   depositInputProps: IDepositInput;
-  handleClickDepositMoneyButton: (rechargeValue: number, index: number, config: RechargeResponseConfig) => void;
+  handleClickDepositMoneyButton: (rechargeValue: number, index: number, config: GetRechargeConfigResponseConfig) => void;
   depositButtonsOptions: {
     rechargeValue: number;
-    config: RechargeResponseConfig
+    config: GetRechargeConfigResponseConfig
     isShowRate: boolean;
     rate: string
   }[];
@@ -59,7 +61,7 @@ export const DepositPanel = (props: IDepositPanel) => {
 
   const [clicked, setClicked] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedIndexConfig, setSelectedIndexConfig] = useState<RechargeResponseConfig>();
+  const [selectedIndexConfig, setSelectedIndexConfig] = useState<GetRechargeConfigResponseConfig>();
   const { inputValue, setInputValue } = depositInputProps;
 
   // NOTE: bd
@@ -112,12 +114,11 @@ export const DepositPanel = (props: IDepositPanel) => {
       setClicked(true);
       triggerRecharge({
         amount: Number(inputValue.data),
-        appPackageName: environment.appPackageName,
-        appVersion: environment.appVersion,
+        // appPackageName: environment.appPackageName,
+        // appVersion: environment.appVersion,
         configId: Number(selectedIndexConfig?.id),
-        phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
-        qr: 1,
-        token: AppLocalStorage.getItem(AppLocalStorageKey.token) || ''
+        // phone: AppLocalStorage.getItem(AppLocalStorageKey.kPhone) || '',
+        // qr: 1,
       }).then(({ data }: any) => {
         navigate(PageOrModalPathEnum.WalletDepositNextPage, {
           state: {
@@ -130,7 +131,7 @@ export const DepositPanel = (props: IDepositPanel) => {
     }
   }
 
-  const handleClickDepositMoneyButton = (rechargeValue: number, index: number, config: RechargeResponseConfig) => {
+  const handleClickDepositMoneyButton = (rechargeValue: number, index: number, config: GetRechargeConfigResponseConfig) => {
     setSelectedIndex(index);
     setInputValue({
       data: String(rechargeValue),

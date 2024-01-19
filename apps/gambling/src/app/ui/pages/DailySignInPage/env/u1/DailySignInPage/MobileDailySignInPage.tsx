@@ -1,5 +1,4 @@
 import React from "react";
-import { GetSignInConfigResponse } from "../../../../../../external";
 import { environment } from "../../../../../../../environments/environment";
 import CurrentVIPIcon from "../../../../../components/CurrentVIPIcon";
 import { CocoLevelList, DayList } from "./index";
@@ -10,6 +9,7 @@ import { useNavigate } from "react-router";
 import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
 import {usePageNavigate} from "../../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../../components-bs/PageContainer";
+import { GetPunchInConfigResponse } from "../../../../../../external/PunchInEndpoint";
 
 const SignInButton = styled.div<{
   disable: boolean
@@ -23,11 +23,11 @@ const SignInButton = styled.div<{
 
 interface ICocoMobileDailySignInPageProps {
   onClickToSignIn: () => void
-  signInConfig: GetSignInConfigResponse['data']['signInConfig']
-  signInAllConfig: GetSignInConfigResponse['data']['signInAllConfig']
-  signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays']
-  todayIsSignIn: GetSignInConfigResponse['data']['todayIsSignIn']
-  vipLevel: GetSignInConfigResponse['data']['vipLevel']
+  signInConfig: GetPunchInConfigResponse['data']['signInConfig']
+  signInAllConfig: GetPunchInConfigResponse['data']['signInAllConfig']
+  signInTotalDays: GetPunchInConfigResponse['data']['signInTotalDays']
+  todayIsSignIn: GetPunchInConfigResponse['data']['todayIsSignIn']
+  vipLevel: GetPunchInConfigResponse['data']['vipLevel']
   currentSelectedLevel: number
   setCurrentSelectedLevel: React.Dispatch<React.SetStateAction<number>>
 }

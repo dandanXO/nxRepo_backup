@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from "react";
 import {
-  GetLetterResponseData,
-  useGetLetterListMutation,
-  useGetMailCountMutation,
+  useLazyGetLetterListQuery,
+  useLazyGetMailCountQuery,
   usePostLetterReadMutation
 } from "../../../../external";
 import {useDispatch} from "react-redux";
 import {AppLocalStorage} from "../../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../../persistant/AppLocalStorageKey";
 import {appSlice} from "../../../../reduxStore/appSlice";
+import { GetMailListResponseData } from "../../../../external/MailEndpoint";
 
 export const useNotificationDrawer = () => {
-  const [messages, setMessages] = useState<GetLetterResponseData[]>([]);
+  const [messages, setMessages] = useState<GetMailListResponseData[]>([]);
   const [expandableIndex, setExpandableIndex] = useState<null | number>(0);
 
-  const [triggerGetLetter, { data }] = useGetLetterListMutation({});
+  const [triggerGetLetter, { data }] = useLazyGetLetterListQuery({});
   const [triggerPostLetterRead] = usePostLetterReadMutation();
   const dispatch = useDispatch();
-  const [triggerGetMailCount, { data: messageData }] = useGetMailCountMutation();
+  const [triggerGetMailCount, { data: getMailCountData }] = useLazyGetMailCountQuery();
 
 
   const handleClick = (
@@ -32,10 +32,9 @@ export const useNotificationDrawer = () => {
     } else {
       if (unRead) {
         triggerPostLetterRead({
-          token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
           mailId,
         });
-        triggerGetMailCount({ token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '' })
+        triggerGetMailCount(null)
 
         const tempMessages = [...messages];
         const tempMessage = { ...messages[index] };
@@ -49,9 +48,7 @@ export const useNotificationDrawer = () => {
   };
 
   useEffect(() => {
-    triggerGetLetter({
-      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
-    });
+    triggerGetLetter(null);
   }, []);
 
   useEffect(() => {
@@ -60,10 +57,10 @@ export const useNotificationDrawer = () => {
   }, [data]);
 
   useEffect(() => {
-    if (messageData) {
-      dispatch(appSlice.actions.setMessageCount(messageData?.mailCount || 0));
+    if (getMailCountData?.data) {
+      dispatch(appSlice.actions.setMessageCount(getMailCountData.data.mailCount || 0));
     }
-  }, [messageData]);
+  }, [getMailCountData]);
 
   return {
     messages,

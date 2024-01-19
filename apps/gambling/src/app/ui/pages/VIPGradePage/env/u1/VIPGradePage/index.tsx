@@ -4,18 +4,19 @@ import { useNavigate } from "react-router";
 import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { tcx } from "../../../../../utils/tcx";
 import CurrentLevelInfoCard from "./CurrentLevelInfoCard";
-import { GetSignInConfigResponse, GetUserVIPAllInfoResponse } from "../../../../../../external";
+import { GetUserVIPAllInfoResponse } from "../../../../../../external";
 import LevelInfoCard from "./LevelInfoCard";
 import {PageContainer} from "../../../../../components-bs/PageContainer";
 import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
 import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
+import { GetPunchInConfigResponse } from "../../../../../../external/PunchInEndpoint";
 
 interface ICoco777betVIPGradePageProps {
   currentLevel: number
   userVIPInfo?: GetVIPInfoResponse
   isMobile: boolean
   allLevelInfo: GetUserVIPAllInfoResponse['data']
-  allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig']
+  allSignInConfig?: GetPunchInConfigResponse['data']['signInAllConfig']
 }
 
 

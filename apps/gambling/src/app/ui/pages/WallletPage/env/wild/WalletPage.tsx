@@ -7,7 +7,6 @@ import { LeftOutlined } from "@ant-design/icons";
 import { DepositPanel } from "../../components/deposit/DepositPanel";
 import { WithdrawPanel } from "../../components/withdraw/WithdrawPanel";
 import { RecordPanel } from "../../components/record/RecordPanel";
-import { useGetRechargeMutation } from "../../../../../external";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { useSelector } from "react-redux";
 

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRechargeHistoryListMutation } from '../../../../../../../external';
-import { RechargeListResponseData } from '../../../../../../../external/RechargeHistoryListEndpoint';
 import { AppLocalStorage } from '../../../../../../../persistant/localstorage';
 import { Table } from '../../../../../../components-bs/Table';
 import copy from 'copy-to-clipboard';
@@ -8,7 +7,7 @@ import {notification} from 'antd';
 import { DragScrollContainer } from '../../../../../../components/DragScrollContainer';
 import {AppLocalStorageKey} from "../../../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../../../utils/format";
-import { width } from 'tailwindcss-classnames';
+import { GetRechargeRecordResponseData } from "../../../../../../../external/PaymentEndpoint";
 
 
 const DepositStatusMap: { [key: number]: string } = {
@@ -20,7 +19,7 @@ const DepositStatusMap: { [key: number]: string } = {
 };
 
 interface IRecordPanelDepositProps {
-  records: RechargeListResponseData[];
+  records: GetRechargeRecordResponseData[];
 }
 
 export const RecordPanelDeposit = () => {
@@ -60,15 +59,13 @@ export const RecordPanelDeposit = () => {
   // 充值紀錄
   const [triggerGetDepositRecord, { data: depositRecordData }] = useRechargeHistoryListMutation({});
   const [page, setPage] = useState(1);
-  const [records, setRecords] = useState<RechargeListResponseData[]>([]);
+  const [records, setRecords] = useState<GetRechargeRecordResponseData[]>([]);
 
 
   useEffect(() => {
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetDepositRecord({
       limit: 10,
       page: page,
-      token,
     });
 
   }, [page]);
@@ -119,7 +116,7 @@ export const RecordPanelDeposit = () => {
 
         <tbody>
         {records.map((record) => (
-          <tr key={record.id}>
+          <tr key={record.pay_serial_no}>
             <td className={'flex flex-row'}>
               <span>{record.pay_serial_no}</span>
               <span>

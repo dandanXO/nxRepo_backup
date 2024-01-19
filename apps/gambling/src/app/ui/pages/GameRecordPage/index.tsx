@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import { GetUserGameRecordResponse, useGetUserGameRecordMutation } from "../../../external";
+import { GetUserGameRecordResponse, useLazyGetUserGameRecordQuery } from "../../../external";
 import { AppLocalStorage } from '../../../persistant/localstorage';
 import { useAllowLoginRouterRules } from "../../router/hooks/useAllowLoginRouterRules";
 import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
@@ -27,13 +27,13 @@ export const GameRecordPage = () => {
   const [dates, setDates] = useState([startDate, endDate]);
 
 
-  const [triggerGetRecord, { data }] = useGetUserGameRecordMutation({});
+  const [triggerGetRecord, { data }] = useLazyGetUserGameRecordQuery();
   const [resetRecords, setResetRecords] = useState(false);
   const [records, setRecords] = useState<GetUserGameRecordResponse["rows"]>([])
   const [page, setPage] = useState(1)
 
   const handleFetchData = () => {
-    if (records.length < (data?.total || 0)) {
+    if (records.length < (data?.data.total || 0)) {
       setPage((records.length / pageSize) + 1)
     }
   }
@@ -45,7 +45,6 @@ export const GameRecordPage = () => {
       dayMax: dates[1].format(dateFormat),
       pageNum: page,
       pageSize: pageSize,
-      token: AppLocalStorage.getItem(AppLocalStorageKey.token) || '',
     });
   }, [page, dates]);
 
@@ -57,12 +56,12 @@ export const GameRecordPage = () => {
 
   useEffect(() => {
     if (resetRecords) {
-      setRecords(data?.rows || [])
+      setRecords(data?.data.records || [])
       setResetRecords(false)
     } else {
-      setRecords([...records, ...(data?.rows || [])])
+      setRecords([...records, ...(data?.data.records || [])])
     }
-  }, [data?.rows])
+  }, [data?.data.records])
 
 
 

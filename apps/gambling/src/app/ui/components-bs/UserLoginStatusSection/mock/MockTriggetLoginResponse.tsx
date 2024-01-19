@@ -1,6 +1,8 @@
-import {PostLoginResponse} from "../../../../external/LoginEndpoint";
+import {
+  PostUserLogoutResponse
+} from "../../../../../../../app/src/app/externel/backend/userService/PostUserLogoutResponse";
 
-export const MockTriggerLoginResponse: PostLoginResponse = {
+export const MockTriggerLoginResponse: PostUserLogoutResponse = {
   "code": 200,
   "msg": "success",
   "data": {
