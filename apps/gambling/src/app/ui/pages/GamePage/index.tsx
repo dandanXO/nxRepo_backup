@@ -53,6 +53,7 @@ export const GamePage = () => {
         // 110000-111000 FC fc
         // 130000-131000 CQ9 cq9
         // 140000-131000 CQ9 oneapi
+        // 160001-169999 pggame
         if (30000 <= gameId && gameId < 40000) {
           return "pg";
         }else if (40000 <= gameId && gameId < 50000) {
@@ -79,6 +80,8 @@ export const GamePage = () => {
             return "oneapi";
         } else if(150000 <= gameId && gameId < 151000) {
             return "pgapi";
+        } else if(160001 <= gameId && gameId < 169999) {
+          return "pggame";
         } else {
             return null;
         }
