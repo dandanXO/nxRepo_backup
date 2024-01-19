@@ -55,7 +55,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
   const user: IUserInfo = AppLocalStorage.getItem(AppLocalStorageKey.userInfo) ? JSON.parse(AppLocalStorage.getItem(AppLocalStorageKey.userInfo) || "") : {};
   const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui)
   const dispatch = useDispatch();
-  const { messageCount } = useSelector((state: RootState) => state.app);
+  const { messageCount, vip_level } = useSelector((state: RootState) => state.app);
 
   return (
     <>
@@ -78,7 +78,7 @@ const UserStatusSection = (props: IUserStatusSection) => {
         <CocoAvatar className='w-[44px] h-[44px]' />
         <div>
           <div className='text-lg text-white flex mb-2'>
-            <div className='text-base leading-none mr-2'>LV:{user.vip_level}</div>
+            <div className='text-base leading-none mr-2'>LV:{vip_level}</div>
             <DirectionIcon
               active={openUserInfoStatusPopover}
               className='mx-auto my-auto'

@@ -7,11 +7,11 @@ import { PageOrModalPathEnum } from '../../../../../PageOrModalPathEnum';
 import { Footer } from '../Footer';
 import { Notice } from '../Notice';
 import { DayList } from './index';
-import {GetSignInConfigResponse} from "../../../../../../external";
 import { RootState } from '../../../../../../reduxStore';
 import { useSelector } from 'react-redux';
 import { LevelList } from "../../../index";
 import {BackNavigation} from "../../../../../components-bs/BackNavigation/BackNavigation";
+import { GetPunchInConfigResponse } from "../../../../../../external/PunchInEndpoint";
 
 const Container = styled.div`
   //background: #287052;
@@ -35,10 +35,10 @@ export const PernambucanMobileDailySignInPage = ({
     value: string;
   }[];
   onClickToSignIn: () => void;
-  signInConfig?: GetSignInConfigResponse['data']['signInConfig'];
-  signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays'];
-  todayIsSignIn: GetSignInConfigResponse['data']['todayIsSignIn'];
-  vipLevel: GetSignInConfigResponse['data']['vipLevel']
+  signInConfig?: GetPunchInConfigResponse['data']['signInConfig'];
+  signInTotalDays: GetPunchInConfigResponse['data']['signInTotalDays'];
+  todayIsSignIn: GetPunchInConfigResponse['data']['todayIsSignIn'];
+  vipLevel: GetPunchInConfigResponse['data']['vipLevel']
   currentSelectedLevel: number;
   setCurrentSelectedLevel: React.Dispatch<React.SetStateAction<number>>;
 }) => {

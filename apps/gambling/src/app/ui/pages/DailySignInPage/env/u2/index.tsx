@@ -3,22 +3,22 @@ import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { tcx } from "../../../../utils/tcx";
 
 import ArrowRight from './images/ArrowRight.png';
-import { GetSignInConfigResponse } from "../../../../../external";
 import { VIPButtonList } from "./components/VIPButtonList";
 import { useEffect, useState } from "react";
 import { DailySignInBonusList } from "./components/DailySignInBonusList";
 import { notification } from "antd";
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import {PageContainer} from "../../../../components-bs/PageContainer";
+import { GetPunchInConfigResponse } from "../../../../../external/PunchInEndpoint";
 
 
 
 interface IDailySignInPageProps {
   onClickToSignIn: () => Promise<boolean>
-  currentVIP: GetSignInConfigResponse['data']['vipLevel']
-  signInAllConfig: GetSignInConfigResponse['data']['signInAllConfig']
-  todayIsSignIn: GetSignInConfigResponse['data']['todayIsSignIn']
-  signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays'];
+  currentVIP: GetPunchInConfigResponse['data']['vipLevel']
+  signInAllConfig: GetPunchInConfigResponse['data']['signInAllConfig']
+  todayIsSignIn: GetPunchInConfigResponse['data']['todayIsSignIn']
+  signInTotalDays: GetPunchInConfigResponse['data']['signInTotalDays'];
 }
 
 const DailySignInPage = ({

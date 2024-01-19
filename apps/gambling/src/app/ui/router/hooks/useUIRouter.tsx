@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation} from "react-router";
-import {useGetConfigMutation, useLazyGetGameListQuery, useLoginMutation} from "../../../external";
+import { useLazyGetConfigQuery, useLazyGetGameListQuery, useLoginMutation } from "../../../external";
 import {environment} from "../../../../environments/environment";
 import {appSlice} from "../../../reduxStore/appSlice";
 import {AppLocalStorage} from "../../../persistant/localstorage";
@@ -23,7 +23,7 @@ export const useUIRouter = () => {
   const location = useLocation();
   const [firstLogin, setFirstLogin] = useState(false);
 
-  const [triggerGetConfig, {data, isLoading, isSuccess, isError}] = useGetConfigMutation();
+  const [triggerGetConfig, {data, isLoading, isSuccess, isError}] = useLazyGetConfigQuery();
 
   const [triggerGetList, { currentData: gameData, isFetching }] = useLazyGetGameListQuery({
     pollingInterval: 0,
@@ -44,11 +44,7 @@ export const useUIRouter = () => {
   useEffect(() => {
     if(!isSetup) return;
     Promise.all([
-      triggerGetConfig({
-        appChannel: "pc",
-        appPackageName: environment.appPackageName,
-        appVersion: environment.appVersion,
-      }),
+      triggerGetConfig(null),
       triggerGetList({id:100})
     ]).finally(() => {
       dispatch(appSlice.actions.setIsUILoading(false));

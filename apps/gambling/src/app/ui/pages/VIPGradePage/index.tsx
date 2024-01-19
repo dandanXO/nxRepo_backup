@@ -3,9 +3,8 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
 import {
-  GetSignInConfigResponse,
   GetUserVIPAllInfoResponse,
-  useGetSignInConfigMutation,
+  useLazyGetPunchInConfigQuery,
   useLazyGetUserVIPAllInfoQuery
 } from "../../../external";
 import {AppLocalStorage} from '../../../persistant/localstorage';
@@ -26,6 +25,7 @@ import {getLocalStorageObjectByKey} from "../../../persistant/getLocalStorageObj
 import {setLocalStorageObjectByKey} from "../../../persistant/setLocalStorageObjectByKey";
 import {useLocalstorageGetUserVIPInfo} from "../../hooks/useLocalstorageGetUserVIPInfo";
 import { GetVIPInfoResponse } from "../../../external/UserEndpoint";
+import { GetPunchInConfigResponse } from "../../../external/PunchInEndpoint";
 
 const LevelButton = styled.button.attrs<{
   className?: string;
@@ -89,7 +89,7 @@ export const JackpotMap: {
   export interface IVIPGradePageProps {
     currentLevel: number;
     allLevelInfo: GetUserVIPAllInfoResponse['data']
-    allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig']
+    allSignInConfig?: GetPunchInConfigResponse['data']['signInAllConfig']
     userVIPInfo?: GetVIPInfoResponse
     signInTotalDays?: number
   }
@@ -123,7 +123,7 @@ export const JackpotMap: {
 
 
   // NOTICE: Store Mutation old data
-  const [triggerGetSignConfig, { data: signInConfigResponseData , isLoading: isGetSignConfigLoading}] = useGetSignInConfigMutation();
+  const [triggerGetSignConfig, { data: signInConfigResponseData , isLoading: isGetSignConfigLoading}] = useLazyGetPunchInConfigQuery();
   const [signInConfig, setSignInConfig] = useState<any>()
   useEffect(() => {
     if(!isGetSignConfigLoading) {
@@ -137,10 +137,7 @@ export const JackpotMap: {
   useEffect(() => {
     const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
     if(token && token !== "" && token !== "undefined") {
-      triggerGetSignConfig({
-        onlyGetSignInConfig: true,
-        token,
-      });
+      triggerGetSignConfig(null);
       triggerGetUserVIPALLInfo(null);
     }
 
@@ -149,10 +146,7 @@ export const JackpotMap: {
   useEffect(() => {
     const handler = () => {
       const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
-      triggerGetSignConfig({
-        onlyGetSignInConfig: true,
-        token,
-      });
+      triggerGetSignConfig(null);
       triggerGetUserVIPALLInfo(null);
     }
     window.addEventListener("focus", handler)

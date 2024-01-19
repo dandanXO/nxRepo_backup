@@ -1,6 +1,3 @@
-import { WithdrawHistoryListEndpointResponseData } from '../../../../../../../external/WithdrawHistoryListEndpoint';
-import cx from "classnames";
-import {environment} from "../../../../../../../../environments/environment";
 import { Table } from "../../../../../../components-bs/Table";
 import { useEffect, useState } from "react";
 import { useWithdrawHistoryListMutation } from "../../../../../../../external";
@@ -9,6 +6,7 @@ import copy from "copy-to-clipboard";
 import { AppLocalStorage } from "../../../../../../../persistant/localstorage";
 import {AppLocalStorageKey} from "../../../../../../../persistant/AppLocalStorageKey";
 import { formatLocaleMoney } from "../../../../../../utils/format";
+import { GetWithdrawRecordResponseData } from "../../../../../../../external/PaymentEndpoint";
 
 const WithdrawStatusMap: { [key: number]: string } = {
   1: 'Completed',
@@ -20,7 +18,7 @@ const WithdrawStatusMap: { [key: number]: string } = {
 
 
 export const RecordPanelWithdraw = () => {
-  const [records, setRecords] = useState<WithdrawHistoryListEndpointResponseData[]>([])
+  const [records, setRecords] = useState<GetWithdrawRecordResponseData[]>([])
   const [page, setPage] = useState(1);
 
 
@@ -66,11 +64,9 @@ export const RecordPanelWithdraw = () => {
   }
 
   useEffect(()=>{
-    const token = AppLocalStorage.getItem(AppLocalStorageKey.token) || '';
     triggerGetWithdrawRecord({
       limit: 10,
       page,
-      token
     })
   }, [page])
 

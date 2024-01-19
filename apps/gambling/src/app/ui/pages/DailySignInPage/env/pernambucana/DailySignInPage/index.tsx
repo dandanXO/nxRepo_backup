@@ -4,13 +4,13 @@ import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import { CurrentLevelButton, OtherLevelButton } from "../../../../VIPGradePage";
 import { environment } from "../../../../../../../environments/environment";
 import { tcx } from "../../../../../utils/tcx";
-import { GetSignInConfigResponse } from "../../../../../../external";
 import cx from "classnames";
 import styled from "styled-components";
 import { PernambucanMobileDailySignInPage } from "./MobileDailySignInPage";
 import { Notice } from "../Notice";
 import { Footer } from "../Footer";
 import { LevelList } from "../../../index";
+import { GetPunchInConfigResponse } from "../../../../../../external/PunchInEndpoint";
 
 const Panel = styled.div`
   //background: linear-gradient(
@@ -65,10 +65,10 @@ export const DayList = (props: {
   }[];
   className?: string;
   itemClassName?: string;
-  signInConfig?: GetSignInConfigResponse['data']['signInConfig'];
-  signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays'];
-  todayIsSignIn: GetSignInConfigResponse['data']['todayIsSignIn'];
-  vipLevel: GetSignInConfigResponse['data']['vipLevel'];
+  signInConfig?: GetPunchInConfigResponse['data']['signInConfig'];
+  signInTotalDays: GetPunchInConfigResponse['data']['signInTotalDays'];
+  todayIsSignIn: GetPunchInConfigResponse['data']['todayIsSignIn'];
+  vipLevel: GetPunchInConfigResponse['data']['vipLevel'];
 }) => {
   const { signInAllConfig, currentSelectedLevel } = props;
   const vipConfig = signInAllConfig.find(
@@ -127,11 +127,11 @@ export const DayList = (props: {
 interface IPernambucanaDailySignInPageProps {
   onClickToSignIn: () => void
   currentLevel: number
-  signInConfig?: GetSignInConfigResponse['data']['signInConfig']
-  signInAllConfig: GetSignInConfigResponse['data']['signInAllConfig']
-  signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays']
-  todayIsSignIn: GetSignInConfigResponse['data']['todayIsSignIn']
-  vipLevel: GetSignInConfigResponse['data']['vipLevel']
+  signInConfig?: GetPunchInConfigResponse['data']['signInConfig']
+  signInAllConfig: GetPunchInConfigResponse['data']['signInAllConfig']
+  signInTotalDays: GetPunchInConfigResponse['data']['signInTotalDays']
+  todayIsSignIn: GetPunchInConfigResponse['data']['todayIsSignIn']
+  vipLevel: GetPunchInConfigResponse['data']['vipLevel']
   currentSelectedLevel: number
   setCurrentSelectedLevel: React.Dispatch<React.SetStateAction<number>>
 }

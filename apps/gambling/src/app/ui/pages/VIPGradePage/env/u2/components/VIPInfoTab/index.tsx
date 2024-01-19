@@ -5,8 +5,9 @@ import TrendUpIcon from '../../images/TrendUp.png'
 import MoneyIcon from '../../images/Money.png'
 import useBreakpoint from "../../../../../../pageTemplate/hooks/useBreakpoint";
 import React, { useState } from "react";
-import { GetSignInConfigResponse, GetUserVIPAllInfoResponse } from "../../../../../../../external";
+import { GetUserVIPAllInfoResponse } from "../../../../../../../external";
 import { formatLocaleMoney } from "../../../../../../utils/format";
+import { GetPunchInConfigResponse } from "../../../../../../../external/PunchInEndpoint";
 
 
 const jackpotMap: { [key: string]: string} = {
@@ -21,7 +22,7 @@ const jackpotMap: { [key: string]: string} = {
 interface IVIPInfoTabProps {
   signInTotalDays?: number;
   allLevelInfo: GetUserVIPAllInfoResponse['data'];
-  allSignInConfig?: GetSignInConfigResponse['data']['signInAllConfig'];
+  allSignInConfig?: GetPunchInConfigResponse['data']['signInAllConfig'];
   className?: string;
 }
 

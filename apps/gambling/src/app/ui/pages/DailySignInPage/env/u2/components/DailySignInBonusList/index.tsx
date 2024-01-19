@@ -1,14 +1,14 @@
-import { GetSignInConfigResponse } from "../../../../../../../external";
 import { tcx } from "../../../../../../utils/tcx";
 import Money from '../../images/Money.png';
 import DisableMoney from '../../images/DisableMoney.png';
 import { formatLocaleMoney } from "../../../../../../utils/format";
+import { GetPunchInConfigResponse } from "../../../../../../../external/PunchInEndpoint";
 
 
 interface IDailySignInBonusListProps {
   currentVIP: number
   selectedVIP: number
-  signInTotalDays: GetSignInConfigResponse['data']['signInTotalDays'];
+  signInTotalDays: GetPunchInConfigResponse['data']['signInTotalDays'];
   className?: string
   dayConfigs: { days: number, cashback: number}[]
 }

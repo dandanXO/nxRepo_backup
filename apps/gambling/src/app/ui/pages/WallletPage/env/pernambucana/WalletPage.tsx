@@ -8,7 +8,6 @@ import {RecordPanel} from "../../components/record/RecordPanel";
 import React from "react";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";
-import { GetRechargeResponseOption, RechargeResponseConfig ,GetRechargeResponse} from "apps/gambling/src/app/external/RechargeInfoGetEndpoint";
 
 export type TotalSectionType = 'total' | 'deposite' | 'promotion'
 export interface ITotalSectionValues {
@@ -16,11 +15,6 @@ export interface ITotalSectionValues {
     balance: number;
     retrievable: number;
   };
-}
-
-export interface IRechargeData{
-  "config": RechargeResponseConfig[],
-  "options": GetRechargeResponseOption;
 }
 
 export type IWalletPage = {

@@ -2,26 +2,33 @@ import { createSelector } from '@reduxjs/toolkit';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { axiosBaseQuery } from '../gateway/axiosBaseQuery';
-import { GetConfigEndpoint, GetRequest } from './GetConfigEndpoint';
 import { GetGameListEndpoint } from './GetGameListEndpoint';
-import { LoginEndpoint } from './LoginEndpoint';
-import { RechargeActionEndpoint } from './RechargeActionEndpoint';
-import { RechargeHistoryListEndpoint } from './RechargeHistoryListEndpoint';
-import { RechargeInfoGetEndpoint } from './RechargeInfoGetEndpoint';
-import { RegisterEndpoint } from './RegisterEndpoint';
 import { StartGameEndpoint } from './StartGameEndpoint';
-import {WithdrawHistoryListEndpoint, WithdrawHistoryListEndpointResponseData} from './WithdrawHistoryListEndpoint';
 import { DownloadEndpoint } from './DownloadEndpoint';
-import {ForgetPasswordEndpoint} from "./ForgetPasswordEndpoint";
 import {environment} from "../../environments/environment";
 import { WithdrawEndpoint } from './WithdrawEndpoint';
 import {SendForgetPasswordSMSCodeEndpoint} from "./SendForgetPasswordSMSCodeEndpoint";
-import {WithdrawInfoGetEndpoint} from "./WithdrawInfoGetEndpoint";
 import {Page} from "./types/Page";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
-import { GetVIPInfoEndpoint } from "./UserEndpoint";
+import {
+  ForgetPasswordEndpoint,
+  GetGameRecordEndpoint,
+  GetVIPInfoEndpoint,
+  LoginEndpoint,
+  RegisterEndpoint
+} from "./UserEndpoint";
+import { GetMailCountEndpoint, GetMailListEndpoint, PostMailReadEndpoint } from "./MailEndpoint";
+import { GetGlobalConfigEndpoint, GetMaintenanceEndpoint, GetRechargeConfig } from "./SystemEndpoint";
+import {
+  GetBankEndpoint,
+  GetRechargeRecordEndpoint,
+  GetWithdrawLimitEndpoint,
+  GetWithdrawRecordEndpoint,
+  PostRechargeEndpoint
+} from "./PaymentEndpoint";
+import { GetPunchInConfigEndpoint, PostPunchInEndpoint } from "./PunchInEndpoint";
 
 type GetInviteConfigRequestData = {
   id: number;
@@ -55,7 +62,6 @@ type GetInviteConfigResponse = {
   total: 0;
 };
 
-type GetBoxInfoRequest = {};
 
 type GetBoxInfoContextVo = {
   amount: number;
@@ -88,22 +94,10 @@ type GetBoxSimpleBalanceResponse = {
   total: number;
 };
 
-type PostMainsRequest = {};
-type PostMainsResponse = {
-  code: number;
-  msg: string;
-  data: string;
-};
-
 type MailCountRequest = {
   token: string;
 };
 
-type MailCountResponse = {
-  code: number;
-  mailCount: number;
-  msg: string;
-};
 
 type ExtraInfoRequest = {
   //
@@ -125,44 +119,6 @@ type GetDamaResponse = {
   msg: any;
   data: any;
   total: number;
-};
-
-type GetLetterRequest = {
-  token: string;
-};
-
-export type GetLetterResponseData = {
-  id: number;
-  from_user_id: number;
-  from: {
-    nickname: string;
-    avatar: number;
-    fb_avatar: string;
-  };
-  user_id: number;
-  type: number;
-  title: string;
-  content: string;
-  is_read: number;
-  attaches: any;
-  attaches_status: number;
-  created_at: string;
-  created_timestamp: number;
-};
-type GetLetterResponse = {
-  code: 200;
-  msg: 'success';
-  data: GetLetterResponseData[];
-};
-
-type GetBankRequest = {
-  token: string;
-};
-
-type GetBankResponse = {
-  code: number;
-  msg: string;
-  data: any;
 };
 
 type GetInviteRewardDataRequest = {
@@ -307,27 +263,6 @@ export type GetUserVIPAllInfoResponse = {
   msg: string;
   total: number;
   data: GetUserVIPAllInfoResponseData[];
-};
-
-export type GetSignInConfigResponse = {
-  code: number;
-  msg: string;
-  data: {
-    vipLevel: number;
-    todayIsSignIn: boolean;
-    signInTotalDays: number;
-    signInRefreshTimestamp: number;
-    signInConfig: {
-      days: number;
-      cashback: number;
-      bonus: number;
-      bonus_finish: number;
-    }[];
-    signInAllConfig?: {
-      identifier: string;
-      value: string;
-    }[];
-  };
 };
 
 export type GetSignInRecordResponseData = {
@@ -599,17 +534,17 @@ export const API = createApi({
   // refetchOnMountOrArgChange: 60,
   endpoints: (builder) => {
     return ({
-      getConfig: GetConfigEndpoint(builder),
+      getConfig: GetGlobalConfigEndpoint(builder),
       register: RegisterEndpoint(builder),
       sendForgetPasswordSMSCode: SendForgetPasswordSMSCodeEndpoint(builder),
       forgetPassword: ForgetPasswordEndpoint(builder),
       login: LoginEndpoint(builder),
-      getRecharge: RechargeInfoGetEndpoint(builder),
-      recharge: RechargeActionEndpoint(builder),
-      rechargeHistoryList: RechargeHistoryListEndpoint(builder),
-      getWithdrawLimit: WithdrawInfoGetEndpoint(builder),
+      getRecharge: GetRechargeConfig(builder),
+      recharge: PostRechargeEndpoint(builder),
+      rechargeHistoryList: GetRechargeRecordEndpoint(builder),
+      getWithdrawLimit: GetWithdrawLimitEndpoint(builder),
       withdraw: WithdrawEndpoint(builder),
-      withdrawHistoryList: WithdrawHistoryListEndpoint(builder),
+      withdrawHistoryList: GetWithdrawRecordEndpoint(builder),
       getBalance: builder.query<GetBalanceResponse, GetBalanceRequest>({
         query: (data: GetBalanceRequest) => ({
           method: 'get',
@@ -630,16 +565,8 @@ export const API = createApi({
           url: '/japi/user/vip/getAllDisplayVo',
         }),
       }),
-      getSignInConfig: builder.mutation<
-        GetSignInConfigResponse,
-        { token: string; onlyGetSignInConfig: boolean }
-      >({
-        query: (data: { token: string; onlyGetSignInConfig: boolean }) => ({
-          method: 'post',
-          url: '/prod-api/sign-in/sign-in',
-          data,
-        }),
-      }),
+      postPunchIn: PostPunchInEndpoint(builder),
+      getPunchInConfig: GetPunchInConfigEndpoint(builder),
       getSignInRecord: builder.mutation<GetSignInRecordResponse, GetSignInRecordRequest>({
         query: (reqeustData: GetSignInRecordRequest) => ({
           method: 'post',
@@ -647,13 +574,7 @@ export const API = createApi({
           data: reqeustData
         })
       }),
-      getMailCount: builder.mutation<MailCountResponse, MailCountRequest>({
-        query: (query: MailCountRequest) => ({
-          method: 'post',
-          url: `/prod-api/mail/getMailCount`,
-          params: query,
-        }),
-      }),
+      getMailCount: GetMailCountEndpoint(builder),
       getExtraInfo: builder.query<ExtraInfoResponse, ExtraInfoRequest>({
         query: (query: MailCountRequest) => ({
           method: 'get',
@@ -681,13 +602,7 @@ export const API = createApi({
           params: query,
         }),
       }),
-      Mains: builder.mutation<PostMainsResponse, PostMainsRequest>({
-        query: (requestData: PostMainsRequest) => ({
-          method: 'post',
-          url: `/prod-api/set/mains`,
-          data: requestData,
-        }),
-      }),
+      Mains: GetMaintenanceEndpoint(builder),
       getDama: builder.query<GetDamaResponse, GetDamaRequest>({
         query: (query: GetDamaRequest) => ({
           method: 'get',
@@ -695,28 +610,10 @@ export const API = createApi({
           params: query,
         }),
       }),
-      postLetterRead: builder.mutation<null, { mailId: number; token: string }>({
-        query: (data: { mailId: number; token: string }) => ({
-          method: 'post',
-          url: '/prod-api/letters/read',
-          data,
-        }),
-      }),
-      getLetterList: builder.mutation<GetLetterResponse, GetLetterRequest>({
-        query: (data: GetLetterRequest) => ({
-          method: 'post',
-          url: `/prod-api/letters/list`,
-          data,
-        }),
-      }),
+      postLetterRead: PostMailReadEndpoint(builder),
+      getLetterList: GetMailListEndpoint(builder),
 
-      getBank: builder.query<GetBankResponse, GetBankRequest>({
-        query: (query: GetDamaRequest) => ({
-          method: 'get',
-          url: `/prod-api/pay-service/bank`,
-          params: query,
-        }),
-      }),
+      getBank: GetBankEndpoint(builder),
 
       getInviteRewardData: builder.query<
         GetInviteRewardDataResponse,
@@ -738,16 +635,7 @@ export const API = createApi({
           params: query,
         }),
       }),
-      getUserGameRecord: builder.mutation<
-        GetUserGameRecordResponse,
-        GetUserGameRecordRequest
-      >({
-        query: (query: GetInviteRewardDataRequest) => ({
-          method: 'post',
-          url: `/prod-api/playGame/queryUserGameRecord`,
-          data: query,
-        }),
-      }),
+      getUserGameRecord: GetGameRecordEndpoint(builder),
       getInviteUserDayReportData: builder.query<
         GetInviteUserDayReportDataResponse,
         GetInviteUserDayReportDataRequest
@@ -785,19 +673,19 @@ export const API = createApi({
 });
 
 export const {
-  useGetConfigMutation,
+  useLazyGetConfigQuery,
   useLazyGetGameListQuery,
   useLoginMutation,
   useLazyGetBalanceQuery,
   useLazyGetSimpleBalanceQuery,
-  useGetUserGameRecordMutation,
+  useLazyGetUserGameRecordQuery,
   useRegisterMutation,
   useSendForgetPasswordSMSCodeMutation,
   useForgetPasswordMutation,
-  useGetRechargeMutation,
+  useLazyGetRechargeQuery,
   useUpdateUserInfoMutation,
   useRechargeMutation,
-  useGetLetterListMutation,
+  useLazyGetLetterListQuery,
   useRechargeHistoryListMutation,
   useLazyGetInviteConfigQuery,
   useLazyGetInviteRewardDataQuery,
@@ -807,13 +695,14 @@ export const {
   useGetWithdrawLimitMutation,
   useWithdrawMutation,
   useWithdrawHistoryListMutation,
-  useGetSignInConfigMutation,
   useGetSignInRecordMutation,
   useLazyGetUserVIPAllInfoQuery,
   useLazyGetVIPInfoQuery,
   useLazyDownloadQuery,
   usePostLetterReadMutation,
-  useGetMailCountMutation
+  useLazyGetMailCountQuery,
+  usePostPunchInMutation,
+  useLazyGetPunchInConfigQuery
 } = API;
 
 export const API3 = createApi({

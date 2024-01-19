@@ -5,7 +5,6 @@ import { environment } from "../../../../../../../environments/environment";
 import { tcx } from "../../../../../utils/tcx";
 import Pernambucana777BetVIPGradeMobileTemplate from "./Pernambucana777BetVIPGradeMobileTemplate";
 import {
-  GetSignInConfigResponse,
   GetUserVIPAllInfoResponse,
   GetUserVIPAllInfoResponseData,
 } from "../../../../../../external";
@@ -14,6 +13,7 @@ import { PageOrModalPathEnum } from "../../../../../PageOrModalPathEnum";
 import { useNavigate } from "react-router";
 import { usePageNavigate } from "../../../../../router/hooks/usePageNavigate";
 import { GetVIPInfoResponse } from "../../../../../../external/UserEndpoint";
+import { GetPunchInConfigResponse } from "../../../../../../external/PunchInEndpoint";
 
 const VIPContainer = styled.div`
   background-color: rgba(40, 112, 82, 0.1);
@@ -197,7 +197,7 @@ interface IPernambucana777BetVIPGradePageProps {
   setCurrentSelectedLevel: React.Dispatch<React.SetStateAction<number>>
   userVIPInfo?: GetVIPInfoResponse
   allLevelInfo: GetUserVIPAllInfoResponse['data']
-  allSignInConfig: GetSignInConfigResponse['data']['signInAllConfig']
+  allSignInConfig: GetPunchInConfigResponse['data']['signInAllConfig']
   currentLevelInfo?: GetUserVIPAllInfoResponseData
 }
 
