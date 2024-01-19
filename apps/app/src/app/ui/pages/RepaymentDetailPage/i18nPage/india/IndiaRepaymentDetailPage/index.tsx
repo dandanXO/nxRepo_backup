@@ -98,7 +98,6 @@ const IndiaRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const listTextStyle = 'text-ctext-primary text-sm';
   return (
     <PageContent className={'w-full pb-0'}>
-      <IndiaReservationProductsModal />
       {modalState.paymentProgressingModal.show && <PaymentProgressingModal />}
       {modalState.reservationProductsModal.show && <IndiaReservationProductsModal />}
       {modalState.reservationSuccessModal.show && <ReservationSuccessModal />}
