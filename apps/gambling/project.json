@@ -23,28 +23,28 @@
         "dev-pernambucana777bet": {
           "buildTarget": "gambling:build:dev-pernambucana777bet"
         },
-        "dev-coco777bet-v1":  {
+        "dev-coco777bet-v1": {
           "buildTarget": "gambling:build:dev-coco777bet-v1"
         },
-        "dev-coco777bet-v2":  {
+        "dev-coco777bet-v2": {
           "buildTarget": "gambling:build:dev-coco777bet-v2"
         },
-        "dev-coco777bet-v3":  {
+        "dev-coco777bet-v3": {
           "buildTarget": "gambling:build:dev-coco777bet-v3"
         },
-        "dev-coco777bet-v4":  {
+        "dev-coco777bet-v4": {
           "buildTarget": "gambling:build:dev-coco777bet-v4"
         },
-        "dev-coco777bet-v5":  {
+        "dev-coco777bet-v5": {
           "buildTarget": "gambling:build:dev-coco777bet-v5"
         },
-        "dev-coco777bet-v6":  {
+        "dev-coco777bet-v6": {
           "buildTarget": "gambling:build:dev-coco777bet-v6"
         },
-        "dev-coco777bet-v7":  {
+        "dev-coco777bet-v7": {
           "buildTarget": "gambling:build:dev-coco777bet-v7"
         },
-        "dev-u1-v8-sambafortunebet":  {
+        "dev-u1-v8-sambafortunebet": {
           "buildTarget": "gambling:build:dev-u1-v8-sambafortunebet"
         },
         "dev-v10-u1-m2v1-brasilbet": {
@@ -67,12 +67,17 @@
         },
         "dev-v13-u2-m1v3-cariocas777bet": {
           "buildTarget": "gambling:build:dev-v13-u2-m1v3-cariocas777bet"
+        },
+        "dev-v17-u1-m1v12-ouroslotsbet": {
+          "buildTarget": "gambling:build:dev-v17-u1-m1v12-ouroslotsbet"
         }
       }
     },
     "build": {
       "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
@@ -82,7 +87,10 @@
         "baseHref": "/",
         "main": "apps/gambling/src/main.tsx",
         "tsConfig": "apps/gambling/tsconfig.app.json",
-        "assets": ["apps/gambling/src/favicon.ico", "apps/gambling/src/assets"],
+        "assets": [
+          "apps/gambling/src/favicon.ico",
+          "apps/gambling/src/assets"
+        ],
         "styles": [],
         "scripts": [],
         "isolatedConfig": true,
@@ -987,14 +995,72 @@
           "namedChunks": false,
           "extractLicenses": true,
           "vendorChunk": false
+        },
+        "dev-v17-u1-m1v12-ouroslotsbet": {
+          "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
+          "fileReplacements": [
+            {
+              "replace": "apps/gambling/src/environments/tailwind.variables",
+              "with": "apps/gambling/src/environments/u1/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u1/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u1/m1v12/environment.dev.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u1/m1v12/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        },
+        "prod-v17-u1-m1v12-ouroslotsbet": {
+          "postcssConfig": "apps/gambling/src/environments/u1/postcss.config.js",
+          "fileReplacements": [
+            {
+              "with": "apps/gambling/src/environments/u1/tailwind.variables",
+              "replace": "apps/gambling/src/environments/tailwind.variables"
+            },
+            {
+              "replace": "apps/gambling/src/environments/theme.css",
+              "with": "apps/gambling/src/environments/u1/theme.css"
+            },
+            {
+              "replace": "apps/gambling/src/environments/environment.ts",
+              "with": "apps/gambling/src/environments/u1/m1v12/environment.prod.ts"
+            },
+            {
+              "replace": "apps/gambling/src/index.html",
+              "with": "apps/gambling/src/environments/u1/m1v12/index.html"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
         }
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/gambling/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/gambling/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "serve-static": {
@@ -1005,7 +1071,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/gambling/jest.config.ts",
         "passWithNoTests": true

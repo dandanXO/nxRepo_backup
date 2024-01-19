@@ -6,16 +6,25 @@ export const i18nReservationProductsModal: i18nComponent = {
     en_US: {
       'Good News': 'Good News',
       'Congratulations! Your credit has been upgraded! We have selected some excellent options for you. Please choose the product you want to reserve based on your needs':
-        'Congratulations! Your credit has been upgraded! We have selected some excellent options for you. Please choose the product you want to reserve based on your needs',
-      'Maximum Amount': 'Maximum Amount',
+        'Congratulations! You have been qualified for the coupon, click below to make an appointment to apply for a loan and get the corresponding coupon!',
+      'Amount': 'Amount',
       'Loan amount': 'Loan amount',
       'Service fee': 'Service fee',
       IVA: 'IVA',
       'Disbursal Amount': 'Disbursal Amount',
       'Due Date': 'Due Date',
       Cancel: 'Cancel',
-      'Reserve Application': 'Reserve Application',
-      'Notes:': 'Notes:',
+      'Apply and Get Coupon': 'Apply and Get Coupon',
+      'Notes': 'Notes:',
+      'Click': 'Click',
+      '"Account" >"My Coupons"' :
+        ' "Account" >"My Coupons" ',
+      'to view your coupons.':
+        'to view your coupons.',
+      'Once your reservation order is approved, funds will be disbursed directly, and you can view your order on the "Payment" page.':
+        'Once your reservation order is approved, funds will be disbursed directly, and you can view your order on the "Payment" page.',
+      'We encourage you to uphold good credit, repay on time, and stand a chance to receive more coupons after repayment.':
+        'We encourage you to uphold good credit, repay on time, and stand a chance to receive more coupons after repayment.',
       'Maintaining good repayment behavior allows us to continue offering high-value, low-interest products.':
         'Maintaining good repayment behavior allows us to continue offering high-value, low-interest products.',
       'Multiple booking requests will be automatically accommodated, and the final outcome will depend on the audit results.':

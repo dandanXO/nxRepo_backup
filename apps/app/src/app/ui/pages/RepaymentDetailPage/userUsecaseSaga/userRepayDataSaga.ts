@@ -49,7 +49,7 @@ export function* userRepayDataSaga(action: PayloadAction) {
         repaymentDetailPageSlice.actions.updateRepaymentData({
           ...repayData,
           balance: balance,
-          repayAmount: balance,
+          repayAmount: repayData.repayAmount || balance,
           orderNo: orderNo,
           repayTypeList,
           payType: repayTypeList[0].value,

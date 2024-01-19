@@ -15,6 +15,7 @@ import {NotificationAnimationIcon} from "../../../../components-bs/Icons/animati
 import {MenuLogo} from "../../../../components-bs/Logos/env/u1/MenuLogo";
 import {IHeader} from "../../types/IHeader";
 import { uiSlice } from "../../../../../reduxStore/uiSlice";
+import {debounce} from "lodash";
 
 const DirectionIcon = styled.img<{
   active?: boolean
@@ -136,7 +137,7 @@ export const Header = (props: IHeader) => {
 
       {/*[How to Align Last Flex Item to Right](https://medium.com/@iamryanyu/how-to-align-last-flex-item-to-right-73512e4e5912)*/}
       {isLogin && (
-        <section className={"flex flex-row items-center gap-6 mr-6"}>
+        <section className={"flex flex-row items-center gap-6 mr-6 oo"}>
 
           <div className={"hidden lg:block"}>
             <UserMoneyStatusSection />
@@ -145,10 +146,7 @@ export const Header = (props: IHeader) => {
           <section
             className='flex gap-2 items-center'
             onClick={() => dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover))}
-            onMouseOver={() => {
-              // console.log("onMouseOver")
-              dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover));
-            }}
+            onMouseOver={debounce(()=>dispatch(uiSlice.actions.setUserInfoStatusPopover(!openUserInfoStatusPopover)), 200)}
             onMouseOut={() => {
               // console.log("onMouseOut")
             }}
