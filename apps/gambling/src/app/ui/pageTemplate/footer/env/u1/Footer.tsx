@@ -10,6 +10,9 @@ import licenseLogo from "../../license.png";
 import { gameSlice, indexPagecurrentSelectLabel } from "../../../../../reduxStore/gameSlice";
 import {FooterLogo} from "../../../../components-bs/Logos/FooterLogo";
 import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
+import { appSlice } from "../../../../../reduxStore/appSlice";
 
 type ILicenseSection = {
   className?: string;
@@ -38,6 +41,7 @@ export const Footer = (props: IFooter) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { label } = useSelector((state: any) => state.gameList);
+  const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
 
 
   const isShowMobileFooter = props.showMobileFooter === undefined ? true : props.showMobileFooter;
@@ -203,7 +207,13 @@ export const Footer = (props: IFooter) => {
                 <div className='text-[var(--white) text-base'>Ajuda</div>
                 <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                 <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
-                <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
+                <button onClick={()=>{
+                  if(token) {
+                    navigate(PageOrModalPathEnum.VIPGradePage)
+                  }else {
+                    dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+                  }
+                }}>Descrico do nivel VIP</button>
               </section>
 
               <section className={"w-8/12 mt-3"}>

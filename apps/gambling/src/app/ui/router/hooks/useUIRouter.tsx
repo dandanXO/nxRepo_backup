@@ -99,7 +99,12 @@ export const useUIRouter = () => {
       const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
       if (!token) {
         setIsSetup(true);
-        dispatch(appSlice.actions.showLoginDrawerOrModal(true));
+        if(!([
+          PageOrModalPathEnum.PrivacyAgreementPage,
+          PageOrModalPathEnum.TermsOfService] as string[]
+        ).includes(location.pathname)) {
+          dispatch(appSlice.actions.showLoginDrawerOrModal(true));
+        }
         return;
       }
       const url = AppLocalStorage.getItem(AppLocalStorageKey.ip);
