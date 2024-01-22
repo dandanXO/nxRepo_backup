@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useRechargeMutation } from "../../../../../external";
 import { useLocation, useNavigate } from "react-router";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
@@ -35,11 +35,12 @@ const ShadowContainer = styled.div.attrs<{
   border-radius: 8px; */
 `
 
+const COUNT_DOWN = 900
 
 export const WalletDepositNextPage = () => {
   useAllowLoginRouterRules();
-  const { isMobile } = useBreakpoint();
-  const [countdown, setCountdown] = useState(900); // 15分钟的秒数
+  const { isMobile, isDesktop } = useBreakpoint();
+  const [countdown, setCountdown] = useState(COUNT_DOWN); // 15分钟的秒数
 
   // const [triggerRecharge, { data, isLoading, isSuccess, isError }] = useRechargeMutation();
   const location = useLocation();
@@ -48,6 +49,8 @@ export const WalletDepositNextPage = () => {
   const data = location.state.data || {};
   const amount = location.state.amount || 0;
   const [api, contextHolder] = notification.useNotification();
+
+  const current = useMemo(()=> moment().format('YYYY-MM-DD HH:mm:ss'), [])
 
   const onClickToCopy = () => {
     copy(data?.data?.channelData?.paymentLink || '');
@@ -80,7 +83,7 @@ export const WalletDepositNextPage = () => {
     return () => clearTimeout(timer);
   }, [countdown]);
 
-  const message = `Ordem de pagamento criada com sucesso, pague em ${moment().startOf('day').seconds(countdown).format('mm:ss')} minutos!`;
+  const message = `Ordem de pagamento criada com sucesso, pague em ${ isDesktop ? COUNT_DOWN / 60: moment().startOf('day').seconds(countdown).format('mm:ss')} minutos!`;
 
   const baseStyle = `
   flex flex-row justify-between
@@ -129,7 +132,7 @@ export const WalletDepositNextPage = () => {
           <section className={cx("mr-10 w-full", { "md:w-[60%]": !isMobile })}>
             <ShadowContainer className={shadowContainerStyle}>
               <div className={"text-left text-white"}>Data de criaqao</div>
-              <div className={"text-white"}>{moment().format('YYYY-MM-DD HH:mm:ss')}</div>
+              <div className={"text-white"}>{current}</div>
             </ShadowContainer>
 
             {!isMobile && <ShadowContainer className={shadowContainerStyle}>
