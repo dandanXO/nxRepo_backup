@@ -9,7 +9,7 @@ export const useUserMoneyStatusSection = () => {
 
   const totalBalanceSheetValue = useSelector(totalBalanceSheetSelector);
 
-  const { update } = useAutoUpdateBalance({
+  const { update, updateBalance } = useAutoUpdateBalance({
     autoWindowFocusRefresh: false,
   });
 
@@ -18,6 +18,7 @@ export const useUserMoneyStatusSection = () => {
     onClickToWallet,
     totalBalanceSheetValue,
     update,
+    updateBalance,
     isUserMoneyStatusLoading,
 
   }

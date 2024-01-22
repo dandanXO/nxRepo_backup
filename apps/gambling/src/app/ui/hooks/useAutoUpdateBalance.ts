@@ -20,14 +20,13 @@ type IUseAutoUpdateBalance = {
 }
 export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
   const windowFocusRefresh = typeof props?.autoWindowFocusRefresh === "undefined" ? true : false;
-
   const dispatch = useDispatch();
   const {isLogin} = useSelector((state: RootState) => state.app)
   // console.log("isLogin", isLogin);
   const location = useLocation();
 
   const [triggerGetBalance, {data,isLoading: isGetBalanceLoading}] = useLazyGetBalanceQuery();
-
+  let isGetBalanceLoadingV2 = false
 
   // NOTICE: get or set by LocalStorage
   const [triggerGetUserVIPInfo, { data: userVIPInfoResponseData, isUninitialized, isLoading: isGetUserVIPInfoLoading }] = useLazyGetVIPInfoQuery();
@@ -52,9 +51,18 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
     }
   }
   const updateBalance = () => {
+    
     if(isValidToken()) {
+      isGetBalanceLoadingV2 = true
+      dispatch(appSlice.actions.setIsUserMoneyStatusLoading(isGetBalanceLoadingV2));
       triggerGetBalance({
         token: AppLocalStorage.getItem(AppLocalStorageKey.token) || "",
+      }).then(()=>{
+        isGetBalanceLoadingV2 = false
+        dispatch(appSlice.actions.setIsUserMoneyStatusLoading(isGetBalanceLoadingV2));
+      }).catch(()=>{
+        isGetBalanceLoadingV2 = false
+        dispatch(appSlice.actions.setIsUserMoneyStatusLoading(isGetBalanceLoadingV2));
       })
     }
   }
@@ -77,6 +85,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
   useEffect(() => {
     const isLoading = isGetBalanceLoading || isGetUserVIPInfoLoading
     dispatch(appSlice.actions.setIsUserMoneyStatusLoading(isLoading));
+    return 
   }, [isGetBalanceLoading, isGetUserVIPInfoLoading])
 
   useEffect(() => {
@@ -154,6 +163,7 @@ export const useAutoUpdateBalance = (props?: IUseAutoUpdateBalance) => {
   }, [vipAllInfo])
 
   const update = () => {
+    console.log('in loadinlog click2')
     updateBalance();
     updateVIPInfo();
     updateMailCount();
