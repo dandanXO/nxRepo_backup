@@ -1,5 +1,5 @@
 import { IVIPGradePageProps } from "../../../index";
-import VIPStatue from '../images/vip_statue.png'
+// import VIPStatue from '../images/vip_statue.png'
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { ProgressBar } from "../../../../../components-bs/ProgressBar";
 import { VIPInfoTab } from "../components/VIPInfoTab";
@@ -8,6 +8,7 @@ import { VIP0Text } from "../components/VIP0Text";
 import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
 import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
 import { PageContainer } from "../../../../../components-bs/PageContainer";
+import {environment} from "../../../../../../../environments/environment";
 
 
 
@@ -25,7 +26,7 @@ export const MobileVIPGradePage = ({
 
   return (
     <PageContainer>
-      <img src={VIPStatue} alt="statue" className='mt-4' />
+      <img src={`assets/${environment.uVersion}/${environment.mvVersion}/vip_statue.png`} alt="statue" className='mt-4' />
 
       <div
         className='w-full mt-4 overflow-x-scroll vip-tab-items flex gap-2 items-center relative'
