@@ -22,6 +22,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
   const productName = ''
   const onClickToCopy = () => {
     copy(props.inviteUrl);
+    navigator.clipboard.writeText(props.inviteUrl);
     notefy.success({
       message: 'Copiado!',
     });

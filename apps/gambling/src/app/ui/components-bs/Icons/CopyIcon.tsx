@@ -20,6 +20,7 @@ export const CopyIcon = (props: ICopyIcon) => {
 
   const onClickToCopy = () => {
     copy(copyText);
+    navigator.clipboard.writeText(copyText);
     api.success({
       message: 'Copiado!',
     });
