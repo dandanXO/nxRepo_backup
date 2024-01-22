@@ -13,6 +13,7 @@ import {usePageNavigate} from "../../../../router/hooks/usePageNavigate";
 import { AppLocalStorage } from "../../../../../persistant/localstorage";
 import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
 import { appSlice } from "../../../../../reduxStore/appSlice";
+import { useScrollToPartPageTemplate } from "../../../hooks/useScrollToPartPageTemplate";
 
 type ILicenseSection = {
   className?: string;
@@ -55,6 +56,8 @@ export const Footer = (props: IFooter) => {
   // NOTE: mobile
   const [footerTextExpand, setFooterTextExpand] = useState(false)
 
+  const { scrollToCarousel } = useScrollToPartPageTemplate();
+  const { onClickToIndex } = usePageNavigate();
 
   return (
     <div>
@@ -86,8 +89,9 @@ export const Footer = (props: IFooter) => {
                       ["Salão", ...label].map((gameName: indexPagecurrentSelectLabel, index: number) => {
                         return (
                           <button key={index} onClick={() => {
-                            dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameName))
-                            return navigate(PageOrModalPathEnum.IndexPage)
+                            onClickToIndex();
+                            dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameName === 'Salão'?'Todos':gameName))
+                            scrollToCarousel();
                           }
                         }>{gameName}</button>
                         )
@@ -194,8 +198,9 @@ export const Footer = (props: IFooter) => {
                   ["Salão", ...label].map((gameName: indexPagecurrentSelectLabel, index: number) => {
                     return (
                       <button key={index} onClick={() => {
-                          dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameName))
-                          return navigate(PageOrModalPathEnum.IndexPage)
+                          onClickToIndex();
+                          dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(gameName === 'Salão'?'Todos':gameName))
+                          scrollToCarousel();
                         }
                       }>{gameName}</button>
                     )
