@@ -1,4 +1,3 @@
-import Banner from './assets/TotalSectionBanner.png';
 import iconTotal from './assets/iconTotal.png';
 import iconPromotion from './assets/iconPromotion.png'
 import iconDeposit from './assets/iconDeposit.png'
@@ -6,6 +5,7 @@ import { ReactElement, useState } from 'react';
 import { formatLocaleMoney } from '../../../../utils/format';
 import { ITotalSectionValues, TotalSectionType } from '../pernambucana/WalletPage';
 import { twMerge } from "tailwind-merge";
+import {environment} from "../../../../../../environments/environment";
 
 
 const IconTabItem = (props: { selected:boolean, icon: string; text: ReactElement; onClick: () => void; }) => {
@@ -41,7 +41,10 @@ export const TotalSectionContainer = (props: ITotalSectionContainer) => {
   return (
     <div className='w-full'>
       <div className='relative'>
-        <img src={Banner} className='w-full h-[124px] md:h-[144px] lg:h-[195px]' />
+        <img
+          src={`assets/${environment.uVersion}/${environment.mvVersion}/TotalSectionBanner.png`}
+          className='w-full h-[124px] md:h-[144px] lg:h-[195px]'
+        />
         <div className='w-full flex absolute top-0 left-0 h-full  '>
           <IconTabItem selected={accountTab === 'total'} icon={iconTotal} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Total</div><div>Conta</div></div>} onClick={() => setAccountTab('total')} />
           <IconTabItem selected={accountTab === 'deposite'} icon={iconDeposit} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Depositar</div><div>Conta</div></div>} onClick={() => setAccountTab('deposite')} />
