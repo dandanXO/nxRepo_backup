@@ -194,7 +194,7 @@ export const IndexPage = ({
               </ScrollTab>
             </div>
 
-            <div className="shirnk-0 grow-0 basis-[200px] min-w-[200px]"
+            <div className="shirnk-0 grow-0 basis-[300px] min-w-[300px]"
                  onClick={() => dispatch(appSlice.actions.setShowGameSearchModal(true))}
             >
               {/*NOTICE: refactor me*/}
@@ -202,7 +202,7 @@ export const IndexPage = ({
                 disable={true}
                 pureContainer={true}
                 className={cx(
-                  "py-0.5 px-2.5 text-xs rounded",
+                  "p12 text-xs rounded",
                   "!border-[var(--stroke-textfields)] bg-[var(--background-textfields)]"
                 )}
                 inputClassName={"text-sm placeholder:text-[#007aff] placeholder:text-[rgba(255,255,255,0.3)]"}
