@@ -13,12 +13,16 @@ import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { gameSlice } from "../../../../../reduxStore/gameSlice";
 import { IGameType } from "../../../../drawers/MenuDrawer/env/u2/MenuDrawer";
 import { useScrollToPartPageTemplate } from "../../../hooks/useScrollToPartPageTemplate";
+import { AppLocalStorage } from "../../../../../persistant/localstorage";
+import { AppLocalStorageKey } from "../../../../../persistant/AppLocalStorageKey";
+import { appSlice } from "../../../../../reduxStore/appSlice";
 
 
 
 export const Footer = (props: IFooter) => {
   const navigate = useNavigate();
   const { label } = useSelector((state: any) => state.gameList);
+  const token = AppLocalStorage.getItem(AppLocalStorageKey.token);
 
   const dispatch = useDispatch();
 
@@ -244,7 +248,13 @@ export const Footer = (props: IFooter) => {
                     <div className='text-white font-bold pb-3 text-lg border-b border-[var(--grayscale-40)] w-full'>Ajuda</div>
                     <button onClick={()=>navigate(PageOrModalPathEnum.PrivacyAgreementPage)}>Politica de Privacidade</button>
                     <button onClick={()=>navigate(PageOrModalPathEnum.TermsOfService)}>Termos de Servico</button>
-                    <button onClick={()=>navigate(PageOrModalPathEnum.VIPGradePage)}>Descrico do nivel VIP</button>
+                    <button onClick={()=>{
+                      if(token) {
+                        navigate(PageOrModalPathEnum.VIPGradePage)
+                      }else {
+                        dispatch(appSlice.actions.showLoginDrawerOrModal(true))
+                      }
+                    }}>Descrico do nivel VIP</button>
                   </section>
 
                   <section className={"flex-1"}>
