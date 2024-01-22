@@ -15,6 +15,8 @@ import {useAutoUpdateBalance} from "../../hooks/useAutoUpdateBalance";
 import {notification} from "antd";
 import {RootState} from "../../../reduxStore";
 
+const MAX_SHOW_DEPOSIT_MODAL_COUNT = 3;
+
 export const useUIRouter = () => {
 
   const [isSetup, setIsSetup] = useState(true);
@@ -234,7 +236,8 @@ export const useUIRouter = () => {
   const isLogin = useSelector((state: RootState) => state.app.isLogin);
   const {isShowDepositModal} = useSelector((state: RootState) => state.app)
   const [startInterval, setStartInterval] = useState(false);
-  const [timesOfShowDepositModal, setTimesOfShowDepositModal] = useState(0);
+  const [configOfShowDepositModal, setConfigOfShowDepositModal] = useState({count:0, isShowDepositModal:isShowDepositModal});
+
   useEffect(() => {
     let timer: any;
     if(!isLogin) return;
@@ -245,20 +248,23 @@ export const useUIRouter = () => {
           const recharge_amount = userInfo?.recharge_amount;
           if(recharge_amount === 0) {
             timer = setInterval(() => {
-              setTimesOfShowDepositModal((timesOfShowDepositModal) => {
-                if(isShowDepositModal) return timesOfShowDepositModal ;
-                if(timesOfShowDepositModal >= 3) {
+              setConfigOfShowDepositModal((configOfShowDepositModal) => {
+                if(configOfShowDepositModal.isShowDepositModal) return configOfShowDepositModal ;
+                if(configOfShowDepositModal.count >= MAX_SHOW_DEPOSIT_MODAL_COUNT) {
                   clearTimeout(timer);
-                  return timesOfShowDepositModal;
+                  return configOfShowDepositModal;
                 } else {
-                  if(!isShowDepositModal) {
+                  if(!configOfShowDepositModal.isShowDepositModal) {
                     if(location.pathname !== PageOrModalPathEnum.GamePage) {
                       dispatch(appSlice.actions.setShowDepositModal(true))
                     } else {
                       window.clearInterval(timer);
                     }
                   }
-                  return timesOfShowDepositModal + 1
+                  return {
+                    ...configOfShowDepositModal,
+                    count: configOfShowDepositModal.count + 1
+                  }
                 }
               });
             }, 25000)
@@ -270,15 +276,23 @@ export const useUIRouter = () => {
       });
     }
 
-    if(location.pathname === PageOrModalPathEnum.GamePage) {
-      setTimesOfShowDepositModal(3)
-    }
-
     return () => {
-      window.clearInterval(timer);
+      if(configOfShowDepositModal.count >= MAX_SHOW_DEPOSIT_MODAL_COUNT){
+        window.clearInterval(timer);
+      }
     };
 
-  }, [isLogin, startInterval, timesOfShowDepositModal, isShowDepositModal, location.pathname])
+  }, [isLogin])
+
+
+  useEffect(() => {
+    if(startInterval) {
+      if(location.pathname === PageOrModalPathEnum.GamePage || !isLogin) {
+        setConfigOfShowDepositModal({ ...configOfShowDepositModal, count: MAX_SHOW_DEPOSIT_MODAL_COUNT})
+      }
+      setConfigOfShowDepositModal((configOfShowDepositModal)=> ({ ...configOfShowDepositModal, isShowDepositModal}))
+    }
+  }, [startInterval, location.pathname, isLogin, isShowDepositModal])
 
 
   const queryParams = new URLSearchParams(location.search);
