@@ -48,6 +48,7 @@ export const WalletDepositNextPage = () => {
 
   const onClickToCopy = () => {
     copy(data?.data?.channelData?.paymentLink || '');
+    navigator.clipboard.writeText(data?.data?.channelData?.paymentLink || '');
     api.success({
       message: "Copiado!"
     })

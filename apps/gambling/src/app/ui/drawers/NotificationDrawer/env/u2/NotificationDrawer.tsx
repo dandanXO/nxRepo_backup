@@ -34,6 +34,7 @@ export const NotificationDrawer = ({
         </div>
 
         <div className={'overflow-y-auto text-white text-xs lg:text-sm'}>
+          indexexpandableIndex{expandableIndex}
           {
             messages.map((message, index) => (
               <NotificationElement
