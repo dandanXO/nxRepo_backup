@@ -20,7 +20,7 @@ const MenuItem = (props: {
 
 }
 export const HeaderMenu = () => {
-  const { onClickToTelegram, onClickToCheckInDaily, onClickToFirstDeposit, onClickToDepositCashback, onClickToCompanyProfile } = usePageNavigate();
+  const { onClickToTelegram, onClickToCheckInDaily, onClickToFirstDeposit, onClickToDepositCashback, onClickToCompanyProfile, onClickToLicense } = usePageNavigate();
   const recharge_first_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_first_cashback_rate);
   const recharge_cashback_rate = useSelector((rootState: RootState) => rootState.app.config.recharge_cashback_rate);
   return (
@@ -30,6 +30,7 @@ export const HeaderMenu = () => {
       <div className="basis-[116px] shrink-0 flex flex-col justify-between self-start">
         <MenuItem menuText={'Telegrama'} className="" onClick={onClickToTelegram} />
         <MenuItem menuText={'Sobre nós'} className="" onClick={onClickToCompanyProfile} />
+        <MenuItem menuText={'Gaming Curaçao'} className="" onClick={onClickToLicense} />
       </div>
 
       <div className="basis-[116px] shrink-0 flex flex-col justify-between self-start">

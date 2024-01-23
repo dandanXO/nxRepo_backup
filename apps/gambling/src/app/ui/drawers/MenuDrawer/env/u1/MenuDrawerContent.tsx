@@ -28,7 +28,8 @@ export const MenuDrawerContent = () => {
     onClickToVipGrade,
     onClickToCheckInDaily,
     onClickToTelegram,
-    onClickToCompanyProfile
+    onClickToCompanyProfile,
+    onClickToLicense
   } = usePageNavigate();
 
   const dispatch = useDispatch();
@@ -121,6 +122,15 @@ export const MenuDrawerContent = () => {
         icon={<img className="w-[14px] h-[14px] mr-2" alt={"about"} src={`assets/${environment.uVersion}/icon=building.png`} />}
         onClick={() => {
           onClickToCompanyProfile();
+          closeMenuDrawer();
+        }}
+      />
+      <MobileMenuLink
+        text={'Gaming Curaçao '}
+        className="text-white"
+        icon={<img className="w-[14px] h-[14px] mr-2" alt={"about"} src={`assets/${environment.uVersion}/icon=medal.png`} />}
+        onClick={() => {
+          onClickToLicense();
           closeMenuDrawer();
         }}
       />
