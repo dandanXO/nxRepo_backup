@@ -77,7 +77,7 @@
         "dev-v1-p1-m1v1-pbet": {
           "buildTarget": "gambling:build:dev-v1-p1-m1v1-pbet"
         },
-        "dev-v20-u1-m1v3-luxoslotsbet": {
+        "dev-v20-u1-m1v13-luxoslotsbet": {
           "buildTarget": "gambling:build:dev-v20-u1-m1v13-luxoslotsbet"
         },
         "dev-v18-u2-m2v1-reels777bet": {
