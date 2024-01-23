@@ -835,7 +835,10 @@ export const {
   useGetVIPInfoMutation,
   useLazyDownloadQuery,
   usePostLetterReadMutation,
-  useGetMailCountMutation
+  useGetMailCountMutation,
+  useGetBoxInfoMutation,
+  useLazyGetBoxReceiveQuery,
+  useLazyGetBoxReceiveRecordEndpointQuery
 } = API;
 
 export const API3 = createApi({

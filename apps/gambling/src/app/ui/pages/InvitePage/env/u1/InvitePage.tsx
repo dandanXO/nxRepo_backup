@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
 
+import { environment } from "../../../../../../environments/environment";
 import { TabItem, Tabs } from "../../../../components-bs/TabItem/TabItem";
 import { PageContainer } from "../../../../components-bs/PageContainer";
 
@@ -10,17 +11,108 @@ import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNav
 import { usePageNavigate } from "../../../../router/hooks/usePageNavigate";
 import { IInvitePage } from "../..";
 import { twMerge } from "tailwind-merge";
+import Modal  from "./boxSearchModal";
 
+import {
+  useGetBoxInfoMutation,
+  useLazyGetBoxReceiveQuery
+} from "../../../../../external";
 
+const BoxSection = (props:{openModal:()=>void}) =>{
+  const [triggerGetBoxInfo, {data:boxInfoRes}] = useGetBoxInfoMutation();
+  const [triggerGetBoxReceive] = useLazyGetBoxReceiveQuery()
+  const handleOpenBox = (receiveFlag: number, number: number) => {
+    //2可以領但是還沒領  才打api
+    if(receiveFlag === 2){  
+      triggerGetBoxReceive({number}).then(res=>{
+        if(res.data){
+          triggerGetBoxInfo({token: localStorage.getItem(localStorage.token) || ''})
+        }
+      }).catch((e)=>{
+        triggerGetBoxInfo({token: localStorage.getItem(localStorage.token) || ''})
+      })
+    }
+  }
 
+  useEffect(()=>{
+    triggerGetBoxInfo({token: localStorage.getItem(localStorage.token) || ''})
+  }, [])
+  return (
+    <section className="forBoxing pb-12">
+      <div className="basic-info text-white flex flex-col justify-center items-center divide-y">
+        <div className="font-bold mb-3 text-center text-base lg:text-xl">
+          Promoção sujeita ao cumprimento de todas as seguintes condições.
+        </div>
+        <div className="w-full flex pt-3 flex-col lg:flex-row justify-center items-center text-sm lg:text-base">
+          <div className="text-center lg:mr-12">
+            <span className="font-bold">Alcance de recarga</span>
+            <br />
+            <span> {boxInfoRes?.data.number} Ou o acima mencionado</span>
+          </div>
+          <div className="text-center lg:ml-12">
+          <span className="font-bold">Alcance de receitas</span>
+          <br />
+          <span>{boxInfoRes?.data.firstRechargeRequiredAmount} Ou o acima mencionado</span>
+          </div>
+        </div>
+      </div>
+      <div className="box-search font-bold text-base lg:text-xl">
+        <div className="text-center text-white">Pessoas de nível inferior eficazes <span className="text-[var(--text-popup)] mx-3">{boxInfoRes?.data.boxFlow}</span> pessoas
+          <span onClick={props.openModal} className=" mx-3 text-[var(--text-popup)]"> {'>>>Detalhes'}</span>
+        </div>
+      </div>
+      <div className="box-image flex flex-wrap">
+        {
+          boxInfoRes?.data.contentVoList.map((box, index)=>{
+            const flagMap = ['close','open', 'active']
+            let reciveFlag = box.receiveFlag // 0未領 1已領過  2可以領但是還沒領
+            if(box.number <= boxInfoRes?.data.number && box.receiveFlag === 0 ){
+              reciveFlag = 2
+            }
+            return (
+              
+              <div className="w-1/4 p-1" onClick={()=>handleOpenBox(reciveFlag, box.number)}>
+                <div className="flex items-center justify-center">
+                  <div className="max-h-[354px] flex flex-col items-center">
+                    <img alt='user' src={`assets/${environment.uVersion}/box-${flagMap[reciveFlag]}.png`} className="h-[64px] w-[64px] lg:h-[270px] lg:w-[270px] mr-2" />
+                    {
+                      reciveFlag === 2 ? <div className="top-[-10px] lg:top-[-70px] relative text-center text-white text-[10px] lg:text-base rounded-[14px] lg:rounded-[24px] px-1.5  lg:px-12  py-0.5 lg:py-2 bg-[var(--button-modal-download-from)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]"> Receber </div>: null
+                    }
+                    <div className={cx({
+                      'top-[-10px]': reciveFlag === 2,
+                      'lg:top-[-70px]' : reciveFlag === 2,
+                    },'relative text-center text-white lg:text-base text-[10px]' )}>{box.number} pessoas</div>
+                    <div className={cx({
+                      'top-[-10px]': reciveFlag === 2,
+                      'lg:top-[-70px]' : reciveFlag === 2,
+                    }, 'relative text-center  text-white lg:text-base text-[12px]')}>{box.amount}</div>                  
+                  </div>
+                    {
+                      index === 0 || (index % 4 !== 3) ? <img alt='user' src={`assets/${environment.uVersion}/box-right-arrow.png`} className="h-[14px] w-[14px] lg:h-[48px] lg:w-[48px] lg:ml-8" /> : ''
+                    }
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+    </section>
+  )
+}
 export const InvitePage = (props: IInvitePage) => {
+  
   const { onClickToIndex } = usePageNavigate();
   const { children, panelMode, setPanelMode } = props;
 
   const { isMobile } = useBreakpoint();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
   return (
     <PageContainer className="pt-7 md:pt-0">
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <p>This is a modal!</p>
+      </Modal>
       {
         !isMobile && (
           <BackNavigation
@@ -67,6 +159,8 @@ export const InvitePage = (props: IInvitePage) => {
         </div>
       </section>
       {children}
+
+      <BoxSection openModal={openModal} />
     </PageContainer>
   )
 }
