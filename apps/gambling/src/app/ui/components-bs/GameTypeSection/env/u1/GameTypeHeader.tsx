@@ -1,10 +1,11 @@
 import {Dispatch, SetStateAction} from "react";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import cx from "classnames";
-import todos from "../../../Icons/tabs/env/u1/index-tab-todos.png"
 import {LeftOutlined} from "@ant-design/icons"
+import { GAME_TYPE_ICON_MAP } from "../../../../pages/IndexPage/env/u1/IndexTabs";
 
 export const GameTypeHeader = (props: {
+  label?: string;
   gameTypeName: string;
   count?: number;
   onClick?: () => void;
@@ -29,7 +30,7 @@ export const GameTypeHeader = (props: {
             <LeftOutlined className={"text-white text-xl mr-2"}/>
           </button>
         )}
-        <img className="w-[24px] h-[24px] mr-2" alt={"map"} src={todos}/>
+        <img className="w-[24px] h-[24px] mr-2" alt={"map"} src={GAME_TYPE_ICON_MAP[props.label || ''] ? GAME_TYPE_ICON_MAP[props.label || '']: GAME_TYPE_ICON_MAP['Todos']}/>
         <span className={"text-xl font-bold text-white"}>{props.gameTypeName}</span>
       </span>
 

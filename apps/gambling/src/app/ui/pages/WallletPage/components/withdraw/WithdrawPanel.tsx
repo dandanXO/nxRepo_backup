@@ -260,7 +260,7 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     const isError4 = validateSelectInput(selectInput.data)
     if (isError1 || isError2 || isError3 || isError4) {
       api.error({
-        message: "Form is invalid"
+        message: "Erro de formato"
       })
       return;
     }

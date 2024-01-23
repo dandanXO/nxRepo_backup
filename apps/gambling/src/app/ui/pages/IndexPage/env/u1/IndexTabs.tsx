@@ -8,6 +8,8 @@ import vivo from "../../../../components-bs/Icons/tabs/env/u1/index-tab-vivo.png
 import viver from "../../../../components-bs/Icons/tabs/env/u1/index-tab-viver.png"
 import favorite from "../../../../components-bs/Icons/tabs/env/u1/index-tab-favorite.png"
 import fishing from "../../../../components-bs/Icons/tabs/env/u1/index-tab-fishing.png";
+import table from "../../../../components-bs/Icons/tabs/env/u1/index-tab-table.png";
+import arcade from "../../../../components-bs/Icons/tabs/env/u1/index-tab-arcades.png";
 
 import recent from "../../../../components-bs/Icons/tabs/env/u1/index-tab-recent.png"
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
@@ -30,6 +32,18 @@ const IndexImageTab = styled(ImageTab)`
     }
   }};
 `
+
+export const GAME_TYPE_ICON_MAP : { [key: string]: string} = {
+  "Todos": todos,
+  "Viver": viver,
+  "Vivo": vivo,
+  "Slots": slots,
+  "Fishing": fishing,
+  "Tables": table,
+  "Arcades": arcade,
+  "Favoritos": favorite
+}
+
 type IIndexTabs = {
   label: any;
   activeTab: any;
@@ -60,15 +74,6 @@ export const IndexTabs = ({
   //   recent
   // ]
 
-  const iconsMap : { [key: string]: string} = {
-    "Todos": todos,
-    "Viver": viver,
-    "Vivo": vivo,
-    "Slots": slots,
-    "Fishing": fishing,
-    "Favoritos": favorite
-  }
-
   const {isMobile} = useBreakpoint();
   return (
       <Tabs className={cx("game-type-tab-list")}>
@@ -88,7 +93,7 @@ export const IndexTabs = ({
                   setViewType('')
                 }}
               >
-                {!hideIcon && <img className="w-[20px] h-[20px] mr-1" src={iconsMap[tab] ? iconsMap[tab] : iconsMap['Todos']} />}
+                {!hideIcon && <img className="w-[20px] h-[20px] mr-1" src={GAME_TYPE_ICON_MAP[tab] ? GAME_TYPE_ICON_MAP[tab] : GAME_TYPE_ICON_MAP['Todos']} />}
                 <span>{tab}</span>
               </IndexImageTab>
             )

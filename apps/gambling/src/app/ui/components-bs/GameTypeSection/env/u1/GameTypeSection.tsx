@@ -20,13 +20,12 @@ export type GameItem = {
 
 
 export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) => {
-  const { displayedItems, animating, listSize, loadMore } = props
+  const { displayedItems, animating, listSize, loadMore, data } = props
   const { isMobile } = useBreakpoint();
   const { onClickGameItem } = usePageNavigate();
 
   const MainGameList = isMobile ? MobileGameList : GameList
   const MainGameItem = isMobile ? MobileGameItem : DesktopGameItem
-
 
   return (
     <section className={cx({
@@ -36,7 +35,7 @@ export const GameTypeSection = (props: IGameTypeSectionList & IGameTypeSection) 
       {props.gameTypeName === 'null' ? <div></div> : isMobile ? (
         <MobileGameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll} {...mobileGameTypeHeaderProps} />
       ) : (
-        <GameTypeHeader key={props.gameTypeName} gameTypeName={props.gameTypeName} count={props.expandCount || props.data?.length} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll} />
+        <GameTypeHeader key={props.gameTypeName} label={data  ? data[0].label: undefined} gameTypeName={props.gameTypeName} count={props.expandCount || props.data?.length} onClick={props.onClickExpand} expandedBrand={props.expandedBrand} setExpandedBrand={props.setExpandedBrand} isViewAll={props.isViewAll} />
       )}
       {props.gameTypeName === 'Favoritos' && displayedItems?.length === 0 ? (
         <div className="my-8 py-6 text-center text-xl text-[var(--primary-assistant)]">

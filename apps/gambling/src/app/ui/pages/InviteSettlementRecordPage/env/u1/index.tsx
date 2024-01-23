@@ -68,7 +68,7 @@ export const InviteSettlementRecordPage = () => {
           {!isMobile &&
             (<section>
               <button className="invisible sm:visible rounded-lg w-full text-xl py-3 px-16 bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]" onClick={() => {
-                refresh(moment().subtract(7, 'days').format('YYYY-MM-DD 00:00:00'), moment().format('YYYY-MM-DD 23:59:59'));
+                refresh(dates[0].format(dateFormat), dates[1].format(dateFormat))
               }}>Registros de liquidação</button>
             </section>)
           }
@@ -97,7 +97,7 @@ export const InviteSettlementRecordPage = () => {
           }
         </section>
 
-        <div className="overflow-x-auto rounded-xl">
+        <div className="overflow-x-auto rounded-xl mb-10">
           <table className="table table-zebra w-full text-center">
             {/* head */}
             <thead>
@@ -112,8 +112,8 @@ export const InviteSettlementRecordPage = () => {
                 currentData?.rows.map((itme, index) => {
                   return (
                     <tr key={index}>
-                      <td className='p-12 border-r border-[rgba(255,255,255,0.2)]'>{moment(itme.updateTime).format('DD.MM-YYYY HH:mm:ss')}</td>
-                      <td className='p-12'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
+                      <td className='p-2 border-r border-[rgba(255,255,255,0.2)]'>{moment(itme.updateTime).format('DD.MM-YYYY HH:mm:ss')}</td>
+                      <td className='p-2'>R$: {formatLocaleMoney(itme.reward / 100)}</td>
                     </tr>
                   )
                 })
