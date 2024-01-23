@@ -53,7 +53,7 @@ export const SubTabItem = (props: ITabItem) => {
         "flex-1",
         {
           'text-white border-[var(--primary-main)] border-solid border-2' : props.active,
-          'bg-[--grayscale-20] text-[rgba(255,255,255,1)] border-2 border-[#333]': !props.active
+          'bg-[var(--grayscale-20)] text-[rgba(255,255,255,1)] border-2 border-[var(--grayscale-20)]': !props.active
         },
         props.className
       )}

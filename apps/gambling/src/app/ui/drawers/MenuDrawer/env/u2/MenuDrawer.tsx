@@ -90,7 +90,9 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             // (isTablet) && "h-[calc(100dvh-72px)]",
             // (isDesktop) && "h-[calc(100dvh-72px)]",
             // (isTablet||isDesktop) && "h-full",
+            // TODO
             "bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto",
+            // "bg-[linear-gradient(90deg, var(--background-tabbar-from), v ar(--background-tabbar-to))] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto",
             "relative"
           )}
           onMouseDown={(event) => {

@@ -174,7 +174,7 @@ export const IndexPage = () => {
       } , [] as string[])
     return (
       <DragScrollContainer className="flex flex-row items-center rounded-[8px] mt-3 md:mt-4 lg:mt-5">
-      <div className="bg-[#333333] flex flex-row rounded-[8px] p-2">
+      <div className="bg-[var(--grayscale-20)] flex flex-row rounded-[8px] p-2">
         {
           ["All", ...subGameMenuList].map((tab: string, index: number) => {
             return (

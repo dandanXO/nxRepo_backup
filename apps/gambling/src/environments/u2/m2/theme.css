@@ -3,7 +3,7 @@
 
   --primary-main: #EB6E47;
   /*NOTE: 沒用到*/
-  --primary-light-disable: #6C3ABE;
+  --primary-light-disable: rgba(235, 110, 71, 0.5);
   /*NOTE: 沒用到*/
   --primary-dark-active: #BC5839;
   /*NOTE: js 部分還沒換*/
@@ -14,7 +14,7 @@
   /* gambling/src/app/ui/components-bs/ProgressBar/env/riojungle/index.tsx */
   --secondary-main: #D12598;
   /*NOTE: 沒用到*/
-  --secondary-light-disable: #0D9574;
+  --secondary-light-disable: rgba(209, 37, 152, 0.5);
   /*NOTE: 沒用到*/
   --secondary-dark-active: #A71E7A;
   /*NOTE: 沒用到*/
@@ -310,7 +310,9 @@
   --drawer-border: rgba(50,63,91,.7);
 
   /* riojungle777bet */
-  --background-tabbar: linear-gradient(to right, rgba(41, 31, 46, 0.5), #36293D);
+  --background-tabbar: rgba(41, 31, 46, 0.5);
+  --background-tabbar-from: rgba(41, 31, 46, 0.5);
+  --background-tabbar-to: #36293D;
   --background-header-from: rgba(41, 31, 46, 0.5);
   --background-header-to: #36293D;
 
