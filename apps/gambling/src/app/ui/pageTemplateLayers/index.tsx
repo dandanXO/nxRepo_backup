@@ -27,13 +27,14 @@ import {TelegramDetailContactModal} from "../modals/TelegramDetailContactModal";
 import { renderByUVersion } from "../utils/renderByUVersion";
 import {twMerge} from "tailwind-merge";
 import {IOSDownloadModal} from "../modals/IOSDownloadModal";
+import useBreakpoint from "../pageTemplate/hooks/useBreakpoint";
+import { UserLoginStatusDrawers } from "../drawers/UserLoginStatusDrawers";
 
 type IModalOpen = {
   isOpen: boolean;
   open: (open: boolean) => void;
 }
 export type IPageTemplateLayers = {
-  isMobile: boolean;
   isShowLoginModal: boolean;
   showLoginModal: IModalOpen["open"];
   setIsLogin: (login: boolean) => void;
@@ -61,7 +62,6 @@ export type IPageTemplateLayers = {
 }
 
 export const PageTemplateLayers = ({
-                           isMobile,
                            isShowLoginModal,
                            showLoginModal,
                            setIsLogin,
@@ -84,6 +84,8 @@ export const PageTemplateLayers = ({
 
   const { openUserInfoStatusPopover } = useSelector((state: RootState) => state.ui);
 
+  const { isMobile, isDesktop } = useBreakpoint();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isShowGameSearchModal } = useSelector((state: RootState) => state.app);
@@ -103,14 +105,35 @@ export const PageTemplateLayers = ({
 
       {/*Login*/}
       {isShowLoginModal && (
-        <UserLoginStatusModal
-          showCloseButton={true}
-          openNotificationWithIcon={openNotificationWithIcon}
-          close={() => {
-            showLoginModal(false)
-          }}
-          setIsLogin={(login: boolean) => setIsLogin(login)}
-        />
+        renderByUVersion({
+          "p1": isDesktop ? (
+            <UserLoginStatusDrawers
+              openNotificationWithIcon={openNotificationWithIcon}
+              closeDrawer={() => {
+                showLoginModal(false)
+              }}
+              setIsLogin={(login: boolean) => setIsLogin(login)}
+            />
+          ):(
+             <UserLoginStatusModal
+              showCloseButton={true}
+              openNotificationWithIcon={openNotificationWithIcon}
+              close={() => {
+                showLoginModal(false)
+              }}
+              setIsLogin={(login: boolean) => setIsLogin(login)}
+            />
+        )
+        },(
+          <UserLoginStatusModal
+            showCloseButton={true}
+            openNotificationWithIcon={openNotificationWithIcon}
+            close={() => {
+              showLoginModal(false)
+            }}
+            setIsLogin={(login: boolean) => setIsLogin(login)}
+          />
+        ))
       )}
 
       {/*Logout*/}
