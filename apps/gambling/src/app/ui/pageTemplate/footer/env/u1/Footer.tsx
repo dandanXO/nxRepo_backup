@@ -19,10 +19,10 @@ type ILicenseSection = {
   className?: string;
 }
 const LicenseSection = (props: ILicenseSection) => {
-  const {onClickToCompanyProfile} = usePageNavigate();
+  const { onClickToLicense } = usePageNavigate();
   return (
     <div className={cx("flex flex-col items-center md:flex-row md:justify-items-start", props.className)}>
-      <img className="w-[76px] h-[70px] md:mr-2 mb-4 md:mb-0 cursor-pointer" src={licenseLogo} onClick={onClickToCompanyProfile}/>
+      <img className="w-[76px] h-[70px] md:mr-2 mb-4 md:mb-0 cursor-pointer" src={licenseLogo} onClick={onClickToLicense}/>
       <div className="text-xs md:text-base font-medium leading-4 md:leading-6 text-[#bebebe] w-full">
         {environment.platformName} is operated by Block balancing A.C. (Commercial
         register of Curaçao no. 158191, Emancipatie Boulevard Dominico F. "Don"
