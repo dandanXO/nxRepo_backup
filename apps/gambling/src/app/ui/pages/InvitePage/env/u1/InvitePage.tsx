@@ -20,7 +20,7 @@ export const InvitePage = (props: IInvitePage) => {
   const { isMobile } = useBreakpoint();
 
   return (
-    <PageContainer className="pt-7 md:pt-0">
+    <PageContainer>
       {
         !isMobile && (
           <BackNavigation

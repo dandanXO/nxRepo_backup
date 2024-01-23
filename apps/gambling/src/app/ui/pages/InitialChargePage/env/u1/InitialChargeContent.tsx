@@ -9,6 +9,7 @@ import { Banner } from "../../../../components/Banner";
 import { environment } from "../../../../../../environments/environment";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../reduxStore";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 
 export const InitialChargeContent = () => {
   const { isMobile } = useBreakpoint();
@@ -25,14 +26,14 @@ export const InitialChargeContent = () => {
   }
 
   return (
-    <div className='px-4 md:px-10'>
+    <PageContainer>
       <BackNavigation
         onClick={() => onClickToIndex()}
         title={isMobile && <div className={"w-full font-bold text-center"}>Primeira recarga</div>}
       />
 
       <Banner
-        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6 md:mt-0`}
+        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`}
         src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_20.png`}
         bannerText={
           <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
@@ -61,7 +62,7 @@ export const InitialChargeContent = () => {
 
         {!isMobile && <RechargeButton />}
       </section>
-    </div>
+    </PageContainer>
 
   )
 }

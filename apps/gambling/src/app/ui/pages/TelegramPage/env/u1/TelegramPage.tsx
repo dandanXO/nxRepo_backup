@@ -17,6 +17,7 @@ import { appSlice } from "../../../../../reduxStore/appSlice";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { ITelegramPage } from "../..";
 import { TelegrmaNotice } from "../components/TelegramNotice";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 
 const GoToTelegram = styled.div`
   cursor: pointer;
@@ -38,7 +39,7 @@ export const TelegramPage = (props: ITelegramPage) => {
   const { onClickToIndex } = usePageNavigate();
   return (
 
-    <div className={"px-4 sm:px-10 w-full"}>
+    <PageContainer>
 
       <BackNavigation
         onClick={() => onClickToIndex()}
@@ -68,6 +69,6 @@ export const TelegramPage = (props: ITelegramPage) => {
           <img className={"w-[30px] mr-4"} src={`assets/${environment.uVersion}/icon=telegram.png`} />
           Junte-se</GoToTelegram>
       </section>
-    </div>
+    </PageContainer>
   )
 }

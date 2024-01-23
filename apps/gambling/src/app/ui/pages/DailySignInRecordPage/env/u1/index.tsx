@@ -60,7 +60,7 @@ export const DailySignInRecordPage = () => {
         onClick={() => onClickToCheckInDaily()}
         title={<div className='ml-2 font-medium text-2xl'>Registro Diário de Presença</div>}
       />
-      <div className='text-white '>
+      <div className='text-white pt-4'>
         <div className='rounded-lg h-[80vh] overflow-hidden'>
           <Table
             fetchData={handleFetchData}

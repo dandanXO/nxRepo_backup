@@ -6,6 +6,7 @@ import { NoticeSection } from "./NoticeSection"
 import { BackNavigation } from "../../../../components-bs/BackNavigation/BackNavigation";
 import { environment } from "../../../../../../environments/environment";
 import { Banner } from "../../../../components/Banner";
+import { PageContainer } from "../../../../components-bs/PageContainer";
 
 export const RechargeActivityContent = () => {
   const { isMobile } = useBreakpoint();
@@ -20,13 +21,13 @@ export const RechargeActivityContent = () => {
   }
 
   return (
-    <div className='px-4 md:px-10 w-full'>
+    <PageContainer>
       <BackNavigation
         onClick={() => onClickToIndex()}
         title={isMobile && <div className={"w-full text-center font-bold"}>Recarga benefícios</div>}
       />
       <Banner
-        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6 md:mt-0`}
+        imgClassName={`rounded-lg mb-4 md:mb-8 mt-6`}
         src={`assets/${environment.uVersion}/${environment.mvVersion}/banner_10.png`}
         bannerText={
           <div className={"absolute left-[5%] top-1/2 transform -translate-y-1/2"}>
@@ -40,6 +41,6 @@ export const RechargeActivityContent = () => {
       {isMobile && <RechargeButton />}
       <NoticeSection />
       {!isMobile && <RechargeButton />}
-    </div>
+    </PageContainer>
   )
 }
