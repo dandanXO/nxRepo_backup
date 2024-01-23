@@ -194,7 +194,7 @@ showToolboxConfig
 
         <div className={cx("w-full h-full", {
           "relative": !isMobile,
-          "top-[100px]": isShowDesktopHeader,
+          // "top-[100px]": isShowDesktopHeader,
           "left-[276px] w-[calc(100vw-276px)]": !isMobile && isShowDesktopMenuDrawer,
           "bg-[]": !isCurrentPageCompanyProfile && !isMobile,//背景色
         })} style={{
