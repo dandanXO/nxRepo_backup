@@ -2,6 +2,8 @@ import {LeftOutlined} from "@ant-design/icons";
 import React from "react";
 import styled from "styled-components";
 import { tcx } from "../../../../utils/tcx";
+import { twMerge } from "tailwind-merge";
+import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 
 type IProps = {
   onClick?: () => void;
@@ -10,10 +12,10 @@ type IProps = {
 }
 
 export const BackNavigation = (props: IProps) => {
+  const { isDesktop } = useBreakpoint();
   return (
-    <div className={tcx("relative text-xl text-left text-white",
-      "p-3",
-      "md:pb-6",
+    <div className={twMerge("relative text-xl text-left text-white",
+      !isDesktop && "p-3 md:pb-6",
       props.className)}>
       <div
         // className='flex items-center text-2xl text-[#ff97ef] ml-[6vw]'
