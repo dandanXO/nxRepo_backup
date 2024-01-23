@@ -156,24 +156,24 @@ showToolboxConfig
       {/*Refactor ME*/}
       {contextHolder}
 
-      {/*{!isMobile && isShowDesktopHeader && (*/}
-      {/*  <Header*/}
-      {/*    onClickToDownload={onClickToDownload}*/}
-      {/*    isLogin={isLogin}*/}
-      {/*    onClickUserLoginStatusDrawer={() => {*/}
-      {/*      // setOpenNonMobileUserLoginStatusDrawer(true);*/}
-      {/*      showLoginModal(true)*/}
-      {/*    }}*/}
-      {/*    className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}*/}
-      {/*    onClickToOpenNotificationDrawer={() => {*/}
-      {/*      setOpenDesktopNotificationDrawer(true)*/}
-      {/*    }}*/}
-      {/*    onClickToChangeLogoutPopover={(display: boolean) => {*/}
-      {/*      setOpenLogoutPopover(display);*/}
-      {/*    }}*/}
-      {/*    openLogoutPopover={isShowMobileLogoutModal}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {!isMobile && isShowDesktopHeader && (
+       <Header
+          onClickToDownload={onClickToDownload}
+          isLogin={isLogin}
+          onClickUserLoginStatusDrawer={() => {
+            // setOpenNonMobileUserLoginStatusDrawer(true);
+            showLoginModal(true)
+          }}
+          className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
+          onClickToOpenNotificationDrawer={() => {
+            setOpenDesktopNotificationDrawer(true)
+          }}
+          onClickToChangeLogoutPopover={(display: boolean) => {
+            setOpenLogoutPopover(display);
+          }}
+          openLogoutPopover={isShowMobileLogoutModal}
+        />
+      )}
 
       <div className={"h-full flex flex-row"}>
         {/*{isShowDesktopMenuDrawer && openMenuDrawer && (*/}
