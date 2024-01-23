@@ -22,9 +22,12 @@ import useRepayTypes from '../../hooks/useRepayTypes';
 import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import IndiaRepaymentModal from './i18n/IndiaRepaymentModal';
 import MexicoRepaymentModal from './i18n/MexicoRepaymentModal';
-import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
+import PakistanRepaymentModal from './i18n/PakistanRepaymentModal/PakistanRepaymentDefModal/index'
+import PakistanRepaymentDemoModal from './i18n/PakistanRepaymentModal/PakistanRepaymentDemoModal/index'
 import PhilippinesRepaymentModal from './i18n/PhilippinesRepaymentModal';
 import { i18nRepaymentModal } from './i18n/translations';
+import { formatDate } from '../../../modules/format/formatDate';
+import moment from 'moment';
 
 type paymentMethodValueType = {
   type: string;
@@ -53,7 +56,7 @@ const RepaymentModal = (props: any) => {
 
   const dispatch = useDispatch();
   const { repaymentData, repaymentDetail } = useSelector((state: RootState) => state.repaymentDetailPage);
-  const { balance = location.state.balance, orderNo = getOrderNo() } = repaymentDetail || {};
+  const { balance = location.state.balance, orderNo = getOrderNo(),applyDate,status } = repaymentDetail || {};
   const [radioValue, setRadioValue] = useState('balance');
 
   // NOTE: 變動數值
@@ -89,7 +92,7 @@ const RepaymentModal = (props: any) => {
   }, []);
 
   const handleConfirm = () => {
-   
+
       const {
         // balance,
         repayAmount,
@@ -114,7 +117,9 @@ const RepaymentModal = (props: any) => {
         );
       }
   };
-
+  // const isTodayRepayment=true;
+  const isTodayRepayment=formatDate(moment(applyDate))===formatDate(moment())&&
+  status==='UNPAID';
   return (
     <Modal
       outlineTheme={ environment.country === MexicoCountry.country ? 'round' : undefined}
@@ -127,8 +132,18 @@ const RepaymentModal = (props: any) => {
         </div>
         {renderByCountry(
           {
-            [IndiaCountry.country]: (
-              <IndiaRepaymentModal
+            [IndiaCountry.country]:
+            isTodayRepayment? (
+              <PakistanRepaymentDemoModal
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                balanceValue={balanceData}
+                setBalanceValue={setbalanceData}
+                handleConfirm={handleConfirm}
+                handleRepayData={handleRepayData}
+                isPostRepayCreateLoading={isPostRepayCreateLoading}
+              />):
+              (<PakistanRepaymentModal
                 radioValue={radioValue}
                 setRadioValue={setRadioValue}
                 balanceValue={balanceData}
@@ -137,9 +152,28 @@ const RepaymentModal = (props: any) => {
                 handleRepayData={handleRepayData}
                 isPostRepayCreateLoading={isPostRepayCreateLoading}
               />
+              // <IndiaRepaymentModal
+              //   radioValue={radioValue}
+              //   setRadioValue={setRadioValue}
+              //   balanceValue={balanceData}
+              //   setBalanceValue={setbalanceData}
+              //   handleConfirm={handleConfirm}
+              //   handleRepayData={handleRepayData}
+              //   isPostRepayCreateLoading={isPostRepayCreateLoading}
+              // />
+
             ),
-            [PakistanCountry.country]: (
-              <PakistanRepaymentModal
+            [PakistanCountry.country]:isTodayRepayment? (
+              <PakistanRepaymentDemoModal
+                radioValue={radioValue}
+                setRadioValue={setRadioValue}
+                balanceValue={balanceData}
+                setBalanceValue={setbalanceData}
+                handleConfirm={handleConfirm}
+                handleRepayData={handleRepayData}
+                isPostRepayCreateLoading={isPostRepayCreateLoading}
+              />):
+              (<PakistanRepaymentModal
                 radioValue={radioValue}
                 setRadioValue={setRadioValue}
                 balanceValue={balanceData}

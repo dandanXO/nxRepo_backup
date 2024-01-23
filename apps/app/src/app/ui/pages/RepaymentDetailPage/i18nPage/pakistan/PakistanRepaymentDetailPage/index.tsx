@@ -146,8 +146,8 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
         {/*NOTICE: 合同金*/}
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-ctext-secondary" />*/}
-
-        {isTodayRepayment ? (
+        <RepaymentDetailDemo loanAmount={loanAmount} />
+        {/* {isTodayRepayment ? (
           <RepaymentDetailDemo loanAmount={loanAmount} />
         ) : (
           <>
@@ -173,7 +173,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                     isFetching={isFetching}
                   />
                 );
-              })}
+              })} */}
 
             {/* {status !== 'EXTEND' && (
           <ListItem
@@ -184,7 +184,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           />
         )} */}
 
-            {status === 'EXTEND' && (
+            {/* {status === 'EXTEND' && (
               <ListItem
                 title={t('Extension Fee')}
                 text={<Money money={extensionFee} />}
@@ -263,9 +263,9 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               isFetching={isFetching}
             />
 
-            <Divider />
+            <Divider /> */}
             {/*NOTE: 總應還金額*/}
-            {status !== 'EXTEND' && (
+            {/* {status !== 'EXTEND' && (
               <ListItem
                 title={t('Repayment Amount')}
                 text={<Money money={balance} />}
@@ -282,10 +282,10 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 }
                 isFetching={isFetching}
               />
-            )}
+            )} */}
 
             {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
-            {status === 'EXTEND' && (
+            {/* {status === 'EXTEND' && (
               <ListItem
                 title={t('Total Extension Fee')}
                 text={<Money money={totalRepayAmount} />}
@@ -296,7 +296,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               />
             )}
           </>
-        )}
+        )} */}
         <div className={`my-3 flex flex-row text-white`}>
           {extendable !== undefined && extendable && (
             <div

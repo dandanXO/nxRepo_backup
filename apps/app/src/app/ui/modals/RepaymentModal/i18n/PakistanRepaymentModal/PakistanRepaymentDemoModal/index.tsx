@@ -7,30 +7,32 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { Input, Radio } from '@frontend/mobile/shared/ui';
 
-import { environment } from '../../../../../../environments/environmentModule/environment';
-import { getToken } from '../../../../../application/getToken';
-import { formatDate } from '../../../../../modules/format/formatDate';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import Money from '../../../../components/Money';
+import { environment } from '../../../../../../../environments/environmentModule/environment';
+import { getToken } from '../../../../../../application/getToken';
+import { formatDate } from '../../../../../../modules/format/formatDate';
+import { PageOrModalPathEnum } from '../../../../../PageOrModalPathEnum';
+import Money from '../../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from '../../../../core-components/Button';
-import ListItem from '../../../../core-components/ListItem';
-import Select from '../../../../core-components/Select';
-import { selectStyles } from '../../../../core-components/selectStyles';
-import { IRepaymentModalProps } from '../../index';
-import AdSVG from '../../repayment_banner.svg';
-import { i18nRepaymentModal } from '../translations';
+import { Button } from '../../../../../core-components/Button';
+import ListItem from '../../../../../core-components/ListItem';
+import Select from '../../../../../core-components/Select';
+import { selectStyles } from '../../../../../core-components/selectStyles';
+import { IRepaymentModalProps } from '../../../index';
+import AdSVG from '../../../repayment_banner.svg';
+import { i18nRepaymentModal } from '../../translations';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import { useSelector } from 'react-redux';
-import { RadioOption } from '../../../../core-components/RadioOption';
-import ValidateInput from '../../../../core-components/ValidateInput';
-import { validateBalance } from '../validation';
+import { RadioOption } from '../../../../../core-components/RadioOption';
+import ValidateInput from '../../../../../core-components/ValidateInput';
+import { validateBalance } from '../../validation';
 import { getOrderNo } from 'apps/app/src/app/externel/window/querystring/getOrderNo';
-
+import info_circle from  "./info_circle.svg"
+import styled from 'styled-components';
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
-
+  const [showCoolTooltip,setShowCoolTooltip]=useState(true);
   const {
     setRadioValue,
     balanceValue,
@@ -45,8 +47,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
   const { t } = useTranslation(i18nRepaymentModal.namespace);
 
   const payOptions = [
-    { value: 'balance', label: t('Repay Full Amount') },
-    { value: 'custom', label: t('Partial Repayment') },
+    { value: 'cooling', label: t('Cooling off Period') },
   ];
   const repaymentData = useSelector((state: RootState) => state.repaymentDetailPage.repaymentData);
   const {
@@ -69,10 +70,26 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
   };
 
   return (
-    <div className="text-ctext-primary px-4 text-left">
-      <div className="mt-1 mb-2 text-sm">
+    <div className="text-ctext-primary px-4 text-left relative">
+      <div className="mt-1 mb-2 text-sm flex flex-row">
         <RadioOption options={payOptions} onChange={handleRadioChange} />
+        <img src={info_circle} alt="info" className='cursor-pointer' data-tooltip-id='cool-tooltip'/>
       </div>
+      <ReactTooltip
+        id='cool-tooltip'
+        place='bottom'
+        className='z-50 w-[90%] absolute'
+        style={{width:'90%'}}
+        >
+          <div className="text-xs font-bold">What should I know about Cooling off Period?</div>
+            <ul className='list-outside list-decimal pl-3 pt-1 text-xs'>
+              <li>To ensure you have sufficient time for careful consideration, we provide you with the option of a cooling-off period.</li>
+              <li>The cooling-off period can only be utilized within 24 hours after borrowing.</li>
+              <li>Repayments made during the cooling-off period will be subject to an additional third-party service fee, which will be included in the total repayment amount.</li>
+              <li>If you decide to repay during the cooling-off period, you must repay the entire loan amount, and partial payments are not allowed.</li>
+              <li>We encourage you to take the time to carefully consider your borrowing decision within the cooling-off period to ensure it aligns with your needs.</li>
+            </ul>
+      </ReactTooltip>
       <div>
         <div className="mt-3 text-xs">{t('Payment Amount (PKR)')}</div>
         <ValidateInput
