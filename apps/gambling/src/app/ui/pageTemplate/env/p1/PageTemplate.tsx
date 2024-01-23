@@ -156,24 +156,24 @@ showToolboxConfig
       {/*Refactor ME*/}
       {contextHolder}
 
-      {/*{!isMobile && isShowDesktopHeader && (*/}
-      {/*  <Header*/}
-      {/*    onClickToDownload={onClickToDownload}*/}
-      {/*    isLogin={isLogin}*/}
-      {/*    onClickUserLoginStatusDrawer={() => {*/}
-      {/*      // setOpenNonMobileUserLoginStatusDrawer(true);*/}
-      {/*      showLoginModal(true)*/}
-      {/*    }}*/}
-      {/*    className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}*/}
-      {/*    onClickToOpenNotificationDrawer={() => {*/}
-      {/*      setOpenDesktopNotificationDrawer(true)*/}
-      {/*    }}*/}
-      {/*    onClickToChangeLogoutPopover={(display: boolean) => {*/}
-      {/*      setOpenLogoutPopover(display);*/}
-      {/*    }}*/}
-      {/*    openLogoutPopover={isShowMobileLogoutModal}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {!isMobile && isShowDesktopHeader && (
+       <Header
+          onClickToDownload={onClickToDownload}
+          isLogin={isLogin}
+          onClickUserLoginStatusDrawer={() => {
+            // setOpenNonMobileUserLoginStatusDrawer(true);
+            showLoginModal(true)
+          }}
+          className={"fixed top-0 left-0 right-0 w-full h-[100px] z-10"}
+          onClickToOpenNotificationDrawer={() => {
+            setOpenDesktopNotificationDrawer(true)
+          }}
+          onClickToChangeLogoutPopover={(display: boolean) => {
+            setOpenLogoutPopover(display);
+          }}
+          openLogoutPopover={isShowMobileLogoutModal}
+        />
+      )}
 
       <div className={"h-full flex flex-row"}>
         {/*{isShowDesktopMenuDrawer && openMenuDrawer && (*/}
@@ -194,7 +194,7 @@ showToolboxConfig
 
         <div className={cx("w-full h-full", {
           "relative": !isMobile,
-          "top-[100px]": isShowDesktopHeader,
+          // "top-[100px]": isShowDesktopHeader,
           "left-[276px] w-[calc(100vw-276px)]": !isMobile && isShowDesktopMenuDrawer,
           "bg-[]": !isCurrentPageCompanyProfile && !isMobile,//背景色
         })} style={{

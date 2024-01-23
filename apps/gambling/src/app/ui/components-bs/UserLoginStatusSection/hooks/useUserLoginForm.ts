@@ -40,7 +40,7 @@ export const useUserLoginForm = (props: IUseUserLoginForm) => {
 
 
   const {deviceId} = useGetDeviceId(phoneInput.data, "login");
-  console.log("[useGetDeviceId] login.deviceId", deviceId);
+ //  console.log("[useGetDeviceId] login.deviceId", deviceId);
 
   const {onFormConfirm} = useForm({
 

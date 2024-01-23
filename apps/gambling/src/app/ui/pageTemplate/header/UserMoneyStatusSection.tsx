@@ -14,5 +14,5 @@ export const UserMoneyStatusSection = (props: IProps) => {
     "u2": (
       <RUserMoneyStatusSection/>
     )
-  }, <UserMoneyStatusSection/>)
+  }, <CUserMoneyStatusSection/>)
 }

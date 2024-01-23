@@ -10,6 +10,7 @@ import {environment} from "../../../../environments/environment";
 import {tcx} from "../../utils/tcx";
 
 import {renderByUVersion} from "../../utils/renderByUVersion";
+import PernambucanaDailySignInPage from './env/pernambucana/DailySignInPage';
 import WDailySignInPage from "./env/wild/DailySignInPage";
 import CocoDailySignInPage from "./env/u1/DailySignInPage";
 import RioDailySignInPage from "./env/u2"
@@ -195,24 +196,11 @@ export const DailySignInPage = () => {
         signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
       />
     )
-  }, (
-    <CocoDailySignInPage
-      onClickToSignIn={onClickToSignIn}
-      signInConfig={signInConfig?.data?.signInConfig || []}
-      signInAllConfig={signInConfig?.data?.signInAllConfig || []}
-      signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
-      todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
-      vipLevel={signInConfig?.data?.vipLevel || 0}
-      currentSelectedLevel={currentSelectedLevel}
-      setCurrentSelectedLevel={setCurrentSelectedLevel}
-    />
-  ))
-
-  // (
-  //   <PernambucanaDailySignInPage
+  },
+  //   (
+  //   <CocoDailySignInPage
   //     onClickToSignIn={onClickToSignIn}
-  //     currentLevel={signInConfig?.data?.vipLevel || 0}
-  //     signInConfig={signInConfig?.data?.signInConfig}
+  //     signInConfig={signInConfig?.data?.signInConfig || []}
   //     signInAllConfig={signInConfig?.data?.signInAllConfig || []}
   //     signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
   //     todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
@@ -221,4 +209,18 @@ export const DailySignInPage = () => {
   //     setCurrentSelectedLevel={setCurrentSelectedLevel}
   //   />
   // ))
+
+  (
+    <PernambucanaDailySignInPage
+      onClickToSignIn={onClickToSignIn}
+      currentLevel={signInConfig?.data?.vipLevel || 0}
+      signInConfig={signInConfig?.data?.signInConfig}
+      signInAllConfig={signInConfig?.data?.signInAllConfig || []}
+      signInTotalDays={signInConfig?.data?.signInTotalDays || 0}
+      todayIsSignIn={signInConfig?.data?.todayIsSignIn || false}
+      vipLevel={signInConfig?.data?.vipLevel || 0}
+      currentSelectedLevel={currentSelectedLevel}
+      setCurrentSelectedLevel={setCurrentSelectedLevel}
+    />
+  ))
 };

@@ -66,9 +66,9 @@
 
   /*NOTE: 沒用到*/
   /*--background-tabbar: #152951;*/
-  --background-tabbar: linear-gradient(to right, rgba(41, 31, 46, 0.5), #36293D);
+  --background-tabbar: #291F2E7F;
   /*NOTE: 沒用到*/
-  --background-header: linear-gradient(to right, rgba(41, 31, 46, 0.5), #36293D);
+  --background-header: #291F2E7F;
 
 
   /*NOTE: 得重構*/
@@ -310,10 +310,11 @@
   --drawer-border: rgba(50,63,91,.7);
 
   /* riojungle777bet */
-  --background-tabbar: rgba(41, 31, 46, 0.5);
-  --background-tabbar-from: rgba(41, 31, 46, 0.5);
+
+  --background-tabbar: #291F2E7F;
+  --background-tabbar-from: #291F2E7F;
   --background-tabbar-to: #36293D;
-  --background-header-from: rgba(41, 31, 46, 0.5);
+  --background-header-from: #291F2E7F;
   --background-header-to: #36293D;
 
   --gray-scale-10: #1A1A1A;

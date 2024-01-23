@@ -90,9 +90,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             // (isTablet) && "h-[calc(100dvh-72px)]",
             // (isDesktop) && "h-[calc(100dvh-72px)]",
             // (isTablet||isDesktop) && "h-full",
-            // TODO
-            "bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto",
-            // "bg-[linear-gradient(90deg, var(--background-tabbar-from), v ar(--background-tabbar-to))] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto",
+            // "bg-[linear-gradient(90deg,_#262626_50%,#333333_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto",
+            "bg-[linear-gradient(90deg,var(--background-tabbar-from),var(--background-tabbar-to))] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-between pb-5 gap-3 items-start overflow-auto",
             "relative"
           )}
           onMouseDown={(event) => {
@@ -116,7 +115,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className="border-solid border-[var(--grayscale-30)] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
+                className="border-solid border-[var(--grayscale-30)] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[var(--background-tabbar-to)] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
                 onClick={() => {
                   onClickToFirstDeposit();
                   close();
@@ -140,7 +139,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
 
             <div className={"w-full flex flex-col px-5"}>
               <button
-                className="border-solid border-[var(--grayscale-30)] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[#333333] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
+                className="border-solid border-[var(--grayscale-30)] shadow-[0px_2px_4px_-1px_rgba(0,_0,_0,_0.06),_0px_4px_6px_-1px_rgba(0,_0,_0,_0.1)] overflow-hidden bg-[var(--background-tabbar-to)] flex flex-row justify-between pl-3 gap-2 items-start border rounded-lg"
                 onClick={() => {
                   onClickToDepositCashback();
                   close();
