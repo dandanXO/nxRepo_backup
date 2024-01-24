@@ -58,12 +58,14 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
     coupon,
     orderNo,
     repayTypeList,
+    repaymentAmountForDemo,
   } = repaymentData;
+
   const handleRadioChange = (e: any) => {
     if (e === 'balance') {
       setBalanceValue({
         ...balanceValue,
-        data: `${environment.currency} ${balance}`,
+        data: `${environment.currency} ${repaymentAmountForDemo}`,
       });
     }
     setRadioValue(e);
@@ -97,7 +99,7 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
           labelType="none"
           outlineType="standard"
           placeholder="8,500"
-          value={`${balanceValue.data}`}
+          value = {`${environment.currency} ${repaymentAmountForDemo}`}
           disabled={radio === 'balance'}
           inputData={balanceValue}
           setInputData={setBalanceValue}
@@ -125,53 +127,53 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
         />
       </div>
 
-      {radio !== 'custom' && (
-        <>
-          <div className="mt-2.5 text-xs">{t('Coupon (PKR)')}</div>
-          <div
-            className="flex items-center justify-center border-b border-solid border-[#aaaaaa] py-1.5 pl-5 pr-4"
-            onClick={() => {
-              if (repayTypeList === undefined) return;
-              navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`,
-              {
-                state: {
-                  ...location.state,
-                  paymentAmount: balance,
-                },
-              }
-            );
-            }}
-          >
-            <div
-              className={cx('flex grow flex-nowrap justify-between text-base', {
-                'text-primary-main': coupon !== undefined && coupon !== null,
-              })}
-            >
-              {coupon ? (
-                <div className="flex grow justify-between">
-                  <div className="self-center">- {coupon.discountAmount}</div>
-                  <div className="text-ctext-secondary flex flex-col text-xs">
-                    <div>{t('expiration date')}</div>
-                    <div className="">
-                      {coupon.expireTime
-                        ? formatDate(moment(coupon.expireTime))
-                        : ''}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div>{t('Select')}</div>
-              )}
-              <RiArrowRightSLine className="fill-[#CCCCCC] text-2xl" />
-            </div>
-          </div>
-        </>
-      )}
+      {/*{radio !== 'custom' && (*/}
+      {/*  <>*/}
+      {/*    <div className="mt-2.5 text-xs">{t('Coupon (PKR)')}</div>*/}
+      {/*    <div*/}
+      {/*      className="flex items-center justify-center border-b border-solid border-[#aaaaaa] py-1.5 pl-5 pr-4"*/}
+      {/*      onClick={() => {*/}
+      {/*        if (repayTypeList === undefined) return;*/}
+      {/*        navigate(`${PageOrModalPathEnum.RepaymentDetailPage}/repayment-coupon-modal?token=${getToken()}&orderNo=${getOrderNo()}`,*/}
+      {/*        {*/}
+      {/*          state: {*/}
+      {/*            ...location.state,*/}
+      {/*            paymentAmount: balance,*/}
+      {/*          },*/}
+      {/*        }*/}
+      {/*      );*/}
+      {/*      }}*/}
+      {/*    >*/}
+      {/*      <div*/}
+      {/*        className={cx('flex grow flex-nowrap justify-between text-base', {*/}
+      {/*          'text-primary-main': coupon !== undefined && coupon !== null,*/}
+      {/*        })}*/}
+      {/*      >*/}
+      {/*        {coupon ? (*/}
+      {/*          <div className="flex grow justify-between">*/}
+      {/*            <div className="self-center">- {coupon.discountAmount}</div>*/}
+      {/*            <div className="text-ctext-secondary flex flex-col text-xs">*/}
+      {/*              <div>{t('expiration date')}</div>*/}
+      {/*              <div className="">*/}
+      {/*                {coupon.expireTime*/}
+      {/*                  ? formatDate(moment(coupon.expireTime))*/}
+      {/*                  : ''}*/}
+      {/*              </div>*/}
+      {/*            </div>*/}
+      {/*          </div>*/}
+      {/*        ) : (*/}
+      {/*          <div>{t('Select')}</div>*/}
+      {/*        )}*/}
+      {/*        <RiArrowRightSLine className="fill-[#CCCCCC] text-2xl" />*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </>*/}
+      {/*)}*/}
 
       <div className="mt-3 font-bold">
         <ListItem
           title={t('Repayment Amount')}
-          text={<Money money={repayAmount || 0} />}
+          text={<Money money={Number(repaymentAmountForDemo || 0)} />}
         />
       </div>
 

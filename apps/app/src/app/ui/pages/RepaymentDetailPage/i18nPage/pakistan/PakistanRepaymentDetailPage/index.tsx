@@ -1,23 +1,23 @@
-import { RootState } from 'apps/app/src/app/reduxStore';
+import {RootState} from 'apps/app/src/app/reduxStore';
 import cx from 'classnames';
 import moment from 'moment';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import {useTranslation} from 'react-i18next';
+import {useSelector} from 'react-redux';
+import {useNavigate} from 'react-router';
 
-import { AmountPaidIcon } from '@frontend/mobile/shared/ui';
+import {AmountPaidIcon} from '@frontend/mobile/shared/ui';
 
-import { getToken } from '../../../../../../application/getToken';
-import { GetLoanDetailResponse } from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
-import { getOrderNo } from '../../../../../../externel/window/querystring/getOrderNo';
-import { formatDate } from '../../../../../../modules/format/formatDate';
+import {getToken} from '../../../../../../application/getToken';
+import {GetLoanDetailResponse} from '../../../../../../externel/backend/loanService/GetLoanDetailResponse';
+import {getOrderNo} from '../../../../../../externel/window/querystring/getOrderNo';
+import {formatDate} from '../../../../../../modules/format/formatDate';
 import Money from '../../../../../components/Money';
-import { Button } from '../../../../../core-components/Button';
+import {Button} from '../../../../../core-components/Button';
 import Divider from '../../../../../core-components/Divider';
 import ListItem from '../../../../../core-components/ListItem';
-import { Status } from '../../../../../statusEnum';
-import { useDynamicChargeFeeList } from '../../../hooks/useDynamicChargeFeeList';
-import { i18nLoanDetailsPage } from '../../../translations';
+import {Status} from '../../../../../statusEnum';
+import {useDynamicChargeFeeList} from '../../../hooks/useDynamicChargeFeeList';
+import {i18nLoanDetailsPage} from '../../../translations';
 import RepaymentDetailDemo from '../RepaymentDetailDemo';
 
 type IRepaymentDetailPage = {
@@ -26,7 +26,7 @@ type IRepaymentDetailPage = {
 };
 const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const navigate = useNavigate();
-  const { currentData, isFetching = true } = props || {};
+  const {currentData, isFetching = true} = props || {};
   const {
     status = '',
     productName = '',
@@ -59,7 +59,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
   const finalItems = useDynamicChargeFeeList(
     props.currentData?.chargeFeeDetail?.items || undefined
   );
-  const { t } = useTranslation(i18nLoanDetailsPage.namespace);
+  const {t} = useTranslation(i18nLoanDetailsPage.namespace);
 
   const renderStatusTag = (status: string) => {
     return (
@@ -68,7 +68,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
       </div>
     );
   };
-  const { app } = useSelector((state: RootState) => state);
+  const {app} = useSelector((state: RootState) => state);
 
   const isTodayRepayment =
     formatDate(moment(applyDate)) === formatDate(moment()) &&
@@ -142,19 +142,19 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
           />
         )}
 
-        <Divider />
+        <Divider/>
 
         {/*NOTICE: 合同金*/}
         {/*<ListItem title={'Loan Amount'} text={<Money money={orderAmount}/>} titleColor="text-ctext-secondary" />*/}
-        <RepaymentDetailDemo loanAmount={loanAmount} />
-        {/* {isTodayRepayment ? (
-          <RepaymentDetailDemo loanAmount={loanAmount} />
+
+        {isTodayRepayment ? (
+          <RepaymentDetailDemo loanAmount={loanAmount}/>
         ) : (
           <>
             {status !== 'EXTEND' && (
               <ListItem
                 title={t('Disbursal Amount')}
-                text={<Money money={loanAmount} />}
+                text={<Money money={loanAmount}/>}
                 titleColor="text-ctext-secondary"
                 textColor="text-ctext-primary"
                 isFetching={isFetching}
@@ -167,13 +167,13 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 return (
                   <ListItem
                     title={item.itemName}
-                    text={<Money money={item.value} />}
+                    text={<Money money={item.value}/>}
                     titleColor="text-ctext-secondary"
                     textColor="text-ctext-primary"
                     isFetching={isFetching}
                   />
                 );
-              })} */}
+              })}
 
             {/* {status !== 'EXTEND' && (
           <ListItem
@@ -183,11 +183,10 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             textColor="text-ctext-primary"
           />
         )} */}
-
-            {/* {status === 'EXTEND' && (
+            {status === 'EXTEND' && (
               <ListItem
                 title={t('Extension Fee')}
-                text={<Money money={extensionFee} />}
+                text={<Money money={extensionFee}/>}
                 titleColor="text-ctext-secondary"
                 textColor="text-ctext-primary"
                 isFetching={isFetching}
@@ -207,7 +206,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
             />
             <ListItem
               title={t('Overdue Fee')}
-              text={<Money money={penaltyInterest} />}
+              text={<Money money={penaltyInterest}/>}
               titleColor="text-ctext-secondary"
               textColor={
                 status === 'OVERDUE'
@@ -217,12 +216,12 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               isFetching={isFetching}
             />
 
-            <Divider />
+            <Divider/>
 
             {status !== 'EXTEND' && (
               <ListItem
                 title={t('coupon')}
-                text={<Money money={coupon} isNagetive={true} />}
+                text={<Money money={coupon} isNagetive={true}/>}
                 titleColor="text-ctext-secondary"
                 textColor="text-ctext-primary"
                 isFetching={isFetching}
@@ -231,7 +230,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
 
             <ListItem
               title={t('Reduction Amount')}
-              text={<Money money={reductionAmount} isNagetive={true} />}
+              text={<Money money={reductionAmount} isNagetive={true}/>}
               titleColor="text-ctext-secondary"
               textColor="text-ctext-primary"
               isFetching={isFetching}
@@ -249,26 +248,26 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                           orderNo ?? getOrderNo()
                         }`,
                         {
-                          state: { repayRecords },
+                          state: {repayRecords},
                         }
                       );
                     }}
                   >
-                    <img src={AmountPaidIcon} />
+                    <img src={AmountPaidIcon}/>
                   </div>
                 </div>
               }
-              text={<Money money={paidAmount} isNagetive={true} />}
+              text={<Money money={paidAmount} isNagetive={true}/>}
               textColor="text-ctext-primary"
               isFetching={isFetching}
             />
 
-            <Divider /> */}
+            <Divider/>
             {/*NOTE: 總應還金額*/}
-            {/* {status !== 'EXTEND' && (
+            {status !== 'EXTEND' && (
               <ListItem
                 title={t('Repayment Amount')}
-                text={<Money money={balance} />}
+                text={<Money money={balance}/>}
                 className="font-bold"
                 titleColor={
                   status === 'OVERDUE'
@@ -282,13 +281,13 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 }
                 isFetching={isFetching}
               />
-            )} */}
+            )}
 
             {/*NOTE: 總展期金額 (Extension Fee + Overdue Fee) 欄位後端有提供 狀態為EXTEND -> totalRepayAmount */}
-            {/* {status === 'EXTEND' && (
+            {status === 'EXTEND' && (
               <ListItem
                 title={t('Total Extension Fee')}
-                text={<Money money={totalRepayAmount} />}
+                text={<Money money={totalRepayAmount}/>}
                 titleColor="text-ctext-primary"
                 textColor="text-ctext-primary"
                 className="font-bold"
@@ -296,7 +295,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               />
             )}
           </>
-        )} */}
+        )}
         <div className={`my-3 flex flex-row text-white`}>
           {extendable !== undefined && extendable && (
             <div
@@ -312,7 +311,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
               }}
               className={`mr-1.5 grow `}
             >
-              <Button type={'ghost'} text={t('Extend')} />
+              <Button type={'ghost'} text={t('Extend')}/>
             </div>
           )}
           {status !== 'PAY_OFF' && status !== 'EXTEND' && (
@@ -332,7 +331,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                 'ml-1.5': extendable,
               })}
             >
-              <Button text={t('Repay')} primaryTypeGradient={true} />
+              <Button text={t('Repay')} primaryTypeGradient={true}/>
             </div>
           )}
         </div>
@@ -383,7 +382,7 @@ const PakistanRepaymentDetailPage = (props: IRepaymentDetailPage) => {
                       orderNo ?? getOrderNo()
                     }`,
                     {
-                      state: { orderNo },
+                      state: {orderNo},
                     }
                   );
                 }}

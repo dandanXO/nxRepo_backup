@@ -1,7 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
-import { GetLoanDetailResponse } from '../externel/backend/loanService/GetLoanDetailResponse';
-import { GetCouponApplicableList } from '../externel/backend/userService/GetCouponApplicableListResponse';
+import {GetLoanDetailResponse} from '../externel/backend/loanService/GetLoanDetailResponse';
+import {GetCouponApplicableList} from '../externel/backend/userService/GetCouponApplicableListResponse';
 
 export type repaymentDetailPageInitialStateType = {
   repaymentDetail: GetLoanDetailResponse | undefined;
@@ -19,6 +19,7 @@ export type repaymentDetailPageInitialStateType = {
     payTypeNoteList?: { value: string; label: string }[];
     onlineRepayTypeList?: { value: string; label: string }[];
     offlineRepayTypeList?: { value: string; label: string }[];
+    repaymentAmountForDemo?: number | string;
   };
 };
 
@@ -34,10 +35,11 @@ export const repaymentDetailPageInitialState: repaymentDetailPageInitialStateTyp
       coupon: null,
       radio: 'balance',
       repayTypeList: [],
-      payTypeNote: { value: '', label: '' },
+      payTypeNote: {value: '', label: ''},
       payTypeNoteList: [],
       onlineRepayTypeList: [],
       offlineRepayTypeList: [],
+      repaymentAmountForDemo: 0,
     },
   };
 
