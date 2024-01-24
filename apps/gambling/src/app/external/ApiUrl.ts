@@ -4,11 +4,13 @@ const FORGET_PASSWORD_URL = '/prod-api/player/sign-in'  // 忘記密碼
 const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo'
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive'
 const GET_BOX_RECEIVE_RECORD_URL = '/japi/invite/boxConfig/boxReceiveRecord'
+const GET_BOX＿INVITE_LIST_URL = '/japi/invite/boxConfig/boxInviteList'
 
 export {
   DOWN_LOAD_URL,
   FORGET_PASSWORD_URL,
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,
-  GET_BOX_RECEIVE_RECORD_URL
+  GET_BOX_RECEIVE_RECORD_URL,
+  GET_BOX＿INVITE_LIST_URL
 }

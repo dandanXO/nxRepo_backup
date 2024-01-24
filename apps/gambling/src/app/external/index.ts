@@ -18,6 +18,7 @@ import { WithdrawEndpoint } from './WithdrawEndpoint';
 import {SendForgetPasswordSMSCodeEndpoint} from "./SendForgetPasswordSMSCodeEndpoint";
 import {WithdrawInfoGetEndpoint} from "./WithdrawInfoGetEndpoint";
 import {Page} from "./types/Page";
+import { GetBoxInviteListEndpoint } from "./GetBoxInviteListEndpoint";
 import { GetBoxInfoEndpoint } from "./GetBoxInfoEndpoint";
 import { GetBoxReceiveEndpoint } from "./GetBoxReceiveEndpoint";
 import { GetBoxReceiveRecordEndpoint } from "./GetBoxReceiveRecordEndpoint";
@@ -637,6 +638,7 @@ export const API = createApi({
       getGameList: GetGameListEndpoint(builder),
       download: DownloadEndpoint(builder),
       getBoxInfo: GetBoxInfoEndpoint(builder),
+      getBoxInviteList: GetBoxInviteListEndpoint(builder),
       getBoxReceive: GetBoxReceiveEndpoint(builder),
       getBoxReceiveRecordEndpoint: GetBoxReceiveRecordEndpoint(builder),
       getVIPInfo: builder.mutation<GetVIPInfoResponse, GetVIInfoPRequest>({
@@ -838,7 +840,8 @@ export const {
   useGetMailCountMutation,
   useGetBoxInfoMutation,
   useLazyGetBoxReceiveQuery,
-  useLazyGetBoxReceiveRecordEndpointQuery
+  useLazyGetBoxReceiveRecordEndpointQuery,
+  useGetBoxInviteListMutation
 } = API;
 
 export const API3 = createApi({

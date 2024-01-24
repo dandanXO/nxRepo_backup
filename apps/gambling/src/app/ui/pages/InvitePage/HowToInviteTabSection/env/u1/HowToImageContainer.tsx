@@ -3,7 +3,7 @@ import shareListImg from "../common/share-list.png";
 import { HowToImageText } from "../common/HowToImageText";
 import { InviteCopySection } from "./InviteCopySection";
 import cx from 'classnames';
-import { environment } from "apps/gambling/src/environments/environment";
+import { environment } from "../../../../../../../environments/environment";
 import useBreakpoint from "../../../../../pageTemplate/hooks/useBreakpoint";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../../../../reduxStore";
@@ -46,6 +46,33 @@ export const HowToImage = (props: any) => {
         {!isMobile && <div className="border-r border-r-solid border-white mx-11 sm:mx-5"></div>}
         <div className={" flex-1 flex flex-col items-center sm:items-start"}>
           <div className={"text-white my-3.5 sm:mt-0 sm:mb-2 text-sm md:text-xl"}>{`Passo 2 : Partilhar ligações através de software social`}</div>
+          <img className={"w-[400px]"} src={`assets/${environment.uVersion}/pic_social_media_logo.png`} />
+        </div>
+      </div>
+    </HowToImageContainer>
+  )
+}
+
+export const BoxHowToImage = (props: any) => {
+  const { isMobile } = useBreakpoint();
+  const invite_hig_reward = useSelector((rootState: RootState) => rootState.app.config.invite_hig_reward)
+
+  return (
+    <HowToImageContainer className={cx(`${props.className} rounded-lg`, {
+      'bg-[#FFFFFF1A]': isMobile,
+      'px-8': isMobile,
+      'py-5': isMobile
+    })}>
+      <div className={cx("w-full flex flex-col text-left sm:text-left sm:flex-col sm:rounded-lg sm:pb-4 sm:pt-5 sm:px-8", {
+        ' bg-[#FFFFFF1A]': !isMobile
+      })}>
+        <div className={'flex-1'}>
+          <p className="mb-3.5 sm:mb-2 text-white text-sm md:text-xl">{`Link exclusivo`}</p>
+          <InviteCopySection />
+        </div>
+        {!isMobile && <div className="border-r border-r-solid border-white mx-11 sm:mx-5"></div>}
+        <div className={" mt-6 flex-1 flex flex-col items-start sm:items-start"}>
+          <div className={"text-white w-full text-left my-3.5 sm:mt-0 sm:mb-2 text-sm md:text-xl"}>{`Partilha rápida`}</div>
           <img className={"w-[400px]"} src={`assets/${environment.uVersion}/pic_social_media_logo.png`} />
         </div>
       </div>
