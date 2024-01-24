@@ -19,6 +19,12 @@ import mapleLeaf02 from "./image/mapleLeaf/maple02.png"
 import mapleLeaf03 from "./image/mapleLeaf/maple03.png"
 import mapleLeaf04 from "./image/mapleLeaf/maple04.png"
 import mapleLeaf05 from "./image/mapleLeaf/maple05.png"
+import coin01 from "./image/coins/coin01.png"
+import coin02 from "./image/coins/coin02.png"
+import coin03 from "./image/coins/coin03.png"
+import coin04 from "./image/coins/coin04.png"
+import coin05 from "./image/coins/coin05.png"
+
 import {environment} from "../../../../../environments/environment";
 
 type IParticle = {
@@ -32,6 +38,8 @@ type IParticle = {
 
 function snowImages() {
   switch (environment.snowEffects) {
+    case "coins":
+      return [coin01, coin02, coin03, coin04, coin05]
     case "snowDot":
       return [snowDot01, snowDot02, snowDot03, snowDot04, snowDot05];
     case "sakura":
