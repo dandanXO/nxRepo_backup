@@ -32,6 +32,8 @@ const GET_BOX_INFO_URL = '/japi/invite/boxConfig/boxInfo' // 取得寶箱歷程
 const GET_BOX_RECEIVE_URL = '/japi/invite/boxConfig/boxReceive' // 領取寶箱
 const GET_BOX_RECEIVE_RECORD_URL = '/japi/invite/boxConfig/boxReceiveRecord' // 取得寶箱領取紀錄
 
+const GET_BOX＿INVITE_LIST_URL = '/japi/invite/boxConfig/boxInviteList'
+
 export {
   DOWN_LOAD_URL,
   FORGET_PASSWORD_URL,
@@ -61,4 +63,5 @@ export {
   GET_BOX_INFO_URL,
   GET_BOX_RECEIVE_URL,
   GET_BOX_RECEIVE_RECORD_URL,
+  GET_BOX＿INVITE_LIST_URL
 }

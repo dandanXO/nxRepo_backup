@@ -19,7 +19,7 @@ export type GetBoxReceiveRecordResponse = {
 
 
 // 寶箱領取紀錄
-export const GetBoxReceiveRecordEndpoint = (builder: ExternelEndpoint) => builder.query<GetBoxReceiveRecordResponse, number>({
+export const GetBoxReceiveRecordEndpoint = (builder: ExternelEndpoint) => builder.query<GetBoxReceiveRecordResponse, {token: string}>({
   query: () => ({
     method: 'get',
     url: GET_BOX_RECEIVE_RECORD_URL
