@@ -28,7 +28,7 @@ export const i18nRepaymentModal: i18nComponent = {
       'Coupon (PKR)': 'Coupon (PKR)',
       'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.':
         'To protect your rights, we strongly recommend that you take a screenshot of the repayment details after completing the repayment, and upload your screenshot to the app.',
-
+      'Cooling off Period':'Cooling off Period ',
       // MX
       'Payment Amount': 'Payment Amount',
       'Coupon (MXN)': 'Coupon (MXN)',

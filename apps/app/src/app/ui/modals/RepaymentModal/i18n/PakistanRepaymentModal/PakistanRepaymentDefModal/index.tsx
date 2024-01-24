@@ -7,25 +7,25 @@ import { useLocation, useNavigate } from 'react-router';
 
 import { Input, Radio } from '@frontend/mobile/shared/ui';
 
-import { environment } from '../../../../../../environments/environmentModule/environment';
-import { getToken } from '../../../../../application/getToken';
-import { formatDate } from '../../../../../modules/format/formatDate';
-import { PageOrModalPathEnum } from '../../../../PageOrModalPathEnum';
-import Money from '../../../../components/Money';
+import { environment } from '../../../../../../../environments/environmentModule/environment';
+import { getToken } from '../../../../../../application/getToken';
+import { formatDate } from '../../../../../../modules/format/formatDate';
+import { PageOrModalPathEnum } from '../../../../../PageOrModalPathEnum';
+import Money from '../../../../../components/Money';
 // import useRepayCreate from "../../hooks/useRepayCreate";
 // import useRepayTypes from "../../hooks/useRepayTypes";
-import { Button } from '../../../../core-components/Button';
-import ListItem from '../../../../core-components/ListItem';
-import Select from '../../../../core-components/Select';
-import { selectStyles } from '../../../../core-components/selectStyles';
-import { IRepaymentModalProps } from '../../index';
-import AdSVG from '../../repayment_banner.svg';
-import { i18nRepaymentModal } from '../translations';
+import { Button } from '../../../../../core-components/Button';
+import ListItem from '../../../../../core-components/ListItem';
+import Select from '../../../../../core-components/Select';
+import { selectStyles } from '../../../../../core-components/selectStyles';
+import { IRepaymentModalProps } from '../../../index';
+import AdSVG from '../../../repayment_banner.svg';
+import { i18nRepaymentModal } from '../../translations';
 import { RootState } from 'apps/app/src/app/reduxStore';
 import { useSelector } from 'react-redux';
-import { RadioOption } from '../../../../core-components/RadioOption';
-import ValidateInput from '../../../../core-components/ValidateInput';
-import { validateBalance } from '../validation';
+import { RadioOption } from '../../../../../core-components/RadioOption';
+import ValidateInput from '../../../../../core-components/ValidateInput';
+import { validateBalance } from '../../validation';
 import { getOrderNo } from 'apps/app/src/app/externel/window/querystring/getOrderNo';
 
 

@@ -1,30 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useTranslation, withTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useTranslation, withTranslation} from 'react-i18next';
+import {useDispatch, useSelector} from 'react-redux';
+import {useLocation} from 'react-router';
 
-import {
-  IndiaCountry,
-  MexicoCountry,
-  PakistanCountry,
-  PhilippinesCountry,
-} from '@frontend/shared/domain';
-
-import { environment } from '../../../../environments/environmentModule/environment';
-import { getOrderNo } from '../../../externel/window/querystring/getOrderNo';
-import { renderByCountry } from '../../../modules/i18n';
-import { RootState } from '../../../reduxStore';
-import { repaymentDetailPageSlice } from '../../../reduxStore/repaymentDetailPageSlice';
+import {IndiaCountry, MexicoCountry, PakistanCountry, PhilippinesCountry,} from '@frontend/shared/domain';
+import moment from 'moment';
+import {environment} from '../../../../environments/environmentModule/environment';
+import {getOrderNo} from '../../../externel/window/querystring/getOrderNo';
+import {renderByCountry} from '../../../modules/i18n';
+import {RootState} from '../../../reduxStore';
+import {repaymentDetailPageSlice} from '../../../reduxStore/repaymentDetailPageSlice';
 import Modal from '../../core-components/Modal';
-import { InputValue } from '../../core-components/form/InputValue';
+import {InputValue} from '../../core-components/form/InputValue';
 import useRepayCreate from '../../hooks/useRepayCreate';
-import useRepayTypes from '../../hooks/useRepayTypes';
-import { RepaymentDetailPageUseCaseActions } from '../../pages/RepaymentDetailPage/userUsecaseSaga';
+import {RepaymentDetailPageUseCaseActions} from '../../pages/RepaymentDetailPage/userUsecaseSaga';
 import IndiaRepaymentModal from './i18n/IndiaRepaymentModal';
 import MexicoRepaymentModal from './i18n/MexicoRepaymentModal';
-import PakistanRepaymentModal from './i18n/PakistanRepaymentModal';
+import PakistanRepaymentModal from './i18n/PakistanRepaymentModal/PakistanRepaymentDefModal/index'
+import PakistanRepaymentDemoModal from './i18n/PakistanRepaymentModal/PakistanRepaymentDemoModal/index'
 import PhilippinesRepaymentModal from './i18n/PhilippinesRepaymentModal';
-import { i18nRepaymentModal } from './i18n/translations';
+import {formatDate} from '../../../modules/format/formatDate';
+import {i18nRepaymentModal} from './i18n/translations';
 
 type paymentMethodValueType = {
   type: string;
@@ -47,13 +43,13 @@ export interface IRepaymentModalProps {
 
 const RepaymentModal = (props: any) => {
   const location = useLocation();
-  const { t } = useTranslation(i18nRepaymentModal.namespace);
+  const {t} = useTranslation(i18nRepaymentModal.namespace);
 
-  const { handlePostRepayCreate, isPostRepayCreateLoading } = useRepayCreate();
+  const {handlePostRepayCreate, isPostRepayCreateLoading} = useRepayCreate();
 
   const dispatch = useDispatch();
-  const { repaymentData, repaymentDetail } = useSelector((state: RootState) => state.repaymentDetailPage);
-  const { balance = location.state.balance, orderNo = getOrderNo() } = repaymentDetail || {};
+  const {repaymentData, repaymentDetail} = useSelector((state: RootState) => state.repaymentDetailPage);
+  const {balance = location.state.balance, orderNo = getOrderNo(), applyDate, status} = repaymentDetail || {};
   const [radioValue, setRadioValue] = useState('balance');
 
   // NOTE: 變動數值
@@ -85,39 +81,43 @@ const RepaymentModal = (props: any) => {
   }, [radioValue, repaymentData.coupon, balanceData.data]);
 
   const handleRepayData = useCallback((data: any) => {
-    dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({ ...data }));
+    dispatch(repaymentDetailPageSlice.actions.updateRepaymentData({...data}));
   }, []);
 
   const handleConfirm = () => {
-   
-      const {
-        // balance,
-        repayAmount,
-        radio,
-        payType,
-        coupon,
-        orderNo,
-        // repayTypeList,
-      } = repaymentData;
-      if ( balanceData.data === '' || isPostRepayCreateLoading || orderNo === '') {
-        return;
-      }
 
-      if (payType && orderNo) {
-        const couponNo = radio === 'balance' && coupon ? coupon?.couponNo || '' : '';
-        handlePostRepayCreate(
-          false,
-          orderNo,
-          Number(repayAmount) || 0,
-          payType,
-          couponNo
-        );
-      }
+    const {
+      // balance,
+      repayAmount,
+      radio,
+      payType,
+      coupon,
+      orderNo,
+      // repayTypeList,
+    } = repaymentData;
+    if (balanceData.data === '' || isPostRepayCreateLoading || orderNo === '') {
+      return;
+    }
+
+    if (payType && orderNo) {
+      const couponNo = radio === 'balance' && coupon ? coupon?.couponNo || '' : '';
+      handlePostRepayCreate(
+        false,
+        orderNo,
+        Number(repayAmount) || 0,
+        payType,
+        couponNo
+      );
+    }
   };
+
+  const isTodayRepayment =
+    formatDate(moment(applyDate)) === formatDate(moment()) &&
+    status === 'UNPAID';
 
   return (
     <Modal
-      outlineTheme={ environment.country === MexicoCountry.country ? 'round' : undefined}
+      outlineTheme={environment.country === MexicoCountry.country ? 'round' : undefined}
       className={'overflow-auto'}
       maskclassName={environment.country === PhilippinesCountry.country ? 'px-4' : undefined}
     >
@@ -138,17 +138,26 @@ const RepaymentModal = (props: any) => {
                 isPostRepayCreateLoading={isPostRepayCreateLoading}
               />
             ),
-            [PakistanCountry.country]: (
-              <PakistanRepaymentModal
-                radioValue={radioValue}
-                setRadioValue={setRadioValue}
-                balanceValue={balanceData}
-                setBalanceValue={setbalanceData}
-                handleConfirm={handleConfirm}
-                handleRepayData={handleRepayData}
-                isPostRepayCreateLoading={isPostRepayCreateLoading}
-              />
-            ),
+            [PakistanCountry.country]: isTodayRepayment ? (
+                <PakistanRepaymentDemoModal
+                  radioValue={radioValue}
+                  setRadioValue={setRadioValue}
+                  balanceValue={balanceData}
+                  setBalanceValue={setbalanceData}
+                  handleConfirm={handleConfirm}
+                  handleRepayData={handleRepayData}
+                  isPostRepayCreateLoading={isPostRepayCreateLoading}
+                />) :
+              (<PakistanRepaymentModal
+                  radioValue={radioValue}
+                  setRadioValue={setRadioValue}
+                  balanceValue={balanceData}
+                  setBalanceValue={setbalanceData}
+                  handleConfirm={handleConfirm}
+                  handleRepayData={handleRepayData}
+                  isPostRepayCreateLoading={isPostRepayCreateLoading}
+                />
+              ),
             [MexicoCountry.country]: (
               <MexicoRepaymentModal
                 radioValue={radioValue}
