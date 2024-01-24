@@ -71,9 +71,9 @@ const PakistanRepaymentModal = (props: IRepaymentModalProps & any) => {
 
   return (
     <div className="text-ctext-primary px-4 text-left relative">
-      <div className="mt-1 mb-2 text-sm flex flex-row">
+      <div className="mt-1 mb-2 text-sm flex flex-row" data-tooltip-id='cool-tooltip'>
         <RadioOption options={payOptions} onChange={handleRadioChange} />
-        <img src={info_circle} alt="info" className='cursor-pointer' data-tooltip-id='cool-tooltip'/>
+        <img src={info_circle} alt="info" className='cursor-pointer'/>
       </div>
       <ReactTooltip
         id='cool-tooltip'
