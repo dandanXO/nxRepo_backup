@@ -10,7 +10,7 @@ import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";
 import { GetRechargeResponseOption, RechargeResponseConfig ,GetRechargeResponse} from "apps/gambling/src/app/external/RechargeInfoGetEndpoint";
 
-export type TotalSectionType = 'total' | 'deposite' | 'promotion'
+export type TotalSectionType = 'total' | 'deposit' | 'promotion'
 export interface ITotalSectionValues {
   [key: string]: {
     balance: number;

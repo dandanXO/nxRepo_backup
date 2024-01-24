@@ -47,7 +47,7 @@ export const TotalSectionContainer = (props: ITotalSectionContainer) => {
         />
         <div className='w-full flex absolute top-0 left-0 h-full  '>
           <IconTabItem selected={accountTab === 'total'} icon={iconTotal} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Total</div><div>Conta</div></div>} onClick={() => setAccountTab('total')} />
-          <IconTabItem selected={accountTab === 'deposite'} icon={iconDeposit} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Depositar</div><div>Conta</div></div>} onClick={() => setAccountTab('deposite')} />
+          <IconTabItem selected={accountTab === 'deposit'} icon={iconDeposit} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Depositar</div><div>Conta</div></div>} onClick={() => setAccountTab('deposit')} />
           <IconTabItem selected={accountTab === 'promotion'} icon={iconPromotion} text={<div className='flex flex-col md:flex-row'><div className='m-0 md:mr-1'>Conta</div><div>Promovida</div></div>} onClick={() => setAccountTab('promotion')} />
         </div>
       </div>
@@ -61,7 +61,7 @@ export const TotalSectionContainer = (props: ITotalSectionContainer) => {
           `}>
 
             {accountTab === 'total' && `“Total Da Conta” é o registro financeiro de “Depositar conta” e “Conta promovida” somados`}
-            {accountTab === 'deposite' && `Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc.`}
+            {accountTab === 'deposit' && `Uma conta que consiste no valor da recarga, recompensas pela participação em atividades, vitórias e derrotas no jogo, etc.`}
             {accountTab === 'promotion' && `Uma conta composta por recompensas por convidar amigos e retorno de comissões com base no valor da transação dos usuários convidados.`}
           </div>
           <div className='flex justify-around w-full '>
