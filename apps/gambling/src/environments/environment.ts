@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   uVersion: "u1",
+  mVersion: "m1",
   mvVersion: "v1",
   mockBackend: false,
   captcha: "/japi/user/captcha/image",

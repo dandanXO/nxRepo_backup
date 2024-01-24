@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
   uVersion: "u2",
+  mVersion: "m1",
   mvVersion: "m1v1",
   mockBackend: false,
   platformName: "Dev Rio Jungle bet",
