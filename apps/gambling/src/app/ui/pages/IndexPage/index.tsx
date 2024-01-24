@@ -23,6 +23,7 @@ import { SubTabItem } from "../../components-bs/TabItem/env/u2/TabItem";
 import {IndexPage as WIndexPage} from "./env/wild/IndexPage";
 import {IndexPage as CIndexPage} from "./env/u1/IndexPage";
 import {IndexPage as RIndexPage} from "./env/u2/IndexPage";
+import {IndexPage as PIndexPage} from "./env/p1/IndexPage";
 
 export const MobileGameNumber = 15;
 export const DesktopGameNumber = 30;
@@ -216,6 +217,22 @@ export const IndexPage = () => {
         setViewType={setExpandedBrand}
         setSearchInput={setSearchInput}
         gameList={gameList}
+        recentGameList={recentGameList}
+      />
+    ),
+    "p1": (
+      <PIndexPage
+        showFixForIOSStickTab={showFixForIOSStickTab}
+        scrollToCarousel={scrollToCarousel}
+        allGameList={allGameList}
+        label={label}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        setViewType={setExpandedBrand}
+        setSearchInput={setSearchInput}
+        gameList={gameList}
+        userFavorite={userFavorite}
+        onClickFavoriteGameItem={onClickFavoriteGameItem}
         recentGameList={recentGameList}
       />
     ),
