@@ -12,6 +12,11 @@ import {PageOrModalPathEnum} from "../../../../PageOrModalPathEnum";
 import {environment} from "../../../../../../environments/environment"
 import {PernambucanaAppCarouselContent} from "../../Carousel/env/pernambucana/PernambucanaAppCarouselContent";
 import { useClickFavoriteGameItem } from "../../../../hooks/useClickFavoriteGameItem";
+import { gameSlice, indexPagecurrentSelectLabel } from "../../../../../reduxStore/gameSlice";
+import { TabItem } from "../../../../components-bs/TabItem/TabItem";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../../../reduxStore";
+import { useEffect } from "react";
 
 
 export type TTotalFavoriteLocalState = {
@@ -53,8 +58,18 @@ export const IndexPage = ({
   userFavorite,
   onClickFavoriteGameItem
 }:IPernambucana777BetIndexPage) => {
+  const dispatch = useDispatch();
   const { isMobile } = useBreakpoint();
   const navigate = useNavigate();
+
+  const { indexPagecurrentSelectLabel } = useSelector((state:RootState)=> state.gameList)
+
+  useEffect(() => {
+    // 初始化 使用 redux
+    if (indexPagecurrentSelectLabel === "nothing_select") {
+      dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel('Todos'))
+    }
+  }, [])
 
   return (
     <>
@@ -78,7 +93,21 @@ export const IndexPage = ({
             <section className="flex flex-col bg-[rgba(1,62,66,0.6)] ml-20 p-4 rounded-lg " style={{ border: '1px solid #2CFD99' }}>
               <section className="mb-4 flex flex-row items-center px-4 w-full" style={{borderBottom: '1px solid rgb(44, 253, 153)'}}>
                   <div className="min-w-[100px] mr-2">
-
+                    {
+                      ["Todos", ...label, 'Favoritos'].map((tab: indexPagecurrentSelectLabel, index) => {
+                        return (
+                          <TabItem
+                            className="flex-1 text-xs md:text-sm lg:text-base px-5"
+                            active={indexPagecurrentSelectLabel === tab}
+                            onClick={() => {
+                              dispatch(gameSlice.actions.setIndexPagecurrentSelectLabel(tab));
+                              setViewType('')
+                            }}
+                            name={tab}
+                          />
+                        )
+                      })
+                    }
                   </div>
                   <div className="shirnk-0 basis-[450px]">
                     <Input className="bg-[#069D5C] items-baseline flex-1" prefix={<img src={`assets/${environment.uVersion}/icon_24.png`} placeholder={"Pesquisar nome do jogo"} />}
