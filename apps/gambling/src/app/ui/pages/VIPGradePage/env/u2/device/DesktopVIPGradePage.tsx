@@ -1,5 +1,4 @@
 import { IVIPGradePageProps } from "../../../index";
-import VIPStatue from '../images/vip_statue.png'
 
 import CaretDown from '../images/CaretDown.png';
 import CaretUP from '../images/CaretUp.png';
@@ -11,6 +10,7 @@ import { VIPInfoTab } from "../components/VIPInfoTab";
 import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
 import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
 import { PageContainer } from "../../../../../components-bs/PageContainer";
+import {environment} from "../../../../../../../environments/environment";
 
 
 export const DesktopVIPGradePage = ({
@@ -29,7 +29,7 @@ export const DesktopVIPGradePage = ({
 
   return (
     <PageContainer>
-      <img src={VIPStatue} alt="statue" className='mt-10' />
+      <img src={`assets/${environment.uVersion}/${environment.mvVersion}/vip_statue.png`} alt="statue" className='mt-10' />
 
       {/*VIP 進度卡*/}
       <div className='w-full h-[298px] flex rounded-2xl bg-[var(--grayscale-20)] mt-10'>

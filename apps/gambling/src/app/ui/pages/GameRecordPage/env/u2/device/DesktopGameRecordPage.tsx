@@ -86,7 +86,7 @@ export const DesktopGameRecordPage = ({
         />
       </div>
 
-      <div className='max-h-[652px]  overflow-x-auto text-white text-center rounded-xl p-5 bg-[var(--grayscale-20)] mb-5'>
+      <div className='h-[652px] w-full text-white text-center p-5 bg-[var(--grayscale-20)] mt-3 mb-20 rounded-xl'>
         <Table
           containerClassName={`min-w-[500px] `}
           className={'w-full overflow-x-auto border-r-0 '}

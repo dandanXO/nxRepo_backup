@@ -1,0 +1,329 @@
+:root {
+  --font-family: 'Inter', sans-serif;
+
+  --primary-main: #EB6E47;
+  /*NOTE: 沒用到*/
+  --primary-light-disable: rgba(235, 110, 71, 0.5);
+  /*NOTE: 沒用到*/
+  --primary-dark-active: #BC5839;
+  /*NOTE: js 部分還沒換*/
+  /* gambling/src/app/ui/pageTemplate/tabBar/env/riojungle/index.tsx */
+  --primary-hover: #EF8B6C;
+
+  /*NOTE: js 部分還沒換, 還有寫死的 js*/
+  /* gambling/src/app/ui/components-bs/ProgressBar/env/riojungle/index.tsx */
+  --secondary-main: #D12598;
+  /*NOTE: 沒用到*/
+  --secondary-light-disable: rgba(209, 37, 152, 0.5);
+  /*NOTE: 沒用到*/
+  --secondary-dark-active: #A71E7A;
+  /*NOTE: 沒用到*/
+  --secondary-hover: #DA51AD;
+  /*NOTE: 沒用到*/
+  --liner-main-from: #FDDC2D;
+
+  --liner-main-to: #B83700;
+
+  --state-error-main: #EF4444;
+  /*NOTE: 沒用到*/
+  --state-error-light: #FEE2E2;
+  /*NOTE: 沒用到*/
+  --state-error-dark: #B71C1C;
+  /*NOTE: 沒用到*/
+  --state-success-main: #10B965;
+  /*NOTE: 沒用到*/
+  --state-success-light: #D1FAE5;
+  /*NOTE: 沒用到*/
+  --state-success-dark: #04783E;
+
+  --state-info-main: #3B82F6;
+  /*NOTE: 沒用到*/
+  --state-info-light: #DBEAFE;
+  /*NOTE: 沒用到*/
+  --state-info-dark: #1D4ED8;
+
+  --state-warn-main: #F59E0B;
+  /*NOTE: 沒用到*/
+  --state-warn-light: #FEF3C7;
+  /*NOTE: 沒用到*/
+  --state-warn-dark: #B45309;
+
+  /*?*/
+  --grayscale-00: #000000;
+  --grayscale-10: #1B141F;
+  --grayscale-15: #291F2E;
+  /* u1 u2 其它站點會共用的組件 就先不改 u2都已經改*/
+  --grayscale-20: #36293D;
+  --grayscale-30: #523D5C;
+  --grayscale-40: #6D527A;
+  --grayscale-50: #886699;
+  --grayscale-60: #A085AD;
+  --grayscale-70: #B8A4C2;
+  --grayscale-80: #CFC2D6;
+  --grayscale-90: #E8E1EB;
+  --grayscale-100: #FFFFFF;
+  /*TODO: 接續*/
+
+  /*NOTE: 沒用到*/
+  /*--background-tabbar: #152951;*/
+  --background-tabbar: #291F2E7F;
+  /*NOTE: 沒用到*/
+  --background-header: #291F2E7F;
+
+
+  /*NOTE: 得重構*/
+  /*NOTE: figma 沒有 自己拆出來的*/
+  --input-border: #808080;
+  --input-background: #333;
+  --input-placeholder-color: #808080;
+  --input-text-color: #FFFFFF;
+
+  --input-focus-border: #8547EB;
+  --input-focus-background: transparent;
+
+  --input-invalidation-border: #EF4444;
+  --input-invalidation-text-color: #EF4444;
+
+
+
+  /*NOTE下面是繼承coco77bet 的顏色，得之後砍掉*/
+  /*這個 rio, 有用到得重構成共用*/
+  --page-background: #1A1A1A;
+
+
+  /*taipei colors-start*/
+  --primary-main-to: #0044C7;
+  --primary-variant: #002773;
+  --primary-assistant: #A1C1FF;
+  --primary-assistant-20: #A1C1FF;
+
+  --secondary-main-from: #FFEF61;
+  --secondary-main-to: #FF7E21;
+  --secondary-variant: #A25700;
+  --secondary-assistant: #FDEF70;
+
+  --black: #000000;
+  --white: #FFFFFF;
+  --white-30: rgba(255, 255, 255, 0.3);
+  --white-20: rgba(255, 255, 255, 0.2);
+
+  --state-success-variant: #E2FFE8;
+  --state-error-main-30: rgba(240, 81, 81, 0.30);
+  --state-error-variant: #FF9696;
+
+  --state-info-variant: #A4DEFF;
+  --state-disable-main: #C5C5C5;
+  --state-disable-variant: #969696;
+
+  --background-primary: #152951;;
+  --background-textfields: #2D3047;
+  --background-checkin-from: #641FA9;
+  --background-checkin-to: #1E083A;
+  --background-modal-from: #577DDE;
+  --background-modal-to: #000691;
+
+  --background-add-money: #2AD2E9;
+  --background-vip-level-from: #7C91FF;
+  --background-vip-level-to: #2E22BD;
+  --background-alert-text-from: #FEB867;
+  --background-alert-text-to: #FF7E21;
+  --background-submenu: #040404bf;
+
+  --background-dashboard-main-from: #5754F3;
+  --background-dashboard-main-via: #121C78;
+  --background-dashboard-main-to: #0D1DA4;
+  --background-dashboard-secondary: #252A99;
+  --background-modal-telegram-from: #0E3E9B;
+  --background-modal-telegram-to: #6272FF;
+  --background-footer: #0B1948;
+
+  --stroke-textfields: #AAC6FF;
+  --stroke-block: #ABDCFF;
+  --stroke-dashboard-main:#00FFEF;
+  --stroke-dashboard-secondary: #393FC4;
+  /* stroke/modal Solid, 70%, Normal #40F4FF -> rgba to hex : #40f4ffb3*/
+  --stroke-modal: #40f4ffb3;
+  --stroke-popup: #FFB84C;
+
+
+
+  --button-login-1-from: #FFC121;
+  --button-login-1-to: #FF7E21;
+
+  --button-login-2-from: #C5C5C5;
+  --button-login-2-to: #969696;
+
+  --button-checkin-from: #FFA775;
+  --button-checkin-to: #FF2121;
+
+  --button-modal-download-from: #3076FF;
+  --button-modal-download-to: #1650A6;
+
+  --button-withdraw-from: #FFA775;
+  --button-withdraw-to: #FF2121;
+
+  --button-deposit-from: #FF7373;
+  --button-deposit-to: #9E21FF;
+
+  --button-invite-record-from: #FFD05D;
+  --button-invite-record-to: #FF3838;
+
+  --button-gametab-focus-from: #FFFFFF;
+  --button-gametab-focus-via: #88E3FF;
+  --button-gametab-focus-to: #0044C7;
+
+  --button-drawer-linear01-from: #528DFF;
+  --button-drawer-linear01-to: #0057FF;
+
+  --button-drawer-linear02-from: #2BE681;
+  --button-drawer-linear02-to: #0E735B;
+
+  --button-drawer-linear03-from: #FF8E8E;
+  --button-drawer-linear03-to: #FF3838;
+
+  --button-drawer-linear04-from: #FFE500;
+  --button-drawer-linear04-to: #FF6A00;
+
+  --button-gametab-from: #FFFFFF;
+  --button-gametab-via: #88E3FF;
+  --button-gametab-to: #0044C7;
+
+  --text-primary: #1C1C1C;
+  --text-seondary: #646464;
+  --text-tertiary: #BEBEBE;
+  --text-white: #ffffff;
+  --text-deposit: #6A3C12;
+  --text-popup: #FFF065;
+
+  --lineary-blue-from: #2492FF;
+  --lineary-blue-to: #0043AE;
+
+
+  /*taipei colors-end*/
+
+  /*bg*/
+  --main: #45CCF7;
+  --varient: #002773;
+  --assistant: #A1C1FF;
+  --medium: #A1C1FF;
+  --light: #06F2ED;
+
+
+
+
+  /*bg-other*/
+  --game-block: #212B5C;
+  --footer: #212B5C;
+
+  /*main*/
+  --main-primary-main: #CAF0F8;
+  --main-primary-varient: #1D2147;
+  --main-primary-assistant: #1D2147;
+  --main-secondary-main: #EFF95C;
+  --main-state-error: #1D2147;
+  --main-state-warning: #1D2147;
+
+  /*table*/
+  --table-main: #3A28AC;
+  --table-varient: #341573;
+  --table-asisstant: #005265;
+  --table-light: #26E5FF;
+
+  /* Table 樣式 */
+  --table-thead: var(--grayscale-20);
+  --table-thead-text:var(--grayscale-70);
+  --table-tbody: var(--grayscale-20);
+  --table-tbody-zebra: var(--grayscale-20);
+  --table-tbody-text:var(--grayscale-100);
+
+  /*button*/
+  /*btn/button*/
+  --btn-gradient1-from: #58DDFF;
+  --btn-gradient1-to: #0D7FFF;
+
+  /*btn/button_2*/
+  --btn-gradient2-from: #6600C5;
+  --btn-gradient2-to: #0681FF;
+
+  /*btn/button_inactive*/
+  --btn-gradient-inactive-from: #D9D9D9;
+  --btn-gradient-inactive-to: #C2C2C2;
+
+  /*btn/icon*/
+  --btn-gradient-icon-from: #99EDFF;
+  --btn-gradient-icon-to: #16FF8F;
+
+  /*btn-vip*/
+  --btn-gradient-vip-from: #FE6060;
+  --btn-gradient-vip-to: #FFA24D;
+
+  /*dashboard*/
+  /*dashboard/block_1*/
+  --dashboard-block1-gradient-from: #8692FF;
+  --dashboard-block1-gradient-to: #55F1D5;
+  /*dashboard/block_2*/
+  --dashboard-block2-gradient-from: #1EE59E;
+  --dashboard-block2-gradient-to: #E2FD97;
+  /*dashboard/block_3*/
+  --dashboard-block3-gradient-from: #FFA73F;
+  --dashboard-block3-gradient-to: #FFB8B8;
+
+
+  /*dashboard/dashboard_base*/
+  --dashboard-base: #F2FFDD;
+  /*dashboard/block_1*/
+  --dashboard-block1: #6432F1;
+
+  /*dashboard/block_2*/
+  --dashboard-block2: #028350;
+  /*dashboard/block_3*/
+  --dashboard-block3: #CA044B;
+
+
+
+  /*text*/
+  /*text/telegram*/
+  --text-telegram: #003BC6;
+  /*text/black*/
+  /*text/white*/
+  /*text/grey*/
+  --gray: #D9D9D9;
+
+  /*text-dashboard*/
+  --text-block1: #6432F1;
+  /*text-ad*/
+  --text-gradient-ad-from: #FFEF00;
+  --text-gradient-ad-to: #FFC100;
+
+  /*text-ad_tg*/
+  --text-gradient-ad-tg-from: #D071FD;
+  --text-gradient-ad-tg-to: #003BC6;
+
+
+  --tab-primary-from: #0044C7;
+  --tab-primary-to: #45CCF7;
+  --tab-border-top: #5964F5;
+  --tab-text-color-normal: #FFFFFF;
+  --tab-text-color-active: #FFFFFF;
+
+  --drawer-bg: #17103F;
+  --drawer-border: rgba(50,63,91,.7);
+
+  /* riojungle777bet */
+
+  --background-tabbar: #291F2E7F;
+  --background-tabbar-from: #291F2E7F;
+  --background-tabbar-to: #36293D;
+  --background-header-from: #291F2E7F;
+  --background-header-to: #36293D;
+
+  --gray-scale-10: #1A1A1A;
+
+
+  /* scrollbar */
+  --scrollbar-width: 8px;
+  --scrollbar-color: var(--secondary-main);
+  --scrollbar-background: var(--grayscale-30);
+  --scrollbar-rounded: 10px;
+
+}

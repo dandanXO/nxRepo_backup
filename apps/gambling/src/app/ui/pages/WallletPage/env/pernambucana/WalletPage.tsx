@@ -9,7 +9,7 @@ import React from "react";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import {IPanelType, IRecordPanelType} from "../../index";
 
-export type TotalSectionType = 'total' | 'deposite' | 'promotion'
+export type TotalSectionType = 'total' | 'deposit' | 'promotion'
 export interface ITotalSectionValues {
   [key: string]: {
     balance: number;

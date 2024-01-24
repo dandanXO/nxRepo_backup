@@ -167,11 +167,14 @@ module.exports = (config, context) => {
       assetModuleFilename: `${ASSET_OUTPUT_PATH}/[hash][ext][query]`,
     },
     devServer: {
+      
       host: hostIP,
       port: PORT,
       open: '/',
       hot: true,
-      https: true,
+      server: {
+        type: 'https',
+      },
       historyApiFallback: true,
       onBeforeSetupMiddleware: function (devServer) {
         if (!devServer) {

@@ -1,5 +1,5 @@
 import { IVIPGradePageProps } from "../../../index";
-import VIPStatue from '../images/vip_statue.png'
+// import VIPStatue from '../images/vip_statue.png'
 import { VerticalVIPButtonList } from "../components/VerticalVIPButtonList";
 import { formatLocaleMoney } from "../../../../../utils/format";
 import { ProgressBar } from "../../../../../components-bs/ProgressBar";
@@ -8,6 +8,7 @@ import { VIPInfoTab } from "../components/VIPInfoTab";
 import { useRioVIPGradePage } from "../hooks/useRioVIPGradePage";
 import { useScrollSelectFixCenter } from "../../../../../hooks/useScrollSelectFixCenter";
 import { PageContainer } from "../../../../../components-bs/PageContainer";
+import {environment} from "../../../../../../../environments/environment";
 
 
 
@@ -25,7 +26,7 @@ export const TabletVIPGradePage = ({
 
   return (
     <PageContainer>
-      <img src={VIPStatue} alt="statue" className='mt-8' />
+      <img src={`assets/${environment.uVersion}/${environment.mvVersion}/vip_statue.png`} alt="statue" className='mt-8' />
 
       {/*VIP 進度卡*/}
       <div className='w-full h-[240px] flex rounded-2xl bg-[var(--grayscale-20)] mt-5'>

@@ -17,9 +17,10 @@ import {environment} from "../../../environments/environment";
 import {usePageNavigate} from "../router/hooks/usePageNavigate";
 
 import {renderByUVersion} from "../utils/renderByUVersion";
-import {PageTemplate as PPageTemplate} from "./env/pernambucana/PageTemplate";
+import {PageTemplate as PernaPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/u1/PageTemplate";
+import {PageTemplate as PPageTemplate} from "./env/p1/PageTemplate";
 import {PageTemplate as RiojunglePageTemplate} from "./env/u2/PageTemplate";
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
 import {PageTemplateLayers} from "../pageTemplateLayers";
@@ -233,6 +234,44 @@ export const PageTemplate = (props: IPage) => {
             {props.children}
           </WPageTemplate>
         ),
+        "p1": (
+          <PPageTemplate
+            isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
+            contextHolder={contextHolder}
+            isMobile={isMobile}
+            isShowMobileFooter={isShowMobileFooter}
+            isShowDesktopFooter={isShowMobileFooter}
+            isShowDesktopHeader={isShowDesktopHeader}
+            isShowDesktopMenuDrawer={isShowDesktopMenuDrawer}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+            showLoginModal={showLoginModal}
+            openDesktopNotificationDrawer={openDesktopNotificationDrawer}
+            setOpenDesktopNotificationDrawer={setOpenDesktopNotificationDrawer}
+            setOpenLogoutPopover={setOpenLogoutPopover}
+            isShowMobileLogoutModal={isShowMobileLogoutModal}
+
+            openMenuDrawer={openMenuDrawer}
+            setOpenMenuDrawer={setOpenMenuDrawer}
+            isShowLoginModal={isShowLoginModal}
+            openNotificationWithIcon={openNotificationWithIcon}
+            openDownloadModal={openDownloadModal}
+            setOpenDownloadModal={setOpenDownloadModal}
+            isShowTelegramModal={isShowTelegramModal}
+            onClickToOpenTelegramService={onClickToOpenTelegramService}
+            isShowInviteBonusModal={isShowInviteBonusModal}
+            setOpenInitailChargeModal={setOpenInitailChargeModal}
+            isShowMobileHeader={isShowMobileHeader}
+            // Deprecated
+            isShowTabbar={isShowTabbar}
+            onClickToDownload={onClickToDownload}
+            onClickToOpenTelegramManager={onClickToOpenTelegramManager}
+            isUILoading={isUILoading}
+            showToolboxConfig={props.showToolboxConfig}
+          >
+            {props.children}
+          </PPageTemplate>
+        ),
         "u1": (
           <CPageTemplate
             isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
@@ -347,7 +386,7 @@ export const PageTemplate = (props: IPage) => {
           </RiojunglePageTemplate>
         )
       }, (
-        <PPageTemplate
+        <PernaPageTemplate
           isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
           contextHolder={contextHolder}
           isMobile={isMobile}
@@ -382,11 +421,10 @@ export const PageTemplate = (props: IPage) => {
           showToolboxConfig={props.showToolboxConfig}
         >
           {props.children}
-        </PPageTemplate>
+        </PernaPageTemplate>
       ))}
 
       <PageTemplateLayers
-        isMobile={isMobile}
         isShowLoginModal={isShowLoginModal}
         showLoginModal={showLoginModal}
         setIsLogin={setIsLogin}

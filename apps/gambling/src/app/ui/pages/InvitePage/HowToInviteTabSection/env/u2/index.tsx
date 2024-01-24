@@ -1,4 +1,4 @@
-import InviteBanner from './desktop_recomendar_pic.png';
+// import InviteBanner from './desktop_recomendar_pic.png';
 import Level from './level.png';
 import Gift from './gift.png';
 import GameChips from './gameChips.png';
@@ -44,11 +44,17 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
       <div className="relative flex flex-col justify-between w-full">
         <div className="flex flex-col gap-1 w-full items-center">
           <img
-            src={InviteBanner}
+            src={`assets/${environment.uVersion}/${environment.mvVersion}/desktop_recomendar_pic.png`}
             alt="Image1"
             id="Image1"
             className=""
           />
+          {/*<img*/}
+          {/*  src={InviteBanner}*/}
+          {/*  alt="Image1"*/}
+          {/*  id="Image1"*/}
+          {/*  className=""*/}
+          {/*/>*/}
 
           <div className="mb-5 md:mb-8 lg:mb-10 w-full text-center text-white text-sm md:text-base lg:text-xl font-bold leading-5 md:leading-6 lg:leading-7">{`Programa de recomendação exclusivo da plataforma ${environment.platformGroup}-${environment.platformName}, recomende aos amigos e ganhe comissões sem limite máximo! Esperamos sinceramente que mais jogadores se juntem a nós!`}</div>
 
@@ -97,7 +103,7 @@ export const HowToInviteTabSection = (props: IHowToInviteTabSection) => {
                   {props?.inviteUrl}
                   </div>
                   <div>
-                    <button 
+                    <button
                       onClick={onClickToCopy}
                       className="text-base md:text-xl lg:text-3xl font-normal leading-6 text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)] flex flex-row justify-center py-2 w-full cursor-pointer rounded-[100px]"
                     >

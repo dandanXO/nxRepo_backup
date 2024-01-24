@@ -25,7 +25,7 @@ export const TabItem = (props: ITabItem) => {
           'py-2.5 px-4': props?.icon !== undefined,
           'py-3 px-4 md:px-8 lg:py-2.5 lg:px-9': props?.icon === undefined,
           'text-white shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[var(--primary-main)]': props.active,
-          'bg-[#333] text-[rgba(255,255,255,1)]': !props.active
+          'bg-[--grayscale-20] text-[rgba(255,255,255,1)]': !props.active
         },
         props.className
       )}
@@ -53,11 +53,11 @@ export const SubTabItem = (props: ITabItem) => {
         "flex-1",
         {
           'text-white border-[var(--primary-main)] border-solid border-2' : props.active,
-          'bg-[#333] text-[rgba(255,255,255,1)] border-2 border-[#333]': !props.active
+          'bg-[var(--grayscale-20)] text-[rgba(255,255,255,1)] border-2 border-[var(--grayscale-20)]': !props.active
         },
         props.className
       )}
-    > 
+    >
     {
     props.name === "All" ? props.name :
       props.imgUrl && (!imgError)?
@@ -65,7 +65,7 @@ export const SubTabItem = (props: ITabItem) => {
         :
         props.name
       }
-      
+
     </div>
   )
 }
