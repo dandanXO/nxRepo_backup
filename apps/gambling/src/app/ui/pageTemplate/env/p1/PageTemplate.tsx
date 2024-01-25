@@ -5,7 +5,6 @@ import cx from "classnames";
 
 import {LogoutModal} from "../../../modals/LogoutModal";
 import {ErrorBoundary} from "react-error-boundary";
-import {Footer} from "../../footer/env/u1/Footer";
 import {TabBar} from "../../tabBar/env/u1";
 import {Toolbox} from "../../Toolbox/env/u1";
 import {ThreeDots} from "react-loading-icons";
@@ -22,6 +21,13 @@ import useBreakpoint from "../../hooks/useBreakpoint";
 import { Header } from "../../header";
 import { BaseStyledPageTemplate } from "../../base/BaseStyledPageTemplate";
 import { IUseSingletonPageTemplateConfig } from "../../hooks/useSingletonPageTemplateConfig";
+import { BaseErrorBoundary } from "../../base/BaseErrorBoundary";
+import { MenuDrawer } from "../../../drawers/MenuDrawer";
+import { Footer } from "../../footer";
+import { twMerge } from "tailwind-merge";
+
+export const BASE_TAB_HEIGHT = 60
+export const BASE_DRAWER_WIDTH = 248
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -137,7 +143,10 @@ export const PageTemplate = ({
                                                  isShowTabbar,
                                                  isUILoading,
 showToolboxConfig,
-  menuDrawer
+  header,
+  menuDrawer,
+  tabBar,
+  footer
 }: IPageTemplate) => {
 
   useEffect(() => {
@@ -148,11 +157,31 @@ showToolboxConfig,
     }
   }, [isMobile]);
 
+  const { isDesktop, isTablet} = useBreakpoint();
+
   // show
+  const isShowHeader = header.mobile || header.tablet || header.desktop;
+  const isShowFooter = footer.mobile || footer.tablet || footer.desktop;
   const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
 
+  // NOTICE: refactor me
+  // NOTE: Style - Header
+  const HeaderHeight =  !isShowHeader ? 0 : isDesktop ? 100 :  isTablet ? 100 : 56;
+
+  // NOTE: Style - MenuDrawer
+  const DrawerWidth = BASE_DRAWER_WIDTH;
+  const MenuDrawerTop = isDesktop ? 130 : 0;
+  const MenuDrawerZIndex = "z-[1003]";
+
+  // NOTE: Style - TabBar
+  const TabHeight = (tabBar.mobile || tabBar.tablet || tabBar.desktop) ? BASE_TAB_HEIGHT : 0;
+
+  const childrenMarginLeft = (isMobile && menuDrawer.mobile && menuDrawer.mobileOverChildren ||
+    isTablet && menuDrawer.tablet && menuDrawer.tabletOverChildren ||
+    isDesktop && menuDrawer.desktop && menuDrawer.desktopOverChildren) ? 0 : DrawerWidth;
+
   return (
-    <BaseStyledPageTemplate
+    <StyledPage
       isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
     >
 
@@ -178,72 +207,126 @@ showToolboxConfig,
         />
       )}
 
-      <div className={"h-full flex flex-row"}>
-        {/*{isShowDesktopMenuDrawer && openMenuDrawer && (*/}
-        {/*  <MenuDrawer*/}
-        {/*    className={cx("fixed left-0 bottom-0 w-[276px] min-w-[276px] h-full z-30", {*/}
-        {/*      "w-[0px]": !isShowDesktopMenuDrawer,*/}
-        {/*    })}*/}
-        {/*    closeMenuDrawer={ () => {*/}
-        {/*      setOpenMenuDrawer(false)*/}
-        {/*    }}/>*/}
-        {/*)}*/}
+      {/*<div className={"h-full flex flex-row"}>*/}
+      {/*  /!*{isShowDesktopMenuDrawer && openMenuDrawer && (*!/*/}
+      {/*  /!*  <MenuDrawer*!/*/}
+      {/*  /!*    className={cx("fixed left-0 bottom-0 w-[276px] min-w-[276px] h-full z-30", {*!/*/}
+      {/*  /!*      "w-[0px]": !isShowDesktopMenuDrawer,*!/*/}
+      {/*  /!*    })}*!/*/}
+      {/*  /!*    closeMenuDrawer={ () => {*!/*/}
+      {/*  /!*      setOpenMenuDrawer(false)*!/*/}
+      {/*  /!*    }}/>*!/*/}
+      {/*  /!*)}*!/*/}
 
-        {isShowMenuDrawer && (
-          <MenuDrawerContainer className={"rounded-r-3xl"}>
-            <MenuDrawerContent/>
-          </MenuDrawerContainer>
-        )}
+      {/*  {*/}
+      {/*    isShowMenuDrawer && (*/}
+      {/*      <div*/}
+      {/*        className={`fixed left-0 ${MenuDrawerZIndex}`}*/}
+      {/*        style={{*/}
+      {/*          top: MenuDrawerTop*/}
+      {/*        }}*/}
+      {/*      >*/}
+      {/*        <MenuDrawer*/}
+      {/*          onClickToDownload={onClickToDownload}*/}
+      {/*        />*/}
 
-        <div className={cx("w-full h-full", {
-          "relative": !isMobile,
-          "top-[100px]": isShowDesktopHeader,
-          "left-[276px] w-[calc(100vw-276px)]": !isMobile && isShowDesktopMenuDrawer,
-          "bg-[]": !isCurrentPageCompanyProfile && !isMobile,//背景色
-        })} style={{
-        }}>
-          {isMobile && isShowMobileHeader && (
-            <MobileHeader
-              clickToOpenMenuDrawer={() => {
-                setOpenMenuDrawer(!openMenuDrawer)
-              }}
-              clickToOpenUserLoginStatusModal={() => {
-                // setShowUserLoginStatusMobileModal(true);
-                showLoginModal(true)
-              }}
+      {/*      </div>*/}
+      {/*    )*/}
+      {/*  }*/}
+
+      {/*  /!*{isShowMenuDrawer && (*!/*/}
+      {/*  /!*  <MenuDrawerContainer className={"rounded-r-3xl"}>*!/*/}
+      {/*  /!*    <MenuDrawerContent/>*!/*/}
+      {/*  /!*  </MenuDrawerContainer>*!/*/}
+      {/*  /!*)}*!/*/}
+
+      {/*  <div className={cx("w-full h-full", {*/}
+      {/*    "relative": !isMobile,*/}
+      {/*    "top-[100px]": isShowDesktopHeader,*/}
+      {/*    "left-[276px] w-[calc(100vw-276px)]": !isMobile && isShowDesktopMenuDrawer,*/}
+      {/*    "bg-[]": !isCurrentPageCompanyProfile && !isMobile,//背景色*/}
+      {/*  })} style={{*/}
+      {/*  }}>*/}
+      {/*    */}
+      {/*  </div>*/}
+      {/*</div>*/}
+
+      {
+        isShowMenuDrawer && (
+          <div
+            className={`fixed left-0 h-full ${MenuDrawerZIndex}`}
+            style={{
+              top: MenuDrawerTop
+            }}
+          >
+            <MenuDrawer
+              isShowMenuDrawer={isShowMenuDrawer}
+              onClickToDownload={onClickToDownload}
             />
-          )}
 
-          {isMobile && isShowMobileLogoutModal && (
-            <LogoutModal/>
-          )}
+          </div>
+        )
+      }
 
-          {/*NOTE: 佔據高度*/}
-          {isMobile ? (
-            isShowMobileHeader && <div className={"h-[52.5px]"}></div>
-          ) : (
-            isShowMobileHeader && <div className={"h-[13px]"}></div>
-          )}
+      {isMobile && isShowMobileHeader && (
+        <MobileHeader
+          clickToOpenMenuDrawer={() => {
+            setOpenMenuDrawer(!openMenuDrawer)
+          }}
+          clickToOpenUserLoginStatusModal={() => {
+            // setShowUserLoginStatusMobileModal(true);
+            showLoginModal(true)
+          }}
+        />
+      )}
 
-          <ErrorBoundary fallback={<div className={"text-white"}>Children</div>}>
+      {isMobile && isShowMobileLogoutModal && (
+        <LogoutModal/>
+      )}
+
+      {/*NOTE: 佔據高度*/}
+      {isMobile ? (
+        isShowMobileHeader && <div className={"h-[52.5px]"}></div>
+      ) : (
+        isShowMobileHeader && <div className={"h-[13px]"}></div>
+      )}
+
+      <div
+        style={{
+          position: 'fixed',
+          top: HeaderHeight,
+          width: '100%',
+          height: `calc(100% - ${HeaderHeight}px - ${TabHeight}px)`,
+        }}
+      >
+        <div
+          id='page-container'
+          className='h-full overflow-auto'
+          style={{
+            marginLeft: isShowMenuDrawer? childrenMarginLeft: 0
+          }}
+        >
+          <BaseErrorBoundary>
             {children}
-          </ErrorBoundary>
+          </BaseErrorBoundary>
 
-          {/*Footer*/}
-          {<Footer showMobileFooter={isShowMobileFooter}
-                   showDesktopFooter={isShowDesktopFooter}
-          />}
+          {
+            isShowFooter && (
+              <Footer />
+            )
+          }
 
-          {isMobile && isShowTabbar && (
-            <TabBar/>
-          )}
-
-          {/*Toolbox*/}
-          {showToolboxConfig !== false && (
-            <Toolbox onClickToDownload={onClickToDownload} onClickToOpenTelegramManager={onClickToOpenTelegramManager} onClickToOpenTelegramService={onClickToOpenTelegramService}/>
-          )}
         </div>
       </div>
+
+      {isMobile && isShowTabbar && (
+        <TabBar/>
+      )}
+
+      {/*Toolbox*/}
+      {showToolboxConfig !== false && (
+        <Toolbox onClickToDownload={onClickToDownload} onClickToOpenTelegramManager={onClickToOpenTelegramManager} onClickToOpenTelegramService={onClickToOpenTelegramService}/>
+      )}
 
       {isUILoading && (
         <div className={"z-[9999] fixed top-0 left-0 right-0 bottom-0 bg-black flex flex-col justify-center items-center"}>
@@ -273,7 +356,7 @@ showToolboxConfig,
         />
       )}
 
-    </BaseStyledPageTemplate>
+    </StyledPage>
 
   )
 }

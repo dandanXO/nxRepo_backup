@@ -20,7 +20,7 @@ import {renderByUVersion} from "../utils/renderByUVersion";
 import {PageTemplate as PernaPageTemplate} from "./env/pernambucana/PageTemplate";
 import {PageTemplate as WPageTemplate} from "./env/wild/PageTemplate";
 import {PageTemplate as CPageTemplate} from "./env/u1/PageTemplate";
-import {PageTemplate as PPageTemplate} from "./env/p1/PageTemplate";
+import {PageTemplate as PPageTemplate, BASE_TAB_HEIGHT as P_BASE_TAB_HEIGHT, BASE_DRAWER_WIDTH as P_BASE_DRAWER_WIDTH} from "./env/p1/PageTemplate";
 import {PageTemplate as RiojunglePageTemplate} from "./env/u2/PageTemplate";
 import {useSingletonPageTemplateConfig} from "./hooks/useSingletonPageTemplateConfig";
 import {PageTemplateLayers} from "../pageTemplateLayers";
@@ -28,6 +28,14 @@ import {IPage} from "./types/IPage";
 import {useScrollToPartPageTemplate} from "./hooks/useScrollToPartPageTemplate";
 
 console.log("[APP] environment", environment);
+
+export const BASE_TAB_HEIGHT = renderByUVersion({
+  "p1": P_BASE_TAB_HEIGHT
+}, P_BASE_TAB_HEIGHT)
+
+export const BASE_DRAWER_WIDTH = renderByUVersion({
+  "p1": P_BASE_DRAWER_WIDTH
+}, P_BASE_DRAWER_WIDTH)
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
@@ -288,9 +296,9 @@ export const PageTemplate = (props: IPage) => {
               mobile: isShowMobileMenuDrawer,
               tablet: isShowTabletMenuDrawer,
               desktop: isShowDesktopMenuDrawer,
-              // mobileOverChildren,
-              // tabletOverChildren,
-              // desktopOverChildren
+              mobileOverChildren,
+              tabletOverChildren,
+              desktopOverChildren
             }}
           >
             {props.children}
