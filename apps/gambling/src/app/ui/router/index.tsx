@@ -23,6 +23,9 @@ export const AppRouter = () => {
   }, [isDesktop, location.pathname])
 
   return renderByUVersion({
+    "p1": (
+      <RiojungleAppRouter />
+    ),
     "u1": (
       <CocoAppRouter/>
     ),

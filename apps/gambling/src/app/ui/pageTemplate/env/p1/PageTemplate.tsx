@@ -20,6 +20,8 @@ import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/Me
 import {TShowToolboxConfig} from "../../base/types";
 import useBreakpoint from "../../hooks/useBreakpoint";
 import { Header } from "../../header";
+import { BaseStyledPageTemplate } from "../../base/BaseStyledPageTemplate";
+import { IUseSingletonPageTemplateConfig } from "../../hooks/useSingletonPageTemplateConfig";
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -67,7 +69,7 @@ export const StyledPage = styled.div.attrs((props) => ({
 `;
 
 
-type IProps = {
+type IPageTemplate = {
   children?: React.ReactNode;
   isCurrentPageCompanyProfile: boolean;
   contextHolder: any;
@@ -100,7 +102,7 @@ type IProps = {
   onClickToOpenTelegramManager: () => void;
   isUILoading: boolean;
   showToolboxConfig?: TShowToolboxConfig
-}
+} & IUseSingletonPageTemplateConfig
 
 export const PageTemplate = ({
                                                  children,
@@ -134,8 +136,9 @@ export const PageTemplate = ({
                                                  onClickToOpenTelegramManager,
                                                  isShowTabbar,
                                                  isUILoading,
-showToolboxConfig
-}: IProps) => {
+showToolboxConfig,
+  menuDrawer
+}: IPageTemplate) => {
 
   useEffect(() => {
     if(!isMobile) {
@@ -145,11 +148,11 @@ showToolboxConfig
     }
   }, [isMobile]);
 
-  console.log("PageTemplate");
-  console.log(`isLogin = ${isLogin}`);
+  // show
+  const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
 
   return (
-    <StyledPage
+    <BaseStyledPageTemplate
       isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
     >
 
@@ -186,7 +189,7 @@ showToolboxConfig
         {/*    }}/>*/}
         {/*)}*/}
 
-        {isShowDesktopMenuDrawer && (
+        {isShowMenuDrawer && (
           <MenuDrawerContainer className={"rounded-r-3xl"}>
             <MenuDrawerContent/>
           </MenuDrawerContainer>
@@ -270,7 +273,7 @@ showToolboxConfig
         />
       )}
 
-    </StyledPage>
+    </BaseStyledPageTemplate>
 
   )
 }
