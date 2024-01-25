@@ -128,7 +128,7 @@ const MyPage = ({
             progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
           >
             <div className='h-full flex px-3 items-center justify-center'>
-              <div className='text-xs text-[var(--text-deposit)] font-normal'>
+              <div className='text-xs text-[var(--text-progress)] font-normal'>
                 Próximo nível {clampNumber(((userVIPInfo?.data?.vip_score || 0) / (userVIPInfo?.data?.next_level_score || 1)* 100 ), 0, 100).toFixed(0)}%
               </div>
             </div>
@@ -148,10 +148,10 @@ const MyPage = ({
                 ? userVIPInfo?.data?.flow_progress / 100
                 : 0
             }
-            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+            progressColor='linear-gradient(180deg,var(--lineary-progress-from),var(--lineary-progress-to))'
           >
             <div className='h-full flex px-3 items-center justify-center font-normal'>
-              <div className='text-xs text-[var(--text-deposit)]'>
+              <div className='text-xs text-[var(--text-progress)]'>
                 Próximo nível {clampNumber(userVIPInfo?.data?.flow_progress || 0, 0, 100).toFixed(0)}%
               </div>
             </div>
@@ -163,7 +163,7 @@ const MyPage = ({
         className={"bg-[var(--primary-variant)]"}
       >
         <ListHeader>
-          <div className='bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)] text-transparent'>
+          <div className='bg-gradient-to-b from-[var(--lineary-progress-from)] to-[var(--lineary-progress-to)] text-transparent'>
             Outras funções
           </div>
         </ListHeader>

@@ -49,16 +49,16 @@ export const UserInfoStatusPopoverVIPInfo = ({
             className='h-6 bg-white'
             rounded='rounded-full'
             progress={vipScore / nextLevelScore}
-            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+            progressColor='linear-gradient(180deg,var(--lineary-progress-from),var(--lineary-progress-to))'
           >
-            <div className='flex justify-between px-4 h-full items-center text-[var(--text-deposit)]'>
+            <div className='flex justify-between px-4 h-full items-center text-[var(--text-progress)]'>
               <div>VIP{currentLevel}</div>
               <div>R$ {formatLocaleMoney(vipScore ? vipScore/100: 0)}/R$ {formatLocaleMoney(nextLevelScore ? nextLevelScore/100: 0)}</div>
               <div>VIP{currentLevel+1}</div>
             </div>
           </ProgressBar>
         </div>
-
+        
         <div className='mt-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
             <div className='text-white'>Próximo nível: {clampNumber(flowProgress, 0, 100).toFixed(0)}%</div>
@@ -68,9 +68,9 @@ export const UserInfoStatusPopoverVIPInfo = ({
             className='h-6 bg-white'
             rounded='rounded-full'
             progress={flowProgress / 100}
-            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+            progressColor='linear-gradient(180deg,var(--lineary-progress-from),var(--lineary-progress-to))'
           >
-            <div className='flex justify-between px-4 h-full items-center text-[var(--text-deposit)]'>
+            <div className='flex justify-between px-4 h-full items-center text-[var(--text-progress)]'>
               <div>VIP{currentLevel}</div>
               <div>R$ {formatLocaleMoney(flow ? flow/100: 0)}/R$ {formatLocaleMoney(nextLevelFlow ? nextLevelFlow/100: 0)}</div>
               <div>VIP{currentLevel+1}</div>
