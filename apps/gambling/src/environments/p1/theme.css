@@ -108,6 +108,7 @@
   --input-invalidation-text-color: #E47174;
 
   --drawer-bg: #013E42;
+  --drawer-bg-opacity-50: rgba(1,62,66,.5);
   --drawer-border: rgba(50,63,91,.7);
 }
 

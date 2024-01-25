@@ -24,6 +24,10 @@ import { IUseSingletonPageTemplateConfig } from "../../hooks/useSingletonPageTem
 import { BaseErrorBoundary } from "../../base/BaseErrorBoundary";
 import { MenuDrawer } from "../../../drawers/MenuDrawer";
 import { Footer } from "../../footer";
+import { twMerge } from "tailwind-merge";
+
+export const BASE_TAB_HEIGHT = 60
+export const BASE_DRAWER_WIDTH = 248
 
 type IStyledPage = {
   isCurrentPageCompanyProfile: boolean;
@@ -165,12 +169,12 @@ showToolboxConfig,
   const HeaderHeight =  !isShowHeader ? 0 : isDesktop ? 100 :  isTablet ? 100 : 56;
 
   // NOTE: Style - MenuDrawer
-  const DrawerWidth = 248;
+  const DrawerWidth = BASE_DRAWER_WIDTH;
   const MenuDrawerTop = isDesktop ? 130 : 0;
   const MenuDrawerZIndex = "z-[1003]";
 
   // NOTE: Style - TabBar
-  const TabHeight = (tabBar.mobile || tabBar.tablet || tabBar.desktop) ? 72 : 0;
+  const TabHeight = (tabBar.mobile || tabBar.tablet || tabBar.desktop) ? BASE_TAB_HEIGHT : 0;
 
   const childrenMarginLeft = (isMobile && menuDrawer.mobile && menuDrawer.mobileOverChildren ||
     isTablet && menuDrawer.tablet && menuDrawer.tabletOverChildren ||
@@ -250,12 +254,13 @@ showToolboxConfig,
       {
         isShowMenuDrawer && (
           <div
-            className={`fixed left-0 ${MenuDrawerZIndex}`}
+            className={`fixed left-0 h-full ${MenuDrawerZIndex}`}
             style={{
               top: MenuDrawerTop
             }}
           >
             <MenuDrawer
+              isShowMenuDrawer={isShowMenuDrawer}
               onClickToDownload={onClickToDownload}
             />
 
