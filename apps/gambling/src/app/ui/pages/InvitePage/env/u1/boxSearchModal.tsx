@@ -26,7 +26,7 @@ const Modal = (props: interfaceProps) => {
   const columns = [
     { title: 'Contas de subordinados', name: 'phone', key: 'phone' },
     { title: 'Hora de registo', name: 'registerTime', key: 'registerTime' },
-    { title: 'Válido ou não', name: 'isEffective', key: 'isEffective', render:(record: boolean)=> record ? (<span>Eficiente</span>) : (<span>Inválido</span>) },
+    { title: 'Válido ou não', name: 'isEffective', key: 'isEffective', render:(record: boolean)=> record ? (<span className='text-[var(--state-success-main)]'>Eficiente</span>) : (<span className='text-[var(--state-error-main)]'>Inválido</span>) },
     { title: 'Condições válidas', name: 'condition', key: 'condition' },
   ]
 
@@ -60,7 +60,6 @@ const Modal = (props: interfaceProps) => {
     }
   }
   const handleMenuClick = (status: null| boolean)=>{
-    if(!searchData) return
     setEffective(status)
 
     triggerGetBoxInfo(
@@ -71,6 +70,10 @@ const Modal = (props: interfaceProps) => {
         "phone": searchData || null
       }
     ) 
+  }
+  const handleSearchClick = ()=>{
+    if(!searchData) return
+    handleMenuClick(effective)
   }
   const effectiveMenu = (
     <Menu className= "bg-[var(--primary-variant)] !p-0 text-[--white]" >
@@ -87,8 +90,8 @@ const Modal = (props: interfaceProps) => {
   return (
     <div className="fixed inset-0 bg-[rgba(0,0,0,0.7)] z-50 flex justify-center items-center">
       <div className={cx({
-        'w-full': isMobile,
-        'h-full':isMobile,
+        'w-11/12': isMobile,
+        'h-[85%]':isMobile,
         'w-10/12': isDesktop
       },'bg-[var(--background-primary)] p-5 rounded-lg  text-end'
       )}>
@@ -96,26 +99,27 @@ const Modal = (props: interfaceProps) => {
         <div className='text-center text-2xl text-[var(--white)]'>
           Meus Indicados
         </div>
-        <div className='flex justify-between items-center'>
+        <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center'>
           <Dropdown overlay={effectiveMenu} trigger={['click']}>
-            <div onClick={e => e.preventDefault()} className='max-h-[34px] rounded-lg text-white w-[100px] px-3 py-2 bg-[var(--primary-variant)] flex justify-between'>
+            <div onClick={e => e.preventDefault()} className='w-full lg:max-h-[34px] rounded-lg text-white lg:w-[100px] px-3 py-2 bg-[var(--primary-variant)] flex justify-between'>
               {effective === null ? 'Tudo': effective ? ('Eficiente'):('Inválido')}
               <DownOutlined className='mt-[5px]' />
             </div>
           </Dropdown>
           <DesktopInput
             placeholder='Conta'
-            className={"py-1.5 px-3 text-base rounded !border-[var(--primary-assistant)] bg-[var(--background-primary)]"}
+            className={"py-1.5 px-3 mt-2 lg:mt-0 text-base rounded !border-[var(--primary-assistant)] bg-[var(--background-primary)]"}
             inputClassName={"text-base  placeholder:text-[var(--white-30)]"}
             prefix={<SearchOutlined className={"text-[#969799] text-sm mr-2 flex justify-center items-center"} />}
             onChange={(event: any) => {
               setSearchData(event.target.value);
             }}
-            onClick={handleMenuClick}
+            onClick={handleSearchClick}
             type="number"
           />
         </div>
-        <Table
+        {
+          <Table
            titleStyle='text-sm border-transparent !border-x-0'
            contentStyle='text-base !border-x-0 !border-b !py-6'
           //  fetchData={handleFetchData}
@@ -123,6 +127,7 @@ const Modal = (props: interfaceProps) => {
            columns={columns}
            dataCount={0}
         ></Table>
+        }
       </div>
     </div>
   );

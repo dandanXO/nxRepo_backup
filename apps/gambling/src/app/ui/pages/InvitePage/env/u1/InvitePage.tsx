@@ -49,21 +49,21 @@ const BoxSection = (props:{openModal:()=>void}) =>{
           <div className="text-center lg:mr-12">
             <span className="font-bold">Alcance de recarga</span>
             <br />
-            <span> {boxInfoRes?.data.number} Ou o acima mencionado</span>
+            <span> {boxInfoRes?.data.firstRechargeRequiredAmount} Ou o acima mencionado</span>
           </div>
           <div className="text-center lg:ml-12">
           <span className="font-bold">Alcance de receitas</span>
           <br />
-          <span>{boxInfoRes?.data.firstRechargeRequiredAmount} Ou o acima mencionado</span>
+          <span>{boxInfoRes?.data.boxFlow} Ou o acima mencionado</span>
           </div>
         </div>
       </div>
       <div className="box-search font-bold text-base lg:text-xl bg-[#FFFFFF1A] rounded-lg mt-4 py-4">
-        <div className="text-center text-white">Pessoas de nível inferior eficazes <span className="text-[var(--text-popup)] mx-3">{boxInfoRes?.data.boxFlow}</span> pessoas
+        <div className="text-center text-white">Pessoas de nível inferior eficazes <span className="text-[var(--text-popup)] mx-3">{boxInfoRes?.data.receiveAmount}</span> pessoas
           <span onClick={props.openModal} className=" mx-3 text-[var(--text-popup)] hover:border-b-2 border-[var(--text-popup)]"> {'>>>Detalhes'}</span>
         </div>
       </div>
-      <div className="box-image flex flex-wrap bg-[#FFFFFF1A] rounded-lg mt-4 py-4">
+      <div className="box-image flex flex-wrap bg-[#FFFFFF1A] rounded-lg mt-4 py-4 lg:px-40">
         {
           boxInfoRes?.data.contentVoList.map((box:any, index:any)=>{
             const flagMap = ['close','open', 'active']
@@ -98,12 +98,12 @@ const BoxSection = (props:{openModal:()=>void}) =>{
           })
         }
       </div>
-      <div className="box-image flex flex-wrap bg-[#FFFFFF1A] rounded-lg mt-4 mb-2 p-4">
-        <p className=" text-white text-sm">Instruções Do Evento:</p>
+      <div className="box-image flex flex-wrap bg-[#FFFFFF1A] rounded-lg mt-4 mb-2 p-4 lg:px-40">
+        <p className=" text-white text-sm font-bold">Instruções Do Evento:</p>
         <div className="text-white mt-2">
         Regras de Atividade<br/>
         1. Este evento apenas para membros parceiros, cumprimento dos novos requisitos especificados, apenas pode receber as recompensas correspondentes.<br/>
-        2. Nova regra: Recarga acumulada ≥ {boxInfoRes?.data.number} e tráfego válido ≥ {boxInfoRes?.data.firstRechargeRequiredAmount} no mesmo mês.<br/>
+        2. Nova regra: Recarga acumulada ≥ {boxInfoRes?.data.firstRechargeRequiredAmount} e tráfego válido ≥ {boxInfoRes?.data.boxFlow} no mesmo mês.<br/>
         3. A atividade é limitada ao jogo normal da própria conta. É estritamente proibido arbitrar e destruir o ambiente saudável de entretenimento por meio de comportamento anormal; caso contrário, os prêmios serão confiscados, a conta será congelada e a conta será colocada na lista negra.<br/>
         4. A fim de evitar diferenças textuais na compreensão, a plataforma tem o poder de manter a interpretação final desta atividade.<br/>
         </div>
