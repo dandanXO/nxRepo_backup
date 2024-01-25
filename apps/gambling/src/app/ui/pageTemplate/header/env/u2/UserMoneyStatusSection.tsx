@@ -1,9 +1,11 @@
 import {environment} from "../../../../../../environments/environment";
+import {useCallback} from "react";
 import {formatLocaleMoney} from "../../../../utils/format";
 import {useUserMoneyStatusSection} from "../../hooks/useUserMoneyStatusSection";
 import {ThreeDots} from "react-loading-icons";
 import refreshICON from "./ArrowsClockwise.svg";
 import plusICON from "./icon＿plus.svg";
+import { debounce } from "lodash";
 
 type IProps = {
   className?: string;
@@ -15,7 +17,10 @@ export const UserMoneyStatusSection = (props: IProps) => {
     update,
     isUserMoneyStatusLoading,
   } = useUserMoneyStatusSection();
-
+  const debouncedOnUpdate = useCallback(
+    debounce(update, 1000), // 500ms的去抖动时间
+    [] // 依赖项数组，空数组意味着该函数在组件的生命周期内不会改变
+  );
   return (
     <div className="w-full h-[40px] bg-[var(--grayscale-30)] flex flex-row justify-between items-center rounded-lg"
          // className={twMerge("px-3 flex flex-row justify-between items-center  md:h-11", props.className)}>
@@ -23,7 +28,7 @@ export const UserMoneyStatusSection = (props: IProps) => {
       <div className="flex flex-row items-center pl-2 pr-6 py-[6px]">
         <button className="flex flex-row items-start mr-2"
                 onClick={() => {
-                  update();
+                  debouncedOnUpdate();
                 }}
         >
           <img alt={"refresh"} className={"w-[24px] h-[24px]"} src={refreshICON}/>
