@@ -47,7 +47,7 @@ export const DepositMobileTable = () => {
 
   return (
     <div>
-      {data?.data?.length !== 0
+      {data?.data?.length === 0
         ? <NoData/>
         : <div className="h-[80vh] overflow-y-auto">
           {data?.data?.map((record) => (
