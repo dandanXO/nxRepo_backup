@@ -1,32 +1,11 @@
 import useBreakpoint from "../../pageTemplate/hooks/useBreakpoint";
-import { DesktopGameItem } from "./GameItem/GameItem";
-import { MobileGameItem } from "./GameItem/MobileGameItem";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { PageOrModalPathEnum } from "../../PageOrModalPathEnum";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../reduxStore";
-import { appSlice } from "../../../reduxStore/appSlice";
-import { AppLocalStorage } from "../../../persistant/localstorage";
 import { DesktopGameNumber, MobileGameNumber } from "../../pages/IndexPage";
-import cx from "classnames";
-import { environment } from "../../../../environments/environment"
-import { MobileGameList } from "./GameList/MobileGameList";
-import { GameList } from "./GameList/GameList";
-import { MobileGameTypeHeader } from "./GameTypeHeader/MobileGameTypeHeader";
-import { GameTypeHeader } from "./GameTypeHeader/GameTypeHeader";
-import { mobileGameTypeHeaderProps as PmobileGameTypeHeaderProps } from "./env/pernambucana/mobileGameTypeHeaderProps";
-import { mobileGameTypeHeaderProps as WmobileGameTypeHeaderProps } from "./env/wild/mobileGameTypeHeaderProps";
-import { mobileGameTypeHeaderProps as CmobileGameTypeHeaderProps } from "./env/u1/mobileGameTypeHeaderProps";
 import { renderByUVersion } from "../../utils/renderByUVersion";
-import { AppLocalStorageKey } from "../../../persistant/AppLocalStorageKey";
-import { usePageNavigate } from "../../router/hooks/usePageNavigate";
-import { useClickFavoriteGameItem } from "../../hooks/useClickFavoriteGameItem";
-import { useScrollToPartPageTemplate } from "../../pageTemplate/hooks/useScrollToPartPageTemplate";
 import { GameTypeSection as RGameTypeSectionList } from "./env/u2/GameTypeSection";
 import { GameTypeSection as WGameTypeSectionList } from "./env/wild/GameTypeSection";
 import { GameTypeSection as CGameTypeSectionList } from "./env/u1/GameTypeSection";
-import { GameTypeSection as PGameTypeSectionList } from "./env/pernambucana/GameTypeSection";
+import { GameTypeSection as PGameTypeSectionList } from "./env/p1/GameTypeSection";
 
 export type GameItem = {
   name: string;
@@ -100,6 +79,13 @@ export const GameTypeSectionList = (props: IGameTypeSectionList) => {
 
   return renderByUVersion({
     "wild777bet": <WGameTypeSectionList
+      {...props}
+      displayedItems={displayedItems}
+      animating={animating}
+      listSize={listSize}
+      loadMore={loadMore}
+    />,
+    "p1":<PGameTypeSectionList
       {...props}
       displayedItems={displayedItems}
       animating={animating}
