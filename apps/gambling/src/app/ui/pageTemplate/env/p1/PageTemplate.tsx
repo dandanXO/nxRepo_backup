@@ -152,7 +152,7 @@ showToolboxConfig,
   const isShowMenuDrawer = menuDrawer.mobile || menuDrawer.tablet || menuDrawer.desktop;
 
   return (
-    <BaseStyledPageTemplate
+    <StyledPage
       isCurrentPageCompanyProfile={isCurrentPageCompanyProfile}
     >
 
@@ -273,7 +273,7 @@ showToolboxConfig,
         />
       )}
 
-    </BaseStyledPageTemplate>
+    </StyledPage>
 
   )
 }
