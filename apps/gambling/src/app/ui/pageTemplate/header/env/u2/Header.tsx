@@ -137,6 +137,7 @@ const LogoBaseContainer = () => {
     />
   )
 }
+
 const RWDLogo = () => {
   const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const { onClickToIndex } = usePageNavigate();

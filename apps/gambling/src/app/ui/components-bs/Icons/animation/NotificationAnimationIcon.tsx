@@ -28,7 +28,7 @@ export const NotificationAnimationIcon = (props: INotificationAnimationIcon) => 
       <img
         className="w-[30px] h-[36px] min-w-[30px] min-h-[36px] hover:opacity-70"
         alt={"notification"}
-        src={`assets/${environment.uVersion}/ic_notification.png`}
+        src={`assets/${environment.uVersion}/${environment.mVersion}/icon_notification.png`}
       />
       {props.messageCount !== 0 && <MessageCountBadge>{props.messageCount}</MessageCountBadge>}
     </Notification>

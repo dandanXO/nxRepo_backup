@@ -54,7 +54,7 @@ export const MyPage = ({
           onClick={onClickToNotification}
         >
           <div className='relative'>
-            <img alt='notification' className='w-8 h-8' src={`assets/${environment.uVersion}/ic_notification.png`}/>
+            <img alt='notification' className='w-8 h-8' src={`assets/${environment.uVersion}/${environment.mVersion}/icon_notification.png`}/>
             {messageCount !== 0 && (<div
               className="absolute -top-2 -right-2 bg-red-600 rounded-full flex justify-center items-center w-5 h-5 text-center">{messageCount}</div>)}
           </div>

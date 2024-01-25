@@ -181,7 +181,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               }}
             >
               <img
-                src={`assets/${environment.uVersion}/${environment.mVersion}/icon＿thumbsup.png`}
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_thumbsup.png`}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
@@ -201,7 +201,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               }}
             >
               <img
-                src={`assets/${environment.uVersion}/${environment.mVersion}/icon＿crownsimple.png`}
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_crownsimple.png`}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
@@ -221,7 +221,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               }}
             >
               <img
-                src={`assets/${environment.uVersion}/${environment.mVersion}/icon＿calendarcheck.png`}
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_calendarcheck.png`}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
@@ -242,7 +242,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               }}
             >
               <img
-                src={`assets/${environment.uVersion}/${environment.mVersion}/icon＿users.png`}
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_users.png`}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
@@ -262,7 +262,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               }}
             >
               <img
-                src={`assets/${environment.uVersion}/${environment.mVersion}/icon__buildings.png`}
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_buildings.png`}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
@@ -282,7 +282,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               }}
             >
               <img
-                src={`assets/${environment.uVersion}/${environment.mVersion}/icon__files.png`}
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_files.png`}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
@@ -298,7 +298,6 @@ export const MenuDrawer = (props: IMenuDrawer) => {
           </div>
 
           {label.map((item: IGameType) => {
-            console.log("label", item);
             let gameTypeIcon;
             switch (item) {
               case "Fishing":
@@ -307,12 +306,13 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               case "Viver":
               case "Arcades":
               case "Tables":
-                gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon＿${item.toLowerCase()}.png`;
+                gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon_${item.toLowerCase()}.png`;
                 break
               default:
                 gameTypeIcon = undefined
                 break
             }
+
 
             return (
               <div className={"w-full flex flex-col px-5"}>
@@ -326,12 +326,12 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                   }}
                 >
                   <img
-                    // src={`assets/${environment.uVersion}/${environment.mVersion}/icon＿${item.toLowerCase()}.png`}
+                    // src={`assets/${environment.uVersion}/${environment.mVersion}/icon_${item.toLowerCase()}.png`}
                     src={gameTypeIcon}
                     className="w-5"
                     onError={(e) => {
                       console.log(`load game type icon fail`, `item = ${item}`, e)
-                      e.currentTarget.src = ''
+                      e.currentTarget.style.visibility='hidden'
                     }}
                   />
                   <div className="text-sm font-medium leading-[20px]">
@@ -355,8 +355,8 @@ export const MenuDrawer = (props: IMenuDrawer) => {
               close();
             }}>
               <img
-                alt="icon＿favorite"
-                src={`assets/${environment.uVersion}/${environment.mVersion}/icon＿favorite.png`}
+                alt="icon_favorite"
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_favoritos.png`}
                 className="w-5"
               />
               <div className="text-sm font-medium leading-[20px]">
@@ -374,7 +374,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
             onClick={props.onClickToDownload}
           >
             <img
-              src={`assets/${environment.uVersion}/${environment.mVersion}/icon＿download.png`}
+              src={`assets/${environment.uVersion}/${environment.mVersion}/icon_download.png`}
               alt="DownloadSimple"
               id="DownloadSimple"
               className="w-5"

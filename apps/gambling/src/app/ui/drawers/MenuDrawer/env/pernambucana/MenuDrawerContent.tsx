@@ -132,9 +132,9 @@ export const MenuDrawerContent = () => {
         }}>
           <span className={"pr-4"}>
             {location.pathname === PageOrModalPathEnum.VIPGradePage ? (
-              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.uVersion}/ic_vip.png`}/>
+              <img className={"w-[24px] h-[24px] mr-2"} alt={"home-open"} src={`assets/${environment.uVersion}/${environment.uVersion}/icon_vip.png`}/>
             ): (
-              <img className="w-[25px] h-[25px]" alt={"vip"} src={`assets/${environment.uVersion}/ic_vip.png`}/>
+              <img className="w-[25px] h-[25px]" alt={"vip"} src={`assets/${environment.uVersion}/${environment.uVersion}/icon_vip.png`}/>
             )}
           </span>
         <span className={cx("text-white", {
