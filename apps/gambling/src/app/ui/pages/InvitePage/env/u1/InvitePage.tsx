@@ -103,7 +103,7 @@ const BoxSection = (props:{openModal:()=>void}) =>{
         <div className="text-white mt-2">
         Regras de Atividade<br/>
         1. Este evento apenas para membros parceiros, cumprimento dos novos requisitos especificados, apenas pode receber as recompensas correspondentes.<br/>
-        2. Nova regra: Recarga acumulada ≥ {10} e tráfego válido ≥ {100} no mesmo mês.<br/>
+        2. Nova regra: Recarga acumulada ≥ {boxInfoRes?.data.number} e tráfego válido ≥ {boxInfoRes?.data.firstRechargeRequiredAmount} no mesmo mês.<br/>
         3. A atividade é limitada ao jogo normal da própria conta. É estritamente proibido arbitrar e destruir o ambiente saudável de entretenimento por meio de comportamento anormal; caso contrário, os prêmios serão confiscados, a conta será congelada e a conta será colocada na lista negra.<br/>
         4. A fim de evitar diferenças textuais na compreensão, a plataforma tem o poder de manter a interpretação final desta atividade.<br/>
         </div>
