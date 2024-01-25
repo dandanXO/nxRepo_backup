@@ -1,21 +1,24 @@
-import React, { useState } from "react";
-import { tcx } from "../../../../utils/tcx";
-import AnimateDrawer, { DrawerDelay } from "../../AnimateDrawer";
-import { IAnimateDrawerProps, IConfirmDrawerProps } from "../../ConfirmDrawer";
+import React, {useState} from "react";
+import {tcx} from "../../../../utils/tcx";
+import AnimateDrawer, {DrawerDelay} from "../../AnimateDrawer";
+import {IAnimateDrawerProps, IConfirmDrawerProps} from "../../ConfirmDrawer";
+import {environment} from "../../../../../../environments/environment";
 
 
-
-export const Drawer = (props: IConfirmDrawerProps & IAnimateDrawerProps ) => {
-  const{
+export const Drawer = (props: IConfirmDrawerProps & IAnimateDrawerProps) => {
+  const {
     onClose,
     title,
     content,
     buttonText,
     className,
     buttonStyle,
-    open, 
+    open,
     setOpen
-  }=props;
+  } = props;
+
+
+  const isLeftToRight = environment.mVersion === "m3";
 
   return (
     <AnimateDrawer
@@ -30,15 +33,14 @@ export const Drawer = (props: IConfirmDrawerProps & IAnimateDrawerProps ) => {
       <div className='text-xl text-white font-bold '>{title}</div>
       <div className='text-sm text-white mt-5 text-center mb-12'>{content}</div>
       <button
-        className={tcx(
-          ` text-xl rounded-lg
-            w-full py-2 text-white font-bold bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)]
-            `,
-          buttonStyle
-        )}
-        onClick={()=>{
+        className={
+          isLeftToRight
+            ? tcx(`text-xl rounded-lg w-full py-2 text-white font-bold bg-gradient-to-l from-[var(--button-confirm-from)] to-[var(--button-confirm-to)]`, buttonStyle)
+            : tcx(`text-xl rounded-lg w-full py-2 text-white font-bold bg-gradient-to-b from-[var(--button-confirm-from)] to-[var(--button-confirm-to)]`, buttonStyle)
+        }
+        onClick={() => {
           setOpen(false)
-          setTimeout(()=>{
+          setTimeout(() => {
             onClose()
           }, DrawerDelay)
         }}

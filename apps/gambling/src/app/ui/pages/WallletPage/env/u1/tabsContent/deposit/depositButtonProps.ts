@@ -33,7 +33,7 @@ export const depositButtonProps = ({
     className: `flex-col-reverse px-3 py-2 min-h-[50px] rounded-md text-white  items-center justify-center`,
     activeRechargeClassName: `${rechargeStyle} text-[var(--text-deposit)]`,
     bgClassName: 'bg-gradient-to-b from-[var(--primary-main-from)] to-[var(--primary-main-to)]',
-    activeBgClassName: 'bg-gradient-to-b from-[var(--secondary-main-from)] to-[var(--secondary-main-to)]',
+    activeBgClassName: 'bg-gradient-to-b from-[var(--button-account-from)] to-[var(--button-account-to)]',
     rate: `+ R$ ${rate}`,
     rateClassName: ` text-[var(--secondary-assistant)] ${rateStyle} `,
     activeRateClassName: `text-[var(--state-error-main)] ${rateStyle}`,

@@ -45,10 +45,10 @@ const CurrentLevelInfoCard = ({
             rounded='rounded-full'
             progress={(userVIPInfo?.data?.vip_score || 0) /
               (userVIPInfo?.data?.next_level_score || 1)
-          }
-            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+            }
+            progressColor='linear-gradient(180deg,var(--lineary-progress-from),var(--lineary-progress-to))'
           >
-            <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center'>
+            <div className='h-full flex items-center text-sm font-normal text-[var(--text-progress)] justify-center'>
               <div>
                 R$
                 {formatLocaleMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
@@ -72,9 +72,9 @@ const CurrentLevelInfoCard = ({
               ? userVIPInfo?.data?.flow_progress / 100
               : 0
             }
-            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+            progressColor='linear-gradient(180deg,var(--lineary-progress-from),var(--lineary-progress-to))'
           >
-            <div className='h-full flex items-center text-sm font-normal text-[var(--text-deposit)] justify-center'>
+            <div className='h-full flex items-center text-sm font-normal text-[var(--text-progress)] justify-center'>
               <div>
                 R$
                 {formatLocaleMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}

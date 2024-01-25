@@ -107,6 +107,15 @@
   --button-gametab-via: #FF8F3F;
   --button-gametab-to: #C75300;
 
+  --button-account-from: #FF8833;
+  --button-account-to: #FD6900;
+
+  --button-check-from: #FF8833;
+  --button-check-to: #FD6900;
+
+  --button-confirm-from: #FF8833;
+  --button-confirm-to: #FD6900;
+
   --text-primary: #1C1C1C;
   --text-seondary: #646464;
   --text-tertiary: #BEBEBE;
@@ -115,9 +124,13 @@
   --text-popup: #FFFFFF;
   --text-group-from: #FBB040;
   --text-group-to: #FFDF66;
+  --text-progress: #6A3C12;
 
   --lineary-blue-from: #FF6A00;
   --lineary-blue-to: #FF6A00;
+  --lineary-bell: #FFCE52;
+  --lineary-progress-from: #FF8833;
+  --lineary-progress-to: #FD6900;
 
   /*NOTE::taipei colors-end*/
 

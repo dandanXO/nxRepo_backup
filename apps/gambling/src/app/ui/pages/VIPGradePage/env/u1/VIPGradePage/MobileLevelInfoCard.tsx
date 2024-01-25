@@ -22,7 +22,7 @@ export const MobileLevelInfoCard = ({
           <div className='w-[100px] flex flex-col items-center justify-center'>
             <img
               alt={`levelInfoIcon`}
-              src={`assets/${environment.uVersion}/icon_vip_info.png`}
+              src={`assets/${environment.uVersion}/${environment.mVersion}/icon_vip_info.png`}
               className='w-[76px] mb-3 object-contain'
             />
             <img className={tcx('w-[45px]', ['w-[57px]', level > 9])} alt='vipLevel' src={`assets/${environment.uVersion}/ic_vip_${level}.png`} />

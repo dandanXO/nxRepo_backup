@@ -52,7 +52,7 @@ const LevelInfoCard = ({
             level < 20 && (
               <img
                 alt={`levelInfoIcon`}
-                src={`assets/${environment.uVersion}/icon_vip_info.png`}
+                src={`assets/${environment.uVersion}/${environment.mVersion}/icon_vip_info.png`}
                 className='w-[94px] mb-[10px] object-contain'
               />
             )

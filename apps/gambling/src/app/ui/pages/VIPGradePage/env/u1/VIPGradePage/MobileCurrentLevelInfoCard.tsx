@@ -34,9 +34,9 @@ export const MobileCurrentLevelInfoCard = ({
             progress={(userVIPInfo?.data?.vip_score || 0) /
               (userVIPInfo?.data?.next_level_score || 1)
             }
-            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+            progressColor='linear-gradient(180deg,var(--lineary-progress-from),var(--lineary-progress-to))'
           >
-            <div className='h-full flex items-center text-sm font-medium text-[var(--text-deposit)] justify-center px-4'>
+            <div className='h-full flex items-center text-sm font-medium text-[var(--text-progress)] justify-center px-4'>
               <div>
                 R$
                 {formatLocaleMoney(userVIPInfo?.data?.vip_score ? userVIPInfo?.data?.vip_score / 100 : 0)}
@@ -63,9 +63,9 @@ export const MobileCurrentLevelInfoCard = ({
                 ? userVIPInfo?.data?.flow_progress / 100
                 : 0
             }
-            progressColor='linear-gradient(180deg,var(--secondary-main-from),var(--secondary-main-to))'
+            progressColor='linear-gradient(180deg,var(--lineary-progress-from),var(--lineary-progress-to))'
           >
-            <div className='h-full flex items-center text-sm font-medium text-[var(--text-deposit)] justify-center px-4'>
+            <div className='h-full flex items-center text-sm font-medium text-[var(--text-progress)] justify-center px-4'>
               <div>
                 R$
                 {formatLocaleMoney(userVIPInfo?.data?.flow ? userVIPInfo?.data?.flow / 100 : 0)}
