@@ -41,14 +41,33 @@ const Modal = (props: interfaceProps) => {
     }
   )
   }, [])
-
+  useEffect(()=>{
+    triggerGetBoxInfo(
+    {
+      token: localStorage.getItem(localStorage.token) || '',
+      "pageNum": 1,
+      "pageSize": 100,
+      "isEffective": effective,
+      "phone": searchData || null
+    }
+  )
+  }, [isOpen])
+  const closeModal = ()=>{
+    if(onClose){
+      // 初始化
+      setEffective(null)
+      return onClose()
+    }
+  }
   const handleMenuClick = (status: null| boolean)=>{
+    if(!searchData) return
     setEffective(status)
+
     triggerGetBoxInfo(
       {
         "pageNum": 1,
         "pageSize": 100,
-        "isEffective": status || effective || null,
+        "isEffective": status,
         "phone": searchData || null
       }
     ) 
@@ -73,7 +92,7 @@ const Modal = (props: interfaceProps) => {
         'w-10/12': isDesktop
       },'bg-[var(--background-primary)] p-5 rounded-lg  text-end'
       )}>
-        <CloseOutlined onClick={onClose}  className='text-[var(--white)] w-[24px] h-[24px]'/>
+        <CloseOutlined onClick={closeModal}  className='text-[var(--white)] w-[24px] h-[24px]'/>
         <div className='text-center text-2xl text-[var(--white)]'>
           Meus Indicados
         </div>
@@ -85,6 +104,7 @@ const Modal = (props: interfaceProps) => {
             </div>
           </Dropdown>
           <DesktopInput
+            placeholder='Conta'
             className={"py-1.5 px-3 text-base rounded !border-[var(--primary-assistant)] bg-[var(--background-primary)]"}
             inputClassName={"text-base  placeholder:text-[var(--white-30)]"}
             prefix={<SearchOutlined className={"text-[#969799] text-sm mr-2 flex justify-center items-center"} />}

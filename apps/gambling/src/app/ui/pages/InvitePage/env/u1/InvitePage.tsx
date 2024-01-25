@@ -60,7 +60,7 @@ const BoxSection = (props:{openModal:()=>void}) =>{
       </div>
       <div className="box-search font-bold text-base lg:text-xl bg-[#FFFFFF1A] rounded-lg mt-4 py-4">
         <div className="text-center text-white">Pessoas de nível inferior eficazes <span className="text-[var(--text-popup)] mx-3">{boxInfoRes?.data.boxFlow}</span> pessoas
-          <span onClick={props.openModal} className=" mx-3 text-[var(--text-popup)]"> {'>>>Detalhes'}</span>
+          <span onClick={props.openModal} className=" mx-3 text-[var(--text-popup)] hover:border-b-2 border-[var(--text-popup)]"> {'>>>Detalhes'}</span>
         </div>
       </div>
       <div className="box-image flex flex-wrap bg-[#FFFFFF1A] rounded-lg mt-4 py-4">
@@ -97,6 +97,16 @@ const BoxSection = (props:{openModal:()=>void}) =>{
             )
           })
         }
+      </div>
+      <div className="box-image flex flex-wrap bg-[#FFFFFF1A] rounded-lg mt-4 mb-2 p-4">
+        <p className=" text-white text-sm">Instruções Do Evento:</p>
+        <div className="text-white mt-2">
+        Regras de Atividade<br/>
+        1. Este evento apenas para membros parceiros, cumprimento dos novos requisitos especificados, apenas pode receber as recompensas correspondentes.<br/>
+        2. Nova regra: Recarga acumulada ≥ {10} e tráfego válido ≥ {100} no mesmo mês.<br/>
+        3. A atividade é limitada ao jogo normal da própria conta. É estritamente proibido arbitrar e destruir o ambiente saudável de entretenimento por meio de comportamento anormal; caso contrário, os prêmios serão confiscados, a conta será congelada e a conta será colocada na lista negra.<br/>
+        4. A fim de evitar diferenças textuais na compreensão, a plataforma tem o poder de manter a interpretação final desta atividade.<br/>
+        </div>
       </div>
     </section>
   )
