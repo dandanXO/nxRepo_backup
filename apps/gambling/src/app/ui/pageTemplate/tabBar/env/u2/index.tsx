@@ -14,6 +14,9 @@ import {UserSVGIcon} from "./UserSVGIcon";
 import {GameControllerSVGIcon} from "./GameControllerSVGIcon";
 import {RootState} from "../../../../../reduxStore";
 import useBreakpoint from "../../../hooks/useBreakpoint";
+import {AssetMappingCoco} from "../../../../../../assets/assetMapping.coco";
+import {environment} from "../../../../../../environments/environment";
+
 
 export const TabBar = (props: ITabBar) => {
   const dispatch = useDispatch();
@@ -26,7 +29,7 @@ export const TabBar = (props: ITabBar) => {
 
   // const iconSize = size === "big" ? "w-[40px] h-[40px]" : "w-[27px] h-[27px]";
   // const iconSize = size === "big" ? "w-[34px] h-[34px]" : "w-[27px] h-[27px]";
-  const iconSize = "w-[24px] h-[24px]";
+  const iconSize = "w-[28px] h-[28px]";
   // console.log("isShowMenuDrawer", props.isShowMenuDrawer);
   const {
     onClickToIndex,
@@ -37,9 +40,11 @@ export const TabBar = (props: ITabBar) => {
 
   const isActive = (active: boolean) => active ? "#9c6aef" : "#b3b3b3";
   const {openMenuDrawer} = useSelector((state: RootState) => state.ui);
-  const { messageCount } = useSelector((state: RootState) => state.app);
+  const {messageCount} = useSelector((state: RootState) => state.app);
 
-  const { isMobile } = useBreakpoint();
+  const {isMobile} = useBreakpoint();
+
+  console.log(" ---> openMenuDrawer", openMenuDrawer)
 
   return (
     <footer
@@ -58,7 +63,12 @@ export const TabBar = (props: ITabBar) => {
           dispatch(uiSlice.actions.setOpenMenuDrawer(true));
         }}
       >
-        <MenuSVGIcon size={isMobile ? 28: undefined}/>
+        <img className={cx(iconSize)}
+             src={openMenuDrawer
+               ? `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_menu_m_hold.png`
+               : `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_menu_m.png`
+             }/>
+        {/*<MenuSVGIcon size={isMobile ? 28: undefined}/>*/}
         <div
           className={twMerge("text-sm font-medium leading-5",
             "text-[var(--grayscale-70)]",
@@ -77,7 +87,14 @@ export const TabBar = (props: ITabBar) => {
             onClickToInvite();
           }}
         >
-          <ThumbsUPSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.InvitePage)} size={isMobile ? 28: undefined}/>
+
+          <img className={cx(iconSize)} src={
+            location.pathname === PageOrModalPathEnum.InvitePage
+              ? `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_invite_m_hold.png`
+              : `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_invite_m.png`
+          }/>
+          {/*<ThumbsUPSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.InvitePage)}*/}
+          {/*                 size={isMobile ? 28 : undefined}/>*/}
           <div
             className={twMerge("text-sm font-medium leading-5",
               location.pathname === PageOrModalPathEnum.InvitePage && "text-[var(--primary-hover)]",
@@ -101,9 +118,13 @@ export const TabBar = (props: ITabBar) => {
 
           <div className={"w-[28px] h-[28px]"}/>
 
-          <div className="absolute top-[-35px] bg-[var(--grayscale-20)] flex flex-row items-start pt-1 px-1 rounded-[100px]">
-            <div className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[linear-gradient(145deg,_var(--primary-main)_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-center mb-1 pt-4 w-16 h-16 items-start rounded-[100px]">
-              <GameControllerSVGIcon size={isMobile ? 28: undefined}/>
+          <div
+            className="absolute top-[-35px] bg-[var(--grayscale-20)] flex flex-row items-start pt-1 px-1 rounded-[100px]">
+            <div
+              className="shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(255,_255,_255,_0.25)] bg-[linear-gradient(145deg,_var(--primary-main)_-7%,#10b98f_109%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-row justify-center mb-1 pt-4 w-16 h-16 items-start rounded-[100px]">
+              {/*<GameControllerSVGIcon size={isMobile ? 28 : undefined}/>*/}
+              <img className={cx(iconSize)}
+                   src={`assets/${environment.uVersion}/${environment.mVersion}/icon_tab_home_m.png`}/>
             </div>
           </div>
 
@@ -111,9 +132,9 @@ export const TabBar = (props: ITabBar) => {
           <div
             className={twMerge("text-sm font-medium leading-5",
               (location.pathname === PageOrModalPathEnum.IndexPage ||
-              location.pathname === PageOrModalPathEnum.GameSearchPage) && "text-[var(--primary-hover)]",
+                location.pathname === PageOrModalPathEnum.GameSearchPage) && "text-[var(--primary-hover)]",
               !(location.pathname === PageOrModalPathEnum.IndexPage ||
-                location.pathname === PageOrModalPathEnum.GameSearchPage)  && "text-[var(--grayscale-70)]",
+                location.pathname === PageOrModalPathEnum.GameSearchPage) && "text-[var(--grayscale-70)]",
             )}
           >
             Casino
@@ -130,7 +151,14 @@ export const TabBar = (props: ITabBar) => {
             onClickToVipGrade();
           }}
         >
-          <CrownSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.VIPGradePage)} size={isMobile ? 28: undefined} />
+
+          <img className={cx(iconSize)} src={
+            location.pathname === PageOrModalPathEnum.VIPGradePage
+              ? `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_vip_m_hold.png`
+              : `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_vip_m.png`
+          }/>
+          {/*<CrownSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.VIPGradePage)}*/}
+          {/*              size={isMobile ? 28 : undefined}/>*/}
 
           <div
             className={twMerge("text-sm font-medium leading-5",
@@ -153,9 +181,18 @@ export const TabBar = (props: ITabBar) => {
           }}
         >
           <div className="relative">
-            <UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)} size={isMobile ? 28: undefined} />
+
+            <img className={cx(iconSize)} src={
+              location.pathname === PageOrModalPathEnum.MyPage
+                ? `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_account_m_hold.png`
+                : `assets/${environment.uVersion}/${environment.mVersion}/icon_tab_account_m.png`
+            }/>
+
+            {/*<UserSVGIcon color={isActive(location.pathname === PageOrModalPathEnum.MyPage)}*/}
+            {/*             size={isMobile ? 28 : undefined}/>*/}
             {messageCount > 0 && (
-              <div className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[var(--state-error-main)] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
+              <div
+                className="absolute top-[-10px] right-[-10px] text-xs leading-[16px] text-white bg-[var(--state-error-main)] flex flex-row mb-4 w-5 h-5 justify-center items-center rounded-[100px]">
                 {messageCount}
               </div>
             )}

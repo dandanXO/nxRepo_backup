@@ -298,20 +298,20 @@ export const MenuDrawer = (props: IMenuDrawer) => {
           </div>
 
           {label.map((item: IGameType) => {
-            let gameTypeIcon;
-            switch (item) {
-              case "Fishing":
-              case "Vivo":
-              case "Slots":
-              case "Viver":
-              case "Arcades":
-              case "Tables":
-                gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon_${item.toLowerCase()}.png`;
-                break
-              default:
-                gameTypeIcon = undefined
-                break
-            }
+            // let gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon_${item.toLowerCase()}.png`;
+            // switch (item) {
+            //   case "Fishing":
+            //   case "Vivo":
+            //   case "Slots":
+            //   case "Viver":
+            //   case "Arcades":
+            //   case "Tables":
+            //     gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon_${item.toLowerCase()}.png`;
+            //     break
+            //   default:
+            //     gameTypeIcon = undefined
+            //     break
+            // }
 
 
             return (
@@ -326,8 +326,7 @@ export const MenuDrawer = (props: IMenuDrawer) => {
                   }}
                 >
                   <img
-                    // src={`assets/${environment.uVersion}/${environment.mVersion}/icon_${item.toLowerCase()}.png`}
-                    src={gameTypeIcon}
+                    src={`assets/${environment.uVersion}/${environment.mVersion}/icon_${item.toLowerCase()}.png`}
                     className="w-5"
                     onError={(e) => {
                       console.log(`load game type icon fail`, `item = ${item}`, e)

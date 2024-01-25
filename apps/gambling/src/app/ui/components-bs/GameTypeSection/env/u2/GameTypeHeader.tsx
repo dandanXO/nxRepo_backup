@@ -42,21 +42,21 @@ export const GameTypeHeader = (props: {
   //   gameTypeName = 'favoritos'
   // }
 
-  let gameTypeIcon;
-  switch (gameTypeName.toLowerCase()) {
-    case "fishing":
-    case "vivo":
-    case "slots":
-    case "viver":
-    case "arcades":
-    case "tables":
-    case "favoritos":
-      gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon_${gameTypeName.toLowerCase()}.png`;
-      break
-    default:
-      gameTypeIcon = undefined
-      break
-  }
+  // const gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon_${gameTypeName.toLowerCase()}.png`;
+  // switch (gameTypeName.toLowerCase()) {
+  //   case "fishing":
+  //   case "vivo":
+  //   case "slots":
+  //   case "viver":
+  //   case "arcades":
+  //   case "tables":
+  //   case "favoritos":
+  //     gameTypeIcon = `assets/${environment.uVersion}/${environment.mVersion}/icon_${gameTypeName.toLowerCase()}.png`;
+  //     break
+  //   default:
+  //     gameTypeIcon = ``;
+  //     break
+  // }
 
   return (
     <header
@@ -78,7 +78,7 @@ export const GameTypeHeader = (props: {
               (
                 <img
                   className='w-6 h-6'
-                  src={gameTypeIcon}
+                  src={`assets/${environment.uVersion}/${environment.mVersion}/icon_${gameTypeName.toLowerCase()}.png`}
                   alt="recentIcon"
                   onError={(e) => {
                     console.log(`load game type index-tab-icon fail`, `item = ${gameTypeName}`, e)
