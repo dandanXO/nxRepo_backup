@@ -13,7 +13,7 @@ import {MenuDrawerContainer} from "../../../drawers/MenuDrawer/MenuDrawerContain
 import {UserLoginStatusModal} from "../../../modals/UserLoginStatusModal";
 import {UserLoginStatusDrawers} from "../../../drawers/UserLoginStatusDrawers";
 
-import {MobileHeader} from "../../header/env/pernambucana/MobileHeader";
+import {MobileHeader} from "../../header/env/p1/MobileHeader";
 import {MenuDrawerContent} from "../../../drawers/MenuDrawer/env/pernambucana/MenuDrawerContent";
 
 import {TShowToolboxConfig} from "../../base/types";
@@ -188,7 +188,7 @@ showToolboxConfig,
       {/*Refactor ME*/}
       {contextHolder}
 
-      {!isMobile && isShowDesktopHeader && (
+      {isDesktop && isShowDesktopHeader && (
        <Header
           onClickToDownload={onClickToDownload}
           isLogin={isLogin}
