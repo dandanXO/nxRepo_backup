@@ -1,169 +1,39 @@
 :root {
-  --font-family: 'Inter', sans-serif;
-
-
-  /*taipei colors-start*/
-  --primary-main-from: #45CCF7;
-  --primary-main-to: #0044C7;
-  --primary-variant: #002773;
-  --primary-assistant: #A1C1FF;
-  --primary-assistant-20: rgba(161, 193, 255, 0.20);
-
-  --secondary-main-from: #FFEF61;
-  --secondary-main-to: #FF7E21;
-  --secondary-variant: #A25700;
-  --secondary-assistant: #FDEF70;
-
-  --black: #000000;
-  --white: #FFFFFF;
-  --white-30: rgba(255, 255, 255, 0.3);
-  --white-20: rgba(255, 255, 255, 0.2);
-
-  --state-success-main: #32D957;
-  --state-success-variant: #E2FFE8;
-  --state-error-main: #F05151;
-  --state-error-main-30: rgba(240, 81, 81, 0.30);
-  --state-error-variant: #FF9696;
-
-  --state-info-main: #51B7F0;
-  --state-info-variant: #A4DEFF;
-  --state-disable-main: #C5C5C5;
-  --state-disable-variant: #969696;
-
-  --background-primary: #152951;;
-  --background-textfields: #2D3047;
-  --background-checkin-from: #641FA9;
-  --background-checkin-to: #1E083A;
-  --background-modal-from: #577DDE;
-  --background-modal-to: #000691;
-  --background-footer: #0B1948;
-
-
-  --background-add-money: #2AD2E9;
-  --background-vip-level-from: #7C91FF;
-  --background-vip-level-to: #2E22BD;
-  --background-alert-text-from: #FEB867;
-  --background-alert-text-to: #FF7E21;
-  --background-submenu: #040404bf;
-
-  --background-dashboard-main-from: #5754F3;
-  --background-dashboard-main-via: #121C78;
-  --background-dashboard-main-to: #0D1DA4;
-  --background-dashboard-secondary: #252A99;
-  --background-modal-telegram-from: #0E3E9B;
-  --background-modal-telegram-to: #6272FF;
-
-
-  --stroke-textfields: #AAC6FF;
-  --stroke-block: #ABDCFF;
-  /* stroke/modal Solid, 70%, Normal #40F4FF -> rgba to hex : #40f4ffb3*/
-  --stroke-modal: #40f4ffb3;
-  --stroke-popup: #FFB84C;
-  --stroke-dashboard-main:#00FFEF;
-  --stroke-dashboard-secondary: #393FC4;
-  --stroke-button: rgba(6,240,246,1);
-
-
-
-  --button-login-1-from: #FFC121;
-  --button-login-1-to: #FF7E21;
-
-  --button-login-2-from: #C5C5C5;
-  --button-login-2-to: #969696;
-
-  --button-checkin-from: #FFA775;
-  --button-checkin-to: #FF2121;
-
-  --button-modal-download-from: #3076FF;
-  --button-modal-download-to: #1650A6;
-
-  --button-withdraw-from: #FFA775;
-  --button-withdraw-to: #FF2121;
-
-  --button-deposit-from: #FF7373;
-  --button-deposit-to: #9E21FF;
-
-  --button-invite-record-from: #FFD05D;
-  --button-invite-record-to: #FF3838;
-
-  --button-gametab-focus-from: #FFFFFF;
-  --button-gametab-focus-via: #88E3FF;
-  --button-gametab-focus-to: #0044C7;
-
-  --button-drawer-linear01-from: #528DFF;
-  --button-drawer-linear01-to: #0057FF;
-
-  --button-drawer-linear02-from: #2BE681;
-  --button-drawer-linear02-to: #0E735B;
-
-  --button-drawer-linear03-from: #FF8E8E;
-  --button-drawer-linear03-to: #FF3838;
-
-  --button-drawer-linear04-from: #FFE500;
-  --button-drawer-linear04-to: #FF6A00;
-
-  --button-gametab-from: #FFFFFF;
-  --button-gametab-via: #88E3FF;
-  --button-gametab-to: #0044C7;
-
-  --text-primary: #1C1C1C;
-  --text-seondary: #646464;
-  --text-tertiary: #BEBEBE;
-  --text-white: #ffffff;
-  --text-deposit: #6A3C12;
-  --text-popup: #FFF065;
-  --text-group-from: #FBB040;
-  --text-group-to: #FFDF66;
-
-  --lineary-blue-from: #2492FF;
-  --lineary-blue-to: #0043AE;
-
-
-  /*taipei colors-end*/
+  --font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui", "Hiragino Sans GB", "Microsoft Yahei", sans-serif;;
 
   /*bg*/
-  --main: #45CCF7;
-  --varient: #002773;
-  --assistant: #A1C1FF;
-  --medium: #A1C1FF;
-  --light: #06F2ED;
-
-
-  --page-background: #152951;
+  --main: #025C50;
+  --varient: #014F4B;
+  --assistant: #013E42;
+  --medium: #069D5C;
+  --light: #31B77D;
 
   /*bg-other*/
-  --game-block: #212B5C;
-  --footer: #212B5C;
+  --game-block: #013E42;
+  --footer: #005B46;
 
   /*main*/
-  --main-primary-main: #CAF0F8;
-  --main-primary-varient: #1D2147;
-  --main-primary-assistant: #1D2147;
-  --main-secondary-main: #EFF95C;
-  --main-state-error: #1D2147;
-  --main-state-warning: #1D2147;
+  --main-primary-main: #16FF8F;
+  --main-primary-varient: #047A70;
+  --main-primary-assistant: #10DB8D;
+  --main-secondary-main: #FBFF3F;
+  --main-state-error: #FF7777;
+  --main-state-warning: #FFCF45;
 
   /*table*/
-  --table-main: #3A28AC;
-  --table-varient: #341573;
+  --table-main: #008B8D;
+  --table-varient: #006D79;
   --table-asisstant: #005265;
-  --table-light: #26E5FF;
-
-  /* Table 樣式 */
-  --table-thead: var(--primary-variant);
-  --table-thead-text: var(--white);
-  --table-tbody: var(--primary-assistant-20);
-  --table-tbody-zebra: var(--white-20);
-  --table-tbody-text: var(--white);
+  --table-light: #58DCC7;
 
   /*button*/
   /*btn/button*/
-  --btn-gradient1-from: #58DDFF;
-  --btn-gradient1-to: #0D7FFF;
+  --btn-gradient1-from: #C8F568;
+  --btn-gradient1-to: #16FF8F;
 
   /*btn/button_2*/
-  --btn-gradient2-from: #6600C5;
-  --btn-gradient2-to: #0681FF;
+  --btn-gradient2-from: #56F0D6;
+  --btn-gradient2-to: #8499FD;
 
   /*btn/button_inactive*/
   --btn-gradient-inactive-from: #D9D9D9;
@@ -221,31 +91,23 @@
   --text-gradient-ad-tg-from: #D071FD;
   --text-gradient-ad-tg-to: #003BC6;
 
-  --tab-primary-from: var(--primary-main-to);
-  --tab-primary-to: var(--primary-main-from);
-
-  --tab-text-color-normal: #FFFFFF;
-  --tab-text-color-active: #FFFFFF;
-
-
-  /*NOTE: figma 沒有 自己拆出來的*/
-  --input-border: var(--stroke-textfields);
-  --input-background: var(--background-textfields);
-  --input-placeholder-color: var(--text-tertiary);
-  --input-text-color: var(--white);
+  --tab-primary-from: #013E42;
+  --tab-primary-to: #013E42;
+  --tab-text-color-normal: #2CFD99;
+  --tab-text-color-active: #E5F041;
 
 
-  --input-focus-border: var(--stroke-textfields);
-  --input-focus-background: var(--background-textfields);
-  --input-invalidation-border: var(--state-error-variant);
-  --input-invalidation-text-color: var(--state-error-variant);
+  --input-text-color: #ffffff;
+  --input-placeholder-color: #d2afff;
+  /*--input-mobile-border: transparent;*/
+  --input-border: #5a3af7b3;
+  --input-background: #341972;
+  --input-focus-background: #E47174;
+  --input-focus-border: #1A7BFF;
+  --input-invalidation-border: #8B619E;
+  --input-invalidation-text-color: #E47174;
 
-  --drawer-bg: #17103F;
+  --drawer-bg: #025C50;
   --drawer-border: rgba(50,63,91,.7);
-
-  /* scrollbar */
-  --scrollbar-width: 3px;
-  --scrollbar-color: var(--white-20);
-  --scrollbar-background: 'transparent';
-  --scrollbar-rounded: 10px;
 }
+
