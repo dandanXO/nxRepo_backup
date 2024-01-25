@@ -34,7 +34,6 @@ type requestData = {
 // 獲取寶箱資訊
 export const GetBoxInviteListEndpoint = (builder: ExternelEndpoint) => builder.mutation<GetBoxInfoResponse, any>({
   query: (data: requestData) => {
-    console.log(data,'datataaaa')
     return({
       method: 'post',
       url: GET_BOX＿INVITE_LIST_URL,

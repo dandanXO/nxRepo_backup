@@ -16,6 +16,7 @@ interface Config {
   recharge_first_cashback_rate?: string;
   reward_daily_reset?: boolean;
   recharge_bonus_start?: number;
+  box_flag?: number
 }
 
 export type ILoginUIStatusType = "login" | "register" | "forget";

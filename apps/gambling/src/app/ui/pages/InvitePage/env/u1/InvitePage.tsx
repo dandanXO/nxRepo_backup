@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,  } from "react";
 import useBreakpoint from "../../../../pageTemplate/hooks/useBreakpoint";
 import { useAllowLoginRouterRules } from "../../../../router/hooks/useAllowLoginRouterRules";
+import { useSelector } from 'react-redux';
+import {RootState} from "../../../../../reduxStore";
 
 import { environment } from "../../../../../../environments/environment";
 import { TabItem, Tabs } from "../../../../components-bs/TabItem/TabItem";
@@ -17,8 +19,8 @@ import {
   useGetBoxInfoMutation,
   useLazyGetBoxReceiveQuery
 } from "../../../../../external";
-const BoxSection = (props:{openModal:()=>void, boxInfoRes:any, triggerGetBoxInfo:any}) =>{
-  const {boxInfoRes, triggerGetBoxInfo} = props
+const BoxSection = (props:{openModal:()=>void}) =>{
+  const [triggerGetBoxInfo, {data:boxInfoRes}] = useGetBoxInfoMutation();
   const [triggerGetBoxReceive] = useLazyGetBoxReceiveQuery()
   useEffect(()=>{
     triggerGetBoxInfo({token: localStorage.getItem(localStorage.token) || ''})
@@ -103,14 +105,11 @@ export const InvitePage = (props: IInvitePage) => {
   
   const { onClickToIndex } = usePageNavigate();
   const { children, panelMode, setPanelMode } = props;
-  const [triggerGetBoxInfo, {data:boxInfoRes}] = useGetBoxInfoMutation();
   const { isMobile } = useBreakpoint();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  useEffect(()=>{
-    triggerGetBoxInfo({token: localStorage.getItem(localStorage.token) || ''})
-  }, [])
+  const box_flag = useSelector((rootState: RootState) => rootState.app.config.box_flag)
   
   return (
     <PageContainer>
@@ -123,8 +122,8 @@ export const InvitePage = (props: IInvitePage) => {
           )
         }
       {
-        // status = 0 沒開寶箱所以顯示邀請
-        !boxInfoRes?.data.status ? (
+        // box_flag = 0 沒開寶箱所以顯示邀請
+        !box_flag ? (
         <>
           <section className={"tab-item w-full flex flex-row justify-center item-center mb-4"}>
             <div>
@@ -171,7 +170,7 @@ export const InvitePage = (props: IInvitePage) => {
           <Modal isOpen={isModalOpen} onClose={closeModal}>
               <p>This is a modal!</p>
             </Modal>
-          <BoxSection boxInfoRes={boxInfoRes} triggerGetBoxInfo={triggerGetBoxInfo}  openModal={openModal} />
+          <BoxSection openModal={openModal} />
         </>
       )
       }
