@@ -36,11 +36,11 @@ export const gateway = async (
       headers: {
         'Content-Type': 'application/json',
         Token: token,
+        'Cache-Control': 'max-age=3',
         ...headers,
       },
     };
     const result = await axios(config);
-
     // NOTE: 系統維護中
     if(result?.data && result?.data?.code && result?.data?.code === 102015 ) {
       dispatch(appSlice.actions.setGlobalMessage(result?.data?.msg));

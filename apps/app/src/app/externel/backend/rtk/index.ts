@@ -43,6 +43,7 @@ import axiosBaseQuery from './axiosBaseQuery';
 
 export const APIV3 = createApi({
   reducerPath: 'apiv3',
+  // keepUnusedDataFor: 3, // 缓存时间为3秒
   baseQuery: axiosBaseQuery({
     baseUrl: '/api/v3',
   }),
@@ -230,6 +231,7 @@ export const {
 
 export const API = createApi({
   reducerPath: 'api',
+  // keepUnusedDataFor: 3, // 缓存时间为3秒
   baseQuery: axiosBaseQuery({
     baseUrl: '/api/v2',
   }),
