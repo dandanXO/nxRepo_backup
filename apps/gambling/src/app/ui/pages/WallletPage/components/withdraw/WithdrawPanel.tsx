@@ -156,13 +156,14 @@ export const WithdrawPanel = (props: IWithdrawPanel) => {
     const isNotBaseOn10 = Number(value) % 10
     const isOverTotalReasableValue = Number(value) > totalReasableValue;
     const isError = isOutOfRange || isValueError || isNotBaseOn10 || isOverTotalReasableValue;
+    const totalReasableValueBase10 = Number(Math.floor(totalReasableValue / 10)) * 10
     // 錯誤訊息 (超過可提取): 可提取金額為0.00 - > O valor que pode ser sacado é 0.00
     // 錯誤訊息 (欄位空白): Valor da retirada (50 - 100)
     const errorMessage =
       isOutOfRange ? `O valor que pode ser sacado é ${formatLocaleMoney(withdrawLimitMin)} - ${formatLocaleMoney(withdrawLimitMax)}` :
         isValueError ? `Valor da retirada (${formatLocaleMoney(withdrawLimitMin)} - ${formatLocaleMoney(withdrawLimitMax)})` :
           isNotBaseOn10 ? 'O valor da retirada deve ser em múltiplos de 50. Por exemplo:  50, 100, 1100, 1650, 28650…' :
-            isOverTotalReasableValue ? `O valor que pode ser sacado é ${Number((totalReasableValue / 10).toFixed(0)) * 10}` : ''
+            isOverTotalReasableValue ? `O valor que pode ser sacado é ${totalReasableValue > totalReasableValueBase10 ? totalReasableValueBase10 : 0 }` : ''
 
     setAmountInput({
       data: value,

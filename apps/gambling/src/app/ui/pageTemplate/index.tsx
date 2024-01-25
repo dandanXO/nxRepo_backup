@@ -132,7 +132,7 @@ export const PageTemplate = (props: IPage) => {
     menuDrawer: props.menuDrawer,
     // NOTE: deprecated
     showTabbar: props.showTabbar,
-    showMenuDrawer: props. showMenuDrawer && openMenuDrawer,
+    showMenuDrawer: props.showMenuDrawer && openMenuDrawer,
   });
 
 
@@ -268,6 +268,30 @@ export const PageTemplate = (props: IPage) => {
             onClickToOpenTelegramManager={onClickToOpenTelegramManager}
             isUILoading={isUILoading}
             showToolboxConfig={props.showToolboxConfig}
+
+            header={{
+              mobile: isShowMobileHeader,
+              tablet: isShowTabletHeader,
+              desktop: isShowDesktopHeader,
+            }}
+            footer={{
+              mobile: isShowMobileFooter,
+              tablet: isShowTabletFooter,
+              desktop: isShowDesktopFooter,
+            }}
+            tabBar={{
+              mobile: isShowMobileTabBar,
+              tablet: isShowTabletTabBar,
+              desktop: isShowDesktopTabBar,
+            }}
+            menuDrawer={{
+              mobile: isShowMobileMenuDrawer,
+              tablet: isShowTabletMenuDrawer,
+              desktop: isShowDesktopMenuDrawer,
+              // mobileOverChildren,
+              // tabletOverChildren,
+              // desktopOverChildren
+            }}
           >
             {props.children}
           </PPageTemplate>
