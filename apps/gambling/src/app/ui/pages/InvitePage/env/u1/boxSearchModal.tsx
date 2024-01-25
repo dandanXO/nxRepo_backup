@@ -26,7 +26,7 @@ const Modal = (props: interfaceProps) => {
   const columns = [
     { title: 'Contas de subordinados', name: 'phone', key: 'phone' },
     { title: 'Hora de registo', name: 'registerTime', key: 'registerTime' },
-    { title: 'Válido ou não', name: 'isEffective', key: 'isEffective', render:(record: boolean)=> record ? (<span className='text-[var(--state-success-main)]'>Eficiente</span>) : (<span className='text-[var(--state-error-main)]'>Inválido</span>) },
+    { title: 'Válido ou não', name: 'isEffective', key: 'isEffective', render:(record: any)=> record.isEffective ? (<span className='text-[var(--state-success-main)]'>Eficiente</span>) : (<span className='text-[var(--state-error-main)]'>Inválido</span>) },
     { title: 'Condições válidas', name: 'condition', key: 'condition' },
   ]
 
