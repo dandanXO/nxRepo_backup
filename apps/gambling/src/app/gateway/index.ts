@@ -47,7 +47,9 @@ export const gateway = async (
       userLogout()
     }
 
-    if(result?.data && result?.data?.code && result?.data?.code === 400 ) {
+    const oldPaths = ['/prod-api/player/update', '/prod-api/sign-in/record-list', '/prod-api/payment/balance-less', '/prod-api/otp/ping']
+
+    if(result?.data && result?.data?.code && result?.data?.code === 400 && oldPaths.includes(url) ) {
       console.log("[gateway] token is invalid: ", token)
       // dispatch(appSlice.actions.setGlobalMessage("token is invalid"));
       dispatch(appSlice.actions.setGlobalMessage(result?.data?.msg));
