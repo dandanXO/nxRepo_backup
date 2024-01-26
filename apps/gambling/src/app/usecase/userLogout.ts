@@ -13,6 +13,7 @@ export const userLogout = () => {
     clearLoginLocalStorage();
     appStore.dispatch(appSlice.actions.setIsLogin(false));
     appStore.dispatch(push(PageOrModalPathEnum.IndexPage));
+    appStore.dispatch(appSlice.actions.showLoginDrawerOrModal(true))
     // // NOTICE: 暫時 reload
     // window.location.reload();
   }

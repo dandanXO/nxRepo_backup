@@ -54,6 +54,13 @@ export const gateway = async (
       userLogout()
     }
 
+    if(result?.data && result?.data?.code && result?.data?.code === 401 ) {
+      console.log("[gateway] token is invalid: ", token)
+      // dispatch(appSlice.actions.setGlobalMessage("token is invalid"));
+      dispatch(appSlice.actions.setGlobalMessage(result?.data?.msg));
+      userLogout()
+    }
+
     // NOTE: other msg
     if(result?.data?.code !==null && result?.data?.code !== 200) {
       dispatch(appSlice.actions.setGlobalMessage(result?.data?.msg));
