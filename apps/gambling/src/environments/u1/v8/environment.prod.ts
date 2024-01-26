@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   uVersion: "u1",
+  mVersion: "m1",
   mvVersion: "v8",
   mockBackend: false,
   platformName: "SambaFortuneBet",

@@ -49,24 +49,24 @@
   --state-warn-dark: #B45309;
 
   /*?*/
-  --grayscale-00: #000000;
-  --grayscale-10: #1B141F;
-  --grayscale-15: #291F2E;
+  --grayscale-00: #0E0812;
+  --grayscale-10: #2B1736;
+  --grayscale-15: #3A1F47;
   /* u1 u2 其它站點會共用的組件 就先不改 u2都已經改*/
-  --grayscale-20: #36293D;
-  --grayscale-30: #523D5C;
-  --grayscale-40: #6D527A;
-  --grayscale-50: #886699;
-  --grayscale-60: #A085AD;
-  --grayscale-70: #B8A4C2;
-  --grayscale-80: #CFC2D6;
-  --grayscale-90: #E8E1EB;
-  --grayscale-100: #FFFFFF;
+  --grayscale-20: #482659;
+  --grayscale-30: #65367D;
+  --grayscale-40: #743D8F;
+  --grayscale-50: #914DB2;
+  --grayscale-60: #A770C2;
+  --grayscale-70: #BD95D1;
+  --grayscale-80: #D3B8E0 ;
+  --grayscale-90: #E9DCF0;
+  --grayscale-100: #FFFFFF ;
   /*TODO: 接續*/
 
   /*NOTE: 沒用到*/
   /*--background-tabbar: #152951;*/
-  --background-tabbar: #291F2E7F;
+  --background-tabbar: #3A1F47;
   /*NOTE: 沒用到*/
   --background-header: #291F2E7F;
 
@@ -311,11 +311,11 @@
 
   /* riojungle777bet */
 
-  --background-tabbar: #291F2E7F;
-  --background-tabbar-from: #291F2E7F;
-  --background-tabbar-to: #36293D;
-  --background-header-from: #291F2E7F;
-  --background-header-to: #36293D;
+  --background-tabbar: #3A1F47;
+  --background-tabbar-from: #3A1F47;
+  --background-tabbar-to: #482659;
+  --background-header-from: #3A1F47;
+  --background-header-to: #482659;
 
   --gray-scale-10: #1A1A1A;
 
