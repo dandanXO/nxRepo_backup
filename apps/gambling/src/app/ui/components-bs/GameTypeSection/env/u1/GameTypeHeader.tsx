@@ -33,7 +33,7 @@ export const GameTypeHeader = (props: {
         <span className={"text-xl font-bold text-white"}>{props.gameTypeName}</span>
       </span>
 
-      {!props.expandedBrand && !props.isViewAll && (
+      {!props.expandedBrand && (
         <div>
           <button
             onClick={props.onClick}
