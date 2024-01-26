@@ -19,7 +19,7 @@ type interfaceProps = {
 }
 
 const Modal = (props: interfaceProps) => {
-  const { isMobile, isDesktop } = useBreakpoint();
+  const { isMobile, isTablet, isDesktop } = useBreakpoint();
   const [triggerGetBoxInfo, {data:boxInfoRes}] = useGetBoxInviteListMutation();
   const {isOpen, onClose} = props
   const [effective, setEffective] = useState<boolean|null>(null)
@@ -120,51 +120,53 @@ const Modal = (props: interfaceProps) => {
           />
         </div>
         {
-          isDesktop?
+          (isDesktop || isTablet)?
           <Table
-           titleStyle='text-sm border-transparent !border-x-0'
-           contentStyle='text-base !border-x-0 !border-b !py-6'
-          //  fetchData={handleFetchData}
-           dataSource={boxInfoRes?.rows as any[] || []}
-           columns={columns}
-           dataCount={0}
+            titleStyle='text-sm border-transparent !border-x-0'
+            contentStyle='text-base !border-x-0 !border-b !py-6'
+            //  fetchData={handleFetchData}
+            dataSource={boxInfoRes?.rows as any[] || []}
+            columns={columns}
+            dataCount={0}
         ></Table>: null
         }
-        { 
-          boxInfoRes?.rows?(
-          <div className='text-white h-[80%] overflow-auto'>
-            {boxInfoRes?.rows.map((item)=>{
-              return (
-                <div className="bg-[#a1c1ff00] text-white mt-4  max-w-sm">
-                <div className="mt-2 bg-[#a1c1ff33] rounded-lg shadow-lg p-1">
-                  <div className="flex justify-between items-center">
-                    <div className='w-[30%] text-center border-r border-[##ffffff33]'>Contas de subordinados</div>
-                    <div>{item.phone}</div>
-                  </div>
-                  <div className="flex justify-between items-center mt-1">
-                    <div className='w-[30%] text-center border-r border-[##ffffff33]'>Hora de registo</div>
-                    <div>{item.registerTime}</div>
-                  </div>
-                  <div className="flex justify-between items-center mt-1">
-                    <div className='w-[30%] text-center border-r border-[##ffffff33]'>Válido ou não</div>
-                    <div>{item.isEffective}
-                      {item.isEffective ? <span className='text-[var(--state-success-main)]'>Eficiente</span> : <span className='text-[var(--state-error-main)]'>Inválido</span>}
+        {
+          (isMobile)?
+          boxInfoRes?.rows?.length?(
+            <div className='text-white h-[80%] overflow-auto'>
+              {boxInfoRes?.rows.map((item)=>{
+                return (
+                  <div className="bg-[#a1c1ff00] text-white mt-4  w-full">
+                  <div className="mt-2 bg-[#a1c1ff33] rounded-lg shadow-lg p-1">
+                    <div className="flex justify-between items-center">
+                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Contas de subordinados</div>
+                      <div>{item.phone}</div>
+                    </div>
+                    <div className="flex justify-between items-center mt-1">
+                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Hora de registo</div>
+                      <div>{item.registerTime}</div>
+                    </div>
+                    <div className="flex justify-between items-center mt-1">
+                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Válido ou não</div>
+                      <div>{item.isEffective}
+                        {item.isEffective ? <span className='text-[var(--state-success-main)]'>Eficiente</span> : <span className='text-[var(--state-error-main)]'>Inválido</span>}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center mt-1">
+                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Condições válidas</div>
+                      <div>{item.condition}</div>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center mt-1">
-                    <div className='w-[30%] text-center border-r border-[##ffffff33]'>Condições válidas</div>
-                    <div>{item.condition}</div>
-                  </div>
                 </div>
-              </div>
-                )
-            })}
-          </div>
-          ): 
-          <div className='flex flex-col justify-center items-center py-[50px] gap-1 text-white'>
+                  )
+              })}
+            </div>
+            ):
+            <div className='flex flex-col justify-center items-center py-[50px] gap-1 text-white'>
             <img className={'h-[100px]'} alt="NoData" src={`assets/${environment.uVersion}/noData.png`} />
             <div className='text-lg font-medium'>Nada aqui</div>
           </div>
+          : null
         }
       </div>
     </div>
