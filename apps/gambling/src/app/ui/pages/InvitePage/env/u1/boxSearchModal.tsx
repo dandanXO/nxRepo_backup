@@ -142,18 +142,18 @@ const Modal = (props: interfaceProps) => {
                       <div className='w-[30%] text-center border-r border-[##ffffff33]'>Contas de subordinados</div>
                       <div>{item.phone}</div>
                     </div>
-                    <div className="flex justify-between items-center mt-1">
-                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Hora de registo</div>
+                    <div className="flex justify-between items-center">
+                      <div className='w-[30%] pt-1 text-center border-r border-[##ffffff33]'>Hora de registo</div>
                       <div>{item.registerTime}</div>
                     </div>
-                    <div className="flex justify-between items-center mt-1">
-                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Válido ou não</div>
+                    <div className="flex justify-between items-center">
+                      <div className='w-[30%] pt-1 text-center border-r border-[##ffffff33]'>Válido ou não</div>
                       <div>{item.isEffective}
                         {item.isEffective ? <span className='text-[var(--state-success-main)]'>Eficiente</span> : <span className='text-[var(--state-error-main)]'>Inválido</span>}
                       </div>
                     </div>
-                    <div className="flex justify-between items-center mt-1">
-                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Condições válidas</div>
+                    <div className="flex justify-between items-center ">
+                      <div className='w-[30%] pt-1 text-center border-r border-[##ffffff33]'>Condições válidas</div>
                       <div>{item.condition}</div>
                     </div>
                   </div>
