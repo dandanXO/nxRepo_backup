@@ -74,23 +74,30 @@ const BoxSection = (props:{openModal:()=>void}) =>{
             return (
               
               <div className="w-1/4 p-1" onClick={()=>handleOpenBox(reciveFlag, box.number)}>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-around">
                   <div className="max-h-[354px] flex flex-col items-center">
-                    <img alt='user' src={`assets/${environment.uVersion}/box-${flagMap[reciveFlag]}.png`} className="h-[64px] w-[64px] lg:h-[270px] lg:w-[270px] mr-2" />
+                    <img alt='user' src={`assets/${environment.uVersion}/box-${flagMap[reciveFlag]}.png`} className="relative right-[-8px] h-[64px] w-[64px] md:h-[64px] md:w-[64px] lg:h-[270px] lg:w-[270px] mr-2" />
                     {
                       reciveFlag === 2 ? <div className="top-[-10px] lg:top-[-70px] relative text-center text-white text-[10px] lg:text-base rounded-[14px] lg:rounded-[24px] px-1.5  lg:px-12  py-0.5 lg:py-2 bg-[var(--button-modal-download-from)] shadow-[inset_0px_-4px_4px_0px_rgba(0,_0,_0,_0.25),_inset_0px_4px_4px_0px_rgba(0,_0,_0,_0.25)]"> Receber </div>: null
                     }
                     <div className={cx({
                       'top-[-10px]': reciveFlag === 2,
-                      'lg:top-[-70px]' : reciveFlag === 2,
+                      'lg:top-[-35px]' : reciveFlag === 2,
                     },'relative text-center text-white lg:text-base text-[10px]' )}>{box.number} pessoas</div>
                     <div className={cx({
                       'top-[-10px]': reciveFlag === 2,
-                      'lg:top-[-70px]' : reciveFlag === 2,
+                      'lg:top-[-35px]' : reciveFlag === 2,
                     }, 'relative text-center  text-white lg:text-base text-[12px]')}>{box.amount}</div>                  
                   </div>
                     {
-                      index === 0 || (index % 4 !== 3) ? <img alt='user' src={`assets/${environment.uVersion}/box-right-arrow.png`} className="h-[14px] w-[14px] lg:h-[48px] lg:w-[48px] lg:ml-8" /> : ''
+                      index === 0 || (index % 4 !== 3) ? 
+                      <div 
+                      >
+                        <img alt='user' src={`assets/${environment.uVersion}/box-right-arrow.png`}
+                        className={cx({
+                          'top-[-16px]': reciveFlag === 2,
+                        },'relative h-[14px] w-[14px] md:w-[14px] md:h-[14px] lg:h-[48px] lg:w-[48px] m-auto'
+                        )} /> </div>: ''
                     }
                 </div>
               </div>
