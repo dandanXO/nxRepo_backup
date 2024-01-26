@@ -139,21 +139,21 @@ const Modal = (props: interfaceProps) => {
                   <div className="bg-[#a1c1ff00] text-white mt-4  w-full">
                   <div className="mt-2 bg-[#a1c1ff33] rounded-lg shadow-lg p-1">
                     <div className="flex justify-between items-center">
-                      <div className='w-[30%] text-center border-r border-[##ffffff33]'>Contas de subordinados</div>
+                      <div className='w-[100px] min-w-[100px] text-center border-r border-[##ffffff33]'>Contas de subordinados</div>
                       <div>{item.phone}</div>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <div className='w-[30%] pt-1 text-center border-r border-[##ffffff33]'>Hora de registo</div>
+                    <div className="flex justify-between items-center bg-[var(--table-tbody-zebra)]">
+                      <div className='w-[100px] min-w-[100px] pt-1 text-center border-r border-[##ffffff33]'>Hora de registo</div>
                       <div>{item.registerTime}</div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <div className='w-[30%] pt-1 text-center border-r border-[##ffffff33]'>Válido ou não</div>
+                      <div className='w-[100px] min-w-[100px] pt-1 text-center border-r border-[##ffffff33]'>Válido ou não</div>
                       <div>{item.isEffective}
                         {item.isEffective ? <span className='text-[var(--state-success-main)]'>Eficiente</span> : <span className='text-[var(--state-error-main)]'>Inválido</span>}
                       </div>
                     </div>
-                    <div className="flex justify-between items-center ">
-                      <div className='w-[30%] pt-1 text-center border-r border-[##ffffff33]'>Condições válidas</div>
+                    <div className="flex justify-between items-center bg-[var(--table-tbody-zebra)]">
+                      <div className='w-[100px] min-w-[100px] pt-1 text-center border-r border-[##ffffff33]'>Condições válidas</div>
                       <div>{item.condition}</div>
                     </div>
                   </div>
